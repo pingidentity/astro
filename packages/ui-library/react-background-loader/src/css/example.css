@@ -1,0 +1,6 @@
+/* @import "skelestyle-typography"; */
+
+.loader-wrapper {
+	color: blue;
+	background-image: url('./bg1.png');
+}

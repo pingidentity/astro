@@ -1,0 +1,21 @@
+{
+    "curly" : true,
+    "eqeqeq" : true,
+    "funcscope" : false,
+    "plusplus" : true,
+    "globalstrict" : true,
+    "latedef" : true,
+    "maxparams" : 5,
+    "nonew" : true,
+    "strict" : false,
+    "smarttabs" : true,
+    "undef": true,
+    "globals" : {
+		"jest" : true,
+		"JSON" : true
+	},
+    "browser" : true,
+    "jasmine" : true,
+    "node" : true,
+    "es3" : true
+}

@@ -1,0 +1,4 @@
+.*.swp
+node/
+node_modules/
+build*
