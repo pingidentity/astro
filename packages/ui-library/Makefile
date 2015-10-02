@@ -87,7 +87,8 @@ verify: log-config
 
 # remove the tag from local and remote if exists
 # create the tag in local and remote
-tag: verify
+# no verification is done here, meaning node/npm are not needed
+tag: log-config
 	if [ '$(GIT_TAG_EXISTS)' = '1' ]; then echo "Tag exists; deleting..."; git tag -d $(GIT_VERSION); git push --delete origin $(GIT_VERSION); fi
 	git tag $(GIT_VERSION)
 	git push origin $(GIT_VERSION)
@@ -95,7 +96,8 @@ tag: verify
 # tag the local version with the FINAL version and push the tag
 # save the next tag to file and commit
 # create the tag in local and remote
-dist: verify
+# no verification is done here, meaning node/npm are not needed
+dist: log-config
 	git tag $(GIT_VERSION_FINAL)
 	git push origin $(GIT_VERSION_FINAL)
 	echo "$(GIT_VERSION_NEXT)" > "$(GIT_VERSION_FILE)"
