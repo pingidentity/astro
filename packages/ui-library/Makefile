@@ -29,19 +29,29 @@ PATH := $(CURRENT_DIR)/node:$(CURRENT_DIR)/node/npm/bin:$(PATH)
 
 GIT_BRANCH=$(shell git symbolic-ref --short -q HEAD)
 
+
 # load version number from file
+GIT_VERSION_FILE=version
+GIT_VERSION=$(shell cat $(GIT_VERSION_FILE))
+
 # check that version number ends with -SNAPSHOT
-GIT_TAG_FILE=version
-GIT_TAG=$(shell cat $(GIT_TAG_FILE))
-ifeq (,$(findstring -SNAPSHOT,$(GIT_TAG)))
+ifeq (,$(findstring -SNAPSHOT,$(GIT_VERSION)))
 $(error The version number does not contain -SNAPSHOT; cannot continue)
 endif
-GIT_TAG_EXISTS=$(shell if git rev-parse $(GIT_TAG) >/dev/null 2>&1; then echo "1"; else echo "0"; fi)
 
-# remove the -SNAPSHOT part
-GIT_TAG_FINAL=$(subst -SNAPSHOT,,$(GIT_TAG))
-# get the version number of the next SNAPSHOT: increment the minor and append -SNAPSHOT
-GIT_TAG_NEXT=$(GIT_TAG_FINAL)-SNAPSHOT
+# check if the tag exists in the local repo
+GIT_TAG_EXISTS=$(shell if git rev-parse $(GIT_VERSION) >/dev/null 2>&1; then echo "1"; else echo "0"; fi)
+
+# get the final version by removing the -SNAPSHOT part from the version
+GIT_VERSION_FINAL=$(subst -SNAPSHOT,,$(GIT_VERSION))
+# get the major and minor parts of the version number
+GIT_VERSION_MAJOR=$(word 1,$(subst ., ,$(GIT_VERSION_FINAL)))
+GIT_VERSION_MINOR=$(word 2,$(subst ., ,$(GIT_VERSION_FINAL)))
+# increment the minor (fucking hell, this took me ages to figure out)
+# I am using this solution http://stackoverflow.com/a/1926105
+GIT_VERSION_MINOR_NEXT=$(shell echo $(GIT_VERSION_MINOR)+1 | bc)
+# get the version number of the next SNAPSHOT
+GIT_VERSION_NEXT=$(GIT_VERSION_MAJOR).$(GIT_VERSION_MINOR_NEXT)-SNAPSHOT
 
 
 log-config:
@@ -75,21 +85,24 @@ verify: install-node-npm
 # remove the tag from local and remote if exists
 # create the tag in local and remote
 tag: verify
-	if [ '$(GIT_TAG_EXISTS)' = '1' ]; then echo "Tag exists; deleting..."; git tag -d $(GIT_TAG); git push --delete origin $(GIT_TAG); fi
-	git tag $(GIT_TAG)
-	git push origin $(GIT_TAG)
+	if [ '$(GIT_TAG_EXISTS)' = '1' ]; then echo "Tag exists; deleting..."; git tag -d $(GIT_VERSION); git push --delete origin $(GIT_VERSION); fi
+	git tag $(GIT_VERSION)
+	git push origin $(GIT_VERSION)
 
-# tag the local version with the FINAL version
+# tag the local version with the FINAL version and push the tag
 # save the next tag to file and commit
 # create the tag in local and remote
-dist:
-	echo "$(GIT_TAG_NEXT)" > "$(GIT_TAG_FILE)"
+dist: 
+	git tag $(GIT_VERSION_FINAL)
+	git push origin $(GIT_VERSION_FINAL)
+	echo "$(GIT_VERSION_NEXT)" > "$(GIT_VERSION_FILE)"
 	git commit -a -m "Prepare for the next release cycle"
-	# git push origin $(GIT_BRANCH):$(GIT_BRANCH)
-	git tag $(GIT_TAG_NEXT)
-	# git push origin $(GIT_TAG_NEXT)
+	git push origin $(GIT_BRANCH):$(GIT_BRANCH)
+	git tag $(GIT_VERSION_NEXT)
+	git push origin $(GIT_VERSION_NEXT)
 
 test:
-	@echo 'test'
-	@echo $(GIT_TAG)
+	@echo $(GIT_VERSION_MAJOR)
+	@echo $(GIT_VERSION_MINOR)
+	@echo $(GIT_VERSION_NEXT)
 
