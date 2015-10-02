@@ -1,9 +1,7 @@
 var React = require('react/addons');
-var BackgroundLoader = require('./main');
+var BackgroundLoader = require('./BackgroundLoader.jsx');
 
-require('./css/example.css');
-
-var Main = React.createClass({
+var BackgroundLoaderDemo = React.createClass({
 
     _loadData: function () {
         var remaining = this.state.timeout - this.state.interval;
@@ -31,19 +29,17 @@ var Main = React.createClass({
         return (
             <div>
                 <BackgroundLoader
-                        className="loader-wrapper"
+                        className="background-loader-example-wrapper"
                         interval={this.state.interval}
                         load={this._loadData}
                         loading={this._showLoading}
                         loaded={this.state.isLoaded}>
                     <span>Data has been loaded.</span>
                 </BackgroundLoader>
-                <img src={require('images/bg3.png')} />
             </div>
         );
     }
 });
 
-React.render(
-        <Main />,
-        document.getElementById('content'));
+
+module.exports = BackgroundLoaderDemo;

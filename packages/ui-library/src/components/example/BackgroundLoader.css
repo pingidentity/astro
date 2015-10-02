@@ -1,0 +1,6 @@
+/* @import "skelestyle-typography"; */
+/* @import "./embeddable.css"; */
+
+.background-loader-example-span {
+	background-image: url('./BackgroundLoader-background.png');
+}

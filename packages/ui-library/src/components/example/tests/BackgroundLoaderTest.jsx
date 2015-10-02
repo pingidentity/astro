@@ -1,13 +1,13 @@
 window.__DEV__ = true;
 
-jest.dontMock('../TestUtils');
-jest.dontMock('../main.jsx');
+jest.dontMock('../../../testutil/TestUtils');
+jest.dontMock('../BackgroundLoader.jsx');
 
 describe('BackgroundLoader', function () {
     var React = require('react/addons');
     var ReactTestUtils = React.addons.TestUtils;
-    var TestUtils = require('../TestUtils');
-    var BackgroundLoader = require('../main.jsx');
+    var TestUtils = require('../../../testutil/TestUtils');
+    var BackgroundLoader = require('../BackgroundLoader.jsx');
 
     var loadingContentFunc;
     var loaded;

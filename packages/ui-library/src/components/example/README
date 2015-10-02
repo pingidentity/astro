@@ -1,0 +1,8 @@
+This is just an example of a reusable component.
+
+The CSS and the PNG resources are just for demonstration purposes;
+if the component needs such resources for core functionality, these
+resources can be defined/required in the JSX, in which case the
+consumer of the JSX file (ie. the project which uses such components)
+much resolve these sort of requires; for webpack, see the file/url
+loaders defined in webpack.dev.config.js

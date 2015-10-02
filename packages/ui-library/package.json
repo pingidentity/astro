@@ -1,7 +1,7 @@
 {
-  "name": "react-background-loader",
-  "version": "1.0.0",
-  "description": "A React component which displays a spinner while content is being loaded in the background",
+  "name": "ui-library",
+  "version": "0.1.0",
+  "description": "A UI library made of reusable React components, util functions and static assets (e.g. CSS)",
   "author": "Ping Identity SaaS Interface Development",
   "license": "ISC",
   "private": true,
@@ -9,11 +9,9 @@
     "type": "git",
     "url": "https://hg-od01.corp.pingidentity.com/r/ui-library"
   },
-  "main": "build/main.js",
-  "style": "build/example.css",
   "dependencies": {
-    "react": "0.12.2",
-    "react-tools": "0.12.2"
+    "react": "0.13.3",
+    "react-tools": "0.13.3"
   },
   "devDependencies": {
     "babel": "5.8.23",
@@ -21,8 +19,6 @@
     "babel-eslint": "4.1.1",
     "babel-jest": "5.3.0",
     "babel-loader": "5.3.2",
-    "clean-css": "3.3.9",
-    "clean-webpack-plugin": "0.1.3",
     "css-loader": "0.16.0",
     "eslint": "1.3.1",
     "eslint-loader": "1.0.0",
@@ -31,10 +27,6 @@
     "file-loader": "0.8.4",
     "jest": "0.1.40",
     "jest-cli": "0.4.19",
-    "jscs": "2.1.1",
-    "jscs-loader": "0.2.0",
-    "mkdirp": "0.5.1",
-    "rework-npm-cli": "0.1.1",
     "style-loader": "0.12.3",
     "url-loader": "0.5.6",
     "webpack": "1.11.0",
@@ -66,11 +58,11 @@
     ]
   },
   "scripts": {
-    "css-bundle": "mkdirp build && rework-npm src/css/example.css | cleancss -o build/example.css",
-    "start": "webpack-dev-server -d --hot --progress --colors --config webpack.example.config.js",
+    "build-do-not-use": "webpack -p --progress --colors --config webpack.config.js",
+
+    "lint": "eslint --ext .js,.jsx .",
     "test": "jest",
-    "build": "webpack -p --progress --colors --config webpack.config.js",
-    "build-example": "webpack -p --progress --colors --config webpack.example.config.js",
-    "dist": "npm test && npm run build && npm run build-example"
+    "start": "webpack-dev-server -d --hot --progress --colors --config webpack.dev.config.js",
+    "verify": "npm run lint && npm run test",
   }
 }

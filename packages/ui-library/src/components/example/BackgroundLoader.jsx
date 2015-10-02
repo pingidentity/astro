@@ -1,6 +1,6 @@
 var React = require('react/addons');
 
-require('./css/core.css');
+require('./BackgroundLoader.css');
 
 /*
  * Repeatedly attempt to load content in the background, until
@@ -54,7 +54,6 @@ var BackgroundLoader = React.createClass({
         // Whether the data has been loaded yet.
         loaded: React.PropTypes.bool
     },
- 
     
     /*
      * Remove the timer from the timer queue.
@@ -193,8 +192,13 @@ var BackgroundLoader = React.createClass({
             this.setState({hidden: 'msHidden'});
         }
         // IE 9 and lower and All others:
-        document.onfocusin = document.onfocusout = window.onpageshow = window.onpagehide = 
-            window.onfocus = window.onblur = this.changeHidden;
+        document.onfocusin =
+                document.onfocusout =
+                window.onpageshow =
+                window.onpagehide =
+                window.onfocus =
+                window.onblur =
+                this.changeHidden;
 
         // set the initial state (but only if browser supports the Page
         // Visibility API)
@@ -219,7 +223,9 @@ var BackgroundLoader = React.createClass({
                 <span data-id="loader" className={this.props.className}>
                     {content}
 
-                    <img src={require('images/bg2.png')} />
+                    <img src={require('./BackgroundLoader-example.png')} />
+
+                    <span className="background-loader-example-span">some example test to demonstrate the required CSS usage</span>
                 </span>
                 /* jshint ignore:end */
             );

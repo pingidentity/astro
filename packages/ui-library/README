@@ -1,0 +1,43 @@
+RUN THE LIBRARY
+===============
+Run
+$ npm install && npm run start
+and open http://localhost:8080/index.html in the browser.
+
+
+
+TODO
+====
+
+compile the SCSS/LESS/SASS from /css
+in postinstall using package.json script
+
+fix the ES lint rules to match the jscs/jshint rules in the WP
+
+makefile: download node, npm, configure paths
+
+configure the Jenkins builds: Code Review, Release
+
+integrate the library as git hosted npm module into the WP
+	assets to be copied to the WP assets directory
+
+configure jest for code coverage w/ istanbul
+	https://facebook.github.io/jest/docs/api.html#config-collectcoverage-boolean
+
+
+
+RESOURCES
+=========
+http://learnjs.io/blog/2014/01/20/rework-npm-myth-clean-css/
+https://www.npmjs.com/package/npm-css
+
+https://github.com/petehunt/webpack-howto
+https://github.com/shanewilson/react-webpack-example
+http://simonsmith.io/using-webpack-to-build-react-components-and-their-assets/
+http://christianalfoni.github.io/javascript/2014/12/13/did-you-know-webpack-and-react-is-awesome.html
+
+http://blog.siftscience.com/blog/2015/best-practices-for-building-large-react-applications
+
+https://docs.npmjs.com/misc/scripts
+http://krasimirtsonev.com/blog/article/Fun-playing-with-npm-dependencies-and-postinstall-script
+

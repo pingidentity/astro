@@ -4,8 +4,8 @@ var Resolve = require('path').resolve;
 var Clean = require('clean-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-var UglifyJsPlugin = require("webpack").optimize.UglifyJsPlugin;
-var DedupePlugin = require("webpack").optimize.DedupePlugin;
+var UglifyJsPlugin = require('webpack').optimize.UglifyJsPlugin;
+var DedupePlugin = require('webpack').optimize.DedupePlugin;
 
 var buildDir = 'build-core';
 
