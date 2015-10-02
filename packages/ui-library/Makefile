@@ -77,6 +77,7 @@ install-npm:
 
 install-node-npm: log-config clean-node install-node install-npm
 	rm -rf node_mpdules
+	# TODO alex - I cannot get the following to work :-((
 	# $(CURRENT_DIR)/node/node $(CURRENT_DIR)/node/npm/bin/npm-cli.js install
 
 verify: install-node-npm
@@ -92,7 +93,7 @@ tag: verify
 # tag the local version with the FINAL version and push the tag
 # save the next tag to file and commit
 # create the tag in local and remote
-dist: 
+dist: verify
 	git tag $(GIT_VERSION_FINAL)
 	git push origin $(GIT_VERSION_FINAL)
 	echo "$(GIT_VERSION_NEXT)" > "$(GIT_VERSION_FILE)"
@@ -100,9 +101,4 @@ dist:
 	git push origin $(GIT_BRANCH):$(GIT_BRANCH)
 	git tag $(GIT_VERSION_NEXT)
 	git push origin $(GIT_VERSION_NEXT)
-
-test:
-	@echo $(GIT_VERSION_MAJOR)
-	@echo $(GIT_VERSION_MINOR)
-	@echo $(GIT_VERSION_NEXT)
 

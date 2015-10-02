@@ -9,17 +9,20 @@ and open http://localhost:8080/index.html in the browser.
 TODO
 ====
 
+makefile: get the freaking 'npm install' to work
+
+configure the Jenkins builds:
+	Code Review: make verify
+	Build: make tag
+	Release: make dist
+
 compile the SCSS/LESS/SASS from /css
-in postinstall using package.json script
-
-fix the ES lint rules to match the jscs/jshint rules in the WP
-
-makefile: download node, npm, configure paths
-
-configure the Jenkins builds: Code Review, Release
+using postinstall script in package.json script
 
 integrate the library as git hosted npm module into the WP
 	assets to be copied to the WP assets directory
+
+fix the ES lint rules to match the jscs/jshint rules in the WP
 
 configure jest for code coverage w/ istanbul
 	https://facebook.github.io/jest/docs/api.html#config-collectcoverage-boolean
