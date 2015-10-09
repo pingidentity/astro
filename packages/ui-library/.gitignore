@@ -2,3 +2,7 @@
 node/
 node_modules/
 build*
+
+# IDEA
+*.iml
+.idea/
