@@ -152,7 +152,6 @@ var Demo = React.createClass({
                     </div>
 
                     <div className="components">
-
                         <a name="example"></a>
                         <div className="section">
                             <h1>Example: Background Loader</h1>
