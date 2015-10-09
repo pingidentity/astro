@@ -9,7 +9,7 @@ and open http://localhost:8080/index.html in the browser.
 TODO
 ====
 
-makefile: get the freaking 'npm install' to work
+makefile: get the freaking 'npm install' to work (Graham: npm install now runs but I'm not sure if there was anything else needing to be done)
 
 configure the Jenkins builds:
 	Code Review: make verify

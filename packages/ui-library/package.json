@@ -63,6 +63,6 @@
     "lint": "eslint --ext .js,.jsx .",
     "test": "jest",
     "start": "webpack-dev-server -d --hot --progress --colors --config webpack.dev.config.js",
-    "verify": "npm run lint && npm run test",
+    "verify": "npm run lint && npm run test"
   }
 }
