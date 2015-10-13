@@ -5,7 +5,6 @@ var React = require('react/addons'),
     CacheDemo = require('./core/CacheDemo.jsx'),
     DetailsTooltipDemo = require('../demo/components/tooltips/DetailsTooltipDemo.jsx');
 
-
 var Demo = React.createClass({
 
     render: function () {
@@ -47,7 +46,7 @@ var Demo = React.createClass({
                         </div>
 
                     </div>
-
+                
                     <div className="components">
 
                         <a name="example"></a>
