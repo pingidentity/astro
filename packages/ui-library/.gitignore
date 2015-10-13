@@ -2,6 +2,7 @@
 node/
 node_modules/
 build*
+**/tests/coverage
 
 # IDEA
 *.iml

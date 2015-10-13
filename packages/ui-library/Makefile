@@ -21,6 +21,7 @@ endif
 
 NODE_FILENAME=node-v$(NODE_VERSION)-$(SYS_NAME)-$(ARCH_NAME)
 NPM_FILENAME=npm-$(NPM_VERSION)
+NPM_EXEC=$(CURRENT_DIR)/node/node $(CURRENT_DIR)/node/npm/bin/npm-cli.js
 
 CURRENT_DIR=$(shell pwd)
 
@@ -64,26 +65,27 @@ clean-node:
 install-node:
 	rm -f $(NODE_FILENAME).tar.gz
 	wget http://art01.corp.pingidentity.com:8080/artifactory/simple/ext-releases-local/nodejs/v$(NODE_VERSION)/$(NODE_FILENAME).tar.gz
-	mkdir node
+	mkdir -p node
 	tar -xzf $(NODE_FILENAME).tar.gz --strip=2 -C node/ $(NODE_FILENAME)/bin/node
 	rm -r $(NODE_FILENAME).tar.gz
 
 install-npm:
 	rm -f $(NPM_FILENAME).tgz
 	wget http://art01.corp.pingidentity.com:8080/artifactory/simple/ext-releases-local/npm/$(NPM_FILENAME).tgz
-	mkdir node/npm
+	mkdir -p node/npm
 	tar -xzf $(NPM_FILENAME).tgz --strip=1 -C node/npm
 	rm -r $(NPM_FILENAME).tgz
 
 install-node-npm: log-config clean-node install-node install-npm
-	rm -rf node_mpdules
-	# TODO alex - I cannot get the following to work :-((
-	# $(CURRENT_DIR)/node/node $(CURRENT_DIR)/node/npm/bin/npm-cli.js install
+	rm -rf node_modules
+	$(NPM_EXEC) install
 
-# TODO alex - enable the following after the above has been fixed
-# verify: install-node-npm
-#	npm run verify
-verify: log-config
+verify: install-node-npm
+	# the freakin' npm executable is broken, makes some stupid assumptions in regard to the npm location;
+	# meaning I cannot run an npm script which calls other npm scripts,
+	# meaning I have to execute the npm scripts one at a time
+	$(NPM_EXEC) run lint
+	$(NPM_EXEC) run test
 
 # remove the tag from local and remote if exists
 # create the tag in local and remote

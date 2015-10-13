@@ -29,6 +29,7 @@
     "file-loader": "0.8.4",
     "jest": "0.1.40",
     "jest-cli": "0.4.19",
+    "react-hot-loader": "1.3.0",
     "style-loader": "0.12.3",
     "url-loader": "0.5.6",
     "webpack": "1.11.0",
@@ -36,8 +37,8 @@
     "webpack-dev-server": "1.10.1"
   },
   "engines": {
-      "node": ">= 0.10.x",
-      "npm": ">= 2.x.x"
+    "node": ">= 0.10.x",
+    "npm": ">= 2.x.x"
   },
   "jest": {
     "rootDir": "./",
@@ -61,10 +62,9 @@
   },
   "scripts": {
     "build-do-not-use": "webpack -p --progress --colors --config webpack.config.js",
-
     "lint": "eslint --ext .js,.jsx .",
     "test": "jest",
-    "start": "webpack-dev-server -d --hot --progress --colors --config webpack.dev.config.js",
+    "start": "webpack-dev-server -d --hot --inline --progress --colors --config webpack.dev.config.js",
     "verify": "npm run lint && npm run test"
   }
 }

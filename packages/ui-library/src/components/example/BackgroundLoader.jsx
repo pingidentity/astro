@@ -225,7 +225,9 @@ var BackgroundLoader = React.createClass({
 
                     <img src={require('./BackgroundLoader-example.png')} />
 
-                    <span className="background-loader-example-span">some example test to demonstrate the required CSS usage</span>
+                    <span className="background-loader-example-span">
+                        some example test to demonstrate the required CSS usage
+                    </span>
                 </span>
                 /* jshint ignore:end */
             );
