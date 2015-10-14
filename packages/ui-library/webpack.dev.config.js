@@ -7,8 +7,8 @@ var buildDir = 'build-demo';
 
 module.exports = {
     entry: {
-        demo: Join(__dirname, 'src', 'Demo'),
-        index: Join(__dirname, 'src', 'index.html')
+        demo: Join(__dirname, 'src', 'demo', 'Demo'),
+        index: Join(__dirname, 'src', 'demo', 'index.html')
     },
     output: {
         path: Join(__dirname, buildDir),

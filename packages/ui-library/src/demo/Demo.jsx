@@ -1,5 +1,5 @@
 var React = require('react/addons');
-var BackgroundLoaderDemo = require('components/example/BackgroundLoaderDemo.jsx');
+var BackgroundLoaderDemo = require('../components/example/BackgroundLoaderDemo.jsx');
 
 var Demo = React.createClass({
     
