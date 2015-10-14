@@ -35,7 +35,7 @@ GIT_BRANCH=$(shell git symbolic-ref --short -q HEAD)
 GIT_VERSION_FILE=version
 GIT_VERSION=$(shell cat $(GIT_VERSION_FILE))
 
-# check that version number ends with -SNAPSHOT
+# check that version number ends with -SNAPSHOT, error out if it doesn't
 ifeq (,$(findstring -SNAPSHOT,$(GIT_VERSION)))
 $(error The version number does not contain -SNAPSHOT; cannot continue)
 endif
@@ -43,16 +43,24 @@ endif
 # check if the tag exists in the local repo
 GIT_TAG_EXISTS=$(shell if git rev-parse $(GIT_VERSION) >/dev/null 2>&1; then echo "1"; else echo "0"; fi)
 
-# get the final version by removing the -SNAPSHOT part from the version
+# get the final version by removing the -SNAPSHOT part from the version number
 GIT_VERSION_FINAL=$(subst -SNAPSHOT,,$(GIT_VERSION))
-# get the major and minor parts of the version number
+# get the major, the minor and the patch parts of the version number
 GIT_VERSION_MAJOR=$(word 1,$(subst ., ,$(GIT_VERSION_FINAL)))
 GIT_VERSION_MINOR=$(word 2,$(subst ., ,$(GIT_VERSION_FINAL)))
-# increment the minor (fucking hell, this took me ages to figure out)
+GIT_VERSION_PATCH=$(word 3,$(subst ., ,$(GIT_VERSION_FINAL)))
+# increment the last non-zero component of the version number
+# (fucking hell, this took me ages to figure out)
 # I am using this solution http://stackoverflow.com/a/1926105
-GIT_VERSION_MINOR_NEXT=$(shell echo $(GIT_VERSION_MINOR)+1 | bc)
+ifeq ($(GIT_VERSION_PATCH),0)
+	GIT_VERSION_MINOR_NEXT=$(shell echo $(GIT_VERSION_MINOR)+1 | bc)
+	GIT_VERSION_PATCH_NEXT=$(GIT_VERSION_PATCH)
+else
+	GIT_VERSION_MINOR_NEXT=$(GIT_VERSION_MINOR)
+	GIT_VERSION_PATCH_NEXT=$(shell echo $(GIT_VERSION_PATCH)+1 | bc)
+endif
 # get the version number of the next SNAPSHOT
-GIT_VERSION_NEXT=$(GIT_VERSION_MAJOR).$(GIT_VERSION_MINOR_NEXT)-SNAPSHOT
+GIT_VERSION_NEXT=$(GIT_VERSION_MAJOR).$(GIT_VERSION_MINOR_NEXT).$(GIT_VERSION_PATCH_NEXT)-SNAPSHOT
 
 
 log-config:
@@ -95,11 +103,15 @@ tag: log-config
 	git tag $(GIT_VERSION)
 	git push origin $(GIT_VERSION)
 
+# set the version number to FINAL, commit and push the change
 # tag the local version with the FINAL version and push the tag
-# save the next tag to file and commit
-# create the tag in local and remote
+# set the version number to the next SNAPSHOT and commit
+# create the tag in local and push the tag
 # no verification is done here, meaning node/npm are not needed
 dist: log-config
+	echo "$(GIT_VERSION_FINAL)" > "$(GIT_VERSION_FILE)"
+	git commit -a -m "Release the project"
+	git push origin $(GIT_BRANCH):$(GIT_BRANCH)
 	git tag $(GIT_VERSION_FINAL)
 	git push origin $(GIT_VERSION_FINAL)
 	echo "$(GIT_VERSION_NEXT)" > "$(GIT_VERSION_FILE)"
