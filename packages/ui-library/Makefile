@@ -23,17 +23,16 @@ NODE_FILENAME=node-v$(NODE_VERSION)-$(SYS_NAME)-$(ARCH_NAME)
 NPM_FILENAME=npm-$(NPM_VERSION)
 NPM_EXEC=$(CURRENT_DIR)/node/node $(CURRENT_DIR)/node/npm/bin/npm-cli.js
 
-CURRENT_DIR=$(shell pwd)
+CURRENT_DIR := $(shell pwd)
 
 SHELL := /bin/bash
 PATH := $(CURRENT_DIR)/node:$(CURRENT_DIR)/node/npm/bin:$(PATH)
 
-GIT_BRANCH=$(shell git symbolic-ref --short -q HEAD)
+GIT_BRANCH := $(shell git symbolic-ref --short -q HEAD)
 
 
-# load version number from file
-GIT_VERSION_FILE=version
-GIT_VERSION=$(shell cat $(GIT_VERSION_FILE))
+# extract the version number from package.json
+GIT_VERSION := $(shell sed -n -e 's/.*"version"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' package.json)
 
 # check that version number ends with -SNAPSHOT, error out if it doesn't
 ifeq (,$(findstring -SNAPSHOT,$(GIT_VERSION)))
@@ -41,7 +40,7 @@ $(error The version number does not contain -SNAPSHOT; cannot continue)
 endif
 
 # check if the tag exists in the local repo
-GIT_TAG_EXISTS=$(shell if git rev-parse $(GIT_VERSION) >/dev/null 2>&1; then echo "1"; else echo "0"; fi)
+GIT_TAG_EXISTS := $(shell if git rev-parse $(GIT_VERSION) >/dev/null 2>&1; then echo "1"; else echo "0"; fi)
 
 # get the final version by removing the -SNAPSHOT part from the version number
 GIT_VERSION_FINAL=$(subst -SNAPSHOT,,$(GIT_VERSION))
@@ -53,11 +52,11 @@ GIT_VERSION_PATCH=$(word 3,$(subst ., ,$(GIT_VERSION_FINAL)))
 # (fucking hell, this took me ages to figure out)
 # I am using this solution http://stackoverflow.com/a/1926105
 ifeq ($(GIT_VERSION_PATCH),0)
-	GIT_VERSION_MINOR_NEXT=$(shell echo $(GIT_VERSION_MINOR)+1 | bc)
-	GIT_VERSION_PATCH_NEXT=$(GIT_VERSION_PATCH)
+	GIT_VERSION_MINOR_NEXT := $(shell echo $(GIT_VERSION_MINOR)+1 | bc)
+	GIT_VERSION_PATCH_NEXT := $(GIT_VERSION_PATCH)
 else
-	GIT_VERSION_MINOR_NEXT=$(GIT_VERSION_MINOR)
-	GIT_VERSION_PATCH_NEXT=$(shell echo $(GIT_VERSION_PATCH)+1 | bc)
+	GIT_VERSION_MINOR_NEXT := $(GIT_VERSION_MINOR)
+	GIT_VERSION_PATCH_NEXT := $(shell echo $(GIT_VERSION_PATCH)+1 | bc)
 endif
 # get the version number of the next SNAPSHOT
 GIT_VERSION_NEXT=$(GIT_VERSION_MAJOR).$(GIT_VERSION_MINOR_NEXT).$(GIT_VERSION_PATCH_NEXT)-SNAPSHOT
@@ -109,12 +108,14 @@ tag: log-config
 # create the tag in local and push the tag
 # no verification is done here, meaning node/npm are not needed
 dist: log-config
-	echo "$(GIT_VERSION_FINAL)" > "$(GIT_VERSION_FILE)"
+	sed -e 's/"version"[[:space:]]*:[[:space:]]*"[^"]*"/"version": "$(GIT_VERSION_FINAL)"/' package.json > package.json.tmp
+	mv package.json.tmp package.json
 	git commit -a -m "Release the project"
 	git push origin $(GIT_BRANCH):$(GIT_BRANCH)
 	git tag $(GIT_VERSION_FINAL)
 	git push origin $(GIT_VERSION_FINAL)
-	echo "$(GIT_VERSION_NEXT)" > "$(GIT_VERSION_FILE)"
+	sed -e 's/"version"[[:space:]]*:[[:space:]]*"[^"]*"/"version": "$(GIT_VERSION_NEXT)"/' package.json > package.json.tmp
+	mv package.json.tmp package.json
 	git commit -a -m "Prepare for the next release cycle"
 	git push origin $(GIT_BRANCH):$(GIT_BRANCH)
 	git tag $(GIT_VERSION_NEXT)
