@@ -1,5 +1,6 @@
 var React = require('react/addons');
 var BackgroundLoaderDemo = require('../components/example/BackgroundLoaderDemo.jsx');
+var CacheDemo = require('./core/CacheDemo.jsx');
 
 var Demo = React.createClass({
     
@@ -7,6 +8,7 @@ var Demo = React.createClass({
         return (
             <div>
                 <BackgroundLoaderDemo />
+                <CacheDemo />
             </div>
         );
     }
