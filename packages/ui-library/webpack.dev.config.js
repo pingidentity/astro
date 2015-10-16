@@ -1,18 +1,24 @@
 var Join = require('path').join;
+var Resolve = require('path').resolve;
 
 var Clean = require('clean-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var buildDir = 'build-demo';
 
 module.exports = {
+    target: 'web',
     entry: {
         demo: Join(__dirname, 'src', 'demo', 'Demo'),
-        index: Join(__dirname, 'src', 'demo', 'index.html')
+        index: Join(__dirname, 'src', 'demo', 'index.html'),
+        maincss: Join(__dirname, 'src', 'css', 'ui-library.scss'),
+        democss: Join(__dirname, 'src', 'demo', 'css', 'ui-library-demo.scss')
     },
     output: {
         path: Join(__dirname, buildDir),
         filename: '[name].js' // Template based on keys in entry above
     },
+    devtool: 'source-map',
     module: {
         loaders: [
             {
@@ -30,9 +36,17 @@ module.exports = {
                 test: /\.css$/,
                 loader: 'style-loader!css-loader'
             },
+            // the main and the demo sass get compiled as separate bundles
             {
-                test: /\.scss/,
-                loader: 'style-loader!css-loader!sass-loader'
+                test: /\.scss$/,
+                include: [
+                    Resolve(__dirname, 'src/css/ui-library.scss'),
+                    Resolve(__dirname, 'src/demo/css/ui-library-demo.scss')
+                ],
+                loader: ExtractTextPlugin.extract(
+                    'style-loader',
+                    'css-loader?sourceMap!sass-loader'
+                )
             },
             {
                 test: /\.png$/,
@@ -47,11 +61,15 @@ module.exports = {
                 loader: 'file-loader?name=images/[path][name].[ext]'
             },
             {
-                test: /\.svg(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                // the following doesn't work, for the request param is like "?-sa9xtz"
+                // test: /\.svg(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                test: /\.svg(\?.*)?$/,
                 loader: 'file-loader?name=images/[path][name].[ext]'
             },
             {
-                test: /\.(ttf|eot|woff2?)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                // the following doesn't work, for the request param is like "?-sa9xtz"
+                // test: /\.(ttf|eot|otf|woff2?)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                test: /\.(ttf|eot|otf|woff2?)(\?.*)?$/,
                 loader: 'file-loader?name=fonts/[path][name].[ext]'
             }
         ]
@@ -59,9 +77,10 @@ module.exports = {
     resolve: {
         // I can now require('file') instead of require('file.jsx')
         extensions: ['', '.js', '.json', '.jsx'],
-        modulesDirectories: ['node_modules', './src']
+        modulesDirectories: ['node_modules']
     },
     plugins: [
-        new Clean([buildDir])
+        new Clean([buildDir]),
+        new ExtractTextPlugin('[name].css')
     ]
 };

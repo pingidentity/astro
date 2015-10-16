@@ -3,6 +3,7 @@ node/
 node_modules/
 build*
 **/tests/coverage
+npm-debug.log
 
 # IDEA
 *.iml

@@ -9,11 +9,9 @@ and open http://localhost:8080/index.html in the browser.
 TODO
 ====
 
-compile the SCSS/LESS/SASS from /css
-using postinstall script in package.json script
-
 integrate the library as git hosted npm module into the WP
 	assets to be copied to the WP assets directory
+	SCSS to be compiled through a maven plugin
 
 configure jest for code coverage w/ istanbul
 	https://facebook.github.io/jest/docs/api.html#config-collectcoverage-boolean
