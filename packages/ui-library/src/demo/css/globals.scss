@@ -1,0 +1,36 @@
+// GLOBALS
+
+// FONT VARIABLES
+$icon-font: 'iconfont';
+$font-path: '../fonts/proxima-nova/';
+$font-fallbacks: Helvetica, Arial, sans-serif;
+$font-stack: 'ProximaNovaRegular', $font-fallbacks;
+$input-font-stack: 'ProximaNovaRegular', $font-fallbacks;
+
+@font-face { font-family: 'ProximaNovaRegular'; font-weight: normal; src: url('#{$font-path}ProximaNova-Regular.otf'); }
+@font-face { font-family: 'ProximaNovaBold'; font-weight: bold; src: url('#{$font-path}ProximaNova-Bold.otf'); }
+@font-face { font-family: 'ProximaNovaLight'; font-weight: normal; src: url('#{$font-path}ProximaNova-Light.otf'); }
+@font-face { font-family: 'ProximaNovaSemibold'; font-weight: normal; src: url('#{$font-path}ProximaNova-Semibold.otf'); }
+@font-face { font-family: 'ProximaNovaCondRegular'; font-weight: normal; src: url('#{$font-path}ProximaNovaCond-Regular.otf'); }
+
+// MASTER COLOR LIST 
+$colors: (
+    'white': #fff,
+    'cyan-deep': #2996cc,
+    'gray-warm-dark': #5A6266,
+    'slate-dark': #5a6267,
+
+	// MOST RECENT COLORS
+	'blue-grey': #9bacb4,
+	'cinder-block': #e4e5e5,
+	'dolphin': #d8dbdc,
+	'elderly': #eff1f1,
+	'elephant': #929aa1,
+	'midnight': #4b637c,
+	'oitnb': #f79100,
+	'rhino': #9eafa8,
+	'slate': #3d454d,
+	'stone': #c2c3c4,
+	'stratus': #bcbdbf,
+	'timberwolf': #e8ebed
+);

@@ -1,0 +1,66 @@
+// COMMON, HTML ELEMENTS
+
+body {
+	font-family: "Proxima Nova", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.3em;
+    color: map-get($colors, 'elephant');
+    font-weight: 300;
+}
+a {
+	cursor: pointer;
+	text-decoration: none;
+	color: map-get($colors, 'cyan-deep');
+	&.link {
+		// for standalone links
+		border-bottom: 1px solid  map-get($colors, 'cyan-deep');
+		padding-bottom: 0px;
+		text-transform: uppercase;
+	}
+	&:hover {
+		text-decoration: underline;
+	}
+}
+h1, h2, h3, h4, h5 {
+	color: map-get($colors, 'slate');
+}
+h1 {
+	// override color
+	color: map-get($colors, 'slate');
+	font-size: 24px;
+	font-weight: 400;
+	margin: 25px 0;
+}
+h2 {
+	font-size: 22px;
+	font-weight: 500;
+	margin: 0 0 10px 0;
+}
+p {
+	margin: 0 0 1em 0;
+}
+strong {
+	font-weight: bold;
+}
+ol {
+	counter-reset: ol-counter;
+	margin: 30px 0 0 0;
+
+	$indent: 20px;
+
+	> li {
+		counter-increment: ol-counter;
+		position: relative;
+		margin: 0 0 10px $indent;
+		padding-top: 1px;
+
+		&:before {
+			content: counter(ol-counter) '.';
+			position: absolute;
+			top: 0;
+			left: 0;
+			margin: 0 0 0 #{-$indent};
+			text-align: left;
+		}
+	}
+}

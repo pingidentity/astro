@@ -1,0 +1,324 @@
+// LAYOUT
+
+// VARS
+$layout-header-height: 48px;
+$sidenav-width: 250px;
+$layout-nav-link-height: 41px; 	// works better as odd number
+$layout-zindex-order: (
+	content,
+	nav,
+	page-messages,
+	header
+);
+$sidenav-width: 250px;
+$sidenav-lineheight: 22px;
+
+#header {
+	z-index: index($layout-zindex-order, 'header');
+	position: fixed;
+	overflow: visible;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: $layout-header-height;
+	background-color: map-get($colors, 'slate-dark');
+
+	a {
+		color: map-get($colors, 'slate');
+		background-color: transparent;
+		@include transition(all 0.2s);
+	}
+	.logo {
+		background: transparent url(../images/icon-logo.png) no-repeat 0 0;
+        background-size: contain;
+		height: 54px;
+		width: 54px;
+		margin: 0 0 0 22px;
+	}
+	.title {
+		position: absolute;
+		bottom: 8px;
+		left: 100px;
+		font-size: 28px;
+		line-height: 1em;
+		font-weight: 400;
+		letter-spacing: -2px;
+		color: map-get($colors, 'elephant');
+        .main {
+            color: map-get($colors, 'white');
+        }
+	}
+	.nav {
+		position: absolute;
+		right: 4px;
+		top: 5px;
+		font-size: 24px;
+
+		li {
+			float:left;
+			a {
+				display: inline-block;
+				vertical-align: middle;
+				padding: 6px 20px 3px 20px;
+				border-right: 1px solid rgba(map-get($colors, 'slate'), 0.5);
+				&:hover {
+					text-decoration: none;
+					color: map-get($colors, 'white');
+				}
+			}
+			&:last-child {
+				a {
+					border-right: none;
+					&:hover {
+						text-decoration: none;
+					}
+				}
+			}
+		}
+		.search {
+			input[type=text] {
+				height: 28px;
+				width: 0;
+				margin: 3px 0 0 0;
+				padding: 0;
+				font-size: 16px;
+				@include opacity(0);
+				@include transition(all 0.2s);
+			}
+			&:before {
+				content: '\73';
+				font-family: 'icofont';
+				font-size: 18px;
+				position: absolute;
+				overflow: hidden;
+				left: 6px;
+				top: 8px;
+				color: gray;
+				width: 0;
+				padding: 1px;
+				@include opacity(0);
+			}
+			&.active {
+				&:before {
+					width: auto;
+					@include opacity(1);
+				}
+				input[type=text] {
+					width: 200px;
+					padding: 0 10px 0 36px;
+					@include opacity(100);
+				}
+				a {
+					padding: 0;
+				}
+				span {
+					display: none;
+				}
+			}
+		}
+	}
+}
+
+#nav {
+	$nav-border-width: 1px;
+	$selected-border-width: 1px;
+	$selected-line-width: 8px;
+	$selected-arrow-offset: -(ceil($layout-nav-link-height/3) + $nav-border-width) + 1;
+	$selected-arrow-width-w: ceil($layout-nav-link-height/2) + $selected-border-width;
+	$selected-arrow-width-h: ceil($selected-arrow-width-w/3) - $selected-border-width;
+
+	z-index: index($layout-zindex-order, 'nav');
+	position: absolute;
+	top: $layout-header-height;
+	bottom: 0;
+	left: 0;
+	width: $sidenav-width;
+
+	&:before {
+		z-index: -1;
+		content: '';
+		position: fixed;
+		background-color: map-get($colors, 'cinder-block');
+		border-right: 1px solid map-get($colors, 'elephant');
+		top: $layout-header-height;
+		bottom: 0;
+		left: 0;
+		width: $sidenav-width;
+	}
+	.title {
+		margin: 20px 0 10px 22px;
+		text-transform: uppercase;
+		color: map-get($colors, 'elephant');
+		font-size: 16px;
+		&.narrow {
+			margin-top: 5px;
+		}
+	}
+	ul.menu {
+		font-size: 16px;
+
+		li {
+			position: relative;
+			padding: $selected-border-width $selected-border-width $selected-border-width 0;
+			border-left: $selected-line-width solid transparent;
+			@include transition(all 0.2s);
+
+			a {
+				position: relative;
+				display: block;
+				padding: 0 0 0 15px;
+				line-height: $layout-nav-link-height;
+				color: map-get($colors, 'slate');
+				background-color: transparent;
+
+				span {
+					display: inline-block;
+					margin: 0 10px;
+				}
+				&:hover {
+					text-decoration: none;
+				}
+			}
+			&:hover {
+				background-color: rgba(#fff, 0.5);
+				text-decoration: none;
+			}
+			&.selected {
+				background-color: map-get($colors, 'elephant');
+				border-left-color: map-get($colors, 'cyan-deep');
+				font-family: 'ProximaNovaSemibold';
+
+				&:after {
+					content: '';
+					display: block;
+					position: absolute;
+					top: 0;
+					border-width: $selected-arrow-width-w $selected-arrow-width-h;
+					border-style: solid;
+					z-index: 1;
+					border-color: transparent transparent transparent map-get($colors, 'stone');
+					right: $selected-arrow-offset;
+				}
+
+				a {
+					color: map-get($colors, 'slate-dark');
+					background-color: map-get($colors, 'white');
+					cursor: default;
+
+					&:before, &:after {
+						content: '';
+						display: block;
+						position: absolute;
+					}
+					&:before {
+						width:4px;
+						background-color: map-get($colors, 'white');
+						top: 0;
+						bottom: 0;
+						right: -($nav-border-width + $selected-border-width);
+						@include border-radius(1px);
+					}
+					&:after {
+						top: 1px;
+						border-width: ($selected-arrow-width-w - 2px) ($selected-arrow-width-h - 1px);
+						border-style: solid;
+						z-index: 2;
+						border-color: transparent transparent transparent map-get($colors, 'white');
+						right: $selected-arrow-offset + 1px;
+					}
+				}
+			}
+            ul.sub-menu {
+                list-style: square inside;
+                li {
+                    display: list-item;
+                    a {
+                        line-height: 16px;
+                    }
+                }
+            }
+		}
+        &:first-child {
+			margin-top: 30px;
+		}
+		&.last {
+			padding-bottom: 30px;
+		}
+	}
+}
+
+#content {
+	z-index: index($layout-zindex-order, 'content');
+	position: fixed;
+	overflow-x: hidden;
+	overflow-y: auto;
+	top: $layout-header-height;
+	right: 0;
+	bottom: 0;
+	left: $sidenav-width + 1px;
+	background-color: map-get($colors, 'white');
+	padding: 15px 30px 40px;
+	border-top: 1px solid map-get($colors, 'white');
+	
+	h1 {
+		&:first-of-type {
+			margin-top: 10px;
+		}
+	}
+	.section {
+		padding: 10px 0 30px 0;
+	}
+	.sub-section {
+		padding: 0 0 20px 0;
+	}
+	.description {
+		line-height: 1.4em;
+		margin: 0 0 0 2px;
+		ul {
+			list-style: square inside;
+		}
+	}
+	pre.language-markup, pre.language-javascript, .output {
+		position: relative;
+		margin-top: 35px;
+		@include border-radius(3px);
+
+		&:before {
+			position: absolute;
+			top: -18px;
+			left: 2px;
+			font-size: 14px;
+			font-family: $font-stack;
+			font-weight: bold;
+			@include opacity(0.2);
+		}
+	}
+	pre.language-markup {
+		overflow: visible;
+
+		&:before {
+			content: 'MARKUP';
+		}
+	}
+	pre.language-javascript {
+		overflow: visible;
+
+		&:before {
+			content: 'JAVASCRIPT';
+		}
+	}
+	.output {
+		padding: 20px;
+		border: 1px dashed silver;
+
+		&:before {
+			content: 'OUTPUT';
+		}
+	}
+	input[type=text], input[type=password], textarea {
+		width: 340px;
+	}
+	textarea {
+		height: 100px;
+	}
+}
