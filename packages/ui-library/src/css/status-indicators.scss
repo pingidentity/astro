@@ -1,0 +1,22 @@
+.status {
+    $meter-height: 20px;
+    height: $meter-height;
+    width: $meter-height;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 10px;
+
+    @include border-radius(10px);
+
+    &.good {
+        background-color: $color-success;
+    }
+    &.failure {
+        background-color: $color-warning;
+    }
+    &.warning {
+        border: 5px solid $color-alert;
+        height: $meter-height/2;
+        width: $meter-height/2;
+    }
+}

@@ -1,0 +1,27 @@
+
+@import 'globals';
+
+.input-select {
+	background: none;
+	border: none;
+	border-radius: 0;
+
+	&:after {
+		content: none;
+	}
+	select {
+		padding: 0;
+		border: 1px solid $color-input-border;
+		width: auto;
+	}
+	&.error {
+		select {
+			border-color: 1px solid $color-warning;
+		}
+	}
+	&.required {
+		select {
+			padding-right: 0;
+		}
+	}
+}

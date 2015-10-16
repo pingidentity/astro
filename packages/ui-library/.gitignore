@@ -8,3 +8,4 @@ npm-debug.log
 # IDEA
 *.iml
 .idea/
+*.prepros.cfg

@@ -1,0 +1,247 @@
+
+@mixin base-button-styles {
+	position: relative;
+	display: inline-block;
+	font-family: $input-font-stack;
+	background-color: $color-button-default-fill;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	outline: none;
+	white-space: nowrap;
+
+	&:hover {
+		text-decoration: none;
+	}
+}
+@mixin default-button-styles {
+	color: $color-button-default-text;
+	background: $color-button-default-fill;
+
+	&:hover {
+		color: $color-button-default-text;
+	}
+}
+
+input[type=button], input[type=submit], .button, button {
+	$height: 36px;
+
+	padding: 0 20px;
+	margin-right: 10px;
+	font-size: 14px;
+	height: $height;
+	line-height: $height;
+	border: 1px solid $color-button-default-border;
+
+	@include border-radius(3px);
+	@include base-button-styles;
+	@include default-button-styles;
+
+	&:hover {
+		color: $color-active;
+		border-color: $color-active;
+	}
+	&:focus {
+		border: 1px solid $color-button-default-border;
+	}
+	&.primary {
+		background: none;
+		background-color: $color-button-primary-fill;
+		color: $color-button-primary-text;
+		border: none;
+
+		&:hover {
+			color: $color-button-primary-text;
+		}
+	}
+	&.secondary {
+		background: none;
+		background-color: $color-button-secondary-fill;
+		color: $color-button-secondary-text;
+		border: none;
+
+		&:hover {
+			color: $color-button-secondary-text;
+		}
+	}
+	&.success {
+		background: none;
+		background-color: $color-success;
+		color: $color-white;
+		border: none;
+
+		&:hover {
+			color: $color-white;
+		}
+	}
+	&.inline {
+		$height: 25px;
+
+		height: $height;
+		line-height: $height;
+		font-weight: 300;
+		@include border-radius(ceil($height/2));
+	}
+	&.disabled, &[disabled] {
+		cursor: default;
+		@include opacity(0.4);
+
+		&:hover {
+			color: $color-button-default-text;
+			border-color: $color-button-default-border;
+		}
+		&.primary, &.secondary {
+			&:hover {
+				color: $color-white;
+			}
+		}
+		&.primary {
+			&.ellipsis {
+				color: $color-button-primary-fill;
+				&:hover {
+					color: $color-button-primary-fill;
+				}
+			}
+		}
+	}
+
+	&.add {
+		padding-left: 35px;
+		margin: 0;
+
+		&:before, &:after {
+			font-family: $icon-font;
+		}
+		&:before {
+			content: '\2b';
+			position: absolute;
+			left: 15px;
+			top: 0;
+			font-size: 10px;
+		}
+		&.user {
+			padding-right: 15px;
+			font-size: 0;
+
+			&:after {
+				font-size: 19px;
+				content: '\55';
+			}
+		}
+		&.no-label {
+			width: 25px;
+			padding: 0;
+
+			&:before {
+				left: 8px;
+			}
+		}
+	}
+	&.download {
+		padding-left: 40px;
+
+		&:before {
+			font-family: $icon-font;
+			content: '\44';
+			position: absolute;
+			left: 15px;
+			top: 0;
+			font-size: 16px;
+		}
+
+		&.inline {
+			padding-left: 35px;
+
+			&:before {
+				font-size: 14px;
+			}
+		}
+	}
+	&.inline.remove {
+		padding: 0;
+		width: 25px;
+		text-align: center;
+
+		&:before {
+			font-family: $icon-font;
+			content: '\2d';
+		}
+	}
+	&.large {
+		$height: 52px;
+		height: $height;
+		line-height: $height;
+		font-size: 15px;
+	}
+}
+
+
+// ROCKER BUTTON
+.rocker-button {
+	$height: 35px;
+	$labelWidth: 125px;
+
+	height: $height;
+	line-height: $height;
+	margin-bottom: 25px;
+	@include border-radius(3px);
+	@include base-button-styles;
+
+	label {
+		position: relative;
+		z-index: 2;
+		float: left;
+
+		width: $labelWidth;
+		line-height: $height - 2px;
+		font-size: 13px;
+
+		text-transform: none;
+		color: map-get($colors, 'gray-warm-dark');
+		margin: 0;
+
+		border-style: solid;
+		border-color: $color-button-default-border;
+		border-width: 1px 0 1px 1px;
+
+		cursor: pointer;
+
+		&:first-of-type {
+			@include border-radius(3px 0 0 3px);
+		}
+		&:last-of-type {
+			@include border-radius(0 3px 3px 0);
+			border-width: 1px;
+		}
+	}
+	.slide {
+		position: absolute;
+		z-index: 1;
+		top: 1px;
+		height: $height - 2px;
+		width: $labelWidth;
+		background: map-get($colors, 'gray-ice-light');
+		@include transition(left .2s ease-out);
+	}
+
+	&.sel-0 {
+		.slide {
+			left: 1px;
+		}
+	}
+	&.sel-1 {
+		.slide {
+			left: $labelWidth + 2;
+		}
+	}
+	&.sel-2 {
+		.slide {
+			left: 2*$labelWidth + 3;
+		}
+	}
+	&.sel-3 {
+		.slide {
+			left: 3*$labelWidth + 4;
+		}
+	}
+}

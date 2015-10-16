@@ -1,0 +1,129 @@
+@font-face { font-family: 'ProximaNovaRegular'; font-weight: normal; src: url('../fonts/proxima-nova/ProximaNova-Regular.otf'); }
+@font-face { font-family: 'ProximaNovaBold'; font-weight: bold; src: url('../fonts/proxima-nova/ProximaNova-Bold.otf'); }
+@font-face { font-family: 'ProximaNovaLight'; font-weight: normal; src: url('../fonts/proxima-nova/ProximaNova-Light.otf'); }
+@font-face { font-family: 'ProximaNovaSemibold'; font-weight: normal; src: url('../fonts/proxima-nova/ProximaNova-Semibold.otf'); }
+@font-face { font-family: 'ProximaNovaCondRegular'; font-weight: normal; src: url('../fonts/proxima-nova/ProximaNovaCond-Regular.otf'); }
+
+$img-path: '../images/';
+$img-branding-path: '../images/icons-pingid/';
+
+// MASTER COLOR LIST (do not add colors lightly!)
+$colors: (
+	'black': #000,
+	'white': #fff,
+
+
+	// THESE COLORS WILL BE PHASED OUT AND ARE DEPRICATED
+	// if the color you are require does not exist in the new color vars, ping Lindsay or Chad for the correct hex
+	// *** DO NOT lift the color from a mock. Color spaces on monitors mess up the hex and make it innaccurate ***
+	'gray-light': #f3f3f3,
+	'gray-light-2': #e8e8e9,
+	'gray-light-3': #EFF2F3,
+	'gray-medium-light': #c6c6c5,
+	'gray-medium-medium': #b2b1b1,
+	'gray-medium-dark': #929396,
+	'gray-ice': #9ea5a8,
+	'gray-ice-light': #e9ecee,
+	'gray-ice-light-2': #d2d5d7,
+	'gray-warm-dark': #5A6266,
+	'gray-warm-medium-light': #CCD5D9,
+	'gray-warm-light': #f1f2f2,
+	'gray-warm-light-3': #F6F9FA,
+	'slate-dark': #556572,
+	'slate-medium': #96a9b3,
+	'slate-extra': #4c637d,
+	'cyan-deep': #2996cc,
+	'cyan-deep-medium': #3ea0d1,
+	'cyan-deep-light': #b4daed,
+	'green-go': #35c370,
+	'red-ketchup': #ed3a03,
+	'yellow-mustard-light': #ffd057,
+	'yellow-mustard': #f1ba1c,
+	'yellow-mustard-dark': darken(#f1ba1c, 50%),
+	'orly': #96702c,
+	'default-background': #f7f7f7,
+
+	// NEW (AWSOME & CORRECT) NAMED COLORS
+	'blue-grey': #9bacb4,
+	'cinder-block': #e4e5e5,
+	'dolphin': #d8dbdc,
+	'elderly': #eff1f1,
+	'elephant': #929aa1,
+	'midnight': #4b637c,
+	'oitnb': #f79100,
+	'rhino': #9eafa8,
+	'slate': #3d454d,
+	'stone': #c2c3c4,
+	'stratus': #bcbdbf,
+	'timberwolf': #e8ebed
+);
+
+// REUSABLE SEMANTIC COLOR VARS (use map-get for all other colors or when semantic meaning does not apply)
+$color-white: map-get($colors, 'white');
+$color-black: map-get($colors, 'black');
+$color-text: map-get($colors, 'elephant');
+$color-midnight: map-get($colors, 'midnight');
+$color-warm: map-get($colors, 'gray-warm-medium-light');
+
+$color-active: map-get($colors, 'cyan-deep');
+$color-inactive: map-get($colors, 'gray-ice-light-2');
+$color-help: map-get($colors, 'cyan-deep-medium');
+$color-controls: map-get($colors, 'gray-light-3');
+
+$color-success: map-get($colors, 'green-go');
+$color-success-text: map-get($colors, 'white');
+$color-warning: map-get($colors, 'red-ketchup');
+$color-warning-text: map-get($colors, 'white');
+$color-alert: map-get($colors, 'yellow-mustard');
+$color-alert-text: map-get($colors, 'yellow-mustard');
+
+$color-input-fill: map-get($colors, 'gray-warm-light');
+$color-input-border: map-get($colors, 'gray-medium-light');
+$color-input-text: map-get($colors, 'slate-extra');
+$color-input-text-readonly: map-get($colors, 'gray-ice');
+$color-input-border-focus: map-get($colors, 'cyan-deep');
+$color-input-label: map-get($colors, 'gray-ice-medium');
+$color-input-placeholder: map-get($colors, 'gray-medium-light');
+$color-input-required: map-get($colors, 'yellow-mustard');
+$color-input-error: map-get($colors, 'red-warm-ketchup');
+$color-input-alert: map-get($colors, 'yellow-mustard-dark');
+
+$color-link-text: map-get($colors, 'cyan-deep');
+$color-link-text-hover: map-get($colors, 'cyan-deep-medium');
+$color-link-text-disabled: map-get($colors, 'cyan-deep-light');
+
+$color-button-default-text: map-get($colors, 'slate-dark');
+$color-button-default-fill: map-get($colors, 'white');
+$color-button-default-border: map-get($colors, 'gray-ice');
+
+$color-button-primary-text: map-get($colors, 'white');
+$color-button-primary-fill: map-get($colors, 'cyan-deep');
+$color-button-primary-border: map-get($colors, 'gray-ice');
+$color-button-primary-selected-fill: map-get($colors, 'white');
+$color-button-primary-selected-border: map-get($colors, 'gray-ice');
+
+$color-button-secondary-text: map-get($colors, 'white');
+$color-button-secondary-fill: map-get($colors, 'gray-medium-medium');
+
+$color-section-border: map-get($colors, 'gray-warm-light-3');
+$color-inline-hover: map-get($colors, 'gray-warm-light-3');
+
+
+// OLD COLOR VARS - DEPRICATED (do not use / replace when found)
+$color-slate: #808285;
+$color-gray-medium: #A5AAAE;
+
+
+// FONTS
+$font-stack: 'Proxima Nova', Helvetica, Arial, sans-serif;
+$font-pn-regular: 'ProximaNovaRegular', helvetica, arial, sans-serif;
+$font-pn-bold: 'ProximaNovaBold', helvetica, arial, sans-serif;
+$font-pn-light: 'ProximaNovaLight', helvetica, arial, sans-serif;
+$font-pn-semibold: 'ProximaNovaSemibold', helvetica, arial, sans-serif;
+$font-pn-cond-regular: 'ProximaNovaCondRegular', helvetica, arial, sans-serif;
+$icon-font: 'iconfont';
+$input-font-stack: proxima-nova, sans-serif;
+
+// MISC
+$layout-header-height: 64px; // used in miltiple includes
+$layout-nav-width: 262px; // used in miltiple include

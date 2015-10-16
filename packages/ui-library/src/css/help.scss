@@ -1,0 +1,221 @@
+
+.help-tooltip {
+    $help-font-spacing: 16px;
+
+    display: inline-block;
+    position: relative;
+    background: transparent;
+    cursor: default;
+
+    &:after {
+        content: '\68';
+        text-transform: none;
+        display: inline-block;
+        font-family: $icon-font;
+        padding: 0 0 1px 1px;
+        width: $help-font-spacing + 1px;
+        font-size: $help-font-spacing;
+        line-height: $help-font-spacing;
+        color: map-get($colors, 'midnight');
+
+        position: absolute;
+        top: 1px;
+        left: 0;
+    }
+    &.no-icon {
+        &:after {
+            content: none;
+        }
+        .tooltip-text {
+            bottom: 0;
+        }
+        &.left {
+            .tooltip-text {
+                right: 0;
+            }
+        }
+    }
+    .tooltip-text {
+        position: absolute;
+        bottom: $help-font-spacing;
+        left: 100%;
+        margin: 0 0 0 -25px;
+        z-index: 1000;
+        width: 360px;
+        opacity: 0;
+        visibility: hidden;
+
+        background: $color-help;
+        color: lighten($color-help, 65);
+
+        padding: 10px;
+        font-size: 14px;
+        line-height: 1.1em;
+        white-space: normal;
+        text-transform: none;
+        font-weight: normal;
+
+        &:before, &:after {
+            content: '';
+            position: absolute;
+        }
+        &:before {
+            border-style: solid;
+            border-width: 6px;
+            line-height: 1em;
+            border-color: $color-help transparent transparent transparent;
+            bottom: -12px;
+            left: 10px;
+        }
+        &:after {
+            width: 50%;
+            height: 28px;
+            bottom: -25px;
+            left: 0;
+            background: transparent;
+        }
+        a {
+            color: $color-white;
+            text-decoration: underline;
+        }
+
+        @include border-radius(4px);
+        @include transform(translate3d(0, 0, 0));
+        @include transition(0.3s ease);
+        @include transition-delay(0ms);
+    }
+    &.warning {
+        .tooltip-text {
+            background: $color-warning;
+
+            &:before {
+                border-color: $color-warning transparent transparent transparent;
+            }
+        }
+        &.bottom {
+            .tooltip-text {
+                &:before {
+                    border-color: transparent transparent $color-warning transparent;
+                }
+            }
+        }
+    }
+    &.short-tooltip {
+        .tooltip-text {
+            width: 200px;
+        }
+    }
+    &.medium-tooltip {
+        .tooltip-text {
+            width: 280px;
+        }
+    }
+    &:hover, &.show {
+        .tooltip-text {
+            opacity: 1;
+            visibility: visible;
+
+            @include transition-delay(100ms);
+        }
+    }
+    &:hover, &:focus, &.show {
+        .tooltip-text {
+            @include transform(translateY(-8px));
+        }
+    }
+    &.bottom {
+        .tooltip-text {
+            top: 18px;
+            bottom: auto;
+
+            &:before {
+                border-color: transparent transparent $color-help transparent;
+                top: -12px;
+                bottom: auto;
+                left: 10px;
+            }
+            &:after {
+                top: -25px;
+                bottom: auto;
+            }
+        }
+        &:hover, &:focus, &.show {
+            .tooltip-text {
+                @include transform(translateY(8px));
+            }
+        }
+    }
+    &.left {
+        .tooltip-text {
+            right: -25px;
+            left: auto;
+
+            &:before {
+                right: 10px;
+                left: auto;
+            }
+            &:after {
+                left: 50%;
+            }
+        }
+    }
+    &.form-error-message {
+        .tooltip-text {
+            bottom: auto;
+            margin: 0 0 0 10px;
+            background: $color-warning;
+
+            &:before {
+                border-color: transparent $color-warning transparent transparent;
+                top: 10px;
+                bottom: auto;
+                right: auto;
+                left: -11px;
+            }
+            &:after {
+                left: -26px;
+                height: 100%;
+                top: 0;
+                width: 30px;
+            }
+        }
+        &:after {
+            content: none;
+            display: none;
+        }
+        &.no-label-text {
+            .tooltip-text {
+                top: 4px;
+            }
+        }
+        &.input-toggle {
+            .tooltip-text {
+        		top: 4px;
+        		left: 47px;
+        	}
+        }
+        &.bottom {
+            .tooltip-text {
+                top: auto;
+                bottom: -22px;
+                left: 0;
+                right: auto;
+                margin: 0 0 -8px 0;
+
+                &:before {
+                    border-color: transparent transparent $color-warning transparent;
+                    top: -12px;
+                    bottom: auto;
+                    right: auto;
+                    left: 15px;
+                }
+                &:after {
+                    left: 0;
+                    height: 10px;
+                    top: -8px;
+                    width: 80%
+                }
+            }
+        }
+    }
+}

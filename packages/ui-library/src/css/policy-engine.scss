@@ -1,0 +1,563 @@
+// TEXT STYLE MIXINS
+@mixin section-title-text {
+    text-transform: uppercase;
+    color: $color-gray-medium;
+}
+
+// LAYOUT STYLES MIXINS
+@mixin section-spacing {
+    margin: 10px 0 0 10px;
+    padding: 20px 0 0 20px;
+}
+@mixin indent {
+    padding-left: 27px;
+}
+@mixin top-rule {
+    border-top: 1px solid $color-gray-medium;
+}
+@mixin bottom-rule {
+    border-bottom: 1px solid $color-gray-medium;
+}
+
+// POPOVER AND MENU ITEM MIXINS
+@mixin menu-item {
+    display: block;
+    padding: 7px 20px;
+    line-height: 20px;
+    &.active {
+        background: $color-inline-hover;
+    }
+    &:hover {
+        background: $color-inline-hover;
+        text-decoration: none;
+    }
+}
+@mixin popover {
+    position: relative;
+    display: inline-block;
+
+    .clear {
+        font-family: $icon-font;
+        font-size: 10px;
+        position: absolute;
+        top: 22px;
+        right: 26px;
+        color: $color-slate;
+    }
+    .menu {
+        display: none;
+        position: absolute;
+        top: 40px;
+        left: 0;
+        border: 1px solid $color-input-border;
+        background: $color-white;
+        z-index: 10;
+
+        @include border-radius(3px);
+
+        .options {
+            margin: 50px 0 0 0;
+            max-height: 285px;
+            min-width: 202px;
+            overflow: auto;
+            a {
+                @include menu-item;
+
+                &:hover {
+                    &:before {
+                        font-family: 'iconfont';
+                        content: '\2b';
+                        font-size: 10px;
+                        position: absolute;
+                        left: 3px;
+                    }
+                }
+            }
+        }
+        .hidden {
+            display: none;
+        }
+        &:before, &:after {
+            content: '';
+            position: absolute;
+            border-style: solid;
+            border-width: 10px;
+            left: 15px;
+        }
+        &:before {
+            top: -21px;
+            border-color: transparent transparent $color-input-border transparent;
+        }
+        &:after {
+            top: -20px;
+            border-color: transparent transparent $color-white transparent;
+        }
+    }
+    &.open {
+        .menu {
+            display: block;
+        }
+    }
+}
+.settings-sections {
+    .condition-list {
+        margin: 15px 0 10px;
+
+        .condition {
+            // because of the :last-child rule above, this border is no longer necessary
+            border-bottom: none;
+
+            .controls {
+                position: absolute;
+                top: -25px;
+                right: 0px;
+
+                span, a, label {
+                    vertical-align: middle;
+                    margin-left: 10px;
+                    display: inline-block;
+                }
+                .remove, .remove-rule {
+                    position: static;
+                    top: auto;
+                }
+                .icon-delete {
+                    width: 25px;
+                    height: 41px;
+                    background-image: none;
+                    &:hover {
+                        text-decoration: none;
+                    }
+                    &:before {
+                        font-size: 18px;
+                        color: map-get($colors, 'elephant');
+                    }
+                }
+            }
+        }
+        .condition-title {
+            margin-top: 0;
+            margin-bottom: 0;
+            padding: 15px 0;
+            cursor: pointer;
+
+            &.grippable {
+                padding-right: 40px;
+                position: relative;;
+
+                &:after {
+                    text-transform: none;
+                    font-family: $icon-font;
+                    position: absolute;
+                    right: 10px;
+                    content: "\47";
+                }
+                &.active {
+                    padding-right: 0;
+
+                    &:after {
+                        display: none;
+                    }
+                }
+            }
+            .show-condition {
+                @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
+            }
+            &.active {
+                .condition-collapsed-controls {
+                    display: none;
+                }
+                .show-condition {
+                    @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
+                    @include transform(rotate(180deg));
+                }
+            }
+        }
+    }
+    .condition-collapsed-controls {
+        float: right;
+        &.disabled {
+            font-style: italic;
+        }
+    }
+    .map-sidebar {
+        width: 35%;
+        float: left;
+        p {
+            @extend body;
+            text-transform: none;
+        }
+        .list-container {
+            border-top: 1px solid $color-input-border;
+            margin-right: 20px;
+            padding: 20px 0;
+
+            > a, > p {
+                margin-left: 20px;
+            }
+        }
+        .options {
+            max-height: 330px;
+            overflow: auto;
+            margin-bottom: 20px;
+
+            li {
+                @extend a;
+                @include menu-item;
+                position: relative;
+                padding-right: 60px;
+                input {
+                    width: 100%;
+                }
+                .edit {
+                    display: none;
+                }
+                &.editing {
+                    .edit {
+                        display: inline;
+                    }
+                    .view {
+                        display: none;
+                    }
+                }
+                a.edit-btn {
+                    display:none;
+                    margin-left: 5px;
+                    line-height: 20px;
+                    height: 20px;
+                    vertical-align: top;
+                    &:after {
+                        content: 'e';
+                        text-transform: none;
+                        font-size: 12px;
+                        font-family: 'iconfont';
+                        color: $color-button-default-text;
+                    }
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+                a.remove {
+                    display: none;
+                    font-size: 10px;
+                    height: 10px;
+                    width: 10px;
+                    line-height: 10px;
+                    padding: 5px;
+                    margin-right: 5px;
+                    position: absolute;
+                    top: 5px;
+                    @include transform(-50%);
+                }
+                &.active, &:hover {
+                    a.remove, a.edit-btn {
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+    }
+    .geo-map {
+        width: 65%;
+        height: 400px;
+        float: left;
+    }
+    .input-row.one-story {
+        label {
+            margin-bottom: 0;
+        }
+    }
+}
+// maps
+.input-map {
+    min-height: 315px;
+
+    .col-1 {
+        max-width: 40%;
+        width: 35%;
+        display: inline-block;
+        label {
+            width: 100%;
+            padding-bottom: 5px;
+            border-bottom: 1px solid $color-input-border;
+        }
+        .locations {
+            margin-top: 15px;
+            li {
+                color: $color-input-border-focus;
+                padding: 4px 20px;
+                position: relative;
+
+                .remove, .remove-rule {
+                    visibility: hidden;
+                    width: 15px;
+                    height: 15px;
+                    line-height: 15px;
+                    top: 5px;
+                    right: 5px;
+                    font-size: 9px;
+                    @include border-radius(8px);
+                }
+                &:hover {
+                    background-color: $color-input-fill;
+                    .remove, .remove-rule {
+                        visibility: visible;
+                    }
+                }
+                &.add {
+                    margin-top: 20px;
+                    &:before {
+                        content: '+ ';
+                    }
+                }
+            }
+        }
+    }
+    .col-2 {
+        width: 60%;
+        height: auto;
+        min-height: 300px;
+        display: inline-block;
+        padding: 5px;
+        float: right;
+        #location-map {
+            margin-top: 15px;
+            min-width: 600px;
+            min-height: 300px;
+        }
+    }
+}
+.input-menu-button {
+    @include popover;
+    position: relative;
+    display: inline-block;
+
+    .description {
+        position: absolute;
+        top: 0;
+        padding: 20px;
+        color: $color-gray-medium;
+    }
+}
+
+// CO-BRANDING, CID SETTINGS
+.pingid-settings, .directory-settings {
+    label {
+        cursor: default;
+
+        &.input-checkbox, &.input-radio {
+            line-height: 20px;
+            cursor: pointer;
+        }
+    }
+    .title {
+        color: $color-input-label;
+        text-transform: uppercase;
+        margin: 15px 0 10px;
+        font-size: 14px;
+        line-height: 1em;
+
+        .inline {
+            margin-left: 10px;
+        }
+        span {
+            font-family: $font-pn-regular;
+            font-size: 13px;
+        }
+    }
+    &.data-group {
+        margin: 0 0 30px 0;
+        display: none;
+
+        &.show {
+            display: block;
+        }
+        .image-upload {
+            margin-bottom: 20px;
+            .image-types {
+                top: 55px;
+            }
+        }
+        .reset {
+            padding-left: 10px;
+            font-size: 14px;
+            text-transform: none;
+        }
+        .data-cols {
+            .col-1-3 {
+                width: 33%;
+                float: left;
+            }
+            .col-2-3 {
+                width: 33%;
+                float: left;
+            }
+            .col-3-3 {
+                width: 33%;
+                float: left;
+            }
+            .heading {
+                width: 75%;
+            }
+        }
+
+        // SUB GROUPS
+        .sub-group {
+            margin-top: 10px;
+            .heading {
+                text-transform: uppercase;
+                font-size: 14px;
+                margin: 10px 0;
+                padding: 10px 0;
+                padding-bottom: 7px;
+                border-bottom: 1px solid $color-input-border;
+                font-size: 14px;
+                font-weight: 600;
+                color: $color-text;
+            }
+        }
+        .section {
+            margin: 20px 0 0 20px;
+        }
+
+        // TAB GROUPS
+        .tab-group {
+            display: none;
+            min-height: 500px;
+            border: 1px solid $color-input-border;
+            position: relative;
+            padding: 0;
+
+            &.show {
+                display: block;
+                overflow: auto;
+            }
+            .col-1 {
+                padding-left: 20px;
+                float: left;
+                width: 44%;
+                min-height: 500px;
+                padding: 20px;
+
+                &.logos {
+                    .input-row {
+                        margin-top: 25px;
+                    }
+                }
+            }
+            .col-2 {
+                float: right;
+                width: 46%;
+                background-color: $color-warm;
+                min-height: 775px;
+                padding: 20px;
+
+                &.images-preview {
+                    margin: 0 auto;
+                    text-align: center;
+                    .details-tooltip {
+                        text-align: left;
+                    }
+                    .image-mobile {
+                        margin: 30px 0;
+                        position: relative;
+                        &.home {
+                            display: inline-block;
+                            width: 200px;
+                            height: 355px;
+                            margin: 30px auto;
+                            background: url('#{$img-branding-path}PingIDHomePreview@2x.png') no-repeat 0 0;
+                            background-size: cover;
+                            .services {
+                                position: absolute;
+                                left: 175px;
+                                bottom: 31px;
+                                height: 42px;
+                                width: 42px;
+                                z-index: 1000;
+                            }
+                        }
+                        &.swipe {
+                            display: inline-block;
+                            width: 200px;
+                            height: 355px;
+                            margin: 30px auto;
+                            background: map-get($colors, 'gray-warm-medium-light-2') url('#{$img-branding-path}SwipePreviewBase@2x.png') no-repeat 0 0;
+                            background-size: cover;
+                            .logo {
+                                display: none;
+                            }
+                        }
+                        &.enrollment {
+                            display: inline-block;
+                            width: 340px;
+                            height: 309px;
+                            margin: 30px auto;
+                            background: $color-input-fill url('#{$img-branding-path}EnrollmentPreviewDarkText@2x.png') no-repeat 0 0;
+                            background-size: cover;
+                            .logo {
+                                display: none;
+                            }
+                            .button {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+                .preview {
+                    font-size: 14px;
+                    position: absolute;
+                    left: 500px;
+                }
+                .details-target.inline.button {
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+    .info {
+        margin: 0 0 10px 0;
+        display: inline-block;
+
+        label {
+            display: inline-block;
+            width: 150px;
+            margin: 0 0 10px 0;
+        }
+        span {
+            display: inline-block;
+            width: 290px;
+            max-width: 290px;
+            float: right;
+            text-align: left;
+        }
+        .success {
+            color: $color-success;
+        }
+        span {
+            display: inline-block;
+        }
+        &:last-of-type {
+            margin: 0;
+        }
+        a {
+            text-transform: uppercase;
+        }
+        &.last-of-type label {
+            margin: 0;
+        }
+    }
+    .option {
+        display: none;
+        width: 100%;
+        &.active {
+            display: inline-block;
+        }
+        .input-toggle {
+            position: relative;
+            top: 5px;
+            left: 0;
+            clear: both;
+        }
+    }
+}

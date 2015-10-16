@@ -1,0 +1,238 @@
+
+.details-tooltip {
+	$width: 360px;
+	$width-small: 240px;
+	$bg-color: $color-white;
+	$border-color: map-get($colors, 'stone');
+	$gutter: 20px;
+
+	display: inline-block;
+	position: relative;
+
+	&.show {
+		.details-content, &.details-content {
+			visibility: visible;
+			opacity: 1;
+		}
+	}
+	&.alert {
+		&.bottom {
+			.details-content {
+				border-top-color: $color-alert;
+				&:before {
+					width: 0;
+					height: 0;
+					border-top: none;
+					border-right: 10px solid transparent;
+					border-bottom: 10px solid $color-alert;
+					top: -11px;
+				}
+				&:after {
+					border: none;
+				}
+			}
+		}
+		.details-content {
+			padding: 0;
+			.details-title {
+				background-color: $color-alert;
+				color: $color-input-alert;
+				border-bottom: none;
+
+				&:before {
+					font-family: $icon-font;
+					content: '\21';
+					position: absolute;
+					top: 5px;
+					left: 0;
+					right: 0;
+					text-align: center;
+					font-size: 22px;
+					z-index: 1;
+					color: map-get($colors, 'orly');
+				}
+			}
+			.title {
+				color: map-get($colors, 'orly');
+				text-align: center;
+				font-weight: 400;
+				font-size: 24px;
+			}
+			p {
+				padding: 0 20px;
+				text-align: center;
+			}
+			.buttons, div {
+				padding: 20px;
+			}
+		}
+	}
+	.details-target {
+		display: block;
+	}
+	.details-content {
+		position: absolute;
+		display: block;
+		left: 50%;
+		visibility: hidden;
+		opacity: 0;
+		z-index: 100;
+
+		width: $width;
+		margin: 0;
+		min-height: 80px;
+		background-color: $bg-color;
+		border: 1px solid $border-color;
+		font-size: 14px;
+		padding: $gutter $gutter ($gutter+10) $gutter;
+
+		@include box-shadow(3px 3px 10px 0px rgba(0,0,0,0.1));
+		@include border-radius(5px);
+		@include transition(0.3s ease);
+
+		&:before, &:after {
+			content: '';
+			position: absolute;
+			border-style: solid;
+			border-width: 10px;
+			margin: 0 0 0 -5px;
+		}
+		.details-title {
+			font-size: 18px;
+			line-height: 1.2;
+			padding: 0 17px 5px 0;
+			margin: 0 0 15px 0;
+			text-align: center;
+			border-bottom: 1px solid map-get($colors, 'slate-extra');
+			color: map-get($colors, 'slate');
+			text-transform: none;
+
+			a {
+				font-size: 16px;
+				text-decoration: uppercase;
+				position: absolute;
+				top: $gutter;
+				right: $gutter;
+			}
+		}
+		.sub-title {
+			font-size: 16px;
+			color: $color-gray-medium;
+			text-decoration: uppercase;
+			padding: 10px 0;
+		}
+		.details {
+			padding: 10px 10px 0 10px;
+		}
+		.primary-action {
+			position: absolute;
+			bottom: $gutter;
+			right: $gutter;
+			margin: 0;
+		}
+		&.primary-button {
+			padding-bottom: 70px;
+		}
+		.loader {
+			position: relative;
+			display: inline-block;
+			margin: 10px 49%;
+			top: auto;
+			left: auto;
+		}
+		.buttons {
+			margin: 15px 0 0 0;
+			text-align: center;
+
+			button {
+				&:last-of-type {
+					margin-right: 0;
+				}
+			}
+			.nevermind {
+				margin-right: 10px;
+			}
+		}
+		.details-close {
+			position: absolute;
+			top: 15px;
+			right: 15px;
+			color: transparent;
+			z-index: 2;
+
+			&:after {
+				font-family: 'iconfont';
+				content: '\78';
+				text-transform: none;
+				font-size: 18px;
+				color: #B5C9D0;
+			}
+		}
+		.input-text {
+			input {
+				width: 304px;
+			}
+		}
+	}
+	&.top {
+		.details-content {
+			bottom: 11px;
+			margin: 0;
+
+			&:before {
+				bottom: -21px;
+				border-color: $border-color transparent transparent transparent;
+			}
+			&:after {
+				bottom: -20px;
+				border-color: $bg-color transparent transparent transparent;
+			}
+			.confirm-buttons {
+				margin: 20px auto;
+				text-align: center;
+			}
+		}
+	}
+	&.bottom {
+		.details-content {
+			margin: 10px 0 0 0;
+			top: 100%;
+			bottom: auto;
+
+			&:before {
+				top: -21px;
+				bottom: auto;
+				border-color: transparent transparent $border-color transparent;
+			}
+			&:after {
+				top: -20px;
+				bottom: auto;
+				border-color: transparent transparent $bg-color transparent;
+			}
+		}
+	}
+	&.left {
+		margin: 0;
+
+		.details-content {
+			right: 0;
+			left: auto;
+
+			&:before, &:after {
+				right: 20px;
+				left: auto;
+			}
+		}
+	}
+	&.right {
+		.details-content {
+			left: 0;
+			right: auto;
+
+			&:before, &:after {
+				left: 20px;
+				right: auto;
+			}
+		}
+	}
+}

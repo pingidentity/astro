@@ -1,0 +1,45 @@
+// HTML ELEMENTS
+body {
+	font-family: $font-stack;
+	font-size: 16px;
+	line-height: 1.3em;
+	color: map-get($colors, 'slate');
+	font-weight: 300;
+}
+a {
+	cursor: pointer;
+	text-decoration: none;
+	color: $color-link-text;
+
+	&.link {
+		border-bottom: 1px solid  $color-active;
+		padding-bottom: 0px;
+		text-transform: uppercase;
+	}
+	&:hover {
+		color: $color-link-text-hover;
+		text-decoration: underline;
+	}
+}
+h1, h2, h3, h4, h5 {
+	color: map-get($colors, 'slate-extra');
+}
+h1 {
+	// override color
+	color: map-get($colors, 'slate');
+	font-size: 28px;
+	font-weight: 400;
+	margin: 25px 0;
+}
+h2 {
+	font-size: 22px;
+	font-weight: 500;
+	margin: 0 0 10px 0;
+}
+p {
+	margin: 0 0 1em 0;
+}
+strong {
+	font-weight: bold;
+	font-family: $font-pn-bold;
+}

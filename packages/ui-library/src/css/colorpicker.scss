@@ -1,0 +1,209 @@
+/**
+ * React ColorPicker Styling
+ */
+$padding: 2%;
+$mapPointer: $padding * 2;
+$sliderWidth: $padding * 4;
+$sliderPointerHeight: $sliderWidth / 4;
+
+@mixin abs ($top: auto, $right: auto, $bottom: auto, $left: auto) {
+    display: block;
+    position: absolute;
+    top: $top;
+    bottom: $bottom;
+    left: $left;
+    right: $right;
+}
+
+.input-color-picker {
+    margin-bottom: 10px;
+    
+    // add later as variable
+    &.inline {
+        position: relative;
+        display: inline-block;
+        margin-right: 20px;
+    }
+    .colors {
+        position: relative;
+        width: auto;
+        display: inline-block;
+        background-color: $color-input-fill;
+        border: 1px solid $color-input-fill;
+        cursor: pointer;
+        @include border-radius(4px);
+        
+        .colors-swatch {
+            position: absolute;
+            vertical-align: middle;
+            background-position: -80px 0;
+            cursor: text;
+            padding: 0;
+            margin: 0;
+            display: inline-block;
+            top: 5px;
+            left: 5px;
+            width: 18px;
+            height: 18px;
+            @include border-radius(4px);
+
+            .colors-swatch-color {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                @include border-radius(4px);
+            }
+            span {
+                display: block;
+                width: 18px;
+                height: 18px;
+                @include border-radius(4px);
+            }
+        }
+        .colors-input {
+            height: 23px;
+            width: 95px;
+            display: inline-block;
+            padding: 0 10px 0 30px;
+            margin-bottom: 5px;
+            border: none;
+            text-transform: uppercase;
+        }
+        &:after {
+            content: 'v';
+            font-family: "iconfont";
+            font-size: 12px;
+            text-transform: none;
+            right: 10px;
+            top: 12px;
+            color: $color-input-text;
+            pointer-events: none;
+        }
+        &.colors-focus {
+            border: 1px solid $color-warm;
+            border-bottom: none;
+            &:after {
+                @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
+                @include transform(rotate(180deg));
+            }
+        }
+    }
+}
+.colorpicker-container {
+    z-index: 99999;
+    position: absolute;
+    margin-top: -1px;
+
+    .colorpicker {
+        color: $color-white;
+        background: $color-input-fill;
+        width: 154px;
+        height: 154px;
+        @include abs($padding, $padding * 2 + $sliderWidth, $padding, $padding);
+
+        .map {
+            @include abs($padding, $padding * 2 + $sliderWidth, $padding, $padding);
+            position: absolute;
+            user-select: none;
+            overflow: hidden;
+            cursor: move;
+
+            &.active {
+                cursor: none;
+            }
+            &.dark .pointer {
+                border-color: $color-white;
+            }
+            &.light .pointer {
+                border-color: $color-black;
+            }
+
+            .pointer {
+                position: absolute;
+                width: $mapPointer;
+                height: $mapPointer;
+                margin-left: -$mapPointer / 2;
+                margin-bottom: -$mapPointer / 2;
+                border-radius: 100%;
+                border: 1px solid $color-black;
+            }
+            .background {
+                top: 0;
+                left: 0;
+                position: absolute;
+                height: 100%;
+                width: 100%;
+            }
+            .background:before,
+            .background:after {
+                display: block;
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+            }
+            .background:after {
+                background: linear-gradient(to bottom, rgba($color-black,0) 0%,rgba($color-black,1) 100%);
+            }
+            .background:before {
+                background: linear-gradient(to right, rgba($color-white,1) 0%,rgba($color-white,0) 100%);
+            }
+        }
+        .slider {
+            position: absolute;
+            user-select: none;
+            
+            &.vertical {
+                top: 0;
+                bottom: 0;
+                width: 100%;
+                cursor: ns-resize;
+
+                .track {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    width: 100%;
+                }
+            }
+            
+            .track {
+                background: #888;
+            }
+            .pointer {
+                position: absolute;
+                left: 0;
+                width: 100%;
+                height: $sliderPointerHeight;
+                background: $color-white;
+                margin-bottom: percentage(0 - $sliderPointerHeight / $sliderWidth / 2);
+            }
+        }
+        .sat-slider, .light-slider, .details, .sample {
+            display: none;
+        }
+        .hue-slider {
+            @include abs($padding, $padding, $padding, 100 - ($sliderWidth + $padding));
+
+            .track {
+                background: linear-gradient(to bottom,
+                    #FF0000 0%,
+                    #FF0099 10%,
+                    #CD00FF 20%,
+                    #3200FF 30%,
+                    #0066FF 40%,
+                    #00FFFD 50%,
+                    #00FF66 60%,
+                    #35FF00 70%,
+                    #CDFF00 80%,
+                    #FF9900 90%,
+                    #FF0000 100%
+                );
+            }
+        }
+    }
+}

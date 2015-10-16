@@ -1,0 +1,51 @@
+
+table {
+	&.basic {
+		width: 100%;
+		
+		th {
+			color: map-get($colors, 'elephant');
+			text-transform: uppercase;
+		}
+		th, td {
+			text-align: left;
+			font-size: 14px;
+			padding: 0 15px 15px 0;
+
+			&:last-of-type {
+				padding-left: 0;
+			}
+			&.center {
+				text-align: center;
+			}
+		}
+		label {
+			vertical-align: middle;
+
+			&.input-checkbox {
+				&.no-label {
+					padding: 0;
+				}
+			}
+		}
+		.button {
+			&.inline {
+				vertical-align: middle;
+			}
+		}
+	}
+}
+a.add-table-row {
+	position: relative;
+	display: inline-block;
+	padding-left: 15px;
+	font-size: 14px;
+
+	&:before {
+		content: '\2b';
+		position: absolute;
+		left: 0;
+		top: 0;
+		font-size: 20px;
+	}
+}

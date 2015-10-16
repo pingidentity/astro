@@ -1,0 +1,755 @@
+.no-results {
+	margin-top: 30px;
+	line-height: 40px;
+	padding-top: 25px;
+	border-top: 1px solid $color-input-text;
+	font-family: $font-pn-regular;
+	font-size: 15px;
+	color: $color-input-label;
+
+	&.inline {
+		line-height: 28px;
+	}
+	input[type=button], button {
+		margin: 0 0 0 30px;
+	}
+	.result-set {
+		display: none;
+	}
+}
+.result-search-inputs {
+	position: relative;
+    margin: 0 0 30px 0;
+
+	label {
+		&.search {
+			input {
+				width: 432px;
+			}
+		}
+	}
+	.search-text {
+		width: 270px;
+		padding-right: 40px;
+	}
+	.list-status-select {
+		position: absolute;
+		top: 0;
+		left: 368px;
+		margin: 0;
+	}
+	.add-button, .add-button-help {
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+	.filter-link {
+		display: inline-block;
+		line-height: 50px;
+		text-decoration: none;
+
+		&:after {
+			font-family: $icon-font;
+			content: '\76';
+			position: absolute;
+			font-size: 12px;
+			@include transition(all 0.3s);
+		}
+		&.show {
+			&:after {
+				@include transform(rotate(180deg));
+			}
+		}
+	}
+	.filter-options {
+		padding-top: 0;
+		padding-bottom: 0;
+		height: 0;
+		overflow: hidden;
+		@include opacity(0);
+		@include transition(all 0.3s);
+
+		&.show {
+			padding-top: 30px;
+			padding-bottom: 10px;
+			height: 24px;
+			@include opacity(1);
+		}
+		.input-checkbox {
+			padding-bottom: 0;
+		}
+	}
+}
+.result-count {
+	display: inline-block;
+	margin: 0 0 0 30px;
+	line-height: 24px;
+	font-size: 16px;
+	color: map-get($colors, 'elephant');
+}
+.result-set {
+	$item-height: 75px;
+	$button-height: 47px;
+	$button-top: 28px;
+
+	position: relative;
+	margin: 30px 0 0 0;
+
+	&.filter {
+		min-height: 950px;
+		margin-right: 45px;
+
+		.az-filter {
+			margin-right: -45px;
+
+			&.fixed {
+				position: fixed;
+				margin: 0;
+				top: 80px;
+				bottom: 0;
+				right: 40px;
+				overflow: auto;
+			}
+		}
+	}
+
+	// IDEAL
+	.loader-container {
+		$loader-hgt: 29px;
+
+		position: fixed;
+		bottom: -30px;
+		z-index: 100;
+		left: 50%;
+		margin: 0 0 0 ceil($layout-nav-width - $loader-hgt)/2;
+		height: $loader-hgt;
+		width: $loader-hgt;
+		background: $color-white;
+		@include border-radius(15px);
+		@include opacity(0);
+		@include transition(all 0.1s);
+		@include box-shadow(1px 1px 3px rgba(0,0, 0, 0.2));
+
+		.loader {
+			position: absolute;
+			top: 5px;
+			left: 5px;
+		}
+	}
+	.loading {
+		.loader-container {
+			bottom: 30px;
+			@include opacity(1);
+		}
+	}
+	.item-head {
+		margin: 5px auto;
+		font-weight: bold;
+		text-align: center;
+		color: map-get($colors, 'slate-extra');
+	}
+	.item {
+		position: relative;
+		// overflow: hidden;
+		background-color: map-get($colors, 'elderly');
+		margin: 0 0 10px 0;
+		max-height: $item-height;
+		@include border-radius(2px);
+		@include transition(all 0.1s);
+
+		&.expanded {
+			background-color: $color-white;
+			border: 1px solid map-get($colors, 'gray-ice-light');
+			max-height: 4000px;
+			@include transition(max-height 1s);
+
+			.expand-btn {
+				&:after {
+					font-family: 'iconfont';
+					content: '\63';
+				}
+			}
+			.row-controls {
+				background: none;
+				border-left: 1px solid $color-controls;
+			}
+			.collapsed-content {
+				.row-button {
+					display: block;
+				}
+				.inline-btn-tooltip {
+					position: absolute;
+					top: 17px;
+					right: 188px;
+
+					&.bottom {
+						position: absolute;
+						top: auto;
+						bottom: 19px;
+						right: 112px;
+					}
+				}
+			}
+		}
+		&.no-content {
+			.row-controls {
+				right: 0;
+			}
+		}
+		.loader {
+			margin: 0 0 20px 20px;
+		}
+		.item-title {
+			font-size: 16px;
+
+			&.name {
+				font-size: 22px;
+			}
+		}
+		.item-sub-title {
+			font-size: 14px;
+			font-weight: normal;
+			color: $color-gray-medium;
+		}
+		.item-link {
+            position: absolute;
+            right: 80px;
+            line-height: 1em;
+            font-size: 16px;
+            top: 24px;
+        }
+		.item-username {
+			font-family: $font-pn-regular;
+			font-size: 17px;
+			color: $color-text;
+			padding-top: 7px;
+		}
+		&.new-user {
+			overflow: visible;
+
+			.item-title, .item-sub-title {
+				font-style: italic;
+			}
+			.item-title {
+				color: $color-gray-medium;
+			}
+		}
+		.row-controls {
+			$btn-width: 75px;
+			background: darken($color-controls, 3);
+			border-bottom: 1px solid $color-controls;
+			border-left: 1px solid darken($color-controls, 8%);
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			right: 51px;
+
+			&.noborder {
+				border: none;
+			}
+
+			.details {
+				padding: 15px 15px 15px 25px;
+				margin: 0 (2*$btn-width) 0 0;
+				min-width: 132px;
+				font-size: 16px;
+				height: 32px;
+
+				.title, .sub-title {
+					line-height: 1em;
+				}
+				.title {
+					margin: 7px 0 0 0;
+					font-size: 16px;
+				}
+				.sub-title {
+					margin: 2px 0 0 0;
+					font-size: 12px;
+					font-style: italic;
+				}
+			}
+			.reject-btn, .approve-btn, .cancel-btn, .resend-btn {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				width: $btn-width;
+				text-align: center;
+				font-size: 16px;
+
+				&:after {
+					font-family: $icon-font;
+					position: absolute;
+					top: 20px;
+					left: 0;
+					right: 0;
+					font-size: 22px;
+				}
+				&:hover {
+					text-decoration: none;
+				}
+			}
+			.reject-btn, .cancel-btn {
+				right: $btn-width;
+			}
+			.approve-btn, .resend-btn {
+				right: 0;
+			}
+			.cancel-btn {
+				padding-top: 27px;
+			}
+			.reject-btn, .approve-btn, .resend-btn {
+				padding-top: 47px;
+
+				&:hover {
+					@include opacity(0.7);
+				}
+			}
+			.reject-btn {
+				color: map-get($colors, 'gray-warm-dark');
+				background-color: map-get($colors, 'gray-light-3');
+
+				&:after {
+					content: '\58';
+				}
+			}
+			.approve-btn {
+				color: $color-white;
+				background-color: $color-success;
+
+				&:after {
+					content: '\70';
+				}
+			}
+			.resend-btn {
+				color: $color-white;
+				background-color: $color-active;
+
+				&:after {
+					content: '\72';
+				}
+			}
+			.row-button {
+				position: absolute;
+				right: 73px;
+				top: 18px;
+				display: none;
+				@include transition(all 0.2s);
+			}
+			.input-toggle {
+				position: absolute;
+				right: 25px;
+				top: 20px;
+			}
+		}
+		.expand-btn, .delete-btn, .edit-btn, .view-btn, .no-edit {
+			background-color: map-get($colors, 'timberwolf');
+			position: absolute;
+			width: 50px;
+			text-align: center;
+			right: 0;
+			padding: $button-top 0 0 0;
+
+			&:after {
+				text-transform: none;
+				font-size: 18px;
+				font-family: 'iconfont';
+				color: map-get($colors, 'gray-warm-dark');
+			}
+		}
+		.expand-btn, .delete-btn, .edit-btn, .view-btn {
+			&:hover {
+				text-decoration: none;
+				@include opacity(0.85);
+			}
+		}
+		.expand-btn {
+			top: 0;
+			bottom: 0;
+			height: $button-height;
+
+			&:after {
+				content: '\45';
+			}
+			&:hover {
+				text-decoration: none;
+			}
+		}
+		.delete-btn {
+			bottom: 0;
+			height: $button-height;
+
+			&:after {
+				content: '\64';
+			}
+		}
+		.edit-btn, .view-btn, .no-edit {
+			top: 1px;
+			bottom: $button-height + $button-top + 1px;
+			padding: 0;
+
+			&:after {
+				position: absolute;
+				top: 50%;
+				left: 0;
+				right: 0;
+				margin: -10px 0 0 0;
+			}
+		}
+		.edit-btn {
+			&:after {
+				content: '\65';
+			}
+		}
+		.view-btn {
+			&:after {
+				content: '\56';
+				font-size: 13px;
+			}
+		}
+		.expanded-content {
+			position: relative;
+			padding: 0 80px 30px 30px;
+		}
+		&.no-edit {
+			.edit-btn {
+				pointer-events: none;
+
+				&:after {
+					content: '';
+				}
+				&:hover {
+					background-color: map-get($colors, 'gray-light-2');
+				}
+			}
+		}
+		&.no-delete {
+			.edit-btn {
+				bottom: 0;
+			}
+			.resend-tooltip {
+				position: absolute;
+				top: 0;
+				right: 0;
+
+				&.bottom {
+					position: absolute;
+					bottom: 0;
+					top: auto;
+				}
+			}
+		}
+		.resend-tooltip {
+			position: absolute;
+			top: 0;
+			right: 0;
+		}
+		.cancel-tooltip {
+			position: absolute;
+			right: 65px;
+			top: 0;
+		}
+	}
+	.collapsed-content {
+		position: relative;
+		height: 55px;
+		padding: 20px 0 0 30px;
+	}
+	.expanded-content {
+		position: relative;
+		padding: 0 65px 30px 30px;
+	}
+	&.draggable {
+
+		.expanded-content {
+			padding-left: 45px;
+		}
+		.item {
+			.item-title, .item-sub-title {
+				margin-left: 25px;
+			}
+			.grip {
+				position: absolute;
+				top: 21px;
+				left: 20px;
+				@include grab-cursor;
+
+				&:before {
+					content: '\47';
+					text-transform: none;
+					font-size: 18px;
+					font-family: 'iconfont';
+					color: map-get($colors, 'stone');
+				}
+			}
+		}
+	}
+}
+
+// POLICY EDITOR
+.result-set-list {
+	margin: 10px 0 0 0;
+	padding: 20px 0 0 30px;
+
+	.result-set-title {
+		text-transform: uppercase;
+		color: $color-input-label;
+		padding: 0 0 5px 0;
+		margin: 0 0 25px 0;
+		border-bottom: 1px solid $color-input-label;
+		font-family: $font-pn-regular;
+		font-size: 16px;
+		a {
+			margin-left: 20px;
+			font-size: 14px;
+			text-transform: uppercase;
+		}
+	}
+	.set-container {
+		width: 100%;
+		&.active {
+			display: inline-block;
+			@include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
+		}
+	}
+	.result-set {
+		margin-top: 5px;
+		.system-status {
+			display: inline-block;
+		}
+		.item {
+			overflow: hidden;
+			&.expanded {
+				overflow-y: scroll;
+			}
+			.expanded-content {
+				row-status-toggle {
+					left: 0;
+					top: 0;
+					position: relative;
+				}
+			}
+		}
+	}
+	&.active {
+		.set-container {
+			display: block;
+		}
+		.result-set-title {
+			border-bottom: none;
+		}
+		.show-set {
+			@include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
+			@include transform(rotate(180deg));
+		}
+	}
+
+}
+// TODO: remove this? why is this so specific?
+.page-policy {
+	.result-set-list {
+		.data-set, .result-set {
+			.condition-list .condition .condition-fields .menu {
+				border-bottom: none;
+			}
+		}
+	}
+}
+.show-set, .show-condition {
+	font-size: 12px;
+	padding: 0 5px;
+	display: inline-block;
+	&.expanded {
+		@include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
+		@include transform(rotate(180deg));
+	}
+	.data-col-of-4 {
+		max-width: 25%;
+	}
+	.data-col-of-5 {
+		max-width: 20%;
+	}
+}
+.condition-list {
+	margin-right: 20px;
+	padding-right: 20px;
+
+	.condition-title {
+		margin: 0;
+		padding: 15px 0;
+		border-style: solid;
+		border-width: 1px 0 0 0;
+		border-color: $color-section-border;
+		text-transform: uppercase;
+		color: $color-gray-medium;
+		font-size: 14px;
+		font-family: $font-pn-regular;
+		font-weight: 600;
+
+		&:hover {
+			cursor: pointer;
+		}
+		&:last-child {
+			border-bottom: 1px solid $color-section-border;
+		}
+		.show-condition, .value {
+			text-transform: none;
+			color: $color-input-text;
+		}
+		.value {
+			font-weight: normal;
+			&:before {
+				// only want ':' to show when condition-title followed by value
+				content: ': ';
+				color: $color-gray-medium;
+				font-size: 14px;
+				font-family: $font-pn-regular;
+				font-weight: 600;
+			}
+		}
+		&.active {
+			.show-condition {
+				@include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
+				@include transform(rotate(180deg));
+			}
+			.condition {
+				display: block;
+				@include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
+			}
+		}
+	}
+	.short {
+		input[type=text] {
+			width: 180px;
+		}
+	}
+	.condition {
+		display: none;
+		margin-right: 10px;
+		padding: 15px 0 0 30px;
+		position: relative;
+		&.active {
+			display: block;
+			@include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
+		}
+		&.alone {
+			border-bottom: none;
+		}
+		.remove, .remove-rule {
+			position: absolute;
+			top: -25px;
+			right: 0;
+			margin-right: 0;
+		}
+		.condition-fields {
+			.menu {
+				position: relative;
+				&.alone {
+					border-bottom: none;
+				}
+				input[type=text] {
+					height: 30px;
+					width: 180px;
+					padding-left: 30px;
+					@include border-radius(3px);
+				}
+				.input-row {
+					margin: 0 0 10px 0;
+				}
+				.actions {
+					display: inline-block;
+					padding: 7px 0 0 0;
+					margin-top: 7px;
+					color: $color-input-label;
+					.input-row {
+						margin-top: 0;
+						label {
+							vertical-align: middle;
+						}
+						.clear-search {
+							top: 17px;
+							right: 5px;
+						}
+					}
+					.input-toggle {
+						position: relative;
+						display: inline-block;
+						top: 0;
+						right: 0;
+						.toggle {
+							margin: -5px 5px 0 10px;
+						}
+					}
+					span {
+						color: $color-text;
+					}
+				}
+			}
+			.check-all {
+				margin: 0 10px 0 0;
+			}
+			.conditions-multiselect {
+				padding: 10px 5px 10px 0;
+				margin-left: 0;
+				border: 1px solid $color-section-border;
+				.options {
+					width: 99%;
+					height: 133px;
+					max-height: 133px;
+					overflow-y: scroll;
+					padding-left: 10px;
+					label {
+						width: 230px;
+						margin-bottom: 10px;
+						text-transform: none;
+						&.input-checkbox {
+							display: inline-block;
+							padding: 0 0 0 30px;
+							.label-text {
+								display: inline-block;
+								padding-top: 5px;
+							}
+						}
+					}
+					div {
+						display: inline;
+						&.item-head {
+							display: block;
+							color: map-get($colors, 'gray-warm-dark');
+						}
+					}
+				}
+			}
+			textarea {
+				max-width: 700px;
+			}
+		}
+	}
+}
+
+ul.az-filter {
+	list-style-type: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+
+	li {
+		color: map-get($colors, 'gray-warm-dark');
+		text-transform: uppercase;
+		padding: 6px;
+		cursor: pointer;
+		width: 18px;
+		text-align: center;
+		font-size: 15px;
+		font-weight: bold;
+		margin-bottom: 5px;
+
+		&.selected {
+			color: $color-active;
+			border: 1px solid $color-active;
+		}
+		&.na {
+			color: map-get($colors, 'gray-ice-light');
+			cursor: default;
+		}
+	}
+}

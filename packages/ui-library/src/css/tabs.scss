@@ -1,0 +1,171 @@
+// tabs
+// $nav-border-width: 1px;
+// $selected-border-width: 1px;
+// $selected-line-width: 8px;
+// $selected-arrow-offset: -(ceil($layout-nav-link-height/3) + $nav-border-width) + 1;
+// $selected-arrow-width-w: ceil($layout-nav-link-height/2) + $selected-border-width;
+// $selected-arrow-width-h: ceil($selected-arrow-width-w/3) - $selected-border-width;
+$selected-arrow-offset: -8px;
+$selected-arrow-width-w: 5px;
+$selected-arrow-width-h: 8px;
+
+.tabs {
+    margin-bottom: 45px;
+    position: relative;
+
+    ul {
+        list-style-type: none;
+        margin-bottom: 10px;
+
+        li {
+            display: inline;
+            margin-right: 25px;
+            padding-bottom: 10px;
+            position: relative;
+            text-transform: uppercase;
+            color: $color-gray-medium;
+            cursor: pointer;
+
+            a {
+                color: $color-gray-medium;
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+            &:hover {
+                color: $color-active;
+            }
+            &.active {
+                color: map-get($colors, 'slate');
+                border-bottom: 4px solid $color-active;
+                cursor: default;
+
+                &:after {
+                    content: '';
+                    position: absolute;
+                    left: 50%;
+                    margin: 0 0 0 -8px;
+                    border-width: $selected-arrow-width-w $selected-arrow-width-h;
+                    border-style: solid;
+                    z-index: 1;
+                    border-color: $color-active transparent transparent transparent;
+                    bottom: $selected-arrow-offset - 3;
+                }
+            }
+        }
+    }
+}
+
+// settings tabs
+.settings-tabs {
+    margin-bottom: 45px;
+
+    ul {
+        list-style-type: none;
+        margin-bottom: 10px;
+        padding-bottom: 0;
+        border-bottom: 2px solid #ddd;
+
+        li {
+            display: inline-block;
+            margin-right: 25px;
+            margin-left: 16%;
+            padding-bottom: 10px;
+            position: relative;
+            text-transform: uppercase;
+            color: $color-gray-medium;
+            cursor: pointer;
+            height: 105px;
+            border-bottom: 5px solid $color-white;
+
+            &.view-pingid {
+                span {
+                    display: inline-block;
+                    position: absolute;
+                    left: 25px;
+                    top: 25px;
+                    height: 77px;
+                    width: 48px;
+                    background: url("../images/icons-pingid/PingIDHomeThumbBase.png") no-repeat 0 0;
+                }
+                &.active {
+                    span {
+                        border: 1px solid $color-button-primary-fill;
+                    }
+                }
+            }
+            &.view-swipe {
+                span {
+                    display: inline-block;
+                    position: absolute;
+                    left: 28px;
+                    top: 25px;
+                    height: 77px;
+                    width: 48px;
+                    background: url("../images/icons-pingid/SwipeThumbBase.png") no-repeat 0 0;
+                }
+                &.active {
+                    span {
+                        border: 1px solid $color-button-primary-fill;
+                    }
+                }
+            }
+            &.view-enrollment {
+                span {
+                    display: inline-block;
+                    position: absolute;
+                    left: 35px;
+                    top: 25px;
+                    height: 77px;
+                    width: 96px;
+                    background: 
+                        url("../images/icons-pingid/EnrollmentThumbSwipeBase.png") no-repeat 0 0,
+                        url("../images/icons-pingid/EnrollmentThumbButton.png") no-repeat 0 0,
+                        url("../images/icons-pingid/EnrollmentThumbLogo.png") no-repeat 0 0,
+                        #F7F7F7 url("../images/icons-pingid/EnrollmentThumbBase.png") no-repeat 0 0;
+                }
+                &.light-text {
+                    span {
+                        background:
+                            url("../images/icons-pingid/EnrollmentThumbSwipeBase.png") no-repeat 0 0,
+                            url("../images/icons-pingid/EnrollmentThumbButton.png") no-repeat 0 0,
+                            url("../images/icons-pingid/EnrollmentThumbLogo.png") no-repeat 0 0,
+                            url("../images/icons-pingid/EnrollmentThumbLightText.png") no-repeat 0 0,
+                            #F7F7F7 url("../images/icons-pingid/EnrollmentThumbBase.png") no-repeat 0 0;
+                    }
+                }
+                &.dark-text {
+                    span {
+                        background: 
+                            url("../images/icons-pingid/EnrollmentThumbSwipeBase.png") no-repeat 0 0,
+                            url("../images/icons-pingid/EnrollmentThumbButton.png") no-repeat 0 0,
+                            url("../images/icons-pingid/EnrollmentThumbLogo.png") no-repeat 0 0,
+                            url("../images/icons-pingid/EnrollmentThumbDarkText.png") no-repeat 0 0,
+                            #F7F7F7 url("../images/icons-pingid/EnrollmentThumbBase.png") no-repeat 0 0;
+                    }
+                }
+                &.active {
+                    span {
+                        border: 1px solid $color-button-primary-fill;
+                    }
+                }
+            }
+            a {
+                color: $color-gray-medium;
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+            &:hover {
+                color: $color-active;
+            }
+            &.active {
+                color: map-get($colors, 'gray-ice-dark');
+                border-bottom: 5px solid $color-active;
+                cursor: default;
+                margin-bottom: 1px;
+                @include transition(all 0.4s ease-in) ;
+            }
+        }
+    }
+}
