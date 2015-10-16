@@ -5,7 +5,8 @@ var moment = require('moment');
 module.exports = {
     /**
      * Helper method to test if the HTML5 File API is supported by the user agent
-     * @returns {Boolean}
+     *
+     * @returns {Boolean} true if the API is supported
      */
     isHtmlFileApiSupported: function () {
         return global.File && global.FileList && global.FileReader;
@@ -14,7 +15,7 @@ module.exports = {
     /**
      * Remove the leading 'fakepath' directory added by the browser to <input type="file" /> elements
      *
-     * @param path {string} the path to strip
+     * @param {string} path the path to strip
      * @returns {string} the stripped path
      */
     stripFakePath: function (path) {
@@ -23,9 +24,11 @@ module.exports = {
 
     /**
      * Trigger a Blob download - based on http://stackoverflow.com/a/23797348
-     * @param filename
-     * @param blobData {Array} the raw data for the file
-     * @param fileType {String} MIME type e.g. 'text/plain'
+     *
+     * @param {string} filename the filename
+     * @param {array} blobData the raw data for the file
+     * @param {string} fileType MIME type e.g. 'text/plain'
+     * @returns {undefined}
      */
     triggerFileDownload: function (filename, blobData, fileType) {
         var blob = new Blob(blobData, { type: fileType });
@@ -54,7 +57,7 @@ module.exports = {
     /**
      * Format the given timestamp in milliseconds as a YYYY-MM-DD date.
      *
-     * @param timestamp {Number} the timestamp (UNIX time * 1000)
+     * @param {Number} timestamp the timestamp (UNIX time * 1000)
      * @returns {String} the formatted date
      */
     formatDate: function (timestamp) {

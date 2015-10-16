@@ -11,10 +11,11 @@ var Constants = require('../constants/CacheConstants');
 /**
  * Constructor.
  *
- * @param type {String} the type of cache (LOCAL or MEMORY)
- * @param name {String} the cache's name
- * @param expiry {Number} cache expiry time in seconds
+ * @param {String} type the type of cache (LOCAL or MEMORY)
+ * @param {String} name the cache's name
+ * @param {Number} expiry cache expiry time in seconds
  * @constructor
+ * @returns {undefined}
  */
 function Cache (type, name, expiry) {
     if (type !== Constants.CacheTypes.LOCAL && type !== Constants.CacheTypes.MEMORY) {
@@ -41,6 +42,8 @@ function Cache (type, name, expiry) {
 
 /**
  * Clear the cache.
+ *
+ * @returns {undefined}
  */
 Cache.prototype.clear = function () {
     if (this.type === Constants.CacheTypes.LOCAL) {
@@ -55,7 +58,7 @@ Cache.prototype.clear = function () {
 /**
  * Get an item from the cache.
  *
- * @param key the item's key
+ * @param {*} key the item's key
  * @returns {*} the item
  */
 Cache.prototype.get = function (key) {
@@ -81,8 +84,8 @@ Cache.prototype.get = function (key) {
 /**
  * Put an item in the cache.
  *
- * @param key the item's key
- * @param item the item
+ * @param {*} key the item's key
+ * @param {*} item the item
  * @returns {boolean} true if successfully stored, false otherwise
  */
 Cache.prototype.put = function (key, item) {
