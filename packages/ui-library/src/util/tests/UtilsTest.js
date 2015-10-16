@@ -18,7 +18,7 @@ describe('Utils', function () {
         // mocks for the navigator and Blob globals
         global.navigator = {};
         global.navigator.msSaveBlob = jest.genMockFunction();
-        global.Blob = jest.genMockFunction().mockImplementation(function (blobData, fileInfo) {
+        global.Blob = jest.genMockFunction().mockImplementation(function (blobData) {
             return blobData;
         });
 

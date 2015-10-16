@@ -6,21 +6,21 @@ require('./BackgroundLoader.css');
  * Repeatedly attempt to load content in the background, until
  * the loaded prop has been set to true.  Display provided
  * loading / spinner content while attempting to load data.
- * 
+ *
  * This component is controlled by the 'loaded' prop.  This prop
  * must be set by the parent when it determines the data has been
  * loaded (which should be done as part of the 'load' callback call).
- * 
+ *
  * In short:  This component calls the 'load' callback every 'interval'
  *  ms until 'loaded' is true.  While 'loaded' is not true, 'loading'
  *  content is displayed.  When 'loaded' is true, the children of this
  *  component are displayed.
- * 
+ *
  * If this element is un-mounted then background loading will cease
  * and the timers will be cancelled.
- * 
+ *
  * Usage:
- * 
+ *
  * <BackgroundLoader
  *     load={loadMethod}           // The method to load data
  *     loading={loadingSpinner}    // Message / content to display when loading
@@ -28,9 +28,9 @@ require('./BackgroundLoader.css');
  *     interval={timeInMs} >       // Time in ms between attempts to load.
  *         <div className="complete-message">Everything was loaded!</div>   // Content to display when loading complete
  * </BackgroundLoader>
- * 
- *   
- * 
+ *
+ *
+ *
  */
 var BackgroundLoader = React.createClass({
 
@@ -57,7 +57,7 @@ var BackgroundLoader = React.createClass({
     
     /*
      * Remove the timer from the timer queue.
-     * 
+     *
      */
     _clearTimeout: function () {
         if (this.timerId) {
@@ -67,7 +67,7 @@ var BackgroundLoader = React.createClass({
     
     /*
      * Start a load loop if one has not already been started.
-     * 
+     *
      */
     _startLoadLoop: function () {
         if ((this.isMounted()) && (!this.props.loaded) && (!this.timerId)) {
@@ -78,7 +78,7 @@ var BackgroundLoader = React.createClass({
     /*
      * Attempt to load the data and schedule another timer to load the
      * data again.
-     * 
+     *
      */
     _loadLoop: function () {
         if (this.isMounted() && !this.props.loaded) {
@@ -95,7 +95,7 @@ var BackgroundLoader = React.createClass({
     /*
      * Get the loading content, which can either be already rendered content
      * or a function to render the content.
-     * 
+     *
      */
     _loadingContent: function () {
         if (this.props.loading) {
@@ -128,7 +128,7 @@ var BackgroundLoader = React.createClass({
     
     /*
      * When we mount we start trying to load the data.
-     * 
+     *
      */
     componentDidMount: function () {
         this._startLoadLoop();
@@ -137,18 +137,18 @@ var BackgroundLoader = React.createClass({
     
     /*
      * Listen for the data to have been loaded.
-     * 
+     *
      */
     componentWillReceiveProps: function (nextProps) {
         if (!this.props.loaded && nextProps.loaded) {
             this._clearTimeout();
-        } 
+        }
     },
     
     /*
      * Clear timers when we unmount so we do not leave any
      * memory leaks or un-expected behaviour lurking.
-     * 
+     *
      */
     componentWillUnmount: function () {
         this._clearTimeout();
@@ -159,37 +159,42 @@ var BackgroundLoader = React.createClass({
      */
     changeHidden: function (evt) {
         var evtMap = {
-            focus:true, focusin:true, pageshow:true, blur:false, focusout:false, pagehide:false
+            focus: true,
+            focusin: true,
+            pageshow: true,
+            blur: false,
+            focusout: false,
+            pagehide: false
         };
 
         if (this.isMounted()) {
             evt = evt || window.event;
-            if (evt.type in evtMap){
-                this.setState({allowPoll: evtMap[evt.type]});
+            if (evt.type in evtMap) {
+                this.setState({ allowPoll: evtMap[evt.type] });
             }
             else {
-                this.setState({allowPoll: (document[this.state.hidden] ? false : true)});
+                this.setState({ allowPoll: (document[this.state.hidden] ? false : true) });
             }
         }
     },
 
     initHidden: function () {
         // Standards:
-        if ('hidden' in document){
+        if ('hidden' in document) {
             document.addEventListener('visibilitychange', this.changeHidden);
-            this.setState({hidden: 'hidden'});
+            this.setState({ hidden: 'hidden' });
         }
-        else if ('mozHidden' in document){
+        else if ('mozHidden' in document) {
             document.addEventListener('mozvisibilitychange', this.changeHidden);
-            this.setState({hidden: 'mozHidden'});
+            this.setState({ hidden: 'mozHidden' });
         }
-        else if ('webkitHidden' in document){
+        else if ('webkitHidden' in document) {
             document.addEventListener('webkitvisibilitychange', this.changeHidden);
-            this.setState({hidden: 'webkitHidden'});
+            this.setState({ hidden: 'webkitHidden' });
         }
-        else if ('msHidden' in document){
+        else if ('msHidden' in document) {
             document.addEventListener('msvisibilitychange', this.changeHidden);
-            this.setState({hidden: 'msHidden'});
+            this.setState({ hidden: 'msHidden' });
         }
         // IE 9 and lower and All others:
         document.onfocusin =
@@ -202,8 +207,8 @@ var BackgroundLoader = React.createClass({
 
         // set the initial state (but only if browser supports the Page
         // Visibility API)
-        if ( document[this.state.hidden] !== undefined ) {
-            this.changeHidden({type: document[this.state.hidden] ? 'blur' : 'focus'});
+        if (document[this.state.hidden] !== undefined) {
+            this.changeHidden({ type: document[this.state.hidden] ? 'blur' : 'focus' });
         }
     },
     

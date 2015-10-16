@@ -23,10 +23,10 @@ var KEY = 'myKey', VALUE = 'myValue', NAME = 'test-cache', TIMEOUT = 0.2,
     KEY2 = 'myOtherKey', VALUE2 = 'myOtherValue';
 
 // helpers
-function sleep(seconds) {
+function sleep (seconds) {
     var start = new Date().getTime();
     for (var i = 0; i < 1e7; i = i + 1) {
-        if ((new Date().getTime() - start) > seconds * 1000){
+        if ((new Date().getTime() - start) > seconds * 1000) {
             break;
         }
     }

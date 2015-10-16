@@ -7,7 +7,7 @@ var TestUtils = {
     
     /*
      * Return all components in the supplied tree with the specified dataId.
-     * 
+     *
      */
     scryRenderedDOMComponentsWithDataId: function (tree, dataId) {
         var components = ReactTestUtils.findAllInRenderedTree(tree, function (inst) {

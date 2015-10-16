@@ -4,7 +4,7 @@ var Cache = require('./../../core/Cache');
 function sleep (seconds) {
     var start = new Date().getTime();
     for (var i = 0; i < 1e7; i = i + 1) {
-        if ((new Date().getTime() - start) > seconds * 1000){
+        if ((new Date().getTime() - start) > seconds * 1000) {
             break;
         }
     }
@@ -16,8 +16,8 @@ var KEY = 'myKey', VALUE = 'myValue', CACHE_NAME = 'local-cache',
 var CacheDemo = React.createClass({
     getInitialState: function () {
         return {
-            localCache: new Cache('LOCAL', CACHE_NAME, TIMEOUT),
-        }
+            localCache: new Cache('LOCAL', CACHE_NAME, TIMEOUT)
+        };
     },
 
     render: function () {
@@ -49,7 +49,7 @@ var CacheDemo = React.createClass({
                 {timeoutBlock}
                 {clearBlock}
             </div>
-        )
+        );
     }
 });
 

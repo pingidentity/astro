@@ -1,5 +1,4 @@
 var Join = require('path').join;
-var Resolve = require('path').resolve;
 
 var Clean = require('clean-webpack-plugin');
 
@@ -30,6 +29,10 @@ module.exports = {
             {
                 test: /\.css$/,
                 loader: 'style-loader!css-loader'
+            },
+            {
+                test: /\.scss/,
+                loader: 'style-loader!css-loader!sass-loader'
             },
             {
                 test: /\.png$/,

@@ -100,6 +100,6 @@ describe('Validators', function () {
             expect(Validators.isValidUrl('http:/pingidentity.com')).toBe(false);
             expect(Validators.isValidUrl('gmitchell@pingidentity.com')).toBe(false);
             expect(Validators.isValidUrl('')).toBe(false);
-        })
+        });
     });
 });

@@ -1,6 +1,6 @@
 /**
  * Class object dedicated to data caching
- * 
+ *
  * Basic Usage:
  * ============
  * var cache = new Cache('LOCAL', 'usersStore', 180);
@@ -16,7 +16,7 @@ var Constants = require('../constants/CacheConstants');
  * @param expiry {Number} cache expiry time in seconds
  * @constructor
  */
-function Cache(type, name, expiry) {
+function Cache (type, name, expiry) {
     if (type !== Constants.CacheTypes.LOCAL && type !== Constants.CacheTypes.MEMORY) {
         throw 'Invalid cache type';
     }

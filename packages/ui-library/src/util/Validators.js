@@ -2,7 +2,7 @@
 
 /*
  * Validator library.
- * 
+ *
  * Library containing reusable validation functions.
  */
 
