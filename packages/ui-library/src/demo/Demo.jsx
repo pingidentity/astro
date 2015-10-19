@@ -4,7 +4,8 @@ var React = require('react/addons'),
     BackgroundLoaderDemo = require('../components/example/BackgroundLoaderDemo.jsx'),
     CacheDemo = require('./core/CacheDemo.jsx'),
     DetailsTooltipDemo = require('../demo/components/tooltips/DetailsTooltipDemo.jsx'),
-    ToggleDemo = require('../demo/components/forms/ToggleDemo.jsx');
+    ToggleDemo = require('../demo/components/forms/ToggleDemo.jsx'),
+    HelpHintDemo = require('../demo/components/tooltips/HelpHintDemo.jsx');
 
 var Demo = React.createClass({
 
@@ -47,7 +48,7 @@ var Demo = React.createClass({
                         </div>
 
                     </div>
-                
+
                     <div className="components">
 
                         <a name="example"></a>
@@ -192,11 +193,30 @@ var Demo = React.createClass({
                             <div className="description">
                                 <p>Toggle demo description.</p>
                             </div>
-
                             <div className="sub-section">
 
                                 <div className="output">
                                     <ToggleDemo />
+                                </div>
+                                <pre className="language-markup">
+                                    <code className="language-markup">
+                                        <p>drag drop row markup, e.g. usage</p>
+                                    </code>
+                                </pre>
+                            </div>
+                        </div>
+                        <a name="HelpHint-demo"></a>
+                        <div className="section">
+                            <h1>HelpHint Demo</h1>
+
+                            <div className="description">
+                                <p>HelpHint demo description.</p>
+                            </div>
+
+                            <div className="sub-section">
+
+                                <div className="output">
+                                    <HelpHintDemo />
                                 </div>
 
                                 <pre className="language-markup">
@@ -204,7 +224,6 @@ var Demo = React.createClass({
                                         <p>drag drop row markup, e.g. usage</p>
                                     </code>
                                 </pre>
-
                             </div>
                         </div>
 
