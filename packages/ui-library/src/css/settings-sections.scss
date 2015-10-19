@@ -79,7 +79,7 @@
                             content: '';
                         }
                     }
-                    
+
                 }
             }
         }
@@ -291,7 +291,7 @@
             }
             .heading {
                 width: 75%;
-            }          
+            }
         }
 
         // SUB GROUPS
@@ -363,163 +363,6 @@
                     padding-top: 0;
                     color: $color-text;
                 }
-                &.images-preview {
-                    margin: 0 auto;
-                    text-align: center;
-                    .details-tooltip {
-                        text-align: left;
-                    }
-                    .image-mobile {
-                        margin: 30px 0;
-                        position: relative;
-                        &.home {
-                            display: inline-block;
-                            width: 200px;
-                            height: 355px;
-                            margin: 30px auto;
-                            background: url('#{$img-branding-path}PingIDHomePreview_default@2x.png') no-repeat 0 0;
-                            background-size: cover;
-                            .services {
-                                position: absolute;
-                                bottom: 87px;
-                                left: 11px;
-                                height: 28px;
-                                width: 28px;
-                                z-index: 1000;
-                                background: url('#{$img-branding-path}PingIDHomePreview_default_logo@2x.png') no-repeat center center;
-                                background-size: contain;
-                            }
-                        }                        
-                        &.swipe {
-                            display: inline-block;
-                            width: 200px;
-                            height: 355px;
-                            margin: 30px auto;
-                            background: map-get($colors, 'gray-warm-medium-light-2') url('#{$img-branding-path}SwipePreviewBase@2x.png') no-repeat center center;
-                            background-size: cover;
-                            background-color: map-get($colors, 'default-background');
-                            &.dark {
-                                background-color: rgba($color-black, 0);
-                                position: absolute;
-                                top: -30px;
-                                left: 0px;
-                            }
-                            .logo {
-                                position: relative;
-                                min-width: 5px;
-                                max-height: 25px;
-                                width: auto;
-                                z-index: 1000;
-                                .position {
-                                    position: relative;
-                                    top: 15px;
-                                    max-height: 20px;
-                                    max-width: 100px;
-                                    width: auto;
-                                }
-                            }
-                            .services {
-                                position: absolute;
-                                bottom: 7px;
-                                left: 8px;
-                                height: 26px;
-                                width: 26px;
-                                z-index: 1000;
-                            }
-                        }
-                        &.enrollment {
-                            width: 340px;
-                            height: 309px;
-                            margin: 30px auto;
-                            background: $color-input-fill url('#{$img-branding-path}EnrollmentPreviewDarkText@2x.png') no-repeat 0 0;
-                            background-size: cover;
-                            z-index: 2;
-                            &.light {
-                                background: url('#{$img-branding-path}EnrollmentPreviewLightText@2x.png') no-repeat 0 0;
-                                background-size: cover;
-                                .content-text, .non-app-text {
-                                    color: $color-white;
-                                }
-                            }
-                            &.dark {
-                                background-color: rgba($color-black, 0);
-                                position: absolute;
-                                top: -30px;
-                                left: 0;
-                            }
-                            .mobile-background {
-                                position: absolute;
-                                top: 88px;
-                                left: 15px;
-                                height: 135px;
-                                width: 105px;
-                                background-color: map-get($colors, 'default-background');
-                                z-index: 1;
-                            }
-                            .logo {
-                                position: absolute;
-                                top: 35px;
-                                left: 130px;
-                                height: 15px;
-                                min-width: 15px;
-                                width: auto;
-                                z-index: 1000;
-                                img {
-                                    max-height: 25px;
-                                    width: auto;
-                                    max-width: 150px;
-                                }
-                            }
-                            .content-text {
-                                position: absolute;
-                                width: 150px;
-                                height: 40px;
-                                left: 135px;
-                                top: 70px;
-                                max-height: 40px;
-                                overflow: hidden;
-                                font-size: 7px;
-                                line-height: 7px;
-                                text-align: left;
-                                @include text-area-as-div;
-                            }
-                            .non-app-text {
-                                position: absolute;
-                                width: 150px;
-                                height: 15px;
-                                left: 135px;
-                                top: 215px;
-                                max-width: 150px;
-                                overflow: hidden;
-                                text-decoration: underline;
-                                font-size: 6px;
-                                line-height: 6px;
-                                text-align: left;
-                            }
-                            .button {
-                                position: absolute;
-                                top: 140px;
-                                right: 28px;
-                                height: 16px;
-                                width: 35px;
-                                z-index: 1000;
-                                border: none;
-                                background-color: transparent;
-                                .text {
-                                    position: absolute;
-                                    top: 4px;
-                                    right: 3px;
-                                    height: 15px;
-                                    line-height: 9px;
-                                    width: 70px;
-                                    z-index: 1001;
-                                    font-size: 7px;
-                                    color: $color-white;
-                                }
-                            }
-                        }
-                    }
-                }
                 .preview {
                     font-size: 14px;
                     position: absolute;
@@ -529,7 +372,7 @@
                     background-color: transparent;
                     margin-right: 0;
                 }
-                
+
                 // MODAL OVERRIDE MIXINS
                 $modal-width: 320px;
                 $modal-height: 574px;
@@ -578,49 +421,6 @@
                                 overflow: hidden;
                             }
                         }
-                        .full {
-                            @include width-height-margin;
-                            .home {
-                                background: url('#{$img-branding-path}PingIDHomeFullPreview_default.png') no-repeat 0 0;
-                                top: 0;
-                                @include modal-background-size;
-                                @include width-height-margin;
-                                .services {
-                                    bottom: 139px;
-                                    left: 17px;
-                                    width: 44px;
-                                    height: 44px;
-                                    background: url('#{$img-branding-path}PingIDHomeFullPreview_default_logo.png') no-repeat center center;
-                                    background-size: contain;
-                                }
-                            }
-                            .swipe {
-                                background: map-get($colors, 'gray-warm-medium-light-2') url('#{$img-branding-path}SwipeFullPreview.png') no-repeat center center;
-                                top: 0;
-                                background-size: auto $modal-height;
-                                @include width-height-margin;
-                                .logo {
-                                    position: relative;
-                                    min-width: 5px;
-                                    max-height: 45px;
-                                    top: 13px;
-                                    width: auto;
-                                    .position {
-                                        position: relative;
-                                        top: 13px;
-                                        max-height: 35px;
-                                        max-width: 150px;
-                                        width: auto;
-                                    }
-                                }
-                                .services {
-                                    bottom: 10px;
-                                    left: 11px;
-                                    height: 46px;
-                                    width: 46px;
-                                }
-                            }
-                        }
                     }
                 }
                 #full-preview-wide-modal {
@@ -646,82 +446,6 @@
                             width: $modal-wide-width;
                             height: $modal-wide-height;
                             margin: 0;
-                            .enrollment {
-                                width: $modal-wide-width;
-                                height: $modal-wide-height;
-                                margin: 0;
-                                background: url('#{$img-branding-path}EnrollmentFullPreviewDarkText.png') no-repeat center center;
-                                background-size: auto $modal-wide-height;
-                                top: 0;
-                                z-index: 2;
-                                &.light {
-                                    background: url('#{$img-branding-path}EnrollmentFullPreviewLightText.png') no-repeat center center;
-                                    background-size: cover;
-                                    .content-text, .non-app-text {
-                                        color: $color-white;
-                                    }
-                                }
-                                .mobile-background {
-                                    position: absolute;
-                                    top: 121px;
-                                    left: 28px;
-                                    height: 307px;
-                                    width: 173px;                    
-                                    background-color: map-get($colors, 'default-background');
-                                    z-index: 1;
-                                }
-                                .logo {
-                                    top: 60px;
-                                    left: 237px;
-                                    height: 35px;
-                                    min-width: 25px;
-                                    img {
-                                        max-height: 35px;
-                                        width: auto;
-                                        max-width: 150px;
-                                    }
-                                }
-                                .content-text {
-                                    position: absolute;
-                                    width: 275px;
-                                    height: 85px;
-                                    left: 240px;
-                                    top: 125px;
-                                    max-height: 85px;
-                                    overflow: hidden;
-                                    font-size: 12px;
-                                    line-height: 12px;
-                                    text-align: left;
-                                    @include text-area-as-div;
-                                }
-                                .non-app-text {
-                                    position: absolute;
-                                    width: 240px;
-                                    height: 20px;
-                                    left: 240px;
-                                    top: 375px;
-                                    max-width: 240px;
-                                    overflow: hidden;
-                                    text-decoration: underline;
-                                    font-size: 8px;
-                                    line-height: 8px;
-                                    text-align: left;
-                                }
-                                .button {
-                                    top: 245px;
-                                    right: 45px;
-                                    width: 105px;
-                                    height: 27px;
-                                    .text {
-                                        top: 6px;
-                                        right: 9px;
-                                        height: 15px;
-                                        line-height: 15px;
-                                        width: 125px;
-                                        font-size: 12px;
-                                    }
-                                }
-                            }
                         }
                     }
                 }

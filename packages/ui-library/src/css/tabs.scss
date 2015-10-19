@@ -78,78 +78,8 @@ $selected-arrow-width-h: 8px;
             height: 105px;
             border-bottom: 5px solid $color-white;
 
-            &.view-pingid {
-                span {
-                    display: inline-block;
-                    position: absolute;
-                    left: 25px;
-                    top: 25px;
-                    height: 77px;
-                    width: 48px;
-                    background: url("../images/icons-pingid/PingIDHomeThumbBase.png") no-repeat 0 0;
-                }
-                &.active {
-                    span {
-                        border: 1px solid $color-button-primary-fill;
-                    }
-                }
-            }
-            &.view-swipe {
-                span {
-                    display: inline-block;
-                    position: absolute;
-                    left: 28px;
-                    top: 25px;
-                    height: 77px;
-                    width: 48px;
-                    background: url("../images/icons-pingid/SwipeThumbBase.png") no-repeat 0 0;
-                }
-                &.active {
-                    span {
-                        border: 1px solid $color-button-primary-fill;
-                    }
-                }
-            }
-            &.view-enrollment {
-                span {
-                    display: inline-block;
-                    position: absolute;
-                    left: 35px;
-                    top: 25px;
-                    height: 77px;
-                    width: 96px;
-                    background: 
-                        url("../images/icons-pingid/EnrollmentThumbSwipeBase.png") no-repeat 0 0,
-                        url("../images/icons-pingid/EnrollmentThumbButton.png") no-repeat 0 0,
-                        url("../images/icons-pingid/EnrollmentThumbLogo.png") no-repeat 0 0,
-                        #F7F7F7 url("../images/icons-pingid/EnrollmentThumbBase.png") no-repeat 0 0;
-                }
-                &.light-text {
-                    span {
-                        background:
-                            url("../images/icons-pingid/EnrollmentThumbSwipeBase.png") no-repeat 0 0,
-                            url("../images/icons-pingid/EnrollmentThumbButton.png") no-repeat 0 0,
-                            url("../images/icons-pingid/EnrollmentThumbLogo.png") no-repeat 0 0,
-                            url("../images/icons-pingid/EnrollmentThumbLightText.png") no-repeat 0 0,
-                            #F7F7F7 url("../images/icons-pingid/EnrollmentThumbBase.png") no-repeat 0 0;
-                    }
-                }
-                &.dark-text {
-                    span {
-                        background: 
-                            url("../images/icons-pingid/EnrollmentThumbSwipeBase.png") no-repeat 0 0,
-                            url("../images/icons-pingid/EnrollmentThumbButton.png") no-repeat 0 0,
-                            url("../images/icons-pingid/EnrollmentThumbLogo.png") no-repeat 0 0,
-                            url("../images/icons-pingid/EnrollmentThumbDarkText.png") no-repeat 0 0,
-                            #F7F7F7 url("../images/icons-pingid/EnrollmentThumbBase.png") no-repeat 0 0;
-                    }
-                }
-                &.active {
-                    span {
-                        border: 1px solid $color-button-primary-fill;
-                    }
-                }
-            }
+
+
             a {
                 color: $color-gray-medium;
                 &:hover {
