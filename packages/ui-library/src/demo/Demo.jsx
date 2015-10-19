@@ -70,9 +70,14 @@ var Demo = React.createClass({
             demo: require('./components/general/SelectTextDemo.jsx'),
             pathToCode: 'src/demo/components/general/SelectTextDemo.jsx',
             description: 'The SelectText component will select all of the text of its children when it is clicked'
+        },
+        {
+            name: 'File Upload',
+            demo: require('./components/forms/FileUploadDemo.jsx'),
+            pathToCode: 'src/demo/components/forms/FileUploadDemo.jsx',
+            description: 'The FileUpload component handles file input selection'
         }
     ],
-
 
     getInitialState: function () {
         return {
