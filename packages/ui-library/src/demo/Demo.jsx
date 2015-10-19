@@ -3,7 +3,8 @@ var React = require('react/addons'),
     // components
     BackgroundLoaderDemo = require('../components/example/BackgroundLoaderDemo.jsx'),
     CacheDemo = require('./core/CacheDemo.jsx'),
-    DetailsTooltipDemo = require('../demo/components/tooltips/DetailsTooltipDemo.jsx');
+    DetailsTooltipDemo = require('../demo/components/tooltips/DetailsTooltipDemo.jsx'),
+    ToggleDemo = require('../demo/components/forms/ToggleDemo.jsx');
 
 var Demo = React.createClass({
 
@@ -174,6 +175,28 @@ var Demo = React.createClass({
 
                                 <div className="output">
                                     <DetailsTooltipDemo />
+                                </div>
+
+                                <pre className="language-markup">
+                                    <code className="language-markup">
+                                        <p>drag drop row markup, e.g. usage</p>
+                                    </code>
+                                </pre>
+
+                            </div>
+                        </div>
+                        <a name="Toggle-demo"></a>
+                        <div className="section">
+                            <h1>Toggle Demo</h1>
+
+                            <div className="description">
+                                <p>Toggle demo description.</p>
+                            </div>
+
+                            <div className="sub-section">
+
+                                <div className="output">
+                                    <ToggleDemo />
                                 </div>
 
                                 <pre className="language-markup">
