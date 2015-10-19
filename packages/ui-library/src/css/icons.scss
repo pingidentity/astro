@@ -1,5 +1,5 @@
 
-$font-path: '../fonts/icons/';
+$font-path: '/src/fonts/icons/';
 
 @font-face {
 	font-family: $icon-font;
@@ -212,10 +212,8 @@ $font-path: '../fonts/icons/';
 }
 
 .icon-ellipsis {
-	position: absolute;
-	bottom: 9px;
-	right: -20px;
 	color: $color-white;
+
 	.path-1 {
 		&:before {
 		    content: "\e600";

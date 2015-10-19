@@ -1,17 +1,15 @@
 // ui-library-demo.scss
 
 // IMPORT EXTERNAL FILES
-@import 'reset';
 @import 'mixins';
 @import 'globals';
-@import 'icon-font';
 @import 'common';
 @import 'layout';
 @import 'markup';
 
 // COMPONENTS
 #content {
-	
+
 	// example
 	.background-loader-example-wrapper {
 		color: blue;
