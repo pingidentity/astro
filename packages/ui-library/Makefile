@@ -121,12 +121,13 @@ deploy: log-config clean-build
 # deploy the package as a maven artifact
 # no verification is done here, meaning node/npm are not needed
 dist: log-config clean-build
-	mkdir -p build
 	sed -e 's/"version"[[:space:]]*:[[:space:]]*"[^"]*"/"version": "$(GIT_VERSION_FINAL)"/' package.json > package.json.tmp
 	mv package.json.tmp package.json
 	git commit -a -m "Release the project"
 	git push origin $(GIT_BRANCH):$(GIT_BRANCH)
-	mkdir build
+	mkdir -p build/ui-library
+	cp -rf src build/ui-library
+	cp -f package.json build/ui-library
 	tar -czf build/ui-library-$(GIT_VERSION_FINAL).tar.gz --directory=build ui-library
 	$(MVN) deploy:deploy-file \
 		-DgroupId=com.pingone.ui-library \
@@ -141,6 +142,10 @@ dist: log-config clean-build
 	mv package.json.tmp package.json
 	git commit -a -m "Prepare for the next release cycle"
 	git push origin $(GIT_BRANCH):$(GIT_BRANCH)
+	rm -rf build
+	mkdir -p build/ui-library
+	cp -rf src build/ui-library
+	cp -f package.json build/ui-library
 	tar -czf build/ui-library-$(GIT_VERSION_NEXT).tar.gz --directory=build ui-library
 	$(MVN) deploy:deploy-file \
 		-DgroupId=com.pingone.ui-library \
