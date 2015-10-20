@@ -105,7 +105,7 @@ deploy: log-config clean-build
 		-DgroupId=com.pingone.ui-library \
 		-DartifactId=ui-library \
 		-Dversion=$(GIT_VERSION) \
-		-Dfile=build/ui-library-$(GIT_VERSION) \
+		-Dfile=build/ui-library-$(GIT_VERSION).tar.gz \
 		-DrepositoryId=art01 \
 		-Durl=http://art01.corp.pingidentity.com:8080/artifactory/repo
 
@@ -128,7 +128,7 @@ dist: log-config clean-build
 		-DgroupId=com.pingone.ui-library \
 		-DartifactId=ui-library \
 		-Dversion=$(GIT_VERSION_FINAL) \
-		-Dfile=build/ui-library-$(GIT_VERSION_FINAL) \
+		-Dfile=build/ui-library-$(GIT_VERSION_FINAL).tar.gz \
 		-DrepositoryId=art01 \
 		-Durl=http://art01.corp.pingidentity.com:8080/artifactory/repo
 	sed -e 's/"version"[[:space:]]*:[[:space:]]*"[^"]*"/"version": "$(GIT_VERSION_NEXT)"/' package.json > package.json.tmp
@@ -140,7 +140,7 @@ dist: log-config clean-build
 		-DgroupId=com.pingone.ui-library \
 		-DartifactId=ui-library \
 		-Dversion=$(GIT_VERSION_NEXT) \
-		-Dfile=build/ui-library-$(GIT_VERSION_NEXT) \
+		-Dfile=build/ui-library-$(GIT_VERSION_NEXT).tar.gz \
 		-DrepositoryId=art01 \
 		-Durl=http://art01.corp.pingidentity.com:8080/artifactory/repo
 
