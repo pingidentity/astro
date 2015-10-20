@@ -5,6 +5,16 @@ $ npm install && npm run start
 and open http://localhost:8080/index.html in the browser.
 
 
+VERIFYING THE LOCAL CHANGES
+===========================
+$ npm run verify
+runs the linting and the testing using the global node/npm installation
+
+$ make verify
+runs the build (just like on the build machine); it downloads node and npm
+locally, installs the required node modules, and runs the linting and testing.
+
+
 
 TODO
 ====
@@ -12,6 +22,7 @@ TODO
 integrate the library as git hosted npm module into the WP
 	assets to be copied to the WP assets directory
 	SCSS to be compiled through a maven plugin
+	https://docs.npmjs.com/misc/scripts
 
 configure jest for code coverage w/ istanbul
 	https://facebook.github.io/jest/docs/api.html#config-collectcoverage-boolean

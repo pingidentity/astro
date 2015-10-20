@@ -39,9 +39,6 @@ ifeq (,$(findstring -SNAPSHOT,$(GIT_VERSION)))
 $(error The version number does not contain -SNAPSHOT; cannot continue)
 endif
 
-# check if the tag exists in the local repo
-GIT_TAG_EXISTS := $(shell if git rev-parse $(GIT_VERSION) >/dev/null 2>&1; then echo "1"; else echo "0"; fi)
-
 # get the final version by removing the -SNAPSHOT part from the version number
 GIT_VERSION_FINAL=$(subst -SNAPSHOT,,$(GIT_VERSION))
 # get the major, the minor and the patch parts of the version number
@@ -64,6 +61,9 @@ GIT_VERSION_NEXT=$(GIT_VERSION_MAJOR).$(GIT_VERSION_MINOR_NEXT).$(GIT_VERSION_PA
 
 log-config:
 	@echo "Building for system '$(SYS_NAME)' and architecture '$(ARCH_NAME)'"
+
+clean-build:
+	rm -rf build
 
 clean-node:
 	rm -rf node
@@ -94,30 +94,51 @@ verify: install-node-npm
 	$(NPM_EXEC) run lint
 	$(NPM_EXEC) run test
 
-# remove the tag from local and remote if exists
-# create the tag in local and remote
-# no verification is done here, meaning node/npm are not needed
-tag: log-config
-	if [ '$(GIT_TAG_EXISTS)' = '1' ]; then echo "Tag exists; deleting..."; git tag -d $(GIT_VERSION); git push --delete origin $(GIT_VERSION); fi
-	git tag $(GIT_VERSION)
-	git push origin $(GIT_VERSION)
+# package the module and name the file to include the current version
+# deploy the package as a maven artifact
+deploy: log-config clean-build
+	mkdir -p build
+	tar -czf build/ui-library-$(GIT_VERSION).tar.gz src package.json
+	mvn deploy:deploy-file \
+		-DgroupId=com.pingone.ui-library \
+		-DartifactId=ui-library \
+		-Dversion=$(GIT_VERSION) \
+		-Dfile=build/ui-library-$(GIT_VERSION) \
+		-DrepositoryId=art01 \
+		-Durl=http://art01.corp.pingidentity.com:8080/artifactory/repo
 
 # set the version number to FINAL, commit and push the change
-# tag the local version with the FINAL version and push the tag
+# package the module and name the file to include the FINAL version
+# and deploy the package as a maven artifact
 # set the version number to the next SNAPSHOT and commit
-# create the tag in local and push the tag
+# package the module and name the file to include the current version
+# deploy the package as a maven artifact
 # no verification is done here, meaning node/npm are not needed
-dist: log-config
+dist: log-config clean-build
+	mkdir -p build
 	sed -e 's/"version"[[:space:]]*:[[:space:]]*"[^"]*"/"version": "$(GIT_VERSION_FINAL)"/' package.json > package.json.tmp
 	mv package.json.tmp package.json
 	git commit -a -m "Release the project"
 	git push origin $(GIT_BRANCH):$(GIT_BRANCH)
-	git tag $(GIT_VERSION_FINAL)
-	git push origin $(GIT_VERSION_FINAL)
+	mkdir build
+	tar -czf build/ui-library-$(GIT_VERSION_FINAL).tar.gz ../ui-library/
+	mvn deploy:deploy-file \
+		-DgroupId=com.pingone.ui-library \
+		-DartifactId=ui-library \
+		-Dversion=$(GIT_VERSION_FINAL) \
+		-Dfile=build/ui-library-$(GIT_VERSION_FINAL) \
+		-DrepositoryId=art01 \
+		-Durl=http://art01.corp.pingidentity.com:8080/artifactory/repo
 	sed -e 's/"version"[[:space:]]*:[[:space:]]*"[^"]*"/"version": "$(GIT_VERSION_NEXT)"/' package.json > package.json.tmp
 	mv package.json.tmp package.json
 	git commit -a -m "Prepare for the next release cycle"
 	git push origin $(GIT_BRANCH):$(GIT_BRANCH)
-	git tag $(GIT_VERSION_NEXT)
-	git push origin $(GIT_VERSION_NEXT)
+	tar -czf build/ui-library-$(GIT_VERSION_NEXT).tar.gz src package.json
+	mvn deploy:deploy-file \
+		-DgroupId=com.pingone.ui-library \
+		-DartifactId=ui-library \
+		-Dversion=$(GIT_VERSION_NEXT) \
+		-Dfile=build/ui-library-$(GIT_VERSION_NEXT) \
+		-DrepositoryId=art01 \
+		-Durl=http://art01.corp.pingidentity.com:8080/artifactory/repo
 
