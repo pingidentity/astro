@@ -100,7 +100,7 @@ verify: install-node-npm
 # deploy the package as a maven artifact
 deploy: log-config clean-build
 	mkdir -p build
-	tar -czf build/ui-library-$(GIT_VERSION).tar.gz src package.json
+	tar -czf build/ui-library-$(GIT_VERSION).tar.gz --directory=.. ui-library/src ui-library/package.json
 	$(MVN) deploy:deploy-file \
 		-DgroupId=com.pingone.ui-library \
 		-DartifactId=ui-library \
@@ -125,7 +125,7 @@ dist: log-config clean-build
 	git commit -a -m "Release the project"
 	git push origin $(GIT_BRANCH):$(GIT_BRANCH)
 	mkdir build
-	tar -czf build/ui-library-$(GIT_VERSION_FINAL).tar.gz ../ui-library/
+	tar -czf build/ui-library-$(GIT_VERSION_FINAL).tar.gz --directory=.. ui-library/src ui-library/package.json
 	$(MVN) deploy:deploy-file \
 		-DgroupId=com.pingone.ui-library \
 		-DartifactId=ui-library \
@@ -139,7 +139,7 @@ dist: log-config clean-build
 	mv package.json.tmp package.json
 	git commit -a -m "Prepare for the next release cycle"
 	git push origin $(GIT_BRANCH):$(GIT_BRANCH)
-	tar -czf build/ui-library-$(GIT_VERSION_NEXT).tar.gz src package.json
+	tar -czf build/ui-library-$(GIT_VERSION_NEXT).tar.gz --directory=.. ui-library/src ui-library/package.json
 	$(MVN) deploy:deploy-file \
 		-DgroupId=com.pingone.ui-library \
 		-DartifactId=ui-library \
