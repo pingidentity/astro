@@ -28,6 +28,8 @@ CURRENT_DIR := $(shell pwd)
 SHELL := /bin/bash
 PATH := $(CURRENT_DIR)/node:$(CURRENT_DIR)/node/npm/bin:$(PATH)
 
+MVN := java -classpath /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/maven_3.2.2/boot/plexus-classworlds-2.5.1.jar -Dmaven.home=/var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/maven_3.2.2 -Dclassworlds.conf=/var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/maven_3.2.2/bin/m2.conf org.codehaus.plexus.classworlds.launcher.Launcher
+
 GIT_BRANCH := $(shell git symbolic-ref --short -q HEAD)
 
 
@@ -99,7 +101,7 @@ verify: install-node-npm
 deploy: log-config clean-build
 	mkdir -p build
 	tar -czf build/ui-library-$(GIT_VERSION).tar.gz src package.json
-	mvn deploy:deploy-file \
+	$(MVN) deploy:deploy-file \
 		-DgroupId=com.pingone.ui-library \
 		-DartifactId=ui-library \
 		-Dversion=$(GIT_VERSION) \
@@ -122,7 +124,7 @@ dist: log-config clean-build
 	git push origin $(GIT_BRANCH):$(GIT_BRANCH)
 	mkdir build
 	tar -czf build/ui-library-$(GIT_VERSION_FINAL).tar.gz ../ui-library/
-	mvn deploy:deploy-file \
+	$(MVN) deploy:deploy-file \
 		-DgroupId=com.pingone.ui-library \
 		-DartifactId=ui-library \
 		-Dversion=$(GIT_VERSION_FINAL) \
@@ -134,7 +136,7 @@ dist: log-config clean-build
 	git commit -a -m "Prepare for the next release cycle"
 	git push origin $(GIT_BRANCH):$(GIT_BRANCH)
 	tar -czf build/ui-library-$(GIT_VERSION_NEXT).tar.gz src package.json
-	mvn deploy:deploy-file \
+	$(MVN) deploy:deploy-file \
 		-DgroupId=com.pingone.ui-library \
 		-DartifactId=ui-library \
 		-Dversion=$(GIT_VERSION_NEXT) \
