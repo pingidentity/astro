@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "classnames": "1.2.1",
+    "isomorphic-fetch": "2.1.1",
     "react": "0.13.3",
     "react-tools": "0.13.3",
+    "redux": "3.0.2",
     "underscore": "1.8.3"
   },
   "devDependencies": {

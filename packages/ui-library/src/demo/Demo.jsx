@@ -1,13 +1,114 @@
-var React = require('react/addons'),
+var React = require('react/addons');
 
-    // components
-    BackgroundLoaderDemo = require('../components/example/BackgroundLoaderDemo.jsx'),
-    CacheDemo = require('./core/CacheDemo.jsx'),
-    DetailsTooltipDemo = require('../demo/components/tooltips/DetailsTooltipDemo.jsx'),
-    ToggleDemo = require('../demo/components/forms/ToggleDemo.jsx'),
-    HelpHintDemo = require('../demo/components/tooltips/HelpHintDemo.jsx'),
-    CollapsibleSectionDemo = require('../demo/components/general/CollapsibleSectionDemo.jsx');
+require('isomorphic-fetch');
 
+var demos = [
+    {
+        name: 'Cache',
+        demo: require('./core/CacheDemo.jsx'),
+        pathToCode: 'src/components/core/CacheDemo.jsx'
+    },
+    {
+        name: 'Background Loader',
+        demo: require('../components/example/BackgroundLoaderDemo.jsx'),
+        pathToCode: 'src/components/example/BackgroundLoaderDemo.jsx'
+    },
+    {
+        name: 'Infinite Scroller',
+        demo: require('./components/list/InfiniteScrollDemo.jsx'),
+        pathToCode: 'src/demo/components/list/InfiniteScrollDemo.jsx'
+    },
+    {
+        name: 'Details Tooltip',
+        demo: require('.//components/tooltips/DetailsTooltipDemo.jsx'),
+        pathToCode: 'src/demo/components/tooltips/DetailsTooltipDemo.jsx'
+    },
+    {
+        name: 'Toggle',
+        demo: require('./components/forms/ToggleDemo.jsx'),
+        pathToCode: 'src/demo/components/forms/ToggleDemo.jsx'
+    },
+    {
+        name: 'Help Hint',
+        demo: require('./components/tooltips/HelpHintDemo.jsx'),
+        pathToCode: 'src/demo/components/tooltips/HelpHintDemo.jsx'
+    }
+];
+
+var Toc = React.createClass({
+    render: function () {
+        return (
+            <ul>
+            <li>Table of Contents</li>
+            {
+                demos.map(function (item, index) {
+                    return <li><a href={'#' + index}>{item.name}</a></li>;
+                })
+            }
+            </ul>
+        );
+    }
+});
+
+var App = React.createClass({
+    getInitialState: function () {
+        return {
+            index: parseInt(document.location.hash.substring(1)),
+            demos: demos
+        };
+    },
+
+    loadCode: function () {
+        var index = this.state.index;
+
+        fetch(this.state.demos[index].pathToCode)
+            .then(function (resp) {
+                return resp.text();
+            }.bind(this)).then(function (text) {
+                document.getElementsByTagName('code')[0].innerHTML = hljs.highlight('javascript', text).value; //eslint-disable-line
+            }.bind(this));
+    },
+
+    loadDescriptions: function () {
+    },
+
+    hashChange: function () {
+        var idx = parseInt(document.location.hash.substring(1));
+
+        this.setState({
+            index: idx
+        });
+
+        this.loadCode(idx);
+    },
+
+    componentWillUnmount: function () {
+        window.removeEventListener(this.hashchange);
+    },
+
+    componentDidMount: function () {
+        window.addEventListener('hashchange', this.hashChange);
+        this.loadCode();
+    },
+
+    render: function () {
+        var item = demos[this.state.index] || {};
+
+        return (
+            <div className="mainContainer">
+                <div className="toc"><Toc /></div>
+                <div className="content">
+                    <div className="demo">{item.demo ? React.createElement(item.demo) : null}</div>
+                    <div className="code"><pre><code></code></pre></div>
+                </div>
+            </div>);
+    }
+});
+
+
+React.render(<App />, document.body);
+
+/*
 var Demo = React.createClass({
 
     render: function () {
@@ -256,6 +357,6 @@ var Demo = React.createClass({
             </div>
         );
     }
-});
+});*/
 
-React.render(<Demo />, document.getElementById('demo'));
+//React.render(<Demo />, document.getElementById('demo'));

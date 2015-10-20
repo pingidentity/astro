@@ -1,7 +1,14 @@
 // COMMON, HTML ELEMENTS
 
+html, body, .mainContainer {
+    height:100%;
+    padding:0;
+    margin:0;
+    box-sizing:border-box;
+}
 body {
-	font-family: "Proxima Nova", Helvetica, Arial, sans-serif;
+    padding: 10px;
+    font-family: "Proxima Nova", Helvetica, Arial, sans-serif;
     font-size: 16px;
     line-height: 1.3em;
     color: map-get($colors, 'elephant');
@@ -63,4 +70,24 @@ ol {
 			text-align: left;
 		}
 	}
+}
+
+.demo, .code {
+    height:50%;
+    margin:0;
+    box-sizing:border-box;
+}
+.code {
+    overflow:auto;
+    font-size:12px;
+    font-family:monospace;
+}
+.toc{
+    width:200px;
+    float:left;
+    height:100%;
+}
+.content{
+    margin-left:200px;
+    height:100%;
 }
