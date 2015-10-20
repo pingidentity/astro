@@ -107,6 +107,7 @@ deploy: log-config clean-build
 		-Dversion=$(GIT_VERSION) \
 		-Dfile=build/ui-library-$(GIT_VERSION).tar.gz \
 		-DuniqueVersion=false \
+		-Dpackaging=tar.gz \
 		-DrepositoryId=art01 \
 		-Durl=http://art01.corp.pingidentity.com:8081/artifactory/inhouse
 
@@ -130,8 +131,10 @@ dist: log-config clean-build
 		-DartifactId=ui-library \
 		-Dversion=$(GIT_VERSION_FINAL) \
 		-Dfile=build/ui-library-$(GIT_VERSION_FINAL).tar.gz \
+		-DuniqueVersion=false \
+		-Dpackaging=tar.gz \
 		-DrepositoryId=art01 \
-		-Durl=http://art01.corp.pingidentity.com:8080/artifactory/repo
+		-Durl=http://art01.corp.pingidentity.com:8081/artifactory/inhouse
 	sed -e 's/"version"[[:space:]]*:[[:space:]]*"[^"]*"/"version": "$(GIT_VERSION_NEXT)"/' package.json > package.json.tmp
 	mv package.json.tmp package.json
 	git commit -a -m "Prepare for the next release cycle"
@@ -142,6 +145,8 @@ dist: log-config clean-build
 		-DartifactId=ui-library \
 		-Dversion=$(GIT_VERSION_NEXT) \
 		-Dfile=build/ui-library-$(GIT_VERSION_NEXT).tar.gz \
+		-DuniqueVersion=false \
+		-Dpackaging=tar.gz \
 		-DrepositoryId=art01 \
-		-Durl=http://art01.corp.pingidentity.com:8080/artifactory/repo
+		-Durl=http://art01.corp.pingidentity.com:8081/artifactory/inhouse
 
