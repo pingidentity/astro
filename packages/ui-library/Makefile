@@ -106,8 +106,9 @@ deploy: log-config clean-build
 		-DartifactId=ui-library \
 		-Dversion=$(GIT_VERSION) \
 		-Dfile=build/ui-library-$(GIT_VERSION).tar.gz \
+		-DuniqueVersion=false \
 		-DrepositoryId=art01 \
-		-Durl=http://art01.corp.pingidentity.com:8080/artifactory/repo
+		-Durl=http://art01.corp.pingidentity.com:8081/artifactory/inhouse
 
 # set the version number to FINAL, commit and push the change
 # package the module and name the file to include the FINAL version
