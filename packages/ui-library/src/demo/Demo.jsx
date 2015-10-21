@@ -34,6 +34,24 @@ var Demo = React.createClass({
             pathToCode: 'components/forms/FormRadioGroup.jsx'
         },
         {
+            name: 'Form - Text Field',
+            demo: require('./components/forms/FormTextFieldDemo.jsx'),
+            pathToCode: 'src/demo/components/forms/FormTextFieldDemo.jsx',
+            description: 'descriptions'
+        },
+        {
+            name: 'Form - Text Area',
+            demo: require('./components/forms/FormTextAreaDemo.jsx'),
+            pathToCode: 'src/demo/components/forms/FormTextAreaDemo.jsx',
+            description: 'descriptions'
+        },
+        {
+            name: 'Form - Select Field',
+            demo: require('./components/forms/FormSelectFieldDemo.jsx'),
+            pathToCode: 'src/demo/components/forms/FormSelectFieldDemo.jsx',
+            description: 'descriptions'
+        },
+        {
             name: 'Collapsible Section',
             demo: require('./components/general/CollapsibleSectionDemo.jsx'),
             pathToCode: 'components/general/CollapsibleSection.jsx'
