@@ -5,7 +5,8 @@ var React = require('react/addons'),
     CacheDemo = require('./core/CacheDemo.jsx'),
     DetailsTooltipDemo = require('../demo/components/tooltips/DetailsTooltipDemo.jsx'),
     ToggleDemo = require('../demo/components/forms/ToggleDemo.jsx'),
-    HelpHintDemo = require('../demo/components/tooltips/HelpHintDemo.jsx');
+    HelpHintDemo = require('../demo/components/tooltips/HelpHintDemo.jsx'),
+    CollapsibleSectionDemo = require('../demo/components/general/CollapsibleSectionDemo.jsx');
 
 var Demo = React.createClass({
 
@@ -217,6 +218,27 @@ var Demo = React.createClass({
 
                                 <div className="output">
                                     <HelpHintDemo />
+                                </div>
+
+                                <pre className="language-markup">
+                                    <code className="language-markup">
+                                        <p>drag drop row markup, e.g. usage</p>
+                                    </code>
+                                </pre>
+                            </div>
+                        </div>
+                        <a name="CollapsibleSection-demo"></a>
+                        <div className="section">
+                            <h1>CollapsibleSection Demo</h1>
+
+                            <div className="description">
+                                <p>CollapsibleSection demo description.</p>
+                            </div>
+
+                            <div className="sub-section">
+
+                                <div className="output">
+                                    <CollapsibleSectionDemo />
                                 </div>
 
                                 <pre className="language-markup">
