@@ -4,85 +4,76 @@ var React = require('react/addons'),
 require('isomorphic-fetch');
 
 var Demo = React.createClass({
+    BASE_PATH_DEMO: 'src/demo/',
+    BASE_PATH_COMP: 'src/',
+
     demos: [
         {
             name: 'Infinite Scroller',
             demo: require('./components/list/InfiniteScrollDemo.jsx'),
-            pathToCode: 'src/demo/components/list/InfiniteScrollDemo.jsx',
-            description: 'descriptions'
+            pathToCode: 'components/list/InfiniteScroll.jsx'
         },
         {
             name: 'Details Tooltip',
             demo: require('./components/tooltips/DetailsTooltipDemo.jsx'),
-            pathToCode: 'src/demo/components/tooltips/DetailsTooltipDemo.jsx',
-            description: 'descriptions'
+            pathToCode: 'components/tooltips/DetailsTooltip.jsx'
         },
         {
             name: 'Forms - Toggle',
             demo: require('./components/forms/ToggleDemo.jsx'),
-            pathToCode: 'src/demo/components/forms/ToggleDemo.jsx',
-            description: 'descriptions'
+            pathToCode: 'components/forms/Toggle.jsx'
         },
         {
             name: 'Help Hint',
             demo: require('./components/tooltips/HelpHintDemo.jsx'),
-            pathToCode: 'src/demo/components/tooltips/HelpHintDemo.jsx',
-            description: 'descriptions'
+            pathToCode: 'components/tooltips/HelpHint.jsx'
         },
         {
             name: 'Form - Radio Group',
             demo: require('./components/forms/FormRadioGroupDemo.jsx'),
-            pathToCode: 'src/demo/components/forms/FormRadioGroupDemo.jsx',
-            description: 'descriptions'
+            pathToCode: 'components/forms/FormRadioGroup.jsx'
         },
         {
             name: 'Collapsible Section',
             demo: require('./components/general/CollapsibleSectionDemo.jsx'),
-            pathToCode: 'src/demo/components/general/CollapsibleSectionDemo.jsx',
-            description: 'descriptions'
+            pathToCode: 'components/general/CollapsibleSection.jsx'
         },
         {
             name: 'Context Close Button',
             demo: require('./components/general/ContextCloseButtonDemo.jsx'),
-            pathToCode: 'src/demo/components/general/ContextCloseButtonDemo.jsx',
-            description: 'descriptions'
+            pathToCode: 'components/general/ContextCloseButton.jsx'
         },
         {
             name: 'Ellipsis Loader',
             demo: require('./components/general/EllipsisLoaderDemo.jsx'),
-            pathToCode: 'src/demo/components/general/EllipsisLoaderDemo.jsx',
-            description: 'descriptions'
+            pathToCode: 'components/general/EllipsisLoader.jsx'
         },
         {
             name: 'If',
             demo: require('./components/general/IfDemo.jsx'),
-            pathToCode: 'src/demo/components/general/IfDemo.jsx',
-            description: 'descriptions'
+            pathToCode: 'components/general/If.jsx'
         },
         {
             name: 'Spinner',
             demo: require('./components/general/SpinnerDemo.jsx'),
-            pathToCode: 'src/demo/components/general/SpinnerDemo.jsx',
-            description: 'descriptions'
+            pathToCode: 'components/general/Spinner.jsx'
         },
         {
             name: 'SelectText',
             demo: require('./components/general/SelectTextDemo.jsx'),
-            pathToCode: 'src/demo/components/general/SelectTextDemo.jsx',
-            description: 'The SelectText component will select all of the text of its children when it is clicked'
+            pathToCode: 'components/general/SelectText.jsx',
         },
         {
             name: 'File Upload',
             demo: require('./components/forms/FileUploadDemo.jsx'),
-            pathToCode: 'src/demo/components/forms/FileUploadDemo.jsx',
-            description: 'The FileUpload component handles file input selection'
+            pathToCode: 'components/forms/FileUpload.jsx',
         }
     ],
 
     getInitialState: function () {
         return {
             demoIndex: -1,
-            markup: null
+            demos: this.demos
         };
     },
 
@@ -94,21 +85,35 @@ var Demo = React.createClass({
         }
     },
 
-    loadCode: function () {
-        if (!this.state.demo) {
+    loadComponentDesc: function () {
+        if (!this.state.demo || this.state.demo.description) {
             return;
         }
 
-        fetch(this.state.demo.pathToCode)
-            .then(function (resp) {
-                return resp.text();
-            }.bind(this)).then(function (text) {
-                var renderCode = this.unindentCode(text.replace(/\n|\r/g,'!!!').match(/render: .*?!!!(.*?) {4}}/)[1]);
+        fetch(this.BASE_PATH_COMP + this.state.demo.pathToCode).then(function (resp) {
+            return resp.text();
+        }).then(function (text) {
+            this.state.demo.description = (text.replace(/\n|\r/g, '!!!').match(/\@desc(.*?)(@|\*\/)/) || ['',''])[1]
+                .replace(/!!! *\*/g, '')
+                .replace(/!!!/g, '');
 
-                this.setState({
-                    markup: hljs.highlight('xml', renderCode).value //eslint-disable-line
-                });
-            }.bind(this));
+            this.setState({ demo: this.state.demo });
+        }.bind(this));
+    },
+
+    loadDemoMarkup: function () {
+        if (!this.state.demo || this.state.demo.markup) {
+            return;
+        }
+
+        fetch(this.BASE_PATH_DEMO + this.state.demo.pathToCode.replace('.jsx', 'Demo.jsx')).then(function (resp) {
+            return resp.text();
+        }.bind(this)).then(function (text) {
+            var renderCode = this.unindentCode(text.replace(/\n|\r/g, '!!!').match(/render: .*?!!!(.*?) {4}}/)[1]);
+            this.state.demo.markup = hljs.highlight('xml', renderCode).value; //eslint-disable-line
+
+            this.setState({ demo: this.state.demo });
+        }.bind(this));
     },
 
     unindentCode: function (string) {
@@ -124,8 +129,11 @@ var Demo = React.createClass({
             demo: this.getDemo(document.location.hash.substring(1)),
             markup: null
         });
+    },
 
-        this.loadCode();
+    componentDidUpdate: function () {
+        this.loadDemoMarkup();
+        this.loadComponentDesc();
     },
 
     componentWillUnmount: function () {
@@ -169,8 +177,8 @@ var Demo = React.createClass({
                     </div>
 
                     <div className="components">
-                        {this.state.demo ? <DemoItem linkName={this.state.name} title={this.state.name}
-                                        markupExample={this.state.markup}
+                        {this.state.demo ? <DemoItem linkName={this.state.demo.name} title={this.state.demo.name}
+                                        markupExample={this.state.demo.markup}
                                         description={this.state.demo.description}>
                                         {React.createElement(this.state.demo.demo)}
                                  </DemoItem> : null
