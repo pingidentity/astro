@@ -1,5 +1,5 @@
 var React = require('react/addons'),
-    Spinner = require('./Spinner.jsx');
+    Spinner = require('../../../components/general/Spinner.jsx');
 
 
 var SpinnerDemo = React.createClass({

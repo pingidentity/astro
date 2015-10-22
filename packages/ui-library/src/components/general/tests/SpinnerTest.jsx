@@ -1,6 +1,6 @@
 window.__DEV__ = true;
 
-jest.dontMock('../../../../testutil/TestUtils');
+jest.dontMock('../../../testutil/TestUtils');
 jest.dontMock('../Spinner.jsx');
 
 describe('Spinner', function () {

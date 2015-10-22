@@ -3,7 +3,7 @@
 // VARS
 $layout-header-height: 48px;
 $sidenav-width: 250px;
-$layout-nav-link-height: 41px; 	// works better as odd number
+$layout-nav-link-height: 31px; 	// works better as odd number
 $layout-zindex-order: (
 	content,
 	nav,
@@ -38,84 +38,12 @@ $sidenav-lineheight: 22px;
 	.title {
 		position: absolute;
 		bottom: 8px;
-		left: 100px;
+		left: 89px;
 		font-size: 28px;
 		line-height: 1em;
 		font-weight: 400;
 		letter-spacing: -2px;
-		color: map-get($colors, 'elephant');
-        .main {
-            color: map-get($colors, 'white');
-        }
-	}
-	.nav {
-		position: absolute;
-		right: 4px;
-		top: 5px;
-		font-size: 24px;
-
-		li {
-			float:left;
-			a {
-				display: inline-block;
-				vertical-align: middle;
-				padding: 6px 20px 3px 20px;
-				border-right: 1px solid rgba(map-get($colors, 'slate'), 0.5);
-				&:hover {
-					text-decoration: none;
-					color: map-get($colors, 'white');
-				}
-			}
-			&:last-child {
-				a {
-					border-right: none;
-					&:hover {
-						text-decoration: none;
-					}
-				}
-			}
-		}
-		.search {
-			input[type=text] {
-				height: 28px;
-				width: 0;
-				margin: 3px 0 0 0;
-				padding: 0;
-				font-size: 16px;
-				@include opacity(0);
-				@include transition(all 0.2s);
-			}
-			&:before {
-				content: '\73';
-				font-family: 'icofont';
-				font-size: 18px;
-				position: absolute;
-				overflow: hidden;
-				left: 6px;
-				top: 8px;
-				color: gray;
-				width: 0;
-				padding: 1px;
-				@include opacity(0);
-			}
-			&.active {
-				&:before {
-					width: auto;
-					@include opacity(1);
-				}
-				input[type=text] {
-					width: 200px;
-					padding: 0 10px 0 36px;
-					@include opacity(100);
-				}
-				a {
-					padding: 0;
-				}
-				span {
-					display: none;
-				}
-			}
-		}
+		color: map-get($colors, 'white');
 	}
 }
 
@@ -166,7 +94,7 @@ $sidenav-lineheight: 22px;
 			a {
 				position: relative;
 				display: block;
-				padding: 0 0 0 15px;
+				padding: 0 0 0 10px;
 				line-height: $layout-nav-link-height;
 				color: map-get($colors, 'slate');
 				background-color: transparent;
@@ -182,6 +110,7 @@ $sidenav-lineheight: 22px;
 			&:hover {
 				background-color: rgba(#fff, 0.5);
 				text-decoration: none;
+				border-left: 8px solid #2996CC;
 			}
 			&.selected {
 				background-color: map-get($colors, 'elephant');
@@ -228,10 +157,24 @@ $sidenav-lineheight: 22px;
 					}
 				}
 			}
+			&:first-of-type {
+				a {
+					opacity: 0.5;
+				}
+			}
             ul.sub-menu {
-                list-style: square inside;
+				margin: 0 0 7px 0;
                 li {
-                    display: list-item;
+					&:hover {
+						background: none;
+					}
+					&:before {
+						content: "";
+						position: absolute;
+						border: 1px solid #33312D;
+						top: 8px;
+						left: 3px;
+					}
                     a {
                         line-height: 16px;
                     }
@@ -259,7 +202,7 @@ $sidenav-lineheight: 22px;
 	background-color: map-get($colors, 'white');
 	padding: 15px 30px 40px;
 	border-top: 1px solid map-get($colors, 'white');
-	
+
 	h1 {
 		&:first-of-type {
 			margin-top: 10px;
@@ -267,6 +210,9 @@ $sidenav-lineheight: 22px;
 	}
 	.section {
 		padding: 10px 0 30px 0;
+	}
+	.section-content {
+		margin: 0 0 0 15px;
 	}
 	.sub-section {
 		padding: 0 0 20px 0;
@@ -280,7 +226,8 @@ $sidenav-lineheight: 22px;
 	}
 	pre.language-markup, pre.language-javascript, .output {
 		position: relative;
-		margin-top: 35px;
+		margin-top: 32px;
+		margin-bottom: 0;
 		@include border-radius(3px);
 
 		&:before {

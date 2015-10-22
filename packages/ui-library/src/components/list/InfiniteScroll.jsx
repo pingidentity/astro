@@ -1,5 +1,5 @@
 var React = require('react/addons'),
-    Spinner = require('../general/Spinner/Spinner.jsx'),
+    Spinner = require('../general/Spinner.jsx'),
     _ = require('underscore');
 
 /** @module components/lists */

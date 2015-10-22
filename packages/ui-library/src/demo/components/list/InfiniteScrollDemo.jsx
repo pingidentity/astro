@@ -1,12 +1,6 @@
 var React = require('react'),
     InfiniteScroll = require('../../../components/list/InfiniteScroll.jsx');
 
-var MyRow = React.createClass({
-    render: function () {
-        return <div ref="container" className="row" onClick={this.handleClick}>My row: {this.props.num}</div>;
-    }
-});
-
 var Demo = React.createClass({
     SIMULATED_DELAY_MS: 200,
 
@@ -83,6 +77,12 @@ var Demo = React.createClass({
                 headingGenerator={this.headingGenerator}
                 batches={this.state.batches}><div>Hello</div></InfiniteScroll></div>
         );
+    }
+});
+
+var MyRow = React.createClass({
+    render: function () {
+        return <div ref="container" className="row" onClick={this.handleClick}>My row: {this.props.num}</div>;
     }
 });
 
