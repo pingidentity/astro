@@ -64,8 +64,15 @@ var Demo = React.createClass({
             demo: require('./components/general/SpinnerDemo.jsx'),
             pathToCode: 'src/demo/components/general/SpinnerDemo.jsx',
             description: 'descriptions'
+        },
+        {
+            name: 'SelectText',
+            demo: require('./components/general/SelectTextDemo.jsx'),
+            pathToCode: 'src/demo/components/general/SelectTextDemo.jsx',
+            description: 'The SelectText component will select all of the text of its children when it is clicked'
         }
     ],
+
 
     getInitialState: function () {
         return {

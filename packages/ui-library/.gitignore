@@ -9,3 +9,7 @@ npm-debug.log
 *.iml
 .idea/
 *.prepros.cfg
+
+# Eclipse
+.project
+.settings
