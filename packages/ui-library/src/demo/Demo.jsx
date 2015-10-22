@@ -101,7 +101,7 @@ var Demo = React.createClass({
         {
             name: 'Messages',
             demo: require('./components/general/MessagesDemo.jsx'),
-            pathToCode: 'components/general/MessagesDemo.jsx'
+            pathToCode: 'components/general/Messages.jsx'
         },
         {
             name: 'Calendar',
