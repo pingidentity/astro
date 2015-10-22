@@ -193,7 +193,7 @@ describe('FileUpload', function () {
     it('will show the filename when the showThumbnail property is not set', function () {
         var componentNoValidation = ReactTestUtils.renderIntoDocument(
             /* jshint ignore:start */
-            <FileUpload accept="" referenceName="testFileUpload" />
+            <FileUpload accept="" referenceName="testFileUpload" buttonText="" removeFileLabel="" />
             /* jshint ignore:end */
         );
 

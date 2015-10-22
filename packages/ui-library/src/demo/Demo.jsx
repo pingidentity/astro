@@ -82,6 +82,11 @@ var Demo = React.createClass({
             pathToCode: 'components/general/Spinner.jsx'
         },
         {
+            name: 'BackgroundLoader',
+            demo: require('./components/general/BackgroundLoaderDemo.jsx'),
+            pathToCode: 'components/general/BackgroundLoader.jsx'
+        },
+        {
             name: 'SelectText',
             demo: require('./components/general/SelectTextDemo.jsx'),
             pathToCode: 'components/general/SelectText.jsx',
