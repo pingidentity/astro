@@ -36,20 +36,17 @@ var Demo = React.createClass({
         {
             name: 'Form - Text Field',
             demo: require('./components/forms/FormTextFieldDemo.jsx'),
-            pathToCode: 'src/demo/components/forms/FormTextFieldDemo.jsx',
-            description: 'descriptions'
+            pathToCode: 'src/demo/components/forms/FormTextFieldDemo.jsx'
         },
         {
             name: 'Form - Text Area',
             demo: require('./components/forms/FormTextAreaDemo.jsx'),
-            pathToCode: 'src/demo/components/forms/FormTextAreaDemo.jsx',
-            description: 'descriptions'
+            pathToCode: 'src/demo/components/forms/FormTextAreaDemo.jsx'
         },
         {
             name: 'Form - Select Field',
             demo: require('./components/forms/FormSelectFieldDemo.jsx'),
-            pathToCode: 'src/demo/components/forms/FormSelectFieldDemo.jsx',
-            description: 'descriptions'
+            pathToCode: 'src/demo/components/forms/FormSelectFieldDemo.jsx'
         },
         {
             name: 'Collapsible Section',
@@ -89,22 +86,27 @@ var Demo = React.createClass({
         {
             name: 'SelectText',
             demo: require('./components/general/SelectTextDemo.jsx'),
-            pathToCode: 'components/general/SelectText.jsx',
+            pathToCode: 'components/general/SelectText.jsx'
         },
         {
             name: 'File Upload',
             demo: require('./components/forms/FileUploadDemo.jsx'),
-            pathToCode: 'components/forms/FileUpload.jsx',
+            pathToCode: 'components/forms/FileUpload.jsx'
         },
         {
             name: 'Expandable Row',
             demo: require('./components/rows/ExpandableRowDemo.jsx'),
-            pathToCode: 'components/rows/ExpandableRow.jsx',
+            pathToCode: 'components/rows/ExpandableRow.jsx'
         },
         {
             name: 'Messages',
             demo: require('./components/general/MessagesDemo.jsx'),
-            pathToCode: 'src/demo/components/general/MessagesDemo.jsx',
+            pathToCode: 'components/general/MessagesDemo.jsx'
+        },
+        {
+            name: 'Calendar',
+            demo: require('./components/calendars/CalendarDemo.jsx'),
+            pathToCode: 'components/calendars/CalendarDemo.jsx'
         }
     ],
 

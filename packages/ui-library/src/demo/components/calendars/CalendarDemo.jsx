@@ -1,0 +1,35 @@
+var React = require('react/addons'),
+    moment = require('moment-range'),
+    Calendar = require('./../../../components/calendars/Calendar.jsx');
+
+var CalendarDemo = React.createClass({
+
+    getInitialState: function () {
+        return {
+            selectedDate: moment(new Date()) //current date
+        };
+    },
+
+    _onEnrollmentDateChanged: function (newValue) {
+        this.setState({
+            selectedDate: parseInt(newValue)
+        });
+    },
+
+    render: function () {
+        return (
+            /* jshint ignore:start */
+            <Calendar format="YYYY-MM-DD"
+                      date={this.state.selectedDate}
+                      computableFormat="x"
+                      closeOnSelect={true}
+                      onChange={this._onEnrollmentDateChanged}/>
+            /* jshint ignore:end */
+        );
+    }
+});
+
+module.exports = CalendarDemo;
+
+
+
