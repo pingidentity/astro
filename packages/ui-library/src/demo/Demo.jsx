@@ -32,6 +32,11 @@ var demos = [
         name: 'Help Hint',
         demo: require('./components/tooltips/HelpHintDemo.jsx'),
         pathToCode: 'src/demo/components/tooltips/HelpHintDemo.jsx'
+    },
+    {
+        name: 'If',
+        demo: require('./components/general/IfDemo.jsx'),
+        pathToCode: 'src/demo/components/general/IfDemo.jsx'
     }
 ];
 
