@@ -85,6 +85,11 @@ var Demo = React.createClass({
             name: 'File Upload',
             demo: require('./components/forms/FileUploadDemo.jsx'),
             pathToCode: 'components/forms/FileUpload.jsx',
+        },
+        {
+            name: 'Expandable Row',
+            demo: require('./components/rows/ExpandableRowDemo.jsx'),
+            pathToCode: 'components/rows/ExpandableRow.jsx',
         }
     ],
 
