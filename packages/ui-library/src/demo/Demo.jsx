@@ -100,6 +100,11 @@ var Demo = React.createClass({
             name: 'Expandable Row',
             demo: require('./components/rows/ExpandableRowDemo.jsx'),
             pathToCode: 'components/rows/ExpandableRow.jsx',
+        },
+        {
+            name: 'Messages',
+            demo: require('./components/general/MessagesDemo.jsx'),
+            pathToCode: 'src/demo/components/general/MessagesDemo.jsx',
         }
     ],
 
