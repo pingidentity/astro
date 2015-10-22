@@ -72,6 +72,11 @@ var Demo = React.createClass({
             pathToCode: 'components/general/If.jsx'
         },
         {
+            name: 'ModalButton',
+            demo: require('./components/general/ModalButtonDemo.jsx'),
+            pathToCode: 'components/general/ModalButton.jsx',
+        },
+        {
             name: 'Spinner',
             demo: require('./components/general/SpinnerDemo.jsx'),
             pathToCode: 'components/general/Spinner.jsx'
