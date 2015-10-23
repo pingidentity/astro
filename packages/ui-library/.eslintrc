@@ -65,7 +65,7 @@
 				"ignoreUrls": true
 			}
 		],
-		"max-params": [2, 5],
+		"max-params": [2, 6],
 		"no-plusplus": [2],
 		"new-cap": [
 			2,
