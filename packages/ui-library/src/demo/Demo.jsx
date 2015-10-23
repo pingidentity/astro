@@ -14,6 +14,11 @@ var Demo = React.createClass({
             pathToCode: 'components/list/InfiniteScroll.jsx'
         },
         {
+            name: 'Wizard',
+            demo: require('./components/wizard/WizardDemo.jsx'),
+            pathToCode: 'components/wizard/Wizard.jsx'
+        },
+        {
             name: 'Details Tooltip',
             demo: require('./components/tooltips/DetailsTooltipDemo.jsx'),
             pathToCode: 'components/tooltips/DetailsTooltip.jsx'
@@ -36,17 +41,17 @@ var Demo = React.createClass({
         {
             name: 'Form - Text Field',
             demo: require('./components/forms/FormTextFieldDemo.jsx'),
-            pathToCode: 'src/demo/components/forms/FormTextFieldDemo.jsx'
+            pathToCode: 'components/forms/FormTextField.jsx'
         },
         {
             name: 'Form - Text Area',
             demo: require('./components/forms/FormTextAreaDemo.jsx'),
-            pathToCode: 'src/demo/components/forms/FormTextAreaDemo.jsx'
+            pathToCode: 'components/forms/FormTextArea.jsx'
         },
         {
             name: 'Form - Select Field',
             demo: require('./components/forms/FormSelectFieldDemo.jsx'),
-            pathToCode: 'src/demo/components/forms/FormSelectFieldDemo.jsx'
+            pathToCode: 'components/forms/FormSelectField.jsx'
         },
         {
             name: 'Collapsible Section',
@@ -71,7 +76,7 @@ var Demo = React.createClass({
         {
             name: 'ModalButton',
             demo: require('./components/general/ModalButtonDemo.jsx'),
-            pathToCode: 'components/general/ModalButton.jsx',
+            pathToCode: 'components/general/ModalButton.jsx'
         },
         {
             name: 'Spinner',
@@ -107,11 +112,11 @@ var Demo = React.createClass({
             name: 'Calendar',
             demo: require('./components/calendars/CalendarDemo.jsx'),
             pathToCode: 'components/calendars/Calendar.jsx'
-        },
+        /*},
         {
             name: 'Multiselect',
             demo: require('./components/forms/MultiselectDemo.jsx'),
-            pathToCode: 'components/forms/Multiselect.jsx',
+            pathToCode: 'components/forms/Multiselect.jsx',*/
         }
     ],
 
