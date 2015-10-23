@@ -12,7 +12,6 @@ describe('Multiselect', function () {
     var Multiselect = require('../Multiselect.jsx');
     var callback = jest.genMockFunction();
     var component;
-    var options;
     var checkboxes;
     var search;
     var clearBtn;
@@ -30,8 +29,7 @@ describe('Multiselect', function () {
                 onChange={callback} />
             /* jshint ignore:end */
         );
-        options = ReactTestUtils.findRenderedDOMComponentWithClass(component, 'options');
-        checkboxes = ReactTestUtils.scryRenderedDOMComponentsWithTag(options, 'input');
+        checkboxes = TestUtils.scryRenderedDOMComponentsWithDataId(component, 'checkbox');
         search = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'input')[0];
         clearBtn = TestUtils.findRenderedDOMComponentWithDataId(component, 'clear');
     });
@@ -50,7 +48,7 @@ describe('Multiselect', function () {
     it('narrow list on type.', function () {
 
         ReactTestUtils.Simulate.change(search, { target: { value: 'acm' } });
-        var labels = ReactTestUtils.scryRenderedDOMComponentsWithTag(options, 'label');
+        var labels = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'label');
         expect(labels.length).toBe(2); //make sure we have only 2 options left which matching search
         expect(labels[0].getDOMNode().textContent).toEqual('acme.com');
         expect(labels[1].getDOMNode().textContent).toEqual('acme.net');

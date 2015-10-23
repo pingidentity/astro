@@ -113,11 +113,11 @@ var Demo = React.createClass({
             name: 'Calendar',
             demo: require('./components/calendars/CalendarDemo.jsx'),
             pathToCode: 'components/calendars/Calendar.jsx'
-        /*},
+        },
         {
             name: 'Multiselect',
             demo: require('./components/forms/MultiselectDemo.jsx'),
-            pathToCode: 'components/forms/Multiselect.jsx',*/
+            pathToCode: 'components/forms/Multiselect.jsx'
         }
     ],
 

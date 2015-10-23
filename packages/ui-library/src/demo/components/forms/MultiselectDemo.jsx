@@ -3,17 +3,27 @@ var Multiselect = require('../../../components/forms/Multiselect.jsx');
 
 var MultiselectDemo = React.createClass({
 
+
+    getInitialState: function () {
+        return {
+            userStatus: '',
+            checkedValue: false
+        };
+    },
+
     _updateUserStatus: function (value,checked) {
-        var message = 'Status ' + value + ' is checked? ' + checked;
-        var output = document.getElementById('output');
-        output.innerHTML += message + '<br />';
+        this.setState({
+            userStatus: value,
+            checkedValue: checked
+        });
     },
 
     render: function () {
         return (
             /* jshint ignore:start */
             <div>
-                <span id="output"></span>
+                <p>Status type {this.state.userStatus} is checked ? {this.state.checkedValue ? ' true' : ' false'}</p>
+
                 <Multiselect title="Status"
                     options={{
                         Active: 'ACTIVE',

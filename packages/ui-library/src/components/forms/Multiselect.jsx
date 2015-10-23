@@ -17,6 +17,14 @@ var MultiselectOption = React.createClass({
         onChange: React.PropTypes.func
     },
 
+    /**
+    * It is used to set the checkbox is checked or not and then
+    * call the props onChange() function to updte the value.
+    *
+    * @param {bool} e - checked value
+    * @returns {undefined}
+    * @private
+    */
     _changed: function (e) {
         var checked = e.target.checked;
         this.setState({
@@ -34,8 +42,8 @@ var MultiselectOption = React.createClass({
     render: function () {
         return (
             /* jshint ignore:start */
-            <label>
-                <input type="checkbox" onChange={this._changed} checked={this.state.isSelected}/>
+            <label data-id={this.props.id}>
+                <input type="checkbox" data-id="checkbox" onChange={this._changed} checked={this.state.isSelected}/>
                 <div className="icon"></div>{this.props.label}</label>
             /* jshint ignore:end */
         );
@@ -82,16 +90,9 @@ var Multiselect = React.createClass({
         id: React.PropTypes.string
     },
 
-    getDefaultProps: function () {
-        return {
-            title: '[TITLE MISSING]', //let's indicate required options is absent
-            options: {},
-            onSelect: this.noop
-        };
-    },
-
     /**
-    * Clear the search field.
+    * It is used to decide the menu should displayed or not.
+    * If it is open, it is closed and vice versa.
     *
     * @returns {undefined}
     * @private
@@ -172,12 +173,13 @@ var Multiselect = React.createClass({
             return _s.startsWith(key.toLowerCase(), self.state.searchStr.toLowerCase());
         });
 
-        var optionsNodes = _.map(match, function (label) {
+        var optionsNodes = _.map(match, function (label, index) {
             var value = self.props.options[label];
 
             return (
                 /* jshint ignore:start */
-                <MultiselectOption label={label} onChange={self.props.onChange} key={label} value={value} />
+                <MultiselectOption id={'option' + index} label={label} onChange={self.props.onChange}
+                    key={label} value={value} />
                 /* jshint ignore:end */
             );
         });
