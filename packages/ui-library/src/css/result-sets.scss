@@ -687,38 +687,6 @@
 			.check-all {
 				margin: 0 10px 0 0;
 			}
-			.conditions-multiselect {
-				padding: 10px 5px 10px 0;
-				margin-left: 0;
-				border: 1px solid $color-section-border;
-				.options {
-					width: 99%;
-					height: 133px;
-					max-height: 133px;
-					overflow-y: scroll;
-					padding-left: 10px;
-					label {
-						width: 230px;
-						margin-bottom: 10px;
-						text-transform: none;
-						&.input-checkbox {
-							display: inline-block;
-							padding: 0 0 0 30px;
-							.label-text {
-								display: inline-block;
-								padding-top: 5px;
-							}
-						}
-					}
-					div {
-						display: inline;
-						&.item-head {
-							display: block;
-							color: map-get($colors, 'gray-warm-dark');
-						}
-					}
-				}
-			}
 			textarea {
 				max-width: 700px;
 			}

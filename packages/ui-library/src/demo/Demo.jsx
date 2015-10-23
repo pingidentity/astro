@@ -35,6 +35,11 @@ var Demo = React.createClass({
             pathToCode: 'components/tooltips/HelpHint.jsx'
         },
         {
+            name: 'Form - Checkbox List',
+            demo: require('./components/forms/FormCheckboxListDemo.jsx'),
+            pathToCode: 'components/forms/FormCheckboxList.jsx'
+        },
+        {
             name: 'Form - Radio Group',
             demo: require('./components/forms/FormRadioGroupDemo.jsx'),
             pathToCode: 'components/forms/FormRadioGroup.jsx'
