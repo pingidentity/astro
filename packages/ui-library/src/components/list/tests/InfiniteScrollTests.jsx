@@ -19,6 +19,7 @@ describe('Infinite Scroll', function () {
     });
 
     window.addEventListener = jest.genMockFunction();
+    window.removeEventListener = jest.genMockFunction();
 
     function getRenderedComponent (opts) {
         var defaults = {
@@ -33,7 +34,11 @@ describe('Infinite Scroll', function () {
             contentType: React.createElement(MyRow)
         };
 
-        return ReactTestUtils.renderIntoDocument(React.createElement(InfiniteScroll, assign(defaults, opts)));
+        return ReactTestUtils.renderIntoDocument(React.createElement(
+            InfiniteScroll,
+            assign(defaults, opts),
+            <span>No results found</span>
+        ));
     }
 
     beforeEach(function () {
@@ -42,6 +47,33 @@ describe('Infinite Scroll', function () {
         for (var i = 0; i < 50; i += 1) {
             batches[0].data.push({ num: i });
         }
+
+        window.addEventListener.mockClear();
+        window.removeEventListener.mockClear();
+    });
+
+    it('re-renders if visibility array changes', function () {
+        var component = getRenderedComponent();
+        var node = React.findDOMNode(component.refs.container);
+
+        component._getBatchVisibility = jest.genMockFunction().mockReturnValue([false, false, true]);
+        component.render = jest.genMockFunction();
+
+        //simulate a change of visibility
+        ReactTestUtils.Simulate.scroll(node);
+        expect(component.render.mock.calls.length).toBe(1);
+
+        //simulate a scroll without a change of visibility - render not called again
+        ReactTestUtils.Simulate.scroll(node);
+        expect(component.render.mock.calls.length).toBe(1);
+    });
+
+    it('renders child if data is empty', function () {
+        var component = getRenderedComponent({ batches: [] });
+        var node = React.findDOMNode(component.refs.container);
+
+        expect(node.childNodes.length).toBe(1);
+        expect(node.childNodes[0].innerHTML).toBe('No results found');
     });
 
     it('computes rect intersection', function () {
@@ -69,8 +101,6 @@ describe('Infinite Scroll', function () {
     });
 
     it('attaches to window scrolls', function () {
-        window.addEventListener.mockClear();
-
         var component = getRenderedComponent({ attachToWindow: true });
 
         component.componentDidUpdate();
@@ -81,6 +111,10 @@ describe('Infinite Scroll', function () {
 
         expect(component.props.loadPrev.mock.calls.length).toBe(1);
         expect(component.props.loadNext.mock.calls.length).toBe(0);
+
+        React.unmountComponentAtNode(React.findDOMNode(component).parentNode);
+
+        expect(removeEventListener.mock.calls.length).toBe(1);
     });
 
     it('calls the heading generator', function () {

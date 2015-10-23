@@ -237,7 +237,7 @@ var InfiniteScroll = React.createClass({
 
     render: function () {
         if (this.props.batches.length === 0) {
-            return (<div>{this.props.children}</div>);
+            return (<div ref="container">{this.props.children}</div>);
         }
 
         var props = this.attachToWindow ? {} : {
@@ -269,5 +269,7 @@ var InfiniteScroll = React.createClass({
         );
     }
 });
+
+InfiniteScroll.Batch = Batch;
 
 module.exports = InfiniteScroll;
