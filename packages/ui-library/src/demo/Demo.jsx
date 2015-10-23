@@ -1,5 +1,6 @@
 var React = require('react/addons'),
-    DemoItem = require('./core/DemoItem.jsx');
+    DemoItem = require('./core/DemoItem.jsx'),
+    assign = require('object-assign');
 
 require('isomorphic-fetch');
 
@@ -143,11 +144,13 @@ var Demo = React.createClass({
         fetch(this.BASE_PATH_COMP + this.state.demo.pathToCode).then(function (resp) {
             return resp.text();
         }).then(function (text) {
-            this.state.demo.description = (text.replace(/\n|\r/g, '!!!').match(/\@desc(.*?)(@|\*\/)/) || ['',''])[1]
+            var desc = (text.replace(/\n|\r/g, '!!!').match(/\@desc(.*?)(@|\*\/)/) || ['',''])[1]
                 .replace(/!!! *\*/g, '')
                 .replace(/!!!/g, '');
 
-            this.setState({ demo: this.state.demo });
+            if (desc) {
+                this.setState({ demo: assign(this.state.demo, { description: desc }) });
+            }
         }.bind(this));
     },
 
@@ -159,10 +162,10 @@ var Demo = React.createClass({
         fetch(this.BASE_PATH_DEMO + this.state.demo.pathToCode.replace('.jsx', 'Demo.jsx')).then(function (resp) {
             return resp.text();
         }.bind(this)).then(function (text) {
-            var renderCode = this.unindentCode(text.replace(/\n|\r/g, '!!!').match(/render: .*?!!!(.*?) {4}}/)[1]);
-            this.state.demo.markup = hljs.highlight('xml', renderCode).value; //eslint-disable-line
+            var renderCode = this.unindentCode(text.replace(/\n|\r/g, '!!!').match(/render: .*?!!!(.*?)!!! {4}}/)[1]);
+            var markup = hljs.highlight('xml', renderCode).value; //eslint-disable-line
 
-            this.setState({ demo: this.state.demo });
+            this.setState({ demo: assign(this.state.demo, { markup: markup }) });
         }.bind(this));
     },
 

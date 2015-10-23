@@ -136,13 +136,13 @@ var InfiniteScroll = React.createClass({
     _didScrollToBottom: function () {
         var containerBounds = this._getContainerBounds();
         return this.props.hasNext &&
-            React.findDOMNode(this.refs.spinnerNext).getBoundingClientRect().top < containerBounds.bottom;
+            React.findDOMNode(this.refs.spinnerNext).getBoundingClientRect().top <= containerBounds.bottom;
     },
 
     _didScrollToTop: function () {
         var containerBounds = this._getContainerBounds();
         return this.props.hasPrev &&
-            React.findDOMNode(this.refs.spinnerPrev).getBoundingClientRect().bottom > containerBounds.top;
+            React.findDOMNode(this.refs.spinnerPrev).getBoundingClientRect().bottom >= containerBounds.top;
     },
 
     _handleScroll: function () {
