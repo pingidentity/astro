@@ -27,7 +27,7 @@
 	@include animation (rotation 1.1s infinite linear);
 }
 
-.loader {
+.spinner {
 	$loader-size: 15px;
 
 	position: relative;
@@ -48,7 +48,7 @@
 		@include border-radius($loader-size);
 	}
 }
-button.loading {
+button.spinner {
 	$loader-size: 9px;
 
 	&:before {
