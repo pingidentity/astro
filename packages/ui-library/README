@@ -5,6 +5,7 @@ $ npm install && npm run start
 and open http://localhost:8080/index.html in the browser.
 
 
+
 VERIFYING THE LOCAL CHANGES
 ===========================
 $ npm run verify
