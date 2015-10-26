@@ -25,7 +25,7 @@ var Demo = React.createClass({
             pathToCode: 'components/tooltips/DetailsTooltip.jsx'
         },
         {
-            name: 'Forms - Toggle',
+            name: 'Form - Toggle',
             demo: require('./components/forms/ToggleDemo.jsx'),
             pathToCode: 'components/forms/Toggle.jsx'
         },
@@ -108,6 +108,16 @@ var Demo = React.createClass({
             name: 'Messages',
             demo: require('./components/general/MessagesDemo.jsx'),
             pathToCode: 'components/general/Messages.jsx'
+        },
+        {
+            name: 'Form - Rocker Button',
+            demo: require('./components/forms/RockerButtonDemo.jsx'),
+            pathToCode: 'components/forms/RockerButton.jsx'
+        },
+        {
+            name: 'Form - Drop Down Button',
+            demo: require('./components/forms/DropDownButtonDemo.jsx'),
+            pathToCode: 'components/forms/DropDownButton.jsx'
         },
         {
             name: 'Calendar',
