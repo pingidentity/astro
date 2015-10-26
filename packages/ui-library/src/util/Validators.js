@@ -15,7 +15,7 @@ module.exports = {
      * @returns {boolean} true if the string looks like an email address
      */
     isValidEmail: function (email) {
-        var re = /^[\w._-]+[+]?[\w._-]+@[a-z0-9]+([\-\.][a-z0-9]+)*\.[a-z0-9]{2,18}$/;
+        var re = /^[\w._-]+[+]?[\w._-]+@[A-Za-z0-9]+([\-\.][A-Za-z0-9]+)*\.[A-Za-z0-9]{2,18}$/;
         return re.test(email);
     },
 

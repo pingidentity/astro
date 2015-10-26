@@ -13,6 +13,7 @@ describe('Validators', function () {
             expect(Validators.isValidEmail('graham.mitchell@pingidentity.com')).toBe(true);
             expect(Validators.isValidEmail('graham.mitchell@pingidentity.com.and.some.other.stuff')).toBe(true);
             expect(Validators.isValidEmail('gmitchell@pingidentity.anewtldwith18chars')).toBe(true);
+            expect(Validators.isValidEmail('GMITCHELL@PingIdentity.Anewtldwith18chars')).toBe(true);
         });
 
         it('returns false for invalid email addresses', function () {
