@@ -13,22 +13,20 @@ var React = require('react'),
  * @param {object} [content] - a JSX object that represents the content to be shown when expanding the row.
  * @param {bool} [isEditEnabled]- whether or not the 'edit' button is enabled. Default is true.
  * @param {string} [editViewRoute] - route to the 'edit mode' view. Default is ''.
- * @param {function} [editModalBody] - modal body content to be displayed when clicking on the 'edit' button. Overwrites 'editViewRoute'.
- * @param {string} [editModalTitle] - title of the modal.
  * @param {bool} [showEdit] - wheter or not the 'edit' button will be shown at all. Default is true.
  * @param {bool} [showDelete] - wheter or not the 'delete' button will be shown at all. Default is true.
  * @param {function} [onDelete] - to be triggered when clicking on the 'delete' icon (if present)
  * @param {bool} [defaultToExpanded] - option to render the row in a expanded state by default. Default is false.
  * @param {object} [editButton] - it is used to show an object inside edit body. For example: ModalButton
  *          can be passed like follow:
- *              <ModalButton
+ *              editButton={<ModalButton
  *                  linkContent={editModalButton}
  *                  data-id="edit-btn"
  *                  inline={true}
  *                  modalTitle={this.props.editModalTitle}
  *                  maximize={true}
  *                  modalBody={this.props.editModalBody}>
- *              </ModalButton>
+ *              </ModalButton>}
  * @param {string} className - extra CSS classes to be applied
  * @param {string} id - it is used for a unique data-id.
  *
@@ -52,8 +50,6 @@ var ExpandableRow = React.createClass({
         content: React.PropTypes.object,
         isEditEnabled: React.PropTypes.bool,
         editViewRoute: React.PropTypes.string,
-        editModalBody: React.PropTypes.func,
-        editModalTitle: React.PropTypes.string,
         showEdit: React.PropTypes.bool,
         showDelete: React.PropTypes.bool,
         onDelete: React.PropTypes.func,
@@ -117,6 +113,15 @@ var ExpandableRow = React.createClass({
             containerCss = containerCss + ' ' + this.props.className;
         }
 
+        var editButton = (this.props.showEdit && this.props.editButton
+            ? this.props.editButton
+            : <a data-id="edit-btn"
+                className={editButtonCss}
+                href={'#/' + this.props.editViewRoute}>
+            </a>
+        );
+
+
         return (
             /* jshint ignore:start */
             <div className="result-set">
@@ -134,13 +139,7 @@ var ExpandableRow = React.createClass({
                         this.state.isExpanded
                             ? <div data-id="expanded-row" className="expanded-content clearfix">
                                 {this.props.children || this.props.content}
-                                {this.props.editModalBody && this.props.showEdit
-                                    ? this.props.editButton
-                                    : <a data-id="edit-btn"
-                                        className={editButtonCss}
-                                        href={'#/' + this.props.editViewRoute}>
-                                    </a>
-                                }
+                                {editButton}
                                 {this.props.showDelete
                                     ? <a data-id="delete-btn"
                                         className="delete-btn"
