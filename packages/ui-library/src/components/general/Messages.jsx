@@ -13,12 +13,17 @@ var React = require('react');
  * to be removed by invoking a callback.
  *
  * @param {object[]} messages List of messages to render.
+ * @param {string} [id] If specified, then the id of the rendered
+*   parent div will be set to this id.
  * @param {string} [data-id] If specified then the
  *  data-id of the rendered parent div will be set to this id.
  * @param {function} [removeMessage] Function to call to remove a
  *  message from the messages list.
  * @param {function} [i18n] Function to handle internationalization of
  *  message keys to message text.
+ * @param {number} [defaultMessageTimeout] Default message timeout in ms.
+ *  Messages will remove themselves after this time, unless the message
+ *  specifically overrides the default timeout itself.
  *
  * @example
  * Usage:
@@ -30,14 +35,18 @@ var Messages = React.createClass({
 
     propTypes: {
         messages: React.PropTypes.array,
+        id: React.PropTypes.string,
         'data-id': React.PropTypes.string,
-        removeMessage: React.PropTypes.func
+        removeMessage: React.PropTypes.func,
+        i18n: React.PropTypes.func,
+        defaultMessageTimeout: React.PropTypes.number
     },
     
     getDefaultProps: function () {
         return {
             removeMessage: null,
-            messages: []
+            messages: [],
+            i18n: function (key) { return key; }
         };
     },
 
@@ -49,23 +58,20 @@ var Messages = React.createClass({
 
         for (var i = 0; i < length; i += 1) {
             renderedMessages.push(
-                /* jshint ignore:start */
                 <Message
                     message={messages[i]}
                     key={i}
                     index={i}
                     removeMessage={this.props.removeMessage}
-                    i18n={this.props.i18n} />
-                /* jshint ignore:end */
+                    i18n={this.props.i18n}
+                    defaultTimeout={this.props.defaultMessageTimeout} />
             );
         }
 
         return (
-            /* jshint ignore:start */
-            <div id={this.props['data-id']}>
+            <div id={this.props.id} data-id={this.props['data-id']}>
                 {renderedMessages}
             </div>
-            /* jshint ignore:end */
         );
     }
 });
@@ -90,9 +96,9 @@ var Message = React.createClass({
     },
 
     componentDidMount: function () {
-        // Close after configured time interval, with 10000ms as the default.
-        // Interval of 0 will result in no automatic message clearing (which is intended).
-        var interval = (this.props.message.duration) ? this.props.message.duration : 10000;
+        // Close after configured time interval
+        // Interval of 0 (or undefined) will result in no automatic message clearing (which is intended).
+        var interval = (this.props.message.duration) ? this.props.message.duration : this.props.defaultTimeout;
         
         if (interval) {
             this.interval = global.setInterval(this._close, interval);
