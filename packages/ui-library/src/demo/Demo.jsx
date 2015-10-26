@@ -179,7 +179,7 @@ var Demo = React.createClass({
 
     hashChange: function () {
         this.setState({
-            demo: this.getDemo(document.location.hash.substring(1)),
+            demo: this.getDemo(document.location.hash.substring(1).replace(/%20/g, ' ')),
             markup: null
         });
     },
