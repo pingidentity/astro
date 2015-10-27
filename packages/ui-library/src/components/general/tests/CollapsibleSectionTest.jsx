@@ -67,4 +67,26 @@ describe('CollapsibleSection', function () {
 
         expect(child).toBeTruthy();
     });
+
+    /*
+     * Test CollapsibleSection is expanded by default
+     * and add title to toggle .
+     */
+    it('is rendering expanded state and toggle title', function () {
+        View = ReactTestUtils.renderIntoDocument(
+            /* jshint ignore:start */
+            <CollapsibleSection className="section" expanded={true} toggleOnTitle={true}
+                onToggle={onToggle}>
+                <div className="section-title" title={true}>
+                    <span className="icon-dropdown-arrow show-section"></span>
+                                Conditions
+                </div>
+            </CollapsibleSection>
+            /* jshint ignore:end */
+        );
+
+        var child = TestUtils.findRenderedDOMComponentWithDataId(View, 'collapsableSection');
+        expect(onToggle).toBeCalled();
+        expect(child).toBeTruthy();
+    });
 });

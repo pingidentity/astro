@@ -47,6 +47,7 @@ var FragmentRenderer = React.createClass({
     /**
      * event handler for determining if iterations should be incremented
      * @param {object} e The event object
+     * @returns {undefined}
      */
     _onScroll: function (e) {
         var el = e.currentTarget;
@@ -58,6 +59,7 @@ var FragmentRenderer = React.createClass({
 
     /**
      * resets the amount of fragment iterations
+     * @returns {undefined}
      */
     reset: function () {
         this.setState({ iterations: 1 });
