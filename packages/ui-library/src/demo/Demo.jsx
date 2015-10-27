@@ -115,6 +115,11 @@ var Demo = React.createClass({
             pathToCode: 'components/general/Messages.jsx'
         },
         {
+            name: 'Drag-N-Drop Row',
+            demo: require('./components/rows/DragDropRowDemo.jsx'),
+            pathToCode: 'components/rows/DragDropRow.jsx'
+        },
+        {
             name: 'Form - Rocker Button',
             demo: require('./components/forms/RockerButtonDemo.jsx'),
             pathToCode: 'components/forms/RockerButton.jsx'

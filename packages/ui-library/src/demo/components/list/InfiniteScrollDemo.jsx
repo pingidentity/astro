@@ -60,22 +60,27 @@ var Demo = React.createClass({
     },
 
     headingGenerator: function (data) {
-        return data.num % 10 === 0 ? '=== Every 10 Heading ===' : null;
+        var start = data.num - (data.num % 10);
+        var end = start + 10;
+        return data.num % 10 === 0 ? ('Heading ' + start + ' to ' + end) : null;
     },
 
     render: function () {
         return (
-            <div style={{ height: 300 }}>
-            <InfiniteScroll
-                contentType={<MyRow/>}
-                loadNext={this.loadNext}
-                loadPrev={this.loadPrev}
-                hasNext={this.hasMore()}
-                hasPrev={this.hasPrev()}
-                pendingNext={this.state.pending.next}
-                pendingPrev={this.state.pending.prev}
-                headingGenerator={this.headingGenerator}
-                batches={this.state.batches}><div>Hello</div></InfiniteScroll></div>
+            <div className="infiniteScrollDemo">
+                <InfiniteScroll
+                        contentType={<MyRow/>}
+                        loadNext={this.loadNext}
+                        loadPrev={this.loadPrev}
+                        hasNext={this.hasMore()}
+                        hasPrev={this.hasPrev()}
+                        pendingNext={this.state.pending.next}
+                        pendingPrev={this.state.pending.prev}
+                        headingGenerator={this.headingGenerator}
+                        batches={this.state.batches}>
+                    <div>Hello</div>
+                </InfiniteScroll>
+            </div>
         );
     }
 });

@@ -1,0 +1,41 @@
+.dragDropRowDemo {
+    .instructions {
+        font-style: italic;
+        margin-bottom:20px;
+    }
+
+    .row {
+        border:1px solid #eee;
+        padding:5px;
+        background:ghostwhite;
+        margin:5px;
+        cursor:move;
+    }
+
+    .row.dragTop {
+        border-top: 3px solid cornFlowerBlue;
+    }
+
+    .row.dragBottom, .row.dragTop.dragBottom {
+        border-bottom: 3px solid cornFlowerBlue;
+    }
+}
+
+.infiniteScrollDemo {
+    height: 300px;
+
+    .row, .item-head {
+        border:1px solid #eee;
+        padding:5px;
+        background:ghostwhite;
+        margin:5px;
+        cursor:move;
+    }
+
+    .item-head {
+        color:white;
+        background: lightblue;
+        border-color:#aaa;
+        text-align:center;
+    }
+}
