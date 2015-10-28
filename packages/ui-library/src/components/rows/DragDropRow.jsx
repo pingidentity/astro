@@ -5,7 +5,7 @@ var dropTarget = dnd.DropTarget;
 var PropTypes = React.PropTypes;
 var TYPE = 'DragDropRow';
 
-var rowSource = {
+var dragSpec = {
     beginDrag: function (props) {
         return {
             id: props.id,
@@ -20,7 +20,7 @@ var rowSource = {
     }
 };
 
-var sourceCollect = function (connect, monitor) {
+var dragCollect = function (connect, monitor) {
     return {
         connectDragSource: connect.dragSource(),
         isDragging: monitor.isDragging()
@@ -35,17 +35,25 @@ var isInTopHalf = function (monitor, node) {
     return (clientOffset.y - boundingRect.top) <= ownMiddleY;
 };
 
-var rowTarget = {
+var dropSpec = {
+    /*
+     * @param {object} props - the properties of the target row
+     * @param {object} monitor - the monitor object:
+     *  - monitor.getItem() will return the row being dragged
+     *  - monitor.getClientOffset() will return the mouse position.
+     * @param {object} component - the target row react instance
+     * @returns null - nothing
+     */
     hover: function (props, monitor, component) {
-        var targetItem = monitor.getItem();
+        var itemBeingDragged = monitor.getItem();
 
-        if (targetItem.id === props.id) {
+        if (itemBeingDragged.id === props.id) {
             props.onDrag(props.index, props.index);
             return;
         }
 
         props.onDrag(props.index + (isInTopHalf(monitor, React.findDOMNode(component)) ? 0 : 1),
-                     targetItem.index);
+                     itemBeingDragged.index);
     },
 
     drop: function (props, monitor, component) {
@@ -54,7 +62,7 @@ var rowTarget = {
     }
 };
 
-var targetCollect = function (connect) {
+var dropCollect = function (connect) {
     return {
         connectDropTarget: connect.dropTarget()
     };
@@ -96,14 +104,12 @@ var DragDropRow = React.createClass({
     }
 });
 
-DragDropRow = dropTarget(TYPE, rowTarget, targetCollect)(
-    dragSource(TYPE, rowSource, sourceCollect)(DragDropRow)
+DragDropRow = dropTarget(TYPE, dropSpec, dropCollect)(
+    dragSource(TYPE, dragSpec, dragCollect)(DragDropRow)
 );
 
 //expose these functions for unit tests
-DragDropRow.target = rowTarget;
-DragDropRow.source = rowSource;
-DragDropRow.targetCollect = targetCollect;
+DragDropRow.dropSpec = dropSpec;
 DragDropRow.isInTopHalf = isInTopHalf;
 
 module.exports = DragDropRow;

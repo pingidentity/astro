@@ -2,12 +2,19 @@ window.__DEV__ = true;
 
 jest.dontMock('../../../testutil/TestUtils');
 jest.dontMock('../DragDropRow.jsx');
-jest.dontMock('underscore');
+jest.setMock('react-dnd', {
+    DragSource: function () {
+        return function (c) { return c; };
+    },
+    DropTarget: function () {
+        return function (c) { return c; };
+    },
+});
 
 describe('DragDropRow', function () {
-    //var React = require('react/addons');
-    //var ReactTestUtils = React.addons.TestUtils;
-    var DragDropRow = require('../DragDropRow.jsx');
+    var React = require('react/addons'),
+        ReactTestUtils = React.addons.TestUtils,
+        DragDropRow = require('../DragDropRow.jsx');
 
     var genMockNode = function (x, y, width, height) {
         return {
@@ -60,8 +67,61 @@ describe('DragDropRow', function () {
         var monitor = genMockMonitor(0, 0, props);
 
         //simulate a drap event to same index
-        DragDropRow.target.hover(props, monitor);
+        DragDropRow.dropSpec.hover(props, monitor);
 
         expect(props.onDrag.mock.calls[0]).toEqual([1, 1]);
     });
+
+    /** had to really bend over backwards to get this test to work since jest mocks the internals
+     * of react-dnd.  It doesnt prove a lot but it exercises the render function of the component */
+    it('Renders children', function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <DragDropRow
+                connectDragSource={function (c) { return c; }}
+                connectDropTarget={function (c) { return c; }}
+                isDragging={false}
+                id={1}
+                index={1}
+                onDrag={jest.genMockFunction()}
+                onDrop={jest.genMockFunction()}
+                onCancel={jest.genMockFunction()} >
+                <div>Blah</div>
+            </DragDropRow>);
+
+        var childNodes = React.findDOMNode(component).childNodes;
+
+        expect(childNodes.length).toBe(1);
+        expect(childNodes[0].innerHTML).toBe('Blah');
+    });
+
+    it('Processes drag to bottom half of row', function () {
+        var monitor = genMockMonitor(0, 60, genMockProps(1));   //pretend we're dragging row index 1
+        var props = genMockProps(2);                            //onto row index 2
+
+        var targetComponent = ReactTestUtils.renderIntoDocument(<div>Blah</div>);
+        var targetNode = React.findDOMNode(targetComponent);
+
+        //mock the getBoundingClientRect function
+        targetNode.getBoundingClientRect = genMockNode(0,0,100,100).getBoundingClientRect;
+
+        DragDropRow.dropSpec.hover(props, monitor, targetComponent);
+
+        expect(props.onDrag.mock.calls[0]).toEqual([3, 1]);
+    });
+
+    it('Processes drag to top half of row', function () {
+        var monitor = genMockMonitor(0, 10, genMockProps(1));   //pretend we're dragging row index 1
+        var props = genMockProps(2);                            //onto row index 2
+
+        var targetComponent = ReactTestUtils.renderIntoDocument(<div>Blah</div>);
+        var targetNode = React.findDOMNode(targetComponent);
+
+        //mock the getBoundingClientRect function
+        targetNode.getBoundingClientRect = genMockNode(0,0,100,100).getBoundingClientRect;
+
+        DragDropRow.dropSpec.hover(props, monitor, targetComponent);
+
+        expect(props.onDrag.mock.calls[0]).toEqual([2, 1]);
+    });
 });
+
