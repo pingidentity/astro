@@ -34,7 +34,7 @@
 	top: 50%;
 	color: transparent;
 	font-size: 1px;
-	border-color: $color-gray-medium rgba($color-gray-medium, 0.4) rgba($color-gray-medium, 0.4) rgba($color-gray-medium, 0.4);
+	border-color: map-get($colors, 'rhino') rgba(map-get($colors, 'rhino'), 0.4) rgba(map-get($colors, 'rhino'), 0.4) rgba(map-get($colors, 'rhino'), 0.4);
 
 	@include loaderCss($loader-size);
 

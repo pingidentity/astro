@@ -88,7 +88,7 @@
         &.data-title {
             > label {
                 padding-top: 25px;
-                color: map-get($colors, 'gray-ice-light-2');
+                color: map-get($colors, 'dolphin');
             	text-transform: uppercase;
             	margin-bottom: 5px;
             	font-size: 15px;
@@ -107,7 +107,7 @@
         &.data-sub-title {
             > label {
         		text-transform: uppercase;
-        		color: map-get($colors, 'gray-warm-medium-light');
+        		color: map-get($colors, 'stone');
         		font-weight: normal;
         		font-size: 16px;
             }
@@ -174,8 +174,8 @@
 
 .data-set {
 	padding: 30px 0 10px;
-	border-top: 1px solid $color-gray-medium;
-	border-bottom: 1px solid $color-gray-medium;
+	border-top: 1px solid map-get($colors, 'rhino');
+	border-bottom: 1px solid map-get($colors, 'rhino');
 
 	&.no-border {
 		border-top: none;

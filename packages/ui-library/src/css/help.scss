@@ -6,6 +6,8 @@
     position: relative;
     background: transparent;
     cursor: default;
+    min-width:  $help-font-spacing + 1px;
+    min-height:  $help-font-spacing + 1px;
 
     &:after {
         content: '\68';
@@ -45,8 +47,8 @@
         opacity: 0;
         visibility: hidden;
 
-        background: $color-help;
-        color: lighten($color-help, 65);
+        background: map-get($colors, 'active-blue');
+        color: map-get($colors, 'white');
 
         padding: 10px;
         font-size: 14px;
@@ -63,7 +65,7 @@
             border-style: solid;
             border-width: 6px;
             line-height: 1em;
-            border-color: $color-help transparent transparent transparent;
+            border-color: map-get($colors, 'active-blue') transparent transparent transparent;
             bottom: -12px;
             left: 10px;
         }
@@ -86,16 +88,16 @@
     }
     &.warning {
         .tooltip-text {
-            background: $color-warning;
+            background: map-get($colors, 'critical-red');
 
             &:before {
-                border-color: $color-warning transparent transparent transparent;
+                border-color: map-get($colors, 'critical-red') transparent transparent transparent;
             }
         }
         &.bottom {
             .tooltip-text {
                 &:before {
-                    border-color: transparent transparent $color-warning transparent;
+                    border-color: transparent transparent map-get($colors, 'critical-red') transparent;
                 }
             }
         }
@@ -129,7 +131,7 @@
             bottom: auto;
 
             &:before {
-                border-color: transparent transparent $color-help transparent;
+                border-color: transparent transparent map-get($colors, 'active-blue') transparent;
                 top: -12px;
                 bottom: auto;
                 left: 10px;
@@ -162,11 +164,12 @@
     &.form-error-message {
         .tooltip-text {
             bottom: auto;
-            margin: 0 0 0 10px;
-            background: $color-warning;
+            margin: 0;
+            background: map-get($colors, 'critical-red');
+            min-height: 15px;
 
             &:before {
-                border-color: transparent $color-warning transparent transparent;
+                border-color: transparent map-get($colors, 'critical-red') transparent transparent;
                 top: 10px;
                 bottom: auto;
                 right: auto;
@@ -203,7 +206,7 @@
                 margin: 0 0 -8px 0;
 
                 &:before {
-                    border-color: transparent transparent $color-warning transparent;
+                    border-color: transparent transparent map-get($colors, 'critical-red') transparent;
                     top: -12px;
                     bottom: auto;
                     right: auto;

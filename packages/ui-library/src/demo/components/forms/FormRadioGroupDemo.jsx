@@ -5,13 +5,14 @@ var FormRadioGroupDemo = React.createClass({
 
     getInitialState: function () {
         return {
-            showSpinner: true
+            showSpinner: true,
+            selectedId: 2
         };
     },
 
-    _onChange: function (selectedIndex) {
+    _onChange: function (selectedId) {
         this.setState({
-            selectedIndex: selectedIndex
+            selectedId: selectedId
         });
     },
 
@@ -27,13 +28,12 @@ var FormRadioGroupDemo = React.createClass({
                 <div>
                     <FormRadioGroup
                         groupName="aps_condition_type"
-                        selected={2}
+                        selected={this.state.selectedId}
                         onChange={this._onChange}
                         items={radioItems}
                     />
-
                     <div>
-                        Selected radio index = {this.state.selectedIndex}
+                        Selected radio id = {this.state.selectedId}
                     </div>
                 </div>
 

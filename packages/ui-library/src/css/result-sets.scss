@@ -5,7 +5,6 @@
 	border-top: 1px solid $color-input-text;
 	font-family: $font-pn-regular;
 	font-size: 15px;
-	color: $color-input-label;
 
 	&.inline {
 		line-height: 28px;
@@ -98,19 +97,6 @@
 	&.filter {
 		min-height: 950px;
 		margin-right: 45px;
-
-		.az-filter {
-			margin-right: -45px;
-
-			&.fixed {
-				position: fixed;
-				margin: 0;
-				top: 80px;
-				bottom: 0;
-				right: 40px;
-				overflow: auto;
-			}
-		}
 	}
 
 	// IDEAL
@@ -146,12 +132,12 @@
 		margin: 5px auto;
 		font-weight: bold;
 		text-align: center;
-		color: map-get($colors, 'slate-extra');
+		color: map-get($colors, 'midnight');
 	}
 	.item {
 		position: relative;
-		// overflow: hidden;
 		background-color: map-get($colors, 'elderly');
+		border: 1px solid map-get($colors, 'elderly');
 		margin: 0 0 10px 0;
 		max-height: $item-height;
 		@include border-radius(2px);
@@ -159,8 +145,8 @@
 
 		&.expanded {
 			background-color: $color-white;
-			border: 1px solid map-get($colors, 'gray-ice-light');
 			max-height: 4000px;
+			border: 1px solid map-get($colors, 'rabbit-fur');
 			@include transition(max-height 1s);
 
 			.expand-btn {
@@ -171,7 +157,7 @@
 			}
 			.row-controls {
 				background: none;
-				border-left: 1px solid $color-controls;
+				border-left: 1px solid map-get($colors, 'rabbit-fur');
 			}
 			.collapsed-content {
 				.row-button {
@@ -209,7 +195,7 @@
 		.item-sub-title {
 			font-size: 14px;
 			font-weight: normal;
-			color: $color-gray-medium;
+			color: map-get($colors, 'rhino');
 		}
 		.item-link {
             position: absolute;
@@ -231,14 +217,14 @@
 				font-style: italic;
 			}
 			.item-title {
-				color: $color-gray-medium;
+				color: map-get($colors, 'rhino');
 			}
 		}
 		.row-controls {
 			$btn-width: 75px;
-			background: darken($color-controls, 3);
-			border-bottom: 1px solid $color-controls;
-			border-left: 1px solid darken($color-controls, 8%);
+			background: darken(map-get($colors, 'rabbit-fur'), 3);
+			border-bottom: 1px solid map-get($colors, 'rabbit-fur');
+			border-left: 1px solid darken(map-get($colors, 'rabbit-fur'), 8%);
 			position: absolute;
 			top: 0;
 			bottom: 0;
@@ -305,8 +291,8 @@
 				}
 			}
 			.reject-btn {
-				color: map-get($colors, 'gray-warm-dark');
-				background-color: map-get($colors, 'gray-light-3');
+				color: map-get($colors, 'walrus');
+				background-color: map-get($colors, 'stratus');
 
 				&:after {
 					content: '\58';
@@ -353,7 +339,7 @@
 				text-transform: none;
 				font-size: 18px;
 				font-family: 'iconfont';
-				color: map-get($colors, 'gray-warm-dark');
+				color: map-get($colors, 'walrus');
 			}
 		}
 		.expand-btn, .delete-btn, .edit-btn, .view-btn {
@@ -409,6 +395,7 @@
 		.expanded-content {
 			position: relative;
 			padding: 0 80px 30px 30px;
+			min-height: 3*$button-height - 20px;
 		}
 		&.no-edit {
 			.edit-btn {
@@ -418,7 +405,7 @@
 					content: '';
 				}
 				&:hover {
-					background-color: map-get($colors, 'gray-light-2');
+					@include opacity(1);
 				}
 			}
 		}
@@ -492,10 +479,8 @@
 
 	.result-set-title {
 		text-transform: uppercase;
-		color: $color-input-label;
 		padding: 0 0 5px 0;
 		margin: 0 0 25px 0;
-		border-bottom: 1px solid $color-input-label;
 		font-family: $font-pn-regular;
 		font-size: 16px;
 		a {
@@ -578,9 +563,9 @@
 		padding: 15px 0;
 		border-style: solid;
 		border-width: 1px 0 0 0;
-		border-color: $color-section-border;
+		border-color: map-get($colors, 'elderly');
 		text-transform: uppercase;
-		color: $color-gray-medium;
+		color: map-get($colors, 'rhino');
 		font-size: 14px;
 		font-family: $font-pn-regular;
 		font-weight: 600;
@@ -589,7 +574,7 @@
 			cursor: pointer;
 		}
 		&:last-child {
-			border-bottom: 1px solid $color-section-border;
+			border-bottom: 1px solid map-get($colors, 'elderly');
 		}
 		.show-condition, .value {
 			text-transform: none;
@@ -600,7 +585,7 @@
 			&:before {
 				// only want ':' to show when condition-title followed by value
 				content: ': ';
-				color: $color-gray-medium;
+				color: map-get($colors, 'rhino');
 				font-size: 14px;
 				font-family: $font-pn-regular;
 				font-weight: 600;
@@ -659,7 +644,6 @@
 					display: inline-block;
 					padding: 7px 0 0 0;
 					margin-top: 7px;
-					color: $color-input-label;
 					.input-row {
 						margin-top: 0;
 						label {
@@ -690,34 +674,6 @@
 			textarea {
 				max-width: 700px;
 			}
-		}
-	}
-}
-
-ul.az-filter {
-	list-style-type: none;
-	position: absolute;
-	top: 0;
-	right: 0;
-
-	li {
-		color: map-get($colors, 'gray-warm-dark');
-		text-transform: uppercase;
-		padding: 6px;
-		cursor: pointer;
-		width: 18px;
-		text-align: center;
-		font-size: 15px;
-		font-weight: bold;
-		margin-bottom: 5px;
-
-		&.selected {
-			color: $color-active;
-			border: 1px solid $color-active;
-		}
-		&.na {
-			color: map-get($colors, 'gray-ice-light');
-			cursor: default;
 		}
 	}
 }

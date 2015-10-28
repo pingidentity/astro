@@ -133,7 +133,7 @@ var FormSelectField = React.createClass({
                     {labelHelp}
                 </span>
                 <div className="input-container">
-                    <div>
+                    <div className="wrapper">
                         <select
                             data-id={this.props.id}
                             className={this.props.selectClassName}
@@ -141,10 +141,10 @@ var FormSelectField = React.createClass({
                             value={this.state.selectedValue}>
                             {options}
                         </select>
-                        <div className={errorCss}>
-                            <div className="tooltip-text" data-id={this.props.id + '_errormessage'}>
-                                {this.props.errorMessage}
-                            </div>
+                    </div>
+                    <div className={errorCss}>
+                        <div className="tooltip-text" data-id={this.props.id + '_errormessage'}>
+                            {this.props.errorMessage}
                         </div>
                     </div>
                 </div>

@@ -23,11 +23,11 @@ $selected-arrow-width-h: 8px;
             padding-bottom: 10px;
             position: relative;
             text-transform: uppercase;
-            color: $color-gray-medium;
+            color: map-get($colors, 'rhino');
             cursor: pointer;
 
             a {
-                color: $color-gray-medium;
+                color: map-get($colors, 'rhino');
                 &:hover {
                     text-decoration: none;
                 }
@@ -73,7 +73,7 @@ $selected-arrow-width-h: 8px;
             padding-bottom: 10px;
             position: relative;
             text-transform: uppercase;
-            color: $color-gray-medium;
+            color: map-get($colors, 'rhino');
             cursor: pointer;
             height: 105px;
             border-bottom: 5px solid $color-white;
@@ -81,7 +81,7 @@ $selected-arrow-width-h: 8px;
 
 
             a {
-                color: $color-gray-medium;
+                color: map-get($colors, 'rhino');
                 &:hover {
                     text-decoration: none;
                 }
@@ -90,7 +90,6 @@ $selected-arrow-width-h: 8px;
                 color: $color-active;
             }
             &.active {
-                color: map-get($colors, 'gray-ice-dark');
                 border-bottom: 5px solid $color-active;
                 cursor: default;
                 margin-bottom: 1px;

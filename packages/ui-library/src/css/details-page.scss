@@ -119,8 +119,8 @@
 		}
 	}
 	.reject-btn {
-		color: map-get($colors, 'gray-warm-dark');
-		background-color: map-get($colors, 'gray-light-3');
+		color: map-get($colors, 'white');
+		background-color: map-get($colors, 'stratus');
 
 		&:after {
 			content: '\58';

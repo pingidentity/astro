@@ -16,7 +16,7 @@
 	}
 	&.error {
 		select {
-			border-color: 1px solid $color-warning;
+			border-color: 1px solid map-get($colors, 'critical-red');
 		}
 	}
 	&.required {

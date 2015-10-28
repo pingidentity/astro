@@ -208,7 +208,7 @@ var FormTextField = React.createClass({
     render: function () {
         var value = _.isUndefined(this.props.value) ? this.state.fieldValue : this.props.value,
             edited = !_.isUndefined(this.props.originalValue) && this.props.originalValue !== value,
-            readonly = this.props.mode === FormFieldConstants.FormFieldMode.READ_ONLY,
+            readonly = this.props.mode.toUpperCase() === FormFieldConstants.FormFieldMode.READ_ONLY,
             undo,
             save,
             labelHelp;

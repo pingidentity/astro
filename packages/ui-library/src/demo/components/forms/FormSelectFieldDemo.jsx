@@ -41,23 +41,38 @@ var FormSelectFieldDemo = React.createClass({
 
         return (
             <div>
-                <div>
-                    <FormSelectField label="Basic" options={options} onChange={this._changeCallback1} />
+                <div className="input-row">
+                    <FormSelectField
+                        label="Basic"
+                        options={options}
+                        onChange={this._changeCallback1} />
                     <span>{this.state.onChangeFieldValue1}</span>
                 </div>
-                <div>
-                    <FormSelectField label="Required with help text" options={options} onChange={this._changeCallback2}
-                                     isRequired={true} labelHelpText="Please select a value" />
+                <div className="input-row">
+                    <FormSelectField
+                        label="Required with help text"
+                        options={options}
+                        onChange={this._changeCallback2}
+                        isRequired={true}
+                        labelHelpText="Please select a value" />
                     <span>{this.state.onChangeFieldValue2}</span>
                 </div>
-                <div>
-                    <FormSelectField label="With none option" options={options} onChange={this._changeCallback3}
-                                     noneOption={true} noneOptionText="Select an option" noneOptionValue="0" />
+                <div className="input-row">
+                    <FormSelectField
+                        label="With none option"
+                        options={options}
+                        onChange={this._changeCallback3}
+                        noneOption={true}
+                        noneOptionText="Select an option"
+                        noneOptionValue="0" />
                     <span>{this.state.onChangeFieldValue3}</span>
                 </div>
-                <div>
-                    <FormSelectField label="With error message" options={options} onChange={this._changeCallback4}
-                                     errorMessage="error!" />
+                <div className="input-row">
+                    <FormSelectField
+                        label="With error message"
+                        options={options}
+                        onChange={this._changeCallback4}
+                        errorMessage="error!" />
                 </div>
             </div>
         );

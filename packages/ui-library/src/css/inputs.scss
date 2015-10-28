@@ -94,7 +94,7 @@ input[type=text], input[type=password], textarea {
 		border: 1px solid $color-input-border;
 	}
 	&:focus {
-		border-color: $color-input-border-focus;
+		border-color: map-get($colors, 'active-blue');
 	}
 	&.extended {
 		width: 350px;
@@ -143,7 +143,11 @@ label {
 		input {
 			padding: 3px 34px 3px 10px;
 		}
-
+		.input-container {
+			&:after {
+				top: 17px;
+			}
+		}
 		&.no-label {
 			.input-container {
 				margin: 0;
@@ -246,6 +250,11 @@ label {
 		}
 	}
 	&.input-textarea {
+		.input-container {
+			&:after {
+				top: 13px;
+			}
+		}
 		textarea {
 			padding: 10px 34px 10px 10px;
 			margin-top: 2px;
@@ -268,10 +277,9 @@ label {
 				content: 'e';
 				text-transform: none;
 				position: absolute;
-				top: 11px;
 				right: 11px;
 				cursor: pointer;
-
+				color: map-get($colors, 'walrus');
 				@include opacity(0);
 			}
 		}
@@ -317,7 +325,7 @@ label {
 			}
 		}
 	}
-	&.error, &.form-error {
+	&.form-error {
 		color: $color-input-error;
 	}
 	&.input-checkbox {
@@ -409,7 +417,7 @@ label {
 			border: $border-width solid map-get($colors, 'timberwolf');
 			@include border-radius(ceil($radio-height/2) + $border-width);
 
-			&.error, &.form-error {
+			&.form-error {
 				border-color: $color-input-error;
 				&:focus {
 					border-color: $color-input-error;
@@ -453,7 +461,7 @@ label {
 		}
 		&.undo {
 			position: absolute;
-			bottom: 5px;
+			top: 13px;
 			right: 11px;
 			font-size: 0;
 			color: transparent;
@@ -469,6 +477,23 @@ label {
 			}
 		}
 	}
+	&.inline-save {
+		.input-container {
+			padding-right: 50px;
+
+			&:after {
+				right: 61px;
+			}
+		}
+		.undo {
+			right: 61px;
+		}
+		.save {
+			position: absolute;
+			top: 18px;
+			right: 0;
+		}
+	}
 	&.edited {
 		.input-container {
 			&:after {
@@ -477,19 +502,7 @@ label {
 				color: transparent;
 			}
 		}
-		&.inline-save {
-			.input-container {
-				padding-right: 50px;
-			}
-			.undo {
-				right: 61px;
-			}
-			.save {
-				position: absolute;
-			    top: 11px;
-			    right: 0;
-			}
-		}
+
 	}
 	.label-text {
 		.help-tooltip {
@@ -520,7 +533,7 @@ label {
 	.value-container {
 		display: block;
 		margin: 6px 0 0 0;
-		color: map-get($colors, 'slate-extra');
+		color: map-get($colors, 'midnight');
 		text-transform: none;
 		font-size: 16px;
 	}
@@ -553,14 +566,14 @@ label {
 	.input-container {
 		margin: 7px 0 0 0;
 
-		> div {
+		.wrapper {
 			position: relative;
 			clear: both;
 			display: inline-block;
 			height: 40px;
 			overflow: hidden;
 			background: $color-white;
-			border: 1px solid $color-button-default-border;
+			border: 1px solid map-get($colors, 'rhino');
 			cursor: pointer;
 			@include border-radius(4px);
 
@@ -573,12 +586,12 @@ label {
 				right: 10px;
 				top: 0;
 				line-height: 34px;
-				color: map-get($colors, 'slate-extra');
+				color: map-get($colors, 'midnight');
 				pointer-events: none;
 			}
 		}
 	}
-	&.error, &.form-error {
+	&.form-error {
 		border-color: $color-input-error;
 
 		&:focus {
@@ -590,7 +603,7 @@ label {
 		-webkit-appearance: none;
 		-moz-appearance: none;
 		appearance: none;
-		color: map-get($colors, 'slate-extra');
+		color: map-get($colors, 'midnight');
 		border: 0;
 		border-radius: 0;
 		font-size: 16px;
@@ -620,7 +633,7 @@ label {
 			display: none;
 		}
 		&::-ms-value {
-			color: map-get($colors, 'slate-extra');
+			color: map-get($colors, 'midnight');
 			background: none;
 		}
 	}
@@ -776,7 +789,6 @@ label {
 			left: $img-width + 15px;
 		}
 		.image-types {
-			color: $color-input-label;
 			font-size: 14px;
 			position: absolute;
 			top: 65px;
@@ -842,7 +854,7 @@ label {
 			}
 		}
 	}
-	&.error, &.form-error, &.selected.error {
+	&.form-error {
 		.toggle {
 			border-color: $color-input-error;
 
@@ -890,7 +902,7 @@ label {
 			text-transform: none;
 			right: 10px;
 			top: 1px;
-			color: map-get($colors, 'slate-extra');
+			color: map-get($colors, 'midnight');
 			pointer-events: none;
 		}
 	}
@@ -898,14 +910,15 @@ label {
 		position: absolute;
 		top: 15px;
 		left: 15px;
-		height: 30px;
-		width: 180px;
+		right: 15px;
+		width: 156px;
+		height: 20px;
 	}
 	.clear {
 		font-family: $icon-font;
 		font-size: 10px;
 		position: absolute;
-		top: 22px;
+		top: 28px;
 		right: 26px;
 		color: $color-input-text;
 	}
@@ -922,7 +935,7 @@ label {
 		@include border-radius(3px);
 
 		.options {
-			margin: 47px 0 0 0;
+			margin: 61px 0 0 0;
 			max-height: 285px;
 			min-width: 202px;
 			overflow: auto;
@@ -1000,7 +1013,7 @@ label {
 .help-tooltip.form-error-message {
 	position: absolute;
 	top: 10px;
-	right: 0;
+	left: auto;
 }
 .required {
 	@mixin requiredCss {
@@ -1038,10 +1051,24 @@ label {
 		input {
 			@include requiredPadding;
 		}
+		.input-container {
+			&:before {
+				top: 5px;
+				bottom: 5px;
+				left: 5px;
+			}
+		}
 	}
 	&.input-textarea {
 		textarea {
 			@include requiredPadding;
+		}
+		.input-container {
+			&:before {
+				top: 7px;
+				bottom: 8px;
+				left: 6px;
+			}
 		}
 	}
 	&.input-select {
@@ -1050,7 +1077,9 @@ label {
 		}
 		.input-container {
 			&:before {
+				top: 5px;
 				bottom: 7px;
+				left: 5px;
 			}
 		}
 	}
@@ -1180,7 +1209,7 @@ a {
 
 		&:before {
 			content: '\00D7';
-			background: map-get($colors, 'red-ketchup');
+			background: map-get($colors, 'critical-red');
 			color: $color-white;
 			font-size: 14px;
 			height: 14px;
@@ -1254,7 +1283,7 @@ a {
 		position: absolute;
 		left: 10px;
 		top: 13px;
-		color: $color-midnight;
+		color: map-get($colors, 'midnight');
 		pointer-events: none;
 	}
 	&:after {
@@ -1270,7 +1299,7 @@ a {
 	}
 	&.active {
 		input[type=text] {
-			border: 1px solid $color-warm;
+			border: 1px solid map-get($colors, 'stone');
 		}
 		&:after {
 			@include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
@@ -1284,7 +1313,7 @@ a {
 		height: 32px;
 		line-height: 32px;
 		&:focus {
-			border: 1px solid $color-warm;
+			border: 1px solid map-get($colors, 'stone');
 		}
 	}
 	.calendar-icon {
@@ -1306,7 +1335,7 @@ a {
 			position: absolute;
 			display: block;
 		    padding: 5px 12px;
-		    border: 1px solid $color-warm;
+		    border: 1px solid map-get($colors, 'stone');
 		    border-top: none;
 		    background-color: $color-input-fill;
 		    width: 200px;
@@ -1336,7 +1365,7 @@ a {
 						display: inline-block;
 						height: 25px;
 						width: 25px;
-						color: $color-midnight;
+						color: map-get($colors, 'midnight');
 						font-size: 13px;
 						&.fa-angle-left {
 							margin-right: 20px;

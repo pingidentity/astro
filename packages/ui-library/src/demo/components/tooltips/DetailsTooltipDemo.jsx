@@ -13,7 +13,7 @@ var DetailsTooltipDemo = React.createClass({
     _confirm: function () {
         this.setState({
             open: false,
-            confirmed: 'Ok'
+            confirmed: 'Confirmed'
         });
     },
 
@@ -35,20 +35,39 @@ var DetailsTooltipDemo = React.createClass({
         return (
             /* jshint ignore:start */
             <div className="controls">
-                <DetailsTooltip positionStyle="delete-tooltip confirm bottom left" labelStyle="remove-rule icon-delete"
-                        label="Label"
-                        title="Title" open={this.state.open}
-                        onToggle={this._toggleConfirmation}>
-                    <p>Are you sure you want to delete this rule?</p>
+                <DetailsTooltip
+                    positionStyle="bottom right"
+                    labelStyle="my-css-class"
+                    label="Label"
+                    title="Tooltip Title"
+                    open={this.state.open}
+                    onToggle={this._toggleConfirmation}>
+
+                    <p>
+                        Are you sure you want to delete this rule?
+                    </p>
                     <div className="buttons" data-id="delete-confirmation">
-                        <input type="button" data-id="cancel-action" value="Cancel"
-                            className="secondary" onClick={this._cancel}/>
-                        <input type="button" data-id="confirm-action" value="Confirm"
-                            className="primary" onClick={this._confirm}/>
+                        <input
+                            type="button"
+                            data-id="cancel-action"
+                            value="Cancel"
+                            className="secondary"
+                            onClick={this._cancel}/>
+                        <input
+                            type="button"
+                            data-id="confirm-action"
+                            value="Confirm"
+                            className="primary"
+                            onClick={this._confirm}/>
                     </div>
                 </DetailsTooltip>
-                <br/>
-                <p>{this.state.confirmed}</p>
+
+                {this.state.confirmed ? (
+                    <div>
+                        <br/>
+                        {this.state.confirmed}
+                    </div>
+                ):null}
             </div>
             /* jshint ignore:end */
         );

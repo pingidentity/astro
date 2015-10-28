@@ -3,7 +3,7 @@
 	position: relative;
 	display: inline-block;
 	font-family: $input-font-stack;
-	background-color: $color-button-default-fill;
+	background-color: map-get($colors, 'white');
 	text-align: center;
 	vertical-align: middle;
 	cursor: pointer;
@@ -15,11 +15,11 @@
 	}
 }
 @mixin default-button-styles {
-	color: $color-button-default-text;
-	background: $color-button-default-fill;
+	color: map-get($colors, 'slate');
+	background: map-get($colors, 'white');
 
 	&:hover {
-		color: $color-button-default-text;
+		color: map-get($colors, 'slate');
 	}
 }
 
@@ -31,7 +31,7 @@ input[type=button], input[type=submit], .button, button {
 	font-size: 14px;
 	height: $height;
 	line-height: $height;
-	border: 1px solid $color-button-default-border;
+	border: 1px solid map-get($colors, 'rhino');
 
 	@include border-radius(3px);
 	@include base-button-styles;
@@ -42,26 +42,28 @@ input[type=button], input[type=submit], .button, button {
 		border-color: $color-active;
 	}
 	&:focus {
-		border: 1px solid $color-button-default-border;
+		border: 1px solid map-get($colors, 'rhino');
 	}
 	&.primary {
 		background: none;
-		background-color: $color-button-primary-fill;
-		color: $color-button-primary-text;
+		background-color: map-get($colors, 'active-blue');
+		color: map-get($colors, 'white');
 		border: none;
 
 		&:hover {
-			color: $color-button-primary-text;
+			background-color: map-get($colors, 'active-blue-highlighted');
+			color: map-get($colors, 'white');
 		}
 	}
 	&.secondary {
 		background: none;
-		background-color: $color-button-secondary-fill;
-		color: $color-button-secondary-text;
-		border: none;
+		background-color: map-get($colors, 'white');
+		color: map-get($colors, 'slate');
+		border: 1px solid map-get($colors, 'rhino');
 
 		&:hover {
-			color: $color-button-secondary-text;
+			color: map-get($colors, 'active-blue-highlighted');
+			border-color: map-get($colors, 'active-blue-highlighted');
 		}
 	}
 	&.success {
@@ -87,8 +89,8 @@ input[type=button], input[type=submit], .button, button {
 		@include opacity(0.4);
 
 		&:hover {
-			color: $color-button-default-text;
-			border-color: $color-button-default-border;
+			color: map-get($colors, 'slate');
+			border-color: map-get($colors, 'rhino');
 		}
 		&.primary, &.secondary {
 			&:hover {
@@ -97,9 +99,10 @@ input[type=button], input[type=submit], .button, button {
 		}
 		&.primary {
 			&.ellipsis {
-				color: $color-button-primary-fill;
+				color: map-get($colors, 'active-blue');
+
 				&:hover {
-					color: $color-button-primary-fill;
+					color: map-get($colors, 'active-blue');
 				}
 			}
 		}
@@ -197,11 +200,11 @@ input[type=button], input[type=submit], .button, button {
 		font-size: 13px;
 
 		text-transform: none;
-		color: map-get($colors, 'gray-warm-dark');
+		color: map-get($colors, 'slate');
 		margin: 0;
 
 		border-style: solid;
-		border-color: $color-button-default-border;
+		border-color: map-get($colors, 'rhino');
 		border-width: 1px 0 1px 1px;
 
 		cursor: pointer;
@@ -220,7 +223,7 @@ input[type=button], input[type=submit], .button, button {
 		top: 1px;
 		height: $height - 2px;
 		width: $labelWidth;
-		background: map-get($colors, 'gray-ice-light');
+		background: map-get($colors, 'timberwolf');
 		@include transition(left .2s ease-out);
 	}
 

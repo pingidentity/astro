@@ -11,10 +11,10 @@ var HelpHintDemo = React.createClass({
     render: function () {
         return (
              /* jshint ignore:start */
-            <label className="label-text">
-                <p>Demo</p>
-                <HelpHint id="helpHint" hintStyle="short-tooltip" hintText="This option is unavailable"/>
-            </label>
+            <HelpHint
+                id="helpHint"
+                hintStyle="short-tooltip"
+                hintText="This option is unavailable"/>
             /* jshint ignore:end */
         );
     }

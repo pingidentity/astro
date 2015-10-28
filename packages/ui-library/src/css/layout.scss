@@ -63,10 +63,10 @@ $layout-zindex-order: (
 			border: none;
 		}
 		&.warning {
-			background-color: $color-warning;
+			background-color: map-get($colors, 'critical-red');
 
 			input[type=button] {
-				color: $color-warning;
+				color: map-get($colors, 'critical-red');
 			}
 		}
 		&.success {
@@ -77,10 +77,10 @@ $layout-zindex-order: (
 			}
 		}
 		&.notice {
-			background-color: $color-alert;
+			background-color: map-get($colors, 'warning-yellow');
 
 			input[type=button] {
-				color: $color-alert;
+				color: map-get($colors, 'warning-yellow');
 			}
 
 		}
@@ -115,7 +115,7 @@ $layout-zindex-order: (
 	&.reversed {
 		background: transparent;
 		border: none;
-		color: $color-input-alert;
+		color: map-get($colors, 'warning-text');
 	}
 }
 
@@ -127,7 +127,7 @@ $layout-zindex-order: (
 	left: 0;
 	right: 0;
 	height: $layout-header-height;
-	background-color: map-get($colors, 'gray-warm-dark');
+	background-color: map-get($colors, 'walrus');
 
 	a {
 		color: rgba($color-white, 0.3);
@@ -215,7 +215,7 @@ $layout-zindex-order: (
 	$selected-arrow-offset: -(ceil($layout-nav-link-height/3) + $nav-border-width) + 1;
 	$selected-arrow-width-w: ceil($layout-nav-link-height/2) + $selected-border-width;
 	$selected-arrow-width-h: ceil($selected-arrow-width-w/3) - $selected-border-width;
-	$color-nav-border: darken(map-get($colors, 'gray-ice-light'), 5%);
+	$color-nav-border: darken(map-get($colors, 'timberwolf'), 5%);
 
 	z-index: index($layout-zindex-order, 'nav');
 	position: absolute;
@@ -228,7 +228,7 @@ $layout-zindex-order: (
 		z-index: -1;
 		content: '';
 		position: fixed;
-		background-color: map-get($colors, 'gray-ice-light');
+		background-color: map-get($colors, 'timberwolf');
 		top: $layout-header-height;
 		bottom: 0;
 		left: 0;
@@ -238,7 +238,7 @@ $layout-zindex-order: (
 	.title {
 		margin: 30px 0 10px 22px;
 		text-transform: uppercase;
-		color: $color-gray-medium;
+		color: map-get($colors, 'rhino');
 		font-size: 16px;
 		&.narrow {
 			margin-top: 5px;
@@ -291,7 +291,7 @@ $layout-zindex-order: (
 				}
 
 				a {
-					color: map-get($colors, 'gray-warm-dark');
+					color: map-get($colors, 'walrus');
 					background-color: $color-white;
 					cursor: default;
 
@@ -353,16 +353,18 @@ $layout-zindex-order: (
 .submit {
 	width: 100%;
 	clear: both;
-	border-top: 1px solid $color-warm;
+	border-top: 1px solid map-get($colors, 'stone');
 	margin-top: 50px;
 	padding-top: 10px;
 	text-align: right;
+
 	.saving {
 		line-height: 36px;
     	height: 36px;
 		width: 50px;
 		bottom: 30px;
 		right: 27px;
+
 		&.icon-ellipsis {
 			background-image: none;
 		}

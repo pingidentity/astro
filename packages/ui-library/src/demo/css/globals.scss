@@ -13,7 +13,7 @@ $input-font-stack: 'ProximaNovaRegular', $font-fallbacks;
 @font-face { font-family: 'ProximaNovaSemibold'; font-weight: normal; src: url('#{$font-path}ProximaNova-Semibold.otf'); }
 @font-face { font-family: 'ProximaNovaCondRegular'; font-weight: normal; src: url('#{$font-path}ProximaNovaCond-Regular.otf'); }
 
-// MASTER COLOR LIST 
+// MASTER COLOR LIST
 $colors: (
     'white': #fff,
     'cyan-deep': #2996cc,

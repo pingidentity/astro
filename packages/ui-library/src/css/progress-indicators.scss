@@ -10,7 +10,7 @@
 	text-align: center;
 	font-size: 14px;
 	font-weight: 500;
-	color: map-get($colors, 'slate-extra');
+	color: map-get($colors, 'midnight');
 
 	&:before, &:after {
 		font-family: $icon-font;
@@ -21,10 +21,10 @@
 		left: 0;
 	}
 	&:before {
-		color: rgba(map-get($colors, 'slate-extra'), 0.2);
+		color: rgba(map-get($colors, 'midnight'), 0.2);
 	}
 	&:after {
-		color: map-get($colors, 'slate-extra');
+		color: map-get($colors, 'midnight');
 	}
 
 	&.of1, &.of2, &.of3, &.of4, &.of5, &.of6 {
@@ -44,7 +44,7 @@
 					content: '\79';
 					height: $progress-size;
 					width: $progress-size;
-					color: map-get($colors, 'slate-extra');
+					color: map-get($colors, 'midnight');
 					font-size: 12px;
 				}
 			}

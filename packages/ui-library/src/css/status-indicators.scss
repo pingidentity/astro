@@ -12,10 +12,10 @@
         background-color: $color-success;
     }
     &.failure {
-        background-color: $color-warning;
+        background-color: map-get($colors, 'critical-red');
     }
     &.warning {
-        border: 5px solid $color-alert;
+        border: 5px solid map-get($colors, 'warning-yellow');
         height: $meter-height/2;
         width: $meter-height/2;
     }

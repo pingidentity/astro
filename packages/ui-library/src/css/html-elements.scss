@@ -17,12 +17,11 @@ a {
 		text-transform: uppercase;
 	}
 	&:hover {
-		color: $color-link-text-hover;
 		text-decoration: underline;
 	}
 }
 h1, h2, h3, h4, h5 {
-	color: map-get($colors, 'slate-extra');
+	color: map-get($colors, 'midnight');
 }
 h1 {
 	// override color

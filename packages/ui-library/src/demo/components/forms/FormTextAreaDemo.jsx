@@ -23,28 +23,28 @@ var FormTextAreaDemo = React.createClass({
 
         return (
             <div>
-                <div>
+                <div className="input-row">
                     <FormTextArea labelText="Basic" />
                 </div>
-                <div>
+                <div className="input-row">
                     <FormTextArea labelText="Required with placeholder and change callback"
                                   onValueChange={this._changeCallback} placeholder="placeholder" isRequired={true}>
                         <span>{this.state.onChangeFieldValue}</span>
                     </FormTextArea>
                 </div>
-                <div>
+                <div className="input-row">
                     <FormTextArea labelText="With maxLength and defined size" options={options}
                                      cols={10} rows={3} maxLength={25} />
                 </div>
-                <div>
+                <div className="input-row">
                     <FormTextArea labelText="With defaultValue and undo" defaultValue="Lorem ipsum dolor sit amet"
                                   originalValue="Lorem ipsum dolor sit amet" />
                 </div>
-                <div>
-                    <FormTextArea mode="readonly" labelText="Read-only" value="Can't touch this" />
+                <div className="input-row">
+                    <FormTextArea mode="read_only" labelText="Read-only" value="Can't touch this" />
                 </div>
-                <div>
-                    <FormTextArea mode="readonly" labelText="With error message" errorMessage="error!" />
+                <div className="input-row">
+                    <FormTextArea labelText="With error message" errorMessage="error!" />
                 </div>
             </div>
         );

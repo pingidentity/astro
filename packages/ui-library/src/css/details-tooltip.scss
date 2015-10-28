@@ -18,13 +18,14 @@
 	&.alert {
 		&.bottom {
 			.details-content {
-				border-top-color: $color-alert;
+				border-top-color: map-get($colors, 'warning-yellow');
+
 				&:before {
 					width: 0;
 					height: 0;
 					border-top: none;
 					border-right: 10px solid transparent;
-					border-bottom: 10px solid $color-alert;
+					border-bottom: 10px solid map-get($colors, 'warning-yellow');
 					top: -11px;
 				}
 				&:after {
@@ -35,8 +36,8 @@
 		.details-content {
 			padding: 0;
 			.details-title {
-				background-color: $color-alert;
-				color: $color-input-alert;
+				background-color: map-get($colors, 'warning-yellow');
+				color: map-get($colors, 'warning-yellow-text');
 				border-bottom: none;
 
 				&:before {
@@ -49,11 +50,11 @@
 					text-align: center;
 					font-size: 22px;
 					z-index: 1;
-					color: map-get($colors, 'orly');
+					color: map-get($colors, 'warning-text');
 				}
 			}
 			.title {
-				color: map-get($colors, 'orly');
+				color: map-get($colors, 'warning-text');
 				text-align: center;
 				font-weight: 400;
 				font-size: 24px;
@@ -103,7 +104,7 @@
 			padding: 0 17px 5px 0;
 			margin: 0 0 15px 0;
 			text-align: center;
-			border-bottom: 1px solid map-get($colors, 'slate-extra');
+			border-bottom: 1px solid map-get($colors, 'midnight');
 			color: map-get($colors, 'slate');
 			text-transform: none;
 
@@ -117,7 +118,7 @@
 		}
 		.sub-title {
 			font-size: 16px;
-			color: $color-gray-medium;
+			color: map-get($colors, 'rhino');
 			text-decoration: uppercase;
 			padding: 10px 0;
 		}

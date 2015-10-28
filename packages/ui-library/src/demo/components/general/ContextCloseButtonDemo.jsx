@@ -66,14 +66,28 @@ var ContextCloseButtonDemo = React.createClass({
     render: function () {
         return (
             <div>
-                <ContextCloseButton onClick={this._clickCallback}
-                                    value="ContextCloseButton with no context" /><br />
-                <ContextComponent clickCallback={this._clickCallback} closeCallback={this._closeCallback}
-                                  value="ContextCloseButton with context" /><br />
-                <ContextComponent clickCallback={this._clickCallbackFalse} closeCallback={this._closeCallback}
-                                  value="ContextCloseButton with close prevented by onClick" /><br />
-                <ContextCloseButton disabled={true}
-                                    value="Disabled ContextCloseButton" /><br /><br />
+                <div className="input-row">
+                    <ContextCloseButton
+                        onClick={this._clickCallback}
+                        value="ContextCloseButton with no context" />
+                </div>
+                <div className="input-row">
+                    <ContextComponent
+                        clickCallback={this._clickCallback}
+                        closeCallback={this._closeCallback}
+                        value="ContextCloseButton with context" />
+                </div>
+                <div className="input-row">
+                    <ContextComponent
+                        clickCallback={this._clickCallbackFalse}
+                        closeCallback={this._closeCallback}
+                        value="ContextCloseButton with close prevented by onClick" />
+                </div>
+                <div className="input-row">
+                    <ContextCloseButton
+                        disabled={true}
+                        value="Disabled ContextCloseButton" />
+                </div>
                 {this.state.clickCallbackCalled
                     ? <div id="clickCallback">
                         <span>click callback called</span>

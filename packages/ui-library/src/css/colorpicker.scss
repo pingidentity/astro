@@ -17,7 +17,7 @@ $sliderPointerHeight: $sliderWidth / 4;
 
 .input-color-picker {
     margin-bottom: 10px;
-    
+
     // add later as variable
     &.inline {
         position: relative;
@@ -32,7 +32,7 @@ $sliderPointerHeight: $sliderWidth / 4;
         border: 1px solid $color-input-fill;
         cursor: pointer;
         @include border-radius(4px);
-        
+
         .colors-swatch {
             position: absolute;
             vertical-align: middle;
@@ -82,7 +82,7 @@ $sliderPointerHeight: $sliderWidth / 4;
             pointer-events: none;
         }
         &.colors-focus {
-            border: 1px solid $color-warm;
+            border: 1px solid map-get($colors, 'stone');
             border-bottom: none;
             &:after {
                 @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
@@ -156,7 +156,7 @@ $sliderPointerHeight: $sliderWidth / 4;
         .slider {
             position: absolute;
             user-select: none;
-            
+
             &.vertical {
                 top: 0;
                 bottom: 0;
@@ -170,7 +170,7 @@ $sliderPointerHeight: $sliderWidth / 4;
                     width: 100%;
                 }
             }
-            
+
             .track {
                 background: #888;
             }

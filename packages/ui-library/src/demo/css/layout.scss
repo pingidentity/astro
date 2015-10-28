@@ -157,11 +157,6 @@ $sidenav-lineheight: 22px;
 					}
 				}
 			}
-			&:first-of-type {
-				a {
-					opacity: 0.5;
-				}
-			}
             ul.sub-menu {
 				margin: 0 0 7px 0;
                 li {
@@ -262,10 +257,10 @@ $sidenav-lineheight: 22px;
 			content: 'OUTPUT';
 		}
 	}
-	input[type=text], input[type=password], textarea {
-		width: 340px;
-	}
-	textarea {
-		height: 100px;
-	}
+}
+input[type=text], input[type=password], textarea {
+	width: 340px;
+}
+textarea {
+	height: 100px;
 }

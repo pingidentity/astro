@@ -96,7 +96,7 @@ var FormRadioGroup = React.createClass({
                             type="radio"
                             name={self.props.groupName}
                             value={item.id}
-                            checked={item.id === self.props.selected}
+                            checked={String(item.id) === String(self.props.selected)}
                             onChange={onChange}/>
                         <div className="circle"></div>
                         {item.name}
