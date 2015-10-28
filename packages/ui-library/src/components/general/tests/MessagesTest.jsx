@@ -36,6 +36,7 @@ describe('Messages', function () {
 
         var messages = ReactTestUtils.scryRenderedDOMComponentsWithClass(messagesComponent, 'message');
         expect(messages.length).toEqual(1);
+        expect(messages[0].getDOMNode().textContent).toEqual('Test message text');
     });
     
     it('Render multiple messages', function () {
@@ -76,6 +77,132 @@ describe('Messages', function () {
         ReactTestUtils.Simulate.click(closeLink,{});
 
         expect(removeMessage).toBeCalledWith(0);
+    });
+
+    it('Render single message with default i18n function', function () {
+        var messageList = [
+                { key: 'Test message text' }
+        ];
+        
+        var messagesComponent = ReactTestUtils.renderIntoDocument(
+            /* jshint ignore:start */
+            <Messages messages={messageList} />
+            /* jshint ignore:end */
+        );
+
+        var messages = ReactTestUtils.scryRenderedDOMComponentsWithClass(messagesComponent, 'message');
+        expect(messages.length).toEqual(1);
+        expect(messages[0].getDOMNode().textContent).toEqual('Test message text');
+    });
+
+    it('Render single message with custom interval', function () {
+        var messageList = [
+                { key: 'Test message text', duration: 5000 }
+        ];
+        
+        var messagesComponent = ReactTestUtils.renderIntoDocument(
+            /* jshint ignore:start */
+            <Messages messages={messageList} />
+            /* jshint ignore:end */
+        );
+
+        var messages = ReactTestUtils.scryRenderedDOMComponentsWithClass(messagesComponent, 'message');
+        expect(messages.length).toEqual(1);
+        expect(global.setInterval.mock.calls[0][1]).toBe(5000);
+    });
+
+    it('Test unmount clears timers', function () {
+        var messageList = [
+                { key: 'Test message text', duration: 5000 }
+        ];
+        
+        var Wrapper = React.createClass({
+            getInitialState: function () {
+                return { renderChildren: true };
+            },
+
+            renderChildren: function (renderChildren) {
+                this.setState({ renderChildren: !!renderChildren });
+            },
+
+            render: function () {
+                if (this.state.renderChildren) {
+                    return this.props.children;
+                } else {
+                    return null;
+                }
+            }
+
+        });
+
+        var component = ReactTestUtils.renderIntoDocument(
+            <Wrapper>
+                <Messages messages={messageList} />
+            </Wrapper>
+        );
+
+        expect(global.clearInterval.mock.calls.length).toBe(0);
+
+        component.renderChildren(false);
+
+        expect(global.clearInterval.mock.calls.length).toBe(1);
+    });
+
+    it('Test unmount with no timer', function () {
+        var messageList = [
+                { key: 'Test message text' }
+        ];
+        
+        var Wrapper = React.createClass({
+            getInitialState: function () {
+                return { renderChildren: true };
+            },
+
+            renderChildren: function (renderChildren) {
+                this.setState({ renderChildren: !!renderChildren });
+            },
+
+            render: function () {
+                if (this.state.renderChildren) {
+                    return this.props.children;
+                } else {
+                    return null;
+                }
+            }
+
+        });
+
+        var component = ReactTestUtils.renderIntoDocument(
+            <Wrapper>
+                <Messages messages={messageList} />
+            </Wrapper>
+        );
+
+        expect(global.clearInterval.mock.calls.length).toBe(0);
+
+        component.renderChildren(false);
+
+        expect(global.clearInterval.mock.calls.length).toBe(0);
+    });
+
+    it('Render html message', function () {
+        var messageList = [
+                { text: 'Test message text <span id="testSpan">html</span>', isHtml: true }
+        ];
+        
+        var messagesComponent = ReactTestUtils.renderIntoDocument(
+            /* jshint ignore:start */
+            <Messages messages={messageList} />
+            /* jshint ignore:end */
+        );
+
+        var messages = ReactTestUtils.scryRenderedDOMComponentsWithClass(messagesComponent, 'message');
+        expect(messages.length).toEqual(1);
+
+        // Ensure html tags are not included as text content (which is what would happen if html
+        // was being rendered as text).
+        expect(messages[0].getDOMNode().textContent).toEqual('Test message text html');
+
     });
 
 });

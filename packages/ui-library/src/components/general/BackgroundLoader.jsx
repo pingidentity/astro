@@ -198,23 +198,28 @@ var BackgroundLoader = React.createClass({
      *
      */
     initHidden: function () {
+        var hidden = null;
+
         // Standards:
         if ('hidden' in document) {
             document.addEventListener('visibilitychange', this.changeHidden);
-            this.setState({ hidden: 'hidden' });
+            hidden = 'hidden';
         }
         else if ('mozHidden' in document) {
             document.addEventListener('mozvisibilitychange', this.changeHidden);
-            this.setState({ hidden: 'mozHidden' });
+            hidden = 'mozHidden';
         }
         else if ('webkitHidden' in document) {
             document.addEventListener('webkitvisibilitychange', this.changeHidden);
-            this.setState({ hidden: 'webkitHidden' });
+            hidden = 'webkitHidden';
         }
         else if ('msHidden' in document) {
             document.addEventListener('msvisibilitychange', this.changeHidden);
-            this.setState({ hidden: 'msHidden' });
+            hidden = 'msHidden';
         }
+
+        this.setState({ hidden: hidden });
+
         // IE 9 and lower and All others:
         document.onfocusin =
                 document.onfocusout =
@@ -226,12 +231,11 @@ var BackgroundLoader = React.createClass({
 
         // set the initial state (but only if browser supports the Page
         // Visibility API)
-        if (document[this.state.hidden] !== undefined) {
-            this.changeHidden({ type: document[this.state.hidden] ? 'blur' : 'focus' });
+        if (hidden !== null && document[hidden] !== undefined) {
+            this.changeHidden({ type: document[hidden] ? 'blur' : 'focus' });
         }
     },
-    
-    
+
     render: function () {
         
         var content;
