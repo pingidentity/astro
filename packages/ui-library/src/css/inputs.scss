@@ -1227,7 +1227,7 @@ a {
 .checkbox-list {
 	padding: 10px 5px 10px 0;
 	margin-left: 0;
-	border: 1px solid $color-section-border;
+	border: 1px solid map-get($colors, 'elderly');
 	.options {
 		width: 99%;
 		height: 133px;
@@ -1272,30 +1272,27 @@ a {
 
 .input-calendar {
 	display: inline-block;
+	position: relative;
 	font-family: $font-stack;
 	margin-bottom: 7px;
 	height: 34px;
 
-	&:before {
+	&:before, &:after {
 		font-family: $icon-font;
 		font-size: 14px;
 		text-transform: none;
 		position: absolute;
-		left: 10px;
-		top: 13px;
 		color: map-get($colors, 'midnight');
-		pointer-events: none;
+		cursor: pointer;
+	}
+	&:before {
+		left: 10px;
+		top: 10px;
 	}
 	&:after {
 		content: "v";
-		font-family: "iconfont";
-		font-size: 14px;
-		text-transform: none;
-		position: absolute;
 		left: 190px;
-		top: 14px;
-		color: $color-input-text;
-		pointer-events: none;
+		top: 11px;
 	}
 	&.active {
 		input[type=text] {
@@ -1322,9 +1319,6 @@ a {
 	    height: 27px;
 	    line-height: 27px;
 	}
-	&.icon-calendar {
-		background-image: none;		// override bootstrap
-	}
 
 	// display
 	.input-calendar-wrapper {
@@ -1341,6 +1335,7 @@ a {
 		    width: 200px;
 		    text-align: center;
 		    left: 0;
+			top: 32px;
 		    -webkit-touch-callout: none;
 		    z-index: 2;
 
@@ -1361,19 +1356,20 @@ a {
 				}
 				.icon {
 					display: inline-block;
+
 					.fa {
 						display: inline-block;
 						height: 25px;
 						width: 25px;
 						color: map-get($colors, 'midnight');
 						font-size: 13px;
+						cursor: pointer;
+
 						&.fa-angle-left {
 							margin-right: 20px;
-							background-image: none;		// override bootstrap
 						}
 						&.fa-angle-right {
 							margin-left: 20px;
-							background-image: none;		// override bootstrap
 						}
 					}
 				}
@@ -1427,12 +1423,23 @@ a {
 			    &.hover {
 			    	color: $color-input-text;
 			    }
-			    &.current {
-			    	background: $color-input-text;
-				    color: $color-white;
+			    &.current, &:hover {
 					@include opacity(.8);
-					@include border-radius(4px);
+					@include border-radius(3px);
 			    }
+				&.current {
+					color: $color-white;
+					background: $color-input-text;
+				}
+				&:hover {
+					background: transparentize($color-input-text, 0.85);
+				}
+				&.title {
+					&:hover {
+						@include opacity(1);
+						background: transparent;
+					}
+				}
 			}
 		}
 	}
