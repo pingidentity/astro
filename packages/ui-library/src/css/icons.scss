@@ -25,66 +25,184 @@ $font-path: '/src/fonts/icons/';
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-key:before {
-	content: "\4b";
+.icon-plus-rounded:before {
+	content: "\2a";
 }
-.icon-cabinet:before {
-	content: "\24";
+.icon-badge:before {
+	content: "\62";
 }
-.icon-directory:before {
-	content: "\3d";
+.icon-circle-o:before {
+	content: "\4f";
 }
-.icon-left:before {
-	content: "\3c";
+.icon-circle:before {
+	content: "\2e";
 }
-.icon-right:before {
-	content: "\3e";
+.icon-directory-hollow:before {
+	content: "\23";
 }
-.icon-wand:before {
-	content: "\57";
+.icon-filter:before {
+	content: "\66";
 }
-.icon-calendar:before {
-	content: "\43";
+.icon-globe:before {
+	content: "\a1";
 }
-.icon-pin:before {
-	content: "\4e";
+.icon-help-rounded:before {
+	content: "\48";
 }
-.icon-grip:before {
-	content: "\47";
+.icon-info:before {
+	content: "\49";
 }
-.icon-download:before {
-	content: "\44";
+.icon-lock:before {
+	content: "\4c";
 }
-.icon-admin-account:before {
-	content: "\74";
+.icon-network:before {
+	content: "\25";
 }
-.icon-view:before {
-	content: "\56";
+.icon-puzzle:before {
+	content: "\7a";
+}
+.icon-minus-rounded:before {
+	content: "\5f";
+}
+.icon-slider:before {
+	content: "\7e";
+}
+.icon-spin-down:before {
+	content: "\30";
+}
+.icon-spin-up:before {
+	content: "\31";
+}
+.icon-thumb:before {
+	content: "\54";
+}
+.icon-view-hidden:before {
+	content: "\2f";
+}
+.icon-walkthrough:before {
+	content: "\4d";
 }
 .icon-alert:before {
 	content: "\21";
 }
-.icon-undo:before {
-	content: "\6e";
-}
-.icon-resend:before {
-	content: "\72";
-}
-.icon-approve:before {
-	content: "\70";
-}
-.icon-minus:before {
-	content: "\2d";
+.icon-cabinet:before {
+	content: "\24";
 }
 .icon-plus:before {
 	content: "\2b";
 }
+.icon-minus:before {
+	content: "\2d";
+}
+.icon-left:before {
+	content: "\3c";
+}
+.icon-directory:before {
+	content: "\3d";
+}
+.icon-right:before {
+	content: "\3e";
+}
+.icon-calendar:before {
+	content: "\43";
+}
+.icon-download:before {
+	content: "\44";
+}
+.icon-expand:before {
+	content: "\45";
+}
+.icon-grip:before {
+	content: "\47";
+}
+.icon-key:before {
+	content: "\4b";
+}
+.icon-pin:before {
+	content: "\4e";
+}
 .icon-spinner:before {
 	content: "\50";
+}
+.icon-settings:before {
+	content: "\53";
+}
+.icon-users:before {
+	content: "\55";
+}
+.icon-view:before {
+	content: "\56";
+}
+.icon-wand:before {
+	content: "\57";
+}
+.icon-clear:before {
+	content: "\58";
+}
+.icon-close-arrow:before {
+	content: "\5e";
+}
+.icon-account:before {
+	content: "\61";
+}
+.icon-collapse:before {
+	content: "\63";
+}
+.icon-delete:before {
+	content: "\64";
+}
+.icon-edit:before {
+	content: "\65";
+}
+.icon-cog:before {
+	content: "\67";
+}
+.icon-help:before {
+	content: "\68";
 }
 .icon-image:before {
 	content: "\69";
 }
+.icon-apps:before {
+	content: "\6c";
+}
+.icon-menu:before {
+	content: "\6d";
+}
+.icon-undo:before {
+	content: "\6e";
+}
+.icon-overview:before {
+	content: "\6f";
+}
+.icon-approve:before {
+	content: "\70";
+}
+.icon-support:before {
+	content: "\71";
+}
+.icon-resend:before {
+	content: "\72";
+}
+.icon-search:before {
+	content: "\73";
+}
+.icon-admin-account:before {
+	content: "\74";
+}
+.icon-user:before {
+	content: "\75";
+}
+.icon-dropdown-arrow:before {
+	content: "\76";
+}
+.icon-welcome:before {
+	content: "\77";
+}
+.icon-close:before {
+	content: "\78";
+}
+
 .icon-progress-2-1:before {
 	content: "\d0";
 }
@@ -145,71 +263,23 @@ $font-path: '/src/fonts/icons/';
 .icon-progress-6-6:before {
 	content: "\e3";
 }
-.icon-clear:before {
-	content: "\58";
+.icon-uniE600:before {
+	content: "\e600";
 }
-.icon-expand:before {
-	content: "\45";
+.icon-uniE601:before {
+	content: "\e601";
 }
-.icon-settings:before {
-	content: "\53";
-}
-.icon-users:before {
-	content: "\55";
-}
-.icon-account:before {
-	content: "\61";
-}
-.icon-collapse:before {
-	content: "\63";
-}
-.icon-delete:before {
-	content: "\64";
-}
-.icon-edit:before {
-	content: "\65";
-}
-.icon-cog:before {
-	content: "\67";
-}
-.icon-help:before {
-	content: "\68";
-}
-.icon-apps:before {
-	content: "\6c";
-}
-.icon-menu:before {
-	content: "\6d";
-}
-.icon-overview:before {
-	content: "\6f";
-}
-.icon-support:before {
-	content: "\71";
-}
-.icon-search:before {
-	content: "\73";
-}
-.icon-user:before {
-	content: "\75";
-}
-.icon-close-arrow:before {
-	content: "\5e";
-}
-.icon-dropdown-arrow:before {
-	content: "\76";
-}
-.icon-welcome:before {
-	content: "\77";
-}
-.icon-close:before {
-	content: "\78";
+.icon-uniE602:before {
+	content: "\e602";
 }
 .icon-success, .icon-check {
 	&:before {
 		content: "\79";
 	}
 }
+
+
+
 
 .icon-ellipsis {
 	color: $color-white;
