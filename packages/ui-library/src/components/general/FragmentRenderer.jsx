@@ -45,7 +45,9 @@ var FragmentRenderer = React.createClass({
     },
 
     /**
-     * event handler for determining if iterations should be incremented
+     * @method FragmentRenderer#_onScroll
+     * @private
+     * @desc event handler for determining if iterations should be incremented
      * @param {object} e The event object
      * @returns {undefined}
      */
@@ -58,7 +60,8 @@ var FragmentRenderer = React.createClass({
     },
 
     /**
-     * resets the amount of fragment iterations
+     * @method FragmentRenderer#reset
+     * @desc resets the amount of fragment iterations
      * @returns {undefined}
      */
     reset: function () {
@@ -75,11 +78,9 @@ var FragmentRenderer = React.createClass({
         var fragments = this.props.items.slice(0, this.props.limit * this.state.iterations);
 
         return (
-            /* jshint ignore:start */
             <div data-id="fragmentRenderContainer" onScroll={this._onScroll} className={this.props.classNames}>
                 {fragments}
             </div>
-            /* jshint ignore:end */
         );
     }
 });

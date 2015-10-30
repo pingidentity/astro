@@ -19,7 +19,7 @@ var css = require('classnames');
  * @param {function} [modalBody] Alternative modal body content.  If provided then this function
  *  will be called if the ModalButton element has no children.  This is necessary to setup
  *  correct context for modals that wish to close the modal using a button within the modal body.
- * @param {function || object} [linkContent] Alternative content / button to trigger the modal to render instead
+ * @param {function | object} [linkContent] Alternative content / button to trigger the modal to render instead
  *  of the default button.  Content rendered within a span tag whose onClick event will trigger the modal.
  *  If this is a function, then the function will be called to render the content, otherwise the content
  *  is rendered as is.

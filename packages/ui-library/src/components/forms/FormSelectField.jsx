@@ -73,8 +73,9 @@ var FormSelectField = React.createClass({
     },
 
     /**
-     * Handle a change of the selected value.
-     *
+     * @desc Handle a change of the selected value.
+     * @method FormSelectField#handleChange
+     * @private
      * @param {object} e the event object
      * @returns {undefined}
      */

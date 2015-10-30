@@ -20,10 +20,10 @@ var React = require('react/addons');
  * and the timers will be cancelled.
  *
  * @param {function} load The method to load data
- * @param {function || object} loading The content to display when loading
+ * @param {function | object} loading The content to display when loading
  * @param {boolean} loaded Set to true if the content has been loaded and loading requests
  *  should cease.
- * @param {number || function} interval The time in ms between load calls.
+ * @param {number | function} interval The time in ms between load calls.
  *
  * @example
  * Usage:
