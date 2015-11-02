@@ -1444,3 +1444,119 @@ a {
 		}
 	}
 }
+
+fieldset {
+    margin: 0 0 25px 0;
+
+    legend {
+        .help-tooltip {
+            margin: 0 5px 0 10px;
+            height: 14px;
+            height: 18px;
+            width: 18px;
+            vertical-align: text-bottom;
+        }
+        label {
+        	margin-right: 5px;
+        }
+    }
+    &.focused {
+        border: 1px solid map-get($colors, 'dolphin');
+        padding: 20px 25px 30px 25px;
+        @include border-radius(5px);
+
+        legend {
+            padding: 0 7px;
+            margin: 0 0 0 -7px;
+            font-size: 14px;
+            color: map-get($colors, 'elephant');
+            text-transform: uppercase;
+
+            .input-radio {
+                &:last-of-type {
+                    margin-right: 0;
+                }
+            }
+        }
+        &.narrow {
+            width: 500px;
+        }
+    }
+    &.unfocused {
+        padding: 0 0 0 25px;
+    }
+    .subset {
+        margin: 0 0 0 25px;
+        label {
+            text-transform: none;
+        }
+    }
+}
+
+input[type=file] {
+    line-height: 1em;
+}
+
+.inline-input-labels {
+    > label {
+        display: table-row;
+
+        &:before {
+            content: none !important;
+        }
+        .label-text, .input-container {
+            display: table-cell;
+            vertical-align: middle;
+            border-bottom: 15px solid transparent;
+        }
+        .label-text {
+            padding: 0 15px 0 0;;
+        }
+        .input-container {
+            display: table-cell;
+            padding: 0;
+        }
+        input, textarea {
+            margin: 0;
+        }
+        &.input-text {
+            &.required {
+                .input-container {
+                    &:before {
+                        top: 5px;
+                        bottom: 5px;
+                    }
+                    &:after {
+                        top: 10px;
+                    }
+                }
+            }
+        }
+        &.input-select {
+            .input-container {
+                margin: 0;
+
+                select {
+                    margin: 0;
+                }
+            }
+        }
+        &.input-checkbox {
+            input {
+                display: none;
+            }
+            .label-text {
+                height: 25px;
+            }
+            .icon {
+                display: table-cell;
+                position: relative;
+
+                &:after {
+                    bottom: auto;
+                      top: 5px;
+                }
+            }
+        }
+    }
+}
