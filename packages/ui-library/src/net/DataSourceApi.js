@@ -229,7 +229,7 @@ var DataSourceApi = {
      * @param {Object.<string, string>} params the request parameters as an associative array
      * @param {function(Object.<string, *>)} callback the callback function, it will be called with an object of this type:
      * {error: string, status: number, data: Object, headers: Object.<string, string>, fromCache: boolean}
-     * @param {Object.<string, string>} headers request headers as an associative array
+     * @param {Object.<string, string>} [headers] request headers as an associative array
      * @return {undefined}
      */
     get: function (endpoint, params, callback, headers) {
@@ -255,7 +255,7 @@ var DataSourceApi = {
      * @param {Object.<string, string>} params the request parameters as an associative array
      * @param {function(Object.<string, *>)} callback the callback function, it will be called with an object of this type:
      * {error: string, status: number, data: Object, headers: Object.<string, string>, fromCache: boolean}
-     * @param {Object.<string, string>} headers request headers as an associative array
+     * @param {Object.<string, string>} [headers] request headers as an associative array
      * @return {undefined}
      */
     getNoCache: function (endpoint, params, callback, headers) {
@@ -281,8 +281,8 @@ var DataSourceApi = {
      * @param {Object.<string, string>} params the request parameters as an associative array
      * @param {function(Object.<string, *>)} callback the callback function, it will be called with an object of this type:
      * {error: string, status: number, data: Object, headers: Object.<string, string>, fromCache: boolean}
-     * @param {Object.<string, Object>} files the files to be attached to the request, as an associative array
-     * @param {Object.<string, string>} headers request headers as an associative array
+     * @param {Object.<string, Object>} [files] the files to be attached to the request, as an associative array
+     * @param {Object.<string, string>} [headers] request headers as an associative array
      * @return {undefined}
      */
     post: function (endpoint, data, params, callback, files, headers) {
@@ -310,7 +310,7 @@ var DataSourceApi = {
      * @param {Object.<string, string>} params the request parameters as an associative array
      * @param {function(Object.<string, *>)} callback the callback function, it will be called with an object of this type:
      * {error: string, status: number, data: Object, headers: Object.<string, string>, fromCache: boolean}
-     * @param {Object.<string, string>} headers request headers as an associative array
+     * @param {Object.<string, string>} [headers] request headers as an associative array
      * @return {undefined}
      */
     put: function (endpoint, data, params, callback, headers) {
@@ -336,7 +336,7 @@ var DataSourceApi = {
      * @param {Object.<string, string>} params the request parameters as an associative array
      * @param {function(Object.<string, *>)} callback the callback function, it will be called with an object of this type:
      * {error: string, status: number, data: Object, headers: Object.<string, string>, fromCache: boolean}
-     * @param {Object.<string, string>} headers request headers as an associative array
+     * @param {Object.<string, string>} [headers] request headers as an associative array
      * @return {undefined}
      */
     doDelete: function (endpoint, params, callback, headers) {
