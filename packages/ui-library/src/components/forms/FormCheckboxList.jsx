@@ -313,7 +313,7 @@ var FormCheckboxList = React.createClass({
 
     render: function () {
         var selectAllLabel = this.props.labelSelectAll ? this.props.labelSelectAll : this.props.labelDeselectAll,
-            containerCss;
+            containerCss = {};
 
         var items = this.props.useFragmentRendering ? (
             /* jshint ignore:start */

@@ -2,9 +2,6 @@ window.__DEV__ = true;
 
 jest.dontMock('../../../testutil/TestUtils');
 jest.dontMock('../Calendar.jsx');
-jest.dontMock('moment-range');
-jest.dontMock('underscore');
-
 
 describe('Calendar', function () {
     var React = require('react/addons'),
@@ -29,6 +26,6 @@ describe('Calendar', function () {
         );
 
         var input = ReactTestUtils.findRenderedDOMComponentWithTag(component, 'input');
-        expect(input.value).toBe(selectedDate);
+        expect(input.getDOMNode().value).toBe(selectedDate.format('YYYY-MM-DD'));
     });
 });
