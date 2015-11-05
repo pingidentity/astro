@@ -109,7 +109,7 @@ input[type=text], input[type=password], textarea {
 	}
 	&[readonly], &[readonly="readonly"], &[disabled] {
 		resize: none !important;
-	}padding: 10px 34px 10px 10px;
+	}
 }
 textarea {
 	overflow: auto;
@@ -305,7 +305,6 @@ label {
 				width: 75px;
 			}
 			.input-container {
-				width: 80px;
 				&:after {
 					top: 7px;
 					right: -25px;
