@@ -32,10 +32,13 @@ var DropDownButton = React.createClass({
     /**
      * Toggle the menu
      *
+     * @param {object} e - the event
      * @returns {undefined}
      * @private
      */
-    _toggle: function () {
+    _toggle: function (e) {
+        e.stopPropagation();
+
         this.setState({ open: !this.state.open });
     },
 
@@ -94,7 +97,7 @@ var DropDownButton = React.createClass({
 
                 return (
                     /* jshint ignore:start */
-                    <a onClick={_.partial(that._onOptionSelected, key)} key={key}>{value}</a>
+                    <a data-id={key} onClick={_.partial(that._onOptionSelected, key)} key={key}>{value}</a>
                     /* jshint ignore:end */
                 );
             });
@@ -114,7 +117,7 @@ var DropDownButton = React.createClass({
         return (
             /* jshint ignore:start */
             <div className={styles} data-id={this.props.id}>
-                <a className="add button inline" onClick={this._toggle}>{this.props.label}</a>
+                <a data-id="action" className="add button inline" onClick={this._toggle}>{this.props.label}</a>
                 {content}
             </div>
             /* jshint ignore:end */

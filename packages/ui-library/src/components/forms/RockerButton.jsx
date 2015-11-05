@@ -72,7 +72,7 @@ var RockerButton = React.createClass({
 
                     return (
                         /* jshint ignore:start */
-                        <label onClick={onChange} key={key}>{key}</label>
+                        <label data-id={key} onClick={onChange} key={key}>{key}</label>
                         /* jshint ignore:end */
                     );
                 }),
