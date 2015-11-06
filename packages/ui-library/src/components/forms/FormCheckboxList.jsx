@@ -1,7 +1,7 @@
 var React = require('react/addons'),
     css = require('classnames'),
     FormTextField = require('./FormTextField.jsx'),
-    FragmentRenderer = require('../general/FragmentRenderer.jsx'),
+    LazyLoader = require('../general/LazyLoader.jsx'),
     Toggle = require('./Toggle.jsx'),
     _ = require('underscore');
 
@@ -110,7 +110,7 @@ var FormCheckboxList = React.createClass({
         labelHideUnselected: React.PropTypes.string.isRequired,
         labelSearchPlaceholder: React.PropTypes.string.isRequired,
         selected: React.PropTypes.array,
-        useFragmentRendering: React.PropTypes.bool
+        useLazyLoader: React.PropTypes.bool
     },
 
     _toggleCheckedAll: function (e) {
@@ -307,9 +307,9 @@ var FormCheckboxList = React.createClass({
         }
 
         /* jshint ignore:start */
-        var items = this.props.useFragmentRendering
+        var items = this.props.useLazyLoader
             ? (
-                <FragmentRenderer items={this._getCheckboxNodes()} limit={100} classNames="options" />
+                <LazyLoader items={this._getCheckboxNodes()} limit={100} classNames="options" />
             )
             : (
                 <div className="options">

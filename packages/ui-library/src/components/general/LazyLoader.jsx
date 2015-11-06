@@ -2,7 +2,7 @@
 
 var React = require('react');
 /**
- * @class FragmentRenderer
+ * @class LazyLoader
  * @description Renders a limited amount of items initially and doubles the rendered items each time scrolling reaches
  *     the bottom.  Note: the container requires CSS rules for height and overflow.
  *
@@ -13,7 +13,7 @@ var React = require('react');
  *         { id: "value", name: "value", group: "group name" },
  *         ...
  *     ]
- * @param {...number} limit - the maxium number of records to return with each fragment/chunk
+ * @param {...number} limit - the maxium number of records to return with each fragment
 
 
 
@@ -30,14 +30,14 @@ var React = require('react');
  *     ...
  *         render: function () {
  *             return (
- *                 <FragmentRenderer items={this.props.items}
- *                                   limit={100}
- *                                   classNames="multi-row-container" />
+ *                 <LazyLoader items={this.props.items}
+ *                             limit={100}
+ *                             classNames="multi-row-container" />
  *             );
  *         }
  *     ...
  */
-var FragmentRenderer = React.createClass({
+var LazyLoader = React.createClass({
     propTypes: {
         items: React.PropTypes.array.isRequired,
         limit: React.PropTypes.number.isRequired,
@@ -45,7 +45,7 @@ var FragmentRenderer = React.createClass({
     },
 
     /**
-     * @method FragmentRenderer#_onScroll
+     * @method LazyLoader#_onScroll
      * @private
      * @desc event handler for determining if iterations should be incremented
      * @param {object} e The event object
@@ -60,7 +60,7 @@ var FragmentRenderer = React.createClass({
     },
 
     /**
-     * @method FragmentRenderer#reset
+     * @method LazyLoader#reset
      * @desc resets the amount of fragment iterations
      * @returns {undefined}
      */
@@ -78,11 +78,11 @@ var FragmentRenderer = React.createClass({
         var fragments = this.props.items.slice(0, this.props.limit * this.state.iterations);
 
         return (
-            <div data-id="fragmentRenderContainer" onScroll={this._onScroll} className={this.props.classNames}>
+            <div data-id="lazyLoaderContainer" onScroll={this._onScroll} className={this.props.classNames}>
                 {fragments}
             </div>
         );
     }
 });
 
-module.exports = FragmentRenderer;
+module.exports = LazyLoader;

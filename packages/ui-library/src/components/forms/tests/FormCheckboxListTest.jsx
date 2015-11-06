@@ -5,7 +5,7 @@ jest.dontMock('../FormTextField.jsx');
 jest.dontMock('../Toggle.jsx');
 
 jest.dontMock('../FormCheckboxList.jsx');
-jest.dontMock('../../general/FragmentRenderer.jsx');
+jest.dontMock('../../general/LazyLoader.jsx');
 
 jest.dontMock('underscore');
 
