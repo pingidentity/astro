@@ -1,9 +1,9 @@
-var React = require('react/addons'),
-    css = require('classnames'),
-    FormTextField = require('./FormTextField.jsx'),
-    LazyLoader = require('../general/LazyLoader.jsx'),
-    Toggle = require('./Toggle.jsx'),
-    _ = require('underscore');
+var React = require("react/addons"),
+    css = require("classnames"),
+    FormTextField = require("./FormTextField.jsx"),
+    LazyLoader = require("../general/LazyLoader.jsx"),
+    Toggle = require("./Toggle.jsx"),
+    _ = require("underscore");
 
 /**
  * @class FormCheckboxList
@@ -117,7 +117,7 @@ var FormCheckboxList = React.createClass({
         var updatedSelectionList = this.props.selected;
         // if all dataobjects were already checked, we need to reset the selection list,
         // otherwise we rebuild the selection list with all dataobject ids included
-        var dataList = this.state.query !== '' ? this.state.filteredItems : this.props.items;
+        var dataList = this.state.query !== "" ? this.state.filteredItems : this.props.items;
 
         // apply the check all/uncheck all functionality based on the current state of the checkall variable
         // checkall gets reset whenever the filter has changed or if checkall/uncheckall has been clicked
@@ -180,7 +180,7 @@ var FormCheckboxList = React.createClass({
     _clearSearch: function () {
         this.setState({
             checkAll: true,
-            query: '',
+            query: "",
             filteredItems: []
         });
     },
@@ -203,7 +203,7 @@ var FormCheckboxList = React.createClass({
 
     _getCheckboxNodes: function () {
         var self = this;
-        var dataList = this.state.query !== '' ? this.state.filteredItems : this.props.items;
+        var dataList = this.state.query !== "" ? this.state.filteredItems : this.props.items;
         var groupNameComparison = null;
 
         var hasMultipleGroups = this._checkMultipleGroups(this.props.items);
@@ -211,7 +211,7 @@ var FormCheckboxList = React.createClass({
         // Sort the list by the group property if we have multiple groups
         if (hasMultipleGroups) {
             dataList = _.sortBy(dataList, function (item) {
-                return item.group === null ? '' : item.group.toLowerCase();
+                return item.group === null ? "" : item.group.toLowerCase();
             });
         }
 
@@ -233,7 +233,7 @@ var FormCheckboxList = React.createClass({
                     // item in the loop
                     if (item.group !== null && item.group !== groupNameComparison) {
                         var setSearchClick = _.partial(self._setSearch, item.group);
-                        var dataIdLabel = 'data-label-' + item.group;
+                        var dataIdLabel = "data-label-" + item.group;
                         divider = (
                             /* jshint ignore:start */
                             <div data-id={dataIdLabel} className="item-head"
@@ -287,7 +287,7 @@ var FormCheckboxList = React.createClass({
     getInitialState: function () {
         return {
             selection: this.props.selected || [],
-            query: '',
+            query: "",
             checkAll: true,
             hideUnchecked: false,
             filteredItems: []
@@ -295,7 +295,7 @@ var FormCheckboxList = React.createClass({
     },
 
     render: function () {
-        var dataList = this.state.query !== '' ? this.state.filteredItems : this.props.items;
+        var dataList = this.state.query !== "" ? this.state.filteredItems : this.props.items;
         var listCount = dataList.length;
         var checkUncheckLabel = this.state.checkAll
                 ? this.props.labelSelectAll(listCount)
@@ -320,7 +320,7 @@ var FormCheckboxList = React.createClass({
 
         return (
             /* jshint ignore:start */
-            <div className={css('checkbox-list', containerCss)}>
+            <div className={css("checkbox-list", containerCss)}>
                 <div className="input-row">
                     <FormTextField
                         className="search"

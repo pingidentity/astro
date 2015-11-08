@@ -1,7 +1,7 @@
-'use strict';
-var React = require('react/addons'),
-    css = require('classnames'),
-    _ = require('underscore');
+"use strict";
+var React = require("react/addons"),
+    css = require("classnames"),
+    _ = require("underscore");
 
 var noop = function () {};
 /**
@@ -48,7 +48,7 @@ var noop = function () {};
  **/
 var Section = React.createClass({
 
-    displayName: 'CollapsableSection',
+    displayName: "CollapsableSection",
 
     propTypes: {
         activeClassName: React.PropTypes.string,
@@ -115,11 +115,11 @@ var Section = React.createClass({
 
     getDefaultProps: function () {
         return {
-            activeClassName: 'active',
-            className: '',
+            activeClassName: "active",
+            className: "",
             toggleOnTitle: false,
             onToggle: noop,
-            id: 'collapsableSection'
+            id: "collapsableSection"
         };
     },
 

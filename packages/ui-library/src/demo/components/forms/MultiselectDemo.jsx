@@ -1,12 +1,12 @@
-var React = require('react/addons');
-var Multiselect = require('../../../components/forms/Multiselect.jsx');
+var React = require("react/addons");
+var Multiselect = require("../../../components/forms/Multiselect.jsx");
 
 var MultiselectDemo = React.createClass({
 
 
     getInitialState: function () {
         return {
-            userStatus: '',
+            userStatus: "",
             checkedValue: false
         };
     },
@@ -22,13 +22,13 @@ var MultiselectDemo = React.createClass({
         return (
             /* jshint ignore:start */
             <div>
-                <p>Status type {this.state.userStatus} is checked ? {this.state.checkedValue ? ' true' : ' false'}</p>
+                <p>Status type {this.state.userStatus} is checked ? {this.state.checkedValue ? " true" : " false"}</p>
 
                 <Multiselect title="Status"
                     options={{
-                        Active: 'ACTIVE',
-                        Disabled: 'DISABLED',
-                        Suspended: 'SUSPENDED'
+                        Active: "ACTIVE",
+                        Disabled: "DISABLED",
+                        Suspended: "SUSPENDED"
                     }}
                 onChange={this._updateUserStatus} />
             </div>

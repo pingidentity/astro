@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
-var React = require('react'),
-    cx = require('classnames'),
-    FormFieldConstants = require('../../constants/FormFieldConstants'),
-    HelpHint = require('../tooltips/HelpHint.jsx'),
-    _ = require('underscore');
+var React = require("react"),
+    cx = require("classnames"),
+    FormFieldConstants = require("../../constants/FormFieldConstants"),
+    HelpHint = require("../tooltips/HelpHint.jsx"),
+    _ = require("underscore");
 
 /**
  * @class FormTextField
@@ -79,7 +79,7 @@ var FormTextField = React.createClass({
      */
     _handleFieldErrorMessage: function (e) {
         // run the validator, if passed in, otherwise assume that the data is valid
-        var errorMessage = '';
+        var errorMessage = "";
         if (this.props.errorMessage) {
             errorMessage = this.props.errorMessage;
         }
@@ -109,10 +109,10 @@ var FormTextField = React.createClass({
             this.props.onChange(e);
         }
 
-        if (this.props.validatorTrigger === 'onChange') {
+        if (this.props.validatorTrigger === "onChange") {
             this._handleFieldErrorMessage(e);
         }
-        if (this.props.validatorTrigger === 'onBlur') {
+        if (this.props.validatorTrigger === "onBlur") {
             // set the internal state to reflect the new value
             this.setState({
                 fieldValue: e.target.value
@@ -128,7 +128,7 @@ var FormTextField = React.createClass({
      * @private
      */
     _handleFieldBlur: function (e) {
-        if (this.props.validatorTrigger === 'onBlur') {
+        if (this.props.validatorTrigger === "onBlur") {
             this._handleFieldErrorMessage(e);
         }
         if (this.props.onBlur) {
@@ -179,13 +179,13 @@ var FormTextField = React.createClass({
 
     getDefaultProps: function () {
         return {
-            referenceName: 'formTextField',
+            referenceName: "formTextField",
             mode: FormFieldConstants.FormFieldMode.EDIT,
-            defaultValue: '',
-            labelText: '',
-            errorCss: '',
+            defaultValue: "",
+            labelText: "",
+            errorCss: "",
             useAutocomplete: false,
-            validatorTrigger: 'onBlur',
+            validatorTrigger: "onBlur",
             onValueChange: function () {
                 // do nothing as the default action
             }
@@ -200,7 +200,7 @@ var FormTextField = React.createClass({
     },
 
     componentWillReceiveProps: function (nextProps) {
-        if (typeof nextProps.errorMessage !== 'undefined') {
+        if (typeof nextProps.errorMessage !== "undefined") {
             this.setState({ errorMessage: nextProps.errorMessage });
         }
     },
@@ -214,21 +214,21 @@ var FormTextField = React.createClass({
             labelHelp;
 
         var labelCss = cx(this.props.labelCss, {
-                'input-text': true,
+                "input-text": true,
                 required: this.props.isRequired,
-                'form-error': this.state.errorMessage,
+                "form-error": this.state.errorMessage,
                 readonly: readonly,
                 edited: edited,
-                'value-entered': !!value,
-                'no-label': (this.props.labelText.length === 0),
+                "value-entered": !!value,
+                "no-label": (this.props.labelText.length === 0),
                 disabled: this.props.disabled
             }),
-            errorCss = cx(this.props.errorCss + ' help-tooltip form-error-message', {
+            errorCss = cx(this.props.errorCss + " help-tooltip form-error-message", {
                 show: this.state.errorMessage
             });
 
         if (this.props.className) {
-            labelCss += ' ' + this.props.className;
+            labelCss += " " + this.props.className;
         }
 
         if (edited) {
@@ -244,20 +244,20 @@ var FormTextField = React.createClass({
             save = (<a data-id="save" className="save" onClick={this._handleSave}>save</a>);
             /* jshint ignore:end */
 
-            labelCss += ' inline-save';
+            labelCss += " inline-save";
         }
 
         if (this.props.labelHelpText) {
             labelHelp = (
                 /* jshint ignore:start */
-                <HelpHint hintText={this.props.labelHelpText} data-id={this.props.referenceName + '_helptooltip'} />
+                <HelpHint hintText={this.props.labelHelpText} data-id={this.props.referenceName + "_helptooltip"} />
                 /* jshint ignore:end */
             );
         }
 
         return (
             /* jshint ignore:start */
-            <label className={labelCss} data-id={this.props.referenceName + '_label'}>
+            <label className={labelCss} data-id={this.props.referenceName + "_label"}>
                 {this.props.labelText ? (
                     <span className="label-text">
                         {this.props.labelText}
@@ -268,24 +268,24 @@ var FormTextField = React.createClass({
                     <input
                         className={this.props.inputCss}
                         placeholder={this.props.placeholder}
-                        did={this.props.validate ? this.props.referenceName : ''}
+                        did={this.props.validate ? this.props.referenceName : ""}
                         isRequired={this.props.isRequired}
                         ref={this.props.referenceName}
                         data-id={this.props.referenceName}
                         name={this.props.referenceName}
                         id={this.props.referenceName}
-                        type={this.props.maskValue ? 'password' : 'text'}
+                        type={this.props.maskValue ? "password" : "text"}
                         readOnly={readonly}
                         maxLength={this.props.maxLength}
                         value={value}
-                        autoComplete={this.props.useAutocomplete ? 'on' : 'off'}
+                        autoComplete={this.props.useAutocomplete ? "on" : "off"}
                         onChange={this._handleFieldChange}
                         onBlur={this._handleFieldBlur}
                         disabled={this.props.disabled}/>
 
                     {undo}
                     {save}
-                    <div className={errorCss} data-id={this.props.referenceName + '_errormessage'}>
+                    <div className={errorCss} data-id={this.props.referenceName + "_errormessage"}>
                         <div className="tooltip-text">
                             {this.state.errorMessage}
                         </div>

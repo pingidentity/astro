@@ -1,5 +1,5 @@
-var React = require('react/addons');
-var ExpandableRow = require('../../../components/rows/ExpandableRow.jsx');
+var React = require("react/addons");
+var ExpandableRow = require("../../../components/rows/ExpandableRow.jsx");
 
 var ExpandableRowDemo = React.createClass({
 

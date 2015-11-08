@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-var React = require('react'),
-    css = require('classnames');
+var React = require("react"),
+    css = require("classnames");
 
  /**
  * @class ExpandableRow
@@ -76,10 +76,10 @@ var ExpandableRow = React.createClass({
         return {
             showEdit: true,
             isEditEnabled: true,
-            editViewRoute: '',
+            editViewRoute: "",
             showDelete: true,
             defaultToExpanded: false,
-            id: 'expandable-row'
+            id: "expandable-row"
         };
     },
 
@@ -95,29 +95,29 @@ var ExpandableRow = React.createClass({
             containerCss = css({
                 item: true,
                 expanded: this.state.isExpanded,
-                'no-delete': !this.props.showDelete,
-                'no-edit': !showEditIcon
+                "no-delete": !this.props.showDelete,
+                "no-edit": !showEditIcon
             }),
 
             editButtonCss = css({
-                'edit-btn': !showViewIcon,
-                'view-btn': showViewIcon
+                "edit-btn": !showViewIcon,
+                "view-btn": showViewIcon
             }),
             titleCss = css({
-                'item-title': true,
-                'title-only': !this.props.subtitle,
-                name: this.props.titleStyle === 'name' || null
+                "item-title": true,
+                "title-only": !this.props.subtitle,
+                name: this.props.titleStyle === "name" || null
             });
 
         if (this.props.className) {
-            containerCss = containerCss + ' ' + this.props.className;
+            containerCss = containerCss + " " + this.props.className;
         }
 
         var editButton = (this.props.showEdit && this.props.editButton
             ? this.props.editButton
             : <a data-id="edit-btn"
                 className={editButtonCss}
-                href={'#/' + this.props.editViewRoute}>
+                href={"#/" + this.props.editViewRoute}>
             </a>
         );
 

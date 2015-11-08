@@ -1,11 +1,11 @@
 
-jest.dontMock('../ContextCloseButton.jsx');
+jest.dontMock("../ContextCloseButton.jsx");
 
 
-describe('ContextCloseButton', function () {
-    var React = require('react/addons');
+describe("ContextCloseButton", function () {
+    var React = require("react/addons");
     var ReactTestUtils = React.addons.TestUtils;
-    var ContextCloseButton = require('../ContextCloseButton.jsx');
+    var ContextCloseButton = require("../ContextCloseButton.jsx");
 
     var ContextComponent = React.createClass({
         propTypes: {
@@ -38,7 +38,7 @@ describe('ContextCloseButton', function () {
         }
     });
     
-    it('Render and click with no context', function () {
+    it("Render and click with no context", function () {
         var callback = jest.genMockFn();
         var component = ReactTestUtils.renderIntoDocument(
             /* jshint ignore:start */
@@ -47,7 +47,7 @@ describe('ContextCloseButton', function () {
         );
 
         // Expect a single button to be rendered.
-        var button = ReactTestUtils.findRenderedDOMComponentWithTag(component, 'input');
+        var button = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
         
         expect(callback.mock.calls.length).toBe(0);
         
@@ -63,7 +63,7 @@ describe('ContextCloseButton', function () {
      * is called when the button is clicked.
      *
      */
-    it('Render and click with context', function () {
+    it("Render and click with context", function () {
         var clickCallback = jest.genMockFn();
         var closeCallback = jest.genMockFn();
         var component = ReactTestUtils.renderIntoDocument(
@@ -73,7 +73,7 @@ describe('ContextCloseButton', function () {
         );
 
         // Expect a single button to be rendered.
-        var button = ReactTestUtils.findRenderedDOMComponentWithTag(component, 'input');
+        var button = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
         
         expect(clickCallback.mock.calls.length).toBe(0);
         expect(closeCallback.mock.calls.length).toBe(0);
@@ -92,7 +92,7 @@ describe('ContextCloseButton', function () {
      * of the button returns false.
      *
      */
-    it('onClick function can prevent context close call', function () {
+    it("onClick function can prevent context close call", function () {
         var clickCallback = jest.genMockFn();
         clickCallback.mockReturnValue(false);
         
@@ -105,7 +105,7 @@ describe('ContextCloseButton', function () {
         );
 
         // Expect a single button to be rendered.
-        var button = ReactTestUtils.findRenderedDOMComponentWithTag(component, 'input');
+        var button = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
         
         expect(clickCallback.mock.calls.length).toBe(0);
         expect(closeCallback.mock.calls.length).toBe(0);
@@ -121,14 +121,14 @@ describe('ContextCloseButton', function () {
     /**
      * Test to ensure that the show property is applied.
      */
-    it('reacts correctly to the show state', function () {
+    it("reacts correctly to the show state", function () {
         var shown = false;
         var component = ReactTestUtils.renderIntoDocument(
             /* jshint ignore:start */
             <ContextCloseButton show={shown} />
             /* jshint ignore:end */
         );
-        var content = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'input');
+        var content = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, "input");
         expect(content.length).toBe(0);
 
         shown = true;
@@ -137,21 +137,21 @@ describe('ContextCloseButton', function () {
             <ContextCloseButton show={shown} />
             /* jshint ignore:end */
         );
-        var button = ReactTestUtils.findRenderedDOMComponentWithTag(component, 'input');
+        var button = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
         expect(ReactTestUtils.isDOMComponent(button)).toBeTruthy();
     });
 
     /*
      * Test to ensure that the disabled property is applied.
      */
-    it('disabled state', function () {
+    it("disabled state", function () {
         var disabled = false;
         var component = ReactTestUtils.renderIntoDocument(
             /* jshint ignore:start */
             <ContextCloseButton disabled={disabled} />
             /* jshint ignore:end */
         );
-        var button = ReactTestUtils.findRenderedDOMComponentWithTag(component, 'input');
+        var button = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
         expect(ReactTestUtils.isDOMComponent(button)).toBeTruthy();
         expect(button.getDOMNode().disabled).toBeFalsy();
 
@@ -161,7 +161,7 @@ describe('ContextCloseButton', function () {
             <ContextCloseButton disabled={disabled} />
             /* jshint ignore:end */
         );
-        button = ReactTestUtils.findRenderedDOMComponentWithTag(component, 'input');
+        button = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
         expect(ReactTestUtils.isDOMComponent(button)).toBeTruthy();
         expect(button.getDOMNode().disabled).toBeTruthy();
     });

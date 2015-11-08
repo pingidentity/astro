@@ -1,22 +1,22 @@
 window.__DEV__ = true;
 
-jest.dontMock('../Reducer.js');
-jest.dontMock('../Actions.js');
-jest.dontMock('object-assign');
+jest.dontMock("../Reducer.js");
+jest.dontMock("../Actions.js");
+jest.dontMock("object-assign");
 
-describe('Step', function () {
-    var Reducer = require('../Reducer.js'),
-        Actions = require('../Actions.js'),
-        assign = require('object-assign');
+describe("Step", function () {
+    var Reducer = require("../Reducer.js"),
+        Actions = require("../Actions.js"),
+        assign = require("object-assign");
 
-    it('Processes next', function () {
-        var initState = Reducer(null, 'init');
+    it("Processes next", function () {
+        var initState = Reducer(null, "init");
         var nextState = Reducer(initState, Actions.next());
 
         expect(nextState).toEqual(assign(initState, { activeStep: 2 }));
     });
 
-    it('Processes edit', function () {
+    it("Processes edit", function () {
         var initState = {
             activeStep: 5,
             numSteps: 10,
@@ -31,7 +31,7 @@ describe('Step', function () {
         });
     });
 
-    it('Processes choose', function () {
+    it("Processes choose", function () {
         var initState = {
             activeStep: 3,
             numSteps: 10,

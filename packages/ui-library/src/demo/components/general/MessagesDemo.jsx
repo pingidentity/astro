@@ -1,5 +1,5 @@
-var React = require('react/addons');
-var Messages = require('./../../../components/general/Messages.jsx');
+var React = require("react/addons");
+var Messages = require("./../../../components/general/Messages.jsx");
 
 var MessagesDemo = React.createClass({
 
@@ -20,7 +20,7 @@ var MessagesDemo = React.createClass({
         var counter = this.state.counter;
         var messages = this.state.messages;
         messages.push({
-            text: 'New message #' + counter
+            text: "New message #" + counter
         });
         counter += 1;
         

@@ -1,5 +1,5 @@
-var Actions = require('./Actions.js'),
-    _ = require('underscore');
+var Actions = require("./Actions.js"),
+    _ = require("underscore");
 
 var initState = {
     choices: [],

@@ -1,23 +1,23 @@
-var Const = require('./Constants');
+var Const = require("./Constants");
 
 var _keyDownViewHelper = [
     {
         prev: false,
         next: true,
         exit: true,
-        unit: 'day',
+        unit: "day",
         upDown: 7
     },
     {
         prev: true,
         next: true,
-        unit: 'months',
+        unit: "months",
         upDown: 3
     },
     {
         prev: true,
         next: false,
-        unit: 'years',
+        unit: "years",
         upDown: 3
     }
 ];

@@ -1,5 +1,5 @@
-var React = require('react/addons');
-var FormTextField = require('./../../../components/forms/FormTextField.jsx');
+var React = require("react/addons");
+var FormTextField = require("./../../../components/forms/FormTextField.jsx");
 
 /**
  * A demo for FormTextField.
@@ -8,8 +8,8 @@ var FormTextFieldDemo = React.createClass({
 
     getInitialState: function () {
         return {
-            onChangeFieldValue: '',
-            onBlurFieldValue: '',
+            onChangeFieldValue: "",
+            onBlurFieldValue: "",
             saved: false
         };
     },
@@ -40,7 +40,7 @@ var FormTextFieldDemo = React.createClass({
     },
 
     render: function () {
-        var originalValueForUndo = 'this is the original value';
+        var originalValueForUndo = "this is the original value";
 
         return (
             <div>
@@ -53,7 +53,7 @@ var FormTextFieldDemo = React.createClass({
                 </div>
                 <div className="input-row">
                     <FormTextField labelText="Required and save" isRequired={true} save={this._save} />
-                    <div>{this.state.saved ? 'saved!' : null}</div>
+                    <div>{this.state.saved ? "saved!" : null}</div>
                 </div>
                 <div className="input-row">
                     <FormTextField labelText="onChange callback and maxLength (10 chars)"

@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
-var React = require('react'),
-    css = require('classnames'),
-    FormFieldConstants = require('../../constants/FormFieldConstants'),
-    HelpHint = require('../tooltips/HelpHint.jsx'),
-    _ = require('underscore');
+var React = require("react"),
+    css = require("classnames"),
+    FormFieldConstants = require("../../constants/FormFieldConstants"),
+    HelpHint = require("../tooltips/HelpHint.jsx"),
+    _ = require("underscore");
 
 /**
  * @class FormTextArea
@@ -113,11 +113,11 @@ var FormTextArea = React.createClass({
 
     getDefaultProps: function () {
         return {
-            referenceName: 'form-text-area',
-            className: 'input-textarea',
+            referenceName: "form-text-area",
+            className: "input-textarea",
             mode: FormFieldConstants.FormFieldMode.EDIT,
-            defaultValue: '',
-            labelText: '',
+            defaultValue: "",
+            labelText: "",
             useAutocomplete: false,
             onValueChange: function () {
                 // do nothing as the default action
@@ -142,17 +142,17 @@ var FormTextArea = React.createClass({
 
         var labelCss = css(this.props.className, {
                 required: this.props.isRequired,
-                'form-error': this.props.errorMessage,
+                "form-error": this.props.errorMessage,
                 edited: edited,
-                'value-entered': !!value,
+                "value-entered": !!value,
                 readonly: readonly
             }),
-            errorCss = css('help-tooltip form-error-message', {
+            errorCss = css("help-tooltip form-error-message", {
                 show: this.props.errorMessage
             });
 
         if (this.props.className) {
-            labelCss += ' ' + this.props.className;
+            labelCss += " " + this.props.className;
         }
 
         var undo;
@@ -169,7 +169,7 @@ var FormTextArea = React.createClass({
         if (this.props.labelHelpText) {
             labelHelp = (
                 /* jshint ignore:start */
-                <HelpHint hintText={this.props.labelHelpText} data-id={this.props.referenceName + '_helptooltip'} />
+                <HelpHint hintText={this.props.labelHelpText} data-id={this.props.referenceName + "_helptooltip"} />
                 /* jshint ignore:end */
             );
         }
@@ -194,13 +194,13 @@ var FormTextArea = React.createClass({
                         value={value}
                         cols={this.props.cols}
                         rows={this.props.rows}
-                        autoComplete={this.props.useAutocomplete ? 'on' : 'off'}
+                        autoComplete={this.props.useAutocomplete ? "on" : "off"}
                         onChange={this._handleFieldChange}
                         onBlur={this._handleBlur}>
                     </textarea>
                     {undo}
                     <div className={errorCss}>
-                        <div className="tooltip-text" data-id={this.props.referenceName + '_errormessage'}>
+                        <div className="tooltip-text" data-id={this.props.referenceName + "_errormessage"}>
                             {this.props.errorMessage}
                         </div>
                     </div>

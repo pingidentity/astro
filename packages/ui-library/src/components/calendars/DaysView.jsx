@@ -1,8 +1,8 @@
-var React = require('react');
-var classnames = require('classnames');
-var moment = require('moment-range');
-var Cell = require('./Cell.jsx');
-var ViewHeader = require('./ViewHeader.jsx');
+var React = require("react");
+var classnames = require("classnames");
+var moment = require("moment-range");
+var Cell = require("./Cell.jsx");
+var ViewHeader = require("./ViewHeader.jsx");
 
 module.exports = React.createClass({
 
@@ -22,11 +22,11 @@ module.exports = React.createClass({
     },
 
     next: function () {
-        this.props.setDate(this.props.date.add(1, 'months'));
+        this.props.setDate(this.props.date.add(1, "months"));
     },
 
     prev: function () {
-        this.props.setDate(this.props.date.subtract(1, 'months'));
+        this.props.setDate(this.props.date.subtract(1, "months"));
     },
 
     cellClick: function (e) {
@@ -38,10 +38,10 @@ module.exports = React.createClass({
             return;
         }
 
-        if (cell.className.indexOf('prev') > -1) {
-            newDate.subtract(1, 'months');
-        } else if (cell.className.indexOf('next') > -1) {
-            newDate.add(1, 'months');
+        if (cell.className.indexOf("prev") > -1) {
+            newDate.subtract(1, "months");
+        } else if (cell.className.indexOf("next") > -1) {
+            newDate.add(1, "months");
         }
 
         newDate.date(date);
@@ -51,8 +51,8 @@ module.exports = React.createClass({
 
     getDays: function () {
         var now = this.props.date ? this.props.date : moment(),
-            start = now.clone().startOf('month').day(0),
-            end = now.clone().endOf('month').day(6),
+            start = now.clone().startOf("month").day(0),
+            end = now.clone().endOf("month").day(6),
             month = now.month(),
             today = moment(),
             currDay = now.date(),
@@ -61,9 +61,9 @@ module.exports = React.createClass({
 
         moment()
             .range(start, end)
-            .by('days', function (day) {
+            .by("days", function (day) {
                 days.push({
-                    label: day.format('D'),
+                    label: day.format("D"),
                     prev: (day.month() < month && (day.year() <= year)) || day.year() < year,
                     next: day.month() > month || day.year() > year,
                     curr: day.date() === currDay && day.month() === month,
@@ -94,7 +94,7 @@ module.exports = React.createClass({
             /* jshint ignore:end */
         });
 
-        var currentDate = this.props.date ? this.props.date.format('MMMM') : moment().format('MMMM');
+        var currentDate = this.props.date ? this.props.date.format("MMMM") : moment().format("MMMM");
 
         return (
             /* jshint ignore:start */

@@ -1,6 +1,6 @@
-var React = require('react');
-var css = require('classnames');
-var EllipsisLoader = require('../general/EllipsisLoader.jsx');
+var React = require("react");
+var css = require("classnames");
+var EllipsisLoader = require("../general/EllipsisLoader.jsx");
 
 /**
  * @module EllipsisLoaderButton
@@ -29,7 +29,7 @@ var EllipsisLoaderButton = React.createClass({
 
     getDefaultProps: function () {
         return {
-            id: 'ellipsis-loader-button'
+            id: "ellipsis-loader-button"
         };
     },
 
@@ -43,7 +43,7 @@ var EllipsisLoaderButton = React.createClass({
 
         return (
             <button
-                className={css('ellipsis-loader-button', buttonCss)}
+                className={css("ellipsis-loader-button", buttonCss)}
                 data-id={this.props.id}
                 onClick={this.props.onButtonClick}>
 

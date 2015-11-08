@@ -1,6 +1,6 @@
-var React = require('react/addons'),
-    moment = require('moment-range'),
-    Calendar = require('./../../../components/calendars/Calendar.jsx');
+var React = require("react/addons"),
+    moment = require("moment-range"),
+    Calendar = require("./../../../components/calendars/Calendar.jsx");
 
 var CalendarDemo = React.createClass({
 

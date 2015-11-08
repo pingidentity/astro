@@ -1,29 +1,29 @@
 window.__DEV__ = true;
 
-jest.dontMock('../Step.jsx');
-jest.dontMock('../Wizard.jsx');
-jest.dontMock('../../../util/format.js');
-jest.dontMock('object-assign');
+jest.dontMock("../Step.jsx");
+jest.dontMock("../Wizard.jsx");
+jest.dontMock("../../../util/format.js");
+jest.dontMock("object-assign");
 
-describe('Step', function () {
-    var React = require('react/addons'),
+describe("Step", function () {
+    var React = require("react/addons"),
         ReactTestUtils = React.addons.TestUtils,
-        Wizard = require('../Wizard.jsx'),
+        Wizard = require("../Wizard.jsx"),
         Step = Wizard.Step,
-        assign = require('object-assign');
+        assign = require("object-assign");
 
     beforeEach(function () {
     });
 
     function getRenderedComponent (opts) {
         var defaults = {
-            title: 'My Wizard',
+            title: "My Wizard",
             onNext: jest.genMockFunction(),
             onEdit: jest.genMockFunction(),
             onChange: jest.genMockFunction(),
-            labelNext: 'next',
-            labelCancel: 'cancel',
-            labelEdit: 'edit'
+            labelNext: "next",
+            labelCancel: "cancel",
+            labelEdit: "edit"
         };
 
         return ReactTestUtils.renderIntoDocument(
@@ -35,7 +35,7 @@ describe('Step', function () {
         );
     }
 
-    it('Is the root wizard', function () {
+    it("Is the root wizard", function () {
         var component = getRenderedComponent();
         var args = component.props.onChange.mock.calls[0];
 
@@ -43,7 +43,7 @@ describe('Step', function () {
         expect(args).toEqual([0, 3]);
     });
 
-    it('Calls onNext when next is clicked', function () {
+    it("Calls onNext when next is clicked", function () {
         var component = getRenderedComponent();
 
         expect(component.props.onNext.mock.calls.length).toBe(0);
@@ -53,7 +53,7 @@ describe('Step', function () {
         expect(component.props.onNext.mock.calls.length).toBe(1);
     });
 
-    it('Calls onEdit when edit is clicked', function () {
+    it("Calls onEdit when edit is clicked", function () {
         var component = getRenderedComponent({ activeStep: 2 });
 
         expect(component.props.onNext.mock.calls.length).toBe(0);

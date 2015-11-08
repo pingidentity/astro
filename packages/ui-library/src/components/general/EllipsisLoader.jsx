@@ -1,5 +1,5 @@
-var React = require('react');
-var css = require('classnames');
+var React = require("react");
+var css = require("classnames");
 
 /**
  * @class EllipsisLoader
@@ -19,14 +19,14 @@ var EllipsisLoader = React.createClass({
 
     getDefaultProps: function () {
         return {
-            id: 'ellipsis-loader'
+            id: "ellipsis-loader"
         };
     },
 
     render: function () {
-        var spanClass = css('icon-ellipsis', this.props.className);
-
         if (this.props.loading) {
+            var spanClass = css("icon-ellipsis", this.props.className);
+
             /* jshint ignore:start */
             return ( <span className={spanClass} data-id={this.props.id}><span></span></span> );
             /* jshint ignore:end */

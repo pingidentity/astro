@@ -1,4 +1,4 @@
-var React = require('react/addons');
+var React = require("react/addons");
 
 /**
  * @module components/general/SelectText
@@ -139,7 +139,7 @@ var SelectText = React.createClass({
             /* jshint ignore:start */
             <span className={this.props.className}
                   onClick={this._selectText}
-                  data-id={this.props.dataId || 'select-text'}>
+                  data-id={this.props.dataId || "select-text"}>
                 {this.props.children}
             </span>
             /* jshint ignore:end */

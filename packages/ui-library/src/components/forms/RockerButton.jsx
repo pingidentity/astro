@@ -1,6 +1,6 @@
-var React = require('react/addons'),
-    cx = require('classnames'),
-    _ = require('underscore');
+var React = require("react/addons"),
+    cx = require("classnames"),
+    _ = require("underscore");
 
 /**
  * @class RockerButton
@@ -47,19 +47,19 @@ var RockerButton = React.createClass({
     
     componentWillReceiveProps: function (nextProps) {
         if (nextProps.labels && (nextProps.labels.length < 2 || nextProps.labels.length > 4)) {
-            console.warn('RockerButton expecting two to four labels, but was given ', nextProps.labels.length);
+            console.warn("RockerButton expecting two to four labels, but was given ", nextProps.labels.length);
         }
     },
 
     getDefaultProps: function () {
         return {
-            id: 'rocker-button'
+            id: "rocker-button"
         };
     },
     
     getInitialState: function () {
         return {
-            selection: (this.props.labels.length > 0) ? (this.props.selected || this.props.labels[0]) : ''
+            selection: (this.props.labels.length > 0) ? (this.props.selected || this.props.labels[0]) : ""
         };
     },
 
@@ -79,14 +79,14 @@ var RockerButton = React.createClass({
             selectionIndex = _.indexOf(this.props.labels, this.state.selection);
 
         var containerCss = cx({
-            'rocker-button': true,
-            'sel-0': selectionIndex === 0,
-            'sel-1': selectionIndex === 1,
-            'sel-2': selectionIndex === 2,
-            'sel-3': selectionIndex === 3
+            "rocker-button": true,
+            "sel-0": selectionIndex === 0,
+            "sel-1": selectionIndex === 1,
+            "sel-2": selectionIndex === 2,
+            "sel-3": selectionIndex === 3
         });
         if (this.props.className) {
-            containerCss = containerCss + ' ' + this.props.className;
+            containerCss = containerCss + " " + this.props.className;
         }
 
         return (

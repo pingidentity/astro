@@ -1,4 +1,4 @@
-var React = require('react');
+var React = require("react");
 
 /*
  * Simple loading spinner implementation. Depends on prop will show loading spinner animation or children content.
@@ -27,7 +27,7 @@ var Spinner = React.createClass({
 
     getDefaultProps: function () {
         return {
-            defaultText: ''
+            defaultText: ""
         };
     },
 

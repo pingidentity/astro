@@ -1,5 +1,5 @@
-var React = require('react/addons');
-var FileUpload = require('../../../components/forms/FileUpload.jsx');
+var React = require("react/addons");
+var FileUpload = require("../../../components/forms/FileUpload.jsx");
 
 var FileUploadDemo = React.createClass({
     
@@ -8,7 +8,7 @@ var FileUploadDemo = React.createClass({
      */
     _fileUploadError: function (errorCode) {
         // TODO replace with messaging when messaging ported
-        console.log('Error in file upload: ' + errorCode);
+        console.log("Error in file upload: " + errorCode);
     },
     
     /*
@@ -16,7 +16,7 @@ var FileUploadDemo = React.createClass({
      */
     _fileValidator: function (file) {
         // TODO replace with a Validator when validators are ported
-        console.log('Validating file: ' + file);
+        console.log("Validating file: " + file);
         return true;
     },
     

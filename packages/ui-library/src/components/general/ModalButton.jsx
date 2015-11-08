@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-var React = require('react');
-var css = require('classnames');
+var React = require("react");
+var css = require("classnames");
 
 /**
  * @module components/general/ModalButton
@@ -93,7 +93,7 @@ var ModalButton = React.createClass({
     getInitialState: function () {
         var expanded = this.props.initiallyExpanded;
         
-        if (typeof this.props.expanded !== 'undefined' && this.props.expanded !== null) {
+        if (typeof this.props.expanded !== "undefined" && this.props.expanded !== null) {
             expanded = !!this.props.expanded;
         }
         
@@ -117,8 +117,8 @@ var ModalButton = React.createClass({
 
             // Add class to body tag, if so configured, and class not already present
             if (this.props.bodyClass) {
-                var body = document.getElementsByTagName('body')[0];
-                if (!body.className.match(new RegExp('(?:^|\s)' + this.props.bodyClass + '(?!\S)'))) {
+                var body = document.getElementsByTagName("body")[0];
+                if (!body.className.match(new RegExp("(?:^|\s)" + this.props.bodyClass + "(?!\S)"))) {
                     body.className += this.props.bodyClass;
                 }
             }
@@ -144,9 +144,9 @@ var ModalButton = React.createClass({
             if (doClose) {
                 // Remove class from body tag if so configured and if present.
                 if (this.props.bodyClass) {
-                    var body = document.getElementsByTagName('body')[0];
+                    var body = document.getElementsByTagName("body")[0];
                     body.className =
-                        body.className.replace(new RegExp('(?:^|\s)' + this.props.bodyClass + '(?!\S)', 'g'), '');
+                        body.className.replace(new RegExp("(?:^|\s)" + this.props.bodyClass + "(?!\S)", "g"), "");
                 }
                 this.setState({ expanded: false });
             }
@@ -158,7 +158,7 @@ var ModalButton = React.createClass({
      *
      */
     _isExpanded: function () {
-        if (typeof this.props.expanded !== 'undefined') {
+        if (typeof this.props.expanded !== "undefined") {
             return !!this.props.expanded;
         } else {
             return this.state.expanded;
@@ -166,7 +166,7 @@ var ModalButton = React.createClass({
     },
     
     componentWillReceiveProps: function (nextProps) {
-        if (typeof nextProps.expanded !== 'undefined' && nextProps.expanded !== null) {
+        if (typeof nextProps.expanded !== "undefined" && nextProps.expanded !== null) {
             this.setState({ expanded: !!nextProps.expanded });
         }
     },
@@ -175,14 +175,14 @@ var ModalButton = React.createClass({
         var modalId;
         var buttonId;
         if (this.props.id) {
-            modalId = this.props.id + '-modal';
-            buttonId = this.props.id + '-button';
+            modalId = this.props.id + "-modal";
+            buttonId = this.props.id + "-button";
         }
 
         var activator;
         if (this.props.linkContent) {
             var linkContent;
-            if (typeof(this.props.linkContent) === 'function') {
+            if (typeof(this.props.linkContent) === "function") {
                 linkContent = this.props.linkContent();
             } else {
                 linkContent = this.props.linkContent;
@@ -193,7 +193,7 @@ var ModalButton = React.createClass({
         } else if (this.props.value) {
             activator = (<button id={buttonId}
                                 data-id="add-user"
-                                className={this.props.buttonStyle || 'default'}
+                                className={this.props.buttonStyle || "default"}
                                 onClick={this._open}
                                 title={this.props.value}
                                 disabled={this.props.disabled}>{this.props.value}</button>);

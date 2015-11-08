@@ -1,7 +1,7 @@
-var React = require('react/addons');
-var _ = require('underscore');
-var Utils = require('../../util/Utils');
-var css = require('classnames');
+var React = require("react/addons");
+var _ = require("underscore");
+var Utils = require("../../util/Utils");
+var css = require("classnames");
 
 /**
  * @module components/forms/FileUpload
@@ -86,7 +86,7 @@ var FileUpload = React.createClass({
      *
      */
     _onChange: function (e) {
-        var errorMessage = '';
+        var errorMessage = "";
         var files = e.target.files;
 
         if (this.props.validator) {
@@ -103,7 +103,7 @@ var FileUpload = React.createClass({
                 self = this;
 
             this._validateFile(fileToUpload, function () {
-                if (self.props.showThumbnail && fileToUpload.type.match('image.*')) {
+                if (self.props.showThumbnail && fileToUpload.type.match("image.*")) {
                     var onFileReadSuccess = function (imgContent) {
                         self.setState({
                             errorMessage: errorMessage,
@@ -115,7 +115,7 @@ var FileUpload = React.createClass({
                         }
                     };
                     var onFileReadError = function () {
-                        return this._handleError('cid.users.fileUpload.error.readingFile');
+                        return this._handleError("cid.users.fileUpload.error.readingFile");
                     };
                     return self._getImagePreview(files[0], onFileReadSuccess, onFileReadError);
                 } else {
@@ -123,7 +123,7 @@ var FileUpload = React.createClass({
                     self.setState({
                         errorMessage: errorMessage,
                         fileName: Utils.stripFakePath(e.target.value),
-                        thumbnailSrc: ''
+                        thumbnailSrc: ""
                     });
                 }
             });
@@ -132,7 +132,7 @@ var FileUpload = React.createClass({
             this.setState({
                 errorMessage: errorMessage,
                 fileName: Utils.stripFakePath(e.target.value),
-                thumbnailSrc: ''
+                thumbnailSrc: ""
             });
         }
     },
@@ -146,15 +146,15 @@ var FileUpload = React.createClass({
             var maxFileSizeBytes = this.props.maxFileSizeKb * 1000;
             if (file.size > maxFileSizeBytes) {
                 this._resetComponent();
-                return this._handleError('cid.users.fileUpload.error.tooBig');
+                return this._handleError("cid.users.fileUpload.error.tooBig");
             }
         }
         if (this.props.accept) {
             // remove any whitespace
-            var acceptArray = this.props.accept.replace(/\s+/g, '').split(',');
+            var acceptArray = this.props.accept.replace(/\s+/g, "").split(",");
             if (_.indexOf(acceptArray, file.type) === -1) {
                 this._resetComponent();
-                return this._handleError('cid.users.fileUpload.error.fileType');
+                return this._handleError("cid.users.fileUpload.error.fileType");
             }
         }
         success();
@@ -179,7 +179,7 @@ var FileUpload = React.createClass({
     _onClickRemove: function () {
         if (this.props.validator) {
             this.setState({
-                errorMessage: this.props.validator('')
+                errorMessage: this.props.validator("")
             });
         }
         this._resetComponent();
@@ -190,8 +190,8 @@ var FileUpload = React.createClass({
      *
      */
     _resetComponent: function () {
-        this.refs.fileInput.getDOMNode().value = '';
-        this.setState({ fileName: '', thumbnailSrc: '' });
+        this.refs.fileInput.getDOMNode().value = "";
+        this.setState({ fileName: "", thumbnailSrc: "" });
         if (this.props.onFileChange) {
             this.props.onFileChange();
         }
@@ -200,22 +200,22 @@ var FileUpload = React.createClass({
     componentWillReceiveProps: function (next) {
         // if file selection managed externally, reset thumbnails and state
         if (this.props.isFileSelected && !_.isUndefined(next.isFileSelected) && !next.isFileSelected) {
-            this.setState({ fileName: '', thumbnailSrc: '' });
+            this.setState({ fileName: "", thumbnailSrc: "" });
         }
     },
 
     getDefaultProps: function () {
         return {
-            accept: 'image/jpeg,image/jpg,image/gif,image/png',  // comma-separated MIME types
+            accept: "image/jpeg,image/jpg,image/gif,image/png",  // comma-separated MIME types
             showThumbnail: false
         };
     },
 
     getInitialState: function () {
         return {
-            errorMessage: '',
-            fileName: '',
-            thumbnailSrc: ''
+            errorMessage: "",
+            fileName: "",
+            thumbnailSrc: ""
         };
     },
 
@@ -223,12 +223,12 @@ var FileUpload = React.createClass({
         var imageUpload = this.props.showThumbnail,
             fileSelected = this.state.thumbnailSrc || this.state.fileName || this.props.isFileSelected,
             containerCss = css({
-                'input-file-upload': true,
-                'image-upload': imageUpload,
-                'file-selected': fileSelected
+                "input-file-upload": true,
+                "image-upload": imageUpload,
+                "file-selected": fileSelected
             }),
             labelCss = css({
-                'form-error help-tooltip show': this.state.errorMessage
+                "form-error help-tooltip show": this.state.errorMessage
             });
 
         var buttonText = this.props.buttonText;
@@ -239,7 +239,7 @@ var FileUpload = React.createClass({
             /* jshint ignore:start */
             <div className={containerCss}>
                 <label className={labelCss}>
-                    <div className="tooltip-text" data-id={this.props.referenceName + '_tooltip'}>
+                    <div className="tooltip-text" data-id={this.props.referenceName + "_tooltip"}>
                         {this.state.errorMessage}
                     </div>
                     {imageUpload &&
@@ -257,7 +257,7 @@ var FileUpload = React.createClass({
                            name={this.props.name}
                            accept={this.props.accept || null}
                            onChange={this._onChange}
-                           data-id={this.props.referenceName + '_input'} />
+                           data-id={this.props.referenceName + "_input"} />
                     <span className="button inline">{buttonLabel}</span>
                 </label>
                 <div className="file-info">

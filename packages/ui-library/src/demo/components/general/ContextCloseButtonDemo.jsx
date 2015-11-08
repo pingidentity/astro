@@ -1,5 +1,5 @@
-var React = require('react/addons');
-var ContextCloseButton = require('./../../../components/general/ContextCloseButton.jsx');
+var React = require("react/addons");
+var ContextCloseButton = require("./../../../components/general/ContextCloseButton.jsx");
 
 var ContextComponent = React.createClass({
     propTypes: {

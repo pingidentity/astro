@@ -1,19 +1,19 @@
-'use strict';
+"use strict";
 
 // variables
-var request = require('superagent'),
-    _ = require('underscore');
+var request = require("superagent"),
+    _ = require("underscore");
 
-var Constants = require('../constants/CacheConstants'),
-    Cache = require('./Cache');
+var Constants = require("../constants/CacheConstants"),
+    Cache = require("./Cache");
 
-var memCache = new Cache(Constants.CacheTypes.MEMORY, 'memCache', 180);
+var memCache = new Cache(Constants.CacheTypes.MEMORY, "memCache", 180);
 
 // constants
-var GET_REQUEST = 'GET',
-    POST_REQUEST = 'POST',
-    PUT_REQUEST = 'PUT',
-    DELETE_REQUEST = 'DELETE';
+var GET_REQUEST = "GET",
+    POST_REQUEST = "POST",
+    PUT_REQUEST = "PUT",
+    DELETE_REQUEST = "DELETE";
 
 
 /*
@@ -75,9 +75,9 @@ var processRequest = function (options) {
         default:
             // Unknown request method? Respond with an error.
             options.callback({
-                error: 'request.method.invalid',
+                error: "request.method.invalid",
                 status: -1,
-                data: '',
+                data: "",
                 fromCache: false
             });
             return;
@@ -89,13 +89,13 @@ var processRequest = function (options) {
         contentType = options.headers.Accept;
     }
     else {
-        contentType = 'application/json, text/plain, */*';
+        contentType = "application/json, text/plain, */*";
     }
-    req.set('Accept', contentType);
+    req.set("Accept", contentType);
 
     // add the rest of the provided headers
     _.each(options.headers, function (value, key) {
-        if (key !== 'Accept') {
+        if (key !== "Accept") {
             req.set(key, value);
         }
     });
@@ -110,14 +110,14 @@ var processRequest = function (options) {
         _.each(options.data, function (value, key) {
             // Undefined values appear to be sent as the literal 'undefined' string,
             // so sending them is probably never the right thing to do.
-            if (value !== null && typeof value !== 'undefined') {
+            if (value !== null && typeof value !== "undefined") {
                 req.field(key, value);
             }
         });
 
         // Add the files
         _.each(options.files, function (value, key) {
-            if (value && typeof value === 'object') {
+            if (value && typeof value === "object") {
                 req.attach(key, value);
             }
         });
@@ -132,10 +132,10 @@ var processRequest = function (options) {
         req.query(options.params).end(function (res) {
             var error;
             // this is to comply with the way the webportal endpoints return certain failures
-            if (res.text === 'ERROR') {
+            if (res.text === "ERROR") {
                 error = res.text;
             } else {
-                error = res.error ? res.error.message : '';
+                error = res.error ? res.error.message : "";
             }
 
             // build the response object and pass it to the callback function

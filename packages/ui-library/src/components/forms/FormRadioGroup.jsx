@@ -1,6 +1,6 @@
-var React = require('react/addons'),
-    css = require('classnames'),
-    _ = require('underscore');
+var React = require("react/addons"),
+    css = require("classnames"),
+    _ = require("underscore");
 
 
 /**
@@ -65,7 +65,7 @@ var FormRadioGroup = React.createClass({
 
     getDefaultProps: function () {
         return {
-            id: 'radio-btn',
+            id: "radio-btn",
             stacked: true
         };
     },
@@ -87,12 +87,12 @@ var FormRadioGroup = React.createClass({
                 return (
                     /* jshint ignore:start */
                     <label
-                        className={css('input-radio', radioCss)}
+                        className={css("input-radio", radioCss)}
                         key={item.id}
-                        data-id={self.props.id + '_label_' + item.id}>
+                        data-id={self.props.id + "_label_" + item.id}>
 
                         <input
-                            data-id={self.props.id + '_' + item.id}
+                            data-id={self.props.id + "_" + item.id}
                             type="radio"
                             name={self.props.groupName}
                             value={item.id}

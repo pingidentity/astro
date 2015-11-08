@@ -1,4 +1,4 @@
-jest.dontMock('../DataSourceApi');
+jest.dontMock("../DataSourceApi");
 
 var api;
 var callback;
@@ -14,12 +14,12 @@ var verifyResponse = function (responseCallback, expectedResponse, expectedCache
     expect(responseCallback.mock.calls[0][0].status).toEqual(expectedResponse.status);
     expect(responseCallback.mock.calls[0][0].headers).toEqual(expectedResponse.header);
     expect(responseCallback.mock.calls[0][0].data).toEqual(expectedResponse.body);
-    expect(responseCallback.mock.calls[0][0].error).toEqual(error ? error : '');
+    expect(responseCallback.mock.calls[0][0].error).toEqual(error ? error : "");
 
     expect(responseCallback.mock.calls[0][0].fromCache).toEqual(expectedCachedData);
 };
 
-describe('DataSourceApi', function () {
+describe("DataSourceApi", function () {
 
     beforeEach(function () {
         callback = jest.genMockFunction();
@@ -36,25 +36,25 @@ describe('DataSourceApi', function () {
             this.put = cachePut;
             this.clear = cacheClear;
         };
-        jest.setMock('../Cache', cacheExports);
+        jest.setMock("../Cache", cacheExports);
 
-        api = require('../DataSourceApi');
+        api = require("../DataSourceApi");
 
         // allow customizing the superagent mock/response (I need it for mocking response w/ errors)
-        superagent = require('superagent');
+        superagent = require("superagent");
         response = {
             status: 200,
-            body: 'value',
+            body: "value",
             header: []
         };
         superagent.request.response = response;
     });
 
-    it('retrieves GET requests from cache', function () {
+    it("retrieves GET requests from cache", function () {
         // mock the cache GET to respond as if the request has been cached
         cacheGet.mockReturnValue(response);
 
-        api.get('/testendpoint', { param: 'testGET' }, callback);
+        api.get("/testendpoint", { param: "testGET" }, callback);
 
         expect(cacheGet.mock.calls.length).toEqual(1);
 
@@ -65,8 +65,8 @@ describe('DataSourceApi', function () {
         expect(callback.mock.calls[0][0].fromCache).toBeTruthy();
     });
 
-    it('performs and caches GET requests', function () {
-        api.get('/testendpoint', { param: 'testGET' }, callback);
+    it("performs and caches GET requests", function () {
+        api.get("/testendpoint", { param: "testGET" }, callback);
 
         verifyResponse(callback, response, false);
 
@@ -82,15 +82,15 @@ describe('DataSourceApi', function () {
 
         // verify that the respnse sent to the cache is correct
         var putResponse = cachePut.mock.calls[0][1];
-        expect(putResponse.error).toEqual('');
+        expect(putResponse.error).toEqual("");
         expect(putResponse.fromCache).toBeFalsy();
         expect(putResponse.status).toEqual(response.status);
         expect(putResponse.headers).toEqual(response.header);
         expect(putResponse.data).toEqual(response.body);
     });
 
-    it('performs GET requests bypassing the cache', function () {
-        api.getNoCache('/testendpoint', { param: 'testGETnocache' }, callback);
+    it("performs GET requests bypassing the cache", function () {
+        api.getNoCache("/testendpoint", { param: "testGETnocache" }, callback);
 
         verifyResponse(callback, response, false);
 
@@ -104,8 +104,8 @@ describe('DataSourceApi', function () {
         expect(cacheClear.mock.calls.length).toEqual(0);
     });
 
-    it('performs POST requests with no files', function () {
-        api.post('/testendpoint', {}, { param: 'testPOST' }, callback);
+    it("performs POST requests with no files", function () {
+        api.post("/testendpoint", {}, { param: "testPOST" }, callback);
 
         verifyResponse(callback, response, false);
 
@@ -119,13 +119,13 @@ describe('DataSourceApi', function () {
         expect(cacheClear.mock.calls.length).toEqual(1);
     });
 
-    it('data is set in POST requests', function () {
+    it("data is set in POST requests", function () {
         var data = {
-            name: 'value',
-            'another name': 'some value'
+            name: "value",
+            "another name": "some value"
         };
 
-        api.post('/testendpoint', data, { param: 'testPOST' }, callback);
+        api.post("/testendpoint", data, { param: "testPOST" }, callback);
 
         expect(superagent.request.send.mock.calls.length).toEqual(1);
         expect(superagent.request.send.mock.calls[0][0]).toBe(data);
@@ -134,35 +134,35 @@ describe('DataSourceApi', function () {
         expect(superagent.request.attach.mock.calls.length).toEqual(0);
     });
 
-    it('data and files are set in POST requests', function () {
+    it("data and files are set in POST requests", function () {
         var data = {
-            name: 'value',
-            'another name': 'some value'
+            name: "value",
+            "another name": "some value"
         };
         var files = {
             file1: {},
             file2: {}
         };
 
-        api.post('/testendpoint', data, { param: 'testPOST' }, callback, files);
+        api.post("/testendpoint", data, { param: "testPOST" }, callback, files);
 
         expect(superagent.request.send.mock.calls.length).toEqual(0);
 
         expect(superagent.request.field.mock.calls.length).toEqual(2);
-        expect(superagent.request.field.mock.calls[0][0]).toEqual('name');
-        expect(superagent.request.field.mock.calls[0][1]).toEqual('value');
-        expect(superagent.request.field.mock.calls[1][0]).toEqual('another name');
-        expect(superagent.request.field.mock.calls[1][1]).toEqual('some value');
+        expect(superagent.request.field.mock.calls[0][0]).toEqual("name");
+        expect(superagent.request.field.mock.calls[0][1]).toEqual("value");
+        expect(superagent.request.field.mock.calls[1][0]).toEqual("another name");
+        expect(superagent.request.field.mock.calls[1][1]).toEqual("some value");
 
         expect(superagent.request.attach.mock.calls.length).toEqual(2);
-        expect(superagent.request.attach.mock.calls[0][0]).toEqual('file1');
+        expect(superagent.request.attach.mock.calls[0][0]).toEqual("file1");
         expect(superagent.request.attach.mock.calls[0][1]).toEqual(files.file1);
-        expect(superagent.request.attach.mock.calls[1][0]).toEqual('file2');
+        expect(superagent.request.attach.mock.calls[1][0]).toEqual("file2");
         expect(superagent.request.attach.mock.calls[1][1]).toEqual(files.file2);
     });
 
-    it('performs PUT requests', function () {
-        api.put('/testendpoint', {}, { param: 'testPUT' }, callback);
+    it("performs PUT requests", function () {
+        api.put("/testendpoint", {}, { param: "testPUT" }, callback);
 
         verifyResponse(callback, response, false);
 
@@ -176,8 +176,8 @@ describe('DataSourceApi', function () {
         expect(cacheClear.mock.calls.length).toEqual(1);
     });
 
-    it('performs DELETE requests', function () {
-        api.doDelete('/testendpoint', { param: 'testDELETE' }, callback);
+    it("performs DELETE requests", function () {
+        api.doDelete("/testendpoint", { param: "testDELETE" }, callback);
 
         verifyResponse(callback, response, false);
 
@@ -191,24 +191,11 @@ describe('DataSourceApi', function () {
         expect(cacheClear.mock.calls.length).toEqual(1);
     });
 
-    it('clears cache on response error', function () {
-        response.error = { message: 'validation_error' };
-        api.get('/testendpoint', { param: 'testGET' }, callback);
+    it("clears cache on response error", function () {
+        response.error = { message: "validation_error" };
+        api.get("/testendpoint", { param: "testGET" }, callback);
 
-        verifyResponse(callback, response, false, 'validation_error');
-
-        // the cache PUT should have not been called
-        expect(cachePut.mock.calls.length).toEqual(0);
-
-        // the cache CLEAR should have not been called
-        expect(cacheClear.mock.calls.length).toEqual(1);
-    });
-
-    it('clears cache on response error text in body', function () {
-        response.text = 'ERROR';
-        api.get('/testendpoint', { param: 'testGET' }, callback);
-
-        verifyResponse(callback, response, false, 'ERROR');
+        verifyResponse(callback, response, false, "validation_error");
 
         // the cache PUT should have not been called
         expect(cachePut.mock.calls.length).toEqual(0);
@@ -217,28 +204,41 @@ describe('DataSourceApi', function () {
         expect(cacheClear.mock.calls.length).toEqual(1);
     });
 
-    it('send headers to server', function () {
-        api.put('/testendpoint',
+    it("clears cache on response error text in body", function () {
+        response.text = "ERROR";
+        api.get("/testendpoint", { param: "testGET" }, callback);
+
+        verifyResponse(callback, response, false, "ERROR");
+
+        // the cache PUT should have not been called
+        expect(cachePut.mock.calls.length).toEqual(0);
+
+        // the cache CLEAR should have not been called
+        expect(cacheClear.mock.calls.length).toEqual(1);
+    });
+
+    it("send headers to server", function () {
+        api.put("/testendpoint",
                 {},
-                { param: 'testPOST' },
+                { param: "testPOST" },
                 callback,
-                { 'xsrf-token': 'abc', Accept: 'text/plain' });
+                { "xsrf-token": "abc", Accept: "text/plain" });
 
         expect(superagent.request.set.mock.calls.length).toEqual(2);
         
-        expect(superagent.request.set.mock.calls[0][0]).toEqual('Accept');
-        expect(superagent.request.set.mock.calls[0][1]).toEqual('text/plain');
+        expect(superagent.request.set.mock.calls[0][0]).toEqual("Accept");
+        expect(superagent.request.set.mock.calls[0][1]).toEqual("text/plain");
         
-        expect(superagent.request.set.mock.calls[1][0]).toEqual('xsrf-token');
-        expect(superagent.request.set.mock.calls[1][1]).toEqual('abc');
+        expect(superagent.request.set.mock.calls[1][0]).toEqual("xsrf-token");
+        expect(superagent.request.set.mock.calls[1][1]).toEqual("abc");
     });
 
-    it('send default accept header to server', function () {
-        api.get('/testendpoint', { param: 'testGETnocache' }, callback);
+    it("send default accept header to server", function () {
+        api.get("/testendpoint", { param: "testGETnocache" }, callback);
 
         expect(superagent.request.set.mock.calls.length).toEqual(1);
-        expect(superagent.request.set.mock.calls[0][0]).toEqual('Accept');
-        expect(superagent.request.set.mock.calls[0][1]).toEqual('application/json, text/plain, */*');
+        expect(superagent.request.set.mock.calls[0][0]).toEqual("Accept");
+        expect(superagent.request.set.mock.calls[0][1]).toEqual("application/json, text/plain, */*");
     });
 
 });

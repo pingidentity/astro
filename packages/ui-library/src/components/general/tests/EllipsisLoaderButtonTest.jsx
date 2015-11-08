@@ -1,27 +1,27 @@
 window.__DEV__ = true;
 
-jest.dontMock('../../../testutil/TestUtils');
-jest.dontMock('../EllipsisLoader.jsx');
-jest.dontMock('../EllipsisLoaderButton.jsx');
-jest.dontMock('underscore');
-jest.dontMock('underscore.string');
-jest.dontMock('classnames');
+jest.dontMock("../../../testutil/TestUtils");
+jest.dontMock("../EllipsisLoader.jsx");
+jest.dontMock("../EllipsisLoaderButton.jsx");
+jest.dontMock("underscore");
+jest.dontMock("underscore.string");
+jest.dontMock("classnames");
 
-describe('Ellipsis loader button', function () {
-    var React = require('react/addons');
+describe("Ellipsis loader button", function () {
+    var React = require("react/addons");
     var ReactTestUtils = React.addons.TestUtils;
-    var TestUtils = require('../../../testutil/TestUtils');
-    var EllipsisLoaderButton = require('../EllipsisLoaderButton.jsx');
+    var TestUtils = require("../../../testutil/TestUtils");
+    var EllipsisLoaderButton = require("../EllipsisLoaderButton.jsx");
     var callback;
-    var buttonId = 'test-loader';
-    var buttonText = 'Text Button';
+    var buttonId = "test-loader";
+    var buttonText = "Text Button";
 
     beforeEach(function () {
         callback = jest.genMockFunction();
     });
 
-    it('renders the animated ellipsis when the loading flag is set to true', function () {
-        var buttonCss = 'css-class';
+    it("renders the animated ellipsis when the loading flag is set to true", function () {
+        var buttonCss = "css-class";
 
         var component = ReactTestUtils.renderIntoDocument(
             /* jshint ignore:start */
@@ -35,10 +35,10 @@ describe('Ellipsis loader button', function () {
         );
 
         var button = TestUtils.findRenderedDOMComponentWithDataId(component, buttonId);
-        expect(button.getDOMNode().className).toEqual('ellipsis-loader-button loading ' + buttonCss);
+        expect(button.getDOMNode().className).toEqual("ellipsis-loader-button loading " + buttonCss);
     });
 
-    it('does not render anything when the loading flag is set to false', function () {
+    it("does not render anything when the loading flag is set to false", function () {
         var component = ReactTestUtils.renderIntoDocument(
             /* jshint ignore:start */
             <EllipsisLoaderButton
@@ -50,10 +50,10 @@ describe('Ellipsis loader button', function () {
         );
 
         var button = TestUtils.findRenderedDOMComponentWithDataId(component, buttonId);
-        expect(button.getDOMNode().className).toEqual('ellipsis-loader-button');
+        expect(button.getDOMNode().className).toEqual("ellipsis-loader-button");
     });
 
-    it('renders the button text', function () {
+    it("renders the button text", function () {
         var component = ReactTestUtils.renderIntoDocument(
             /* jshint ignore:start */
             <EllipsisLoaderButton

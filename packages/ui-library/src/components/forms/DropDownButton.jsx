@@ -1,6 +1,6 @@
-var React = require('react/addons'),
-    cx = require('classnames'),
-    _ = require('underscore');
+var React = require("react/addons"),
+    cx = require("classnames"),
+    _ = require("underscore");
 
 /**
  * @class DropDownButton
@@ -68,7 +68,7 @@ var DropDownButton = React.createClass({
 
     getDefaultProps: function () {
         return {
-            label: 'Add',
+            label: "Add",
             options: {}
         };
     },
@@ -82,13 +82,13 @@ var DropDownButton = React.createClass({
     render: function () {
 
         var that = this,
-            styles = cx('input-menu-button', {
+            styles = cx("input-menu-button", {
                 open: this.state.open
             }),
             content = null;
             
         if (this.props.className) {
-            styles = styles + ' ' + this.props.className;
+            styles = styles + " " + this.props.className;
         }
 
         if (this.state.open) {

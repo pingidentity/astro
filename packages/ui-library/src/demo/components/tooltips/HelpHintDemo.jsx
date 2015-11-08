@@ -1,5 +1,5 @@
-var React = require('react/addons');
-var HelpHint = require('../../../components/tooltips/HelpHint.jsx');
+var React = require("react/addons");
+var HelpHint = require("../../../components/tooltips/HelpHint.jsx");
 
 var HelpHintDemo = React.createClass({
 

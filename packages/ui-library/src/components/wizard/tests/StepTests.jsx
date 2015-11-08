@@ -1,14 +1,14 @@
 window.__DEV__ = true;
 
-jest.dontMock('../Step.jsx');
-jest.dontMock('../../../util/format.js');
-jest.dontMock('object-assign');
+jest.dontMock("../Step.jsx");
+jest.dontMock("../../../util/format.js");
+jest.dontMock("object-assign");
 
-describe('Step', function () {
-    var React = require('react/addons'),
+describe("Step", function () {
+    var React = require("react/addons"),
         ReactTestUtils = React.addons.TestUtils,
-        Step = require('../Step.jsx'),
-        assign = require('object-assign');
+        Step = require("../Step.jsx"),
+        assign = require("object-assign");
 
     beforeEach(function () {
     });
@@ -20,9 +20,9 @@ describe('Step', function () {
             total: 2,
             onNext: jest.genMockFunction(),
             onEdit: jest.genMockFunction(),
-            labelNext: 'xxxnext',
-            labelCancel: 'xxxcancel',
-            labelEdit: 'xxxedit'
+            labelNext: "xxxnext",
+            labelCancel: "xxxcancel",
+            labelEdit: "xxxedit"
         };
 
         return ReactTestUtils.renderIntoDocument(
@@ -32,17 +32,17 @@ describe('Step', function () {
         );
     }
 
-    it('Specifies button labels', function () {
+    it("Specifies button labels", function () {
         var component = getRenderedComponent({ isModal: false });
 
-        expect(React.findDOMNode(component.refs.nextButton).value).toBe('xxxnext');
-        expect(React.findDOMNode(component.refs.cancelButton).value).toBe('xxxcancel');
+        expect(React.findDOMNode(component.refs.nextButton).value).toBe("xxxnext");
+        expect(React.findDOMNode(component.refs.cancelButton).value).toBe("xxxcancel");
 
         component = getRenderedComponent({ active: false });
-        expect(React.findDOMNode(component.refs.editButton).innerHTML).toBe('xxxedit');
+        expect(React.findDOMNode(component.refs.editButton).innerHTML).toBe("xxxedit");
     });
 
-    it('Next button executes callback', function () {
+    it("Next button executes callback", function () {
         var component = getRenderedComponent();
 
         ReactTestUtils.Simulate.click(React.findDOMNode(component.refs.nextButton));
@@ -51,7 +51,7 @@ describe('Step', function () {
         expect(component.props.onEdit.mock.calls.length).toBe(0);
     });
 
-    it('Edit button executes callback', function () {
+    it("Edit button executes callback", function () {
         var component = getRenderedComponent({ active: false });
 
         ReactTestUtils.Simulate.click(React.findDOMNode(component.refs.editButton));
@@ -60,7 +60,7 @@ describe('Step', function () {
         expect(component.props.onEdit.mock.calls.length).toBe(1);
     });
 
-    it('Disabled navigation', function () {
+    it("Disabled navigation", function () {
         var component = getRenderedComponent({ disableNavigation: true });
 
         expect(component.refs.nextButton).toBeFalsy();
@@ -68,27 +68,27 @@ describe('Step', function () {
         expect(component.refs.editButton).toBeFalsy();
     });
 
-    it('Inactive step is collapsed', function () {
+    it("Inactive step is collapsed", function () {
         var component = getRenderedComponent({ active: false });
 
         expect(component.refs.nextButton).toBeFalsy();
         expect(component.refs.cancelButton).toBeFalsy();
         expect(component.refs.editButton).toBeTruthy();
 
-        expect(ReactTestUtils.scryRenderedDOMComponentsWithClass(component, 'childNode').length).toBe(0);
+        expect(ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "childNode").length).toBe(0);
     });
 
-    it('Active step is expanded', function () {
+    it("Active step is expanded", function () {
         var component = getRenderedComponent();
 
         expect(component.refs.nextButton).toBeTruthy();
         expect(component.refs.cancelButton).toBeTruthy();
         expect(component.refs.editButton).toBeFalsy();
 
-        expect(ReactTestUtils.scryRenderedDOMComponentsWithClass(component, 'childNode').length).toBe(1);
+        expect(ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "childNode").length).toBe(1);
     });
 
-    it('Hide cancel button', function () {
+    it("Hide cancel button", function () {
         var component = getRenderedComponent({ hideCancel: true });
 
         expect(component.refs.nextButton).toBeTruthy();
@@ -96,7 +96,7 @@ describe('Step', function () {
         expect(component.refs.editButton).toBeFalsy();
     });
 
-    it('Hide edit link', function () {
+    it("Hide edit link", function () {
         var component = getRenderedComponent({ active: false, showEdit: false });
 
         expect(component.refs.nextButton).toBeFalsy();

@@ -1,6 +1,6 @@
-var React = require('react/addons'),
-    _ = require('underscore'),
-    Step = require('./Step.jsx');
+var React = require("react/addons"),
+    _ = require("underscore"),
+    Step = require("./Step.jsx");
 
 /** @class Wizard#Choose
  * @desc A component which allows branches in a wizard.  It will render each child <Wizard /> or <Choose /> as a radio option, click which will append the steps
@@ -35,15 +35,15 @@ var React = require('react/addons'),
  **/
 var Choose = React.createClass({
     INHERIT_PROPS: [
-        'onEdit',
-        'onChange',
-        'onNext',
-        'labelNext',
-        'labelCancel',
-        'labelEdit',
-        'choices',
-        'activeStep',
-        'numSteps'
+        "onEdit",
+        "onChange",
+        "onNext",
+        "labelNext",
+        "labelCancel",
+        "labelEdit",
+        "choices",
+        "activeStep",
+        "numSteps"
     ],
 
     getDefaultProps: function () {
@@ -61,7 +61,7 @@ var Choose = React.createClass({
     },
 
     _getSelectedChild: function () {
-        if (typeof(this._getChoice()) === 'undefined') {
+        if (typeof(this._getChoice()) === "undefined") {
             return undefined;
         }
 
@@ -82,14 +82,14 @@ var Choose = React.createClass({
 
     _getChoiceTitle: function () {
         var selectedChild = this._getSelectedChild();
-        return selectedChild ? selectedChild.props.title : '';
+        return selectedChild ? selectedChild.props.title : "";
     },
 
     _getSubChildCount: function (i) {
         var count = 0;
 
         React.Children.forEach(this.props.children[i].props.children, function (child) {
-            if (!('when' in child.props) || child.props.when) {
+            if (!("when" in child.props) || child.props.when) {
                 count += 1;
             }
         });
@@ -101,7 +101,7 @@ var Choose = React.createClass({
         var choice = this._getChoice();
 
         return React.Children.map(this.props.children, function (e, i) {
-            if (e.type.displayName === 'Wizard' || e.type.displayName === 'Choose') {
+            if (e.type.displayName === "Wizard" || e.type.displayName === "Choose") {
                 /* jshint ignore:start */
                 return (
                     <label className="input-radio stacked">
@@ -126,7 +126,7 @@ var Choose = React.createClass({
     },
 
     render: function () {
-        var props = _.pick(this.props, this.INHERIT_PROPS.concat(['number', 'title']));
+        var props = _.pick(this.props, this.INHERIT_PROPS.concat(["number", "title"]));
         props.active = this.props.activeStep === this.props.number;
         props.completed = this.props.choices.length >= this.props.number;
         props.total = this.props.numSteps;

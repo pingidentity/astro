@@ -1,5 +1,5 @@
-var React = require('react/addons');
-var SelectText = require('./../../../components/general/SelectText.jsx');
+var React = require("react/addons");
+var SelectText = require("./../../../components/general/SelectText.jsx");
 
 var SelectTextDemo = React.createClass({
 

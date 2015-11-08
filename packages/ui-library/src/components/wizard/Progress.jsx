@@ -1,5 +1,5 @@
-var React = require('react'),
-    format = require('../../util/format.js');
+var React = require("react"),
+    format = require("../../util/format.js");
 
 /** @class Wizard#Progress
  * @desc Wizard progress indicator (a-la icon)
@@ -17,15 +17,15 @@ var Progress = React.createClass({
     },
 
     _style: function () {
-        return format('progress step{step} of{of}', this.props) + (this.props.done ? ' done' : '');
+        return format("progress step{step} of{of}", this.props) + (this.props.done ? " done" : "");
     },
 
     componentWillReceiveProps: function (nextProps) {
         if (nextProps.step < 1 || nextProps.step > 7) {
-            console.warn('Progress expecting \'step\' param between 1 and 6, but was given ', nextProps.step);
+            console.warn("Progress expecting 'step' param between 1 and 6, but was given ", nextProps.step);
         }
         if (nextProps.of < 1 || nextProps.step > 7) {
-            console.warn('Progress expecting \'of\' param between 1 and 6, but was given ', nextProps.of);
+            console.warn("Progress expecting 'of' param between 1 and 6, but was given ", nextProps.of);
         }
     },
 

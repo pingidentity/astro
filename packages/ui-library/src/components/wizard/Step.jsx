@@ -1,8 +1,8 @@
-var React = require('react');
-var HelpHint = require('../tooltips/HelpHint.jsx');
-var Progress = require('./Progress.jsx');
-var ContextButton = require('../general/ContextCloseButton.jsx');
-var cx = require('classnames');
+var React = require("react");
+var HelpHint = require("../tooltips/HelpHint.jsx");
+var Progress = require("./Progress.jsx");
+var ContextButton = require("../general/ContextCloseButton.jsx");
+var cx = require("classnames");
 
 /** @class Wizard#Step
  * @desc Describes single wizard step. It is not intended to be used outside of <Wizard>..</Wizard>.  Primarily used for step appearance configuration. Actual step content to be rendered should be defined withing <Step>...</Step>.
@@ -72,10 +72,10 @@ var Step = React.createClass({
 
     _getCancelButton: function () {
         if (!this.props.hideCancel) {
-            return React.createElement(this.props.isModal ? ContextButton : 'input', {
-                type: 'button',
-                ref: 'cancelButton',
-                className: 'default cancel-step',
+            return React.createElement(this.props.isModal ? ContextButton : "input", {
+                type: "button",
+                ref: "cancelButton",
+                className: "default cancel-step",
                 value: this.props.labelCancel
             });
         }
@@ -98,7 +98,7 @@ var Step = React.createClass({
                         <input type="button"
                             ref="nextButton"
                             data-id="nextButton"
-                            className={this.props.nextButtonStyle || 'primary next-step'}
+                            className={this.props.nextButtonStyle || "primary next-step"}
                             value={this.props.labelNext}
                             onClick={this._next}
                             disabled={!this.props.canProceed} />
@@ -129,7 +129,7 @@ var Step = React.createClass({
         var inlineStyles;
         if (!this.props.active && this.props.renderHidden) {
             inlineStyles = {
-                display: 'none'
+                display: "none"
             };
         }
 

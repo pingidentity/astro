@@ -1,6 +1,6 @@
-var React = require('react/addons');
+var React = require("react/addons");
 
-require('./BackgroundLoader.css');
+require("./BackgroundLoader.css");
 
 /*
  * Repeatedly attempt to load content in the background, until
@@ -99,7 +99,7 @@ var BackgroundLoader = React.createClass({
      */
     _loadingContent: function () {
         if (this.props.loading) {
-            if ((typeof this.props.loading) === 'function') {
+            if ((typeof this.props.loading) === "function") {
                 return this.props.loading();
             } else {
                 return this.props.loading;
@@ -110,7 +110,7 @@ var BackgroundLoader = React.createClass({
     _getInterval: function () {
         var interval;
         if (this.props.interval) {
-            if ((typeof this.props.interval) === 'function') {
+            if ((typeof this.props.interval) === "function") {
                 interval = this.props.interval();
             } else {
                 interval = this.props.interval;
@@ -121,7 +121,7 @@ var BackgroundLoader = React.createClass({
 
     getInitialState: function () {
         return {
-            hidden: 'hidden',
+            hidden: "hidden",
             allowPoll: true
         };
     },
@@ -180,21 +180,21 @@ var BackgroundLoader = React.createClass({
 
     initHidden: function () {
         // Standards:
-        if ('hidden' in document) {
-            document.addEventListener('visibilitychange', this.changeHidden);
-            this.setState({ hidden: 'hidden' });
+        if ("hidden" in document) {
+            document.addEventListener("visibilitychange", this.changeHidden);
+            this.setState({ hidden: "hidden" });
         }
-        else if ('mozHidden' in document) {
-            document.addEventListener('mozvisibilitychange', this.changeHidden);
-            this.setState({ hidden: 'mozHidden' });
+        else if ("mozHidden" in document) {
+            document.addEventListener("mozvisibilitychange", this.changeHidden);
+            this.setState({ hidden: "mozHidden" });
         }
-        else if ('webkitHidden' in document) {
-            document.addEventListener('webkitvisibilitychange', this.changeHidden);
-            this.setState({ hidden: 'webkitHidden' });
+        else if ("webkitHidden" in document) {
+            document.addEventListener("webkitvisibilitychange", this.changeHidden);
+            this.setState({ hidden: "webkitHidden" });
         }
-        else if ('msHidden' in document) {
-            document.addEventListener('msvisibilitychange', this.changeHidden);
-            this.setState({ hidden: 'msHidden' });
+        else if ("msHidden" in document) {
+            document.addEventListener("msvisibilitychange", this.changeHidden);
+            this.setState({ hidden: "msHidden" });
         }
         // IE 9 and lower and All others:
         document.onfocusin =
@@ -208,7 +208,7 @@ var BackgroundLoader = React.createClass({
         // set the initial state (but only if browser supports the Page
         // Visibility API)
         if (document[this.state.hidden] !== undefined) {
-            this.changeHidden({ type: document[this.state.hidden] ? 'blur' : 'focus' });
+            this.changeHidden({ type: document[this.state.hidden] ? "blur" : "focus" });
         }
     },
     
@@ -228,7 +228,7 @@ var BackgroundLoader = React.createClass({
                 <span data-id="loader" className={this.props.className}>
                     {content}
 
-                    <img src={require('./BackgroundLoader-example.png')} />
+                    <img src={require("./BackgroundLoader-example.png")} />
 
                     <span className="background-loader-example-span">
                         some example test to demonstrate the required CSS usage

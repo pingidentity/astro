@@ -32,7 +32,7 @@
 		],
 		"quotes": [
 			2,
-			"single",
+			"double",
 			"avoid-escape"
 		],
 		"no-cond-assign": [2],

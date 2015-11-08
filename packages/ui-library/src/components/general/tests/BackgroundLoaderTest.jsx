@@ -1,13 +1,13 @@
 window.__DEV__ = true;
 
-jest.dontMock('../../../testutil/TestUtils');
-jest.dontMock('../BackgroundLoader.jsx');
+jest.dontMock("../../../testutil/TestUtils");
+jest.dontMock("../BackgroundLoader.jsx");
 
-describe('BackgroundLoader', function () {
-    var React = require('react/addons');
+describe("BackgroundLoader", function () {
+    var React = require("react/addons");
     var ReactTestUtils = React.addons.TestUtils;
-    var TestUtils = require('../../../testutil/TestUtils');
-    var BackgroundLoader = require('../BackgroundLoader.jsx');
+    var TestUtils = require("../../../testutil/TestUtils");
+    var BackgroundLoader = require("../BackgroundLoader.jsx");
 
     var loadingContentFunc;
     var loadContentFunc;
@@ -26,7 +26,7 @@ describe('BackgroundLoader', function () {
     });
 
 
-    it('render loading state', function () {
+    it("render loading state", function () {
         loaded = false;
 
         var component = ReactTestUtils.renderIntoDocument(
@@ -43,16 +43,16 @@ describe('BackgroundLoader', function () {
         );
         
         // the loading content should be visible; the loaded content should not be
-        var loader = TestUtils.findRenderedDOMComponentWithDataId(component, 'loader');
+        var loader = TestUtils.findRenderedDOMComponentWithDataId(component, "loader");
         expect(ReactTestUtils.isDOMComponent(loader)).toBeTruthy();
-        expect(loader.getDOMNode().className).toEqual('css-class');
-        var loadingContent = TestUtils.findRenderedDOMComponentWithDataId(component, 'loading-content');
+        expect(loader.getDOMNode().className).toEqual("css-class");
+        var loadingContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loading-content");
         expect(ReactTestUtils.isDOMComponent(loadingContent)).toBeTruthy();
-        var loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, 'loaded-content');
+        var loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeFalsy();
     });
 
-    it('render loaded state', function () {
+    it("render loaded state", function () {
         loaded = true;
 
         var component = ReactTestUtils.renderIntoDocument(
@@ -69,15 +69,15 @@ describe('BackgroundLoader', function () {
         );
 
         // the loading content should not be visible; the loaded content should be
-        var loader = TestUtils.findRenderedDOMComponentWithDataId(component, 'loader');
+        var loader = TestUtils.findRenderedDOMComponentWithDataId(component, "loader");
         expect(ReactTestUtils.isDOMComponent(loader)).toBeTruthy();
-        var loadingContent = TestUtils.findRenderedDOMComponentWithDataId(component, 'loading-content');
+        var loadingContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loading-content");
         expect(ReactTestUtils.isDOMComponent(loadingContent)).toBeFalsy();
-        var loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, 'loaded-content');
+        var loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeTruthy();
     });
 
-    it('verify component unmount', function () {
+    it("verify component unmount", function () {
         global.clearTimeout = jest.genMockFunction();
 
         var Wrapper = React.createClass({
@@ -121,7 +121,7 @@ describe('BackgroundLoader', function () {
         expect(global.clearTimeout.mock.calls.length).toBe(1);
     });
 
-    it('verify component loadLoop invoked', function () {
+    it("verify component loadLoop invoked", function () {
         loaded = false;
 
         var Wrapper = React.createClass({
@@ -154,24 +154,24 @@ describe('BackgroundLoader', function () {
             <Wrapper />
         );
         
-        document['hidden'] = false;
+        document["hidden"] = false;
         var component = ReactTestUtils.renderIntoDocument(element);
 
         expect(setTimeout.mock.calls.length).toBe(1);
         expect(setTimeout.mock.calls[0][1]).toBe(2000);
 
-        var loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, 'loaded-content');
+        var loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeFalsy();
 
         loaded = true;
         jest.runAllTimers();
 
-        loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, 'loaded-content');
+        loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeTruthy();
 
     });
 
-    it('render passed in loading content', function () {
+    it("render passed in loading content", function () {
         loaded = false;
 
         var component = ReactTestUtils.renderIntoDocument(
@@ -188,19 +188,19 @@ describe('BackgroundLoader', function () {
         );
         
         // the loading content should be visible; the loaded content should not be
-        var loader = TestUtils.findRenderedDOMComponentWithDataId(component, 'loader');
+        var loader = TestUtils.findRenderedDOMComponentWithDataId(component, "loader");
         expect(ReactTestUtils.isDOMComponent(loader)).toBeTruthy();
-        expect(loader.getDOMNode().className).toEqual('css-class');
-        var loadingContent = TestUtils.findRenderedDOMComponentWithDataId(component, 'loading-content');
+        expect(loader.getDOMNode().className).toEqual("css-class");
+        var loadingContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loading-content");
         expect(ReactTestUtils.isDOMComponent(loadingContent)).toBeTruthy();
-        var loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, 'loaded-content');
+        var loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeFalsy();
     });
 
-    it('test non-mapped hidden event', function () {
+    it("test non-mapped hidden event", function () {
         loaded = false;
 
-        document['hidden'] = false;
+        document["hidden"] = false;
         var component = ReactTestUtils.renderIntoDocument(
             /* jshint ignore:start */
             <BackgroundLoader
@@ -217,21 +217,21 @@ describe('BackgroundLoader', function () {
         
         expect(component.state.allowPoll).toBeTruthy();
         
-        document['hidden'] = true;
-        component.changeHidden({ type: 'something' });
+        document["hidden"] = true;
+        component.changeHidden({ type: "something" });
 
         expect(component.state.allowPoll).toBeFalsy();
         
     });
 
-    it('test mozHidden', function () {
+    it("test mozHidden", function () {
         loaded = false;
 
         // Clear document['hidden'] since it could be polluted from previous tests.
-        delete document['hidden'];
+        delete document["hidden"];
 
         // Setup the document for mozilla hidden testing (with window initially out of focus)
-        document['mozHidden'] = true;
+        document["mozHidden"] = true;
 
         var Wrapper = React.createClass({
             getInitialState: function () {
@@ -267,7 +267,7 @@ describe('BackgroundLoader', function () {
         // Render the component and verify that the loaded content is not yet displayed
         var component = ReactTestUtils.renderIntoDocument(element);
 
-        var loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, 'loaded-content');
+        var loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeFalsy();
 
         // With loaded set to true, trigger a timer callback to attempt a data load.
@@ -276,32 +276,32 @@ describe('BackgroundLoader', function () {
         loaded = true;
         jest.runOnlyPendingTimers();
 
-        loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, 'loaded-content');
+        loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeFalsy();
 
         // Set the document to now be in focus and trigger a document event
-        document['mozHidden'] = false;
-        var evt = document.createEvent('HTMLEvents');
-        evt.initEvent('mozvisibilitychange', true, true);
+        document["mozHidden"] = false;
+        var evt = document.createEvent("HTMLEvents");
+        evt.initEvent("mozvisibilitychange", true, true);
         document.body.dispatchEvent(evt);
 
         loaded = true;
         jest.runOnlyPendingTimers();
 
-        loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, 'loaded-content');
+        loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeTruthy();
         
     });
 
-    it('test webkitHidden', function () {
+    it("test webkitHidden", function () {
         loaded = false;
 
         // Clear document['hidden'] since it could be polluted from previous tests.
-        delete document['hidden'];
-        delete document['mozHidden'];
+        delete document["hidden"];
+        delete document["mozHidden"];
 
         // Setup the document for mozilla hidden testing (with window initially out of focus)
-        document['webkitHidden'] = true;
+        document["webkitHidden"] = true;
 
         var Wrapper = React.createClass({
             getInitialState: function () {
@@ -337,7 +337,7 @@ describe('BackgroundLoader', function () {
         // Render the component and verify that the loaded content is not yet displayed
         var component = ReactTestUtils.renderIntoDocument(element);
 
-        var loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, 'loaded-content');
+        var loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeFalsy();
 
         // With loaded set to true, trigger a timer callback to attempt a data load.
@@ -346,33 +346,33 @@ describe('BackgroundLoader', function () {
         loaded = true;
         jest.runOnlyPendingTimers();
 
-        loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, 'loaded-content');
+        loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeFalsy();
 
         // Set the document to now be in focus and trigger a document event
-        document['webkitHidden'] = false;
-        var evt = document.createEvent('HTMLEvents');
-        evt.initEvent('webkitvisibilitychange', true, true);
+        document["webkitHidden"] = false;
+        var evt = document.createEvent("HTMLEvents");
+        evt.initEvent("webkitvisibilitychange", true, true);
         document.body.dispatchEvent(evt);
 
         loaded = true;
         jest.runOnlyPendingTimers();
 
-        loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, 'loaded-content');
+        loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeTruthy();
         
     });
 
-    it('test msHidden', function () {
+    it("test msHidden", function () {
         loaded = false;
 
         // Clear document['hidden'] since it could be polluted from previous tests.
-        delete document['hidden'];
-        delete document['mozHidden'];
-        delete document['webkitHidden'];
+        delete document["hidden"];
+        delete document["mozHidden"];
+        delete document["webkitHidden"];
 
         // Setup the document for mozilla hidden testing (with window initially out of focus)
-        document['msHidden'] = true;
+        document["msHidden"] = true;
 
         var Wrapper = React.createClass({
             getInitialState: function () {
@@ -408,7 +408,7 @@ describe('BackgroundLoader', function () {
         // Render the component and verify that the loaded content is not yet displayed
         var component = ReactTestUtils.renderIntoDocument(element);
 
-        var loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, 'loaded-content');
+        var loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeFalsy();
 
         // With loaded set to true, trigger a timer callback to attempt a data load.
@@ -417,19 +417,19 @@ describe('BackgroundLoader', function () {
         loaded = true;
         jest.runOnlyPendingTimers();
 
-        loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, 'loaded-content');
+        loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeFalsy();
 
         // Set the document to now be in focus and trigger a document event
-        document['msHidden'] = false;
-        var evt = document.createEvent('HTMLEvents');
-        evt.initEvent('msvisibilitychange', true, true);
+        document["msHidden"] = false;
+        var evt = document.createEvent("HTMLEvents");
+        evt.initEvent("msvisibilitychange", true, true);
         document.body.dispatchEvent(evt);
 
         loaded = true;
         jest.runOnlyPendingTimers();
 
-        loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, 'loaded-content');
+        loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeTruthy();
         
     });

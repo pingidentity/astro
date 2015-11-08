@@ -1,5 +1,5 @@
-var React = require('react'),
-    _ = require('underscore');
+var React = require("react"),
+    _ = require("underscore");
 
 /** @class Wizard
  * @desc A component used to build step-by-step wizards. Can contain 2 child types <Step /> or <Choose />.  You can think of a wizard as a
@@ -34,15 +34,15 @@ var React = require('react'),
  **/
 var Wizard = React.createClass({
     INHERIT_PROPS: [
-        'onEdit',
-        'onChange',
-        'onNext',
-        'labelNext',
-        'labelCancel',
-        'labelEdit',
-        'choices',
-        'activeStep',
-        'numSteps'
+        "onEdit",
+        "onChange",
+        "onNext",
+        "labelNext",
+        "labelCancel",
+        "labelEdit",
+        "choices",
+        "activeStep",
+        "numSteps"
     ],
 
     propTypes: {
@@ -60,7 +60,7 @@ var Wizard = React.createClass({
         var result = [];
 
         React.Children.forEach(children, function (child) {
-            if (!('when' in child.props) || child.props.when) {
+            if (!("when" in child.props) || child.props.when) {
                 result.push(child);
             }
         });
@@ -90,7 +90,7 @@ var Wizard = React.createClass({
             var idx = this.props.number + i;
 
             return React.addons.cloneWithProps(step, _.defaults({
-                ref: 'step' + idx,
+                ref: "step" + idx,
                 active: this.props.activeStep === idx,
                 key: idx,
                 number: idx,
@@ -110,9 +110,9 @@ var Wizard = React.createClass({
     }
 });
 
-Wizard.Step = require('.//Step.jsx');
-Wizard.Choose = require('./Choose.jsx');
-Wizard.Reducer = require('./Reducer.js');
-Wizard.Actions = require('./Actions.js');
+Wizard.Step = require(".//Step.jsx");
+Wizard.Choose = require("./Choose.jsx");
+Wizard.Reducer = require("./Reducer.js");
+Wizard.Actions = require("./Actions.js");
 
 module.exports = Wizard;

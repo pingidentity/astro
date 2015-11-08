@@ -1,5 +1,5 @@
-var React = require('react/addons');
-var FormTextArea = require('./../../../components/forms/FormTextArea.jsx');
+var React = require("react/addons");
+var FormTextArea = require("./../../../components/forms/FormTextArea.jsx");
 
 /**
  * A demo for FormTextArea.
@@ -8,7 +8,7 @@ var FormTextAreaDemo = React.createClass({
 
     getInitialState: function () {
         return {
-            onChangeFieldValue: ''
+            onChangeFieldValue: ""
         };
     },
 
@@ -19,7 +19,7 @@ var FormTextAreaDemo = React.createClass({
     },
 
     render: function () {
-        var options = { 1: 'one', 2: 'two', 3: 'three' };
+        var options = { 1: "one", 2: "two", 3: "three" };
 
         return (
             <div>

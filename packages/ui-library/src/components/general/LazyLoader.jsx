@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-var React = require('react');
+var React = require("react");
 /**
  * @class LazyLoader
  * @description Renders a limited amount of items initially and doubles the rendered items each time scrolling reaches

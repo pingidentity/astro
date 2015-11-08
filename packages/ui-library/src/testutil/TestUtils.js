@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-var React = require('react/addons');
+var React = require("react/addons");
 var ReactTestUtils = React.addons.TestUtils;
 
 var TestUtils = {
@@ -11,7 +11,7 @@ var TestUtils = {
      */
     scryRenderedDOMComponentsWithDataId: function (tree, dataId) {
         var components = ReactTestUtils.findAllInRenderedTree(tree, function (inst) {
-            var instId = inst.props['data-id'];
+            var instId = inst.props["data-id"];
             return ReactTestUtils.isDOMComponent(inst) && (instId === dataId);
         });
         
@@ -22,8 +22,8 @@ var TestUtils = {
         var components = TestUtils.scryRenderedDOMComponentsWithDataId(tree, dataId);
 
         if (components.length > 1) {
-            throw new Error('Found more than one component with dataId: ' +
-                    dataId + ' in the given tree');
+            throw new Error("Found more than one component with dataId: " +
+                    dataId + " in the given tree");
         }
 
         return components.length === 0 ? null : components[0];
@@ -36,8 +36,8 @@ var TestUtils = {
         });
     
         if (components.length > 1) {
-            throw new Error('Found more than one component with name: ' +
-                    name + ' in the given tree');
+            throw new Error("Found more than one component with name: " +
+                    name + " in the given tree");
         }
     
         return components.length === 0 ? null : components[0];

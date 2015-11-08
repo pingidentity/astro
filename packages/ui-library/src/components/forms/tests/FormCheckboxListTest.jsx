@@ -1,32 +1,32 @@
 window.__DEV__ = true;
 
-jest.dontMock('../../../testutil/TestUtils');
-jest.dontMock('../FormTextField.jsx');
-jest.dontMock('../Toggle.jsx');
+jest.dontMock("../../../testutil/TestUtils");
+jest.dontMock("../FormTextField.jsx");
+jest.dontMock("../Toggle.jsx");
 
-jest.dontMock('../FormCheckboxList.jsx');
-jest.dontMock('../../general/LazyLoader.jsx');
+jest.dontMock("../FormCheckboxList.jsx");
+jest.dontMock("../../general/LazyLoader.jsx");
 
-jest.dontMock('underscore');
+jest.dontMock("underscore");
 
-describe('FormCheckboxList', function () {
-    var React = require('react/addons');
+describe("FormCheckboxList", function () {
+    var React = require("react/addons");
     var ReactTestUtils = React.addons.TestUtils;
-    var TestUtils = require('../../../testutil/TestUtils');
-    var FormCheckboxList = require('../FormCheckboxList.jsx');
+    var TestUtils = require("../../../testutil/TestUtils");
+    var FormCheckboxList = require("../FormCheckboxList.jsx");
     var callback = jest.genMockFunction();
-    var Toggle = require('../Toggle.jsx');
+    var Toggle = require("../Toggle.jsx");
 
     var items = [
-        { id: 1, name: 'Salesforce' },
-        { id: 2, name: 'Google Mail' }
+        { id: 1, name: "Salesforce" },
+        { id: 2, name: "Google Mail" }
     ];
     var itemsInGroups = [
-        { id: 1, name: 'Salesforce', group: 'group1' },
-        { id: 2, name: 'Google Mail', group: 'group2' }
+        { id: 1, name: "Salesforce", group: "group1" },
+        { id: 2, name: "Google Mail", group: "group2" }
     ];
 
-    xit('test default render state of form with minimal parameters', function () {
+    xit("test default render state of form with minimal parameters", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
             /* jshint ignore: start */
@@ -43,10 +43,10 @@ describe('FormCheckboxList', function () {
             /* jshint ignore: end */
         );
 
-        var checkboxContainer = TestUtils.findRenderedDOMComponentWithDataId(component, 'dataobjects');
-        var checkboxes = ReactTestUtils.scryRenderedDOMComponentsWithTag(checkboxContainer, 'input');
-        var searchInput = TestUtils.findRenderedDOMComponentWithDataId(component, 'dataobject-search');
-        var checkAllToggle = TestUtils.findRenderedDOMComponentWithDataId(component, 'check-all');
+        var checkboxContainer = TestUtils.findRenderedDOMComponentWithDataId(component, "dataobjects");
+        var checkboxes = ReactTestUtils.scryRenderedDOMComponentsWithTag(checkboxContainer, "input");
+        var searchInput = TestUtils.findRenderedDOMComponentWithDataId(component, "dataobject-search");
+        var checkAllToggle = TestUtils.findRenderedDOMComponentWithDataId(component, "check-all");
         var hideUncheckedToggle = ReactTestUtils.scryRenderedComponentsWithType(component, Toggle);
 
         // Check for rendered elements
@@ -56,11 +56,11 @@ describe('FormCheckboxList', function () {
         expect(hideUncheckedToggle.length).toBe(1);
 
         // validate rendered dataobject checkbox values
-        expect(checkboxes[0].getDOMNode().value).toBe('1');
-        expect(checkboxes[1].getDOMNode().value).toBe('2');
+        expect(checkboxes[0].getDOMNode().value).toBe("1");
+        expect(checkboxes[1].getDOMNode().value).toBe("2");
     });
 
-    xit('test no default selected item', function () {
+    xit("test no default selected item", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
             /* jshint ignore: start */
@@ -76,8 +76,8 @@ describe('FormCheckboxList', function () {
             /* jshint ignore: end */
         );
 
-        var checkboxContainer = TestUtils.findRenderedDOMComponentWithDataId(component, 'dataobjects');
-        var checkboxes = ReactTestUtils.scryRenderedDOMComponentsWithTag(checkboxContainer, 'input');
+        var checkboxContainer = TestUtils.findRenderedDOMComponentWithDataId(component, "dataobjects");
+        var checkboxes = ReactTestUtils.scryRenderedDOMComponentsWithTag(checkboxContainer, "input");
 
         // make sure no checkboxes are checked since we didn't provide a default
         expect(checkboxes.length).toBe(2);
@@ -85,7 +85,7 @@ describe('FormCheckboxList', function () {
         expect(checkboxes[1].getDOMNode().checked).toBe(false);
     });
 
-    xit('will trigger callback on select all hyperlink change event', function () {
+    xit("will trigger callback on select all hyperlink change event", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
             /* jshint ignore: start */
@@ -101,8 +101,8 @@ describe('FormCheckboxList', function () {
             /* jshint ignore: end */
         );
 
-        var checkboxes = TestUtils.scryRenderedDOMComponentsWithDataId(component, 'checkbox');
-        var checkAllToggle = TestUtils.findRenderedDOMComponentWithDataId(component, 'check-all');
+        var checkboxes = TestUtils.scryRenderedDOMComponentsWithDataId(component, "checkbox");
+        var checkAllToggle = TestUtils.findRenderedDOMComponentWithDataId(component, "check-all");
 
         expect(checkboxes[0].getDOMNode().checked).toBe(false);
         expect(checkboxes[1].getDOMNode().checked).toBe(false);
@@ -119,7 +119,7 @@ describe('FormCheckboxList', function () {
         expect(checkboxes[1].getDOMNode().checked).toBe(true);
     });
 
-    xit('will trigger callback on checkbox dataobject selection change', function () {
+    xit("will trigger callback on checkbox dataobject selection change", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
             /* jshint ignore: start */
@@ -136,8 +136,8 @@ describe('FormCheckboxList', function () {
             /* jshint ignore: end */
         );
 
-        var checkboxContainer = TestUtils.findRenderedDOMComponentWithDataId(component, 'dataobjects');
-        var checkboxes = ReactTestUtils.scryRenderedDOMComponentsWithTag(checkboxContainer, 'input');
+        var checkboxContainer = TestUtils.findRenderedDOMComponentWithDataId(component, "dataobjects");
+        var checkboxes = ReactTestUtils.scryRenderedDOMComponentsWithTag(checkboxContainer, "input");
 
         // make sure second checkbox is checked by default
         expect(checkboxes[0].getDOMNode().checked).toBe(true);
@@ -148,7 +148,7 @@ describe('FormCheckboxList', function () {
         expect(callback).toBeCalled();
     });
 
-    xit('will trigger search filter', function () {
+    xit("will trigger search filter", function () {
         var component = ReactTestUtils.renderIntoDocument(
             /* jshint ignore: start */
             <FormCheckboxList
@@ -163,9 +163,9 @@ describe('FormCheckboxList', function () {
             /* jshint ignore: end */
         );
 
-        var searchInput = TestUtils.findRenderedDOMComponentWithDataId(component, 'dataobject-search');
+        var searchInput = TestUtils.findRenderedDOMComponentWithDataId(component, "dataobject-search");
 
-        ReactTestUtils.Simulate.change(searchInput, { target: { value: 'Sa' } } );
+        ReactTestUtils.Simulate.change(searchInput, { target: { value: "Sa" } } );
 
         var calls = component.props.onQueryChange.mock.calls;
         expect(calls.length).toBe(1);
@@ -173,15 +173,15 @@ describe('FormCheckboxList', function () {
         component.setProps({ queryString: calls[0][0] });
 
         // get the updated DOM
-        var checkboxContainer = TestUtils.findRenderedDOMComponentWithDataId(component, 'dataobjects');
-        var checkboxes = ReactTestUtils.scryRenderedDOMComponentsWithTag(checkboxContainer, 'input');
+        var checkboxContainer = TestUtils.findRenderedDOMComponentWithDataId(component, "dataobjects");
+        var checkboxes = ReactTestUtils.scryRenderedDOMComponentsWithTag(checkboxContainer, "input");
 
         // there should now be 1 checkbox since Google Mail was filtered out
         expect(checkboxes.length).toBe(1);
-        expect(checkboxes[0].getDOMNode().value).toBe('1');
+        expect(checkboxes[0].getDOMNode().value).toBe("1");
     });
 
-    xit('will trigger hide unchecked toggle', function () {
+    xit("will trigger hide unchecked toggle", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
             /* jshint ignore: start */
@@ -206,7 +206,7 @@ describe('FormCheckboxList', function () {
         expect(callback).toBeCalled();
     });
 
-    xit('will render grouped datasets, validate group labels shows up', function () {
+    xit("will render grouped datasets, validate group labels shows up", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
             /* jshint ignore: start */
@@ -222,28 +222,28 @@ describe('FormCheckboxList', function () {
             /* jshint ignore: end */
         );
 
-        var checkboxContainer = TestUtils.findRenderedDOMComponentWithDataId(component, 'dataobjects');
-        var checkboxes = ReactTestUtils.scryRenderedDOMComponentsWithTag(checkboxContainer, 'input');
-        var searchInput = TestUtils.findRenderedDOMComponentWithDataId(component, 'dataobject-search');
-        var checkAllToggle = TestUtils.findRenderedDOMComponentWithDataId(component, 'check-all');
+        var checkboxContainer = TestUtils.findRenderedDOMComponentWithDataId(component, "dataobjects");
+        var checkboxes = ReactTestUtils.scryRenderedDOMComponentsWithTag(checkboxContainer, "input");
+        var searchInput = TestUtils.findRenderedDOMComponentWithDataId(component, "dataobject-search");
+        var checkAllToggle = TestUtils.findRenderedDOMComponentWithDataId(component, "check-all");
         var hideUncheckedToggle = ReactTestUtils.scryRenderedComponentsWithType(component, Toggle);
-        var group1Label = TestUtils.findRenderedDOMComponentWithDataId(component, 'data-label-group1');
-        var group2Label = TestUtils.findRenderedDOMComponentWithDataId(component, 'data-label-group2');
+        var group1Label = TestUtils.findRenderedDOMComponentWithDataId(component, "data-label-group1");
+        var group2Label = TestUtils.findRenderedDOMComponentWithDataId(component, "data-label-group2");
 
         // Check for rendered elements
         expect(checkboxes.length).toBe(2);
         expect(searchInput).toBeDefined();
         expect(checkAllToggle).toBeDefined(1);
         expect(hideUncheckedToggle.length).toBe(1);
-        expect(group1Label.props.children).toBe('group1');
-        expect(group2Label.props.children).toBe('group2');
+        expect(group1Label.props.children).toBe("group1");
+        expect(group2Label.props.children).toBe("group2");
 
         // validate rendered dataobject checkbox values
-        expect(checkboxes[0].getDOMNode().value).toBe('1');
-        expect(checkboxes[1].getDOMNode().value).toBe('2');
+        expect(checkboxes[0].getDOMNode().value).toBe("1");
+        expect(checkboxes[1].getDOMNode().value).toBe("2");
     });
 
-    xit('will trigger group label filtering', function () {
+    xit("will trigger group label filtering", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
             /* jshint ignore: start */
@@ -259,8 +259,8 @@ describe('FormCheckboxList', function () {
             /* jshint ignore: end */
         );
 
-        var group2Label = TestUtils.findRenderedDOMComponentWithDataId(component, 'data-label-group2');
-        var checkboxes = TestUtils.scryRenderedDOMComponentsWithDataId(component, 'checkbox');
+        var group2Label = TestUtils.findRenderedDOMComponentWithDataId(component, "data-label-group2");
+        var checkboxes = TestUtils.scryRenderedDOMComponentsWithDataId(component, "checkbox");
 
         expect(checkboxes.length).toBe(2);
 

@@ -1,33 +1,33 @@
-var React = require('react/addons');
-var DetailsTooltip = require('../../../components/tooltips/DetailsTooltip.jsx');
+var React = require("react/addons");
+var DetailsTooltip = require("../../../components/tooltips/DetailsTooltip.jsx");
 
 var DetailsTooltipDemo = React.createClass({
 
     _cancel: function () {
         this.setState({
             open: false,
-            confirmed: 'Cancelled'
+            confirmed: "Cancelled"
         });
     },
 
     _confirm: function () {
         this.setState({
             open: false,
-            confirmed: 'Confirmed'
+            confirmed: "Confirmed"
         });
     },
 
     _toggleConfirmation: function () {
         this.setState({
             open: !this.state.open,
-            confirmed: ''
+            confirmed: ""
         });
     },
 
     getInitialState: function () {
         return {
             open: false,
-            confirmed: ''
+            confirmed: ""
         };
     },
 

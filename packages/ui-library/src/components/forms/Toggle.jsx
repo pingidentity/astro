@@ -1,6 +1,6 @@
-var React = require('react/addons'),
-    css = require('classnames'),
-    _ = require('underscore');
+var React = require("react/addons"),
+    css = require("classnames"),
+    _ = require("underscore");
 
  /**
  * @class Toggle
@@ -39,7 +39,7 @@ var Toggle = React.createClass({
 
     getDefaultProps: function () {
         return {
-            id: 'toggle'
+            id: "toggle"
         };
     },
 
@@ -80,13 +80,13 @@ var Toggle = React.createClass({
         var state = _.isUndefined(this.props.value) ? this.state.toggled : this.props.value;
 
         var classNames = css({
-            'input-toggle': true,
+            "input-toggle": true,
             selected: state,
             disabled: this.props.disabled
         });
 
         if (this.props.className) {
-            classNames = classNames + ' ' + this.props.className;
+            classNames = classNames + " " + this.props.className;
         }
 
         return (

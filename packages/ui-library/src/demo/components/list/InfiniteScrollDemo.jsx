@@ -1,5 +1,5 @@
-var React = require('react'),
-    InfiniteScroll = require('../../../components/list/InfiniteScroll.jsx');
+var React = require("react"),
+    InfiniteScroll = require("../../../components/list/InfiniteScroll.jsx");
 
 var Demo = React.createClass({
     SIMULATED_DELAY_MS: 200,
@@ -62,7 +62,7 @@ var Demo = React.createClass({
     headingGenerator: function (data) {
         var start = data.num - (data.num % 10);
         var end = start + 10;
-        return data.num % 10 === 0 ? ('Heading ' + start + ' to ' + end) : null;
+        return data.num % 10 === 0 ? ("Heading " + start + " to " + end) : null;
     },
 
     render: function () {

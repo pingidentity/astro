@@ -1,26 +1,26 @@
-var React = require('react/addons');
-var Toggle = require('../../../components/forms/Toggle.jsx');
+var React = require("react/addons");
+var Toggle = require("../../../components/forms/Toggle.jsx");
 
 var ToggleDemo = React.createClass({
 
     getInitialState: function () {
         return {
-            userStatus: ''
+            userStatus: ""
         };
     },
 
     _isToggled: function () {
-        return this.state.userStatus === 'ACTIVE';
+        return this.state.userStatus === "ACTIVE";
     },
 
     _onStatusToggle: function (toggledOn) {
         if (toggledOn) {
             this.setState({
-                userStatus: 'ACTIVE'
+                userStatus: "ACTIVE"
             });
         } else {
             this.setState({
-                userStatus: 'DISABLED'
+                userStatus: "DISABLED"
             });
         }
         return true;

@@ -1,27 +1,27 @@
 
-jest.dontMock('../ModalButton.jsx');
+jest.dontMock("../ModalButton.jsx");
 
 
-describe('ModalButtonTest', function () {
-    var React = require('react/addons');
+describe("ModalButtonTest", function () {
+    var React = require("react/addons");
     var ReactTestUtils = React.addons.TestUtils;
-    var ModalButton = require('../ModalButton.jsx');
+    var ModalButton = require("../ModalButton.jsx");
 
     var linkCallback = function () {
         return <span className="someCallbackClass">Link</span>;
     };
 
-    it('Test default render', function () {
+    it("Test default render", function () {
         var modalComponent = ReactTestUtils.renderIntoDocument(
             <ModalButton value="My Button" buttonStyle="buttonClass" />
         );
 
         // Expect a single button to be rendered.
-        var button = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, 'buttonClass');
-        expect(button.getDOMNode().textContent).toBe('My Button');
+        var button = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, "buttonClass");
+        expect(button.getDOMNode().textContent).toBe("My Button");
 
         // Expect no modal to be rendered.
-        var modals = ReactTestUtils.scryRenderedDOMComponentsWithClass(modalComponent, 'modal');
+        var modals = ReactTestUtils.scryRenderedDOMComponentsWithClass(modalComponent, "modal");
         expect(modals.length).toEqual(0);
     });
 
@@ -31,17 +31,17 @@ describe('ModalButtonTest', function () {
      * is rendered as such.
      *
      */
-    it('Modal initially open', function () {
+    it("Modal initially open", function () {
         var modalComponent = ReactTestUtils.renderIntoDocument(
             <ModalButton buttonStyle="buttonClass" initiallyExpanded={true} value="Test Button" />
         );
 
         // Expect a single button to be rendered.
-        ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, 'buttonClass');
+        ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, "buttonClass");
 
         // Expect a single shown modal to be rendered.
-        var modal = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, 'modal');
-        ReactTestUtils.findRenderedDOMComponentWithClass(modal, 'show');
+        var modal = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, "modal");
+        ReactTestUtils.findRenderedDOMComponentWithClass(modal, "show");
     });
 
 
@@ -52,7 +52,7 @@ describe('ModalButtonTest', function () {
      *
      * Happy path modal functionality.
      */
-    it('Initially closed modal opened on click', function () {
+    it("Initially closed modal opened on click", function () {
         var callback = jest.genMockFunction();
 
         var modalComponent = ReactTestUtils.renderIntoDocument(
@@ -60,10 +60,10 @@ describe('ModalButtonTest', function () {
         );
 
         // Expect a single button to be rendered.
-        var button = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, 'buttonClass');
+        var button = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, "buttonClass");
 
         // Expect no modal to be rendered.
-        var modals = ReactTestUtils.scryRenderedDOMComponentsWithClass(modalComponent, 'modal');
+        var modals = ReactTestUtils.scryRenderedDOMComponentsWithClass(modalComponent, "modal");
         expect(modals.length).toEqual(0);
 
         // Callback should not have been called yet
@@ -72,8 +72,8 @@ describe('ModalButtonTest', function () {
         ReactTestUtils.Simulate.click(button);
 
         // Expect a single shown modal to be rendered after click.
-        var modal = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, 'modal');
-        ReactTestUtils.findRenderedDOMComponentWithClass(modal, 'show');
+        var modal = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, "modal");
+        ReactTestUtils.findRenderedDOMComponentWithClass(modal, "show");
 
         // Callback should have been called one time for the one click
         expect(callback.mock.calls.length).toBe(1);
@@ -85,7 +85,7 @@ describe('ModalButtonTest', function () {
      * closing it a couple of times.
      *
      */
-    it('Open, close, open, close again', function () {
+    it("Open, close, open, close again", function () {
         var openCallback = jest.genMockFunction();
         var closeCallback = jest.genMockFunction();
         closeCallback.mockReturnValue(true);
@@ -95,10 +95,10 @@ describe('ModalButtonTest', function () {
         );
 
         // Expect a single button to be rendered.
-        var button = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, 'buttonClass');
+        var button = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, "buttonClass");
 
         // Expect no modal to be rendered.
-        var modals = ReactTestUtils.scryRenderedDOMComponentsWithClass(modalComponent, 'modal');
+        var modals = ReactTestUtils.scryRenderedDOMComponentsWithClass(modalComponent, "modal");
         expect(modals.length).toBe(0);
 
         // Callback should not have been called yet
@@ -110,8 +110,8 @@ describe('ModalButtonTest', function () {
         ReactTestUtils.Simulate.click(button);
 
         // Expect a single shown modal to be rendered after click.
-        var modal = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, 'modal');
-        ReactTestUtils.findRenderedDOMComponentWithClass(modal, 'show');
+        var modal = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, "modal");
+        ReactTestUtils.findRenderedDOMComponentWithClass(modal, "show");
 
         // Open callback should have been called one time for the one click
         expect(openCallback.mock.calls.length).toBe(1);
@@ -119,11 +119,11 @@ describe('ModalButtonTest', function () {
 
 
         // --- Close modal
-        var closeLink = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, 'close-modal');
+        var closeLink = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, "close-modal");
         ReactTestUtils.Simulate.click(closeLink);
 
         // Expect no modal to be rendered
-        modals = ReactTestUtils.scryRenderedDOMComponentsWithClass(modalComponent, 'modal');
+        modals = ReactTestUtils.scryRenderedDOMComponentsWithClass(modalComponent, "modal");
         expect(modals.length).toBe(0);
 
         // Should be a single call to each callback now
@@ -132,12 +132,12 @@ describe('ModalButtonTest', function () {
 
 
         // --- Open the modal again
-        button = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, 'buttonClass');
+        button = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, "buttonClass");
         ReactTestUtils.Simulate.click(button);
 
         // Expect a single shown modal to be rendered after click.
-        modal = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, 'modal');
-        ReactTestUtils.findRenderedDOMComponentWithClass(modal, 'show');
+        modal = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, "modal");
+        ReactTestUtils.findRenderedDOMComponentWithClass(modal, "show");
 
         // Open callback should have been called one time for the one click
         expect(openCallback.mock.calls.length).toBe(2);
@@ -145,11 +145,11 @@ describe('ModalButtonTest', function () {
 
 
         // --- Close modal again
-        closeLink = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, 'close-modal');
+        closeLink = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, "close-modal");
         ReactTestUtils.Simulate.click(closeLink);
 
         // Expect no modal to be rendered
-        modals = ReactTestUtils.scryRenderedDOMComponentsWithClass(modalComponent, 'modal');
+        modals = ReactTestUtils.scryRenderedDOMComponentsWithClass(modalComponent, "modal");
         expect(modals.length).toBe(0);
 
         // Should be two calls to each callback now
@@ -157,51 +157,51 @@ describe('ModalButtonTest', function () {
         expect(closeCallback.mock.calls.length).toBe(2);
     });
 
-    it('Test alternative link render as text', function () {
+    it("Test alternative link render as text", function () {
         var modalComponent = ReactTestUtils.renderIntoDocument(
             <ModalButton linkContent={"some text"} linkStyle="someStyle" />
         );
 
         // Expect a single button to be rendered.
-        var button = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, 'someStyle');
-        expect(button.getDOMNode().textContent).toBe('some text');
+        var button = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, "someStyle");
+        expect(button.getDOMNode().textContent).toBe("some text");
 
         // Expect no modal to be rendered.
-        var modals = ReactTestUtils.scryRenderedDOMComponentsWithClass(modalComponent, 'modal');
+        var modals = ReactTestUtils.scryRenderedDOMComponentsWithClass(modalComponent, "modal");
         expect(modals.length).toEqual(0);
 
         ReactTestUtils.Simulate.click(button);
 
         // Expect a single shown modal to be rendered after click.
-        var modal = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, 'modal');
-        ReactTestUtils.findRenderedDOMComponentWithClass(modal, 'show');
+        var modal = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, "modal");
+        ReactTestUtils.findRenderedDOMComponentWithClass(modal, "show");
     });
 
-    it('Test alternative link render as callback', function () {
+    it("Test alternative link render as callback", function () {
         var modalComponent = ReactTestUtils.renderIntoDocument(
             <ModalButton linkContent={linkCallback} linkStyle="someStyle" />
         );
 
         // Expect a single button to be rendered.
-        var button = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, 'someStyle');
-        expect(button.getDOMNode().textContent).toBe('Link');
+        var button = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, "someStyle");
+        expect(button.getDOMNode().textContent).toBe("Link");
 
         // Ensure callback returned span rendered as expected.
-        var span = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, 'someCallbackClass');
-        expect(span.getDOMNode().textContent).toBe('Link');
+        var span = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, "someCallbackClass");
+        expect(span.getDOMNode().textContent).toBe("Link");
 
         // Expect no modal to be rendered.
-        var modals = ReactTestUtils.scryRenderedDOMComponentsWithClass(modalComponent, 'modal');
+        var modals = ReactTestUtils.scryRenderedDOMComponentsWithClass(modalComponent, "modal");
         expect(modals.length).toEqual(0);
 
         ReactTestUtils.Simulate.click(button);
 
         // Expect a single shown modal to be rendered after click.
-        var modal = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, 'modal');
-        ReactTestUtils.findRenderedDOMComponentWithClass(modal, 'show');
+        var modal = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, "modal");
+        ReactTestUtils.findRenderedDOMComponentWithClass(modal, "show");
     });
 
-    it('renders in header less mode', function () {
+    it("renders in header less mode", function () {
         var closeCallback = jest.genMockFunction();
         closeCallback.mockReturnValue(true);
 
@@ -210,18 +210,18 @@ describe('ModalButtonTest', function () {
         );
 
         // Expect a single button to be rendered.
-        ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, 'buttonClass');
+        ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, "buttonClass");
 
         // Expect a single shown modal to be rendered.
-        var modal = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, 'modal');
-        ReactTestUtils.findRenderedDOMComponentWithClass(modal, 'show');
-        var header = ReactTestUtils.scryRenderedDOMComponentsWithClass(modal, 'modal-header');
+        var modal = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, "modal");
+        ReactTestUtils.findRenderedDOMComponentWithClass(modal, "show");
+        var header = ReactTestUtils.scryRenderedDOMComponentsWithClass(modal, "modal-header");
 
         //no header
         expect(header.length).toBe(0);
 
         //but close link is here
-        ReactTestUtils.findRenderedDOMComponentWithClass(modal, 'close-modal');
+        ReactTestUtils.findRenderedDOMComponentWithClass(modal, "close-modal");
     });
 
 

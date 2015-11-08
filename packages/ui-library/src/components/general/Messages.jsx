@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-var React = require('react');
+var React = require("react");
 
 /**
  * @module components/general/Messages
@@ -36,7 +36,7 @@ var Messages = React.createClass({
     propTypes: {
         messages: React.PropTypes.array,
         id: React.PropTypes.string,
-        'data-id': React.PropTypes.string,
+        "data-id": React.PropTypes.string,
         removeMessage: React.PropTypes.func,
         i18n: React.PropTypes.func,
         defaultMessageTimeout: React.PropTypes.number
@@ -69,7 +69,7 @@ var Messages = React.createClass({
         }
 
         return (
-            <div id={this.props.id} data-id={this.props['data-id']}>
+            <div id={this.props.id} data-id={this.props["data-id"]}>
                 {renderedMessages}
             </div>
         );
@@ -115,11 +115,11 @@ var Message = React.createClass({
     render: function () {
         var text = this.props.message.text || this.props.i18n(this.props.message.key, this.props.message.params);
         var classes = this.props.message.type +
-                ' ' +
+                " " +
                 this.props.message.type +
-                '-' +
+                "-" +
                 this.props.index +
-                ' message show';
+                " message show";
 
         // Allow html messages to be rendered, this is dangerous
         // as it could allow XSS, so messages have to be explicitly

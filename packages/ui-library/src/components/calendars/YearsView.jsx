@@ -1,8 +1,8 @@
-var React = require('react');
-var classnames = require('classnames');
-var moment = require('moment-range');
-var Cell = require('./Cell.jsx');
-var ViewHeader = require('./ViewHeader.jsx');
+var React = require("react");
+var classnames = require("classnames");
+var moment = require("moment-range");
+var Cell = require("./Cell.jsx");
+var ViewHeader = require("./ViewHeader.jsx");
 
 module.exports = React.createClass({
 
@@ -14,11 +14,11 @@ module.exports = React.createClass({
     years: [],
 
     next: function () {
-        this.props.setDate(this.props.date.add(10, 'years'));
+        this.props.setDate(this.props.date.add(10, "years"));
     },
 
     prev: function () {
-        this.props.setDate(this.props.date.subtract(10, 'years'));
+        this.props.setDate(this.props.date.subtract(10, "years"));
     },
 
     rangeCheck: function (currYear) {
@@ -31,8 +31,8 @@ module.exports = React.createClass({
 
     getYears: function () {
         var now = this.props.date,
-            start = now.clone().subtract(5, 'year'),
-            end = now.clone().add(6, 'year'),
+            start = now.clone().subtract(5, "year"),
+            end = now.clone().add(6, "year"),
             currYear = now.year(),
             items = [],
             inRange = this.rangeCheck(currYear);
@@ -43,9 +43,9 @@ module.exports = React.createClass({
 
         moment()
             .range(start, end)
-            .by('years', function (year) {
+            .by("years", function (year) {
                 items.push({
-                    label: year.format('YYYY'),
+                    label: year.format("YYYY"),
                     curr: currYear === year.year()
                 });
             });
@@ -75,7 +75,7 @@ module.exports = React.createClass({
             /* jshint ignore:end */
         });
 
-        var currentDate = [years[0].label, years[years.length - 1].label].join('-');
+        var currentDate = [years[0].label, years[years.length - 1].label].join("-");
 
         return (
             /* jshint ignore:start */

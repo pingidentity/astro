@@ -1,13 +1,13 @@
 window.__DEV__ = true;
 
-jest.dontMock('../Utils');
-jest.dontMock('moment');
+jest.dontMock("../Utils");
+jest.dontMock("moment");
 
-describe('Utils', function () {
-    var Utils = require('../Utils');
+describe("Utils", function () {
+    var Utils = require("../Utils");
 
-    describe('isHtmlFileApiSupported', function () {
-        it('returns true if File, FileList, FileReader are defined', function () {
+    describe("isHtmlFileApiSupported", function () {
+        it("returns true if File, FileList, FileReader are defined", function () {
             global.File = true;
             global.FileList = true;
             global.FileReader = true;
@@ -15,23 +15,23 @@ describe('Utils', function () {
             expect(Utils.isHtmlFileApiSupported()).toBeTruthy();
         });
 
-        it('returns false if any of File, FileList, FileReader are undefined', function () {
+        it("returns false if any of File, FileList, FileReader are undefined", function () {
             global.File = undefined;
 
             expect(Utils.isHtmlFileApiSupported()).toBeFalsy();
         });
     });
 
-    describe('stripFakePath', function () {
-        it('strips the leading C:\\fakepath\\ from the filename of file upload elements', function () {
-            expect(Utils.stripFakePath('C:\\fakepath\\someFileName.jpg')).toEqual('someFileName.jpg');
-            expect(Utils.stripFakePath('c:\\fakepath\\someOtherFileName.txt')).toEqual('someOtherFileName.txt');
-            expect(Utils.stripFakePath('someOtherFileName.txt')).toEqual('someOtherFileName.txt');
+    describe("stripFakePath", function () {
+        it("strips the leading C:\\fakepath\\ from the filename of file upload elements", function () {
+            expect(Utils.stripFakePath("C:\\fakepath\\someFileName.jpg")).toEqual("someFileName.jpg");
+            expect(Utils.stripFakePath("c:\\fakepath\\someOtherFileName.txt")).toEqual("someOtherFileName.txt");
+            expect(Utils.stripFakePath("someOtherFileName.txt")).toEqual("someOtherFileName.txt");
         });
     });
 
-    describe('triggerFileDownload', function () {
-        it('uses the correct function to save the blob file in IE', function () {
+    describe("triggerFileDownload", function () {
+        it("uses the correct function to save the blob file in IE", function () {
             // mocks for the navigator and Blob globals
             global.navigator = {};
             global.navigator.msSaveBlob = jest.genMockFunction();
@@ -39,14 +39,14 @@ describe('Utils', function () {
                 return blobData;
             });
 
-            var fakeBlob = ['someFakeFileContent'];
-            var fakeFilename = 'someFileName.txt';
+            var fakeBlob = ["someFakeFileContent"];
+            var fakeFilename = "someFileName.txt";
 
-            Utils.triggerFileDownload(fakeFilename, fakeBlob, 'text/plain');
+            Utils.triggerFileDownload(fakeFilename, fakeBlob, "text/plain");
             expect(global.navigator.msSaveBlob).toBeCalled();
         });
 
-        it('uses the correct function to save the blob file in other browsers',
+        it("uses the correct function to save the blob file in other browsers",
             function () {
                 var click = jest.genMockFn();
                 var createObjectURL = jest.genMockFn();
@@ -63,19 +63,19 @@ describe('Utils', function () {
                 global.URL = {};
                 global.URL.createObjectURL = createObjectURL;
 
-                var fakeBlob = ['someFakeFileContent'];
-                var fakeFilename = 'someFileName.txt';
+                var fakeBlob = ["someFakeFileContent"];
+                var fakeFilename = "someFileName.txt";
 
-                Utils.triggerFileDownload(fakeFilename, fakeBlob, 'text/plain');
+                Utils.triggerFileDownload(fakeFilename, fakeBlob, "text/plain");
                 expect(createObjectURL).toBeCalled();
                 expect(click).toBeCalled();
                 expect(document.body.appendChild).toBeCalled();
             });
 
-        it('uses the correct function to save the blob file in other browsers if a.download isn\'t supported',
+        it("uses the correct function to save the blob file in other browsers if a.download isn't supported",
             function () {
                 var click = jest.genMockFn();
-                var url = 'http://pingidentity.com/url';
+                var url = "http://pingidentity.com/url";
                 var createObjectURL = jest.genMockFn().mockReturnValue(url);
                 global.navigator = {};
                 global.Blob = jest.genMockFunction().mockImplementation(function (blobData) {
@@ -89,18 +89,18 @@ describe('Utils', function () {
                 global.URL = {};
                 global.URL.createObjectURL = createObjectURL;
 
-                var fakeBlob = ['someFakeFileContent'];
-                var fakeFilename = 'someFileName.txt';
+                var fakeBlob = ["someFakeFileContent"];
+                var fakeFilename = "someFileName.txt";
 
-                Utils.triggerFileDownload(fakeFilename, fakeBlob, 'text/plain');
+                Utils.triggerFileDownload(fakeFilename, fakeBlob, "text/plain");
                 expect(createObjectURL).toBeCalled();
                 expect(global.location).toBe(url);
             });
     });
 
-    describe('formatDate', function () {
-        expect(Utils.formatDate(1444860746000)).toBe('2015-10-14');
-        expect(Utils.formatDate(0)).toBe('1970-01-01');
-        expect(Utils.formatDate(2525465544000)).toBe('2050-01-10');
+    describe("formatDate", function () {
+        expect(Utils.formatDate(1444860746000)).toBe("2015-10-14");
+        expect(Utils.formatDate(0)).toBe("1970-01-01");
+        expect(Utils.formatDate(2525465544000)).toBe("2050-01-10");
     });
 });

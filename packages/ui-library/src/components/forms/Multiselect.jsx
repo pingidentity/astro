@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-var React = require('react');
-var cx = require('classnames');
-var _ = require('underscore');
-var _s = require('underscore.string');
+var React = require("react");
+var cx = require("classnames");
+var _ = require("underscore");
+var _s = require("underscore.string");
 
 /**
  * @class MultiselectOption
@@ -80,7 +80,7 @@ var MultiselectOption = React.createClass({
  *
  **/
 var Multiselect = React.createClass({
-    displayName: 'Multiselect',
+    displayName: "Multiselect",
 
     propTypes: {
         title: React.PropTypes.string.isRequired,
@@ -113,7 +113,7 @@ var Multiselect = React.createClass({
     _clearSearch: function (e) {
         e.stopPropagation();
         this.setState({
-            searchStr: ''
+            searchStr: ""
         });
     },
 
@@ -142,7 +142,7 @@ var Multiselect = React.createClass({
     _searchKeyUp: function (e) {
         //clear search on ESC or close multiselect if search is empty
         if (e.keyCode === 27) {
-            if (this.state.searchStr === '') {
+            if (this.state.searchStr === "") {
                 this._toggle();
             } else {
                 this._clearSearch(e);
@@ -153,17 +153,17 @@ var Multiselect = React.createClass({
     getInitialState: function () {
         return {
             isOpen: false,
-            searchStr: ''
+            searchStr: ""
         };
     },
 
     render: function () {
         var containerCss = cx({
-            'input-multiselect': true,
+            "input-multiselect": true,
             open: this.state.isOpen
         });
         if (this.props.className) {
-            containerCss = containerCss + ' ' + this.props.className;
+            containerCss = containerCss + " " + this.props.className;
         }
 
         var self = this;
@@ -178,7 +178,7 @@ var Multiselect = React.createClass({
 
             return (
                 /* jshint ignore:start */
-                <MultiselectOption id={'option' + index} label={label} onChange={self.props.onChange}
+                <MultiselectOption id={"option" + index} label={label} onChange={self.props.onChange}
                     key={label} value={value} />
                 /* jshint ignore:end */
             );

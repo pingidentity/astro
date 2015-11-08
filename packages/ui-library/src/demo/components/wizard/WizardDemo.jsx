@@ -1,6 +1,6 @@
-var Redux = require('redux'),
-    React = require('react'),
-    Wizard = require('../../../components/wizard/Wizard.jsx');
+var Redux = require("redux"),
+    React = require("react"),
+    Wizard = require("../../../components/wizard/Wizard.jsx");
 
 // this is the store
 
@@ -9,9 +9,9 @@ var Choose = Wizard.Choose;
 
 var Demo = React.createClass({
     BUTTON_LABELS: {
-        labelNext: 'next',
-        labelCancel: 'cancel',
-        labelEdit: 'edit'
+        labelNext: "next",
+        labelCancel: "cancel",
+        labelEdit: "edit"
     },
 
     getInitialState: function () {
@@ -50,7 +50,7 @@ var Demo = React.createClass({
 
     render: function () {
         return (
-        <div style={{ float: 'left', width: '100%' }}>
+        <div style={{ float: "left", width: "100%" }}>
         <Choose title="Choose a Wizard"
             onChange={this.change}
             onNext={this.next}

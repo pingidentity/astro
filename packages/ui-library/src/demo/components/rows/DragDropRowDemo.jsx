@@ -1,8 +1,8 @@
-var React = require('react/addons'),
-    DragDropContext = require('react-dnd').DragDropContext,
-    HTML5Backend = require('react-dnd/modules/backends/HTML5'),
-    DragDropRow = require('./../../../components/rows/DragDropRow.jsx'),
-    _ = require('underscore');
+var React = require("react/addons"),
+    DragDropContext = require("react-dnd").DragDropContext,
+    HTML5Backend = require("react-dnd/modules/backends/HTML5"),
+    DragDropRow = require("./../../../components/rows/DragDropRow.jsx"),
+    _ = require("underscore");
 
 var DragDropRowDemo = React.createClass({
 
@@ -44,7 +44,7 @@ var DragDropRowDemo = React.createClass({
     _getDragClass: function (item, index) {
         var dragBottom = this.state.rows.length - 1 === index &&
             this.state.dropTarget === this.state.rows.length;
-        return 'row' + (this.state.dropTarget === index ? ' dragTop' : '') + (dragBottom ? ' dragBottom' : '');
+        return "row" + (this.state.dropTarget === index ? " dragTop" : "") + (dragBottom ? " dragBottom" : "");
     },
 
     render: function () {

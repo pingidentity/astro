@@ -1,5 +1,5 @@
-var React = require('react/addons');
-var If = require('./../../../components/general/If.jsx');
+var React = require("react/addons");
+var If = require("./../../../components/general/If.jsx");
 
 var IfDemo = React.createClass({
 
@@ -16,7 +16,7 @@ var IfDemo = React.createClass({
     render: function () {
         return (
             <div>
-                <div>Toggle set to: { (this.state.toggle) ? 'true' : 'false' } </div>
+                <div>Toggle set to: { (this.state.toggle) ? "true" : "false" } </div>
                 <button onClick={this._toggle}>Toggle if condition</button>
                 <br />
                 <If test={this.state.toggle}>

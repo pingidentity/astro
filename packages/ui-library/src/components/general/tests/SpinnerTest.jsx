@@ -1,16 +1,16 @@
 window.__DEV__ = true;
 
-jest.dontMock('../../../testutil/TestUtils');
-jest.dontMock('../Spinner.jsx');
+jest.dontMock("../../../testutil/TestUtils");
+jest.dontMock("../Spinner.jsx");
 
-describe('Spinner', function () {
-    var React = require('react/addons'),
+describe("Spinner", function () {
+    var React = require("react/addons"),
         ReactTestUtils = React.addons.TestUtils,
-        Spinner = require('../Spinner.jsx'),
-        defaultText = 'Loading...';
+        Spinner = require("../Spinner.jsx"),
+        defaultText = "Loading...";
 
 
-    it('is rendering spinning animation', function () {
+    it("is rendering spinning animation", function () {
         var component = ReactTestUtils.renderIntoDocument(
                 /* jshint ignore:start */
                 <Spinner
@@ -23,14 +23,14 @@ describe('Spinner', function () {
                 /* jshint ignore:end */
             );
 
-        var content = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, 'spinner-content');
+        var content = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "spinner-content");
         expect(content.length).toBe(0);
 
-        var spinner = ReactTestUtils.findRenderedDOMComponentWithClass(component, 'spinner');
+        var spinner = ReactTestUtils.findRenderedDOMComponentWithClass(component, "spinner");
         expect(spinner.getDOMNode().textContent).toBe(defaultText);
     });
 
-    it('is rendering child content', function () {
+    it("is rendering child content", function () {
         var component = ReactTestUtils.renderIntoDocument(
                 /* jshint ignore:start */
                 <Spinner
@@ -43,10 +43,10 @@ describe('Spinner', function () {
                 /* jshint ignore:end */
             );
 
-        var content = ReactTestUtils.findRenderedDOMComponentWithClass(component, 'spinner-content');
-        expect(content.getDOMNode().textContent).toBe('whatever');
+        var content = ReactTestUtils.findRenderedDOMComponentWithClass(component, "spinner-content");
+        expect(content.getDOMNode().textContent).toBe("whatever");
 
-        var spinner = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, 'spinner');
+        var spinner = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "spinner");
         expect(spinner.length).toBe(0);
     });
 });

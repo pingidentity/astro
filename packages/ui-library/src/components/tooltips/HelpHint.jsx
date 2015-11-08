@@ -1,4 +1,4 @@
-var React = require('react');
+var React = require("react");
 
 /**
  * @class HelpHint
@@ -32,15 +32,15 @@ var HelpHint = React.createClass({
 
     getDefaultProps: function () {
         return {
-            id: 'helpHint'
+            id: "helpHint"
         };
     },
 
     render: function () {
-        var hintStyles = 'help-tooltip';
+        var hintStyles = "help-tooltip";
 
         if (this.props.className) {
-            hintStyles += ' ' + this.props.className;
+            hintStyles += " " + this.props.className;
         }
 
         return (

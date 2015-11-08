@@ -1,12 +1,12 @@
-var React = require('react/addons'),
-    FormCheckboxList = require('../../../components/forms/FormCheckboxList.jsx');
+var React = require("react/addons"),
+    FormCheckboxList = require("../../../components/forms/FormCheckboxList.jsx");
 
 var FormCheckboxListDemo = React.createClass({
 
     getInitialState: function () {
         return {
             hideUnchecked: false,
-            queryString: '',
+            queryString: "",
             selectedIds: [1, 3]
         };
     },
@@ -31,11 +31,11 @@ var FormCheckboxListDemo = React.createClass({
 
     render: function () {
         var checkboxItems = [
-            { name: 'Checkbox 1', id: 1, group: 'Group A' },
-            { name: 'Checkbox 2', id: 2, group: 'Group A' },
-            { name: 'Checkbox 3', id: 3, group: 'Group B' },
-            { name: 'Checkbox 4', id: 4, group: 'Group B' },
-            { name: 'Checkbox 5', id: 5, group: 'Group B' }
+            { name: "Checkbox 1", id: 1, group: "Group A" },
+            { name: "Checkbox 2", id: 2, group: "Group A" },
+            { name: "Checkbox 3", id: 3, group: "Group B" },
+            { name: "Checkbox 4", id: 4, group: "Group B" },
+            { name: "Checkbox 5", id: 5, group: "Group B" }
         ];
 
         return (

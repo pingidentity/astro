@@ -1,11 +1,11 @@
-var React = require('react/addons'),
-    RockerButton = require('../../../components/forms/RockerButton.jsx');
+var React = require("react/addons"),
+    RockerButton = require("../../../components/forms/RockerButton.jsx");
 
 var RockerButtonDemo = React.createClass({
 
     getInitialState: function () {
         return {
-            selectedLabel: 'None.'
+            selectedLabel: "None."
         };
     },
 
@@ -21,7 +21,7 @@ var RockerButtonDemo = React.createClass({
             /* jslint ignore:start */
             <div>
                 <RockerButton onChange={this._changeSubview}
-                    labels={['Label One', 'Label Two', 'Label Three', 'Label Four']} />
+                    labels={["Label One", "Label Two", "Label Three", "Label Four"]} />
                 
                 <div>Selected rocker index = {this.state.selectedLabel}</div>
             </div>

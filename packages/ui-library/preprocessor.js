@@ -3,14 +3,14 @@
  * These are the non-JS files (e.g. CSS, PNG, etc) which can be required in JS.
  */
 
-var babelJest = require('babel-jest');
+var babelJest = require("babel-jest");
 
 module.exports = {
     process: function (src, filename) {
         return babelJest.process(src, filename)
-                .replace(/require\(\'[^\']+\.less\'\);/gm, '')
-                .replace(/require\(\'[^\']+\.css\'\);/gm, '')
-                .replace(/require\(\'[^\']+\.png\'\);?/gm, '\'\'')
+                .replace(/require\(\"[^\"]+\.less\"\);/gm, "")
+                .replace(/require\(\"[^\"]+\.css\"\);/gm, "")
+                .replace(/require\(\"[^\"]+\.png\"\);?/gm, "\"\"")
             ;
     }
 };

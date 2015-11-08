@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-var React = require('react'),
-    css = require('classnames'),
-    HelpHint = require('../tooltips/HelpHint.jsx'),
-    _ = require('underscore');
+var React = require("react"),
+    css = require("classnames"),
+    HelpHint = require("../tooltips/HelpHint.jsx"),
+    _ = require("underscore");
 
 /**
  * @class FormSelectField
@@ -61,8 +61,8 @@ var FormSelectField = React.createClass({
     getDefaultProps: function () {
         return {
             noneOption: false,
-            noneOptionValue: '',
-            id: 'form-select-field'
+            noneOptionValue: "",
+            id: "form-select-field"
         };
     },
 
@@ -92,17 +92,17 @@ var FormSelectField = React.createClass({
             noneOptionObj = {},
             labelHelp,
             labelCss = css({
-                'input-select': true,
-                'form-error': this.props.errorMessage,
+                "input-select": true,
+                "form-error": this.props.errorMessage,
                 required: this.props.isRequired,
-                'value-entered': this.state.selectedValue !== this.props.noneOptionValue
+                "value-entered": this.state.selectedValue !== this.props.noneOptionValue
             }),
-            errorCss = css('help-tooltip form-error-message', {
+            errorCss = css("help-tooltip form-error-message", {
                 show: this.props.errorMessage
             });
 
         if (this.props.className) {
-            labelCss += ' ' + this.props.className;
+            labelCss += " " + this.props.className;
         }
 
         if (this.props.noneOption) {
@@ -128,7 +128,7 @@ var FormSelectField = React.createClass({
 
         return (
             /* jshint ignore:start */
-            <label className={labelCss} data-id={this.props.id + '_label'}>
+            <label className={labelCss} data-id={this.props.id + "_label"}>
                 <span className="label-text">
                     {this.props.label}
                     {labelHelp}
@@ -144,7 +144,7 @@ var FormSelectField = React.createClass({
                         </select>
                     </div>
                     <div className={errorCss}>
-                        <div className="tooltip-text" data-id={this.props.id + '_errormessage'}>
+                        <div className="tooltip-text" data-id={this.props.id + "_errormessage"}>
                             {this.props.errorMessage}
                         </div>
                     </div>

@@ -1,5 +1,5 @@
 
-jest.dontMock('../SelectText.jsx');
+jest.dontMock("../SelectText.jsx");
 
 
 /*
@@ -13,12 +13,12 @@ jest.dontMock('../SelectText.jsx');
  * actually ends up being selected).
  *
  */
-describe('SelectText', function () {
-    var React = require('react/addons');
+describe("SelectText", function () {
+    var React = require("react/addons");
     var ReactTestUtils = React.addons.TestUtils;
-    var SelectText = require('../SelectText.jsx');
+    var SelectText = require("../SelectText.jsx");
     
-    it('Render and click', function () {
+    it("Render and click", function () {
 
         // --- Setup global object ------
         // Node / Jest runtime environment does not
@@ -43,7 +43,7 @@ describe('SelectText', function () {
         };
 
         // --- Render and test component ------
-        var someText = 'Just some test text';
+        var someText = "Just some test text";
         var component = ReactTestUtils.renderIntoDocument(
             /* jshint ignore: start */
             <SelectText className="testClass">
@@ -58,7 +58,7 @@ describe('SelectText', function () {
         expect(addRange.mock.calls.length).toBe(0);
         
         // Ensure a single rendered element with the expected class.
-        var element = ReactTestUtils.findRenderedDOMComponentWithClass(component, 'testClass');
+        var element = ReactTestUtils.findRenderedDOMComponentWithClass(component, "testClass");
         
         ReactTestUtils.Simulate.click(element);
         
@@ -74,7 +74,7 @@ describe('SelectText', function () {
      * Test to ensure text can be initially selected if so configured.
      *
      */
-    it('Render initially selected', function () {
+    it("Render initially selected", function () {
         // --- Setup global object ------
         // Node / Jest runtime environment does not
         // have the concept of selecting text, so we
@@ -98,7 +98,7 @@ describe('SelectText', function () {
         };
 
         // --- Render and test component ------
-        var someText = 'Just some test text';
+        var someText = "Just some test text";
         var component = ReactTestUtils.renderIntoDocument(
             /* jshint ignore: start */
             <SelectText className="testClass" select={true}>
@@ -116,7 +116,7 @@ describe('SelectText', function () {
         expect(selectNodeContents.mock.calls[0][0].childNodes[0].nodeValue).toBe(someText);
         
         // Ensure a single rendered element with the expected class.
-        ReactTestUtils.findRenderedDOMComponentWithClass(component, 'testClass');
+        ReactTestUtils.findRenderedDOMComponentWithClass(component, "testClass");
     });
     
 

@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-var moment = require('moment');
+var moment = require("moment");
 
 module.exports = {
     /**
@@ -19,7 +19,7 @@ module.exports = {
      * @returns {string} the stripped path
      */
     stripFakePath: function (path) {
-        return path.replace(/^c:\\fakepath\\/i, '');
+        return path.replace(/^c:\\fakepath\\/i, "");
     },
 
     /**
@@ -33,7 +33,7 @@ module.exports = {
     triggerFileDownload: function (filename, blobData, fileType) {
         var blob = new Blob(blobData, { type: fileType });
 
-        if (typeof global.navigator.msSaveBlob !== 'undefined') {
+        if (typeof global.navigator.msSaveBlob !== "undefined") {
             // IE has its own way of saving blobs locally (see HTML7007 error)
             global.navigator.msSaveBlob(blob, filename);
         } else {
@@ -41,9 +41,9 @@ module.exports = {
             var downloadUrl = URL.createObjectURL(blob);
 
             // use HTML5 a[download] attribute to specify filename
-            var a = document.createElement('a');
+            var a = document.createElement("a");
 
-            if (typeof a.download === 'undefined') {
+            if (typeof a.download === "undefined") {
                 global.location = downloadUrl;
             } else {
                 a.href = downloadUrl;
@@ -61,6 +61,6 @@ module.exports = {
      * @returns {String} the formatted date
      */
     formatDate: function (timestamp) {
-        return moment.utc(timestamp).format('YYYY-MM-DD');
+        return moment.utc(timestamp).format("YYYY-MM-DD");
     }
 };

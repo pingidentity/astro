@@ -6,7 +6,7 @@
  * var cache = new Cache('LOCAL', 'usersStore', 180);
  */
 
-var Constants = require('../constants/CacheConstants');
+var Constants = require("../constants/CacheConstants");
 
 /**
  * Constructor.
@@ -19,13 +19,13 @@ var Constants = require('../constants/CacheConstants');
  */
 function Cache (type, name, expiry) {
     if (type !== Constants.CacheTypes.LOCAL && type !== Constants.CacheTypes.MEMORY) {
-        throw 'Invalid cache type';
+        throw "Invalid cache type";
     }
     if (!name) {
-        throw 'Cache name is required';
+        throw "Cache name is required";
     }
     if (!expiry || expiry <= 0) {
-        throw 'Expiry time for cache is required and should be greater than zero';
+        throw "Expiry time for cache is required and should be greater than zero";
     }
     this.cache = {
         expiry: expiry,

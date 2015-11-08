@@ -1,5 +1,5 @@
-var React = require('react/addons');
-var Section = require('../../../components/general/CollapsibleSection.jsx');
+var React = require("react/addons");
+var Section = require("../../../components/general/CollapsibleSection.jsx");
 
 var CollapsibleSectionDemo = React.createClass({
 

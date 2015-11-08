@@ -1,5 +1,5 @@
-var React = require('react/addons');
-var FormSelectField = require('./../../../components/forms/FormSelectField.jsx');
+var React = require("react/addons");
+var FormSelectField = require("./../../../components/forms/FormSelectField.jsx");
 
 /**
  * A demo for FormSelectField.
@@ -8,9 +8,9 @@ var FormSelectFieldDemo = React.createClass({
 
     getInitialState: function () {
         return {
-            onChangeFieldValue1: '',
-            onChangeFieldValue2: '',
-            onChangeFieldValue3: ''
+            onChangeFieldValue1: "",
+            onChangeFieldValue2: "",
+            onChangeFieldValue3: ""
         };
     },
 
@@ -37,7 +37,7 @@ var FormSelectFieldDemo = React.createClass({
     },
 
     render: function () {
-        var options = { 1: 'one', 2: 'two', 3: 'three' };
+        var options = { 1: "one", 2: "two", 3: "three" };
 
         return (
             <div>

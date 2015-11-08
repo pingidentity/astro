@@ -1,12 +1,12 @@
-var React = require('react/addons'),
-    classnames = require('classnames'),
-    moment = require('moment-range');
+var React = require("react/addons"),
+    classnames = require("classnames"),
+    moment = require("moment-range");
 
 
-var DaysView = require('./DaysView.jsx');
-var MonthsView = require('./MonthsView.jsx');
-var YearsView = require('./YearsView.jsx');
-var Utils = require('./Utils');
+var DaysView = require("./DaysView.jsx");
+var MonthsView = require("./MonthsView.jsx");
+var YearsView = require("./YearsView.jsx");
+var Utils = require("./Utils");
 
 var _keyDownActions = Utils.keyDownActions;
 
@@ -65,16 +65,16 @@ var Calendar = React.createClass({
 
     getInitialState: function () {
         var date = this.props.date ? moment(this.props.date) : null,
-            format = this.props.format || 'MM-DD-YYYY',
+            format = this.props.format || "MM-DD-YYYY",
             minView = parseInt(this.props.minView, 10) || 0,
-            computableFormat = this.props.computableFormat || 'MM-DD-YYYY';
+            computableFormat = this.props.computableFormat || "MM-DD-YYYY";
 
         return {
             date: date,
             format: format,
             computableFormat: computableFormat,
             inputValue: date ? date.format(format) : null,
-            views: ['days', 'months', 'years'],
+            views: ["days", "months", "years"],
             minView: minView,
             currentView: minView || 0,
             isVisible: false
@@ -82,11 +82,11 @@ var Calendar = React.createClass({
     },
 
     componentDidMount: function () {
-        document.addEventListener('click', this.documentClick);
+        document.addEventListener("click", this.documentClick);
     },
 
     componentWillUnmount: function () {
-        document.removeEventListener('click', this.documentClick);
+        document.removeEventListener("click", this.documentClick);
     },
 
     componentWillReceiveProps: function (nextProps) {
@@ -220,8 +220,8 @@ var Calendar = React.createClass({
 
     setVisibility: function (val) {
         var value = val !== undefined ? val : !this.state.isVisible;
-        var eventMethod = value ? 'addEventListener' : 'removeEventListener';
-        document[eventMethod]('keydown', this.keyDown);
+        var eventMethod = value ? "addEventListener" : "removeEventListener";
+        document[eventMethod]("keydown", this.keyDown);
 
         this.setState({
             isVisible: value
@@ -256,14 +256,14 @@ var Calendar = React.createClass({
         }
 
         /* jshint ignore:start */
-        var calendar = !this.state.isVisible ? ''
+        var calendar = !this.state.isVisible ? ""
             : <div className="input-calendar-wrapper active" onClick={this.calendarClick}>
                 {view}
                 <span className="today-btn" onClick={this.todayClick} >Today</span>
             </div>;
         /* jshint ignore:end */
 
-        var containerCss = classnames('input-calendar icon-calendar', { active: this.state.isVisible } );
+        var containerCss = classnames("input-calendar icon-calendar", { active: this.state.isVisible } );
 
         return (
             /* jshint ignore:start */

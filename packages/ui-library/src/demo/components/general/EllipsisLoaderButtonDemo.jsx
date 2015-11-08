@@ -1,6 +1,6 @@
 
-var React = require('react/addons');
-var EllipsisLoaderButton = require('./../../../components/general/EllipsisLoaderButton.jsx');
+var React = require("react/addons");
+var EllipsisLoaderButton = require("./../../../components/general/EllipsisLoaderButton.jsx");
 
 
 var EllipsisLoaderDemo = React.createClass({

@@ -1,11 +1,11 @@
-var React = require('react/addons'),
-    DropDownButton = require('../../../components/forms/DropDownButton.jsx');
+var React = require("react/addons"),
+    DropDownButton = require("../../../components/forms/DropDownButton.jsx");
 
 var DropDownButtonDemo = React.createClass({
 
     getInitialState: function () {
         return {
-            selectedLabel: 'None.'
+            selectedLabel: "None."
         };
     },
     
@@ -18,11 +18,11 @@ var DropDownButtonDemo = React.createClass({
     _dropDownOptions: function () {
 
         var menu = {
-            optionOne: 'Option One',
-            optionTwo: 'Option Two',
-            optionThree: 'Option Three',
-            optionFour: 'Option Four',
-            optionFive: 'Option Five'
+            optionOne: "Option One",
+            optionTwo: "Option Two",
+            optionThree: "Option Three",
+            optionFour: "Option Four",
+            optionFive: "Option Five"
         };
 
         return menu;

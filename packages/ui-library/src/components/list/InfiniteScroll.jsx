@@ -1,13 +1,13 @@
-var React = require('react/addons'),
-    Spinner = require('../general/Spinner.jsx'),
-    _ = require('underscore');
+var React = require("react/addons"),
+    Spinner = require("../general/Spinner.jsx"),
+    _ = require("underscore");
 
 /** @module components/lists */
 
 /** @class InfiniteScroll#Batch
  * @private */
 var Batch = React.createClass({
-    displayName: 'Batch',
+    displayName: "Batch",
 
     componentWillUpdate: function () {
         var container = React.findDOMNode(this.refs.container);
@@ -74,7 +74,7 @@ var Batch = React.createClass({
  * <InfiniteScroll loadNext={this.loadNext} hasNext={true} hasPrev={false} batches={batches} contentType={MyRow} />
  **/
 var InfiniteScroll = React.createClass({
-    displayName: 'InfiniteScroll',
+    displayName: "InfiniteScroll",
 
     propTypes: {
         batches: React.PropTypes.arrayOf(
@@ -165,7 +165,7 @@ var InfiniteScroll = React.createClass({
     },
 
     _getBatchNode: function (batchIndex) {
-        return React.findDOMNode(this.refs['batch' + batchIndex]);
+        return React.findDOMNode(this.refs["batch" + batchIndex]);
     },
 
     _jumpToItem: function (batchIndex, itemIndex) {
@@ -189,13 +189,13 @@ var InfiniteScroll = React.createClass({
         this.inited = false;
 
         if (this.props.attachToWindow) {
-            window.addEventListener('scroll', this._handleScroll);
+            window.addEventListener("scroll", this._handleScroll);
         }
     },
 
     componentWillUnmount: function () {
         if (this.props.attachToWindow) {
-            window.removeEventListener('scroll', this._handleScroll);
+            window.removeEventListener("scroll", this._handleScroll);
         }
     },
 
@@ -242,11 +242,11 @@ var InfiniteScroll = React.createClass({
 
         var props = this.attachToWindow ? {} : {
             style: _.defaults({
-                overflow: 'auto',
-                height: '100%'
-            }, _.pick(this.props, 'minHeight', 'height')),
+                overflow: "auto",
+                height: "100%"
+            }, _.pick(this.props, "minHeight", "height")),
             onScroll: this._handleScroll,
-            ref: 'container'
+            ref: "container"
         };
 
         return (
@@ -256,7 +256,7 @@ var InfiniteScroll = React.createClass({
                     this.props.batches.map(function (b, i) {
                         return (<Batch prev={i > 0 ? this.props.batches[i - 1].data : null}
                             data={b.data}
-                            ref={'batch' + i}
+                            ref={"batch" + i}
                             key={b.id}
                             id={b.id}
                             headingGenerator={this.props.headingGenerator}

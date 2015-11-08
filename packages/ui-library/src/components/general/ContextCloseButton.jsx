@@ -1,5 +1,5 @@
-var React = require('react/addons'),
-    css = require('classnames');
+var React = require("react/addons"),
+    css = require("classnames");
 
 /*
  * @class ContextCloseButton
@@ -40,18 +40,18 @@ var ContextCloseButton = React.createClass({
     _close: function () {
         var doClose = true;
 
-        if (typeof(this.props.onClick) === 'function') {
+        if (typeof(this.props.onClick) === "function") {
             doClose = this.props.onClick();
         }
 
         var close;
-        if (this.props.close && typeof(this.props.close === 'function')) {
+        if (this.props.close && typeof(this.props.close === "function")) {
             close = this.props.close;
-        } else if (this.context && (typeof(this.context.close) === 'function')) {
+        } else if (this.context && (typeof(this.context.close) === "function")) {
             close = this.context.close;
         }
 
-        if (close && ((typeof(doClose) === 'undefined') || doClose)) {
+        if (close && ((typeof(doClose) === "undefined") || doClose)) {
             close();
         }
     },

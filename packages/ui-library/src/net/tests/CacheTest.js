@@ -1,5 +1,5 @@
-jest.dontMock('../Cache');
-jest.dontMock('../../constants/CacheConstants');
+jest.dontMock("../Cache");
+jest.dontMock("../../constants/CacheConstants");
 
 // mock the browser's sessionStorage
 var mock = (function () {
@@ -16,11 +16,11 @@ var mock = (function () {
         }
     };
 })();
-Object.defineProperty(window, 'sessionStorage', { value: mock });
+Object.defineProperty(window, "sessionStorage", { value: mock });
 
 // test constants
-var KEY = 'myKey', VALUE = 'myValue', NAME = 'test-cache', TIMEOUT = 0.2,
-    KEY2 = 'myOtherKey', VALUE2 = 'myOtherValue';
+var KEY = "myKey", VALUE = "myValue", NAME = "test-cache", TIMEOUT = 0.2,
+    KEY2 = "myOtherKey", VALUE2 = "myOtherValue";
 
 // helpers
 function sleep (seconds) {
@@ -32,9 +32,9 @@ function sleep (seconds) {
     }
 }
 
-describe('Cache', function () {
-    var Constants = require('../../constants/CacheConstants');
-    var Cache = require('../Cache');
+describe("Cache", function () {
+    var Constants = require("../../constants/CacheConstants");
+    var Cache = require("../Cache");
     var localCache, memoryCache;
 
     beforeEach(function () {
@@ -42,18 +42,18 @@ describe('Cache', function () {
         memoryCache = new Cache(Constants.CacheTypes.MEMORY, NAME, TIMEOUT);
     });
 
-    it('instantiates correctly (local cache)', function () {
+    it("instantiates correctly (local cache)", function () {
         expect(localCache).not.toBeNull();
     });
 
-    it('instantiates correctly (memory cache)', function () {
+    it("instantiates correctly (memory cache)", function () {
         expect(memoryCache).not.toBeNull();
     });
 
-    it('throws error if parameters are incorrect', function () {
-        var invalidName = 'Cache name is required',
-            invalidType = 'Invalid cache type',
-            invalidExpiry = 'Expiry time for cache is required and should be greater than zero';
+    it("throws error if parameters are incorrect", function () {
+        var invalidName = "Cache name is required",
+            invalidType = "Invalid cache type",
+            invalidExpiry = "Expiry time for cache is required and should be greater than zero";
         expect(function () {
             return new Cache(Constants.CacheTypes.MEMORY);
         }).toThrow(new Error(invalidName));
@@ -71,7 +71,7 @@ describe('Cache', function () {
         }).toThrow(new Error(invalidType));
     });
 
-    it('puts a value in the local cache', function () {
+    it("puts a value in the local cache", function () {
         // happy path
         var ok = localCache.put(KEY, VALUE);
         expect(ok).toBeTruthy();
@@ -80,7 +80,7 @@ describe('Cache', function () {
         expect(ok).toBeFalsy();
     });
 
-    it('puts a value in the memory cache', function () {
+    it("puts a value in the memory cache", function () {
         // happy path
         var ok = memoryCache.put(KEY, VALUE);
         expect(ok).toBeTruthy();
@@ -89,33 +89,33 @@ describe('Cache', function () {
         expect(ok).toBeFalsy();
     });
 
-    it('gets value from local cache', function () {
+    it("gets value from local cache", function () {
         localCache.put(KEY, VALUE);
         var value = localCache.get(KEY);
         expect(value).toEqual(VALUE, NAME);
     });
 
-    it('gets value from memory cache', function () {
+    it("gets value from memory cache", function () {
         memoryCache.put(KEY, VALUE);
         var value = memoryCache.get(KEY);
         expect(value).toEqual(VALUE, NAME);
     });
 
-    it('clears the local cache', function () {
+    it("clears the local cache", function () {
         localCache.put(KEY, VALUE);
         localCache.clear();
         var value = localCache.get(KEY);
         expect(value).toBeFalsy();
     });
 
-    it('clears the memory cache', function () {
+    it("clears the memory cache", function () {
         memoryCache.put(KEY, VALUE);
         memoryCache.clear();
         var value = memoryCache.get(KEY);
         expect(value).toBeFalsy();
     });
 
-    it('handles timeouts correctly in the local cache', function () {
+    it("handles timeouts correctly in the local cache", function () {
         localCache.put(KEY, VALUE);
         sleep(TIMEOUT / 2);
         localCache.put(KEY2, VALUE2);
@@ -126,7 +126,7 @@ describe('Cache', function () {
         expect(localCache.get(KEY2)).toBeFalsy();
     });
 
-    it('handles timeouts correctly in the memory cache', function () {
+    it("handles timeouts correctly in the memory cache", function () {
         memoryCache.put(KEY, VALUE);
         sleep(TIMEOUT / 2);
         memoryCache.put(KEY2, VALUE2);

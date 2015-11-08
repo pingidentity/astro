@@ -1,8 +1,8 @@
-var React = require('react');
-var css = require('classnames');
-var moment = require('moment-range');
-var Cell = require('./Cell.jsx');
-var ViewHeader = require('./ViewHeader.jsx');
+var React = require("react");
+var css = require("classnames");
+var moment = require("moment-range");
+var Cell = require("./Cell.jsx");
+var ViewHeader = require("./ViewHeader.jsx");
 
 module.exports = React.createClass({
 
@@ -11,11 +11,11 @@ module.exports = React.createClass({
     },
 
     next: function () {
-        this.props.setDate(this.props.date.add(1, 'years'));
+        this.props.setDate(this.props.date.add(1, "years"));
     },
 
     prev: function () {
-        this.props.setDate(this.props.date.subtract(1, 'years'));
+        this.props.setDate(this.props.date.subtract(1, "years"));
     },
 
     cellClick: function (e) {
@@ -47,7 +47,7 @@ module.exports = React.createClass({
             /* jshint ignore:end */
         });
 
-        var currentDate = this.props.date.format('YYYY');
+        var currentDate = this.props.date.format("YYYY");
 
         return (
             /* jshint ignore:start */

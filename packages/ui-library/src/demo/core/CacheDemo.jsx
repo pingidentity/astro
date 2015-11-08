@@ -1,5 +1,5 @@
-var React = require('react/addons');
-var Cache = require('./../../core/Cache');
+var React = require("react/addons");
+var Cache = require("./../../core/Cache");
 
 function sleep (seconds) {
     var start = new Date().getTime();
@@ -10,13 +10,13 @@ function sleep (seconds) {
     }
 }
 
-var KEY = 'myKey', VALUE = 'myValue', CACHE_NAME = 'local-cache',
+var KEY = "myKey", VALUE = "myValue", CACHE_NAME = "local-cache",
     TIMEOUT = 0.2;
 
 var CacheDemo = React.createClass({
     getInitialState: function () {
         return {
-            localCache: new Cache('LOCAL', CACHE_NAME, TIMEOUT)
+            localCache: new Cache("LOCAL", CACHE_NAME, TIMEOUT)
         };
     },
 
@@ -24,14 +24,14 @@ var CacheDemo = React.createClass({
         this.state.localCache.put(KEY, VALUE);
         var putGetBlock = (
             <div>
-                <span>Cache PUT/GET: {this.state.localCache.get(KEY) === VALUE ? 'PASS' : 'FAIL'}</span><br />
+                <span>Cache PUT/GET: {this.state.localCache.get(KEY) === VALUE ? "PASS" : "FAIL"}</span><br />
             </div>
         );
 
         sleep(TIMEOUT);
         var timeoutBlock = (
             <div>
-                <span>Cache timeout: {this.state.localCache.get(KEY) ? 'FAIL' : 'PASS'}</span><br />
+                <span>Cache timeout: {this.state.localCache.get(KEY) ? "FAIL" : "PASS"}</span><br />
             </div>
         );
 
@@ -39,7 +39,7 @@ var CacheDemo = React.createClass({
         this.state.localCache.clear();
         var clearBlock = (
             <div>
-                <span>Cache clear: {this.state.localCache.get(KEY) ? 'FAIL' : 'PASS'}</span>
+                <span>Cache clear: {this.state.localCache.get(KEY) ? "FAIL" : "PASS"}</span>
             </div>
         );
 

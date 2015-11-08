@@ -1,5 +1,5 @@
-var React = require('react/addons'),
-    FormRadioGroup = require('../../../components/forms/FormRadioGroup.jsx');
+var React = require("react/addons"),
+    FormRadioGroup = require("../../../components/forms/FormRadioGroup.jsx");
 
 var FormRadioGroupDemo = React.createClass({
 
@@ -18,9 +18,9 @@ var FormRadioGroupDemo = React.createClass({
 
     render: function () {
         var radioItems = [
-            { id: '1', name: 'Radio 1' },
-            { id: '2', name: 'Radio 2' },
-            { id: '3', name: 'Radio 3' }
+            { id: "1", name: "Radio 1" },
+            { id: "2", name: "Radio 2" },
+            { id: "3", name: "Radio 3" }
         ];
 
         return (

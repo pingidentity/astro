@@ -1,6 +1,6 @@
-'use strict';
-var React = require('react');
-var css = require('classnames');
+"use strict";
+var React = require("react");
+var css = require("classnames");
 
 
 /** @class DetailsTooltip
@@ -51,9 +51,9 @@ var DetailsTooltip = React.createClass({
 
     getDefaultProps: function () {
         return {
-            positionStyle: 'top',
-            titleClassNames: 'details-title',
-            contentClassNames: 'details-content',
+            positionStyle: "top",
+            titleClassNames: "details-title",
+            contentClassNames: "details-content",
             open: false,
             showClose: true,
             hideOnClick: false
@@ -98,23 +98,23 @@ var DetailsTooltip = React.createClass({
 
         var containerCss = css({
             show: this.props.open,
-            'details-tooltip': true
+            "details-tooltip": true
         });
 
-        containerCss = containerCss + ' ' + this.props.positionStyle;
+        containerCss = containerCss + " " + this.props.positionStyle;
 
-        var targetCss = 'details-target';
+        var targetCss = "details-target";
 
         if (this.props.labelStyle) {
-            targetCss = targetCss + ' ' + this.props.labelStyle;
+            targetCss = targetCss + " " + this.props.labelStyle;
         }
 
         if (this.props.className) {
-            containerCss = containerCss + ' ' + this.props.className;
+            containerCss = containerCss + " " + this.props.className;
         }
 
         if (this.props.disabled) {
-            targetCss += ' disabled';
+            targetCss += " disabled";
         }
 
         return (

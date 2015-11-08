@@ -1,4 +1,4 @@
-var React = require('react/addons');
+var React = require("react/addons");
 
 /**
  * @module components/general/BackgroundLoader
@@ -106,7 +106,7 @@ var BackgroundLoader = React.createClass({
      */
     _loadingContent: function () {
         if (this.props.loading) {
-            if ((typeof this.props.loading) === 'function') {
+            if ((typeof this.props.loading) === "function") {
                 return this.props.loading();
             } else {
                 return this.props.loading;
@@ -124,7 +124,7 @@ var BackgroundLoader = React.createClass({
     _getInterval: function () {
         var interval;
         if (this.props.interval) {
-            if ((typeof this.props.interval) === 'function') {
+            if ((typeof this.props.interval) === "function") {
                 interval = this.props.interval();
             } else {
                 interval = this.props.interval;
@@ -135,7 +135,7 @@ var BackgroundLoader = React.createClass({
 
     getInitialState: function () {
         return {
-            hidden: 'hidden',
+            hidden: "hidden",
             allowPoll: true
         };
     },
@@ -201,21 +201,21 @@ var BackgroundLoader = React.createClass({
         var hidden = null;
 
         // Standards:
-        if ('hidden' in document) {
-            document.addEventListener('visibilitychange', this.changeHidden);
-            hidden = 'hidden';
+        if ("hidden" in document) {
+            document.addEventListener("visibilitychange", this.changeHidden);
+            hidden = "hidden";
         }
-        else if ('mozHidden' in document) {
-            document.addEventListener('mozvisibilitychange', this.changeHidden);
-            hidden = 'mozHidden';
+        else if ("mozHidden" in document) {
+            document.addEventListener("mozvisibilitychange", this.changeHidden);
+            hidden = "mozHidden";
         }
-        else if ('webkitHidden' in document) {
-            document.addEventListener('webkitvisibilitychange', this.changeHidden);
-            hidden = 'webkitHidden';
+        else if ("webkitHidden" in document) {
+            document.addEventListener("webkitvisibilitychange", this.changeHidden);
+            hidden = "webkitHidden";
         }
-        else if ('msHidden' in document) {
-            document.addEventListener('msvisibilitychange', this.changeHidden);
-            hidden = 'msHidden';
+        else if ("msHidden" in document) {
+            document.addEventListener("msvisibilitychange", this.changeHidden);
+            hidden = "msHidden";
         }
 
         this.setState({ hidden: hidden });
@@ -232,7 +232,7 @@ var BackgroundLoader = React.createClass({
         // set the initial state (but only if browser supports the Page
         // Visibility API)
         if (hidden !== null && document[hidden] !== undefined) {
-            this.changeHidden({ type: document[hidden] ? 'blur' : 'focus' });
+            this.changeHidden({ type: document[hidden] ? "blur" : "focus" });
         }
     },
 

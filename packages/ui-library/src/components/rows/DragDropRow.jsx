@@ -1,9 +1,9 @@
-var React = require('react');
-var dnd = require('react-dnd');
+var React = require("react");
+var dnd = require("react-dnd");
 var dragSource = dnd.DragSource;
 var dropTarget = dnd.DropTarget;
 var PropTypes = React.PropTypes;
-var TYPE = 'DragDropRow';
+var TYPE = "DragDropRow";
 
 var dragSpec = {
     beginDrag: function (props) {
