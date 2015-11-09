@@ -18,13 +18,11 @@ var CalendarDemo = React.createClass({
 
     render: function () {
         return (
-            /* jshint ignore:start */
             <Calendar format="YYYY-MM-DD"
                       date={this.state.selectedDate}
                       computableFormat="x"
                       closeOnSelect={true}
                       onChange={this._onEnrollmentDateChanged}/>
-            /* jshint ignore:end */
         );
     }
 });

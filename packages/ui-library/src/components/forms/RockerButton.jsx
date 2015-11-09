@@ -71,9 +71,7 @@ var RockerButton = React.createClass({
                     var onChange = _.partial(self._onSelectionChange, key);
 
                     return (
-                        /* jshint ignore:start */
                         <label data-id={key} onClick={onChange} key={key}>{key}</label>
-                        /* jshint ignore:end */
                     );
                 }),
             selectionIndex = _.indexOf(this.props.labels, this.state.selection);
@@ -90,13 +88,11 @@ var RockerButton = React.createClass({
         }
 
         return (
-            /* jshint ignore:start */
             <div data-id={this.props.id}
                  className={containerCss}>
                     {buttonNodes}
                     <span className="slide"></span>
             </div>
-            /* jshint ignore:end */
         );
     }
 });

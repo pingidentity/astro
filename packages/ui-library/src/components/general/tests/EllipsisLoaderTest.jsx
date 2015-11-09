@@ -14,9 +14,7 @@ describe("Ellipsis loader", function () {
 
     it("renders the animated ellipsis when the loading flag is set to true", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <EllipsisLoader id="test-loader" loading={true} className="css-class"/>
-            /* jshint ignore:end */
         );
 
         var loader = TestUtils.findRenderedDOMComponentWithDataId(component, "test-loader");
@@ -26,9 +24,7 @@ describe("Ellipsis loader", function () {
 
     it("does not render anything when the loading flag is set to false", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <EllipsisLoader id="test-loader" loading={false}/>
-            /* jshint ignore:end */
         );
 
         var test = TestUtils.scryRenderedDOMComponentsWithDataId(component, "test-loader");

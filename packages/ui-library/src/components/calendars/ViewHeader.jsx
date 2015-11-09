@@ -13,7 +13,6 @@ module.exports = React.createClass({
         var prop = this.props;
 
         return (
-            /* jshint ignore:start */
             <div className="navigation-wrapper">
                 <span onClick={prop.prev} className="icon" >
                     <i className="fa fa-angle-left icon-left"></i>
@@ -23,7 +22,6 @@ module.exports = React.createClass({
                     <i className="fa fa-angle-right icon-right"></i>
                 </span>
             </div>
-            /* jshint ignore:end */
         );
     }
 

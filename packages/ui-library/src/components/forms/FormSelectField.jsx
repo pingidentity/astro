@@ -114,20 +114,15 @@ var FormSelectField = React.createClass({
 
         if (this.props.labelHelpText) {
             labelHelp = (
-                /* jshint ignore:start */
                 <HelpHint hintText={this.props.labelHelpText} />
-                /* jshint ignore:end */
             );
         }
 
         options = _.map(options, function (option, value) {
-            /* jshint ignore:start */
             return <option value={value} key={value}>{option}</option>;
-            /* jshint ignore:end */
         });
 
         return (
-            /* jshint ignore:start */
             <label className={labelCss} data-id={this.props.id + "_label"}>
                 <span className="label-text">
                     {this.props.label}
@@ -150,7 +145,6 @@ var FormSelectField = React.createClass({
                     </div>
                 </div>
             </label>
-            /* jshint ignore:end */
         );
     }
 });

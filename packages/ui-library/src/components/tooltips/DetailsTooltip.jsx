@@ -83,14 +83,12 @@ var DetailsTooltip = React.createClass({
         };
 
         return this.props.open ? (
-            /* jshint ignore:start */
             <div className={this.props.contentClassNames} data-id="details-content" onClick={hide}>
                     {this.props.showClose && <a className="details-close" data-id="details-close"
                     onClick={this.props.onToggle}></a>}
                 <div className={this.props.titleClassNames} data-id="details-title">{this.props.title}</div>
                   {this.props.children}
             </div>
-            /* jshint ignore:end */
         ) : null;
     },
 
@@ -118,13 +116,11 @@ var DetailsTooltip = React.createClass({
         }
 
         return (
-            /* jshint ignore:start */
             <span className={containerCss}>
                 {this.props.label ? <a className={targetCss} data-id="action-btn"
                     onClick={!this.props.disabled && this._toggle}>{this.props.label}</a> : null}
                 {this._content()}
             </span>
-            /* jshint ignore:end */
         );
     }
 });

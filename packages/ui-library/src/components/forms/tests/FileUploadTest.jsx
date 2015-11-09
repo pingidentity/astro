@@ -53,7 +53,6 @@ describe("FileUpload", function () {
     describe("with validation settings set", function () {
         beforeEach(function () {
             componentWithValidation = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <FileUpload
                 accept="image/jpeg, image/jpg, image/gif, image/png"
                 maxFileSizeKb={10}
@@ -64,7 +63,6 @@ describe("FileUpload", function () {
                 buttonText="Select File"
                 removeFileLabel="Remove File"
                 errorHandler={errorFn} />
-            /* jshint ignore:end */
             );
         });
 
@@ -192,9 +190,7 @@ describe("FileUpload", function () {
 
     it("will show the filename when the showThumbnail property is not set", function () {
         var componentNoValidation = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <FileUpload accept="" referenceName="testFileUpload" buttonText="" removeFileLabel="" />
-            /* jshint ignore:end */
         );
 
         var fileInputDOMComponent =

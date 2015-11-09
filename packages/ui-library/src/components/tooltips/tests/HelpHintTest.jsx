@@ -17,9 +17,7 @@ describe("HelpHint", function () {
 
     beforeEach(function () {
         component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <HelpHint hintText={text} id="helpTooltip" className={classValue}>{label}</HelpHint>
-            /* jshint ignore:end */
         );
         div = TestUtils.findRenderedDOMComponentWithDataId(component, "helpTooltip");
         tooltipDiv = ReactTestUtils.findRenderedDOMComponentWithClass(component, "tooltip-text");

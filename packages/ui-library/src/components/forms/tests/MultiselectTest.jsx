@@ -18,7 +18,6 @@ describe("Multiselect", function () {
 
     beforeEach(function () {
         component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Multiselect title="Sites" id="multiselect"
                 options={{
                     "acme.com": "1st",
@@ -27,7 +26,6 @@ describe("Multiselect", function () {
                     "foo.net": "4th"
                 }}
                 onChange={callback} />
-            /* jshint ignore:end */
         );
         checkboxes = TestUtils.scryRenderedDOMComponentsWithDataId(component, "checkbox");
         search = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, "input")[0];

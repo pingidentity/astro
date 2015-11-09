@@ -41,11 +41,9 @@ var MultiselectOption = React.createClass({
 
     render: function () {
         return (
-            /* jshint ignore:start */
             <label data-id={this.props.id}>
                 <input type="checkbox" data-id="checkbox" onChange={this._changed} checked={this.state.isSelected}/>
                 <div className="icon"></div>{this.props.label}</label>
-            /* jshint ignore:end */
         );
     }
 });
@@ -177,15 +175,12 @@ var Multiselect = React.createClass({
             var value = self.props.options[label];
 
             return (
-                /* jshint ignore:start */
                 <MultiselectOption id={"option" + index} label={label} onChange={self.props.onChange}
                     key={label} value={value} />
-                /* jshint ignore:end */
             );
         });
 
         return (
-            /* jshint ignore:start */
             <div className={containerCss} data-id={this.props.id}>
                 <div className="button default" onClick={this._toggle}>{this.props.title}</div>
                 <div className="menu">
@@ -197,7 +192,6 @@ var Multiselect = React.createClass({
                     </div>
                 </div>
             </div>
-            /* jshint ignore:end */
         );
     }
 });

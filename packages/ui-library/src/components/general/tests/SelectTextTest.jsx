@@ -45,11 +45,9 @@ describe("SelectText", function () {
         // --- Render and test component ------
         var someText = "Just some test text";
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore: start */
             <SelectText className="testClass">
                 {someText}
             </SelectText>
-            /* jshint ignore: end */
         );
         
         // Initially expect no calls to the select text functions
@@ -100,11 +98,9 @@ describe("SelectText", function () {
         // --- Render and test component ------
         var someText = "Just some test text";
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore: start */
             <SelectText className="testClass" select={true}>
                 {someText}
             </SelectText>
-            /* jshint ignore: end */
         );
         
         // Initially expect no calls to the select text functions

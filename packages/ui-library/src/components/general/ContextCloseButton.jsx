@@ -66,7 +66,6 @@ var ContextCloseButton = React.createClass({
         var styles = { disabled: this.props.disabled };
         styles[this.props.className] = !!this.props.className;
 
-        /* jshint ignore:start */
         return (
             this.props.show ? (
                 <input id={this.props.id}
@@ -78,7 +77,6 @@ var ContextCloseButton = React.createClass({
                     disabled={this.props.disabled} />
             ) : null
         );
-        /* jshint ignore:end */
     }
 });
 

@@ -25,7 +25,6 @@ var EllipsisLoaderDemo = React.createClass({
 
     render: function () {
         return (
-            /* jshint ignore:start */
             <div>
                 <EllipsisLoaderButton
                     id="demo-ellipsis-loader-button"
@@ -41,8 +40,6 @@ var EllipsisLoaderDemo = React.createClass({
                     onButtonClick={this._toggleLoadingButton2}
                 />
             </div>
-
-            /* jshint ignore:end */
         );
     }
 });

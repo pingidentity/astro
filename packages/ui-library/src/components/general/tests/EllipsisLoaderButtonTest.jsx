@@ -24,14 +24,12 @@ describe("Ellipsis loader button", function () {
         var buttonCss = "css-class";
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <EllipsisLoaderButton
                 id={buttonId}
                 loading={true}
                 className={buttonCss}
                 text={buttonText}
                 onButtonClick={callback} />
-            /* jshint ignore:end */
         );
 
         var button = TestUtils.findRenderedDOMComponentWithDataId(component, buttonId);
@@ -40,13 +38,11 @@ describe("Ellipsis loader button", function () {
 
     it("does not render anything when the loading flag is set to false", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <EllipsisLoaderButton
                 id={buttonId}
                 text={buttonText}
                 loading={false}
                 onButtonClick={callback} />
-            /* jshint ignore:end */
         );
 
         var button = TestUtils.findRenderedDOMComponentWithDataId(component, buttonId);
@@ -55,13 +51,11 @@ describe("Ellipsis loader button", function () {
 
     it("renders the button text", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <EllipsisLoaderButton
                 id={buttonId}
                 text={buttonText}
                 loading={false}
                 onButtonClick={callback} />
-            /* jshint ignore:end */
         );
 
         var button = TestUtils.findRenderedDOMComponentWithDataId(component, buttonId);

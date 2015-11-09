@@ -234,29 +234,22 @@ var FormTextField = React.createClass({
         if (edited) {
             // only show the undo icon if an original value is passed in and the field's value has changed
             // empty strings are OK
-            /* jshint ignore:start */
             undo = (<a data-id="undo" className="undo" onClick={this._handleUndo}>undo</a>);
-            /* jshint ignore:end */
         }
 
         if (this.props.save && this.state.fieldValue !== this.props.originalValue) {
-            /* jshint ignore:start */
             save = (<a data-id="save" className="save" onClick={this._handleSave}>save</a>);
-            /* jshint ignore:end */
 
             labelCss += " inline-save";
         }
 
         if (this.props.labelHelpText) {
             labelHelp = (
-                /* jshint ignore:start */
                 <HelpHint hintText={this.props.labelHelpText} data-id={this.props.referenceName + "_helptooltip"} />
-                /* jshint ignore:end */
             );
         }
 
         return (
-            /* jshint ignore:start */
             <label className={labelCss} data-id={this.props.referenceName + "_label"}>
                 {this.props.labelText ? (
                     <span className="label-text">
@@ -293,7 +286,6 @@ var FormTextField = React.createClass({
                 </span>
                 {this.props.children}
             </label>
-            /* jshint ignore:end */
         );
     }
 

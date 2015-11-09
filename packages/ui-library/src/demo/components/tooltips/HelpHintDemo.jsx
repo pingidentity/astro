@@ -10,12 +10,10 @@ var HelpHintDemo = React.createClass({
 
     render: function () {
         return (
-             /* jshint ignore:start */
             <HelpHint
                 id="helpHint"
                 hintStyle="short-tooltip"
                 hintText="This option is unavailable"/>
-            /* jshint ignore:end */
         );
     }
 });

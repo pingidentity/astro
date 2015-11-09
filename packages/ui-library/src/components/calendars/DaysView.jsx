@@ -76,9 +76,7 @@ module.exports = React.createClass({
 
     render: function () {
         var titles = this.getDaysTitles().map(function (item, i) {
-            /* jshint ignore:start */
             return <Cell value={item.label} classes="day title" key={i} />;
-            /* jshint ignore:end */
         });
 
         var days = this.getDays().map(function (item, i) {
@@ -89,15 +87,12 @@ module.exports = React.createClass({
                 current: item.curr,
                 today: item.today
             });
-            /* jshint ignore:start */
             return <Cell value={item.label} classes={_class} key={i} />;
-            /* jshint ignore:end */
         });
 
         var currentDate = this.props.date ? this.props.date.format("MMMM") : moment().format("MMMM");
 
         return (
-            /* jshint ignore:start */
             <div className="view days-view" onKeyDown={this.keyDown}>
                 <ViewHeader
                     prev={this.prev}
@@ -108,7 +103,6 @@ module.exports = React.createClass({
                 <div className="days-title">{titles}</div>
                 <div className="days" onClick={this.cellClick} >{days}</div>
             </div>
-            /* jshint ignore:end */
         );
     }
 

@@ -183,13 +183,11 @@ var Section = React.createClass({
         }
 
         return (
-            /* jshint ignore:start */
             <div data-id={this.props.id} className={css(styles)}
                 onClick={!this.props.toggleOnTitle ? this._toggle : noop}>
                 {titleNodes}
                 {content}
             </div>
-            /* jshint ignore:end */
         );
     }
 });

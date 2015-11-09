@@ -44,11 +44,9 @@ var HelpHint = React.createClass({
         }
 
         return (
-            /* jshint ignore:start */
             <div className={hintStyles} data-id={this.props.id}>
                 {this.props.children} <div className="tooltip-text">{this.props.hintText}</div>
             </div>
-            /* jshint ignore:end */
         );
     }
 });

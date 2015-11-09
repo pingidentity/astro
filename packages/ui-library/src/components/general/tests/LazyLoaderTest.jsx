@@ -28,9 +28,7 @@ describe("LazyLoader", function () {
         var container;
 
         View = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <LazyLoader items={components} limit={limit} />
-            /* jshint ignore:end */
         );
 
         container = TestUtils.findRenderedDOMComponentWithDataId(View, "lazyLoaderContainer");

@@ -14,9 +14,7 @@ describe("FormTextArea", function () {
 
     it("renders the component", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <FormTextArea referenceName={'test'} />
-            /* jshint ignore:end */
         );
         // verify that the component is rendered
         var field = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-textarea");
@@ -28,9 +26,7 @@ describe("FormTextArea", function () {
 
     it("shows field as required", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <FormTextArea referenceName={'test'} isRequired={true} />
-            /* jshint ignore:end */
         );
         // verify that the component is rendered
         var field = ReactTestUtils.findRenderedDOMComponentWithClass(component, "required");
@@ -40,9 +36,7 @@ describe("FormTextArea", function () {
     it("shows the default value", function () {
         var defaultValue = "my random value";
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <FormTextArea referenceName={'test'} defaultValue={defaultValue} />
-            /* jshint ignore:end */
         );
         // verify that the component is rendered
         var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "textarea");
@@ -52,9 +46,7 @@ describe("FormTextArea", function () {
     it("shows placeholder", function () {
         var defaultValue = "my random value";
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <FormTextArea referenceName={'test'} defaultValue={defaultValue} placeholder="edit me"/>
-            /* jshint ignore:end */
         );
         // verify that the component is rendered
         var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "textarea");
@@ -63,9 +55,7 @@ describe("FormTextArea", function () {
 
     it("respects value over defaultValue and state precedence", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <FormTextArea referenceName={'test'} defaultValue={'my random value'} value={'my value'}/>
-            /* jshint ignore:end */
         );
 
         // verify that the component is rendered
@@ -79,9 +69,7 @@ describe("FormTextArea", function () {
     it("fires the onValueChange callback when field changes", function () {
         var handleChange = jest.genMockFunction();
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <FormTextArea referenceName={'test'} onValueChange={handleChange} />
-            /* jshint ignore:end */
         );
         var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "textarea");
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
@@ -93,12 +81,10 @@ describe("FormTextArea", function () {
         var handleChange = jest.genMockFunction();
         var originalValue = "my original value";
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <FormTextArea
                 referenceName={'test'}
                 defaultValue={originalValue}
                 onValueChange={handleChange} />
-            /* jshint ignore:end */
         );
         var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "textarea");
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
@@ -110,13 +96,11 @@ describe("FormTextArea", function () {
         var handleChange = jest.genMockFunction();
         var originalValue = "my original value";
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <FormTextArea
                 referenceName={'test'}
                 defaultValue={originalValue}
                 originalValue={originalValue}
                 onValueChange={handleChange} />
-            /* jshint ignore:end */
         );
         var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "textarea");
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
@@ -128,13 +112,11 @@ describe("FormTextArea", function () {
         var handleChange = jest.genMockFunction();
         var originalValue = "my original value";
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <FormTextArea
                 referenceName={'test'}
                 defaultValue={originalValue}
                 originalValue={originalValue}
                 onValueChange={handleChange} />
-            /* jshint ignore:end */
         );
         var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "textarea");
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
@@ -153,13 +135,11 @@ describe("FormTextArea", function () {
         var handleChange = jest.genMockFunction();
         var originalValue = "my original value";
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <FormTextArea
                 referenceName={'test'}
                 defaultValue={originalValue}
                 originalValue={originalValue}
                 onValueChange={handleChange} />
-            /* jshint ignore:end */
         );
         // make the undo icon appear by changing the field
         var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "textarea");
@@ -180,9 +160,7 @@ describe("FormTextArea", function () {
         var errorMessage = "help!";
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <FormTextArea errorMessage={errorMessage} />
-            /* jshint ignore:end */
         );
 
         var errorDiv = ReactTestUtils.findRenderedDOMComponentWithClass(component, "tooltip-text");

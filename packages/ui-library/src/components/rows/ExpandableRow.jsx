@@ -123,7 +123,6 @@ var ExpandableRow = React.createClass({
 
 
         return (
-            /* jshint ignore:start */
             <div className="result-set">
                 <div data-id={this.props.id} className={containerCss}>
                     <div className="collapsed-content">
@@ -156,7 +155,6 @@ var ExpandableRow = React.createClass({
                     </a>
                 </div>
             </div>
-            /* jshint ignore:end */
         );
     }
 

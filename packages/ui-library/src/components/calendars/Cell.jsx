@@ -12,9 +12,7 @@ module.exports = React.createClass({
         prop.classes += " cell";
 
         return (
-            /* jshint ignore:start */
             <div className={prop.classes}>{prop.value}</div>
-            /* jshint ignore:end */
         );
     }
 

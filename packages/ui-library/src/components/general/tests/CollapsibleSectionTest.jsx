@@ -17,11 +17,9 @@ describe("CollapsibleSection", function () {
      */
     it("is collapsed by default", function () {
         View = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <CollapsibleSection className="iShouldBeVisible">
                 <div className="iShouldBeHidden" />
             </CollapsibleSection>
-            /* jshint ignore:end */
         );
 
         var cmp = ReactTestUtils.findRenderedComponentWithType(View, CollapsibleSection);
@@ -36,11 +34,9 @@ describe("CollapsibleSection", function () {
      */
     it("expands on click", function () {
         View = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <CollapsibleSection onToggle={onToggle}>
                 <div className="iShouldBeVisibleAfterClick" />
             </CollapsibleSection>
-            /* jshint ignore:end */
         );
 
         ReactTestUtils.Simulate.click(React.findDOMNode(View));
@@ -56,11 +52,9 @@ describe("CollapsibleSection", function () {
      */
     it("is rendering expanded state", function () {
         View = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <CollapsibleSection className="iShouldBeVisible" expanded={true} >
                 <div className="iShouldBeVisible" />
             </CollapsibleSection>
-            /* jshint ignore:end */
         );
 
         var child = TestUtils.findRenderedDOMComponentWithDataId(View, "collapsableSection");
@@ -74,7 +68,6 @@ describe("CollapsibleSection", function () {
      */
     it("is rendering expanded state and toggle title", function () {
         View = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <CollapsibleSection className="section" expanded={true} toggleOnTitle={true}
                 onToggle={onToggle}>
                 <div className="section-title" title={true}>
@@ -82,7 +75,6 @@ describe("CollapsibleSection", function () {
                                 Conditions
                 </div>
             </CollapsibleSection>
-            /* jshint ignore:end */
         );
 
         var child = TestUtils.findRenderedDOMComponentWithDataId(View, "collapsableSection");

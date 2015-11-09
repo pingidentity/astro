@@ -24,7 +24,6 @@ var FormRadioGroupDemo = React.createClass({
         ];
 
         return (
-            /* jshint ignore:start */
                 <div>
                     <FormRadioGroup
                         groupName="aps_condition_type"
@@ -37,7 +36,6 @@ var FormRadioGroupDemo = React.createClass({
                     </div>
                 </div>
 
-            /* jshint ignore:end */
         );
     }
 

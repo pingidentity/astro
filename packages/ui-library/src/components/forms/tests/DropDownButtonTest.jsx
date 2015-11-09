@@ -23,11 +23,9 @@ describe("DropDownButton", function () {
         };
 
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <DropDownButton title="Test Drop Down"
                             onSelect={callback}
                             options={menu} />
-            /* jshint ignore:end */
         );
 
         // expect a single button to be rendered.
@@ -53,11 +51,9 @@ describe("DropDownButton", function () {
         };
 
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <DropDownButton title="Test Drop Down"
                             onSelect={callback}
                             options={menu} />
-            /* jshint ignore:end */
         );
         
         // expect a single button to be rendered.
@@ -100,11 +96,9 @@ describe("DropDownButton", function () {
         };
 
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <DropDownButton title="Test Drop Down"
                             onSelect={callback}
                             options={menu} />
-            /* jshint ignore:end */
         );
         
         // expect a single button to be rendered.

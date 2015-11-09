@@ -16,13 +16,11 @@ describe("Calendar", function () {
 
     it("test basic happy path rendering", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore: start */
             <Calendar format="YYYY-MM-DD"
                     date={selectedDate}
                     computableFormat="x"
                     closeOnSelect={true}
                     onChange={callback}/>
-            /* jshint ignore: end */
         );
 
         var input = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");

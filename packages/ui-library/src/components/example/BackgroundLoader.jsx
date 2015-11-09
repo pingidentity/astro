@@ -224,7 +224,6 @@ var BackgroundLoader = React.createClass({
         
         if (content) {
             return (
-                /* jshint ignore:start */
                 <span data-id="loader" className={this.props.className}>
                     {content}
 
@@ -234,7 +233,6 @@ var BackgroundLoader = React.createClass({
                         some example test to demonstrate the required CSS usage
                     </span>
                 </span>
-                /* jshint ignore:end */
             );
         } else {
             return null;

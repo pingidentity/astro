@@ -90,13 +90,11 @@ var Toggle = React.createClass({
         }
 
         return (
-            /* jshint ignore:start */
             <div data-id={this.props.id} className={classNames} onClick={this._toggle}>
                 <a className="toggle">
                     <input type="hidden" />
                 </a>
             </div>
-            /* jshint ignore:end */
         );
     }
 });

@@ -136,13 +136,11 @@ var SelectText = React.createClass({
 
     render: function () {
         return (
-            /* jshint ignore:start */
             <span className={this.props.className}
                   onClick={this._selectText}
                   data-id={this.props.dataId || "select-text"}>
                 {this.props.children}
             </span>
-            /* jshint ignore:end */
         );
     }
 });

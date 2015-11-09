@@ -96,31 +96,25 @@ var DropDownButton = React.createClass({
             var optionNodes = _.map(this.props.options, function (value, key) {
 
                 return (
-                    /* jshint ignore:start */
                     <a data-id={key} onClick={_.partial(that._onOptionSelected, key)} key={key}>{value}</a>
-                    /* jshint ignore:end */
                 );
             });
 
             content = (
-                /* jshint ignore:start */
                 <div className="menu">
                     <div className="description">{this.props.title}</div>
                     <div className="options">
                         {optionNodes}
                     </div>
                 </div>
-                /* jshint ignore:end */
             );
         }
 
         return (
-            /* jshint ignore:start */
             <div className={styles} data-id={this.props.id}>
                 <a data-id="action" className="add button inline" onClick={this._toggle}>{this.props.label}</a>
                 {content}
             </div>
-            /* jshint ignore:end */
         );
     }
 });

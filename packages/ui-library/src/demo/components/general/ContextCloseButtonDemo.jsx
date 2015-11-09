@@ -26,9 +26,7 @@ var ContextComponent = React.createClass({
 
     render: function () {
         return (
-            /* jshint ignore:start */
             <ContextCloseButton onClick={this.props.clickCallback} value={this.props.value} />
-            /* jshint ignore:end */
         );
     }
 });

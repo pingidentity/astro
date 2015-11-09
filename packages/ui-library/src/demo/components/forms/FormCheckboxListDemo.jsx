@@ -39,7 +39,6 @@ var FormCheckboxListDemo = React.createClass({
         ];
 
         return (
-            /* jshint ignore:start */
                 <div>
                     <FormCheckboxList
                         groupName="aps_condition_type"
@@ -59,7 +58,6 @@ var FormCheckboxListDemo = React.createClass({
                     </div>
                 </div>
 
-            /* jshint ignore:end */
         );
     }
 

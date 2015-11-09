@@ -235,17 +235,14 @@ var FormCheckboxList = React.createClass({
                         var setSearchClick = _.partial(self._setSearch, item.group);
                         var dataIdLabel = "data-label-" + item.group;
                         divider = (
-                            /* jshint ignore:start */
                             <div data-id={dataIdLabel} className="item-head"
                                  onClick={setSearchClick}>{item.group}</div>
-                            /* jshint ignore:end */
                         );
                         groupNameComparison = item.group;
                     }
                 }
 
                 return (
-                    /* jshint ignore:start */
                     <div key={item.id + index}>
                         {divider}
                         <label className="input-checkbox">
@@ -255,7 +252,6 @@ var FormCheckboxList = React.createClass({
                             <div className="icon"></div>
                         </label>
                     </div>
-                    /* jshint ignore:end */
                 );
             }
         }, groupNameComparison);
@@ -306,7 +302,6 @@ var FormCheckboxList = React.createClass({
             containerCss[this.props.className] = true;
         }
 
-        /* jshint ignore:start */
         var items = this.props.useLazyLoader
             ? (
                 <LazyLoader items={this._getCheckboxNodes()} limit={100} classNames="options" />
@@ -316,10 +311,8 @@ var FormCheckboxList = React.createClass({
                     {this._getCheckboxNodes()}
                 </div>
             );
-        /* jshint ignore:end */
 
         return (
-            /* jshint ignore:start */
             <div className={css("checkbox-list", containerCss)}>
                 <div className="input-row">
                     <FormTextField
@@ -348,7 +341,6 @@ var FormCheckboxList = React.createClass({
                     {items}
                 </div>
             </div>
-            /* jshint ignore:end */
         );
     }
 });

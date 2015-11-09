@@ -12,9 +12,7 @@ describe("Infinite Scroll", function () {
 
     var MyRow = React.createClass({
         render: function () {
-            /* jshint ignore:start */
             return <div ref="container" className="row">My row: {this.props.num}</div>;
-            /* jshint ignore:end */
         }
     });
 

@@ -66,19 +66,16 @@ module.exports = React.createClass({
         var currYear = this.props.date.year();
 
         var yearsCells = years.map(function (item, i) {
-            /* jshint ignore:start */
             var _class = classnames({
                 year: true,
                 current: item.label === currYear
             });
             return <Cell value={item.label} classes={_class} key={i} />;
-            /* jshint ignore:end */
         });
 
         var currentDate = [years[0].label, years[years.length - 1].label].join("-");
 
         return (
-            /* jshint ignore:start */
             <div className="years-view">
                 <ViewHeader
                     prev={this.prev}
@@ -86,7 +83,6 @@ module.exports = React.createClass({
                     data={currentDate} />
                 <div className="years" onClick={this.cellClick}>{yearsCells}</div>
             </div>
-            /* jshint ignore:end */
         );
     }
 

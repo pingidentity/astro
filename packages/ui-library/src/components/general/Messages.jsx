@@ -125,19 +125,15 @@ var Message = React.createClass({
         // as it could allow XSS, so messages have to be explicitly
         // flagged as being html.
         if (this.props.message.isHtml) {
-            /* jshint ignore:start */
             text = <span dangerouslySetInnerHTML={{ __html: text }} /> ;
-            /* jshint ignore:end */
         }
         
         return (
-            /* jshint ignore:start */
             <div className={classes}>
                 <div className="text">
                     {text}<a className="close" onClick={this._close}></a>
                 </div>
             </div>
-            /* jshint ignore:end */
         );
     }
 

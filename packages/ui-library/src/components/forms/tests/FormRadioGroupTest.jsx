@@ -17,13 +17,11 @@ describe("FormRadioGroup", function () {
 
     it("test no default selected item", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore: start */
             <FormRadioGroup
                 id="test-radio-group"
                 groupName="test_radio_group"
                 onChange={callback}
                 items={items}/>
-            /* jshint ignore: end */
         );
 
         var radios = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, "input");
@@ -40,13 +38,11 @@ describe("FormRadioGroup", function () {
         var selectedItem = "2";
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore: start */
             <FormRadioGroup
                 groupName="test_radio_group"
                 selected={selectedItem}
                 onChange={callback}
                 items={items}/>
-            /* jshint ignore: end */
         );
 
         var radios = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, "input");
@@ -69,23 +65,19 @@ describe("FormRadioGroup", function () {
         var customClass = "my-test-class";
 
         var stackedComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore: start */
             <FormRadioGroup
                 groupName="test_radio_group"
                 className={customClass}
                 onChange={callback}
                 items={items}/>
-            /* jshint ignore: end */
         );
 
         var horizontalComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore: start */
             <FormRadioGroup
                 stacked={false}
                 groupName="test_radio_group"
                 onChange={callback}
                 items={items}/>
-            /* jshint ignore: end */
         );
 
         // test presence of custom class (className prop)

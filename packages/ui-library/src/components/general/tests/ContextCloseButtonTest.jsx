@@ -31,9 +31,7 @@ describe("ContextCloseButton", function () {
 
         render: function () {
             return (
-                /* jshint ignore:start */
                 <ContextCloseButton onClick={this.props.clickCallback} />
-                /* jshint ignore:end */
             );
         }
     });
@@ -41,9 +39,7 @@ describe("ContextCloseButton", function () {
     it("Render and click with no context", function () {
         var callback = jest.genMockFn();
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <ContextCloseButton onClick={callback} />
-            /* jshint ignore:end */
         );
 
         // Expect a single button to be rendered.
@@ -67,9 +63,7 @@ describe("ContextCloseButton", function () {
         var clickCallback = jest.genMockFn();
         var closeCallback = jest.genMockFn();
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <ContextComponent clickCallback={clickCallback} closeCallback={closeCallback} />
-            /* jshint ignore:end */
         );
 
         // Expect a single button to be rendered.
@@ -99,9 +93,7 @@ describe("ContextCloseButton", function () {
         var closeCallback = jest.genMockFn();
         
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <ContextComponent clickCallback={clickCallback} closeCallback={closeCallback} />
-            /* jshint ignore:end */
         );
 
         // Expect a single button to be rendered.
@@ -124,18 +116,14 @@ describe("ContextCloseButton", function () {
     it("reacts correctly to the show state", function () {
         var shown = false;
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <ContextCloseButton show={shown} />
-            /* jshint ignore:end */
         );
         var content = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, "input");
         expect(content.length).toBe(0);
 
         shown = true;
         component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <ContextCloseButton show={shown} />
-            /* jshint ignore:end */
         );
         var button = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
         expect(ReactTestUtils.isDOMComponent(button)).toBeTruthy();
@@ -147,9 +135,7 @@ describe("ContextCloseButton", function () {
     it("disabled state", function () {
         var disabled = false;
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <ContextCloseButton disabled={disabled} />
-            /* jshint ignore:end */
         );
         var button = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
         expect(ReactTestUtils.isDOMComponent(button)).toBeTruthy();
@@ -157,9 +143,7 @@ describe("ContextCloseButton", function () {
 
         disabled = true;
         component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <ContextCloseButton disabled={disabled} />
-            /* jshint ignore:end */
         );
         button = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
         expect(ReactTestUtils.isDOMComponent(button)).toBeTruthy();

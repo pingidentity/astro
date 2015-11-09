@@ -161,21 +161,16 @@ var FormTextArea = React.createClass({
                 (value !== this.props.originalValue)) {
             // only show the undo icon if an original value is passed in and the text area's value has changed
             // empty strings are OK
-            /* jshint ignore:start */
             undo = (<a data-id="undo" className="undo" onClick={this._handleUndo}>undo</a>);
-            /* jshint ignore:end */
         }
 
         if (this.props.labelHelpText) {
             labelHelp = (
-                /* jshint ignore:start */
                 <HelpHint hintText={this.props.labelHelpText} data-id={this.props.referenceName + "_helptooltip"} />
-                /* jshint ignore:end */
             );
         }
 
         return (
-            /* jshint ignore:start */
             <label className={labelCss}>
                 <span className="label-text">
                     {this.props.labelText}
@@ -207,7 +202,6 @@ var FormTextArea = React.createClass({
                 </span>
                 {this.props.children}
             </label>
-            /* jshint ignore:end */
         );
     }
 

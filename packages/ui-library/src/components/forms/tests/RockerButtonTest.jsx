@@ -15,9 +15,7 @@ describe("RockerButton", function () {
         var callback = jest.genMockFunction();
 
         var rockerButtonComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <RockerButton labels={["Profile", "Groups", "Services"]} onChange={callback}/>
-            /* jshint ignore:end */
         );
 
         var labels = ReactTestUtils.scryRenderedDOMComponentsWithTag(rockerButtonComponent, "label");

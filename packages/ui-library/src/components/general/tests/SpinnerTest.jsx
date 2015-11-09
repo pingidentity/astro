@@ -12,7 +12,6 @@ describe("Spinner", function () {
 
     it("is rendering spinning animation", function () {
         var component = ReactTestUtils.renderIntoDocument(
-                /* jshint ignore:start */
                 <Spinner
                     show={true}
                     defaultText={defaultText}>
@@ -20,7 +19,6 @@ describe("Spinner", function () {
                         whatever
                     </div>
                 </Spinner>
-                /* jshint ignore:end */
             );
 
         var content = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "spinner-content");
@@ -32,7 +30,6 @@ describe("Spinner", function () {
 
     it("is rendering child content", function () {
         var component = ReactTestUtils.renderIntoDocument(
-                /* jshint ignore:start */
                 <Spinner
                     show={false}
                     defaultText={defaultText}>
@@ -40,7 +37,6 @@ describe("Spinner", function () {
                         whatever
                     </div>
                 </Spinner>
-                /* jshint ignore:end */
             );
 
         var content = ReactTestUtils.findRenderedDOMComponentWithClass(component, "spinner-content");

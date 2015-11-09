@@ -15,11 +15,9 @@ describe("BackgroundLoader", function () {
 
     beforeEach(function () {
         loadingContentFunc = function () {
-            /* jshint ignore:start */
             return (
                 <span data-id="loading-content">loading content</span>
             );
-            /* jshint ignore:end */
         };
 
         loadContentFunc = jest.genMockFunction();
@@ -30,7 +28,6 @@ describe("BackgroundLoader", function () {
         loaded = false;
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <BackgroundLoader
                     interval={3000}
                     load={loadContentFunc}
@@ -39,7 +36,6 @@ describe("BackgroundLoader", function () {
                     className="css-class">
                 <div data-id="loaded-content">content loaded</div>
             </BackgroundLoader>
-            /* jshint ignore:end */
         );
         
         // the loading content should be visible; the loaded content should not be
@@ -56,7 +52,6 @@ describe("BackgroundLoader", function () {
         loaded = true;
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <BackgroundLoader
                     interval={2000}
                     load={loadContentFunc}
@@ -65,7 +60,6 @@ describe("BackgroundLoader", function () {
                     className="css-class">
                 <div data-id="loaded-content">content loaded</div>
             </BackgroundLoader>
-            /* jshint ignore:end */
         );
 
         // the loading content should not be visible; the loaded content should be
@@ -175,7 +169,6 @@ describe("BackgroundLoader", function () {
         loaded = false;
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <BackgroundLoader
                     interval={2000}
                     load={loadContentFunc}
@@ -184,7 +177,6 @@ describe("BackgroundLoader", function () {
                     className="css-class">
                 <div data-id="loaded-content">content loaded</div>
             </BackgroundLoader>
-            /* jshint ignore:end */
         );
         
         // the loading content should be visible; the loaded content should not be
@@ -202,7 +194,6 @@ describe("BackgroundLoader", function () {
 
         document["hidden"] = false;
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <BackgroundLoader
                     interval={2000}
                     load={loadContentFunc}
@@ -211,7 +202,6 @@ describe("BackgroundLoader", function () {
                     className="css-class">
                 <div data-id="loaded-content">content loaded</div>
             </BackgroundLoader>
-            /* jshint ignore:end */
         );
 
         

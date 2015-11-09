@@ -17,9 +17,7 @@ describe("Toggle", function () {
      */
     it("Render initial state toggled on", function () {
         var toggleComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Toggle toggled={true} id="toggle" />
-            /* jshint ignore:end */
         );
 
         // Expect a single toggle to be rendered.
@@ -37,9 +35,7 @@ describe("Toggle", function () {
      */
     it("render extra css classes", function () {
         var toggleComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Toggle className="small" id="toggle" />
-            /* jshint ignore:end */
         );
 
         // Expect a single toggle to be rendered.
@@ -56,9 +52,7 @@ describe("Toggle", function () {
      */
     it("Render initial state toggled off", function () {
         var toggleComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Toggle toggled={false} id="toggle" />
-            /* jshint ignore:end */
         );
 
         // Expect a single toggle to be rendered.
@@ -75,9 +69,7 @@ describe("Toggle", function () {
      */
     it("prefers props.value over state", function () {
         var toggleComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Toggle value={true} id="toggle" />
-            /* jshint ignore:end */
         );
 
         // Expect a single toggle to be rendered.
@@ -95,9 +87,7 @@ describe("Toggle", function () {
      */
     it("Render default state toggled off", function () {
         var toggleComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Toggle id="toggle" />
-            /* jshint ignore:end */
         );
 
         // Expect a single toggle to be rendered.
@@ -122,9 +112,7 @@ describe("Toggle", function () {
         };
 
         var toggleComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Toggle onToggle={callback} paramObj={paramObj} id="toggle" />
-            /* jshint ignore:end */
         );
 
         var toggle = TestUtils.findRenderedDOMComponentWithDataId(toggleComponent, "toggle");
@@ -188,9 +176,7 @@ describe("Toggle", function () {
         callback.mockReturnValue(false);
 
         var toggleComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Toggle onToggle={callback} id="toggle" />
-            /* jshint ignore:end */
         );
 
         var toggle = TestUtils.scryRenderedDOMComponentsWithDataId(toggleComponent, "toggle");
@@ -218,9 +204,7 @@ describe("Toggle", function () {
         callback.mockReturnValue(true);
 
         var toggleComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Toggle onToggle={callback} value={true} id="toggle" />
-            /* jshint ignore:end */
         );
 
         var toggle = TestUtils.findRenderedDOMComponentWithDataId(toggleComponent, "toggle");
@@ -242,9 +226,7 @@ describe("Toggle", function () {
      */
     it("Test toggle default data-id generated", function () {
         var toggleComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Toggle toggled={true} />
-            /* jshint ignore:end */
         );
 
         // Expect a single toggle to be rendered.

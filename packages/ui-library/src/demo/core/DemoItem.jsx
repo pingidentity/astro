@@ -11,7 +11,6 @@ var DemoItem = React.createClass({
 
     render: function () {
         return (
-            /* jshint ignore:start */
             <div className="section">
                 <a name={this.props.linkName}></a>
                 <h2>
@@ -34,7 +33,6 @@ var DemoItem = React.createClass({
                     ) : null}
                 </div>
             </div>
-            /* jshint ignore:end */
         );
     }
 });

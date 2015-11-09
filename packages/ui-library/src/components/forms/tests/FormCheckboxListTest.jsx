@@ -29,7 +29,6 @@ describe("FormCheckboxList", function () {
     xit("test default render state of form with minimal parameters", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore: start */
             <FormCheckboxList
                 groupName="test_checkbox_list"
                 labelSelectAll="Select All"
@@ -40,7 +39,6 @@ describe("FormCheckboxList", function () {
                 onVisibilityChange={callback}
                 onChange={callback}
                 items={items}/>
-            /* jshint ignore: end */
         );
 
         var checkboxContainer = TestUtils.findRenderedDOMComponentWithDataId(component, "dataobjects");
@@ -63,7 +61,6 @@ describe("FormCheckboxList", function () {
     xit("test no default selected item", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore: start */
             <FormCheckboxList
                 groupName="test_checkbox_list"
                 labelSelectAll="Select All"
@@ -73,7 +70,6 @@ describe("FormCheckboxList", function () {
                 onQueryChange={callback}
                 onVisibilityChange={callback}
                 items={items}/>
-            /* jshint ignore: end */
         );
 
         var checkboxContainer = TestUtils.findRenderedDOMComponentWithDataId(component, "dataobjects");
@@ -88,7 +84,6 @@ describe("FormCheckboxList", function () {
     xit("will trigger callback on select all hyperlink change event", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore: start */
             <FormCheckboxList
                 groupName="test_checkbox_list"
                 labelSelectAll="Select All"
@@ -98,7 +93,6 @@ describe("FormCheckboxList", function () {
                 onQueryChange={callback}
                 onVisibilityChange={callback}
                 items={items} />
-            /* jshint ignore: end */
         );
 
         var checkboxes = TestUtils.scryRenderedDOMComponentsWithDataId(component, "checkbox");
@@ -122,7 +116,6 @@ describe("FormCheckboxList", function () {
     xit("will trigger callback on checkbox dataobject selection change", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore: start */
             <FormCheckboxList
                 groupName="test_checkbox_list"
                 labelSelectAll="Select All"
@@ -133,7 +126,6 @@ describe("FormCheckboxList", function () {
                 onQueryChange={callback}
                 onVisibilityChange={callback}
                 items={items}/>
-            /* jshint ignore: end */
         );
 
         var checkboxContainer = TestUtils.findRenderedDOMComponentWithDataId(component, "dataobjects");
@@ -150,7 +142,6 @@ describe("FormCheckboxList", function () {
 
     xit("will trigger search filter", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore: start */
             <FormCheckboxList
                 groupName="test_checkbox_list"
                 labelSelectAll="Select All"
@@ -160,7 +151,6 @@ describe("FormCheckboxList", function () {
                 onQueryChange={jest.genMockFunction()}
                 onVisibilityChange={callback}
                 items={items}/>
-            /* jshint ignore: end */
         );
 
         var searchInput = TestUtils.findRenderedDOMComponentWithDataId(component, "dataobject-search");
@@ -184,7 +174,6 @@ describe("FormCheckboxList", function () {
     xit("will trigger hide unchecked toggle", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore: start */
             <FormCheckboxList
                 groupName="test_checkbox_list"
                 labelSelectAll="Select All"
@@ -195,7 +184,6 @@ describe("FormCheckboxList", function () {
                 onQueryChange={callback}
                 onVisibilityChange={callback}
                 items={items}/>
-            /* jshint ignore: end */
         );
 
         var hideUncheckedToggle = ReactTestUtils.scryRenderedComponentsWithType(component, Toggle);
@@ -209,7 +197,6 @@ describe("FormCheckboxList", function () {
     xit("will render grouped datasets, validate group labels shows up", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore: start */
             <FormCheckboxList
                 groupName="test_checkbox_list"
                 labelSelectAll="Select All"
@@ -219,7 +206,6 @@ describe("FormCheckboxList", function () {
                 onQueryChange={callback}
                 onVisibilityChange={callback}
                 items={itemsInGroups} />
-            /* jshint ignore: end */
         );
 
         var checkboxContainer = TestUtils.findRenderedDOMComponentWithDataId(component, "dataobjects");
@@ -246,7 +232,6 @@ describe("FormCheckboxList", function () {
     xit("will trigger group label filtering", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore: start */
             <FormCheckboxList
                 groupName="test_checkbox_list"
                 labelSelectAll="Select All"
@@ -256,7 +241,6 @@ describe("FormCheckboxList", function () {
                 onQueryChange={callback}
                 onVisibilityChange={callback}
                 items={itemsInGroups} />
-            /* jshint ignore: end */
         );
 
         var group2Label = TestUtils.findRenderedDOMComponentWithDataId(component, "data-label-group2");

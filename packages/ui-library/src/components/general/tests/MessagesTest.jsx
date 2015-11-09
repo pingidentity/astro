@@ -14,9 +14,7 @@ describe("Messages", function () {
 
     it("Render empty messages", function () {
         var messagesComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Messages />
-            /* jshint ignore:end */
         );
 
         var messages = ReactTestUtils.scryRenderedDOMComponentsWithClass(messagesComponent, "message");
@@ -29,9 +27,7 @@ describe("Messages", function () {
         ];
         
         var messagesComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Messages messages={messageList} />
-            /* jshint ignore:end */
         );
 
         var messages = ReactTestUtils.scryRenderedDOMComponentsWithClass(messagesComponent, "message");
@@ -47,9 +43,7 @@ describe("Messages", function () {
         ];
         
         var messagesComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Messages messages={messageList} />
-            /* jshint ignore:end */
         );
 
         var messages = ReactTestUtils.scryRenderedDOMComponentsWithClass(messagesComponent, "message");
@@ -66,9 +60,7 @@ describe("Messages", function () {
         var removeMessage = jest.genMockFunction();
         
         var messagesComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Messages messages={messageList} removeMessage={removeMessage} />
-            /* jshint ignore:end */
         );
 
         var messages = ReactTestUtils.scryRenderedDOMComponentsWithClass(messagesComponent, "message");
@@ -85,9 +77,7 @@ describe("Messages", function () {
         ];
         
         var messagesComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Messages messages={messageList} />
-            /* jshint ignore:end */
         );
 
         var messages = ReactTestUtils.scryRenderedDOMComponentsWithClass(messagesComponent, "message");
@@ -101,9 +91,7 @@ describe("Messages", function () {
         ];
         
         var messagesComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Messages messages={messageList} />
-            /* jshint ignore:end */
         );
 
         var messages = ReactTestUtils.scryRenderedDOMComponentsWithClass(messagesComponent, "message");
@@ -191,9 +179,7 @@ describe("Messages", function () {
         ];
         
         var messagesComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Messages messages={messageList} />
-            /* jshint ignore:end */
         );
 
         var messages = ReactTestUtils.scryRenderedDOMComponentsWithClass(messagesComponent, "message");

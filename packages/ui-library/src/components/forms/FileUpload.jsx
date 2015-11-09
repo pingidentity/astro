@@ -236,7 +236,6 @@ var FileUpload = React.createClass({
         var buttonLabel = fileSelected ? buttonTextSelected : buttonText;
 
         return (
-            /* jshint ignore:start */
             <div className={containerCss}>
                 <label className={labelCss}>
                     <div className="tooltip-text" data-id={this.props.referenceName + "_tooltip"}>
@@ -275,7 +274,6 @@ var FileUpload = React.createClass({
                     </div>
                 }
             </div>
-            /* jshint ignore:end */
         );
     }
 });

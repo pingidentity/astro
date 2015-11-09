@@ -33,7 +33,6 @@ var DetailsTooltipDemo = React.createClass({
 
     render: function () {
         return (
-            /* jshint ignore:start */
             <div className="controls">
                 <DetailsTooltip
                     positionStyle="bottom right"
@@ -69,7 +68,6 @@ var DetailsTooltipDemo = React.createClass({
                     </div>
                 ):null}
             </div>
-            /* jshint ignore:end */
         );
     }
 });

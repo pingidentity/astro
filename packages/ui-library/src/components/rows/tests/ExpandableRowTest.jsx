@@ -13,18 +13,14 @@ describe("ExpandableRow", function () {
     var contentText = "Test Content";
     var contentChildrenText = "Test Children Content";
     var component, row, expandButton;
-    /* jshint ignore:start */
     var titleJsx = (<div>{titleText}</div>);
     var subtitleJsx = (<div>{subtitleText}</div>);
     var contentJsx = (<div data-id="content">{contentText}</div>);
     var contentChildrenJsx = (<div data-id="content-children">{contentChildrenText}</div>);
-    /* jshint ignore:end */
 
     beforeEach(function () {
         component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <ExpandableRow title={titleJsx} subtitle={subtitleJsx} content={contentJsx} />
-            /* jshint ignore:end */
         );
         row = TestUtils.findRenderedDOMComponentWithDataId(component, "expandable-row");
         expandButton = TestUtils.findRenderedDOMComponentWithDataId(component, "expand-btn");
@@ -65,9 +61,7 @@ describe("ExpandableRow", function () {
 
     it("renders the row as expanded if defaultToExpanded prop is set to true", function () {
         var expandedComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <ExpandableRow title={titleJsx} subtitle={subtitleJsx} content={contentJsx} defaultToExpanded={true} />
-            /* jshint ignore:end */
         );
         var expandedRow = TestUtils.findRenderedDOMComponentWithDataId(expandedComponent, "expandable-row");
         expect(ReactTestUtils.isDOMComponent(expandedRow)).toBeTruthy();
@@ -75,9 +69,7 @@ describe("ExpandableRow", function () {
 
     it("renders the view icon when isEditEnabled prop is set to false", function () {
         var readOnlyComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <ExpandableRow title={titleJsx} subtitle={subtitleJsx} content={contentJsx} isEditEnabled={false} />
-            /* jshint ignore:end */
         );
         expandButton = TestUtils.findRenderedDOMComponentWithDataId(readOnlyComponent, "expand-btn");
         ReactTestUtils.Simulate.click(expandButton);
@@ -87,9 +79,7 @@ describe("ExpandableRow", function () {
 
     it("renders an empty disabled button when showEdit prop is set to false", function () {
         var readOnlyComponent = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <ExpandableRow title={titleJsx} subtitle={subtitleJsx} content={contentJsx} showEdit={false} />
-            /* jshint ignore:end */
         );
         expandButton = TestUtils.findRenderedDOMComponentWithDataId(readOnlyComponent, "expand-btn");
         ReactTestUtils.Simulate.click(expandButton);
@@ -99,11 +89,9 @@ describe("ExpandableRow", function () {
 
     it("renders the content when passed in as a children instead of a prop", function () {
         component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <ExpandableRow title={titleJsx} subtitle={subtitleJsx}>
                 {contentChildrenJsx}
             </ExpandableRow>
-            /* jshint ignore:end */
         );
         expandButton = TestUtils.findRenderedDOMComponentWithDataId(component, "expand-btn");
         ReactTestUtils.Simulate.click(expandButton);

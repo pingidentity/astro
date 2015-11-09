@@ -16,9 +16,7 @@ describe("FormSelectField", function () {
         var onChange = function () {};
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <FormSelectField label="test label" options={{ 1: "one", 2: "two" }} onChange={onChange} value={'2'} />
-            /* jshint ignore:end */
         );
 
         var label = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-select");
@@ -40,9 +38,7 @@ describe("FormSelectField", function () {
         var onChange = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <FormSelectField label="test label" options={{ 1: "one", 2: "two" }} onChange={onChange} value={'2'} />
-            /* jshint ignore:end */
         );
 
         var select = ReactTestUtils.findRenderedDOMComponentWithTag(component, "select");
@@ -57,11 +53,9 @@ describe("FormSelectField", function () {
         var noneOptionValue = "0";
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <FormSelectField label="test label" options={{ 1: "one", 2: "two" }} onChange={onChange}
                 noneOption={true} noneOptionText={noneOptionText} noneOptionValue={noneOptionValue}
                 value={'0'} />
-            /* jshint ignore:end */
         );
 
         var options = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, "option");
@@ -74,10 +68,8 @@ describe("FormSelectField", function () {
         var errorMessage = "help!";
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <FormSelectField label="test label" options={{ 1: "one", 2: "two" }} onChange={onChange}
                              errorMessage={errorMessage} value={'2'} />
-            /* jshint ignore:end */
         );
 
         var errorDiv = ReactTestUtils.findRenderedDOMComponentWithClass(component, "tooltip-text");

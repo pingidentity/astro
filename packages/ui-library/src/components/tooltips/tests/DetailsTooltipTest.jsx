@@ -16,11 +16,9 @@ describe("DetailsTooltip", function () {
     it("is rendering open state", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Details title="Title" label="Action" open={true}>
                 <p>what ever callout content is</p>
             </Details>
-            /* jshint ignore:end */
         );
 
         var details = ReactTestUtils.findRenderedComponentWithType(component, Details);
@@ -43,12 +41,10 @@ describe("DetailsTooltip", function () {
     it("is rendering open state with custom styles and no close control", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Details title="Title" label="Action" open={true} titleClassNames="title"
                      contentClassNames="content" showClose={false}>
                 <p>what ever callout content is</p>
             </Details>
-            /* jshint ignore:end */
         );
 
         var details = ReactTestUtils.findRenderedComponentWithType(component, Details);
@@ -75,11 +71,9 @@ describe("DetailsTooltip", function () {
     it("is rendering closed state", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Details title="Title" label="Action" open={false}>
                 <p>what ever callout content is</p>
             </Details>
-            /* jshint ignore:end */
         );
 
         var details = ReactTestUtils.findRenderedComponentWithType(component, Details);
@@ -94,11 +88,9 @@ describe("DetailsTooltip", function () {
         var callback = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Details title="Title" label="Action" open={false} onToggle={callback}>
                 <p>what ever callout content is</p>
             </Details>
-            /* jshint ignore:end */
         );
 
         var details = ReactTestUtils.findRenderedComponentWithType(component, Details);
@@ -114,11 +106,9 @@ describe("DetailsTooltip", function () {
         var callback = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Details title="Title" label="Action" open={true} onToggle={callback} showClose={false} hideOnClick={true}>
                 <p>what ever callout content is</p>
             </Details>
-            /* jshint ignore:end */
         );
 
         var details = ReactTestUtils.findRenderedComponentWithType(component, Details);
@@ -134,11 +124,9 @@ describe("DetailsTooltip", function () {
         var callback = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Details title="Title" label="Action" open={true} onToggle={callback}>
                 <p>what ever callout content is</p>
             </Details>
-            /* jshint ignore:end */
         );
 
         var details = ReactTestUtils.findRenderedComponentWithType(component, Details);
@@ -153,11 +141,9 @@ describe("DetailsTooltip", function () {
         var callback = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
-            /* jshint ignore:start */
             <Details title="Title" label="Action" open={false} onToggle={callback} disabled={true}>
                 <p>what ever callout content is</p>
             </Details>
-            /* jshint ignore:end */
         );
 
         var details = ReactTestUtils.findRenderedComponentWithType(component, Details);

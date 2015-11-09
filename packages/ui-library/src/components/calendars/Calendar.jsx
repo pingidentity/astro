@@ -238,35 +238,26 @@ var Calendar = React.createClass({
         var view;
         switch (this.state.currentView) {
             case 0:
-                /* jshint ignore:start */
                 view = <DaysView date={calendarDate} setDate={this.setDate} nextView={this.nextView} />;
-                /* jshint ignore:end */
                 break;
             case 1:
-                /* jshint ignore:start */
                 view = <MonthsView date={calendarDate} setDate={this.setDate} //eslint-disable-line
                                    nextView={this.nextView} prevView={this.prevView} />;
-                /* jshint ignore:end */
                 break;
             case 2:
-                /* jshint ignore:start */
                 view = <YearsView date={calendarDate} setDate={this.setDate} prevView={this.prevView} />;
-                /* jshint ignore:end */
                 break;
         }
 
-        /* jshint ignore:start */
         var calendar = !this.state.isVisible ? ""
             : <div className="input-calendar-wrapper active" onClick={this.calendarClick}>
                 {view}
                 <span className="today-btn" onClick={this.todayClick} >Today</span>
             </div>;
-        /* jshint ignore:end */
 
         var containerCss = classnames("input-calendar icon-calendar", { active: this.state.isVisible } );
 
         return (
-            /* jshint ignore:start */
             <div className={containerCss} onClick={this.toggleClick}>
                 <input type="text"
                     className="input-calendar-value"
@@ -276,7 +267,6 @@ var Calendar = React.createClass({
                     placeholder={this.props.placeholder} />
                 {calendar}
             </div>
-            /* jshint ignore:end */
         );
     }
 

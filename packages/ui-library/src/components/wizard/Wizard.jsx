@@ -103,9 +103,7 @@ var Wizard = React.createClass({
         }.bind(this));
 
         return (
-            /* jshint ignore:start */
             <div>{stepNodes}</div>
-            /* jshint ignore:end */
         );
     }
 });

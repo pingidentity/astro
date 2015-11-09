@@ -33,9 +33,7 @@ var Spinner = React.createClass({
 
     render: function () {
         if (this.props.show) {
-            /* jshint ignore:start */
             return <span data-id="spinner" className="spinner">{this.props.defaultText}</span>;
-            /* jshint ignore:end */
         } else {
             return this.props.children;
         }

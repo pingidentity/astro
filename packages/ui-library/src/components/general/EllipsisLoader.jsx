@@ -26,10 +26,7 @@ var EllipsisLoader = React.createClass({
     render: function () {
         if (this.props.loading) {
             var spanClass = css("icon-ellipsis", this.props.className);
-
-            /* jshint ignore:start */
             return ( <span className={spanClass} data-id={this.props.id}><span></span></span> );
-            /* jshint ignore:end */
         } else {
             return null;
         }

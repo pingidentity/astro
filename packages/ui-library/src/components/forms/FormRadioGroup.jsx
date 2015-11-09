@@ -85,7 +85,6 @@ var FormRadioGroup = React.createClass({
                 var onChange = _.partial(self._onSelectionChange, item.id);
 
                 return (
-                    /* jshint ignore:start */
                     <label
                         className={css("input-radio", radioCss)}
                         key={item.id}
@@ -101,16 +100,13 @@ var FormRadioGroup = React.createClass({
                         <div className="circle"></div>
                         {item.name}
                     </label>
-                    /* jshint ignore:end */
                 );
             });
 
         return (
-            /* jshint ignore:start */
             <div className="input-row list">
                 {radioButtonNodes}
             </div>
-            /* jshint ignore:end */
         );
     }
 

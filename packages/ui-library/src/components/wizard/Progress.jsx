@@ -31,9 +31,7 @@ var Progress = React.createClass({
 
     render: function () {
         return (
-            /* jshint ignore:start */
             <div ref="container" className={this._style()}><i>{this.props.step}</i></div>
-            /* jshint ignore:end */
         );
     }
 });

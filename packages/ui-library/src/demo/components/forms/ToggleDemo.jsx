@@ -30,14 +30,12 @@ var ToggleDemo = React.createClass({
 
     render: function () {
         return (
-            /* jshint ignore:start */
             <div className="collapsed-content">
                 <Toggle onToggle={this._onStatusToggle} id="toggle" toggled={this._isToggled()}
                     disabled={false} className="row-status-toggle" />
                 <br/>
                 <p>{this.state.userStatus}</p>
             </div>
-            /* jshint ignore:end */
         );
     }
 });

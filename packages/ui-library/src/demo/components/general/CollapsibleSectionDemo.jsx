@@ -5,7 +5,6 @@ var CollapsibleSectionDemo = React.createClass({
 
     render: function () {
         return (
-            /* jshint ignore:start */
             <Section className="condition-title">
                 <span title={true} className="icon-dropdown-arrow show-condition"></span>
                 Collapsible Title
@@ -16,7 +15,6 @@ var CollapsibleSectionDemo = React.createClass({
                     </div>
                 </div>
             </Section>
-            /* jshint ignore:end */
         );
     }
 });

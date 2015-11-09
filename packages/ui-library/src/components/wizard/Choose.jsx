@@ -102,7 +102,6 @@ var Choose = React.createClass({
 
         return React.Children.map(this.props.children, function (e, i) {
             if (e.type.displayName === "Wizard" || e.type.displayName === "Choose") {
-                /* jshint ignore:start */
                 return (
                     <label className="input-radio stacked">
                         <input type="radio"
@@ -118,7 +117,6 @@ var Choose = React.createClass({
                         <div className="circle"></div>
                         {e.props.title}
                     </label>);
-                /* jshint ignore:end */
             } else {
                 return e;
             }
@@ -133,14 +131,12 @@ var Choose = React.createClass({
         props.titleSelection = this._getChoiceTitle();
         props.canProceed = this._getChoice() >= 0;
 
-        /* jshint ignore:start */
         return (
             <div>
                 { React.createElement(Step, props, this._generateRadioOptions()) }
                 { this._getWizard() }
             </div>
         );
-        /* jshint ignore:end */
     }
 });
 

@@ -42,15 +42,12 @@ module.exports = React.createClass({
                 month: true,
                 current: item.curr
             });
-            /* jshint ignore:start */
             return <Cell value={item.label} classes={_class} key={i} />;
-            /* jshint ignore:end */
         });
 
         var currentDate = this.props.date.format("YYYY");
 
         return (
-            /* jshint ignore:start */
             <div className="months-view" >
                 <ViewHeader
                     prev={this.prev}
@@ -60,7 +57,6 @@ module.exports = React.createClass({
 
                 <div className="months" onClick={this.cellClick}>{months}</div>
             </div>
-            /* jshint ignore:end */
         );
     }
 

@@ -33,7 +33,6 @@ var DropDownButtonDemo = React.createClass({
         var optionsMenu = this._dropDownOptions();
         
         return (
-            /* jshint ignore:start */
             <div>
                 <DropDownButton title="Drop Down"
                                 onSelect={this._changeARule}
@@ -43,7 +42,6 @@ var DropDownButtonDemo = React.createClass({
                     Selected menu item = {this.state.selectedLabel}
                 </div>
             </div>
-            /* jshint ignore:end */
         );
     }
 

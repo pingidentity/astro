@@ -20,7 +20,6 @@ var MultiselectDemo = React.createClass({
 
     render: function () {
         return (
-            /* jshint ignore:start */
             <div>
                 <p>Status type {this.state.userStatus} is checked ? {this.state.checkedValue ? " true" : " false"}</p>
 
@@ -32,7 +31,6 @@ var MultiselectDemo = React.createClass({
                     }}
                 onChange={this._updateUserStatus} />
             </div>
-            /* jshint ignore:end */
         );
     }
 });
