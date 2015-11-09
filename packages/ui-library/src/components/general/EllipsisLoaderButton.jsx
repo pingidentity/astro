@@ -7,6 +7,7 @@ var EllipsisLoader = require("../general/EllipsisLoader.jsx");
  * @desc Loading indicator (animated ...) for fields which have server-side validation, etc.
  * @param {string} [id] data-id to set on the button (optional, default 'ellipsis-loader-button')
  * @param {string} text text to display in the button when not loading
+ * @param {boolean} [disabled] button will not function when true
  * @param {boolean} loading while true, loading animation will be shown
  * @param {string} [className] CSS class to add to the button
  * @param {function} onButtonClick function to call when the button is clicked
@@ -20,15 +21,17 @@ var EllipsisLoader = require("../general/EllipsisLoader.jsx");
  */
 var EllipsisLoaderButton = React.createClass({
     propTypes: {
-        id: React.PropTypes.string,
-        text: React.PropTypes.string.isRequired,
-        loading: React.PropTypes.bool.isRequired,
         className: React.PropTypes.string,
-        onButtonClick: React.PropTypes.func.isRequired
+        disabled: React.PropTypes.bool,
+        id: React.PropTypes.string,
+        loading: React.PropTypes.bool.isRequired,
+        onButtonClick: React.PropTypes.func.isRequired,
+        text: React.PropTypes.string.isRequired
     },
 
     getDefaultProps: function () {
         return {
+            disabled: false,
             id: "ellipsis-loader-button"
         };
     },
@@ -37,6 +40,10 @@ var EllipsisLoaderButton = React.createClass({
         var buttonCss = {};
 
         buttonCss.loading = this.props.loading;
+
+        if (this.props.disabled) {
+            buttonCss.disabled = true;
+        }
         if (this.props.className) {
             buttonCss[this.props.className] = true;
         }
@@ -45,7 +52,8 @@ var EllipsisLoaderButton = React.createClass({
             <button
                 className={css("ellipsis-loader-button", buttonCss)}
                 data-id={this.props.id}
-                onClick={this.props.onButtonClick}>
+                onClick={this.props.onButtonClick}
+                disabled={this.props.disabled}>
 
                 {this.props.text}
                 <EllipsisLoader loading={this.props.loading}/>

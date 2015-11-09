@@ -1,5 +1,5 @@
 
-$font-path: '/src/fonts/icons/';
+$font-path: '../fonts/icons/';
 
 @font-face {
 	font-family: $icon-font;
@@ -284,6 +284,7 @@ $font-path: '/src/fonts/icons/';
 .icon-ellipsis {
 	$size: 7px;
 	$spacing: 7px;
+	$color: #ccc;
 
 	position: relative;
 	display: inline-block;
@@ -311,12 +312,12 @@ $font-path: '/src/fonts/icons/';
 		@include animation(pulse-3 1.0s ease-out 0.25s infinite);
 	}
 
-	@include keyframe(pulse-3) {
+	@include keyframe(pulse-1) {
 		from {
 			background-color: transparent;
 		}
-		80% {
-			background-color: #868889;
+		15% {
+			background-color: transparentize($color, 0.6);
 		}
 	}
 	@include keyframe(pulse-2) {
@@ -324,15 +325,15 @@ $font-path: '/src/fonts/icons/';
 			background-color: transparent;
 		}
 		45% {
-			background-color: #a9a8a8;
+			background-color: transparentize($color, 0.4);
 		}
 	}
-	@include keyframe(pulse-1) {
+	@include keyframe(pulse-3) {
 		from {
 			background-color: transparent;
 		}
-		15% {
-			background-color: #c4c4c3;
+		80% {
+			background-color: $color;
 		}
 	}
 }
