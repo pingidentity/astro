@@ -105,7 +105,7 @@ var Demo = React.createClass({
             pathToCode: "components/general/SelectText.jsx"
         },
         {
-            name: "File Upload",
+            name: "Form - File Upload",
             demo: require("./components/forms/FileUploadDemo.jsx"),
             pathToCode: "components/forms/FileUpload.jsx"
         },

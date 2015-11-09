@@ -41,6 +41,10 @@
 		position: absolute;
 		right: 0;
 		top: 0;
+
+		.tooltip-text {
+			bottom: 15px;
+		}
 	}
 	.filter-link {
 		display: inline-block;
@@ -433,7 +437,6 @@
 		.cancel-tooltip {
 			position: absolute;
 			right: 65px;
-			top: 0;
 		}
 	}
 	.collapsed-content {

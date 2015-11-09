@@ -379,5 +379,24 @@ a {
 		white-space: nowrap;
 	}
 }
+.content-col-of-2, .content-col-of-3, .content-col-of-4, .content-col-of-5 {
+	float: left;
+
+	.input-row {
+		margin-right: 15px;
+	}
+}
+.content-col-of-2 {
+	max-width: 50%;
+}
+.content-col-of-3 {
+	max-width: 33%;
+}
+.content-col-of-4 {
+	max-width: 25%;
+}
+.content-col-of-5{
+	max-width: 20%;
+}
 
 .inlineForm { display: inline-block; }
