@@ -75,6 +75,11 @@ var Demo = React.createClass({
             pathToCode: 'components/general/EllipsisLoader.jsx'
         },
         {
+            name: 'Ellipsis Loader Button',
+            demo: require('./components/general/EllipsisLoaderButtonDemo.jsx'),
+            pathToCode: 'components/general/EllipsisLoaderButton.jsx'
+        },
+        {
             name: 'If',
             demo: require('./components/general/IfDemo.jsx'),
             pathToCode: 'components/general/If.jsx'

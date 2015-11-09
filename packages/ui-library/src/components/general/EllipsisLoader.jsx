@@ -24,14 +24,11 @@ var EllipsisLoader = React.createClass({
     },
 
     render: function () {
+        var spanClass = css('icon-ellipsis', this.props.className);
+
         if (this.props.loading) {
             /* jshint ignore:start */
-            var spanClass = css('icon-ellipsis', this.props.className);
-            return ( <span className={spanClass} data-id={this.props.id}>
-                        <span className="path-1"></span>
-                        <span className="path-2"></span>
-                        <span className="path-3"></span>
-                    </span> );
+            return ( <span className={spanClass} data-id={this.props.id}><span></span></span> );
             /* jshint ignore:end */
         } else {
             return null;

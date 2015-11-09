@@ -179,6 +179,31 @@ input[type=button], input[type=submit], .button, button {
 }
 
 
+button.ellipsis-loader-button {
+	.icon-ellipsis {
+		position: absolute;
+		top: 14px;
+		left: 50%;
+		margin: 0 0 0 -19px;
+		display: none;
+	}
+	&.loading {
+		color: transparent;
+		cursor: default;
+
+		.icon-ellipsis {
+			display: block;
+		}
+		&.primary {
+			&:hover {
+				background-color: map-get($colors, 'active-blue');
+				color: map-get($colors, 'active-blue');
+			}
+		}
+	}
+
+}
+
 // ROCKER BUTTON
 .rocker-button {
 	$height: 35px;
