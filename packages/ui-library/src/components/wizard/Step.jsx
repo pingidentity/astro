@@ -4,7 +4,7 @@ var Progress = require("./Progress.jsx");
 var ContextButton = require("../general/ContextCloseButton.jsx");
 var cx = require("classnames");
 
-/** @class Wizard#Step
+/** @module Wizard#Step
  * @desc Describes single wizard step. It is not intended to be used outside of <Wizard>..</Wizard>.  Primarily used for step appearance configuration. Actual step content to be rendered should be defined withing <Step>...</Step>.
  * @see Wizard
  *

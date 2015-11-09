@@ -11,7 +11,7 @@ var Utils = require("./Utils");
 var _keyDownActions = Utils.keyDownActions;
 
 /**
- * @class Calendar
+ * @module Calendar
  * @desc Calendar renders a basic Calendar popup over an input field. It takes a date number that can be used to set the
  *          current date. Coming from Java backend this should be straight forward. To play with this client side
  *          the moment plugin is helpful to convert a Date object to a numeric value.

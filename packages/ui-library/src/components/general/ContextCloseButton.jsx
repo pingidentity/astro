@@ -2,7 +2,7 @@ var React = require("react/addons"),
     css = require("classnames");
 
 /*
- * @class ContextCloseButton
+ * @module ContextCloseButton
  * @desc Button that will invoke a 'close()' method from the context on click
  * should such a method exist, after invoking a supplied on click callback.
  * Should the supplied callback return false then the close() method will

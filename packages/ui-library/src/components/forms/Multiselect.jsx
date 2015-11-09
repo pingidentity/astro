@@ -8,6 +8,7 @@ var _s = require("underscore.string");
 /**
  * @class MultiselectOption
  * @desc It is a helper compoment, not for export.
+ * @private
  **/
 var MultiselectOption = React.createClass({
 
@@ -49,7 +50,7 @@ var MultiselectOption = React.createClass({
 });
 
 /**
- * @class Multiselect
+ * @module Multiselect
  * @desc Multiselect implements multi selection drop-down with option search capability.
  *
  * @param {string} title - drop down label. (required)

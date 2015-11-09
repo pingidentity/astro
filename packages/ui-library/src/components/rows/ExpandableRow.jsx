@@ -4,7 +4,7 @@ var React = require("react"),
     css = require("classnames");
 
  /**
- * @class ExpandableRow
+ * @module ExpandableRow
  * @desc Basic expandable row component.
  *
  * @param {object} [title] - a JSX object that serves as the title shown on the row.

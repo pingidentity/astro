@@ -6,7 +6,7 @@ var React = require("react/addons"),
     _ = require("underscore");
 
 /**
- * @class FormCheckboxList
+ * @module FormCheckboxList
  * @description FormCheckboxList renders a list checkbox items from an array of
  *     objects, with a searchable box to filter the displayed checkboxed based
  *     on the input query.

@@ -2,7 +2,7 @@ var React = require("react/addons"),
     _ = require("underscore"),
     Step = require("./Step.jsx");
 
-/** @class Wizard#Choose
+/** @module Wizard#Choose
  * @desc A component which allows branches in a wizard.  It will render each child <Wizard /> or <Choose /> as a radio option, click which will append the steps
  * @see Wizard
  * @see Step

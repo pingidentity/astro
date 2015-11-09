@@ -5,7 +5,7 @@ var React = require("react/addons"),
 
 var noop = function () {};
 /**
- * @class Section
+ * @module Section
  * @desc Simple section which expand/collapse on click. In collapsed mody only
  *          title is shown. When expanded shows
  *          body content. Designed to work with arbitrary content. To indicate

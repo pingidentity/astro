@@ -7,7 +7,7 @@ var React = require("react"),
     _ = require("underscore");
 
 /**
- * @class FormTextField
+ * @module FormTextField
  * @desc A text field component that supports edit, readonly and summary mode
  *
  * @param {string} [referenceName] name used by the parent to get the value/text entered in this component (default 'formTextField')

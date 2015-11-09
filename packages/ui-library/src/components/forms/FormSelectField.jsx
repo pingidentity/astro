@@ -6,7 +6,7 @@ var React = require("react"),
     _ = require("underscore");
 
 /**
- * @class FormSelectField
+ * @module FormSelectField
  * @desc A generic select (dropdown) component. Encapsulates common markup and designed to be a drop-in replacement
  * for react controlled <select>. Stateless.
  *

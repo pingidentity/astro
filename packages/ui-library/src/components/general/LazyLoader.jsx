@@ -2,7 +2,7 @@
 
 var React = require("react");
 /**
- * @class LazyLoader
+ * @module LazyLoader
  * @description Renders a limited amount of items initially and doubles the rendered items each time scrolling reaches
  *     the bottom.  Note: the container requires CSS rules for height and overflow.
  *

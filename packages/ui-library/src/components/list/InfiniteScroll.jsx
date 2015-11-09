@@ -51,7 +51,7 @@ var Batch = React.createClass({
     }
 });
 
-/** @class InfiniteScroll
+/** @module InfiniteScroll
  * @desc An scrolling component which pages content in and out of the dom as their visibility changes.    Content is passed as an
  * array of batches which is a simple js object with an id and an array of rows.
  *

@@ -3,7 +3,7 @@ var React = require("react/addons"),
     _ = require("underscore");
 
 /**
- * @class DropDownButton
+ * @module DropDownButton
  *
  * @desc DropDownButton implementation
  *
