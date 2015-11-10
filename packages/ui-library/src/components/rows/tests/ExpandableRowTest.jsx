@@ -45,6 +45,12 @@ describe("ExpandableRow", function () {
         expect(editButton.getDOMNode().className).toEqual("edit-btn");
     });
 
+    it("renders the delete button by default", function () {
+        ReactTestUtils.Simulate.click(expandButton);
+        var deleteButton = TestUtils.findRenderedDOMComponentWithDataId(component, "delete-btn");
+        expect(deleteButton.getDOMNode().className).toEqual("delete-btn");
+    });
+
     it("expands when clicking on the expand icon and collapses when clicked on again", function () {
         // expand
         ReactTestUtils.Simulate.click(expandButton);

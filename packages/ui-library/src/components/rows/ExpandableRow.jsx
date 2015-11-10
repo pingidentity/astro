@@ -27,6 +27,7 @@ var React = require("react"),
  *                  maximize={true}
  *                  modalBody={this.props.editModalBody}>
  *              </ModalButton>}
+ * @param {object} [deleteButton] - it is used to show an object inside delete body. For example: ModalButton
  * @param {string} className - extra CSS classes to be applied
  * @param {string} id - it is used for a unique data-id.
  *
@@ -55,6 +56,7 @@ var ExpandableRow = React.createClass({
         onDelete: React.PropTypes.func,
         defaultToExpanded: React.PropTypes.bool,
         editButton: React.PropTypes.object,
+        deleteButton: React.PropTypes.object,
         className: React.PropTypes.string,
         id: React.PropTypes.string
     },
@@ -121,6 +123,13 @@ var ExpandableRow = React.createClass({
             </a>
         );
 
+        var deleteButton = (this.props.showDelete && this.props.deleteButton
+            ? this.props.deleteButton
+            : <a data-id="delete-btn"
+                className="delete-btn"
+                onClick={this.props.onDelete}>
+            </a>
+        );
 
         return (
             <div className="result-set">
@@ -139,13 +148,7 @@ var ExpandableRow = React.createClass({
                             ? <div data-id="expanded-row" className="expanded-content clearfix">
                                 {this.props.children || this.props.content}
                                 {editButton}
-                                {this.props.showDelete
-                                    ? <a data-id="delete-btn"
-                                        className="delete-btn"
-                                        onClick={this.props.onDelete}>
-                                    </a>
-                                    : null
-                                }
+                                {deleteButton}
                             </div>
                         : null
                     }
