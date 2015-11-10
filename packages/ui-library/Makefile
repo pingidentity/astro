@@ -95,6 +95,7 @@ verify: install-node-npm
 	# meaning I have to execute the npm scripts one at a time
 	$(NPM_EXEC) run lint
 	$(NPM_EXEC) run test
+	rm -rf $$TMPDIR/jest_preprocess_cache
 
 # package the module and name the file to include the current version
 # deploy the package as a maven artifact
