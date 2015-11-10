@@ -1011,8 +1011,8 @@ label {
 }
 .help-tooltip.form-error-message {
 	position: absolute;
-	top: 10px;
-	left: auto;
+	top: 9px;
+	left: 100%;
 }
 .required {
 	@mixin requiredCss {

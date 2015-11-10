@@ -159,7 +159,7 @@ var FileUpload = React.createClass({
         }
         success();
     },
-    
+
     /*
      * Handle an error event by invoking the configured
      * error handler function if one was supplied.
@@ -228,7 +228,10 @@ var FileUpload = React.createClass({
                 "file-selected": fileSelected
             }),
             labelCss = css({
-                "form-error help-tooltip show": this.state.errorMessage
+                "form-error": this.state.errorMessage
+            }),
+            errorCss = css("form-error-message help-tooltip", {
+                show: this.state.errorMessage
             });
 
         var buttonText = this.props.buttonText;
@@ -238,9 +241,6 @@ var FileUpload = React.createClass({
         return (
             <div className={containerCss}>
                 <label className={labelCss}>
-                    <div className="tooltip-text" data-id={this.props.referenceName + "_tooltip"}>
-                        {this.state.errorMessage}
-                    </div>
                     {imageUpload &&
                         <div>
                             {this.props.title && <div>{this.props.title}</div>}
@@ -250,15 +250,24 @@ var FileUpload = React.createClass({
                             </span>
                         </div>
                     }
-
-                    <input type="file"
-                           ref="fileInput"
-                           name={this.props.name}
-                           accept={this.props.accept || null}
-                           onChange={this._onChange}
-                           data-id={this.props.referenceName + "_input"} />
-                    <span className="button inline">{buttonLabel}</span>
+                    <input
+                        type="file"
+                        ref="fileInput"
+                        name={this.props.name}
+                        accept={this.props.accept || null}
+                        onChange={this._onChange}
+                        data-id={this.props.referenceName + "_input"}
+                    />
+                    <span className="button inline">
+                        {buttonLabel}
+                    </span>
+                    <div className={errorCss} data-id={this.props.referenceName + "_errormessage"}>
+                        <div className="tooltip-text">
+                            {this.state.errorMessage}
+                        </div>
+                    </div>
                 </label>
+
                 <div className="file-info">
                     <a className="file-remove" onClick={this._onClickRemove}>
                         {this.props.removeFileLabel}

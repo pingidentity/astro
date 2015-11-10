@@ -37,8 +37,8 @@ describe("FileUpload", function () {
     var TestUtils = require("../../../testutil/TestUtils");
     var FileUpload = require("../FileUpload.jsx");
     var componentWithValidation;
-    var validatorFn = jest.genMockFunction();
-    var errorFn = jest.genMockFunction();
+    var validatorFn;
+    var errorFn;
 
     // helper function to generate fake image data for file size testing
     function getFakeJpegBlob (iterations) {
@@ -52,17 +52,20 @@ describe("FileUpload", function () {
 
     describe("with validation settings set", function () {
         beforeEach(function () {
+            validatorFn = jest.genMockFunction();
+            errorFn = jest.genMockFunction();
             componentWithValidation = ReactTestUtils.renderIntoDocument(
-            <FileUpload
-                accept="image/jpeg, image/jpg, image/gif, image/png"
-                maxFileSizeKb={10}
-                showThumbnail={true}
-                referenceName="testFileUpload"
-                onPreviewReady={previewReadyHandler}
-                validator={validatorFn}
-                buttonText="Select File"
-                removeFileLabel="Remove File"
-                errorHandler={errorFn} />
+                <FileUpload
+                    accept="image/jpeg, image/jpg, image/gif, image/png"
+                    maxFileSizeKb={10}
+                    showThumbnail={true}
+                    referenceName="testFileUpload"
+                    onPreviewReady={previewReadyHandler}
+                    validator={validatorFn}
+                    buttonText="Select File"
+                    removeFileLabel="Remove File"
+                    errorHandler={errorFn}
+                />
             );
         });
 
@@ -141,10 +144,11 @@ describe("FileUpload", function () {
             var fileUploadErrorMsg = "Please upload a valid file";
 
             var errorTooltip =
-                TestUtils.findRenderedDOMComponentWithDataId(componentWithValidation, "testFileUpload_tooltip");
+                TestUtils.findRenderedDOMComponentWithDataId(componentWithValidation, "testFileUpload_errormessage");
+            var errorTooltipText = ReactTestUtils.findRenderedDOMComponentWithClass(errorTooltip, "tooltip-text");
 
             // expect no error text to be rendered to begin with
-            expect(errorTooltip.props.children).toEqual("");
+            expect(errorTooltipText.props.children).toEqual("");
 
             // simulate an error state
             componentWithValidation.setState({
@@ -152,10 +156,10 @@ describe("FileUpload", function () {
             });
 
             errorTooltip =
-                TestUtils.findRenderedDOMComponentWithDataId(componentWithValidation, "testFileUpload_tooltip");
+                TestUtils.findRenderedDOMComponentWithDataId(componentWithValidation, "testFileUpload_errormessage");
 
             // renders the error in a tooltip
-            expect(errorTooltip.props.children).toEqual(fileUploadErrorMsg);
+            expect(errorTooltipText.props.children).toEqual(fileUploadErrorMsg);
 
             // simulate a valid state
             componentWithValidation.setState({
@@ -163,10 +167,10 @@ describe("FileUpload", function () {
             });
 
             errorTooltip =
-                TestUtils.findRenderedDOMComponentWithDataId(componentWithValidation, "testFileUpload_tooltip");
+                TestUtils.findRenderedDOMComponentWithDataId(componentWithValidation, "testFileUpload_errormessage");
 
             // no error is rendered
-            expect(errorTooltip.props.children).toEqual("");
+            expect(errorTooltipText.props.children).toEqual("");
         });
 
         it('calls "onPreviewReady" when the image file is loaded', function () {
