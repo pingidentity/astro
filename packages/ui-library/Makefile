@@ -142,10 +142,10 @@ deploy: install-mvn
 # deploy the package as a maven artifact
 # no verification is done here, meaning node/npm are not needed
 dist: install-mvn
-	$(call version_and_tag,$(GIT_VERSION_FINAL,"Release the project"))
+	$(call version_and_tag,$(GIT_VERSION_FINAL),"Release the project")
 	$(call package,$(GIT_VERSION_FINAL))
 	$(call deploy,$(GIT_VERSION_FINAL))
-	$(call version_and_tag,$(GIT_VERSION_NEXT,"Prepare for the next release cycle"))
+	$(call version_and_tag,$(GIT_VERSION_NEXT),"Prepare for the next release cycle")
 	$(call package,$(GIT_VERSION_NEXT))
 	$(call deploy,$(GIT_VERSION_NEXT))
 
