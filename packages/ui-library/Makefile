@@ -30,8 +30,10 @@ M2_HOME := $(CURRENT_DIR)/mvn
 SHELL := /bin/bash
 PATH := $(CURRENT_DIR)/node:$(CURRENT_DIR)/node/npm/bin:$(PATH):$(M2_HOME)/bin
 
-GIT_BRANCH := $(shell git branch | sed -n '/\* /s///p')
-
+GIT_BRANCH := $(shell if [ -f git_branch ]; then cat git_branch; fi)
+ifeq ($(GIT_BRANCH),)
+$(error There should be a file named 'git_branch' containing the current git branch name)
+endif
 
 # extract the version number from package.json
 GIT_VERSION := $(shell sed -n -e 's/.*"version"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' package.json)
@@ -141,6 +143,11 @@ deploy: install-mvn
 # package the module and name the file to include the current version
 # deploy the package as a maven artifact
 # no verification is done here, meaning node/npm are not needed
-dist:
-	@echo $(GIT_BRANCH)
+dist: install-mvn
+	$(call version_and_tag,$(GIT_VERSION_FINAL),"Release the project")
+	$(call package,$(GIT_VERSION_FINAL))
+	$(call deploy,$(GIT_VERSION_FINAL))
+	$(call version_and_tag,$(GIT_VERSION_NEXT),"Prepare for the next release cycle")
+	$(call package,$(GIT_VERSION_NEXT))
+	$(call deploy,$(GIT_VERSION_NEXT))
 
