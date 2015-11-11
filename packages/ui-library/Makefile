@@ -22,13 +22,13 @@ endif
 NODE_FILENAME=node-v$(NODE_VERSION)-$(SYS_NAME)-$(ARCH_NAME)
 NPM_FILENAME=npm-$(NPM_VERSION)
 NPM_EXEC=$(CURRENT_DIR)/node/node $(CURRENT_DIR)/node/npm/bin/npm-cli.js
+MVN_FILENAME=apache-maven-3.2.2-bin.tar.gz
 
 CURRENT_DIR := $(shell pwd)
 
+M2_HOME := $(CURRENT_DIR)/mvn
 SHELL := /bin/bash
-PATH := $(CURRENT_DIR)/node:$(CURRENT_DIR)/node/npm/bin:$(PATH)
-
-MVN := java -classpath /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/maven_3.2.2/boot/plexus-classworlds-2.5.1.jar -Dmaven.home=/var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/maven_3.2.2 -Dclassworlds.conf=/var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/maven_3.2.2/bin/m2.conf org.codehaus.plexus.classworlds.launcher.Launcher
+PATH := $(CURRENT_DIR)/node:$(CURRENT_DIR)/node/npm/bin:$(PATH):$(M2_HOME)/bin
 
 GIT_BRANCH := $(shell git symbolic-ref --short -q HEAD)
 
@@ -60,34 +60,65 @@ endif
 # get the version number of the next SNAPSHOT
 GIT_VERSION_NEXT=$(GIT_VERSION_MAJOR).$(GIT_VERSION_MINOR_NEXT).$(GIT_VERSION_PATCH_NEXT)-SNAPSHOT
 
+define version_and_tag
+	sed -e 's/"version"[[:space:]]*:[[:space:]]*"[^"]*"/"version": "$(1)"/' package.json > package.json.tmp
+	mv package.json.tmp package.json
+	git commit -a -m "$(2)"
+	git push origin $(GIT_BRANCH):$(GIT_BRANCH)
+
+endef
+
+define package
+	rm -rf build
+	mkdir -p build/ui-library
+	cp -rf src build/ui-library
+	cp -f package.json build/ui-library
+	tar -czf build/ui-library-$(1).tar.gz --directory=build ui-library
+endef
+
+define deploy
+	mvn deploy:deploy-file \
+		-DgroupId=com.pingone.ui-library \
+		-DartifactId=ui-library \
+		-Dversion=$(1) \
+		-Dfile=build/ui-library-$(1).tar.gz \
+		-DuniqueVersion=false \
+		-Dpackaging=tar.gz \
+		-DrepositoryId=art01 \
+		-Durl=http://art01.corp.pingidentity.com:8081/artifactory/inhouse
+endef
+
 
 log-config:
 	@echo "Building for system '$(SYS_NAME)' and architecture '$(ARCH_NAME)'"
 
-clean-build:
-	rm -rf build
-
 clean-node:
+	rm -f $(NODE_FILENAME).tar.gz
+	rm -f $(NPM_FILENAME).tgz
 	rm -rf node
 	rm -rf node_modules
 
-install-node:
-	rm -f $(NODE_FILENAME).tar.gz
+install-node-npm: clean-node
 	wget http://art01.corp.pingidentity.com:8080/artifactory/simple/ext-releases-local/nodejs/v$(NODE_VERSION)/$(NODE_FILENAME).tar.gz
 	mkdir -p node
 	tar -xzf $(NODE_FILENAME).tar.gz --strip=2 -C node/ $(NODE_FILENAME)/bin/node
 	rm -r $(NODE_FILENAME).tar.gz
-
-install-npm:
-	rm -f $(NPM_FILENAME).tgz
 	wget http://art01.corp.pingidentity.com:8080/artifactory/simple/ext-releases-local/npm/$(NPM_FILENAME).tgz
 	mkdir -p node/npm
 	tar -xzf $(NPM_FILENAME).tgz --strip=1 -C node/npm
 	rm -r $(NPM_FILENAME).tgz
-
-install-node-npm: log-config clean-node install-node install-npm
 	rm -rf node_modules
 	$(NPM_EXEC) install
+
+clean-mvn:
+	rm -f $(MVN_FILENAME)
+	rm -rf mvn
+
+install-mvn: clean-mvn
+	wget http://archive.apache.org/dist/maven/maven-3/3.2.2/binaries/$(MVN_FILENAME)
+	mkdir -p mvn
+	tar -xzf apache-maven-3.2.2-bin.tar.gz --strip=1 -C mvn
+	rm -f $(MVN_FILENAME)
 
 verify: install-node-npm
 	# the freakin' npm executable is broken, makes some stupid assumptions in regard to the npm location;
@@ -99,20 +130,9 @@ verify: install-node-npm
 
 # package the module and name the file to include the current version
 # deploy the package as a maven artifact
-deploy: log-config clean-build
-	mkdir -p build/ui-library
-	cp -rf src build/ui-library
-	cp -f package.json build/ui-library
-	tar -czf build/ui-library-$(GIT_VERSION).tar.gz --directory=build ui-library
-	$(MVN) deploy:deploy-file \
-		-DgroupId=com.pingone.ui-library \
-		-DartifactId=ui-library \
-		-Dversion=$(GIT_VERSION) \
-		-Dfile=build/ui-library-$(GIT_VERSION).tar.gz \
-		-DuniqueVersion=false \
-		-Dpackaging=tar.gz \
-		-DrepositoryId=art01 \
-		-Durl=http://art01.corp.pingidentity.com:8081/artifactory/inhouse
+deploy: install-mvn
+	$(call package,$(GIT_VERSION))
+	$(call deploy,$(GIT_VERSION))
 
 # set the version number to FINAL, commit and push the change
 # package the module and name the file to include the FINAL version
@@ -121,40 +141,11 @@ deploy: log-config clean-build
 # package the module and name the file to include the current version
 # deploy the package as a maven artifact
 # no verification is done here, meaning node/npm are not needed
-dist: log-config clean-build
-	sed -e 's/"version"[[:space:]]*:[[:space:]]*"[^"]*"/"version": "$(GIT_VERSION_FINAL)"/' package.json > package.json.tmp
-	mv package.json.tmp package.json
-	git commit -a -m "Release the project"
-	git push origin $(GIT_BRANCH):$(GIT_BRANCH)
-	mkdir -p build/ui-library
-	cp -rf src build/ui-library
-	cp -f package.json build/ui-library
-	tar -czf build/ui-library-$(GIT_VERSION_FINAL).tar.gz --directory=build ui-library
-	$(MVN) deploy:deploy-file \
-		-DgroupId=com.pingone.ui-library \
-		-DartifactId=ui-library \
-		-Dversion=$(GIT_VERSION_FINAL) \
-		-Dfile=build/ui-library-$(GIT_VERSION_FINAL).tar.gz \
-		-DuniqueVersion=false \
-		-Dpackaging=tar.gz \
-		-DrepositoryId=art01 \
-		-Durl=http://art01.corp.pingidentity.com:8081/artifactory/inhouse
-	sed -e 's/"version"[[:space:]]*:[[:space:]]*"[^"]*"/"version": "$(GIT_VERSION_NEXT)"/' package.json > package.json.tmp
-	mv package.json.tmp package.json
-	git commit -a -m "Prepare for the next release cycle"
-	git push origin $(GIT_BRANCH):$(GIT_BRANCH)
-	rm -rf build
-	mkdir -p build/ui-library
-	cp -rf src build/ui-library
-	cp -f package.json build/ui-library
-	tar -czf build/ui-library-$(GIT_VERSION_NEXT).tar.gz --directory=build ui-library
-	$(MVN) deploy:deploy-file \
-		-DgroupId=com.pingone.ui-library \
-		-DartifactId=ui-library \
-		-Dversion=$(GIT_VERSION_NEXT) \
-		-Dfile=build/ui-library-$(GIT_VERSION_NEXT).tar.gz \
-		-DuniqueVersion=false \
-		-Dpackaging=tar.gz \
-		-DrepositoryId=art01 \
-		-Durl=http://art01.corp.pingidentity.com:8081/artifactory/inhouse
+dist: install-mvn
+	$(call version_and_tag,$(GIT_VERSION_FINAL,"Release the project"))
+	$(call package,$(GIT_VERSION_FINAL))
+	$(call deploy,$(GIT_VERSION_FINAL))
+	$(call version_and_tag,$(GIT_VERSION_NEXT,"Prepare for the next release cycle"))
+	$(call package,$(GIT_VERSION_NEXT))
+	$(call deploy,$(GIT_VERSION_NEXT))
 

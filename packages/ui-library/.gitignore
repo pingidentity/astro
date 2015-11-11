@@ -1,6 +1,7 @@
 .*.swp
 node/
 node_modules/
+mvn/
 build*
 **/tests/coverage
 npm-debug.log
