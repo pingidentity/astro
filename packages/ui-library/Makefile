@@ -66,6 +66,7 @@ define version_and_tag
 	git commit -a -m $(2)
 	if [ "$(1)" = "$(GIT_VERSION_FINAL)" ]; then \
 		git tag $(GIT_VERSION_FINAL); \
+		git push origin $(GIT_VERSION_FINAL); \
 	fi
 	git push origin $(GIT_BRANCH)
 endef
