@@ -51,11 +51,11 @@ GIT_VERSION_PATCH=$(word 3,$(subst ., ,$(GIT_VERSION_FINAL)))
 # (fucking hell, this took me ages to figure out)
 # I am using this solution http://stackoverflow.com/a/1926105
 ifeq ($(GIT_VERSION_PATCH),0)
-	GIT_VERSION_MINOR_NEXT := $(shell echo $(GIT_VERSION_MINOR)+1 | bc)
+	GIT_VERSION_MINOR_NEXT := $(shell echo $$(($(GIT_VERSION_MINOR)+1)))
 	GIT_VERSION_PATCH_NEXT := $(GIT_VERSION_PATCH)
 else
 	GIT_VERSION_MINOR_NEXT := $(GIT_VERSION_MINOR)
-	GIT_VERSION_PATCH_NEXT := $(shell echo $(GIT_VERSION_PATCH)+1 | bc)
+	GIT_VERSION_PATCH_NEXT := $(shell echo $$(($(GIT_VERSION_PATCH)+1)))
 endif
 # get the version number of the next SNAPSHOT
 GIT_VERSION_NEXT=$(GIT_VERSION_MAJOR).$(GIT_VERSION_MINOR_NEXT).$(GIT_VERSION_PATCH_NEXT)-SNAPSHOT
