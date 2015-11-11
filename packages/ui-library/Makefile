@@ -30,7 +30,7 @@ M2_HOME := $(CURRENT_DIR)/mvn
 SHELL := /bin/bash
 PATH := $(CURRENT_DIR)/node:$(CURRENT_DIR)/node/npm/bin:$(PATH):$(M2_HOME)/bin
 
-GIT_BRANCH := $(shell git symbolic-ref --short -q HEAD)
+GIT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 
 
 # extract the version number from package.json
@@ -141,14 +141,6 @@ deploy: install-mvn
 # package the module and name the file to include the current version
 # deploy the package as a maven artifact
 # no verification is done here, meaning node/npm are not needed
-#dist: install-mvn
-dist:
-	@echo "git branch is $(GIT_BRANCH)"
-	git symbolic-ref --short -q HEAD
-	@echo -------------
-	#$(call version_and_tag,$(GIT_VERSION_FINAL),"Release the project")
-	#$(call package,$(GIT_VERSION_FINAL))
-	#$(call deploy,$(GIT_VERSION_FINAL))
-	#$(call version_and_tag,$(GIT_VERSION_NEXT),"Prepare for the next release cycle")
-	#$(call package,$(GIT_VERSION_NEXT))
-	#$(call deploy,$(GIT_VERSION_NEXT))
+dist: install-mvn
+	@echo $(GIT_BRANCH)
+
