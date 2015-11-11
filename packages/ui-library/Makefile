@@ -64,8 +64,10 @@ define version_and_tag
 	sed -e 's/"version"[[:space:]]*:[[:space:]]*"[^"]*"/"version": "$(1)"/' package.json > package.json.tmp
 	mv package.json.tmp package.json
 	git commit -a -m $(2)
-	if [ "$(1)" = "$(GIT_VERSION_FINAL)" ]; then git tag $(GIT_VERSION_FINAL); fi
-	git push origin $(GIT_BRANCH):$(GIT_BRANCH)
+	if [ "$(1)" = "$(GIT_VERSION_FINAL)" ]; then \
+		git tag $(GIT_VERSION_FINAL); \
+	fi
+	git push origin $(GIT_BRANCH)
 endef
 
 define package
