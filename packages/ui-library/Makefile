@@ -30,7 +30,7 @@ M2_HOME := $(CURRENT_DIR)/mvn
 SHELL := /bin/bash
 PATH := $(CURRENT_DIR)/node:$(CURRENT_DIR)/node/npm/bin:$(PATH):$(M2_HOME)/bin
 
-GIT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
+GIT_BRANCH := $(shell git symbolic-ref HEAD | sed -e "s/^refs\/heads\///")
 
 
 # extract the version number from package.json
