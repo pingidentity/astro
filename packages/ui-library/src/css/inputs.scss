@@ -1013,6 +1013,7 @@ label {
 	position: absolute;
 	top: 9px;
 	left: 100%;
+	min-width: 0;
 }
 .required {
 	@mixin requiredCss {

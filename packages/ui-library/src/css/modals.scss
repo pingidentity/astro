@@ -7,15 +7,15 @@
 	z-index: 2000;
 	top: -550px;
 	opacity: 0;
-	left: 0;
-	right: 35px;
+	left: 26px;
+	right: 15px;
 	overflow: visible;
 	font-family: $font-pn-regular;
 	@include border-radius($modal-radius);
 	@include transition(all 0s);
 
 	&.show {
-		top: 30px;
+		top: 65px;
 		opacity: 1;
 		@include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
 
@@ -34,11 +34,11 @@
 
 	.modal-header {
 		position: relative;
-		padding: 15px 25px;
+		padding: 0 25px;
 		background-color: map-get($colors, 'walrus');
 		color: $color-white;
 		font-size: 22px;
-		line-height: 14px;
+		line-height: 42px;
 		font-weight: 300;
 		margin: 0 0 0 $modal-left;
 		@include border-radius($modal-radius $modal-radius 0 0);
@@ -76,7 +76,10 @@
 		}
 	}
 	.modal-body {
-		position: relative;
+		position: absolute;
+		top: 40px;
+		left: 0;
+		right: 0;
 		padding: 30px;
 		font-weight: normal;
 		min-height: 140px;
@@ -107,10 +110,6 @@
 			bottom: 45px;
 
 			.modal-body {
-				position: absolute;
-				left: 0;
-				right: 0;
-				top: 40px;
 				bottom: 0;
 				max-height: none;
 				min-height: inherit;

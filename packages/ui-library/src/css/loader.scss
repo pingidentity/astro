@@ -35,6 +35,7 @@
 	color: transparent;
 	font-size: 1px;
 	border-color: map-get($colors, 'rhino') rgba(map-get($colors, 'rhino'), 0.4) rgba(map-get($colors, 'rhino'), 0.4) rgba(map-get($colors, 'rhino'), 0.4);
+	vertical-align: bottom;
 
 	@include loaderCss($loader-size);
 
