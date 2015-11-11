@@ -30,10 +30,8 @@ M2_HOME := $(CURRENT_DIR)/mvn
 SHELL := /bin/bash
 PATH := $(CURRENT_DIR)/node:$(CURRENT_DIR)/node/npm/bin:$(PATH):$(M2_HOME)/bin
 
-GIT_BRANCH := $(shell if [ -f git_branch ]; then cat git_branch; fi)
-ifeq ($(GIT_BRANCH),)
-$(error There should be a file named 'git_branch' containing the current git branch name)
-endif
+GIT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
+
 
 # extract the version number from package.json
 GIT_VERSION := $(shell sed -n -e 's/.*"version"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' package.json)
