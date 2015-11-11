@@ -30,7 +30,7 @@ M2_HOME := $(CURRENT_DIR)/mvn
 SHELL := /bin/bash
 PATH := $(CURRENT_DIR)/node:$(CURRENT_DIR)/node/npm/bin:$(PATH):$(M2_HOME)/bin
 
-GIT_BRANCH := $(shell git symbolic-ref HEAD | sed -e "s/^refs\/heads\///")
+GIT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 
 
 # extract the version number from package.json
@@ -143,4 +143,3 @@ deploy: install-mvn
 # no verification is done here, meaning node/npm are not needed
 dist: install-mvn
 	@echo $(GIT_BRANCH)
-
