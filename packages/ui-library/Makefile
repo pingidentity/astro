@@ -64,7 +64,7 @@ define version_and_tag
 	sed -e 's/"version"[[:space:]]*:[[:space:]]*"[^"]*"/"version": "$(1)"/' package.json > package.json.tmp
 	mv package.json.tmp package.json
 	git commit -a -m $(2)
-	git push origin $(GIT_BRANCH):$(GIT_BRANCH)
+	git push origin $(3):$(3)
 
 endef
 
@@ -142,10 +142,10 @@ deploy: install-mvn
 # deploy the package as a maven artifact
 # no verification is done here, meaning node/npm are not needed
 dist: install-mvn
-	$(call version_and_tag,$(GIT_VERSION_FINAL),"Release the project")
+	$(call version_and_tag,$(GIT_VERSION_FINAL),"Release the project",$(GIT_BRANCH))
 	$(call package,$(GIT_VERSION_FINAL))
 	$(call deploy,$(GIT_VERSION_FINAL))
-	$(call version_and_tag,$(GIT_VERSION_NEXT),"Prepare for the next release cycle")
+	$(call version_and_tag,$(GIT_VERSION_NEXT),"Prepare for the next release cycle",$(GIT_BRANCH))
 	$(call package,$(GIT_VERSION_NEXT))
 	$(call deploy,$(GIT_VERSION_NEXT))
 
