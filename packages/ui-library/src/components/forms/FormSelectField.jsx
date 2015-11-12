@@ -132,6 +132,7 @@ var FormSelectField = React.createClass({
                     <div className="wrapper">
                         <select
                             data-id={this.props.id}
+                            name={this.props.id}
                             className={this.props.selectClassName}
                             onChange={this.handleChange}
                             value={this.state.selectedValue}>

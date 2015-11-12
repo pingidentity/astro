@@ -16,7 +16,9 @@ describe("FormSelectField", function () {
         var onChange = function () {};
 
         var component = ReactTestUtils.renderIntoDocument(
-            <FormSelectField label="test label" options={{ 1: "one", 2: "two" }} onChange={onChange} value={'2'} />
+            <FormSelectField id="testId" label="test label"
+                options={{ 1: "one", 2: "two" }}
+                onChange={onChange} value={'2'} />
         );
 
         var label = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-select");
@@ -26,6 +28,7 @@ describe("FormSelectField", function () {
         expect(ReactTestUtils.isDOMComponent(label)).toBeTruthy();
 
         expect(select.getDOMNode().value).toBe("2");
+        expect(select.getDOMNode().name).toBe("testId");
 
         expect(options.length).toBe(2);
         expect(options[0].getDOMNode().getAttribute("value")).toBe("1");
