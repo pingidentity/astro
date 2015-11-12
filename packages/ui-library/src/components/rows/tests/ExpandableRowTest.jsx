@@ -51,6 +51,40 @@ describe("ExpandableRow", function () {
         expect(deleteButton.getDOMNode().className).toEqual("delete-btn");
     });
 
+    it("renders an empty disabled button when showDelete prop is set to false", function () {
+        var expandedComponent = ReactTestUtils.renderIntoDocument(
+            <ExpandableRow
+                title={titleJsx}
+                subtitle={subtitleJsx}
+                content={contentJsx}
+                defaultToExpanded={true}
+                showDelete={false}
+            />
+        );
+
+        var expandableRow = TestUtils.findRenderedDOMComponentWithDataId(expandedComponent, "expandable-row");
+        expect(expandableRow.getDOMNode().className).toContain("no-delete");
+    });
+
+
+    it("renders the specified delete button", function () {
+        var deleteButton = (<div data-id="my-delete-button">Delete Me</div>);
+        var expandedComponent = ReactTestUtils.renderIntoDocument(
+            <ExpandableRow
+                title={titleJsx}
+                subtitle={subtitleJsx}
+                content={contentJsx}
+                defaultToExpanded={true}
+                deleteButton={deleteButton}
+            />
+        );
+
+        var defaultDeleteButton = TestUtils.findRenderedDOMComponentWithDataId(expandedComponent, "delete-btn");
+        expect(ReactTestUtils.isDOMComponent(defaultDeleteButton)).toBeFalsy();
+        var customDeleteButton = TestUtils.findRenderedDOMComponentWithDataId(expandedComponent, "my-delete-button");
+        expect(customDeleteButton.getDOMNode().textContent).toEqual("Delete Me");
+    });
+
     it("expands when clicking on the expand icon and collapses when clicked on again", function () {
         // expand
         ReactTestUtils.Simulate.click(expandButton);
