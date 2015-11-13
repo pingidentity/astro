@@ -20,17 +20,15 @@ var SpinnerDemo = React.createClass({
         return (
             /* jslint ignore:start */
             <div>
-                <Spinner
-                    show={this.state.showSpinner}
-                    defaultText="Loading...">
-
-                    <div className="spinner-content">
-                        Spinner content here.
-                    </div>
-                </Spinner>
-
-                <br/><br/><br/>
-
+                <p>
+                    <Spinner
+                        show={this.state.showSpinner}
+                        defaultText="Loading...">
+                        <div className="spinner-content">
+                            Content shown after spinner/loading is complete goes here.
+                        </div>
+                    </Spinner>
+                </p>
                 <a onClick={this._toggleSpinner}>
                     Toggle Spinner
                 </a>

@@ -5,7 +5,7 @@ var ToggleDemo = React.createClass({
 
     getInitialState: function () {
         return {
-            userStatus: ""
+            userStatus: "DISABLED"
         };
     },
 
@@ -26,15 +26,13 @@ var ToggleDemo = React.createClass({
         return true;
     },
 
-
-
     render: function () {
         return (
             <div className="collapsed-content">
                 <Toggle onToggle={this._onStatusToggle} id="toggle" toggled={this._isToggled()}
                     disabled={false} className="row-status-toggle" />
-                <br/>
-                <p>{this.state.userStatus}</p>
+                <br/><br/>
+                <div>{this.state.userStatus}</div>
             </div>
         );
     }

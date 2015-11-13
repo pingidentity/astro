@@ -8,20 +8,23 @@ var IfDemo = React.createClass({
             toggle: false
         };
     },
-    
+
     _toggle: function () {
         this.setState({ toggle: !this.state.toggle });
     },
-    
+
     render: function () {
         return (
             <div>
-                <div>Toggle set to: { (this.state.toggle) ? "true" : "false" } </div>
-                <button onClick={this._toggle}>Toggle if condition</button>
-                <br />
+                <p>
+                    Toggle set to: { (this.state.toggle) ? "true" : "false" }
+                </p>
+                <p>
+                    <button onClick={this._toggle}>Toggle if condition</button>
+                </p>
                 <If test={this.state.toggle}>
                     <div>
-                        <p>This is only displayed when the toggle condition is true</p>
+                        This is only displayed when the toggle condition is true
                     </div>
                 </If>
             </div>
