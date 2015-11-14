@@ -19,14 +19,14 @@ var React = require("react"),
  * @param {bool} [defaultToExpanded] - option to render the row in a expanded state by default. Default is false.
  * @param {object} [editButton] - it is used to show an object inside edit body. For example: ModalButton
  *          can be passed like follow:
- *              editButton={<ModalButton
- *                  linkContent={editModalButton}
+ *              editButton=&#123;<ModalButton
+ *                  linkContent=&#123;editModalButton}#125;
  *                  data-id="edit-btn"
- *                  inline={true}
- *                  modalTitle={this.props.editModalTitle}
- *                  maximize={true}
- *                  modalBody={this.props.editModalBody}>
- *              </ModalButton>}
+ *                  inline={#123;true}#125;
+ *                  modalTitle={#123;this.props.editModalTitle}#125;
+ *                  maximize={#123;true}#125;
+ *                  modalBody={#123;this.props.editModalBody}#125;>
+ *              </ModalButton>}#125;
  * @param {object} [deleteButton] - it is used to show an object inside delete body. For example: ModalButton
  * @param {string} className - extra CSS classes to be applied
  * @param {string} id - it is used for a unique data-id.
@@ -41,7 +41,7 @@ var React = require("react"),
  *      <ExpandableRow title={titleJsx} subtitle={subtitleJsx}>
  *          {contentChildrenJsx}
  *      </ExpandableRow>
- **/
+ */
 var ExpandableRow = React.createClass({
 
     propTypes: {

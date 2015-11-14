@@ -1,5 +1,5 @@
 var React = require("react/addons");
-var Cache = require("./../../core/Cache");
+var Cache = require("../../net/Cache");
 
 function sleep (seconds) {
     var start = new Date().getTime();

@@ -150,6 +150,11 @@ var Demo = React.createClass({
             name: "Multiselect",
             demo: require("./components/forms/MultiselectDemo.jsx"),
             pathToCode: "components/forms/Multiselect.jsx"
+        },
+        {
+            name: "Cache",
+            demo: require("./net/CacheDemo.jsx"),
+            pathToCode: "components/net/Cache.js"
         }
     ],
 
@@ -244,6 +249,11 @@ var Demo = React.createClass({
                 </div>
                 <div id="nav">
                     <ul className="menu">
+                        <li key="jsdoc">
+                            <a target="_blank" href="build/jsdoc/index.html">
+                                <strong>Documentation</strong>
+                            </a>
+                        </li>
                         {
                             this.demos.map(function (item) {
                                 return <li key={item.name}><a href={"#" + item.name}>{item.name}</a></li>;

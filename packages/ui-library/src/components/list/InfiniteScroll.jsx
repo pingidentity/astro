@@ -51,7 +51,8 @@ var Batch = React.createClass({
     }
 });
 
-/** @module InfiniteScroll
+/**
+ * @module InfiniteScroll
  * @desc An scrolling component which pages content in and out of the dom as their visibility changes.    Content is passed as an
  * array of batches which is a simple js object with an id and an array of rows.
  *
@@ -59,7 +60,7 @@ var Batch = React.createClass({
  * @param {function} loadPrev - callback which will fetch the prev batch of data, executed when the user scrolls to the top of the container
  * @param {bool} hasNext - has more batches after the last batch loaded
  * @param {bool} hasPrev - has more batches preceding the first batch loaded
- * @param {object[]} batches - An array of objects in the form {id: _id, data: [_data_]}
+ * @param {object[]} batches - An array of objects in the form &#123;id: _id, data: [_data_]&#125;
  * @param {Component} contentType - A react component representing the row type
  * @param {bool} [attachToWindow] - When set, the component will attach to the window instead of creating a scrolling container
  * @param {object} [initialItem] - An object describing the batchIdex and itemIndex of the first row to display
@@ -72,7 +73,7 @@ var Batch = React.createClass({
  * @example
  * var batches=[{id: 1, data: ['some', 'data', 'here']}...];
  * <InfiniteScroll loadNext={this.loadNext} hasNext={true} hasPrev={false} batches={batches} contentType={MyRow} />
- **/
+ */
 var InfiniteScroll = React.createClass({
     displayName: "InfiniteScroll",
 

@@ -1,0 +1,28 @@
+{
+  "source": {
+      "include": [
+        "./src"
+      ],
+      "includePattern": ".+\\.(js|jsx)$",
+      "exclude": [
+        "./src/demo",
+        "./src/css",
+        "./src/fonts",
+        "./src/images"
+      ],
+      "excludePattern": ".+/tests/.+$",
+      "excludePattern": ".+/__mocks__/.+$"
+  },
+  "tags": {
+    "allowUnknownTags": true
+  },
+  "opts": {
+    "destination": "./build/jsdoc",
+    "readme": "./README.md",
+    "package": "./package.json",
+    "recurse": true
+  },
+  "plugins": [
+    "./node_modules/jsdoc-jsx"
+  ]
+}

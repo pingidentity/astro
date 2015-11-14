@@ -1,5 +1,12 @@
-/** Format a string.  The format string may call methods on the target key.
- * @function external:String#format
+/**
+ * String format utility.
+ *
+ * @module util/format
+ */
+
+/**
+ * Format a string.  The format string may call methods on the target key.
+ *
  * @param {string} string - The string to format
  * @param {...Object} keys - The keys to use for substitution
  * @returns {string} the formattted string

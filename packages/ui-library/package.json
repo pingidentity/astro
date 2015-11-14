@@ -7,7 +7,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://hg-od01.corp.pingidentity.com/r/ui-library"
+    "url": "https://hg-od01.corp.pingidentity.com/r/gitweb?p=ui-library.git;a=tree;h=HEAD;hb=HEAD"
   },
   "dependencies": {
     "classnames": "1.2.1",
@@ -37,6 +37,8 @@
     "file-loader": "0.8.4",
     "jest": "0.1.40",
     "jest-cli": "0.4.19",
+    "jsdoc": "3.3.3",
+    "jsdoc-jsx": "0.1.0",
     "moment": "2.9.0",
     "moment-range": "1.0.5",
     "react-dnd": "1.1.8",
@@ -74,8 +76,10 @@
     "build-do-not-use": "webpack -p --progress --colors --config webpack.config.js",
     "lint": "eslint --ext .js,.jsx .",
     "test": "jest",
-    "start": "webpack-dev-server -d --hot --inline --progress --colors --config webpack.dev.config.js",
-    "verify": "npm run lint && npm run test"
+    "start": "npm run doc && npm run webpack-start",
+    "webpack-start": "webpack-dev-server -d --hot --inline --progress --colors --config webpack.dev.config.js",
+    "verify": "npm run lint && npm run test",
+    "doc": "jsdoc -c ./jsdoc.json"
   },
   "browserify": {
     "transform": [

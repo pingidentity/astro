@@ -2,11 +2,16 @@
 
 var moment = require("moment");
 
+/**
+ * A set of util functions.
+ *
+ * @module util/Utils
+ */
 module.exports = {
     /**
      * Helper method to test if the HTML5 File API is supported by the user agent
      *
-     * @returns {Boolean} true if the API is supported
+     * @returns {boolean} true if the API is supported
      */
     isHtmlFileApiSupported: function () {
         return global.File && global.FileList && global.FileReader;
@@ -26,7 +31,7 @@ module.exports = {
      * Trigger a Blob download - based on http://stackoverflow.com/a/23797348
      *
      * @param {string} filename the filename
-     * @param {array} blobData the raw data for the file
+     * @param {Array} blobData the raw data for the file
      * @param {string} fileType MIME type e.g. 'text/plain'
      * @returns {undefined}
      */
@@ -57,8 +62,8 @@ module.exports = {
     /**
      * Format the given timestamp in milliseconds as a YYYY-MM-DD date.
      *
-     * @param {Number} timestamp the timestamp (UNIX time * 1000)
-     * @returns {String} the formatted date
+     * @param {number} timestamp the timestamp (UNIX time * 1000)
+     * @returns {string} the formatted date
      */
     formatDate: function (timestamp) {
         return moment.utc(timestamp).format("YYYY-MM-DD");

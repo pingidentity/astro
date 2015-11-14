@@ -1,8 +1,8 @@
 /**
- * Class object dedicated to data caching
+ * @module net/Cache
+ * @desc Class object dedicated to data caching
  *
- * Basic Usage:
- * ============
+ * @example
  * var cache = new Cache('LOCAL', 'usersStore', 180);
  */
 
@@ -11,11 +11,10 @@ var Constants = require("../constants/CacheConstants");
 /**
  * Constructor.
  *
+ * @constructor
  * @param {String} type the type of cache (LOCAL or MEMORY)
  * @param {String} name the cache's name
  * @param {Number} expiry cache expiry time in seconds
- * @constructor
- * @returns {undefined}
  */
 function Cache (type, name, expiry) {
     if (type !== Constants.CacheTypes.LOCAL && type !== Constants.CacheTypes.MEMORY) {

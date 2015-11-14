@@ -1,9 +1,9 @@
 "use strict";
 
-/*
- * Validator library.
+/**
+ * Validator library, containing reusable validation functions.
  *
- * Library containing reusable validation functions.
+ * @module util/Validators
  */
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
     /**
      * Validate that the string looks like an email address.
      *
-     * @param {String} email the string to validate
+     * @param {string} email the string to validate
      * @returns {boolean} true if the string looks like an email address
      */
     isValidEmail: function (email) {
@@ -22,7 +22,7 @@ module.exports = {
     /**
      * Validate that the string looks like a domain name.
      *
-     * @param {String} domainName the string to validate
+     * @param {string} domainName the string to validate
      * @returns {boolean} true if the string looks like a domain name
      */
     isValidDomainName: function (domainName) {
@@ -34,7 +34,7 @@ module.exports = {
     /**
      * Validate that the string looks like an IP address (a.b.c.d, all integers).
      *
-     * @param {String} str the string to validate
+     * @param {string} str the string to validate
      * @returns {boolean} true if the string looks like an IP address
      */
     isValidIp: function (str) {
@@ -45,7 +45,7 @@ module.exports = {
     /**
      * Validate that the string looks like valid CIDR format (a.b.c.d/e, all integers).
      *
-     * @param {String} str the string to validate
+     * @param {string} str the string to validate
      * @returns {boolean} true if the string looks like valid CIDR format
      */
     isValidCidr: function (str) {
@@ -56,7 +56,7 @@ module.exports = {
     /**
      * Validate that the given string contains only digits.
      *
-     * @param {String} str the string to validate
+     * @param {string} str the string to validate
      * @returns {boolean} true if the string contains only digits
      */
     isDigitsOnly: function (str) {
@@ -67,7 +67,7 @@ module.exports = {
      * Validate that the given string looks like a valid URL including protocol
      * (e.g., http://www.pingidentity.com/mypage)
      *
-     * @param {String} str the string to validate
+     * @param {string} str the string to validate
      * @returns {boolean} true if the string looks like a valid URL
      */
     isValidUrl: function (str) {
