@@ -49,6 +49,35 @@ describe("FormSelectField", function () {
 
         expect(onChange.mock.calls.length).toBe(1);
     });
+    
+    it("should update state when property value changes", function () {
+        var onChange = jest.genMockFunction();
+
+        var TestParent = React.createFactory(React.createClass({
+            getInitialState () {
+                return { testState: "2" };
+            },
+
+            render () {
+                return (<FormSelectField ref="fsf" label="test label"
+                          options={{ 1: "one", 2: "two" }}
+                          onChange={onChange}
+                          value={this.state.testState} />);
+            }
+        }));
+
+        var parent = ReactTestUtils.renderIntoDocument(TestParent());
+
+        expect(parent.refs.fsf.props.value).toBe("2");
+        expect(parent.refs.fsf.state.selectedValue).toBe("2");
+        
+        parent.setState({
+            testState: "1"
+        });
+
+        expect(parent.refs.fsf.props.value).toBe("1");
+        expect(parent.refs.fsf.state.selectedValue).toBe("1");
+    });
 
     it("adds the none option when it is specified", function () {
         var onChange = function () {};

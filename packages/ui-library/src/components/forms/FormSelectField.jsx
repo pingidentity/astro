@@ -66,6 +66,12 @@ var FormSelectField = React.createClass({
         };
     },
 
+    componentWillReceiveProps: function (nextProps) {
+        this.setState({
+            selectedValue: nextProps.value
+        });
+    },
+
     getInitialState: function () {
         return {
             selectedValue: this.props.value
