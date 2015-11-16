@@ -7,15 +7,22 @@ var ExpandableRowDemo = React.createClass({
 
         return (
             <div data-id="idp-row">
-                <ExpandableRow titleStyle="name" editModalTitle="Modal Title"
-                    defaultToExpanded={false} showDelete={false} showEdit={true} />
-                <ExpandableRow titleStyle="name" editModalTitle="Modal Title-2"
-                    defaultToExpanded={true} showDelete={true} showEdit={false} />
+                <ExpandableRow
+                    titleStyle="name"
+                    editModalTitle="Modal Title"
+                    defaultToExpanded={false}
+                    showDelete={false}
+                    showEdit={true}
+                />
+                <ExpandableRow
+                    titleStyle="name"
+                    editModalTitle="Modal Title-2"
+                    defaultToExpanded={true}
+                    showDelete={true}
+                    showEdit={false} />
             </div>
         );
     }
 });
 
 module.exports = ExpandableRowDemo;
-
-

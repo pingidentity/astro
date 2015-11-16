@@ -17,7 +17,7 @@ var DemoItem = React.createClass({
                     {this.props.title}
                 </h2>
                 <div className="section-content">
-                    <div className="description">
+                    <div className="demo-description">
                         {this.props.description}
                     </div>
                     {this.props.children ? (

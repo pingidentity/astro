@@ -94,48 +94,57 @@ var ExpandableRow = React.createClass({
     render: function () {
         var showEditIcon = this.props.showEdit && this.props.isEditEnabled,
             showViewIcon = this.props.showEdit && !this.props.isEditEnabled,
-            containerCss = css({
+            containerCss = {
                 item: true,
                 expanded: this.state.isExpanded,
                 "no-delete": !this.props.showDelete,
                 "no-edit": !showEditIcon
-            }),
-
-            editButtonCss = css({
+            },
+            editButtonCss = {
                 "edit-btn": !showViewIcon,
                 "view-btn": showViewIcon
-            }),
-            titleCss = css({
+            },
+            titleCss = {
                 "item-title": true,
                 "title-only": !this.props.subtitle,
                 name: this.props.titleStyle === "name" || null
-            });
+            },
+            deleteButton,
+            editButton;
 
         if (this.props.className) {
-            containerCss = containerCss + " " + this.props.className;
+            containerCss[this.props.className] = true;
         }
 
-        var editButton = (this.props.showEdit && this.props.editButton
-            ? this.props.editButton
-            : <a data-id="edit-btn"
-                className={editButtonCss}
-                href={"#/" + this.props.editViewRoute}>
-            </a>
-        );
+        if (this.props.showEdit && this.props.editButton) {
+            editButton = this.props.editButton;
+        } else {
+            editButton = (
+                <a data-id="edit-btn"
+                    className={css(editButtonCss)}
+                    href={"#/" + this.props.editViewRoute}>
+                </a>
+            );
+        }
 
-        var deleteButton = (this.props.showDelete && this.props.deleteButton
-            ? this.props.deleteButton
-            : <a data-id="delete-btn"
-                className="delete-btn"
-                onClick={this.props.onDelete}>
-            </a>
-        );
+        if (this.props.showDelete) {
+            if (this.props.deleteButton) {
+                deleteButton = this.props.deleteButton;
+            } else {
+                deleteButton = (
+                    <a data-id="delete-btn"
+                        className="delete-btn"
+                        onClick={this.props.onDelete}>
+                    </a>
+                );
+            }
+        }
 
         return (
             <div className="result-set">
-                <div data-id={this.props.id} className={containerCss}>
+                <div data-id={this.props.id} className={css(containerCss)}>
                     <div className="collapsed-content">
-                        <div className={titleCss}>
+                        <div className={css(titleCss)}>
                             {this.props.title}
                         </div>
                         {this.props.subtitle

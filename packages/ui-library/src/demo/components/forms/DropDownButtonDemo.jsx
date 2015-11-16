@@ -8,7 +8,7 @@ var DropDownButtonDemo = React.createClass({
             selectedLabel: "None."
         };
     },
-    
+
     _changeARule: function (selectedLabel) {
         this.setState({
             selectedLabel: selectedLabel
@@ -22,22 +22,26 @@ var DropDownButtonDemo = React.createClass({
             optionTwo: "Option Two",
             optionThree: "Option Three",
             optionFour: "Option Four",
-            optionFive: "Option Five"
+            optionFive: "Option Five",
+            optionSix: "Option Six",
+            optionSeven: "Option Seven"
         };
 
         return menu;
     },
 
     render: function () {
-        
+
         var optionsMenu = this._dropDownOptions();
-        
+
         return (
             <div>
-                <DropDownButton title="Drop Down"
-                                onSelect={this._changeARule}
-                                options={optionsMenu} /><br/><br/>
-                            
+                <DropDownButton
+                    title="Options Title"
+                    onSelect={this._changeARule}
+                    options={optionsMenu}
+                />
+                <br/><br/>
                 <div>
                     Selected menu item = {this.state.selectedLabel}
                 </div>

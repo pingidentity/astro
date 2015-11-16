@@ -51,7 +51,7 @@ describe("ExpandableRow", function () {
         expect(deleteButton.getDOMNode().className).toEqual("delete-btn");
     });
 
-    it("renders an empty disabled button when showDelete prop is set to false", function () {
+    it("renders row without delete button when showDelete prop is set to false", function () {
         var expandedComponent = ReactTestUtils.renderIntoDocument(
             <ExpandableRow
                 title={titleJsx}
@@ -62,10 +62,14 @@ describe("ExpandableRow", function () {
             />
         );
 
+        // check css on row
         var expandableRow = TestUtils.findRenderedDOMComponentWithDataId(expandedComponent, "expandable-row");
         expect(expandableRow.getDOMNode().className).toContain("no-delete");
-    });
 
+        // make sure delete button not rendered
+        var deleteButton = TestUtils.findRenderedDOMComponentWithDataId(component, "delete-btn");
+        expect(ReactTestUtils.isDOMComponent(deleteButton)).toBeFalsy();
+    });
 
     it("renders the specified delete button", function () {
         var deleteButton = (<div data-id="my-delete-button">Delete Me</div>);

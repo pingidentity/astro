@@ -56,7 +56,7 @@
         @include border-radius(3px);
 
         .options {
-            margin: 50px 0 0 0;
+            margin: 45px 0 10px 0;
             max-height: 285px;
             min-width: 202px;
             overflow: auto;
@@ -184,7 +184,6 @@
         width: 35%;
         float: left;
         p {
-            @extend body;
             text-transform: none;
         }
         .list-container {
@@ -202,7 +201,6 @@
             margin-bottom: 20px;
 
             li {
-                @extend a;
                 @include menu-item;
                 position: relative;
                 padding-right: 60px;
@@ -335,7 +333,7 @@
     .description {
         position: absolute;
         top: 0;
-        padding: 20px;
+        padding: 15px 0 0 20px;
         color: map-get($colors, 'rhino');
     }
 }
