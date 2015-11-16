@@ -1,6 +1,6 @@
-var React = require("react"),
-
-    HelpHint = require("../tooltips/HelpHint.jsx");
+var React=require("react"),
+    css = require("classnames"),
+    HelpHint=require("../tooltips/HelpHint.jsx");
 
     /**
      * @module FormCheckbox
@@ -19,13 +19,13 @@ var React = require("react"),
      *
      * @example
      *
-     *       <FormCheckbox label = "Regular Checkbox"
+     *       <FormCheckbox label="Regular Checkbox"
      *                 id="form-checkbox"
      *                 onChange={this._changeCallback} />
      *
      */
 
-var FormCheckbox = React.createClass({
+var FormCheckbox=React.createClass({
     propTypes: {
         checked: React.PropTypes.bool,
         className: React.PropTypes.string,
@@ -48,31 +48,38 @@ var FormCheckbox = React.createClass({
         this.props.onValueChange(e);
     },
     render: function () {
-        var labelHelp;
+        var labelHelp,
+            labelCss = {};
+
         if (this.props.labelHelpText) {
             labelHelp = (
                 <HelpHint hintText={this.props.labelHelpText} />
             );
         }
+
+        if (this.props.className) {
+            labelCss[this.props.className] = true;
+        }
+
         return (
-            <label className = "input-checkbox" disabled = {this.props.disabled}>
+            <label className={css("input-checkbox", labelCss)} disabled={this.props.disabled}>
                 <span className="label-text">
                     {this.props.label}
                     {labelHelp}
                 </span>
                 <input
-                    data-id = {this.props.id}
-                    type = "checkbox"
-                    name = {this.props.name ? this.props.name : this.props.id}
-                    value = {this.props.value ? this.props.value: this.props.id}
-                    onChange = {this.props.onChange}
-                    checked = {this.props.checked}
-                    disabled = {this.props.disabled}
-                    />
-                <div className = "icon"/>
+                    data-id={this.props.id}
+                    type="checkbox"
+                    name={this.props.name ? this.props.name : this.props.id}
+                    value={this.props.value ? this.props.value: this.props.id}
+                    onChange={this.props.onChange}
+                    checked={this.props.checked}
+                    disabled={this.props.disabled}
+                />
+                <div className="icon"/>
             </label>
         );
     }
 });
 
-module.exports = FormCheckbox;
+module.exports=FormCheckbox;

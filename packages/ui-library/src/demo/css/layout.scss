@@ -61,6 +61,7 @@ $sidenav-lineheight: 22px;
 	bottom: 0;
 	left: 0;
 	width: $sidenav-width;
+	overflow: auto;
 
 	&:before {
 		z-index: -1;

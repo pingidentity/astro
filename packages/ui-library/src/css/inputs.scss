@@ -657,6 +657,7 @@ label {
 .input-row {
 	position: relative;
 	margin: 0 0 20px 0;
+
 	.inactive, &.inactive {
 		display: none;
 	}
@@ -1559,4 +1560,92 @@ input[type=file] {
             }
         }
     }
+}
+
+
+// Input width functions
+@function calc-input-width($container-width, $divisions, $margin, $side-padding){
+	@return (
+		(($container-width - (($divisions - 1) * $margin)) / $divisions) - $side-padding
+	);
+}
+@function calc-input-part-width($fraction-num, $fraction-width, $content-margin, $input-padding) {
+	@return (
+		$fraction-width*$fraction-num + (($fraction-num - 1)*$content-margin) + ($fraction-num - 1)*$input-padding
+	);
+}
+@function input-width-map($width-smallest, $hor-margin, $hor-padding) {
+	@return ((
+		'xsmall': $width-smallest,
+		'small': calc-input-part-width(2, $width-smallest, $hor-margin, $hor-padding),
+		'medium': calc-input-part-width(3, $width-smallest, $hor-margin, $hor-padding),
+		'large': calc-input-part-width(4, $width-smallest, $hor-margin, $hor-padding),
+		'xlarge': calc-input-part-width(5, $width-smallest, $hor-margin, $hor-padding),
+		'full': calc-input-part-width(6, $width-smallest, $hor-margin, $hor-padding)
+	));
+}
+@mixin input-width-css($size) {
+	vertical-align: bottom;
+
+	.label-text {
+		word-break: break-all;
+		width: map-get($input-widths-map-default, $size);
+	}
+	&.input-text {
+		input {
+			width: map-get($input-widths-map-text, $size);
+		}
+	}
+	&.input-textarea {
+		textarea {
+			width: map-get($input-widths-map-textarea, $size);
+		}
+	}
+	&.input-select {
+		select {
+			width: map-get($input-widths-map-select, $size);
+		}
+	}
+	&.input-checkbox {
+		width: map-get($input-widths-map-default, $size);
+	}
+}
+
+// Input width settings
+$input-width-max: 800px;
+$input-hor-margin: 20px;
+$input-hor-padding-text: 46px;
+$input-hor-padding-textarea: 46px;
+$input-hor-padding-select: 2px;
+
+$input-width-smallest-default: calc-input-width($input-width-max, 6, $input-hor-margin, 0);
+$input-width-smallest-text: calc-input-width($input-width-max, 6, $input-hor-margin, $input-hor-padding-text);
+$input-width-smallest-textarea: calc-input-width($input-width-max, 6, $input-hor-margin, $input-hor-padding-textarea);
+$input-width-smallest-select: calc-input-width($input-width-max, 6, $input-hor-margin, $input-hor-padding-select);
+
+$input-widths-map-default: input-width-map($input-width-smallest-default, $input-hor-margin, 0);
+$input-widths-map-text: input-width-map($input-width-smallest-text, $input-hor-margin, $input-hor-padding-text);
+$input-widths-map-textarea: input-width-map($input-width-smallest-textarea, $input-hor-margin, $input-hor-padding-text);
+$input-widths-map-select: input-width-map($input-width-smallest-select, $input-hor-margin, $input-hor-padding-select);
+
+.input-width-xsmall, .input-width-small, .input-width-medium, .input-width-large, .input-width-xlarge, .input-width-full {
+	margin-bottom: $input-hor-margin;
+}
+.input-width-xsmall {
+	@include input-width-css('xsmall');
+}
+.input-width-small {
+	@include input-width-css('small');
+}
+.input-width-medium {
+	@include input-width-css('medium');
+}
+.input-width-large {
+	@include input-width-css('large');
+}
+.input-width-xlarge {
+	@include input-width-css('xlarge');
+}
+.input-width-full {
+	@include input-width-css('full');
 }

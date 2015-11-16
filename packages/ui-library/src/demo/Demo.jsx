@@ -67,6 +67,11 @@ var Demo = React.createClass({
             pathToCode: "components/forms/FormSelectField.jsx"
         },
         {
+            name: "Form - Input Widths",
+            demo: require("./components/forms/FormInputWidthsDemo.jsx"),
+            pathToCode: "none"
+        },
+        {
             name: "Collapsible Section",
             demo: require("./components/general/CollapsibleSectionDemo.jsx"),
             pathToCode: "components/general/CollapsibleSection.jsx"

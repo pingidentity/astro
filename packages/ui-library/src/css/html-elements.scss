@@ -42,3 +42,17 @@ strong {
 	font-weight: bold;
 	font-family: $font-pn-bold;
 }
+ul.ul {
+	margin: 5px 0 15px 20px;
+
+	li {
+		list-style: disc;
+	}
+}
+ol.ol {
+	margin: 5px 0 15px 20px;
+
+	li {
+		list-style: decimal;
+	}
+}

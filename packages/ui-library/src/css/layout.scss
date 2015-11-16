@@ -223,6 +223,7 @@ $layout-zindex-order: (
 	bottom: 0;
 	left: 0;
 	width: $layout-nav-width;
+	overflow: auto;
 
 	&:before {
 		z-index: -1;

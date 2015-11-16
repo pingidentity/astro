@@ -141,6 +141,7 @@ var FormTextArea = React.createClass({
             labelHelp;
 
         var labelCss = css(this.props.className, {
+                "input-textarea": true,
                 required: this.props.isRequired,
                 "form-error": this.props.errorMessage,
                 edited: edited,
@@ -150,10 +151,6 @@ var FormTextArea = React.createClass({
             errorCss = css("help-tooltip form-error-message", {
                 show: this.props.errorMessage
             });
-
-        if (this.props.className) {
-            labelCss += " " + this.props.className;
-        }
 
         var undo;
         if (this.props.originalValue !== null &&
