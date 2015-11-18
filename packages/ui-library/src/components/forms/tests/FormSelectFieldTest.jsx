@@ -54,11 +54,11 @@ describe("FormSelectField", function () {
         var onChange = jest.genMockFunction();
 
         var TestParent = React.createFactory(React.createClass({
-            getInitialState () {
+            getInitialState: function () {
                 return { testState: "2" };
             },
 
-            render () {
+            render: function () {
                 return (<FormSelectField ref="fsf" label="test label"
                           options={{ 1: "one", 2: "two" }}
                           onChange={onChange}

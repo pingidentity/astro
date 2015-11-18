@@ -1,5 +1,5 @@
 NODE_VERSION=0.10.35
-NPM_VERSION=2.1.8
+NPM_VERSION=2.7.0
 
 
 # below are derived properties
