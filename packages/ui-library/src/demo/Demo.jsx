@@ -160,6 +160,11 @@ var Demo = React.createClass({
             name: "Cache",
             demo: require("./net/CacheDemo.jsx"),
             pathToCode: "components/net/Cache.js"
+        },
+        {
+            name: "Tutorial",
+            demo: require("./components/help/IntroTutorial/IntroTutorialDemo.jsx"),
+            pathToCode: "components/help/IntroTutorial/IntroTutorial.jsx"
         }
     ],
 

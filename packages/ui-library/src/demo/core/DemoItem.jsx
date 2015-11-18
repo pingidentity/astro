@@ -26,10 +26,12 @@ var DemoItem = React.createClass({
                         </div>
                     ) : null}
                     {this.props.markupExample ? (
-                        <pre className="language-markup">
-                            <code className="language-markup"
-                                dangerouslySetInnerHTML={{ __html: this.props.markupExample }}></code>
-                        </pre>
+                        <div className="markup-wrapper">
+                            <pre className="language-markup">
+                                <code className="language-markup"
+                                    dangerouslySetInnerHTML={{ __html: this.props.markupExample }}></code>
+                            </pre>
+                        </div>
                     ) : null}
                 </div>
             </div>

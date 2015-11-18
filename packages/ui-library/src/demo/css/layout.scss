@@ -220,6 +220,9 @@ $sidenav-lineheight: 22px;
 			list-style: square inside;
 		}
 	}
+  .markup-wrapper {
+    overflow:hidden;
+  }
 	pre.language-markup, pre.language-javascript, .output {
 		position: relative;
 		margin-top: 32px;

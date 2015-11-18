@@ -2,9 +2,8 @@ var React = require("react/addons"),
     Spinner = require("../general/Spinner.jsx"),
     _ = require("underscore");
 
-/** @module components/lists */
-
 /** @class InfiniteScroll#Batch
+ * @module InfiniteScroll
  * @private */
 var Batch = React.createClass({
     displayName: "Batch",
