@@ -18,7 +18,7 @@ var Arrow = React.createClass({
         arrowGapToTarget: React.PropTypes.number,
         arrowOffsetFromEnd: React.PropTypes.number,
         arrowMinimumCurviture: React.PropTypes.number,
-        to: React.PropTypes.object,
+        to: React.PropTypes.object.isRequired,
         from: React.PropTypes.object,
     },
 

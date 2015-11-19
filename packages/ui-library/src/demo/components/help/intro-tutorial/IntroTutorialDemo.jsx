@@ -1,5 +1,5 @@
 var React = require("react"),
-    IntroTutorial = require("../../../../components/help/IntroTutorial");
+    IntroTutorial = require("../../../../components/help/intro-tutorial");
 
 var Demo = React.createClass({
     LABELS: {

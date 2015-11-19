@@ -33,7 +33,9 @@ describe("IntroTutorial", function () {
         var originalFn = Arrow.prototype.componentWillReceiveProps;
         Arrow.prototype.componentWillReceiveProps = jest.genMockFunction();
 
-        var component = ReactTestUtils.renderIntoDocument(<Arrow />);
+        var component = getComponent(
+            { top: 100, left: 490, width: 100, height: 200 },
+            { width: 1000, height: 1000 });
 
         expect(component.componentWillReceiveProps.mock.calls.length).toBe(1);
 

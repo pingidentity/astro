@@ -10,7 +10,7 @@ var React = require("react"),
 var Spotlight = React.createClass({
     propTypes: {
         padding: React.PropTypes.number,
-        target: React.PropTypes.object
+        target: React.PropTypes.object.isRequired
     },
 
     getDefaultProps: function () {
@@ -46,6 +46,7 @@ var Spotlight = React.createClass({
 
     render: function () {
         var style = _.pick(this.state, ["left", "top", "width"]);
+        style.padding = this.props.padding;
 
         /* jshint ignore:start */
         return (
