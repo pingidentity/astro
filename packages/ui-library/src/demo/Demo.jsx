@@ -11,6 +11,11 @@ var Demo = React.createClass({
 
     demos: [
         {
+            name: "Color Picker",
+            demo: require("./components/general/ColorPickerDemo.jsx"),
+            pathToCode: "components/general/ColorPicker.jsx"
+        },
+        {
             name: "Infinite Scroller",
             demo: require("./components/list/InfiniteScrollDemo.jsx"),
             pathToCode: "components/list/InfiniteScroll.jsx"
