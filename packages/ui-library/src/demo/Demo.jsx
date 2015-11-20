@@ -162,6 +162,11 @@ var Demo = React.createClass({
             pathToCode: "components/net/Cache.js"
         },
         {
+            name: "Tabbed Sections",
+            demo: require("./components/general/TabbedSectionsDemo.jsx"),
+            pathToCode: "components/general/TabbedSections.jsx"
+        },
+        {
             name: "Tutorial",
             demo: require("./components/help/intro-tutorial/IntroTutorialDemo.jsx"),
             pathToCode: "components/help/intro-tutorial/IntroTutorial.jsx"
