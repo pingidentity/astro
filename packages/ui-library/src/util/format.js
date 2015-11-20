@@ -1,11 +1,10 @@
 /**
- * String format utility.
- *
  * @module util/format
+ * @desc String format utility.
  */
 
 /**
- * Format a string.  The format string may call methods on the target key.
+ * @desc Format a string.  The format string may call methods on the target key.
  *
  * @param {string} string - The string to format
  * @param {...Object} keys - The keys to use for substitution

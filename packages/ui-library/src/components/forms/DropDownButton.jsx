@@ -33,7 +33,6 @@ var DropDownButton = React.createClass({
      * Toggle the menu
      *
      * @param {object} e - the event
-     * @returns {undefined}
      * @private
      */
     _toggle: function (e) {
@@ -45,7 +44,6 @@ var DropDownButton = React.createClass({
     /**
      * On option selected
      *
-     * @returns {undefined}
      * @param {value} value selected from drop down
      * @private
      */
@@ -59,7 +57,6 @@ var DropDownButton = React.createClass({
     /**
      * Close menu
      *
-     * @returns {undefined}
      * @private
      */
     close: function () {

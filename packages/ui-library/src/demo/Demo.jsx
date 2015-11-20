@@ -1,6 +1,7 @@
 var React = require("react/addons"),
     DemoItem = require("./core/DemoItem.jsx"),
-    assign = require("object-assign");
+    assign = require("object-assign"),
+    packageJson = require("../../package.json");
 
 require("isomorphic-fetch");
 
@@ -41,9 +42,9 @@ var Demo = React.createClass({
             pathToCode: "components/forms/FormCheckbox.jsx"
         },
         {
-            name: "Form - Checkbox List",
-            demo: require("./components/forms/FormCheckboxListDemo.jsx"),
-            pathToCode: "components/forms/FormCheckboxList.jsx"
+            name: "Form - Checkbox List (stateless)",
+            demo: require("./components/forms/FormCheckboxListStatelessDemo.jsx"),
+            pathToCode: "components/forms/FormCheckboxListStateless.jsx"
 
         },
         {
@@ -215,6 +216,7 @@ var Demo = React.createClass({
             return resp.text();
         }.bind(this)).then(function (text) {
             var renderCode = this.unindentCode(text.replace(/\n|\r/g, "!!!").match(/render: .*?!!!(.*?)!!! {4}}/)[1]);
+            // hljs below is provided by a script tag
             var markup = hljs.highlight('xml', renderCode).value; //eslint-disable-line
 
             this.setState({ demo: assign(this.state.demo, { markup: markup }) });
@@ -234,6 +236,10 @@ var Demo = React.createClass({
             demo: this.getDemo(document.location.hash.substring(1).replace(/%20/g, " ")),
             markup: null
         });
+    },
+
+    getDocumentationUrl: function () {
+        return "build/jsdoc/" + packageJson.name + "/" + packageJson.version + "/index.html";
     },
 
     componentDidUpdate: function () {
@@ -265,7 +271,7 @@ var Demo = React.createClass({
                 <div id="nav">
                     <ul className="menu">
                         <li key="jsdoc">
-                            <a target="_blank" href="build/jsdoc/index.html">
+                            <a target="_blank" href={this.getDocumentationUrl()}>
                                 <strong>Documentation</strong>
                             </a>
                         </li>

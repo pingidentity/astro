@@ -5,21 +5,21 @@ var React = require("react/addons"),
 
 var noop = function () {};
 /**
- * @module Section
+ * @module src/components/general/Section
  * @desc Simple section which expand/collapse on click. In collapsed mody only
  *          title is shown. When expanded shows
  *          body content. Designed to work with arbitrary content. To indicate
  *          elements corresponding to title,
  *          title = {true} attribute should be attached (see examples)
  *
- * @param {string} activeClassName - class names to attach when section is expanded.
- * @param {string} className - class names for top level div.
- * @param {bool} toggleOnTitle - boolean.
- * @param {bool} expanded - whether or not initially expanded.
- * @param {function} onToggle - execute extra functionality on toggle.
- * @param {function} onContentClick - allow click bubbling without premature collapsing. only available for components
+ * @param {string} [activeClassName] - class names to attach when section is expanded.
+ * @param {string} [className] - class names for top level div.
+ * @param {bool} [toggleOnTitle] - boolean.
+ * @param {bool} [expanded] - whether or not initially expanded.
+ * @param {function} [onToggle] - execute extra functionality on toggle.
+ * @param {function} [onContentClick] - allow click bubbling without premature collapsing. only available for components
  *          that meet the _filterBodyNodes criteria which is filtered all children who have no title.
- * @param {string} id - it is used for a unique data-id.
+ * @param {string} [id] - it is used for a unique data-id.
  *
  * @example
  *          <Section className="section" toggleOnTitle={true}>
@@ -63,7 +63,6 @@ var Section = React.createClass({
     /**
      * Call the props toggle() function .
      *
-     * @returns {undefined}
      * @private
     */
     _toggle: function () {

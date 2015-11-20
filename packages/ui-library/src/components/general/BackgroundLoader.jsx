@@ -1,7 +1,7 @@
 var React = require("react/addons");
 
 /**
- * @module components/general/BackgroundLoader
+ * @module src/components/general/BackgroundLoader
  * @desc
  * Repeatedly attempt to load content in the background, until
  * the loaded prop has been set to true.  Display provided
@@ -20,10 +20,11 @@ var React = require("react/addons");
  * and the timers will be cancelled.
  *
  * @param {function} load The method to load data
- * @param {function | object} loading The content to display when loading
- * @param {boolean} loaded Set to true if the content has been loaded and loading requests
+ * @param {function | object} [loading] The content to display when loading
+ * @param {boolean} [loaded] Set to true if the content has been loaded and loading requests
  *  should cease.
  * @param {number | function} interval The time in ms between load calls.
+ * @param {string} [className] CSS classes added to the input button
  *
  * @example
  * Usage:

@@ -12,7 +12,6 @@ var EllipsisLoaderDemo = React.createClass({
     /**
      * Set the loading flag to true, then call _finishLoading after 5000 ms.
      *
-     * @returns {undefined}
      * @private
      */
     _load: function () {
@@ -25,7 +24,6 @@ var EllipsisLoaderDemo = React.createClass({
     /**
      * Set the loading flag to false.
      *
-     * @returns {undefined}
      * @private
      */
     _finishLoading: function () {

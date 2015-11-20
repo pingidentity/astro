@@ -68,7 +68,6 @@ var FormTextArea = React.createClass({
      * Handle a change of the field's value.
      *
      * @param {object} e the event object
-     * @returns {undefined}
      * @private
      */
     _handleFieldChange: function (e) {
@@ -84,7 +83,6 @@ var FormTextArea = React.createClass({
      * Handle the field losing focus.
      *
      * @param {object} e the event object
-     * @returns {undefined}
      * @private
      */
     _handleBlur: function (e) {
@@ -95,7 +93,6 @@ var FormTextArea = React.createClass({
      * Handle the undo operation by changing the value back to originalValue.
      *
      * @param {object} e the event object
-     * @returns {undefined}
      * @private
      */
     _handleUndo: function (e) {

@@ -36,7 +36,6 @@ var RockerButton = React.createClass({
     /**
      * On rocker change
      *
-     * @returns {undefined}
      * @private
      * @param {label} label of text selected
      */

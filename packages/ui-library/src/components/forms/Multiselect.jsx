@@ -23,7 +23,6 @@ var MultiselectOption = React.createClass({
     * call the props onChange() function to updte the value.
     *
     * @param {bool} e - checked value
-    * @returns {undefined}
     * @private
     */
     _changed: function (e) {
@@ -93,7 +92,6 @@ var Multiselect = React.createClass({
     * It is used to decide the menu should displayed or not.
     * If it is open, it is closed and vice versa.
     *
-    * @returns {undefined}
     * @private
     */
     _toggle: function () {
@@ -106,7 +104,6 @@ var Multiselect = React.createClass({
     * Clear the search field.
     *
     * @param {string} e - search parameter
-    * @returns {undefined}
     * @private
     */
     _clearSearch: function (e) {
@@ -120,7 +117,6 @@ var Multiselect = React.createClass({
     * Set the filter criteria by entered value.
     *
     * @param {string} e - search parameter
-    * @returns {undefined}
     * @private
     */
     _filterOptions: function (e) {
@@ -135,7 +131,6 @@ var Multiselect = React.createClass({
     * if search is empty.
     *
     * @param {string} e - search parameter
-    * @returns {undefined}
     * @private
     */
     _searchKeyUp: function (e) {

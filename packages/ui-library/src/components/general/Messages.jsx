@@ -3,7 +3,7 @@
 var React = require("react");
 
 /**
- * @module components/general/Messages
+ * @class components/general/Messages
  *
  * @desc
  *
@@ -30,6 +30,8 @@ var React = require("react");
  *   <Messages messages={messages} data-id="page-messages" removeMessage={this._removeMessage} />
  *
  */
+
+var Message;
 
 var Messages = React.createClass({
 
@@ -82,7 +84,7 @@ var Messages = React.createClass({
  * from the store).
  *
  */
-var Message = React.createClass({
+Message = React.createClass({
 
     /*
      * Close the message by calling the removeMessage

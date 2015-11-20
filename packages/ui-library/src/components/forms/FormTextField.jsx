@@ -74,7 +74,6 @@ var FormTextField = React.createClass({
      * Handle field validation and the display of an error message.
      *
      * @param {object} e the event object
-     * @returns {undefined}
      * @private
      */
     _handleFieldErrorMessage: function (e) {
@@ -97,7 +96,6 @@ var FormTextField = React.createClass({
      * Perform any operations that need to happen when the field value changes.
      *
      * @param {object} e the event object
-     * @returns {undefined}
      * @private
      */
     _handleFieldChange: function (e) {
@@ -124,7 +122,6 @@ var FormTextField = React.createClass({
      * Perform any operations that need to happen when the field blurs (loses focus).
      *
      * @param {object} e the event object
-     * @returns {undefined}
      * @private
      */
     _handleFieldBlur: function (e) {
@@ -140,7 +137,6 @@ var FormTextField = React.createClass({
      * Perform the undo operation when the undo control is clicked.
      *
      * @param {object} e the event object
-     * @returns {undefined}
      * @private
      */
     _handleUndo: function (e) {
@@ -168,7 +164,6 @@ var FormTextField = React.createClass({
      * Perform the save operation when the save control is clicked.
      *
      * @param {object} e the event object
-     * @returns {undefined}
      * @private
      */
     _handleSave: function () {

@@ -2,11 +2,11 @@
 
 var React = require("react");
 /**
- * @module LazyLoader
+ * @class components/general/LazyLoader
  * @description Renders a limited amount of items initially and doubles the rendered items each time scrolling reaches
  *     the bottom.  Note: the container requires CSS rules for height and overflow.
  *
- * @param {string} className - name of css class(s) to add to the parent container
+ * @param {string} [classNames] - name of css class(s) to add to the parent container
  * @param {Object} items - array of objects in the following format:
  *     [
  *         { id: "value", name: "value", group: "group name" },
@@ -14,9 +14,7 @@ var React = require("react");
  *         ...
  *     ]
  * @param {...number} limit - the maxium number of records to return with each fragment
-
-
-
+ *
  * @example
  * Example Use:
  *     { CSS }
@@ -49,7 +47,6 @@ var LazyLoader = React.createClass({
      * @private
      * @desc event handler for determining if iterations should be incremented
      * @param {object} e The event object
-     * @returns {undefined}
      */
     _onScroll: function (e) {
         var el = e.currentTarget;
@@ -62,7 +59,6 @@ var LazyLoader = React.createClass({
     /**
      * @method LazyLoader#reset
      * @desc resets the amount of fragment iterations
-     * @returns {undefined}
      */
     reset: function () {
         this.setState({ iterations: 1 });

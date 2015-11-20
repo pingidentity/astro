@@ -4,16 +4,16 @@ jest.dontMock("../../../testutil/TestUtils");
 jest.dontMock("../FormTextField.jsx");
 jest.dontMock("../Toggle.jsx");
 
-jest.dontMock("../FormCheckboxList.jsx");
+jest.dontMock("../FormCheckboxListStateless.jsx");
 jest.dontMock("../../general/LazyLoader.jsx");
 
 jest.dontMock("underscore");
 
-describe("FormCheckboxList", function () {
+describe("FormCheckboxListStateless", function () {
     var React = require("react/addons");
     var ReactTestUtils = React.addons.TestUtils;
     var TestUtils = require("../../../testutil/TestUtils");
-    var FormCheckboxList = require("../FormCheckboxList.jsx");
+    var FormCheckboxListStateless = require("../FormCheckboxListStateless.jsx");
     var callback = jest.genMockFunction();
     var Toggle = require("../Toggle.jsx");
 
@@ -26,14 +26,15 @@ describe("FormCheckboxList", function () {
         { id: 2, name: "Google Mail", group: "group2" }
     ];
 
-    xit("test default render state of form with minimal parameters", function () {
+    it("test default render state of form with minimal parameters", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
-            <FormCheckboxList
+            <FormCheckboxListStateless
                 groupName="test_checkbox_list"
                 labelSelectAll="Select All"
                 labelDeselectAll="Deselect All"
                 labelHideUnselected="Hide Unselected"
+                labelSearchPlaceholder="Search"
                 onSelectionChange={callback}
                 onQueryChange={callback}
                 onVisibilityChange={callback}
@@ -58,14 +59,15 @@ describe("FormCheckboxList", function () {
         expect(checkboxes[1].getDOMNode().value).toBe("2");
     });
 
-    xit("test no default selected item", function () {
+    it("test no default selected item", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
-            <FormCheckboxList
+            <FormCheckboxListStateless
                 groupName="test_checkbox_list"
                 labelSelectAll="Select All"
                 labelDeselectAll="Deselect All"
                 labelHideUnselected="Hide Unselected"
+                labelSearchPlaceholder="Search"
                 onSelectionChange={callback}
                 onQueryChange={callback}
                 onVisibilityChange={callback}
@@ -81,14 +83,15 @@ describe("FormCheckboxList", function () {
         expect(checkboxes[1].getDOMNode().checked).toBe(false);
     });
 
-    xit("will trigger callback on select all hyperlink change event", function () {
+    it("will trigger callback on select all hyperlink change event", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
-            <FormCheckboxList
+            <FormCheckboxListStateless
                 groupName="test_checkbox_list"
                 labelSelectAll="Select All"
                 labelDeselectAll="Deselect All"
                 labelHideUnselected="Hide Unselected"
+                labelSearchPlaceholder="Search"
                 onSelectionChange={jest.genMockFunction()}
                 onQueryChange={callback}
                 onVisibilityChange={callback}
@@ -113,14 +116,15 @@ describe("FormCheckboxList", function () {
         expect(checkboxes[1].getDOMNode().checked).toBe(true);
     });
 
-    xit("will trigger callback on checkbox dataobject selection change", function () {
+    it("will trigger callback on checkbox dataobject selection change", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
-            <FormCheckboxList
+            <FormCheckboxListStateless
                 groupName="test_checkbox_list"
                 labelSelectAll="Select All"
                 labelDeselectAll="Deselect All"
                 labelHideUnselected="Hide Unselected"
+                labelSearchPlaceholder="Search"
                 selected={[1, 2]}
                 onSelectionChange={callback}
                 onQueryChange={callback}
@@ -140,13 +144,14 @@ describe("FormCheckboxList", function () {
         expect(callback).toBeCalled();
     });
 
-    xit("will trigger search filter", function () {
+    it("will trigger search filter", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            <FormCheckboxList
+            <FormCheckboxListStateless
                 groupName="test_checkbox_list"
                 labelSelectAll="Select All"
                 labelDeselectAll="Deselect All"
                 labelHideUnselected="Hide Unselected"
+                labelSearchPlaceholder="Search"
                 onSelectionChange={callback}
                 onQueryChange={jest.genMockFunction()}
                 onVisibilityChange={callback}
@@ -171,14 +176,15 @@ describe("FormCheckboxList", function () {
         expect(checkboxes[0].getDOMNode().value).toBe("1");
     });
 
-    xit("will trigger hide unchecked toggle", function () {
+    it("will trigger hide unchecked toggle", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
-            <FormCheckboxList
+            <FormCheckboxListStateless
                 groupName="test_checkbox_list"
                 labelSelectAll="Select All"
                 labelDeselectAll="Deselect All"
                 labelHideUnselected="Hide Unselected"
+                labelSearchPlaceholder="Search"
                 selected={[2]}
                 onSelectionChange={callback}
                 onQueryChange={callback}
@@ -194,14 +200,15 @@ describe("FormCheckboxList", function () {
         expect(callback).toBeCalled();
     });
 
-    xit("will render grouped datasets, validate group labels shows up", function () {
+    it("will render grouped datasets, validate group labels shows up", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
-            <FormCheckboxList
+            <FormCheckboxListStateless
                 groupName="test_checkbox_list"
                 labelSelectAll="Select All"
                 labelDeselectAll="Deselect All"
                 labelHideUnselected="Hide Unselected"
+                labelSearchPlaceholder="Search"
                 onSelectionChange={callback}
                 onQueryChange={callback}
                 onVisibilityChange={callback}
@@ -229,14 +236,15 @@ describe("FormCheckboxList", function () {
         expect(checkboxes[1].getDOMNode().value).toBe("2");
     });
 
-    xit("will trigger group label filtering", function () {
+    it("will trigger group label filtering", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
-            <FormCheckboxList
+            <FormCheckboxListStateless
                 groupName="test_checkbox_list"
                 labelSelectAll="Select All"
                 labelDeselectAll="Deselect All"
                 labelHideUnselected="Hide Unselected"
+                labelSearchPlaceholder="Search"
                 onSelectionChange={callback}
                 onQueryChange={callback}
                 onVisibilityChange={callback}

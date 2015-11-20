@@ -3,7 +3,7 @@ node/
 node_modules/
 mvn/
 build*
-**/tests/coverage
+**/coverage
 npm-debug.log
 
 # IDEA

@@ -27,6 +27,10 @@ module.exports = {
                 loaders: ["react-hot", "babel-loader"]
             },
             {
+                test: /\.json$/,
+                loaders: ["json-loader"]
+            },
+            {
                 test: /\.html$/,
                 // the path is up one directory to put it under root
                 loader: "file?name=../[name].[ext]"

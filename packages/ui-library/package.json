@@ -39,6 +39,7 @@
     "jest-cli": "0.4.19",
     "jsdoc": "3.3.3",
     "jsdoc-jsx": "0.1.0",
+    "json-loader": "0.5.3",
     "moment": "2.9.0",
     "moment-range": "1.0.5",
     "react-dnd": "1.1.8",
@@ -69,7 +70,8 @@
     "testPathIgnorePatterns": [
       "<rootDir>/node/",
       "<rootDir>/node_modules/",
-      "<rootDir>/.*/tests/coverage/"
+      "<rootDir>/.*/tests/coverage/",
+      "<rootDir>/build/"
     ]
   },
   "scripts": {

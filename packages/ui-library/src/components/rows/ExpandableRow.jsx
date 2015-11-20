@@ -65,7 +65,6 @@ var ExpandableRow = React.createClass({
      * Handle row should expand or not. If it is expaned, then
      * it is not expanded and vise versa.
      *
-     * @returns {undefined}
      * @private
     */
     _handleExpandButtonClick: function () {

@@ -1,15 +1,14 @@
 "use strict";
 
 /**
- * Validator library, containing reusable validation functions.
- *
  * @module util/Validators
+ * @desc Validator library, containing reusable validation functions.
  */
 
 module.exports = {
 
     /**
-     * Validate that the string looks like an email address.
+     * @desc Validate that the string looks like an email address.
      *
      * @param {string} email the string to validate
      * @returns {boolean} true if the string looks like an email address
@@ -20,7 +19,7 @@ module.exports = {
     },
 
     /**
-     * Validate that the string looks like a domain name.
+     * @desc Validate that the string looks like a domain name.
      *
      * @param {string} domainName the string to validate
      * @returns {boolean} true if the string looks like a domain name
@@ -32,7 +31,7 @@ module.exports = {
     },
 
     /**
-     * Validate that the string looks like an IP address (a.b.c.d, all integers).
+     * @desc Validate that the string looks like an IP address (a.b.c.d, all integers).
      *
      * @param {string} str the string to validate
      * @returns {boolean} true if the string looks like an IP address
@@ -43,7 +42,7 @@ module.exports = {
     },
 
     /**
-     * Validate that the string looks like valid CIDR format (a.b.c.d/e, all integers).
+     * @desc Validate that the string looks like valid CIDR format (a.b.c.d/e, all integers).
      *
      * @param {string} str the string to validate
      * @returns {boolean} true if the string looks like valid CIDR format
@@ -54,7 +53,7 @@ module.exports = {
     },
 
     /**
-     * Validate that the given string contains only digits.
+     * @desc Validate that the given string contains only digits.
      *
      * @param {string} str the string to validate
      * @returns {boolean} true if the string contains only digits
@@ -64,7 +63,7 @@ module.exports = {
     },
 
     /**
-     * Validate that the given string looks like a valid URL including protocol
+     * @desc Validate that the given string looks like a valid URL including protocol
      * (e.g., http://www.pingidentity.com/mypage)
      *
      * @param {string} str the string to validate

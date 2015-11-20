@@ -1,20 +1,12 @@
-/**
- * @module net/Cache
- * @desc Class object dedicated to data caching
- *
- * @example
- * var cache = new Cache('LOCAL', 'usersStore', 180);
- */
-
 var Constants = require("../constants/CacheConstants");
 
 /**
- * Constructor.
- *
- * @constructor
- * @param {String} type the type of cache (LOCAL or MEMORY)
+ * @desc Class object dedicated to data caching
+ * @param {constants/CacheConstants#CacheTypes} type the cache type
  * @param {String} name the cache's name
  * @param {Number} expiry cache expiry time in seconds
+ * @example
+ * var cache = new Cache('LOCAL', 'usersStore', 180);
  */
 function Cache (type, name, expiry) {
     if (type !== Constants.CacheTypes.LOCAL && type !== Constants.CacheTypes.MEMORY) {
@@ -40,9 +32,8 @@ function Cache (type, name, expiry) {
 }
 
 /**
- * Clear the cache.
- *
- * @returns {undefined}
+ * @public
+ * @desc Clear the cache.
  */
 Cache.prototype.clear = function () {
     if (this.type === Constants.CacheTypes.LOCAL) {
@@ -55,10 +46,10 @@ Cache.prototype.clear = function () {
 };
 
 /**
- * Get an item from the cache.
- *
+ * @public
+ * @desc Get an item from the cache.
  * @param {*} key the item's key
- * @returns {*} the item
+ * @return {*} the value in the cache for the given key, otherwise undefined
  */
 Cache.prototype.get = function (key) {
     var now = new Date().getTime(), myCache;
@@ -81,8 +72,8 @@ Cache.prototype.get = function (key) {
 };
 
 /**
- * Put an item in the cache.
- *
+ * @public
+ * @desc Put an item in the cache.
  * @param {*} key the item's key
  * @param {*} item the item
  * @returns {boolean} true if successfully stored, false otherwise

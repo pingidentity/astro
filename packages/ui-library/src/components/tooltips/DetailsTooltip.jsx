@@ -63,7 +63,6 @@ var DetailsTooltip = React.createClass({
     /**
      * Call the props toggle() function .
      *
-     * @returns {undefined}
      * @private
     */
     _toggle: function () {
@@ -74,8 +73,8 @@ var DetailsTooltip = React.createClass({
     /**
      * Return of content based on props.open.
      *
-     * @returns {undefined}
      * @private
+     * @return {React.Component} the React component to be used as tooltip content
     */
     _content: function () {
 

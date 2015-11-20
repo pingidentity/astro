@@ -4,7 +4,7 @@ var React = require("react");
 var css = require("classnames");
 
 /**
- * @module components/general/ModalButton
+ * @class components/general/ModalButton
  * @desc
  *
  * Modal button:  Button to display a modal.

@@ -1,7 +1,7 @@
 var React = require("react");
 
 /**
- * @module HelpHint
+ * @class components/tooltips/HelpHint
  * @desc HelpHint can appear above, to the right, to the bottom or to the left of any DOM element.
  *      By default the hint appears to the upper right of the icon or target
  *      The following css classes may be added to effect the tooltip placement and state:
@@ -14,8 +14,8 @@ var React = require("react");
  *      Multiple rows of text are supported.
  *      HTML is supported.
  * @param {any} hintText - provides the text that will appear in the hint.( required )
- * @param {string} className - extra CSS classes to be applied on the top level HTML
- * @param {string} id - attribute of rendered tooltip text.
+ * @param {string} [className] - extra CSS classes to be applied on the top level HTML
+ * @param {string} [id] - attribute of rendered tooltip text.
  *
  *
  *  @example
@@ -27,7 +27,7 @@ var HelpHint = React.createClass({
         // prop validations
         hintText: React.PropTypes.any.isRequired,
         className: React.PropTypes.string,
-        id: React.PropTypes.string,
+        id: React.PropTypes.string
     },
 
     getDefaultProps: function () {

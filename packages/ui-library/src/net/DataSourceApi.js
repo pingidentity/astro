@@ -170,7 +170,7 @@ var processRequest = function (options) {
 
 /**
  *
- * @module net/DataSourceApi
+ * @class net/DataSourceApi
  *
  * @desc
  * A simple singleton wrapper that will serve as the main
@@ -219,18 +219,16 @@ var processRequest = function (options) {
  */
 var DataSourceApi = {
     /**
+     * @public
      * @desc Makes a GET request and calls the callback with the response.
      * If the response exists in the cache, it will be returned from there.
      * Use getNoCache() method to force sending the request even if it exists
      * in the response cache.
-     * @method DataSourceApi#get
-     * @public
      * @param {string} endpoint the endpoint to send the request to
      * @param {Object.<string, string>} params the request parameters as an associative array
      * @param {function(Object.<string, *>)} callback the callback function, it will be called with an object of this type:
      * {error: string, status: number, data: Object, headers: Object.<string, string>, fromCache: boolean}
      * @param {Object.<string, string>} [headers] request headers as an associative array
-     * @return {undefined}
      */
     get: function (endpoint, params, callback, headers) {
         processRequest(
@@ -247,16 +245,14 @@ var DataSourceApi = {
     },
 
     /**
+     * @public
      * @desc Makes a GET request and calls the callback with the response.
      * It doesn't use the response cache.
-     * @method DataSourceApi#getNoCache
-     * @public
      * @param {string} endpoint the endpoint to send the request to
      * @param {Object.<string, string>} params the request parameters as an associative array
      * @param {function(Object.<string, *>)} callback the callback function, it will be called with an object of this type:
      * {error: string, status: number, data: Object, headers: Object.<string, string>, fromCache: boolean}
      * @param {Object.<string, string>} [headers] request headers as an associative array
-     * @return {undefined}
      */
     getNoCache: function (endpoint, params, callback, headers) {
         processRequest(
@@ -273,9 +269,8 @@ var DataSourceApi = {
     },
 
     /**
-     * @desc Makes a POST request and calls the callback with the response.
-     * @method DataSourceApi#post
      * @public
+     * @desc Makes a POST request and calls the callback with the response.
      * @param {string} endpoint the endpoint to send the request to
      * @param {Object.<string, *>} data the form data to be sent in the body, as an associative array
      * @param {Object.<string, string>} params the request parameters as an associative array
@@ -283,7 +278,6 @@ var DataSourceApi = {
      * {error: string, status: number, data: Object, headers: Object.<string, string>, fromCache: boolean}
      * @param {Object.<string, Object>} [files] the files to be attached to the request, as an associative array
      * @param {Object.<string, string>} [headers] request headers as an associative array
-     * @return {undefined}
      */
     post: function (endpoint, data, params, callback, files, headers) {
         processRequest(
@@ -302,16 +296,14 @@ var DataSourceApi = {
     },
 
     /**
-     * @desc Makes a PUT request and calls the callback with the response.
-     * @method DataSourceApi#put
      * @public
+     * @desc Makes a PUT request and calls the callback with the response.
      * @param {string} endpoint the endpoint to send the request to
      * @param {Object} data the form data to be sent in the body, as an associative array
      * @param {Object.<string, string>} params the request parameters as an associative array
      * @param {function(Object.<string, *>)} callback the callback function, it will be called with an object of this type:
      * {error: string, status: number, data: Object, headers: Object.<string, string>, fromCache: boolean}
      * @param {Object.<string, string>} [headers] request headers as an associative array
-     * @return {undefined}
      */
     put: function (endpoint, data, params, callback, headers) {
         processRequest(
@@ -329,15 +321,13 @@ var DataSourceApi = {
     },
 
     /**
-     * @desc Makes a DELETE request and calls the callback with the response.
-     * @method DataSourceApi#delete
      * @public
+     * @desc Makes a DELETE request and calls the callback with the response.
      * @param {string} endpoint the endpoint to send the request to
      * @param {Object.<string, string>} params the request parameters as an associative array
      * @param {function(Object.<string, *>)} callback the callback function, it will be called with an object of this type:
      * {error: string, status: number, data: Object, headers: Object.<string, string>, fromCache: boolean}
      * @param {Object.<string, string>} [headers] request headers as an associative array
-     * @return {undefined}
      */
     doDelete: function (endpoint, params, callback, headers) {
         processRequest(

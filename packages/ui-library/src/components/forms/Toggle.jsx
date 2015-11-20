@@ -46,7 +46,6 @@ var Toggle = React.createClass({
    /**
      * Call the props toggle() function .
      *
-     * @returns {undefined}
      * @private
     */
     _toggle: function () {

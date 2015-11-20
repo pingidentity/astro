@@ -1,7 +1,7 @@
 var React = require("react");
 
 /**
- * @module components/general/If
+ * @class components/general/If
  *
  * @desc
  * Simple conditional render for convenience.  Will display children

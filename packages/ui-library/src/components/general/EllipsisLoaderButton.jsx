@@ -3,7 +3,7 @@ var css = require("classnames");
 var EllipsisLoader = require("../general/EllipsisLoader.jsx");
 
 /**
- * @module EllipsisLoaderButton
+ * @class src/components/general/EllipsisLoaderButton
  * @desc Loading indicator (animated ...) for fields which have server-side validation, etc.
  * @param {string} [id] data-id to set on the button (optional, default 'ellipsis-loader-button')
  * @param {string} text text to display in the button when not loading

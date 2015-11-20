@@ -1,7 +1,7 @@
 var React = require("react/addons");
 
 /**
- * @module components/general/SelectText
+ * @class components/general/SelectText
  * @desc
  *
  * Component that will select all text in all child
@@ -23,6 +23,7 @@ var React = require("react/addons");
  *  span.
  * @param {function} [onClick] Function to call after selection has been
  *  triggered.
+ * @param {string} [dataId] id attribute of rendered input button
  *
  * @example
  * <SelectText>

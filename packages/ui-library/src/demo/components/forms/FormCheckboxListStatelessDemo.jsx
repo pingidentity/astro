@@ -1,7 +1,7 @@
 var React = require("react/addons"),
-    FormCheckboxList = require("../../../components/forms/FormCheckboxList.jsx");
+    FormCheckboxListStateless = require("../../../components/forms/FormCheckboxListStateless.jsx");
 
-var FormCheckboxListDemo = React.createClass({
+var FormCheckboxListStatelessDemo = React.createClass({
 
     getInitialState: function () {
         return {
@@ -40,13 +40,14 @@ var FormCheckboxListDemo = React.createClass({
 
         return (
                 <div>
-                    <FormCheckboxList
+                    <FormCheckboxListStateless
                         groupName="aps_condition_type"
                         hideUnchecked={this.state.hideUnchecked}
                         items={checkboxItems}
                         labelSelectAll="Select All"
                         labelDeselectAll="Deselect All"
                         labelHideUnselected="Hide Unselected"
+                        labelSearchPlaceholder="Search"
                         onSelectionChange={this._onSelectionChange}
                         onQueryChange={this._onQueryChange}
                         onVisibilityChange={this._onVisibilityChange}
@@ -64,4 +65,4 @@ var FormCheckboxListDemo = React.createClass({
 });
 
 
-module.exports = FormCheckboxListDemo;
+module.exports = FormCheckboxListStatelessDemo;

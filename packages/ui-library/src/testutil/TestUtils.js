@@ -4,16 +4,16 @@ var React = require("react/addons");
 var ReactTestUtils = React.addons.TestUtils;
 
 /**
- * A collection of ReactJS test utils, to complement the ones provided by the
- * framework.
- *
  * @module testutil/TestUtils
+ *
+ * @desc A collection of ReactJS test utils, to complement the ones provided by the
+ * framework.
  *
  */
 var TestUtils = {
     
     /**
-     * Return all components in the supplied tree with the specified dataId.
+     * @desc Return all components in the supplied tree with the specified dataId.
      *
      * @param {ReactComponent} tree - the React component tree to search
      * @param {string} dataId - the value of the data-id attribute on the target elements
@@ -29,7 +29,7 @@ var TestUtils = {
     },
 
     /**
-     * Return the single component in the supplied tree with the specified dataId.
+     * @desc Return the single component in the supplied tree with the specified dataId.
      * If no component in the tree matches the criteria, null is returned.
      * If there are more than one component, an error is thrown.
      *
@@ -50,7 +50,7 @@ var TestUtils = {
     },
     
     /**
-     * Return the single component in the supplied tree with the specified name.
+     * @desc Return the single component in the supplied tree with the specified name.
      * If no component in the tree matches the criteria, null is returned.
      * If there are more than one component, an error is thrown.
      *

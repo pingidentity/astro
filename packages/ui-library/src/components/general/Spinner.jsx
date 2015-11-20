@@ -1,23 +1,21 @@
 var React = require("react");
 
 /*
- * Simple loading spinner implementation. Depends on prop will show loading spinner animation or children content.
- *
+ * @class components/general/Spinner
+ * @desc Simple loading spinner implementation. Depends on prop will show loading spinner animation or children content.
  * Children content should be exception safe if no data available, because it will be evaluated regardless of loading
  * state (react limitation), also content should be wrapped in top-level element (div or span) (also react limitation).
  *
- * Sample usage:
+ * @param {string} [defaultTest] text that shows if CSS rotations are not supported
+ * @param {boolean} show boolean value, while true loading animation will be shown instead of context
+ *
+ * @example
  *     <Spinner show={this.state.show} defaultText="Loading...">
  *         <div className="result-set">
  *             {data}
  *         </div>
  *     </Spinner>
- *
- * Params:
- *     - defaultText (optional): text that shows if CSS rotations are not supported
- *     - show: boolean value, while true loading animation will be shown instead of context
-*/
-
+ */
 var Spinner = React.createClass({
 
     propTypes: {

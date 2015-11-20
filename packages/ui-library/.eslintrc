@@ -52,7 +52,12 @@
 		"no-invalid-regexp": [2],
 		"no-irregular-whitespace": [2],
 		"no-unreachable": [2],
-		"valid-jsdoc": [1],
+		"valid-jsdoc": [
+			2,
+			{
+				"requireReturn": false
+			}
+		],
 		"valid-typeof": [2],
 		"no-unexpected-multiline": [2],
 		"max-depth": [2, 5],
