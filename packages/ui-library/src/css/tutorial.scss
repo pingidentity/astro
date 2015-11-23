@@ -1,51 +1,114 @@
 .introOverlay {
-  background: rgba(0, 0, 0, 0.6);
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  position: absolute;
-  z-index:5;
-  left:0;
-  top:0;
-  text-align:center;
-}
+	$intro-colors: (
+        'blue': #40C5E3
+    );
 
-.introOverlay > svg {
-  width:100%;
-  height:100%;
-  position:absolute;
-  left:0;
-}
+	background: rgba(map-get($colors, 'black'), 0.6);
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	position: absolute;
+	z-index: 5;
+	text-align: center;
+	left: 0;
+	top: 0;
 
-.introOverlay > div.modal {
-  display:inline-block;
-  min-height:200px;
-  padding:20px;
-  margin-top:-100px;
-  top:50%;
-  position:relative;
-  background-color:black;
-  color:white;
-  max-width:300px;
-  opacity:1;
-}
+	> svg {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		left: 0;
+	}
+    div.modal {
+        display: inline-block;
+        padding: 20px 20px 77px 20px;
+        margin-top: -100px;
+        top: 50%;
+        position: relative;
+        background-color: map-get($colors, 'black');
+        width: 400px;
+        opacity: 1;
+		color: map-get($colors, 'white');
+		@include border-radius(5px);
 
-.introOverlay path {
-  stroke: #95B1E5;
-  stroke-width: 1px;
-  fill:none;
-}
+		.title {
+			font-size: 36px;
+			line-height: 1em;
+			margin: 0 0 25px 0;
+			color: map-get($intro-colors, 'blue');
+			font-family: $font-pn-regular;
+		}
+		.description {
+			text-align: left;
+			line-height: 1.6em;
+			font-size: 18px;
+			font-family: $font-pn-light;
+		}
+		.page {
+			font-weight: 100;
+			font-size: 20px;
+			padding: 30px 0;
+			color: transparentize(map-get($colors, 'white'), 0.5);
+		}
+		.controls {
+			position: absolute;
+			bottom: 0;
+			left: 5px;
+			right: 5px;
+			border-top: 1px solid transparentize(map-get($colors, 'white'), 0.75);
+			padding: 20px 0;
+			text-align: right;
 
-.introOverlay > .spotlight {
-  background:white;
-  border-radius:25px;
-  position:absolute;
-  text-align:left;
-  overflow:hidden;
-}
+		}
+		input[type=button] {
+			border: none;
+			font-size: 16px;
+	        line-height: 1em;
+			padding: 10px 20px;
+			color: map-get($colors, 'white');
+			background-color: map-get($intro-colors, 'blue');
+			font-weight: 100;
+			@include border-radius(2px);
 
+			&.prev, &.dismiss {
+				color: map-get($intro-colors, 'blue');
+				background-color: transparent;
+				font-weight: 500;
+			}
+			&.dismiss {
+				position: absolute;
+				bottom: 10px;
+				left: 10px;
+				padding: 0;
+			}
+			&[disabled] {
+				&:hover {
+					color: map-get($colors, 'white');
+				}
+			}
+		}
+    }
+	path {
+		stroke: map-get($intro-colors, 'blue');
+		fill:none;
+
+		&.line {
+			stroke-width: 2px;
+		}
+		&.marker {
+			stroke-width: 0.04em;
+		}
+	}
+	> .spotlight {
+		background: map-get($colors, 'white');
+		border-radius: 15px;
+		position: absolute;
+		text-align: left;
+		overflow: hidden;
+	}
+}
 html body .introOverlay > .spotlight > * {
   position:relative;
   left:0;

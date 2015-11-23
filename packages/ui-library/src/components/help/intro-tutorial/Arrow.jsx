@@ -91,11 +91,11 @@ var Arrow = React.createClass({
         return (
             <svg>
                 <defs dangerouslySetInnerHTML={{ __html:
-                    "<marker id=\"Triangle\" viewBox=\"0 0 10 10\" refX=\"10\" " +
-                        "refY=\"5\" markerWidth=\"20\" markerHeight=\"20\" orient=\"auto\">" +
-                        "<path d=\"M 0 0 L 10 5 L 0 10\" fill=\"none\" />" +
+                    "<marker id=\"Triangle\" viewBox=\"0 0 10 10\" refX=\"7\" " +
+                        "refY=\"5\" markerWidth=\"15\" markerHeight=\"15\" orient=\"auto\">" +
+                        "<path class=\"marker\" d=\"M 0 0 L 7 5 L 0 10\" fill=\"none\" />" +
                     "</marker>" }} />
-                <path d={this.state.command} ref="focusPointer" />
+                <path className="line" d={this.state.command} ref="focusPointer" />
             </svg>);
         /* jshint ignore:end */
     }
