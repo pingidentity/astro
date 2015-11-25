@@ -25,6 +25,7 @@ var React = require("react"),
  * @param {string} [id] the data-id for the select component and label (appended with '_label')
  * (default 'form-select-field')
  * @param {string} [errorMessage] an error message (will be shown if defined)
+ * @param {boolean} [disabled] if true, the select element will be disabled
  *
  *  @example
  *                   <FormSelectField className="css classes to use on label or input-select as default"
@@ -55,14 +56,16 @@ var FormSelectField = React.createClass({
         id: React.PropTypes.string,
         selectClassName: React.PropTypes.string,
         value: React.PropTypes.string.isRequired,
-        errorMessage: React.PropTypes.string
+        errorMessage: React.PropTypes.string,
+        isDisabled: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
         return {
             noneOption: false,
             noneOptionValue: "",
-            id: "form-select-field"
+            id: "form-select-field",
+            isDisabled: false
         };
     },
 
@@ -140,7 +143,8 @@ var FormSelectField = React.createClass({
                             name={this.props.id}
                             className={this.props.selectClassName}
                             onChange={this.handleChange}
-                            value={this.state.selectedValue}>
+                            value={this.state.selectedValue}
+                            disabled={this.props.isDisabled}>
                             {options}
                         </select>
                     </div>

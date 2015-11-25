@@ -107,4 +107,28 @@ describe("FormSelectField", function () {
         var errorDiv = ReactTestUtils.findRenderedDOMComponentWithClass(component, "tooltip-text");
         expect(errorDiv.getDOMNode().textContent).toBe(errorMessage);
     });
+    
+    it("is not disabled when not specified", function () {
+        var onChange = function () {};
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormSelectField label="test label" options={{ 1: "one", 2: "two" }} onChange={onChange}
+                             value={'2'} />
+        );
+
+        var select = ReactTestUtils.findRenderedDOMComponentWithTag(component, "select");
+        expect(ReactTestUtils.isDOMComponent(select)).toBeTruthy();
+        expect(select.props.disabled).toBeFalsy();
+    });
+    
+    it("is disabled when it is specified", function () {
+        var onChange = function () {};
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormSelectField label="test label" options={{ 1: "one", 2: "two" }} onChange={onChange}
+                             isDisabled={true} value={'2'} />
+        );
+
+        var select = ReactTestUtils.findRenderedDOMComponentWithTag(component, "select");
+        expect(ReactTestUtils.isDOMComponent(select)).toBeTruthy();
+        expect(select.props.disabled).toBeTruthy();
+    });
 });
