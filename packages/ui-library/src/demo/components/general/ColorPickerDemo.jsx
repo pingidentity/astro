@@ -6,16 +6,16 @@ var ColorPickerDemo = React.createClass({
 
     getInitialState: function () {
         return {
-            visible: [false, false],
+            expanded: [false, false],
             color: ["#fff", "#000"]
         };
     },
 
     _handleToggle: function (i) {
-        var visible = _.clone(this.state.visible);
-        visible[i] = !visible[i];
+        var expanded = _.clone(this.state.expanded);
+        expanded[i] = !expanded[i];
 
-        this.setState({ visible: visible });
+        this.setState({ expanded: expanded });
     },
 
     _handleChange: function (i, color) {
@@ -28,16 +28,21 @@ var ColorPickerDemo = React.createClass({
     render: function () {
         return (
             <div>
-                <ColorPicker
-                    visible={this.state.visible[0]}
-                    color={this.state.color[0]}
-                    onChange={this._handleChange.bind(this, 0)}
-                    onToggle={this._handleToggle.bind(this, 0)} />
-                <ColorPicker
-                    visible={this.state.visible[1]}
-                    color={this.state.color[1]}
-                    onChange={this._handleChange.bind(this, 1)}
-                    onToggle={this._handleToggle.bind(this, 1)} />
+                <div>
+                    <ColorPicker
+                        unmanaged={true}
+                        labelText="Externally Managed"
+                        expanded={this.state.expanded[0]}
+                        color={this.state.color[0]}
+                        onChange={this._handleChange.bind(this, 0)}
+                        onToggle={this._handleToggle.bind(this, 0)} />
+                </div>
+                <div>
+                    <ColorPicker
+                        labelText="Internally Managed"
+                        color={this.state.color[1]}
+                        onChange={this._handleChange.bind(this, 1)} />
+                </div>
             </div>);
     }
 });
