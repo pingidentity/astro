@@ -1,6 +1,4 @@
-var React = require("react/addons"),
-    cx = require("classnames"),
-    _ = require("underscore");
+var React = require("react/addons");
 
 /**
  * @module RockerButton
@@ -37,13 +35,14 @@ var RockerButton = React.createClass({
      * On rocker change
      *
      * @private
-     * @param {label} label of text selected
+     * @param {string} label text label of the selected item
+     * @param {number} index index of the selected item
      */
-    _onSelectionChange: function (label) {
-        this.setState({ selection: label });
-        this.props.onChange(label);
+    _onSelectionChange: function (label, index) {
+        this.setState({ selection: label, index: index });
+        this.props.onChange(label, index);
     },
-    
+
     componentWillReceiveProps: function (nextProps) {
         if (nextProps.labels && (nextProps.labels.length < 2 || nextProps.labels.length > 4)) {
             console.warn("RockerButton expecting two to four labels, but was given ", nextProps.labels.length);
@@ -55,44 +54,33 @@ var RockerButton = React.createClass({
             id: "rocker-button"
         };
     },
-    
+
     getInitialState: function () {
         return {
-            selection: (this.props.labels.length > 0) ? (this.props.selected || this.props.labels[0]) : ""
+            selection: this.props.selected || this.props.labels[0],
+            index: this.props.selected ? this.props.labels.indexOf(this.props.selected) : 0
         };
     },
 
     render: function () {
-        
-        var self = this,
-            buttonNodes =
-                _.map(this.props.labels, function (key) {
-                    var onChange = _.partial(self._onSelectionChange, key);
-
-                    return (
-                        <label data-id={key} onClick={onChange} key={key}>{key}</label>
-                    );
-                }),
-            selectionIndex = _.indexOf(this.props.labels, this.state.selection);
-
-        var containerCss = cx({
-            "rocker-button": true,
-            "sel-0": selectionIndex === 0,
-            "sel-1": selectionIndex === 1,
-            "sel-2": selectionIndex === 2,
-            "sel-3": selectionIndex === 3
-        });
+        var className = "rocker-button sel-" + this.state.index;
         if (this.props.className) {
-            containerCss = containerCss + " " + this.props.className;
+            className = className + " " + this.props.className;
         }
 
         return (
             <div data-id={this.props.id}
-                 className={containerCss}>
-                    {buttonNodes}
-                    <span className="slide"></span>
-            </div>
-        );
+                className={className}>
+                {
+                    this.props.labels.map(function (text, index) {
+                        return (
+                            <label data-id={text}
+                                onClick={this._onSelectionChange.bind(this, text, index)}
+                                key={text}>{text}</label>);
+                    }.bind(this))
+                }
+                <span className="slide"></span>
+            </div>);
     }
 });
 

@@ -20,6 +20,9 @@ var React = require("react"),
  * @param {string} [labelText] the text to show as the field's label
  * @param {string} [placeholder] input placeholder text
  * @param {function} [onValueChange] a callback that will be triggered when the field changes
+ * @param {function} [onChange] a callback that will be triggered when the field changes.  Only difference
+ *   between this prop and onValueChange is that this will return the actual value of text field as
+ *   opposed to the event object.
  * @param {function} [onBlur] a callback that will be triggered when the field loses focus
  * @param {string} [mode] how the field will be shown: edit or readonly (default edit)
  * @param {number} [maxLength] max length (number) supported by the field
@@ -73,6 +76,8 @@ var FormTextArea = React.createClass({
     _handleFieldChange: function (e) {
         // return the event to the parent so it can perform whatever operations it needs
         this.props.onValueChange(e);
+        this.props.onChange(e.target.value);
+
         // set the internal state to reflect the new value
         this.setState({
             fieldValue: e.target.value
@@ -116,12 +121,9 @@ var FormTextArea = React.createClass({
             defaultValue: "",
             labelText: "",
             useAutocomplete: false,
-            onValueChange: function () {
-                // do nothing as the default action
-            },
-            onBlur: function () {
-                // do nothing as the default action
-            }
+            onChange: _.noop,
+            onValueChange: _.noop,
+            onBlur: _.noop
         };
     },
 

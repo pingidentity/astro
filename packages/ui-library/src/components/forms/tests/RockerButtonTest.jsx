@@ -5,7 +5,7 @@ jest.dontMock("../RockerButton.jsx");
 jest.dontMock("underscore");
 
 describe("RockerButton", function () {
-    
+
     var React = require("react/addons"),
         ReactTestUtils = React.addons.TestUtils,
         RockerButton = require("../RockerButton.jsx");
@@ -26,16 +26,16 @@ describe("RockerButton", function () {
         ReactTestUtils.Simulate.click(labels[1], {});
 
         // verify label, make sure callback was triggered for Groups
-        expect(callback).toBeCalledWith("Groups");
-        
+        expect(callback).toBeCalledWith("Groups", 1);
+
         ReactTestUtils.Simulate.click(labels[0], {});
 
         // verify label, make sure callback was triggered for Profile
-        expect(callback).toBeCalledWith("Profile");
-        
+        expect(callback).toBeCalledWith("Profile", 0);
+
         ReactTestUtils.Simulate.click(labels[2], {});
 
         // verify label, make sure callback was triggered for Services
-        expect(callback).toBeCalledWith("Services");
+        expect(callback).toBeCalledWith("Services", 2);
     });
 });
