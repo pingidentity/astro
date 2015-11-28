@@ -87,6 +87,15 @@ describe("FileUpload", function () {
             expect(errorFn).not.toBeCalled();
         });
 
+        it("shows default Image before something is uploaded", function () {
+            var logo = "https://www.pingidentity.com/etc/designs/pic/clientlibs-all/logos/PingIdentity_logo.png";
+            var component = ReactTestUtils.renderIntoDocument(
+                <FileUpload showThumbnail={true} defaultImage={logo} buttonText="upload" removeFileLabel="remove" />);
+            var preview = React.findDOMNode(component.refs.imageThumb);
+
+            expect(preview.getAttribute("src")).toBe(logo);
+        });
+
         it("will generate an error when file size is more than the maximum size.", function () {
             var fileInputDOMComponent = TestUtils.findRenderedDOMComponentWithDataId(componentWithValidation,
                                             "testFileUpload_input").getDOMNode();

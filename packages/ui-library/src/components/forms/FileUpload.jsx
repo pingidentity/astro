@@ -3,6 +3,13 @@ var _ = require("underscore");
 var Utils = require("../../util/Utils");
 var css = require("classnames");
 
+/** @enum {string}
+ */
+var Accept = {
+    IMAGE: "image/jpeg, image/jpg, image/gif, image/png",
+    TEXT: "text/html, text/*"
+};
+
 /**
  * @module components/forms/FileUpload
  *
@@ -27,7 +34,8 @@ var css = require("classnames");
  * @param {number} maxFileSizeKb the maximum size (in KB) of the uploaded file (default 5MB)
  * @param {string} [filesAcceptedMsg] text describing the accepted file types
  * @param {string} referenceName name attribute for the <input>
- * @param {boolean} [showThumbnail] controls whether a thumbnail is shown if an image file is selected
+ * @param {boolean} [showThumbnail=false] controls whether a thumbnail is shown if an image file is selected
+ * @param {string} [defaultImage] the url for the default image to use
  * @param {function} onFileChange callback that handles the file selection event
  * @param {boolean} isFileSelected whether or not a file has been selected for this component.  Useful for changing
  *         the button text and displaying the remove link even when the uploaded file name is not available
@@ -56,7 +64,8 @@ var FileUpload = React.createClass({
         removeFileLabel: React.PropTypes.string.isRequired,
         validator: React.PropTypes.func,
         onPreviewReady: React.PropTypes.func,
-        errorHandler: React.PropTypes.func
+        errorHandler: React.PropTypes.func,
+        defaultImage: React.PropTypes.string
     },
 
     /*
@@ -198,15 +207,22 @@ var FileUpload = React.createClass({
     },
 
     componentWillReceiveProps: function (next) {
+        var state = {};
+
         // if file selection managed externally, reset thumbnails and state
         if (this.props.isFileSelected && !_.isUndefined(next.isFileSelected) && !next.isFileSelected) {
-            this.setState({ fileName: "", thumbnailSrc: "" });
+            state = { fileName: "", thumbnailSrc: "" };
         }
+        if (next.defaultImage !== this.props.defaultImage && !this.state.thumbnailSrc) {
+            state.thumbnailSrc = next.defaultImage;
+        }
+
+        this.setState(state);
     },
 
     getDefaultProps: function () {
         return {
-            accept: "image/jpeg,image/jpg,image/gif,image/png",  // comma-separated MIME types
+            accept: Accept.IMAGE,
             showThumbnail: false
         };
     },
@@ -215,7 +231,7 @@ var FileUpload = React.createClass({
         return {
             errorMessage: "",
             fileName: "",
-            thumbnailSrc: ""
+            thumbnailSrc: this.props.defaultImage
         };
     },
 
@@ -287,4 +303,5 @@ var FileUpload = React.createClass({
     }
 });
 
+FileUpload.Accept = Accept;
 module.exports = FileUpload;

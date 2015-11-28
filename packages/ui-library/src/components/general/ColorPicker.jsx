@@ -2,7 +2,7 @@
 
 var React = require("react"),
     Picker = require("react-colorpicker"),
-    HelpHint = require("../tooltips/HelpHint.jsx");
+    FormLabel = require("../forms/FormLabel.jsx");
 
 /** @class ColorPicker
  * @desc A wrapper around react-color picker which allows you to pick a color and displays a swatch and hex code
@@ -11,6 +11,8 @@ var React = require("react"),
  * @param {function} onToggle - A callback executed when the user expands/collapses the color picker
  * @param {bool} expanded - A boolean which determines when the color picker is expanded
  * @param {number} [swatchSize=18] - The dims in pixels of the swatch
+ * @param {string} [labelText] - A label to render over the color picker
+ * @param {string} [hintText] - If a label is provided, a hint text may also be optionally provided
  * @param {string} [id] - Set the data-id on the top level html element
  * @param {string} [className] - Append classname to the top level html element
  * @param {bool} [controlled] - A boolean to enable the component to be externally managed.  True will relinquish
@@ -37,7 +39,9 @@ var ControlledColorPicker = React.createClass({
         swatchSize: React.PropTypes.number,
         id: React.PropTypes.string,
         classname: React.PropTypes.string,
-        defaultColor: React.PropTypes.string
+        defaultColor: React.PropTypes.string,
+        labelText: React.PropTypes.string,
+        hintText: React.PropTypes.string
     },
 
     getDefaultProps: function () {
@@ -91,16 +95,6 @@ var ControlledColorPicker = React.createClass({
         }
     },
 
-    _getLabel: function () {
-        return (
-            <label>
-                <span className="label-text">
-                    { this.props.labelText }
-                    { this.props.hintText ? <HelpHint hintText={this.props.hintText} /> : null }
-                </span>
-            </label>);
-    },
-
     /* There were performance issues with having many of these components on the screen causing eachother to re-render */
     shouldComponentUpdate: function (nextProps) {
         return nextProps.color !== this.props.color || nextProps.expanded !== this.props.expanded;
@@ -133,7 +127,7 @@ var ControlledColorPicker = React.createClass({
         return (
             <div>
                 <div>
-                { this.props.labelText && this._getLabel() }
+                    <FormLabel value={this.props.labelText} hint={this.props.hintText} />
                 </div>
                 <div ref="container"
                     className={"input-color-picker inline " + (this.props.className || "")}

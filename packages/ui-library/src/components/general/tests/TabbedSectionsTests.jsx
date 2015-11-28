@@ -22,7 +22,7 @@ describe("If component", function () {
     }
 
     it("ID and classname are written to DOM", function () {
-        var component = getComponent({ active: 1, id: "myId", className: "myClassName" });
+        var component = getComponent({ active: 0, id: "myId", className: "myClassName" });
         var node = React.findDOMNode(component);
 
         expect(node.getAttribute("class").match("myClassName")).toBeTruthy();
@@ -30,15 +30,26 @@ describe("If component", function () {
     });
 
     it("Highlights active tab", function () {
-        var component = getComponent({ active: 0 });
+        var component = getComponent({ active: -1 });
         var tabs = React.findDOMNode(component.refs.tabs);
         var content = React.findDOMNode(component.refs.content);
         var before = tabs.childNodes[0].outerHTML;
 
         //expect that after setting tab 1 as active, something should change
-        component.setProps({ active: 1 });
+        component.setProps({ active: 0 });
 
         expect(before).not.toBe(tabs.childNodes[0].outerHTML);
         expect(content.textContent).toBe("section 1");
+    });
+
+    it("Renders hidden", function () {
+        var component = getComponent({ renderHidden: true, active: 0 });
+        var node = React.findDOMNode(component);
+        var content = React.findDOMNode(component.refs.content);
+
+        expect(node.innerHTML.match("section 1")).toBeTruthy();
+        expect(node.innerHTML.match("section 2")).toBeTruthy();
+        expect(content.childNodes[0].style.display).toBe("");
+        expect(content.childNodes[1].style.display).toBe("none");
     });
 });

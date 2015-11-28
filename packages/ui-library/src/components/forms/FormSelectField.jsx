@@ -55,7 +55,10 @@ var FormSelectField = React.createClass({
         options: React.PropTypes.object.isRequired,
         id: React.PropTypes.string,
         selectClassName: React.PropTypes.string,
-        value: React.PropTypes.string.isRequired,
+        value: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.number
+        ]).isRequired,
         errorMessage: React.PropTypes.string,
         isDisabled: React.PropTypes.bool
     },
