@@ -76,6 +76,11 @@
 			&:after {
 				content: ':';
 			}
+			&.no-data {
+				&:after {
+					content: '';
+				}
+			}
 		}
 		> span {
             display: table-cell;

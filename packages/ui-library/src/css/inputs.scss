@@ -666,6 +666,9 @@ label {
 	display: block;
 	margin: 25px 0;
 	border-top: 1px solid map-get($colors, 'dolphin');
+	&.dotted {
+	    border-top-style: dotted;
+	}
 }
 .input-child {
 	margin: 0 0 0 25px;

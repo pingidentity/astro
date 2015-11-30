@@ -207,6 +207,9 @@
             line-height: 1em;
             font-size: 16px;
             top: 24px;
+			&.close-link {
+				bottom: 24px;
+			}
         }
 		.item-username {
 			font-family: $font-pn-regular;

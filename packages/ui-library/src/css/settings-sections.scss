@@ -79,8 +79,13 @@
                             content: '';
                         }
                     }
-
                 }
+            }
+        }
+        &.sub-attribute {
+            .delete-attribute {
+                position: absolute;
+                right: 20px;                
             }
         }
     }
