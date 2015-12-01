@@ -153,6 +153,11 @@ var Demo = React.createClass({
             pathToCode: "components/forms/DropDownButton.jsx"
         },
         {
+            name: "Form - I18n Phone Input",
+            demo: require("./components/forms/I18nPhoneInput/I18nPhoneInputDemo.jsx"),
+            pathToCode: "components/forms/I18nPhoneInput/I18nPhoneInput.jsx"
+        },
+        {
             name: "Calendar",
             demo: require("./components/calendars/CalendarDemo.jsx"),
             pathToCode: "components/calendars/Calendar.jsx"
