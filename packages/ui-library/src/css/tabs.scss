@@ -49,7 +49,7 @@ $selected-arrow-width-h: 8px;
                     border-style: solid;
                     z-index: 1;
                     border-color: $color-active transparent transparent transparent;
-                    bottom: $selected-arrow-offset - 3;
+                    bottom: $selected-arrow-offset - 5;
                 }
             }
         }

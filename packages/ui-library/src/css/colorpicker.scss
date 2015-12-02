@@ -25,6 +25,7 @@ $sliderPointerHeight: $sliderWidth / 4;
         margin-right: 20px;
     }
     .colors {
+        padding: 5px;
         position: relative;
         width: auto;
         display: inline-block;
@@ -35,14 +36,13 @@ $sliderPointerHeight: $sliderWidth / 4;
 
         .colors-swatch {
             position: absolute;
-            vertical-align: middle;
             background-position: -80px 0;
             cursor: text;
             padding: 0;
             margin: 0;
             display: inline-block;
-            top: 5px;
-            left: 5px;
+            top: 11px;
+            left: 10px;
             width: 18px;
             height: 18px;
             @include border-radius(4px);
@@ -63,11 +63,10 @@ $sliderPointerHeight: $sliderWidth / 4;
             }
         }
         .colors-input {
-            height: 23px;
+            height: 30px;
             width: 95px;
             display: inline-block;
             padding: 0 10px 0 30px;
-            margin-bottom: 5px;
             border: none;
             text-transform: uppercase;
         }
@@ -76,13 +75,11 @@ $sliderPointerHeight: $sliderWidth / 4;
             font-family: "iconfont";
             font-size: 12px;
             text-transform: none;
-            right: 10px;
-            top: 12px;
             color: $color-input-text;
             pointer-events: none;
         }
         &.colors-focus {
-            border: 1px solid map-get($colors, 'stone');
+            //border: 1px solid map-get($colors, 'stone');
             border-bottom: none;
             &:after {
                 @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
