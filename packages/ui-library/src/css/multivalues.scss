@@ -1,0 +1,105 @@
+.input-multivalues {
+	position: relative;
+	display: inline-block;
+	width: 350px;
+	height: 200px;
+	background-color: $color-input-fill;
+	font-size: 16px;
+	text-transform: none;
+	cursor: text;
+	margin: 0;
+	overflow: scroll;
+	padding-right: 10px;
+	border: 10px solid $color-input-fill;
+	border-right: none;
+	.clear {
+		font-family: $icon-font;
+		font-size: 10px;
+		position: absolute;
+		top: 28px;
+		right: 26px;
+		color: $color-input-text;
+	}
+	.entries {
+		@include box-sizing(border-box);
+		z-index: 10;
+	    display: block;
+		min-height: 36px;
+	    outline: none;
+	    overflow: hidden;
+	    position: relative;
+	    width: 100%;
+		padding-right: 10px;
+		.entry {
+			@include box-sizing(border-box);
+			border: 1px solid $color-input-border;
+			background: $color-white;
+			max-width: 100%;
+			display: inline-block;
+			font-size: 0.9em;
+			margin: 5px;
+			vertical-align: top;
+			padding: 5px 20px 5px 5px;
+			text-transform: none;
+			@include border-radius(4px);
+			.delete {
+				color: $color-input-text;
+				font-size: 11px;
+				position: absolute;
+				top: 5px;
+				right: 7px;
+			}
+			span{
+				max-width: 100%;
+				text-overflow: ellipsis;
+				display: block;
+				overflow: hidden;
+				}
+		}
+		[draggable]{
+			cursor: grab;
+			cursor: -webkit-grab;
+			cursor: -moz-grab;
+			&:active{
+				cursor: grabbing;
+				cursor: -webkit-grabbing;
+				cursor: -moz-grabbing;
+			}
+		}
+
+		.placeholder {
+			background: #2996cc;
+			width: 5px;
+			height: 36px;
+			display: inline-block;
+		}
+
+		.value-input {
+			display: inline-block;
+			outline: none;
+			vertical-align: middle;
+			padding: 0;
+			max-width: 100%;
+			input {
+				width:auto;
+				width: 1em;
+				max-width: 100%;
+				color: $color-input-text;
+				box-sizing: content-box;
+				background: none transparent;
+			    border: 0 none;
+			    box-shadow: none;
+			    cursor: default;
+			    display: inline-block;
+			    font-family: inherit;
+			    font-size: inherit;
+			    height: 34px;
+			    margin: 0;
+			    outline: none;
+			    padding: 0;
+			    -webkit-appearance: none;
+				margin-left: 5px;
+			}
+		}
+	}
+}

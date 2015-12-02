@@ -163,6 +163,11 @@ var Demo = React.createClass({
             pathToCode: "components/forms/Multiselect.jsx"
         },
         {
+            name: "Multivalues",
+            demo: require("./components/forms/MultivaluesDemo.jsx"),
+            pathToCode: "components/forms/Multivalues.jsx"
+        },
+        {
             name: "Cache",
             demo: require("./net/CacheDemo.jsx"),
             pathToCode: "components/net/Cache.js"
