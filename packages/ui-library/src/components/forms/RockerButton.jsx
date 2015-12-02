@@ -54,7 +54,8 @@ var ControlledRockerButton = React.createClass({
 
     getDefaultProps: function () {
         return {
-            onChange: _.noop
+            onChange: _.noop,
+            id: "rocker-button"
         };
     },
 
