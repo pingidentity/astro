@@ -1,4 +1,5 @@
-var React = require("react/addons");
+var React = require("react/addons"),
+    _ = require("underscore");
 
 /**
  * @module RockerButton
@@ -6,9 +7,15 @@ var React = require("react/addons");
  * @desc Rocker buttons implementation, supports 2 to 4 buttons (current CSS restriction)
  *
  * @param {string} labels - array of string labels to use as button titles
- * @param {function} onChange - function (selectedLabel) {...} delegate to call when selection changed.
- * @param {string} id - optional id to pass
- * @param {string} className - optional class to pass
+ * @param {number} [selectedIndex] - The index of the selectedIndex label
+ * @param {string} [selected] - The text value of item to select initially.  Not this property is only valid if controlled
+ *   is not true.  Controlled components must use selectedIndex
+ * @param {function} [onChange] - function (selectedLabel) {...} delegate to call when selection changed.
+ * @param {string} [id] - optional id to pass
+ * @param {string} [className[ - optional class to pass
+ * @param {bool} [controlled] - A boolean to enable the component to be externally managed.  True will relinquish
+ *   control to the component's owner.  False or not specified will cause the component to manage state internally
+ *   but still execute the onChange callback in case the owner is interested.
  *
  * @example
  *
@@ -21,26 +28,22 @@ var React = require("react/addons");
  *          console.log("++ _changeSubview: ",selectedView);
  *      }
  */
-var RockerButton = React.createClass({
+module.exports = React.createClass({
+    render: function () {
+        return (
+            this.props.controlled
+                ? <ControlledRockerButton ref="rocker" {...this.props} />
+                : <ManagedRockerButton ref="manager" {...this.props} />);
+    }
+});
 
+var ControlledRockerButton = React.createClass({
     propTypes: {
         labels: React.PropTypes.array.isRequired,
-        selected: React.PropTypes.string,
+        selectedIndex: React.PropTypes.number,
         onChange: React.PropTypes.func,
         id: React.PropTypes.string,
         className: React.PropTypes.string
-    },
-
-    /**
-     * On rocker change
-     *
-     * @private
-     * @param {string} label text label of the selected item
-     * @param {number} index index of the selected item
-     */
-    _onSelectionChange: function (label, index) {
-        this.setState({ selection: label, index: index });
-        this.props.onChange(label, index);
     },
 
     componentWillReceiveProps: function (nextProps) {
@@ -51,31 +54,28 @@ var RockerButton = React.createClass({
 
     getDefaultProps: function () {
         return {
-            id: "rocker-button"
+            onChange: _.noop
         };
     },
 
-    getInitialState: function () {
-        return {
-            selection: this.props.selected || this.props.labels[0],
-            index: this.props.selected ? this.props.labels.indexOf(this.props.selected) : 0
-        };
+    //dont expose the event
+    _handleChange: function (text, index) {
+        this.props.onChange(text, index);
     },
 
     render: function () {
-        var className = "rocker-button sel-" + this.state.index;
+        var className = "rocker-button sel-" + this.props.selectedIndex;
         if (this.props.className) {
             className = className + " " + this.props.className;
         }
 
         return (
-            <div data-id={this.props.id}
-                className={className}>
+            <div ref="container" data-id={this.props.id} className={className}>
                 {
                     this.props.labels.map(function (text, index) {
                         return (
                             <label data-id={text}
-                                onClick={this._onSelectionChange.bind(this, text, index)}
+                                onClick={this._handleChange.bind(this, text, index)}
                                 key={text}>{text}</label>);
                     }.bind(this))
                 }
@@ -84,4 +84,25 @@ var RockerButton = React.createClass({
     }
 });
 
-module.exports = RockerButton;
+var ManagedRockerButton = React.createClass({
+    getInitialState: function () {
+        return {
+            index: typeof(this.props.selectedIndex) === "number"
+                ? this.props.selectedIndex
+                : Math.max(0, this.props.labels.indexOf(this.props.selected))
+        };
+    },
+
+    _handleChange: function (label, index) {
+        this.props.onChange(label, index);
+        this.setState({
+            index: index
+        });
+    },
+
+    render: function () {
+        return (<ControlledRockerButton ref="rocker" {...this.props}
+            selectedIndex={this.state.index}
+            onChange={this._handleChange} />);
+    }
+});
