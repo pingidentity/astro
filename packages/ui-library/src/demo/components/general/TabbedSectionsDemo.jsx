@@ -4,17 +4,17 @@ var TabbedSections = require("./../../../components/general/TabbedSections.jsx")
 var TabbedSectionsDemo = React.createClass({
     _handleSectionChange: function (index) {
         this.setState({
-            active: index
+            selectedIndex: index
         });
     },
 
     getInitialState: function () {
-        return { active: -1 };
+        return { selectedIndex: -1 };
     },
 
     render: function () {
         return (
-            <TabbedSections active={this.state.active} onSectionChange={this._handleSectionChange} >
+            <TabbedSections selectedIndex={this.state.selectedIndex} onSectionChange={this._handleSectionChange} >
                 <div title="Section 1">
                     <span>This is the content of section 1</span>
                 </div>

@@ -12,7 +12,7 @@ var React = require("react/addons"),
  *   is not true.  Controlled components must use selectedIndex
  * @param {function} [onChange] - function (selectedLabel) {...} delegate to call when selection changed.
  * @param {string} [id] - optional id to pass
- * @param {string} [className[ - optional class to pass
+ * @param {string} [className] - optional class to pass
  * @param {bool} [controlled] - A boolean to enable the component to be externally managed.  True will relinquish
  *   control to the component's owner.  False or not specified will cause the component to manage state internally
  *   but still execute the onChange callback in case the owner is interested.

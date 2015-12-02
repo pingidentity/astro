@@ -11,7 +11,7 @@ describe("If component", function () {
     function getComponent (opts) {
         opts = _.defaults(opts, {
             onSectionChange: jest.genMockFunction(),
-            active: -1
+            selectedIndex: -1
         });
 
         return ReactTestUtils.renderIntoDocument(
@@ -22,28 +22,28 @@ describe("If component", function () {
     }
 
     it("ID and classname are written to DOM", function () {
-        var component = getComponent({ active: 0, id: "myId", className: "myClassName" });
+        var component = getComponent({ selectedIndex: 0, id: "myId", className: "myClassName" });
         var node = React.findDOMNode(component);
 
         expect(node.getAttribute("class").match("myClassName")).toBeTruthy();
         expect(node.getAttribute("data-id")).toBe("myId");
     });
 
-    it("Highlights active tab", function () {
-        var component = getComponent({ active: -1 });
+    it("Highlights selectedIndex tab", function () {
+        var component = getComponent({ selectedIndex: -1 });
         var tabs = React.findDOMNode(component.refs.tabs);
         var content = React.findDOMNode(component.refs.content);
         var before = tabs.childNodes[0].outerHTML;
 
-        //expect that after setting tab 1 as active, something should change
-        component.setProps({ active: 0 });
+        //expect that after setting tab 1 as selectedIndex, something should change
+        component.setProps({ selectedIndex: 0 });
 
         expect(before).not.toBe(tabs.childNodes[0].outerHTML);
         expect(content.textContent).toBe("section 1");
     });
 
     it("Renders hidden", function () {
-        var component = getComponent({ renderHidden: true, active: 0 });
+        var component = getComponent({ renderHidden: true, selectedIndex: 0 });
         var node = React.findDOMNode(component);
         var content = React.findDOMNode(component.refs.content);
 
