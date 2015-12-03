@@ -6,23 +6,20 @@ var ColorPickerDemo = React.createClass({
 
     getInitialState: function () {
         return {
-            expanded: [false, false],
-            color: ["#fff", "#000"]
+            expanded: true,
+            colors: ["#fff", "#000"]
         };
     },
 
-    _handleToggle: function (i) {
-        var expanded = _.clone(this.state.expanded);
-        expanded[i] = !expanded[i];
-
-        this.setState({ expanded: expanded });
+    _handleToggle: function () {
+        this.setState({ expanded: !this.state.expanded });
     },
 
     _handleChange: function (i, color) {
-        var clone = _.clone(this.state.color);
-        clone[i] = color.toHex();
+        var colors = _.clone(this.state.colors);
+        colors[i] = color;
 
-        this.setState({ color: clone });
+        this.setState({ colors: colors });
     },
 
     render: function () {
@@ -30,18 +27,17 @@ var ColorPickerDemo = React.createClass({
             <div>
                 <div>
                     <ColorPicker
-                        unmanaged={true}
+                        controlled={true}
                         labelText="Externally Managed"
-                        expanded={this.state.expanded[0]}
-                        color={this.state.color[0]}
-                        onChange={this._handleChange.bind(this, 0)}
-                        onToggle={this._handleToggle.bind(this, 0)} />
+                        expanded={this.state.expanded}
+                        color={this.state.colors[0]}
+                        onChange={this._handleChange.bind(null, 0)}
+                        onToggle={this._handleToggle} />
                 </div>
                 <div>
-                    <ColorPicker
-                        labelText="Internally Managed"
-                        color={this.state.color[1]}
-                        onChange={this._handleChange.bind(this, 1)} />
+                    <ColorPicker labelText="Internally Managed"
+                        onChange={this._handleChange.bind(null, 1)}
+                        color={this.state.colors[1]} />
                 </div>
             </div>);
     }
