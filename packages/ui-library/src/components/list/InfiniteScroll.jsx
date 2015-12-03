@@ -240,7 +240,7 @@ var InfiniteScroll = React.createClass({
             return (<div ref="container">{this.props.children}</div>);
         }
 
-        var props = this.attachToWindow ? {} : {
+        var props = this.props.attachToWindow ? {} : {
             style: _.defaults({
                 overflow: "auto",
                 height: "100%"
