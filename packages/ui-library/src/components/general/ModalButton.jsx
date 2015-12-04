@@ -11,9 +11,9 @@ var css = require("classnames");
  * Child components of the modal are rendered as the modal content.
  *
  * Configurable props:
- * @param {string} [id] Id of the modal and activation button.  Modal will have the id "{id}-modal"
- *     and the activation button will have the id "{id}-button".  If id is not present then
- *     no id will be set on the html elements.
+ * @param {string} [id] data-id of the modal and activation button.  Modal will have the data-id "{id}-modal"
+ *     and the activation button will have the data-id "{id}-button".  If id is not present then
+ *     no data-id will be set on the html elements.
  * @param {string} value Button text label.
  * @param {string} modalTitle Title of the modal.
  * @param {function} [modalBody] Alternative modal body content.  If provided then this function
@@ -191,16 +191,16 @@ var ModalButton = React.createClass({
             } else {
                 linkContent = this.props.linkContent;
             }
-            activator = (<span className={this.props.linkStyle}
-                              onClick={this._open}
-                              disabled={this.props.disabled}>{linkContent}</span>);
+            activator = (<span data-id={buttonId}
+                               className={this.props.linkStyle}
+                               onClick={this._open}
+                               disabled={this.props.disabled}>{linkContent}</span>);
         } else if (this.props.value) {
-            activator = (<button id={buttonId}
-                                data-id="add-user"
-                                className={this.props.buttonStyle || "default"}
-                                onClick={this._open}
-                                title={this.props.value}
-                                disabled={this.props.disabled}>{this.props.value}</button>);
+            activator = (<button data-id={buttonId}
+                                 className={this.props.buttonStyle || "default"}
+                                 onClick={this._open}
+                                 title={this.props.value}
+                                 disabled={this.props.disabled}>{this.props.value}</button>);
         }
 
         if (this.props.activatorContainerStyle) {
@@ -245,7 +245,7 @@ var ModalButton = React.createClass({
 
         if (this._isExpanded()) {
             var modal = (
-                <div id={modalId} className={modalClasses} data-id="add-user-modal">
+                <div data-id={modalId} className={modalClasses}>
                     {this.props.showHeader &&
                         <div className="modal-header">
                             {this.props.modalTitle}

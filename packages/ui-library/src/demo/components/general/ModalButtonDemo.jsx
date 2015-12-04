@@ -12,6 +12,7 @@ var ModalButtonDemo = React.createClass({
             <div>
                 <div className="input-row">
                     <ModalButton
+                        id="default-example"
                         value="Open Default Modal"
                         modalTitle="Default Modal">
 

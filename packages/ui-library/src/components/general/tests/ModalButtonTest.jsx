@@ -1,10 +1,12 @@
 
+jest.dontMock("../../../testutil/TestUtils");
 jest.dontMock("../ModalButton.jsx");
 
 
 describe("ModalButtonTest", function () {
     var React = require("react/addons");
     var ReactTestUtils = React.addons.TestUtils;
+    var TestUtils = require("../../../testutil/TestUtils");
     var ModalButton = require("../ModalButton.jsx");
 
     var linkCallback = function () {
@@ -23,6 +25,41 @@ describe("ModalButtonTest", function () {
         // Expect no modal to be rendered.
         var modals = ReactTestUtils.scryRenderedDOMComponentsWithClass(modalComponent, "modal");
         expect(modals.length).toEqual(0);
+    });
+
+    it("Button and modal don't render data-ids if not provided", function () {
+        var modalComponent = ReactTestUtils.renderIntoDocument(
+            <ModalButton value="My Button" buttonStyle="buttonClass" />
+        );
+
+        // Try to get the button by data-id. It shouldn't be there.
+        var button = TestUtils.findRenderedDOMComponentWithDataId(modalComponent, "-button");
+        expect(ReactTestUtils.isDOMComponent(button)).toBeFalsy();
+
+        button = ReactTestUtils.findRenderedDOMComponentWithClass(modalComponent, "buttonClass");
+        expect(button.getDOMNode().textContent).toBe("My Button");
+
+        ReactTestUtils.Simulate.click(button);
+
+        // Try to get the modal by data-id. It shouldn't be there.
+        var modal = TestUtils.findRenderedDOMComponentWithDataId(modalComponent, "-modal");
+        expect(ReactTestUtils.isDOMComponent(modal)).toBeFalsy();
+    });
+
+    it("Button and modal render data-ids if provided", function () {
+        var modalComponent = ReactTestUtils.renderIntoDocument(
+            <ModalButton id="my-button" value="My Button" buttonStyle="buttonClass" />
+        );
+
+        // Get the button by data-id.
+        var button = TestUtils.findRenderedDOMComponentWithDataId(modalComponent, "my-button-button");
+        expect(button.getDOMNode().textContent).toBe("My Button");
+
+        ReactTestUtils.Simulate.click(button);
+
+        // Get the modal by data-id.
+        var modal = TestUtils.findRenderedDOMComponentWithDataId(modalComponent, "my-button-modal");
+        expect(ReactTestUtils.isDOMComponent(modal)).toBeTruthy();
     });
 
     /*
