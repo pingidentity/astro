@@ -91,7 +91,7 @@ var I18nPhoneInput = React.createClass({
             var styles = cx("iti-flag", item.iso2);
 
             return (
-                <li key={item.is} className="country" onClick={this._onCountryClick.bind(this, item)}>
+                <li key={item.iso2} className="country" onClick={this._onCountryClick.bind(this, item)}>
                     <div className="flag">
                         <div className={styles}></div>
                     </div>
