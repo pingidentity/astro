@@ -32,10 +32,13 @@ var React = require("react"),
  * @param {string} id - it is used for a unique data-id.
  *
  * @example
- *        <ExpandableRow
- *          title={'my title'}
- *          subtitle={'my subtitle'}
- *          content={contentObject} />
+ *        <h1>My Row Results</h1>
+ *        <!-- note that all expanding rows must be in a div with the "result-set" css class -->
+ *        <div className="result-set">
+ *            <ExpandableRow title={'row1'} subtitle={'row1 subtitle'} content={row1Content} />
+ *            <ExpandableRow title={'row2'} subtitle={'row2 subtitle'} content={row2Content} />
+ *            <ExpandableRow title={'row3'} subtitle={'row3 subtitle'} content={row3Content} />
+ *        </div>
  *
  *  You can also pass the content as a children of the component. This will overwrite any content passed in as a prop
  *      <ExpandableRow title={titleJsx} subtitle={subtitleJsx}>
@@ -140,31 +143,29 @@ var ExpandableRow = React.createClass({
         }
 
         return (
-            <div className="result-set">
-                <div data-id={this.props.id} className={css(containerCss)}>
-                    <div className="collapsed-content">
-                        <div className={css(titleCss)}>
-                            {this.props.title}
-                        </div>
-                        {this.props.subtitle
-                            ? <div className="item-sub-title">{this.props.subtitle}</div>
-                            : null
-                        }
+            <div data-id={this.props.id} className={css(containerCss)}>
+                <div className="collapsed-content">
+                    <div className={css(titleCss)}>
+                        {this.props.title}
                     </div>
-                    {
-                        this.state.isExpanded
-                            ? <div data-id="expanded-row" className="expanded-content clearfix">
-                                {this.props.children || this.props.content}
-                                {editButton}
-                                {deleteButton}
-                            </div>
+                    {this.props.subtitle
+                        ? <div className="item-sub-title">{this.props.subtitle}</div>
                         : null
                     }
-                    <a data-id="expand-btn"
-                        className="expand-btn"
-                        onClick={this._handleExpandButtonClick}>
-                    </a>
                 </div>
+                {
+                    this.state.isExpanded
+                        ? <div data-id="expanded-row" className="expanded-content clearfix">
+                            {this.props.children || this.props.content}
+                            {editButton}
+                            {deleteButton}
+                        </div>
+                    : null
+                }
+                <a data-id="expand-btn"
+                    className="expand-btn"
+                    onClick={this._handleExpandButtonClick}>
+                </a>
             </div>
         );
     }

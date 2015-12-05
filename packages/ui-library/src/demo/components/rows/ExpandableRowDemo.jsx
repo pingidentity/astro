@@ -6,7 +6,7 @@ var ExpandableRowDemo = React.createClass({
     render: function () {
 
         return (
-            <div data-id="idp-row">
+            <div data-id="idp-row" className="result-set">
                 <ExpandableRow
                     titleStyle="name"
                     editModalTitle="Modal Title"
