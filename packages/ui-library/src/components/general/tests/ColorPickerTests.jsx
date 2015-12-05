@@ -29,6 +29,19 @@ describe("ColorPicker", function () {
         window.removeEventListener.mockClear();
     });
 
+    it("disables component if disabled=true", function () {
+        var component = getComponent({ disabled: true, controlled: false });
+        var manager = component.refs.manager;
+        var picker = manager.refs.picker;
+        var input = React.findDOMNode(picker.refs.input);
+
+        expect(input.disabled).toBeTruthy();
+
+        expect(manager.state.expanded).toBe(false);
+        manager._handleToggle();
+        expect(manager.state.expanded).toBe(false);
+    });
+
     it("accepts user typed color", function () {
         var component = getComponent({ controlled: false });
         var manager = component.refs.manager;

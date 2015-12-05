@@ -3,7 +3,6 @@ window.__DEV__ = true;
 jest.dontMock("../../../testutil/TestUtils");
 jest.dontMock("../FileUpload.jsx");
 jest.dontMock("../../../util/Utils");
-jest.dontMock("underscore");
 
 var fileMock = function (parts, filename, properties) {
     return {
@@ -14,7 +13,6 @@ var fileMock = function (parts, filename, properties) {
         type: properties.type
     };
 };
-var previewReadyHandler = jest.genMockFunction();
 
 // mocks for the HTML File API used by the component
 global.File = global.File || fileMock;
@@ -32,13 +30,11 @@ global.FileReader = function () {
 };
 
 describe("FileUpload", function () {
-    var React = require("react/addons");
-    var ReactTestUtils = React.addons.TestUtils;
-    var TestUtils = require("../../../testutil/TestUtils");
-    var FileUpload = require("../FileUpload.jsx");
-    var componentWithValidation;
-    var validatorFn;
-    var errorFn;
+    var React = require("react/addons"),
+        ReactTestUtils = React.addons.TestUtils,
+        TestUtils = require("../../../testutil/TestUtils"),
+        FileUpload = require("../FileUpload.jsx"),
+        _ = require("underscore");
 
     // helper function to generate fake image data for file size testing
     function getFakeJpegBlob (iterations) {
@@ -50,172 +46,172 @@ describe("FileUpload", function () {
         return x;
     }
 
-    describe("with validation settings set", function () {
-        beforeEach(function () {
-            validatorFn = jest.genMockFunction();
-            errorFn = jest.genMockFunction();
-            componentWithValidation = ReactTestUtils.renderIntoDocument(
-                <FileUpload
-                    accept="image/jpeg, image/jpg, image/gif, image/png"
-                    maxFileSizeKb={10}
-                    showThumbnail={true}
-                    referenceName="testFileUpload"
-                    onPreviewReady={previewReadyHandler}
-                    validator={validatorFn}
-                    buttonText="Select File"
-                    removeFileLabel="Remove File"
-                    errorHandler={errorFn}
-                />
-            );
+    function getComponent (opts) {
+        opts = _.defaults(opts || {}, {
+            accept: "image/jpeg, image/jpg, image/gif, image/png",
+            maxFileSizeKb: 10,
+            showThumbnail: true,
+            referenceName: "testFileUpload",
+            buttonText: "Select File",
+            removeFileLabel: "Remove File",
+            onPreviewReady: jest.genMockFunction(),
+            validator: jest.genMockFunction(),
+            errorHandler: jest.genMockFunction()
         });
 
-        it("will not generate an error when file size is less than the maximum size.", function () {
-            var fileInputDOMComponent = TestUtils.findRenderedDOMComponentWithDataId(componentWithValidation,
-                                            "testFileUpload_input").getDOMNode();
 
-            var fakeFile = new global.File([getFakeJpegBlob(5)], "someFile.jpeg", { type: "image/jpeg" });
+        return ReactTestUtils.renderIntoDocument(<FileUpload {...opts} />);
+    }
 
-            ReactTestUtils.Simulate.change(fileInputDOMComponent, {
-                target: {
-                    value: "someFile.jpeg",
-                    files: [fakeFile]
-                }
-            });
+    it("will not generate an error when file size is less than the maximum size.", function () {
+        var component = getComponent();
+        var fileInput = React.findDOMNode(component.refs.fileInput);
+        var fakeFile = new global.File([getFakeJpegBlob(5)], "someFile.jpeg", { type: "image/jpeg" });
 
-            // calls the validator function on change
-            expect(validatorFn).toBeCalled();
-            expect(errorFn).not.toBeCalled();
+        ReactTestUtils.Simulate.change(fileInput, {
+            target: {
+                value: "someFile.jpeg",
+                files: [fakeFile]
+            }
         });
 
-        it("shows default Image before something is uploaded", function () {
-            var logo = "https://www.pingidentity.com/etc/designs/pic/clientlibs-all/logos/PingIdentity_logo.png";
-            var component = ReactTestUtils.renderIntoDocument(
-                <FileUpload showThumbnail={true} defaultImage={logo} buttonText="upload" removeFileLabel="remove" />);
-            var preview = React.findDOMNode(component.refs.imageThumb);
+        // calls the validator function on change
+        expect(component.props.validator).toBeCalled();
+        expect(component.props.errorHandler).not.toBeCalled();
+    });
 
-            expect(preview.getAttribute("src")).toBe(logo);
+    it("shows default Image before something is uploaded", function () {
+        var logo = "https://www.pingidentity.com/etc/designs/pic/clientlibs-all/logos/PingIdentity_logo.png";
+        var component = getComponent({ defaultImage: logo });
+        var preview = React.findDOMNode(component.refs.imageThumb);
+
+        expect(preview.getAttribute("src")).toBe(logo);
+    });
+
+    it("will generate an error when file size is more than the maximum size.", function () {
+        var component = getComponent();
+        var fileInput = React.findDOMNode(component.refs.fileInput);
+
+        // fake JPEG here is 21870 bytes - the rendered component has a max file size of 10000 bytes
+        var fakeFile = new global.File([getFakeJpegBlob(7)], "someFile.jpeg", { type: "image/jpeg" });
+
+        ReactTestUtils.Simulate.change(fileInput, {
+            target: {
+                value: "someFile.jpeg",
+                files: [fakeFile]
+            }
         });
 
-        it("will generate an error when file size is more than the maximum size.", function () {
-            var fileInputDOMComponent = TestUtils.findRenderedDOMComponentWithDataId(componentWithValidation,
-                                            "testFileUpload_input").getDOMNode();
+        // calls the validator function on change
+        expect(component.props.validator).toBeCalled();
+        expect(component.props.errorHandler).toBeCalledWith("cid.users.fileUpload.error.tooBig");
+    });
 
-            // fake JPEG here is 21870 bytes - the rendered component has a max file size of 10000 bytes
-            var fakeFile = new global.File([getFakeJpegBlob(7)], "someFile.jpeg", { type: "image/jpeg" });
+    it("will set error text when file is not one of the accepted types.", function () {
+        var component = getComponent();
+        var fileInput = React.findDOMNode(component.refs.fileInput);
 
-            ReactTestUtils.Simulate.change(fileInputDOMComponent, {
-                target: {
-                    value: "someFile.jpeg",
-                    files: [fakeFile]
-                }
-            });
+        // image/bmp is not in the accepted file type array
+        var fakeFile = new global.File([getFakeJpegBlob(1)], "someFile.bmp", { type: "image/bmp" });
 
-            // calls the validator function on change
-            expect(validatorFn).toBeCalled();
-            expect(errorFn).toBeCalledWith("cid.users.fileUpload.error.tooBig");
+        ReactTestUtils.Simulate.change(fileInput, {
+            target: {
+                value: "someFile.bmp",
+                files: [fakeFile]
+            }
         });
 
-        it("will set error text when file is not one of the accepted types.", function () {
-            var fileInputDOMComponent = TestUtils.findRenderedDOMComponentWithDataId(componentWithValidation,
-                                            "testFileUpload_input").getDOMNode();
+        // calls the validator function on change
+        expect(component.props.validator).toBeCalled();
+        expect(component.props.errorHandler).toBeCalledWith("cid.users.fileUpload.error.fileType");
+    });
 
-            // image/bmp is not in the accepted file type array
-            var fakeFile = new global.File([getFakeJpegBlob(1)], "someFile.bmp", { type: "image/bmp" });
+    it("will reset the value of the file input value when the remove link is clicked.", function () {
+        var component = getComponent();
+        var fileInput = React.findDOMNode(component.refs.fileInput);
+        var removeButton = React.findDOMNode(component.refs.remove);
 
-            ReactTestUtils.Simulate.change(fileInputDOMComponent, {
-                target: {
-                    value: "someFile.bmp",
-                    files: [fakeFile]
-                }
-            });
+        fileInput.value = "someFile.png";
+        expect(fileInput.value).toEqual("someFile.png");
 
-            // calls the validator function on change
-            expect(validatorFn).toBeCalled();
-            expect(errorFn).toBeCalledWith("cid.users.fileUpload.error.fileType");
+        ReactTestUtils.Simulate.click(removeButton);
+
+        // calls the validator function on reset
+        expect(component.props.validator).toBeCalled();
+        expect(fileInput.value).toEqual("");
+    });
+
+    it("shows an error message when one is set", function () {
+        var fileUploadErrorMsg = "Please upload a valid file";
+        var component = getComponent();
+        var errorTooltip =
+            TestUtils.findRenderedDOMComponentWithDataId(component, "testFileUpload_errormessage");
+        var errorTooltipText = ReactTestUtils.findRenderedDOMComponentWithClass(errorTooltip, "tooltip-text");
+
+        // expect no error text to be rendered to begin with
+        expect(errorTooltipText.props.children).toEqual("");
+
+        // simulate an error state
+        component.setState({ errorMessage: fileUploadErrorMsg });
+
+        errorTooltip =
+            TestUtils.findRenderedDOMComponentWithDataId(component, "testFileUpload_errormessage");
+
+        // renders the error in a tooltip
+        expect(errorTooltipText.props.children).toEqual(fileUploadErrorMsg);
+
+        // simulate a valid state
+        component.setState({
+            errorMessage: ""
         });
 
-        it("will reset the value of the file input value when the remove link is clicked.", function () {
-            var inputTypeFile = ReactTestUtils.scryRenderedDOMComponentsWithTag(componentWithValidation, "input")[0];
-            var removeButton =
-                ReactTestUtils.findRenderedDOMComponentWithClass(componentWithValidation, "file-remove");
+        errorTooltip =
+            TestUtils.findRenderedDOMComponentWithDataId(component, "testFileUpload_errormessage");
 
-            inputTypeFile.getDOMNode().value = "someFile.png";
-            expect(inputTypeFile.getDOMNode().value).toEqual("someFile.png");
+        // no error is rendered
+        expect(errorTooltipText.props.children).toEqual("");
+    });
 
-            ReactTestUtils.Simulate.click(removeButton);
+    it('calls "onPreviewReady" when the image file is loaded', function () {
+        var component = getComponent();
+        var fileInput = React.findDOMNode(component.refs.fileInput);
 
-            // calls the validator function on reset
-            expect(validatorFn).toBeCalled();
-            expect(inputTypeFile.getDOMNode().value).toEqual("");
+        var fakeFile = new global.File([getFakeJpegBlob(2)], "someFile.jpeg", { type: "image/jpeg" });
+
+        ReactTestUtils.Simulate.change(fileInput, {
+            target: {
+                value: "someFile.jpeg",
+                files: [fakeFile]
+            }
         });
 
-        it("shows an error message when one is set", function () {
-            var fileUploadErrorMsg = "Please upload a valid file";
+        expect(component.props.onPreviewReady).toBeCalled();
+    });
 
-            var errorTooltip =
-                TestUtils.findRenderedDOMComponentWithDataId(componentWithValidation, "testFileUpload_errormessage");
-            var errorTooltipText = ReactTestUtils.findRenderedDOMComponentWithClass(errorTooltip, "tooltip-text");
+    it("will not respond to actions while disabled", function () {
+        var component = getComponent({ disabled: true });
+        var fileInput = React.findDOMNode(component.refs.fileInput);
+        var removeButton = React.findDOMNode(component.refs.remove);
 
-            // expect no error text to be rendered to begin with
-            expect(errorTooltipText.props.children).toEqual("");
+        expect(fileInput.disabled).toBeTruthy();
 
-            // simulate an error state
-            componentWithValidation.setState({
-                errorMessage: fileUploadErrorMsg
-            });
+        fileInput.value = "someFile.png";
+        ReactTestUtils.Simulate.click(removeButton);
 
-            errorTooltip =
-                TestUtils.findRenderedDOMComponentWithDataId(componentWithValidation, "testFileUpload_errormessage");
-
-            // renders the error in a tooltip
-            expect(errorTooltipText.props.children).toEqual(fileUploadErrorMsg);
-
-            // simulate a valid state
-            componentWithValidation.setState({
-                errorMessage: ""
-            });
-
-            errorTooltip =
-                TestUtils.findRenderedDOMComponentWithDataId(componentWithValidation, "testFileUpload_errormessage");
-
-            // no error is rendered
-            expect(errorTooltipText.props.children).toEqual("");
-        });
-
-        it('calls "onPreviewReady" when the image file is loaded', function () {
-            var fileInputDOMComponent = TestUtils.findRenderedDOMComponentWithDataId(
-                                            componentWithValidation,
-                                            "testFileUpload_input"
-                                        ).getDOMNode();
-
-            var fakeFile = new global.File([getFakeJpegBlob(2)], "someFile.jpeg", { type: "image/jpeg" });
-
-            ReactTestUtils.Simulate.change(fileInputDOMComponent, {
-                target: {
-                    value: "someFile.jpeg",
-                    files: [fakeFile]
-                }
-            });
-
-            expect(previewReadyHandler).toBeCalled();
-        });
+        // calls the validator function on reset
+        expect(fileInput.value).toEqual("someFile.png");
     });
 
     it("will show the filename when the showThumbnail property is not set", function () {
-        var componentNoValidation = ReactTestUtils.renderIntoDocument(
-            <FileUpload accept="" referenceName="testFileUpload" buttonText="" removeFileLabel="" />
-        );
-
-        var fileInputDOMComponent =
-        TestUtils.findRenderedDOMComponentWithDataId(componentNoValidation, "testFileUpload_input").getDOMNode();
-
+        var component = getComponent();
+        var fileInput = React.findDOMNode(component.refs.fileInput);
         var fakeFile = new global.File([getFakeJpegBlob(1)], "someFile.jpeg", { type: "image/bmp" });
 
-        fileInputDOMComponent.files = [];
+        fileInput.files = [];
 
         // fake image file
-        fileInputDOMComponent.files[0] = fakeFile;
-        ReactTestUtils.Simulate.change(fileInputDOMComponent, {
+        fileInput.files[0] = fakeFile;
+        ReactTestUtils.Simulate.change(fileInput, {
             target: {
                 value: "someFile.jpeg",
                 files: [fakeFile]
@@ -223,8 +219,7 @@ describe("FileUpload", function () {
         });
 
         // doesn't show the files accepted message
-        var filesAcceptedMsg =
-        TestUtils.findRenderedDOMComponentWithDataId(componentNoValidation, "filesAcceptedMsg");
+        var filesAcceptedMsg = TestUtils.findRenderedDOMComponentWithDataId(component, "filesAcceptedMsg");
         expect(filesAcceptedMsg).toBeFalsy();
     });
 });

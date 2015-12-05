@@ -11,6 +11,7 @@ var React = require("react"),
  * @param {function} onToggle - A callback executed when the user expands/collapses the color picker
  * @param {bool} expanded - A boolean which determines when the color picker is expanded
  * @param {number} [swatchSize=18] - The dims in pixels of the swatch
+ * @param {bool} [disabled] - A property to disable the component
  * @param {string} [labelText] - A label to render over the color picker
  * @param {string} [hintText] - If a label is provided, a hint text may also be optionally provided
  * @param {string} [id] - Set the data-id on the top level html element
@@ -21,6 +22,13 @@ var React = require("react"),
  * @param {string} [defaultColor] - RGB string for the default color
  */
 module.exports = React.createClass({
+    /* There were performance issues with having many of these components on the screen causing eachother to re-render */
+    shouldComponentUpdate: function (nextProps) {
+        return nextProps.color !== this.props.color ||
+            nextProps.expanded !== this.props.expanded ||
+            nextProps.disabled !== this.props.disabled;
+    },
+
     render: function () {
         return (
             this.props.controlled
@@ -36,6 +44,7 @@ var ControlledColorPicker = React.createClass({
         onChange: React.PropTypes.func.isRequired,
         onToggle: React.PropTypes.func.isRequired,
         expanded: React.PropTypes.bool.isRequired,
+        disabled: React.PropTypes.bool,
         swatchSize: React.PropTypes.number,
         id: React.PropTypes.string,
         classname: React.PropTypes.string,
@@ -95,11 +104,6 @@ var ControlledColorPicker = React.createClass({
         }
     },
 
-    /* There were performance issues with having many of these components on the screen causing eachother to re-render */
-    shouldComponentUpdate: function (nextProps) {
-        return nextProps.color !== this.props.color || nextProps.expanded !== this.props.expanded;
-    },
-
     componentDidMount: function () {
         this.slider = React.findDOMNode(this.refs.picker).getElementsByClassName("hue-slider")[0];
         this.container = React.findDOMNode(this.refs.container);
@@ -114,7 +118,7 @@ var ControlledColorPicker = React.createClass({
 
     render: function () {
         var style = {
-            display: this.props.expanded ? "" : "none",
+            display: this.props.expanded && !this.props.disabled ? "" : "none",
             left: this.props.swatchSize + 10,
             top: this.props.swatchSize + 10
         };
@@ -137,6 +141,7 @@ var ControlledColorPicker = React.createClass({
                             <span style={swatchStyle}></span>
                         </span>
                         <input ref="input" type="text" className="colors-input btn-fg-color"
+                            disabled={this.props.disabled}
                             onChange={this._handleChange}
                             onKeyDown={this._handleKeyDown}
                             value={this.props.color} maxLength="7" />
@@ -159,7 +164,12 @@ var ManagedColorPicker = React.createClass({
     },
 
     _handleToggle: function () {
+        if (this.props.disabled) {
+            return;
+        }
+
         this.setState({ expanded: !this.state.expanded });
+
         if (typeof(this.props.onToggle) === "function") {
             this.props.onToggle();
         }
@@ -171,4 +181,3 @@ var ManagedColorPicker = React.createClass({
             onToggle={this._handleToggle} />);
     }
 });
-

@@ -34,6 +34,7 @@ var React = require("react"),
  * @param {string} [inputCss] CSS classes to add to the input element
  * @param {string} [className] CSS classes to add to the parent Label element
  * @param {string} [errorMessage] an error message to show (will be shown if defined)
+ * @param {boolean} [disabled] property that disables the component
  *
  * @example
  *                   <FormTextArea
@@ -47,6 +48,7 @@ var FormTextArea = React.createClass({
 
     propTypes: {
         // prop validations
+        disabled: React.PropTypes.bool,
         mode: React.PropTypes.string,
         isRequired: React.PropTypes.bool,
         defaultValue: React.PropTypes.string,
@@ -174,6 +176,7 @@ var FormTextArea = React.createClass({
                 </span>
                 <span className="input-container">
                     <textarea
+                        disabled={this.props.disabled}
                         className={this.props.inputCss}
                         placeholder={this.props.placeholder}
                         isRequired={this.props.isRequired}

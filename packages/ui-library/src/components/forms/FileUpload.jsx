@@ -35,6 +35,7 @@ var Accept = {
  * @param {string} [filesAcceptedMsg] text describing the accepted file types
  * @param {string} referenceName name attribute for the <input>
  * @param {boolean} [showThumbnail=false] controls whether a thumbnail is shown if an image file is selected
+ * @param {boolean} [disabled] controls whether the component is disabled
  * @param {string} [defaultImage] the url for the default image to use
  * @param {function} onFileChange callback that handles the file selection event
  * @param {boolean} isFileSelected whether or not a file has been selected for this component.  Useful for changing
@@ -65,7 +66,8 @@ var FileUpload = React.createClass({
         validator: React.PropTypes.func,
         onPreviewReady: React.PropTypes.func,
         errorHandler: React.PropTypes.func,
-        defaultImage: React.PropTypes.string
+        defaultImage: React.PropTypes.string,
+        disabled: React.PropTypes.bool
     },
 
     /*
@@ -186,6 +188,9 @@ var FileUpload = React.createClass({
      *
      */
     _onClickRemove: function () {
+        if (this.props.disabled) {
+            return;
+        }
         if (this.props.validator) {
             this.setState({
                 errorMessage: this.props.validator("")
@@ -267,6 +272,7 @@ var FileUpload = React.createClass({
                         </div>
                     }
                     <input
+                        disabled={this.props.disabled}
                         type="file"
                         ref="fileInput"
                         name={this.props.name}
@@ -285,7 +291,7 @@ var FileUpload = React.createClass({
                 </label>
 
                 <div className="file-info">
-                    <a className="file-remove" onClick={this._onClickRemove}>
+                    <a className="file-remove" ref="remove" onClick={this._onClickRemove}>
                         {this.props.removeFileLabel}
                     </a>
                     {!imageUpload &&
