@@ -115,6 +115,20 @@ describe("FormTextField", function () {
         expect(validator.mock.calls.length).toBe(1);
     });
 
+    it("fire onKeyPress when key is pressed", function () {
+        var handleKeyPress = jest.genMockFunction();
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormTextField
+                    referenceName={'test'}
+                    onKeyPress={handleKeyPress} />
+        );
+        var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
+        ReactTestUtils.Simulate.keyPress(field, { key: "Enter", keyCode: 13, which: 13 });
+        expect(handleKeyPress.mock.calls.length).toBe(1);
+        expect(handleKeyPress.mock.calls[0][0]).toBe(13);
+        expect(handleKeyPress.mock.calls[0][1].which).toBe(13);
+    });
+
     it("does not show the undo button if the originalValue param is not passed in", function () {
         var handleChange = jest.genMockFunction();
         var originalValue = "my original value";

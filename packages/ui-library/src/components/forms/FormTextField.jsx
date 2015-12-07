@@ -17,6 +17,8 @@ var React = require("react"),
  * @param {string} [labelText] the text to show as the field's label
  * @param {string} [placeholder] placeholder text for the input field
  * @param {function} [onBlur] a callback that will be triggered when the field blurs (loses focus)
+ * @param {function} [onKeyPress] a callback that will be triggered when a key is pressed in the field;
+ *     the key code and the event are passed as arguments
  * @param {function} [onValueChange] a callback that will be triggered when the field changes
  * @param {function} [onChange] same thing as 'onValueChange' to match common naming convention in ReactJS
  * @param {string} [mode] how the field will be shown: edit or readonly (default edit)
@@ -57,6 +59,7 @@ var FormTextField = React.createClass({
         maxLength: React.PropTypes.number,
         mode: React.PropTypes.string,
         onBlur: React.PropTypes.func,
+        onKeyPress: React.PropTypes.func,
         onChange: React.PropTypes.func,
         onValueChange: React.PropTypes.func,
         originalValue: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
@@ -130,6 +133,18 @@ var FormTextField = React.createClass({
         }
         if (this.props.onBlur) {
             this.props.onBlur(e);
+        }
+    },
+
+    /**
+     * Perform any operations that need to happen when a key is pressed in this field.
+     *
+     * @param {object} e the event object
+     * @private
+     */
+    _handleFieldKeyPress: function (e) {
+        if (this.props.onKeyPress) {
+            this.props.onKeyPress(e.which, e);
         }
     },
 
@@ -269,6 +284,7 @@ var FormTextField = React.createClass({
                         autoComplete={this.props.useAutocomplete ? "on" : "off"}
                         onChange={this._handleFieldChange}
                         onBlur={this._handleFieldBlur}
+                        onKeyPress={this._handleFieldKeyPress}
                         disabled={this.props.disabled}/>
 
                     {undo}
