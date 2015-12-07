@@ -208,8 +208,37 @@
             font-size: 16px;
             top: 24px;
 			&.close-link {
+				top: inherit;
 				bottom: 24px;
 			}
+			&.edit-link {
+                .edit {
+                    right: 120px;
+                    top: 3px;
+                    position: absolute;
+                }
+                .icon-view {
+                    top: 0;
+                    &.hide {
+                        @include opacity(.25);
+                    }
+                    &.disabled {
+                        cursor: not-allowed;
+                    }
+                }
+            }
+        }
+		.icon-view {
+            position: absolute;
+            top: 30px;
+            right: 80px;
+            &.hide {
+                display: block;
+                @include opacity(.25);
+            }
+            &.disabled {
+                cursor: not-allowed;
+            }
         }
 		.item-username {
 			font-family: $font-pn-regular;
