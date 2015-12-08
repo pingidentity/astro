@@ -37,7 +37,7 @@
 			top: 8px;
 		}
 		&.item-disabled {
-			background: map-get($colors, 'dolphin');
+			background: $color-dolphin;
 			cursor: default;
 		}
 	}

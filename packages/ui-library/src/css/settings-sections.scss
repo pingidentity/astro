@@ -6,7 +6,7 @@
         text-transform: uppercase;
         font-family: $font-pn-regular;
         color: map-get($colors, 'blue-grey');
-        border-bottom: 2px solid map-get($colors, 'dolphin');
+        border-bottom: 2px solid $color-dolphin;
         padding: 0 0 5px 0;
         margin: 0 0 5px 0;
 
@@ -85,7 +85,7 @@
         &.sub-attribute {
             .delete-attribute {
                 position: absolute;
-                right: 20px;                
+                right: 20px;
             }
         }
     }

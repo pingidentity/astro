@@ -40,11 +40,40 @@ $colors: (
 	'warning-yellow': #ffd057,
 	'warning-icon-yellow': #eeb91c
 );
+$color-black: map-get($colors, 'black');
+$color-white: map-get($colors, 'white');
+$color-active-blue: map-get($colors, 'active-blue');
+$color-active-blue-highlighted: map-get($colors, 'active-blue-highlighted');
+$color-active-blue-inactive: map-get($colors, 'active-blue-inactive');
+$color-blue-grey: map-get($colors, 'blue-grey');
+$color-cinder-block: map-get($colors, 'cinder-block');
+$color-critical-red: map-get($colors, 'critical-red');
+$color-dolphin: map-get($colors, 'dolphin');
+$color-dolphin: #d8dbdc; // map-get is NOT evaluating propely for only this color (anywhere). Temp fix for now.
+$color-elephant: map-get($colors, 'elephant');
+$color-elderly: map-get($colors, 'elderly');
+$color-grass: map-get($colors, 'grass');
+$color-manatee: map-get($colors, 'manatee');
+$color-midnight: map-get($colors, 'midnight');
+$color-oitnb: map-get($colors, 'oitnb');
+$color-rabbit-fur: map-get($colors, 'rabbit-fur');
+$color-required-yellow: map-get($colors, 'required-yellow');
+$color-rhino: map-get($colors, 'rhino');
+$color-slate: map-get($colors, 'slate');
+$color-sonic: map-get($colors, 'sonic');
+$color-stone: map-get($colors, 'stone');
+$color-stratus: map-get($colors, 'stratus');
+$color-success-green-highlighted: map-get($colors, 'success-green-highlighted');
+$color-success-green-inactive: map-get($colors, 'success-green-inactive');
+$color-timberwolf: map-get($colors, 'timberwolf');
+$color-verde: map-get($colors, 'verde');
+$color-walrus: map-get($colors, 'walrus');
+$color-warning-text: map-get($colors, 'warning-text');
+$color-warning-yellow: map-get($colors, 'warning-yellow');
+$color-warning-icon-yellow: map-get($colors, 'warning-icon-yellow');
 
 
 // REUSABLE SEMANTIC COLOR VARS (use map-get for all other colors or when semantic meaning does not apply)
-$color-white: map-get($colors, 'white');
-$color-black: map-get($colors, 'black');
 $color-text: map-get($colors, 'elephant');
 $color-active: map-get($colors, 'active-blue');
 $color-success: map-get($colors, 'success-green-highlighted');

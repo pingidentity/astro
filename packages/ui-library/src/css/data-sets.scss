@@ -93,7 +93,7 @@
         &.data-title {
             > label {
                 padding-top: 25px;
-                color: map-get($colors, 'dolphin');
+                color: $color-dolphin;
             	text-transform: uppercase;
             	margin-bottom: 5px;
             	font-size: 15px;

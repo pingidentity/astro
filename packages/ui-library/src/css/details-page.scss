@@ -10,7 +10,7 @@
 	.details-actions {
 		position: relative;
 		float: right;
-		border: 1px solid map-get($colors, 'dolphin');
+		border: 1px solid $color-dolphin;
 		padding: 10px;
 		height: 20px;
 		margin: 0 0 0 10px;
@@ -44,14 +44,14 @@
 	}
 	.details-content {
 		margin: 15px 0 0 0;
-		border-top: 1px solid map-get($colors, 'dolphin');
+		border-top: 1px solid $color-dolphin;
 		padding: 40px 0 0 30px;
 	}
 	.details-section-title {
 		text-transform: uppercase;
 		font-size: 16px;
 		color: gray;
-		border-bottom: 1px solid map-get($colors, 'dolphin');
+		border-bottom: 1px solid $color-dolphin;
 		margin: 0 0 15px 0 0;
 		padding: 0 0 15px 0 0;
 	}

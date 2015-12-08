@@ -28,7 +28,7 @@ var ToggleDemo = React.createClass({
 
     render: function () {
         return (
-            <div className="collapsed-content">
+            <div>
                 <Toggle onToggle={this._onStatusToggle} id="toggle" toggled={this._isToggled()}
                     disabled={false} className="row-status-toggle" />
                 <br/><br/>
