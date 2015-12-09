@@ -19,10 +19,29 @@
 	}
 	.rows-added {
 		width: 320px;
+		.items {
+			.no-items {
+				padding: 30px;
+				margin-bottom: 15px;
+				text-align: center;
+				font-size: 12px;
+				border: 1px dashed map-get($colors, 'rabbit-fur');
+				position: absolute;
+                width: 257px;
+                z-index: 10;
+                background-color: $color-white;
+			}
+			:nth-child(2) {
+                &.item {
+                    margin-top: 90px;
+                    z-index: 3;
+                }
+            }
+		}
 	}
 	.items {
 		max-height: 400px;
-  		overflow: auto;
+		overflow: auto;
 	}
 	.item {
 		position: relative;
@@ -40,12 +59,5 @@
 			background: $color-dolphin;
 			cursor: default;
 		}
-	}
-	.no-items {
-		padding: 30px;
-		margin-bottom: 15px;
-		text-align: center;
-		font-size: 12px;
-		border: 1px dashed map-get($colors, 'rabbit-fur');
 	}
 }
