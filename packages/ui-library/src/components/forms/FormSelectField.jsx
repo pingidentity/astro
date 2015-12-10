@@ -2,17 +2,19 @@
 
 var React = require("react"),
     css = require("classnames"),
-    HelpHint = require("../tooltips/HelpHint.jsx"),
-    _ = require("underscore");
+    HelpHint = require("../tooltips/HelpHint.jsx");
 
 /**
  * @module FormSelectField
- * @desc A generic select (dropdown) component. Encapsulates common markup and designed to be a drop-in replacement
+ * @desc A generic select (dropdown) component. Encapsulates common markup and designed to be a drop-in replacement.
+ *       Options data may be either an array of objects with 'value' and 'label' properties or an object. Only the array
+ *       will insure display order of options.
  * for react controlled <select>. Stateless.
  *
  * @param {function} onChange delegate function to be called on select element onChange event (will receive same argument)
  * @param {string} value currently selected value
- * @param {object} options value -> label map to describe dropdown options
+ * @param {object} options key/value object OR an array of single-item objects with 'value' and 'label' properties to
+ *       describe the dropdown options
  * @param {boolean} [required] if true, the user must select a value for this field
  * @param {string} [className] CSS classes to add to the top-level label element (default 'input-select')
  * @param {string} [selectClassName] CSS classes to add to the select element
@@ -27,19 +29,27 @@ var React = require("react"),
  * @param {string} [errorMessage] an error message (will be shown if defined)
  * @param {boolean} [disabled] if true, the select element will be disabled
  *
- *  @example
- *                   <FormSelectField className="css classes to use on label or input-select as default"
- *                       label={element.viewName}
- *                       onChange={myFunction}
- *                       value={this.state.value}
- *                       options={value1: 'option-1', value2: 'option-2', value3: 'option-3'} />
- *
- *                   <FormSelectField
- *                       onChange={myFunction}
- *                       value={this.state.value}
- *                       options={value1: 'option-1', value2: 'option-2', value3: 'option-3'}
- *                       errorMessage="Oops, something went wrong">
- *                   </FormSelectField>
+ * @example
+ *     <FormSelectField className="css classes to use on label or input-select as default"
+ *         label={element.viewName}
+ *         onChange={myFunction}
+ *         value={this.state.value}
+ *         options={[
+ *             {value: value1, label: 'label1'},
+ *             {value: value2, label: 'label2'},
+ *             {value: value3, label: 'label3'}
+ *         ]}>
+ *     </FormSelectField>
+ *     <FormSelectField
+ *         onChange={myFunction}
+ *         value={this.state.value}
+ *         options={{
+ *             value1: 'label1',
+ *             value2: 'label2',
+ *             value3: 'label3'
+ *         }}
+ *         errorMessage="Oops, something went wrong">
+ *     </FormSelectField>
  */
 
 var FormSelectField = React.createClass({
@@ -48,11 +58,13 @@ var FormSelectField = React.createClass({
         isRequired: React.PropTypes.bool,
         label: React.PropTypes.string,
         labelHelpText: React.PropTypes.string,
-        noneOption: React.PropTypes.bool,
         noneOptionText: React.PropTypes.string,
         noneOptionValue: React.PropTypes.string,
         onChange: React.PropTypes.func.isRequired,
-        options: React.PropTypes.object.isRequired,
+        options: React.PropTypes.oneOfType([
+            React.PropTypes.object,
+            React.PropTypes.array
+        ]).isRequired,
         id: React.PropTypes.string,
         selectClassName: React.PropTypes.string,
         value: React.PropTypes.oneOfType([
@@ -66,6 +78,7 @@ var FormSelectField = React.createClass({
     getDefaultProps: function () {
         return {
             noneOption: false,
+            noneOptionText: null,
             noneOptionValue: "",
             id: "form-select-field",
             isDisabled: false
@@ -90,7 +103,7 @@ var FormSelectField = React.createClass({
      * @private
      * @param {object} e the event object
      */
-    handleChange: function (e) {
+    _handleChange: function (e) {
         this.setState({ selectedValue: e.target.value });
 
         if (this.props.onChange) {
@@ -98,29 +111,40 @@ var FormSelectField = React.createClass({
         }
     },
 
+    _getOptionHtml: function (value, label) {
+        return (<option value={value} key={value}>{label}</option>);
+    },
+
     render: function () {
-        var options,
-            noneOptionObj = {},
+        var option,
+            optionValue,
+            optionLabel,
+            optionsIsArray = Array.isArray(this.props.options),
+            optionsHtml = [],
             labelHelp,
-            labelCss = css({
+            labelCss = {
                 "input-select": true,
                 "form-error": this.props.errorMessage,
                 required: this.props.isRequired,
                 "value-entered": this.state.selectedValue !== this.props.noneOptionValue
-            }),
+            },
             errorCss = css("help-tooltip form-error-message", {
                 show: this.props.errorMessage
             });
 
         if (this.props.className) {
-            labelCss += " " + this.props.className;
+            labelCss[this.props.className] = true;
         }
 
-        if (this.props.noneOption) {
-            noneOptionObj[this.props.noneOptionValue] = this.props.noneOptionText;
-            options = _.extend(noneOptionObj, this.props.options);
-        } else {
-            options = this.props.options;
+        for (var index in this.props.options) {
+            option = this.props.options[index];
+            optionValue = optionsIsArray ? option.value : index;
+            optionLabel = optionsIsArray ? option.label : option;
+            optionsHtml.push(this._getOptionHtml(optionValue, optionLabel));
+        }
+
+        if (this.props.noneOptionText) {
+            optionsHtml.unshift(this._getOptionHtml(this.props.noneOptionValue, this.props.noneOptionText));
         }
 
         if (this.props.labelHelpText) {
@@ -129,12 +153,8 @@ var FormSelectField = React.createClass({
             );
         }
 
-        options = _.map(options, function (option, value) {
-            return <option value={value} key={value}>{option}</option>;
-        });
-
         return (
-            <label className={labelCss} data-id={this.props.id + "_label"}>
+            <label className={css(labelCss)} data-id={this.props.id + "_label"}>
                 <span className="label-text">
                     {this.props.label}
                     {labelHelp}
@@ -145,10 +165,10 @@ var FormSelectField = React.createClass({
                             data-id={this.props.id}
                             name={this.props.id}
                             className={this.props.selectClassName}
-                            onChange={this.handleChange}
+                            onChange={this._handleChange}
                             value={this.state.selectedValue}
                             disabled={this.props.isDisabled}>
-                            {options}
+                            {optionsHtml}
                         </select>
                     </div>
                     <div className={errorCss}>

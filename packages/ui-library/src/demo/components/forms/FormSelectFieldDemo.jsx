@@ -8,95 +8,85 @@ var FormSelectFieldDemo = React.createClass({
 
     getInitialState: function () {
         return {
-            onChangeFieldValue1: "",
-            onChangeFieldValue2: "",
-            onChangeFieldValue3: ""
+            fieldValue1: "1",
+            fieldValue2: "1",
+            fieldValue3: "1",
+            fieldValue4: "1"
         };
     },
 
-    _changeCallback1: function (event) {
-        this.setState({
-            onChangeFieldValue1: event.target.value
-        });
-    },
-
-    _changeCallback2: function (event) {
-        this.setState({
-            onChangeFieldValue2: event.target.value
-        });
-    },
-
-    _changeCallback3: function (event) {
-        this.setState({
-            onChangeFieldValue3: event.target.value
-        });
-    },
-
-    _changeCallback4: function () {
-        // don't do anything (for error message display example)
+    _changeCallback: function (index, event) {
+        var stateObj = {};
+        stateObj["fieldValue" + index] = event.target.value;
+        this.setState(stateObj);
     },
 
     render: function () {
-        var options = {
-            1: "one",
-            2: "two",
-            3: "three"
-        };
+        // data may be either an array of objects or an object. Only the array will insure display order of options
+        var optionsArr = [
+                { value: 1, label: "one" },
+                { value: 2, label: "two" },
+                { value: 3, label: "three" },
+                { value: 4, label: "four " }
+            ],
+            optionsObj = {
+                1: "one",
+                2: "two",
+                3: "three",
+                4: "four"
+            };
 
         return (
             <div>
                 <div className="input-row">
                     <FormSelectField
                         label="Basic"
-                        options={options}
-                        onChange={this._changeCallback1}
+                        options={optionsObj}
+                        onChange={this._changeCallback.bind(this, 1)}
+                        value={this.state.fieldValue1}
                     />
                     <div>
-                        selected option: {this.state.onChangeFieldValue1}
+                        selected option value: {this.state.fieldValue1}
                     </div>
                 </div>
                 <div className="input-row">
                     <FormSelectField
-                        label="Required Select"
-                        options={options}
-                        noneOption={true}
-                        noneOptionText="- select option -"
-                        noneOptionValue="0"
-                        value="0"
-                        onChange={this._changeCallback2}
-                        isRequired={true}
-                    />
-                    <div>
-                        selected option: {this.state.onChangeFieldValue2}
-                    </div>
-                </div>
-                <div className="input-row">
-                    <FormSelectField
-                        label="With none option"
-                        options={options}
-                        onChange={this._changeCallback3}
+                        label="Required Select With None Option"
+                        options={optionsArr}
                         noneOption={true}
                         noneOptionText="Select an option"
                         noneOptionValue="0"
+                        onChange={this._changeCallback.bind(this, 2)}
+                        isRequired={true}
+                        value={this.state.fieldValue2}
                     />
                     <div>
-                        selected option: {this.state.onChangeFieldValue3}
+                        selected option value: {this.state.fieldValue2}
                     </div>
                 </div>
                 <div className="input-row">
                     <FormSelectField
                         label="With error message"
-                        options={options}
-                        onChange={this._changeCallback4}
+                        options={optionsObj}
+                        onChange={this._changeCallback.bind(this, 3)}
                         errorMessage="error!"
+                        value={this.state.fieldValue3}
                     />
+                    <div>
+                        selected option value: {this.state.fieldValue3}
+                    </div>
                 </div>
                 <div className="input-row">
                     <FormSelectField
                         label="With help text"
                         labelHelpText="Help text goes here!"
-                        options={options}
-                        onChange={this._changeCallback4} />
+                        options={optionsObj}
+                        onChange={this._changeCallback.bind(this, 4)}
+                        value={this.state.fieldValue4}
+                    />
+                    <div>
+                        selected option value: {this.state.fieldValue4}
+                    </div>
                 </div>
             </div>
         );
