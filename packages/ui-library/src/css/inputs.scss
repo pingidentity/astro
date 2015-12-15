@@ -132,7 +132,7 @@ label {
 		display: block;
 		@include transition($default-input-transition);
 
-		&:before, &:after {
+		&:before {
 			@include transition($default-input-transition);
 		}
 	}
@@ -142,11 +142,6 @@ label {
 	&.input-text {
 		input {
 			padding: 3px 34px 3px 10px;
-		}
-		.input-container {
-			&:after {
-				top: 17px;
-			}
 		}
 		&.no-label {
 			.input-container {
@@ -160,10 +155,6 @@ label {
 		}
 		&.large {
 			.input-container {
-				&:after {
-					top: 15px;
-					right: 15px;
-				}
 				input {
 					height: 48px;
 					font-size: 16px;
@@ -196,9 +187,6 @@ label {
 					text-transform: none;
 					font-size: 22px;
 					color: $color-input-text;
-				}
-				&:after {
-					content: '';
 				}
 			}
 			a.clear-search {
@@ -250,11 +238,6 @@ label {
 		}
 	}
 	&.input-textarea {
-		.input-container {
-			&:after {
-				top: 13px;
-			}
-		}
 		textarea {
 			padding: 10px 34px 10px 10px;
 			margin-top: 2px;
@@ -271,49 +254,21 @@ label {
 		}
 	}
 	&.input-text, &.input-textarea {
-		.input-container {
-			&:after {
-				font-family: $icon-font;
-				content: 'e';
-				text-transform: none;
-				position: absolute;
-				right: 11px;
-				cursor: pointer;
-				color: map-get($colors, 'walrus');
-				@include opacity(0);
-			}
-		}
-		&:hover {
-			.input-container {
-				&:after {
-					@include opacity(1);
-				}
-			}
-		}
 		&.no-label {
 			&.required {
 				&:before {
 					top: 5px;
 				}
 			}
-			&:after {
-				top: 17px;
-			}
 		}
 		&.short {
 			input[type=text], input[type=password] {
 				width: 75px;
 			}
-			.input-container {
-				&:after {
-					top: 7px;
-					right: -25px;
-				}
-			}
 		}
 		&.disabled {
 			.input-container {
-				&:before, &:after {
+				&:before {
 					content: none;
 				}
 				input {
@@ -400,9 +355,6 @@ label {
 				display: inline-block;
 				margin: 0;
 			}
-			&:after {
-				top: 31px;
-			}
 		}
 		.circle {
 			position: absolute;
@@ -479,10 +431,6 @@ label {
 	&.inline-save {
 		.input-container {
 			padding-right: 50px;
-
-			&:after {
-				right: 61px;
-			}
 		}
 		.undo {
 			right: 61px;
@@ -492,16 +440,6 @@ label {
 			top: 18px;
 			right: 0;
 		}
-	}
-	&.edited {
-		.input-container {
-			&:after {
-				content: '';
-				font-size: 0;
-				color: transparent;
-			}
-		}
-
 	}
 	.label-text {
 		.help-tooltip {
@@ -1162,11 +1100,6 @@ label {
 		textarea {
 			resize: none !important;
 		}
-		.input-container {
-			&:after {
-				content: '';
-			}
-		}
 	}
 	&.required {
 		&.input-text {
@@ -1529,9 +1462,6 @@ input[type=file] {
                     &:before {
                         top: 5px;
                         bottom: 5px;
-                    }
-                    &:after {
-                        top: 10px;
                     }
                 }
             }
