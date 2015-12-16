@@ -191,7 +191,6 @@ var Demo = React.createClass({
 
     getInitialState: function () {
         return {
-            demoIndex: -1,
             demos: this.demos
         };
     },
@@ -246,7 +245,19 @@ var Demo = React.createClass({
         }).join("\n");
     },
 
-    hashChange: function () {
+    handleKeyDown: function (e) {
+        switch (e.keyCode) {
+            case 38: //Arrow up
+            case 40: //Arrow down
+                var index = this.state.demos.indexOf(this.state.demo) || 0;
+                index += e.keyCode === 38 ? -1 : 1;
+                index = Math.max(0, index);
+                document.location.hash = this.state.demos[index].name;
+                break;
+        }
+    },
+
+    handleHashChange: function () {
         this.setState({
             demo: this.getDemo(document.location.hash.substring(1).replace(/%20/g, " ")),
             markup: null
@@ -263,7 +274,8 @@ var Demo = React.createClass({
     },
 
     componentWillUnmount: function () {
-        window.removeEventListener(this.hashchange);
+        window.removeEventListener("hashchange", this.handleHashChange);
+        window.removeEventListener("keydown", this.handleKeyDown);
     },
 
     componentDidMount: function () {
@@ -271,12 +283,15 @@ var Demo = React.createClass({
             return a.name < b.name ? -1 : 1;
         });
 
-        window.addEventListener("hashchange", this.hashChange);
+        window.addEventListener("hashchange", this.handleHashChange);
+        window.addEventListener("keydown", this.handleKeyDown);
 
-        this.hashChange();
+        this.handleHashChange();
     },
 
     render: function () {
+        var selectedDemoName = this.state.demo ? this.state.demo.name : null;
+
         return (
             <div className="components-container">
                 <div id="header">
@@ -292,8 +307,11 @@ var Demo = React.createClass({
                         </li>
                         {
                             this.demos.map(function (item) {
-                                return <li key={item.name}><a href={"#" + item.name}>{item.name}</a></li>;
-                            })
+                                return (
+                                    <li className={item.name === selectedDemoName ? "selected": ""} key={item.name}>
+                                        <a href={"#" + item.name}>{item.name}</a>
+                                    </li>);
+                            }.bind(this))
                         }
                     </ul>
                 </div>
