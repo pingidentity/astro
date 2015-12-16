@@ -192,6 +192,11 @@ var Demo = React.createClass({
             name: "Tutorial",
             demo: require("./components/help/intro-tutorial/IntroTutorialDemo.jsx"),
             pathToCode: "components/help/intro-tutorial/IntroTutorial.jsx"
+        },
+        {
+            name: "Pagination",
+            demo: require("./components/list/PaginationDemo.jsx"),
+            pathToCode: "components/list/Pagination.jsx"
         }
     ],
 

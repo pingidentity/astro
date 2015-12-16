@@ -1,0 +1,33 @@
+.page-links{
+    text-align: center;
+    color: map-get($colors, 'walrus');
+    margin: 10px;
+    a{
+        box-sizing: border-box;
+        display: inline-block;
+        min-width: 30px;
+        height: 30px;
+        margin: 2px;
+        padding-left: 2px;
+        padding-right: 2px;
+        padding-top: 4px;
+        font-size: 14px;
+        color: map-get($colors, 'walrus');
+        //text-decoration: none;
+        vertical-align: middle;
+        border: 1px solid transparent;
+        border-radius: 2px;
+        &.active{
+            border: 1px solid map-get($colors, 'active-blue');
+            color: map-get($colors, 'active-blue');
+        }
+        &:hover{
+            text-decoration: none;
+            color: map-get($colors, 'active-blue');
+        }
+    }
+    span{
+        vertical-align: text-bottom;
+    }
+
+}
