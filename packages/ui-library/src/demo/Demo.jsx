@@ -63,10 +63,16 @@ var Demo = React.createClass({
             pathToCode: "components/forms/FormTextField.jsx"
         },
         {
+            name: "Form - Integer Field",
+            demo: require("./components/forms/FormIntegerFieldDemo.jsx"),
+            pathToCode: "components/forms/FormIntegerField.jsx"
+        },
+        {
             name: "Form - Text Area",
             demo: require("./components/forms/FormTextAreaDemo.jsx"),
             pathToCode: "components/forms/FormTextArea.jsx"
         },
+
         {
             name: "Form - Select Field",
             demo: require("./components/forms/FormSelectFieldDemo.jsx"),

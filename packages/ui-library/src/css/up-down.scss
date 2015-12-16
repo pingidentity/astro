@@ -1,0 +1,35 @@
+[disabled] .up-down-spinner, [readonly] .up-down-spinner{
+    pointer-events: none;
+}
+.up-down-spinner{
+  position: relative;
+  font-family: $icon-font;
+  margin-left: -35px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  vertical-align: baseline;
+  max-width: 35px;
+  display: inline-block;
+
+    button{
+        height: 18px;
+        padding: 0px;
+        display: inline-block;
+        text-decoration: none;
+        font-color: inherit;
+        border: none;
+        background-color: transparent;
+
+    }
+
+}
+.form-integer-container{
+    &:after, a.undo{
+        right: 40px !important;
+    }
+    .input-container{
+        display: inline-block !important;
+        vertical-align: bottom;
+    }
+
+}

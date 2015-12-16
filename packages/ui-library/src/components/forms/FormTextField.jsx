@@ -34,6 +34,7 @@ var React = require("react"),
  * @param {boolean} [maskValue] if true, the value shown in the input field will be masked with '*****' i.e: passwords (default false)
  * @param {string} [errorMessage] error message to render if validation is being done externally
  * @param {function} [save] a method to be called to save the value; causes the save control to be shown
+ * @param {object} [upDownSpinner] up down buttons used by FormIntegerField
  *
  * @example <FormTextField
  *              referenceName={name}
@@ -67,6 +68,7 @@ var FormTextField = React.createClass({
         referenceName: React.PropTypes.string,
         save: React.PropTypes.func,
         type: React.PropTypes.string,
+        //upDownSpinner: React.PropTypes.object,
         useAutocomplete: React.PropTypes.bool,
         validator: React.PropTypes.func,
         validatorTrigger: React.PropTypes.string,
@@ -217,7 +219,8 @@ var FormTextField = React.createClass({
 
     render: function () {
         var value = _.isUndefined(this.props.value) ? this.state.fieldValue : this.props.value,
-            edited = !_.isUndefined(this.props.originalValue) && this.props.originalValue !== value,
+            edited = !_.isUndefined(this.props.originalValue) &&
+                this.props.originalValue.toString() !== value.toString(),
             readonly = this.props.mode.toUpperCase() === FormFieldConstants.FormFieldMode.READ_ONLY,
             undo,
             save,
@@ -286,7 +289,6 @@ var FormTextField = React.createClass({
                         onBlur={this._handleFieldBlur}
                         onKeyPress={this._handleFieldKeyPress}
                         disabled={this.props.disabled}/>
-
                     {undo}
                     {save}
                     <div className={errorCss} data-id={this.props.referenceName + "_errormessage"}>
