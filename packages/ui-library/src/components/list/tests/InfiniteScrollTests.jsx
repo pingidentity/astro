@@ -8,7 +8,6 @@ describe("Infinite Scroll", function () {
         ReactTestUtils = React.addons.TestUtils,
         InfiniteScroll = require("../InfiniteScroll.jsx"),
         assign = require("object-assign");
-    var batches;
 
     var MyRow = React.createClass({
         render: function () {
@@ -18,8 +17,14 @@ describe("Infinite Scroll", function () {
 
     window.addEventListener = jest.genMockFunction();
     window.removeEventListener = jest.genMockFunction();
+    window.setTimeout = jest.genMockFunction();
 
     function getRenderedComponent (opts) {
+        var batches = [{ id: 0, data: [] }];
+        for (var i = 0; i < 50; i += 1) {
+            batches[0].data.push({ num: i });
+        }
+
         var defaults = {
             hasPrev: true,
             hasNext: true,
@@ -40,14 +45,29 @@ describe("Infinite Scroll", function () {
     }
 
     beforeEach(function () {
-        batches = [{ id: 0, data: [] }];
-
-        for (var i = 0; i < 50; i += 1) {
-            batches[0].data.push({ num: i });
-        }
-
         window.addEventListener.mockClear();
         window.removeEventListener.mockClear();
+    });
+
+    it("jumps to paged out item", function () {
+        var component = getRenderedComponent();
+        var node = React.findDOMNode(component.refs.container);
+
+        component.visibilityArray = [false, false, true];
+
+        var batches = React.findDOMNode(component).getElementsByClassName("batch");
+
+        //pretend we're scrolled 200 pixes in this infinite scroll
+        node.scrollTop = 200;
+        node.getBoundingClientRect = jest.genMockFunction()
+            .mockReturnValue({ top: 0, left: 0, bottom: 50, right: 100, height: 50, width: 100 });
+        batches[0].getBoundingClientRect = jest.genMockFunction()
+            .mockReturnValue({ top: -190, left: 0, bottom: -90, right: 100, height: 100, width: 100 });
+
+        //jumping to the first item which we defined as starting at 10px, should cause the container to
+        //scroll up by 190px
+        component.jumpToItem(0, 0);
+        expect(node.scrollTop).toBe(10);
     });
 
     it("re-renders if visibility array changes", function () {

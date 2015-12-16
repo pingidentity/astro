@@ -168,11 +168,20 @@ var InfiniteScroll = React.createClass({
         return React.findDOMNode(this.refs["batch" + batchIndex]);
     },
 
-    _jumpToItem: function (batchIndex, itemIndex) {
+    jumpToItem: function (batchIndex, itemIndex) {
         var batch = this._getBatchNode(batchIndex);
 
-        if (batch && batch.childNodes.length > itemIndex) {
+        if (batch) {
             var containerBounds = this._getContainerBounds();
+
+            if (!this.visibilityArray[batchIndex]) {
+                var batchBounds = batch.getBoundingClientRect();
+
+                this._scrollContainerBy(batchBounds.top - containerBounds.top);
+                setTimeout(this.jumpToItem.bind(this, batchIndex, itemIndex), 100);
+                return;
+            }
+
             var itemBounds = batch.childNodes[itemIndex].getBoundingClientRect();
 
             this._scrollContainerBy(itemBounds.top - containerBounds.top);
@@ -219,7 +228,7 @@ var InfiniteScroll = React.createClass({
 
         //after loading the first batch of data hide the prevSpinner
         if (!this.batchRange && this.props.hasPrev) {
-            this._jumpToItem(0, 0);
+            this.jumpToItem(0, 0);
         }
 
         //when a new batch is prepended, the container's scrollTop should be adjusted by the height of the new batch
@@ -229,7 +238,7 @@ var InfiniteScroll = React.createClass({
         }
         //after the first render with data, jump to the offset specified in the props
         if (!this.inited && this.props.batches.length > 0 && this.props.initialItem) {
-            this.inited = this._jumpToItem(this.props.initialItem.batchIndex, this.props.initialItem.itemIndex);
+            this.inited = this.jumpToItem(this.props.initialItem.batchIndex, this.props.initialItem.itemIndex);
         }
 
         this.batchRange = newRange;
