@@ -168,7 +168,15 @@ var InfiniteScroll = React.createClass({
         return React.findDOMNode(this.refs["batch" + batchIndex]);
     },
 
-    jumpToItem: function (batchIndex, itemIndex) {
+    /** @method InfiniteScroll#jumpToItem
+     * @desc scroll the infinite scroll to the give item
+     * @param {number} batchIndex - The batch index
+     * @param {number} itemIndex - The item index within the batch
+     * @param {bool} [scrollIfOutOfView=false] - Normally the infinite scroll will scroll so the specified item is the first
+     *   visible item.  If this param is set to true, it will only scroll if the item is out of view
+     * @returns {bool} - true if jumping to the item was successful, false otherwise
+     */
+    jumpToItem: function (batchIndex, itemIndex, scrollIfOutOfView) {
         var batch = this._getBatchNode(batchIndex);
 
         if (batch) {
@@ -184,10 +192,15 @@ var InfiniteScroll = React.createClass({
 
             var itemBounds = batch.childNodes[itemIndex].getBoundingClientRect();
 
-            this._scrollContainerBy(itemBounds.top - containerBounds.top);
+            if (!scrollIfOutOfView ||
+                itemBounds.bottom > containerBounds.bottom || itemBounds.top < containerBounds.top)
+            {
+                this._scrollContainerBy(itemBounds.top - containerBounds.top);
+            }
 
-            //return false if we're setting an impossible scroll position
-            return batch.childNodes[itemIndex].getBoundingClientRect().top >= 0;
+            //get the updated client rect
+            itemBounds = batch.childNodes[itemIndex].getBoundingClientRect();
+            return itemBounds.bottom <= containerBounds.bottom && itemBounds.top >= containerBounds.top;
         } else {
             return false;
         }
