@@ -30,12 +30,14 @@ var css = require("classnames");
  * @param {string} [linkStyle] CSS class to add to the containing span when rendering alternative linkContent.
  * @param {boolean} [initiallyExpanded=false] Initial modal expansion state.  This setting differs from
  * @param {boolean} [expanded=false] Modal expansion state.  If set then the modal will not keep its own
- *  expansion state, and closing the modal must be managed externally.
+ *     expansion state, and closing the modal must be managed externally.
  * @param {boolean} [showHeader=true] Controls modal header rendering, if set to false,
- *  making modal effectivly a 'light box' for previews. Defaults to true.
+ *      making modal effectivly a 'light box' for previews. Defaults to true.
  * @param {function} [onOpen] callback that is called when the modal is opened.
  * @param {function} [onClose] callback that is called when the modal is closed by clicking
- *  the close modal link.  If this function returns false then closing will be prevented.
+ *      the close modal link.  If this function returns false then closing will be prevented.
+ * @param {boolean} [maximize=false] When true, modal content will fill screen height
+ * @param {string} [type] basic modal when not specified. Options include 'alert', and 'dialog'
  *
  * @example
  * Sample usage:
@@ -63,6 +65,7 @@ var ModalButton = React.createClass({
         initiallyExpanded: React.PropTypes.bool,
         expanded: React.PropTypes.bool,
         maximize: React.PropTypes.bool,
+        type: React.PropTypes.string,
         onOpen: React.PropTypes.func,
         onClose: React.PropTypes.func,
         disabled: React.PropTypes.bool,
@@ -76,7 +79,8 @@ var ModalButton = React.createClass({
     getDefaultProps: function () {
         return {
             showHeader: true,
-            initiallyExpanded: false
+            initiallyExpanded: false,
+            maximize: false
         };
     },
 
@@ -92,11 +96,11 @@ var ModalButton = React.createClass({
 
     getInitialState: function () {
         var expanded = this.props.initiallyExpanded;
-        
+
         if (typeof this.props.expanded !== "undefined" && this.props.expanded !== null) {
             expanded = !!this.props.expanded;
         }
-        
+
         return {
             expanded: expanded,
             disabled: (this.props.disabled) ? this.props.disabled : false
@@ -152,7 +156,7 @@ var ModalButton = React.createClass({
             }
         }
     },
-    
+
     /*
      * Return true iff the modal is expanded.
      *
@@ -164,7 +168,7 @@ var ModalButton = React.createClass({
             return this.state.expanded;
         }
     },
-    
+
     componentWillReceiveProps: function (nextProps) {
         if (typeof nextProps.expanded !== "undefined" && nextProps.expanded !== null) {
             this.setState({ expanded: !!nextProps.expanded });
@@ -210,6 +214,8 @@ var ModalButton = React.createClass({
         var modalClasses = css({
             modal: true,
             maximize: this.props.maximize,
+            dialog: this.props.type === "dialog",
+            alert: this.props.type === "alert",
             show: this._isExpanded()
         });
 

@@ -7,7 +7,7 @@
 	z-index: 2000;
 	top: -550px;
 	opacity: 0;
-	left: 26px;
+	left: $modal-left + 27px;
 	right: 15px;
 	overflow: visible;
 	font-family: $font-pn-regular;
@@ -40,7 +40,6 @@
 		font-size: 22px;
 		line-height: 42px;
 		font-weight: 300;
-		margin: 0 0 0 $modal-left;
 		@include border-radius($modal-radius $modal-radius 0 0);
 
 		h2 {
@@ -85,7 +84,6 @@
 		min-height: 140px;
 		max-height: 600px;
 		overflow-y: auto;
-		margin: 0 0 0 $modal-left;
 		background-color: map-get($colors, 'elderly');
 
 		h2 {
@@ -116,6 +114,40 @@
 			}
 		}
 	}
+	&.dialog {
+		$modal-width: 350px;
+
+		left: 50%;
+		right: auto;
+		width: $modal-width;
+		margin-left: -($modal-width/4);
+
+		.modal-title {
+			font-size: 20px;
+			margin: 0 0 15px 0;
+		}
+		.modal-header {
+			display: none;
+		}
+		.modal-body {
+			border-width: 0 1px 1px 1px;
+			text-align: left;
+			font-size: 18px;
+			@include border-radius($modal-radius);
+
+			.buttons {
+				margin: 30px 0 0 0;
+				text-align: center;
+
+				a {
+					display: block;
+					margin: 20px 0 0 0;
+					font-size: 15px;
+					text-transform: uppercase;
+				}
+			}
+		}
+	}
 	&.alert {
 		$modal-width: 500px;
 
@@ -123,26 +155,33 @@
 		right: auto;
 		width: $modal-width;
 		margin-left: -($modal-width/4);
-		border: 1px solid #eee;
+		border: 1px solid $color-timberwolf;
 
 		.modal-header, .modal-body {
+			border-width: 1px 1px 0 1px;
 			border-style: solid;
-			border-color: #ddd;
+			border-color: $color-timberwolf;
 		}
 		.modal-header {
-			background: #E8B53D;
-			font-weight: normal;
+			background: $color-warning-yellow;
 			color: rgba($color-black, 0.5);
 			border-width: 1px 1px 0 1px;
 			font-size: 24px;
-			font-family: 'ProximaNovaLight';
+			font-family: $font-pn-light;
 			text-align: center;
-			padding: 20px 0;
 
+			&:after {
+				content: none;
+			}
 			.icon-alert {
 				font-size: 26px;
 				position: absolute;
 				margin: -3px 0 0 -36px;
+			}
+			.close-modal {
+				&:after {
+					color: rgba($color-black, 0.3);
+				}
 			}
 		}
 		.modal-body {
