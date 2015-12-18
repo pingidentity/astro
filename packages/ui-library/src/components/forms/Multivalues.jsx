@@ -49,8 +49,9 @@ var MultivaluesOption = React.createClass({
  * @desc Multivalues takes an array of strings and creates "boxed" text entries of each. Free form typing creates new entries when Enter or Comma is used.
  *
  * @param {array} [entries] - array of strings used to display initial entry boxes.
- *@param {function} onChange - required callback from parent
+ * @param {function} onChange - required callback from parent
  * @param {string} [className] - extra CSS classes to be applied
+ * @param {boolean} [isRequired] whether the field is required or not (default false)
  * @param {string} [id] - it is used for a unique data-id
  *
  * @example
@@ -61,11 +62,10 @@ var MultivaluesOption = React.createClass({
  *                                "Entry 2",
  *                                "Entry 3"
  *                          ]}
+ *                          isRequired={element.required}
  *                          onChange={this._addEntries} />
  *
-
  **/
-
 
 var Multivalues = React.createClass({
 
@@ -75,6 +75,7 @@ var Multivalues = React.createClass({
         entries: React.PropTypes.array,
         onChange: React.PropTypes.func.isRequired,
         className: React.PropTypes.string,
+        isRequired: React.PropTypes.bool,
         id: React.PropTypes.string
     },
     getInitialState: function () {
@@ -157,7 +158,9 @@ var Multivalues = React.createClass({
 
     render: function () {
         var containerCss = cx({
-            "input-multivalues": true
+            "input-multivalues": true,
+            required: this.props.isRequired,
+            "value-entered": (this.props.entries.length !== 0)
         });
 
         //this style is for the hidden div that allows us to get an accurate

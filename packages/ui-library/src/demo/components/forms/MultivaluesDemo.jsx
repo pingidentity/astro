@@ -25,9 +25,19 @@ var MultivaluesDemo = React.createClass({
             <div>
                 <p>Type ahead. Press return or "," to add an item, or delete an item by clicking "x".</p>
 
-                <Multivalues title="Multivalues Demo"
-                    entries={this.state.entries}
-                    onChange={this._updateEntries} />
+                <div className="input-row">
+                    <Multivalues title="Multivalues Demo"
+                        entries={this.state.entries}
+                        onChange={this._updateEntries} />
+                </div>
+                
+                <div className="input-row">
+                    <Multivalues title="Multivalues Demo"
+                        entries={this.state.entries}
+                        isRequired={true}
+                        onChange={this._updateEntries} />
+                </div>
+                
             </div>
         );
     }

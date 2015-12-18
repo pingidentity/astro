@@ -253,7 +253,7 @@ label {
 			}
 		}
 	}
-	&.input-text, &.input-textarea {
+	&.input-text, &.input-textarea, &.input-multivalues {
 		&.no-label {
 			&.required {
 				&:before {
@@ -984,7 +984,7 @@ label {
 		padding-right: 34px;
 		padding-left: 10px;
 	}
-
+	
 	&.input-text, &.input-textarea, &.input-select {
 		.input-container {
 			&:before {
@@ -1017,6 +1017,16 @@ label {
 				bottom: 8px;
 				left: 6px;
 			}
+		}
+	}
+	&.input-multivalues {
+		@include requiredPadding;
+		width: 315px;
+		&:before {
+			@include requiredCss;
+			top: 7px;
+			bottom: 8px;
+			left: 0;
 		}
 	}
 	&.input-select {
@@ -1068,6 +1078,11 @@ label {
 				}
 			}
 		}
+		&.input-multivalues {
+			&:before {
+				width: 0;
+			}
+		}
 		&.input-text {
 			input {
 				@include requiredPaddingEntered;
@@ -1077,6 +1092,9 @@ label {
 			textarea {
 				@include requiredPaddingEntered;
 			}
+		}
+		&.input-multivalues {
+			@include requiredPaddingEntered;
 		}
 		&.input-select {
 			select {

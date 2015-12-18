@@ -29,7 +29,26 @@ describe("FormTextField", function () {
         entries = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "entry");
         input = TestUtils.findRenderedDOMComponentWithDataId(component,"value-entry");
 
-
+        // make sure that the field is not required by default
+        var elements = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "required");
+        expect(elements.length).toBe(0);
+    });
+    
+    it("shows field as required", function () {
+        component = ReactTestUtils.renderIntoDocument(
+            <Multivalues title="Sites" id="multiselect"
+                entries={[
+                    "Entry 1",
+                    "Entry 2",
+                    "Entry 3",
+                    "Entry 4"
+                ]}
+                isRequired={true}
+                onChange={callback} />
+        );
+        // verify that the component is rendered
+        var field = ReactTestUtils.findRenderedDOMComponentWithClass(component, "required");
+        expect(ReactTestUtils.isDOMComponent(field)).toBeTruthy();
     });
 
     it ("rendered with all 4 strings", function () {
@@ -39,6 +58,7 @@ describe("FormTextField", function () {
         expect(entries[2].getDOMNode().firstChild.innerHTML).toBe("Entry 3");
 
     });
+    
     it ("trigger basic change callback", function () {
 
         //simulate typing a letter
