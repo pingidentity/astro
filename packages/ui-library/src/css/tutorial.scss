@@ -1,7 +1,7 @@
 .introOverlay {
 	$intro-colors: (
-        'blue': #40C5E3
-    );
+				'blue': #40C5E3
+		);
 
 	background: rgba(map-get($colors, 'black'), 0.6);
 	width: 100%;
@@ -21,15 +21,16 @@
 		position: absolute;
 		left: 0;
 	}
-    div.modal {
-        display: inline-block;
-        padding: 20px 20px 77px 20px;
-        margin-top: -100px;
-        top: 50%;
-        position: relative;
-        background-color: map-get($colors, 'black');
-        width: 400px;
-        opacity: 1;
+	div.modal {
+		display: inline-block;
+		padding: 20px 20px 77px 20px;
+		margin-top: -100px;
+		margin-left: -200px;
+		top: 50%;
+		left: 50%;
+		background-color: map-get($colors, 'black');
+		width: 400px;
+		opacity: 1;
 		color: map-get($colors, 'white');
 		@include border-radius(5px);
 
@@ -65,7 +66,7 @@
 		input[type=button] {
 			border: none;
 			font-size: 16px;
-	        line-height: 1em;
+					line-height: 1em;
 			padding: 10px 20px;
 			color: map-get($colors, 'white');
 			background-color: map-get($intro-colors, 'blue');
@@ -89,7 +90,7 @@
 				}
 			}
 		}
-    }
+	}
 	path {
 		stroke: map-get($intro-colors, 'blue');
 		fill:none;
@@ -110,9 +111,9 @@
 	}
 }
 html body .introOverlay > .spotlight > * {
-  position:relative;
-  left:0;
-  top:0;
-  margin-bottom:0;
-  margin-top:0;
+	position:relative;
+	left:0;
+	top:0;
+	margin-bottom:0;
+	margin-top:0;
 }

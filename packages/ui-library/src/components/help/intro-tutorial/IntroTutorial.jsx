@@ -79,11 +79,12 @@ var IntroTutorial = React.createClass({
             <div key={2} className="page">{this.props.active} {this.props.labelOf} {this.props.steps.length}</div>,
             <div key={3} className="controls">
                 <input type="button" ref="dismissButton" onClick={this._handleDismiss}
-                    value={this.props.labelDismiss} className="dismiss" />
-                <input type="button" ref="prevButton" disabled={this.props.active === 1}
+                    value={this.props.labelDismiss} className="dismiss" data-id="dismiss-button" />
+                <input type="button" ref="prevButton" disabled={this.props.active === 1} data-id="prev-button"
                     onClick={this.props.onPrevious} value={"« " + this.props.labelPrevious} className="prev" />
                 <input type="button" ref="nextButton" disabled={this.props.active === this.props.steps.length}
-                    onClick={this.props.onNext} value={this.props.labelNext + " »"} className="next" />
+                    onClick={this.props.onNext} value={this.props.labelNext + " »"} className="next"
+                    data-id="next-button" />
             </div>
         ];
         /* jshint ignore:end */
