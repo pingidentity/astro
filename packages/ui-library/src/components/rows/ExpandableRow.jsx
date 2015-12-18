@@ -29,6 +29,7 @@ var React = require("react"),
  *              </ModalButton>}#125;
  * @param {object} [deleteButton] - it is used to show an object inside delete body. For example: ModalButton
  * @param {string} className - extra CSS classes to be applied
+ * @param {string} waiting - when true, disabled interaction with row and reduces opacity of the layer
  * @param {string} id - it is used for a unique data-id.
  *
  * @example
@@ -61,6 +62,7 @@ var ExpandableRow = React.createClass({
         editButton: React.PropTypes.object,
         deleteButton: React.PropTypes.object,
         className: React.PropTypes.string,
+        waiting: React.PropTypes.bool,
         id: React.PropTypes.string
     },
 
@@ -83,7 +85,8 @@ var ExpandableRow = React.createClass({
             editViewRoute: "",
             showDelete: true,
             defaultToExpanded: false,
-            id: "expandable-row"
+            id: "expandable-row",
+            waiting: false
         };
     },
 
@@ -100,7 +103,8 @@ var ExpandableRow = React.createClass({
                 item: true,
                 expanded: this.state.isExpanded,
                 "no-delete": !this.props.showDelete,
-                "no-edit": !showEditIcon
+                "no-edit": !showEditIcon,
+                waiting: this.props.waiting
             },
             editButtonCss = {
                 "edit-btn": !showViewIcon,
