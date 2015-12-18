@@ -81,6 +81,7 @@ endef
 
 define deploy
 	mvn deploy:deploy-file \
+		-X
 		-DgroupId=com.pingone.ui-library \
 		-DartifactId=ui-library \
 		-Dversion=$(1) \
