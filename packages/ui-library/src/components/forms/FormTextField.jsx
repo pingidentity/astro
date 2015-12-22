@@ -26,6 +26,7 @@ var React = require("react"),
  * @param {string} [defaultValue] the default (initial) value to be shown in the field, when component managing state itself
  * @param {string} [originalValue] value to set the field to if the undo icon is clicked. If 'undefined' no undo icon will be shown
  * @param {boolean} [useAutocomplete] whether or not the field will support autocomplete (default false)
+ * @param {boolean} [autoFocus] whether or not to auto-focus the element
  * @param {string} [inputCss] CSS classes to add to the input element
  * @param {string} [labelCss] CSS classes to add to the label element
  * @param {string} [className] CSS classes to add to the parent Label element
@@ -70,6 +71,7 @@ var FormTextField = React.createClass({
         type: React.PropTypes.string,
         //upDownSpinner: React.PropTypes.object,
         useAutocomplete: React.PropTypes.bool,
+        autoFocus: React.PropTypes.bool,
         validator: React.PropTypes.func,
         validatorTrigger: React.PropTypes.string,
         value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number])
@@ -272,6 +274,7 @@ var FormTextField = React.createClass({
                 ) : null}
                 <span className="input-container">
                     <input
+                        autoFocus={this.props.autoFocus}
                         className={this.props.inputCss}
                         placeholder={this.props.placeholder}
                         did={this.props.validate ? this.props.referenceName : ""}
