@@ -34,6 +34,7 @@ var React = require("react"),
  * @param {boolean} [maskValue] if true, the value shown in the input field will be masked with '*****' i.e: passwords (default false)
  * @param {string} [errorMessage] error message to render if validation is being done externally
  * @param {function} [save] a method to be called to save the value; causes the save control to be shown
+ * @param {boolean} [autoFocus] whether or not to auto-focus the element
  *
  * @example <FormIntegerField
  *              referenceName={name}
@@ -74,8 +75,8 @@ var FormIntegerField = React.createClass({
         useAutocomplete: React.PropTypes.bool,
         validator: React.PropTypes.func,
         validatorTrigger: React.PropTypes.string,
-        value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number])
-
+        value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+        autoFocus: React.PropTypes.bool
     },
 
     /**

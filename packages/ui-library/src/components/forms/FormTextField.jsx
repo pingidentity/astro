@@ -26,7 +26,6 @@ var React = require("react"),
  * @param {string} [defaultValue] the default (initial) value to be shown in the field, when component managing state itself
  * @param {string} [originalValue] value to set the field to if the undo icon is clicked. If 'undefined' no undo icon will be shown
  * @param {boolean} [useAutocomplete] whether or not the field will support autocomplete (default false)
- * @param {boolean} [autoFocus] whether or not to auto-focus the element
  * @param {string} [inputCss] CSS classes to add to the input element
  * @param {string} [labelCss] CSS classes to add to the label element
  * @param {string} [className] CSS classes to add to the parent Label element
@@ -36,6 +35,7 @@ var React = require("react"),
  * @param {string} [errorMessage] error message to render if validation is being done externally
  * @param {function} [save] a method to be called to save the value; causes the save control to be shown
  * @param {object} [upDownSpinner] up down buttons used by FormIntegerField
+ * @param {boolean} [autoFocus] whether or not to auto-focus the element
  *
  * @example <FormTextField
  *              referenceName={name}
@@ -71,10 +71,10 @@ var FormTextField = React.createClass({
         type: React.PropTypes.string,
         //upDownSpinner: React.PropTypes.object,
         useAutocomplete: React.PropTypes.bool,
-        autoFocus: React.PropTypes.bool,
         validator: React.PropTypes.func,
         validatorTrigger: React.PropTypes.string,
-        value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number])
+        value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+        autoFocus: React.PropTypes.bool
     },
 
     /**
@@ -274,7 +274,6 @@ var FormTextField = React.createClass({
                 ) : null}
                 <span className="input-container">
                     <input
-                        autoFocus={this.props.autoFocus}
                         className={this.props.inputCss}
                         placeholder={this.props.placeholder}
                         did={this.props.validate ? this.props.referenceName : ""}
@@ -291,7 +290,8 @@ var FormTextField = React.createClass({
                         onChange={this._handleFieldChange}
                         onBlur={this._handleFieldBlur}
                         onKeyPress={this._handleFieldKeyPress}
-                        disabled={this.props.disabled}/>
+                        disabled={this.props.disabled}
+                        autoFocus={this.props.autoFocus}/>
                     {undo}
                     {save}
                     <div className={errorCss} data-id={this.props.referenceName + "_errormessage"}>

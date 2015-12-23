@@ -17,6 +17,8 @@ var cx = require("classnames");
  * @param {string} [countryCode] the country code to be selected by default (defaults to "us" as in USA)
  * @param {string} [placeholder] the country code to be selected by default (defaults to "(555) 555-5555")
  * @param {string} [invalidPhoneNumberMessage] the message to display if an invalid ph no is entered (defaults to "Please enter a valid phone number.")
+ * @param {boolean} [autoFocus] passes to and auto focuses the FormTextField input
+ * @param {boolean} [useAutocomplete] whether or not the field will support autocomplete (default false)
  */
 var I18nPhoneInput = React.createClass({
     propTypes: {
@@ -25,7 +27,9 @@ var I18nPhoneInput = React.createClass({
         onValueChange: React.PropTypes.func,
         countryCode: React.PropTypes.string,
         placeholder: React.PropTypes.string,
-        invalidPhoneNumberMessage: React.PropTypes.string
+        invalidPhoneNumberMessage: React.PropTypes.string,
+        autoFocus: React.PropTypes.bool,
+        useAutoComplete: React.PropTypes.bool
     },
 
     /**
@@ -117,9 +121,12 @@ var I18nPhoneInput = React.createClass({
                     </div>
                     <ul className={list}>{countries}</ul>
                 </div>
-                <TextField type="tel" onChange={this._onChange} value={this.state.phoneNumber}
-                    className="form-control" autoComplete="off" placeholder={this.props.placeholder}
-                    validator={this._validatePhoneNumber} />
+                <TextField type="tel" onChange={this._onChange}
+                           value={this.state.phoneNumber}
+                           className="form-control" placeholder={this.props.placeholder}
+                           validator={this._validatePhoneNumber}
+                           autoFocus={this.props.autoFocus}
+                           useAutocomplete={this.props.useAutocomplete} />
             </div>
         );
     }

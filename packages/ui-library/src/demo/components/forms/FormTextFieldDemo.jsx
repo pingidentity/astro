@@ -51,12 +51,6 @@ var FormTextFieldDemo = React.createClass({
                 </div>
                 <div className="input-row">
                     <FormTextField
-                        autoFocus={true}
-                        labelText="auto Focusyn™"
-                    />
-                </div>
-                <div className="input-row">
-                    <FormTextField
                         labelText="Default value and undo"
                         defaultValue={originalValueForUndo}
                         originalValue={originalValueForUndo}

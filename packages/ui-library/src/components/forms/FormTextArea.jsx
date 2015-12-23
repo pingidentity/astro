@@ -35,6 +35,7 @@ var React = require("react"),
  * @param {string} [className] CSS classes to add to the parent Label element
  * @param {string} [errorMessage] an error message to show (will be shown if defined)
  * @param {boolean} [disabled] property that disables the component
+ * @param {boolean} [autoFocus] whether or not to auto-focus the element
  *
  * @example
  *                   <FormTextArea
@@ -66,7 +67,8 @@ var FormTextArea = React.createClass({
         useAutocomplete: React.PropTypes.bool,
         inputCss: React.PropTypes.string,
         className: React.PropTypes.string,
-        errorMessage: React.PropTypes.string
+        errorMessage: React.PropTypes.string,
+        autoFocus: React.PropTypes.bool
     },
 
     /**
@@ -190,7 +192,8 @@ var FormTextArea = React.createClass({
                         rows={this.props.rows}
                         autoComplete={this.props.useAutocomplete ? "on" : "off"}
                         onChange={this._handleFieldChange}
-                        onBlur={this._handleBlur}>
+                        onBlur={this._handleBlur}
+                        autoFocus={this.props.autoFocus}>
                     </textarea>
                     {undo}
                     <div className={errorCss}>
