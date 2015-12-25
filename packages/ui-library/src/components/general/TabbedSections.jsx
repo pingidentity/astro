@@ -24,7 +24,8 @@ var TabbedSections = React.createClass({
     },
 
     _renderSelectedChild: function () {
-        return this.props.children[this.props.selectedIndex];
+        return React.Children.count(this.props.children) === 1
+            ? this.props.children : this.props.children[this.props.selectedIndex];
     },
 
     render: function () {
@@ -34,7 +35,7 @@ var TabbedSections = React.createClass({
                 <div className="tabs">
                     <ul ref="tabs">
                     {
-                        this.props.children.map(function (child, index) {
+                        React.Children.map(this.props.children, function (child, index) {
                             return (<li className={this.props.selectedIndex === index ? "active" : ""}
                                         onClick={this.props.onSectionChange.bind(null, index)}
                                         key={index}>{child.props.title}</li>);

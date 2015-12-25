@@ -1,10 +1,12 @@
 window.__DEV__ = true;
 
 jest.dontMock("../TabbedSections.jsx");
+jest.dontMock("../../../testutil/TestUtils");
 
 describe("If component", function () {
     var React = require("react/addons"),
         ReactTestUtils = React.addons.TestUtils,
+        TestUtils = require("../../../testutil/TestUtils"),
         TabbedSections = require("../TabbedSections.jsx"),
         _ = require("underscore");
 
@@ -20,6 +22,17 @@ describe("If component", function () {
                 <div data-id="section2" title="section 2">section 2</div>
             </TabbedSections>);
     }
+
+    it("Renders one child", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <TabbedSections selectedIndex={0} onSectionChange={_.noop}>
+                <div data-id="section1" title="section 1">section 1</div>
+            </TabbedSections>);
+
+        var child = TestUtils.findRenderedDOMComponentWithDataId(component, "section1");
+
+        expect(React.findDOMNode(child).textContent).toBe("section 1");
+    });
 
     it("ID and classname are written to DOM", function () {
         var component = getComponent({ selectedIndex: 0, id: "myId", className: "myClassName" });
