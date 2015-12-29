@@ -11,7 +11,19 @@ describe("DetailsTooltip", function () {
     var React = require("react/addons"),
         ReactTestUtils = React.addons.TestUtils,
         TestUtils = require("../../../testutil/TestUtils"),
-        Details = require("../DetailsTooltip.jsx");
+        Details = require("../DetailsTooltip.jsx"),
+        _ = require("underscore");
+
+    function getComponent (opts) {
+        opts = _.defaults(opts, {
+            title: "Title",
+            label: "Label",
+            open: true
+        });
+
+        return ReactTestUtils.renderIntoDocument(
+            <Details {...opts}><p>what ever callout content is</p></Details>);
+    }
 
     it("is rendering open state", function () {
 
@@ -36,6 +48,13 @@ describe("DetailsTooltip", function () {
 
         //title
         expect(title.getDOMNode().textContent).toBe("Title");
+    });
+
+    it("doesnt render title container if none exists", function () {
+        var component = getComponent({ title: "" });
+        var title = TestUtils.findRenderedDOMComponentWithDataId(component, "details-title");
+
+        expect(title).toBe(null);
     });
 
     it("is rendering open state with custom styles and no close control", function () {

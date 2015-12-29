@@ -6,8 +6,8 @@ var css = require("classnames");
 /** @module DetailsTooltip
  * @desc DetailsTooltip implements tooltip callout with trigger label. Body of tooltip is becoming callout content.
  *
- * @param {string} title - tooltip title ( required )
- * @param {string} label - tooltip trigger label
+ * @param {string} [title] - tooltip title
+ * @param {object|string} label - tooltip trigger label (can be a component)
  * @param {string} positionStyle - css styling to manage tooltip callout position ('bottom', 'top', 'left', 'right')
  *          + any extra css styling if needed
  * @param {string} titleClassNames - css classes to apply to title container, 'details-title' if not specified
@@ -35,8 +35,10 @@ var css = require("classnames");
 var DetailsTooltip = React.createClass({
 
     propTypes: {
-        title: React.PropTypes.string.isRequired,
-        label: React.PropTypes.string,
+        title: React.PropTypes.string,
+        label: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.object]),
         positionStyle: React.PropTypes.string,
         titleClassNames: React.PropTypes.string,
         contentClassNames: React.PropTypes.string,
@@ -83,10 +85,11 @@ var DetailsTooltip = React.createClass({
 
         return this.props.open ? (
             <div className={this.props.contentClassNames} data-id="details-content" onClick={hide}>
-                    {this.props.showClose && <a className="details-close" data-id="details-close"
-                    onClick={this.props.onToggle}></a>}
-                <div className={this.props.titleClassNames} data-id="details-title">{this.props.title}</div>
-                  {this.props.children}
+                {this.props.showClose &&
+                    <a className="details-close" data-id="details-close" onClick={this.props.onToggle}></a>}
+                {this.props.title &&
+                    <div className={this.props.titleClassNames} data-id="details-title">{this.props.title}</div>}
+                {this.props.children}
             </div>
         ) : null;
     },
