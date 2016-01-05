@@ -68,14 +68,14 @@ var FormIntegerField = React.createClass({
         onBlur: React.PropTypes.func,
         onChange: React.PropTypes.func.isRequired,
         onValueChange: React.PropTypes.func,
-        originalValue: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+        originalValue: React.PropTypes.number,
         placeholder: React.PropTypes.string,
         save: React.PropTypes.func,
         type: React.PropTypes.string,
         useAutocomplete: React.PropTypes.bool,
         validator: React.PropTypes.func,
         validatorTrigger: React.PropTypes.string,
-        value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+        value: React.PropTypes.number,
         autoFocus: React.PropTypes.bool
     },
 
