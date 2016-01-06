@@ -1,5 +1,5 @@
 var React = require("react/addons"),
-    I18nPhoneInput = require("../../../../components/forms/I18nPhoneInput/I18nPhoneInput.jsx");
+    I18nPhoneInput = require("../../../../components/forms/i18nPhoneInput/I18nPhoneInput.jsx");
 
 var I18nPhoneInputDemo = React.createClass({
     _onChange: function (dialCode, phoneNumber) {

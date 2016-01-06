@@ -45,13 +45,21 @@ var I18nPhoneInput = React.createClass({
         });
     },
 
+    _onClick: function (e) {
+        if (!e.target.dataset.hasOwnProperty("target") && e.target.dataset.target !== "list-select") {
+            this.setState({
+                listOpen: false
+            });
+        }
+    },
+
     /**
      * @param  {object} country the clicked country item
      */
     _onCountryClick: function (country) {
         this.setState({
             selected: country,
-            listOpen: !this.state.listOpen
+            listOpen: false
         }, function () {
             this.props.onValueChange(this.state.selected.dialCode, this.state.phoneNumber);
         }.bind(this));
@@ -69,6 +77,14 @@ var I18nPhoneInput = React.createClass({
 
     _validatePhoneNumber: function (str) {
         return Validators.isValidPhoneNumber(str) ? null : this.props.invalidPhoneNumberMessage;
+    },
+
+    componentWillMount: function () {
+        document.addEventListener("click", this._onClick);
+    },
+
+    componentWillUnmount: function () {
+        document.removeEventListener("click", this._onClick);
     },
 
     getDefaultProps: function () {
@@ -95,7 +111,8 @@ var I18nPhoneInput = React.createClass({
             var styles = cx("iti-flag", item.iso2);
 
             return (
-                <li key={item.iso2} className="country" onClick={this._onCountryClick.bind(this, item)}>
+                <li key={item.iso2} data-id={"country-" + item.iso2} className="country"
+                    onClick={this._onCountryClick.bind(this, item)}>
                     <div className="flag">
                         <div className={styles}></div>
                     </div>
@@ -115,11 +132,12 @@ var I18nPhoneInput = React.createClass({
         return (
             <div className={container} data-id={this.props.id}>
                 <div className="flag-container">
-                    <div tabIndex="0" onClick={this._toggleList} className="selected-flag" title={title}>
-                        <div className={selection}></div>
-                        <div className="arrow"></div>
+                    <div data-target="list-select" data-id="selected-flag" tabIndex="0"
+                         onClick={this._toggleList} className="selected-flag" title={title}>
+                        <div data-target="list-select" className={selection}></div>
+                        <div data-target="list-select" className="arrow"></div>
                     </div>
-                    <ul className={list}>{countries}</ul>
+                    <ul data-id="country-list" className={list}>{countries}</ul>
                 </div>
                 <TextField type="tel" onChange={this._onChange}
                            value={this.state.phoneNumber}

@@ -160,8 +160,8 @@ var Demo = React.createClass({
         },
         {
             name: "Form - I18n Phone Input",
-            demo: require("./components/forms/I18nPhoneInput/I18nPhoneInputDemo.jsx"),
-            pathToCode: "components/forms/I18nPhoneInput/I18nPhoneInput.jsx"
+            demo: require("./components/forms/i18nPhoneInput/I18nPhoneInputDemo.jsx"),
+            pathToCode: "components/forms/i18nPhoneInput/I18nPhoneInput.jsx"
         },
         {
             name: "Calendar",
