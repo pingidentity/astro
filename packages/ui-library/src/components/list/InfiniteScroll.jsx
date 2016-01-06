@@ -179,7 +179,7 @@ var InfiniteScroll = React.createClass({
     jumpToItem: function (batchIndex, itemIndex, scrollIfOutOfView) {
         var batch = this._getBatchNode(batchIndex);
 
-        if (batch) {
+        if (batch && batch.childNodes.length > itemIndex) {
             var containerBounds = this._getContainerBounds();
 
             if (!this.visibilityArray[batchIndex]) {
