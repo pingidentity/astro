@@ -142,7 +142,7 @@
 		position: relative;
 		background-color: map-get($colors, 'elderly');
 		border: 1px solid map-get($colors, 'elderly');
-		margin: 0 0 10px 0;
+		margin: 0 0 12px 0;
 		max-height: $item-height;
 		@include border-radius(2px);
 		@include transition(all 0.1s);

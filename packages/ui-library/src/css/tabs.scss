@@ -20,7 +20,7 @@ $selected-arrow-width-h: 8px;
         li {
             display: inline;
             margin-right: 25px;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
             position: relative;
             text-transform: uppercase;
             color: map-get($colors, 'rhino');
@@ -49,7 +49,7 @@ $selected-arrow-width-h: 8px;
                     border-style: solid;
                     z-index: 1;
                     border-color: $color-active transparent transparent transparent;
-                    bottom: $selected-arrow-offset - 5;
+                    bottom: $selected-arrow-offset - 2;
                 }
             }
         }

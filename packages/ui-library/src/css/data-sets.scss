@@ -66,7 +66,7 @@
         	font-size: 14px;
         }
 		> label {
-            padding: 0 15px 15px 0;
+            padding: 0 20px 10px 0;
         	cursor: default;
 
         	&.input-radio {
@@ -84,6 +84,7 @@
 		> span {
             display: table-cell;
             padding: 0 20px 15px 0;
+			color: $color-midnight;
 
         	a {
         		margin: 0;
