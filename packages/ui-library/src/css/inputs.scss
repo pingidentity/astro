@@ -308,6 +308,7 @@ label {
 			display: block;
 			margin-bottom: 5px;
 			padding: 0 0 0 30px;
+			text-transform: none;
 
 			.label-text {
 				display: inline-block;
@@ -335,6 +336,7 @@ label {
 		&.stacked {
 			display: block;
 			margin-bottom: 13px;
+			text-transform: none;
 
 			.label-text {
 				text-transform: capitalize;
@@ -1004,7 +1006,7 @@ label {
 		padding-right: 34px;
 		padding-left: 10px;
 	}
-	
+
 	&.input-text, &.input-textarea, &.input-select {
 		.input-container {
 			&:before {
