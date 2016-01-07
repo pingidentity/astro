@@ -87,6 +87,12 @@ input[type=text], input[type=password], textarea {
 	@include border-radius(3px);
 	@include transition($default-input-transition);
 
+	&.error, &.form-error {
+		border-color: $color-input-error;
+		&:focus {
+			border-color: $color-input-error;
+		}
+	}
 	&:visited {
 		border: 1px solid $color-input-fill;
 	}
@@ -604,6 +610,20 @@ label {
 
 	.inactive, &.inactive {
 		display: none;
+	}
+	.text-input, .input-checkbox {
+		text-align: left;
+		.comment {
+			display: block;
+			padding: 5px;
+			margin-top: -3px;
+			&.error {
+				background-color: $color-error-msg;
+				color: $color-white;
+				padding: 15px;
+				@include border-radius(0 0 4px 4px);
+			}
+		}
 	}
 }
 .input-divider {
@@ -1569,7 +1589,7 @@ input[type=file] {
 }
 
 // Input width settings
-$input-width-max: 800px;
+$input-width-max: 600px;
 $input-hor-margin: 20px;
 $input-hor-padding-text: 46px;
 $input-hor-padding-textarea: 46px;

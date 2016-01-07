@@ -17,8 +17,9 @@
 			margin: 45px;
 		}
 		.primary-instructions {
-			color: map-get($colors, 'elephant');
-			margin: -10px 0 27px -25px;
+			color: $color-elephant;
+			margin: -10px 0 27px -20px;
+			font-size: 15px;
 		}
 		textarea {
 			max-width: 600px;
@@ -53,7 +54,7 @@
 		}
 		.progress {
 			text-transform: none;
-			margin: 0 10px 0 0;
+			margin: 0 15px 0 0;
 			font-family: 'ProximaNovaSemibold';
 		}
 		.help-tooltip {

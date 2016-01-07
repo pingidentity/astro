@@ -2,7 +2,7 @@
 	.column-title {
 		font-size: 16px;
 		padding: 0 0 15px 0;
-		margin: 0 0 30px 0;
+		margin: 0 0 4px 0;
 		border-bottom: 1px solid map-get($colors, 'rabbit-fur');
 		text-transform: uppercase;
 	}
@@ -21,10 +21,10 @@
 		width: 320px;
 		.items {
 			.no-items {
-				padding: 30px;
-				margin-bottom: 15px;
+				padding: 20px;
+				margin-bottom: 4px;
 				text-align: center;
-				font-size: 12px;
+				font-size: 14px;
 				border: 1px dashed map-get($colors, 'rabbit-fur');
 				position: absolute;
                 width: 257px;
@@ -33,7 +33,7 @@
 			}
 			:nth-child(2) {
                 &.item {
-                    margin-top: 90px;
+                    margin-top: 66px;
                     z-index: 3;
                 }
             }
@@ -45,9 +45,11 @@
 	}
 	.item {
 		position: relative;
-		background-color: map-get($colors, 'elderly');
-		margin: 0 0 15px 0;
-		padding: 13px 15px;
+		background-color: $color-white;
+		border-bottom: 1px solid $color-text;
+		color: $color-text;
+		margin: 0 15px 15px 0;
+		padding: 13px 15px 20px;
 		@include grab-cursor;
 
 		a.button {
