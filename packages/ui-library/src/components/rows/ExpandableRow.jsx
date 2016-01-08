@@ -112,8 +112,7 @@ var ExpandableRow = React.createClass({
             },
             titleCss = {
                 "item-title": true,
-                "title-only": !this.props.subtitle,
-                name: this.props.titleStyle === "name" || null
+                "title-only": !this.props.subtitle
             },
             deleteButton,
             editButton;

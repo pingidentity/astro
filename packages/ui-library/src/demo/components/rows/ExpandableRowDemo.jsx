@@ -10,7 +10,6 @@ var ExpandableRowDemo = React.createClass({
                 <ExpandableRow
                     title="Collapsed Expandable Row"
                     subtitle="subtitle here"
-                    titleStyle="name"
                     editModalTitle="Modal Title"
                     defaultToExpanded={false}
                     showDelete={false}
@@ -18,7 +17,6 @@ var ExpandableRowDemo = React.createClass({
                 <ExpandableRow
                     title="Open Expandable Row"
                     subtitle="subtitle here"
-                    titleStyle="name"
                     editModalTitle="Modal Title-2"
                     defaultToExpanded={true}
                     showDelete={true}
@@ -26,7 +24,6 @@ var ExpandableRowDemo = React.createClass({
                 <ExpandableRow
                     title="Expandable Row in Waiting Mode"
                     subtitle="subtitle here"
-                    titleStyle="name"
                     editModalTitle="Modal Title-2"
                     waiting={true}
                     defaultToExpanded={true} />

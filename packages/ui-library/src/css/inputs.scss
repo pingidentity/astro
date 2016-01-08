@@ -41,7 +41,7 @@ $default-input-transition: all 0.2s;
 		&:before {
 			content: '';
 			display: block;
-			border: 3px solid map-get($colors, 'timberwolf');
+			border: 3px solid $color-timberwolf;
 			height: $checkbox-height;
 			width: $checkbox-height;
 			line-height: $checkbox-height;
@@ -100,7 +100,7 @@ input[type=text], input[type=password], textarea {
 		border: 1px solid $color-input-border;
 	}
 	&:focus {
-		border-color: map-get($colors, 'active-blue');
+		border-color: $color-active-blue;
 	}
 	&.extended {
 		width: 350px;
@@ -127,7 +127,7 @@ label {
 	margin: 0 20px 0 0;
 	font-size: 14px;
 	text-transform: uppercase;
-	color: map-get($colors, 'elephant');
+	color: $color-elephant;
 	vertical-align: top;
 	line-height: 1em;
 	font-family: $font-pn-regular;
@@ -356,7 +356,7 @@ label {
 			margin: 0;
 
 			&:checked + .circle:after {
-				background-color: map-get($colors, 'midnight');
+				background-color: $color-midnight;
 			}
 		}
 		&.input-text {
@@ -377,7 +377,7 @@ label {
 			height: $radio-height;
 			cursor: pointer;
 
-			border: $border-width solid map-get($colors, 'timberwolf');
+			border: $border-width solid $color-timberwolf;
 			@include border-radius(ceil($radio-height/2) + $border-width);
 
 			&.form-error {
@@ -482,7 +482,7 @@ label {
 	.value-container {
 		display: block;
 		margin: 6px 0 0 0;
-		color: map-get($colors, 'midnight');
+		color: $color-midnight;
 		text-transform: none;
 		font-size: 16px;
 	}
@@ -522,7 +522,7 @@ label {
 			height: 40px;
 			overflow: hidden;
 			background: $color-white;
-			border: 1px solid map-get($colors, 'rhino');
+			border: 1px solid $color-rhino;
 			cursor: pointer;
 			@include border-radius(4px);
 
@@ -535,7 +535,7 @@ label {
 				right: 10px;
 				top: 0;
 				line-height: 42px;
-				color: map-get($colors, 'midnight');
+				color: $color-midnight;
 				pointer-events: none;
 			}
 		}
@@ -552,7 +552,7 @@ label {
 		-webkit-appearance: none;
 		-moz-appearance: none;
 		appearance: none;
-		color: map-get($colors, 'midnight');
+		color: $color-midnight;
 		border: 0;
 		border-radius: 0;
 		font-size: 16px;
@@ -582,7 +582,7 @@ label {
 			display: none;
 		}
 		&::-ms-value {
-			color: map-get($colors, 'midnight');
+			color: $color-midnight;
 			background: none;
 		}
 	}
@@ -618,7 +618,7 @@ label {
 			padding: 5px;
 			margin-top: -3px;
 			&.error {
-				background-color: $color-error-msg;
+				background-color: $color-critical-red;
 				color: $color-white;
 				padding: 15px;
 				@include border-radius(0 0 4px 4px);
@@ -869,7 +869,7 @@ label {
 			text-transform: none;
 			right: 10px;
 			top: 1px;
-			color: map-get($colors, 'midnight');
+			color: $color-midnight;
 			pointer-events: none;
 		}
 	}
@@ -1190,7 +1190,7 @@ a {
 
 		&:before {
 			content: '\00D7';
-			background: map-get($colors, 'critical-red');
+			background: $color-critical-red;
 			color: $color-white;
 			font-size: 14px;
 			height: 14px;
@@ -1208,7 +1208,7 @@ a {
 .checkbox-list {
 	padding: 10px 5px 10px 0;
 	margin-left: 0;
-	border: 1px solid map-get($colors, 'elderly');
+	border: 1px solid $color-elderly;
 	.options {
 		width: 99%;
 		height: 133px;
@@ -1232,7 +1232,7 @@ a {
 			display: inline;
 			&.item-head {
 				display: block;
-				color: map-get($colors, 'gray-warm-dark');
+				color: $color-walrus;
 			}
 		}
 	}
@@ -1263,7 +1263,7 @@ a {
 		font-size: 14px;
 		text-transform: none;
 		position: absolute;
-		color: map-get($colors, 'midnight');
+		color: $color-midnight;
 		cursor: pointer;
 	}
 	&:before {
@@ -1277,7 +1277,7 @@ a {
 	}
 	&.active {
 		input[type=text] {
-			border: 1px solid map-get($colors, 'stone');
+			border: 1px solid $color-stone;
 		}
 		&:after {
 			@include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
@@ -1291,7 +1291,7 @@ a {
 		height: 32px;
 		line-height: 32px;
 		&:focus {
-			border: 1px solid map-get($colors, 'stone');
+			border: 1px solid $color-stone;
 		}
 	}
 	.calendar-icon {
@@ -1310,7 +1310,7 @@ a {
 			position: absolute;
 			display: block;
 		    padding: 5px 12px;
-		    border: 1px solid map-get($colors, 'stone');
+		    border: 1px solid $color-stone;
 		    border-top: none;
 		    background-color: $color-input-fill;
 		    width: 200px;
@@ -1342,7 +1342,7 @@ a {
 						display: inline-block;
 						height: 25px;
 						width: 25px;
-						color: map-get($colors, 'midnight');
+						color: $color-midnight;
 						font-size: 13px;
 						cursor: pointer;
 
@@ -1450,7 +1450,7 @@ fieldset {
             padding: 0 7px;
             margin: 0 0 0 -7px;
             font-size: 14px;
-            color: map-get($colors, 'elephant');
+            color: $color-elephant;
             text-transform: uppercase;
 
             .input-radio {

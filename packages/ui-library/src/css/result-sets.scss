@@ -88,7 +88,7 @@
 	margin: 0 0 0 30px;
 	line-height: 24px;
 	font-size: 16px;
-	color: map-get($colors, 'elephant');
+	color: $color-elephant;
 }
 .result-set {
 	$item-height: 75px;
@@ -136,12 +136,12 @@
 		margin: 5px auto;
 		font-weight: bold;
 		text-align: center;
-		color: map-get($colors, 'midnight');
+		color: $color-midnight;
 	}
 	.item {
 		position: relative;
-		background-color: map-get($colors, 'elderly');
-		border: 1px solid map-get($colors, 'elderly');
+		background-color: $color-elderly;
+		border: 1px solid $color-elderly;
 		margin: 0 0 12px 0;
 		max-height: $item-height;
 		@include border-radius(2px);
@@ -150,7 +150,7 @@
 		&.expanded {
 			background-color: $color-white;
 			max-height: 4000px;
-			border: 1px solid map-get($colors, 'rabbit-fur');
+			border: 1px solid $color-rabbit-fur;
 			@include transition(max-height 1s);
 
 			.expand-btn {
@@ -161,7 +161,7 @@
 			}
 			.row-controls {
 				background: none;
-				border-left: 1px solid map-get($colors, 'rabbit-fur');
+				border-left: 1px solid $color-rabbit-fur;
 			}
 			.collapsed-content {
 				.row-button {
@@ -191,17 +191,16 @@
 		}
 		.item-title {
 			font-size: 16px;
-			&.name {
-				font-size: 22px;
-			}
-			&.no-sub-title {
-				margin-top: 13px;
+			color: $color-slate;
+
+			&.title-only {
+				margin-top: 8px;
 			}
 		}
 		.item-sub-title {
-			font-size: 14px;
+			font-size: 13px;
 			font-weight: normal;
-			color: map-get($colors, 'rhino');
+			color: $color-elephant;
 		}
 		.item-link {
             position: absolute;
@@ -255,14 +254,14 @@
 				font-style: italic;
 			}
 			.item-title {
-				color: map-get($colors, 'rhino');
+				color: $color-rhino;
 			}
 		}
 		.row-controls {
 			$btn-width: 75px;
-			background: darken(map-get($colors, 'rabbit-fur'), 3);
-			border-bottom: 1px solid map-get($colors, 'rabbit-fur');
-			border-left: 1px solid darken(map-get($colors, 'rabbit-fur'), 8%);
+			background: darken($color-rabbit-fur, 3);
+			border-bottom: 1px solid $color-rabbit-fur;
+			border-left: 1px solid darken($color-rabbit-fur, 8%);
 			position: absolute;
 			top: 0;
 			bottom: 0;
@@ -329,8 +328,8 @@
 				}
 			}
 			.reject-btn {
-				color: map-get($colors, 'walrus');
-				background-color: map-get($colors, 'stratus');
+				color: $color-walrus;
+				background-color: $color-stratus;
 
 				&:after {
 					content: '\58';
@@ -366,7 +365,7 @@
 			}
 		}
 		.expand-btn, .delete-btn, .edit-btn, .view-btn, .no-edit {
-			background-color: map-get($colors, 'timberwolf');
+			background-color: $color-timberwolf;
 			position: absolute;
 			width: 50px;
 			text-align: center;
@@ -377,7 +376,7 @@
 				text-transform: none;
 				font-size: 18px;
 				font-family: 'iconfont';
-				color: map-get($colors, 'walrus');
+				color: $color-walrus;
 			}
 		}
 		.expand-btn, .delete-btn, .edit-btn, .view-btn {
@@ -502,9 +501,6 @@
 		.item {
 			.item-title, .item-sub-title {
 				margin-left: 25px;
-				&.no-sub-title {
-					margin-top: 13px;
-				}
 			}
 			.grip {
 				position: absolute;
@@ -517,7 +513,7 @@
 					text-transform: none;
 					font-size: 18px;
 					font-family: 'iconfont';
-					color: map-get($colors, 'stone');
+					color: $color-stone;
 				}
 			}
 		}
@@ -615,9 +611,9 @@
 		padding: 15px 0;
 		border-style: solid;
 		border-width: 1px 0 0 0;
-		border-color: map-get($colors, 'elderly');
+		border-color: $color-elderly;
 		text-transform: uppercase;
-		color: map-get($colors, 'rhino');
+		color: $color-rhino;
 		font-size: 14px;
 		font-family: $font-pn-regular;
 		font-weight: 600;
@@ -626,7 +622,7 @@
 			cursor: pointer;
 		}
 		&:last-child {
-			border-bottom: 1px solid map-get($colors, 'elderly');
+			border-bottom: 1px solid $color-elderly;
 		}
 		.show-condition, .value {
 			text-transform: none;
@@ -637,7 +633,7 @@
 			&:before {
 				// only want ':' to show when condition-title followed by value
 				content: ': ';
-				color: map-get($colors, 'rhino');
+				color: $color-rhino;
 				font-size: 14px;
 				font-family: $font-pn-regular;
 				font-weight: 600;
