@@ -733,8 +733,8 @@ label {
 			}
 			&.no-logo {
 				display: inline-block;
-				color: #c6c6c5;
-				border: 1px solid #c6c6c5;
+				color: $color-stone;
+				border: 1px solid $color-stone;
 				height: 52px;
 				width: 72px;
 				padding: 5px 0 0 0;
@@ -822,6 +822,9 @@ label {
 				left: $toggle-width - $toggle-height + 1;
 			}
 		}
+	}
+	&.disabled {
+		@include opacity(0.6);
 	}
 	&.form-error {
 		.toggle {
@@ -1432,6 +1435,7 @@ fieldset {
     margin: 0 0 25px 0;
 
     legend {
+		text-transform: uppercase;
         .help-tooltip {
             margin: 0 5px 0 10px;
             height: 14px;
@@ -1453,8 +1457,7 @@ fieldset {
             margin: 0 0 0 -7px;
             font-size: 14px;
             color: $color-elephant;
-            text-transform: uppercase;
-
+            
             .input-radio {
                 &:last-of-type {
                     margin-right: 0;

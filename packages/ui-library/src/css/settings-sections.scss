@@ -226,6 +226,39 @@
     }
 }
 
+// ATTRIBUTE PREVIEW
+.preview {
+    padding: 5px;
+    background-color: $color-dolphin;
+    .title {
+        display: block;
+		padding: 0 0 5px 0;
+		margin: 0 0 25px 0;
+		color: $color-blue-grey;
+		border-bottom: 1px solid $color-stratus;
+		text-transform: uppercase;
+        text-align: center;
+		font-size: 14px;
+		line-height: 1em;
+        &.active {
+            .icon-dropdown-arrow {
+                &:before {
+                    @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
+        			@include transform(rotate(180deg));
+                }
+            }
+        }
+    }
+    .body {
+        padding-left: 30px;
+        .row-title {
+            text-transform: uppercase;
+            color: $color-midnight;
+            margin: 5px 0 10px;
+        }
+    }
+}
+
 // CO-BRANDING, CID SETTINGS
 .branding, .directory-settings {
     label {
