@@ -225,6 +225,9 @@ label {
 				width: 350px;
 			}
 		}
+		&.disabled {
+			font-style: normal;
+		}
 
 		// temporary sizing classes
 		&.input-width-1 {
@@ -610,6 +613,9 @@ label {
 	position: relative;
 	margin: 0 0 20px 0;
 
+	&.lead-item {
+		margin-bottom: 30px;
+	}
 	.inactive, &.inactive {
 		display: none;
 	}
@@ -1449,7 +1455,7 @@ fieldset {
     }
     &.focused {
         border: 1px solid $color-dolphin;
-        padding: 20px 25px 30px 25px;
+        padding: 15px 25px 30px 25px;
         @include border-radius(5px);
 
         legend {

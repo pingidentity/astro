@@ -6,7 +6,6 @@
 	$border-color: map-get($colors, 'stone');
 	$gutter: 20px;
 
-	display: inline-block;
 	position: relative;
 
 	&.show {

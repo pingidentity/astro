@@ -24,7 +24,7 @@
     }
     .section {
         position: relative;
-	    padding: 20px 0 20px 0;
+	    padding: 15px 0 20px 0;
 		border-bottom: 1px solid map-get($colors, 'cinder-block');
 		overflow: visible;
 		@include transition(max-height ease-out 0.6s);
@@ -33,7 +33,7 @@
 			border-bottom: none;
 		}
         &.active {
-            .icon-dropdown-arrow:before {
+            .icon-dropdown-arrow {
                 @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
     			@include transform(rotate(180deg));
             }
@@ -255,6 +255,9 @@
             text-transform: uppercase;
             color: $color-midnight;
             margin: 5px 0 10px;
+        }
+        .inactive {
+            @include opacity(0.6);
         }
     }
 }
