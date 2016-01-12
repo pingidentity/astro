@@ -84,6 +84,7 @@ input[type=text], input[type=password], textarea {
 	font-size: 14px;
 	height: 40px;
 	outline: none;
+	font-family: $font-pn-regular;
 	@include border-radius(3px);
 	@include transition($default-input-transition);
 
@@ -1463,7 +1464,7 @@ fieldset {
             margin: 0 0 0 -7px;
             font-size: 14px;
             color: $color-elephant;
-            
+
             .input-radio {
                 &:last-of-type {
                     margin-right: 0;
