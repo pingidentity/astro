@@ -1,16 +1,74 @@
 window.__DEV__ = true;
 
 jest.dontMock("../Messages.jsx");
-
+jest.dontMock("../../../util/ReduxTestUtils.js");
 
 describe("Messages", function () {
-    var React, ReactTestUtils;
-    var Messages;
+    var React = require("react/addons"),
+        ReactTestUtils = React.addons.TestUtils,
+        Messages = require("../Messages.jsx"),
+        ReduxTestUtils = require("../../../util/ReduxTestUtils.js"),
+        setTimeout = window.setTimeout,
+        _ = require("underscore");
 
-    React = require("react/addons");
-    ReactTestUtils = React.addons.TestUtils;
+    beforeEach(function () {
+        window.setTimeout = jest.genMockFunction();
+    });
 
-    Messages = require("../Messages.jsx");
+    afterEach(function () {
+        window.setTimeout = setTimeout;
+    });
+
+    it("Add message schedules removal", function () {
+        var obj = { state: { messages: [] } };
+        var dispatch = ReduxTestUtils.createTestDispatcher(Messages.Reducer, obj);
+
+        dispatch({});
+        dispatch(Messages.Actions.addMessage("message"));
+
+        expect(window.setTimeout.mock.calls[0][1]).toBe(5000);
+        expect(_.omit(obj.state.messages[0], "timer")).toEqual({ text: "message", type: "success", index: 1 });
+
+        //change the message id to verify that it doesnt affect what gets removed
+        dispatch(Messages.Actions.addMessage("message 1"));
+        dispatch(Messages.Actions.addMessage("message 2"));
+
+        expect(obj.state.messages.length).toBe(3);
+
+        //execute the timer
+        window.setTimeout.mock.calls[0][0]();
+        expect(_.pluck(obj.state.messages, "text")).toEqual(["message 1", "message 2"]);
+
+        //trigger removal of all messages
+        window.setTimeout.mock.calls[1][0]();
+        window.setTimeout.mock.calls[2][0]();
+        expect(obj.state.messages).toEqual([]);
+    });
+
+    it("Removes message by index", function () {
+        var obj = { state: { messages: [] } };
+        var dispatch = ReduxTestUtils.createTestDispatcher(Messages.Reducer, obj);
+
+        dispatch({});
+        dispatch(Messages.Actions.addMessage("message 1"));
+        dispatch(Messages.Actions.addMessage("message 2"));
+        dispatch(Messages.Actions.addMessage("message 3"));
+
+        dispatch(Messages.Actions.removeAt(1));
+
+        expect(_.pluck(obj.state.messages, "text")).toEqual(["message 1", "message 3"]);
+    });
+
+    it("Removes non-existant index", function () {
+        var obj = { state: { messages: [] } };
+        var dispatch = ReduxTestUtils.createTestDispatcher(Messages.Reducer, obj);
+
+        dispatch({});
+        dispatch(Messages.Actions.addMessage("message 1"));
+        dispatch(Messages.Actions.removeAt(1));
+
+        expect(obj.state.messages.length).toBe(1);
+    });
 
     it("Render empty messages", function () {
         var messagesComponent = ReactTestUtils.renderIntoDocument(

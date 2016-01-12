@@ -1,9 +1,11 @@
 "use strict";
 
-var React = require("react");
+var React = require("react"),
+    keyMirror = require("react/lib/keyMirror"),
+    _ = require("underscore");
 
 /**
- * @class components/general/Messages
+ * @class Messages
  *
  * @desc
  *
@@ -140,5 +142,137 @@ Message = React.createClass({
     }
 
 });
+
+
+/** Actions **/
+Messages.Actions = {};
+var initialState = { messages: [] };
+
+/** Internal auto-incremented id.  This should only be used by message expiry mechanism (since index wont be reliable) */
+Messages.id = 0;
+
+/** @enum {string}
+ * @desc Enum for the different types of Messages */
+Messages.MessageTypes = {
+    SUCCESS: "success",
+    NOTICE: "notice",
+    WARNING: "warning",
+    ERROR: "error"
+};
+
+/** @enum {string}
+ * @desc Action types
+ * @private */
+Messages.Actions.Types = keyMirror({
+    ADD_MESSAGE: null,
+    REMOVE_MESSAGE: null,
+    REMOVE_AT: null,
+    SHIFT_MESSAGE: null
+});
+
+/** @function Messages.Actions.shiftMessage
+ * @desc Action creator to remove the first (oldest) item in the message list
+ * @returns {object} action */
+Messages.Actions.shiftMessage = function () {
+    return {
+        type: Messages.Actions.Types.SHIFT_MESSAGE
+    };
+};
+
+/** @function Messages.Actions.addMessage
+ * @param {string|object} message - Generally this will be a string but it is possible to pass a react component instance
+ * @param {Messages.MessageTypes} [status="success"] - The type of Message to add
+ * @param {number} [removeAfterMs=5000] - Auto-expire duration
+ * @desc Add a message to the Messages store
+ * @returns {object} action */
+Messages.Actions.addMessage = function (message, status, removeAfterMs) {
+    removeAfterMs = typeof(removeAfterMs) === "undefined" ? 5000 : removeAfterMs;
+    Messages.id += 1;
+
+    var payload = {
+        type: Messages.Actions.Types.ADD_MESSAGE,
+        message: message,
+        status: status,
+        id: Messages.id
+    };
+
+    return function (dispatch) {
+        if (removeAfterMs > 0) {
+            payload.timer = setTimeout(function (id) {
+                dispatch(Messages.Actions.removeMessage(id));
+            }.bind(null, Messages.id), removeAfterMs);
+        }
+
+        dispatch(payload);
+    };
+};
+
+/** @function Messages.Actions.removeAt
+ * @param {number} index - The index number of the message to remove
+ * @returns {object} action */
+Messages.Actions.removeAt = function (index) {
+    return {
+        type: Messages.Actions.Types.REMOVE_AT,
+        index: index
+    };
+};
+
+/** @function Messages.Actions.removeMessage
+ * @param {number} id - The id of the message to remove (only used internally)
+ * @returns {object} action */
+Messages.Actions.removeMessage = function (id) {
+    return {
+        type: Messages.Actions.Types.REMOVE_MESSAGE,
+        id: id
+    };
+};
+
+/** @function Messages.Reducer
+ * @param {object} state - start state
+ * @param {object} action - action
+ * @returns {object} nextState*/
+Messages.Reducer = function (state, action) {
+    var nextState = _.clone(state);
+
+    switch (action.type) {
+        case Messages.Actions.Types.ADD_MESSAGE:
+            nextState.messages = _.clone(state.messages);
+            nextState.messages.push({
+                text: action.message,
+                type: action.status || Messages.MessageTypes.SUCCESS,
+                index: action.id,
+                timer: action.timer
+            });
+            break;
+        case Messages.Actions.Types.REMOVE_MESSAGE:
+            var index = _.findIndex(nextState.messages, function (item) {
+                return item.index === action.id;
+            });
+            if (index > -1) {
+                clearTimeout(nextState.messages[index].timer);
+                nextState.messages = _.clone(state.messages);
+                nextState.messages.splice(index, 1);
+            }
+            break;
+        case Messages.Actions.Types.REMOVE_AT:
+            if (nextState.messages.length > action.index) {
+                clearTimeout(nextState.messages[action.index].timer);
+                nextState.messages = _.clone(state.messages);
+                nextState.messages.splice(action.index, 1);
+            }
+            break;
+        case Messages.Actions.Types.SHIFT_MESSAGE:
+            if (nextState.messages.length > 0) {
+                nextState.messages = _.clone(state.messages);
+                clearTimeout(nextState.messages[0].timer);
+                nextState.messages.shift();
+            }
+            break;
+        default:
+            return state || initialState;
+    }
+
+    return nextState;
+};
 
 module.exports = Messages;

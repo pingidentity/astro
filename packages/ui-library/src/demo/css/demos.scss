@@ -39,3 +39,48 @@
         text-align:center;
     }
 }
+
+.messagesDemo {
+    .message {
+    	overflow: hidden;
+    }
+
+    .text {
+	    position: relative;
+	    margin-top: -100px;
+	    padding: 10px 40px;
+    }
+
+    .message.warning {
+    		background-color: red;
+    }
+    .message.success {
+    		background-color: green;
+        color: white;
+    }
+    .message.notice {
+    		background-color: orange;
+    }
+    .show .text {
+    		margin-top: 0px;
+    		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .close {
+    	width: 15px;
+      height: 15px;
+    	position: absolute;
+    	top: 10px;
+    	right: 10px;
+    	color: "white";
+    }
+
+    .close:after {
+        font-size: 18px;
+        content: '\78';
+        font-family: 'iconfont';
+    }
+    .close:hover {
+        text-decoration: none;
+    }
+}
