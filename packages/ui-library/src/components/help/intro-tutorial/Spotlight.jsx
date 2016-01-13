@@ -34,11 +34,18 @@ var Spotlight = React.createClass({
     componentWillReceiveProps: function (newProps) {
         if (newProps.target) {
             var targetBounds = newProps.target.getBoundingClientRect();
+            var marginLeft = 0, marginRight = 0;
+
+            try {
+                var style = getComputedStyle(newProps.target);
+                marginLeft = parseInt(style.marginLeft);
+                marginRight = parseInt(style.marginRight);
+            } catch (e) {}
 
             this.setState({
-                left: targetBounds.left - this.props.padding,
+                left: targetBounds.left - this.props.padding - marginLeft,
                 top: targetBounds.top - this.props.padding,
-                width: targetBounds.width,
+                width: targetBounds.width + marginLeft + marginRight,
                 clone: newProps.target.outerHTML
             });
         }
