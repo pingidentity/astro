@@ -308,8 +308,7 @@ label {
 				vertical-align: middle;
 			}
 		}
-		&.stacked {
-			display: block;
+		&.stacked, &.inline {
 			margin-bottom: 5px;
 			padding: 0 0 0 30px;
 			text-transform: none;
@@ -319,6 +318,9 @@ label {
 				text-transform: capitalize;
 				padding-top: 6px;
 			}
+		}
+		&.stacked {
+			display: block;
 		}
 	}
 	&.input-radio {
@@ -332,6 +334,7 @@ label {
 		display: inline-block;
 		padding: 0 0 0 32px;
 		margin: 0 20px 0 0;
+		text-transform: none;
 		cursor: pointer;
 
 		&.no-label {
@@ -340,7 +343,6 @@ label {
 		&.stacked {
 			display: block;
 			margin-bottom: 13px;
-			text-transform: none;
 
 			.label-text {
 				text-transform: capitalize;
