@@ -9,6 +9,7 @@ var _ = require("underscore");
  * @param {object} state - The state object to modify
  * @param {string} path - The path to place the value
  * @param {object} val - The value
+ * @returns {object} the object that was passed in
  * @example
  * var state = {};
  * setAtPath(state, "path.to.val", 123);
@@ -16,6 +17,7 @@ var _ = require("underscore");
  */
 exports.setAtPath = function (state, path, val) {
     var parts = path.split(".");
+    var original = state;
 
     state.dirty = true;
 
@@ -25,7 +27,7 @@ exports.setAtPath = function (state, path, val) {
                 state[parts[i]] = {};
                 break;
             case "object":
-                //this is okay
+                state[parts[i]] = _.clone(state[parts[i]]);
                 break;
             default:
                 console.warn("trying to set sub-state on non-object");
@@ -36,6 +38,8 @@ exports.setAtPath = function (state, path, val) {
     }
 
     state[parts[parts.length - 1]] = val;
+
+    return original;
 };
 
 /** @function rollback
