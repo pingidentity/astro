@@ -228,7 +228,48 @@
                     }
                 }
             }
+			.deleting {
+				display: inline-block;
+				margin-left: 30px;
+				margin-top: -10px;
+				.icon-delete {
+					display: inline-block;
+					margin: 0 0 5px 10px;
+					color: $color-critical-red;
+				}
+			}
+			.undo {
+				display: inline-block;
+				margin-left: 30px;
+				margin-top: -10px;
+				.icon-undo {
+					display: inline-block;
+					margin: 0 0 5px 10px;
+					color: $color-active;
+				}
+				a {
+					&:hover {
+						text-decoration: none;
+					}
+				}
+				.spinner {
+					margin-right: 7px;
+				}
+			}
         }
+		.status-deleting {
+			.item-title, 
+			.item-sub-title, 
+			.grip,
+			.action-status {
+				@include opacity(0.5);
+			}
+			.item-title, 
+			.item-sub-title,
+			.action-status {
+				font-style: italic;
+			}
+		}
 		.icon-view {
             position: absolute;
             top: 30px;
@@ -433,6 +474,12 @@
 			position: relative;
 			padding: 0 80px 30px 30px;
 			min-height: 3*$button-height - 20px;
+			.loading-message {
+				float: right;
+				.spinner {
+					margin-right: 7px;
+				}
+			}
 		}
 		&.no-edit {
 			.edit-btn {

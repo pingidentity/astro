@@ -92,7 +92,8 @@
     .expanded {
 		max-height: 600px;
         .show-section {
-            color: map-get($colors, 'elephant');
+            color: $color-elephant;
+            display: inline-block;
             @include transition(top ease-out 0.4s);
             @include transform(rotate(180deg));
         }

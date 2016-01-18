@@ -1583,7 +1583,7 @@ input[type=file] {
 		width: map-get($input-widths-map-default, $size);
 	}
 	&.input-text {
-		input {
+		input[type=text], input[type=password] {
 			width: map-get($input-widths-map-text, $size);
 		}
 	}

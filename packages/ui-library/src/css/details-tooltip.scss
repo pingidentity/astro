@@ -3,7 +3,7 @@
 	$width: 360px;
 	$width-small: 240px;
 	$bg-color: $color-white;
-	$border-color: map-get($colors, 'stone');
+	$border-color: $color-stone;
 	$gutter: 20px;
 
 	position: relative;
@@ -17,14 +17,14 @@
 	&.alert {
 		&.bottom {
 			.details-content {
-				border-top-color: map-get($colors, 'warning-yellow');
+				border-top-color: $color-warning-yellow;
 
 				&:before {
 					width: 0;
 					height: 0;
 					border-top: none;
 					border-right: 10px solid transparent;
-					border-bottom: 10px solid map-get($colors, 'warning-yellow');
+					border-bottom: 10px solid $color-warning-yellow;
 					top: -11px;
 				}
 				&:after {
@@ -35,8 +35,8 @@
 		.details-content {
 			padding: 0;
 			.details-title {
-				background-color: map-get($colors, 'warning-yellow');
-				color: map-get($colors, 'warning-yellow-text');
+				background-color: $color-warning-yellow;
+				color: $color-warning-text;
 				border-bottom: none;
 
 				&:before {
@@ -49,11 +49,12 @@
 					text-align: center;
 					font-size: 22px;
 					z-index: 1;
-					color: map-get($colors, 'warning-text');
+					color: $color-warning-text;
 				}
 			}
 			.title {
-				color: map-get($colors, 'warning-text');
+				color: $color-warning-text;
+				text-transform: uppercase;
 				text-align: center;
 				font-weight: 400;
 				font-size: 24px;
@@ -67,12 +68,48 @@
 			.buttons, div {
 				padding: 20px;
 				margin-top: 0;
+				.input-row {
+					padding-top: 0;
+					margin-bottom: 0;
+				}
 				.alone {
 					margin-right: 0;
 				}
 			}
 		}
 	}
+	&.confirm {
+        .details-content {
+			padding: 0;
+			.details-title {
+				background-color: $color-elderly;
+				border-bottom: none;
+                color: $color-rhino;
+				text-transform: none;
+				text-align: center;
+				font-weight: 400;
+				font-size: 18px;
+				margin: 0 0 20px 0;
+                padding: 15px 20px;
+            }
+            p {
+				padding: 0 20px;
+				text-align: center;
+				margin-bottom: 0.5em;
+			}
+			.buttons, div {
+				padding: 20px;
+				margin-top: 0;
+                .input-row {
+                    padding-top: 0;
+                    margin-bottom: 0;
+                }
+				.alone {
+					margin-right: 0;
+				}
+			}
+        }
+    }
 	.details-target {
 		display: block;
 	}
@@ -249,5 +286,4 @@
 	    	margin-bottom: 20px;
 		}
 	}
-
 }
