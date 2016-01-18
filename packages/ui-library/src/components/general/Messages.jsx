@@ -157,7 +157,7 @@ Messages.MessageTypes = {
     SUCCESS: "success",
     NOTICE: "notice",
     WARNING: "warning",
-    ERROR: "error"
+    FEATURE: "feature"
 };
 
 /** @enum {string}

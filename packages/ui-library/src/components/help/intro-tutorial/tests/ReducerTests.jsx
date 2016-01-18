@@ -24,11 +24,16 @@ describe("IntroTutorial Reducer", function () {
         expect(next.active).toBe(state.active - 1);
     });
 
-    it("dimiss", function () {
+    it("dimiss and show", function () {
         var state = IntroTutorial.Reducer(null, "init");
         var next = IntroTutorial.Reducer(state, IntroTutorial.Actions.dismiss());
 
         expect(next.visible).toBe(false);
+
+        state.active = 5;
+        next = IntroTutorial.Reducer(state, IntroTutorial.Actions.show());
+        expect(next.visible).toBe(true);
+        expect(next.active).toBe(0);
     });
 });
 

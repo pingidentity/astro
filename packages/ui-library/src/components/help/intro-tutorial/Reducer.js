@@ -3,8 +3,7 @@ var Actions = require("./Actions.js"),
 
 var initialState = {
     visible: true,
-    active: 0,
-    steps: []
+    active: 0
 };
 
 module.exports = function (state, action) {
@@ -16,6 +15,10 @@ module.exports = function (state, action) {
             break;
         case Actions.Types.HELP_PREV:
             nextState.active -= 1;
+            break;
+        case Actions.Types.HELP_SHOW:
+            nextState.active = 0;
+            nextState.visible = true;
             break;
         case Actions.Types.HELP_DISMISS:
             nextState.visible = false;
