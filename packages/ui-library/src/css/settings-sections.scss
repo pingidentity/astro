@@ -41,7 +41,7 @@
     }
     .section-title {
 		text-transform: uppercase;
-        font-size: 16px;
+        font-size: 15px;
 	    color: map-get($colors, 'slate');
         font-family: $font-pn-regular;
         position: relative;
@@ -51,6 +51,9 @@
         }
         &.sub-title {
             margin-top: -11px;
+        }
+        &.listing {
+            margin-left: -25px;
         }
     }
     .section-sub-title {
@@ -86,6 +89,9 @@
             .delete-attribute {
                 position: absolute;
                 right: 20px;
+                .button.inline.remove {
+                    width: 22px;
+                }
             }
         }
     }
@@ -232,6 +238,7 @@
     background-color: $color-timberwolf;
     text-align: center;
     margin-bottom: 20px;
+    padding-bottom: 20px;
     .section {
         padding: 0;
         border-bottom: none;
@@ -266,8 +273,27 @@
             text-align: left;
             margin: 0;
             padding: 20px 0 0 40px;
-            input[type=text], input[type=password], textarea {
-                background-color: $color-white;
+            label {
+                &.input-text, &.input-textarea {
+                    input[type=text], 
+                    input[type=password], 
+                    textarea {
+                        background-color: $color-white;
+                    }
+                }
+                &.input-checkbox {
+                    .icon {
+                        background-color: $color-white;
+                        &:before {
+                            border-color: $color-rabbit-fur;
+                        }
+                    }
+                }
+                &.input-radio {
+                    .circle {
+                        border-color: $color-rabbit-fur;
+                    }
+                }
             }
             .row-title {
                 text-transform: uppercase;

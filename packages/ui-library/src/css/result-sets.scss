@@ -162,6 +162,7 @@
 			.row-controls {
 				background: none;
 				border-left: 1px solid $color-rabbit-fur;
+				border-bottom: 1px solid $color-rabbit-fur;
 			}
 			.collapsed-content {
 				.row-button {
@@ -178,6 +179,13 @@
 						bottom: 19px;
 						right: 112px;
 					}
+				}
+			}
+			&.row {
+				border: none;
+				.collapsed-content {
+					height: 1px;
+					padding: 0;
 				}
 			}
 		}
@@ -459,6 +467,9 @@
 				margin: -10px 0 0 0;
 			}
 		}
+		.no-edit {
+			bottom: 63px;
+		}
 		.edit-btn {
 			&:after {
 				content: '\65';
@@ -574,8 +585,10 @@
 
 	.result-set-title {
 		text-transform: uppercase;
+		color: $color-elephant;
 		padding: 0 0 5px 0;
 		margin: 0 0 25px 0;
+		border-bottom: 1px solid $color-elephant;
 		font-family: $font-pn-regular;
 		font-size: 16px;
 		a {
@@ -583,12 +596,37 @@
 			font-size: 14px;
 			text-transform: uppercase;
 		}
+		.actions {
+			float: right;
+			a {
+				text-transform: none;
+				color: $color-link-text;
+				font-size: 14px;
+				margin-left: 0;
+			}
+		}
 	}
 	.set-container {
 		width: 100%;
+		clear: both;
+		margin-bottom: 5px;
 		&.active {
 			display: inline-block;
 			@include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
+		}
+		.set {
+			width: 100%;
+			clear: both;
+			display: inline-block;
+			.col-1, .col-2 {
+				width: 50%;
+			}
+			.col-1 {
+				float: left;
+			}
+			.col-2 {
+				float: right;
+			}
 		}
 	}
 	.result-set {
@@ -602,7 +640,7 @@
 				overflow-y: scroll;
 			}
 			.expanded-content {
-				row-status-toggle {
+				.row-status-toggle {
 					left: 0;
 					top: 0;
 					position: relative;
@@ -622,18 +660,8 @@
 			@include transform(rotate(180deg));
 		}
 	}
+}
 
-}
-// TODO: remove this? why is this so specific?
-.page-policy {
-	.result-set-list {
-		.data-set, .result-set {
-			.condition-list .condition .condition-fields .menu {
-				border-bottom: none;
-			}
-		}
-	}
-}
 .show-set, .show-condition {
 	font-size: 12px;
 	padding: 0 5px;
@@ -739,6 +767,7 @@
 					display: inline-block;
 					padding: 7px 0 0 0;
 					margin-top: 7px;
+					color: $color-elephant;
 					.input-row {
 						margin-top: 0;
 						label {
@@ -765,6 +794,38 @@
 			}
 			.check-all {
 				margin: 0 10px 0 0;
+			}
+			.conditions-multiselect {
+				padding: 10px 5px 10px 0;
+				margin-left: 0;
+				border: 1px solid map-get($colors, 'elderly');
+				.options {
+					width: 99%;
+					height: 133px;
+					max-height: 133px;
+					overflow-y: scroll;
+					padding-left: 10px;
+					label {
+						width: 230px;
+						margin-bottom: 10px;
+						text-transform: none;
+						&.input-checkbox {
+							display: inline-block;
+							padding: 0 0 0 30px;
+							.label-text {
+								display: inline-block;
+								padding-top: 5px;
+							}
+						}
+					}
+					div {
+						display: inline;
+						&.item-head {
+							display: block;
+							color: map-get($colors, 'walrus');
+						}
+					}
+				}
 			}
 			textarea {
 				max-width: 700px;

@@ -137,6 +137,7 @@ label {
 	.label-text, .input-container {
 		position: relative;
 		display: block;
+		color: $color-elephant;
 		@include transition($default-input-transition);
 
 		&:before {
@@ -277,6 +278,9 @@ label {
 			}
 		}
 		&.disabled {
+			input[type=text], input[type=password], textarea {
+				background-color: $color-timberwolf;
+			}
 			.input-container {
 				&:before {
 					content: none;
@@ -614,7 +618,7 @@ label {
 }
 .input-row {
 	position: relative;
-	margin: 0 0 20px 0;
+	margin: 0 0 25px 0;
 
 	&.lead-item {
 		margin-bottom: 30px;
@@ -833,7 +837,7 @@ label {
 		}
 	}
 	&.disabled {
-		@include opacity(0.6);
+		@include opacity(0.5);
 	}
 	&.form-error {
 		.toggle {
@@ -1621,6 +1625,11 @@ $input-widths-map-select: input-width-map($input-width-smallest-select, $input-h
 
 .input-width-xsmall, .input-width-small, .input-width-medium, .input-width-large, .input-width-xlarge, .input-width-full {
 	margin-bottom: $input-hor-margin;
+}
+.input-row {
+	.input-width-xsmall, .input-width-small, .input-width-medium, .input-width-large, .input-width-xlarge, .input-width-full {
+		margin-bottom: 0;
+	}	
 }
 .input-width-xsmall {
 	@include input-width-css('xsmall');
