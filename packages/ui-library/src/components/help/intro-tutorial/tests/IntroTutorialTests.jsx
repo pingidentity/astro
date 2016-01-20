@@ -41,11 +41,13 @@ describe("IntroTutorial", function () {
             labelDismiss: "Dismiss",
             labelGetStarted: "GetStarted",
             labelOf: "of",
+            labelGotIt: "Got it",
             messageWelcome: "HELLO WORLD",
 
             onNext: jest.genMockFunction(),
             onPrevious: jest.genMockFunction(),
             onDismiss: jest.genMockFunction(),
+            onGotIt: jest.genMockFunction(),
             visible: true,
             steps: [],
             active: 0
@@ -102,17 +104,17 @@ describe("IntroTutorial", function () {
         expect(nextButton.disabled).toBe(false);
     });
 
-    it("Disabled next button on last step", function () {
+    it("'Got it' next button on last step", function () {
         var component = getComponent();
         var tutorial = component.refs.tutorial;
 
         sendSteps(component, 2);
 
-        var prevButton = React.findDOMNode(tutorial.refs.prevButton);
         var nextButton = React.findDOMNode(tutorial.refs.nextButton);
+        expect(nextButton.value).toBe("Got it");
 
-        expect(prevButton.disabled).toBe(false);
-        expect(nextButton.disabled).toBe(true);
+        ReactTestUtils.Simulate.click(nextButton);
+        expect(tutorial.props.onGotIt.mock.calls.length).toBe(1);
     });
 
     it("Executes callbacks on click", function () {

@@ -40,7 +40,8 @@ var IntroTutorial = React.createClass({
         labelNext: React.PropTypes.string.isRequired,
         labelPrevious: React.PropTypes.string.isRequired,
         labelDismiss: React.PropTypes.string.isRequired,
-        labelOf: React.PropTypes.string.isRequired
+        labelOf: React.PropTypes.string.isRequired,
+        labelGotIt: React.PropTypes.string.isRequired
     },
 
     getDefaultProps: function () {
@@ -60,13 +61,26 @@ var IntroTutorial = React.createClass({
         /* jshint ignore:start */
         return [
             <div key={0}>{this.props.messageWelcome}</div>,
-            <input key={1} type="button" onClick={this.props.onNext} value={this.props.labelGetStarted} />
+            <input key={1} type="button" onClick={this.props.onNext} data-id="getStarted"
+                value={this.props.labelGetStarted} />
         ];
         /* jshint ignore:end */
     },
 
     _handleWindowResize: function () {
         this.forceUpdate();
+    },
+
+    _getNextLabel: function () {
+        return this.props.active === this.props.steps.length ? this.props.labelGotIt : this.props.labelNext + " »";
+    },
+
+    _onNext: function () {
+        if (this.props.active === this.props.steps.length) {
+            this.props.onGotIt();
+        } else {
+            this.props.onNext();
+        }
     },
 
     _renderStep: function () {
@@ -82,9 +96,8 @@ var IntroTutorial = React.createClass({
                     value={this.props.labelDismiss} className="dismiss" data-id="dismiss-button" />
                 <input type="button" ref="prevButton" disabled={this.props.active === 1} data-id="prev-button"
                     onClick={this.props.onPrevious} value={"« " + this.props.labelPrevious} className="prev" />
-                <input type="button" ref="nextButton" disabled={this.props.active === this.props.steps.length}
-                    onClick={this.props.onNext} value={this.props.labelNext + " »"} className="next"
-                    data-id="next-button" />
+                <input type="button" ref="nextButton" className="next" data-id="next-button"
+                    onClick={this._onNext} value={this._getNextLabel()} />
             </div>
         ];
         /* jshint ignore:end */
