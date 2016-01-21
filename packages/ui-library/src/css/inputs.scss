@@ -12,7 +12,7 @@ $default-input-transition: all 0.2s;
 	display: inline-block;
 	min-width: $checkbox-height + (2*$border-width);
 	min-height: $checkbox-height + (2*$border-width);
-	padding: 0 0 20px 0;
+	padding: 0 0 24px 0;
 	cursor: pointer;
 
 	.label-text {
@@ -559,6 +559,32 @@ label {
 			border-color: $color-input-error;
 		}
 	}
+	&.no-label {
+		.input-container {
+			margin: 0;
+		}
+	}
+	&.large {
+		.input-container {
+			div {
+				height: 50px;
+				line-height: 50px;
+			}
+			&:after {
+				top: 0;
+				line-height: 50px;
+			}
+		}
+	}
+	&.disabled {
+		.input-container {
+			.wrapper {
+				&:after {
+					content: '';
+				}
+			}
+		}
+	}
 	select {
 		background: transparent;
 		-webkit-appearance: none;
@@ -596,23 +622,6 @@ label {
 		&::-ms-value {
 			color: $color-midnight;
 			background: none;
-		}
-	}
-	&.no-label {
-		.input-container {
-			margin: 0;
-		}
-	}
-	&.large {
-		.input-container {
-			div {
-				height: 50px;
-				line-height: 50px;
-			}
-			&:after {
-				top: 0;
-				line-height: 50px;
-			}
 		}
 	}
 }
@@ -1148,6 +1157,7 @@ label {
 	&[type=radio] + .circle {
 		cursor: default;
 	}
+	
 }
 .readonly {
 	&.input-text, &.input-textarea {
@@ -1547,10 +1557,9 @@ input[type=file] {
             .icon {
                 display: table-cell;
                 position: relative;
-
                 &:after {
                     bottom: auto;
-                      top: 5px;
+                    top: 5px;
                 }
             }
         }
