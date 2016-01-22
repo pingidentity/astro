@@ -197,6 +197,11 @@ var Demo = React.createClass({
             name: "Pagination",
             demo: require("./components/list/PaginationDemo.jsx"),
             pathToCode: "components/list/Pagination.jsx"
+        },
+        {
+            name: "Time Picker",
+            demo: require("./components/general/TimePickerDemo.jsx"),
+            pathToCode: "components/general/TimePicker.jsx"
         }
     ],
 
