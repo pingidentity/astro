@@ -15,7 +15,7 @@ var cx = require("classnames");
  * @param {string} [className] CSS class to set on the top HTML element
  * @param {function} [onValueChange] callback executed when dialCode or phone number input change
  * @param {string} [countryCode] the country code to be selected by default (defaults to "us" as in USA)
- * @param {string} [placeholder] the country code to be selected by default (defaults to "(555) 555-5555")
+ * @param {string} [placeholder] the country code to be selected by default
  * @param {string} [invalidPhoneNumberMessage] the message to display if an invalid ph no is entered (defaults to "Please enter a valid phone number.")
  * @param {boolean} [autoFocus] passes to and auto focuses the FormTextField input
  * @param {boolean} [useAutocomplete] whether or not the field will support autocomplete (default false)
@@ -93,7 +93,7 @@ var I18nPhoneInput = React.createClass({
             className: "",
             onValueChange: _.noop,
             countryCode: "us",
-            placeholder: "(555) 555-5555",
+            placeholder: "",
             invalidPhoneNumberMessage: "Please enter a valid phone number."
         };
     },

@@ -155,11 +155,6 @@ label {
 			.input-container {
 				margin: 0;
 			}
-			&.form-error {
-				.tooltip-text {
-					top: 10px;
-				}
-			}
 		}
 		&.large {
 			.input-container {
@@ -1638,7 +1633,7 @@ $input-widths-map-select: input-width-map($input-width-smallest-select, $input-h
 .input-row {
 	.input-width-xsmall, .input-width-small, .input-width-medium, .input-width-large, .input-width-xlarge, .input-width-full {
 		margin-bottom: 0;
-	}	
+	}
 }
 .input-width-xsmall {
 	@include input-width-css('xsmall');
