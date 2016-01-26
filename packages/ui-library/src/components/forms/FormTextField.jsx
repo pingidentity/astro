@@ -10,32 +10,34 @@ var React = require("react"),
  * @module FormTextField
  * @desc A text field component that supports edit, readonly and summary mode
  *
- * @param {string} [referenceName] name used by the parent to get the value/text entered in this component (default 'formTextField')
- * @param {boolean} [isRequired] whether the field is required or not (default false)
- * @param {string} [value] current text field value. this is used when state is managed outside of component,
- *           must be used with onValueChange/onChange handler to get updates
- * @param {string} [labelText] the text to show as the field's label
- * @param {string} [placeholder] placeholder text for the input field
- * @param {function} [onBlur] a callback that will be triggered when the field blurs (loses focus)
- * @param {function} [onKeyPress] a callback that will be triggered when a key is pressed in the field;
- *     the key code and the event are passed as arguments
+ * @param {string}   [referenceName] name used by the parent to get the value/text entered in this component (default 'formTextField')
+ * @param {boolean}  [isRequired]    whether the field is required or not (default false)
+ * @param {string}   [value]         current text field value. this is used when state is managed outside of component,
+ *                                   must be used with onValueChange/onChange handler to get updates
+ * @param {string}   [labelText]     the text to show as the field's label
+ * @param {string}   [placeholder]   placeholder text for the input field
+ * @param {function} [onBlur]        a callback that will be triggered when the field blurs (loses focus)
+ * @param {function} [onKeyPress]    a callback that will be triggered when a key is pressed in the field;
+ *                                   the key code and the event are passed as arguments
  * @param {function} [onValueChange] a callback that will be triggered when the field changes
- * @param {function} [onChange] same thing as 'onValueChange' to match common naming convention in ReactJS
- * @param {string} [mode] how the field will be shown: edit or readonly (default edit)
- * @param {number} [maxLength] maximum length supported by the field
- * @param {string} [defaultValue] the default (initial) value to be shown in the field, when component managing state itself
- * @param {string} [originalValue] value to set the field to if the undo icon is clicked. If 'undefined' no undo icon will be shown
- * @param {boolean} [useAutocomplete] whether or not the field will support autocomplete (default false)
- * @param {string} [inputCss] CSS classes to add to the input element
- * @param {string} [labelCss] CSS classes to add to the label element
- * @param {string} [className] CSS classes to add to the parent Label element
- * @param {function} [validator] callback function that takes the input data and returns an error message if the data is not valid
- * @param {string} [validatorTrigger] defines the event that triggers validation ('onBlur' and 'onChange' are supported values) (default 'onBlur')
- * @param {boolean} [maskValue] if true, the value shown in the input field will be masked with '*****' i.e: passwords (default false)
- * @param {string} [errorMessage] error message to render if validation is being done externally
- * @param {function} [save] a method to be called to save the value; causes the save control to be shown
- * @param {object} [upDownSpinner] up down buttons used by FormIntegerField
- * @param {boolean} [autoFocus] whether or not to auto-focus the element
+ * @param {function} [onChange]      same thing as 'onValueChange' to match common naming convention in ReactJS
+ * @param {string}   [mode]          how the field will be shown: edit or readonly (default edit)
+ * @param {number}   [maxLength]     maximum length supported by the field
+ * @param {string}   [defaultValue]  the default (initial) value to be shown in the field, when component managing state itself
+ * @param {string}   [originalValue] value to set the field to if the undo icon is clicked. If 'undefined' no undo icon will be shown
+ * @param {boolean}  [useAutocomplete]    whether or not the field will support autocomplete (default false)
+ * @param {string}   [inputCss]           CSS classes to add to the input element
+ * @param {string}   [labelCss]           CSS classes to add to the label element
+ * @param {string}   [className]          CSS classes to add to the parent Label element
+ * @param {function} [validator]          callback function that takes the input data and returns an error message if the data is not valid
+ * @param {string}   [validatorTrigger]   defines the event that triggers validation ('onBlur' and 'onChange' are supported values) (default 'onBlur')
+ * @param {boolean}  [maskValue]          if true, the value shown in the input field will be masked with '*****' i.e: passwords (default false)
+ * @param {string}   [errorMessage]       error message to render if validation is being done externally
+ * @param {function} [save] a method      to be called to save the value; causes the save control to be shown
+ * @param {object}   [upDownSpinner]      up down buttons used by FormIntegerField
+ * @param {boolean}  [autoFocus]          whether or not to auto-focus the element
+ * @param {boolean}  [forceExternalState] Won't switch to internally managed state value if true. Defaults to false
+ * @param {string}   [labelId]        A data-id for convenient access to the label's text
  *
  * @example <FormTextField
  *              referenceName={name}
@@ -74,7 +76,9 @@ var FormTextField = React.createClass({
         validator: React.PropTypes.func,
         validatorTrigger: React.PropTypes.string,
         value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
-        autoFocus: React.PropTypes.bool
+        autoFocus: React.PropTypes.bool,
+        forceExternalState: React.PropTypes.bool,
+        labelId: React.PropTypes.string
     },
 
     /**
@@ -200,6 +204,7 @@ var FormTextField = React.createClass({
             errorCss: "",
             useAutocomplete: false,
             validatorTrigger: "onBlur",
+            forceExternalState: false,
             onValueChange: function () {
                 // do nothing as the default action
             }
@@ -220,8 +225,11 @@ var FormTextField = React.createClass({
     },
 
     render: function () {
-        var value = _.isUndefined(this.props.value) ? this.state.fieldValue : this.props.value,
-            edited = !_.isUndefined(this.props.originalValue) &&
+        var value = _.isUndefined(this.props.value) ? this.state.fieldValue : this.props.value;
+        // if forcing external state, only use prop value
+        value = this.props.forceExternalState ? this.props.value : value;
+
+        var edited = !_.isUndefined(this.props.originalValue) &&
                 this.props.originalValue !== value,
             readonly = this.props.mode.toUpperCase() === FormFieldConstants.FormFieldMode.READ_ONLY,
             undo,
@@ -267,7 +275,7 @@ var FormTextField = React.createClass({
         return (
             <label className={labelCss} data-id={this.props.referenceName + "_label"}>
                 {this.props.labelText ? (
-                    <span className="label-text">
+                    <span data-id={this.props.labelId} className="label-text">
                         {this.props.labelText}
                         {labelHelp}
                     </span>

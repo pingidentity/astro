@@ -19,14 +19,14 @@ var _keyDownActions = Utils.keyDownActions;
  *          Credit: Calendar control taken from https://github.com/Rudeg/react-input-calendar
  *          Compatibility: 0.12.2+ compatible, tested against 0.13.3 and still compatible
  *
- * @param {string} format - string value of the date format you want to display, e.g. "YYYY-MM-DD"
- * @param {number} date - numeric value for the selected date
- * @param {string} computableFormat - if unsure leave as "x". Refer to moment#formatTokenFunctions for more info.
- * @param {boolean} closeOnSelect - close once date is selected
- * @param {function} onChange - the callback function called when a date is selected
+ * @param {string}   format           - string value of the date format you want to display, e.g. "YYYY-MM-DD"
+ * @param {number}   date             - numeric value for the selected date
+ * @param {string}   computableFormat - if unsure leave as "x". Refer to moment#formatTokenFunctions for more info.
+ * @param {boolean}  closeOnSelect    - close once date is selected
+ * @param {function} onChange         - the callback function called when a date is selected
+ * @param {string}   id               - the data-id property
  *
  * @example
- *
  *
  *     getInitialState: function () {
  *           return {
@@ -60,7 +60,14 @@ var Calendar = React.createClass({
         format: React.PropTypes.string,
         minView: React.PropTypes.number,
         onChange: React.PropTypes.func,
-        placeholder: React.PropTypes.string
+        placeholder: React.PropTypes.string,
+        id: React.PropTypes.string
+    },
+
+    getDefaultProps: function () {
+        return {
+            id: "calendar"
+        };
     },
 
     getInitialState: function () {
@@ -260,6 +267,7 @@ var Calendar = React.createClass({
         return (
             <div className={containerCss} onClick={this.toggleClick}>
                 <input type="text"
+                    data-id={this.props.id}
                     className="input-calendar-value"
                     value={this.state.inputValue}
                     onBlur={this.inputBlur}

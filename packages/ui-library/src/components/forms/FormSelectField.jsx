@@ -11,23 +11,24 @@ var React = require("react"),
  *       will insure display order of options.
  * for react controlled <select>. Stateless.
  *
- * @param {function} onChange delegate function to be called on select element onChange event (will receive same argument)
- * @param {string} value currently selected value
- * @param {object} options key/value object OR an array of single-item objects with 'value' and 'label' properties to
- *       describe the dropdown options
- * @param {boolean} [required] if true, the user must select a value for this field
- * @param {string} [className] CSS classes to add to the top-level label element (default 'input-select')
- * @param {string} [selectClassName] CSS classes to add to the select element
- * @param {string} [label] label text
- * @param {string} [labelHelpText] text for the help tooltip
- * @param {boolean} [noneOption] if true, add an option which does not count as a selection (e.g., "select an option").
- * This option will be shown at the top of the dropdown list.
- * @param {string} [noneOptionText] the text of the none option (required if noneOption = true)
- * @param {string} [noneOptionValue] the value of the none option (required if noneOption = true)
- * @param {string} [id] the data-id for the select component and label (appended with '_label')
- * (default 'form-select-field')
- * @param {string} [errorMessage] an error message (will be shown if defined)
- * @param {boolean} [disabled] if true, the select element will be disabled
+ * @param {function} onChange          delegate function to be called on select element onChange event (will receive same argument)
+ * @param {string}   value             currently selected value
+ * @param {object}   options           key/value object OR an array of single-item objects with 'value' and 'label' properties to
+ *                                     describe the dropdown options
+ * @param {boolean}  [required]        if true, the user must select a value for this field
+ * @param {string}   [className]       CSS classes to add to the top-level label element (default 'input-select')
+ * @param {string}   [selectClassName] CSS classes to add to the select element
+ * @param {string}   [label]           label text
+ * @param {string}   [labelHelpText]   text for the help tooltip
+ * @param {boolean}  [noneOption]      if true, add an option which does not count as a selection (e.g., "select an option").
+ *                                     This option will be shown at the top of the dropdown list.
+ * @param {string}   [noneOptionText]  the text of the none option (required if noneOption = true)
+ * @param {string}   [noneOptionValue] the value of the none option (required if noneOption = true)
+ * @param {string}   [id]              the data-id for the select component and label (appended with '_label')
+ *                                     (default 'form-select-field')
+ * @param {string}   [errorMessage]    an error message (will be shown if defined)
+ * @param {boolean}  [disabled]        if true, the select element will be disabled
+ * @param {string}   [labelId]         A data-id for easy access to the label's text content
  *
  * @example
  *     <FormSelectField className="css classes to use on label or input-select as default"
@@ -72,7 +73,8 @@ var FormSelectField = React.createClass({
             React.PropTypes.number
         ]).isRequired,
         errorMessage: React.PropTypes.string,
-        isDisabled: React.PropTypes.bool
+        isDisabled: React.PropTypes.bool,
+        labelId: React.PropTypes.string
     },
 
     getDefaultProps: function () {
@@ -155,7 +157,7 @@ var FormSelectField = React.createClass({
 
         return (
             <label className={css(labelCss)} data-id={this.props.id + "_label"}>
-                <span className="label-text">
+                <span data-id={this.props.labelId} className="label-text">
                     {this.props.label}
                     {labelHelp}
                 </span>
