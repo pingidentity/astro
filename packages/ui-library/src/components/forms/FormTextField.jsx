@@ -205,6 +205,7 @@ var FormTextField = React.createClass({
             useAutocomplete: false,
             validatorTrigger: "onBlur",
             forceExternalState: false,
+            originalValue: null,
             onValueChange: function () {
                 // do nothing as the default action
             }
@@ -229,8 +230,7 @@ var FormTextField = React.createClass({
         // if forcing external state, only use prop value
         value = this.props.forceExternalState ? this.props.value : value;
 
-        var edited = !_.isUndefined(this.props.originalValue) &&
-                this.props.originalValue !== value,
+        var edited = this.props.originalValue !== null && this.props.originalValue !== value,
             readonly = this.props.mode.toUpperCase() === FormFieldConstants.FormFieldMode.READ_ONLY,
             undo,
             save,
