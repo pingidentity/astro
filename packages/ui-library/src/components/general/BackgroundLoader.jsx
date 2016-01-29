@@ -1,7 +1,7 @@
 var React = require("react/addons");
 
 /**
- * @module src/components/general/BackgroundLoader
+ * @class src/components/general/BackgroundLoader
  * @desc
  * Repeatedly attempt to load content in the background, until
  * the loaded prop has been set to true.  Display provided
@@ -62,7 +62,7 @@ var BackgroundLoader = React.createClass({
         // Whether the data has been loaded yet.
         loaded: React.PropTypes.bool
     },
-    
+
     /*
      * Remove the timer from the timer queue.
      *
@@ -72,7 +72,7 @@ var BackgroundLoader = React.createClass({
             global.clearTimeout(this.timerId);
         }
     },
-    
+
     /*
      * Start a load loop if one has not already been started.
      *
@@ -82,7 +82,7 @@ var BackgroundLoader = React.createClass({
             this._loadLoop();
         }
     },
-    
+
     /*
      * Attempt to load the data and schedule another timer to load the
      * data again.
@@ -99,7 +99,7 @@ var BackgroundLoader = React.createClass({
             this.timerId = null;
         }
     },
-    
+
     /*
      * Get the loading content, which can either be already rendered content
      * or a function to render the content.
@@ -114,7 +114,7 @@ var BackgroundLoader = React.createClass({
             }
         }
     },
-    
+
     /*
      * Determine the interval between load calls.
      * If the interval prop passed is a function, then
@@ -140,7 +140,7 @@ var BackgroundLoader = React.createClass({
             allowPoll: true
         };
     },
-    
+
     /*
      * When we mount we start trying to load the data.
      *
@@ -149,7 +149,7 @@ var BackgroundLoader = React.createClass({
         this._startLoadLoop();
         this.initHidden();
     },
-    
+
     /*
      * Listen for the data to have been loaded.
      *
@@ -159,7 +159,7 @@ var BackgroundLoader = React.createClass({
             this._clearTimeout();
         }
     },
-    
+
     /*
      * Clear timers when we unmount so we do not leave any
      * memory leaks or un-expected behaviour lurking.
@@ -238,14 +238,14 @@ var BackgroundLoader = React.createClass({
     },
 
     render: function () {
-        
+
         var content;
         if (this.props.loaded) {
             content = this.props.children;
         } else {
             content = this._loadingContent();
         }
-        
+
         if (content) {
             return (
                 <span data-id="loader" className={this.props.className}>

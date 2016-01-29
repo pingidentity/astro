@@ -1,7 +1,7 @@
 var React = require("react"),
     _ = require("underscore");
 
-/** @module Wizard
+/** @class Wizard
  * @desc A component used to build step-by-step wizards. Can contain 2 child types <Step /> or <Choose />.  You can think of a wizard as a
  * tree, where its state of it can be describe by an array of numbers (denoting the child at that level) and
  * @see Choose

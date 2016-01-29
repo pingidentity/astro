@@ -7,7 +7,7 @@ var React = require("react"),
     _ = require("underscore");
 
 /**
- * @module FormTextArea
+ * @class FormTextArea
  * @desc A text area component that supports edit and readonly modes.
  *
  * @param {string} [referenceName] name used by the parent to get the value/text entered in this component

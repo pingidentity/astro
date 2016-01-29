@@ -1,7 +1,7 @@
 var React = require("react"),
     format = require("../../util/format.js");
 
-/** @module Wizard#Progress
+/** @class Wizard#Progress
  * @desc Wizard progress indicator (a-la icon)
  * @see Wizard
  *

@@ -69,7 +69,7 @@ var dropCollect = function (connect) {
 };
 
 /**
- * @module DragDropRow
+ * @class DragDropRow
  *
  * @desc A component to hide the workings of react-dnd.  Can be dragged on dropped onto any other component of type DragDropRow
  * @param {string|number} id - An id for the row

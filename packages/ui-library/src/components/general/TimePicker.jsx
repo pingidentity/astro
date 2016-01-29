@@ -2,7 +2,7 @@ var React = require("react");
 var FormSelectField = require("../forms/FormSelectField.jsx");
 
 /**
- * @module TimePicker
+ * @class TimePicker
  * @desc   A drop-down form for selecting the time
  *
  * @param {function} onValueChange Handles the select element value change
@@ -23,10 +23,11 @@ module.exports = React.createClass({
 
     /**
      * Adjusts hours based on format, adds am/pm property if needed
+     * @method Timpicker#_getHourType
      *
-     * @param  {object} hoursMinutes The hours/mins object
-     * @param  {string} format       The time format
-     * @return {object}              The modified parameter
+     * @param  {Object} hoursMinutes The hours/mins object
+     * @param  {String} format       The time format
+     * @return {Object}              The modified parameter
      */
     _getHourType: function (hoursMinutes, format) {
         switch (format) {
@@ -53,9 +54,10 @@ module.exports = React.createClass({
 
     /**
      * Pads with a zero if necessary
+     * @method TimePicker#_getPaddedNumber
      *
-     * @param  {string|number} number The number
-     * @return {string}               The padded number
+     * @param  {String|Number} number The number
+     * @return {String}               The padded number
      */
     _getPaddedNumber: function (number) {
         number = "" + number;
@@ -64,9 +66,10 @@ module.exports = React.createClass({
 
     /**
      * Breaks minutes into hours and minutes
+     * @method TimePicker#_getHoursMinutes
      *
-     * @param  {number} minutes The total minutes to be broken down
-     * @return {object}         eg: {
+     * @param  {Number} minutes The total minutes to be broken down
+     * @return {Object}         eg: {
      *                                  hours: 3,
      *                                  minutes: 15
      *                              }
@@ -80,8 +83,9 @@ module.exports = React.createClass({
 
     /**
      * Populate an object of times
+     * @method TimePicker#_getTimes
      *
-     * @return {object} eg {
+     * @return {Object} eg {
      *                         ...
      *                         "6:00": "6:00",
      *                         "6:30": "6:30",
@@ -110,8 +114,9 @@ module.exports = React.createClass({
 
     /**
      * handles the change event
+     * @method TimePicker#_onChange
      *
-     * @param {object} e The event object
+     * @param {Object} e The event object
      */
     _onChange: function (e) {
         this.props.onValueChange(e.target.value);

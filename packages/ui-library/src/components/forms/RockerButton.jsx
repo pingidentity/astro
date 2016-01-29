@@ -2,7 +2,7 @@ var React = require("react/addons"),
     _ = require("underscore");
 
 /**
- * @module RockerButton
+ * @class RockerButton
  *
  * @desc Rocker buttons implementation, supports 2 to 4 buttons (current CSS restriction)
  *

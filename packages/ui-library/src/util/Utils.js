@@ -3,7 +3,7 @@
 var moment = require("moment");
 
 /**
- * @module util/Utils
+ * @class util/Utils
  * @desc A set of util functions.
  */
 module.exports = {

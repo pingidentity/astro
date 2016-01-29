@@ -3,19 +3,15 @@ var _ = require("underscore");
 var Utils = require("../../util/Utils");
 var css = require("classnames");
 
-/** @enum {string}
- */
 var Accept = {
     IMAGE: "image/jpeg, image/jpg, image/gif, image/png",
     TEXT: "text/html, text/*"
 };
 
 /**
- * @module components/forms/FileUpload
+ * @class FileUpload
  *
- * @desc
- *
- * Component to render an <input type="file" /> element
+ * @desc Component to render an <code>&lt;input type="file" /&gt;</code> element
  *
  * Supports the upload of a single file and includes:
  * - generation of a thumbnail image using the HTML5 File API (where available)
@@ -28,7 +24,6 @@ var Accept = {
  *
  * If the File API is not available (IE < 10), the component falls back to rendering the name of the uploaded file.
  *
- * Configurable props:
  * @param {string} accept comma-separated string of MIME types that are fed to the 'accept' attribute of the <input>
  *         element and used in the file type validation. Pass an empty string to the property to disable validation.
  * @param {number} maxFileSizeKb the maximum size (in KB) of the uploaded file (default 5MB)
@@ -70,8 +65,9 @@ var FileUpload = React.createClass({
         disabled: React.PropTypes.bool
     },
 
-    /*
+    /**
      * Async function to read a given image file and return a base64 encoded string representation
+     * @method FileUpload#_getImagePreview
      * @param {Object} file an individual file from a FileList object
      * @param {function} success Callback to call on success
      * @param {function} error Callback to call if an error is encountered
@@ -90,11 +86,12 @@ var FileUpload = React.createClass({
         reader.readAsDataURL(file);
     },
 
-    /*
+    /**
      * Triggered when the file input has been changed.
      * Calls the validator (if present) and onChange
      * callback (if present).
-     *
+     * @method FileUpload#_onChange
+     * @param  {Object} e The event object
      */
     _onChange: function (e) {
         var errorMessage = "";
@@ -148,9 +145,12 @@ var FileUpload = React.createClass({
         }
     },
 
-    /*
+    /**
      * Validate the MIME type and size of a selected file.
-     *
+     * @method FileUpload#_validateFile
+     * @param  {?} file    [description]
+     * @param  {?} success [description]
+     * @return {String|undefined} Returns error if invalid
      */
     _validateFile: function (file, success) {
         if (this.props.maxFileSizeKb) {
@@ -171,10 +171,11 @@ var FileUpload = React.createClass({
         success();
     },
 
-    /*
+    /**
      * Handle an error event by invoking the configured
      * error handler function if one was supplied.
-     *
+     * @method FileUpload#_handleError
+     * @param  {?} errorKey [description]
      */
     _handleError: function (errorKey) {
         if (this.props.errorHandler) {
@@ -182,10 +183,10 @@ var FileUpload = React.createClass({
         }
     },
 
-    /*
+    /**
      * Handle removal of the file when remove has
      * been clicked.
-     *
+     * @method FileUpload#_onClickRemove
      */
     _onClickRemove: function () {
         if (this.props.disabled) {
@@ -199,9 +200,9 @@ var FileUpload = React.createClass({
         this._resetComponent();
     },
 
-    /*
+    /**
      * Reset the state of the component.
-     *
+     * @method FileUpload#_resetComponent
      */
     _resetComponent: function () {
         this.refs.fileInput.getDOMNode().value = "";

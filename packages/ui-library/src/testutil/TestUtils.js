@@ -4,14 +4,14 @@ var React = require("react/addons");
 var ReactTestUtils = React.addons.TestUtils;
 
 /**
- * @module testutil/TestUtils
+ * @class testutil/TestUtils
  *
  * @desc A collection of ReactJS test utils, to complement the ones provided by the
  * framework.
  *
  */
 var TestUtils = {
-    
+
     /**
      * @desc Return all components in the supplied tree with the specified dataId.
      *
@@ -24,7 +24,7 @@ var TestUtils = {
             var instId = inst.props["data-id"];
             return ReactTestUtils.isDOMComponent(inst) && (instId === dataId);
         });
-        
+
         return components;
     },
 
@@ -48,7 +48,7 @@ var TestUtils = {
 
         return components.length === 0 ? null : components[0];
     },
-    
+
     /**
      * @desc Return the single component in the supplied tree with the specified name.
      * If no component in the tree matches the criteria, null is returned.
@@ -64,12 +64,12 @@ var TestUtils = {
             var instName = inst.props.name;
             return ReactTestUtils.isDOMComponent(inst) && (name === instName);
         });
-    
+
         if (components.length > 1) {
             throw new Error("Found more than one component with name: " +
                     name + " in the given tree");
         }
-    
+
         return components.length === 0 ? null : components[0];
     }
 };

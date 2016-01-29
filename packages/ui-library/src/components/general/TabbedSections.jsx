@@ -17,12 +17,22 @@ var TabbedSections = React.createClass({
         renderHidden: React.PropTypes.bool
     },
 
+    /**
+     * Returns all children
+     * @method TabbedSections#_renderAllChildren
+     * @return {Object[]} The React child components
+     */
     _renderAllChildren: function () {
         return React.Children.map(this.props.children, function (item, index) {
             return <div style={{ display: this.props.selectedIndex === index ? "" : "none" }}> {item} </div>;
         }.bind(this));
     },
 
+    /**
+     * Returns selected child
+     * @method TabbedSections#_renderSelectedChild
+     * @return {Object[]} [description]
+     */
     _renderSelectedChild: function () {
         return React.Children.count(this.props.children) === 1
             ? this.props.children : this.props.children[this.props.selectedIndex];

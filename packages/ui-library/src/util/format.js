@@ -1,9 +1,5 @@
 /**
- * @module util/format
- * @desc String format utility.
- */
-
-/**
+ * @class format
  * @desc Format a string.  The format string may call methods on the target key.
  *
  * @param {string} string - The string to format

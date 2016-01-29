@@ -3,7 +3,7 @@ var React=require("react"),
     HelpHint=require("../tooltips/HelpHint.jsx");
 
     /**
-     * @module FormCheckbox
+     * @class FormCheckbox
      *
      * @desc FormCheckbox implementation
      * @param {bool} [checked] - setting a box as checked or not

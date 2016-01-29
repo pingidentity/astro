@@ -3,7 +3,7 @@ var React = require("react");
 var css = require("classnames");
 
 
-/** @module DetailsTooltip
+/** @class DetailsTooltip
  * @desc DetailsTooltip implements tooltip callout with trigger label. Body of tooltip is becoming callout content.
  *
  * @param {string} [title] - tooltip title

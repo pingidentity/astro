@@ -33,7 +33,9 @@ var I18nPhoneInput = React.createClass({
     },
 
     /**
-     * @param {object} e - the event object
+     * Handles value change
+     * @method I18nPhoneInput#_onChange
+     * @param {Object} e The event object
      */
     _onChange: function (e) {
         var val = e.target.value;
@@ -45,6 +47,11 @@ var I18nPhoneInput = React.createClass({
         });
     },
 
+    /**
+     * Closes list if click originates elsewhere
+     * @method I18nPhoneInput#_onClick
+     * @param  {Object} e The event object
+     */
     _onClick: function (e) {
         if (!e.target.dataset.hasOwnProperty("target") && e.target.dataset.target !== "list-select") {
             this.setState({
@@ -54,7 +61,9 @@ var I18nPhoneInput = React.createClass({
     },
 
     /**
-     * @param  {object} country the clicked country item
+     * Handles click on a country in the list
+     * @method I18nPhoneInput#_onCountryClick
+     * @param  {Object} country The clicked country item
      */
     _onCountryClick: function (country) {
         this.setState({
@@ -65,16 +74,31 @@ var I18nPhoneInput = React.createClass({
         }.bind(this));
     },
 
+    /**
+     * Returns a country's data by code
+     * @param  {String} code The iso2 country code
+     * @return {Object}      The country data
+     */
     _findByCountryCode: function (code) {
         return _.findWhere(data, { iso2: code });
     },
 
+    /**
+     * Toggles the country list
+     * @method I18nPhoneInput#_toggleList
+     */
     _toggleList: function () {
         this.setState({
             listOpen: !this.state.listOpen
         });
     },
 
+    /**
+     * Returns an error message if invalid
+     * @method I18nPhoneInput#_validatePhoneNumber
+     * @param  {String}      str The user input
+     * @return {null|String}     Either an error message or null
+     */
     _validatePhoneNumber: function (str) {
         return Validators.isValidPhoneNumber(str) ? null : this.props.invalidPhoneNumberMessage;
     },

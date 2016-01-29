@@ -3,7 +3,7 @@
 var keyMirror = require("fbjs/lib/keyMirror");
 
 /**
- * @module constants/CacheConstants
+ * @class constants/CacheConstants
  * @desc {@link net/Cache} related constants
  */
 module.exports = {

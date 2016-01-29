@@ -5,7 +5,7 @@ var React = require("react"),
     HelpHint = require("../tooltips/HelpHint.jsx");
 
 /**
- * @module FormSelectField
+ * @class FormSelectField
  * @desc A generic select (dropdown) component. Encapsulates common markup and designed to be a drop-in replacement.
  *       Options data may be either an array of objects with 'value' and 'label' properties or an object. Only the array
  *       will insure display order of options.

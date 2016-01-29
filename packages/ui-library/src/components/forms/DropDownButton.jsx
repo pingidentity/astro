@@ -3,7 +3,7 @@ var React = require("react/addons"),
     _ = require("underscore");
 
 /**
- * @module DropDownButton
+ * @class DropDownButton
  *
  * @desc DropDownButton implementation
  *
@@ -31,9 +31,9 @@ var DropDownButton = React.createClass({
 
     /**
      * Toggle the menu
+     * @method DropDownButton#_toggle
      *
-     * @param {object} e - the event
-     * @private
+     * @param {object} e The event
      */
     _toggle: function (e) {
         e.stopPropagation();
@@ -43,9 +43,9 @@ var DropDownButton = React.createClass({
 
     /**
      * On option selected
+     * @method DropDownButton#_onOptionSelected
      *
-     * @param {value} value selected from drop down
-     * @private
+     * @param {value} value The value selected from drop down
      */
     _onOptionSelected: function (value) {
         if (this.props.onSelect) {
@@ -56,8 +56,7 @@ var DropDownButton = React.createClass({
 
     /**
      * Close menu
-     *
-     * @private
+     * @method DropDownButton#close
      */
     close: function () {
         this.setState({ open: false });
@@ -83,7 +82,7 @@ var DropDownButton = React.createClass({
                 open: this.state.open
             }),
             content = null;
-            
+
         if (this.props.className) {
             styles = styles + " " + this.props.className;
         }

@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * @module util/Validators
+ * @class util/Validators
  * @desc Validator library, containing reusable validation functions.
  */
 

@@ -4,7 +4,7 @@ var React = require("react/addons"),
 
 
 /**
- * @module FormRadioGroup
+ * @class FormRadioGroup
  * @desc FormRadioGroup renders the any object (key/display) into a group of radio buttons
  *
  * @param {string} className - CSS class or classes to add to containing radio button labels

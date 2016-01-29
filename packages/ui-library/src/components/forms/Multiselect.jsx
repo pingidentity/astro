@@ -49,7 +49,7 @@ var MultiselectOption = React.createClass({
 });
 
 /**
- * @module Multiselect
+ * @class Multiselect
  * @desc Multiselect implements multi selection drop-down with option search capability.
  *
  * @param {string} title - drop down label. (required)

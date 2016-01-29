@@ -11,7 +11,7 @@ var Utils = require("./Utils");
 var _keyDownActions = Utils.keyDownActions;
 
 /**
- * @module Calendar
+ * @class Calendar
  * @desc Calendar renders a basic Calendar popup over an input field. It takes a date number that can be used to set the
  *          current date. Coming from Java backend this should be straight forward. To play with this client side
  *          the moment plugin is helpful to convert a Date object to a numeric value.
@@ -103,16 +103,30 @@ var Calendar = React.createClass({
         });
     },
 
+    /**
+     * [keyDown description]
+     * @method Calendar#keydown
+     * @param  {Object} e The event object
+     */
     keyDown: function (e) {
         _keyDownActions.call(this, e.keyCode);
     },
 
+    /**
+     * Increments the currentView state
+     * @method Calendar#nextView
+     */
     nextView: function () {
         this.setState({
             currentView: this.state.currentView + 1
         });
     },
 
+    /**
+     * Decrements the currentView state
+     * @method Calendar#prevView
+     * @param {?} date [description]
+     */
     prevView: function (date) {
         if (this.state.currentView === this.state.minView) {
             this.setState({
@@ -133,6 +147,12 @@ var Calendar = React.createClass({
         }
     },
 
+    /**
+     * [setDate description]
+     * @method Calendar#setDate
+     * @param {?}  date      [description]
+     * @param {Boolean} isDayView [description]
+     */
     setDate: function (date, isDayView) {
         this.setState({
             date: date,
@@ -149,12 +169,21 @@ var Calendar = React.createClass({
         }
     },
 
+    /**
+     * Sets the inputValue state
+     * @method Calendar#changeDate
+     * @param  {Object} e The event object
+     */
     changeDate: function (e) {
         this.setState({
             inputValue: e.target.value
         });
     },
 
+    /**
+     * Handles input blur
+     * @method Calendar#inputBlur
+     */
     inputBlur: function () {
         var date = this.state.inputValue,
             newDate = null,
@@ -194,6 +223,10 @@ var Calendar = React.createClass({
     //small hack for hide calendar
     isCalendar: false,
 
+    /**
+     * Handles document click
+     * @method Calendar#documentClick
+     */
     documentClick: function () {
         if (!this.isCalendar) {
             this.setVisibility(false);
@@ -201,11 +234,20 @@ var Calendar = React.createClass({
         this.isCalendar = false;
     },
 
+    /**
+     * Handles calendar click
+     * @method Calendar#calendarClick
+     * @param  {Object} e The event object
+     */
     calendarClick: function (e) {
         e.stopPropagation();
         this.isCalendar = true;
     },
 
+    /**
+     * Handles today click
+     * @method Calendar#todayClick
+     */
     todayClick: function () {
         var today = moment();
 
@@ -220,11 +262,19 @@ var Calendar = React.createClass({
         }
     },
 
+    /**
+     * @method Calendar#toggleClick
+     */
     toggleClick: function () {
         this.isCalendar = true;
         this.setVisibility();
     },
 
+    /**
+     * Sets Visibility
+     * @method Calendar#setVisibility
+     * @param {?} val [description]
+     */
     setVisibility: function (val) {
         var value = val !== undefined ? val : !this.state.isVisible;
         var eventMethod = value ? "addEventListener" : "removeEventListener";

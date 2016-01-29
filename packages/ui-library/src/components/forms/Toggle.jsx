@@ -3,7 +3,7 @@ var React = require("react/addons"),
     _ = require("underscore");
 
  /**
- * @module Toggle
+ * @class Toggle
  * @desc Toggles between two states on click.  Is either "off" or "on".
  *
  * @param {function} onToggle - function (newStatus, paramObj) {...}  delegate to call when selection changed.

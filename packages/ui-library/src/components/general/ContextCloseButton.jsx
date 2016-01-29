@@ -2,7 +2,7 @@ var React = require("react/addons"),
     css = require("classnames");
 
 /*
- * @module src/components/general/ContextCloseButton
+ * @class src/components/general/ContextCloseButton
  * @desc Button that will invoke a 'close()' method from the context on click
  * should such a method exist, after invoking a supplied on click callback.
  * Should the supplied callback return false then the close() method will
@@ -54,7 +54,7 @@ var ContextCloseButton = React.createClass({
             close();
         }
     },
-    
+
     getDefaultProps: function () {
         return {
             show: true
