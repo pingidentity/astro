@@ -3,6 +3,20 @@ UI library
 A library made of reusable React components, util functions and static assets
 (e.g. CSS).
 
+Prerequisites
+-------------
+* node v0.10.35: https://nodejs.org/en/download/releases/
+* Fix the npm permissions, as described here under Option 1:
+https://docs.npmjs.com/getting-started/fixing-npm-permissions
+* npm v2.7.0: `$ npm install -g npm@2.7.0`
+* eslint v1.6.0 (only if you have eslint installed globally):
+`$ npm installl -g eslint@1.6.0`
+* jest v1.6.0 (only if you have eslint installed globally):
+`$ npm installl -g jest@1.6.0`
+
+To verify if a package is installed locally, run:
+`$ npm list -g package-name`
+
 
 
 Resources
