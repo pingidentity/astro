@@ -13,7 +13,7 @@ https://docs.npmjs.com/getting-started/fixing-npm-permissions
 * npm v2.7.0: `$ npm install -g npm@2.7.0`
 * eslint v1.6.0 (only if you have eslint installed globally):
 `$ npm install -g eslint@1.6.0`
-* jest-cli v0.4.19 (only if you have eslint installed globally):
+* jest-cli v0.4.19 (only if you have jest-cli installed globally):
 `$ npm install -g jest-cli@0.4.19`
 
 To verify if a package is installed globally, run:
