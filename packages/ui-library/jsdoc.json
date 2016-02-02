@@ -17,7 +17,7 @@
     "allowUnknownTags": true
   },
   "opts": {
-    "destination": "./build/jsdoc",
+    "destination": "./build-doc",
     "readme": "./README.md",
     "package": "./package.json",
     "recurse": true

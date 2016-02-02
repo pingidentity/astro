@@ -1,7 +1,7 @@
 "use strict";
 
 var React = require("react"),
-    keyMirror = require("react/lib/keyMirror"),
+    keyMirror = require("fbjs/lib/keyMirror"),
     _ = require("underscore");
 
 /**

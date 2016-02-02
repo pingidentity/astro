@@ -72,11 +72,11 @@ define version_and_tag
 endef
 
 define package
-	rm -rf build
-	mkdir -p build/ui-library
-	cp -rf src build/ui-library
-	cp -f package.json build/ui-library
-	tar -czf build/ui-library-$(1).tar.gz --directory=build ui-library
+	rm -rf dist
+	mkdir -p dist/ui-library
+	cp -rf src dist/ui-library
+	cp -f package.json dist/ui-library
+	tar -czf dist/ui-library-$(1).tar.gz --directory=dist ui-library
 endef
 
 define deploy
@@ -84,7 +84,7 @@ define deploy
 		-DgroupId=com.pingone.ui-library \
 		-DartifactId=ui-library \
 		-Dversion=$(1) \
-		-Dfile=build/ui-library-$(1).tar.gz \
+		-Dfile=dist/ui-library-$(1).tar.gz \
 		-DuniqueVersion=false \
 		-Dpackaging=tar.gz \
 		-DrepositoryId=art01 \
@@ -132,9 +132,12 @@ verify: install-node-npm
 	rm -rf $$TMPDIR/jest_preprocess_cache
 
 # package the module and name the file to include the current version
-# deploy the package as a maven artifact
-deploy: install-mvn
+package: install-mvn
 	$(call package,$(GIT_VERSION))
+
+# package the module and name the file to include the current version
+# deploy the package as a maven artifact
+deploy: package
 	$(call deploy,$(GIT_VERSION))
 
 # set the version number to FINAL, commit and push the change

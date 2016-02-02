@@ -3,7 +3,6 @@ window.__DEV__ = true;
 jest.dontMock("../../../testutil/TestUtils");
 jest.dontMock("../DetailsTooltip.jsx");
 jest.dontMock("underscore");
-jest.dontMock("underscore.string");
 jest.dontMock("classnames");
 
 describe("DetailsTooltip", function () {

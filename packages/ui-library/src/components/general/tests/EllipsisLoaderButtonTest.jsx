@@ -4,7 +4,6 @@ jest.dontMock("../../../testutil/TestUtils");
 jest.dontMock("../EllipsisLoader.jsx");
 jest.dontMock("../EllipsisLoaderButton.jsx");
 jest.dontMock("underscore");
-jest.dontMock("underscore.string");
 jest.dontMock("classnames");
 
 describe("Ellipsis loader button", function () {

@@ -13,34 +13,27 @@
     "classnames": "1.2.1",
     "fbjs": "0.4.0",
     "isomorphic-fetch": "2.1.1",
-    "moment": "2.9.0",
+    "moment": "2.11.1",
     "moment-range": "1.0.5",
     "object-assign": "4.0.1",
-    "redux": "3.0.0",
-    "redux-thunk": "1.0.0",
-    "react": "0.13.3",
     "react-colorpicker": "0.3.14",
-    "react-tools": "0.13.3",
     "superagent": "0.21.0",
     "underscore": "1.8.3",
     "underscore.string": "3.2.2"
   },
   "devDependencies": {
-    "babel": "5.8.23",
-    "babel-core": "5.8.22",
-    "babel-eslint": "4.1.3",
-    "babel-jest": "5.3.0",
-    "babel-loader": "5.3.2",
-    "browserify": "11.0.1",
+    "babel-core": "6.4.0",
+    "babel-eslint": "4.1.8",
+    "babel-jest": "6.0.1",
+    "babel-loader": "6.2.1",
+    "babel-preset-react": "6.3.13",
     "clean-webpack-plugin": "0.1.3",
     "css-loader": "0.16.0",
-    "escope": "3.3.0",
     "eslint": "1.6.0",
     "eslint-loader": "1.1.0",
     "eslint-plugin-react": "3.5.1",
     "extract-text-webpack-plugin": "0.8.2",
     "file-loader": "0.8.4",
-    "jest": "0.1.40",
     "jest-cli": "0.4.19",
     "jsdoc": "3.3.3",
     "jsdoc-jsx": "0.1.0",
@@ -53,18 +46,24 @@
     "style-loader": "0.12.3",
     "url-loader": "0.5.6",
     "webpack": "1.12.2",
-    "webpack-babel-jest": "1.0.0",
+    "webpack-babel-jest": "1.0.2",
     "webpack-dev-server": "1.12.0"
+  },
+  "peerDependencies": {
+    "react": "0.13.3",
+    "redux": "3.0.0",
+    "redux-thunk": "1.0.0"
   },
   "engines": {
     "node": ">= 0.10.x",
-    "npm": ">= 2.x.x"
+    "npm": ">= 2.7.x"
   },
   "jest": {
     "rootDir": "./",
     "scriptPreprocessor": "<rootDir>/preprocessor.js",
     "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules"
+      "<rootDir>/node_modules",
+      "<rootDir>/src/testutil/TestUtils.js"
     ],
     "testDirectoryName": "tests",
     "testFileExtensions": [
@@ -75,11 +74,12 @@
       "<rootDir>/node/",
       "<rootDir>/node_modules/",
       "<rootDir>/.*/tests/coverage/",
-      "<rootDir>/build/"
+      "<rootDir>/build/",
+      "<rootDir>/dist/"
     ]
   },
   "scripts": {
-    "build-do-not-use": "webpack -p --progress --colors --config webpack.config.js",
+    "build-do-not-use": "webpack --progress --colors --config webpack.config.js",
     "lint": "eslint --ext .js,.jsx .",
     "test": "jest",
     "start": "npm run doc && npm run webpack-start",

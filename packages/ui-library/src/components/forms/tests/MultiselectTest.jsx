@@ -1,9 +1,6 @@
 window.__DEV__ = true;
 
 jest.dontMock("../Multiselect.jsx");
-jest.dontMock("underscore");
-jest.dontMock("underscore.string");
-jest.dontMock("../../../testutil/TestUtils");
 
 describe("Multiselect", function () {
     var React = require("react/addons");

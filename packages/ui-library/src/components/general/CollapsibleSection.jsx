@@ -1,5 +1,5 @@
 "use strict";
-var React = require("react/addons"),
+var React = require("react"),
     css = require("classnames"),
     _ = require("underscore");
 
@@ -188,7 +188,7 @@ var Stateless = React.createClass({
         if (this.props.toggleOnTitle) {
             titleNodes = _.map(title, function (child, idx) {
                 if (child.props) {
-                    return React.addons.cloneWithProps(child, {
+                    return React.cloneElement(child, {
                         onClick: that._toggle,
                         key: idx
                     });
@@ -208,7 +208,7 @@ var Stateless = React.createClass({
             if (!this.props.toggleOnTitle) {
                 content = _.map(content, function (child, idx) {
                     if (child.props) {
-                        return React.addons.cloneWithProps(child, {
+                        return React.cloneElement(child, {
                             key: idx,
                             onClick: function (e) {
                                 if (that.props.onContentClick) {

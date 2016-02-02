@@ -3,6 +3,7 @@ node/
 node_modules/
 mvn/
 build*
+dist
 **/coverage
 npm-debug.log
 

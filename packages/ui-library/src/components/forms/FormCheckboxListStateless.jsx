@@ -1,4 +1,4 @@
-var React = require("react/addons"),
+var React = require("react"),
     css = require("classnames"),
     FormTextField = require("./FormTextField.jsx"),
     LazyLoader = require("../general/LazyLoader.jsx"),

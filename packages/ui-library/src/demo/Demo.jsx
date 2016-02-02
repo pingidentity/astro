@@ -281,7 +281,7 @@ var Demo = React.createClass({
     },
 
     getDocumentationUrl: function () {
-        return "build/jsdoc/" + packageJson.name + "/" + packageJson.version + "/index.html";
+        return "build-doc/" + packageJson.name + "/" + packageJson.version + "/index.html";
     },
 
     componentDidUpdate: function () {

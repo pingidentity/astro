@@ -89,7 +89,7 @@ var Wizard = React.createClass({
         var stepNodes = React.Children.map(steps, function (step, i) {
             var idx = this.props.number + i;
 
-            return React.addons.cloneWithProps(step, _.defaults({
+            return React.cloneElement(step, _.defaults({
                 ref: "step" + idx,
                 active: this.props.activeStep === idx,
                 key: idx,

@@ -1,4 +1,4 @@
-var keyMirror = require("react/lib/keyMirror");
+var keyMirror = require("fbjs/lib/keyMirror");
 
 exports.Types = keyMirror({
     HELP_DISMISS: null,

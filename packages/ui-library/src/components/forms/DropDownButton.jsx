@@ -1,4 +1,4 @@
-var React = require("react/addons"),
+var React = require("react"),
     cx = require("classnames"),
     _ = require("underscore");
 

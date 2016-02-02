@@ -1,4 +1,4 @@
-var React = require("react/addons"),
+var React = require("react"),
     _ = require("underscore"),
     Step = require("./Step.jsx");
 
@@ -76,7 +76,7 @@ var Choose = React.createClass({
             var props = _.pick(this.props, this.INHERIT_PROPS);
             props.number = this.props.number + 1;
 
-            return React.addons.cloneWithProps(selectedChild, props);
+            return React.cloneElement(selectedChild, props);
         }
     },
 

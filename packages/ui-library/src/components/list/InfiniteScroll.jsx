@@ -1,4 +1,4 @@
-var React = require("react/addons"),
+var React = require("react"),
     Spinner = require("../general/Spinner.jsx"),
     _ = require("underscore");
 
@@ -35,13 +35,21 @@ var Batch = React.createClass({
                     rows.push(
                         <div key={i}>
                             <div className="item-head">{nextHeading}</div>
-                            {React.addons.cloneWithProps(this.props.contentType, _.defaults(this.props.data[i]))}
+                            {
+                                React.cloneElement(
+                                    this.props.contentType,
+                                    _.defaults(this.props.data[i]))
+                            }
                         </div>
                     );
                     heading = nextHeading;
                 } else {
-                    rows.push(React.addons.cloneWithProps(this.props.contentType,
-                        _.defaults({ key: i }, this.props.data[i])));
+                    rows.push(React.cloneElement(
+                        this.props.contentType,
+                        _.defaults(
+                            { key: i },
+                            this.props.data[i])
+                    ));
                 }
             }
         }

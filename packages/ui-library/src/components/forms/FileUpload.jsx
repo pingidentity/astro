@@ -1,4 +1,4 @@
-var React = require("react/addons");
+var React = require("react");
 var _ = require("underscore");
 var Utils = require("../../util/Utils");
 var css = require("classnames");
