@@ -575,6 +575,12 @@
 				}
 			}
 		}
+		.row.dragTop {
+			border-top: 3px solid cornFlowerBlue;
+		}
+		.row.dragBottom, .row.dragTop.dragBottom {
+			border-bottom: 3px solid cornFlowerBlue;
+		}
 	}
 }
 
