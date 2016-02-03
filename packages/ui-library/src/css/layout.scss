@@ -388,17 +388,37 @@ a {
 }
 .content-col-of-2 {
 	max-width: 50%;
+
+	&.maximize {
+		max-width: none;
+		width: 50%;
+	}
 }
 .content-col-of-3 {
-	max-width: 33%;
+	max-width: 33.3%;
+
+	&.maximize {
+		max-width: none;
+		width: 33.3%;
+	}
 }
 .content-col-of-4 {
 	max-width: 25%;
+
+	&.maximize {
+		max-width: none;
+		width: 25%;
+	}
 }
 .content-col-of-5{
 	max-width: 20%;
+
+	&.maximize {
+		max-width: none;
+		width: 20%;
+	}
 }
 
-.inlineForm { 
+.inlineForm {
 	display: inline-block;
 }

@@ -9,7 +9,7 @@ npm-debug.log
 # IDEA
 *.iml
 .idea/
-*.prepros.cfg
+prepros.cfg
 
 .DS_Store
 **/.DS_Store

@@ -1152,7 +1152,7 @@ label {
 	&[type=radio] + .circle {
 		cursor: default;
 	}
-	
+
 }
 .readonly {
 	&.input-text, &.input-textarea {
@@ -1465,13 +1465,9 @@ fieldset {
         	margin-right: 5px;
         }
     }
-    &.focused {
-        border: 1px solid $color-dolphin;
-        padding: 15px 25px 30px 25px;
-        @include border-radius(5px);
-
-        legend {
-            padding: 0 7px;
+	&.focused, &.unfocused {
+		legend {
+			padding: 0 7px;
             margin: 0 0 0 -7px;
             font-size: 14px;
             color: $color-elephant;
@@ -1481,13 +1477,19 @@ fieldset {
                     margin-right: 0;
                 }
             }
-        }
+		}
+	}
+    &.focused {
+        border: 1px solid $color-dolphin;
+        padding: 15px 25px 30px 25px;
+        @include border-radius(5px);
+
         &.narrow {
             width: 500px;
         }
     }
     &.unfocused {
-        padding: 0 0 0 25px;
+        padding: 15px 0 0 25px;
     }
     .subset {
         margin: 0 0 0 25px;
