@@ -132,11 +132,25 @@
 			@include opacity(1);
 		}
 	}
+
+	// index/letter (should be renamed)
 	.item-head {
 		margin: 5px auto;
 		font-weight: bold;
 		text-align: center;
 		color: $color-midnight;
+	}
+	.result-section-title {
+		font-family: $font-pn-semibold;
+		font-size: 16px;
+		color: $color-blue-grey;
+		padding: 0 0 10px 0;
+		margin: 30px 0 10px 0;
+		border-bottom: 1px solid $color-timberwolf;
+
+		&:first-of-type {
+			margin-top: 0;
+		}
 	}
 	.item {
 		position: relative;
@@ -266,13 +280,13 @@
 			}
         }
 		.status-deleting {
-			.item-title, 
-			.item-sub-title, 
+			.item-title,
+			.item-sub-title,
 			.grip,
 			.action-status {
 				@include opacity(0.5);
 			}
-			.item-title, 
+			.item-title,
 			.item-sub-title,
 			.action-status {
 				font-style: italic;
