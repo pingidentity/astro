@@ -7,7 +7,8 @@ var _ = require("underscore");
  * on action to set a key/value, and ultimately call this function.  Then create a bunch of partials
  * to set each individual field
  * @param {object} state - The state object to modify
- * @param {string} path - The path to place the value
+ * @param {string|string[]} path - The path to place the value.  This can be period separated string or an
+ * array if the keys contain a period.
  * @param {object} val - The value
  * @returns {object} the object that was passed in
  * @example
@@ -16,7 +17,7 @@ var _ = require("underscore");
  * console.log(state); //=> {path: {to: {val: 123} } }
  */
 exports.setAtPath = function (state, path, val) {
-    var parts = path.split(".");
+    var parts = _.isArray(path) ? path : path.split(".");
     var original = state;
 
     state.dirty = true;
