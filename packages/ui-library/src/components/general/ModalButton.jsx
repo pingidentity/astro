@@ -236,13 +236,6 @@ var ModalButton = React.createClass({
          * react version which will obviate the need for rendering
          * via callback here.
          */
-        var modalBody;
-        if (this.props.children) {
-            modalBody = this.props.children;
-        } else if (this.props.modalBody) {
-            modalBody = this.props.modalBody();
-        }
-
         if (this._isExpanded()) {
             var modal = (
                 <div data-id={modalId} className={modalClasses}>
@@ -256,7 +249,7 @@ var ModalButton = React.createClass({
                         {!this.props.showHeader &&
                             <a className="close-modal" onClick={this._close}>×</a>
                         }
-                        {modalBody}
+                        {this.props.children || (this.props.modalBody && this.props.modalBody())}
                     </div>
                 </div>
             );

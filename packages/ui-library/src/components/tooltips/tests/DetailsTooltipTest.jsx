@@ -25,6 +25,20 @@ describe("DetailsTooltip", function () {
             <Details {...opts}><p>what ever callout content is</p></Details>);
     }
 
+    it("managed component that starts open", function () {
+        var component = getComponent({ controlled: false });
+        expect(component.refs.manager.state.open).toBe(true);
+    });
+
+    it("managed component", function () {
+        var component = getComponent({ controlled: false, open: false });
+        var link = TestUtils.findRenderedDOMComponentWithDataId(component, "action-btn");
+        expect(component.refs.manager.state.open).toBe(false);
+
+        ReactTestUtils.Simulate.click(link, {});
+        expect(component.refs.manager.state.open).toBe(true);
+    });
+
     it("is rendering open state", function () {
 
         var component = ReactTestUtils.renderIntoDocument(

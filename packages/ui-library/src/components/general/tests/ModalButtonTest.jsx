@@ -13,6 +13,17 @@ describe("ModalButtonTest", function () {
         return <span className="someCallbackClass">Link</span>;
     };
 
+    it("Doesnt render body until expanded", function () {
+        var modalComponent = ReactTestUtils.renderIntoDocument(
+            <ModalButton value="My Button" buttonStyle="buttonClass" modalBody={jest.genMockFunction()} />
+        );
+
+        expect(modalComponent.props.modalBody).not.toBeCalled();
+
+        modalComponent._open();
+        expect(modalComponent.props.modalBody).toBeCalled();
+    });
+
     it("Test default render", function () {
         var modalComponent = ReactTestUtils.renderIntoDocument(
             <ModalButton value="My Button" buttonStyle="buttonClass" />
