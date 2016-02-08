@@ -19,9 +19,16 @@ var TimePickerDemo = React.createClass({
     render: function () {
         return (
             <div>
-                <TimePicker onValueChange={this._onChange.bind(null, "12")} increments={30} />
-                <TimePicker onValueChange={this._onChange.bind(null, "24")}
-                            increments={60} format="24" value={"16:00"} />
+                <TimePicker
+                    onValueChange={this._onChange.bind(null, "12")}
+                    increments={30}
+                />
+                <TimePicker
+                    onValueChange={this._onChange.bind(null, "24")}
+                    increments={60}
+                    format="24"
+                    value={"16:00"}
+                />
                 <br /><br />
                 <p>12hr (w/30m): <strong>{this.state["12"]}</strong></p>
                 <p>24hr: <strong>{this.state["24"]}</strong></p>

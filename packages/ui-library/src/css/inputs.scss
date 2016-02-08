@@ -83,6 +83,7 @@ input[type=text], input[type=password], textarea {
 	border-color: $color-input-fill;
 	font-size: 14px;
 	height: 40px;
+	box-sizing: border-box;
 	outline: none;
 	font-family: $font-pn-regular;
 	@include border-radius(3px);
@@ -650,7 +651,7 @@ label {
 	margin: 0 0 15px 0;
 	border-top: 1px solid $color-rabbit-fur;
 	&.dotted {
-	    border-top-style: dotted;
+		border-top-style: dotted;
 	}
 }
 .input-child {
@@ -1290,38 +1291,33 @@ a {
 		cursor: pointer;
 	}
 	&:before {
+		content: '\43';
 		left: 10px;
-		top: 10px;
+		top: 6px;
 	}
 	&:after {
 		content: "v";
-		left: 190px;
-		top: 11px;
+		right: 9px;
+		top: 7px;
+		@include transition((all 0.3s));
 	}
 	&.active {
 		input[type=text] {
 			border: 1px solid $color-stone;
 		}
 		&:after {
-			@include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
-            @include transform(rotate(180deg));
+			@include transform(rotate(180deg));
 		}
 	}
-	input[type=text] {
+	input[type=text].input-calendar-value {
 		padding: 0 30px;
 		font-size: 16px;
-		width: 164px;
+		width: 226px;
 		height: 32px;
 		line-height: 32px;
 		&:focus {
 			border: 1px solid $color-stone;
 		}
-	}
-	.calendar-icon {
-	    display: inline-block;
-	    padding: 0 5px;
-	    height: 27px;
-	    line-height: 27px;
 	}
 
 	// display
@@ -1332,18 +1328,17 @@ a {
 		&.active {
 			position: absolute;
 			display: block;
-		    padding: 5px 12px;
-		    border: 1px solid $color-stone;
-		    border-top: none;
-		    background-color: $color-input-fill;
-		    width: 200px;
-		    text-align: center;
-		    left: 0;
-			top: 32px;
-		    -webkit-touch-callout: none;
-		    z-index: 2;
+			padding: 5px 12px;
+			border: 1px solid $color-stone;
+			background-color: $color-input-fill;
+			width: 200px;
+			text-align: center;
+			left: 0;
+			top: 33px;
+			-webkit-touch-callout: none;
+			z-index: 2;
 
-			@include border-radius(0 0 2px 2px);
+			@include border-radius(2px);
 			@include user-select(none);
 		}
 		.today-btn {
@@ -1353,10 +1348,10 @@ a {
 			.navigation-wrapper {
 				.navigation-title {
 					width: 100px;
-				    display: inline-block;
-				    cursor: pointer;
-				    color: $color-input-text;
-				    font-weight: 600;
+					display: inline-block;
+					cursor: pointer;
+					color: $color-input-text;
+					font-weight: 600;
 				}
 				.icon {
 					display: inline-block;
@@ -1380,57 +1375,58 @@ a {
 			}
 			.days-title {
 				.cell {
-				    height: 25px;
-				    line-height: 25px;
-				    cursor: default;
-				    font-weight: 600;
-				    margin: 0;
-				    color: $color-input-text;
+					height: 25px;
+					line-height: 25px;
+					cursor: default;
+					font-weight: 600;
+					margin: 0;
+					color: $color-input-text;
 				}
 			}
 			.days, .months, .years {
-	    		padding-bottom: 2px;
-	    		.day {
-	    			width: 26px;
-	    			height: 25px;
-	    			font-weight: 600;
-	    		}
+				padding-bottom: 2px;
+				.day {
+					width: 26px;
+					height: 25px;
+					font-weight: 600;
+				}
 				.month {
 					width: 58px;
-	    			height: 38px;
-	    			line-height: 38px;
+					height: 38px;
+					line-height: 38px;
 				}
 			}
 			.year {
 				width: 58px;
-    			height: 38px;
-    			line-height: 38px;
+				height: 38px;
+				line-height: 38px;
 			}
 			.day {
-			    width: 26px;
-			    height: 25px;
-			    line-height: 25px;
-			    color: $color-input-text;
-			    &.prev, &.next {
-					@include opacity(.4);
-			    }
+				width: 26px;
+				height: 25px;
+				line-height: 25px;
+				color: $color-input-text;
+				&.prev, &.next {
+					@include opacity(0.4);
+				}
 			}
 			.cell {
 				display: inline-block;
-			    text-align: center;
-			    cursor: pointer;
-			    border: none;
-			    -webkit-touch-callout: none;
-			    font-size: 13px;
+				text-align: center;
+				cursor: pointer;
+				border: none;
+				-webkit-touch-callout: none;
+				font-size: 13px;
 				@include  user-select(none);
+				@include transition((all 0.3s));
 
-			    &.hover {
-			    	color: $color-input-text;
-			    }
-			    &.current, &:hover {
+				&.hover {
+					color: $color-input-text;
+				}
+				&.current, &:hover {
 					@include opacity(.8);
 					@include border-radius(3px);
-			    }
+				}
 				&.current {
 					color: $color-white;
 					background: $color-input-text;
@@ -1450,139 +1446,139 @@ a {
 }
 
 fieldset {
-    margin: 0 0 25px 0;
+	margin: 0 0 25px 0;
 
-    legend {
+	legend {
 		text-transform: uppercase;
-        .help-tooltip {
-            margin: 0 5px 0 10px;
-            height: 14px;
-            height: 18px;
-            width: 18px;
-            vertical-align: text-bottom;
-        }
-        label {
-        	margin-right: 5px;
-        }
-    }
+		.help-tooltip {
+			margin: 0 5px 0 10px;
+			height: 14px;
+			height: 18px;
+			width: 18px;
+			vertical-align: text-bottom;
+		}
+		label {
+			margin-right: 5px;
+		}
+	}
 	&.focused, &.unfocused {
 		legend {
 			padding: 0 7px;
-            margin: 0 0 0 -7px;
-            font-size: 14px;
-            color: $color-elephant;
+			margin: 0 0 0 -7px;
+			font-size: 14px;
+			color: $color-elephant;
 
-            .input-radio {
-                &:last-of-type {
-                    margin-right: 0;
-                }
-            }
+			.input-radio {
+				&:last-of-type {
+					margin-right: 0;
+				}
+			}
 		}
 	}
-    &.focused {
-        border: 1px solid $color-dolphin;
-        padding: 15px 25px 30px 25px;
-        @include border-radius(5px);
+	&.focused {
+		border: 1px solid $color-dolphin;
+		padding: 15px 25px 30px 25px;
+		@include border-radius(5px);
 
-        &.narrow {
-            width: 500px;
-        }
-    }
-    &.unfocused {
-        padding: 15px 0 0 25px;
-    }
-    .subset {
-        margin: 0 0 0 25px;
-        label {
-            text-transform: none;
-        }
-    }
+		&.narrow {
+			width: 500px;
+		}
+	}
+	&.unfocused {
+		padding: 15px 0 0 25px;
+	}
+	.subset {
+		margin: 0 0 0 25px;
+		label {
+			text-transform: none;
+		}
+	}
 }
 
 input[type=file] {
-    line-height: 1em;
+	line-height: 1em;
 }
 
 .inline-input-labels {
-    > label {
-        display: table-row;
+	> label {
+		display: table-row;
 
-        &:before {
-            content: none !important;
-        }
-        .label-text, .input-container {
-            display: table-cell;
-            vertical-align: middle;
-            border-bottom: 15px solid transparent;
-        }
-        .label-text {
-            padding: 0 15px 0 0;;
-        }
-        .input-container {
-            display: table-cell;
-            padding: 0;
-        }
-        input, textarea {
-            margin: 0;
-        }
-        &.input-text {
-            &.required {
-                .input-container {
-                    &:before {
-                        top: 5px;
-                        bottom: 5px;
-                    }
-                }
-            }
-        }
-        &.input-select {
-            .input-container {
-                margin: 0;
+		&:before {
+			content: none !important;
+		}
+		.label-text, .input-container {
+			display: table-cell;
+			vertical-align: middle;
+			border-bottom: 15px solid transparent;
+		}
+		.label-text {
+			padding: 0 15px 0 0;;
+		}
+		.input-container {
+			display: table-cell;
+			padding: 0;
+		}
+		input, textarea {
+			margin: 0;
+		}
+		&.input-text {
+			&.required {
+				.input-container {
+					&:before {
+						top: 5px;
+						bottom: 5px;
+					}
+				}
+			}
+		}
+		&.input-select {
+			.input-container {
+				margin: 0;
 
-                select {
-                    margin: 0;
-                }
-            }
-        }
-        &.input-checkbox {
-            input {
-                display: none;
-            }
-            .label-text {
-                height: 25px;
-            }
-            .icon {
-                display: table-cell;
-                position: relative;
-                &:after {
-                    bottom: auto;
-                    top: 5px;
-                }
-            }
-        }
-    }
+				select {
+					margin: 0;
+				}
+			}
+		}
+		&.input-checkbox {
+			input {
+				display: none;
+			}
+			.label-text {
+				height: 25px;
+			}
+			.icon {
+				display: table-cell;
+				position: relative;
+				&:after {
+					bottom: auto;
+					top: 5px;
+				}
+			}
+		}
+	}
 }
 
 
 // Input width functions
-@function calc-input-width($container-width, $divisions, $margin, $side-padding){
+@function calc-input-width($container-width, $divisions, $hor-margin){
 	@return (
-		(($container-width - (($divisions - 1) * $margin)) / $divisions) - $side-padding
+		(($container-width - (($divisions - 1) * $hor-margin)) / $divisions)
 	);
 }
-@function calc-input-part-width($fraction-num, $fraction-width, $content-margin, $input-padding) {
+@function calc-input-part-width($fraction-num, $fraction-width, $hor-margin) {
 	@return (
-		$fraction-width*$fraction-num + (($fraction-num - 1)*$content-margin) + ($fraction-num - 1)*$input-padding
+		$fraction-width*$fraction-num + (($fraction-num - 1)*$hor-margin)
 	);
 }
-@function input-width-map($width-smallest, $hor-margin, $hor-padding) {
+@function input-width-map($width-smallest, $hor-margin) {
 	@return ((
 		'xsmall': $width-smallest,
-		'small': calc-input-part-width(2, $width-smallest, $hor-margin, $hor-padding),
-		'medium': calc-input-part-width(3, $width-smallest, $hor-margin, $hor-padding),
-		'large': calc-input-part-width(4, $width-smallest, $hor-margin, $hor-padding),
-		'xlarge': calc-input-part-width(5, $width-smallest, $hor-margin, $hor-padding),
-		'full': calc-input-part-width(6, $width-smallest, $hor-margin, $hor-padding)
+		'small': calc-input-part-width(2, $width-smallest, $hor-margin),
+		'medium': calc-input-part-width(3, $width-smallest, $hor-margin),
+		'large': calc-input-part-width(4, $width-smallest, $hor-margin),
+		'xlarge': calc-input-part-width(5, $width-smallest, $hor-margin),
+		'full': calc-input-part-width(6, $width-smallest, $hor-margin)
 	));
 }
 @mixin input-width-css($size) {
@@ -1604,33 +1600,37 @@ input[type=file] {
 	}
 	&.input-select {
 		select {
-			width: map-get($input-widths-map-select, $size);
+			width: map-get($input-widths-map-select, $size) - 2px; // subtract wrapper border width
 		}
 	}
 	&.input-checkbox {
 		width: map-get($input-widths-map-default, $size);
 	}
+	&.input-calendar {
+		input[type=text] {
+			width: map-get($input-widths-map-default, $size);
+		}
+	}
 }
 
 // Input width settings
 $input-width-max: 600px;
-$input-hor-margin: 20px;
-$input-hor-padding-text: 46px;
-$input-hor-padding-textarea: 46px;
-$input-hor-padding-select: 2px;
+$num-input-sizes: 6;
+$hor-margin: 20px;
+$vert-margin: 20px;
 
-$input-width-smallest-default: calc-input-width($input-width-max, 6, $input-hor-margin, 0);
-$input-width-smallest-text: calc-input-width($input-width-max, 6, $input-hor-margin, $input-hor-padding-text);
-$input-width-smallest-textarea: calc-input-width($input-width-max, 6, $input-hor-margin, $input-hor-padding-textarea);
-$input-width-smallest-select: calc-input-width($input-width-max, 6, $input-hor-margin, $input-hor-padding-select);
+$input-width-smallest-default: calc-input-width($input-width-max, $num-input-sizes, $hor-margin);
+$input-width-smallest-text: calc-input-width($input-width-max, $num-input-sizes, $hor-margin);
+$input-width-smallest-textarea: calc-input-width($input-width-max, $num-input-sizes, $hor-margin);
+$input-width-smallest-select: calc-input-width($input-width-max, $num-input-sizes, $hor-margin);
 
-$input-widths-map-default: input-width-map($input-width-smallest-default, $input-hor-margin, 0);
-$input-widths-map-text: input-width-map($input-width-smallest-text, $input-hor-margin, $input-hor-padding-text);
-$input-widths-map-textarea: input-width-map($input-width-smallest-textarea, $input-hor-margin, $input-hor-padding-text);
-$input-widths-map-select: input-width-map($input-width-smallest-select, $input-hor-margin, $input-hor-padding-select);
+$input-widths-map-default: input-width-map($input-width-smallest-default, $hor-margin);
+$input-widths-map-text: input-width-map($input-width-smallest-text, $hor-margin);
+$input-widths-map-textarea: input-width-map($input-width-smallest-textarea, $hor-margin);
+$input-widths-map-select: input-width-map($input-width-smallest-select, $hor-margin);
 
 .input-width-xsmall, .input-width-small, .input-width-medium, .input-width-large, .input-width-xlarge, .input-width-full {
-	margin-bottom: $input-hor-margin;
+	margin-bottom: $vert-margin;
 }
 .input-row {
 	.input-width-xsmall, .input-width-small, .input-width-medium, .input-width-large, .input-width-xlarge, .input-width-full {

@@ -306,16 +306,19 @@ var Calendar = React.createClass({
                 break;
         }
 
-        var calendar = !this.state.isVisible ? ""
-            : <div className="input-calendar-wrapper active" onClick={this.calendarClick}>
+        var calendar = !this.state.isVisible ? "" : (
+            <div className="input-calendar-wrapper active" onClick={this.calendarClick}>
                 {view}
                 <span className="today-btn" onClick={this.todayClick} >Today</span>
-            </div>;
+            </div>
+        );
 
-        var containerCss = classnames("input-calendar icon-calendar", { active: this.state.isVisible } );
+        var containerCss = {
+            active: this.state.isVisible
+        };
 
         return (
-            <div className={containerCss} onClick={this.toggleClick}>
+            <div className={classnames("input-calendar", containerCss)} onClick={this.toggleClick}>
                 <input type="text"
                     data-id={this.props.id}
                     className="input-calendar-value"
