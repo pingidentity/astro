@@ -123,5 +123,11 @@ describe("DragDropRow", function () {
 
         expect(props.onDrag.mock.calls[0]).toEqual([2, 1]);
     });
+
+    it("disables drag based on prop", function () {
+        expect(DragDropRow.dragSpec.canDrag({ disabled: false })).toEqual(true);
+        expect(DragDropRow.dragSpec.canDrag({ disabled: true })).toEqual(false);
+    });
+
 });
 

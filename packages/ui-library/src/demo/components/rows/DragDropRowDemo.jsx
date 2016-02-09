@@ -1,7 +1,7 @@
 var React = require("react/addons"),
     DragDropContext = require("react-dnd").DragDropContext,
     HTML5Backend = require("react-dnd/modules/backends/HTML5"),
-    DragDropRow = require("./../../../components/rows/DragDropRow.jsx"),
+    Draggable = require("./../../../components/rows/DragDropRow.jsx"),
     _ = require("underscore");
 
 var DragDropRowDemo = React.createClass({
@@ -54,14 +54,17 @@ var DragDropRowDemo = React.createClass({
                 {
                     this.state.rows.map(function (item, index) {
                         return (
-                            <DragDropRow
+                            <Draggable
                                     id={index}
                                     index={index}
                                     onDrag={this._onDrag}
                                     onDrop={this._onDrop}
-                                    onCancel={this._onCancel}>
-                                <div className={this._getDragClass(item, index)}>Row {item}</div>
-                            </DragDropRow>
+                                    onCancel={this._onCancel}
+                                    disabled={item === 2}>
+                                <div className={this._getDragClass(item, index)}>
+                                    Row {item} {item === 2 && "can't drag me"}
+                                </div>
+                            </Draggable>
                         );
                     }.bind(this))
                 }
