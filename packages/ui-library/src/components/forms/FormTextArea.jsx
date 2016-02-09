@@ -172,10 +172,12 @@ var FormTextArea = React.createClass({
 
         return (
             <label className={labelCss}>
-                <span className="label-text">
-                    {this.props.labelText}
-                    {labelHelp}
-                </span>
+                {this.props.labelText && (
+                    <span className="label-text">
+                        {this.props.labelText}
+                        {labelHelp}
+                    </span>
+                )}
                 <span className="input-container">
                     <textarea
                         disabled={this.props.disabled}

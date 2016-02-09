@@ -243,7 +243,6 @@ var FormTextField = React.createClass({
                 readonly: readonly,
                 edited: edited,
                 "value-entered": !!value,
-                "no-label": (this.props.labelText.length === 0),
                 disabled: this.props.disabled
             }),
             errorCss = cx(this.props.errorCss + " help-tooltip form-error-message", {
@@ -274,12 +273,12 @@ var FormTextField = React.createClass({
 
         return (
             <label className={labelCss} data-id={this.props.referenceName + "_label"}>
-                {this.props.labelText ? (
+                {this.props.labelText && (
                     <span data-id={this.props.labelId} className="label-text">
                         {this.props.labelText}
                         {labelHelp}
                     </span>
-                ) : null}
+                )}
                 <span className="input-container">
                     <input
                         className={this.props.inputCss}

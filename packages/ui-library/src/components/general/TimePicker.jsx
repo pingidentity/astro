@@ -8,6 +8,7 @@ var FormSelectField = require("../forms/FormSelectField.jsx");
  * @param {function} onValueChange Handles the select element value change
  * @param {number}   [increments]  The increments (in minutes) to populate the list. Default is 15
  * @param {string}   [format]      The time format. Either 12/24hr. Default is "12"
+ * @param {string}   [labelText]   The text to display as the field's label
  * @param {string}   [value]       The value to be initially selected
  * @param {string}   [id]          The data-id to pass to the FormSelectField
  */
@@ -17,6 +18,7 @@ module.exports = React.createClass({
         onValueChange: React.PropTypes.func.isRequired,
         increments: React.PropTypes.number,
         format: React.PropTypes.string,
+        labelText: React.PropTypes.string,
         value: React.PropTypes.string,
         id: React.PropTypes.string
     },
@@ -136,9 +138,13 @@ module.exports = React.createClass({
 
         return (
             /* jshint ignore:start */
-            <FormSelectField {...this.props}
-                             options={times}
-                             onChange={this._onChange} />
+            <FormSelectField
+                {...this.props}
+                options={times}
+                onChange={this._onChange}
+                className="input-time"
+                label={this.props.labelText}
+            />
             /* jshint ignore:end */
         );
     }

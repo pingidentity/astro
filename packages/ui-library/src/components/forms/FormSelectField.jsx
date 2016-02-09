@@ -18,7 +18,7 @@ var React = require("react"),
  * @param {boolean}  [required]        if true, the user must select a value for this field
  * @param {string}   [className]       CSS classes to add to the top-level label element (default 'input-select')
  * @param {string}   [selectClassName] CSS classes to add to the select element
- * @param {string}   [label]           label text
+ * @param {string}   [label]           the text to display as the field's label
  * @param {string}   [labelHelpText]   text for the help tooltip
  * @param {boolean}  [noneOption]      if true, add an option which does not count as a selection (e.g., "select an option").
  *                                     This option will be shown at the top of the dropdown list.
@@ -157,10 +157,12 @@ var FormSelectField = React.createClass({
 
         return (
             <label className={css(labelCss)} data-id={this.props.id + "_label"}>
-                <span data-id={this.props.labelId} className="label-text">
-                    {this.props.label}
-                    {labelHelp}
-                </span>
+                {this.props.label && (
+                    <span data-id={this.props.labelId} className="label-text">
+                        {this.props.label}
+                        {labelHelp}
+                    </span>
+                )}
                 <div className="input-container">
                     <div className="wrapper">
                         <select

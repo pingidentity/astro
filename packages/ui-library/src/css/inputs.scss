@@ -145,17 +145,12 @@ label {
 			@include transition($default-input-transition);
 		}
 	}
-	.input-container {
-		margin: 7px 0 0 0;
+	.label-text {
+		margin: 0 0 7px 0;
 	}
 	&.input-text {
 		input {
 			padding: 3px 34px 3px 10px;
-		}
-		&.no-label {
-			.input-container {
-				margin: 0;
-			}
 		}
 		&.large {
 			.input-container {
@@ -521,13 +516,12 @@ label {
 		}
 	}
 	.input-container {
-		margin: 7px 0 0 0;
 
 		.wrapper {
 			position: relative;
 			clear: both;
 			display: inline-block;
-			height: 40px;
+			height: 38px;
 			overflow: hidden;
 			background: $color-white;
 			border: 1px solid $color-rhino;
@@ -1276,15 +1270,17 @@ a {
 }
 
 .input-calendar {
+	$calendar-height: 40px;
+
 	display: inline-block;
 	position: relative;
 	font-family: $font-stack;
 	margin-bottom: 7px;
-	height: 34px;
 
 	&:before, &:after {
 		font-family: $icon-font;
 		font-size: 14px;
+		line-height: 1em;
 		text-transform: none;
 		position: absolute;
 		color: $color-midnight;
@@ -1293,12 +1289,12 @@ a {
 	&:before {
 		content: '\43';
 		left: 10px;
-		top: 6px;
+		top: 12px;
 	}
 	&:after {
 		content: "v";
 		right: 9px;
-		top: 7px;
+		top: 14px;
 		@include transition((all 0.3s));
 	}
 	&.active {
@@ -1313,7 +1309,7 @@ a {
 		padding: 0 30px;
 		font-size: 16px;
 		width: 226px;
-		height: 32px;
+		height: $calendar-height;
 		line-height: 32px;
 		&:focus {
 			border: 1px solid $color-stone;
@@ -1334,7 +1330,7 @@ a {
 			width: 200px;
 			text-align: center;
 			left: 0;
-			top: 33px;
+			top: $calendar-height + 1;
 			-webkit-touch-callout: none;
 			z-index: 2;
 
@@ -1442,6 +1438,12 @@ a {
 				}
 			}
 		}
+	}
+}
+.input-datetime {
+	.input-time {
+		margin-right: 0;
+		margin-left: 3px;
 	}
 }
 
@@ -1568,7 +1570,7 @@ input[type=file] {
 }
 @function calc-input-part-width($fraction-num, $fraction-width, $hor-margin) {
 	@return (
-		$fraction-width*$fraction-num + (($fraction-num - 1)*$hor-margin)
+		round($fraction-width*$fraction-num + (($fraction-num - 1)*$hor-margin))
 	);
 }
 @function input-width-map($width-smallest, $hor-margin) {
@@ -1609,6 +1611,25 @@ input[type=file] {
 	&.input-calendar {
 		input[type=text] {
 			width: map-get($input-widths-map-default, $size);
+		}
+	}
+	&.input-datetime {
+		$dt-width: map-get($input-widths-map-default, $size);
+		$cal-percent: 0.66;
+		$cal-width: ceil($dt-width * $cal-percent);
+		$time-width: floor(($dt-width - 4) * (1 - $cal-percent));
+
+		display: inline-block;
+
+		.input-calendar {
+			input[type=text] {
+				width: $cal-width;
+			}
+		}
+		.input-time {
+			select {
+				width: $time-width;
+			}
 		}
 	}
 }

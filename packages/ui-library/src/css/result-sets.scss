@@ -144,13 +144,7 @@
 		font-family: $font-pn-semibold;
 		font-size: 16px;
 		color: $color-blue-grey;
-		padding: 0 0 10px 0;
 		margin: 30px 0 10px 0;
-		border-bottom: 1px solid $color-timberwolf;
-
-		&:first-of-type {
-			margin-top: 0;
-		}
 	}
 	.item {
 		position: relative;
