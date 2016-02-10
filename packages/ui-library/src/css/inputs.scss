@@ -129,7 +129,6 @@ label {
 	margin: 0 20px 0 0;
 	font-size: 14px;
 	text-transform: uppercase;
-	color: $color-elephant;
 	vertical-align: top;
 	line-height: 1em;
 	font-family: $font-pn-regular;
@@ -138,7 +137,6 @@ label {
 	.label-text, .input-container {
 		position: relative;
 		display: block;
-		color: $color-elephant;
 		@include transition($default-input-transition);
 
 		&:before {
@@ -146,6 +144,7 @@ label {
 		}
 	}
 	.label-text {
+		color: $color-elephant;
 		margin: 0 0 7px 0;
 	}
 	&.input-text {

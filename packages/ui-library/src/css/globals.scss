@@ -13,6 +13,8 @@ $img-path: '../images/';
 
 // MASTER COLOR LIST
 // Do not add or remove colors unless it is sanctioned by the design team
+
+// color map - DEPRICATED. Use color vars as they are more reliable
 $colors: (
 	'black': #000,
 	'white': #fff,
@@ -28,7 +30,7 @@ $colors: (
 	'grass': #3cb66e,
 	'manatee': #b1b5b8,
 	'midnight': #4b637c,
-	'oitnb': #ed3a03,
+	'oitnb': #f89201,
 	'rabbit-fur': #d1d3d4,
 	'required-yellow': #f2bb1a,
 	'rhino': #9ea5a8,
@@ -45,51 +47,52 @@ $colors: (
 	'warning-yellow': #ffd057,
 	'warning-icon-yellow': #eeb91c
 );
-$color-black: map-get($colors, 'black');
-$color-white: map-get($colors, 'white');
-$color-active-blue: map-get($colors, 'active-blue');
-$color-active-blue-highlighted: map-get($colors, 'active-blue-highlighted');
-$color-active-blue-inactive: map-get($colors, 'active-blue-inactive');
-$color-blue-grey: map-get($colors, 'blue-grey');
-$color-cinder-block: map-get($colors, 'cinder-block');
-$color-critical-red: map-get($colors, 'critical-red');
-$color-dolphin: map-get($colors, 'dolphin');
-$color-dolphin: #d8dbdc; // map-get is NOT evaluating propely for only this color (anywhere). Temp fix for now.
-$color-elephant: map-get($colors, 'elephant');
-$color-elderly: map-get($colors, 'elderly');
-$color-grass: map-get($colors, 'grass');
-$color-manatee: map-get($colors, 'manatee');
-$color-midnight: map-get($colors, 'midnight');
-$color-oitnb: map-get($colors, 'oitnb');
-$color-rabbit-fur: map-get($colors, 'rabbit-fur');
-$color-required-yellow: map-get($colors, 'required-yellow');
-$color-rhino: map-get($colors, 'rhino');
-$color-slate: map-get($colors, 'slate');
-$color-sonic: map-get($colors, 'sonic');
-$color-stone: map-get($colors, 'stone');
-$color-stratus: map-get($colors, 'stratus');
-$color-success-green-highlighted: map-get($colors, 'success-green-highlighted');
-$color-success-green-inactive: map-get($colors, 'success-green-inactive');
-$color-timberwolf: map-get($colors, 'timberwolf');
-$color-verde: map-get($colors, 'verde');
-$color-walrus: map-get($colors, 'walrus');
-$color-warning-text: map-get($colors, 'warning-text');
-$color-warning-yellow: map-get($colors, 'warning-yellow');
-$color-warning-icon-yellow: map-get($colors, 'warning-icon-yellow');
+
+// color vars - map-get is NOT evaluating propely
+$color-black: #000;
+$color-white: #fff;
+$color-active-blue: #2996cc;
+$color-active-blue-highlighted: #3ea0d1;
+$color-active-blue-inactive: #a9d5eb;
+$color-blue-grey: #9bacb4;
+$color-cinder-block: #e4e5e5;
+$color-critical-red: #ed3a03;
+$color-dolphin: #d8dbdc;
+$color-elephant: #929aa1;
+$color-elderly: #f4f7f9;
+$color-grass: #3cb66e;
+$color-manatee: #b1b5b8;
+$color-midnight: #4b637c;
+$color-oitnb: #f89201;
+$color-rabbit-fur: #d1d3d4;
+$color-required-yellow: #f2bb1a;
+$color-rhino: #9ea5a8;
+$color-slate: #3d454d;
+$color-sonic: #f0f6f7;
+$color-stone: #c2c3c4;
+$color-stratus: #bcbdbf;
+$color-success-green-highlighted: #4aba78;
+$color-success-green-inactive: #b1e2c5;
+$color-timberwolf: #e8ebed;
+$color-verde: #76cc99;
+$color-walrus: #575f67;
+$color-warning-text: #96702c;
+$color-warning-yellow: #ffd057;
+$color-warning-icon-yellow: #eeb91c;
 
 
-// REUSABLE SEMANTIC COLOR VARS (use map-get for all other colors or when semantic meaning does not apply)
-$color-text: map-get($colors, 'elephant');
-$color-active: map-get($colors, 'active-blue');
-$color-success: map-get($colors, 'success-green-highlighted');
-$color-input-fill: map-get($colors, 'sonic');
-$color-input-border: map-get($colors, 'rabbit-fur');
-$color-input-text: map-get($colors, 'midnight');
-$color-input-text-readonly: map-get($colors, 'rabbit-fur');
-$color-input-placeholder: map-get($colors, 'rabbit-fur');
-$color-input-required: map-get($colors, 'required-yellow');
-$color-input-error: map-get($colors, 'critical-red');
-$color-link-text: map-get($colors, 'active-blue');
+// REUSABLE SEMANTIC COLOR VARS (use color vars for all other colors or when semantic meaning does not apply)
+$color-text: $color-elephant;
+$color-active: $color-active-blue;
+$color-success: $color-success-green-highlighted;
+$color-input-fill: $color-sonic;
+$color-input-border: $color-rabbit-fur;
+$color-input-text: $color-midnight;
+$color-input-text-readonly: $color-rabbit-fur;
+$color-input-placeholder: $color-rabbit-fur;
+$color-input-required: $color-required-yellow;
+$color-input-error: $color-critical-red;
+$color-link-text: $color-active-blue;
 
 
 // FONTS

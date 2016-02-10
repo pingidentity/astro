@@ -49,11 +49,12 @@
 	}
 	.details-section-title {
 		text-transform: uppercase;
-		font-size: 16px;
-		color: gray;
-		border-bottom: 1px solid $color-dolphin;
-		margin: 0 0 15px 0;
-		padding: 0 0 15px 0;
+		font-size: 15px;
+		font-family: 'proximaNovaSemibold';
+		color: $color-blue-grey;
+		padding: 0 0 10px 0;
+		margin: 0 0 30px 0;
+		border-bottom: 1px solid $color-manatee;
 	}
 	.details-section {
 		padding: 30px 0 0 30px;
