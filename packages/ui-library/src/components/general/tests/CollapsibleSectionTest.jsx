@@ -3,7 +3,6 @@ window.__DEV__ = true;
 jest.dontMock("../CollapsibleSection.jsx");
 jest.dontMock("../../../testutil/TestUtils");
 
-
 describe("CollapsibleSection", function () {
     var React = require("react/addons");
     var ReactTestUtils = React.addons.TestUtils;

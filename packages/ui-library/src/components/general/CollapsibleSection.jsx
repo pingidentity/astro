@@ -3,23 +3,37 @@ var React = require("react/addons"),
     css = require("classnames"),
     _ = require("underscore");
 
-var noop = function () {};
+var noop = function () {
+};
+
 /**
- * @class src/components/general/Section
- * @desc Simple section which expand/collapse on click. In collapsed mody only
+ * @class Section
+ * @desc Simple section which expand/collapse on click. In collapsed mode only
  *          title is shown. When expanded shows
  *          body content. Designed to work with arbitrary content. To indicate
  *          elements corresponding to title,
- *          title = {true} attribute should be attached (see examples)
+ *          title = {true} attribute should be attached. All unwrapped TEXT nodes automatically treated as part of title.
+ *          (see examples)
+ **
  *
- * @param {string} [activeClassName] - class names to attach when section is expanded.
+ * @param {string} [activeClassName="active"] - class names to attach when section is expanded.
  * @param {string} [className] - class names for top level div.
- * @param {bool} [toggleOnTitle] - boolean.
- * @param {bool} [expanded] - whether or not initially expanded.
- * @param {function} [onToggle] - execute extra functionality on toggle.
+ * @param {bool} [toggleOnTitle=false] - flag indicating if section should be toggled via click on title nodes
+ *                                       (not including TEXT nodes) vs. entire wrap element surrounding all title nodes.
+ *                                       Usually useful when desired active section title width is shorter then overall
+ *                                       page width.
+ *
+ * @param {bool} [expanded=false] - whether or not section is expanded and showing body content.
+ * @param {Section~callback} [onToggle] - callback to be executed when visibility toggled.
  * @param {function} [onContentClick] - allow click bubbling without premature collapsing. only available for components
  *          that meet the _filterBodyNodes criteria which is filtered all children who have no title.
- * @param {string} [id] - it is used for a unique data-id.
+ * @param {string} [id="collapsableSection"] - it is used for a unique data-id.
+ * @param {bool} [controlled=false] - A boolean to enable the component to be externally managed.  True will relinquish
+ *   control to the components owner.  False or not specified will cause the component to manage state internally
+ *   but still execute the onToggle callback in case the owner is interested.
+ *
+ * @callback Section~callback
+ * @param {bool} expanded - current expanded/collapsed state
  *
  * @example
  *          <Section className="section" toggleOnTitle={true}>
@@ -46,7 +60,54 @@ var noop = function () {};
  *             </div>
  *         </Section>
  **/
-var Section = React.createClass({
+
+
+module.exports = React.createClass({
+
+    propTypes: {
+        controlled: React.PropTypes.bool
+    },
+
+    getDefaultProps: function () {
+        return {
+            controlled: false
+        };
+    },
+
+    render: function () {
+        return (
+            this.props.controlled ? <Stateless {...this.props} /> : <Stateful {...this.props} />);
+    }
+});
+
+
+var Stateful = React.createClass({
+
+    getInitialState: function () {
+        return {
+            expanded: this.props.expanded || false
+        };
+    },
+
+    _onToggle: function (expanded) {
+
+        var self = this;
+
+        this.setState({
+            expanded: !expanded
+        }, function () {
+            if (self.props.onToggle) {
+                self.props.onToggle(this.state.expanded);
+            }
+        });
+    },
+
+    render: function () {
+        return <Stateless {...this.props} expanded={this.state.expanded} onToggle={this._onToggle}/>;
+    }
+});
+
+var Stateless = React.createClass({
 
     displayName: "CollapsableSection",
 
@@ -60,31 +121,21 @@ var Section = React.createClass({
         id: React.PropTypes.string
     },
 
-    /**
-     * Call the props toggle() function .
-     *
-     * @private
-    */
     _toggle: function () {
-        this.setState({
-            open: !this.state.open
-        }, function () {
-            this.props.onToggle(this.state.open);
-        }.bind(this));
+        this.props.onToggle(this.props.expanded);
     },
 
     /**
-    * Filter the title nodes.
-    *
-    * @param {Object} children parameter
-    * @private
-    * @returns {Object[]} array objects
-    */
+     * Filter the title nodes.
+     *
+     * @param {Object} children parameter
+     * @private
+     * @returns {Object[]} array objects
+     */
     _filterTitleNodes: function (children) {
         var result = [];
 
         React.Children.forEach(children, function (child) {
-
             if (child && (!child.props || child.props.title)) {
                 result.push(child);
             }
@@ -94,12 +145,12 @@ var Section = React.createClass({
     },
 
     /**
-    * Filter the body nodes.
-    *
-    * @param {Object} children parameter
-    * @private
-    * @returns {Object[]} array objects
-    */
+     * Filter the body nodes.
+     *
+     * @param {Object} children parameter
+     * @private
+     * @returns {Object[]} array objects
+     */
     _filterBodyNodes: function (children) {
         var result = [];
 
@@ -117,14 +168,7 @@ var Section = React.createClass({
             activeClassName: "active",
             className: "",
             toggleOnTitle: false,
-            onToggle: noop,
             id: "collapsableSection"
-        };
-    },
-
-    getInitialState: function () {
-        return {
-            open: this.props.expanded || false
         };
     },
 
@@ -134,7 +178,7 @@ var Section = React.createClass({
         var styles = {};
 
         styles[this.props.className] = this.props.className;
-        styles[this.props.activeClassName] = this.state.open;
+        styles[this.props.activeClassName] = this.props.expanded;
 
         var title = this._filterTitleNodes(this.props.children);
 
@@ -156,7 +200,7 @@ var Section = React.createClass({
 
         var content = null;
 
-        if (this.state.open) {
+        if (this.props.expanded) {
 
             content = this._filterBodyNodes(this.props.children);
 
@@ -183,12 +227,10 @@ var Section = React.createClass({
 
         return (
             <div data-id={this.props.id} className={css(styles)}
-                onClick={!this.props.toggleOnTitle ? this._toggle : noop}>
+                 onClick={!this.props.toggleOnTitle ? this._toggle : noop}>
                 {titleNodes}
                 {content}
             </div>
         );
     }
 });
-
-module.exports = Section;

@@ -84,7 +84,7 @@ var Demo = React.createClass({
             pathToCode: "none"
         },
         {
-            name: "Collapsible Section",
+            name: "Collapsible Section (stateless)",
             demo: require("./components/general/CollapsibleSectionDemo.jsx"),
             pathToCode: "components/general/CollapsibleSection.jsx"
         },
