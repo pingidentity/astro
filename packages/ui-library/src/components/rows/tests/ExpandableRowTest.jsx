@@ -35,6 +35,18 @@ describe("ExpandableRow", function () {
         expect(ReactTestUtils.isDOMComponent(expandedRow)).toBeFalsy();
     });
 
+    it("renders stateless component as collapsed (by default)", function () {
+        component = ReactTestUtils.renderIntoDocument(
+            <ExpandableRow title={titleJsx} subtitle={subtitleJsx} content={contentJsx} contolled={true} />
+        );
+        row = TestUtils.findRenderedDOMComponentWithDataId(component, "expandable-row");
+        expandButton = TestUtils.findRenderedDOMComponentWithDataId(component, "expand-btn");
+
+
+        var expandedRow = TestUtils.findRenderedDOMComponentWithDataId(component, "expanded-row");
+        expect(ReactTestUtils.isDOMComponent(expandedRow)).toBeFalsy();
+    });
+
     it("renders the expand button", function () {
         expect(ReactTestUtils.isDOMComponent(expandButton)).toBeTruthy();
     });
@@ -110,6 +122,33 @@ describe("ExpandableRow", function () {
         var expandedRow = TestUtils.findRenderedDOMComponentWithDataId(expandedComponent, "expandable-row");
         expect(ReactTestUtils.isDOMComponent(expandedRow)).toBeTruthy();
     });
+
+    it("renders expanded row", function () {
+        var expandedComponent = ReactTestUtils.renderIntoDocument(
+            <ExpandableRow title={titleJsx} subtitle={subtitleJsx} content={contentJsx} expanded={true}
+                           controlled={true}/>
+        );
+        var expandedRow = TestUtils.findRenderedDOMComponentWithDataId(expandedComponent, "expandable-row");
+        expect(ReactTestUtils.isDOMComponent(expandedRow)).toBeTruthy();
+    });
+
+    it("calls onToggle callback", function () {
+
+        var onToggle = jest.genMockFunction();
+
+        component = ReactTestUtils.renderIntoDocument(
+            <ExpandableRow title={titleJsx} subtitle={subtitleJsx} content={contentJsx}
+                           controlled={true} onToggle={onToggle} />
+        );
+        row = TestUtils.findRenderedDOMComponentWithDataId(component, "expandable-row");
+        expandButton = TestUtils.findRenderedDOMComponentWithDataId(component, "expand-btn");
+
+        // expand
+        ReactTestUtils.Simulate.click(expandButton);
+
+        expect(onToggle).toBeCalledWith(false);
+    });
+
 
     it("renders the view icon when isEditEnabled prop is set to false", function () {
         var readOnlyComponent = ReactTestUtils.renderIntoDocument(
