@@ -162,7 +162,7 @@
 					color: $color-elephant;
                     &.value {
                         text-transform: none;
-                        color: $color-midnight;                        
+                        color: $color-midnight;
                     }
 				}
 			}
@@ -234,7 +234,7 @@
 }
 
 // ATTRIBUTE PREVIEW
-.preview {
+.attribute-preview {
     background-color: $color-timberwolf;
     text-align: center;
     margin-bottom: 20px;
@@ -275,8 +275,8 @@
             padding: 20px 0 0 40px;
             label {
                 &.input-text, &.input-textarea {
-                    input[type=text], 
-                    input[type=password], 
+                    input[type=text],
+                    input[type=password],
                     textarea {
                         background-color: $color-white;
                     }

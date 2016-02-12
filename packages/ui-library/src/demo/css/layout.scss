@@ -21,13 +21,8 @@ $sidenav-lineheight: 22px;
 	left: 0;
 	right: 0;
 	height: $layout-header-height;
-	background-color: map-get($colors, 'slate-dark');
+	background-color: $color-slate;
 
-	a {
-		color: map-get($colors, 'slate');
-		background-color: transparent;
-		@include transition(all 0.2s);
-	}
 	.logo {
 		background: transparent url(../images/icon-logo.png) no-repeat 0 0;
         background-size: contain;
@@ -43,7 +38,7 @@ $sidenav-lineheight: 22px;
 		line-height: 1em;
 		font-weight: 400;
 		letter-spacing: -2px;
-		color: map-get($colors, 'white');
+		color: $color-white;
 	}
 }
 
@@ -61,14 +56,15 @@ $sidenav-lineheight: 22px;
 	bottom: 0;
 	left: 0;
 	width: $sidenav-width;
-	overflow: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
 
 	&:before {
 		z-index: -1;
 		content: '';
 		position: fixed;
-		background-color: map-get($colors, 'cinder-block');
-		border-right: 1px solid map-get($colors, 'elephant');
+		background-color: $color-cinder-block;
+		border-right: 1px solid $color-stone;
 		top: $layout-header-height;
 		bottom: 0;
 		left: 0;
@@ -77,7 +73,7 @@ $sidenav-lineheight: 22px;
 	.title {
 		margin: 20px 0 10px 22px;
 		text-transform: uppercase;
-		color: map-get($colors, 'elephant');
+		color: $color-elephant;
 		font-size: 16px;
 		&.narrow {
 			margin-top: 5px;
@@ -97,7 +93,7 @@ $sidenav-lineheight: 22px;
 				display: block;
 				padding: 0 0 0 10px;
 				line-height: $layout-nav-link-height;
-				color: map-get($colors, 'slate');
+				color: $color-slate;
 				background-color: transparent;
 
 				span {
@@ -111,12 +107,11 @@ $sidenav-lineheight: 22px;
 			&:hover {
 				background-color: rgba(#fff, 0.5);
 				text-decoration: none;
-				border-left: 8px solid #2996CC;
 			}
 			&.selected {
-				background-color: map-get($colors, 'elephant');
-				border-left-color: map-get($colors, 'cyan-deep');
-				font-family: 'ProximaNovaSemibold';
+				background-color: $color-stone;
+				border-left-color: $color-active-blue;
+				font-family: 'ProximaNovaRegular';
 
 				&:after {
 					content: '';
@@ -126,13 +121,13 @@ $sidenav-lineheight: 22px;
 					border-width: $selected-arrow-width-w $selected-arrow-width-h;
 					border-style: solid;
 					z-index: 1;
-					border-color: transparent transparent transparent map-get($colors, 'stone');
+					border-color: transparent transparent transparent $color-stone;
 					right: $selected-arrow-offset;
 				}
 
 				a {
-					color: map-get($colors, 'slate-dark');
-					background-color: map-get($colors, 'white');
+					color: $color-slate;
+					background-color: $color-white;
 					cursor: default;
 
 					&:before, &:after {
@@ -142,7 +137,7 @@ $sidenav-lineheight: 22px;
 					}
 					&:before {
 						width:4px;
-						background-color: map-get($colors, 'white');
+						background-color: $color-white;
 						top: 0;
 						bottom: 0;
 						right: -($nav-border-width + $selected-border-width);
@@ -153,7 +148,7 @@ $sidenav-lineheight: 22px;
 						border-width: ($selected-arrow-width-w - 2px) ($selected-arrow-width-h - 1px);
 						border-style: solid;
 						z-index: 2;
-						border-color: transparent transparent transparent map-get($colors, 'white');
+						border-color: transparent transparent transparent $color-white;
 						right: $selected-arrow-offset + 1px;
 					}
 				}
@@ -195,9 +190,9 @@ $sidenav-lineheight: 22px;
 	right: 0;
 	bottom: 0;
 	left: $sidenav-width + 1px;
-	background-color: map-get($colors, 'white');
+	background-color: $color-white;
 	padding: 15px 30px 40px;
-	border-top: 1px solid map-get($colors, 'white');
+	border-top: 1px solid $color-white;
 
 	h1 {
 		&:first-of-type {

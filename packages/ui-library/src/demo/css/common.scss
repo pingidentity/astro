@@ -11,16 +11,16 @@ body {
     font-family: "Proxima Nova", Helvetica, Arial, sans-serif;
     font-size: 16px;
     line-height: 1.3em;
-    color: map-get($colors, 'elephant');
+    color: $color-elephant;
     font-weight: 300;
 }
 a {
 	cursor: pointer;
 	text-decoration: none;
-	color: map-get($colors, 'cyan-deep');
+	color: $color-active-blue;
 	&.link {
 		// for standalone links
-		border-bottom: 1px solid  map-get($colors, 'cyan-deep');
+		border-bottom: 1px solid  $color-active-blue;
 		padding-bottom: 0px;
 		text-transform: uppercase;
 	}
@@ -29,11 +29,11 @@ a {
 	}
 }
 h1, h2, h3, h4, h5 {
-	color: map-get($colors, 'slate');
+	color: $color-slate;
 }
 h1 {
 	// override color
-	color: map-get($colors, 'slate');
+	color: $color-slate;
 	font-size: 24px;
 	font-weight: 400;
 	margin: 25px 0;
