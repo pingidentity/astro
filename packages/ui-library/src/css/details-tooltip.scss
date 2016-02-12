@@ -43,7 +43,7 @@
 					font-family: $icon-font;
 					content: '\21';
 					position: absolute;
-					top: 5px;
+					top: 6px;
 					left: 0;
 					right: 0;
 					text-align: center;
@@ -76,6 +76,9 @@
 					margin-right: 0;
 				}
 			}
+		}
+		.details-close {
+			display: none;
 		}
 	}
 	&.confirm {
@@ -202,6 +205,7 @@
 			right: 15px;
 			color: transparent;
 			z-index: 2;
+			line-height: 1em;
 
 			&:after {
 				font-family: 'iconfont';

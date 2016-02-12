@@ -310,7 +310,9 @@ label {
 			.label-text {
 				display: inline-block;
 				text-transform: capitalize;
-				padding-top: 6px;
+				padding: 6px 0 0 0;
+				margin: 0;
+				line-height: 1em;
 			}
 		}
 		&.stacked {

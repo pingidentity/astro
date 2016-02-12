@@ -156,30 +156,26 @@ var StatelessDetailsTooltip = React.createClass({
 
     render: function () {
 
-        var containerCss = css({
-            show: this.props.open,
-            "details-tooltip": true
-        });
+        var containerCss = {
+                show: this.props.open
+            },
+            targetCss = {
+                disabled: this.props.disabled
+            };
 
-        containerCss = containerCss + " " + this.props.positionStyle;
-
-        var targetCss = "details-target";
+        containerCss[this.props.positionStyle] = true;
 
         if (this.props.labelStyle) {
-            targetCss = targetCss + " " + this.props.labelStyle;
+            targetCss[this.props.labelStyle] = true;
         }
 
         if (this.props.className) {
-            containerCss = containerCss + " " + this.props.className;
-        }
-
-        if (this.props.disabled) {
-            targetCss += " disabled";
+            containerCss[this.props.className] = true;
         }
 
         return (
-            <span className={containerCss}>
-                {this.props.label ? <a className={targetCss} data-id="action-btn"
+            <span className={css("details-tooltip", containerCss)}>
+                {this.props.label ? <a className={css("details-target", targetCss)} data-id="action-btn"
                     onClick={!this.props.disabled && this._toggle}>{this.props.label}</a> : null}
                 {this._content()}
             </span>
