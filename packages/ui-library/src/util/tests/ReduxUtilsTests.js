@@ -23,4 +23,11 @@ describe("ReduxUtils", function () {
         expect(next.blah).toBe(2);
         expect(state.blah).toBe(1);
     });
+
+    it("Will unset at path", function () {
+        var state = { some: { initial: { state: 5 } }, blah: 1 };
+        var next = Utils.setAtPath(_.clone(state), ["blah"], undefined);
+
+        expect(next).toEqual({ dirty: true, some: { initial: { state: 5 } } });
+    });
 });

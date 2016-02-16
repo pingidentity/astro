@@ -38,7 +38,11 @@ exports.setAtPath = function (state, path, val) {
         state = state[parts[i]];
     }
 
-    state[parts[parts.length - 1]] = val;
+    if (typeof(val) === "undefined") {
+        delete state[parts[parts.length - 1]];
+    } else {
+        state[parts[parts.length - 1]] = val;
+    }
 
     return original;
 };
