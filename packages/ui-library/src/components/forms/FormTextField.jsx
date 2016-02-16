@@ -16,6 +16,7 @@ var React = require("react"),
  *                                   must be used with onValueChange/onChange handler to get updates
  * @param {string}   [labelText]     the text to show as the field's label
  * @param {string}   [placeholder]   placeholder text for the input field
+ * @param {function} [onFocus]       a callback that will be triggered when the field gains focus
  * @param {function} [onBlur]        a callback that will be triggered when the field blurs (loses focus)
  * @param {function} [onKeyPress]    a callback that will be triggered when a key is pressed in the field;
  *                                   the key code and the event are passed as arguments
@@ -62,6 +63,7 @@ var FormTextField = React.createClass({
         maskValue: React.PropTypes.bool,
         maxLength: React.PropTypes.number,
         mode: React.PropTypes.string,
+        onFocus: React.PropTypes.func,
         onBlur: React.PropTypes.func,
         onKeyPress: React.PropTypes.func,
         onChange: React.PropTypes.func,
@@ -126,6 +128,18 @@ var FormTextField = React.createClass({
             this.setState({
                 fieldValue: e.target.value
             });
+        }
+    },
+
+    /**
+     * Perform any operations that need to happen when the field gains focus.
+     *
+     * @param {object} e the event object
+     * @private
+     */
+    _handleFieldFocus: function (e) {
+        if (this.props.onFocus) {
+            this.props.onFocus(e);
         }
     },
 
@@ -295,6 +309,7 @@ var FormTextField = React.createClass({
                         value={value}
                         autoComplete={this.props.useAutocomplete ? "on" : "off"}
                         onChange={this._handleFieldChange}
+                        onFocus={this._handleFieldFocus}
                         onBlur={this._handleFieldBlur}
                         onKeyPress={this._handleFieldKeyPress}
                         disabled={this.props.disabled}

@@ -115,6 +115,16 @@ describe("FormTextField", function () {
         expect(validator.mock.calls.length).toBe(1);
     });
 
+    it("fire onFocus callback when field gains focus", function () {
+        var handleFocus = jest.genMockFunction();
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormTextField referenceName={'test'} onFocus={handleFocus} />
+        );
+        var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
+        ReactTestUtils.Simulate.focus(field);
+        expect(handleFocus.mock.calls.length).toBe(1);
+    });
+
     it("fire onKeyPress when key is pressed", function () {
         var handleKeyPress = jest.genMockFunction();
         var component = ReactTestUtils.renderIntoDocument(
