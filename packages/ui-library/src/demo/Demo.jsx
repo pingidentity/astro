@@ -154,7 +154,7 @@ var Demo = React.createClass({
             pathToCode: "components/forms/RockerButton.jsx"
         },
         {
-            name: "Form - Drop Down Button",
+            name: "Form - Drop Down Button (stateless)",
             demo: require("./components/forms/DropDownButtonDemo.jsx"),
             pathToCode: "components/forms/DropDownButton.jsx"
         },

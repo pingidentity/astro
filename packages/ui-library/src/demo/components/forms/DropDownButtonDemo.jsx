@@ -5,13 +5,21 @@ var DropDownButtonDemo = React.createClass({
 
     getInitialState: function () {
         return {
-            selectedLabel: "None."
+            selectedLabel: "None.",
+            open: false
         };
     },
 
-    _changeARule: function (selectedLabel) {
+    _onToggle: function () {
         this.setState({
-            selectedLabel: selectedLabel
+            open: !this.state.open
+        });
+    },
+
+    _onSelect: function (selectedLabel) {
+        this.setState({
+            selectedLabel: this._dropDownOptions()[selectedLabel],
+            open: false
         });
     },
 
@@ -38,7 +46,11 @@ var DropDownButtonDemo = React.createClass({
             <div>
                 <DropDownButton
                     title="Options Title"
-                    onSelect={this._changeARule}
+                    label="New Option"
+                    onSelect={this._onSelect}
+                    onToggle={this._onToggle}
+                    open={this.state.open}
+                    controlled={true}
                     options={optionsMenu}
                 />
                 <br/><br/>
