@@ -10,17 +10,21 @@ var _ = require("underscore");
  * @param {string|string[]} path - The path to place the value.  This can be period separated string or an
  * array if the keys contain a period.
  * @param {object} val - The value
+ * @param {object} opts - Options
+ * @param {bool} [opts.setDirty=true] - indicates whether the dirty flag should be set
  * @returns {object} the object that was passed in
  * @example
  * var state = {};
  * setAtPath(state, "path.to.val", 123);
  * console.log(state); //=> {path: {to: {val: 123} } }
  */
-exports.setAtPath = function (state, path, val) {
+exports.setAtPath = function (state, path, val, opts) {
     var parts = _.isArray(path) ? path : path.split(".");
     var original = state;
 
-    state.dirty = true;
+    if (!opts || opts.setDirty !== false) {
+        state.dirty = true;
+    }
 
     for (var i = 0; i < parts.length - 1; i += 1) {
         switch (typeof(state[parts[i]])) {

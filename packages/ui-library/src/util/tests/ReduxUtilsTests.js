@@ -24,6 +24,13 @@ describe("ReduxUtils", function () {
         expect(state.blah).toBe(1);
     });
 
+    it("Doesnt set dirty bit if option is specified", function () {
+        var state = { some: { initial: { state: 5 } }, blah: 1 };
+        var next = Utils.setAtPath(_.clone(state), ["blah"], 5, { setDirty: false });
+
+        expect(next).toEqual({ some: { initial: { state: 5 } }, blah: 5 });
+    });
+
     it("Will unset at path", function () {
         var state = { some: { initial: { state: 5 } }, blah: 1 };
         var next = Utils.setAtPath(_.clone(state), ["blah"], undefined);
