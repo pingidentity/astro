@@ -93,6 +93,7 @@
 .result-set {
 	$item-height: 75px;
 	$button-height: 47px;
+	$button-width: 50px;
 	$button-top: 28px;
 
 	position: relative;
@@ -208,6 +209,9 @@
 		.item-title {
 			font-size: 16px;
 			color: $color-slate;
+			margin-right: $button-width;
+			overflow: hidden;
+			text-overflow: ellipsis;
 
 			&.title-only {
 				margin-top: 8px;
@@ -217,6 +221,9 @@
 			font-size: 13px;
 			font-weight: normal;
 			color: $color-elephant;
+			margin-right: $button-width;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 		.item-link {
             position: absolute;
@@ -424,7 +431,7 @@
 		.expand-btn, .delete-btn, .edit-btn, .view-btn, .no-edit {
 			background-color: $color-timberwolf;
 			position: absolute;
-			width: 50px;
+			width: $button-width;
 			text-align: center;
 			right: 0;
 			padding: $button-top 0 0 0;

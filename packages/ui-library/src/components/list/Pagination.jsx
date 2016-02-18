@@ -36,7 +36,7 @@ var PageLinks = React.createClass({
             key="previous"
             onClick={this.props.onClick}
             className={currentPage === 1 ? "disabled" : ""}>
-                {"<<"}
+                <span className="icon-previous"></span>
             </a>);
 
         if (numPages <= 6) {
@@ -104,7 +104,7 @@ var PageLinks = React.createClass({
             name={currentPage >= numPages ? currentPage : currentPage + 1}
             key="next"
             onClick={this.props.onClick}>
-            {">>"}
+            <span className="icon-next"></span>
             </a>);
         if (numPages <= 1) {
             pageLinks = [];

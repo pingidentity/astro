@@ -46,7 +46,7 @@ describe("Pagination", function () {
         expect(topLinks.length).toEqual(10);
 
         //expect the first child to be "<<"
-        expect(topLinks[0].innerHTML).toBe("&lt;&lt;");
+        expect(topLinks[0].childNodes[0].className).toBe("icon-previous");
 
         //expect the highest page to be 20
         expect(topLinks[8].innerHTML).toBe("20");
