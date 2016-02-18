@@ -1,23 +1,38 @@
 var React = require("react");
 
 /**
- * @class src/components/general/BackgroundLoader
+ * @deprecated The component is deprecated and subject to be removed in future library versions. There is no direct
+ *             replacement. Timer based polling or other timer related activities is better to be implemented on
+ *             middleware/actions/reducers layer.
+ *
+ * @class BackgroundLoader
+ *
  * @desc
+ * <p><b>DEPRECATED</b> (see deprecation section in the doc below).</p>
+ *
+ * <p>
  * Repeatedly attempt to load content in the background, until
  * the loaded prop has been set to true.  Display provided
  * loading / spinner content while attempting to load data.
+ * </p>
  *
+ * <p>
  * This component is controlled by the 'loaded' prop.  This prop
  * must be set by the parent when it determines the data has been
  * loaded (which should be done as part of the 'load' callback call).
+ * </p>
  *
+ * <p>
  * In short:  This component calls the 'load' callback every 'interval'
  *  ms until 'loaded' is true.  While 'loaded' is not true, 'loading'
  *  content is displayed.  When 'loaded' is true, the children of this
  *  component are displayed.
+ * </p>
  *
+ * <p>
  * If this element is un-mounted then background loading will cease
  * and the timers will be cancelled.
+ * </p>
  *
  * @param {function} load The method to load data
  * @param {function | object} [loading] The content to display when loading
@@ -27,7 +42,6 @@ var React = require("react");
  * @param {string} [className] CSS classes added to the input button
  *
  * @example
- * Usage:
  *
  * <BackgroundLoader
  *     load={loadMethod}

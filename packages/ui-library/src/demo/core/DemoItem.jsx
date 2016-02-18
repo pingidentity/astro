@@ -17,22 +17,22 @@ var DemoItem = React.createClass({
                     {this.props.title}
                 </h2>
                 <div className="section-content">
-                    <div className="demo-description">
-                        {this.props.description}
-                    </div>
+                    <div className="demo-description"
+                         dangerouslySetInnerHTML={{ __html: this.props.description }}></div>
+                    
                     {this.props.children ? (
-                        <div className="output clearfix">
-                            {this.props.children}
-                        </div>
-                    ) : null}
+                    <div className="output clearfix">
+                        {this.props.children}
+                    </div>
+                        ) : null}
                     {this.props.markupExample ? (
-                        <div className="markup-wrapper">
+                    <div className="markup-wrapper">
                             <pre className="language-markup">
                                 <code className="language-markup"
-                                    dangerouslySetInnerHTML={{ __html: this.props.markupExample }}></code>
+                                      dangerouslySetInnerHTML={{ __html: this.props.markupExample }}></code>
                             </pre>
-                        </div>
-                    ) : null}
+                    </div>
+                        ) : null}
                 </div>
             </div>
         );

@@ -43,13 +43,20 @@ var MultivaluesOption = React.createClass({
     }
 });
 
+
+/**
+ * @callback Multivalues~onChangeCallback
+ * @param {array} newValues - Array of strings, contains new list of entries
+ */
+
 /**
  * @class Multivalues
  *
- * @desc Multivalues takes an array of strings and creates "boxed" text entries of each. Free form typing creates new entries when Enter or Comma is used.
+ * @desc Multivalues takes an array of strings and creates "boxed" text entries of each. Free form typing creates
+ *       new entries when Enter or Comma is used.
  *
  * @param {array} [entries] - array of strings used to display initial entry boxes.
- * @param {function} onChange - required callback from parent
+ * @param {Multivalues~onChangeCallback} onChange - Callback to be triggered when new entry added or removed
  * @param {string} [className] - extra CSS classes to be applied
  * @param {boolean} [isRequired] whether the field is required or not (default false)
  * @param {string} [id] - it is used for a unique data-id
@@ -78,9 +85,10 @@ var Multivalues = React.createClass({
         isRequired: React.PropTypes.bool,
         id: React.PropTypes.string
     },
+
     getInitialState: function () {
         return {
-            inputWidth: "20px",
+            inputWidth: "20px"
         };
     },
 
