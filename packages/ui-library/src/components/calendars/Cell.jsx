@@ -8,11 +8,11 @@ module.exports = React.createClass({
     },
 
     render: function () {
-        var prop = this.props;
-        prop.classes += " cell";
+        var label = this.props.value;
+        var classes = this.props.classes + " cell";
 
         return (
-            <div className={prop.classes}>{prop.value}</div>
+            <div className={classes}>{label}</div>
         );
     }
 
