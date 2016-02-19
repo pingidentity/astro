@@ -28,6 +28,7 @@ jest.dontMock("classnames");
 jest.dontMock("underscore");
 jest.dontMock("../../../testutil/TestUtils");
 jest.dontMock("../i18nPhoneInput/I18nPhoneInput.jsx");
+jest.dontMock("../FormTextField.jsx");
 
 describe("I18nPhoneInput", function () {
     var React = require("react/addons"),
@@ -83,5 +84,51 @@ describe("I18nPhoneInput", function () {
         ReactTestUtils.Simulate.click(canada);
         expect(onValueChange).toBeCalledWith("1", "");
 
+    });
+
+    it("preselects flag by iso2", function () {
+        var selectedIso2 = "af";
+
+        View = ReactTestUtils.renderIntoDocument(
+            <I18nPhoneInput
+                countryCode={selectedIso2}
+                onValueChange={onValueChange} />
+        );
+
+        var flag = TestUtils.findRenderedDOMComponentWithDataId(View, "selected-flag");
+        var flagInner = ReactTestUtils.findRenderedDOMComponentWithClass(flag, "iti-flag").getDOMNode();
+
+        expect(flagInner.className).toContain(selectedIso2);
+    });
+
+    it("preselects flag by dial code", function () {
+        var selectedIso2 = "af";
+        var selectedDialCode = "93";
+
+        View = ReactTestUtils.renderIntoDocument(
+            <I18nPhoneInput
+                dialCode={selectedDialCode}
+                onValueChange={onValueChange} />
+        );
+
+        var flag = TestUtils.findRenderedDOMComponentWithDataId(View, "selected-flag");
+        var flagInner = ReactTestUtils.findRenderedDOMComponentWithClass(flag, "iti-flag").getDOMNode();
+
+        expect(flagInner.className).toContain(selectedIso2);
+    });
+
+    it("prepopulates phone number", function () {
+        var phoneNumber = "123 456 7890";
+        var inputId = "phoneInput";
+
+        View = ReactTestUtils.renderIntoDocument(
+            <I18nPhoneInput
+                id={inputId}
+                phoneNumber={phoneNumber} />
+        );
+
+        var phoneInput = TestUtils.findRenderedDOMComponentWithDataId(View, inputId + "_phonenumber").getDOMNode();
+
+        expect(phoneInput.value).toEqual(phoneNumber);
     });
 });

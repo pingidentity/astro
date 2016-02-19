@@ -15,7 +15,9 @@ var cx = require("classnames");
  * @param {string} [className] CSS class to set on the top HTML element
  * @param {function} [onValueChange] callback executed when dialCode or phone number input change
  * @param {string} [countryCode] the country code to be selected by default (defaults to "us" as in USA)
- * @param {string} [placeholder] the country code to be selected by default
+ * @param {string} [dialCode] the dial code to be selected by default (defaults to "1"/USA)
+ * @param {string} [phoneNumber] the initial value of the phone number excluding dial code
+ * @param {string} [placeholder] the phone number input placeholder text
  * @param {string} [invalidPhoneNumberMessage] the message to display if an invalid ph no is entered (defaults to "Please enter a valid phone number.")
  * @param {boolean} [autoFocus] passes to and auto focuses the FormTextField input
  * @param {boolean} [useAutocomplete] whether or not the field will support autocomplete (default false)
@@ -26,6 +28,11 @@ var I18nPhoneInput = React.createClass({
         className: React.PropTypes.string,
         onValueChange: React.PropTypes.func,
         countryCode: React.PropTypes.string,
+        dialCode: React.PropTypes.oneOfType([
+            React.PropTypes.number,
+            React.PropTypes.string
+        ]),
+        phoneNumber: React.PropTypes.string,
         placeholder: React.PropTypes.string,
         invalidPhoneNumberMessage: React.PropTypes.string,
         autoFocus: React.PropTypes.bool,
@@ -84,6 +91,15 @@ var I18nPhoneInput = React.createClass({
     },
 
     /**
+     * Returns a country's data by code
+     * @param  {String} code The dial code
+     * @return {Object}      The country data
+     */
+    _findByDialCode: function (code) {
+        return _.findWhere(data, { dialCode: code });
+    },
+
+    /**
      * Toggles the country list
      * @method I18nPhoneInput#_toggleList
      */
@@ -117,16 +133,20 @@ var I18nPhoneInput = React.createClass({
             className: "",
             onValueChange: _.noop,
             countryCode: "us",
+            dialCode: null,
             placeholder: "",
             invalidPhoneNumberMessage: "Please enter a valid phone number."
         };
     },
 
     getInitialState: function () {
+        var selected = this.props.dialCode ? this._findByDialCode(this.props.dialCode)
+            : this._findByCountryCode(this.props.countryCode);
+
         return {
-            phoneNumber: "",
+            phoneNumber: this.props.phoneNumber || "",
             listOpen: false,
-            selected: this._findByCountryCode(this.props.countryCode)
+            selected: selected
         };
     },
 
@@ -163,12 +183,16 @@ var I18nPhoneInput = React.createClass({
                     </div>
                     <ul data-id="country-list" className={list}>{countries}</ul>
                 </div>
-                <TextField type="tel" onChange={this._onChange}
-                           value={this.state.phoneNumber}
-                           className="form-control" placeholder={this.props.placeholder}
-                           validator={this._validatePhoneNumber}
-                           autoFocus={this.props.autoFocus}
-                           useAutocomplete={this.props.useAutocomplete} />
+                <TextField
+                    type="tel"
+                    onChange={this._onChange}
+                    value={this.state.phoneNumber}
+                    className="form-control"
+                    placeholder={this.props.placeholder}
+                    validator={this._validatePhoneNumber}
+                    autoFocus={this.props.autoFocus}
+                    useAutocomplete={this.props.useAutocomplete}
+                    referenceName={this.props.id + "_phonenumber"} />
             </div>
         );
     }

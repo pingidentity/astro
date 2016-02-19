@@ -11,15 +11,18 @@ var I18nPhoneInputDemo = React.createClass({
 
     getInitialState: function () {
         return {
-            dialCode: "1",
-            phoneNumber: ""
+            dialCode: "253",
+            phoneNumber: "123 456 7890"
         };
     },
 
     render: function () {
         return (
             <div>
-                <I18nPhoneInput onValueChange={this._onChange} />
+                <I18nPhoneInput
+                    onValueChange={this._onChange}
+                    dialCode={this.state.dialCode}
+                    phoneNumber={this.state.phoneNumber} />
                 <br/><br/>
                 <div>
                     +{this.state.dialCode}
