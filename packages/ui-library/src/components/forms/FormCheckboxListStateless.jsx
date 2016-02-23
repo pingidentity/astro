@@ -8,22 +8,22 @@ var React = require("react"),
 /**
  * @class FormCheckboxListStateless
  * @desc FormCheckboxListStateless renders a list checkbox items from an array of
- *     objects, with a searchable box to filter the displayed checkboxed based
- *     on the input query.
- *     <br>
- *     This component also supports dataset grouping, if the group is specified
- *     for each, and will adjust the UI to display the data items in group-able
- *     chunks.
- *     <br>
- *     The search field will search on the dataset depending on whether the data
- *     is grouped or not. Grouped data searching will apply to the group whereas
- *     non grouped data will search on the display value.
- *     <br>
- *     This component differs from {@link components/forms/FormCheckboxList.jsx}
- *     in that it doesn't maintain state, therefore its state should be maintained
- *     externally.
- *     <br>
- *     <pre>
+ * objects, with a searchable box to filter the displayed checkboxed based
+ * on the input query.
+ *
+ * This component also supports dataset grouping, if the group is specified
+ * for each, and will adjust the UI to display the data items in group-able
+ * chunks.
+ *
+ * The search field will search on the dataset depending on whether the data
+ * is grouped or not. Grouped data searching will apply to the group whereas
+ * non grouped data will search on the display value.
+ *
+ * This component differs from {@link components/forms/FormCheckboxList.jsx}
+ * in that it doesn't maintain state, therefore its state should be maintained
+ * externally.
+ *
+ *
  *     NON GROUPED DATASET
  *
  *     [ search input field   x ]     [x] Check All               [O ] Hide Unchecked Toggle
@@ -46,7 +46,7 @@ var React = require("react"),
  *     [ ] Data Object 1 Name         [ ] Data Object 2 Name          [ ] Data Object 3 Name
  *     [ ] Data Object 4 Name         [ ] Data Object 5 Name          [ ] Data Object 6 Name
  *     [ ] Data Object 7 Name         [ ] Data Object 8 Name          [ ] Data Object 9 Name
- *     </pre>
+ *
  *
  * @param {string} className - name of css class(s) to add to the parent container
  * @param {string} groupName - the name of the checkbox group name

@@ -227,9 +227,11 @@ var Demo = React.createClass({
         fetch(this.BASE_PATH_COMP + this.state.demo.pathToCode).then(function (resp) {
             return resp.text();
         }).then(function (text) {
-            var desc = (text.replace(/\n|\r/g, "!!!").match(/\@desc(.*?)(@|\*\/)/) || ["",""])[1]
-                .replace(/!!! *\*/g, "")
-                .replace(/!!!/g, "");
+            var desc = (text.replace(/\n|\r/g, "!!!") //remove line breaks
+                            .replace(/{@[a-zA-Z]+\s+([^}]+)\}/, "$1") //transform inline tags
+                            .match(/\@desc(.*?)(\*\s+@|\*\/)/) || ["",""])[1] //extract @desc
+                .replace(/!!! *\*/g, "\n") //cleanup, return line breaks for markdown
+                .replace(/!!!/g, "\n");
 
             if (desc) {
                 this.setState({ demo: assign(this.state.demo, { description: desc }) });

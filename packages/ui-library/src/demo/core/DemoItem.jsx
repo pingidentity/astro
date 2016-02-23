@@ -1,4 +1,5 @@
 var React = require("react/addons");
+var marked = require("marked");
 
 var DemoItem = React.createClass({
 
@@ -10,6 +11,9 @@ var DemoItem = React.createClass({
     },
 
     render: function () {
+
+        var markdown = this.props.description && marked(this.props.description);
+
         return (
             <div className="section">
                 <a name={this.props.linkName}></a>
@@ -18,8 +22,8 @@ var DemoItem = React.createClass({
                 </h2>
                 <div className="section-content">
                     <div className="demo-description"
-                         dangerouslySetInnerHTML={{ __html: this.props.description }}></div>
-                    
+                         dangerouslySetInnerHTML={{ __html: markdown }}></div>
+
                     {this.props.children ? (
                     <div className="output clearfix">
                         {this.props.children}

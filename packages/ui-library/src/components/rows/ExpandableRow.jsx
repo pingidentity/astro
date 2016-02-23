@@ -7,8 +7,6 @@ var React = require("react"),
  * @class ExpandableRow
  * @desc Basic expandable row component.
  *
- **
- *
  * @param {object} [title] - a JSX object that serves as the title shown on the row.
  * @param {string} [titleStyle] - extra css styling for label
  * @param {object} [subtitle] - a JSX object that goes right below the title, and serves as a subtitle.

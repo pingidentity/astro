@@ -104,7 +104,7 @@ describe("FileUpload", function () {
 
         // calls the validator function on change
         expect(component.props.validator).toBeCalled();
-        expect(component.props.errorHandler).toBeCalledWith("cid.users.fileUpload.error.tooBig");
+        expect(component.props.errorHandler).toBeCalledWith(FileUpload.ErrorCodes.TooBig);
     });
 
     it("will set error text when file is not one of the accepted types.", function () {
@@ -123,7 +123,7 @@ describe("FileUpload", function () {
 
         // calls the validator function on change
         expect(component.props.validator).toBeCalled();
-        expect(component.props.errorHandler).toBeCalledWith("cid.users.fileUpload.error.fileType");
+        expect(component.props.errorHandler).toBeCalledWith(FileUpload.ErrorCodes.WrongMimeType);
     });
 
     it("will reset the value of the file input value when the remove link is clicked.", function () {
