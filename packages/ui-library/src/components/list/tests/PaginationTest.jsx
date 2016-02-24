@@ -3,6 +3,7 @@ window.__DEV__ = true;
 jest.dontMock("../Pagination.jsx");
 jest.dontMock("../../rows/ExpandableRow.jsx");
 jest.dontMock("../../../testutil/TestUtils");
+jest.dontMock("underscore");
 
 describe("Pagination", function () {
 
@@ -21,6 +22,7 @@ describe("Pagination", function () {
         callback = jest.genMockFunction();
         component = ReactTestUtils.renderIntoDocument(
             <Pagination
+                page={2}
                 perPage = {5}
                 total = {100}
                 onChange={callback}>
@@ -38,7 +40,40 @@ describe("Pagination", function () {
 
     });
 
-    it ("rendered with correct pages", function () {
+    it ("renders short pages navigation", function () {
+
+        component = ReactTestUtils.renderIntoDocument(
+            <Pagination
+                perPage = {5}
+                total = {30}
+                onChange={callback}>
+                <ExpandableRow className = "row" key = {1} />
+                <ExpandableRow className = "row" key = {2} />
+                <ExpandableRow className = "row" key = {3} />
+                <ExpandableRow className = "row" key = {4} />
+                <ExpandableRow className = "row" key = {5} />
+            </Pagination>
+        );
+
+        pageLinks = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "page-links");
+        top = pageLinks[0];
+        topLinks = React.findDOMNode(top).childNodes;
+
+        //expect 2 lists of page links
+        expect(pageLinks.length).toBe(2);
+
+        //expect 8 child dom nodes in page links, no ellipsis
+        expect(topLinks.length).toEqual(8);
+
+        //expect the first child to be "<<"
+        expect(topLinks[0].childNodes[0].className).toBe("icon-previous");
+
+        //expect the highest page to be 6
+        expect(topLinks[6].innerHTML).toBe("6");
+
+    });
+
+    it ("renders expanded pages navigation", function () {
 
         //expect 2 lists of page links
         expect(pageLinks.length).toBe(2);
@@ -53,15 +88,49 @@ describe("Pagination", function () {
 
     });
 
-    it ("trigger basic change callback", function () {
+    it ("renders no pages navigation", function () {
 
-        ReactTestUtils.Simulate.click(topLinks[1]);
-        expect(callback.mock.calls.length).toBe(1);
+        component = ReactTestUtils.renderIntoDocument(
+            <Pagination
+                perPage = {5}
+                total = {4}
+                onChange={callback}>
+                <ExpandableRow className = "row" key = {1} />
+                <ExpandableRow className = "row" key = {2} />
+                <ExpandableRow className = "row" key = {3} />
+                <ExpandableRow className = "row" key = {4} />
+                <ExpandableRow className = "row" key = {5} />
+            </Pagination>
+        );
+
+        pageLinks = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "page-links");
+
+        topLinks = React.findDOMNode(pageLinks[0]).childNodes;
+        var bottomLinks = React.findDOMNode(pageLinks[1]).childNodes;
+
+        //expect 2 lists of page links
+        expect(pageLinks.length).toBe(2);
+
+        //expect no child DOM nodes
+        expect(topLinks.length).toEqual(0);
+        expect(bottomLinks.length).toEqual(0);
+
 
     });
 
-    it ("expect children are displayed", function () {
+    it ("trigger page change callback", function () {
+        ReactTestUtils.Simulate.click(topLinks[1]);
+        expect(callback).toBeCalledWith(0, 5, 1);
 
+    });
+
+    it ("is not triggering callback for same page", function () {
+        ReactTestUtils.Simulate.click(topLinks[0]);
+        expect(callback).not.toBeCalled();
+
+    });
+
+    it ("renders children content", function () {
         var children = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "row");
         expect(children.length).toEqual(5);
 

@@ -11,21 +11,26 @@ var PaginationDemo = React.createClass({
             items.push(<ExpandableRow title = {"Entry " + (i+1)} key = {i}/>);
         }
         return {
-            total: 100,
+            total: items.length,
             perPage: 5,
             items: items,
-            display: []
+            display: items.slice(0, 5),
+            first: 0,
+            last: 5,
+            currentPage: 1
         };
     },
 
     _changeCallback: function (first, last, page) {
-        var display = this.state.items.slice(first,last);
+
+        console.log(`++ _changeCallback(${first}, ${last}, ${page})`);
+
         this.setState({
-            display: display
+            display: this.state.items.slice(first,last),
+            first: first,
+            last: last,
+            currentPage: page
         });
-        this.first = first;
-        this.last = last;
-        this.page = page;
     },
 
     render: function () {
@@ -34,13 +39,14 @@ var PaginationDemo = React.createClass({
             <div>
                 <label>Callback to Parent</label>
                 <div>
-                    First Entry Index: {this.first ? this.first : ""},
-                    Slice To: {this.last ? this.last : ""},
-                    Current Page: {this.page ? this.page : ""}
+                    First Entry Index: {this.state.first},
+                    Slice To: {this.state.last},
+                    Current Page: {this.state.currentPage},
                 </div>
-                <Pagination
+                <Pagination controlled={true}
                     className = "result-set"
                     perPage = {this.state.perPage}
+                    page = {this.state.currentPage}
                     total = {this.state.items.length}
                     onChange = {this._changeCallback}>
                     {this.state.display}
