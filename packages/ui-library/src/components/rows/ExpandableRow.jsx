@@ -17,42 +17,44 @@ var React = require("react"),
  * @param {bool} [showDelete=true] - whether or not the 'delete' button will be shown at all. Default is true.
  * @param {function} [onDelete] - callback to be triggered when clicking on the 'delete' icon (if present)
  * @param {bool} [defaultToExpanded=false] - DEPRECATED: option to render the row in a expanded state by default.
- *                                                       Default is false. This option is only left for backward
- *                                                       compatibility within stateful version of control.
+ *     Default is false. This option is only left for backward compatibility within stateful version of control.
  * @param {bool} [expanded=false] - whether row is expanded or collapsed
  * @param {function} [onToggle] - callback to be triggered when expand/collapse button is clicked. Accepts
- *                                param of type bool - expanded/collapsed state before trigger.
+ *     param of type bool - expanded/collapsed state before trigger.
  * @param {object} [editButton] - it is used to show an object inside edit body. For example: ModalButton
- *          can be passed like follow:
- *              editButton=&#123;<ModalButton
- *                  linkContent=&#123;editModalButton}#125;
- *                  data-id="edit-btn"
- *                  inline={#123;true}#125;
- *                  modalTitle={#123;this.props.editModalTitle}#125;
- *                  maximize={#123;true}#125;
- *                  modalBody={#123;this.props.editModalBody}#125;>
- *              </ModalButton>}#125;
+ *     can be passed like follow:
+ *         editButton=&#123;<ModalButton
+ *             linkContent=&#123;editModalButton}#125;
+ *             data-id="edit-btn"
+ *             inline={#123;true}#125;
+ *             modalTitle={#123;this.props.editModalTitle}#125;
+ *             maximize={#123;true}#125;
+ *             modalBody={#123;this.props.editModalBody}#125;>
+ *         </ModalButton>}#125;
  * @param {object} [deleteButton] - it is used to show an object inside delete body. For example: ModalButton
  * @param {string} [className] - extra CSS classes to be applied
  * @param {bool} [waiting=false] - when true, disabled interaction with row and reduces opacity of the layer
  * @param {string} [id="expandable-row"]- it is used for a unique data-id.
  * @param {bool} [controlled=false] - A boolean to enable the component to be externally managed.  True will relinquish
- *   control to the components owner.  False or not specified will cause the component to manage state internally
- *   but still execute the onToggle callback in case the owner is interested.
+ *     control to the components owner.  False or not specified will cause the component to manage state internally
+ *     but still execute the onToggle callback in case the owner is interested.
+ * @param {object} [rowAccessories] - a container where buttons, toggles, status may be passed in to render on the right
+ *     side of the row just to the left of the expand button
  *
  * @example
- *        <h1>My Row Results</h1>
- *        <!-- note that all expanding rows must be in a div with the "result-set" css class -->
- *        <div className="result-set">
- *            <ExpandableRow title={'row1'} subtitle={'row1 subtitle'} content={row1Content} />
- *            <ExpandableRow title={'row2'} subtitle={'row2 subtitle'} content={row2Content} />
- *            <ExpandableRow title={'row3'} subtitle={'row3 subtitle'} content={row3Content} />
- *        </div>
+ *         <h1>My Row Results</h1>
+ *         <!-- note that all expanding rows must be in a div with the "result-set" css class -->
+ *         <div className="result-set">
+ *             <ExpandableRow title={'row1'} subtitle={'row1 subtitle'} content={row1Content} />
+ *             <ExpandableRow title={'row2'} subtitle={'row2 subtitle'} content={row2Content} />
+ *             <ExpandableRow title={'row3'} subtitle={'row3 subtitle'} content={row3Content} />
+ *         </div>
  *
- *  You can also pass the content as a children of the component. This will overwrite any content passed in as a prop
- *      <ExpandableRow title={titleJsx} subtitle={subtitleJsx}>
- *          {contentChildrenJsx}
- *      </ExpandableRow>
+ *     You can also pass the content as a children of the component. This will overwrite any content passed in as a prop
+ *
+ *         <ExpandableRow title={titleJsx} subtitle={subtitleJsx}>
+ *             {contentChildrenJsx}
+ *         </ExpandableRow>
  */
 
 
@@ -108,22 +110,24 @@ var Stateful = React.createClass({
 var Stateless = React.createClass({
 
     propTypes: {
+        className: React.PropTypes.string,
+        content: React.PropTypes.object,
+        deleteButton: React.PropTypes.object,
+        draggable: React.PropTypes.bool,
+        editButton: React.PropTypes.object,
+        editViewRoute: React.PropTypes.string,
+        expanded: React.PropTypes.bool,
+        id: React.PropTypes.string,
+        isEditEnabled: React.PropTypes.bool,
+        onDelete: React.PropTypes.func,
+        onToggle: React.PropTypes.func,
+        rowAccessories: React.PropTypes.object,
+        showDelete: React.PropTypes.bool,
+        showEdit: React.PropTypes.bool,
         title: React.PropTypes.object,
         titleStyle: React.PropTypes.string,
         subtitle: React.PropTypes.object,
-        content: React.PropTypes.object,
-        isEditEnabled: React.PropTypes.bool,
-        editViewRoute: React.PropTypes.string,
-        showEdit: React.PropTypes.bool,
-        showDelete: React.PropTypes.bool,
-        onDelete: React.PropTypes.func,
-        expanded: React.PropTypes.bool,
-        onToggle: React.PropTypes.func,
-        editButton: React.PropTypes.object,
-        deleteButton: React.PropTypes.object,
-        className: React.PropTypes.string,
         waiting: React.PropTypes.bool,
-        id: React.PropTypes.string
     },
 
     /**
@@ -204,20 +208,20 @@ var Stateless = React.createClass({
                     <div className={css(titleCss)}>
                         {this.props.title}
                     </div>
-                    {this.props.subtitle
-                        ? <div className="item-sub-title">{this.props.subtitle}</div>
-                        : null
-                        }
+                    {this.props.subtitle && (
+                        <div className="item-sub-title">{this.props.subtitle}</div>
+                    )}
+                    { this.props.rowAccessories && (
+                        <div className="row-accessories">{this.props.rowAccessories}</div>
+                    )}
                 </div>
-                {
-                    this.props.expanded
-                        ? <div data-id="expanded-row" className="expanded-content clearfix">
+                {this.props.expanded && (
+                    <div data-id="expanded-row" className="expanded-content clearfix">
                         {this.props.children || this.props.content}
                         {editButton}
                         {deleteButton}
                     </div>
-                        : null
-                    }
+                )}
                 <a data-id="expand-btn"
                    className="expand-btn"
                    onClick={this._handleExpandButtonClick}>

@@ -185,4 +185,28 @@ describe("ExpandableRow", function () {
         expect(content.props.children).toEqual(contentChildrenText);
     });
 
+    it("renders the right-side/row-accessories content", function () {
+        var linkText = "Control Link",
+            rowAccessoriesLink = (
+                <a className="control-link">{linkText}</a>
+            ),
+            rowAccessories,
+            rowAccessoriesContent;
+
+        component = ReactTestUtils.renderIntoDocument(
+            <ExpandableRow
+                title={titleJsx}
+                subtitle={subtitleJsx}
+                rowAccessories={rowAccessoriesLink} />
+        );
+
+        rowAccessories = ReactTestUtils.findRenderedDOMComponentWithClass(component, "row-accessories");
+        expect(rowAccessories).toBeTruthy();
+
+        rowAccessoriesContent = ReactTestUtils.findRenderedDOMComponentWithClass(component, "control-link");
+        expect(rowAccessoriesContent).toBeTruthy();
+
+        expect(rowAccessoriesContent.getDOMNode().textContent).toEqual(linkText);
+    });
+
 });

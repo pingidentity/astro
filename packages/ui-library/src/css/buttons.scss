@@ -2,7 +2,7 @@
 @mixin base-button-styles {
 	position: relative;
 	display: inline-block;
-	font-family: $input-font-stack;
+	font-family: $font-pn-regular;
 	background-color: map-get($colors, 'white');
 	text-align: center;
 	vertical-align: middle;

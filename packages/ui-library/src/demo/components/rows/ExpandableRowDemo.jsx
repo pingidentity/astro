@@ -1,5 +1,6 @@
 var React = require("react/addons");
 var ExpandableRow = require("../../../components/rows/ExpandableRow.jsx");
+var Toggle = require("../../../components/forms/Toggle.jsx");
 
 var ExpandableRowDemo = React.createClass({
 
@@ -17,32 +18,41 @@ var ExpandableRowDemo = React.createClass({
 
     render: function () {
 
+
+        var rowAccessories = (<div>
+            <a>Link</a>
+            <input type="button" className="button inline" value="Inline Button" />
+            <Toggle />
+            <div className="status good"></div>
+        </div>);
+
         return (
             <div data-id="idp-row" className="result-set">
                 <ExpandableRow
+                    title="Row With Right Content"
+                    subtitle="Row Subtitle"
+                    rowAccessories={rowAccessories}
+                    showEdit={false} />
+                <ExpandableRow
                     title="Collapsed Expandable Row"
                     subtitle="stateful"
-                    editModalTitle="Modal Title"
                     defaultToExpanded={false}
                     showDelete={false}
-                    showEdit={true}/>
+                    showEdit={true} />
                 <ExpandableRow
                     title="Open Expandable Row"
                     subtitle="stateful"
-                    editModalTitle="Modal Title-2"
                     defaultToExpanded={true}
                     showDelete={true}
                     showEdit={false}/>
                 <ExpandableRow
                     title="Expandable Row in Waiting Mode"
                     subtitle="stateful"
-                    editModalTitle="Modal Title-2"
                     waiting={true}
                     defaultToExpanded={true}/>
                 <ExpandableRow
                     title="Expandable Row"
                     subtitle="stateless"
-                    editModalTitle="Modal Title-3"
                     expanded={this.state.expanded}
                     onToggle={this._onToggle}/>
             </div>
