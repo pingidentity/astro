@@ -1,14 +1,11 @@
 window.__DEV__ = true;
 
 jest.dontMock("../FormTextArea.jsx");
-jest.dontMock("classnames");
-jest.dontMock("underscore");
-jest.dontMock("../../../testutil/TestUtils");
 
 describe("FormTextArea", function () {
 
-    var React = require("react/addons"),
-        ReactTestUtils = React.addons.TestUtils,
+    var React = require("react"),
+        ReactTestUtils = require("react-addons-test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         FormTextArea = require("../FormTextArea.jsx");
 
@@ -17,10 +14,10 @@ describe("FormTextArea", function () {
             <FormTextArea referenceName={'test'} />
         );
         // verify that the component is rendered
-        var field = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-textarea");
+        var field = TestUtils.findRenderedDOMNodeWithClass(component, "input-textarea");
         expect(ReactTestUtils.isDOMComponent(field)).toBeTruthy();
         // make sure that the field is not required by default
-        var elements = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "required");
+        var elements = TestUtils.scryRenderedDOMNodesWithClass(component, "required");
         expect(elements.length).toBe(0);
     });
 
@@ -29,7 +26,7 @@ describe("FormTextArea", function () {
             <FormTextArea referenceName={'test'} isRequired={true} />
         );
         // verify that the component is rendered
-        var field = ReactTestUtils.findRenderedDOMComponentWithClass(component, "required");
+        var field = TestUtils.findRenderedDOMNodeWithClass(component, "required");
         expect(ReactTestUtils.isDOMComponent(field)).toBeTruthy();
     });
 
@@ -39,8 +36,8 @@ describe("FormTextArea", function () {
             <FormTextArea referenceName={'test'} defaultValue={defaultValue} />
         );
         // verify that the component is rendered
-        var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "textarea");
-        expect(field.getDOMNode().value).toContain(defaultValue);
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
+        expect(field.value).toContain(defaultValue);
     });
 
     it("shows placeholder", function () {
@@ -49,8 +46,8 @@ describe("FormTextArea", function () {
             <FormTextArea referenceName={'test'} defaultValue={defaultValue} placeholder="edit me"/>
         );
         // verify that the component is rendered
-        var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "textarea");
-        expect(field.getDOMNode().getAttribute("placeholder")).toEqual("edit me");
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
+        expect(field.getAttribute("placeholder")).toEqual("edit me");
     });
 
     it("respects value over defaultValue and state precedence", function () {
@@ -59,11 +56,11 @@ describe("FormTextArea", function () {
         );
 
         // verify that the component is rendered
-        var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "textarea");
-        expect(field.getDOMNode().value).toContain("my value");
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
+        expect(field.value).toContain("my value");
 
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } });
-        expect(field.getDOMNode().value).toContain("my value");
+        expect(field.value).toContain("my value");
     });
 
     it("fires the onValueChange callback when field changes", function () {
@@ -71,7 +68,7 @@ describe("FormTextArea", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormTextArea referenceName={'test'} onValueChange={handleChange} />
         );
-        var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "textarea");
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
         expect(handleChange.mock.calls.length).toBe(1);
 
@@ -86,9 +83,9 @@ describe("FormTextArea", function () {
                 defaultValue={originalValue}
                 onValueChange={handleChange} />
         );
-        var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "textarea");
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
-        var undo = TestUtils.findRenderedDOMComponentWithDataId(component, "undo");
+        var undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
         expect(ReactTestUtils.isDOMComponent(undo)).toBeFalsy();
     });
 
@@ -102,9 +99,9 @@ describe("FormTextArea", function () {
                 originalValue={originalValue}
                 onValueChange={handleChange} />
         );
-        var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "textarea");
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
-        var undo = TestUtils.findRenderedDOMComponentWithDataId(component, "undo");
+        var undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
         expect(ReactTestUtils.isDOMComponent(undo)).toBeTruthy();
     });
 
@@ -118,16 +115,16 @@ describe("FormTextArea", function () {
                 originalValue={originalValue}
                 onValueChange={handleChange} />
         );
-        var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "textarea");
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
         // check that the undo icon gets displayed
-        var undo = TestUtils.findRenderedDOMComponentWithDataId(component, "undo");
+        var undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
         expect(ReactTestUtils.isDOMComponent(undo)).toBeTruthy();
         // click on the undo icon and verify that the field gets reverted to the original value
         ReactTestUtils.Simulate.click(undo);
-        expect(field.getDOMNode().value).toEqual(originalValue);
+        expect(field.value).toEqual(originalValue);
         // now check that the undo icon dissapeared
-        undo = TestUtils.findRenderedDOMComponentWithDataId(component, "undo");
+        undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
         expect(ReactTestUtils.isDOMComponent(undo)).toBeFalsy();
     });
 
@@ -142,12 +139,12 @@ describe("FormTextArea", function () {
                 onValueChange={handleChange} />
         );
         // make the undo icon appear by changing the field
-        var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "textarea");
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
         // the field change will trigger the callback, clear it since we are not testing for it
         handleChange.mockClear();
         // check that the icon is actually there
-        var undo = TestUtils.findRenderedDOMComponentWithDataId(component, "undo");
+        var undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
         expect(ReactTestUtils.isDOMComponent(undo)).toBeTruthy();
         // click on the undo icon
         ReactTestUtils.Simulate.click(undo);
@@ -163,7 +160,7 @@ describe("FormTextArea", function () {
             <FormTextArea errorMessage={errorMessage} />
         );
 
-        var errorDiv = ReactTestUtils.findRenderedDOMComponentWithClass(component, "tooltip-text");
-        expect(errorDiv.getDOMNode().textContent).toBe(errorMessage);
+        var errorDiv = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text");
+        expect(errorDiv.textContent).toBe(errorMessage);
     });
 });

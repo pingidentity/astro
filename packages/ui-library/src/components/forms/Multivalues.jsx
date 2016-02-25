@@ -1,6 +1,7 @@
 "use strict";
 
 var React = require("react");
+var ReactDOM = require("react-dom");
 var cx = require("classnames");
 var _ = require("underscore");
 var placeholder = document.createElement("span");
@@ -107,7 +108,7 @@ var Multivalues = React.createClass({
     */
     _handleChange: function (e) {
         //Sets the html of a hidden div to calculate exact pixel width of the input string
-        var hidden = React.findDOMNode(this.refs["hidden-div"]);
+        var hidden = ReactDOM.findDOMNode(this.refs["hidden-div"]);
         hidden.innerHTML = e.target.value;
         //add 20 pixels so input has room for next character
         var newWidth = hidden.offsetWidth + 20 + "px";

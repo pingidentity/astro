@@ -1,11 +1,10 @@
 window.__DEV__ = true;
 
 jest.dontMock("../HelpHint.jsx");
-jest.dontMock("../../../testutil/TestUtils");
 
 describe("HelpHint", function () {
-    var React = require("react/addons");
-    var ReactTestUtils = React.addons.TestUtils;
+    var React = require("react");
+    var ReactTestUtils = require("react-addons-test-utils");
     var TestUtils = require("../../../testutil/TestUtils");
     var HelpHint = require("../HelpHint.jsx");
     var text = "test help text!";
@@ -19,8 +18,8 @@ describe("HelpHint", function () {
         component = ReactTestUtils.renderIntoDocument(
             <HelpHint hintText={text} id="helpTooltip" className={classValue}>{label}</HelpHint>
         );
-        div = TestUtils.findRenderedDOMComponentWithDataId(component, "helpTooltip");
-        tooltipDiv = ReactTestUtils.findRenderedDOMComponentWithClass(component, "tooltip-text");
+        div = TestUtils.findRenderedDOMNodeWithDataId(component, "helpTooltip");
+        tooltipDiv = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text");
     });
 
     it("renders the component", function () {
@@ -29,14 +28,14 @@ describe("HelpHint", function () {
 
     it("renders the enclosed label", function () {
         // verify that the label is rendered with a space between the label and the tooltip content
-        expect(div.getDOMNode().textContent).toEqual(label + " " + text);
+        expect(div.textContent).toEqual(label + " " + text);
     });
 
     it("has hint text", function () {
-        expect(tooltipDiv.getDOMNode().textContent).toEqual(text);
+        expect(tooltipDiv.textContent).toEqual(text);
     });
 
     it("has the styling class", function () {
-        expect(div.props.className).toContain(classValue);
+        expect(div.className).toContain(classValue);
     });
 });

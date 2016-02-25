@@ -1,4 +1,4 @@
-var React = require("react/addons");
+var React = require("react");
 var If = require("./../../../components/general/If.jsx");
 
 var IfDemo = React.createClass({

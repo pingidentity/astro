@@ -1,11 +1,11 @@
 window.__DEV__ = true;
 
 jest.dontMock("../CollapsibleSection.jsx");
-jest.dontMock("../../../testutil/TestUtils");
 
 describe("CollapsibleSection", function () {
-    var React = require("react/addons");
-    var ReactTestUtils = React.addons.TestUtils;
+    var React = require("react");
+    var ReactDOM = require("react-dom");
+    var ReactTestUtils = require("react-addons-test-utils");
     var CollapsibleSection = require("../CollapsibleSection.jsx");
     var TestUtils = require("../../../testutil/TestUtils");
     var onToggle = jest.genMockFunction();
@@ -21,8 +21,8 @@ describe("CollapsibleSection", function () {
             </CollapsibleSection>
         );
 
-        var cmp = ReactTestUtils.findRenderedComponentWithType(View, CollapsibleSection);
-        var nada = TestUtils.scryRenderedDOMComponentsWithDataId(View, "iShouldBeHidden");
+        var cmp = TestUtils.findRenderedComponentWithType(View, CollapsibleSection);
+        var nada = TestUtils.scryRenderedDOMNodesWithDataId(View, "iShouldBeHidden");
 
         expect(cmp).toBeTruthy();
         expect(nada.length).toEqual(0);
@@ -38,9 +38,9 @@ describe("CollapsibleSection", function () {
             </CollapsibleSection>
         );
 
-        ReactTestUtils.Simulate.click(React.findDOMNode(View));
+        ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(View));
 
-        var child = TestUtils.findRenderedDOMComponentWithDataId(View, "collapsableSection");
+        var child = TestUtils.findRenderedDOMNodeWithDataId(View, "collapsableSection");
 
         expect(onToggle).toBeCalled();
         expect(child).toBeTruthy();
@@ -56,7 +56,7 @@ describe("CollapsibleSection", function () {
             </CollapsibleSection>
         );
 
-        var child = TestUtils.findRenderedDOMComponentWithDataId(View, "collapsableSection");
+        var child = TestUtils.findRenderedDOMNodeWithDataId(View, "collapsableSection");
 
         expect(child).toBeTruthy();
     });
@@ -76,7 +76,7 @@ describe("CollapsibleSection", function () {
             </CollapsibleSection>
         );
 
-        var child = TestUtils.findRenderedDOMComponentWithDataId(View, "collapsableSection");
+        var child = TestUtils.findRenderedDOMNodeWithDataId(View, "collapsableSection");
         expect(onToggle).toBeCalled();
         expect(child).toBeTruthy();
     });

@@ -1,5 +1,5 @@
-NODE_VERSION=0.10.35
-NPM_VERSION=2.7.0
+NODE_VERSION=4.2.4
+NPM_VERSION=3.7.1
 
 
 # below are derived properties
@@ -21,14 +21,14 @@ endif
 
 NODE_FILENAME=node-v$(NODE_VERSION)-$(SYS_NAME)-$(ARCH_NAME)
 NPM_FILENAME=npm-$(NPM_VERSION)
-NPM_EXEC=$(CURRENT_DIR)/node/node $(CURRENT_DIR)/node/npm/bin/npm-cli.js
+NPM_EXEC=$(CURRENT_DIR)/node/node $(CURRENT_DIR)/node/node_modules/npm/bin/npm-cli.js
 MVN_FILENAME=apache-maven-3.2.2-bin.tar.gz
 
 CURRENT_DIR := $(shell pwd)
 
 M2_HOME := $(CURRENT_DIR)/mvn
 SHELL := /bin/bash
-PATH := $(CURRENT_DIR)/node:$(CURRENT_DIR)/node/npm/bin:$(PATH):$(M2_HOME)/bin
+PATH := $(CURRENT_DIR)/node:$(CURRENT_DIR)/node/node_modules/npm/bin:$(PATH):$(M2_HOME)/bin
 
 GIT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 
@@ -107,8 +107,8 @@ install-node-npm: clean-node
 	tar -xzf $(NODE_FILENAME).tar.gz --strip=2 -C node/ $(NODE_FILENAME)/bin/node
 	rm -r $(NODE_FILENAME).tar.gz
 	wget http://art01.corp.pingidentity.com:8080/artifactory/simple/ext-releases-local/npm/$(NPM_FILENAME).tgz
-	mkdir -p node/npm
-	tar -xzf $(NPM_FILENAME).tgz --strip=1 -C node/npm
+	mkdir -p node/node_modules/npm
+	tar -xzf $(NPM_FILENAME).tgz --strip=1 -C node/node_modules/npm
 	rm -r $(NPM_FILENAME).tgz
 	rm -rf node_modules
 	$(NPM_EXEC) install

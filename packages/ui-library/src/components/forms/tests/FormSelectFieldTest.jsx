@@ -1,14 +1,12 @@
 window.__DEV__ = true;
 
 jest.dontMock("../FormSelectField.jsx");
-jest.dontMock("classnames");
-jest.dontMock("underscore");
-jest.dontMock("../../../testutil/TestUtils");
 
 describe("FormSelectField", function () {
 
-    var React = require("react/addons"),
-        ReactTestUtils = React.addons.TestUtils,
+    var React = require("react"),
+        ReactTestUtils = require("react-addons-test-utils"),
+        TestUtils = require("../../../testutil/TestUtils"),
         FormSelectField = require("../FormSelectField.jsx");
 
     it("renders the component with a data object", function () {
@@ -21,20 +19,20 @@ describe("FormSelectField", function () {
                 onChange={onChange} value={'2'} />
         );
 
-        var label = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-select");
-        var select = ReactTestUtils.findRenderedDOMComponentWithTag(component, "select");
-        var options = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, "option");
+        var label = TestUtils.findRenderedDOMNodeWithClass(component, "input-select");
+        var select = TestUtils.findRenderedDOMNodeWithTag(component, "select");
+        var options = TestUtils.scryRenderedDOMNodesWithTag(component, "option");
 
         expect(ReactTestUtils.isDOMComponent(label)).toBeTruthy();
 
-        expect(select.getDOMNode().value).toBe("2");
-        expect(select.getDOMNode().name).toBe("testId");
+        expect(select.value).toBe("2");
+        expect(select.name).toBe("testId");
 
         expect(options.length).toBe(2);
-        expect(options[0].getDOMNode().getAttribute("value")).toBe("1");
-        expect(options[0].getDOMNode().textContent).toBe("one");
-        expect(options[1].getDOMNode().getAttribute("value")).toBe("2");
-        expect(options[1].getDOMNode().textContent).toBe("two");
+        expect(options[0].getAttribute("value")).toBe("1");
+        expect(options[0].textContent).toBe("one");
+        expect(options[1].getAttribute("value")).toBe("2");
+        expect(options[1].textContent).toBe("two");
     });
 
     it("renders the component with a data array", function () {
@@ -46,13 +44,13 @@ describe("FormSelectField", function () {
                 onChange={onChange} value={'2'} />
         );
 
-        var options = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, "option");
+        var options = TestUtils.scryRenderedDOMNodesWithTag(component, "option");
 
         expect(options.length).toBe(2);
-        expect(options[0].getDOMNode().getAttribute("value")).toBe("1");
-        expect(options[0].getDOMNode().textContent).toBe("one");
-        expect(options[1].getDOMNode().getAttribute("value")).toBe("2");
-        expect(options[1].getDOMNode().textContent).toBe("two");
+        expect(options[0].getAttribute("value")).toBe("1");
+        expect(options[0].textContent).toBe("one");
+        expect(options[1].getAttribute("value")).toBe("2");
+        expect(options[1].textContent).toBe("two");
     });
 
     it("fires the onChange callback when selection changes", function () {
@@ -62,7 +60,7 @@ describe("FormSelectField", function () {
             <FormSelectField label="test label" options={{ 1: "one", 2: "two" }} onChange={onChange} value={'2'} />
         );
 
-        var select = ReactTestUtils.findRenderedDOMComponentWithTag(component, "select");
+        var select = TestUtils.findRenderedDOMNodeWithTag(component, "select");
         ReactTestUtils.Simulate.change(select, { target: { value: "1" } } );
 
         expect(onChange.mock.calls.length).toBe(1);
@@ -117,9 +115,9 @@ describe("FormSelectField", function () {
             />
         );
 
-        var options = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, "option");
-        expect(options[0].getDOMNode().textContent).toBe(noneOptionText);
-        expect(options[0].getDOMNode().getAttribute("value")).toBe(noneOptionValue);
+        var options = TestUtils.scryRenderedDOMNodesWithTag(component, "option");
+        expect(options[0].textContent).toBe(noneOptionText);
+        expect(options[0].getAttribute("value")).toBe(noneOptionValue);
     });
 
     it("adds the none option when specified with a data array of objects", function () {
@@ -142,9 +140,9 @@ describe("FormSelectField", function () {
             />
         );
 
-        var options = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, "option");
-        expect(options[0].getDOMNode().textContent).toBe(noneOptionText);
-        expect(options[0].getDOMNode().getAttribute("value")).toBe(noneOptionValue);
+        var options = TestUtils.scryRenderedDOMNodesWithTag(component, "option");
+        expect(options[0].textContent).toBe(noneOptionText);
+        expect(options[0].getAttribute("value")).toBe(noneOptionValue);
     });
 
     it("shows the error message when it is specified", function () {
@@ -156,8 +154,8 @@ describe("FormSelectField", function () {
                 errorMessage={errorMessage} value={'2'} />
         );
 
-        var errorDiv = ReactTestUtils.findRenderedDOMComponentWithClass(component, "tooltip-text");
-        expect(errorDiv.getDOMNode().textContent).toBe(errorMessage);
+        var errorDiv = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text");
+        expect(errorDiv.textContent).toBe(errorMessage);
     });
 
     it("is not disabled when not specified", function () {
@@ -167,9 +165,9 @@ describe("FormSelectField", function () {
                 value={'2'} />
         );
 
-        var select = ReactTestUtils.findRenderedDOMComponentWithTag(component, "select");
+        var select = TestUtils.findRenderedDOMNodeWithTag(component, "select");
         expect(ReactTestUtils.isDOMComponent(select)).toBeTruthy();
-        expect(select.props.disabled).toBeFalsy();
+        expect(select.disabled).toBeFalsy();
     });
 
     it("is disabled when it is specified", function () {
@@ -179,8 +177,8 @@ describe("FormSelectField", function () {
                 isDisabled={true} value={'2'} />
         );
 
-        var select = ReactTestUtils.findRenderedDOMComponentWithTag(component, "select");
+        var select = TestUtils.findRenderedDOMNodeWithTag(component, "select");
         expect(ReactTestUtils.isDOMComponent(select)).toBeTruthy();
-        expect(select.props.disabled).toBeTruthy();
+        expect(select.disabled).toBeTruthy();
     });
 });

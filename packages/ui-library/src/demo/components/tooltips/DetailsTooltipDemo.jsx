@@ -1,4 +1,4 @@
-var React = require("react/addons");
+var React = require("react");
 var DetailsTooltip = require("../../../components/tooltips/DetailsTooltip.jsx");
 
 var DetailsTooltipDemo = React.createClass({

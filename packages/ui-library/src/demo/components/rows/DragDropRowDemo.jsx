@@ -1,4 +1,4 @@
-var React = require("react/addons"),
+var React = require("react"),
     DragDropContext = require("react-dnd").DragDropContext,
     HTML5Backend = require("react-dnd/modules/backends/HTML5"),
     Draggable = require("./../../../components/rows/DragDropRow.jsx"),

@@ -1,13 +1,12 @@
 window.__DEV__ = true;
 
-jest.dontMock("../../../testutil/TestUtils");
 jest.dontMock("../FormRadioGroup.jsx");
-jest.dontMock("underscore");
 
 
 describe("FormRadioGroup", function () {
-    var React = require("react/addons"),
-        ReactTestUtils = React.addons.TestUtils,
+    var React = require("react"),
+        ReactTestUtils = require("react-addons-test-utils"),
+        TestUtils = require("../../../testutil/TestUtils"),
         FormRadioGroup = require("../FormRadioGroup.jsx"),
         callback = jest.genMockFunction(),
         items = [
@@ -24,14 +23,14 @@ describe("FormRadioGroup", function () {
                 items={items}/>
         );
 
-        var radios = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, "input");
+        var radios = TestUtils.scryRenderedDOMNodesWithTag(component, "input");
 
         // make sure there are 2 radios
         expect(radios.length).toBe(2);
 
         // make sure no radios are checked since we didn't provide a default
-        expect(radios[0].getDOMNode().checked).toBe(false);
-        expect(radios[1].getDOMNode().checked).toBe(false);
+        expect(radios[0].checked).toBe(false);
+        expect(radios[1].checked).toBe(false);
     });
 
     it("will trigger callback on radio selection change", function () {
@@ -45,16 +44,16 @@ describe("FormRadioGroup", function () {
                 items={items}/>
         );
 
-        var radios = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, "input");
+        var radios = TestUtils.scryRenderedDOMNodesWithTag(component, "input");
 
         // make sure there are 2 radios
         expect(radios.length).toBe(2);
 
         // make sure second radio button is checked by default
-        expect(radios[0].getDOMNode().checked).toBe(false);
-        expect(radios[0].getDOMNode().value).toBe("1");
-        expect(radios[1].getDOMNode().checked).toBe(true);
-        expect(radios[1].getDOMNode().value).toBe("2");
+        expect(radios[0].checked).toBe(false);
+        expect(radios[0].value).toBe("1");
+        expect(radios[1].checked).toBe(true);
+        expect(radios[1].value).toBe("2");
 
         ReactTestUtils.Simulate.change(radios[0], { target: { checked: true } });
         //make sure callback was triggered
@@ -81,15 +80,15 @@ describe("FormRadioGroup", function () {
         );
 
         // test presence of custom class (className prop)
-        var labelsCustom = ReactTestUtils.scryRenderedDOMComponentsWithClass(stackedComponent, customClass);
+        var labelsCustom = TestUtils.scryRenderedDOMNodesWithClass(stackedComponent, customClass);
         expect(labelsCustom.length).toBe(items.length);
 
         // test presence of "stacked" class (default behavior)
-        var labelsStacked = ReactTestUtils.scryRenderedDOMComponentsWithClass(stackedComponent, "stacked");
+        var labelsStacked = TestUtils.scryRenderedDOMNodesWithClass(stackedComponent, "stacked");
         expect(labelsStacked.length).toBe(items.length);
 
         // test that "stacked" class is not present
-        var labelsHorizontal = ReactTestUtils.scryRenderedDOMComponentsWithClass(horizontalComponent, "stacked");
+        var labelsHorizontal = TestUtils.scryRenderedDOMNodesWithClass(horizontalComponent, "stacked");
         expect(labelsHorizontal.length).toBe(0);
     });
 });

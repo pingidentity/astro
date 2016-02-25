@@ -1,6 +1,5 @@
 window.__DEV__ = true;
 
-jest.dontMock("../../../testutil/TestUtils");
 jest.dontMock("../FileUpload.jsx");
 jest.dontMock("../../../util/Utils");
 
@@ -30,8 +29,9 @@ global.FileReader = function () {
 };
 
 describe("FileUpload", function () {
-    var React = require("react/addons"),
-        ReactTestUtils = React.addons.TestUtils,
+    var React = require("react"),
+        ReactDOM = require("react-dom"),
+        ReactTestUtils = require("react-addons-test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         FileUpload = require("../FileUpload.jsx"),
         _ = require("underscore");
@@ -65,7 +65,7 @@ describe("FileUpload", function () {
 
     it("will not generate an error when file size is less than the maximum size.", function () {
         var component = getComponent();
-        var fileInput = React.findDOMNode(component.refs.fileInput);
+        var fileInput = ReactDOM.findDOMNode(component.refs.fileInput);
         var fakeFile = new global.File([getFakeJpegBlob(5)], "someFile.jpeg", { type: "image/jpeg" });
 
         ReactTestUtils.Simulate.change(fileInput, {
@@ -83,14 +83,14 @@ describe("FileUpload", function () {
     it("shows default Image before something is uploaded", function () {
         var logo = "https://www.pingidentity.com/etc/designs/pic/clientlibs-all/logos/PingIdentity_logo.png";
         var component = getComponent({ defaultImage: logo });
-        var preview = React.findDOMNode(component.refs.imageThumb);
+        var preview = ReactDOM.findDOMNode(component.refs.imageThumb);
 
         expect(preview.getAttribute("src")).toBe(logo);
     });
 
     it("will generate an error when file size is more than the maximum size.", function () {
         var component = getComponent();
-        var fileInput = React.findDOMNode(component.refs.fileInput);
+        var fileInput = ReactDOM.findDOMNode(component.refs.fileInput);
 
         // fake JPEG here is 21870 bytes - the rendered component has a max file size of 10000 bytes
         var fakeFile = new global.File([getFakeJpegBlob(7)], "someFile.jpeg", { type: "image/jpeg" });
@@ -109,7 +109,7 @@ describe("FileUpload", function () {
 
     it("will set error text when file is not one of the accepted types.", function () {
         var component = getComponent();
-        var fileInput = React.findDOMNode(component.refs.fileInput);
+        var fileInput = ReactDOM.findDOMNode(component.refs.fileInput);
 
         // image/bmp is not in the accepted file type array
         var fakeFile = new global.File([getFakeJpegBlob(1)], "someFile.bmp", { type: "image/bmp" });
@@ -128,8 +128,8 @@ describe("FileUpload", function () {
 
     it("will reset the value of the file input value when the remove link is clicked.", function () {
         var component = getComponent();
-        var fileInput = React.findDOMNode(component.refs.fileInput);
-        var removeButton = React.findDOMNode(component.refs.remove);
+        var fileInput = ReactDOM.findDOMNode(component.refs.fileInput);
+        var removeButton = ReactDOM.findDOMNode(component.refs.remove);
 
         fileInput.value = "someFile.png";
         expect(fileInput.value).toEqual("someFile.png");
@@ -144,37 +144,34 @@ describe("FileUpload", function () {
     it("shows an error message when one is set", function () {
         var fileUploadErrorMsg = "Please upload a valid file";
         var component = getComponent();
-        var errorTooltip =
-            TestUtils.findRenderedDOMComponentWithDataId(component, "testFileUpload_errormessage");
-        var errorTooltipText = ReactTestUtils.findRenderedDOMComponentWithClass(errorTooltip, "tooltip-text");
+        var errorTooltip = TestUtils.findRenderedDOMNodeWithDataId(component, "testFileUpload_errormessage");
+        var errorTooltipText = TestUtils.findRenderedDOMNodeWithClass(errorTooltip, "tooltip-text");
 
         // expect no error text to be rendered to begin with
-        expect(errorTooltipText.props.children).toEqual("");
+        expect(errorTooltipText.textContent).toEqual("");
 
         // simulate an error state
         component.setState({ errorMessage: fileUploadErrorMsg });
 
-        errorTooltip =
-            TestUtils.findRenderedDOMComponentWithDataId(component, "testFileUpload_errormessage");
+        errorTooltip = TestUtils.findRenderedDOMNodeWithDataId(component, "testFileUpload_errormessage");
 
         // renders the error in a tooltip
-        expect(errorTooltipText.props.children).toEqual(fileUploadErrorMsg);
+        expect(errorTooltipText.textContent).toEqual(fileUploadErrorMsg);
 
         // simulate a valid state
         component.setState({
             errorMessage: ""
         });
 
-        errorTooltip =
-            TestUtils.findRenderedDOMComponentWithDataId(component, "testFileUpload_errormessage");
+        errorTooltip = TestUtils.findRenderedDOMNodeWithDataId(component, "testFileUpload_errormessage");
 
         // no error is rendered
-        expect(errorTooltipText.props.children).toEqual("");
+        expect(errorTooltipText.textContent).toEqual("");
     });
 
     it('calls "onPreviewReady" when the image file is loaded', function () {
         var component = getComponent();
-        var fileInput = React.findDOMNode(component.refs.fileInput);
+        var fileInput = ReactDOM.findDOMNode(component.refs.fileInput);
 
         var fakeFile = new global.File([getFakeJpegBlob(2)], "someFile.jpeg", { type: "image/jpeg" });
 
@@ -190,8 +187,8 @@ describe("FileUpload", function () {
 
     it("will not respond to actions while disabled", function () {
         var component = getComponent({ disabled: true });
-        var fileInput = React.findDOMNode(component.refs.fileInput);
-        var removeButton = React.findDOMNode(component.refs.remove);
+        var fileInput = ReactDOM.findDOMNode(component.refs.fileInput);
+        var removeButton = ReactDOM.findDOMNode(component.refs.remove);
 
         expect(fileInput.disabled).toBeTruthy();
 
@@ -204,7 +201,7 @@ describe("FileUpload", function () {
 
     it("will show the filename when the showThumbnail property is not set", function () {
         var component = getComponent();
-        var fileInput = React.findDOMNode(component.refs.fileInput);
+        var fileInput = ReactDOM.findDOMNode(component.refs.fileInput);
         var fakeFile = new global.File([getFakeJpegBlob(1)], "someFile.jpeg", { type: "image/bmp" });
 
         fileInput.files = [];
@@ -219,7 +216,7 @@ describe("FileUpload", function () {
         });
 
         // doesn't show the files accepted message
-        var filesAcceptedMsg = TestUtils.findRenderedDOMComponentWithDataId(component, "filesAcceptedMsg");
+        var filesAcceptedMsg = TestUtils.findRenderedDOMNodeWithDataId(component, "filesAcceptedMsg");
         expect(filesAcceptedMsg).toBeFalsy();
     });
 });

@@ -1,7 +1,6 @@
 window.__DEV__ = true;
 
 jest.dontMock("../Utils");
-jest.dontMock("moment");
 
 describe("Utils", function () {
     var Utils = require("../Utils");
@@ -48,23 +47,25 @@ describe("Utils", function () {
 
         it("uses the correct function to save the blob file in other browsers",
             function () {
-                var click = jest.genMockFn();
-                var createObjectURL = jest.genMockFn();
-                global.navigator = {};
+                var fakeBlob = ["someFakeFileContent"];
+                var fakeFilename = "someFileName.txt";
+
+                global.navigator = { };
                 global.Blob = jest.genMockFunction().mockImplementation(function (blobData) {
                     return blobData;
                 });
+
+                var createObjectURL = jest.genMockFn();
+                global.URL = {};
+                global.URL.createObjectURL = createObjectURL;
+
+                var click = jest.genMockFn();
                 document.createElement = jest.genMockFn();
                 document.createElement.mockReturnValue({
                     download: {},
                     click: click
                 });
                 document.body.appendChild = jest.genMockFn();
-                global.URL = {};
-                global.URL.createObjectURL = createObjectURL;
-
-                var fakeBlob = ["someFakeFileContent"];
-                var fakeFilename = "someFileName.txt";
 
                 Utils.triggerFileDownload(fakeFilename, fakeBlob, "text/plain");
                 expect(createObjectURL).toBeCalled();
@@ -74,27 +75,30 @@ describe("Utils", function () {
 
         it("uses the correct function to save the blob file in other browsers if a.download isn't supported",
             function () {
-                var click = jest.genMockFn();
                 var url = "http://pingidentity.com/url";
-                var createObjectURL = jest.genMockFn().mockReturnValue(url);
-                global.navigator = {};
+                var fakeBlob = ["someFakeFileContent"];
+                var fakeFilename = "someFileName.txt";
+
+                global.navigator = { };
+                global.window = global.window || { location: { href: "" } };
                 global.Blob = jest.genMockFunction().mockImplementation(function (blobData) {
                     return blobData;
                 });
+
+                var createObjectURL = jest.genMockFn().mockReturnValue(url);
+                global.URL = {};
+                global.URL.createObjectURL = createObjectURL;
+                
+                var click = jest.genMockFn();
                 document.createElement = jest.genMockFn();
                 document.createElement.mockReturnValue({
                     click: click
                 });
                 document.body.appendChild = jest.genMockFn();
-                global.URL = {};
-                global.URL.createObjectURL = createObjectURL;
-
-                var fakeBlob = ["someFakeFileContent"];
-                var fakeFilename = "someFileName.txt";
 
                 Utils.triggerFileDownload(fakeFilename, fakeBlob, "text/plain");
                 expect(createObjectURL).toBeCalled();
-                expect(global.location).toBe(url);
+                expect(global.window.location.href).toBe(url);
             });
     });
 

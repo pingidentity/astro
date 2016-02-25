@@ -1,183 +1,152 @@
-"use strict";
-
-var React = require("react"),
-    Picker = require("react-colorpicker"),
-    FormLabel = require("../forms/FormLabel.jsx");
-
-/** @class ColorPicker
- * @desc A wrapper around react-color picker which allows you to pick a color and displays a swatch and hex code
- * @param {string} color - A hexcode of chosen color
- * @param {function} onChange - A callback executed when a color is chosen
- * @param {function} onToggle - A callback executed when the user expands/collapses the color picker
- * @param {bool} expanded - A boolean which determines when the color picker is expanded
- * @param {number} [swatchSize=18] - The dims in pixels of the swatch
- * @param {bool} [disabled] - A property to disable the component
- * @param {string} [labelText] - A label to render over the color picker
- * @param {string} [hintText] - If a label is provided, a hint text may also be optionally provided
- * @param {string} [id] - Set the data-id on the top level html element
- * @param {string} [className] - Append classname to the top level html element
- * @param {bool} [controlled] - A boolean to enable the component to be externally managed.  True will relinquish
- *   control to the component's owner.  False or not specified will cause the component to manage state internally
- *   but still execute the onToggle callback in case the owner is interested.
- * @param {string} [defaultColor] - RGB string for the default color
- */
-module.exports = React.createClass({
-    /* There were performance issues with having many of these components on the screen causing eachother to re-render */
-    shouldComponentUpdate: function (nextProps) {
-        return nextProps.color !== this.props.color ||
-            nextProps.expanded !== this.props.expanded ||
-            nextProps.disabled !== this.props.disabled;
-    },
-
-    render: function () {
-        return (
-            this.props.controlled
-                ? <ControlledColorPicker ref="picker" {...this.props} />
-                : <ManagedColorPicker ref="manager" {...this.props} />);
-    }
-});
-
-
-var ControlledColorPicker = React.createClass({
-    propTypes: {
-        color: React.PropTypes.string.isRequired,
-        onChange: React.PropTypes.func.isRequired,
-        onToggle: React.PropTypes.func.isRequired,
-        expanded: React.PropTypes.bool.isRequired,
-        disabled: React.PropTypes.bool,
-        swatchSize: React.PropTypes.number,
-        id: React.PropTypes.string,
-        classname: React.PropTypes.string,
-        defaultColor: React.PropTypes.string,
-        labelText: React.PropTypes.string,
-        hintText: React.PropTypes.string
-    },
-
-    getDefaultProps: function () {
-        return {
-            swatchSize: 18,
-            defaultColor: "#fff"
-        };
-    },
-
-    _handleKeyDown: function (e) {
-        switch (e.keyCode) {
-            case 13:
-                this.props.onToggle();
-                break;
-            case 27:
-                this._close();
-                break;
-        }
-    },
-
-    _handleClick: function (e) {
-        var target = e.target;
-
-        //if the click event originated in the hue slider, dont toggle the picker
-        while (target && target !== this.container) {
-            if (target === this.slider) {
-                e.stopPropagation();
-                return;
-            }
-            target = target.parentNode;
-        }
-
-        //if the click happened inside the container show then show, or any click when the picker is expanded hides
-        if (target === this.container || this.props.expanded) {
-            e.stopPropagation(); //stop propagation, otherwise it will bubble up and call this function again
-            this.props.onToggle();
-        }
-    },
-
-    _close: function () {
-        if (this.props.expanded) {
-            this.props.onToggle();
-        }
-    },
-
-    _handleChange: function (e) {
-        if (e.toHex) {
-            this.props.onChange(e.toHex());
-        } else if (e.target.value !== this.props.color) {
-            this.props.onChange(e.target.value);
-        }
-    },
-
-    componentDidMount: function () {
-        this.slider = React.findDOMNode(this.refs.picker).getElementsByClassName("hue-slider")[0];
-        this.container = React.findDOMNode(this.refs.container);
-        window.addEventListener("click", this._close);
-    },
-
-    componentWillUnmount: function () {
-        this.slider = null;
-        this.container = null;
-        window.removeEventListener("click", this._close);
-    },
-
-    render: function () {
-        var style = {
-            display: this.props.expanded && !this.props.disabled ? "" : "none",
-            left: this.props.swatchSize + 10,
-            top: this.props.swatchSize + 10
-        };
-        var swatchStyle = {
-            height: this.props.swatchStyle,
-            width: this.props.swatchStyle,
-            backgroundColor: this.props.color
-        };
-
-        return (
-            <div>
-                <div>
-                    <FormLabel value={this.props.labelText} hint={this.props.hintText} />
-                </div>
-                <div ref="container"
-                    className={"input-color-picker inline " + (this.props.className || "")}
-                    onClick={this._handleClick} data-id={this.props.id}>
-                    <span className="colors">
-                        <span className="colors-swatch">
-                            <span style={swatchStyle}></span>
-                        </span>
-                        <input ref="input" type="text" className="colors-input btn-fg-color"
-                            disabled={this.props.disabled}
-                            onChange={this._handleChange}
-                            onKeyDown={this._handleKeyDown}
-                            value={this.props.color} maxLength="7" />
-                    </span>
-                    <span className="colorpicker-container" style={style}>
-                        <Picker ref="picker" color={this.props.color || this.props.defaultColor}
-                            onChange={this._handleChange}/>
-                    </span>
-                </div>
-            </div>
-        );
-    }
-});
-
-var ManagedColorPicker = React.createClass({
-    getInitialState: function () {
-        return {
-            expanded: false,
-        };
-    },
-
-    _handleToggle: function () {
-        if (this.props.disabled) {
-            return;
-        }
-
-        this.setState({ expanded: !this.state.expanded });
-
-        if (typeof(this.props.onToggle) === "function") {
-            this.props.onToggle();
-        }
-    },
-
-    render: function () {
-        return (<ControlledColorPicker ref="picker" {...this.props}
-            expanded={this.state.expanded}
-            onToggle={this._handleToggle} />);
-    }
-});
+// "use strict";
+//
+// var React = require("react");
+// var ReactDOM = require("react-dom");
+// var Picker = require("react-color-picker");
+// var FormLabel = require("../forms/FormLabel.jsx");
+// var css = require("classnames");
+//
+// var If = require("./If.jsx");
+// var callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutsideOfContainer;
+//
+// /**
+//  * @class ColorPicker
+//  *
+//  * @desc  A color picker that supports common rgb values for text, background, etc.
+//  * @param {string} [id] - Set the data-id on the top level html element
+//  * @param {string} [className] - Append classname to the top level html element
+//  * @param {string} color - A hexcode of chosen color
+//  * @param {function} onChange - A callback executed when a color is chosen
+//  * @param {bool} [disabled] - A property to disable the component (false by default)
+//  * @param {string} [labelText] - A label to render over the color picker
+//  * @param {string} [hintText] - If a label is provided, a hint text may also be optionally provided
+//  *
+//  * @example
+//  *   <ColorPicker
+//  *       id="my-color-picker"
+//  *       onClick={this._onBgPickerClick}
+//  *       onChange={this._onBgColorChange}
+//  *       pickerHidden={this.state.bgPickerHidden}
+//  *       color={this.props.data.enrollmentBgColor} />
+//  */
+// var ColorPicker = React.createClass({
+//
+//     _handleGlobalClick: function (e) {
+//         if (this.state.visible) {
+//             callIfOutsideOfContainer(ReactDOM.findDOMNode(this.refs.swatch), this._onPickerToggle, e);
+//         }
+//     },
+//
+//     _handleGlobalKeyDown: function (e) {
+//         if (e.keyCode === 27 && this.state.visible) {
+//             this._onPickerToggle();
+//         }
+//     },
+//
+//
+//     _onChange: function (color) {
+//         var self = this;
+//
+//         this.setState({visible: !this.state.visible}, function () {
+//             self.props.onChange(color);
+//         });
+//     },
+//
+//     _onDrag: function (color) {
+//         this.props.onChange(color);
+//     },
+//
+//     _onPickerToggle: function () {
+//         if (!this.props.disabled) {
+//             this.setState({visible: !this.state.visible});
+//         }
+//     },
+//
+//     _onColorInputChange: function (e) {
+//         this.props.onChange(e.target.value);
+//     },
+//
+//     componentDidMount: function () {
+//         window.addEventListener("click", this._handleGlobalClick);
+//         window.addEventListener("keydown", this._handleGlobalKeyDown);
+//
+//         var swatch = ReactDOM.findDOMNode(this.refs.swatch);
+//
+//         /* eslint-disable react/no-did-mount-set-state */
+//         this.setState({
+//             pickerTop: swatch.offsetHeight,
+//             pickerLeft: 0,
+//             pickerDimensions: swatch.offsetWidth + 40 //size of container div + hue spectrum bar width
+//         });
+//         /* eslint-enable react/no-did-mount-set-state */
+//     },
+//
+//     getInitialState: function () {
+//         return {
+//             visible: false,
+//             pickerTop: 28,
+//             pickerLeft: 0,
+//             pickerDimensions: 0
+//         };
+//     },
+//
+//     componentWillUnmount: function () {
+//         window.removeEventListener("click", this._handleGlobalClick);
+//         window.removeEventListener("keydown", this._handleGlobalKeyDown);
+//     },
+//
+//     render: function () {
+//         var styles = css(
+//             "colorpicker-container",
+//             {hidden: !this.state.visible}
+//         );
+//
+//         return (
+//             /* eslint-disable max-len */
+//             <div>
+//                 <div>
+//                     <FormLabel value={this.props.labelText} hint={this.props.hintText} />
+//                 </div>
+//
+//                 <div className={"input-color-picker inline " + (this.props.className || "")}
+//                         data-id={this.props.id}
+//                         ref="manager">
+//                     <span ref="swatch"
+//                             className="colors colors-theme-default colors-swatch-position-left colors-swatch-left colors-position-default"
+//                             onClick={this._onPickerToggle}>
+//                         <span className="colors-swatch">
+//                             <span style={{backgroundColor: this.props.color}}></span>
+//                         </span>
+//                         <input ref="input"
+//                                 type="text"
+//                                 className="colors-input btn-fg-color"
+//                                 disabled={this.props.disabled}
+//                                 onChange={this._onColorInputChange}
+//                                 value={this.props.color}
+//                                 maxLength="7" />
+//                     </span>
+//
+//                     <If test={this.state.visible && !this.props.disabled}>
+//                             <span className={styles} style={{
+//                                 top: this.state.pickerTop,
+//                                 left: this.state.pickerLeft,
+//                                 width: this.state.pickerDimensions,
+//                                 height: this.state.pickerDimensions
+//                             }}>
+//
+//                             <Picker ref="picker"
+//                                     value={this.props.color}
+//                                     onChange={this._onChange}
+//                                     onDrag={this._onDrag}
+//                                     saturationWidth={this.state.pickerDimensions-40}
+//                                     saturationHeight={this.state.pickerDimensions-40}/>
+//                             </span>
+//                     </If>
+//                 </div>
+//             </div>
+//             /* eslint-enable max-len */
+//         );
+//     }
+// });
+//
+// module.exports = ColorPicker;

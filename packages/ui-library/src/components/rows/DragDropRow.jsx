@@ -1,4 +1,5 @@
 var React = require("react");
+var ReactDOM = require("react-dom");
 var dnd = require("react-dnd");
 var dragSource = dnd.DragSource;
 var dropTarget = dnd.DropTarget;
@@ -56,12 +57,12 @@ var dropSpec = {
             return;
         }
 
-        props.onDrag(props.index + (isInTopHalf(monitor, React.findDOMNode(component)) ? 0 : 1),
+        props.onDrag(props.index + (isInTopHalf(monitor, ReactDOM.findDOMNode(component)) ? 0 : 1),
                      itemBeingDragged.index);
     },
 
     drop: function (props, monitor, component) {
-        props.onDrop(props.index + (isInTopHalf(monitor, React.findDOMNode(component)) ? 0 : 1),
+        props.onDrop(props.index + (isInTopHalf(monitor, ReactDOM.findDOMNode(component)) ? 0 : 1),
                      monitor.getItem().index);
     }
 };

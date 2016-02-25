@@ -1,4 +1,5 @@
 var React = require("react");
+var ReactDOM = require("react-dom");
 var _ = require("underscore");
 var Utils = require("../../util/Utils");
 var css = require("classnames");
@@ -233,7 +234,7 @@ var FileUpload = React.createClass({
      * @method FileUpload#_resetComponent
      */
     _resetComponent: function () {
-        this.refs.fileInput.getDOMNode().value = "";
+        ReactDOM.findDOMNode(this.refs.fileInput).value = "";
         this.setState({ fileName: "", thumbnailSrc: "" });
         if (this.props.onFileChange) {
             this.props.onFileChange();

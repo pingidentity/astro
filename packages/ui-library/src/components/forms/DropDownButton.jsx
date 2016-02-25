@@ -1,4 +1,5 @@
 var React = require("react"),
+    ReactDOM = require("react-dom"),
     cx = require("classnames"),
     callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutsideOfContainer,
     _ = require("underscore");
@@ -98,8 +99,11 @@ var Stateless = React.createClass({
 
     _handleGlobalClick: function (e) {
         if (this.props.open) {
-            callIfOutsideOfContainer(React.findDOMNode(this.refs.menu), _.partial(this.props.onToggle, this.props.open),
-                e);
+            callIfOutsideOfContainer(
+                ReactDOM.findDOMNode(this.refs.menu),
+                _.partial(this.props.onToggle, this.props.open),
+                e
+            );
         }
     },
 

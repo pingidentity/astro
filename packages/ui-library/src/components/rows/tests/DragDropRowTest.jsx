@@ -1,6 +1,5 @@
 window.__DEV__ = true;
 
-jest.dontMock("../../../testutil/TestUtils");
 jest.dontMock("../DragDropRow.jsx");
 jest.setMock("react-dnd", {
     DragSource: function () {
@@ -12,8 +11,9 @@ jest.setMock("react-dnd", {
 });
 
 describe("DragDropRow", function () {
-    var React = require("react/addons"),
-        ReactTestUtils = React.addons.TestUtils,
+    var React = require("react"),
+        ReactDOM = require("react-dom"),
+        ReactTestUtils = require("react-addons-test-utils"),
         DragDropRow = require("../DragDropRow.jsx");
 
     var genMockNode = function (x, y, width, height) {
@@ -88,10 +88,10 @@ describe("DragDropRow", function () {
                 <div>Blah</div>
             </DragDropRow>);
 
-        var childNodes = React.findDOMNode(component).childNodes;
+        var childNodes = ReactDOM.findDOMNode(component).childNodes;
 
         expect(childNodes.length).toBe(1);
-        expect(childNodes[0].innerHTML).toBe("Blah");
+        expect(childNodes[0].textContent).toBe("Blah");
     });
 
     it("Processes drag to bottom half of row", function () {
@@ -99,7 +99,7 @@ describe("DragDropRow", function () {
         var props = genMockProps(2);                            //onto row index 2
 
         var targetComponent = ReactTestUtils.renderIntoDocument(<div>Blah</div>);
-        var targetNode = React.findDOMNode(targetComponent);
+        var targetNode = ReactDOM.findDOMNode(targetComponent);
 
         //mock the getBoundingClientRect function
         targetNode.getBoundingClientRect = genMockNode(0,0,100,100).getBoundingClientRect;
@@ -114,7 +114,7 @@ describe("DragDropRow", function () {
         var props = genMockProps(2);                            //onto row index 2
 
         var targetComponent = ReactTestUtils.renderIntoDocument(<div>Blah</div>);
-        var targetNode = React.findDOMNode(targetComponent);
+        var targetNode = ReactDOM.findDOMNode(targetComponent);
 
         //mock the getBoundingClientRect function
         targetNode.getBoundingClientRect = genMockNode(0,0,100,100).getBoundingClientRect;

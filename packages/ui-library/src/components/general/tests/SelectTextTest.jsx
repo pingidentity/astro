@@ -14,8 +14,9 @@ jest.dontMock("../SelectText.jsx");
  *
  */
 describe("SelectText", function () {
-    var React = require("react/addons");
-    var ReactTestUtils = React.addons.TestUtils;
+    var React = require("react");
+    var ReactTestUtils = require("react-addons-test-utils");
+    var TestUtils = require("../../../testutil/TestUtils");
     var SelectText = require("../SelectText.jsx");
     
     it("Render and click", function () {
@@ -56,7 +57,7 @@ describe("SelectText", function () {
         expect(addRange.mock.calls.length).toBe(0);
         
         // Ensure a single rendered element with the expected class.
-        var element = ReactTestUtils.findRenderedDOMComponentWithClass(component, "testClass");
+        var element = TestUtils.findRenderedDOMNodeWithClass(component, "testClass");
         
         ReactTestUtils.Simulate.click(element);
         
@@ -112,7 +113,7 @@ describe("SelectText", function () {
         expect(selectNodeContents.mock.calls[0][0].childNodes[0].nodeValue).toBe(someText);
         
         // Ensure a single rendered element with the expected class.
-        ReactTestUtils.findRenderedDOMComponentWithClass(component, "testClass");
+        TestUtils.findRenderedDOMNodeWithClass(component, "testClass");
     });
     
 

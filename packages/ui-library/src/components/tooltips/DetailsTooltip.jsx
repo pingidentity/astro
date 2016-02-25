@@ -1,5 +1,6 @@
 "use strict";
 var React = require("react"),
+    ReactDOM = require("react-dom"),
     css = require("classnames"),
     _ = require("underscore"),
     callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutsideOfContainer;
@@ -65,7 +66,7 @@ var StatefulDetailsTooltip = React.createClass({
 
     _handleGlobalClick: function (e) {
         if (this.state.open) {
-            callIfOutsideOfContainer(React.findDOMNode(this.refs.tooltip), this.close, e);
+            callIfOutsideOfContainer(ReactDOM.findDOMNode(this.refs.tooltip), this.close, e);
         }
     },
 

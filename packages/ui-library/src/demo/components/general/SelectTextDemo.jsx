@@ -1,4 +1,4 @@
-var React = require("react/addons");
+var React = require("react");
 var SelectText = require("./../../../components/general/SelectText.jsx");
 var FormTextField = require("./../../../components/forms/FormTextField.jsx");
 

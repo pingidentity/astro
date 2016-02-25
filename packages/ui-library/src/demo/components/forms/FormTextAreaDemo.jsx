@@ -1,4 +1,4 @@
-var React = require("react/addons");
+var React = require("react");
 var FormTextArea = require("./../../../components/forms/FormTextArea.jsx");
 
 /**

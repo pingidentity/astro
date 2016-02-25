@@ -1,6 +1,7 @@
 "use strict";
 
 var React = require("react"),
+    ReactDOM = require("react-dom"),
     css = require("classnames"),
     FormFieldConstants = require("../../constants/FormFieldConstants"),
     HelpHint = require("../tooltips/HelpHint.jsx"),
@@ -108,7 +109,7 @@ var FormTextArea = React.createClass({
         var originalValue = this.props.originalValue;
         // update the event with the reverted data and send back to the parent
         // otherwise the parent won't be aware of the reverted field even though the browser displays the original value
-        e.target = this.refs[this.props.referenceName].getDOMNode();
+        e.target = ReactDOM.findDOMNode(this.refs[this.props.referenceName]);
         e.target.value = originalValue;
         this.props.onValueChange(e);
         // trigger a re-rendering of the field so the 'undo' link dissapears and the value gets reverted

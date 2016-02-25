@@ -1,4 +1,4 @@
-var React = require("react/addons");
+var React = require("react");
 var ContextCloseButton = require("./../../../components/general/ContextCloseButton.jsx");
 
 var ContextComponent = React.createClass({

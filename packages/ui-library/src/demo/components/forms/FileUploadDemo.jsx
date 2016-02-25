@@ -1,4 +1,4 @@
-var React = require("react/addons");
+var React = require("react");
 var FileUpload = require("../../../components/forms/FileUpload.jsx");
 
 var FileUploadDemo = React.createClass({

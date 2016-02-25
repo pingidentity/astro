@@ -1,11 +1,12 @@
 window.__DEV__ = true;
 
 jest.dontMock("../InfiniteScroll.jsx");
-jest.dontMock("object-assign");
 
 describe("Batch", function () {
-    var React = require("react/addons"),
-        ReactTestUtils = React.addons.TestUtils,
+    var React = require("react"),
+        ReactDOM = require("react-dom"),
+        ReactTestUtils = require("react-addons-test-utils"),
+        Wrapper = require("../../../testutil/UpdatePropsWrapper"),
         InfiniteScroll = require("../InfiniteScroll.jsx"),
         assign = require("object-assign");
     var batches;
@@ -25,7 +26,9 @@ describe("Batch", function () {
             data: batches[1].data
         };
 
-        return ReactTestUtils.renderIntoDocument(React.createElement(InfiniteScroll.Batch, assign(defaults, opts)));
+        return ReactTestUtils.renderIntoDocument(
+            <Wrapper type={InfiniteScroll.Batch} {...assign(defaults, opts)} />
+        );
     }
 
     function generateBatch (start, count) {
@@ -47,14 +50,14 @@ describe("Batch", function () {
 
     it("Hides content when invisible", function () {
         var component = getRenderedComponent();
-        var node = React.findDOMNode(component.refs.container);
+        var node = ReactDOM.findDOMNode(component.refs.wrapper.refs.container);
 
         expect(node.style.height).toBe("");
         expect(node.childNodes.length).toBe(50);
 
         node.scrollHeight = 100;
 
-        component.setProps({ isVisible: false });
+        component._setProps({ isVisible: false });
 
         expect(node.style.height).toBe("100px");
         expect(node.childNodes.length).toBe(0);

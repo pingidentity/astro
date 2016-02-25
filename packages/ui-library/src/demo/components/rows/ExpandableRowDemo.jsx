@@ -1,4 +1,4 @@
-var React = require("react/addons");
+var React = require("react");
 var ExpandableRow = require("../../../components/rows/ExpandableRow.jsx");
 var Toggle = require("../../../components/forms/Toggle.jsx");
 

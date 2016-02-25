@@ -1,4 +1,5 @@
-var React = require("react/addons"),
+/*
+var React = require("react"),
     ColorPicker = require("../../../components/general/ColorPicker.jsx"),
     _ = require("underscore");
 
@@ -44,3 +45,4 @@ var ColorPickerDemo = React.createClass({
 });
 
 module.exports = ColorPickerDemo;
+*/

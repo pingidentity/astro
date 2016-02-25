@@ -1,4 +1,4 @@
-var React = require("react/addons"),
+var React = require("react"),
     DropDownButton = require("../../../components/forms/DropDownButton.jsx");
 
 var DropDownButtonDemo = React.createClass({

@@ -1,4 +1,4 @@
-var React = require("react/addons"),
+var React = require("react"),
     FormCheckboxListStateless = require("../../../components/forms/FormCheckboxListStateless.jsx");
 
 var FormCheckboxListStatelessDemo = React.createClass({

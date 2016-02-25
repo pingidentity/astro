@@ -67,7 +67,8 @@ var PageLinks = React.createClass({
         if (numPages <= 6) {
             for (var i = 0; i < this.props.numPages; i = i + 1) {
                 var active = (i + 1) === currentPage ? "active" : "";
-                var link = (<a className={active}
+                var link = (<a key={i + 1}
+                               className={active}
                                onClick={_.partial(this._onLinkClick, _, i+1)}>
                     {i + 1}
                 </a>);
@@ -218,12 +219,14 @@ var Stateless = React.createClass({
                 <PageLinks
                     currentPage={currentPage}
                     numPages={numPages}
-                    onClick={this._handlePageChange}/>
+                    onClick={this._handlePageChange}
+                    key="topPageLinks" />
                 {this.props.children}
                 <PageLinks
                     currentPage={currentPage}
                     numPages={numPages}
-                    onClick={this._handlePageChange}/>
+                    onClick={this._handlePageChange}
+                    key="bottomPageLinks" />
             </div>
         );
     }

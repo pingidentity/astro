@@ -1,11 +1,10 @@
 window.__DEV__ = true;
 
 jest.dontMock("../ExpandableRow.jsx");
-jest.dontMock("../../../testutil/TestUtils");
 
 describe("ExpandableRow", function () {
-    var React = require("react/addons");
-    var ReactTestUtils = React.addons.TestUtils;
+    var React = require("react");
+    var ReactTestUtils = require("react-addons-test-utils");
     var TestUtils = require("../../../testutil/TestUtils");
     var ExpandableRow = require("../ExpandableRow.jsx");
     var titleText = "Test Title";
@@ -22,8 +21,8 @@ describe("ExpandableRow", function () {
         component = ReactTestUtils.renderIntoDocument(
             <ExpandableRow title={titleJsx} subtitle={subtitleJsx} content={contentJsx} />
         );
-        row = TestUtils.findRenderedDOMComponentWithDataId(component, "expandable-row");
-        expandButton = TestUtils.findRenderedDOMComponentWithDataId(component, "expand-btn");
+        row = TestUtils.findRenderedDOMNodeWithDataId(component, "expandable-row");
+        expandButton = TestUtils.findRenderedDOMNodeWithDataId(component, "expand-btn");
     });
 
     it("renders the component", function () {
@@ -31,7 +30,7 @@ describe("ExpandableRow", function () {
     });
 
     it("renders the component as collapsed (by default)", function () {
-        var expandedRow = TestUtils.findRenderedDOMComponentWithDataId(component, "expanded-row");
+        var expandedRow = TestUtils.findRenderedDOMNodeWithDataId(component, "expanded-row");
         expect(ReactTestUtils.isDOMComponent(expandedRow)).toBeFalsy();
     });
 
@@ -39,11 +38,11 @@ describe("ExpandableRow", function () {
         component = ReactTestUtils.renderIntoDocument(
             <ExpandableRow title={titleJsx} subtitle={subtitleJsx} content={contentJsx} contolled={true} />
         );
-        row = TestUtils.findRenderedDOMComponentWithDataId(component, "expandable-row");
-        expandButton = TestUtils.findRenderedDOMComponentWithDataId(component, "expand-btn");
+        row = TestUtils.findRenderedDOMNodeWithDataId(component, "expandable-row");
+        expandButton = TestUtils.findRenderedDOMNodeWithDataId(component, "expand-btn");
 
 
-        var expandedRow = TestUtils.findRenderedDOMComponentWithDataId(component, "expanded-row");
+        var expandedRow = TestUtils.findRenderedDOMNodeWithDataId(component, "expanded-row");
         expect(ReactTestUtils.isDOMComponent(expandedRow)).toBeFalsy();
     });
 
@@ -53,14 +52,14 @@ describe("ExpandableRow", function () {
 
     it("renders the edit button by default", function () {
         ReactTestUtils.Simulate.click(expandButton);
-        var editButton = TestUtils.findRenderedDOMComponentWithDataId(component, "edit-btn");
-        expect(editButton.getDOMNode().className).toEqual("edit-btn");
+        var editButton = TestUtils.findRenderedDOMNodeWithDataId(component, "edit-btn");
+        expect(editButton.className).toEqual("edit-btn");
     });
 
     it("renders the delete button by default", function () {
         ReactTestUtils.Simulate.click(expandButton);
-        var deleteButton = TestUtils.findRenderedDOMComponentWithDataId(component, "delete-btn");
-        expect(deleteButton.getDOMNode().className).toEqual("delete-btn");
+        var deleteButton = TestUtils.findRenderedDOMNodeWithDataId(component, "delete-btn");
+        expect(deleteButton.className).toEqual("delete-btn");
     });
 
     it("renders row without delete button when showDelete prop is set to false", function () {
@@ -75,11 +74,11 @@ describe("ExpandableRow", function () {
         );
 
         // check css on row
-        var expandableRow = TestUtils.findRenderedDOMComponentWithDataId(expandedComponent, "expandable-row");
-        expect(expandableRow.getDOMNode().className).toContain("no-delete");
+        var expandableRow = TestUtils.findRenderedDOMNodeWithDataId(expandedComponent, "expandable-row");
+        expect(expandableRow.className).toContain("no-delete");
 
         // make sure delete button not rendered
-        var deleteButton = TestUtils.findRenderedDOMComponentWithDataId(component, "delete-btn");
+        var deleteButton = TestUtils.findRenderedDOMNodeWithDataId(component, "delete-btn");
         expect(ReactTestUtils.isDOMComponent(deleteButton)).toBeFalsy();
     });
 
@@ -95,23 +94,23 @@ describe("ExpandableRow", function () {
             />
         );
 
-        var defaultDeleteButton = TestUtils.findRenderedDOMComponentWithDataId(expandedComponent, "delete-btn");
+        var defaultDeleteButton = TestUtils.findRenderedDOMNodeWithDataId(expandedComponent, "delete-btn");
         expect(ReactTestUtils.isDOMComponent(defaultDeleteButton)).toBeFalsy();
-        var customDeleteButton = TestUtils.findRenderedDOMComponentWithDataId(expandedComponent, "my-delete-button");
-        expect(customDeleteButton.getDOMNode().textContent).toEqual("Delete Me");
+        var customDeleteButton = TestUtils.findRenderedDOMNodeWithDataId(expandedComponent, "my-delete-button");
+        expect(customDeleteButton.textContent).toEqual("Delete Me");
     });
 
     it("expands when clicking on the expand icon and collapses when clicked on again", function () {
         // expand
         ReactTestUtils.Simulate.click(expandButton);
-        var expandedRow = TestUtils.findRenderedDOMComponentWithDataId(component, "expanded-row");
+        var expandedRow = TestUtils.findRenderedDOMNodeWithDataId(component, "expanded-row");
         expect(ReactTestUtils.isDOMComponent(expandedRow)).toBeTruthy();
-        var content = TestUtils.findRenderedDOMComponentWithDataId(component, "content");
+        var content = TestUtils.findRenderedDOMNodeWithDataId(component, "content");
         expect(ReactTestUtils.isDOMComponent(content)).toBeTruthy();
-        expect(content.props.children).toEqual(contentText);
+        expect(content.textContent).toEqual(contentText);
         // collapse
         ReactTestUtils.Simulate.click(expandButton);
-        expandedRow = TestUtils.findRenderedDOMComponentWithDataId(component, "expanded-row");
+        expandedRow = TestUtils.findRenderedDOMNodeWithDataId(component, "expanded-row");
         expect(ReactTestUtils.isDOMComponent(expandedRow)).toBeFalsy();
     });
 
@@ -119,7 +118,7 @@ describe("ExpandableRow", function () {
         var expandedComponent = ReactTestUtils.renderIntoDocument(
             <ExpandableRow title={titleJsx} subtitle={subtitleJsx} content={contentJsx} defaultToExpanded={true} />
         );
-        var expandedRow = TestUtils.findRenderedDOMComponentWithDataId(expandedComponent, "expandable-row");
+        var expandedRow = TestUtils.findRenderedDOMNodeWithDataId(expandedComponent, "expandable-row");
         expect(ReactTestUtils.isDOMComponent(expandedRow)).toBeTruthy();
     });
 
@@ -128,7 +127,7 @@ describe("ExpandableRow", function () {
             <ExpandableRow title={titleJsx} subtitle={subtitleJsx} content={contentJsx} expanded={true}
                            controlled={true}/>
         );
-        var expandedRow = TestUtils.findRenderedDOMComponentWithDataId(expandedComponent, "expandable-row");
+        var expandedRow = TestUtils.findRenderedDOMNodeWithDataId(expandedComponent, "expandable-row");
         expect(ReactTestUtils.isDOMComponent(expandedRow)).toBeTruthy();
     });
 
@@ -140,8 +139,8 @@ describe("ExpandableRow", function () {
             <ExpandableRow title={titleJsx} subtitle={subtitleJsx} content={contentJsx}
                            controlled={true} onToggle={onToggle} />
         );
-        row = TestUtils.findRenderedDOMComponentWithDataId(component, "expandable-row");
-        expandButton = TestUtils.findRenderedDOMComponentWithDataId(component, "expand-btn");
+        row = TestUtils.findRenderedDOMNodeWithDataId(component, "expandable-row");
+        expandButton = TestUtils.findRenderedDOMNodeWithDataId(component, "expand-btn");
 
         // expand
         ReactTestUtils.Simulate.click(expandButton);
@@ -154,20 +153,20 @@ describe("ExpandableRow", function () {
         var readOnlyComponent = ReactTestUtils.renderIntoDocument(
             <ExpandableRow title={titleJsx} subtitle={subtitleJsx} content={contentJsx} isEditEnabled={false} />
         );
-        expandButton = TestUtils.findRenderedDOMComponentWithDataId(readOnlyComponent, "expand-btn");
+        expandButton = TestUtils.findRenderedDOMNodeWithDataId(readOnlyComponent, "expand-btn");
         ReactTestUtils.Simulate.click(expandButton);
-        var viewButton = TestUtils.findRenderedDOMComponentWithDataId(readOnlyComponent, "edit-btn");
-        expect(viewButton.getDOMNode().className).toEqual("view-btn");
+        var viewButton = TestUtils.findRenderedDOMNodeWithDataId(readOnlyComponent, "edit-btn");
+        expect(viewButton.className).toEqual("view-btn");
     });
 
     it("renders an empty disabled button when showEdit prop is set to false", function () {
         var readOnlyComponent = ReactTestUtils.renderIntoDocument(
             <ExpandableRow title={titleJsx} subtitle={subtitleJsx} content={contentJsx} showEdit={false} />
         );
-        expandButton = TestUtils.findRenderedDOMComponentWithDataId(readOnlyComponent, "expand-btn");
+        expandButton = TestUtils.findRenderedDOMNodeWithDataId(readOnlyComponent, "expand-btn");
         ReactTestUtils.Simulate.click(expandButton);
-        var expandableRow = TestUtils.findRenderedDOMComponentWithDataId(readOnlyComponent, "expandable-row");
-        expect(expandableRow.getDOMNode().className).toContain("no-edit");
+        var expandableRow = TestUtils.findRenderedDOMNodeWithDataId(readOnlyComponent, "expandable-row");
+        expect(expandableRow.className).toContain("no-edit");
     });
 
     it("renders the content when passed in as a children instead of a prop", function () {
@@ -176,13 +175,13 @@ describe("ExpandableRow", function () {
                 {contentChildrenJsx}
             </ExpandableRow>
         );
-        expandButton = TestUtils.findRenderedDOMComponentWithDataId(component, "expand-btn");
+        expandButton = TestUtils.findRenderedDOMNodeWithDataId(component, "expand-btn");
         ReactTestUtils.Simulate.click(expandButton);
-        var expandedRow = TestUtils.findRenderedDOMComponentWithDataId(component, "expanded-row");
+        var expandedRow = TestUtils.findRenderedDOMNodeWithDataId(component, "expanded-row");
         expect(ReactTestUtils.isDOMComponent(expandedRow)).toBeTruthy();
-        var content = TestUtils.findRenderedDOMComponentWithDataId(component, "content-children");
+        var content = TestUtils.findRenderedDOMNodeWithDataId(component, "content-children");
         expect(ReactTestUtils.isDOMComponent(content)).toBeTruthy();
-        expect(content.props.children).toEqual(contentChildrenText);
+        expect(content.textContent).toEqual(contentChildrenText);
     });
 
     it("renders the right-side/row-accessories content", function () {
@@ -206,7 +205,7 @@ describe("ExpandableRow", function () {
         rowAccessoriesContent = ReactTestUtils.findRenderedDOMComponentWithClass(component, "control-link");
         expect(rowAccessoriesContent).toBeTruthy();
 
-        expect(rowAccessoriesContent.getDOMNode().textContent).toEqual(linkText);
+        expect(rowAccessoriesContent.textContent).toEqual(linkText);
     });
 
 });

@@ -1,4 +1,4 @@
-var React = require("react/addons"),
+var React = require("react"),
     moment = require("moment-range"),
     Calendar = require("./../../../components/calendars/Calendar.jsx");
 

@@ -1,13 +1,13 @@
 window.__DEV__ = true;
 
-jest.dontMock("../../../testutil/TestUtils");
 jest.dontMock("../RockerButton.jsx");
-jest.dontMock("underscore");
 
 describe("RockerButton", function () {
 
-    var React = require("react/addons"),
-        ReactTestUtils = React.addons.TestUtils,
+    var React = require("react"),
+        ReactDOM = require("react-dom"),
+        ReactTestUtils = require("react-addons-test-utils"),
+        TestUtils = require("../../../testutil/TestUtils"),
         RockerButton = require("../RockerButton.jsx"),
         _ = require("underscore");
 
@@ -24,7 +24,7 @@ describe("RockerButton", function () {
 
     it("will call onChange even if managed", function () {
         var component = getComponent();
-        var labels = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, "label");
+        var labels = TestUtils.scryRenderedDOMNodesWithTag(component, "label");
 
         ReactTestUtils.Simulate.click(labels[2], {});
         expect(component.props.onChange).toBeCalledWith("C", 2);
@@ -34,7 +34,7 @@ describe("RockerButton", function () {
         var component = getComponent({ selectedIndex: 1 });
         var rocker = component.refs.rocker;
         var container = rocker.refs.container;
-        var node = React.findDOMNode(container);
+        var node = ReactDOM.findDOMNode(container);
 
         expect(node.getAttribute("class").match("sel-1")).toBeTruthy();
     });
@@ -44,7 +44,7 @@ describe("RockerButton", function () {
         var manager = component.refs.manager;
         var rocker = manager.refs.rocker;
         var container = rocker.refs.container;
-        var node = React.findDOMNode(container);
+        var node = ReactDOM.findDOMNode(container);
 
         expect(node.getAttribute("class").match("sel-2")).toBeTruthy();
     });
@@ -54,7 +54,7 @@ describe("RockerButton", function () {
         var manager = component.refs.manager;
         var rocker = manager.refs.rocker;
         var container = rocker.refs.container;
-        var node = React.findDOMNode(container);
+        var node = ReactDOM.findDOMNode(container);
 
         expect(node.getAttribute("class").match("sel-2")).toBeTruthy();
     });
@@ -67,7 +67,7 @@ describe("RockerButton", function () {
             <RockerButton labels={["Profile", "Groups", "Services"]} onChange={callback}/>
         );
 
-        var labels = ReactTestUtils.scryRenderedDOMComponentsWithTag(rockerButtonComponent, "label");
+        var labels = TestUtils.scryRenderedDOMNodesWithTag(rockerButtonComponent, "label");
 
         //make sure 3 labels in a list
         expect(labels.length).toBe(3);

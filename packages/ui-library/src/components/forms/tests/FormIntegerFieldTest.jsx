@@ -1,15 +1,12 @@
 window.__DEV__ = true;
 
-jest.dontMock("../../../testutil/TestUtils");
 jest.dontMock("../FormIntegerField.jsx");
 jest.dontMock("../FormTextField.jsx");
 jest.dontMock("../../tooltips/HelpHint.jsx");
-jest.dontMock("underscore");
-jest.dontMock("classnames");
 
 describe("FormIntegerField", function () {
-    var React = require("react/addons"),
-        ReactTestUtils = React.addons.TestUtils,
+    var React = require("react"),
+        ReactTestUtils = require("react-addons-test-utils"),
         FormIntegerField= require("../FormIntegerField.jsx"),
         TestUtils = require("../../../testutil/TestUtils"),
         callback;
@@ -28,14 +25,14 @@ describe("FormIntegerField", function () {
         );
 
         //Expect a single checkbox to be rendered with default data-id.
-        var integer = TestUtils.scryRenderedDOMComponentsWithDataId(component,"formIntegerField");
+        var integer = TestUtils.scryRenderedDOMNodesWithDataId(component,"formIntegerField");
         expect(integer.length).toEqual(1);
-        var input = integer[0].getDOMNode();
+        var input = integer[0];
         expect(input.value).toBe(""); //expect no value
 
         //Expect properly named labelText
-        var label = ReactTestUtils.findRenderedDOMComponentWithClass(component,"label-text");
-        expect(label.getDOMNode().children[0].innerHTML).toBe("Default Integer Box");
+        var label = TestUtils.findRenderedDOMNodeWithClass(component,"label-text");
+        expect(label.children[0].textContent).toBe("Default Integer Box");
 
 
     });
@@ -47,8 +44,8 @@ describe("FormIntegerField", function () {
         );
 
         //Expect a single input to be renderd with initial value of 40
-        var integer = TestUtils.scryRenderedDOMComponentsWithDataId(component,"formIntegerField");
-        var input = integer[0].getDOMNode();
+        var integer = TestUtils.scryRenderedDOMNodesWithDataId(component,"formIntegerField");
+        var input = integer[0];
         expect(input.value).toBe("40");
 
         //Test the up and down keys
@@ -65,9 +62,9 @@ describe("FormIntegerField", function () {
         expect(callback.mock.calls.length).toBe(12);
 
         //Test the up and down spinners
-        var spinnerContainer = ReactTestUtils.findRenderedDOMComponentWithClass(component, "up-down-spinner");
-        var spinnerUp = (spinnerContainer.getDOMNode().childNodes[0]);
-        var spinnerDown = (spinnerContainer.getDOMNode().childNodes[1]);
+        var spinnerContainer = TestUtils.findRenderedDOMNodeWithClass(component, "up-down-spinner");
+        var spinnerUp = (spinnerContainer.childNodes[0]);
+        var spinnerDown = (spinnerContainer.childNodes[1]);
 
         //mouseDown the up arrow and expect 1 to be added to the callback
         ReactTestUtils.Simulate.mouseDown(spinnerUp);
@@ -85,7 +82,7 @@ describe("FormIntegerField", function () {
             <FormIntegerField onChange = {callback} isRequired={true} />
         );
         // verify that the component is rendered
-        var integer = ReactTestUtils.findRenderedDOMComponentWithClass(component, "required");
+        var integer = TestUtils.findRenderedDOMNodeWithClass(component, "required");
         expect(ReactTestUtils.isDOMComponent(integer)).toBeTruthy();
     });
 
@@ -94,15 +91,15 @@ describe("FormIntegerField", function () {
             <FormIntegerField onChange={callback} placeholder="Enter a number"/>
         );
         // verify that the component is rendered
-        var input = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
-        expect(input.getDOMNode().getAttribute("placeholder")).toEqual("Enter a number");
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        expect(input.getAttribute("placeholder")).toEqual("Enter a number");
     });
 
     it("fires the onChange callback when field changes", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormIntegerField onChange={callback} />
         );
-        var input = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         ReactTestUtils.Simulate.change(input, { target: { value: "3" } } );
         expect(callback.mock.calls.length).toBe(1);
 
@@ -115,7 +112,7 @@ describe("FormIntegerField", function () {
             <FormIntegerField errorMessage={errorMessage} onChange={callback} />
         );
 
-        var errorDiv = ReactTestUtils.findRenderedDOMComponentWithClass(component, "tooltip-text");
-        expect(errorDiv.getDOMNode().textContent).toBe(errorMessage);
+        var errorDiv = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text");
+        expect(errorDiv.textContent).toBe(errorMessage);
     });
 });

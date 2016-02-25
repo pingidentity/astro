@@ -1,13 +1,11 @@
 window.__DEV__ = true;
 
-jest.dontMock("../../../testutil/TestUtils");
 jest.dontMock("../DropDownButton.jsx");
-jest.dontMock("underscore");
 
 describe("DropDownButton", function () {
 
-    var React = require("react/addons"),
-        ReactTestUtils = React.addons.TestUtils,
+    var React = require("react"),
+        ReactTestUtils = require("react-addons-test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         DropDownButton = require("../DropDownButton.jsx");
 
@@ -23,15 +21,16 @@ describe("DropDownButton", function () {
             <DropDownButton title="Test Drop Down"
                             controlled={true}
                             onSelect={callback}
-                            options={menu} />
+                            options={menu}
+                            onToggle={jest.genMockFunction()} />
         );
 
         // expect a single button to be rendered.
-        var button = ReactTestUtils.findRenderedDOMComponentWithClass(dropDownButtonComponent, "input-menu-button");
-        expect(button.getDOMNode().textContent).toBe("Add");
+        var button = TestUtils.findRenderedDOMNodeWithClass(dropDownButtonComponent, "input-menu-button");
+        expect(button.textContent).toBe("Add");
 
         // expect no modal to be rendered.
-        var menu = ReactTestUtils.scryRenderedDOMComponentsWithClass(dropDownButtonComponent, "menu");
+        var menu = TestUtils.scryRenderedDOMNodesWithClass(dropDownButtonComponent, "menu");
         expect(menu.length).toEqual(0);
     });
 
@@ -48,18 +47,19 @@ describe("DropDownButton", function () {
                             controlled={true}
                             open={true}
                             onSelect={callback}
-                            options={menu} />
+                            options={menu}
+                            onToggle={jest.genMockFunction()} />
         );
 
         //expect menu to be rendered
-        var menu = ReactTestUtils.findRenderedDOMComponentWithClass(dropDownButtonComponent, "menu");
-        ReactTestUtils.findRenderedDOMComponentWithClass(menu, "menu");
+        var menu = TestUtils.findRenderedDOMNodeWithClass(dropDownButtonComponent, "menu");
+        TestUtils.findRenderedDOMNodeWithClass(menu, "menu");
 
-        var as = ReactTestUtils.scryRenderedDOMComponentsWithTag(dropDownButtonComponent, "a");
+        var as = TestUtils.scryRenderedDOMNodesWithTag(dropDownButtonComponent, "a");
 
         // make sure <a>s in a list, +1 length for button
         expect(as.length).toBe(3);
-        expect(as[1].getDOMNode().textContent).toEqual("Option One");
+        expect(as[1].textContent).toEqual("Option One");
     });
 
     it("triggers callback on toggle in stateless mode", function () {
@@ -74,11 +74,12 @@ describe("DropDownButton", function () {
             <DropDownButton title="Test Drop Down"
                             controlled={true}
                             open={false}
+                            onSelect={jest.genMockFunction()}
                             onToggle={callback}
                             options={menu} />
         );
 
-        var button = TestUtils.findRenderedDOMComponentWithDataId(dropDownButtonComponent, "action");
+        var button = TestUtils.findRenderedDOMNodeWithDataId(dropDownButtonComponent, "action");
 
         ReactTestUtils.Simulate.click(button);
 
@@ -106,11 +107,11 @@ describe("DropDownButton", function () {
         );
 
         // expect a single button to be rendered.
-        var button = ReactTestUtils.findRenderedDOMComponentWithClass(dropDownButtonComponent, "input-menu-button");
-        expect(button.getDOMNode().textContent).toBe("Add");
+        var button = TestUtils.findRenderedDOMNodeWithClass(dropDownButtonComponent, "input-menu-button");
+        expect(button.textContent).toBe("Add");
 
         // expect no modal to be rendered.
-        var menu = ReactTestUtils.scryRenderedDOMComponentsWithClass(dropDownButtonComponent, "menu");
+        var menu = TestUtils.scryRenderedDOMNodesWithClass(dropDownButtonComponent, "menu");
         expect(menu.length).toEqual(0);
 
     });
@@ -134,29 +135,29 @@ describe("DropDownButton", function () {
         );
 
         // expect a single button to be rendered.
-        var button = ReactTestUtils.findRenderedDOMComponentWithClass(dropDownButtonComponent, "add button inline");
+        var button = TestUtils.findRenderedDOMNodeWithClass(dropDownButtonComponent, "add button inline");
 
         // expect no menu to be rendered.
-        var menus = ReactTestUtils.scryRenderedDOMComponentsWithClass(dropDownButtonComponent, "menu");
+        var menus = TestUtils.scryRenderedDOMNodesWithClass(dropDownButtonComponent, "menu");
         expect(menus.length).toEqual(0);
 
         ReactTestUtils.Simulate.click(button);
 
         // expect a menu to be rendered after click.
-        var menu = ReactTestUtils.findRenderedDOMComponentWithClass(dropDownButtonComponent, "menu");
-        ReactTestUtils.findRenderedDOMComponentWithClass(menu, "menu");
+        var menu = TestUtils.findRenderedDOMNodeWithClass(dropDownButtonComponent, "menu");
+        TestUtils.findRenderedDOMNodeWithClass(menu, "menu");
 
-        var as = ReactTestUtils.scryRenderedDOMComponentsWithTag(dropDownButtonComponent, "a");
+        var as = TestUtils.scryRenderedDOMNodesWithTag(dropDownButtonComponent, "a");
 
         // make sure <a>s in a list, +1 length for button
         expect(as.length).toBe(6);
-        expect(as[1].getDOMNode().textContent).toEqual("Option One");
+        expect(as[1].textContent).toEqual("Option One");
 
         // click an option
         ReactTestUtils.Simulate.click(as[1]);
 
         // expect menu to have been hidden
-        var noMenus = ReactTestUtils.scryRenderedDOMComponentsWithClass(dropDownButtonComponent, "menu");
+        var noMenus = TestUtils.scryRenderedDOMNodesWithClass(dropDownButtonComponent, "menu");
         expect(noMenus.length).toEqual(0);
     });
 
@@ -179,23 +180,23 @@ describe("DropDownButton", function () {
         );
 
         // expect a single button to be rendered.
-        var button = ReactTestUtils.findRenderedDOMComponentWithClass(dropDownButtonComponent, "add button inline");
+        var button = TestUtils.findRenderedDOMNodeWithClass(dropDownButtonComponent, "add button inline");
 
         // expect no menu to be rendered.
-        var menus = ReactTestUtils.scryRenderedDOMComponentsWithClass(dropDownButtonComponent, "menu");
+        var menus = TestUtils.scryRenderedDOMNodesWithClass(dropDownButtonComponent, "menu");
         expect(menus.length).toEqual(0);
 
         ReactTestUtils.Simulate.click(button);
 
         // expect a menu to be rendered after click.
-        var menu = ReactTestUtils.findRenderedDOMComponentWithClass(dropDownButtonComponent, "menu");
-        ReactTestUtils.findRenderedDOMComponentWithClass(menu, "menu");
+        var menu = TestUtils.findRenderedDOMNodeWithClass(dropDownButtonComponent, "menu");
+        TestUtils.findRenderedDOMNodeWithClass(menu, "menu");
 
-        var as = ReactTestUtils.scryRenderedDOMComponentsWithTag(dropDownButtonComponent, "a");
+        var as = TestUtils.scryRenderedDOMNodesWithTag(dropDownButtonComponent, "a");
 
         // make sure <a>s in a list, +1 length for button
         expect(as.length).toBe(6);
-        expect(as[1].getDOMNode().textContent).toEqual("Option One");
+        expect(as[1].textContent).toEqual("Option One");
 
         // click an option
         ReactTestUtils.Simulate.click(as[1]);

@@ -1,4 +1,5 @@
 var React = require("react"),
+    ReactDOM = require("react-dom"),
     IntroTutorial = require("../../../../components/help/intro-tutorial");
 
 var Demo = React.createClass({
@@ -21,7 +22,7 @@ var Demo = React.createClass({
 
     _handleDismiss: function () {
         this.setState({ visible: false });
-        React.findDOMNode(this.refs.container).style.display = "none";
+        ReactDOM.findDOMNode(this.refs.container).style.display = "none";
     },
 
     _handleNext: function () {

@@ -1,14 +1,12 @@
 window.__DEV__ = true;
 
-jest.dontMock("../../../testutil/TestUtils");
 jest.dontMock("../FormCheckbox.jsx");
 jest.dontMock("../../tooltips/HelpHint.jsx");
-jest.dontMock("underscore");
 
 
 describe("FormCheckbox", function () {
-    var React = require("react/addons"),
-        ReactTestUtils = React.addons.TestUtils,
+    var React = require("react"),
+        ReactTestUtils = require("react-addons-test-utils"),
         FormCheckbox= require("../FormCheckbox.jsx"),
         TestUtils = require("../../../testutil/TestUtils"),
         callback;
@@ -27,13 +25,13 @@ describe("FormCheckbox", function () {
         );
 
         //Expect a single checkbox to be rendered with default data-id.
-        var checkbox = TestUtils.scryRenderedDOMComponentsWithDataId(component,"form-checkbox");
+        var checkbox = TestUtils.scryRenderedDOMNodesWithDataId(component,"form-checkbox");
         expect(checkbox.length).toEqual(1);
-        expect(checkbox[0].getDOMNode().checked).toBe(false); //expect not to be checked
+        expect(checkbox[0].checked).toBe(false); //expect not to be checked
 
         //Expect the label text to be blank
-        var label = ReactTestUtils.scryRenderedDOMComponentsWithClass(component,"label-text");
-        expect(label[0].getDOMNode().childNodes.length).toEqual(0);
+        var label = TestUtils.scryRenderedDOMNodesWithClass(component,"label-text");
+        expect(label[0].childNodes.length).toEqual(0);
 
     });
     it("test pre-checked box with custom id and label", function () {
@@ -44,15 +42,15 @@ describe("FormCheckbox", function () {
 
         );
         //Expect single element with custom data-id
-        var checkbox = TestUtils.scryRenderedDOMComponentsWithDataId(component,"checkbox-test");
+        var checkbox = TestUtils.scryRenderedDOMNodesWithDataId(component,"checkbox-test");
         expect(checkbox.length).toEqual(1);
 
         //expect to be checked
-        expect(checkbox[0].getDOMNode().checked).toBe(true);
+        expect(checkbox[0].checked).toBe(true);
 
         //expect properly titled label
-        var label = ReactTestUtils.scryRenderedDOMComponentsWithClass(component,"label-text");
-        expect(label[0].getDOMNode().childNodes[0].innerHTML).toEqual("pre-check");
+        var label = TestUtils.scryRenderedDOMNodesWithClass(component,"label-text");
+        expect(label[0].childNodes[0].textContent).toEqual("pre-check");
 
     });
     it("simulate change event", function () {
@@ -61,9 +59,9 @@ describe("FormCheckbox", function () {
             <FormCheckbox onChange= {callback} />
         );
 
-        var checkbox = TestUtils.findRenderedDOMComponentWithDataId(component,"form-checkbox");
+        var checkbox = TestUtils.findRenderedDOMNodeWithDataId(component,"form-checkbox");
         //expect default unchecked
-        expect(checkbox.getDOMNode().checked).toBe(false);
+        expect(checkbox.checked).toBe(false);
 
         ReactTestUtils.Simulate.change(checkbox);
 
@@ -77,8 +75,8 @@ describe("FormCheckbox", function () {
             <FormCheckbox onChange= {callback} labelHelpText="Enter a port number" />
         );
 
-        var tooltip = ReactTestUtils.findRenderedDOMComponentWithClass(component,"tooltip-text");
-        expect(tooltip.getDOMNode().innerHTML).toEqual("Enter a port number");
+        var tooltip = TestUtils.findRenderedDOMNodeWithClass(component,"tooltip-text");
+        expect(tooltip.textContent).toEqual("Enter a port number");
 
 
     });

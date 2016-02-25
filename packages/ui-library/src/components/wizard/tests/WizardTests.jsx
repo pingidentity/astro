@@ -3,11 +3,11 @@ window.__DEV__ = true;
 jest.dontMock("../Step.jsx");
 jest.dontMock("../Wizard.jsx");
 jest.dontMock("../../../util/format.js");
-jest.dontMock("object-assign");
 
 describe("Step", function () {
-    var React = require("react/addons"),
-        ReactTestUtils = React.addons.TestUtils,
+    var React = require("react"),
+        ReactDOM = require("react-dom"),
+        ReactTestUtils = require("react-addons-test-utils"),
         Wizard = require("../Wizard.jsx"),
         Step = Wizard.Step,
         assign = require("object-assign");
@@ -48,7 +48,7 @@ describe("Step", function () {
 
         expect(component.props.onNext.mock.calls.length).toBe(0);
 
-        ReactTestUtils.Simulate.click(React.findDOMNode(component.refs.step1.refs.nextButton));
+        ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(component.refs.step1.refs.nextButton));
 
         expect(component.props.onNext.mock.calls.length).toBe(1);
     });
@@ -59,7 +59,7 @@ describe("Step", function () {
         expect(component.props.onNext.mock.calls.length).toBe(0);
         expect(component.props.onEdit.mock.calls.length).toBe(0);
 
-        ReactTestUtils.Simulate.click(React.findDOMNode(component.refs.step1.refs.editButton));
+        ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(component.refs.step1.refs.editButton));
 
         expect(component.props.onNext.mock.calls.length).toBe(0);
         expect(component.props.onEdit.mock.calls.length).toBe(1);

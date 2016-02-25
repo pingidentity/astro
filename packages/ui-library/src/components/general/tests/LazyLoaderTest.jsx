@@ -1,14 +1,11 @@
 window.__DEV__ = true;
 
 jest.dontMock("../LazyLoader.jsx");
-jest.dontMock("../../../testutil/TestUtils");
-jest.dontMock("classnames");
-jest.dontMock("underscore");
 
 describe("LazyLoader", function () {
 
-    var React = require("react/addons"),
-        ReactTestUtils = React.addons.TestUtils,
+    var React = require("react"),
+        ReactTestUtils = require("react-addons-test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         LazyLoader = require("../LazyLoader.jsx"),
         components = [],
@@ -31,9 +28,9 @@ describe("LazyLoader", function () {
             <LazyLoader items={components} limit={limit} />
         );
 
-        container = TestUtils.findRenderedDOMComponentWithDataId(View, "lazyLoaderContainer");
+        container = TestUtils.findRenderedDOMNodeWithDataId(View, "lazyLoaderContainer");
 
         expect(components.length).toEqual(cmpLen);
-        expect(React.Children.count(container.props.children)).toEqual(limit);
+        expect(container.children.length).toEqual(limit);
     });
 });

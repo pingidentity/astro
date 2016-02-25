@@ -16,7 +16,8 @@
     "moment": "2.11.1",
     "moment-range": "1.0.5",
     "object-assign": "4.0.1",
-    "react-colorpicker": "0.3.14",
+    "react-color-picker": "3.1.0",
+    "react-dnd": "1.1.8",
     "superagent": "0.21.0",
     "underscore": "1.8.3",
     "underscore.string": "3.2.2"
@@ -24,47 +25,53 @@
   "devDependencies": {
     "babel-core": "6.4.0",
     "babel-eslint": "4.1.8",
-    "babel-jest": "6.0.1",
     "babel-loader": "6.2.1",
     "babel-preset-react": "6.3.13",
-    "clean-webpack-plugin": "0.1.3",
-    "css-loader": "0.16.0",
-    "eslint": "1.6.0",
-    "eslint-loader": "1.1.0",
-    "eslint-plugin-react": "3.5.1",
-    "extract-text-webpack-plugin": "0.8.2",
-    "file-loader": "0.8.4",
-    "jest-cli": "0.4.19",
+    "clean-webpack-plugin": "0.1.8",
+    "css-loader": "0.23.1",
+    "eslint": "1.10.3",
+    "eslint-loader": "1.3.0",
+    "eslint-plugin-react": "4.1.0",
+    "extract-text-webpack-plugin": "1.0.1",
+    "file-loader": "0.8.5",
+    "jest-cli": "0.8.2",
     "jsdoc": "3.3.3",
     "jsdoc-jsx": "0.1.0",
-    "json-loader": "0.5.3",
-    "node-sass": "3.3.3",
-    "react-dnd": "1.1.8",
+    "json-loader": "0.5.4",
+    "marked": "0.3.5",
+    "node-sass": "3.4.2",
+    "react": "0.14.6",
+    "react-addons-test-utils": "0.14.6",
+    "react-dom": "0.14.6",
     "react-hot-loader": "1.3.0",
-    "reactify": "1.1.1",
-    "sass-loader": "3.0.0",
-    "style-loader": "0.12.3",
-    "url-loader": "0.5.6",
-    "webpack": "1.12.2",
-    "webpack-babel-jest": "1.0.2",
-    "webpack-dev-server": "1.12.0",
-    "marked": "0.3.5"
+    "redux": "3.0.5",
+    "redux-thunk": "1.0.0",
+    "rimraf": "2.5.2",
+    "sass-loader": "3.1.2",
+    "style-loader": "0.13.0",
+    "url-loader": "0.5.7",
+    "webpack": "1.12.14",
+    "webpack-dev-server": "1.14.1"
   },
   "peerDependencies": {
-    "react": "0.13.3",
-    "redux": "3.0.0",
-    "redux-thunk": "1.0.0"
+    "react": "0.13 - 0.14",
+    "react-dom": "0.14",
+    "redux": "3.0.x",
+    "redux-thunk": "1.0.x"
   },
   "engines": {
-    "node": ">= 0.10.x",
-    "npm": ">= 2.7.x"
+    "node": ">= 4.2.x",
+    "npm": ">= 3.7.x"
   },
   "jest": {
     "rootDir": "./",
-    "scriptPreprocessor": "<rootDir>/preprocessor.js",
+    "testRunner": "<rootDir>/node_modules/jest-cli/src/testRunners/jasmine/jasmine1",
+    "scriptPreprocessor": "<rootDir>/jest/preprocessor.js",
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules",
-      "<rootDir>/src/testutil/TestUtils.js"
+      "<rootDir>/src/testutil/TestUtils.js",
+      "<rootDir>/src/testutil/UpdatePropsWrapper.js",
+      "<rootDir>/src/util/ReduxTestUtils.js"
     ],
     "testDirectoryName": "tests",
     "testFileExtensions": [
@@ -72,25 +79,24 @@
       "jsx"
     ],
     "testPathIgnorePatterns": [
-      "<rootDir>/node/",
-      "<rootDir>/node_modules/",
-      "<rootDir>/.*/tests/coverage/",
-      "<rootDir>/build/",
-      "<rootDir>/dist/"
+      "/node/",
+      "/node_modules/",
+      "/tests\/coverage/",
+      "/build/",
+      "/dist/"
+    ],
+    "modulePathIgnorePatterns": [
+      "/node/"
     ]
   },
   "scripts": {
     "build-do-not-use": "webpack --progress --colors --config webpack.config.js",
-    "lint": "eslint --ext .js,.jsx .",
-    "test": "jest",
-    "start": "npm run doc && npm run webpack-start",
     "webpack-start": "webpack-dev-server -d --hot --inline --progress --colors --config webpack.dev.config.js",
-    "verify": "npm run lint && npm run test",
-    "doc": "jsdoc -c ./jsdoc.json"
-  },
-  "browserify": {
-    "transform": [
-      "reactify"
-    ]
+    "start": "npm run doc && npm run webpack-start",
+    "doc": "jsdoc -c ./jsdoc.json",
+    "lint": "eslint --ext .js,.jsx .",
+    "jest": "jest && node ./clean-after.js",
+    "test": "jest",
+    "verify": "npm run lint && npm run test"
   }
 }

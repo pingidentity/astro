@@ -3,8 +3,10 @@ jest.dontMock("../ContextCloseButton.jsx");
 
 
 describe("ContextCloseButton", function () {
-    var React = require("react/addons");
-    var ReactTestUtils = React.addons.TestUtils;
+    var React = require("react");
+    var ReactDOM = require("react-dom");
+    var ReactTestUtils = require("react-addons-test-utils");
+    var TestUtils = require("../../../testutil/TestUtils");
     var ContextCloseButton = require("../ContextCloseButton.jsx");
 
     var ContextComponent = React.createClass({
@@ -43,7 +45,7 @@ describe("ContextCloseButton", function () {
         );
 
         // Expect a single button to be rendered.
-        var button = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
+        var button = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         
         expect(callback.mock.calls.length).toBe(0);
         
@@ -51,7 +53,6 @@ describe("ContextCloseButton", function () {
         ReactTestUtils.Simulate.click(button);
         
         expect(callback.mock.calls.length).toBe(1);
-        
     });
     
     /*
@@ -67,7 +68,7 @@ describe("ContextCloseButton", function () {
         );
 
         // Expect a single button to be rendered.
-        var button = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
+        var button = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         
         expect(clickCallback.mock.calls.length).toBe(0);
         expect(closeCallback.mock.calls.length).toBe(0);
@@ -97,7 +98,7 @@ describe("ContextCloseButton", function () {
         );
 
         // Expect a single button to be rendered.
-        var button = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
+        var button = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         
         expect(clickCallback.mock.calls.length).toBe(0);
         expect(closeCallback.mock.calls.length).toBe(0);
@@ -118,14 +119,13 @@ describe("ContextCloseButton", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <ContextCloseButton show={shown} />
         );
-        var content = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, "input");
-        expect(content.length).toBe(0);
+        expect(ReactDOM.findDOMNode(component)).toBeNull();
 
         shown = true;
         component = ReactTestUtils.renderIntoDocument(
             <ContextCloseButton show={shown} />
         );
-        var button = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
+        var button = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         expect(ReactTestUtils.isDOMComponent(button)).toBeTruthy();
     });
 
@@ -137,17 +137,17 @@ describe("ContextCloseButton", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <ContextCloseButton disabled={disabled} />
         );
-        var button = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
+        var button = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         expect(ReactTestUtils.isDOMComponent(button)).toBeTruthy();
-        expect(button.getDOMNode().disabled).toBeFalsy();
+        expect(button.disabled).toBeFalsy();
 
         disabled = true;
         component = ReactTestUtils.renderIntoDocument(
             <ContextCloseButton disabled={disabled} />
         );
-        button = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
+        button = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         expect(ReactTestUtils.isDOMComponent(button)).toBeTruthy();
-        expect(button.getDOMNode().disabled).toBeTruthy();
+        expect(button.disabled).toBeTruthy();
     });
 
 });

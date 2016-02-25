@@ -1,4 +1,4 @@
-var React = require("react/addons");
+var React = require("react");
 var marked = require("marked");
 
 var DemoItem = React.createClass({

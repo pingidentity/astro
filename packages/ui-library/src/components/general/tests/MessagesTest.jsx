@@ -1,11 +1,11 @@
 window.__DEV__ = true;
 
 jest.dontMock("../Messages.jsx");
-jest.dontMock("../../../util/ReduxTestUtils.js");
 
 describe("Messages", function () {
-    var React = require("react/addons"),
-        ReactTestUtils = React.addons.TestUtils,
+    var React = require("react"),
+        ReactTestUtils = require("react-addons-test-utils"),
+        TestUtils = require("../../../testutil/TestUtils"),
         Messages = require("../Messages.jsx"),
         ReduxTestUtils = require("../../../util/ReduxTestUtils.js"),
         setTimeout = window.setTimeout,
@@ -75,7 +75,7 @@ describe("Messages", function () {
             <Messages />
         );
 
-        var messages = ReactTestUtils.scryRenderedDOMComponentsWithClass(messagesComponent, "message");
+        var messages = TestUtils.scryRenderedDOMNodesWithClass(messagesComponent, "message");
         expect(messages.length).toEqual(0);
     });
 
@@ -88,9 +88,9 @@ describe("Messages", function () {
             <Messages messages={messageList} />
         );
 
-        var messages = ReactTestUtils.scryRenderedDOMComponentsWithClass(messagesComponent, "message");
+        var messages = TestUtils.scryRenderedDOMNodesWithClass(messagesComponent, "message");
         expect(messages.length).toEqual(1);
-        expect(messages[0].getDOMNode().textContent).toEqual("Test message text");
+        expect(messages[0].textContent).toEqual("Test message text");
     });
     
     it("Render multiple messages", function () {
@@ -104,7 +104,7 @@ describe("Messages", function () {
             <Messages messages={messageList} />
         );
 
-        var messages = ReactTestUtils.scryRenderedDOMComponentsWithClass(messagesComponent, "message");
+        var messages = TestUtils.scryRenderedDOMNodesWithClass(messagesComponent, "message");
         expect(messages.length).toEqual(3);
     });
 
@@ -121,9 +121,9 @@ describe("Messages", function () {
             <Messages messages={messageList} removeMessage={removeMessage} />
         );
 
-        var messages = ReactTestUtils.scryRenderedDOMComponentsWithClass(messagesComponent, "message");
+        var messages = TestUtils.scryRenderedDOMNodesWithClass(messagesComponent, "message");
 
-        var closeLink = ReactTestUtils.findRenderedDOMComponentWithClass(messages[0], "close");
+        var closeLink = TestUtils.findRenderedDOMNodeWithClass(messages[0], "close");
         ReactTestUtils.Simulate.click(closeLink,{});
 
         expect(removeMessage).toBeCalledWith(0);
@@ -138,9 +138,9 @@ describe("Messages", function () {
             <Messages messages={messageList} />
         );
 
-        var messages = ReactTestUtils.scryRenderedDOMComponentsWithClass(messagesComponent, "message");
+        var messages = TestUtils.scryRenderedDOMNodesWithClass(messagesComponent, "message");
         expect(messages.length).toEqual(1);
-        expect(messages[0].getDOMNode().textContent).toEqual("Test message text");
+        expect(messages[0].textContent).toEqual("Test message text");
     });
 
     it("Render single message with custom interval", function () {
@@ -152,7 +152,7 @@ describe("Messages", function () {
             <Messages messages={messageList} />
         );
 
-        var messages = ReactTestUtils.scryRenderedDOMComponentsWithClass(messagesComponent, "message");
+        var messages = TestUtils.scryRenderedDOMNodesWithClass(messagesComponent, "message");
         expect(messages.length).toEqual(1);
         expect(global.setInterval.mock.calls[0][1]).toBe(5000);
     });
@@ -240,12 +240,12 @@ describe("Messages", function () {
             <Messages messages={messageList} />
         );
 
-        var messages = ReactTestUtils.scryRenderedDOMComponentsWithClass(messagesComponent, "message");
+        var messages = TestUtils.scryRenderedDOMNodesWithClass(messagesComponent, "message");
         expect(messages.length).toEqual(1);
 
         // Ensure html tags are not included as text content (which is what would happen if html
         // was being rendered as text).
-        expect(messages[0].getDOMNode().textContent).toEqual("Test message text html");
+        expect(messages[0].textContent).toEqual("Test message text html");
 
     });
 

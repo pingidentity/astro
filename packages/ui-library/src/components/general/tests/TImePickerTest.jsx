@@ -1,12 +1,12 @@
 window.__DEV__ = true;
 
-jest.dontMock("../../../testutil/TestUtils");
 jest.dontMock("../TimePicker.jsx");
 jest.dontMock("../../forms/FormSelectField.jsx");
 
 describe("TimePicker", function () {
-    var React = require("react/addons"),
-        ReactTestUtils = React.addons.TestUtils,
+    var React = require("react"),
+        ReactTestUtils = require("react-addons-test-utils"),
+        TestUtils = require("../../../testutil/TestUtils"),
         TimePicker = require("../TimePicker.jsx"),
         onValueChange = jest.genMockFunction(),
         component;
@@ -113,12 +113,12 @@ describe("TimePicker", function () {
             format: "24"
         });
 
-        var select = ReactTestUtils.findRenderedDOMComponentWithTag(component, "select");
+        var select = TestUtils.findRenderedDOMNodeWithTag(component, "select");
 
-        expect(select.props.children.length).toEqual(24);
-        expect(select.props.children[0].key).toEqual("0:00");
-        expect(select.props.children[12].key).toEqual("12:00");
-        expect(select.props.children[23].key).toEqual("23:00");
+        expect(select.children.length).toEqual(24);
+        expect(select.children[0].value).toEqual("0:00");
+        expect(select.children[12].value).toEqual("12:00");
+        expect(select.children[23].value).toEqual("23:00");
     });
 
     it("updates the value on change", function () {
@@ -127,7 +127,7 @@ describe("TimePicker", function () {
             format: "24"
         });
 
-        var select = ReactTestUtils.findRenderedDOMComponentWithTag(component, "select");
+        var select = TestUtils.findRenderedDOMNodeWithTag(component, "select");
         var evt = {
             target: {
                 value: "8:16"

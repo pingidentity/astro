@@ -1,14 +1,14 @@
 window.__DEV__ = true;
 
-jest.dontMock("../../../testutil/TestUtils");
 jest.dontMock("../Calendar.jsx");
 
 describe("Calendar", function () {
-    var React = require("react/addons"),
+    var React = require("react"),
         Calendar = require("../Calendar.jsx"),
         moment = require("moment-range"),
 
-        ReactTestUtils = React.addons.TestUtils,
+        ReactTestUtils = require("react-addons-test-utils"),
+        TestUtils = require("../../../testutil/TestUtils"),
 
         callback = jest.genMockFunction(),
         selectedDateString = "2015-10-15",
@@ -23,7 +23,7 @@ describe("Calendar", function () {
                     onChange={callback}/>
         );
 
-        var input = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
-        expect(input.getDOMNode().value).toBe(selectedDate.format("YYYY-MM-DD"));
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        expect(input.value).toBe(selectedDate.format("YYYY-MM-DD"));
     });
 });

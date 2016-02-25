@@ -1,4 +1,4 @@
-var React = require("react/addons");
+var React = require("react");
 var Toggle = require("../../../components/forms/Toggle.jsx");
 
 var ToggleDemo = React.createClass({

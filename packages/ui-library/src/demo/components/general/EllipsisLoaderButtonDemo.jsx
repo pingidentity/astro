@@ -1,5 +1,4 @@
-
-var React = require("react/addons");
+var React = require("react");
 var EllipsisLoaderButton = require("./../../../components/general/EllipsisLoaderButton.jsx");
 
 

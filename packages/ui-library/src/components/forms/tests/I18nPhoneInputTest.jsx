@@ -24,15 +24,12 @@ jest.setMock("../i18nPhoneInput/countryCodes", [
     }
 ]);
 
-jest.dontMock("classnames");
-jest.dontMock("underscore");
-jest.dontMock("../../../testutil/TestUtils");
 jest.dontMock("../i18nPhoneInput/I18nPhoneInput.jsx");
 jest.dontMock("../FormTextField.jsx");
 
 describe("I18nPhoneInput", function () {
-    var React = require("react/addons"),
-        ReactTestUtils = React.addons.TestUtils,
+    var React = require("react"),
+        ReactTestUtils = require("react-addons-test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         I18nPhoneInput = require("../i18nPhoneInput/I18nPhoneInput.jsx"),
         _ = require("underscore");
@@ -51,28 +48,28 @@ describe("I18nPhoneInput", function () {
     });
 
     it("renders the component", function () {
-        var input = TestUtils.findRenderedDOMComponentWithDataId(View, "i18n-phone-input");
+        var input = TestUtils.findRenderedDOMNodeWithDataId(View, "i18n-phone-input");
 
         expect(input).toBeTruthy();
     });
 
     it("opens country list on list button click", function () {
-        var flag = TestUtils.findRenderedDOMComponentWithDataId(View, "selected-flag");
-        var list = TestUtils.findRenderedDOMComponentWithDataId(View, "country-list");
-        var listClasses = list.getDOMNode().className.split(" ");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(View, "selected-flag");
+        var list = TestUtils.findRenderedDOMNodeWithDataId(View, "country-list");
+        var listClasses = list.className.split(" ");
 
         expect(_.contains(listClasses, "hide")).toEqual(true);
 
         ReactTestUtils.Simulate.click(flag);
 
-        listClasses = list.getDOMNode().className.split(" ");
+        listClasses = list.className.split(" ");
         expect(_.contains(listClasses, "hide")).toEqual(false);
     });
 
     it("updates callback on country select", function () {
-        var flag = TestUtils.findRenderedDOMComponentWithDataId(View, "selected-flag");
-        var canada = TestUtils.findRenderedDOMComponentWithDataId(View, "country-ca");
-        var afghanistan = TestUtils.findRenderedDOMComponentWithDataId(View, "country-af");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(View, "selected-flag");
+        var canada = TestUtils.findRenderedDOMNodeWithDataId(View, "country-ca");
+        var afghanistan = TestUtils.findRenderedDOMNodeWithDataId(View, "country-af");
 
         ReactTestUtils.Simulate.click(flag);
 
@@ -95,8 +92,8 @@ describe("I18nPhoneInput", function () {
                 onValueChange={onValueChange} />
         );
 
-        var flag = TestUtils.findRenderedDOMComponentWithDataId(View, "selected-flag");
-        var flagInner = ReactTestUtils.findRenderedDOMComponentWithClass(flag, "iti-flag").getDOMNode();
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(View, "selected-flag");
+        var flagInner = TestUtils.findRenderedDOMNodeWithClass(flag, "iti-flag");
 
         expect(flagInner.className).toContain(selectedIso2);
     });
@@ -111,8 +108,8 @@ describe("I18nPhoneInput", function () {
                 onValueChange={onValueChange} />
         );
 
-        var flag = TestUtils.findRenderedDOMComponentWithDataId(View, "selected-flag");
-        var flagInner = ReactTestUtils.findRenderedDOMComponentWithClass(flag, "iti-flag").getDOMNode();
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(View, "selected-flag");
+        var flagInner = TestUtils.findRenderedDOMNodeWithClass(flag, "iti-flag");
 
         expect(flagInner.className).toContain(selectedIso2);
     });
@@ -127,7 +124,7 @@ describe("I18nPhoneInput", function () {
                 phoneNumber={phoneNumber} />
         );
 
-        var phoneInput = TestUtils.findRenderedDOMComponentWithDataId(View, inputId + "_phonenumber").getDOMNode();
+        var phoneInput = TestUtils.findRenderedDOMNodeWithDataId(View, inputId + "_phonenumber");
 
         expect(phoneInput.value).toEqual(phoneNumber);
     });

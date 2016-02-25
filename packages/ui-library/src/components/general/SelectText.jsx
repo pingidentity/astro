@@ -1,4 +1,5 @@
 var React = require("react");
+var ReactDOM = require("react-dom");
 
 /**
  * @class components/general/SelectText
@@ -101,8 +102,7 @@ var SelectText = React.createClass({
             event.target.select();
         } else {
             
-            // TODO Replace with React.findDOMNode(this) in React 0.13
-            var text = this.getDOMNode();
+            var text = ReactDOM.findDOMNode(this);
             var range;
     
             if (global.document.body.createTextRange) {

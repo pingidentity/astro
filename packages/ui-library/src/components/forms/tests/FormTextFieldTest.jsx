@@ -1,14 +1,11 @@
 window.__DEV__ = true;
 
 jest.dontMock("../FormTextField.jsx");
-jest.dontMock("classnames");
-jest.dontMock("underscore");
-jest.dontMock("../../../testutil/TestUtils");
 
 describe("FormTextField", function () {
 
-    var React = require("react/addons"),
-        ReactTestUtils = React.addons.TestUtils,
+    var React = require("react"),
+        ReactTestUtils = require("react-addons-test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         FormTextField = require("../FormTextField.jsx");
 
@@ -17,10 +14,10 @@ describe("FormTextField", function () {
             <FormTextField referenceName={'test'} />
         );
         // verify that the component is rendered
-        var field = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-text");
+        var field = TestUtils.findRenderedDOMNodeWithClass(component, "input-text");
         expect(ReactTestUtils.isDOMComponent(field)).toBeTruthy();
         // make sure that the field is not required by default
-        var elements = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "required");
+        var elements = TestUtils.scryRenderedDOMNodesWithClass(component, "required");
         expect(elements.length).toBe(0);
     });
 
@@ -29,7 +26,7 @@ describe("FormTextField", function () {
             <FormTextField referenceName={'test'} isRequired={true} />
         );
         // verify that the component is rendered
-        var field = ReactTestUtils.findRenderedDOMComponentWithClass(component, "required");
+        var field = TestUtils.findRenderedDOMNodeWithClass(component, "required");
         expect(ReactTestUtils.isDOMComponent(field)).toBeTruthy();
     });
 
@@ -39,8 +36,8 @@ describe("FormTextField", function () {
             <FormTextField referenceName={'test'} defaultValue={defaultValue} />
         );
         // verify that the component is rendered
-        var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
-        expect(field.getDOMNode().value).toEqual(defaultValue);
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        expect(field.value).toEqual(defaultValue);
     });
 
     it("shows placeholder", function () {
@@ -49,8 +46,8 @@ describe("FormTextField", function () {
             <FormTextField referenceName={'test'} defaultValue={defaultValue} placeholder="edit me"/>
         );
         // verify that the component is rendered
-        var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
-        expect(field.getDOMNode().getAttribute("placeholder")).toEqual("edit me");
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        expect(field.getAttribute("placeholder")).toEqual("edit me");
     });
 
     it("respects value over defaultValue and state precedence", function () {
@@ -59,11 +56,11 @@ describe("FormTextField", function () {
         );
 
         // verify that the component is rendered
-        var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
-        expect(field.getDOMNode().value).toEqual("my value");
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        expect(field.value).toEqual("my value");
 
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } });
-        expect(field.getDOMNode().value).toEqual("my value");
+        expect(field.value).toEqual("my value");
     });
 
     it("fires the onValueChange callback when field changes", function () {
@@ -71,7 +68,7 @@ describe("FormTextField", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormTextField referenceName={'test'} onValueChange={handleChange} />
         );
-        var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
         expect(handleChange.mock.calls.length).toBe(1);
 
@@ -84,7 +81,7 @@ describe("FormTextField", function () {
             <FormTextField referenceName={'test'} validator={validator} onValueChange={handleChange}
                            validatorTrigger="onChange" />
         );
-        var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
         expect(handleChange.mock.calls.length).toBe(1);
         expect(validator.mock.calls.length).toBe(1);
@@ -96,7 +93,7 @@ describe("FormTextField", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormTextField referenceName={'test'} validator={validator} onValueChange={handleChange} />
         );
-        var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
         expect(handleChange.mock.calls.length).toBe(1);
         expect(validator.mock.calls.length).toBe(0);
@@ -108,7 +105,7 @@ describe("FormTextField", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormTextField referenceName={'test'} validator={validator} onValueChange={handleChange} />
         );
-        var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
         ReactTestUtils.Simulate.blur(field);
         expect(handleChange.mock.calls.length).toBe(1);
@@ -120,7 +117,7 @@ describe("FormTextField", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormTextField referenceName={'test'} onFocus={handleFocus} />
         );
-        var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         ReactTestUtils.Simulate.focus(field);
         expect(handleFocus.mock.calls.length).toBe(1);
     });
@@ -132,7 +129,7 @@ describe("FormTextField", function () {
                     referenceName={'test'}
                     onKeyPress={handleKeyPress} />
         );
-        var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         ReactTestUtils.Simulate.keyPress(field, { key: "Enter", keyCode: 13, which: 13 });
         expect(handleKeyPress.mock.calls.length).toBe(1);
         expect(handleKeyPress.mock.calls[0][0]).toBe(13);
@@ -148,9 +145,9 @@ describe("FormTextField", function () {
                 defaultValue={originalValue}
                 onValueChange={handleChange} />
         );
-        var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
-        var undo = TestUtils.findRenderedDOMComponentWithDataId(component, "undo");
+        var undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
         expect(ReactTestUtils.isDOMComponent(undo)).toBeFalsy();
     });
 
@@ -164,9 +161,9 @@ describe("FormTextField", function () {
                 originalValue={originalValue}
                 onValueChange={handleChange} />
         );
-        var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
-        var undo = TestUtils.findRenderedDOMComponentWithDataId(component, "undo");
+        var undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
         expect(ReactTestUtils.isDOMComponent(undo)).toBeTruthy();
     });
 
@@ -180,16 +177,16 @@ describe("FormTextField", function () {
                 originalValue={originalValue}
                 onValueChange={handleChange} />
         );
-        var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
         // check that the undo icon gets displayed
-        var undo = TestUtils.findRenderedDOMComponentWithDataId(component, "undo");
+        var undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
         expect(ReactTestUtils.isDOMComponent(undo)).toBeTruthy();
         // click on the undo icon and verify that the field gets reverted to the original value
         ReactTestUtils.Simulate.click(undo);
-        expect(field.getDOMNode().value).toEqual(originalValue);
+        expect(field.value).toEqual(originalValue);
         // now check that the undo icon dissapeared
-        undo = TestUtils.findRenderedDOMComponentWithDataId(component, "undo");
+        undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
         expect(ReactTestUtils.isDOMComponent(undo)).toBeFalsy();
     });
 
@@ -204,12 +201,12 @@ describe("FormTextField", function () {
                 onValueChange={handleChange} />
         );
         // make the undo icon appear by changing the field
-        var field = ReactTestUtils.findRenderedDOMComponentWithTag(component, "input");
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
         // the field change will trigger the callback, clear it since we are not testing for it
         handleChange.mockClear();
         // check that the icon is actually there
-        var undo = TestUtils.findRenderedDOMComponentWithDataId(component, "undo");
+        var undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
         expect(ReactTestUtils.isDOMComponent(undo)).toBeTruthy();
         // click on the undo icon
         ReactTestUtils.Simulate.click(undo);
@@ -225,8 +222,8 @@ describe("FormTextField", function () {
             <FormTextField errorMessage={errorMessage} />
         );
 
-        var errorDiv = ReactTestUtils.findRenderedDOMComponentWithClass(component, "tooltip-text");
-        expect(errorDiv.getDOMNode().textContent).toBe(errorMessage);
+        var errorDiv = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text");
+        expect(errorDiv.textContent).toBe(errorMessage);
     });
 
 });

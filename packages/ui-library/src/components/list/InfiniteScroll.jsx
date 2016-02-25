@@ -1,4 +1,5 @@
 var React = require("react"),
+    ReactDOM = require("react-dom"),
     Spinner = require("../general/Spinner.jsx"),
     _ = require("underscore");
 
@@ -9,9 +10,9 @@ var Batch = React.createClass({
     displayName: "Batch",
 
     componentWillUpdate: function () {
-        var container = React.findDOMNode(this.refs.container);
+        var container = ReactDOM.findDOMNode(this.refs.container);
         if (container) {
-            this.containerHeight = React.findDOMNode(this.refs.container).scrollHeight;
+            this.containerHeight = ReactDOM.findDOMNode(this.refs.container).scrollHeight;
         }
     },
 
@@ -132,25 +133,26 @@ var InfiniteScroll = React.createClass({
         if (this.props.attachToWindow) {
             window.scrollTo(0, window.scrollY + y);
         } else {
-            React.findDOMNode(this.refs.container).scrollTop += y;
+            ReactDOM.findDOMNode(this.refs.container).scrollTop += y;
         }
     },
 
     _getContainerBounds: function () {
         return this.props.attachToWindow
-            ? { top: 0, bottom: window.innerHeight } : React.findDOMNode(this.refs.container).getBoundingClientRect();
+            ? { top: 0, bottom: window.innerHeight }
+            : ReactDOM.findDOMNode(this.refs.container).getBoundingClientRect();
     },
 
     _didScrollToBottom: function () {
         var containerBounds = this._getContainerBounds();
         return this.props.hasNext &&
-            React.findDOMNode(this.refs.spinnerNext).getBoundingClientRect().top <= containerBounds.bottom;
+            ReactDOM.findDOMNode(this.refs.spinnerNext).getBoundingClientRect().top <= containerBounds.bottom;
     },
 
     _didScrollToTop: function () {
         var containerBounds = this._getContainerBounds();
         return this.props.hasPrev &&
-            React.findDOMNode(this.refs.spinnerPrev).getBoundingClientRect().bottom >= containerBounds.top;
+            ReactDOM.findDOMNode(this.refs.spinnerPrev).getBoundingClientRect().bottom >= containerBounds.top;
     },
 
     _handleScroll: function () {
@@ -173,7 +175,7 @@ var InfiniteScroll = React.createClass({
     },
 
     _getBatchNode: function (batchIndex) {
-        return React.findDOMNode(this.refs["batch" + batchIndex]);
+        return ReactDOM.findDOMNode(this.refs["batch" + batchIndex]);
     },
 
     /** @method InfiniteScroll#jumpToItem
@@ -255,7 +257,7 @@ var InfiniteScroll = React.createClass({
         //when a new batch is prepended, the container's scrollTop should be adjusted by the height of the new batch
         //so that the content in view doesnt change
         if (this.batchRange && newRange.start !== this.batchRange.start) {
-            this._scrollContainerBy(React.findDOMNode(this.refs.batch0).clientHeight);
+            this._scrollContainerBy(ReactDOM.findDOMNode(this.refs.batch0).clientHeight);
         }
         //after the first render with data, jump to the offset specified in the props
         if (!this.inited && this.props.batches.length > 0 && this.props.initialItem) {

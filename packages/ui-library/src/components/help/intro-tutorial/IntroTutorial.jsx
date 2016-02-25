@@ -58,13 +58,11 @@ var IntroTutorial = React.createClass({
     },
 
     _renderWelcome: function () {
-        /* jshint ignore:start */
         return [
             <div key={0}>{this.props.messageWelcome}</div>,
             <input key={1} type="button" onClick={this.props.onNext} data-id="getStarted"
                 value={this.props.labelGetStarted} />
         ];
-        /* jshint ignore:end */
     },
 
     _handleWindowResize: function () {
@@ -86,7 +84,6 @@ var IntroTutorial = React.createClass({
     _renderStep: function () {
         var item = this.props.steps[this.props.active - 1];
 
-        /* jshint ignore:start */
         return [
             <div key={0} className="title">{item.title}</div>,
             <div key={1} className="description">{item.description}</div>,
@@ -100,7 +97,6 @@ var IntroTutorial = React.createClass({
                     onClick={this._onNext} value={this._getNextLabel()} />
             </div>
         ];
-        /* jshint ignore:end */
     },
 
     componentWillMount: function () {
@@ -120,7 +116,6 @@ var IntroTutorial = React.createClass({
         var target = item && item.target ? item.target : null;
 
         //The defs below are inject as a string since react wasnt passing through all properties
-        /* jshint ignore:start */
         return (
             <div ref="container" className="introOverlay">
                 { this.props.active > 0 ? <Spotlight target={target} /> : null }
@@ -130,7 +125,6 @@ var IntroTutorial = React.createClass({
                 </div>
             </div>
         );
-        /* jshint ignore:end */
     }
 });
 

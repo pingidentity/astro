@@ -2,7 +2,6 @@ window.__DEV__ = true;
 
 jest.dontMock("../Reducer.js");
 jest.dontMock("../Actions.js");
-jest.dontMock("object-assign");
 
 describe("Step", function () {
     var Reducer = require("../Reducer.js"),

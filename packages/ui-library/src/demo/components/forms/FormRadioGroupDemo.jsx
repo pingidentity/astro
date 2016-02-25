@@ -1,4 +1,4 @@
-var React = require("react/addons"),
+var React = require("react"),
     FormRadioGroup = require("../../../components/forms/FormRadioGroup.jsx");
 
 var FormRadioGroupDemo = React.createClass({

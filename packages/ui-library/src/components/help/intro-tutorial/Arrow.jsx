@@ -1,4 +1,5 @@
 var React = require("react"),
+    ReactDOM = require("react-dom"),
     format = require("../../../util/format.js");
 
 /** @class InfiniteScroll#Arrow
@@ -38,14 +39,14 @@ var Arrow = React.createClass({
     },
 
     componentDidMount: function () {
-        React.findDOMNode(this.refs.focusPointer).setAttribute("marker-end", "url(#Triangle)");
+        ReactDOM.findDOMNode(this.refs.focusPointer).setAttribute("marker-end", "url(#Triangle)");
         this.componentWillReceiveProps(this.props);
     },
 
     componentWillReceiveProps: function (newProps) {
         if (newProps.to) {
             var targetBounds = newProps.to.getBoundingClientRect();
-            var fromBounds = (this.props.from || React.findDOMNode(this)).getBoundingClientRect();
+            var fromBounds = (this.props.from || ReactDOM.findDOMNode(this)).getBoundingClientRect();
 
             var coords = {
                 endx: parseInt(targetBounds.left + targetBounds.width / 2, 10),
@@ -87,7 +88,6 @@ var Arrow = React.createClass({
 
      /* React isnt passing svg attributes correctly so have to resort to setting the innerHTML instead */
     render: function () {
-        /* jshint ignore:start */
         return (
             <svg>
                 <defs dangerouslySetInnerHTML={{ __html:
@@ -97,7 +97,6 @@ var Arrow = React.createClass({
                     "</marker>" }} />
                 <path className="line" d={this.state.command} ref="focusPointer" />
             </svg>);
-        /* jshint ignore:end */
     }
 });
 

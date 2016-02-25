@@ -1,4 +1,4 @@
-var React = require("react/addons"),
+var React = require("react"),
     Spinner = require("../../../components/general/Spinner.jsx");
 
 
@@ -18,7 +18,6 @@ var SpinnerDemo = React.createClass({
 
     render: function () {
         return (
-            /* jslint ignore:start */
             <div>
                 <p>
                     <Spinner
@@ -33,7 +32,6 @@ var SpinnerDemo = React.createClass({
                     Toggle Spinner
                 </a>
             </div>
-            /* jslint ignore:end */
         );
     }
 

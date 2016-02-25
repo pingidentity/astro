@@ -1,4 +1,4 @@
-var React = require("react/addons");
+var React = require("react");
 var ModalButton = require("./../../../components/general/ModalButton.jsx");
 
 var ModalButtonDemo = React.createClass({

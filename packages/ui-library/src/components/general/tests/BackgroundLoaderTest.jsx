@@ -1,11 +1,10 @@
 window.__DEV__ = true;
 
-jest.dontMock("../../../testutil/TestUtils");
 jest.dontMock("../BackgroundLoader.jsx");
 
 describe("BackgroundLoader", function () {
-    var React = require("react/addons");
-    var ReactTestUtils = React.addons.TestUtils;
+    var React = require("react");
+    var ReactTestUtils = require("react-addons-test-utils");
     var TestUtils = require("../../../testutil/TestUtils");
     var BackgroundLoader = require("../BackgroundLoader.jsx");
 
@@ -39,12 +38,12 @@ describe("BackgroundLoader", function () {
         );
         
         // the loading content should be visible; the loaded content should not be
-        var loader = TestUtils.findRenderedDOMComponentWithDataId(component, "loader");
+        var loader = TestUtils.findRenderedDOMNodeWithDataId(component, "loader");
         expect(ReactTestUtils.isDOMComponent(loader)).toBeTruthy();
-        expect(loader.getDOMNode().className).toEqual("css-class");
-        var loadingContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loading-content");
+        expect(loader.className).toEqual("css-class");
+        var loadingContent = TestUtils.findRenderedDOMNodeWithDataId(component, "loading-content");
         expect(ReactTestUtils.isDOMComponent(loadingContent)).toBeTruthy();
-        var loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
+        var loadedContent = TestUtils.findRenderedDOMNodeWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeFalsy();
     });
 
@@ -63,11 +62,11 @@ describe("BackgroundLoader", function () {
         );
 
         // the loading content should not be visible; the loaded content should be
-        var loader = TestUtils.findRenderedDOMComponentWithDataId(component, "loader");
+        var loader = TestUtils.findRenderedDOMNodeWithDataId(component, "loader");
         expect(ReactTestUtils.isDOMComponent(loader)).toBeTruthy();
-        var loadingContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loading-content");
+        var loadingContent = TestUtils.findRenderedDOMNodeWithDataId(component, "loading-content");
         expect(ReactTestUtils.isDOMComponent(loadingContent)).toBeFalsy();
-        var loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
+        var loadedContent = TestUtils.findRenderedDOMNodeWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeTruthy();
     });
 
@@ -154,13 +153,13 @@ describe("BackgroundLoader", function () {
         expect(setTimeout.mock.calls.length).toBe(1);
         expect(setTimeout.mock.calls[0][1]).toBe(2000);
 
-        var loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
+        var loadedContent = TestUtils.findRenderedDOMNodeWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeFalsy();
 
         loaded = true;
         jest.runAllTimers();
 
-        loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
+        loadedContent = TestUtils.findRenderedDOMNodeWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeTruthy();
 
     });
@@ -180,12 +179,12 @@ describe("BackgroundLoader", function () {
         );
         
         // the loading content should be visible; the loaded content should not be
-        var loader = TestUtils.findRenderedDOMComponentWithDataId(component, "loader");
+        var loader = TestUtils.findRenderedDOMNodeWithDataId(component, "loader");
         expect(ReactTestUtils.isDOMComponent(loader)).toBeTruthy();
-        expect(loader.getDOMNode().className).toEqual("css-class");
-        var loadingContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loading-content");
+        expect(loader.className).toEqual("css-class");
+        var loadingContent = TestUtils.findRenderedDOMNodeWithDataId(component, "loading-content");
         expect(ReactTestUtils.isDOMComponent(loadingContent)).toBeTruthy();
-        var loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
+        var loadedContent = TestUtils.findRenderedDOMNodeWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeFalsy();
     });
 
@@ -257,7 +256,7 @@ describe("BackgroundLoader", function () {
         // Render the component and verify that the loaded content is not yet displayed
         var component = ReactTestUtils.renderIntoDocument(element);
 
-        var loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
+        var loadedContent = TestUtils.findRenderedDOMNodeWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeFalsy();
 
         // With loaded set to true, trigger a timer callback to attempt a data load.
@@ -266,7 +265,7 @@ describe("BackgroundLoader", function () {
         loaded = true;
         jest.runOnlyPendingTimers();
 
-        loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
+        loadedContent = TestUtils.findRenderedDOMNodeWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeFalsy();
 
         // Set the document to now be in focus and trigger a document event
@@ -278,7 +277,7 @@ describe("BackgroundLoader", function () {
         loaded = true;
         jest.runOnlyPendingTimers();
 
-        loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
+        loadedContent = TestUtils.findRenderedDOMNodeWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeTruthy();
         
     });
@@ -327,7 +326,7 @@ describe("BackgroundLoader", function () {
         // Render the component and verify that the loaded content is not yet displayed
         var component = ReactTestUtils.renderIntoDocument(element);
 
-        var loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
+        var loadedContent = TestUtils.findRenderedDOMNodeWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeFalsy();
 
         // With loaded set to true, trigger a timer callback to attempt a data load.
@@ -336,7 +335,7 @@ describe("BackgroundLoader", function () {
         loaded = true;
         jest.runOnlyPendingTimers();
 
-        loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
+        loadedContent = TestUtils.findRenderedDOMNodeWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeFalsy();
 
         // Set the document to now be in focus and trigger a document event
@@ -348,7 +347,7 @@ describe("BackgroundLoader", function () {
         loaded = true;
         jest.runOnlyPendingTimers();
 
-        loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
+        loadedContent = TestUtils.findRenderedDOMNodeWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeTruthy();
         
     });
@@ -398,7 +397,7 @@ describe("BackgroundLoader", function () {
         // Render the component and verify that the loaded content is not yet displayed
         var component = ReactTestUtils.renderIntoDocument(element);
 
-        var loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
+        var loadedContent = TestUtils.findRenderedDOMNodeWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeFalsy();
 
         // With loaded set to true, trigger a timer callback to attempt a data load.
@@ -407,7 +406,7 @@ describe("BackgroundLoader", function () {
         loaded = true;
         jest.runOnlyPendingTimers();
 
-        loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
+        loadedContent = TestUtils.findRenderedDOMNodeWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeFalsy();
 
         // Set the document to now be in focus and trigger a document event
@@ -419,7 +418,7 @@ describe("BackgroundLoader", function () {
         loaded = true;
         jest.runOnlyPendingTimers();
 
-        loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
+        loadedContent = TestUtils.findRenderedDOMNodeWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeTruthy();
         
     });

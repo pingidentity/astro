@@ -1,11 +1,11 @@
 window.__DEV__ = true;
 
 jest.dontMock("../Spotlight.jsx");
-jest.dontMock("../../../../testutil/TestUtils.js");
 
 describe("IntroTutorial", function () {
-    var React = require("react/addons"),
-        ReactTestUtils = React.addons.TestUtils,
+    var React = require("react"),
+        ReactDOM = require("react-dom"),
+        ReactTestUtils = require("react-addons-test-utils"),
         Spotlight = require("../Spotlight.jsx");
 
     beforeEach(function () {
@@ -21,7 +21,7 @@ describe("IntroTutorial", function () {
             outerHTML: "<div data-id=\"blah\">blah</div>"
         };
         var component = ReactTestUtils.renderIntoDocument(<Spotlight target={target} />);
-        var node = React.findDOMNode(component);
+        var node = ReactDOM.findDOMNode(component);
 
         expect(node.innerHTML).toBe(target.outerHTML);
         expect(node.style.left).toBe("90px");

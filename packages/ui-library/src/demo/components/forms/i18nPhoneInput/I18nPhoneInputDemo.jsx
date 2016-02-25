@@ -1,4 +1,4 @@
-var React = require("react/addons"),
+var React = require("react"),
     I18nPhoneInput = require("../../../../components/forms/i18nPhoneInput/I18nPhoneInput.jsx");
 
 var I18nPhoneInputDemo = React.createClass({

@@ -2,14 +2,12 @@ window.__DEV__ = true;
 
 jest.dontMock("../Pagination.jsx");
 jest.dontMock("../../rows/ExpandableRow.jsx");
-jest.dontMock("../../../testutil/TestUtils");
-jest.dontMock("underscore");
 
 describe("Pagination", function () {
 
-    var React = require("react/addons"),
-        ReactTestUtils = React.addons.TestUtils,
-        //TestUtils = require("../../../testutil/TestUtils"),
+    var React = require("react"),
+        ReactTestUtils = require("react-addons-test-utils"),
+        TestUtils = require("../../../testutil/TestUtils"),
         Pagination = require("../Pagination.jsx"),
         ExpandableRow = require("../../rows/ExpandableRow.jsx"),
         callback,
@@ -34,9 +32,9 @@ describe("Pagination", function () {
             </Pagination>
         );
 
-        pageLinks = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "page-links");
+        pageLinks = TestUtils.scryRenderedDOMNodesWithClass(component, "page-links");
         top = pageLinks[0];
-        topLinks = React.findDOMNode(top).childNodes;
+        topLinks = top.childNodes;
 
     });
 
@@ -55,9 +53,9 @@ describe("Pagination", function () {
             </Pagination>
         );
 
-        pageLinks = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "page-links");
+        pageLinks = TestUtils.scryRenderedDOMNodesWithClass(component, "page-links");
         top = pageLinks[0];
-        topLinks = React.findDOMNode(top).childNodes;
+        topLinks = top.childNodes;
 
         //expect 2 lists of page links
         expect(pageLinks.length).toBe(2);
@@ -69,7 +67,7 @@ describe("Pagination", function () {
         expect(topLinks[0].childNodes[0].className).toBe("icon-previous");
 
         //expect the highest page to be 6
-        expect(topLinks[6].innerHTML).toBe("6");
+        expect(topLinks[6].textContent).toBe("6");
 
     });
 
@@ -84,7 +82,7 @@ describe("Pagination", function () {
         expect(topLinks[0].childNodes[0].className).toBe("icon-previous");
 
         //expect the highest page to be 20
-        expect(topLinks[8].innerHTML).toBe("20");
+        expect(topLinks[8].textContent).toBe("20");
 
     });
 
@@ -103,10 +101,10 @@ describe("Pagination", function () {
             </Pagination>
         );
 
-        pageLinks = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "page-links");
+        pageLinks = TestUtils.scryRenderedDOMNodesWithClass(component, "page-links");
 
-        topLinks = React.findDOMNode(pageLinks[0]).childNodes;
-        var bottomLinks = React.findDOMNode(pageLinks[1]).childNodes;
+        topLinks = pageLinks[0].childNodes;
+        var bottomLinks = pageLinks[1].childNodes;
 
         //expect 2 lists of page links
         expect(pageLinks.length).toBe(2);
@@ -131,7 +129,7 @@ describe("Pagination", function () {
     });
 
     it ("renders children content", function () {
-        var children = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "row");
+        var children = TestUtils.scryRenderedDOMNodesWithClass(component, "row");
         expect(children.length).toEqual(5);
 
     });

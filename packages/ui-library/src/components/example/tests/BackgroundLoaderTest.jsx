@@ -1,11 +1,10 @@
 window.__DEV__ = true;
 
-jest.dontMock("../../../testutil/TestUtils");
 jest.dontMock("../BackgroundLoader.jsx");
 
 describe("BackgroundLoader", function () {
-    var React = require("react/addons");
-    var ReactTestUtils = React.addons.TestUtils;
+    var React = require("react");
+    var ReactTestUtils = require("react-addons-test-utils");
     var TestUtils = require("../../../testutil/TestUtils");
     var BackgroundLoader = require("../BackgroundLoader.jsx");
 
@@ -39,12 +38,12 @@ describe("BackgroundLoader", function () {
         );
         
         // the loading content should be visible; the loaded content should not be
-        var loader = TestUtils.findRenderedDOMComponentWithDataId(component, "loader");
+        var loader = TestUtils.findRenderedDOMNodeWithDataId(component, "loader");
         expect(ReactTestUtils.isDOMComponent(loader)).toBeTruthy();
-        expect(loader.getDOMNode().className).toEqual("css-class");
-        var loadingContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loading-content");
+        expect(loader.className).toEqual("css-class");
+        var loadingContent = TestUtils.findRenderedDOMNodeWithDataId(component, "loading-content");
         expect(ReactTestUtils.isDOMComponent(loadingContent)).toBeTruthy();
-        var loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
+        var loadedContent = TestUtils.findRenderedDOMNodeWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeFalsy();
     });
 
@@ -63,11 +62,11 @@ describe("BackgroundLoader", function () {
         );
 
         // the loading content should not be visible; the loaded content should be
-        var loader = TestUtils.findRenderedDOMComponentWithDataId(component, "loader");
+        var loader = TestUtils.findRenderedDOMNodeWithDataId(component, "loader");
         expect(ReactTestUtils.isDOMComponent(loader)).toBeTruthy();
-        var loadingContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loading-content");
+        var loadingContent = TestUtils.findRenderedDOMNodeWithDataId(component, "loading-content");
         expect(ReactTestUtils.isDOMComponent(loadingContent)).toBeFalsy();
-        var loadedContent = TestUtils.findRenderedDOMComponentWithDataId(component, "loaded-content");
+        var loadedContent = TestUtils.findRenderedDOMNodeWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeTruthy();
     });
 });

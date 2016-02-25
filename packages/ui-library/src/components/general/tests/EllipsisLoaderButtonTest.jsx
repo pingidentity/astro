@@ -1,14 +1,11 @@
 window.__DEV__ = true;
 
-jest.dontMock("../../../testutil/TestUtils");
 jest.dontMock("../EllipsisLoader.jsx");
 jest.dontMock("../EllipsisLoaderButton.jsx");
-jest.dontMock("underscore");
-jest.dontMock("classnames");
 
 describe("Ellipsis loader button", function () {
-    var React = require("react/addons");
-    var ReactTestUtils = React.addons.TestUtils;
+    var React = require("react");
+    var ReactTestUtils = require("react-addons-test-utils");
     var TestUtils = require("../../../testutil/TestUtils");
     var EllipsisLoaderButton = require("../EllipsisLoaderButton.jsx");
     var callback;
@@ -31,8 +28,8 @@ describe("Ellipsis loader button", function () {
                 onButtonClick={callback} />
         );
 
-        var button = TestUtils.findRenderedDOMComponentWithDataId(component, buttonId);
-        expect(button.getDOMNode().className).toEqual("ellipsis-loader-button loading " + buttonCss);
+        var button = TestUtils.findRenderedDOMNodeWithDataId(component, buttonId);
+        expect(button.className).toEqual("ellipsis-loader-button loading " + buttonCss);
     });
 
     it("does not render anything when the loading flag is set to false", function () {
@@ -44,8 +41,8 @@ describe("Ellipsis loader button", function () {
                 onButtonClick={callback} />
         );
 
-        var button = TestUtils.findRenderedDOMComponentWithDataId(component, buttonId);
-        expect(button.getDOMNode().className).toEqual("ellipsis-loader-button");
+        var button = TestUtils.findRenderedDOMNodeWithDataId(component, buttonId);
+        expect(button.className).toEqual("ellipsis-loader-button");
     });
 
     it("renders the button text", function () {
@@ -57,7 +54,7 @@ describe("Ellipsis loader button", function () {
                 onButtonClick={callback} />
         );
 
-        var button = TestUtils.findRenderedDOMComponentWithDataId(component, buttonId);
-        expect(button.getDOMNode().textContent).toEqual(buttonText);
+        var button = TestUtils.findRenderedDOMNodeWithDataId(component, buttonId);
+        expect(button.textContent).toEqual(buttonText);
     });
 });

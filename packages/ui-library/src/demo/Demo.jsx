@@ -1,4 +1,4 @@
-var React = require("react/addons"),
+var React = require("react"),
     DemoItem = require("./core/DemoItem.jsx"),
     assign = require("object-assign"),
     packageJson = require("../../package.json");
@@ -10,11 +10,13 @@ var Demo = React.createClass({
     BASE_PATH_COMP: "src/",
 
     demos: [
+        /*
         {
             name: "Color Picker",
             demo: require("./components/general/ColorPickerDemo.jsx"),
             pathToCode: "components/general/ColorPicker.jsx"
         },
+        */
         {
             name: "Infinite Scroller",
             demo: require("./components/list/InfiniteScrollDemo.jsx"),

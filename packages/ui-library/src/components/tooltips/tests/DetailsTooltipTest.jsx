@@ -1,14 +1,11 @@
 window.__DEV__ = true;
 
-jest.dontMock("../../../testutil/TestUtils");
 jest.dontMock("../DetailsTooltip.jsx");
-jest.dontMock("underscore");
-jest.dontMock("classnames");
 
 describe("DetailsTooltip", function () {
 
-    var React = require("react/addons"),
-        ReactTestUtils = React.addons.TestUtils,
+    var React = require("react"),
+        ReactTestUtils = require("react-addons-test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         Details = require("../DetailsTooltip.jsx"),
         _ = require("underscore");
@@ -31,7 +28,7 @@ describe("DetailsTooltip", function () {
 
     it("managed component", function () {
         var component = getComponent({ controlled: false, open: false });
-        var link = TestUtils.findRenderedDOMComponentWithDataId(component, "action-btn");
+        var link = TestUtils.findRenderedDOMNodeWithDataId(component, "action-btn");
         expect(component.refs.manager.state.open).toBe(false);
 
         ReactTestUtils.Simulate.click(link, {});
@@ -46,26 +43,26 @@ describe("DetailsTooltip", function () {
             </Details>
         );
 
-        var details = ReactTestUtils.findRenderedComponentWithType(component, Details);
-        var title = TestUtils.findRenderedDOMComponentWithDataId(details, "details-title");
-        var content = TestUtils.findRenderedDOMComponentWithDataId(details, "details-content");
-        var link = TestUtils.findRenderedDOMComponentWithDataId(details, "action-btn");
+        var details = TestUtils.findRenderedComponentWithType(component, Details);
+        var title = TestUtils.findRenderedDOMNodeWithDataId(details, "details-title");
+        var content = TestUtils.findRenderedDOMNodeWithDataId(details, "details-content");
+        var link = TestUtils.findRenderedDOMNodeWithDataId(details, "action-btn");
 
         //DOM to contain actual content
-        expect(content.getDOMNode().children.length).toBe(3);
-        expect(content.getDOMNode().children[2].nodeName).toBe("P");
-        expect(content.getDOMNode().children[2].textContent).toBe("what ever callout content is");
+        expect(content.children.length).toBe(3);
+        expect(content.children[2].nodeName).toBe("P");
+        expect(content.children[2].textContent).toBe("what ever callout content is");
 
         //action link
-        expect(link.getDOMNode().textContent).toBe("Action");
+        expect(link.textContent).toBe("Action");
 
         //title
-        expect(title.getDOMNode().textContent).toBe("Title");
+        expect(title.textContent).toBe("Title");
     });
 
     it("doesnt render title container if none exists", function () {
         var component = getComponent({ title: "" });
-        var title = TestUtils.findRenderedDOMComponentWithDataId(component, "details-title");
+        var title = TestUtils.findRenderedDOMNodeWithDataId(component, "details-title");
 
         expect(title).toBe(null);
     });
@@ -79,25 +76,25 @@ describe("DetailsTooltip", function () {
             </Details>
         );
 
-        var details = ReactTestUtils.findRenderedComponentWithType(component, Details);
-        var title = TestUtils.findRenderedDOMComponentWithDataId(details, "details-title");
-        var content = TestUtils.findRenderedDOMComponentWithDataId(details, "details-content");
-        var link = TestUtils.findRenderedDOMComponentWithDataId(details, "action-btn");
-        var closeLink = TestUtils.scryRenderedDOMComponentsWithDataId(details, "details-close");
+        var details = TestUtils.findRenderedComponentWithType(component, Details);
+        var title = TestUtils.findRenderedDOMNodeWithDataId(details, "details-title");
+        var content = TestUtils.findRenderedDOMNodeWithDataId(details, "details-content");
+        var link = TestUtils.findRenderedDOMNodeWithDataId(details, "action-btn");
+        var closeLink = TestUtils.scryRenderedDOMNodesWithDataId(details, "details-close");
 
         //DOM to contain actual content
-        expect(content.getDOMNode().children.length).toBe(2);
-        expect(content.getDOMNode().children[1].nodeName).toBe("P");
-        expect(content.getDOMNode().children[1].textContent).toBe("what ever callout content is");
+        expect(content.children.length).toBe(2);
+        expect(content.children[1].nodeName).toBe("P");
+        expect(content.children[1].textContent).toBe("what ever callout content is");
 
         //no close link
         expect(closeLink.length).toBe(0);
 
         //action link
-        expect(link.getDOMNode().textContent).toBe("Action");
+        expect(link.textContent).toBe("Action");
 
         //title
-        expect(title.getDOMNode().textContent).toBe("Title");
+        expect(title.textContent).toBe("Title");
     });
 
     it("is rendering closed state", function () {
@@ -108,8 +105,8 @@ describe("DetailsTooltip", function () {
             </Details>
         );
 
-        var details = ReactTestUtils.findRenderedComponentWithType(component, Details);
-        var content = TestUtils.scryRenderedDOMComponentsWithDataId(details, "details-content");
+        var details = TestUtils.findRenderedComponentWithType(component, Details);
+        var content = TestUtils.scryRenderedDOMNodesWithDataId(details, "details-content");
 
         //no DOM content
         expect(content.length).toBe(0);
@@ -125,8 +122,8 @@ describe("DetailsTooltip", function () {
             </Details>
         );
 
-        var details = ReactTestUtils.findRenderedComponentWithType(component, Details);
-        var link = TestUtils.findRenderedDOMComponentWithDataId(details, "action-btn");
+        var details = TestUtils.findRenderedComponentWithType(component, Details);
+        var link = TestUtils.findRenderedDOMNodeWithDataId(details, "action-btn");
 
         ReactTestUtils.Simulate.click(link, {});
 
@@ -143,8 +140,8 @@ describe("DetailsTooltip", function () {
             </Details>
         );
 
-        var details = ReactTestUtils.findRenderedComponentWithType(component, Details);
-        var content = TestUtils.findRenderedDOMComponentWithDataId(details, "details-content");
+        var details = TestUtils.findRenderedComponentWithType(component, Details);
+        var content = TestUtils.findRenderedDOMNodeWithDataId(details, "details-content");
 
         ReactTestUtils.Simulate.click(content, {});
 
@@ -161,8 +158,8 @@ describe("DetailsTooltip", function () {
             </Details>
         );
 
-        var details = ReactTestUtils.findRenderedComponentWithType(component, Details);
-        var link = TestUtils.findRenderedDOMComponentWithDataId(details, "details-close");
+        var details = TestUtils.findRenderedComponentWithType(component, Details);
+        var link = TestUtils.findRenderedDOMNodeWithDataId(details, "details-close");
 
         ReactTestUtils.Simulate.click(link, {});
 
@@ -178,11 +175,11 @@ describe("DetailsTooltip", function () {
             </Details>
         );
 
-        var details = ReactTestUtils.findRenderedComponentWithType(component, Details);
-        var link = TestUtils.findRenderedDOMComponentWithDataId(details, "action-btn");
+        var details = TestUtils.findRenderedComponentWithType(component, Details);
+        var link = TestUtils.findRenderedDOMNodeWithDataId(details, "action-btn");
 
         //make disabled css styling was added
-        expect(link.getDOMNode().getAttribute("class")).toContain("disabled");
+        expect(link.getAttribute("class")).toContain("disabled");
 
         ReactTestUtils.Simulate.click(link, {});
 

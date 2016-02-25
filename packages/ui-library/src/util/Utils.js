@@ -48,7 +48,7 @@ module.exports = {
             var a = document.createElement("a");
 
             if (typeof a.download === "undefined") {
-                global.location = downloadUrl;
+                global.window.location.href = downloadUrl;
             } else {
                 a.href = downloadUrl;
                 a.download = filename;

@@ -1,13 +1,10 @@
 
-jest.dontMock("underscore");
 jest.dontMock("../Toggle.jsx");
-jest.dontMock("classnames");
-jest.dontMock("../../../testutil/TestUtils");
 
 
 describe("Toggle", function () {
-    var React = require("react/addons");
-    var ReactTestUtils = React.addons.TestUtils;
+    var React = require("react");
+    var ReactTestUtils = require("react-addons-test-utils");
     var TestUtils = require("../../../testutil/TestUtils");
     var Toggle = require("../Toggle.jsx");
 
@@ -21,11 +18,11 @@ describe("Toggle", function () {
         );
 
         // Expect a single toggle to be rendered.
-        var toggles = TestUtils.scryRenderedDOMComponentsWithDataId(toggleComponent, "toggle");
+        var toggles = TestUtils.scryRenderedDOMNodesWithDataId(toggleComponent, "toggle");
         expect(toggles.length).toEqual(1);
 
         // Expect the rendered toggle to be selected.
-        var selectedToggles = TestUtils.scryRenderedDOMComponentsWithDataId(toggleComponent, "toggle");
+        var selectedToggles = TestUtils.scryRenderedDOMNodesWithDataId(toggleComponent, "toggle");
         expect(selectedToggles.length).toEqual(1);
     });
 
@@ -39,11 +36,10 @@ describe("Toggle", function () {
         );
 
         // Expect a single toggle to be rendered.
-        var toggle = TestUtils.findRenderedDOMComponentWithDataId(toggleComponent, "toggle");
+        var toggle = TestUtils.findRenderedDOMNodeWithDataId(toggleComponent, "toggle");
 
         // Expect the rendered toggle to be selected.
-        var className = toggle.getDOMNode().getAttribute("class");
-        expect(className).toContain("small");
+        expect(toggle.className).toContain("small");
     });
 
     /*
@@ -56,11 +52,11 @@ describe("Toggle", function () {
         );
 
         // Expect a single toggle to be rendered.
-        var toggles = TestUtils.scryRenderedDOMComponentsWithDataId(toggleComponent, "toggle");
+        var toggles = TestUtils.scryRenderedDOMNodesWithDataId(toggleComponent, "toggle");
         expect(toggles.length).toEqual(1);
 
         // Expect the rendered toggle to be unselected.
-        var selectedToggles = ReactTestUtils.scryRenderedDOMComponentsWithClass(toggleComponent, "selected");
+        var selectedToggles = TestUtils.scryRenderedDOMNodesWithClass(toggleComponent, "selected");
         expect(selectedToggles.length).toEqual(0);
     });
 
@@ -73,11 +69,11 @@ describe("Toggle", function () {
         );
 
         // Expect a single toggle to be rendered.
-        var toggles = TestUtils.scryRenderedDOMComponentsWithDataId(toggleComponent, "toggle");
+        var toggles = TestUtils.scryRenderedDOMNodesWithDataId(toggleComponent, "toggle");
         expect(toggles.length).toEqual(1);
 
         // Expect the rendered toggle to be unselected.
-        var selectedToggles = ReactTestUtils.scryRenderedDOMComponentsWithClass(toggleComponent, "selected");
+        var selectedToggles = TestUtils.scryRenderedDOMNodesWithClass(toggleComponent, "selected");
         expect(selectedToggles.length).toEqual(1);
     });
 
@@ -91,11 +87,11 @@ describe("Toggle", function () {
         );
 
         // Expect a single toggle to be rendered.
-        var toggles = TestUtils.scryRenderedDOMComponentsWithDataId(toggleComponent, "toggle");
+        var toggles = TestUtils.scryRenderedDOMNodesWithDataId(toggleComponent, "toggle");
         expect(toggles.length).toBe(1);
 
         // Expect the rendered toggle to be unselected.
-        var selectedToggles = ReactTestUtils.scryRenderedDOMComponentsWithClass(toggleComponent, "selected");
+        var selectedToggles = TestUtils.scryRenderedDOMNodesWithClass(toggleComponent, "selected");
         expect(selectedToggles.length).toBe(0);
     });
 
@@ -115,11 +111,11 @@ describe("Toggle", function () {
             <Toggle onToggle={callback} paramObj={paramObj} id="toggle" />
         );
 
-        var toggle = TestUtils.findRenderedDOMComponentWithDataId(toggleComponent, "toggle");
+        var toggle = TestUtils.findRenderedDOMNodeWithDataId(toggleComponent, "toggle");
         expect(toggle).not.toBeNull();
 
         // Expect initially untoggled
-        var selectedToggles = ReactTestUtils.scryRenderedDOMComponentsWithClass(toggleComponent, "selected");
+        var selectedToggles = TestUtils.scryRenderedDOMNodesWithClass(toggleComponent, "selected");
         expect(selectedToggles.length).toBe(0);
 
         // Callback should not have been called yet
@@ -129,7 +125,7 @@ describe("Toggle", function () {
         ReactTestUtils.Simulate.click(toggle);
 
         // Expect the toggle to now be toggled after the click
-        selectedToggles = ReactTestUtils.scryRenderedDOMComponentsWithClass(toggleComponent, "selected");
+        selectedToggles = TestUtils.scryRenderedDOMNodesWithClass(toggleComponent, "selected");
         expect(selectedToggles.length).toBe(1);
 
         // Expect the callback to have been called exactly once,
@@ -142,7 +138,7 @@ describe("Toggle", function () {
         ReactTestUtils.Simulate.click(toggle);
 
         // Expect the toggle to now be toggled off again
-        selectedToggles = ReactTestUtils.scryRenderedDOMComponentsWithClass(toggleComponent, "selected");
+        selectedToggles = TestUtils.scryRenderedDOMNodesWithClass(toggleComponent, "selected");
         expect(selectedToggles.length).toBe(0);
 
         // Expect the callback to have been called exactly twice,
@@ -156,7 +152,7 @@ describe("Toggle", function () {
         ReactTestUtils.Simulate.click(toggle);
 
         // Expect the toggle to now be toggled after the click
-        selectedToggles = ReactTestUtils.scryRenderedDOMComponentsWithClass(toggleComponent, "selected");
+        selectedToggles = TestUtils.scryRenderedDOMNodesWithClass(toggleComponent, "selected");
         expect(selectedToggles.length).toBe(1);
 
         // Expect the callback to have been called exactly 3 times,
@@ -179,11 +175,11 @@ describe("Toggle", function () {
             <Toggle onToggle={callback} id="toggle" />
         );
 
-        var toggle = TestUtils.scryRenderedDOMComponentsWithDataId(toggleComponent, "toggle");
+        var toggle = TestUtils.scryRenderedDOMNodesWithDataId(toggleComponent, "toggle");
         expect(toggle).not.toBeNull();
 
         // Expect initially untoggled
-        var selectedToggles = ReactTestUtils.scryRenderedDOMComponentsWithClass(toggleComponent, "selected");
+        var selectedToggles = TestUtils.scryRenderedDOMNodesWithClass(toggleComponent, "selected");
         expect(selectedToggles.length).toBe(0);
 
         // Click the toggle to active it
@@ -191,7 +187,7 @@ describe("Toggle", function () {
 
         // Expect the toggle to not be toggled after the click
         // since the callback returned false.
-        selectedToggles = ReactTestUtils.scryRenderedDOMComponentsWithClass(toggleComponent, "selected");
+        selectedToggles = TestUtils.scryRenderedDOMNodesWithClass(toggleComponent, "selected");
         expect(selectedToggles.length).toBe(0);
 
     });
@@ -207,11 +203,11 @@ describe("Toggle", function () {
             <Toggle onToggle={callback} value={true} id="toggle" />
         );
 
-        var toggle = TestUtils.findRenderedDOMComponentWithDataId(toggleComponent, "toggle");
+        var toggle = TestUtils.findRenderedDOMNodeWithDataId(toggleComponent, "toggle");
         expect(toggle).not.toBeNull();
 
         // Expect initially toggled
-        var selectedToggles = ReactTestUtils.scryRenderedDOMComponentsWithClass(toggleComponent, "selected");
+        var selectedToggles = TestUtils.scryRenderedDOMNodesWithClass(toggleComponent, "selected");
         expect(selectedToggles.length).toBe(1);
 
         // Click the toggle to deactivate it
@@ -230,7 +226,7 @@ describe("Toggle", function () {
         );
 
         // Expect a single toggle to be rendered.
-        var toggles = TestUtils.scryRenderedDOMComponentsWithDataId(toggleComponent, "toggle");
+        var toggles = TestUtils.scryRenderedDOMNodesWithDataId(toggleComponent, "toggle");
         expect(toggles.length).toEqual(1);
     });
 });

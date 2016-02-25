@@ -4,8 +4,8 @@ jest.dontMock("../Arrow.jsx");
 jest.dontMock("../../../../util/format.js");
 
 describe("IntroTutorial", function () {
-    var React = require("react/addons"),
-        ReactTestUtils = React.addons.TestUtils,
+    var React = require("react"),
+        ReactTestUtils = require("react-addons-test-utils"),
         Arrow = require("../Arrow.jsx");
 
     beforeEach(function () {

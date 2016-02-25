@@ -1,4 +1,4 @@
-var React = require("react/addons");
+var React = require("react");
 var TabbedSections = require("./../../../components/general/TabbedSections.jsx");
 
 var TabbedSectionsDemo = React.createClass({

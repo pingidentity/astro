@@ -3,9 +3,10 @@ window.__DEV__ = true;
 jest.dontMock("../EventUtils");
 
 describe("ReduxUtils", function () {
-    var React = require("react/addons"),
-        Utils = require("../EventUtils"),
-        ReactTestUtils = React.addons.TestUtils;
+    var React = require("react"),
+        ReactDOM = require("react-dom"),
+        ReactTestUtils = require("react-addons-test-utils"),
+        Utils = require("../EventUtils");
 
     it("Forwards checked attribute", function () {
         var callback = jest.genMockFunction();
@@ -38,7 +39,7 @@ describe("ReduxUtils", function () {
         var MockComp = React.createClass({
             _handleClick: function (e) {
                 Utils.callIfOutsideOfContainer(
-                    React.findDOMNode(this.refs.inner),
+                    ReactDOM.findDOMNode(this.refs.inner),
                     this.props.onClick, e);
             },
 

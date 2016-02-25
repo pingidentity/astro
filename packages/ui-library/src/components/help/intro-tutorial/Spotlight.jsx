@@ -55,10 +55,7 @@ var Spotlight = React.createClass({
         var style = _.pick(this.state, ["left", "top", "width"]);
         style.padding = this.props.padding;
 
-        /* jshint ignore:start */
-        return (
-            <div className="spotlight" style={style} dangerouslySetInnerHTML={{ __html: this.state.clone }} />);
-        /* jshint ignore:end */
+        return (<div className="spotlight" style={style} dangerouslySetInnerHTML={{ __html: this.state.clone }} />);
     }
 });
 
