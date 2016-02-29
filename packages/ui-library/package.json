@@ -98,5 +98,13 @@
     "jest": "jest && node ./clean-after.js",
     "test": "jest",
     "verify": "npm run lint && npm run test"
+  },
+  "browserify": {
+    "transform": [[
+        "babelify",
+        {
+            "presets": ["react"]
+        }
+    ]]
   }
 }
