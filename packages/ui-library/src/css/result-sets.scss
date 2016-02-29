@@ -721,8 +721,10 @@
 
 .show-set, .show-condition {
 	font-size: 12px;
-	padding: 0 5px;
-	display: inline-block;
+	padding: 0;
+	position: absolute;
+	left: -4px;
+	top: 4px;
 	&.expanded {
 		@include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
 		@include transform(rotate(180deg));
@@ -734,13 +736,24 @@
 		max-width: 20%;
 	}
 }
+.condition-title {
+	position: relative;
+	padding-left: 21px;
+	cursor: pointer;
+
+	&.active {
+		.show-condition {
+			@include rotate(-180deg);
+		}
+	}
+}
 .condition-list {
 	margin-right: 20px;
 	padding-right: 20px;
 
 	.condition-title {
 		margin: 0;
-		padding: 15px 0;
+		padding: 15px 0 15px 30px;
 		border-style: solid;
 		border-width: 1px 0 0 0;
 		border-color: $color-elderly;
@@ -755,6 +768,10 @@
 		}
 		&:last-child {
 			border-bottom: 1px solid $color-elderly;
+		}
+		.show-condition {
+			top: 19px;
+			left: 5px;
 		}
 		.show-condition, .value {
 			text-transform: none;
@@ -792,6 +809,8 @@
 		margin-right: 10px;
 		padding: 15px 0 0 30px;
 		position: relative;
+		text-transform: none;
+		font-weight: normal;
 		&.active {
 			display: block;
 			@include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));

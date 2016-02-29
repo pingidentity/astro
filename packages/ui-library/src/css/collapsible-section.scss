@@ -1,0 +1,38 @@
+
+.collapsible-section {
+	.collapsible-section-title {
+		position: relative;
+		display: inline-block;
+		margin: 0 0 10px 0;
+		padding: 0 0 0 19px;
+		font-size: 16px;
+		line-height: 1em;
+		cursor: pointer;
+
+		&:before {
+			position: absolute;
+			top: 0;
+			left: 0;
+			content: '\59';
+			font-family: $icon-font;
+			font-size: 6px;
+			@include transition((all 0.3s cubic-bezier(1, 0, 1, 1)));
+		}
+	}
+	.collapsible-section-content {
+		overflow: hidden;
+		max-height: 0;
+		@include transition((all 0.3s));
+	}
+	&.open {
+		.collapsible-section-title {
+			&:before {
+				@include rotate(-180deg);
+				@include transition((all 0.3s cubic-bezier(0, 0, 0, 1)));
+			}
+		}
+		.collapsible-section-content {
+			max-height: 4000px;
+		}
+	}
+}
