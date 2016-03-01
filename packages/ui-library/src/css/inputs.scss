@@ -524,9 +524,8 @@ label {
 			display: inline-block;
 			height: 38px;
 			overflow: hidden;
-			background: $color-white;
-			border: 1px solid $color-rhino;
 			cursor: pointer;
+			border: 1px solid $color-input-fill;
 			@include border-radius(4px);
 
 			&:after {
@@ -570,6 +569,9 @@ label {
 	&.disabled {
 		.input-container {
 			.wrapper {
+				select {
+					background-color: $color-timberwolf;
+				}
 				&:after {
 					content: '';
 				}
@@ -577,13 +579,13 @@ label {
 		}
 	}
 	select {
-		background: transparent;
 		-webkit-appearance: none;
 		-moz-appearance: none;
 		appearance: none;
-		color: $color-midnight;
 		border: 0;
 		border-radius: 0;
+		color: $color-input-text;
+		background-color: $color-input-fill;
 		font-size: 16px;
 		line-height: 20px;
 		height: 40px;
@@ -613,6 +615,16 @@ label {
 		&::-ms-value {
 			color: $color-midnight;
 			background: none;
+		}
+	}
+	&.select-filter {
+		.input-container {
+			.wrapper {
+				border: 1px solid $color-rhino;
+				select {
+					background: $color-white;
+				}
+			}
 		}
 	}
 }
