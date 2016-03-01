@@ -25,6 +25,7 @@ var _keyDownActions = Utils.keyDownActions;
  * @param {boolean}  closeOnSelect    - close once date is selected
  * @param {function} onChange         - the callback function called when a date is selected
  * @param {string}   id               - the data-id property
+ * @param {boolean}  isRequired       - whether the field is required or not (default false)
  *
  * @example
  *
@@ -58,15 +59,17 @@ var Calendar = React.createClass({
         computableFormat: React.PropTypes.string,
         date: React.PropTypes.any,
         format: React.PropTypes.string,
+        id: React.PropTypes.string,
+        isRequired: React.PropTypes.bool,
         minView: React.PropTypes.number,
         onChange: React.PropTypes.func,
-        placeholder: React.PropTypes.string,
-        id: React.PropTypes.string
+        placeholder: React.PropTypes.string
     },
 
     getDefaultProps: function () {
         return {
-            id: "calendar"
+            id: "calendar",
+            isRequired: false
         };
     },
 
@@ -314,18 +317,22 @@ var Calendar = React.createClass({
         );
 
         var containerCss = {
-            active: this.state.isVisible
+            active: this.state.isVisible,
+            required: this.props.isRequired,
+            "value-entered": !!this.state.inputValue
         };
 
         return (
             <div className={classnames("input-calendar", containerCss)} onClick={this.toggleClick}>
-                <input type="text"
-                    data-id={this.props.id}
-                    className="input-calendar-value"
-                    value={this.state.inputValue}
-                    onBlur={this.inputBlur}
-                    onChange={this.changeDate}
-                    placeholder={this.props.placeholder} />
+                <div className="input-container">
+                    <input type="text"
+                        data-id={this.props.id}
+                        className="input-calendar-value"
+                        value={this.state.inputValue}
+                        onBlur={this.inputBlur}
+                        onChange={this.changeDate}
+                        placeholder={this.props.placeholder} />
+                </div>
                 {calendar}
             </div>
         );

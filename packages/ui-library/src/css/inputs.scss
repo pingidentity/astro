@@ -1,6 +1,6 @@
 
 
-$default-input-transition: all 0.2s;
+$default-input-transition: all 0.3s;
 
 @include placeholder-css($color-input-placeholder, normal, 0);
 
@@ -240,7 +240,7 @@ label {
 	}
 	&.input-textarea {
 		textarea {
-			padding: 10px 34px 10px 10px;
+			padding: 10px;
 			margin-top: 2px;
 		}
 		&.extended {
@@ -255,13 +255,6 @@ label {
 		}
 	}
 	&.input-text, &.input-textarea, &.input-multivalues {
-		&.no-label {
-			&.required {
-				&:before {
-					top: 5px;
-				}
-			}
-		}
 		&.short {
 			input[type=text], input[type=password] {
 				width: 75px;
@@ -1024,18 +1017,20 @@ label {
 		width: 6px;
 		z-index: 1;
 		@include border-radius(2px);
+		@include transition($default-input-transition);
 	}
 	@mixin requiredPadding {
 		font-family: $font-stack;
 		padding-left: 20px;
-		padding-right: 24px;
 	}
 	@mixin requiredPaddingEntered {
-		padding-right: 34px;
 		padding-left: 10px;
 	}
 
-	&.input-text, &.input-textarea, &.input-select {
+	&.input-text, &.input-calendar {
+		input[type=text] {
+			@include requiredPadding;
+		}
 		.input-container {
 			&:before {
 				@include requiredCss;
@@ -1045,16 +1040,12 @@ label {
 			}
 		}
 	}
-	&.input-text {
-		input {
-			@include requiredPadding;
+	&.input-calendar {
+		&:before {
+			left: 16px;
 		}
-		.input-container {
-			&:before {
-				top: 5px;
-				bottom: 5px;
-				left: 5px;
-			}
+		input[type=text].input-calendar-value {
+			padding-left: 36px;
 		}
 	}
 	&.input-textarea {
@@ -1063,6 +1054,7 @@ label {
 		}
 		.input-container {
 			&:before {
+				@include requiredCss;
 				top: 7px;
 				bottom: 8px;
 				left: 6px;
@@ -1085,6 +1077,7 @@ label {
 		}
 		.input-container {
 			&:before {
+				@include requiredCss;
 				top: 5px;
 				bottom: 7px;
 				left: 5px;
@@ -1121,11 +1114,19 @@ label {
 		}
 	}
 	&.value-entered {
-		&.input-text, &.input-textarea, &.input-select {
+		&.input-text, &.input-textarea, &.input-select, &.input-calendar {
 			.input-container {
 				&:before {
 					width: 0;
 				}
+			}
+		}
+		&.input-calendar {
+			&:before {
+				left: 10px;
+			}
+			input[type=text] {
+				padding-left: 30px;
 			}
 		}
 		&.input-multivalues {
@@ -1303,12 +1304,13 @@ a {
 		content: '\43';
 		left: 10px;
 		top: 12px;
+		@include transition($default-input-transition);
 	}
 	&:after {
 		content: "v";
 		right: 9px;
 		top: 14px;
-		@include transition((all 0.3s));
+		@include transition($default-input-transition);
 	}
 	&.active {
 		input[type=text] {
@@ -1427,7 +1429,7 @@ a {
 				-webkit-touch-callout: none;
 				font-size: 13px;
 				@include  user-select(none);
-				@include transition((all 0.3s));
+				@include transition($default-input-transition);
 
 				&.hover {
 					color: $color-input-text;
@@ -1535,16 +1537,6 @@ input[type=file] {
 		}
 		input, textarea {
 			margin: 0;
-		}
-		&.input-text {
-			&.required {
-				.input-container {
-					&:before {
-						top: 5px;
-						bottom: 5px;
-					}
-				}
-			}
 		}
 		&.input-select {
 			.input-container {

@@ -1,5 +1,7 @@
 window.__DEV__ = true;
 
+var ReactDOM = require("react-dom");
+
 jest.dontMock("../Calendar.jsx");
 
 describe("Calendar", function () {
@@ -25,5 +27,18 @@ describe("Calendar", function () {
 
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         expect(input.value).toBe(selectedDate.format("YYYY-MM-DD"));
+    });
+
+    it("renders as required", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar format="YYYY-MM-DD"
+                    date={selectedDate}
+                    computableFormat="x"
+                    closeOnSelect={true}
+                    onChange={callback}
+                    isRequired={true}/>
+        );
+
+        expect(ReactDOM.findDOMNode(component).className).toContain("required");
     });
 });
