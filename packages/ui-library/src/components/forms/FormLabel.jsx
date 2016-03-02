@@ -4,6 +4,7 @@ var React = require("react"),
 /** @class FormLabel
  * @desc Most form fields implement the same logic to display an optional label, with optional hint.
  * It is easier to consolidate this logic in one component to avoid re-inventing the wheel.
+ *
  * @param {string} [id] - The data-id for the top level dom element
  * @param {string} [className] - An optional classname string
  * @param {string} [value] - The label text.  If omitted, nothing is rendered.

@@ -4,6 +4,11 @@ var React = require("react"),
 
 
 /**
+ * @callback FormRadioGroup~onChangeCallback
+ * @param {object} selectedId - newly selected id value from original items prop
+ */
+
+/**
  * @class FormRadioGroup
  * @desc FormRadioGroup renders the any object (key/display) into a group of radio buttons
  *
@@ -14,7 +19,7 @@ var React = require("react"),
  *          label is assigned data-id attribute as follows: "_label_{id}"
  * @param {Object} items - array of objects to render (required)
  *          format: [{"id": "val", "name": "val"}, {"id": "val", "name": "val"}...]
- * @param {function} onChange - the callback function called when the selected radio button changes
+ * @param {FormRadioGroup~onChangeCallback} onChange - the callback to be triggered when the selection changed
  * @param {string} selected - the selected "id" from the items object above. If none is passed-in, all radio buttons
  *          are left unchecked
  * @param {boolean} stacked - {true} by default. When true, radios inputs are stacked vertically. When false radio

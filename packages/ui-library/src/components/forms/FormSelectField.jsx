@@ -9,7 +9,7 @@ var React = require("react"),
  * @desc A generic select (dropdown) component. Encapsulates common markup and designed to be a drop-in replacement.
  *       Options data may be either an array of objects with 'value' and 'label' properties or an object. Only the array
  *       will insure display order of options.
- * for react controlled <select>. Stateless.
+ * for react controlled `<select>`. Stateless.
  *
  * @param {function} onChange          delegate function to be called on select element onChange event (will receive same argument)
  * @param {string}   value             currently selected value

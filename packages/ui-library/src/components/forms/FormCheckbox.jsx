@@ -2,29 +2,32 @@ var React=require("react"),
     css = require("classnames"),
     HelpHint=require("../tooltips/HelpHint.jsx");
 
-    /**
-     * @class FormCheckbox
-     *
-     * @desc FormCheckbox implementation
-     * @param {bool} [checked] - setting a box as checked or not
-     * @param {string} [className] - optional class to pass
-     * @param {bool} [disabled] - disable current checkbox and style opacity
-     * @param {string} [id] - optional id to pass
-     * @param {string} [label] - label text to be displayed
-     * @param {string} [labelHelpText] - label help text to be displayed
-     * @param {string} [name] - optional name to pass
-     * @param {function} onChange - function (value) {...} required callback function from parent
-     * @param {string} [value] - optional value to pass
+/**
+ * @callback FormCheckbox~onChangeCallback
+ * @param {object} event - reactjs synthetic event object
+ */
 
-     *
-     * @example
-     *
-     *       <FormCheckbox label="Regular Checkbox"
-     *                 id="form-checkbox"
-     *                 onChange={this._changeCallback} />
-     *
-     */
-
+/**
+ * @class FormCheckbox
+ * @desc A checkbox field component.
+ *
+ * @param {bool} [checked] - setting a box as checked or not
+ * @param {string} [className] - optional class to pass
+ * @param {bool} [disabled] - disable current checkbox and style opacity
+ * @param {string} [id] - optional id to pass
+ * @param {string} [label] - label text to be displayed
+ * @param {string} [labelHelpText] - label help text to be displayed
+ * @param {string} [name] - optional name to pass
+ * @param {FormCheckbox~onChangeCallback} onChange - callback to be triggered when checkbox ticked
+ * @param {string} [value] - optional value to pass
+ *
+ * @example
+ *
+ *       <FormCheckbox label="Regular Checkbox"
+ *                 id="form-checkbox"
+ *                 onChange={this._changeCallback} />
+ *
+ */
 var FormCheckbox=React.createClass({
     propTypes: {
         checked: React.PropTypes.bool,
@@ -37,16 +40,14 @@ var FormCheckbox=React.createClass({
         onChange: React.PropTypes.func.isRequired,
         value: React.PropTypes.string
     },
+
     getDefaultProps: function () {
         return{
             disabled: false,
             id: "form-checkbox"
         };
     },
-    _handleChange: function (e) {
-        //return event to parent
-        this.props.onValueChange(e);
-    },
+
     render: function () {
         var labelHelp,
             labelCss = {};

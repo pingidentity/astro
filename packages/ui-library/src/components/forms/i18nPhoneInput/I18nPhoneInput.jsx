@@ -8,12 +8,18 @@ var _ = require("underscore");
 var cx = require("classnames");
 
 /**
+ * @callback I18nPhoneInput~onValueChange
+ * @param {string|number} dialCode - selected dial code (country code)
+ * @param {string} phoneNumber - phone number
+ */
+
+/**
  * @class I18nPhoneInput
  * @desc an international phone number input with dial code drop down
  *
  * @param {string} [id] data-id to set on the top HTML element (defaults to "i18n-phone-input")
  * @param {string} [className] CSS class to set on the top HTML element
- * @param {function} [onValueChange] callback executed when dialCode or phone number input change
+ * @param {I18nPhoneInput~onValueChange} [onValueChange] callback to be triggered when dialCode or phone number change
  * @param {string} [countryCode] the country code to be selected by default (defaults to "us" as in USA)
  * @param {string} [dialCode] the dial code to be selected by default (defaults to "1"/USA)
  * @param {string} [phoneNumber] the initial value of the phone number excluding dial code
@@ -43,6 +49,7 @@ var I18nPhoneInput = React.createClass({
      * Handles value change
      * @method I18nPhoneInput#_onChange
      * @param {Object} e The event object
+     * @private
      */
     _onChange: function (e) {
         var val = e.target.value;
@@ -58,6 +65,7 @@ var I18nPhoneInput = React.createClass({
      * Closes list if click originates elsewhere
      * @method I18nPhoneInput#_onClick
      * @param  {Object} e The event object
+     * @private
      */
     _onClick: function (e) {
         if (!e.target.dataset.hasOwnProperty("target") && e.target.dataset.target !== "list-select") {
@@ -71,6 +79,7 @@ var I18nPhoneInput = React.createClass({
      * Handles click on a country in the list
      * @method I18nPhoneInput#_onCountryClick
      * @param  {Object} country The clicked country item
+     * @private
      */
     _onCountryClick: function (country) {
         this.setState({
@@ -85,6 +94,7 @@ var I18nPhoneInput = React.createClass({
      * Returns a country's data by code
      * @param  {String} code The iso2 country code
      * @return {Object}      The country data
+     * @private
      */
     _findByCountryCode: function (code) {
         return _.findWhere(data, { iso2: code });
@@ -94,6 +104,7 @@ var I18nPhoneInput = React.createClass({
      * Returns a country's data by code
      * @param  {String} code The dial code
      * @return {Object}      The country data
+     * @private
      */
     _findByDialCode: function (code) {
         return _.findWhere(data, { dialCode: code });
@@ -102,6 +113,7 @@ var I18nPhoneInput = React.createClass({
     /**
      * Toggles the country list
      * @method I18nPhoneInput#_toggleList
+     * @private
      */
     _toggleList: function () {
         this.setState({
@@ -112,6 +124,7 @@ var I18nPhoneInput = React.createClass({
     /**
      * Returns an error message if invalid
      * @method I18nPhoneInput#_validatePhoneNumber
+     * @private
      * @param  {String}      str The user input
      * @return {null|String}     Either an error message or null
      */

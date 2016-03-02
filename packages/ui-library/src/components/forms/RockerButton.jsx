@@ -1,19 +1,24 @@
 var React = require("react"),
     _ = require("underscore");
+/**
+ * @callback RockerButton~onChangeCallback
+ * @param {string} label - selected label from labels array prop
+ * @param {number} labelIndex - index of selected label from labels array prop
+ */
 
 /**
  * @class RockerButton
  *
- * @desc Rocker buttons implementation, supports 2 to 4 buttons (current CSS restriction)
+ * @desc Rocker buttons implementation, supports 2 to 4 buttons (current CSS restriction).
  *
- * @param {string} labels - array of string labels to use as button titles
+ * @param {array} labels - array of strings. labels to use as button titles
  * @param {number} [selectedIndex] - The index of the selectedIndex label
  * @param {string} [selected] - The text value of item to select initially.  Not this property is only valid if controlled
  *   is not true.  Controlled components must use selectedIndex
- * @param {function} [onChange] - function (selectedLabel) {...} delegate to call when selection changed.
+ * @param {RockerButton~onChangeCallback} [onChange] - function (selectedLabel) {...} delegate to call when selection changed.
  * @param {string} [id] - optional id to pass
  * @param {string} [className] - optional class to pass
- * @param {bool} [controlled] - A boolean to enable the component to be externally managed.  True will relinquish
+ * @param {boolean} [controlled] - A boolean to enable the component to be externally managed.  True will relinquish
  *   control to the component's owner.  False or not specified will cause the component to manage state internally
  *   but still execute the onChange callback in case the owner is interested.
  *

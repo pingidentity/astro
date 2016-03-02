@@ -5,16 +5,25 @@ var React = require("react"),
     _ = require("underscore");
 
 /**
+ * @callback DropDownButton~onSelectCallback
+ * @param {object} selectedValue - selected value from menu
+ */
+
+/**
+ * @callback DropDownButton~onToggleCallback
+ * @param {boolean} isOpen - current open/closed status before click
+ */
+
+/**
  * @class DropDownButton
- *
  * @desc Button which triggers drop down menu using list of provided options.
  *
  * @param {string} options - array of string labels to use as drop down options
- * @param {function} onSelect - function (value) {...} delegate to call when selection changed.
- *                                Will recieve selected value from options list.
- * @param {function} [onToggle] - function (value) {...} delegate to call when open/closed state changed.
+ * @param {DropDownButton~onSelectCallback} onSelect - callback to be triggered when selection changed.
+ *                                                     Will recieve selected value from options list.
+ * @param {DropDownButton~onToggleCallback} [onToggle] - callback to be triggered when open/closed state changed.
  *                                Used only with stateless mode. Will receive current open status value.
- * @param {function} [open=false] - boolean state of open/closed menu. Used only in stateless mode.
+ * @param {bool} [open=false] - boolean state of open/closed menu. Used only in stateless mode.
  * @param {string} [id] - optional id to pass to be used as data-id attribute value
  * @param {string} [className] - optional class to pass to style top level container
  * @param {string} [label="Add"] - label text for button

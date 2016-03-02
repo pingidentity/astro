@@ -66,28 +66,6 @@ module.exports = React.createClass({
  * is grouped or not. Grouped data searching will apply to the group whereas
  * non grouped data will search on the display value.
  *
- * @param {string} [className] - extra css classes to be applied
- * @param {bool} [hideUnchecked] - status of 'hide uncheck' toggle
- * @param {array} items - actual data to show, array of objects, triplets in a format:
- *
- *      {"id": 1, "name": "Salesforce", "group": "Sales and Marketing"}
- *
- * @param {FormCheckboxList~msgCallback} labelSelectAll - callback to get actual message for 'select all' label.
- * @param {FormCheckboxList~msgCallback} labelDeselectAll - callback to get actual message for 'unselect all' label.
- * @param {string} labelHideUnselected - text for toggle label.
- * @param {string} labelSearchPlaceholder - text query text field placeholder.
- * @param {array} [selected] - arrays of IDs (from items) that are currently selected.
- * @param {FormCheckboxList~selectionCallback} onSelectionChange - callback to be triggered when items
- *                                                                 selected/deselected.
- *
- * @param {string} [queryString] - query field value
- * @param {FormCheckboxList~queryCallback} onQueryChange - callback to be triggered when items
- *                                                         search field changed.
- * @param {FormCheckboxList~toggleCallback} onVisibilityChange - callback to be triggered toggle control is changed.
- * @param {bool} [controlled=false] - A boolean to enable the component to be externally managed.  True will relinquish
- *   control to the components owner.  False or not specified will cause the component to manage state internally
- *   but still execute the onToggle callback in case the owner is interested.
- *
  *
  *
  *     NON GROUPED DATASET
@@ -114,26 +92,31 @@ module.exports = React.createClass({
  *     [ ] Data Object 7 Name         [ ] Data Object 8 Name          [ ] Data Object 9 Name
  *
  *
- *     [
- *         { id: "value", name: "value", group: "group name" },
- *         { id: "value", name: "value", group: "group name" },
- *         ...
- *     ]
- *      are not already selected
- *      are already selected
- *      search field
- *     the selecting or delselecting items.  Provides Array of selected ids as its
- *     first and only argument to the callback : [id1, id2, id3...]
- *     text into the search field.  Provides the query text as the first argument
- *     and the filtered ids as the second argument to the callback.
- *     selection of whether to show or hide unchecked items. Sends a boolean flag
- *     as its only argument to the callback.
- *     [id1, id2, id3...]
- *     items
+ *
+ * @param {string} [className] - extra css classes to be applied
+ * @param {bool} [hideUnchecked] - status of 'hide uncheck' toggle
+ * @param {array} items - actual data to show, array of objects, triplets in a format:
+ *
+ * `{"id": 1, "name": "Salesforce", "group": "Sales and Marketing"}`
+ *
+ * @param {FormCheckboxList~msgCallback} labelSelectAll - callback to get actual message for 'select all' label.
+ * @param {FormCheckboxList~msgCallback} labelDeselectAll - callback to get actual message for 'unselect all' label.
+ * @param {string} labelHideUnselected - text for toggle label.
+ * @param {string} labelSearchPlaceholder - text query text field placeholder.
+ * @param {array} [selected] - arrays of IDs (from items) that are currently selected.
+ * @param {FormCheckboxList~selectionCallback} onSelectionChange - callback to be triggered when items
+ *                                                                 selected/deselected.
+ *
+ * @param {string} [queryString] - query field value
+ * @param {FormCheckboxList~queryCallback} onQueryChange - callback to be triggered when items
+ *                                                         search field changed.
+ * @param {FormCheckboxList~toggleCallback} onVisibilityChange - callback to be triggered toggle control is changed.
+ * @param {bool} [controlled=false] - A boolean to enable the component to be externally managed.  True will relinquish
+ *   control to the components owner.  False or not specified will cause the component to manage state internally
+ *   but still execute the onToggle callback in case the owner is interested.
  *
  *
  * @example
- * Sample usage of data and callback:
  *
  *     _onSelectionChange: function(selectedIds) {
  *         this.setState({

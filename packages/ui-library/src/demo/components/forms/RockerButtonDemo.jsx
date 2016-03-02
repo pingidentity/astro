@@ -5,24 +5,26 @@ var RockerButtonDemo = React.createClass({
 
     getInitialState: function () {
         return {
-            selectedLabel: "None."
+            selectedLabel: "Label One",
+            selectedIndex: 0
         };
     },
 
-    _changeSubview: function (selectedLabel) {
+    _changeSubview: function (selectedLabel, selectedIndex) {
         this.setState({
-            selectedLabel: selectedLabel
+            selectedLabel: selectedLabel,
+            selectedIndex: selectedIndex
         });
     },
 
     render: function () {
-        
+
         return (
             <div>
                 <RockerButton onChange={this._changeSubview}
                     labels={["Label One", "Label Two", "Label Three", "Label Four"]} />
-                
-                <div>Selected rocker index = {this.state.selectedLabel}</div>
+
+                <div>Selected rocker label = {this.state.selectedLabel}, index = {this.state.selectedIndex}</div>
             </div>
         );
     }

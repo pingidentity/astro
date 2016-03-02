@@ -50,8 +50,8 @@ var Demo = React.createClass({
         },
         {
             name: "Form - Checkbox List (stateless)",
-            demo: require("./components/forms/FormCheckboxListStatelessDemo.jsx"),
-            pathToCode: "components/forms/FormCheckboxListStateless.jsx"
+            demo: require("./components/forms/FormCheckboxListDemo.jsx"),
+            pathToCode: "components/forms/FormCheckboxList.jsx"
 
         },
         {
@@ -169,11 +169,6 @@ var Demo = React.createClass({
             name: "Calendar",
             demo: require("./components/calendars/CalendarDemo.jsx"),
             pathToCode: "components/calendars/Calendar.jsx"
-        },
-        {
-            name: "Multiselect",
-            demo: require("./components/forms/MultiselectDemo.jsx"),
-            pathToCode: "components/forms/Multiselect.jsx"
         },
         {
             name: "Multivalues",

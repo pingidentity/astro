@@ -2,21 +2,28 @@ var React = require("react"),
     css = require("classnames"),
     _ = require("underscore");
 
+/**
+ * @callback Toggle~onToggleCallback
+ * @param {boolean} newState - new toggle state after switch
+ * @param {object} paramObj - context, paramObj from original props
+ * @returns {boolean} shouldClose - true if toggle can switch its state, false otherwise
+ */
+
  /**
  * @class Toggle
  * @desc Toggles between two states on click.  Is either "off" or "on".
  *
- * @param {function} onToggle - function (newStatus, paramObj) {...}  delegate to call when selection changed.
+ * @param {Toggle~onToggleCallback} [onToggle] - callback to be triggered toggle is clicked.
  *          If call returns true then toggle will be toggled, otherwise toggle will
  *          not be toggled.
- * @param {object} paramObj - parameter object to pass to onToggle delegate method.
- * @param {bool} toggled - Initial toggle state; set true for "on".  Default: false.
- * @param {bool} value - toggle state (true/false), used to manage state outside of Toggle component, must be used in
+ * @param {object} [paramObj] - parameter object to pass to onToggle delegate method.
+ * @param {boolean} [toggled] - Initial toggle state; set true for "on".  Default: false.
+ * @param {boolean} [value] - toggle state (true/false), used to manage state outside of Toggle component, must be used in
  *          conjunction with onToggle callback to receive state updates.
- * @param {bool} disabled - If disabled then the toggle will be styled with a "disabled" class
+ * @param {boolean} [disabled] - If disabled then the toggle will be styled with a "disabled" class
  *          and will not be clickable.  Default: false.
- * @param {string} className - extra CSS classes to be applied
- * @param {string} id - it is used for a unique data-id
+ * @param {string} [className] - extra CSS classes to be applied
+ * @param {string} [id] - it is used for a unique data-id
  * @example
  *    <Toggle className="small" onToggle={this._toggleChanged} paramObj={someObject} toggled={true} />
  *

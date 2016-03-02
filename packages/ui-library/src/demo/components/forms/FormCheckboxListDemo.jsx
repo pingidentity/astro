@@ -1,7 +1,7 @@
 var React = require("react"),
     FormCheckboxList = require("../../../components/forms/FormCheckboxList.jsx");
 
-var FormCheckboxListStatelessDemo = React.createClass({
+var FormCheckboxListDemo = React.createClass({
 
     getInitialState: function () {
         return {
@@ -64,4 +64,4 @@ var FormCheckboxListStatelessDemo = React.createClass({
 });
 
 
-module.exports = FormCheckboxListStatelessDemo;
+module.exports = FormCheckboxListDemo;

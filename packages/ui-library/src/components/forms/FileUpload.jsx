@@ -41,10 +41,7 @@ var ErrorCodes = {
 
 /**
  * @class FileUpload
- *
- * @desc
- * Component to render an <code>&lt;input type="file" /&gt;</code> element.
- *
+ * @desc Component to render an <code>&lt;input type="file" /&gt;</code> element.
  * Supports the upload of a single file and includes:
  *   - generation of a thumbnail image using the HTML5 File API (where available)
  *   - the File API is also used to provide validation of the size and type of the uploaded
