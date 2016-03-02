@@ -1,25 +1,95 @@
 var React = require("react"),
     css = require("classnames"),
     FormTextField = require("./FormTextField.jsx"),
-    LazyLoader = require("../general/LazyLoader.jsx"),
     Toggle = require("./Toggle.jsx"),
+    If = require("../general/If.jsx"),
     _ = require("underscore");
+
+var _includesIgnoreCase = function (propName, substr) {
+    return function (item) {
+        return item[propName].toUpperCase().indexOf(substr.toUpperCase()) !== -1;
+    };
+};
+
+module.exports = React.createClass({
+
+    propTypes: {
+        controlled: React.PropTypes.bool
+    },
+
+    getDefaultProps: function () {
+        return {
+            controlled: false
+        };
+    },
+
+    render: function () {
+        return (
+            this.props.controlled
+                ? <Stateless {...this.props} />
+                : <Stateful {...this.props} />);
+    }
+});
+
+/**
+ * @callback FormCheckboxList~msgCallback
+ * @param {number} count - visible items count
+ */
+
+/**
+ * @callback FormCheckboxList~selectionCallback
+ * @param {array} newSelection - array of selected IDs (from items)
+ */
+
+/**
+ * @callback FormCheckboxList~queryCallback
+ * @param {string} newQueryString - field value
+ */
+
+/**
+ * @callback FormCheckboxList~toggleCallback
+ * @param {bool} toggleState - current state of toggle to be inverted
+ * @param
+ */
 
 /**
  * @class FormCheckboxList
- * @description FormCheckboxList renders a list checkbox items from an array of
- *     objects, with a searchable box to filter the displayed checkboxed based
- *     on the input query.
- *     <br>
- *     This component also supports dataset grouping, if the group is specified
- *     for each, and will adjust the UI to display the data items in group-able
- *     chunks.
- *     <br>
- *     The search field will search on the dataset depending on whether the data
- *     is grouped or not. Grouped data searching will apply to the group whereas
- *     non grouped data will search on the display value.
- *     <br>
- *     <pre>
+ * @desc FormCheckboxList renders a list checkbox items from an array of
+ * objects, with a searchable box to filter the displayed checkboxed based
+ * on the input query.
+ *
+ * This component also supports dataset grouping, if the group is specified
+ * for each, and will adjust the UI to display the data items in group-able
+ * chunks.
+ *
+ * The search field will search on the dataset depending on whether the data
+ * is grouped or not. Grouped data searching will apply to the group whereas
+ * non grouped data will search on the display value.
+ *
+ * @param {string} [className] - extra css classes to be applied
+ * @param {bool} [hideUnchecked] - status of 'hide uncheck' toggle
+ * @param {array} items - actual data to show, array of objects, triplets in a format:
+ *
+ *      {"id": 1, "name": "Salesforce", "group": "Sales and Marketing"}
+ *
+ * @param {FormCheckboxList~msgCallback} labelSelectAll - callback to get actual message for 'select all' label.
+ * @param {FormCheckboxList~msgCallback} labelDeselectAll - callback to get actual message for 'unselect all' label.
+ * @param {string} labelHideUnselected - text for toggle label.
+ * @param {string} labelSearchPlaceholder - text query text field placeholder.
+ * @param {array} [selected] - arrays of IDs (from items) that are currently selected.
+ * @param {FormCheckboxList~selectionCallback} onSelectionChange - callback to be triggered when items
+ *                                                                 selected/deselected.
+ *
+ * @param {string} [queryString] - query field value
+ * @param {FormCheckboxList~queryCallback} onQueryChange - callback to be triggered when items
+ *                                                         search field changed.
+ * @param {FormCheckboxList~toggleCallback} onVisibilityChange - callback to be triggered toggle control is changed.
+ * @param {bool} [controlled=false] - A boolean to enable the component to be externally managed.  True will relinquish
+ *   control to the components owner.  False or not specified will cause the component to manage state internally
+ *   but still execute the onToggle callback in case the owner is interested.
+ *
+ *
+ *
  *     NON GROUPED DATASET
  *
  *     [ search input field   x ]     [x] Check All               [O ] Hide Unchecked Toggle
@@ -42,29 +112,25 @@ var React = require("react"),
  *     [ ] Data Object 1 Name         [ ] Data Object 2 Name          [ ] Data Object 3 Name
  *     [ ] Data Object 4 Name         [ ] Data Object 5 Name          [ ] Data Object 6 Name
  *     [ ] Data Object 7 Name         [ ] Data Object 8 Name          [ ] Data Object 9 Name
- *     </pre>
  *
- * @param {string} className - name of css class(s) to add to the parent container
- * @param {string} groupName - the name of the checkbox group name
- * @param {Object} items - array of objects in the following format:
+ *
  *     [
  *         { id: "value", name: "value", group: "group name" },
  *         { id: "value", name: "value", group: "group name" },
  *         ...
  *     ]
- * @param {string} labelSelectAll - a function which takes the current item count
- *     and return a label for the select-all link when all checkboxes
- *     are not already selected
- * @param {string} labelDeselectAll - a function which takes the current item count
- *     and return a label for the select-all link when all checkboxes
- *     are already selected
- * @param {string} labelHideUnselected - label for the hide-checked toggle
- * @param {string} labelSearchPlaceholder - placeholder for the search query field
- * @param {function} onChange - the callback function to capture and process
+ *      are not already selected
+ *      are already selected
+ *      search field
  *     the selecting or delselecting items.  Provides Array of selected ids as its
  *     first and only argument to the callback : [id1, id2, id3...]
- * @param {string} [selected] - list of selected IDs to represent checked items
+ *     text into the search field.  Provides the query text as the first argument
+ *     and the filtered ids as the second argument to the callback.
+ *     selection of whether to show or hide unchecked items. Sends a boolean flag
+ *     as its only argument to the callback.
  *     [id1, id2, id3...]
+ *     items
+ *
  *
  * @example
  * Sample usage of data and callback:
@@ -72,6 +138,16 @@ var React = require("react"),
  *     _onSelectionChange: function(selectedIds) {
  *         this.setState({
  *             selectedCheckboxIds: selectedIds
+ *         });
+ *     }
+ *     _onQueryChange: function(queryString) {
+ *         this.setState({
+ *             queryString: queryString
+ *         });
+ *     }
+ *     _onVisibilityChange: function(hideUnchecked) {
+ *         this.setState({
+ *             selectedCheckboxIds: !hideUnchecked
  *         });
  *     }
  *
@@ -90,259 +166,291 @@ var React = require("react"),
  *     <FormCheckboxList
  *         groupName="mycheckboxes"
  *         items={myCheckboxes}
- *         labelSelectAll='Select All'
- *         labelDeselectAll='Deselect All'
- *         labelHideUnselected='Hide Unselected'
- *         labelSearchPlaceholder='Search'
- *         onChange={this._onSelectionChange}
+ *         labelSelectAll="Select All"
+ *         labelDeselectAll="Deselect All"
+ *         labelHideUnselected="Hide Unselected"
+ *         onSelectionChange={this._onSelectionChange}
+ *         onQueryChange={this._onQueryChange}
+ *         onVisibilityChange={this._onVisibilityChange}
+ *         queryString={this.state.queryString}
  *         selected={this.state.selectedCheckboxIds} />
- *
  */
-
-var FormCheckboxList = React.createClass({
+var Stateless = React.createClass({
 
     propTypes: {
         className: React.PropTypes.string,
-        groupName: React.PropTypes.string.isRequired,
+        hideUnchecked: React.PropTypes.bool,
         items: React.PropTypes.array.isRequired,
         labelSelectAll: React.PropTypes.func.isRequired,
         labelDeselectAll: React.PropTypes.func.isRequired,
         labelHideUnselected: React.PropTypes.string.isRequired,
         labelSearchPlaceholder: React.PropTypes.string.isRequired,
+        onSelectionChange: React.PropTypes.func.isRequired,
+        onQueryChange: React.PropTypes.func.isRequired,
+        onVisibilityChange: React.PropTypes.func.isRequired,
+        queryString: React.PropTypes.string,
         selected: React.PropTypes.array,
-        useLazyLoader: React.PropTypes.bool
     },
 
-    _toggleCheckedAll: function (e) {
-        var updatedSelectionList = this.props.selected;
-        // if all dataobjects were already checked, we need to reset the selection list,
-        // otherwise we rebuild the selection list with all dataobject ids included
-        var dataList = this.state.query !== "" ? this.state.filteredItems : this.props.items;
+    _isAllSelected: function (visibleItems, isSelected) {
+        return _.every(visibleItems, isSelected);
+    },
 
-        // apply the check all/uncheck all functionality based on the current state of the checkall variable
-        // checkall gets reset whenever the filter has changed or if checkall/uncheckall has been clicked
-        if (this.state.checkAll) {
-            // add items not already in the selected list into the selected list from the filtered list
-            _.each(dataList, function (item) {
-                if (!_.contains(updatedSelectionList, item.id)) {
-                    updatedSelectionList.push(item.id);
-                }
-            }, updatedSelectionList);
-        } else {
-            // remove all items in the filtered list from the selected list
-            var dataListUuids = [];
+    /**
+     * @desc Toggle checking all checkboxes.
+     *
+     * @param {object} visibleItems currently displayed items on screen
+     * @param {function} selector - function(item) {} - delegate to check if item is selected
+     * @param {array} e the event object
+     * @private
+     */
+    _toggleCheckAll: function (visibleItems, selector, e) {
 
-            _.each(dataList, function (item) {
-                dataListUuids.push(item.id);
-            }, dataListUuids);
+        e.preventDefault();
 
-            updatedSelectionList = _.difference(updatedSelectionList, dataListUuids);
+        var newIds = _.pluck(visibleItems, "id");
+        var newSelection = [];
+
+        //all visible items were checked (new = previous + visible)
+        if (!this._isAllSelected(visibleItems, selector)) {
+            newSelection = _.union(this.props.selected, newIds);
         }
 
-        this.setState({
-            checkAll: !this.state.checkAll,
-            selection: updatedSelectionList
-        });
-        this.props.onChange(updatedSelectionList);
-        e.preventDefault();
+        //all visible items were unchecked (new = previous - visible)
+        else {
+            newSelection = _.difference(this.props.selected, newIds);
+        }
+
+        this.props.onSelectionChange(newSelection);
     },
 
-    _onSelectionChange: function (value) {
+    /**
+     * @desc Fired when the selection changes.
+     *
+     * @param {string} value the new value
+     * @param {function} isSelected - function(item) {..} will return if item selected or not
+     * @private
+     */
+    _onSelectionChange: function (value, isSelected) {
         // add to the array of selected items (if it does not exist) or remove it (if it does exist)
         var updatedSelection;
 
-        if (_.contains(this.props.selected, value)) {
-            updatedSelection = _.filter(this.props.selected, function (selectedId) {
-                return selectedId !== value;
-            });
-            if (!this.state.checkAll) {
-                this.setState({ checkAll: true });
-            }
+        if (isSelected(value)) {
+            updatedSelection = _.without(this.props.selected, value.id);
         } else {
-            updatedSelection = this.props.selected.concat([value]);
+            updatedSelection = this.props.selected.concat([value.id]);
         }
 
-        //this.setState({selection: updatedSelection});
-        this.props.onChange(updatedSelection);
+        this.props.onSelectionChange(updatedSelection);
     },
 
     _onHideUncheckedToggle: function () {
-        this.setState({ hideUnchecked: !this.state.hideUnchecked });
+        this.props.onVisibilityChange(this.props.hideUnchecked);
         return true;
     },
 
-    // updates the filtered list and keeps a copy of this for checkall useage
-    _searchOnType: function (event) {
-        var query = event.target.value;
-        this._setSearch(query);
+    /**
+     * @desc Search when the value in the search box changes.
+     *
+     * @param {object} e the event object
+     * @private
+     */
+    _searchOnType: function (e) {
+        this.props.onQueryChange(e.target.value);
     },
 
-    _clearSearch: function () {
-        this.setState({
-            checkAll: true,
-            query: "",
-            filteredItems: []
-        });
-    },
-
-    _checkMultipleGroups: function (list) {
-        // check whether the dataobject set contains multiple groups defined
-        if (list.length > 1) {
-            var baseComparison = list[0].group;
-
-            // check if at least one difference is found
-            for (var i = 1; i < list.length; i += 1) {
-                if (list[i].group !== baseComparison) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    },
-
-    _getCheckboxNodes: function () {
+    /**
+     * @desc returns list of react nodes to be displayed based on current data state
+     * @param {object} visibleItems - items grouped by group names
+     * @param {function} isSelected - delegate to check if item is selected
+     * @param {boolean} useGrouping - is grouping should be used
+     *
+     * @return {array} list of react nodes
+     *
+     * @private
+     */
+    _getCheckboxNodes: function (visibleItems, isSelected, useGrouping) {
         var self = this;
-        var dataList = this.state.query !== "" ? this.state.filteredItems : this.props.items;
-        var groupNameComparison = null;
 
-        var hasMultipleGroups = this._checkMultipleGroups(this.props.items);
+        return _.map(visibleItems, function (items, groupName) {
+            return _.map(items, function (item, index) {
+                var checked = isSelected(item);
 
-        // Sort the list by the group property if we have multiple groups
-        if (hasMultipleGroups) {
-            dataList = _.sortBy(dataList, function (item) {
-                return item.group === null ? "" : item.group.toLowerCase();
-            });
-        }
+                // hide elements if they aren't checked and the global "hide unchecked" is set to true
+                if (!self.props.hideUnchecked || checked) {
+                    var onChange = _.partial(self._onSelectionChange, item, isSelected);
+                    var onGroupClick = _.partial(self.props.onQueryChange, groupName);
 
-        return _.map(dataList, function (item, index) {
-
-            var checked = _.contains(self.props.selected, item.id);
-
-            // hide elements if they aren't checked and the global 'hide unchecked' is set to true
-            if (self.state.hideUnchecked && !checked) {
-                return;
-            } else {
-                var onChange = _.partial(self._onSelectionChange, item.id);
-
-                if (hasMultipleGroups) {
-                    var divider;
-
-                    // check for a non null group name which has not already been 'labeled', if a group label is
-                    // found, insert a new heading label and adjust the current group name variable for the next
-                    // item in the loop
-                    if (item.group !== null && item.group !== groupNameComparison) {
-                        var setSearchClick = _.partial(self._setSearch, item.group);
-                        var dataIdLabel = "data-label-" + item.group;
-                        divider = (
-                            <div data-id={dataIdLabel} className="item-head"
-                                 onClick={setSearchClick}>{item.group}</div>
-                        );
-                        groupNameComparison = item.group;
-                    }
+                    return (
+                        <div key={item.id + "-" + index}>
+                            <If test={useGrouping && index === 0}>
+                                <div data-id={"data-label-" + groupName} className="item-head" onClick={onGroupClick}>
+                                    {groupName}
+                                </div>
+                            </If>
+                            <label className="input-checkbox">
+                                <span className="label-text">{item.name}</span>
+                                <input data-id="checkbox" type="checkbox" name={groupName}
+                                       value={item.id} onChange={onChange} checked={checked}/>
+                                <div className="icon"></div>
+                            </label>
+                        </div>
+                    );
                 }
-
-                return (
-                    <div key={item.id + index}>
-                        {divider}
-                        <label className="input-checkbox">
-                            <span className="label-text">{item.name}</span>
-                            <input type="checkbox" name={self.props.groupName}
-                                   value={item.id} onChange={onChange} checked={checked}/>
-                            <div className="icon"></div>
-                        </label>
-                    </div>
-                );
-            }
-        }, groupNameComparison);
-    },
-
-    _setSearch: function (queryValue) {
-        var itemResults = [];
-        var groupResults = [];
-
-        var hasMultipleGroups = this._checkMultipleGroups(this.props.items);
-
-        if (hasMultipleGroups) {
-            groupResults = _.filter(this.props.items, function (item) {
-                return item.group.toUpperCase().indexOf(queryValue.toUpperCase()) !== -1;
-            }, queryValue);
-        }
-
-        itemResults = _.filter(this.props.items, function (item) {
-            return item.name.toUpperCase().indexOf(queryValue.toUpperCase()) !== -1;
-        }, queryValue);
-
-        this.setState({
-            checkAll: true,
-            query: queryValue,
-            filteredItems: itemResults.concat(groupResults)
+            });
         });
     },
 
-    getInitialState: function () {
+    /**
+     * @desc Filter currently visible data on screen based on search string, toggles state, e.t.c.
+     * @param {function} isItemSelected - delegate to check if item is selected
+     * @param {boolean} useGrouping - if grouping should be used
+     * @returns {array} the currently visible list of items
+     * @private
+     */
+    _filterVisible: function (isItemSelected, useGrouping) {
+        var items = this.props.hideUnchecked ? _.filter(this.props.items, isItemSelected) : this.props.items;
+
+        var itemResults = [],
+            groupResults = [];
+
+        if (this.props.queryString) {
+
+            if (useGrouping) {
+                groupResults = _.filter(items, _includesIgnoreCase("group", this.props.queryString));
+            }
+
+            itemResults = _.filter(items, _includesIgnoreCase("name", this.props.queryString));
+
+            return _.uniq(itemResults.concat(groupResults));
+        }
+
+        return items;
+
+    },
+
+    getDefaultProps: function () {
         return {
-            selection: this.props.selected || [],
-            query: "",
-            checkAll: true,
-            hideUnchecked: false,
-            filteredItems: []
+            selected: [],
+            queryString: "",
+            hideUnchecked: false
         };
     },
 
     render: function () {
-        var dataList = this.state.query !== "" ? this.state.filteredItems : this.props.items;
-        var listCount = dataList.length;
-        var checkUncheckLabel = this.state.checkAll
-                ? this.props.labelSelectAll(listCount)
-                : this.props.labelDeselectAll(listCount);
         var containerCss = {};
+
+        var groupedItems = _.groupBy(this.props.items, "group");
+        var useGrouping = _.keys(groupedItems).length > 1;
+
+        //[1,2,3] -> {1:1, 2:2, 3:2}  - index selection
+        var selection = _.object(this.props.selected, this.props.selected);
+        var selector = function (item) {
+            return _.has(selection, item.id);
+        };
+
+        var visibleItems = this._filterVisible(selector, useGrouping);
+
+        var toDisplay = _.chain(groupedItems)
+            .mapObject(function (items) { return _.intersection(items, visibleItems); }) //remove all invisible items
+            .pick(function (items) { return items.length > 0; }) //keep only not empty
+            .value();
+
+        var itemNodes = this._getCheckboxNodes(toDisplay, selector, useGrouping);
+
+        var selectAllLabel = this._isAllSelected(visibleItems, selector)
+            ? this.props.labelDeselectAll(visibleItems.length)
+            : this.props.labelSelectAll(visibleItems.length);
 
         if (this.props.className) {
             containerCss[this.props.className] = true;
         }
 
-        var items = this.props.useLazyLoader
-            ? (
-                <LazyLoader items={this._getCheckboxNodes()} limit={100} classNames="options" />
-            )
-            : (
-                <div className="options">
-                    {this._getCheckboxNodes()}
-                </div>
-            );
-
         return (
             <div className={css("checkbox-list", containerCss)}>
                 <div className="input-row">
+
                     <FormTextField
                         className="search"
                         referenceName="dataobject-search"
                         originalValue=""
                         onChange={this._searchOnType}
-                        value={this.state.query}
-                        placeholder={this.props.labelSearchPlaceholder} />
+                        value={this.props.queryString}
+                        placeholder={this.props.labelSearchPlaceholder}/>
 
                     <div className="actions">
-                        <a href="#" data-id="check-all" className="check-all" onClick={this._toggleCheckedAll}>
-                            {checkUncheckLabel}
+                        <a href="#" data-id="check-all" className="check-all"
+                           onClick={_.partial(this._toggleCheckAll, visibleItems, selector) }>
+                            {selectAllLabel}
                         </a>
-
                         <div className="toggle-container">
                             {this.props.labelHideUnselected}
-                            <Toggle className="small" data-id="hide-unchecked"
-                                    onToggle={this._onHideUncheckedToggle}
-                                    toggled={this.state.hideUnchecked} />
+                            <Toggle
+                                className="small"
+                                id="hide-unchecked"
+                                onToggle={this._onHideUncheckedToggle}
+                                toggled={this.props.hideUnchecked}/>
                         </div>
                     </div>
                 </div>
 
                 <div data-id="dataobjects" className="conditions-multiselect">
-                    {items}
+                    <div className="options">
+                        {itemNodes}
+                    </div>
                 </div>
             </div>
         );
     }
 });
 
-module.exports = FormCheckboxList;
+var Stateful = React.createClass({
+
+    _onSelectionChange: function (selectedIds) {
+        var self = this;
+
+        this.setState({
+            selected: selectedIds
+        }, function () {
+            self.props.onSelectionChange(selectedIds);
+        });
+    },
+
+    _onQueryChange: function (queryString) {
+        this.setState({
+            queryString: queryString
+        });
+    },
+
+    _onVisibilityChange: function (hideUnchecked) {
+        this.setState({
+            hideUnchecked: !hideUnchecked
+        });
+    },
+
+    componentWillMount: function () {
+        this.setState({
+            selected: this.props.selected
+        });
+    },
+
+    getInitialState: function () {
+        return {
+            selected: [],
+            hideUnchecked: false,
+            queryString: ""
+        };
+    },
+
+    render: function () {
+        return (
+            <Stateless {...this.props} onSelectionChange={this._onSelectionChange}
+                                       onQueryChange={this._onQueryChange}
+                                       onVisibilityChange={this._onVisibilityChange}
+                                       selected={this.state.selected}
+                                       queryString={this.state.queryString}
+                                       hideUnchecked={this.state.hideUnchecked}
+            />
+        );
+    }
+});

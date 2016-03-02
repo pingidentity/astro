@@ -1,5 +1,5 @@
 var React = require("react"),
-    FormCheckboxListStateless = require("../../../components/forms/FormCheckboxListStateless.jsx");
+    FormCheckboxList = require("../../../components/forms/FormCheckboxList.jsx");
 
 var FormCheckboxListStatelessDemo = React.createClass({
 
@@ -31,21 +31,21 @@ var FormCheckboxListStatelessDemo = React.createClass({
 
     render: function () {
         var checkboxItems = [
-            { name: "Checkbox 1", id: 1, group: "Group A" },
-            { name: "Checkbox 2", id: 2, group: "Group A" },
-            { name: "Checkbox 3", id: 3, group: "Group B" },
             { name: "Checkbox 4", id: 4, group: "Group B" },
+            { name: "Checkbox 1", id: 1, group: "Group A" },
+            { name: "Checkbox 3", id: 3, group: "Group B" },
+            { name: "Checkbox 2", id: 2, group: "Group A" },
             { name: "Checkbox 5", id: 5, group: "Group B" }
         ];
 
         return (
                 <div>
-                    <FormCheckboxListStateless
-                        groupName="aps_condition_type"
+                    <FormCheckboxList
+                        controlled={true}
                         hideUnchecked={this.state.hideUnchecked}
                         items={checkboxItems}
-                        labelSelectAll="Select All"
-                        labelDeselectAll="Deselect All"
+                        labelSelectAll={count => `Select ${count} items`}
+                        labelDeselectAll={count => `Deselect ${count} items`}
                         labelHideUnselected="Hide Unselected"
                         labelSearchPlaceholder="Search"
                         onSelectionChange={this._onSelectionChange}
@@ -55,10 +55,9 @@ var FormCheckboxListStatelessDemo = React.createClass({
                         selected={this.state.selectedIds}
                     />
                     <div>
-                        Selected Checkbox IDs = {this.state.selectedIds}
+                        Selected Checkbox IDs = {this.state.selectedIds.join()}
                     </div>
                 </div>
-
         );
     }
 

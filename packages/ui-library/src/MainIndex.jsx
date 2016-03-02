@@ -25,7 +25,6 @@ module.exports = {
     EllipsisLoader: require("./components/general/EllipsisLoader.jsx"),
     EllipsisLoaderButton: require("./components/general/EllipsisLoaderButton.jsx"),
     If: require("./components/general/If.jsx"),
-    LazyLoader: require("./components/general/LazyLoader.jsx"),
     Messages: require("./components/general/Messages.jsx"),
     ModalButton: require("./components/general/ModalButton.jsx"),
     SelectText: require("./components/general/SelectText.jsx"),
