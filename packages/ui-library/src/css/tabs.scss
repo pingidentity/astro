@@ -1,13 +1,3 @@
-// tabs
-// $nav-border-width: 1px;
-// $selected-border-width: 1px;
-// $selected-line-width: 8px;
-// $selected-arrow-offset: -(ceil($layout-nav-link-height/3) + $nav-border-width) + 1;
-// $selected-arrow-width-w: ceil($layout-nav-link-height/2) + $selected-border-width;
-// $selected-arrow-width-h: ceil($selected-arrow-width-w/3) - $selected-border-width;
-$selected-arrow-offset: -8px;
-$selected-arrow-width-w: 5px;
-$selected-arrow-width-h: 8px;
 
 .tabs {
     margin-bottom: 30px;
@@ -45,11 +35,11 @@ $selected-arrow-width-h: 8px;
                     position: absolute;
                     left: 50%;
                     margin: 0 0 0 -8px;
-                    border-width: $selected-arrow-width-w $selected-arrow-width-h;
+                    border-width: 5px 8px;
                     border-style: solid;
                     z-index: 1;
                     border-color: $color-active transparent transparent transparent;
-                    bottom: $selected-arrow-offset - 2;
+                    bottom: -14px;
                 }
             }
         }
