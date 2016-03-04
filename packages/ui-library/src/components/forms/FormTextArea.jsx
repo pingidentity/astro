@@ -8,6 +8,16 @@ var React = require("react"),
     _ = require("underscore");
 
 /**
+ * @callback FormTextArea~eventCallback
+ * @param {object} event - reactjs synthetic event object
+ */
+
+/**
+ * @callback FormTextArea~valueCallback
+ * @param {string} value - value entered in text field
+ */
+
+/**
  * @class FormTextArea
  * @desc A text area component that supports edit and readonly modes.
  *
@@ -20,10 +30,8 @@ var React = require("react"),
  *      itself
  * @param {string} [labelText] the text to show as the field's label
  * @param {string} [placeholder] input placeholder text
- * @param {function} [onValueChange] a callback that will be triggered when the field changes
- * @param {function} [onChange] a callback that will be triggered when the field changes.  Only difference
- *   between this prop and onValueChange is that this will return the actual value of text field as
- *   opposed to the event object.
+ * @param {FormTextArea~eventCallback} [onValueChange] a callback that will be triggered when the field changes
+ * @param {FormTextArea~valueCallback} [onChange] a callback that will be triggered when the field changes.
  * @param {function} [onBlur] a callback that will be triggered when the field loses focus
  * @param {string} [mode] how the field will be shown: edit or readonly (default edit)
  * @param {number} [maxLength] max length (number) supported by the field

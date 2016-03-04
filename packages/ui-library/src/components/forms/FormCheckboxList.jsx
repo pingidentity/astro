@@ -93,7 +93,8 @@ module.exports = React.createClass({
  *
  *
  *
- * @param {string} [className] - extra css classes to be applied
+ * @param {string} [id="formcheckboxlist"] - data-id to set on the top HTML element
+ * @param {string} [className] - extra css classes to be applied to the top HTML element
  * @param {bool} [hideUnchecked] - status of 'hide uncheck' toggle
  * @param {array} items - actual data to show, array of objects, triplets in a format:
  *
@@ -161,6 +162,7 @@ module.exports = React.createClass({
 var Stateless = React.createClass({
 
     propTypes: {
+        id: React.PropTypes.string,
         className: React.PropTypes.string,
         hideUnchecked: React.PropTypes.bool,
         items: React.PropTypes.array.isRequired,
@@ -314,6 +316,7 @@ var Stateless = React.createClass({
 
     getDefaultProps: function () {
         return {
+            id: "form-checkbox-list",
             selected: [],
             queryString: "",
             hideUnchecked: false
@@ -350,7 +353,7 @@ var Stateless = React.createClass({
         }
 
         return (
-            <div className={css("checkbox-list", containerCss)}>
+            <div className={css("checkbox-list", containerCss)} data-id={this.props.id}>
                 <div className="input-row">
 
                     <FormTextField

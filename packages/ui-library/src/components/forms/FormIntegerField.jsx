@@ -5,19 +5,46 @@ var React = require("react"),
     FormTextField = require("./FormTextField.jsx"),
     cx = require("classnames");
 
+/**
+ * @callback FormIntegerField~valueEventCallback
+ * @param {string} value - value entered in text field
+ * @param {object} event - reactjs synthetic event object
+ */
+
+/**
+ * @callback FormIntegerField~keypressCallback
+ * @param {number} keyCode - pressed key, essentially same thing as `event.which`
+ * @param {object} event - reactjs synthetic event object
+ */
+
+/**
+ * @callback FormIntegerField~validationCallback
+ * @param {string} value - value entered in text field
+ * @returns {string|falsy} error - error validation message or some falsy value if no error found
+ */
+
+/**
+ * @callback FormIntegerField~eventCallback
+ * @param {object} event - reactjs synthetic event object
+ */
+
+/**
+ * @callback FormIntegerField~valueCallback
+ * @param {string} value - value entered in text field
+ */
 
 /**
  * @class FormIntegerField
- * @desc A component that extends FormTextField to only accept positive integers with add and subtract arrows
+ * @desc A component that extends FormTextField to only accept positive integers with add and subtract arrows.
  *
  * @param {boolean} [isRequired] whether the field is required or not (default false)
  * @param {string} [value] current integer field value. this is used when state is managed outside of component,
  *           must be used with onValueChange/onChange handler to get updates
  * @param {string} [labelText] the text to show as the field's label
  * @param {string} [placeholder] placeholder text for the input field
- * @param {function} [onBlur] a callback that will be triggered when the field blurs (loses focus)
- * @param {function} [onValueChange] a callback that will be triggered when the field changes
- * @param {function} onChange required callback for parent to manage state
+ * @param {FormIntegerField~valueEventCallback} [onBlur] a callback that will be triggered when the field blurs (loses focus)
+ * @param {FormIntegerField~eventCallback} [onValueChange] a callback that will be triggered when the field changes
+ * @param {FormIntegerField~valueEventCallback} onChange required callback for parent to manage state
  * @param {string} [mode] how the field will be shown: edit or readonly (default edit)
  * @param {number} [maxLength] maximum length supported by the field
  * @param {number} [max] - maximum number allowed in field, default 999999999999999
@@ -29,11 +56,11 @@ var React = require("react"),
  * @param {string} [inputCss] CSS classes to add to the input element
  * @param {string} [labelCss] CSS classes to add to the label element
  * @param {string} [className] CSS classes to add to the parent Label element
- * @param {function} [validator] callback function that takes the input data and returns an error message if the data is not valid
+ * @param {FormIntegerField~validationCallback} [validator] callback function that takes the input data and returns an error message if the data is not valid
  * @param {string} [validatorTrigger] defines the event that triggers validation ('onBlur' and 'onChange' are supported values) (default 'onBlur')
  * @param {boolean} [maskValue] if true, the value shown in the input field will be masked with '*****' i.e: passwords (default false)
  * @param {string} [errorMessage] error message to render if validation is being done externally
- * @param {function} [save] a method to be called to save the value; causes the save control to be shown
+ * @param {FormIntegerField~valueCallback} [save] a method to be called to save the value; causes the save control to be shown
  * @param {boolean} [autoFocus] whether or not to auto-focus the element
  *
  * @example <FormIntegerField

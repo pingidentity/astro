@@ -5,13 +5,18 @@ var React = require("react"),
     HelpHint = require("../tooltips/HelpHint.jsx");
 
 /**
+ * @callback FormSelectField~eventCallback
+ * @param {object} event - reactjs synthetic event object
+ */
+
+/**
  * @class FormSelectField
  * @desc A generic select (dropdown) component. Encapsulates common markup and designed to be a drop-in replacement.
  *       Options data may be either an array of objects with 'value' and 'label' properties or an object. Only the array
  *       will insure display order of options.
  * for react controlled `<select>`. Stateless.
  *
- * @param {function} onChange          delegate function to be called on select element onChange event (will receive same argument)
+ * @param {FormSelectField~eventCallback} onChange callback to be triggered when selected value changed
  * @param {string}   value             currently selected value
  * @param {object}   options           key/value object OR an array of single-item objects with 'value' and 'label' properties to
  *                                     describe the dropdown options

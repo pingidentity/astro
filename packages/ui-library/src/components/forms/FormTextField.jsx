@@ -8,6 +8,28 @@ var React = require("react"),
     _ = require("underscore");
 
 /**
+ * @callback FormTextField~eventCallback
+ * @param {object} event - reactjs synthetic event object
+ */
+
+/**
+ * @callback FormTextField~keypressCallback
+ * @param {number} keyCode - pressed key, essentially same thing as `event.which`
+ * @param {object} event - reactjs synthetic event object
+ */
+
+/**
+ * @callback FormTextField~validationCallback
+ * @param {string} value - value entered in text field
+ * @returns {string|falsy} error - error validation message or some falsy value if no error found
+ */
+
+/**
+ * @callback FormTextField~valueCallback
+ * @param {string} value - value entered in text field
+ */
+
+/**
  * @class FormTextField
  * @desc A text field component that supports edit, readonly and summary mode
  *
@@ -17,12 +39,13 @@ var React = require("react"),
  *                                   must be used with onValueChange/onChange handler to get updates
  * @param {string}   [labelText]     the text to show as the field's label
  * @param {string}   [placeholder]   placeholder text for the input field
- * @param {function} [onFocus]       a callback that will be triggered when the field gains focus
- * @param {function} [onBlur]        a callback that will be triggered when the field blurs (loses focus)
- * @param {function} [onKeyPress]    a callback that will be triggered when a key is pressed in the field;
- *                                   the key code and the event are passed as arguments
- * @param {function} [onValueChange] a callback that will be triggered when the field changes
- * @param {function} [onChange]      same thing as 'onValueChange' to match common naming convention in ReactJS
+ * @param {FormTextField~eventCallback} [onFocus]       a callback that will be triggered when the field gains focus
+ * @param {FormTextField~eventCallback} [onBlur]        a callback that will be triggered when the field blurs (loses focus)
+ * @param {FormTextField~keypressCallback} [onKeyPress]    a callback that will be triggered when a key is pressed in the field;
+ *
+ * @param {FormTextField~eventCallback} [onValueChange] a callback that will be triggered when the field value
+ *                                                               changes
+ * @param {FormTextField~eventCallback} [onChange] same thing as 'onValueChange' to match common naming convention in ReactJS
  * @param {string}   [mode]          how the field will be shown: edit or readonly (default edit)
  * @param {number}   [maxLength]     maximum length supported by the field
  * @param {string}   [defaultValue]  the default (initial) value to be shown in the field, when component managing state itself
@@ -31,15 +54,16 @@ var React = require("react"),
  * @param {string}   [inputCss]           CSS classes to add to the input element
  * @param {string}   [labelCss]           CSS classes to add to the label element
  * @param {string}   [className]          CSS classes to add to the parent Label element
- * @param {function} [validator]          callback function that takes the input data and returns an error message if the data is not valid
+ * @param {FormTextField~validationCallback} [validator]          callback function that takes the input data and returns an error message if the data is not valid
  * @param {string}   [validatorTrigger]   defines the event that triggers validation ('onBlur' and 'onChange' are supported values) (default 'onBlur')
  * @param {boolean}  [maskValue]          if true, the value shown in the input field will be masked with '*****' i.e: passwords (default false)
  * @param {string}   [errorMessage]       error message to render if validation is being done externally
- * @param {function} [save] a method      to be called to save the value; causes the save control to be shown
+ * @param {FormTextField~valueCallback} [save] a callback to be triggred when 'save' icon is clicked; when defined
+ *                                             causes the save control to be shown
  * @param {object}   [upDownSpinner]      up down buttons used by FormIntegerField
  * @param {boolean}  [autoFocus]          whether or not to auto-focus the element
  * @param {boolean}  [forceExternalState] Won't switch to internally managed state value if true. Defaults to false
- * @param {string}   [labelId]        A data-id for convenient access to the label's text
+ * @param {string}   [labelId]            A data-id for convenient access to the label's text
  *
  * @example <FormTextField
  *              referenceName={name}
@@ -74,7 +98,6 @@ var FormTextField = React.createClass({
         referenceName: React.PropTypes.string,
         save: React.PropTypes.func,
         type: React.PropTypes.string,
-        //upDownSpinner: React.PropTypes.object,
         useAutocomplete: React.PropTypes.bool,
         validator: React.PropTypes.func,
         validatorTrigger: React.PropTypes.string,
@@ -221,9 +244,7 @@ var FormTextField = React.createClass({
             validatorTrigger: "onBlur",
             forceExternalState: false,
             originalValue: null,
-            onValueChange: function () {
-                // do nothing as the default action
-            }
+            onValueChange: _.noop
         };
     },
 

@@ -17,7 +17,7 @@ var cx = require("classnames");
  * @class I18nPhoneInput
  * @desc an international phone number input with dial code drop down
  *
- * @param {string} [id] data-id to set on the top HTML element (defaults to "i18n-phone-input")
+ * @param {string} [id="i18n-phone-input"] data-id to set on the top HTML element (defaults to "i18n-phone-input")
  * @param {string} [className] CSS class to set on the top HTML element
  * @param {I18nPhoneInput~onValueChange} [onValueChange] callback to be triggered when dialCode or phone number change
  * @param {string} [countryCode] the country code to be selected by default (defaults to "us" as in USA)
