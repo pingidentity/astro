@@ -1,6 +1,6 @@
 {
   "name": "ui-library",
-  "version": "0.18.0-SNAPSHOT",
+  "version": "0.18.0",
   "description": "A UI library made of reusable React components, util functions and static assets (e.g. CSS)",
   "author": "Ping Identity SaaS Interface Development",
   "license": "ISC",
