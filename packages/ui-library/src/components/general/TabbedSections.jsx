@@ -1,10 +1,16 @@
 var React = require("react");
 
-/** @class TabbedSections
- * @desc A component which breaks up its children by tabs
- * @param {function} onSectionChange - A callback executed when tabs are changed
+/**
+ * @callback TabbedSections~callback
+ * @param {number} index - selected tab index
+ */
+
+/**
+ * @class TabbedSections
+ * @desc A component which breaks up its children by tabs.
+ * @param {TabbedSections~callback} onSectionChange - A callback executed when tabs are changed
  * @param {number} selectedIndex - A number starting at 0 to identify the selected tab
- * @param {string} [id] - An id for the top level html element
+ * @param {string} [id="tabbed-sections"] - An id for the top level html element
  * @param {string} [className] - A className for the top level html element
  * @param {boolean} [renderHidden] - Hide hidden children by applying a style instead of not rendering
  **/
@@ -17,9 +23,16 @@ var TabbedSections = React.createClass({
         renderHidden: React.PropTypes.bool
     },
 
+    getDefaultProps: function () {
+        return {
+            id: "tabbed-sections"
+        };
+    },
+
     /**
      * Returns all children
      * @method TabbedSections#_renderAllChildren
+     * @private
      * @return {Object[]} The React child components
      */
     _renderAllChildren: function () {
@@ -31,6 +44,7 @@ var TabbedSections = React.createClass({
     /**
      * Returns selected child
      * @method TabbedSections#_renderSelectedChild
+     * @private
      * @return {Object[]} [description]
      */
     _renderSelectedChild: function () {

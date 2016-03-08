@@ -2,9 +2,10 @@ var React = require("react");
 var css = require("classnames");
 
 /**
- * @class src/components/general/EllipsisLoader
+ * @class EllipsisLoader
  * @desc Loading indicator (animated ...) for fields which have server-side validation, etc.
- * @param {string} [id] data-id to set on the top HTML element (optional, default 'ellipsis-loader')
+ *
+ * @param {string} [id="ellipsis-loader"] data-id to set on the top HTML element (optional, default 'ellipsis-loader')
  * @param {boolean} loading while true, loading animation will be shown
  * @param {string} [className] CSS class to set on the top HTML element (optional)
  *

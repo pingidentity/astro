@@ -6,14 +6,23 @@ var React = require("react"),
 var noop = function () {
 };
 
+
 /**
- * @class Section
- * @desc Simple section which expand/collapse on click. In collapsed mode only
- *          title is shown. When expanded shows
- *          body content. Designed to work with arbitrary content. To indicate
- *          elements corresponding to title,
- *          title = {true} attribute should be attached. All unwrapped TEXT nodes automatically treated as part of title.
- *          (see examples)
+ * @callback CollapsibleSection~callback
+ * @param {bool} expanded - current expanded/collapsed state
+**/
+
+/**
+ * @deprecated The component is deprecated and subject to be removed in future library versions. See Section control as
+ * replacement.
+ *
+ * @class CollapsibleSection
+ * @desc <b>DEPRECATED</b> (see deprecate note below). Simple section which expand/collapse on click. In collapsed mode only
+ * title is shown. When expanded shows
+ * body content. Designed to work with arbitrary content. To indicate
+ * elements corresponding to title,
+ * title = {true} attribute should be attached. All unwrapped TEXT nodes automatically treated as part of title.
+ * (see examples)
  **
  *
  * @param {string} [activeClassName="active"] - class names to attach when section is expanded.
@@ -24,17 +33,14 @@ var noop = function () {
  *                                       page width.
  *
  * @param {bool} [expanded=false] - whether or not section is expanded and showing body content.
- * @param {Section~callback} [onToggle] - callback to be executed when visibility toggled.
+ * @param {CollapsibleSection~callback} [onToggle] - callback to be executed when visibility toggled.
  * @param {function} [onContentClick] - allow click bubbling without premature collapsing. only available for components
  *          that meet the _filterBodyNodes criteria which is filtered all children who have no title.
  * @param {string} [id="collapsableSection"] - it is used for a unique data-id.
  * @param {bool} [controlled=false] - A boolean to enable the component to be externally managed.  True will relinquish
  *   control to the components owner.  False or not specified will cause the component to manage state internally
  *   but still execute the onToggle callback in case the owner is interested.
- *
- * @callback Section~callback
- * @param {bool} expanded - current expanded/collapsed state
- *
+ **
  * @example
  *          <Section className="section" toggleOnTitle={true}>
  *               <div className="section-title" title={true}>    <!-- this div is title, always visible -->

@@ -1,7 +1,7 @@
 var React = require("react");
 
 /**
- * @class components/general/If
+ * @class If
  *
  * @desc
  * Simple conditional render for convenience.  Will display children
@@ -36,7 +36,7 @@ var If = React.createClass({
         if (!this.props.test) {
             return null;
         }
-        
+
         return this.props.children;
     }
 });

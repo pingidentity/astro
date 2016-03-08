@@ -3,14 +3,20 @@ var css = require("classnames");
 var EllipsisLoader = require("../general/EllipsisLoader.jsx");
 
 /**
- * @class src/components/general/EllipsisLoaderButton
+ * @callback EllipsisLoaderButton~eventCallback
+ * @param {object} event - reactjs synthetic event object
+ */
+
+/**
+ * @class EllipsisLoaderButton
  * @desc Loading indicator (animated ...) for fields which have server-side validation, etc.
- * @param {string} [id] data-id to set on the button (optional, default 'ellipsis-loader-button')
+ *
+ * @param {string} [id="ellipsis-loader-button"] data-id to set on the button (optional, default 'ellipsis-loader-button')
  * @param {string} text text to display in the button when not loading
  * @param {boolean} [disabled] button will not function when true
  * @param {boolean} loading while true, loading animation will be shown
  * @param {string} [className] CSS class to add to the button
- * @param {function} onButtonClick function to call when the button is clicked
+ * @param {EllipsisLoaderButton~callback} onButtonClick function to call when the button is clicked
  *
  * @example
  *     <EllipsisLoaderButton

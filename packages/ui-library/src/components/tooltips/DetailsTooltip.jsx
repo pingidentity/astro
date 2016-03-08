@@ -8,6 +8,7 @@ var React = require("react"),
 /** @class DetailsTooltip
  * @desc DetailsTooltip implements tooltip callout with trigger label. Body of tooltip is becoming callout content.
  *
+ * @param {string} [id="details-tooltip"] - used as data-in on top HTML element.
  * @param {string} [title] - tooltip title
  * @param {object|string} label - tooltip trigger label (can be a component)
  * @param {string} positionStyle - css styling to manage tooltip callout position ("bottom", "top", "left", "right")
@@ -97,6 +98,7 @@ var StatefulDetailsTooltip = React.createClass({
 var StatelessDetailsTooltip = React.createClass({
 
     propTypes: {
+        id: React.PropTypes.string,
         title: React.PropTypes.string,
         label: React.PropTypes.oneOfType([
             React.PropTypes.string,
@@ -115,6 +117,7 @@ var StatelessDetailsTooltip = React.createClass({
 
     getDefaultProps: function () {
         return {
+            id: "details-tooltip",
             positionStyle: "top",
             titleClassNames: "details-title",
             contentClassNames: "details-content",
@@ -175,7 +178,7 @@ var StatelessDetailsTooltip = React.createClass({
         }
 
         return (
-            <span className={css("details-tooltip", containerCss)}>
+            <span className={css("details-tooltip", containerCss)} data-id={this.props.id}>
                 {this.props.label ? <a className={css("details-target", targetCss)} data-id="action-btn"
                     onClick={!this.props.disabled && this._toggle}>{this.props.label}</a> : null}
                 {this._content()}

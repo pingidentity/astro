@@ -5,23 +5,30 @@ var React = require("react"),
     _ = require("underscore");
 
 /**
+ * @callback Messages~removeCallback
+ * @param {number} msgIndex - message index to remove
+ */
+
+/**
+ * @callback Messages~i18nCallback
+ * @param {string} key - i18n message key
+ * @param {object} params - params for i18n message
+ * @returns {string} result of i18n given message key
+ */
+
+/**
  * @class Messages
  *
- * @desc
- *
- * Messages component.
- *
- * Renders a list of supplied message strings and allows for messages
+ * @desc Messages component. Renders a list of supplied message strings and allows for messages
  * to be removed by invoking a callback.
  *
  * @param {object[]} messages List of messages to render.
  * @param {string} [id] If specified, then the id of the rendered
-*   parent div will be set to this id.
+ *   parent div will be set to this id.
  * @param {string} [data-id] If specified then the
  *  data-id of the rendered parent div will be set to this id.
- * @param {function} [removeMessage] Function to call to remove a
- *  message from the messages list.
- * @param {function} [i18n] Function to handle internationalization of
+ * @param {Messages~removeCallback} [removeMessage] callback to be triggered when message is about to be removed from the messages list.
+ * @param {Messages~i18nCallback} [i18n] callback to be called for internationalization of
  *  message keys to message text.
  * @param {number} [defaultMessageTimeout] Default message timeout in ms.
  *  Messages will remove themselves after this time, unless the message
@@ -45,7 +52,7 @@ var Messages = React.createClass({
         i18n: React.PropTypes.func,
         defaultMessageTimeout: React.PropTypes.number
     },
-    
+
     getDefaultProps: function () {
         return {
             removeMessage: null,
@@ -103,7 +110,7 @@ Message = React.createClass({
         // Close after configured time interval
         // Interval of 0 (or undefined) will result in no automatic message clearing (which is intended).
         var interval = (this.props.message.duration) ? this.props.message.duration : this.props.defaultTimeout;
-        
+
         if (interval) {
             this.interval = global.setInterval(this._close, interval);
         }
@@ -131,7 +138,7 @@ Message = React.createClass({
         if (this.props.message.isHtml) {
             text = <span dangerouslySetInnerHTML={{ __html: text }} /> ;
         }
-        
+
         return (
             <div className={classes}>
                 <div className="text">
@@ -148,10 +155,14 @@ Message = React.createClass({
 Messages.Actions = {};
 var initialState = { messages: [] };
 
-/** Internal auto-incremented id.  This should only be used by message expiry mechanism (since index wont be reliable) */
+/**
+ * @private
+ * @desc Internal auto-incremented id.  This should only be used by message expiry mechanism (since index wont be reliable)
+ * */
 Messages.id = 0;
 
-/** @enum {string}
+/**
+ * @enum {string}
  * @desc Enum for the different types of Messages */
 Messages.MessageTypes = {
     SUCCESS: "success",
@@ -160,9 +171,10 @@ Messages.MessageTypes = {
     FEATURE: "feature"
 };
 
-/** @enum {string}
+/**
+ * @enum {string}
  * @desc Action types
- * @private */
+ **/
 Messages.Actions.Types = keyMirror({
     ADD_MESSAGE: null,
     REMOVE_MESSAGE: null,
@@ -170,7 +182,8 @@ Messages.Actions.Types = keyMirror({
     SHIFT_MESSAGE: null
 });
 
-/** @function Messages.Actions.shiftMessage
+/**
+ * @function Messages.Actions.shiftMessage
  * @desc Action creator to remove the first (oldest) item in the message list
  * @returns {object} action */
 Messages.Actions.shiftMessage = function () {

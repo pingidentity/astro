@@ -2,15 +2,20 @@ var React = require("react");
 var FormSelectField = require("../forms/FormSelectField.jsx");
 
 /**
+ * @callback TimePicker~valueCallback
+ * @param {string} value - value entered in text field
+ */
+
+/**
  * @class TimePicker
  * @desc   A drop-down form for selecting the time
  *
- * @param {function} onValueChange Handles the select element value change
+ * @param {TimePicker~valueCallback} onValueChange Handles the select element value change
  * @param {number}   [increments]  The increments (in minutes) to populate the list. Default is 15
- * @param {string}   [format]      The time format. Either 12/24hr. Default is "12"
+ * @param {string}   [format]      The time format. Either "12" or "24". Default is "12"
  * @param {string}   [labelText]   The text to display as the field's label
  * @param {string}   [value]       The value to be initially selected
- * @param {string}   [id]          The data-id to pass to the FormSelectField
+ * @param {string}   [id="time-picker"] The data-id to pass to the FormSelectField
  */
 module.exports = React.createClass({
 
@@ -26,7 +31,7 @@ module.exports = React.createClass({
     /**
      * Adjusts hours based on format, adds am/pm property if needed
      * @method Timpicker#_getHourType
-     *
+     * @private
      * @param  {Object} hoursMinutes The hours/mins object
      * @param  {String} format       The time format
      * @return {Object}              The modified parameter
@@ -57,6 +62,7 @@ module.exports = React.createClass({
     /**
      * Pads with a zero if necessary
      * @method TimePicker#_getPaddedNumber
+     * @private
      *
      * @param  {String|Number} number The number
      * @return {String}               The padded number
@@ -69,6 +75,7 @@ module.exports = React.createClass({
     /**
      * Breaks minutes into hours and minutes
      * @method TimePicker#_getHoursMinutes
+     * @private
      *
      * @param  {Number} minutes The total minutes to be broken down
      * @return {Object}         eg: {
@@ -86,7 +93,7 @@ module.exports = React.createClass({
     /**
      * Populate an object of times
      * @method TimePicker#_getTimes
-     *
+     * @private
      * @return {Object} eg {
      *                         ...
      *                         "6:00": "6:00",
@@ -117,7 +124,7 @@ module.exports = React.createClass({
     /**
      * handles the change event
      * @method TimePicker#_onChange
-     *
+     * @private
      * @param {Object} e The event object
      */
     _onChange: function (e) {

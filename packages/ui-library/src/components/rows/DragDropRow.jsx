@@ -74,15 +74,22 @@ var dropCollect = function (connect) {
 };
 
 /**
+ * @callback DragDropRow~dragCallback
+ * @param {number} targetIndex - current target index where items is dragged over or dropped
+ * @param {number} sourceIndex - origin index item is dragged or dropped from
+ */
+
+/**
  * @class DragDropRow
  *
  * @desc A component to hide the workings of react-dnd.  Can be dragged on dropped onto any other component of type DragDropRow
  * @param {string|number} id - An id for the row
  * @param {number} index - The index number for the row
  * @param {bool} [disabled=false] - If child content should not be draggable. False by default (draggable).
- * @param {function} onDrag - A callback which is execute when the row is moved.  Must have signature function (targetIndex, ownIndex)
- * @param {function} onDrop - A callback which is execute when the row is dropped.  Must have signature function (targetIndex, ownIndex)
+ * @param {DragDropRow~dragCallback} onDrag - A callback which is execute when the row is moved.  Must have signature function (targetIndex, ownIndex)
+ * @param {DragDropRow~dragCallback} onDrop - A callback which is execute when the row is dropped.  Must have signature function (targetIndex, ownIndex)
  * @param {function} onCancel - A callback which is executed when the dragging is cancelled (dropped outside a droppable area or esc button pressed).
+ *
  * @example
  *  <DragDropRow onDrop={this._reorder} disabled={this.props.disabled} id="1" index={1}>
  *      <div>Row #1</div>

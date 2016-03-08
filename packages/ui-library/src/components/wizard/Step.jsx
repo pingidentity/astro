@@ -4,10 +4,17 @@ var Progress = require("./Progress.jsx");
 var ContextButton = require("../general/ContextCloseButton.jsx");
 var cx = require("classnames");
 
-/** @class Wizard#Step
- * @desc Describes single wizard step. It is not intended to be used outside of <Wizard>..</Wizard>.  Primarily used for step appearance configuration. Actual step content to be rendered should be defined withing <Step>...</Step>.
+/**
+ * @callback Wizard#Step~callback
+ * @param {number} number - step number which triggered event
+ */
+
+/**@class Wizard#Step
+ * @desc Describes single wizard step. It is not intended to be used outside of `<Wizard>..</Wizard>`.  Primarily used for step appearance configuration. Actual step content to be rendered should be defined withing `<Step>...</Step>`.
  * @see Wizard
  *
+ * @param {string} [id="step"] - used as data-id for top HTML element.
+ * @param {string} [className] - additional CSS classed to be used on top HTML element.
  * @param {string} labelEdit - string text of step activation link
  * @param {string} labelCancel - string text for cancel button label
  * @param {string} labelNext - string text for next button label
@@ -24,11 +31,13 @@ var cx = require("classnames");
  * @param {bool} [when=true] - conditionally show a step (hidden if false)
  * @param {bool} [renderHidden=false] - render the child elements to the DOM, but hidden (display: none), when the step is not active
  * @param {string} [hintText] -string tooltip help text
- * @param {function} [onNext] - function(stepNo) callback executed in response of 'next' click
- * @param {function} [onEdit] - function(stepNo) callback executed in response of 'edit' click.
+ * @param {Wizard#Step~callback} [onNext] - callback to be triggered in response of 'next' click
+ * @param {Wizard#Step~callback} [onEdit] - callback to be triggered in response of 'edit' click.
  **/
 var Step = React.createClass({
     propTypes: {
+        id: React.PropTypes.string,
+        className: React.PropTypes.string,
         labelEdit: React.PropTypes.string,
         labelCancel: React.PropTypes.string,
         labelNext: React.PropTypes.string,
@@ -51,6 +60,7 @@ var Step = React.createClass({
 
     getDefaultProps: function () {
         return {
+            id: "step",
             canProceed: true,
             isModal: true,
             showEdit: true,
@@ -120,7 +130,7 @@ var Step = React.createClass({
     },
 
     render: function () {
-        var css = cx({
+        var css = cx(this.props.className, {
             task: true,
             clearfix: true,
             active: this.props.active
@@ -135,7 +145,7 @@ var Step = React.createClass({
 
 
         return (
-            <div className={css}>
+            <div className={css} data-id={this.props.id}>
                 <div className="task-title">
                     <Progress
                         ref="progress"

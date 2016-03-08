@@ -59,21 +59,40 @@ var Batch = React.createClass({
     }
 });
 
+
+/**
+ * @callback InfiniteScroll~scrollCallback
+ * @param {object} visibleItem - new top visible item:
+ *
+ *      {
+ *          batchId: <batchId>
+ *          itemIndex: <array index within batch>
+ *      }
+ */
+
+/**
+ * @callback InfiniteScroll~headingCallback
+ * @param {object} data item from batch for current row
+ * @param {string} previous heading text
+ * @returns {string|null} section heading text or null if no heading should be added
+ */
+
+
 /**
  * @class InfiniteScroll
  * @desc An scrolling component which pages content in and out of the dom as their visibility changes.    Content is passed as an
  * array of batches which is a simple js object with an id and an array of rows.
  *
- * @param {function} loadNext - callback which will fetch the next batch of data, executed when the user scrolls to the bottom of the container
- * @param {function} loadPrev - callback which will fetch the prev batch of data, executed when the user scrolls to the top of the container
+ * @param {function} loadNext - callback which will be triggered to fetch the next batch of data, executed when the user scrolls to the bottom of the container.
+ * @param {function} loadPrev - callback which will be triggered fetch the prev batch of data, executed when the user scrolls to the top of the container.
  * @param {bool} hasNext - has more batches after the last batch loaded
  * @param {bool} hasPrev - has more batches preceding the first batch loaded
- * @param {object[]} batches - An array of objects in the form &#123;id: _id, data: [_data_]&#125;
+ * @param {array} batches - An array of objects in the form &#123;id: _id, data: [_data_]&#125;
  * @param {Component} contentType - A react component representing the row type
  * @param {bool} [attachToWindow] - When set, the component will attach to the window instead of creating a scrolling container
  * @param {object} [initialItem] - An object describing the batchIdex and itemIndex of the first row to display
- * @param {function} [onScroll] - A callback which will get the batch id and the scroll offset of the infinite scroller
- * @param {function} [headingGenerator] - A heading generator function.  Will be passed the data item for
+ * @param {InfiniteScroll~scrollCallback} [onScroll] - A callback which will get the batch id and the scroll offset of the infinite scroller
+ * @param {InfiniteScroll~headingCallback} [headingGenerator] - A heading generator function.  Will be passed the data item for
  * the current row and the result from the last call to the generator.  If the result is anything but null, a new heading will
  * be generated the content of which will be set to the result of the call.
  * @param {number} [minHeight] - Min height for the container (when not attached to window)

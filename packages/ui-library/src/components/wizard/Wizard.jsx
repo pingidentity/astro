@@ -1,12 +1,26 @@
 var React = require("react"),
     _ = require("underscore");
 
+/**
+ * @callback Wizard~editCallback
+ * @param {number} number - step number which triggered event
+ */
+
+/**
+ * @callback Wizard~changeCallback
+ * @param {number} choice - step number that was chosen
+ * @param {number} total - total number of steps in a wizard
+ */
+
+
 /** @class Wizard
  * @desc A component used to build step-by-step wizards. Can contain 2 child types `<Step />` or `<Choose />`.  You can think of a wizard as a
  * tree, where its state of it can be describe by an array of numbers (denoting the child at that level) and
  * @see Choose
  * @see Step
  *
+ * @param {string} [id="wizard"] - used as data-id for top HTML element.
+ * @param {string} [className] - additional CSS classed to be used on top HTML element.
  * @param {string} title - The title of the Wizard
  * @param {number} [number=1] - Since wizards can be embedded inside other wizards, they need to be given a
  * number unless they're the root
@@ -14,11 +28,11 @@ var React = require("react"),
  * inside another wizard numSteps != this.props.children.length
  * @param {number} activeStep - The current step the wizard (since redux forces externally managed components)
  * @param {number[]} choices - An array describing the state of the entire wizard tree
- * @param {function} [onEdit] - Called when the edit link of any children is clicked.  If provided, will be injected
+ * @param {Wizard~editCallback} [onEdit] - Called when the edit link of any children is clicked.  If provided, will be injected
  * its children's props, otherwise the actions of each step must be handled and the store updated
- * @param {function} [onChange] - Called when a choice is made (ie a radio button of a Choose component is clicked).
+ * @param {Wizard~changeCallback} [onChange] - Called when a choice is made (ie a radio button of a Choose component is clicked).
  * If provided, will be injected its children's props, otherwise the actions of each step must be handled and the
- * store updated.  The function signature is function(choice, numberOfSteps)
+ * store updated.
  * @param {function} [onNext] - Called when the next button of any child is clicked.  If provided, will be injected
  * its children's props, otherwise the actions of each step must be handled and the store updated
  * @param {string} [labelEdit] - If provided, will be injected its children's props
@@ -46,6 +60,8 @@ var Wizard = React.createClass({
     ],
 
     propTypes: {
+        id: React.PropTypes.string,
+        className: React.PropTypes.string,
         title: React.PropTypes.string.isRequired,
         number: React.PropTypes.number,
         activeStep: React.PropTypes.number,
@@ -70,6 +86,7 @@ var Wizard = React.createClass({
 
     getDefaultProps: function () {
         return {
+            id: "wizard",
             number: 1,
             activeStep: 1
         };
@@ -103,12 +120,12 @@ var Wizard = React.createClass({
         }.bind(this));
 
         return (
-            <div>{stepNodes}</div>
+            <div data-id={this.props.id} className={this.props.className}>{stepNodes}</div>
         );
     }
 });
 
-Wizard.Step = require(".//Step.jsx");
+Wizard.Step = require("./Step.jsx");
 Wizard.Choose = require("./Choose.jsx");
 Wizard.Reducer = require("./Reducer.js");
 Wizard.Actions = require("./Actions.js");

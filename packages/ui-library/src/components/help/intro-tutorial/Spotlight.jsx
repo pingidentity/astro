@@ -1,7 +1,9 @@
 var React = require("react"),
     _ = require("underscore");
 
-/** @class IntroTutorial#Spotlight
+/**
+ * @class IntroTutorial#Spotlight
+ * @private
  * @desc A class that will clone the target and place it above the original so that it can pop out of a
  * lightbox.
  * @param {number} [padding=10] - A padding around the spotlight

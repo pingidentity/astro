@@ -2,7 +2,7 @@ var React = require("react");
 var ReactDOM = require("react-dom");
 
 /**
- * @class components/general/SelectText
+ * @class SelectText
  * @desc
  *
  * Component that will select all text in all child
@@ -17,13 +17,9 @@ var ReactDOM = require("react-dom");
  * elements being selected.
  *
  *
- * Props:
- * @param {boolean} [select] Select text immediately without
- *  requiring a click.
- * @param {string} [className] CSS classes to add to the surrounding
- *  span.
- * @param {function} [onClick] Function to call after selection has been
- *  triggered.
+ * @param {boolean} [select] Select text immediately without requiring a click.
+ * @param {string} [className] CSS classes to add to the surrounding span.
+ * @param {function} [onClick] Function to call after selection has been triggered.
  * @param {string} [dataId] id attribute of rendered input button
  *
  * @example
@@ -101,10 +97,10 @@ var SelectText = React.createClass({
         if (event && event.target.select) {
             event.target.select();
         } else {
-            
+
             var text = ReactDOM.findDOMNode(this);
             var range;
-    
+
             if (global.document.body.createTextRange) {
                 range = global.document.body.createTextRange();
                 range.moveToElementText(text);
@@ -117,7 +113,7 @@ var SelectText = React.createClass({
                 selection.addRange(range);
             }
         }
-        
+
         if (this.props.onClick) {
             this.props.onClick();
         }

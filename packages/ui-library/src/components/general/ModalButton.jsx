@@ -4,22 +4,27 @@ var React = require("react");
 var css = require("classnames");
 
 /**
- * @class components/general/ModalButton
- * @desc
+ * @callback ModalButton~contentCallback
+ * @returns {object} reactjs component to be used as modal body
+ */
+
+/**
+ * @class ModalButton
+ * @desc Button to display a modal. Child components of the modal are rendered as the modal content.
  *
- * Modal button:  Button to display a modal.
- * Child components of the modal are rendered as the modal content.
- *
- * Configurable props:
- * @param {string} [id] data-id of the modal and activation button.  Modal will have the data-id "{id}-modal"
+ * Note: In order to use components such as ContextCloseButton within a modal, the
+ *  modal body content must be rendered by the modalBody callback instead of as
+ *  child elements as shown above in the sample usage.
+
+ * @param {string} [id="modal-button"] data-id of the modal and activation button.  Modal will have the data-id "{id}-modal"
  *     and the activation button will have the data-id "{id}-button".  If id is not present then
  *     no data-id will be set on the html elements.
  * @param {string} value Button text label.
  * @param {string} modalTitle Title of the modal.
- * @param {function} [modalBody] Alternative modal body content.  If provided then this function
+ * @param {ModalButton~contentCallback | object} [modalBody] Alternative modal body content.  If provided then this function
  *  will be called if the ModalButton element has no children.  This is necessary to setup
  *  correct context for modals that wish to close the modal using a button within the modal body.
- * @param {function | object} [linkContent] Alternative content / button to trigger the modal to render instead
+ * @param {ModalButton~contentCallback | object} [linkContent] Alternative content / button to trigger the modal to render instead
  *  of the default button.  Content rendered within a span tag whose onClick event will trigger the modal.
  *  If this is a function, then the function will be called to render the content, otherwise the content
  *  is rendered as is.
@@ -40,14 +45,9 @@ var css = require("classnames");
  * @param {string} [type] basic modal when not specified. Options include 'alert', and 'dialog'
  *
  * @example
- * Sample usage:
  *      <ModalButton modalTitle="My wonderful modal" onClose={this._onCloseModal}>
  *          <p>Thank you for opening this modal</p>
  *      </ModalButton>
- *
- * Note: In order to use components such as ContextCloseButton within a modal, the
- *  modal body content must be rendered by the modalBody callback instead of as
- *  child elements as shown above in the sample usage.
  *
  */
 var ModalButton = React.createClass({
@@ -78,6 +78,7 @@ var ModalButton = React.createClass({
 
     getDefaultProps: function () {
         return {
+            id: "modal-button",
             showHeader: true,
             initiallyExpanded: false,
             maximize: false

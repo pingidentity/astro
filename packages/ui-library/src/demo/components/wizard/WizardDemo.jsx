@@ -22,8 +22,8 @@ var Demo = React.createClass({
         };
     },
 
-    change: function (index, value, total) {
-        this.store.dispatch(Wizard.Actions.choose(index, value, total));
+    change: function (index, totalSteps) {
+        this.store.dispatch(Wizard.Actions.choose(index, totalSteps));
     },
 
     edit: function (index) {

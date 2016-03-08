@@ -94,6 +94,7 @@ var FileUpload = React.createClass({
     /**
      * Async function to read a given image file and return a base64 encoded string representation
      * @method FileUpload#_getImagePreview
+     * @private
      * @param {Object} file an individual file from a FileList object
      * @param {function} success Callback to call on success
      * @param {function} error Callback to call if an error is encountered
@@ -117,6 +118,7 @@ var FileUpload = React.createClass({
      * Calls the validator (if present) and onChange
      * callback (if present).
      * @method FileUpload#_onChange
+     * @private
      * @param  {Object} e The event object
      */
     _onChange: function (e) {
@@ -174,6 +176,7 @@ var FileUpload = React.createClass({
     /**
      * Validate the MIME type and size of a selected file.
      * @method FileUpload#_validateFile
+     * @private
      * @param  {object} file browser File object
      * @param  {function} success callback to trigger on success
      * @return {String|undefined} Returns error if invalid
@@ -201,6 +204,7 @@ var FileUpload = React.createClass({
      * Handle an error event by invoking the configured
      * error handler function if one was supplied.
      * @method FileUpload#_handleError
+     * @private
      * @param  {?} errorKey [description]
      */
     _handleError: function (errorKey) {
@@ -213,6 +217,7 @@ var FileUpload = React.createClass({
      * Handle removal of the file when remove has
      * been clicked.
      * @method FileUpload#_onClickRemove
+     * @private
      */
     _onClickRemove: function () {
         if (this.props.disabled) {
@@ -229,6 +234,7 @@ var FileUpload = React.createClass({
     /**
      * Reset the state of the component.
      * @method FileUpload#_resetComponent
+     * @private
      */
     _resetComponent: function () {
         ReactDOM.findDOMNode(this.refs.fileInput).value = "";

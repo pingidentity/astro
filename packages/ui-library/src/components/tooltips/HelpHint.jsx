@@ -1,7 +1,7 @@
 var React = require("react");
 
 /**
- * @class components/tooltips/HelpHint
+ * @class HelpHint
  * @desc HelpHint can appear above, to the right, to the bottom or to the left of any DOM element.
  *      By default the hint appears to the upper right of the icon or target
  *      The following css classes may be added to effect the tooltip placement and state:

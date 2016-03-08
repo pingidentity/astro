@@ -1,8 +1,14 @@
 var React = require("react"),
     css = require("classnames");
 
-/*
- * @class src/components/general/ContextCloseButton
+
+/**
+ * @callback ContextCloseButton~callback
+ * @returns {boolean} shouldClose - true if context `close()` should be called. false - if not.
+ */
+
+/**
+ * @class ContextCloseButton
  * @desc Button that will invoke a 'close()' method from the context on click
  * should such a method exist, after invoking a supplied on click callback.
  * Should the supplied callback return false then the close() method will
@@ -11,10 +17,10 @@ var React = require("react"),
  * @param {string} [id] id attribute of rendered input button
  * @param {string} [value] Button value, i.e. the text shown on the button
  * @param {string} [className] CSS classes added to the input button
- * @param {function} [onClick] Function to call when the button is clicked.  If this function returns false (but not undefined) then the close method in the context will not be called.
+ * @param {ContextCloseButton~callback} [onClick] callback to call when the button is clicked.  If this function returns false (but not undefined) then the close method in the context will not be called.
  * @param {boolean} [disabled] if true, the button is disabled; otherwise, it is enabled
  * @param {boolean} [show] if true, the button is displayed; otherwise, it is hidden (default true)
- */
+ **/
 var ContextCloseButton = React.createClass({
 
     propTypes: {
@@ -63,7 +69,7 @@ var ContextCloseButton = React.createClass({
 
     render: function () {
         var styles = { disabled: this.props.disabled };
-        styles[this.props.className] = !!this.props.className;
+        styles[this.props.className] = true;
 
         return (
             this.props.show ? (

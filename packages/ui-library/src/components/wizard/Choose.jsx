@@ -2,11 +2,24 @@ var React = require("react"),
     _ = require("underscore"),
     Step = require("./Step.jsx");
 
+/**
+ * @callback Wizard#Choose~editCallback
+ * @param {number} number - step number which triggered event
+ */
+
+/**
+ * @callback Wizard#Choose~changeCallback
+ * @param {number} choice - step number that was chosen
+ * @param {number} total - total number of steps in a wizard
+ */
+
+
 /** @class Wizard#Choose
- * @desc A component which allows branches in a wizard.  It will render each child <Wizard /> or <Choose /> as a radio option, click which will append the steps
+ * @desc A component which allows branches in a wizard.  It will render each child `<Wizard />` or `<Choose />` as a radio option, click which will append the steps.
  * @see Wizard
  * @see Step
- *
+ * @param {string} [id="choose"] - used as data-id for top HTML element.
+ * @param {string} [className] - additional CSS classed to be used on top HTML element.
  * @param {string} title - The title of the Wizard
  * @param {number} [number=1] - Since wizards can be embedded inside other wizards, they need to be given a number
  * unless they're the root
@@ -15,10 +28,9 @@ var React = require("react"),
  * @param {number} activeStep - The current step the wizard (since redux forces externally managed components).
  * Will be injected to children
  * @param {number[]} choices - An array describing the state of the entire wizard tree.  Will be injected to children
- *
- * @param {function} [onEdit] - If provided, will be provided to all children.  If not provided, the actions of each
+ * @param {Wizard#Choose~editCallback} [onEdit] - If provided, will be provided to all children.  If not provided, the actions of each
  * step must be handled and the store updated to reflect these actions
- * @param {function} [onChange] - Called when a choice is made (ie a radio button of a Choose component is clicked).
+ * @param {Wizard#Choose~changeCallback} [onChange] - Called when a choice is made (ie a radio button of a Choose component is clicked).
  * If provided, will be injected its children's props, otherwise the actions of each step must be handled and the
  * store updated.  The function signature is function(choice, numberOfSteps)
  * @param {function} [onNext] - If provided, will be provided to all children.  If not provided, the actions of each
@@ -48,6 +60,7 @@ var Choose = React.createClass({
 
     getDefaultProps: function () {
         return {
+            id: "choose",
             number: 1
         };
     },
@@ -132,7 +145,7 @@ var Choose = React.createClass({
         props.canProceed = this._getChoice() >= 0;
 
         return (
-            <div>
+            <div data-id={this.props.id} className={this.props.className}>
                 { React.createElement(Step, props, this._generateRadioOptions()) }
                 { this._getWizard() }
             </div>

@@ -2,7 +2,9 @@ var React = require("react"),
     ReactDOM = require("react-dom"),
     format = require("../../../util/format.js");
 
-/** @class InfiniteScroll#Arrow
+/**
+ * @class Arrow
+ * @private
  * @desc Draws an svg path between two points
  * @param {object} to - A DOM element to be used as the target
  * @param {object} [from] - A DOM element to use as the starting point.  It not included, the

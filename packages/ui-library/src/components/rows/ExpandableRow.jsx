@@ -4,6 +4,16 @@ var React = require("react"),
     css = require("classnames");
 
 /**
+ * @callback ExpandableRow~eventCallback
+ * @param {object} event - reactjs synthetic event object
+ */
+
+/**
+ * @callback ExpandableRow~toggleCallback
+ * @param {boolean} isExpanded - current expanded state (expanded/collapsed).
+ */
+
+/**
  * @class ExpandableRow
  * @desc Basic expandable row component.
  *
@@ -15,11 +25,11 @@ var React = require("react"),
  * @param {string} [editViewRoute] - route to the 'edit mode' view. Default is ''.
  * @param {bool} [showEdit=true] - whether or not the 'edit' button will be shown at all. Default is true.
  * @param {bool} [showDelete=true] - whether or not the 'delete' button will be shown at all. Default is true.
- * @param {function} [onDelete] - callback to be triggered when clicking on the 'delete' icon (if present)
+ * @param {ExpandableRow~eventCallback} [onDelete] - callback to be triggered when clicking on the 'delete' icon (if present)
  * @param {bool} [defaultToExpanded=false] - DEPRECATED: option to render the row in a expanded state by default.
  *     Default is false. This option is only left for backward compatibility within stateful version of control.
  * @param {bool} [expanded=false] - whether row is expanded or collapsed
- * @param {function} [onToggle] - callback to be triggered when expand/collapse button is clicked. Accepts
+ * @param {ExpandableRow~toggleCallback} [onToggle] - callback to be triggered when expand/collapse button is clicked. Accepts
  *     param of type bool - expanded/collapsed state before trigger.
  * @param {object} [editButton] - it is used to show an object inside edit body. For example: ModalButton
  *     can be passed like follow:
