@@ -18,7 +18,6 @@ var ExpandableRowDemo = React.createClass({
 
     render: function () {
 
-
         var rowAccessories = (<div>
             <a>Link</a>
             <input type="button" className="button inline" value="Inline Button" />

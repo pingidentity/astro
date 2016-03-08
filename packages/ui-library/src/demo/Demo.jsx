@@ -2,7 +2,8 @@ var React = require("react"),
     ReactDOM = require("react-dom"),
     DemoItem = require("./core/DemoItem.jsx"),
     assign = require("object-assign"),
-    packageJson = require("../../package.json");
+    packageJson = require("../../package.json"),
+    _ = require("underscore");
 
 require("isomorphic-fetch");
 
@@ -82,7 +83,7 @@ var Demo = React.createClass({
         {
             name: "Form - Input Widths",
             demo: require("./components/forms/FormInputWidthsDemo.jsx"),
-            pathToCode: "none"
+            pathToCode: "components/forms/FormInputWidths.jsx"
         },
         {
             name: "Collapsible Section (stateless)",
@@ -177,7 +178,7 @@ var Demo = React.createClass({
         {
             name: "Cache",
             demo: require("./net/CacheDemo.jsx"),
-            pathToCode: "components/net/Cache.js"
+            pathToCode: "net/Cache.js"
         },
         {
             name: "Tabbed Sections",
@@ -224,13 +225,15 @@ var Demo = React.createClass({
             return resp.text();
         }).then(function (text) {
             var desc = (text.replace(/\n|\r/g, "!!!") //remove line breaks
-                            .replace(/{@[a-zA-Z]+\s+([^}]+)\}/, "$1") //transform inline tags
-                            .match(/\@desc(.*?)(\*\s+@|\*\/)/) || ["",""])[1] //extract @desc
+                .replace(/{@[a-zA-Z]+\s+([^}]+)\}/, "$1") //transform inline tags
+                .match(/\@desc(.*?)(\*\s+@|\*\/)/) || ["", ""])[1] //extract @desc
                 .replace(/!!! *\*/g, "\n") //cleanup, return line breaks for markdown
                 .replace(/!!!/g, "\n");
 
             if (desc) {
-                this.setState({ demo: assign(this.state.demo, { description: desc }) });
+                this.setState({
+                    demo: assign(this.state.demo, { description: desc })
+                });
             }
         }.bind(this));
     },
@@ -240,19 +243,33 @@ var Demo = React.createClass({
             return;
         }
 
-        fetch(this.BASE_PATH_DEMO + this.state.demo.pathToCode.replace(".jsx", "Demo.jsx")).then(function (resp) {
-            return resp.text();
-        }.bind(this)).then(function (text) {
-            var renderCode = this.unindentCode(text.replace(/\n|\r/g, "!!!").match(/render: .*?!!!(.*?)!!! {4}}/)[1]);
-            // hljs below is provided by a script tag
-            var markup = hljs.highlight('xml', renderCode).value; //eslint-disable-line
+        fetch(this.BASE_PATH_DEMO + this.state.demo.pathToCode
+                .replace(/(\.jsx|\.js)/, "Demo.jsx"))
+            .then(function (resp) {
+                return resp.text();
+            }.bind(this))
 
-            this.setState({ demo: assign(this.state.demo, { markup: markup }) });
-        }.bind(this));
+            .then(function (text) {
+                //get all matches for 'render: function() {...}`
+                var matches = text.replace(/\n|\r/g, "!!!").match(/\s*render: .*?!!!(.*?)!!!\s{4}}/g);
+
+                //take latest one (we can have helper react components before demo class)
+                var latestMatch = _.last(matches);
+
+                //pre-format for rendering
+                var renderCode = this.unindentCode(latestMatch);
+
+                // hljs below is provided by a script tag
+                var markup = hljs.highlight('xml', renderCode).value; //eslint-disable-line
+
+                this.setState({
+                    demo: assign(this.state.demo, { markup: markup })
+                });
+            }.bind(this));
     },
 
     unindentCode: function (string) {
-        var indents = string.match(/^( *?)[^ ]/)[1].length;
+        var indents = string.match(/^(\s*?)[^\s]/)[1].length;
 
         return string.split("!!!").map(function (line) {
             return line.substring(indents);
@@ -309,7 +326,7 @@ var Demo = React.createClass({
         return (
             <div className="components-container">
                 <div id="header">
-                    <div className="logo" />
+                    <div className="logo"/>
                     <div className="title">UI Component Library</div>
                 </div>
                 <div id="nav">
@@ -322,9 +339,9 @@ var Demo = React.createClass({
                         {
                             this.demos.map(function (item) {
                                 return (
-                                    <li className={item.name === selectedDemoName ? "selected": ""} key={item.name}>
-                                        <a href={"#" + item.name}>{item.name}</a>
-                                    </li>);
+                                <li className={item.name === selectedDemoName ? "selected": ""} key={item.name}>
+                                    <a href={"#" + item.name}>{item.name}</a>
+                                </li>);
                             }.bind(this))
                         }
                     </ul>
@@ -341,11 +358,11 @@ var Demo = React.createClass({
 
                     <div className="components">
                         {this.state.demo ? <DemoItem linkName={this.state.demo.name} title={this.state.demo.name}
-                                        markupExample={this.state.demo.markup}
-                                        description={this.state.demo.description}>
-                                        {React.createElement(this.state.demo.demo)}
-                                 </DemoItem> : null
-                        }
+                                                     markupExample={this.state.demo.markup}
+                                                     description={this.state.demo.description}>
+                            {React.createElement(this.state.demo.demo)}
+                        </DemoItem> : null
+                            }
                     </div>
                 </div>
             </div>
