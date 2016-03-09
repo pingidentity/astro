@@ -91,6 +91,11 @@ var Demo = React.createClass({
             pathToCode: "components/general/CollapsibleSection.jsx"
         },
         {
+            name: "Section",
+            demo: require("./components/general/SectionDemo.jsx"),
+            pathToCode: "components/general/Section.jsx"
+        },
+        {
             name: "Context Close Button",
             demo: require("./components/general/ContextCloseButtonDemo.jsx"),
             pathToCode: "components/general/ContextCloseButton.jsx"
