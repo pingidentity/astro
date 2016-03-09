@@ -1,26 +1,49 @@
-/*
 var React = require("react"),
-    ColorPicker = require("../../../components/general/ColorPicker.jsx"),
-    _ = require("underscore");
+    ColorPicker = require("../../../components/general/ColorPicker.jsx");
 
 var ColorPickerDemo = React.createClass({
 
     getInitialState: function () {
         return {
-            expanded: true,
-            colors: ["#fff", "#000"]
+            picker1color: "#fff",
+            picker2color: "#000",
+            picker2open: false
         };
     },
 
-    _handleToggle: function () {
-        this.setState({ expanded: !this.state.expanded });
+    // There is a lot of duplication in the methods below.
+    // It's better than building the prop names on the state dynamically.
+
+    _handleChange1: function (color, keepOpen) {
+        if (keepOpen === true) {
+            this.setState({ picker1color: color });
+        }
+        else {
+            this.setState(
+                { picker1open: false },
+                function () {
+                    this.setState({ picker1color: color });
+                }
+            );
+        }
     },
 
-    _handleChange: function (i, color) {
-        var colors = _.clone(this.state.colors);
-        colors[i] = color;
+    _handleChange2: function (color, keepOpen) {
+        if (keepOpen === true) {
+            this.setState({ picker2color: color });
+        }
+        else {
+            this.setState(
+                { picker2open: false },
+                function () {
+                    this.setState({ picker2color: color });
+                }
+            );
+        }
+    },
 
-        this.setState({ colors: colors });
+    _toggle2: function () {
+        this.setState({ picker2open: !this.state.picker2open });
     },
 
     render: function () {
@@ -28,21 +51,26 @@ var ColorPickerDemo = React.createClass({
             <div>
                 <div>
                     <ColorPicker
-                        controlled={true}
-                        labelText="Externally Managed"
-                        expanded={this.state.expanded}
-                        color={this.state.colors[0]}
-                        onChange={this._handleChange.bind(null, 0)}
-                        onToggle={this._handleToggle} />
+                        id="color-picker"
+                        color={this.state.picker1color}
+                        onChange={this._handleChange1}
+                        labelText="Background color"
+                        hintText="Pick a color or type in the hex code" />
                 </div>
+
                 <div>
-                    <ColorPicker labelText="Internally Managed"
-                        onChange={this._handleChange.bind(null, 1)}
-                        color={this.state.colors[1]} />
-                </div>
+                    <ColorPicker
+                        id="color-picker"
+                        color={this.state.picker2color}
+                        onChange={this._handleChange2}
+                        labelText="Background color"
+                        hintText="Pick a color or type in the hex code"
+                        onToggle={this._toggle2}
+                        open={this.state.picker2open}
+                        controlled={true} />
+                    </div>
             </div>);
     }
 });
 
 module.exports = ColorPickerDemo;
-*/
