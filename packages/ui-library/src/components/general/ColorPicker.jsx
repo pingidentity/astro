@@ -182,7 +182,7 @@ var Stateless = React.createClass({
         this.setState({
             pickerTop: swatch.offsetHeight,
             pickerLeft: 0,
-            pickerDimensions: swatch.offsetWidth + 40 //size of container div + hue spectrum bar width
+            pickerDimensions: swatch.offsetWidth
         });
         /* eslint-enable react/no-did-mount-set-state */
     },
@@ -224,7 +224,7 @@ var Stateless = React.createClass({
                     <FormLabel value={this.props.labelText} hint={this.props.hintText}/>
                 </div>
 
-                <div className="input-color-picker inline" ref="swatch">
+                <div className="input-color-picker" ref="swatch">
                     <span className="colors colors-theme-default colors-swatch-position-left colors-swatch-left colors-position-default"
                             ref="innerSwatch"
                             onClick={this._onToggle}>
@@ -245,14 +245,14 @@ var Stateless = React.createClass({
                         <span className={styles} style={{
                             top: this.state.pickerTop,
                             left: this.state.pickerLeft,
-                            width: this.state.pickerDimensions,
+                            width: this.state.pickerDimensions + 40,
                             height: this.state.pickerDimensions
                         }}>
                             <Picker ref="reactColorPicker" value={this.props.color}
                                     onChange={this._onChange}
                                     onDrag={this._onDrag}
-                                    saturationWidth={this.state.pickerDimensions-40}
-                                    saturationHeight={this.state.pickerDimensions-40} />
+                                    saturationWidth={this.state.pickerDimensions}
+                                    saturationHeight={this.state.pickerDimensions} />
                         </span>
                     </If>
                 </div>

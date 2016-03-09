@@ -1,3 +1,40 @@
+.input-color-picker {
+    position: relative;
+    display: inline-block;
+
+    .colors-input {
+        width: 117px;
+        padding: 0 5px 0 27px;
+        font-size: 16px;
+        text-transform: uppercase;
+    }
+    .colors-swatch {
+        position: absolute;
+        top: 7px;
+        bottom: 7px;
+        left: 7px;
+        width: 14px;
+
+        overflow: hidden;
+        border: 1px solid rgba($color-black, 0.03);
+        @include border-radius(3px);
+
+        > span {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+    }
+    .colorpicker-container {
+        position: absolute;
+        z-index: 1;
+    	padding: 10px;
+    	background: $color-sonic;
+    }
+}
+
 .cp, .cp *, .cp-saturation-spectrum, .cp-saturation-spectrum *, .cp-hue-spectrum, .cp-hue-spectrum * {
     box-sizing: border-box;
 }
@@ -102,9 +139,4 @@
 	    width: 100%;
 	    border: 1px solid $color-black;
 	}
-}
-
-.colorpicker-container {
-	padding: 10px;
-	background: $color-sonic;
 }

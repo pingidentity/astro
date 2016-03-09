@@ -49,7 +49,7 @@ var ColorPickerDemo = React.createClass({
     render: function () {
         return (
             <div>
-                <div>
+                <div className="input-row">
                     <ColorPicker
                         id="color-picker"
                         color={this.state.picker1color}
@@ -57,8 +57,7 @@ var ColorPickerDemo = React.createClass({
                         labelText="Background color"
                         hintText="Pick a color or type in the hex code" />
                 </div>
-
-                <div>
+                <div className="input-row">
                     <ColorPicker
                         id="color-picker"
                         color={this.state.picker2color}
