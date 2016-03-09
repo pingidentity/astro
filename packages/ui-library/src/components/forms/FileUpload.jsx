@@ -3,6 +3,8 @@ var ReactDOM = require("react-dom");
 var _ = require("underscore");
 var Utils = require("../../util/Utils");
 var css = require("classnames");
+var fixOrientation = require("fix-orientation");
+var readExif = require("exif-js");
 
 var Accept = {
     IMAGE: "image/jpeg, image/jpg, image/gif, image/png",
@@ -114,6 +116,55 @@ var FileUpload = React.createClass({
     },
 
     /**
+     * @desc process the file and update the state accordingly.
+     * @method FileUpload#_processFileAndSetState
+     * @private
+     * @param {string} dataURI the base64 encoded image data
+     * @param {string} errorMessage to display if any
+     */
+    _processFileAndSetState: function (dataURI, errorMessage) {
+        this.setState({
+            errorMessage: errorMessage,
+            thumbnailSrc: dataURI
+        });
+
+        if (this.props.onPreviewReady) {
+            this.props.onPreviewReady(dataURI);
+        }
+    },
+
+    /**
+     * @desc call the file change event handler
+     * @method FileUpload#_invokeOnFileChange
+     * @private
+     * @param {object} file the file to be uploaded
+     * @param {string} errorMessage message to display if any
+     */
+    _invokeOnFileChange: function (file) {
+        if (this.props.onFileChange) {
+            this.props.onFileChange(file);
+        }
+    },
+
+    /**
+     * @desc Convert image base64 dataURL to file object.
+     * @method FileUpload#_dataURItoFile
+     * @private
+     * @param {string} dataURI the base64 encoded image data
+     * @param {object} file used to generate the base64 data
+     * @returns {object} new file created based on the base64 data passed
+     */
+    _dataURItoFile: function (dataURI, file) {
+        var byteString = atob(dataURI.split(",")[1]);
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i += 1) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+        return new File([ab], file.name, { type: file.type });
+    },
+
+    /**
      * Triggered when the file input has been changed.
      * Calls the validator (if present) and onChange
      * callback (if present).
@@ -129,25 +180,38 @@ var FileUpload = React.createClass({
             errorMessage = this.props.validator(files[0]);
         }
 
-        if (this.props.onFileChange) {
-            this.props.onFileChange(files[0]);
-        }
-
         // check if there is a file selected and the user agent supports the HTML5 File API
         if (Utils.isHtmlFileApiSupported() && files && files[0]) {
+
             var fileToUpload = files[0],
                 self = this;
 
             this._validateFile(fileToUpload, function () {
                 if (self.props.showThumbnail && fileToUpload.type.match("image.*")) {
                     var onFileReadSuccess = function (imgContentUrl) {
-                        self.setState({
-                            errorMessage: errorMessage,
-                            thumbnailSrc: imgContentUrl
-                        });
-
-                        if (self.props.onPreviewReady) {
-                            self.props.onPreviewReady(imgContentUrl);
+                        //exif only affects jpeg so check it is a jpeg/jpg file
+                        if (((fileToUpload.type === "image/jpg") || (fileToUpload.type === "image/jpeg")) &&
+                            imgContentUrl)
+                        {
+                            //try to read exif data the base64 data was passed
+                            readExif.getData(e.target.files[0], function () {
+                                if (this.exifdata.Orientation) {
+                                    //correct and display the image according to the exif orientation
+                                    fixOrientation(imgContentUrl, { image: true }, function (fixedImgContentUrl) {
+                                        var fixedFile = self._dataURItoFile(fixedImgContentUrl, files[0]);
+                                        self._invokeOnFileChange(fixedFile);
+                                        self._processFileAndSetState(fixedImgContentUrl, errorMessage);
+                                    });
+                                }
+                                else {
+                                    self._invokeOnFileChange(fileToUpload);
+                                    self._processFileAndSetState(imgContentUrl, errorMessage);
+                                }
+                            });
+                        }
+                        else {
+                            self._invokeOnFileChange(fileToUpload);
+                            self._processFileAndSetState(imgContentUrl, errorMessage);
                         }
                     };
                     var onFileReadError = function () {
@@ -155,6 +219,9 @@ var FileUpload = React.createClass({
                     };
                     return self._getImagePreview(files[0], onFileReadSuccess, onFileReadError);
                 } else {
+
+                    self._invokeOnFileChange(fileToUpload);
+
                     // display the selected file name
                     self.setState({
                         errorMessage: errorMessage,
@@ -164,6 +231,8 @@ var FileUpload = React.createClass({
                 }
             });
         } else {
+            self._invokeOnFileChange(files[0]);
+
             // display the selected file name
             this.setState({
                 errorMessage: errorMessage,
@@ -296,13 +365,13 @@ var FileUpload = React.createClass({
             <div className={containerCss}>
                 <label className={labelCss}>
                     {imageUpload &&
-                        <div>
-                            {this.props.title && <div>{this.props.title}</div>}
-                            <span className="image-icon"></span>
+                    <div>
+                        {this.props.title && <div>{this.props.title}</div>}
+                        <span className="image-icon"></span>
                             <span className="input-image-thumb">
                                 <img src={this.state.thumbnailSrc} ref="imageThumb" />
                             </span>
-                        </div>
+                    </div>
                     }
                     <input
                         disabled={this.props.disabled}
@@ -328,14 +397,14 @@ var FileUpload = React.createClass({
                         {this.props.removeFileLabel}
                     </a>
                     {!imageUpload &&
-                        <span className="file-name" data-id="fileUploadFileName">{this.state.fileName}</span>
+                    <span className="file-name" data-id="fileUploadFileName">{this.state.fileName}</span>
                     }
                 </div>
 
                 {this.props.filesAcceptedMsg &&
-                    <div className="image-types" data-id="filesAcceptedMsg">
-                        {this.props.filesAcceptedMsg}
-                    </div>
+                <div className="image-types" data-id="filesAcceptedMsg">
+                    {this.props.filesAcceptedMsg}
+                </div>
                 }
             </div>
         );

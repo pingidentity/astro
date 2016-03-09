@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "classnames": "1.2.1",
+    "exif-js": "2.1.1",
     "fbjs": "0.4.0",
+    "fix-orientation": "0.0.2",
     "isomorphic-fetch": "2.1.1",
     "moment": "2.11.1",
     "moment-range": "1.0.5",
@@ -40,6 +42,7 @@
     "json-loader": "0.5.4",
     "marked": "0.3.5",
     "node-sass": "3.4.2",
+    "process": "0.11.2",
     "react": "0.14.6",
     "react-addons-test-utils": "0.14.6",
     "react-dom": "0.14.6",
