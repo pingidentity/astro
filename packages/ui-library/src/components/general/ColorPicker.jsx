@@ -95,6 +95,7 @@ var Stateless = React.createClass({
      * if a mouse click happens outside the color picker area
      * and if the color picker is open.
      * @param {MouseEvent} e - the mouse event
+     * @private
      */
     _handleGlobalClick: function (e) {
         if (this.props.open) {
@@ -105,6 +106,7 @@ var Stateless = React.createClass({
     /**
      * Close the color picker if open and the ESC key is pressed.
      * @param {KeyEvent} e - the key event
+     * @private
      */
     _handleGlobalKeyDown: function (e) {
         if (e.keyCode === 27 && this.props.open) {
@@ -116,6 +118,7 @@ var Stateless = React.createClass({
      * Open the color picker if ENTER is pressed in the input field.
      * Close it if ESCAPE is pressed in the input field.
      * @param {KeyEvent} e - the key event
+     * @private
      */
     _onColorInputKeyDown: function (e) {
         switch (e.keyCode) {
@@ -134,6 +137,7 @@ var Stateless = React.createClass({
 
     /**
      * Toggle the color picker, but only if it is not disabled.
+     * @private
      */
     _onToggle: function () {
         if (!this.props.disabled) {
@@ -144,6 +148,7 @@ var Stateless = React.createClass({
     /**
      * Call the onChange callback when a color is selected in the color picker.
      * @param {string} color - the new color
+     * @private
      */
     _onChange: function (color) {
         this.props.onChange(color);
@@ -152,6 +157,7 @@ var Stateless = React.createClass({
     /**
      * Call the onChange callback when a color is selected by dragging in the color picker.
      * @param {string} color - the new color
+     * @private
      */
     _onDrag: function (color) {
         this.props.onChange(color, true);
@@ -160,6 +166,7 @@ var Stateless = React.createClass({
     /**
      * Call the onChange callback when a color code is typed into the input field.
      * @param {Event} e - the input field change event
+     * @private
      */
     _onColorInputChange: function (e) {
         this.props.onChange(e.target.value);
@@ -268,6 +275,7 @@ var Stateful = React.createClass({
      * @param {string} value - the new color
      * @param {boolean} keepOpen - whether to keep the color picker open or close it
      *     (eg. the drag event triggers several change callbacks, but they should not close the picker).
+     * @private
      */
     _change: function (value, keepOpen) {
         if (keepOpen === true) {
