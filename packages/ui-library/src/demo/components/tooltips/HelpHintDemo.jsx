@@ -3,43 +3,93 @@ var HelpHint = require("../../../components/tooltips/HelpHint.jsx");
 
 var HelpHintDemo = React.createClass({
 
-    getInitialState: function () {
-        return {
-        };
+    _onClick: function () {
+        alert("clicked!");
     },
 
     render: function () {
         return (
             <div>
-                <div style={ { paddingLeft: "180px" } }>
-                    <HelpHint
-                        className="top right short-tooltip"
-                        hintText="Help tooltip text"/>
-                    <br /><br />
-                    <HelpHint
-                        className="top left short-tooltip"
-                        hintText="Help tooltip text"/>
-                    <br /><br />
-                    <HelpHint
-                        className="bottom right short-tooltip"
-                        hintText="Help tooltip text"/>
-                    <br /><br />
-                    <HelpHint
-                        className="bottom left short-tooltip"
-                        hintText="Help tooltip text"/>
-                </div>
-                <br /><br /><br />
-                <HelpHint
-                    className="top right"
-                    hintText="Regular length tooltip text"/>
+                <strong>
+                    Types of Tooltips
+                </strong>
                 <br /><br />
                 <HelpHint
-                    className="top right medium-tooltip"
-                    hintText="Medium length tooltip text"/>
+                    className="short-tooltip right"
+                    hintText="Regular help tooltip with icon" />
+                &nbsp; &nbsp;
+                <HelpHint
+                    className="short-tooltip"
+                    hintText="Help tooltip text">
+                    <button onClick={this._onClick}>Button with tooltip</button>
+                </HelpHint>
+                &nbsp; &nbsp;
+                <HelpHint
+                    className="short-tooltip"
+                    hintText="Help tooltip text">
+                    <a onClick={this._onClick}>Text Link with tooltip</a>
+                </HelpHint>
+                &nbsp; &nbsp;
+                <HelpHint
+                    className="short"
+                    hintText="Help tooltip text">
+                    <button onClick={this._onClick} className="inline">Inline button with tooltip</button>
+                </HelpHint>
+
+                <br /><br />
+                <strong>
+                    Tooltip Placement
+                </strong>
                 <br /><br />
                 <HelpHint
-                    className="top right short-tooltip"
-                    hintText="Short length tooltip text"/>
+                    className="right short-tooltip"
+                    hintText="Top right placement"
+                />
+                &nbsp; &nbsp;
+                <HelpHint
+                    className="bottom right short-tooltip"
+                    hintText="Bottom right placement"
+                />
+                &nbsp; &nbsp;
+                <HelpHint
+                    className="short-tooltip"
+                    hintText="Top center placement (default)"
+                />
+                &nbsp; &nbsp;
+                <HelpHint
+                    className="bottom short-tooltip"
+                    hintText="Bottom center placement"
+                />
+                &nbsp; &nbsp;
+                <HelpHint
+                    className="left short-tooltip"
+                    hintText="Top left placement"
+                />
+                &nbsp; &nbsp;
+                <HelpHint
+                    className="bottom left short-tooltip"
+                    hintText="Bottom left placement"
+                />
+
+                <br /><br />
+                <strong>
+                    Tooltip Lengths
+                </strong>
+                <br /><br />
+                <HelpHint
+                    className="right"
+                    hintText="Regular length tooltip (default)"
+                />
+                &nbsp; &nbsp;
+                <HelpHint
+                    className="right medium-tooltip"
+                    hintText="Medium length tooltip"
+                />
+                &nbsp; &nbsp;
+                <HelpHint
+                    className="right short-tooltip"
+                    hintText="Short length tooltip"
+                />
 
             </div>
         );

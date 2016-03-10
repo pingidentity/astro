@@ -3,8 +3,8 @@
     display: inline-block;
 
     .colors-input {
-        width: 117px;
-        padding: 0 5px 0 27px;
+        width: 120px;
+        padding: 0 5px 0 29px;
         font-size: 16px;
         text-transform: uppercase;
     }
@@ -13,11 +13,7 @@
         top: 7px;
         bottom: 7px;
         left: 7px;
-        width: 14px;
-
-        overflow: hidden;
-        border: 1px solid rgba($color-black, 0.03);
-        @include border-radius(3px);
+        width: 16px;
 
         > span {
             position: absolute;
@@ -25,6 +21,22 @@
             bottom: 0;
             left: 0;
             right: 0;
+            overflow: hidden;
+            @include border-radius(3px);
+
+            &:before {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+
+                box-sizing: border-box;
+                border: 1px solid rgba($color-black, 0.1);
+                @include background-clip(content-box);
+                @include border-radius(3px);
+            }
         }
     }
     .colorpicker-container {

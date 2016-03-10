@@ -303,7 +303,10 @@ var FormTextField = React.createClass({
 
         if (this.props.labelHelpText) {
             labelHelp = (
-                <HelpHint hintText={this.props.labelHelpText} data-id={this.props.referenceName + "_helptooltip"} />
+                <HelpHint
+                    className="medium-tooltip"
+                    hintText={this.props.labelHelpText}
+                    data-id={this.props.referenceName + "_helptooltip"} />
             );
         }
 
@@ -340,7 +343,7 @@ var FormTextField = React.createClass({
                     {save}
                     <div className={errorCss} data-id={this.props.referenceName + "_errormessage"}>
                         <div className="tooltip-text">
-                            {this.state.errorMessage}
+                            <div className="tooltip-text-content">{this.state.errorMessage}</div>
                         </div>
                     </div>
                 </span>

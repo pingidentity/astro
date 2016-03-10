@@ -1,197 +1,244 @@
 
 .help-tooltip {
-    $help-font-spacing: 16px;
+    $tooltip-edge-offset: 10px;
+    $help-icon-size: 16px;
+    $animation-timing: 0.5s;
 
     display: inline-block;
     position: relative;
     background: transparent;
     cursor: default;
-    min-width:  $help-font-spacing + 1px;
-    min-height:  $help-font-spacing + 1px;
+    line-height: 1em;
 
-    &:after {
-        content: '\68';
+    .icon-help {
         text-transform: none;
-        display: inline-block;
-        font-family: $icon-font;
-        padding: 0 0 1px 1px;
-        width: $help-font-spacing + 1px;
-        font-size: $help-font-spacing;
-        line-height: $help-font-spacing;
-        color: map-get($colors, 'midnight');
-
-        position: absolute;
-        top: 1px;
-        left: 0;
-    }
-    &.no-icon {
-        &:after {
-            content: none;
-        }
-        .tooltip-text {
-            bottom: 0;
-        }
-        &.left {
-            .tooltip-text {
-                right: 0;
-            }
-        }
+        width: $help-icon-size + 1px;
+        font-size: $help-icon-size;
+        line-height: $help-icon-size;
+        color: $color-midnight;
     }
     .tooltip-text {
+        display: none;
         position: absolute;
-        bottom: $help-font-spacing;
-        left: 100%;
-        margin: 0 0 0 -25px;
+        bottom: 100%;
+        left: 50%;
+
+        width: 0;
+        padding: 0;
+        margin: 0;
         z-index: 1000;
-        width: 360px;
-        opacity: 0;
-        visibility: hidden;
 
-        background: map-get($colors, 'active-blue');
-        color: map-get($colors, 'white');
-
-        padding: 10px;
         font-size: 14px;
         line-height: 1.1em;
-        white-space: normal;
         text-transform: none;
+        white-space: normal;
         font-weight: normal;
 
-        &:before, &:after {
-            content: '';
-            position: absolute;
-        }
-        &:before {
-            border-style: solid;
-            border-width: 6px;
-            line-height: 1em;
-            border-color: map-get($colors, 'active-blue') transparent transparent transparent;
-            bottom: -12px;
-            left: 10px;
-        }
-        &:after {
-            width: 50%;
-            height: 28px;
-            bottom: -25px;
-            left: 0;
-            background: transparent;
+        @include animation(fade-in $animation-timing);
+
+        .tooltip-text-content {
+            $width: 340px;
+
+            position: relative;
+            box-sizing: border-box;
+            width: $width;
+            margin: 0 0 6px floor($width/-2);
+            background: $color-active-blue;
+            color: $color-white;
+            padding: 10px;
+            @include border-radius(4px);
+
+            &:before {
+                content: '';
+                position: absolute;
+                border-style: solid;
+                border-width: 6px;
+                line-height: 1em;
+                border-color: $color-active-blue transparent transparent transparent;
+                bottom: -12px;
+                left: 50%;
+                margin: 0 0 0 -6px;
+            }
+            &:after {
+                $hover-width: floor($width*0.6);
+                content: '';
+                position: absolute;
+                height: 10px;
+                bottom: -10px;
+                left: 10%;
+                right: 10%;
+                background: transparent;
+            }
         }
         a {
             color: $color-white;
             text-decoration: underline;
         }
-
-        @include border-radius(4px);
-        @include transform(translate3d(0, 0, 0));
-        @include transition(0.3s ease);
-        @include transition-delay(0ms);
     }
-    &.warning {
+    &:hover, &.show {
         .tooltip-text {
-            background: map-get($colors, 'critical-red');
+            display: block;
+        }
+    }
+    &.short-tooltip {
+        $width: 180px;
 
-            &:before {
-                border-color: map-get($colors, 'critical-red') transparent transparent transparent;
+        .tooltip-text {
+            .tooltip-text-content {
+                width: $width;
+                margin: 0 0 6px floor($width/-2);
             }
         }
-        &.bottom {
+        &.left {
             .tooltip-text {
-                &:before {
-                    border-color: transparent transparent map-get($colors, 'critical-red') transparent;
+                .tooltip-text-content {
+                    margin: 0 0 6px (-($width - 16));
+                }
+            }
+            &.bottom {
+                .tooltip-text {
+                    .tooltip-text-content {
+                        margin: 6px 0 0 (-($width - 16));
+                    }
                 }
             }
         }
     }
-    &.short-tooltip {
-        .tooltip-text {
-            width: 200px;
-        }
-    }
     &.medium-tooltip {
-        .tooltip-text {
-            width: 280px;
-        }
-    }
-    &:hover, &.show {
-        .tooltip-text {
-            opacity: 1;
-            visibility: visible;
+        $width: 260px;
 
-            @include transition-delay(100ms);
+        .tooltip-text {
+            .tooltip-text-content {
+                width: $width;
+                margin: 0 0 6px floor($width/-2);
+            }
+        }
+        &.left {
+            .tooltip-text {
+                .tooltip-text-content {
+                    margin: 0 0 6px (-($width - 16));
+                }
+            }
+            &.bottom {
+                .tooltip-text {
+                    .tooltip-text-content {
+                        margin: 6px 0 0 (-($width - 16));
+                    }
+                }
+            }
         }
     }
-    &:hover, &:focus, &.show {
+    &.right {
         .tooltip-text {
-            @include transform(translateY(-8px));
+            .tooltip-text-content {
+                margin: 0 0 6px -16px;
+
+                &:before {
+                    left: 0;
+                    margin: 0 0 0 $tooltip-edge-offset;
+                }
+                &:after {
+                    left: 0;
+                    right: 30%;
+                }
+            }
+        }
+    }
+    &.left {
+        $width: 340px;
+
+        .tooltip-text {
+            .tooltip-text-content {
+                margin: 0 0 6px (-($width - 16));
+
+                &:before {
+                    right: 0;
+                    left: auto;
+                    margin: 0 $tooltip-edge-offset 0 0;
+                }
+                &:after {
+                    right: 0;
+                    left: 30%;
+                }
+            }
         }
     }
     &.bottom {
         .tooltip-text {
-            top: 18px;
+            top: 100%;
             bottom: auto;
 
-            &:before {
-                border-color: transparent transparent map-get($colors, 'active-blue') transparent;
-                top: -12px;
-                bottom: auto;
-                left: 10px;
+
+            .tooltip-text-content {
+                margin-top: 6px;
+
+                &:after {
+                    top: auto;
+                    bottom: 100%;
+                }
+                &:before {
+                    border-color: transparent transparent $color-active-blue transparent;
+                    top: -12px;
+                    bottom: auto;
+
+                }
             }
             &:after {
                 top: -25px;
                 bottom: auto;
             }
         }
-        &:hover, &:focus, &.show {
-            .tooltip-text {
-                @include transform(translateY(8px));
-            }
-        }
     }
-    &.left {
+    &.warning {
         .tooltip-text {
-            right: -25px;
-            left: auto;
+            background: $color-critical-red;
 
             &:before {
-                right: 10px;
-                left: auto;
+                border-color: $color-critical-red transparent transparent transparent;
             }
-            &:after {
-                left: 50%;
+        }
+        &.bottom {
+            .tooltip-text {
+                &:before {
+                    border-color: transparent transparent $color-critical-red transparent;
+                }
             }
         }
     }
     &.form-error-message {
-        margin: 0 0 0 5px;
-        
+        position: absolute;
+        right: 0;
+        top: 0;
+
         .tooltip-text {
             bottom: auto;
-            margin: 0;
-            background: map-get($colors, 'critical-red');
-            min-height: 15px;
 
-            &:before {
-                border-color: transparent map-get($colors, 'critical-red') transparent transparent;
-                top: 10px;
-                bottom: auto;
-                right: auto;
-                left: -11px;
-            }
-            &:after {
-                left: -26px;
-                height: 100%;
-                top: 0;
-                width: 30px;
+            .tooltip-text-content {
+                margin: 0 0 0 6px;
+                min-height: 15px;
+                width: auto;
+                min-width: 240px;
+                max-width: 360px;
+                background: $color-critical-red;
+
+                &:before {
+                    border-color: transparent $color-critical-red transparent transparent;
+                    top: 10px;
+                    bottom: auto;
+                    right: auto;
+                    left: -6px;
+                }
+                &:after {
+                    left: -26px;
+                    height: 100%;
+                    top: 0;
+                    width: 30px;
+                }
             }
         }
         &:after {
             content: none;
             display: none;
-        }
-        &.no-label-text {
-            .tooltip-text {
-                top: 4px;
-            }
         }
         &.input-toggle {
             .tooltip-text {
@@ -200,27 +247,37 @@
         	}
         }
         &.bottom {
-            .tooltip-text {
-                top: auto;
-                bottom: -22px;
-                left: 0;
-                right: auto;
-                margin: 0 0 -8px 0;
+            top: 100%;
+            left: 0;
+            bottom: auto;
+            right: auto;
 
-                &:before {
-                    border-color: transparent transparent map-get($colors, 'critical-red') transparent;
-                    top: -12px;
+            .tooltip-text {
+                .tooltip-text-content {
+                    top: auto;
                     bottom: auto;
-                    right: auto;
-                    left: 15px;
-                }
-                &:after {
-                    left: 0;
-                    height: 10px;
-                    top: -8px;
-                    width: 80%
+                    margin: 7px 0 0 0;
+
+                    &:before {
+                        border-color: transparent transparent $color-critical-red transparent;
+                        top: -12px;
+                        bottom: auto;
+                        right: auto;
+                        left: 15px;
+                    }
+                    &:after {
+                        left: 0;
+                        height: 10px;
+                        top: -8px;
+                        width: 80%
+                    }
                 }
             }
         }
+    }
+
+    @-webkit-keyframes fade-in {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
     }
 }

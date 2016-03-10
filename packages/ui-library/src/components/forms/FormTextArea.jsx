@@ -175,7 +175,10 @@ var FormTextArea = React.createClass({
 
         if (this.props.labelHelpText) {
             labelHelp = (
-                <HelpHint hintText={this.props.labelHelpText} data-id={this.props.referenceName + "_helptooltip"} />
+                <HelpHint
+                    className="medium-tooltip"
+                    hintText={this.props.labelHelpText}
+                    data-id={this.props.referenceName + "_helptooltip"} />
             );
         }
 
@@ -209,7 +212,7 @@ var FormTextArea = React.createClass({
                     {undo}
                     <div className={errorCss}>
                         <div className="tooltip-text" data-id={this.props.referenceName + "_errormessage"}>
-                            {this.props.errorMessage}
+                            <div className="tooltip-text-content">{this.props.errorMessage}</div>
                         </div>
                     </div>
                 </span>

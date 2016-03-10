@@ -368,7 +368,7 @@ label {
 		.circle {
 			position: absolute;
 			left: 0;
-			bottom: 0;
+			bottom: 1px;
 			font-size: 16px;
 			width: $radio-height;
 			height: $radio-height;
@@ -999,12 +999,6 @@ label {
 			}
 		}
 	}
-}
-.help-tooltip.form-error-message {
-	position: absolute;
-	top: 9px;
-	left: 100%;
-	min-width: 0;
 }
 .required {
 	@mixin requiredCss {

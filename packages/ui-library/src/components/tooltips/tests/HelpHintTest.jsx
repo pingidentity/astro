@@ -19,16 +19,21 @@ describe("HelpHint", function () {
             <HelpHint hintText={text} id="helpTooltip" className={classValue}>{label}</HelpHint>
         );
         div = TestUtils.findRenderedDOMNodeWithDataId(component, "helpTooltip");
-        tooltipDiv = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text");
+        tooltipDiv = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text-content");
     });
 
     it("renders the component", function () {
         expect(ReactTestUtils.isDOMComponent(div)).toBeTruthy();
     });
 
-    it("renders the enclosed label", function () {
-        // verify that the label is rendered with a space between the label and the tooltip content
-        expect(div.textContent).toEqual(label + " " + text);
+    it("renders the icon when no label is passed in", function () {
+        component = ReactTestUtils.renderIntoDocument(
+            <HelpHint hintText={text} id="helpTooltip" className={classValue} />
+        );
+
+        var icon = TestUtils.findRenderedDOMNodeWithClass(component, "icon-help");
+
+        expect(icon).toBeTruthy();
     });
 
     it("has hint text", function () {

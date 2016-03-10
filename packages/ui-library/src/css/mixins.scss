@@ -34,6 +34,12 @@
 	box-sizing: $box-sizing;
 }
 
+@mixin background-clip($background-clip) {
+	-webkit-background-clip: $background-clip;
+	-moz-background-clip: $background-clip;
+	background-clip: $background-clip;
+}
+
 @mixin background-size($bgsize){
 	-webkit-background-size: $bgsize;
 	-moz-background-size: $bgsize;

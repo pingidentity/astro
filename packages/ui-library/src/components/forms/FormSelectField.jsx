@@ -182,7 +182,7 @@ var FormSelectField = React.createClass({
                     </div>
                     <div className={errorCss}>
                         <div className="tooltip-text" data-id={this.props.id + "_errormessage"}>
-                            {this.props.errorMessage}
+                            <div className="tooltip-text-content">{this.props.errorMessage}</div>
                         </div>
                     </div>
                 </div>
