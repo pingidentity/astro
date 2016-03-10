@@ -7,7 +7,7 @@ describe("If component", function () {
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-addons-test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        Wrapper = require("../../../testutil/UpdatePropsWrapper"),
+        Wrapper = TestUtils.UpdatePropsWrapper,
         TabbedSections = require("../TabbedSections.jsx"),
         _ = require("underscore");
 

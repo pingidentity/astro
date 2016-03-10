@@ -1,13 +1,16 @@
+/*eslint-disable valid-jsdoc*/
+
 "use strict";
 
 /**
- * @class util/Validators
+ * @module util/Validators
  * @desc Validator library, containing reusable validation functions.
  */
 
 module.exports = {
 
     /**
+     * @alias module:util/Validators.isValidEmail
      * @desc Validate that the string looks like an email address.
      *
      * @param {string} email the string to validate
@@ -19,6 +22,7 @@ module.exports = {
     },
 
     /**
+     * @alias module:util/Validators.isValidDomainName
      * @desc Validate that the string looks like a domain name.
      *
      * @param {string} domainName the string to validate
@@ -31,6 +35,7 @@ module.exports = {
     },
 
     /**
+     * @alias module:util/Validators.isValidIp
      * @desc Validate that the string looks like an IP address (a.b.c.d, all integers).
      *
      * @param {string} str the string to validate
@@ -42,6 +47,7 @@ module.exports = {
     },
 
     /**
+     * @alias module:util/Validators.isValidCidr
      * @desc Validate that the string looks like valid CIDR format (a.b.c.d/e, all integers).
      *
      * @param {string} str the string to validate
@@ -53,6 +59,7 @@ module.exports = {
     },
 
     /**
+     * @alias module:util/Validators.isDigitsOnly
      * @desc Validate that the given string contains only digits.
      *
      * @param {string} str the string to validate
@@ -63,6 +70,7 @@ module.exports = {
     },
 
     /**
+     * @alias module:util/Validators.isValidUrl
      * @desc Validate that the given string looks like a valid URL including protocol
      * (e.g., http://www.pingidentity.com/mypage)
      *
@@ -75,6 +83,7 @@ module.exports = {
     },
 
     /**
+     * @alias module:util/Validators.isValidPhoneNumber
      * @desc Validate that a phone number has only numbers, parens, dashes & whitespace
              (e.g.: (604) 555-1337)
      * @param {string} str string to validate

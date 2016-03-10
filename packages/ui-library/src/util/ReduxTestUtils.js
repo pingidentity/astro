@@ -1,4 +1,10 @@
-/** @function createTestDispatcher
+/**
+ * @module util/ReduxTest
+ * @desc The module contains utility functions to help with testing Redux componentn
+ */
+
+/**
+ * @function createTestDispatcher
  * @desc When writing unit tests for a reducer, there needs to be a convenient way to induce the reducer and execute
  * the middleware.  This function will create a mock dispatcher for the closed over state
  * @param {function} reducer - The reducer to bind to the dispatch

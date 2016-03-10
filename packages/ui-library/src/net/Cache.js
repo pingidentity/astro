@@ -1,10 +1,18 @@
+/*eslint-disable valid-jsdoc*/
+
 var Constants = require("../constants/CacheConstants");
 
 /**
+ * @module net/Cache
+ * @desc the module dedicated to work in conjunction with net/DataSourceApi and provides caching layer for networking
+ */
+
+/**
+ * @alias module:net/Cache.Cache
  * @desc Class object dedicated to data caching
  * @param {constants/CacheConstants#CacheTypes} type the cache type
- * @param {String} name the cache's name
- * @param {Number} expiry cache expiry time in seconds
+ * @param {string} name the cache's name
+ * @param {number} expiry cache expiry time in seconds
  * @example
  * var cache = new Cache('LOCAL', 'usersStore', 180);
  */
@@ -32,7 +40,7 @@ function Cache (type, name, expiry) {
 }
 
 /**
- * @public
+ * @memberOf module:net/Cache
  * @desc Clear the cache.
  */
 Cache.prototype.clear = function () {
@@ -46,7 +54,7 @@ Cache.prototype.clear = function () {
 };
 
 /**
- * @public
+ * @memberOf module:net/Cache
  * @desc Get an item from the cache.
  * @param {*} key the item's key
  * @return {*} the value in the cache for the given key, otherwise undefined
@@ -72,7 +80,7 @@ Cache.prototype.get = function (key) {
 };
 
 /**
- * @public
+ * @memberOf module:net/Cache
  * @desc Put an item in the cache.
  * @param {*} key the item's key
  * @param {*} item the item

@@ -1,26 +1,30 @@
+/*eslint-disable valid-jsdoc*/
+
 "use strict";
 
-var ReactDOM = require("react-dom");
-var ReactTestUtils = require("react-addons-test-utils");
-var _ = require("underscore");
-
 /**
- * @class util/TestUtils
- *
+ * @module util/TestUtils
  * @desc A collection of ReactJS test utils, to complement the ones provided by the
  * framework. This is a copy of the TestUtils in the library, just because this class
  * is used in the tests and should work with the same version of React used in the WP
  * and not in the library.
- *
  */
+
+var ReactDOM = require("react-dom");
+var React = require("react");
+var ReactTestUtils = require("react-addons-test-utils");
+var _ = require("underscore");
+var assign = require("object-assign");
+
 var TestUtils = {
 
     /**
+     * @alias module:util/TestUtils.scryRenderedDOMNodesWithDataId
      * @desc Return all DOM nodes children of the given tree with the specified dataId.
      *
-     * @param {ReactComponent} parent - the React component or DOM Node tree to search
+     * @param {object} parent - the React component or DOM Node tree to search
      * @param {string} dataId - the value of the data-id attribute on the target elements
-     * @return {DOMNode[]} - all DOM nodes which match the given criteria
+     * @return {array} - of DOM node objects which match the given criteria
      */
     scryRenderedDOMNodesWithDataId: function (parent, dataId) {
         // first check if the parent component is a DOM node
@@ -49,13 +53,14 @@ var TestUtils = {
     },
 
     /**
+     * @alias module:util/TestUtils.findRenderedDOMNodeWithDataId
      * @desc Return the single DOM node child of the given tree with the specified dataId.
      * If no node in the tree matches the criteria, null is returned.
      * If there are more than one node, an error is thrown.
      *
-     * @param {ReactComponent} parent - the React component or DOM Node tree to search
+     * @param {object} parent - the React component or DOM Node tree to search
      * @param {string} dataId - the value of the data-id attribute on the target element
-     * @return {DOMNode} - the DOM node which matches the given criteria
+     * @return {object} - the DOM node object which matches the given criteria
      */
     findRenderedDOMNodeWithDataId: function (parent, dataId) {
         var nodes = this.scryRenderedDOMNodesWithDataId(parent, dataId);
@@ -69,11 +74,12 @@ var TestUtils = {
     },
 
     /**
+     * @alias module:util/TestUtils.scryRenderedDOMNodesWithTag
      * @desc Return all DOM nodes children of the given tree with the specified tag name.
      *
-     * @param {ReactComponent} parent - the React component or DOM Node tree to search
+     * @param {object} parent - the React component or DOM Node tree to search
      * @param {string} tagName - the tag name on the target elements
-     * @return {DOMNode[]} - all DOM nodes which match the given criteria
+     * @return {array} - array of DOM nodes object which match the given criteria
      */
     scryRenderedDOMNodesWithTag: function (parent, tagName) {
         // first check if the parent component is a DOM node
@@ -98,6 +104,7 @@ var TestUtils = {
     },
 
     /**
+     * @alias module:util/TestUtils.findRenderedDOMNodeWithTag
      * @desc Return the single DOM node child of the given tree with the specified tag name.
      * If no node in the tree matches the criteria, null is returned.
      * If there are more than one node, an error is thrown.
@@ -118,6 +125,7 @@ var TestUtils = {
     },
 
     /**
+     * @alias module:util/TestUtils.scryRenderedDOMNodesWithName
      * @desc Return all DOM nodes children of the given tree with the specified name.
      *
      * @param {ReactComponent} parent - the React component or DOM Node tree to search
@@ -147,6 +155,7 @@ var TestUtils = {
     },
 
     /**
+     * @alias module:util/TestUtils.findRenderedDOMNodeWithName
      * @desc Return the single DOM node child of the given tree with the specified name.
      * If no node in the tree matches the criteria, null is returned.
      * If there are more than one node, an error is thrown.
@@ -167,6 +176,7 @@ var TestUtils = {
     },
 
     /**
+     * @alias module:util/TestUtils.scryRenderedDOMNodesWithClass
      * @desc Return all DOM nodes children of the given tree with the specified CSS class name.
      *
      * @param {ReactComponent} parent - the React component or DOM Node tree to search
@@ -205,6 +215,7 @@ var TestUtils = {
     },
 
     /**
+     * @alias module:util/TestUtils.findRenderedDOMNodeWithClass
      * @desc Return the single DOM node child of the given tree with the specified CSS class name.
      * If no node in the tree matches the criteria, null is returned.
      * If there are more than one node, an error is thrown.
@@ -225,7 +236,8 @@ var TestUtils = {
     },
 
     /**
-     * Finds all instances of components with type equal to `componentType`.
+     * @alias module:util/TestUtils.scryRenderedComponentsWithType
+     * @desc Finds all instances of components with type equal to `componentType`.
      * @param {object} root - a composite (ie. React) component
      * @param {object} componentType - the component type
      * @return {array} an array of all the matches.
@@ -235,7 +247,8 @@ var TestUtils = {
     },
 
     /**
-     * Same as `scryRenderedComponentsWithType` but expects there to be one result
+     * @alias module:util/TestUtils.findRenderedComponentWithType
+     * @desc Same as `scryRenderedComponentsWithType` but expects there to be one result
      * and returns that one result, or throws exception if there is any other
      * number of matches besides one.
      * @param {object} root - a composite (ie. React) component
@@ -245,7 +258,7 @@ var TestUtils = {
     findRenderedComponentWithType: function (root, componentType) {
         return ReactTestUtils.findRenderedComponentWithType(root, componentType);
     }
-    
+
 
 
     /**
@@ -315,5 +328,56 @@ var TestUtils = {
     }
     */
 };
+
+/**
+ * @class UpdatePropsWrapper
+ *
+ * @desc
+ * A simple wrapper to be used for unit testing, when you need to update
+ * a property on a rendered component. Starting with React 0.14.x,
+ * directly setting or replacing a prop on a rendered component is deprecated.
+ * Instead, use this wrapper and call _setProps(newProps) on it
+ * to have the wrapped component re-render with the new property(ies).
+ * The ref attribute on the wrapper is set to "wrapper".
+ *
+ * @Example
+ *  // initial render
+ *  var component = ReactTestUtils.renderIntoDocument(
+ *      <UpdatePropsWrapper type={If} test={true} />
+ *  );
+ *  // update the property through re-render
+ *  component._setProps({test: false});
+ *
+ * @Example
+ *  var component = ReactTestUtils.renderIntoDocument(
+ *      <UpdatePropsWrapper type={TabbedSections}
+ *              onSectionChange={jest.genMockFunction()}
+ *              selectedIndex={-1}>
+ *          <div data-id="section1" title="section 1">section 1</div>
+ *          <div data-id="section2" title="section 2">section 2</div>
+ *      </UpdatePropsWrapper>
+ *  );
+ *  component._setProps({ selectedIndex: 0 });
+ *
+ */
+TestUtils.UpdatePropsWrapper = React.createClass({
+    /**
+     * Re-render the wrapped component using the new property.
+     * Use this function to avoid setting the props directly on the component (anti pattern).
+     * @param {object} props - new property(ies) to set
+     */
+    _setProps: function (props) {
+        this.setState(props);
+    },
+    getInitialState: function () {
+        return assign({ ref: "wrapper" }, this.props);
+    },
+    render: function () {
+        return React.createElement(
+            this.props.type, // this is the type of element to create, provided as prop
+            this.state // this is the rest of props to set on the element
+        );
+    }
+});
 
 module.exports = TestUtils;

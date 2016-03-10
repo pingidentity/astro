@@ -70,7 +70,6 @@
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules",
       "<rootDir>/src/testutil/TestUtils.js",
-      "<rootDir>/src/testutil/UpdatePropsWrapper.js",
       "<rootDir>/src/util/ReduxTestUtils.js"
     ],
     "testDirectoryName": "tests",

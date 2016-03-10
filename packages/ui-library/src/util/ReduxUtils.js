@@ -1,7 +1,12 @@
-/** This file will house common utility functions for use with Redux */
 var _ = require("underscore");
 
-/** @function setAtPath
+/**
+ * @module util/ReduxUtils
+ * @desc The module contains common utility functions for use with Redux
+ */
+
+/**
+ * @function setAtPath
  * @desc this is a function that can be used to reduce redux boilerplate, especially on pages
  * with forms since most of what is done is setting values.  Using this function, you can create
  * on action to set a key/value, and ultimately call this function.  Then create a bunch of partials

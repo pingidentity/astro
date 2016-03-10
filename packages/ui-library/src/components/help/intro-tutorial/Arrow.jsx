@@ -3,7 +3,7 @@ var React = require("react"),
     format = require("../../../util/format.js");
 
 /**
- * @class Arrow
+ * @class IntroTutorial#Arrow
  * @private
  * @desc Draws an svg path between two points
  * @param {object} to - A DOM element to be used as the target

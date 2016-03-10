@@ -3,12 +3,6 @@ var React = require("react"),
     _ = require("underscore"),
     Spotlight = require("./Spotlight.jsx");
 
-/** @typedef {object} TutorialStep
- * @property {object} target - The css class of the target for this step
- * @property {string} description - A string description for the step
- * @property {string} title - A string title for the step
- **/
-
 /**
  * @class IntroTutorial
  * @private

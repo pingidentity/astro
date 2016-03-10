@@ -1,4 +1,28 @@
+/*eslint-disable valid-jsdoc*/
+
 "use strict";
+
+/**
+ * @module net/DataSourceApi
+ *
+ * @desc
+ * A simple singleton wrapper that will serve as the main
+ * interface for server API calls. By default the Accept content type header
+ * is set to json, text or *; it can be overriden by passing the 'Accept' header.
+ *
+ *
+ * <strong>Caching</strong>
+ * Caching is set by default, unless using getNoCache() method in lieu of get().
+ *
+ *
+ * <strong>Parsing the response</strong>
+ * If the server returns responses in JSON format, then the response will get
+ * automatically parsed in the 'response.data'; so if the JSON has a property
+ * like: 'phone' then all you have to do is to read its value from
+ * 'response.data.phone'.
+ *
+ * See the unit tests for more examples.
+ */
 
 // variables
 var request = require("superagent"),
@@ -16,7 +40,7 @@ var GET_REQUEST = "GET",
     DELETE_REQUEST = "DELETE";
 
 
-/*
+/**
  * @desc [INTERNAL] Check if the request represented by the supplied options
  * is allowed to hit the cache (ie. if the type is GET_REQUEST and the bypassCache
  * is not true). If the type is not GET_REQUEST, the cache will be cleared.
@@ -42,18 +66,18 @@ var verifyCache = function (options) {
     return false;
 };
 
-/*
+/**
  * @desc [INTERNAL] given the request attributes passed as the options argument,
  * build an HTTP request and sends it to the server.
  * @private
- * @param {{endpoint: string, type: string, params: Object.<string, string>, data: Object.<string, *>, files: Object.<string, Object>, headers: Object.<string, string>, callback: function, bypassCache: function(Object.<string, *>), cache: <Cache>}} options
- * the request type can be one of GET_REQUEST, POST_REQUEST, etc;
+ * @param {object} options the request type can be one of GET_REQUEST, POST_REQUEST, etc;
+ *  {{endpoint: string, type: string, params: Object.<string, string>, data: Object.<string, *>, files: Object.<string, Object>, headers: Object.<string, string>, callback: function, bypassCache: function(Object.<string, *>), cache: <Cache>}}
  * the params field is an array of named request parameters;
  * the data field is an associative array of form data;
  * the files field is an associative array of objects;
  * the headers field is an associative array of headers (the Accept is optional)
  * callback is the function to be called upon response, it is called with an object of this type:
- * {error: string, status: number, data: Object, fromCache: boolean}
+ * ```{error: string, status: number, data: Object, fromCache: boolean}```
  *
  * @return {undefined}
  */
@@ -168,67 +192,44 @@ var processRequest = function (options) {
  * since they are the 'contract' to be used across the entire application.
  */
 
-/**
- *
- * @class net/DataSourceApi
- *
- * @desc
- * A simple singleton wrapper that will serve as the main
- * interface for server API calls. By default the Accept content type header
- * is set to json, text or *; it can be overriden by passing the 'Accept' header.
- * <br/><br/>
- * <strong>Caching</strong>
- * Caching is set by default, unless using getNoCache() method in lieu of get().
- * <br/><br/>
- * <strong>Parsing the response</strong>
- * If the server returns responses in JSON format, then the response will get
- * automatically parsed in the 'response.data'; so if the JSON has a property
- * like: 'phone' then all you have to do is to read its value from
- * 'response.data.phone'.
- *
- * @example
- * See the unit tests for more examples.
- *
- * var api = require('ui-library/src/net/DataSourceAPI');
- *
- * // GET request
- * api.get(
- *     'http://localhost:9090/web-portal/myendpoint/action',
- *     { query: 'search string', count: 10 },
- *     function(response) {
- *         if (!response.error) {
- *             console.log('Received ' + response.status + ' with data: ' + response.data);
- *         } else {
- *             console.log('Received error: '  + response.error);
- *         }
- *     },
- *     { 'Accept': 'application/json' );
- *
- * // POST request
- * api.post(
- *     'myendpoint/action',
- *     {postParam: 'p1'},
- *     {queryParam: 'q1'},
- *     function(response) {
- *         if (!response.error) {
- *             console.log('Received ' + response.status + ' with data: ' + response.data);
- *         } else {
- *             console.log('Received error: '  + response.error);
- *         }
- *     });
- */
+
+
 var DataSourceApi = {
+
     /**
-     * @public
+     * @callback module:net/DataSourceApi.callback
+     * @param {object} response object - response data object
+     * @param {string|falsy} response.error - error string is request failed, falsy otherwise
+     * @param {number} response.status - response HTTP status code
+     * @param {object} response.data - response HTTP status code
+     * @param {object} response.headers - response headers (string -> string)
+     * @param {boolean} response.fromCache - true is response was served from cache, false if real networking
+     */
+
+    /**
+     * @alias module:net/DataSourceApi.get
      * @desc Makes a GET request and calls the callback with the response.
      * If the response exists in the cache, it will be returned from there.
      * Use getNoCache() method to force sending the request even if it exists
      * in the response cache.
      * @param {string} endpoint the endpoint to send the request to
-     * @param {Object.<string, string>} params the request parameters as an associative array
-     * @param {function(Object.<string, *>)} callback the callback function, it will be called with an object of this type:
-     * {error: string, status: number, data: Object, headers: Object.<string, string>, fromCache: boolean}
-     * @param {Object.<string, string>} [headers] request headers as an associative array
+     * @param {object} params the request query parameters as an associative array (string -> string)
+     * @param {module:net/DataSourceApi.callback} callback the callback function to be triggered once response is ready
+     * @param {object} [headers] request headers as an associative array (string -> string)
+     * @example
+     * var api = require('ui-library/src/net/DataSourceAPI');
+     *
+     * api.get(
+     *     'http://localhost:9090/web-portal/myendpoint/action',
+     *     { query: 'search string', count: 10 },
+     *     function(response) {
+     *         if (!response.error) {
+     *             console.log('Received ' + response.status + ' with data: ' + response.data);
+     *         } else {
+     *             console.log('Received error: '  + response.error);
+     *         }
+     *     },
+     *     { 'Accept': 'application/json' );
      */
     get: function (endpoint, params, callback, headers) {
         processRequest(
@@ -245,14 +246,27 @@ var DataSourceApi = {
     },
 
     /**
-     * @public
+     * @alias module:net/DataSourceApi.getNoCache
      * @desc Makes a GET request and calls the callback with the response.
-     * It doesn't use the response cache.
+     * It is explicitly bypassing cache and always do networking
      * @param {string} endpoint the endpoint to send the request to
-     * @param {Object.<string, string>} params the request parameters as an associative array
-     * @param {function(Object.<string, *>)} callback the callback function, it will be called with an object of this type:
-     * {error: string, status: number, data: Object, headers: Object.<string, string>, fromCache: boolean}
-     * @param {Object.<string, string>} [headers] request headers as an associative array
+     * @param {object} params the request query parameters as an associative array (string -> string)
+     * @param {module:net/DataSourceApi.callback} callback the callback function to be triggered once response is ready
+     * @param {object} [headers] request headers as an associative array (string -> string)
+     * @example
+     * var api = require('ui-library/src/net/DataSourceAPI');
+     *
+     * api.getNoCache(
+     *     'http://localhost:9090/web-portal/myendpoint/action',
+     *     { query: 'search string', count: 10 },
+     *     function(response) {
+     *         if (!response.error) {
+     *             console.log('Received ' + response.status + ' with data: ' + response.data);
+     *         } else {
+     *             console.log('Received error: '  + response.error);
+     *         }
+     *     },
+     *     { 'Accept': 'application/json' );
      */
     getNoCache: function (endpoint, params, callback, headers) {
         processRequest(
@@ -269,15 +283,29 @@ var DataSourceApi = {
     },
 
     /**
-     * @public
+     * @alias module:net/DataSourceApi.post
      * @desc Makes a POST request and calls the callback with the response.
      * @param {string} endpoint the endpoint to send the request to
-     * @param {Object.<string, *>} data the form data to be sent in the body, as an associative array
-     * @param {Object.<string, string>} params the request parameters as an associative array
-     * @param {function(Object.<string, *>)} callback the callback function, it will be called with an object of this type:
-     * {error: string, status: number, data: Object, headers: Object.<string, string>, fromCache: boolean}
-     * @param {Object.<string, Object>} [files] the files to be attached to the request, as an associative array
-     * @param {Object.<string, string>} [headers] request headers as an associative array
+     * @param {object} data the form data to be sent in the body
+     * @param {object} params the request query parameters as an associative array (string -> string)
+     * @param {module:net/DataSourceApi.callback} callback the callback function to be triggered once response is ready
+     * @param {object} [files] the files to be attached to the request. Will be sent as 'multipart/form-data`
+     * @param {object} [headers] request headers as an associative array (string -> string)
+     * @example
+     *
+     * var api = require('ui-library/src/net/DataSourceAPI');
+     *
+     * api.post(
+     *     'myendpoint/action',
+     *     {postParam: 'p1'},
+     *     {queryParam: 'q1'},
+     *     function(response) {
+     *         if (!response.error) {
+     *             console.log('Received ' + response.status + ' with data: ' + response.data);
+     *         } else {
+     *             console.log('Received error: '  + response.error);
+     *         }
+     *     });
      */
     post: function (endpoint, data, params, callback, files, headers) {
         processRequest(
@@ -296,14 +324,29 @@ var DataSourceApi = {
     },
 
     /**
-     * @public
+     * @alias module:net/DataSourceApi.put
      * @desc Makes a PUT request and calls the callback with the response.
+     *
      * @param {string} endpoint the endpoint to send the request to
-     * @param {Object} data the form data to be sent in the body, as an associative array
-     * @param {Object.<string, string>} params the request parameters as an associative array
-     * @param {function(Object.<string, *>)} callback the callback function, it will be called with an object of this type:
-     * {error: string, status: number, data: Object, headers: Object.<string, string>, fromCache: boolean}
-     * @param {Object.<string, string>} [headers] request headers as an associative array
+     * @param {object} data the form data to be sent in the body
+     * @param {object} params the request query parameters as an associative array (string -> string)
+     * @param {module:net/DataSourceApi.callback} callback the callback function to be triggered once response is ready
+     * @param {object} [headers] request headers as an associative array (string -> string)
+     * @example
+     * var api = require('ui-library/src/net/DataSourceAPI');
+     *
+     * api.put(
+     *     'http://localhost:9090/web-portal/myendpoint/action',
+     *     { query: 'search string', count: 10 },
+     *     { param1: "value1, param2: "value2},
+     *     function(response) {
+     *         if (!response.error) {
+     *             console.log('Received ' + response.status + ' with data: ' + response.data);
+     *         } else {
+     *             console.log('Received error: '  + response.error);
+     *         }
+     *     },
+     *     { 'Accept': 'application/json' );
      */
     put: function (endpoint, data, params, callback, headers) {
         processRequest(
@@ -321,13 +364,27 @@ var DataSourceApi = {
     },
 
     /**
-     * @public
+     * @alias module:net/DataSourceApi.doDelete
      * @desc Makes a DELETE request and calls the callback with the response.
+     *
      * @param {string} endpoint the endpoint to send the request to
-     * @param {Object.<string, string>} params the request parameters as an associative array
-     * @param {function(Object.<string, *>)} callback the callback function, it will be called with an object of this type:
-     * {error: string, status: number, data: Object, headers: Object.<string, string>, fromCache: boolean}
-     * @param {Object.<string, string>} [headers] request headers as an associative array
+     * @param {object} params the request query parameters as an associative array (string -> string)
+     * @param {module:net/DataSourceApi.callback} callback the callback function to be triggered once response is ready
+     * @param {object} [headers] request headers as an associative array (string -> string)
+     * @example
+     * var api = require('ui-library/src/net/DataSourceAPI');
+     *
+     * api.doDelete(
+     *     'http://localhost:9090/web-portal/resource/123',
+     *     { query: 'search string', count: 10 },
+     *     function(response) {
+     *         if (!response.error) {
+     *             console.log('Received ' + response.status + ' with data: ' + response.data);
+     *         } else {
+     *             console.log('Received error: '  + response.error);
+     *         }
+     *     },
+     *     { 'Accept': 'application/json' );
      */
     doDelete: function (endpoint, params, callback, headers) {
         processRequest(

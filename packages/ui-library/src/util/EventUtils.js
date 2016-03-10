@@ -1,3 +1,9 @@
+/**
+ * @module util/EventUtils
+ * @desc The module contains helper functions to deal with React/DOM events model.
+ */
+
+
 /** @function forwardTargetChecked
  * @desc Wapper which will extract the checked attribute of the target and pass that to the wrapped callback.  This
  * helps in bridging the gap between what a callback expects and low level components which pass events.

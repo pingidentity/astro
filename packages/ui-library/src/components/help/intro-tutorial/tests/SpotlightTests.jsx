@@ -20,7 +20,7 @@ describe("IntroTutorial", function () {
             }),
             outerHTML: "<div data-id=\"blah\">blah</div>"
         };
-        var component = ReactTestUtils.renderIntoDocument(<Spotlight target={target} />);
+        var component = ReactTestUtils.renderIntoDocument(<Spotlight target={target}/>);
         var node = ReactDOM.findDOMNode(component);
 
         expect(node.innerHTML).toBe(target.outerHTML);

@@ -6,7 +6,7 @@ describe("Batch", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-addons-test-utils"),
-        Wrapper = require("../../../testutil/UpdatePropsWrapper"),
+        Wrapper = require("../../../testutil/TestUtils").UpdatePropsWrapper,
         InfiniteScroll = require("../InfiniteScroll.jsx"),
         assign = require("object-assign");
     var batches;

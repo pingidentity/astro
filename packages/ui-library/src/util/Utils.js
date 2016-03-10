@@ -1,14 +1,17 @@
+/*eslint-disable valid-jsdoc*/
+
 "use strict";
 
-var moment = require("moment");
-
 /**
- * @class util/Utils
+ * @module util/Utils
  * @desc A set of util functions.
  */
+
+var moment = require("moment");
 module.exports = {
 
     /**
+     * @alias module:util/Utils.isHtmlFileApiSupported
      * @desc Helper method to test if the HTML5 File API is supported by the user agent
      *
      * @returns {boolean} true if the API is supported
@@ -18,7 +21,8 @@ module.exports = {
     },
 
     /**
-     * @desc Remove the leading 'fakepath' directory added by the browser to <input type="file" /> elements
+     * @alias module:util/Utils.stripFakePath
+     * @desc Remove the leading 'fakepath' directory added by the browser to `<input type="file" />` elements
      *
      * @param {string} path the path to strip
      * @returns {string} the stripped path
@@ -28,6 +32,7 @@ module.exports = {
     },
 
     /**
+     * @alias module:util/Utils.triggerFileDownload
      * @desc Trigger a Blob download - based on http://stackoverflow.com/a/23797348
      *
      * @param {string} filename the filename
@@ -59,6 +64,7 @@ module.exports = {
     },
 
     /**
+     * @alias module:util/Utils.formatDate
      * @desc Format the given timestamp in milliseconds as a YYYY-MM-DD date.
      *
      * @param {number} timestamp the timestamp (UNIX time * 1000)

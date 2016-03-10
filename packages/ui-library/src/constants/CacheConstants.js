@@ -3,14 +3,16 @@
 var keyMirror = require("fbjs/lib/keyMirror");
 
 /**
- * @class constants/CacheConstants
+ * @module net/Cache
  * @desc {@link net/Cache} related constants
  */
 module.exports = {
     /**
-     * @desc cache types
+     * @enum {string}
+     * @desc cache storage types
      */
     CacheTypes: keyMirror({
+
         /**
          * @desc in-memory
          */
