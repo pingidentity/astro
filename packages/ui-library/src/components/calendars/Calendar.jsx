@@ -2,7 +2,6 @@ var React = require("react"),
     classnames = require("classnames"),
     moment = require("moment-range");
 
-
 var DaysView = require("./DaysView.jsx");
 var MonthsView = require("./MonthsView.jsx");
 var YearsView = require("./YearsView.jsx");
@@ -26,6 +25,7 @@ var _keyDownActions = Utils.keyDownActions;
  * @param {function} onChange         - the callback function called when a date is selected
  * @param {string}   id               - the data-id property
  * @param {boolean}  isRequired       - whether the field is required or not (default false)
+ * @param {boolean}  className        - additional classes to add to the container element
  *
  * @example
  *
@@ -63,7 +63,8 @@ var Calendar = React.createClass({
         isRequired: React.PropTypes.bool,
         minView: React.PropTypes.number,
         onChange: React.PropTypes.func,
-        placeholder: React.PropTypes.string
+        placeholder: React.PropTypes.string,
+        className: React.PropTypes.string
     },
 
     getDefaultProps: function () {
@@ -223,7 +224,7 @@ var Calendar = React.createClass({
         }
     },
 
-    //small hack for hide calendar
+    // notify document click handler that event originated from calendar elements
     isCalendar: false,
 
     /**
@@ -323,7 +324,8 @@ var Calendar = React.createClass({
         };
 
         return (
-            <div className={classnames("input-calendar", containerCss)} onClick={this.toggleClick}>
+            <div className={classnames("input-calendar", this.props.className, containerCss)}
+                 onClick={this.toggleClick}>
                 <div className="input-container">
                     <input type="text"
                         data-id={this.props.id}

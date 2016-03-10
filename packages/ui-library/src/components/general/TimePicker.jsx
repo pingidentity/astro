@@ -1,5 +1,6 @@
 var React = require("react");
 var FormSelectField = require("../forms/FormSelectField.jsx");
+var cx = require("classnames");
 
 /**
  * @callback TimePicker~valueCallback
@@ -11,11 +12,12 @@ var FormSelectField = require("../forms/FormSelectField.jsx");
  * @desc   A drop-down form for selecting the time
  *
  * @param {TimePicker~valueCallback} onValueChange Handles the select element value change
- * @param {number}   [increments]  The increments (in minutes) to populate the list. Default is 15
- * @param {string}   [format]      The time format. Either "12" or "24". Default is "12"
- * @param {string}   [labelText]   The text to display as the field's label
- * @param {string}   [value]       The value to be initially selected
+ * @param {number}   [increments]       The increments (in minutes) to populate the list. Default is 15
+ * @param {string}   [format]           The time format. Either "12" or "24". Default is "12"
+ * @param {string}   [labelText]        The text to display as the field's label
+ * @param {string}   [value]            The value to be initially selected
  * @param {string}   [id="time-picker"] The data-id to pass to the FormSelectField
+ * @param {string}   [className]        Additional class names for container
  */
 module.exports = React.createClass({
 
@@ -25,7 +27,8 @@ module.exports = React.createClass({
         format: React.PropTypes.string,
         labelText: React.PropTypes.string,
         value: React.PropTypes.string,
-        id: React.PropTypes.string
+        id: React.PropTypes.string,
+        className: React.PropTypes.string
     },
 
     /**
@@ -142,17 +145,16 @@ module.exports = React.createClass({
 
     render: function () {
         var times = this._getTimes();
+        var classes = cx("input-time", this.props.className);
 
         return (
-            /* jshint ignore:start */
             <FormSelectField
                 {...this.props}
                 options={times}
                 onChange={this._onChange}
-                className="input-time"
+                className={classes}
                 label={this.props.labelText}
             />
-            /* jshint ignore:end */
         );
     }
 });
