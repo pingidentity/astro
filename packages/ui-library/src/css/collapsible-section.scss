@@ -1,21 +1,31 @@
 
 .collapsible-section {
+	$line-indent: 20px;
+
+	border-top: 1px solid $color-rabbit-fur;
+	border-bottom: 1px solid $color-rabbit-fur;
+	padding: 25px 0 0 0;
+	margin: 0 0 -1px $line-indent;
+
 	.collapsible-section-title {
 		position: relative;
 		display: inline-block;
-		margin: 0 0 10px 0;
-		padding: 0 0 0 19px;
-		font-size: 16px;
+		padding: 0 0 25px 1px;
+		font-size: 15px;
+		text-transform: uppercase;
+		color: $color-slate;
 		line-height: 1em;
 		cursor: pointer;
+		font-family: $font-pn-regular;
 
 		&:before {
 			position: absolute;
 			top: 0;
-			left: 0;
+			left: -$line-indent;
 			content: '\59';
 			font-family: $icon-font;
 			font-size: 6px;
+			color: $color-midnight;
 			@include transition((all 0.3s cubic-bezier(1, 0, 1, 1)));
 		}
 	}
