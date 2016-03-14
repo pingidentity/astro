@@ -2,9 +2,39 @@
     position: relative;
     display: inline-block;
 
+
+    .color-picker {
+        position: relative;
+        display: inline-block;
+
+        &:after {
+            content: '\59';
+            font-family: $icon-font;
+            font-size: 7px;
+            position: absolute;
+            top: 11px;
+            right: 10px;
+            color: $color-midnight;
+            pointer-events: none;
+            @include transition(all 0.3s);
+        }
+    }
+    &.open {
+        .color-picker {
+            .colorpicker-container {
+                display: block;
+            }
+            &:after {
+                @include rotate(180deg);
+            }
+        }
+    }
+    label {
+        display: block;
+    }
     .colors-input {
-        width: 120px;
-        padding: 0 5px 0 29px;
+        width: 133px;
+        padding: 0 5px 0 27px;
         font-size: 16px;
         text-transform: uppercase;
     }
@@ -41,6 +71,7 @@
     }
     .colorpicker-container {
         position: absolute;
+        display: none;
         z-index: 1;
     	padding: 10px;
     	background: $color-sonic;

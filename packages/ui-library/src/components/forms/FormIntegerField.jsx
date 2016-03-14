@@ -251,18 +251,21 @@ var FormIntegerField = React.createClass({
         var isReadonly = this.props.mode.toUpperCase() === FormFieldConstants.FormFieldMode.READ_ONLY,
             upDownSpinner;
 
-        var labelCss = cx(this.props.labelCSS, { "form-integer-container": true });
+        var labelCss = cx(this.props.labelCSS, { "form-integer-container input-integer": true });
 
         if (!this.props.disabled && !isReadonly) {
             upDownSpinner = (
-                <span className = "up-down-spinner"
+                <span
+                    className = "up-down-spinner"
                     onMouseOut = {this._handleSpinnerRelease}>
-                    <button className = "icon-close-arrow"
+                    <button
+                        className = "icon-close-arrow"
                         name = "spinner-up"
                         onMouseDown = {this._handleSpinnerPress}
                         onMouseUp = {this._handleSpinnerRelease}
                     />
-                <button className = "icon-dropdown-arrow"
+                    <button
+                        className = "icon-dropdown-arrow"
                         name = "spinner-down"
                         onMouseDown = {this._handleSpinnerPress}
                         onMouseUp = {this._handleSpinnerRelease}
@@ -272,8 +275,7 @@ var FormIntegerField = React.createClass({
         }
 
         return (
-            <div
-                onKeyDown={this._handleKeyPress}>
+            <div onKeyDown={this._handleKeyPress}>
                 <FormTextField
                     {...this.props}
                     ref = "formTextField"
@@ -284,7 +286,6 @@ var FormIntegerField = React.createClass({
                     {upDownSpinner}
                 </FormTextField>
             </div>
-
         );
     }
 

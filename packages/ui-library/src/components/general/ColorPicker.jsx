@@ -12,26 +12,30 @@ var callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutside
  * @class ColorPicker
  *
  * @desc  A color picker component that supports common rgb values for text, background, etc.
- * It has a text field for displaying the current color (which also allows entering the desired color code)
- * and a color selection area.
- * Pressing ESC while the color selection area is showing will close the color selection.
+ *   It has a text field for displaying the current color (which also allows entering the desired
+ *   color code) and a color selection area.
+ *   Pressing ESC while the color selection area is showing will close the color selection.
  *
  * @param {string} [id="color-picker"] - Set the data-id on the top level html element
  * @param {string} [className] - Append classname to the top level html element
  * @param {string} color - A hexcode of chosen color
- * @param {function} onChange - function (color, keepOpen) {...} A callback executed when a color is chosen;
- *   the new color is passed as param, as well as the keepOpen boolean which tells the parent whether
- *   the color picker should be kept open or not.
+ * @param {bool} [controlled=false] - A boolean to enable the component to be externally managed.
+ *   True will relinquish control to the components owner.  False or not specified will cause
+ *   the component to manage state internally but still execute the onToggle callback
+ *   in case the owner is interested.
+ * @param {function} onChange - function (color, keepOpen) {...} A callback executed when a color is
+ *   chosen; the new color is passed as param, as well as the keepOpen boolean which tells the
+ *   parent whether the color picker should be kept open or not.
  * @param {bool} [disabled=false] - A property to disable the component
  * @param {string} [labelText] - A label to render at the top of the color picker
  * @param {string} [hintText] - If a label is provided, a hint text may also be optionally provided
  * @param {function} [onToggle] - function () {...} delegate to call when open/closed state changed.
  *   Used only with stateless mode. Will receive current open status value.
  * @param {function} [open=false] - boolean state of open/closed menu. Used only in stateless mode.
- * @param {bool} [controlled=false] - A boolean to enable the component to be externally managed.
- *   True will relinquish control to the components owner.  False or not specified will cause
- *   the component to manage state internally but still execute the onToggle callback
- *   in case the owner is interested.
+ * @param {bool} [pickerHidden=false] - A property to hide the color picker using CSS.  When
+ *   pickerHidden is true, the "colorpicker-container" is always rendered and the visibility is
+ *   controlled via the presence of the "open" class the components top-level div (see containerCss
+ *   below).
  *
  * @example
  *   <ColorPicker
@@ -82,12 +86,13 @@ var Stateless = React.createClass({
         id: React.PropTypes.string,
         className: React.PropTypes.string,
         color: React.PropTypes.string.isRequired,
+        disabled: React.PropTypes.bool,
+        hintText: React.PropTypes.string,
+        labelText: React.PropTypes.string,
         onChange: React.PropTypes.func.isRequired,
         onToggle: React.PropTypes.func.isRequired,
         open: React.PropTypes.bool,
-        disabled: React.PropTypes.bool,
-        labelText: React.PropTypes.string,
-        hintText: React.PropTypes.string
+        pickerHidden: React.PropTypes.bool
     },
 
     /**
@@ -204,6 +209,7 @@ var Stateless = React.createClass({
         return {
             open: this.props.open || false,
             disabled: this.props.disable || false,
+            pickerHidden: this.props.pickerHidden || false,
             pickerTop: 28,
             pickerLeft: 0,
             pickerDimensions: 0
@@ -212,22 +218,23 @@ var Stateless = React.createClass({
 
 
     render: function () {
-        var styles = css(
-                "colorpicker-container",
-                { hidden: !this.props.open }
-        );
+        /* When props.pickerHidden is true, the "colorpicker-container" is always rendered and the
+        visibility is controlled via the presence of the "open" class the components top-level div
+        (see containerCss below). */
+        var containerCss = {
+            "input-color-picker": true,
+            open: this.props.open
+        };
+        containerCss[this.props.className] = !!this.props.className;
 
         return (
             /* eslint-disable max-len */
-            <div data-id={this.props.id} className={this.props.className}>
-                <div>
-                    <FormLabel value={this.props.labelText} hint={this.props.hintText}/>
-                </div>
-
-                <div className="input-color-picker" ref="swatch">
+            <div data-id={this.props.id} className={css(containerCss)}>
+                <FormLabel value={this.props.labelText} hint={this.props.hintText}/>
+                <div className="color-picker" ref="swatch">
                     <span className="colors colors-theme-default colors-swatch-position-left colors-swatch-left colors-position-default"
-                            ref="innerSwatch"
-                            onClick={this._onToggle}>
+                          ref="innerSwatch"
+                          onClick={this._onToggle}>
                         <span className="colors-swatch">
                             <span ref="colorSample" style={{ backgroundColor: this.props.color }}></span>
                         </span>
@@ -240,9 +247,8 @@ var Stateless = React.createClass({
                                 onChange={this._onColorInputChange}
                                 onKeyDown={this._onColorInputKeyDown} />
                     </span>
-
-                    <If test={this.props.open && !this.props.disabled}>
-                        <span className={styles} style={{
+                    <If test={(this.props.pickerHidden || this.props.open) && !this.props.disabled}>
+                        <span className="colorpicker-container" style={{
                             top: this.state.pickerTop,
                             left: this.state.pickerLeft,
                             width: this.state.pickerDimensions + 40,
@@ -274,7 +280,8 @@ var Stateful = React.createClass({
      * Call the onChange callback.
      * @param {string} value - the new color
      * @param {boolean} keepOpen - whether to keep the color picker open or close it
-     *     (eg. the drag event triggers several change callbacks, but they should not close the picker).
+     *    (eg. the drag event triggers several change callbacks, but they should not close the
+     *    picker).
      * @private
      */
     _change: function (value, keepOpen) {

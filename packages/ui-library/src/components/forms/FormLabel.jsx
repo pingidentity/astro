@@ -24,7 +24,8 @@ var FormLabel = React.createClass({
                 <label data-id={this.props.id} className={this.props.className}>
                     <span className="label-text">
                         { this.props.value }
-                        { this.props.hint ? <HelpHint ref="hint" hintText={this.props.hint} /> : null }
+                        { this.props.hint &&
+                            <HelpHint ref="hint" className="medium-tooltip" hintText={this.props.hint} /> }
                     </span>
                 </label>);
         } else {
