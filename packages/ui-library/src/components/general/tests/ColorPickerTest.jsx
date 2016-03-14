@@ -74,6 +74,7 @@ describe("ColorPicker", function () {
 
     it("stateless: renders the picker when open", function () {
         var component = getComponent({
+            id: "container",
             color: "#ff00ff",
             open: true,
             controlled: true
@@ -82,6 +83,9 @@ describe("ColorPicker", function () {
 
         var picker = componentRef.refs.reactColorPicker;
         expect(picker).toBeTruthy();
+
+        var container = TestUtils.findRenderedDOMNodeWithDataId(component, "container");
+        expect(container.classList.contains("open")).toBeTruthy();
     });
 
     it("stateless: disables component if disabled=true", function () {
@@ -387,6 +391,7 @@ describe("ColorPicker", function () {
 
     it("stateless: hides picker when told so", function () {
         var component = getComponent({
+            id: "container",
             color: "#ff00ff",
             pickerHidden: true,
             controlled: true
@@ -396,6 +401,9 @@ describe("ColorPicker", function () {
         // the picker is not visible by default
         var picker = componentRef.refs.reactColorPicker;
         expect(picker).toBeDefined();
+
+        var container = TestUtils.findRenderedDOMNodeWithDataId(component, "container");
+        expect(container.classList.contains("open")).toBeFalsy();
     });
 
 });
