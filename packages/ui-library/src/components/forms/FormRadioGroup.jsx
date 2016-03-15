@@ -22,8 +22,9 @@ var React = require("react"),
  * @param {FormRadioGroup~onChangeCallback} onChange - the callback to be triggered when the selection changed
  * @param {string} selected - the selected "id" from the items object above. If none is passed-in, all radio buttons
  *          are left unchecked
- * @param {boolean} stacked - {true} by default. When true, radios inputs are stacked vertically. When false radio
+ * @param {boolean} [stacked=true]- When true, radios inputs are stacked vertically. When false radio
  *          inputs appear on same line and wrap when out of space.
+ * @param {boolean} [disabled=false] - if radio buttons are disabled
  *
  * @example
  *
@@ -71,14 +72,16 @@ var FormRadioGroup = React.createClass({
     getDefaultProps: function () {
         return {
             id: "radio-btn",
-            stacked: true
+            stacked: true,
+            disabled: false
         };
     },
 
     render: function () {
         var self = this,
             radioCss = {
-                stacked: this.props.stacked
+                stacked: this.props.stacked,
+                disabled: this.props.disabled
             };
 
         if (this.props.className) {

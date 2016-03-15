@@ -91,4 +91,18 @@ describe("FormRadioGroup", function () {
         var labelsHorizontal = TestUtils.scryRenderedDOMNodesWithClass(horizontalComponent, "stacked");
         expect(labelsHorizontal.length).toBe(0);
     });
+
+    it("renders disabled state", function () {
+        var view = ReactTestUtils.renderIntoDocument(
+            <FormRadioGroup
+                groupName="test_radio_group"
+                disabled={true}
+                onChange={callback}
+                items={items}/>
+        );
+
+        // test presence of disabled class (className prop)
+        var labelsCustom = TestUtils.scryRenderedDOMNodesWithClass(view, "disabled");
+        expect(labelsCustom.length).toBe(items.length);
+    });
 });
