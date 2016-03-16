@@ -25,6 +25,11 @@
 	// for better font rendering
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+
+	&:before {
+		display: block;
+		text-align: center;
+	}
 }
 
 .icon-account:before { content: "\61"; }

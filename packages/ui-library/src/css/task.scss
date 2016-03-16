@@ -59,10 +59,11 @@
 		}
 		.help-tooltip {
 			margin-left: 10px;
-			vertical-align: -3px;
-			height: 18px;
-			width: 18px;
-			line-height: 18px;
+			vertical-align: 1px;
+
+			.icon-help {
+				width: 17px;
+			}
 		}
 	}
 	.task-title-selection {

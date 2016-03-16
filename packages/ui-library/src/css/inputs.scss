@@ -396,8 +396,9 @@ label {
 			}
 		}
 		.help-tooltip {
-			height: 18px;
-			width: 18px;
+			height: 23px;
+    		vertical-align: bottom;
+			margin: 0 0 0 10px;
 		}
 	}
 	.input-toggle {
