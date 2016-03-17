@@ -336,16 +336,6 @@ label {
 			.label-text {
 				text-transform: capitalize;
 			}
-			.help-tooltip {
-				&:after {
-					position: static;
-				}
-				.tooltip-text {
-					bottom: 24px;
-					left: 21%;
-					margin-left: -5px;
-				}
-			}
 		}
 		input[type=radio] {
 			position: absolute;
