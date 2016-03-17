@@ -34,8 +34,8 @@ var TestUtils = {
 
         var parentNode =
             ReactTestUtils.isDOMComponent(parent) || ReactTestUtils.isCompositeComponent(parent)
-            ? ReactDOM.findDOMNode(parent)
-            : parent;
+                ? ReactDOM.findDOMNode(parent)
+                : parent;
 
         var nodes;
         if (parentNode.getAttribute("data-id") === dataId) {
@@ -43,9 +43,9 @@ var TestUtils = {
         }
         else {
             var selectorValue = dataId
-                    .replace(/\[/g, "\\[")
-                    .replace(/\]/g, "\\]")
-                    .replace(/'/g, "\\'");
+                .replace(/\[/g, "\\[")
+                .replace(/\]/g, "\\]")
+                .replace(/'/g, "\\'");
             nodes = parentNode.querySelectorAll("[data-id=" + selectorValue + "]");
         }
 
@@ -67,7 +67,7 @@ var TestUtils = {
 
         if (nodes.length > 1) {
             throw new Error("Found more than one DOM node with dataId: " +
-                    dataId + " in the given tree");
+                dataId + " in the given tree");
         }
 
         return nodes.length === 0 ? null : nodes[0];
@@ -89,8 +89,8 @@ var TestUtils = {
 
         var parentNode =
             ReactTestUtils.isDOMComponent(parent) || ReactTestUtils.isCompositeComponent(parent)
-            ? ReactDOM.findDOMNode(parent)
-            : parent;
+                ? ReactDOM.findDOMNode(parent)
+                : parent;
 
         var nodes;
         if (parentNode.tagName.toLowerCase() === tagName.toLowerCase()) {
@@ -118,7 +118,7 @@ var TestUtils = {
 
         if (nodes.length > 1) {
             throw new Error("Found more than one DOM node with tag name: " +
-                    tagName + " in the given tree");
+                tagName + " in the given tree");
         }
 
         return nodes.length === 0 ? null : nodes[0];
@@ -140,8 +140,8 @@ var TestUtils = {
 
         var parentNode =
             ReactTestUtils.isDOMComponent(parent) || ReactTestUtils.isCompositeComponent(parent)
-            ? ReactDOM.findDOMNode(parent)
-            : parent;
+                ? ReactDOM.findDOMNode(parent)
+                : parent;
 
         var nodes;
         if (parentNode.name === name) {
@@ -169,7 +169,7 @@ var TestUtils = {
 
         if (nodes.length > 1) {
             throw new Error("Found more than one DOM node with name: " +
-                    name + " in the given tree");
+                name + " in the given tree");
         }
 
         return nodes.length === 0 ? null : nodes[0];
@@ -190,8 +190,8 @@ var TestUtils = {
         }
 
         var parentNode = ReactTestUtils.isDOMComponent(parent) || ReactTestUtils.isCompositeComponent(parent)
-                ? ReactDOM.findDOMNode(parent)
-                : parent;
+            ? ReactDOM.findDOMNode(parent)
+            : parent;
 
         var nodes;
 
@@ -229,7 +229,7 @@ var TestUtils = {
 
         if (nodes.length > 1) {
             throw new Error("Found more than one DOM node with class name: " +
-                    className + " in the given tree");
+                className + " in the given tree");
         }
 
         return nodes.length === 0 ? null : nodes[0];
@@ -257,9 +257,36 @@ var TestUtils = {
      */
     findRenderedComponentWithType: function (root, componentType) {
         return ReactTestUtils.findRenderedComponentWithType(root, componentType);
+    },
+
+    /**
+     * @alias module:util/TestUtils.captureGlobalListener
+     * @desc Attaches proxy function for `window.addEvenListener` which will save reference to actual provided callback when
+     * event type match filter. Useful for testing ReactJS component global (window) callbacks behaviour.
+     *
+     * @param eventType event to save callback for. case insensitive.
+     * @returns {function} - when executed will trigger actual provided callback to `window.addEventListener`
+     *
+     * @example
+     * //capture registered callback from reactjs control
+     * var onKeyDown = TestUtils.captureGlobalListener("keyDown")
+     *
+     * onKeyDown({keyCode:13});  //later in test trigger global event
+     */
+    captureGlobalListener: function (eventType) {
+
+        var captured;
+
+        window.addEventListener = function (event, listener) {
+            if (event.toLowerCase() === eventType.toLowerCase()) {
+                captured = listener;
+            }
+        };
+
+        return function () {
+            return captured.apply(this, arguments);
+        };
     }
-
-
 
     /**
      * @desc Return all components in the supplied tree with the specified dataId.
@@ -269,15 +296,15 @@ var TestUtils = {
      * @return {ReactComponent[]} - all components which match the given criteria
      */
     /*
-    scryRenderedDOMComponentsWithDataId: function (tree, dataId) {
-        var components = ReactTestUtils.findAllInRenderedTree(tree, function (inst) {
-            var instId = ReactDOM.findDOMNode(inst).getAttribute("data-id");
-            return ReactTestUtils.isDOMComponent(inst) && (instId === dataId);
-        });
+     scryRenderedDOMComponentsWithDataId: function (tree, dataId) {
+     var components = ReactTestUtils.findAllInRenderedTree(tree, function (inst) {
+     var instId = ReactDOM.findDOMNode(inst).getAttribute("data-id");
+     return ReactTestUtils.isDOMComponent(inst) && (instId === dataId);
+     });
 
-        return components;
-    },
-    */
+     return components;
+     },
+     */
 
     /**
      * @desc Return the single component in the supplied tree with the specified dataId.
@@ -290,17 +317,17 @@ var TestUtils = {
      * @throws Will throw an Error if more than one element match the criteria
      */
     /*
-    findRenderedDOMComponentWithDataId: function (tree, dataId) {
-        var components = TestUtils.scryRenderedDOMNodesWithDataId(tree, dataId);
+     findRenderedDOMComponentWithDataId: function (tree, dataId) {
+     var components = TestUtils.scryRenderedDOMNodesWithDataId(tree, dataId);
 
-        if (components.length > 1) {
-            throw new Error("Found more than one component with dataId: " +
-                    dataId + " in the given tree");
-        }
+     if (components.length > 1) {
+     throw new Error("Found more than one component with dataId: " +
+     dataId + " in the given tree");
+     }
 
-        return components.length === 0 ? null : components[0];
-    },
-    */
+     return components.length === 0 ? null : components[0];
+     },
+     */
 
     /**
      * @desc Return the single component in the supplied tree with the specified name.
@@ -313,20 +340,20 @@ var TestUtils = {
      * @throws Will throw an Error if more than one element match the criteria
      */
     /*
-    findRenderedDOMComponentWithName: function (tree, name) {
-        var components = ReactTestUtils.findAllInRenderedTree(tree, function (inst) {
-            var instName = ReactDOM.findDOMNode(inst).name;
-            return ReactTestUtils.isDOMComponent(inst) && (name === instName);
-        });
+     findRenderedDOMComponentWithName: function (tree, name) {
+     var components = ReactTestUtils.findAllInRenderedTree(tree, function (inst) {
+     var instName = ReactDOM.findDOMNode(inst).name;
+     return ReactTestUtils.isDOMComponent(inst) && (name === instName);
+     });
 
-        if (components.length > 1) {
-            throw new Error("Found more than one component with name: " +
-                    name + " in the given tree");
-        }
+     if (components.length > 1) {
+     throw new Error("Found more than one component with name: " +
+     name + " in the given tree");
+     }
 
-        return components.length === 0 ? null : components[0];
-    }
-    */
+     return components.length === 0 ? null : components[0];
+     }
+     */
 };
 
 /**

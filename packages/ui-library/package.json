@@ -98,6 +98,7 @@
     "doc": "jsdoc -c ./jsdoc.json",
     "lint": "eslint --ext .js,.jsx .",
     "jest": "jest && node ./clean-after.js",
+    "coverage": "jest --coverage && node ./clean-after.js",
     "test": "jest",
     "verify": "npm run lint && npm run test"
   },

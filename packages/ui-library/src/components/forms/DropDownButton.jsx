@@ -24,7 +24,7 @@ var React = require("react"),
  * @param {DropDownButton~onToggleCallback} [onToggle] - callback to be triggered when open/closed state changed.
  *                                Used only with stateless mode. Will receive current open status value.
  * @param {bool} [open=false] - boolean state of open/closed menu. Used only in stateless mode.
- * @param {string} [id] - optional id to pass to be used as data-id attribute value
+ * @param {string} [id="drop-down-button"] - optional id to pass to be used as data-id attribute value
  * @param {string} [className] - optional class to pass to style top level container
  * @param {string} [label="Add"] - label text for button
  * @param {string} [title] - menu title text
@@ -109,10 +109,7 @@ var Stateless = React.createClass({
     _handleGlobalClick: function (e) {
         if (this.props.open) {
             callIfOutsideOfContainer(
-                ReactDOM.findDOMNode(this.refs.menu),
-                _.partial(this.props.onToggle, this.props.open),
-                e
-            );
+                ReactDOM.findDOMNode(this.refs.menu), _.partial(this.props.onToggle, this.props.open), e);
         }
     },
 
@@ -124,6 +121,7 @@ var Stateless = React.createClass({
 
     getDefaultProps: function () {
         return {
+            id: "drop-down-button",
             label: "Add",
             title: "",
             options: {},
@@ -196,7 +194,6 @@ var Stateful = React.createClass({
         }, function () {
             if (this.props.onSelect) {
                 this.props.onSelect(value);
-
             }
         });
     },

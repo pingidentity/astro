@@ -1,6 +1,7 @@
 window.__DEV__ = true;
 
 jest.dontMock("../DropDownButton.jsx");
+jest.dontMock("../../../util/EventUtils.js");
 
 describe("DropDownButton", function () {
 
@@ -14,7 +15,7 @@ describe("DropDownButton", function () {
 
         var menu = {
             optionOne: "Option One",
-            optionTwo: "Option Two",
+            optionTwo: "Option Two"
         };
 
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
@@ -60,6 +61,30 @@ describe("DropDownButton", function () {
         // make sure <a>s in a list, +1 length for button
         expect(as.length).toBe(3);
         expect(as[1].textContent).toEqual("Option One");
+    });
+
+    it("renders extra css classes", function () {
+        var callback = jest.genMockFunction();
+
+        var menu = {
+            optionOne: "Option One",
+            optionTwo: "Option Two"
+        };
+
+        var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
+            <DropDownButton title="Test Drop Down"
+                            className="extra"
+                            controlled={true}
+                            open={true}
+                            onSelect={callback}
+                            options={menu}
+                            onToggle={jest.genMockFunction()} />
+        );
+
+        //expect menu to be rendered
+        var root = TestUtils.findRenderedDOMNodeWithDataId (dropDownButtonComponent, "drop-down-button");
+
+        expect(root.getAttribute("class")).toContain("extra");
     });
 
     it("triggers callback on toggle in stateless mode", function () {
@@ -204,5 +229,110 @@ describe("DropDownButton", function () {
         //make sure callback was triggered
         expect(callback).toBeCalled();
     });
+
+    it("register global listeners on mount", function () {
+
+        window.addEventListener = jest.genMockFunction();
+
+        var menu = {
+            optionOne: "Option One",
+            optionTwo: "Option Two"
+        };
+
+        ReactTestUtils.renderIntoDocument(
+            <DropDownButton title="Test Drop Down"
+                            controlled={true}
+                            open={true}
+                            options={menu}
+                            onToggle={jest.genMockFunction()} />
+        );
+
+        expect(window.addEventListener.mock.calls.length).toBe(2);
+        expect(window.addEventListener.mock.calls[0][0]).toEqual("click");
+        expect(window.addEventListener.mock.calls[1][0]).toEqual("keydown");
+    });
+
+    it("unregister global listeners on unmount", function () {
+
+        window.removeEventListener = jest.genMockFunction();
+
+        var menu = {
+            optionOne: "Option One",
+            optionTwo: "Option Two"
+        };
+
+        var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
+            <DropDownButton title="Test Drop Down"
+                            controlled={true}
+                            open={true}
+                            options={menu}
+                            onToggle={jest.genMockFunction()} />
+        );
+
+        //trigger unmount
+        React.unmountComponentAtNode(React.findDOMNode(dropDownButtonComponent).parentNode);
+
+        expect(window.removeEventListener.mock.calls.length).toBe(2);
+        expect(window.removeEventListener.mock.calls[0][0]).toEqual("click");
+        expect(window.removeEventListener.mock.calls[1][0]).toEqual("keydown");
+    });
+
+    it("triggers callback when clicked outside", function () {
+
+        var globalClickListener = TestUtils.captureGlobalListener("click");
+
+        var callback = jest.genMockFunction();
+
+        var menu = {
+            optionOne: "Option One",
+            optionTwo: "Option Two"
+        };
+
+        ReactTestUtils.renderIntoDocument(
+            <DropDownButton title="Test Drop Down"
+                            controlled={true}
+                            open={true}
+                            onSelect={jest.genMockFunction()}
+                            options={menu}
+                            onToggle={callback} />
+        );
+
+
+        //click outside
+        globalClickListener({
+            target: {}
+        });
+
+        expect(callback).toBeCalled();
+    });
+
+    it("triggers callback when ESC pressed", function () {
+
+        var globalKeyListener = TestUtils.captureGlobalListener("keyDown");
+
+        var callback = jest.genMockFunction();
+
+        var menu = {
+            optionOne: "Option One",
+            optionTwo: "Option Two"
+        };
+
+        ReactTestUtils.renderIntoDocument(
+            <DropDownButton title="Test Drop Down"
+                            controlled={true}
+                            open={true}
+                            onSelect={jest.genMockFunction()}
+                            options={menu}
+                            onToggle={callback} />
+        );
+
+        //press ESC
+        globalKeyListener({
+            keyCode: 27
+        });
+
+        expect(callback).toBeCalled();
+    });
+
 
 });
