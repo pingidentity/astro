@@ -180,16 +180,29 @@ var Stateless = React.createClass({
     componentDidMount: function () {
         window.addEventListener("click", this._handleGlobalClick);
         window.addEventListener("keydown", this._handleGlobalKeyDown);
+    },
+    
+    componentDidUpdate: function () {
+        // re-render to update the style on the picker and its container
+        // only if their position and dimension changed
+        // (the recursive call should happen only once)
 
-        var swatch = ReactDOM.findDOMNode(this.refs.swatch);
+        if (this.props.disabled !== true) {
+            var swatch = ReactDOM.findDOMNode(this.refs.swatch);
+            var newPickerTop = swatch.offsetHeight;
+            var newPickerDimensions = swatch.offsetWidth + 40;
 
-        /* eslint-disable react/no-did-mount-set-state */
-        this.setState({
-            pickerTop: swatch.offsetHeight,
-            pickerLeft: 0,
-            pickerDimensions: swatch.offsetWidth
-        });
-        /* eslint-enable react/no-did-mount-set-state */
+            if ((newPickerTop && newPickerDimensions) &&
+                     (this.state.pickerTop !== newPickerTop ||
+                              this.state.pickerDimensions !== newPickerDimensions)) {
+                /* eslint-disable react/no-did-update-set-state */
+                this.setState({
+                    pickerTop: swatch.offsetHeight,
+                    pickerDimensions: swatch.offsetWidth + 40 //size of container div + hue spectrum bar width
+                });
+                /* eslint-enable react/no-did-update-set-state */
+            }
+        }
     },
 
     componentWillUnmount: function () {
@@ -207,11 +220,9 @@ var Stateless = React.createClass({
 
     getInitialState: function () {
         return {
-            open: this.props.open || false,
-            disabled: this.props.disable || false,
             pickerHidden: this.props.pickerHidden || false,
             pickerTop: 28,
-            pickerLeft: 0,
+            pickerLeft: 0, // this is static
             pickerDimensions: 0
         };
     },
