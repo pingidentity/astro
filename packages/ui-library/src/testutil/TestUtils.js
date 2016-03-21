@@ -264,20 +264,29 @@ var TestUtils = {
      * @desc Attaches proxy function for `window.addEvenListener` which will save reference to actual provided callback when
      * event type match filter. Useful for testing ReactJS component global (window) callbacks behaviour.
      *
-     * @param eventType event to save callback for. case insensitive.
+     * @param {string} eventType event to save callback for. case insensitive.
+     * @param {object} [obj=window] optional object to capture listener from. Like `document`. If not provided - window object
      * @returns {function} - when executed will trigger actual provided callback to `window.addEventListener`
      *
      * @example
      * //capture registered callback from reactjs control
-     * var onKeyDown = TestUtils.captureGlobalListener("keyDown")
+     * var onKeyDown = TestUtils.captureGlobalListener("keyDown");
+     *
+     * onKeyDown({keyCode:13});  //later in test trigger global event
+     *
+     * @example
+     * //capture registered callback from reactjs control on `document` object
+     * var onKeyDown = TestUtils.captureGlobalListener("keyDown", document);
      *
      * onKeyDown({keyCode:13});  //later in test trigger global event
      */
-    captureGlobalListener: function (eventType) {
+    captureGlobalListener: function (eventType, obj) {
 
         var captured;
 
-        window.addEventListener = function (event, listener) {
+        var target = obj || window;
+
+        target.addEventListener = function (event, listener) {
             if (event.toLowerCase() === eventType.toLowerCase()) {
                 captured = listener;
             }

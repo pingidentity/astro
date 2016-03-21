@@ -51,12 +51,6 @@ var ControlledRockerButton = React.createClass({
         className: React.PropTypes.string
     },
 
-    componentWillReceiveProps: function (nextProps) {
-        if (nextProps.labels && (nextProps.labels.length < 2 || nextProps.labels.length > 4)) {
-            console.warn("RockerButton expecting two to four labels, but was given ", nextProps.labels.length);
-        }
-    },
-
     getDefaultProps: function () {
         return {
             onChange: _.noop,
@@ -70,6 +64,11 @@ var ControlledRockerButton = React.createClass({
     },
 
     render: function () {
+
+        if (this.props.labels && (this.props.labels.length < 2 || this.props.labels.length > 4)) {
+            console.warn("RockerButton expecting two to four labels, but was given ", this.props.labels.length);
+        }
+
         var className = "rocker-button sel-" + this.props.selectedIndex;
         if (this.props.className) {
             className = className + " " + this.props.className;

@@ -87,4 +87,17 @@ describe("RockerButton", function () {
         // verify label, make sure callback was triggered for Services
         expect(callback).toBeCalledWith("Services", 2);
     });
+
+    it("is logging warning if more than 4 labels given", function () {
+
+        console.warn = jest.genMockFunction();
+        var callback = jest.genMockFunction();
+
+        ReactTestUtils.renderIntoDocument(
+            <RockerButton labels={["Profile", "Groups", "Services", "Users", "Security"]} onChange={callback} />
+        );
+
+        expect(console.warn).toBeCalledWith("RockerButton expecting two to four labels, but was given ", 5);
+    });
+
 });

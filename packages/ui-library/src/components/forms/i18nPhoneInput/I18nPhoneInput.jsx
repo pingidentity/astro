@@ -24,7 +24,7 @@ var cx = require("classnames");
  * @param {string} [dialCode] the dial code to be selected by default (defaults to "1"/USA)
  * @param {string} [phoneNumber] the initial value of the phone number excluding dial code
  * @param {string} [placeholder] the phone number input placeholder text
- * @param {string} [invalidPhoneNumberMessage] the message to display if an invalid ph no is entered (defaults to "Please enter a valid phone number.")
+ * @param {string} [invalidPhoneNumberMessage="Please enter a valid phone number."] the message to display if an invalid ph no is entered.
  * @param {boolean} [autoFocus] passes to and auto focuses the FormTextField input
  * @param {boolean} [useAutocomplete] whether or not the field will support autocomplete (default false)
  */

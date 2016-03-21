@@ -29,6 +29,7 @@ jest.dontMock("../FormTextField.jsx");
 
 describe("I18nPhoneInput", function () {
     var React = require("react"),
+        ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-addons-test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         I18nPhoneInput = require("../i18nPhoneInput/I18nPhoneInput.jsx"),
@@ -128,4 +129,81 @@ describe("I18nPhoneInput", function () {
 
         expect(phoneInput.value).toEqual(phoneNumber);
     });
+
+    it("triggers callback on phone number change", function () {
+
+        var callback = jest.genMockFunction();
+
+        View = ReactTestUtils.renderIntoDocument(
+            <I18nPhoneInput id="phoneInput" dialCode="1" onValueChange={callback} />
+        );
+
+        var phoneInput = TestUtils.findRenderedDOMNodeWithDataId(View, "phoneInput" + "_phonenumber");
+
+        ReactTestUtils.Simulate.change(phoneInput, {
+            target: {
+                value: "111-222"
+            }
+        });
+
+        expect(callback).toBeCalledWith("1", "111-222");
+    });
+
+    it("shows error message on blur", function () {
+        View = ReactTestUtils.renderIntoDocument(
+            <I18nPhoneInput id="phoneInput" dialCode="1" />
+        );
+
+        var phoneInput = TestUtils.findRenderedDOMNodeWithDataId(View, "phoneInput" + "_phonenumber");
+
+        ReactTestUtils.Simulate.blur(phoneInput, {});
+
+        var error = TestUtils.findRenderedDOMNodeWithClass(View, "tooltip-text-content");
+
+        expect(error.textContent).toEqual("Please enter a valid phone number.");
+    });
+
+    it("closing when called outside", function () {
+        var globalClickListener = TestUtils.captureGlobalListener("click", document);
+
+        View = ReactTestUtils.renderIntoDocument(
+            <I18nPhoneInput id="phoneInput" dialCode="1" />
+        );
+
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(View, "selected-flag");
+
+        //open country list
+        ReactTestUtils.Simulate.click(flag);
+
+        //click outside
+        globalClickListener({
+            target: {
+                dataset: {}
+            }
+        });
+
+        var list = TestUtils.findRenderedDOMNodeWithDataId(View, "country-list");
+
+        expect(list.getAttribute("class")).toContain("hide");
+    });
+
+    it("unregister global listeners on unmount", function () {
+        document.addEventListener = jest.genMockFunction();
+        document.removeEventListener = jest.genMockFunction();
+
+        var view = ReactTestUtils.renderIntoDocument(
+            <I18nPhoneInput onValueChange={onValueChange} />
+        );
+
+        //trigger unmount
+        ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(view).parentNode);
+
+        expect(document.addEventListener.mock.calls.length).toEqual(1);
+        expect(document.addEventListener.mock.calls[0][0]).toEqual("click");
+
+        expect(document.removeEventListener.mock.calls.length).toEqual(1);
+        expect(document.removeEventListener.mock.calls[0][0]).toEqual("click");
+    });
+
+
 });

@@ -6,6 +6,7 @@ jest.dontMock("../../../util/EventUtils.js");
 describe("DropDownButton", function () {
 
     var React = require("react"),
+        ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-addons-test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         DropDownButton = require("../DropDownButton.jsx");
@@ -270,7 +271,7 @@ describe("DropDownButton", function () {
         );
 
         //trigger unmount
-        React.unmountComponentAtNode(React.findDOMNode(dropDownButtonComponent).parentNode);
+        ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(dropDownButtonComponent).parentNode);
 
         expect(window.removeEventListener.mock.calls.length).toBe(2);
         expect(window.removeEventListener.mock.calls[0][0]).toEqual("click");
