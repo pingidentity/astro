@@ -1,7 +1,8 @@
 "use strict";
 
-var React = require("react");
-var css = require("classnames");
+var React = require("react"),
+    EventUtils = require("../../util/EventUtils.js"),
+    css = require("classnames");
 
 /**
  * @callback ModalButton~contentCallback
@@ -170,6 +171,25 @@ var ModalButton = React.createClass({
         }
     },
 
+    _handleKeyDown: function (e) {
+        if (!this._isExpanded()) {
+            return;
+        }
+
+        EventUtils.callIfOutsideOfContainer(this.refs.container, function () {
+            e.stopPropagation();
+            e.preventDefault();
+        }, e);
+    },
+
+    componentWillMount: function () {
+        window.addEventListener("keydown", this._handleKeyDown);
+    },
+
+    componentWillUnmount: function () {
+        window.removeEventListener("keydown", this._handleKeyDown);
+    },
+
     componentWillReceiveProps: function (nextProps) {
         if (typeof nextProps.expanded !== "undefined" && nextProps.expanded !== null) {
             this.setState({ expanded: !!nextProps.expanded });
@@ -257,22 +277,11 @@ var ModalButton = React.createClass({
         }
 
 
-        if (this.props.inline) {
-            return (
-                <span className={this.props.containerStyle}>
-                    {activator}
-                    {modal}
-                </span>
-            );
-        } else {
-            return (
-                <div className={this.props.containerStyle}>
-                    {activator}
-                    {modal}
-                </div>
-            );
-        }
+        return React.createElement(this.props.inline ? "span" : "div",
+            { className: this.props.containerStyle, ref: "container" },
+            [activator, modal]);
     }
 });
 
 module.exports = ModalButton;
+
