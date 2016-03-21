@@ -2,7 +2,9 @@
 table {
 	&.basic {
 		width: 100%;
-		
+		&.fixed {
+			table-layout: fixed;
+		}	
 		th {
 			color: map-get($colors, 'elephant');
 			text-transform: uppercase;

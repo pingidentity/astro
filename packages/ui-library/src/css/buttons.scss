@@ -3,7 +3,7 @@
 	position: relative;
 	display: inline-block;
 	font-family: $font-pn-regular;
-	background-color: map-get($colors, 'white');
+	background-color: $color-white;
 	text-align: center;
 	vertical-align: middle;
 	cursor: pointer;
@@ -15,11 +15,11 @@
 	}
 }
 @mixin default-button-styles {
-	color: map-get($colors, 'slate');
-	background: map-get($colors, 'white');
+	color: $color-slate;
+	background: $color-white;
 
 	&:hover {
-		color: map-get($colors, 'slate');
+		color: $color-slate;
 	}
 }
 
@@ -28,10 +28,10 @@ input[type=button], input[type=submit], .button, button {
 
 	padding: 0 20px;
 	margin-right: 10px;
-	font-size: 14px;
+	font-size: 15px;
 	height: $height;
 	line-height: $height;
-	border: 1px solid map-get($colors, 'rhino');
+	border: 1px solid $color-rhino;
 
 	@include border-radius(3px);
 	@include base-button-styles;
@@ -42,28 +42,28 @@ input[type=button], input[type=submit], .button, button {
 		border-color: $color-active;
 	}
 	&:focus {
-		border: 1px solid map-get($colors, 'rhino');
+		border: 1px solid $color-rhino;
 	}
 	&.primary {
 		background: none;
-		background-color: map-get($colors, 'active-blue');
-		color: map-get($colors, 'white');
+		background-color: $color-active-blue;
+		color: $color-white;
 		border: none;
 
 		&:hover {
-			background-color: map-get($colors, 'active-blue-highlighted');
-			color: map-get($colors, 'white');
+			background-color: $color-active-blue-highlighted;
+			color: $color-white;
 		}
 	}
 	&.secondary {
 		background: none;
-		background-color: map-get($colors, 'white');
-		color: map-get($colors, 'slate');
-		border: 1px solid map-get($colors, 'rhino');
+		background-color: $color-white;
+		color: $color-slate;
+		border: 1px solid $color-rhino;
 
 		&:hover {
-			color: map-get($colors, 'active-blue-highlighted');
-			border-color: map-get($colors, 'active-blue-highlighted');
+			color: $color-active-blue-highlighted;
+			border-color: $color-active-blue-highlighted;
 		}
 	}
 	&.success {
@@ -82,6 +82,7 @@ input[type=button], input[type=submit], .button, button {
 		height: $height;
 		line-height: $height;
 		font-weight: 300;
+		font-size: 14px;
 		@include border-radius(ceil($height/2));
 	}
 	&.disabled, &[disabled] {
@@ -89,8 +90,8 @@ input[type=button], input[type=submit], .button, button {
 		@include opacity(0.4);
 
 		&:hover {
-			color: map-get($colors, 'slate');
-			border-color: map-get($colors, 'rhino');
+			color: $color-slate;
+			border-color: $color-rhino;
 		}
 		&.primary, &.secondary {
 			&:hover {
@@ -99,15 +100,14 @@ input[type=button], input[type=submit], .button, button {
 		}
 		&.primary {
 			&.ellipsis {
-				color: map-get($colors, 'active-blue');
+				color: $color-active-blue;
 
 				&:hover {
-					color: map-get($colors, 'active-blue');
+					color: $color-active-blue;
 				}
 			}
 		}
 	}
-
 	&.add {
 		padding-left: 35px;
 		margin: 0;
@@ -201,18 +201,16 @@ button.ellipsis-loader-button {
 		}
 		&.primary {
 			&:hover {
-				background-color: map-get($colors, 'active-blue');
-				color: map-get($colors, 'active-blue');
+				background-color: $color-active-blue;
+				color: $color-active-blue;
 			}
 		}
 	}
-
 }
 
 // ROCKER BUTTON
 .rocker-button {
 	$height: 35px;
-	$labelWidth: 125px;
 
 	height: $height;
 	line-height: $height;
@@ -224,17 +222,18 @@ button.ellipsis-loader-button {
 		position: relative;
 		z-index: 2;
 		float: left;
+		padding: 0 30px;
 
-		width: $labelWidth;
+		width: auto;
 		line-height: $height - 2px;
-		font-size: 13px;
+		font-size: 14px;
 
 		text-transform: none;
-		color: map-get($colors, 'slate');
+		color: $color-slate;
 		margin: 0;
 
 		border-style: solid;
-		border-color: map-get($colors, 'rhino');
+		border-color: $color-rhino;
 		border-width: 1px 0 1px 1px;
 
 		cursor: pointer;
@@ -247,34 +246,36 @@ button.ellipsis-loader-button {
 			border-width: 1px;
 		}
 	}
-	.slide {
-		position: absolute;
-		z-index: 1;
-		top: 1px;
-		height: $height - 2px;
-		width: $labelWidth;
-		background: map-get($colors, 'timberwolf');
-		@include transition(left .2s ease-out);
-	}
-
 	&.sel-0 {
-		.slide {
-			left: 1px;
-		}
+		label {
+			&:nth-of-type(1) {
+				background: $color-timberwolf;
+				@include transition(left .4s ease-out);
+			}
+    	}
 	}
 	&.sel-1 {
-		.slide {
-			left: $labelWidth + 2;
-		}
+		label {
+			&:nth-of-type(2) {
+				background: $color-timberwolf;
+				@include transition(left .4s ease-out);
+			}
+    	}
 	}
 	&.sel-2 {
-		.slide {
-			left: 2*$labelWidth + 3;
-		}
+		label {
+			&:nth-of-type(3) {
+        		background: $color-timberwolf;
+        		@include transition(left .4s ease-out);
+			}
+    	}
 	}
 	&.sel-3 {
-		.slide {
-			left: 3*$labelWidth + 4;
-		}
+		label {
+			&:nth-of-type(4) {
+        		background: $color-timberwolf;
+        		@include transition(left .4s ease-out);
+			}
+    	}
 	}
 }

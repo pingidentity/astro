@@ -19,6 +19,9 @@ $layout-zindex-order: (
 	padding: 0;
 	border-bottom: 1px solid $color-white;
 
+	&.full {
+		left: 0;
+	}
 	&.inline {
 		position: relative;
 		margin: 0 -40px 0 -40px;
@@ -32,7 +35,6 @@ $layout-zindex-order: (
 		margin-top: -100px;
 		padding: 10px 40px;
 		@include transition(margin-top ease-out 0.1s);
-
 	}
 	.close {
 		$size: 15px;

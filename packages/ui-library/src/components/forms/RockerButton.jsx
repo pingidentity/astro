@@ -84,7 +84,6 @@ var ControlledRockerButton = React.createClass({
                                 key={text}>{text}</label>);
                     }.bind(this))
                 }
-                <span className="slide"></span>
             </div>);
     }
 });

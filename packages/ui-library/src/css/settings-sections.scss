@@ -55,6 +55,15 @@
         &.listing {
             margin-left: -25px;
         }
+        &.link {
+            color: $color-active-blue;
+            text-transform: none;
+            margin-bottom: 25px;
+            &:hover {
+                cursor: pointer;
+                text-decoration: underline;
+            }
+        }
     }
     .section-sub-title {
 	    color: map-get($colors, 'rhino');

@@ -22,7 +22,7 @@ var RockerButtonDemo = React.createClass({
         return (
             <div>
                 <RockerButton onChange={this._changeSubview}
-                    labels={["Label One", "Label Two", "Label Three", "Label Four"]} />
+                    labels={["Label One", "Label 2", "Label Three", "Longer Label Four"]} />
 
                 <div>Selected rocker label = {this.state.selectedLabel}, index = {this.state.selectedIndex}</div>
             </div>

@@ -1,8 +1,8 @@
-.page-links{
+.page-links {
     text-align: center;
     color: map-get($colors, 'walrus');
     margin: 10px;
-    a{
+    a {
         box-sizing: border-box;
         display: inline-block;
         min-width: 30px;
@@ -17,13 +17,19 @@
         vertical-align: middle;
         border: 1px solid transparent;
         border-radius: 2px;
-        &.active{
-            border: 1px solid map-get($colors, 'active-blue');
-            color: map-get($colors, 'active-blue');
+        &.active {
+            border: 1px solid $color-active-blue;
+            color: $color-active-blue;
         }
-        &:hover{
+        &:hover {
             text-decoration: none;
-            color: map-get($colors, 'active-blue');
+            color: $color-active-blue;
+        }
+        &.disabled {
+            cursor: default;
+            &:hover {
+                color: inherit;
+            }
         }
     }
     span{
