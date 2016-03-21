@@ -1,6 +1,7 @@
 window.__DEV__ = true;
 
 jest.dontMock("../FormTextField.jsx");
+jest.dontMock("../../tooltips/HelpHint.jsx");
 
 describe("FormTextField", function () {
 
@@ -102,14 +103,20 @@ describe("FormTextField", function () {
     it("fire onBlur validatorTrigger when field changes", function () {
         var handleChange = jest.genMockFunction();
         var validator = jest.genMockFunction();
+        var onBlur = jest.genMockFunction();
+
         var component = ReactTestUtils.renderIntoDocument(
-            <FormTextField referenceName={'test'} validator={validator} onValueChange={handleChange} />
+            <FormTextField referenceName={'test'}
+                           validator={validator}
+                           onValueChange={handleChange}
+                           onBlur={onBlur} />
         );
         var field = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
         ReactTestUtils.Simulate.blur(field);
         expect(handleChange.mock.calls.length).toBe(1);
         expect(validator.mock.calls.length).toBe(1);
+        expect(onBlur).toBeCalled();
     });
 
     it("fire onFocus callback when field gains focus", function () {
@@ -226,4 +233,83 @@ describe("FormTextField", function () {
         expect(errorDiv.textContent).toBe(errorMessage);
     });
 
+    it("renders custom className", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormTextField className="extra" />
+        );
+
+        var test = TestUtils.findRenderedDOMNodeWithDataId(component, "formTextField_label");
+
+        expect(test.getAttribute("class")).toContain("extra");
+    });
+
+    it("renders custom error message", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormTextField className="extra" errorMessage="Upps, something wrong."/>
+        );
+
+        var input = TestUtils.findRenderedDOMNodeWithDataId(component, "formTextField");
+
+        ReactTestUtils.Simulate.change(input, {
+            target: {
+                value: "abc"
+            }
+        });
+
+        var errorLabel = TestUtils.findRenderedDOMNodeWithDataId(component, "formTextField_errormessage");
+
+        expect(errorLabel.textContent).toEqual("Upps, something wrong.");
+    });
+
+    it("triggers onChange callback when input updated", function () {
+
+        var callback = jest.genMockFunction();
+
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormTextField className="extra" onChange={callback} />
+        );
+
+        var input = TestUtils.findRenderedDOMNodeWithDataId(component, "formTextField");
+
+        ReactTestUtils.Simulate.change(input, {
+            target: {
+                value: "abc"
+            }
+        });
+
+        expect(callback).toBeCalled();
+    });
+
+    it("renders help tooltip", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormTextField lableHelpText="some tooltip content" />
+        );
+
+        //make sure help hint exists
+        TestUtils.findRenderedDOMNodeWithDataId(component, "formTextField_helptooltip");
+    });
+
+    it("renders save control", function () {
+
+        var callback = jest.genMockFunction();
+
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormTextField save={callback} originalValue="value"/>
+        );
+
+        var input = TestUtils.findRenderedDOMNodeWithDataId(component, "formTextField");
+
+        ReactTestUtils.Simulate.change(input, {
+            target: {
+                value: "abc"
+            }
+        });
+
+        //make sure save control was rendered
+        var save = TestUtils.findRenderedDOMNodeWithDataId(component, "save");
+
+        ReactTestUtils.Simulate.click(save, {});
+
+        expect(callback).toBeCalledWith("abc");
+    });
 });

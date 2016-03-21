@@ -65,20 +65,6 @@ var StatefulDetailsTooltip = React.createClass({
         };
     },
 
-    _handleGlobalClick: function (e) {
-        if (this.state.open) {
-            callIfOutsideOfContainer(ReactDOM.findDOMNode(this.refs.tooltip), this.close, e);
-        }
-    },
-
-    componentWillMount: function () {
-        window.addEventListener("click", this._handleGlobalClick);
-    },
-
-    componentWillUnmount: function () {
-        window.removeEventListener("click", this._handleGlobalClick);
-    },
-
     toggle: function () {
         this.setState({ open: !this.state.open });
     },
@@ -158,6 +144,20 @@ var StatelessDetailsTooltip = React.createClass({
         ) : null;
     },
 
+    _handleGlobalClick: function (e) {
+        if (this.props.open) {
+            callIfOutsideOfContainer(ReactDOM.findDOMNode(this.refs.container), this._toggle, e);
+        }
+    },
+
+    componentWillMount: function () {
+        window.addEventListener("click", this._handleGlobalClick);
+    },
+
+    componentWillUnmount: function () {
+        window.removeEventListener("click", this._handleGlobalClick);
+    },
+
     render: function () {
 
         var containerCss = {
@@ -178,7 +178,7 @@ var StatelessDetailsTooltip = React.createClass({
         }
 
         return (
-            <span className={css("details-tooltip", containerCss)} data-id={this.props.id}>
+            <span className={css("details-tooltip", containerCss)} data-id={this.props.id} ref="container">
                 {this.props.label ? <a className={css("details-target", targetCss)} data-id="action-btn"
                     onClick={!this.props.disabled && this._toggle}>{this.props.label}</a> : null}
                 {this._content()}

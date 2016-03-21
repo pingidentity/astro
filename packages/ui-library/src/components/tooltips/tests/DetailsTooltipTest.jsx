@@ -1,10 +1,12 @@
 window.__DEV__ = true;
 
 jest.dontMock("../DetailsTooltip.jsx");
+jest.dontMock("../../../util/EventUtils.js");
 
 describe("DetailsTooltip", function () {
 
     var React = require("react"),
+        ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-addons-test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         Details = require("../DetailsTooltip.jsx"),
@@ -71,7 +73,7 @@ describe("DetailsTooltip", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
             <Details title="Title" label="Action" open={true} titleClassNames="title"
-                     contentClassNames="content" showClose={false}>
+                     contentClassNames="content" showClose={false} labelStyle="label" className="extra">
                 <p>what ever callout content is</p>
             </Details>
         );
@@ -81,6 +83,9 @@ describe("DetailsTooltip", function () {
         var content = TestUtils.findRenderedDOMNodeWithDataId(details, "details-content");
         var link = TestUtils.findRenderedDOMNodeWithDataId(details, "action-btn");
         var closeLink = TestUtils.scryRenderedDOMNodesWithDataId(details, "details-close");
+
+        //make sure root div got extra CSS classes
+        expect(ReactDOM.findDOMNode(component).getAttribute("class")).toContain("extra");
 
         //DOM to contain actual content
         expect(content.children.length).toBe(2);
@@ -185,4 +190,61 @@ describe("DetailsTooltip", function () {
 
         expect(callback).not.toBeCalled(); //make sure callback was not triggered
     });
+
+    it("is closing stateful component programatically", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Details title="Title" label="Action" controlled={false} open={true}>
+                <p>what ever callout content is</p>
+            </Details>
+        );
+
+        component.close();
+
+        var details = TestUtils.findRenderedComponentWithType(component, Details);
+        var content = TestUtils.scryRenderedDOMNodesWithDataId(details, "details-content");
+
+        //no DOM content
+        expect(content.length).toBe(0);
+    });
+
+
+    it("unregister global listeners on unmount", function () {
+
+        window.addEventListener = jest.genMockFunction();
+        window.removeEventListener = jest.genMockFunction();
+
+        var component = ReactTestUtils.renderIntoDocument(
+            <Details title="Title" label="Action">
+                <p>what ever callout content is</p>
+            </Details>
+        );
+
+        //trigger unmount
+        ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
+
+        expect(window.addEventListener.mock.calls.length).toBe(1);
+        expect(window.addEventListener.mock.calls[0][0]).toEqual("click");
+        expect(window.removeEventListener.mock.calls.length).toBe(1);
+        expect(window.removeEventListener.mock.calls[0][0]).toEqual("click");
+    });
+
+    it("triggers callback when clicked outside", function () {
+        var globalClickListener = TestUtils.captureGlobalListener("click");
+
+        var callback = jest.genMockFunction();
+
+        ReactTestUtils.renderIntoDocument(
+            <Details title="Title" label="Action" open={true} onToggle={callback}>
+                <p>what ever callout content is</p>
+            </Details>
+        );
+
+        //click outside
+        globalClickListener({
+            target: {}
+        });
+
+        expect(callback).toBeCalled();
+    });
+
 });
