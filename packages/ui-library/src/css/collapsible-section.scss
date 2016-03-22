@@ -35,6 +35,8 @@
 		@include transition((all 0.3s));
 	}
 	&.open {
+		overflow: visible;
+
 		.collapsible-section-title {
 			&:before {
 				@include rotate(-180deg);
