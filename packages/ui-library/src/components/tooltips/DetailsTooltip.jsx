@@ -66,11 +66,15 @@ var StatefulDetailsTooltip = React.createClass({
     },
 
     toggle: function () {
-        this.setState({ open: !this.state.open });
+        this.setState({
+            open: !this.state.open
+        });
     },
 
     close: function () {
-        this.setState({ open: false });
+        this.setState({
+            open: false
+        });
     },
 
     render: function () {
@@ -117,7 +121,7 @@ var StatelessDetailsTooltip = React.createClass({
      * Call the props toggle() function .
      *
      * @private
-    */
+     */
     _toggle: function () {
         this.props.onToggle();
     },
@@ -128,7 +132,7 @@ var StatelessDetailsTooltip = React.createClass({
      *
      * @private
      * @return {React.Component} the React component to be used as tooltip content
-    */
+     */
     _content: function () {
 
         var hide = this.props.hideOnClick ? this.props.onToggle : _.noop;
@@ -136,9 +140,9 @@ var StatelessDetailsTooltip = React.createClass({
         return this.props.open ? (
             <div className={this.props.contentClassNames} data-id="details-content" onClick={hide}>
                 {this.props.showClose &&
-                    <a className="details-close" data-id="details-close" onClick={this.props.onToggle}></a>}
+                <a className="details-close" data-id="details-close" onClick={this.props.onToggle}></a>}
                 {this.props.title &&
-                    <div className={this.props.titleClassNames} data-id="details-title">{this.props.title}</div>}
+                <div className={this.props.titleClassNames} data-id="details-title">{this.props.title}</div>}
                 {this.props.children}
             </div>
         ) : null;
@@ -150,8 +154,29 @@ var StatelessDetailsTooltip = React.createClass({
         }
     },
 
+    _bindWindowsEvents: function () {
+        var self = this;
+
+        //bind once current execution stack is cleared (e.g. current window event processed).
+        //to avoid possible false positive triggers if tooltip was open as result of click outside of it (e.g. some link outside)
+        _.defer(function () {
+            window.addEventListener("click", self._handleGlobalClick);
+        });
+    },
+
+    componentWillReceiveProps: function (nextProps) {
+        if (!this.props.open && nextProps.open) {
+            this._bindWindowsEvents();
+        }
+        else if (this.props.open && !nextProps.open) {
+            window.removeEventListener("click", this._handleGlobalClick);
+        }
+    },
+
     componentWillMount: function () {
-        window.addEventListener("click", this._handleGlobalClick);
+        if (this.props.open) {
+            this._bindWindowsEvents();
+        }
     },
 
     componentWillUnmount: function () {
@@ -180,7 +205,7 @@ var StatelessDetailsTooltip = React.createClass({
         return (
             <span className={css("details-tooltip", containerCss)} data-id={this.props.id} ref="container">
                 {this.props.label ? <a className={css("details-target", targetCss)} data-id="action-btn"
-                    onClick={!this.props.disabled && this._toggle}>{this.props.label}</a> : null}
+                                       onClick={!this.props.disabled && this._toggle}>{this.props.label}</a> : null}
                 {this._content()}
             </span>
         );

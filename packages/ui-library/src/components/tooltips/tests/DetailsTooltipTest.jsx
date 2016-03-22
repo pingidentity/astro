@@ -10,6 +10,7 @@ describe("DetailsTooltip", function () {
         ReactTestUtils = require("react-addons-test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         Details = require("../DetailsTooltip.jsx"),
+        Wrapper = TestUtils.UpdatePropsWrapper,
         _ = require("underscore");
 
     function getComponent (opts) {
@@ -207,10 +208,26 @@ describe("DetailsTooltip", function () {
         expect(content.length).toBe(0);
     });
 
+    it("registers global listener on mount if component is open", function () {
+        window.addEventListener = jest.genMockFunction();
+
+        //let's override defer or execute func immediately for tests
+        _.defer = function (func) {
+            func();
+        };
+
+        ReactTestUtils.renderIntoDocument(
+            <Details title="Title" label="Action" open={true}>
+                <p>what ever callout content is</p>
+            </Details>
+        );
+
+        expect(window.addEventListener.mock.calls.length).toBe(1);
+        expect(window.addEventListener.mock.calls[0][0]).toEqual("click");
+    });
+
 
     it("unregister global listeners on unmount", function () {
-
-        window.addEventListener = jest.genMockFunction();
         window.removeEventListener = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
@@ -222,8 +239,6 @@ describe("DetailsTooltip", function () {
         //trigger unmount
         ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
 
-        expect(window.addEventListener.mock.calls.length).toBe(1);
-        expect(window.addEventListener.mock.calls[0][0]).toEqual("click");
         expect(window.removeEventListener.mock.calls.length).toBe(1);
         expect(window.removeEventListener.mock.calls[0][0]).toEqual("click");
     });
@@ -246,5 +261,20 @@ describe("DetailsTooltip", function () {
 
         expect(callback).toBeCalled();
     });
+
+    it("unregister listener when transitioning from open to closed", function () {
+        window.removeEventListener = jest.genMockFunction();
+
+        var component = ReactTestUtils.renderIntoDocument(
+                            <Wrapper type={Details} title="Title" label="Action" open={true} onToggle={jest.genMockFn}>
+                                <p>what ever callout content is</p>
+                            </Wrapper>);
+
+        component._setProps({ open: false });
+
+        expect(window.removeEventListener.mock.calls.length).toBe(1);
+        expect(window.removeEventListener.mock.calls[0][0]).toEqual("click");
+    });
+
 
 });
