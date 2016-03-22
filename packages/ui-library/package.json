@@ -40,6 +40,7 @@
     "jsdoc": "3.3.3",
     "jsdoc-jsx": "0.1.0",
     "json-loader": "0.5.4",
+    "left-pad": "git://github.com/azer/left-pad.git#bff80e3ef0db0bfaba7698606c4f623433d14355",
     "marked": "0.3.5",
     "node-sass": "3.4.2",
     "process": "0.11.2",
