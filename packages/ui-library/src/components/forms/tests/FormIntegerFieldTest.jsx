@@ -36,11 +36,10 @@ describe("FormIntegerField", function () {
 
 
     });
+
     it("test up/down key press and up/down spinner press", function () {
         var component = ReactTestUtils.renderIntoDocument(
-
-            <FormIntegerField onChange = {callback} value = {40}/>
-
+            <FormIntegerField onChange = {callback} value = {40} />
         );
 
         //Expect a single input to be renderd with initial value of 40
@@ -53,6 +52,10 @@ describe("FormIntegerField", function () {
         for (var i = 0; i < 9; i = i + 1) {
             ReactTestUtils.Simulate.keyDown(input, { key: "up arrow", keyCode: 38, which: 38 } );
         }
+
+        //test non-arrow keys
+        ReactTestUtils.Simulate.keyDown(input, { key: "up arrow", keyCode: 37, which: 37 } );
+
         expect(callback.mock.calls.length).toBe(9);
 
         //Press the down key 3 times and expect three more callback
@@ -73,7 +76,6 @@ describe("FormIntegerField", function () {
         //mouseDown the down arrow and expect 1 to be added to callback
         ReactTestUtils.Simulate.mouseDown(spinnerDown);
         expect(callback.mock.calls.length).toBe(14);
-
 
     });
 
@@ -115,4 +117,91 @@ describe("FormIntegerField", function () {
         var errorDiv = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text");
         expect(errorDiv.textContent).toBe(errorMessage);
     });
+
+    it("triggers onBlur event", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormIntegerField onBlur={callback} />
+        );
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        ReactTestUtils.Simulate.blur(input, { target: { value: "3" } } );
+
+        expect(callback.mock.calls.length).toEqual(1);
+        expect(callback.mock.calls[0][0]).toEqual("3");
+    });
+
+    it("is not triggering onChange callback on invalid input", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormIntegerField onChange={callback} />
+        );
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        ReactTestUtils.Simulate.change(input, { target: { value: "A" } } );
+
+        expect(callback).not.toBeCalled();
+    });
+
+    it("is not triggering onChange callback when max limit exceeded", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormIntegerField onChange={callback} max={5} />
+        );
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        ReactTestUtils.Simulate.change(input, { target: { value: "6" } } );
+
+        expect(callback).not.toBeCalled();
+    });
+
+    it("is limiting up/down arrows within min-max interval", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormIntegerField onChange={callback} max={5} min={3} value={4} increment={3} />
+        );
+
+        var spinnerContainer = TestUtils.findRenderedDOMNodeWithClass(component, "up-down-spinner");
+        var spinnerUp = (spinnerContainer.childNodes[0]);
+        var spinnerDown = (spinnerContainer.childNodes[1]);
+
+        ReactTestUtils.Simulate.mouseDown(spinnerUp);
+
+        expect(callback.mock.calls.length).toEqual(1);
+        expect(callback.mock.calls[0][0]).toEqual(5);
+
+        ReactTestUtils.Simulate.mouseDown(spinnerDown);
+
+        expect(callback.mock.calls.length).toEqual(2);
+        expect(callback.mock.calls[1][0]).toEqual(3);
+
+    });
+
+    it("is releasing timer tasks on mouse up", function () {
+        clearTimeout = jest.genMockFunction(); //eslint-disable-line
+        clearInterval = jest.genMockFunction(); //eslint-disable-line
+
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormIntegerField onChange={callback} max={5} min={3} value={4} increment={3} />
+        );
+
+        var spinnerContainer = TestUtils.findRenderedDOMNodeWithClass(component, "up-down-spinner");
+        var spinnerUp = (spinnerContainer.childNodes[0]);
+
+        ReactTestUtils.Simulate.mouseUp(spinnerUp);
+
+        expect(clearTimeout).toBeCalled();
+        expect(clearInterval).toBeCalled();
+    });
+
+    it("is autoincrementing field while spinner is pressed", function () {
+
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormIntegerField onChange={callback} value={1} />
+        );
+
+        var spinnerContainer = TestUtils.findRenderedDOMNodeWithClass(component, "up-down-spinner");
+        var spinnerUp = (spinnerContainer.childNodes[0]);
+
+        ReactTestUtils.Simulate.mouseDown(spinnerUp);
+
+        jest.runOnlyPendingTimers();
+        jest.runOnlyPendingTimers();
+
+        expect(callback.mock.calls.length).toEqual(2);
+    });
+
 });

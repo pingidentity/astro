@@ -119,6 +119,12 @@ var SelectText = React.createClass({
         }
     },
 
+    getDefaultProps: function () {
+        return {
+            dataId: "select-text"
+        };
+    },
+
     componentDidMount: function () {
         if (this.props.select) {
             this._selectText();
@@ -135,7 +141,7 @@ var SelectText = React.createClass({
         return (
             <span className={this.props.className}
                   onClick={this._selectText}
-                  data-id={this.props.dataId || "select-text"}>
+                  data-id={this.props.dataId}>
                 {this.props.children}
             </span>
         );

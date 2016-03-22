@@ -62,6 +62,7 @@ var React = require("react"),
  * @param {string} [errorMessage] error message to render if validation is being done externally
  * @param {FormIntegerField~valueCallback} [save] a method to be called to save the value; causes the save control to be shown
  * @param {boolean} [autoFocus] whether or not to auto-focus the element
+ * @param {boolean} [enforceRange=true] whether or not enforce max value limit
  *
  * @example <FormIntegerField
  *              referenceName={name}
@@ -192,8 +193,12 @@ var FormIntegerField = React.createClass({
         var key = e.keyCode;
         //do nothing for all other keys
         if (key !== 38 && key !== 40) {return;}
+
+        e.stopPropagation();
+
         var inc = (key === 38) ? this.props.increment : - this.props.increment;
         //preform addition or subraction
+
         this._counter(e, inc);
     },
 
@@ -243,7 +248,7 @@ var FormIntegerField = React.createClass({
             min: 0,
             increment: 1,
             errorCss: "",
-            enforceRange: true,
+            enforceRange: true
         };
     },
 
