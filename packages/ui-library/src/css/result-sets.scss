@@ -94,10 +94,11 @@
 
 // V2 ------------------------------------------------------------------------------------------------------------------
 .result-set {
-	$item-height: 75px;
-	$button-height: 47px;
-	$button-width: 50px;
-	$button-top: 28px;
+	$item-height: 60px;
+	$button-height: 32px;
+	$button-width: 45px;
+	$button-top: 22px;
+	$button-bottom: 6px;
 
 	position: relative;
 	margin: 30px 0 0 0;
@@ -113,8 +114,8 @@
 
 		.collapsed-content {
 			position: relative;
-			height: 55px;
-			padding: 20px 0 0 30px;
+			height: 48px;
+			padding: 12px 0 0 34px;
 		}
 		.expanded-content {
 			position: relative;
@@ -150,7 +151,7 @@
 			.button, input[type=button], button, a, .input-toggle, .status {
 				display: inline-block;
 				vertical-align: top;
-				margin: 38px 15px 0 0;
+				margin: 30px 15px 0 0;
 				@include transform(translateY(-50%));
 			}
 			.input-toggle {
@@ -166,7 +167,7 @@
 			width: $button-width;
 			text-align: center;
 			right: 0;
-			padding: $button-top 0 0 0;
+			padding: $button-top 0 $button-bottom 0;
 
 			&:after {
 				text-transform: none;
@@ -229,7 +230,6 @@
 				margin: -10px 0 0 0;
 			}
 		}
-
 		&.expanded {
 			background-color: $color-white;
 			max-height: 4000px;
@@ -305,10 +305,10 @@
 				}
 			}
 			.row.dragTop {
-				border-top: 3px solid cornFlowerBlue;
+				border-top: 3px solid $color-active-blue;
 			}
 			.row.dragBottom, .row.dragTop.dragBottom {
-				border-bottom: 3px solid cornFlowerBlue;
+				border-bottom: 3px solid $color-active-blue;
 			}
 		}
 	}
