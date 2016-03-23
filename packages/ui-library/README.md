@@ -51,15 +51,21 @@ locally, installs the required node modules, and runs the linting and testing.
 
 
 
+Building the UI library
+--------------------
+The library can be built for distribution as a node module with `make package`.
+The JS documentation is generated using `npm run doc`.
+The library can be built as a bundle of static resources to be deployed in a
+web server with `npm run pack`.
+See the *scripts* section in package.json for more options.
+
+
+
 TODO
 ----
-
 * configure jest for code coverage w/ istanbul:
 https://facebook.github.io/jest/docs/api.html#config-collectcoverage-boolean
 * enforce the code coverage in Jenkins
-
-* include the main/demo file content into the index page
-* include the relevant code from demo into the index page
 
 
 

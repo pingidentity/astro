@@ -5,6 +5,11 @@ var React = require("react"),
     packageJson = require("../../package.json"),
     _ = require("underscore");
 
+// the SCSS files will be compiled by a webpack plugin
+// and injected into the head section of the HTML page by another plugin
+require("../css/ui-library.scss");
+require("./css/ui-library-demo.scss");
+
 require("isomorphic-fetch");
 
 var Demo = React.createClass({

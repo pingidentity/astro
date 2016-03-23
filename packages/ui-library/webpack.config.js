@@ -1,8 +1,7 @@
-var Join = require("path").join;
-var Resolve = require("path").resolve;
-
 var Clean = require("clean-webpack-plugin");
+var CopyWebpackPlugin = require("copy-webpack-plugin");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
 
 // var UglifyJsPlugin = require("webpack").optimize.UglifyJsPlugin;
 // var DedupePlugin = require("webpack").optimize.DedupePlugin;
@@ -10,17 +9,14 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var buildDir = "build";
 
 module.exports = {
-    target: "web",
     entry: {
-        mainIndex: Join(__dirname, "src", "MainIndex.jsx"),
-        testIndex: Join(__dirname, "src", "TestIndex.jsx")
+        demo: "./src/demo/Demo",
     },
-    // devtool: "source-map",
     output: {
-        path: Join(__dirname, buildDir),
-        pathInfo: false,
+        path: "./" + buildDir,
         filename: "[name].js" // Template based on keys in entry above
     },
+    devtool: "source-map",
     module: {
         preLoaders: [{
             test: /\.jsx?$/,
@@ -35,9 +31,47 @@ module.exports = {
                 loader: "babel-loader"
             },
             {
+                test: /\.json$/,
+                loaders: ["json-loader"]
+            },
+            // the core css gets embedded in the JS file
+            {
                 test: /\.css$/,
                 loader: "style-loader!css-loader"
             },
+            // the main and the demo sass get compiled as separate bundles
+            {
+                test: /\.scss$/,
+                loader: ExtractTextPlugin.extract(
+                    "style-loader",
+                    "css-loader?sourceMap!sass-loader"
+                )
+            },
+            {
+                test: /\.png$/,
+                loader: "file-loader?name=images/[path][name].[ext]"
+            },
+            {
+                test: /\.gif$/,
+                loader: "file-loader?name=images/[path][name].[ext]"
+            },
+            {
+                test: /\.jpe?g$/,
+                loader: "file-loader?name=images/[path][name].[ext]"
+            },
+            {
+                // the following doesn't work, for the request param is like "?-sa9xtz"
+                // test: /\.svg(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                test: /\.svg(\?.*)?$/,
+                loader: "file-loader?name=images/[path][name].[ext]"
+            },
+            {
+                // the following doesn't work, for the request param is like "?-sa9xtz"
+                // test: /\.(ttf|eot|otf|woff2?)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                test: /\.(ttf|eot|otf|woff2?)(\?.*)?$/,
+                loader: "file-loader?name=fonts/[path][name].[ext]"
+            }
+/*
             // embed some images as base64 encoded strings
             {
                 test: /\.png$/,
@@ -54,32 +88,42 @@ module.exports = {
             // the TTF/WOFF/EOT fonts are supposed to be large, I cannot embed them
             {
                 test: /\.(ttf|eot|woff2?)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: "file-loader?name=fonts/[name].[ext]"
+                loader: "file-loader?name=fonts/[path][name].[ext]"
             },
             // the SVG images are supposed to be large, I cannot embed them
             {
                 test: /\.svg(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: "file-loader?name=images/[name].[ext]"
+                loader: "file-loader?name=images/[path][name].[ext]"
             }
+*/
         ]
     },
     resolve: {
-        root: Resolve(__dirname),
         // I can now require("file") instead of require("file.jsx")
         extensions: ["", ".js", ".json", ".jsx"],
         modulesDirectories: ["node_modules"]
     },
     plugins: [
         new Clean([buildDir]),
+        new CopyWebpackPlugin([
+            { from: "./package.json" }, // the demo page needs the version number
+            { from: "./build-doc", to: "build-doc" }, // the demo page links to the js documentation
+            { from: "./src", to: "src" } // the demo page of each component needs the demo and source code
+        ]),
+        new HtmlWebpackPlugin({
+            template: "./src/demo/index.ejs", // Load a custom template
+            inject: "body", // Inject all scripts into the body
+            favicon: "./src/demo/images/favicon.png"
+        }),
         new ExtractTextPlugin("[name].css"),
-        // new DedupePlugin()
-        /*
+/*
+        new DedupePlugin()
         new UglifyJsPlugin({
             minimize: true,
             sourceMap: true, // default
             output: { comments: false },
             compress: { warnings: false }
         })
-        */
+*/
     ]
 };

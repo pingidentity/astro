@@ -1,21 +1,11 @@
-var Join = require("path").join;
-var Resolve = require("path").resolve;
-
-var Clean = require("clean-webpack-plugin");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-var buildDir = "build-demo";
-
 module.exports = {
-    target: "web",
     entry: {
-        demo: Join(__dirname, "src", "demo", "Demo"),
-        index: Join(__dirname, "src", "demo", "index.html"),
-        maincss: Join(__dirname, "src", "css", "ui-library.scss"),
-        democss: Join(__dirname, "src", "demo", "css", "ui-library-demo.scss")
+        demo: "./src/demo/Demo",
     },
     output: {
-        path: Join(__dirname, buildDir),
         filename: "[name].js" // Template based on keys in entry above
     },
     devtool: "source-map",
@@ -30,11 +20,6 @@ module.exports = {
                 test: /\.json$/,
                 loaders: ["json-loader"]
             },
-            {
-                test: /\.html$/,
-                // the path is up one directory to put it under root
-                loader: "file?name=../[name].[ext]"
-            },
             // the core css gets embedded in the JS file
             {
                 test: /\.css$/,
@@ -43,10 +28,6 @@ module.exports = {
             // the main and the demo sass get compiled as separate bundles
             {
                 test: /\.scss$/,
-                include: [
-                    Resolve(__dirname, "src/css/ui-library.scss"),
-                    Resolve(__dirname, "src/demo/css/ui-library-demo.scss")
-                ],
                 loader: ExtractTextPlugin.extract(
                     "style-loader",
                     "css-loader?sourceMap!sass-loader"
@@ -84,7 +65,11 @@ module.exports = {
         modulesDirectories: ["node_modules"]
     },
     plugins: [
-        new Clean([buildDir]),
+        new HtmlWebpackPlugin({
+            template: "./src/demo/index.ejs", // Load a custom template
+            inject: "body", // Inject all scripts into the body
+            favicon: "./src/demo/images/favicon.png"
+        }),
         new ExtractTextPlugin("[name].css")
     ]
 };
