@@ -120,7 +120,7 @@
 		.expanded-content {
 			position: relative;
 			padding: 0 80px 30px 30px;
-			min-height: 3*$button-height - 20px;
+			min-height: 3*$button-height - 4px;
 			position: relative;
 		}
 		.item-title {
@@ -219,7 +219,7 @@
 		.no-edit // depricated
 		{
 			top: 1px;
-			bottom: $button-height + $button-top + 1px;
+			bottom: $button-height + $button-top + 7px;
 			padding: 0;
 
 			&:after {
