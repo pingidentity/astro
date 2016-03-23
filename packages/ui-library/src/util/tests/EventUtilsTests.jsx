@@ -59,8 +59,5 @@ describe("ReduxUtils", function () {
         ReactTestUtils.Simulate.click(component.refs.innerMost);
         expect(callback).not.toBeCalled();
         callback.mockClear();
-
-        ReactTestUtils.Simulate.click(component.refs.outer);
-        expect(callback).toBeCalled();
     });
 });
