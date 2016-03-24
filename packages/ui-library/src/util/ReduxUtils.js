@@ -66,7 +66,7 @@ exports.rollback = function (state) {
     for (var k in state.snapshot) {
         state[k] = state.snapshot[k];
     }
-    state.dirty = false;
+    exports.commit(state);
 };
 
 /** @function commit

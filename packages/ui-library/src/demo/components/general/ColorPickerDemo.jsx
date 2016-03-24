@@ -14,32 +14,12 @@ var ColorPickerDemo = React.createClass({
     // There is a lot of duplication in the methods below.
     // It's better than building the prop names on the state dynamically.
 
-    _handleChange1: function (color, keepOpen) {
-        if (keepOpen === true) {
-            this.setState({ picker1color: color });
-        }
-        else {
-            this.setState(
-                { picker1open: false },
-                function () {
-                    this.setState({ picker1color: color });
-                }
-            );
-        }
+    _handleChange1: function (color) {
+        this.setState({ picker1color: color });
     },
 
-    _handleChange2: function (color, keepOpen) {
-        if (keepOpen === true) {
-            this.setState({ picker2color: color });
-        }
-        else {
-            this.setState(
-                { picker2open: false },
-                function () {
-                    this.setState({ picker2color: color });
-                }
-            );
-        }
+    _handleChange2: function (color) {
+        this.setState({ picker2color: color });
     },
 
     _toggle2: function () {

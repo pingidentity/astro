@@ -103,8 +103,13 @@ var Stateless = React.createClass({
      * @private
      */
     _handleGlobalClick: function (e) {
-        if (this.props.open) {
-            callIfOutsideOfContainer(ReactDOM.findDOMNode(this.refs.swatch), this._onToggle, e);
+        //if the click event isnt the click that opened the color picker
+        if (this.props.open && this._clickEvent !== e) {
+            var picker = ReactDOM.findDOMNode(this.refs.reactColorPicker);
+            var hue = picker.getElementsByClassName("react-color-picker__hue-spectrum")[0];
+
+            //dont close the color picker if the click is in the hue slider
+            callIfOutsideOfContainer(hue, this.props.onToggle, e);
         }
     },
 
@@ -114,8 +119,8 @@ var Stateless = React.createClass({
      * @private
      */
     _handleGlobalKeyDown: function (e) {
-        if (e.keyCode === 27 && this.props.open) {
-            this._onToggle();
+        if (e.keyCode === 27) {
+            this._close();
         }
     },
 
@@ -127,26 +132,45 @@ var Stateless = React.createClass({
      */
     _onColorInputKeyDown: function (e) {
         switch (e.keyCode) {
-            case 13:
-                if (!this.props.open) {
-                    this._onToggle();
-                }
+            case 13:  //return key
+                this._open();
                 break;
-            case 27:
-                if (this.props.open) {
-                    this._onToggle();
-                }
+            case 9:   //tab key
+            case 27:  //esc key
+                this._close();
                 break;
+        }
+    },
+
+    _open: function () {
+        if (!this.props.open) {
+            this.props.onToggle();
+        }
+    },
+
+    _close: function () {
+        if (this.props.open) {
+            this.props.onToggle();
         }
     },
 
     /**
      * Toggle the color picker, but only if it is not disabled.
+     * @param {KeyEvent} e - the key event
      * @private
      */
-    _onToggle: function () {
+    _handleClick: function (e) {
         if (!this.props.disabled) {
+            //store a reference to this event so that we dont open and then close the colorpicker when the
+            //global click event listener gets triggered.
+            this._clickEvent = e.nativeEvent;
             this.props.onToggle();
+        }
+    },
+
+    _handleFocus: function (e) {
+        if (e.nativeEvent.relatedTarget) {
+            this._open();
         }
     },
 
@@ -165,7 +189,7 @@ var Stateless = React.createClass({
      * @private
      */
     _onDrag: function (color) {
-        this.props.onChange(color, true);
+        this.props.onChange(color);
     },
 
     /**
@@ -182,6 +206,13 @@ var Stateless = React.createClass({
         window.addEventListener("keydown", this._handleGlobalKeyDown);
     },
 
+    /* There were performance issues with having many of these components on the screen causing eachother to re-render */
+    shouldComponentUpdate: function (nextProps) {
+        return nextProps.color !== this.props.color ||
+            nextProps.open !== this.props.open ||
+            nextProps.disabled !== this.props.disabled;
+    },
+
     componentWillUnmount: function () {
         window.removeEventListener("click", this._handleGlobalClick);
         window.removeEventListener("keydown", this._handleGlobalKeyDown);
@@ -191,7 +222,8 @@ var Stateless = React.createClass({
         return {
             id: "color-picker",
             open: false,
-            disabled: false
+            disabled: false,
+            cpid: Math.random()
         };
     },
 
@@ -200,7 +232,6 @@ var Stateless = React.createClass({
             pickerHidden: this.props.pickerHidden || false
         };
     },
-
 
     render: function () {
         /* When props.pickerHidden is true, the "colorpicker-container" is always rendered and the
@@ -219,7 +250,8 @@ var Stateless = React.createClass({
                 <div className="color-picker" ref="swatch">
                     <span className="colors colors-theme-default colors-swatch-position-left colors-swatch-left colors-position-default"
                           ref="innerSwatch"
-                          onClick={this._onToggle}>
+                          onFocus={this._handleFocus}
+                          onClick={this._handleClick}>
                         <span className="colors-swatch">
                             <span ref="colorSample" style={{ backgroundColor: this.props.color }}></span>
                         </span>
@@ -256,28 +288,6 @@ var Stateful = React.createClass({
         });
     },
 
-    /**
-     * Call the onChange callback.
-     * @param {string} value - the new color
-     * @param {boolean} keepOpen - whether to keep the color picker open or close it
-     *    (eg. the drag event triggers several change callbacks, but they should not close the
-     *    picker).
-     * @private
-     */
-    _change: function (value, keepOpen) {
-        if (keepOpen === true) {
-            // just call the callback and don't change the open state
-            this.props.onChange(value);
-        }
-        else {
-            this.setState({
-                open: false
-            }, function () {
-                this.props.onChange(value);
-            });
-        }
-    },
-
     getInitialState: function () {
         return {
             open: false
@@ -288,7 +298,7 @@ var Stateful = React.createClass({
         return (
             <Stateless ref="stateless" {...this.props}
                     onToggle={this._toggle}
-                    onChange={this._change}
+                    onChange={this.props.onChange}
                     open={this.state.open}/>
         );
     }

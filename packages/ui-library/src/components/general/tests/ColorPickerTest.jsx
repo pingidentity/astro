@@ -2,6 +2,7 @@ window.__DEV__ = true;
 
 jest.dontMock("../ColorPicker.jsx");
 jest.dontMock("../If.jsx");
+jest.dontMock("../../../util/EventUtils.js");
 
 describe("ColorPicker", function () {
     var React = require("react"),
@@ -22,6 +23,14 @@ describe("ColorPicker", function () {
             color: "#fff"
         });
         return ReactTestUtils.renderIntoDocument(<ColorPicker {...opts} />);
+    }
+
+    function getParts (component) {
+        var componentRef = component.refs.stateless || component.refs.stateful.refs.stateless;
+        return {
+            input: componentRef.refs.colorInput,
+            picker: componentRef.refs.reactColorPicker
+        };
     }
 
     beforeEach(function () {
@@ -54,6 +63,38 @@ describe("ColorPicker", function () {
         // the picker is not visible by default
         var picker = componentRef.refs.reactColorPicker;
         expect(picker).toBeUndefined();
+    });
+
+    it("stateless: opens if tabbed to it", function () {
+        var component = getComponent({ controlled: true });
+        var input = getParts(component).input;
+
+        ReactTestUtils.Simulate.focus(input, { nativeEvent: { relatedTarget: {} } });
+
+        expect(component.props.onToggle).toBeCalled();
+    });
+
+    it("stateless: closes on a global click", function () {
+        var component = getComponent({ controlled: true, open: true });
+        var handler = window.addEventListener.mock.calls[0][1];
+        var e = { target: document.body };
+
+        expect(component.props.onToggle).not.toBeCalled();
+
+        //click outside
+        handler(e);
+
+        expect(component.props.onToggle).toBeCalled();
+    });
+
+    it("stateless: skips global click handler if the click is inside the hue-spectrum", function () {
+        var component = getComponent({ controlled: true, open: true });
+        var handler = window.addEventListener.mock.calls[0][1];
+        var hue = ReactDOM.findDOMNode(component).getElementsByClassName("react-color-picker__hue-spectrum")[0];
+
+        //click inside hue spectrum
+        handler({ target: hue });
+        expect(component.props.onToggle).not.toBeCalled();
     });
 
     it("stateless: renders as closed and enabled if open and disabled props are not provided", function () {
@@ -289,33 +330,6 @@ describe("ColorPicker", function () {
         expect(componentRef.props.open).toBe(true);
     });
 
-    it("stateless: does not toggle when the inner swatch is clicked and component is disabled", function () {
-        var onToggle = jest.genMockFunction();
-        var component = getComponent({
-            disabled: true,
-            controlled: true,
-            onToggle: onToggle
-        });
-        var componentRef = component.refs.stateless;
-
-        // open the color picker
-        ReactTestUtils.Simulate.click(componentRef.refs.innerSwatch);
-
-        expect(onToggle.mock.calls.length).toBe(0);
-    });
-
-    it("stateful: does not open when the inner swatch is clicked and component is disabled", function () {
-        var component = getComponent({
-            disabled: true
-        });
-        var componentRef = component.refs.stateful.refs.stateless;
-
-        // open the color picker
-        ReactTestUtils.Simulate.click(componentRef.refs.innerSwatch);
-
-        expect(componentRef.props.open).toBe(false);
-    });
-
     it("stateless: trigger onChange when color is picked", function () {
         var component = getComponent({
             controlled: true,
@@ -340,10 +354,7 @@ describe("ColorPicker", function () {
 
         // simulate a call back from the react color picker component
         componentRef._onChange("#aaa");
-
         expect(component.props.onChange.mock.calls.length).toBe(1);
-        // and the color picker should have closed
-        expect(componentRef.props.open).toBe(false);
     });
 
     it("stateless: trigger onChange when mouse is dragged on the color picker", function () {
@@ -358,7 +369,6 @@ describe("ColorPicker", function () {
 
         expect(component.props.onChange.mock.calls.length).toBe(1);
         expect(component.props.onChange.mock.calls[0][0]).toBe("#aaa");
-        expect(component.props.onChange.mock.calls[0][1]).toBe(true);
     });
 
     it("stateful: trigger onChange when mouse is dragged on the color picker", function () {
