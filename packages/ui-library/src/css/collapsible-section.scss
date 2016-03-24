@@ -35,8 +35,6 @@
 		@include transition((all 0.3s));
 	}
 	&.open {
-		overflow: visible;
-
 		.collapsible-section-title {
 			&:before {
 				@include rotate(-180deg);
@@ -44,6 +42,7 @@
 			}
 		}
 		.collapsible-section-content {
+		  overflow: visible;
 			max-height: 4000px;
 		}
 	}
