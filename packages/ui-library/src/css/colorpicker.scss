@@ -16,6 +16,7 @@
             right: 10px;
             color: $color-midnight;
             pointer-events: none;
+            text-transform: none;
             @include transition(all 0.3s);
         }
     }
@@ -70,11 +71,21 @@
         }
     }
     .colorpicker-container {
-        position: absolute;
         display: none;
+        position: absolute;
+        top: 40px;
+        left: 0;
+        width: 213px;
+        height: 173px;
         z-index: 1;
     	padding: 10px;
     	background: $color-sonic;
+        @include animation(fade-in 0.3s);
+
+        @-webkit-keyframes fade-in {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
     }
 }
 

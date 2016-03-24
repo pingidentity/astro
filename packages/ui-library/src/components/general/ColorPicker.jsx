@@ -181,29 +181,6 @@ var Stateless = React.createClass({
         window.addEventListener("click", this._handleGlobalClick);
         window.addEventListener("keydown", this._handleGlobalKeyDown);
     },
-    
-    componentDidUpdate: function () {
-        // re-render to update the style on the picker and its container
-        // only if their position and dimension changed
-        // (the recursive call should happen only once)
-
-        if (this.props.disabled !== true) {
-            var swatch = ReactDOM.findDOMNode(this.refs.swatch);
-            var newPickerTop = swatch.offsetHeight;
-            var newPickerDimensions = swatch.offsetWidth + 40;
-
-            if ((newPickerTop && newPickerDimensions) &&
-                     (this.state.pickerTop !== newPickerTop ||
-                              this.state.pickerDimensions !== newPickerDimensions)) {
-                /* eslint-disable react/no-did-update-set-state */
-                this.setState({
-                    pickerTop: swatch.offsetHeight,
-                    pickerDimensions: swatch.offsetWidth + 40 //size of container div + hue spectrum bar width
-                });
-                /* eslint-enable react/no-did-update-set-state */
-            }
-        }
-    },
 
     componentWillUnmount: function () {
         window.removeEventListener("click", this._handleGlobalClick);
@@ -220,10 +197,7 @@ var Stateless = React.createClass({
 
     getInitialState: function () {
         return {
-            pickerHidden: this.props.pickerHidden || false,
-            pickerTop: 28,
-            pickerLeft: 0, // this is static
-            pickerDimensions: 0
+            pickerHidden: this.props.pickerHidden || false
         };
     },
 
@@ -259,17 +233,12 @@ var Stateless = React.createClass({
                                 onKeyDown={this._onColorInputKeyDown} />
                     </span>
                     <If test={(this.props.pickerHidden || this.props.open) && !this.props.disabled}>
-                        <span className="colorpicker-container" style={{
-                            top: this.state.pickerTop,
-                            left: this.state.pickerLeft,
-                            width: this.state.pickerDimensions + 40,
-                            height: this.state.pickerDimensions
-                        }}>
+                        <span className="colorpicker-container">
                             <Picker ref="reactColorPicker" value={this.props.color}
                                     onChange={this._onChange}
                                     onDrag={this._onDrag}
-                                    saturationWidth={this.state.pickerDimensions}
-                                    saturationHeight={this.state.pickerDimensions} />
+                                    saturationWidth={173}
+                                    saturationHeight={173} />
                         </span>
                     </If>
                 </div>
