@@ -46,7 +46,7 @@ describe("ModalButtonTest", function () {
         var component = getComponent();
         var handler = window.addEventListener.mock.calls[0][1];
         var e = {
-            target: { parentNode: window },
+            target: { parentNode: document.body },
             stopPropagation: jest.genMockFunction(),
             preventDefault: jest.genMockFunction()
         };

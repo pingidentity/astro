@@ -279,9 +279,6 @@ describe("DropDownButton", function () {
     });
 
     it("triggers callback when clicked outside", function () {
-
-        var globalClickListener = TestUtils.captureGlobalListener("click");
-
         var callback = jest.genMockFunction();
 
         var menu = {
@@ -298,11 +295,15 @@ describe("DropDownButton", function () {
                             onToggle={callback} />
         );
 
+        var handler = window.addEventListener.mock.calls[0][1];
+        var e = {
+            target: { parentNode: document.body },
+            stopPropagation: jest.genMockFunction(),
+            preventDefault: jest.genMockFunction()
+        };
 
         //click outside
-        globalClickListener({
-            target: {}
-        });
+        handler(e);
 
         expect(callback).toBeCalled();
     });

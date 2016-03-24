@@ -52,20 +52,18 @@ exports.callIfOutsideOfContainer = function (container, callback, e) {
     var node = e.target;
 
     while (node.parentNode) {
-        //if the item that was clicked is detached from the dom, then it's unknown if it's was outside, so do nothing
         if (node === container) {
             return false;
         }
-        if (node === window) {
-            break;
+        //if we've bubbled all the way up to the top of the dom and still havent matched the container then
+        //click was outside
+        if (node === document.body) {
+            callback(e);
+            return true;
         }
         node = node.parentNode;
     }
 
-    if (node.parentNode === null) {
-        return false;
-    }
-
-    callback(e);
-    return true;
+    //if the item that was clicked is detached from the dom, then it's unknown if it's was outside, so do nothing
+    return false;
 };
