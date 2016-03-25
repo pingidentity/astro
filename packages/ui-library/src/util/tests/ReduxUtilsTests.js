@@ -37,4 +37,54 @@ describe("ReduxUtils", function () {
 
         expect(next).toEqual({ dirty: true, some: { initial: { state: 5 } } });
     });
+
+    it("will log warning on attempt to update primitive type", function () {
+        console.warn = jest.genMockFunction();
+
+        var state = { some: { initial: { state: 5 } }, blah: 1 };
+
+        Utils.setAtPath(_.clone(state), "some.initial.state.opt", 6);
+
+        expect(console.warn).toBeCalledWith("trying to set sub-state on non-object");
+    });
+
+    it("rollback to snapshot", function () {
+        var state = {
+            a: 2,
+            b: 3,
+            dirty: true,
+
+            snapshot: {
+                a: 1,
+                b: 2
+            }
+        };
+
+        Utils.rollback(state);
+
+        expect(state.dirty).toBeFalsy();
+        expect(state.a).toEqual(1);
+        expect(state.b).toEqual(2);
+    });
+
+    it("commit changes", function () {
+        var state = {
+            a: 2,
+            b: 3,
+            dirty: true,
+
+            snapshot: {
+                a: 1,
+                b: 2
+            }
+        };
+
+        Utils.commit(state);
+
+        expect(state.dirty).toBeFalsy();
+        expect(state.a).toEqual(2);
+        expect(state.b).toEqual(3);
+        expect(state.snapshot.a).toEqual(2);
+        expect(state.snapshot.b).toEqual(3);
+    });
 });

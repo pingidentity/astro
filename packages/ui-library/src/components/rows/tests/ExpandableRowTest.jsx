@@ -56,6 +56,47 @@ describe("ExpandableRow", function () {
         expect(editButton.className).toEqual("edit-btn");
     });
 
+    it("renders custom edit button", function () {
+
+        var editButtonJsx = (<div data-id="custom-edit-button">Click me</div>);
+
+        component = ReactTestUtils.renderIntoDocument(
+            <ExpandableRow controlled={true}
+                           expanded={true}
+                           title="Row"
+                           subtitle="#1"
+                           content={contentJsx}
+                           editButton={editButtonJsx}
+            />
+        );
+
+        var defaultEditButton = TestUtils.scryRenderedDOMNodesWithDataId(component, "edit-btn");
+        var customEditButton = TestUtils.findRenderedDOMNodeWithDataId(component, "custom-edit-button");
+
+        //no default edit button
+        expect(defaultEditButton.length).toEqual(0);
+
+        //custom buton instead
+        expect(customEditButton.textContent).toEqual("Click me");
+    });
+
+    it("renders custom className", function () {
+        component = ReactTestUtils.renderIntoDocument(
+            <ExpandableRow controlled={true}
+                           expanded={true}
+                           title="Row"
+                           subtitle="#1"
+                           content={contentJsx}
+                           className="extra"
+            />
+        );
+
+        var container = TestUtils.findRenderedDOMNodeWithDataId(component, "expandable-row");
+
+        //custom buton instead
+        expect(container.getAttribute("class")).toContain("extra");
+    });
+
     it("renders the delete button by default", function () {
         ReactTestUtils.Simulate.click(expandButton);
         var deleteButton = TestUtils.findRenderedDOMNodeWithDataId(component, "delete-btn");
