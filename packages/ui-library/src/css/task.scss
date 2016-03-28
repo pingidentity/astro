@@ -2,7 +2,7 @@
 	$inactive-opacity: 0.5;
 
 	padding: 12px;
-	border: 1px solid transparentize(map-get($colors, 'timberwolf'), $inactive-opacity);
+	border: 1px solid transparentize($color-timberwolf, $inactive-opacity);
 	background-color: transparentize($color-white, $inactive-opacity);
 	margin: 0 0 14px 0;
 
@@ -26,7 +26,7 @@
 		}
 	}
 	&.active {
-		border: 1px solid map-get($colors, 'timberwolf');
+		border: 1px solid $color-timberwolf;
 		background-color: $color-white;
 
 		.task-title {
@@ -45,8 +45,8 @@
 		font-size: 18px;
 		line-height: 1em;
 		height: 33px;
-		font-family: 'ProximaNovaLight';
-		color: map-get($colors, 'slate');
+		font-family: $font-pn-light;
+		color: $color-slate;
 		text-transform: uppercase;
 
 		.progress, .task-title-text {
@@ -55,12 +55,14 @@
 		.progress {
 			text-transform: none;
 			margin: 0 15px 0 0;
-			font-family: 'ProximaNovaSemibold';
+			font-family: $font-pn-semibold;
+			i {
+				font-style: normal;
+			}
 		}
 		.help-tooltip {
 			margin-left: 10px;
 			vertical-align: 1px;
-
 			.icon-help {
 				width: 17px;
 			}
@@ -68,7 +70,7 @@
 	}
 	.task-title-selection {
 		padding: 0 0 0 6px;
-		font-family: 'ProximaNovaRegular';
+		font-family: $font-pn-regular;
 		text-transform: initial;
 		@include opacity($inactive-opacity);
 	}
@@ -111,9 +113,8 @@
 		padding: 0 0 5px 0;
 		margin: 40px 0 25px 0;
 		color: $color-blue-grey;
-		border-bottom: 1px solid map-get($colors, 'stone');
+		border-bottom: 1px solid $color-stone;
 		font-family: $font-pn-bold;
-
 		.help-tooltip {
 			margin: 0 0 0 10px;
 			line-height: 1em;
@@ -138,7 +139,7 @@
 	.loading-message {
 		font-size: 19px;
 		font-weight: bold;
-		color: map-get($colors, 'elephant');
+		color: $color-elephant;
 
 		.loader {
 			margin: 0 10px -4px 0;
@@ -170,7 +171,7 @@
 				display: block;
 				text-transform: uppercase;
 				margin-bottom: 25px;
-				color: map-get($colors, 'slate');
+				color: $color-slate;
 				font-size: 16px;
 
 				.remove {
@@ -192,7 +193,7 @@
 				top: -1px;
 				left: 0;
 			    font-size: 12px;
-			    background-color: map-get($colors, 'midnight');
+			    background-color: $color-midnight;
 			    color: $color-white;
 			    height: $size;
 				width: $size;
@@ -201,12 +202,12 @@
 				margin: 0 0 0 #{-$indent};
 				font-weight: 100;
 
-			    @include border-radius(#{ceil($size/2)})
+			    @include border-radius(#{ceil($size/2)});
 			}
 		}
 		&.divided {
 			li {
-				border-bottom: 1px solid map-get($colors, 'stratus');;
+				border-bottom: 1px solid $color-stratus;
 				padding-bottom: 15px;
 				margin-bottom: 30px;
 

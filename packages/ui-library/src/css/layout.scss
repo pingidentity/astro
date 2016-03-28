@@ -356,10 +356,15 @@ $layout-zindex-order: (
 .submit {
 	width: 100%;
 	clear: both;
-	margin-top: 50px;
-	padding-top: 10px;
+	margin-top: 20px;
+	padding: 0 0 10px 0;
 	text-align: right;
 
+	input[type=button] {
+		&:last-of-type {
+			margin-right: 0;
+		}
+	}
 	.saving {
 		line-height: 36px;
     	height: 36px;
