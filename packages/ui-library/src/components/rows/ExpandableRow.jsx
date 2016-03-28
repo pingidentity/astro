@@ -45,7 +45,6 @@ var React = require("react"),
  * @param {string} [className] - extra CSS classes to be applied
  * @param {bool} [waiting=false] - when true, disabled interaction with row and reduces opacity of the layer
  * @param {string} [id="expandable-row"]- it is used for a unique data-id.
- * @param {string} [id="expandable-row"]- it is used for a unique data-idedit-b.
  * @param {bool} [controlled=false] - A boolean to enable the component to be externally managed.  True will relinquish
  *     control to the components owner.  False or not specified will cause the component to manage state internally
  *     but still execute the onToggle callback in case the owner is interested.

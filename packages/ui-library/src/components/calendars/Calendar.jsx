@@ -164,10 +164,6 @@ var Calendar = React.createClass({
             isVisible: this.props.closeOnSelect && isDayView ? !this.state.isVisible : this.state.isVisible
         });
 
-        console.log(date);
-        console.log(this.state.computableFormat);
-        console.log(date.format(this.state.computableFormat));
-
         if (this.props.onChange) {
             this.props.onChange(date.format(this.state.computableFormat));
         }
@@ -249,24 +245,6 @@ var Calendar = React.createClass({
     },
 
     /**
-     * Handles today click
-     * @method Calendar#todayClick
-     */
-    todayClick: function () {
-        var today = moment();
-
-        this.setState({
-            date: today,
-            inputValue: today.format(this.state.format),
-            currentView: this.state.minView
-        });
-
-        if (this.props.onChange) {
-            this.props.onChange(today.format(this.state.computableFormat));
-        }
-    },
-
-    /**
      * @method Calendar#toggleClick
      */
     toggleClick: function () {
@@ -313,7 +291,6 @@ var Calendar = React.createClass({
         var calendar = !this.state.isVisible ? "" : (
             <div className="input-calendar-wrapper active" onClick={this.calendarClick}>
                 {view}
-                <span className="today-btn" onClick={this.todayClick} >Today</span>
             </div>
         );
 

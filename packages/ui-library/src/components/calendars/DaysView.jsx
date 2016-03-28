@@ -93,7 +93,7 @@ module.exports = React.createClass({
         var currentDate = this.props.date ? this.props.date.format("MMMM") : moment().format("MMMM");
 
         return (
-            <div className="view days-view" onKeyDown={this.keyDown}>
+            <div className="view days-view">
                 <ViewHeader
                     prev={this.prev}
                     next={this.next}
