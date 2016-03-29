@@ -31,7 +31,24 @@ describe("CsrfDataSourceApi", function () {
         // if a test uses a different name, it has to be deleted explicitly
         document.cookie = "web-portal-csrf=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
         document.cookie = "application-csrf=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+
+        api.callbacks.before = [];
+        api.callbacks.after = [];
     });
+
+    function testUnaffectedByMiddleware (method, params) {
+        var callbackIndex = params.findIndex(function (i) { return typeof(i) === "function"; });
+
+        apiExport[method] = jest.genMockFunction();
+        api[method].apply(null, params);
+
+        //execute the callback
+        apiExport[method].mock.calls[0][callbackIndex]({
+            headers: []
+        });
+
+        expect(params[callbackIndex]).toBeCalled();
+    }
 
     it("GET is called", function () {
         var params = { param1: "value 1" };
@@ -249,4 +266,91 @@ describe("CsrfDataSourceApi", function () {
         expect(apiExport.put.mock.calls[0][4]).toEqual({});
     });
 
+    it("register middleware callback", function () {
+        var cb = jest.genMockFunction();
+
+        expect(api.callbacks.before).toEqual([]);
+
+        api.registerMiddleware("before", cb);
+        expect(api.callbacks.before).toEqual([cb]);
+    });
+
+    it("unregister middleware callback", function () {
+        var cb = jest.genMockFunction();
+
+        api.registerMiddleware("before", cb);
+        expect(api.callbacks.before).toEqual([cb]);
+
+        api.unregisterMiddleware("before", cb);
+        expect(api.callbacks.before).toEqual([]);
+    });
+
+    it("unregister all middleware callback", function () {
+        var cbBefore = jest.genMockFunction();
+        api.registerMiddleware("before", cbBefore);
+        expect(api.callbacks.before).toEqual([cbBefore]);
+
+        var cbAfter = jest.genMockFunction();
+        api.registerMiddleware("after", cbAfter);
+        expect(api.callbacks.before).toEqual([cbAfter]);
+
+        api.unregisterAllMiddleware();
+        expect(api.callbacks.before).toEqual([]);
+        expect(api.callbacks.after).toEqual([]);
+    });
+
+    it("get without middleware", function () {
+        testUnaffectedByMiddleware("get", ["/some/url", {}, jest.genMockFunction()]);
+    });
+
+    it("getNoCache without middleware", function () {
+        testUnaffectedByMiddleware("getNoCache", ["/some/url", {}, jest.genMockFunction()]);
+    });
+
+    it("post without middleware", function () {
+        testUnaffectedByMiddleware("post", ["/some/url", { some: "data" }, {}, jest.genMockFunction()]);
+    });
+
+    it("put without middleware", function () {
+        testUnaffectedByMiddleware("put", ["/some/url", { some: "data" }, {}, jest.genMockFunction()]);
+    });
+
+    it("delete without middleware", function () {
+        testUnaffectedByMiddleware("doDelete", ["/some/url", {}, jest.genMockFunction()]);
+    });
+
+    it("executes callback", function () {
+        var before = jest.genMockFunction();
+        var after = jest.genMockFunction();
+        var cb = jest.genMockFunction();
+
+        api.registerMiddleware("before", before);
+        api.registerMiddleware("after", after);
+        api.get("blah", null, cb);
+
+        expect(before).toBeCalled();
+        expect(after).not.toBeCalled();
+
+        //execute the callback
+        apiExport.get.mock.calls[0][2]({
+            headers: []
+        });
+
+        expect(after).toBeCalled();
+    });
+
+    it("skips callback if middleware returns false", function () {
+        var after = jest.genMockFunction().mockReturnValue(false);
+        var cb = jest.genMockFunction();
+
+        api.registerMiddleware("after", after);
+        api.get("blah", null, cb);
+
+        //execute the callback
+        apiExport.get.mock.calls[0][2]({
+            headers: []
+        });
+
+        expect(cb).not.toBeCalled();
+    });
 });

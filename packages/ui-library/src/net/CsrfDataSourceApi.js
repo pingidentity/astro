@@ -148,50 +148,96 @@ var CsrfDataSourceApi = function (config) {
     var csrfHeaderName = config && config.csrfHeaderName;
     var csrfCookieName = config && config.csrfCookieName || "application-csrf";
 
-    return {
+    var Api = {
+        MiddlewareTiming: {
+            CALL_BEFORE_REQUEST: "before",
+            CALL_AFTER_RESPONSE: "after"
+        },
+
+        callbacks: {
+            after: [],
+            before: []
+        },
+
+        registerMiddleware: function (which, callback) {
+            Api.callbacks[which].push(callback);
+        },
+
+        unregisterMiddleware: function (which, index) {
+            Api.callbacks[which].splice(index, 1);
+        },
+
+        unregisterAllMiddleware: function () {
+            Api.callbacks = { after: [], before: [] };
+        },
+
+        _execMiddlewareCallbacks: function (which, resp) {
+            var callbacks = Api.callbacks[which] || [];
+            var result = true;
+
+            for (var i = 0; i < callbacks.length; i += 1) {
+                result = result && callbacks[i](resp) !== false;
+            }
+
+            return result;
+        },
+
+        _handleResponse: function (callback, resp) {
+            if (Api._execMiddlewareCallbacks(Api.MiddlewareTiming.CALL_AFTER_RESPONSE, resp) !== false) {
+                parseCsrfHeader(resp, csrfHeaderName, csrfCookieName);
+                callback(resp);
+            }
+        },
+
         get: function (endpoint, params, callback) {
+            Api._execMiddlewareCallbacks(Api.MiddlewareTiming.CALL_BEFORE_REQUEST);
+
             DataSourceApi.get(
                     rootPath + endpoint,
                     params,
-                    function (response) {
-                        parseCsrfHeader(response, csrfHeaderName, csrfCookieName);
-                        callback(response);
-                    });
+                    Api._handleResponse.bind(null, callback));
         },
         getNoCache: function (endpoint, params, callback) {
+            Api._execMiddlewareCallbacks(Api.MiddlewareTiming.CALL_BEFORE_REQUEST);
+
             DataSourceApi.getNoCache(
                     rootPath + endpoint,
                     params,
-                    function (response) {
-                        parseCsrfHeader(response, csrfHeaderName, csrfCookieName);
-                        callback(response);
-                    });
+                    Api._handleResponse.bind(null, callback));
         },
-        post: function (endpoint, data, params, callback, files) {
+        post: function (endpoint, data, params, callback, files, headers) {
+            Api._execMiddlewareCallbacks(Api.MiddlewareTiming.CALL_BEFORE_REQUEST);
+
             DataSourceApi.post(
                     rootPath + endpoint,
                     data,
                     params,
-                    callback,
+                    Api._handleResponse.bind(null, callback),
                     files,
-                    buildCsrfHeader(csrfHeaderName, csrfCookieName));
+                    _.extend(buildCsrfHeader(csrfHeaderName, csrfCookieName), headers));
         },
-        put: function (endpoint, data, params, callback) {
+        put: function (endpoint, data, params, callback, headers) {
+            Api._execMiddlewareCallbacks(Api.MiddlewareTiming.CALL_BEFORE_REQUEST);
+
             DataSourceApi.put(
                     rootPath + endpoint,
                     data,
                     params,
-                    callback,
-                    buildCsrfHeader(csrfHeaderName, csrfCookieName));
+                    Api._handleResponse.bind(null, callback),
+                    _.extend(buildCsrfHeader(csrfHeaderName, csrfCookieName), headers));
         },
-        doDelete: function (endpoint, params, callback) {
+        doDelete: function (endpoint, params, callback, headers) {
+            Api._execMiddlewareCallbacks(Api.MiddlewareTiming.CALL_BEFORE_REQUEST);
+
             DataSourceApi.doDelete(
                     rootPath + endpoint,
                     params,
-                    callback,
-                    buildCsrfHeader(csrfHeaderName, csrfCookieName));
+                    Api._handleResponse.bind(null, callback),
+                    _.extend(buildCsrfHeader(csrfHeaderName, csrfCookieName), headers));
         }
     };
+
+    return Api;
 };
 
 module.exports = CsrfDataSourceApi;
