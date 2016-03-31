@@ -1465,13 +1465,6 @@ a {
 .input-child {
 	margin: 0 0 0 25px;
 }
-.input-button {
-	vertical-align: bottom;
-
-	&.inline {
-		margin: 0 0 6px 0;
-	}
-}
 
 // Input width functions
 @function calc-input-width($container-width, $divisions, $hor-margin){

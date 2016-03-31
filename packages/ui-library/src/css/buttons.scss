@@ -181,6 +181,13 @@ input[type=button], input[type=submit], .button, button {
 		line-height: $height;
 		font-size: 15px;
 	}
+	&.row-button {
+		vertical-align: bottom;
+
+		&.inline {
+			margin: 0 0 6px 0;
+		}
+	}
 }
 
 
