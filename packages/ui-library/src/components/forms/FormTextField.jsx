@@ -97,7 +97,6 @@ var FormTextField = React.createClass({
         placeholder: React.PropTypes.string,
         referenceName: React.PropTypes.string,
         save: React.PropTypes.func,
-        type: React.PropTypes.string,
         useAutocomplete: React.PropTypes.bool,
         validator: React.PropTypes.func,
         validatorTrigger: React.PropTypes.string,
