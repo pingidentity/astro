@@ -128,8 +128,10 @@ verify: install-node-npm
 	# meaning I cannot run an npm script which calls other npm scripts,
 	# meaning I have to execute the npm scripts one at a time
 	$(NPM_EXEC) run lint
-	$(NPM_EXEC) run test
+	$(NPM_EXEC) run coverage
 	rm -rf $$TMPDIR/jest_preprocess_cache
+	# convert the lcov report to cobertura
+	python tools/lcov_cobertura.py coverage/lcov.info --base-dir . --output coverage/cobertura.xml
 
 # package the module and name the file to include the current version
 package: install-mvn

@@ -1,0 +1,4 @@
+lcov_cobertura.py
+=================
+Converts an lcov coverage report into cobertura format.
+https://github.com/eriwen/lcov-to-cobertura-xml
