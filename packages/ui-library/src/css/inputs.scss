@@ -1,9 +1,10 @@
 
-
+// INPUT GLOBAL VARS -------------------------------------------------------------------------------
 $default-input-transition: all 0.3s;
 
-@include placeholder-css($color-input-placeholder, normal, 0);
 
+
+// MISC SUPPORTING FUNCTIONS -----------------------------------------------------------------------
 @mixin checkboxStyles() {
 	$checkbox-height: 18px;
 	$border-width: 3px;
@@ -75,6 +76,12 @@ $default-input-transition: all 0.3s;
 	}
 }
 
+
+
+// CORE INPUT STYLES -------------------------------------------------------------------------------
+
+// Tag styling
+// TODO : move styles under class names?
 input[type=text], input[type=password], textarea {
 	color: $color-input-text;
 	background-color: $color-input-fill;
@@ -475,10 +482,61 @@ label {
 		font-size: 16px;
 	}
 }
-.radio-inputs {
-	position: relative;
-	margin: 15px 0 0 23px;
+fieldset {
+	margin: 0 0 25px 0;
+
+	legend {
+		text-transform: uppercase;
+		.help-tooltip {
+			margin: 0 5px 0 10px;
+			height: 14px;
+			height: 18px;
+			width: 18px;
+			vertical-align: text-bottom;
+		}
+		label {
+			margin-right: 5px;
+		}
+	}
+	&.focused, &.unfocused {
+		legend {
+			padding: 0 7px;
+			margin: 0 0 0 -7px;
+			font-size: 14px;
+			color: $color-elephant;
+
+			.input-radio {
+				&:last-of-type {
+					margin-right: 0;
+				}
+			}
+		}
+	}
+	&.focused {
+		border: 1px solid $color-dolphin;
+		padding: 15px 25px 30px 25px;
+		@include border-radius(5px);
+
+		&.narrow {
+			width: 500px;
+		}
+	}
+	&.unfocused {
+		padding: 15px 0 0 25px;
+	}
+	.subset {
+		margin: 0 0 0 25px;
+		label {
+			text-transform: none;
+		}
+	}
 }
+input[type=file] {
+	line-height: 1em;
+}
+@include placeholder-css($color-input-placeholder, normal, 0);
+
+// Input types
 .radio-text-input {
 	margin: -12px 0 0 32px;
 }
@@ -612,43 +670,6 @@ label {
 		}
 	}
 }
-.input-row {
-	position: relative;
-	margin: 0 0 25px 0;
-
-	&.lead-item {
-		margin-bottom: 30px;
-	}
-	.inactive, &.inactive {
-		display: none;
-	}
-	.text-input, .input-checkbox {
-		text-align: left;
-		.comment {
-			display: block;
-			padding: 5px;
-			margin-top: -3px;
-			&.error {
-				background-color: $color-critical-red;
-				color: $color-white;
-				padding: 15px;
-				@include border-radius(0 0 4px 4px);
-			}
-		}
-	}
-}
-.input-divider {
-	display: block;
-	margin: 0 0 15px 0;
-	border-top: 1px solid $color-rabbit-fur;
-	&.dotted {
-		border-top-style: dotted;
-	}
-}
-.input-child {
-	margin: 0 0 0 25px;
-}
-
 .input-file-upload {
 	position: relative;
 	display: block;
@@ -941,6 +962,7 @@ label {
 			border-color: transparent transparent $color-white transparent;
 		}
 		label {
+			// TODO - change multi-select component to use checkbox component
 			@include checkboxStyles();
 			display: block;
 			margin: 0 0 5px 0;
@@ -956,41 +978,180 @@ label {
 		}
 	}
 }
-.drop-link {
-	position: relative;
-	text-transform: uppercase;
+.input-calendar {
+	$calendar-height: 40px;
 
-	&:hover {
-		text-decoration: none;
+	display: inline-block;
+	position: relative;
+	font-family: $font-stack;
+	margin-bottom: 7px;
+
+	&:before, &:after {
+		font-family: $icon-font;
+		font-size: 14px;
+		line-height: 1em;
+		text-transform: none;
+		position: absolute;
+		color: $color-midnight;
+		cursor: pointer;
+	}
+	&:before {
+		content: '\43';
+		left: 10px;
+		top: 12px;
+		@include transition($default-input-transition);
 	}
 	&:after {
-		content: 'v';
-		font-family: $icon-font;
-		font-size: 12px;
-		text-transform: none;
-		right: 10px;
-		top: 1px;
-		pointer-events: none;
+		content: "v";
+		right: 9px;
+		top: 14px;
+		@include transition($default-input-transition);
 	}
-	&.open {
+	&.active {
+		input[type=text] {
+			border: 1px solid $color-stone;
+		}
 		&:after {
-			content: '^';
+			@include transform(rotate(180deg));
+		}
+	}
+	input[type=text].input-calendar-value {
+		padding: 0 30px;
+		font-size: 16px;
+		width: 226px;
+		height: $calendar-height;
+		line-height: 32px;
+		&:focus {
+			border: 1px solid $color-stone;
+		}
+	}
+
+	// display
+	.input-calendar-wrapper {
+		display: none;
+		font-family: $font-stack;
+
+		&.active {
+			position: absolute;
+			display: block;
+			padding: 5px 12px;
+			border: 1px solid $color-stone;
+			background-color: $color-input-fill;
+			width: 200px;
+			text-align: center;
+			left: 0;
+			top: $calendar-height + 1;
+			-webkit-touch-callout: none;
+			z-index: 2;
+
+			@include border-radius(2px);
+			@include user-select(none);
+		}
+		.today-btn {
+			display: none;
+		}
+		.days-view, .months-view, .years-view {
+			.navigation-wrapper {
+				.navigation-title {
+					width: 100px;
+					display: inline-block;
+					cursor: pointer;
+					color: $color-input-text;
+					font-weight: 600;
+				}
+				.icon {
+					display: inline-block;
+
+					.fa {
+						display: inline-block;
+						height: 25px;
+						width: 25px;
+						color: $color-midnight;
+						font-size: 13px;
+						cursor: pointer;
+
+						&.fa-angle-left {
+							margin-right: 20px;
+						}
+						&.fa-angle-right {
+							margin-left: 20px;
+						}
+					}
+				}
+			}
+			.days-title {
+				.cell {
+					height: 25px;
+					line-height: 25px;
+					cursor: default;
+					font-weight: 600;
+					margin: 0;
+					color: $color-input-text;
+				}
+			}
+			.days, .months, .years {
+				padding-bottom: 2px;
+				.day {
+					width: 26px;
+					height: 25px;
+					font-weight: 600;
+				}
+				.month {
+					width: 58px;
+					height: 38px;
+					line-height: 38px;
+				}
+			}
+			.year {
+				width: 58px;
+				height: 38px;
+				line-height: 38px;
+			}
+			.day {
+				width: 26px;
+				height: 25px;
+				line-height: 25px;
+				color: $color-input-text;
+				&.prev, &.next {
+					@include opacity(0.4);
+				}
+			}
+			.cell {
+				display: inline-block;
+				text-align: center;
+				cursor: pointer;
+				border: none;
+				-webkit-touch-callout: none;
+				font-size: 13px;
+				@include  user-select(none);
+				@include transition($default-input-transition);
+
+				&.hover {
+					color: $color-input-text;
+				}
+				&.current, &:hover {
+					@include opacity(.8);
+					@include border-radius(3px);
+				}
+				&.current {
+					color: $color-white;
+					background: $color-input-text;
+				}
+				&:hover {
+					background: transparentize($color-input-text, 0.85);
+				}
+				&.title {
+					&:hover {
+						@include opacity(1);
+						background: transparent;
+					}
+				}
+			}
 		}
 	}
 }
-.form-error {
-	&.input-toggle {
-		.toggle {
-			border-color: $color-input-error;
-			&:focus {
-				border-color: $color-input-error;
-			}
-			&:after {
-				border-color: $color-input-error;
-			}
-		}
-	}
-}
+
+// Input variants
 .required {
 	@mixin requiredCss {
 		content: '';
@@ -1191,41 +1352,33 @@ label {
 		}
 	}
 }
-a {
-	&.input-link {
-		display: block;
-		margin: 2px 0 0 1px;
-	}
+
+
+
+// MISC SUPPORTING STYLES --------------------------------------------------------------------------
+
+.input-row {
+	position: relative;
+	margin: 0 0 25px 0;
 }
-.password-errors {
-	margin: 10px 0 0 2px;
-
-	> div {
-		display: inline-block;
-		margin: 0 15px 5px 0;
-		width: 164px;
-
-		&:before {
-			content: '\00D7';
-			background: $color-critical-red;
-			color: $color-white;
-			font-size: 14px;
-			height: 14px;
-			width: 14px;
-			line-height: 16px;
-			margin: 0 5px 0 0;
-			text-align: center;
-			display: inline-block;
-
-			@include border-radius(10px);
+.form-error {
+	&.input-toggle {
+		.toggle {
+			border-color: $color-input-error;
+			&:focus {
+				border-color: $color-input-error;
+			}
+			&:after {
+				border-color: $color-input-error;
+			}
 		}
 	}
 }
-
 .checkbox-list {
 	padding: 10px 5px 10px 0;
 	margin-left: 0;
 	border: 1px solid $color-elderly;
+
 	.options {
 		width: 99%;
 		height: 133px;
@@ -1267,239 +1420,180 @@ a {
 		}
 	}
 }
-
-.input-calendar {
-	$calendar-height: 40px;
-
-	display: inline-block;
-	position: relative;
-	font-family: $font-stack;
-	margin-bottom: 7px;
-
-	&:before, &:after {
-		font-family: $icon-font;
-		font-size: 14px;
-		line-height: 1em;
-		text-transform: none;
-		position: absolute;
-		color: $color-midnight;
-		cursor: pointer;
-	}
-	&:before {
-		content: '\43';
-		left: 10px;
-		top: 12px;
-		@include transition($default-input-transition);
-	}
-	&:after {
-		content: "v";
-		right: 9px;
-		top: 14px;
-		@include transition($default-input-transition);
-	}
-	&.active {
-		input[type=text] {
-			border: 1px solid $color-stone;
-		}
-		&:after {
-			@include transform(rotate(180deg));
-		}
-	}
-	input[type=text].input-calendar-value {
-		padding: 0 30px;
-		font-size: 16px;
-		width: 226px;
-		height: $calendar-height;
-		line-height: 32px;
-		&:focus {
-			border: 1px solid $color-stone;
-		}
-	}
-
-	// display
-	.input-calendar-wrapper {
-		display: none;
-		font-family: $font-stack;
-
-		&.active {
-			position: absolute;
-			display: block;
-			padding: 5px 12px;
-			border: 1px solid $color-stone;
-			background-color: $color-input-fill;
-			width: 200px;
-			text-align: center;
-			left: 0;
-			top: $calendar-height + 1;
-			-webkit-touch-callout: none;
-			z-index: 2;
-
-			@include border-radius(2px);
-			@include user-select(none);
-		}
-		.today-btn {
-			display: none;
-		}
-		.days-view, .months-view, .years-view {
-			.navigation-wrapper {
-				.navigation-title {
-					width: 100px;
-					display: inline-block;
-					cursor: pointer;
-					color: $color-input-text;
-					font-weight: 600;
-				}
-				.icon {
-					display: inline-block;
-
-					.fa {
-						display: inline-block;
-						height: 25px;
-						width: 25px;
-						color: $color-midnight;
-						font-size: 13px;
-						cursor: pointer;
-
-						&.fa-angle-left {
-							margin-right: 20px;
-						}
-						&.fa-angle-right {
-							margin-left: 20px;
-						}
-					}
-				}
-			}
-			.days-title {
-				.cell {
-					height: 25px;
-					line-height: 25px;
-					cursor: default;
-					font-weight: 600;
-					margin: 0;
-					color: $color-input-text;
-				}
-			}
-			.days, .months, .years {
-				padding-bottom: 2px;
-				.day {
-					width: 26px;
-					height: 25px;
-					font-weight: 600;
-				}
-				.month {
-					width: 58px;
-					height: 38px;
-					line-height: 38px;
-				}
-			}
-			.year {
-				width: 58px;
-				height: 38px;
-				line-height: 38px;
-			}
-			.day {
-				width: 26px;
-				height: 25px;
-				line-height: 25px;
-				color: $color-input-text;
-				&.prev, &.next {
-					@include opacity(0.4);
-				}
-			}
-			.cell {
-				display: inline-block;
-				text-align: center;
-				cursor: pointer;
-				border: none;
-				-webkit-touch-callout: none;
-				font-size: 13px;
-				@include  user-select(none);
-				@include transition($default-input-transition);
-
-				&.hover {
-					color: $color-input-text;
-				}
-				&.current, &:hover {
-					@include opacity(.8);
-					@include border-radius(3px);
-				}
-				&.current {
-					color: $color-white;
-					background: $color-input-text;
-				}
-				&:hover {
-					background: transparentize($color-input-text, 0.85);
-				}
-				&.title {
-					&:hover {
-						@include opacity(1);
-						background: transparent;
-					}
-				}
-			}
-		}
-	}
-}
 .input-datetime {
 	.input-time {
 		margin-right: 0;
 		margin-left: 3px;
 	}
 }
+a {
+	&.input-link {
+		display: block;
+		margin: 2px 0 0 1px;
+	}
+}
+.drop-link {
+	position: relative;
+	text-transform: uppercase;
 
-fieldset {
-	margin: 0 0 25px 0;
-
-	legend {
-		text-transform: uppercase;
-		.help-tooltip {
-			margin: 0 5px 0 10px;
-			height: 14px;
-			height: 18px;
-			width: 18px;
-			vertical-align: text-bottom;
-		}
-		label {
-			margin-right: 5px;
+	&:hover {
+		text-decoration: none;
+	}
+	&:after {
+		content: 'v';
+		font-family: $icon-font;
+		font-size: 12px;
+		text-transform: none;
+		right: 10px;
+		top: 1px;
+		pointer-events: none;
+	}
+	&.open {
+		&:after {
+			content: '^';
 		}
 	}
-	&.focused, &.unfocused {
-		legend {
-			padding: 0 7px;
-			margin: 0 0 0 -7px;
-			font-size: 14px;
-			color: $color-elephant;
+}
+.input-divider {
+	display: block;
+	margin: 0 0 15px 0;
+	border-top: 1px solid $color-rabbit-fur;
+	&.dotted {
+		border-top-style: dotted;
+	}
+}
+.input-child {
+	margin: 0 0 0 25px;
+}
+.input-button {
+	vertical-align: bottom;
 
-			.input-radio {
-				&:last-of-type {
-					margin-right: 0;
-				}
+	&.inline {
+		margin: 0 0 6px 0;
+	}
+}
+
+// Input width functions
+@function calc-input-width($container-width, $divisions, $hor-margin){
+	@return (
+		(($container-width - (($divisions - 1) * $hor-margin)) / $divisions)
+	);
+}
+@function calc-input-part-width($fraction-num, $fraction-width, $hor-margin) {
+	@return (
+		round($fraction-width*$fraction-num + (($fraction-num - 1)*$hor-margin))
+	);
+}
+@function input-width-map($width-smallest, $hor-margin) {
+	@return ((
+		'xsmall': $width-smallest,
+		'small': calc-input-part-width(2, $width-smallest, $hor-margin),
+		'medium': calc-input-part-width(3, $width-smallest, $hor-margin),
+		'large': calc-input-part-width(4, $width-smallest, $hor-margin),
+		'xlarge': calc-input-part-width(5, $width-smallest, $hor-margin),
+		'full': calc-input-part-width(6, $width-smallest, $hor-margin)
+	));
+}
+@mixin input-width-css($size) {
+	vertical-align: bottom;
+
+	.label-text {
+		word-break: break-all;
+		width: map-get($input-width-settings-map-default, $size);
+	}
+	&.input-text {
+		input[type=text], input[type=password] {
+			width: map-get($input-width-settings-map-text, $size);
+		}
+	}
+	&.input-textarea {
+		textarea {
+			width: map-get($input-width-settings-map-textarea, $size);
+		}
+	}
+	&.input-select {
+		select {
+			width: map-get($input-width-settings-map-select, $size) - 2px; // subtract wrapper border width
+		}
+	}
+	&.input-checkbox {
+		width: map-get($input-width-settings-map-default, $size);
+	}
+	&.input-calendar {
+		input[type=text] {
+			width: map-get($input-width-settings-map-default, $size);
+		}
+	}
+	&.input-datetime {
+		$dt-width: map-get($input-width-settings-map-default, $size);
+		$cal-percent: 0.66;
+		$cal-width: ceil($dt-width * $cal-percent);
+		$time-width: floor(($dt-width - 4) * (1 - $cal-percent));
+
+		display: inline-block;
+
+		.input-calendar {
+			input[type=text] {
+				width: $cal-width;
+			}
+		}
+		.input-time {
+			select {
+				width: $time-width;
 			}
 		}
 	}
-	&.focused {
-		border: 1px solid $color-dolphin;
-		padding: 15px 25px 30px 25px;
-		@include border-radius(5px);
-
-		&.narrow {
-			width: 500px;
-		}
-	}
-	&.unfocused {
-		padding: 15px 0 0 25px;
-	}
-	.subset {
-		margin: 0 0 0 25px;
-		label {
-			text-transform: none;
-		}
-	}
 }
 
-input[type=file] {
-	line-height: 1em;
+// Input width settings
+$input-width-settings: (
+	'width-max': 600px,
+	'num-increments': 6,
+	'hor-margin': 20px,
+	'vert-margin': 20px
+);
+
+$input-width-settings-smallest-default: calc-input-width(map-get($input-width-settings, 'width-max'), map-get($input-width-settings, 'num-increments'), map-get($input-width-settings, 'hor-margin'));
+$input-width-settings-smallest-text: calc-input-width(map-get($input-width-settings, 'width-max'), map-get($input-width-settings, 'num-increments'), map-get($input-width-settings, 'hor-margin'));
+$input-width-settings-smallest-textarea: calc-input-width(map-get($input-width-settings, 'width-max'), map-get($input-width-settings, 'num-increments'), map-get($input-width-settings, 'hor-margin'));
+$input-width-settings-smallest-select: calc-input-width(map-get($input-width-settings, 'width-max'), map-get($input-width-settings, 'num-increments'), map-get($input-width-settings, 'hor-margin'));
+
+$input-width-settings-map-default: input-width-map($input-width-settings-smallest-default, map-get($input-width-settings, 'hor-margin'));
+$input-width-settings-map-text: input-width-map($input-width-settings-smallest-text, map-get($input-width-settings, 'hor-margin'));
+$input-width-settings-map-textarea: input-width-map($input-width-settings-smallest-textarea, map-get($input-width-settings, 'hor-margin'));
+$input-width-settings-map-select: input-width-map($input-width-settings-smallest-select, map-get($input-width-settings, 'hor-margin'));
+
+.input-width-xsmall, .input-width-small, .input-width-medium, .input-width-large, .input-width-xlarge, .input-width-full {
+	margin-bottom: map-get($input-width-settings, 'vert-margin');
 }
+.input-row {
+	.input-width-xsmall, .input-width-small, .input-width-medium, .input-width-large, .input-width-xlarge, .input-width-full {
+		margin-bottom: 0;
+	}
+}
+.input-width-xsmall {
+	@include input-width-css('xsmall');
+}
+.input-width-small {
+	@include input-width-css('small');
+}
+.input-width-medium {
+	@include input-width-css('medium');
+}
+.input-width-large {
+	@include input-width-css('large');
+}
+.input-width-xlarge {
+	@include input-width-css('xlarge');
+}
+.input-width-full {
+	@include input-width-css('full');
+}
+
+
+
+// DEPRICATED OR SITE-SPECIFIC STYLES --------------------------------------------------------------
+// TODO : move WP styles to WP
 
 .inline-input-labels {
 	> label {
@@ -1550,119 +1644,53 @@ input[type=file] {
 		}
 	}
 }
+.password-errors {
+	margin: 10px 0 0 2px;
 
-
-// Input width functions
-@function calc-input-width($container-width, $divisions, $hor-margin){
-	@return (
-		(($container-width - (($divisions - 1) * $hor-margin)) / $divisions)
-	);
-}
-@function calc-input-part-width($fraction-num, $fraction-width, $hor-margin) {
-	@return (
-		round($fraction-width*$fraction-num + (($fraction-num - 1)*$hor-margin))
-	);
-}
-@function input-width-map($width-smallest, $hor-margin) {
-	@return ((
-		'xsmall': $width-smallest,
-		'small': calc-input-part-width(2, $width-smallest, $hor-margin),
-		'medium': calc-input-part-width(3, $width-smallest, $hor-margin),
-		'large': calc-input-part-width(4, $width-smallest, $hor-margin),
-		'xlarge': calc-input-part-width(5, $width-smallest, $hor-margin),
-		'full': calc-input-part-width(6, $width-smallest, $hor-margin)
-	));
-}
-@mixin input-width-css($size) {
-	vertical-align: bottom;
-
-	.label-text {
-		word-break: break-all;
-		width: map-get($input-widths-map-default, $size);
-	}
-	&.input-text {
-		input[type=text], input[type=password] {
-			width: map-get($input-widths-map-text, $size);
-		}
-	}
-	&.input-textarea {
-		textarea {
-			width: map-get($input-widths-map-textarea, $size);
-		}
-	}
-	&.input-select {
-		select {
-			width: map-get($input-widths-map-select, $size) - 2px; // subtract wrapper border width
-		}
-	}
-	&.input-checkbox {
-		width: map-get($input-widths-map-default, $size);
-	}
-	&.input-calendar {
-		input[type=text] {
-			width: map-get($input-widths-map-default, $size);
-		}
-	}
-	&.input-datetime {
-		$dt-width: map-get($input-widths-map-default, $size);
-		$cal-percent: 0.66;
-		$cal-width: ceil($dt-width * $cal-percent);
-		$time-width: floor(($dt-width - 4) * (1 - $cal-percent));
-
+	> div {
 		display: inline-block;
+		margin: 0 15px 5px 0;
+		width: 164px;
 
-		.input-calendar {
-			input[type=text] {
-				width: $cal-width;
-			}
-		}
-		.input-time {
-			select {
-				width: $time-width;
-			}
+		&:before {
+			content: '\00D7';
+			background: $color-critical-red;
+			color: $color-white;
+			font-size: 14px;
+			height: 14px;
+			width: 14px;
+			line-height: 16px;
+			margin: 0 5px 0 0;
+			text-align: center;
+			display: inline-block;
+
+			@include border-radius(10px);
 		}
 	}
 }
-
-// Input width settings
-$input-width-max: 600px;
-$num-input-sizes: 6;
-$hor-margin: 20px;
-$vert-margin: 20px;
-
-$input-width-smallest-default: calc-input-width($input-width-max, $num-input-sizes, $hor-margin);
-$input-width-smallest-text: calc-input-width($input-width-max, $num-input-sizes, $hor-margin);
-$input-width-smallest-textarea: calc-input-width($input-width-max, $num-input-sizes, $hor-margin);
-$input-width-smallest-select: calc-input-width($input-width-max, $num-input-sizes, $hor-margin);
-
-$input-widths-map-default: input-width-map($input-width-smallest-default, $hor-margin);
-$input-widths-map-text: input-width-map($input-width-smallest-text, $hor-margin);
-$input-widths-map-textarea: input-width-map($input-width-smallest-textarea, $hor-margin);
-$input-widths-map-select: input-width-map($input-width-smallest-select, $hor-margin);
-
-.input-width-xsmall, .input-width-small, .input-width-medium, .input-width-large, .input-width-xlarge, .input-width-full {
-	margin-bottom: $vert-margin;
+.radio-inputs {
+	position: relative;
+	margin: 15px 0 0 23px;
 }
 .input-row {
-	.input-width-xsmall, .input-width-small, .input-width-medium, .input-width-large, .input-width-xlarge, .input-width-full {
-		margin-bottom: 0;
+	&.lead-item {
+		margin-bottom: 30px;
 	}
-}
-.input-width-xsmall {
-	@include input-width-css('xsmall');
-}
-.input-width-small {
-	@include input-width-css('small');
-}
-.input-width-medium {
-	@include input-width-css('medium');
-}
-.input-width-large {
-	@include input-width-css('large');
-}
-.input-width-xlarge {
-	@include input-width-css('xlarge');
-}
-.input-width-full {
-	@include input-width-css('full');
+	.inactive, &.inactive {
+		display: none;
+	}
+	.text-input, .input-checkbox {
+		text-align: left;
+		.comment {
+			display: block;
+			padding: 5px;
+			margin-top: -3px;
+			&.error {
+				background-color: $color-critical-red;
+				color: $color-white;
+				padding: 15px;
+				@include border-radius(0 0 4px 4px);
+			}
+		}
+	}
 }
