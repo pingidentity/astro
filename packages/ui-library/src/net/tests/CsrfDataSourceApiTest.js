@@ -3,11 +3,7 @@ window.__DEV__ = true;
 jest.dontMock("../CsrfDataSourceApi");
 
 describe("CsrfDataSourceApi", function () {
-
-    var api;
-    var callback;
-
-    var apiExport;
+    var api, callback, apiExport;
 
     beforeEach(function () {
         // configure the DataSourceApi mock instance, to allow controlling the DataSourceApi mock
@@ -20,11 +16,14 @@ describe("CsrfDataSourceApi", function () {
         };
         jest.setMock("../DataSourceApi", apiExport);
 
-        api = require("../CsrfDataSourceApi")({
+        api = require("../CsrfDataSourceApi");
+
+        api._loadConfig({
             rootPath: "/web-portal/",
             csrfHeaderName: "X-CSRF-TOKEN",
             csrfCookieName: "web-portal-csrf"
         });
+
         callback = jest.genMockFunction();
 
         // delete the cookies with the 2 main names used in this test class;
@@ -191,9 +190,9 @@ describe("CsrfDataSourceApi", function () {
     });
 
     it("use default cookie name if none provided", function () {
-        api = require("../CsrfDataSourceApi")({
+        api._loadConfig({
             rootPath: "/web-portal/",
-            csrfHeaderName: "X-CSRF-TOKEN"
+            csrfHeaderName: "X-CSRF-TOKEN",
         });
 
         // mock the get function in the core DataSourceApi, so that it calls the callback function
@@ -225,7 +224,7 @@ describe("CsrfDataSourceApi", function () {
     });
 
     it("set '' as default root path if none provided", function () {
-        api = require("../CsrfDataSourceApi")();
+        api._loadConfig({});
 
         api.get("endpoint", {}, callback);
 
@@ -234,8 +233,9 @@ describe("CsrfDataSourceApi", function () {
     });
 
     it("does not parse/store token if the header name is not specified", function () {
-        api = require("../CsrfDataSourceApi")({
-            rootPath: "/web-portal/"
+        api._loadConfig({
+            rootPath: "/web-portal/",
+            csrfCookieName: "web-portal-csrf"
         });
 
         // mock the get function in the core DataSourceApi, so that it calls the callback function
@@ -273,6 +273,16 @@ describe("CsrfDataSourceApi", function () {
 
         api.registerMiddleware("before", cb);
         expect(api.callbacks.before).toEqual([cb]);
+    });
+
+    it("unregister middleware callback by index", function () {
+        var cb = jest.genMockFunction();
+
+        api.registerMiddleware("before", cb);
+        expect(api.callbacks.before).toEqual([cb]);
+
+        api.unregisterMiddleware("before", cb);
+        expect(api.callbacks.before).toEqual([]);
     });
 
     it("unregister middleware callback", function () {
