@@ -61,8 +61,8 @@
   "peerDependencies": {
     "react": "0.13 - 0.14",
     "react-dom": "0.14",
-    "redux": "3.0.x",
-    "redux-thunk": "1.0.x"
+    "redux": "3.x",
+    "redux-thunk": "1.x"
   },
   "engines": {
     "node": ">= 4.2.x",
