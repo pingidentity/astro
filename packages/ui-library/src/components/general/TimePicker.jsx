@@ -3,19 +3,14 @@ var FormSelectField = require("../forms/FormSelectField.jsx");
 var cx = require("classnames");
 
 /**
- * @callback TimePicker~valueCallback
- * @param {string} value - value entered in text field
- */
-
-/**
  * @class TimePicker
- * @desc   A drop-down form for selecting the time
+ * @desc  A drop-down form for selecting the time
  *
  * @param {TimePicker~valueCallback} onValueChange Handles the select element value change
  * @param {number}   [increments]       The increments (in minutes) to populate the list. Default is 15
  * @param {string}   [format]           The time format. Either "12" or "24". Default is "12"
  * @param {string}   [labelText]        The text to display as the field's label
- * @param {string}   [value]            The value to be initially selected
+ * @param {string|object} [value]       The value to be set, eg: "3:00pm" or a `moment` object
  * @param {string}   [id="time-picker"] The data-id to pass to the FormSelectField
  * @param {string}   [className]        Additional class names for container
  */
@@ -26,7 +21,10 @@ module.exports = React.createClass({
         increments: React.PropTypes.number,
         format: React.PropTypes.string,
         labelText: React.PropTypes.string,
-        value: React.PropTypes.string,
+        value: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.object
+        ]),
         id: React.PropTypes.string,
         className: React.PropTypes.string
     },
@@ -34,38 +32,55 @@ module.exports = React.createClass({
     /**
      * Adjusts hours based on format, adds am/pm property if needed
      * @method Timpicker#_getHourType
-     * @private
+     *
      * @param  {Object} hoursMinutes The hours/mins object
      * @param  {String} format       The time format
      * @return {Object}              The modified parameter
      */
-    _getHourType: function (hoursMinutes, format) {
-        switch (format) {
-            case "12":
-                if (hoursMinutes.hours > 11) {
-                    hoursMinutes.amPm = "pm";
-                } else {
-                    hoursMinutes.amPm = "am";
-                }
+    _getFormattedHourType: function (hoursMinutes, format) {
+        var hourType = this._getHourType(hoursMinutes.hours, format);
 
-                if (hoursMinutes.hours === 0) {
-                    hoursMinutes.hours = 12;
-                }
-
-                if (hoursMinutes.hours > 12) {
-                    hoursMinutes.hours -= 12;
-                }
-
-                break;
-        }
+        hoursMinutes.amPm = hourType.amPm;
+        hoursMinutes.hours = hourType.hours;
 
         return hoursMinutes;
     },
 
     /**
+     * Returns an object with the correct hours (based on format) and am/pm if 12 hour format
+     *
+     * @method TimePicker#_getHourType
+     * @param  {Integer}  hours  The amount of hours to parse
+     * @param  {String}   format The hour format
+     * @return {Object}          {amPm, hours}
+     */
+    _getHourType: function (hours, format) {
+        var amPm = "";
+
+        switch (format) {
+            case "12":
+                amPm = hours > 11 ? "pm" : "am";
+
+                if (hours === 0) {
+                    hours = 12;
+                }
+
+                if (hours > 12) {
+                    hours -= 12;
+                }
+
+                break;
+        }
+
+        return {
+            amPm: amPm,
+            hours: hours
+        };
+    },
+
+    /**
      * Pads with a zero if necessary
      * @method TimePicker#_getPaddedNumber
-     * @private
      *
      * @param  {String|Number} number The number
      * @return {String}               The padded number
@@ -78,7 +93,6 @@ module.exports = React.createClass({
     /**
      * Breaks minutes into hours and minutes
      * @method TimePicker#_getHoursMinutes
-     * @private
      *
      * @param  {Number} minutes The total minutes to be broken down
      * @return {Object}         eg: {
@@ -96,7 +110,7 @@ module.exports = React.createClass({
     /**
      * Populate an object of times
      * @method TimePicker#_getTimes
-     * @private
+     *
      * @return {Object} eg {
      *                         ...
      *                         "6:00": "6:00",
@@ -113,7 +127,7 @@ module.exports = React.createClass({
 
         for (var i = 0; i < count; i += 1) {
             formattedTime = this._getHoursMinutes(i * increments);
-            formattedTime = this._getHourType(formattedTime, this.props.format);
+            formattedTime = this._getFormattedHourType(formattedTime, this.props.format);
             formattedTime = formattedTime.hours + ":" +
                             this._getPaddedNumber(formattedTime.minutes) +
                             (formattedTime.amPm || "");
@@ -127,7 +141,7 @@ module.exports = React.createClass({
     /**
      * handles the change event
      * @method TimePicker#_onChange
-     * @private
+     *
      * @param {Object} e The event object
      */
     _onChange: function (e) {
@@ -146,10 +160,19 @@ module.exports = React.createClass({
     render: function () {
         var times = this._getTimes();
         var classes = cx("input-time", this.props.className);
+        var value = this.props.value;
+
+        // if a moment object, parse to human-readable
+        if (value && typeof value === "object") {
+            var minutes = value.minutes();
+            var hourType = this._getHourType(value.hours(), this.props.format);
+            value = hourType.hours + ":" + this._getPaddedNumber(minutes) + hourType.amPm;
+        }
 
         return (
             <FormSelectField
                 {...this.props}
+                value={value}
                 options={times}
                 onChange={this._onChange}
                 className={classes}

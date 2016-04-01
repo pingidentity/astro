@@ -4,17 +4,18 @@ var TimePicker = require("./../../../components/general/TimePicker.jsx");
 var Calendar = require("./../../../components/calendars/Calendar.jsx");
 
 var TimePickerDemo = React.createClass({
-    _onChange: function (format, value) {
+    _onChange: function (index, value) {
         var newState = {};
-        newState[format] = value;
+        newState[index] = value;
 
         this.setState(newState);
     },
 
     getInitialState: function () {
         return {
-            12: "--",
-            24: "--"
+            a: "--",
+            b: "--",
+            c: ""
         };
     },
 
@@ -23,23 +24,24 @@ var TimePickerDemo = React.createClass({
             <div>
                 <div className="input-row">
                     <TimePicker
-                        onValueChange={this._onChange.bind(null, "12")}
+                        onValueChange={this._onChange.bind(null, "a")}
                         increments={30}
                         label="12 Hour Format"
+                        value={this.state.a}
                     />
                     <br /><br />
-                    12hr (w/30m): <strong>{this.state["12"]}</strong>
+                    12hr (w/30m): <strong>{this.state.a}</strong>
                 </div>
                 <div className="input-row">
                     <TimePicker
-                        onValueChange={this._onChange.bind(null, "24")}
+                        onValueChange={this._onChange.bind(null, "b")}
                         increments={60}
                         format="24"
-                        value={"16:00"}
                         label="24 Hour Format"
+                        value={this.state.b}
                     />
                     <br /><br />
-                    24hr: <strong>{this.state["24"]}</strong>
+                    24hr: <strong>{this.state.b}</strong>
                 </div>
 
                 <label className="stand-alone">
@@ -51,10 +53,10 @@ var TimePickerDemo = React.createClass({
                         computableFormat="x"
                         closeOnSelect={true} />
                     <TimePicker
-                        onValueChange={this._onChange.bind(null, "24")}
+                        onValueChange={this._onChange.bind(null, "c")}
                         increments={60}
                         format="24"
-                        value={"16:00"}
+                        value={this.state.c}
                     />
                 </div>
             </div>

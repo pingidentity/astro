@@ -2,12 +2,14 @@ window.__DEV__ = true;
 
 jest.dontMock("../TimePicker.jsx");
 jest.dontMock("../../forms/FormSelectField.jsx");
+jest.dontMock("moment");
 
 describe("TimePicker", function () {
     var React = require("react"),
         ReactTestUtils = require("react-addons-test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         TimePicker = require("../TimePicker.jsx"),
+        moment = require("moment"),
         onValueChange = jest.genMockFunction(),
         component;
 
@@ -137,5 +139,20 @@ describe("TimePicker", function () {
         ReactTestUtils.Simulate.change(select, evt);
 
         expect(onValueChange).toBeCalledWith(evt.target.value);
+    });
+
+    it("takes a `moment` object as a value", function () {
+        component = render({
+            increments: 60,
+            format: "12",
+            value: moment("2016-04-01T14:00:00.000Z")
+        });
+
+        var date = new Date("April 1 2016");
+        var offset = date.getTimezoneOffset() / 60;
+        var select = TestUtils.findRenderedDOMNodeWithTag(component, "select");
+
+        // subtract time zone ofset from 1400 hours eg: 14 - 7 (PDT -700)
+        expect(select.value).toEqual((14 - offset) + ":00am");
     });
 });
