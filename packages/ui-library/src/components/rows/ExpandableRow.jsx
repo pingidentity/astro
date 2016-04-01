@@ -94,6 +94,10 @@ var Stateful = React.createClass({
     },
 
     _onToggle: function () {
+        if (typeof(this.props.onToggle) === "function") {
+            this.props.onToggle(!this.state.expanded);
+        }
+
         this.setState({
             expanded: !this.state.expanded
         });
