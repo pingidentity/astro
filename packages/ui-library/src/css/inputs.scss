@@ -1,6 +1,7 @@
 
 // INPUT GLOBAL VARS -------------------------------------------------------------------------------
 $default-input-transition: all 0.3s;
+$default-input-height: 40px;
 
 
 
@@ -89,7 +90,7 @@ input[type=text], input[type=password], textarea {
 	border-style: solid;
 	border-color: $color-input-fill;
 	font-size: 14px;
-	height: 40px;
+	height: $default-input-height;
 	box-sizing: border-box;
 	outline: none;
 	font-family: $font-pn-regular;
@@ -134,7 +135,7 @@ label {
 	position: relative;
 	display: inline-block;
 	margin: 0 20px 0 0;
-	font-size: 14px;
+	font-size: 13px;
 	text-transform: uppercase;
 	vertical-align: top;
 	line-height: 1em;
@@ -537,6 +538,9 @@ input[type=file] {
 @include placeholder-css($color-input-placeholder, normal, 0);
 
 // Input types
+.input-text, .input-textarea, .input-select, .input-file-upload, .input-integer, .input-radio, .input-checkbox, .input-color-picker {
+	margin: 0 20px 20px 0;
+}
 .radio-text-input {
 	margin: -12px 0 0 32px;
 }
@@ -559,15 +563,17 @@ input[type=file] {
 		}
 	}
 	.input-container {
+		height: $default-input-height;
 
 		.wrapper {
 			position: relative;
 			clear: both;
 			display: inline-block;
-			height: 38px;
+			height: $default-input-height;
 			overflow: hidden;
 			cursor: pointer;
 			border: 1px solid $color-input-fill;
+			box-sizing: border-box;
 			@include border-radius(4px);
 
 			&:after {
@@ -578,7 +584,7 @@ input[type=file] {
 				text-transform: none;
 				right: 10px;
 				top: 0;
-				line-height: 42px;
+				line-height: 41px;
 				color: $color-midnight;
 				pointer-events: none;
 			}
@@ -630,7 +636,7 @@ input[type=file] {
 		background-color: $color-input-fill;
 		font-size: 16px;
 		line-height: 20px;
-		height: 40px;
+		height: $default-input-height;
 		-webkit-appearance: none;
 		outline:none;
 		cursor: pointer;
@@ -979,8 +985,6 @@ input[type=file] {
 	}
 }
 .input-calendar {
-	$calendar-height: 40px;
-
 	display: inline-block;
 	position: relative;
 	font-family: $font-stack;
@@ -1019,7 +1023,7 @@ input[type=file] {
 		padding: 0 30px;
 		font-size: 16px;
 		width: 226px;
-		height: $calendar-height;
+		height: $default-input-height;
 		line-height: 32px;
 		&:focus {
 			border: 1px solid $color-stone;
@@ -1040,7 +1044,7 @@ input[type=file] {
 			width: 200px;
 			text-align: center;
 			left: 0;
-			top: $calendar-height + 1;
+			top: $default-input-height + 1;
 			-webkit-touch-callout: none;
 			z-index: 2;
 
@@ -1150,6 +1154,46 @@ input[type=file] {
 		}
 	}
 }
+.input-integer, .form-integer-container{
+    position: relative;
+
+    &:after, a.undo{
+        right: 40px;
+    }
+    .input-container{
+        position: relative;
+        display: inline-block;
+        vertical-align: bottom;
+    }
+	.input-text {
+		margin: 0;
+	}
+    .up-down-spinner{
+        position: absolute;
+		right: 10px;
+
+        font-family: $icon-font;
+        cursor: pointer;
+        vertical-align: baseline;
+        max-width: 35px;
+        display: inline-block;
+
+        button{
+            height: 18px;
+            padding: 0px;
+            display: inline-block;
+            text-decoration: none;
+            font-color: inherit;
+            border: none;
+            background-color: transparent;
+        }
+    }
+    [disabled], [readonly] {
+        .up-down-spinner, .up-down-spinner{
+            pointer-events: none;
+        }
+    }
+}
 
 // Input variants
 .required {
@@ -1239,16 +1283,6 @@ input[type=file] {
 			left: -14px;
 		}
 	}
-	&.input-row {
-		position: relative;
-		margin-left: 20px;
-
-		&:before {
-			top: 0;
-			bottom: 2px;
-			left: -19px;
-		}
-	}
 	&.legend {
 		float: right;
 		margin: 0 0 0 15px;
@@ -1334,7 +1368,7 @@ input[type=file] {
 				padding-left: 15px;
 			}
 		}
-		&.input-text, &.input-textarea, &.input-toggle, &.input-select > div, &.input-row, &.legend {
+		&.input-text, &.input-textarea, &.input-toggle, &.input-select > div, &.legend {
 			&:before {
 				content: none;
 			}
@@ -1347,9 +1381,6 @@ input[type=file] {
 		&.input-toggle {
 			margin: 0;
 		}
-		&.input-row {
-			margin-left: 0;
-		}
 	}
 }
 
@@ -1359,7 +1390,11 @@ input[type=file] {
 
 .input-row {
 	position: relative;
-	margin: 0 0 25px 0;
+	margin: 0 0 20px 0;
+
+	.input-text, .input-textarea, .input-select, .input-file-upload, .input-integer, .input-radio, .input-checkbox, .input-color-picker {
+		margin-bottom: 0;
+	}
 }
 .form-error {
 	&.input-toggle {
@@ -1559,11 +1594,6 @@ $input-width-settings-map-select: input-width-map($input-width-settings-smallest
 .input-width-xsmall, .input-width-small, .input-width-medium, .input-width-large, .input-width-xlarge, .input-width-full {
 	margin-bottom: map-get($input-width-settings, 'vert-margin');
 }
-.input-row {
-	.input-width-xsmall, .input-width-small, .input-width-medium, .input-width-large, .input-width-xlarge, .input-width-full {
-		margin-bottom: 0;
-	}
-}
 .input-width-xsmall {
 	@include input-width-css('xsmall');
 }
@@ -1667,7 +1697,7 @@ $input-width-settings-map-select: input-width-map($input-width-settings-smallest
 }
 .input-row {
 	&.lead-item {
-		margin-bottom: 30px;
+		margin-bottom: 10px;
 	}
 	.inactive, &.inactive {
 		display: none;

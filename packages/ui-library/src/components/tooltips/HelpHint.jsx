@@ -37,6 +37,11 @@ var HelpHint = React.createClass({
         };
     },
 
+    captureClick: function (e) {
+        // kill click event to prevent event from triggering label from checking a checkbox/radio
+        e.preventDefault();
+    },
+
     render: function () {
         var hintStyles = {};
 
@@ -45,7 +50,7 @@ var HelpHint = React.createClass({
         }
 
         return (
-            <div className={css("help-tooltip", hintStyles)} data-id={this.props.id}>
+            <div className={css("help-tooltip", hintStyles)} data-id={this.props.id} onClick={this.captureClick}>
                 {this.props.children || (<div><span className="icon-help"></span></div>)}
                 <div className="tooltip-text"><div className="tooltip-text-content">{this.props.hintText}</div></div>
             </div>
