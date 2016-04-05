@@ -1,3 +1,5 @@
+var React = require("react");
+
 /**
  * @module util/ReduxTest
  * @desc The module contains utility functions to help with testing Redux componentn
@@ -27,3 +29,20 @@ exports.createTestDispatcher = function (reducer, obj) {
 
     return dispatch;
 };
+
+/**
+ * @class Wrapper
+ * @desc Since react has deprecated using set props, we need to wrap components in another component to enable
+ * sending properties to them by exposing a function.
+ */
+exports.Wrapper = React.createClass({
+    sendProps: function (state) {
+        this.setState(state);
+    },
+
+    render: function () {
+        /* eslint-disable */
+        return <this.props.type ref="target" {...this.props.opts} {...this.state} />;
+        /* eslint-enable */
+    }
+});
