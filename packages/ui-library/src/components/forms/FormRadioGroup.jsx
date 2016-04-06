@@ -20,7 +20,7 @@ var React = require("react"),
  * @param {Object} items - array of objects to render (required)
  *          format: [{"id": "val", "name": "val"}, {"id": "val", "name": "val"}...]
  * @param {FormRadioGroup~onChangeCallback} onChange - the callback to be triggered when the selection changed
- * @param {string} selected - the selected "id" from the items object above. If none is passed-in, all radio buttons
+ * @param {*} selected - the selected "id" from the items object above. If none is passed-in, all radio buttons
  *          are left unchecked
  * @param {boolean} [stacked=true]- When true, radios inputs are stacked vertically. When false radio
  *          inputs appear on same line and wrap when out of space.
@@ -61,7 +61,7 @@ var FormRadioGroup = React.createClass({
         id: React.PropTypes.string,
         items: React.PropTypes.array.isRequired,
         onChange: React.PropTypes.func.isRequired,
-        selected: React.PropTypes.string,
+        selected: React.PropTypes.any,
         stacked: React.PropTypes.bool
     },
 
