@@ -1,4 +1,5 @@
-var React = require("react");
+var React = require("react"),
+    _ = require("underscore");
 
 /**
  * @module util/ReduxTest
@@ -41,8 +42,10 @@ exports.Wrapper = React.createClass({
     },
 
     render: function () {
+        var opts = _.extend({}, this.props.opts, this.state, { ref: "target" });
+
         /* eslint-disable */
-        return <this.props.type ref="target" {...this.props.opts} {...this.state} />;
+        return React.createElement(this.props.type, opts);
         /* eslint-enable */
     }
 });
