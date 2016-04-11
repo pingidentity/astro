@@ -13,7 +13,7 @@ $layout-zindex-order: (
 $sidenav-width: 250px;
 $sidenav-lineheight: 22px;
 
-#header {
+#library-header {
 	z-index: index($layout-zindex-order, 'header');
 	position: fixed;
 	overflow: visible;
@@ -42,13 +42,9 @@ $sidenav-lineheight: 22px;
 	}
 }
 
-#nav {
+#library-nav {
 	$nav-border-width: 1px;
 	$selected-border-width: 1px;
-	$selected-line-width: 8px;
-	$selected-arrow-offset: -(ceil($layout-nav-link-height/3) + $nav-border-width) + 1;
-	$selected-arrow-width-w: ceil($layout-nav-link-height/2) + $selected-border-width;
-	$selected-arrow-width-h: ceil($selected-arrow-width-w/3) - $selected-border-width;
 
 	z-index: index($layout-zindex-order, 'nav');
 	position: absolute;
@@ -64,7 +60,6 @@ $sidenav-lineheight: 22px;
 		content: '';
 		position: fixed;
 		background-color: $color-cinder-block;
-		border-right: 1px solid $color-stone;
 		top: $layout-header-height;
 		bottom: 0;
 		left: 0;
@@ -84,8 +79,7 @@ $sidenav-lineheight: 22px;
 
 		li {
 			position: relative;
-			padding: $selected-border-width $selected-border-width $selected-border-width 0;
-			border-left: $selected-line-width solid transparent;
+			border-left: 6px solid transparent;
 			@include transition(all 0.2s);
 
 			a {
@@ -109,21 +103,9 @@ $sidenav-lineheight: 22px;
 				text-decoration: none;
 			}
 			&.selected {
-				background-color: $color-stone;
 				border-left-color: $color-active-blue;
 				font-family: 'ProximaNovaRegular';
 
-				&:after {
-					content: '';
-					display: block;
-					position: absolute;
-					top: 0;
-					border-width: $selected-arrow-width-w $selected-arrow-width-h;
-					border-style: solid;
-					z-index: 1;
-					border-color: transparent transparent transparent $color-stone;
-					right: $selected-arrow-offset;
-				}
 
 				a {
 					color: $color-slate;
@@ -140,16 +122,8 @@ $sidenav-lineheight: 22px;
 						background-color: $color-white;
 						top: 0;
 						bottom: 0;
-						right: -($nav-border-width + $selected-border-width);
+						right: -(1px + $selected-border-width);
 						@include border-radius(1px);
-					}
-					&:after {
-						top: 1px;
-						border-width: ($selected-arrow-width-w - 2px) ($selected-arrow-width-h - 1px);
-						border-style: solid;
-						z-index: 2;
-						border-color: transparent transparent transparent $color-white;
-						right: $selected-arrow-offset + 1px;
 					}
 				}
 			}
@@ -181,7 +155,7 @@ $sidenav-lineheight: 22px;
 	}
 }
 
-#content {
+#library-content {
 	z-index: index($layout-zindex-order, 'content');
 	position: fixed;
 	overflow-x: hidden;
@@ -231,13 +205,13 @@ $sidenav-lineheight: 22px;
 			font-size: 14px;
 			font-family: $font-stack;
 			font-weight: bold;
-			@include opacity(0.2);
 		}
 	}
 	pre.language-markup {
 		overflow: visible;
 
 		&:before {
+			color: silver;
 			content: 'MARKUP';
 		}
 	}
@@ -253,6 +227,7 @@ $sidenav-lineheight: 22px;
 		border: 1px dashed silver;
 
 		&:before {
+			color: silver;
 			content: 'OUTPUT';
 		}
 	}
