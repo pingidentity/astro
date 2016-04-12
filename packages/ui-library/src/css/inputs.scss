@@ -1526,7 +1526,7 @@ a {
 	vertical-align: bottom;
 
 	.label-text {
-		word-break: break-all;
+		word-break: normal;
 		width: map-get($input-width-settings-map-default, $size);
 	}
 	&.input-text {

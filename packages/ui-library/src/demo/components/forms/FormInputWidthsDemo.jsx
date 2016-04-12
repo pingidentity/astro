@@ -41,10 +41,13 @@ var FormInputWidthsDemo = React.createClass({
                 <div>
                     <FormTextField labelText="Large" className="input-width-large" />
                     <FormTextField labelText="Small" className="input-width-small" />
+                    <FormTextField labelText="Small but with a veryverylonglabel name"
+                        className="input-width-small" />
                 </div>
                 <div>
                     <FormTextField labelText="Medium" className="input-width-medium" />
-                    <FormTextField labelText="Medium" className="input-width-medium" />
+                    <FormTextField labelText="Medium with a extra veryvery long label name"
+                        className="input-width-medium" />
                 </div>
                 <div>
                     <FormTextField labelText="Small" className="input-width-small" />
@@ -57,7 +60,8 @@ var FormInputWidthsDemo = React.createClass({
                     <FormTextField labelText="X-Small" className="input-width-xsmall" />
                     <FormTextField labelText="X-Small" className="input-width-xsmall" />
                     <FormTextField labelText="X-Small" className="input-width-xsmall" />
-                    <FormTextField labelText="X-Small" className="input-width-xsmall" />
+                    <FormTextField labelText="X-Small and with a veryvery longlabelname"
+                        className="input-width-xsmall" />
                 </div>
 
                 <br />

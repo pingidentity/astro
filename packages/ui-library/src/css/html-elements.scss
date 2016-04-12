@@ -1,9 +1,9 @@
 // HTML ELEMENTS
 body {
-	font-family: $font-stack;
-	font-size: 16px;
+	font-family: $font-pn-regular;
+	font-size: 14px;
 	line-height: 1.3em;
-	color: map-get($colors, 'slate');
+	color: $color-slate;
 	font-weight: 300;
 }
 a {
@@ -21,11 +21,11 @@ a {
 	}
 }
 h1, h2, h3, h4, h5 {
-	color: map-get($colors, 'midnight');
+	color: $color-midnight;
 }
 h1 {
 	// override color
-	color: map-get($colors, 'slate');
+	color: $color-slate;
 	font-size: 28px;
 	font-weight: 400;
 	margin: 25px 0;
@@ -37,6 +37,9 @@ h2 {
 }
 p {
 	margin: 0 0 1em 0;
+	font-family: $font-pn-regular;
+	font-size: 14px;
+	color: $color-elephant;
 }
 strong {
 	font-weight: bold;
@@ -47,14 +50,12 @@ i {
 }
 ul.ul {
 	margin: 5px 0 15px 20px;
-
 	li {
 		list-style: disc;
 	}
 }
 ol.ol {
 	margin: 5px 0 15px 20px;
-
 	li {
 		list-style: decimal;
 	}
