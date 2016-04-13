@@ -3,26 +3,27 @@ var React = require("react"),
     _ = require("underscore");
 
 /**
- * @class HistoryWriter
- * @desc This component can be used to monitor properties and write them to the url.  The props
- * of the app should be passed in so the component has access to the same state as the app (see
- * example)
- * @param {string[]} watch - A list of keys to watch.  Keys may be paths to a value
+ * @class PropsToUrlWatcher
+ * @desc This component can be used to monitor properties and write them to the url by passing in properties as a
+ * hash to the watch property.
+ * @param {object} watch - A hash of properties watch.  When their values change, a new string will be
+ * generated and passed to the callback.
  * @param {function} onReplaceUrl - A callback to replace the history object.  Typically this will just
  * be the replace action creator from react-router-redux
  * @param {object} location - The React Router's location object
+ * @param {bool} [ignoreFalse=false] - An option which treats false as undefined and skips writing them to the url
  * @example:
  * var App = React.createClass({
  *     render: function () {
  *         return (
  *             <div>
- *                 <HistoryWriter onReplaceUrl={this.routerActions.replace} watch={["initialItem"]} {...this.props} />
+ *                 <PropsToUrlWatcher onReplaceUrl={this.routerActions.replace} watch={{ prop1: this.props.prop1 ... }} />
  *                 ...
  *         );
  *     }
  * })
  */
-var HistoryWriter = React.createClass({
+var PropsToUrlWatcher = React.createClass({
     propTypes: {
         watch: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
         onReplaceUrl: React.PropTypes.func.isRequired,
@@ -30,62 +31,51 @@ var HistoryWriter = React.createClass({
     },
 
     /**
-     * @method _get
-     * @private
-     * @desc Extracts a value from the props, at the given path
-     * @param {object} tree - the object to search
-     * @param {string} path - the path to resolve within the object
-     * @return {object} the value or null
+     * @method shouldComponentUpdate
+     * @desc since this is an offscreen component, never update the dom
+     * @returns {bool} - false
      */
-    _get: function (tree, path) {
-        var parts = path.split(".");
-
-        for (var i = 0; i < parts.length; i += 1) {
-            if (typeof(tree[parts[i]]) === "undefined") {
-                return null;
-            }
-
-            tree = tree[parts[i]];
-        }
-
-        return tree;
-    },
-
-    /**
-     * @method _arePropsUnchanged
-     * @param {object} props - a set of props to compare to the current props (generally nextProps).
-     * @private
-     * @return {bool} - whether or not the new set of props are different than the current one
-     * for the keys specified in this.props.watch.  This is very important to avoid the infinite
-     * loop of replacing the url, which causes a state change, which causes props to update.
-     */
-    _arePropsUnchanged: function (props) {
-        return _.isEqual(
-            _.pick(this.props, this.props.watch),
-            _.pick(props, this.props.watch));
-    },
-
     shouldComponentUpdate: function () {
         return false;
     },
 
+    /**
+     * @method componentWillReceiveProps
+     * @desc When new properties are received by the component, this function will compare them to the previous
+     * props, determine if anything has changed, and if so, recompute the query string and push it to the callback.
+     * @param {object} nextProps - next props
+     */
     componentWillReceiveProps: function (nextProps) {
         var vals = [], v;
 
-        if (this._arePropsUnchanged(nextProps) && _.isEqual(this.props.watch, nextProps.watch)) {
+        //only recompute the string if the input props have changed
+        if ( _.isEqual(this.props.watch, nextProps.watch) &&   //list of props to watch changed
+            nextProps.ignoreFalse === this.props.ignoreFalse)  //or the option to ignoreFalse changed
+        {
             return;
         }
 
-        nextProps.watch.forEach(function (key) {
-            v = this._get(nextProps, key);
+        for (var key in nextProps.watch) {
+            v = nextProps.watch[key];
 
             switch (typeof(v)) {
                 case "object":
+                    //since arrays evaluate as object, have a condition to catch this and treat them differntly.
+                    //Arrays will be written to the query string as key=val1,val2,val3&...
+                    if (_.isArray(v)) {
+                        vals.push(key + "=" + v.join(","));
+                        break;
+                    }
+
                     for (var subKey in v) {
                         //TODO: some day build the ability to have any level of depth but practically speaking
                         // this is generally not necessary.
                         if (typeof(v[subKey]) === "object") {
                             throw "cannot watch a key which maps to an hash of hashes";
+                        }
+
+                        if (nextProps.ignoreFalse && v[subKey] === false) {
+                            continue;
                         }
 
                         vals.push(key + "." + subKey + "=" + v[subKey]);
@@ -94,11 +84,16 @@ var HistoryWriter = React.createClass({
                 case "null":
                     //here to make Alex happy though it's unnecessary because _.pick skips nulls
                     break;
+                case "boolean":
+                    if (v || !nextProps.ignoreFalse) {
+                        vals.push(key + "=" + v);
+                    }
+                    break;
                 default:
                     vals.push(key + "=" + v);
                     break;
             }
-        }.bind(this));
+        }
 
         this.props.onReplaceUrl(this.props.location.pathname + "?" + vals.join("&"));
     },
@@ -114,8 +109,18 @@ var HistoryWriter = React.createClass({
  * @param {string} key - The Key we'd like to extract from the query string
  * @return {number} - the number
  */
-HistoryWriter.getNumFromQuery = function (location, key) {
+PropsToUrlWatcher.getNum = function (location, key) {
     return parseFloat(location.query[key]);
+};
+
+/** @static
+ * @function getArray
+ * @param {object} location - ReactRouter's location object
+ * @param {string} key - The Key we'd like to extract from the query string
+ * @return {array} - the array of values
+ */
+PropsToUrlWatcher.getArray = function (location, key) {
+    return location.query[key].split(",");
 };
 
 /** @static
@@ -125,7 +130,7 @@ HistoryWriter.getNumFromQuery = function (location, key) {
  * @param {string} prefix - The key namespace we'd like extract
  * @return {object} - the resulting object
  */
-HistoryWriter.getObjFromQuery = function (location, prefix) {
+PropsToUrlWatcher.getObj = function (location, prefix) {
     var result = {};
     var regex = new RegExp("^" + prefix + "\\.");
 
@@ -138,5 +143,5 @@ HistoryWriter.getObjFromQuery = function (location, prefix) {
     return result[prefix];
 };
 
-module.exports = HistoryWriter;
+module.exports = PropsToUrlWatcher;
 
