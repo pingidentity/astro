@@ -93,16 +93,66 @@ describe("FormRadioGroup", function () {
     });
 
     it("renders disabled state", function () {
-        var view = ReactTestUtils.renderIntoDocument(
+
+        // first test a disabled group
+        var viewAllDisabled = ReactTestUtils.renderIntoDocument(
             <FormRadioGroup
                 groupName="test_radio_group"
                 disabled={true}
                 onChange={callback}
-                items={items}/>
+                items={items} />
         );
 
-        // test presence of disabled class (className prop)
-        var labelsCustom = TestUtils.scryRenderedDOMNodesWithClass(view, "disabled");
-        expect(labelsCustom.length).toBe(items.length);
+        // test for disabled class on labels
+        var labels = TestUtils.scryRenderedDOMNodesWithClass(viewAllDisabled, "disabled");
+        expect(labels.length).toBe(items.length);
+
+        // test for disabled attribute on inputs
+        var inputs = ReactTestUtils.scryRenderedDOMComponentsWithTag(viewAllDisabled, "input");
+        expect(inputs[0].disabled).toBeTruthy();
+        expect(inputs[1].disabled).toBeTruthy();
+
+        // alter data so that one item has the disabled property
+        items[0].disabled = true;
+
+        // then test group with only one disabled
+        var viewIndividualDisabled = ReactTestUtils.renderIntoDocument(
+            <FormRadioGroup
+                groupName="test_radio_group"
+                onChange={callback}
+                items={items} />
+        );
+
+        // test for disabled class on labels
+        var labels = TestUtils.scryRenderedDOMNodesWithClass(viewIndividualDisabled, "disabled");
+        expect(labels.length).toBe(1);
+
+        // test for disabled attribute on inputs
+        var inputs = ReactTestUtils.scryRenderedDOMComponentsWithTag(viewIndividualDisabled, "input");
+        expect(inputs[0].disabled).toBeTruthy();
+        expect(inputs[1].disabled).toBeFalsy();
+    });
+
+    it("renders inputs without disabled state", function () {
+
+        // set disabled=false on individual item and for group
+        items[0].disabled = false;
+        var view = ReactTestUtils.renderIntoDocument(
+            <FormRadioGroup
+                groupName="test_radio_group"
+                disabled={false}
+                onChange={callback}
+                items={items} />
+        );
+
+        // test for disabled class on labels
+        var labels = TestUtils.scryRenderedDOMNodesWithClass(view, "disabled");
+        expect(labels.length).toBe(0);
+
+        // test for disabled attribute on inputs
+        var inputs = ReactTestUtils.scryRenderedDOMComponentsWithTag(view, "input");
+        expect(inputs[0].disabled).toBeFalsy();
+        expect(inputs[1].disabled).toBeFalsy();
+
     });
 });

@@ -334,6 +334,14 @@ label {
 		text-transform: none;
 		cursor: pointer;
 
+		&.disabled {
+			cursor: default;
+			@include opacity(0.5);
+
+			.circle, .circle:after {
+				background-color: $color-elderly
+			}
+		}
 		&.no-label {
 			margin-right: 0;
 		}

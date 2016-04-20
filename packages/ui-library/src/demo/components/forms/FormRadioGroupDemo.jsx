@@ -7,7 +7,8 @@ var FormRadioGroupDemo = React.createClass({
         return {
             showSpinner: true,
             selectedId1: 1,
-            selectedId2: 1
+            selectedId2: 2,
+            selectedId3: 3
         };
     },
 
@@ -21,12 +22,12 @@ var FormRadioGroupDemo = React.createClass({
         var radioItems = [
             { id: "1", name: "Radio 1" },
             { id: "2", name: "Radio 2" },
-            { id: "3", name: "Radio 3" }
+            { id: "3", name: "Radio 3", disabled: true }
         ];
 
         return (
                 <div>
-
+                    <label className="standalone">Horizonal Alignment</label>
                     <FormRadioGroup
                         groupName="horizontal-group"
                         selected={this.state.selectedId1}
@@ -38,6 +39,7 @@ var FormRadioGroupDemo = React.createClass({
                         selected id = {this.state.selectedId1}
                     </div>
                     <br /><br />
+                    <label className="standalone">Stacked/Vertical Alignment</label>
                     <FormRadioGroup
                         groupName="stacked-group"
                         selected={this.state.selectedId2}
@@ -47,6 +49,15 @@ var FormRadioGroupDemo = React.createClass({
                     <div>
                         selected id = {this.state.selectedId2}
                     </div>
+                    <br /><br />
+                    <label className="standalone">Disabled Radio Group</label>
+                    <FormRadioGroup
+                        groupName="disabled-stacked-group"
+                        selected={this.state.selectedId3}
+                        onChange={this._onChange.bind(this, 2)}
+                        items={radioItems}
+                        disabled={true}
+                    />
                 </div>
 
         );

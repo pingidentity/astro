@@ -1,5 +1,5 @@
 var React = require("react"),
-    css = require("classnames"),
+    classnames = require("classnames"),
     _ = require("underscore");
 
 
@@ -36,12 +36,17 @@ var React = require("react"),
  *
  *     var apsConditionTypes = [
  *         {
- *             "id": PolicyConditionsConstants.ConditionType.APS_APPLICATIONS,
- *             "name": "Applications"
+ *             id: PolicyConditionsConstants.ConditionType.APS_APPLICATIONS,
+ *             name: "Applications"
  *         },
  *         {
- *             "id": PolicyConditionsConstants.ConditionType.APS_CUSTOMERS,
- *             "name": "Customers"
+ *             id: PolicyConditionsConstants.ConditionType.APS_CUSTOMERS,
+ *             name: "Customers"
+ *         },
+ *         {
+ *             id: PolicyConditionsConstants.ConditionType.APS_WHATEVER,
+ *             name: "Customers",
+ *             disabled: true
  *         }
  *     ];
  *
@@ -50,6 +55,7 @@ var React = require("react"),
  *         groupName="aps_condition_type"
  *         selected={PolicyConditionsConstants.ConditionType.APS_APPLICATIONS}
  *         onChange={this._changeRadioSelection}
+ *         disabled={this._radioGroupDisabled}
  *         items={apsConditionTypes} />
  */
 
@@ -57,6 +63,7 @@ var FormRadioGroup = React.createClass({
 
     propTypes: {
         className: React.PropTypes.string,
+        disabled: React.PropTypes.bool,
         groupName: React.PropTypes.string.isRequired,
         id: React.PropTypes.string,
         items: React.PropTypes.array.isRequired,
@@ -80,21 +87,19 @@ var FormRadioGroup = React.createClass({
     render: function () {
         var self = this,
             radioCss = {
-                stacked: this.props.stacked,
-                disabled: this.props.disabled
+                stacked: this.props.stacked
             };
-
-        if (this.props.className) {
-            radioCss[this.props.className] = true;
-        }
 
         var radioButtonNodes =
             _.map(this.props.items, function (item) {
-                var onChange = _.partial(self._onSelectionChange, item.id);
+                var onChange = _.partial(self._onSelectionChange, item.id),
+                    radioDisabled = self.props.disabled || item.disabled;
+
+                radioCss.disabled = radioDisabled;
 
                 return (
                     <label
-                        className={css("input-radio", radioCss)}
+                        className={classnames("input-radio", self.props.className, radioCss)}
                         key={item.id}
                         data-id={self.props.id + "_label_" + item.id}>
 
@@ -104,7 +109,8 @@ var FormRadioGroup = React.createClass({
                             name={self.props.groupName}
                             value={item.id}
                             checked={String(item.id) === String(self.props.selected)}
-                            onChange={onChange}/>
+                            onChange={onChange}
+                            disabled={radioDisabled} />
                         <div className="circle"></div>
                         {item.name}
                     </label>
