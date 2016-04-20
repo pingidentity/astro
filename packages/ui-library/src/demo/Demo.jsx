@@ -23,6 +23,11 @@ var Demo = React.createClass({
             pathToCode: "components/general/ColorPicker.jsx"
         },
         {
+            name: "Columns",
+            demo: require("./components/general/ColumnLayoutDemo.jsx"),
+            pathToCode: "components/general/ColumnLayout.jsx"
+        },
+        {
             name: "Infinite Scroller",
             demo: require("./components/list/InfiniteScrollDemo.jsx"),
             pathToCode: "components/list/InfiniteScroll.jsx"
@@ -335,11 +340,11 @@ var Demo = React.createClass({
 
         return (
             <div className="components-container">
-                <div id="header">
+                <div id="library-header">
                     <div className="logo"/>
                     <div className="title">UI Component Library</div>
                 </div>
-                <div id="nav">
+                <div id="library-nav">
                     <ul className="menu">
                         <li key="jsdoc">
                             <a target="_blank" href={this.getDocumentationUrl()}>
@@ -357,7 +362,7 @@ var Demo = React.createClass({
                     </ul>
                 </div>
 
-                <div id="content">
+                <div id="library-content">
                     <a name="introduction"></a>
                     <div className="introduction">
                         <div className="sub-section">

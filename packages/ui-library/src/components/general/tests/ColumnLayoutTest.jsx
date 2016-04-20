@@ -1,0 +1,118 @@
+window.__DEV__ = true;
+
+jest.dontMock("../ColumnLayout.jsx");
+
+describe("Row", function () {
+    var React = require("react"),
+        ReactTestUtils = require("react-addons-test-utils"),
+        Layout = require("../ColumnLayout.jsx"),
+        TestUtils = require("../../../testutil/TestUtils");
+
+    var colContent, customRowCss, customColCss, columns2, columns3, columns4, testNodeParent, testNodeChildren, i;
+
+    beforeEach(function () {
+        colContent = ["One", "Two", "Three", "Four"];
+        customRowCss = ["rowClass2", "rowClass3", "rowClass4"];
+        customColCss = ["colClass1", "colClass2", "colClass3", "colClass4"];
+
+        columns2 = ReactTestUtils.renderIntoDocument(
+            <Layout.Row id="columns-2" className={customRowCss[0]}>
+                <Layout.Column className={customColCss[0]}>{colContent[0]}</Layout.Column>
+                <Layout.Column className={customColCss[1]}>{colContent[1]}</Layout.Column>
+            </Layout.Row>
+        );
+        columns3 = ReactTestUtils.renderIntoDocument(
+            <Layout.Row id="columns-3" className={customRowCss[1]}>
+                <Layout.Column className={customColCss[0]}>{colContent[0]}</Layout.Column>
+                <Layout.Column className={customColCss[1]}>{colContent[1]}</Layout.Column>
+                <Layout.Column className={customColCss[2]}>{colContent[2]}</Layout.Column>
+            </Layout.Row>
+        );
+        columns4 = ReactTestUtils.renderIntoDocument(
+            <Layout.Row id="columns-4" className={customRowCss[2]}>
+                <Layout.Column className={customColCss[0]}>{colContent[0]}</Layout.Column>
+                <Layout.Column className={customColCss[1]}>{colContent[1]}</Layout.Column>
+                <Layout.Column className={customColCss[2]}>{colContent[2]}</Layout.Column>
+                <Layout.Column className={customColCss[3]}>{colContent[3]}</Layout.Column>
+            </Layout.Row>
+        );
+    });
+
+    it("renders the correct number of columns", function () {
+
+        // two columns
+        testNodeParent = TestUtils.findRenderedDOMNodeWithDataId(columns2, "columns-2");
+        expect(testNodeParent.getAttribute("class")).toContain("columns-2");
+        testNodeChildren = ReactTestUtils.scryRenderedDOMComponentsWithClass(columns2, "content-column");
+        expect(testNodeChildren.length).toBe(2);
+
+        // three columns
+        testNodeParent = TestUtils.findRenderedDOMNodeWithDataId(columns3, "columns-3");
+        expect(testNodeParent.getAttribute("class")).toContain("columns-3");
+        testNodeChildren = ReactTestUtils.scryRenderedDOMComponentsWithClass(columns3, "content-column");
+        expect(testNodeChildren.length).toBe(3);
+
+        // four columns
+        testNodeParent = TestUtils.findRenderedDOMNodeWithDataId(columns4, "columns-4");
+        expect(testNodeParent.getAttribute("class")).toContain("columns-4");
+        testNodeChildren = ReactTestUtils.scryRenderedDOMComponentsWithClass(columns4, "content-column");
+        expect(testNodeChildren.length).toBe(4);
+    });
+
+    it("renders content and in the proper columns", function () {
+
+        // two columns
+        testNodeChildren = ReactTestUtils.scryRenderedDOMComponentsWithClass(columns2, "content-column");
+        for (i=0; i<testNodeChildren.length; i+=1) {
+            expect(testNodeChildren[i].textContent).toBe(colContent[i]);
+        }
+
+        // three columns
+        testNodeChildren = ReactTestUtils.scryRenderedDOMComponentsWithClass(columns3, "content-column");
+        for (i=0; i<testNodeChildren.length; i+=1) {
+            expect(testNodeChildren[i].textContent).toBe(colContent[i]);
+        }
+
+        // four columns
+        testNodeChildren = ReactTestUtils.scryRenderedDOMComponentsWithClass(columns4, "content-column");
+        for (i=0; i<testNodeChildren.length; i+=1) {
+            expect(testNodeChildren[i].textContent).toBe(colContent[i]);
+        }
+
+    });
+
+    it("adds custom css classes", function () {
+
+        // two columns
+
+        testNodeParent = ReactTestUtils.findRenderedDOMComponentWithClass(columns2, customRowCss[0]);
+        expect(testNodeParent).toBeTruthy();
+
+        testNodeChildren = ReactTestUtils.scryRenderedDOMComponentsWithClass(columns2, "content-column");
+        for (i=0; i<testNodeChildren.length; i+=1) {
+            expect(testNodeChildren[i].className).toContain(customColCss[i]);
+        }
+
+        // three columns
+
+        testNodeParent = ReactTestUtils.findRenderedDOMComponentWithClass(columns3, customRowCss[1]);
+        expect(testNodeParent).toBeTruthy();
+
+        testNodeChildren = ReactTestUtils.scryRenderedDOMComponentsWithClass(columns3, "content-column");
+        for (i=0; i<testNodeChildren.length; i+=1) {
+            expect(testNodeChildren[i].className).toContain(customColCss[i]);
+        }
+
+        // four columns
+
+        testNodeParent = ReactTestUtils.findRenderedDOMComponentWithClass(columns4, customRowCss[2]);
+        expect(testNodeParent).toBeTruthy();
+
+        testNodeChildren = ReactTestUtils.scryRenderedDOMComponentsWithClass(columns4, "content-column");
+        for (i=0; i<testNodeChildren.length; i+=1) {
+            expect(testNodeChildren[i].className).toContain(customColCss[i]);
+        }
+
+    });
+
+});

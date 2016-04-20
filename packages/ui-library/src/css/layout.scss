@@ -466,6 +466,9 @@ $layout-zindex-order: (
 	@function get-width($divisions){
   		@return calc(#{to-fixed(percentage(1 / $divisions))} - #{calc-minus-amt($divisions)});
 	}
+	@function get-width-nopad($divisions){
+  		@return #{to-fixed(percentage(1 / $divisions))};
+	}
 
 	$column-margin: 40px;
 	@include clearfix;
@@ -477,6 +480,12 @@ $layout-zindex-order: (
 
 		&:last-of-type {
 			margin: 0;
+		}
+	}
+	&.columns-1 {
+		.content-column {
+			float: none;
+			width: 100%;
 		}
 	}
 	&.columns-2 {
@@ -501,7 +510,27 @@ $layout-zindex-order: (
 	}
 	&.columns-nopad {
 		.content-column {
-			padding: 0;
+			margin: 0;
+		}
+		&.columns-2 {
+			.content-column {
+				width: get-width-nopad(2);
+			}
+		}
+		&.columns-3 {
+			.content-column {
+				width: get-width-nopad(3);
+			}
+		}
+		&.columns-4 {
+			.content-column {
+				width: get-width-nopad(4);
+			}
+		}
+		&.columns-5 {
+			.content-column {
+				width: get-width-nopad(5);
+			}
 		}
 	}
 }
