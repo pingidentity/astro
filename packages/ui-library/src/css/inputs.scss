@@ -2,7 +2,7 @@
 // INPUT GLOBAL VARS -------------------------------------------------------------------------------
 $default-input-transition: all 0.3s;
 $default-input-height: 40px;
-
+$default-input-font-size: 14px;
 
 
 // MISC SUPPORTING FUNCTIONS -----------------------------------------------------------------------
@@ -642,7 +642,7 @@ input[type=file] {
 		border-radius: 0;
 		color: $color-input-text;
 		background-color: $color-input-fill;
-		font-size: 16px;
+		font-size: $default-input-font-size;
 		line-height: 20px;
 		height: $default-input-height;
 		-webkit-appearance: none;
@@ -1029,7 +1029,7 @@ input[type=file] {
 	}
 	input[type=text].input-calendar-value {
 		padding: 0 30px;
-		font-size: 16px;
+		font-size: $default-input-font-size;
 		width: 226px;
 		height: $default-input-height;
 		line-height: 32px;

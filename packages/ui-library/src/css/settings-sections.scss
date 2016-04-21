@@ -33,6 +33,12 @@
 			border-bottom: none;
 		}
         &.active {
+            .form-integer-container {
+                .icon-dropdown-arrow {
+                    @include transition(none);
+                    @include transform(none);
+                }
+            }
             .icon-dropdown-arrow {
                 @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
     			@include transform(rotate(180deg));
