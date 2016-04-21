@@ -21,7 +21,8 @@ endif
 
 NODE_FILENAME=node-v$(NODE_VERSION)-$(SYS_NAME)-$(ARCH_NAME)
 NPM_FILENAME=npm-$(NPM_VERSION)
-NPM_EXEC=$(CURRENT_DIR)/node/node $(CURRENT_DIR)/node/node_modules/npm/bin/npm-cli.js
+NODE_EXEC=$(CURRENT_DIR)/node/node
+NPM_EXEC=$(NODE_EXEC) $(CURRENT_DIR)/node/node_modules/npm/bin/npm-cli.js
 MVN_FILENAME=apache-maven-3.2.2-bin.tar.gz
 
 CURRENT_DIR := $(shell pwd)
@@ -157,3 +158,29 @@ dist: install-mvn
 	$(call package,$(GIT_VERSION_NEXT))
 	$(call deploy,$(GIT_VERSION_NEXT))
 
+# compile/transpile the files, so that they can be packed and distributed as a collection of static assets
+package-and-upload-for-hosting: install-node-npm
+	# the freakin' npm executable is broken, makes some stupid assumptions in regard to the npm location;
+	# meaning I cannot run an npm script which calls other npm scripts,
+	# meaning I have to execute the npm scripts one at a time
+	$(NPM_EXEC) run doc
+	$(NPM_EXEC) run pack
+	rm -rf $(GIT_VERSION).tar.gz
+	tar czf $(GIT_VERSION).tar.gz build
+	# now that I have the archive with the current version, upload it to hosting server and extract
+	ssh root@10.101.107.88 rm -f /var/www/html/$(GIT_VERSION).tar.gz
+	scp $(GIT_VERSION).tar.gz root@10.101.107.88:/var/www/html/
+	ssh root@10.101.107.88 rm -rf /var/www/html/$(GIT_VERSION)
+	ssh root@10.101.107.88 mkdir /var/www/html/$(GIT_VERSION)
+	ssh root@10.101.107.88 tar xzf /var/www/html/$(GIT_VERSION).tar.gz --strip 1 -C /var/www/html/$(GIT_VERSION)
+	ssh root@10.101.107.88 rm -f /var/www/html/$(GIT_VERSION).tar.gz
+	# download versions.json, add the new version (if it doesn't already exist), upload it back up
+	# (with a temp unique name first, to minimize the risk of colisions with other process doing the same thing)
+	scp root@10.101.107.88:/var/www/html/versions.json ./
+	$(NODE_EXEC) hosting/append_current_version.js
+	uuid=$(uuidgen)
+	scp ./versions.json root@10.101.107.88:/var/www/html/versions-$UUID.json
+	ssh root@10.101.107.88 mv /var/www/html/versions-$UUID.json /var/www/html/versions.json
+
+print-version:
+	@echo $(GIT_VERSION)

@@ -1,0 +1,44 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>UI library</title>
+	<meta name="description" content="UI library">
+
+	<script>
+		function onVersionsLoaded () {
+			var versions = JSON.parse(this.responseText);
+			var ul = document.getElementById("versions");
+			versions.forEach(function (version) {
+				var li = document.createElement("li");
+				var anchor = document.createElement("a");
+				anchor.setAttribute("href", version + "/index.html");
+				var text = document.createTextNode(version);
+				anchor.appendChild(text);
+				li.appendChild(anchor);
+				ul.appendChild(li);
+			});
+		}
+		function onVersionsLoadError () {
+			document.getElementById("error").style.visibility = "visible";
+		}
+
+		function generateVersionList () {
+			var versionsRequest = new XMLHttpRequest();
+			versionsRequest.addEventListener("load", onVersionsLoaded);
+			versionsRequest.addEventListener("error", onVersionsLoadError);
+			versionsRequest.open("GET", "versions.json");
+			versionsRequest.send();
+		}
+
+		window.onload = generateVersionList;
+	</script>
+</head>
+
+<body>
+	<ul id="versions"></ul>
+	<div id="error" style="visibility:hidden">Cannot fetch the list of available versions</div>
+</body>
+</html>
