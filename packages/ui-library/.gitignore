@@ -5,6 +5,7 @@ mvn/
 build*
 dist
 **/coverage
+**/coverage-reference
 npm-debug.log
 
 # IDEA

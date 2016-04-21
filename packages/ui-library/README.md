@@ -45,6 +45,10 @@ Verifying the local changes
 `npm run verify`
 runs the linting and the testing using the global node/npm installation.
 
+`npm run coverage`
+in addition to `npm run verify` above, this will generate the code coverage report
+(in coverage/lcov-report/index.html).
+
 `make verify`
 runs the build (just like on the build machine); it downloads node and npm
 locally, installs the required node modules, and runs the linting and testing.
@@ -84,14 +88,6 @@ Example:
   * demo.js
   * demo.js.map
   * etc
-
-
-
-TODO
-----
-* configure jest for code coverage w/ istanbul:
-https://facebook.github.io/jest/docs/api.html#config-collectcoverage-boolean
-* enforce the code coverage in Jenkins
 
 
 

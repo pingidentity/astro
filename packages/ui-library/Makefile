@@ -31,7 +31,12 @@ M2_HOME := $(CURRENT_DIR)/mvn
 SHELL := /bin/bash
 PATH := $(CURRENT_DIR)/node:$(CURRENT_DIR)/node/node_modules/npm/bin:$(PATH):$(M2_HOME)/bin
 
-GIT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
+# The Git branch is to be passed as argument on the command line
+# (eg. make GIT_BRANCH=uip-58 verify)
+# GIT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
+ifndef GIT_BRANCH
+$(error "GIT_BRANCH should be passed as command line argument (eg. make GIT_BRANCH=uip-58 verify)")
+endif
 
 
 # extract the version number from package.json
@@ -61,15 +66,47 @@ endif
 # get the version number of the next SNAPSHOT
 GIT_VERSION_NEXT=$(GIT_VERSION_MAJOR).$(GIT_VERSION_MINOR_NEXT).$(GIT_VERSION_PATCH_NEXT)-SNAPSHOT
 
+ifeq ($(GIT_BRANCH),"master")
+	PACKAGE_VERSION=$(GIT_VERSION)
+	PACKAGE_VERSION_FINAL=$(GIT_VERSION_FINAL)
+	PACKAGE_VERSION_NEXT=$(GIT_VERSION_NEXT)
+else
+	PACKAGE_VERSION=$(GIT_VERSION)-$(GIT_BRANCH)
+	PACKAGE_VERSION_FINAL=$(GIT_VERSION_FINAL)-$(GIT_BRANCH)
+	PACKAGE_VERSION_NEXT=$(GIT_VERSION_NEXT)-$(GIT_BRANCH)
+endif
+
+
+# find the name of the reference coverage to download, by sending HEAD requests for various coverage packages:
+# get the latest for the current branch;
+# if not available, get the latest from master (with no suffix);
+# if no coverage is found, fail the build
+COVERAGE_VERSION=$(GIT_VERSION)-$(GIT_BRANCH)
+COVERAGE_STATUS_CODE=$(shell curl -s -I http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library-coverage/$(COVERAGE_VERSION)/ui-library-coverage-$(COVERAGE_VERSION).tar.gz | grep "HTTP/1.1" | awk {'print $$2'})
+ifneq ($(COVERAGE_STATUS_CODE),200)
+	COVERAGE_VERSION=$(GIT_VERSION)
+	COVERAGE_STATUS_CODE=$(shell curl -s -I http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library-coverage/$(COVERAGE_VERSION)/ui-library-coverage-$(COVERAGE_VERSION).tar.gz | grep "HTTP/1.1" | awk {'print $$2'})
+endif
+# TODO alex - disable this for now; once the coverage report is generated and uploaded to art01, I can enable the verification (see note on line 205 too)
+# ifneq ($(COVERAGE_STATUS_CODE),200)
+# $(error Cannot find the coverage report to download)
+# endif
+
+
 define version_and_tag
 	sed -e 's/"version"[[:space:]]*:[[:space:]]*"[^"]*"/"version": "$(1)"/' package.json > package.json.tmp
 	mv package.json.tmp package.json
 	git commit -a -m $(2)
-	if [ "$(1)" = "$(GIT_VERSION_FINAL)" ]; then \
+	if [[ "$(1)" = "$(GIT_VERSION_FINAL)" ]]; then \
 		git tag $(GIT_VERSION_FINAL); \
 		git push origin $(GIT_VERSION_FINAL); \
 	fi
 	git push origin $(GIT_BRANCH)
+endef
+
+define run_coverage
+	$(NPM_EXEC) run coverage
+	rm -rf $$TMPDIR/jest_preprocess_cache
 endef
 
 define package
@@ -78,6 +115,11 @@ define package
 	cp -rf src dist/ui-library
 	cp -f package.json dist/ui-library
 	tar -czf dist/ui-library-$(1).tar.gz --directory=dist ui-library
+endef
+
+define package_coverage
+	rm -rf dist/ui-library-coverage-$(1).tar.gz
+	tar -czf dist/ui-library-coverage-$(1).tar.gz coverage
 endef
 
 define deploy
@@ -92,9 +134,36 @@ define deploy
 		-Durl=http://art01.corp.pingidentity.com:8081/artifactory/inhouse
 endef
 
+define deploy_coverage
+	mvn deploy:deploy-file \
+		-DgroupId=com.pingone.ui-library \
+		-DartifactId=ui-library-coverage \
+		-Dversion=$(1) \
+		-Dfile=dist/ui-library-coverage-$(1).tar.gz \
+		-DuniqueVersion=false \
+		-Dpackaging=tar.gz \
+		-DrepositoryId=art01 \
+		-Durl=http://art01.corp.pingidentity.com:8081/artifactory/inhouse
+endef
+
+define install_reference_coverage_report
+	rm -f ui-library-coverage-*.tar.gz
+	rm -rf coverage-reference
+	wget http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library-coverage/$(1)/ui-library-coverage-$(1).tar.gz
+	mkdir coverage-reference
+	tar -xzf ui-library-coverage-$(1).tar.gz --strip 1 -C coverage-reference
+endef
+
 
 log-config:
+	@echo "Current branch: $(GIT_BRANCH)"
+	@echo "Current version: $(GIT_VERSION)"
 	@echo "Building for system '$(SYS_NAME)' and architecture '$(ARCH_NAME)'"
+	@echo "Package version: $(PACKAGE_VERSION)"
+	@echo "Package version final: $(PACKAGE_VERSION_FINAL)"
+	@echo "Package version next: $(PACKAGE_VERSION_NEXT)"
+	@echo "Coverage version: $(COVERAGE_VERSION)"
+	@echo "Coverage status code: $(COVERAGE_STATUS_CODE)"
 
 clean-node:
 	rm -f $(NODE_FILENAME).tar.gz
@@ -125,23 +194,30 @@ install-mvn: clean-mvn
 	rm -f $(MVN_FILENAME)
 
 verify: install-node-npm
-	# the freakin' npm executable is broken, makes some stupid assumptions in regard to the npm location;
-	# meaning I cannot run an npm script which calls other npm scripts,
-	# meaning I have to execute the npm scripts one at a time
 	$(NPM_EXEC) run lint
-	$(NPM_EXEC) run coverage
-	rm -rf $$TMPDIR/jest_preprocess_cache
-	# convert the lcov report to cobertura
+	$(call run_coverage)
+
+	# convert the lcov report to cobertura format to be published by Jenkins
 	python tools/lcov_cobertura.py coverage/lcov.info --base-dir . --output coverage/cobertura.xml
 
+	# download the coverage report from art01 for the current version
+	# verify the current coverage against the reference;
+# TODO alex - disable this for now; once the coverage report is generated and uploaded to art01, I can enable the verification
+#	$(call install_reference_coverage_report,$(COVERAGE_VERSION))
+#	$(NODE_EXEC) tools/verify_coverage.js
+
 # package the module and name the file to include the current version
-package: install-mvn
-	$(call package,$(GIT_VERSION))
+package: install-mvn install-node-npm
+	$(call run_coverage)
+
+	$(call package,$(PACKAGE_VERSION))
+	$(call package_coverage,$(PACKAGE_VERSION))
 
 # package the module and name the file to include the current version
 # deploy the package as a maven artifact
 deploy: package
-	$(call deploy,$(GIT_VERSION))
+	$(call deploy,$(PACKAGE_VERSION))
+	$(call deploy_coverage,$(PACKAGE_VERSION))
 
 # set the version number to FINAL, commit and push the change
 # package the module and name the file to include the FINAL version
@@ -150,15 +226,22 @@ deploy: package
 # package the module and name the file to include the current version
 # deploy the package as a maven artifact
 # no verification is done here, meaning node/npm are not needed
-dist: install-mvn
+dist: install-mvn install-node-npm
 	$(call version_and_tag,$(GIT_VERSION_FINAL),"Release the project")
-	$(call package,$(GIT_VERSION_FINAL))
-	$(call deploy,$(GIT_VERSION_FINAL))
+	$(call package,$(PACKAGE_VERSION_FINAL))
+	$(call deploy,$(PACKAGE_VERSION_FINAL))
+
 	$(call version_and_tag,$(GIT_VERSION_NEXT),"Prepare for the next release cycle")
-	$(call package,$(GIT_VERSION_NEXT))
-	$(call deploy,$(GIT_VERSION_NEXT))
+	$(call package,$(PACKAGE_VERSION_NEXT))
+	$(call deploy,$(PACKAGE_VERSION_NEXT))
+
+	# generate the coverage, package and deploy it
+	$(call run_coverage)
+	$(call package_coverage,$(PACKAGE_VERSION_NEXT))
+	$(call deploy_coverage,$(PACKAGE_VERSION_NEXT))
 
 # compile/transpile the files, so that they can be packed and distributed as a collection of static assets
+# THIS SHOULD ONLY BE EXECUTED ON MASTER
 package-and-upload-for-hosting: install-node-npm
 	# the freakin' npm executable is broken, makes some stupid assumptions in regard to the npm location;
 	# meaning I cannot run an npm script which calls other npm scripts,
@@ -166,13 +249,13 @@ package-and-upload-for-hosting: install-node-npm
 	$(NPM_EXEC) run doc
 	$(NPM_EXEC) run pack
 	rm -rf $(GIT_VERSION).tar.gz
-	tar czf $(GIT_VERSION).tar.gz build
+	tar -czf $(GIT_VERSION).tar.gz build
 	# now that I have the archive with the current version, upload it to hosting server and extract
 	ssh root@10.101.107.88 rm -f /var/www/html/$(GIT_VERSION).tar.gz
 	scp $(GIT_VERSION).tar.gz root@10.101.107.88:/var/www/html/
 	ssh root@10.101.107.88 rm -rf /var/www/html/$(GIT_VERSION)
 	ssh root@10.101.107.88 mkdir /var/www/html/$(GIT_VERSION)
-	ssh root@10.101.107.88 tar xzf /var/www/html/$(GIT_VERSION).tar.gz --strip 1 -C /var/www/html/$(GIT_VERSION)
+	ssh root@10.101.107.88 tar -xzf /var/www/html/$(GIT_VERSION).tar.gz --strip 1 -C /var/www/html/$(GIT_VERSION)
 	ssh root@10.101.107.88 rm -f /var/www/html/$(GIT_VERSION).tar.gz
 	# download versions.json, add the new version (if it doesn't already exist), upload it back up
 	# (with a temp unique name first, to minimize the risk of colisions with other process doing the same thing)
@@ -181,6 +264,4 @@ package-and-upload-for-hosting: install-node-npm
 	uuid=$(uuidgen)
 	scp ./versions.json root@10.101.107.88:/var/www/html/versions-$UUID.json
 	ssh root@10.101.107.88 mv /var/www/html/versions-$UUID.json /var/www/html/versions.json
-
-print-version:
-	@echo $(GIT_VERSION)
+	
