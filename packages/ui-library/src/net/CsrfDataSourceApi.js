@@ -260,7 +260,10 @@ var Api = {
 
 //this package wont exist in unit tests, so catch the situation
 //jest will not let you mock a module which doesnt exist on disk
-var config = window.__DEV__ ? {} : require("../../../../package.json").csrfDataSourceApiConfig;
+var config = window.__DEV__ ? {}
+    : require("../../../../package.json").csrfDataSourceApiConfig ||
+        // if from pingone-ui-library
+        require("../../../../../../package.json").csrfDataSourceApiConfig;
 
 Api._loadConfig(config);
 
