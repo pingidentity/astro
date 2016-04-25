@@ -113,6 +113,25 @@ var buildCsrfHeader = function (headerName, cookieName) {
 };
 
 /**
+ * @desc return csrfConfig if called from either ui-library or pingone-ui-library
+ * @return {object|null} The config if found or null
+ */
+var getCSRFConfig = function () {
+    var uiLibPackageJson = require("../../../../package.json");
+    var pingOneUiLibPackageJson = require("../../../../../../package.json");
+
+    if (uiLibPackageJson) {
+        return uiLibPackageJson.csrfDataSourceApiConfig;
+    }
+
+    if (pingOneUiLibPackageJson) {
+        return pingOneUiLibPackageJson.csrfDataSourceApiConfig;
+    }
+
+    return null;
+};
+
+/**
  * @typedef GetRequest
  * @type {function}
  * @param {string} endpoint the endpoint to send the request to
@@ -260,10 +279,7 @@ var Api = {
 
 //this package wont exist in unit tests, so catch the situation
 //jest will not let you mock a module which doesnt exist on disk
-var config = window.__DEV__ ? {}
-    : require("../../../../package.json").csrfDataSourceApiConfig ||
-        // if from pingone-ui-library
-        require("../../../../../../package.json").csrfDataSourceApiConfig;
+var config = window.__DEV__ ? {} : getCSRFConfig();
 
 Api._loadConfig(config);
 
