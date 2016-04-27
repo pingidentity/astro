@@ -1,5 +1,5 @@
 var React = require("react");
-var css = require("classnames");
+var classnames = require("classnames");
 
 /**
  * @class HelpHint
@@ -43,14 +43,11 @@ var HelpHint = React.createClass({
     },
 
     render: function () {
-        var hintStyles = {};
-
-        if (this.props.className) {
-            hintStyles[this.props.className] = true;
-        }
-
         return (
-            <div className={css("help-tooltip", hintStyles)} data-id={this.props.id} onClick={this.captureClick}>
+            <div
+                className={classnames("help-tooltip", this.props.className)}
+                data-id={this.props.id}
+                onClick={this.captureClick}>
                 {this.props.children || (<div><span className="icon-help"></span></div>)}
                 <div className="tooltip-text"><div className="tooltip-text-content">{this.props.hintText}</div></div>
             </div>

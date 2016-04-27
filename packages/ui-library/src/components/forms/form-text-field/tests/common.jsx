@@ -90,16 +90,6 @@ module.exports = function (getComponent) {
         expect(callback.mock.calls[0][0].target.value).toBe("abc");
     });
 
-    it("renders help tooltip", function () {
-        var component = getComponent({
-            labelText: "some label",
-            labelHelpText: "some help"
-        });
-        var help = TestUtils.findRenderedDOMNodeWithClass(component, "medium-tooltip");
-
-        expect(help.textContent).toBe("some help");
-    });
-
     it("renders label", function () {
         var component = getComponent({
             labelText: "some label",

@@ -1,5 +1,5 @@
 var React = require("react"),
-    css = require("classnames"),
+    classnames = require("classnames"),
     FormTextField = require("./form-text-field").v1,
     Toggle = require("./Toggle.jsx"),
     If = require("../general/If.jsx"),
@@ -353,7 +353,7 @@ var Stateless = React.createClass({
         }
 
         return (
-            <div className={css("checkbox-list", containerCss)} data-id={this.props.id}>
+            <div className={classnames("checkbox-list", containerCss)} data-id={this.props.id}>
                 <div className="input-row">
 
                     <FormTextField

@@ -1,6 +1,6 @@
 var React=require("react"),
-    css = require("classnames"),
-    HelpHint=require("../tooltips/HelpHint.jsx");
+    classnames = require("classnames"),
+    FormLabel = require("./FormLabel.jsx");
 
 /**
  * @callback FormCheckbox~onChangeCallback
@@ -20,6 +20,7 @@ var React=require("react"),
  * @param {string} [name] - optional name to pass
  * @param {FormCheckbox~onChangeCallback} onChange - callback to be triggered when checkbox ticked
  * @param {string} [value] - optional value to pass
+ * @param {string} [helpClassName] - optional class for HelpHint
  *
  * @example
  *
@@ -38,7 +39,8 @@ var FormCheckbox=React.createClass({
         labelHelpText: React.PropTypes.string,
         name: React.PropTypes.string,
         onChange: React.PropTypes.func.isRequired,
-        value: React.PropTypes.string
+        value: React.PropTypes.string,
+        helpClassName: React.PropTypes.string
     },
 
     getDefaultProps: function () {
@@ -49,36 +51,25 @@ var FormCheckbox=React.createClass({
     },
 
     render: function () {
-        var labelHelp,
-            labelCss = {};
-
-        if (this.props.labelHelpText) {
-            labelHelp = (
-                <HelpHint hintText={this.props.labelHelpText} />
-            );
-        }
-
-        if (this.props.className) {
-            labelCss[this.props.className] = true;
-        }
+        var id = this.props["data-id"] || this.props.id;
 
         return (
-            <label className={css("input-checkbox", labelCss)} disabled={this.props.disabled}>
-                <span className="label-text">
-                    {this.props.label}
-                    {labelHelp}
-                </span>
+            <FormLabel className={classnames("input-checkbox", this.props.className)}
+                    helpClassName={this.props.helpClassName}
+                    disabled={this.props.disabled}
+                    value={this.props.label}
+                    hint={this.props.labelHelpText}>
                 <input
-                    data-id={this.props.id}
+                    data-id={id}
                     type="checkbox"
-                    name={this.props.name ? this.props.name : this.props.id}
-                    value={this.props.value ? this.props.value: this.props.id}
+                    name={this.props.name ? this.props.name : id}
+                    value={this.props.value ? this.props.value: id}
                     onChange={this.props.onChange}
                     checked={this.props.checked}
                     disabled={this.props.disabled}
                 />
                 <div className="icon"/>
-            </label>
+            </FormLabel>
         );
     }
 });

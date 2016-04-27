@@ -1,5 +1,6 @@
 var React = require("react"),
-    HelpHint = require("../tooltips/HelpHint.jsx");
+    HelpHint = require("../tooltips/HelpHint.jsx"),
+    classnames = require("classnames");
 
 /** @class FormLabel
  * @desc Most form fields implement the same logic to display an optional label, with optional hint.
@@ -9,13 +10,15 @@ var React = require("react"),
  * @param {string} [className] - An optional classname string
  * @param {string} [value] - The label text.  If omitted, nothing is rendered.
  * @param {string} [hint] - The hint text
+ * @param {string} [helpClassName] - Optional class for help hint.
  */
 var FormLabel = React.createClass({
     propTypes: {
         value: React.PropTypes.string,
         hint: React.PropTypes.string,
         id: React.PropTypes.string,
-        className: React.PropTypes.string
+        className: React.PropTypes.string,
+        helpClassName: React.PropTypes.string
     },
 
     _renderHint: function () {
@@ -26,7 +29,8 @@ var FormLabel = React.createClass({
         return (
             <HelpHint ref="hint"
                 id="help-tooltip"
-                className="medium-tooltip" hintText={this.props.hint} />);
+                className={classnames("inline", this.props.helpClassName)}
+                hintText={this.props.hint} />);
     },
 
     render: function () {

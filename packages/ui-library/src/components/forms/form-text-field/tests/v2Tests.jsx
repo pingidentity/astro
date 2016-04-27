@@ -161,4 +161,13 @@ describe("FormTextinput", function () {
         expect(container.getAttribute("class")).toContain("extra");
     });
 
+    it("renders help tooltip", function () {
+        var component = getComponent({
+            labelText: "some label",
+            labelHelpText: "some help"
+        });
+        var help = TestUtils.findRenderedDOMNodeWithDataId(component, "help-tooltip");
+
+        expect(help.textContent).toBe("some help");
+    });
 });

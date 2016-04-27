@@ -1,5 +1,6 @@
 var React = require("react");
 var HelpHint = require("../../../components/tooltips/HelpHint.jsx");
+var FormTextField = require("../../../components/forms/FormTextField.jsx");
 
 var HelpHintDemo = React.createClass({
 
@@ -90,6 +91,17 @@ var HelpHintDemo = React.createClass({
                     className="right short-tooltip"
                     hintText="Short length tooltip"
                 />
+                <br /><br />
+                <strong>
+                    Inline help hint style.
+                </strong>
+                <br /><br />
+                <FormTextField
+                    labelText="Label"
+                    labelHelpText="Here is an inline help hint"
+                    helpCss="short-tooltip inline"
+                />
+
 
             </div>
         );

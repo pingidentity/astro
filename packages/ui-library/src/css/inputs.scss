@@ -473,9 +473,11 @@ label {
 			margin-left: 10px;
 			margin-top: -3px;
 			line-height: 14px;
-			height: 18px;
-			width: 18px;
 			vertical-align: middle;
+		}
+		.help-tooltip.inline {
+			margin-left: 5px;
+			margin-top: 0px;
 		}
 	}
 	&.main {

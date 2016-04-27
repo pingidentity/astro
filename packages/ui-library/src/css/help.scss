@@ -1,21 +1,39 @@
-
 .help-tooltip {
     $tooltip-edge-offset: 10px;
-    $help-icon-size: 16px;
+    $help-icon-size: 18px;
     $animation-timing: 0.5s;
+    $inline-icon-height: 12px;
 
     display: inline-block;
     position: relative;
     background: transparent;
-    cursor: default;
+    cursor: pointer;
     line-height: 1em;
-
+    &.inline {
+        &:hover {
+            .icon-help {
+                color: $color-midnight;
+            }
+        }
+        .icon-help {
+            height: $inline-icon-height;
+            width: $inline-icon-height - 1px;
+            font-size: $inline-icon-height;
+            line-height: $inline-icon-height;
+            color: $color-blue-grey;
+            display: inline-block;
+            &:before { //change to icon-help-rounded
+                content: "\48";
+            }
+        }
+    }
     .icon-help {
         text-transform: none;
-        width: $help-icon-size + 1px;
+        width: $help-icon-size;
         font-size: $help-icon-size;
         line-height: $help-icon-size;
         color: $color-midnight;
+        display: inline-block;
     }
     .tooltip-text {
         display: none;
@@ -37,7 +55,7 @@
             box-sizing: border-box;
             width: $width;
             margin: 0 0 6px floor($width/-2);
-            background: $color-active-blue;
+            background: $color-midnight;
             color: $color-white;
             padding: 10px;
             font-size: 14px;
@@ -54,7 +72,7 @@
                 border-style: solid;
                 border-width: 7px;
                 line-height: 1em;
-                border-color: $color-active-blue transparent transparent transparent;
+                border-color: $color-midnight transparent transparent transparent;
                 bottom: -12px;
                 left: 50%;
                 margin: 0 0 0 -6px;
@@ -104,7 +122,7 @@
             }
         }
     }
-    &.medium-tooltip {
+    &.medium-tooltip, &.inline { //inline added to keep same size with removal of medium-tooltip class from Form labels. Will remove when dynamic
         $width: 260px;
 
         .tooltip-text {
@@ -177,7 +195,7 @@
                     bottom: 100%;
                 }
                 &:before {
-                    border-color: transparent transparent $color-active-blue transparent;
+                    border-color: transparent transparent $color-midnight transparent;
                     top: -12px;
                     bottom: auto;
 

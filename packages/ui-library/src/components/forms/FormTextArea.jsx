@@ -41,6 +41,7 @@ var React = require("react"),
  *      (if not specified, no undo control will be shown)
  * @param {boolean} [useAutocomplete] whether or not the field will support autocomplete. (default false)
  * @param {string} [inputCss] CSS classes to add to the input element
+ * @param {string} [helpClassName] CSS classes to add to the HelpHint
  * @param {string} [className] CSS classes to add to the parent Label element
  * @param {string} [errorMessage] an error message to show (will be shown if defined)
  * @param {boolean} [disabled] property that disables the component
@@ -75,6 +76,7 @@ var FormTextArea = React.createClass({
         rows: React.PropTypes.number,
         useAutocomplete: React.PropTypes.bool,
         inputCss: React.PropTypes.string,
+        helpClassName: React.PropTypes.string,
         className: React.PropTypes.string,
         errorMessage: React.PropTypes.string,
         autoFocus: React.PropTypes.bool
@@ -176,7 +178,7 @@ var FormTextArea = React.createClass({
         if (this.props.labelHelpText) {
             labelHelp = (
                 <HelpHint
-                    className="medium-tooltip"
+                    className={css("inline", this.props.helpClassName)}
                     hintText={this.props.labelHelpText}
                     data-id={this.props.referenceName + "_helptooltip"} />
             );

@@ -170,6 +170,17 @@ describe("FormTextField", function () {
 
     });
 
+    it("renders help tooltip", function () {
+        var component = getComponent({
+            labelText: "some label",
+            labelHelpText: "some help",
+            referenceName: "text"
+        });
+        var help = TestUtils.findRenderedDOMNodeWithDataId(component, "text_helptooltip");
+
+        expect(help.textContent).toBe("some help");
+    });
+
     it("renders custom className", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormTextField className="extra" />

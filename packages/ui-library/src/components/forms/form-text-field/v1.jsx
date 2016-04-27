@@ -2,7 +2,7 @@
 
 var React = require("react"),
     ReactDOM = require("react-dom"),
-    cx = require("classnames"),
+    classnames = require("classnames"),
     FormFieldConstants = require("../../../constants/FormFieldConstants"),
     HelpHint = require("../../tooltips/HelpHint.jsx"),
     _ = require("underscore");
@@ -51,6 +51,7 @@ var React = require("react"),
  * @param {string}   [defaultValue]  the default (initial) value to be shown in the field, when component managing state itself
  * @param {string}   [originalValue] value to set the field to if the undo icon is clicked. If 'undefined' no undo icon will be shown
  * @param {boolean}  [useAutocomplete]    whether or not the field will support autocomplete (default false)
+ * @param {string}   [helpClassName]           CSS classes to add to the help element
  * @param {string}   [inputCss]           CSS classes to add to the input element
  * @param {string}   [labelCss]           CSS classes to add to the label element
  * @param {string}   [className]          CSS classes to add to the parent Label element
@@ -82,6 +83,7 @@ var FormTextField = React.createClass({
         errorMessage: React.PropTypes.string,
         labelHelpText: React.PropTypes.string,
         errorCss: React.PropTypes.string,
+        helpClassName: React.PropTypes.string,
         inputCss: React.PropTypes.string,
         isRequired: React.PropTypes.bool,
         labelText: React.PropTypes.string,
@@ -275,7 +277,7 @@ var FormTextField = React.createClass({
             save,
             labelHelp;
 
-        var labelCss = cx(this.props.labelCss, {
+        var labelCss = classnames(this.props.labelCss, {
                 "input-text": true,
                 required: this.props.isRequired,
                 "form-error": this.state.errorMessage,
@@ -284,7 +286,7 @@ var FormTextField = React.createClass({
                 "value-entered": !!value,
                 disabled: this.props.disabled
             }),
-            errorCss = cx(this.props.errorCss + " help-tooltip form-error-message", {
+            errorCss = classnames(this.props.errorCss + " help-tooltip form-error-message", {
                 show: this.state.errorMessage
             });
 
@@ -307,9 +309,9 @@ var FormTextField = React.createClass({
         if (this.props.labelHelpText) {
             labelHelp = (
                 <HelpHint
-                    className="medium-tooltip"
+                    className={classnames("inline", this.props.helpClassName)}
                     hintText={this.props.labelHelpText}
-                    data-id={this.props.referenceName + "_helptooltip"} />
+                    id={this.props.referenceName + "_helptooltip"} />
             );
         }
 

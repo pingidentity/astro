@@ -1,7 +1,7 @@
 "use strict";
 
 var React = require("react"),
-    css = require("classnames"),
+    classnames = require("classnames"),
     HelpHint = require("../tooltips/HelpHint.jsx");
 
 /**
@@ -34,6 +34,7 @@ var React = require("react"),
  * @param {string}   [errorMessage]    an error message (will be shown if defined)
  * @param {boolean}  [disabled]        if true, the select element will be disabled
  * @param {string}   [labelId]         A data-id for easy access to the label's text content
+ * @param {string}   [helpClassName]         Optional css for HelpHint
  *
  * @example
  *     <FormSelectField className="css classes to use on label or input-select as default"
@@ -79,7 +80,8 @@ var FormSelectField = React.createClass({
         ]).isRequired,
         errorMessage: React.PropTypes.string,
         isDisabled: React.PropTypes.bool,
-        labelId: React.PropTypes.string
+        labelId: React.PropTypes.string,
+        helpClassName: React.PropTypes.string
     },
 
     getDefaultProps: function () {
@@ -135,7 +137,7 @@ var FormSelectField = React.createClass({
                 required: this.props.isRequired,
                 "value-entered": this.state.selectedValue !== this.props.noneOptionValue
             },
-            errorCss = css("help-tooltip form-error-message", {
+            errorCss = classnames("help-tooltip form-error-message", {
                 show: this.props.errorMessage
             });
 
@@ -156,12 +158,14 @@ var FormSelectField = React.createClass({
 
         if (this.props.labelHelpText) {
             labelHelp = (
-                <HelpHint hintText={this.props.labelHelpText} />
+                <HelpHint
+                    hintText={this.props.labelHelpText}
+                    className={classnames("inline", this.props.helpClassName)}/>
             );
         }
 
         return (
-            <label className={css(labelCss)} data-id={this.props.id + "_label"}>
+            <label className={classnames(labelCss)} data-id={this.props.id + "_label"}>
                 {this.props.label && (
                     <span data-id={this.props.labelId} className="label-text">
                         {this.props.label}
