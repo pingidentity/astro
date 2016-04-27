@@ -156,6 +156,7 @@ var PageLinks = React.createClass({
  * @param {string} [id="pagination] - it is used for a unique data-id
  * @param {number} [perPage=10] - number of results per page
  * @param {number} total - total number of items to paginate
+ * @param {number} totalPages - total number of pages (alternate to passing total records)
  * @param {Pagination~onChangeCallback} onChange - callback to be trigger when new page selected
  * @param {number} [page] - currently selected page number. Respected only with externally managed variant.
  * @param {bool} [controlled=false] - A boolean to enable the component to be externally managed.  True will relinquish
@@ -164,12 +165,22 @@ var PageLinks = React.createClass({
  *
  * @example
  *
- *    <Pagination className = "result-set"
- *            perPage = {5}
- *            total = {this.state.items.length}
- *            onChange={this._onPageChanged}>
- *            page={this.state.currentPage}
- *            {itemNodes}
+ *    <Pagination
+ *        className="result-set"
+ *        onChange={this._onPageChanged}
+ *        page={this.state.currentPage}
+ *        perPage={5}
+ *        total={this.state.items.length} >
+ *        {itemNodes}
+ *    </Pagination>
+ *    // OR (pass totalPages instead of total)
+ *    <Pagination
+ *        className="result-set"
+ *        onChange={this._onPageChanged}
+ *        page={this.state.currentPage}
+ *        perPage={5}
+ *        totalPages={Math.ceil(this.state.items.length/5)} >
+ *        {itemNodes}
  *    </Pagination>
  *
  **/
@@ -181,40 +192,53 @@ var Stateless = React.createClass({
     propTypes: {
         className: React.PropTypes.string,
         id: React.PropTypes.string,
-        perPage: React.PropTypes.number.isRequired,
-        total: React.PropTypes.number.isRequired,
+        totalPages: React.PropTypes.number,
         onChange: React.PropTypes.func.isRequired,
-        page: React.PropTypes.number
+        page: React.PropTypes.number,
+        perPage: React.PropTypes.number,
+        total: React.PropTypes.number
     },
 
     getDefaultProps: function () {
         return {
             id: "pagination",
-            perPage: 10
+            perPage: 10,
+            totalPages: null
         };
     },
 
-    _handlePageChange: function (newPage) {
-        var page = newPage;
+    _getNumPages: function () {
+        if (this.props.totalPages) {
+            return this.props.totalPages;
 
-        var numPages = Math.ceil(this.props.total / this.props.perPage);
-        var currentPage = page > numPages ? numPages : page;
-        var start = (currentPage - 1) * this.props.perPage;
-        var last = start + this.props.perPage;
+        } else if (this.props.total && this.props.perPage) {
+            return Math.ceil(this.props.total / this.props.perPage);
+
+        } else {
+            throw("Either props.totalPages OR (props.total and props.perPage) must be defined to \
+                determine the number of page links to render!");
+        }
+    },
+
+    _handlePageChange: function (newPage) {
+        var page = newPage,
+            numPages = this._getNumPages(),
+            currentPage = page > numPages ? numPages : page,
+            start = (currentPage - 1) * this.props.perPage,
+            last = start + this.props.perPage;
 
         this.props.onChange(start, last, currentPage);
     },
 
     render: function () {
-        var labelCss = this.props.className;
-        var numPages = Math.ceil(this.props.total / this.props.perPage);
+        var numPages = this._getNumPages();
 
         //make sure current page isn't greater than number of pages
         var currentPage = parseInt(this.props.page) > numPages ? numPages : parseInt(this.props.page);
 
         return (
             <div
-                className={labelCss}
+                className={this.props.className}
                 data-id={this.props.id}>
                 <PageLinks
                     currentPage={currentPage}
