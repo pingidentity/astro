@@ -33,7 +33,7 @@ input[type=button], input[type=submit], .button, button {
 	line-height: $height;
 	border: 1px solid $color-rhino;
 
-	@include border-radius(3px);
+	@include border-radius(2px);
 	@include base-button-styles;
 	@include default-button-styles;
 
@@ -74,6 +74,16 @@ input[type=button], input[type=submit], .button, button {
 
 		&:hover {
 			color: $color-white;
+		}
+	}
+	&.cancel {
+		background: none;
+		background-color: $color-stratus;
+		color: $color-white;
+		border: none;
+
+		&:hover {
+			background-color: $color-rabbit-fur;
 		}
 	}
 	&.inline {

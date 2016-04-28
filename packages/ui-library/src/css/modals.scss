@@ -202,6 +202,7 @@
 			position: relative;
 			top: 0;
 			padding: 20px;
+			padding-top: 30px;
 			.title {
 				color: $color-warning-text;
 				text-transform: uppercase;
@@ -216,7 +217,7 @@
 				margin: 20px 0 0 0;
 				text-align: center;
 				.confirm {
-					padding: 0px 40px;
+					padding: 0px 25px;
 					margin: 0px;
 					border-radius: 1px;
 					margin-bottom: 10px;
