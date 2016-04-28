@@ -149,56 +149,81 @@
 		}
 	}
 	&.alert {
-		$modal-width: 500px;
-
+		$modal-width: 360px;
 		left: 50%;
 		right: auto;
 		width: $modal-width;
 		margin-left: -($modal-width/4);
-		border: 1px solid $color-timberwolf;
+		border: 1px solid $color-stone;
+		background-color: $color-white;
+		font-family: $font-pn-light;
+		min-height: 80px;
+		font-size: 14px;
+		color: $color-slate;
+		@include box-shadow(3px 3px 10px 0px rgba(0,0,0,0.1));
 
 		.modal-header, .modal-body {
 			border-width: 1px 1px 0 1px;
 			border-style: solid;
-			border-color: $color-timberwolf;
+			border-color:  $color-warning-icon-yellow;
 		}
 		.modal-header {
-			background: $color-warning-yellow;
+			background: $color-warning-icon-yellow;
 			color: rgba($color-black, 0.5);
-			border-width: 1px 1px 0 1px;
-			font-size: 24px;
-			font-family: $font-pn-light;
+			font-size: 18px;
 			text-align: center;
+			line-height: 1.2em;
+			padding: 20px;
 
 			&:after {
 				content: none;
 			}
-			.icon-alert {
-				font-size: 26px;
+			&:before {
+				font-family: $icon-font;
+				content: '\21';
 				position: absolute;
-				margin: -3px 0 0 -36px;
+				top: 8px;
+				left: 0;
+				right: 0;
+				text-align: center;
+				font-size: 22px;
+				z-index: 1;
+				color: $color-warning-text;
 			}
 			.close-modal {
-				&:after {
-					color: rgba($color-black, 0.3);
-				}
+				display: none;
 			}
 		}
 		.modal-body {
-			border-width: 0 1px 1px 1px;
+			border: none;
 			text-align: left;
-			font-size: 18px;
 			@include border-radius(0 0 $modal-radius $modal-radius);
+			background-color: $color-white;
+			position: relative;
+			top: 0;
+			padding: 20px;
+			.title {
+				color: $color-warning-text;
+				text-transform: uppercase;
+				text-align: center;
+				font-weight: 400;
+				font-size: 24px;
+				margin: 0;
+				padding-bottom: 20px;
+			}
 
 			.buttons {
-				margin: 30px 0 0 0;
+				margin: 20px 0 0 0;
 				text-align: center;
-
+				.confirm {
+					padding: 0px 40px;
+					margin: 0px;
+					border-radius: 1px;
+					margin-bottom: 10px;
+				}
 				a {
 					display: block;
-					margin: 20px 0 0 0;
-					font-size: 15px;
-					text-transform: uppercase;
+					font-size: 13px;
 				}
 			}
 		}

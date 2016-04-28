@@ -5,6 +5,7 @@ var ModalButtonDemo = React.createClass({
 
     _closeModal: function () {
         this.refs.dialogModal._close();
+        this.refs.dialogModal2._close();
     },
 
     render: function () {
@@ -56,10 +57,24 @@ var ModalButtonDemo = React.createClass({
                 <div className="input-row">
                     <ModalButton
                         value="Open Alert Modal"
-                        modalTitle="Alert Modal"
-                        type="alert">
+                        modalTitle=""
+                        type="alert"
+                        ref="dialogModal2">
+                        <div className = "title">
+                            Alert Modal
+                        </div>
                         <div>
-                            Alert modal content here!
+                            This modal copies the look of details tooltip with alert class.
+                        </div>
+                        <div className="buttons">
+                            <input
+                                type="button"
+                                className="secondary confirm"
+                                value="Confirm"
+                                onClick={this._closeModal}
+                            />
+                            <br />
+                            <a onClick={this._closeModal}> Cancel </a>
                         </div>
                     </ModalButton>
                 </div>

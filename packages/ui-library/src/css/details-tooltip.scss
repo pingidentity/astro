@@ -17,14 +17,14 @@
 	&.alert {
 		&.bottom {
 			.details-content {
-				border-top-color: $color-warning-yellow;
+				border-top-color: $color-warning-icon-yellow;
 
 				&:before {
 					width: 0;
 					height: 0;
 					border-top: none;
 					border-right: 10px solid transparent;
-					border-bottom: 10px solid $color-warning-yellow;
+					border-bottom: 10px solid $color-warning-icon-yellow;
 					top: -11px;
 				}
 				&:after {
@@ -35,7 +35,7 @@
 		.details-content {
 			padding: 0;
 			.details-title {
-				background-color: $color-warning-yellow;
+				background-color: $color-warning-icon-yellow;
 				color: $color-warning-text;
 				border-bottom: none;
 
