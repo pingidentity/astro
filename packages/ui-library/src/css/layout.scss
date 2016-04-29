@@ -456,15 +456,98 @@ $layout-zindex-order: (
 }
 
 
+// REUSABLE PAGE STYLES ----------------------------------------------------------------------------
 
-// MISC LAYOUT STYLES ------------------------------------------------------------------------------
+.page-title {
+	font-size: 24px;
+	font-family: $font-pn-regular;
+	color: $color-slate;
+	margin: 0 0 30px 0;
+
+	.page-subtitle {
+		margin: 5px 0 0 0;
+		font-size: 14px;
+		display: block;
+		color: $color-elephant;
+	}
+}
+.page-section {
+	margin: 0 0 40px 25px;
+
+	.page-section-title {
+		margin: 0 0 25px 0;
+		padding: 0 0 5px 0;
+		border-bottom: 1px solid $color-rabbit-fur;
+		font-size: 15px;
+		line-height: 1em;
+		font-family: $font-pn-semibold;
+		color: $color-blue-grey;
+		text-transform: uppercase;
+	}
+	.page-section-content {
+		margin: 0 0 40px 25px;
+	}
+}
+.page-section-data-title {
+	font-size: 14px;
+	text-transform: uppercase;
+	color: $color-elephant;
+	margin: 0 0 5px 0;
+}
+.page-section-data {
+	display: table;
+	margin: 0 0 30px 0;
+
+	.data-item {
+		display: table-row;
+
+		.data-item-label, .data-item-value {
+			display: table-cell;
+			padding-top: 5px;
+			padding-bottom: 5px;
+			font-family: $font-pn-regular;
+			line-height: 1em;
+		}
+		.data-item-label {
+			font-size: 13px;
+			text-transform: uppercase;
+			padding-right: 20px;
+			color: $color-elephant;
+
+			&:after {
+				content: ':';
+			}
+		}
+		.data-item-value {
+			font-size: 14px;
+			color: $color-midnight;
+		}
+	}
+}
+.page-section-data-divider {
+	background: none;
+	border-style: dotted;
+	border-width: 1px 0 0 0;
+	border-color: $color-rabbit-fur;
+	margin: -25px 0 5px 0;
+}
+.content-controls {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 20px;
+	text-align: right;
+	background: rgba($color-white, 0.5);
+	border-top: 1px solid silver;
+}
+
+
+
 
 .content-columns {
-	@function calc-minus-amt($divisions){
-  		@return to-fixed(($column-margin * ($divisions - 1)) / $divisions);
-	}
 	@function get-width($divisions){
-  		@return calc(#{to-fixed(percentage(1 / $divisions))} - #{calc-minus-amt($divisions)});
+  		@return calc(#{to-fixed(percentage(1 / $divisions))} - #{to-fixed(($column-margin * ($divisions - 1)) / $divisions)});
 	}
 	@function get-width-nopad($divisions){
   		@return #{to-fixed(percentage(1 / $divisions))};
@@ -701,8 +784,6 @@ $layout-zindex-order: (
 	}
 }
 
-
-// DEPRICATED OR SITE-SPECIFIC STYLES --------------------------------------------------------------
 .submit {
 	width: 100%;
 	clear: both;
