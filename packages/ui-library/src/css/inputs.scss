@@ -428,8 +428,8 @@ label {
 		}
 		&.undo {
 			position: absolute;
-			top: 12px;
-			right: 11px;
+			top: 13px;
+			right: 13px;
 			font-size: 0;
 			color: transparent;
 			width: 14px;
@@ -1165,7 +1165,7 @@ input[type=file] {
 .input-integer, .form-integer-container{
     position: relative;
 
-    &:after, a.undo{
+    &:after, a.undo {
         right: 40px;
     }
     .input-container{
@@ -1176,10 +1176,10 @@ input[type=file] {
 	.input-text {
 		margin: 0;
 	}
-    .up-down-spinner{
+    .integer-controls {
         position: absolute;
-		right: 10px;
-		bottom: 2px;
+		right: 13px;
+		bottom: 8px;
         font-family: $icon-font;
         cursor: pointer;
         vertical-align: baseline;
@@ -1187,17 +1187,35 @@ input[type=file] {
         display: inline-block;
 
         button{
-            height: 18px;
-            padding: 0px;
-            display: inline-block;
+			$height: 10px;
+
+            height: $height;
+			width: 12px;
+            padding: 0;
+			margin: 0;
+            display: block;
+			text-align: center;
             text-decoration: none;
-            font-color: inherit;
+            color: $color-slate;
             border: none;
             background-color: transparent;
+			line-height: $height;
+
+			&:before {
+				content: "Y";
+				font-family: $icon-font;
+				font-size: 7px;
+				line-height: $height;
+				height: $height;
+			}
+			&.integer-up {
+				margin: 0 0 3px 0;
+				@include rotate(180deg);
+			}
         }
     }
     [disabled], [readonly] {
-        .up-down-spinner, .up-down-spinner{
+        .integer-controls {
             pointer-events: none;
         }
     }

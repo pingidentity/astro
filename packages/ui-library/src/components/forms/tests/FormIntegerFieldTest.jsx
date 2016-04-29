@@ -65,7 +65,7 @@ describe("FormIntegerField", function () {
         expect(callback.mock.calls.length).toBe(12);
 
         //Test the up and down spinners
-        var spinnerContainer = TestUtils.findRenderedDOMNodeWithClass(component, "up-down-spinner");
+        var spinnerContainer = TestUtils.findRenderedDOMNodeWithClass(component, "integer-controls");
         var spinnerUp = (spinnerContainer.childNodes[0]);
         var spinnerDown = (spinnerContainer.childNodes[1]);
 
@@ -154,7 +154,7 @@ describe("FormIntegerField", function () {
             <FormIntegerField onChange={callback} max={5} min={3} value={4} increment={3} />
         );
 
-        var spinnerContainer = TestUtils.findRenderedDOMNodeWithClass(component, "up-down-spinner");
+        var spinnerContainer = TestUtils.findRenderedDOMNodeWithClass(component, "integer-controls");
         var spinnerUp = (spinnerContainer.childNodes[0]);
         var spinnerDown = (spinnerContainer.childNodes[1]);
 
@@ -178,7 +178,7 @@ describe("FormIntegerField", function () {
             <FormIntegerField onChange={callback} max={5} min={3} value={4} increment={3} />
         );
 
-        var spinnerContainer = TestUtils.findRenderedDOMNodeWithClass(component, "up-down-spinner");
+        var spinnerContainer = TestUtils.findRenderedDOMNodeWithClass(component, "integer-controls");
         var spinnerUp = (spinnerContainer.childNodes[0]);
 
         ReactTestUtils.Simulate.mouseUp(spinnerUp);
@@ -193,7 +193,7 @@ describe("FormIntegerField", function () {
             <FormIntegerField onChange={callback} value={1} />
         );
 
-        var spinnerContainer = TestUtils.findRenderedDOMNodeWithClass(component, "up-down-spinner");
+        var spinnerContainer = TestUtils.findRenderedDOMNodeWithClass(component, "integer-controls");
         var spinnerUp = (spinnerContainer.childNodes[0]);
 
         ReactTestUtils.Simulate.mouseDown(spinnerUp);
@@ -202,6 +202,25 @@ describe("FormIntegerField", function () {
         jest.runOnlyPendingTimers();
 
         expect(callback.mock.calls.length).toEqual(2);
+    });
+
+    it("it assigns tabIndex when specified", function () {
+
+        var noTabIndex = ReactTestUtils.renderIntoDocument(
+                <FormIntegerField onChange={callback} value={1} />
+            ),
+            withTabIndex = ReactTestUtils.renderIntoDocument(
+                <FormIntegerField onChange={callback} value={1} tabIndex={10} />
+            ),
+            testIntField;
+
+        // check default tabIndex
+        testIntField = TestUtils.findRenderedDOMNodeWithClass(noTabIndex, "integer-up");
+        expect(testIntField.tabIndex).toBe(-1);
+
+        // check assigned tabIndex
+        testIntField = TestUtils.findRenderedDOMNodeWithClass(withTabIndex, "integer-up");
+        expect(testIntField.tabIndex).toBe(10);
     });
 
 });

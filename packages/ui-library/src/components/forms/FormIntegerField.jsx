@@ -3,7 +3,7 @@
 var React = require("react"),
     FormFieldConstants = require("../../constants/FormFieldConstants"),
     FormTextField = require("./FormTextField.jsx"),
-    cx = require("classnames");
+    classnames = require("classnames");
 
 /**
  * @callback FormIntegerField~valueEventCallback
@@ -73,20 +73,21 @@ var React = require("react"),
  */
 
 
-var FormIntegerField = React.createClass({
+var FormIntegerField=React.createClass({
 
     propTypes: {
         // prop validations
+        autoFocus: React.PropTypes.bool,
         className: React.PropTypes.string,
         defaultValue: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
         disabled: React.PropTypes.bool,
         errorMessage: React.PropTypes.string,
-        labelHelpText: React.PropTypes.string,
         errorCss: React.PropTypes.string,
         enforceRange: React.PropTypes.bool,
         increment: React.PropTypes.number,
         inputCss: React.PropTypes.string,
         isRequired: React.PropTypes.bool,
+        labelHelpText: React.PropTypes.string,
         labelText: React.PropTypes.string,
         maskValue: React.PropTypes.bool,
         maxLength: React.PropTypes.number,
@@ -99,12 +100,12 @@ var FormIntegerField = React.createClass({
         originalValue: React.PropTypes.number,
         placeholder: React.PropTypes.string,
         save: React.PropTypes.func,
+        tabIndex: React.PropTypes.number,
         type: React.PropTypes.string,
         useAutocomplete: React.PropTypes.bool,
         validator: React.PropTypes.func,
         validatorTrigger: React.PropTypes.string,
-        value: React.PropTypes.number,
-        autoFocus: React.PropTypes.bool
+        value: React.PropTypes.number
     },
 
     /**
@@ -115,15 +116,19 @@ var FormIntegerField = React.createClass({
      */
     _handleChange: function (e) {
         // pass the event to the parent so it can perform whatever operations it needs
-        //check Integer and Range
+
         var input = e.target.value;
+
+        // check Integer and Range
         if (!this._isValid(input)) {
             return;
         }
         input = parseInt(input);
-        //remove leading 0s
+
+        // remove leading 0s
         var value = isNaN(input) ? "" : input ;
-        //pass value and event to parent
+
+        // pass value and event to parent
         this.props.onChange(value, e);
     },
 
@@ -147,11 +152,11 @@ var FormIntegerField = React.createClass({
         if (isNaN(value) || value.toString().indexOf(".") !== -1) {
             return false;
         }
-        //check max range if enforceRange is true
+        // check max range if enforceRange is true
         if (this.props.enforceRange && value > this.props.max) {
             return false;
         }
-        //check int
+        // check int
         return value % 1 === 0;
     },
 
@@ -163,12 +168,15 @@ var FormIntegerField = React.createClass({
      */
     _handleSpinnerPress: function (e) {
         var inc = this.props.increment;
+
         //set negative increment for down spinner
-        inc = (e.target.name === "spinner-down") ? -inc : inc;
+        inc = (e.target.getAttribute("data-direction") === "down") ? -inc : inc;
+
         //preform addition or subraction
         this._counter(e, inc);
+
         //set timeout for rapid addition or subtraction when held
-        this.timeout= setTimeout(this._interval.bind(this, e, inc), 700);
+        this.timeout = setTimeout(this._interval.bind(this, e, inc), 700);
 
     },
 
@@ -197,8 +205,8 @@ var FormIntegerField = React.createClass({
         e.stopPropagation();
 
         var inc = (key === 38) ? this.props.increment : - this.props.increment;
-        //preform addition or subraction
 
+        // preform addition or subraction
         this._counter(e, inc);
     },
 
@@ -224,7 +232,7 @@ var FormIntegerField = React.createClass({
         var inputValue = this.props.value,
             newValue = isNaN(parseInt(inputValue)) ? this.props.min : parseInt(inputValue) + inc,
             value;
-        //Always enforce range for spinner buttons and up and down keys
+        // Always enforce range for spinner buttons and up and down keys
         if (newValue < this.props.min) {
             value = this.props.min;
         }
@@ -239,41 +247,46 @@ var FormIntegerField = React.createClass({
 
     getDefaultProps: function () {
         return {
-            referenceName: "formIntegerField",
-            mode: FormFieldConstants.FormFieldMode.EDIT,
             defaultValue: "",
+            errorCss: "",
+            enforceRange: true,
+            increment: 1,
             labelText: "",
             max: 999999999999999,
             maxLength: 16,
             min: 0,
-            increment: 1,
-            errorCss: "",
-            enforceRange: true
+            mode: FormFieldConstants.FormFieldMode.EDIT,
+            referenceName: "formIntegerField",
+            tabIndex: -1
         };
     },
 
     render: function () {
         var isReadonly = this.props.mode.toUpperCase() === FormFieldConstants.FormFieldMode.READ_ONLY,
-            upDownSpinner;
-
-        var labelCss = cx(this.props.labelCSS, { "form-integer-container input-integer": true });
+            integerControls;
 
         if (!this.props.disabled && !isReadonly) {
-            upDownSpinner = (
+            integerControls = (
                 <span
-                    className = "up-down-spinner"
-                    onMouseOut = {this._handleSpinnerRelease}>
+                    className="integer-controls"
+                    onMouseOut={this._handleSpinnerRelease}>
                     <button
-                        className = "icon-close-arrow"
-                        name = "spinner-up"
-                        onMouseDown = {this._handleSpinnerPress}
-                        onMouseUp = {this._handleSpinnerRelease}
+                        className="integer-up"
+                        data-direction="up"
+                        data-id={this.props.referenceName + "-up-btn"}
+                        onMouseDown={this._handleSpinnerPress}
+                        onMouseUp={this._handleSpinnerRelease}
+                        tabIndex={this.props.tabIndex}
+                        type="button"
                     />
                     <button
-                        className = "icon-dropdown-arrow"
-                        name = "spinner-down"
-                        onMouseDown = {this._handleSpinnerPress}
-                        onMouseUp = {this._handleSpinnerRelease}
+                        className="integer-down"
+                        data-direction="down"
+                        data-id={this.props.referenceName + "-up-btn"}
+                        onMouseDown={this._handleSpinnerPress}
+                        onMouseUp={this._handleSpinnerRelease}
+                        tabIndex={this.props.tabIndex}
+                        type="button"
                     />
                 </span>
             );
@@ -283,12 +296,12 @@ var FormIntegerField = React.createClass({
             <div onKeyDown={this._handleKeyPress}>
                 <FormTextField
                     {...this.props}
-                    ref = "formTextField"
-                    referenceName = "formIntegerField"
-                    labelCss = {labelCss}
-                    onChange = {this._handleChange}
-                    onBlur = {this._handleBlur} >
-                    {upDownSpinner}
+                    ref="formTextField"
+                    referenceName={this.props.referenceName}
+                    labelCss={classnames(this.props.labelCss, { "form-integer-container input-integer": true })}
+                    onChange={this._handleChange}
+                    onBlur={this._handleBlur} >
+                    {integerControls}
                 </FormTextField>
             </div>
         );
