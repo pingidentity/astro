@@ -7,6 +7,8 @@
 		&.data-section {
 			.data-item {
 				> label {
+					font-size: 13px;
+					color: $color-elephant;
 					padding-left: 25px;
 				}
 				&.sub-item {
@@ -22,11 +24,15 @@
 						display: block;
 						padding: 0 0 5px 0;
 					    margin: 0 0 25px 0;
-					    color: map-get($colors, 'blue-grey');
-					    border-bottom: 1px solid map-get($colors, 'stratus');
+					    color: $color-blue-grey;
+					    border-bottom: 1px solid $color-stratus;
 		            	text-transform: uppercase;
-						font-size: 18px;
+						font-family: $font-pn-semibold;
+						font-size: 15px;
 		            	line-height: 1em;
+						&:after {
+							content: '';
+						}
 		            }
 		            &:first-of-type {
 		                > label {
@@ -63,13 +69,13 @@
             display: table-cell;
             vertical-align: top;
             line-height: 1em;
-        	font-size: 14px;
+        	font-size: 13px;
         }
 		> label {
             padding: 0 20px 10px 0;
         	cursor: default;
 			font-size: 14px;
-			color: $color-midnight;
+			color: $color-elephant;
 
         	&.input-radio {
         		cursor: pointer;
@@ -87,10 +93,23 @@
             display: table-cell;
             padding: 0 20px 15px 0;
 			color: $color-midnight;
+			font-size: 14px;
 
         	a {
         		margin: 0;
         	}
+		}
+		&.labels-only {
+			font-size: 15px;
+			color: $color-midnight;
+			font-style: italic;
+			display: inline-block;
+			padding-left: 25px;
+			> label {
+				&:after {
+					content: none;
+				}
+			}
 		}
         &.data-title {
             > label {

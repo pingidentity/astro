@@ -198,6 +198,13 @@
 			.nevermind {
 				margin-right: 10px;
 			}
+			a {
+				color: $color-active-blue;
+				text-transform: none;
+				&.secondary {
+					color: $color-rhino;
+				}
+			}
 		}
 		.details-close {
 			position: absolute;

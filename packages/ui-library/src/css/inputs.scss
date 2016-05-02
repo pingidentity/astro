@@ -271,6 +271,11 @@ label {
 		&.disabled {
 			input[type=text], input[type=password], textarea {
 				background-color: $color-timberwolf;
+				color: $color-midnight;
+        		@include opacity(1.0);
+        		&:hover {
+					border: 1px solid $color-rabbit-fur;
+				}
 			}
 			.input-container {
 				&:before {
@@ -310,7 +315,7 @@ label {
 
 			.label-text {
 				display: inline-block;
-				text-transform: capitalize;
+				text-transform: uppercase;
 				padding: 6px 0 0 0;
 				margin: 0;
 				line-height: 1em;
@@ -348,9 +353,11 @@ label {
 		&.stacked {
 			display: block;
 			margin-bottom: 13px;
-
 			.label-text {
-				text-transform: capitalize;
+				text-transform: uppercase;
+			}
+			&:last-of-type {
+				margin-bottom: 0;
 			}
 		}
 		input[type=radio] {
@@ -1402,7 +1409,7 @@ input[type=file] {
 
 .input-row {
 	position: relative;
-	margin: 0 0 20px 0;
+	margin: 0 0 25px 0;
 
 	.input-text, .input-textarea, .input-select, .input-file-upload, .input-integer, .input-radio, .input-checkbox, .input-color-picker {
 		margin-bottom: 0;

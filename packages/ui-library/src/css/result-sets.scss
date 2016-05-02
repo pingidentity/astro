@@ -127,8 +127,7 @@
 			font-size: 16px;
 			color: $color-slate;
 			margin-right: $button-width;
-			overflow: hidden;
-			text-overflow: ellipsis;
+			@include text-truncate;
 
 			&.title-only {
 				margin-top: 8px;
@@ -139,8 +138,7 @@
 			font-weight: normal;
 			color: $color-elephant;
 			margin-right: $button-width;
-			overflow: hidden;
-			text-overflow: ellipsis;
+			@include text-truncate;
 		}
 		.row-accessories {
 			position: absolute;

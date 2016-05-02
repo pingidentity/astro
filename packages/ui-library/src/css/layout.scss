@@ -388,6 +388,12 @@ $layout-zindex-order: (
 
 	&.full {
 		left: 0;
+		.messsage {
+			padding-left: 0;
+			text {
+				padding-left: 22px;
+			}
+		}
 	}
 	&.inline {
 		position: relative;

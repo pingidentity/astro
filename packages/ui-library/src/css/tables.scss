@@ -6,7 +6,7 @@ table {
 			table-layout: fixed;
 		}	
 		th {
-			color: map-get($colors, 'elephant');
+			color: $color-elephant;
 			text-transform: uppercase;
 		}
 		th, td {
@@ -35,6 +35,30 @@ table {
 				}
 				&.row-item {
 					margin-right: 0;
+				}
+			}
+		}
+		thead {
+			border-bottom: 1px solid $color-rabbit-fur;
+		}
+		tbody {
+			tr {
+				border-top: 1px dotted $color-rabbit-fur;
+				&:first-child {
+					border-top: none;
+				}
+				td {
+					.input-width-xsmall,
+		            .input-width-small,
+		            .input-width-medium,
+		            .input-width-large,
+		            .input-width-xlarge,
+		            .input-width-full {
+						margin-bottom: 0;
+		            }
+					.icon-delete {
+						position: inherit;
+					}			
 				}
 			}
 		}
