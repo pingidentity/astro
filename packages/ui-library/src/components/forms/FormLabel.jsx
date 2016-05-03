@@ -18,19 +18,30 @@ var FormLabel = React.createClass({
         className: React.PropTypes.string
     },
 
-    render: function () {
-        if (this.props.value) {
-            return (
-                <label data-id={this.props.id} className={this.props.className}>
-                    <span className="label-text">
-                        { this.props.value }
-                        { this.props.hint &&
-                            <HelpHint ref="hint" className="medium-tooltip" hintText={this.props.hint} /> }
-                    </span>
-                </label>);
-        } else {
+    _renderHint: function () {
+        if (!this.props.hint) {
             return null;
         }
+
+        return (
+            <HelpHint ref="hint"
+                id="help-tooltip"
+                className="medium-tooltip" hintText={this.props.hint} />);
+    },
+
+    render: function () {
+        if ((typeof(this.props.value) === "undefined" || this.props.value === null) && !this.props.children) {
+            return null;
+        }
+
+        return (
+            <label data-id={this.props["data-id"]} className={this.props.className}>
+                <span className="label-text" data-id="label">
+                    { this.props.value }
+                    { this._renderHint() }
+                </span>
+                {this.props.children}
+            </label>);
     }
 });
 

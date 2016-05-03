@@ -25,13 +25,14 @@ var React = require("react"),
  */
 var PropsToUrlWatcher = React.createClass({
     propTypes: {
-        watch: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+        watch: React.PropTypes.object.isRequired,
         onReplaceUrl: React.PropTypes.func.isRequired,
         location: React.PropTypes.object.isRequired
     },
 
     /**
-     * @method shouldComponentUpdate
+     * @method
+     * @name PropsToUrlWatcher#shouldComponentUpdate
      * @desc since this is an offscreen component, never update the dom
      * @returns {bool} - false
      */
@@ -40,7 +41,8 @@ var PropsToUrlWatcher = React.createClass({
     },
 
     /**
-     * @method componentWillReceiveProps
+     * @method
+     * @name PropsToUrlWatcher#componentWillReceiveProps
      * @desc When new properties are received by the component, this function will compare them to the previous
      * props, determine if anything has changed, and if so, recompute the query string and push it to the callback.
      * @param {object} nextProps - next props
@@ -104,7 +106,8 @@ var PropsToUrlWatcher = React.createClass({
 });
 
 /** @static
- * @function getNumFromQuery
+ * @memberof PropsToUrlWatcher
+ * @function PropsToUrlWatcher#getNumFromQuery
  * @param {object} location - ReactRouter's location object
  * @param {string} key - The Key we'd like to extract from the query string
  * @return {number} - the number
@@ -114,16 +117,19 @@ PropsToUrlWatcher.getNum = function (location, key) {
 };
 
 /** @static
+ * @memberof PropsToUrlWatcher
  * @function getArray
  * @param {object} location - ReactRouter's location object
  * @param {string} key - The Key we'd like to extract from the query string
  * @return {array} - the array of values
  */
 PropsToUrlWatcher.getArray = function (location, key) {
-    return location.query[key].split(",");
+    var str = location.query[key];
+    return str ? str.split(",") : [];
 };
 
 /** @static
+ * @memberof PropsToUrlWatcher
  * @function getObjFromQuery
  * @desc get all keys in the query string that belong to the same namespace
  * @param {object} location - ReactRouter's location object
@@ -144,4 +150,3 @@ PropsToUrlWatcher.getObj = function (location, prefix) {
 };
 
 module.exports = PropsToUrlWatcher;
-

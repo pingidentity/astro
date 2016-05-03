@@ -1,4 +1,5 @@
 var React = require("react"),
+    ReactDOM = require("react-dom"),
     _ = require("underscore");
 
 /**
@@ -49,3 +50,37 @@ exports.Wrapper = React.createClass({
         /* eslint-enable */
     }
 });
+
+/**
+ * @function
+ * @name unmountDetachesWindowListener
+ * @param {function} getComponentFn - A function which returns the component to test
+ * @param {string} type - The Event type that we expect to attach and detach
+ * @returns {bool} The result of the test
+ * @desc This test appears in many components so it makes sense to implement it once and reuse it.
+ */
+exports.unmountDetachesWindowListener = function (getComponentFn, type) {
+    window.addEventListener = jest.genMockFunction();
+    window.removeEventListener = jest.genMockFunction();
+
+    var component = getComponentFn();
+    var handler;
+
+    //find the event handler
+    window.addEventListener.mock.calls.some(function (args) {
+        if (args[0] === type) {
+            handler = args[1];
+            return true;
+        }
+    });
+
+    //attaches listener
+    var attached = window.addEventListener.mock.calls.length > 0;
+
+    ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
+
+    return (attached &&
+        window.removeEventListener.mock.calls.length > 0 &&
+        window.removeEventListener.mock.calls[0][0] === type &&
+        window.removeEventListener.mock.calls[0][1] === handler);
+};

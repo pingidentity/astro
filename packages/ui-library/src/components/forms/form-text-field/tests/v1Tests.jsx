@@ -1,68 +1,27 @@
 window.__DEV__ = true;
 
-jest.dontMock("../FormTextField.jsx");
-jest.dontMock("../../tooltips/HelpHint.jsx");
+jest.dontMock("./common.jsx");
+jest.dontMock("../v1.jsx");
+jest.dontMock("../index.js");
+jest.dontMock("../../FormLabel.jsx");
+jest.dontMock("../../../tooltips/HelpHint.jsx");
 
 describe("FormTextField", function () {
-
     var React = require("react"),
         ReactTestUtils = require("react-addons-test-utils"),
-        TestUtils = require("../../../testutil/TestUtils"),
-        FormTextField = require("../FormTextField.jsx");
+        TestUtils = require("../../../../testutil/TestUtils"),
+        FormTextField = require("../v1.jsx"),
+        CommonTests = require("./common.jsx"),
+        _ = require("underscore");
 
-    it("renders the component", function () {
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormTextField referenceName={'test'} />
-        );
-        // verify that the component is rendered
-        var field = TestUtils.findRenderedDOMNodeWithClass(component, "input-text");
-        expect(ReactTestUtils.isDOMComponent(field)).toBeTruthy();
-        // make sure that the field is not required by default
-        var elements = TestUtils.scryRenderedDOMNodesWithClass(component, "required");
-        expect(elements.length).toBe(0);
-    });
+    function getComponent (opts) {
+        opts = _.defaults(opts || {}, {
+        });
 
-    it("shows field as required", function () {
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormTextField referenceName={'test'} isRequired={true} />
-        );
-        // verify that the component is rendered
-        var field = TestUtils.findRenderedDOMNodeWithClass(component, "required");
-        expect(ReactTestUtils.isDOMComponent(field)).toBeTruthy();
-    });
+        return ReactTestUtils.renderIntoDocument(<FormTextField {...opts} />);
+    }
 
-    it("shows the default value", function () {
-        var defaultValue = "my random value";
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormTextField referenceName={'test'} defaultValue={defaultValue} />
-        );
-        // verify that the component is rendered
-        var field = TestUtils.findRenderedDOMNodeWithTag(component, "input");
-        expect(field.value).toEqual(defaultValue);
-    });
-
-    it("shows placeholder", function () {
-        var defaultValue = "my random value";
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormTextField referenceName={'test'} defaultValue={defaultValue} placeholder="edit me"/>
-        );
-        // verify that the component is rendered
-        var field = TestUtils.findRenderedDOMNodeWithTag(component, "input");
-        expect(field.getAttribute("placeholder")).toEqual("edit me");
-    });
-
-    it("respects value over defaultValue and state precedence", function () {
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormTextField referenceName={'test'} defaultValue={'my random value'} value={'my value'}/>
-        );
-
-        // verify that the component is rendered
-        var field = TestUtils.findRenderedDOMNodeWithTag(component, "input");
-        expect(field.value).toEqual("my value");
-
-        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } });
-        expect(field.value).toEqual("my value");
-    });
+    CommonTests(getComponent);
 
     it("fires the onValueChange callback when field changes", function () {
         var handleChange = jest.genMockFunction();
@@ -119,23 +78,12 @@ describe("FormTextField", function () {
         expect(onBlur).toBeCalled();
     });
 
-    it("fire onFocus callback when field gains focus", function () {
-        var handleFocus = jest.genMockFunction();
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormTextField referenceName={'test'} onFocus={handleFocus} />
-        );
-        var field = TestUtils.findRenderedDOMNodeWithTag(component, "input");
-        ReactTestUtils.Simulate.focus(field);
-        expect(handleFocus.mock.calls.length).toBe(1);
-    });
-
     it("fire onKeyPress when key is pressed", function () {
         var handleKeyPress = jest.genMockFunction();
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormTextField
-                    referenceName={'test'}
-                    onKeyPress={handleKeyPress} />
-        );
+        var component = getComponent({
+            onKeyPress: handleKeyPress
+        });
+
         var field = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         ReactTestUtils.Simulate.keyPress(field, { key: "Enter", keyCode: 13, which: 13 });
         expect(handleKeyPress.mock.calls.length).toBe(1);
@@ -146,14 +94,14 @@ describe("FormTextField", function () {
     it("does not show the undo button if the originalValue param is not passed in", function () {
         var handleChange = jest.genMockFunction();
         var originalValue = "my original value";
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormTextField
-                referenceName={'test'}
-                defaultValue={originalValue}
-                onValueChange={handleChange} />
-        );
+        var component = getComponent({
+            defaultValue: originalValue,
+            onValueChange: handleChange
+        });
+
         var field = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
+
         var undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
         expect(ReactTestUtils.isDOMComponent(undo)).toBeFalsy();
     });
@@ -222,17 +170,6 @@ describe("FormTextField", function () {
 
     });
 
-    it("shows the error message when it is specified", function () {
-        var errorMessage = "help!";
-
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormTextField errorMessage={errorMessage} />
-        );
-
-        var errorDiv = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text");
-        expect(errorDiv.textContent).toBe(errorMessage);
-    });
-
     it("renders custom className", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormTextField className="extra" />
@@ -243,61 +180,15 @@ describe("FormTextField", function () {
         expect(test.getAttribute("class")).toContain("extra");
     });
 
-    it("renders custom error message", function () {
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormTextField className="extra" errorMessage="Upps, something wrong."/>
-        );
-
-        var input = TestUtils.findRenderedDOMNodeWithDataId(component, "formTextField");
-
-        ReactTestUtils.Simulate.change(input, {
-            target: {
-                value: "abc"
-            }
-        });
-
-        var errorLabel = TestUtils.findRenderedDOMNodeWithDataId(component, "formTextField_errormessage");
-
-        expect(errorLabel.textContent).toEqual("Upps, something wrong.");
-    });
-
-    it("triggers onChange callback when input updated", function () {
-
-        var callback = jest.genMockFunction();
-
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormTextField className="extra" onChange={callback} />
-        );
-
-        var input = TestUtils.findRenderedDOMNodeWithDataId(component, "formTextField");
-
-        ReactTestUtils.Simulate.change(input, {
-            target: {
-                value: "abc"
-            }
-        });
-
-        expect(callback).toBeCalled();
-    });
-
-    it("renders help tooltip", function () {
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormTextField lableHelpText="some tooltip content" />
-        );
-
-        //make sure help hint exists
-        TestUtils.findRenderedDOMNodeWithDataId(component, "formTextField_helptooltip");
-    });
-
     it("renders save control", function () {
-
         var callback = jest.genMockFunction();
+        var component = getComponent({
+            referenceName: "formTextinput",
+            save: callback,
+            originalValue: "value"
+        });
 
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormTextField save={callback} originalValue="value"/>
-        );
-
-        var input = TestUtils.findRenderedDOMNodeWithDataId(component, "formTextField");
+        var input = TestUtils.findRenderedDOMNodeWithDataId(component, "formTextinput");
 
         ReactTestUtils.Simulate.change(input, {
             target: {

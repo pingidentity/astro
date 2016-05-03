@@ -4,7 +4,9 @@
  */
 
 
-/** @function forwardTargetChecked
+/**
+ * @function
+ * @name forwardTargetChecked
  * @desc Wapper which will extract the checked attribute of the target and pass that to the wrapped callback.  This
  * helps in bridging the gap between what a callback expects and low level components which pass events.
  * @param {function} callback - The callback to execute
@@ -16,7 +18,9 @@ exports.forwardTargetChecked = function (callback) {
     };
 };
 
-/** @function forwardTargetValue
+/**
+ * @function
+ * @name forwardTargetValue
  * @desc Wrapper which will extract the value of the target and pass that to the wrapped callback.  This
  * helps in bridging the gap between what a callback expects and low level components which pass events.
  * @param {function} callback - The callback to execute
@@ -28,7 +32,9 @@ exports.forwardTargetValue = function (callback) {
     };
 };
 
-/** @function forwardTargetValueAsInt
+/**
+ * @function
+ * @name forwardTargetValueAsInt
  * @desc Wrapper which will extract the value of the target, coerce it to an int, and pass that to the wrapped callback.  This
  * helps in bridging the gap between what a callback expects and low level components which pass events.
  * @param {function} callback - The callback to execute
@@ -40,7 +46,9 @@ exports.forwardTargetValueAsInt = function (callback) {
     };
 };
 
-/** @function eventOutsideOfContainer
+/**
+ * @function
+ * @name eventOutsideOfContainer
  * @desc Function which will execute the callback only if the passed event is outside of the specified container.  This is
  * useful when we want to hide a container when the user clicks outside of it (such a popover).
  * @param {object} container - The DOM container node
@@ -66,4 +74,25 @@ exports.callIfOutsideOfContainer = function (container, callback, e) {
 
     //if the item that was clicked is detached from the dom, then it's unknown if it's was outside, so do nothing
     return false;
+};
+
+/**
+ * @function
+ * @name handleKeydowns
+ * @param {object} map - An object mapping keyCodes to callbacks
+ * @param {bool} killEvent - Kill the event after executing the callback
+ * @desc Use this to function to create a keydown handler which handles keyCodes specified by the hashmap
+ * @returns {function} - The wrapper function
+ */
+exports.handleKeydowns = function (map, killEvent) {
+    return function (e) {
+        if (e.keyCode in map) {
+            map[e.keyCode]();
+
+            if (killEvent) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }
+    };
 };

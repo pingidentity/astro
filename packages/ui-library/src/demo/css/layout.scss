@@ -13,7 +13,7 @@ $layout-zindex-order: (
 $sidenav-width: 250px;
 $sidenav-lineheight: 22px;
 
-#library-header {
+#header {
 	z-index: index($layout-zindex-order, 'header');
 	position: fixed;
 	overflow: visible;
@@ -24,135 +24,65 @@ $sidenav-lineheight: 22px;
 	background-color: $color-slate;
 
 	.logo {
-		background: transparent url(../images/icon-logo.png) no-repeat 0 0;
-        background-size: contain;
 		height: 54px;
 		width: 54px;
-		margin: 0 0 0 22px;
 	}
+
 	.title {
 		position: absolute;
 		bottom: 8px;
-		left: 89px;
+		left: 100px;
 		font-size: 28px;
 		line-height: 1em;
-		font-weight: 400;
 		letter-spacing: -2px;
 		color: $color-white;
 	}
 }
 
-#library-nav {
-	$nav-border-width: 1px;
-	$selected-border-width: 1px;
-
-	z-index: index($layout-zindex-order, 'nav');
-	position: absolute;
-	top: $layout-header-height;
-	bottom: 0;
-	left: 0;
+#nav, #nav .nav-menus, #nav ul.menu, #nav:before, #nav .selected-item {
 	width: $sidenav-width;
-	overflow-y: auto;
-	overflow-x: hidden;
+}
 
-	&:before {
-		z-index: -1;
-		content: '';
-		position: fixed;
-		background-color: $color-cinder-block;
-		top: $layout-header-height;
-		bottom: 0;
-		left: 0;
-		width: $sidenav-width;
-	}
-	.title {
-		margin: 20px 0 10px 22px;
-		text-transform: uppercase;
-		color: $color-elephant;
-		font-size: 16px;
-		&.narrow {
-			margin-top: 5px;
-		}
-	}
-	ul.menu {
-		font-size: 16px;
+.doc{
+    width: 100%;
+    height: 20px;
+    position: inherit;
+		@include transition(all 0.3s);
 
-		li {
-			position: relative;
-			border-left: 6px solid transparent;
-			@include transition(all 0.2s);
+    h2 {
+        float: left;
+    }
 
-			a {
-				position: relative;
-				display: block;
-				padding: 0 0 0 10px;
-				line-height: $layout-nav-link-height;
-				color: $color-slate;
-				background-color: transparent;
+    &.open {
+        height: 1000px;
+        overflow: hidden;
 
-				span {
-					display: inline-block;
-					margin: 0 10px;
-				}
-				&:hover {
-					text-decoration: none;
-				}
-			}
-			&:hover {
-				background-color: rgba(#fff, 0.5);
-				text-decoration: none;
-			}
-			&.selected {
-				border-left-color: $color-active-blue;
-				font-family: 'ProximaNovaRegular';
-
-
-				a {
-					color: $color-slate;
-					background-color: $color-white;
-					cursor: default;
-
-					&:before, &:after {
-						content: '';
-						display: block;
-						position: absolute;
-					}
-					&:before {
-						width:4px;
-						background-color: $color-white;
-						top: 0;
-						bottom: 0;
-						right: -(1px + $selected-border-width);
-						@include border-radius(1px);
-					}
-				}
-			}
-            ul.sub-menu {
-				margin: 0 0 7px 0;
-                li {
-					&:hover {
-						background: none;
-					}
-					&:before {
-						content: "";
-						position: absolute;
-						border: 1px solid #33312D;
-						top: 8px;
-						left: 3px;
-					}
-                    a {
-                        line-height: 16px;
-                    }
-                }
+        .toggle {
+            &:before {
+                content: '- close documentation'
             }
-		}
-        &:first-child {
-			margin-top: 30px;
-		}
-		&.last {
-			padding-bottom: 30px;
-		}
-	}
+        }
+
+        iframe {
+            height: 100%;
+        }
+    }
+
+    .toggle {
+        height: 20px;
+        cursor:pointer;
+        float: right;
+
+        &:before {
+			    color: $color-active;
+          content: '+ expand documentation'
+        }
+    }
+
+    iframe {
+        width: 100%;
+        height: 0;
+    }
 }
 
 #library-content {

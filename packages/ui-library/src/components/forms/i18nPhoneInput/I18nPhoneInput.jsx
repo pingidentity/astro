@@ -1,11 +1,11 @@
 "use strict";
 
-var React = require("react");
-var data = require("./countryCodes");
-var TextField = require("../FormTextField.jsx");
-var Validators = require("../../../util/Validators");
-var _ = require("underscore");
-var cx = require("classnames");
+var React = require("react"),
+    data = require("./countryCodes"),
+    FormTextField = require("../form-text-field").v1,
+    Validators = require("../../../util/Validators"),
+    _ = require("underscore"),
+    classnames = require("classnames");
 
 /**
  * @callback I18nPhoneInput~onValueChange
@@ -165,7 +165,7 @@ var I18nPhoneInput = React.createClass({
 
     render: function () {
         var countries = _.map(data, function (item) {
-            var styles = cx("iti-flag", item.iso2);
+            var styles = classnames("iti-flag", item.iso2);
 
             return (
                 <li key={item.iso2} data-id={"country-" + item.iso2} className="country"
@@ -178,10 +178,10 @@ var I18nPhoneInput = React.createClass({
                 </li>
             );
         }.bind(this));
-        var container = cx("intl-tel-input", this.props.className);
+        var container = classnames("intl-tel-input", this.props.className);
         var selected = this.state.selected;
-        var selection = cx("iti-flag", selected.iso2);
-        var list = cx("country-list", {
+        var selection = classnames("iti-flag", selected.iso2);
+        var list = classnames("country-list", {
             hide: !this.state.listOpen
         });
         var title = selected.name + " +" + selected.dialCode;
@@ -196,8 +196,7 @@ var I18nPhoneInput = React.createClass({
                     </div>
                     <ul data-id="country-list" className={list}>{countries}</ul>
                 </div>
-                <TextField
-                    type="tel"
+                <FormTextField
                     onChange={this._onChange}
                     value={this.state.phoneNumber}
                     className="form-control"

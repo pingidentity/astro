@@ -1,6 +1,6 @@
 var React = require("react"),
     css = require("classnames"),
-    FormTextField = require("./FormTextField.jsx"),
+    FormTextField = require("./form-text-field").v1,
     Toggle = require("./Toggle.jsx"),
     If = require("../general/If.jsx"),
     _ = require("underscore");

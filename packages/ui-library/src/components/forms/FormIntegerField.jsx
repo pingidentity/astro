@@ -2,7 +2,7 @@
 
 var React = require("react"),
     FormFieldConstants = require("../../constants/FormFieldConstants"),
-    FormTextField = require("./FormTextField.jsx"),
+    FormTextField = require("./form-text-field").v1,
     classnames = require("classnames");
 
 /**
@@ -73,21 +73,20 @@ var React = require("react"),
  */
 
 
-var FormIntegerField=React.createClass({
+var FormIntegerField = React.createClass({
 
     propTypes: {
         // prop validations
-        autoFocus: React.PropTypes.bool,
         className: React.PropTypes.string,
         defaultValue: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
         disabled: React.PropTypes.bool,
         errorMessage: React.PropTypes.string,
+        labelHelpText: React.PropTypes.string,
         errorCss: React.PropTypes.string,
         enforceRange: React.PropTypes.bool,
         increment: React.PropTypes.number,
         inputCss: React.PropTypes.string,
         isRequired: React.PropTypes.bool,
-        labelHelpText: React.PropTypes.string,
         labelText: React.PropTypes.string,
         maskValue: React.PropTypes.bool,
         maxLength: React.PropTypes.number,
@@ -105,7 +104,8 @@ var FormIntegerField=React.createClass({
         useAutocomplete: React.PropTypes.bool,
         validator: React.PropTypes.func,
         validatorTrigger: React.PropTypes.string,
-        value: React.PropTypes.number
+        value: React.PropTypes.number,
+        autoFocus: React.PropTypes.bool
     },
 
     /**
@@ -116,19 +116,15 @@ var FormIntegerField=React.createClass({
      */
     _handleChange: function (e) {
         // pass the event to the parent so it can perform whatever operations it needs
-
+        //check Integer and Range
         var input = e.target.value;
-
-        // check Integer and Range
         if (!this._isValid(input)) {
             return;
         }
         input = parseInt(input);
-
-        // remove leading 0s
+        //remove leading 0s
         var value = isNaN(input) ? "" : input ;
-
-        // pass value and event to parent
+        //pass value and event to parent
         this.props.onChange(value, e);
     },
 
@@ -152,11 +148,11 @@ var FormIntegerField=React.createClass({
         if (isNaN(value) || value.toString().indexOf(".") !== -1) {
             return false;
         }
-        // check max range if enforceRange is true
+        //check max range if enforceRange is true
         if (this.props.enforceRange && value > this.props.max) {
             return false;
         }
-        // check int
+        //check int
         return value % 1 === 0;
     },
 
@@ -205,8 +201,8 @@ var FormIntegerField=React.createClass({
         e.stopPropagation();
 
         var inc = (key === 38) ? this.props.increment : - this.props.increment;
+        //preform addition or subraction
 
-        // preform addition or subraction
         this._counter(e, inc);
     },
 
@@ -232,7 +228,7 @@ var FormIntegerField=React.createClass({
         var inputValue = this.props.value,
             newValue = isNaN(parseInt(inputValue)) ? this.props.min : parseInt(inputValue) + inc,
             value;
-        // Always enforce range for spinner buttons and up and down keys
+        //Always enforce range for spinner buttons and up and down keys
         if (newValue < this.props.min) {
             value = this.props.min;
         }

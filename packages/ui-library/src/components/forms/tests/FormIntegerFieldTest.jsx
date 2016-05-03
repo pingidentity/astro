@@ -1,7 +1,8 @@
 window.__DEV__ = true;
 
 jest.dontMock("../FormIntegerField.jsx");
-jest.dontMock("../FormTextField.jsx");
+jest.dontMock("../form-text-field/index.js");
+jest.dontMock("../form-text-field/v1.jsx");
 jest.dontMock("../../tooltips/HelpHint.jsx");
 
 describe("FormIntegerField", function () {

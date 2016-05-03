@@ -17,9 +17,9 @@ var React = require("react"),
  * @class ExpandableRow
  * @desc Basic expandable row component.
  *
- * @param {object} [title] - a JSX object that serves as the title shown on the row.
+ * @param {object} [title] - a string or JSX object that serves as the title shown on the row.
  * @param {string} [titleStyle] - extra css styling for label
- * @param {object} [subtitle] - a JSX object that goes right below the title, and serves as a subtitle.
+ * @param {object} [subtitle] - a string or JSX object that goes right below the title, and serves as a subtitle.
  * @param {object} [content] - a JSX object that represents the content to be shown when expanding the row.
  * @param {bool} [isEditEnabled=true] - whether or not the 'edit' button is enabled. Default is true.
  * @param {string} [editViewRoute] - route to the 'edit mode' view. Default is ''.
@@ -83,11 +83,13 @@ module.exports = React.createClass({
 
     render: function () {
         return (
-            this.props.controlled ? <Stateless {...this.props} /> : <Stateful {...this.props} />);
+            this.props.controlled
+                ? <StatelessExpandableRow {...this.props} />
+                : <StatefulExpandableRow {...this.props} />);
     }
 });
 
-var Stateful = React.createClass({
+var StatefulExpandableRow = React.createClass({
 
     propTypes: {
         defaultToExpanded: React.PropTypes.bool
@@ -116,12 +118,12 @@ var Stateful = React.createClass({
     },
 
     render: function () {
-        return <Stateless {...this.props} expanded={this.state.expanded} onToggle={this._onToggle}/>;
+        return <StatelessExpandableRow {...this.props} expanded={this.state.expanded} onToggle={this._onToggle}/>;
     }
 });
 
 
-var Stateless = React.createClass({
+var StatelessExpandableRow = React.createClass({
 
     propTypes: {
         className: React.PropTypes.string,
@@ -131,16 +133,25 @@ var Stateless = React.createClass({
         editButton: React.PropTypes.object,
         editViewRoute: React.PropTypes.string,
         expanded: React.PropTypes.bool,
-        id: React.PropTypes.string,
+        id: React.PropTypes.oneOfType([
+            React.PropTypes.number,
+            React.PropTypes.string
+        ]),
         isEditEnabled: React.PropTypes.bool,
         onDelete: React.PropTypes.func,
         onToggle: React.PropTypes.func,
         rowAccessories: React.PropTypes.object,
         showDelete: React.PropTypes.bool,
         showEdit: React.PropTypes.bool,
-        title: React.PropTypes.object,
+        title: React.PropTypes.oneOfType([
+            React.PropTypes.object,
+            React.PropTypes.string
+        ]),
         titleStyle: React.PropTypes.string,
-        subtitle: React.PropTypes.object,
+        subtitle: React.PropTypes.oneOfType([
+            React.PropTypes.object,
+            React.PropTypes.string
+        ]),
         waiting: React.PropTypes.bool,
     },
 

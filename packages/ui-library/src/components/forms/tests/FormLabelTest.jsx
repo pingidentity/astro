@@ -9,7 +9,13 @@ describe("FormLabel", function () {
         ReactTestUtils = require("react-addons-test-utils"),
         FormLabel = require("../FormLabel.jsx");
 
-    beforeEach(function () {
+    it("renders if it has children", function () {
+        var label = ReactTestUtils.renderIntoDocument(
+            <FormLabel><div>some text</div></FormLabel>);
+        var node = ReactDOM.findDOMNode(label);
+
+        expect(node).not.toBe(null);
+        expect(node.innerHTML).toContain("some text");
     });
 
     it("doesnt render anything when nothing is passed", function () {
@@ -38,7 +44,7 @@ describe("FormLabel", function () {
 
     it("renders classname and id", function () {
         var label = ReactTestUtils.renderIntoDocument(
-            <FormLabel value="hello" hint="my hint" id="my-id" className="my-label" />);
+            <FormLabel value="hello" hint="my hint" data-id="my-id" className="my-label" />);
         var node = ReactDOM.findDOMNode(label);
 
         expect(node.getAttribute("data-id")).toBe("my-id");

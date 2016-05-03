@@ -423,13 +423,17 @@ label {
 		}
 	}
 	a {
+    &.password-show-button {
+      display: inline-block;
+      margin-left: -32px;
+    }
 		&.input-toggle {
 			display: block;
 		}
 		&.undo {
 			position: absolute;
-			top: 13px;
-			right: 13px;
+			top: 12px;
+			right: 11px;
 			font-size: 0;
 			color: transparent;
 			width: 14px;
@@ -1165,7 +1169,7 @@ input[type=file] {
 .input-integer, .form-integer-container{
     position: relative;
 
-    &:after, a.undo {
+    &:after, a.undo{
         right: 40px;
     }
     .input-container{
@@ -1176,10 +1180,10 @@ input[type=file] {
 	.input-text {
 		margin: 0;
 	}
-    .integer-controls {
+    .up-down-spinner{
         position: absolute;
-		right: 13px;
-		bottom: 8px;
+		right: 10px;
+		bottom: 2px;
         font-family: $icon-font;
         cursor: pointer;
         vertical-align: baseline;
@@ -1187,35 +1191,17 @@ input[type=file] {
         display: inline-block;
 
         button{
-			$height: 10px;
-
-            height: $height;
-			width: 12px;
-            padding: 0;
-			margin: 0;
-            display: block;
-			text-align: center;
+            height: 18px;
+            padding: 0px;
+            display: inline-block;
             text-decoration: none;
-            color: $color-slate;
+            font-color: inherit;
             border: none;
             background-color: transparent;
-			line-height: $height;
-
-			&:before {
-				content: "Y";
-				font-family: $icon-font;
-				font-size: 7px;
-				line-height: $height;
-				height: $height;
-			}
-			&.integer-up {
-				margin: 0 0 3px 0;
-				@include rotate(180deg);
-			}
         }
     }
     [disabled], [readonly] {
-        .integer-controls {
+        .up-down-spinner, .up-down-spinner{
             pointer-events: none;
         }
     }
@@ -1442,10 +1428,10 @@ input[type=file] {
 
 	.options {
 		width: 99%;
-		height: 133px;
 		max-height: 133px;
-		overflow-y: scroll;
+		overflow-y: auto;
 		padding-left: 10px;
+
 		label {
 			width: 230px;
 			margin-bottom: 10px;
