@@ -2,6 +2,7 @@ var React = require("react"),
     ReactDOM = require("react-dom"),
     classnames = require("classnames"),
     Copyright = require("./Copyright.jsx"),
+    ReduxUtils = require("../../../util/ReduxUtils.js"),
     _ = require("underscore");
 
 /**
@@ -22,6 +23,8 @@ var LeftNavBar = React.createClass({
         onItemClick: React.PropTypes.func,
         openNode: React.PropTypes.string
     },
+
+    renderProps: ["tree", "selectedNode", "openNode"],
 
     _handleSectionClick: function (id) {
         this.props.onSectionClick(id);
@@ -82,6 +85,20 @@ var LeftNavBar = React.createClass({
         return {
             selectorStyle: { top: 0, height: 0 }
         };
+    },
+
+    /**
+     * @method
+     * @name LeftNavBar#shouldComponentUpdate
+     * @param {object} nextProps - next props
+     * @param {object} nextState - next state
+     * @returns {bool} whether the component needs to re-render
+     * @desc Becaue Redux applications cause changes to the store which then trickle down, every state change re-renders the
+     * entire application.  As such, implementing shouldComponentUpdate prevents potential performance issues.
+     */
+    shouldComponentUpdate: function (nextProps, nextState) {
+        return !!(ReduxUtils.diffProps(this.props, nextProps, this.renderProps) ||
+            ReduxUtils.diffProps(this.state, nextState, ["selectorStyle"]));
     },
 
     /**

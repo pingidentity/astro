@@ -7,12 +7,7 @@ var Actions = require("./Actions.js"),
     _ = require("underscore");
 
 var initialState = {
-    rows: [
-        { id: 1, title: "1", subtitle: "subtitle 1" },
-        { id: 2, title: "2", subtitle: "subtitle 2" },
-        { id: 3, title: "3", subtitle: "subtitle 3" },
-        { id: 4, title: "4", subtitle: "subtitle 4" }
-    ],
+    rows: [],
     hasNext: false,
     hasPrev: false,
     pendingNext: false,
@@ -40,13 +35,25 @@ var batchSelector = createSelector(
               (!filters.odd || row.id % 2 === 1);
         });
 
-        return [{ id: 1, data: rows }];
+        //generate a few batches of data so that the InfiniteScroller can be seen in action paging in/out
+        //batches
+        var batches = [];
+
+        for (var i = 0; i < rows.length; i += 20) {
+            batches.push({ id: parseInt(i / 20), data: rows.slice(i, i + 20) });
+        }
+
+        return batches;
     });
 
 /*
  * Since our data is hardcoded, we need to apply the selector once here.  Normally we would apply it when
  * the request returned from the server with the rows.
  */
+for (var i = 1; i < 51; i += 1) {
+    initialState.rows.push({ id: i, title: i.toString(), subtitle: "subtitle for row " + i });
+}
+
 initialState.batches = batchSelector(initialState);
 
 /*

@@ -23,3 +23,4 @@ exports.setFilter = function (name, value) {
 
 exports.setActiveTab = exports.set.bind(null, "activeTab");
 exports.setExpandedSearch = exports.set.bind(null, "advancedSearch");
+exports.setPosition = exports.set.bind(null, "position");

@@ -25,8 +25,7 @@ require("./css/ui-library-demo.scss");
 var DemoApp = React.createClass({
     /**
      * @method
-     * @name _getDocumentationUrl
-     * @memberOf DemoApp
+     * @name DemoApp#_getDocumentationUrl
      * @param {object} name - The demo descriptor
      * @private
      * @desc Compute the path to the demo item's jsdoc
@@ -46,8 +45,7 @@ var DemoApp = React.createClass({
 
     /**
      * @method
-     * @name componentWillMount
-     * @memberOf DemoApp
+     * @name DemoApp#componentWillMount
      * @desc Initialize the app
      */
     componentWillMount: function () {
@@ -56,6 +54,7 @@ var DemoApp = React.createClass({
         this.routerActions = Redux.bindActionCreators(ReactRouterRedux.routerActions, this.props.dispatch);
         this.navActions = Redux.bindActionCreators(LeftNavBar.Actions, this.props.dispatch);
         this.headerActions = Redux.bindActionCreators(HeaderBar.Actions, this.props.dispatch);
+        this._demoItem = {};
 
         //set up member variables
         this._demoIndexById = {};
@@ -93,8 +92,7 @@ var DemoApp = React.createClass({
 
     /**
      * @method
-     * @name componentWillUnmount
-     * @memberOf DemoApp
+     * @name DemoApp#componentWillUnmount
      * @desc Remove event listeners, references to DOM nodes and cleanup.
      *
      */
@@ -104,8 +102,7 @@ var DemoApp = React.createClass({
 
     /**
      * @method
-     * @name componentDidMount
-     * @memberOf DemoApp
+     * @name DemoApp#componentDidMount
      * @desc Some initialization cannot take place until the app has mounted and rendered.  That code will be
      * put here.  For instance, loading the query string.
      */
@@ -121,35 +118,90 @@ var DemoApp = React.createClass({
 
     /**
      * @method
-     * @name componentWillReceiveProps
-     * @memberOf DemoApp
+     * @name DemoApp#componentWillReceiveProps
      * @param {object} newProps - Next props
      * @desc If the app receives a new selectedNode then fetch the markup for the displayed demo
      */
     componentWillReceiveProps: function (newProps) {
         if (newProps.nav.selectedNode !== this.props.nav.selectedNode) {
             var id = newProps.nav.selectedNode;
-            var demoItem = this._demoIndexById[id];
 
             //fetch the demo jsx
-            this.appActions.fetchCode(id, demoItem.pathToCode);
             this._demoActions = null;
+            this._demoItem = this._demoIndexById[id];
+            this._demoWatchProps = this._demoItem && this._demoItem.demo.WatchProps;
+            this.appActions.fetchCode(id, this._demoItem.pathToCode);
 
             //If the demo exposes Actions/Reducer, tie the Reducer into the application store and bind the Actions
             //so they can be injected into the active demo.
-            if (demoItem.demo.Reducer && demoItem.demo.Actions) {
+            if (this._demoItem.demo.Reducer && this._demoItem.demo.Actions) {
                 store.replaceReducer(Redux.combineReducers(
-                    _.extend({}, store.baseReducers, _.object([demoItem.id], [demoItem.demo.Reducer]))));
+                    _.extend({}, store.baseReducers, _.object([this._demoItem.id], [this._demoItem.demo.Reducer]))));
 
-                this._demoActions = Redux.bindActionCreators(demoItem.demo.Actions, this.props.dispatch);
+                this._demoActions = Redux.bindActionCreators(this._demoItem.demo.Actions, this.props.dispatch);
+
+                if (!this.props.all[id] && this._demoWatchProps) {
+                    this._injectInitialPropsFromUrl(this._demoWatchProps, this._demoActions);
+                }
             }
         }
     },
 
+    /**
+     * @method
+     * @name DemoApp#_injectInitialPropsFromUrl
+     * @private
+     * @param {object} watchedProps - The watched props for the current DemoItem
+     * @param {object} actions - Bound actions for the current DemoItem
+     * @desc When the page first loads, it will read the query string from the url and if the current demo item
+     * exposes WatchedProps, it will inject these same props if they're in the list of WatchedProps.
+     */
+    _injectInitialPropsFromUrl: function (watchedProps, actions) {
+        for (var key in this.props.location.query) {
+            var parts = key.split(".");
+            var subkey;
+
+            //The key in the url might be more specific than the watched prop.  For instance, the watched prop might
+            //be an object.  This will get written to the url as path.to.prop=val.  We need to reconstruct this when
+            //parsing.
+            for (var i = 0; i < parts.length; i += 1) {
+                subkey = parts.slice(0, i + 1).join(".");
+
+                if (watchedProps.indexOf(subkey)) {
+                    var val = this.props.location.query[key];
+
+                    if (!_.isNaN(parseFloat(val))) { val = parseFloat(val); }
+                    if (val === "true") { val = true; }
+
+                    actions.set(key, val);
+
+                    break;
+                }
+            }
+        }
+    },
+
+    /**
+     * @method
+     * @name DemoApp#DemoApp#_watchedProps
+     * @private
+     * @returns {object} Picks the parts of the store that we want the PropsToUrlWatcher to receive
+     * @desc To allow DemoItems to demonstrate use of the PropsToUrlWatcher, extract the props specified in the
+     * DemoItem and append them to the properties to watch and sync in the hash query string.
+     */
+    _watchedProps: function () {
+        var props = _.pick(this.props.nav, "openNode", "selectedNode");
+
+        if (this.props.nav.selectedNode && this._demoWatchProps) {
+            _.extend(props, _.pick(this.props.all[this.props.nav.selectedNode], this._demoWatchProps));
+        }
+
+        return props;
+    },
+
     render: function () {
         var id = this.props.nav.selectedNode;
-        var demo = this._demoIndexById[id] || {};
-        var name = demo.pathToCode && demo.pathToCode.match(/(\w*).jsx/)[1];
+        var name = this._demoItem && this._demoItem.pathToCode && this._demoItem.pathToCode.match(/(\w*).jsx/)[1];
 
         return (
             <div className="components-container">
@@ -180,8 +232,8 @@ var DemoApp = React.createClass({
                 }
                 <div id="library-content">
                     <div className="components">
-                        <DemoItem label={demo.label}
-                            type={demo.demo}
+                        <DemoItem label={this._demoItem.label}
+                            type={this._demoItem && this._demoItem.demo}
                             jsdocUrl={this._getDocumentationUrl(name)}
                             code={this.props.code[id]}
                             demoActions={this._demoActions}
@@ -197,7 +249,7 @@ var DemoApp = React.createClass({
                 <PropsToUrlWatcher ignoreFalse={true}
                     location={this.props.location}
                     onReplaceUrl={this.routerActions.replace}
-                    watch={this.props.watchedProps} />
+                    watch={this._watchedProps()} />
             </div>);
     }
 });
@@ -208,10 +260,6 @@ DemoApp = ReactRedux.connect(function (state) {
         code: state.app.code,
         nav: state.nav,
         header: state.header,
-        watchedProps: {
-            openNode: state.nav.openNode,
-            selectedNode: state.nav.selectedNode
-        },
         all: state
     };
 })(DemoApp);

@@ -280,7 +280,14 @@ var InfiniteScroll = React.createClass({
         }
         //after the first render with data, jump to the offset specified in the props
         if (!this.inited && this.props.batches.length > 0 && this.props.initialItem) {
-            this.inited = this.jumpToItem(this.props.initialItem.batchIndex, this.props.initialItem.itemIndex);
+            var batchIndex = this.props.initialItem.batchIndex;
+
+            if (typeof(this.props.initialItem.batchId) !== "undefined") {
+                batchIndex = _.findIndex(this.props.batches, { id: this.props.initialItem.batchId });
+            }
+            if (batchIndex !== -1) {
+                this.inited = this.jumpToItem(batchIndex, this.props.initialItem.itemIndex);
+            }
         }
 
         this.batchRange = newRange;

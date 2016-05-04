@@ -1,11 +1,13 @@
 var React = require("react"),
     ReactDOM = require("react-dom"),
     EventUtils = require("../../../util/EventUtils.js"),
+    ReduxUtils = require("../../../util/ReduxUtils.js"),
     _ = require("underscore");
 
 /** @class HeaderBar
  * @desc HeaderBar provides what you need to show a styled top bar with logos, links, and a menu.
  *
+ * @param {object[]} tree - The data structure of the menus of the headerbar
  * @param {string} [data-id] - used as data-id on top HTML element.
  * @param {string} [logo] - leftmost generic company logo or branded logo
  * @param {string} [siteLogo] - site or service specific logo
@@ -13,14 +15,17 @@ var React = require("react"),
  * of the nav item will be passed back as the first parameter
  * @param {function} [onMenuClick] - Callback which will be executed when a menu item is clicked.  The id
  * of the nav item and the id of the menu item will be passed back as parameters 1 and 2.
- * @param {
+ * @param {string} [openNode] - The id of the currently open node
  **/
 module.exports = React.createClass({
     propTypes: {
         "data-id": React.PropTypes.string,
         logo: React.PropTypes.string,
-        siteLogo: React.PropTypes.string
+        siteLogo: React.PropTypes.string,
+        tree: React.PropTypes.arrayOf(React.PropTypes.object)
     },
+
+    renderProps: ["data-id", "logo", "siteLogo", "tree", "openNode", "label"],
 
     getDefaultProps: function () {
         return {
@@ -34,8 +39,20 @@ module.exports = React.createClass({
 
     /**
      * @method
-     * @name componentDidMount
-     * @memberOf HeaderBar
+     * @name HeaderBar#shouldComponentUpdate
+     * @param {object} nextProps - next props
+     * @param {object} nextState - next state
+     * @returns {bool} whether the component needs to re-render
+     * @desc Becaue Redux applications cause changes to the store which then trickle down, every state change re-renders the
+     * entire application.  As such, implementing shouldComponentUpdate prevents potential performance issues.
+     */
+    shouldComponentUpdate: function (nextProps) {
+        return ReduxUtils.diffProps(this.props, nextProps, this.renderProps);
+    },
+
+    /**
+     * @method
+     * @name HeaderBar#componentDidMount
      * @desc Upon mounting, register a callback for global click events to be used to hide any visible menu items when
      * the user clicks outside of it
      */
@@ -45,8 +62,7 @@ module.exports = React.createClass({
 
     /**
      * @method
-     * @name componentWillUnmount
-     * @memberOf HeaderBar
+     * @name HeaderBar#componentWillUnmount
      * @desc Before unmounting, unregister the global click listener
      */
     componentWillUnmount: function () {
@@ -55,8 +71,7 @@ module.exports = React.createClass({
 
     /**
      * @method
-     * @name _handleGlobalClick
-     * @memberOf HeaderBar
+     * @name HeaderBar#_handleGlobalClick
      * @param {event} e - Event
      * @private
      * @desc The function which gets called on window clicks to determine if the menu should be hidden
@@ -76,8 +91,7 @@ module.exports = React.createClass({
 
     /**
      * @method
-     * @name _handleNavClick
-     * @memberOf HeaderBar
+     * @name HeaderBar#_handleNavClick
      * @param {event} e - Event
      * @private
      * @desc Instead of creating partials using bind, we have one function which will pass back the id of

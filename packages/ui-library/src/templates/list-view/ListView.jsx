@@ -5,6 +5,7 @@ var React = require("react"),
     InfiniteScroll = require("../../components/list/InfiniteScroll.jsx"),
     TabbedSections = require("../../components/general/TabbedSections.jsx"),
     ExpandableRow = require("../../components/rows/ExpandableRow.jsx"),
+    ReduxUtils = require("../../util/ReduxUtils.js"),
     classnames = require("classnames"),
     _ = require("underscore");
 
@@ -20,6 +21,8 @@ var React = require("react"),
  * @
  */
 module.exports = React.createClass({
+    renderProps: ["activeTab", "advancedSearch", "filters", "batches", "hasNext", "hasPrev"],
+
     componentWillMount: function () {
         this._contentType = <ExpandableRow id={0} showEdit={true} rowAccessories={<RowAccessories />} />;
     },
@@ -34,6 +37,16 @@ module.exports = React.createClass({
 
     _handleFilter: function (e) {
         this.props.actions.setFilter(e.target.getAttribute("data-id"), !!e.target.checked);
+    },
+
+    _handleScroll: function (pos) {
+        if (this.props.position.batchId !== pos.batchId || this.props.position.itemIndex !== pos.itemIndex) {
+            this.props.actions.setPosition(pos);
+        }
+    },
+
+    shouldComponentUpdate: function (newProps) {
+        return ReduxUtils.diffProps(this.props, newProps, this.renderProps);
     },
 
     render: function () {
@@ -62,8 +75,15 @@ module.exports = React.createClass({
                                 checked={this.props.filters.even} />
                         </div>
                     </div>
-                    <div className="result-set">
+                    {
+                      /*
+                       * Hardcoded height just to demonstrate the infinite scroll
+                       */
+                    }
+                    <div className="result-set" style={{ height: 500 }}>
                         <InfiniteScroll contentType={this._contentType}
+                                initialItem={this.props.position}
+                                onScroll={this._handleScroll}
                                 batches={this.props.batches}
                                 hasNext={this.props.hasNext}
                                 hasPrev={this.props.hasPrev}

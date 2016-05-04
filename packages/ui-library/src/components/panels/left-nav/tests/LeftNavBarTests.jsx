@@ -3,6 +3,7 @@ window.__DEV__ = true;
 jest.dontMock("../LeftNavBar.jsx");
 jest.dontMock("../../../../testutil/TestUtils");
 jest.dontMock("../../../../util/ReduxTestUtils");
+jest.dontMock("../../../../util/ReduxUtils");
 
 describe("LeftNavBar", function () {
     var React = require("react"),
@@ -62,6 +63,7 @@ describe("LeftNavBar", function () {
         var section2 = TestUtils.findRenderedDOMNodeWithDataId(component, "section-2-menu");
 
         wrapper.sendProps({ openNode: "section-1" });
+
         expect(section1.className).toContain("open");
         expect(section2.className).not.toContain("open");
     });

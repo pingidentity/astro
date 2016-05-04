@@ -8,9 +8,10 @@ var ListViewDemo = React.createClass({
 });
 
 /*
- * Expose the Reducer and the Actions for the Demo app to inject
+ * Expose the Reducer, Actions, and WatchedProps for the Demo app to inject
  */
 ListViewDemo.Reducer = ListView.Reducer;
 ListViewDemo.Actions = ListView.Actions;
+ListViewDemo.WatchProps = ["position", "activeTab", "filters", "advancedSearch"];
 
 module.exports = ListViewDemo;
