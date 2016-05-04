@@ -1,5 +1,5 @@
 var React = require("react");
-var FormSelectField = require("./../../../components/forms/FormSelectField.jsx");
+var FormSelectField = require("./../../../components/forms/form-text-field").v1;
 
 /**
  * A demo for FormSelectField.

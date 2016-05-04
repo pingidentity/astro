@@ -1,7 +1,7 @@
 
 var React = require("react"),
     FormTextArea = require("./../../../components/forms/FormTextArea.jsx"),
-    FormTextField = require("./../../../components/forms/FormTextField.jsx"),
+    FormTextField = require("./../../../components/forms/form-text-field"),
     FormSelectField = require("./../../../components/forms/FormSelectField.jsx"),
     FormCheckbox = require("./../../../components/forms/FormCheckbox.jsx");
 
