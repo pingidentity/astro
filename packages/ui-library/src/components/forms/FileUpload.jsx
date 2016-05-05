@@ -1,10 +1,10 @@
-var React = require("react");
-var ReactDOM = require("react-dom");
-var _ = require("underscore");
-var Utils = require("../../util/Utils");
-var css = require("classnames");
-var fixOrientation = require("fix-orientation");
-var readExif = require("exif-js");
+var React = require("react"),
+    ReactDOM = require("react-dom"),
+    Utils = require("../../util/Utils"),
+    fixOrientation = require("fix-orientation"),
+    readExif = require("exif-js"),
+    classnames = require("classnames"),
+    _ = require("underscore");
 
 var Accept = {
     IMAGE: "image/jpeg, image/jpg, image/gif, image/png",
@@ -345,15 +345,15 @@ var FileUpload = React.createClass({
     render: function () {
         var imageUpload = this.props.showThumbnail,
             fileSelected = this.state.thumbnailSrc || this.state.fileName || this.props.isFileSelected,
-            containerCss = css({
-                "input-file-upload": true,
+            containerClass = classnames("input-file-upload", {
                 "image-upload": imageUpload,
-                "file-selected": fileSelected
+                "file-selected": fileSelected,
+                disabled: this.props.disabled
             }),
-            labelCss = css({
+            labelClass = classnames({
                 "form-error": this.state.errorMessage
             }),
-            errorCss = css("form-error-message help-tooltip", {
+            errorClass = classnames("form-error-message help-tooltip", {
                 show: this.state.errorMessage
             });
 
@@ -362,8 +362,8 @@ var FileUpload = React.createClass({
         var buttonLabel = fileSelected ? buttonTextSelected : buttonText;
 
         return (
-            <div className={containerCss}>
-                <label className={labelCss}>
+            <div className={containerClass}>
+                <label className={labelClass}>
                     {imageUpload &&
                     <div>
                         {this.props.title && <div>{this.props.title}</div>}
@@ -385,7 +385,7 @@ var FileUpload = React.createClass({
                     <span className="button inline">
                         {buttonLabel}
                     </span>
-                    <div className={errorCss} data-id={this.props.referenceName + "_errormessage"}>
+                    <div className={errorClass} data-id={this.props.referenceName + "_errormessage"}>
                         <div className="tooltip-text">
                             {this.state.errorMessage}
                         </div>

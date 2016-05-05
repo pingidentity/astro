@@ -185,6 +185,12 @@ describe("FileUpload", function () {
         expect(component.props.onPreviewReady).toBeCalled();
     });
 
+    it("will add disabled css class to container", function () {
+        var component = getComponent({ disabled: true });
+
+        expect(ReactDOM.findDOMNode(component).className).toContain("disabled");
+    });
+
     it("will not respond to actions while disabled", function () {
         var component = getComponent({ disabled: true });
         var fileInput = ReactDOM.findDOMNode(component.refs.fileInput);
