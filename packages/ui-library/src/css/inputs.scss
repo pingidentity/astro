@@ -430,10 +430,22 @@ label {
 		}
 	}
 	a {
-    &.password-show-button {
-      display: inline-block;
-      margin-left: -32px;
-    }
+		&.password-show-button {
+            position: absolute;
+            right: 14px;
+
+            &:hover {
+                text-decoration: none;
+            }
+            &.icon-view {
+                top: 14px;
+                font-size: 13px;
+            }
+            &.icon-view-hidden {
+                top: 9px;
+                font-size: 24px;
+            }
+        }
 		&.input-toggle {
 			display: block;
 		}
