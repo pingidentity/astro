@@ -12,13 +12,16 @@ var React = require("react"),
 /**
  * @class ListView
  * @desc This is a template to demonstrate how to build an InfiniteScrolling list view, with search and filters.  Use
- * it as a starting poing for a page.  For the purposes of this demonstration, the view is treated like an app and
- * connected directly to the store, but under normal circumstances, the store would be connected to the app, and the app
- * would inject the appropriate branch of state into the view
- * @param {object} actions - For convenience we're passing all actions associated with this component, bound to the dispatcher
+ * it as a starting poing for a page.
+ *
  * @param {number} activeTab - The tab to show
  * @param {bool} advancedSearch - Whether to show the narrow by section
- * @
+ * @param {object} position - The position of the Infinite Scroll.  Used to determine if the IS position has changed enough
+ * to execute the onScrollPositionChange callback.
+ * @param {function} onSearchToggleAdvanced - A callback executed when the advanced search is toggled
+ * @param {function} onSearchFilterChange - A callback executed when the filter criteria is changed.  The signature is
+ * function (filterName, filterValue).
+ * @param {function} onActiveTabChange - A callback executed when the active tab is changed.
  */
 module.exports = React.createClass({
     renderProps: ["activeTab", "advancedSearch", "filters", "batches", "hasNext", "hasPrev"],
@@ -27,42 +30,42 @@ module.exports = React.createClass({
         this._contentType = <ExpandableRow id={0} showEdit={true} rowAccessories={<RowAccessories />} />;
     },
 
-    _handleToggleSearchBar: function () {
-        this.props.actions.setExpandedSearch(!this.props.advancedSearch);
-    },
-
     _handleTextFilter: function (value) {
-        this.props.actions.setFilter("text", value);
+        this.props.onSearchFilterChange("text", value);
     },
 
     _handleFilter: function (e) {
-        this.props.actions.setFilter(e.target.getAttribute("data-id"), !!e.target.checked);
+        this.props.onSearchFilterChange(e.target.getAttribute("data-id"), !!e.target.checked);
     },
 
     _handleScroll: function (pos) {
         if (this.props.position.batchId !== pos.batchId || this.props.position.itemIndex !== pos.itemIndex) {
-            this.props.actions.setPosition(pos);
+            this.props.onScrollPositionChange(pos);
         }
     },
 
+    /*
+     * Despite the fact that state is never mutated, because the ListViewDemo object expands the demoProps and
+     *
+     */
     shouldComponentUpdate: function (newProps) {
         return ReduxUtils.diffProps(this.props, newProps, this.renderProps);
     },
 
     render: function () {
         return (
-            <TabbedSections selectedIndex={this.props.activeTab} onSectionChange={this.props.actions.setActiveTab}>
+            <TabbedSections selectedIndex={this.props.activeTab} onSectionChange={this.props.onActiveTabChange}>
                 <div title="First Page">
                     <div className={classnames("search-bar", { expanded: this.props.advancedSearch })}>
                         <div>
                             <FormTextField controlled={true}
-                                onValueChange={this._handleTextFilter}
+                                onValueChange={this.props.onSearchQueryChange}
                                 value={this.props.filters.text}
                                 className="search" />
 
                             <span data-id="narrow-by"
                                 className="filter-by"
-                                onClick={this._handleToggleSearchBar}>Narrow By</span>
+                                onClick={this.props.onSearchToggleAdvanced}>Narrow By</span>
                         </div>
                         <div className="filters">
                             <FormCheckbox label="filter odd rows"

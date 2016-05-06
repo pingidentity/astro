@@ -1,7 +1,6 @@
 var React = require("react"),
     classnames = require("classnames"),
-    marked = require("marked"),
-    _ = require("underscore");
+    marked = require("marked");
 
 var DemoItem = React.createClass({
     propTypes: {
@@ -27,7 +26,6 @@ var DemoItem = React.createClass({
         }
 
         var markdown = this.props.description && marked(this.props.description);
-        var props = _.extend({ actions: this.props.demoActions }, this.props.demoProps);
 
         return (
             <div className="section">
@@ -44,7 +42,7 @@ var DemoItem = React.createClass({
                     <div className="demo-description"
                          dangerouslySetInnerHTML={{ __html: markdown }}></div>
 
-                    <div className="output clearfix">{React.createElement(this.props.type, { demoProps: props })}</div>
+                    <div className="output clearfix">{React.createElement(this.props.type, this.props)}</div>
 
                     <Code content={this.props.code} />
                 </div>
