@@ -1,11 +1,10 @@
-var React = require("react"),
+var React = require("../../util/ReactWithDefaultMethods.js"),
     Toggle = require("../../components/forms/Toggle.jsx"),
     FormTextField = require("../../components/forms/form-text-field"),
     FormCheckbox = require("../../components/forms/FormCheckbox.jsx"),
     InfiniteScroll = require("../../components/list/InfiniteScroll.jsx"),
     TabbedSections = require("../../components/general/TabbedSections.jsx"),
     ExpandableRow = require("../../components/rows/ExpandableRow.jsx"),
-    ReduxUtils = require("../../util/ReduxUtils.js"),
     classnames = require("classnames"),
     _ = require("underscore");
 
@@ -24,7 +23,18 @@ var React = require("react"),
  * @param {function} onActiveTabChange - A callback executed when the active tab is changed.
  */
 module.exports = React.createClass({
-    renderProps: ["activeTab", "advancedSearch", "filters", "batches", "hasNext", "hasPrev"],
+    /*
+     * Declare which variables affect rendering.  The shouldComponentUpdate method will be be injected by ReactDefaultMethods
+     * utility.
+     */
+    propTypes: {
+        activeTab: React.PropTypes.number.isRequired.affectsRendering,
+        advancedSearch: React.PropTypes.bool.affectsRendering,
+        filters: React.PropTypes.object.affectsRendering,
+        batches: React.PropTypes.array.affectsRendering,
+        hasNext: React.PropTypes.bool.affectsRendering,
+        hasPrev: React.PropTypes.bool.affectsRendering
+    },
 
     componentWillMount: function () {
         this._contentType = <ExpandableRow id={0} showEdit={true} rowAccessories={<RowAccessories />} />;
@@ -42,14 +52,6 @@ module.exports = React.createClass({
         if (this.props.position.batchId !== pos.batchId || this.props.position.itemIndex !== pos.itemIndex) {
             this.props.onScrollPositionChange(pos);
         }
-    },
-
-    /*
-     * Despite the fact that state is never mutated, because the ListViewDemo object expands the demoProps and
-     *
-     */
-    shouldComponentUpdate: function (newProps) {
-        return ReduxUtils.diffProps(this.props, newProps, this.renderProps);
     },
 
     render: function () {

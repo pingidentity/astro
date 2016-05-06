@@ -1,12 +1,12 @@
 window.__DEV__ = true;
 
 jest.dontMock("../LeftNavBar.jsx");
-jest.dontMock("../../../../testutil/TestUtils");
-jest.dontMock("../../../../util/ReduxTestUtils");
+jest.dontMock("../Copyright.jsx");
 jest.dontMock("../../../../util/ReduxUtils");
 
 describe("LeftNavBar", function () {
     var React = require("react"),
+        ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-addons-test-utils"),
         ReduxTestUtils = require("../../../../util/ReduxTestUtils"),
         TestUtils = require("../../../../testutil/TestUtils"),
@@ -66,5 +66,34 @@ describe("LeftNavBar", function () {
 
         expect(section1.className).toContain("open");
         expect(section2.className).not.toContain("open");
+    });
+
+    it("detaches animation listener after re-render", function () {
+        var wrapper = getWrappedComponent();
+        var component = wrapper.refs.target;
+
+        component._getItemSelector().removeEventListener = jest.genMockFunction();
+
+        component._rerender();
+
+        expect(component._getItemSelector().removeEventListener).toBeCalled();
+    });
+
+    it("unmounts", function () {
+        var wrapper = getWrappedComponent({ selectedNode: "item-1" });
+        var component = wrapper.refs.target;
+
+        component._getItemSelector().removeEventListener = jest.genMockFunction();
+
+        ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
+
+        expect(component._getItemSelector()).toBe(null);
+    });
+
+    //just here to satisfy code coverage
+    it("gets new selected item", function () {
+        var wrapper = getWrappedComponent({ openNode: "section-1", selectedNode: "item-1" });
+
+        wrapper.sendProps({ openNode: "section-2", selectedNode: "item-2" });
     });
 });

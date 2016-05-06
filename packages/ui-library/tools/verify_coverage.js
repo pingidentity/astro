@@ -9,6 +9,7 @@ var parse = require("lcov-parse");
 var _ = require("underscore");
 var chalk = require("chalk");
 var table = require("tty-table");
+var excludes = require("./exclude");
 
 var COVERAGE_PROPERTIES = {
     LINES: "lines",
@@ -145,6 +146,11 @@ var verifyFileCoverage = function (relativePath, coverage, refCoverage) {
 
     var result = lineCoverageResult && functionCoverageResult && branchCoverageResult;
 
+    //if the file is excluded from coverage, still measure it but set the result to pass
+    if (excludes.indexOf(relativePath) !== -1) {
+        result = true;
+    }
+
     return {
         result: result,
         lineCoverageResult: lineCoverageResult,
@@ -214,7 +220,7 @@ var logCoverageVerificationResult = function (comparisonResults) {
             branchCoverage: branchCoverage
         };
     });
-     
+
     var comparisonTable = table(header, rows, {
         borderStyle: 1,
         paddingBottom: 0,

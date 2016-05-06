@@ -1,7 +1,6 @@
-var React = require("react"),
+var React = require("../../../util/ReactWithDefaultMethods.js"),
     ReactDOM = require("react-dom"),
     EventUtils = require("../../../util/EventUtils.js"),
-    ReduxUtils = require("../../../util/ReduxUtils.js"),
     _ = require("underscore");
 
 /** @class HeaderBar
@@ -19,13 +18,13 @@ var React = require("react"),
  **/
 module.exports = React.createClass({
     propTypes: {
-        "data-id": React.PropTypes.string,
-        logo: React.PropTypes.string,
-        siteLogo: React.PropTypes.string,
-        tree: React.PropTypes.arrayOf(React.PropTypes.object)
+        "data-id": React.PropTypes.string.affectsRendering,
+        logo: React.PropTypes.string.affectsRendering,
+        siteLogo: React.PropTypes.string.affectsRendering,
+        tree: React.PropTypes.arrayOf(React.PropTypes.object).affectsRendering,
+        openNode: React.PropTypes.string.affectsRendering,
+        label: React.PropTypes.string.affectsRendering
     },
-
-    renderProps: ["data-id", "logo", "siteLogo", "tree", "openNode", "label"],
 
     getDefaultProps: function () {
         return {
@@ -35,19 +34,6 @@ module.exports = React.createClass({
             onMenuClick: _.noop,
             "data-id": "header-bar"
         };
-    },
-
-    /**
-     * @method
-     * @name HeaderBar#shouldComponentUpdate
-     * @param {object} nextProps - next props
-     * @param {object} nextState - next state
-     * @returns {bool} whether the component needs to re-render
-     * @desc Becaue Redux applications cause changes to the store which then trickle down, every state change re-renders the
-     * entire application.  As such, implementing shouldComponentUpdate prevents potential performance issues.
-     */
-    shouldComponentUpdate: function (nextProps) {
-        return ReduxUtils.diffProps(this.props, nextProps, this.renderProps);
     },
 
     /**

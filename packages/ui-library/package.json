@@ -88,7 +88,8 @@
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules",
       "<rootDir>/src/testutil/TestUtils.js",
-      "<rootDir>/src/util/ReduxTestUtils.js"
+      "<rootDir>/src/util/ReduxTestUtils.js",
+      "<rootDir>/src/util/ReactWithDefaultMethods.js"
     ],
     "testDirectoryName": "tests",
     "testFileExtensions": [

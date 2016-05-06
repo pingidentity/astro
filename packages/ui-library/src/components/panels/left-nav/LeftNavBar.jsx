@@ -1,8 +1,7 @@
-var React = require("react"),
+var React = require("../../../util/ReactWithDefaultMethods.js"),
     ReactDOM = require("react-dom"),
     classnames = require("classnames"),
     Copyright = require("./Copyright.jsx"),
-    ReduxUtils = require("../../../util/ReduxUtils.js"),
     _ = require("underscore");
 
 /**
@@ -18,13 +17,12 @@ var React = require("react"),
  */
 var LeftNavBar = React.createClass({
     propTypes: {
-        tree: React.PropTypes.array.isRequired,
+        tree: React.PropTypes.array.isRequired.affectsRendering,
+        selectedNode: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).affectsRendering,
+        openNode: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).affectsRendering,
         onSectionClick: React.PropTypes.func,
-        onItemClick: React.PropTypes.func,
-        openNode: React.PropTypes.string
+        onItemClick: React.PropTypes.func
     },
-
-    renderProps: ["tree", "selectedNode", "openNode"],
 
     _handleSectionClick: function (id) {
         this.props.onSectionClick(id);
@@ -65,40 +63,29 @@ var LeftNavBar = React.createClass({
 
     _rerender: function () {
         this.componentDidUpdate();
+        this._getItemSelector().removeEventListener("animationend", this._rerender);
+    },
 
-        ReactDOM.findDOMNode(this.refs.selectedItem).removeEventListener("animationend", this._rerender);
+    _getItemSelector: function () {
+        return ReactDOM.findDOMNode(this.refs.itemSelector);
     },
 
     componentDidMount: function () {
         //Occasionally the first calculation of the position of the selector is wrong because there are still animations
         //happening on the page.  Recalculate after the initialRender
-        ReactDOM.findDOMNode(this.refs.selectedItem).addEventListener("transitionend", this._rerender, false);
+        this._getItemSelector().addEventListener("transitionend", this._rerender, false);
 
         this.componentDidUpdate();
     },
 
     componentWillUnmount: function () {
-        ReactDOM.findDOMNode(this.refs.selectedItem).removeEventListener("animationend", this._rerender);
+        this._getItemSelector().removeEventListener("animationend", this._rerender);
     },
 
     getInitialState: function () {
         return {
             selectorStyle: { top: 0, height: 0 }
         };
-    },
-
-    /**
-     * @method
-     * @name LeftNavBar#shouldComponentUpdate
-     * @param {object} nextProps - next props
-     * @param {object} nextState - next state
-     * @returns {bool} whether the component needs to re-render
-     * @desc Becaue Redux applications cause changes to the store which then trickle down, every state change re-renders the
-     * entire application.  As such, implementing shouldComponentUpdate prevents potential performance issues.
-     */
-    shouldComponentUpdate: function (nextProps, nextState) {
-        return !!(ReduxUtils.diffProps(this.props, nextProps, this.renderProps) ||
-            ReduxUtils.diffProps(this.state, nextState, ["selectorStyle"]));
     },
 
     /**
@@ -113,12 +100,12 @@ var LeftNavBar = React.createClass({
             prevProps.openNode !== this.props.openNode)
         {
             var parent = ReactDOM.findDOMNode(this.refs.container);
-            var selectedItems = parent.getElementsByClassName("highlighted");
+            var itemSelectors = parent.getElementsByClassName("highlighted");
             var style = { height: 0, top: 0 };
 
 
-            if (selectedItems.length > 0) {
-                var dims = selectedItems[0].getBoundingClientRect();
+            if (itemSelectors.length > 0) {
+                var dims = itemSelectors[0].getBoundingClientRect();
                 var copyrightDims = ReactDOM.findDOMNode(this.refs.container).getElementsByClassName("copyright")[0]
                     .getBoundingClientRect();
                 var parentDims = parent.getBoundingClientRect();
@@ -152,7 +139,9 @@ var LeftNavBar = React.createClass({
             }
 
             /* eslint-disable react/no-did-update-set-state */
-            this.setState({ selectorStyle: style });
+            if (!_.isEqual(this.state.selectorStyle, style)) {
+                this.setState({ selectorStyle: style });
+            }
             /* eslint-enable react/no-did-update-set-state */
         }
     },
@@ -161,7 +150,7 @@ var LeftNavBar = React.createClass({
         return (
             <div id="nav">
                 <div className="nav-menus" ref="container">
-                    <div ref="selectedItem" className="selected-item" style={this.state.selectorStyle}></div>
+                    <div ref="itemSelector" className="selected-item" style={this.state.selectorStyle}></div>
 
                     { this.props.tree.map(this._renderSection) }
 

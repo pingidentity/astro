@@ -14,7 +14,8 @@ var initialState = {
     pendingPrev: false,
     advancedSearch: false,
     activeTab: 0,
-    filters: {}
+    filters: {},
+    position: {}
 };
 
 /*
@@ -30,7 +31,7 @@ var batchSelector = createSelector(
         //and apply a filter to it.  In a real example we would divide the results into batches of some
         //size or more often, re-query the server and let the endpoint perform the filtering.
         rows = rows.filter(function (row) {
-            return (!filters.text || row.title.match(filters.text)) &&
+            return (!filters.text || row.title.indexOf(filters.text) > -1) &&
               (!filters.even || row.id % 2 === 0) &&
               (!filters.odd || row.id % 2 === 1);
         });
