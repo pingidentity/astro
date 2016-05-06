@@ -87,10 +87,9 @@ ifneq ($(COVERAGE_STATUS_CODE),200)
 	COVERAGE_VERSION=$(GIT_VERSION)
 	COVERAGE_STATUS_CODE=$(shell curl -s -I http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library-coverage/$(COVERAGE_VERSION)/ui-library-coverage-$(COVERAGE_VERSION).tar.gz | grep "HTTP/1.1" | awk {'print $$2'})
 endif
-# TODO alex - disable this for now; once the coverage report is generated and uploaded to art01, I can enable the verification (see note on line 205 too)
-# ifneq ($(COVERAGE_STATUS_CODE),200)
-# $(error Cannot find the coverage report to download)
-# endif
+ifneq ($(COVERAGE_STATUS_CODE),200)
+$(error Cannot find the coverage report to download)
+endif
 
 
 define version_and_tag
@@ -202,9 +201,8 @@ verify: install-node-npm
 
 	# download the coverage report from art01 for the current version
 	# verify the current coverage against the reference;
-# TODO alex - disable this for now; once the coverage report is generated and uploaded to art01, I can enable the verification
-#	$(call install_reference_coverage_report,$(COVERAGE_VERSION))
-#	$(NODE_EXEC) tools/verify_coverage.js
+	$(call install_reference_coverage_report,$(COVERAGE_VERSION))
+	$(NODE_EXEC) tools/verify_coverage.js
 
 # package the module and name the file to include the current version
 package: install-mvn install-node-npm
