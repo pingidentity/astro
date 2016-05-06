@@ -1,6 +1,9 @@
 NODE_VERSION=4.2.4
 NPM_VERSION=3.7.1
 
+HOSTING_SERVER_ADDRESS=52.26.244.241
+HOSTING_SERVER_USERNAME=ubuntu
+
 
 # below are derived properties
 UNAME_S := $(shell uname -s)
@@ -32,7 +35,7 @@ SHELL := /bin/bash
 PATH := $(CURRENT_DIR)/node:$(CURRENT_DIR)/node/node_modules/npm/bin:$(PATH):$(M2_HOME)/bin
 
 # The Git branch is to be passed as argument on the command line
-# (eg. make GIT_BRANCH=uip-58 verify)
+# (eg. make GIT_BRANCH=master verify)
 # GIT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 ifndef GIT_BRANCH
 $(error "GIT_BRANCH should be passed as command line argument (eg. make GIT_BRANCH=uip-58 verify)")
@@ -251,17 +254,18 @@ package-and-upload-for-hosting: install-node-npm
 	rm -rf $(GIT_VERSION).tar.gz
 	tar -czf $(GIT_VERSION).tar.gz build
 	# now that I have the archive with the current version, upload it to hosting server and extract
-	ssh root@10.101.107.88 rm -f /var/www/html/$(GIT_VERSION).tar.gz
-	scp $(GIT_VERSION).tar.gz root@10.101.107.88:/var/www/html/
-	ssh root@10.101.107.88 rm -rf /var/www/html/$(GIT_VERSION)
-	ssh root@10.101.107.88 mkdir /var/www/html/$(GIT_VERSION)
-	ssh root@10.101.107.88 tar -xzf /var/www/html/$(GIT_VERSION).tar.gz --strip 1 -C /var/www/html/$(GIT_VERSION)
-	ssh root@10.101.107.88 rm -f /var/www/html/$(GIT_VERSION).tar.gz
+	ssh $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -f /var/www/html/$(GIT_VERSION).tar.gz
+	scp $(GIT_VERSION).tar.gz $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/
+	ssh $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -rf /var/www/html/$(GIT_VERSION)
+	ssh $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) mkdir /var/www/html/$(GIT_VERSION)
+	ssh $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) tar -xzf /var/www/html/$(GIT_VERSION).tar.gz --strip 1 -C /var/www/html/$(GIT_VERSION)
+	ssh $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -f /var/www/html/$(GIT_VERSION).tar.gz
 	# download versions.json, add the new version (if it doesn't already exist), upload it back up
-	# (with a temp unique name first, to minimize the risk of colisions with other process doing the same thing)
-	scp root@10.101.107.88:/var/www/html/versions.json ./
+	# (with a temp unique name first, to minimize the risk of colisions with another process doing the same thing)
+	scp $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/versions.json ./
 	$(NODE_EXEC) hosting/append_current_version.js
 	uuid=$(uuidgen)
-	scp ./versions.json root@10.101.107.88:/var/www/html/versions-$UUID.json
-	ssh root@10.101.107.88 mv /var/www/html/versions-$UUID.json /var/www/html/versions.json
+	scp ./versions.json $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/versions-$UUID.json
+	ssh $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) mv /var/www/html/versions-$UUID.json /var/www/html/versions.json
+	rm -f ./versions.json
 	
