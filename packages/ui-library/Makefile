@@ -87,9 +87,6 @@ ifneq ($(COVERAGE_STATUS_CODE),200)
 	COVERAGE_VERSION=$(GIT_VERSION)
 	COVERAGE_STATUS_CODE=$(shell curl -s -I http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library-coverage/$(COVERAGE_VERSION)/ui-library-coverage-$(COVERAGE_VERSION).tar.gz | grep "HTTP/1.1" | awk {'print $$2'})
 endif
-ifneq ($(COVERAGE_STATUS_CODE),200)
-$(error Cannot find the coverage report to download)
-endif
 
 
 define version_and_tag
@@ -198,6 +195,11 @@ verify: install-node-npm
 
 	# convert the lcov report to cobertura format to be published by Jenkins
 	python tools/lcov_cobertura.py coverage/lcov.info --base-dir . --output coverage/cobertura.xml
+
+	if [ "$(COVERAGE_STATUS_CODE)" -ne "200" ]; then\
+		echo "Cannot find the coverage report to download";\
+		exit 1;\
+	fi
 
 	# download the coverage report from art01 for the current version
 	# verify the current coverage against the reference;
