@@ -84,12 +84,12 @@ module.exports = {
 
     /**
      * @alias module:util/Validators.isValidPhoneNumber
-     * @desc Validate that a phone number has only numbers, parens, dashes & whitespace
+     * @desc Validate that a phone number has only empty, numbers, parens, dashes & whitespace
              (e.g.: (604) 555-1337)
      * @param {string} str string to validate
-     * @return {boolean} true if only numbers, parens, dashes & whitespace present
+     * @return {boolean} true if only empty, numbers, parens, dashes & whitespace present
      */
     isValidPhoneNumber: function (str) {
-        return /^[\d\-\(\)\s\.]+$/g.test(str);
+        return /^$|^[\d\-\(\)\s\.]+$/g.test(str);
     }
 };

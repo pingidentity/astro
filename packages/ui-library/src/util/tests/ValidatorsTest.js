@@ -103,4 +103,23 @@ describe("Validators", function () {
             expect(Validators.isValidUrl("")).toBe(false);
         });
     });
+
+    describe("isValidPhoneNumber", function () {
+        it("returns true for valid phone numbers", function () {
+            expect(Validators.isValidPhoneNumber("")).toBe(true);
+            expect(Validators.isValidPhoneNumber(" ")).toBe(true);
+            expect(Validators.isValidPhoneNumber("1234567890")).toBe(true);
+            expect(Validators.isValidPhoneNumber("1111111111111111")).toBe(true);
+            expect(Validators.isValidPhoneNumber("(123)456789")).toBe(true);
+            expect(Validators.isValidPhoneNumber("123-456-7890")).toBe(true);
+            expect(Validators.isValidPhoneNumber("123 456 7890")).toBe(true);
+            expect(Validators.isValidPhoneNumber("(555) 555-5555")).toBe(true);
+        });
+
+        it("returns false for invalid phone numbers", function () {
+            expect(Validators.isValidPhoneNumber("abc")).toBe(false);
+            expect(Validators.isValidPhoneNumber("@123-456-7890")).toBe(false);
+            expect(Validators.isValidPhoneNumber("!@#$%##")).toBe(false);
+        });
+    });
 });
