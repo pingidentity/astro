@@ -252,23 +252,24 @@ package-and-upload-for-hosting: install-node-npm
 	# after that, download versions.json, add the new version (if it doesn't already exist), upload it back up
 	# (with a temp unique name first, to minimize the risk of colisions with another process doing the same thing)
 	if [ "$(GIT_BRANCH)" == "master" ]; then\
+		LIB_VERSION=`sed -n -e 's/.*"version"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' package.json`;\
 		$(NPM_EXEC) run doc;\
 		$(NPM_EXEC) run pack;\
-		rm -rf $(GIT_VERSION).tar.gz;\
-		tar -czf $(GIT_VERSION).tar.gz build;\
+		rm -rf $${LIB_VERSION}.tar.gz;\
+		tar -czf $${LIB_VERSION}.tar.gz build;\
 		chmod 600 ./hosting/FARM-33-341f336d.us-west-2.pem;\
-		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -f /var/www/html/$(GIT_VERSION).tar.gz;\
-		scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(GIT_VERSION).tar.gz $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/;\
-		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -rf /var/www/html/$(GIT_VERSION);\
-		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) mkdir /var/www/html/$(GIT_VERSION);\
-		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) tar -xzf /var/www/html/$(GIT_VERSION).tar.gz --strip 1 -C /var/www/html/$(GIT_VERSION);\
-		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -f /var/www/html/$(GIT_VERSION).tar.gz;\
+		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -f /var/www/html/$${LIB_VERSION}.tar.gz;\
+		scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $${LIB_VERSION}.tar.gz $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/;\
+		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -rf /var/www/html/$${LIB_VERSION};\
+		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) mkdir /var/www/html/$${LIB_VERSION};\
+		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) tar -xzf /var/www/html/$${LIB_VERSION}.tar.gz --strip 1 -C /var/www/html/$${LIB_VERSION};\
+		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -f /var/www/html/$${LIB_VERSION}.tar.gz;\
 		scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/versions.json ./;\
 		$(NODE_EXEC) hosting/append_current_version.js;\
 		uuid=$(uuidgen);\
 		scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem ./versions.json $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/versions-$(UUID).json;\
 		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) mv /var/www/html/versions-$(UUID).json /var/www/html/versions.json;\
 		rm -f ./versions.json;\
-		rm -f $(GIT_VERSION).tar.gz;\
+		rm -f $${LIB_VERSION}.tar.gz;\
 	fi
 	
