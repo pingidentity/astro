@@ -256,6 +256,7 @@ package-and-upload-for-hosting: install-node-npm
 		$(NPM_EXEC) run pack;\
 		rm -rf $(GIT_VERSION).tar.gz;\
 		tar -czf $(GIT_VERSION).tar.gz build;\
+		chmod 600 ./hosting/FARM-33-341f336d.us-west-2.pem;\
 		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -f /var/www/html/$(GIT_VERSION).tar.gz;\
 		scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(GIT_VERSION).tar.gz $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/;\
 		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -rf /var/www/html/$(GIT_VERSION);\
