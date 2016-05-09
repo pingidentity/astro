@@ -29,7 +29,7 @@
 			var versionsRequest = new XMLHttpRequest();
 			versionsRequest.addEventListener("load", onVersionsLoaded);
 			versionsRequest.addEventListener("error", onVersionsLoadError);
-			versionsRequest.open("GET", "versions.json");
+			versionsRequest.open("GET", "versions.json?_=" + new Date().getTime());
 			versionsRequest.send();
 		}
 
