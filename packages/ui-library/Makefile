@@ -256,17 +256,17 @@ package-and-upload-for-hosting: install-node-npm
 		$(NPM_EXEC) run pack;\
 		rm -rf $(GIT_VERSION).tar.gz;\
 		tar -czf $(GIT_VERSION).tar.gz build;\
-		ssh -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -f /var/www/html/$(GIT_VERSION).tar.gz;\
-		scp -i ./hosting/FARM-33-341f336d.us-west-2.pem $(GIT_VERSION).tar.gz $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/;\
-		ssh -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -rf /var/www/html/$(GIT_VERSION);\
-		ssh -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) mkdir /var/www/html/$(GIT_VERSION);\
-		ssh -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) tar -xzf /var/www/html/$(GIT_VERSION).tar.gz --strip 1 -C /var/www/html/$(GIT_VERSION);\
-		ssh -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -f /var/www/html/$(GIT_VERSION).tar.gz;\
-		scp -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/versions.json ./;\
+		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -f /var/www/html/$(GIT_VERSION).tar.gz;\
+		scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(GIT_VERSION).tar.gz $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/;\
+		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -rf /var/www/html/$(GIT_VERSION);\
+		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) mkdir /var/www/html/$(GIT_VERSION);\
+		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) tar -xzf /var/www/html/$(GIT_VERSION).tar.gz --strip 1 -C /var/www/html/$(GIT_VERSION);\
+		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -f /var/www/html/$(GIT_VERSION).tar.gz;\
+		scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/versions.json ./;\
 		$(NODE_EXEC) hosting/append_current_version.js;\
 		uuid=$(uuidgen);\
-		scp -i ./hosting/FARM-33-341f336d.us-west-2.pem ./versions.json $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/versions-$(UUID).json;\
-		ssh -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) mv /var/www/html/versions-$(UUID).json /var/www/html/versions.json;\
+		scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem ./versions.json $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/versions-$(UUID).json;\
+		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) mv /var/www/html/versions-$(UUID).json /var/www/html/versions.json;\
 		rm -f ./versions.json;\
 		rm -f $(GIT_VERSION).tar.gz;\
 	fi
