@@ -244,28 +244,30 @@ dist: install-mvn install-node-npm
 	$(call deploy_coverage,$(PACKAGE_VERSION_NEXT))
 
 # compile/transpile the files, so that they can be packed and distributed as a collection of static assets
-# THIS SHOULD ONLY BE EXECUTED ON MASTER
 package-and-upload-for-hosting: install-node-npm
 	# the freakin' npm executable is broken, makes some stupid assumptions in regard to the npm location;
 	# meaning I cannot run an npm script which calls other npm scripts,
-	# meaning I have to execute the npm scripts one at a time
-	$(NPM_EXEC) run doc
-	$(NPM_EXEC) run pack
-	rm -rf $(GIT_VERSION).tar.gz
-	tar -czf $(GIT_VERSION).tar.gz build
-	# now that I have the archive with the current version, upload it to hosting server and extract
-	ssh $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -f /var/www/html/$(GIT_VERSION).tar.gz
-	scp $(GIT_VERSION).tar.gz $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/
-	ssh $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -rf /var/www/html/$(GIT_VERSION)
-	ssh $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) mkdir /var/www/html/$(GIT_VERSION)
-	ssh $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) tar -xzf /var/www/html/$(GIT_VERSION).tar.gz --strip 1 -C /var/www/html/$(GIT_VERSION)
-	ssh $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -f /var/www/html/$(GIT_VERSION).tar.gz
-	# download versions.json, add the new version (if it doesn't already exist), upload it back up
+	# meaning I have to execute the npm scripts one at a time ('doc' and 'pack');
+	# once I have the current version packaged, upload it to hosting server and extract;
+	# after that, download versions.json, add the new version (if it doesn't already exist), upload it back up
 	# (with a temp unique name first, to minimize the risk of colisions with another process doing the same thing)
-	scp $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/versions.json ./
-	$(NODE_EXEC) hosting/append_current_version.js
-	uuid=$(uuidgen)
-	scp ./versions.json $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/versions-$UUID.json
-	ssh $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) mv /var/www/html/versions-$UUID.json /var/www/html/versions.json
-	rm -f ./versions.json
+	if [ "$(GIT_BRANCH)" == "master" ]; then\
+		$(NPM_EXEC) run doc;\
+		$(NPM_EXEC) run pack;\
+		rm -rf $(GIT_VERSION).tar.gz;\
+		tar -czf $(GIT_VERSION).tar.gz build;\
+		ssh -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -f /var/www/html/$(GIT_VERSION).tar.gz;\
+		scp -i ./hosting/FARM-33-341f336d.us-west-2.pem $(GIT_VERSION).tar.gz $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/;\
+		ssh -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -rf /var/www/html/$(GIT_VERSION);\
+		ssh -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) mkdir /var/www/html/$(GIT_VERSION);\
+		ssh -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) tar -xzf /var/www/html/$(GIT_VERSION).tar.gz --strip 1 -C /var/www/html/$(GIT_VERSION);\
+		ssh -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -f /var/www/html/$(GIT_VERSION).tar.gz;\
+		scp -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/versions.json ./;\
+		$(NODE_EXEC) hosting/append_current_version.js;\
+		uuid=$(uuidgen);\
+		scp -i ./hosting/FARM-33-341f336d.us-west-2.pem ./versions.json $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/versions-$(UUID).json;\
+		ssh -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) mv /var/www/html/versions-$(UUID).json /var/www/html/versions.json;\
+		rm -f ./versions.json;\
+		rm -f $(GIT_VERSION).tar.gz;\
+	fi
 	
