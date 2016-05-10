@@ -2,7 +2,7 @@ window.__DEV__ = true;
 
 jest.dontMock("../HeaderBar.jsx");
 jest.dontMock("../../../../util/EventUtils");
-jest.dontMock("../../../../util/ReduxUtils");
+jest.dontMock("../../../../util/Utils");
 
 describe("HeaderBar", function () {
     var React = require("react"),

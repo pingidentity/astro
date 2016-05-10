@@ -77,21 +77,3 @@ exports.commit = function (state) {
     state.snapshot = _.omit(_.clone(state), "snapshot");
     state.dirty = false;
 };
-
-/** @function compareProps
- * @desc A function that makes it more concise to compare parts of the passed in props to determine if the component
- * should re-reneder
- * @param {object} current - Current props
- * @param {object} next - Next props
- * @param {string[]} list - An array of keys
- * @returns {bool} - true if the props are different
- */
-exports.diffProps = function (current, next, list) {
-    for (var i = 0; i < list.length; i += 1) {
-        if (current[list[i]] !== next[list[i]]) {
-            return true;
-        }
-    }
-
-    return false;
-};

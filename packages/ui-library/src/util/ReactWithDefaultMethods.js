@@ -1,5 +1,5 @@
 var React = require("react"),
-    ReduxUtils = require("./ReduxUtils.js"),
+    Utils = require("./Utils.js"),
     deepClone = require("clone");
 
 /*
@@ -81,7 +81,7 @@ PingReact.createClass = function (props) {
 
         //wrap the original function in some logic
         props.shouldComponentUpdate = function (newProps, newState) {
-            var result = ReduxUtils.diffProps(this.props, newProps, renderProps);
+            var result = Utils.diffProps(this.props, newProps, renderProps);
             var childResult = shouldComponentUpdate && shouldComponentUpdate.call(this, newProps, newState);
 
             return !!(result || childResult || (this.state && newState && this.state !== newState));

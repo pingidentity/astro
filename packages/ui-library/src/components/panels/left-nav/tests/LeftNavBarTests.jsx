@@ -2,7 +2,7 @@ window.__DEV__ = true;
 
 jest.dontMock("../LeftNavBar.jsx");
 jest.dontMock("../Copyright.jsx");
-jest.dontMock("../../../../util/ReduxUtils");
+jest.dontMock("../../../../util/Utils");
 
 describe("LeftNavBar", function () {
     var React = require("react"),

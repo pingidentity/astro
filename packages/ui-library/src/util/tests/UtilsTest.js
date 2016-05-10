@@ -5,6 +5,13 @@ jest.dontMock("../Utils");
 describe("Utils", function () {
     var Utils = require("../Utils");
 
+    describe("diffProps", function () {
+        it("only compares the props in the list", function () {
+            expect(Utils.diffProps({ a: 1, b: 2 }, { a: 1, b: 3 }, ["a"])).toBe(false);
+            expect(Utils.diffProps({ a: 1, b: 2 }, { a: 1, b: 3 }, ["a", "b"])).toBe(true);
+        });
+    });
+
     describe("isHtmlFileApiSupported", function () {
         it("returns true if File, FileList, FileReader are defined", function () {
             global.File = true;
@@ -88,7 +95,7 @@ describe("Utils", function () {
                 var createObjectURL = jest.genMockFn().mockReturnValue(url);
                 global.URL = {};
                 global.URL.createObjectURL = createObjectURL;
-                
+
                 var click = jest.genMockFn();
                 document.createElement = jest.genMockFn();
                 document.createElement.mockReturnValue({
