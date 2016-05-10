@@ -69,13 +69,8 @@
   "peerDependencies": {
     "clone": "1.x",
     "reselect": "2.x",
-    "react-redux": "4.x",
-    "react-router": "2.x",
-    "react-router-redux": "4.x",
     "react": "0.13 - 0.14",
-    "react-dom": "0.14",
-    "redux": "3.x",
-    "redux-thunk": "1.x"
+    "react-dom": "0.14"
   },
   "engines": {
     "node": ">= 4.2.x",
