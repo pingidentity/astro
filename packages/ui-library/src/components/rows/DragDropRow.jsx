@@ -89,6 +89,7 @@ var dropCollect = function (connect) {
  * @param {DragDropRow~dragCallback} onDrag - A callback which is execute when the row is moved.  Must have signature function (targetIndex, ownIndex)
  * @param {DragDropRow~dragCallback} onDrop - A callback which is execute when the row is dropped.  Must have signature function (targetIndex, ownIndex)
  * @param {function} onCancel - A callback which is executed when the dragging is cancelled (dropped outside a droppable area or esc button pressed).
+ * @param {boolean} removeDraggableAttribute - Remove the draggable="true" attribute to disable dragging.  This is useful to resolve issues with IE and input fields.
  *
  * @example
  *  <DragDropRow onDrop={this._reorder} disabled={this.props.disabled} id="1" index={1}>
@@ -110,7 +111,8 @@ var DragDropRow = React.createClass({
         onDrop: PropTypes.func.isRequired,
         onCancel: PropTypes.func.isRequired,
 
-        disabled: PropTypes.bool
+        disabled: PropTypes.bool,
+        removeDraggableAttribute: PropTypes.bool
     },
 
     getDefaultProps: function () {
@@ -125,11 +127,13 @@ var DragDropRow = React.createClass({
 
         var opacity = this.props.isDragging ? 0.2 : 1;
 
-        return connectDragSource(connectDropTarget(
-            <div style={{ opacity: opacity }}>
-                {this.props.children}
-            </div>
-        ));
+        const row = (
+          <div className="drag-drop-row" style={{ opacity: opacity }}>
+              {this.props.children}
+          </div>);
+
+        //IE must have a drop target even if dragging is disabled.  Enabling after the first render has no effect.
+        return this.props.removeDraggableAttribute ? connectDropTarget(row) : connectDragSource(connectDropTarget(row));
     }
 });
 
