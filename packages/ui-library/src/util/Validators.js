@@ -91,5 +91,16 @@ module.exports = {
      */
     isValidPhoneNumber: function (str) {
         return /^$|^[\d\-\(\)\s\.]+$/g.test(str);
+    },
+
+    /**
+    * @alias module:util/Validators.isValidHexColorCharacter
+    * @desc Validate that a hex color only has values: empty, # or hex value between 00 - FF
+    * (e.g.: #ABC or #FF00FF)
+    * @param {string} str string to validate
+    * @returns {boolean} true if the string only contains values: empty, # or hex value between 00 - FF
+    */
+    isValidHexColorCharacter: function (str) {
+        return /^$|^#?[0-9A-F]*$/i.test(str);
     }
 };

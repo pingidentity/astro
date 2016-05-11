@@ -63,6 +63,7 @@
     "style-loader": "0.13.0",
     "tty-table": "1.0.7",
     "url-loader": "0.5.7",
+    "validator": "5.2.0 ",
     "webpack": "1.12.14",
     "webpack-dev-server": "1.14.1"
   },
@@ -70,7 +71,8 @@
     "clone": "1.x",
     "reselect": "2.x",
     "react": "0.13 - 0.14",
-    "react-dom": "0.14"
+    "react-dom": "0.14",
+    "validator": "5.2.0 "
   },
   "engines": {
     "node": ">= 4.2.x",

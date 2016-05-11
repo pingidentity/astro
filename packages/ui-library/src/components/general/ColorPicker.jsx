@@ -1,10 +1,14 @@
 "use strict";
 
-var React = require("react");
+var React = require("../../util/ReactWithDefaultMethods.js");
 var ReactDOM = require("react-dom");
 var Picker = require("react-color-picker");
 var css = require("classnames");
+var _ = require("underscore");
 var FormLabel = require("../forms/FormLabel.jsx");
+var FormTextField = require("../forms/form-text-field");
+var Validators = require("../../util/Validators");
+var Validator = require("validator");
 var If = require("./If.jsx");
 var callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutsideOfContainer;
 
@@ -32,6 +36,8 @@ var callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutside
  * @param {function} [onToggle] - function () {...} delegate to call when open/closed state changed.
  *   Used only with stateless mode. Will receive current open status value.
  * @param {function} [open=false] - boolean state of open/closed menu. Used only in stateless mode.
+ * @param {function} [onError] - function (message) {...} delegate to call when input is an invalid color
+ * @param {string} [errorMessage] - An error message to to display if any
  * @param {bool} [pickerHidden=false] - A property to hide the color picker using CSS.  When
  *   pickerHidden is true, the "colorpicker-container" is always rendered and the visibility is
  *   controlled via the presence of the "open" class the components top-level div (see containerCss
@@ -85,14 +91,16 @@ var Stateless = React.createClass({
         // prop validations
         id: React.PropTypes.string,
         className: React.PropTypes.string,
-        color: React.PropTypes.string.isRequired,
-        disabled: React.PropTypes.bool,
-        hintText: React.PropTypes.string,
-        labelText: React.PropTypes.string,
+        color: React.PropTypes.string.isRequired.affectsRendering,
+        disabled: React.PropTypes.bool.affectsRendering,
+        hintText: React.PropTypes.string.affectsRendering,
+        labelText: React.PropTypes.string.affectsRendering,
         onChange: React.PropTypes.func.isRequired,
         onToggle: React.PropTypes.func.isRequired,
-        open: React.PropTypes.bool,
-        pickerHidden: React.PropTypes.bool
+        open: React.PropTypes.bool.affectsRendering,
+        onError: React.PropTypes.func,
+        errorMessage: React.PropTypes.string.affectsRendering,
+        pickerHidden: React.PropTypes.bool.affectsRendering
     },
 
     /**
@@ -139,6 +147,17 @@ var Stateless = React.createClass({
             case 27:  //esc key
                 this._close();
                 break;
+        }
+    },
+
+    /**
+    * Check if the input value is a valid hex color, trigger onError callback if not
+    * @param {KeyEvent} e - the key event
+    * @private
+    */
+    _onColorInputBlur: function (e) {
+        if (e.target.value !== "" && !Validator.isHexColor(e.target.value)) {
+            this.props.onError("This is not a valid hex color.");
         }
     },
 
@@ -193,24 +212,22 @@ var Stateless = React.createClass({
     },
 
     /**
-     * Call the onChange callback when a color code is typed into the input field.
-     * @param {Event} e - the input field change event
+     * Call the onChange callback when a valid hex color code is typed into the input field.
+     * @param {string} value - the input field value
      * @private
      */
-    _onColorInputChange: function (e) {
-        this.props.onChange(e.target.value);
+    _onColorInputChange: function (value) {
+        var val = value && value[0] !== "#" ? ("#" + value) : value;
+
+        if (Validators.isValidHexColorCharacter(val)) {
+            this.props.onChange(val);
+            this.props.onError(null);   // clear the errorMessage
+        }
     },
 
     componentDidMount: function () {
         window.addEventListener("click", this._handleGlobalClick);
         window.addEventListener("keydown", this._handleGlobalKeyDown);
-    },
-
-    /* There were performance issues with having many of these components on the screen causing eachother to re-render */
-    shouldComponentUpdate: function (nextProps) {
-        return nextProps.color !== this.props.color ||
-            nextProps.open !== this.props.open ||
-            nextProps.disabled !== this.props.disabled;
     },
 
     componentWillUnmount: function () {
@@ -223,7 +240,9 @@ var Stateless = React.createClass({
             id: "color-picker",
             open: false,
             disabled: false,
-            cpid: Math.random()
+            cpid: Math.random(),
+            onError: _.noop,
+            errorMessage: ""
         };
     },
 
@@ -246,23 +265,26 @@ var Stateless = React.createClass({
         return (
             /* eslint-disable max-len */
             <div data-id={this.props.id} className={css(containerCss)}>
-                <FormLabel value={this.props.labelText} hint={this.props.hintText}/>
+                <FormLabel data-id="colorLabel" value={this.props.labelText} hint={this.props.hintText}/>
                 <div className="color-picker" ref="swatch">
                     <span className="colors colors-theme-default colors-swatch-position-left colors-swatch-left colors-position-default"
                           ref="innerSwatch"
                           onFocus={this._handleFocus}
                           onClick={this._handleClick}>
+                        <FormTextField
+                                data-id="colorInput"
+                                className="colors-label"
+                                inputClassName="colors-input btn-fg-color"
+                                value={this.props.color}
+                                maxLength={7}
+                                disabled={this.props.disabled}
+                                errorMessage={this.props.errorMessage}
+                                onValueChange={this._onColorInputChange}
+                                onKeyDown={this._onColorInputKeyDown}
+                                onBlur={this._onColorInputBlur} />
                         <span className="colors-swatch">
                             <span ref="colorSample" style={{ backgroundColor: this.props.color }}></span>
                         </span>
-                        <input type="text"
-                                ref="colorInput"
-                                className="colors-input btn-fg-color"
-                                value={this.props.color}
-                                maxLength="7"
-                                disabled={this.props.disabled}
-                                onChange={this._onColorInputChange}
-                                onKeyDown={this._onColorInputKeyDown} />
                     </span>
                     <If test={(this.props.pickerHidden || this.props.open) && !this.props.disabled}>
                         <span className="colorpicker-container">
@@ -288,15 +310,22 @@ var Stateful = React.createClass({
         });
     },
 
+    _handleError: function (message) {
+        this.setState({ errorMessage: message });
+    },
+
     getInitialState: function () {
         return {
-            open: false
+            open: false,
+            errorMessage: ""
         };
     },
 
     render: function () {
         return (
             <Stateless ref="stateless" {...this.props}
+                    errorMessage={this.state.errorMessage}
+                    onError={this._handleError}
                     onToggle={this._toggle}
                     onChange={this.props.onChange}
                     open={this.state.open}/>

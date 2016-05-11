@@ -7,7 +7,8 @@ var ColorPickerDemo = React.createClass({
         return {
             picker1color: "#fff",
             picker2color: "#000",
-            picker2open: false
+            picker2open: false,
+            errorMessage: ""
         };
     },
 
@@ -24,6 +25,10 @@ var ColorPickerDemo = React.createClass({
 
     _toggle2: function () {
         this.setState({ picker2open: !this.state.picker2open });
+    },
+
+    _handleError: function (message) {
+        this.setState({ errorMessage: message });
     },
 
     render: function () {
@@ -45,6 +50,8 @@ var ColorPickerDemo = React.createClass({
                         labelText="Background color"
                         hintText="Pick a color or type in the hex code"
                         onToggle={this._toggle2}
+                        onError={this._handleError}
+                        errorMessage={this.state.errorMessage}
                         open={this.state.picker2open}
                         controlled={true} />
                     </div>

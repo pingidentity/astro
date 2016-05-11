@@ -82,6 +82,18 @@ describe("FormTextinput", function () {
         expect(handleKeyPress.mock.calls[0][0].keyCode).toBe(13);
     });
 
+    it("fires onKeyDown when key is pressed down", function () {
+        var handleKeyDown = jest.genMockFunction();
+        var component = getComponent({
+            onKeyDown: handleKeyDown
+        });
+
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        ReactTestUtils.Simulate.keyDown(input, { keyCode: 13 });
+
+        expect(handleKeyDown.mock.calls[0][0].keyCode).toBe(13);
+    });
+
     it("warns if id prop is used", function () {
         var warn = global.console.warn;
         console.warn = jest.genMockFunction();
@@ -159,6 +171,13 @@ describe("FormTextinput", function () {
         var container = ReactDOM.findDOMNode(component);
 
         expect(container.getAttribute("class")).toContain("extra");
+    });
+
+    it("renders custom inputClassName", function () {
+        var component = getComponent({ inputClassName: "foo" });
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+
+        expect(input.getAttribute("class")).toContain("foo");
     });
 
     it("renders help tooltip", function () {

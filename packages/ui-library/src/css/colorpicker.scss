@@ -33,6 +33,10 @@
     label {
         display: block;
     }
+    .colors-label,
+    .colors-label .label-text {
+        margin: 0;
+    }
     .colors-input {
         width: 137px;
         padding: 0 5px 0 39px;

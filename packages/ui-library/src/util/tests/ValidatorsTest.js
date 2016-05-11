@@ -122,4 +122,26 @@ describe("Validators", function () {
             expect(Validators.isValidPhoneNumber("!@#$%##")).toBe(false);
         });
     });
+
+    describe("isValidHexColorCharacter", function () {
+        it("returns true for valid hex colors", function () {
+            expect(Validators.isValidHexColorCharacter("")).toBe(true);
+            expect(Validators.isValidHexColorCharacter("#")).toBe(true);
+            expect(Validators.isValidHexColorCharacter("#FFF")).toBe(true);
+            expect(Validators.isValidHexColorCharacter("#456")).toBe(true);
+            expect(Validators.isValidHexColorCharacter("#AFBCAB")).toBe(true);
+            expect(Validators.isValidHexColorCharacter("#32FF00")).toBe(true);
+            expect(Validators.isValidHexColorCharacter("AA33FF110000")).toBe(true);
+        });
+
+        it("returns false for invalid hex colors", function () {
+            expect(Validators.isValidHexColorCharacter(" ")).toBe(false);
+            expect(Validators.isValidHexColorCharacter("ZZZ")).toBe(false);
+            expect(Validators.isValidHexColorCharacter("#ZZZ")).toBe(false);
+            expect(Validators.isValidHexColorCharacter("FF00TT")).toBe(false);
+            expect(Validators.isValidHexColorCharacter("#FF00TT")).toBe(false);
+            expect(Validators.isValidHexColorCharacter("#AA BB CC")).toBe(false);
+            expect(Validators.isValidHexColorCharacter("!@#$%^&*")).toBe(false);
+        });
+    });
 });

@@ -46,6 +46,7 @@ var FormTextFieldError = React.createClass({
  * @param {function} [onFocus]            A callback that will be triggered when the field gains focus
  * @param {function} [onBlur]             A callback that will be triggered when the field blurs (loses focus)
  * @param {function} [onKeyPress]         A callback that will be triggered when a key is pressed in the field;
+ * @param {function} [onKeyDown]          A callback that will be triggered when a key is pressed down in the field;
  * @param {function} [onValueChange]      A callback that will be triggered when the field value changes but will receive the component's value
  * @param {function} [onChange]           A callback that will be triggered when the field value changes but will receive the triggering event
  * @param {function} [onSave]             A callback to be triggred when 'save' icon is clicked
@@ -53,6 +54,7 @@ var FormTextFieldError = React.createClass({
  *
  * @param {number}   [maxLength]          Maximum length supported by the field
  * @param {string}   [defaultValue]       The default (initial) value to be shown in the field, when component managing state itself
+ * @param {string}   [inputClassName]     CSS classes to add to the input element
  * @param {string}   [labelClassName]     CSS classes to add to the label element
  * @param {string}   [className]          CSS classes to add to the parent Label element
  * @param {string}   [errorMessage]       Error message to render if validation is being done externally
@@ -93,6 +95,7 @@ var Stateless = React.createClass({
         onFocus: React.PropTypes.func,
         onBlur: React.PropTypes.func,
         onKeyPress: React.PropTypes.func,
+        onKeyDown: React.PropTypes.func,
         onChange: React.PropTypes.func,
         onValueChange: React.PropTypes.func,
         onUndo: React.PropTypes.func,
@@ -101,6 +104,7 @@ var Stateless = React.createClass({
         "data-id": React.PropTypes.string,
         errorClassName: React.PropTypes.string,
         errorMessage: React.PropTypes.string,
+        inputClassName: React.PropTypes.string,
         className: React.PropTypes.string,
         labelHelpText: React.PropTypes.string,
         labelText: React.PropTypes.string,
@@ -171,9 +175,11 @@ var Stateless = React.createClass({
                        value={this.props.labelText}
                        hint={this.props.labelHelpText}>
                 <span className="input-container">
-                    <input onFocus={this.props.onFocus}
+                    <input className={this.props.inputClassName}
+                           onFocus={this.props.onFocus}
                            onBlur={this.props.onBlur}
                            onKeyPress={this.props.onKeyPress}
+                           onKeyDown={this.props.onKeyDown}
                            onMouseDown={this.props.onMouseDown}
                            onChange={this._handleFieldChange}
                            placeholder={this.props.placeholder}
