@@ -378,6 +378,9 @@ label {
 				margin: 0;
 			}
 		}
+		&.hidden {
+			display: none;
+		}
 		.circle {
 			position: absolute;
 			left: 0;

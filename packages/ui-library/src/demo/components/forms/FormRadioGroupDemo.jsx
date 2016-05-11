@@ -8,7 +8,8 @@ var FormRadioGroupDemo = React.createClass({
             showSpinner: true,
             selectedId1: 1,
             selectedId2: 2,
-            selectedId3: 3
+            selectedId3: 3,
+            selectedId4: 4
         };
     },
 
@@ -24,6 +25,14 @@ var FormRadioGroupDemo = React.createClass({
             { id: "2", name: "Radio 2" },
             { id: "3", name: "Radio 3", disabled: true }
         ];
+
+        var radioItemsWithHidden = [
+            { id: "1", name: "Radio A" },
+            { id: "2", name: "Radio B" },
+            { id: "3", name: "Radio C" },
+            { id: "4", name: "Radio D" }
+        ];
+        radioItemsWithHidden[Math.round(Math.random() * 3)].hidden = true;
 
         return (
                 <div>
@@ -54,9 +63,17 @@ var FormRadioGroupDemo = React.createClass({
                     <FormRadioGroup
                         groupName="disabled-stacked-group"
                         selected={this.state.selectedId3}
-                        onChange={this._onChange.bind(this, 2)}
+                        onChange={this._onChange.bind(this, 3)}
                         items={radioItems}
                         disabled={true}
+                    />
+                    <br /><br />
+                    <label className="standalone">Radio Group With Random Hidden</label>
+                    <FormRadioGroup
+                        groupName="hidden-stacked-group"
+                        selected={this.state.selectedId4}
+                        onChange={this._onChange.bind(this, 4)}
+                        items={radioItemsWithHidden}
                     />
                 </div>
 

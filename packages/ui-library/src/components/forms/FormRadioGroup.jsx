@@ -2,10 +2,17 @@ var React = require("react"),
     classnames = require("classnames"),
     _ = require("underscore");
 
-
 /**
  * @callback FormRadioGroup~onChangeCallback
  * @param {object} selectedId - newly selected id value from original items prop
+ */
+
+/**
+ * @typedef FormRadioGroup~RadioGroupItems
+ * @property {String}  id       The item's identifier
+ * @property {String}  name     The item's display text
+ * @property {Boolean} disabled Disables the input
+ * @property {Boolean} hidden   Hides the input
  */
 
 /**
@@ -17,8 +24,8 @@ var React = require("react"),
  * @param {string} id - add data-id to radio label and input.
  *          input is assigned data-id attribute as follows: "_{id}"
  *          label is assigned data-id attribute as follows: "_label_{id}"
- * @param {Object} items - array of objects to render (required)
- *          format: [{"id": "val", "name": "val"}, {"id": "val", "name": "val"}...]
+ * @param {RadioGroupItems} items - array of objects to render (required)
+ *          format: <code>[{id: "val", name: "val", disabled: true}, {id: "val", name: "val", hidden: true}...]</code>
  * @param {FormRadioGroup~onChangeCallback} onChange - the callback to be triggered when the selection changed
  * @param {*} selected - the selected "id" from the items object above. If none is passed-in, all radio buttons
  *          are left unchecked
@@ -41,7 +48,8 @@ var React = require("react"),
  *         },
  *         {
  *             id: PolicyConditionsConstants.ConditionType.APS_CUSTOMERS,
- *             name: "Customers"
+ *             name: "Customers",
+ *             hidden: !this.props.apsCustomersEnabled
  *         },
  *         {
  *             id: PolicyConditionsConstants.ConditionType.APS_WHATEVER,
@@ -99,7 +107,9 @@ var FormRadioGroup = React.createClass({
 
                 return (
                     <label
-                        className={classnames("input-radio", self.props.className, radioCss)}
+                        className={classnames("input-radio", self.props.className, radioCss, {
+                            hidden: item.hidden
+                        })}
                         key={item.id}
                         data-id={self.props.id + "_label_" + item.id}>
 

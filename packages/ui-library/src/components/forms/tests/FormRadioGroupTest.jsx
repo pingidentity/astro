@@ -2,7 +2,6 @@ window.__DEV__ = true;
 
 jest.dontMock("../FormRadioGroup.jsx");
 
-
 describe("FormRadioGroup", function () {
     var React = require("react"),
         ReactTestUtils = require("react-addons-test-utils"),
@@ -134,7 +133,6 @@ describe("FormRadioGroup", function () {
     });
 
     it("renders inputs without disabled state", function () {
-
         // set disabled=false on individual item and for group
         items[0].disabled = false;
         var view = ReactTestUtils.renderIntoDocument(
@@ -154,5 +152,20 @@ describe("FormRadioGroup", function () {
         expect(inputs[0].disabled).toBeFalsy();
         expect(inputs[1].disabled).toBeFalsy();
 
+    });
+
+    it("adds 'hidden' class to inputs with 'hidden' property", function () {
+        // hide first item
+        items[0].hidden = true;
+        var view = ReactTestUtils.renderIntoDocument(
+            <FormRadioGroup
+                groupName="test_radio_group"
+                onChange={callback}
+                items={items} />
+        );
+
+        // test for "hidden" class on labels
+        var labels = TestUtils.scryRenderedDOMNodesWithClass(view, "hidden");
+        expect(labels.length).toBe(1);
     });
 });
