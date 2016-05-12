@@ -18,7 +18,10 @@ var React=require("react"),
  * @param {string} [label] - label text to be displayed
  * @param {string} [labelHelpText] - label help text to be displayed
  * @param {string} [name] - optional name to pass
- * @param {FormCheckbox~onChangeCallback} onChange - callback to be triggered when checkbox ticked
+ * @param {FormCheckbox~onChangeCallback} onChange - callback to be triggered when checkbox ticked,
+ * will be passed the original event
+ * @param {function} onValueChange - callback to be triggered when checkbox is toggled, will be
+ * passed the checked state
  * @param {string} [value] - optional value to pass
  * @param {string} [helpClassName] - optional class for HelpHint
  *
@@ -38,7 +41,8 @@ var FormCheckbox=React.createClass({
         label: React.PropTypes.string,
         labelHelpText: React.PropTypes.string,
         name: React.PropTypes.string,
-        onChange: React.PropTypes.func.isRequired,
+        onChange: React.PropTypes.func,
+        onValueChange: React.PropTypes.func,
         value: React.PropTypes.string,
         helpClassName: React.PropTypes.string
     },
@@ -48,6 +52,15 @@ var FormCheckbox=React.createClass({
             disabled: false,
             id: "form-checkbox"
         };
+    },
+
+    _handleChange: function (e) {
+        if (this.props.onChange) {
+            this.props.onChange(e);
+        }
+        if (this.props.onValueChange) {
+            this.props.onValueChange(!!e.target.checked);
+        }
     },
 
     render: function () {
@@ -64,7 +77,7 @@ var FormCheckbox=React.createClass({
                     type="checkbox"
                     name={this.props.name ? this.props.name : id}
                     value={this.props.value ? this.props.value: id}
-                    onChange={this.props.onChange}
+                    onChange={this._handleChange}
                     checked={this.props.checked}
                     disabled={this.props.disabled}
                 />

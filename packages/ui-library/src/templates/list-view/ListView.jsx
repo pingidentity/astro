@@ -36,18 +36,31 @@ module.exports = React.createClass({
         hasPrev: React.PropTypes.bool.affectsRendering
     },
 
+    /*
+     * When the component mounts, do a bunch of initialization
+     */
     componentWillMount: function () {
+        //Create an instance of the row type with the right accessory type
         this._contentType = <ExpandableRow id={0} showEdit={true} rowAccessories={<RowAccessories />} />;
+
+        //Instead of creating partials in the render function, which get computed on ever render, or
+        //extracting the data-id of the target.  Created partials on mount and use them
+        this._handleTextChange = this._handleFilter.bind(null, "text");
+        this._handleOddFilterToggle = this._handleFilter.bind(null, "odd");
+        this._handleEvenFilterToggle = this._handleFilter.bind(null, "even");
     },
 
-    _handleTextFilter: function (value) {
-        this.props.onSearchFilterChange("text", value);
+    /*
+     * Wrap the callback in a function so that we can create partials without having to worry about the
+     * callback changing.
+     */
+    _handleFilter: function (name, value) {
+        this.props.onSearchFilterChange(name, value);
     },
 
-    _handleFilter: function (e) {
-        this.props.onSearchFilterChange(e.target.getAttribute("data-id"), !!e.target.checked);
-    },
-
+    /*
+     * Only execute the scroll callback if the the position changes
+     */
     _handleScroll: function (pos) {
         if (this.props.position.batchId !== pos.batchId || this.props.position.itemIndex !== pos.itemIndex) {
             this.props.onScrollPositionChange(pos);
@@ -61,7 +74,7 @@ module.exports = React.createClass({
                     <div className={classnames("search-bar", { expanded: this.props.advancedSearch })}>
                         <div>
                             <FormTextField controlled={true}
-                                onValueChange={this.props.onSearchQueryChange}
+                                onValueChange={this._handleTextChange}
                                 value={this.props.filters.text}
                                 className="search" />
 
@@ -71,12 +84,10 @@ module.exports = React.createClass({
                         </div>
                         <div className="filters">
                             <FormCheckbox label="filter odd rows"
-                                onChange={this._handleFilter}
-                                id="odd"
+                                onValueChange={this._handleOddFilterToggle}
                                 checked={this.props.filters.odd} />
                             <FormCheckbox label="filter even rows"
-                                onChange={this._handleFilter}
-                                id="even"
+                                onValueChange={this._handleEvenFilterToggle}
                                 checked={this.props.filters.even} />
                         </div>
                     </div>

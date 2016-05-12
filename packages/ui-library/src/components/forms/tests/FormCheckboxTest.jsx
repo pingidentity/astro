@@ -13,11 +13,23 @@ describe("FormCheckbox", function () {
 
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
-            onChange: jest.genMockFunction()
+            onChange: jest.genMockFunction(),
+            onValueChange: jest.genMockFunction()
         });
 
         return ReactTestUtils.renderIntoDocument(<FormCheckbox {...opts} />);
     }
+
+    it("works with no callbacks", function () {
+        var component = getComponent({
+            onChange: null,
+            onValueChange: null,
+        });
+
+        var checkbox = TestUtils.findRenderedDOMNodeWithDataId(component, "form-checkbox");
+
+        ReactTestUtils.Simulate.change(checkbox, { target: { checked: true } });
+    });
 
     it("uses 'data-id' to set data-id", function () {
         var component = getComponent({
@@ -59,17 +71,30 @@ describe("FormCheckbox", function () {
         expect(label[0].childNodes[0].textContent).toEqual("pre-check");
     });
 
+    it("provides name and value", function () {
+        var component = getComponent({
+            name: "my name",
+            value: "my value"
+        });
+        var checkbox = TestUtils.findRenderedDOMNodeWithDataId(component, "form-checkbox");
+
+        expect(checkbox.getAttribute("value")).toEqual("my value");
+    });
+
     it("simulate change event", function () {
-        var component = getComponent();
+        var component = getComponent({
+            onValueChange: jest.genMockFunction()
+        });
         var checkbox = TestUtils.findRenderedDOMNodeWithDataId(component, "form-checkbox");
 
         //expect default unchecked
         expect(checkbox.checked).toBe(false);
 
-        ReactTestUtils.Simulate.change(checkbox);
+        ReactTestUtils.Simulate.change(checkbox, { target: { checked: true } });
 
         //expect callback
         expect(component.props.onChange).toBeCalled();
+        expect(component.props.onValueChange).toBeCalledWith(true);
     });
 
     it("check help tootip", function () {
