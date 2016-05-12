@@ -6,6 +6,26 @@ module.exports = [
                 label: "List View",
                 demo: require("../components/templates/ListViewDemo.jsx"),
                 pathToCode: "components/templates/ListView.jsx"
+            },
+            {
+                label: "Edit View - Simple",
+                demo: require("../components/templates/EditViewSimpleDemo.jsx"),
+                pathToCode: "components/templates/EditViewSimple.jsx"
+            },
+            {
+                label: "Edit View - Sectioned",
+                demo: require("../components/templates/EditViewSectionedDemo.jsx"),
+                pathToCode: "components/templates/EditViewSectioned.jsx"
+            },
+            {
+                label: "Edit View - Switched",
+                demo: require("../components/templates/EditViewSwitchedDemo.jsx"),
+                pathToCode: "components/templates/EditViewSwitched.jsx"
+            },
+            {
+                label: "Edit View - Collapsible",
+                demo: require("../components/templates/EditViewCollapsibleDemo.jsx"),
+                pathToCode: "components/templates/EditViewCollapsible.jsx"
             }
         ]
     },

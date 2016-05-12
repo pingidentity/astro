@@ -159,19 +159,20 @@ var Stateless = React.createClass({
     },
 
     render: function () {
-        var className = classnames(this.props.className, "input-text", {
-            edited: this.props.isEdited,
-            required: this.props.required,
-            disabled: this.props.disabled,
-            "value-entered": this.props.value,
-            "inline-save": this.props.showSave,
-            "form-error": this.props.errorMessage
-        });
+        var id = this.props["data-id"] || this.props.id,
+            className = classnames(this.props.className, "input-text", {
+                edited: this.props.isEdited,
+                required: this.props.required,
+                disabled: this.props.disabled,
+                "value-entered": this.props.value,
+                "inline-save": this.props.showSave,
+                "form-error": this.props.errorMessage
+            });
 
         return (
             <FormLabel className={className}
                        ref="container"
-                       data-id={this.props["data-id"] || this.props.id}
+                       data-id={id}
                        value={this.props.labelText}
                        hint={this.props.labelHelpText}>
                 <span className="input-container">
@@ -184,9 +185,9 @@ var Stateless = React.createClass({
                            onChange={this._handleFieldChange}
                            placeholder={this.props.placeholder}
                            defaultValue={this.props.defaultValue}
-                           ref="input"
+                           ref={id + "-input"}
                            readOnly={this.props.readOnly}
-                           data-id="input"
+                           data-id={id + "-input"}
                            type={this.props.maskValue && !this.props.reveal ? "password" : "text"}
                            maxLength={this.props.maxLength}
                            value={this.props.value}

@@ -357,7 +357,7 @@ $layout-zindex-order: (
 	bottom: 0;
 	left: $layout-nav-width + 1px;
 	background-color: $color-white;
-	padding: 25px 40px 40px 40px;
+	padding: 25px 40px 80px 40px;
 	border-top: 1px solid $color-white;
 
 	.detail-primary-buttons {
@@ -556,7 +556,7 @@ $layout-zindex-order: (
 	margin: -25px 0 5px 0;
 }
 .content-controls {
-	position: fixed;
+	position: absolute;
 	left: 0;
 	right: 0;
 	bottom: 0;
