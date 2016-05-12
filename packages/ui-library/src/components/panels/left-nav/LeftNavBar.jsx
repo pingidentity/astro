@@ -1,4 +1,4 @@
-var React = require("../../../util/ReactWithDefaultMethods.js"),
+var React = require("../../../util/ReactWithDefaultMethods"),
     ReactDOM = require("react-dom"),
     classnames = require("classnames"),
     Copyright = require("./Copyright.jsx"),
@@ -24,43 +24,6 @@ var LeftNavBar = React.createClass({
         onItemClick: React.PropTypes.func
     },
 
-    _handleSectionClick: function (id) {
-        this.props.onSectionClick(id);
-    },
-
-    _handleItemClick: function (id) {
-        this.props.onItemClick(id);
-    },
-
-    _renderSection: function (section, index) {
-        var sectionClass = classnames({
-            menu: true,
-            open: this.props.openNode === section.id
-        });
-
-        return (
-            <div key={index}>
-                <div className="title" data-id={section.id + "-label"}
-                        onClick={this._handleSectionClick.bind(this, section.id)}>
-                    {section.label}
-                </div>
-                <ul className={sectionClass} data-id={section.id + "-menu"}>
-                {
-                    section.children.map(function (item, i) {
-                        return (
-                            <li key={i} className={this.props.selectedNode === item.id ? "highlighted" : ""}>
-                                <a data-id={item.id + "-label"} onClick={this._handleItemClick.bind(this, item.id)}>
-                                    {item.label}
-                                </a>
-                            </li>);
-                    }.bind(this))
-                }
-                </ul>
-                <div className="divider"></div>
-            </div>
-        );
-    },
-
     _rerender: function () {
         this.componentDidUpdate();
         this._getItemSelector().removeEventListener("animationend", this._rerender);
@@ -68,6 +31,15 @@ var LeftNavBar = React.createClass({
 
     _getItemSelector: function () {
         return ReactDOM.findDOMNode(this.refs.itemSelector);
+    },
+
+    _renderSection: function (section) {
+        return (
+            <LeftNavSection {...section} key={section.id} data-id={section.id}
+                selectedNode={this.props.selectedNode}
+                onItemClick={this.props.onItemClick}
+                onSectionClick={this.props.onSectionClick}
+                open={this.props.openNode === section.id} />);
     },
 
     componentDidMount: function () {
@@ -95,6 +67,12 @@ var LeftNavBar = React.createClass({
      * @desc After each render, we need to check if the NavBar highlter needs to be slid over a new item
      */
     componentDidUpdate: function (prevProps) {
+        //it is generally bad practice to touch the dom after rendering and also bad practice to set state within
+        //componentDidUpdate because how easily you can get into an infinite loop of
+        //setState -> componentDidUpdate -> setState.  This is why we make sure the specific props have changed
+        //before calling setState.  There's no way around this as the section has to be expanded first before it
+        //can be known where to move the itemSelector.
+
         if (!prevProps ||
             prevProps.selectedNode !== this.props.selectedNode ||
             prevProps.openNode !== this.props.openNode)
@@ -154,10 +132,73 @@ var LeftNavBar = React.createClass({
 
                     { this.props.tree.map(this._renderSection) }
 
-                    <Copyright />
+                    <Copyright ref="copyright" />
                 </div>
             </div>);
     }
 });
 
+/**
+ * @class LeftNavSection
+ * @private
+ * @desc Internal class which renders a section of the LeftNavBar
+ * @param {function} onItemClick - The callback for when an leaf is clicked.  Will be passed back the
+ * id of the clicked item
+ * @param {function} onSectionClick - The callback for when a section label is clicked.  Will be passed
+ * back the id of the clicked section
+ * @param {bool} open - indicates if the section is open
+ * @param {string} id - The id of the component (this is what will be passed back to the onSectionClick handler
+ * @param {string} data-id - This may or may not be the same as the id.
+ */
+var LeftNavSection = React.createClass({
+    propTypes: {
+        onItemClick: React.PropTypes.func,
+        onSectionClick: React.PropTypes.func,
+        open: React.PropTypes.bool,
+        id: React.PropTypes.string,
+        "data-id": React.PropTypes.string
+    },
+
+    /*
+     * Instead of using bind to create a partial after ever render, just use the data-id to pass the
+     * right id back to the click handler.
+     */
+    _handleItemClick: function (e) {
+        this.props.onItemClick(e.target.getAttribute("data-id").slice(0, -6));
+    },
+
+    _handleSectionClick: function (e) {
+        this.props.onSectionClick(e.target.getAttribute("data-id").slice(0, -6));
+    },
+
+    render: function () {
+        var className = classnames({
+            menu: true,
+            open: this.props.open
+        });
+
+        return (
+            <div>
+                <div className="title" data-id={this.props["data-id"] + "-label"} onClick={this._handleSectionClick}>
+                    {this.props.label}
+                </div>
+                <ul className={className} data-id={this.props["data-id"] + "-menu"}>
+                {
+                    this.props.children.map(function (item, i) {
+                        return (
+                            <li key={i} className={this.props.selectedNode === item.id ? "highlighted" : ""}>
+                                <a data-id={item.id + "-label"} onClick={this._handleItemClick}>
+                                    {item.label}
+                                </a>
+                            </li>);
+                    }.bind(this))
+                }
+                </ul>
+                <div className="divider"></div>
+            </div>
+        );
+    }
+});
+
 module.exports = LeftNavBar;
+

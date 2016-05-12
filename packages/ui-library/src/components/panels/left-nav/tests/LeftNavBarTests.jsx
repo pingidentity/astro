@@ -90,10 +90,32 @@ describe("LeftNavBar", function () {
         expect(component._getItemSelector()).toBe(null);
     });
 
+    /*
+    it("will scroll if selected item is below copyright section", function () {
+        var wrapper = getWrappedComponent({ openNode: "section-1", selectedNode: "item-1" });
+        var component = wrapper.refs.target;
+        var copyright = ReactDOM.findDOMNode(component.refs.copyright);
+        var itemSelector = ReactDOM.findDOMNode(component).getElementsByTagName("li")[1];
+
+        copyright.getBoundingClientRect = jest.genMockFunction().mockReturnValue({ top: 10 });
+        itemSelector.getBoundingClientRect = jest.genMockFunction().mockReturnValue({ bottom: 11 });
+        parent.getBoundingClientRect = jest.genMockFunction().mockReturnValue({ height: 10 });
+
+        wrapper.sendProps({ openNode: "section-2", selectedNode: "item-2" });
+        expect(parent.scrollTop).toBe(10);
+
+        itemSelector = ReactDOM.findDOMNode(component).getElementsByTagName("li")[0];
+        itemSelector.getBoundingClientRect = jest.genMockFunction().mockReturnValue({ top: -10 });
+
+        wrapper.sendProps({ openNode: "section-1", selectedNode: "item-1" });
+        expect(parent.scrollTop).toBe(0);
+    });*/
+
     //just here to satisfy code coverage
     it("gets new selected item", function () {
         var wrapper = getWrappedComponent({ openNode: "section-1", selectedNode: "item-1" });
 
         wrapper.sendProps({ openNode: "section-2", selectedNode: "item-2" });
+        wrapper.sendProps({ openNode: "section-1", selectedNode: "item-1" });
     });
 });

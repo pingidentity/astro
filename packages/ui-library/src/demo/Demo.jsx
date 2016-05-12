@@ -49,6 +49,8 @@ var DemoApp = React.createClass({
      * @desc Initialize the app
      */
     componentWillMount: function () {
+        var reducers = _.clone(store.baseReducers);
+
         //bind action creators
         this.appActions = Redux.bindActionCreators(Actions, this.props.dispatch);
         this.routerActions = Redux.bindActionCreators(ReactRouterRedux.routerActions, this.props.dispatch);
@@ -65,12 +67,17 @@ var DemoApp = React.createClass({
 
         //The demos list doesn't have ids, so this loop will just duplicate the label and use it as an ID.
         //IDs are required by the LeftNavBar.
+        //While looping through the demos, register their reducers
         this.navActions.init(deepClone(require("./core/demos.js")).map(function (section) {
             section.id = section.label.replace(/\W/g, "");
 
             section.children.forEach(function (demo) {
                 demo.id = demo.label.replace(/\W/g, "");
                 this._demoIndexById[demo.id] = demo;
+
+                if (demo.demo.Reducer) {
+                    reducers[demo.id] = demo.demo.Reducer;
+                }
             }.bind(this));
 
             section.children = section.children.sort(function (a, b) {
@@ -88,6 +95,9 @@ var DemoApp = React.createClass({
 
         //Watch arrow keys and map them to the corresponding actions
         window.addEventListener("keydown", this._handleKeydown , false);
+
+        //register all reducers
+        store.replaceReducer(Redux.combineReducers(reducers));
     },
 
     /**
@@ -135,9 +145,6 @@ var DemoApp = React.createClass({
             //If the demo exposes Actions/Reducer, tie the Reducer into the application store and bind the Actions
             //so they can be injected into the active demo.
             if (this._demoItem.demo.Reducer && this._demoItem.demo.Actions) {
-                store.replaceReducer(Redux.combineReducers(
-                    _.extend({}, store.baseReducers, _.object([this._demoItem.id], [this._demoItem.demo.Reducer]))));
-
                 this._demoActions = Redux.bindActionCreators(this._demoItem.demo.Actions, this.props.dispatch);
 
                 if (!this.props.all[id] && this._demoWatchProps) {

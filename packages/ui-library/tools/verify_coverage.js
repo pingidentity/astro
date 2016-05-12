@@ -115,15 +115,15 @@ var getFeatureCoverage = function (name, coverage, refCoverage) {
     // when no properties of this type are found, the coverage is considered 100%
     var current = coverage[name].found === 0 ? 1.0 : coverage[name].hit / coverage[name].found;
 
-    // use the default coverage if the reference coverage does not exist
-    // or if no such features were found in the reference code
+    //Okhtay: It's too restrictive to say that coverage will never drop.  Instead, we should always meet at least the reference
+    //level of coverage or better than before.
     var reference = refCoverage && refCoverage[name].found
             ? refCoverage[name].hit / refCoverage[name].found
-            : DEFAULT_COVERAGE[name];
+            : 1;
 
     return {
         current: current,
-        reference: reference
+        reference: Math.min(reference, DEFAULT_COVERAGE[name])
     };
 };
 

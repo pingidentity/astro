@@ -37,9 +37,7 @@ var Batch = React.createClass({
                         <div key={i}>
                             <div className="item-head">{nextHeading}</div>
                             {
-                                React.cloneElement(
-                                    this.props.contentType,
-                                    _.defaults(this.props.data[i]))
+                                React.cloneElement(this.props.contentType, this.props.data[i])
                             }
                         </div>
                     );
