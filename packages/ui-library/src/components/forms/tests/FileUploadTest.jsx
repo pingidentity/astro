@@ -191,6 +191,12 @@ describe("FileUpload", function () {
         expect(ReactDOM.findDOMNode(component).className).toContain("disabled");
     });
 
+    it("will add stacked css class to container", function () {
+        var component = getComponent({ stacked: true });
+
+        expect(TestUtils.findRenderedDOMNodeWithClass(component, "stacked"));
+    });
+
     it("will not respond to actions while disabled", function () {
         var component = getComponent({ disabled: true });
         var fileInput = ReactDOM.findDOMNode(component.refs.fileInput);

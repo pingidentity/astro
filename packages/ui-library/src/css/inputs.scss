@@ -719,13 +719,11 @@ input[type=file] {
 	&.no-label {
 		margin-top: 0;
 	}
-
 	.form-error.help-tooltip {
 		.tooltip-text {
 			top: 7px;
 		}
 	}
-
 	input[type=file] {
 		position: absolute;
 		top: 0;
@@ -750,7 +748,9 @@ input[type=file] {
 	}
 	.file-info {
 		line-height: 1em;
-		margin: 0 0 0 10px;
+		padding: 0;
+		font-family: $font-pn-regular;
+		display: inline-block;
 
 		a.file-remove {
 			display: none;
@@ -761,6 +761,18 @@ input[type=file] {
 		.file-name {
 			font-size: 14px;
 			line-height: 1em;
+			margin: 10px 20px 0 0;
+			color: $color-midnight;
+		}
+		// within a details tooltip, login modal
+		&.stacked {
+			display: block;
+			.file-name {
+				display: inline-block;
+				vertical-align: top;
+				max-width: 250px;
+				@include text-truncate;
+			}
 		}
 	}
 	&.file-selected {
@@ -836,7 +848,15 @@ input[type=file] {
 			left: 105px;
 			  left: $img-width + 15px;
 		}
-
+		.form-error-message {
+			.tooltip-text {
+				min-width: 250px;
+				margin-left: 20px;
+			}
+		}
+		.file-info {
+			display: block;
+		}
 		&.file-selected {
 			.image-icon {
 				display: none;
@@ -1651,7 +1671,7 @@ $input-width-settings-map-select: input-width-map($input-width-settings-smallest
 
 
 
-// DEPRICATED OR SITE-SPECIFIC STYLES --------------------------------------------------------------
+// DEPRECATED OR SITE-SPECIFIC STYLES --------------------------------------------------------------
 // TODO : move WP styles to WP
 
 .inline-input-labels {

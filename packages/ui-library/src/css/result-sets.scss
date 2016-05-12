@@ -175,7 +175,7 @@
 			}
 		}
 		.expand-btn, .delete-btn, .edit-btn,
-		.view-btn // depricated
+		.view-btn // deprecated
 		{
 			&:hover {
 				text-decoration: none;
@@ -214,7 +214,7 @@
 			}
 		}
 		.edit-btn, .view-btn,
-		.no-edit // depricated
+		.no-edit // deprecated
 		{
 			top: 1px;
 			bottom: $button-height + $button-top + 7px;
@@ -317,7 +317,7 @@
 		margin: 30px 0 10px 0;
 	}
 	.result-set-index, // prefered
-	.item-head // depricated
+	.item-head // deprecated
 	{
 		margin: 5px auto;
 		font-weight: bold;
@@ -327,7 +327,7 @@
 }
 
 
-// V1 - TO BE REMOVED OR MOVED - DEPRICATED OR SITE SPECIFIC -----------------------------------------------------------
+// V1 - TO BE REMOVED OR MOVED - DEPRECATED OR SITE SPECIFIC -----------------------------------------------------------
 .result-set {
 	$item-height: 75px;
 	$button-height: 47px;

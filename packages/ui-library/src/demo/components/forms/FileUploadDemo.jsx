@@ -1,12 +1,17 @@
 var React = require("react");
 var FileUpload = require("../../../components/forms/FileUpload.jsx");
+var DetailsTooltip = require("../../../components/tooltips/DetailsTooltip.jsx");
 
 var FileUploadDemo = React.createClass({
 
     getInitialState: function () {
         return {
             firstFile: "none",
-            secondFile: "favicon.png (4762 bytes)"
+            secondFile: "favicon.png (4762 bytes)",
+            thirdFile: "",
+            fourthFile: "",
+            tooltipOpen: false,
+            tooltipConfirmed: ""
         };
     },
 
@@ -19,6 +24,13 @@ var FileUploadDemo = React.createClass({
     _onSecondFileChanged: function (file) {
         this.setState({
             secondFile: file ? `${file.name} (${file.size} bytes)` : "none"
+        });
+    },
+    
+    _toggleTooltip: function () {
+        this.setState({
+            tooltipOpen: !this.state.tooltipOpen,
+            tooltipConfirmed: ""
         });
     },
 
@@ -48,38 +60,97 @@ var FileUploadDemo = React.createClass({
     render: function () {
         return (
             <div>
-                <FileUpload
-                    referenceName="fileUpload"
-                    maxFileSizeKb={4096}
-                    errorHandler={this._onError}
-                    showThumbnail={true}
-                    onFileChange={this._onFirstFileChanged}
-                    removeFileLabel="Remove File"
-                    buttonText="Choose a File"
-                />
-
-                <br/><br/>
-                <div>
+                
+                <div className="input-row">
+                    <label>
+                        <span className="label-text">Image Upload</span>
+                    </label>
+                    <FileUpload
+                        referenceName="fileUpload"
+                        maxFileSizeKb={4096}
+                        errorHandler={this._onError}
+                        showThumbnail={true}
+                        onFileChange={this._onFirstFileChanged}
+                        removeFileLabel="Remove"
+                        buttonText="Choose a File"
+                    />
+                </div>
+                <div className="input-row">
                     Selected file = {this.state.firstFile}
                 </div>
 
-                <br/><br/>
-
-                <FileUpload
-                    accept="image/png"
-                    validator={this._fileValidator}
-                    showThumbnail={true}
-                    onFileChange={this._onSecondFileChanged}
-                    errorHandler={this._onError}
-                    defaultImage="src/demo/images/favicon.png"
-                    removeFileLabel="Remove File"
-                    buttonText="Choose a File"
-                />
-
-                <br/><br/>
-                <div>
+                <div className="input-row">
+                    <label>
+                        <span className="label-text">Image Uploaded</span>
+                    </label>
+                    <FileUpload
+                        accept="image/png"
+                        validator={this._fileValidator}
+                        showThumbnail={true}
+                        onFileChange={this._onSecondFileChanged}
+                        errorHandler={this._onError}
+                        defaultImage="src/demo/images/favicon.png"
+                        removeFileLabel="Remove"
+                        buttonText="Choose a File"
+                    />
+                </div>
+                <div className="input-row">
                     Selected file = {this.state.secondFile}
                 </div>
+
+                <div className="input-row">
+                    <label>
+                        <span className="label-text">File Upload</span>
+                    </label>
+                    <FileUpload
+                        accept=""
+                        errorHandler={this._onError}
+                        removeFileLabel="Remove"
+                        buttonText="Choose a File"
+                    />
+                </div>
+                
+                <a onClick={this._toggleTooltip}>Stacked File Name in a DetailsTooltip</a>
+                <DetailsTooltip
+                    positionStyle="top right"
+                    labelStyle="my-css-class"
+                    title="File Upload in a Details Tooltip"
+                    open={this.state.tooltipOpen}
+                    onToggle={this._toggleTooltip}>
+
+                    <br/><br/>
+                    <div className="input-row">
+                      <label>
+                        <span className="label-text">File Upload</span>
+                      </label>
+
+                      <FileUpload
+                        referenceName="uploadedFile"
+                        accept=""
+                        buttonText="Choose a File"
+                        removeFileLabel="Remove"
+                        stacked={true}
+                      />
+
+                    </div>
+
+                    <div className="buttons" data-id="delete-confirmation">
+                        <input
+                            type="button"
+                            data-id="cancel-action"
+                            value="Cancel"
+                            className="secondary"
+                            onClick={this._toggleTooltip}
+                        />
+                        <input
+                            type="button"
+                            data-id="confirm-action"
+                            value="Confirm"
+                            className="primary"
+                            onClick={this._toggleTooltip}
+                        />
+                    </div>
+                </DetailsTooltip>
 
             </div>
 
