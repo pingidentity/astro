@@ -183,8 +183,14 @@ var Calendar = React.createClass({
     /**
      * Handles input blur
      * @method Calendar#inputBlur
+     * @param {Object} e The event object
      */
-    inputBlur: function () {
+    inputBlur: function (e) {
+        //ignore blank inputs to avoid inputBlur setting date to be invalid before setDate can be called
+        if (e.target.value === "") {
+            return;
+        }
+
         var date = this.state.inputValue,
             newDate = null,
             computableDate = null,

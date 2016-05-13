@@ -23,6 +23,10 @@ describe("Calendar", function () {
         selectedDateString = "2015-10-15",
         selectedDate = moment(new Date(selectedDateString));
 
+    beforeEach(function () {
+        callback.mockClear();
+    });
+
     it("is rendering closed view", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Calendar format="YYYY-MM-DD"
@@ -267,6 +271,22 @@ describe("Calendar", function () {
         ReactTestUtils.Simulate.blur(input, {});
 
         expect(callback).toBeCalled();
+    });
+
+    it("does not trigger callback for empty string date input", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar format="YYYY-MM-DD"
+                      date={selectedDate}
+                      computableFormat="x"
+                      closeOnSelect={true}
+                      onChange={callback}/>
+        );
+
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+
+        ReactTestUtils.Simulate.blur(input, { target: { value: "" } });
+
+        expect(callback).not.toBeCalled();
     });
 
     it("is closing calendar on click outside", function () {
