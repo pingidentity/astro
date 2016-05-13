@@ -486,12 +486,13 @@ $layout-zindex-order: (
 	position: relative;
 	display: inline-block;
 	padding: 0 0 25px 0;
-	margin-right: 25px;
+	margin-right: 15px;
 	font-size: 14px;
 	color: $color-active-blue;
 	line-height: 1em;
 	cursor: pointer;
 	font-family: $font-pn-regular;
+
 	&:hover {
 		color: $color-active-blue-highlighted;
 		text-decoration: underline;
@@ -517,6 +518,22 @@ $layout-zindex-order: (
 	}
 }
 
+.page-return-link {
+	position: relative;
+	display: inline-block;
+	font-size: 14px;
+	margin: 0 0 25px 13px;
+
+	&:before {
+		content: 'Y';
+		position: absolute;
+		top: -1px;
+		left: -14px;
+		font-size: 6px;
+		font-family: $icon-font;
+		@include rotate(90deg);
+	}
+}
 .page-title {
 	font-size: 24px;
 	font-family: $font-pn-regular;
@@ -528,6 +545,23 @@ $layout-zindex-order: (
 		font-size: 14px;
 		display: block;
 		color: $color-elephant;
+	}
+}
+.page-controls-secondary {
+	float: right;
+    margin: -70px 0 0 0;
+
+	.button, input[type=button], button, a, .input-toggle, .status {
+		display: inline-block;
+		vertical-align: top;
+		margin: 30px 15px 0 0;
+		@include transform(translateY(-50%));
+	}
+	.input-toggle {
+		a.toggle {
+			margin: 0;
+			@include transform(translateY(0));
+		}
 	}
 }
 .page-section {
@@ -590,7 +624,7 @@ $layout-zindex-order: (
 	border-color: $color-rabbit-fur;
 	margin: -25px 0 5px 0;
 }
-.content-controls {
+.page-controls-primary {
 	position: absolute;
 	left: 0;
 	right: 0;

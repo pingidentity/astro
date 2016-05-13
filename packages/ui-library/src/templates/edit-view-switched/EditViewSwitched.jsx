@@ -4,7 +4,8 @@ var React = require("react"),
     FormRadioGroup = require("../../components/forms/FormRadioGroup.jsx"),
     FormSelectField = require("../../components/forms/FormSelectField.jsx"),
     Layout = require("../../components/general/ColumnLayout.jsx"),
-    RockerButton = require("../../components/forms/RockerButton.jsx");
+    RockerButton = require("../../components/forms/RockerButton.jsx"),
+    Toggle = require("../../components/forms/Toggle.jsx");
 
 /**
  * @class EditViewSwitched
@@ -40,8 +41,14 @@ module.exports = React.createClass({
     render: function () {
         return (
             <div>
+                <a className="page-return-link">To record list</a>
+
                 <h1 className="page-title">Edit Template with Switcher</h1>
 
+                <div className="page-controls-secondary">
+                    <input type="button" className="button inline" value="Inline Button" />
+                    <Toggle />
+                </div>
                 <RockerButton
                     labels={["Identity", "Address", "Miscellaneous"]}
                     onChange={this.props.onRockerButtonChange}
@@ -178,7 +185,7 @@ module.exports = React.createClass({
                     </div>
                 )}
 
-                <div className="content-controls">
+                <div className="page-controls-primary">
                     <input
                         type="button"
                         className="cancel"

@@ -4,7 +4,8 @@ var React = require("react"),
     FormRadioGroup = require("../../components/forms/FormRadioGroup.jsx"),
     FormSelectField = require("../../components/forms/FormSelectField.jsx"),
     Layout = require("../../components/general/ColumnLayout.jsx"),
-    Section = require("../../components/general/Section.jsx");
+    Section = require("../../components/general/Section.jsx"),
+    Toggle = require("../../components/forms/Toggle.jsx");
 
 /**
  * @class EditViewCollapsible
@@ -50,8 +51,14 @@ module.exports = React.createClass({
     render: function () {
         return (
             <div>
+                <a className="page-return-link">To record list</a>
+
                 <h1 className="page-title">Edit Template</h1>
 
+                <div className="page-controls-secondary">
+                    <input type="button" className="button inline" value="Inline Button" />
+                    <Toggle />
+                </div>
                 <div className="page-section-content">
                     <Section
                         onToggle={this._toggleSection1}
@@ -189,7 +196,7 @@ module.exports = React.createClass({
                         </div>
                     </Section>
                 </div>
-                <div className="content-controls">
+                <div className="page-controls-primary">
                     <input
                         type="button"
                         className="cancel"
