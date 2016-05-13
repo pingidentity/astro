@@ -157,41 +157,23 @@ label {
 	}
 	&.input-text {
 		input {
-			padding: 3px 34px 3px 10px;
-		}
-		&.large {
-			.input-container {
-				input {
-					height: 48px;
-					font-size: 16px;
-				}
-			}
-			&.search {
-				.input-container {
-					&:before {
-						bottom: 18px;
-						left: 14px;
-					}
-					.undo {
-						bottom: 13px;
-						right: 12px;
-					}
-				}
-			}
+			padding: 4px 34px 3px 10px;
 		}
 		&.search {
 			.input-container {
 				input {
-					padding-left: 46px;
+					padding-left: 40px;
 				}
 				&:before {
 					font-family: $icon-font;
 					content: '\73';
-					position: absolute;
-					bottom: 14px;
-					left: 15px;
 					text-transform: none;
-					font-size: 22px;
+					position: absolute;
+					bottom: 10px;
+					left: 13px;
+					font-size: 18px;
+					font-weight: bold;
+					line-height: 1em;
 					color: $color-input-text;
 				}
 			}
@@ -1250,6 +1232,58 @@ input[type=file] {
         }
     }
 }
+.input-selection-list {
+	position: relative;
+	display: inline-block;
+	padding: 10px;
+	border: 1px solid $color-timberwolf;
+	width: 202px;
+	box-sizing: border-box;
+
+	.input-text.search {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		margin: 0;
+		padding: 0;
+
+		.input-container {
+			input {
+				height: 36px;
+				width: 180px;
+				padding-left: 35px;
+				padding-right: 5px;
+			}
+			&:before {
+				font-size: 16px;
+				bottom: 10px;
+	    		left: 10px;
+			}
+		}
+	}
+	.input-row {
+		margin: 0;
+	}
+	.input-selection-list-items {
+		max-height: 250px - 46px;
+		margin: 46px 0 0 0 ;
+		overflow-x: hidden;
+		overflow-y: auto;
+
+		.input-radio {
+			margin: 0 0 10px 0;
+		}
+		.input-checkbox {
+			margin: 0 0 10px 0;
+
+			.label-text {
+				text-transform: none;
+			}
+		}
+	}
+
+	@include border-radius(3px);
+}
 
 // Input variants
 .required {
@@ -1674,6 +1708,30 @@ $input-width-settings-map-select: input-width-map($input-width-settings-smallest
 // DEPRECATED OR SITE-SPECIFIC STYLES --------------------------------------------------------------
 // TODO : move WP styles to WP
 
+label {
+	&.input-text {
+		&.large {
+			.input-container {
+				input {
+					height: 48px;
+					font-size: 16px;
+				}
+			}
+			&.search {
+				.input-container {
+					&:before {
+						bottom: 18px;
+						left: 14px;
+					}
+					.undo {
+						bottom: 13px;
+						right: 12px;
+					}
+				}
+			}
+		}
+	}
+}
 .inline-input-labels {
 	> label {
 		display: table-row;

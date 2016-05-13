@@ -47,9 +47,9 @@ describe("FormCheckbox", function () {
         expect(checkbox.length).toEqual(1);
         expect(checkbox[0].checked).toBe(false); //expect not to be checked
 
-        //Expect the label text to be blank
+        //Expect label container to not render when no label is provided
         var label = TestUtils.scryRenderedDOMNodesWithClass(component, "label-text");
-        expect(label[0].childNodes.length).toEqual(0);
+        expect(label.length).toEqual(0);
     });
 
     it("test pre-checked box with custom id and label", function () {
@@ -99,6 +99,7 @@ describe("FormCheckbox", function () {
 
     it("check help tootip", function () {
         var component = getComponent({
+            label: "Port Number",
             labelHelpText: "Enter a port number"
         });
 

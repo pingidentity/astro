@@ -297,4 +297,18 @@
 	    	margin-bottom: 20px;
 		}
 	}
+	&.input-selection-list-tooltip {
+		.details-content {
+			width: 200px;
+			padding: 0;
+			border-color: $color-timberwolf;
+
+			&:before {
+				border-color: transparent transparent $color-timberwolf transparent;
+			}
+			.input-selection-list {
+				border: none;
+			}
+		}
+	}
 }
