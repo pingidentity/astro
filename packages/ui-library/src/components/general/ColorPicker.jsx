@@ -38,24 +38,18 @@ var callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutside
  * @param {function} [open=false] - boolean state of open/closed menu. Used only in stateless mode.
  * @param {function} [onError] - function (message) {...} delegate to call when input is an invalid color
  * @param {string} [errorMessage] - An error message to to display if any
- * @param {bool} [pickerHidden=false] - A property to hide the color picker using CSS.  When
- *   pickerHidden is true, the "colorpicker-container" is always rendered and the visibility is
- *   controlled via the presence of the "open" class the components top-level div (see containerCss
- *   below).
  *
  * @example
  *   <ColorPicker
  *       id="my-color-picker"
  *       onClick={this._onBgPickerClick}
  *       onChange={this._onBgColorChange}
- *       pickerHidden={this.state.bgPickerHidden}
  *       color={this.props.data.enrollmentBgColor} />
  *
  *   <ColorPicker
  *       id="my-color-picker"
  *       onClick={this._onBgPickerClick}
  *       onChange={this._onBgColorChange}
- *       pickerHidden={this.state.bgPickerHidden}
  *       color={this.props.data.enrollmentBgColor}
  *       onToggle={this._onColorPickerToggle}
  *       open={this.state.colorPickerOpen}
@@ -99,8 +93,7 @@ var Stateless = React.createClass({
         onToggle: React.PropTypes.func.isRequired,
         open: React.PropTypes.bool.affectsRendering,
         onError: React.PropTypes.func,
-        errorMessage: React.PropTypes.string.affectsRendering,
-        pickerHidden: React.PropTypes.bool.affectsRendering
+        errorMessage: React.PropTypes.string.affectsRendering
     },
 
     /**
@@ -246,16 +239,7 @@ var Stateless = React.createClass({
         };
     },
 
-    getInitialState: function () {
-        return {
-            pickerHidden: this.props.pickerHidden || false
-        };
-    },
-
     render: function () {
-        /* When props.pickerHidden is true, the "colorpicker-container" is always rendered and the
-        visibility is controlled via the presence of the "open" class the components top-level div
-        (see containerCss below). */
         var containerCss = {
             "input-color-picker": true,
             open: this.props.open
@@ -286,7 +270,7 @@ var Stateless = React.createClass({
                             <span ref="colorSample" style={{ backgroundColor: this.props.color }}></span>
                         </span>
                     </span>
-                    <If test={(this.props.pickerHidden || this.props.open) && !this.props.disabled}>
+                    <If test={this.props.open && !this.props.disabled}>
                         <span className="colorpicker-container">
                             <Picker ref="reactColorPicker" value={this.props.color}
                                     onChange={this._onChange}

@@ -555,22 +555,4 @@ describe("ColorPicker", function () {
         var picker = componentRef.refs.reactColorPicker;
         expect(picker.props.value).toBe("#ff00ff");
     });
-
-    it("stateless: hides picker when told so", function () {
-        var component = getComponent({
-            id: "container",
-            color: "#ff00ff",
-            pickerHidden: true,
-            controlled: true
-        });
-        var componentRef = component.refs.stateless;
-
-        // the picker is not visible by default
-        var picker = componentRef.refs.reactColorPicker;
-        expect(picker).toBeDefined();
-
-        var container = TestUtils.findRenderedDOMNodeWithDataId(component, "container");
-        expect(container.classList.contains("open")).toBeFalsy();
-    });
-
 });
