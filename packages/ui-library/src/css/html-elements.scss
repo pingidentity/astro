@@ -21,18 +21,20 @@ a {
 	}
 }
 h1, h2, h3, h4, h5 {
-	color: $color-midnight;
+	color: $color-slate;
 }
 h1 {
-	// override color
-	color: $color-slate;
-	font-size: 28px;
+	font-size: 24px;
 	font-weight: 400;
 	margin: 25px 0;
 }
 h2 {
-	font-size: 22px;
+	font-size: 20px;
 	font-weight: 500;
+	margin: 0 0 10px 0;
+}
+h3 {
+	font-size: 16px;
 	margin: 0 0 10px 0;
 }
 p {

@@ -14,7 +14,7 @@ var templatesInDepth = React.createClass({
                      &quot;UI Library 101&quot; tutorial first for an introduction to the UI Library before continuing.
                 </p>
 
-                <h3>Where to find templates?</h3>
+                <h2>Where to find templates?</h2>
                 <p>
                     The UI Library's demo app contains a demo page for all the template layouts in the library, so it's
                      a good place to start when looking for a template you can use. Since you are reading this page,
@@ -48,7 +48,7 @@ var templatesInDepth = React.createClass({
                      tutorial helpful to refer to when navigating through the UI Library package.
                 </p>
 
-                <h3>Using a template</h3>
+                <h2>Using a template</h2>
                 <p>
                     Now that you know where to find templates and information on each template the remainder of this
                      tutorial will detail how to use the demo app, JS documentation, and source code to gain all the
@@ -129,9 +129,9 @@ var templatesInDepth = React.createClass({
                      achieve the layout you want in your application.
                 </p>
 
-                <h4>
+                <h3>
                     Congratulations! You should now have all the tools you need to start using UI Library templates.
-                </h4>
+                </h3>
             </Tutorial>
         );
     }

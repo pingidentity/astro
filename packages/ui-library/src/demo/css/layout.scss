@@ -11,10 +11,9 @@ $sidenav-lineheight: 22px;
 
 	.nav-menus {
 		width: $sidenav-width - 5;
-
-		.copyright {
-			width: $sidenav-width - $layout-nav-offset;
-		}
+	}
+	.copyright {
+		width: $sidenav-width - $layout-nav-offset;
 	}
 	ul.menu, .selected-item, &:before {
 		width: $sidenav-width - $layout-nav-offset;
@@ -47,7 +46,7 @@ $sidenav-lineheight: 22px;
 
 		.toggle {
 			&:before {
-				content: '- close documentation';
+				content: 'close documentation -';
 			}
 		}
 		.toggle-source {
@@ -59,13 +58,13 @@ $sidenav-lineheight: 22px;
 			.toggle {
 				&:before {
 					content: '';
-				}				
+				}
 			}
 			.toggle-source {
 				&:before {
-					content: '- close source';
+					content: 'close source -';
 				}
-			}	
+			}
 		}
 		iframe {
 			height: 100%;
@@ -75,25 +74,27 @@ $sidenav-lineheight: 22px;
 		}
 	}
 
-	.toggle {
-		height: 20px;
+	.toggle, .toggle-source {
+		position: absolute;
+		right: 30px;
 		cursor: pointer;
-		float: right;
 
 		&:before {
 			color: $color-active;
-			content: '+ expand documentation'
+		}
+	}
+	.toggle {
+		top: 30px;
+
+		&:before {
+			content: 'expand documentation +'
 		}
 	}
 	.toggle-source {
-		height: 20px;
-		cursor: pointer;
-		float: right;
-		clear: both;
+		top: 50px;
 
 		&:before {
-			color: $color-active;
-			content: '+ view source'
+			content: 'view source +'
 		}
 	}
 	iframe {
@@ -122,6 +123,7 @@ $sidenav-lineheight: 22px;
 	.fullscreen {
 		.output {
 			padding:0;
+			margin: 25px 0 0 0;
 			border: none;
 
 			&:before {
@@ -160,15 +162,15 @@ $sidenav-lineheight: 22px;
 			top: -18px;
 			left: 2px;
 			font-size: 14px;
-			font-family: $font-stack;
-			font-weight: bold;
+			font-family: $font-pn-semibold;
 		}
 	}
 	pre.language-markup {
 		overflow: visible;
 
 		&:before {
-			color: silver;
+			font-size: 13px;
+			color: $color-elephant;
 			content: 'MARKUP';
 		}
 	}
@@ -176,15 +178,18 @@ $sidenav-lineheight: 22px;
 		overflow: visible;
 
 		&:before {
+			font-size: 13px;
+			color: $color-elephant;
 			content: 'JAVASCRIPT';
 		}
 	}
 	.output {
 		padding: 20px;
-		border: 1px dashed silver;
+		border: 1px dashed $color-elephant;
 
 		&:before {
-			color: silver;
+			font-size: 13px;
+			color: $color-elephant;
 			content: 'OUTPUT';
 		}
 	}

@@ -14,7 +14,7 @@ var componentsInDepth = React.createClass({
                      UI Library before continuing.
                 </p>
 
-                <h3>Where to find components?</h3>
+                <h2>Where to find components?</h2>
                 <p>
                     A good place to start when looking for an inventory of the UI Library's components is to fire-up the
                      UI Library's demo app and scan through the demos. Since you are reading this page, you most likely
@@ -47,7 +47,7 @@ var componentsInDepth = React.createClass({
                      "UI Library 101" tutorial helpful to refer to when navigating through the UI Library package.
                 </p>
 
-                <h3>Using a component</h3>
+                <h2>Using a component</h2>
                 <p>
                     Now that you know where to find components and information on each component the remainder of this
                      tutorial will detail how to use the demo app, JS documentation, and source code to gain all
@@ -191,9 +191,9 @@ var componentsInDepth = React.createClass({
                      the information necessary to use the Header Bar component.
                 </p>
 
-                <h4>
+                <h3>
                     Congratulations! You should now have all the tools you need to start using UI Library components.
-                </h4>
+                </h3>
             </Tutorial>
         );
     }

@@ -32,6 +32,7 @@ input[type=button], input[type=submit], button, .button {
 	height: $height;
 	line-height: $height;
 	border: 1px solid $color-rhino;
+	box-sizing: border-box;
 
 	@include border-radius(2px);
 	@include base-button-styles;

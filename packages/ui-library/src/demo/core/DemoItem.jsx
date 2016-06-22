@@ -84,7 +84,7 @@ var DemoItem = React.createClass({
 
                     <div className={classnames("doc", { open: this.state.open, source: this.state.source })}>
                         <div className="clearfix">
-                            <h2>{this.props.label}</h2>
+                            <h1 className="page-title">{this.props.label}</h1>
                             {docToggle}
                             {srcToggle}
                         </div>

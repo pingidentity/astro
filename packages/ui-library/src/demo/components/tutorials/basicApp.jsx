@@ -19,12 +19,12 @@ var BasicApp = React.createClass({
                      app using "npm install && npm run start" to see it working.
                 </p>
                 <p className="attention">
-                    For simplicity, the basic app does not interact with a server and uses mock data. This tutorial
+                    For simplicity, the basic app doesn't interact with a server and uses mock data. This tutorial
                      will point out which parts of the code are using mocks as we reach them and the source code will
                      contain comments on these parts as well.
                 </p>
 
-                <h3>The Basic App structure</h3>
+                <h2>The Basic App structure</h2>
                 <p>
                     Before we begin, let's familiarize ourselves with the key parts of the basic app package.
                      The main files we'll be working in are located under &quot;app&quot;:
@@ -68,14 +68,14 @@ var BasicApp = React.createClass({
                      your hand at implementing the list, expanded, add, and edit views as the tutorial progresses.
                      For data, you can either use the existing data in &quot;mocks.js&quot; or create your own.
                 </p>
-                
-                <h3>UI Library dependency</h3>
+
+                <h2>UI Library dependency</h2>
                 <p>
                     In order for the basic app to use the UI Library assets, the UI Library must be included as a
                      dependency. Refer to the &quot;UI Library 101&quot; tutorial for a guide on how this can be done.
                 </p>
 
-                <h3>Application entry point</h3>
+                <h2>Application entry point</h2>
                 <p>
                     The basic app's entry point is located in the file &quot;basic-app/src/app/App.jsx&quot;.
                      This is where we initialize the app - creating the root React component, loading styles,
@@ -105,7 +105,7 @@ var BasicApp = React.createClass({
                             ].join("\n")
                         } />
 
-                <h3>Loading styles</h3>
+                    <h2>Loading styles</h2>
                 <p>
                     We incorporate the UI Library's static assets (CSS, fonts, images) into our project by copying
                      the files over into the &quot;ui-lib-assets&quot; folder using the &quot;clean-ui-lib&quot;
@@ -130,7 +130,7 @@ var BasicApp = React.createClass({
                             ].join("\n")
                         } />
 
-                <h3>Routing set up</h3>
+                    <h2>Routing set up</h2>
                 <p>
                     The basic app uses a combination of
                      <a href="https://github.com/reactjs/react-router" target="_blank"> React Router</a>,
@@ -161,7 +161,7 @@ var BasicApp = React.createClass({
                      explained later on when we finalize what this render function looks like.
                 </p>
 
-                <h3>What is Redux?</h3>
+                <h2>What is Redux?</h2>
                 <p>
                     <a href="https://github.com/reactjs/redux" target="_blank">Redux </a>
                     is a tool for managing state in JavaScript applications. It stores all your application state in
@@ -179,7 +179,7 @@ var BasicApp = React.createClass({
                      tutorial for more information on how Redux works together with React.
                 </p>
 
-                <h3>Tying in Redux</h3>
+                <h2>Tying in Redux</h2>
                 <p>
                     To enable the basic app to use Redux we need to create a store, actions, and reducer.
                      Then we need to tie the store into our app (which includes wiring in all reducers),
@@ -409,7 +409,7 @@ var BasicApp = React.createClass({
                     Now that we have everything set up, we can start adding some more components and views!
                 </p>
 
-                <h3>Base view</h3>
+                <h2>Base view</h2>
                 <p>
                     Our base view is going to consist of a header and left navigation bar with a content area
                      that will render a different child view based on the navigation item selected in the
@@ -771,7 +771,7 @@ var BasicApp = React.createClass({
                 </p>
                 <img src={require("../../images/basic-app-base-view.png")} />
 
-                <h3>Shows - List view</h3>
+                <h2>Shows - List view</h2>
                 <p>
                     Moving on, we want a view that lists all of our shows as separate rows on the page
                      and supports searching and filtering. Browsing through the UI Library's templates, the
@@ -1018,7 +1018,7 @@ var BasicApp = React.createClass({
                         } />
                 <p className="attention">
                     Be aware of the usage of mock data here. Normally, such data would come from the server but for
-                     simplicity the basic app is purely a client-side application and does not interact with a server.
+                     simplicity the basic app is purely a client-side application and doesn't interact with a server.
                      Hence, we define mock data to use and populate our views.
                 </p>
                 <p>
@@ -1305,7 +1305,7 @@ var BasicApp = React.createClass({
                 </p>
                 <img src={require("../../images/basic-app-shows-list-view.png")} />
 
-                <h3>Shows - Expanded view</h3>
+                <h2>Shows - Expanded view</h2>
                 <p>
                     Currently, our rows don't show any data when expanded. We can make the expanded row more
                      interesting by using that space to show some more details on a show:
@@ -1346,16 +1346,16 @@ var BasicApp = React.createClass({
                 </p>
                 <img src={require("../../images/basic-app-expanded-view.png")} />
 
-                <h3>Shows - Add view</h3>
+                <h2>Shows - Add view</h2>
                 <p>
-                    The &quot;Add&quot; button in the list view opens up a Modal dialog. This is where we want our
+                    The &quot;Add&quot; button in the list view opens up a modal dialog. This is where we want our
                      add view to live and we want it to be a similar to the UI Library's &quot;Wizard View&quot; demo.
                      Similar to what we did with the &quot;List View&quot; template, we can use the
                      &quot;Wizard View&quot; template as a starting point.
                 </p>
                 <p>
                     The &quot;Wizard View&quot; template comes with a set of actions and a reducer as well. Since
-                     we are using this template as a base for the add view which is essentially a child view of the
+                     we're using this template as a base for the add view, which is essentially a child view of the
                      list view we can just merge the parts of the &quot;Wizard View&quot; actions and reducer we need
                      into our existing &quot;ShowsActions.js&quot; and &quot;ShowsReducer.js&quot; files.
                 </p>
@@ -1822,7 +1822,7 @@ var BasicApp = React.createClass({
                 </p>
                 <img src={require("../../images/basic-app-add-view.png")} />
 
-                <h3>Shows - Edit view</h3>
+                <h2>Shows - Edit view</h2>
                 <p>
                     The last view we need is editing a show. We want a simple form that will fill the content area
                      and allow users to edit the title, genres, summary, and status of a show. Looking in the
@@ -2187,7 +2187,7 @@ var BasicApp = React.createClass({
                                 '                                    ? "Summary cannot exceed 250 characters." : ""} />',
                                 '                    </div>',
                                 '                    <div className="input-row">',
-                                '                        <h4>Genres</h4>',
+                                '                        <h3>Genres</h3>',
                                 '                    </div>',
                                 '                    <div>{this._getGenreInputs()}</div>',
                                 '                    <div className="input-row">',
@@ -2245,13 +2245,13 @@ var BasicApp = React.createClass({
                 </p>
                 <img src={require("../../images/basic-app-edit-view.png")} />
 
-                <h3>Completed application</h3>
+                <h2>Completed application</h2>
                 <p>
                     The basic app is now complete! We used the UI Library's components, templates, styles, and
                      utils to build a simple Redux application.
                 </p>
 
-                <h4>Congratulations! You've successfully built a working application using the UI Library.</h4>
+                <h3>Congratulations! You've successfully built a working application using the UI Library.</h3>
             </Tutorial>
         );
     }

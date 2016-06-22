@@ -1,15 +1,21 @@
-// ui-library-demo.scss
 
+// IMPORT LIBRARY EXTERNAL FILES
 @import '../../css/globals';
+@import '../../css/mixins';
 
-// IMPORT EXTERNAL FILES
-@import 'mixins';
-@import 'globals';
-@import 'common';
+// IMPORT EXTERNAL DEMO-ONLY FILES
 @import 'layout';
 @import 'markup';
 @import 'demos';
 @import 'tutorial';
+
+// SET FONT PATHS
+$font-path: '../fonts/proxima-nova/';
+@font-face { font-family: 'ProximaNovaRegular'; font-weight: normal; src: url('#{$font-path}ProximaNova-Regular.otf'); }
+@font-face { font-family: 'ProximaNovaBold'; font-weight: bold; src: url('#{$font-path}ProximaNova-Bold.otf'); }
+@font-face { font-family: 'ProximaNovaLight'; font-weight: normal; src: url('#{$font-path}ProximaNova-Light.otf'); }
+@font-face { font-family: 'ProximaNovaSemibold'; font-weight: normal; src: url('#{$font-path}ProximaNova-Semibold.otf'); }
+@font-face { font-family: 'ProximaNovaCondRegular'; font-weight: normal; src: url('#{$font-path}ProximaNovaCond-Regular.otf'); }
 
 // COMPONENTS
 #content {

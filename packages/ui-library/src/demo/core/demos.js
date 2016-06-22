@@ -388,6 +388,11 @@ module.exports = [
                 label: "Basic App",
                 demo: require("../components/tutorials/basicApp.jsx"),
                 fullscreen: true
+            },
+            {
+                label: "CSS Tips & Tricks",
+                demo: require("../components/tutorials/cssTips.jsx"),
+                fullscreen: true
             }
         ]
     }

@@ -41,7 +41,7 @@ var UILibrary101 = React.createClass({
                      and start using it to create a new application using its application template.
                 </p>
 
-                <h3 className="integrate-anchor">How to integrate the UI Library into an existing project</h3>
+                <h2 className="integrate-anchor">How to integrate the UI Library into an existing project</h2>
                 <p>
                     The UI Library can be integrated as an npm module into an existing project by adding it as a
                      dependency in your project's package.json file.
@@ -79,7 +79,7 @@ var UILibrary101 = React.createClass({
                      library's assets in your project.
                 </p>
 
-                <h3>The UI Library structure</h3>
+                <h2>The UI Library structure</h2>
                 <p>
                     Before we get to how to incorporate the library's assets into your project, let's take a look at
                      how the UI Library package is structured:
@@ -126,7 +126,7 @@ var UILibrary101 = React.createClass({
                     }
                 />
 
-                <h3>Importing and using components from the UI Library module</h3>
+            <h2>Importing and using components from the UI Library module</h2>
                 <p>
                     Great, now you know how to successfully add the UI Library as a project dependency and are familiar
                      with how it is structured. Using a component from the library is just a matter of providing the
@@ -189,7 +189,7 @@ var UILibrary101 = React.createClass({
                     />
                 </div>
 
-                <h3>Using templates from the UI Library module</h3>
+                <h2>Using templates from the UI Library module</h2>
                 <p>
                     In addition to ready-to-use components like the ColorPicker, the UI Library also comes with several
                      useful templates. Under the 'ui-library/src/templates' folder there are examples showing how the
@@ -264,7 +264,7 @@ var UILibrary101 = React.createClass({
                     As the templates contain reducers and actions, these will need to be exposed to the app so that the
                      reducers can be registered with the Redux store and the actions bound so that they can be injected
                      into the app for use. Here, we have taken care of this behind the scenes within the
-                     'ui-library/src/demo/Demo.jsx' file and store the things within 'demoProps' and 'demoActions.
+                     'ui-library/src/demo/Demo.jsx' file and store the things within 'demoProps' and 'demoActions'.
                      You may choose to look at that as an example and follow what is done there or do so differently
                      - whichever works best with your project.
                 </p>
@@ -275,7 +275,7 @@ var UILibrary101 = React.createClass({
                      or maybe even remove them altogether.
                 </p>
 
-                <h3>Using the other assets from the UI Library module</h3>
+                <h2>Using the other assets from the UI Library module</h2>
                 <p>The remaining assets from the UI Library can be incorporated into your project as follows:</p>
                 <p>
                     The source CSS files in the library should be imported into the source CSS files in your project.
@@ -293,9 +293,9 @@ var UILibrary101 = React.createClass({
                      directory of your project.
                 </p>
 
-                <h4>
+                <h3>
                     Congratulations! You now know everything you need to start using the UI Library in your projects.
-                </h4>
+                </h3>
             </Tutorial>
         );
     }
