@@ -122,7 +122,7 @@ var MultiDragDemo = React.createClass({
         var from = this.props.drag.columns[desc.from.column].rows.indexOf(
             this.props.drag.columns[desc.from.column].filteredRows[desc.from.index]);
 
-        var to = desc.to.index === this.props.drag.columns[desc.to.column].filteredRows.length
+        var to = desc.to.index >= this.props.drag.columns[desc.to.column].filteredRows.length
             /* if an item is being dragged to the end of the list, append it to the end of the unfiltered list */
             ? this.props.drag.columns[desc.to.column].rows.length
             : this.props.drag.columns[desc.to.column].rows.indexOf(

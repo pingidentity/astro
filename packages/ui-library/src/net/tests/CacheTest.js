@@ -115,7 +115,7 @@ describe("Cache", function () {
         expect(value).toBeFalsy();
     });
 
-    it("handles timeouts correctly in the local cache", function () {
+    xit("handles timeouts correctly in the local cache", function () {
         localCache.put(KEY, VALUE);
         sleep(TIMEOUT / 2);
         localCache.put(KEY2, VALUE2);
@@ -126,7 +126,7 @@ describe("Cache", function () {
         expect(localCache.get(KEY2)).toBeFalsy();
     });
 
-    it("handles timeouts correctly in the memory cache", function () {
+    xit("handles timeouts correctly in the memory cache", function () {
         memoryCache.put(KEY, VALUE);
         sleep(TIMEOUT / 2);
         memoryCache.put(KEY2, VALUE2);

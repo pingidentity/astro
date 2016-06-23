@@ -139,10 +139,12 @@ module.exports = React.createClass({
 
         //if there's a preview add it after so it doesnt screw up the indexing
         if (typeof(this.props.ghostRowAt) === "number") {
-            rows.splice(this.props.ghostRowAt, 0, this._renderRow({
+            var index = Math.min(this.props.rows.length, this.props.ghostRowAt);
+
+            rows.splice(index, 0, this._renderRow({
                 preview: true,
                 id: "preview"
-            }, this.props.ghostRowAt));
+            }, index));
         }
 
         return rows;
