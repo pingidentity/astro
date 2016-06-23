@@ -6,6 +6,38 @@ var _ = require("underscore");
  */
 
 /**
+ * @function resolveAndClone
+ * @private
+ * @desc this function will go to the specified path in the passed in object, cloning
+ * all parts along the path.
+ * @param {object} state - the state to traverse
+ * @param {string[]} parts - an array of keys to traverse
+ * @returns {object} - The object found at the given path
+ */
+function resolveAndClone (state, parts) {
+    for (var i = 0; i < parts.length - 1; i += 1) {
+        switch (typeof(state[parts[i]])) {
+            case "undefined":
+                state[parts[i]] = {};
+                break;
+            case "object":
+                state[parts[i]] = _.clone(state[parts[i]]);
+                break;
+            default:
+                throw "trying to set sub-state on non-object";
+        }
+
+        state = state[parts[i]];
+    }
+
+    return state;
+}
+
+//NOTE: The setAtPath, deleteAtPath and pushAtPath could all be accomplished by using React Additions' update
+//function but a) the additions are now deprecated and b) they require rebuilding the entire data structure
+//to describe the path to update which introduces the overhead.
+
+/**
  * @function setAtPath
  * @desc this is a function that can be used to reduce redux boilerplate, especially on pages
  * with forms since most of what is done is setting values.  Using this function, you can create
@@ -25,35 +57,59 @@ var _ = require("underscore");
  */
 exports.setAtPath = function (state, path, val, opts) {
     var parts = _.isArray(path) ? path : path.split(".");
-    var original = state;
+    var tip = resolveAndClone(state, parts);
+    var lastKey = parts[parts.length - 1];
 
     if (!opts || opts.setDirty !== false) {
         state.dirty = true;
     }
 
-    for (var i = 0; i < parts.length - 1; i += 1) {
-        switch (typeof(state[parts[i]])) {
-            case "undefined":
-                state[parts[i]] = {};
-                break;
-            case "object":
-                state[parts[i]] = _.clone(state[parts[i]]);
-                break;
-            default:
-                console.warn("trying to set sub-state on non-object");
-                return;
-        }
-
-        state = state[parts[i]];
-    }
-
     if (typeof(val) === "undefined") {
-        delete state[parts[parts.length - 1]];
+        if (_.isArray(tip)) {
+            tip.splice(lastKey, 1);
+        } else {
+            delete tip[lastKey];
+        }
     } else {
-        state[parts[parts.length - 1]] = val;
+        tip[parts[parts.length - 1]] = val;
     }
 
-    return original;
+    return state;
+};
+
+/**
+ * @function deleteAtPath
+ * @desc this is another function to reduce redux boilerplate for deleting a branch of the store at the given path
+ * @param {object} state - The state
+ * @param {string|string[]} path - The path to the key to delete
+ * @returns {object} the object that was passed in
+ */
+exports.deleteAtPath = function (state, path) {
+    return exports.setAtPath(state, path);
+};
+
+/**
+ * @function pushAtPath
+ * @desc this is yet another function to reduce redux boilerplate for pushing values to an array at the given path
+ * @param {object} state - The state
+ * @param {string|string[]} path - The path to the key
+ * @param {string|number|object} val - The value to push at the given path
+ * @param {object} opts - Options
+ * @param {bool} [opts.setDirty=true] - indicates whether the dirty flag should be set
+ * @returns {object} the object that was passed in
+ */
+exports.pushAtPath = function (state, path, val, opts) {
+    var parts = _.isArray(path) ? path : path.split(".");
+    var tip = resolveAndClone(state, parts);
+
+    if (!opts || opts.setDirty !== false) {
+        state.dirty = true;
+    }
+
+    tip[parts[parts.length - 1]] = _.clone(tip[parts[parts.length - 1]]);
+    tip[parts[parts.length - 1]].push(val);
+
+    return state;
 };
 
 /** @function rollback

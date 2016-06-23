@@ -4,78 +4,53 @@ var DetailsTooltip = require("../../../components/tooltips/DetailsTooltip.jsx");
 
 var DetailsTooltipDemo = React.createClass({
 
-    _firstCancel: function () {
-        this.setState({
-            firstOpen: false,
-            firstConfirmed: "Cancelled"
-        });
+    numDemos: 6,
+
+    _toggle: function (index) {
+        var newState = {};
+
+        newState["open" + index] = !this.state["open" + index];
+
+        this.setState(newState);
     },
 
-    _secondCancel: function () {
-        this.setState({
-            secondOpen: false,
-            secondConfirmed: "Cancelled"
-        });
+    _confirm: function (index) {
+        var newState = {};
+
+        newState["status" + index] = "confirmed";
+        this._toggle(index);
+
+        this.setState(newState);
     },
 
-    _thirdCancel: function () {
-        this.setState({
-            thirdOpen: false,
-            thirdConfirmed: "Cancelled"
-        });
-    },
+    _cancel: function (index) {
+        var newState = {};
 
-    _secondConfirm: function () {
-        this.setState({
-            secondOpen: false,
-            secondConfirmed: "Confirmed"
-        });
-    },
+        newState["status" + index] = "cancelled";
+        this._toggle(index);
 
-    _firstConfirm: function () {
-        this.setState({
-            firstOpen: false,
-            firstConfirmed: "Confirmed"
-        });
-    },
-
-    _thirdConfirm: function () {
-        this.setState({
-            thirdOpen: false,
-            thirdConfirmed: "Confirmed"
-        });
-    },
-
-    _toggleConfirmation: function () {
-        this.setState({
-            firstOpen: !this.state.firstOpen,
-            firstConfirmed: ""
-        });
-    },
-
-    _toggleOutside: function () {
-        this.setState({
-            secondOpen: !this.state.secondOpen,
-            secondConfirmed: ""
-        });
-    },
-
-    _toggleThird: function () {
-        this.setState({
-            thirdOpen: !this.state.thirdOpen,
-            thirdConfirmed: ""
-        });
+        this.setState(newState);
     },
 
     getInitialState: function () {
-        return {
-            firstOpen: false,
-            secondOpen: false,
-            thirdOpen: true,
-            firstConfirmed: "",
-            secondConfirmed: "",
-            thirdConfirmed: ""
-        };
+        var initState = {};
+
+        for (var i=1; i<=this.numDemos; i+=1) {
+            initState["open" + i] = false;
+            initState["status" + i] = "";
+        }
+
+        initState.open4 = true; // tooltip that is open by default
+
+        return initState;
+    },
+
+    componentDidMount: function () {
+        for (var i=1; i<=this.numDemos; i+=1) {
+            this["_toggle" + i] = this._toggle.bind(null, i);
+            this["_cancel" + i] = this._cancel.bind(null, i);
+            this["_confirm" + i] = this._confirm.bind(null, i);
+        }
     },
 
     render: function () {
@@ -83,109 +58,129 @@ var DetailsTooltipDemo = React.createClass({
             <div className="controls">
                 <DetailsTooltip
                     positionStyle="bottom right"
-                    labelStyle="my-css-class"
-                    label="Label"
+                    label="With a label (label is passed into component)"
                     title="Tooltip Title"
-                    open={this.state.firstOpen}
-                    onToggle={this._toggleConfirmation}>
+                    open={this.state.open1}
+                    onToggle={this._toggle1}>
 
                     <p>
-                        Are you sure you want to delete this rule?
+                        Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
+                        sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
                     <div className="buttons" data-id="delete-confirmation">
-                        <input
-                            type="button"
-                            data-id="cancel-action"
-                            value="Cancel"
-                            className="secondary"
-                            onClick={this._firstCancel}/>
                         <input
                             type="button"
                             data-id="confirm-action"
                             value="Confirm"
                             className="primary"
-                            onClick={this._firstConfirm}/>
+                            onClick={this._confirm1} />
+                        <br />
+                        <a className="cancel" onClick={this._cancel1}>Cancel</a>
                     </div>
                 </DetailsTooltip>
+                <div>{this.state.status1}</div>
 
-                {this.state.firstConfirmed ? (
-                <div>
-                    <br/>
-                    {this.state.firstConfirmed}
-                </div>
-                    ):null}
-
-                <br/><br/>
-                <a onClick={this._toggleOutside}>Outside label</a>
+                <br/>
+                <a onClick={this._toggle2}>Without label (label is outside component)</a>
                 <DetailsTooltip
                     positionStyle="bottom right"
-                    labelStyle="my-css-class"
                     title="Tooltip Title"
-                    open={this.state.secondOpen}
-                    onToggle={this._toggleOutside}>
+                    open={this.state.open2}
+                    onToggle={this._toggle2}>
 
                     <p>
-                        Are you sure you want to delete this rule?
+                        Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
+                        sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
                     <div className="buttons" data-id="delete-confirmation">
-                        <input
-                            type="button"
-                            data-id="cancel-action"
-                            value="Cancel"
-                            className="secondary"
-                            onClick={this._secondCancel}/>
                         <input
                             type="button"
                             data-id="confirm-action"
                             value="Confirm"
                             className="primary"
-                            onClick={this._secondConfirm}/>
+                            onClick={this._confirm2}/>
+                        <br />
+                        <a className="cancel" onClick={this._cancel2}>Cancel</a>
                     </div>
                 </DetailsTooltip>
+                <div>{this.state.status2}</div>
 
-                {this.state.secondConfirmed ? (
-                <div>
-                    <br/>
-                    {this.state.secondConfirmed}
-                </div>
-                    ):null}
-
-                <br/><br/>
-                <a onClick={this._toggleThird}>Open by default label</a>
+                <br/>
                 <DetailsTooltip
+                    label={(<input type="button" value="Label as button" />)}
                     positionStyle="bottom right"
-                    labelStyle="my-css-class"
                     title="Tooltip Title"
-                    open={this.state.thirdOpen}
-                    onToggle={this._toggleThird}>
+                    open={this.state.open3}
+                    onToggle={this._toggle3}>
 
                     <p>
-                        Are you sure you want to delete this rule?
+                        Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
+                        sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
                     <div className="buttons" data-id="delete-confirmation">
-                        <input
-                            type="button"
-                            data-id="cancel-action"
-                            value="Cancel"
-                            className="secondary"
-                            onClick={this._thirdCancel}/>
                         <input
                             type="button"
                             data-id="confirm-action"
                             value="Confirm"
                             className="primary"
-                            onClick={this._thirdConfirm}/>
+                            onClick={this._confirm3}/>
+                        <br />
+                        <a className="cancel" onClick={this._cancel3}>Cancel</a>
                     </div>
                 </DetailsTooltip>
+                <div>{this.state.status3}</div>
 
-                {this.state.thirdConfirmed ? (
-                <div>
-                    <br/>
-                    {this.state.thirdConfirmed}
-                </div>
-                    ):null}
-                <br/><br/>
+                <br/>
+                <DetailsTooltip
+                    positionStyle="bottom"
+                    label="Open by default"
+                    title="Tooltip Title"
+                    open={this.state.open4}
+                    onToggle={this._toggle4}>
 
+                    <p>
+                        Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
+                        sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
+                    </p>
+                    <div className="buttons" data-id="delete-confirmation">
+                        <input
+                            type="button"
+                            data-id="confirm-action"
+                            value="Confirm"
+                            className="primary"
+                            onClick={this._confirm4}/>
+                        <br />
+                        <a className="cancel" onClick={this._cancel4}>Cancel</a>
+                    </div>
+                </DetailsTooltip>
+                <div>{this.state.status4}</div>
+
+                <br/>
+                <DetailsTooltip
+                    label="With alert styling"
+                    positionStyle="alert"
+                    title="Tooltip Title"
+                    open={this.state.open5}
+                    onToggle={this._toggle5}>
+
+                    <p>
+                        Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
+                        sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
+                    </p>
+                    <div className="buttons" data-id="delete-confirmation">
+                        <input
+                            type="button"
+                            data-id="confirm-action"
+                            value="Confirm"
+                            className="primary"
+                            onClick={this._confirm5}/>
+                        <br />
+                        <a className="cancel" onClick={this._cancel5}>Cancel</a>
+                    </div>
+                </DetailsTooltip>
+                <div>{this.state.status5}</div>
+
+                <br/>
                 <DetailsTooltip
                     positionStyle="bottom right"
                     labelStyle="my-css-class"

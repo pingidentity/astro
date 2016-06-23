@@ -64,8 +64,8 @@ describe("LeftNavBar", function () {
 
         wrapper.sendProps({ openNode: "section-1" });
 
-        expect(section1.className).toContain("open");
-        expect(section2.className).not.toContain("open");
+        expect(section1.parentNode.className).toContain("open");
+        expect(section2.parentNode.className).not.toContain("open");
     });
 
     it("detaches animation listener after re-render", function () {

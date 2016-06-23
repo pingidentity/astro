@@ -1,8 +1,7 @@
 "use strict";
 
 var React = require("react"),
-    EventUtils = require("../../util/EventUtils.js"),
-    css = require("classnames");
+    Modal = require("./Modal.jsx");
 
 /**
  * @callback ModalButton~contentCallback
@@ -17,20 +16,20 @@ var React = require("react"),
  *  modal body content must be rendered by the modalBody callback instead of as
  *  child elements as shown above in the sample usage.
 
- * @param {string} [id="modal-button"] data-id of the modal and activation button.  Modal will have the data-id "{id}-modal"
- *     and the activation button will have the data-id "{id}-button".  If id is not present then
- *     no data-id will be set on the html elements.
- * @param {string} value Button text label.
+ * @param {string} [id="modal-button"] data-id of the modal and activation button.  Modal will have the data-id
+ *     "{id}-modal" and the activation button will have the data-id "{id}-button".  If id is not present then no data-id
+ *     will be set on the html elements.
+ * @param {string} value Button label text.
  * @param {string} modalTitle Title of the modal.
  * @param {ModalButton~contentCallback | object} [modalBody] Alternative modal body content.  If provided then this function
- *  will be called if the ModalButton element has no children.  This is necessary to setup
- *  correct context for modals that wish to close the modal using a button within the modal body.
+ *     will be called if the ModalButton element has no children.  This is necessary to setup
+ *     correct context for modals that wish to close the modal using a button within the modal body.
  * @param {ModalButton~contentCallback | object} [linkContent] Alternative content / button to trigger the modal to render instead
- *  of the default button.  Content rendered within a span tag whose onClick event will trigger the modal.
- *  If this is a function, then the function will be called to render the content, otherwise the content
- *  is rendered as is.
+ *     of the default button.  Content rendered within a span tag whose onClick event will trigger the modal.
+ *     If this is a function, then the function will be called to render the content, otherwise the content
+ *     is rendered as is.
  * @param {boolean} [inline] If true, then render the overall container as a span instead of as a div.
- * @param {string} [bodyClass] CSS class to add to the document body tag when displaying the modal.
+ * @param {string} [activatorContainerStyle] When specified the button/link/etc will wrapped in div with this css class
  * @param {string} [buttonStyle] CSS class to add to the button.
  * @param {string} [containerStyle] CSS class to add to containing div (contains button and modal).
  * @param {string} [linkStyle] CSS class to add to the containing span when rendering alternative linkContent.
@@ -38,61 +37,98 @@ var React = require("react"),
  * @param {boolean} [expanded=false] Modal expansion state.  If set then the modal will not keep its own
  *     expansion state, and closing the modal must be managed externally.
  * @param {boolean} [showHeader=true] Controls modal header rendering, if set to false,
- *      making modal effectivly a 'light box' for previews. Defaults to true.
+ *     making modal effectivly a 'light box' for previews. Defaults to true.
  * @param {function} [onOpen] callback that is called when the modal is opened.
  * @param {function} [onClose] callback that is called when the modal is closed by clicking
- *      the close modal link.  If this function returns false then closing will be prevented.
+ *     the close modal link.  If this function returns false then closing will be prevented.
  * @param {boolean} [maximize=false] When true, modal content will fill screen height
  * @param {string} [type] basic modal when not specified. Options include 'alert', and 'dialog'
  *
  * @example
- *      <ModalButton modalTitle="My wonderful modal" onClose={this._onCloseModal}>
- *          <p>Thank you for opening this modal</p>
- *      </ModalButton>
+ *     <ModalButton modalTitle="My wonderful modal" onClose={this._onCloseModal}>
+ *         <p>Thank you for opening this modal</p>
+ *     </ModalButton>
  *
  */
 var ModalButton = React.createClass({
 
     propTypes: {
-        id: React.PropTypes.string,
-        value: React.PropTypes.string,
-        modalTitle: React.PropTypes.string,
-        modalBody: React.PropTypes.func,
-        linkContent: React.PropTypes.any,
-        inline: React.PropTypes.bool,
-        bodyClass: React.PropTypes.string,
+        // ModalButton only props
+        activatorContainerStyle: React.PropTypes.string,
         buttonStyle: React.PropTypes.string,
         containerStyle: React.PropTypes.string,
+        disabled: React.PropTypes.bool,
+        id: React.PropTypes.string,
         initiallyExpanded: React.PropTypes.bool,
+        inline: React.PropTypes.bool,
+        linkContent: React.PropTypes.any,
+        linkStyle: React.PropTypes.string,
+        value: React.PropTypes.string,
+
+        // Modal/ModalButton props (passed through to modal component)
         expanded: React.PropTypes.bool,
         maximize: React.PropTypes.bool,
-        type: React.PropTypes.string,
-        onOpen: React.PropTypes.func,
+        modalTitle: React.PropTypes.string,
+        modalBody: React.PropTypes.func,
         onClose: React.PropTypes.func,
-        disabled: React.PropTypes.bool,
-        showHeader: React.PropTypes.bool
+        onOpen: React.PropTypes.func,
+        showHeader: React.PropTypes.bool,
+        type: React.PropTypes.string
     },
 
     childContextTypes: {
         close: React.PropTypes.func
     },
 
-    getDefaultProps: function () {
-        return {
-            id: "modal-button",
-            showHeader: true,
-            initiallyExpanded: false,
-            maximize: false
-        };
+
+    /*
+     * Expand the modal if it is not already expanded.
+     * Triggered by clicking on the modal button.
+     *
+     */
+    _open: function () {
+        if (!this._isExpanded()) {
+            if (this.props.onOpen) {
+                this.props.onOpen();
+            }
+
+            this.setState({ expanded: true });
+        }
     },
 
     /*
-     * Set close method into context to allow children
-     * to easily close modal.
+     * Close the modal if it is open, triggered by clicking
+     * on the close modal button.
+     *
      */
-    getChildContext: function () {
+    close: function () {
+        if (this._isExpanded()) {
+            var doClose = true;
+
+            if (this.props.onClose) {
+                doClose = this.props.onClose();
+            }
+
+            // Prevent closing if close callback returned false
+            if (doClose) {
+                this.setState({ expanded: false });
+            }
+        }
+    },
+
+    _isExpanded: function () {
+        if (typeof this.props.expanded !== "undefined") {
+            return !!this.props.expanded;
+        } else {
+            return this.state.expanded;
+        }
+    },
+
+    getDefaultProps: function () {
         return {
-            close: this._close
+            showHeader: true,
+            initiallyExpanded: false,
+            maximize: false
         };
     },
 
@@ -109,136 +145,25 @@ var ModalButton = React.createClass({
         };
     },
 
-    /*
-     * Expand the modal if it is not already expanded.
-     * Triggered by clicking on the modal button.
-     *
-     */
-    _open: function () {
-        if (!this._isExpanded()) {
-
-            if (this.props.onOpen) {
-                this.props.onOpen();
-            }
-
-            // Add class to body tag, if so configured, and class not already present
-            if (this.props.bodyClass) {
-                var body = document.getElementsByTagName("body")[0];
-                if (!body.className.match(new RegExp("(?:^|\s)" + this.props.bodyClass + "(?!\S)"))) {
-                    body.className += this.props.bodyClass;
-                }
-            }
-
-            this.setState({ expanded: true });
-        }
-    },
-
-    /*
-     * Close the modal if it is open, triggered by clicking
-     * on the close modal button.
-     *
-     */
-    _close: function () {
-        if (this._isExpanded()) {
-            var doClose = true;
-
-            if (this.props.onClose) {
-                doClose = this.props.onClose();
-            }
-
-            // Prevent closing if close callback returned false
-            if (doClose) {
-                // Remove class from body tag if so configured and if present.
-                if (this.props.bodyClass) {
-                    var body = document.getElementsByTagName("body")[0];
-                    body.className =
-                        body.className.replace(new RegExp("(?:^|\s)" + this.props.bodyClass + "(?!\S)", "g"), "");
-                }
-                this.setState({ expanded: false });
-            }
-        }
-    },
-
-    /*
-     * Return true iff the modal is expanded.
-     *
-     */
-    _isExpanded: function () {
-        if (typeof this.props.expanded !== "undefined") {
-            return !!this.props.expanded;
-        } else {
-            return this.state.expanded;
-        }
-    },
-
-    _handleKeyDown: function (e) {
-        if (!this._isExpanded()) {
-            return;
-        }
-
-        EventUtils.callIfOutsideOfContainer(this.refs.container, function () {
-            e.stopPropagation();
-            e.preventDefault();
-        }, e);
-    },
-
-    componentWillMount: function () {
-        window.addEventListener("keydown", this._handleKeyDown);
-    },
-
-    componentWillUnmount: function () {
-        window.removeEventListener("keydown", this._handleKeyDown);
-    },
-
-    componentWillReceiveProps: function (nextProps) {
-        if (typeof nextProps.expanded !== "undefined" && nextProps.expanded !== null) {
-            this.setState({ expanded: !!nextProps.expanded });
-        }
-    },
-
     render: function () {
         var modalId;
-        var buttonId;
+        var activatorId;
         if (this.props.id) {
             modalId = this.props.id + "-modal";
-            buttonId = this.props.id + "-button";
+            activatorId = this.props.id + "-button";
         }
 
-        var activator;
-        if (this.props.linkContent) {
-            var linkContent;
-            if (typeof(this.props.linkContent) === "function") {
-                linkContent = this.props.linkContent();
-            } else {
-                linkContent = this.props.linkContent;
-            }
-            activator = (<span data-id={buttonId}
-                               className={this.props.linkStyle}
-                               onClick={this._open}
-                               disabled={this.props.disabled}>{linkContent}</span>);
-        } else if (this.props.value) {
-            activator = (<button data-id={buttonId}
-                                 className={this.props.buttonStyle || "default"}
-                                 onClick={this._open}
-                                 title={this.props.value}
-                                 disabled={this.props.disabled}>{this.props.value}</button>);
-        }
-
-        if (this.props.activatorContainerStyle) {
-            activator = (
-                <div className={this.props.activatorContainerStyle}>
-                    {activator}
-                </div>
-            );
-        }
-
-        var modalClasses = css({
-            modal: true,
-            maximize: this.props.maximize,
-            dialog: this.props.type === "dialog",
-            alert: this.props.type === "alert",
-            show: this._isExpanded()
-        });
+        var activator = (
+            <ModalActivator
+                activatorContainerStyle={this.props.activatorContainerStyle}
+                buttonStyle={this.props.buttonStyle}
+                id={activatorId}
+                key="activator"
+                linkContent={this.props.linkContent}
+                linkStyle={this.props.linkStyle}
+                onOpen={this._open}
+                value={this.props.value} />
+        );
 
         /*
          * Allow modalBody to be defined either by this.props.children
@@ -257,25 +182,24 @@ var ModalButton = React.createClass({
          * react version which will obviate the need for rendering
          * via callback here.
          */
-        if (this._isExpanded()) {
-            var modal = (
-                <div data-id={modalId} className={modalClasses}>
-                    {this.props.showHeader &&
-                        <div className="modal-header">
-                            {this.props.modalTitle}
-                            <a className="close-modal" onClick={this._close}>×</a>
-                        </div>
-                    }
-                    <div className="modal-body">
-                        {!this.props.showHeader &&
-                            <a className="close-modal" onClick={this._close}>×</a>
-                        }
-                        {this.props.children || (this.props.modalBody && this.props.modalBody())}
-                    </div>
-                </div>
-            );
-        }
 
+        var modalBodyContent = this.props.modalBody && this._isExpanded() ? this.props.modalBody() : null;
+
+        var modal = (
+            <Modal
+                key="modal"
+                id={modalId}
+                expanded={this._isExpanded()}
+                onClose={this.close}
+                onOpen={this._open}
+                maximize={this.props.maximize}
+                modalTitle={this.props.modalTitle}
+                showHeader={this.props.showHeader}
+                type={this.props.type} >
+
+                {this.props.children || modalBodyContent}
+            </Modal>
+        );
 
         return React.createElement(this.props.inline ? "span" : "div",
             { className: this.props.containerStyle, ref: "container" },
@@ -283,5 +207,70 @@ var ModalButton = React.createClass({
     }
 });
 
-module.exports = ModalButton;
 
+/**
+ * @class ModalActivator
+ * @desc Renders item that triggers the opening of modal (button/link/etc).
+ *
+ * @param {string} [activatorContainerStyle] When specified the button/link/etc will wrapped in div with this css class
+ * @param {string} [buttonStyle] CSS class to add to the button.
+ * @param {ModalButton~contentCallback | object} [linkContent] Alternative content / button to trigger the modal to render instead
+ *     of the default button.  Content rendered within a span tag whose onClick event will trigger the modal.
+ *     If this is a function, then the function will be called to render the content, otherwise the content
+ *     is rendered as is.
+ * @param {string} [linkStyle] CSS class to add to the containing span when rendering alternative linkContent.
+ * @param {function} [onOpen] callback that is called when the activator is clicked.
+ * @param {string} value Button label text.
+ *
+ */
+var ModalActivator = React.createClass({
+    propTypes: {
+        activatorContainerStyle: React.PropTypes.string,
+        buttonStyle: React.PropTypes.string,
+        id: React.PropTypes.string,
+        linkContent: React.PropTypes.any,
+        linkStyle: React.PropTypes.string,
+        value: React.PropTypes.string
+    },
+
+    render: function () {
+        var activator;
+
+        if (this.props.linkContent) {
+            var linkContent;
+            if (typeof(this.props.linkContent) === "function") {
+                linkContent = this.props.linkContent();
+            } else {
+                linkContent = this.props.linkContent;
+            }
+            activator = (
+                <span
+                    data-id={this.props.id}
+                    className={this.props.linkStyle}
+                    onClick={this.props.onOpen}
+                    disabled={this.props.disabled}>{linkContent}</span>
+            );
+        } else if (this.props.value) {
+            activator = (
+                <button
+                    data-id={this.props.id}
+                    className={this.props.buttonStyle || "default"}
+                    onClick={this.props.onOpen}
+                    title={this.props.value}
+                    disabled={this.props.disabled}>{this.props.value}</button>
+            );
+        }
+
+        if (this.props.activatorContainerStyle) {
+            activator = (
+                <div className={this.props.activatorContainerStyle}>
+                    {activator}
+                </div>
+            );
+        }
+
+        return activator;
+    }
+});
+
+module.exports = ModalButton;

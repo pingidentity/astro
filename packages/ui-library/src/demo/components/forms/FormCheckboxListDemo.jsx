@@ -44,8 +44,8 @@ var FormCheckboxListDemo = React.createClass({
                         controlled={true}
                         hideUnchecked={this.state.hideUnchecked}
                         items={checkboxItems}
-                        labelSelectAll={count => `Select ${count} items`}
-                        labelDeselectAll={count => `Deselect ${count} items`}
+                        labelSelectAll={function (count) { return "Select " + count + " items"; }}
+                        labelDeselectAll={function (count) { return "Deselect " + count + " items"; }}
                         labelHideUnselected="Hide Unselected"
                         labelSearchPlaceholder="Search"
                         onSelectionChange={this._onSelectionChange}

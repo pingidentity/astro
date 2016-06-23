@@ -1,10 +1,12 @@
-var React = require("../../util/ReactWithDefaultMethods.js"),
+var React = require("re-react"),
     Toggle = require("../../components/forms/Toggle.jsx"),
     FormTextField = require("../../components/forms/form-text-field"),
     FormCheckbox = require("../../components/forms/FormCheckbox.jsx"),
     InfiniteScroll = require("../../components/list/InfiniteScroll.jsx"),
     TabbedSections = require("../../components/general/TabbedSections.jsx"),
-    ExpandableRow = require("../../components/rows/ExpandableRow.jsx"),
+    ExpandableRow = require("../../components/rows/expandable-row"),
+    RowAccessories = require("../../components/rows/expandable-row/Accessories.jsx"),
+    ModalButton = require("../../components/general/ModalButton.jsx"),
     classnames = require("classnames"),
     _ = require("underscore");
 
@@ -41,7 +43,7 @@ module.exports = React.createClass({
      */
     componentWillMount: function () {
         //Create an instance of the row type with the right accessory type
-        this._contentType = <ExpandableRow id={0} showEdit={true} rowAccessories={<RowAccessories />} />;
+        this._contentType = <Row id={0} showEdit={true} />;
 
         //Instead of creating partials in the render function, which get computed on ever render, or
         //extracting the data-id of the target.  Created partials on mount and use them
@@ -81,6 +83,13 @@ module.exports = React.createClass({
                             <span data-id="narrow-by"
                                 className="filter-by"
                                 onClick={this.props.onSearchToggleAdvanced}>Narrow By</span>
+
+                            <ModalButton ref="modal"
+                                    value="Add Modal Button"
+                                    modalTitle="Add Modal"
+                                    containerStyle="add-modal" >
+                                Add Modal content
+                            </ModalButton>
                         </div>
                         <div className="filters">
                             <FormCheckbox label="filter odd rows"
@@ -119,14 +128,77 @@ module.exports = React.createClass({
     }
 });
 
-var RowAccessories = React.createClass({
+/*
+ * This component just serves as a proxy to choose the type of row to return.  This is obviously verbose so
+ * that the code for each row type is not obfuscated.  This could easily be boiled down to one return statement
+ */
+var Row = React.createClass({
     render: function () {
-        return (
-            <div>
-                <a>Link</a>
-                <input type="button" className="button inline" value="Inline Button" />
-                <Toggle />
-                <div className="status good"></div>
-            </div>);
+        switch (this.props.type) {
+            case "1 line with icon, no accessories":
+                return (
+                    <ExpandableRow {...this.props}
+                        image="https://media1.giphy.com/media/EldfH1VJdbrwY/200_s.gif"
+                        title={"Row number " + this.props.id + " (" + this.props.type + ")"} />);
+            case "2 lines with icon, no accessories":
+                return (
+                    <ExpandableRow {...this.props}
+                        image="https://media1.giphy.com/media/EldfH1VJdbrwY/200_s.gif"
+                        subtitle="this is a subtitle"
+                        title={"Row number " + this.props.id + " (" + this.props.type + ")"} />);
+            case "1 line no icon, no accessories":
+                return (
+                    <ExpandableRow {...this.props}
+                        title={"Row number " + this.props.id + " (" + this.props.type + ")"} />);
+            case "2 lines no icon, no accessories":
+                return (
+                    <ExpandableRow {...this.props} subtitle="this is a subtitle"
+                        title={"Row number " + this.props.id + " (" + this.props.type + ")"} />);
+            case "2 lines with icon, with status=good":
+                return (
+                    <ExpandableRow {...this.props} subtitle="this is a subtitle"
+                        image="https://media1.giphy.com/media/EldfH1VJdbrwY/200_s.gif"
+                        rowAccessories={<RowAccessories.Status status="good" />}
+                        title={"Row number " + this.props.id + " (" + this.props.type + ")"} />);
+            case "2 lines with icon, with status=bad":
+                return (
+                    <ExpandableRow {...this.props} subtitle="this is a subtitle"
+                        image="https://media1.giphy.com/media/EldfH1VJdbrwY/200_s.gif"
+                        rowAccessories={<RowAccessories.Status status="failure" />}
+                        title={"Row number " + this.props.id + " (" + this.props.type + ")"} />);
+            case "2 lines with icon toggle on":
+                return (
+                    <ExpandableRow {...this.props} subtitle="this is a subtitle"
+                        image="https://media1.giphy.com/media/EldfH1VJdbrwY/200_s.gif"
+                        rowAccessories={<Toggle toggled={true} />}
+                        title={"Row number " + this.props.id + " (" + this.props.type + ")"} />);
+            case "2 lines with icon toggle off":
+                return (
+                    <ExpandableRow {...this.props} subtitle="this is a subtitle"
+                        image="https://media1.giphy.com/media/EldfH1VJdbrwY/200_s.gif"
+                        rowAccessories={<Toggle toggled={false} />}
+                        title={"Row number " + this.props.id + " (" + this.props.type + ")"} />);
+            case "2 lines with icon, with pill button":
+                return (
+                    <ExpandableRow {...this.props} subtitle="this is a subtitle"
+                        image="https://media1.giphy.com/media/EldfH1VJdbrwY/200_s.gif"
+                        rowAccessories={<RowAccessories.PillButton label="Pill Button" onClick={this.props.onClick} />}
+                        title={"Row number " + this.props.id + " (" + this.props.type + ")"} />);
+            case "2 lines with icon, with all accessories":
+                var accessories = (
+                    <div>
+                        <RowAccessories.PillButton label="Pill Button" />
+                        <Toggle toggled={true} />
+                        <RowAccessories.Status status="good" />
+                        <RowAccessories.Status status="failure" />
+                        <RowAccessories.Status status="warning" />
+                    </div>);
+
+                return (
+                    <ExpandableRow {...this.props} subtitle="this is a subtitle"
+                        image="https://media1.giphy.com/media/EldfH1VJdbrwY/200_s.gif"
+                        rowAccessories={accessories}
+                        title={"Row number " + this.props.id + " (" + this.props.type + ")"} />);
+        }
     }
 });

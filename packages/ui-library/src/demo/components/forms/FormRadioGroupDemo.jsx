@@ -35,8 +35,9 @@ var FormRadioGroupDemo = React.createClass({
         radioItemsWithHidden[Math.round(Math.random() * 3)].hidden = true;
 
         return (
-                <div>
-                    <label className="standalone">Horizonal Alignment</label>
+            <div>
+                <div className="input-row">
+                    <label>Horizonal Alignment</label>
                     <FormRadioGroup
                         groupName="horizontal-group"
                         selected={this.state.selectedId1}
@@ -44,22 +45,28 @@ var FormRadioGroupDemo = React.createClass({
                         items={radioItems}
                         stacked={false}
                     />
-                    <div>
-                        selected id = {this.state.selectedId1}
-                    </div>
-                    <br /><br />
-                    <label className="standalone">Stacked/Vertical Alignment</label>
+                </div>
+
+                <div className="input-row">
+                    selected id = {this.state.selectedId1}
+                </div>
+
+                <div className="input-row">
+                    <label>Stacked/Vertical Alignment</label>
                     <FormRadioGroup
                         groupName="stacked-group"
                         selected={this.state.selectedId2}
                         onChange={this._onChange.bind(this, 2)}
                         items={radioItems}
                     />
-                    <div>
-                        selected id = {this.state.selectedId2}
-                    </div>
-                    <br /><br />
-                    <label className="standalone">Disabled Radio Group</label>
+                </div>
+
+                <div className="input-row">
+                    selected id = {this.state.selectedId2}
+                </div>
+
+                <div className="input-row">
+                    <label>Disabled Radio Group</label>
                     <FormRadioGroup
                         groupName="disabled-stacked-group"
                         selected={this.state.selectedId3}
@@ -67,8 +74,10 @@ var FormRadioGroupDemo = React.createClass({
                         items={radioItems}
                         disabled={true}
                     />
-                    <br /><br />
-                    <label className="standalone">Radio Group With Random Hidden</label>
+                </div>
+
+                <div className="input-row">
+                    <label>Radio Group With Random Hidden</label>
                     <FormRadioGroup
                         groupName="hidden-stacked-group"
                         selected={this.state.selectedId4}
@@ -76,10 +85,10 @@ var FormRadioGroupDemo = React.createClass({
                         items={radioItemsWithHidden}
                     />
                 </div>
-
+                
+            </div>
         );
     }
-
 });
 
 

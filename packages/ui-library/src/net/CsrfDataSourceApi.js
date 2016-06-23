@@ -68,7 +68,9 @@ var readCookie = function (name) {
  * @param {number} maxAge the max age of the cookie
  */
 var writeCookie = function (name, value, maxAge) {
-    var cookie = name + "=" + value + "; max-age=" + maxAge + "; path=/";
+    //add the secure flag to the cookie when the protocol is https
+    var secure = window.location.protocol === "https:" ? "; secure" : "";
+    var cookie = name + "=" + value + "; max-age=" + maxAge + secure;
     document.cookie = cookie;
 };
 

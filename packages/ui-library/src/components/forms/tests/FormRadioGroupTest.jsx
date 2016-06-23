@@ -13,6 +13,21 @@ describe("FormRadioGroup", function () {
             { id: "2", name: "name 2" }
         ];
 
+    it("tests onValueChanged", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormRadioGroup
+                id="test-radio-group"
+                groupName="test_radio_group"
+                onValueChange={callback}
+                items={items}/>
+        );
+        var radios = TestUtils.scryRenderedDOMNodesWithTag(component, "input");
+
+        ReactTestUtils.Simulate.change(radios[0], { target: { checked: true } });
+        //make sure callback was triggered
+        expect(callback).toBeCalled();
+    });
+
     it("test no default selected item", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormRadioGroup

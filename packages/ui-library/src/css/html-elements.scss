@@ -3,7 +3,7 @@ body {
 	font-family: $font-pn-regular;
 	font-size: 14px;
 	line-height: 1.3em;
-	color: $color-slate;
+	color: $color-elephant;
 	font-weight: 300;
 }
 a {
@@ -11,13 +11,13 @@ a {
 	text-decoration: none;
 	color: $color-link-text;
 
+	&:hover {
+		text-decoration: underline;
+	}
 	&.link {
 		border-bottom: 1px solid  $color-active;
 		padding-bottom: 0px;
 		text-transform: uppercase;
-	}
-	&:hover {
-		text-decoration: underline;
 	}
 }
 h1, h2, h3, h4, h5 {

@@ -3,6 +3,7 @@
     $help-icon-size: 18px;
     $animation-timing: 0.5s;
     $inline-icon-height: 12px;
+    $pointer-size: 6px;
 
     display: inline-block;
     position: relative;
@@ -34,6 +35,7 @@
         line-height: $help-icon-size;
         color: $color-midnight;
         display: inline-block;
+        vertical-align: baseline;
     }
     .tooltip-text {
         display: none;
@@ -46,7 +48,7 @@
         margin: 0;
         z-index: 1000;
 
-        @include animation(fade-in $animation-timing);
+        @include animation(fade-in 0.5s);
 
         .tooltip-text-content {
             $width: 340px;
@@ -54,7 +56,7 @@
             position: relative;
             box-sizing: border-box;
             width: $width;
-            margin: 0 0 6px floor($width/-2);
+            margin: 0 0 $pointer-size floor($width/-2);
             background: $color-midnight;
             color: $color-white;
             padding: 10px;
@@ -70,12 +72,12 @@
                 content: '';
                 position: absolute;
                 border-style: solid;
-                border-width: 7px;
+                border-width: $pointer-size;
                 line-height: 1em;
                 border-color: $color-midnight transparent transparent transparent;
                 bottom: -12px;
                 left: 50%;
-                margin: 0 0 0 -6px;
+                margin: 0 0 0 (-$pointer-size);
             }
             &:after {
                 $hover-width: floor($width*0.6);
@@ -104,19 +106,19 @@
         .tooltip-text {
             .tooltip-text-content {
                 width: $width;
-                margin: 0 0 6px floor($width/-2);
+                margin: 0 0 $pointer-size floor($width/-2);
             }
         }
         &.left {
             .tooltip-text {
                 .tooltip-text-content {
-                    margin: 0 0 6px (-($width - 16));
+                    margin: 0 0 $pointer-size (-($width - 16));
                 }
             }
             &.bottom {
                 .tooltip-text {
                     .tooltip-text-content {
-                        margin: 6px 0 0 (-($width - 16));
+                        margin: $pointer-size 0 0 (-($width - 16));
                     }
                 }
             }
@@ -128,19 +130,19 @@
         .tooltip-text {
             .tooltip-text-content {
                 width: $width;
-                margin: 0 0 6px floor($width/-2);
+                margin: 0 0 $pointer-size floor($width/-2);
             }
         }
         &.left {
             .tooltip-text {
                 .tooltip-text-content {
-                    margin: 0 0 6px (-($width - 16));
+                    margin: 0 0 $pointer-size (-($width - 16));
                 }
             }
             &.bottom {
                 .tooltip-text {
                     .tooltip-text-content {
-                        margin: 6px 0 0 (-($width - 16));
+                        margin: $pointer-size 0 0 (-($width - 16));
                     }
                 }
             }
@@ -149,7 +151,7 @@
     &.right {
         .tooltip-text {
             .tooltip-text-content {
-                margin: 0 0 6px -16px;
+                margin: 0 0 $pointer-size -16px;
 
                 &:before {
                     left: 0;
@@ -167,7 +169,7 @@
 
         .tooltip-text {
             .tooltip-text-content {
-                margin: 0 0 6px (-($width - 16));
+                margin: 0 0 $pointer-size (-($width - 16));
 
                 &:before {
                     right: 0;
@@ -188,7 +190,7 @@
 
 
             .tooltip-text-content {
-                margin-top: 6px;
+                margin-top: $pointer-size;
 
                 &:after {
                     top: auto;
@@ -232,7 +234,7 @@
             bottom: auto;
 
             .tooltip-text-content {
-                margin: 0 0 0 6px;
+                margin: 0 0 0 $pointer-size;
                 min-height: 15px;
                 width: auto;
                 min-width: 240px;
@@ -244,7 +246,7 @@
                     top: 10px;
                     bottom: auto;
                     right: auto;
-                    left: -6px;
+                    left: (-$pointer-size);
                 }
                 &:after {
                     left: -26px;
@@ -294,8 +296,5 @@
         }
     }
 
-    @-webkit-keyframes fade-in {
-        0% { opacity: 0; }
-        100% { opacity: 1; }
-    }
+    @include fadein-keyframes;
 }

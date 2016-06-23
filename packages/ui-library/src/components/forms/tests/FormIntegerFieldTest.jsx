@@ -34,8 +34,7 @@ describe("FormIntegerField", function () {
         //Expect properly named labelText
         var label = TestUtils.findRenderedDOMNodeWithClass(component,"label-text");
         expect(label.children[0].textContent).toBe("Default Integer Box");
-
-
+        
     });
 
     it("test up/down key press and up/down spinner press", function () {
@@ -224,4 +223,15 @@ describe("FormIntegerField", function () {
         expect(testIntField.tabIndex).toBe(10);
     });
 
+    it("is disabled when it is specified", function () {
+        var onChange = function () {};
+        var helpText = "Disabled with help text";
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormIntegerField onChange={onChange} value={1} labelHelpText={helpText} disabled={true} />
+        );
+
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        expect(ReactTestUtils.isDOMComponent(input)).toBeTruthy();
+        expect(input.disabled).toBeTruthy();
+    });
 });

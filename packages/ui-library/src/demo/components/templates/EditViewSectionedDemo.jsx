@@ -1,27 +1,25 @@
 var React = require("react"),
+    Redux = require("redux"),
     EditViewSectioned = require("../../../templates/edit-view-sectioned");
 
 var EditViewSectionedDemo = React.createClass({
-
-    _handleInputChange: function (name, value) {
-        this.props.demoActions.setInput(name, value);
-    },
-
-    _handleFormSave: function () {
-        this.props.demoActions.saveForm();
+    componentWillMount: function () {
+        this.actions = Redux.bindActionCreators(EditViewSectioned.Actions, this.props.store.dispatch);
     },
 
     render: function () {
-        return (<EditViewSectioned {...this.props.demoProps}
-            onInputChange={this._handleInputChange}
-            onSave={this._handleFormSave} />);
+        return (<EditViewSectioned {...this.props}
+            onInputChange={this.actions.setInput}
+            onSave={this.actions.saveForm} />);
     }
 });
 
 /*
- * Expose the Reducer and the Actions for the Demo app to inject
+ * Expose the Reducer.  Doing so will tell the DemoApp to create an isolated store for the Demo to use.  Normally
+ * Redux forbids having more than one store, but using the main store makes the data flow difficult to follow, and
+ * can be unpredictable with events from one demo affecting another demo.  For this reason we treat each demo as
+ * its own app.
  */
 EditViewSectionedDemo.Reducer = EditViewSectioned.Reducer;
-EditViewSectionedDemo.Actions = EditViewSectioned.Actions;
 
 module.exports = EditViewSectionedDemo;

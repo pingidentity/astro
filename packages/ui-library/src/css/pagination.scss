@@ -1,7 +1,8 @@
 .page-links {
     text-align: center;
-    color: map-get($colors, 'walrus');
+    color: $color-walrus;
     margin: 10px;
+
     a {
         box-sizing: border-box;
         display: inline-block;
@@ -12,21 +13,22 @@
         padding-right: 2px;
         padding-top: 4px;
         font-size: 14px;
-        color: map-get($colors, 'walrus');
-        //text-decoration: none;
+        color: $color-walrus;
         vertical-align: middle;
         border: 1px solid transparent;
         border-radius: 2px;
-        &.active {
-            border: 1px solid $color-active-blue;
-            color: $color-active-blue;
-        }
+
         &:hover {
             text-decoration: none;
             color: $color-active-blue;
         }
+        &.active {
+            border: 1px solid $color-active-blue;
+            color: $color-active-blue;
+        }
         &.disabled {
             cursor: default;
+
             &:hover {
                 color: inherit;
             }

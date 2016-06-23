@@ -1,44 +1,57 @@
+@include fadein-keyframes;
 .modal {
-	$modal-width: 650px;
 	$modal-radius: 4px;
-	$modal-left: 240px; // used instead of left attribute to fix scrollbar placement bug in chrome
+	$default-top: 57px;
+	$min-bottom: 40px;
+	$header-height: 42px;
+	$max-modal-width: 960px;
 
 	position: fixed;
-	z-index: 2000;
-	top: -550px;
-	opacity: 0;
-	left: $modal-left + 27px;
-	right: 15px;
-	overflow: visible;
-	font-family: $font-pn-regular;
-	@include border-radius($modal-radius);
-	@include transition(all 0s);
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 1000;
 
 	&.show {
-		top: 65px;
-		opacity: 1;
-		@include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
+		.modal-content {
+			top: $default-top;
+			display: table;
+		}
 
-		&:after {
-			content: '';
+		.modal-bg{
 			background: $color-black;
 			position: fixed;
 			top: 0;
 			bottom: 0;
 			left: 0;
 			right: 0;
-			z-index: -1;
+			z-index: 1;
 			@include opacity(0.4);
 		}
 	}
-
+	.modal-content {
+		display: none;
+		position: fixed;
+		z-index: 1;
+		top: 0;
+		left: 50%;
+		height: 100%;
+		max-width: $max-modal-width;
+		min-width: 360px;
+		font-family: $font-pn-regular;
+	}
+	.modal-header, .modal-body {
+		margin: 0 50% 0 -50%;
+	}
 	.modal-header {
 		position: relative;
-		padding: 0 25px;
-		background-color: map-get($colors, 'walrus');
+		padding: 12px 25px 0 25px;
+		box-sizing: border-box;
+		background-color: $color-walrus;
 		color: $color-white;
 		font-size: 22px;
-		line-height: 42px;
+		min-height: $header-height;
 		font-weight: 300;
 		@include border-radius($modal-radius $modal-radius 0 0);
 
@@ -48,7 +61,6 @@
 			color: $color-white;
 			padding: 18px 0 0 18px;
 		}
-
 		.close-modal {
 			position: absolute;
 			top: 9px;
@@ -57,7 +69,7 @@
 			color: transparent;
 
 			&:after {
-				color: map-get($colors, 'rhino');
+				color: $color-rhino;
 				font-size: 18px;
 				content: '\78';
 				font-family: 'iconfont';
@@ -75,53 +87,50 @@
 		}
 	}
 	.modal-body {
-		position: absolute;
-		top: 40px;
-		left: 0;
-		right: 0;
 		padding: 30px;
 		font-weight: normal;
-		min-height: 140px;
-		max-height: 600px;
+		box-sizing: border-box;
+		background-color: $color-elderly;
+		overflow-x: visible;
 		overflow-y: auto;
-		background-color: map-get($colors, 'elderly');
+		max-height: calc(100% - #{2*$min-bottom});
+		@include border-radius(0 0 $modal-radius $modal-radius);
 
 		h2 {
-			color: map-get($colors, 'midnight');
+			color: $color-midnight;
 			padding: 20px 0 5px 48px;
 			margin-bottom: 0;
 		}
-
 		p {
 			margin-bottom: 1.0em;
-			color: map-get($colors, 'elephant');
+			color: $color-elephant;
 			font-size: 14px;
 
 			a {
 				display: inline-block;
-  				margin: 0 5px;
+				margin: 0 5px;
 			}
 		}
 	}
 	&.maximize {
 		&.show {
-			bottom: 45px;
-
+			.modal-content {
+				bottom: $min-bottom;
+			}
 			.modal-body {
 				bottom: 0;
-				max-height: none;
 				min-height: inherit;
+				height: calc(100% - #{$min-bottom});
+				width: $max-modal-width;
 			}
 		}
 	}
 	&.dialog {
 		$modal-width: 350px;
 
-		left: 50%;
-		right: auto;
-		width: $modal-width;
-		margin-left: -($modal-width/4);
-
+		.modal-content {
+			width: $modal-width;
+		}
 		.modal-title {
 			font-size: 20px;
 			margin: 0 0 15px 0;
@@ -134,6 +143,8 @@
 			text-align: left;
 			font-size: 18px;
 			@include border-radius($modal-radius);
+
+			max-height: calc(100% - #{$min-bottom});
 
 			.buttons {
 				margin: 30px 0 0 0;
@@ -150,17 +161,6 @@
 	}
 	&.alert {
 		$modal-width: 360px;
-		left: 50%;
-		right: auto;
-		width: $modal-width;
-		margin-left: -($modal-width/4);
-		border: 1px solid $color-stone;
-		background-color: $color-white;
-		font-family: $font-pn-light;
-		min-height: 80px;
-		font-size: 14px;
-		color: $color-slate;
-		@include box-shadow(3px 3px 10px 0px rgba(0,0,0,0.1));
 
 		.modal-header, .modal-body {
 			border-width: 1px 1px 0 1px;
@@ -170,10 +170,11 @@
 		.modal-header {
 			background: $color-warning-icon-yellow;
 			color: rgba($color-black, 0.5);
-			font-size: 18px;
+			font-size: 17px;
 			text-align: center;
 			line-height: 1.2em;
 			padding: 20px;
+			text-transform: none;
 
 			&:after {
 				content: none;
@@ -182,7 +183,7 @@
 				font-family: $icon-font;
 				content: '\21';
 				position: absolute;
-				top: 8px;
+				top: 10px;
 				left: 0;
 				right: 0;
 				text-align: center;
@@ -201,8 +202,7 @@
 			background-color: $color-white;
 			position: relative;
 			top: 0;
-			padding: 20px;
-			padding-top: 30px;
+
 			.title {
 				color: $color-warning-text;
 				text-transform: uppercase;
@@ -214,19 +214,21 @@
 			}
 
 			.buttons {
-				margin: 20px 0 0 0;
+				margin: 25px 0 0 0;
 				text-align: center;
-				.confirm {
-					padding: 0px 25px;
-					margin: 0px;
-					border-radius: 1px;
-					margin-bottom: 10px;
-				}
-				a {
-					display: block;
-					font-size: 13px;
+
+				a.cancel {
+					display: inline-block;
+					margin: 15px 0 0 0;
 				}
 			}
+		}
+	}
+}
+.edit-form {
+	.modal {
+		.modal-body {
+			background: $color-white;
 		}
 	}
 }

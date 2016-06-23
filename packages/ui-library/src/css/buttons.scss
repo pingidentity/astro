@@ -23,7 +23,7 @@
 	}
 }
 
-input[type=button], input[type=submit], .button, button {
+input[type=button], input[type=submit], button, .button {
 	$height: 36px;
 
 	padding: 0 20px;
@@ -87,7 +87,7 @@ input[type=button], input[type=submit], .button, button {
 		}
 	}
 	&.inline {
-		$height: 25px;
+		$height: 28px;
 
 		height: $height;
 		line-height: $height;
@@ -103,7 +103,7 @@ input[type=button], input[type=submit], .button, button {
 			color: $color-slate;
 			border-color: $color-rhino;
 		}
-		&.primary, &.secondary {
+		&.primary, &.secondary, &.success {
 			&:hover {
 				color: $color-white;
 			}
@@ -115,6 +115,9 @@ input[type=button], input[type=submit], .button, button {
 				&:hover {
 					color: $color-active-blue;
 				}
+			}
+			&:hover {
+				background-color: $color-active-blue;
 			}
 		}
 	}
@@ -129,8 +132,9 @@ input[type=button], input[type=submit], .button, button {
 			content: '\2b';
 			position: absolute;
 			left: 15px;
-			top: 0;
+			top: 13px;
 			font-size: 10px;
+			line-height: 1em;
 		}
 		&.user {
 			padding-right: 15px;
@@ -147,6 +151,12 @@ input[type=button], input[type=submit], .button, button {
 
 			&:before {
 				left: 8px;
+			}
+		}
+
+		&.inline {
+			&:before {
+				top: 10px;
 			}
 		}
 	}
@@ -170,19 +180,66 @@ input[type=button], input[type=submit], .button, button {
 			}
 		}
 	}
-	&.inline.remove {
-		padding: 0;
-		width: 25px;
-		text-align: center;
+	&.inline {
+		&.edit, &.plus, &.delete, &.remove, &.prev, &.next  {
+			$size: 29px;
 
-		&:before {
-			position: absolute;
-			left: 0;
-			right: 0;
-			top: 1px;
-			font-family: $icon-font;
-			content: '\2d';
-			font-size: 12px;
+			padding: 0;
+			height: $size;
+			width: $size;
+			text-align: center;
+
+			&:before {
+				line-height: 1em;
+				position: absolute;
+				left: 0;
+				width: 100%;
+				font-family: $icon-font;
+				text-transform: none;
+			}
+		}
+
+		&.plus {
+			&:before {
+				top: 7px;
+				content: '*';
+				font-size: 15px;
+			}
+		}
+		&.remove {
+			&:before {
+				top: 7px;
+				content: '-';
+				font-size: 15px;
+			}
+		}
+		&.delete {
+			&:before {
+				top: 6px;
+				content: 'd';
+				font-size: 15px;
+			}
+		}
+		&.edit {
+			&:before {
+				top: 6px;
+				content: 'e';
+				font-size: 15px;
+			}
+		}
+		&.prev {
+			&:before {
+				top: 9px;
+				content: '<';
+				font-size: 11px;
+			}
+		}
+		&.next {
+			&:before {
+				top: 9px;
+				content: '>';
+				font-size: 11px;
+			}
 		}
 	}
 	&.large {
@@ -225,7 +282,6 @@ button.ellipsis-loader-button {
 	}
 }
 
-// ROCKER BUTTON
 .rocker-button {
 	$height: 35px;
 

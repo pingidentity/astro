@@ -105,4 +105,3 @@ References
 
 * https://docs.npmjs.com/misc/scripts
 * http://krasimirtsonev.com/blog/article/Fun-playing-with-npm-dependencies-and-postinstall-script
-

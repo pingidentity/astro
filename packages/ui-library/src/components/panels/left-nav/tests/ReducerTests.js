@@ -2,7 +2,6 @@ window.__DEV__ = true;
 
 jest.dontMock("../Reducer.js");
 jest.dontMock("../Actions.js");
-jest.dontMock("../../../../util/ReduxUtils.js");
 
 describe("LeftNavBar-Reducer", function () {
     var Reducer = require("../Reducer.js"),

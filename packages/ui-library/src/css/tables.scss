@@ -1,10 +1,144 @@
 
 table {
+	&.grid {
+		display: inline-block;
+
+		th {
+			border-bottom: 1px solid $color-rabbit-fur;
+			padding: 0 20px 10px 0;
+			font-size: 13px;
+			color: $color-elephant;
+			text-transform: uppercase;
+
+			&.column-xs {
+				width: 90px;
+			}
+			&.column-sm {
+				width: 190px;
+			}
+			&.column-md {
+				width: 290px;
+			}
+			&.column-lg {
+				width: 390px;
+			}
+			&.column-xl {
+				width: 490px;
+			}
+			&.column-pg {
+				padding: 0 0 0 20px;
+				text-transform: none;
+				font-size: 12px;
+				font-weight: bold;
+				line-height: 1em;
+				white-space: nowrap;
+
+				.icon-previous, .icon-next {
+					display: inline-block;
+					font-size: 11px;
+					vertical-align: text-top;
+				}
+				.icon-previous {
+					margin-right: 10px;
+				}
+				.icon-next {
+					margin-left: 10px;
+				}
+			}
+
+			a.sort {
+				position: relative;
+
+				&:after {
+					position: absolute;
+					top: -1px;
+					right: -11px;
+					font-family: $icon-font;
+					text-transform: none;
+					content: '\7c';
+					font-size: 10px;
+					margin: 0 0 0 10px;
+
+				}
+				&.asc {
+					&:after {
+						top: -4px;
+						font-size: 4px;
+						content: '\41';
+					}
+				}
+				&.desc {
+					&:after {
+						top: 1px;
+						font-size: 4px;
+						content: '\2200';
+					}
+				}
+			}
+		}
+		td {
+			border-bottom: 1px dotted $color-rabbit-fur;
+			font-size: 14px;
+			color: $color-midnight;
+			padding: 9px 20px 8px 0;
+
+			button.inline {
+				&.delete {
+					margin: -5px 0;
+				}
+			}
+			&.cell-btn {
+				vertical-align: middle;
+			}
+			.input-width-xsmall,
+			.input-width-small,
+			.input-width-medium,
+			.input-width-large,
+			.input-width-xlarge,
+			.input-width-full {
+				margin-bottom: 0;
+			}
+			.input-text, .input-select, .input-checkbox, .input-radio {
+                margin-bottom: 0;
+            }
+            .input-checkbox {
+                padding: 0;
+            }
+		}
+		th, td {
+			text-align: left;
+			box-sizing: border-box;
+			font-family: $font-pn-regular;
+			line-height: 1.1em;
+			vertical-align: baseline;
+
+			&:last-of-type {
+				padding-right: 0;
+			}
+			&.center {
+				text-align: center;
+			}
+			&.right {
+				text-align: right;
+			}
+		}
+		&.grid-inline {
+			th {
+				padding: 9px 20px 8px 0;
+				border-bottom: 1px dotted $color-rabbit-fur;
+			}
+		}
+	}
+}
+
+
+// DEPRICATED OR SITE-SPECIFIC STYLES ----------------------------------------------------------------------------------
+table {
 	&.basic {
 		width: 100%;
 		&.fixed {
 			table-layout: fixed;
-		}	
+		}
 		th {
 			color: $color-elephant;
 			text-transform: uppercase;
@@ -58,7 +192,7 @@ table {
 		            }
 					.icon-delete {
 						position: inherit;
-					}			
+					}
 				}
 			}
 		}

@@ -1,9 +1,9 @@
 .row-selector {
+	height: 450px;
 	.column-title {
-		font-size: 16px;
-		padding: 0 0 15px 0;
-		margin: 0 0 4px 0;
-		border-bottom: 1px solid map-get($colors, 'rabbit-fur');
+		font-size: 15px;
+		color: $color-slate;
+		padding: 0 0 10px 0;
 		text-transform: uppercase;
 	}
 	.input-search {
@@ -12,50 +12,82 @@
 	.rows-available, .rows-added {
 		display: inline-block;
 		vertical-align: top;
+		width: calc(50% - 20px);
+		float: left;
+		box-sizing: border-box;
 	}
 	.rows-available {
-		margin: 0 30px 0 0;
-		width: 480px;
+		margin: 0 20px 0 0;
 	}
 	.rows-added {
-		width: 320px;
 		.items {
-			.no-items {
-				padding: 20px;
-				margin-bottom: 4px;
-				text-align: center;
-				font-size: 14px;
-				border: 1px dashed map-get($colors, 'rabbit-fur');
-				position: absolute;
-                width: 257px;
-                z-index: 10;
-                background-color: $color-white;
-			}
-			:nth-child(2) {
-                &.item {
-                    margin-top: 66px;
-                    z-index: 3;
-                }
-            }
+			position: relative;
 		}
 	}
 	.items {
 		max-height: 400px;
 		overflow: auto;
 	}
+	.no-items {
+		&.preview {
+			border: 1px dotted $color-active-blue;
+		}
+		padding: 14px 0;
+		margin-bottom: 4px;
+		text-align: center;
+		font-size: 14px;
+		border: 1px dotted $color-rabbit-fur;
+            left: 0;
+		right: 0;
+            z-index: 10;
+            background-color: $color-white;
+	}
 	.item {
 		position: relative;
 		background-color: $color-white;
-		border-bottom: 1px solid $color-text;
+		border-top: 1px solid $color-rabbit-fur;
 		color: $color-text;
-		margin: 0 15px 15px 0;
-		padding: 13px 15px 20px;
+		margin: 0;
+		padding: 15px 5px;
+		
+		@include box-sizing(border-box);
 		@include grab-cursor;
 
+		&.preview {
+			border: 1px dotted $color-active-blue;
+		}
+
+		.icon-grip {
+			display: inline-block;
+			margin-right: 20px;
+			vertical-align: middle;
+			&:before {
+				font-size: 16px;
+				color: $color-rabbit-fur;
+			}
+		}
 		a.button {
 			position: absolute;
 			right: 0;
 			top: 8px;
+		}
+		button {
+			position: absolute;
+			right: 0;
+			top: 10px;
+			&.inline {
+				&.plus, &.remove {
+					padding: 0;
+					right: 5px;
+					margin-right: 0;
+					&:hover {
+						border-color: $color-rhino;
+						&:before {
+							color: $color-active-blue;
+						}
+					}
+				}
+			}
 		}
 		&.item-disabled {
 			background: $color-dolphin;
@@ -63,3 +95,4 @@
 		}
 	}
 }
+

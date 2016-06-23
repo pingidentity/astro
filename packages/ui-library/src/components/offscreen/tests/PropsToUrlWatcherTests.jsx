@@ -2,7 +2,6 @@ window.__DEV__ = true;
 
 jest.dontMock("../PropsToUrlWatcher.jsx");
 jest.dontMock("../../../util/ReduxTestUtils.js");
-jest.dontMock("../../../util/ReduxUtils.js");
 
 describe("HistoryWriter", function () {
     var React = require("react"),
@@ -98,6 +97,13 @@ describe("HistoryWriter", function () {
 
         wrapper.sendProps({ watch: { prop1: { a: 1, b: false } } });
         expect(component.props.onReplaceUrl).lastCalledWith("blah?prop1.a=1");
+    });
+
+    it("pulls bool from query string", function () {
+        var location = { query: { yes: "true", no: "false" } };
+
+        expect(PropsToUrlWatcher.getBool(location, "yes")).toBe(true);
+        expect(PropsToUrlWatcher.getBool(location, "no")).toBe(false);
     });
 
     it("pulls array from query string", function () {

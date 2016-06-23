@@ -1,0 +1,27 @@
+var keyMirror = require("fbjs/lib/keyMirror");
+
+exports.Types = keyMirror({
+    EDIT_VIEW_SET_INPUT: null,
+    EDIT_VIEW_SAVE: null,
+    EDIT_VIEW_MODAL: null
+});
+
+exports.setInput = function (name, value) {
+    return {
+        type: exports.Types.EDIT_VIEW_SET_INPUT,
+        name: name,
+        value: value
+    };
+};
+
+exports.saveForm = function () {
+    return {
+        type: exports.Types.EDIT_VIEW_SAVE
+    };
+};
+
+exports.toggleModal = function () {
+    return {
+        type: exports.Types.EDIT_VIEW_MODAL
+    };
+};

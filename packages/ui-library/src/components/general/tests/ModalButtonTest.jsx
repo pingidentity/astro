@@ -1,10 +1,10 @@
 
 jest.dontMock("../ModalButton.jsx");
+jest.dontMock("../Modal.jsx");
 jest.dontMock("../../../util/EventUtils.js");
 
 describe("ModalButtonTest", function () {
     var React = require("react"),
-        ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-addons-test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         ModalButton = require("../ModalButton.jsx"),
@@ -15,8 +15,6 @@ describe("ModalButtonTest", function () {
     };
 
     beforeEach(function () {
-        window.addEventListener = jest.genMockFunction();
-        window.removeEventListener = jest.genMockFunction();
         window.setTimeout = jest.genMockFunction();
     });
 
@@ -31,37 +29,7 @@ describe("ModalButtonTest", function () {
         return ReactTestUtils.renderIntoDocument(<ModalButton {...opts} />);
     }
 
-    it("detaches event listeners on unmount", function () {
-        var component = getComponent();
-        var handler = window.addEventListener.mock.calls[0][1];
-
-        expect(window.addEventListener).toBeCalled();
-
-        ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
-
-        expect(window.removeEventListener).toBeCalledWith("keydown", handler);
-    });
-
-    it("keydown event listener only listens when modal is visible", function () {
-        var component = getComponent();
-        var handler = window.addEventListener.mock.calls[0][1];
-        var e = {
-            target: { parentNode: document.body },
-            stopPropagation: jest.genMockFunction(),
-            preventDefault: jest.genMockFunction()
-        };
-
-        //expect that the collapsed modal does not process keypress events
-        handler(e);
-        expect(e.stopPropagation).not.toBeCalled();
-
-        //expand the modal and verify it processes keypresses
-        component._open();
-        handler(e);
-        expect(e.stopPropagation).toBeCalled();
-    });
-
-    it("Doesnt render body until expanded", function () {
+    it("Doesn't render body until expanded", function () {
         var component = getComponent({ modalBody: jest.genMockFunction() });
 
         expect(component.props.modalBody).not.toBeCalled();
@@ -75,6 +43,7 @@ describe("ModalButtonTest", function () {
 
         // Expect a single button to be rendered.
         var button = TestUtils.findRenderedDOMNodeWithClass(component, "buttonClass");
+
         expect(button.textContent).toBe("My Button");
 
         // Expect no modal to be rendered.
@@ -82,34 +51,22 @@ describe("ModalButtonTest", function () {
         expect(modals.length).toEqual(0);
     });
 
-    it("Button and modal don't render data-ids if not provided", function () {
-        var component = getComponent();
+    it("Button and modal do not render data-ids if not provided", function () {
+        var component = getComponent({ expanded: true }),
+            button = TestUtils.findRenderedDOMNodeWithTag(component, "button"),
+            modal = TestUtils.findRenderedDOMNodeWithClass(component, "modal");
 
-        // Try to get the button by data-id. It shouldn't be there.
-        var button = TestUtils.findRenderedDOMNodeWithDataId(component, "-button");
-        expect(ReactTestUtils.isDOMComponent(button)).toBeFalsy();
-
-        button = TestUtils.findRenderedDOMNodeWithClass(component, "buttonClass");
-        expect(button.textContent).toBe("My Button");
-
-        ReactTestUtils.Simulate.click(button);
-
-        // Try to get the modal by data-id. It shouldn't be there.
-        var modal = TestUtils.findRenderedDOMNodeWithDataId(component, "-modal");
-        expect(ReactTestUtils.isDOMComponent(modal)).toBeFalsy();
+        expect(button.getAttribute("data-id")).toBeFalsy();
+        expect(modal.getAttribute("data-id")).toBeFalsy();
     });
 
     it("Button and modal render data-ids if provided", function () {
-        var component = getComponent({ id: "my-button" });
+        var did = "myid",
+            component = getComponent({ id: did, expanded: true }),
+            button = TestUtils.findRenderedDOMNodeWithDataId(component, did + "-button"),
+            modal = TestUtils.findRenderedDOMNodeWithDataId(component, did + "-modal");
 
-        // Get the button by data-id.
-        var button = TestUtils.findRenderedDOMNodeWithDataId(component, "my-button-button");
-        expect(button.textContent).toBe("My Button");
-
-        ReactTestUtils.Simulate.click(button);
-
-        // Get the modal by data-id.
-        var modal = TestUtils.findRenderedDOMNodeWithDataId(component, "my-button-modal");
+        expect(ReactTestUtils.isDOMComponent(button)).toBeTruthy();
         expect(ReactTestUtils.isDOMComponent(modal)).toBeTruthy();
     });
 
@@ -129,7 +86,6 @@ describe("ModalButtonTest", function () {
         var modal = TestUtils.findRenderedDOMNodeWithClass(component, "modal");
         TestUtils.findRenderedDOMNodeWithClass(modal, "show");
     });
-
 
     /*
      * Ensure that a modal can be opened by clicking the button,
@@ -271,21 +227,4 @@ describe("ModalButtonTest", function () {
         TestUtils.findRenderedDOMNodeWithClass(component, "modal");
     });
 
-    it("renders in header less mode", function () {
-        var component = getComponent({ expanded: true, showHeader: false });
-
-        // Expect a single button to be rendered.
-        TestUtils.findRenderedDOMNodeWithClass(component, "buttonClass");
-
-        // Expect a single shown modal to be rendered.
-        var modal = TestUtils.findRenderedDOMNodeWithClass(component, "modal");
-        TestUtils.findRenderedDOMNodeWithClass(modal, "show");
-        var header = TestUtils.scryRenderedDOMNodesWithClass(modal, "modal-header");
-
-        //no header
-        expect(header.length).toBe(0);
-
-        //but close link is here
-        TestUtils.findRenderedDOMNodeWithClass(modal, "close-modal");
-    });
 });

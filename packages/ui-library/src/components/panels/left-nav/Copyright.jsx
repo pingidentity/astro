@@ -56,15 +56,13 @@ var Copyright = React.createClass({
 
     render: function () {
         return (
-            <div className="pingone-info">
-                <div className="copyright">
+            <div className="copyright">
 
-                    { this._getLogo() }
+                { this._getLogo() }
 
-                    Copyright &copy; 2003-{this._year}
-                    <br />Ping Identity Corporation
-                    <br />All rights reserved
-                </div>
+                Copyright &copy; 2003-{this._year}
+                <br />Ping Identity Corporation
+                <br />All rights reserved
             </div>);
     }
 });

@@ -23,10 +23,10 @@ var FileUploadDemo = React.createClass({
 
     _onSecondFileChanged: function (file) {
         this.setState({
-            secondFile: file ? `${file.name} (${file.size} bytes)` : "none"
+            secondFile: file ? (file.name + " " + file.size + " bytes") : "none"
         });
     },
-    
+
     _toggleTooltip: function () {
         this.setState({
             tooltipOpen: !this.state.tooltipOpen,
@@ -60,10 +60,10 @@ var FileUploadDemo = React.createClass({
     render: function () {
         return (
             <div>
-                
+
                 <div className="input-row">
                     <label>
-                        <span className="label-text">Image Upload</span>
+                        <span className="label-text">Image Upload w Max Size Passed</span>
                     </label>
                     <FileUpload
                         referenceName="fileUpload"
@@ -72,7 +72,8 @@ var FileUploadDemo = React.createClass({
                         showThumbnail={true}
                         onFileChange={this._onFirstFileChanged}
                         removeFileLabel="Remove"
-                        buttonText="Choose a File"
+                        maxFileSizeLabel="Max Size 4MB"
+                        accept="image/jpeg, image/jpg, image/png"
                     />
                 </div>
                 <div className="input-row">
@@ -109,7 +110,7 @@ var FileUploadDemo = React.createClass({
                         buttonText="Choose a File"
                     />
                 </div>
-                
+
                 <a onClick={this._toggleTooltip}>Stacked File Name in a DetailsTooltip</a>
                 <DetailsTooltip
                     positionStyle="top right"
@@ -157,6 +158,5 @@ var FileUploadDemo = React.createClass({
         );
     }
 });
-
 
 module.exports = FileUploadDemo;

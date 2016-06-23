@@ -3,8 +3,7 @@ var Actions = require("./Actions.js"),
     /* This function is a more limited version of React's immutability helper.  It will
      * clone only parts of the state that will be mutated so the parts that are unchanged
      * will be shared with the original state */
-    setAtPath = require("../../util/ReduxUtils.js").setAtPath,
-    _ = require("underscore");
+    update = require("re-mutable");
 
 var initialState = {
     rows: [],
@@ -17,6 +16,19 @@ var initialState = {
     filters: {},
     position: {}
 };
+
+var types = [
+    "1 line with icon, no accessories",
+    "2 lines with icon, no accessories",
+    "1 line no icon, no accessories",
+    "2 lines no icon, no accessories",
+    "2 lines with icon, with status=good",
+    "2 lines with icon, with status=bad",
+    "2 lines with icon toggle on",
+    "2 lines with icon toggle off",
+    "2 lines with icon, with pill button",
+    "2 lines with icon, with all accessories"
+];
 
 /*
  * Reselect is a library which creates functions that only get evaluated when the inputs change. By
@@ -52,7 +64,9 @@ var batchSelector = createSelector(
  * the request returned from the server with the rows.
  */
 for (var i = 1; i < 51; i += 1) {
-    initialState.rows.push({ id: i, title: i.toString(), subtitle: "subtitle for row " + i });
+    var type = types[Math.min(types.length, Math.floor((Math.random() * 10) % types.length))];
+
+    initialState.rows.push({ id: i, type: type, title: "Row number " + i + " (" + type + ")" });
 }
 
 initialState.batches = batchSelector(initialState);
@@ -62,15 +76,15 @@ initialState.batches = batchSelector(initialState);
  * combine this with out reducers or have additional logic.
  */
 module.exports = function (state, action) {
-    var nextState = _.clone(state);
+    var nextState = state;
 
     switch (action.type) {
         case Actions.Types.LIST_VIEW_SET:
-            setAtPath(nextState, action.path, action.value);
+            nextState = update.set(nextState, action.path, action.value);
             break;
         case Actions.Types.LIST_VIEW_FILTER:
-            setAtPath(nextState, ["filters", action.name], action.value);
-            nextState.batches = batchSelector(nextState);
+            nextState = update.set(nextState, ["filters", action.name], action.value);
+            nextState = update.set(nextState, ["batches"], batchSelector(nextState));
             break;
         default:
             return state || initialState;

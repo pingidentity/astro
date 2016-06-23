@@ -62,6 +62,7 @@ var FormTextFieldError = React.createClass({
  * @param {boolean}  [autoComplete]       Whether or not the field will support autoComplete (default false)
  * @param {boolean}  [maskValue]          If true, the value shown in the input field will be masked with '*****' i.e: passwords (default false)
  * @param {boolean}  [readOnly=false]     Make the input field readonly.
+ * @param {boolean}  [disabled]           A property that disables the component
  *
  * @example <FormTextField
  *              data-id="my-data-id"
@@ -166,7 +167,8 @@ var Stateless = React.createClass({
                 disabled: this.props.disabled,
                 "value-entered": this.props.value,
                 "inline-save": this.props.showSave,
-                "form-error": this.props.errorMessage
+                "form-error": this.props.errorMessage,
+                actions: this.props.showReveal || this.props.showUndo
             });
 
         return (

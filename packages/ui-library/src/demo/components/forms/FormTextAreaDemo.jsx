@@ -71,6 +71,13 @@ var FormTextAreaDemo = React.createClass({
                         labelHelpText="This is my help text."
                     />
                 </div>
+                <div className="input-row">
+                    <FormTextArea
+                        labelText="Disabled With help tooltip"
+                        labelHelpText="This is my help text."
+                        disabled={true}
+                    />
+                </div>
             </div>
         );
     }

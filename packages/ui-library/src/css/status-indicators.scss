@@ -11,7 +11,7 @@
     &.good {
         background-color: $color-success;
     }
-    &.failure {
+    &.error {
         background-color: map-get($colors, 'critical-red');
     }
     &.warning {

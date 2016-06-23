@@ -32,7 +32,7 @@ var ToggleDemo = React.createClass({
                 <Toggle onToggle={this._onStatusToggle} id="toggle" toggled={this._isToggled()}
                     disabled={false} className="row-status-toggle" />
                 <br/><br/>
-                <div>{this.state.userStatus}</div>
+                <div data-id="userStatus">{this.state.userStatus}</div>
             </div>
         );
     }

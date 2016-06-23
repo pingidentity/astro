@@ -17,16 +17,19 @@
 		line-height: 1em;
 		cursor: pointer;
 		font-family: $font-pn-regular;
-
-		&:before {
-			position: absolute;
-			top: 0;
+	}
+	// Override default collapsible-link styles
+	.collapsible-link {
+		&:hover {
+			color: $color-slate;
+			text-decoration: none;
+			&.left:before {
+				color: $color-slate;
+			}
+		}
+		&.left:before {
 			left: -$line-indent;
-			content: '\59';
-			font-family: $icon-font;
-			font-size: 6px;
 			color: $color-midnight;
-			@include transition((all 0.3s cubic-bezier(1, 0, 1, 1)));
 		}
 	}
 	.collapsible-section-content {
@@ -35,12 +38,6 @@
 		@include transition((all 0.3s));
 	}
 	&.open {
-		.collapsible-section-title {
-			&:before {
-				@include rotate(-180deg);
-				@include transition((all 0.3s cubic-bezier(0, 0, 0, 1)));
-			}
-		}
 		.collapsible-section-content {
 		  overflow: visible;
 			max-height: 4000px;

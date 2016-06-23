@@ -106,4 +106,19 @@ describe("FormCheckbox", function () {
         var tooltip = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text");
         expect(tooltip.textContent).toEqual("Enter a port number");
     });
+    
+    it("is disabled when it is specified", function () {
+        var component = getComponent({
+            label: "Disable with help text",
+            labelHelpText: "Disabled with help text",
+            disabled: true
+        });
+
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        expect(ReactTestUtils.isDOMComponent(input)).toBeTruthy();
+        expect(input.disabled).toBeTruthy();
+        
+        var tooltip = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text");
+        expect(tooltip.textContent).toEqual("Disabled with help text");
+    });
 });

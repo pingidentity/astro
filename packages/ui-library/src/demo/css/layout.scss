@@ -1,105 +1,137 @@
 // LAYOUT
 
 // VARS
-$layout-header-height: 48px;
 $sidenav-width: 250px;
 $layout-nav-link-height: 31px; 	// works better as odd number
-$layout-zindex-order: (
-	content,
-	nav,
-	page-messages,
-	header
-);
-$sidenav-width: 250px;
+$layout-nav-offset: 15px;
 $sidenav-lineheight: 22px;
 
-#header {
-	z-index: index($layout-zindex-order, 'header');
-	position: fixed;
-	overflow: visible;
-	top: 0;
-	left: 0;
-	right: 0;
-	height: $layout-header-height;
-	background-color: $color-slate;
-
-	.logo {
-		height: 54px;
-		width: 54px;
-	}
-
-	.title {
-		position: absolute;
-		bottom: 8px;
-		left: 100px;
-		font-size: 28px;
-		line-height: 1em;
-		letter-spacing: -2px;
-		color: $color-white;
-	}
-}
-
-#nav, #nav .nav-menus, #nav ul.menu, #nav:before, #nav .selected-item {
+#nav {
 	width: $sidenav-width;
+
+	.nav-menus {
+		width: $sidenav-width - 5;
+
+		.copyright {
+			width: $sidenav-width - $layout-nav-offset;
+		}
+	}
+	ul.menu, .selected-item, &:before {
+		width: $sidenav-width - $layout-nav-offset;
+	}
+	.selected-item-arrow {
+		left: $sidenav-width + $layout-nav-offset - 5;
+	}
+	ul.menu {
+		li {
+			a {
+				padding-left: 33px;
+			}
+		}
+	}
 }
 
-.doc{
-    width: 100%;
-    height: 20px;
-    position: inherit;
-		@include transition(all 0.3s);
+.doc {
+	width: 100%;
+	height: 20px;
+	position: inherit;
+	@include transition(all 0.3s);
 
-    h2 {
-        float: left;
-    }
+	h2 {
+		float: left;
+	}
 
-    &.open {
-        height: 1000px;
-        overflow: hidden;
+	&.open {
+		height: 1000px;
+		overflow: hidden;
 
-        .toggle {
-            &:before {
-                content: '- close documentation'
-            }
-        }
+		.toggle {
+			&:before {
+				content: '- close documentation';
+			}
+		}
+		.toggle-source {
+			&:before {
+				content: '';
+			}
+		}
+		&.source {
+			.toggle {
+				&:before {
+					content: '';
+				}				
+			}
+			.toggle-source {
+				&:before {
+					content: '- close source';
+				}
+			}	
+		}
+		iframe {
+			height: 100%;
+			&.hidden {
+				display: none;
+			}
+		}
+	}
 
-        iframe {
-            height: 100%;
-        }
-    }
+	.toggle {
+		height: 20px;
+		cursor: pointer;
+		float: right;
 
-    .toggle {
-        height: 20px;
-        cursor:pointer;
-        float: right;
+		&:before {
+			color: $color-active;
+			content: '+ expand documentation'
+		}
+	}
+	.toggle-source {
+		height: 20px;
+		cursor: pointer;
+		float: right;
+		clear: both;
 
-        &:before {
-			    color: $color-active;
-          content: '+ expand documentation'
-        }
-    }
-
-    iframe {
-        width: 100%;
-        height: 0;
-    }
+		&:before {
+			color: $color-active;
+			content: '+ view source'
+		}
+	}
+	iframe {
+		width: 100%;
+		height: 0;
+	}
 }
 
-#library-content {
-	z-index: index($layout-zindex-order, 'content');
+.clear-both {
+	clear: both;
+}
+
+.page-controls-primary {
 	position: fixed;
-	overflow-x: hidden;
-	overflow-y: auto;
-	top: $layout-header-height;
-	right: 0;
-	bottom: 0;
-	left: $sidenav-width + 1px;
-	background-color: $color-white;
-	padding: 15px 30px 40px;
-	border-top: 1px solid $color-white;
+	margin-left: $sidenav-width - 2;
+}
+.page-messages {
+	left: $sidenav-width - $layout-nav-offset;
+}
+#content {
+	left: $sidenav-width;
 
 	.section {
 		padding: 10px 0 30px 0;
+	}
+	.fullscreen {
+		.output {
+			padding:0;
+			border: none;
+
+			&:before {
+				display: none;
+			}
+		}
+
+		.section-content {
+			margin: 0;
+		}
 	}
 	.section-content {
 		margin: 0 0 0 15px;
@@ -114,9 +146,9 @@ $sidenav-lineheight: 22px;
 			list-style: square inside;
 		}
 	}
-  .markup-wrapper {
-    overflow:hidden;
-  }
+	.markup-wrapper {
+		overflow:hidden;
+	}
 	pre.language-markup, pre.language-javascript, .output {
 		position: relative;
 		margin-top: 32px;

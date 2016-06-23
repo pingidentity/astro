@@ -35,10 +35,14 @@ var React = require("react"),
  * store updated.  The function signature is function(choice, numberOfSteps)
  * @param {function} [onNext] - If provided, will be provided to all children.  If not provided, the actions of each
  * step must be handled and the store updated to reflect these actions
+ * @param {function} [onDone] - If provided, will be provided to all children.  If not provided, the done action
+ * step must be handled and the store updated to reflect done action
  * @param {string} [labelEdit] - If provided, will be passed to all children
  * @param {string} [labelNext] - If provided, will be passed to all children
  * @param {string} [labelCancel] - If provided, will be passed to all children
  *
+ * @param {string} [labelDone] - If provided, will be passed to all children
+ * @param {boolean} [showPulsing=false] - If provided, will be injected its children's props
  * @example:
  * <Choose title='Choose a Wizard'>
  *     <Wizard title="Wizard A"></Wizard>
@@ -50,23 +54,29 @@ var Choose = React.createClass({
         "onEdit",
         "onChange",
         "onNext",
+        "onDone",
+        "onCancel",
         "labelNext",
         "labelCancel",
         "labelEdit",
+        "labelDone",
         "choices",
         "activeStep",
-        "numSteps"
+        "numSteps",
+        "showPulsing"
+
     ],
 
     getDefaultProps: function () {
         return {
             id: "choose",
-            number: 1
+            number: 1,
+            showPulsing: false
         };
     },
 
     _getChoice: function () {
-        return this.props.choices[this.props.number - 1];
+        return this.props.choices && this.props.choices[this.props.number - 1];
     },
 
     _isComplete: function () {
@@ -139,7 +149,7 @@ var Choose = React.createClass({
     render: function () {
         var props = _.pick(this.props, this.INHERIT_PROPS.concat(["number", "title"]));
         props.active = this.props.activeStep === this.props.number;
-        props.completed = this.props.choices.length >= this.props.number;
+        props.completed = this.props.choices && (this.props.choices.length >= this.props.number);
         props.total = this.props.numSteps;
         props.titleSelection = this._getChoiceTitle();
         props.canProceed = this._getChoice() >= 0;

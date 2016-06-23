@@ -48,13 +48,17 @@ describe("DetailsTooltip", function () {
 
         var details = TestUtils.findRenderedComponentWithType(component, Details);
         var title = TestUtils.findRenderedDOMNodeWithDataId(details, "details-title");
-        var content = TestUtils.findRenderedDOMNodeWithDataId(details, "details-content");
+        var content = TestUtils.findRenderedDOMNodeWithDataId(details, "details-content").children[0];
+        var body = TestUtils.findRenderedDOMNodeWithDataId(details, "details-body");
         var link = TestUtils.findRenderedDOMNodeWithDataId(details, "action-btn");
+
+
+        console.log("\n\n\ncontent.children.length", content.children.length);
 
         //DOM to contain actual content
         expect(content.children.length).toBe(3);
-        expect(content.children[2].nodeName).toBe("P");
-        expect(content.children[2].textContent).toBe("what ever callout content is");
+        expect(body.children[0].nodeName).toBe("P");
+        expect(body.children[0].textContent).toBe("what ever callout content is");
 
         //action link
         expect(link.textContent).toBe("Action");
@@ -81,7 +85,8 @@ describe("DetailsTooltip", function () {
 
         var details = TestUtils.findRenderedComponentWithType(component, Details);
         var title = TestUtils.findRenderedDOMNodeWithDataId(details, "details-title");
-        var content = TestUtils.findRenderedDOMNodeWithDataId(details, "details-content");
+        var content = TestUtils.findRenderedDOMNodeWithDataId(details, "details-content").children[0];
+        var body = TestUtils.findRenderedDOMNodeWithDataId(details, "details-body");
         var link = TestUtils.findRenderedDOMNodeWithDataId(details, "action-btn");
         var closeLink = TestUtils.scryRenderedDOMNodesWithDataId(details, "details-close");
 
@@ -90,8 +95,8 @@ describe("DetailsTooltip", function () {
 
         //DOM to contain actual content
         expect(content.children.length).toBe(2);
-        expect(content.children[1].nodeName).toBe("P");
-        expect(content.children[1].textContent).toBe("what ever callout content is");
+        expect(body.children[0].nodeName).toBe("P");
+        expect(body.children[0].textContent).toBe("what ever callout content is");
 
         //no close link
         expect(closeLink.length).toBe(0);

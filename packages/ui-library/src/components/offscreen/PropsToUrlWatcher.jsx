@@ -1,5 +1,5 @@
 var React = require("react"),
-    ReduxUtils = require("../../util/ReduxUtils.js"),
+    update = require("re-mutable"),
     _ = require("underscore");
 
 /**
@@ -105,9 +105,20 @@ var PropsToUrlWatcher = React.createClass({
     }
 });
 
-/** @static
+/**
  * @memberof PropsToUrlWatcher
- * @function PropsToUrlWatcher#getNumFromQuery
+ * @function getBool
+ * @param {object} location - ReactRouter's location object
+ * @param {string} key - The Key we'd like to extract from the query string
+ * @return {bool} - the value
+ */
+PropsToUrlWatcher.getBool = function (location, key) {
+    return location.query[key] === "true";
+};
+
+/**
+ * @memberof PropsToUrlWatcher
+ * @function getNum
  * @param {object} location - ReactRouter's location object
  * @param {string} key - The Key we'd like to extract from the query string
  * @return {number} - the number
@@ -116,7 +127,7 @@ PropsToUrlWatcher.getNum = function (location, key) {
     return parseFloat(location.query[key]);
 };
 
-/** @static
+/**
  * @memberof PropsToUrlWatcher
  * @function getArray
  * @param {object} location - ReactRouter's location object
@@ -128,9 +139,9 @@ PropsToUrlWatcher.getArray = function (location, key) {
     return str ? str.split(",") : [];
 };
 
-/** @static
+/**
  * @memberof PropsToUrlWatcher
- * @function getObjFromQuery
+ * @function getObj
  * @desc get all keys in the query string that belong to the same namespace
  * @param {object} location - ReactRouter's location object
  * @param {string} prefix - The key namespace we'd like extract
@@ -142,7 +153,7 @@ PropsToUrlWatcher.getObj = function (location, prefix) {
 
     for (var k in location.query) {
         if (k.match(regex)) {
-            ReduxUtils.setAtPath(result, k, location.query[k]);
+            result = update.set(result, k, location.query[k]);
         }
     }
 

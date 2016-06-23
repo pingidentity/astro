@@ -96,11 +96,7 @@
 			float: right;
 
 			input, button, .button {
-				margin: 0 13px 0 0;
-
-				&:last-of-type {
-					margin-right: 0;
-				}
+				margin: 0 0 0 13px;
 			}
 		}
 		.hide {

@@ -1,7 +1,7 @@
 "use strict";
 var React = require("react"),
     ReactDOM = require("react-dom"),
-    css = require("classnames"),
+    classnames = require("classnames"),
     _ = require("underscore"),
     callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutsideOfContainer;
 
@@ -110,7 +110,7 @@ var StatelessDetailsTooltip = React.createClass({
             id: "details-tooltip",
             positionStyle: "top",
             titleClassNames: "details-title",
-            contentClassNames: "details-content",
+            contentClassNames: null,
             open: false,
             showClose: true,
             hideOnClick: false
@@ -138,12 +138,17 @@ var StatelessDetailsTooltip = React.createClass({
         var hide = this.props.hideOnClick ? this.props.onToggle : _.noop;
 
         return this.props.open ? (
-            <div className={this.props.contentClassNames} data-id="details-content" onClick={hide}>
-                {this.props.showClose &&
-                <a className="details-close" data-id="details-close" onClick={this.props.onToggle}></a>}
-                {this.props.title &&
-                <div className={this.props.titleClassNames} data-id="details-title">{this.props.title}</div>}
-                {this.props.children}
+            <div className={classnames("details-content", this.props.contentClassNames)} data-id="details-content"
+                    onClick={hide}>
+                <div className="details-content-inner">
+                    {this.props.showClose && (
+                        <span className="details-close" data-id="details-close" onClick={this.props.onToggle}></span>
+                    )}
+                    {this.props.title && (
+                        <div className={this.props.titleClassNames} data-id="details-title">{this.props.title}</div>
+                    )}
+                    <div className="details-body" data-id="details-body">{this.props.children}</div>
+                </div>
             </div>
         ) : null;
     },
@@ -203,9 +208,10 @@ var StatelessDetailsTooltip = React.createClass({
         }
 
         return (
-            <span className={css("details-tooltip", containerCss)} data-id={this.props.id} ref="container">
-                {this.props.label ? <a className={css("details-target", targetCss)} data-id="action-btn"
-                                       onClick={!this.props.disabled && this._toggle}>{this.props.label}</a> : null}
+            <span className={classnames("details-tooltip", containerCss)} data-id={this.props.id} ref="container">
+                {this.props.label ? (
+                    <a className={classnames("details-target", targetCss)} data-id="action-btn"
+                        onClick={!this.props.disabled && this._toggle}>{this.props.label}</a>) : null }
                 {this._content()}
             </span>
         );

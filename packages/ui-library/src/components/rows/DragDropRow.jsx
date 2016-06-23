@@ -10,7 +10,8 @@ var dragSpec = {
     beginDrag: function (props) {
         return {
             id: props.id,
-            index: props.index
+            index: props.index,
+            column: props.column
         };
     },
 
@@ -40,6 +41,14 @@ var isInTopHalf = function (monitor, node) {
     return (clientOffset.y - boundingRect.top) <= ownMiddleY;
 };
 
+function handleDragEvent (callback, props, monitor, component) {
+    var itemBeingDragged = monitor.getItem();
+    var offset = isInTopHalf(monitor, ReactDOM.findDOMNode(component)) ? 0 : 1;
+
+    //this is awkward but backward compatible
+    props[callback](props.index + offset, itemBeingDragged.index, props.column, itemBeingDragged.column);
+}
+
 var dropSpec = {
     /*
      * @param {object} props - the properties of the target row
@@ -49,22 +58,8 @@ var dropSpec = {
      * @param {object} component - the target row react instance
      * @returns null - nothing
      */
-    hover: function (props, monitor, component) {
-        var itemBeingDragged = monitor.getItem();
-
-        if (itemBeingDragged.id === props.id) {
-            props.onDrag(props.index, props.index);
-            return;
-        }
-
-        props.onDrag(props.index + (isInTopHalf(monitor, ReactDOM.findDOMNode(component)) ? 0 : 1),
-                     itemBeingDragged.index);
-    },
-
-    drop: function (props, monitor, component) {
-        props.onDrop(props.index + (isInTopHalf(monitor, ReactDOM.findDOMNode(component)) ? 0 : 1),
-                     monitor.getItem().index);
-    }
+    hover: handleDragEvent.bind(null, "onDrag"),
+    drop: handleDragEvent.bind(null, "onDrop")
 };
 
 var dropCollect = function (connect) {
@@ -127,7 +122,7 @@ var DragDropRow = React.createClass({
 
         var opacity = this.props.isDragging ? 0.2 : 1;
 
-        const row = (
+        var row = (
           <div className="drag-drop-row" style={{ opacity: opacity }}>
               {this.props.children}
           </div>);

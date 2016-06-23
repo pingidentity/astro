@@ -5,7 +5,6 @@ var React = require("react"),
 
 /**
  * @class IntroTutorial
- * @private
  * @desc A component which manages walking a user through features of a page.  It will render a translucent overlay
  * over the page and then highlight components as they step through the tutorial.
  *

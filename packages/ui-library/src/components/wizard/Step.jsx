@@ -1,9 +1,10 @@
-var React = require("react");
-var HelpHint = require("../tooltips/HelpHint.jsx");
-var Progress = require("./Progress.jsx");
-var ContextButton = require("../general/ContextCloseButton.jsx");
-var cx = require("classnames");
-
+var React = require("react"),
+    HelpHint = require("../tooltips/HelpHint.jsx"),
+    Progress = require("./Progress.jsx"),
+    ContextButton = require("../general/ContextCloseButton.jsx"),
+    EllipsisLoaderButton = require("../general/EllipsisLoaderButton.jsx"),
+    classnames = require("classnames"),
+    _ = require("underscore");
 /**
  * @callback Wizard#Step~callback
  * @param {number} number - step number which triggered event
@@ -18,8 +19,10 @@ var cx = require("classnames");
  * @param {string} labelEdit - string text of step activation link
  * @param {string} labelCancel - string text for cancel button label
  * @param {string} labelNext - string text for next button label
+ * @param {string} labelDone - string text for done button label
  * @param {string} [nextButtonStyle] - css classes to use for the next button
- * @param {number} number - the step numbe(used for progress <i>number</i> of <i>total</i>))
+ * @param {string} [doneButtonStyle] - css classes to use for the done button
+ * @param {number} number - the step number(used for progress <i>number</i> of <i>total</i>))
  * @param {number} total - the total number of steps (used for progress <i>number</i> of <i>total</i>)
  * @param {bool} [active=false] -  bool indicating if step is open, used for external state management
  * @param {bool} [canProceed=true] - bool indicating if step is open, used for external state management
@@ -31,8 +34,10 @@ var cx = require("classnames");
  * @param {bool} [when=true] - conditionally show a step (hidden if false)
  * @param {bool} [renderHidden=false] - render the child elements to the DOM, but hidden (display: none), when the step is not active
  * @param {string} [hintText] -string tooltip help text
- * @param {Wizard#Step~callback} [onNext] - callback to be triggered in response of 'next' click
- * @param {Wizard#Step~callback} [onEdit] - callback to be triggered in response of 'edit' click.
+ * @param {Wizard#Step~callback} onNext - callback to be triggered in response of 'next' click
+ * @param {Wizard#Step~callback} onEdit - callback to be triggered in response of 'edit' click.
+ * @param {Wizard#Step~callback} onDone - callback to be triggered in response of 'done' click.
+ * @param {boolean} [showPulsing=false] - By default it set to false, if true next and done button will be change to loader when navigation buttons clicked
  **/
 var Step = React.createClass({
     propTypes: {
@@ -41,6 +46,7 @@ var Step = React.createClass({
         labelEdit: React.PropTypes.string,
         labelCancel: React.PropTypes.string,
         labelNext: React.PropTypes.string,
+        labelDone: React.PropTypes.string,
         number: React.PropTypes.number,
         total: React.PropTypes.number,
         active: React.PropTypes.bool,
@@ -54,8 +60,11 @@ var Step = React.createClass({
         renderHidden: React.PropTypes.bool,
         onEdit: React.PropTypes.func,
         onNext: React.PropTypes.func,
+        onDone: React.PropTypes.func,
         hintText: React.PropTypes.string,
-        nextButtonStyle: React.PropTypes.string
+        nextButtonStyle: React.PropTypes.string,
+        doneButtonStyle: React.PropTypes.string,
+        showPulsing: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
@@ -64,12 +73,13 @@ var Step = React.createClass({
             canProceed: true,
             isModal: true,
             showEdit: true,
-            when: true
+            when: true,
+            onCancel: _.noop
         };
     },
 
     _edit: function () {
-        if (this.props.onEdit) {
+        if (this.props.onEdit && !this.props.showPulsing) {
             this.props.onEdit(this.props.number);
         }
     },
@@ -83,12 +93,34 @@ var Step = React.createClass({
     _getCancelButton: function () {
         if (!this.props.hideCancel) {
             return React.createElement(this.props.isModal ? ContextButton : "input", {
+                onClick: this.props.onCancel,
                 type: "button",
                 ref: "cancelButton",
                 className: "default cancel-step",
-                value: this.props.labelCancel
+                value: this.props.labelCancel,
+                disabled: this.props.showPulsing
             });
         }
+    },
+
+    _getNextButton: function () {
+        return (
+            <EllipsisLoaderButton ref="nextButton" id="nextButton"
+                onButtonClick={this._next}
+                text={this.props.labelNext}
+                loading={this.props.showPulsing}
+                disabled={!this.props.canProceed || this.props.showPulsing}
+                className={this.props.nextButtonStyle || "primary next-step"} />);
+    },
+
+    _getDoneButton: function () {
+        return (
+            <EllipsisLoaderButton ref="doneButton" id="doneButton"
+                onButtonClick={this.props.onDone}
+                text={this.props.labelDone}
+                loading={this.props.showPulsing}
+                disabled={!this.props.canProceed || this.props.showPulsing}
+                className={this.props.doneButtonStyle || "primary final-step"} />);
     },
 
     _getEditLink: function () {
@@ -100,21 +132,19 @@ var Step = React.createClass({
     },
 
     _getNavigation: function () {
-        if (this.props.active && !this.props.disableNavigation) {
-            return (
-                <div className="sub-task clearfix">
-                    <div className="button-container">
-                        {this._getCancelButton()}
-                        <input type="button"
-                            ref="nextButton"
-                            data-id="nextButton"
-                            className={this.props.nextButtonStyle || "primary next-step"}
-                            value={this.props.labelNext}
-                            onClick={this._next}
-                            disabled={!this.props.canProceed} />
-                    </div>
-                </div>);
+        if (!this.props.active || this.props.disableNavigation) {
+            return null;
         }
+
+        var showNext = this.props.number !== this.props.total;
+
+        return (
+            <div className="sub-task clearfix">
+                <div className="button-container">
+                    {this._getCancelButton()}
+                    {showNext ? this._getNextButton() : this._getDoneButton()}
+                </div>
+            </div>);
     },
 
     _getHint: function () {
@@ -130,22 +160,21 @@ var Step = React.createClass({
     },
 
     render: function () {
-        var css = cx(this.props.className, {
+        var inlineStyles;
+        var className = classnames(this.props.className, {
             task: true,
             clearfix: true,
             active: this.props.active
         });
 
-        var inlineStyles;
         if (!this.props.active && this.props.renderHidden) {
             inlineStyles = {
                 display: "none"
             };
         }
 
-
         return (
-            <div className={css} data-id={this.props.id}>
+            <div className={className} data-id={this.props.id}>
                 <div className="task-title">
                     <Progress
                         ref="progress"

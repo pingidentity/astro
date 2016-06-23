@@ -2,20 +2,13 @@ $layout-header-height: 46px;
 $layout-nav-width: 190px;
 $layout-nav-link-height: 47px; // works better as odd number
 $layout-nav-width-offset: 15px;
-$layout-zindex-order: (
-	content,
-	nav,
-	page-messages,
-	page-detail-buttons,
-	header,
-);
 
 
 
 // CORE PAGE LAYOUT STYLES -------------------------------------------------------------------------
 #header {
-	z-index: index($layout-zindex-order, 'header');
-	position: fixed;
+	z-index: 1;
+	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -23,7 +16,7 @@ $layout-zindex-order: (
 	background-color: $color-walrus;
 
 	.logo {
-		$logo-env-hgt: 46px;
+		$logo-env-hgt: 52px;
 		$logo-env-wdt: 300px;
 		$logo-env-pad: 5px;
 
@@ -32,12 +25,11 @@ $layout-zindex-order: (
 
 		position: absolute;
 		top: 0;
-		left: 22px;
-		background-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 347.3 347.3"><linearGradient gradientUnits="userSpaceOnUse" x1="-132.3" y1="569.7" x2="-131.6" y2="568.9"><stop offset="0" stop-color="#20AC4B"/><stop offset="0.9831" stop-color="#19361A"/></linearGradient><rect style="fill:#E71939;" width="347.3" height="347.3"/><path style="fill:#F5F5F5;" d="M51.8 169.4c10.4 0 13.5 1.1 17 3 5.7 3.2 8.8 8.8 8.8 15.8 0 8.1-3.9 14.6-10.5 17.7 -2.8 1.3-5.5 2-12.2 2H48v22.5H35.7v-61.1H51.8zM48 197.9h6.4c5 0 6.5-0.6 8.2-3.2 1.1-1.7 1.5-3.4 1.5-6.3 0-5.7-3.1-9.1-8.3-9.1H48V197.9z"/><path style="fill:#F5F5F5;" d="M94.8 173c0 4-3.3 7.3-7.3 7.3 -4 0-7.2-3.3-7.2-7.3 0-4 3.3-7.3 7.4-7.3C91.7 165.7 94.8 169 94.8 173zM93.4 184.4v46.1H81.6v-44.2L93.4 184.4z"/><path style="fill:#F5F5F5;" d="M109.3 184.3c1.1 1.8 1.7 3.8 1.7 5.6 1.8-1.2 3.2-2.3 5.2-3.3 2.4-1.2 5.4-1.9 8.1-1.9 5 0 9.4 2.6 10.8 6.5 0.6 1.7 0.9 3.6 0.9 6.4v32.9h-11.6v-29.3c0-5.1-0.9-6.6-4-6.6 -2.4 0-5.4 1.6-8.2 4v31.8h-11.8v-32.6c0-3.9-0.5-7.6-1.6-10.5L109.3 184.3z"/><path style="fill:#F5F5F5;" d="M187.3 190.4c-2.6 2.4-5 3.3-8.3 3.3 -1.1 0-2.4-0.2-3.1-0.3 1.8 2.1 2.6 4.4 2.6 7.4 0 7.7-7 13.4-16.6 13.4 -0.5 0-0.9 0-1.8-0.1 -3 1.4-4.7 2.5-4.7 3.7 0 0.6 0.7 1.1 1.9 1.1l6.3 0.1c6.8 0.1 10.5 1.1 13.6 4 2.6 2.5 3.9 5.5 3.9 9.6 0 3.8-1.1 6.7-3.6 9.3 -4 4.2-10.7 5.8-17.8 5.8 -6.4 0-13-1.1-17-4.8 -2.5-2.3-3.7-4.9-3.7-8 0-2.5 0.6-3.7 1.1-4.6h10.9c-0.4 1.1-0.5 1.7-0.5 2.9 0 3.6 3 5.5 8.4 5.5 3 0 5.5-0.3 7.4-1.5 1.8-1.1 2.9-2.7 2.9-4.6 0-4-3.6-5.3-8.3-5.4l-5-0.1c-5.3-0.1-8.7-0.5-10.8-1.4 -2.1-0.8-3.4-2.8-3.4-5.9 0-2.9 0.9-5.6 8.3-7.6 -6.5-1.7-9.7-5.8-9.7-12.5 0-9.2 7.5-15.2 19-15.2 2.5 0 4.8 0.4 8.1 1.1 2.5 0.6 4 1 5.5 1 3.3 0 6.6-1.4 9.3-3.9L187.3 190.4zM152.3 199.9c0 4.6 2.8 6.4 6.9 6.4 4.7 0 7.2-2.3 7.2-6.4 0-4.2-2.6-6.7-7.1-6.7C154.8 193.3 152.3 195.7 152.3 199.9z"/><rect x="35.7" y="240.4" style="fill:#F5F5F5;" width="8" height="68.9"/><path style="fill:#F5F5F5;" d="M89 237.3l-7.8-1.3v21c0 3.6 0.1 7.7 0.1 7.7 -3-4-7.9-6.3-13.6-6.3 -3.6 0-6.4 0.9-9.6 3.1 -6.8 4.7-10.3 12.5-10.3 23.2 0 16 7.4 25.3 20.4 25.3 5.8 0 9.6-1.7 13.3-5.8 0.1 2.6 1.1 5.1 1.1 5.1h8c-1.1-2.9-1.5-7.5-1.5-16.2V237.3zM81.1 296.5c0 0-0.9 2.1-3 3.6 -3.2 2.3-5.5 3.2-9.6 3.2 -4.6 0-7.7-1.7-10-5.8 -1.6-2.9-2-7.2-2-13.1 0-7 0.8-10.6 3.2-14.5 2.1-3.4 5.4-5.2 9.3-5.2 5.9 0 9.6 1.7 12.2 5.2V296.5z"/><path style="fill:#F5F5F5;" d="M115.5 258c-6 0-10.9 2.2-15 6.9 -4.2 5-6 10.4-6 18.9 0 16.6 8.3 26.6 22.2 26.6 6.4 0 12.5-2.2 16.9-6.2l-3-5c-3.5 3.2-7.4 4.7-12.3 4.7 -5 0-9.6-1.8-12.5-6.1 -1.7-2.6-2.3-6.2-2.3-10.9v-1.2h31.2v-1.1c-0.2-11.9-1.4-16.7-5.7-21.1C125.7 259.9 120.9 258 115.5 258zM103.6 279.7c0.4-10.3 4.4-15.6 11.5-15.6 3.8 0 7.3 1.7 9 4.4 1.5 2.4 2.2 5.7 2.3 11.1H103.6z"/><path style="fill:#F5F5F5;" d="M164.2 258.2c-5.3 0-10.5 2.5-15.8 7.7 0-4.1-1.8-7.8-1.8-7.8l-7.6 2.1c0 0 1.9 3.4 1.9 10.5v38.6h7.6V272c3.6-3.8 9.8-7 13.9-7 2.3 0 4.4 0.8 5.5 2.1 1.4 1.7 1.8 3 1.8 8.3v33.8h7.9v-38c0-2-0.4-4-1.2-5.8C174.5 261.1 169.7 258.2 164.2 258.2z"/><path style="fill:#F5F5F5;" d="M197 259.3c0-6.6 1-14.5 1-14.5l-8.2 1.8c0 0-0.8 7.8-0.8 12.7h-6.5v5.9h6.5v34.3c0 5 1.3 8.2 4.8 9.9 1.9 0.9 3.9 1.4 6.5 1.4 3.5 0 6.3-0.7 8.8-2l-1.1-5c-1.4 0.7-2.7 1-4.9 1 -4.9 0-6.4-1.9-6.4-7.4v-32.2h21.7v44.1h8.1v-51.1l-6.9 1.1H197z"/><path style="fill:#F5F5F5;" d="M256.1 265.2l2.4-5.9h-12.6c0-6.6 1-14.5 1-14.5l-8.2 1.8c0 0-0.8 7.8-0.8 12.7h-6.5v5.9h6.5v34.3c0 5 1.3 8.2 4.8 9.9 1.9 0.9 3.9 1.4 6.5 1.4 3.5 0 6.3-0.7 8.8-2l-1.1-5c-1.4 0.7-2.7 1-4.9 1 -4.9 0-6.4-1.9-6.4-7.4v-32.2H256.1z"/><path style="fill:#F5F5F5;" d="M285.5 292.1c-1.2 4.1-3.1 10.5-3.1 10.5h-0.2c0 0-1.5-7.7-3-12.5l-10.2-32.4 -7.7 2.6 10.8 31.3c1.7 5 4.4 14.8 5 18 0 0 0.5 1.7 1.3 5.7 -2.1 5.4-4.7 7.7-9.6 9.2l2.3 5.3c8.7-2.1 12.8-8.7 16.2-18.8l17.2-51.8h-8.9L285.5 292.1z"/><path style="fill:#F5F5F5;" d="M313 246.5c-4 0-7.2 3.3-7.2 7.3 0 4 3.3 7.3 7.2 7.3 4 0 7.3-3.3 7.3-7.3C320.2 249.7 317 246.5 313 246.5zM313 259.6c-3 0-5.5-2.5-5.5-5.8 0-3.4 2.5-5.8 5.5-5.8 3 0 5.5 2.5 5.5 5.8C318.5 257.1 316 259.6 313 259.6zM316.3 252c0-1.7-1.1-2.4-3-2.4h-3.1v8.2h1.5v-3.5h0.9l2.1 3.5h1.6l-2.2-3.6C315.5 254.1 316.3 253.4 316.3 252zM311.7 253.1v-2.4h1.4c0.8 0 1.7 0.2 1.7 1.1 0 1.1-0.8 1.2-1.7 1.2H311.7z"/></svg>');
+		left: 20px;
+		background-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="utf-8"?><svg width="52px" height="52px" viewBox="0 0 52 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><title>Ping Logo</title><desc>Ping Identity</desc><defs></defs><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Ping-Logo"><polygon id="Fill-6" fill="%23E31E3D" points="0 0 52 0 52 52 0 52"></polygon><path d="M32.928,44.735 C32.507,44.735 32.164,45.098 32.164,45.543 C32.164,45.989 32.507,46.351 32.928,46.351 C33.349,46.351 33.692,45.989 33.692,45.543 C33.692,45.098 33.349,44.735 32.928,44.735 L32.928,44.735 Z M32.928,46.195 C32.608,46.195 32.35,45.921 32.35,45.543 C32.35,45.165 32.608,44.892 32.928,44.892 C33.248,44.892 33.506,45.165 33.506,45.543 C33.506,45.921 33.248,46.195 32.928,46.195 L32.928,46.195 Z" id="Fill-7" fill="%23FFFFFF"></path><path d="M33.275,45.351 C33.275,45.158 33.163,45.082 32.955,45.082 L32.633,45.082 L32.633,45.998 L32.795,45.998 L32.795,45.604 L32.891,45.604 L33.116,45.998 L33.281,45.998 L33.049,45.597 C33.19,45.583 33.275,45.507 33.275,45.351 L33.275,45.351 Z M32.795,45.474 L32.795,45.211 L32.938,45.211 C33.021,45.211 33.114,45.229 33.114,45.336 C33.114,45.46 33.032,45.474 32.936,45.474 L32.795,45.474 L32.795,45.474 Z" id="Fill-8" fill="%23FFFFFF"></path><path d="M30.895,44.46 C30.772,44.916 30.577,45.627 30.577,45.627 L30.556,45.627 C30.556,45.627 30.402,44.771 30.248,44.248 L29.2,40.658 L28.408,40.947 L29.508,44.415 C29.683,44.971 29.96,46.049 30.021,46.405 C30.02,46.405 30.068,46.595 30.149,47.032 C29.931,47.634 29.669,47.881 29.169,48.05 L29.405,48.639 C30.299,48.406 30.71,47.672 31.06,46.56 L32.816,40.825 L31.901,40.825 L30.895,44.46" id="Fill-9" fill="%23FFFFFF"></path><path d="M27.885,41.481 L28.132,40.825 L26.848,40.825 L26.848,38.728 L26.025,38.728 L26.025,40.825 L25.358,40.825 L25.358,41.481 L26.026,41.481 L26.026,45.282 C26.026,45.838 26.159,46.194 26.518,46.383 C26.713,46.483 26.919,46.538 27.186,46.538 C27.545,46.538 27.833,46.46 28.09,46.316 L27.977,45.76 C27.833,45.838 27.7,45.872 27.474,45.872 C26.97,45.872 26.816,45.66 26.816,45.049 L26.816,41.481 L27.885,41.481" id="Fill-10" fill="%23FFFFFF"></path><path d="M21.842,40.825 L21.842,38.728 L21.02,38.728 L21.02,40.825 L20.352,40.825 L20.352,41.481 L21.02,41.481 L21.02,45.282 C21.02,45.838 21.153,46.194 21.513,46.383 C21.708,46.483 21.914,46.538 22.18,46.538 C22.539,46.538 22.828,46.46 23.085,46.316 L22.972,45.76 C22.828,45.838 22.695,45.872 22.468,45.872 C21.965,45.872 21.811,45.66 21.811,45.049 L21.811,41.481 L24.03,41.481 L24.03,46.361 L24.861,46.361 L24.861,40.703 L24.159,40.825 L21.842,40.825" id="Fill-11" fill="%23FFFFFF"></path><path d="M18.492,40.703 C17.947,40.703 17.413,40.981 16.88,41.559 C16.88,41.103 16.694,40.692 16.694,40.692 L15.914,40.925 C15.914,40.925 16.109,41.303 16.109,42.093 L16.109,46.361 L16.89,46.361 L16.89,42.237 C17.26,41.815 17.896,41.459 18.308,41.459 C18.544,41.459 18.76,41.548 18.872,41.692 C19.016,41.881 19.058,42.025 19.058,42.615 L19.058,46.361 L19.87,46.361 L19.87,42.159 C19.87,41.936 19.828,41.714 19.746,41.515 C19.54,41.026 19.047,40.703 18.492,40.703" id="Fill-12" fill="%23FFFFFF"></path><path d="M15.482,43.737 L15.482,43.615 C15.462,42.293 15.338,41.77 14.897,41.281 C14.547,40.892 14.065,40.681 13.509,40.681 C12.893,40.681 12.39,40.925 11.979,41.448 C11.547,42.004 11.363,42.604 11.363,43.538 C11.363,45.372 12.215,46.483 13.633,46.483 C14.291,46.483 14.907,46.238 15.359,45.794 L15.05,45.237 C14.691,45.594 14.291,45.76 13.797,45.76 C13.283,45.76 12.811,45.56 12.523,45.082 C12.348,44.794 12.287,44.394 12.287,43.871 L12.287,43.737 L15.482,43.737 L15.482,43.737 Z M13.469,41.359 C13.859,41.359 14.218,41.548 14.393,41.847 C14.547,42.115 14.62,42.481 14.629,43.081 L12.287,43.081 C12.328,41.936 12.739,41.359 13.469,41.359 L13.469,41.359 Z" id="Fill-13" fill="%23FFFFFF"></path><path d="M10.797,44.571 L10.797,38.728 L9.996,38.728 L9.996,40.57 C9.996,40.97 10.006,41.426 10.006,41.426 C9.698,40.981 9.194,40.726 8.619,40.726 C8.25,40.726 7.962,40.825 7.633,41.07 C6.934,41.592 6.575,42.459 6.575,43.637 C6.575,45.404 7.336,46.438 8.66,46.438 C9.257,46.438 9.647,46.249 10.016,45.794 C10.026,46.082 10.129,46.361 10.129,46.361 L10.952,46.361 C10.838,46.038 10.797,45.527 10.797,44.571 L10.797,44.571 Z M9.986,44.949 C9.986,44.949 9.893,45.182 9.677,45.349 C9.348,45.604 9.112,45.705 8.691,45.705 C8.218,45.705 7.9,45.516 7.664,45.06 C7.499,44.738 7.458,44.26 7.458,43.615 C7.458,42.837 7.54,42.437 7.787,42.015 C8.003,41.637 8.342,41.437 8.743,41.437 C9.348,41.437 9.729,41.626 9.986,42.015 L9.986,44.949 L9.986,44.949 Z" id="Fill-14" fill="%23FFFFFF"></path><polygon id="Fill-15" fill="%23FFFFFF" points="5.342 38.736 6.164 38.736 6.164 46.36 5.342 46.36"></polygon><path d="M14.391,21.106 C13.452,20.545 12.585,20.24 9.745,20.24 L5.342,20.24 L5.342,37.944 L8.711,37.944 L8.711,31.422 L10.564,31.422 C12.416,31.422 13.139,31.219 13.909,30.837 C15.738,29.919 16.795,28.035 16.795,25.692 C16.795,23.653 15.954,22.023 14.391,21.106 L14.391,21.106 Z M12.705,27.601 C12.249,28.34 11.839,28.519 10.468,28.519 L8.711,28.519 L8.711,23.118 L10.852,23.118 C12.272,23.118 13.114,24.112 13.114,25.767 C13.114,26.608 12.995,27.119 12.705,27.601 L12.705,27.601 Z" id="Fill-16" fill="%23FFFFFF"></path><path d="M21.538,21.309 C21.538,22.481 20.647,23.424 19.539,23.424 C18.458,23.424 17.567,22.481 17.567,21.309 C17.567,20.138 18.482,19.195 19.588,19.195 C20.672,19.195 21.538,20.138 21.538,21.309 L21.538,21.309 Z M21.152,24.594 L21.152,37.944 L17.929,37.944 L17.929,25.13 L21.152,24.594 L21.152,24.594 Z" id="Fill-17" fill="%23FFFFFF"></path><path d="M25.507,24.571 C25.797,25.106 25.966,25.666 25.966,26.2 C26.447,25.843 26.856,25.537 27.386,25.232 C28.035,24.876 28.878,24.673 29.6,24.673 C30.972,24.673 32.175,25.436 32.56,26.558 C32.728,27.041 32.8,27.601 32.8,28.416 L32.8,37.944 L29.622,37.944 L29.622,29.461 C29.622,27.984 29.383,27.552 28.54,27.552 C27.892,27.552 27.05,28.01 26.304,28.722 L26.304,37.944 L23.078,37.944 L23.078,28.492 C23.078,27.372 22.933,26.302 22.645,25.436 L25.507,24.571" id="Fill-18" fill="%23FFFFFF"></path><path d="M40.431,34.607 L38.697,34.581 C38.359,34.581 38.168,34.453 38.168,34.275 C38.168,33.919 38.625,33.614 39.442,33.205 C39.683,33.231 39.779,33.231 39.924,33.231 C42.547,33.231 44.474,31.6 44.474,29.359 C44.474,28.492 44.231,27.83 43.75,27.22 C43.942,27.246 44.28,27.296 44.593,27.296 C45.484,27.296 46.157,27.015 46.855,26.327 L45.508,24.162 C44.761,24.876 43.847,25.284 42.956,25.284 C42.547,25.284 42.113,25.181 41.44,25.003 C40.549,24.774 39.924,24.673 39.226,24.673 C36.074,24.673 34.028,26.404 34.028,29.079 C34.028,31.015 34.894,32.212 36.675,32.697 C34.653,33.256 34.413,34.047 34.413,34.887 C34.413,35.779 34.773,36.364 35.351,36.593 C35.93,36.849 36.868,36.974 38.311,37.001 L39.683,37.026 C40.96,37.052 41.945,37.409 41.945,38.58 C41.945,39.115 41.633,39.599 41.151,39.904 C40.647,40.237 39.948,40.336 39.131,40.336 C37.639,40.336 36.819,39.777 36.819,38.732 C36.819,38.376 36.844,38.199 36.964,37.893 L33.98,37.893 C33.859,38.147 33.692,38.504 33.692,39.218 C33.692,40.107 34.028,40.873 34.702,41.535 C35.808,42.631 37.614,42.936 39.37,42.936 C41.295,42.936 43.15,42.478 44.231,41.255 C44.906,40.491 45.219,39.651 45.219,38.555 C45.219,37.383 44.882,36.492 44.16,35.779 C43.293,34.937 42.306,34.632 40.431,34.607 L40.431,34.607 Z M37.277,29.105 C37.277,27.882 37.974,27.168 39.202,27.168 C40.431,27.168 41.151,27.882 41.151,29.105 C41.151,30.301 40.454,30.964 39.178,30.964 C38.046,30.964 37.277,30.429 37.277,29.105 L37.277,29.105 Z" id="Fill-19" fill="%23FFFFFF"></path></g></g></svg>');
 		background-size: contain;
 		background-repeat: no-repeat;
 		background-color: transparent;
-		margin: 0 0 0 22px;
 
 		img {
 			margin: 5px 0 0 0;
@@ -57,26 +49,34 @@ $layout-zindex-order: (
 		$logo-hgt: 22px;
 
 		position: absolute;
-		top: 12px;
-		left: 89px;
+		top: 14px;
+		left: 87px;
 		height: $logo-hgt;
 		overflow: visible;
 	}
-
+	.site-title {
+		position: absolute;
+		top: 0;
+		left: 86px;
+		font-family: $font-pn-regular;
+		font-size: 20px;
+		color: $color-white;
+		line-height: $layout-header-height;
+	}
 	.product-nav {
-		$item-size: 21px;
+		$item-size: 20px;
 
 		position: absolute;
 		right: 0;
-		top: 12px;
+		top: 13px;
 		bottom: 10px;
 		left: auto;
 		@include clearfix;
 
 		> li {
 			float: left;
-			font-size: 21px;
-			height: 21px;
+			font-size: 20px;
+			height: 20px;
 			width: 55px;
 			text-align: center;
 			border-left: 1px solid $color-elephant;
@@ -87,7 +87,6 @@ $layout-zindex-order: (
 		}
 		a {
 			display: inline-block;
-			margin: 0 $item-size;
 			color: $color-elephant;
 
 			&:hover {
@@ -105,13 +104,13 @@ $layout-zindex-order: (
 		$right-pad: 5px;
 
 		display: none;
-		position: relative;
-		top: 18px;
-		left: -164px;
-		width: 190px;
+		position: absolute;
+		top: 43px;
+		right: 5px;
+		min-width: 190px;
 		background-color: $color-white;
 		border: 1px solid $color-rabbit-fur;
-    	padding: 10px $right-pad 10px $left-pad;
+		padding: 10px $right-pad 10px $left-pad;
 		@include border-radius(5px);
 		@include animation(fade-in 0.3s);
 
@@ -150,6 +149,8 @@ $layout-zindex-order: (
 				font-size: 14px;
 				color: $color-slate;
 				display: block;
+				text-align: left;
+				@include text-truncate;
 				@include transition(all 0.3s);
 
 				[class^="icon-"], [class*=" icon-"] {
@@ -168,28 +169,67 @@ $layout-zindex-order: (
 	}
 }
 #nav {
-	z-index: index($layout-zindex-order, 'nav');
-	position: fixed;
+	z-index: 0;
+	position: absolute;
 	top: $layout-header-height;
 	bottom: 0;
 	left: 0;
 	width: $layout-nav-width + $layout-nav-width-offset;
 	box-sizing: border-box;
 
-	&:before {
-		z-index: -1;
-		content: '';
-		position: fixed;
-		background-color: $color-timberwolf;
-		top: $layout-header-height;
-		bottom: 0;
-		left: 0;
-		width: $layout-nav-width;
-	}
+	background-color: $color-timberwolf;
+	border-right: $layout-nav-width-offset solid $color-white;
 
+	.nav-section {
+		padding: 16px 0 14px 0;
+		border-bottom: 1px solid $color-rabbit-fur;
+
+		&:first-of-type {
+			margin-top: -15px;
+		}
+
+		&.open, &.closed {
+			.title {
+				&:after {
+					font-family: $icon-font;
+					text-transform: none;
+					content: 'Y';
+					font-size: 5px;
+					font-weight: bold;
+					display: inline-block;
+					margin: 2px 0 0 10px;
+					line-height: 1em;
+					vertical-align: top;
+					@include transition(all 0.3s);
+				}
+			}
+		}
+		&.closed {
+			.title {
+				&:after {
+					@include rotate(0deg);
+				}
+			}
+		}
+		&.open {
+			padding-bottom: 25px;
+
+			.menu {
+				max-height: 2000px;
+			}
+			.title {
+				&:after {
+					@include rotate(-180deg);
+				}
+			}
+		}
+	}
+	.selected-item-arrow + .nav-section  {
+		padding-top: 0;
+	}
 	.title {
-		margin: 0 $layout-nav-width-offset 10px 17px;
-		color: $color-midnight;
+		padding: 10px 5px 10px 17px;
+		color: rgba($color-midnight, 0.55);
 		font-size: 12px;
 		line-height: 1em;
 		text-transform: uppercase;
@@ -199,13 +239,6 @@ $layout-zindex-order: (
 		&.narrow {
 			margin-top: 5px;
 		}
-	}
-	.divider {
-		margin: 25px $layout-nav-width-offset 25px 0;
-		height: 1px;
-		background: $color-rabbit-fur;
-		position:relative;
-		top:-2px;
 	}
 	.selected-item {
 		position: absolute;
@@ -218,10 +251,10 @@ $layout-zindex-order: (
 		background-color: $color-white;
 		border-style: solid;
 		border-color: $color-rabbit-fur;
-		border-width: 1px 0;
+		border-width: 1px 1px 1px 0;
 		height: $layout-nav-link-height;
-		@include transition(all 0.3s);
 		overflow:hidden;
+		@include transition(all 0.3s);
 
 		&:before {
 			content: '';
@@ -233,11 +266,13 @@ $layout-zindex-order: (
 			background-color: $color-active;
 		}
 	}
-	.select-item-arrow {
+	.selected-item-arrow {
 		position: absolute;
 		left: 215px;
 		z-index: -1;
 		height: 0;
+		opacity: 0;
+		@include transition(all 0.3s);
 
 		div {
 			height: 0;
@@ -250,7 +285,7 @@ $layout-zindex-order: (
 			}
 			&:before {
 				top: 0;
-				border-width: 24px 8px;
+				border-width: 26px 8px;
 				border-style: solid;
 				z-index: 2;
 				border-color: transparent transparent transparent $color-rabbit-fur;
@@ -258,7 +293,7 @@ $layout-zindex-order: (
 			}
 			&:after {
 				top: 3px;
-				border-width: 21px 7px;
+				border-width: 23px 7px;
 				border-style: solid;
 				z-index: 2;
 				border-color: transparent transparent transparent $color-white;
@@ -271,35 +306,30 @@ $layout-zindex-order: (
 		position: absolute;
 		top: 0;
 		left: 0;
-		bottom: 0;
+		bottom: 112px;
 		overflow-x: hidden;
 		overflow-y: auto;
 		width: $layout-nav-width + 10px;
-		padding: 25px 10px 120px 0;
+		padding: 15px 10px 0 0;
 		box-sizing: border-box;
 	}
 	ul.menu {
 		font-size: 16px;
 		width: $layout-nav-width;
  		max-height: 0px;
-				overflow: hidden;
-				@include transition(max-height ease-out 0.3s);
-
-		&.open {
-			max-height: 2000px;
-		}
+		overflow: hidden;
+		@include transition(max-height ease-out 0.3s);
 
 		li {
 			position: relative;
-			border-left: 8px solid transparent;
-			margin: 0 0 10px;
 			@include transition(all 0.3s);
 
 			a {
 				position: relative;
 				display: block;
-				padding: 0 0 0 46px;
-				line-height: $layout-nav-link-height;
+				box-sizing: border-box;
+				padding: 16px 20px 16px 25px;
+				line-height: 1.0em;
 				font-size: 14px;
 				font-family: $font-pn-regular;
 				color: $color-slate;
@@ -308,62 +338,100 @@ $layout-zindex-order: (
 				&:hover {
 					text-decoration: none;
 				}
+				span {
+					display: inline-block;
+					pointer-events: inherit;
+				}
 			}
 			&:hover {
 				background-color: rgba($color-white, 0.5);
 				text-decoration: none;
 			}
+			&.highlighted {
+				&:hover {
+					background-color: inherit;
+				}
+			}
 			[class^="icon-"], [class*=" icon-"] {
 				position: absolute;
-				left: 5px;
+				left: 25px;
 				top: 13px;
 				font-size: 18px;
+				width: 18px;
+				text-align: center;
+			}
+			&.has-icon {
+				a {
+					padding-left: 56px;
+				}
 			}
 		}
 	}
 	.copyright {
-		$gradient-height: 3px;
-
-		position: fixed;
+		position: absolute;
 		bottom: 0;
 		left: 0;
-		width: $layout-nav-width - 10px;
+		width: $layout-nav-width;
 		box-sizing: border-box;
-		padding: (20px - $gradient-height) 10px 25px 20px;
+		padding: 20px 10px 25px 20px;
 		font-family: $font-pn-regular;
 		font-size: 10px;
 		line-height: 1.3em;
-		background: $color-timberwolf;
 		color: $color-elephant;
 
-		&:before {
-			content: '';
-			position: absolute;;
-			left: 0;
-			top: -$gradient-height;
-			height: $gradient-height;
-			width: $layout-nav-width - 10px;
-			@include gradient-vertical(transparent, $color-timberwolf);
+		.pingone-logo {
+			max-width: 75px;
+			display: block;
+			margin: 0 0 7px 0;
+			fill: $color-elephant;
+		}
+	}
+	&.scrollable {
+		.copyright {
+			border-top: 1px solid darken($color-timberwolf, 7%);
+
+			&:before, &:after {
+				content: '';
+				position: absolute;
+
+				left: 0;
+				right: 0;
+
+			}
+			&:before {
+				$gradient-height: 20px;
+
+				z-index: 1;
+				top: -$gradient-height - 1;
+				height: $gradient-height;
+				@include gradient-vertical(transparent, rgba($color-timberwolf, 0.9), 0%, 85%);
+			}
+			&:after {
+				$gradient-height: 5px;
+
+				z-index: 2;
+				top: -$gradient-height - 1;
+				height: $gradient-height;
+				@include gradient-vertical(transparent, rgba($color-black, 0.05));
+			}
 		}
 	}
 }
 #content {
-	z-index: index($layout-zindex-order, 'content');
-	position: fixed;
+	position: absolute;
 	overflow-x: hidden;
 	overflow-y: auto;
 	top: $layout-header-height;
 	right: 0;
 	bottom: 0;
-	left: $layout-nav-width + 1px;
+	left: $layout-nav-width + 11px;
 	background-color: $color-white;
 	padding: 25px 40px 80px 40px;
-	border-top: 1px solid $color-white;
 
 	.detail-primary-buttons {
-		position: fixed;
-		z-index: index($layout-zindex-order, 'page-detail-buttons');
-		bottom: 0px;
+		position: absolute;
+		z-index: 2;
+		bottom: 0;
 		left: 241px;
 		right: 30px;
 		top: auto;
@@ -372,26 +440,29 @@ $layout-zindex-order: (
 		background: rgba($color-white, 0.9);
 		border-top: 1px solid $color-input-border;
 
-		@include chrome-fixed-positioning-bug-hack;
+		// @include chrome-fixed-positioning-bug-hack;
 	}
 }
-#page-messages {
+.page-messages {
 	position: fixed;
-	z-index: index($layout-zindex-order, 'page-messages');
+	z-index: 1;
 	top: $layout-header-height;
-	left: $layout-nav-width;
+	left: $layout-nav-width + $layout-nav-width-offset;
 	right: 0;
 	color: $color-white;
 	padding: 0;
-	border-bottom: 1px solid $color-white;
 
-	&.full {
+	&.full, &.in-modal {
 		left: 0;
-		.messsage {
-			padding-left: 0;
-			text {
-				padding-left: 22px;
-			}
+		.message {
+			padding-left: 25px;
+		}
+	}
+	&.in-modal {
+		position: absolute;
+		top: 0;
+		.close {
+			right: 15px;
 		}
 	}
 	&.inline {
@@ -412,7 +483,7 @@ $layout-zindex-order: (
 		$size: 16px;
 
 		position: absolute;
-		top: 12px;
+		top: 13px;
 		right: 10px;
 		color: rgba($color-white, 0.7);
 		line-height: 1em;
@@ -429,7 +500,7 @@ $layout-zindex-order: (
 	.message {
 		position: relative;
 		overflow: hidden;
-		padding: 10px 50px 11px 40px;
+		padding: 12px 50px 9px 40px;
 		border-bottom: 1px solid rgba($color-black, 0.1);
 		font-size: 14px;
 		line-height: 1.3;
@@ -469,12 +540,85 @@ $layout-zindex-order: (
 			}
 
 		}
+		&.feature {
+			background-color: $color-active-blue;
+
+			input[type=button] {
+				color: $color-active-blue;
+			}
+		}
 	}
 	.show {
 		.text {
 			margin-top: 0px;
 			border-bottom: 1px solid rgba($color-black, 0.1);
 			@include transition(margin-top 0.2s);
+		}
+	}
+}
+
+.inline-message {
+	position: relative;
+	display: table;
+	padding: 15px;
+	margin: 15px 0 30px 0;
+	border: 1px solid $color-rabbit-fur;
+	color: $color-elephant;
+	font-size: 14px;
+	font-family: $font-pn-regular;
+	@include border-radius(3px);
+
+	.inline-message-icon, .inline-message-text, .inline-message-btn {
+		display: table-cell;
+		vertical-align: middle;
+	}
+	.inline-message-btn {
+		margin: 0 0 0 20px;
+
+		.input, .button, button {
+			display: block;
+	    	margin: 0 auto 0 15px;
+		}
+	}
+
+	&.warning, &.success, &.notice {
+		padding-left: 55px;
+
+		&:before {
+			position: absolute;
+			left: 15px;
+			font-family: $icon-font;
+    		line-height: 1em;
+		}
+	}
+	&.warning {
+		$icon-size: 25px;
+
+		&:before {
+			content: '!';
+			top: calc(50% - #{floor($icon-size/2)});
+			font-size: $icon-size;
+			color: $color-critical-red;
+		}
+	}
+	&.success {
+		$icon-size: 20px;
+
+		&:before {
+			content: 'y';
+			top: calc(50% - #{floor($icon-size/2)});
+			font-size: $icon-size;
+			color: $color-success;
+		}
+	}
+	&.notice {
+		$icon-size: 25px;
+
+		&:before {
+			content: '!';
+			top: calc(50% - #{floor($icon-size/2)});
+			font-size: $icon-size;
+			color: $color-warning-icon-yellow;
 		}
 	}
 }
@@ -500,18 +644,25 @@ $layout-zindex-order: (
 			color: $color-active-blue-highlighted;
 		}
 	}
-	&:after {
+	&.left:before,
+	&.right:after {
 		position: absolute;
 		top: 0;
-		right: -15px;
 		content: '\59';
 		font-family: $icon-font;
 		font-size: 6px;
 		color: $color-active-blue;
 		@include transition((all 0.3s cubic-bezier(1, 0, 1, 1)));
 	}
+	&.left:before {
+		left: -15px;
+	}
+	&.right:after {
+		right: -15px;
+	}
 	&.open {
-		&:after {
+		&.left:before,
+		&.right:after {
 			@include rotate(-180deg);
 			@include transition((all 0.3s cubic-bezier(0, 0, 0, 1)));
 		}
@@ -564,19 +715,19 @@ $layout-zindex-order: (
 		}
 	}
 }
+.page-section-title {
+	margin: 0 0 25px 0;
+	padding: 0 0 5px 0;
+	border-bottom: 1px solid $color-rabbit-fur;
+	font-size: 15px;
+	line-height: 1em;
+	font-family: $font-pn-semibold;
+	color: $color-blue-grey;
+	text-transform: uppercase;
+}
 .page-section {
 	margin: 0 0 40px 25px;
 
-	.page-section-title {
-		margin: 0 0 25px 0;
-		padding: 0 0 5px 0;
-		border-bottom: 1px solid $color-rabbit-fur;
-		font-size: 15px;
-		line-height: 1em;
-		font-family: $font-pn-semibold;
-		color: $color-blue-grey;
-		text-transform: uppercase;
-	}
 	.page-section-content {
 		margin: 0 0 40px 25px;
 	}
@@ -631,7 +782,7 @@ $layout-zindex-order: (
 	bottom: 0;
 	padding: 20px;
 	text-align: right;
-	background: rgba($color-white, 0.5);
+	background: rgba($color-white, 0.9);
 	border-top: 1px solid silver;
 }
 
@@ -774,68 +925,6 @@ $layout-zindex-order: (
 		}
 	}
 }
-#nav {
-	$nav-border-width: 1px;
-	$selected-border-width: 1px;
-	$selected-arrow-offset: -(ceil($layout-nav-link-height/3) + $nav-border-width) + 1;
-	$selected-arrow-width-w: ceil($layout-nav-link-height/2) + $selected-border-width;
-	$selected-arrow-width-h: ceil($selected-arrow-width-w/3) - $selected-border-width;
-
-	ul.menu {
-		li {
-			a {
-				span {
-					display: inline-block;
-					margin: 0 10px;
-				}
-			}
-			&.selected, &.active {
-				background-color: $color-rabbit-fur;
-				border-left-color: $color-active;
-
-				&:after {
-					content: '';
-					display: block;
-					position: absolute;
-					top: 0;
-					border-width: $selected-arrow-width-w $selected-arrow-width-h;
-					border-style: solid;
-					z-index: 1;
-					border-color: transparent transparent transparent $color-rabbit-fur;
-					right: $selected-arrow-offset;
-				}
-
-				a {
-					color: $color-slate;
-					background-color: $color-white;
-					cursor: default;
-
-					&:before, &:after {
-						content: '';
-						display: block;
-						position: absolute;
-					}
-					&:before {
-						width:4px;
-						background-color: $color-white;
-						top: 0;
-						bottom: 0;
-						right: -($nav-border-width + $selected-border-width);
-						@include border-radius(1px);
-					}
-					&:after {
-						top: 1px;
-						border-width: ($selected-arrow-width-w - 2px) ($selected-arrow-width-h - 1px);
-						border-style: solid;
-						z-index: 2;
-						border-color: transparent transparent transparent $color-white;
-						right: $selected-arrow-offset + 1px;
-					}
-				}
-			}
-		}
-	}
-}
 
 .content-col-of-2, .content-col-of-3, .content-col-of-4, .content-col-of-5 {
 	float: left;
@@ -912,46 +1001,54 @@ a {
 }
 
 .search-bar {
-  .filter-by {
-    font-size:12px;
-    padding-top: 16px;
-    display: inline-block;
-    padding-left: 40px;
-	  color: $color-slate;
-    cursor: pointer;
-    user-select:none;
-    position:relative;
+	$animation-timing: ease-out 0.2s;
+
+	.filter-by {
+		font-size:12px;
+		padding-top: 11px;
+		display: inline-block;
+		padding-left: 40px;
+		color: $color-slate;
+		cursor: pointer;
+		user-select: none;
+		position: relative;
 
 		&:before {
 			font-family: $icon-font;
 			content: 'Y';
-      position:absolute;
-      left:16px;
-      top:5px;
-      font-size:0.5em;
-      padding-right:5px;
-	    @include transition(all ease-out 0.3s);
-    }
-  }
-  .input-text {
-    margin: 0;
-  }
-  .filters {
-    padding-top:10px;
-    max-height: 0px;
-	  @include transition(max-height ease-out 0.3s);
-    overflow: hidden;
-  }
+			position:absolute;
+			left: 20px;
+			top: 10px;
+			font-size:0.5em;
+			padding-right:5px;
+			@include transition(all $animation-timing);
+		}
+	}
+	.input-text {
+		margin: 0;
+	}
+	.filters {
+		display: none;
+		padding-top:10px;
+		max-height: 0px;
+		@include transition(max-height $animation-timing);
+	}
+	.add-modal {
+		display: inline;
+		float: right;
+	}
 
-  &.expanded {
-    .filter-by {
-	    &:before {
+	&.expanded {
+		.filter-by {
+			&:before {
 				@include rotate(-180deg);
-      }
-    }
-    .filters {
-      max-height:133px;
-    }
-  }
-
+			}
+		}
+		.filters {
+			display: block;
+			max-height:133px;
+			@include animation(fade-in $animation-timing);
+		}
+	}
+	@include fadein-keyframes;
 }

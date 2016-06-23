@@ -1,4 +1,4 @@
-var React = require("../../../util/ReactWithDefaultMethods.js"),
+var React = require("re-react"),
     ReactDOM = require("react-dom"),
     EventUtils = require("../../../util/EventUtils.js"),
     _ = require("underscore");
@@ -96,7 +96,9 @@ module.exports = React.createClass({
                     <img className="site-logo" data-id="header-site-logo" src={this.props.siteLogo} />
                 }
 
-                <span className="title">{this.props.label}</span>
+                {this.props.label &&
+                    <span className="site-title">{this.props.label}</span>
+                }
 
                 <ul className="product-nav" ref="navContainer">
                 {

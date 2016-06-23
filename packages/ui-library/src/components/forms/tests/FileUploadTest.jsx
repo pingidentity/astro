@@ -48,8 +48,9 @@ describe("FileUpload", function () {
 
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
-            accept: "image/jpeg, image/jpg, image/gif, image/png",
             maxFileSizeKb: 10,
+            maxFileSizeLabel: "Max Size 4MB",
+            accept: "image/jpeg, image/jpg, image/gif, image/png",
             showThumbnail: true,
             referenceName: "testFileUpload",
             buttonText: "Select File",
@@ -58,7 +59,6 @@ describe("FileUpload", function () {
             validator: jest.genMockFunction(),
             errorHandler: jest.genMockFunction()
         });
-
 
         return ReactTestUtils.renderIntoDocument(<FileUpload {...opts} />);
     }
@@ -231,4 +231,26 @@ describe("FileUpload", function () {
         var filesAcceptedMsg = TestUtils.findRenderedDOMNodeWithDataId(component, "filesAcceptedMsg");
         expect(filesAcceptedMsg).toBeFalsy();
     });
+
+    // it will display the max size
+    it("it will display the max size", function () {
+        var component = getComponent();
+
+        // expect properly titled label
+        var label = TestUtils.scryRenderedDOMNodesWithClass(component, "max-size");
+        expect(label[0].childNodes[0].textContent).toEqual("Max Size 4MB");
+    });
+    
+    // it will display the accept types
+    it("it will display the accept types", function () {
+        var component = getComponent();
+
+        // expect properly titled label
+        var label = TestUtils.scryRenderedDOMNodesWithClass(component, "accepted-types");
+        expect(label[0].childNodes[1].textContent).toEqual("jpeg, ");
+        expect(label[0].childNodes[2].textContent).toEqual("jpg, ");
+        expect(label[0].childNodes[3].textContent).toEqual("gif, ");
+        expect(label[0].childNodes[4].textContent).toEqual("png");
+    });
+
 });

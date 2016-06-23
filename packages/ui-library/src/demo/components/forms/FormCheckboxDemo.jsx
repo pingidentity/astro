@@ -46,6 +46,7 @@ var FormCheckboxDemo = React.createClass({
                         onChange = {this._onChange.bind(this, 3)}
                         checked = {this.state.checkboxChecked3}
                         disabled = {true}
+                        labelHelpText = "Disabled with help"
                     />
                 </div>
                 <div className="input-row">

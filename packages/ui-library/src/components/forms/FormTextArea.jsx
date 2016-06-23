@@ -152,24 +152,26 @@ var FormTextArea = React.createClass({
         var value = _.isUndefined(this.props.value) ? this.state.fieldValue : this.props.value,
             edited = this.props.originalValue && this.props.originalValue !== value,
             readonly = this.props.mode.toUpperCase() === FormFieldConstants.FormFieldMode.READ_ONLY,
-            labelHelp;
+            labelHelp,
+            undoValue = this.props.originalValue !== null &&
+                        this.props.originalValue !== undefined &&
+                        (value !== this.props.originalValue);
 
-        var labelCss = css(this.props.className, {
-                "input-textarea": true,
+        var labelCss = css(this.props.className, "input-textarea", {
                 required: this.props.isRequired,
                 "form-error": this.props.errorMessage,
+                disabled: this.props.disabled,
                 edited: edited,
                 "value-entered": !!value,
-                readonly: readonly
+                readonly: readonly,
+                actions: undoValue
             }),
             errorCss = css("help-tooltip form-error-message", {
                 show: this.props.errorMessage
             });
 
         var undo;
-        if (this.props.originalValue !== null &&
-                this.props.originalValue !== undefined &&
-                (value !== this.props.originalValue)) {
+        if (undoValue) {
             // only show the undo icon if an original value is passed in and the text area's value has changed
             // empty strings are OK
             undo = (<a data-id="undo" className="undo" onClick={this._handleUndo}>undo</a>);

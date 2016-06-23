@@ -49,6 +49,7 @@ var FormIntegerFieldDemo = React.createClass({
             });
         }
     },
+    
     _blurCallback4: function (value) {
 
         this.setState({
@@ -67,6 +68,7 @@ var FormIntegerFieldDemo = React.createClass({
         }
 
     },
+    
     _changeCallback5: function (value) {
 
         if (value !== "" && (value % 5 !== 0 || value < 50 || value > 300 )) {
@@ -83,11 +85,13 @@ var FormIntegerFieldDemo = React.createClass({
             integerField5: value
         });
     },
+    
     _changeCallback6: function (value) {
         this.setState({
             integerField6: value
         });
     },
+    
     _changeMode: function (value,event) {
         var name = event.target.name;
         if (name === "read-only") {
@@ -177,17 +181,23 @@ var FormIntegerFieldDemo = React.createClass({
 
                 <div className="input-row">
                     <FormIntegerField
-                        labelText = {this.state.integerField7Disabled ? "Disabled" : "Read Only"}
+                        labelText = {"Read Only"}
                         mode = {this.state.integerField7Mode}
                         disabled = {this.state.integerField7Disabled}
                         onChange = {this._changeCallback}
-                        value = {30}>
-                        <br />
-                        <a name = "read-only" onClick = {this._changeMode}>Read Only</a>
-                        {" | "}
-                        <a name = "disabled" onClick = {this._changeMode}>Disabled</a>
-                    </FormIntegerField>
-
+                        value = {30}
+                    />
+                </div>
+                
+                <div className="input-row">
+                    <FormIntegerField
+                        labelText = {"Disabled with help text"}
+                        mode = {this.state.integerField8Mode}
+                        disabled = {true}
+                        onChange = {this._changeCallback}
+                        labelHelpText = "Disabled with help text"
+                        value = {40}
+                    />
                 </div>
 
             </div>

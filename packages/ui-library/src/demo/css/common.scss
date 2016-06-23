@@ -8,8 +8,8 @@ html, body, .mainContainer {
 }
 body {
     padding: 10px;
-    font-family: "Proxima Nova", Helvetica, Arial, sans-serif;
-    font-size: 16px;
+    font-family: $font-pn-regular;
+    font-size: 14px;
     line-height: 1.3em;
     color: $color-elephant;
     font-weight: 300;

@@ -1,8 +1,8 @@
 "use strict";
 
-var React = require("../../util/ReactWithDefaultMethods.js");
+var React = require("re-react");
 var ReactDOM = require("react-dom");
-var Picker = require("react-color-picker");
+var Picker = require("ping-react-color-picker");
 var css = require("classnames");
 var _ = require("underscore");
 var FormLabel = require("../forms/FormLabel.jsx");

@@ -1,5 +1,5 @@
 var React = require("react");
-var FormSelectField = require("./../../../components/forms/form-text-field").v1;
+var FormSelectField = require("./../../../components/forms/FormSelectField");
 
 /**
  * A demo for FormSelectField.
@@ -11,7 +11,8 @@ var FormSelectFieldDemo = React.createClass({
             fieldValue1: "1",
             fieldValue2: "1",
             fieldValue3: "1",
-            fieldValue4: "1"
+            fieldValue4: "1",
+            fieldValue5: "1"
         };
     },
 
@@ -27,13 +28,15 @@ var FormSelectFieldDemo = React.createClass({
                 { value: 1, label: "one" },
                 { value: 2, label: "two" },
                 { value: 3, label: "three" },
-                { value: 4, label: "four " }
+                { value: 4, label: "four " },
+                { value: 5, label: "five " }
             ],
             optionsObj = {
                 1: "one",
                 2: "two",
                 3: "three",
-                4: "four"
+                4: "four",
+                5: "five"
             };
 
         return (
@@ -86,6 +89,19 @@ var FormSelectFieldDemo = React.createClass({
                     />
                     <div>
                         selected option value: {this.state.fieldValue4}
+                    </div>
+                </div>
+                <div className="input-row">
+                    <FormSelectField
+                        label="Disabled With help text"
+                        labelHelpText="Help text goes here!"
+                        options={optionsObj}
+                        onChange={this._changeCallback.bind(this, 5)}
+                        value={this.state.fieldValue5}
+                        isDisabled={true}
+                    />
+                    <div>
+                        selected option value: {this.state.fieldValue5}
                     </div>
                 </div>
             </div>

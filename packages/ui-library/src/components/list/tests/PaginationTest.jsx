@@ -1,7 +1,7 @@
 window.__DEV__ = true;
 
 jest.dontMock("../Pagination.jsx");
-jest.dontMock("../../rows/ExpandableRow.jsx");
+jest.dontMock("../../rows/expandable-row/ExpandableRow.jsx");
 
 describe("Pagination", function () {
 
@@ -9,7 +9,7 @@ describe("Pagination", function () {
         ReactTestUtils = require("react-addons-test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         Pagination = require("../Pagination.jsx"),
-        ExpandableRow = require("../../rows/ExpandableRow.jsx"),
+        ExpandableRow = require("../../rows/expandable-row/ExpandableRow.jsx"),
         callback,
         component,
         pageLinks,
@@ -112,7 +112,6 @@ describe("Pagination", function () {
         // expect no child DOM nodes
         expect(topLinks.length).toEqual(0);
         expect(bottomLinks.length).toEqual(0);
-
     });
 
     it ("renders navigation using totalPages instead of total and perPage", function () {
@@ -144,26 +143,20 @@ describe("Pagination", function () {
 
         // expect the last child to be ">>"
         expect(topLinks[4].childNodes[0].className).toBe("icon-next");
-
     });
 
     it ("trigger page change callback", function () {
         ReactTestUtils.Simulate.click(topLinks[1]);
         expect(callback).toBeCalledWith(0, 5, 1);
-
     });
 
     it ("is not triggering callback for same page", function () {
         ReactTestUtils.Simulate.click(topLinks[0]);
         expect(callback).not.toBeCalled();
-
     });
 
     it ("renders children content", function () {
         var children = TestUtils.scryRenderedDOMNodesWithClass(component, "row");
         expect(children.length).toEqual(5);
-
     });
-
-
 });

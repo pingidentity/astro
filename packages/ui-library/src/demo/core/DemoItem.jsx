@@ -1,6 +1,8 @@
 var React = require("react"),
     classnames = require("classnames"),
-    marked = require("marked");
+    marked = require("marked"),
+    Markup = require("./Markup.jsx"),
+    _ = require("underscore");
 
 var DemoItem = React.createClass({
     propTypes: {
@@ -8,12 +10,50 @@ var DemoItem = React.createClass({
 
     getInitialState: function () {
         return {
-            open: false
+            open: false,
+            source: false
         };
     },
 
     _toggle: function () {
-        this.setState({ open: !this.state.open });
+        this.setState({
+            open: !this.state.open,
+            source: false
+        });
+    },
+    
+    _toggleSource: function () {
+        this.setState({
+            open: !this.state.open,
+            source: true
+        });
+    },
+
+    _handleChange: function () {
+        this.setState({
+            store: this.props.store.getState()
+        });
+    },
+
+    /*
+     * When a new demo is selected, inspect the properties of the demo and determine if it's requesting an
+     * isolated store.  If so, connect the demo class to the store before rendering.
+     *
+     * Also, ReactRedux.connect does not work reliably here (probably because of the multiple stores), so
+     * instead we just subscribe directly to the store and use the updates to re-render
+     */
+    componentWillReceiveProps: function (newProps) {
+        if (this.props.type !== newProps.type) {
+            if (this.unsubscribe) {
+                this.unsubscribe();
+                this.unsubscribe = null;
+            }
+
+            if (newProps.type.Reducer) {
+                this.unsubscribe = newProps.store.subscribe(this._handleChange);
+                this.setState({ store: newProps.store.getState() });
+            }
+        }
     },
 
     render: function () {
@@ -25,62 +65,48 @@ var DemoItem = React.createClass({
             return null;
         }
 
-        var markdown = this.props.description && marked(this.props.description);
+        // Some demo items do not have documentation (e.g. Tutorial items)
+        var docToggle,
+            srcToggle;
+        if (this.props.jsdocUrl) {
+            docToggle = <span className="toggle" onClick={this._toggle} />;
+        }
+        if (this.props.codePathUrl) {
+            srcToggle = <span className="toggle-source" onClick={this._toggleSource} />;
+        }
+        
+        var markdown = this.props.description && marked(this.props.description),
+            props = _.extend({}, this.props, this.state.store);
 
         return (
-            <div className="section">
+            <div className={classnames("section", { fullscreen: this.props.fullscreen })}>
                 <div className="documentation">
-                    <div className={classnames("doc", this.state)}>
+
+                    <div className={classnames("doc", { open: this.state.open, source: this.state.source })}>
                         <div className="clearfix">
                             <h2>{this.props.label}</h2>
-                            <div className="toggle" onClick={this._toggle} />
+                            {docToggle}
+                            {srcToggle}
                         </div>
-                        <iframe src={this.props.jsdocUrl} />
+                        <iframe src={this.props.jsdocUrl}
+                                className={classnames("js-doc", { hidden: this.state.source })} />
+                        <iframe src={this.props.codePathUrl}
+                                className={classnames("js-source", { hidden: !this.state.source })} />
                     </div>
+                    
                 </div>
                 <div className="section-content">
                     <div className="demo-description"
                          dangerouslySetInnerHTML={{ __html: markdown }}></div>
 
-                    <div className="output clearfix">{React.createElement(this.props.type, this.props)}</div>
+                    <div className="output clearfix">
+                        {React.createElement(this.props.type, props)}
+                    </div>
 
-                    <Code content={this.props.code} />
+                    {!this.props.fullscreen && <Markup content={this.props.code} />}
                 </div>
             </div>
         );
-    }
-});
-
-var Code = React.createClass({
-    _extractRenderCode: function () {
-        //get all matches for 'render: function() {...}'
-        var matches = this.props.content.replace(/\n|\r/g, "!!!").match(/\s*render: .*?!!!(.*?)!!!\s{4}}/g);
-
-        //take latest one (we can have helper react components before demo class)
-        var latestMatch = matches[matches.length - 1];
-
-        //remove indentation
-        var indents = latestMatch.match(/^(\s*?)[^\s]/)[1].length;
-        var renderCode = latestMatch.split("!!!").map(function (line) {
-            return line.substring(indents);
-        }).join("\n");
-
-        // hljs below is provided by a script tag
-        return hljs.highlight('xml', renderCode).value; //eslint-disable-line
-    },
-
-    render: function () {
-        if (!this.props.content) {
-            return null;
-        }
-
-        return (
-            <div className="markup-wrapper">
-                <pre className="language-markup">
-                    <code className="language-markup"
-                          dangerouslySetInnerHTML={{ __html: this._extractRenderCode() }}></code>
-                </pre>
-            </div>);
     }
 });
 

@@ -3,15 +3,19 @@ var React = require("react"),
     classnames = require("classnames");
 
 /**
- * @class Row
+ * @class ColumnLayout
  * @desc Renders vertical columns of content with equal percentage widths separated by a margin.
  *   The "content-nopad" css class may be passed in to render the columns without margin/padding
  *   between the columns.
- *
- * @param {string} [id="content-columns"] - data-id on top-level HTML element.
- * @param {string} [className] - added class name applied to the top-level HTML element.
- *
 **/
+
+/**
+* @class Row
+* @memberof ColumnLayout
+* @param {string} [id="content-columns"] - data-id on top-level HTML element.
+* @param {string} [className] - added class name applied to the top-level HTML element.
+* @desc the child tag/object used to pass in a row of content
+*/
 
 var Row = React.createClass({
     propTypes: {
@@ -38,7 +42,7 @@ var Row = React.createClass({
 
 /**
  * @class Column
- * @memberof Row
+ * @memberof ColumnLayout
  * @param {string} [id] - data-id on an individual column.
  * @param {string} [className] - added class name applied to an individual column.
  * @desc the child tag/object used to pass in a column of content

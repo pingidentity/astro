@@ -66,10 +66,16 @@ describe("DragDropRow", function () {
         var props = genMockProps(1);
         var monitor = genMockMonitor(0, 0, props);
 
-        //simulate a drap event to same index
-        DragDropRow.dropSpec.hover(props, monitor);
+        var targetComponent = ReactTestUtils.renderIntoDocument(<div>Blah</div>);
+        var targetNode = ReactDOM.findDOMNode(targetComponent);
 
-        expect(props.onDrag.mock.calls[0]).toEqual([1, 1]);
+        //mock the getBoundingClientRect function
+        targetNode.getBoundingClientRect = genMockNode(0,0,100,100).getBoundingClientRect;
+
+        //simulate a drap event to same index
+        DragDropRow.dropSpec.hover(props, monitor, targetComponent);
+
+        expect(props.onDrag).toBeCalledWith(1, 1, undefined, undefined);
     });
 
     /** had to really bend over backwards to get this test to work since jest mocks the internals
@@ -106,7 +112,7 @@ describe("DragDropRow", function () {
 
         DragDropRow.dropSpec.hover(props, monitor, targetComponent);
 
-        expect(props.onDrag.mock.calls[0]).toEqual([3, 1]);
+        expect(props.onDrag).toBeCalledWith(3, 1, undefined, undefined);
     });
 
     it("Processes drag to top half of row", function () {
@@ -121,7 +127,7 @@ describe("DragDropRow", function () {
 
         DragDropRow.dropSpec.hover(props, monitor, targetComponent);
 
-        expect(props.onDrag.mock.calls[0]).toEqual([2, 1]);
+        expect(props.onDrag).toBeCalledWith(2, 1, undefined, undefined);
     });
 
     it("disables drag based on prop", function () {

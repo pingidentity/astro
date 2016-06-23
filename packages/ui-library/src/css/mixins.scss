@@ -11,14 +11,14 @@
 	-moz-box-shadow: $shadow;
 	box-shadow: $shadow;
 }
-@mixin gradient-vertical($color-top, $color-bot) {
+@mixin gradient-vertical($color-top, $color-bot, $top-percent:0%, $bot-percent:100%) {
 	background: $color-top; // Old browsers
-	background: -moz-linear-gradient(top,  $color-top 0%, $color-bot 100%); // FF3.6+
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$color-top), color-stop(100%,$color-bot)); // Chrome,Safari4+
-	background: -webkit-linear-gradient(top,  $color-top 0%,$color-bot 100%); // Chrome10+,Safari5.1+
-	background: -o-linear-gradient(top,  $color-top 0%,$color-bot 100%); // Opera 11.10+
-	background: -ms-linear-gradient(top,  $color-top 0%,$color-bot 100%); // IE10+
-	background: linear-gradient(to bottom,  $color-top 0%,$color-bot 100%); // W3C
+	background: -moz-linear-gradient(top,  $color-top $top-percent, $color-bot $bot-percent); // FF3.6+
+	background: -webkit-gradient(linear, left top, left bottom, color-stop($bot-percent,$color-top), color-stop($bot-percent,$color-bot)); // Chrome,Safari4+
+	background: -webkit-linear-gradient(top,  $color-top $top-percent,$color-bot $bot-percent); // Chrome10+,Safari5.1+
+	background: -o-linear-gradient(top,  $color-top $top-percent,$color-bot $bot-percent); // Opera 11.10+
+	background: -ms-linear-gradient(top,  $color-top $top-percent,$color-bot $bot-percent); // IE10+
+	background: linear-gradient(to bottom,  $color-top $top-percent,$color-bot $bot-percent); // W3C
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$color-top}', endColorstr='#{$color-bot}',GradientType=0 ); // IE6-9
 }
 @mixin opacity($opacity) {

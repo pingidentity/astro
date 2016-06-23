@@ -1,19 +1,58 @@
-var React = require("../../../util/ReactWithDefaultMethods"),
+var React = require("re-react"),
     ReactDOM = require("react-dom"),
     classnames = require("classnames"),
     Copyright = require("./Copyright.jsx"),
     _ = require("underscore");
 
 /**
+ * An object describing a leaf in the LeftNav
+ * @typedef {object} LeftNavBar#Node
+ * @property {string} label - The label of the node
+ * @property {string} id - A unique string identifier.  This value will be passed back to the onItemClick callback
+ */
+
+/**
+ * @typedef {object} LeftNavBar#Section
+ * @property {string} label - The label of the section
+ * @property {string} id - A unique string identifier.  This value will be passed back to the onSectionClick callback
+ * @property {LeftNavBar#Node[]} [children] - An optional array of children under this section
+ */
+
+/**
+ * This callback type is passed of onItemClick or onSectionClick
+ * @callback LeftNavBar#ClickCallback
+ * @param {string} id - The id of the item that was clicked
+ */
+
+/**
  * @class LeftNavBar
- * @param {object[]} tree - A prop which describes the structure of the nav tree.
+ * @desc This component implements a LeftNav bar.  While on first instinct, it might seem like it would be better to
+ * have the tree structure be described by some jsx markup inside the LeftNavBar, there are a couple of problems with that:
+ *
+ * a) Attaching the click handlers for sections/nodes would involve cloning and re-writing each child and grandchild.
+ *    This is cumbersome.
+ *
+ * b) Most of the time, the left nav bar is dynamic (think of the CDP where the list of categories is determiend at runtime),
+ *    so this approach would introduce logic to take some data strucutre, map it to React descriptors, only to be cloned and
+ *    re-written.
+ *
+ * As a result, the approach taken was to pass in a data structure to the LeftNav as a property and leave it up to it to
+ * map that data to whatever internal markup it wants.
+ *
+ * @param {LeftNavBar#Section[]} tree - A prop which describes the structure of the nav tree.  This will be an array of
+ * Section objects, each of which may have an array of Node objects as its children.  Please refer to the example below.
  * @param {object} [openNode] = A hash map of ids and their open state
- * @param {function} [onSectionClick] - A callback which will be excuted when any section node is clicked.
+ * @param {LeftNavBar#ClickCallback} [onSectionClick] - A callback which will be excuted when any section node is clicked.
  * The callback will be given 1 parameter equal to the id of the item clicked.
- * @param {function} [onItemClick] - A callback which will be executed when any leaf node is clicked.
+ * @param {LeftNavBar#ClickCallback} [onItemClick] - A callback which will be executed when any leaf node is clicked.
  * The callback will be given 1 parameter equal to the id of the item clicked.
  * @example
- * <LeftNavBar tree={[{ label: "Group 1", children: [{ label: "Item 1" }] }]} />
+ * var item1 = {label: "Item 1", id: "item1"};
+ * var item2 = {label: "Item 2", id: "item2"};
+ * var section1 = {label: "Section 1", id: "section1", children: [item1, item2]};
+ * var section2 = {label: "Empty Section", id: "empty"};
+ *
+ * <LeftNavBar tree={[section1, section2]}
  */
 var LeftNavBar = React.createClass({
     propTypes: {
@@ -42,21 +81,38 @@ var LeftNavBar = React.createClass({
                 open={this.props.openNode === section.id} />);
     },
 
+    _handleResize: function () {
+        var nav = ReactDOM.findDOMNode(this.refs.container);
+        this.setState({ scrollable: nav.scrollHeight > nav.offsetHeight });
+    },
+
     componentDidMount: function () {
         //Occasionally the first calculation of the position of the selector is wrong because there are still animations
         //happening on the page.  Recalculate after the initialRender
         this._getItemSelector().addEventListener("transitionend", this._rerender, false);
+
+        // store height of copyright to use as bottom of nav-menus
+        var copyright = ReactDOM.findDOMNode(this.refs.copyright),
+            dims = copyright.getBoundingClientRect();
+
+        /* eslint-disable */
+        this.setState({ copyrightHeight: Math.round(dims.height) });
+        /* eslint-enable */
 
         this.componentDidUpdate();
     },
 
     componentWillUnmount: function () {
         this._getItemSelector().removeEventListener("animationend", this._rerender);
+        this._getItemSelector().removeEventListener("resize", this._handleResize);
     },
 
     getInitialState: function () {
         return {
-            selectorStyle: { top: 0, height: 0 }
+            copyrightHeight: 0,
+            selectorStyle: { top: 0, height: 0 },
+            selectorArrowStyle: { top: 0 },
+            scrollable: false
         };
     },
 
@@ -80,11 +136,12 @@ var LeftNavBar = React.createClass({
             var parent = ReactDOM.findDOMNode(this.refs.container);
             var itemSelectors = parent.getElementsByClassName("highlighted");
             var style = { height: 0, top: 0 };
+            var arrowStyle = { top: 0 };
 
 
             if (itemSelectors.length > 0) {
                 var dims = itemSelectors[0].getBoundingClientRect();
-                var copyrightDims = ReactDOM.findDOMNode(this.refs.container).getElementsByClassName("copyright")[0]
+                var copyrightDims = ReactDOM.findDOMNode(this.refs.nav).getElementsByClassName("copyright")[0]
                     .getBoundingClientRect();
                 var parentDims = parent.getBoundingClientRect();
 
@@ -104,8 +161,8 @@ var LeftNavBar = React.createClass({
                 }
             }
 
-            //since the old menu will be collapsing, we need to calculate how much height is going to disappear so that the selector
-            //ends up in the right place.
+            //since the old menu will be collapsing, we need to calculate how much height is going to disappear so that
+            //the selector ends up in the right place.
             if (prevProps && this.props.openNode && prevProps.openNode && this.props.openNode !== prevProps.openNode) {
                 var oldIndex = _.findIndex(this.props.tree, { id: prevProps.openNode });
                 var newIndex = _.findIndex(this.props.tree, { id: this.props.openNode });
@@ -116,9 +173,19 @@ var LeftNavBar = React.createClass({
                 }
             }
 
+            // set styles for arrow element based on selected item styles
+            arrowStyle = {
+                top: style.top + Math.floor((style.height - 52) / 2), // 52 == height of arrow
+                opacity: style.opacity
+            };
+
+            // set whether nav is tall enough to scroll (toggles class on nav to trigger shadow on copyright)
+            window.addEventListener("resize", this._handleResize);
+            this._handleResize();
+
             /* eslint-disable react/no-did-update-set-state */
             if (!_.isEqual(this.state.selectorStyle, style)) {
-                this.setState({ selectorStyle: style });
+                this.setState({ selectorStyle: style, selectorArrowStyle: arrowStyle });
             }
             /* eslint-enable react/no-did-update-set-state */
         }
@@ -126,14 +193,16 @@ var LeftNavBar = React.createClass({
 
     render: function () {
         return (
-            <div id="nav">
-                <div className="nav-menus" ref="container">
+            <div id="nav" ref="nav" className={classnames({ scrollable: this.state.scrollable })}>
+                <div className="nav-menus" ref="container"
+                        style={{ bottom: this.state.copyrightHeight }}>
                     <div ref="itemSelector" className="selected-item" style={this.state.selectorStyle}></div>
-
+                    <div ref="itemSelectorArrow" className="selected-item-arrow" style={this.state.selectorArrowStyle}>
+                        <div></div>
+                    </div>
                     { this.props.tree.map(this._renderSection) }
-
-                    <Copyright ref="copyright" />
                 </div>
+                <Copyright ref="copyright" />
             </div>);
     }
 });
@@ -163,8 +232,8 @@ var LeftNavSection = React.createClass({
      * Instead of using bind to create a partial after ever render, just use the data-id to pass the
      * right id back to the click handler.
      */
-    _handleItemClick: function (e) {
-        this.props.onItemClick(e.target.getAttribute("data-id").slice(0, -6));
+    _handleItemClick: function (id) {
+        this.props.onItemClick(id);
     },
 
     _handleSectionClick: function (e) {
@@ -173,32 +242,39 @@ var LeftNavSection = React.createClass({
 
     render: function () {
         var className = classnames({
-            menu: true,
-            open: this.props.open
-        });
+                "nav-section": true,
+                open: !this.props.label || this.props.open,
+                closed: this.props.label && !this.props.open
+            }),
+            itemClassName;
 
         return (
-            <div>
-                <div className="title" data-id={this.props["data-id"] + "-label"} onClick={this._handleSectionClick}>
-                    {this.props.label}
-                </div>
-                <ul className={className} data-id={this.props["data-id"] + "-menu"}>
+            <div className={className}>
+                {this.props.label && (
+                    <div className="title" data-id={this.props["data-id"] + "-label"}
+                            onClick={this._handleSectionClick}>
+                        {this.props.label}
+                    </div>
+                )}
+                <ul className="menu" data-id={this.props["data-id"] + "-menu"}>
                 {
                     this.props.children.map(function (item, i) {
+                        itemClassName = {
+                            highlighted: this.props.selectedNode === item.id,
+                            "has-icon": !!item.icon
+                        };
                         return (
-                            <li key={i} className={this.props.selectedNode === item.id ? "highlighted" : ""}>
-                                <a data-id={item.id + "-label"} onClick={this._handleItemClick}>
-                                    {item.label}
+                            <li key={i} className={classnames(itemClassName)}>
+                                <a data-id={item.id + "-label"} onClick={this._handleItemClick.bind(null, item.id)}>
+                                    {item.icon ? (<span className={"icon-" + item.icon}></span>) : null}{item.label}
                                 </a>
                             </li>);
                     }.bind(this))
                 }
                 </ul>
-                <div className="divider"></div>
             </div>
         );
     }
 });
 
 module.exports = LeftNavBar;
-

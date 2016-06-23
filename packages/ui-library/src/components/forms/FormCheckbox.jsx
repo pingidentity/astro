@@ -64,10 +64,13 @@ var FormCheckbox=React.createClass({
     },
 
     render: function () {
-        var id = this.props["data-id"] || this.props.id;
+        var id = this.props["data-id"] || this.props.id,
+            labelClassName = classnames("input-checkbox", this.props.className, {
+                disabled: this.props.disabled
+            });
 
         return (
-            <FormLabel className={classnames("input-checkbox", this.props.className)}
+            <FormLabel className={labelClassName}
                     helpClassName={this.props.helpClassName}
                     disabled={this.props.disabled}
                     value={this.props.label}

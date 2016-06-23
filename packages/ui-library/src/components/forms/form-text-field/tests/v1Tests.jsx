@@ -214,4 +214,41 @@ describe("FormTextField", function () {
 
         expect(callback).toBeCalledWith("abc");
     });
+
+    it("should receive props errorMessage from parent component", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormTextField
+                referenceName={'test'}
+                errorMessage="abc"
+                validatorTrigger="onChange"/>
+        );
+        var inputField = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        ReactTestUtils.Simulate.change(inputField, { target: { value: "abc" } } );
+
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "label");
+        expect(field.getAttribute("class")).toContain("form-error");
+    });
+
+    it("should fire the handleUndo event when click on undo", function () {
+        var handleChange = jest.genMockFunction();
+        var originalValue = "my original value";
+        var defaultValue = "default value";
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormTextField
+                referenceName={'test'}
+                defaultValue={defaultValue}
+                value={defaultValue}
+                onChange={handleChange}
+                originalValue={originalValue}
+                forceExternalState={true}
+            />
+        );
+        // check that the icon is actually there
+        var undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
+        expect(ReactTestUtils.isDOMComponent(undo)).toBeTruthy();
+        // click on the undo icon
+        ReactTestUtils.Simulate.click(undo);
+        // now we can verify that the callback gets triggered
+        expect(handleChange.mock.calls.length).toBe(1);
+    });
 });

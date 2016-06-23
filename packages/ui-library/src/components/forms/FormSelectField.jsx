@@ -32,7 +32,7 @@ var React = require("react"),
  * @param {string}   [id]              the data-id for the select component and label (appended with '_label')
  *                                     (default 'form-select-field')
  * @param {string}   [errorMessage]    an error message (will be shown if defined)
- * @param {boolean}  [disabled]        if true, the select element will be disabled
+ * @param {boolean}  [isDisabled]      if true, the select element will be disabled
  * @param {string}   [labelId]         A data-id for easy access to the label's text content
  * @param {string}   [helpClassName]         Optional css for HelpHint
  *
@@ -134,6 +134,7 @@ var FormSelectField = React.createClass({
             labelCss = {
                 "input-select": true,
                 "form-error": this.props.errorMessage,
+                disabled: this.props.isDisabled,
                 required: this.props.isRequired,
                 "value-entered": this.state.selectedValue !== this.props.noneOptionValue
             },

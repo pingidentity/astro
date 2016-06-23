@@ -8,7 +8,7 @@ var PaginationDemo = React.createClass({
     getInitialState: function () {
         var items = [];
         for (var i = 0; i < 100; i = i + 1) {
-            items.push(<ExpandableRow title = {"Entry " + (i+1)} key = {i}/>);
+            items.push(<ExpandableRow title = {"Entry " + (i + 1)} key = {i}/>);
         }
         return {
             total: items.length,
@@ -22,9 +22,6 @@ var PaginationDemo = React.createClass({
     },
 
     _changeCallback: function (first, last, page) {
-
-        console.log(`++ _changeCallback(${first}, ${last}, ${page})`);
-
         this.setState({
             display: this.state.items.slice(first,last),
             first: first,

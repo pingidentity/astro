@@ -16,73 +16,6 @@
 		display: none;
 	}
 }
-.result-search-inputs {
-	position: relative;
-    margin: 0 0 30px 0;
-
-	label {
-		&.search {
-			input {
-				width: 432px;
-			}
-		}
-	}
-	.search-text {
-		width: 270px;
-		padding-right: 40px;
-	}
-	.list-status-select {
-		position: absolute;
-		top: 0;
-		left: 368px;
-		margin: 0;
-	}
-	.add-button, .add-button-help {
-		position: absolute;
-		right: 0;
-		top: 0;
-
-		> .tooltip-text {
-			bottom: 15px;
-		}
-	}
-	.filter-link {
-		display: inline-block;
-		line-height: 50px;
-		text-decoration: none;
-
-		&:after {
-			font-family: $icon-font;
-			content: '\76';
-			position: absolute;
-			font-size: 12px;
-			@include transition(all 0.3s);
-		}
-		&.show {
-			&:after {
-				@include transform(rotate(180deg));
-			}
-		}
-	}
-	.filter-options {
-		padding-top: 0;
-		padding-bottom: 0;
-		height: 0;
-		overflow: hidden;
-		@include opacity(0);
-		@include transition(all 0.3s);
-
-		&.show {
-			padding-top: 30px;
-			padding-bottom: 10px;
-			height: 24px;
-			@include opacity(1);
-		}
-		.input-checkbox {
-			padding-bottom: 0;
-		}
-	}
-}
 .result-count {
 	display: inline-block;
 	margin: 0 0 0 30px;
@@ -114,43 +47,79 @@
 
 		.collapsed-content {
 			position: relative;
-			height: 48px;
-			padding: 12px 0 0 34px;
+			box-sizing: border-box;
+			height: 60px;
+			padding: 15px 0 0 34px;
+		}
+		&.title-only {
+			.collapsed-content {
+				padding-top: 23px;
+			}
 		}
 		.expanded-content {
 			position: relative;
-			padding: 0 80px 30px 30px;
+			padding: 0 75px 30px 30px;
 			min-height: 3*$button-height - 4px;
 			position: relative;
+
+			.delete-confirm-dialog {
+				position: absolute;
+			    bottom: 0;
+			    right: 0;
+			}
 		}
 		.item-title {
-			font-size: 16px;
+			font-size: 17px;
+			line-height: 1em;
+			font-weight: normal;
+			font-family: $font-pn-regular;
 			color: $color-slate;
 			margin-right: $button-width;
 			@include text-truncate;
-
-			&.title-only {
-				margin-top: 8px;
-			}
 		}
 		.item-sub-title {
 			font-size: 13px;
+			line-height: 1em;
 			font-weight: normal;
+			font-family: $font-pn-regular;
 			color: $color-elephant;
+			margin-top: 2px;
 			margin-right: $button-width;
 			@include text-truncate;
 		}
+		.item-image {
+			position: absolute;
+			left: 10px;
+			top: 10px;
+			max-height: 42px;
+			max-width: 42px;
+		}
+		&.has-image {
+			.collapsed-content {
+				padding-left: 76px;
+			}
+		}
 		.row-accessories {
 			position: absolute;
-			right: 50px;
+			right: 65px;
 			top: 0px;
 			bottom: 0;
 
 			.button, input[type=button], button, a, .input-toggle, .status {
 				display: inline-block;
 				vertical-align: top;
-				margin: 30px 15px 0 0;
+				margin: 30px 0 0 20px;
 				@include transform(translateY(-50%));
+			}
+			.button + .button, input[type=button], button {
+				& + .button, & + .button, & + input[type=button], & + button {
+					margin-left: 10px;
+				}
+			}
+			.details-tooltip {
+				.details-content {
+					margin-top: 35px;
+				}
 			}
 			.input-toggle {
 				a.toggle {
@@ -159,8 +128,8 @@
 				}
 			}
 		}
-		.expand-btn, .delete-btn, .edit-btn, .view-btn, .no-edit {
-			background-color: $color-timberwolf;
+		.expand-btn, .delete-btn, .edit-btn, .view-btn, .no-edit, .btn-fill {
+			background-color: $color-chilly;
 			position: absolute;
 			width: $button-width;
 			text-align: center;
@@ -171,7 +140,7 @@
 				text-transform: none;
 				font-size: 18px;
 				font-family: 'iconfont';
-				color: $color-walrus;
+				color: $color-slate;
 			}
 		}
 		.expand-btn, .delete-btn, .edit-btn,
@@ -266,6 +235,17 @@
 					position: absolute;
 					bottom: 0;
 					top: auto;
+				}
+			}
+		}
+		&.no-edit {
+			.btn-fill {
+				top: 1px;
+				bottom: 61px;
+			}
+			&.no-delete {
+				.btn-fill {
+					bottom: 1px;
 				}
 			}
 		}
@@ -574,7 +554,7 @@
 				}
 			}
 			.reject-btn {
-				color: $color-walrus;
+				color: $color-slate;
 				background-color: $color-stratus;
 
 				&:after {
@@ -904,6 +884,73 @@
 			textarea {
 				max-width: 700px;
 			}
+		}
+	}
+}
+.result-search-inputs {
+	position: relative;
+    margin: 0 0 30px 0;
+
+	label {
+		&.search {
+			input {
+				width: 432px;
+			}
+		}
+	}
+	.search-text {
+		width: 270px;
+		padding-right: 40px;
+	}
+	.list-status-select {
+		position: absolute;
+		top: 0;
+		left: 368px;
+		margin: 0;
+	}
+	.add-button, .add-button-help {
+		position: absolute;
+		right: 0;
+		top: 0;
+
+		> .tooltip-text {
+			bottom: 15px;
+		}
+	}
+	.filter-link {
+		display: inline-block;
+		line-height: 50px;
+		text-decoration: none;
+
+		&:after {
+			font-family: $icon-font;
+			content: '\76';
+			position: absolute;
+			font-size: 12px;
+			@include transition(all 0.3s);
+		}
+		&.show {
+			&:after {
+				@include transform(rotate(180deg));
+			}
+		}
+	}
+	.filter-options {
+		padding-top: 0;
+		padding-bottom: 0;
+		height: 0;
+		overflow: hidden;
+		@include opacity(0);
+		@include transition(all 0.3s);
+
+		&.show {
+			padding-top: 30px;
+			padding-bottom: 10px;
+			height: 24px;
+			@include opacity(1);
+		}
+		.input-checkbox {
+			padding-bottom: 0;
 		}
 	}
 }

@@ -29,7 +29,8 @@ module.exports = React.createClass({
 
     _handleInputChange: function (e) {
         var value = e.target.type === "checkbox" ? !!e.target.checked : e.target.value,
-            dataId = e.target.getAttribute("data-id").slice(0,-6);
+            dataId = e.target.type === "text" ? e.target.getAttribute("data-id").slice(0,-6)
+                : e.target.getAttribute("data-id");
 
         this.props.onInputChange(dataId, value);
     },
@@ -171,7 +172,7 @@ module.exports = React.createClass({
                         title="Miscellaneous">
 
                         <div className="input-row">
-                            <label className="stand-alone">
+                            <label>
                                 User Group
                             </label>
                             <FormRadioGroup

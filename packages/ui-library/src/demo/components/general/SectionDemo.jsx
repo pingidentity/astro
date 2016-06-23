@@ -5,8 +5,7 @@ var SectionDemo = React.createClass({
 
     getInitialState: function () {
         return {
-            firstSectionOpen: false,
-            secondSectionOpen: false
+            firstSectionOpen: false
         };
     },
 
@@ -16,16 +15,11 @@ var SectionDemo = React.createClass({
         });
     },
 
-    _toggleSecond: function () {
-        this.setState({
-            secondSectionOpen: !this.state.secondSectionOpen
-        });
-    },
-
     render: function () {
         return (
             <div>
-                <Section onToggle={this._toggleFirst} expanded={this.state.firstSectionOpen} title="My section #1">
+                <Section onToggle={this._toggleFirst}
+                        expanded={this.state.firstSectionOpen} title="My section Stateless">
                     <div className="condition">
                         <div className="condition-fields">
                             <p>
@@ -37,9 +31,8 @@ var SectionDemo = React.createClass({
                         </div>
                     </div>
                 </Section>
-                <Section onToggle={this._toggleSecond}
-                         expanded={this.state.secondSectionOpen}
-                         title="My section #2"
+                <Section controlled={false}
+                         title="My section Stateful"
                          id="section-2"
                          className="extra">
                     <div className="condition">

@@ -57,7 +57,7 @@ $default-input-font-size: 14px;
 			font-family: $icon-font;
 			font-size: 10px;
 			left: 3px;
-  			bottom: 1px;
+  			bottom: 0;
 			text-align: center;
 			height: $checkbox-height;
 			width: $checkbox-height;
@@ -157,7 +157,7 @@ label {
 	}
 	&.input-text {
 		input {
-			padding: 4px 34px 3px 10px;
+			padding: 4px 15px 3px;
 		}
 		&.search {
 			.input-container {
@@ -207,9 +207,6 @@ label {
 				width: 350px;
 			}
 		}
-		&.disabled {
-			font-style: normal;
-		}
 
 		// temporary sizing classes
 		&.input-width-1 {
@@ -230,7 +227,7 @@ label {
 	}
 	&.input-textarea {
 		textarea {
-			padding: 10px;
+			padding: 12px 15px;
 			margin-top: 2px;
 		}
 		&.extended {
@@ -248,6 +245,11 @@ label {
 		&.short {
 			input[type=text], input[type=password] {
 				width: 75px;
+			}
+		}
+		&.actions {
+			input[type=text], input[type=password], textarea {
+				padding-right: 40px;
 			}
 		}
 		&.disabled {
@@ -271,10 +273,22 @@ label {
 			}
 		}
 	}
+	// handle disabled label for inputs w helptext
+	&.input-text, &.input-textarea, &.input-multivalues, &.input-checkbox, &.input-select {
+		&.disabled {
+			font-style: normal;
+			.label-text {
+				span {
+					@include opacity(0.5);
+				}
+			}
+		}
+	}
 	&.form-error {
 		color: $color-input-error;
 	}
 	&.input-checkbox {
+		// TODO: nix checkboxStyles mixin (no longer needed since input-multiselect is not used in a component - check wp)
 		@include checkboxStyles();
 
 		&.side-label {
@@ -305,6 +319,11 @@ label {
 		}
 		&.stacked {
 			display: block;
+
+			.icon {
+				top: -1px;
+				bottom: auto;
+			}
 		}
 	}
 	&.input-radio {
@@ -366,7 +385,7 @@ label {
 		.circle {
 			position: absolute;
 			left: 0;
-			bottom: 1px;
+			top: -1px;
 			font-size: 16px;
 			width: $radio-height;
 			height: $radio-height;
@@ -718,12 +737,7 @@ input[type=file] {
 		cursor: pointer;
 		@include opacity(0);
 	}
-	label {
-		position: relative;
-		display: inline-block;
-		vertical-align: top;
-	}
-	.button.inline {
+	.choose {
 		display: block;
 		width: 95px;
 		text-transform: none;
@@ -738,19 +752,21 @@ input[type=file] {
 			display: none;
 			font-size: 14px;
 			line-height: 1em;
-			margin: 10px 10px 0 0;
+			margin: 5px 10px 0 0;
 		}
 		.file-name {
 			font-size: 14px;
 			line-height: 1em;
-			margin: 10px 20px 0 0;
+			margin: 0 20px 0 0;
 			color: $color-midnight;
+			display: block;
+			.icon-file {
+				display: none;
+			}
 		}
 		// within a details tooltip, login modal
 		&.stacked {
-			display: block;
 			.file-name {
-				display: inline-block;
 				vertical-align: top;
 				max-width: 250px;
 				@include text-truncate;
@@ -758,6 +774,21 @@ input[type=file] {
 		}
 	}
 	&.file-selected {
+		.button.inline, .file-size {
+			display: none;
+		}
+		.file-info {
+			position: relative;
+			float: left;
+			.icon-file {
+				font-size: 10px;
+				padding-right: 5px;
+				display: inline-block;
+			}
+			&:before {
+				display: none;
+			}
+		}
 		a.file-remove {
 			display: inline-block;
 		}
@@ -775,37 +806,49 @@ input[type=file] {
 		}
 		.image-icon {
 			display: inline-block;
-			width: $img-width - 12px;
-			min-height: ceil(($img-width - 12px)/1.3);
-			padding: 5px;
-			border: 1px solid #ddd;
+			width: 67px;
+			height: 67px;
+			border: 1px solid $color-stratus;
+			padding: 0;
+			position: relative;
+			overflow: hidden;
 
-			@include border-radius(4px);
+			@include border-radius(2px);
 
-			&:after {
+			&:before {
 				display: block;
-				color: $color-input-border;
+				position: absolute;
+				left: -10px;
+				color: $color-stratus;
 				font-family: $icon-font;
 				text-transform: none;
 				content: '\69';
-				border: 1px solid $color-input-border;
-
-				font-size: 51px;
-				height: 52px;
-				padding: 5px 0 0px 0;
+				font-size: 60px;
+				height: 67px;
+				line-height: 1.3em;
+			}
+			&:after {
 				line-height: 1em;
-
-				@include border-radius(4px);
+				position: absolute;
+				width: 15px;
+				font-family: $icon-font;
+				text-transform: none;
+				right: 5px;
+				bottom: 5px;
+				content: '*';
+				font-size: 15px;
+				padding: 5px;
+				background-color: $color-white;
+				border: 1px solid $color-rhino;
+				@include border-radius(18px);
 			}
 			&.no-logo {
 				display: inline-block;
-				color: $color-stone;
-				border: 1px solid $color-stone;
-				height: 52px;
+				color: $color-stratus;
+				border: 1px solid $color-stratus;
+				height: 72px;
 				width: 72px;
 				padding: 5px 0 0 0;
-
-				@include border-radius(4px);
 			}
 		}
 		.with-logo {
@@ -818,17 +861,26 @@ input[type=file] {
 				width: $img-width;
 			}
 		}
-		.button.inline {
+		.choose {
+			display: none;
+		}
+		.file-size {
 			position: absolute;
-			top: 25px;
-			left: $img-width + 15px;
+			bottom: 0;
+			left: $img-width - 1px;
+			min-width: 300px;
+			color: $color-stratus;
+			line-height: 1em;
+			font-size: 13px;
+			span:first-child {
+				display: block;
+			}
 		}
 		.image-types {
 			font-size: 14px;
 			position: absolute;
 			top: 65px;
-			left: 105px;
-			  left: $img-width + 15px;
+			left: $img-width + 15px;
 		}
 		.form-error-message {
 			.tooltip-text {
@@ -838,13 +890,14 @@ input[type=file] {
 		}
 		.file-info {
 			display: block;
+			float: none;
 		}
 		&.file-selected {
-			.image-icon {
-				display: none;
-			}
 			.input-image-thumb {
 				display: block;
+			}
+			.image-icon {
+				display: none;
 			}
 		}
 		&.inactive {
@@ -1192,13 +1245,13 @@ input[type=file] {
 		}
 	}
 }
-.input-integer, .form-integer-container{
+.input-integer, .form-integer-container {
     position: relative;
 
-    &:after, a.undo{
+    &:after, a.undo {
         right: 40px;
     }
-    .input-container{
+    .input-container {
         position: relative;
         display: inline-block;
         vertical-align: bottom;
@@ -1206,10 +1259,11 @@ input[type=file] {
 	.input-text {
 		margin: 0;
 	}
-    .up-down-spinner{
+
+    .integer-controls {
         position: absolute;
-		right: 10px;
-		bottom: 2px;
+		right: 13px;
+		bottom: 8px;
         font-family: $icon-font;
         cursor: pointer;
         vertical-align: baseline;
@@ -1217,17 +1271,38 @@ input[type=file] {
         display: inline-block;
 
         button{
-            height: 18px;
-            padding: 0px;
-            display: inline-block;
+			$height: 10px;
+
+            height: $height;
+			width: 12px;
+            padding: 0;
+			margin: 0;
+            display: block;
+			text-align: center;
             text-decoration: none;
-            font-color: inherit;
+            color: $color-slate;
             border: none;
             background-color: transparent;
+			line-height: $height;
+
+			&:before {
+				content: "Y";
+				font-family: $icon-font;
+				font-size: 7px;
+				line-height: $height;
+				height: $height;
+			}
+			&.integer-up {
+				margin: 0 0 3px 0;
+				@include rotate(180deg);
+			}
         }
     }
+	input[type=text] {
+		padding-right: 40px;
+	}
     [disabled], [readonly] {
-        .up-down-spinner, .up-down-spinner{
+        .integer-controls {
             pointer-events: none;
         }
     }
@@ -1262,11 +1337,11 @@ input[type=file] {
 		}
 	}
 	.input-row {
-		margin: 0;
+		margin: 2px 0 0 0;
 	}
 	.input-selection-list-items {
-		max-height: 250px - 46px;
-		margin: 46px 0 0 0 ;
+		max-height: 250px;
+		margin: 0;
 		overflow-x: hidden;
 		overflow-y: auto;
 
@@ -1279,6 +1354,12 @@ input[type=file] {
 			.label-text {
 				text-transform: none;
 			}
+		}
+	}
+	&.searchable {
+		.input-selection-list-items {
+			max-height: 250px - 46px;
+			margin: 46px 0 0 0;
 		}
 	}
 
@@ -1294,14 +1375,14 @@ input[type=file] {
 		color: $color-white;
 		font-size: 16px;
 		text-align: center;
-		width: 6px;
+		width: 5px;
 		z-index: 1;
-		@include border-radius(2px);
+		@include border-radius(1px);
 		@include transition($default-input-transition);
 	}
 	@mixin requiredPadding {
 		font-family: $font-stack;
-		padding-left: 20px;
+		padding-left: 15px;
 	}
 	@mixin requiredPaddingEntered {
 		padding-left: 10px;
@@ -1510,21 +1591,22 @@ input[type=file] {
 		overflow-y: auto;
 		padding-left: 10px;
 
-		label {
+		label.input-checkbox {
 			width: 230px;
 			margin-bottom: 10px;
 			text-transform: none;
-			&.input-checkbox {
+			display: inline-block;
+			padding: 0 0 0 30px;
+
+			.label-text {
 				display: inline-block;
-				padding: 0 0 0 30px;
-				.label-text {
-					display: inline-block;
-					padding-top: 5px;
-				}
+				padding-top: 6px;
+				margin: 0;
 			}
 		}
-		div {
-			display: inline;
+		> div {
+			display: inline-block;
+
 			&.item-head {
 				display: block;
 				color: $color-walrus;

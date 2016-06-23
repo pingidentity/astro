@@ -35,9 +35,13 @@ var React = require("react"),
  * store updated.
  * @param {function} [onNext] - Called when the next button of any child is clicked.  If provided, will be injected
  * its children's props, otherwise the actions of each step must be handled and the store updated
+ * @param {function} [onDone] - Called when the done button of final step is clicked.  If provided, will be injected
+ * its children's props, otherwise the done action must be handled and the store updated
  * @param {string} [labelEdit] - If provided, will be injected its children's props
  * @param {string} [labelNext] - If provided,will be injected its children's props
  * @param {string} [labelCancel] - If provided, will be injected its children's props
+ * @param {string} [labelDone] - If provided, will be injected its children's props
+ * @param {boolean} [showPulsing=false] - By default it set to false, if true next and done button will be change to loader when navigation buttons clicked
  * @example
  * render: function () {
  *     <Wizard title="My wizard" onNext={this.next} onEdit={this.edit} onChange={this.change} >
@@ -51,12 +55,16 @@ var Wizard = React.createClass({
         "onEdit",
         "onChange",
         "onNext",
+        "onDone",
+        "onCancel",
         "labelNext",
         "labelCancel",
         "labelEdit",
+        "labelDone",
         "choices",
         "activeStep",
-        "numSteps"
+        "numSteps",
+        "showPulsing"
     ],
 
     propTypes: {
@@ -68,7 +76,9 @@ var Wizard = React.createClass({
         numSteps: React.PropTypes.number,
         labelEdit: React.PropTypes.string,
         labelCancel: React.PropTypes.string,
-        labelNext: React.PropTypes.string
+        labelNext: React.PropTypes.string,
+        labelDone: React.PropTypes.string,
+        showPulsing: React.PropTypes.bool
     },
 
 
@@ -88,7 +98,9 @@ var Wizard = React.createClass({
         return {
             id: "wizard",
             number: 1,
-            activeStep: 1
+            activeStep: 1,
+            showDoneButton: false,
+            showPulsing: false
         };
     },
 
@@ -113,9 +125,7 @@ var Wizard = React.createClass({
                 number: idx,
                 total: this.props.numSteps,
                 completed: this.props.activeStep > idx,
-                showEdit: this.props.activeStep > idx,
-                //disable navigation controls for very last step
-                disableNavigation: idx === this.props.numSteps
+                showEdit: this.props.activeStep > idx
             }, props));
         }.bind(this));
 
@@ -127,7 +137,7 @@ var Wizard = React.createClass({
 
 Wizard.Step = require("./Step.jsx");
 Wizard.Choose = require("./Choose.jsx");
-Wizard.Reducer = require("./Reducer.js");
-Wizard.Actions = require("./Actions.js");
+Wizard.Reducer = require("./WizardReducer.js");
+Wizard.Actions = require("./WizardActions.js");
 
 module.exports = Wizard;

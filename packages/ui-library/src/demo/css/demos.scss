@@ -40,47 +40,49 @@
     }
 }
 
-.messagesDemo {
-    .message {
-    	overflow: hidden;
+.multidrag-demo {
+    .row-icon {
+        width: 32px;
+        height: 32px;
+        background-position: center;
+        background-size: cover;
+        position: absolute;
+        top: 8px;
+        left: 30px;
     }
 
-    .text {
-	    position: relative;
-	    margin-top: -100px;
-	    padding: 10px 40px;
+    .with-icon .name {
+        margin-left:40px;
     }
 
-    .message.warning {
-    		background-color: red;
-    }
-    .message.success {
-    		background-color: green;
-        color: white;
-    }
-    .message.notice {
-    		background-color: orange;
-    }
-    .show .text {
-    		margin-top: 0px;
-    		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    .name {
+        @include transition(all 0.3s);
+        margin-left:0px;
     }
 
-    .close {
-    	width: 15px;
-      height: 15px;
-    	position: absolute;
-    	top: 10px;
-    	right: 10px;
-    	color: "white";
+    .demo-options {
+        padding-bottom:10px;
+        margin-bottom:20px;
+        border-bottom:1px solid #eee;
+
+        & > div {
+            display: inline-block;
+            width:50%;
+        }
     }
 
-    .close:after {
-        font-size: 18px;
-        content: '\78';
-        font-family: 'iconfont';
-    }
-    .close:hover {
-        text-decoration: none;
-    }
+}
+
+table {
+	&.grid {
+		td {
+			&.cell-background-test {
+                background-color: #EBECCB;
+            }
+            &.cell-border-test {
+                border-width: 3px;
+                border-style: double;
+            }
+		}
+	}
 }

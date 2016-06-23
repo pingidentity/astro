@@ -189,4 +189,19 @@ describe("FormTextinput", function () {
 
         expect(help.textContent).toBe("some help");
     });
+    
+    it("it is disabled and renders help tooltip", function () {
+        var component = getComponent({
+            labelText: "some label",
+            labelHelpText: "some help",
+            disabled: true
+        });
+        
+        var help = TestUtils.findRenderedDOMNodeWithDataId(component, "help-tooltip");
+        expect(help.textContent).toBe("some help");
+        
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        expect(ReactTestUtils.isDOMComponent(input)).toBeTruthy();
+        expect(input.disabled).toBeTruthy();
+    });
 });

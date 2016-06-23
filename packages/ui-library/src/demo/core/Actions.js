@@ -19,9 +19,9 @@ exports.receiveCode = function (id, markup) {
     };
 };
 
-exports.fetchCode = function (id, pathToCode) {
+exports.fetchCode = function (id, pathToDoc) {
     return function (dispatch) {
-        fetch("src/demo/" + pathToCode.replace(/(\.jsx|\.js)/, "Demo.jsx"))
+        fetch("src/demo/" + pathToDoc.replace(/(\.jsx|\.js)/, "Demo.jsx"))
             .then(function (resp) {
                 return resp.text();
             })

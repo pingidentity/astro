@@ -36,6 +36,20 @@ var FormTextFieldDemo = React.createClass({
         this.setState({ saved: true });
         window.setTimeout(this.setState.bind(this, { saved: false }), 5000);
     },
+    
+    _validateInput: function (e) {
+        var errorMessage = "";
+
+        if (e.length === 0) {
+            errorMessage = "";
+        } else {
+            if (e.length < 5) {
+                errorMessage = "Please enter at least 5 chars";
+            }
+        }
+
+        return errorMessage;
+    },
 
     render: function () {
         var originalValueForUndo = "this is the original value";
@@ -48,7 +62,7 @@ var FormTextFieldDemo = React.createClass({
                     />
                 </div>
                 <div className="input-row">
-                    <FormTextField
+                    <FormTextFieldV2
                         labelText="Default value and undo"
                         showUndo={true}
                         onUndo={this._undo}
@@ -56,7 +70,7 @@ var FormTextFieldDemo = React.createClass({
                     <div>{this.state.undone ? "undone!" : null}</div>
                 </div>
                 <div className="input-row">
-                    <FormTextField
+                    <FormTextFieldV2
                         labelText="Required and save"
                         required={true}
                         showSave={true}
@@ -99,10 +113,32 @@ var FormTextFieldDemo = React.createClass({
                         labelText="With help tooltip"
                         labelHelpText="This is my help text." />
                 </div>
+                <div className="input-row">
+                    <FormTextField
+                        labelText="Validate onChange"
+                        labelHelpText="Valid when have 5 or more chars"
+                        validatorTrigger="onChange"
+                        validator={this._validateInput}
+                    />
+                </div>
+                <div className="input-row">
+                    <FormTextField
+                        labelText="Validate onBlur"
+                        labelHelpText="Valid when have 5 or more chars"
+                        validatorTrigger="onBlur"
+                        validator={this._validateInput}
+                    />
+                </div>
+                <div className="input-row">
+                    <FormTextField
+                        labelText="Disabled field with help"
+                        labelHelpText="Disabled field with help"
+                        disabled={true}
+                    />
+                </div>
             </div>
         );
     }
 });
-
 
 module.exports = FormTextFieldDemo;

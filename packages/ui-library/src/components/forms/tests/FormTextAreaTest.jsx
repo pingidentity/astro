@@ -163,4 +163,14 @@ describe("FormTextArea", function () {
         var errorDiv = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text");
         expect(errorDiv.textContent).toBe(errorMessage);
     });
+    
+    it("is disabled when it is specified", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormTextArea disabled={true} />
+        );
+
+        var textarea = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
+        expect(ReactTestUtils.isDOMComponent(textarea)).toBeTruthy();
+        expect(textarea.disabled).toBeTruthy();
+    });
 });

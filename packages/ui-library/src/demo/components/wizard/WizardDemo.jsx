@@ -1,83 +1,102 @@
-var Redux = require("redux"),
-    React = require("react"),
-    Wizard = require("../../../components/wizard/Wizard.jsx");
+var React = require("react"),
+    Redux = require("redux"),
+    Wizard = require("../../../components/wizard/Wizard.jsx"),
+    FormCheckbox = require("../../../components/forms/FormCheckbox.jsx"),
+    Step = Wizard.Step,
+    Choose = Wizard.Choose;
 
-// this is the store
-
-var Step = Wizard.Step;
-var Choose = Wizard.Choose;
-
-var Demo = React.createClass({
+var WizardDemo = React.createClass({
     BUTTON_LABELS: {
         labelNext: "next",
         labelCancel: "cancel",
+        labelDone: "done",
         labelEdit: "edit"
     },
 
     getInitialState: function () {
         return {
-            choices: [],
-            activeStep: 1,
-            numSteps: 2
+            usePulsing: false,
+            isLoading: false
         };
     },
 
-    change: function (index, totalSteps) {
-        this.store.dispatch(Wizard.Actions.choose(index, totalSteps));
-    },
-
-    edit: function (index) {
-        this.store.dispatch(Wizard.Actions.edit(index));
+    toggleUsePulsing: function () {
+        this.setState({
+            usePulsing: !this.state.usePulsing
+        });
     },
 
     next: function () {
-        this.store.dispatch(Wizard.Actions.next());
+        if (this.state.usePulsing) {
+            this.setState({ isLoading: true });
+
+            setTimeout(function () {
+                this.setState({ isLoading: false });
+                this.actions.next();
+            }.bind(this), 2500);
+        } else {
+            this.actions.next();
+        }
     },
 
-    storeChange: function () {
-        this.setState(this.store.getState());
+    done: function () {
+        if (this.state.usePulsing) {
+            this.setState({ isLoading: true });
+            setTimeout(function () {
+                this.setState({ isLoading: false });
+                this.actions.reset();
+            }.bind(this), 2500);
+        } else {
+            this.actions.reset();
+        }
     },
 
     componentWillMount: function () {
-        this.store = Redux.createStore(Wizard.Reducer);
-        this.unsub = this.store.subscribe(this.storeChange);
-    },
-
-    componentWillUnmount: function () {
-        this.store = null;
-        this.unsub();
+        this.actions = Redux.bindActionCreators(Wizard.Actions, this.props.store.dispatch);
     },
 
     render: function () {
         return (
-        <div style={{ float: "left", width: "100%" }}>
-        <Choose title="Choose a Wizard"
-            onChange={this.change}
-            onNext={this.next}
-            onEdit={this.edit}
-            {...this.state}
-            {...this.BUTTON_LABELS} >
-            <Wizard title="wizard A">
-                <Step title="step 1">some content herreeeeeeeeeeeee</Step>
-                <Step title="Step 2">some content herreeeeeeeeeeeee</Step>
-                <Step title="Step 3" when={false}>some content herreeeeeeeeeeeee</Step>
-                <Step title="Step 4">some content herreeeeeeeeeeeee</Step>
-            </Wizard>
+            <div style={{ float: "left", width: "100%" }}>
+                <div className="input-row">
+                    <FormCheckbox
+                        label="Use pulsing"
+                        onChange={this.toggleUsePulsing}
+                        checked={this.state.usePulsing}
+                        className="stacked" />
+                </div>
 
-            <div style={{ marginBottom: 10 }}>OR</div>
+                <Choose title="Choose a wizard" {...this.props} {...this.BUTTON_LABELS}
+                    onChange={this.actions.choose}
+                    onEdit={this.actions.edit}
+                    onNext={this.next}
+                    onDone={this.done}
+                    showPulsing={this.state.isLoading} >
 
-            <Choose title="Deeper wizard">
-                <Wizard title="Wizard B.1">
-                    <Step title="Step B1-1">some content herreeeeeeeeeeeee</Step>
-                </Wizard>
-                <Wizard title="Wizard B.2">
-                    <Step title="Step B2-1">some content herreeeeeeeeeeeee</Step>
-                    <Step title="Step B2-2">some content herreeeeeeeeeeeee</Step>
-                </Wizard>
-            </Choose>
-        </Choose></div>);
+                    <Wizard title="Wizard 1">
+                        <Step title="Wizard 1 - Step 1">some content herreeeeeeeeeeeee</Step>
+                        <Step title="Wizard 1 - Step 2">some content herreeeeeeeeeeeee</Step>
+                    </Wizard>
+
+                    <div style={{ marginBottom: 10 }}>OR</div>
+
+                    <Wizard title="Wizard 2">
+                        <Step title="Wizard 2 - Step 1">some content herreeeeeeeeeeeee</Step>
+                        <Step title="Wizard 2 - Step 2">some content herreeeeeeeeeeeee</Step>
+                        <Step title="Wizard 2 - Step 3">some content herreeeeeeeeeeeee</Step>
+                    </Wizard>
+                </Choose>
+                <div>{this.state.isLoading && "Making some async call..."}</div>
+           </div>);
     }
 });
 
-module.exports = Demo;
+/*
+ * Expose the Reducer.  Doing so will tell the DemoApp to create an isolated store for the Demo to use.  Normally
+ * Redux forbids having more than one store, but using the main store makes the data flow difficult to follow, and
+ * can be unpredictable with events from one demo affecting another demo.  For this reason we treat each demo as
+ * its own app.
+ */
+WizardDemo.Reducer = Wizard.Reducer;
 
+module.exports = WizardDemo;

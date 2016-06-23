@@ -4,3 +4,8 @@ build*/*
 dist*/*
 **/coverage-reference/lcov-report/*.js
 **/coverage/lcov-report/*.js
+
+# Basic App example
+**/examples/basic-app/node_modules
+**/examples/basic-app/clean-ui-lib.js
+**/examples/basic-app/copy-styles.js

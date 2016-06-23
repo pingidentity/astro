@@ -1,0 +1,58 @@
+.tutorial {
+    margin-top: 12px;
+
+    h3 {
+        font-family: $font-pn-semibold;
+        padding-bottom: 7px;
+    }
+    .attention {
+        position: relative;
+        margin-left: 50px;
+        margin-top: 32px;
+        padding: 7px;
+        font-style: italic;
+        border: 1px dotted;
+
+        &:before {
+            position: absolute;
+            content: 'ATTENTION!';
+            top: -25px;
+            left: -50px;
+        }
+    }
+
+    .markup-wrapper {
+        margin-bottom: 20px;
+    }
+
+    .table-of-contents {
+        margin-bottom: 20px;
+        font-family: Arial;
+        font-size: 13px;
+
+        ul {
+            list-style: none;
+            padding: 10px 0;
+
+            li {
+                background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAALElEQVQoz2NgGGSg4EzBTPwKOgr+F6ThVzKTsJK7Bf/JN4GgG4C+6GAYigAASNYUTGaVYwsAAAAASUVORK5CYII=) no-repeat;
+                padding-left: 15px;
+                background-position-y: 2px;
+            }
+        }
+    }
+
+    img {
+        border: 1px dashed silver;
+        margin-bottom: 20px;
+    }
+
+    .icon-help {
+        display: inline-block;
+        margin-left: 5px;
+    }
+}
+
+#library-content .tutorial .output {
+    margin-bottom: 20px;
+}

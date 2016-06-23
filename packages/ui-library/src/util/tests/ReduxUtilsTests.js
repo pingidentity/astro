@@ -24,6 +24,18 @@ describe("ReduxUtils", function () {
         expect(state.blah).toBe(1);
     });
 
+    it("Push at path will clone", function () {
+        var state = { blah: [] };
+
+        var next = Utils.pushAtPath(_.clone(state), "blah", "one");
+        expect(next.blah).toEqual(["one"]);
+        expect(state.blah).toEqual([]);
+
+        next = Utils.pushAtPath(_.clone(next), "blah", "two");
+        expect(next.blah).toEqual(["one", "two"]);
+        expect(state.blah).toEqual([]);
+    });
+
     it("Doesnt set dirty bit if option is specified", function () {
         var state = { some: { initial: { state: 5 } }, blah: 1 };
         var next = Utils.setAtPath(_.clone(state), ["blah"], 5, { setDirty: false });
@@ -36,16 +48,32 @@ describe("ReduxUtils", function () {
         var next = Utils.setAtPath(_.clone(state), ["blah"], undefined);
 
         expect(next).toEqual({ dirty: true, some: { initial: { state: 5 } } });
+
+        state = { some: { initial: { state: 5 } }, blah: 1 };
+        Utils.deleteAtPath(state, ["blah"]);
+        expect(state).toEqual({ dirty: true, some: { initial: { state: 5 } } });
+
+        state = { some: { array: [1, 2, 3] }, blah: 1 };
+        Utils.deleteAtPath(state, ["some", "array", 1]);
+        expect(state).toEqual({ dirty: true, some: { array: [1, 3] }, blah: 1 });
     });
 
-    it("will log warning on attempt to update primitive type", function () {
-        console.warn = jest.genMockFunction();
+    it("Will throw an error setting a sub-attribute of a primitive", function () {
+        var state = { blah: 1 };
+        expect(Utils.setAtPath.bind(null, state, "blah.one", 1)).toThrow("trying to set sub-state on non-object");
+    });
 
-        var state = { some: { initial: { state: 5 } }, blah: 1 };
+    it("Will push at path", function () {
+        var state = { blah: [] };
+        var next = Utils.pushAtPath(_.clone(state), ["blah"], "one", { setDirty: false });
 
-        Utils.setAtPath(_.clone(state), "some.initial.state.opt", 6);
+        expect(next).toEqual({ blah: ["one"] });
 
-        expect(console.warn).toBeCalledWith("trying to set sub-state on non-object");
+        next = Utils.pushAtPath(_.clone(next), ["blah"], "two");
+        expect(next).toEqual({ blah: ["one", "two"], dirty: true });
+
+        next = Utils.pushAtPath(_.clone(next), "blah", "three");
+        expect(next).toEqual({ blah: ["one", "two", "three"], dirty: true });
     });
 
     it("rollback to snapshot", function () {

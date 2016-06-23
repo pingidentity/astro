@@ -1,0 +1,110 @@
+<!-- https://jira.pingidentity.com/browse/UIP-94 -->
+<!-- https://jira.pingidentity.com/browse/UIP-364 -->
+
+<html>
+<head>
+<title>Sample DOM for 2 Column DragDrop Component</title>
+</head>
+
+<body>
+    
+    <!-- sample dom for 2 column drag and drop -->
+
+    <div data-id="drag-drop" className="input-row row-selector">
+    
+        <div className="rows-available">
+
+            <div className="column-title">List of Attributes</div>
+            <div className="items" data-id="dragDropFromList">
+                
+                <div className="item" draggable="true">
+                    <span className="icon-grip"></span>
+                    <span className="name">Time Zone asdfasf asdf</span>
+                    <button className="inline plus" type="button" />
+                </div>
+                <div className="item" draggable="true">
+                    <span className="icon-grip"></span>
+                    <span className="name">Locale</span>
+                    <button className="inline plus" type="button" />
+                </div>
+                <div className="item" draggable="true">
+                    <span className="icon-grip"></span>
+                    <span className="name">Display Name</span>
+                    <button className="inline plus" type="button" />
+                </div>
+                <div className="item" draggable="true">
+                    <span className="icon-grip"></span>
+                    <span className="name">Job Title</span>
+                    <button className="inline plus" type="button" />
+                </div>
+                <div className="item" draggable="true">
+                    <span className="icon-grip"></span>
+                    <span className="name">Preferred Language</span>
+                    <button className="inline plus" type="button" />
+                </div>
+                <div className="item" draggable="true">
+                    <span className="icon-grip"></span>
+                    <span className="name">Profile</span>
+                    <button className="inline plus" type="button" />
+                </div>
+                <div className="item" draggable="true">
+                    <span className="icon-grip"></span>
+                    <span className="name">Entitlements</span>
+                    <button className="inline plus" type="button" />
+                </div>
+                <div className="item" draggable="true">
+                    <span className="icon-grip"></span>
+                    <span className="name">Messaging Service</span>
+                    <button className="inline plus" type="button" />
+                </div>
+                <div className="item" draggable="true">
+                    <span className="icon-grip"></span>
+                    <span className="name">Address</span>
+                    <button className="inline plus" type="button" />
+                </div>
+                <div className="item" draggable="true">
+                    <span className="icon-grip"></span>
+                    <span className="name">Phone Number</span>
+                    <button className="inline plus" type="button" />
+                </div>
+                <div className="item"  draggable="true">
+                    <span className="icon-grip"></span>
+                    <span className="name">Roles</span>
+                    <button className="inline plus" type="button" />
+                </div>
+                <div className="item" draggable="true">
+                    <span className="icon-grip"></span>
+                    <span className="name">Certificates</span>
+                    <button className="inline plus" type="button" />
+                </div>
+                
+            </div>
+                
+        </div>
+        
+        <div className="rows-added">
+
+            <div className="column-title">Selected Attributes (2)</div>
+            <div className="items" data-id="dragDropToList">
+                
+                <div className="no-items">Add Another Attribute</div>
+                <div className="item" draggable="true">
+                    <span className="icon-grip"></span>
+                    <span className="name">Nickname</span>
+                    <button className="inline remove" type="button" />
+                </div>
+                <div className="item" draggable="true">
+                    <span className="icon-grip"></span>
+                    <span className="name">User Type</span>
+                    <button className="inline remove" type="button" />
+                </div>
+
+            </div>
+
+        </div>
+        <input type="hidden" value="hidden_value" />
+
+    </div>
+    
+</body>
+</html>

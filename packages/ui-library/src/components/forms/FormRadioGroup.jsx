@@ -1,6 +1,5 @@
 var React = require("react"),
-    classnames = require("classnames"),
-    _ = require("underscore");
+    classnames = require("classnames");
 
 /**
  * @callback FormRadioGroup~onChangeCallback
@@ -27,6 +26,7 @@ var React = require("react"),
  * @param {RadioGroupItems} items - array of objects to render (required)
  *          format: <code>[{id: "val", name: "val", disabled: true}, {id: "val", name: "val", hidden: true}...]</code>
  * @param {FormRadioGroup~onChangeCallback} onChange - the callback to be triggered when the selection changed
+ * @param {FormRadioGroup~onChangeCallback} onValueChange - the callback to be triggered when the selection changed
  * @param {*} selected - the selected "id" from the items object above. If none is passed-in, all radio buttons
  *          are left unchecked
  * @param {boolean} [stacked=true]- When true, radios inputs are stacked vertically. When false radio
@@ -75,13 +75,10 @@ var FormRadioGroup = React.createClass({
         groupName: React.PropTypes.string.isRequired,
         id: React.PropTypes.string,
         items: React.PropTypes.array.isRequired,
-        onChange: React.PropTypes.func.isRequired,
+        onChange: React.PropTypes.func,
+        onValueChange: React.PropTypes.func,
         selected: React.PropTypes.any,
         stacked: React.PropTypes.bool
-    },
-
-    _onSelectionChange: function (value) {
-        this.props.onChange(value);
     },
 
     getDefaultProps: function () {
@@ -92,46 +89,48 @@ var FormRadioGroup = React.createClass({
         };
     },
 
-    render: function () {
-        var self = this,
-            radioCss = {
-                stacked: this.props.stacked
-            };
+    _handleChange: function (e) {
+        if (this.props.onChange) {
+            this.props.onChange(e.target.value);
+        }
+        if (this.props.onValueChange) {
+            this.props.onValueChange(e.target.value);
+        }
+    },
 
-        var radioButtonNodes =
-            _.map(this.props.items, function (item) {
-                var onChange = _.partial(self._onSelectionChange, item.id),
-                    radioDisabled = self.props.disabled || item.disabled;
+    _getRadioButtons: function () {
+        return this.props.items.map(function (item) {
+            var radioDisabled = this.props.disabled || item.disabled;
 
-                radioCss.disabled = radioDisabled;
-
-                return (
-                    <label
-                        className={classnames("input-radio", self.props.className, radioCss, {
-                            hidden: item.hidden
-                        })}
-                        key={item.id}
-                        data-id={self.props.id + "_label_" + item.id}>
-
-                        <input
-                            data-id={self.props.id + "_" + item.id}
-                            type="radio"
-                            name={self.props.groupName}
-                            value={item.id}
-                            checked={String(item.id) === String(self.props.selected)}
-                            onChange={onChange}
-                            disabled={radioDisabled} />
-                        <div className="circle"></div>
-                        {item.name}
-                    </label>
-                );
+            var className = classnames("input-radio", this.props.className, {
+                stacked: this.props.stacked,
+                disabled: radioDisabled,
+                hidden: item.hidden
             });
 
-        return (
-            <div className="input-row list">
-                {radioButtonNodes}
-            </div>
-        );
+            return (
+                <label
+                    className={className}
+                    key={item.id}
+                    data-id={this.props.id + "_label_" + item.id}>
+
+                    <input
+                        data-id={this.props.id + "_" + item.id}
+                        type="radio"
+                        name={this.props.groupName}
+                        value={item.id}
+                        checked={String(item.id) === String(this.props.selected)}
+                        onChange={this._handleChange}
+                        disabled={radioDisabled} />
+                    <div className="circle"></div>
+                    {item.name}
+                </label>
+            );
+        }.bind(this));
+    },
+
+    render: function () {
+        return <div className="list">{this._getRadioButtons()}</div>;
     }
 
 });
