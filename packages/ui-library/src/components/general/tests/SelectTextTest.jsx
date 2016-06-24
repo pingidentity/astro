@@ -177,7 +177,7 @@ describe("SelectText", function () {
         var callback = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
-            <SelectText className="testClass" select={true} onClick={callback}>
+            <SelectText dataId="select-text" className="testClass" select={true} onClick={callback}>
                 Just some test text
             </SelectText>
         );
