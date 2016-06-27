@@ -4,6 +4,8 @@ jest.dontMock("../../../testutil/TestUtils");
 jest.dontMock("../form-text-field/index.js");
 jest.dontMock("../form-text-field/v1.jsx");
 jest.dontMock("../Toggle.jsx");
+jest.dontMock("../form-toggle/index.js");
+jest.dontMock("../form-toggle/v1.jsx");
 jest.dontMock("../../general/If.jsx");
 jest.dontMock("../FormCheckboxList.jsx");
 jest.dontMock("underscore");
