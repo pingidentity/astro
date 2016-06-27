@@ -12,10 +12,10 @@ var ReactDOM = require("react-dom");
  * An input field will have its select() method called specifically if the input field is the target of the click.
  * Other elements clicked on within a select text field will result all text for all elements being selected.
  *
- * @param {string} [dataId]
- *     DEPRECATED. To define the base "data-id" value for top-level HTML container.
  * @param {string} [data-id="select-text"]
  *     To define the base "data-id" value for top-level HTML container.
+ * @param {string} [dataId]
+ *     DEPRECATED. Use "data-id" instead. To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
  *
