@@ -6,9 +6,16 @@ var React = require("react");
  * Children content should be exception safe if no data available, because it will be evaluated regardless of loading
  * state (react limitation), also content should be wrapped in top-level element (div or span) (also react limitation).
  *
- * @param {string} [id="spinner"] data-id value for HTML top element
- * @param {string} [defaultTest] text that shows if CSS rotations are not supported
- * @param {boolean} show boolean value, while true loading animation will be shown instead of context
+ * @param {string} [data-id="spinner"]
+ *     To define the base "data-id" value for top-level HTML container.
+ * @param {string} [id="spinner"]
+ *     DEPRECATED. Use "data-id" instead. To define the base "data-id" value for top-level HTML container.
+ *
+ * @param {string} [defaultText]
+ *     Text that shows if CSS rotations are not supported
+ *
+ * @param {boolean} show
+ *     Boolean value, while true loading animation will be shown instead of context
  *
  * @example
  *     <Spinner show={this.state.show} defaultText="Loading...">
@@ -17,9 +24,11 @@ var React = require("react");
  *         </div>
  *     </Spinner>
  **/
+
 var Spinner = React.createClass({
 
     propTypes: {
+        "data-id": React.PropTypes.string,
         id: React.PropTypes.string,
         defaultText: React.PropTypes.string,
         show: React.PropTypes.bool.isRequired
@@ -27,6 +36,7 @@ var Spinner = React.createClass({
 
     getDefaultProps: function () {
         return {
+            // not yet changed to data-id so that id used by older clients are not overwritten by default data-id.
             id: "spinner",
             defaultText: ""
         };
@@ -34,7 +44,8 @@ var Spinner = React.createClass({
 
     render: function () {
         if (this.props.show) {
-            return <span data-id={this.props.id} className="spinner">{this.props.defaultText}</span>;
+            var dataId = this.props["data-id"] || this.props.id;
+            return <span data-id={dataId} className="spinner">{this.props.defaultText}</span>;
         } else {
             return this.props.children;
         }
