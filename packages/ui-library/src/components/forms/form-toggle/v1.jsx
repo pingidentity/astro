@@ -1,29 +1,42 @@
 var React = require("react"),
-    css = require("classnames"),
+    classnames = require("classnames"),
     _ = require("underscore");
 
 /**
- * @callback Toggle~onToggleCallback
- * @param {boolean} newState - new toggle state after switch
- * @param {object} paramObj - context, paramObj from original props
- * @returns {boolean} shouldClose - true if toggle can switch its state, false otherwise
+ * @callback Toggle~onToggle
+ *
+ * @param {boolean} newState
+ *     New toggle state after switch.
+ * @param {object} paramObj
+ *     Context, paramObj from original props.
+ *
+ * @returns {boolean} shouldClose
+ *     True if toggle can switch its state, false otherwise.
  */
 
  /**
  * @class Toggle
  * @desc Toggles between two states on click.  Is either "off" or "on".
  *
- * @param {Toggle~onToggleCallback} [onToggle] - callback to be triggered toggle is clicked.
- *          If call returns true then toggle will be toggled, otherwise toggle will
- *          not be toggled.
- * @param {object} [paramObj] - parameter object to pass to onToggle delegate method.
- * @param {boolean} [toggled] - Initial toggle state; set true for "on".  Default: false.
- * @param {boolean} [value] - toggle state (true/false), used to manage state outside of Toggle component, must be used in
- *          conjunction with onToggle callback to receive state updates.
- * @param {boolean} [disabled] - If disabled then the toggle will be styled with a "disabled" class
- *          and will not be clickable.  Default: false.
- * @param {string} [className] - extra CSS classes to be applied
- * @param {string} [id] - it is used for a unique data-id
+ * @param {string} [id="toggle"]
+ *     To define the base "data-id" value for top-level HTML container.
+ * @param {string} [className]
+ *     CSS classes to set on the top-level HTML container.
+ *
+ * @param {boolean} [toggled=false]
+ *     Initial toggle state; set true for "on".
+ * @param {boolean} [value]
+ *     Toggle state (true/false), used to manage state outside of Toggle component, must be used in conjunction with
+ *     onToggle callback to receive state updates.
+ * @param {object} [paramObj]
+ *     Parameter object to pass to onToggle delegate method.
+ * @param {Toggle~onToggle} [onToggle]
+ *     Callback to be triggered when toggle state changed - if returns true then toggle will be toggled,
+ *     otherwise toggle will not be toggled.
+ *
+ * @param {boolean} [disabled=false]
+ *     If disabled then the toggle will be styled with a "disabled" class and will not be clickable.
+ *
  * @example
  *    <Toggle className="small" onToggle={this._toggleChanged} paramObj={someObject} toggled={true} />
  *
@@ -32,6 +45,7 @@ var React = require("react"),
  *      and if it returns true then the toggle will be toggled.
  *
  **/
+
 var Toggle = React.createClass({
 
     propTypes: {
@@ -48,6 +62,10 @@ var Toggle = React.createClass({
         return {
             id: "toggle"
         };
+    },
+
+    componentWillMount: function () {
+        console.warn("** This version of the Toggle is deprecated and will be removed in the next release");
     },
 
    /**
@@ -85,7 +103,7 @@ var Toggle = React.createClass({
 
         var state = _.isUndefined(this.props.value) ? this.state.toggled : this.props.value;
 
-        var classNames = css({
+        var classNames = classnames({
             "input-toggle": true,
             selected: state,
             disabled: this.props.disabled
