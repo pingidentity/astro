@@ -78,10 +78,10 @@ var SelectText = React.createClass({
 
     propTypes: {
         "data-id": React.PropTypes.string,
-        select: React.PropTypes.bool,
+        dataId: React.PropTypes.string,
         className: React.PropTypes.string,
-        onClick: React.PropTypes.func,
-        dataId: React.PropTypes.string
+        select: React.PropTypes.bool,
+        onClick: React.PropTypes.func
     },
 
     /*
@@ -124,15 +124,14 @@ var SelectText = React.createClass({
 
     getDefaultProps: function () {
         return {
-            dataId: "select-text"
-            // this is not yet changed to data-id so that data ids used by older clients are not overwritten.
+            "data-id": "select-text"
         };
     },
 
     componentWillMount: function () {
         if (this.props.dataId) {
-            console.warn("Deprecated: use data-id instead of dataId.  " +
-            "Support for dataId will be removed in next version");
+            console.warn(
+                "Deprecated: use data-id instead of dataId. Support for dataId will be removed in next version");
         }
     },
 
@@ -149,7 +148,7 @@ var SelectText = React.createClass({
     },
 
     render: function () {
-        var dataId = this.props["data-id"] || this.props.dataId;
+        var dataId = this.props.dataId || this.props["data-id"];
         return (
             <span className={this.props.className}
                   onClick={this._selectText}
