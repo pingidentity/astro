@@ -98,8 +98,7 @@ var RockerButtonStateless = React.createClass({
 
     getDefaultProps: function () {
         return {
-            //TODO: change to data-id when v1 id support removed
-            defaultDataId: "rocker-button",
+            "data-id": "rocker-button",
             className: "",
             onValueChange: _.noop,
             selected: "",
@@ -133,7 +132,7 @@ var RockerButtonStateless = React.createClass({
     },
 
     render: function () {
-        var id = this.props["data-id"] || this.props.id || this.props.defaultDataId,
+        var id = this.props.id || this.props["data-id"],
             className = classnames("rocker-button sel-" + this.props.selectedIndex, this.props.className);
 
         return (
