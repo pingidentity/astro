@@ -200,5 +200,14 @@ describe("I18nPhoneInput", function () {
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 70 }); // f
         expect(component.state.searchString).toBe("af");
     });
+
+    it("warns of deprecated component version", function () {
+        console.warn = jest.genMockFunction();
+
+        getComponent();
+
+        expect(console.warn).toBeCalledWith(
+            "** This version of the I18nPhoneInput is deprecated and will be removed in the next release");
+    });
     
 });

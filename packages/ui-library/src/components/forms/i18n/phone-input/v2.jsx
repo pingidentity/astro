@@ -128,7 +128,6 @@ var I18nPhoneInputStateless = React.createClass({
     getDefaultProps: function () {
         return {
             "data-id": "i18n-phone-input",
-            id: null,
             className: "",
             controlled: false,
             countryCode: "",
@@ -179,7 +178,7 @@ var I18nPhoneInputStateless = React.createClass({
     },
 
     render: function () {
-        var id = this.props["data-id"] || this.props.id,
+        var id = this.props.id || this.props["data-id"],
             classname = classnames("intl-tel-input", this.props.className);
 
         return (

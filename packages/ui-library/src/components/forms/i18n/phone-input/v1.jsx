@@ -194,6 +194,10 @@ var I18nPhoneInput = React.createClass({
         };
     },
 
+    componentWillMount: function () {
+        console.warn("** This version of the I18nPhoneInput is deprecated and will be removed in the next release");
+    },
+
     getInitialState: function () {
         var selected = this.props.dialCode ? this._findByDialCode(this.props.dialCode)
             : this._findByCountryCode(this.props.countryCode);

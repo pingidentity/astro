@@ -230,5 +230,14 @@ describe("I18nPhoneInput", function () {
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 70 }); // f
         expect(componentRef.state.searchString).toBe("af");
     });
+
+    it("is logging warning if id prop given", function () {
+        console.warn = jest.genMockFunction();
+
+        getComponent({ id: "myPhoneInput" });
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use data-id instead of id.  Support for id will be removed in next version");
+    });
     
 });
