@@ -8,7 +8,7 @@ var React = require("react");
  *
  * @param {string} [data-id="spinner"]
  *     To define the base "data-id" value for top-level HTML container.
- * @param {string} [id="spinner"]
+ * @param {string} [id]
  *     DEPRECATED. Use "data-id" instead. To define the base "data-id" value for top-level HTML container.
  *
  * @param {string} [defaultText]
@@ -36,15 +36,20 @@ var Spinner = React.createClass({
 
     getDefaultProps: function () {
         return {
-            // not yet changed to data-id so that id used by older clients are not overwritten by default data-id.
-            id: "spinner",
+            "data-id": "spinner",
             defaultText: ""
         };
     },
 
+    componentWillMount: function () {
+        if (this.props.id) {
+            console.warn("Deprecated: use data-id instead of id.  Support for id will be removed in next version");
+        }
+    },
+
     render: function () {
         if (this.props.show) {
-            var dataId = this.props["data-id"] || this.props.id;
+            var dataId = this.props.id || this.props["data-id"];
             return <span data-id={dataId} className="spinner">{this.props.defaultText}</span>;
         } else {
             return this.props.children;
