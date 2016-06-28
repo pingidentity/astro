@@ -1,13 +1,14 @@
 window.__DEV__ = true;
 
-jest.dontMock("../FormSelectField.jsx");
+jest.dontMock("../v1.jsx");
 
 describe("FormSelectField", function () {
 
     var React = require("react"),
         ReactTestUtils = require("react-addons-test-utils"),
-        TestUtils = require("../../../testutil/TestUtils"),
-        FormSelectField = require("../FormSelectField.jsx");
+        TestUtils = require("../../../../testutil/TestUtils"),
+        FormSelectField = require("../v1.jsx"),
+        HelpHint = require("../../../tooltips/HelpHint.jsx");
 
     it("renders the component with a data object", function () {
 
@@ -156,6 +157,40 @@ describe("FormSelectField", function () {
 
         var errorDiv = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text");
         expect(errorDiv.textContent).toBe(errorMessage);
+    });
+
+    it("renders component with additional CSS classes as specified in className prop", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormSelectField className="mySelect"
+                    label="test label"
+                    options={{ 1: "one", 2: "two" }}
+                    value={'2'} />);
+
+        var label = TestUtils.findRenderedDOMNodeWithClass(component, "mySelect");
+
+        expect(label).toBeTruthy();
+    });
+
+    it("renders HelpHint when specified", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormSelectField label="test label" options={{ 1: "one", 2: "two" }} value={'2'} labelHelpText="helpMe" />);
+
+        var help = TestUtils.findRenderedComponentWithType(component, HelpHint);
+
+        expect(help).toBeTruthy();
+    });
+
+    it("does not trigger onChange callback if not given", function () {
+        var onChange = jest.genMockFunction();
+
+        var component = ReactTestUtils.renderIntoDocument(
+                <FormSelectField label="test label" option={{ 1: "one", 2: "two" }} value={'2'} />);
+
+        var select = TestUtils.findRenderedDOMNodeWithTag(component, "select");
+
+        ReactTestUtils.Simulate.change(select, { target: { value: "1" } } );
+
+        expect(onChange).not.toBeCalled();
     });
 
     it("is not disabled when not specified", function () {
