@@ -15,6 +15,8 @@ module.exports = [
     //Sisi: this is excluded because istanbul is not registering some branches and functions
     //that are definitely being hit as hit.
     "/src/components/general/Section.jsx",
+    //Okhtay: this is a test file
+    "/src/components/forms/file-upload/tests/commonTests.jsx",
     //Sisi: this is excluded because istanbul is not registering some branches and functions
     //that are definitely being hit as hit.
     "/src/components/forms/i18n/phone-input/v2.jsx",
