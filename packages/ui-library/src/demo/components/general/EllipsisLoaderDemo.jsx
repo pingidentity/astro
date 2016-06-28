@@ -36,7 +36,7 @@ var EllipsisLoaderDemo = React.createClass({
         return (
             <div>
                 <input type="button" onClick={this._load} value="Load" />
-                <EllipsisLoader id="demo-ellipsis-loader" loading={this.state.loading} />
+                <EllipsisLoader data-id="demo-ellipsis-loader" loading={this.state.loading} />
             </div>
         );
     }

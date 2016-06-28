@@ -112,7 +112,8 @@ var RockerButtonStateless = React.createClass({
         }
         if (this.props.onChange) {
             console.warn(
-                "Deprecated: use onValueChange instead of onChange. Support for onChange will be removd in next version"
+                "Deprecated: use onValueChange instead of onChange. " +
+                "Support for onChange will be removed in next version"
             );
         }
 

@@ -21,11 +21,11 @@ describe("Ellipsis loader button", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
             <EllipsisLoaderButton
-                id={buttonId}
+                data-id={buttonId}
                 loading={true}
                 className={buttonCss}
                 text={buttonText}
-                onButtonClick={callback} />
+                onClick={callback} />
         );
 
         var button = TestUtils.findRenderedDOMNodeWithDataId(component, buttonId);
@@ -35,10 +35,10 @@ describe("Ellipsis loader button", function () {
     it("does not render anything when the loading flag is set to false", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <EllipsisLoaderButton
-                id={buttonId}
+                data-id={buttonId}
                 text={buttonText}
                 loading={false}
-                onButtonClick={callback} />
+                onClick={callback} />
         );
 
         var button = TestUtils.findRenderedDOMNodeWithDataId(component, buttonId);
@@ -48,13 +48,51 @@ describe("Ellipsis loader button", function () {
     it("renders the button text", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <EllipsisLoaderButton
-                id={buttonId}
+                data-id={buttonId}
                 text={buttonText}
                 loading={false}
-                onButtonClick={callback} />
+                onClick={callback} />
         );
 
         var button = TestUtils.findRenderedDOMNodeWithDataId(component, buttonId);
         expect(button.textContent).toEqual(buttonText);
     });
+
+    it("check if warning with id vs data-id", function () {
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <EllipsisLoaderButton
+                id={buttonId}
+                text={buttonText}
+                loading={false}
+                onClick={callback} />
+        );
+        expect(console.warn).toBeCalled();
+    });
+
+    it("check if warning with id vs data-id", function () {
+        console.warn = jest.genMockFunction();
+        var component = ReactTestUtils.renderIntoDocument(
+            <EllipsisLoaderButton
+                text={buttonText}
+                loading={false}
+                onClick={callback} />
+        );
+        var button = TestUtils.findRenderedDOMNodeWithDataId(component, "ellipsis-loader-button");
+        expect(button.textContent).toEqual(buttonText);
+        expect(console.warn).not.toBeCalled();
+    });
+
+    it("check if warning with onButtonClick vs onClick", function () {
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <EllipsisLoaderButton
+                data-id={buttonId}
+                text={buttonText}
+                loading={false}
+                onButtonClick={callback} />
+        );
+        expect(console.warn).toBeCalled();
+    });
+
 });
