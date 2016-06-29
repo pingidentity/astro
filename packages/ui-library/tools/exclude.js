@@ -22,5 +22,8 @@ module.exports = [
     "/src/components/forms/i18n/phone-input/v2.jsx",
     //Sisi: this is excluded because istanbul is not registering some functions
     //that are definitely being hit as hit.
-    "/src/components/forms/form-toggle/v2.jsx"
+    "/src/components/forms/form-toggle/v2.jsx",
+    //Sisi: this is excluded because istanbul is not registering some functions
+    //that are definitely being hit as hit.
+    "/src/components/forms/form-text-field/v2.jsx"
 ];

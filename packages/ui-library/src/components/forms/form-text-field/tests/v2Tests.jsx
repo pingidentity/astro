@@ -42,6 +42,30 @@ describe("FormTextinput", function () {
 
     CommonTests(getComponent);
 
+    it("renders with default data-id", function () {
+        var component = getComponent();
+
+        var field = TestUtils.findRenderedDOMNodeWithDataId(component, "form-text-field");
+
+        expect(field).toBeTruthy();
+    });
+
+    it("renders with given data-id", function () {
+        var component = getComponent({ "data-id": "myField" });
+
+        var field = TestUtils.findRenderedDOMNodeWithDataId(component, "myField");
+
+        expect(field).toBeTruthy();
+    });
+
+    it("renders with given id", function () {
+        var component = getComponent({ id: "myField" });
+
+        var field = TestUtils.findRenderedDOMNodeWithDataId(component, "myField");
+
+        expect(field).toBeTruthy();
+    });
+
     it("toggles reveal state", function () {
         var component = getComponent({
             showReveal: true
