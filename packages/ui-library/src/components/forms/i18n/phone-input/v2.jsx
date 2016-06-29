@@ -104,7 +104,6 @@ var I18nPhoneInputStateless = React.createClass({
 
     propTypes: {
         "data-id": React.PropTypes.string,
-        id: React.PropTypes.string,
         className: React.PropTypes.string,
         controlled: React.PropTypes.bool,
         countryCode: React.PropTypes.string.affectsRendering,
@@ -146,12 +145,6 @@ var I18nPhoneInputStateless = React.createClass({
         };
     },
 
-    componentWillMount: function () {
-        if (this.props.id) {
-            console.warn("Deprecated: use data-id instead of id.  Support for id will be removed in next version");
-        }
-    },
-
     /**
     * @method handleCountryClick
     * @memberof I18nPhoneInputStateless
@@ -178,11 +171,10 @@ var I18nPhoneInputStateless = React.createClass({
     },
 
     render: function () {
-        var id = this.props.id || this.props["data-id"],
-            classname = classnames("intl-tel-input", this.props.className);
+        var classname = classnames("intl-tel-input", this.props.className);
 
         return (
-            <div data-id={id} className={classname}>
+            <div data-id={this.props["data-id"]} className={classname}>
                 <CountryFlagList
                         data-id={this.props["data-id"] + "-countryFlagList"}
                         countryCodeClassName="dial-code"

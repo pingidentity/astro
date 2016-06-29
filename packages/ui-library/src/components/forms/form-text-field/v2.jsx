@@ -211,8 +211,6 @@ module.exports = React.createClass({
 var Stateless = React.createClass({
     propTypes: {
         "data-id": React.PropTypes.string,
-        //TODO: remove when v1 id support removed
-        id: React.PropTypes.string,
         className: React.PropTypes.string,
         value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
         defaultValue: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
@@ -284,28 +282,21 @@ var Stateless = React.createClass({
         };
     },
 
-    componentWillMount: function () {
-        if (this.props.id) {
-            console.warn("Deprecated: use data-id instead of id.  Support for id will be removed in the next version");
-        }
-    },
-
     render: function () {
-        var id = this.props.id || this.props["data-id"],
-            className = classnames(this.props.className, "input-text", {
-                edited: this.props.isEdited,
-                required: this.props.required,
-                disabled: this.props.disabled,
-                "value-entered": this.props.value,
-                "inline-save": this.props.showSave,
-                "form-error": this.props.errorMessage,
-                actions: this.props.showReveal || this.props.showUndo
-            });
+        var className = classnames(this.props.className, "input-text", {
+            edited: this.props.isEdited,
+            required: this.props.required,
+            disabled: this.props.disabled,
+            "value-entered": this.props.value,
+            "inline-save": this.props.showSave,
+            "form-error": this.props.errorMessage,
+            actions: this.props.showReveal || this.props.showUndo
+        });
 
         return (
             <FormLabel className={className}
                        ref="container"
-                       data-id={id}
+                       data-id={this.props["data-id"]}
                        value={this.props.labelText}
                        hint={this.props.labelHelpText}>
                 <span className="input-container">
@@ -318,9 +309,9 @@ var Stateless = React.createClass({
                            onChange={this._handleFieldChange}
                            placeholder={this.props.placeholder}
                            defaultValue={this.props.defaultValue}
-                           ref={id + "-input"}
+                           ref={this.props["data-id"] + "-input"}
                            readOnly={this.props.readOnly}
-                           data-id={id + "-input"}
+                           data-id={this.props["data-id"] + "-input"}
                            type={this.props.maskValue && !this.props.reveal ? "password" : "text"}
                            maxLength={this.props.maxLength}
                            value={this.props.value}

@@ -58,14 +58,6 @@ describe("FormTextinput", function () {
         expect(field).toBeTruthy();
     });
 
-    it("renders with given id", function () {
-        var component = getComponent({ id: "myField" });
-
-        var field = TestUtils.findRenderedDOMNodeWithDataId(component, "myField");
-
-        expect(field).toBeTruthy();
-    });
-
     it("toggles reveal state", function () {
         var component = getComponent({
             showReveal: true
@@ -116,16 +108,6 @@ describe("FormTextinput", function () {
         ReactTestUtils.Simulate.keyDown(input, { keyCode: 13 });
 
         expect(handleKeyDown.mock.calls[0][0].keyCode).toBe(13);
-    });
-
-    it("warns if id prop is used", function () {
-        var warn = global.console.warn;
-        console.warn = jest.genMockFunction();
-
-        getComponent({ id: "my-id" });
-        expect(console.warn).toBeCalled();
-
-        console.warn = warn;
     });
 
     it("passes back value to onValueChange", function () {
