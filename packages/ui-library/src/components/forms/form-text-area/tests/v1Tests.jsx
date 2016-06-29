@@ -1,13 +1,14 @@
 window.__DEV__ = true;
 
-jest.dontMock("../FormTextArea.jsx");
+jest.dontMock("../v1.jsx");
 
 describe("FormTextArea", function () {
 
     var React = require("react"),
         ReactTestUtils = require("react-addons-test-utils"),
-        TestUtils = require("../../../testutil/TestUtils"),
-        FormTextArea = require("../FormTextArea.jsx");
+        TestUtils = require("../../../../testutil/TestUtils"),
+        FormTextArea = require("../v1.jsx"),
+        HelpHint = require("../../../tooltips/HelpHint.jsx");
 
     it("renders the component", function () {
         var component = ReactTestUtils.renderIntoDocument(
@@ -50,6 +51,17 @@ describe("FormTextArea", function () {
         expect(field.getAttribute("placeholder")).toEqual("edit me");
     });
 
+    it("shows labelHelpText", function () {
+        var helpText = "help!";
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormTextArea referenceName="test" labelText="label" labelHelpText={helpText} />
+        );
+
+        var help = TestUtils.findRenderedComponentWithType(component, HelpHint);
+
+        expect(help).toBeTruthy();
+    });
+
     it("respects value over defaultValue and state precedence", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormTextArea referenceName={'test'} defaultValue={'my random value'} value={'my value'}/>
@@ -72,6 +84,19 @@ describe("FormTextArea", function () {
         ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
         expect(handleChange.mock.calls.length).toBe(1);
 
+    });
+
+    it("triggers the onBlur callback on field blur", function () {
+        var onBlur = jest.genMockFunction();
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormTextArea onBlur={onBlur} />
+        );
+
+        var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
+
+        ReactTestUtils.Simulate.blur(field);
+
+        expect(onBlur).toBeCalled();
     });
 
     it("does not show the undo button if the originalValue param is not passed in", function () {
