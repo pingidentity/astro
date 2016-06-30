@@ -156,7 +156,7 @@ module.exports = [
                 label: "Selection List",
                 demo: require("../components/forms/SelectionListDemo.jsx"),
                 pathToDoc: "components/forms/SelectionList.jsx",
-                pathToSource: "components_forms_selection-list_v2.jsx.html"
+                pathToSource: "components_forms_SelectionList.jsx.html"
             }
         ]
     },

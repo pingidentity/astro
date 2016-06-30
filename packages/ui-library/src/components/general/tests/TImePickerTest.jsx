@@ -1,8 +1,6 @@
 window.__DEV__ = true;
 
 jest.dontMock("../TimePicker.jsx");
-jest.dontMock("../../forms/form-select-field/index.js");
-jest.dontMock("../../forms/form-select-field/v1.jsx");
 jest.dontMock("../../forms/FormSelectField.jsx");
 jest.dontMock("moment");
 

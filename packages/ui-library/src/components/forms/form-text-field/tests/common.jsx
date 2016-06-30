@@ -76,9 +76,8 @@ module.exports = function (getComponent) {
             errorMessage: errorMessage
         });
 
-        var errorDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "form-text-field-error-message") ||
+        var errorDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "formTextField-error-message") ||
                        TestUtils.findRenderedDOMNodeWithDataId(component, "formTextField_errormessage");
-
         expect(errorDiv.textContent).toBe(errorMessage);
     });
 

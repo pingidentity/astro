@@ -146,7 +146,8 @@ describe("I18nCountrySelector", function () {
         
         var flag = TestUtils.findRenderedDOMNodeWithDataId(componentRef, "selected-flag");
         // var currentCountryIso = componentRef.state.selected.iso2;
-        // enter can, validate still not selected, hit enter, validate Canada now selected
+        // open flag, enter can, validate still not selected, hit enter, validate Canada now selected
+        ReactTestUtils.Simulate.click(flag);
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 65 }); // a
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 78 }); // n
@@ -178,6 +179,7 @@ describe("I18nCountrySelector", function () {
         
         var flag = TestUtils.findRenderedDOMNodeWithDataId(componentRef, "selected-flag");
 
+        ReactTestUtils.Simulate.click(flag);
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 65 }); // a
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 78 }); // n

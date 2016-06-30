@@ -4,63 +4,50 @@ var classnames = require("classnames");
 /**
  * @class HelpHint
  * @desc HelpHint can appear above, to the right, to the bottom or to the left of any DOM element.
- *     By default the hint appears to the upper right of the icon or target
- *     The following css classes may be added to effect the tooltip placement and state:
- *         'right': tooltip displays to the left of the icon instead of the right
- *         'bottom': tooltip displays under the help icon instead of above
- *         'show': keeps tooltip visible regardless of hover
- *     The following css classes maybe added to change the appearace of the tooltip:
- *         'error'/'warning': tooltip shows in red
- *         'success': tooltip shows in green
- *     Multiple rows of text are supported.
- *     HTML is supported.
+ *      By default the hint appears to the upper right of the icon or target
+ *      The following css classes may be added to effect the tooltip placement and state:
+ *          'right': tooltip displays to the left of the icon instead of the right
+ *          'bottom': tooltip displays under the help icon instead of above
+ *          'show': keeps tooltip visible regardless of hover
+ *      The following css classes maybe added to change the appearace of the tooltip:
+ *          'error'/'warning': tooltip shows in red
+ *          'success': tooltip shows in green
+ *      Multiple rows of text are supported.
+ *      HTML is supported.
+ * @param {any} hintText - provides the text that will appear in the hint.( required )
+ * @param {string} [className] - extra CSS classes to be applied on the top level HTML
+ * @param {string} [id] - attribute of rendered tooltip text.
  *
- * @param {string} [data-id="helpHint"]
- *     To define the base "data-id" value for top-level HTML container.
- * @param {string} [id]
- *     DEPRECATED. Use "data-id" instead. To define the base "data-id" value for top-level HTML container.
- * @param {string} [className]
- *     CSS classes to set on the top-level HTML container.
- *
- * @param {any} hintText
- *     Provides the text that will appear in the hint.
  *
  *  @example
- *     <HelpHint className="short-tooltip right" hintText="My first HelpHint!">SomeTextWithHelp</HelpHint>
+ *      <HelpHint hintStyle='error show' hintText='My first HelpHint!'>SomeTextWithHelp</HelpHint>
  */
 
 var HelpHint = React.createClass({
     propTypes: {
-        "data-id": React.PropTypes.string,
-        id: React.PropTypes.string,
+        // prop validations
+        hintText: React.PropTypes.any.isRequired,
         className: React.PropTypes.string,
-        hintText: React.PropTypes.any.isRequired
+        id: React.PropTypes.string
     },
 
     getDefaultProps: function () {
         return {
-            "data-id": "helpHint"
+            id: "helpHint"
         };
     },
 
-    _handleClick: function (e) {
+    captureClick: function (e) {
         // kill click event to prevent event from triggering label from checking a checkbox/radio
         e.preventDefault();
     },
 
-    componentWillMount: function () {
-        if (this.props.id) {
-            console.warn("Deprecated: use data-id instead of id.  Support for id will be removed in next version");
-        }
-    },
-    
     render: function () {
-        var dataId = this.props.id || this.props["data-id"];
         return (
             <div
                 className={classnames("help-tooltip", this.props.className)}
-                data-id={dataId}
-                onClick={this._handleClick}>
+                data-id={this.props.id}
+                onClick={this.captureClick}>
                 {this.props.children || (<div><span className="icon-help"></span></div>)}
                 <div className="tooltip-text"><div className="tooltip-text-content">{this.props.hintText}</div></div>
             </div>

@@ -6,47 +6,20 @@ var React = require("react"),
     CountryFlagList = require("./CountryFlagList.jsx");
 
 /**
-* @callback I18nCountrySelector~onValueChange
-* @param {string|number} countryCode
-*     The country code.
-*/
-
-/**
-* @callback I18nCountrySelector~onToggle
-* /
-
-/**
-* @callback I18nCountrySelector~onCountrySearch
-*/
-
-/**
 * @class I18nCountrySelector
-* @desc An international country selector with numeric country code drop down.
+* @desc an international country selector with numeric country code drop down.
 *
-* @param {string} [data-id="i18n-country-selector"]
-*     To define the base "data-id" value for top-level HTML container.
-* @param {string} [className]
-*     CSS classes to set on the top-level HTML container.
-* @param {boolean} [controlled=false]
-*    To enable the component to be externally managed. True will relinquish control to the component's owner.
-*    False or not specified will cause the component to manage state internally.
-*
-* @param {string} [countryCode]
-*     The country code to be selected by default.
-* @param {I18nCountrySelector~onValueChange}
-*     Callback to be triggered when country code changes.
-*
-* @param {boolean} [open=false]
-*     State of the open/closed dropdown menu.
-* @param {I18nCountrySelector~onToggle} [onToggle]
-*     Callback to be triggered when open/close state changes. Used only when controlled=true.
-*
-* @param {string} [searchString]
-*     Value to help with finding an element on keydown.
-* @param {number} [searchTime]
-*     Time to help clear the search when the user delays their search.
-* @param {I18nCountrySelector~onCountrySearch} [onCountrySearch]
-*     Callback to handle state change for on search of country when flag dropdown expanded.
+* @param {string} [data-id="i18n-country-selector"] - data-id to set on the top HTML element
+*   (defaults to "I18n-country-selector").
+* @param {string} [className] - CSS class to set on the top HTML element.
+* @param {bool} [open] - boolean state of the open/closed dropdown menu. Used only in stateless mode.
+*   (defaults to false).
+* @param {function} [onValueChange] - function (countryCode) {...} A callback to be triggered when the country code changes.
+* @param {function} [onToggle] - function () {...} delegates to call when open/closed state changed.
+* @param {string|number} [countryCode] - the country code to be selected by default.
+* @param {function} [onCountrySearch] - function () {...} handles state change for on search of country when flag dropdown expanded
+* @param {string} [searchString] - value to help with finding an element on keydown
+* @param {number} [searchTime] - time to help clear the search when the user delays his search
 */
 
 module.exports = React.createClass({
@@ -74,46 +47,41 @@ var I18nCountrySelectorStateless = React.createClass({
     propTypes: {
         "data-id": React.PropTypes.string,
         className: React.PropTypes.string,
+        open: React.PropTypes.bool,
+        onValueChange: React.PropTypes.func,
+        onCountrySearch: React.PropTypes.func,
+        searchString: React.PropTypes.string,
+        searchTime: React.PropTypes.number,
+        onToggle: React.PropTypes.func,
         countryCode: React.PropTypes.oneOfType([
             React.PropTypes.string,
             React.PropTypes.number
-        ]),
-        onValueChange: React.PropTypes.func,
-        open: React.PropTypes.bool,
-        onToggle: React.PropTypes.func,
-        searchString: React.PropTypes.string,
-        searchTime: React.PropTypes.number,
-        onCountrySearch: React.PropTypes.func
+        ])
+    },
+
+    /**
+    * Handles click on a country in the list
+    * @method I18nCountrySelector#_handleCountryClick
+    * @param {Object} country - the clicked country item
+    * @private
+    */
+    _handleCountryClick: function (country) {
+        this.props.onValueChange(country ? country.isoNum : "" );
+        this.props.onToggle();
     },
 
     getDefaultProps: function () {
         return {
             "data-id": "i18n-country-selector",
             className: "",
-            countryCode: "",
-            onValueChange: _.noop,
             open: false,
+            onValueChange: _.noop,
             onToggle: _.noop,
+            countryCode: "",
+            onCountrySearch: _.noop,
             searchString: "",
-            searchTime: 0,
-            onCountrySearch: _.noop
+            searchTime: 0
         };
-    },
-
-    /**
-    * @method _handleCountryClick
-    * @memberof I18nCountrySelectorStateless
-    * @private
-    * @ignore
-    *
-    * @desc Handles click on a country in the list.
-    *
-    * @param {object} country
-    *     The clicked country item.
-    */
-    _handleCountryClick: function (country) {
-        this.props.onValueChange(country ? country.isoNum : "" );
-        this.props.onToggle();
     },
 
     render: function () {
@@ -147,20 +115,14 @@ var I18nCountrySelectorStateful = React.createClass({
         });
     },
 
-     /**
-     * @method _handleCountrySearch
-     * @memberof I18nCountrySelectorStateful
+    /**
+     * Handles search of country in list
+     * @method I18nCountrySelectorStateful#_onCountrySearch
+     * @param {String} search - Search string for country
+     * @param {Number} time - Search time for country
      * @private
-     * @ignore
-     *
-     * @desc Handles search of country in list.
-     *
-     * @param {string} search
-     *     Search string for country.
-     * @param {number} time
-     *     Search time for country.
      */
-    _handleCountrySearch: function (search, time) {
+    _onCountrySearch: function (search, time) {
         this.setState({
             searchString: search,
             searchTime: time
@@ -169,7 +131,7 @@ var I18nCountrySelectorStateful = React.createClass({
 
     getInitialState: function () {
         return {
-            open: this.props.open || false,
+            open: false,
             searchString: "",
             searchTime: 0
         };
@@ -180,7 +142,7 @@ var I18nCountrySelectorStateful = React.createClass({
             <I18nCountrySelectorStateless ref="I18nCountrySelectorStateless" {...this.props}
                 onToggle={this._handleToggle}
                 open={this.state.open}
-                onCountrySearch={this._handleCountrySearch}
+                onCountrySearch={this._onCountrySearch}
                 searchString={this.state.searchString}
                 searchTime={this.state.searchTime}
             />

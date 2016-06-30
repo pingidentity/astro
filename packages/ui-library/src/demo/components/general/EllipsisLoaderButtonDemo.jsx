@@ -26,17 +26,17 @@ var EllipsisLoaderDemo = React.createClass({
         return (
             <div>
                 <EllipsisLoaderButton
-                    data-id="demo-ellipsis-loader-button"
+                    id="demo-ellipsis-loader-button"
                     loading={this.state.loading1}
                     text="My Ellipsis Button Test Button"
-                    onClick={this._toggleLoadingButton1}
+                    onButtonClick={this._toggleLoadingButton1}
                     className="primary"
                 />
                 <EllipsisLoaderButton
-                    data-id="demo-ellipsis-loader-button"
+                    id="demo-ellipsis-loader-button"
                     loading={this.state.loading2}
                     text="My Ellipsis Button Test Button"
-                    onClick={this._toggleLoadingButton2}
+                    onButtonClick={this._toggleLoadingButton2}
                 />
             </div>
         );

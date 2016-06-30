@@ -21,12 +21,12 @@ var PaginationDemo = React.createClass({
         };
     },
 
-    _changeCallback: function (pagingDetails) {
+    _changeCallback: function (first, last, page) {
         this.setState({
-            display: this.state.items.slice(pagingDetails.first,pagingDetails.last),
-            first: pagingDetails.first,
-            last: pagingDetails.last,
-            currentPage: pagingDetails.page
+            display: this.state.items.slice(first,last),
+            first: first,
+            last: last,
+            currentPage: page
         });
     },
 
@@ -45,7 +45,7 @@ var PaginationDemo = React.createClass({
                     perPage = {this.state.perPage}
                     page = {this.state.currentPage}
                     total = {this.state.items.length}
-                    onValueChange = {this._changeCallback}>
+                    onChange = {this._changeCallback}>
                     {this.state.display}
                 </Pagination>
             </div>

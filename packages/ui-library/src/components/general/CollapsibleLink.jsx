@@ -1,47 +1,35 @@
 "use strict";
-
 var React = require("react"),
     classnames = require("classnames");
 
 /**
- * @callback CollapsibleLink~onToggle
- * @param {boolean} expanded
- *     Current expanded/collapsed state
+ * @callback CollapsibleLink~callback
+ * @param {bool} expanded - current expanded/collapsed state
  **/
+
 
 /**
  * @class CollapsibleLink
- * @desc Simple link which expand/collapse on click. Link contains two states: expand and collapse.
- * Default state of link is collapse.
+ * @desc Simple link which expand/collapse on click. Link contains two states: expand and collapse. Default state of link is collapse.
  *
- * @param {string} [data-id="collapsible-link"]
- *     To define the base "data-id" value for top-level HTML container.
- * @param {string} [className]
- *     CSS classes to set on the top-level HTML container.
- *
- * @param {string} [title]
- *     Text of link.
- * @param {string} [toggledTitle]
- *     Text of link when state change. When toggledTitle is specified, title becomes title of link if link is
- *     collapsed and toggledTitle becomes title of link if link is expanded.
- *
- * @param {CollapsibleLink.arrowPositions} [arrowPosition=CollapsibleLink.arrowPositions.RIGHT]
- *     Enum to specify where the arrow is positioned relative to the the title.
- *
- * @param {boolean} [expanded=false]
- *     Indicate whether link is in expanded state or collapsed state. Default is in collapsed state.
- *
- * @param {CollapsibleLink~onToggle} [onToggle]
- *     Callback to be executed when toggle state of link is changed.
+ * @param {string} [data-id="collapsible-link"] - used as data-id on top HTML element.
+ * @param {string} [title] - Text of link.
+ * @param {string} [toggledTitle] - Text of link when state change. When toggledTitle is specified, title becomes title of link if link is
+ * collapsed and toggledTitle becomes title of link if link is expanded.
+ * @param {string} [className] - class names for top level HTML element.
+ * @param {CollapsibleLink.arrowPositions} [arrowPosition] - enum to specify where the arrow is positioned
+ *  relative to the the title (default = CollapsibleLink.arrowPositions.RIGHT).
+ * @param {bool} [expanded=false] - Indicate whether link is in expanded state or collapsed state. Default is in collapsed state (expanded = false)
+ * @param {CollapsibleLink~callback} [onToggle] - callback to be executed when toggle state of link is changed.
  *
  * @example
- *     <CollapsibleLink
- *           data-id="my-link"
- *           title="Text when link is collapsed"
- *           toggledTitle="Text when link is expanded"
- *           onToggle={this._toggle}
- *           expanded={this.state.isOpen}>
- *     </CollapsibleLink>
+ *            <CollapsibleLink
+                    data-id="my-link"
+ *                  title="Text when link is collapsed"
+ *                  toggledTitle="Text when link is expanded"
+ *                  onToggle={this._toggle}
+ *                  expanded={this.state.isOpen}>
+ *            </CollapsibleLink>
  **/
 
 var CollapsibleLink = React.createClass({
@@ -49,9 +37,9 @@ var CollapsibleLink = React.createClass({
     propTypes: {
         "data-id": React.PropTypes.string,
         className: React.PropTypes.string,
+        arrowPosition: React.PropTypes.oneOf(["left", "right"]),
         title: React.PropTypes.string,
         toggledTitle: React.PropTypes.string,
-        arrowPosition: React.PropTypes.oneOf(["left", "right"]),
         expanded: React.PropTypes.bool,
         onToggle: React.PropTypes.func
 
@@ -65,7 +53,7 @@ var CollapsibleLink = React.createClass({
         };
     },
 
-    _handleToggle: function () {
+    _onToggle: function () {
         if (this.props.onToggle) {
             // do callback in case it has passed callback function.
             this.props.onToggle();
@@ -84,7 +72,7 @@ var CollapsibleLink = React.createClass({
         }
         return (
             <div data-id={this.props["data-id"]} className={className}
-                onClick={this._handleToggle} >
+                onClick={this._onToggle} >
                 {title}
             </div>
         );

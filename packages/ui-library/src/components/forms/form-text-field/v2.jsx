@@ -8,153 +8,44 @@ var React = require("react"),
     _ = require("underscore");
 
 /**
-/**
-* @callback FormTextField~onChange
-*
-* @param {object} e
-*     The ReactJS synthetic event object.
-*
-
-/**
-* @callback FormTextField~onValueChange
-*
-* @param {string} value
-*     The current text field value.
-*/
-
-/**
-* @callback FormTextField~onBlur
-*
-* @param {object} e
-*     The ReactJS synthetic event object.
-*/
-
-/**
-* @callback FormTextField~onFocus
-*
-* @param {object} e
-*     The ReactJS synthetic event object.
-*/
-
-/**
-* @callback FormTextField~onKeyDown
-*
-* @param {object} e
-*     The ReactJS synthetic event object.
-*/
-
-/**
-* @callback FormTextField~onKeyPress
-*
-* @param {object} e
-*     The ReactJS synthetic event object.
-*/
-
-/**
-* @callback FormTextField~onMouseDown
-*
-* @param {object} e
-*     The ReactJS synthetic event object.
-*/
-
-/**
-* @callback FormTextField~onSave
-*/
-
-/**
-* @callback FormTextField~onUndo
-*/
-
-/**
-* @callback FormTextField~onToggleReveal
-*/
-
-/**
-* @class FormTextField
-* @desc A text field component.
-*
-* @param {string} [data-id="form-text-field"]
-*     To define the base "data-id" value for the top-level HTML container.
-* @param {string} [className]
-*     CSS classes to set on the top-level HTML container.
-* @param {boolean} [controlled=false]
-*     To enable the component to be externally managed. True will relinquish control to the component's owner.
-*     False or not specified will cause the component to manage state internally.
-*
-* @param {string|number} [value]
-*     Current text field value.
-* @param {string} [defaultValue]
-*     The default (initial) value to be shown in the text field.
-* @param {FormTextField~onChange} [onChange]
-*     Callback to be triggered when the field value changes. It will receive the triggering event.
-* @param {FormTextField~onValueChange} [onValueChange]
-*     Callback to be triggered when the field value changes. It will receive the component's value.
-* @param {FormTextField~onBlur} [onBlur]
-*     Callback to be triggered when the field blurs (loses focus).
-* @param {FormTextField~onFocus} [onFocus]
-*     Callback to be triggered when the field gains focus.
-* @param {FormTextField~onKeyDown} [onKeyDown]
-*     Callback to be triggered when a key is pressed down in the field.
-* @param {FormTextField~onKeyPress} [onKeyPress]
-*     Callback to be triggered when a key is pressed in the field.
-* @param {FormTextField~onMouseDown} [onMouseDown]
-*     Callback to be triggered when the field registers a mouse down.
-*
-* @param {string} [labelHelpText]
-*     The text to display for the help tooltip.
-* @param {string} [labelText]
-*     The text to show as the field's label.
-*
-* @param {string} [placeholder]
-*     Placeholder text for the input field.
-* @param {string} [inputClassName]
-*     CSS classes to set on the input element.
-* @param {number} [maxLength]
-*     Maximum length supported by the text field.
-*
-* @param {string} [errorMessage]
-*     The message to display if defined when external validation failed.
-* @param {string} [errorClassName]
-*     CSS classes to set on the FormTextFieldError component.
-* @param {boolean} [disabled=false]
-*     If true, the text field will be disabled.
-* @param {boolean} [required=false]
-*     If true, the user must select a value for this field.
-*
-* @param {boolean} [autoComplete=false]
-*     Whether or not the field will support autocomplete.
-* @param {boolean} [autoFocus=false]
-*     Whether or not to auto-focus the element.
-* @param {boolean} [maskValue=false]
-*     If true, the value shown in the input field will be masked with '*****'. (i.e: passwords).
-* @param {boolean} [readOnly=false]
-*     Whether or not the input field is readonly.
-*
-* @param {boolean} [showSave=false]
-*     Whether or not to display a save option.
-* @param {FormTextField~onSave} [onSave]
-*     Callback to be triggered when the 'save' icon is clicked.
-*
-* @param {boolean} [showUndo=false]
-*     Whether or not to display an undo option.
-* @param {FormTextField~onUndo} [onUndo]
-*     Callback to be triggred when the 'undo' icon is clicked.
-*
-* @param {boolean} [reveal=false]
-*     If true, will remove value masking.
-* @param {boolean} [showReveal=false]
-*    Whether or not to display a reveal option to remove value masking.
-* @param {FormTextField~onToggleReveal}
-*    Callack to be triggered when the 'reveal' button is clicked.
-*
-* @example <FormTextField
-*              data-id="my-data-id"
-*              labelText={element.viewName}
-*              required={element.required}
-*              defaultValue="default value"
-*              onValueChange={myFunction} />
-*/
-
+ * @class FormTextField
+ * @desc A text field component.
+ *
+ * @param {string}   [data-id]            Name used by the parent to get the value/text entered in this component (default 'formTextField')
+ * @param {boolean}  [required]           Whether the field is required or not (default false)
+ * @param {string}   [value]              Current text field value. this is used when state is managed outside of component,
+ *                                        Must be used with onValueChange/onChange handler to get updates
+ * @param {string}   [labelText]          The text to show as the field's label
+ * @param {string}   [placeholder]        Placeholder text for the input field
+ * @param {function} [onFocus]            A callback that will be triggered when the field gains focus
+ * @param {function} [onBlur]             A callback that will be triggered when the field blurs (loses focus)
+ * @param {function} [onKeyPress]         A callback that will be triggered when a key is pressed in the field;
+ * @param {function} [onKeyDown]          A callback that will be triggered when a key is pressed down in the field;
+ * @param {function} [onValueChange]      A callback that will be triggered when the field value changes but will receive the component's value
+ * @param {function} [onChange]           A callback that will be triggered when the field value changes but will receive the triggering event
+ * @param {function} [onSave]             A callback to be triggred when 'save' icon is clicked
+ * @param {function} [onUndo]             A callback to be triggred when 'undo' icon is clicked
+ *
+ * @param {number}   [maxLength]          Maximum length supported by the field
+ * @param {string}   [defaultValue]       The default (initial) value to be shown in the field, when component managing state itself
+ * @param {string}   [inputClassName]     CSS classes to add to the input element
+ * @param {string}   [labelClassName]     CSS classes to add to the label element
+ * @param {string}   [className]          CSS classes to add to the parent Label element
+ * @param {string}   [errorMessage]       Error message to render if validation is being done externally
+ * @param {boolean}  [autoFocus]          Whether or not to auto-focus the element
+ * @param {boolean}  [autoComplete]       Whether or not the field will support autoComplete (default false)
+ * @param {boolean}  [maskValue]          If true, the value shown in the input field will be masked with '*****' i.e: passwords (default false)
+ * @param {boolean}  [readOnly=false]     Make the input field readonly.
+ * @param {boolean}  [disabled]           A property that disables the component
+ * @param {object}  [controls]           Accepts a React object for extra controls. Used with FormIntegerField.
+ *
+ * @example <FormTextField
+ *              data-id="my-data-id"
+ *              labelText={element.viewName}
+ *              required={element.required}
+ *              defaultValue="default value"
+ *              onValueChange={myFunction} />
+ */
 module.exports = React.createClass({
     propTypes: {
         controlled: React.PropTypes.bool
@@ -176,37 +67,36 @@ module.exports = React.createClass({
 
 var Stateless = React.createClass({
     propTypes: {
-        "data-id": React.PropTypes.string,
-        className: React.PropTypes.string,
-        value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
-        defaultValue: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+        onFocus: React.PropTypes.func,
+        onBlur: React.PropTypes.func,
+        onKeyPress: React.PropTypes.func,
+        onKeyDown: React.PropTypes.func,
         onChange: React.PropTypes.func,
         onValueChange: React.PropTypes.func,
-        onBlur: React.PropTypes.func,
-        onFocus: React.PropTypes.func,
-        onKeyDown: React.PropTypes.func,
-        onKeyPress: React.PropTypes.func,
-        labelClassName: React.PropTypes.string,
+        onUndo: React.PropTypes.func,
+        onSave: React.PropTypes.func,
+        onToggleReveal: React.PropTypes.func,
+        "data-id": React.PropTypes.string,
+        errorClassName: React.PropTypes.string,
+        errorMessage: React.PropTypes.string,
+        inputClassName: React.PropTypes.string,
+        className: React.PropTypes.string,
         labelHelpText: React.PropTypes.string,
         labelText: React.PropTypes.string,
-        placeholder: React.PropTypes.string,
-        inputClassName: React.PropTypes.string,
-        maxLength: React.PropTypes.number,
-        errorMessage: React.PropTypes.string,
-        errorClassName: React.PropTypes.string,
         disabled: React.PropTypes.bool,
         required: React.PropTypes.bool,
-        autoComplete: React.PropTypes.bool,
-        autoFocus: React.PropTypes.bool,
         maskValue: React.PropTypes.bool,
-        readOnly: React.PropTypes.bool,
+        maxLength: React.PropTypes.number,
+        placeholder: React.PropTypes.string,
         showSave: React.PropTypes.bool,
-        onSave: React.PropTypes.func,
         showUndo: React.PropTypes.bool,
-        onUndo: React.PropTypes.func,
-        reveal: React.PropTypes.bool,
         showReveal: React.PropTypes.bool,
-        onToggleReveal: React.PropTypes.func
+        autoComplete: React.PropTypes.bool,
+        value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+        autoFocus: React.PropTypes.bool,
+        readOnly: React.PropTypes.bool,
+        reveal: React.PropTypes.bool,
+        controls: React.PropTypes.object
     },
 
     /**
@@ -222,29 +112,20 @@ var Stateless = React.createClass({
 
     getDefaultProps: function () {
         return {
-            "data-id": "form-text-field",
+            "data-id": "formTextField",
             defaultValue: "",
-            onChange: _.noop,
-            onValueChange: _.noop,
-            onBlur: _.noop,
+            autoComplete: false,
+            errorClassName: "",
+            //do nothing with the events if no handlers are passed
             onFocus: _.noop,
-            onKeyDown: _.noop,
+            onBlur: _.noop,
             onKeyPress: _.noop,
             onMouseDown: _.noop,
-            errorClassName: "",
-            disabled: false,
-            required: false,
-            autoComplete: false,
-            autoFocus: false,
-            maskValue: false,
-            readOnly: false,
-            showSave: false,
+            onToggleReveal: _.noop,
             onSave: _.noop,
-            showUndo: false,
             onUndo: _.noop,
-            reveal: false,
-            showReveal: false,
-            onToggleReveal: _.noop
+            onValueChange: _.noop,
+            onChange: _.noop
         };
     },
 
@@ -264,8 +145,7 @@ var Stateless = React.createClass({
                 "inline-save": this.props.showSave,
                 "form-error": this.props.errorMessage,
                 actions: this.props.showReveal || this.props.showUndo
-            }),
-            type = this.props._type || (this.props.maskValue && !this.props.reveal ? "password" : "text");
+            });
 
         return (
             <FormLabel className={className}
@@ -286,7 +166,7 @@ var Stateless = React.createClass({
                            ref={id + "-input"}
                            readOnly={this.props.readOnly}
                            data-id={id + "-input"}
-                           type={type}
+                           type={this.props.maskValue && !this.props.reveal ? "password" : "text"}
                            maxLength={this.props.maxLength}
                            value={this.props.value}
                            autoComplete={this.props.autoComplete ? "on" : "off"}
@@ -329,10 +209,8 @@ var Stateful = React.createClass({
     },
 
     render: function () {
-        return (
-            <Stateless ref="stateless" {...this.props}
-                reveal={this.state.reveal}
-                onToggleReveal={this._toggleReveal} />
-        );
+        var props = _.defaults({ ref: "stateless", onToggleReveal: this._toggleReveal }, this.props);
+
+        return React.createElement(Stateless, props);
     }
 });

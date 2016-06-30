@@ -177,7 +177,7 @@ describe("SelectText", function () {
         var callback = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
-            <SelectText data-id="select-text" className="testClass" select={true} onClick={callback}>
+            <SelectText className="testClass" select={true} onClick={callback}>
                 Just some test text
             </SelectText>
         );
@@ -190,80 +190,5 @@ describe("SelectText", function () {
         expect(callback).toBeCalled();
     });
 
-    // TODO To be removed once "dataId" support is discontnued.
-    it("is having deprecated usage warning in console", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <SelectText dataId="select-text" className="testClass" select={true}>
-                Just some test text
-            </SelectText>
-        );
-
-        expect(console.warn.mock.calls[0][0]).toContain(
-            "Deprecated: use data-id instead of dataId. Support for dataId will be removed in next version");
-    });
-
-
-    // TODO To be removed once "dataId" support is discontnued.
-    it("render component with dataId", function () {
-        var component = ReactTestUtils.renderIntoDocument(
-            <SelectText dataId="selectTextWithOldDataId" className="testClass" select={true}>
-                Just some test text
-            </SelectText>
-        );
-
-        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "selectTextWithOldDataId");
-
-        expect(element).toBeDefined();
-    });
-
-    it("render component with data-id", function () {
-        var component = ReactTestUtils.renderIntoDocument(
-            <SelectText data-id="selectTextWithNewDataId" className="testClass" select={true}>
-                Just some test text
-            </SelectText>
-        );
-
-        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "selectTextWithNewDataId");
-
-        expect(element).toBeDefined();
-    });
-
-    it("render component with default data-id", function () {
-        var component = ReactTestUtils.renderIntoDocument(
-            <SelectText className="testClass" select={true}>
-                Just some test text
-            </SelectText>
-        );
-
-        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "select-text");
-
-        expect(element).toBeDefined();
-    });
-
-    // TODO To be removed once "dataId" support is discontnued.
-    it("log warning in console for dataId", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <SelectText dataId="selectTextWithOldDataId" className="testClass" select={true}>
-                Just some test text
-            </SelectText>
-        );
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use data-id instead of dataId. Support for dataId will be removed in next version");
-    });
-
-    // TODO To be removed once "dataId" support is discontnued.
-    it("does not log warning in console without dataId", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <SelectText className="testClass" select={true}>
-                Just some test text
-            </SelectText>
-        );
-
-        expect(console.warn).not.toBeCalled();
-    });
 
 });

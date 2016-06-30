@@ -42,34 +42,17 @@ describe("FormTextField", function () {
 
     CommonTests(getComponent);
 
-    it("renders with default data-id", function () {
-        var component = getComponent();
-
-        var field = TestUtils.findRenderedDOMNodeWithDataId(component, "form-text-field");
-
-        expect(field).toBeTruthy();
-    });
-
-    it("renders with given data-id", function () {
-        var component = getComponent({ "data-id": "myField" });
-
-        var field = TestUtils.findRenderedDOMNodeWithDataId(component, "myField");
-
-        expect(field).toBeTruthy();
-    });
-
-    it("stateless: toggles reveal state", function () {
-        var handleReveal = jest.genMockFunction();
+    it("toggles reveal state", function () {
         var component = getComponent({
-            showReveal: true,
-            controlled: true,
-            onToggleReveal: handleReveal
+            showReveal: true
         });
         var reveal = TestUtils.findRenderedDOMNodeWithDataId(component, "reveal");
 
+        expect(reveal.getAttribute("class")).toContain("icon-view-hidden");
+
         ReactTestUtils.Simulate.click(reveal);
 
-        expect(handleReveal).toBeCalled();
+        expect(reveal.getAttribute("class")).toContain("icon-view");
     });
 
     it("stateless: toggles reveal state", function () {
@@ -108,6 +91,16 @@ describe("FormTextField", function () {
         ReactTestUtils.Simulate.keyDown(input, { keyCode: 13 });
 
         expect(handleKeyDown.mock.calls[0][0].keyCode).toBe(13);
+    });
+
+    it("warns if id prop is used", function () {
+        var warn = global.console.warn;
+        console.warn = jest.genMockFunction();
+
+        getComponent({ id: "my-id" });
+        expect(console.warn).toBeCalled();
+
+        console.warn = warn;
     });
 
     it("passes back value to onValueChange", function () {
@@ -200,7 +193,7 @@ describe("FormTextField", function () {
         var component = getComponent();
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
 
-        expect(input.getAttribute("data-id")).toEqual("form-text-field-input");
+        expect(input.getAttribute("data-id")).toEqual("formTextField-input");
     });
 
     it("it is disabled and renders help tooltip", function () {

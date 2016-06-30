@@ -1,5 +1,6 @@
 var React = require("react"),
-    FormTextField = require("./../../../components/forms/form-text-field");
+    FormTextField = require("./../../../components/forms/form-text-field").v1,
+    FormTextFieldV2 = require("./../../../components/forms/form-text-field").v2;
 
 /**
  * A demo for FormTextField.
@@ -8,56 +9,41 @@ var FormTextFieldDemo = React.createClass({
 
     getInitialState: function () {
         return {
-            onValueChangeFieldValue: "",
+            onChangeFieldValue: "",
             onBlurFieldValue: "",
-            onChangeValidationErrorMessage: "",
-            onBlurValidationErrorMessage: "",
-            saved: false,
-            undone: false
+            saved: false
         };
     },
 
-    _handleValueChange: function (value) {
+    _changeCallback: function (event) {
         this.setState({
-            onValueChangeFieldValue: value
+            onChangeFieldValue: event.target.value
         });
     },
 
-    _handleBlur: function (e) {
+    _blurCallback: function (event) {
         this.setState({
-            onBlurFieldValue: e.target.value
+            onBlurFieldValue: event.target.value
         });
     },
 
-    _handleUndo: function () {
+    _undo: function () {
         this.setState({ undone: true });
         window.setTimeout(this.setState.bind(this, { undone: false }), 5000);
     },
 
-    _handleSave: function () {
+    _save: function () {
         this.setState({ saved: true });
         window.setTimeout(this.setState.bind(this, { saved: false }), 5000);
     },
-
-    _handleChangeErrorValidation: function (e) {
-        this.setState({
-            onChangeValidationErrorMessage: this._validateInput(e.target.value)
-        });
-    },
-
-    _handleBlurErrorValidation: function (e) {
-        this.setState({
-            onBlurValidationErrorMessage: this._validateInput(e.target.value)
-        });
-    },
     
-    _validateInput: function (value) {
+    _validateInput: function (e) {
         var errorMessage = "";
 
-        if (value.length === 0) {
+        if (e.length === 0) {
             errorMessage = "";
         } else {
-            if (value.length < 5) {
+            if (e.length < 5) {
                 errorMessage = "Please enter at least 5 chars";
             }
         }
@@ -76,23 +62,23 @@ var FormTextFieldDemo = React.createClass({
                     />
                 </div>
                 <div className="input-row">
-                    <FormTextField
+                    <FormTextFieldV2
                         labelText="Default value and undo"
                         showUndo={true}
-                        onUndo={this._handleUndo}
+                        onUndo={this._undo}
                         defaultValue={originalValueForUndo} />
                     <div>{this.state.undone ? "undone!" : null}</div>
                 </div>
                 <div className="input-row">
-                    <FormTextField
+                    <FormTextFieldV2
                         labelText="Required and save"
                         required={true}
                         showSave={true}
-                        onSave={this._handleSave} />
+                        onSave={this._save} />
                     <div>{this.state.saved ? "saved!" : null}</div>
                 </div>
                 <div className="input-row">
-                    <FormTextField
+                    <FormTextFieldV2
                         labelText="Reveal"
                         maskValue={true}
                         showReveal={true} />
@@ -100,14 +86,14 @@ var FormTextFieldDemo = React.createClass({
                 <div className="input-row">
                     <FormTextField
                         labelText="onChange callback and maxLength (10 chars)"
-                        onValueChange={this._handleValueChange}
+                        onChange={this._changeCallback}
                         maxLength={10} />
-                    <span>{this.state.onValueChangeFieldValue}</span>
+                    <span>{this.state.onChangeFieldValue}</span>
                 </div>
                 <div className="input-row">
                     <FormTextField
                         labelText="onBlur callback and placeholder"
-                        onBlur={this._handleBlur}
+                        onBlur={this._blurCallback}
                         placeholder="placeholder" />
                     <span>{this.state.onBlurFieldValue}</span>
                 </div>
@@ -131,16 +117,16 @@ var FormTextFieldDemo = React.createClass({
                     <FormTextField
                         labelText="Validate onChange"
                         labelHelpText="Valid when have 5 or more chars"
-                        errorMessage={this.state.onChangeValidationErrorMessage}
-                        onChange={this._handleChangeErrorValidation}
+                        validatorTrigger="onChange"
+                        validator={this._validateInput}
                     />
                 </div>
                 <div className="input-row">
                     <FormTextField
                         labelText="Validate onBlur"
                         labelHelpText="Valid when have 5 or more chars"
-                        errorMessage={this.state.onBlurValidationErrorMessage}
-                        onBlur={this._handleBlurErrorValidation}
+                        validatorTrigger="onBlur"
+                        validator={this._validateInput}
                     />
                 </div>
                 <div className="input-row">

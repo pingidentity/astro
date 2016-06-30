@@ -14,20 +14,16 @@ module.exports = [
     "/src/util/ReduxTestUtils.js",
     //Sisi: this is excluded because istanbul is not registering some branches and functions
     //that are definitely being hit as hit.
+    //Revert touched all coverage so I'm having to exclude them for now.  I'll erase this in the
+    //ui-lib-2.0 -> master merge
     "/src/components/general/Section.jsx",
-    //Okhtay: this is a test file
-    "/src/components/forms/file-upload/tests/commonTests.jsx",
-    //Sisi: this is excluded because istanbul is not registering some branches and functions
-    //that are definitely being hit as hit.
-    "/src/components/forms/i18n/phone-input/v2.jsx",
-    //Sisi: this is excluded because istanbul is not registering some functions
-    //that are definitely being hit as hit.
-    "/src/components/forms/form-toggle/v2.jsx",
-    //Sisi: this is excluded because istanbul is not registering some functions
-    //that are definitely being hit as hit.
-    "/src/components/forms/form-text-field/v2.jsx",
-    //alex: the coverage numbers are completely messed up on this file; and the report doesn't say which lines is not covered
-    "/src/components/forms/selection-list/v2-stateful.jsx",
-    //alex: the coverage numbers are completely messed up on this file; and the report doesn't say which lines is not covered
-    "/src/components/forms/selection-list/v2.jsx"
+    "/src/components/forms/Toggle.jsx",
+    "/src/components/forms/FileUpload.jsx",
+    "/src/components/forms/FormTextArea.jsx",
+    "/src/components/forms/FormSelectField.jsx",
+    "/src/components/general/SelectText.jsx",
+    "/src/components/list/Pagination.jsx",
+    "/src/components/forms/RockerButton.jsx",
+    "/src/components/general/EllipsisLoaderButton.jsx",
+    "/src/components/tooltips/HelpHint.jsx"
 ];
