@@ -100,7 +100,7 @@ var Modal = React.createClass({
         };
 
         return (
-            <div data-id={this.props.id} key="modal" className={classnames("modal", modalClasses)}>
+            <div data-id={this.props.id} ref="container" key="modal" className={classnames("modal", modalClasses)}>
                 <div className="modal-bg">{/* applies overlay to content area */}</div>
                 <div className="modal-content">
                     {this.props.showHeader &&

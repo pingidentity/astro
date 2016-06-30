@@ -6,6 +6,10 @@ var tempRoot = wdioConfig.screenshotOpts.tempRoot;
 var baseLineRoot = wdioConfig.screenshotOpts.baseLineRoot;
 var diffRoot = wdioConfig.screenshotOpts.diffRoot;
 var globalEqualRatio = wdioConfig.screenshotOpts.globalEqualRatio;
+var useScreenshotTool = wdioConfig.screenshotOpts.useScreenshotTool;
+var activeBrowsers = wdioConfig.screenshotOpts.browsers;
+var browserName = wdioConfig.capabilities[0].browserName;
+var isScreenshotActive= (useScreenshotTool && activeBrowsers.indexOf(browserName) > -1)? true : false;
 
 var ScreenshotUtils = {
     /**
@@ -22,6 +26,8 @@ var ScreenshotUtils = {
             fs.mkdirSync(diffRoot);
         }
     },
+
+
 
     getBaseLineScreenshotPath: function (fileName) {
         return baseLineRoot + fileName + "-BASELINE"+ ".png";
@@ -40,9 +46,11 @@ var ScreenshotUtils = {
      * @param {string} fileName: name of screenshot file.
      */
     takeScreenshotAndSaveToCurrentPath: function (fileName) {
-        this.initializeScreenshotDir();
-        var currentPath = this.getCurrentScreenshotPath(fileName);
-        this.takeScreenshotAndSave(currentPath);
+        if (isScreenshotActive) {
+            this.initializeScreenshotDir();
+            var currentPath = this.getCurrentScreenshotPath(fileName);
+            this.takeScreenshotAndSave(currentPath);
+        }
     },
 
     /**
@@ -50,9 +58,11 @@ var ScreenshotUtils = {
      * @param {string} fileName: name of screenshot file.
      */
     takeScreenshotAndSaveToBaselinePath: function (fileName) {
-        this.initializeScreenshotDir();
-        var baselinePath = this.getBaseLineScreenshotPath(fileName);
-        this.takeScreenshotAndSave(baselinePath);
+        if (isScreenshotActive) {
+            this.initializeScreenshotDir();
+            var baselinePath = this.getBaseLineScreenshotPath(fileName);
+            this.takeScreenshotAndSave(baselinePath);
+        }
     },
 
     takeScreenshotAndSave: function (path) {
@@ -64,36 +74,39 @@ var ScreenshotUtils = {
      * @param {string} fileName: name of screenshot file.
      * @param {number} equalRatio By default it will be set to 0.
      * - This is an optional parameter to increase or decrease the accuracy
-     * - Higher value is more accuracy
+     * - Higher value is less accuracy
      * @returns {bool} true if they are matched and false if they are difference.
      */
     compareScreenshotWithBaseline: function (fileName, equalRatio) {
-        this.initializeScreenshotDir();
-        var baselinePath = this.getBaseLineScreenshotPath(fileName);
         var result = false;
+        if (isScreenshotActive) {
+            this.initializeScreenshotDir();
+            var baselinePath = this.getBaseLineScreenshotPath(fileName);
+            if (fs.existsSync(baselinePath)) {
+                var currentPath = this.getCurrentScreenshotPath(fileName);
+                var diffPath = this.getDiffScreenshotPath(fileName);
+                var comp = im.compare(baselinePath, currentPath, diffPath, equalRatio? equalRatio: globalEqualRatio);
+                // execute IM command line
+                comp.then(function (data) {
+                    if (data.error && parseInt(data.stderr) > 0) {
+                        result = false;
+                    } else if (!data.error && parseInt(data.stderr) === 0) {
+                        result = true;
+                        // remove diff screenshot if there is nothing difference
+                        fs.unlinkSync(diffPath);
+                    } else {
+                        console.log("Error: "+ data.stderr);
+                        result = false;
+                    }
+                });
 
-        if (fs.existsSync(baselinePath)) {
-            var currentPath = this.getCurrentScreenshotPath(fileName);
-            var diffPath = this.getDiffScreenshotPath(fileName);
-            var comp = im.compare(baselinePath, currentPath, diffPath, equalRatio? equalRatio: globalEqualRatio);
-            // execute IM command line
-            comp.then(function (data) {
-                if (data.error && parseInt(data.stderr) > 0) {
-                    result = false;
-                } else if (!data.error && parseInt(data.stderr) === 0) {
-                    result = true;
-                    // remove diff screenshot if there is nothing difference
-                    fs.unlinkSync(diffPath);
-                } else {
-                    console.log("Error: "+ data.stderr);
-                    result = false;
-                }
-            });
-
-            // wait for IM finishes its job
-            browser.waitUntil(comp, 5000, 100);
+                // wait for IM finishes its job
+                browser.waitUntil(comp, 5000, 100);
+            } else {
+                this.takeScreenshotAndSaveToBaselinePath(fileName);
+                result = true;
+            }
         } else {
-            this.takeScreenshotAndSaveToBaselinePath(fileName);
             result = true;
         }
         return result;
@@ -103,14 +116,18 @@ var ScreenshotUtils = {
      * @param {string} fileName: name of screenshot file.
      * @param {number} equalRatio By default it will be set to 0.
      * - This is an optional parameter to increase or decrease the accuracy
-     * - Higher value is more accuracy
+     * - Higher value is less accuracy
      * @returns {bool} true if they are matched and false if they are difference.
      */
     takeScreenShotAndCompareWithBaseline: function (fileName, equalRatio) {
-        this.initializeScreenshotDir();
-        var currentPath = this.getCurrentScreenshotPath(fileName);
-        this.takeScreenshotAndSave(currentPath);
-        return this.compareScreenshotWithBaseline(fileName, equalRatio);
+        if (isScreenshotActive) {
+            this.initializeScreenshotDir();
+            var currentPath = this.getCurrentScreenshotPath(fileName);
+            this.takeScreenshotAndSave(currentPath);
+            return this.compareScreenshotWithBaseline(fileName, equalRatio);
+        } else {
+            return true;
+        }
     }
 };
 

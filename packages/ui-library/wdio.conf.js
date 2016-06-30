@@ -134,6 +134,8 @@ exports.config = {
     },
 
     screenshotOpts: {
+        useScreenshotTool: true, // turn on or off screenshot validation
+        browsers: ["firefox"], // screenshot tool only run with these browser
         // Screenshot directory should end with "/" character otherwise the code will not work as expected.
         tempRoot: "./build/temp-screenshot/",
         diffRoot: "./build/diff-screenshot/",

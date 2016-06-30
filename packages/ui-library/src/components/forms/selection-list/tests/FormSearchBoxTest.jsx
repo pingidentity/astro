@@ -1,24 +1,23 @@
 window.__DEV__ = true;
 
-jest.dontMock("../../../testutil/TestUtils");
+jest.dontMock("../../../../testutil/TestUtils");
 jest.dontMock("../FormSearchBox.jsx");
-jest.dontMock("../../tooltips/HelpHint.jsx");
-jest.dontMock("../form-text-field/index.js");
-jest.dontMock("../form-text-field/v1.jsx");
-jest.dontMock("../FormTextField.jsx");
+jest.dontMock("../../../tooltips/HelpHint.jsx");
+jest.dontMock("../../form-text-field/index.js");
+jest.dontMock("../../form-text-field/v2.jsx");
 jest.dontMock("underscore");
 
 describe("FormSearchBox", function () {
     var React = require("react");
     var ReactTestUtils = require("react-addons-test-utils");
     var _ = require("underscore");
-    var TestUtils = require("../../../testutil/TestUtils");
+    var TestUtils = require("../../../../testutil/TestUtils");
     var FormSearchBox = require("../FormSearchBox.jsx");
-    var FormTextField = require("../FormTextField.jsx");
+    var FormTextField = require("../../form-text-field/index");
 
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
-            onChange: jest.genMockFunction()
+            onValueChange: jest.genMockFunction()
         });
 
         return ReactTestUtils.renderIntoDocument(<FormSearchBox {...opts} />);
@@ -26,10 +25,10 @@ describe("FormSearchBox", function () {
 
     it("should render the component", function () {
         var component = getComponent({
-            id: "searchBox"
+            "data-id": "mySearchBox"
         });
 
-        var searchBox = TestUtils.findRenderedDOMNodeWithDataId(component, "searchBox");
+        var searchBox = TestUtils.findRenderedDOMNodeWithDataId(component, "mySearchBox");
         expect(ReactTestUtils.isDOMComponent(searchBox)).toBeTruthy();
     });
 
@@ -37,7 +36,7 @@ describe("FormSearchBox", function () {
         var component = getComponent();
 
         var formTextField = TestUtils.findRenderedComponentWithType(component, FormTextField);
-        expect(formTextField.props.placeholder).toEqual("");
+        expect(formTextField.props.placeholder).toBeUndefined();
     });
 
     it("should show placeholder", function () {
@@ -52,7 +51,7 @@ describe("FormSearchBox", function () {
     it("should fire onChange when field changes", function () {
         var handleOnChange = jest.genMockFunction();
         var component = ReactTestUtils.renderIntoDocument(
-            <FormSearchBox onChange={handleOnChange} />
+            <FormSearchBox onValueChange={handleOnChange} />
         );
 
         var formTextField = TestUtils.findRenderedDOMNodeWithDataId(component, "searchBox");
