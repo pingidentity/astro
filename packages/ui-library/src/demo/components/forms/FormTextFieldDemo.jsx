@@ -1,6 +1,8 @@
 var React = require("react"),
-    FormTextField = require("./../../../components/forms/form-text-field").v1,
-    FormTextFieldV2 = require("./../../../components/forms/form-text-field").v2;
+    FormTextField = require("../../../components/forms/form-text-field").v1,
+    FormTextFieldV2 = require("../../../components/forms/form-text-field").v2,
+    FormTimeField = require("../../../components/forms/FormTimeField.jsx"),
+    Utils = require("../../../util/Utils.js");
 
 /**
  * A demo for FormTextField.
@@ -11,7 +13,9 @@ var FormTextFieldDemo = React.createClass({
         return {
             onChangeFieldValue: "",
             onBlurFieldValue: "",
-            saved: false
+            saved: false,
+            timeFieldValue: "00:00:00",
+            dateTimeFieldValue: Utils.formatDate(Date.now())
         };
     },
 
@@ -36,7 +40,19 @@ var FormTextFieldDemo = React.createClass({
         this.setState({ saved: true });
         window.setTimeout(this.setState.bind(this, { saved: false }), 5000);
     },
-    
+
+    _handleTimeValueChange: function (value) {
+        this.setState({
+            timeFieldValue: value
+        });
+    },
+
+    _handleDateTimeValueChange: function (value) {
+        this.setState({
+            dateTimeFieldValue: value
+        });
+    },
+
     _validateInput: function (e) {
         var errorMessage = "";
 
@@ -56,6 +72,22 @@ var FormTextFieldDemo = React.createClass({
 
         return (
             <div>
+                <div className="input-row">
+                    <FormTimeField
+                        defaultValue={this.state.timeFieldValue}
+                        onValueChange={this._handleTimeValueChange}
+                        labelText="Time Field" />
+                </div>
+                <div>{this.state.timeFieldValue}</div>
+                <br />
+                <div className="input-row">
+                    <FormTimeField type={FormTimeField.Types.DATE}
+                        defaultValue={this.state.dateTimeFieldValue}
+                        onValueChange={this._handleDateTimeValueChange}
+                        labelText="Date Time Field" />
+                </div>
+                <div>{this.state.dateTimeFieldValue}</div>
+                <br />
                 <div className="input-row">
                     <FormTextField
                         labelText="Basic"

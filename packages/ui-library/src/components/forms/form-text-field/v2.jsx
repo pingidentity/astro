@@ -145,7 +145,8 @@ var Stateless = React.createClass({
                 "inline-save": this.props.showSave,
                 "form-error": this.props.errorMessage,
                 actions: this.props.showReveal || this.props.showUndo
-            });
+            }),
+            type = this.props._type || (this.props.maskValue && !this.props.reveal ? "password" : "text");
 
         return (
             <FormLabel className={className}
@@ -166,7 +167,7 @@ var Stateless = React.createClass({
                            ref={id + "-input"}
                            readOnly={this.props.readOnly}
                            data-id={id + "-input"}
-                           type={this.props.maskValue && !this.props.reveal ? "password" : "text"}
+                           type={type}
                            maxLength={this.props.maxLength}
                            value={this.props.value}
                            autoComplete={this.props.autoComplete ? "on" : "off"}
