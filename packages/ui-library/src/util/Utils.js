@@ -90,3 +90,23 @@ exports.diffProps = function (current, next, list) {
 
     return false;
 };
+
+/**
+ * @function deprecated
+ * @param {string} feature
+ *    The name of the feature that is now deprecated
+ * @param {string} useInstead
+ *    The name of the feature to use instead
+ */
+exports.deprecateWarn = function (feature, useInstead, log) {
+    var warning = [
+        "Deprecated: use ", useInstead, " instead of ", feature,
+        ". Support for ", feature, " will be removed in next version"
+    ].join("");
+
+    if (log) {
+        log(warning);
+    } else {
+        global.console.warn(warning);
+    }
+};

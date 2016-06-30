@@ -2,10 +2,9 @@
 table {
 	&.grid {
 		display: inline-block;
+		border-collapse: separate;
 
 		th {
-			border-bottom: 1px solid $color-rabbit-fur;
-			padding: 0 20px 10px 0;
 			font-size: 13px;
 			color: $color-elephant;
 			text-transform: uppercase;
@@ -77,10 +76,8 @@ table {
 			}
 		}
 		td {
-			border-bottom: 1px dotted $color-rabbit-fur;
 			font-size: 14px;
 			color: $color-midnight;
-			padding: 9px 20px 8px 0;
 
 			button.inline {
 				&.delete {
@@ -106,6 +103,8 @@ table {
             }
 		}
 		th, td {
+			padding: 9px 20px 8px 0;
+			border-bottom: 1px dotted $color-rabbit-fur;
 			text-align: left;
 			box-sizing: border-box;
 			font-family: $font-pn-regular;
@@ -121,11 +120,30 @@ table {
 			&.right {
 				text-align: right;
 			}
+			&:first-child {
+				padding-left: 2px;
+			}
+			&:last-child {
+				padding-right: 5px;
+			}
 		}
-		&.grid-inline {
+		tr {
+			&.expanded {
+				td, th {
+					border-bottom: none;
+				}
+			}
+			&.expanded-content {
+				td {
+					padding: 15px;
+					@include animation(fade-in 0.1s);
+				}
+			}
+		}
+		thead {
 			th {
-				padding: 9px 20px 8px 0;
-				border-bottom: 1px dotted $color-rabbit-fur;
+				border-bottom: 1px solid $color-rabbit-fur;
+				padding: 0 20px 10px 0;
 			}
 		}
 	}

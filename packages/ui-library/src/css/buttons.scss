@@ -181,7 +181,7 @@ input[type=button], input[type=submit], button, .button {
 		}
 	}
 	&.inline {
-		&.edit, &.plus, &.delete, &.remove, &.prev, &.next  {
+		&.edit, &.plus, &.delete, &.remove, &.minus, &.prev, &.next  {
 			$size: 29px;
 
 			padding: 0;
@@ -206,7 +206,7 @@ input[type=button], input[type=submit], button, .button {
 				font-size: 15px;
 			}
 		}
-		&.remove {
+		&.remove, &.minus {
 			&:before {
 				top: 7px;
 				content: '-';

@@ -3,9 +3,9 @@ module.exports = {
         {
             rowheader: "Row 1",
             firstname: "Chien",
-            midname: { value: "Right-Align", className: "cell-border-test" },
+            midname: { value: "Right-Align" },
             lastname: "Cao",
-            email: { value: "chiencao@pingidentity.com", className: "cell-background-test" },
+            email: { value: "chiencao@pingidentity.com" },
             gender: "male",
             job: "Front-end Developer",
             birthday: "02/02",

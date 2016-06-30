@@ -126,6 +126,7 @@ var GridDemo = React.createClass({
         return (
             <div>
                 <h2>Grid example 1 (Expandable row, Components inside a cell, Stateless)</h2>
+                <br /><br />
                 <Grid {...this.props[this.id]}
                       controlled={true}
                       columnsPerPage={2}
@@ -159,6 +160,7 @@ var GridDemo = React.createClass({
                 <br /><br /><br /><br />
 
                 <h2>Grid example 2 (Simple Statefull Grid)</h2>
+                <br />
                 <Grid {...this.props[this.id2]} columnsPerPage={6} >
                     <Grid.Column field="firstname" width={Grid.ColumnSizes.XS} />
                     <Grid.Column field="lastname" width={Grid.ColumnSizes.XS} />

@@ -65,7 +65,7 @@ describe("I18nPhoneInput", function () {
 
         ReactTestUtils.Simulate.blur(phoneInput, {});
 
-        var error = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text-content");
+        var error = TestUtils.findRenderedDOMNodeWithDataId(component, "phoneInput_phonenumber_errormessage");
 
         expect(error.textContent).toEqual("Please enter a valid phone number.");
     });

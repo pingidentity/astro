@@ -120,7 +120,7 @@ var StatelessGrid = React.createClass({
 
             if (this.props.rowExpandable && rowObject.expanded) {
                 rows.push(
-                    <tr key={"expandedRow-" + index} data-id={"expandedRow-" + index} >
+                    <tr key={"expandedRow-" + index} data-id={"expandedRow-" + index} className="expanded-content" >
                         <td colSpan={expandableRowColSpan} data-id={"expandedCell-" + index} >
                             {React.cloneElement(this.props.expandedRowContentType, rowObject)}
                         </td>
@@ -224,29 +224,10 @@ var StatelessGrid = React.createClass({
         return pageableColumns;
     },
 
-    /*
-     * Checks if Grid has Left Header
-     */
-    _hasLeftHeader: function () {
-        var hasLeftHeader = false;
-        React.Children.forEach(this.props.children, function (column) {
-            if (column.type.displayName === "Column" && column.props.isLeftHeader) {
-                hasLeftHeader = true;
-            }
-        });
-
-        return hasLeftHeader;
-    },
-
     render: function () {
-        var className = classnames(this.props.className, {
-            grid: true,
-            "grid-inline": this._hasLeftHeader()
-        });
-
         return (
             <div data-id={this.props["data-id"]}>
-                <table className={className} >
+                <table className={classnames("grid", this.props.className)} >
                     <thead>
                         <tr data-id="grid-row-header" >
                             {this._getColumnHeaders()}

@@ -164,8 +164,6 @@ $layout-nav-width-offset: 15px;
 				}
 			}
 		}
-
-		@include fadein-keyframes;
 	}
 }
 #nav {
@@ -1050,5 +1048,4 @@ a {
 			@include animation(fade-in $animation-timing);
 		}
 	}
-	@include fadein-keyframes;
 }

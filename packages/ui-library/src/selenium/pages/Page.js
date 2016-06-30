@@ -88,4 +88,40 @@ Page.prototype.showElement = function (elementPath) {
     browser.selectorExecute(elementPath, "arguments[0][0].style.visibility = 'visible'");
 };
 
+/**
+ * @desc scroll element into specific position
+ *
+ * @param {string} elementPath(optional) the xPath
+ * @param {number} offset position(pixel)
+ */
+Page.prototype.scrollElementToTop = function (elementPath, offset) {
+    browser.selectorExecute(elementPath, "arguments[0][0].scrollTop = "+ offset);
+};
+
+/**
+ * @desc scroll element into specific position
+ *
+ * @param {string} elementPath(optional) the xPath
+ * @param {number} offset position(pixel)
+ */
+Page.prototype.scrollElementToLeft = function (elementPath, offset) {
+    browser.selectorExecute(elementPath, "arguments[0][0].scrollLeft = "+ offset);
+};
+
+/**
+ * @desc scroll browser into specific position
+ *
+ * @param {string} [elementPath] the xPath
+ * @param {number} x offsetX
+ * @param {number} y offsetY
+ */
+Page.prototype.scrollPage = function (elementPath, x, y) {
+    if (elementPath) {
+        browser.scroll(elementPath, x, y);
+    } else {
+        browser.scroll(x, y);
+    }
+};
+
+
 module.exports = new Page();

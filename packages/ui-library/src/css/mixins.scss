@@ -117,18 +117,18 @@
     // -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=#{-1*sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)})";
     // filter:  progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=#{-1*sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)});
 }
-@mixin keyframe ($animation_name) {
-    @-webkit-keyframes #{$animation_name} { @content; }
-    @-moz-keyframes #{$animation_name} { @content; }
-    @-o-keyframes #{$animation_name} { @content; }
-    @keyframes #{$animation_name} { @content; }
+@mixin keyframes($animation-name) {
+    @-webkit-keyframes #{$animation-name} { @content; }
+    @-moz-keyframes #{$animation-name} { @content; }
+    @keyframes #{$animation-name} { @content; }
 }
 @mixin fadein-keyframes {
-    @-webkit-keyframes fade-in {
+    @include keyframes("fade-in") {
         0% { opacity: 0; }
         100% { opacity: 1; }
     }
 }
+@include fadein-keyframes; // animation keyframes only need to be declared once and then can be used globally
 
 
 // NUMERIC -----------------------------------------------------------------------------------------
@@ -221,4 +221,9 @@
     -webkit-user-select: $select;
     -ms-user-select: $select;
     user-select: $select;
+}
+@mixin keyframe ($animation-name) {
+    @include keyframes($animation-name) {
+        @content;
+    };
 }

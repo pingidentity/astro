@@ -255,6 +255,21 @@ var StatelessExpandableRow = React.createClass({
         };
     },
 
+    /*
+     * PingAccess guys need the ability to specify a non-hash route to edit rows.  In order to maintain
+     * backwards compatibility, the component will only skip adding a hash to the edit url if the editViewRoute
+     * starts with a '/'.
+     */
+    _getEditViewRoute: function (route) {
+        if (!route) {
+            return null;
+        }
+        if (route[0] === "/") {
+            return route;
+        }
+        return "#/" + route;
+    },
+
     render: function () {
         var showEditIcon = this.props.showEdit && this.props.isEditEnabled,
             showViewIcon = this.props.showEdit && !this.props.isEditEnabled,
@@ -274,18 +289,17 @@ var StatelessExpandableRow = React.createClass({
             editButton;
 
         if (this.props.showEdit) {
-            editButton = this.props.editButton ||
+            editButton = this.props.editButton || (
                 <a data-id="edit-btn" className={editButtonClassname}
-                        href={this.props.editViewRoute ? "#/" + this.props.editViewRoute : null}
-                        onClick={this.props.onEditButtonClick} />;
+                        href={this._getEditViewRoute(this.props.editViewRoute)}
+                        onClick={this.props.onEditButtonClick} />);
         }
 
         if (this.props.showDelete) {
-            deleteButton = this.props.deleteButton ||
+            deleteButton = this.props.deleteButton || (
                 <a data-id={this.props.confirmDelete ? "delete-btn-confirm" : "delete-btn"}
-                    className="delete-btn"
-                    onClick={this.props.onDelete}>
-                </a>;
+                      className="delete-btn"
+                      onClick={this.props.onDelete} />);
         }
 
         return (

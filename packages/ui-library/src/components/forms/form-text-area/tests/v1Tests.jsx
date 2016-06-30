@@ -185,10 +185,10 @@ describe("FormTextArea", function () {
             <FormTextArea errorMessage={errorMessage} />
         );
 
-        var errorDiv = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text");
+        var errorDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "form-text-area_errormessage");
         expect(errorDiv.textContent).toBe(errorMessage);
     });
-    
+
     it("is disabled when it is specified", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormTextArea disabled={true} />

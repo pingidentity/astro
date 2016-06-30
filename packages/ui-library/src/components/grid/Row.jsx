@@ -94,7 +94,7 @@ var Row = React.createClass({
     render: function () {
         var cssClassName = classnames({
             "inline plus": !this.props.rowObject.expanded,
-            "inline remove": this.props.rowObject.expanded
+            "inline minus": this.props.rowObject.expanded
         });
 
         var row = [];
@@ -110,7 +110,8 @@ var Row = React.createClass({
         row.push(<td data-id="paginationCell" key={this.props["data-id"] + "_paginationCell"}></td>);
 
         return (
-            <tr data-id={this.props["data-id"]} key={this.props["data-id"]} >
+            <tr data-id={this.props["data-id"]} key={this.props["data-id"]}
+                    className={classnames({ expanded: this.props.rowObject.expanded })} >
                 {row}
             </tr>
         );

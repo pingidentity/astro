@@ -156,6 +156,7 @@
 	$size: 7px;
 	$spacing: 7px;
 	$color: #ccc;
+	$timing: 1.0s ease-out infinite;
 
 	position: relative;
 	display: inline-block;
@@ -172,39 +173,27 @@
 
 	span {
 		left: 0;
-		@include animation(pulse-1 1.0s ease-out 0.25s infinite);
+		@include animation(pulse-1 $timing);
 	}
 	&:before {
 		left: $size + $spacing;
-		@include animation(pulse-2 1.0s ease-out 0.25s infinite);
+		@include animation(pulse-2 $timing);
 	}
 	&:after {
 	    left: 2*($size + $spacing);
-		@include animation(pulse-3 1.0s ease-out 0.25s infinite);
+		@include animation(pulse-3 $timing);
 	}
 
-	@include keyframe(pulse-1) {
-		from {
-			background-color: transparent;
-		}
-		15% {
-			background-color: transparentize($color, 0.6);
-		}
+	@include keyframes(pulse-1) {
+		0% { background-color: transparent; }
+		50% { background-color: $color; }
 	}
-	@include keyframe(pulse-2) {
-		from {
-			background-color: transparent;
-		}
-		45% {
-			background-color: transparentize($color, 0.4);
-		}
+	@include keyframes(pulse-2) {
+		25% { background-color: transparent; }
+		75% { background-color: $color; }
 	}
-	@include keyframe(pulse-3) {
-		from {
-			background-color: transparent;
-		}
-		80% {
-			background-color: $color;
-		}
+	@include keyframes(pulse-3) {
+		50% { background-color: transparent; }
+		100% { background-color: $color; }
 	}
 }

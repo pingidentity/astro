@@ -296,9 +296,8 @@ var FormIntegerField = React.createClass({
                     referenceName={this.props.referenceName}
                     labelCss={classnames(this.props.labelCss, { "form-integer-container input-integer": true })}
                     onChange={this._handleChange}
-                    onBlur={this._handleBlur} >
-                    {integerControls}
-                </FormTextField>
+                    onBlur={this._handleBlur}
+                    controls={integerControls} />
             </div>
         );
     }

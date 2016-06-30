@@ -443,11 +443,11 @@ label {
             }
             &.icon-view {
                 top: 14px;
-                font-size: 13px;
+                font-size: 11px;
             }
             &.icon-view-hidden {
                 top: 9px;
-                font-size: 24px;
+                font-size: 20px;
             }
         }
 		&.input-toggle {
@@ -1910,6 +1910,20 @@ label {
 				padding: 15px;
 				@include border-radius(0 0 4px 4px);
 			}
+		}
+	}
+}
+
+.input-menu-button {
+	.menu {
+		.options {
+			a {
+				padding-right: 15px;
+				&:last-child {
+					padding-right: 0px;
+				}
+			}
+
 		}
 	}
 }

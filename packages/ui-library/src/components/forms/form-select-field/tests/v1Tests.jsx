@@ -155,7 +155,7 @@ describe("FormSelectField", function () {
                 errorMessage={errorMessage} value={'2'} />
         );
 
-        var errorDiv = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text");
+        var errorDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "form-select-field_errormessage");
         expect(errorDiv.textContent).toBe(errorMessage);
     });
 

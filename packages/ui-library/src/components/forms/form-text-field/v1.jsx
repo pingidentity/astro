@@ -3,8 +3,10 @@
 var React = require("react"),
     ReactDOM = require("react-dom"),
     classnames = require("classnames"),
+    FormError = require("../FormError.jsx"),
     FormFieldConstants = require("../../../constants/FormFieldConstants"),
     HelpHint = require("../../tooltips/HelpHint.jsx"),
+    Utils = require("../../../util/Utils.js"),
     _ = require("underscore");
 
 /**
@@ -65,6 +67,7 @@ var React = require("react"),
  * @param {boolean}  [autoFocus]          whether or not to auto-focus the element
  * @param {boolean}  [forceExternalState] Won't switch to internally managed state value if true. Defaults to false
  * @param {string}   [labelId]            A data-id for convenient access to the label's text
+ * @param {object}  [controls]           Accepts a React object for extra controls. Used with FormIntegerField.
  *
  * @example <FormTextField
  *              referenceName={name}
@@ -105,11 +108,12 @@ var FormTextField = React.createClass({
         value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
         autoFocus: React.PropTypes.bool,
         forceExternalState: React.PropTypes.bool,
-        labelId: React.PropTypes.string
+        labelId: React.PropTypes.string,
+        controls: React.PropTypes.object
     },
 
     componentWillMount: function () {
-        console.warn("** This version of the FormTextField is deprecated and will be removed in the next release");
+        Utils.deprecateWarn("FormTextField v1", "FormTextField v2");
     },
 
     /**
@@ -278,17 +282,14 @@ var FormTextField = React.createClass({
             labelHelp;
 
         var labelCss = classnames(this.props.labelCss, {
-                "input-text": true,
-                required: this.props.isRequired,
-                "form-error": this.state.errorMessage,
-                readonly: readonly,
-                edited: edited,
-                "value-entered": !!value,
-                disabled: this.props.disabled
-            }),
-            errorCss = classnames(this.props.errorCss + " help-tooltip form-error-message", {
-                show: this.state.errorMessage
-            });
+            "input-text": true,
+            required: this.props.isRequired,
+            "form-error": this.state.errorMessage,
+            readonly: readonly,
+            edited: edited,
+            "value-entered": !!value,
+            disabled: this.props.disabled
+        });
 
         if (this.props.className) {
             labelCss += " " + this.props.className;
@@ -344,13 +345,14 @@ var FormTextField = React.createClass({
                         onKeyPress={this._handleFieldKeyPress}
                         disabled={this.props.disabled}
                         autoFocus={this.props.autoFocus}/>
+
                     {undo}
                     {save}
-                    <div className={errorCss} data-id={this.props.referenceName + "_errormessage"}>
-                        <div className="tooltip-text">
-                            <div className="tooltip-text-content">{this.state.errorMessage}</div>
-                        </div>
-                    </div>
+
+                    {this.props.controls}
+
+                    <FormError value={this.state.errorMessage}
+                        data-id={this.props.referenceName + "_errormessage"} />
                 </span>
                 {this.props.children}
             </label>

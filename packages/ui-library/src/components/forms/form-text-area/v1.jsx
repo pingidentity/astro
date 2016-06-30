@@ -4,6 +4,7 @@ var React = require("react"),
     ReactDOM = require("react-dom"),
     css = require("classnames"),
     FormFieldConstants = require("../../../constants/FormFieldConstants"),
+    FormError = require("../FormError.jsx"),
     HelpHint = require("../../tooltips/HelpHint.jsx"),
     _ = require("underscore");
 
@@ -158,17 +159,14 @@ var FormTextArea = React.createClass({
                         (value !== this.props.originalValue);
 
         var labelCss = css(this.props.className, "input-textarea", {
-                required: this.props.isRequired,
-                "form-error": this.props.errorMessage,
-                disabled: this.props.disabled,
-                edited: edited,
-                "value-entered": !!value,
-                readonly: readonly,
-                actions: undoValue
-            }),
-            errorCss = css("help-tooltip form-error-message", {
-                show: this.props.errorMessage
-            });
+            required: this.props.isRequired,
+            "form-error": this.props.errorMessage,
+            disabled: this.props.disabled,
+            edited: edited,
+            "value-entered": !!value,
+            readonly: readonly,
+            actions: undoValue
+        });
 
         var undo;
         if (undoValue) {
@@ -214,11 +212,9 @@ var FormTextArea = React.createClass({
                         autoFocus={this.props.autoFocus}>
                     </textarea>
                     {undo}
-                    <div className={errorCss}>
-                        <div className="tooltip-text" data-id={this.props.referenceName + "_errormessage"}>
-                            <div className="tooltip-text-content">{this.props.errorMessage}</div>
-                        </div>
-                    </div>
+
+                    <FormError value={this.props.errorMessage}
+                        data-id={this.props.referenceName + "_errormessage"} />
                 </span>
                 {this.props.children}
             </label>

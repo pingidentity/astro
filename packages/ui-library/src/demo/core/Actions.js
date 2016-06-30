@@ -1,5 +1,8 @@
 var keyMirror = require("fbjs/lib/keyMirror"),
-    fetch = require("isomorphic-fetch");
+    fetch = require("isomorphic-fetch"),
+    // isomorphic-fetch need a Promise polyfill for older browsers.
+    // Promise use inside of fetch, fetch should go with Promise to avoid page crashing in IE.
+    Promise = require("es6-promise").Promise; // eslint-disable-line
 
 exports.Types = keyMirror({
     SET: null

@@ -103,6 +103,17 @@ describe("ExpandableRow", function () {
         expect(ReactTestUtils.isDOMComponent(getDeleteButton(component))).toBeFalsy();
     });
 
+    it("stateless: passes non-hash path", function () {
+        var component = getComponent({
+            expanded: true,
+            editViewRoute: "/my/route"
+        });
+
+        var editButton = getEditButton(component);
+
+        expect(editButton.getAttribute("href")).toEqual("/my/route");
+    });
+
     it("stateless: renders the specified delete button", function () {
         var component = getComponent({
             expanded: true,

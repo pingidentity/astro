@@ -12,6 +12,7 @@
   "dependencies": {
     "classnames": "1.2.1",
     "exif-js": "2.1.1",
+    "es6-promise": "3.2.1",
     "fbjs": "0.4.0",
     "fix-orientation": "0.0.2",
     "isomorphic-fetch": "2.1.1",
@@ -93,6 +94,7 @@
     "scriptPreprocessor": "<rootDir>/jest/preprocessor.js",
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules",
+      "<rootDir>/src/util/Utils.js",
       "<rootDir>/src/testutil/TestUtils.js",
       "<rootDir>/src/util/ReduxTestUtils.js",
       "<rootDir>/src/util/ReactWithDefaultMethods.js"

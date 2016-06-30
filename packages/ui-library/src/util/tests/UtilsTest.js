@@ -36,6 +36,16 @@ describe("Utils", function () {
         });
     });
 
+    describe("deprecateWarn", function () {
+        it("uses deprecateWarn", function () {
+            var log = jest.genMockFunction();
+            Utils.deprecateWarn("click", "onClick", log);
+
+            expect(log).toBeCalledWith(
+                "Deprecated: use onClick instead of click. Support for click will be removed in next version");
+        });
+    });
+
     describe("triggerFileDownload", function () {
         it("uses the correct function to save the blob file in IE", function () {
             // mocks for the navigator and Blob globals

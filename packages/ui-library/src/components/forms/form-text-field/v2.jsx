@@ -3,44 +3,11 @@
 var React = require("react"),
     classnames = require("classnames"),
     FormLabel = require("../FormLabel.jsx"),
+    FormError = require("../FormError.jsx"),
+    Utils = require("../../../util/Utils.js"),
     _ = require("underscore");
 
 /**
-* @class FormTextFieldError
-* @ignore
-* @private
-*
-* @param {string} [data-id]
-*     To define the base "data-id" value for the error container.
-* @param {string} [className]
-*     CSS classes to set on the error container.
-*
-* @param {string} value
-*     The error message.
-*/
-
-var FormTextFieldError = React.createClass({
-    propTypes: {
-        value: React.PropTypes.string,
-        "data-id": React.PropTypes.string
-    },
-
-    render: function () {
-        if (!this.props.value) {
-            return null;
-        }
-
-        var className = this.props.className + " help-tooltip form-error-message show";
-
-        return (
-            <div className={className} data-id={this.props["data-id"]}>
-                <div className="tooltip-text">
-                    <div className="tooltip-text-content">{this.props.value}</div>
-                </div>
-            </div>);
-    }
-});
-
 /**
 * @callback FormTextField~onChange
 *
@@ -200,10 +167,9 @@ module.exports = React.createClass({
     },
 
     render: function () {
-        return (
-            this.props.controlled
-                ? <Stateless ref="stateless" {...this.props} />
-                : <Stateful ref="stateful" {...this.props} />);
+        return (this.props.controlled
+            ? React.createElement(Stateless, _.defaults({ ref: "stateless" }, this.props)) //eslint-disable-line
+            : React.createElement(Stateful, _.defaults({ ref: "stateful" }, this.props))); //eslint-disable-line
     }
 });
 
@@ -282,21 +248,29 @@ var Stateless = React.createClass({
         };
     },
 
+    componentWillMount: function () {
+        if (this.props.id) {
+            Utils.deprecateWarn("id", "data-id");
+        }
+    },
+
     render: function () {
-        var className = classnames(this.props.className, "input-text", {
-            edited: this.props.isEdited,
-            required: this.props.required,
-            disabled: this.props.disabled,
-            "value-entered": this.props.value,
-            "inline-save": this.props.showSave,
-            "form-error": this.props.errorMessage,
-            actions: this.props.showReveal || this.props.showUndo
-        });
+        var id = this.props.id || this.props["data-id"],
+            className = classnames(this.props.className, "input-text", {
+                edited: this.props.isEdited,
+                required: this.props.required,
+                disabled: this.props.disabled,
+                "value-entered": this.props.value,
+                "inline-save": this.props.showSave,
+                "form-error": this.props.errorMessage,
+                actions: this.props.showReveal || this.props.showUndo
+            }),
+            type = this.props._type || (this.props.maskValue && !this.props.reveal ? "password" : "text");
 
         return (
             <FormLabel className={className}
                        ref="container"
-                       data-id={this.props["data-id"]}
+                       data-id={id}
                        value={this.props.labelText}
                        hint={this.props.labelHelpText}>
                 <span className="input-container">
@@ -309,10 +283,10 @@ var Stateless = React.createClass({
                            onChange={this._handleFieldChange}
                            placeholder={this.props.placeholder}
                            defaultValue={this.props.defaultValue}
-                           ref={this.props["data-id"] + "-input"}
+                           ref={id + "-input"}
                            readOnly={this.props.readOnly}
-                           data-id={this.props["data-id"] + "-input"}
-                           type={this.props.maskValue && !this.props.reveal ? "password" : "text"}
+                           data-id={id + "-input"}
+                           type={type}
                            maxLength={this.props.maxLength}
                            value={this.props.value}
                            autoComplete={this.props.autoComplete ? "on" : "off"}
@@ -322,18 +296,18 @@ var Stateless = React.createClass({
                     { this.props.showReveal &&
                         <a data-id="reveal" onClick={this.props.onToggleReveal}
                             className={classnames("password-show-button", {
-                                "icon-view": !this.props.reveal,
-                                "icon-view-hidden": this.props.reveal
+                                "icon-view-hidden": !this.props.reveal,
+                                "icon-view": this.props.reveal
                             })} />
                     }
                     { this.props.showUndo &&
                         <a data-id="undo" className="undo" onClick={this.props.onUndo}>undo</a>}
                     { this.props.showSave &&
                         <a data-id="save" className="save" onClick={this.props.onSave}>save</a>}
+                    { this.props.controls }
 
-                    <FormTextFieldError value={this.props.errorMessage}
-                        className={this.props.errorClassName}
-                        data-id="error-message" />
+                    <FormError value={this.props.errorMessage}
+                        data-id={this.props["data-id"] + "-error-message"} />
 
                 </span>
             </FormLabel>

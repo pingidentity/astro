@@ -85,11 +85,6 @@
     	padding: 10px;
     	background: $color-sonic;
         @include animation(fade-in 0.3s);
-
-        @-webkit-keyframes fade-in {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
     }
 }
 

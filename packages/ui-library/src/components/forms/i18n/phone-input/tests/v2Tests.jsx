@@ -82,7 +82,7 @@ describe("I18nPhoneInput", function () {
             }
         });
 
-        var error = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text-content");
+        var error = TestUtils.findRenderedDOMNodeWithDataId(component, "phoneInput-phoneNumber-error-message");
 
         expect(error.textContent).toEqual("Please enter a valid phone number.");
     });

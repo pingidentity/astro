@@ -2,6 +2,7 @@
 
 var React = require("react"),
     classnames = require("classnames"),
+    FormError = require("../FormError.jsx"),
     HelpHint = require("../../tooltips/HelpHint.jsx");
 
 /**
@@ -137,10 +138,7 @@ var FormSelectField = React.createClass({
                 disabled: this.props.isDisabled,
                 required: this.props.isRequired,
                 "value-entered": this.state.selectedValue !== this.props.noneOptionValue
-            },
-            errorCss = classnames("help-tooltip form-error-message", {
-                show: this.props.errorMessage
-            });
+            };
 
         if (this.props.className) {
             labelCss[this.props.className] = true;
@@ -185,11 +183,8 @@ var FormSelectField = React.createClass({
                             {optionsHtml}
                         </select>
                     </div>
-                    <div className={errorCss}>
-                        <div className="tooltip-text" data-id={this.props.id + "_errormessage"}>
-                            <div className="tooltip-text-content">{this.props.errorMessage}</div>
-                        </div>
-                    </div>
+                    <FormError value={this.props.errorMessage}
+                        data-id={this.props.id + "_errormessage"} />
                 </div>
             </label>
         );

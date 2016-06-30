@@ -6,12 +6,12 @@ jest.dontMock("../index.js");
 jest.dontMock("../../FormLabel.jsx");
 jest.dontMock("../../../tooltips/HelpHint.jsx");
 
-describe("FormTextinput", function () {
+describe("FormTextField", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-addons-test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
-        FormTextinput = require("../v2.jsx"),
+        FormTextField = require("../v2.jsx"),
         CommonTests = require("./common.jsx"),
         _ = require("underscore");
 
@@ -36,7 +36,7 @@ describe("FormTextinput", function () {
             required: legacyProp(opts, "required", "isRequired", false)
         });
 
-        return ReactTestUtils.renderIntoDocument(<FormTextinput {...opts} />);
+        return ReactTestUtils.renderIntoDocument(<FormTextField {...opts} />);
     }
 
 
@@ -58,18 +58,18 @@ describe("FormTextinput", function () {
         expect(field).toBeTruthy();
     });
 
-    it("toggles reveal state", function () {
+    it("stateless: toggles reveal state", function () {
+        var handleReveal = jest.genMockFunction();
         var component = getComponent({
-            showReveal: true
+            showReveal: true,
+            controlled: true,
+            onToggleReveal: handleReveal
         });
         var reveal = TestUtils.findRenderedDOMNodeWithDataId(component, "reveal");
 
-        expect(reveal.getAttribute("class")).toContain("icon-view");
-        expect(reveal.getAttribute("class")).not.toContain("icon-view-hidden");
-
         ReactTestUtils.Simulate.click(reveal);
 
-        expect(reveal.getAttribute("class")).toContain("icon-view-hidden");
+        expect(handleReveal).toBeCalled();
     });
 
     it("stateless: toggles reveal state", function () {
@@ -195,17 +195,24 @@ describe("FormTextinput", function () {
 
         expect(help.textContent).toBe("some help");
     });
-    
+
+    it("gives a default data-id", function () {
+        var component = getComponent();
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+
+        expect(input.getAttribute("data-id")).toEqual("form-text-field-input");
+    });
+
     it("it is disabled and renders help tooltip", function () {
         var component = getComponent({
             labelText: "some label",
             labelHelpText: "some help",
             disabled: true
         });
-        
+
         var help = TestUtils.findRenderedDOMNodeWithDataId(component, "help-tooltip");
         expect(help.textContent).toBe("some help");
-        
+
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         expect(ReactTestUtils.isDOMComponent(input)).toBeTruthy();
         expect(input.disabled).toBeTruthy();

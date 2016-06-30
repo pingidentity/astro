@@ -34,7 +34,6 @@ describe("FormIntegerField", function () {
         //Expect properly named labelText
         var label = TestUtils.findRenderedDOMNodeWithClass(component,"label-text");
         expect(label.children[0].textContent).toBe("Default Integer Box");
-        
     });
 
     it("test up/down key press and up/down spinner press", function () {
@@ -114,7 +113,7 @@ describe("FormIntegerField", function () {
             <FormIntegerField errorMessage={errorMessage} onChange={callback} />
         );
 
-        var errorDiv = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text");
+        var errorDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "formIntegerField_errormessage");
         expect(errorDiv.textContent).toBe(errorMessage);
     });
 
