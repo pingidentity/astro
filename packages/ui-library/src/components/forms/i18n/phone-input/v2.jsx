@@ -61,6 +61,8 @@ var React = require("re-react"),
 * @param {I18nPhoneInput~onToggle} [onToggle]
 *     Callback to be triggered when open/close state changes. Used only when controlled=true.
 *
+* @param {number} [searchIndex]
+*     The index of the country that was just searched to enable highlighing.
 * @param {string} [searchString]
 *     Value to help with finding an element on keydown.
 * @param {number} [searchTime]
@@ -123,6 +125,7 @@ var I18nPhoneInputStateless = React.createClass({
         onValueChange: React.PropTypes.func,
         open: React.PropTypes.bool.affectsRendering,
         onToggle: React.PropTypes.func,
+        searchIndex: React.PropTypes.number.affectsRendering,
         searchString: React.PropTypes.string.affectsRendering,
         searchTime: React.PropTypes.number.affectsRendering,
         onSearch: React.PropTypes.func,
@@ -144,6 +147,7 @@ var I18nPhoneInputStateless = React.createClass({
             onValueChange: _.noop,
             open: false,
             onToggle: _.noop,
+            searchIndex: -1,
             searchString: "",
             searchTime: 0,
             onSearch: _.noop,
@@ -198,6 +202,7 @@ var I18nPhoneInputStateless = React.createClass({
                         onValueChange={this._handleValueChange}
                         open={this.props.open}
                         onToggle={this.props.onToggle}
+                        searchIndex={this.props.searchIndex}
                         searchString={this.props.searchString}
                         searchTime={this.props.searchTime}
                         onSearch={this.props.onCountrySearch || this.props.onSearch} />
@@ -224,6 +229,7 @@ var I18nPhoneInputStateful = React.createClass({
     _handleToggle: function () {
         this.setState({
             open: !this.state.open,
+            searchIndex: -1,
             searchString: "",
             searchTime: 0
         });
@@ -241,17 +247,21 @@ var I18nPhoneInputStateful = React.createClass({
     *     Search string for country.
     * @param {number} time
     *     Search time for country.
+    * @param {Number} index
+    *     The index of country searched
     */
-    _handleSearch: function (search, time) {
+    _handleSearch: function (search, time, index) {
         this.setState({
             searchString: search,
-            searchTime: time
+            searchTime: time,
+            searchIndex: index
         });
     },
 
     getInitialState: function () {
         return {
             open: this.props.open || false,
+            searchIndex: -1,
             searchString: "",
             searchTime: 0
         };
@@ -262,6 +272,7 @@ var I18nPhoneInputStateful = React.createClass({
             ref: "I18nPhoneInputStateless",
             open: this.state.open,
             onToggle: this._handleToggle,
+            searchIndex: this.state.searchIndex,
             searchString: this.state.searchString,
             searchTime: this.state.searchTime,
             onSearch: this._handleSearch

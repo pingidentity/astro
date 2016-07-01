@@ -4,6 +4,7 @@ var React = require("react"),
     ReactDOM = require("react-dom"),
     _ = require("underscore"),
     classnames = require("classnames"),
+    KeyboardUtils = require("../../../util/KeyboardUtils.js"),
     countryCodes = require("./countryCodes.js");
 
 /**
@@ -72,7 +73,8 @@ var Types = {
 *    State of the open/closed dropdown menu.
 * @param {CountryFlagList~onToggle} [onToggle]
 *    Callback to be triggered when the open/closed state changes.
-*
+* @param {number} [searchIndex]
+*   The index of the country that was just searched. Allows for highlighting and up/down arrow movement.
 * @param {string} [searchString]
 *    Value to help with finding an element on keydown.
 * @param {number} [searchTime]
@@ -130,12 +132,18 @@ var CountryFlagList = React.createClass({
         if (this.props.open) { // only do search when country list expanded
             var search;
             var time = Date.now();
-            if (e.keyCode === 13) { //enter, so pull previously entered search string
-                search = this.props.searchString;
-            } else if (e.keyCode === 27) { // esc, so clear
+            if (e.keyCode === KeyboardUtils.KeyCodes.ENTER) { //enter, so pull previously entered search string
+                if (this.props.searchIndex > -1) {
+                    this.props.onValueChange(countryCodes[this.props.searchIndex]);
+                }
+            } else if (e.keyCode === KeyboardUtils.KeyCodes.ESC) { // esc, so clear
                 search = "";
+            } else if (e.keyCode === KeyboardUtils.KeyCodes.ARROW_UP ||
+                e.keyCode === KeyboardUtils.KeyCodes.ARROW_DOWN) {
+                this._handleUpDownKeys(e);
             } else if (String.fromCharCode(e.keyCode).search(/[^a-zA-Z\s]+/) === -1) { // a-z so valid characters, not i18n friendly right now
-                search = String.fromCharCode(e.keyCode).toLowerCase(); // again, not i18n friendly
+                search = String.fromCharCode(e.keyCode).toLowerCase();
+                 // again, not i18n friendly
                 if (this.props.searchTime !== 0 && (time - this.props.searchTime) < 1000) { // more than a second and reset search
                     search = this.props.searchString + search;
                 }
@@ -148,23 +156,57 @@ var CountryFlagList = React.createClass({
                                 return c;
                             }
                         });
-                    //if country found by search name or enter pressed
-                    if (country) {
-                        if (e.keyCode === 13) {
-                            this.props.onValueChange(country);
-                        } else {
-                            var countryList = ReactDOM.findDOMNode(this.refs["countryList"]);
-                            var countryListItem = ReactDOM.findDOMNode(this.refs[country.iso2], countryList);
-                            countryList.scrollTop = (countryListItem.offsetTop - 50);
-                            ///TODO : it would be very nice to highlight the row of what country you're on here.
-                        }
-                    } else {
+                    var index = countryCodes.indexOf(country);
+                    if (!country) {
                         search = ""; //nonsense entered, not in country list
                     }
                 }
-                this.props.onSearch(search, time);
+                this.props.onSearch(search, time, index);
             }
         }
+    },
+
+    /**
+     * When Up or Down keys are pressed, increment/decrement the searchIndex accordingly
+     * and call this.props.onCountrySearch
+     *
+     *
+     * @method I18nPhoneInput#_handleUpDownKeys
+     * @param {Object} e The event object
+     * @private
+     */
+    _handleUpDownKeys: function (e) {
+        var index = this.props.searchIndex;
+        if (e.keyCode === KeyboardUtils.KeyCodes.ARROW_UP) {
+            index = index - 1;
+        }
+        else {
+            index = index + 1;
+        }
+        //Dont allow index to go below -1 or higher than the lenght of Country Codes
+        index = index < -1 || index >= countryCodes.length ? -1 : index;
+        this.props.onSearch("",0, index);
+        e.preventDefault();
+        e.stopPropagation();
+    },
+
+    /**
+     * Centers the search list on last searched item. Called on componentDidUpdate.
+     *
+     *
+     * @method I18nPhoneInput#_setSearchListPosition
+     * @private
+     */
+    _setSearchListPosition: function () {
+        if (!this.props.open) {
+            return;
+        }
+        var country = countryCodes[this.props.searchIndex],
+            countryList = ReactDOM.findDOMNode(this.refs["countryList"]),
+            countryListTarget= country ? country.iso2 : "no-country",
+            countryListItem = ReactDOM.findDOMNode(this.refs[countryListTarget]);
+
+        countryList.scrollTop = (countryListItem.offsetTop - 50);
     },
 
     /**
@@ -177,6 +219,10 @@ var CountryFlagList = React.createClass({
         return countryCodes.filter(function (country) {
             return country.iso2 === code || country.isoNum === code || country.dialCode === code;
         })[0];
+    },
+
+    componentDidUpdate: function () {
+        this._setSearchListPosition();
     },
 
     componentDidMount: function () {
@@ -202,9 +248,8 @@ var CountryFlagList = React.createClass({
     },
 
     render: function () {
-        var containerClassName = classnames("flag-container", this.props.className, {
-            open: this.props.open
-        });
+        var containerClassName = classnames("flag-container", this.props.className, { open: this.props.open }),
+            noCountryClassName = classnames("no-country", { highlighted: this.props.searchIndex === -1 });
         var selectedCountry = this.props.selectedCountryCode
             ? this._findByCountryCode(this.props.selectedCountryCode)
             : null;
@@ -213,7 +258,6 @@ var CountryFlagList = React.createClass({
         var title = selectedCountry
             ? selectedCountry.name + separator + selectedCountry.isoNum
             : "No country selected";
-
         return (
             <div data-id={this.props["data-id"]} className={containerClassName}>
                 <div data-target="list-select" data-id="selected-flag" tabIndex="0"
@@ -223,15 +267,16 @@ var CountryFlagList = React.createClass({
                     <div data-target="list-select" className="arrow"></div>
                 </div>
                 <ul data-id="country-list" className="country-list" ref="countryList">
-                    <li data-id="no-country" className="no-country"
+                    <li data-id="no-country" ref="no-country" className={noCountryClassName}
                         onClick={this.props.onValueChange.bind(null, null)}>
                         <span className="country-name">{this.props.labelNoCountry}</span>
                     </li>
 
                     {
-                        countryCodes.map(function (item) {
+                        countryCodes.map(function (item, index) {
                             return (
                                 <Flag key={item.iso2} data-id={"country-" + item.iso2} iso2={item.iso2}
+                                      highlighted={index === this.props.searchIndex}
                                       name={item.name}
                                       code={item[this.props.countryCodeDisplayType]}
                                       onClick={this.props.onValueChange.bind(null, item)}
@@ -284,7 +329,8 @@ var Flag = React.createClass({
         countryCodeClassName: React.PropTypes.string,
         name: React.PropTypes.string,
         code: React.PropTypes.string,
-        onClick: React.PropTypes.func
+        onClick: React.PropTypes.func,
+        highlighted: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
@@ -294,12 +340,16 @@ var Flag = React.createClass({
         };
     },
 
+
     render: function () {
         var flagClassName = classnames("iti-flag", this.props.iso2),
-            countryCodeClassName = classnames("country-code", this.props.countryCodeClassName);
+            countryCodeClassName = classnames("country-code", this.props.countryCodeClassName),
+            className = classnames("country", { highlighted: this.props.highlighted });
 
         return (
-            <li key={this.props.key} data-id={this.props["data-id"]} className="country"
+            <li key={this.props.key}
+                data-id={this.props["data-id"]}
+                className={className}
                 onClick={this.props.onClick}>
                 <div className="flag">
                     <div className={flagClassName}></div>

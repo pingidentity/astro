@@ -268,7 +268,7 @@ $flagsImageExtension: "png" !default;
 				color: $greyText;
 			}
 
-			&:hover {
+			&:hover, &.highlighted {
 				background: $hoverColor;
 			}
 		}

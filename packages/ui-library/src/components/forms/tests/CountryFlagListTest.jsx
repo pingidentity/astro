@@ -270,6 +270,7 @@ describe("CountryFlagList", function () {
     it("find and select country by hitting enter", function () {
         var component = getComponent({
             open: true,
+            searchIndex: 1,
             searchString: "can",
             searchTime: 0
         });
@@ -331,4 +332,35 @@ describe("CountryFlagList", function () {
 
         expect(component.props.onClick).toBeCalled();
     });
+
+    it("cycle though options with up/down arrows", function () {
+        var component = getComponent({
+            open: true,
+            searchIndex: 1,
+            searchString: "c",
+            searchTime: (Date.now() - 2000)
+        });
+
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        ReactTestUtils.Simulate.keyDown(flag, { keyCode: 40 }); // down arrow
+        expect(component.props.onSearch).toBeCalled();
+        expect(component.props.onSearch.mock.calls[0][0]).toBe("");
+        expect(component.props.onSearch.mock.calls[0][2]).toBe(2); //added 1 to searchIndex
+        ReactTestUtils.Simulate.keyDown(flag, { keyCode: 38 }); // up arrow
+        expect(component.props.onSearch).toBeCalled();
+        expect(component.props.onSearch.mock.calls[1][2]).toBe(0); //subtract 1 from searchIndex
+    });
+
+    it("calls function for list placement on componentDidUpdate", function () {
+        var component = getComponent({
+            open: true,
+            searchIndex: 1,
+            searchString: "c",
+            searchTime: (Date.now() - 2000)
+        });
+        component._setSearchListPosition = jest.genMockFunction();
+        component.componentDidUpdate();
+        expect(component._setSearchListPosition).toBeCalled();
+    });
+
 });

@@ -140,9 +140,9 @@ var verifyFileCoverage = function (relativePath, coverage, refCoverage) {
     var functionCoverage = getFeatureCoverage(COVERAGE_PROPERTIES.FUNCTIONS, coverage, refCoverage);
     var branchCoverage = getFeatureCoverage(COVERAGE_PROPERTIES.BRANCHES, coverage, refCoverage);
 
-    var lineCoverageResult = lineCoverage.current >= lineCoverage.reference;
-    var functionCoverageResult = functionCoverage.current >= functionCoverage.reference;
-    var branchCoverageResult = branchCoverage.current >= branchCoverage.reference;
+    var lineCoverageResult = lineCoverage.current.toFixed(2) >= lineCoverage.reference.toFixed(2);
+    var functionCoverageResult = functionCoverage.current.toFixed(2) >= functionCoverage.reference.toFixed(2);
+    var branchCoverageResult = branchCoverage.current.toFixed(2) >= branchCoverage.reference.toFixed(2);
 
     var result = lineCoverageResult && functionCoverageResult && branchCoverageResult;
 

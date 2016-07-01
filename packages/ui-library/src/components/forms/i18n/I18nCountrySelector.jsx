@@ -38,17 +38,16 @@ var React = require("react"),
 * @param {boolean} [controlled=false]
 *    To enable the component to be externally managed. True will relinquish control to the component's owner.
 *    False or not specified will cause the component to manage state internally.
-*
 * @param {string} [countryCode]
 *     The country code to be selected by default.
 * @param {I18nCountrySelector~onValueChange}
 *     Callback to be triggered when country code changes.
-*
 * @param {boolean} [open=false]
 *     State of the open/closed dropdown menu.
 * @param {I18nCountrySelector~onToggle} [onToggle]
 *     Callback to be triggered when open/close state changes. Used only when controlled=true.
-*
+* @param {number} [searchIndex]
+*     Index of searched element if found
 * @param {string} [searchString]
 *     Value to help with finding an element on keydown.
 * @param {number} [searchTime]
@@ -91,6 +90,7 @@ var I18nCountrySelectorStateless = React.createClass({
         onValueChange: React.PropTypes.func,
         open: React.PropTypes.bool,
         onToggle: React.PropTypes.func,
+        searchIndex: React.PropTypes.number,
         searchString: React.PropTypes.string,
         searchTime: React.PropTypes.number,
         onSearch: React.PropTypes.func,
@@ -105,6 +105,7 @@ var I18nCountrySelectorStateless = React.createClass({
             onValueChange: _.noop,
             open: false,
             onToggle: _.noop,
+            searchIndex: -1,
             searchString: "",
             searchTime: 0,
             onSearch: _.noop
@@ -135,7 +136,6 @@ var I18nCountrySelectorStateless = React.createClass({
 
     render: function () {
         var classname = classnames("intl-country-selector", this.props.className);
-
         return (
             <div className={classname} data-id={this.props["data-id"]}>
                 <CountryFlagList
@@ -146,6 +146,7 @@ var I18nCountrySelectorStateless = React.createClass({
                     onValueChange={this._handleValueChange}
                     onToggle={this.props.onToggle}
                     onSearch={this.props.onCountrySearch || this.props.onSearch}
+                    searchIndex={this.props.searchIndex}
                     searchString={this.props.searchString}
                     searchTime={this.props.searchTime}
                 />
@@ -159,6 +160,7 @@ var I18nCountrySelectorStateful = React.createClass({
     _handleToggle: function () {
         this.setState({
             open: !this.state.open,
+            searchIndex: -1,
             searchString: "",
             searchTime: 0
         });
@@ -176,17 +178,21 @@ var I18nCountrySelectorStateful = React.createClass({
      *     Search string for country.
      * @param {number} time
      *     Search time for country.
+     * @param {Number} index
+     *     The index of country searched
      */
-    _handleSearch: function (search, time) {
+    _handleSearch: function (search, time, index) {
         this.setState({
             searchString: search,
-            searchTime: time
+            searchTime: time,
+            searchIndex: index
         });
     },
 
     getInitialState: function () {
         return {
             open: this.props.open || false,
+            searchIndex: -1,
             searchString: "",
             searchTime: 0
         };
@@ -198,6 +204,7 @@ var I18nCountrySelectorStateful = React.createClass({
             onToggle: this._handleToggle,
             open: this.state.open,
             onSearch: this._handleSearch,
+            searchIndex: this.state.searchIndex,
             searchString: this.state.searchString,
             searchTime: this.state.searchTime
         }, this.props);
@@ -205,4 +212,3 @@ var I18nCountrySelectorStateful = React.createClass({
         return React.createElement(I18nCountrySelectorStateless, props);
     }
 });
-

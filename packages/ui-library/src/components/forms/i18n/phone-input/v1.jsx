@@ -9,7 +9,6 @@ var React = require("react"),
     classnames = require("classnames");
 
 
-
 /**
 * @callback I18nPhoneInput~onValueChange
 * @ignore
@@ -119,14 +118,17 @@ var I18nPhoneInput = React.createClass({
     *     The search value.
     * @param {Number} time
     *     The search time.
+    * @param {Number} index
+    *     The index of country searched
     */
-    _onCountrySearch: function (search, time) {
+    _onCountrySearch: function (search, time, index) {
         this.setState({
+            searchIndex: index,
             searchString: search,
             searchTime: time
         });
     },
-    
+
     /**
     * @method I18nPhoneInput#_findByCountryCode
     * @private
@@ -167,6 +169,7 @@ var I18nPhoneInput = React.createClass({
     _toggleList: function () {
         this.setState({
             listOpen: !this.state.listOpen,
+            searchIndex: -1,
             searchString: "",
             searchTime: 0
         });
@@ -210,6 +213,7 @@ var I18nPhoneInput = React.createClass({
             phoneNumber: this.props.phoneNumber || "",
             listOpen: false,
             selected: selected,
+            searchIndex: -1,
             searchString: "",
             searchTime: 0
         };
@@ -226,6 +230,7 @@ var I18nPhoneInput = React.createClass({
                     countryCodeDisplayType="dialCode"
                     selectedCountryCode={selected ? selected.iso2 : ""}
                     open={this.state.listOpen}
+                    searchIndex={this.state.searchIndex}
                     searchString={this.state.searchString}
                     searchTime={this.state.searchTime}
                     onSearch={this._onCountrySearch}
