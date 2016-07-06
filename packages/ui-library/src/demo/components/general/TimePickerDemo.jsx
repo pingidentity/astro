@@ -6,8 +6,13 @@ var Calendar = require("./../../../components/calendars/Calendar.jsx");
 var TimePickerDemo = React.createClass({
     _onChange: function (index, value) {
         var newState = {};
-        newState[index] = value;
 
+        // special handling for the calendar value
+        if (index === "c1") {
+            value = parseInt(value);
+        }
+
+        newState[index] = value;
         this.setState(newState);
     },
 
@@ -15,7 +20,8 @@ var TimePickerDemo = React.createClass({
         return {
             a: "--",
             b: "--",
-            c: ""
+            c1: "",
+            c2: ""
         };
     },
 
@@ -51,12 +57,15 @@ var TimePickerDemo = React.createClass({
                     <Calendar
                         format="YYYY-MM-DD"
                         computableFormat="x"
-                        closeOnSelect={true} />
+                        closeOnSelect={true}
+                        onChange={this._onChange.bind(null, "c1")}
+                        date={this.state.c1}
+                    />
                     <TimePicker
-                        onValueChange={this._onChange.bind(null, "c")}
+                        onValueChange={this._onChange.bind(null, "c2")}
                         increments={60}
                         format="24"
-                        value={this.state.c}
+                        value={this.state.c2}
                     />
                 </div>
             </div>
