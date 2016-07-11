@@ -211,6 +211,16 @@ verify: install-node-npm
 	$(call install_reference_coverage_report,$(COVERAGE_VERSION))
 	$(NODE_EXEC) tools/verify_coverage.js
 
+# run integration test
+integration: install-node-npm
+	rm -rf reports
+	node_modules/.bin/selenium-standalone install
+	node_modules/.bin/selenium-standalone start & node_modules/.bin/http-server ./build &
+	$(NPM_EXEC) run pack
+	node_modules/.bin/wdio wdio.conf.js
+	kill $(ps -ef | grep -E 'selenium|http-server' | awk '{print $2}')  &> /dev/null
+
+
 # package the module and name the file to include the current version
 package: install-mvn install-node-npm
 	$(call run_coverage)
