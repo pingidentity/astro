@@ -685,8 +685,11 @@ input[type=file] {
 
 		// IE FIXES
 		option {
+			&:checked {
+				background-color: $color-active-blue-option;
+			}
 			&:hover {
-				background-color: $color-active;
+				background-color: $color-active-blue-option;
 				color: $color-white;
 			}
 		}
