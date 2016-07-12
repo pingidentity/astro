@@ -115,7 +115,6 @@ var FileUploadDemo = React.createClass({
                     open={this.state.tooltipOpen}
                     onToggle={this._toggleTooltip}>
 
-                    <br/><br/>
                     <div className="input-row">
                         <label>
                             <span className="label-text">File Upload</span>
