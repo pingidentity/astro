@@ -135,7 +135,7 @@ var TwoColumnStep = React.createClass({
                                           onValueChange={this._handleCheckboxChange2} />
                         </div>
                         <div className="input-row">
-                            <FileUpload buttonText="Image upload" removeFileLabel="Remove" />
+                            <FileUpload buttonText="Image upload" labelRemove="Remove" labelSelect="Image upload" />
                         </div>
                     </Layout.Column>
                 </Layout.Row>
