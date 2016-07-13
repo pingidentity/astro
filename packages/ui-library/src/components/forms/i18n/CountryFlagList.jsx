@@ -7,39 +7,98 @@ var React = require("react"),
     countryCodes = require("./countryCodes.js");
 
 /**
-* @class CountryFlagList
-* @desc a selectable international country flag list dropdown with optional country codes
+* @enum {string}
+* @alisas CountryFlagList.CountryCodeTypes
+* @private
+* @ignore
+*/
+var Types = {
+    ISO_2: "iso2",
+    ISO_NUM: "isoNum",
+    DIAL_CODE: "dialCode"
+};
+
+/**
+* @callback CountryFlagList~onValueChange
+* @private
+* @ignore
 *
-* @param {string} [data-id="country-flag-list"] - data-id to set on the top HTML element
-*    (defaults to "country-flag-list").
-* @param {string} [className] - CSS class to set on the top HTML element.
-* @param {string} [countryCodeClassName] - CSS class to set on the country code.
-* @param {string} [countryCodeDisplayType] - the type of country code displayed, one of: iso2, isoNum, dialCode
-*    (defaults to iso2).
-* @param {string|number} [selectedCountryCode] - the selected country's iso2, isoNum or dial code.
-* @param {bool} [open] - boolean state of the open/closed dropdown menu (defaults to false).
-* @param {function} [onCountryClick] - function (country) {...} A callback to be triggered when a country is selected.
-* @param {function} [onToggle] - function () {...} delegates to call when open/closed state changed.
+* @param {object} country
+*    The newly selected country.
+*/
+
+/**
+* @callback CountryFlagList~onToggle
+* @private
+* @ignore
+*/
+
+/**
+* @callback CountryFlagList~onSearch
+* @private
+* @ignore
+*
+* @param {string} searchString
+*    The text to search with.
+* @param {number} searchTime
+*    The time after which to clear the search when the user delays their search.
+*/
+
+/**
+* @class CountryFlagList
+* @private
+* @ignore
+*
+* @desc A selectable international country flag list dropdown with optional country codes.
+*
+* @param {string} [data-id="country-flag-list"]
+*    To define the base "data-id" value for the top-level HTML container.
+* @param {string} [className]
+*    CSS classes to set on the top-level HTML container.
+*
+* @param {string|number} [selectedCountryCode]
+*    The selected country's iso2, isoNum or dial code.
+* @param {CountryFlagList.CountryCodeTypes} [countryCodeDisplayType=CountryFlagList.CountryCodeTypes.ISO_2]
+*    The type of country code displayed.
+* @param {string} [countryCodeClassName]
+*    CSS classes to set on the country code text.
+* @param {CountryFlagList~onValueChange} [onValueChange]
+*    Callback to be triggered when a country is selected.
+*
+* @param {string} [labelNoCountry]
+*    Text to set on the no country selected option.
+*
+* @param {boolean} [open=false]
+*    State of the open/closed dropdown menu.
+* @param {CountryFlagList~onToggle} [onToggle]
+*    Callback to be triggered when the open/closed state changes.
+*
+* @param {string} [searchString]
+*    Value to help with finding an element on keydown.
+* @param {number} [searchTime]
+*    Time to help clear the search when the user delays their search.
+* @param {CountryFlagList~onSearch} [onSearch]
+*    Callback to be triggered when the state of the search of a country when the flag dropdown is expanded changes.
 */
 
 var CountryFlagList = React.createClass({
 
     propTypes: {
-        labelNoCountry: React.PropTypes.string,
         "data-id": React.PropTypes.string,
         className: React.PropTypes.string,
-        countryCodeClassName: React.PropTypes.string,
-        countryCodeDisplayType: React.PropTypes.string,
         selectedCountryCode: React.PropTypes.oneOfType([
             React.PropTypes.string,
             React.PropTypes.number
         ]),
+        countryCodeDisplayType: React.PropTypes.oneOf([Types.ISO_2, Types.ISO_NUM, Types.DIAL_CODE]),
+        countryCodeClassName: React.PropTypes.string,
+        onValueChange: React.PropTypes.func,
+        labelNoCountry: React.PropTypes.string,
         open: React.PropTypes.bool,
+        onToggle: React.PropTypes.func,
         searchString: React.PropTypes.string,
         searchTime: React.PropTypes.number,
-        onCountrySearch: React.PropTypes.func,
-        onCountryClick: React.PropTypes.func,
-        onToggle: React.PropTypes.func
+        onSearch: React.PropTypes.func
     },
 
     /**
@@ -47,6 +106,7 @@ var CountryFlagList = React.createClass({
     * and if the country list is open.
     * @param {MouseEvent} e - the mouse event
     * @private
+    * @ignore
     */
     _handleGlobalClick: function (e) {
         if (!e.target.dataset.hasOwnProperty("target") &&
@@ -64,6 +124,7 @@ var CountryFlagList = React.createClass({
      * @method I18nPhoneInput#_onKeyDown
      * @param {Object} e The event object
      * @private
+     * @ignore
      */
     _onKeyDown: function (e) {
         if (this.props.open) { // only do search when country list expanded
@@ -90,7 +151,7 @@ var CountryFlagList = React.createClass({
                     //if country found by search name or enter pressed
                     if (country) {
                         if (e.keyCode === 13) {
-                            this.props.onCountryClick(country);
+                            this.props.onValueChange(country);
                         } else {
                             var countryList = ReactDOM.findDOMNode(this.refs["countryList"]);
                             var countryListItem = ReactDOM.findDOMNode(this.refs[country.iso2], countryList);
@@ -101,7 +162,7 @@ var CountryFlagList = React.createClass({
                         search = ""; //nonsense entered, not in country list
                     }
                 }
-                this.props.onCountrySearch(search, time);
+                this.props.onSearch(search, time);
             }
         }
     },
@@ -110,6 +171,7 @@ var CountryFlagList = React.createClass({
     * Returns a country's data by code
     * @param {string} code - the county iso2, isoNum or dial code
     * @return {Object} - the country data
+    * @ignore
     */
     _findByCountryCode: function (code) {
         return countryCodes.filter(function (country) {
@@ -131,10 +193,10 @@ var CountryFlagList = React.createClass({
             "data-id": "country-flag-list",
             className: "",
             countryCodeClassName: "",
-            countryCodeDisplayType: "iso2",
+            countryCodeDisplayType: Types.ISO_2,
             selectedCountryCode: "",
             open: false,
-            onCountryClick: _.noop,
+            onValueChange: _.noop,
             onToggle: _.noop
         };
     },
@@ -162,7 +224,7 @@ var CountryFlagList = React.createClass({
                 </div>
                 <ul data-id="country-list" className="country-list" ref="countryList">
                     <li data-id="no-country" className="no-country"
-                        onClick={this.props.onCountryClick.bind(null, null)}>
+                        onClick={this.props.onValueChange.bind(null, null)}>
                         <span className="country-name">{this.props.labelNoCountry}</span>
                     </li>
 
@@ -172,7 +234,7 @@ var CountryFlagList = React.createClass({
                                 <Flag key={item.iso2} data-id={"country-" + item.iso2} iso2={item.iso2}
                                       name={item.name}
                                       code={item[this.props.countryCodeDisplayType]}
-                                      onClick={this.props.onCountryClick.bind(null, item)}
+                                      onClick={this.props.onValueChange.bind(null, item)}
                                       ref={item.iso2}
                                       countryCodeClassName={this.props.countryCodeClassName} />);
                         }.bind(this))
@@ -182,6 +244,37 @@ var CountryFlagList = React.createClass({
         );
     }
 });
+
+/**
+* @callback Flag~onClick
+* @private
+* @ignore
+*
+* @param {object} e
+*    The ReactJS synthetic event object.
+*/
+
+/**
+* @class CountryFlagList~Flag
+* @private
+* @ignore
+*
+* @desc A single flag list component.
+*
+* @param {string} [data-id="flag"]
+*    To define the base "data-id" value for the top-level HTML container.
+*
+* @param {string} [key]
+*    A unique key for the list item.
+* @param {string} [name]
+*    The flag's country name.
+* @param {string} [code]
+*    The flag's country code.
+* @param {string} [countryCodeClassName]
+*    CSS classes to set on the country code text.
+* @param {Flag~onClick} [onClick]
+*    Callback to be triggered when the flag is clicked.
+*/
 
 var Flag = React.createClass({
 
@@ -196,26 +289,30 @@ var Flag = React.createClass({
 
     getDefaultProps: function () {
         return {
-            key: "",
-            "data-id": "",
-            name: "",
-            code: "",
+            "data-id": "flag",
             onClick: _.noop
         };
     },
 
     render: function () {
+        var flagClassName = classnames("iti-flag", this.props.iso2),
+            countryCodeClassName = classnames("country-code", this.props.countryCodeClassName);
+
         return (
             <li key={this.props.key} data-id={this.props["data-id"]} className="country"
                 onClick={this.props.onClick}>
                 <div className="flag">
-                    <div className={classnames("iti-flag", this.props.iso2)}></div>
+                    <div className={flagClassName}></div>
                 </div>
                 <span className="country-name">{this.props.name}</span>
-                <span className={classnames("country-code", this.props.countryCodeClassName)}>{this.props.code}</span>
+                <span className={countryCodeClassName}>{this.props.code}</span>
             </li>
         );
     }
 });
+
+CountryFlagList.CountryCodeTypes = Types;
+
+CountryFlagList.Flag = Flag; //Internal but exposed for testing only
 
 module.exports = CountryFlagList;

@@ -1,30 +1,33 @@
 window.__DEV__ = true;
 
-jest.dontMock("../../../testutil/TestUtils");
-jest.dontMock("../../tooltips/HelpHint.jsx");
-jest.dontMock("../form-text-field/index.js");
-jest.dontMock("../form-text-field/v1.jsx");
-jest.dontMock("../FormTextField.jsx");
-jest.dontMock("../SelectionList.jsx");
+jest.dontMock("../../../tooltips/HelpHint.jsx");
+jest.dontMock("../../form-text-field/index.js");
+jest.dontMock("../../form-text-field/v2.jsx");
+jest.dontMock("../../FormRadioGroup.jsx");
+jest.dontMock("../../FormCheckbox.jsx");
+jest.dontMock("../../FormLabel.jsx");
+jest.dontMock("../../../general/If.jsx");
+jest.dontMock("../v2.jsx");
 jest.dontMock("../FormSearchBox.jsx");
-jest.dontMock("../FormRadioGroup.jsx");
-jest.dontMock("../FormCheckbox.jsx");
-jest.dontMock("../FormLabel.jsx");
-jest.dontMock("../../general/If.jsx");
-jest.dontMock("classnames");
-jest.dontMock("underscore");
-jest.dontMock("underscore.string");
+jest.dontMock("../v2-stateless.jsx");
+jest.dontMock("../v2-stateful.jsx");
+jest.dontMock("../v2-reducer.js");
+jest.dontMock("../v2-constants.js");
 
 describe("SelectionList", function () {
     var React = require("react");
     var ReactTestUtils = require("react-addons-test-utils");
     var _ = require("underscore");
     var _s = require("underscore.string");
-    var TestUtils = require("../../../testutil/TestUtils");
-    var SelectionList = require("../SelectionList.jsx");
-    var FormCheckbox = require("../FormCheckbox.jsx");
-    var FormRadioGroup = require("../FormRadioGroup.jsx");
-    var FormLabel = require("../FormLabel.jsx");
+    var TestUtils = require("../../../../testutil/TestUtils");
+    var SelectionList = require("../v2.jsx");
+    var FormCheckbox = require("../../FormCheckbox.jsx");
+    var FormRadioGroup = require("../../FormRadioGroup.jsx");
+    var FormLabel = require("../../FormLabel.jsx");
+
+    // just so that they are included in the coverage report
+    require("../v2-stateful.jsx");
+    require("../v2-stateless.jsx");
 
     var listItems;
 
@@ -45,47 +48,53 @@ describe("SelectionList", function () {
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
             items: listItems,
-            "data-id": "selection-list",
-            onChange: jest.genMockFunction()
+            "data-id": "my-selection-list",
+            onValueChange: jest.genMockFunction()
         });
 
         return ReactTestUtils.renderIntoDocument(<SelectionList {...opts} />);
     }
-
+    
     it("should render the component as single selection list by default", function () {
         var component = getComponent();
-
-        var list = TestUtils.findRenderedDOMNodeWithDataId(component, "selection-list");
+ 
+        var list = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list");
         expect(ReactTestUtils.isDOMComponent(list)).toBeTruthy();
 
-        var options = TestUtils.findRenderedComponentWithType(component, FormRadioGroup);
-        expect(options).toBeTruthy();
+        var radioGroup = TestUtils.findRenderedComponentWithType(component, FormRadioGroup);
+        expect(radioGroup).toBeDefined();
+        
+        var radios = TestUtils.scryRenderedDOMNodesWithTag(radioGroup, "input");
+        expect(radios.length).toBe(listItems.length);
     });
 
     it("should render the component as a single selection list when specified", function () {
         var component = getComponent({
             "data-id": "single-selection-list",
-            type: SelectionList.types.SINGLE
+            type: SelectionList.ListType.SINGLE
         });
 
         var list = TestUtils.findRenderedDOMNodeWithDataId(component, "single-selection-list");
         expect(ReactTestUtils.isDOMComponent(list)).toBeTruthy();
 
-        var singleOptions = TestUtils.findRenderedComponentWithType(component, FormRadioGroup);
-        expect(singleOptions).toBeTruthy();
+        var radioGroup = TestUtils.findRenderedComponentWithType(component, FormRadioGroup);
+        expect(radioGroup).toBeDefined();
+        
+        var radios = TestUtils.scryRenderedDOMNodesWithTag(radioGroup, "input");
+        expect(radios.length).toBe(listItems.length);
     });
-
+    
     it("should render the component as a multi selection list when specified", function () {
         var component = getComponent({
             "data-id": "multi-selection-list",
-            type: SelectionList.types.MULTI
+            type: SelectionList.ListType.MULTI
         });
 
         var list = TestUtils.findRenderedDOMNodeWithDataId(component, "multi-selection-list");
         expect(ReactTestUtils.isDOMComponent(list)).toBeTruthy();
 
         var multiOptions = TestUtils.scryRenderedComponentsWithType(component, FormCheckbox);
-        expect(multiOptions).toBeTruthy();
+        expect(multiOptions.length).toBe(listItems.length);
     });
 
     it("should render the component without searchbox", function () {
@@ -93,25 +102,25 @@ describe("SelectionList", function () {
             showSearchBox: false
         });
 
-        var searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "selection-list-search-box");
+        var searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-search-box");
         expect(searchBoxDiv).toBeNull();
     });
-
+    
     it("should render the component with searchbox and placeholder", function () {
         var component = getComponent({
             searchPlaceholder: "search..."
         });
 
-        var searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "selection-list-search-box");
+        var searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-search-box");
         var searchBox = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
 
         expect(searchBox.getAttribute("placeholder")).toEqual("search...");
     });
-
+    
     it("should render the component with a checked radio", function () {
         var component = getComponent({
             selectedItemIds: 1,
-            type: SelectionList.types.SINGLE
+            type: SelectionList.ListType.SINGLE
         });
 
         var formRadioGroup = TestUtils.findRenderedComponentWithType(component, FormRadioGroup);
@@ -119,35 +128,35 @@ describe("SelectionList", function () {
 
         expect(radios[0].checked).toBeTruthy();
     });
-
+    
     it("triggers callback on radio change", function () {
         var component = getComponent({
-            type: SelectionList.types.SINGLE
+            type: SelectionList.ListType.SINGLE
         });
 
         var formRadioGroup = TestUtils.findRenderedComponentWithType(component, FormRadioGroup);
         var radios = TestUtils.scryRenderedDOMNodesWithTag(formRadioGroup, "input");
 
         ReactTestUtils.Simulate.change(radios[0]);
-        expect(component.props.onChange).toBeCalled();
+        expect(component.props.onValueChange).toBeCalled();
     });
-
+    
     it("should check one radio", function () {
         var component = getComponent({
-            type: SelectionList.types.SINGLE
+            type: SelectionList.ListType.SINGLE
         });
 
         var formRadioGroup = TestUtils.findRenderedComponentWithType(component, FormRadioGroup);
         var radios = TestUtils.scryRenderedDOMNodesWithTag(formRadioGroup, "input");
 
         ReactTestUtils.Simulate.change(radios[0]);
-        expect(component.props.onChange).toBeCalledWith("1");
+        expect(component.props.onValueChange).toBeCalledWith("1");
     });
 
     it("should render with few checked checkboxes", function () {
         var component = getComponent({
             selectedItemIds: [1, 2],
-            type: SelectionList.types.MULTI
+            type: SelectionList.ListType.MULTI
         });
 
         var formCheckboxes = TestUtils.scryRenderedComponentsWithType(component, FormCheckbox);
@@ -165,70 +174,70 @@ describe("SelectionList", function () {
     it("triggers callback on checkbox change", function () {
         var component = getComponent({
             selectedItemIds: [2],
-            type: SelectionList.types.MULTI
+            type: SelectionList.ListType.MULTI
         });
 
-        var selectionList = TestUtils.findRenderedDOMNodeWithDataId(component, "selection-list-options");
+        var selectionList = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-options");
         var checkboxes = TestUtils.scryRenderedDOMNodesWithTag(selectionList, "input");
 
         ReactTestUtils.Simulate.change(checkboxes[0]);
 
-        expect(component.props.onChange).toBeCalled();
+        expect(component.props.onValueChange).toBeCalled();
     });
 
     it("should check one checkbox", function () {
         var component = getComponent({
             selectedItemIds: [],
-            type: SelectionList.types.MULTI
+            type: SelectionList.ListType.MULTI
         });
 
-        var selectionList = TestUtils.findRenderedDOMNodeWithDataId(component, "selection-list-options");
+        var selectionList = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-options");
         var checkboxes = TestUtils.scryRenderedDOMNodesWithTag(selectionList, "input");
 
         ReactTestUtils.Simulate.change(checkboxes[3]);
 
-        expect(component.props.onChange).toBeCalledWith([4]);
+        expect(component.props.onValueChange).toBeCalledWith([4]);
     });
 
     it("should check few checkboxes", function () {
         var component = getComponent({
             selectedItemIds: [1, 2],
-            type: SelectionList.types.MULTI
+            type: SelectionList.ListType.MULTI
         });
 
-        var selectionList = TestUtils.findRenderedDOMNodeWithDataId(component, "selection-list-options");
+        var selectionList = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-options");
         var checkboxes = TestUtils.scryRenderedDOMNodesWithTag(selectionList, "input");
 
         ReactTestUtils.Simulate.change(checkboxes[4]);
 
-        expect(component.props.onChange).toBeCalledWith([1, 2, 5]);
+        expect(component.props.onValueChange).toBeCalledWith([1, 2, 5]);
     });
 
     it("should check all checkboxes", function () {
         var component = getComponent({
             selectedItemIds: [1, 2, 3, 4, 5, 6, 7, 8],
-            type: SelectionList.types.MULTI
+            type: SelectionList.ListType.MULTI
         });
 
-        var selectionList = TestUtils.findRenderedDOMNodeWithDataId(component, "selection-list-options");
+        var selectionList = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-options");
         var checkboxes = TestUtils.scryRenderedDOMNodesWithTag(selectionList, "input");
 
         ReactTestUtils.Simulate.change(checkboxes[8]);
 
-        expect(component.props.onChange).toBeCalledWith([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+        expect(component.props.onValueChange).toBeCalledWith([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     });
 
     it("should uncheck one checkbox", function () {
         var component = getComponent({
             selectedItemIds: [1, 3],
-            type: SelectionList.types.MULTI
+            type: SelectionList.ListType.MULTI
         });
 
-        var selectionList = TestUtils.findRenderedDOMNodeWithDataId(component, "selection-list-options");
+        var selectionList = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-options");
         var checkboxes = TestUtils.scryRenderedDOMNodesWithTag(selectionList, "input");
 
         ReactTestUtils.Simulate.change(checkboxes[2]);
-        expect(component.props.onChange).toBeCalledWith([1]);
+        expect(component.props.onValueChange).toBeCalledWith([1]);
     });
 
     it("should do a start search with 2 chars keyword", function () {
@@ -236,11 +245,11 @@ describe("SelectionList", function () {
             showSearchBox: true
         });
 
-        var searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "selection-list-search-box");
+        var searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-search-box");
         var searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
         ReactTestUtils.Simulate.change(searchInput, { target: { value: "Na" } });
 
-        var selectionList = TestUtils.findRenderedDOMNodeWithDataId(component, "selection-list-options");
+        var selectionList = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-options");
         var checkboxes = TestUtils.scryRenderedDOMNodesWithTag(selectionList, "input");
 
         expect(checkboxes.length).toEqual(2);
@@ -251,11 +260,11 @@ describe("SelectionList", function () {
             showSearchBox: true
         });
 
-        var searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "selection-list-search-box");
+        var searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-search-box");
         var searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
         ReactTestUtils.Simulate.change(searchInput, { target: { value: "Chi" } });
 
-        var selectionList = TestUtils.findRenderedDOMNodeWithDataId(component, "selection-list-options");
+        var selectionList = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-options");
         var checkboxes = TestUtils.scryRenderedDOMNodesWithTag(selectionList, "input");
 
         expect(checkboxes.length).toEqual(1);
@@ -266,11 +275,11 @@ describe("SelectionList", function () {
             showSearchBox: true
         });
 
-        var searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "selection-list-search-box");
+        var searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-search-box");
         var searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
         ReactTestUtils.Simulate.change(searchInput, { target: { value: "Tran" } });
 
-        var selectionList = TestUtils.findRenderedDOMNodeWithDataId(component, "selection-list-options");
+        var selectionList = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-options");
         var checkboxes = TestUtils.scryRenderedDOMNodesWithTag(selectionList, "input");
 
         expect(checkboxes.length).toEqual(2);
@@ -286,15 +295,14 @@ describe("SelectionList", function () {
         };
 
         var component = getComponent({
-            showSearchBox: true,
-            customSearchFunc: customSearchFunc
+            onSearch: customSearchFunc
         });
 
-        var searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "selection-list-search-box");
+        var searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-search-box");
         var searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
         ReactTestUtils.Simulate.change(searchInput, { target: { value: "Cao" } });
 
-        var selectionList = TestUtils.findRenderedDOMNodeWithDataId(component, "selection-list-options");
+        var selectionList = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-options");
         var checkboxes = TestUtils.scryRenderedDOMNodesWithTag(selectionList, "input");
 
         expect(checkboxes.length).toEqual(1);
@@ -305,13 +313,35 @@ describe("SelectionList", function () {
             showSearchBox: true
         });
 
-        var searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "selection-list-search-box");
+        var searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-search-box");
         var searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
         ReactTestUtils.Simulate.change(searchInput, { target: { value: " Chi  " } });
 
-        var selectionList = TestUtils.findRenderedDOMNodeWithDataId(component, "selection-list-options");
+        var selectionList = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-options");
         var checkboxes = TestUtils.scryRenderedDOMNodesWithTag(selectionList, "input");
 
         expect(checkboxes.length).toEqual(1);
+    });
+
+    it("check stateless rendering", function () {
+        var component = getComponent({
+            controlled: true,
+            onSearch: _.noop,
+            onFilter: _.noop,
+            queryString: "my query"
+        });
+        
+        var list = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list");
+        expect(ReactTestUtils.isDOMComponent(list)).toBeTruthy();
+
+        var radioGroup = TestUtils.findRenderedComponentWithType(component, FormRadioGroup);
+        expect(radioGroup).toBeDefined();
+        
+        var radios = TestUtils.scryRenderedDOMNodesWithTag(radioGroup, "input");
+        expect(radios.length).toBe(listItems.length);
+
+        var searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-search-box");
+        var searchBox = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
+        expect(searchBox.getAttribute("value")).toEqual("my query");
     });
 });

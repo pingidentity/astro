@@ -7,18 +7,26 @@ var ViewHeader = require("./ViewHeader.jsx");
 module.exports = React.createClass({
 
     propTypes: {
+        "data-id": React.PropTypes.string,
         date: React.PropTypes.object,
-        changeView: React.PropTypes.func
+        onSetDate: React.PropTypes.func,
+        onPrevView: React.PropTypes.func
+    },
+
+    getDefaultProps: function () {
+        return {
+            "data-id": "years-view"
+        };
     },
 
     years: [],
 
     next: function () {
-        this.props.setDate(this.props.date.add(10, "years"));
+        this.props.onSetDate(this.props.date.add(10, "years"));
     },
 
     prev: function () {
-        this.props.setDate(this.props.date.subtract(10, "years"));
+        this.props.onSetDate(this.props.date.subtract(10, "years"));
     },
 
     rangeCheck: function (currYear) {
@@ -57,7 +65,7 @@ module.exports = React.createClass({
     cellClick: function (e) {
         var year = parseInt(e.target.innerHTML, 10);
         var date = this.props.date.year(year);
-        this.props.prevView(date);
+        this.props.onPrevView(date);
     },
 
 
@@ -66,20 +74,20 @@ module.exports = React.createClass({
         var currYear = this.props.date.year();
 
         var yearsCells = years.map(function (item, i) {
-            var _class = classnames({
+            var className = classnames({
                 year: true,
                 current: item.label === currYear
             });
-            return <Cell value={item.label} classes={_class} key={i} />;
+            return <Cell data-id={"years-cell-" + i} value={item.label} className={className} key={i} />;
         });
 
         var currentDate = [years[0].label, years[years.length - 1].label].join("-");
 
         return (
-            <div className="years-view">
+            <div data-id={this.props["data-id"]} className="years-view">
                 <ViewHeader
-                    prev={this.prev}
-                    next={this.next}
+                    onPrev={this.prev}
+                    onNext={this.next}
                     data={currentDate} />
                 <div className="years" onClick={this.cellClick}>{yearsCells}</div>
             </div>

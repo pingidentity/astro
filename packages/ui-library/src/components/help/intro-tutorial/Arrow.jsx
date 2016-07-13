@@ -4,32 +4,44 @@ var React = require("react"),
 
 /**
  * @class IntroTutorial#Arrow
- * @private
  * @desc Draws an svg path between two points
- * @param {object} to - A DOM element to be used as the target
- * @param {object} [from] - A DOM element to use as the starting point.  It not included, the
- *   center of the screen will be used.
- * @param {number} [arrowGapToTarget] - This number determines how close the arrow should point to the target.
- *   Default stops 20 pixels shy of touching the target
- * @param {number} [arrowOffsetFromEnd] - When the component decides to point to the end of the target, as opposed
- *   to the middle, this number will determine who many pixels from the end to inset.
- * @param {number} [arrowMinimumCurviture] - This number determines the minimum desired curviture of the pointing
- *   arrow.  This is determined by the distance from the middle of the screen to the middle of the target.
+ *
+ * @param {string} [data-id="arrow"]
+ *     To define the base "data-id" value for top-level HTML container.
+ *
+ * @param {number} [arrowGapToTarget=20]
+ *     This number determines how close in pixels the arrow should point to the target.
+ * @param {number} [arrowMinimumCurviture=150]
+ *     This number determines the minimum desired curviture of the pointing arrow. This is determined by the
+ *     distance from the middle of the screen to the middle of the target.
+ * @param {number} [arrowOffsetFromEnd=30]
+ *     When the component decides to point to the end of the target, as opposed
+ *     to the middle, this number will determine who many pixels from the end to inset.
+ *
+ * @param {object} to
+ *     A DOM element to be used as the target
+ * @param {object} [from]
+ *     A DOM element to use as the starting point. If not included, the center of the screen will be used.
+ *
+ * @example
+ *     <Arrow to={target} />
  */
 var Arrow = React.createClass({
     propTypes: {
+        "data-id": React.PropTypes.string,
         arrowGapToTarget: React.PropTypes.number,
-        arrowOffsetFromEnd: React.PropTypes.number,
         arrowMinimumCurviture: React.PropTypes.number,
+        arrowOffsetFromEnd: React.PropTypes.number,
         to: React.PropTypes.object.isRequired,
-        from: React.PropTypes.object,
+        from: React.PropTypes.object
     },
 
     getDefaultProps: function () {
         return {
+            "data-id": "arrow",
             arrowGapToTarget: 20,
-            arrowOffsetFromEnd: 30,
             arrowMinimumCurviture: 150,
+            arrowOffsetFromEnd: 30,
             arcAway: 400
         };
     },
@@ -91,7 +103,7 @@ var Arrow = React.createClass({
      /* React isnt passing svg attributes correctly so have to resort to setting the innerHTML instead */
     render: function () {
         return (
-            <svg>
+            <svg data-id={this.props["data-id"]}>
                 <defs dangerouslySetInnerHTML={{ __html:
                     "<marker id=\"Triangle\" viewBox=\"0 0 10 10\" refX=\"7\" " +
                         "refY=\"5\" markerWidth=\"15\" markerHeight=\"15\" orient=\"auto\">" +

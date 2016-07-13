@@ -1,24 +1,28 @@
 /**
- * @module util/format
- */
+* @module util/format
+*/
 
 /**
- * @desc Format a string.  The format string may call methods on the target key.
+ * @desc Format a string. The format string may call methods on the target key.
  *
- * @param {string} string - The string to format
- * @param {...Object} keys - The keys to use for substitution
- * @returns {string} the formattted string
+ * @param {string} string
+ *    The string to format.
+ * @param {Object[]} keys
+ *    The keys to use for substitution.
+ * @returns {string}
+ *    The formattted string.
+ *
  * @example
- * var p = new Person('mr', 'okhtay', 'shoghi')
- * 'Hello {saluation.capitalize} {lastName.capitalize}'.format(p);
- * //'Hello Mr. Shoghi'
+ *   var p = new Person('mr', 'okhtay', 'shoghi')
+ *   'Hello {saluation.capitalize} {lastName.capitalize}'.format(p);
+ *   //'Hello Mr. Shoghi'
  * @example
- * '{0} + {1} = {2}'.format(1, 2, 3);
- * //'1 + 2 = 3'
+ *   '{0} + {1} = {2}'.format(1, 2, 3);
+ *   //'1 + 2 = 3'
  * @example
- * var p = {first: 'okhtay', last: 'shoghi'}
- * 'Hello {name.first.capitalize}'.format(p);
- * //'Hello Okhtay'
+ *   var p = {first: 'okhtay', last: 'shoghi'}
+ *   'Hello {name.first.capitalize}'.format(p);
+ *   //'Hello Okhtay'
  */
 module.exports = function (string, keys) {
     if (arguments.length > 2 || typeof(keys) !== "object") {

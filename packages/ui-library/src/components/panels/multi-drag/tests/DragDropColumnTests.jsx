@@ -34,6 +34,33 @@ describe("DragDropColumn", function () {
     beforeEach(function () {
     });
 
+    it("renders with default data-id", function () {
+        var wrapper = getWrappedComponent();
+        var component = wrapper.refs.target;
+
+        var dragDropColumn = TestUtils.findRenderedDOMNodeWithDataId(component, "drag-drop-column");
+
+        expect(dragDropColumn).toBeDefined();
+    });
+
+    it("renders with given data-id", function () {
+        var wrapper = getWrappedComponent({ "data-id": "myDragDropColumn" });
+        var component = wrapper.refs.target;
+
+        var dragDropColumn = TestUtils.findRenderedDOMNodeWithDataId(component, "myDragDropColumn");
+
+        expect(dragDropColumn).toBeDefined();
+    });
+
+    it("renders with given className", function () {
+        var wrapper = getWrappedComponent({ className: "myDragDropColumnClass" });
+        var component = wrapper.refs.target;
+
+        var dragDropColumn = TestUtils.findRenderedDOMNodeWithClass(component, "myDragDropColumnClass");
+
+        expect(dragDropColumn).toBeDefined();
+    });
+
     it("Renders search when showSearch=true", function () {
         var wrapper = getWrappedComponent({ showSearch: true });
         var component = wrapper.refs.target;

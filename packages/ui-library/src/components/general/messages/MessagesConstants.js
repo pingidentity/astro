@@ -3,7 +3,8 @@ var _ = require("underscore");
 /**
  * @enum {string}
  * @alias Messages.MessageTypes
- * @desc Enum for the different types of Messages */
+ * @desc Enum for the different types of Messages
+ */
 exports.MessageTypes = {
     /** success */
     SUCCESS: "success",
@@ -14,7 +15,7 @@ exports.MessageTypes = {
     /** feature */
     FEATURE: "feature",
     /** error */
-    ERROR: "warning"
+    ERROR: "error"
 };
 
 /*

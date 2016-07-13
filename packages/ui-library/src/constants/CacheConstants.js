@@ -1,25 +1,21 @@
 "use strict";
 
-var keyMirror = require("fbjs/lib/keyMirror");
+//NOTE: Do not use keyMirror to generate the enums as JSDocs doesn't know how to parse it for keys.
 
-/**
- * @module net/Cache
- * @desc {@link net/Cache} related constants
+ /**
+ * @module constants/CacheConstants
+ * @desc {@link module:net/Cache} Related cache constants.
  */
 module.exports = {
     /**
      * @enum {string}
-     * @desc cache storage types
+     * @alias module:constants/CacheConstants.CacheTypes
+     * @desc Cache storage types
      */
-    CacheTypes: keyMirror({
-
-        /**
-         * @desc in-memory
-         */
-        MEMORY: null,
-        /**
-         * @desc local browser storage
-         */
-        LOCAL: null
-    })
+    CacheTypes: {
+        /** in-memory */
+        MEMORY: "MEMORY",
+        /** local browser storage */
+        LOCAL: "LOCAL"
+    }
 };

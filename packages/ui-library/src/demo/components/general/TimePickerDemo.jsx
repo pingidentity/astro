@@ -4,7 +4,7 @@ var TimePicker = require("./../../../components/general/TimePicker.jsx");
 var Calendar = require("./../../../components/calendars/Calendar.jsx");
 
 var TimePickerDemo = React.createClass({
-    _onChange: function (index, value) {
+    _handleValueChange: function (index, value) {
         var newState = {};
 
         // special handling for the calendar value
@@ -30,7 +30,7 @@ var TimePickerDemo = React.createClass({
             <div>
                 <div className="input-row">
                     <TimePicker
-                        onValueChange={this._onChange.bind(null, "a")}
+                        onValueChange={this._handleValueChange.bind(null, "a")}
                         increments={30}
                         label="12 Hour Format"
                         value={this.state.a}
@@ -40,7 +40,7 @@ var TimePickerDemo = React.createClass({
                 </div>
                 <div className="input-row">
                     <TimePicker
-                        onValueChange={this._onChange.bind(null, "b")}
+                        onValueChange={this._handleValueChange.bind(null, "b")}
                         increments={60}
                         format="24"
                         label="24 Hour Format"
@@ -58,11 +58,11 @@ var TimePickerDemo = React.createClass({
                         format="YYYY-MM-DD"
                         computableFormat="x"
                         closeOnSelect={true}
-                        onChange={this._onChange.bind(null, "c1")}
+                        onValueChange={this._handleValueChange.bind(null, "c1")}
                         date={this.state.c1}
                     />
                     <TimePicker
-                        onValueChange={this._onChange.bind(null, "c2")}
+                        onValueChange={this._handleValueChange.bind(null, "c2")}
                         increments={60}
                         format="24"
                         value={this.state.c2}

@@ -7,9 +7,16 @@ var ViewHeader = require("./ViewHeader.jsx");
 module.exports = React.createClass({
 
     propTypes: {
+        "data-id": React.PropTypes.string,
         date: React.PropTypes.object.isRequired,
-        setDate: React.PropTypes.func,
-        nextView: React.PropTypes.func
+        onSetDate: React.PropTypes.func,
+        onNextView: React.PropTypes.func
+    },
+
+    getDefaultProps: function () {
+        return {
+            "data-id": "days-view"
+        };
     },
 
     getDaysTitles: function () {
@@ -22,11 +29,11 @@ module.exports = React.createClass({
     },
 
     next: function () {
-        this.props.setDate(this.props.date.add(1, "months"));
+        this.props.onSetDate(this.props.date.add(1, "months"));
     },
 
     prev: function () {
-        this.props.setDate(this.props.date.subtract(1, "months"));
+        this.props.onSetDate(this.props.date.subtract(1, "months"));
     },
 
     cellClick: function (e) {
@@ -45,7 +52,7 @@ module.exports = React.createClass({
         }
 
         newDate.date(date);
-        this.props.setDate(newDate, true);
+        this.props.onSetDate(newDate, true);
     },
 
 
@@ -76,29 +83,29 @@ module.exports = React.createClass({
 
     render: function () {
         var titles = this.getDaysTitles().map(function (item, i) {
-            return <Cell value={item.label} classes="day title" key={i} />;
+            return <Cell data-id={"titles-cell-" + i} value={item.label} className="day title" key={i} />;
         });
 
         var days = this.getDays().map(function (item, i) {
-            var _class = classnames({
+            var className = classnames({
                 day: true,
                 next: item.next,
                 prev: item.prev,
                 current: item.curr,
                 today: item.today
             });
-            return <Cell value={item.label} classes={_class} key={i} />;
+            return <Cell data-id={"days-cell-" + i} value={item.label} className={className} key={i} />;
         });
 
         var currentDate = this.props.date ? this.props.date.format("MMMM") : moment().format("MMMM");
 
         return (
-            <div className="view days-view">
+            <div data-id={this.props["data-id"]} className="view days-view">
                 <ViewHeader
-                    prev={this.prev}
-                    next={this.next}
+                    onPrev={this.prev}
+                    onNext={this.next}
                     data={currentDate}
-                    titleAction={this.props.nextView} />
+                    onClick={this.props.onNextView} />
 
                 <div className="days-title">{titles}</div>
                 <div className="days" onClick={this.cellClick} >{days}</div>

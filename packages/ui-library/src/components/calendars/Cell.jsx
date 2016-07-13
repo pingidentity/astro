@@ -3,16 +3,23 @@ var React = require("react");
 module.exports = React.createClass({
 
     propTypes: {
-        value: React.PropTypes.string,
-        classes: React.PropTypes.string
+        "data-id": React.PropTypes.string,
+        className: React.PropTypes.string,
+        value: React.PropTypes.string
+    },
+
+    getDefaultProps: function () {
+        return {
+            "data-id": "cell"
+        };
     },
 
     render: function () {
         var label = this.props.value;
-        var classes = this.props.classes + " cell";
+        var className = this.props.className + " cell";
 
         return (
-            <div className={classes}>{label}</div>
+            <div data-id={this.props["data-id"]} className={className}>{label}</div>
         );
     }
 

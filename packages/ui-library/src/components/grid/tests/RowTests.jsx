@@ -128,6 +128,35 @@ describe("Row", function () {
         expect(callback).toBeCalled();
     });
 
+    it("should not render CheckboxCell without onGridCellAction callback", function () {
+        var rows = [{
+            firstname: { value: "Chien", className: "" },
+            lastname: "Cao",
+            hasLaptop: true
+        }];
+
+        var props = {
+            rows: rows,
+            columnsPerPage: 2
+        };
+        var component = ReactTestUtils.renderIntoDocument(
+            <Grid data-id="grid-test" {...props}>
+                <Grid.Column headerText="Firstname" field="firstname" width={Grid.ColumnSizes.S} />
+                <Grid.Column headerText="Has Laptop" field="hasLaptop" >
+                    <CheckboxCell className="stacked" />
+                </Grid.Column>
+            </Grid>
+        );
+
+        var node = TestUtils.findRenderedDOMNodeWithDataId(component, "grid-row-0-cell-1");
+        expect(ReactTestUtils.isDOMComponent(node)).toBeTruthy();
+
+        var label = TestUtils.findRenderedDOMNodeWithTag(node, "label");
+        expect(label).toBeNull();
+        var input = TestUtils.findRenderedDOMNodeWithTag(label, "input");
+        expect(input).toBeNull();
+    });
+
     it("should render row normally inside a grid with onChange listener for cell", function () {
         var rows = [{
             firstname: { value: "Chien", className: "" },
@@ -153,7 +182,9 @@ describe("Row", function () {
         expect(ReactTestUtils.isDOMComponent(node)).toBeTruthy();
 
         var label = TestUtils.findRenderedDOMNodeWithTag(node, "label");
+        expect(label).toBeTruthy();
         var input = TestUtils.findRenderedDOMNodeWithTag(label, "input");
+        expect(input).toBeTruthy();
         ReactTestUtils.Simulate.change(input);
         expect(callback).toBeCalled();
     });

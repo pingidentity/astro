@@ -167,7 +167,7 @@ var MultiDragDemo = React.createClass({
                 <div>
                     <FormLabel value="Search options" />
                     <FormRadioGroup
-                        onChange={this.demoActions.setSearch}
+                        onValueChange={this.demoActions.setSearch}
                         selected={this.props.demo.search}
                         groupName="search-opts"
                         stacked={false}
@@ -180,7 +180,7 @@ var MultiDragDemo = React.createClass({
                 <div>
                     <FormLabel value="row options" />
                     <FormRadioGroup
-                        onChange={this.demoActions.setStyle}
+                        onValueChange={this.demoActions.setStyle}
                         selected={this.props.demo.style}
                         groupName="row-opts"
                         stacked={false}
@@ -198,7 +198,7 @@ var MultiDragDemo = React.createClass({
 
         return (
             <div className="multidrag-demo">
-                <Messages messages={this.props.messages.messages} removeMessage={this.messageActions.removeAt} />
+                <Messages messages={this.props.messages.messages} onRemoveMessage={this.messageActions.removeAt} />
 
                 {this.renderOptions()}
 

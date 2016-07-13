@@ -11,19 +11,19 @@ var FormCheckboxListDemo = React.createClass({
         };
     },
 
-    _onSelectionChange: function (selectedIds) {
+    _handleValueChange: function (selectedIds) {
         this.setState({
             selectedIds: selectedIds
         });
     },
 
-    _onQueryChange: function (queryString) {
+    _handleQueryChange: function (queryString) {
         this.setState({
             queryString: queryString
         });
     },
 
-    _onVisibilityChange: function (hideUnchecked) {
+    _handleVisibilityChange: function (hideUnchecked) {
         this.setState({
             hideUnchecked: !hideUnchecked
         });
@@ -44,13 +44,13 @@ var FormCheckboxListDemo = React.createClass({
                         controlled={true}
                         hideUnchecked={this.state.hideUnchecked}
                         items={checkboxItems}
-                        labelSelectAll={function (count) { return "Select " + count + " items"; }}
-                        labelDeselectAll={function (count) { return "Deselect " + count + " items"; }}
+                        onGetSelectAllLabel={function (count) { return "Select " + count + " items"; }}
+                        onGetDeselectAllLabel={function (count) { return "Deselect " + count + " items"; }}
                         labelHideUnselected="Hide Unselected"
                         labelSearchPlaceholder="Search"
-                        onSelectionChange={this._onSelectionChange}
-                        onQueryChange={this._onQueryChange}
-                        onVisibilityChange={this._onVisibilityChange}
+                        onValueChange={this._handleValueChange}
+                        onQueryChange={this._handleQueryChange}
+                        onVisibilityChange={this._handleVisibilityChange}
                         queryString={this.state.queryString}
                         selected={this.state.selectedIds}
                     />

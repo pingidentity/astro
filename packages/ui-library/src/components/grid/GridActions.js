@@ -1,5 +1,9 @@
 var keyMirror = require("fbjs/lib/keyMirror");
 
+/**
+ * @enum {string}
+ * @desc An enum of Grid action types.
+ */
 exports.Types = keyMirror({
     GRID_SET_PAGINATION: null,
     GRID_TOGGLE_ROW: null,

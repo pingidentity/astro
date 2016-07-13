@@ -7,6 +7,10 @@ var keyMirror = require("fbjs/lib/keyMirror"),
  */
 exports.lastId = 0;
 
+/**
+* @enum {string}
+* @desc An enum of Messages action types.
+*/
 exports.Types = keyMirror({
     ADD_MESSAGE: null,
     REMOVE_MESSAGE: null,
@@ -15,10 +19,12 @@ exports.Types = keyMirror({
 });
 
 /**
- * @function shiftMessage
+ * @function Messages~shiftMessage
  * @desc remove the first message from messages array
- * @param {string} [containerId=messages] - The grouping of the message
- * @returns {object} the action
+ * @param {string} [containerId="messages"]
+ *     The grouping of the message
+ * @returns {object}
+ *     The action
  */
 exports.shiftMessage = function (containerId) {
     return {
@@ -39,17 +45,22 @@ exports.pushMessage = function (containerId, text, status, timer, index) {
 };
 
 /**
- * @function addMessage
+ * @function Messages~addMessage
  * @desc Originally the messages component was designed to be a singleton, so the reducer/actions assumed there
- * would only ever be one array of messages.  Since this is no longer the case, all actions now allow specifying
- * a containerId.  To remain backwards compatible however, the actions will determine if the first argument is a
- * containerId and behave one way, otherwise, they will set the containerId to "messages" which will preserve the
- * legacy behavior.
- * @param {string} [containerId=messages] - The grouping of the message
- * @param {string} message - The body of the message
- * @param {Messages.MessageTypes} status - The type of message
- * @param {number} removeAfterMs - The timeout before the message will be auto removed
- * @returns {function} thunk action
+ *     would only ever be one array of messages.  Since this is no longer the case, all actions now allow specifying
+ *     a containerId.  To remain backwards compatible however, the actions will determine if the first argument is a
+ *     containerId and behave one way, otherwise, they will set the containerId to "messages" which will preserve the
+ *     legacy behavior.
+ * @param {string} [containerId="messages"]
+ *     The grouping of the message
+ * @param {string} message
+ *     The body of the message
+ * @param {Messages.MessageTypes} [status]
+ *     The type of message
+ * @param {number} [removeAfterMs]
+ *     The timeout before the message will be auto removed
+ * @returns {function}
+ *     The action
  */
 exports.addMessage = function (containerId, message, status, removeAfterMs) {
     if ((arguments.length === 1) ||
@@ -79,12 +90,14 @@ exports.addMessage = function (containerId, message, status, removeAfterMs) {
 };
 
 /**
- * @function removeAt
+ * @function Messages~removeAt
  * @desc remove the message at the give index
- * @param {string} containerId - If the first parameter is a number, containerId will be set to "messages" for
- * backwards compatibility.
- * @param {number} index - The index of the message to remove
- * @returns {object} the action
+ * @param {string} [containerId="messages"]
+ *     If the first parameter is a number, containerId will be set to "messages" for backwards compatibility.
+ * @param {number} index
+ *     The index of the message to remove
+ * @returns {object}
+ *     The action
  */
 exports.removeAt = function (containerId, index) {
     //preserve backwards compatibility if the action creator is called without a containerId
@@ -101,13 +114,16 @@ exports.removeAt = function (containerId, index) {
 };
 
 /**
- * @function removeMessage
+ * @function Messages~removeMessage
  * @desc remove the message with the given id.  This is called by the scheduled job to remove the
- * message.  Since the index of Message may change between the time it mounts and this is called, we
- * need some way to remove a specific id.
- * @param {string} [containerId=messages] - The grouping of the message
- * @param {number} messageId - The id of the message to remove
- * @returns {object} the action
+ *     message.  Since the index of Message may change between the time it mounts and this is called, we
+ *     need some way to remove a specific id.
+ * @param {string} [containerId="messages"]
+ *     The grouping of the message
+ * @param {number} messageId
+ *     The id of the message to remove
+ * @returns {object}
+ *     The action
  */
 exports.removeMessage = function (containerId, messageId) {
     //preserve backwards compatibility if the action creator is called without a containerId

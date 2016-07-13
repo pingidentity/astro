@@ -20,7 +20,7 @@ jest.dontMock("../../forms/form-text-field/v1.jsx");
 jest.dontMock("../../forms/form-text-field");
 
 describe("Grid", function () {
-    var React = require("react");
+    var React = require("re-react");
     var ReactTestUtils = require("react-addons-test-utils");
     var _ = require("underscore");
     var TestUtils = require("../../../testutil/TestUtils");
@@ -121,11 +121,18 @@ describe("Grid", function () {
         }
     });
 
-    it("should have column-xs class name at the third column", function () {
+    it("should have column-xs class name at the third column header", function () {
         var component = getComponent();
 
         var headerCell3 = TestUtils.findRenderedDOMNodeWithDataId(component, "grid-column-3");
         expect(headerCell3.getAttribute("class")).toContain("column-xs");
+    });
+
+    it("should have alignment class name right at the third column header", function () {
+        var component = getComponent();
+
+        var headerCell3 = TestUtils.findRenderedDOMNodeWithDataId(component, "grid-column-3");
+        expect(headerCell3.getAttribute("class")).toContain("right");
     });
 
     it("should call callback function when clicking on plus icon", function () {
@@ -176,7 +183,7 @@ describe("Grid", function () {
                         hasSelectAll={true}
                         data-id="check-all-header"
                         selectAllValue={true} >
-                    <CheckboxCell onCallBack={jest.genMockFunction()} className="stacked" />
+                    <CheckboxCell onGridCellAction={jest.genMockFunction()} className="stacked" />
                 </Grid.Column>
             </Grid>
         );
@@ -185,6 +192,49 @@ describe("Grid", function () {
         var checkbox = TestUtils.findRenderedDOMNodeWithDataId(cellHeader, "form-checkbox");
         expect(checkbox).not.toBeNull();
         expect(checkbox.checked).toBeTruthy();
+    });
+
+    it("triggers onGridCellAction on Checkbox cell change", function () {
+        var props = {
+            rows: rows,
+            columnsPerPage: 2
+        };
+        var callback = jest.genMockFunction();
+        var component = ReactTestUtils.renderIntoDocument(
+            <Grid data-id="grid-test" {...props}>
+                <Grid.Column headerText="Firstname" field="firstname" width={Grid.ColumnSizes.S} />
+                <Grid.Column headerText="Has Laptop" field="hasLaptop" >
+                    <CheckboxCell onGridCellAction={callback} className="stacked" />
+                </Grid.Column>
+            </Grid>
+        );
+
+        var node = TestUtils.findRenderedDOMNodeWithDataId(component, "grid-row-0-cell-1");
+        var checkbox = TestUtils.findRenderedDOMNodeWithTag(node, "input");
+        ReactTestUtils.Simulate.change(checkbox);
+        expect(callback).toBeCalled();
+    });
+
+    // TODO To be removed once onCallback is discontinued
+    it("triggers deprecated onCallBack on Checkbox cell change", function () {
+        var props = {
+            rows: rows,
+            columnsPerPage: 2
+        };
+        var callback = jest.genMockFunction();
+        var component = ReactTestUtils.renderIntoDocument(
+            <Grid data-id="grid-test" {...props}>
+                <Grid.Column headerText="Firstname" field="firstname" width={Grid.ColumnSizes.S} />
+                <Grid.Column headerText="Has Laptop" field="hasLaptop" >
+                    <CheckboxCell onCallBack={callback} className="stacked" />
+                </Grid.Column>
+            </Grid>
+        );
+
+        var node = TestUtils.findRenderedDOMNodeWithDataId(component, "grid-row-0-cell-1");
+        var checkbox = TestUtils.findRenderedDOMNodeWithTag(node, "input");
+        ReactTestUtils.Simulate.change(checkbox);
+        expect(callback).toBeCalled();
     });
 
     it("should go to next column page if pagination changed", function () {
@@ -219,7 +269,7 @@ describe("Grid", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Grid rows={rows} controlled={false} >
                 <Grid.Column headerText="Email" field="email" >
-                    <TextFieldCell onCallBack={jest.genMockFunction()} />
+                    <TextFieldCell onGridCellAction={jest.genMockFunction()} />
                 </Grid.Column>
             </Grid>
         );
@@ -229,15 +279,50 @@ describe("Grid", function () {
             var tr = trs[i];
             var td = TestUtils.scryRenderedDOMNodesWithTag(tr, "td")[0];
             var input = TestUtils.scryRenderedDOMNodesWithTag(td, "input");
-            expect(input).not.toBeNull();
+            expect(input[0]).toBeTruthy();
         }
+    });
+
+    it("triggers onGridCellAction on TextField cell change", function () {
+        var callback = jest.genMockFunction();
+        var component = ReactTestUtils.renderIntoDocument(
+            <Grid rows={rows} controlled={false} >
+                <Grid.Column headerText="Email" field="email" >
+                    <TextFieldCell onGridCellAction={callback} />
+                </Grid.Column>
+            </Grid>
+        );
+
+        var trs = TestUtils.scryRenderedDOMNodesWithTag(component, "tr");
+        var td = TestUtils.scryRenderedDOMNodesWithTag(trs[1], "td")[0];
+        var input = TestUtils.scryRenderedDOMNodesWithTag(td, "input")[0];
+        ReactTestUtils.Simulate.change(input);
+        expect(callback).toBeCalled();
+    });
+
+    // TODO To be removed once onCallback is discontinued
+    it("triggers deprecated onCallBack on TextField cell change", function () {
+        var callback = jest.genMockFunction();
+        var component = ReactTestUtils.renderIntoDocument(
+            <Grid rows={rows} controlled={false} >
+                <Grid.Column headerText="Email" field="email" >
+                    <TextFieldCell onCallBack={callback} />
+                </Grid.Column>
+            </Grid>
+        );
+
+        var trs = TestUtils.scryRenderedDOMNodesWithTag(component, "tr");
+        var td = TestUtils.scryRenderedDOMNodesWithTag(trs[1], "td")[0];
+        var input = TestUtils.scryRenderedDOMNodesWithTag(td, "input")[0];
+        ReactTestUtils.Simulate.change(input);
+        expect(callback).toBeCalled();
     });
 
     it("should have Button in cells", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Grid rows={rows} controlled={false} >
                 <Grid.Column headerText="Email" field="email" >
-                    <ButtonCell onCallBack={jest.genMockFunction()} />
+                    <ButtonCell onGridCellAction={jest.genMockFunction()} />
                 </Grid.Column>
             </Grid>
         );
@@ -247,8 +332,37 @@ describe("Grid", function () {
             var tr = trs[i];
             var td = TestUtils.scryRenderedDOMNodesWithTag(tr, "td")[0];
             var button = TestUtils.scryRenderedDOMNodesWithTag(td, "button");
-            expect(button).not.toBeNull();
+            expect(button[0]).toBeTruthy();
         }
+    });
+
+    it("triggers onGridCellAction on button cell click", function () {
+        var callback = jest.genMockFunction();
+        var component = ReactTestUtils.renderIntoDocument(
+            <Grid rows={rows} controlled={false} >
+                <Grid.Column headerText="Email" field="email" >
+                    <ButtonCell data-id="cellWithonGridCellAction" onGridCellAction={callback} />
+                </Grid.Column>
+            </Grid>
+        );
+        var button = TestUtils.scryRenderedDOMNodesWithDataId(component, "cellWithonGridCellAction")[0];
+        ReactTestUtils.Simulate.click(button);
+        expect(callback).toBeCalled();
+    });
+
+    // TODO To be removed once onCallback is discontinued
+    it("triggers deprecated onCallBack on button cell click", function () {
+        var callback = jest.genMockFunction();
+        var component = ReactTestUtils.renderIntoDocument(
+            <Grid rows={rows} controlled={false} >
+                <Grid.Column headerText="Email" field="email" >
+                    <ButtonCell data-id="cellWithOnCallback" onCallBack={callback} />
+                </Grid.Column>
+            </Grid>
+        );
+        var button = TestUtils.scryRenderedDOMNodesWithDataId(component, "cellWithOnCallback")[0];
+        ReactTestUtils.Simulate.click(button);
+        expect(callback).toBeCalled();
     });
 
     it("should return null for Column", function () {
@@ -259,4 +373,51 @@ describe("Grid", function () {
         expect(output).toBeNull();
     });
 
+    // TODO To be removed once onCallBack is discontinued
+    it("should have warning for Button cell with deprecated onCallBack", function () {
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <Grid rows={rows} controlled={false} >
+                <Grid.Column headerText="Email" field="email" >
+                    <ButtonCell onCallBack={jest.genMockFunction()} />
+                </Grid.Column>
+            </Grid>
+        );
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use onGridCellAction instead of onCallBack. " +
+            "Support for onCallBack will be removed in next version");
+    });
+
+    // TODO To be removed once onCallBack is discontinued
+    it("should have warning for Checkbox cell with deprecated onCallBack", function () {
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <Grid rows={rows} controlled={false} >
+                <Grid.Column headerText="Email" field="email" >
+                    <CheckboxCell onCallBack={jest.genMockFunction()} />
+                </Grid.Column>
+            </Grid>
+        );
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use onGridCellAction instead of onCallBack. " +
+            "Support for onCallBack will be removed in next version");
+    });
+
+    // TODO To be removed once onCallBack is discontinued
+    it("should have warning for TextField cell with deprecated onCallBack", function () {
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <Grid rows={rows} controlled={false} >
+                <Grid.Column headerText="Email" field="email" >
+                    <TextFieldCell onCallBack={jest.genMockFunction()} />
+                </Grid.Column>
+            </Grid>
+        );
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use onGridCellAction instead of onCallBack. " +
+            "Support for onCallBack will be removed in next version");
+    });
 });

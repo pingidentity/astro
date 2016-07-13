@@ -49,9 +49,9 @@ describe("CountryFlagList", function () {
 
     function getComponent (props) {
         props = _.defaults(props || {}, {
-            onCountryClick: jest.genMockFunction(),
+            onValueChange: jest.genMockFunction(),
             onToggle: jest.genMockFunction(),
-            onCountrySearch: jest.genMockFunction()
+            onSearch: jest.genMockFunction()
         });
         return ReactTestUtils.renderIntoDocument(<CountryFlagList {...props} />);
     }
@@ -204,14 +204,14 @@ describe("CountryFlagList", function () {
         expect(component.props.onToggle.mock.calls.length).toBe(1);
     });
 
-    it("triggers onCountryClick callback when a country in the list is clicked", function () {
+    it("triggers onValueChange callback when a country in the list is clicked", function () {
         var component = getComponent();
 
         // Click on Canada in the list
         var canada = TestUtils.findRenderedDOMNodeWithDataId(component, "country-ca");
         ReactTestUtils.Simulate.click(canada);
 
-        expect(component.props.onCountryClick).toBeCalled();
+        expect(component.props.onValueChange).toBeCalled();
     });
 
     it("global click handler closes open list when click outside of component", function () {
@@ -254,17 +254,17 @@ describe("CountryFlagList", function () {
 
         var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
-        expect(component.props.onCountrySearch).toBeCalled();
-        expect(component.props.onCountrySearch.mock.calls[0][0]).toBe("c");
+        expect(component.props.onSearch).toBeCalled();
+        expect(component.props.onSearch.mock.calls[0][0]).toBe("c");
 
         component = getComponent({ // props seem to be immutable so I can't override them for this test
             open: true,
-            searchString: component.props.onCountrySearch.mock.calls[0][0],
-            searchTime: component.props.onCountrySearch.mock.calls[0][1]
+            searchString: component.props.onSearch.mock.calls[0][0],
+            searchTime: component.props.onSearch.mock.calls[0][1]
         });
         flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 65 }); // a
-        expect(component.props.onCountrySearch.mock.calls[0][0]).toBe("ca");
+        expect(component.props.onSearch.mock.calls[0][0]).toBe("ca");
     });
 
     it("find and select country by hitting enter", function () {
@@ -276,8 +276,8 @@ describe("CountryFlagList", function () {
 
         var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 13 }); // enter
-        expect(component.props.onCountryClick).toBeCalled();
-        expect(component.props.onCountryClick.mock.calls[0][0].iso2).toBe("ca");
+        expect(component.props.onValueChange).toBeCalled();
+        expect(component.props.onValueChange.mock.calls[0][0].iso2).toBe("ca");
     });
 
     it("find by typing - clear with esc", function () {
@@ -289,8 +289,8 @@ describe("CountryFlagList", function () {
 
         var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 27 }); // esc
-        expect(component.props.onCountrySearch).toBeCalled();
-        expect(component.props.onCountrySearch.mock.calls[0][0]).toBe("");
+        expect(component.props.onSearch).toBeCalled();
+        expect(component.props.onSearch.mock.calls[0][0]).toBe("");
     });
 
     it("find by typing - clear with delay", function () {
@@ -302,8 +302,33 @@ describe("CountryFlagList", function () {
 
         var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 65 }); // a
-        expect(component.props.onCountrySearch).toBeCalled();
-        expect(component.props.onCountrySearch.mock.calls[0][0]).toBe("a");
+        expect(component.props.onSearch).toBeCalled();
+        expect(component.props.onSearch.mock.calls[0][0]).toBe("a");
     });
 
+    it("flag list item renders with default data-id", function () {
+        var component = ReactTestUtils.renderIntoDocument(<CountryFlagList.Flag />);
+
+        var flagItem = TestUtils.findRenderedDOMNodeWithDataId(component, "flag");
+
+        expect(flagItem).toBeDefined();
+    });
+
+    it("flag list item renders with given data-id", function () {
+        var component = ReactTestUtils.renderIntoDocument(<CountryFlagList.Flag data-id="myFlagItem" />);
+
+        var flagItem = TestUtils.findRenderedDOMNodeWithDataId(component, "myFlagItem");
+
+        expect(flagItem).toBeDefined();
+    });
+
+    it("flag list item triggers onClick callback on item click", function () {
+        var component = ReactTestUtils.renderIntoDocument(<CountryFlagList.Flag onClick={jest.genMockFunction()} />);
+
+        var flagItem = TestUtils.findRenderedDOMNodeWithDataId(component, "flag");
+
+        ReactTestUtils.Simulate.click(flagItem);
+
+        expect(component.props.onClick).toBeCalled();
+    });
 });

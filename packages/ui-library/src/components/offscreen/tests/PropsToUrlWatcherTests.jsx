@@ -8,6 +8,7 @@ describe("HistoryWriter", function () {
         ReactTestUtils = require("react-addons-test-utils"),
         ReduxTestUtils = require("../../../util/ReduxTestUtils.js"),
         PropsToUrlWatcher = require("../PropsToUrlWatcher.jsx"),
+        TestUtils = require("../../../testutil/TestUtils"),
         _ = require("underscore");
 
     function getWrappedComponent (opts) {
@@ -122,5 +123,11 @@ describe("HistoryWriter", function () {
         var location = { query: { "initialItem.batch": 1, "initialItem.index": 3, initialItem: "5" } };
 
         expect(PropsToUrlWatcher.getNum(location, "initialItem")).toBe(5);
+    });
+
+    it("verify default data-id", function () {
+        var wrapper = getWrappedComponent();
+        var test = TestUtils.findRenderedDOMNodeWithDataId(wrapper, "props-to-url-watcher");
+        expect(test).toBeTruthy();
     });
 });

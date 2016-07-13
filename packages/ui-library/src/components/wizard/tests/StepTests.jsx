@@ -155,4 +155,33 @@ describe("Step", function () {
         expect(component.refs.cancelButton.props.disabled).toBeTruthy();
     });
 
+    it("Verify setting id causes warning", function () {
+        console.warn = jest.genMockFunction();
+        getRenderedComponent({ active: false, showEdit: false, id: "myid" });
+        expect(console.warn).toBeCalledWith("Deprecated: use data-id instead of id. " +
+            "Support for id will be removed in next version");
+    });
+
+    it("Verify default data-id set.", function () {
+        console.warn = jest.genMockFunction();
+        var component = getRenderedComponent();
+        var test = TestUtils.findRenderedDOMNodeWithDataId(component, "step");
+        expect(test).toBeTruthy();
+        expect(console.warn).not.toBeCalled();
+    });
+
+    it("Verify warning on doneButtonStyle.", function () {
+        console.warn = jest.genMockFunction();
+        getRenderedComponent({ doneButtonStyle: "somestyle" });
+        expect(console.warn).toBeCalledWith("Deprecated: use doneButtonClassName instead of doneButtonStyle. " +
+            "Support for doneButtonStyle will be removed in next version");
+    });
+
+    it("Verify warning on nextButtonStyle.", function () {
+        console.warn = jest.genMockFunction();
+        getRenderedComponent({ nextButtonStyle: "somestyle" });
+        expect(console.warn).toBeCalledWith("Deprecated: use nextButtonClassName instead of nextButtonStyle. " +
+            "Support for nextButtonStyle will be removed in next version");
+    });
+
 });

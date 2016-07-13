@@ -36,7 +36,7 @@ var ModalDemo = React.createClass({
                     <a onClick={this._toggle1}>Open Default Modal</a>
 
                     <Modal
-                        id="default-example"
+                        data-id="default-example"
                         modalTitle="Default Modal"
                         expanded={this.state.expanded1}
                         onOpen={this._toggle1}

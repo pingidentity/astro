@@ -1,18 +1,27 @@
 var React = require("react"),
+    Utils = require("../../util/Utils"),
     format = require("../../util/format.js");
 
 /** @class Wizard#Progress
  * @desc Wizard progress indicator (a-la icon)
  * @see Wizard
  *
- * @param {string} [id="progress"] - used as data-id for top HTML element.
- * @param {string} [className] - additional CSS classed to be used on top HTML element.
- * @param {number} step - step number (1-6)
- * @param {number} of - total number of steps (1-6)
- * @param {bool} done - completed step indicator */
+ * @param {string} [data-id="progress"]
+ *              To define the base "data-id" value for the top-level HTML container.
+ * @param {string} [id]
+ *              Deprecated. Use data-id instead.
+ * @param {string} [className]
+ *              CSS classes to set on the top-level HTML container
+ * @param {number} step
+ *              Step number (1-6)
+ * @param {number} of
+ *              Total number of steps (1-6)
+ * @param {boolean} done
+ *              Completed step indicator */
 var Progress = React.createClass({
 
     propTypes: {
+        "data-id": React.PropTypes.string,
         id: React.PropTypes.string,
         className: React.PropTypes.string,
         step: React.PropTypes.number.isRequired,
@@ -22,7 +31,7 @@ var Progress = React.createClass({
 
     getDefaultProps: function () {
         return {
-            id: "progress"
+            "data-id": "progress"
         };
     },
 
@@ -41,9 +50,17 @@ var Progress = React.createClass({
         }
     },
 
+    componentWillMount: function () {
+        if (this.props.id) {
+            Utils.deprecateWarn("id", "data-id");
+        }
+    },
+
     render: function () {
+        var id = this.props.id || this.props["data-id"];
+
         return (
-            <div ref="container" className={this._style()} data-id={this.props.id}><i>{this.props.step}</i></div>
+            <div ref="container" className={this._style()} data-id={id}><i>{this.props.step}</i></div>
         );
     }
 });

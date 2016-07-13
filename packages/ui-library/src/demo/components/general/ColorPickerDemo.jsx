@@ -23,7 +23,7 @@ var ColorPickerDemo = React.createClass({
         this.setState({ picker2color: color });
     },
 
-    _toggle2: function () {
+    _handleToggle: function () {
         this.setState({ picker2open: !this.state.picker2open });
     },
 
@@ -36,20 +36,20 @@ var ColorPickerDemo = React.createClass({
             <div>
                 <div className="input-row">
                     <ColorPicker
-                        id="color-picker"
+                        data-id="color-picker"
                         color={this.state.picker1color}
-                        onChange={this._handleChange1}
+                        onValueChange={this._handleChange1}
                         labelText="Background color"
                         hintText="Pick a color or type in the hex code" />
                 </div>
                 <div className="input-row">
                     <ColorPicker
-                        id="color-picker"
+                        data-id="color-picker"
                         color={this.state.picker2color}
-                        onChange={this._handleChange2}
+                        onValueChange={this._handleChange2}
                         labelText="Background color"
                         hintText="Pick a color or type in the hex code"
-                        onToggle={this._toggle2}
+                        onToggle={this._handleToggle}
                         onError={this._handleError}
                         errorMessage={this.state.errorMessage}
                         open={this.state.picker2open}

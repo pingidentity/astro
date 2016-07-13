@@ -26,7 +26,7 @@ describe("Messages", function () {
             messages: [{
                 text: "Test message text"
             }],
-            removeMessage: jest.genMockFunction()
+            onRemoveMessage: jest.genMockFunction()
         });
 
         return ReactTestUtils.renderIntoDocument(<Messages {...props} />);
@@ -62,6 +62,23 @@ describe("Messages", function () {
 
     it("Close message", function () {
         var component = getComponent();
+        var messages = TestUtils.scryRenderedDOMNodesWithClass(component, "message");
+        var closeLink = TestUtils.findRenderedDOMNodeWithClass(messages[0], "close");
+
+        ReactTestUtils.Simulate.click(closeLink);
+
+        expect(component.props.onRemoveMessage).toBeCalledWith(0);
+    });
+
+    //TODO To be removed once "removeMessage" support is discontnued.
+    it("Close message with deprecared removeMessage callback", function () {
+        var props = {
+            messages: [{
+                text: "Test message text"
+            }],
+            removeMessage: jest.genMockFunction()
+        };
+        var component = ReactTestUtils.renderIntoDocument(<Messages {...props} />);
         var messages = TestUtils.scryRenderedDOMNodesWithClass(component, "message");
         var closeLink = TestUtils.findRenderedDOMNodeWithClass(messages[0], "close");
 
@@ -126,19 +143,6 @@ describe("Messages", function () {
         expect(messages[0].textContent).toEqual("Test message text html");
     });
 
-    it("Warns if id property is added", function () {
-        var warn = global.console.warn;
-        console.warn = jest.genMockFunction();
-
-        try {
-            getComponent({ id: "deprecated" });
-
-            expect(console.warn).toBeCalled();
-        } finally {
-            console.warn = warn;
-        }
-    });
-
     it("Component has the class page-messages", function () {
         var component = getComponent();
         var node = ReactDOM.findDOMNode(component);
@@ -158,5 +162,98 @@ describe("Messages", function () {
         var node = ReactDOM.findDOMNode(component);
 
         expect(node.getAttribute("class")).toBe("page-messages in-modal");
+    });
+
+    // TODO To be removed once "id" support is discontnued.
+    it("render component with id", function () {
+        var component = getComponent(
+            { id: "messagesWithId" }
+        );
+
+        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "messagesWithId");
+
+        expect(element).toBeDefined();
+    });
+
+    it("render component with data-id", function () {
+        var component = getComponent(
+            { "data-id": "messagesWithDataId" }
+        );
+
+        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "messagesWithDataId");
+
+        expect(element).toBeDefined();
+    });
+
+    it("render component with default data-id", function () {
+        var component = getComponent();
+
+        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "messages");
+
+        expect(element).toBeDefined();
+    });
+
+    // TODO To be removed once "id" support is discontnued.
+    it("log warning in console for id", function () {
+        console.warn = jest.genMockFunction();
+        getComponent(
+            { id: "messagesWithId" }
+        );
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use data-id instead of id. Support for id will be removed in next version");
+    });
+
+    // TODO To be removed once "id" support is discontnued.
+    it("does not log warning in console without id", function () {
+        console.warn = jest.genMockFunction();
+        getComponent();
+
+        expect(console.warn).not.toBeCalled();
+    });
+
+    // TODO To be removed once "removeMessage" support is discontnued.
+    it("log warning in console for removeMessage", function () {
+        console.warn = jest.genMockFunction();
+        getComponent({
+            "data-id": "messagesWithRemoveChange",
+            removeMessage: jest.genMockFunction()
+        });
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use onRemoveMessage instead of removeMessage. " +
+            "Support for removeMessage will be removed in next version");
+    });
+
+    // TODO To be removed once "removeMessage" support is discontnued.
+    it("log no warning in console with onRemoveMessage", function () {
+        console.warn = jest.genMockFunction();
+        getComponent({
+            "data-id": "messagesWithOnRemoveChange"
+        });
+
+        expect(console.warn).not.toBeCalled();
+    });
+
+    // TODO To be removed once "i18n" support is discontnued.
+    it("log warning in console for i18n", function () {
+        console.warn = jest.genMockFunction();
+        getComponent({
+            "data-id": "messagesWithI18n",
+            i18n: jest.genMockFunction()
+        });
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use onI18n instead of i18n. Support for i18n will be removed in next version");
+    });
+
+    // TODO To be removed once "i18n" support is discontnued.
+    it("log no warning in console without i18n", function () {
+        console.warn = jest.genMockFunction();
+        getComponent({
+            "data-id": "messagesWithOnI18n"
+        });
+
+        expect(console.warn).not.toBeCalled();
     });
 });

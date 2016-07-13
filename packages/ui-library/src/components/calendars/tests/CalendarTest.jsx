@@ -27,13 +27,51 @@ describe("Calendar", function () {
         callback.mockClear();
     });
 
+    it("renders with default data-id", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar date={selectedDate} />
+        );
+
+        var calendar = TestUtils.findRenderedDOMNodeWithDataId(component, "calendar");
+
+        expect(calendar).toBeDefined();
+    });
+
+    it("renders with given data-id", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar data-id="myCalendar" date={selectedDate} />
+        );
+
+        var calendar = TestUtils.findRenderedDOMNodeWithDataId(component, "myCalendar");
+
+        expect(calendar).toBeDefined();
+    });
+
+    //TODO: remove when v1 no longer supported
+    it("renders with given id", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar id="myCalendar" date={selectedDate} />
+        );
+
+        var calendar = TestUtils.findRenderedDOMNodeWithDataId(component, "myCalendar");
+
+        expect(calendar).toBeDefined();
+    });
+
+    it("renders will null date and inputValue state it date not specified", function () {
+        var component = ReactTestUtils.renderIntoDocument(<Calendar />);
+
+        expect(component.state.date).toBeNull();
+        expect(component.state.inputValue).toBeNull();
+    });
+
     it("is rendering closed view", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Calendar format="YYYY-MM-DD"
                       date={selectedDate}
                       computableFormat="x"
                       closeOnSelect={true}
-                      onChange={callback}/>
+                      onValueChange={callback}/>
         );
 
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
@@ -51,7 +89,7 @@ describe("Calendar", function () {
                       date={selectedDate}
                       computableFormat="x"
                       closeOnSelect={true}
-                      onChange={callback}/>
+                      onValueChange={callback}/>
         );
 
         var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
@@ -71,7 +109,7 @@ describe("Calendar", function () {
                       date={selectedDate}
                       computableFormat="x"
                       closeOnSelect={true}
-                      onChange={callback}/>
+                      onValueChange={callback}/>
         );
 
         var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
@@ -101,7 +139,7 @@ describe("Calendar", function () {
                       date={selectedDate}
                       computableFormat="x"
                       closeOnSelect={true}
-                      onChange={callback}/>
+                      onValueChange={callback}/>
         );
 
         var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
@@ -123,7 +161,8 @@ describe("Calendar", function () {
         expect(cells.length).toEqual(12);
     });
 
-    it("renders as required", function () {
+    //TODO: remove when v1 no longer supported
+    it("renders as required when isRequired set", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Calendar format="YYYY-MM-DD"
                       date={selectedDate}
@@ -136,7 +175,21 @@ describe("Calendar", function () {
         expect(ReactDOM.findDOMNode(component).className).toContain("required");
     });
 
-    it("is triggering callback on date selection", function () {
+    it("renders as required when required set", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar format="YYYY-MM-DD"
+                      date={selectedDate}
+                      computableFormat="x"
+                      closeOnSelect={true}
+                      onValueChange={callback}
+                      required={true}/>
+        );
+
+        expect(ReactDOM.findDOMNode(component).className).toContain("required");
+    });
+
+    //TODO: remove when v1 no longer supported
+    it("is triggering onChange callback on date selection", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Calendar format="YYYY-MM-DD"
                       date={selectedDate}
@@ -157,13 +210,52 @@ describe("Calendar", function () {
         expect(callback).toBeCalled();
     });
 
-    it("changes date via input field", function () {
+    it("is triggering onValueChange callback on date selection", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar format="YYYY-MM-DD"
+                      date={selectedDate}
+                      computableFormat="x"
+                      closeOnSelect={true}
+                      onValueChange={callback}/>
+        );
+
+        var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
+
+        //open calendar
+        ReactTestUtils.Simulate.click(container, {});
+
+        var cells = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "day");
+
+        ReactTestUtils.Simulate.click(cells[7], {});
+
+        expect(callback).toBeCalled();
+    });
+
+    //TODO: remove when v1 no longer supported
+    it("onChange changes date via input field", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Calendar format="YYYY-MM-DD"
                       date={selectedDate}
                       computableFormat="x"
                       closeOnSelect={true}
                       onChange={callback}/>
+        );
+
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+
+        ReactTestUtils.Simulate.change(input, { target: { value: "2016-10-15" } });
+
+        //input was updated
+        expect(input.value).toBe("2016-10-15");
+    });
+
+    it("onValueChange changes date via input field", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar format="YYYY-MM-DD"
+                      date={selectedDate}
+                      computableFormat="x"
+                      closeOnSelect={true}
+                      onValueChange={callback}/>
         );
 
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
@@ -181,7 +273,7 @@ describe("Calendar", function () {
                       minView={1}
                       computableFormat="x"
                       closeOnSelect={true}
-                      onChange={callback}/>
+                      onValueChange={callback}/>
         );
 
         var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
@@ -198,7 +290,8 @@ describe("Calendar", function () {
         expect(callback).toBeCalled();
     });
 
-    it("is triggering callback on arrow nagivation", function () {
+    //TODO: remove when v1 no longer supported
+    it("is triggering onChange callback on arrow nagivation", function () {
         var globalKeyListener = TestUtils.captureGlobalListener("keyDown", document);
 
         var component = ReactTestUtils.renderIntoDocument(
@@ -207,6 +300,27 @@ describe("Calendar", function () {
                       computableFormat="x"
                       closeOnSelect={true}
                       onChange={callback}/>
+        );
+
+        var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
+
+        //open calendar
+        ReactTestUtils.Simulate.click(container, {});
+
+        globalKeyListener({ keyCode: 39 }); //arrow right
+
+        expect(callback).toBeCalledWith("1444953600000");
+    });
+
+    it("is triggering onValueChange callback on arrow nagivation", function () {
+        var globalKeyListener = TestUtils.captureGlobalListener("keyDown", document);
+
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar format="YYYY-MM-DD"
+                      date={selectedDate}
+                      computableFormat="x"
+                      closeOnSelect={true}
+                      onValueChange={callback}/>
         );
 
         var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
@@ -228,7 +342,7 @@ describe("Calendar", function () {
                       date={selectedDate}
                       computableFormat="x"
                       closeOnSelect={true}
-                      onChange={callback}/>
+                      onValueChange={callback}/>
         );
 
         ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
@@ -246,7 +360,7 @@ describe("Calendar", function () {
                       date={selectedDate}
                       computableFormat="x"
                       closeOnSelect={true}
-                      onChange={callback}/>
+                      onValueChange={callback}/>
         );
 
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
@@ -262,7 +376,7 @@ describe("Calendar", function () {
                       date={selectedDate}
                       computableFormat="x"
                       closeOnSelect={true}
-                      onChange={callback}/>
+                      onValueChange={callback}/>
         );
 
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
@@ -273,13 +387,30 @@ describe("Calendar", function () {
         expect(callback).toBeCalled();
     });
 
-    it("does not trigger callback for empty string date input", function () {
+    //TODO: remove when v1 no longer supported
+    it("does not trigger onChange callback for empty string date input", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Calendar format="YYYY-MM-DD"
                       date={selectedDate}
                       computableFormat="x"
                       closeOnSelect={true}
                       onChange={callback}/>
+        );
+
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+
+        ReactTestUtils.Simulate.blur(input, { target: { value: "" } });
+
+        expect(callback).not.toBeCalled();
+    });
+
+    it("does not trigger onValueChange callback for empty string date input", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar format="YYYY-MM-DD"
+                      date={selectedDate}
+                      computableFormat="x"
+                      closeOnSelect={true}
+                      onValueChange={callback}/>
         );
 
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
@@ -297,7 +428,7 @@ describe("Calendar", function () {
                       date={selectedDate}
                       computableFormat="x"
                       closeOnSelect={true}
-                      onChange={callback}/>
+                      onValueChange={callback}/>
         );
 
         var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
@@ -313,6 +444,42 @@ describe("Calendar", function () {
 
         //make sure calendar was closed
         expect(cells.length).toEqual(0);
+    });
+
+    //TODO: remove when v1 no longer supported
+    it("logs warning for id prop", function () {
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <Calendar id="myCalendar" date={selectedDate} />
+        );
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use data-id instead of id. " +
+            "Support for id will be removed in next version");
+    });
+
+    //TODO: remove when v1 no longer supported
+    it("logs warning for onChange prop", function () {
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <Calendar date={selectedDate} onChange={jest.genMockFunction()} />
+          );
+
+        expect(console.warn).toBeCalledWith(
+          "Deprecated: use onValueChange instead of onChange. " +
+          "Support for onChange will be removed in next version");
+    });
+
+    //TODO: remove when v1 no longer supported
+    it("logs warning for isRequired prop", function () {
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <Calendar date={selectedDate} isRequired={true} />
+          );
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use required instead of isRequired. " +
+            "Support for isRequired will be removed in next version");
     });
 
 });

@@ -31,8 +31,8 @@ var LeftNavDemo = React.createClass({
         //the nav bar is styled with position fixed so it's not possible to have a demo for it
         return (
             <LeftNavBar {...this.state}
-                onItemClick={this._handleItemClick}
-                onSectionClick={this._handleSectionClick} />);
+                onItemValueChange={this._handleItemClick}
+                onSectionValueChange={this._handleSectionClick} />);
     }
 });
 

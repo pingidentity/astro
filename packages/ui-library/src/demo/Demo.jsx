@@ -201,7 +201,7 @@ var DemoApp = React.createClass({
                 }
                 <HeaderBar {...this.props.header}
                     label="UI Library"
-                    onItemClick={this.headerActions.toggleItem} />
+                    onItemValueChange={this.headerActions.toggleItem} />
 
                 {
                   /*
@@ -209,8 +209,8 @@ var DemoApp = React.createClass({
                    */
                 }
                 <LeftNavBar {...this.props.nav}
-                    onItemClick={this.navActions.selectItem}
-                    onSectionClick={this.navActions.toggleSection} />
+                    onItemValueChange={this.navActions.selectItem}
+                    onSectionValueChange={this.navActions.toggleSection} />
 
                 {
                   /*

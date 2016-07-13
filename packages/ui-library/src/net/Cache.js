@@ -4,15 +4,20 @@ var Constants = require("../constants/CacheConstants");
 
 /**
  * @module net/Cache
- * @desc the module dedicated to work in conjunction with net/DataSourceApi and provides caching layer for networking
+ * @desc The module dedicated to work in conjunction with net/DataSourceApi and provides caching layer for networking.
  */
 
 /**
  * @alias module:net/Cache.Cache
- * @desc Class object dedicated to data caching
- * @param {constants/CacheConstants#CacheTypes} type the cache type
- * @param {string} name the cache's name
- * @param {number} expiry cache expiry time in seconds
+ * @desc Class object dedicated to data caching.
+ *
+ * @param {module:constants/CacheConstants.CacheTypes} type
+ *    The cache type.
+ * @param {string} name
+ *    The cache's name.
+ * @param {number} expiry
+ *    Cache expiry time in seconds.
+ *
  * @example
  * var cache = new Cache('LOCAL', 'usersStore', 180);
  */
@@ -40,7 +45,7 @@ function Cache (type, name, expiry) {
 }
 
 /**
- * @memberOf module:net/Cache
+ * @alias module:net/Cache.clear
  * @desc Clear the cache.
  */
 Cache.prototype.clear = function () {
@@ -54,10 +59,14 @@ Cache.prototype.clear = function () {
 };
 
 /**
- * @memberOf module:net/Cache
+ * @alias module:net/Cache.get
  * @desc Get an item from the cache.
- * @param {*} key the item's key
- * @return {*} the value in the cache for the given key, otherwise undefined
+ *
+ * @param {*} key
+ *    The item's key.
+ *
+ * @return {*}
+ *    The value in the cache for the given key, otherwise undefined.
  */
 Cache.prototype.get = function (key) {
     var now = new Date().getTime(), myCache;
@@ -80,11 +89,16 @@ Cache.prototype.get = function (key) {
 };
 
 /**
- * @memberOf module:net/Cache
+ * @alias module:net/Cache.put
  * @desc Put an item in the cache.
- * @param {*} key the item's key
- * @param {*} item the item
- * @returns {boolean} true if successfully stored, false otherwise
+ *
+ * @param {*} key
+ *    The item's key.
+ * @param {*} item
+ *    The item.
+ *
+ * @returns {boolean}
+ *    True if successfully stored, false otherwise.
  */
 Cache.prototype.put = function (key, item) {
     try {

@@ -38,6 +38,30 @@ describe("ExpandableRow", function () {
         return TestUtils.findRenderedDOMNodeWithDataId(component, "delete-btn");
     }
 
+    it("renders with default data-id", function () {
+        var component = getComponent();
+
+        var row = TestUtils.findRenderedDOMNodeWithDataId(component, "expandable-row");
+
+        expect(row).toBeDefined();
+    });
+
+    it("renders with given data-id", function () {
+        var component = getComponent({ "data-id": "myRow" });
+
+        var row = TestUtils.findRenderedDOMNodeWithDataId(component, "myRow");
+
+        expect(row).toBeDefined();
+    });
+
+    it("renders with given id", function () {
+        var component = getComponent({ id: "myRow" });
+
+        var row = TestUtils.findRenderedDOMNodeWithDataId(component, "myRow");
+
+        expect(row).toBeDefined();
+    });
+
     it("stateless: renders component as collapsed (by default)", function () {
         var component = getComponent();
         var expandedRow = TestUtils.findRenderedDOMNodeWithDataId(component, "expanded-row");
@@ -406,4 +430,24 @@ describe("ExpandableRow", function () {
         expect(component.props.onEditButtonClick).toBeCalled();
     });
 
+    //TODO: remove when v1 no longer supported
+    it("logs warning when id prop given", function () {
+        console.warn = jest.genMockFunction();
+
+        getComponent({ id: "myRow" });
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use data-id instead of id. Support for id will be removed in next version");
+    });
+
+    //TODO: remove when v1 no longer supported
+    it("logs wanring when defaultToExpanded prop given", function () {
+        console.warn = jest.genMockFunction();
+
+        getComponent({ defaultToExpanded: true });
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use expanded instead of defaultToExpanded. " +
+            "Support for defaultToExpanded will be removed in next version");
+    });
 });

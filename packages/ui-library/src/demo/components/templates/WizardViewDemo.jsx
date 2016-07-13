@@ -42,7 +42,7 @@ var WizardViewDemo = React.createClass({
                 onNext={this.wizardActions.next}
                 onEdit={this.wizardActions.edit}
                 onReset={this._handleReset}
-                onChange={this.wizardActions.choose} />);
+                onValueChange={this.wizardActions.pick} />);
     }
 });
 

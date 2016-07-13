@@ -1,36 +1,29 @@
 var React = require("react");
-var Toggle = require("../../../components/forms/Toggle.jsx");
+var Toggle = require("../../../components/forms/form-toggle");
 
 var ToggleDemo = React.createClass({
 
     getInitialState: function () {
         return {
-            userStatus: "DISABLED"
+            toggled: false,
+            userStatus: "USER DISABLED"
         };
     },
 
-    _isToggled: function () {
-        return this.state.userStatus === "ACTIVE";
-    },
-
-    _onStatusToggle: function (toggledOn) {
-        if (toggledOn) {
-            this.setState({
-                userStatus: "ACTIVE"
-            });
-        } else {
-            this.setState({
-                userStatus: "DISABLED"
-            });
-        }
-        return true;
+    _handleToggle: function () {
+        this.setState({
+            toggled: !this.state.toggled,
+            userStatus: !this.state.toggled ? "USER ACTIVE" : "USER DISABLED"
+        });
     },
 
     render: function () {
         return (
             <div>
-                <Toggle onToggle={this._onStatusToggle} id="toggle" toggled={this._isToggled()}
-                    disabled={false} className="row-status-toggle" />
+                <Toggle data-id="user-toggle" className="row-status-toggle"
+                        controlled={true}
+                        toggled={this.state.toggled}
+                        onToggle={this._handleToggle} />
                 <br/><br/>
                 <div data-id="userStatus">{this.state.userStatus}</div>
             </div>

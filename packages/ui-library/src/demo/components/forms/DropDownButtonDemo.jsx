@@ -16,7 +16,7 @@ var DropDownButtonDemo = React.createClass({
         });
     },
 
-    _onSelect: function (selectedLabel) {
+    _onValueChange: function (selectedLabel) {
         this.setState({
             selectedLabel: this._dropDownOptions()[selectedLabel],
             open: false
@@ -47,7 +47,7 @@ var DropDownButtonDemo = React.createClass({
                 <DropDownButton
                     title="Options Title"
                     label="New Option"
-                    onSelect={this._onSelect}
+                    onValueChange={this._onValueChange}
                     onToggle={this._onToggle}
                     open={this.state.open}
                     controlled={true}

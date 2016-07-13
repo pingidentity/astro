@@ -7,6 +7,7 @@ jest.dontMock("../../../../util/Utils");
 describe("MultiDrag", function () {
     var React = require("react"),
         ReactTestUtils = require("react-addons-test-utils"),
+        TestUtils = require("../../../../testutil/TestUtils"),
         ReduxTestUtils = require("../../../../util/ReduxTestUtils"),
         MultiDrag = require("../MultiDrag.jsx"),
         _ = require("underscore");
@@ -41,6 +42,33 @@ describe("MultiDrag", function () {
             to: { column: toC, index: toI }
         };
     }
+
+    it("renders with default data-id", function () {
+        var wrapper = getWrappedComponent();
+        var component = getUnderlyingComp(wrapper);
+
+        var multiDrag = TestUtils.findRenderedDOMNodeWithDataId(component, "multi-drag");
+
+        expect(multiDrag).toBeDefined();
+    });
+
+    it("renders with given data-id", function () {
+        var wrapper = getWrappedComponent({ "data-id": "myMultiDrag" });
+        var component = getUnderlyingComp(wrapper);
+
+        var multiDrag = TestUtils.findRenderedDOMNodeWithDataId(component, "myMultiDrag");
+
+        expect(multiDrag).toBeDefined();
+    });
+
+    it("renders with given className", function () {
+        var wrapper = getWrappedComponent({ className: "myMultiDragClass" });
+        var component = getUnderlyingComp(wrapper);
+
+        var multiDrag = TestUtils.findRenderedDOMNodeWithClass(component, "myMultiDragClass");
+
+        expect(multiDrag).toBeDefined();
+    });
 
     it("cancels drag while invalid", function () {
         var wrapper = getWrappedComponent();

@@ -1,3 +1,5 @@
+"use strict";
+
 var React = require("react");
 var ReactDOM = require("react-dom");
 var dnd = require("react-dnd");
@@ -69,30 +71,55 @@ var dropCollect = function (connect) {
 };
 
 /**
- * @callback DragDropRow~dragCallback
- * @param {number} targetIndex - current target index where items is dragged over or dropped
- * @param {number} sourceIndex - origin index item is dragged or dropped from
+ * @callback DragDropRow~onDrag
+ * @param {number} targetIndex
+ *          current target index where items is dragged over or dropped
+ * @param {number} sourceIndex
+ *          origin index item is dragged or dropped from
+ */
+
+/**
+ * @callback DragDropRow~onDrop
+ * @param {number} targetIndex
+ *          current target index where items is dragged over or dropped
+ * @param {number} sourceIndex
+ *          origin index item is dragged or dropped from
+ */
+
+/**
+ * @callback DragDropRow~onCancel
  */
 
 /**
  * @class DragDropRow
  *
- * @desc A component to hide the workings of react-dnd.  Can be dragged on dropped onto any other component of type DragDropRow
- * @param {string|number} id - An id for the row
- * @param {number} index - The index number for the row
- * @param {bool} [disabled=false] - If child content should not be draggable. False by default (draggable).
- * @param {DragDropRow~dragCallback} onDrag - A callback which is execute when the row is moved.  Must have signature function (targetIndex, ownIndex)
- * @param {DragDropRow~dragCallback} onDrop - A callback which is execute when the row is dropped.  Must have signature function (targetIndex, ownIndex)
- * @param {function} onCancel - A callback which is executed when the dragging is cancelled (dropped outside a droppable area or esc button pressed).
- * @param {boolean} removeDraggableAttribute - Remove the draggable="true" attribute to disable dragging.  This is useful to resolve issues with IE and input fields.
+ * @desc A component to hide the workings of react-dnd.  Can be dragged on dropped onto any other component
+ * of type DragDropRow
+ *
+ * @param {string|number} id
+ *          An id for the row
+ * @param {number} index
+ *          The index number for the row
+ * @param {bool} [disabled=false]
+ *          If child content should not be draggable. False by default (draggable).
+ * @param {boolean} removeDraggableAttribute
+ *          Remove the draggable="true" attribute to disable dragging.  This is useful to resolve issues with IE
+ *          and input fields.
+ * @param {DragDropRow~onDrag} onDrag
+ *          A callback which is execute when the row is moved.  Must have signature function (targetIndex, ownIndex)
+ * @param {DragDropRow~onDrop} onDrop
+ *          A callback which is execute when the row is dropped.  Must have signature function (targetIndex, ownIndex)
+ * @param {DragDropRow~onCancel} onCancel
+ *          A callback which is executed when the dragging is cancelled (dropped outside a droppable area
+ *          or esc button pressed).
  *
  * @example
- *  <DragDropRow onDrop={this._reorder} disabled={this.props.disabled} id="1" index={1}>
- *      <div>Row #1</div>
- *  </DragDropRow>
- *  <DragDropRow onDrop={this._reorder} id="2" index={2}>
- *      <div>Row #2</div>
- *  </DragDropRow>
+ *
+ *  <Draggable id={index} index={index} onDrag={this._onDrag} onDrop={this._onDrop}
+ *              onCancel={this._onCancel} disabled={item === 2}>
+ *      <div className={this._getDragClass(item, index)}>Row {item} {item === 2 && "can't drag me"}</div>
+ *  </Draggable>
+ *
  */
 var DragDropRow = React.createClass({
     propTypes: {

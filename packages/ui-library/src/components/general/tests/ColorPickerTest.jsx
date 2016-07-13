@@ -4,6 +4,7 @@ jest.dontMock("../ColorPicker.jsx");
 jest.dontMock("../If.jsx");
 jest.dontMock("../../../util/EventUtils.js");
 jest.dontMock("../../../util/Validators.js");
+jest.dontMock("../../../util/Utils.js");
 
 describe("ColorPicker", function () {
     var React = require("react"),
@@ -20,7 +21,7 @@ describe("ColorPicker", function () {
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
             onToggle: jest.genMockFunction(),
-            onChange: jest.genMockFunction(),
+            onValueChange: jest.genMockFunction(),
             onError: jest.genMockFunction(),
             color: "#fff"
         });
@@ -196,7 +197,7 @@ describe("ColorPicker", function () {
         // the picker should not be rendered (due to the disable state), even after forcibly toggling it
         var picker = componentRef.refs.reactColorPicker;
         expect(picker).toBeUndefined();
-        component.refs.stateful._toggle();
+        component.refs.stateful._handleToggle();
         var picker = componentRef.refs.reactColorPicker;
         expect(picker).toBeUndefined();
     });
@@ -209,7 +210,7 @@ describe("ColorPicker", function () {
 
         //return key should make it expand.  This is weak but simulating keydowns didnt work
         ReactTestUtils.Simulate.change(input, { target: { value: "#ff00aa" } });
-        expect(component.props.onChange).lastCalledWith("#ff00aa");
+        expect(component.props.onValueChange).lastCalledWith("#ff00aa");
     });
 
     it("stateful: accepts valid user typed color", function () {
@@ -218,7 +219,7 @@ describe("ColorPicker", function () {
 
         //return key should make it expand.  This is weak but simulating keydowns didnt work
         ReactTestUtils.Simulate.change(input, { target: { value: "#ff00aa" } });
-        expect(component.props.onChange).lastCalledWith("#ff00aa");
+        expect(component.props.onValueChange).lastCalledWith("#ff00aa");
     });
 
     it("stateless: does not accept invalid user typed color", function () {
@@ -229,7 +230,7 @@ describe("ColorPicker", function () {
 
         //return key should make it expand.  This is weak but simulating keydowns didnt work
         ReactTestUtils.Simulate.change(input, { target: { value: "#xxi" } });
-        expect(component.props.onChange).not.toBeCalled();
+        expect(component.props.onValueChange).not.toBeCalled();
     });
 
     it("stateful: does not accept invalid user typed color", function () {
@@ -238,7 +239,7 @@ describe("ColorPicker", function () {
 
         //return key should make it expand.  This is weak but simulating keydowns didnt work
         ReactTestUtils.Simulate.change(input, { target: { value: "#xxi" } });
-        expect(component.props.onChange).not.toBeCalled();
+        expect(component.props.onValueChange).not.toBeCalled();
     });
 
     it("stateless: triggers error for invalid user typed color on blur", function () {
@@ -269,10 +270,10 @@ describe("ColorPicker", function () {
 
         //return key should make it expand.  This is weak but simulating keydowns didnt work
         ReactTestUtils.Simulate.change(input, { target: { value: "ff00aa" } });
-        expect(component.props.onChange).lastCalledWith("#ff00aa");
+        expect(component.props.onValueChange).lastCalledWith("#ff00aa");
 
         ReactTestUtils.Simulate.change(input, { target: { value: "#aabbcc" } });
-        expect(component.props.onChange).lastCalledWith("#aabbcc");
+        expect(component.props.onValueChange).lastCalledWith("#aabbcc");
     });
 
     it("stateful: prepends '#' to user typed color if it does not start with '#'", function () {
@@ -281,10 +282,10 @@ describe("ColorPicker", function () {
 
         //return key should make it expand.  This is weak but simulating keydowns didnt work
         ReactTestUtils.Simulate.change(input, { target: { value: "ff00aa" } });
-        expect(component.props.onChange).lastCalledWith("#ff00aa");
+        expect(component.props.onValueChange).lastCalledWith("#ff00aa");
 
         ReactTestUtils.Simulate.change(input, { target: { value: "#aabbcc" } });
-        expect(component.props.onChange).lastCalledWith("#aabbcc");
+        expect(component.props.onValueChange).lastCalledWith("#aabbcc");
     });
 
     it("stateless: detaches on unmount", function () {
@@ -487,7 +488,7 @@ describe("ColorPicker", function () {
         expect(componentRef.props.open).toBe(true);
     });
 
-    it("stateless: trigger onChange when color is picked", function () {
+    it("stateless: trigger onValueChange when color is picked", function () {
         var component = getComponent({
             controlled: true,
             open: true
@@ -495,48 +496,130 @@ describe("ColorPicker", function () {
         var componentRef = component.refs.stateless;
 
         // simulate a call back from the react color picker component
-        componentRef._onChange("#aaa");
+        componentRef._handleValueChange("#aaa");
+
+        expect(component.props.onValueChange.mock.calls.length).toBe(1);
+        expect(component.props.onValueChange.mock.calls[0][0]).toBe("#aaa");
+        expect(component.props.onValueChange.mock.calls[0][1]).toBeUndefined();
+    });
+
+    it("stateful: trigger onValueChange when color is picked", function () {
+        var component = getComponent();
+        var componentRef = component.refs.stateful.refs.stateless;
+
+        // open the color picker
+        ReactTestUtils.Simulate.click(componentRef.refs.innerSwatch);
+
+        // simulate a call back from the react color picker component
+        componentRef._handleValueChange("#aaa");
+        expect(component.props.onValueChange.mock.calls.length).toBe(1);
+    });
+
+    it("stateless: trigger onValueChange when mouse is dragged on the color picker", function () {
+        var component = getComponent({
+            controlled: true,
+            open: true
+        });
+        var componentRef = component.refs.stateless;
+
+        // simulate a call back from the react color picker component
+        componentRef._handleDrag("#aaa");
+
+        expect(component.props.onValueChange.mock.calls.length).toBe(1);
+        expect(component.props.onValueChange.mock.calls[0][0]).toBe("#aaa");
+    });
+
+    it("stateful: trigger onValueChange when mouse is dragged on the color picker", function () {
+        var component = getComponent();
+        var componentRef = component.refs.stateful.refs.stateless;
+
+        // open the color picker
+        ReactTestUtils.Simulate.click(componentRef.refs.innerSwatch);
+
+        // simulate a call back from the react color picker component
+        componentRef._handleDrag("#aaa");
+
+        expect(component.props.onValueChange.mock.calls.length).toBe(1);
+        // and the color picker should not close
+        expect(componentRef.props.open).toBe(true);
+    });
+
+    //TODO To be removed once "onChange" support is discontnued.
+    it("stateless: trigger onChange when color is picked", function () {
+        var opts = {
+            onToggle: jest.genMockFunction(),
+            onError: jest.genMockFunction(),
+            onChange: jest.genMockFunction(),
+            color: "#fff",
+            controlled: true,
+            open: true
+        };
+        var component = ReactTestUtils.renderIntoDocument(<ColorPicker {...opts} />);
+        var componentRef = component.refs.stateless;
+
+        // simulate a call back from the react color picker component
+        componentRef._handleValueChange("#aaa");
 
         expect(component.props.onChange.mock.calls.length).toBe(1);
         expect(component.props.onChange.mock.calls[0][0]).toBe("#aaa");
         expect(component.props.onChange.mock.calls[0][1]).toBeUndefined();
     });
 
+    //TODO To be removed once "onChange" support is discontnued.
     it("stateful: trigger onChange when color is picked", function () {
-        var component = getComponent();
+        var opts = {
+            onToggle: jest.genMockFunction(),
+            onError: jest.genMockFunction(),
+            onChange: jest.genMockFunction(),
+            color: "#fff"
+        };
+        var component = ReactTestUtils.renderIntoDocument(<ColorPicker {...opts} />);
         var componentRef = component.refs.stateful.refs.stateless;
 
         // open the color picker
         ReactTestUtils.Simulate.click(componentRef.refs.innerSwatch);
 
         // simulate a call back from the react color picker component
-        componentRef._onChange("#aaa");
+        componentRef._handleValueChange("#aaa");
         expect(component.props.onChange.mock.calls.length).toBe(1);
     });
 
+    //TODO To be removed once "onChange" support is discontnued.
     it("stateless: trigger onChange when mouse is dragged on the color picker", function () {
-        var component = getComponent({
+        var opts = {
+            onToggle: jest.genMockFunction(),
+            onError: jest.genMockFunction(),
+            onChange: jest.genMockFunction(),
+            color: "#fff",
             controlled: true,
             open: true
-        });
+        };
+        var component = ReactTestUtils.renderIntoDocument(<ColorPicker {...opts} />);
         var componentRef = component.refs.stateless;
 
         // simulate a call back from the react color picker component
-        componentRef._onDrag("#aaa");
+        componentRef._handleDrag("#aaa");
 
         expect(component.props.onChange.mock.calls.length).toBe(1);
         expect(component.props.onChange.mock.calls[0][0]).toBe("#aaa");
     });
 
+    //TODO To be removed once "onChange" support is discontnued.
     it("stateful: trigger onChange when mouse is dragged on the color picker", function () {
-        var component = getComponent();
+        var opts = {
+            onToggle: jest.genMockFunction(),
+            onError: jest.genMockFunction(),
+            onChange: jest.genMockFunction(),
+            color: "#fff"
+        };
+        var component = ReactTestUtils.renderIntoDocument(<ColorPicker {...opts} />);
         var componentRef = component.refs.stateful.refs.stateless;
 
         // open the color picker
         ReactTestUtils.Simulate.click(componentRef.refs.innerSwatch);
 
         // simulate a call back from the react color picker component
-        componentRef._onDrag("#aaa");
+        componentRef._handleDrag("#aaa");
 
         expect(component.props.onChange.mock.calls.length).toBe(1);
         // and the color picker should not close
@@ -556,21 +639,78 @@ describe("ColorPicker", function () {
         expect(picker.props.value).toBe("#ff00ff");
     });
 
-    it("stateless: hides picker when told so", function () {
-        var component = getComponent({
-            id: "container",
-            color: "#ff00ff",
-            pickerHidden: true,
-            controlled: true
+    // TODO To be removed once "id" support is discontnued.
+    it("render component with id", function () {
+        var component = getComponent(
+            { id: "colorPickerWithId" }
+        );
+
+        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "colorPickerWithId");
+
+        expect(element).toBeDefined();
+    });
+
+    it("render component with data-id", function () {
+        var component = getComponent(
+            { "data-id": "colorPickerWithDataId" }
+        );
+
+        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "colorPickerWithDataId");
+
+        expect(element).toBeDefined();
+    });
+
+    it("render component with default data-id", function () {
+        var component = getComponent();
+
+        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "color-picker");
+
+        expect(element).toBeDefined();
+    });
+
+    // TODO To be removed once "id" support is discontnued.
+    it("log warning in console for id", function () {
+        console.warn = jest.genMockFunction();
+        getComponent(
+            { id: "colorPickerWithId" }
+        );
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use data-id instead of id. Support for id will be removed in next version");
+    });
+
+    // TODO To be removed once "id" support is discontnued.
+    it("does not log warning in console without id", function () {
+        console.warn = jest.genMockFunction();
+        getComponent();
+
+        expect(console.warn).not.toBeCalled();
+    });
+
+    // TODO To be removed once "onChange" support is discontnued.
+    it("log warning in console for onChange", function () {
+        console.warn = jest.genMockFunction();
+        getComponent({
+            "data-id": "colorPickerWithOnChange",
+            onChange: jest.genMockFunction()
         });
-        var componentRef = component.refs.stateless;
 
-        // the picker is not visible by default
-        var picker = componentRef.refs.reactColorPicker;
-        expect(picker).toBeDefined();
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use onValueChange instead of onChange. Support for onChange will be removed in next version");
+    });
 
-        var container = TestUtils.findRenderedDOMNodeWithDataId(component, "container");
-        expect(container.classList.contains("open")).toBeFalsy();
+    // TODO To be removed once "onChange" support is discontnued.
+    it("log warning in console for missing onValueChange and onChange", function () {
+        console.error = jest.genMockFunction();
+        var opts = {
+            onToggle: jest.genMockFunction(),
+            onError: jest.genMockFunction(),
+            color: "#fff"
+        };
+        ReactTestUtils.renderIntoDocument(<ColorPicker {...opts} />);
+
+        expect(console.error).toBeCalledWith(
+            "Warning: Failed propType: Required prop onValueChange was not specified in `ColorPicker`.");
     });
 
 });

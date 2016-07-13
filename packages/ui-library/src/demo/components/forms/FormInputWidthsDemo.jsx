@@ -1,21 +1,21 @@
 
 var React = require("react"),
-    FormTextArea = require("./../../../components/forms/FormTextArea.jsx"),
+    FormTextArea = require("./../../../components/forms/form-text-area"),
     FormTextField = require("./../../../components/forms/form-text-field"),
-    FormSelectField = require("./../../../components/forms/FormSelectField.jsx"),
+    FormSelectField = require("./../../../components/forms/form-select-field"),
     FormCheckbox = require("./../../../components/forms/FormCheckbox.jsx");
 
 
 var FormInputWidthsDemo = React.createClass({
 
     render: function () {
-        var selectOptions = {
-            value1: "Option One",
-            value2: "Option Two",
-            value3: "Option Three",
-            value4: "Option Four",
-            value5: "Option Fiv"
-        };
+        var selectOptions = [
+            { label: "value1", value: "Option One" },
+            { label: "value2", value: "Option Two" },
+            { label: "value3", value: "Option Three" },
+            { label: "value4", value: "Option Four" },
+            { label: "value5", value: "Option Five" },
+        ];
 
         return (
             <div>
@@ -67,32 +67,32 @@ var FormInputWidthsDemo = React.createClass({
                 <br />
 
                 <div>
-                    <FormSelectField options={selectOptions} label="Full" className="input-width-full" />
+                    <FormSelectField value="" options={selectOptions} label="Full" className="input-width-full" />
                 </div>
                 <div>
-                    <FormSelectField options={selectOptions} label="X-Large" className="input-width-xlarge" />
-                    <FormSelectField options={selectOptions} label="X-Small" className="input-width-xsmall" />
+                    <FormSelectField value="" options={selectOptions} label="X-Large" className="input-width-xlarge" />
+                    <FormSelectField value="" options={selectOptions} label="X-Small" className="input-width-xsmall" />
                 </div>
                 <div>
-                    <FormSelectField options={selectOptions} label="Large" className="input-width-large" />
-                    <FormSelectField options={selectOptions} label="Small" className="input-width-small" />
+                    <FormSelectField value="" options={selectOptions} label="Large" className="input-width-large" />
+                    <FormSelectField value="" options={selectOptions} label="Small" className="input-width-small" />
                 </div>
                 <div>
-                    <FormSelectField options={selectOptions} label="Medium" className="input-width-medium" />
-                    <FormSelectField options={selectOptions} label="Medium" className="input-width-medium" />
+                    <FormSelectField value="" options={selectOptions} label="Medium" className="input-width-medium" />
+                    <FormSelectField value="" options={selectOptions} label="Medium" className="input-width-medium" />
                 </div>
                 <div>
-                    <FormSelectField options={selectOptions} label="Small" className="input-width-small" />
-                    <FormSelectField options={selectOptions} label="Small" className="input-width-small" />
-                    <FormSelectField options={selectOptions} label="Small" className="input-width-small" />
+                    <FormSelectField value="" options={selectOptions} label="Small" className="input-width-small" />
+                    <FormSelectField value="" options={selectOptions} label="Small" className="input-width-small" />
+                    <FormSelectField value="" options={selectOptions} label="Small" className="input-width-small" />
                 </div>
                 <div>
-                    <FormSelectField options={selectOptions} label="X-Small" className="input-width-xsmall" />
-                    <FormSelectField options={selectOptions} label="X-Small" className="input-width-xsmall" />
-                    <FormSelectField options={selectOptions} label="X-Small" className="input-width-xsmall" />
-                    <FormSelectField options={selectOptions} label="X-Small" className="input-width-xsmall" />
-                    <FormSelectField options={selectOptions} label="X-Small" className="input-width-xsmall" />
-                    <FormSelectField options={selectOptions} label="X-Small" className="input-width-xsmall" />
+                    <FormSelectField value="" options={selectOptions} label="X-Small" className="input-width-xsmall" />
+                    <FormSelectField value="" options={selectOptions} label="X-Small" className="input-width-xsmall" />
+                    <FormSelectField value="" options={selectOptions} label="X-Small" className="input-width-xsmall" />
+                    <FormSelectField value="" options={selectOptions} label="X-Small" className="input-width-xsmall" />
+                    <FormSelectField value="" options={selectOptions} label="X-Small" className="input-width-xsmall" />
+                    <FormSelectField value="" options={selectOptions} label="X-Small" className="input-width-xsmall" />
                 </div>
 
                 <br />

@@ -1,23 +1,44 @@
-var React = require("react");
-var FormSelectField = require("../forms/FormSelectField.jsx");
-var cx = require("classnames");
+"use strict";
+
+var React = require("react"),
+    _ = require("underscore"),
+    FormSelectField = require("../forms/form-select-field"),
+    Utils = require("../../util/Utils"),
+    cx = require("classnames");
+
+/**
+ * @callback TimePicker~onValueChange
+ * @param {string} time
+ *              Time represented as a formatted string.
+ */
 
 /**
  * @class TimePicker
  * @desc  A drop-down form for selecting the time
  *
- * @param {TimePicker~valueCallback} onValueChange Handles the select element value change
- * @param {number}   [increments]       The increments (in minutes) to populate the list. Default is 15
- * @param {string}   [format]           The time format. Either "12" or "24". Default is "12"
- * @param {string}   [labelText]        The text to display as the field's label
- * @param {string|object} [value]       The value to be set, eg: "3:00pm" or a `moment` object
- * @param {string}   [id="time-picker"] The data-id to pass to the FormSelectField
- * @param {string}   [className]        Additional class names for container
+ * @param {string} [data-id="time-picker"]
+ *              To define the base "data-id" value for the top-level HTML container.
+ * @param {string}   [id]
+ *              DEPRECATED. Use "data-id" instead.
+ * @param {string}   [className]
+ *              CSS classes to set on the top-level HTML container
+ * @param {number}   [increments]
+ *              The increments (in minutes) to populate the list. Default is 15
+ * @param {string}   [format]
+ *              The time format. Either "12" or "24". Default is "12"
+ * @param {string}   [labelText]
+ *              The text to display as the field's label
+ * @param {string|object} [value]
+ *              The value to be set, eg: "3:00pm" or a `moment` object
+ * @param {TimePicker~onValueChange} onValueChange
+ *              Callback to be triggered when the select element value changes
  */
 module.exports = React.createClass({
 
     propTypes: {
-        onValueChange: React.PropTypes.func.isRequired,
+        "data-id": React.PropTypes.string,
+        id: React.PropTypes.string,
+        className: React.PropTypes.string,
         increments: React.PropTypes.number,
         format: React.PropTypes.string,
         labelText: React.PropTypes.string,
@@ -25,13 +46,14 @@ module.exports = React.createClass({
             React.PropTypes.string,
             React.PropTypes.object
         ]),
-        id: React.PropTypes.string,
-        className: React.PropTypes.string
+        onValueChange: React.PropTypes.func.isRequired
     },
 
     /**
      * Adjusts hours based on format, adds am/pm property if needed
      * @method Timpicker#_getHourType
+     * @private
+     * @ignore
      *
      * @param  {Object} hoursMinutes The hours/mins object
      * @param  {String} format       The time format
@@ -50,6 +72,9 @@ module.exports = React.createClass({
      * Returns an object with the correct hours (based on format) and am/pm if 12 hour format
      *
      * @method TimePicker#_getHourType
+     * @private
+     * @ignore
+     *
      * @param  {Integer}  hours  The amount of hours to parse
      * @param  {String}   format The hour format
      * @return {Object}          {amPm, hours}
@@ -81,6 +106,8 @@ module.exports = React.createClass({
     /**
      * Pads with a zero if necessary
      * @method TimePicker#_getPaddedNumber
+     * @private
+     * @ignore
      *
      * @param  {String|Number} number The number
      * @return {String}               The padded number
@@ -93,6 +120,8 @@ module.exports = React.createClass({
     /**
      * Breaks minutes into hours and minutes
      * @method TimePicker#_getHoursMinutes
+     * @private
+     * @ignore
      *
      * @param  {Number} minutes The total minutes to be broken down
      * @return {Object}         eg: {
@@ -110,18 +139,20 @@ module.exports = React.createClass({
     /**
      * Populate an object of times
      * @method TimePicker#_getTimes
+     * @private
+     * @ignore
      *
-     * @return {Object} eg {
+     * @return {array} eg [
      *                         ...
-     *                         "6:00": "6:00",
-     *                         "6:30": "6:30",
-     *                         "7:00": "7:00",
+     *                         { label: "6:00", value: "6:00" },
+     *                         { label: "6:30", value: "6:30" }
+     *                         { label: "7:00", value: "7:00" }
      *                         ...
-     *                     }
+     *                     ]
      */
     _getTimes: function () {
         var increments = this.props.increments;
-        var times = {};
+        var times = [];
         var count = 24 * 60 / increments;
         var formattedTime;
 
@@ -132,20 +163,10 @@ module.exports = React.createClass({
                             this._getPaddedNumber(formattedTime.minutes) +
                             (formattedTime.amPm || "");
 
-            times[formattedTime] = formattedTime;
+            times.push({ label: formattedTime, value: formattedTime });
         }
 
         return times;
-    },
-
-    /**
-     * handles the change event
-     * @method TimePicker#_onChange
-     *
-     * @param {Object} e The event object
-     */
-    _onChange: function (e) {
-        this.props.onValueChange(e.target.value);
     },
 
     getDefaultProps: function () {
@@ -153,11 +174,19 @@ module.exports = React.createClass({
             increments: 15,
             format: "12",
             value: "12:00pm",
-            id: "time-picker"
+            "data-id": "time-picker"
         };
     },
 
+    componentWillMount: function () {
+        if (this.props.id) {
+            Utils.deprecateWarn("id", "data-id");
+        }
+    },
+
     render: function () {
+        var id = this.props.id || this.props["data-id"];
+
         var times = this._getTimes();
         var classes = cx("input-time", this.props.className);
         var value = this.props.value;
@@ -169,15 +198,14 @@ module.exports = React.createClass({
             value = hourType.hours + ":" + this._getPaddedNumber(minutes) + hourType.amPm;
         }
 
-        return (
-            <FormSelectField
-                {...this.props}
-                value={value}
-                options={times}
-                onChange={this._onChange}
-                className={classes}
-                label={this.props.labelText}
-            />
-        );
+        var props = _.defaults({
+            "data-id": id,
+            value: value,
+            options: times,
+            className: classes,
+            label: this.props.labelText
+        }, this.props);
+
+        return React.createElement(FormSelectField, props);
     }
 });

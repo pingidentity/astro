@@ -1,13 +1,25 @@
+window.__DEV__ = true;
 
-jest.dontMock("../ContextCloseButton.jsx");
+jest.dontMock("./common.jsx");
+jest.dontMock("../v1.jsx");
 
 
 describe("ContextCloseButton", function () {
     var React = require("react");
-    var ReactDOM = require("react-dom");
     var ReactTestUtils = require("react-addons-test-utils");
-    var TestUtils = require("../../../testutil/TestUtils");
-    var ContextCloseButton = require("../ContextCloseButton.jsx");
+    var TestUtils = require("../../../../testutil/TestUtils");
+    var ContextCloseButton = require("../v1.jsx"),
+        CommonTests = require("./common.jsx"),
+        _ = require("underscore");
+
+    function getComponent (opts) {
+        opts = _.defaults(opts || {}, {
+        });
+
+        return ReactTestUtils.renderIntoDocument(<ContextCloseButton {...opts} />);
+    }
+
+    CommonTests(getComponent);
 
     var ContextComponent = React.createClass({
         propTypes: {
@@ -109,45 +121,6 @@ describe("ContextCloseButton", function () {
         expect(clickCallback.mock.calls.length).toBe(1);
         expect(closeCallback.mock.calls.length).toBe(0);
         
-    });
-
-    /**
-     * Test to ensure that the show property is applied.
-     */
-    it("reacts correctly to the show state", function () {
-        var shown = false;
-        var component = ReactTestUtils.renderIntoDocument(
-            <ContextCloseButton show={shown} />
-        );
-        expect(ReactDOM.findDOMNode(component)).toBeNull();
-
-        shown = true;
-        component = ReactTestUtils.renderIntoDocument(
-            <ContextCloseButton show={shown} />
-        );
-        var button = TestUtils.findRenderedDOMNodeWithTag(component, "input");
-        expect(ReactTestUtils.isDOMComponent(button)).toBeTruthy();
-    });
-
-    /*
-     * Test to ensure that the disabled property is applied.
-     */
-    it("disabled state", function () {
-        var disabled = false;
-        var component = ReactTestUtils.renderIntoDocument(
-            <ContextCloseButton disabled={disabled} />
-        );
-        var button = TestUtils.findRenderedDOMNodeWithTag(component, "input");
-        expect(ReactTestUtils.isDOMComponent(button)).toBeTruthy();
-        expect(button.disabled).toBeFalsy();
-
-        disabled = true;
-        component = ReactTestUtils.renderIntoDocument(
-            <ContextCloseButton disabled={disabled} />
-        );
-        button = TestUtils.findRenderedDOMNodeWithTag(component, "input");
-        expect(ReactTestUtils.isDOMComponent(button)).toBeTruthy();
-        expect(button.disabled).toBeTruthy();
     });
 
 });

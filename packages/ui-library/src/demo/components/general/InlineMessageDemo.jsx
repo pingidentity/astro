@@ -23,7 +23,7 @@ var InlineMessageDemo = React.createClass({
                 </InlineMessage>
 
                 <InlineMessage data-id="notice-message-button" type={ InlineMessage.MessageTypes.NOTICE }
-                               label="Do Something" callback={doSomething}>
+                               label="Do Something" onClick={doSomething}>
                     Message with action.
                 </InlineMessage>
 

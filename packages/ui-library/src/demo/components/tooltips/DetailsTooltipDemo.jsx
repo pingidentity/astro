@@ -1,4 +1,4 @@
-var React = require("react");
+var React = require("re-react");
 var _ = require("underscore");
 var DetailsTooltip = require("../../../components/tooltips/DetailsTooltip.jsx");
 
@@ -47,9 +47,9 @@ var DetailsTooltipDemo = React.createClass({
 
     componentDidMount: function () {
         for (var i=1; i<=this.numDemos; i+=1) {
-            this["_toggle" + i] = this._toggle.bind(null, i);
-            this["_cancel" + i] = this._cancel.bind(null, i);
-            this["_confirm" + i] = this._confirm.bind(null, i);
+            this["_handleToggle" + i] = this._toggle.bind(null, i);
+            this["_handleCancel" + i] = this._cancel.bind(null, i);
+            this["_handleConfirm" + i] = this._confirm.bind(null, i);
         }
     },
 
@@ -57,11 +57,11 @@ var DetailsTooltipDemo = React.createClass({
         return (
             <div className="controls">
                 <DetailsTooltip
-                    positionStyle="bottom right"
+                    positionClassName="bottom right"
                     label="With a label (label is passed into component)"
                     title="Tooltip Title"
                     open={this.state.open1}
-                    onToggle={this._toggle1}>
+                    onToggle={this._handleToggle1}>
 
                     <p>
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
@@ -73,20 +73,20 @@ var DetailsTooltipDemo = React.createClass({
                             data-id="confirm-action"
                             value="Confirm"
                             className="primary"
-                            onClick={this._confirm1} />
+                            onClick={this._handleConfirm1} />
                         <br />
-                        <a className="cancel" onClick={this._cancel1}>Cancel</a>
+                        <a className="cancel" onClick={this._handleCancel1}>Cancel</a>
                     </div>
                 </DetailsTooltip>
                 <div>{this.state.status1}</div>
 
                 <br/>
-                <a onClick={this._toggle2}>Without label (label is outside component)</a>
+                <a onClick={this._handleToggle2}>Without label (label is outside component)</a>
                 <DetailsTooltip
-                    positionStyle="bottom right"
+                    positionClassName="bottom right"
                     title="Tooltip Title"
                     open={this.state.open2}
-                    onToggle={this._toggle2}>
+                    onToggle={this._handleToggle2}>
 
                     <p>
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
@@ -98,9 +98,9 @@ var DetailsTooltipDemo = React.createClass({
                             data-id="confirm-action"
                             value="Confirm"
                             className="primary"
-                            onClick={this._confirm2}/>
+                            onClick={this._handleConfirm2}/>
                         <br />
-                        <a className="cancel" onClick={this._cancel2}>Cancel</a>
+                        <a className="cancel" onClick={this._handleCancel2}>Cancel</a>
                     </div>
                 </DetailsTooltip>
                 <div>{this.state.status2}</div>
@@ -108,10 +108,10 @@ var DetailsTooltipDemo = React.createClass({
                 <br/>
                 <DetailsTooltip
                     label={(<input type="button" value="Label as button" />)}
-                    positionStyle="bottom right"
+                    positionClassName="bottom right"
                     title="Tooltip Title"
                     open={this.state.open3}
-                    onToggle={this._toggle3}>
+                    onToggle={this._handleToggle3}>
 
                     <p>
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
@@ -123,20 +123,20 @@ var DetailsTooltipDemo = React.createClass({
                             data-id="confirm-action"
                             value="Confirm"
                             className="primary"
-                            onClick={this._confirm3}/>
+                            onClick={this._handleConfirm3}/>
                         <br />
-                        <a className="cancel" onClick={this._cancel3}>Cancel</a>
+                        <a className="cancel" onClick={this._handleCancel3}>Cancel</a>
                     </div>
                 </DetailsTooltip>
                 <div>{this.state.status3}</div>
 
                 <br/>
                 <DetailsTooltip
-                    positionStyle="bottom"
+                    positionClassName="bottom"
                     label="Open by default"
                     title="Tooltip Title"
                     open={this.state.open4}
-                    onToggle={this._toggle4}>
+                    onToggle={this._handleToggle4}>
 
                     <p>
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
@@ -148,9 +148,9 @@ var DetailsTooltipDemo = React.createClass({
                             data-id="confirm-action"
                             value="Confirm"
                             className="primary"
-                            onClick={this._confirm4}/>
+                            onClick={this._handleConfirm4}/>
                         <br />
-                        <a className="cancel" onClick={this._cancel4}>Cancel</a>
+                        <a className="cancel" onClick={this._handleCancel4}>Cancel</a>
                     </div>
                 </DetailsTooltip>
                 <div>{this.state.status4}</div>
@@ -158,10 +158,10 @@ var DetailsTooltipDemo = React.createClass({
                 <br/>
                 <DetailsTooltip
                     label="With alert styling"
-                    positionStyle="alert"
+                    positionClassName="alert"
                     title="Tooltip Title"
                     open={this.state.open5}
-                    onToggle={this._toggle5}>
+                    onToggle={this._handleToggle5}>
 
                     <p>
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
@@ -173,17 +173,17 @@ var DetailsTooltipDemo = React.createClass({
                             data-id="confirm-action"
                             value="Confirm"
                             className="primary"
-                            onClick={this._confirm5}/>
+                            onClick={this._handleConfirm5}/>
                         <br />
-                        <a className="cancel" onClick={this._cancel5}>Cancel</a>
+                        <a className="cancel" onClick={this._handleCancel5}>Cancel</a>
                     </div>
                 </DetailsTooltip>
                 <div>{this.state.status5}</div>
 
                 <br/>
                 <DetailsTooltip
-                    positionStyle="bottom right"
-                    labelStyle="my-css-class"
+                    positionClassName="bottom right"
+                    labelClassName="my-css-class"
                     label="Stateful tooltip"
                     title="Tooltip Title"
                     controlled={false}

@@ -22,17 +22,18 @@ describe("DropDownButton", function () {
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
             <DropDownButton title="Test Drop Down"
                             controlled={true}
-                            onSelect={callback}
+                            onValueChange={callback}
                             options={menu}
-                            onToggle={jest.genMockFunction()} />
+                            onToggle={jest.genMockFunction()}
+                            label="Add" />
         );
 
         // expect a single button to be rendered.
-        var button = TestUtils.findRenderedDOMNodeWithClass(dropDownButtonComponent, "input-menu-button");
+        var button = TestUtils.findRenderedDOMNodeWithDataId(dropDownButtonComponent, "drop-down-button");
         expect(button.textContent).toBe("Add");
 
         // expect no modal to be rendered.
-        var menu = TestUtils.scryRenderedDOMNodesWithClass(dropDownButtonComponent, "menu");
+        var menu = TestUtils.scryRenderedDOMNodesWithDataId(dropDownButtonComponent, "menu");
         expect(menu.length).toEqual(0);
     });
 
@@ -45,17 +46,16 @@ describe("DropDownButton", function () {
         };
 
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
-            <DropDownButton title="Test Drop Down"
+            <DropDownButton label="Test Drop Down"
                             controlled={true}
                             open={true}
-                            onSelect={callback}
+                            onValueChange={callback}
                             options={menu}
                             onToggle={jest.genMockFunction()} />
         );
 
         //expect menu to be rendered
-        var menu = TestUtils.findRenderedDOMNodeWithClass(dropDownButtonComponent, "menu");
-        TestUtils.findRenderedDOMNodeWithClass(menu, "menu");
+        var menu = TestUtils.findRenderedDOMNodeWithDataId(dropDownButtonComponent, "menu");
 
         var as = TestUtils.scryRenderedDOMNodesWithTag(dropDownButtonComponent, "a");
 
@@ -73,17 +73,17 @@ describe("DropDownButton", function () {
         };
 
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
-            <DropDownButton title="Test Drop Down"
+            <DropDownButton label="Test Drop Down"
                             className="extra"
                             controlled={true}
                             open={true}
-                            onSelect={callback}
+                            onValueChange={callback}
                             options={menu}
                             onToggle={jest.genMockFunction()} />
         );
 
         //expect menu to be rendered
-        var root = TestUtils.findRenderedDOMNodeWithDataId (dropDownButtonComponent, "drop-down-button");
+        var root = TestUtils.findRenderedDOMNodeWithDataId(dropDownButtonComponent, "drop-down-button");
 
         expect(root.getAttribute("class")).toContain("extra");
     });
@@ -97,10 +97,10 @@ describe("DropDownButton", function () {
         };
 
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
-            <DropDownButton title="Test Drop Down"
+            <DropDownButton label="Test Drop Down"
                             controlled={true}
                             open={false}
-                            onSelect={jest.genMockFunction()}
+                            onValueChange={jest.genMockFunction()}
                             onToggle={callback}
                             options={menu} />
         );
@@ -127,17 +127,17 @@ describe("DropDownButton", function () {
         };
 
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
-            <DropDownButton title="Test Drop Down"
-                            onSelect={callback}
+            <DropDownButton label="Add" title="Test Drop Down"
+                            onValueChange={callback}
                             options={menu} />
         );
 
         // expect a single button to be rendered.
-        var button = TestUtils.findRenderedDOMNodeWithClass(dropDownButtonComponent, "input-menu-button");
+        var button = TestUtils.findRenderedDOMNodeWithDataId(dropDownButtonComponent, "drop-down-button");
         expect(button.textContent).toBe("Add");
 
         // expect no modal to be rendered.
-        var menu = TestUtils.scryRenderedDOMNodesWithClass(dropDownButtonComponent, "menu");
+        var menu = TestUtils.scryRenderedDOMNodesWithDataId(dropDownButtonComponent, "menu");
         expect(menu.length).toEqual(0);
 
     });
@@ -155,22 +155,22 @@ describe("DropDownButton", function () {
         };
 
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
-            <DropDownButton title="Test Drop Down"
-                            onSelect={callback}
+            <DropDownButton label="Test Drop Down"
+                            onValueChange={callback}
                             options={menu} />
         );
 
         // expect a single button to be rendered.
-        var button = TestUtils.findRenderedDOMNodeWithClass(dropDownButtonComponent, "add button inline");
+        var button = TestUtils.findRenderedDOMNodeWithDataId(dropDownButtonComponent, "action");
 
         // expect no menu to be rendered.
-        var menus = TestUtils.scryRenderedDOMNodesWithClass(dropDownButtonComponent, "menu");
+        var menus = TestUtils.scryRenderedDOMNodesWithDataId(dropDownButtonComponent, "menu");
         expect(menus.length).toEqual(0);
 
         ReactTestUtils.Simulate.click(button);
 
         // expect a menu to be rendered after click.
-        var menu = TestUtils.findRenderedDOMNodeWithClass(dropDownButtonComponent, "menu");
+        var menu = TestUtils.findRenderedDOMNodeWithDataId(dropDownButtonComponent, "menu");
         TestUtils.findRenderedDOMNodeWithClass(menu, "menu");
 
         var as = TestUtils.scryRenderedDOMNodesWithTag(dropDownButtonComponent, "a");
@@ -183,7 +183,7 @@ describe("DropDownButton", function () {
         ReactTestUtils.Simulate.click(as[1]);
 
         // expect menu to have been hidden
-        var noMenus = TestUtils.scryRenderedDOMNodesWithClass(dropDownButtonComponent, "menu");
+        var noMenus = TestUtils.scryRenderedDOMNodesWithDataId(dropDownButtonComponent, "menu");
         expect(noMenus.length).toEqual(0);
     });
 
@@ -200,22 +200,22 @@ describe("DropDownButton", function () {
         };
 
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
-            <DropDownButton title="Test Drop Down"
-                            onSelect={callback}
+            <DropDownButton label="Test Drop Down"
+                            onValueChange={callback}
                             options={menu} />
         );
 
         // expect a single button to be rendered.
-        var button = TestUtils.findRenderedDOMNodeWithClass(dropDownButtonComponent, "add button inline");
+        var button = TestUtils.findRenderedDOMNodeWithDataId(dropDownButtonComponent, "action");
 
         // expect no menu to be rendered.
-        var menus = TestUtils.scryRenderedDOMNodesWithClass(dropDownButtonComponent, "menu");
+        var menus = TestUtils.scryRenderedDOMNodesWithDataId(dropDownButtonComponent, "menu");
         expect(menus.length).toEqual(0);
 
         ReactTestUtils.Simulate.click(button);
 
         // expect a menu to be rendered after click.
-        var menu = TestUtils.findRenderedDOMNodeWithClass(dropDownButtonComponent, "menu");
+        var menu = TestUtils.findRenderedDOMNodeWithDataId(dropDownButtonComponent, "menu");
         TestUtils.findRenderedDOMNodeWithClass(menu, "menu");
 
         var as = TestUtils.scryRenderedDOMNodesWithTag(dropDownButtonComponent, "a");
@@ -241,7 +241,7 @@ describe("DropDownButton", function () {
         };
 
         ReactTestUtils.renderIntoDocument(
-            <DropDownButton title="Test Drop Down"
+            <DropDownButton label="Test Drop Down"
                             controlled={true}
                             open={true}
                             options={menu}
@@ -263,7 +263,7 @@ describe("DropDownButton", function () {
         };
 
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
-            <DropDownButton title="Test Drop Down"
+            <DropDownButton label="Test Drop Down"
                             controlled={true}
                             open={true}
                             options={menu}
@@ -287,10 +287,10 @@ describe("DropDownButton", function () {
         };
 
         ReactTestUtils.renderIntoDocument(
-            <DropDownButton title="Test Drop Down"
+            <DropDownButton label="Test Drop Down"
                             controlled={true}
                             open={true}
-                            onSelect={jest.genMockFunction()}
+                            onValueChange={jest.genMockFunction()}
                             options={menu}
                             onToggle={callback} />
         );
@@ -308,7 +308,37 @@ describe("DropDownButton", function () {
         expect(callback).toBeCalled();
     });
 
-    it("triggers callback when ESC pressed", function () {
+    it("doesn't trigger callback when clicked outside and drop down is not open", function () {
+        var callback = jest.genMockFunction();
+
+        var menu = {
+            optionOne: "Option One",
+            optionTwo: "Option Two"
+        };
+
+        ReactTestUtils.renderIntoDocument(
+            <DropDownButton label="Test Drop Down"
+                            controlled={true}
+                            open={false}
+                            onValueChange={jest.genMockFunction()}
+                            options={menu}
+                            onToggle={callback} />
+        );
+
+        var handler = window.addEventListener.mock.calls[0][1];
+        var e = {
+            target: { parentNode: document.body },
+            stopPropagation: jest.genMockFunction(),
+            preventDefault: jest.genMockFunction()
+        };
+
+        //click outside
+        handler(e);
+
+        expect(callback).not.toBeCalled();
+    });
+
+    it("triggers callback when drop down is open and ESC pressed", function () {
 
         var globalKeyListener = TestUtils.captureGlobalListener("keyDown");
 
@@ -320,10 +350,10 @@ describe("DropDownButton", function () {
         };
 
         ReactTestUtils.renderIntoDocument(
-            <DropDownButton title="Test Drop Down"
+            <DropDownButton label="Test Drop Down"
                             controlled={true}
                             open={true}
-                            onSelect={jest.genMockFunction()}
+                            onValueChange={jest.genMockFunction()}
                             options={menu}
                             onToggle={callback} />
         );
@@ -336,5 +366,132 @@ describe("DropDownButton", function () {
         expect(callback).toBeCalled();
     });
 
+    it("doesn't trigger callback when drop down is not open and ESC pressed", function () {
+
+        var globalKeyListener = TestUtils.captureGlobalListener("keyDown");
+
+        var callback = jest.genMockFunction();
+
+        var menu = {
+            optionOne: "Option One",
+            optionTwo: "Option Two"
+        };
+
+        ReactTestUtils.renderIntoDocument(
+            <DropDownButton label="Test Drop Down"
+                            controlled={true}
+                            open={false}
+                            onValueChange={jest.genMockFunction()}
+                            options={menu}
+                            onToggle={callback} />
+        );
+
+        //press ESC
+        globalKeyListener({
+            keyCode: 27
+        });
+
+        expect(callback).not.toBeCalled();
+    });
+
+    it("renders title (aka description) if provided", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <DropDownButton title="Test Drop Down" options={{}} label="Add" />
+        );
+
+        // no title in collapsed mode
+        var titles = TestUtils.scryRenderedDOMNodesWithDataId(component, "description");
+        expect(titles.length).toBe(0);
+
+        // toggle the drop down
+        var toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "action");
+        ReactTestUtils.Simulate.click(toggle);
+
+        var title = TestUtils.findRenderedDOMNodeWithDataId(component, "description");
+        expect(title.textContent).toBe("Test Drop Down");
+    });
+
+    it("renders classname and data-id", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <DropDownButton options={{}} label="Add" data-id="my-id" className="my-class" />
+        );
+
+        var node = ReactDOM.findDOMNode(component);
+
+        expect(node.getAttribute("data-id")).toBe("my-id");
+        expect(node.getAttribute("class")).toContain("my-class");
+    });
+
+    it("render component with default data-id", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <DropDownButton options={{}} label="Add" />
+        );
+
+        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "drop-down-button");
+        expect(element).toBeDefined();
+    });
+
+    // TODO To be removed once "id" support is discontinued.
+    it("render component with id and log warning", function () {
+        console.warn = jest.genMockFunction();
+
+        var component = ReactTestUtils.renderIntoDocument(
+            <DropDownButton options={{}} label="Add" id="deprecated" />
+        );
+
+        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "deprecated");
+        expect(element).toBeDefined();
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use data-id instead of id. Support for id will be removed in next version"
+        );
+    });
+
+    // TODO To be removed once "onSelect" support is discontinued.
+    it("passing the onSelect property triggers warning, but it works", function () {
+        console.warn = jest.genMockFunction();
+
+        ReactTestUtils.renderIntoDocument(
+            <DropDownButton options={{}} label="Add" onSelect={jest.genMockFunction()} />
+        );
+
+
+
+
+        var callback = jest.genMockFunction();
+
+        var menu = {
+            optionOne: "Option One"
+        };
+
+        var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
+            <DropDownButton label="Test Drop Down" onSelect={callback} options={menu} />
+        );
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use onValueChange instead of onSelect. Support for onSelect will be removed in next version"
+        );
+
+        // open the menu
+        var button = TestUtils.findRenderedDOMNodeWithDataId(dropDownButtonComponent, "action");
+        ReactTestUtils.Simulate.click(button);
+
+        // click on the single menu item (the index is 1 for the first returned a element is the action button)
+        var as = TestUtils.scryRenderedDOMNodesWithTag(dropDownButtonComponent, "a");
+        ReactTestUtils.Simulate.click(as[1]);
+
+        //make sure callback was triggered
+        expect(callback).toBeCalled();
+    });
+
+    // TODO To be removed once "id" support is discontnued.
+    it("does not log warning in console without id", function () {
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <DropDownButton options={{}} label="Add" />
+        );
+
+        expect(console.warn).not.toBeCalled();
+    });
 
 });

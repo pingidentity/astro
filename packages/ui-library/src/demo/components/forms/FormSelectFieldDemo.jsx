@@ -1,5 +1,5 @@
 var React = require("react");
-var FormSelectField = require("./../../../components/forms/FormSelectField");
+var FormSelectField = require("./../../../components/forms/form-select-field");
 
 /**
  * A demo for FormSelectField.
@@ -25,26 +25,19 @@ var FormSelectFieldDemo = React.createClass({
     render: function () {
         // data may be either an array of objects or an object. Only the array will insure display order of options
         var optionsArr = [
-                { value: 1, label: "one" },
-                { value: 2, label: "two" },
-                { value: 3, label: "three" },
-                { value: 4, label: "four " },
-                { value: 5, label: "five " }
-            ],
-            optionsObj = {
-                1: "one",
-                2: "two",
-                3: "three",
-                4: "four",
-                5: "five"
-            };
+            { value: 1, label: "one" },
+            { value: 2, label: "two" },
+            { value: 3, label: "three" },
+            { value: 4, label: "four " },
+            { value: 5, label: "five " }
+        ];
 
         return (
             <div>
                 <div className="input-row">
-                    <FormSelectField
+                    <FormSelectField controlled={true}
                         label="Basic"
-                        options={optionsObj}
+                        options={optionsArr}
                         onChange={this._changeCallback.bind(this, 1)}
                         value={this.state.fieldValue1}
                     />
@@ -53,14 +46,12 @@ var FormSelectFieldDemo = React.createClass({
                     </div>
                 </div>
                 <div className="input-row">
-                    <FormSelectField
+                    <FormSelectField controlled={true}
                         label="Required Select With None Option"
                         options={optionsArr}
-                        noneOption={true}
-                        noneOptionText="Select an option"
-                        noneOptionValue="0"
+                        noneOption={{ label: "Select an option", value: "0" }}
                         onChange={this._changeCallback.bind(this, 2)}
-                        isRequired={true}
+                        required={true}
                         value={this.state.fieldValue2}
                     />
                     <div>
@@ -68,9 +59,9 @@ var FormSelectFieldDemo = React.createClass({
                     </div>
                 </div>
                 <div className="input-row">
-                    <FormSelectField
+                    <FormSelectField controlled={true}
                         label="With error message"
-                        options={optionsObj}
+                        options={optionsArr}
                         onChange={this._changeCallback.bind(this, 3)}
                         errorMessage="error!"
                         value={this.state.fieldValue3}
@@ -80,10 +71,10 @@ var FormSelectFieldDemo = React.createClass({
                     </div>
                 </div>
                 <div className="input-row">
-                    <FormSelectField
+                    <FormSelectField controlled={true}
                         label="With help text"
                         labelHelpText="Help text goes here!"
-                        options={optionsObj}
+                        options={optionsArr}
                         onChange={this._changeCallback.bind(this, 4)}
                         value={this.state.fieldValue4}
                     />
@@ -92,13 +83,13 @@ var FormSelectFieldDemo = React.createClass({
                     </div>
                 </div>
                 <div className="input-row">
-                    <FormSelectField
+                    <FormSelectField controlled={true}
                         label="Disabled With help text"
                         labelHelpText="Help text goes here!"
-                        options={optionsObj}
+                        options={optionsArr}
                         onChange={this._changeCallback.bind(this, 5)}
                         value={this.state.fieldValue5}
-                        isDisabled={true}
+                        disabled={true}
                     />
                     <div>
                         selected option value: {this.state.fieldValue5}

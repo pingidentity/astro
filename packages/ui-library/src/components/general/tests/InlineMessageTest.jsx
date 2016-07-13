@@ -33,10 +33,10 @@ describe("InlineMessage", function () {
     it("display simple inline message with button", function () {
         var text = "Your message here";
         var label = "Do Something";
-        var callback = jest.genMockFunction();
+        var onClick = jest.genMockFunction();
         var view = getComponent({ "data-id": "notice-message-button",
                                   type: InlineMessage.MessageTypes.NOTICE,
-                                  label: label, callback: callback }, text);
+                                  label: label, onClick: onClick }, text);
         var container = TestUtils.findRenderedDOMNodeWithDataId(view, "notice-message-button");
         var actionContainer = TestUtils.findRenderedDOMNodeWithDataId(container, "inline-message-btn");
         var buttonElement = TestUtils.findRenderedDOMNodeWithTag(actionContainer, "button");
@@ -44,7 +44,7 @@ describe("InlineMessage", function () {
         expect(buttonElement.textContent).toEqual(label);
         ReactTestUtils.Simulate.click(buttonElement);
 
-        expect(view.props.callback).toBeCalled();
+        expect(view.props.onClick).toBeCalled();
     });
 
     it("display simple inline message with button text, but no action", function () {
@@ -60,10 +60,10 @@ describe("InlineMessage", function () {
 
     it("display simple inline message with action, but no button text", function () {
         var text = "Your message here";
-        var callback = jest.genMockFunction();
+        var onClick = jest.genMockFunction();
         var view = getComponent({ "data-id": "notice-message-button",
                                   type: InlineMessage.MessageTypes.NOTICE,
-                                  callback: callback }, text);
+                                  onClick: onClick }, text);
         var container = TestUtils.findRenderedDOMNodeWithDataId(view, "notice-message-button");
         var actionContainer = TestUtils.findRenderedDOMNodeWithDataId(container, "inline-message-btn");
         expect(actionContainer).toBeFalsy();
@@ -101,7 +101,36 @@ describe("InlineMessage", function () {
         var container = TestUtils.findRenderedDOMNodeWithDataId(view, "notice-message-no-button");
         var message = TestUtils.findRenderedDOMNodeWithDataId(container, "inline-message-text");
 
-        expect(container.getAttribute("class")).toContain("warning");
+        expect(container.getAttribute("class")).toContain("error");
         expect(message.textContent).toEqual(text);
+    });
+
+    it("display simple inline error message", function () {
+        var text = "Message text";
+        var view = getComponent({ "data-id": "notice-message-no-button",
+            type: InlineMessage.MessageTypes.ERROR }, text);
+        var container = TestUtils.findRenderedDOMNodeWithDataId(view, "notice-message-no-button");
+        var message = TestUtils.findRenderedDOMNodeWithDataId(container, "inline-message-text");
+
+        expect(container.getAttribute("class")).toContain("error");
+        expect(message.textContent).toEqual(text);
+    });
+
+    it("check if warning with onButtonClick vs onClick", function () {
+        var text = "Your message here";
+        var label = "Do Something";
+        var clickHandler = jest.genMockFunction();
+        console.warn = jest.genMockFunction();
+        var view = getComponent({ "data-id": "notice-message-button",
+                                type: InlineMessage.MessageTypes.NOTICE,
+                                label: label, callback: clickHandler }, text);
+        expect(console.warn).toBeCalled();
+
+        var container = TestUtils.findRenderedDOMNodeWithDataId(view, "notice-message-button");
+        var actionContainer = TestUtils.findRenderedDOMNodeWithDataId(container, "inline-message-btn");
+        var buttonElement = TestUtils.findRenderedDOMNodeWithTag(actionContainer, "button");
+        expect(buttonElement.textContent).toEqual(label);
+        ReactTestUtils.Simulate.click(buttonElement);
+        expect(view.props.callback).toBeCalled();
     });
 });

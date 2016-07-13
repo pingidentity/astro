@@ -1,31 +1,77 @@
 var React = require("react"),
     classnames = require("classnames"),
-    moment = require("moment-range");
+    moment = require("moment-range"),
+    DaysView = require("./DaysView.jsx"),
+    MonthsView = require("./MonthsView.jsx"),
+    YearsView = require("./YearsView.jsx"),
+    CalendarUtils = require("./Utils"),
+    Utils = require("../../util/Utils.js");
 
-var DaysView = require("./DaysView.jsx");
-var MonthsView = require("./MonthsView.jsx");
-var YearsView = require("./YearsView.jsx");
-var Utils = require("./Utils");
+var _keyDownActions = CalendarUtils.keyDownActions;
 
-var _keyDownActions = Utils.keyDownActions;
+/**
+* @enum {number}
+* @alias Calendar.Views
+* @desc An enum of calendar views.
+*/
+var Views = {
+    DAYS: 0,
+    MONTHS: 1,
+    YEARS: 2
+};
+
+/**
+* @deprecated
+* @callback Calendar~onChange
+*
+* @param {number} date
+*    The numeric value for the selected date.
+*/
+
+/**
+* @callback Calendar~onValueChange
+*
+* @param {number} date
+*    The numeric value for the selected date.
+*/
 
 /**
  * @class Calendar
  * @desc Calendar renders a basic Calendar popup over an input field. It takes a date number that can be used to set the
- *          current date. Coming from Java backend this should be straight forward. To play with this client side
- *          the moment plugin is helpful to convert a Date object to a numeric value.
+ *    current date. Coming from Java backend this should be straight forward. To play with this client side
+ *    the moment plugin is helpful to convert a Date object to a numeric value.
  *
- *          Credit: Calendar control taken from https://github.com/Rudeg/react-input-calendar
- *          Compatibility: 0.12.2+ compatible, tested against 0.13.3 and still compatible
+ *    Credit: Calendar control taken from https://github.com/Rudeg/react-input-calendar
+ *    Compatibility: 0.12.2+ compatible, tested against 0.13.3 and still compatible
  *
- * @param {string}   format           - string value of the date format you want to display, e.g. "YYYY-MM-DD"
- * @param {number}   date             - numeric value for the selected date
- * @param {string}   computableFormat - if unsure leave as "x". Refer to moment#formatTokenFunctions for more info.
- * @param {boolean}  closeOnSelect    - close once date is selected
- * @param {function} onChange         - the callback function called when a date is selected
- * @param {string}   id               - the data-id property
- * @param {boolean}  isRequired       - whether the field is required or not (default false)
- * @param {boolean}  className        - additional classes to add to the container element
+ * @param {string} [data-id="calendar"]
+ *    To define the base "data-id" value for the top-level HTML container.
+ * @param {string} [id]
+ *    DEPRECATED. Use "data-id" instead.
+ * @param {string} [className]
+ *    CSS classes to set on the top-level HTML container.
+ *
+ * @param {*} date
+ *    Numeric value for the selected date.
+ * @param {string} [format="MM-DD-YYYY"]
+ *    String value of the date format you want to display (e.g. "YYYY-MM-DD").
+ * @param {string} [computableFormat="MM-DD-YYYY"]
+ *    If unsure, leave as "x". Refer to moment#formatTokenFunctions for more info.
+ * @param {Calendar.Views} [minView=Calendar.Views.DAYS]
+ *    Set the minimal view.
+ * @param {Calendar~onValueChange} [onValueChange]
+ *    Callback to be triggered when a date is selected.
+ * @param {Calendar~onChange} [onChnage]
+ *    DEPRECATED. Use "onValueChange" instead.
+ *
+ * @param {string} [placeholder]
+ *    Placeholder text for the calendar field.
+ * @param {boolean} [closeOnSelect=false]
+ *    Whether or not the calendar should close once a date is selected.
+ * @param {boolean} [required=false]
+ *    If true, the user must select a date for the calendar.
+ * @param {boolean} [isRequired]
+ *    DEPRECATED. Use "required" instead.
  *
  * @example
  *
@@ -47,7 +93,7 @@ var _keyDownActions = Utils.keyDownActions;
  *                          date={this.state.selectedDate}
  *                          computableFormat="x"
  *                          closeOnSelect={true}
- *                          onChange={this._onEnrollmentDateChanged}/>
+ *                          onValueChange={this._onEnrollmentDateChanged}/>
  *             );
  *     }
  */
@@ -55,41 +101,62 @@ var _keyDownActions = Utils.keyDownActions;
 var Calendar = React.createClass({
 
     propTypes: {
-        closeOnSelect: React.PropTypes.bool,
-        computableFormat: React.PropTypes.string,
-        date: React.PropTypes.any,
-        format: React.PropTypes.string,
+        "data-id": React.PropTypes.string,
+        //TODO: remove when v1 no longer supported
         id: React.PropTypes.string,
-        isRequired: React.PropTypes.bool,
-        minView: React.PropTypes.number,
+        className: React.PropTypes.string,
+        date: React.PropTypes.any.isRequired,
+        format: React.PropTypes.string,
+        computableFormat: React.PropTypes.string,
+        minView: React.PropTypes.oneOf([Views.DAYS, Views.MONTHS, Views.YEARS]),
+        //TODO: set as required when v1 no longer supported
+        onValueChange: React.PropTypes.func,
+        //TODO: remove when v1 no longer supported
         onChange: React.PropTypes.func,
         placeholder: React.PropTypes.string,
-        className: React.PropTypes.string
+        closeOnSelect: React.PropTypes.bool,
+        required: React.PropTypes.bool,
+        //TODO: remove when v1 no longer supported
+        isRequired: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
         return {
-            id: "calendar",
-            isRequired: false
+            "data-id": "calendar",
+            format: "MM-DD-YYYY",
+            computableFormat: "MM-DD-YYYY",
+            minView: Views.DAYS,
+            closeOnSelect: false,
+            required: false
         };
     },
 
     getInitialState: function () {
         var date = this.props.date ? moment(this.props.date) : null,
-            format = this.props.format || "MM-DD-YYYY",
-            minView = parseInt(this.props.minView, 10) || 0,
-            computableFormat = this.props.computableFormat || "MM-DD-YYYY";
+            minView = parseInt(this.props.minView, 10);
 
         return {
             date: date,
-            format: format,
-            computableFormat: computableFormat,
-            inputValue: date ? date.format(format) : null,
+            format: this.props.format,
+            computableFormat: this.props.computableFormat,
+            inputValue: date ? date.format(this.props.format) : null,
             views: ["days", "months", "years"],
             minView: minView,
-            currentView: minView || 0,
+            currentView: minView || Views.DAYS,
             isVisible: false
         };
+    },
+
+    componentWillMount: function () {
+        if (this.props.id) {
+            Utils.deprecateWarn("id", "data-id");
+        }
+        if (this.props.onChange) {
+            Utils.deprecateWarn("onChange", "onValueChange");
+        }
+        if (this.props.isRequired) {
+            Utils.deprecateWarn("isRequired", "required");
+        }
     },
 
     componentDidMount: function () {
@@ -139,8 +206,12 @@ var Calendar = React.createClass({
                 isVisible: false
             });
 
+            //TODO: remove when v1 no longer supported
             if (this.props.onChange) {
                 this.props.onChange(date.format(this.state.computableFormat));
+            }
+            if (this.props.onValueChange) {
+                this.props.onValueChange(date.format(this.state.computableFormat));
             }
 
         } else {
@@ -164,8 +235,12 @@ var Calendar = React.createClass({
             isVisible: this.props.closeOnSelect && isDayView ? !this.state.isVisible : this.state.isVisible
         });
 
+        //TODO: remove when v1 no longer supported
         if (this.props.onChange) {
             this.props.onChange(date.format(this.state.computableFormat));
+        }
+        if (this.props.onValueChange) {
+            this.props.onValueChange(date.format(this.state.computableFormat));
         }
     },
 
@@ -221,8 +296,12 @@ var Calendar = React.createClass({
             inputValue: newDate ? newDate.format(format) : null
         });
 
+        //TODO: remove when v1 no longer supported
         if (this.props.onChange) {
             this.props.onChange(computableDate);
+        }
+        if (this.props.onValueChange) {
+            this.props.onValueChange(computableDate);
         }
     },
 
@@ -282,15 +361,15 @@ var Calendar = React.createClass({
 
         var view;
         switch (this.state.currentView) {
-            case 0:
-                view = <DaysView date={calendarDate} setDate={this.setDate} nextView={this.nextView} />;
+            case Views.DAYS:
+                view = <DaysView date={calendarDate} onSetDate={this.setDate} onNextView={this.nextView} />;
                 break;
-            case 1:
-                view = <MonthsView date={calendarDate} setDate={this.setDate} //eslint-disable-line
-                                   nextView={this.nextView} prevView={this.prevView} />;
+            case Views.MONTHS:
+                view = <MonthsView date={calendarDate} onSetDate={this.setDate} //eslint-disable-line
+                                   onNextView={this.nextView} onPrevView={this.prevView} />;
                 break;
-            case 2:
-                view = <YearsView date={calendarDate} setDate={this.setDate} prevView={this.prevView} />;
+            case Views.YEARS:
+                view = <YearsView date={calendarDate} onSetDate={this.setDate} onPrevView={this.prevView} />;
                 break;
         }
 
@@ -300,18 +379,20 @@ var Calendar = React.createClass({
             </div>
         );
 
-        var containerCss = {
+        var className = classnames("input-calendar", this.props.className, {
             active: this.state.isVisible,
-            required: this.props.isRequired,
+            required: this.props.isRequired || this.props.required,
             "value-entered": !!this.state.inputValue
-        };
+        });
+
+        var id = this.props.id || this.props["data-id"];
 
         return (
-            <div className={classnames("input-calendar", this.props.className, containerCss)}
+            <div className={className}
                  onClick={this.toggleClick}>
                 <div className="input-container">
                     <input type="text"
-                        data-id={this.props.id}
+                        data-id={id}
                         className="input-calendar-value"
                         value={this.state.inputValue}
                         onBlur={this.inputBlur}
@@ -324,5 +405,7 @@ var Calendar = React.createClass({
     }
 
 });
+
+Calendar.Views = Views;
 
 module.exports = Calendar;

@@ -2,8 +2,9 @@ var React = require("react");
 
 /**
  * @class Copyright
- * @desc renders the copyright block
- * @param {bool} [logo=true] - Determines whether to show the Ping Logo
+ * @desc Renders the copyright block
+ * @param {boolean} [logo=false]
+ *          Determines whether to show the Ping Logo
  */
 var Copyright = React.createClass({
     propTypes: {

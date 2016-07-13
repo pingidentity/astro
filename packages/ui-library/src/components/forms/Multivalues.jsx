@@ -1,16 +1,19 @@
 "use strict";
 
-var React = require("react");
-var ReactDOM = require("react-dom");
-var cx = require("classnames");
-var _ = require("underscore");
-var placeholder = document.createElement("span");
+var React = require("react"),
+    ReactDOM = require("react-dom"),
+    classnames = require("classnames"),
+    _ = require("underscore"),
+    Utils = require("../../util/Utils.js"),
+    placeholder = document.createElement("span");
+
 placeholder.className = "placeholder";
 
 
 /**
  * @class MultivaluesOption
  * @private
+ * @ignore
  **/
 var MultivaluesOption = React.createClass({
 
@@ -22,8 +25,10 @@ var MultivaluesOption = React.createClass({
     /**
     * Passes entry index to delete function
     *
-    * @param {string} e - event object
+    * @param {object} e
+    *     The ReactJS synthetic event object.
     * @private
+    * @ignore
     */
     _delete: function (e) {
         var id = e.target.id;
@@ -46,21 +51,44 @@ var MultivaluesOption = React.createClass({
 
 
 /**
- * @callback Multivalues~onChangeCallback
- * @param {array} newValues - Array of strings, contains new list of entries
+ * @deprecated
+ * @callback Multivalues~onChange
+ *
+ * @param {array<string>} newValues
+ *     Array of strings, contains new list of entries.
+ */
+
+ /**
+ * @callback Multivalues~onValueChange
+ *
+ * @param {arrray<string>} newValues
+ *     Array of strings, contains new list of entries.
  */
 
 /**
  * @class Multivalues
  *
  * @desc Multivalues takes an array of strings and creates "boxed" text entries of each. Free form typing creates
- *       new entries when Enter or Comma is used.
+ *     new entries when Enter or Comma is used.
  *
- * @param {array} [entries] - array of strings used to display initial entry boxes.
- * @param {Multivalues~onChangeCallback} onChange - Callback to be triggered when new entry added or removed
- * @param {string} [className] - extra CSS classes to be applied
- * @param {boolean} [isRequired] whether the field is required or not (default false)
- * @param {string} [id] - it is used for a unique data-id
+ * @param {string} [data-id="multivalues"]
+ *     To define the base "data-id" value for the top-level HTML container.
+ * @param {string} [id]
+ *     DEPRECATED. Use "data-id" instead.
+ * @param {string} [className]
+ *     CSS classes to set on the top-level HTML container.
+ *
+ * @param {array<string>} [entries=[]]
+ *     Array of strings used to display initial entry boxes.
+ * @param {Multivalues~onValueChange} [onValueChange]
+ *     Callback triggered when a new entry is added or removed.
+ * @param {Multivalues~onChange} [onChange]
+ *     DEPRECATED. Use "onValueChange" instead.
+ *
+ * @param {boolean} [required=false]
+ *     If true, the user must enter an entry to the field.
+ * @param {boolean} [isRequired]
+ *     DEPRECATED. Use "required" instead.
  *
  * @example
  *
@@ -70,7 +98,7 @@ var MultivaluesOption = React.createClass({
  *                                "Entry 2",
  *                                "Entry 3"
  *                          ]}
- *                          isRequired={element.required}
+ *                          required={element.required}
  *                          onChange={this._addEntries} />
  *
  **/
@@ -80,11 +108,14 @@ var Multivalues = React.createClass({
     displayName: "Multivalues",
 
     propTypes: {
-        entries: React.PropTypes.array,
-        onChange: React.PropTypes.func.isRequired,
+        "data-id": React.PropTypes.string,
+        id: React.PropTypes.string, //TODO: remove when v1 no longer supported.
         className: React.PropTypes.string,
-        isRequired: React.PropTypes.bool,
-        id: React.PropTypes.string
+        entries: React.PropTypes.arrayOf(React.PropTypes.string),
+        onValueChange: React.PropTypes.func, //TODO: mark as required when onChange has been removed.
+        onChange: React.PropTypes.func, //TODO: remove when v1 no longer supported.
+        required: React.PropTypes.bool,
+        isRequired: React.PropTypes.bool //TODO: remove when v1 no longer supported.
     },
 
     getInitialState: function () {
@@ -95,8 +126,22 @@ var Multivalues = React.createClass({
 
     getDefaultProps: function () {
         return {
-            entries: null
+            "data-id": "multivalues",
+            entries: [],
+            required: false
         };
+    },
+
+    componentWillMount: function () {
+        if (this.props.id) {
+            Utils.deprecateWarn("id", "data-id");
+        }
+        if (this.props.onChange) {
+            Utils.deprecateWarn("onChange", "onValueChange");
+        }
+        if (this.props.isRequired) {
+            Utils.deprecateWarn("isRequired", "required");
+        }
     },
 
     /**
@@ -144,7 +189,15 @@ var Multivalues = React.createClass({
             e.target.value = "";
             var entries = this.props.entries;
             entries.push(enteredValue);
-            this.props.onChange(entries);
+            
+            //TODO: remove when v1 no longer supported.
+            if (this.props.onChange) {
+                this.props.onChange(entries);
+            }
+            if (this.props.onValueChange) {
+                this.props.onValueChange(entries);
+            }
+
             //reset the input width
             this.setState({
                 inputWidth: "20px"
@@ -162,13 +215,20 @@ var Multivalues = React.createClass({
     _handleDelete: function (index) {
         var entries = this.props.entries;
         entries.splice(index,1);
-        this.props.onChange(entries);
+        
+        //TODO: remove when v1 no longer supported.
+        if (this.props.onChange) {
+            this.props.onChange(entries);
+        }
+        if (this.props.onValueChange) {
+            this.props.onValueChange(entries);
+        }
     },
 
     render: function () {
-        var containerCss = cx({
+        var className = classnames(this.props.className, {
             "input-multivalues": true,
-            required: this.props.isRequired,
+            required: this.props.isRequired || this.props.required,
             "value-entered": (this.props.entries.length !== 0)
         });
 
@@ -187,26 +247,22 @@ var Multivalues = React.createClass({
             width: [this.state.inputWidth]
         };
 
-        if (this.props.className) {
-            containerCss = containerCss + " " + this.props.className;
-        }
-
-        var self = this;
-
         var entryNodes = _.map(this.props.entries, function (label, index) {
             return (
                 <MultivaluesOption
                     id={index}
                     label={label}
-                    onChange={self.props.onChange}
-                    onDelete = {self._handleDelete}
+                    onChange={this.props.onChange || this.props.onValueChange}
+                    onDelete = {this._handleDelete}
                     key={index}
                     />
             );
-        });
+        }.bind(this));
+
+        var id = this.props.id || this.props["data-id"];
 
         return (
-            <label className={containerCss} data-id={this.props.id} >
+            <label className={className} data-id={id} >
                 <div className="entries" data-id="entries">
                     {entryNodes}
                     <div className="value-input">

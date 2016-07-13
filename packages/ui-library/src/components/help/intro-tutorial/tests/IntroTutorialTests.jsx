@@ -143,5 +143,16 @@ describe("IntroTutorial", function () {
         ReactTestUtils.Simulate.click(dismissButton);
         expect(tutorial.props.onDismiss.mock.calls.length).toBe(1);
     });
+
+    it("Executes onGotIt callbacks on click", function () {
+        var component = getComponent();
+        var tutorial = component.refs.tutorial;
+
+        sendSteps(component, 2);
+        var gotItButton = ReactDOM.findDOMNode(tutorial.refs.nextButton);
+        //got it
+        ReactTestUtils.Simulate.click(gotItButton);
+        expect(tutorial.props.onGotIt.mock.calls.length).toBe(1);
+    });
 });
 

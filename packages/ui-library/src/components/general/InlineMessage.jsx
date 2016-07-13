@@ -1,34 +1,41 @@
 "use strict";
+
 var React = require("react"),
     classnames = require("classnames"),
     If = require("../general/If.jsx"),
+    Utils = require("../../util/Utils"),
     MessageTypes = require("../general/messages/MessagesConstants").MessageTypes;
 
 /**
- * @callback InlineMessage~callback
- * @param {object} element - on click of the message button if an action should occur
+ * @callback InlineMessage~onClick
+ * @param {object} e
+ *          The ReactJS synthetic event object
  **/
 
 /**
  * @class InlineMessage
  * @desc Sometimes we need a message block to show embedded in a form or somewhere on a page.
  *
- * @param {string} [data-id="inline-message"] - data-id to set on the top HTML element
- *   (defaults to "inline-message").
- * @param {MessageTypes} [type=MessageTypes.NOTICE, MessageTypes.ERROR, MessageTypes.WARNING] - type of icon to display
- * @param {string} [label: string]
+ * @param {string} [data-id="inline-message"]
+ *                  To define the base "data-id" value for the top-level HTML container.
+ * @param {InlineMessage.MessageTypes} [type=MessageTypes.NOTICE]
+ *                  Type of icon to display (MessageTypes.NOTICE, MessageTypes.ERROR, MessageTypes.WARNING)
+ * @param {string} [label]
  *                  Pass in a string label for the button label if you want an action option. If you pass this you must
  *                  also pass the callback function.
- * @param {func} [callback: function]
- *                  Pass in a callback function that you want to trigger with the action button.
+ * @param {InlineMessage~onClick} [onClick]
+ *                  Callback to be triggered when the button is clicked.
+ * @param {InlineMessage~callback} [callback]
+ *                  DEPRECATED use onClick instead
  *
  * @example
  *          No action button button:
- *          <InlineMessage data-id="notice-message-no-button" type={"notice"}>
+ *          <InlineMessage data-id="notice-message-no-button" type={ InlineMessage.MessageTypes.NOTICE }>
  *              Your message here
  *          </InlineMessage>
  *          With a button:
- *          <InlineMessage data-id="notice-message-button" type={"notice"} label: "Do Something" callback: this._doSomething>
+ *          <InlineMessage data-id="notice-message-button" type={ InlineMessage.MessageTypes.NOTICE }
+ *                         label="Do Something" onClick={doSomething}>
  *              Your message here
  *          </InlineMessage>
  **/
@@ -40,25 +47,31 @@ var InlineMessage = React.createClass({
             MessageTypes.NOTICE, MessageTypes.ERROR, MessageTypes.WARNING, MessageTypes.SUCCESS
         ]),
         label: React.PropTypes.string,
+        onClick: React.PropTypes.func,
         callback: React.PropTypes.func
     },
     
     getDefaultProps: function () {
         return {
-            dataId: "inline-message",
-            type: MessageTypes.NOTICE,
-            label: "NO_ACTION",
-            callback: undefined
+            "data-id": "inline-message",
+            type: MessageTypes.NOTICE
         };
     },
 
     _showAction: function () {
-        return (this.props.label !== undefined && this.props.label !== "NO_ACTION" &&
-                this.props.callback !== undefined);
+        return (this.props.label !== undefined &&
+                    (this.props.onClick !== undefined || this.props.callback !== undefined));
     },
 
     _onClick: function (e) {
-        this.props.callback(e);
+        var clickHandler = this.props.callback || this.props.onClick;
+        clickHandler(e);
+    },
+
+    componentWillMount: function () {
+        if (this.props.callback) {
+            Utils.deprecateWarn("callback", "onClick");
+        }
     },
 
     render: function () {

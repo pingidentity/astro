@@ -157,6 +157,12 @@ module.exports = [
                 demo: require("../components/forms/SelectionListDemo.jsx"),
                 pathToDoc: "components/forms/SelectionList.jsx",
                 pathToSource: "components_forms_SelectionList.jsx.html"
+            },
+            {
+                label: "Button Bar",
+                demo: require("../components/forms/ButtonBarDemo.jsx"),
+                pathToDoc: "components/forms/ButtonBar.jsx",
+                pathToSource: "components_forms_ButtonBar.jsx.html"
             }
         ]
     },
@@ -359,7 +365,7 @@ module.exports = [
             {
                 label: "Grid",
                 demo: require("../components/grid/GridDemo.jsx"),
-                pathToCode: "components/grid/Grid.jsx",
+                pathToDoc: "components/grid/Grid.jsx",
                 pathToSource: "components_grid_Grid.jsx.html"
             }
         ]

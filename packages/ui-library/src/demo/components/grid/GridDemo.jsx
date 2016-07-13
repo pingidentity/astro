@@ -17,7 +17,7 @@ var ExpandedRow = React.createClass({
         };
     },
 
-    _onEnrollmentDateChanged: function (newValue) {
+    _handleEnrollmentDateChanged: function (newValue) {
         this.setState({
             selectedDate: parseInt(newValue)
         });
@@ -47,7 +47,7 @@ var ExpandedRow = React.createClass({
                             date={this.state.selectedDate}
                             computableFormat="x"
                             closeOnSelect={true}
-                            onChange={this._onEnrollmentDateChanged} />
+                            onValueChange={this._handleEnrollmentDateChanged} />
                     </div>
                 );
         }
@@ -76,12 +76,12 @@ var GridDemo = React.createClass({
         this.actions.set([this.id, "hasLaptopForAll"], checked);
     },
 
-    _onRowExpanded: function (rowIndex) {
+    _handleRowExpanded: function (rowIndex) {
         // changes status (expand or collapse)
         this.actions.toggleRow(this.id, rowIndex);
     },
 
-    _onHasLaptopChecked: function (rowObject, e) {
+    _handleLaptopChecked: function (rowObject, e) {
         //this would not be scalable.  For big sets we'd want an index
         var index = this.props[this.id].rows.indexOf(rowObject);
 
@@ -101,7 +101,7 @@ var GridDemo = React.createClass({
         console.log(e.target.checked);
     },
 
-    _onBirthyearChanged: function (rowObject, e) {
+    _handleBirthYearChanged: function (rowObject, e) {
         console.log(e.target.value);
 
         var index = this.props[this.id].rows.indexOf(rowObject);
@@ -132,7 +132,7 @@ var GridDemo = React.createClass({
                       columnsPerPage={2}
                       onPaginationChanged={this._handlePaginationChange}
                       rowExpandable={true}
-                      onRowExpanded={this._onRowExpanded}
+                      onRowExpanded={this._handleRowExpanded}
                       expandedRowContentType={this.expandedRowContentType} >
                     <Grid.Column isLeftHeader={true} field="rowheader" width={Grid.ColumnSizes.S} />
                     <Grid.Column headerText="Firstname" fixed={true} field="firstname" />
@@ -140,20 +140,18 @@ var GridDemo = React.createClass({
                     <Grid.Column headerText="Midname" field="midname" align={Grid.Alignments.RIGHT} />
                     <Grid.Column headerText="Email" field="email" width={Grid.ColumnSizes.XL} />
                     <Grid.Column headerText="Gender" field="gender" width={Grid.ColumnSizes.XS} />
-                    <Grid.Column headerText="Job"
-                                 field="job"
-                                 width={Grid.ColumnSizes.XL} />
+                    <Grid.Column headerText="Job" field="job" width={Grid.ColumnSizes.XL} />
                     <Grid.Column headerText="Birthday" field="birthday" width={Grid.ColumnSizes.S} />
                     <Grid.Column headerText="Birthyear" field="birthyear" width={Grid.ColumnSizes.S} >
-                        <TextFieldCell onCallBack={this._onBirthyearChanged} />
+                        <TextFieldCell onGridCellAction={this._handleBirthYearChanged} />
                     </Grid.Column>
                     <Grid.Column headerText="Has Laptop"
-                                 field="hasLaptop"
-                                 hasSelectAll={true}
-                                 selectAllValue={this.props[this.id].hasLaptopForAll}
-                                 onSelectAllChange={this._handleSelectAllHasLaptop}
-                                 width={Grid.ColumnSizes.M}>
-                        <CheckboxCell onCallBack={this._onHasLaptopChecked} className="stacked" />
+                            field="hasLaptop"
+                            hasSelectAll={true}
+                            selectAllValue={this.props[this.id].hasLaptopForAll}
+                            onSelectAllChange={this._handleSelectAllHasLaptop}
+                            width={Grid.ColumnSizes.M}>
+                        <CheckboxCell onGridCellAction={this._handleLaptopChecked} className="stacked" />
                     </Grid.Column>
                 </Grid>
 
@@ -165,7 +163,8 @@ var GridDemo = React.createClass({
                     <Grid.Column field="firstname" width={Grid.ColumnSizes.XS} />
                     <Grid.Column field="lastname" width={Grid.ColumnSizes.XS} />
                     <Grid.Column field="email" />
-                    <Grid.Column field="gender" width={Grid.ColumnSizes.XS} align={Grid.Alignments.RIGHT} />
+                    <Grid.Column field="gender" width={Grid.ColumnSizes.XS}
+                            align={Grid.Alignments.RIGHT} />
                     <Grid.Column field="job" align={Grid.Alignments.RIGHT} />
                 </Grid>
             </div>

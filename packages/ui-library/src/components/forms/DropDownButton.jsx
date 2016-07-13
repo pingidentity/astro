@@ -2,92 +2,97 @@ var React = require("react"),
     ReactDOM = require("react-dom"),
     cx = require("classnames"),
     callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutsideOfContainer,
-    _ = require("underscore");
+    _ = require("underscore"),
+    If = require("../general/If.jsx"),
+    Utils = require("../../util/Utils.js");
 
 /**
- * @callback DropDownButton~onSelectCallback
- * @param {object} selectedValue - selected value from menu
+ * @callback DropDownButton~onValueChange
+ * @param {object} value
+ *     Selected value from menu (ie. the value of the selected item in the options object).
  */
 
 /**
- * @callback DropDownButton~onToggleCallback
- * @param {boolean} isOpen - current open/closed status before click
+ * @callback DropDownButton~onToggle
+ * @param {boolean} isOpen
+ *     Current open/closed status before click.
  */
 
 /**
  * @class DropDownButton
  * @desc Button which triggers drop down menu using list of provided options.
  *
- * @param {string} options - array of string labels to use as drop down options
- * @param {DropDownButton~onSelectCallback} onSelect - callback to be triggered when selection changed.
- *                                                     Will recieve selected value from options list.
- * @param {DropDownButton~onToggleCallback} [onToggle] - callback to be triggered when open/closed state changed.
- *                                Used only with stateless mode. Will receive current open status value.
- * @param {bool} [open=false] - boolean state of open/closed menu. Used only in stateless mode.
- * @param {string} [id="drop-down-button"] - optional id to pass to be used as data-id attribute value
- * @param {string} [className] - optional class to pass to style top level container
- * @param {string} [label="Add"] - label text for button
- * @param {string} [title] - menu title text
- * @param {bool} [controlled=false] - A boolean to enable the component to be externally managed.  True will relinquish
- *   control to the components owner.  False or not specified will cause the component to manage state internally
- *   but still execute the onToggle callback in case the owner is interested.
+ * @param {string} [data-id="drop-down-button"]
+ *     To define the base "data-id" value for top-level HTML container.
+ * @param {string} [id]
+ *     DEPRECATED. Use "data-id" instead. To define the base "data-id" value for top-level HTML container.
+ * @param {string} [className]
+ *     CSS classes to set on the top-level HTML container.
+ * @param {boolean} [controlled=false]
+ *     To enable the component to be externally managed. True will relinquish control to the component's owner.
+ *     False or not specified will cause the component to manage state internally.
+ *
+ * @param {object} options
+ *     An object where the keys are the item IDs, and the values are the corresponding labels.
+ * @param {DropDownButton~onValueChange} [onValueChange]
+ *     Callback to be triggered when the selection changed.
+ * @param {DropDownButton~onSelect} [onSelect]
+ *     DEPRECATED. Use "onValueChange" instead.
+ * @param {DropDownButton~onToggle} [onToggle]
+ *     Callback to be triggered when open/closed state changed. Used only when controlled=true.
+ * @param {boolean} [open=false]
+ *     Boolean state of open/closed menu. Used only when controlled=true.
+ * @param {string} label
+ *     Label text for button
+ * @param {string} [title]
+ *     Menu title text
  *
  * @example
  *
  *      <DropDownButton title="Drop Down"
- *                      id="drop-down-menu"
- *                      onSelect={this._changeARule}
- *                      options={optionsMenu}/>
+ *              data-id="drop-down-menu"
+ *              onValueChange={this._changeARule}
+ *              options={optionsMenu}
+ *      />
  *
  *      <DropDownButton controlled={true}
- *                      title="My menu"
- *                      id="drop-down-menu"
- *                      onSelect={this._changeARule}
- *                      open={this.state.menuOpen}
- *                      onToggle={this._toggleMenu}
- *                      options={
- *                          one: "One",
- *                          two: "Two",
- *                          three: "Three"} />
+ *          data-id="drop-down-menu"
+ *          title="My menu"
+ *          onValueChange={this._changeARule}
+ *          open={this.state.menuOpen}
+ *          onToggle={this._toggleMenu}
+ *          options={
+ *              one: "One",
+ *              two: "Two",
+ *              three: "Three"
+ *          }
+ *     />
  */
 
 
-module.exports = React.createClass({
-    propTypes: {
-        controlled: React.PropTypes.bool
-    },
-
-    getDefaultProps: function () {
-        return {
-            controlled: false
-        };
-    },
-
-    render: function () {
-        return (
-            this.props.controlled ? <Stateless {...this.props} /> : <Stateful {...this.props} />);
-    }
-});
-
-
 var Stateless = React.createClass({
+    displayName: "DropDownButtonStateless",
 
     propTypes: {
-        options: React.PropTypes.object.isRequired,
-        onSelect: React.PropTypes.func.isRequired,
-        onToggle: React.PropTypes.func.isRequired,
-        label: React.PropTypes.string,
+        "data-id": React.PropTypes.string,
         id: React.PropTypes.string,
         className: React.PropTypes.string,
+        options: React.PropTypes.object.isRequired,
+        onValueChange: React.PropTypes.func,
+        onSelect: React.PropTypes.func,
+        onToggle: React.PropTypes.func.isRequired,
         open: React.PropTypes.bool.isRequired,
+        label: React.PropTypes.string.isRequired,
         title: React.PropTypes.string
     },
 
     /**
      * Triggered
      * @method DropDownButton#_toggle
-     * @param {object} e The event
+     * @param {object} e
+     *     The ReactJS synthetic event
      * @private
+     * @ignore
      */
     _toggle: function (e) {
         e.stopPropagation();
@@ -96,20 +101,24 @@ var Stateless = React.createClass({
 
     /**
      * On option selected
-     * @method DropDownButton#_onOptionSelected
-     * @param {value} value The value selected from drop down
+     * @method DropDownButton#_onValueChanged
+     * @param {value} value
+     *     The value selected from drop down
      * @private
+     * @ignore
      */
-    _onOptionSelected: function (value) {
-        if (this.props.onSelect) {
-            this.props.onSelect(value);
-        }
+    _onValueChanged: function (value) {
+        // onSelect first, for onValueChange has a default
+        (this.props.onSelect || this.props.onValueChange)(value);
     },
 
     _handleGlobalClick: function (e) {
         if (this.props.open) {
             callIfOutsideOfContainer(
-                ReactDOM.findDOMNode(this.refs.menu), _.partial(this.props.onToggle, this.props.open), e);
+                ReactDOM.findDOMNode(this.refs.menu),
+                _.partial(this.props.onToggle, this.props.open),
+                e
+            );
         }
     },
 
@@ -121,12 +130,20 @@ var Stateless = React.createClass({
 
     getDefaultProps: function () {
         return {
-            id: "drop-down-button",
-            label: "Add",
-            title: "",
+            "data-id": "drop-down-button",
+            onValueChange: _.noop,
             options: {},
             open: false
         };
+    },
+
+    componentWillMount: function () {
+        if (this.props.id) {
+            Utils.deprecateWarn("id", "data-id");
+        }
+        if (this.props.onSelect) {
+            Utils.deprecateWarn("onSelect", "onValueChange");
+        }
     },
 
     componentDidMount: function () {
@@ -142,28 +159,32 @@ var Stateless = React.createClass({
     render: function () {
 
         var that = this,
-            styles = cx("input-menu-button", {
-                open: this.props.open
-            }),
-            content = null;
-
-        if (this.props.className) {
-            styles = styles + " " + this.props.className;
-        }
+            styles = cx(
+                "input-menu-button", {
+                    open: this.props.open
+                },
+                this.props.className
+            ),
+            content = null,
+            dataId = this.props.id || this.props["data-id"];
 
         if (this.props.open) {
 
             var optionNodes = _.map(this.props.options, function (value, key) {
 
                 return (
-                    <a data-id={key} onClick={_.partial(that._onOptionSelected, key)} key={key}>{value}</a>
+                    <a data-id={key} onClick={_.partial(that._onValueChanged, key)} key={key}>
+                        {value}
+                    </a>
                 );
             });
 
             content = (
-                <div className="menu" ref="menu">
-                    <div className="description">{this.props.title}</div>
-                    <div className="options">
+                <div className="menu" ref="menu" data-id="menu">
+                    <If test={this.props.title}>
+                        <div className="description" data-id="description">{this.props.title}</div>
+                    </If>
+                    <div className="options" data-id="options">
                         {optionNodes}
                     </div>
                 </div>
@@ -171,8 +192,10 @@ var Stateless = React.createClass({
         }
 
         return (
-            <div className={styles} data-id={this.props.id}>
-                <a data-id="action" className="add button inline" onClick={this._toggle}>{this.props.label}</a>
+            <div className={styles} data-id={dataId}>
+                <a data-id="action" className="add button inline" onClick={this._toggle}>
+                    {this.props.label}
+                </a>
                 {content}
             </div>
         );
@@ -181,6 +204,7 @@ var Stateless = React.createClass({
 
 
 var Stateful = React.createClass({
+    displayName: "DropDownButtonStateful",
 
     _toggle: function () {
         this.setState({
@@ -192,10 +216,15 @@ var Stateful = React.createClass({
         this.setState({
             open: false
         }, function () {
-            if (this.props.onSelect) {
-                this.props.onSelect(value);
-            }
+            // onSelect first, for onValueChange has a default
+            (this.props.onSelect || this.props.onValueChange)(value);
         });
+    },
+
+    getDefaultProps: function () {
+        return {
+            onValueChange: _.noop
+        };
     },
 
     getInitialState: function () {
@@ -205,9 +234,44 @@ var Stateful = React.createClass({
     },
 
     render: function () {
-        return (
-            <Stateless {...this.props} onToggle={this._toggle} onSelect={this._select} open={this.state.open}/>
-        );
+        var props = _.defaults({
+            onToggle: this._toggle,
+            onValueChange: this._select,
+            open: this.state.open
+        }, this.props);
+        return React.createElement(Stateless, props);
+    }
+});
+
+module.exports = React.createClass({
+    displayName: "DropDownButton",
+
+    propTypes: {
+        "data-id": React.PropTypes.string,
+        id: React.PropTypes.string,
+        className: React.PropTypes.string,
+        controlled: React.PropTypes.bool,
+        options: React.PropTypes.object,
+        onValueChange: React.PropTypes.func,
+        onSelect: React.PropTypes.func,
+        onToggle: React.PropTypes.func,
+        open: React.PropTypes.bool,
+        label: React.PropTypes.string,
+        title: React.PropTypes.string
+    },
+
+    getDefaultProps: function () {
+        return {
+            "data-id": "drop-down-button",
+            controlled: false,
+            open: false
+        };
+    },
+
+    render: function () {
+        return this.props.controlled
+            ? React.createElement(Stateless, _.defaults({ ref: "Stateless" }, this.props))
+            : React.createElement(Stateful, _.defaults({ ref: "Stateful" }, this.props));
     }
 });
 

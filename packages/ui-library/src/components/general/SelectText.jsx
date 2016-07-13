@@ -2,25 +2,27 @@ var React = require("react");
 var ReactDOM = require("react-dom");
 
 /**
+ * @callback SelectText~onClick
+ */
+
+/**
  * @class SelectText
- * @desc
+ * @desc Component that will select all text in all child elements when clicked, or select initially if
+ * the prop select is set to true. Special handling is enabled for input fields contained within a SelectText component.
+ * An input field will have its select() method called specifically if the input field is the target of the click.
+ * Other elements clicked on within a select text field will result all text for all elements being selected.
  *
- * Component that will select all text in all child
- * elements when clicked, or select initially if
- * the prop select is set to true.
+ * @param {string} [data-id="select-text"]
+ *     To define the base "data-id" value for top-level HTML container.
+ * @param {string} [dataId]
+ *     DEPRECATED. Use "data-id" instead. To define the base "data-id" value for top-level HTML container.
+ * @param {string} [className]
+ *     CSS classes to set on the top-level HTML container.
  *
- * Special handling is enabled for input fields contained
- * within a SelectText component.  An input field will have
- * its select() method called specifically if the input field
- * is the target of the click.  Other elements clicked on
- * within a select text field will result all text for all
- * elements being selected.
- *
- *
- * @param {boolean} [select] Select text immediately without requiring a click.
- * @param {string} [className] CSS classes to add to the surrounding span.
- * @param {function} [onClick] Function to call after selection has been triggered.
- * @param {string} [dataId] id attribute of rendered input button
+ * @param {boolean} [select=false]
+ *     Select text immediately without requiring a click.
+ * @param {SelectText~onClick} [onClick]
+ *     Callback to be triggered when selection has been triggered.
  *
  * @example
  * <SelectText>
@@ -41,8 +43,7 @@ var ReactDOM = require("react-dom");
  * </SelectText>
  *
  * @example
- * In the below example, only the text within the input will be selected
- * when the input itself is clicked.
+ * In the below example, only the text within the input will be selected when the input itself is clicked.
  *
  * <SelectText>
  *     <input type="text" value="some text to select when clicked" />
@@ -72,13 +73,15 @@ var ReactDOM = require("react-dom");
  *     </div>
  * </SelectText>
  */
+
 var SelectText = React.createClass({
 
     propTypes: {
-        select: React.PropTypes.bool,
+        "data-id": React.PropTypes.string,
+        dataId: React.PropTypes.string,
         className: React.PropTypes.string,
-        onClick: React.PropTypes.func,
-        dataId: React.PropTypes.string
+        select: React.PropTypes.bool,
+        onClick: React.PropTypes.func
     },
 
     /*
@@ -121,8 +124,15 @@ var SelectText = React.createClass({
 
     getDefaultProps: function () {
         return {
-            dataId: "select-text"
+            "data-id": "select-text"
         };
+    },
+
+    componentWillMount: function () {
+        if (this.props.dataId) {
+            console.warn(
+                "Deprecated: use data-id instead of dataId. Support for dataId will be removed in next version");
+        }
     },
 
     componentDidMount: function () {
@@ -138,10 +148,11 @@ var SelectText = React.createClass({
     },
 
     render: function () {
+        var dataId = this.props.dataId || this.props["data-id"];
         return (
             <span className={this.props.className}
                   onClick={this._selectText}
-                  data-id={this.props.dataId}>
+                  data-id={dataId}>
                 {this.props.children}
             </span>
         );

@@ -1,6 +1,8 @@
 window.__DEV__ = true;
 
 jest.dontMock("../TimePicker.jsx");
+jest.dontMock("../../forms/form-select-field/index.js");
+jest.dontMock("../../forms/form-select-field/v2.jsx");
 jest.dontMock("../../forms/FormSelectField.jsx");
 jest.dontMock("moment");
 
@@ -19,94 +21,98 @@ describe("TimePicker", function () {
         );
     }
 
+    beforeEach(function () {
+        onValueChange.mockClear();
+    });
+
     it("populates an object with times based on props", function () {
         component = render({
             increments: 30,
             format: "12"
         });
 
-        expect(component._getTimes()).toEqual({
-            "12:00am": "12:00am",
-            "12:30am": "12:30am",
-            "1:00am": "1:00am",
-            "1:30am": "1:30am",
-            "2:00am": "2:00am",
-            "2:30am": "2:30am",
-            "3:00am": "3:00am",
-            "3:30am": "3:30am",
-            "4:00am": "4:00am",
-            "4:30am": "4:30am",
-            "5:00am": "5:00am",
-            "5:30am": "5:30am",
-            "6:00am": "6:00am",
-            "6:30am": "6:30am",
-            "7:00am": "7:00am",
-            "7:30am": "7:30am",
-            "8:00am": "8:00am",
-            "8:30am": "8:30am",
-            "9:00am": "9:00am",
-            "9:30am": "9:30am",
-            "10:00am": "10:00am",
-            "10:30am": "10:30am",
-            "11:00am": "11:00am",
-            "11:30am": "11:30am",
-            "12:00pm": "12:00pm",
-            "12:30pm": "12:30pm",
-            "1:00pm": "1:00pm",
-            "1:30pm": "1:30pm",
-            "2:00pm": "2:00pm",
-            "2:30pm": "2:30pm",
-            "3:00pm": "3:00pm",
-            "3:30pm": "3:30pm",
-            "4:00pm": "4:00pm",
-            "4:30pm": "4:30pm",
-            "5:00pm": "5:00pm",
-            "5:30pm": "5:30pm",
-            "6:00pm": "6:00pm",
-            "6:30pm": "6:30pm",
-            "7:00pm": "7:00pm",
-            "7:30pm": "7:30pm",
-            "8:00pm": "8:00pm",
-            "8:30pm": "8:30pm",
-            "9:00pm": "9:00pm",
-            "9:30pm": "9:30pm",
-            "10:00pm": "10:00pm",
-            "10:30pm": "10:30pm",
-            "11:00pm": "11:00pm",
-            "11:30pm": "11:30pm"
-        });
+        expect(component._getTimes()).toEqual([
+            { label: "12:00am", value: "12:00am" },
+            { label: "12:30am", value: "12:30am" },
+            { label: "1:00am", value: "1:00am" },
+            { label: "1:30am", value: "1:30am" },
+            { label: "2:00am", value: "2:00am" },
+            { label: "2:30am", value: "2:30am" },
+            { label: "3:00am", value: "3:00am" },
+            { label: "3:30am", value: "3:30am" },
+            { label: "4:00am", value: "4:00am" },
+            { label: "4:30am", value: "4:30am" },
+            { label: "5:00am", value: "5:00am" },
+            { label: "5:30am", value: "5:30am" },
+            { label: "6:00am", value: "6:00am" },
+            { label: "6:30am", value: "6:30am" },
+            { label: "7:00am", value: "7:00am" },
+            { label: "7:30am", value: "7:30am" },
+            { label: "8:00am", value: "8:00am" },
+            { label: "8:30am", value: "8:30am" },
+            { label: "9:00am", value: "9:00am" },
+            { label: "9:30am", value: "9:30am" },
+            { label: "10:00am", value: "10:00am" },
+            { label: "10:30am", value: "10:30am" },
+            { label: "11:00am", value: "11:00am" },
+            { label: "11:30am", value: "11:30am" },
+            { label: "12:00pm", value: "12:00pm" },
+            { label: "12:30pm", value: "12:30pm" },
+            { label: "1:00pm", value: "1:00pm" },
+            { label: "1:30pm", value: "1:30pm" },
+            { label: "2:00pm", value: "2:00pm" },
+            { label: "2:30pm", value: "2:30pm" },
+            { label: "3:00pm", value: "3:00pm" },
+            { label: "3:30pm", value: "3:30pm" },
+            { label: "4:00pm", value: "4:00pm" },
+            { label: "4:30pm", value: "4:30pm" },
+            { label: "5:00pm", value: "5:00pm" },
+            { label: "5:30pm", value: "5:30pm" },
+            { label: "6:00pm", value: "6:00pm" },
+            { label: "6:30pm", value: "6:30pm" },
+            { label: "7:00pm", value: "7:00pm" },
+            { label: "7:30pm", value: "7:30pm" },
+            { label: "8:00pm", value: "8:00pm" },
+            { label: "8:30pm", value: "8:30pm" },
+            { label: "9:00pm", value: "9:00pm" },
+            { label: "9:30pm", value: "9:30pm" },
+            { label: "10:00pm", value: "10:00pm" },
+            { label: "10:30pm", value: "10:30pm" },
+            { label: "11:00pm", value: "11:00pm" },
+            { label: "11:30pm", value: "11:30pm" }
+        ]);
 
         component = render({
             increments: 60,
             format: "24"
         });
 
-        expect(component._getTimes()).toEqual({
-            "0:00": "0:00",
-            "1:00": "1:00",
-            "2:00": "2:00",
-            "3:00": "3:00",
-            "4:00": "4:00",
-            "5:00": "5:00",
-            "6:00": "6:00",
-            "7:00": "7:00",
-            "8:00": "8:00",
-            "9:00": "9:00",
-            "10:00": "10:00",
-            "11:00": "11:00",
-            "12:00": "12:00",
-            "13:00": "13:00",
-            "14:00": "14:00",
-            "15:00": "15:00",
-            "16:00": "16:00",
-            "17:00": "17:00",
-            "18:00": "18:00",
-            "19:00": "19:00",
-            "20:00": "20:00",
-            "21:00": "21:00",
-            "22:00": "22:00",
-            "23:00": "23:00"
-        });
+        expect(component._getTimes()).toEqual([
+            { label: "0:00", value: "0:00" },
+            { label: "1:00", value: "1:00" },
+            { label: "2:00", value: "2:00" },
+            { label: "3:00", value: "3:00" },
+            { label: "4:00", value: "4:00" },
+            { label: "5:00", value: "5:00" },
+            { label: "6:00", value: "6:00" },
+            { label: "7:00", value: "7:00" },
+            { label: "8:00", value: "8:00" },
+            { label: "9:00", value: "9:00" },
+            { label: "10:00", value: "10:00" },
+            { label: "11:00", value: "11:00" },
+            { label: "12:00", value: "12:00" },
+            { label: "13:00", value: "13:00" },
+            { label: "14:00", value: "14:00" },
+            { label: "15:00", value: "15:00" },
+            { label: "16:00", value: "16:00" },
+            { label: "17:00", value: "17:00" },
+            { label: "18:00", value: "18:00" },
+            { label: "19:00", value: "19:00" },
+            { label: "20:00", value: "20:00" },
+            { label: "21:00", value: "21:00" },
+            { label: "22:00", value: "22:00" },
+            { label: "23:00", value: "23:00" }
+        ]);
     });
 
     it("properly populates the FormSelectField's options", function () {
@@ -154,5 +160,17 @@ describe("TimePicker", function () {
 
         // subtract time zone ofset from 1400 hours eg: 14 - 7 (PDT -700)
         expect(select.value).toEqual((14 - offset) + ":00am");
+    });
+
+    it("verify default data-id", function () {
+        component = render({ increments: 60, format: "24" });
+        expect(component.props["data-id"]).toBe("time-picker");
+    });
+
+    it("verify id causes warning to be output", function () {
+        console.warn = jest.genMockFunction();
+        component = render({ id: "some-id", increments: 60, format: "12" });
+        expect(console.warn).toBeCalledWith("Deprecated: use data-id instead of id. " +
+                                                "Support for id will be removed in next version");
     });
 });

@@ -13,7 +13,7 @@ describe("If component", function () {
 
     function getComponent (opts) {
         opts = _.defaults(opts, {
-            onSectionChange: jest.genMockFunction(),
+            onValueChange: jest.genMockFunction(),
             selectedIndex: -1
         });
 
@@ -26,7 +26,7 @@ describe("If component", function () {
 
     it("Renders one child", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            <TabbedSections selectedIndex={0} onSectionChange={_.noop}>
+            <TabbedSections selectedIndex={0} onValueChange={_.noop}>
                 <div data-id="section1" title="section 1">section 1</div>
             </TabbedSections>);
 
@@ -36,17 +36,17 @@ describe("If component", function () {
     });
 
     it("ID and classname are written to DOM", function () {
-        var component = getComponent({ selectedIndex: 0, id: "myId", className: "myClassName" });
-        var node = ReactDOM.findDOMNode(component);
+        var component = getComponent({ selectedIndex: 0, "data-id": "myId", className: "myClassName" });
+        var node = TestUtils.findRenderedDOMNodeWithDataId(component, "myId");
 
-        expect(node.getAttribute("class").match("myClassName")).toBeTruthy();
+        expect(node.getAttribute("class")).toBe("myClassName");
         expect(node.getAttribute("data-id")).toBe("myId");
     });
 
     it("Highlights selectedIndex tab", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Wrapper type={TabbedSections}
-                    onSectionChange={jest.genMockFunction()}
+                     onValueChange={jest.genMockFunction()}
                     selectedIndex={-1}>
                 <div data-id="section1" title="section 1">section 1</div>
                 <div data-id="section2" title="section 2">section 2</div>
@@ -74,4 +74,48 @@ describe("If component", function () {
         expect(content.childNodes[0].style.display).toBe("");
         expect(content.childNodes[1].style.display).toBe("none");
     });
+
+    it("Verify onValueChange called", function () {
+        var onValueChange = jest.genMockFunction();
+
+        var component = ReactTestUtils.renderIntoDocument(
+            <TabbedSections selectedIndex={-1} onValueChange={onValueChange}>
+                <div data-id="section1" title="section 1">section 1</div>
+                <div data-id="section2" title="section 2">section 2</div>
+            </TabbedSections>);
+        var tabs = ReactDOM.findDOMNode(component.refs.tabs);
+        ReactTestUtils.Simulate.click(tabs.childNodes[1]);
+
+        expect(onValueChange).toBeCalled();
+    });
+
+    it("Verify onSectionChange warning called", function () {
+        var onValueChange = jest.genMockFunction();
+        console.warn = jest.genMockFunction();
+
+        var component = ReactTestUtils.renderIntoDocument(
+            <TabbedSections selectedIndex={-1} onSectionChange={onValueChange}>
+                <div data-id="section1" title="section 1">section 1</div>
+                <div data-id="section2" title="section 2">section 2</div>
+            </TabbedSections>);
+        var tabs = ReactDOM.findDOMNode(component.refs.tabs);
+        ReactTestUtils.Simulate.click(tabs.childNodes[1]);
+
+        expect(onValueChange).toBeCalled();
+        expect(console.warn).toBeCalledWith("Deprecated: use onValueChange instead of onSectionChange. " +
+            "Support for onSectionChange will be removed in next version");
+    });
+
+    it("Verify id warning called", function () {
+        var onValueChange = jest.genMockFunction();
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <TabbedSections id="myId" selectedIndex={-1} onValueChange={onValueChange}>
+                <div data-id="section1" title="section 1">section 1</div>
+                <div data-id="section2" title="section 2">section 2</div>
+            </TabbedSections>);
+        expect(console.warn).toBeCalledWith("Deprecated: use data-id instead of id. " +
+            "Support for id will be removed in next version");
+    });
+
 });

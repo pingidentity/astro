@@ -422,7 +422,7 @@ $layout-nav-width-offset: 15px;
 	top: $layout-header-height;
 	right: 0;
 	bottom: 0;
-	left: $layout-nav-width + 11px;
+	left: $layout-nav-width + 11px - $layout-nav-width-offset;
 	background-color: $color-white;
 	padding: 25px 40px 80px 40px;
 
@@ -579,7 +579,7 @@ $layout-nav-width-offset: 15px;
 		}
 	}
 
-	&.warning, &.success, &.notice {
+	&.warning, &.success, &.notice, &.error {
 		padding-left: 55px;
 
 		&:before {
@@ -589,7 +589,7 @@ $layout-nav-width-offset: 15px;
     		line-height: 1em;
 		}
 	}
-	&.warning {
+	&.error {
 		$icon-size: 25px;
 
 		&:before {
@@ -609,7 +609,7 @@ $layout-nav-width-offset: 15px;
 			color: $color-success;
 		}
 	}
-	&.notice {
+	&.notice, &.warning {
 		$icon-size: 25px;
 
 		&:before {
@@ -774,14 +774,29 @@ $layout-nav-width-offset: 15px;
 	margin: -25px 0 5px 0;
 }
 .page-controls-primary {
-	position: absolute;
-	left: 0;
-	right: 0;
+	box-sizing: border-box;
+	position: fixed;
+	z-index: 1;
+	left: $layout-nav-width + 40px;
+	right: 40px;
 	bottom: 0;
-	padding: 20px;
+	padding: 20px 0;
 	text-align: right;
 	background: rgba($color-white, 0.9);
 	border-top: 1px solid silver;
+
+	@include transition(all 0.2s);
+
+	&.hidden {
+		@include transform(translateY(100%));
+	}
+	input[type=button], button, .button {
+		margin: 0;
+
+		& ~ input[type=button], & ~ button, & ~ .button {
+			margin-left: 10px;
+		}
+	}
 }
 
 

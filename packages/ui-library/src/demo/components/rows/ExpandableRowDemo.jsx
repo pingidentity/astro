@@ -1,6 +1,6 @@
 var React = require("react");
 var ExpandableRow = require("../../../components/rows/ExpandableRow.jsx");
-var Toggle = require("../../../components/forms/Toggle.jsx");
+var Toggle = require("../../../components/forms/form-toggle");
 
 var ExpandableRowDemo = React.createClass({
 
@@ -21,6 +21,19 @@ var ExpandableRowDemo = React.createClass({
 
     _handleDelete2: function () {
         this.setState({
+            showDeleteConfirm: true
+        });
+    },
+
+    _handleDeleteCancel: function () {
+        this.setState({
+            showDeleteConfirm: false
+        });
+    },
+
+    _handleDeleteConfirm: function () {
+        this.setState({
+            showDeleteConfirm: false,
             deletedRow2: true
         });
     },
@@ -29,8 +42,7 @@ var ExpandableRowDemo = React.createClass({
         return {
             expanded: false,
             deletedRow: false,
-            deletedRow2: false,
-            showDeleteConfirm2: false
+            deletedRow2: false
         };
     },
 
@@ -67,7 +79,7 @@ var ExpandableRowDemo = React.createClass({
                 <ExpandableRow
                     title="Collapsed Expandable Row"
                     subtitle="stateful"
-                    defaultToExpanded={false}
+                    expanded={false}
                     showDelete={false}
                     showEdit={true} />
                 <ExpandableRow
@@ -83,7 +95,7 @@ var ExpandableRowDemo = React.createClass({
                 <ExpandableRow
                     title="Open Expandable Row"
                     subtitle="stateful"
-                    defaultToExpanded={true}
+                    expanded={true}
                     showDelete={true}
                     showEdit={false} />
                 <ExpandableRow
@@ -100,20 +112,27 @@ var ExpandableRowDemo = React.createClass({
                     ? <span>Delete confirmed!</span>
                     : <ExpandableRow
                         title="Expanded Row with Delete Confirmation"
-                        defaultToExpanded={true}
+                        expanded={true}
                         showDelete={true}
                         confirmDelete={true}
-                        onDelete={this._handleDelete} />
+                        onDelete={this._handleDelete}
+                        labelDeleteConfirm="Are you sure you want to delete this row?" />
                 }
                 {this.state.deletedRow2
                     ? <span>Delete confirmed!</span>
                     : <ExpandableRow
                         title="Collapsed Row with Delete Confirmation"
+                        subtitle="stateless"
+                        controlled={true}
                         expanded={this.state.expanded3}
                         onToggle={this._onToggle.bind(null, 3)}
+                        onDeleteCancelClick={this._handleDeleteCancel}
+                        onDeleteConfirmClick={this._handleDeleteConfirm}
                         showDelete={true}
                         confirmDelete={true}
-                        onDelete={this._handleDelete2} />
+                        showDeleteConfirm={this.state.showDeleteConfirm}
+                        onDelete={this._handleDelete2}
+                        labelDeleteConfirm="Are you sure you want to delete this row?" />
                 }
             </div>
         );

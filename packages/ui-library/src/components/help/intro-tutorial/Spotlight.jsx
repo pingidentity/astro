@@ -3,20 +3,27 @@ var React = require("react"),
 
 /**
  * @class IntroTutorial#Spotlight
- * @private
- * @desc A class that will clone the target and place it above the original so that it can pop out of a
- * lightbox.
- * @param {number} [padding=10] - A padding around the spotlight
- * @param {object} target - The target on which we want to cast a spotlight
+ * @desc A class that will clone the target and place it above the original so that it can pop out of a lightbox.
+ *
+ * @param {string} [data-id="spotlight"]
+ *     To define the base "data-id" value for top-level HTML container.
+ *
+ * @param {number} [padding=10]
+ *     A padding around the spotlight
+ * @param {object} target
+ *     The DOM element on which we want to cast a spotlight
  */
+
 var Spotlight = React.createClass({
     propTypes: {
+        "data-id": React.PropTypes.string,
         padding: React.PropTypes.number,
         target: React.PropTypes.object.isRequired
     },
 
     getDefaultProps: function () {
         return {
+            "data-id": "spotlight",
             padding: 10
         };
     },
@@ -57,7 +64,10 @@ var Spotlight = React.createClass({
         var style = _.pick(this.state, ["left", "top", "width"]);
         style.padding = this.props.padding;
 
-        return (<div className="spotlight" style={style} dangerouslySetInnerHTML={{ __html: this.state.clone }} />);
+        return (
+            <div data-id={this.props["data-id"]} className="spotlight" style={style}
+                    dangerouslySetInnerHTML={{ __html: this.state.clone }} />
+        );
     }
 });
 

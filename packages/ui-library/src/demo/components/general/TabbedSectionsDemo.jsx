@@ -14,7 +14,8 @@ var TabbedSectionsDemo = React.createClass({
 
     render: function () {
         return (
-            <TabbedSections selectedIndex={this.state.selectedIndex} onSectionChange={this._handleSectionChange} >
+            <TabbedSections selectedIndex={this.state.selectedIndex}
+                            onValueChange={this._handleSectionChange} >
                 <div title="Section 1">
                     <span>This is the content of section 1</span>
                 </div>

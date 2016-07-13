@@ -1,6 +1,6 @@
-var React = require("react");
-var FileUpload = require("../../../components/forms/FileUpload.jsx");
-var DetailsTooltip = require("../../../components/tooltips/DetailsTooltip.jsx");
+var React = require("react"),
+    FileUpload = require("../../../components/forms/file-upload"),
+    DetailsTooltip = require("../../../components/tooltips/DetailsTooltip.jsx");
 
 var FileUploadDemo = React.createClass({
 
@@ -66,14 +66,15 @@ var FileUploadDemo = React.createClass({
                         <span className="label-text">Image Upload w Max Size Passed</span>
                     </label>
                     <FileUpload
-                        referenceName="fileUpload"
+                        data-id="fileUpload"
                         maxFileSizeKb={4096}
-                        errorHandler={this._onError}
+                        onError={this._onError}
                         showThumbnail={true}
                         onFileChange={this._onFirstFileChanged}
-                        removeFileLabel="Remove"
-                        maxFileSizeLabel="Max Size 4MB"
+                        labelMaxFileSize="Max Size 4MB"
                         accept="image/jpeg, image/jpg, image/png"
+                        labelSelect="Choose a File"
+                        labelRemove="Remove"
                     />
                 </div>
                 <div className="input-row">
@@ -89,11 +90,10 @@ var FileUploadDemo = React.createClass({
                         validator={this._fileValidator}
                         showThumbnail={true}
                         onFileChange={this._onSecondFileChanged}
-                        errorHandler={this._onError}
+                        onError={this._onError}
                         defaultImage="src/demo/images/favicon.png"
-                        removeFileLabel="Remove"
-                        buttonText="Choose a File"
-                    />
+                        labelSelect="Choose a File"
+                        labelRemove="Remove" />
                 </div>
                 <div className="input-row">
                     Selected file = {this.state.secondFile}
@@ -103,36 +103,32 @@ var FileUploadDemo = React.createClass({
                     <label>
                         <span className="label-text">File Upload</span>
                     </label>
-                    <FileUpload
-                        accept=""
-                        errorHandler={this._onError}
-                        removeFileLabel="Remove"
-                        buttonText="Choose a File"
-                    />
+                    <FileUpload onError={this._onError} accept="" labelSelect="Choose a File"
+                            labelRemove="Remove a File" />
                 </div>
 
                 <a onClick={this._toggleTooltip}>Stacked File Name in a DetailsTooltip</a>
                 <DetailsTooltip
-                    positionStyle="top right"
-                    labelStyle="my-css-class"
+                    positionClassName="top right"
+                    labelClassName="my-css-class"
                     title="File Upload in a Details Tooltip"
                     open={this.state.tooltipOpen}
                     onToggle={this._toggleTooltip}>
 
                     <br/><br/>
                     <div className="input-row">
-                      <label>
-                        <span className="label-text">File Upload</span>
-                      </label>
+                        <label>
+                            <span className="label-text">File Upload</span>
+                        </label>
 
-                      <FileUpload
-                        referenceName="uploadedFile"
-                        accept=""
-                        buttonText="Choose a File"
-                        removeFileLabel="Remove"
-                        stacked={true}
-                      />
-
+                        <FileUpload
+                            onError={this._onError}
+                            data-id="uploadedFile"
+                            accept=""
+                            buttonText="Choose a File"
+                            stacked={true}
+                            labelSelect="Choose a File"
+                            labelRemove="Remove" />
                     </div>
 
                     <div className="buttons" data-id="delete-confirmation">

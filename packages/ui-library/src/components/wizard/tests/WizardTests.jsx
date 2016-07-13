@@ -8,6 +8,7 @@ jest.dontMock("../../general/EllipsisLoaderButton.jsx");
 describe("Step", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
+        TestUtils = require("../../../testutil/TestUtils"),
         ReactTestUtils = require("react-addons-test-utils"),
         Wizard = require("../Wizard.jsx"),
         Step = Wizard.Step,
@@ -21,7 +22,7 @@ describe("Step", function () {
             title: "My Wizard",
             onNext: jest.genMockFunction(),
             onEdit: jest.genMockFunction(),
-            onChange: jest.genMockFunction(),
+            onValueChange: jest.genMockFunction(),
             onDone: jest.genMockFunction(),
             labelNext: "next",
             labelCancel: "cancel",
@@ -41,10 +42,21 @@ describe("Step", function () {
 
     it("Is the root wizard", function () {
         var component = getRenderedComponent();
+        var args = component.props.onValueChange.mock.calls[0];
+
+        //when the root wizard mounts, it should broadcast how many steps it contains to the reducer
+        expect(args).toEqual([{ choice: 0, numSteps: 3 }]);
+    });
+
+    it("Check for warning onChange", function () {
+        console.warn = jest.genMockFunction();
+        var component = getRenderedComponent({ onChange: jest.genMockFunction() });
         var args = component.props.onChange.mock.calls[0];
 
         //when the root wizard mounts, it should broadcast how many steps it contains to the reducer
         expect(args).toEqual([0, 3]);
+        expect(console.warn).toBeCalledWith("Deprecated: use onValueChange instead of onChange. " +
+            "Support for onChange will be removed in next version");
     });
 
     it("Calls onNext when next is clicked", function () {
@@ -77,5 +89,20 @@ describe("Step", function () {
 
         expect(component.props.onNext.mock.calls.length).toBe(0);
         expect(component.props.onEdit.mock.calls.length).toBe(1);
+    });
+
+    it("Verify warning when id set.", function () {
+        console.warn = jest.genMockFunction();
+        getRenderedComponent({ id: "myid" });
+        expect(console.warn).toBeCalledWith("Deprecated: use data-id instead of id. " +
+            "Support for id will be removed in next version");
+    });
+
+    it("Verify default data-id set.", function () {
+        console.warn = jest.genMockFunction();
+        var component = getRenderedComponent();
+        var test = TestUtils.findRenderedDOMNodeWithDataId(component, "wizard");
+        expect(test).toBeTruthy();
+        expect(console.warn).not.toBeCalled();
     });
 });

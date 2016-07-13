@@ -36,7 +36,7 @@ var MessagesDemo = React.createClass({
                 appear in pages with a left-nav, do not set the containerType prop.</p>
 
                 <Messages messages={this.props.messages}
-                    removeMessage={this.actions.removeAt} />
+                    onRemoveMessage={this.actions.removeAt} />
                 <br />
                 <button onClick={this._addSuccessMessage} >Add success message</button>
                 <button onClick={this._addErrorMessage} >Add error message</button>

@@ -33,7 +33,7 @@ var SectionDemo = React.createClass({
                 </Section>
                 <Section controlled={false}
                          title="My section Stateful"
-                         id="section-2"
+                         data-id="section-2"
                          className="extra">
                     <div className="condition">
                         <div className="condition-fields">

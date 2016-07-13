@@ -13,7 +13,7 @@ var FormRadioGroupDemo = React.createClass({
         };
     },
 
-    _onChange: function (i, value) {
+    _handleChange: function (i, value) {
         var newState = {};
         newState["selectedId" + i] = value;
         this.setState(newState);
@@ -41,7 +41,7 @@ var FormRadioGroupDemo = React.createClass({
                     <FormRadioGroup
                         groupName="horizontal-group"
                         selected={this.state.selectedId1}
-                        onChange={this._onChange.bind(this, 1)}
+                        onValueChange={this._handleChange.bind(this, 1)}
                         items={radioItems}
                         stacked={false}
                     />
@@ -56,7 +56,7 @@ var FormRadioGroupDemo = React.createClass({
                     <FormRadioGroup
                         groupName="stacked-group"
                         selected={this.state.selectedId2}
-                        onChange={this._onChange.bind(this, 2)}
+                        onValueChange={this._handleChange.bind(this, 2)}
                         items={radioItems}
                     />
                 </div>
@@ -70,7 +70,7 @@ var FormRadioGroupDemo = React.createClass({
                     <FormRadioGroup
                         groupName="disabled-stacked-group"
                         selected={this.state.selectedId3}
-                        onChange={this._onChange.bind(this, 3)}
+                        onValueChange={this._handleChange.bind(this, 3)}
                         items={radioItems}
                         disabled={true}
                     />
@@ -81,7 +81,7 @@ var FormRadioGroupDemo = React.createClass({
                     <FormRadioGroup
                         groupName="hidden-stacked-group"
                         selected={this.state.selectedId4}
-                        onChange={this._onChange.bind(this, 4)}
+                        onValueChange={this._handleChange.bind(this, 4)}
                         items={radioItemsWithHidden}
                     />
                 </div>

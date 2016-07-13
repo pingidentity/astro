@@ -15,8 +15,8 @@ describe("LeftNavBar", function () {
 
     function getWrappedComponent (opts) {
         opts = _.defaults(opts || {}, {
-            onItemClick: jest.genMockFunction(),
-            onSectionClick: jest.genMockFunction(),
+            onItemValueChange: jest.genMockFunction(),
+            onSectionValueChange: jest.genMockFunction(),
             tree: [
                 {
                     label: "Section 1",
@@ -40,10 +40,79 @@ describe("LeftNavBar", function () {
         var itemLabel = TestUtils.findRenderedDOMNodeWithDataId(component, "item-1-label");
 
         ReactTestUtils.Simulate.click(sectionLabel);
-        expect(component.props.onSectionClick).lastCalledWith("section-1");
+        expect(component.props.onSectionValueChange).lastCalledWith("section-1");
+
+        ReactTestUtils.Simulate.click(itemLabel);
+        expect(component.props.onItemValueChange).lastCalledWith("item-1");
+    });
+
+    it("clicks trigger correct callback and onItemClick warning", function () {
+        console.warn = jest.genMockFunction();
+
+        var opts = _.defaults(opts || {}, {
+            onItemClick: jest.genMockFunction(),
+            onSectionValueChange: jest.genMockFunction(),
+            tree: [
+                {
+                    label: "Section 1",
+                    id: "section-1",
+                    children: [{ label: "Item 1", id: "item-1" }]
+                },
+                {
+                    label: "Section 2",
+                    id: "section-2",
+                    children: [{ label: "Item 2", id: "item-2" }]
+                }
+            ]
+        });
+        var wrapper = ReactTestUtils.renderIntoDocument(<ReduxTestUtils.Wrapper type={LeftNavBar} opts={opts} />);
+
+        var component = wrapper.refs.target;
+        var sectionLabel = TestUtils.findRenderedDOMNodeWithDataId(component, "section-1-label");
+        var itemLabel = TestUtils.findRenderedDOMNodeWithDataId(component, "item-1-label");
+
+        ReactTestUtils.Simulate.click(sectionLabel);
+        expect(component.props.onSectionValueChange).lastCalledWith("section-1");
 
         ReactTestUtils.Simulate.click(itemLabel);
         expect(component.props.onItemClick).lastCalledWith("item-1");
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use onItemValueChange instead of onItemClick. Support for onItemClick " +
+            "will be removed in next version");
+    });
+
+    it("clicks trigger correct callback and onSectionClick warning", function () {
+        console.warn = jest.genMockFunction();
+        var opts = _.defaults(opts || {}, {
+            onItemValueChange: jest.genMockFunction(),
+            onSectionClick: jest.genMockFunction(),
+            tree: [
+                {
+                    label: "Section 1",
+                    id: "section-1",
+                    children: [{ label: "Item 1", id: "item-1" }]
+                },
+                {
+                    label: "Section 2",
+                    id: "section-2",
+                    children: [{ label: "Item 2", id: "item-2" }]
+                }
+            ]
+        });
+        var wrapper = ReactTestUtils.renderIntoDocument(<ReduxTestUtils.Wrapper type={LeftNavBar} opts={opts} />);
+
+        var component = wrapper.refs.target;
+        var sectionLabel = TestUtils.findRenderedDOMNodeWithDataId(component, "section-1-label");
+        var itemLabel = TestUtils.findRenderedDOMNodeWithDataId(component, "item-1-label");
+
+        ReactTestUtils.Simulate.click(sectionLabel);
+        expect(component.props.onSectionClick).lastCalledWith("section-1");
+
+        ReactTestUtils.Simulate.click(itemLabel);
+        expect(component.props.onItemValueChange).lastCalledWith("item-1");
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use onSectionValueChange instead of onSectionClick. Support for onSectionClick " +
+            "will be removed in next version");
     });
 
     it("renders the tree structure", function () {

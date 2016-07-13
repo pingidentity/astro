@@ -262,9 +262,9 @@ input[type=button], input[type=submit], button, .button {
 button.ellipsis-loader-button {
 	.icon-ellipsis {
 		position: absolute;
-		top: 14px;
+		top: 15px;
 		left: 50%;
-		margin: 0 0 0 -19px;
+		margin: 0 0 0 -18px;
 		display: none;
 	}
 	&.loading {

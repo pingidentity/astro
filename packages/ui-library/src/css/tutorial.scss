@@ -64,10 +64,12 @@
 			line-height: 1em;
 			padding: 10px 20px;
 			color: $color-white;
+			background-color: $color-active-blue;
 			font-weight: 100;
 			@include border-radius(2px);
 
 			&.prev, &.dismiss {
+				color: $color-active-blue;
 				background-color: transparent;
 				font-weight: 500;
 			}
@@ -85,6 +87,7 @@
 		}
 	}
 	path {
+		stroke: $color-active-blue;
 		fill:none;
 
 		&.line {

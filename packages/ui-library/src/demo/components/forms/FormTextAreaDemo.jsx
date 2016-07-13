@@ -1,5 +1,5 @@
 var React = require("react");
-var FormTextArea = require("./../../../components/forms/FormTextArea.jsx");
+var FormTextArea = require("./../../../components/forms/form-text-area");
 
 /**
  * A demo for FormTextArea.
@@ -8,13 +8,28 @@ var FormTextAreaDemo = React.createClass({
 
     getInitialState: function () {
         return {
-            onChangeFieldValue: ""
+            onValueChangeFieldValue: "",
+            onUndoValue: null
         };
     },
 
-    _changeCallback: function (event) {
+    _handleValueChange: function (value) {
         this.setState({
-            onChangeFieldValue: event.target.value
+            onValueChangeFieldValue: value
+        });
+    },
+
+    _handleUndoValueChange: function (value) {
+        this.setState({
+            onUndoValue: value,
+            edited: value !== "Lorem ipsum dolor sit amet",
+            showUndo: value !== "Lorem ipsum dolor sit amet"
+        });
+    },
+
+    _handleUndo: function () {
+        this.setState({
+            onUndoValue: "Lorem ipsum dolor sit amet"
         });
     },
 
@@ -31,10 +46,10 @@ var FormTextAreaDemo = React.createClass({
                 <div className="input-row">
                     <FormTextArea
                         labelText="Required with placeholder and change callback"
-                        onValueChange={this._changeCallback}
+                        onValueChange={this._handleValueChange}
                         placeholder="placeholder"
-                        isRequired={true}>
-                        {this.state.onChangeFieldValue}
+                        required={true}>
+                        {this.state.onValueChangeFieldValue}
                     </FormTextArea>
                 </div>
                 <div className="input-row">
@@ -48,9 +63,21 @@ var FormTextAreaDemo = React.createClass({
                 </div>
                 <div className="input-row">
                     <FormTextArea
-                        labelText="With defaultValue and undo"
+                        labelText="With defaultValue and undo (stateful)"
                         defaultValue="Lorem ipsum dolor sit amet"
                         originalValue="Lorem ipsum dolor sit amet"
+                    />
+                </div>
+                <div className="input-row">
+                    <FormTextArea
+                        controlled={true}
+                        labelText="With defaultValue and undo (stateless)"
+                        value={this.state.onUndoValue}
+                        onValueChange={this._handleUndoValueChange}
+                        defaultValue="Lorem ipsum dolor sit amet"
+                        edited={this.state.edited}
+                        showUndo={this.state.showUndo}
+                        onUndo={this._handleUndo}
                     />
                 </div>
                 <div className="input-row">

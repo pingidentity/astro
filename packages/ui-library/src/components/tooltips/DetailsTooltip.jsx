@@ -1,43 +1,74 @@
 "use strict";
-var React = require("react"),
+var React = require("re-react"),
     ReactDOM = require("react-dom"),
     classnames = require("classnames"),
     _ = require("underscore"),
-    callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutsideOfContainer;
+    callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutsideOfContainer,
+    Utils = require("../../util/Utils");
 
-/** @class DetailsTooltip
+/**
+ * @callback DetailsTooltip~onToggle
+ **/
+
+/**
+ * @class DetailsTooltip
  * @desc DetailsTooltip implements tooltip callout with trigger label. Body of tooltip is becoming callout content.
  *
- * @param {string} [id="details-tooltip"] - used as data-in on top HTML element.
- * @param {string} [title] - tooltip title
- * @param {object|string} label - tooltip trigger label (can be a component)
- * @param {string} positionStyle - css styling to manage tooltip callout position ("bottom", "top", "left", "right")
- *          + any extra css styling if needed
- * @param {string} titleClassNames - css classes to apply to title container, "details-title" if not specified
- * @param {string} contentClassNames - css classes to apply to content container, "details-content" if not specified
- * @param {string} labelStyle - extra css styling for trigger label
- * @param {string} className - extra CSS classes to be applied on the top level HTML
- * @param {bool} open - if callout is open (to manage state outside of DetailsTooltip)
- * @param {function} onToggle - delegate to call when label is clicked and tooltip visibility should be triggered
- *          (used to manage state outside of DetailsTooltip in case it should be closed from outside,
- *          e.g. on some external action)
- * @param {bool} disabled - If true then disable button activity and add "disabled"
- *          css style to label link.  Default: false.
- * @param {bool} showClose - show close control, true by default
- * @param {bool} [controlled=true] - A boolean to enable the component to be externally managed.  True will relinquish
- *   control to the component"s owner.  False or not specified will cause the component to manage state internally
- *   but still execute the onToggle callback in case the owner is interested.
- * @param {bool} hideOnClick - whether to close tooltip on content area click, false by default
+ * @param {string} [data-id="details-tooltip"]
+ *     To define the base "data-id" value for top-level HTML container.
+ * @param {string} [id]
+ *     DEPRECATED. Use "data-id" instead.
+ * @param {string} [className]
+ *     CSS classes to set on the top-level HTML container.
+ * @param {boolean} [controlled=true]
+ *     WARNING. Default value will be set to false from next version. To enable the component to be externally managed.
+ *     True will relinquish control to the component's owner. False or not specified will cause the component to manage
+ *     state internally.
+ * @param {string} [contentClassName]
+ *     CSS classes to apply to content container
+ * @param {string} [contentClassNames]
+ *     DEPRECATED. Use "contentClassName" instead.
+ * @param {string} [titleClassName]
+ *     CSS classes to apply to title container.
+ * @param {string} [titleClassNames]
+ *     DEPRECATED. Use "titleClassName" instead.
+ * @param {string} [labelClassName]
+ *     CSS classes to set on the trigger label.
+ * @param {string} [labelStyle]
+ *     DEPRECATED. Use "labelClassName" instead.
+ * @param {DetailsTooltip.positionStyles|string} [positionClassName]
+ *     CSS classes to set on the top-level HTML container. Used to manage tooltip callout positioning with the
+ *     DetailsTooltip.positionStyles enum and/or any extra css styling if needed.
+ * @param {DetailsTooltip.positionStyles|string} [positionStyle]
+ *     DEPRECATED. Use "positionClassName" instead.
+ *
+ * @param {object|string} [label]
+ *     A string or JSX object that serves as the trigger label.
+ * @param {string} [title]
+ *     Tooltip title
+ *
+ * @param {boolean} [disabled=false]
+ *     If true then disable button activity and add "disabled" css style to label link.
+ * @param {boolean} [hideOnClick=false]
+ *     Whether to close tooltip on content area click.
+ * @param {boolean} [open=false]
+ *     If true, tooltip is open or else closed.
+ * @param {DetailsTooltip~onToggle} [onToggle]
+ *     Callback to be triggered when label is clicked.
+ * @param {boolean} [showClose=true]
+ *     Show close control.
+ *
  * @example
- *       <Details positionStyle="resend-tooltip bottom left" labelStyle="resend-btn"
- *              title={this.im("pingid.policies.deleterule.title")}
- *              label={this.im("pingid.policies.deleterule.title")}
- *               open={this.state.isInviteOpen} onToggle={this._toggleDetails}
- *              disabled={false}>
+ *     <DetailsTooltip positionStyle="resend-tooltip bottom left" labelStyle="resend-btn"
+ *          title={this.im("pingid.policies.deleterule.label")}
+ *          label={this.im("pingid.policies.deleterule.title")}
+ *          open={this.state.isInviteOpen} onToggle={this._handleToggle}
+ *          disabled={false}>
  *           <p>what ever callout content is</p>
- *       </Details>
+ *     </DetailsTooltip>
  **/
-module.exports = React.createClass({
+
+var DetailsTooltip = React.createClass({
     getDefaultProps: function () {
         return {
             controlled: true
@@ -53,99 +84,80 @@ module.exports = React.createClass({
     render: function () {
         return (
             this.props.controlled
-                ? <StatelessDetailsTooltip ref="tooltip" {...this.props} />
-                : <StatefulDetailsTooltip ref="manager" {...this.props} />);
+                ? React.createElement(DetailsTooltipStateless, //eslint-disable-line
+                    _.defaults({ ref: "tooltip" }, this.props), this.props.children)
+                : React.createElement(DetailsTooltipStateful, //eslint-disable-line
+                    _.defaults({ ref: "manager" }, this.props), this.props.children)
+        );
     }
 });
 
-var StatefulDetailsTooltip = React.createClass({
-    getInitialState: function () {
-        return {
-            open: this.props.open
-        };
-    },
-
-    toggle: function () {
-        this.setState({
-            open: !this.state.open
-        });
-    },
-
-    close: function () {
-        this.setState({
-            open: false
-        });
-    },
-
-    render: function () {
-        return (
-            <StatelessDetailsTooltip ref="tooltip" {...this.props} open={this.state.open} onToggle={this.toggle}>
-                {this.props.children}
-            </StatelessDetailsTooltip>);
-    }
-});
-
-var StatelessDetailsTooltip = React.createClass({
+var DetailsTooltipStateless = React.createClass({
 
     propTypes: {
+        "data-id": React.PropTypes.string,
         id: React.PropTypes.string,
-        title: React.PropTypes.string,
+        className: React.PropTypes.string.affectsRendering,
+        contentClassName: React.PropTypes.string.affectsRendering,
+        contentClassNames: React.PropTypes.string.affectsRendering,
+        titleClassName: React.PropTypes.string.affectsRendering,
+        titleClassNames: React.PropTypes.string.affectsRendering,
+        labelClassname: React.PropTypes.string.affectsRendering,
+        labelStyle: React.PropTypes.string.affectsRendering,
+        positionClassname: React.PropTypes.string.affectsRendering,
+        positionStyle: React.PropTypes.string.affectsRendering,
         label: React.PropTypes.oneOfType([
             React.PropTypes.string,
-            React.PropTypes.object]),
-        positionStyle: React.PropTypes.string,
-        titleClassNames: React.PropTypes.string,
-        contentClassNames: React.PropTypes.string,
-        labelStyle: React.PropTypes.string,
-        className: React.PropTypes.string,
-        open: React.PropTypes.bool,
+            React.PropTypes.object]).affectsRendering,
+        title: React.PropTypes.string.affectsRendering,
+        disabled: React.PropTypes.bool.affectsRendering,
+        hideOnClick: React.PropTypes.bool.affectsRendering,
+        open: React.PropTypes.bool.affectsRendering,
         onToggle: React.PropTypes.func,
-        disabled: React.PropTypes.bool,
-        showClose: React.PropTypes.bool,
-        hideOnClick: React.PropTypes.bool
+        showClose: React.PropTypes.bool.affectsRendering
     },
 
     getDefaultProps: function () {
         return {
-            id: "details-tooltip",
-            positionStyle: "top",
-            titleClassNames: "details-title",
-            contentClassNames: null,
+            "data-id": "details-tooltip",
+            positionClassName: "top",
+            titleClassName: "details-title",
             open: false,
+            disabled: false,
             showClose: true,
             hideOnClick: false
         };
     },
 
-    /**
+    /*
      * Call the props toggle() function .
-     *
-     * @private
      */
-    _toggle: function () {
+    _handleToggle: function () {
         this.props.onToggle();
     },
 
 
-    /**
+    /*
      * Return of content based on props.open.
      *
-     * @private
      * @return {React.Component} the React component to be used as tooltip content
      */
     _content: function () {
 
         var hide = this.props.hideOnClick ? this.props.onToggle : _.noop;
+        var contentClassName =
+            classnames("details-content", (this.props.contentClassNames || this.props.contentClassName)) ;
+        var titleClassName = this.props.titleClassNames || this.props.titleClassName;
 
         return this.props.open ? (
-            <div className={classnames("details-content", this.props.contentClassNames)} data-id="details-content"
+            <div className={contentClassName} data-id="details-content"
                     onClick={hide}>
                 <div className="details-content-inner">
                     {this.props.showClose && (
                         <span className="details-close" data-id="details-close" onClick={this.props.onToggle}></span>
                     )}
                     {this.props.title && (
-                        <div className={this.props.titleClassNames} data-id="details-title">{this.props.title}</div>
+                        <div className={titleClassName} data-id="details-title">{this.props.title}</div>
                     )}
                     <div className="details-body" data-id="details-body">{this.props.children}</div>
                 </div>
@@ -155,7 +167,7 @@ var StatelessDetailsTooltip = React.createClass({
 
     _handleGlobalClick: function (e) {
         if (this.props.open) {
-            callIfOutsideOfContainer(ReactDOM.findDOMNode(this.refs.container), this._toggle, e);
+            callIfOutsideOfContainer(ReactDOM.findDOMNode(this.refs.container), this._handleToggle, e);
         }
     },
 
@@ -179,8 +191,27 @@ var StatelessDetailsTooltip = React.createClass({
     },
 
     componentWillMount: function () {
+        console.warn(
+            "** Default value for 'controlled' in `DetailsTooltip` component will be set to 'false' from next version");
+
         if (this.props.open) {
             this._bindWindowsEvents();
+        }
+
+        if (this.props.id) {
+            Utils.deprecateWarn("id", "data-id");
+        }
+        if (this.props.contentClassNames) {
+            Utils.deprecateWarn("contentClassNames", "contentClassName");
+        }
+        if (this.props.titleClassNames) {
+            Utils.deprecateWarn("titleClassNames", "titleClassName");
+        }
+        if (this.props.labelStyle) {
+            Utils.deprecateWarn("labelStyle", "labelClassName");
+        }
+        if (this.props.positionStyle) {
+            Utils.deprecateWarn("positionStyle", "positionClassName");
         }
     },
 
@@ -197,23 +228,71 @@ var StatelessDetailsTooltip = React.createClass({
                 disabled: this.props.disabled
             };
 
-        containerCss[this.props.positionStyle] = true;
+        var positionClassName = this.props.positionStyle || this.props.positionClassName;
+        containerCss[positionClassName] = true;
 
-        if (this.props.labelStyle) {
-            targetCss[this.props.labelStyle] = true;
+        var labelClassName = this.props.labelStyle || this.props.labelClassName;
+        if (labelClassName) {
+            targetCss[labelClassName] = true;
         }
 
         if (this.props.className) {
             containerCss[this.props.className] = true;
         }
 
+        var containerClassName = classnames("details-tooltip", containerCss);
+        var dataId = this.props.id || this.props["data-id"];
+
         return (
-            <span className={classnames("details-tooltip", containerCss)} data-id={this.props.id} ref="container">
+            <span className={containerClassName} data-id={dataId} ref="container">
                 {this.props.label ? (
                     <a className={classnames("details-target", targetCss)} data-id="action-btn"
-                        onClick={!this.props.disabled && this._toggle}>{this.props.label}</a>) : null }
+                        onClick={!this.props.disabled && this._handleToggle}>{this.props.label}</a>) : null }
                 {this._content()}
             </span>
         );
     }
 });
+
+var DetailsTooltipStateful = React.createClass({
+    getInitialState: function () {
+        return {
+            open: this.props.open
+        };
+    },
+
+    _handleToggle: function () {
+        this.setState({
+            open: !this.state.open
+        });
+    },
+
+    close: function () {
+        this.setState({
+            open: false
+        });
+    },
+
+    render: function () {
+        var props = _.defaults(
+            { ref: "tooltip", open: this.state.open, onToggle: this._handleToggle }, this.props);
+        return React.createElement(DetailsTooltipStateless, props, this.props.children);
+    }
+});
+
+/**
+ * @enum {string}
+ * @desc Enum for the different styles for DetailsTooltip position.
+ **/
+DetailsTooltip.positionStyles = {
+    /** Add className {DetailsTooltip.positionStyles.LEFT} for positioning the tooltip to the left of the label. */
+    LEFT: "left",
+    /** Add className {DetailsTooltip.positionStyles.RIGHT} for positioning the tooltip to the right of the label. */
+    RIGHT: "right",
+    /** Add className {DetailsTooltip.positionStyles.TOP} for positioning the tooltip to the top of the label. */
+    TOP: "top",
+    /** Add className {DetailsTooltip.positionStyles.BOTTOM} for positioning the tooltip to the bottom of the label. */
+    BOTTOM: "bottom"
+};
+
+module.exports = DetailsTooltip;

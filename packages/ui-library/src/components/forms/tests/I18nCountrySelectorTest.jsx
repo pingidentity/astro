@@ -41,7 +41,7 @@ describe("I18nCountrySelector", function () {
         props = _.defaults(props || {}, {
             onValueChange: jest.genMockFunction(),
             onToggle: jest.genMockFunction(),
-            onCountrySearch: jest.genMockFunction()
+            onSearch: jest.genMockFunction()
         });
         return ReactTestUtils.renderIntoDocument(<I18nCountrySelector {...props} />);
     }
@@ -146,8 +146,7 @@ describe("I18nCountrySelector", function () {
         
         var flag = TestUtils.findRenderedDOMNodeWithDataId(componentRef, "selected-flag");
         // var currentCountryIso = componentRef.state.selected.iso2;
-        // open flag, enter can, validate still not selected, hit enter, validate Canada now selected
-        ReactTestUtils.Simulate.click(flag);
+        // enter can, validate still not selected, hit enter, validate Canada now selected
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 65 }); // a
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 78 }); // n
@@ -179,7 +178,6 @@ describe("I18nCountrySelector", function () {
         
         var flag = TestUtils.findRenderedDOMNodeWithDataId(componentRef, "selected-flag");
 
-        ReactTestUtils.Simulate.click(flag);
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 65 }); // a
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 78 }); // n
@@ -187,5 +185,45 @@ describe("I18nCountrySelector", function () {
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 27 }); // esc
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 13 }); // enter - don't do anything because empty
         expect(componentRef.state.searchString).toBe("");
+    });
+
+    it("stateless: triggers onSearch callback when typing and search string provided", function () {
+        var component = getComponent({
+            controlled: true,
+            open: true,
+            searchString: "",
+            searchTime: 0
+        });
+
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
+        expect(component.props.onSearch).toBeCalled();
+    });
+
+    //TODO: remove when v1 no longer supported
+    it("stateless: triggers onCountrySearch callback when typing and search string provided", function () {
+        var component = getComponent({
+            controlled: true,
+            open: true,
+            searchString: "",
+            searchTime: 0,
+            onCountrySearch: jest.genMockFunction()
+        });
+
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
+        expect(component.props.onCountrySearch).toBeCalled();
+    });
+
+    //TODO: remove when v1 no longer supported
+    it("logs warning when onCountrySearch prop given", function () {
+        console.warn = jest.genMockFunction();
+        getComponent({
+            onCountrySearch: jest.genMockFunction()
+        });
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use onSearch instead of onCountrySearch. " +
+            "Support for onCountrySearch will be removed in next version");
     });
 });

@@ -1,22 +1,34 @@
-var React = require("react");
-var css = require("classnames");
-var EllipsisLoader = require("../general/EllipsisLoader.jsx");
+var React = require("react"),
+    css = require("classnames"),
+    Utils = require("../../util/Utils"),
+    EllipsisLoader = require("../general/EllipsisLoader.jsx");
 
 /**
- * @callback EllipsisLoaderButton~eventCallback
- * @param {object} event - reactjs synthetic event object
+ * @callback EllipsisLoaderButton~onClick
+ * @param {object} e
+ *          The ReactJS synthetic event object
  */
 
 /**
  * @class EllipsisLoaderButton
  * @desc Loading indicator (animated ...) for fields which have server-side validation, etc.
  *
- * @param {string} [id="ellipsis-loader-button"] data-id to set on the button (optional, default 'ellipsis-loader-button')
- * @param {string} text text to display in the button when not loading
- * @param {boolean} [disabled] button will not function when true
- * @param {boolean} loading while true, loading animation will be shown
- * @param {string} [className] CSS class to add to the button
- * @param {EllipsisLoaderButton~callback} onButtonClick function to call when the button is clicked
+ * @param {string} [data-id="ellipsis-loader-button"]
+ *          To define the base "data-id" value for the top-level HTML container.
+ * @param {string} [id]
+ *          DEPRECATED. Use "data-id" instead.
+ * @param {string} text
+ *          Text to display in the button when not loading
+ * @param {boolean} [disabled=false]
+ *          Button will not function when true
+ * @param {boolean} loading
+ *          While true, loading animation will be shown
+ * @param {string} [className]
+ *          CSS class to add to the button
+ * @param {EllipsisLoaderButton~onClick} onClick
+ *          Callback to be triggered when the button is clicked.
+ * @param {EllipsisLoaderButton~onButtonClick} onButtonClick
+ *          DEPRECATED, use onClick instead.
  *
  * @example
  *     <EllipsisLoaderButton
@@ -27,40 +39,53 @@ var EllipsisLoader = require("../general/EllipsisLoader.jsx");
  */
 var EllipsisLoaderButton = React.createClass({
     propTypes: {
-        className: React.PropTypes.string,
-        disabled: React.PropTypes.bool,
+        "data-id": React.PropTypes.string,
         id: React.PropTypes.string,
+        className: React.PropTypes.string,
+        text: React.PropTypes.string.isRequired,
+        disabled: React.PropTypes.bool,
         loading: React.PropTypes.bool.isRequired,
-        onButtonClick: React.PropTypes.func.isRequired,
-        text: React.PropTypes.string.isRequired
+        onClick: React.PropTypes.func, /// Should be isRequired once DEPRECATED onButtonClick is removed.
+        onButtonClick: React.PropTypes.func
     },
 
     getDefaultProps: function () {
         return {
             disabled: false,
-            id: "ellipsis-loader-button"
+            "data-id": "ellipsis-loader-button"
         };
     },
 
-    render: function () {
-        var buttonCss = {};
-
-        buttonCss.loading = this.props.loading;
-
-        if (this.props.disabled) {
-            buttonCss.disabled = true;
+    componentWillMount: function () {
+        if (this.props.id) {
+            Utils.deprecateWarn("id", "data-id");
         }
+        if (this.props.onButtonClick) {
+            Utils.deprecateWarn("onButtonClick", "onClick");
+        }
+    },
+
+    render: function () {
+        var id = this.props.id || this.props["data-id"];
+
+        var buttonCss = {};
+        buttonCss.loading = this.props.loading;
         if (this.props.className) {
             buttonCss[this.props.className] = true;
         }
 
+        if (this.props.disabled) {
+            buttonCss.disabled = true;
+        }
+
+        var clickHandler = this.props.onButtonClick || this.props.onClick;
+
         return (
             <button
                 className={css("ellipsis-loader-button", buttonCss)}
-                data-id={this.props.id}
-                onClick={this.props.onButtonClick}
+                data-id={id}
+                onClick={clickHandler}
                 disabled={this.props.disabled}>
-
                 {this.props.text}
                 <EllipsisLoader loading={this.props.loading}/>
             </button>

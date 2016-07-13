@@ -1,12 +1,12 @@
 
-jest.dontMock("../Toggle.jsx");
+jest.dontMock("../v1.jsx");
 
 
 describe("Toggle", function () {
     var React = require("react");
     var ReactTestUtils = require("react-addons-test-utils");
-    var TestUtils = require("../../../testutil/TestUtils");
-    var Toggle = require("../Toggle.jsx");
+    var TestUtils = require("../../../../testutil/TestUtils");
+    var Toggle = require("../v1.jsx");
 
     /*
      * Test toggling intital state the toggle on and
@@ -228,5 +228,17 @@ describe("Toggle", function () {
         // Expect a single toggle to be rendered.
         var toggles = TestUtils.scryRenderedDOMNodesWithDataId(toggleComponent, "toggle");
         expect(toggles.length).toEqual(1);
+    });
+
+    it("will not trigger onToggle callback if disabled", function () {
+        var callback = jest.genMockFunction();
+        var compnent = ReactTestUtils.renderIntoDocument(
+            <Toggle value={true} onToggle={callback} disabled={true} />);
+
+        var toggle = TestUtils.findRenderedDOMNodeWithDataId(compnent, "toggle");
+
+        ReactTestUtils.Simulate.click(toggle);
+
+        expect(callback).not.toBeCalled();
     });
 });

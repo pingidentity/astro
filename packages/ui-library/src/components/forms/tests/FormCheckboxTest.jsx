@@ -31,12 +31,25 @@ describe("FormCheckbox", function () {
         ReactTestUtils.Simulate.change(checkbox, { target: { checked: true } });
     });
 
+    it("renders with default data-id", function () {
+        var component = getComponent();
+
+        expect(TestUtils.findRenderedDOMNodeWithDataId(component, "form-checkbox-container")).toBeDefined();
+    });
+
     it("uses 'data-id' to set data-id", function () {
         var component = getComponent({
             "data-id": "my-new-id"
         });
 
-        expect(TestUtils.findRenderedDOMNodeWithDataId(component, "my-new-id")).toBeTruthy();
+        expect(TestUtils.findRenderedDOMNodeWithDataId(component, "my-new-id-container")).toBeTruthy();
+    });
+
+    //TODO: remove when v1 no longer supported
+    it("renders with given id", function () {
+        var component = getComponent({ id: "myCheckboxId" });
+
+        expect(TestUtils.findRenderedDOMNodeWithDataId(component, "myCheckboxId-container")).toBeDefined();
     });
 
     it("test default render with minimum required params", function () {
@@ -52,11 +65,11 @@ describe("FormCheckbox", function () {
         expect(label.length).toEqual(0);
     });
 
-    it("test pre-checked box with custom id and label", function () {
+    it("test pre-checked box with custom data-id and label", function () {
         var component = getComponent({
             checked: true,
             label: "pre-check",
-            id: "checkbox-test"
+            "data-id": "checkbox-test"
         });
 
         //Expect single element with custom data-id
@@ -120,5 +133,16 @@ describe("FormCheckbox", function () {
         
         var tooltip = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text");
         expect(tooltip.textContent).toEqual("Disabled with help text");
+    });
+
+    //TODO: remove when v1 no longer supported
+    it("logs warning when id prop given", function () {
+        console.warn = jest.genMockFunction();
+        getComponent(
+            { id: "FormCheckboxId" }
+        );
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use data-id instead of id. Support for id will be removed in next version");
     });
 });

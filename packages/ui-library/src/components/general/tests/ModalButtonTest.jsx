@@ -1,6 +1,8 @@
+"use strict";
 
 jest.dontMock("../ModalButton.jsx");
 jest.dontMock("../Modal.jsx");
+jest.dontMock("../If.jsx");
 jest.dontMock("../../../util/EventUtils.js");
 
 describe("ModalButtonTest", function () {
@@ -9,24 +11,29 @@ describe("ModalButtonTest", function () {
         TestUtils = require("../../../testutil/TestUtils"),
         ModalButton = require("../ModalButton.jsx"),
         _ = require("underscore");
+    
+    require("../Modal.jsx"); // just so Jest include the code coverage on Modal.jsx in the report
 
     var linkCallback = function () {
-        return <span className="someCallbackClass">Link</span>;
+        return (<span className="someCallbackClass">Link</span>);
     };
 
     beforeEach(function () {
         window.setTimeout = jest.genMockFunction();
     });
 
+    function getComponentWithoutDefaults (opts) {
+        return ReactTestUtils.renderIntoDocument(<ModalButton {...opts} />);
+    }
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
-            value: "My Button",
-            buttonStyle: "buttonClass",
+            activatorButtonLabel: "My Button",
+            activatorButtonClassName: "buttonClass",
             onOpen: jest.genMockFunction(),
             onClose: jest.genMockFunction().mockReturnValue(true)
         });
 
-        return ReactTestUtils.renderIntoDocument(<ModalButton {...opts} />);
+        return getComponentWithoutDefaults(opts);
     }
 
     it("Doesn't render body until expanded", function () {
@@ -34,7 +41,7 @@ describe("ModalButtonTest", function () {
 
         expect(component.props.modalBody).not.toBeCalled();
 
-        component._open();
+        component.refs.modalButtonStateful._handleOpen();
         expect(component.props.modalBody).toBeCalled();
     });
 
@@ -51,18 +58,18 @@ describe("ModalButtonTest", function () {
         expect(modals.length).toEqual(0);
     });
 
-    it("Button and modal do not render data-ids if not provided", function () {
+    it("Button and modal render default data-ids if not provided", function () {
         var component = getComponent({ expanded: true }),
             button = TestUtils.findRenderedDOMNodeWithTag(component, "button"),
             modal = TestUtils.findRenderedDOMNodeWithClass(component, "modal");
 
-        expect(button.getAttribute("data-id")).toBeFalsy();
-        expect(modal.getAttribute("data-id")).toBeFalsy();
+        expect(button.getAttribute("data-id")).toEqual("modal-button-button");
+        expect(modal.getAttribute("data-id")).toEqual("modal-button-modal");
     });
 
     it("Button and modal render data-ids if provided", function () {
         var did = "myid",
-            component = getComponent({ id: did, expanded: true }),
+            component = getComponent({ "data-id": did, expanded: true }),
             button = TestUtils.findRenderedDOMNodeWithDataId(component, did + "-button"),
             modal = TestUtils.findRenderedDOMNodeWithDataId(component, did + "-modal");
 
@@ -149,7 +156,6 @@ describe("ModalButtonTest", function () {
         expect(component.props.onOpen.mock.calls.length).toBe(1);
         expect(component.props.onClose.mock.calls.length).toBe(0);
 
-
         // --- Close modal
         var closeLink = TestUtils.findRenderedDOMNodeWithClass(component, "close-modal");
         ReactTestUtils.Simulate.click(closeLink);
@@ -190,7 +196,12 @@ describe("ModalButtonTest", function () {
     });
 
     it("Test alternative link render as text", function () {
-        var component = getComponent({ linkContent: "some text", linkStyle: "someStyle" });
+        var component = getComponentWithoutDefaults({
+            activatorContent: "some text",
+            activatorContentClassName: "someStyle",
+            onOpen: jest.genMockFunction(),
+            onClose: jest.genMockFunction().mockReturnValue(true)
+        });
 
         // Expect a single button to be rendered.
         var button = TestUtils.findRenderedDOMNodeWithClass(component, "someStyle");
@@ -207,7 +218,12 @@ describe("ModalButtonTest", function () {
     });
 
     it("Test alternative link render as callback", function () {
-        var component = getComponent({ linkContent: linkCallback, linkStyle: "someStyle" });
+        var component = getComponentWithoutDefaults({
+            activatorContent: linkCallback,
+            activatorContentClassName: "someStyle",
+            onOpen: jest.genMockFunction(),
+            onClose: jest.genMockFunction().mockReturnValue(true)
+        });
 
         // Expect a single button to be rendered.
         var button = TestUtils.findRenderedDOMNodeWithClass(component, "someStyle");
@@ -227,4 +243,123 @@ describe("ModalButtonTest", function () {
         TestUtils.findRenderedDOMNodeWithClass(component, "modal");
     });
 
+    it("Test activator container enablement through prop", function () {
+        var component = getComponent({
+            activatorContainerClassName: "activatorContainerClassName"
+        });
+
+        var container = TestUtils.findRenderedDOMNodeWithDataId(
+                component,
+                "modal-button-button-container"
+            );
+        expect(container).toBeDefined();
+    });
+
+    it("Test warning on providing both the activator label and the content", function () {
+        console.warn = jest.genMockFunction();
+
+        getComponentWithoutDefaults({
+            activatorButtonLabel: "button label",
+            activatorContent: "some text",
+            onOpen: jest.genMockFunction(),
+            onClose: jest.genMockFunction().mockReturnValue(true)
+        });
+
+        expect(console.warn).toBeCalledWith("Only one of ('content', 'buttonLabel') is required");
+    });
+
+    it("Renders the content inline when told so through props", function () {
+        // inline render
+        var component = getComponent({ inline: true });
+        var componentElement = TestUtils.findRenderedDOMNodeWithDataId(component, "modal-button");
+        expect(componentElement.tagName.toLowerCase()).toEqual("span");
+
+        // not inline
+        component = getComponent({});
+        componentElement = TestUtils.findRenderedDOMNodeWithDataId(component, "modal-button");
+        expect(componentElement.tagName.toLowerCase()).toEqual("div");
+    });
+
+    it("Open/close stateful modal button", function () {
+        var component = getComponentWithoutDefaults({
+            activatorButtonLabel: "some text"
+        });
+
+        // Expect a single button to be rendered.
+        var button = TestUtils.findRenderedDOMNodeWithDataId(component, "modal-button-button");
+
+        // Expect no modal to be rendered.
+        var modals = TestUtils.scryRenderedDOMNodesWithDataId(component, "modal-button-modal");
+        expect(modals.length).toBe(0);
+
+
+        // --- Open Modal
+        ReactTestUtils.Simulate.click(button);
+
+        // Expect a single shown modal to be rendered after click.
+        var modal = TestUtils.findRenderedDOMNodeWithDataId(component, "modal-button-modal");
+        TestUtils.findRenderedDOMNodeWithClass(modal, "show");
+
+        // --- Close modal
+        var closeLink = TestUtils.findRenderedDOMNodeWithDataId(modal, "close-button");
+        ReactTestUtils.Simulate.click(closeLink);
+
+        // Expect no modal to be rendered
+        modals = TestUtils.scryRenderedDOMNodesWithDataId(component, "modal-button-modal");
+        expect(modals.length).toBe(0);
+    });
+
+    it("Open/close stateless modal button", function () {
+        var component = getComponentWithoutDefaults({
+            activatorContent: "some text",
+            onOpen: jest.genMockFunction().mockReturnValue(true),
+            onClose: jest.genMockFunction().mockReturnValue(true),
+            controlled: true
+        });
+
+        expect(component.refs.modalButtonStateless).toBeDefined();
+    });
+
+    it("Show warnings when using deprecated properties", function () {
+        console.warn = jest.genMockFunction();
+
+        getComponent({
+            id: "deprecated",
+            containerStyle: "deprecated",
+            activatorContainerStyle: "deprecated"
+        });
+        expect(console.warn.mock.calls[0][0]).toEqual(
+            "Deprecated: use data-id instead of id. Support for id will be removed in next version"
+        );
+        expect(console.warn.mock.calls[1][0]).toEqual(
+            "Deprecated: use className instead of containerStyle. Support for containerStyle will be removed in next version" // eslint-disable-line max-len
+        );
+        expect(console.warn.mock.calls[2][0]).toEqual(
+            "Deprecated: use activatorContainerClassName instead of activatorContainerStyle. Support for activatorContainerStyle will be removed in next version" // eslint-disable-line max-len
+        );
+
+        console.warn.mockClear();
+        getComponentWithoutDefaults({
+            linkContent: "deprecated",
+            linkStyle: "deprecated"
+        });
+        expect(console.warn.mock.calls[0][0]).toEqual(
+            "Deprecated: use activatorContent instead of linkContent. Support for linkContent will be removed in next version" // eslint-disable-line max-len
+        );
+        expect(console.warn.mock.calls[1][0]).toEqual(
+            "Deprecated: use activatorContentClassName instead of linkStyle. Support for linkStyle will be removed in next version" // eslint-disable-line max-len
+        );
+
+        console.warn.mockClear();
+        getComponentWithoutDefaults({
+            value: "deprecated",
+            buttonStyle: "deprecated"
+        });
+        expect(console.warn.mock.calls[0][0]).toEqual(
+            "Deprecated: use activatorButtonLabel instead of value. Support for value will be removed in next version" // eslint-disable-line max-len
+        );
+        expect(console.warn.mock.calls[1][0]).toEqual(
+            "Deprecated: use activatorButtonClassName instead of buttonStyle. Support for buttonStyle will be removed in next version" // eslint-disable-line max-len
+        );
+    });
 });

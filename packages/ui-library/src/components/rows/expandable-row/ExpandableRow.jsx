@@ -3,7 +3,19 @@
 var React = require("react"),
     classnames = require("classnames"),
     _ = require("underscore"),
-    DetailsTooltip = require("../../tooltips/DetailsTooltip.jsx");
+    DetailsTooltip = require("../../tooltips/DetailsTooltip.jsx"),
+    Utils = require("../../../util/Utils.js");
+
+/**
+* @enum {string}
+* @alias ExpandableRow.Statuses
+* @desc An enum of expandable row statuses.
+*/
+var Statuses = {
+    GOOD: "good",
+    WARNING: "warning",
+    ERROR: "error"
+};
 
 /**
  * @callback ExpandableRow~eventCallback
@@ -11,24 +23,82 @@ var React = require("react"),
  */
 
 /**
- * @callback ExpandableRow~toggleCallback
- * @param {boolean} isExpanded - current expanded state (expanded/collapsed).
+ * @callback ExpandableRow~onToggle
+ *
+ * @param {boolean} expanded
+ *     Current expanded/collapsed state.
+ */
+
+ /**
+ * @callback ExpandableRow~onEditButtonClick
+ *
+ * @param {object} e
+ *    The ReactJS synthetic event object.
+ */
+
+ /**
+ * @callback ExpandableRow~onDelete
+ */
+
+ /**
+ * @callback ExpandableRow~onDeleteCancelClick
+ *
+ * @param {object} e
+ *    The ReactJS synthetic event object.
+ */
+
+ /**
+ * @callback ExpandableRow~onDeleteConfirmClick
+ *
+ * @param {object} e
+ *    The ReactJS synthetic event object.
  */
 
 /**
  * @class ExpandableRow
  * @desc Basic expandable row component.
  *
- * @param {object}  [content] - a JSX object that represents the content to be shown when expanding
- *     the row.
- * @param {bool}    [controlled=false] - A boolean to enable the component to be externally managed.
- *     True will relinquish control to the components owner.  False or not specified will cause the component to manage
- *     state internally but still execute the onToggle callback in case the owner is interested.
- * @param {bool}    [defaultToExpanded=false] - DEPRECATED: option to render the row in a expanded
- *     state by default. Default is false. This option is only left for backward compatibility
- *     within stateful version of control.
- * @param {object}  [editButton] - it is used to show an object inside edit body. For example:
- *     ModalButton can be passed as shown here:
+ * @param {string} [data-id="expandable-row"]
+ *     To define the base "data-id" value for the top-level HTML container.
+ * @param {string|number} [id]
+ *     DEPRECATED. Use "data-id" instead.
+ * @param {string} [className]
+ *     CSS classes to set on the top-level HTML container.
+ * @param {boolean} [controlled=false]
+ *     To enable the component to be externally managed. True will relinquish control to the component's owner.
+ *     False or not specified will cause the component to manage state internally.
+ *     The "onToggle" callback will still be executed in case the owner is interested.
+ *
+ * @param {boolean} [expanded=false]
+ *     Whether the row is expanded or collapsed.
+ * @param {boolean} [defaultToExpanded=false]
+ *     DEPRECATED. Use "expanded" instead.
+ * @param {ExpandableRow~onToggle} [onToggle]
+ *     Callback to be triggered when the expand/collapse button is clicked.
+ *
+ * @param {string|object} [title]
+ *     A string or JSX object that serves as the title shown on the row.
+ * @param {string} [titleClassName]
+ *     CSS classes to set on the row title.
+ *
+ * @param {string|object} [subtitle]
+ *     A string or JSX object that serves as the subtitle shown on the row right below the title.
+ *
+ * @param {string} [image]
+ *     HTTP path to an image. When specified, the image displays to the left of the title and subtitle.
+ *
+ * @param {object} [content]
+ *     A JSX object that represents the content to be shown when expanding the row.
+ *
+ * @param {string} [editViewRoute=""]
+ *     Route to the 'edit mode' view.
+ * @param {boolean} [isEditEnabled=true]
+ *     Whether or not the 'edit' button is enabled.
+ * @param {boolean} [showEdit=true]
+ *     Whether or not the 'edit' button will be shown at all.
+ * @param {object}  [editButton]
+ *     If defined, will replace the default edit button implementation.
+ *     For example, a ModalButton can be passed as shown here:
  *         <...editButton={
  *             <ModalButton
  *                 linkContent={editModalButton}
@@ -39,40 +109,46 @@ var React = require("react"),
  *                 modalBody={this.props.editModalBody}>
  *             </ModalButton>}>
  *         />
- * @param {string}  [editViewRoute] - route to the 'edit mode' view. Default is ''.
- * @param {bool}    [expanded=false] - whether row is expanded or collapsed
- * @param {string}  [image] - (optional) http path to an image. When specified, the image displays
- *     to the left of the title and subtitle
- * @param {bool}    [isEditEnabled=true] - whether or not the 'edit' button is enabled. Default is
- *     true.
- * @param {ExpandableRow~eventCallback}  [onDelete] - callback to be triggered when clicking on the
- *     'delete' icon (if present)
- * @param {ExpandableRow~toggleCallback} [onToggle] - callback to be triggered when expand/collapse
- *     button is clicked. Accepts param of type bool - expanded/collapsed state before trigger.
- * @param {object}  [subtitle] - a string or JSX object that goes right below the title, and serves
- *     as a subtitle.
- * @param {bool}    [showEdit=true] - whether or not the 'edit' button will be shown at all. Default
- *     is true.
- * @param {bool}    [showDelete=true] - whether or not the 'delete' button will be shown at all.
- *     Default is true.
- * @param {object}  [title] - a string or JSX object that serves as the title shown on the row.
- * @param {string}  [titleStyle] - extra css styling for label
- * @param {object}  [deleteButton] - it is used to show an object inside delete body. For example:
- *     ModalButton
- * @param {string}  [className] - extra CSS classes to be applied
- * @param {bool}    [waiting=false] - when true, disabled interaction with row and reduces opacity
- (     of the layer
- * @param {string}  [id="expandable-row"]- it is used for a unique data-id.
- * @param {object} [status] - show a ExpandableRow.Statuses to show the status on the right hand side of the row.
- * @param {object}  [rowAccessories] - a span (don't use a div) where buttons and toggles may be passed in
- *     to render on the right side of the row just to the left of the expand button
- * @param {bool} [confirmDelete=false] - whether or not a 'delete' should show a confirmation dialog.
- *      Default is false.
- * @param {bool} [showDeleteConfirm=false] - whether or not the confirm delete dialog is visible (default=false).
- * @param {string} [labelDeleteConfirm] - message to display when asking for confirmation to delete a row
- *      (default = Are you sure you want to delete this row?).
- * @param {ExpandableRow~eventCallback} [onEditButtonClick] - callback to be triggered when clicking on the
- *      'edit' button (if present)
+ * @param {ExpandableRow~onEditButtonClick} [onEditButtonClick]
+ *     Callback to be triggered when the 'edit' button is clicked (if present).
+ *
+ * @param {boolean} [showDelete=true]
+ *     Whether or not the 'delete' button will be shown at all.
+ * @param {object} [deleteButton]
+ *     If defined, will replace the default delet button implementation.
+ *     For example, a ModalButton can be passed as shown here:
+ *         <...deleteButton={
+ *             <ModalButton
+ *                 linkContent={deleteModalButton}
+ *                 data-id="delete-btn"
+ *                 inline={true}
+ *                 modalTitle={this.props.deleteModalTitle}
+ *                 maximize={true}
+ *                 modalBody={this.props.deleteModalBody}>
+ *             </ModalButton>}>
+ *         />
+ * @param {ExpandableRow~onDelete} [onDelete]
+ *     Callback to be triggered when the 'delete' button is clicked (if present).
+ *
+ * @param {string} [labelDeleteConfirm]
+ *     The message to display within the delete confirm dialog when asking for confirmation to delete a row.
+ * @param {boolean} [confirmDelete=false]
+ *     Whether or not a 'delete' action should show a confirmation dialog.
+ * @param {boolean} [showDeleteConfirm=false]
+ *     Whether or not the confirm delete dialog is visible.
+ * @param {ExpandableRow~onDeleteCancelClick} [onDeleteCancelClick]
+ *     Callback to be triggered when the 'cancel' button in a delete confirm dialog is clicked.
+ * @param {ExpandableRow~onDeleteConfirmClick} [onDeleteConfirmClick]
+ *     Callback to be triggered when the 'confirm' button in a delete confirm dialog is clicked.
+ *
+ * @param {ExpandableRow.Statuses} [status]
+ *     The ExpandableRow.Statuses status to show on the right hand side of the row.
+ * @param {object} [rowAccessories]
+ *     A "span" (don't use a "div") where buttons and toggles may be passed in to render on the right side of the row
+ *     just to the left of the expand button.
+ *
+ * @param {boolan} [waiting=false]
+ *     If true, disables interaction with the row and reduces opacity of the layer.
  *
  * @example
  *         <h1>My Row Results</h1>
@@ -92,40 +168,46 @@ var React = require("react"),
 
 
 var ExpandableRow = React.createClass({
+
+    displayName: "ExpandableRow",
+
     propTypes: {
-        controlled: React.PropTypes.bool,
-        defaultToExpanded: React.PropTypes.bool
+        controlled: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
         return {
-            controlled: false,
-            defaultToExpanded: false
+            controlled: false
         };
     },
 
     render: function () {
-        return (
-            this.props.controlled
-                ? <StatelessExpandableRow ref="StatelessExpandableRow" {...this.props} />
-                : <StatefulExpandableRow ref="StatefulExpandableRow" {...this.props} />);
+        return this.props.controlled
+            ? React.createElement(StatelessExpandableRow, //eslint-disable-line no-use-before-define
+                _.defaults({ ref: "StatelessExpandableRow" }, this.props), this.props.children)
+            : React.createElement(StatefulExpandableRow, //eslint-disable-line no-use-before-define
+                _.defaults({ ref: "StatefulExpandableRow" }, this.props), this.props.children);
     }
 });
 
-var Statuses = {
-    GOOD: "good",
-    WARNING: "warning",
-    ERROR: "error"
-};
-
 var StatefulExpandableRow = React.createClass({
+
+    displayName: "StatefulExpandableRow",
 
     propTypes: {
         defaultToExpanded: React.PropTypes.bool,
         showDeleteConfirm: React.PropTypes.bool
     },
 
-    _onToggle: function () {
+    getDefaultProps: function () {
+        return {
+            defaultToExpanded: false,
+            showDeleteConfirm: false,
+            expanded: false
+        };
+    },
+
+    _handleToggle: function () {
         if (typeof(this.props.onToggle) === "function") {
             this.props.onToggle(!this.state.expanded);
         }
@@ -158,71 +240,97 @@ var StatefulExpandableRow = React.createClass({
         }
     },
 
-    getDefaultProps: function () {
-        return {
-            defaultToExpanded: false,
-            showDeleteConfirm: false
-        };
-    },
-
     getInitialState: function () {
         return {
-            expanded: this.props.defaultToExpanded,
+            //TODO: remove defaultToExpanded when v1 no longer supported
+            expanded: this.props.defaultToExpanded || this.props.expanded,
             showDeleteConfirm: this.props.showDeleteConfirm
         };
     },
 
     render: function () {
-        return (
-            <StatelessExpandableRow ref="StatelessExpandableRow" {...this.props}
-                expanded={this.state.expanded}
-                onToggle={this._onToggle}
-                showDeleteConfirm={this.state.showDeleteConfirm}
-                onDelete={this._handleDelete}
-                onDeleteCancelClick={this._hideDeleteConfirm}
-                onDeleteConfirmClick={this._handleDeleteConfirm} />
-        );
+        var props = _.defaults({
+            ref: "StatelessExpandableRow",
+            expanded: this.state.expanded,
+            onToggle: this._handleToggle,
+            showDeleteConfirm: this.state.showDeleteConfirm,
+            onDelete: this._handleDelete,
+            onDeleteCancelClick: this._hideDeleteConfirm,
+            onDeleteConfirmClick: this._handleDeleteConfirm
+        }, this.props);
+
+        return React.createElement(StatelessExpandableRow, props, this.props.children); //eslint-disable-line no-use-before-define
     }
 });
 
 
 var StatelessExpandableRow = React.createClass({
 
+    displayName: "StatelessExpandableRow",
+
     propTypes: {
-        className: React.PropTypes.string,
-        content: React.PropTypes.object,
-        deleteButton: React.PropTypes.object,
-        draggable: React.PropTypes.bool,
-        editButton: React.PropTypes.object,
-        editViewRoute: React.PropTypes.string,
-        expanded: React.PropTypes.bool,
-        id: React.PropTypes.oneOfType([
+        "data-id": React.PropTypes.string,
+        id: React.PropTypes.oneOfType([ //TODO: remove id when v1 no longer supported
             React.PropTypes.number,
             React.PropTypes.string
         ]),
-        image: React.PropTypes.string,
-        isEditEnabled: React.PropTypes.bool,
-        onDelete: React.PropTypes.func,
+        className: React.PropTypes.string,
+        expanded: React.PropTypes.bool,
         onToggle: React.PropTypes.func,
-        rowAccessories: React.PropTypes.object,
-        showDelete: React.PropTypes.bool,
-        showEdit: React.PropTypes.bool,
         title: React.PropTypes.oneOfType([
             React.PropTypes.object,
             React.PropTypes.string
         ]),
-        titleStyle: React.PropTypes.string,
+        titleClassName: React.PropTypes.string,
         subtitle: React.PropTypes.oneOfType([
             React.PropTypes.object,
             React.PropTypes.string
         ]),
-        waiting: React.PropTypes.bool,
+        image: React.PropTypes.string,
+        content: React.PropTypes.object,
+        editViewRoute: React.PropTypes.string,
+        isEditEnabled: React.PropTypes.bool,
+        showEdit: React.PropTypes.bool,
+        editButton: React.PropTypes.object,
+        onEditButtonClick: React.PropTypes.func,
+        showDelete: React.PropTypes.bool,
+        deleteButton: React.PropTypes.object,
+        onDelete: React.PropTypes.func,
+        labelDeleteConfirm: React.PropTypes.string,
         confirmDelete: React.PropTypes.bool,
         showDeleteConfirm: React.PropTypes.bool,
-        labelDeleteConfirm: React.PropTypes.string,
         onDeleteCancelClick: React.PropTypes.func,
         onDeleteConfirmClick: React.PropTypes.func,
-        onEditButtonClick: React.PropTypes.func
+        status: React.PropTypes.oneOf([Statuses.GOOD, Statuses.ERROR, Statuses.WARNING]),
+        rowAccessories: React.PropTypes.object,
+        waiting: React.PropTypes.bool
+    },
+
+    getDefaultProps: function () {
+        return {
+            "data-id": "expandable-row",
+            expanded: false,
+            editViewRoute: "",
+            isEditEnabled: true,
+            showEdit: true,
+            onEditButtonClick: _.noop,
+            showDelete: true,
+            onDelete: _.noop,
+            confirmDelete: false,
+            showDeleteConfirm: false,
+            onDeleteCancelClick: _.noop,
+            onDeleteConfirmClick: _.noop,
+            waiting: false,
+        };
+    },
+
+    componentWillMount: function () {
+        if (this.props.id) {
+            Utils.deprecateWarn("id", "data-id");
+        }
+        if (this.props.defaultToExpanded) {
+            Utils.deprecateWarn("defaultToExpanded", "expanded");
+        }
     },
 
     /**
@@ -234,25 +342,6 @@ var StatelessExpandableRow = React.createClass({
         if (this.props.onToggle) {
             this.props.onToggle(this.props.expanded);
         }
-    },
-
-    getDefaultProps: function () {
-        return {
-            showEdit: true,
-            isEditEnabled: true,
-            editViewRoute: "",
-            showDelete: true,
-            expanded: false,
-            id: "expandable-row",
-            waiting: false,
-            onDelete: _.noop,
-            confirmDelete: false,
-            showDeleteConfirm: false,
-            labelDeleteConfirm: "Are you sure you want to delete this row?",
-            onDeleteCancelClick: _.noop,
-            onDeleteConfirmClick: _.noop,
-            onEditButtonClick: _.noop
-        };
     },
 
     /*
@@ -302,13 +391,16 @@ var StatelessExpandableRow = React.createClass({
                       onClick={this.props.onDelete} />);
         }
 
+        var id = this.props.id || this.props["data-id"],
+            titleClassName = classnames("item-title", this.props.titleClassName);
+
         return (
-            <div data-id={this.props.id} className={containerClassname}>
+            <div data-id={id} className={containerClassname}>
                 <div className="collapsed-content">
                     {this.props.image && (
                         <img src={this.props.image} className="item-image" />
                     )}
-                    <div className="item-title">{this.props.title}</div>
+                    <div className={titleClassName}>{this.props.title}</div>
                     {this.props.subtitle && (
                         <div className="item-sub-title">{this.props.subtitle}</div>
                     )}
@@ -348,6 +440,8 @@ var StatelessExpandableRow = React.createClass({
 
 var ConfirmDeleteDialog = React.createClass({
 
+    displayName: "ConfirmDeleteDialog",
+
     propTypes: {
         label: React.PropTypes.string,
         onCancel: React.PropTypes.func,
@@ -365,8 +459,8 @@ var ConfirmDeleteDialog = React.createClass({
     render: function () {
         return (
             <DetailsTooltip label=" "
-                positionStyle="bottom left"
-                id="delete-confirm-dialog"
+                positionClassName="bottom left"
+                data-id="delete-confirm-dialog"
                 className="delete-confirm-dialog"
                 title="Confirm Delete"
                 open={true}

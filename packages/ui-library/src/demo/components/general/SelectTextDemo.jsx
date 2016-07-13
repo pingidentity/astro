@@ -1,6 +1,7 @@
 var React = require("react");
 var SelectText = require("./../../../components/general/SelectText.jsx");
-var FormTextField = require("./../../../components/forms/form-text-field").v1;
+var FormTextField = require("./../../../components/forms/form-text-field");
+var FormFieldConstants = require("./../../../constants/FormFieldConstants");
 
 var SelectTextDemo = React.createClass({
     render: function () {
@@ -14,7 +15,7 @@ var SelectTextDemo = React.createClass({
                 <div className="input-row">
                     <SelectText>
                         <FormTextField
-                            mode="READ_ONLY"
+                            mode={FormFieldConstants.FormFieldMode.READ_ONLY}
                             value="The text in this input will be selected when clicked"
                         />
                     </SelectText>

@@ -3,19 +3,72 @@ var React = require("re-react"),
     EventUtils = require("../../../util/EventUtils.js"),
     _ = require("underscore");
 
-/** @class HeaderBar
+/**
+ * @typedef HeaderBar~navigationLink
+ * @desc Look at HeaderBar#NavItem to understand what can be passed.
+ * @property {string} [data-id]
+ *          To define the base "data-id" value for the top-level HTML container.
+ * @property {string} id
+ *          Identifier of the link, as well as for the icon. It is formatted "icon-"+id for the icon class.
+ * @property {string} [title]
+ *          Link title.
+ * @property {string} [label]
+ *          Display label for the header link. Typically only used by dropdown links, defined in children.
+ * @property {string} [url]
+ *          Url for link to direct to
+ * @property {string} [target="_blank"]
+ *          Target window for url, which will default to a new window/tab.
+ * @property {HeaderBar~navigationLink[]} [children]
+ *          The array of navigationLinks are links display in a dropdown menu, which can contain all of the
+ *          same properties defined in a regular link, excluding children, as we only support one level deep.
+ */
+
+/**
+ * @callback HeaderBar~onItemValueChange
+ * @desc The id of the nav item will be passed back as the first parameter
+ * @param {string} id
+ *          Nav item identifier.
+ */
+
+/**
+ * @callback HeaderBar~onMenuValueChange
+ * @desc The id of the nav item and the id of the menu item will be passed back as parameters 1 and 2.
+ * @param {string} navItemId
+ *          Nav item identifier.
+ * @param {string} navItemId
+ *          Menu item identifier.
+ */
+
+/**
+ * @class HeaderBar
  * @desc HeaderBar provides what you need to show a styled top bar with logos, links, and a menu.
  *
- * @param {object[]} tree - The data structure of the menus of the headerbar
- * @param {string} [data-id] - used as data-id on top HTML element.
- * @param {string} [logo] - leftmost generic company logo or branded logo
- * @param {string} [siteLogo] - site or service specific logo
- * @param {function} [onItemClick] - Callback which will be executed when a header link is clicked.  The id
- * of the nav item will be passed back as the first parameter
- * @param {function} [onMenuClick] - Callback which will be executed when a menu item is clicked.  The id
- * of the nav item and the id of the menu item will be passed back as parameters 1 and 2.
- * @param {string} [openNode] - The id of the currently open node
- **/
+ * @param {string} [data-id="header-bar"]
+ *          To define the base "data-id" value for the top-level HTML container.
+ * @param {string} [logo]
+ *          Leftmost generic company logo or branded logo
+ * @param {string} [siteLogo]
+ *          Site or service specific logo
+ * @param {string} [label]
+ *          Headerbar label
+ * @param {HeaderBar~navigationLink[]} tree
+ *          The data structure of the menus of the headerbar
+ * @param {string} [openNode]
+ *          The id of the currently open node
+ * @param {HeaderBar~onItemValueChange} [onItemValueChange]
+ *          Callback which will be executed when a header link is clicked.  The id
+ *          of the nav item will be passed back as the first parameter
+ * @param {HeaderBar~onMenuValueChange} [onMenuValueChange]
+ *          Callback which will be executed when a menu item is clicked.  The id
+ *          of the nav item and the id of the menu item will be passed back as parameters 1 and 2.
+ *
+ * @example
+ * var headerTree = { id: "help", title: "Help" },
+ *                  { id: "account", label: "John Doe",
+ *                          children: [{ id: "globe", title: "Internet", label: "Internet", url: "http://google.com" }] }
+ *
+ * <HeaderBar tree={headerTree} label="Basic UI Library App" onItemValueChange={this.headerActions.toggleItem} />
+**/
 module.exports = React.createClass({
     propTypes: {
         "data-id": React.PropTypes.string.affectsRendering,
@@ -23,15 +76,17 @@ module.exports = React.createClass({
         siteLogo: React.PropTypes.string.affectsRendering,
         tree: React.PropTypes.arrayOf(React.PropTypes.object).affectsRendering,
         openNode: React.PropTypes.string.affectsRendering,
-        label: React.PropTypes.string.affectsRendering
+        label: React.PropTypes.string.affectsRendering,
+        onMenuValueChange: React.PropTypes.func,
+        onItemValueChange: React.PropTypes.func
     },
 
     getDefaultProps: function () {
         return {
             logo: "",
             siteLogo: "",
-            onItemClick: _.noop,
-            onMenuClick: _.noop,
+            onItemValueChange: _.noop,
+            onMenuValueChange: _.noop,
             "data-id": "header-bar"
         };
     },
@@ -71,7 +126,7 @@ module.exports = React.createClass({
         //if there is a menu open and we receive a click from outside of the nav container, then close it
         EventUtils.callIfOutsideOfContainer(
             ReactDOM.findDOMNode(this.refs.navContainer),
-            this.props.onItemClick.bind(null, ""),
+            this.props.onItemValueChange.bind(null, ""),
             e);
     },
 
@@ -84,7 +139,7 @@ module.exports = React.createClass({
      * the clicked on nav item.  There is a performance overhead of creating partials on every render.
      */
     _handleNavClick: function (e) {
-        this.props.onItemClick(e.target.getAttribute("data-id"));
+        this.props.onItemValueChange(e.target.getAttribute("data-id"));
     },
 
     render: function () {
@@ -103,11 +158,16 @@ module.exports = React.createClass({
                 <ul className="product-nav" ref="navContainer">
                 {
                     this.props.tree.map(function (item) {
-                        return (
-                            <NavItem {...item} key={item.id} data-id={item.id}
-                                onClick={this._handleNavClick}
-                                onMenuClick={this.props.onMenuClick}
-                                showMenu={item.id === this.props.openNode} />);
+                        var props = _.defaults({
+                            key: item.id,
+                            id: item.id,
+                            "data-id": item.id,
+                            onClick: this._handleNavClick,
+                            onMenuValueChange: this.props.onMenuValueChange,
+                            showMenu: item.id === this.props.openNode
+                        }, item);
+
+                        return React.createElement(NavItem, props, item.children); //eslint-disable-line no-use-before-define
                     }.bind(this))
                 }
                 </ul>
@@ -115,34 +175,44 @@ module.exports = React.createClass({
     }
 });
 
-/** @class NavItem
+/**
+ * @class NavItem
+ * @desc Internal component type which will render a product-nav item and optional a corresponding menu
  * @private
  * @memberOf HeaderBar
- * @param {string} id - The id of the component.  Determines the icon
- * @param {string} data-id - The data-id of the component
- * @param {string} [title] - Sets the title attribute of the label (tooltip)
- * @param {string} [target=_blank] - This may be "" or "_blank"
- * @param {string} [url] - If provided the NavItem will be a clickable link instead of executing a callback
- * @param {showMenu} [bool=false] - Menu state
- * @desc Internal component type which will render a product-nav item and optionall a corresponding menu
+ *
+ * @param {string} id
+ *          The id of the component.  Determines the icon
+ * @param {string} [data-id="nav-item"]
+ *          To define the base "data-id" value for the top-level HTML container.
+ * @param {string} [title]
+ *          Sets the title attribute of the label (tooltip)
+ * @param {string} [target=_blank]
+ *          This may be "" or "_blank"
+ * @param {string} [url]
+ *          If provided the NavItem will be a clickable link instead of executing a callback
+ * @param {boolean} [showMenu=false]
+ *          Menu state, while this is defined, it's managed internally to this component and doesn't require the
+ *          developer to do anything when they use the headerbar.
  */
 var NavItem = React.createClass({
     propTypes: {
+        id: React.PropTypes.string.isRequired,
+        "data-id": React.PropTypes.string,
         title: React.PropTypes.string,
         target: React.PropTypes.string,
-        id: React.PropTypes.string,
-        "data-id": React.PropTypes.string,
         url: React.PropTypes.string,
         showMenu: React.PropTypes.bool
     },
 
     _handleMenuClick: function (e) {
-        this.props.onMenuClick(e.target.getAttribute("data-id"), this.props.id);
+        this.props.onMenuValueChange(e.target.getAttribute("data-id"), this.props.id);
     },
 
     getDefaultProps: function () {
         return {
-            target: "_blank"
+            target: "_blank",
+            "data-id": "nav-item"
         };
     },
 

@@ -1,57 +1,92 @@
 var React=require("react"),
     classnames = require("classnames"),
-    FormLabel = require("./FormLabel.jsx");
+    FormLabel = require("./FormLabel.jsx"),
+    Utils = require("../../util/Utils.js");
 
 /**
- * @callback FormCheckbox~onChangeCallback
- * @param {object} event - reactjs synthetic event object
+ * @callback FormCheckbox~onChange
+ *
+ * @param {object} e
+ *    The ReactJS synthetic event object.
+ */
+
+ /**
+ * @callback FormCheckbox~onValueChange
+ *
+ * @param {boolean} checked
+ *    The current checked state.
  */
 
 /**
  * @class FormCheckbox
  * @desc A checkbox field component.
  *
- * @param {bool} [checked] - setting a box as checked or not
- * @param {string} [className] - optional class to pass
- * @param {bool} [disabled] - disable current checkbox and style opacity
- * @param {string} [id] - optional id to pass
- * @param {string} [label] - label text to be displayed
- * @param {string} [labelHelpText] - label help text to be displayed
- * @param {string} [name] - optional name to pass
- * @param {FormCheckbox~onChangeCallback} onChange - callback to be triggered when checkbox ticked,
- * will be passed the original event
- * @param {function} onValueChange - callback to be triggered when checkbox is toggled, will be
- * passed the checked state
- * @param {string} [value] - optional value to pass
- * @param {string} [helpClassName] - optional class for HelpHint
+ * @param {string} [data-id="form-checkbox-container"]
+ *    To define the base "data-id" value for the top-level HTML container.
+ *    Note that "-container" will be appended to the "data-id" set on the top-level HTML container,
+ *    and the "data-id" string will be set on the checkbox "input" elelment under the top-level HTML container.
+ * @param {string} [id]
+ *    DEPRECATED. Use "data-id" instead.
+ * @param {string} [className]
+ *    CSS classes to set on the top-level HTML container.
+ *
+ * @param {boolean} [checked=false]
+ *    Whether or not the checkbox is checked.
+ * @param {FormCheckbox~onChange} [onChange]
+ *    Callback to be triggered when checkbox is toggled. It will receive the triggering event.
+ * @param {FormCheckbox~onValueChange} ]onValueChange]
+ *    Callback to be triggered when checkbox is toggled. It will receive the component's value.
+ *
+ * @param {string} [label]
+ *    Label text to be displayed.
+ * @param {string} [labelHelpText]
+ *    Label help text to be displayed.
+ * @param {string} [helpClassName]
+ *    CSS classes to set on the HelpHint component.
+ *
+ * @param {string} [name]
+ *    The name value for the input.
+ * @param {string} [value]
+ *    The value for the input.
+ *
+ * @param {boolean} [disabled=false]
+ *    If true, disables current checkbox and styles opacity.
  *
  * @example
  *
  *       <FormCheckbox label="Regular Checkbox"
- *                 id="form-checkbox"
+ *                 data-id="form-checkbox"
  *                 onChange={this._changeCallback} />
  *
  */
 var FormCheckbox=React.createClass({
     propTypes: {
-        checked: React.PropTypes.bool,
+        "data-id": React.PropTypes.string,
+        id: React.PropTypes.string, //TODO: remove when v1 no longer supported
         className: React.PropTypes.string,
-        disabled: React.PropTypes.bool,
-        id: React.PropTypes.string,
-        label: React.PropTypes.string,
-        labelHelpText: React.PropTypes.string,
-        name: React.PropTypes.string,
+        checked: React.PropTypes.bool,
         onChange: React.PropTypes.func,
         onValueChange: React.PropTypes.func,
+        label: React.PropTypes.string,
+        labelHelpText: React.PropTypes.string,
+        helpClassName: React.PropTypes.string,
+        name: React.PropTypes.string,
         value: React.PropTypes.string,
-        helpClassName: React.PropTypes.string
+        disabled: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
         return{
-            disabled: false,
-            id: "form-checkbox"
+            "data-id": "form-checkbox",
+            checked: false,
+            disabled: false
         };
+    },
+
+    componentWillMount: function () {
+        if (this.props.id) {
+            Utils.deprecateWarn("id", "data-id");
+        }
     },
 
     _handleChange: function (e) {
@@ -64,25 +99,25 @@ var FormCheckbox=React.createClass({
     },
 
     render: function () {
-        var id = this.props["data-id"] || this.props.id,
+        var id = this.props.id || this.props["data-id"],
             labelClassName = classnames("input-checkbox", this.props.className, {
                 disabled: this.props.disabled
             });
 
         return (
-            <FormLabel className={labelClassName}
+            <FormLabel data-id={id + "-container"}
+                    className={labelClassName}
                     helpClassName={this.props.helpClassName}
                     disabled={this.props.disabled}
                     value={this.props.label}
                     hint={this.props.labelHelpText}>
-                <input
-                    data-id={id}
-                    type="checkbox"
-                    name={this.props.name ? this.props.name : id}
-                    value={this.props.value ? this.props.value: id}
-                    onChange={this._handleChange}
-                    checked={this.props.checked}
-                    disabled={this.props.disabled}
+                <input data-id={id}
+                        type="checkbox"
+                        name={this.props.name ? this.props.name : id}
+                        value={this.props.value ? this.props.value: id}
+                        onChange={this._handleChange}
+                        checked={this.props.checked}
+                        disabled={this.props.disabled}
                 />
                 <div className="icon"/>
             </FormLabel>

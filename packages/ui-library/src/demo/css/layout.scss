@@ -108,14 +108,13 @@ $sidenav-lineheight: 22px;
 }
 
 .page-controls-primary {
-	position: fixed;
-	margin-left: $sidenav-width - 2;
+	left: $sidenav-width - $layout-nav-offset + 40px;
 }
 .page-messages {
 	left: $sidenav-width - $layout-nav-offset;
 }
 #content {
-	left: $sidenav-width;
+	left: $sidenav-width - $layout-nav-offset;
 
 	.section {
 		padding: 10px 0 30px 0;

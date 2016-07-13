@@ -4,18 +4,26 @@ var React = require("react");
 var _ = require("underscore");
 
 /**
+ * @callback PageLinks~onClick
+ *
+ * @param {number} page
+ *     Page number for the link that was clicked.
+ **/
+
+/**
  * @class PageLinks
  * @private
- * @param {number} numPages - number of total pages.
- * @param {number} currentPage - current page displayed
- * @param {function} onClick - callback click function
+ * @param {number} numPages
+ *     Number of total pages.
+ * @param {number} currentPage
+ *     Current page displayed
+ * @param {PageLinks~onClick} onClick
+ *     Callback to be triggered when link is clicked.
  *
  * @example
  *
- *  <PageLinks
- *       currentPage = {currentPage}
- *       numPages = {numPages}
- *       onClick = {this._handlePageChange} />
+ *     <PageLinks currentPage = {currentPage} numPages = {numPages} onClick = {this._handlePageChange} />
+ *
  **/
 
 var PageLinks = React.createClass({
@@ -26,7 +34,7 @@ var PageLinks = React.createClass({
         onClick: React.PropTypes.func.isRequired
     },
 
-    _onLinkClick: function (e, page) {
+    _handleClick: function (e, page) {
         if (this.props.currentPage !== page) {
             this.props.onClick(page);
         }
@@ -47,14 +55,14 @@ var PageLinks = React.createClass({
             <div data-id={this.props["data-id"]}>
                 <a data-id={previousKey} key={previousKey}
                     className={currentPage === 1 ? "icon-previous disabled" : "icon-previous"}
-                    onClick={_.partial(this._onLinkClick, _, (currentPage <= 1 ? currentPage : currentPage - 1))} >
+                    onClick={_.partial(this._handleClick, _, (currentPage <= 1 ? currentPage : currentPage - 1))} >
                 </a>
 
                 {this.props.currentPage} of {this.props.numPages}
 
                 <a data-id={nextKey} key={nextKey}
                   className={currentPage === numPages ? "icon-next disabled" : "icon-next"}
-                  onClick={_.partial(this._onLinkClick, _, (currentPage >= numPages ? currentPage : currentPage + 1))} >
+                  onClick={_.partial(this._handleClick, _, (currentPage >= numPages ? currentPage : currentPage + 1))} >
                 </a>
             </div>
         );
@@ -63,32 +71,32 @@ var PageLinks = React.createClass({
 });
 
 /**
- * @callback ColumnPagination~onChangeCallback
- * @param {number} first - first item index for newly selected page
- * @param {number} last - last item index for newly selected page
- * @param {number} page - newly selected page number
- */
-
-/**
- * @class ColumnPagination
- *
+ * @private
+ * @class Grid#ColumnPagination
  * @desc ColumnPagination provides a callback to response first, last and currentPage.
- *          This is mostly copied from .../src/components/list/Pagination.jsx
+ *     This is mostly copied from .../src/components/list/Pagination.jsx
  *
- * @param {string} [className] - extra CSS classes to be applied
- * @param {string} [data-id] - it is used for a unique data-id
- * @param {number} [perPage=5] - number of results per page
- * @param {number} total - total number of items to paginate
- * @param {ColumnPagination~onChangeCallback} onChange - callback to be triggered when new page selected
- * @param {number} [page] - currently selected page number. Respected only with externally managed variant.
+ * @param {string} [data-id="columnPagination"]
+ *     To define the base "data-id" value for top-level HTML container.
+ * @param {string} [className]
+ *     CSS classes to set on the top-level HTML container.
+ *
+ * @param {number} [page]
+ *     Currently selected page number. Only used when stateless.
+ * @param {number} [perPage=5]
+ *     Number of results per page
+ * @param {number} total
+ *     Total number of items to paginate
+ * @param {Grid~onPaginationChanged} onChange
+ *     Callback to be triggered when new page is selected.
  *
  * @example
  *
  *    <ColumnPagination
- *        onChange={this._onPageChanged}
- *        page={this.state.currentPage}
- *        perPage={5}
- *        total={this.state.items.length} />
+ *            onChange={this._onPageChanged}
+ *            page={this.state.currentPage}
+ *            perPage={5}
+ *            total={this.state.items.length} />
  *
  **/
 
@@ -97,17 +105,17 @@ module.exports = React.createClass({
     displayName: "ColumnPagination",
 
     propTypes: {
-        className: React.PropTypes.string,
         "data-id": React.PropTypes.string,
-        onChange: React.PropTypes.func.isRequired,
+        className: React.PropTypes.string,
         page: React.PropTypes.number,
         perPage: React.PropTypes.number,
-        total: React.PropTypes.number
+        total: React.PropTypes.number,
+        onChange: React.PropTypes.func.isRequired
     },
 
     getDefaultProps: function () {
         return {
-            id: "columnPagination",
+            "data-id": "columnPagination",
             perPage: 5
         };
     },

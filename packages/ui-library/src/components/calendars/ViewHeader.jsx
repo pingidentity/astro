@@ -3,22 +3,29 @@ var React = require("react");
 module.exports = React.createClass({
 
     propTypes: {
-        next: React.PropTypes.func,
-        prev: React.PropTypes.func,
-        titleAction: React.PropTypes.func,
+        "data-id": React.PropTypes.string,
+        onNext: React.PropTypes.func,
+        onPrev: React.PropTypes.func,
+        onClick: React.PropTypes.func,
         data: React.PropTypes.string
+    },
+
+    getDefaultProps: function () {
+        return {
+            "data-id": "view-header"
+        };
     },
 
     render: function () {
         var prop = this.props;
 
         return (
-            <div className="navigation-wrapper">
-                <span onClick={prop.prev} className="icon" >
+            <div data-id={this.props["data-id"]} className="navigation-wrapper">
+                <span onClick={prop.onPrev} className="icon" >
                     <i className="fa fa-angle-left icon-left"></i>
                 </span>
-                <span onClick={prop.titleAction} className="navigation-title" >{prop.data}</span>
-                <span onClick={prop.next} className="icon" >
+                <span onClick={prop.onClick} className="navigation-title" >{prop.data}</span>
+                <span onClick={prop.onNext} className="icon" >
                     <i className="fa fa-angle-right icon-right"></i>
                 </span>
             </div>

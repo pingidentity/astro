@@ -9,7 +9,8 @@ var Demo = React.createClass({
         labelPrevious: "Previous",
         labelDismiss: "Dismiss",
         labelGetStarted: "GetStarted",
-        labelOf: "of"
+        labelOf: "of",
+        labelGotIt: "Finish"
     },
 
     getInitialState: function () {
@@ -43,14 +44,14 @@ var Demo = React.createClass({
                         target: document.getElementsByClassName("markup-wrapper")[0]
                     },
                     {
-                        title: "Markup",
+                        title: "Description",
                         description: "This is where description of your demo will be displayed",
                         target: document.getElementsByClassName("demo-description")[0]
                     },
                     {
                         title: "Name",
                         description: "This is the name of your component",
-                        target: document.getElementsByTagName("h2")[0]
+                        target: document.getElementsByTagName("h1")[0]
                     },
                     {
                         title: "Page title",
@@ -71,6 +72,7 @@ var Demo = React.createClass({
                     onNext={this._handleNext}
                     onPrevious={this._handlePrev}
                     onDismiss={this._handleDismiss}
+                    onGotIt={this._handleDismiss}
                     visible={this.state.visible}
                     steps={this.state.steps}
                     active={this.state.active} />

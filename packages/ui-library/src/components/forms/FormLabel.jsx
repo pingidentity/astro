@@ -1,24 +1,48 @@
 var React = require("react"),
+    classnames = require("classnames"),
     HelpHint = require("../tooltips/HelpHint.jsx"),
-    classnames = require("classnames");
+    Utils = require("../../util/Utils");
 
 /** @class FormLabel
  * @desc Most form fields implement the same logic to display an optional label, with optional hint.
  * It is easier to consolidate this logic in one component to avoid re-inventing the wheel.
+ * This component displays the value provided as prop, if provided. Next to it, it displays its children.
+ * If there is no value and no children, nothing is rendered.
  *
- * @param {string} [id] - The data-id for the top level dom element
- * @param {string} [className] - An optional classname string
- * @param {string} [value] - The label text.  If omitted, nothing is rendered.
- * @param {string} [hint] - The hint text
- * @param {string} [helpClassName] - Optional class for help hint.
+ * @param {string} [data-id="formLabel"]
+ *     To define the base "data-id" value for top-level HTML container.
+ * @param {string} [id]
+ *     DEPRECATED. Use "data-id" instead. To define the base "data-id" value for top-level HTML container.
+ * @param {string} [className]
+ *     CSS classes to set on the top-level HTML container.
+ *
+ * @param {string} [value]
+ *     The label text.  If omitted and if this element has no children, nothing is rendered.
+ * @param {string} [hint]
+ *     The hint text. If omitted, the help hint is not rendered.
+ * @param {string} [helpClassName]
+ *     CSS classes to set on the help hint.
  */
 var FormLabel = React.createClass({
     propTypes: {
-        value: React.PropTypes.string,
-        hint: React.PropTypes.string,
+        "data-id": React.PropTypes.string,
         id: React.PropTypes.string,
         className: React.PropTypes.string,
+        value: React.PropTypes.string,
+        hint: React.PropTypes.string,
         helpClassName: React.PropTypes.string
+    },
+
+    getDefaultProps: function () {
+        return {
+            "data-id": "formLabel"
+        };
+    },
+
+    componentWillMount: function () {
+        if (this.props.id) {
+            Utils.deprecateWarn("data-id", "id");
+        }
     },
 
     _renderHint: function () {
@@ -28,9 +52,11 @@ var FormLabel = React.createClass({
 
         return (
             <HelpHint ref="hint"
-                id="help-tooltip"
-                className={classnames("inline", this.props.helpClassName)}
-                hintText={this.props.hint} />);
+                    data-id="help-tooltip"
+                    className={classnames("inline", this.props.helpClassName)}
+                    hintText={this.props.hint}
+                />
+        );
     },
 
     render: function () {
@@ -40,9 +66,10 @@ var FormLabel = React.createClass({
             return null;
         }
 
+        var dataId = this.props.id || this.props["data-id"];
         return (
-            <label data-id={this.props["data-id"]} className={this.props.className}>
-                {!noLabel && (
+            <label data-id={dataId} className={this.props.className}>
+                { !noLabel && (
                     <span className="label-text" data-id="label">
                         { this.props.value }
                         { this._renderHint() }

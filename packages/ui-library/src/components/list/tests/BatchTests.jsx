@@ -6,6 +6,7 @@ describe("Batch", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-addons-test-utils"),
+        TestUtils = require("../../../testutil/TestUtils"),
         Wrapper = require("../../../testutil/TestUtils").UpdatePropsWrapper,
         InfiniteScroll = require("../InfiniteScroll.jsx"),
         assign = require("object-assign");
@@ -21,7 +22,7 @@ describe("Batch", function () {
 
     function getRenderedComponent (opts) {
         var defaults = {
-            headingGenerator: jest.genMockFunction(),
+            onGenerateHeading: jest.genMockFunction(),
             contentType: React.createElement(MyRow),
             data: batches[1].data
         };
@@ -48,6 +49,22 @@ describe("Batch", function () {
         ];
     });
 
+    it("renders with default data-id", function () {
+        var component = getRenderedComponent();
+
+        var batch = TestUtils.findRenderedDOMNodeWithDataId(component, "batch");
+
+        expect(batch).toBeDefined();
+    });
+
+    it("renders with given data-id", function () {
+        var component = getRenderedComponent({ "data-id": "myBatch" });
+
+        var batch = TestUtils.findRenderedDOMNodeWithDataId(component, "batch");
+
+        expect(batch).toBeDefined();
+    });
+
     it("Hides content when invisible", function () {
         var component = getRenderedComponent();
         var node = ReactDOM.findDOMNode(component.refs.wrapper.refs.container);
@@ -66,13 +83,13 @@ describe("Batch", function () {
     it("Only passes last item of previous batch to heading generator", function () {
         var component = getRenderedComponent({
             prev: batches[0].data,
-            headingGenerator: jest.genMockFunction()
+            onGenerateHeading: jest.genMockFunction()
                 .mockReturnValueOnce("A")
         });
 
         //computing the heading for the previous batch
-        expect(component.props.headingGenerator.mock.calls[0]).toEqual([{ num: 49 }]);
-        expect(component.props.headingGenerator.mock.calls[1]).toEqual([{ num: 50 }, "A"]);
+        expect(component.props.onGenerateHeading.mock.calls[0]).toEqual([{ num: 49 }]);
+        expect(component.props.onGenerateHeading.mock.calls[1]).toEqual([{ num: 50 }, "A"]);
     });
 });
 

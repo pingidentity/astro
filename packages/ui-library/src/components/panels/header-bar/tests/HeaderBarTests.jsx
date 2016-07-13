@@ -14,8 +14,8 @@ describe("HeaderBar", function () {
 
     function getWrappedComponent (opts) {
         opts = _.defaults(opts || {}, {
-            onItemClick: jest.genMockFunction(),
-            onMenuClick: jest.genMockFunction(),
+            onItemValueChange: jest.genMockFunction(),
+            onMenuValueChange: jest.genMockFunction(),
             tree: [
                 { id: "help", url: "http://www.yahoo.com" },
                 { id: "cog", children: [{ id: "cog-menu-item", label: "Cog Menu Item" }] },
@@ -37,11 +37,11 @@ describe("HeaderBar", function () {
         var menuItem = TestUtils.findRenderedDOMNodeWithDataId(component, "cog-menu-item");
 
         ReactTestUtils.Simulate.click(navItem);
-        expect(component.props.onItemClick).toBeCalledWith("cog");
-        expect(component.props.onMenuClick).not.toBeCalled();
+        expect(component.props.onItemValueChange).toBeCalledWith("cog");
+        expect(component.props.onMenuValueChange).not.toBeCalled();
 
         ReactTestUtils.Simulate.click(menuItem);
-        expect(component.props.onMenuClick).lastCalledWith("cog-menu-item", "cog");
+        expect(component.props.onMenuValueChange).lastCalledWith("cog-menu-item", "cog");
     });
 
     it("detaches event listener on umount", function () {
@@ -56,7 +56,7 @@ describe("HeaderBar", function () {
         var handler = window.addEventListener.mock.calls[0][1];
         handler(e);
 
-        expect(component.props.onItemClick).toBeCalledWith("", e);
+        expect(component.props.onItemValueChange).toBeCalledWith("", e);
     });
 
     it("does nothing on global click if no open node", function () {
@@ -66,7 +66,7 @@ describe("HeaderBar", function () {
         var handler = window.addEventListener.mock.calls[0][1];
         handler({ target: document.body });
 
-        expect(component.props.onItemClick).not.toBeCalled();
+        expect(component.props.onItemValueChange).not.toBeCalled();
     });
 
     it("provides logo url", function () {

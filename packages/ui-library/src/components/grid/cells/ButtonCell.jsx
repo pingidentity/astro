@@ -1,36 +1,58 @@
 "use strict";
 
-var React = require("react");
+var React = require("re-react"),
+    Utils = require("../../../util/Utils");
 
 /**
  * @class ButtonCell
- *
  * @desc ButtonCell displays a button to a cell where users can click it inside a cell.
  *
- * @param {string} [className] - extra CSS classes to be applied
- * @param {string} [data-id] - it is used for a unique data-id
- * @param {number} [value] - label to display on the button
- * @param {ButtonCell~onClickCallback} [onCallBack] - callback to be triggered when button is clicked
+ * @param {string} [data-id="grid-button-cell"]
+ *     To define the base "data-id" value for top-level HTML container.
+ * @param {string} [className]
+ *     CSS classes to set on the top-level HTML container.
+ *
+ * @param {string} [value]
+ *     Label to display on the button
+ * @param {Grid~onGridCellAction} [onGridCellAction]
+ *     Callback to be triggered when button is clicked. This is a mandatory callback to be rendered as a Grid cell.
+ *     If this callback is omitted, this component won't be rendered as a Grid cell. Current version also supports
+ *     using the deprecated onCallBack.
+ * @param {Grid~onGridCellAction} [onCallBack]
+ *     DEPRECATED. Use onGridCellAction instead.
+ *
+ * @example
+ *     <ButtonCell value="Submit" onGridCellAction={this._handleCellSubmit} />
+ *
  **/
+
 var ButtonCell = React.createClass({
 
     propTypes: {
         "data-id": React.PropTypes.string,
-        className: React.PropTypes.string,
-        onCallBack: React.PropTypes.func,
-        value: React.PropTypes.string
+        className: React.PropTypes.string.affectsRendering,
+        value: React.PropTypes.string.affectsRendering,
+        onGridCellAction: React.PropTypes.func,
+        onCallBack: React.PropTypes.func
     },
 
     getDefaultProps: function () {
         return {
-            "data-id": "grid-button-cell",
+            "data-id": "grid-button-cell"
         };
     },
 
+    componentWillMount: function () {
+        if (this.props.onCallBack) {
+            Utils.deprecateWarn("onCallBack", "onGridCellAction");
+        }
+    },
+
     render: function () {
+        // Grid Row component will rebind onCallBack and set it to onGridCellAction
         return (
-            <button className={this.props.className} data-id={this.props["data-id"]} onClick={this.props.onCallBack}>
-            </button>
+            <button data-id={this.props["data-id"]}
+                    className={this.props.className} onClick={this.props.onGridCellAction} />
         );
     }
 });

@@ -9,10 +9,12 @@ exports.Types = keyMirror({
 });
 
 /**
- * @function LeftNav.Actions.init
- * @param {object[]} tree - An array of objects describing the shape of the NavBar
+ * @function LeftNavBar#Actions~init
  * @desc initialize the structure of the left nav
- * @returns {object} - action object
+ * @param {object[]} tree
+ *          An array of objects describing the shape of the NavBar
+ * @returns {object}
+ *          Action object
  */
 exports.init = function (tree) {
     return {
@@ -22,10 +24,12 @@ exports.init = function (tree) {
 };
 
 /**
- * @function LeftNav.Actions.toggleSection
- * @param {number|string} id - The id of the section to toggle
+ * @function LeftNav#Actions~toggleSection
  * @desc this will toggle the specified id and leave all other sections expanded state as is.
- * @returns {object} - action object
+ * @param {number|string} id
+ *              The id of the section to toggle
+ * @returns {object}
+ *              Action object
  */
 exports.toggleSection = function (id) {
     return {
@@ -35,10 +39,12 @@ exports.toggleSection = function (id) {
 };
 
 /**
- * @function LeftNav.Actions.selectItemUnselectOthers
- * @param {number|string} id - The id of the item to select
+ * @function LeftNav#Actions~selectItemUnselectOthers
  * @desc This will make the specified item selected
- * @returns {object} - action object
+ * @param {number|string} id
+ *          The id of the item to select
+ * @returns {object}
+ *          Action object
  */
 exports.selectItem = function (id) {
     return {
@@ -48,9 +54,10 @@ exports.selectItem = function (id) {
 };
 
 /**
- * @function LeftNav.Actions.selectNextItem
+ * @function LeftNav#Actions~selectNextItem
  * @desc Select the next item in the nav bar
- * @returns {object} - action object
+ * @returns {object}
+ *          Action object
  */
 exports.selectNextItem = function () {
     return {
@@ -59,9 +66,10 @@ exports.selectNextItem = function () {
 };
 
 /**
- * @function LeftNav.Actions.selectPrevItem
+ * @function LeftNav#Actions~selectPrevItem
  * @desc Select the previous item in the nav bar
- * @returns {object} - action object
+ * @returns {object}
+ *          Action object
  */
 exports.selectPrevItem = function () {
     return {

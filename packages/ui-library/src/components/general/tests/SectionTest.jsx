@@ -84,7 +84,7 @@ describe("Section", function () {
 
     it("Stateless: renders custom classname and data-id", function () {
         var view = ReactTestUtils.renderIntoDocument(
-            <Section title="My Section" className="extra" id="my-section" expanded={true}>
+            <Section title="My Section" className="extra" data-id="my-section" expanded={true}>
                 content
             </Section>
         );
@@ -98,7 +98,7 @@ describe("Section", function () {
 
     it("Stateful: renders custom classname and data-id", function () {
         var view = ReactTestUtils.renderIntoDocument(
-            <Section title="My Section" className="extra" id="my-section" expanded={true} controlled={false}>
+            <Section title="My Section" className="extra" data-id="my-section" expanded={true} controlled={false}>
                 content
             </Section>
         );
@@ -143,4 +143,66 @@ describe("Section", function () {
     });
 
 
+    // TODO To be removed once "id" support is discontnued.
+    it("render component with id", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Section id="sectionWithId" title="My Section" controlled={false}>
+                <div data-id="iShouldBeHidden">My Content</div>
+            </Section>
+        );
+
+        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "sectionWithId");
+
+        expect(element).toBeDefined();
+    });
+
+    it("render component with default data-id", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Section title="My Section" controlled={false}>
+                <div data-id="iShouldBeHidden">My Content</div>
+            </Section>
+        );
+
+        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "section");
+
+        expect(element).toBeDefined();
+    });
+
+    it("log warning in console for controlled default value", function () {
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <Section title="My Section">
+                <div data-id="content">My Content</div>
+            </Section>
+        );
+
+        expect(console.warn).toBeCalledWith(
+            "** Default value for 'controlled' in Section component will be set to 'false' from next version");
+    });
+
+    // TODO To be removed once "id" support is discontinued.
+    it("log warning in console for id", function () {
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <Section id="sectionWithId" title="My Section" controlled={false}>
+                <div data-id="iShouldBeHidden">My Content</div>
+            </Section>
+        );
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use data-id instead of id. Support for id will be removed in next version");
+    });
+
+    // TODO To be removed once "id" support is discontinued.
+    it("does not log warning in console without id", function () {
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <Section data-id="sectionWithDataId" title="My Section" controlled={false}>
+                <div data-id="iShouldBeHidden">My Content</div>
+            </Section>
+        );
+
+        expect(console.warn).not.toBeCalledWith(
+            "Deprecated: use data-id instead of id. Support for id will be removed in next version");
+    });
 });

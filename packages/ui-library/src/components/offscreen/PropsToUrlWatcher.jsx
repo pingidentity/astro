@@ -3,15 +3,29 @@ var React = require("react"),
     _ = require("underscore");
 
 /**
+ * @callback PropsToUrlWatcher~onReplaceUrl
+ * @param {string} url
+ *              Formatted url with params
+ */
+
+/**
  * @class PropsToUrlWatcher
  * @desc This component can be used to monitor properties and write them to the url by passing in properties as a
  * hash to the watch property.
- * @param {object} watch - A hash of properties watch.  When their values change, a new string will be
- * generated and passed to the callback.
- * @param {function} onReplaceUrl - A callback to replace the history object.  Typically this will just
- * be the replace action creator from react-router-redux
- * @param {object} location - The React Router's location object
- * @param {bool} [ignoreFalse=false] - An option which treats false as undefined and skips writing them to the url
+ *
+ * @param {string} [data-id="props-to-url-watcher"]
+ *              To define the base "data-id" value for the top-level HTML container.
+ * @param {object} watch
+ *              A hash of properties watch.  When their values change, a new string will be generated
+ *              and passed to the callback.
+ * @param {object} location
+ *              The React Router's location object
+ * @param {bool} [ignoreFalse=false]
+ *              An option which treats false as undefined and skips writing them to the url
+ * @param {PropsToUrlWatcher~onReplaceUrl} onReplaceUrl
+ *              A callback to replace the history object.  Typically this will just be the replace action creator
+ *              from react-router-redux
+ *
  * @example:
  * var App = React.createClass({
  *     render: function () {
@@ -100,8 +114,14 @@ var PropsToUrlWatcher = React.createClass({
         this.props.onReplaceUrl(this.props.location.pathname + "?" + vals.join("&"));
     },
 
+    getDefaultProps: function () {
+        return {
+            "data-id": "props-to-url-watcher"
+        };
+    },
+
     render: function () {
-        return <div style={{ display: "none" }} />;
+        return <div data-id={this.props["data-id"]} style={{ display: "none" }} />;
     }
 });
 

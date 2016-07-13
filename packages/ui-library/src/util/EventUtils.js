@@ -1,16 +1,23 @@
+/*eslint-disable valid-jsdoc*/
+
+//For some very odd reason linting picks up the "/**"  JSDoc definitions of the @alias with "/" as having a JSDoc syntax error. So we disable.
+
+"use strict";
+
 /**
  * @module util/EventUtils
  * @desc The module contains helper functions to deal with React/DOM events model.
  */
 
-
 /**
- * @function
- * @name forwardTargetChecked
+ * @alias module:util/EventUtils.forwardTargetChecked
  * @desc Wapper which will extract the checked attribute of the target and pass that to the wrapped callback.  This
- * helps in bridging the gap between what a callback expects and low level components which pass events.
- * @param {function} callback - The callback to execute
- * @returns {function} an annonymous function wrapping the callback
+ *     helps in bridging the gap between what a callback expects and low level components which pass events.
+ *
+ * @param {function} callback
+ *     The callback to execute
+ * @returns {function}
+ *     An annonymous function wrapping the callback
  */
 exports.forwardTargetChecked = function (callback) {
     return function (e) {
@@ -19,12 +26,14 @@ exports.forwardTargetChecked = function (callback) {
 };
 
 /**
- * @function
- * @name forwardTargetValue
+ * @alias module:util/EventUtils.forwardTargetValue
  * @desc Wrapper which will extract the value of the target and pass that to the wrapped callback.  This
- * helps in bridging the gap between what a callback expects and low level components which pass events.
- * @param {function} callback - The callback to execute
- * @returns {function} an annonymous function wrapping the callback
+ *     helps in bridging the gap between what a callback expects and low level components which pass events.
+ *
+ * @param {function} callback
+ *     The callback to execute
+ * @returns {function}
+ *     An annonymous function wrapping the callback
  */
 exports.forwardTargetValue = function (callback) {
     return function (e) {
@@ -33,12 +42,14 @@ exports.forwardTargetValue = function (callback) {
 };
 
 /**
- * @function
- * @name forwardTargetValueAsInt
- * @desc Wrapper which will extract the value of the target, coerce it to an int, and pass that to the wrapped callback.  This
- * helps in bridging the gap between what a callback expects and low level components which pass events.
- * @param {function} callback - The callback to execute
- * @returns {function} an annonymous function wrapping the callback
+ * @alias module:util/EventUtils.forwardTargetValueAsInt
+ * @desc Wrapper which will extract the value of the target, coerce it to an int, and pass that to the wrapped callback.
+ *     This helps in bridging the gap between what a callback expects and low level components which pass events.
+ *
+ * @param {function} callback
+ *     The callback to execute
+ * @returns {function}
+ *     An annonymous function wrapping the callback
  */
 exports.forwardTargetValueAsInt = function (callback) {
     return function (e) {
@@ -47,14 +58,18 @@ exports.forwardTargetValueAsInt = function (callback) {
 };
 
 /**
- * @function
- * @name eventOutsideOfContainer
- * @desc Function which will execute the callback only if the passed event is outside of the specified container.  This is
- * useful when we want to hide a container when the user clicks outside of it (such a popover).
- * @param {object} container - The DOM container node
- * @param {function} callback - The callback
- * @param {event} e - The event to examine
- * @returns {bool} Whether or not the event was outside of the container.  True means the event was outside
+ * @alias module:util/EventUtils.callIfOutsideOfContainer
+ * @desc Function which will execute the callback only if the passed event is outside of the specified container.
+ *     This is useful when we want to hide a container when the user clicks outside of it (such a popover).
+ *
+ * @param {object} container
+ *     The DOM container node
+ * @param {function} callback
+ *     The callback to execute
+ * @param {event} e
+ *     The event to examine
+ * @returns {boolean}
+ *     Whether or not the event was outside of the container.  True means the event was outside
  */
 exports.callIfOutsideOfContainer = function (container, callback, e) {
     var node = e.target;
@@ -77,12 +92,15 @@ exports.callIfOutsideOfContainer = function (container, callback, e) {
 };
 
 /**
- * @function
- * @name handleKeydowns
- * @param {object} map - An object mapping keyCodes to callbacks
- * @param {bool} killEvent - Kill the event after executing the callback
+ * @alias module:util/EventUtils.handleKeydowns
  * @desc Use this to function to create a keydown handler which handles keyCodes specified by the hashmap
- * @returns {function} - The wrapper function
+ *
+ * @param {object} map
+ *     An object mapping keyCodes to callbacks
+ * @param {boolean} killEvent
+ *     If true, kill the event after executing the callback
+ * @returns {function}
+ *     The wrapper function
  */
 exports.handleKeydowns = function (map, killEvent) {
     return function (e) {

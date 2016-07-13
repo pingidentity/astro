@@ -7,7 +7,7 @@ var ColumnLayoutDemo = React.createClass({
     render: function () {
         return (
             <div>
-                <Layout.Row id="columns-2">
+                <Layout.Row data-id="columns-2">
                     <Layout.Column>
                         <div style={ { background: "#ddd" } }>column content</div>
                     </Layout.Column>
@@ -16,7 +16,7 @@ var ColumnLayoutDemo = React.createClass({
                     </Layout.Column>
                 </Layout.Row>
                 <br />
-                <Layout.Row id="columns-3">
+                <Layout.Row data-id="columns-3">
                     <Layout.Column>
                         <div style={ { background: "#ddd" } }>column content</div>
                     </Layout.Column>
@@ -28,7 +28,7 @@ var ColumnLayoutDemo = React.createClass({
                     </Layout.Column>
                 </Layout.Row>
                 <br />
-                <Layout.Row id="columns-4">
+                <Layout.Row data-id="columns-4">
                     <Layout.Column>
                         <div style={ { background: "#ddd" } }>column content</div>
                     </Layout.Column>
@@ -43,7 +43,7 @@ var ColumnLayoutDemo = React.createClass({
                     </Layout.Column>
                 </Layout.Row>
                 <br />
-                <Layout.Row id="columns-5">
+                <Layout.Row data-id="columns-5">
                     <Layout.Column>
                         <div style={ { background: "#ddd" } }>column content</div>
                     </Layout.Column>
@@ -62,7 +62,7 @@ var ColumnLayoutDemo = React.createClass({
                 </Layout.Row>
 
                 <br /><br />
-                <Layout.Row id="columns-2-nopad" className="columns-nopad">
+                <Layout.Row data-id="columns-2-nopad" className="columns-nopad">
                     <Layout.Column>
                         <div style={ { background: "#ddd" } }>column content</div>
                     </Layout.Column>
@@ -71,7 +71,7 @@ var ColumnLayoutDemo = React.createClass({
                     </Layout.Column>
                 </Layout.Row>
                 <br />
-                <Layout.Row id="columns-3-nopad" className="columns-nopad">
+                <Layout.Row data-id="columns-3-nopad" className="columns-nopad">
                     <Layout.Column>
                         <div style={ { background: "#ddd" } }>column content</div>
                     </Layout.Column>
@@ -83,7 +83,7 @@ var ColumnLayoutDemo = React.createClass({
                     </Layout.Column>
                 </Layout.Row>
                 <br />
-                <Layout.Row id="columns-4-nopad" className="columns-nopad">
+                <Layout.Row data-id="columns-4-nopad" className="columns-nopad">
                     <Layout.Column>
                         <div style={ { background: "#ddd" } }>column content</div>
                     </Layout.Column>
@@ -98,7 +98,7 @@ var ColumnLayoutDemo = React.createClass({
                     </Layout.Column>
                 </Layout.Row>
                 <br />
-                <Layout.Row id="columns-5-nopad" className="columns-nopad">
+                <Layout.Row data-id="columns-5-nopad" className="columns-nopad">
                     <Layout.Column>
                         <div style={ { background: "#ddd" } }>column content</div>
                     </Layout.Column>

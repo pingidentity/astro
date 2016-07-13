@@ -2,80 +2,101 @@
 
 var React = require("re-react"),
     classnames = require("classnames"),
+    _ = require("underscore"),
     Row = require("./Row.jsx"),
     ColumnPagination = require("./ColumnPagination.jsx"),
     FormCheckbox = require("../forms/FormCheckbox.jsx");
 
-var Grid = React.createClass({
-
-    propTypes: {
-        controlled: React.PropTypes.bool
-    },
-
-    getDefaultProps: function () {
-        return {
-            controlled: false
-        };
-    },
-
-    render: function () {
-        return (this.props.controlled ? <StatelessGrid {...this.props} /> : <StatefulGrid {...this.props} />);
-    }
-});
-
-module.exports = Grid;
+/**
+ * @callback Grid~onGridCellAction
+ *
+ * @param {Grid#Row~RowData} rowObject
+ *     Data corresponding to a Grid Row.
+ * @param {object} e
+ *     The ReactJS synthetic event object.
+ *
+ **/
 
 /**
- * @callback onRowExpanded~callback
- * @param {number} rowIndex - current expanded row index
+ * @callback Grid~onRowExpanded
+ *
+ * @param {number} rowIndex
+ *     Current expanded row index
+ **/
+
+/**
+ * @callback Grid~onPaginationChanged
+ *
+ * @param {number} firstColumn
+ *     First column index for newly selected page
+ * @param {number} lastColumn
+ *     Last column index for newly selected page
+ * @param {number} page
+ *     Newly selected page number
  **/
 
 /**
  * @class Grid
- *
  * @desc Grid displays an array of object as a table. It also provides expanable rows, columns paging
  *
- * @param {string} [className] - extra CSS classes to be applied
- * @param {string} [data-id] - it is used for a unique data-id
- * @param {number} [rows] - rows to display on the table
- * @param {string} [width] - css class to determine width of Grid
- * @param {bool} [rowExpandable] - it is to determine if this grid has expandable rows
- * @param {Grid~onChangeCallback} [onRowExpanded] - callback to be triggered when a row is expanded
- * @param {object} [expandedRowContentType] - custom markup to display on expanded row section
- * @param {number} columnsPerPage - number of columns per page.
- * @param {number} firstColumn - the first pageable  column.
- * @param {number} lastColumn - the last pageable column.
- * @param {number} currentPage - current page.
- * @param {Grid~onChangeCallback} [onPaginationChanged] - callback to be triggered when pagination is changed
+ * @param {string} [data-id="grid-table"]
+ *     To define the base "data-id" value for top-level HTML container.
+ * @param {string} [className]
+ *     CSS classes to set on the top-level HTML container.
+ * @param {boolean} [controlled=false]
+ *     To enable the component to be externally managed. True will relinquish control to the component's owner.
+ *     False or not specified will cause the component to manage state internally.
+ *
+ * @param {Grid#Row[]} [rows]
+ *     Rows to display on the table
+ * @param {boolean} [rowExpandable=false]
+ *     Determine if this grid has expandable rows
+ * @param {object} [expandedRowContentType]
+ *     Custom markup to display on expanded row section
+ * @param {Grid~onRowExpanded} [onRowExpanded]
+ *     Callback to be triggered when a row is expanded
+ *
+ * @param {number} columnsPerPage
+ *     Number of columns per page.
+ * @param {number} firstColumn
+ *     First pageable  column.
+ * @param {number} lastColumn
+ *     Last pageable column.
+ *
+ * @param {number} currentPage
+ *     Current page.
+ * @param {Grid~onPaginationChanged} [onPaginationChanged]
+ *     Callback to be triggered when pagination is changed
  *
  * @example
  *
  *     <Grid rows={this.state.rows} columnsPerPage={3} onRowExpanded={this._onRowExpanded} >
- *         <Column isLeftHeader={true} fixed={true} field="rowheader" />
- *         <Column headerText="Firstname" fixed={true} field="firstname" />
- *         <Column headerText="Lastname" fixed={true} field="lastname" />
- *         <Column headerText="Email" field="email" width={ColumnSizes.XL} />
- *         <Column headerText="Gender" field="gender" width={ColumnSizes.M} />
- *         <Column headerText="Birthday" field="birthday" width={ColumnSizes.S} />
- *         <Column headerText="Birthyear" field="birthyear" width={ColumnSizes.M}  >
+ *         <Grid.Column isLeftHeader={true} fixed={true} field="rowheader" />
+ *         <Grid.Column headerText="Firstname" fixed={true} field="firstname" />
+ *         <Grid.Column headerText="Lastname" fixed={true} field="lastname" />
+ *         <Grid.Column headerText="Email" field="email" width={ColumnSizes.XL} />
+ *         <Grid.Column headerText="Gender" field="gender" width={ColumnSizes.M} />
+ *         <Grid.Column headerText="Birthday" field="birthday" width={ColumnSizes.S} />
+ *         <Grid.Column headerText="Birthyear" field="birthyear" width={ColumnSizes.M}  >
  *             <TextInputCell onChange={this._onBirthyearChanged} />
- *         </Column>
- *         <Column headerText={this._getCheckAll()} field="hasLaptop" >
+ *         </Grid.Column>
+ *         <Grid.Column headerText={this._getCheckAll()} field="hasLaptop" >
  *             <CheckboxCell onChange={this._onHasLaptopChecked} />
- *         </Column>
+ *         </Grid.Column>
  *     </Grid>
  *
  **/
-var StatelessGrid = React.createClass({
+
+var GridStateless = React.createClass({
+    displayName: "GridStateless",
 
     propTypes: {
         "data-id": React.PropTypes.string,
         className: React.PropTypes.string.affectsRendering,
         rows: React.PropTypes.array.affectsRendering,
-        width: React.PropTypes.string.affectsRendering,
         rowExpandable: React.PropTypes.bool.affectsRendering,
-        onRowExpanded: React.PropTypes.func,
         expandedRowContentType: React.PropTypes.object,
+        onRowExpanded: React.PropTypes.func,
         columnsPerPage: React.PropTypes.number.isRequired.affectsRendering,
         firstColumn: React.PropTypes.number.isRequired.affectsRendering,
         lastColumn: React.PropTypes.number.isRequired.affectsRendering,
@@ -149,6 +170,7 @@ var StatelessGrid = React.createClass({
         }
 
         var className = column.props.width + " " + column.props.align;
+
         return (
             <th data-id={column.props["data-id"]} key={column.props.field} className={className} >
                 {headerText}
@@ -242,7 +264,8 @@ var StatelessGrid = React.createClass({
     }
 });
 
-var StatefulGrid = React.createClass({
+var GridStateful = React.createClass({
+    displayName: "GridStateful",
 
     getDefaultProps: function () {
         return {
@@ -261,7 +284,7 @@ var StatefulGrid = React.createClass({
     /*
      * Handles pagination changed
      */
-    _onPaginationChanged: function (firstColumn, lastColumn, newPage) {
+    _handlePaginationChanged: function (firstColumn, lastColumn, newPage) {
         this.setState({
             firstColumn: firstColumn,
             lastColumn: lastColumn,
@@ -270,49 +293,70 @@ var StatefulGrid = React.createClass({
     },
 
     render: function () {
+        var props = _.defaults(
+            {
+                ref: "GridStateless", firstColumn: this.state.firstColumn, lastColumn: this.state.lastColumn,
+                currentPage: this.state.currentPage, onPaginationChanged: this._handlePaginationChanged
+            }, this.props);
+        return React.createElement(GridStateless, props, this.props.children);
+    }
+});
+
+var Grid = React.createClass({
+    displayName: "Grid",
+
+    propTypes: {
+        controlled: React.PropTypes.bool
+    },
+
+    getDefaultProps: function () {
+        return {
+            controlled: false
+        };
+    },
+
+    render: function () {
         return (
-            <StatelessGrid {...this.props}
-                firstColumn={this.state.firstColumn}
-                lastColumn={this.state.lastColumn}
-                currentPage={this.state.currentPage}
-                onPaginationChanged={this._onPaginationChanged} />
+            this.props.controlled
+                ? React.createElement(
+                    GridStateless, _.defaults({ ref: "GridStateless" }, this.props), this.props.children)
+                : React.createElement(
+                    GridStateful, _.defaults({ ref: "GridStateful" }, this.props), this.props.children)
         );
     }
 });
 
+module.exports = Grid;
 
 /**
  * @enum {string}
  * @desc Enum for the different options for Column size.
- * Set type prop to {ColumnSizes.XS} for a column with XS size.
- * Set type prop to {ColumnSizes.S} for a column with S size.
- * Set type prop to {ColumnSizes.M} for a column with M size.
- * Set type prop to {ColumnSizes.L} for a column with L size.
- * Set type prop to {ColumnSizes.XL} for a column with XL size.
  **/
 Grid.ColumnSizes = {
+    /** Set type prop to {ColumnSizes.XS} for a column with XS size. */
     XS: "column-xs",
+    /** Set type prop to {ColumnSizes.S} for a column with S size. */
     S: "column-sm",
+    /** Set type prop to {ColumnSizes.M} for a column with M size. */
     M: "column-md",
+    /** Set type prop to {ColumnSizes.L} for a column with L size. */
     L: "column-lg",
+    /** Set type prop to {ColumnSizes.XL} for a column with XL size. */
     XL: "column-xl"
 };
 
 /**
  * @enum {string}
- * @desc Enum for the different options for Column size.
- * Set type prop to {ColumnSizes.XS} for a column with XS size.
- * Set type prop to {ColumnSizes.S} for a column with S size.
- * Set type prop to {ColumnSizes.M} for a column with M size.
- * Set type prop to {ColumnSizes.L} for a column with L size.
- * Set type prop to {ColumnSizes.XL} for a column with XL size.
+ * @desc Enum for the different options for alignments.
  **/
 Grid.Alignments = {
+    /** Set type prop to {Alignments.LEFT} for aligning to the left. Empty is left by default. */
     LEFT: "",
+    /** Set type prop to {Alignments.LEFT} for aligning to the right. */
     RIGHT: "right",
+    /** Set type prop to {Alignments.LEFT} for aligning to the center. */
     CENTER: "center"
 };
-
 
 Grid.Column = require("./Column.jsx");
 

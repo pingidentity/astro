@@ -37,7 +37,7 @@ var Demo = React.createClass({
         return this.state.batches[this.state.batches.length - 1].id < 9;
     },
 
-    loadPrev: function () {
+    _handleLoadPrev: function () {
         this.setState({ pending: { prev: true } });
         setTimeout(function () {
             this.setState({ pending: { prev: false } });
@@ -48,7 +48,7 @@ var Demo = React.createClass({
         }.bind(this), this.SIMULATED_DELAY_MS);
     },
 
-    loadNext: function () {
+    _handleLoadNext: function () {
         this.setState({ pending: { next: true } });
         setTimeout(function () {
             this.setState({ pending: { next: false } });
@@ -59,7 +59,7 @@ var Demo = React.createClass({
         }.bind(this), this.SIMULATED_DELAY_MS);
     },
 
-    headingGenerator: function (data) {
+    _handleGenerateHeading: function (data) {
         var start = data.num - (data.num % 10);
         var end = start + 10;
         return data.num % 10 === 0 ? ("Heading " + start + " to " + end) : null;
@@ -70,13 +70,13 @@ var Demo = React.createClass({
             <div className="infiniteScrollDemo">
                 <InfiniteScroll
                         contentType={<MyRow/>}
-                        loadNext={this.loadNext}
-                        loadPrev={this.loadPrev}
+                        onLoadNext={this._handleLoadNext}
+                        onLoadPrev={this._handleLoadPrev}
                         hasNext={this.hasMore()}
                         hasPrev={this.hasPrev()}
                         pendingNext={this.state.pending.next}
                         pendingPrev={this.state.pending.prev}
-                        headingGenerator={this.headingGenerator}
+                        onGenerateHeading={this._handleGenerateHeading}
                         batches={this.state.batches}>
                     <div>Hello</div>
                 </InfiniteScroll>

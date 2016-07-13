@@ -1,13 +1,48 @@
 var React = require("react"),
     ReactDOM = require("react-dom"),
     Spinner = require("../general/Spinner.jsx"),
-    _ = require("underscore");
+    _ = require("underscore"),
+    Utils = require("../../util/Utils.js");
 
-/** @class InfiniteScroll#Batch
- * @class InfiniteScroll
- * @private */
+/**
+ * @callback Batch~onGenerateHeading
+ *
+ * @param {object} data
+ *    The data item from the batch for the current row.
+ * @param {string} previousHeading
+ *    The previous heading text generated from the last call to the generator.
+ *
+ * @returns {string|null}
+ *    The generated section heading text or null if no heading should be added.
+ */
+
+/**
+ * @class Batch
+ * @memberof InfiniteScroll
+ *
+ * @param {string} [data-id="batch"]
+ *    To define the base "data-id" value for the top-level HTML container.
+ *
+ * @param {Batch~onGenerateHeading} [onGenerateHeading]
+ *    A heading generator function. If the result is anything but null, a new heading will be generated
+ *    the content of which will be set to the result of the call.
+ *
+ * @private
+ * @ignore
+ */
 var Batch = React.createClass({
     displayName: "Batch",
+
+    propTypes: {
+        "data-id": React.PropTypes.string
+    },
+
+    getDefaultProps: function () {
+        return {
+            "data-id": "batch",
+            onGenerateHeading: _.noop
+        };
+    },
 
     componentWillUpdate: function () {
         var container = ReactDOM.findDOMNode(this.refs.container);
@@ -20,8 +55,7 @@ var Batch = React.createClass({
         var visible = this.props.isVisible !== false;
         var style = {};
         var rows = null;
-        var heading = this.props.prev && this.props.headingGenerator
-            ? this.props.headingGenerator(_.last(this.props.prev)) : null;
+        var heading = this.props.prev && this.props.onGenerateHeading(_.last(this.props.prev));
 
         if (!visible) {
             style.height = this.containerHeight;
@@ -29,8 +63,7 @@ var Batch = React.createClass({
             rows = [];
 
             for (var i = 0; i < this.props.data.length; i += 1) {
-                var nextHeading = this.props.headingGenerator
-                    ? this.props.headingGenerator(this.props.data[i], heading) : null;
+                var nextHeading = this.props.onGenerateHeading(this.props.data[i], heading);
 
                 if (nextHeading !== null) {
                     rows.push(
@@ -53,63 +86,153 @@ var Batch = React.createClass({
             }
         }
 
-        return <div ref="container" className="batch" style={style}>{rows}</div>;
+        return <div data-id={this.props["data-id"]} ref="container" className="batch" style={style}>{rows}</div>;
     }
 });
 
+/**
+* @typedef InfiniteScroll~BatchItem
+* @desc A single batch item (e.g. &#123;id: _id, data: [_data_]&#125).
+*
+* @property {number} id
+*    The item's identifier.
+* @property {array<*>} data
+*    The data for the batch item.
+*/
 
 /**
- * @callback InfiniteScroll~scrollCallback
- * @param {object} visibleItem - new top visible item:
+* @typedef InfiniteScroll~VisibleItem
+* @desc The batch id and scroll offset of the top visible item.
+*
+* @property {number} batchId
+*    The batch id of the top visible item.
+* @property {number} itemIndex
+*    The array index of the item within the batch of the top visible item.
+*/
+
+/**
+* @typedef InfiniteScroll~initialItem
+* @desc The batch index and item index of the initial item to display.
+*
+* @property {number} batchIndex
+*    The array index of the batch in which the initial item is found within batches.
+* @property {number} itemIndex
+*    The array index of the item in the batch at batchIndex.
+*/
+
+/**
+ * @callback InfiniteScroll~onScroll
  *
- *      {
- *          batchId: <batchId>
- *          itemIndex: <array index within batch>
- *      }
+ * @param {InfiniteScroll~VisibleItem} visibleItem
+ *    The new top visible item.
+ */
+
+ /**
+ * @callback InfiniteScroll~onLoadPrev
+ */
+
+ /**
+ * @callback InfiniteScroll~onLoadNext
  */
 
 /**
- * @callback InfiniteScroll~headingCallback
- * @param {object} data item from batch for current row
- * @param {string} previous heading text
- * @returns {string|null} section heading text or null if no heading should be added
+ * @callback InfiniteScroll~onGenerateHeading
+ *
+ * @param {array<*>} data
+ *    The array of data from the batch for the current row.
+ * @param {string} previousHeading
+ *    The previous heading text generated from the last call to the generator.
+ *
+ * @returns {string|null}
+ *    The generated section heading text or null if no heading should be added.
  */
-
 
 /**
  * @class InfiniteScroll
- * @desc An scrolling component which pages content in and out of the dom as their visibility changes.    Content is passed as an
- * array of batches which is a simple js object with an id and an array of rows.
+ * @desc An scrolling component which pages content in and out of the dom as their visibility changes.
+ *    Content is passed as an array of batches which is a simple js object with an id and an array of rows.
  *
- * @param {function} loadNext - callback which will be triggered to fetch the next batch of data, executed when the user scrolls to the bottom of the container.
- * @param {function} loadPrev - callback which will be triggered fetch the prev batch of data, executed when the user scrolls to the top of the container.
- * @param {bool} hasNext - has more batches after the last batch loaded
- * @param {bool} hasPrev - has more batches preceding the first batch loaded
- * @param {array} batches - An array of objects in the form &#123;id: _id, data: [_data_]&#125;
- * @param {Component} contentType - A react component representing the row type
- * @param {bool} [attachToWindow] - When set, the component will attach to the window instead of creating a scrolling container
- * @param {object} [initialItem] - An object describing the batchIdex and itemIndex of the first row to display
- * @param {InfiniteScroll~scrollCallback} [onScroll] - A callback which will get the batch id and the scroll offset of the infinite scroller
- * @param {InfiniteScroll~headingCallback} [headingGenerator] - A heading generator function.  Will be passed the data item for
- * the current row and the result from the last call to the generator.  If the result is anything but null, a new heading will
- * be generated the content of which will be set to the result of the call.
- * @param {number} [minHeight] - Min height for the container (when not attached to window)
- * @param {number} [height] - Required when not attached to the window
+ * @param {string} [data-id="infinite-scroll"]
+ *    To define the base "data-id" value for the top-level HTML container.
+ * @param {string} [className]
+ *    CSS classes to set on the top-level HTML container.
+ *
+ * @param {array<InfiniteScroll~BatchItem>} batches
+ *    An array of InfiniteScroll~BatchItem objects.
+ * @param {InfiniteScroll~initialItem} [initialItem]
+ *    An object describing the batch index and item index of the first row to display.
+ * @param {InfiniteScroll~onScroll} [onScroll]
+ *    Callback to be triggered when the component is scrolled.
+ *
+ * @param {boolean} [hasPrev=false]
+ *    Whether or not ther are more batches preceeding the first batch loaded.
+ * @param {InfiniteScroll~onLoadPrev} [onLoadPrev]
+ *    Callback to be triggered when the previous batch of data is fetched.
+ *    Executed when the user scrolls to the top of the container.
+ * @param {InfiniteScroll~onLoadPrev} [loadPrev]
+ *    DEPRECATED. Use "onLoadPrev" instead.
+ *
+ * @param {boolean} [hasNext=false]
+ *    Whether or not there are more batches following the last batch loaded.
+ * @param {InfiniteScroll~onLoadNext} [onLoadNext]
+ *    Callback to be triggered when the next batch of data is fetched.
+ *    Executed when the user scrolls to the bottom of the container.
+ * @param {InfiniteScroll~onLoadNext} [loadNext]
+ *    DEPRECATED. Use "onLoadNext" instead.
+ *
+ * @param {Component} contentType
+ *    A ReactJS component representing the row type.
+ *
+ * @param {InfiniteScroll~onGenerateHeading} [onGenerateHeading]
+ *    A heading generator function. If the result is anything but null, a new heading will be generated
+ *    the content of which will be set to the result of the call.
+ * @param {InfiniteScroll~onGenerateHeading} [headingGenerator]
+ *    DEPRECATED. Use "onGenerateHeading" instead.
+ *
+ * @param {number} [height]
+ *    The height of the container. Required when not attached to the window.
+ * @param {number} [minHeight]
+ *    Minimum height for the container (when not attached to window).
+ * @param {bool} [attachToWindow=false]
+ *    If true, the component will attach to the window instead of creating a scrolling container.
+ *
  * @example
- * var batches=[{id: 1, data: ['some', 'data', 'here']}...];
- * <InfiniteScroll loadNext={this.loadNext} hasNext={true} hasPrev={false} batches={batches} contentType={MyRow} />
+ *   var batches=[{id: 1, data: ['some', 'data', 'here']}...];
+ *   <InfiniteScroll onLoadNext={this.loadNext} hasNext={true} hasPrev={false} batches={batches} contentType={MyRow} />
  */
 var InfiniteScroll = React.createClass({
     displayName: "InfiniteScroll",
 
     propTypes: {
+        "data-id": React.PropTypes.string,
         batches: React.PropTypes.arrayOf(
             React.PropTypes.shape({
                 id: React.PropTypes.number,
                 data: React.PropTypes.array
             })).isRequired,
-        loadNext: React.PropTypes.func.isRequired,
-        loadPrev: React.PropTypes.func.isRequired
+        initalItem: React.PropTypes.object,
+        onScroll: React.PropTypes.func,
+        hasPrev: React.PropTypes.bool,
+        onLoadPrev: React.PropTypes.func, //TODO: set as required when v1 removed
+        loadPrev: React.PropTypes.func, //TODO: remove when v1 no longer supported
+        hasNext: React.PropTypes.bool,
+        onLoadNext: React.PropTypes.func, //TODO: set as required when v1 removed
+        loadNext: React.PropTypes.func, //TODO: remove when v1 no longer supported
+        contentType: React.PropTypes.object,
+        onGenerateHeading: React.PropTypes.func,
+        headingGenerator: React.PropTypes.func, //TODO: remove when v1 no longer supported
+        height: React.PropTypes.number,
+        minHeight: React.PropTypes.number,
+        attachToWindow: React.PropTypes.bool
+    },
+
+    getDefaultProps: function () {
+        return {
+            "data-id": "infinite-scroll",
+            hasPrev: false,
+            hasNext: false,
+            attachToWindow: false
+        };
     },
 
     _getBatchVisibility: function () {
@@ -181,10 +304,22 @@ var InfiniteScroll = React.createClass({
             this.forceUpdate();
         }
         if (this._didScrollToTop()) {
-            this.props.loadPrev();
+            //TODO: remove loadPrev logic when v1 removed.
+            //Also, if check can be removed as onLoadPrev should be made required then as well
+            var onLoadPrev = this.props.onLoadPrev || this.props.loadPrev;
+
+            if (onLoadPrev) {
+                onLoadPrev();
+            }
         }
         if (this._didScrollToBottom()) {
-            this.props.loadNext();
+            //TODO: remove loadNext logic when v1 removed.
+            //Also, if check can be removed as onLoadNext should be made required then as well
+            var onLoadNext = this.props.onLoadNext || this.props.loadNext;
+
+            if (onLoadNext) {
+                onLoadNext();
+            }
         }
         if (this.props.onScroll) {
             this.props.onScroll(this._getFirstVisibleItem());
@@ -239,6 +374,17 @@ var InfiniteScroll = React.createClass({
 
         if (this.props.attachToWindow) {
             window.addEventListener("scroll", this._handleScroll);
+        }
+
+        //TODO: remove these when v1 no longer supported:
+        if (this.props.loadPrev) {
+            Utils.deprecateWarn("loadPrev", "onLoadPrev");
+        }
+        if (this.props.loadNext) {
+            Utils.deprecateWarn("loadNext", "onLoadNext");
+        }
+        if (this.props.headingGenerator) {
+            Utils.deprecateWarn("headingGenerator", "onGenerateHeading");
         }
     },
 
@@ -296,17 +442,26 @@ var InfiniteScroll = React.createClass({
             return (<div ref="container">{this.props.children}</div>);
         }
 
-        var props = this.props.attachToWindow ? {} : {
-            style: _.defaults({
+        var style = null,
+            onScroll = null,
+            ref = null;
+        if (!this.props.attachToWindow) {
+            style = _.defaults({
                 overflow: "auto",
                 height: "100%"
-            }, _.pick(this.props, "minHeight", "height")),
-            onScroll: this._handleScroll,
-            ref: "container"
-        };
+            }, _.pick(this.props, "minHeight", "height"));
+
+            onScroll = this._handleScroll;
+
+            ref = "container";
+        }
 
         return (
-            <div {...props}>
+            <div data-id={this.props["data-id"]}
+                    className={this.props.className}
+                    style={style}
+                    onScroll={onScroll}
+                    ref={ref} >
                 { this.props.hasPrev ? <span ref="spinnerPrev"><Spinner show={true} /></span> : null }
                 {
                     this.props.batches.map(function (b, i) {
@@ -315,7 +470,7 @@ var InfiniteScroll = React.createClass({
                             ref={"batch" + i}
                             key={b.id}
                             id={b.id}
-                            headingGenerator={this.props.headingGenerator}
+                            onGenerateHeading={this.props.onGenerateHeading || this.props.headingGenerator}
                             contentType={this.props.contentType}
                             isVisible={this.visibilityArray[i]} />);
                     }.bind(this))

@@ -55,6 +55,7 @@ var DragDropRowDemo = React.createClass({
                     this.state.rows.map(function (item, index) {
                         return (
                             <Draggable
+                                    key={index}
                                     id={index}
                                     index={index}
                                     onDrag={this._onDrag}

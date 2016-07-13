@@ -7,12 +7,12 @@ var initialState = {
 };
 
 /**
- * @function
- * @name findFirstChildIdUnlessSelected
- * @param {object} state - the state object
- * @desc returns the id of the openNode's first child unless state.selectedNode belongs
- * to the openNode.
- * @returns {string} - the id of the first child
+ * @function LeftNavBar#Reducer~findFirstChildIdUnlessSelected
+ * @desc Returns the id of the openNode's first child unless state.selectedNode belongs to the openNode.
+ * @param {object} state
+ *          The state object
+ * @returns {string}
+ *          The id of the first child
  */
 function findFirstChildIdUnlessSelected (state) {
     var section = _.findWhere(state.tree, { id: state.openNode });
@@ -26,12 +26,13 @@ function findFirstChildIdUnlessSelected (state) {
 }
 
 /**
- * @function
- * @name selectByOffset
- * @param {object} state - State object (will be mutated so must be a clone!)
- * @param {number} offset - The number of positions to offset the selected Item by
+ * @function LeftNavBar#Reducer~selectByOffset
  * @desc This function will calculate the new position of the selected node according to the
  * offset specified.
+ * @param {object} state
+ *          State object (will be mutated so must be a clone!)
+ * @param {number} offset
+ *          The number of positions to offset the selected Item by
  */
 function selectByOffset (state, offset) {
     var sectionIndex = _.findIndex(state.tree, { id: state.openNode });

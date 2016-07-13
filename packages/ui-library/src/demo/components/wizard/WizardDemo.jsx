@@ -67,7 +67,7 @@ var WizardDemo = React.createClass({
                 </div>
 
                 <Choose title="Choose a wizard" {...this.props} {...this.BUTTON_LABELS}
-                    onChange={this.actions.choose}
+                    onValueChange={this.actions.pick}
                     onEdit={this.actions.edit}
                     onNext={this.next}
                     onDone={this.done}

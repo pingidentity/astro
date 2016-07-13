@@ -23,7 +23,7 @@ var CalendarDemo = React.createClass({
                 date={this.state.selectedDate}
                 computableFormat="x"
                 closeOnSelect={true}
-                onChange={this._onEnrollmentDateChanged} />
+                onValueChange={this._onEnrollmentDateChanged} />
         );
     }
 });

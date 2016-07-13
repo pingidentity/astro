@@ -14,7 +14,7 @@ var MultivaluesDemo = React.createClass({
         };
     },
 
-    _updateEntries: function (entries) {
+    _handleValueChange: function (entries) {
         this.setState({
             entries: entries
         });
@@ -28,14 +28,14 @@ var MultivaluesDemo = React.createClass({
                 <div className="input-row">
                     <Multivalues title="Multivalues Demo"
                         entries={this.state.entries}
-                        onChange={this._updateEntries} />
+                        onValueChange={this._handleValueChange} />
                 </div>
                 
                 <div className="input-row">
                     <Multivalues title="Multivalues Demo"
                         entries={this.state.entries}
-                        isRequired={true}
-                        onChange={this._updateEntries} />
+                        required={true}
+                        onValueChange={this._handleValueChange} />
                 </div>
                 
             </div>

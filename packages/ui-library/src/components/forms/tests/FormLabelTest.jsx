@@ -2,11 +2,13 @@ window.__DEV__ = true;
 
 jest.dontMock("../FormLabel.jsx");
 jest.dontMock("../../tooltips/HelpHint.jsx");
+jest.dontMock("../../general/If.jsx");
 
 describe("FormLabel", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-addons-test-utils"),
+        TestUtils = require("../../../testutil/TestUtils"),
         FormLabel = require("../FormLabel.jsx");
 
     it("renders if it has children", function () {
@@ -41,13 +43,48 @@ describe("FormLabel", function () {
         expect(hint.textContent.trim()).toBe("my hint");
     });
 
-
-    it("renders classname and id", function () {
+    it("renders classname and data-id", function () {
         var label = ReactTestUtils.renderIntoDocument(
-            <FormLabel value="hello" hint="my hint" data-id="my-id" className="my-label" />);
+            <FormLabel value="hello" hint="my hint" data-id="my-id" className="my-label" />
+        );
         var node = ReactDOM.findDOMNode(label);
 
         expect(node.getAttribute("data-id")).toBe("my-id");
         expect(node.getAttribute("class")).toBe("my-label");
+    });
+
+    it("render component with default data-id", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormLabel value="foo" />
+        );
+
+        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "formLabel");
+        expect(element).toBeDefined();
+    });
+
+    // TODO To be removed once "id" support is discontnued.
+    it("render component with id and log warning", function () {
+        console.warn = jest.genMockFunction();
+
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormLabel value="foo" id="deprecated" />
+        );
+
+        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "deprecated");
+        expect(element).toBeDefined();
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use id instead of data-id. Support for data-id will be removed in next version"
+        );
+    });
+
+    // TODO To be removed once "id" support is discontnued.
+    it("does not log warning in console without id", function () {
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <FormLabel value="foo" />
+        );
+
+        expect(console.warn).not.toBeCalled();
     });
 });

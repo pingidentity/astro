@@ -1,15 +1,15 @@
 window.__DEV__ = true;
 
-jest.dontMock("../FormIntegerField.jsx");
-jest.dontMock("../form-text-field/index.js");
-jest.dontMock("../form-text-field/v1.jsx");
-jest.dontMock("../../tooltips/HelpHint.jsx");
+jest.dontMock("../v1.jsx");
+jest.dontMock("../../form-text-field/index.js");
+jest.dontMock("../../form-text-field/v1.jsx");
+jest.dontMock("../../../tooltips/HelpHint.jsx");
 
 describe("FormIntegerField", function () {
     var React = require("react"),
         ReactTestUtils = require("react-addons-test-utils"),
-        FormIntegerField= require("../FormIntegerField.jsx"),
-        TestUtils = require("../../../testutil/TestUtils"),
+        FormIntegerField= require("../v1.jsx"),
+        TestUtils = require("../../../../testutil/TestUtils"),
         callback;
 
     beforeEach(function () {
@@ -34,6 +34,20 @@ describe("FormIntegerField", function () {
         //Expect properly named labelText
         var label = TestUtils.findRenderedDOMNodeWithClass(component,"label-text");
         expect(label.children[0].textContent).toBe("Default Integer Box");
+    });
+
+    it("test arrow key press without initial value and defined min", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormIntegerField onChange={callback} min={10} />
+        );
+
+        //Expect a single input to be renderd with initial value of 40
+        var integer = TestUtils.scryRenderedDOMNodesWithDataId(component,"formIntegerField");
+        var input = integer[0];
+
+        ReactTestUtils.Simulate.keyDown(input, { key: "up arrow", keyCode: 38, which: 38 } );
+        expect(callback.mock.calls.length).toBe(1);
+        expect(callback.mock.calls[0][0]).toBe(10);
     });
 
     it("test up/down key press and up/down spinner press", function () {
@@ -232,5 +246,14 @@ describe("FormIntegerField", function () {
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         expect(ReactTestUtils.isDOMComponent(input)).toBeTruthy();
         expect(input.disabled).toBeTruthy();
+    });
+
+    it("handles change with empty value", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormIntegerField onChange={callback} value={10} controlled={true} />
+        );
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        ReactTestUtils.Simulate.change(input, { target: { value: "" } } );
+        expect(callback.mock.calls.length).toBe(1);
     });
 });

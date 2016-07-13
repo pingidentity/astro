@@ -1,5 +1,5 @@
-
 jest.dontMock("../Modal.jsx");
+jest.dontMock("../If.jsx");
 jest.dontMock("../../../util/EventUtils.js");
 
 describe("ModalTest", function () {
@@ -86,11 +86,11 @@ describe("ModalTest", function () {
         expect(modals.length).toEqual(0);
     });
 
-    it("Modal do not render data-ids if not provided", function () {
+    it("Modal render default data-ids if not provided", function () {
         var component = getComponent({ expanded: true }),
             modal = TestUtils.findRenderedDOMNodeWithClass(component, "modal");
 
-        expect(modal.getAttribute("data-id")).toBeFalsy();
+        expect(modal.getAttribute("data-id")).toEqual("modal-button");
     });
 
     it("Modal render data-ids if provided", function () {
@@ -99,6 +99,17 @@ describe("ModalTest", function () {
             modal = TestUtils.findRenderedDOMNodeWithDataId(component, did);
 
         expect(ReactTestUtils.isDOMComponent(modal)).toBeTruthy();
+    });
+
+    it("Modal render id if provided", function () {
+        console.warn = jest.genMockFunction();
+
+        var component = getComponent({ expanded: true, id: "myid" }),
+            modal = TestUtils.findRenderedDOMNodeWithClass(component, "modal");
+
+        expect(console.warn).toBeCalledWith("Deprecated: use data-id instead of id. " +
+                                            "Support for id will be removed in next version");
+        expect(modal.getAttribute("data-id")).toEqual("myid");
     });
 
     /*

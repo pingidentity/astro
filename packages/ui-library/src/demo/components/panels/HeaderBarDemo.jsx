@@ -6,9 +6,9 @@ var HeaderBarDemo = React.createClass({
         var initState = HeaderBar.Reducer(null, {});
 
         return HeaderBar.Reducer(initState, HeaderBar.Actions.init([
-            { id: "help", title: "Documentation" },
-            { id: "cog", children: [{ id: "cog", label: "Cog" }] },
-            { id: "account", children: [{ id: "globe", label: "Globe" }] }
+            { id: "help", title: "Help" },
+            { id: "account", label: "John Doe",
+                    children: [{ id: "globe", title: "Internet", label: "Internet", url: "http://google.com" }] }
         ]));
     },
 
@@ -20,7 +20,7 @@ var HeaderBarDemo = React.createClass({
         //the header bar is styled with position fixed so it's not possible to have a demo for it
         return (
             <HeaderBar {...this.state}
-                onItemClick={this._handleItemClick} />);
+                onItemValueChange={this._handleItemClick} />);
     }
 });
 

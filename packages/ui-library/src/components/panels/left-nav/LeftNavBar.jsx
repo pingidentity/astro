@@ -2,26 +2,38 @@ var React = require("re-react"),
     ReactDOM = require("react-dom"),
     classnames = require("classnames"),
     Copyright = require("./Copyright.jsx"),
+    Utils = require("../../../util/Utils"),
     _ = require("underscore");
 
 /**
- * An object describing a leaf in the LeftNav
  * @typedef {object} LeftNavBar#Node
- * @property {string} label - The label of the node
- * @property {string} id - A unique string identifier.  This value will be passed back to the onItemClick callback
+ * @desc An object describing a leaf in the LeftNav
+ * @property {string} label
+ *              The label of the node
+ * @property {string} id
+ *              A unique string identifier.  This value will be passed back to the onItemValueChange callback.
  */
 
 /**
  * @typedef {object} LeftNavBar#Section
- * @property {string} label - The label of the section
- * @property {string} id - A unique string identifier.  This value will be passed back to the onSectionClick callback
- * @property {LeftNavBar#Node[]} [children] - An optional array of children under this section
+ * @property {string} label
+ *              The label of the section
+ * @property {string} id
+ *              A unique string identifier.  This value will be passed back to the onSectionValueChange callback.
+ * @property {LeftNavBar#Node[]} [children]
+ *              An optional array of children under this section
  */
 
 /**
- * This callback type is passed of onItemClick or onSectionClick
- * @callback LeftNavBar#ClickCallback
- * @param {string} id - The id of the item that was clicked
+ * @callback LeftNavBar~onSectionValueChange
+ * @param {string} id
+ *             The id of the item that was clicked
+ */
+
+/**
+ * @callback LeftNavBar~onItemValueChange
+ * @param {string} id
+ *             The id of the item that was clicked
  */
 
 /**
@@ -39,13 +51,26 @@ var React = require("re-react"),
  * As a result, the approach taken was to pass in a data structure to the LeftNav as a property and leave it up to it to
  * map that data to whatever internal markup it wants.
  *
- * @param {LeftNavBar#Section[]} tree - A prop which describes the structure of the nav tree.  This will be an array of
- * Section objects, each of which may have an array of Node objects as its children.  Please refer to the example below.
- * @param {object} [openNode] = A hash map of ids and their open state
- * @param {LeftNavBar#ClickCallback} [onSectionClick] - A callback which will be excuted when any section node is clicked.
- * The callback will be given 1 parameter equal to the id of the item clicked.
- * @param {LeftNavBar#ClickCallback} [onItemClick] - A callback which will be executed when any leaf node is clicked.
- * The callback will be given 1 parameter equal to the id of the item clicked.
+ * @param {string} [data-id="left-nav-bar"]
+ *          To define the base "data-id" value for the top-level HTML container.
+ * @param {LeftNavBar#Section[]} tree
+ *          A prop which describes the structure of the nav tree.  This will be an array of
+ *          Section objects, each of which may have an array of Node objects as its children.
+ *          Please refer to the example below.
+ * @param {object} [openNode]
+ *          A hash map of ids and their open state. This is used internally by the Reducer to maintain
+ *          expand/collapse state.
+ * @param {LeftNavBar~onSectionValueChange} [onSectionValueChange]
+ *          A callback which will be excuted when any section node is clicked. The callback will be given 1 parameter
+ *          equal to the id of the item clicked.
+ * @param {LeftNavBar~onSectionClick} [onSectionClick]
+ *          DEPRECATED. Use onSectionValueChange instead.
+ * @param {LeftNavBar~onItemValueChange} [onItemValueChange]
+ *          A callback which will be executed when any leaf node is clicked. The callback will be given 1 parameter
+ *          equal to the id of the item clicked.
+ * @param {LeftNavBar~onItemClick} [onItemClick]
+ *          DEPRECATED. Use onItemValueChange instead.
+ *
  * @example
  * var item1 = {label: "Item 1", id: "item1"};
  * var item2 = {label: "Item 2", id: "item2"};
@@ -56,11 +81,14 @@ var React = require("re-react"),
  */
 var LeftNavBar = React.createClass({
     propTypes: {
+        "data-id": React.PropTypes.string,
         tree: React.PropTypes.array.isRequired.affectsRendering,
         selectedNode: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).affectsRendering,
         openNode: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).affectsRendering,
         onSectionClick: React.PropTypes.func,
-        onItemClick: React.PropTypes.func
+        onItemClick: React.PropTypes.func,
+        onSectionValueChange: React.PropTypes.func,
+        onItemValueChange: React.PropTypes.func
     },
 
     _rerender: function () {
@@ -73,12 +101,14 @@ var LeftNavBar = React.createClass({
     },
 
     _renderSection: function (section) {
+        var itemclick = this.props.onItemClick || this.props.onItemValueChange;
+        var sectionclick = this.props.onSectionClick || this.props.onSectionValueChange;
         return (
             <LeftNavSection {...section} key={section.id} data-id={section.id}
-                selectedNode={this.props.selectedNode}
-                onItemClick={this.props.onItemClick}
-                onSectionClick={this.props.onSectionClick}
-                open={this.props.openNode === section.id} />);
+                    selectedNode={this.props.selectedNode}
+                    onItemValueChange={itemclick}
+                    onSectionValueChange={sectionclick}
+                    open={this.props.openNode === section.id} />);
     },
 
     _handleResize: function () {
@@ -116,11 +146,19 @@ var LeftNavBar = React.createClass({
         };
     },
 
+    getDefaultProps: function () {
+        return {
+            "data-id": "left-nav-bar"
+        };
+    },
+
     /**
+     * @ignore
      * @method
-     * @name LeftNavBar#componentDidUpdate
-     * @param {object} prevProps - Previous props
      * @desc After each render, we need to check if the NavBar highlter needs to be slid over a new item
+     * @name LeftNavBar~componentDidUpdate
+     * @param {object} prevProps
+     *          Previous props
      */
     componentDidUpdate: function (prevProps) {
         //it is generally bad practice to touch the dom after rendering and also bad practice to set state within
@@ -191,6 +229,15 @@ var LeftNavBar = React.createClass({
         }
     },
 
+    componentWillMount: function () {
+        if (this.props.onItemClick) {
+            Utils.deprecateWarn("onItemClick", "onItemValueChange");
+        }
+        if (this.props.onSectionClick) {
+            Utils.deprecateWarn("onSectionClick", "onSectionValueChange");
+        }
+    },
+
     render: function () {
         return (
             <div id="nav" ref="nav" className={classnames({ scrollable: this.state.scrollable })}>
@@ -211,18 +258,21 @@ var LeftNavBar = React.createClass({
  * @class LeftNavSection
  * @private
  * @desc Internal class which renders a section of the LeftNavBar
- * @param {function} onItemClick - The callback for when an leaf is clicked.  Will be passed back the
- * id of the clicked item
- * @param {function} onSectionClick - The callback for when a section label is clicked.  Will be passed
- * back the id of the clicked section
- * @param {bool} open - indicates if the section is open
- * @param {string} id - The id of the component (this is what will be passed back to the onSectionClick handler
- * @param {string} data-id - This may or may not be the same as the id.
+ * @param {string} data-id
+ *          This may or may not be the same as the id.
+ * @param {string} id
+ *          The id of the component (this is what will be passed back to the onSectionValueChange handler)
+ * @param {boolean} open
+ *          Indicates if the section is open
+ * @param {function} onItemValueChange
+ *          The callback for when an leaf is clicked.  Will be passed back the id of the clicked item.
+ * @param {function} onSectionValueChange
+ *          The callback for when a section label is clicked.  Will be passed back the id of the clicked section.
  */
 var LeftNavSection = React.createClass({
     propTypes: {
-        onItemClick: React.PropTypes.func,
-        onSectionClick: React.PropTypes.func,
+        onItemValueChange: React.PropTypes.func,
+        onSectionValueChange: React.PropTypes.func,
         open: React.PropTypes.bool,
         id: React.PropTypes.string,
         "data-id": React.PropTypes.string
@@ -233,11 +283,11 @@ var LeftNavSection = React.createClass({
      * right id back to the click handler.
      */
     _handleItemClick: function (id) {
-        this.props.onItemClick(id);
+        this.props.onItemValueChange(id);
     },
 
     _handleSectionClick: function (e) {
-        this.props.onSectionClick(e.target.getAttribute("data-id").slice(0, -6));
+        this.props.onSectionValueChange(e.target.getAttribute("data-id").slice(0, -6));
     },
 
     render: function () {

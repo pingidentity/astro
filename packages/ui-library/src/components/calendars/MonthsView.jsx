@@ -1,5 +1,5 @@
 var React = require("react");
-var css = require("classnames");
+var classnames = require("classnames");
 var moment = require("moment-range");
 var Cell = require("./Cell.jsx");
 var ViewHeader = require("./ViewHeader.jsx");
@@ -7,21 +7,31 @@ var ViewHeader = require("./ViewHeader.jsx");
 module.exports = React.createClass({
 
     propTypes: {
-        date: React.PropTypes.object.isRequired
+        "data-id": React.PropTypes.string,
+        date: React.PropTypes.object.isRequired,
+        onPrevView: React.PropTypes.func,
+        onNextView: React.PropTypes.func,
+        onSetDate: React.PropTypes.func
+    },
+
+    getDefaultProps: function () {
+        return {
+            "data-id": "months-view"
+        };
     },
 
     next: function () {
-        this.props.setDate(this.props.date.add(1, "years"));
+        this.props.onSetDate(this.props.date.add(1, "years"));
     },
 
     prev: function () {
-        this.props.setDate(this.props.date.subtract(1, "years"));
+        this.props.onSetDate(this.props.date.subtract(1, "years"));
     },
 
     cellClick: function (e) {
         var month = e.target.innerHTML;
         var date = this.props.date.month(month);
-        this.props.prevView(date);
+        this.props.onPrevView(date);
     },
 
     getMonth: function () {
@@ -38,22 +48,22 @@ module.exports = React.createClass({
 
     render: function () {
         var months = this.getMonth().map(function (item, i) {
-            var _class = css({
+            var className = classnames({
                 month: true,
                 current: item.curr
             });
-            return <Cell value={item.label} classes={_class} key={i} />;
+            return <Cell data-id={"months-cell-" + i} value={item.label} className={className} key={i} />;
         });
 
         var currentDate = this.props.date.format("YYYY");
 
         return (
-            <div className="months-view" >
+            <div data-id={this.props["data-id"]} className="months-view" >
                 <ViewHeader
-                    prev={this.prev}
-                    next={this.next}
+                    onPrev={this.prev}
+                    onNext={this.next}
                     data={currentDate}
-                    titleAction={this.props.nextView} />
+                    onClick={this.props.onNextView} />
 
                 <div className="months" onClick={this.cellClick}>{months}</div>
             </div>

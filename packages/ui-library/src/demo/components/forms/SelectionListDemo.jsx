@@ -1,7 +1,7 @@
 var React = require("react"),
     _ = require("underscore"),
     _s = require("underscore.string"),
-    SelectionList = require("../../../components/forms/SelectionList.jsx"),
+    SelectionList = require("../../../components/forms/selection-list/index"),
     DetailsTooltip = require("../../../components/tooltips/DetailsTooltip.jsx");
 
 var SelectionListDemo = React.createClass({
@@ -96,18 +96,20 @@ var SelectionListDemo = React.createClass({
                         Selected Radio ID = {this.state.singleSelectId1}
                     </div>
                     <DetailsTooltip
-                            positionStyle="bottom right"
+                            positionClassName="bottom right"
                             className="input-selection-list-tooltip"
                             label="Single Selection List"
                             showClose={false}
                             controlled={false}
                             onToggle={function () {}}>
-                        <SelectionList data-id="single-select-1" type={SelectionList.types.SINGLE}
-                            items={singleSelectItems}
-                            selectedItemIds={this.state.singleSelectId1}
-                            showSearchBox={true}
-                            searchPlaceholder="Search..."
-                            onChange={this._onSingleSelectionListChange1} />
+                        <SelectionList data-id="single-select-1"
+                                controlled={false}
+                                type={SelectionList.ListType.SINGLE}
+                                items={singleSelectItems}
+                                selectedItemIds={this.state.singleSelectId1}
+                                showSearchBox={true}
+                                searchPlaceholder="Search..."
+                                onValueChange={this._onSingleSelectionListChange1} />
                     </DetailsTooltip>
                     <br />
                     <hr />
@@ -119,12 +121,14 @@ var SelectionListDemo = React.createClass({
                     <div>
                         Selected Radio ID = {this.state.singleSelectId2}
                     </div>
-                        <SelectionList data-id="single-select-2" type={SelectionList.types.SINGLE}
+                    <SelectionList data-id="single-select-2"
+                            controlled={false}
+                            type={SelectionList.ListType.SINGLE}
                             items={singleSelectItems}
                             selectedItemIds={this.state.singleSelectId2}
                             showSearchBox={true}
                             searchPlaceholder="Search..."
-                            onChange={this._onSingleSelectionListChange2} />
+                            onValueChange={this._onSingleSelectionListChange2} />
                     <br />
                     <hr />
                     <br />
@@ -135,12 +139,14 @@ var SelectionListDemo = React.createClass({
                     <div>
                         Selected Radio ID = {this.state.singleSelectId3}
                     </div>
-                        <SelectionList data-id="single-select-3" type={SelectionList.types.SINGLE}
+                    <SelectionList data-id="single-select-3"
+                            controlled={false}
+                            type={SelectionList.ListType.SINGLE}
                             items={singleSelectItems}
                             selectedItemIds={this.state.singleSelectId3}
                             showSearchBox={false}
                             searchPlaceholder="Search..."
-                            onChange={this._onSingleSelectionListChange3} />
+                            onValueChange={this._onSingleSelectionListChange3} />
                     <br />
                     <hr />
                     <br />
@@ -153,18 +159,20 @@ var SelectionListDemo = React.createClass({
                         Selected Radio ID = {this.state.multiSelectIds1.join()}
                     </div>
                     <DetailsTooltip
-                            positionStyle="bottom right"
+                            positionClassName="bottom right"
                             className="input-selection-list-tooltip"
                             label="Multi Selection List"
                             showClose={false}
                             controlled={false}
                             onToggle={function () {}}>
-                        <SelectionList data-id="multi-select-1" type={SelectionList.types.MULTI}
-                            items={multiSelectItems}
-                            selectedItemIds={this.state.multiSelectIds1}
-                            showSearchBox={true}
-                            searchPlaceholder={"Search..."}
-                            onChange={this._onMultiSelectionListChange1} />
+                        <SelectionList data-id="multi-select-1"
+                                controlled={false}
+                                type={SelectionList.ListType.MULTI}
+                                items={multiSelectItems}
+                                selectedItemIds={this.state.multiSelectIds1}
+                                showSearchBox={true}
+                                searchPlaceholder={"Search..."}
+                                onValueChange={this._onMultiSelectionListChange1} />
                     </DetailsTooltip>
                     <br />
                     <hr />
@@ -172,17 +180,17 @@ var SelectionListDemo = React.createClass({
                 </div>
 
                 <div>
-                    <h3>A standing multi-select list (custom search - sample search: Fruit --> Grape Fruit)</h3>
+                    <h3>A standing multi-select list (custom search using the endsWith operator)</h3>
                     <div>
                         Selected Radio ID = {this.state.multiSelectIds2.join()}
                     </div>
-                    <SelectionList data-id="multi-select-2" type={SelectionList.types.MULTI}
+                    <SelectionList data-id="multi-select-2" type={SelectionList.ListType.MULTI}
                         items={multiSelectItems}
                         selectedItemIds={this.state.multiSelectIds2}
                         showSearchBox={true}
                         searchPlaceholder={"Search..."}
-                        customSearchFunc={this._myCustomSearch}
-                        onChange={this._onMultiSelectionListChange2} />
+                        onSearch={this._myCustomSearch}
+                        onValueChange={this._onMultiSelectionListChange2} />
                     <br />
                     <hr />
                     <br />
@@ -193,11 +201,13 @@ var SelectionListDemo = React.createClass({
                     <div>
                         Selected Radio ID = {this.state.multiSelectIds3.join()}
                     </div>
-                    <SelectionList data-id="multi-select-3" type={SelectionList.types.MULTI}
-                        items={multiSelectItems}
-                        selectedItemIds={this.state.multiSelectIds3}
-                        showSearchBox={false}
-                        onChange={this._onMultiSelectionListChange3} />
+                    <SelectionList data-id="multi-select-3"
+                            controlled={false}
+                            type={SelectionList.ListType.MULTI}
+                            items={multiSelectItems}
+                            selectedItemIds={this.state.multiSelectIds3}
+                            showSearchBox={false}
+                            onValueChange={this._onMultiSelectionListChange3} />
                 </div>
             </div>
         );

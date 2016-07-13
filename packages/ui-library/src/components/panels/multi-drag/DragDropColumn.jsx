@@ -7,30 +7,50 @@ var React = require("re-react"),
     _ = require("underscore");
 
 /**
+ * @class MultiDrag#DragDropColumn
  * @private
- * @class MultiDrag#DDColumn
- * @desc This component is internal to the MultiDrag component and is used to render a column of drag/drop rows.
- * @param {object[]} rows - The row objects.  The shape of these objects must correspond to the expected props
- * of your contentType.
- * @param {string} name - The name of the column
- * @param {number} index - The index of the column.  Used when executing callbacks
- * @param {string} filter - the filter to display in the search field
- * @param {object} contentType - A react component to be used as a template for rendering rows.
- * @param {string} labelEmpty - The placeholder string for when a column is empty
- * @param {bool} [showSearch=false] - determines if the searchbox should be shown
- * @param {string} [className] - Optional classname
- * @param {number} [ghostRowAt] - display a ghost row to preview where a row would be inserted
+ * @ignore
  *
- * @param {function} onSearch - onSearch callback.
- * @param {function} onDrag - onDrag callback.  Will be given a MultiDrag#MoveDescriptor
- * @param {function} onDrop - onDrop callback.  Will be given a MultiDrag#MoveDescriptor
- * @param {function} onCancel - A callback executed after every drag event ends
- * @param {function} [onScrolledToTop] - a callback executed when the list is scrolled to the top.
- * @param {function} [onScrolledToBottom] - a callback executed when the list is scrolled to the bottom (can be used
- * to fetch more data.
+ * @desc This component is internal to the MultiDrag component and is used to render a column of drag/drop rows.
+ *
+ * @param {string} [data-id="drag-drop-column"]
+ *    To define the base "data-id" value for the top-level HTML container.
+ *
+ * @param {object[]} rows
+ *    The row objects. The shape of these objects must correspond to the expected props of your contentType.
+ * @param {string} name
+ *    The name of the column.
+ * @param {number} index
+ *    The index of the column. Used when executing callbacks.
+ * @param {string} filter
+ *    The filter to display in the search field.
+ * @param {object} contentType
+ *    A react component to be used as a template for rendering rows.
+ * @param {string} [labelEmpty]
+ *    The placeholder string for when a column is empty.
+ * @param {boolean} [showSearch=false]
+ *    Determines if the searchbox should be shown.
+ * @param {string} [className]
+ *    CSS classes to set on the top-level HTML container.
+ * @param {number} [ghostRowAt]
+ *    Display a ghost row to preview where a row would be inserted
+ *
+ * @param {MultiDrag~onSearch} onSearch
+ *    Callback to be triggered when a column is searched.
+ * @param {MultiDrag~onDragDrop} onDrag
+ *    Callback to be triggered when a row is dragged.
+ * @param {MultiDrag~onDragDrop} onDrop
+ *    Callback to be triggered when a row id dropped.
+ * @param {MultiDrag~onCancel} onCancel
+ *    Callback to be triggered when a drag event ends.
+ * @param {MultiDrag~onScrolledToPosition} [onScrolledToTop]
+ *    Callback to be triggered when the list is scrolled to the top.
+ * @param {MultiDrag~onScrolledToPosition} [onScrolledToBottom]
+ *    Callback to be triggered when the list is scrolled to the bottom. Can be used to fetch more data.
  */
 module.exports = React.createClass({
     propTypes: {
+        "data-id": React.PropTypes.string,
         rows: React.PropTypes.arrayOf(
             React.PropTypes.object
         ).isRequired.affectsRendering,
@@ -44,6 +64,7 @@ module.exports = React.createClass({
         ghostRowAt: React.PropTypes.number.affectsRendering,
         className: React.PropTypes.string.affectsRendering,
         //callbacks
+        onSearch: React.PropTypes.func.isRequired,
         onDrag: React.PropTypes.func.isRequired,
         onDrop: React.PropTypes.func.isRequired,
         onCancel: React.PropTypes.func.isRequired,
@@ -53,8 +74,8 @@ module.exports = React.createClass({
 
     getDefaultProps: function () {
         return {
+            "data-id": "drag-drop-column",
             showSearch: false,
-            labelEmpty: "Empty",
             onScrolledToBottom: _.noop,
             onScrolledToTop: _.noop
         };
@@ -152,7 +173,7 @@ module.exports = React.createClass({
 
     render: function () {
         return (
-            <div className={this.props.className}>
+            <div data-id={this.props["data-id"]} className={this.props.className}>
                 <FormLabel value={this.props.name} />
 
                 { this._renderSearch() }

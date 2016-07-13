@@ -5,41 +5,79 @@ var React = require("re-react"),
     ButtonCell = require("./cells/ButtonCell.jsx");
 
 /**
- * @class Row
+ * @callback Grid#Row~onRowExpanded
  *
+ * @param {number} rowIndex
+ *     Current expanded row index
+ **/
+
+/**
+ * @typedef Grid#Row~RowData
+ * @desc Data to be displayed to a row which is in key-value format with key being the column name and value being
+ *     value for that column. Value itself can be another object in the format {value: "value"}
+ *
+ * @example
+ *     {
+ *         "column1": "value1",
+ *         "column2": "value2",
+ *         "column3": {value: "value3"}
+ *     }
+ */
+
+/**
+ * @private
+ * @class Grid#Row
  * @desc Row displays an object as a row
  *
- * @param {string} data-id - it is used for a unique data-id
- * @param {object} [rowObject] - data to be displayed to a row
- * @param {number} [rowIndex] - row index
- * @param {array} [columns] - visible columns to determine which cells will be displayed (column paging feature)
- * @param {bool} [rowExpandable] - it is to determine if this row has expandable column
- * @param {Row~onChangeCallback} [onRowExpanded] - callback to be triggered when a row is expanded
+ * @param {string} data-id
+ *     To define the base "data-id" value for top-level HTML container.
+ *
+ * @param {Grid#Row~RowData} [rowObject]
+ *     Data to be displayed to a row.
+ * @param {number} [rowIndex]
+ *     Row index
+ * @param {Grid#Column[]} [columns]
+ *     Visible columns to determine which cells will be displayed (column paging feature)
+ * @param {boolean} [rowExpandable=false]
+ *     Determine if this row has expandable column
+ * @param {Grid#Row~onRowExpanded} [onRowExpanded]
+ *     Callback to be triggered when a row is expanded
  **/
+
 var Row = React.createClass({
 
     propTypes: {
         "data-id": React.PropTypes.string.isRequired,
-        rowObject: React.PropTypes.object,
-        rowIndex: React.PropTypes.number,
-        columns: React.PropTypes.array,
-        onRowExpanded: React.PropTypes.func,
-        rowExpandable: React.PropTypes.bool
+        rowObject: React.PropTypes.object.affectsRendering,
+        rowIndex: React.PropTypes.number.affectsRendering,
+        columns: React.PropTypes.array.affectsRendering,
+        rowExpandable: React.PropTypes.bool.affectsRendering,
+        onRowExpanded: React.PropTypes.func
+    },
+
+    getDefaultProps: function () {
+        return {
+            rowExpandable: false
+        };
     },
 
     /*
      * Prepares content for a cell. Content can be a text, a component or a html element.
+     * Any React component that needs to be rendered within a cell needs to have the callback onGridCellAction.
      */
     _getCellContent: function (cellContent, column, rowObject) {
         var cell = column.props.children;
 
-        if (React.isValidElement(cell) && cell.props.onCallBack !== undefined) {
-            var _onCallBack = cell.props.onCallBack.bind(null, rowObject);
-            var updatedCellProps = {
-                onCallBack: _onCallBack,
-                value: cellContent
-            };
-            cellContent = React.cloneElement(cell, updatedCellProps);
+        if (React.isValidElement(cell)) {
+            var _onGridCellAction = cell.props.onGridCellAction || cell.props.onCallBack;
+            if (_onGridCellAction) {
+                _onGridCellAction = _onGridCellAction.bind(null, rowObject);
+                var updatedCellProps = {
+                    onGridCellAction: _onGridCellAction,
+                    value: cellContent
+                };
+                cellContent = React.cloneElement(cell, updatedCellProps);
+            }
         }
 
         return cellContent;

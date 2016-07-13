@@ -1,53 +1,132 @@
 var React = require("re-react"),
+    classnames = require("classnames"),
     DragDropColumn = require("./DragDropColumn.jsx"),
     DragDropContext = require("react-dnd").DragDropContext,
     HTML5Backend = require("react-dnd/modules/backends/HTML5");
 
 /**
- * @typedef {object} MultiDrag#ColumnData
- * @property {string} name - The name of the column
- * @property {object[]} rows - An array of objects that constintute the rows.  These are free
- * to have any shape, remember that this will correspond to the props that will be injected to
- * each row when rendering them.
- * @property {string} [filter] - a filter to display for the column
+ * @typedef {object} MultiDrag~ColumnData
+ *
+ * @property {string} name
+ *    The name of the column.
+ * @property {object[]} rows
+ *    An array of objects that constintute the rows. These are free to have any shape,
+ *    remember that this will correspond to the props that will be injected to each row when rendering them.
+ * @property {string} [filter]
+ *    A filter to display for the column.
  */
 
 /**
- * @typedef {object} MultiDrag#MoveDescriptor
- * @property {object} from - The dragged item description
- * @property {number} from.column - The column index
- * @property {number} from.index - The row index
- * @property {object} to - The target item description
- * @property {number} to.column - The column index
- * @property {number} to.index - The row index
+ * @typedef {object} MultiDrag~MoveDescriptor
+ *
+ * @property {object} from
+ *    The dragged item description.
+ * @property {number} from.column
+ *    The column index.
+ * @property {number} from.index
+ *    The row index.
+ * @property {object} to
+ *    The target item description.
+ * @property {number} to.column
+ *    The column index.
+ * @property {number} to.index
+ *    The row index.
+ */
+
+ /**
+ * @typedef {object} MultiDrag~previewLocation
+ *
+ * @property {number} column
+ *    The column index of the preview.
+ * @property {numer} row
+ *    The row index of the preview.
+ */
+
+ /**
+ * @callback MultiDrag~onSearch
+ *
+ * @param {number} index
+ *    Since the multi-Drag component supports search in all columns,
+ *    each column needs to report which column (via the column index) a search affects.
+ * @param {string} value
+ *    The value to search for.
+ */
+
+ /**
+ * @callback MultiDrag~onDragDrop
+ *
+ * @param {MultiDrag~MoveDescriptor} moveDescriptor
+ *    The move descriptor for the drag.
+ */
+
+ /**
+ * @callback MultiDrag~onCancel
+ */
+
+ /**
+ * @callback MultiDrag~onScrolledToPosition
+ *
+ * @param {number} columnIndex
+ *     The column index for the column scrolled.
  */
 
 /**
  * @class MultiDrag
- * @description A multi-column drag and drop view.  This is designed to allow more than two columns though,
- * the requirements only specify 2 columns needed.  The consumer of the component is responsible for implementing
- * the component type for each row.  The component will iterate over a set of data and coerce each item to a
- * row component.
+ * @desc A multi-column drag and drop view. This is designed to allow more than two columns though,
+ *    the requirements only specify 2 columns needed. The consumer of the component is responsible for implementing
+ *    the component type for each row. The component will iterate over a set of data and coerce each item to a
+ *    row component.
  *
- * @param {MultiDrag#ColumnData[]} columns - The data representing the columns in the component
- * @param {object} [previewMove] - An optional object of shape { column: number, index: number}, which if
- * passed, will render a placeholder in the column and index specified.  This is used to give feedback
- * when a user drags a row to a new location but has not released the mouse.
- * @param {string[]} [classNames] - The classnames to assign to each column.  By default the first column
- * will have rows-available applied and the second rows-added
- * @param {bool} [showSearchOnAllColumns=false] - Display searchbar on all columns
- * @param {bool} [showSearch=false] - Dispaly searchbar on the first column
+ * @param {string} [data-id="multi-drag"]
+ *    To define the base "data-id" value for the top-level HTML container.
+ * @param {string} [className]
+ *    CSS classes to set on the top-level HTML container.
  *
- * @param {function} onDrag - onDrag callback.  Will be given a MultiDrag#MoveDescriptor
- * @param {function} onDrop - onDrop callback.  Will be given a MultiDrag#MoveDescriptor
- * @param {function} onCancel - A callback executed after every drag event ends
- * @param {function} [onScrolledToTop] - a callback executed when the list is scrolled to the top.  Will be given the
- * column index
- * @param {function} [onScrolledToBottom] - a callback executed when the list is scrolled to the bottom (can be used
- * to fetch more data.  Will be given the column index
+ * @param {MultiDrag~ColumnData[]} columns
+ *    The data representing the columns in the component.
+ * @param {MultiDrag~previewLocation} [previewMove]
+ *    If passed, will render a placeholder in MultiDrag~previewLocation specified.
+ *    This is used to give feedback when a user drags a row to a new location but has not released the mouse.
+ * @param {string[]} [classNames]
+ *    The classnames to assign to each column.
+ *    By default the first column will have rows-available applied and the second rows-added.
+ * @param {boolean} [showSearchOnAllColumns=false]
+ *    Display searchbar on all columns.
+ * @param {boolean} [showSearch=false]
+ *    Dispaly searchbar on the first column.
+ *
+ * @param {MultiDrag~onSearch} onSearch
+ *    Callback to be triggered when a column is searched.
+ * @param {MultiDrag~onDragDrop} onDrag
+ *    Callback to be triggered when a row is dragged.
+ * @param {MultiDrag~onDragDrop} onDrop
+ *    Callback to be triggered when a row id dropped.
+ * @param {MultiDrag~onCancel} onCancel
+ *    Callback to be triggered when a drag event ends.
+ * @param {MultiDrag~onScrolledToPosition} [onScrolledToTop]
+ *    Callback to be triggered when the list is scrolled to the top.
+ * @param {MultiDrag~onScrolledToPosition} [onScrolledToBottom]
+ *    Callback to be triggered when the list is scrolled to the bottom. Can be used to fetch more data.
+ *
+ * @example
+ *    <MultiDrag
+ *               showSearchOnAllColumns={this.props.demo.search === "all"}
+ *              showSearch={this.props.demo.search === "first"}
+ *              onSearch={this.onSearch}
+ *              columns={this.props.drag.columns}
+ *              previewMove={this.props.drag.placeholder}
+ *              onScrolledToTop={this.onScrolledToTop}
+ *              onScrolledToBottom={this.onScrolledToBottom}
+ *              onCancel={this.onCancel}
+ *              onDrop={this.onDrop}
+ *              onDrag={this.onDrag}
+ *              contentType={contentType} />
  */
 var MultiDrag = React.createClass({
+
     propTypes: {
+        "data-id": React.PropTypes.string,
+        className: React.PropTypes.string,
         columns: React.PropTypes.arrayOf(
             React.PropTypes.shape({
                 name: React.PropTypes.string,
@@ -57,12 +136,16 @@ var MultiDrag = React.createClass({
         ).isRequired.affectsRendering,
         showSearchOnAllColumns: React.PropTypes.bool.affectsRendering,
         showSearch: React.PropTypes.bool.affectsRendering,
-        previewMove: React.PropTypes.object.affectsRendering,
+        previewMove: React.PropTypes.shape({
+            column: React.PropTypes.number.affectsRendering,
+            row: React.PropTypes.number.affectsRendering
+        }),
         contentType: React.PropTypes.element.isRequired.affectsRendering,
         classNames: React.PropTypes.arrayOf(
             React.PropTypes.string
         ).affectsRendering,
         //callbacks
+        onSearch: React.PropTypes.func.isRequired,
         onDrag: React.PropTypes.func.isRequired,
         onDrop: React.PropTypes.func.isRequired,
         onCancel: React.PropTypes.func.isRequired,
@@ -72,7 +155,10 @@ var MultiDrag = React.createClass({
 
     getDefaultProps: function () {
         return {
-            classNames: ["rows-available", "rows-added"]
+            "data-id": "multi-drag",
+            classNames: ["rows-available", "rows-added"],
+            showSearchOnAllColumns: false,
+            showSearch: false
         };
     },
 
@@ -153,8 +239,10 @@ var MultiDrag = React.createClass({
     render: function () {
         var preview = this.props.previewMove;
 
+        var className = classnames("input-row row-selector", this.props.className);
+
         return (
-            <div className="input-row row-selector">
+            <div data-id={this.props["data-id"]} className={className}>
             {
                 this.props.columns.map(function (column, index) {
                     return (
