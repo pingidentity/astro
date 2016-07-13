@@ -110,9 +110,11 @@ exports.diffProps = function (current, next, list) {
  * @desc Write to log or console.warn a deprecated usage message.
  *
  * @param {string} feature
- *    The name of the feature that is now deprecated
+ *    The name of the feature that is now deprecated.
  * @param {string} useInstead
- *    The name of the feature to use instead
+ *    The name of the feature to use instead.
+ * @param {function} log
+ *    Custom log function to use to log the warning.
  */
 exports.deprecateWarn = function (feature, useInstead, log) {
     var warning = [

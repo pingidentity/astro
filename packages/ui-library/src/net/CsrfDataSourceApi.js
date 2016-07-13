@@ -215,7 +215,7 @@ var Api = {
     },
 
     /**
-    * @alias module:net/CsrfDataSourceApi.unregisterAllMiddlware
+    * @alias module:net/CsrfDataSourceApi.unregisterAllMiddleware
     * @desc Unregisters all middlware.
     */
     unregisterAllMiddleware: function () {
