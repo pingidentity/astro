@@ -1,6 +1,11 @@
 var React = require("react"),
     ColorPicker = require("../../../components/general/ColorPicker.jsx");
 
+/**
+* @name ColorPickerDemo
+* @memberof ColorPicker
+* @desc A demo for ColorPicker
+*/
 var ColorPickerDemo = React.createClass({
 
     getInitialState: function () {

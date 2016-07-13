@@ -2,6 +2,11 @@ var React = require("react");
 var ExpandableRow = require("../../../components/rows/ExpandableRow.jsx");
 var Toggle = require("../../../components/forms/form-toggle");
 
+/**
+* @name ExpandableRowDemo
+* @memberof ExpandableRow
+* @desc A demo for ExpandableRow
+*/
 var ExpandableRowDemo = React.createClass({
 
     _onToggle: function (index) {

@@ -2,6 +2,11 @@ var React = require("react"),
     Redux = require("redux"),
     EditViewSwitched = require("../../../templates/edit-view-switched");
 
+/**
+* @name EditViewSwitchedDemo
+* @memberof EditViewSwitched
+* @desc A demo for EditViewSwitched
+*/
 var EditViewSwitchedDemo = React.createClass({
     componentWillMount: function () {
         this.actions = Redux.bindActionCreators(EditViewSwitched.Actions, this.props.store.dispatch);

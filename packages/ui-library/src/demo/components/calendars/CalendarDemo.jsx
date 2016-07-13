@@ -2,6 +2,11 @@ var React = require("react"),
     moment = require("moment-range"),
     Calendar = require("./../../../components/calendars/Calendar.jsx");
 
+/**
+* @name CalendarDemo
+* @memberof Calendar
+* @desc A demo for Calendar
+*/
 var CalendarDemo = React.createClass({
 
     getInitialState: function () {

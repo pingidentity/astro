@@ -1,6 +1,11 @@
 var React = require("react");
 var Section = require("../../../components/general/CollapsibleSection.jsx");
 
+/**
+* @name CollapsibleSectionDemo
+* @memberof CollapsibleSection
+* @desc A demo for CollapsibleSection
+*/
 var CollapsibleSectionDemo = React.createClass({
 
     getInitialState: function () {

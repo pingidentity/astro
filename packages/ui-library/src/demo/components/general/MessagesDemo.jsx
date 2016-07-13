@@ -2,6 +2,11 @@ var React = require("react"),
     Redux = require("redux"),
     Messages = require("./../../../components/general/messages/");
 
+/**
+* @name MessagesDemo
+* @memberof Messages
+* @desc A demo for Messages
+*/
 var MessagesDemo = React.createClass({
     _addSuccessMessage: function () {
         this.actions.addMessage("New Success Message Added at " + (new Date()).toString(),

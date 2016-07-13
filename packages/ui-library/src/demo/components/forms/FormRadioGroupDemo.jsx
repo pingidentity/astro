@@ -1,6 +1,11 @@
 var React = require("react"),
     FormRadioGroup = require("../../../components/forms/FormRadioGroup.jsx");
 
+/**
+* @name FormRadioGroupDemo
+* @memberof FormRadioGroup
+* @desc A demo for FormRadioGroup
+*/
 var FormRadioGroupDemo = React.createClass({
 
     getInitialState: function () {

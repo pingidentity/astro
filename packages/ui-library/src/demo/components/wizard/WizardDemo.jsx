@@ -5,6 +5,11 @@ var React = require("react"),
     Step = Wizard.Step,
     Choose = Wizard.Choose;
 
+/**
+* @name WizardDemo
+* @memberof Wizard
+* @desc A demo for Wizard
+*/
 var WizardDemo = React.createClass({
     BUTTON_LABELS: {
         labelNext: "next",

@@ -5,8 +5,10 @@ var React = require("react"),
 
 
 /**
- * A demo for FormTextField.
- */
+* @name FormTextFieldDemo
+* @memberof FormTextField
+* @desc A demo for FormTextField
+*/
 var FormTextFieldDemo = React.createClass({
 
     getInitialState: function () {

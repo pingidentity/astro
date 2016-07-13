@@ -4,6 +4,11 @@ var React = require("react"),
     Draggable = require("./../../../components/rows/DragDropRow.jsx"),
     _ = require("underscore");
 
+/**
+* @name DragDropRowDemo
+* @memberof DragDropRow
+* @desc A demo for DragDropRow
+*/
 var DragDropRowDemo = React.createClass({
 
     getInitialState: function () {

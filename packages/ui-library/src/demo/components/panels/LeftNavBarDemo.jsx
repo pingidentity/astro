@@ -1,6 +1,11 @@
 var React = require("react");
 var LeftNavBar = require("../../../components/panels/left-nav");
 
+/**
+* @name LeftNavBarDemo
+* @memberof LeftNavBar
+* @desc A demo for LeftNavBar
+*/
 var LeftNavDemo = React.createClass({
     getInitialState: function () {
         var initState = LeftNavBar.Reducer(null, {});

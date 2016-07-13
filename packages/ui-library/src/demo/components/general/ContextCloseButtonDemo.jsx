@@ -1,6 +1,11 @@
 var React = require("react");
 var ContextCloseButton = require("./../../../components/general/context-close-button");
 
+/**
+* @name ContextCloseButtonDemo
+* @memberof ContextCloseButton
+* @desc A demo for ContextCloseButton
+*/
 var ContextComponent = React.createClass({
     propTypes: {
         clickCallback: React.PropTypes.func,

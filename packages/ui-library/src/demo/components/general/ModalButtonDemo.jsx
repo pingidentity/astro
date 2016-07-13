@@ -1,6 +1,11 @@
 var React = require("react");
 var ModalButton = require("./../../../components/general/ModalButton.jsx");
 
+/**
+* @name ModalButtonDemo
+* @memberof ModalButton
+* @desc A demo for ModalButton
+*/
 var ModalButtonDemo = React.createClass({
 
     _handleOpen: function (index) {

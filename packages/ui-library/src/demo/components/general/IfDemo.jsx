@@ -1,6 +1,11 @@
 var React = require("react");
 var If = require("./../../../components/general/If.jsx");
 
+/**
+* @name IfDemo
+* @memberof If
+* @desc A demo for If
+*/
 var IfDemo = React.createClass({
 
     getInitialState: function () {

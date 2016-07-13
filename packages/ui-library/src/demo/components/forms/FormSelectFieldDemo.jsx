@@ -2,8 +2,10 @@ var React = require("react");
 var FormSelectField = require("./../../../components/forms/form-select-field");
 
 /**
- * A demo for FormSelectField.
- */
+* @name FormSelectFieldDemo
+* @memberof FormSelectField
+* @desc A demo for FormSelectField
+*/
 var FormSelectFieldDemo = React.createClass({
 
     getInitialState: function () {

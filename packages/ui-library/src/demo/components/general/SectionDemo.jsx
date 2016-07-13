@@ -1,6 +1,11 @@
 var React = require("react");
 var Section = require("../../../components/general/Section.jsx");
 
+/**
+* @name SectionDemo
+* @memberof Section
+* @desc A demo for Section
+*/
 var SectionDemo = React.createClass({
 
     getInitialState: function () {

@@ -1,6 +1,11 @@
 var React = require("react"),
     RockerButton = require("../../../components/forms/RockerButton.jsx");
 
+/**
+* @name RockerButtonDemo
+* @memberof RockerButton
+* @desc A demo for RockerButton
+*/
 var RockerButtonDemo = React.createClass({
 
     getInitialState: function () {

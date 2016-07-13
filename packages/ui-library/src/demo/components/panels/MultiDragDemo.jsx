@@ -9,6 +9,12 @@ var React = require("react"),
     keyMirror = require("fbjs/lib/keyMirror"),
     data = require("./MultiDragData.js");
 
+/**
+* @name MultiDragDemo
+* @memberof MultiDrag
+* @desc A demo for MultiDrag
+*/
+
 var Types = keyMirror({
     GRID_DEMO_SET: null,
     GRID_DEMO_TOGGLE_ICON: null

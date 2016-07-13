@@ -1,7 +1,11 @@
 var React = require("react"),
     Layout = require("../../../components/general/ColumnLayout.jsx");
 
-
+/**
+* @name ColumnLayoutDemo
+* @memberof ColumnLayout
+* @desc A demo for ColumnLayout
+*/
 var ColumnLayoutDemo = React.createClass({
 
     render: function () {

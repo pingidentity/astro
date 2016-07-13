@@ -3,6 +3,11 @@ var TimePicker = require("./../../../components/general/TimePicker.jsx");
 
 var Calendar = require("./../../../components/calendars/Calendar.jsx");
 
+/**
+* @name TimePickerDemo
+* @memberof TimePicker
+* @desc A demo for TimePicker
+*/
 var TimePickerDemo = React.createClass({
     _handleValueChange: function (index, value) {
         var newState = {};

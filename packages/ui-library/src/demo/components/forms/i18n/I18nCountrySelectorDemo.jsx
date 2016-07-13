@@ -1,6 +1,11 @@
 var React = require("react"),
     I18nCountrySelector = require("../../../../components/forms/i18n/I18nCountrySelector.jsx");
 
+/**
+* @name I18nCountrySelectorDemo
+* @memberof I18nCountrySelector
+* @desc A demo for I18nCountrySelector
+*/
 var I18nCountrySelectorDemo = React.createClass({
 
     _handleValueChange: function (countryCode) {

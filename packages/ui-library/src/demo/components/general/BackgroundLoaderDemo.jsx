@@ -1,6 +1,11 @@
 var React = require("react");
 var BackgroundLoader = require("./../../../components/general/BackgroundLoader.jsx");
 
+/**
+* @name BackgroundLoaderDemo
+* @memberof BackgroundLoader
+* @desc A demo for BackgroundLoader
+*/
 var BackgroundLoaderDemo = React.createClass({
 
     _loadData: function () {

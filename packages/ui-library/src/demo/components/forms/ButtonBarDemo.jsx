@@ -2,6 +2,11 @@
 var React = require("react"),
     ButtonBar = require("../../../components/forms/ButtonBar.jsx");
 
+/**
+* @name ButtonBarDemo
+* @memberof ButtonBar
+* @desc A demo for ButtonBar
+*/
 var ButtonBarDemo = React.createClass({
 
     _handleCancel: function () {

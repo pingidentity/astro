@@ -2,6 +2,11 @@ var React = require("react"),
     Redux = require("redux"),
     EditViewCollapsible = require("../../../templates/edit-view-collapsible");
 
+/**
+* @name EditViewCollapsibleDemo
+* @memberof EditViewCollapsible
+* @desc A demo for EditViewCollapsible
+*/
 var EditViewCollapsibleDemo = React.createClass({
     componentWillMount: function () {
         this.actions = Redux.bindActionCreators(EditViewCollapsible.Actions, this.props.store.dispatch);

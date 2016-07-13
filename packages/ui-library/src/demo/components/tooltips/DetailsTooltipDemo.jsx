@@ -2,6 +2,11 @@ var React = require("re-react");
 var _ = require("underscore");
 var DetailsTooltip = require("../../../components/tooltips/DetailsTooltip.jsx");
 
+/**
+* @name DetailsTooltipDemo
+* @memberof DetailsTooltip
+* @desc A demo for DetailsTooltip
+*/
 var DetailsTooltipDemo = React.createClass({
 
     numDemos: 6,

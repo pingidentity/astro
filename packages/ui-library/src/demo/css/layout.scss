@@ -54,6 +54,11 @@ $sidenav-lineheight: 22px;
 				content: '';
 			}
 		}
+		.toggle-demo-source {
+			&:before {
+				content: '';
+			}
+		}
 		&.source {
 			.toggle {
 				&:before {
@@ -65,6 +70,28 @@ $sidenav-lineheight: 22px;
 					content: 'close source -';
 				}
 			}
+			.toggle-demo-source {
+				&:before {
+					content: '';
+				}
+			}
+		}
+		&.demo-source {
+			.toggle {
+				&:before {
+					content: '';
+				}
+			}
+			.toggle-source {
+				&:before {
+					content: '';
+				}
+			}
+			.toggle-demo-source {
+				&:before {
+					content: 'close demo source -';
+				}
+			}
 		}
 		iframe {
 			height: 100%;
@@ -74,7 +101,7 @@ $sidenav-lineheight: 22px;
 		}
 	}
 
-	.toggle, .toggle-source {
+	.toggle, .toggle-source, .toggle-demo-source {
 		position: absolute;
 		right: 30px;
 		cursor: pointer;
@@ -90,8 +117,15 @@ $sidenav-lineheight: 22px;
 			content: 'expand documentation +'
 		}
 	}
-	.toggle-source {
+	.toggle-demo-source {
 		top: 50px;
+
+		&:before {
+			content: 'view demo source +';
+		}
+	}
+	.toggle-source {
+		top: 70px;
 
 		&:before {
 			content: 'view source +'

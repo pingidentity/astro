@@ -1,6 +1,11 @@
 var React = require("react");
 var EllipsisLoader = require("./../../../components/general/EllipsisLoader.jsx");
 
+/**
+* @name EllipsisLoaderDemo
+* @memberof EllipsisLoader
+* @desc A demo for EllipsisLoader
+*/
 var EllipsisLoaderDemo = React.createClass({
 
     getInitialState: function () {

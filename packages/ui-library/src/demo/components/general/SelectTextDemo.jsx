@@ -3,6 +3,11 @@ var SelectText = require("./../../../components/general/SelectText.jsx");
 var FormTextField = require("./../../../components/forms/form-text-field");
 var FormFieldConstants = require("./../../../constants/FormFieldConstants");
 
+/**
+* @name SelectTextDemo
+* @memberof SelectText
+* @desc A demo for SelectText
+*/
 var SelectTextDemo = React.createClass({
     render: function () {
         return (

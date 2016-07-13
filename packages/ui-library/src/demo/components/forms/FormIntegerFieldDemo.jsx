@@ -2,8 +2,10 @@ var React = require("react");
 var FormIntegerField = require("./../../../components/forms/form-integer-field/index.js").v2;
 
 /**
- * A demo for FormTextField.
- */
+* @name FormIntegerFieldDemo
+* @memberof FormIntegerField
+* @desc A demo for FormIntegerField
+*/
 var FormIntegerFieldDemo = React.createClass({
 
     getInitialState: function () {

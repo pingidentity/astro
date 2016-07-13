@@ -2,6 +2,11 @@ var React = require("react"),
     ReactDOM = require("react-dom"),
     IntroTutorial = require("../../../../components/help/intro-tutorial");
 
+/**
+* @name IntroTutorialDemo
+* @memberof IntroTutorial
+* @desc A demo for IntroTutorial
+*/
 var Demo = React.createClass({
     LABELS: {
         messageWelcome: "Welcome to the tutorial",

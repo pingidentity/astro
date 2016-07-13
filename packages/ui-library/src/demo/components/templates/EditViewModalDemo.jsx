@@ -2,6 +2,11 @@ var React = require("react"),
     Redux = require("redux"),
     EditViewModal = require("../../../templates/edit-view-modal");
 
+/**
+* @name EditViewModalDemo
+* @memberof EditViewModal
+* @desc A demo for EditViewModal
+*/
 var EditViewModalDemo = React.createClass({
     componentWillMount: function () {
         this.actions = Redux.bindActionCreators(EditViewModal.Actions, this.props.store.dispatch);

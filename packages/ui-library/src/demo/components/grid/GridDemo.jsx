@@ -9,6 +9,12 @@ var TextFieldCell = require("../../../components/grid/cells/TextFieldCell.jsx");
 var moment = require("moment-range");
 var Calendar = require("./../../../components/calendars/Calendar.jsx");
 
+/**
+* @name GridDemo
+* @memberof Grid
+* @desc A demo for Grid
+*/
+
 var ExpandedRow = React.createClass({
 
     getInitialState: function () {

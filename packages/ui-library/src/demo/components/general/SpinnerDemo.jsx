@@ -1,7 +1,11 @@
 var React = require("react"),
     Spinner = require("../../../components/general/Spinner.jsx");
 
-
+/**
+* @name SpinnerDemo
+* @memberof Spinner
+* @desc A demo for Spinner
+*/
 var SpinnerDemo = React.createClass({
 
     getInitialState: function () {

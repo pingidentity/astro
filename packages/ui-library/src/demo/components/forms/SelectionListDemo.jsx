@@ -4,6 +4,11 @@ var React = require("react"),
     SelectionList = require("../../../components/forms/selection-list/index"),
     DetailsTooltip = require("../../../components/tooltips/DetailsTooltip.jsx");
 
+/**
+* @name SelectionListDemo
+* @memberof SelectionList
+* @desc A demo for SelectionList
+*/
 var SelectionListDemo = React.createClass({
 
     _onSingleSelectionListChange1: function (selectedItemId) {

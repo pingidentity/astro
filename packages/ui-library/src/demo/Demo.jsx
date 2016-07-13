@@ -189,6 +189,7 @@ var DemoApp = React.createClass({
         var id = this.props.nav.selectedNode,
             name = this._getDocumentationName(),
             path = this._demoItem.pathToSource,
+            demoPath = this._demoItem.pathToDemoSource,
             watch = _.pick(this.props.nav, "openNode", "selectedNode");
 
         return (
@@ -228,6 +229,7 @@ var DemoApp = React.createClass({
                             type={this._demo}
                             jsdocUrl={this._getDocumentationUrl(name)}
                             codePathUrl={this._getSourceUrl(path)}
+                            demoCodePathUrl={this._getSourceUrl(demoPath)}
                             code={this.props.code[id]}
                             fullscreen={this._demoItem.fullscreen} />
                     </div>

@@ -2,6 +2,11 @@ var React = require("react"),
     FileUpload = require("../../../components/forms/file-upload"),
     DetailsTooltip = require("../../../components/tooltips/DetailsTooltip.jsx");
 
+/**
+* @name FileUploadDemo
+* @memberof FileUpload
+* @desc A demo for FileUpload
+*/
 var FileUploadDemo = React.createClass({
 
     getInitialState: function () {

@@ -1,6 +1,11 @@
 var React = require("react");
 var HeaderBar = require("../../../components/panels/header-bar");
 
+/**
+* @name HeaderBarDemo
+* @memberof HeaderBar
+* @desc A demo for HeaderBar
+*/
 var HeaderBarDemo = React.createClass({
     getInitialState: function () {
         var initState = HeaderBar.Reducer(null, {});

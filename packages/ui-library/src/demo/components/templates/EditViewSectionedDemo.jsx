@@ -2,6 +2,11 @@ var React = require("react"),
     Redux = require("redux"),
     EditViewSectioned = require("../../../templates/edit-view-sectioned");
 
+/**
+* @name EditViewSectionedDemo
+* @memberof EditViewSectioned
+* @desc A demo for EditViewSectioned
+*/
 var EditViewSectionedDemo = React.createClass({
     componentWillMount: function () {
         this.actions = Redux.bindActionCreators(EditViewSectioned.Actions, this.props.store.dispatch);

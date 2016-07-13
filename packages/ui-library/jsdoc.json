@@ -5,7 +5,12 @@
       ],
       "includePattern": ".+\\.(js|jsx)$",
       "exclude": [
-        "./src/demo",
+        "./src/demo/core",
+        "./src/demo/css",
+        "./src/demo/fonts",
+        "./src/demo/images",
+        "./src/demo/Demo.jsx",
+        "./src/demo/highlight.js",
         "./src/css",
         "./src/fonts",
         "./src/images"

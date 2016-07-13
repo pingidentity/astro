@@ -1,6 +1,11 @@
 var React = require("react");
 var Multivalues = require("../../../components/forms/Multivalues.jsx");
 
+/**
+* @name MultivaluesDemo
+* @memberof Multivalues
+* @desc A demo for Multivalues
+*/
 var MultivaluesDemo = React.createClass({
 
     getInitialState: function () {

@@ -2,6 +2,11 @@ var React = require("react");
 var CollapsibleLink = require("../../../components/general/CollapsibleLink.jsx"),
     If = require("../../../components/general/If.jsx");
 
+/**
+* @name CollapsibleLinkDemo
+* @memberof CollapsibleLink
+* @desc A demo for CollapsibleLink
+*/
 var CollapsibleLinkDemo = React.createClass({
 
     getInitialState: function () {

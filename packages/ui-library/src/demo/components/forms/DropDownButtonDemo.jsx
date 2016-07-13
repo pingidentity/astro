@@ -1,6 +1,11 @@
 var React = require("react"),
     DropDownButton = require("../../../components/forms/DropDownButton.jsx");
 
+/**
+* @name DropDownButtonDemo
+* @memberof DropDownButton
+* @desc A demo for DropDownButton
+*/
 var DropDownButtonDemo = React.createClass({
 
     getInitialState: function () {

@@ -4,6 +4,11 @@ var React = require("react"),
     PropsToUrlWatcher = require("../../../components/offscreen/PropsToUrlWatcher.jsx"),
     _ = require("underscore");
 
+/**
+* @name ListViewDemo
+* @memberof ListView
+* @desc A demo for ListView
+*/
 var ListViewDemo = React.createClass({
     _handleToggleSearchBar: function () {
         this.actions.setExpandedSearch(!this.props.advancedSearch);

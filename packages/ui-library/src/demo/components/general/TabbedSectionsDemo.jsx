@@ -1,6 +1,11 @@
 var React = require("react");
 var TabbedSections = require("./../../../components/general/TabbedSections.jsx");
 
+/**
+* @name TabbedSectionsDemo
+* @memberof TabbedSections
+* @desc A demo for TabbedSections
+*/
 var TabbedSectionsDemo = React.createClass({
     _handleSectionChange: function (index) {
         this.setState({

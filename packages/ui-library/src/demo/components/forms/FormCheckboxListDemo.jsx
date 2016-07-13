@@ -1,6 +1,11 @@
 var React = require("react"),
     FormCheckboxList = require("../../../components/forms/FormCheckboxList.jsx");
 
+/**
+* @name FormCheckboxListDemo
+* @memberof FormCheckboxList
+* @desc A demo for FormCheckboxList
+*/
 var FormCheckboxListDemo = React.createClass({
 
     getInitialState: function () {

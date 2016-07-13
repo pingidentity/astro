@@ -1,6 +1,12 @@
 var React = require("react"),
     InlineMessage = require("../../../components/general/InlineMessage.jsx");
 
+/**
+* @name InlineMessageDemo
+* @memberof InlineMessage
+* @desc A demo for InlineMessage
+*/
+
 var doSomething = function (e) {
     console.log("Did something with " + e);
 };

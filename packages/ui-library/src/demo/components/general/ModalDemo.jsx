@@ -1,6 +1,11 @@
 var React = require("react");
 var Modal = require("./../../../components/general/Modal.jsx");
 
+/**
+* @name ModalDemo
+* @memberof Modal
+* @desc A demo for Modal
+*/
 var ModalDemo = React.createClass({
 
     numDemos: 4,

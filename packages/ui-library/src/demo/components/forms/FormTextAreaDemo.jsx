@@ -2,8 +2,10 @@ var React = require("react");
 var FormTextArea = require("./../../../components/forms/form-text-area");
 
 /**
- * A demo for FormTextArea.
- */
+* @name FormTextAreaDemo
+* @memberof FormTextArea
+* @desc A demo for FormTextArea
+*/
 var FormTextAreaDemo = React.createClass({
 
     getInitialState: function () {

@@ -2,6 +2,11 @@ var React = require("react"),
     Redux = require("redux"),
     ListViewPaginated = require("../../../templates/list-view-paginated");
 
+/**
+* @name ListViewPaginatedDemo
+* @memberof ListViewPaginated
+* @desc A demo for ListViewPaginated
+*/
 var ListViewPaginatedDemo = React.createClass({
     _handleToggleSearchBar: function () {
         this.actions.setExpandedSearch(!this.props.demoProps.advancedSearch);

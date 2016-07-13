@@ -1,3 +1,6 @@
+/*eslint-disable valid-jsdoc*/
+
+//For some very odd reason linting picks up the "/**"  JSDoc definitions of the @alias as having a JSDoc syntax error. So we disable.
 
 var React = require("react"),
     FormTextArea = require("./../../../components/forms/form-text-area"),
@@ -5,7 +8,11 @@ var React = require("react"),
     FormSelectField = require("./../../../components/forms/form-select-field"),
     FormCheckbox = require("./../../../components/forms/FormCheckbox.jsx");
 
-
+/**
+* @name FormInputWidthsDemo
+* @memberof module:constants/FormFieldConstants
+* @desc A demo of CSS classes to set form field inputs
+*/
 var FormInputWidthsDemo = React.createClass({
 
     render: function () {

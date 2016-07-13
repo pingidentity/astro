@@ -4,6 +4,11 @@ var React = require("react"),
     Messages = require("../../../components/general/messages/"),
     WizardView = require("../../../templates/wizard-view");
 
+/**
+* @name WizardViewDemo
+* @memberof WizardView
+* @desc A demo for WizardView
+*/
 var WizardViewDemo = React.createClass({
     LABELS: {
         labelNext: "Next",

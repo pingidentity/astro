@@ -1,6 +1,11 @@
 var React = require("react");
 var Toggle = require("../../../components/forms/form-toggle");
 
+/**
+* @name ToggleDemo
+* @memberof Toggle
+* @desc A demo for Toggle
+*/
 var ToggleDemo = React.createClass({
 
     getInitialState: function () {

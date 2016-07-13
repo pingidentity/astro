@@ -2,6 +2,12 @@ var React = require("react");
 var HelpHint = require("../../../components/tooltips/HelpHint.jsx");
 var FormTextField = require("../../../components/forms/form-text-field");
 
+
+/**
+* @name HelpHintDemo
+* @memberof HelpHint
+* @desc A demo for HelpHint
+*/
 var HelpHintDemo = React.createClass({
 
     _onClick: function () {

@@ -2,6 +2,11 @@ var React = require("react"),
     Redux = require("redux"),
     EditViewSimple = require("../../../templates/edit-view-simple");
 
+/**
+* @name EditViewSimpleDemo
+* @memberof EditViewSimple
+* @desc A demo for EditViewSimple
+*/
 var EditViewSimpleDemo = React.createClass({
     componentWillMount: function () {
         this.actions = Redux.bindActionCreators(EditViewSimple.Actions, this.props.store.dispatch);

@@ -1,5 +1,15 @@
+/*eslint-disable valid-jsdoc*/
+
+//For some very odd reason linting picks up the "/**"  JSDoc definitions of the @alias as having a JSDoc syntax error. So we disable.
+
 var React = require("react");
 var Cache = require("../../net/Cache");
+
+/**
+* @name CacheDemo
+* @memberof module:net/Cache
+* @desc A demo for Cache
+*/
 
 function sleep (seconds) {
     var start = new Date().getTime();

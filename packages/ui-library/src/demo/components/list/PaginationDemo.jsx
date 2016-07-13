@@ -2,7 +2,11 @@ var React = require("react"),
     Pagination = require("../../../components/list/Pagination.jsx"),
     ExpandableRow = require("../../../components/rows/ExpandableRow.jsx");
 
-
+/**
+* @name PaginationDemo
+* @memberof Pagination
+* @desc A demo for Pagination
+*/
 var PaginationDemo = React.createClass({
 
     getInitialState: function () {

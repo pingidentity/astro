@@ -1,6 +1,11 @@
 var React = require("react"),
     InfiniteScroll = require("../../../components/list/InfiniteScroll.jsx");
 
+/**
+* @name InfiniteScrollDemo
+* @memberof InfiniteScroll
+* @desc A demo for InfiniteScroll
+*/
 var Demo = React.createClass({
     SIMULATED_DELAY_MS: 200,
 

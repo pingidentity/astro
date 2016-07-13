@@ -1,6 +1,11 @@
 var React = require("react"),
     I18nPhoneInput = require("../../../../components/forms/i18n/phone-input");
 
+/**
+* @name I18nPhoneInputDemo
+* @memberof I18nPhoneInput
+* @desc A demo for I18nPhoneInput
+*/
 var I18nPhoneInputDemo = React.createClass({
 
     _handleValueChangeStateful: function (phoneInputValues) {
