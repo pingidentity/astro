@@ -20,10 +20,10 @@ exports.saveForm = function () {
     };
 };
 
-exports.setActiveRockerButton = function (name, index) {
+exports.setActiveRockerButton = function (activeRockerButton) {
     return {
         type: exports.Types.EDIT_VIEW_SET_ROCKERBUTTON,
-        name: name,
-        index: index
+        name: activeRockerButton.label,
+        index: activeRockerButton.index
     };
 };
