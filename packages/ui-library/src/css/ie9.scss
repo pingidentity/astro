@@ -5,6 +5,7 @@
 	background: none;
 	border: none;
 	border-radius: 0;
+	width: 160%; 		// pushes default select arrow out of range
 
 	&:after {
 		content: none;
@@ -13,10 +14,18 @@
 		padding: 0;
 		border: 1px solid $color-input-border;
 		width: auto;
+		option {
+			&:checked {
+				background-color: $color-input-fill;
+			}
+			&:hover {
+				background-color: $color-input-fill;
+			}
+		}
 	}
 	&.error {
 		select {
-			border-color: 1px solid map-get($colors, 'critical-red');
+			border-color: 1px solid $color-critical-red;
 		}
 	}
 	&.required {
