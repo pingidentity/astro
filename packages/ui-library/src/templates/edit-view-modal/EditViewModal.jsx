@@ -2,18 +2,37 @@ var React = require("react"),
     FormCheckbox = require("../../components/forms/FormCheckbox.jsx"),
     FormTextField = require("../../components/forms//form-text-field").v2,
     FormRadioGroup = require("../../components/forms/FormRadioGroup.jsx"),
-    FormSelectField = require("../../components/forms/FormSelectField.jsx"),
+    FormSelectField = require("../../components/forms/form-select-field").v2,
     Layout = require("../../components/general/ColumnLayout.jsx"),
     ModalButton = require("../../components/general/ModalButton.jsx");
+
+/**
+ * @callback EditViewModal~onModalToggle
+ */
+
+/**
+ * @callback EditViewModal~onSave
+ */
+
+/**
+ * @callback EditViewModal~onInputChange
+ * @param {string} data-id
+ *          Identifier used by reducer to track changes
+ * @param {string} value
+ *          Value after change
+ */
 
 /**
  * @class EditViewModal
  * @desc This is a template to demonstrate how to build a sectioned edit/form page.  Use it as a
  *     starting poing for a sectioned edit page.
  *
- * @param {function} onModalToggle - A callback to toggle the display of the modal
- * @param {function} onInputChange - A callback executed when an input value changes
- * @param {function} onSave - A callback executed when the save button is clicked
+ * @param {EditViewModal~onModalToggle} onModalToggle
+ *          Callback to be triggered to toggle the display of the modal
+ * @param {EditViewModal~onInputChange} onInputChange
+ *          Callback to be triggered when an input value changes
+ * @param {EditViewModal~onSave} onSave
+ *          Callback to be triggered when the save button is clicked
  */
 module.exports = React.createClass({
 
@@ -29,7 +48,6 @@ module.exports = React.createClass({
         var value = e.target.type === "checkbox" ? !!e.target.checked : e.target.value,
             dataId = e.target.type === "text" ? e.target.getAttribute("data-id").slice(0,-6)
                 : e.target.getAttribute("data-id");
-
         this.props.onInputChange(dataId, value);
     },
 
@@ -93,7 +111,6 @@ module.exports = React.createClass({
                                     <div className="input-row">
                                         <FormTextField
                                             className="input-width-medium"
-                                            onChange={this._handleInputChange}
                                             data-id="address2"
                                             value={this.props.inputs.address2}
                                             onChange={this._handleInputChange} />
@@ -102,7 +119,7 @@ module.exports = React.createClass({
                                         <FormSelectField
                                             label="Address Location"
                                             className="input-width-medium"
-                                            id="addressType"
+                                            data-id="addressType"
                                             value={this.props.inputs.addressType}
                                             onChange={this._handleInputChange}
                                             options={[
@@ -164,9 +181,8 @@ module.exports = React.createClass({
                             <FormRadioGroup
                                 label="User Group"
                                 groupName="user-group"
-                                groupName="userGroup"
                                 selected={this.props.inputs.userGroup}
-                                onChange={this._handleRadioInputChange.bind(this, "userGroup")}
+                                onValueChange={this._handleRadioInputChange.bind(this, "userGroup")}
                                 items={[
                                     { id: 1, name: "Group 1" },
                                     { id: 2, name: "Group 2" },
@@ -177,7 +193,7 @@ module.exports = React.createClass({
                             <FormCheckbox
                                 label="Activate User"
                                 className="input-width-medium"
-                                id="userActive"
+                                data-id="userActive"
                                 checked={this.props.inputs.userActive}
                                 onChange={this._handleInputChange} />
                         </div>
@@ -202,11 +218,11 @@ module.exports = React.createClass({
     render: function () {
         return (
             <ModalButton
-                id="default-example"
+                data-id="default-example"
                 expanded={this.props.modalExpanded}
-                value="Open Default Modal"
+                activatorButtonLabel="Open Default Modal"
                 modalTitle="Default Modal"
-                containerStyle="edit-form"
+                className="edit-form"
                 onOpen={this._handleModalToggle}
                 onClose={this._handleModalToggle}>
 
