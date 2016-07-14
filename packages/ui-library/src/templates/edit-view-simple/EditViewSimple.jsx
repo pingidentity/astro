@@ -2,17 +2,31 @@ var React = require("react"),
     FormCheckbox = require("../../components/forms/FormCheckbox.jsx"),
     FormTextField = require("../../components/forms//form-text-field").v2,
     FormRadioGroup = require("../../components/forms/FormRadioGroup.jsx"),
-    FormSelectField = require("../../components/forms/FormSelectField.jsx"),
+    FormSelectField = require("../../components/forms/form-select-field").v2,
     Layout = require("../../components/general/ColumnLayout.jsx"),
-    Toggle = require("../../components/forms/Toggle.jsx");
+    Toggle = require("../../components/forms/form-toggle").v2;
+
+/**
+ * @callback EditViewSimple~onSave
+ */
+
+/**
+ * @callback EditViewSimple~onInputChange
+ * @param {string} data-id
+ *          Identifier for the input, used by the reducer
+ * @param {string} value
+ *          New value of input field.
+ */
 
 /**
  * @class EditViewSimple
  * @desc This is a template to demonstrate how to build a simple edit/form page.  Use it as a
- *     starting poing for any basic edit page.
+ *     starting going for any basic edit page.
  *
- * @param {function} onInputChange - A callback executed when an input value changes
- * @param {function} onSave - A callback executed when the save button is clicked
+ * @param {EditViewSimple~onInputChange} onInputChange
+ *          Callback to be triggered when an input value changes
+ * @param {EditViewSimple~onSave} onSave
+ *          Callback to be triggered when the save button is clicked
  */
 module.exports = React.createClass({
 
@@ -84,7 +98,6 @@ module.exports = React.createClass({
                                 <div className="input-row">
                                     <FormTextField
                                         className="input-width-medium"
-                                        onChange={this._handleInputChange}
                                         data-id="address2"
                                         value={this.props.inputs.address2}
                                         onChange={this._handleInputChange} />
@@ -151,9 +164,8 @@ module.exports = React.createClass({
                         <FormRadioGroup
                             label="User Group"
                             groupName="user-group"
-                            groupName="userGroup"
                             selected={this.props.inputs.userGroup}
-                            onChange={this._handleRadioInputChange.bind(this, "userGroup")}
+                            onValueChange={this._handleRadioInputChange.bind(this, "userGroup")}
                             items={[
                                 { id: 1, name: "Group 1" },
                                 { id: 2, name: "Group 2" },
@@ -164,7 +176,7 @@ module.exports = React.createClass({
                         <FormCheckbox
                             label="Activate User"
                             className="input-width-medium"
-                            id="userActive"
+                            data-id="userActive"
                             checked={this.props.inputs.userActive}
                             onChange={this._handleInputChange} />
                     </div>
