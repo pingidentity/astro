@@ -4,7 +4,7 @@ var React = require("react"),
     classnames = require("classnames"),
     FormTextField = require("./../../../components/forms/form-text-field").v2,
     Layout = require("../../../components/general/ColumnLayout.jsx"),
-    Toggle = require("../../../components/forms/Toggle.jsx");
+    Toggle = require("../../../components/forms/form-toggle").v2;
 
 var cssTips = React.createClass({
 
@@ -139,7 +139,7 @@ var cssTips = React.createClass({
                     an "icon font". This means that they are vector-based and may be resized and styled using
                     the same CSS rules as text.
                 </p>
-                <Layout.Row id="columns-5" className="icons">
+                <Layout.Row data-id="columns-5" className="icons">
                     <Layout.Column>
                         <span className="inline-icon icon-account"></span> icon-account
                         <br /><span className="inline-icon icon-admin-account"></span> icon-admin-account
@@ -275,10 +275,11 @@ var cssTips = React.createClass({
                     designs, the "unfocused" class is used to preserve the legend placement when the border
                     isn't present.
                 </p>
-                <p>
+                <div className="output">
                     <fieldset className={classnames(fieldsetCss)}>
                         <legend>
-                            <Toggle onToggle={this._toggleFieldset} value={this.state.showFieldset} />
+                            <Toggle controlled={true} onToggle={this._toggleFieldset} toggled={this.state.showFieldset}
+                                    value={this.state.showFieldset} />
                             &nbsp; Click here to toggle fieldset content
                         </legend>
 
@@ -287,7 +288,7 @@ var cssTips = React.createClass({
                         )}
 
                     </fieldset>
-                </p>
+                </div>
                 <Markup custom={true} language="html"
                     content={
                         [

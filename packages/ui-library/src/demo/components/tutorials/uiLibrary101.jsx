@@ -168,9 +168,9 @@ var UILibrary101 = React.createClass({
                             'render: function () {',
                             '    return (',
                             '       <ColorPicker',
-                            '           id="color-picker"',
+                            '           data-id="color-picker"',
                             '           color={this.state.pickerColor}',
-                            '           onChange={this._handleChange}',
+                            '           onValueChange={this._handleChange}',
                             '           labelText="ColorPicker"',
                             '           hintText="Pick a color or type in the hex code"',
                             '    );',
@@ -181,9 +181,9 @@ var UILibrary101 = React.createClass({
                 />
                 <div className="output">
                     <ColorPicker
-                        id="color-picker"
+                        data-id="color-picker"
                         color={this.state.pickerColor}
-                        onChange={this._handleChange}
+                        onValueChange={this._handleChange}
                         labelText="ColorPicker"
                         hintText="Pick a color or type in the hex code"
                     />
