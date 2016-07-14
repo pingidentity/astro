@@ -231,10 +231,10 @@ var LeftNavBar = React.createClass({
 
     componentWillMount: function () {
         if (this.props.onItemClick) {
-            Utils.deprecateWarn("onItemClick", "onItemValueChange");
+            console.warn(Utils.deprecateMessage("onItemClick", "onItemValueChange"));
         }
         if (this.props.onSectionClick) {
-            Utils.deprecateWarn("onSectionClick", "onSectionValueChange");
+            console.warn(Utils.deprecateMessage("onSectionClick", "onSectionValueChange"));
         }
     },
 

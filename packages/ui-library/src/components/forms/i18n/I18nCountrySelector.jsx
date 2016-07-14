@@ -113,7 +113,7 @@ var I18nCountrySelectorStateless = React.createClass({
 
     componentWillMount: function () {
         if (this.props.onCountrySearch) {
-            Utils.deprecateWarn("onCountrySearch", "onSearch");
+            console.warn(Utils.deprecateMessage("onCountrySearch", "onSearch"));
         }
     },
 

@@ -378,13 +378,13 @@ var InfiniteScroll = React.createClass({
 
         //TODO: remove these when v1 no longer supported:
         if (this.props.loadPrev) {
-            Utils.deprecateWarn("loadPrev", "onLoadPrev");
+            console.warn(Utils.deprecateMessage("loadPrev", "onLoadPrev"));
         }
         if (this.props.loadNext) {
-            Utils.deprecateWarn("loadNext", "onLoadNext");
+            console.warn(Utils.deprecateMessage("loadNext", "onLoadNext"));
         }
         if (this.props.headingGenerator) {
-            Utils.deprecateWarn("headingGenerator", "onGenerateHeading");
+            console.warn(Utils.deprecateMessage("headingGenerator", "onGenerateHeading"));
         }
     },
 

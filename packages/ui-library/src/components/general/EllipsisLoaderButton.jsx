@@ -58,10 +58,10 @@ var EllipsisLoaderButton = React.createClass({
 
     componentWillMount: function () {
         if (this.props.id) {
-            Utils.deprecateWarn("id", "data-id");
+            console.warn(Utils.deprecateMessage("id", "data-id"));
         }
         if (this.props.onButtonClick) {
-            Utils.deprecateWarn("onButtonClick", "onClick");
+            console.warn(Utils.deprecateMessage("onButtonClick", "onClick"));
         }
     },
 

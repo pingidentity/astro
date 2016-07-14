@@ -139,10 +139,10 @@ var Stateless = React.createClass({
 
     componentWillMount: function () {
         if (this.props.id) {
-            Utils.deprecateWarn("id", "data-id");
+            console.warn(Utils.deprecateMessage("id", "data-id"));
         }
         if (this.props.onSelect) {
-            Utils.deprecateWarn("onSelect", "onValueChange");
+            console.warn(Utils.deprecateMessage("onSelect", "onValueChange"));
         }
     },
 

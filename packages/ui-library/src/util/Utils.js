@@ -128,3 +128,22 @@ exports.deprecateWarn = function (feature, useInstead, log) {
         global.console.warn(warning);
     }
 };
+
+/**
+ * @alias module:util/Utils.deprecateMessage
+ * @desc Return a formatted string for deprecated prop.
+ *
+ * @param {string} feature
+ *    The name of the feature that is now deprecated.
+ * @param {string} useInstead
+ *    The name of the feature to use instead.
+ * @return {string}
+ *    Formatted warning string.
+ */
+exports.deprecateMessage = function (feature, useInstead) {
+    var warning = [
+        "Deprecated: use ", useInstead, " instead of ", feature,
+        ". Support for ", feature, " will be removed in next version"
+    ].join("");
+    return warning;
+};

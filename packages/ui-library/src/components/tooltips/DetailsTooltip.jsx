@@ -199,19 +199,19 @@ var DetailsTooltipStateless = React.createClass({
         }
 
         if (this.props.id) {
-            Utils.deprecateWarn("id", "data-id");
+            console.warn(Utils.deprecateMessage("id", "data-id"));
         }
         if (this.props.contentClassNames) {
-            Utils.deprecateWarn("contentClassNames", "contentClassName");
+            console.warn(Utils.deprecateMessage("contentClassNames", "contentClassName"));
         }
         if (this.props.titleClassNames) {
-            Utils.deprecateWarn("titleClassNames", "titleClassName");
+            console.warn(Utils.deprecateMessage("titleClassNames", "titleClassName"));
         }
         if (this.props.labelStyle) {
-            Utils.deprecateWarn("labelStyle", "labelClassName");
+            console.warn(Utils.deprecateMessage("labelStyle", "labelClassName"));
         }
         if (this.props.positionStyle) {
-            Utils.deprecateWarn("positionStyle", "positionClassName");
+            console.warn(Utils.deprecateMessage("positionStyle", "positionClassName"));
         }
     },
 

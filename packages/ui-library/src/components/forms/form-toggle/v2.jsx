@@ -1,5 +1,6 @@
 var React = require("re-react"),
     classnames = require("classnames"),
+    Utils = require("../../../util/Utils"),
     _ = require("underscore");
 
 /**
@@ -75,7 +76,7 @@ var ToggleStateless = React.createClass({
 
     componentWillMount: function () {
         if (this.props.id) {
-            console.warn("Deprecated: use data-id instead of id.  Support for id will be removed in next version");
+            console.warn(Utils.deprecateMessage("id", "data-id"));
         }
     },
 

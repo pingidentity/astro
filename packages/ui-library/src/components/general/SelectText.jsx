@@ -1,5 +1,6 @@
-var React = require("react");
-var ReactDOM = require("react-dom");
+var React = require("react"),
+    ReactDOM = require("react-dom"),
+    Utils = require("../../util/Utils");
 
 /**
  * @callback SelectText~onClick
@@ -130,8 +131,7 @@ var SelectText = React.createClass({
 
     componentWillMount: function () {
         if (this.props.dataId) {
-            console.warn(
-                "Deprecated: use data-id instead of dataId. Support for dataId will be removed in next version");
+            console.warn(Utils.deprecateMessage("dataId", "data-id"));
         }
     },
 

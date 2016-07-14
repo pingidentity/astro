@@ -218,16 +218,16 @@ var Stateless = React.createClass({
 
     componentWillMount: function () {
         if (this.props.id) {
-            Utils.deprecateWarn("id", "data-id");
+            console.warn(Utils.deprecateMessage("id", "data-id"));
         }
         if (this.props.onSelectionChange) {
-            Utils.deprecateWarn("onSelectionChange", "onValueChange");
+            console.warn(Utils.deprecateMessage("onSelectionChange", "onValueChange"));
         }
         if (this.props.labelSelectAll) {
-            Utils.deprecateWarn("labelSelectAll", "onGetSelectAllLabel");
+            console.warn(Utils.deprecateMessage("labelSelectAll", "onGetSelectAllLabel"));
         }
         if (this.props.labelDeselectAll) {
-            Utils.deprecateWarn("labelDeselectAll", "onGetDeselectAllLabel");
+            console.warn(Utils.deprecateMessage("labelDeselectAll", "onGetDeselectAllLabel"));
         }
     },
 

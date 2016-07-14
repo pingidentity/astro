@@ -222,13 +222,13 @@ var Step = React.createClass({
 
     componentWillMount: function () {
         if (this.props.id) {
-            Utils.deprecateWarn("id", "data-id");
+            console.warn(Utils.deprecateMessage("id", "data-id"));
         }
         if (this.props.doneButtonStyle) {
-            Utils.deprecateWarn("doneButtonStyle", "doneButtonClassName");
+            console.warn(Utils.deprecateMessage("doneButtonStyle", "doneButtonClassName"));
         }
         if (this.props.nextButtonStyle) {
-            Utils.deprecateWarn("nextButtonStyle", "nextButtonClassName");
+            console.warn(Utils.deprecateMessage("nextButtonStyle", "nextButtonClassName"));
         }
     },
 

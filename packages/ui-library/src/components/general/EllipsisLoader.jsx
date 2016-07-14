@@ -1,5 +1,6 @@
-var React = require("react");
-var css = require("classnames");
+var React = require("react"),
+    css = require("classnames"),
+    Utils = require("../../util/Utils");
 
 /**
  * @class EllipsisLoader
@@ -32,7 +33,7 @@ var EllipsisLoader = React.createClass({
 
     componentWillMount: function () {
         if (this.props.id) {
-            console.warn("Deprecated: use data-id instead of id.  Support for id will be removed in the next version");
+            console.warn(Utils.deprecateMessage("id", "data-id"));
         }
     },
 

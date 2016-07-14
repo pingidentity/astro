@@ -2,6 +2,7 @@
 var React = require("react"),
     classnames = require("classnames"),
     CollapsibleLink = require("./CollapsibleLink.jsx"),
+    Utils = require("../../util/Utils"),
     _ = require("underscore");
 
 /**
@@ -91,8 +92,7 @@ var SectionStateless = React.createClass({
         console.warn(
             "** Default value for 'controlled' in Section component will be set to 'false' from next version");
         if (this.props.id) {
-            console.warn(
-                "Deprecated: use data-id instead of id. Support for id will be removed in next version");
+            console.warn(Utils.deprecateMessage("id", "data-id"));
         }
     },
 

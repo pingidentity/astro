@@ -181,25 +181,25 @@ var ModalButtonStateless = ReactVanilla.createClass({
 
     componentWillMount: function () {
         if (this.props.id) {
-            Utils.deprecateWarn("id", "data-id");
+            console.warn(Utils.deprecateMessage("id", "data-id"));
         }
         if (this.props.containerStyle) {
-            Utils.deprecateWarn("containerStyle", "className");
+            console.warn(Utils.deprecateMessage("containerStyle", "className"));
         }
         if (this.props.activatorContainerStyle) {
-            Utils.deprecateWarn("activatorContainerStyle", "activatorContainerClassName");
+            console.warn(Utils.deprecateMessage("activatorContainerStyle", "activatorContainerClassName"));
         }
         if (this.props.linkContent) {
-            Utils.deprecateWarn("linkContent", "activatorContent");
+            console.warn(Utils.deprecateMessage("linkContent", "activatorContent"));
         }
         if (this.props.linkStyle) {
-            Utils.deprecateWarn("linkStyle", "activatorContentClassName");
+            console.warn(Utils.deprecateMessage("linkStyle", "activatorContentClassName"));
         }
         if (this.props.value) {
-            Utils.deprecateWarn("value", "activatorButtonLabel");
+            console.warn(Utils.deprecateMessage("value", "activatorButtonLabel"));
         }
         if (this.props.buttonStyle) {
-            Utils.deprecateWarn("buttonStyle", "activatorButtonClassName");
+            console.warn(Utils.deprecateMessage("buttonStyle", "activatorButtonClassName"));
         }
     },
 

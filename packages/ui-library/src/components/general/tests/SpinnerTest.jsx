@@ -82,7 +82,7 @@ describe("Spinner", function () {
         );
 
         expect(console.warn).toBeCalledWith(
-            "Deprecated: use data-id instead of id.  Support for id will be removed in next version");
+            "Deprecated: use data-id instead of id. Support for id will be removed in next version");
     });
 
     // TODO To be removed once "id" support is discontnued.

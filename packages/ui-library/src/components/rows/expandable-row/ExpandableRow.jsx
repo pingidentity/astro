@@ -326,10 +326,10 @@ var StatelessExpandableRow = React.createClass({
 
     componentWillMount: function () {
         if (this.props.id) {
-            Utils.deprecateWarn("id", "data-id");
+            console.warn(Utils.deprecateMessage("id", "data-id"));
         }
         if (this.props.defaultToExpanded) {
-            Utils.deprecateWarn("defaultToExpanded", "expanded");
+            console.warn(Utils.deprecateMessage("defaultToExpanded", "expanded"));
         }
     },
 

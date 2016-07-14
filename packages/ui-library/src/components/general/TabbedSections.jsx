@@ -85,10 +85,10 @@ var TabbedSections = React.createClass({
 
     componentWillMount: function () {
         if (this.props.id) {
-            Utils.deprecateWarn("id", "data-id");
+            console.warn(Utils.deprecateMessage("id", "data-id"));
         }
         if (this.props.onSectionChange) {
-            Utils.deprecateWarn("onSectionChange", "onValueChange");
+            console.warn(Utils.deprecateMessage("onSectionChange", "onValueChange"));
         }
     },
     

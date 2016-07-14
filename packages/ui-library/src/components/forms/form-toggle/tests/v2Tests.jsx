@@ -107,7 +107,7 @@ describe("Toggle", function () {
         getComponent({ id: "myToggle" });
 
         expect(console.warn).toBeCalledWith(
-            "Deprecated: use data-id instead of id.  Support for id will be removed in next version");
+            "Deprecated: use data-id instead of id. Support for id will be removed in next version");
     });
 
     it("does not log warning when no id prop is given", function () {

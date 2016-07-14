@@ -46,6 +46,15 @@ describe("Utils", function () {
         });
     });
 
+    describe("deprecateMessage", function () {
+        it("uses deprecateMessage", function () {
+            var message = Utils.deprecateMessage("click", "onClick");
+
+            expect(message).toBe(
+                "Deprecated: use onClick instead of click. Support for click will be removed in next version");
+        });
+    });
+
     describe("triggerFileDownload", function () {
         it("uses the correct function to save the blob file in IE", function () {
             // mocks for the navigator and Blob globals

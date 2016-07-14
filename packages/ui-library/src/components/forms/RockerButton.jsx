@@ -1,6 +1,7 @@
 var React = require("react"),
     classnames = require("classnames"),
-    _ = require("underscore");
+    _ = require("underscore"),
+    Utils = require("../../util/Utils");
 
 /**
 * @typedef RockerButton~labelValues
@@ -108,13 +109,10 @@ var RockerButtonStateless = React.createClass({
 
     componentWillMount: function () {
         if (this.props.id) {
-            console.warn("Deprecated: use data-id instead of id.  Support for id will be removed in the next version");
+            console.warn(Utils.deprecateMessage("id", "data-id"));
         }
         if (this.props.onChange) {
-            console.warn(
-                "Deprecated: use onValueChange instead of onChange. " +
-                "Support for onChange will be removed in next version"
-            );
+            console.warn(Utils.deprecateMessage("onChange", "onValueChange"));
         }
 
         if (this.props.labels && (this.props.labels.length < 2 || this.props.labels.length > 4)) {

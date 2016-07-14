@@ -187,10 +187,10 @@ var Choose = React.createClass({
 
     componentWillMount: function () {
         if (this.props.id) {
-            Utils.deprecateWarn("id", "data-id");
+            console.warn(Utils.deprecateMessage("id", "data-id"));
         }
         if (this.props.onChange) {
-            Utils.deprecateWarn("onChange", "onValueChange");
+            console.warn(Utils.deprecateMessage("onChange", "onValueChange"));
         }
     },
 
