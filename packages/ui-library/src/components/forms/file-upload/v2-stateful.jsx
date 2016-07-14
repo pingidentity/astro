@@ -7,9 +7,10 @@ var React = require("react"),
     _ = require("underscore");
 
 /**
- * @class StatefulFileUpload
- * @desc this is a wrapper around the StatefulFileUpload to give the user image preview and error messages without
- * having to implement that logic.
+ * @name FileUploadStateful
+ * @memberof FileUpload
+ * @desc This is a wrapper around the stateful (controlled=false) FileUpload to give the user image preview
+ *    and error messages without having to implement that logic.
  */
 module.exports = React.createClass({
     displayName: "FileUploadStateful",

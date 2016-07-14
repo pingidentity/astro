@@ -2,6 +2,11 @@ var React = require("react"),
     ReactDOM = require("react-dom"),
     classnames = require("classnames");
 
+/**
+ * @name FileUploadStateless
+ * @memberof FileUpload
+ * @desc This is a wrapper around the stateless (controlled=true) FileUpload.
+ */
 module.exports = React.createClass({
     displayName: "FileUploadStateless",
 

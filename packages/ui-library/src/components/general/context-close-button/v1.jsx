@@ -4,15 +4,21 @@ var React = require("react"),
 
 /**
  * @callback ContextCloseButton~onClick
+ * @ignore
+ *
  * @return {boolean} Should return true if `close()` should be called or false if not.
  */
 
 /**
  * @callback ContextCloseButton~close
+ * @ignore
+ *
  */
 
 /**
  * @class ContextCloseButton
+ * @ignore
+ *
  * @desc Button that will invoke a 'close()' method from its props or context on click
  * should such a method exist, after invoking a supplied on click callback.
  * Should the supplied callback return false then the close() method will

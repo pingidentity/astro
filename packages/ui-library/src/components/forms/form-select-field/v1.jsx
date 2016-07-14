@@ -7,6 +7,8 @@ var React = require("react"),
 
 /**
 * @callback FormSelectField~onChange
+* @ignore
+*
 *
 * @param {object} e
 *     The ReactJS synthetic event object.
@@ -14,6 +16,8 @@ var React = require("react"),
 
 /**
 * @class FormSelectField
+* @ignore
+*
 * @desc A generic select (dropdown) component. Encapsulates common markup and designed to be a drop-in replacement.
 *       Options data may be either an array of objects with 'value' and 'label' properties or an object. Only the array
 *       will insure display order of options. For react controlled `<select>`. Stateless.

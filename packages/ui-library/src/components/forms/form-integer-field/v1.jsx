@@ -7,22 +7,30 @@ var React = require("react"),
 
 /**
  * @callback FormIntegerField~validationCallback
+ * @ignore
+ *
  * @param {string} value - value entered in text field
  * @returns {string|falsy} error - error validation message or some falsy value if no error found
  */
 
 /**
  * @callback FormIntegerField~eventCallback
+ * @ignore
+ *
  * @param {object} event - reactjs synthetic event object
  */
 
 /**
  * @callback FormIntegerField~valueCallback
+ * @ignore
+ *
  * @param {string} value - value entered in text field
  */
 
 /**
  * @class FormIntegerField
+ * @ignore
+ *
  * @desc A component that extends FormTextField to only accept positive integers with add and subtract arrows.
  *
  * @param {boolean} [isRequired] whether the field is required or not (default false)

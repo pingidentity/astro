@@ -93,11 +93,15 @@ $sidenav-lineheight: 22px;
 				}
 			}
 		}
-		iframe {
+		iframe, .js-source {
 			height: 100%;
 			&.hidden {
 				display: none;
 			}
+		}
+		.js-source a {
+			display: inline;
+			margin-right: 5px;
 		}
 	}
 
@@ -134,6 +138,9 @@ $sidenav-lineheight: 22px;
 	iframe {
 		width: 100%;
 		height: 0;
+	}
+	.js-source a {
+		display: none;
 	}
 }
 

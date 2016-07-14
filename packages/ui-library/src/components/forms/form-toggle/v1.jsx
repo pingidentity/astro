@@ -4,6 +4,8 @@ var React = require("react"),
 
 /**
  * @callback Toggle~onToggle
+ * @ignore
+ *
  *
  * @param {boolean} newState
  *     New toggle state after switch.
@@ -16,6 +18,8 @@ var React = require("react"),
 
  /**
  * @class Toggle
+* @ignore
+ *
  * @desc Toggles between two states on click.  Is either "off" or "on".
  *
  * @param {string} [id="toggle"]

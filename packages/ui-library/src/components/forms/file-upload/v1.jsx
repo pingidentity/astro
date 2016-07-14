@@ -19,22 +19,30 @@ var ErrorCodes = {
 
 /**
  * @callback FileUpload~onValidateCallback
+ * @ignore
+ *
  * @param {object} file - browser File object to validate
  * @returns {string|undefined} error message, if no error - undefined
  */
 
 /**
  * @callback FileUpload~onFileChange
+ * @ignore
+ *
  * @param {object} file - browser File object
  */
 
 /**
  * @callback FileUpload~onPreviewReady
+ * @ignore
+ *
  * @param {string} url - preview url, can be used directly with &lt;img /&gt; tags or css background styles
  */
 
 /**
  * @callback FileUpload~onError
+ * @ignore
+ *
  * @param {string} errorCode - error code, supported error codes:
  *   - fileupload.error.read - there were browser problem while reading file
  *   - fileupload.error.type - selected file doesn't match provided list of allowed mime types
@@ -43,6 +51,8 @@ var ErrorCodes = {
 
 /**
  * @class FileUpload
+ * @ignore
+ *
  * @desc Component to render an <code>&lt;input type="file" /&gt;</code> element.
  * Supports the upload of a single file and includes:
  *   - generation of a thumbnail image using the HTML5 File API (where available)

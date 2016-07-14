@@ -8,10 +8,13 @@ var React = require("react"),
 
 /**
  * @typedef {(Object.<number|string, string>)} SelectionListItem
+ * @ignore
  */
 
 /**
  * @class SelectionList
+ * @ignore
+ *
  * @desc SelectionList implements a list of selectable items with search capability.
  *
  * @param {SelectionListItem[]} [items] - actual data to display to the component.

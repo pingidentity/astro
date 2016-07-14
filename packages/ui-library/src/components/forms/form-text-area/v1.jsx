@@ -10,24 +10,32 @@ var React = require("react"),
 
 /**
 * @callback FormTextArea~onChange
+* @ignore
+*
 * @param {object} e
 *     The ReactJS synthetic event object.
 */
 
 /**
 * @callback FormTextArea~onValueChange
+* @ignore
+*
 * @param {string} value
 *     The current text area value.
 */
 
 /**
 * @callback FormTextArea~onBlur
+* @ignore
+*
 * @param {object} e
 *     The ReactJS synthetic event object.
 */
 
 /**
 * @class FormTextArea
+* @ignore
+*
 * @desc A text area component that supports edit and readonly modes.
 *
 * @param {string} [referenceName="form-text-area"]

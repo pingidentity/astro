@@ -75,7 +75,7 @@ module.exports = [
                 label: "Toggle",
                 demo: require("../components/forms/ToggleDemo.jsx"),
                 pathToDoc: "components/forms/Toggle.jsx",
-                pathToSource: "components_forms_Toggle.jsx.html",
+                pathToSource: "components_forms_form-toggle_v2.jsx.html",
                 pathToDemoSource: "demo_components_forms_ToggleDemo.jsx.html"
             },
             {
@@ -118,21 +118,21 @@ module.exports = [
                 label: "Integer Field",
                 demo: require("../components/forms/FormIntegerFieldDemo.jsx"),
                 pathToDoc: "components/forms/FormIntegerField.jsx",
-                pathToSource: "components_forms_FormIntegerField.jsx.html",
+                pathToSource: "components_forms_form-integer-field_v2.jsx.html",
                 pathToDemoSource: "demo_components_forms_FormIntegerFieldDemo.jsx.html"
             },
             {
                 label: "Text Area",
                 demo: require("../components/forms/FormTextAreaDemo.jsx"),
                 pathToDoc: "components/forms/FormTextArea.jsx",
-                pathToSource: "components_forms_FormTextArea.jsx.html",
+                pathToSource: "components_forms_form-text-area_v2.jsx.html",
                 pathToDemoSource: "demo_components_forms_FormTextAreaDemo.jsx.html"
             },
             {
                 label: "Select Field",
                 demo: require("../components/forms/FormSelectFieldDemo.jsx"),
                 pathToDoc: "components/forms/FormSelectField.jsx",
-                pathToSource: "components_forms_FormSelectField.jsx.html",
+                pathToSource: "components_forms_form-select-field_v2.jsx.html",
                 pathToDemoSource: "demo_components_forms_FormSelectFieldDemo.jsx.html"
             },
             {
@@ -166,21 +166,33 @@ module.exports = [
                 label: "I18n Phone Input",
                 demo: require("../components/forms/i18n/I18nPhoneInputDemo.jsx"),
                 pathToDoc: "components/forms/i18n/I18nPhoneInput.jsx",
-                pathToSource: "components_forms_i18n_I18nPhoneInput.jsx.html",
+                pathToSource: "components_forms_i18n_phone-input_v2.jsx.html",
                 pathToDemoSource: "demo_components_forms_i18n_I18nPhoneInputDemo.jsx.html"
             },
             {
                 label: "File Upload",
                 demo: require("../components/forms/FileUploadDemo.jsx"),
                 pathToDoc: "components/forms/FileUpload.jsx",
-                pathToSource: "components_forms_FileUpload.jsx.html",
+                // FileUpload v2 is split into separate source files, so pass all as array.
+                // First item in array will be displayed in full source iframe, rest will be linked to above the iframe.
+                pathToSource: [
+                    "components_forms_file-upload_v2.jsx.html",
+                    "components_forms_file-upload_v2-stateless.jsx.html",
+                    "components_forms_file-upload_v2-stateful.jsx.html"
+                ],
                 pathToDemoSource: "demo_components_forms_FileUploadDemo.jsx.html"
             },
             {
                 label: "Selection List",
                 demo: require("../components/forms/SelectionListDemo.jsx"),
                 pathToDoc: "components/forms/SelectionList.jsx",
-                pathToSource: "components_forms_SelectionList.jsx.html",
+                // SelectionList v2 is split into separate source files, so pass all as array.
+                // First item in array will be displayed in full source iframe, rest will be linked to above the iframe.
+                pathToSource: [
+                    "components_forms_selection-list_v2.jsx.html",
+                    "components_forms_selection-list_v2-stateless.jsx.html",
+                    "components_forms_selection-list_v2-stateful.jsx.html"
+                ],
                 pathToDemoSource: "demo_components_forms_SelectionListDemo.jsx.html"
             },
             {
@@ -281,7 +293,7 @@ module.exports = [
                 label: "Context Close Button",
                 demo: require("../components/general/ContextCloseButtonDemo.jsx"),
                 pathToDoc: "components/general/ContextCloseButton.jsx",
-                pathToSource: "components_general_ContextCloseButton.jsx.html",
+                pathToSource: "components_general_context-close-button_v2.jsx.html",
                 pathToDemoSource: "demo_components_general_ContextCloseButtonDemo.jsx.html"
             },
             {

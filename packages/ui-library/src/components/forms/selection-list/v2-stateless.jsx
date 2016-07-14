@@ -7,6 +7,11 @@ var React = require("re-react"),
     FormSearchBox = require("./FormSearchBox.jsx"),
     Constants = require("./v2-constants");
 
+/**
+ * @name SelectionListStateless
+ * @memberof SelectionList
+ * @desc This is a wrapper around the stateful (controlled=true) SelectionList.
+ */
 module.exports = React.createClass({
     displayName: "SelectionListStateless",
 

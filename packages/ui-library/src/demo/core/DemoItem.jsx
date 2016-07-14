@@ -46,6 +46,30 @@ var DemoItem = React.createClass({
         });
     },
 
+    _getComponentSourceFrame: function () {
+        var sourceClassName = classnames("js-source", { hidden: !this.state.source || this.state.demoSource });
+
+        if (Array.isArray(this.props.codePathUrl)) {
+            return (
+                <div className={sourceClassName}>
+                    {
+                        this.props.codePathUrl.map(function (url, index) {
+                            var title = url.match("[^_]+\\.jsx.html$")[0].replace(".jsx.html", "");
+
+                            if (index !== 0) {
+                                return <a key={title} href={url} target="_blank">{title}</a>;
+                            }
+                        })
+                    }
+
+                    <iframe src={this.props.codePathUrl[0]} />
+                </div>
+            );
+        } else {
+            return <iframe src={this.props.codePathUrl} className={sourceClassName} />;
+        }
+    },
+
     /*
      * When a new demo is selected, inspect the properties of the demo and determine if it's requesting an
      * isolated store.  If so, connect the demo class to the store before rendering.
@@ -99,7 +123,6 @@ var DemoItem = React.createClass({
                 "demo-source": this.state.demoSource
             }),
             docsClassName = classnames("js-doc", { hidden: this.state.source || this.state.demoSource }),
-            sourceClassName = classnames("js-source", { hidden: !this.state.source || this.state.demoSource }),
             demoSourceClassname = classnames("js-demo-source", { hidden: !this.state.demoSource || this.state.source });
 
         return (
@@ -114,8 +137,8 @@ var DemoItem = React.createClass({
                             {srcToggle}
                         </div>
                         <iframe src={this.props.jsdocUrl} className={docsClassName} />
-                        <iframe src={this.props.codePathUrl} className={sourceClassName} />
                         <iframe src={this.props.demoCodePathUrl} className={demoSourceClassname} />
+                        {this._getComponentSourceFrame()}
                     </div>
                     
                 </div>

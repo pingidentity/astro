@@ -12,6 +12,8 @@ var React = require("react"),
 
 /**
 * @callback I18nPhoneInput~onValueChange
+* @ignore
+*
 * @param {string|number} dialCode
 *     Dial code and phone number input.
 * @param {string} phoneNumber
@@ -20,6 +22,8 @@ var React = require("react"),
 
 /**
 * @class I18nPhoneInput
+* @ignore
+*
 * @desc An international phone number input with dial code drop down.
 *
 * @param {string} [id="i18n-phone-input"]

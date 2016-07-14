@@ -42,25 +42,35 @@ var DemoApp = React.createClass({
             name: name
         });
     },
+
+    _buildSourceUrl: function (path) {
+        return format("build-doc/{packageName}/{packageVersion}/{path}", {
+            packageName: packageJson.name,
+            packageVersion: packageJson.version,
+            path: path
+        });
+    },
     
     /**
      * @method
      * @name DemoApp#_getSourceUrl
-     * @param {object} path - The demo descriptor
+     * @param {string|array<string>} path - The demo source code path or an array or source code paths
      * @private
      * @desc Compute the path to the demo item's source code
-     * @returns {string} - The source code url
+     * @returns {string|array<string>} - The source code url or an array or source code url if more that one sourc file
      */
     _getSourceUrl: function (path) {
         if (!path) {
             return null;
         }
 
-        return format("build-doc/{packageName}/{packageVersion}/{path}", {
-            packageName: packageJson.name,
-            packageVersion: packageJson.version,
-            path: path
-        });
+        if (Array.isArray(path)) {
+            return path.map(function (_path) {
+                return this._buildSourceUrl(_path);
+            }.bind(this));
+        } else {
+            return this._buildSourceUrl(path);
+        }
     },
 
     /**

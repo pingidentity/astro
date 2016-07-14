@@ -3,6 +3,12 @@ var React = require("react"),
     Stateless = require("./v2-stateless.jsx"),
     filterItemsFunction = require("./v2-reducer").filterItemsFunction;
 
+/**
+ * @name SelectionListStateful
+ * @memberof SelectionList
+ * @desc This is a wrapper around the stateful (controlled=false) SelectionList to give the user search support
+ *    without having to implement that logic.
+ */
 module.exports = React.createClass({
     displayName: "SelectionListStateful",
 
