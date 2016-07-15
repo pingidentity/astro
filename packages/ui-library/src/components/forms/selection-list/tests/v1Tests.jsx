@@ -314,7 +314,7 @@ describe("SelectionList-v1", function () {
 
         getComponent();
         expect(console.warn).toBeCalledWith(
-            "** This version of the ContextCloseButton is deprecated and will be removed in the next release"
+            "** This version of the SelectionList is deprecated and will be removed in the next release"
         );
     });
 });

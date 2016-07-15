@@ -235,7 +235,7 @@ var ListOptions = React.createClass({
     },
 
     componentWillMount: function () {
-        console.warn("** This version of the ContextCloseButton is deprecated and will be removed in the next release");
+        console.warn("** This version of the SelectionList is deprecated and will be removed in the next release");
     },
 
     render: function () {
