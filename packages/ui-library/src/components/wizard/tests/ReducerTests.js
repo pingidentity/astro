@@ -77,7 +77,7 @@ describe("Step", function () {
 
     it("with id: Processes choose", function () {
         var next = Reducer(initialState, Actions.reset("blah"));
-        next = Reducer(next, Actions.pick({ id: "blah", choice: 5, numSteps: 6 }));
+        next = Reducer(next, Actions.pick("blah", { choice: 5, numSteps: 6 }));
 
         expect(next.blah).toEqual({
             activeStep: 1,
@@ -87,7 +87,7 @@ describe("Step", function () {
     });
 
     it("Processes choose", function () {
-        var next = Reducer(initialState, Actions.pick({ choice: 5, numSteps: 6 }));
+        var next = Reducer(initialState, Actions.pick(null, { choice: 5, numSteps: 6 }));
 
         expect(next).toEqual({
             activeStep: 1,

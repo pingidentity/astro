@@ -15,7 +15,7 @@ exports.Types = keyMirror({
 /**
  * @function Wizard~reset
  * @param {string} id
- *          Identifier
+ *          Wizard identifier
  * @returns {{type: null, id: *}}
  *          Object with type and id
  */
@@ -29,7 +29,7 @@ exports.reset = function (id) {
 /**
  * @function Wizard~next
  * @param {string} id
- *          Identifier
+ *          Wizard identifier
  * @returns {{type: null, id: *}}
  *          Object with type and id
  */
@@ -45,7 +45,7 @@ exports.next = function (id) {
  * @private
  * @desc Build and return the wizard choice.
  * @param {string} id
- *          Identifier for the wizard step.
+ *          Wizard identifier.
  * @param {number} choice
  *          Choice or step of the wizard.
  * @param {number} numSteps
@@ -71,7 +71,7 @@ var _buildWizardChoice = function (id, choice, numSteps) {
  * @deprecated
  * @desc Use change instead
  * @param {string} id
- *           Identifier for the wizard step.
+ *           Wizard identifier.
  * @param {number} choice
  *           Step of the wizard.
  * @param {number} numSteps
@@ -92,20 +92,23 @@ exports.choose = function (id, choice, numSteps) {
 /**
  * @function Wizard~pick
  * @desc Replacement for WizardActions~choose, which takes the object used by Wizard#Choose~onValueChange.
+ *
+ * @param {string} id
+ *           Wizard identifier.
  * @param {Wizard#WizardActions~choice} choice
  *           Details of the action choice.
  * @returns {Wizard#WizardActions~choice}
  *           WizardActions choice object with type, id, choice, numSteps
  */
-exports.pick = function (choice) {
-    return _buildWizardChoice (choice.id, choice.choice, choice.numSteps);
+exports.pick = function (id, choice) {
+    return _buildWizardChoice (id, choice.choice, choice.numSteps);
 };
 
 /**
  * @function Wizard~edit
  * @desc Edit a step in the wizard
  * @param {string} id
- *          Identifier for the wizard step
+ *          Wizard identifier.
  * @param {number} number
  *          Step number
  * @returns {Wizard~choice}
