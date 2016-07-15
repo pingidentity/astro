@@ -41,7 +41,7 @@ describe("ModalButtonTest", function () {
 
         expect(component.props.modalBody).not.toBeCalled();
 
-        component.refs.modalButtonStateful._handleOpen();
+        component.refs.ModalButtonStateful._handleOpen();
         expect(component.props.modalBody).toBeCalled();
     });
 
@@ -317,7 +317,7 @@ describe("ModalButtonTest", function () {
             controlled: true
         });
 
-        expect(component.refs.modalButtonStateless).toBeDefined();
+        expect(component.refs.ModalButtonStateless).toBeDefined();
     });
 
     it("Show warnings when using deprecated properties", function () {

@@ -43,7 +43,7 @@ module.exports = React.createClass({
 
     _done: function () {
         alert("done");
-        this.refs.modal.close();
+        this.refs.modal.refs.ModalButtonStateful._handleClose();
     },
 
     _cancel: function () {

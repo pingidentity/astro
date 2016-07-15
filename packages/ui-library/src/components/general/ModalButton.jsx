@@ -357,7 +357,7 @@ var ModalButtonStateful = ReactVanilla.createClass({
 
         var props = _.defaults(
             {
-                ref: "modalButtonStateless",
+                ref: "ModalButtonStateless",
                 expanded: expanded,
                 onOpen: this._handleOpen,
                 onClose: this._handleClose
@@ -389,11 +389,11 @@ var ModalButton = React.createClass({
             this.props.controlled
                 ? React.createElement(
                     ModalButtonStateless,
-                    _.defaults({ ref: "modalButtonStateless" }, this.props)
+                    _.defaults({ ref: "ModalButtonStateless" }, this.props)
                 )
                 : React.createElement(
                     ModalButtonStateful,
-                    _.defaults({ ref: "modalButtonStateful" }, this.props)
+                    _.defaults({ ref: "ModalButtonStateful" }, this.props)
                 )
         );
     }
