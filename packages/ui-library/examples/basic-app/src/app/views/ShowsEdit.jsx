@@ -3,8 +3,7 @@ var React = require("re-react"),
     FormTextField = require("ui-library/src/components/forms//form-text-field").v2,
     FormRadioGroup = require("ui-library/src/components/forms/FormRadioGroup.jsx"),
     FormLabel = require("ui-library/src/components/forms/FormLabel.jsx"),
-    FormTextArea = require("ui-library/src/components/forms/FormTextArea.jsx"),
-    EventUtils = require("ui-library/src/util/EventUtils");
+    FormTextArea = require("ui-library/src/components/forms/form-text-area");
 
 var ShowsEdit = React.createClass({
     /*
@@ -20,14 +19,14 @@ var ShowsEdit = React.createClass({
      */
     componentWillMount: function () {
         //Create the partials here for better performance, instead of binding on every render
-        this._handleTitleInputChange = this.props.onInputChange.bind(null, ["editingRowInputs", "title"]);
-        this._handleStatusInputChange = this.props.onInputChange.bind(null, ["editingRowInputs", "status"]);
-        this._handleSummaryInputChange = EventUtils.forwardTargetValue(
-            this.props.onInputChange.bind(null, ["editingRowInputs", "summary"]));
+        this._handleTitleInputValueChange = this.props.onInputValueChange.bind(null, ["editingRowInputs", "title"]);
+        this._handleStatusInputValueChange = this.props.onInputValueChange.bind(null, ["editingRowInputs", "status"]);
+        this._handleSummaryInputValueChange = this.props.onInputValueChange.bind(null, ["editingRowInputs", "summary"]);
 
-        this._handleGenreInputChange = {};
+        this._handleGenreInputValueChange = {};
         for (var genre in this.props.genres) {
-            this._handleGenreInputChange[genre] = this.props.onInputChange.bind(null, ["editingRowInputs", genre]);
+            this._handleGenreInputValueChange[genre] =
+                this.props.onInputValueChange.bind(null,["editingRowInputs", genre]);
         }
 
         //Initialize the status radio options
@@ -69,9 +68,9 @@ var ShowsEdit = React.createClass({
         return Object.keys(this.props.genres).map(function (genre) {
             return (
                 <FormCheckbox key={genre + "-input"}
-                        id={genre + "-input"}
+                        data-id={genre + "-input"}
                         label={this.props.genres[genre].title}
-                        onValueChange={this._handleGenreInputChange[genre]}
+                        onValueChange={this._handleGenreInputValueChange[genre]}
                         checked={this.props.inputs[genre]} />
             );
         }.bind(this));
@@ -90,14 +89,15 @@ var ShowsEdit = React.createClass({
                                 className="input-width-medium"
                                 data-id="title"
                                 value={this.props.inputs.title}
-                                onValueChange={this._handleTitleInputChange} />
+                                onValueChange={this._handleTitleInputValueChange} />
                     </div>
                     <div className="input-row">
-                        <FormTextArea labelText="Summary"
+                        <FormTextArea controlled={true}
+                                labelText="Summary"
                                 className="input-width-full"
                                 maxLength={250}
                                 defaultValue={this.props.inputs.summary}
-                                onValueChange={this._handleSummaryInputChange}
+                                onValueChange={this._handleSummaryInputValueChange}
                                 errorMessage={this.props.errors.summaryMaxLength
                                     ? "Summary cannot exceed 250 characters." : ""} />
                     </div>
@@ -109,7 +109,7 @@ var ShowsEdit = React.createClass({
                         <FormLabel value="Status" />
                         <FormRadioGroup groupName="statusGroup"
                                 selected={this.props.inputs.status}
-                                onChange={this._handleStatusInputChange}
+                                onValueChange={this._handleStatusInputValueChange}
                                 items={this._statusRadioOptions} />
                     </div>
                 </div>
@@ -143,7 +143,7 @@ var ShowsEditView = React.createClass({
                     genres={this.props.genres}
                     statuses={this.props.statuses}
                     inputs={this.props.editingRowInputs}
-                    onInputChange={this.props.onShowsChange}
+                    onInputValueChange={this.props.onShowsValueChange}
                     errors={this.props.editingRowErrors}
                     onCancel={this.props.onShowsEditCancel}
                     onSave={this.props.onShowsEditSave} />

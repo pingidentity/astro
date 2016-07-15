@@ -123,9 +123,6 @@ lastId = initialState.rows.length;
 module.exports = function (state, action) {
     var nextState = _.clone(state);
 
-    window.pushAtPath = pushAtPath;
-    window.clone = _.clone;
-
     switch (action.type) {
         case Actions.Types.SHOWS_SET:
             //Summaries cannot be longer then 250 characters
@@ -145,7 +142,7 @@ module.exports = function (state, action) {
             lastId += 1;
             var id = lastId;
             nextState = pushAtPath(nextState, "rows", {
-                id: id,
+                id: id.toString(),
                 title: action.title,
                 genres: action.genres,
                 status: action.status,

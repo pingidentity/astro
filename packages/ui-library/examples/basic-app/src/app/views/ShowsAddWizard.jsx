@@ -6,8 +6,7 @@ var React = require("re-react"),
     FormRadioGroup = require("ui-library/src/components/forms/FormRadioGroup.jsx"),
     FormCheckbox = require("ui-library/src/components/forms/FormCheckbox.jsx"),
     FormTextField = require("ui-library/src/components/forms/form-text-field"),
-    FormTextArea = require("ui-library/src/components/forms/FormTextArea.jsx"),
-    EventUtils = require("ui-library/src/util/EventUtils");
+    FormTextArea = require("ui-library/src/components/forms/form-text-area");
 
 var ShowsAddWizard = React.createClass({
     /*
@@ -32,13 +31,13 @@ var ShowsAddWizard = React.createClass({
         this.props.onReset();
 
         //Create the partials here for better performance, instead of binding on every render
-        this._handleTitleFieldChange = this.props.onFieldChange.bind(null, "title");
-        this._handleStatusFieldChange = this.props.onFieldChange.bind(null, "status");
-        this._handleSummaryFieldChange = EventUtils.forwardTargetValue(this.props.onFieldChange.bind(null, "summary"));
+        this._handleTitleFieldValueChange = this.props.onFieldValueChange.bind(null, "title");
+        this._handleStatusFieldValueChange = this.props.onFieldValueChange.bind(null, "status");
+        this._handleSummaryFieldValueChange = this.props.onFieldValueChange.bind(null, "summary");
 
-        this._handleGenreFieldChange = {};
+        this._handleGenreFieldValueChange = {};
         for (var genre in this.props.genres) {
-            this._handleGenreFieldChange[genre] = this.props.onFieldChange.bind(null, genre);
+            this._handleGenreFieldValueChange[genre] = this.props.onFieldValueChange.bind(null, genre);
         }
 
         //Initialize the status radio options
@@ -61,7 +60,7 @@ var ShowsAddWizard = React.createClass({
         
         this.props.onAdd(this.props.fields.title, genres, this.props.statuses[this.props.fields.status],
             this.props.fields.summary);
-        this.refs["shows-add-wizard-modal"].close();
+        this.refs["shows-add-wizard-modal"].refs.ModalButtonStateful._handleClose();
     },
 
     /*
@@ -71,9 +70,9 @@ var ShowsAddWizard = React.createClass({
         return Object.keys(this.props.genres).map(function (genre) {
             return (
                 <FormCheckbox key={genre + "-field"}
-                        id={genre + "-field"}
+                        data-id={genre + "-field"}
                         label={this.props.genres[genre].title}
-                        onValueChange={this._handleGenreFieldChange[genre]}
+                        onValueChange={this._handleGenreFieldValueChange[genre]}
                         checked={this.props.fields[genre]} />
             );
         }.bind(this));
@@ -82,9 +81,9 @@ var ShowsAddWizard = React.createClass({
     render: function () {
         return (
             <ModalButton ref="shows-add-wizard-modal"
-                    value="+ Add Show"
+                    activatorButtonLabel="+ Add Show"
                     modalTitle="Show Creation Wizard"
-                    containerStyle="add-modal" >
+                    className="add-modal" >
 
                 <Wizard {...this.props} title="Enter details to add a new show" className="shows-add">
                     <Wizard.Step title="Set Show Details"
@@ -97,13 +96,14 @@ var ShowsAddWizard = React.createClass({
                                     <FormTextField labelText="Title"
                                             data-id="title"
                                             value={this.props.fields.title}
-                                            onValueChange={this._handleTitleFieldChange} />
+                                            onValueChange={this._handleTitleFieldValueChange} />
                                 </div>
                                 <div className="input-row">
-                                    <FormTextArea labelText="Summary"
+                                    <FormTextArea controlled={true}
+                                            labelText="Summary"
                                             maxLength={250}
                                             defaultValue={this.props.fields.summary}
-                                            onValueChange={this._handleSummaryFieldChange}
+                                            onValueChange={this._handleSummaryFieldValueChange}
                                             errorMessage={this.props.errors.summaryMaxLength
                                                 ? "Summary cannot exceed 250 characters." : ""} />
                                 </div>
@@ -111,7 +111,7 @@ var ShowsAddWizard = React.createClass({
                                     <FormLabel value="Status" />
                                     <FormRadioGroup groupName="statusGroup"
                                             selected={this.props.fields.status}
-                                            onChange={this._handleStatusFieldChange}
+                                            onValueChange={this._handleStatusFieldValueChange}
                                             items={this._statusRadioOptions} />
                                 </div>
                             </Layout.Column>
@@ -158,8 +158,8 @@ var ShowsAddWizardView = React.createClass({
     /*
     * Handle input field changes
     */
-    _handleFieldChange: function (name, value) {
-        this.props.onShowsChange(["addWizardFields", name], value);
+    _handleFieldValueChange: function (name, value) {
+        this.props.onShowsValueChange(["addWizardFields", name], value);
     },
 
     /*
@@ -178,11 +178,11 @@ var ShowsAddWizardView = React.createClass({
                     errors={this.props.addWizardErrors}
                     genres={this.props.genres}
                     statuses={this.props.statuses}
-                    onFieldChange={this._handleFieldChange}
+                    onFieldValueChange={this._handleFieldValueChange}
                     onReset={this._handleReset}
                     onNext={this._handleWizardNext}
                     onEdit={this._handleWizardEdit}
-                    onChange={this._handleWizardChoose}
+                    onValueChange={this._handleWizardChoose}
                     onAdd={this.props.onShowsAdd} />
         );
     }

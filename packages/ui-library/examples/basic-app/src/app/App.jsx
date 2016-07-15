@@ -106,12 +106,12 @@ var App = React.createClass({
                             onWizardChoose={this.wizardActions.pick}
                             onWizardEdit={this.wizardActions.edit}
                             onShowsAddWizardReset={this.showsViewActions.addReset}
-                            onShowsSearchFilterChange={this.showsViewActions.setFilter}
-                            onShowsActiveTabChange={this.showsViewActions.setActiveTab}
-                            onShowsSearchToggleAdvanced={this.showsViewActions.setExpandedSearch}
-                            onShowsScrollPositionChange={this.showsViewActions.setPosition}
+                            onShowsSearchFilterValueChange={this.showsViewActions.setFilter}
+                            onShowsActiveTabValueChange={this.showsViewActions.setActiveTab}
+                            onShowsSearchAdvancedToggle={this.showsViewActions.setExpandedSearch}
+                            onShowsScrollPositionValueChange={this.showsViewActions.setPosition}
                             onShowsAdd={this.showsViewActions.add}
-                            onShowsChange={this.showsViewActions.set}
+                            onShowsValueChange={this.showsViewActions.set}
                             onShowsEdit={this.showsViewActions.edit}
                             onShowsEditSave={this.showsViewActions.saveEdit}
                             onShowsEditCancel={this.showsViewActions.cancelEdit} />
@@ -138,7 +138,7 @@ var App = React.createClass({
                 }
                 <HeaderBar {...this.props.header}
                         label="Basic UI Library App"
-                        onItemClick={this.headerActions.toggleItem} />
+                        onItemValueChange={this.headerActions.toggleItem} />
 
                 {
                   /*
@@ -146,8 +146,8 @@ var App = React.createClass({
                    */
                 }
                 <LeftNavBar {...this.props.nav}
-                        onItemClick={this.navActions.selectItem}
-                        onSectionClick={this.navActions.toggleSection} />
+                        onItemValueChange={this.navActions.selectItem}
+                        onSectionValueChange={this.navActions.toggleSection} />
                 {
                     /*
                     * When an item is selected in the nav bar, the corresponding view is rendered

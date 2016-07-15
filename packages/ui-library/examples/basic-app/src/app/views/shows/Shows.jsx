@@ -9,7 +9,7 @@ var React = require("re-react"),
     PropsToUrlWatcher = require("ui-library/src/components/offscreen/PropsToUrlWatcher.jsx"),
     Section = require("ui-library/src/components/general/Section.jsx"),
     DetailsTooltip = require("ui-library/src/components/tooltips/DetailsTooltip.jsx"),
-    SelectionList = require("ui-library/src/components/forms/SelectionList.jsx"),
+    SelectionList = require("ui-library/src/components/forms/selection-list"),
     ShowsAddWizardView = require("../ShowsAddWizard.jsx"),
     ShowsEditView = require("../ShowsEdit.jsx"),
     classnames = require("classnames"),
@@ -38,7 +38,7 @@ var Shows = React.createClass({
         this._contentType = <ShowRow id={0} showEdit={true} onShowsEdit={this.props.onShowsEdit} />;
 
         //Create the partials here for better performance, instead of binding on every render
-        this._handleTextChange = this._handleFilter.bind(null, "text");
+        this._handleTextValueChange = this._handleFilter.bind(null, "text");
         this._handleGenreFilterToggle = {};
 
         this._genreFilters = [];
@@ -58,7 +58,7 @@ var Shows = React.createClass({
     /*
     * Handle SelectionList genre filter changes.
     */
-    _handleGenreFiltersChange: function (selectedGenreFilters) {
+    _handleGenreFiltersValueChange: function (selectedGenreFilters) {
         this._genreFilters.forEach(function (genreFilter) {
             this._handleGenreFilterToggle[genreFilter.id](selectedGenreFilters.indexOf(genreFilter.id) !== -1);
         }.bind(this));
@@ -71,7 +71,7 @@ var Shows = React.createClass({
      * callback changing.
      */
     _handleFilter: function (name, value) {
-        this.props.onSearchFilterChange(name, value);
+        this.props.onSearchFilterValueChange(name, value);
     },
 
     /*
@@ -79,7 +79,7 @@ var Shows = React.createClass({
      */
     _handleScroll: function (pos) {
         if (this.props.position.batchId !== pos.batchId || this.props.position.itemIndex !== pos.itemIndex) {
-            this.props.onScrollPositionChange(pos);
+            this.props.onScrollPositionValueChange(pos);
         }
     },
 
@@ -93,7 +93,7 @@ var Shows = React.createClass({
         for (var status in Statuses) {
             filters.push(
                 <FormCheckbox key={status + "-filter"}
-                        id={status + "-filter"}
+                        data-id={status + "-filter"}
                         label={Statuses[status]}
                         onValueChange={this._handleGenreFilterToggle[status]}
                         checked={this.props.filters[status]} />
@@ -102,18 +102,18 @@ var Shows = React.createClass({
         //Genre filters
         filters.push(
             <DetailsTooltip key="genre-filters-container"
-                    id="genre-filters-dialog"
+                    data-id="genre-filters-dialog"
                     className="input-selection-list-tooltip"
-                    positionStyle="bottom right"
+                    positionClassName="bottom right"
                     label="Genres"
                     showClose={false}
                     controlled={false} >
                 <SelectionList data-id="genre-filters"
-                        type={SelectionList.types.MULTI}
+                        type={SelectionList.ListType.MULTI}
                         items={this._genreFilters}
                         selectedItemIds={this._selectedGenreFilters}
                         showSearchBox={true}
-                        onChange={this._handleGenreFiltersChange} />
+                        onValueChange={this._handleGenreFiltersValueChange} />
             </DetailsTooltip>
         );
         return filters;
@@ -126,7 +126,7 @@ var Shows = React.createClass({
         return Object.keys(Genres).map(function (genre) {
             return (
                 <Section key={genre + "-description"}
-                        id={genre + "-description"}
+                        data-id={genre + "-description"}
                         title={Genres[genre].title}
                         controlled={false} >
                     <div className="input-row">
@@ -139,12 +139,12 @@ var Shows = React.createClass({
 
     render: function () {
         return (
-            <TabbedSections selectedIndex={this.props.activeTab} onSectionChange={this.props.onActiveTabChange}>
+            <TabbedSections selectedIndex={this.props.activeTab} onValueChange={this.props.onActiveTabValueChange}>
                 <div title="Shows">
                     <div className={classnames("search-bar", { expanded: this.props.advancedSearch })}>
                         <div>
                             <FormTextField controlled={true}
-                                    onValueChange={this._handleTextChange}
+                                    onValueChange={this._handleTextValueChange}
                                     value={this.props.filters.text}
                                     className="search" />
 
@@ -170,8 +170,8 @@ var Shows = React.createClass({
                                 batches={this.props.batches}
                                 hasNext={this.props.hasNext}
                                 hasPrev={this.props.hasPrev}
-                                loadNext={_.noop}
-                                loadPrev={_.noop} >
+                                onLoadNext={_.noop}
+                                onLoadPrev={_.noop} >
                             <div>No shows match the filters</div>
                         </InfiniteScroll>
                     </div>
@@ -209,11 +209,11 @@ var ShowRow = React.createClass({
 
     render: function () {
         return (
-            <ExpandableRow {...this.props}
-                    id={this.props.id}
+            <ExpandableRow data-id={this.props.id}
                     title={this.props.title}
                     subtitle={this._getGenreTitles()}
-                    onEditButtonClick={this._handleEditButtonClick} >
+                    onEditButtonClick={this._handleEditButtonClick}
+                    showDelete={false} >
                 <div className="data">
                     <div className="data-item">
                         <label>Status</label>
@@ -236,36 +236,36 @@ var ShowsView = React.createClass({
     /*
     * Handle toggling the advanced search bar
     */
-    _handleToggleSearchBar: function () {
-        this.props.onShowsSearchToggleAdvanced(!this.props.shows.advancedSearch);
+    _handleSearchBarToggle: function () {
+        this.props.onShowsSearchAdvancedToggle(!this.props.shows.advancedSearch);
     },
 
     /*
     * Handle changing the search filters
     */
-    _handleSearchFilterChange: function (name, value) {
-        this.props.onShowsSearchFilterChange(name, value);
+    _handleSearchFilterValueChange: function (name, value) {
+        this.props.onShowsSearchFilterValueChange(name, value);
     },
 
     render: function () {
         var watch = _.pick(this.props.shows, "position", "activeTab", "filters", "advancedSearch");
-        var showsViewProps = _.pick(this.props, "wizard", "onWizardReset", "onWizardNext",
-            "onWizardEdit", "onWizardChoose", "onShowsChange", "onShowsAddWizardReset", "onShowsAdd", "onShowsEdit");
+        var showsViewProps = _.pick(this.props, "wizard", "onWizardReset", "onWizardNext", "onWizardEdit",
+            "onWizardChoose", "onShowsValueChange", "onShowsAddWizardReset", "onShowsAdd", "onShowsEdit");
         
         return (
             <div>
                 {_.isEmpty(this.props.shows.editingRowInputs)
                     ? <Shows {...this.props.shows} {...showsViewProps}
-                            onSearchToggleAdvanced={this._handleToggleSearchBar}
-                            onSearchFilterChange={this._handleSearchFilterChange}
-                            onScrollPositionChange={this.props.onShowsScrollPositionChange}
-                            onActiveTabChange={this.props.onShowsActiveTabChange} />
+                            onSearchToggleAdvanced={this._handleSearchBarToggle}
+                            onSearchFilterValueChange={this._handleSearchFilterValueChange}
+                            onScrollPositionValueChange={this.props.onShowsScrollPositionValueChange}
+                            onActiveTabValueChange={this.props.onShowsActiveTabValueChange} />
                     : <ShowsEditView
                             genres={Genres}
                             statuses={Statuses}
                             editingRowInputs={this.props.shows.editingRowInputs}
                             editingRowErrors={this.props.shows.editingRowErrors}
-                            onShowsChange={this.props.onShowsChange}
+                            onShowsValueChange={this.props.onShowsValueChange}
                             onShowsEditCancel={this.props.onShowsEditCancel}
                             onShowsEditSave={this.props.onShowsEditSave} />
                 }
