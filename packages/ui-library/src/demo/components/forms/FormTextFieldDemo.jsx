@@ -20,7 +20,8 @@ var FormTextFieldDemo = React.createClass({
             saved: false,
             undone: false,
             timeFieldValue: "00:00:00",
-            dateTimeFieldValue: Utils.formatDate(Date.now())
+            dateTimeFieldValue: Utils.formatDate(Date.now()),
+            onUndoValue: null
         };
     },
 
@@ -36,8 +37,18 @@ var FormTextFieldDemo = React.createClass({
         });
     },
 
+    _handleUndoValueChange: function (value) {
+        this.setState({
+            onUndoValue: value,
+            showUndo: value !== "this is the original value"
+        });
+    },
+
     _handleUndo: function () {
-        this.setState({ undone: true });
+        this.setState({
+            undone: true,
+            onUndoValue: "this is the original value"
+        });
         window.setTimeout(this.setState.bind(this, { undone: false }), 5000);
     },
 
@@ -80,12 +91,10 @@ var FormTextFieldDemo = React.createClass({
                 errorMessage = "Please enter at least 5 chars";
             }
         }
-
         return errorMessage;
     },
 
     render: function () {
-        var originalValueForUndo = "this is the original value";
 
         return (
             <div>
@@ -115,7 +124,10 @@ var FormTextFieldDemo = React.createClass({
                         labelText="Default value and undo"
                         showUndo={true}
                         onUndo={this._handleUndo}
-                        defaultValue={originalValueForUndo} />
+                        value={this.state.onUndoValue}
+                        onValueChange={this._handleUndoValueChange}
+                        defaultValue="this is the original value"
+                    />
                     <div>{this.state.undone ? "undone!" : null}</div>
                 </div>
                 <div className="input-row">
