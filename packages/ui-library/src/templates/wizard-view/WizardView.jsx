@@ -2,27 +2,90 @@ var React = require("re-react"),
     ModalButton = require("../../components/general/ModalButton.jsx"),
     Wizard = require("../../components/wizard/Wizard.jsx"),
     Layout = require("../../components/general/ColumnLayout.jsx"),
-    Messages = require("../../components/general/Messages.jsx"),
+    Messages = require("../../components/general/messages"),
     FormLabel = require("../../components/forms/FormLabel.jsx"),
-    FileUpload = require("../../components/forms/FileUpload.jsx"),
+    FileUpload = require("../../components/forms/file-upload").v2,
     FormRadioGroup = require("../../components/forms/FormRadioGroup.jsx"),
     FormCheckbox = require("../../components/forms/FormCheckbox.jsx"),
-    FormTextField = require("../../components/forms/form-text-field");
+    FormTextField = require("../../components/forms/form-text-field").v2;
+
+/**
+ * @callback WizardView~onFieldChange
+ * @param {string} name
+ *          Identifier for input
+ * @param {string} value
+ *          New value of input
+ */
+
+/**
+ * @callback WizardView~onComplexFieldChange
+ * @param {string} name
+ *          Identifier for input
+ * @param {string} value
+ *          New value of input
+ */
+
+/**
+ * @callback WizardView~onAddComplexFieldsRow
+ * @param {string} name
+ *          Identifier for input
+ * @param {string} value
+ *          New value of input
+ */
+
+/**
+ * @callback WizardView~onAddMessage
+ * @param {string} message
+ *          Passed message
+ */
+
+/**
+ * @callback WizardView~onNext
+ */
+
+/**
+ * @callback WizardView~onReset
+ */
 
 /**
  * @class WizardView
  * @desc This is a template to demonstrate how to build a page with a wizard in a modal dialog.  Use it as a
  *     starting poing for a wizard in modal page.
  *
- * @param {function} onFieldChange - A callback executed when an input field value changes
- * @param {function} onComplexFieldChange - A callback executed when a complex input field value changes
- * @param {function} onAddComplexFieldsRow - A callback executed when a complex input field row is added
- * @param {function} onAddMessage - A callback executed when a message is added
- * @param {function} onRemoveMessage - A callback executed when a message is removed
- * @param {function} onNext - A callback executed when a wizard's next is clicked
- * @param {function} onEdit - A callback executed when a wizard's edit is clicked
- * @param {function} onReset - A callback executed to reset a wizard
- * @param {function} onChange - A callback executed when a wizard is chosen
+ * @param {string} labelNext
+ *              Label for next button
+ * @param {string} labelCancel
+ *              Label for cancel button
+ * @param {string} labelEdit
+ *              Label for edit button
+ * @param {object} fields
+ *              Object for fields
+ * @param {array} choices
+ *              Array for choices
+ * @param {number} activeStep
+ *              Current active step
+ * @param {number} numSteps
+ *              Number of steps
+ * @param {array} messages
+ *              Array of messages
+ * @param {WizardView~onFieldChange} onFieldChange
+ *              Callback to be triggered when an input field value changes
+ * @param {WizardView~onComplexFieldChange} onComplexFieldChange
+ *              Callback to be triggered when a complex input field value changes
+ * @param {WizardView~onAddComplexFieldsRow} onAddComplexFieldsRow
+ *              Callback to be triggered when a complex input field row is added
+ * @param {WizardView~onAddMessage} onAddMessage
+ *              Callback to be triggered when a message is added
+ * @param {Messages~onRemoveMessage} onRemoveMessage
+ *              Callback to be triggered when a message is removed
+ * @param {Wizard~onEdit} onEdit
+ *              Callback to be triggered when a wizard's edit is clicked
+ * @param {WizardView~onNext} onNext
+ *              Callback to be triggered when a wizard's next is clicked
+ * @param {WizardView~onReset} onReset
+ *              Callback to be triggered to reset a wizard
+ * @param {Wizard#Choose~onValueChange} onValueChange
+ *              Callback to be triggered when the choice is made on first step of wizard.
  */
 module.exports = React.createClass({
     propTypes: {
@@ -33,7 +96,15 @@ module.exports = React.createClass({
         choices: React.PropTypes.array.affectsRendering,
         activeStep: React.PropTypes.number.affectsRendering,
         numSteps: React.PropTypes.number.affectsRendering,
-        messages: React.PropTypes.array.affectsRendering
+        messages: React.PropTypes.array.affectsRendering,
+
+        onFieldChange: React.PropTypes.func,
+        onComplexFieldChange: React.PropTypes.func,
+        onAddComplexFieldsRow: React.PropTypes.func,
+        onAddMessage: React.PropTypes.func,
+        onRemoveMessage: React.PropTypes.func,
+        onNext: React.PropTypes.func,
+        onReset: React.PropTypes.func
     },
 
     _next: function () {
@@ -65,24 +136,65 @@ module.exports = React.createClass({
             <div className="clear-both">
                 {/* This outer div is only required to style inside the DemoApp */}
 
-                <ModalButton value="Show wizard" modalTitle="Object creation wizard" ref="modal">
+                <ModalButton activatorButtonLabel="Show wizard" modalTitle="Object creation wizard" ref="modal">
                     <Messages messages={this.props.messages}
                         containerType={Messages.ContainerTypes.MODAL}
-                        removeMessage={this.props.onRemoveMessage} />
+                        onRemoveMessage={this.props.onRemoveMessage} />
 
-                    <Wizard.Choose {...this.props}
+                    <Wizard.Choose labelCancel={this.props.labelCancel}
+                                   labelDone={this.props.labelDone}
+                                   labelEdit={this.props.labelEdit}
+                                   labelNext={this.props.labelNext}
+                                   numSteps={this.props.numSteps}
+                                   activeStep={this.props.activeStep}
+                                   choices={this.props.choices}
                                    title="Choose a Wizard"
+                                   onEdit={this.props.onEdit}
+                                   onValueChange={this.props.onValueChange}
                                    onNext={this._next}
-                                   onDone={this._done}
-                                   onCancel={this._cancel} >
+                                   onCancel={this._cancel}
+                                   onReset={this.props.onReset}
+                    >
                         <Wizard title="Two Column Step">
-                            <TwoColumnStep {...this.props} onFieldChange={this._onFieldChange} />
+                            <TwoColumnStep labelCancel={this.props.labelCancel}
+                                           labelDone={this.props.labelDone}
+                                           labelEdit={this.props.labelEdit}
+                                           labelNext={this.props.labelNext}
+                                           numSteps={this.props.numSteps}
+                                           activeStep={this.props.activeStep}
+                                           fields={this.props.fields}
+                                           onEdit={this.props.onEdit}
+                                           onNext={this._next}
+                                           onDone={this._done}
+                                           onCancel={this._cancel}
+                                           onFieldChange={this._onFieldChange}
+                                           onRemoveMessage={this.props.onRemoveMessage}
+                                           onComplexFieldChange={this.props.onComplexFieldChange}
+                                           onAddMessage={this.props.onAddMessage}
+                                           onAddComplexFieldsRow={this.props.onAddComplexFieldsRow}
+                            />
                         </Wizard>
 
                         <Or />
 
                         <Wizard title="Form Template">
-                            <FormStep {...this.props} onFieldChange={this._onFieldChange} />
+                            <FormStep labelCancel={this.props.labelCancel}
+                                      labelDone={this.props.labelDone}
+                                      labelEdit={this.props.labelEdit}
+                                      labelNext={this.props.labelNext}
+                                      numSteps={this.props.numSteps}
+                                      activeStep={this.props.activeStep}
+                                      fields={this.props.fields}
+                                      onEdit={this.props.onEdit}
+                                      onNext={this._next}
+                                      onDone={this._done}
+                                      onCancel={this._cancel}
+                                      onFieldChange={this._onFieldChange}
+                                      onRemoveMessage={this.props.onRemoveMessage}
+                                      onComplexFieldChange={this.props.onComplexFieldChange}
+                                      onAddMessage={this.props.onAddMessage}
+                                      onAddComplexFieldsRow={this.props.onAddComplexFieldsRow}
+                            />
                             <Wizard.Step title="Final Step" />
                         </Wizard>
                     </Wizard.Choose>
