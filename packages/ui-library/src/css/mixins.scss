@@ -217,7 +217,7 @@
 }
 @mixin user-select($select) {
     -o-user-select: $select;
-    -moz-user-select: -moz-$select;
+    -moz-user-select: $select;
     -webkit-user-select: $select;
     -ms-user-select: $select;
     user-select: $select;

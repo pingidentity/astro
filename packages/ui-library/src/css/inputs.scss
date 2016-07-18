@@ -4,7 +4,6 @@ $default-input-transition: all 0.3s;
 $default-input-height: 40px;
 $default-input-font-size: 14px;
 
-
 // MISC SUPPORTING FUNCTIONS -----------------------------------------------------------------------
 @mixin checkboxStyles() {
 	$checkbox-height: 18px;
@@ -111,6 +110,10 @@ input[type=text], input[type=password], textarea {
 	}
 	&:focus {
 		border-color: $color-active-blue;
+	}
+	&::-moz-selection {
+		// prevents odd FF text selection on undo
+		background: none;
 	}
 	&.extended {
 		width: 350px;
