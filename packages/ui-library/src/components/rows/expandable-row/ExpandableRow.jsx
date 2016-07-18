@@ -61,7 +61,7 @@ var Statuses = {
  * @param {string} [data-id="expandable-row"]
  *     To define the base "data-id" value for the top-level HTML container.
  * @param {string|number} [id]
- *     DEPRECATED. Use "data-id" instead.
+ *     Row id, which may be used as a numeric counter rather. Can compliment data-id.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
  * @param {boolean} [controlled=false]
@@ -154,9 +154,9 @@ var Statuses = {
  *         <h1>My Row Results</h1>
  *         <!-- note that all expanding rows must be in a div with the "result-set" css class -->
  *         <div className="result-set">
- *             <ExpandableRow title={'row1'} subtitle={'row1 subtitle'} content={row1Content} />
- *             <ExpandableRow title={'row2'} subtitle={'row2 subtitle'} content={row2Content} />
- *             <ExpandableRow title={'row3'} subtitle={'row3 subtitle'} content={row3Content} />
+ *             <ExpandableRow id="1" title={'row1'} subtitle={'row1 subtitle'} content={row1Content} />
+ *             <ExpandableRow id="2" title={'row2'} subtitle={'row2 subtitle'} content={row2Content} />
+ *             <ExpandableRow id="3" title={'row3'} subtitle={'row3 subtitle'} content={row3Content} />
  *         </div>
  *
  *     You can also pass the content as a children of the component. This will overwrite any content passed in as a prop
@@ -325,9 +325,6 @@ var StatelessExpandableRow = React.createClass({
     },
 
     componentWillMount: function () {
-        if (this.props.id) {
-            console.warn(Utils.deprecateMessage("id", "data-id"));
-        }
         if (this.props.defaultToExpanded) {
             console.warn(Utils.deprecateMessage("defaultToExpanded", "expanded"));
         }

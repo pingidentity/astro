@@ -431,16 +431,6 @@ describe("ExpandableRow", function () {
     });
 
     //TODO: remove when v1 no longer supported
-    it("logs warning when id prop given", function () {
-        console.warn = jest.genMockFunction();
-
-        getComponent({ id: "myRow" });
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use data-id instead of id. Support for id will be removed in next version");
-    });
-
-    //TODO: remove when v1 no longer supported
     it("logs wanring when defaultToExpanded prop given", function () {
         console.warn = jest.genMockFunction();
 

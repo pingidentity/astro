@@ -54,7 +54,8 @@ var pageSelector = createSelector(
  * the request returned from the server with the rows.
  */
 for (var i = 1; i < 51; i += 1) {
-    initialState.rows.all.push({ id: i, title: "Row " + i, subtitle: "subtitle for row " + i });
+    initialState.rows.all.push({ id: i, key: "row-" + i, "data-id": "row-" + i,
+                                 title: "Row " + i, subtitle: "subtitle for row " + i });
 }
 
 initialState.rows.filtered = filterSelector(initialState);

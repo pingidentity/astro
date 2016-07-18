@@ -19,7 +19,7 @@ var ListViewPaginatedDemo = React.createClass({
     render: function () {
         return (
             <ListViewPaginated {...this.props}
-                onSearchToggleAdvanced={this._handleToggleSearchBar}
+                onSearchAdvancedToggle={this._handleToggleSearchBar}
                 onSearchFilterChange={this.actions.setFilter}
                 onPageChange={this.actions.setPage} />);
     }

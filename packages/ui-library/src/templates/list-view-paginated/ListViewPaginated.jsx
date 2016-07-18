@@ -1,21 +1,47 @@
 var React = require("re-react"),
-    Toggle = require("../../components/forms/Toggle.jsx"),
-    FormTextField = require("../../components/forms/form-text-field"),
+    Toggle = require("../../components/forms/form-toggle").v2,
+    FormTextField = require("../../components/forms/form-text-field").v2,
     FormCheckbox = require("../../components/forms/FormCheckbox.jsx"),
     ExpandableRow = require("../../components/rows/ExpandableRow.jsx"),
-    Pagination = require("../../components/list/Pagination.jsx"),
+    Pagination = require("../../components/list/Pagination"),
     classnames = require("classnames");
+
+/**
+ * @callback ListView~onSearchAdvancedToggle
+ * @param {object} e
+ *    The ReactJS synthetic event object.
+ */
+
+/**
+ * @callback ListView~onSearchFilterChange
+ * @param {string} Name
+ *          Identifier for input
+ * @param {string} value
+ *          New value of input
+ */
+
+/**
+ * @callback ListView~onPageChange
+ * @param {Pagination~pagingDetails} pageDetails
+ *          Details about the paging
+ */
 
 /**
  * @class ListViewPaginated
  * @desc This is a template to demonstrate how to build an paginated list view, with search and filters.  Use it as a
  *     starting point for a page.
  *
- * @param {bool} advancedSearch - Whether to show the narrow by section
- * @param {function} onSearchToggleAdvanced - A callback executed when the advanced search is toggled
- * @param {function} onSearchFilterChange - A callback executed when the filter criteria is changed.  The signature is
- *     function (filterName, filterValue).
- * @param {number} page - The page number of row results to display
+ * @param {boolean} advancedSearch
+ *          Whether to show the narrow by section
+ * @param {number} page
+ *          The page number of row results to display
+ * @param {ListView~onSearchAdvancedToggle} onSearchAdvancedToggle
+ *          Callback to be triggered when the advanced search is toggled
+ * @param {ListView~onSearchFilterChange} onSearchFilterChange
+ *          Callback to be triggered when the filter criteria is changed.
+ *          The signature is function (filterName, filterValue).
+ * @param {ListView~onPageChange} onPageChange
+ *          Callback to be triggered when the page has changed.
  */
 module.exports = React.createClass({
     /*
@@ -25,7 +51,10 @@ module.exports = React.createClass({
     propTypes: {
         advancedSearch: React.PropTypes.bool.affectsRendering,
         filters: React.PropTypes.object.affectsRendering,
-        page: React.PropTypes.number.affectsRendering
+        page: React.PropTypes.number.affectsRendering,
+        onSearchFilterChange: React.PropTypes.func,
+        onSearchAdvancedToggle: React.PropTypes.func,
+        onPageChange: React.PropTypes.func
     },
 
     /*
@@ -47,8 +76,8 @@ module.exports = React.createClass({
         this.props.onSearchFilterChange(name, value);
     },
 
-    _handlePageChange: function (start, last, currentPage) {
-        this.props.onPageChange(currentPage);
+    _handlePageChange: function (pageDetails) {
+        this.props.onPageChange(pageDetails.page);
     },
 
     _generatePageRows: function () {
@@ -69,7 +98,7 @@ module.exports = React.createClass({
 
                         <span data-id="narrow-by"
                             className="filter-by"
-                            onClick={this.props.onSearchToggleAdvanced}>Narrow By</span>
+                            onClick={this.props.onSearchAdvancedToggle}>Narrow By</span>
                     </div>
                     <div className="filters">
                         <FormCheckbox label="filter odd rows"
@@ -87,7 +116,7 @@ module.exports = React.createClass({
                         perPage = {this.props.perPage}
                         page = {this.props.page}
                         total = {this.props.rows.filtered.length}
-                        onChange = {this._handlePageChange}>
+                        onValueChange = {this._handlePageChange}>
 
                         <div className="result-set">{this._generatePageRows()}</div>
                     </Pagination>
