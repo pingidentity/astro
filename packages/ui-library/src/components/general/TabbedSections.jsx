@@ -50,7 +50,8 @@ var TabbedSections = React.createClass({
         selectedIndex: React.PropTypes.number.isRequired.affectsRendering,
         renderHidden: React.PropTypes.bool.affectsRendering,
         onSectionChange: React.PropTypes.func,
-        onValueChange: React.PropTypes.func // add isRequired once the onSectionChange is removed
+        onValueChange: React.PropTypes.func, // add isRequired once the onSectionChange is removed
+        children: React.PropTypes.node.affectsRendering
     },
 
     getDefaultProps: function () {

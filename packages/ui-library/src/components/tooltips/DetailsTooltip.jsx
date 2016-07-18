@@ -114,7 +114,8 @@ var DetailsTooltipStateless = React.createClass({
         hideOnClick: React.PropTypes.bool.affectsRendering,
         open: React.PropTypes.bool.affectsRendering,
         onToggle: React.PropTypes.func,
-        showClose: React.PropTypes.bool.affectsRendering
+        showClose: React.PropTypes.bool.affectsRendering,
+        children: React.PropTypes.node.affectsRendering
     },
 
     getDefaultProps: function () {

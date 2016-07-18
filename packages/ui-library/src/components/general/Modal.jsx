@@ -70,10 +70,7 @@ var Modal = React.createClass({
             Type.DIALOG,
             Type.ALERT
         ]).affectsRendering,
-        children: React.PropTypes.oneOfType([
-            React.PropTypes.object,
-            React.PropTypes.arrayOf(React.PropTypes.object)
-        ]).affectsRendering
+        children: React.PropTypes.node.affectsRendering
     },
 
     childContextTypes: {

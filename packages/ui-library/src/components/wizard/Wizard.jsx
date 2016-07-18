@@ -133,10 +133,7 @@ var Wizard = React.createClass({
         onNext: React.PropTypes.func,
         onEdit: React.PropTypes.func,
         onDone: React.PropTypes.func,
-        children: React.PropTypes.oneOfType([
-            React.PropTypes.object,
-            React.PropTypes.arrayOf(React.PropTypes.object)
-        ]).affectsRendering
+        children: React.PropTypes.node.affectsRendering
     },
 
 

@@ -101,7 +101,8 @@ var GridStateless = React.createClass({
         firstColumn: React.PropTypes.number.isRequired.affectsRendering,
         lastColumn: React.PropTypes.number.isRequired.affectsRendering,
         currentPage: React.PropTypes.number.isRequired.affectsRendering,
-        onPaginationChanged: React.PropTypes.func.isRequired
+        onPaginationChanged: React.PropTypes.func.isRequired,
+        children: React.PropTypes.node.affectsRendering
     },
 
     getDefaultProps: function () {

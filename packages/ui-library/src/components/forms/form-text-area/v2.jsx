@@ -155,7 +155,8 @@ var FormTextAreaStateless = React.createClass({
         disabled: React.PropTypes.bool.affectsRendering,
         required: React.PropTypes.bool.affectsRendering,
         autoFocus: React.PropTypes.bool,
-        useAutocomplete: React.PropTypes.bool
+        useAutocomplete: React.PropTypes.bool,
+        children: React.PropTypes.node.affectsRendering
     },
 
     getDefaultProps: function () {
@@ -272,8 +273,8 @@ var FormTextAreaStateful = React.createClass({
             edited: this.props.originalValue && this.state.value !== this.props.originalValue,
             showUndo: this.props.originalValue && this.state.value !== this.props.originalValue,
             onUndo: this._handleUndo
-        }, this.props, this.props.children);
+        }, this.props);
 
-        return React.createElement(FormTextAreaStateless, props);
+        return React.createElement(FormTextAreaStateless, props, this.props.children);
     }
 });

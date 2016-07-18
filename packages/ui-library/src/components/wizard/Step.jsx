@@ -114,10 +114,7 @@ var Step = React.createClass({
         onEdit: React.PropTypes.func,
         onNext: React.PropTypes.func,
         onDone: React.PropTypes.func,
-        children: React.PropTypes.oneOfType([
-            React.PropTypes.object,
-            React.PropTypes.arrayOf(React.PropTypes.object)
-        ]).affectsRendering
+        children: React.PropTypes.node.affectsRendering
     },
 
     getDefaultProps: function () {
