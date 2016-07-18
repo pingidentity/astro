@@ -6,7 +6,7 @@
  */
 function Page () {
     // Change browsers windows size to avoid negative fails
-    browser.windowHandleSize({ width: 1024, height: 768 });
+    browser.windowHandleSize({ width: 1400, height: 1200 });
 }
 
 Page.prototype.format = function (string, keys) {
@@ -121,6 +121,17 @@ Page.prototype.scrollPage = function (elementPath, x, y) {
     } else {
         browser.scroll(x, y);
     }
+};
+/**
+ * @desc scroll element into specific position and wait for completed
+ * @param {string} elementPath(optional) the xPath
+ * @param {number} offset position(pixel)
+ * @returns {object} browser execute object
+ */
+Page.prototype.scrollElementToTopSync = function (elementPath, offset) {
+    var newOffset = browser.selectorExecute(elementPath, "return arguments[0][0].scrollTop = "+ offset);
+    return browser.waitUntil(browser.selectorExecute(elementPath,
+        "return arguments[0][0].scrollTop") === newOffset , 5000, "Error: Cannot wait for scrolling", 100);
 };
 
 

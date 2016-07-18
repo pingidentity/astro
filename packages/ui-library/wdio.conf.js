@@ -132,7 +132,6 @@ exports.config = {
         // expectationResultHandler: function (passed, assertion) {
         // }
     },
-
     screenshotOpts: {
         useScreenshotTool: true, // turn on or off screenshot validation
         browsers: ["firefox"], // screenshot tool only run with these browser
@@ -140,7 +139,13 @@ exports.config = {
         tempRoot: "./build/temp-screenshot/",
         diffRoot: "./build/diff-screenshot/",
         baseLineRoot: "./src/selenium/base-screenshot/",
-        globalEqualRatio: 0 // 0-49 lower is more accurate
+        resolution: {
+            width: 1600,
+            height: 900
+        },
+        globalEqualRatio: 49, // 0-49 lower is more accurate,
+        maxScreenshotAttempt: 5, // number of retry time when the comparison is failed. set to 1 if you want to turn it off
+        retryInterval: 500 // delay time after failed comparison
     },
     //
     // =====

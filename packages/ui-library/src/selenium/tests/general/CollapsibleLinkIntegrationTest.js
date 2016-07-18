@@ -13,10 +13,6 @@ describe("Collapsible Link Page", function () {
         CollapsibleLinkDemoPage.click(CollapsibleLinkDemoPage.secondCollapsibleLinkPath);
         expect(collapsibleLink.getText()).toEqual("Expanded link");
 
-        // wait for css transition
-        // pause() function should not be used in somewhere else use waitForXXX APIs instead
-        CollapsibleLinkDemoPage.pause(1500);
-
         // ignore custom element
         CollapsibleLinkDemoPage.hideElement(CollapsibleLinkDemoPage.secondExpandedContentPath);
 
@@ -32,10 +28,6 @@ describe("Collapsible Link Page", function () {
         var collapsibleLink = CollapsibleLinkDemoPage.getElement(CollapsibleLinkDemoPage.firstCollapsibleLinkPath);
         CollapsibleLinkDemoPage.click(CollapsibleLinkDemoPage.firstCollapsibleLinkPath);
         expect(collapsibleLink.getText()).toEqual("Normal link");
-
-        // wait for css transition
-        // pause() function should not be used in somewhere else use waitForXXX APIs instead
-        CollapsibleLinkDemoPage.pause(1500);
 
         // ignore custom element
         CollapsibleLinkDemoPage.hideElement(CollapsibleLinkDemoPage.firstExpandedContentPath);
