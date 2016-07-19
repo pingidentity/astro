@@ -34,6 +34,9 @@ var WizardViewDemo = React.createClass({
         this.messageActions = Redux.bindActionCreators(Messages.Actions, this.props.store.dispatch);
         this.wizardActions = Redux.bindActionCreators(Wizard.Actions, this.props.store.dispatch);
         this.fieldActions = Redux.bindActionCreators(WizardView.Actions, this.props.store.dispatch);
+
+        //Root level reducer so null id
+        this._handlePick = this.wizardActions.pick.bind(null, null);
     },
 
     render: function () {
@@ -47,7 +50,7 @@ var WizardViewDemo = React.createClass({
                 onNext={this.wizardActions.next}
                 onEdit={this.wizardActions.edit}
                 onReset={this._handleReset}
-                onValueChange={this.wizardActions.pick} />);
+                onValueChange={this._handlePick} />);
     }
 });
 

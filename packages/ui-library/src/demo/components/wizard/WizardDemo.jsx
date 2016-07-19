@@ -58,6 +58,9 @@ var WizardDemo = React.createClass({
 
     componentWillMount: function () {
         this.actions = Redux.bindActionCreators(Wizard.Actions, this.props.store.dispatch);
+
+        //Root level reducer so null id
+        this._handlePick = this.actions.pick.bind(null, null);
     },
 
     render: function () {
@@ -72,7 +75,7 @@ var WizardDemo = React.createClass({
                 </div>
 
                 <Choose title="Choose a wizard" {...this.props} {...this.BUTTON_LABELS}
-                    onValueChange={this.actions.pick}
+                    onValueChange={this._handlePick}
                     onEdit={this.actions.edit}
                     onNext={this.next}
                     onDone={this.done}
