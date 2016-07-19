@@ -53,9 +53,6 @@ describe("DetailsTooltip", function () {
         var body = TestUtils.findRenderedDOMNodeWithDataId(details, "details-body");
         var link = TestUtils.findRenderedDOMNodeWithDataId(details, "action-btn");
 
-
-        console.log("\n\n\ncontent.children.length", content.children.length);
-
         //DOM to contain actual content
         expect(content.children.length).toBe(3);
         expect(body.children[0].nodeName).toBe("P");
@@ -232,7 +229,6 @@ describe("DetailsTooltip", function () {
         expect(window.addEventListener.mock.calls.length).toBe(1);
         expect(window.addEventListener.mock.calls[0][0]).toEqual("click");
     });
-
 
     it("unregister global listeners on unmount", function () {
         window.removeEventListener = jest.genMockFunction();

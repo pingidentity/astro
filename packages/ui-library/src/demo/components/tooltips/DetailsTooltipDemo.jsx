@@ -9,7 +9,7 @@ var DetailsTooltip = require("../../../components/tooltips/DetailsTooltip.jsx");
 */
 var DetailsTooltipDemo = React.createClass({
 
-    numDemos: 6,
+    numDemos: 8,
 
     _toggle: function (index) {
         var newState = {};
@@ -37,6 +37,15 @@ var DetailsTooltipDemo = React.createClass({
         this.setState(newState);
     },
 
+    _discard: function (index) {
+        var newState = {};
+
+        newState["status" + index] = "changes discarded";
+        this._toggle(index);
+
+        this.setState(newState);
+    },
+
     getInitialState: function () {
         var initState = {};
 
@@ -55,6 +64,7 @@ var DetailsTooltipDemo = React.createClass({
             this["_handleToggle" + i] = this._toggle.bind(null, i);
             this["_handleCancel" + i] = this._cancel.bind(null, i);
             this["_handleConfirm" + i] = this._confirm.bind(null, i);
+            this["_handleDiscard" + i] = this._discard.bind(null, i);
         }
     },
 
@@ -164,7 +174,7 @@ var DetailsTooltipDemo = React.createClass({
                 <DetailsTooltip
                     label="With alert styling"
                     positionClassName="alert"
-                    title="Tooltip Title"
+                    title="Title won't display"
                     open={this.state.open5}
                     onToggle={this._handleToggle5}>
 
@@ -184,6 +194,68 @@ var DetailsTooltipDemo = React.createClass({
                     </div>
                 </DetailsTooltip>
                 <div>{this.state.status5}</div>
+
+                <br/>
+                <DetailsTooltip
+                    positionClassName="bottom right"
+                    label="Three Buttons"
+                    title="Three Buttons"
+                    open={this.state.open6}
+                    onToggle={this._handleToggle6}>
+
+                    <p>
+                        Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
+                        sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
+                    </p>
+                    <div className="buttons" data-id="delete-confirmation">
+                        <input
+                            type="button"
+                            data-id="confirm-action"
+                            value="Discard Changes"
+                            className="cancel"
+                            onClick={this._handleDiscard6} />
+                        <input
+                            type="button"
+                            data-id="confirm-action"
+                            value="Confirm"
+                            className="primary"
+                            onClick={this._handleConfirm6} />
+                        <br />
+                        <a className="cancel" onClick={this._handleCancel6}>Cancel</a>
+                    </div>
+                </DetailsTooltip>
+                <div>{this.state.status6}</div>
+                
+                <br/>
+                <DetailsTooltip
+                    label="Alert styling with three buttons"
+                    positionClassName="alert"
+                    title="Tooltip Title"
+                    open={this.state.open7}
+                    onToggle={this._handleToggle7}>
+                    <div className="title">Save Changes</div>
+                    <p>
+                        Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
+                        sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
+                    </p>
+                    <div className="buttons" data-id="delete-confirmation">
+                        <input
+                            type="button"
+                            data-id="confirm-action"
+                            value="Discard Changes"
+                            className="cancel"
+                            onClick={this._handleDiscard7} />
+                        <input
+                            type="button"
+                            data-id="confirm-action"
+                            value="Confirm"
+                            className="primary"
+                            onClick={this._handleConfirm7}/>
+                        <br />
+                        <a className="cancel" onClick={this._handleCancel7}>Cancel</a>
+                    </div>
+                </DetailsTooltip>
+                <div>{this.state.status7}</div>
 
                 <br/>
                 <DetailsTooltip

@@ -51,6 +51,14 @@
 			.details-close, .details-title {
 				display: none;
 			}
+			.title {
+				color: $color-warning-text;
+				text-transform: none;
+				text-align: center;
+				font-weight: 400;
+				font-size: 24px;
+				margin: 0;
+			}
 		}
 	}
 	&.confirm {
@@ -174,9 +182,12 @@
 			.buttons {
 				margin: 25px 0 0 0;
 				text-align: center;
-
+				
 				button, .button, input[type=button] {
 					margin: 0;
+					&.cancel {
+						margin-right: 10px;
+					}
 				}
 				.cancel {
 					display: inline-block;
@@ -189,7 +200,6 @@
 				a {
 					color: $color-active-blue;
 					text-transform: none;
-
 					&.secondary {
 						color: $color-rhino;
 					}
@@ -306,14 +316,6 @@
 .details-tooltip {
 	&.alert {
 		.details-content-inner {
-			.title {
-				color: $color-warning-text;
-				text-transform: uppercase;
-				text-align: center;
-				font-weight: 400;
-				font-size: 24px;
-				margin: 0;
-			}
 			p {
 				padding: 0 20px;
 				margin-bottom: 0.5em;
