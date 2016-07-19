@@ -5,15 +5,14 @@
 	background: none;
 	border: none;
 	border-radius: 0;
-	width: 160%; 		// pushes default select arrow out of range
-
+	
 	&:after {
 		content: none;
 	}
 	select {
 		padding: 0;
 		border: 1px solid $color-input-border;
-		width: auto;
+		width: 160%; 		// pushes default select arrow out of range
 		option {
 			&:checked {
 				background-color: $color-input-fill;
