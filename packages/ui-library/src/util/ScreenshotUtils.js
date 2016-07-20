@@ -64,7 +64,7 @@ var ScreenshotUtils = {
     },
 
     takeScreenshotAndSave: function (path) {
-        browser.saveScreenshot(path);
+        return browser.saveScreenshot(path);
     },
 
     takeElementScreenshotAndSave: function (path, elementSelector) {
@@ -73,6 +73,20 @@ var ScreenshotUtils = {
             "return { width: arguments[0][0].offsetWidth, height: arguments[0][0].offsetHeight};");
         var location = browser.getLocationInView(elementSelector);
         return this.cropImage(path, size.width, size.height, location.x, location.y);
+    },
+
+    takeScreenshotThenSaveToCurrentDiff: function (fileName, elementSelector) {
+        this.initializeScreenshotDir();
+        var screenshotDiffPath = this.getDiffScreenshotPath(fileName),
+            screenshotCurrentPath = this.getCurrentScreenshotPath(fileName);
+
+        if (!elementSelector) {
+            this.takeScreenshotAndSave(screenshotCurrentPath);
+            this.takeScreenshotAndSave(screenshotDiffPath);
+        } else {
+            this.takeElementScreenshotAndSave(screenshotCurrentPath, elementSelector);
+            this.takeElementScreenshotAndSave(screenshotDiffPath, elementSelector);
+        }
     },
 
     /**
@@ -134,10 +148,12 @@ var ScreenshotUtils = {
         if (isScreenshotActive) {
             this.initializeScreenshotDir();
             var baselinePath = this.getBaseLineScreenshotPath(fileName);
+
             if (fs.existsSync(baselinePath)) {
                 var currentPath = this.getCurrentScreenshotPath(fileName);
                 var diffPath = this.getDiffScreenshotPath(fileName);
                 var comp = im.compare(baselinePath, currentPath, diffPath, equalRatio);
+
                 // execute IM command line
                 comp.then(function (data) {
                     if (data.error && parseInt(data.stderr) > 0) {
@@ -155,12 +171,8 @@ var ScreenshotUtils = {
                 // wait for IM finishes its job
                 browser.waitUntil(comp, 5000, 100);
             } else {
-                if (!elementSelector) {
-                    this.takeScreenshotAndSaveToBaselinePath(fileName);
-                } else {
-                    this.takeElementScreenshotAndSaveToBaselinePath(fileName, elementSelector);
-                }
-                result = true;
+                this.takeScreenshotThenSaveToCurrentDiff(fileName, elementSelector);
+                result = false;
             }
         } else {
             result = true;
@@ -201,7 +213,9 @@ var ScreenshotUtils = {
             var currentPath = this.getCurrentScreenshotPath(fileName),
                 tryCount = 0,
                 maxRetry = wdioConfig.screenshotOpts.maxScreenshotAttempt,
-                isNoDiff = false;
+                isNoDiff = false,
+                baselinePath = this.getBaseLineScreenshotPath(fileName);
+
             do {
                 if (tryCount > 0) {
                     fs.unlinkSync(currentPath);
@@ -217,7 +231,8 @@ var ScreenshotUtils = {
                 }
                 tryCount += 1;
             }
-            while (!isNoDiff && tryCount < maxRetry);
+            while (!isNoDiff && tryCount < maxRetry && fs.existsSync(baselinePath));
+
             return isNoDiff;
         } else {
             return true;
