@@ -122,7 +122,7 @@
   },
   "scripts": {
     "pack": "webpack --progress --colors --config webpack.config.js",
-    "webpack-start": "webpack-dev-server -d --hot --inline --progress --colors --config webpack.dev.config.js",
+    "webpack-start": "webpack-dev-server -d --hot --host 0.0.0.0 --inline --progress --colors --config webpack.dev.config.js",
     "start": "npm run doc && npm run webpack-start",
     "doc": "jsdoc -c ./jsdoc.json",
     "jslint": "eslint --ext .js,.jsx .",
