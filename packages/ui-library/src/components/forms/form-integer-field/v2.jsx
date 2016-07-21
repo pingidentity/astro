@@ -6,6 +6,10 @@ var React = require("react"),
     _ = require("underscore");
 
 var isValid = function (value, enforceRange, min, max) {
+
+    if (value === "") {
+        return true;
+    }
     if (typeof(value) === "string" && value.indexOf(".") !== -1) {
         return false;
     }
@@ -386,7 +390,7 @@ var Stateful = React.createClass({
             });
             return;
         } else {
-            var intValue = parseInt(value);
+            var intValue = value === "" ? value : parseInt(value);
             this.setState({
                 value: intValue
             }, this.props.onValueChange(intValue));

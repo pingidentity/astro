@@ -147,6 +147,8 @@ describe("FormIntegerField", function () {
         expect(callback).not.toBeCalled();
     });
 
+
+
     it("is not triggering onChange callback when max limit exceeded", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormIntegerField onValueChange={callback} max={5} controlled={false} />
@@ -319,6 +321,17 @@ describe("FormIntegerField", function () {
         ReactTestUtils.Simulate.change(input, { target: { value: "3" } } );
         expect(callback.mock.calls.length).toBe(1);
         expect(callback.mock.calls[0][0]).toBe(3);
+
+    });
+
+    it("does trigger onValueChange for empty value in stateful component", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormIntegerField onValueChange={callback} controlled={false} />
+        );
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        ReactTestUtils.Simulate.change(input, { target: { value: "" } } );
+        expect(callback.mock.calls.length).toBe(1);
+        expect(callback.mock.calls[0][0]).toBe("");
 
     });
 
