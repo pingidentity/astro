@@ -219,8 +219,6 @@ integration: install-node-npm
 	node_modules/.bin/selenium-standalone start & node_modules/.bin/http-server ./build &
 	$(NPM_EXEC) run pack
 	node_modules/.bin/wdio wdio.conf.js
-	kill $(ps -ef | grep -E 'selenium|http-server' | awk '{print $2}')  &> /dev/null
-
 
 # package the module and name the file to include the current version
 package: install-mvn install-node-npm

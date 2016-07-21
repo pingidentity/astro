@@ -75,6 +75,7 @@
     "validator": "5.2.0 ",
     "wdio": "0.3.1",
     "wdio-jasmine-framework": "0.2.1",
+    "wdio-junit-reporter": "0.1.0",
     "webdriverio": "4.0.9",
     "webpack": "1.12.14",
     "webpack-dev-server": "1.14.1"
