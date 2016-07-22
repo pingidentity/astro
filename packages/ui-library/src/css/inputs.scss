@@ -6,14 +6,15 @@ $default-input-font-size: 14px;
 
 // MISC SUPPORTING FUNCTIONS -----------------------------------------------------------------------
 @mixin checkboxStyles() {
-	$checkbox-height: 18px;
+	$checkbox-size: 24px;
 	$border-width: 3px;
 
 	position: relative;
 	display: inline-block;
-	min-width: $checkbox-height + (2*$border-width);
-	min-height: $checkbox-height + (2*$border-width);
-	padding: 0 0 24px 0;
+	box-sizing: border-box;
+	min-width: $checkbox-size;
+	min-height: $checkbox-size;
+	padding: 0 0 22px 0;
 	cursor: pointer;
 
 	.label-text {
@@ -26,8 +27,8 @@ $default-input-font-size: 14px;
 		margin: 0;
 		top: 0;
 		left: 0;
-		width: $checkbox-height;
-		height: $checkbox-height;
+		width: $checkbox-size;
+		height: $checkbox-size;
 
 		&:checked + .icon:after {
 			color: $color-input-text;
@@ -42,10 +43,12 @@ $default-input-font-size: 14px;
 		&:before {
 			content: '';
 			display: block;
+			box-sizing: border-box;
 			border: 3px solid $color-timberwolf;
-			height: $checkbox-height;
-			width: $checkbox-height;
-			line-height: $checkbox-height;
+			background-color: $color-elderly;
+			height: $checkbox-size;
+			width: $checkbox-size;
+			line-height: $checkbox-size;
 			@include border-radius(2px);
 		}
 		&:after {
@@ -55,11 +58,13 @@ $default-input-font-size: 14px;
 			color: transparent;
 			font-family: $icon-font;
 			font-size: 10px;
-			left: 3px;
+			left: 0;
   			bottom: 0;
 			text-align: center;
-			height: $checkbox-height;
-			width: $checkbox-height;
+			height: $checkbox-size;
+			width: $checkbox-size;
+			line-height: $checkbox-size;
+			text-align: center;
 			@include transition($default-input-transition);
 		}
 	}
@@ -156,7 +161,18 @@ label {
 	}
 	.label-text {
 		color: $color-elephant;
-		margin: 0 0 7px 0;
+		margin: 0 0 8px 0;
+
+		.help-tooltip {
+			margin-left: 10px;
+			margin-top: -3px;
+			line-height: 14px;
+			vertical-align: middle;
+		}
+		.help-tooltip.inline {
+			margin-left: 5px;
+			margin-top: 0px;
+		}
 	}
 	&.input-text {
 		input {
@@ -232,6 +248,7 @@ label {
 		textarea {
 			padding: 12px 15px;
 			margin-top: 2px;
+			line-height: 1.2em;
 		}
 		&.extended {
 			textarea {
@@ -276,8 +293,8 @@ label {
 			}
 		}
 	}
-	// handle disabled label for inputs w helptext
 	&.input-text, &.input-textarea, &.input-multivalues, &.input-checkbox, &.input-select {
+		// handle disabled label for inputs w helptext
 		&.disabled {
 			font-style: normal;
 			.label-text {
@@ -286,9 +303,6 @@ label {
 				}
 			}
 		}
-	}
-	&.form-error {
-		color: $color-input-error;
 	}
 	&.input-checkbox {
 		// TODO: nix checkboxStyles mixin (no longer needed since input-multiselect is not used in a component - check wp)
@@ -309,12 +323,15 @@ label {
 		}
 		&.stacked, &.inline {
 			margin-bottom: 5px;
-			padding: 0 0 0 30px;
+			margin-right: 20px;
+			padding: 0 0 0 36px;
 			text-transform: none;
 
 			.label-text {
 				display: inline-block;
-				text-transform: uppercase;
+				text-transform: none;
+				font-size: 14px;
+				color: $color-midnight;
 				padding: 6px 0 0 0;
 				margin: 0;
 				line-height: 1em;
@@ -330,26 +347,49 @@ label {
 		}
 	}
 	&.input-radio {
-		$radio-height: 19px;
+		$radio-height: 24px;
 		$border-width: 3px;
 
 		position: relative;
-		line-height: $radio-height + (2*$border-width);
-		min-height: $radio-height + (2*$border-width);
-		min-width: $radio-height + (2*$border-width);
 		display: inline-block;
-		padding: 0 0 0 32px;
-		margin: 0 20px 0 0;
+		box-sizing: border-box;
+		line-height: $radio-height;
+		min-height: $radio-height;
+		min-width: $radio-height;
+		font-size: 14px;
 		text-transform: none;
+		color: $color-midnight;
+		padding: 0 0 0 35px;
+		margin-right: 20px;
 		cursor: pointer;
 
+		.circle {
+			position: absolute;
+			left: 0;
+			top: -1px;
+			box-sizing: border-box;
+			width: $radio-height;
+			height: $radio-height;
+			cursor: pointer;
+			border: $border-width solid $color-timberwolf;
+			background: $color-elderly;
+			@include border-radius(ceil($radio-height/2) + $border-width);
+
+			&:after {
+				content: '';
+				position: absolute;
+				left: 4px;
+				top: 4px;
+				width: 10px;
+				height: 10px;
+				background-color: $color-elderly;
+				@include border-radius(ceil($radio-height/2) + 1);
+				@include transition($default-input-transition);
+			}
+		}
 		&.disabled {
 			cursor: default;
 			@include opacity(0.5);
-
-			.circle, .circle:after {
-				background-color: $color-elderly
-			}
 		}
 		&.no-label {
 			margin-right: 0;
@@ -385,36 +425,6 @@ label {
 		&.hidden {
 			display: none;
 		}
-		.circle {
-			position: absolute;
-			left: 0;
-			top: -1px;
-			font-size: 16px;
-			width: $radio-height;
-			height: $radio-height;
-			cursor: pointer;
-
-			border: $border-width solid $color-timberwolf;
-			@include border-radius(ceil($radio-height/2) + $border-width);
-
-			&.form-error {
-				border-color: $color-input-error;
-				&:focus {
-					border-color: $color-input-error;
-				}
-			}
-			&:after {
-				content: '';
-				position: absolute;
-				left: 2px;
-				top: 2px;
-				width: $radio-height - 4;
-				height: $radio-height - 4;
-				background-color: $color-white;
-				@include border-radius(ceil($radio-height/2) + 1);
-				@include transition($default-input-transition);
-			}
-		}
 		.help-tooltip {
 			height: 23px;
     		vertical-align: bottom;
@@ -424,8 +434,14 @@ label {
 	.input-toggle {
 		display: block;
 	}
+	&.input-group {
+		font-size: 14px;
+		color: $color-elephant;
+		text-transform: uppercase;
+		margin: 0 0 20px 0;
+	}
 	&.detached {
-		margin-bottom: 7px;
+		margin-bottom: 8px;
 		margin-right: 10px;
 		display: block;
 
@@ -434,6 +450,31 @@ label {
 			height: 18px;
 			width: 18px;
 			vertical-align: text-bottom;
+		}
+	}
+	&.inline-save {
+		.input-container {
+			padding-right: 50px;
+		}
+		.undo {
+			right: 61px;
+		}
+		.save {
+			position: absolute;
+			top: 18px;
+			right: 0;
+		}
+	}
+	&.radio-group {
+		display: block;
+		margin: 0 0 10px 0;
+
+		.help-tooltip {
+			line-height: 1em;
+			height: 18px;
+			width: 18px;
+			vertical-align: middle;
+			margin: 0 0 0 10px;
 		}
 	}
 	a {
@@ -458,7 +499,7 @@ label {
 		}
 		&.undo {
 			position: absolute;
-			top: 12px;
+			top: 13px;
 			right: 11px;
 			font-size: 0;
 			color: transparent;
@@ -472,47 +513,6 @@ label {
 				text-transform: none;
 				@include transition($default-input-transition);
 			}
-		}
-	}
-	&.inline-save {
-		.input-container {
-			padding-right: 50px;
-		}
-		.undo {
-			right: 61px;
-		}
-		.save {
-			position: absolute;
-			top: 18px;
-			right: 0;
-		}
-	}
-	.label-text {
-		.help-tooltip {
-			margin-left: 10px;
-			margin-top: -3px;
-			line-height: 14px;
-			vertical-align: middle;
-		}
-		.help-tooltip.inline {
-			margin-left: 5px;
-			margin-top: 0px;
-		}
-	}
-	&.main {
-		display: block;
-		margin: 0 0 5px 0;
-	}
-	&.radio-group {
-		display: block;
-		margin: 0 0 10px 0;
-
-		.help-tooltip {
-			line-height: 1em;
-			height: 18px;
-			width: 18px;
-			vertical-align: middle;
-			margin: 0 0 0 10px;
 		}
 	}
 	.value-container {
@@ -579,7 +579,7 @@ input[type=file] {
 
 // Input types
 .input-text, .input-textarea, .input-select, .input-file-upload, .input-integer, .input-radio, .input-checkbox, .input-color-picker {
-	margin: 0 20px 20px 0;
+	margin: 0 10px 20px 0;
 }
 .radio-text-input {
 	margin: -12px 0 0 32px;
@@ -620,7 +620,7 @@ input[type=file] {
 				position: absolute;
 				content: 'v';
 				font-family: $icon-font;
-				font-size: 12px;
+				font-size: 10px;
 				text-transform: none;
 				right: 10px;
 				top: 0;
@@ -628,13 +628,6 @@ input[type=file] {
 				color: $color-midnight;
 				pointer-events: none;
 			}
-		}
-	}
-	&.form-error {
-		border-color: $color-input-error;
-
-		&:focus {
-			border-color: $color-input-error;
 		}
 	}
 	&.no-label {
@@ -843,6 +836,7 @@ input[type=file] {
 				content: '*';
 				font-size: 15px;
 				padding: 5px;
+				color: $color-slate;
 				background-color: $color-white;
 				border: 1px solid $color-rhino;
 				@include border-radius(18px);
@@ -871,7 +865,7 @@ input[type=file] {
 		}
 		.file-size {
 			position: absolute;
-			bottom: 0;
+			bottom: 4px;
 			left: $img-width - 1px;
 			min-width: 300px;
 			color: $color-stratus;
@@ -911,23 +905,24 @@ input[type=file] {
 	}
 }
 .input-toggle {
-	$toggle-height: 26px;
+	$toggle-height: 24px;
 	$toggle-width: 40px;
 	$toggle-time: 0.1s;
 
-	$toggle-diameter: $toggle-height;
+	$toggle-diameter: $toggle-height - 2;
 	$toggle-border-radius: ceil($toggle-height / 2) + 1;
 
 	display: inline-block;
 
 	.toggle {
 		position: relative;
-		height: $toggle-height;
-		width: $toggle-width;
-		background-color: $color-input-border;
+		height: $toggle-height - 2;
+		width: $toggle-width - 2;
+		background-color: $color-stratus;
 		display: inline-block;
-		border: 1px solid $color-input-border;
 		vertical-align: middle;
+		box-sizing: border-box;
+		border: 1px solid $color-stratus;
 		@include border-radius($toggle-border-radius);
 		@include transition(all $toggle-time);
 
@@ -935,14 +930,14 @@ input[type=file] {
 			content: '';
 			background-color: $color-white;
 			position: absolute;
-			left: -1px;
-			top: -1px;
-			height: $toggle-diameter;
-			width: $toggle-diameter;
-			border: 1px solid $color-input-border;
+			left: 0;
+			top: 0;
+			height: $toggle-diameter - 2;
+			width: $toggle-diameter - 2;
+			box-sizing: border-box;
 			@include border-radius($toggle-border-radius);
 			@include transition(all $toggle-time);
-			@include box-shadow((1px 1px 4px 0px rgba(0, 0, 0, 0.15)));
+			@include box-shadow((1px 1px 3px 0px rgba(0, 0, 0, 0.3)));
 		}
 	}
 	&.selected {
@@ -951,41 +946,31 @@ input[type=file] {
 			border-color: $color-success;
 
 			&:after {
-				left: $toggle-width - $toggle-height + 1;
+				left: $toggle-width - $toggle-diameter - 1;
 			}
 		}
 	}
 	&.disabled {
 		@include opacity(0.5);
 	}
-	&.form-error {
-		.toggle {
-			border-color: $color-input-error;
-
-			&:focus {
-				border-color: $color-input-error;
-			}
-			&:after {
-				border-color: $color-input-error;
-			}
-		}
-	}
 	&.small {
 		.toggle {
 			$toggle-height: 18px;
 			$toggle-width: 30px;
-			$toggle-diameter: $toggle-height;
+			$toggle-diameter: $toggle-height - 2;
 
 			height: $toggle-height;
 			width: $toggle-width;
 
 			&:after {
-				height: $toggle-diameter;
-				width: $toggle-diameter;
+				height: $toggle-diameter - 2;
+				width: $toggle-diameter - 2;
 			}
-			&.selected {
+		}
+		&.selected {
+			.toggle {
 				&:after {
-					left: $toggle-width - $toggle-height + 1;
+					left: $toggle-width - $toggle-diameter - 1; //13px
 				}
 			}
 		}
@@ -1285,7 +1270,7 @@ input[type=file] {
             display: block;
 			text-align: center;
             text-decoration: none;
-            color: $color-slate;
+            color: $color-active-blue;
             border: none;
             background-color: transparent;
 			line-height: $height;
@@ -1293,7 +1278,7 @@ input[type=file] {
 			&:before {
 				content: "Y";
 				font-family: $icon-font;
-				font-size: 7px;
+				font-size: 6px;
 				line-height: $height;
 				height: $height;
 			}
@@ -1317,7 +1302,7 @@ input[type=file] {
 	display: inline-block;
 	padding: 10px;
 	border: 1px solid $color-timberwolf;
-	width: 202px;
+	width: 200px;
 	box-sizing: border-box;
 
 	.input-text.search {
@@ -1345,7 +1330,7 @@ input[type=file] {
 		margin: 2px 0 0 0;
 	}
 	.input-selection-list-items {
-		max-height: 250px;
+		max-height: 228px;
 		margin: 0;
 		overflow-x: hidden;
 		overflow-y: auto;
@@ -1363,7 +1348,7 @@ input[type=file] {
 	}
 	&.searchable {
 		.input-selection-list-items {
-			max-height: 250px - 46px;
+			max-height: 228px - 46px;
 			margin: 46px 0 0 0;
 		}
 	}
@@ -1510,6 +1495,49 @@ input[type=file] {
 		}
 	}
 }
+.form-error {
+	&.input-text, &.input-integer {
+		input[type=text] {
+			border-color: $color-input-error;
+		}
+	}
+	&.input-textarea {
+		textarea {
+			border-color: $color-input-error;
+		}
+	}
+	&.input-select {
+		.wrapper {
+			border-color: $color-input-error;
+		}
+	}
+	&.input-toggle {
+		.toggle {
+			border-color: $color-input-error;
+
+			&:after {
+				border-color: $color-input-error;
+			}
+		}
+	}
+	&.input-checkbox {
+		.icon {
+			&:before {
+				border-color: $color-input-error;
+			}
+		}
+	}
+	&.input-radio {
+		.circle {
+			border-color: $color-input-error;
+		}
+	}
+	&.intl-tel-input {
+		input[type=text] {
+			border-color: $color-input-error;
+		}
+	}
+}
 [disabled] {
 	cursor: default;
 	@include opacity(0.5);
@@ -1572,24 +1600,14 @@ input[type=file] {
 		margin-bottom: 0;
 	}
 }
-.form-error {
-	&.input-toggle {
-		.toggle {
-			border-color: $color-input-error;
-			&:focus {
-				border-color: $color-input-error;
-			}
-			&:after {
-				border-color: $color-input-error;
-			}
-		}
-	}
-}
 .checkbox-list {
 	padding: 10px 5px 10px 0;
 	margin-left: 0;
 	border: 1px solid $color-elderly;
 
+	.filters {
+		margin: 0 0 0 10px;
+	}
 	.options {
 		width: 99%;
 		max-height: 133px;
@@ -1597,7 +1615,7 @@ input[type=file] {
 		padding-left: 10px;
 
 		label.input-checkbox {
-			width: 230px;
+			width: 190px;
 			margin-bottom: 10px;
 			text-transform: none;
 			display: inline-block;
@@ -1609,13 +1627,9 @@ input[type=file] {
 				margin: 0;
 			}
 		}
-		> div {
-			display: inline-block;
-
-			&.item-head {
-				display: block;
-				color: $color-walrus;
-			}
+		&.item-head {
+			display: block;
+			color: $color-walrus;
 		}
 	}
 	.actions {
@@ -1752,9 +1766,9 @@ a {
 
 // Input width settings
 $input-width-settings: (
-	'width-max': 600px,
+	'width-max': 590px,
 	'num-increments': 6,
-	'hor-margin': 20px,
+	'hor-margin': 10px,
 	'vert-margin': 20px
 );
 
@@ -1817,6 +1831,10 @@ label {
 				}
 			}
 		}
+	}
+	&.main {
+		display: block;
+		margin: 0 0 5px 0;
 	}
 }
 .inline-input-labels {
@@ -1921,6 +1939,9 @@ label {
 
 .input-menu-button {
 	.menu {
+		.options-title {
+			margin: 20px 0 0 0;
+		}
 		.options {
 			a {
 				padding-right: 15px;

@@ -136,42 +136,43 @@ module.exports = React.createClass({
             <div className="clear-both">
                 {/* This outer div is only required to style inside the DemoApp */}
 
-                <ModalButton activatorButtonLabel="Show wizard" modalTitle="Object creation wizard" ref="modal">
+                <ModalButton ref="modal"
+                        activatorButtonLabel="Show wizard"
+                        modalClassName="full-width"
+                        modalTitle="Object creation wizard">
                     <Messages messages={this.props.messages}
                         containerType={Messages.ContainerTypes.MODAL}
                         onRemoveMessage={this.props.onRemoveMessage} />
-
                     <Wizard.Choose labelCancel={this.props.labelCancel}
-                                   labelDone={this.props.labelDone}
-                                   labelEdit={this.props.labelEdit}
-                                   labelNext={this.props.labelNext}
-                                   numSteps={this.props.numSteps}
-                                   activeStep={this.props.activeStep}
-                                   choices={this.props.choices}
-                                   title="Choose a Wizard"
-                                   onEdit={this.props.onEdit}
-                                   onValueChange={this.props.onValueChange}
-                                   onNext={this._next}
-                                   onCancel={this._cancel}
-                                   onReset={this.props.onReset}
-                    >
+                            labelDone={this.props.labelDone}
+                            labelEdit={this.props.labelEdit}
+                            labelNext={this.props.labelNext}
+                            numSteps={this.props.numSteps}
+                            activeStep={this.props.activeStep}
+                            choices={this.props.choices}
+                            title="Choose a Wizard"
+                            onEdit={this.props.onEdit}
+                            onValueChange={this.props.onValueChange}
+                            onNext={this._next}
+                            onCancel={this._cancel}
+                            onReset={this.props.onReset} >
                         <Wizard title="Two Column Step">
                             <TwoColumnStep labelCancel={this.props.labelCancel}
-                                           labelDone={this.props.labelDone}
-                                           labelEdit={this.props.labelEdit}
-                                           labelNext={this.props.labelNext}
-                                           numSteps={this.props.numSteps}
-                                           activeStep={this.props.activeStep}
-                                           fields={this.props.fields}
-                                           onEdit={this.props.onEdit}
-                                           onNext={this._next}
-                                           onDone={this._done}
-                                           onCancel={this._cancel}
-                                           onFieldChange={this._onFieldChange}
-                                           onRemoveMessage={this.props.onRemoveMessage}
-                                           onComplexFieldChange={this.props.onComplexFieldChange}
-                                           onAddMessage={this.props.onAddMessage}
-                                           onAddComplexFieldsRow={this.props.onAddComplexFieldsRow}
+                                labelDone={this.props.labelDone}
+                                labelEdit={this.props.labelEdit}
+                                labelNext={this.props.labelNext}
+                                numSteps={this.props.numSteps}
+                                activeStep={this.props.activeStep}
+                                fields={this.props.fields}
+                                onEdit={this.props.onEdit}
+                                onNext={this._next}
+                                onDone={this._done}
+                                onCancel={this._cancel}
+                                onFieldChange={this._onFieldChange}
+                                onRemoveMessage={this.props.onRemoveMessage}
+                                onComplexFieldChange={this.props.onComplexFieldChange}
+                                onAddMessage={this.props.onAddMessage}
+                                onAddComplexFieldsRow={this.props.onAddComplexFieldsRow}
                             />
                         </Wizard>
 
@@ -179,21 +180,21 @@ module.exports = React.createClass({
 
                         <Wizard title="Form Template">
                             <FormStep labelCancel={this.props.labelCancel}
-                                      labelDone={this.props.labelDone}
-                                      labelEdit={this.props.labelEdit}
-                                      labelNext={this.props.labelNext}
-                                      numSteps={this.props.numSteps}
-                                      activeStep={this.props.activeStep}
-                                      fields={this.props.fields}
-                                      onEdit={this.props.onEdit}
-                                      onNext={this._next}
-                                      onDone={this._done}
-                                      onCancel={this._cancel}
-                                      onFieldChange={this._onFieldChange}
-                                      onRemoveMessage={this.props.onRemoveMessage}
-                                      onComplexFieldChange={this.props.onComplexFieldChange}
-                                      onAddMessage={this.props.onAddMessage}
-                                      onAddComplexFieldsRow={this.props.onAddComplexFieldsRow}
+                                labelDone={this.props.labelDone}
+                                labelEdit={this.props.labelEdit}
+                                labelNext={this.props.labelNext}
+                                numSteps={this.props.numSteps}
+                                activeStep={this.props.activeStep}
+                                fields={this.props.fields}
+                                onEdit={this.props.onEdit}
+                                onNext={this._next}
+                                onDone={this._done}
+                                onCancel={this._cancel}
+                                onFieldChange={this._onFieldChange}
+                                onRemoveMessage={this.props.onRemoveMessage}
+                                onComplexFieldChange={this.props.onComplexFieldChange}
+                                onAddMessage={this.props.onAddMessage}
+                                onAddComplexFieldsRow={this.props.onAddComplexFieldsRow}
                             />
                             <Wizard.Step title="Final Step" />
                         </Wizard>
@@ -229,22 +230,22 @@ var TwoColumnStep = React.createClass({
                     <Layout.Column>
                         <div className="input-row">
                             <FormCheckbox label="Checkbox without a value"
-                                          checked={this.props.fields.checkbox1}
-                                          onValueChange={this._handleCheckboxChange1} />
+                                checked={this.props.fields.checkbox1}
+                                onValueChange={this._handleCheckboxChange1} />
                         </div>
                         <div className="input-row">
                             <FormLabel value="Stacked radio button group" />
                             <FormRadioGroup groupName="stackedRadioGroup"
-                                            selected={this.props.fields.radio}
-                                            onValueChange={this._handleRadioChange}
-                                            items={this.RADIO_OPTS} />
+                                selected={this.props.fields.radio}
+                                onValueChange={this._handleRadioChange}
+                                items={this.RADIO_OPTS} />
                         </div>
                     </Layout.Column>
                     <Layout.Column>
                         <div className="input-row">
                             <FormCheckbox label="Checkbox without a value"
-                                          checked={this.props.fields.checkbox2}
-                                          onValueChange={this._handleCheckboxChange2} />
+                                checked={this.props.fields.checkbox2}
+                                onValueChange={this._handleCheckboxChange2} />
                         </div>
                         <div className="input-row">
                             <FileUpload buttonText="Image upload" labelRemove="Remove" labelSelect="Image upload" />
@@ -271,10 +272,9 @@ var FormStep = React.createClass({
                         onValueChange={this._handleField1Change} />
                 </div>
 
-                <div className="input-row">
-                    <h4>Complex Fields</h4>
-                </div>
-
+                <label className="input-group">
+                    Complex Fields
+                </label>
                 <div className="input-row">
                     {
                         this.props.fields.complex.map(function (row, index) {

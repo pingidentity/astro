@@ -34,7 +34,7 @@
 	$button-bottom: 6px;
 
 	position: relative;
-	margin: 30px 0 0 0;
+	margin: 20px 0 0 0;
 
 	.item {
 		position: relative;
@@ -140,7 +140,7 @@
 				text-transform: none;
 				font-size: 18px;
 				font-family: 'iconfont';
-				color: $color-slate;
+				color: $color-walrus;
 			}
 		}
 		.expand-btn, .delete-btn, .edit-btn,
@@ -852,7 +852,7 @@
 			.conditions-multiselect {
 				padding: 10px 5px 10px 0;
 				margin-left: 0;
-				border: 1px solid map-get($colors, 'elderly');
+				border: 1px solid $color-elderly;
 				.options {
 					width: 99%;
 					height: 133px;
@@ -876,7 +876,7 @@
 						display: inline;
 						&.item-head {
 							display: block;
-							color: map-get($colors, 'walrus');
+							color: $color-walrus;
 						}
 					}
 				}

@@ -1,16 +1,16 @@
 
 .collapsible-section {
-	$line-indent: 20px;
+	$line-indent: 17px;
 
 	border-top: 1px solid $color-rabbit-fur;
 	border-bottom: 1px solid $color-rabbit-fur;
-	padding: 25px 0 0 0;
+	padding: 25px 0 22px 0;
 	margin: 0 0 -1px $line-indent;
 
 	.collapsible-section-title {
 		position: relative;
 		display: inline-block;
-		padding: 0 0 25px 1px;
+		padding: 0 0 0 1px;
 		font-size: 15px;
 		text-transform: uppercase;
 		color: $color-slate;
@@ -18,7 +18,23 @@
 		cursor: pointer;
 		font-family: $font-pn-regular;
 	}
-	// Override default collapsible-link styles
+	.collapsible-section-content {
+		overflow: hidden;
+		max-height: 0;
+		@include transition((all 0.3s));
+	}
+	.collapsible-section-content-inner {
+		margin: 12px 0 0 25px;
+	}
+	&.open {
+		.collapsible-section-content {
+			overflow: visible;
+			max-height: 4000px;
+			@include animation(fade-in 0.2s);
+		}
+	}
+
+	// Override for default collapsible-link styles
 	.collapsible-link {
 		&:hover {
 			color: $color-slate;
@@ -30,17 +46,6 @@
 		&.left:before {
 			left: -$line-indent;
 			color: $color-midnight;
-		}
-	}
-	.collapsible-section-content {
-		overflow: hidden;
-		max-height: 0;
-		@include transition((all 0.3s));
-	}
-	&.open {
-		.collapsible-section-content {
-			overflow: visible;
-			max-height: 4000px;
 		}
 	}
 }

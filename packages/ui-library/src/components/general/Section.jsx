@@ -113,7 +113,9 @@ var SectionStateless = React.createClass({
                     arrowPosition={CollapsibleLink.arrowPositions.LEFT} title={this.props.title}
                     expanded={this.props.expanded} onToggle={this._handleToggle} />
                 <div className="collapsible-section-content" data-id={dataId + "-content"}>
-                    {this.props.children}
+                    <div className="collapsible-section-content-inner">
+                        {this.props.children}
+                    </div>
                 </div>
             </div>
         );

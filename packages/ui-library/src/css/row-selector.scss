@@ -29,18 +29,19 @@
 		overflow: auto;
 	}
 	.no-items {
-		&.preview {
-			border: 1px dotted $color-active-blue;
-		}
 		padding: 14px 0;
 		margin-bottom: 4px;
 		text-align: center;
 		font-size: 14px;
 		border: 1px dotted $color-rabbit-fur;
-            left: 0;
+        left: 0;
 		right: 0;
-            z-index: 10;
-            background-color: $color-white;
+        z-index: 10;
+        background-color: $color-white;
+
+		&.preview {
+			border: 1px dotted $color-active-blue;
+		}
 	}
 	.item {
 		position: relative;
@@ -49,13 +50,9 @@
 		color: $color-text;
 		margin: 0;
 		padding: 15px 5px;
-		
+
 		@include box-sizing(border-box);
 		@include grab-cursor;
-
-		&.preview {
-			border: 1px dotted $color-active-blue;
-		}
 
 		.icon-grip {
 			display: inline-block;
@@ -63,8 +60,12 @@
 			vertical-align: middle;
 			&:before {
 				font-size: 16px;
-				color: $color-rabbit-fur;
+				color: $color-stratus;
 			}
+		}
+		.name {
+			font-size: 18px;
+			color: $color-midnight;
 		}
 		a.button {
 			position: absolute;
@@ -89,10 +90,12 @@
 				}
 			}
 		}
+		&.preview {
+			border: 1px dotted $color-active-blue;
+		}
 		&.item-disabled {
 			background: $color-dolphin;
 			cursor: default;
 		}
 	}
 }
-

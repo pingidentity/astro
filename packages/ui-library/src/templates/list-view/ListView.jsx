@@ -1,12 +1,13 @@
 var React = require("re-react"),
-    Toggle = require("../../components/forms/form-toggle").v2,
-    FormTextField = require("../../components/forms/form-text-field").v2,
-    FormCheckbox = require("../../components/forms/FormCheckbox.jsx"),
-    InfiniteScroll = require("../../components/list/InfiniteScroll.jsx"),
-    TabbedSections = require("../../components/general/TabbedSections.jsx"),
+    CollapsibleLink = require("../../components/general/CollapsibleLink.jsx"),
     ExpandableRow = require("../../components/rows/expandable-row"),
-    RowAccessories = require("../../components/rows/expandable-row/Accessories.jsx"),
+    FormCheckbox = require("../../components/forms/FormCheckbox.jsx"),
+    FormTextField = require("../../components/forms/form-text-field"),
+    InfiniteScroll = require("../../components/list/InfiniteScroll.jsx"),
     ModalButton = require("../../components/general/ModalButton.jsx"),
+    RowAccessories = require("../../components/rows/expandable-row/Accessories.jsx"),
+    Toggle = require("../../components/forms/Toggle.jsx"),
+    TabbedSections = require("../../components/general/TabbedSections.jsx"),
     classnames = require("classnames"),
     _ = require("underscore");
 
@@ -105,15 +106,17 @@ module.exports = React.createClass({
                                 onValueChange={this._handleTextChange}
                                 value={this.props.filters.text}
                                 className="search" />
-
-                            <span data-id="narrow-by"
-                                className="filter-by"
-                                onClick={this.props.onSearchAdvancedToggle}>Narrow By</span>
-
+                            <CollapsibleLink data-id="narrow-by"
+                                title="Narrow By"
+                                onToggle={this.props.onSearchAdvancedToggle}
+                                arrowPosition={CollapsibleLink.arrowPositions.RIGHT}
+                                expanded={this.props.advancedSearch}
+                                className="filter-by" />
                             <ModalButton ref="modal"
                                     activatorButtonLabel="Add Modal Button"
                                     modalTitle="Add Modal"
-                                    className="add-modal" >
+                                    className="add-modal"
+                                    activatorButtonClassName="add" >
                                 <div>
                                     Add Modal content
                                 </div>
@@ -122,10 +125,12 @@ module.exports = React.createClass({
                         <div className="filters">
                             <FormCheckbox label="filter odd rows"
                                 onValueChange={this._handleOddFilterToggle}
-                                checked={this.props.filters.odd} />
+                                checked={this.props.filters.odd}
+                                className="inline" />
                             <FormCheckbox label="filter even rows"
                                 onValueChange={this._handleEvenFilterToggle}
-                                checked={this.props.filters.even} />
+                                checked={this.props.filters.even}
+                                className="inline" />
                         </div>
                     </div>
                     {

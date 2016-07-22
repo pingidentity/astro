@@ -42,7 +42,7 @@ label {
 		}
 	}
 	&.show {
-		border: 1px solid map-get($colors, 'stratus');
+		border: 1px solid $color-stratus;
 
 		&:after {
 			// ie8 bg fix
@@ -56,11 +56,11 @@ label {
 }
 a.input-toggle {
 	width: 16px;
-	border-left: 28px solid map-get($colors, 'midnight');
+	border-left: 28px solid $color-midnight;
 
 	&.selected {
 		border-left: none;
-		border-right: 28px solid map-get($colors, 'midnight');
+		border-right: 28px solid $color-midnight;
 	}
 }
 

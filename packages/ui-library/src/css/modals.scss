@@ -2,12 +2,12 @@
 	$modal-radius: 4px;
 	$default-top: 57px;
 	$min-bottom: 40px;
-	$header-height: 42px;
+	$header-height: 46px;
 	$max-modal-width: 960px;
 
 	position: fixed;
-	left: 0;
-	right: 0;
+	left: 10px;
+	right: 10px;
 	top: $default-top;
 	bottom: 0;
 	z-index: 1001;
@@ -27,6 +27,11 @@
 			@include opacity(0.4);
 		}
 	}
+	&.full-width {
+		.modal-content {
+			width: 100%;
+		}
+	}
 	.modal-content {
 		display: none;
 		position: relative;
@@ -44,11 +49,12 @@
 	}
 	.modal-header {
 		position: relative;
-		padding: 12px 25px 0 25px;
+		padding: 0 25px;
 		box-sizing: border-box;
 		background-color: $color-walrus;
 		color: $color-white;
-		font-size: 22px;
+		font-size: 21px;
+		line-height: $header-height;
 		min-height: $header-height;
 		font-weight: 300;
 		@include border-radius($modal-radius $modal-radius 0 0);
@@ -73,18 +79,9 @@
 				font-family: 'iconfont';
 			}
 		}
-		&:after {
-			position: absolute;
-			content: '';
-			left: 0;
-			right: 0;
-			top: 40px;
-			background-color: $color-white;
-			height: 2px;
-			z-index: 10;
-		}
 	}
 	.modal-body {
+		position: relative;
 		padding: 30px;
 		font-weight: normal;
 		box-sizing: border-box;
@@ -108,6 +105,15 @@
 				display: inline-block;
 				margin: 0 5px;
 			}
+		}
+		.page-controls-primary {
+			position: relative;
+			left: auto;
+			right: auto;
+			bottom: auto;
+			background: transparent;
+			padding: 0;
+			border: none;
 		}
 	}
 	&.maximize {
@@ -203,7 +209,6 @@
 
 			.title {
 				color: $color-warning-text;
-				text-transform: uppercase;
 				text-align: center;
 				font-weight: 400;
 				font-size: 24px;
@@ -220,6 +225,24 @@
 					margin: 15px 0 0 0;
 				}
 			}
+		}
+	}
+	.page-messages {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+
+		.close {
+			right: 15px;
+
+			&:after {
+				font-size: 18px;
+
+			}
+		}
+		.message {
+			padding-left: 30px;
 		}
 	}
 }

@@ -1,9 +1,10 @@
 var React = require("re-react"),
-    Toggle = require("../../components/forms/form-toggle").v2,
-    FormTextField = require("../../components/forms/form-text-field").v2,
-    FormCheckbox = require("../../components/forms/FormCheckbox.jsx"),
+    CollapsibleLink = require("../../components/general/CollapsibleLink.jsx"),
     ExpandableRow = require("../../components/rows/ExpandableRow.jsx"),
-    Pagination = require("../../components/list/Pagination"),
+    FormCheckbox = require("../../components/forms/FormCheckbox.jsx"),
+    FormTextField = require("../../components/forms/form-text-field"),
+    Pagination = require("../../components/list/Pagination.jsx"),
+    Toggle = require("../../components/forms/Toggle.jsx"),
     classnames = require("classnames");
 
 /**
@@ -96,17 +97,23 @@ module.exports = React.createClass({
                             value={this.props.filters.text}
                             className="search" />
 
-                        <span data-id="narrow-by"
-                            className="filter-by"
-                            onClick={this.props.onSearchAdvancedToggle}>Narrow By</span>
+
+                        <CollapsibleLink data-id="narrow-by"
+                            title="Narrow By"
+                            onToggle={this.props.onSearchAdvancedToggle}
+                            arrowPosition={CollapsibleLink.arrowPositions.RIGHT}
+                            expanded={this.props.advancedSearch}
+                            className="filter-by" />
                     </div>
                     <div className="filters">
                         <FormCheckbox label="filter odd rows"
                             onValueChange={this._handleOddFilterToggle}
-                            checked={this.props.filters.odd} />
+                            checked={this.props.filters.odd}
+                            className="inline" />
                         <FormCheckbox label="filter even rows"
                             onValueChange={this._handleEvenFilterToggle}
-                            checked={this.props.filters.even} />
+                            checked={this.props.filters.even}
+                            className="inline" />
                     </div>
 
                 </div>

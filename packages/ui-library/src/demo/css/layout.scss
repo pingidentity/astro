@@ -155,7 +155,7 @@ $sidenav-lineheight: 22px;
 	left: $sidenav-width - $layout-nav-offset;
 }
 #content {
-	left: $sidenav-width - $layout-nav-offset;
+	left: $sidenav-width + $layout-nav-offset;
 
 	.section {
 		padding: 10px 0 30px 0;

@@ -154,7 +154,7 @@ var Step = React.createClass({
                 onClick: this.props.onCancel,
                 type: "button",
                 ref: "cancelButton",
-                className: "default cancel-step",
+                className: "cancel cancel-step",
                 value: this.props.labelCancel,
                 disabled: this.props.showPulsing
             });
@@ -197,12 +197,11 @@ var Step = React.createClass({
         var showNext = this.props.number !== this.props.total;
 
         return (
-            <div className="sub-task clearfix">
-                <div className="button-container">
-                    {this._getCancelButton()}
-                    {showNext ? this._getNextButton() : this._getDoneButton()}
-                </div>
-            </div>);
+            <div className="buttons">
+                {this._getCancelButton()}
+                {showNext ? this._getNextButton() : this._getDoneButton()}
+            </div>
+        );
     },
 
     _getHint: function () {

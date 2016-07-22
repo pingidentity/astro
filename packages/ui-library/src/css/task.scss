@@ -4,7 +4,7 @@
 	padding: 12px;
 	border: 1px solid transparentize($color-timberwolf, $inactive-opacity);
 	background-color: transparentize($color-white, $inactive-opacity);
-	margin: 0 0 14px 0;
+	margin: 0 0 20px 0;
 
 	.task-content {
 		position: relative;
@@ -89,14 +89,6 @@
 			margin-left: 20px;
 			&.section-heading {
 				margin-left: 0;
-			}
-		}
-		.button-container {
-			margin: 0 8px 8px 0;
-			float: right;
-
-			input, button, .button {
-				margin: 0 0 0 13px;
 			}
 		}
 		.hide {
@@ -211,6 +203,20 @@
 					border-bottom: none;
 					margin-bottom: 0;
 				}
+			}
+		}
+	}
+	.buttons,
+	.button-container // DEPRECATED
+	{
+		margin: 20px 0 0 0;
+		text-align: right;
+
+		input[type=button], button, .button {
+			margin: 0;
+
+			& ~ input[type=button], & ~ button, & ~ .button {
+				margin-left: 10px;
 			}
 		}
 	}

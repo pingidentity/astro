@@ -450,17 +450,10 @@ $layout-nav-width-offset: 15px;
 	color: $color-white;
 	padding: 0;
 
-	&.full, &.in-modal {
+	&.full {
 		left: 0;
 		.message {
 			padding-left: 25px;
-		}
-	}
-	&.in-modal {
-		position: absolute;
-		top: 0;
-		.close {
-			right: 15px;
 		}
 	}
 	&.inline {
@@ -528,10 +521,10 @@ $layout-nav-width-offset: 15px;
 		}
 		&.notice {
 			background-color: $color-warning-yellow;
-			color: $color-warning-text;
+			color: $color-white;
 
 			.close {
-				color: $color-warning-text;
+				color: $color-white;
 			}
 			input[type=button] {
 				color: $color-warning-yellow;
@@ -648,9 +641,9 @@ $layout-nav-width-offset: 15px;
 		top: 0;
 		content: '\59';
 		font-family: $icon-font;
-		font-size: 6px;
+		font-size: 5px;
 		color: $color-active-blue;
-		@include transition((all 0.3s cubic-bezier(1, 0, 1, 1)));
+		@include transition((all 0.2s linear));
 	}
 	&.left:before {
 		left: -15px;
@@ -662,7 +655,7 @@ $layout-nav-width-offset: 15px;
 		&.left:before,
 		&.right:after {
 			@include rotate(-180deg);
-			@include transition((all 0.3s cubic-bezier(0, 0, 0, 1)));
+			@include transition((all 0.2s linear));
 		}
 	}
 }
@@ -694,23 +687,6 @@ $layout-nav-width-offset: 15px;
 		font-size: 14px;
 		display: block;
 		color: $color-elephant;
-	}
-}
-.page-controls-secondary {
-	float: right;
-    margin: -70px 0 0 0;
-
-	.button, input[type=button], button, a, .input-toggle, .status {
-		display: inline-block;
-		vertical-align: top;
-		margin: 30px 15px 0 0;
-		@include transform(translateY(-50%));
-	}
-	.input-toggle {
-		a.toggle {
-			margin: 0;
-			@include transform(translateY(0));
-		}
 	}
 }
 .page-section-title {
@@ -772,6 +748,23 @@ $layout-nav-width-offset: 15px;
 	border-width: 1px 0 0 0;
 	border-color: $color-rabbit-fur;
 	margin: -25px 0 5px 0;
+}
+.page-controls-secondary {
+	float: right;
+    margin: -70px 0 0 0;
+
+	.button, input[type=button], button, a, .input-toggle, .status {
+		display: inline-block;
+		vertical-align: top;
+		margin: 30px 15px 0 0;
+		@include transform(translateY(-50%));
+	}
+	.input-toggle {
+		a.toggle {
+			margin: 0;
+			@include transform(translateY(0));
+		}
+	}
 }
 .page-controls-primary {
 	box-sizing: border-box;
@@ -904,7 +897,7 @@ $layout-nav-width-offset: 15px;
 	&.reversed {
 		background: transparent;
 		border: none;
-		color: map-get($colors, 'warning-text');
+		color:$color-warning-text;
 	}
 }
 #header {
@@ -1017,38 +1010,27 @@ a {
 	$animation-timing: ease-out 0.2s;
 
 	.filter-by {
-		font-size:12px;
-		padding-top: 11px;
-		display: inline-block;
-		padding-left: 40px;
-		color: $color-slate;
-		cursor: pointer;
-		user-select: none;
-		position: relative;
-
-		&:before {
-			font-family: $icon-font;
-			content: 'Y';
-			position:absolute;
-			left: 20px;
-			top: 10px;
-			font-size:0.5em;
-			padding-right:5px;
-			@include transition(all $animation-timing);
-		}
+		font-size: 14px;
+		margin: 12px 7px 0 40px;
+		padding: 0;
 	}
 	.input-text {
 		margin: 0;
+
+		input[type=text] {
+			width: 460px;
+		}
 	}
 	.filters {
 		display: none;
-		padding-top:10px;
+		padding-top: 20px;
 		max-height: 0px;
 		@include transition(max-height $animation-timing);
 	}
 	.add-modal {
 		display: inline;
 		float: right;
+		padding-top: 2px;
 	}
 
 	&.expanded {

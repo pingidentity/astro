@@ -79,7 +79,7 @@ module.exports = React.createClass({
                     controlled={true} />
 
                 {this.props.activeRockerButton === 0 && (
-                    <div>
+                    <div className="page-section">
                         <div className="input-row">
                             <FormTextField
                                 labelText="First Name"
@@ -106,7 +106,7 @@ module.exports = React.createClass({
                 )}
 
                 {this.props.activeRockerButton === 1 && (
-                    <Layout.Row>
+                    <Layout.Row className="page-section">
                         <Layout.Column>
                             <div className="input-row">
                                 <FormTextField

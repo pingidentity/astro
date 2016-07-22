@@ -23,33 +23,26 @@ var SectionDemo = React.createClass({
     render: function () {
         return (
             <div>
-                <Section onToggle={this._toggleFirst}
-                        expanded={this.state.firstSectionOpen} title="My section Stateless">
-                    <div className="condition">
-                        <div className="condition-fields">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas lectus vulputate
-                                diam porta rhoncus. Aenean sollicitudin nunc dui, eget cursus nisi interdum vitae. Donec
-                                nec justo quis velit ullamcorper dictum vel sed quam. Etiam purus libero, porttitor
-                                vitae risus ac, venenatis luctus lacus.
-                            </p>
-                        </div>
+                <Section title="My section Stateless"
+                        onToggle={this._toggleFirst}
+                        expanded={this.state.firstSectionOpen}>
+                    <div>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas lectus vulputate
+                        diam porta rhoncus. Aenean sollicitudin nunc dui, eget cursus nisi interdum vitae. Donec
+                        nec justo quis velit ullamcorper dictum vel sed quam. Etiam purus libero, porttitor
+                        vitae risus ac, venenatis luctus lacus.
                     </div>
                 </Section>
-                <Section controlled={false}
-                         title="My section Stateful"
-                         data-id="section-2"
-                         className="extra">
-                    <div className="condition">
-                        <div className="condition-fields">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas lectus vulputate
-                                diam porta rhoncus. Aenean sollicitudin nunc dui, eget cursus nisi interdum vitae. Donec
-                                nec justo quis velit ullamcorper dictum vel sed quam. Etiam purus libero, porttitor
-                                vitae risus ac, venenatis luctus lacus.
-                            </p>
-                        </div>
-                    </div>
+                <Section title="My section Stateful"
+                        controlled={false}
+                        data-id="section-2"
+                        className="extra">
+                     <div>
+                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas lectus vulputate
+                         diam porta rhoncus. Aenean sollicitudin nunc dui, eget cursus nisi interdum vitae. Donec
+                         nec justo quis velit ullamcorper dictum vel sed quam. Etiam purus libero, porttitor
+                         vitae risus ac, venenatis luctus lacus.
+                     </div>
                 </Section>
             </div>
         );

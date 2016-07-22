@@ -1,18 +1,19 @@
 .page-links {
+    $size: 30px;
+
     text-align: center;
     color: $color-walrus;
-    margin: 10px;
+    margin: 20px 0;
 
     a {
         box-sizing: border-box;
         display: inline-block;
-        min-width: 30px;
+        min-width: $size;
         height: 30px;
         margin: 2px;
-        padding-left: 2px;
-        padding-right: 2px;
-        padding-top: 4px;
+        padding: 0 2px;
         font-size: 14px;
+        line-height: $size;
         color: $color-walrus;
         vertical-align: middle;
         border: 1px solid transparent;

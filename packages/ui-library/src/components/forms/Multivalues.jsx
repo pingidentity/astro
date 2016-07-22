@@ -43,7 +43,7 @@ var MultivaluesOption = React.createClass({
                 <a className="delete"
                     data-id="delete"
                     id = {this.props.id}
-                    onClick={this._delete}>x</a>
+                    onClick={this._delete}></a>
             </label>
         );
     }
@@ -189,7 +189,7 @@ var Multivalues = React.createClass({
             e.target.value = "";
             var entries = this.props.entries;
             entries.push(enteredValue);
-            
+
             //TODO: remove when v1 no longer supported.
             if (this.props.onChange) {
                 this.props.onChange(entries);
@@ -215,7 +215,7 @@ var Multivalues = React.createClass({
     _handleDelete: function (index) {
         var entries = this.props.entries;
         entries.splice(index,1);
-        
+
         //TODO: remove when v1 no longer supported.
         if (this.props.onChange) {
             this.props.onChange(entries);

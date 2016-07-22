@@ -26,7 +26,7 @@
 input[type=button], input[type=submit], button, .button {
 	$height: 36px;
 
-	padding: 0 20px;
+	padding: 0 25px;
 	margin-right: 10px;
 	font-size: 15px;
 	height: $height;
@@ -88,7 +88,7 @@ input[type=button], input[type=submit], button, .button {
 		}
 	}
 	&.inline {
-		$height: 28px;
+		$height: 26px;
 
 		height: $height;
 		line-height: $height;
@@ -123,7 +123,7 @@ input[type=button], input[type=submit], button, .button {
 		}
 	}
 	&.add {
-		padding-left: 35px;
+		padding-left: 36px;
 		margin: 0;
 
 		&:before, &:after {
@@ -132,7 +132,7 @@ input[type=button], input[type=submit], button, .button {
 		&:before {
 			content: '\2b';
 			position: absolute;
-			left: 15px;
+			left: 20px;
 			top: 13px;
 			font-size: 10px;
 			line-height: 1em;
@@ -157,7 +157,7 @@ input[type=button], input[type=submit], button, .button {
 
 		&.inline {
 			&:before {
-				top: 10px;
+				top: 8px;
 			}
 		}
 	}
@@ -189,6 +189,7 @@ input[type=button], input[type=submit], button, .button {
 			height: $size;
 			width: $size;
 			text-align: center;
+			@include border-radius(ceil($size/2));
 
 			&:before {
 				line-height: 1em;

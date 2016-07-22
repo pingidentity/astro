@@ -394,20 +394,20 @@ describe("DropDownButton", function () {
         expect(callback).not.toBeCalled();
     });
 
-    it("renders title (aka description) if provided", function () {
+    it("renders title if provided", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <DropDownButton title="Test Drop Down" options={{}} label="Add" />
         );
 
         // no title in collapsed mode
-        var titles = TestUtils.scryRenderedDOMNodesWithDataId(component, "description");
+        var titles = TestUtils.scryRenderedDOMNodesWithDataId(component, "options-title");
         expect(titles.length).toBe(0);
 
         // toggle the drop down
         var toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "action");
         ReactTestUtils.Simulate.click(toggle);
 
-        var title = TestUtils.findRenderedDOMNodeWithDataId(component, "description");
+        var title = TestUtils.findRenderedDOMNodeWithDataId(component, "options-title");
         expect(title.textContent).toBe("Test Drop Down");
     });
 

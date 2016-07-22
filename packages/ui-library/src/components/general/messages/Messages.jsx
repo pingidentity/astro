@@ -94,7 +94,7 @@ module.exports = React.createClass({
     propTypes: {
         "data-id": React.PropTypes.string,
         id: React.PropTypes.string,
-        containerType: React.PropTypes.oneOf(["full", "in-modal"]),
+        containerType: React.PropTypes.oneOf(["full"]),
         messages: React.PropTypes.array,
         onRemoveMessage: React.PropTypes.func,
         removeMessage: React.PropTypes.func,

@@ -157,13 +157,6 @@ describe("Messages", function () {
         expect(node.getAttribute("class")).toBe("page-messages full");
     });
 
-    it("Component has the class page-messages and wizard", function () {
-        var component = getComponent({ containerType: Messages.ContainerTypes.MODAL });
-        var node = ReactDOM.findDOMNode(component);
-
-        expect(node.getAttribute("class")).toBe("page-messages in-modal");
-    });
-
     // TODO To be removed once "id" support is discontnued.
     it("render component with id", function () {
         var component = getComponent(

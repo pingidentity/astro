@@ -9,9 +9,8 @@
 	cursor: text;
 	margin: 0;
 	overflow: scroll;
-	padding-right: 10px;
-	border: 10px solid $color-input-fill;
-	border-right: none;
+	padding: 12px 7px 12px 12px;
+
 	.clear {
 		font-family: $icon-font;
 		font-size: 10px;
@@ -29,32 +28,43 @@
 	    overflow: hidden;
 	    position: relative;
 	    width: 100%;
-		padding-right: 10px;
+
 		.entry {
 			@include box-sizing(border-box);
 			border: 1px solid $color-input-border;
 			background: $color-white;
+			color: $color-midnight;
 			max-width: 100%;
 			display: inline-block;
 			font-size: 0.9em;
-			margin: 5px;
+			margin: 0 5px 5px 0;
 			vertical-align: top;
-			padding: 5px 20px 5px 5px;
+			padding: 10px 30px 10px 10px;
 			text-transform: none;
-			@include border-radius(4px);
+			@include border-radius(2px);
+
 			.delete {
-				color: $color-input-text;
 				font-size: 11px;
 				position: absolute;
-				top: 5px;
-				right: 7px;
+				top: 11px;
+				right: 11px;
+
+				&:before {
+					content: 'X';
+					font-family: $icon-font;
+					font-size: 8px;
+					color: $color-midnight;
+				}
+				&:hover {
+					text-decoration: none;
+				}
 			}
-			span{
+			span {
 				max-width: 100%;
 				text-overflow: ellipsis;
 				display: block;
 				overflow: hidden;
-				}
+			}
 		}
 		[draggable]{
 			cursor: grab;
@@ -66,14 +76,12 @@
 				cursor: -moz-grabbing;
 			}
 		}
-
 		.placeholder {
 			background: #2996cc;
 			width: 5px;
 			height: 36px;
 			display: inline-block;
 		}
-
 		.value-input {
 			display: inline-block;
 			outline: none;

@@ -1,22 +1,26 @@
 .status {
-    $meter-height: 20px;
-    height: $meter-height;
-    width: $meter-height;
+    $size: 14px;
+
+    height: $size;
+    width: $size;
     display: inline-block;
     vertical-align: top;
     margin-left: 10px;
+    box-sizing: border-box;
 
-    @include border-radius(10px);
+    @include border-radius(ceil($size/2));
 
     &.good {
         background-color: $color-success;
     }
-    &.error {
+    &.error, &.failure {
         background-color: $color-critical-red;
     }
     &.warning {
-        border: 5px solid $color-warning-yellow;
-        height: $meter-height/2;
-        width: $meter-height/2;
+        $border: 2px;
+        border: $border solid $color-warning-yellow;
+        height: $size;
+        width: $size;
+        @include border-radius(ceil(($size + $border)/2));
     }
 }

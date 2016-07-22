@@ -123,15 +123,15 @@
 			.details-title {
 				min-height: $title-height;
 				box-sizing: border-box;
-				padding: 16px 10px 10px 10px;
+				padding: 18px 10px 10px 10px;
 
 				background-color: $color-walrus;
 				color: $color-white;
 
 				text-align: center;
-				font-family: $font-pn-semibold;
+				font-family: $font-pn-regular;
 				font-size: 17px;
-				line-height: 1.1;
+				line-height: 18px;
 				letter-spacing: 0;
 				text-transform: none;
 
@@ -146,14 +146,14 @@
 			}
 			.sub-title {
 				font-size: 16px;
-				color: map-get($colors, 'rhino');
+				color: $color-rhino;
 				text-decoration: uppercase;
 				padding: 10px 0;
 			}
 			.details-body {
-				font-size: 14px;
+				font-size: 15px;
 				padding: 25px;
-				color: $color-elephant;
+				color: $color-slate;
 
 				border-style: solid;
 				border-width: 0 1px 1px 1px;
@@ -182,7 +182,7 @@
 			.buttons {
 				margin: 25px 0 0 0;
 				text-align: center;
-				
+
 				button, .button, input[type=button] {
 					margin: 0;
 					&.cancel {
@@ -311,13 +311,12 @@
 
 
 
-// DEPRICATED OR SITE-SPECIFIC STYLES ----------------------------------------------------------------------------------
+// DEPRECATED OR SITE-SPECIFIC STYLES ----------------------------------------------------------------------------------
 
 .details-tooltip {
 	&.alert {
 		.details-content-inner {
 			p {
-				padding: 0 20px;
 				margin-bottom: 0.5em;
 			}
 			.buttons, div {
@@ -344,7 +343,6 @@
 					color: $color-rhino;
 				}
 				p {
-					padding: 0 20px;
 					text-align: center;
 					margin-bottom: 0.5em;
 				}

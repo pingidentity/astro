@@ -327,19 +327,19 @@ var Stateless = React.createClass({
                     var onGroupClick = _.partial(self.props.onQueryChange, groupName);
 
                     return (
-                        <div key={item.id + "-" + index}>
+                        <span key={item.id + "-" + index}>
                             <If test={useGrouping && index === 0}>
                                 <div data-id={"data-label-" + groupName} className="item-head" onClick={onGroupClick}>
                                     {groupName}
                                 </div>
                             </If>
-                            <label className="input-checkbox">
+                            <label className="input-checkbox inline">
                                 <span className="label-text">{item.name}</span>
                                 <input data-id="checkbox" type="checkbox" name={groupName}
                                        value={item.id} onChange={onChange} checked={checked}/>
                                 <div className="icon"></div>
                             </label>
-                        </div>
+                        </span>
                     );
                 }
             });
@@ -411,8 +411,7 @@ var Stateless = React.createClass({
 
         return (
             <div className={className} data-id={id}>
-                <div className="input-row">
-
+                <div className="filters">
                     <FormTextField data-id="dataobject-search"
                             className="search"
                             showUndo={showSearchUndo}

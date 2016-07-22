@@ -133,7 +133,7 @@
         &.data-sub-title {
             > label {
         		text-transform: uppercase;
-        		color: map-get($colors, 'stone');
+        		color: $color-stone;
         		font-weight: normal;
         		font-size: 16px;
             }
@@ -206,8 +206,8 @@
 
 .data-set {
 	padding: 30px 0 10px;
-	border-top: 1px solid map-get($colors, 'rhino');
-	border-bottom: 1px solid map-get($colors, 'rhino');
+	border-top: 1px solid $color-rhino;
+	border-bottom: 1px solid $color-rhino;
 
 	&.no-border {
 		border-top: none;

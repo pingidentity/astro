@@ -3,7 +3,7 @@
 	.details-url {
 		margin: -10px 0 15px 0;
 		font-size: 14px;
-		color: map-get($colors, 'stone');
+		color: $color-stone;
 		word-break: break-all;
 		display: block;
 	}
@@ -119,8 +119,8 @@
 		}
 	}
 	.reject-btn {
-		color: map-get($colors, 'white');
-		background-color: map-get($colors, 'stratus');
+		color: $color-white;
+		background-color: $color-stratus;
 
 		&:after {
 			content: '\58';

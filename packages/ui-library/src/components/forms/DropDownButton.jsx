@@ -182,7 +182,7 @@ var Stateless = React.createClass({
             content = (
                 <div className="menu" ref="menu" data-id="menu">
                     <If test={this.props.title}>
-                        <div className="description" data-id="description">{this.props.title}</div>
+                        <div className="options-title" data-id="options-title">{this.props.title}</div>
                     </If>
                     <div className="options" data-id="options">
                         {optionNodes}
@@ -274,4 +274,3 @@ module.exports = React.createClass({
             : React.createElement(Stateful, _.defaults({ ref: "Stateful" }, this.props));
     }
 });
-

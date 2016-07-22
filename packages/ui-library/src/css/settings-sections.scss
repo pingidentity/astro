@@ -5,7 +5,6 @@
         font-size: 18px;
         text-transform: uppercase;
         font-family: $font-pn-regular;
-        color: map-get($colors, 'blue-grey');
         border-bottom: 2px solid $color-dolphin;
         padding: 0 0 5px 0;
         margin: 0 0 5px 0;
@@ -25,7 +24,7 @@
     .section {
         position: relative;
 	    padding: 15px 0 20px 0;
-		border-bottom: 1px solid map-get($colors, 'cinder-block');
+		border-bottom: 1px solid $color-cinder-block;
 		overflow: visible;
 		@include transition(max-height ease-out 0.6s);
 
@@ -48,7 +47,7 @@
     .section-title {
 		text-transform: uppercase;
         font-size: 15px;
-	    color: map-get($colors, 'slate');
+	    color: $color-slate;
         font-family: $font-pn-regular;
         position: relative;
 
@@ -72,7 +71,7 @@
         }
     }
     .section-sub-title {
-	    color: map-get($colors, 'rhino');
+	    color: $color-rhino;
         font-size: 12px;
         font-family: $font-pn-light;
         text-transform: none;
@@ -201,7 +200,7 @@
             padding: 3px 0 0 20px;
             display: block;
             text-transform: uppercase;
-            color: map-get($colors, 'elephant');
+            color: $color-elephant;
             font-size: 14px;
             line-height: 1em;
 
@@ -235,7 +234,7 @@
                 text-transform: none;
                 font-size: 18px;
                 font-family: 'iconfont';
-                color: map-get($colors, 'stone');
+                color: $color-stone;
             }
         }
         .close-link {
@@ -356,7 +355,7 @@
             font-size: 13px;
         }
         &.section {
-            color: map-get($colors, 'rhino');
+            color: $color-rhino;
             font-size: 16px;
             font-weight: 600;
             padding-bottom: 10px;
@@ -422,7 +421,7 @@
             display: none;
             min-height: 500px;
             border: 1px solid $color-input-border;
-            background-color: map-get($colors, 'stone');
+            background-color: $color-stone;
             position: relative;
             padding: 0;
 
