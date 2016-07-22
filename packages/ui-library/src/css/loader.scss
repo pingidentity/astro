@@ -68,3 +68,75 @@ button.spinner {
 		}
 	}
 }
+
+
+.icon-ellipsis {
+	$color: rgba($color-walrus, 0.6);
+	position: relative;
+	display: inline-block;
+	color: $color-white;
+	$size: 7px;
+	$spacing: 7px;
+	$timing: 1.0s ease-out infinite;
+
+	> span, &:before, &:after {
+		content: '';
+		display: block;
+		position: absolute;
+		height: $size;
+		width: $size;
+		@include border-radius(ceil($size/2));
+		background-color: $color;
+		opacity: 0;
+	}
+
+		span {
+			left: 0;
+			@include animation(pulse-1 $timing);
+		}
+		&:before {
+			left: $size + $spacing;
+			@include animation(pulse-2 $timing);
+		}
+		&:after {
+			left: 2*($size + $spacing);
+			@include animation(pulse-3 $timing);
+		}
+
+	@include keyframes(pulse-1) {
+		0% { opacity: 0; }
+		50% { opacity: 1;  }
+	}
+	@include keyframes(pulse-2) {
+		25% { opacity: 0; }
+		75% { opacity: 1; }
+	}
+	@include keyframes(pulse-3) {
+		50% { opacity: 0; }
+		100% { opacity: 1; }
+	}
+	&.ie9 {
+		height: 7px;
+		width: 36px;
+		content: ('');
+		background-image: url("#{$img-path}ellipsis-dark.gif");
+		background-repeat: no-repeat;
+		background-position: 50%;
+		background-size: 36px 7px;
+	}
+}
+
+.ellipsis-loader-button {
+	&.primary, &.success, &.cancel {
+		.icon-ellipsis {
+			$color: rgba($color-white, 0.6);
+			> span, &:before, &:after {
+				background-color: $color;
+			}
+			&.ie9 {
+				background-image: url("#{$img-path}ellipsis.gif");
+				opacity: 0.6;
+			}
+		}
+	}
+}

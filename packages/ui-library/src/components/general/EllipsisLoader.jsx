@@ -40,7 +40,7 @@ var EllipsisLoader = React.createClass({
     render: function () {
         if (this.props.loading) {
             var id = this.props.id || this.props["data-id"];
-            var spanClass = css("icon-ellipsis", this.props.className);
+            var spanClass = css("icon-ellipsis", this.props.className, { ie9: Utils.isIE9() } );
             return ( <span className={spanClass} data-id={id}><span></span></span> );
         } else {
             return null;
