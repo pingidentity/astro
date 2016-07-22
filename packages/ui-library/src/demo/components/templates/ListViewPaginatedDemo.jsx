@@ -9,7 +9,7 @@ var React = require("react"),
 */
 var ListViewPaginatedDemo = React.createClass({
     _handleToggleSearchBar: function () {
-        this.actions.setExpandedSearch(!this.props.demoProps.advancedSearch);
+        this.actions.setExpandedSearch(!this.props.advancedSearch);
     },
 
     componentWillMount: function () {
