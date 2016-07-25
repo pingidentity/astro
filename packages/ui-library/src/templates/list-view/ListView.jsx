@@ -138,7 +138,7 @@ module.exports = React.createClass({
                        * Hardcoded height just to demonstrate the infinite scroll
                        */
                     }
-                    <div className="result-set" style={{ height: 500 }}>
+                    <div className="result-set" data-id="result-set" style={{ height: 500 }}>
                         <InfiniteScroll contentType={this._contentType}
                                 initialItem={this.props.position}
                                 onScroll={this._handleScroll}

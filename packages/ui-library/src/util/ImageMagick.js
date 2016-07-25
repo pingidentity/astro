@@ -21,6 +21,7 @@ var ImageMagick = {
     compare: function (origin, compareTo, diff, equalRatio) {
         var deferred = Q.defer();
         var command = "compare";
+        // more info about arguments at: http://www.imagemagick.org/script/command-line-options.php#metric
         var args = ["-metric", "ae", "-fuzz", equalRatio+"%", origin, compareTo, diff];
         var fullCommand = command;
 

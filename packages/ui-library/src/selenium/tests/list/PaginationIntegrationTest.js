@@ -10,59 +10,86 @@ describe("Pagination Integration", function () {
         PaginationPage.end(done);
     });
 
-    it("should have the top and bottom pagination", function () {
-        expect(PaginationPage.pagePaginationDetail).not.toBeNull();
-        expect(PaginationPage.topPaging).not.toBeNull();
-        expect(PaginationPage.bottomPaging).not.toBeNull();
-
-        expect(PaginationPage.entryNumber(0)).not.toBeNull();
-        expect(PaginationPage.entryNumber(1)).not.toBeNull();
-        expect(PaginationPage.entryNumber(2)).not.toBeNull();
-        expect(PaginationPage.entryNumber(3)).not.toBeNull();
-        expect(PaginationPage.entryNumber(4)).not.toBeNull();
+    /**
+     * SCENARIO: Should have the top, bottom pagination and the number of items in the list
+     * GIVEN: Goes to component Pagination
+     * WHEN: Takes screenshot
+     * AND: Compares it with the base image
+     * THEN: The base image and the current image should be identical
+     * THEN: The top, the bottom paging and the number of items in the list should display correctly
+     */
+    it("should have the top, bottom pagination and the number of items in the list", function () {
+        expect(PaginationPage.verifyPagePaginationDetailExisting()).toBeTruthy();
+        var generalPageFileName = "ComponentPagination_GeneralPage";
+        //take screenshot and compare
+        expect(PaginationPage.takeScreenshotAndCompare(generalPageFileName)).toBeTruthy();
+        expect(PaginationPage.verifyTopPagingExisting()).toBeTruthy();
+        expect(PaginationPage.verifyBottomPagingExisting()).toBeTruthy();
+        for (var i = 0; i < 5; i = i + 1) {
+            expect(PaginationPage.verifyEntryNumberExisting(i)).toBeTruthy();
+        }
     });
-
-    it("should be clickable for the third page, previous and next page", function () {
-        expect(PaginationPage.pagePaginationDetail).not.toBeNull();
-
-        // clicks on the third page
+    
+    /**
+     * SCENARIO: Should be clickable for the next, previous, last, first page
+     * GIVEN: Goes to component Pagination
+     * WHEN: Clicks on the third page
+     * THEN: The third page should be switched
+     * WHEN: Clicks on the previous page
+     * THEN: The second page should be switched
+     * WHEN: Clicks on the next page
+     * THEN: The next page should be switched
+     * WHEN: Clicks on the first page
+     * THEN: The first page should be switched
+     * WHEN: Clicks on the final page
+     * THEN: The final page should be selected
+     */
+    it("should be clickable for the next, previous, last, first page", function () {
+        expect(PaginationPage.verifyPagePaginationDetailExisting()).toBeTruthy();
+        //clicks on the third page
         PaginationPage.clickPagingNumberPath(3);
-        expect(PaginationPage.entryNumber(10)).not.toBeNull();
-        expect(PaginationPage.entryNumber(11)).not.toBeNull();
-        expect(PaginationPage.entryNumber(12)).not.toBeNull();
-        expect(PaginationPage.entryNumber(13)).not.toBeNull();
-        expect(PaginationPage.entryNumber(14)).not.toBeNull();
+        for (var i = 10; i < 15; i = i+1) {
+            expect(PaginationPage.verifyEntryNumberExisting(i)).toBeTruthy();
+        }
 
-        // clicks on the previous page
+        //take screenshot and compare
+        var theThirdPageFileName = "ComponentPagination_TheThirdPage";
+        expect(PaginationPage.takeScreenshotAndCompare(theThirdPageFileName)).toBeTruthy();
+        //clicks on the previous page
         PaginationPage.clickPagingNumberPath("previous");
-        expect(PaginationPage.entryNumber(5)).not.toBeNull();
-        expect(PaginationPage.entryNumber(6)).not.toBeNull();
-        expect(PaginationPage.entryNumber(7)).not.toBeNull();
-        expect(PaginationPage.entryNumber(8)).not.toBeNull();
-        expect(PaginationPage.entryNumber(9)).not.toBeNull();
+        for (var i = 5; i < 10; i = i+1) {
+            expect(PaginationPage.verifyEntryNumberExisting(i)).toBeTruthy();
+        }
 
-        // clicks on the next page
+        //take screenshot and compare
+        var thePreviousPageFileName = "ComponentPagination_ThePreviousPage";
+        expect(PaginationPage.takeScreenshotAndCompare(thePreviousPageFileName)).toBeTruthy();
+        //clicks on the next page
         PaginationPage.clickPagingNumberPath("next");
-        expect(PaginationPage.entryNumber(10)).not.toBeNull();
-        expect(PaginationPage.entryNumber(11)).not.toBeNull();
-        expect(PaginationPage.entryNumber(12)).not.toBeNull();
-        expect(PaginationPage.entryNumber(13)).not.toBeNull();
-        expect(PaginationPage.entryNumber(14)).not.toBeNull();
+        for (var i = 10; i < 15; i = i+1) {
+            expect(PaginationPage.verifyEntryNumberExisting(i)).toBeTruthy();
+        }
 
-        // clicks on the third page again
-        PaginationPage.clickPagingNumberPath(20);
-        expect(PaginationPage.entryNumber(95)).not.toBeNull();
-        expect(PaginationPage.entryNumber(96)).not.toBeNull();
-        expect(PaginationPage.entryNumber(97)).not.toBeNull();
-        expect(PaginationPage.entryNumber(98)).not.toBeNull();
-        expect(PaginationPage.entryNumber(99)).not.toBeNull();
-
-        // clicks on the first page
+        //take screenshot and compare
+        var theNextPageFileName = "ComponentPagination_TheNextPage";
+        expect(PaginationPage.takeScreenshotAndCompare(theNextPageFileName)).toBeTruthy();
+        //clicks on the first page
         PaginationPage.clickPagingNumberPath("first");
-        expect(PaginationPage.entryNumber(0)).not.toBeNull();
-        expect(PaginationPage.entryNumber(1)).not.toBeNull();
-        expect(PaginationPage.entryNumber(2)).not.toBeNull();
-        expect(PaginationPage.entryNumber(3)).not.toBeNull();
-        expect(PaginationPage.entryNumber(4)).not.toBeNull();
+        for (var i = 0; i < 5; i = i+1) {
+            expect(PaginationPage.verifyEntryNumberExisting(i)).toBeTruthy();
+        }
+
+        //take screenshot and compare
+        var theFirstPageFileName = "ComponentPagination_TheFirstPage";
+        expect(PaginationPage.takeScreenshotAndCompare(theFirstPageFileName)).toBeTruthy();
+        //clicks on the last page
+        PaginationPage.clickPagingNumberPath(20);
+        for (var i = 95; i < 100; i = i+1) {
+            expect(PaginationPage.verifyEntryNumberExisting(i)).toBeTruthy();
+        }
+
+        //take screenshot and compare
+        var theLastPageFileName = "ComponentPagination_TheLastPage";
+        expect(PaginationPage.takeScreenshotAndCompare(theLastPageFileName)).toBeTruthy();
     });
 });

@@ -150,7 +150,7 @@ var DragDropRow = React.createClass({
         var opacity = this.props.isDragging ? 0.2 : 1;
 
         var row = (
-          <div className="drag-drop-row" style={{ opacity: opacity }}>
+          <div className="drag-drop-row" data-id="drag-drop-row" style={{ opacity: opacity }}>
               {this.props.children}
           </div>);
 

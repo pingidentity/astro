@@ -66,7 +66,7 @@ var batchSelector = createSelector(
 for (var i = 1; i < 51; i += 1) {
     var type = types[Math.min(types.length, Math.floor((Math.random() * 10) % types.length))];
 
-    initialState.rows.push({ id: i, type: type, title: "Row number " + i + " (" + type + ")" });
+    initialState.rows.push({ id: i, "data-id": "" + i, type: type, title: "Row number " + i + " (" + type + ")" });
 }
 
 initialState.batches = batchSelector(initialState);

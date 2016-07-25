@@ -319,7 +319,7 @@ var Stateless = React.createClass({
                                 onValueChange={this._handleColorInputChange}
                                 onKeyDown={this._handleColorInputKeyDown}
                                 onBlur={this._handleColorInputBlur} />
-                        <span className="colors-swatch">
+                        <span className="colors-swatch" data-id={this.props["data-id"] + "-colors-swatch"} >
                             <span ref="colorSample" style={{ backgroundColor: this.props.color }}></span>
                         </span>
                     </span>

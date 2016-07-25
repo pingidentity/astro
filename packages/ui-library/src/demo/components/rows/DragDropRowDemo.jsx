@@ -54,7 +54,7 @@ var DragDropRowDemo = React.createClass({
 
     render: function () {
         return (
-            <div className="dragDropRowDemo">
+            <div className="dragDropRowDemo" data-id="dragDropRowDemo">
                 <div className="instructions">Drag and drop rows into to re-order them</div>
                 {
                     this.state.rows.map(function (item, index) {

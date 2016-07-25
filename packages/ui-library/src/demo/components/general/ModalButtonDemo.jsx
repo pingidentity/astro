@@ -73,6 +73,7 @@ var ModalButtonDemo = React.createClass({
                 </div>
                 <div className="input-row">
                     <ModalButton activatorButtonLabel="Open Maximized Modal"
+                            data-id="maximized-modal"
                             modalTitle="Maximized Modal"
                             maximize={true}>
                         <div>
@@ -82,6 +83,7 @@ var ModalButtonDemo = React.createClass({
                 </div>
                 <div className="input-row">
                     <ModalButton activatorButtonLabel="Open Dialog Modal"
+                            data-id="dialog-modal"
                             modalTitle="Dialog Modal"
                             type={ModalButton.Modal.Type.DIALOG}
                             ref="dialogModal"
@@ -98,14 +100,16 @@ var ModalButtonDemo = React.createClass({
                                 euismod. Etiam molestie quis nunc eu ultrices.
                             </p>
                             <div className="buttons">
-                                <input type="button" value="Nope" onClick={this._handleClose3} />
-                                <input type="button" className="primary" value="Yup" onClick={this._handleClose3} />
+                                <input type="button" data-id="nopeButton" value="Nope" onClick={this._handleClose3} />
+                                <input type="button" data-id="yupButton" className="primary" value="Yup"
+                                    onClick={this._handleClose3} />
                             </div>
                         </div>
                     </ModalButton>
                 </div>
                 <div className="input-row">
                     <ModalButton activatorButtonLabel="Open Alert Modal"
+                            data-id="alert-modal"
                             modalTitle=""
                             type={ModalButton.Modal.Type.ALERT}
                             ref="dialogModal2"
@@ -121,10 +125,11 @@ var ModalButtonDemo = React.createClass({
                         </div>
                         <div className="buttons">
                             <input type="button" className="cancel" value="Disgard Changes"
-                                    onClick={this._handleClose4}/>
-                            <input type="button" className="primary" value="Save" onClick={this._handleClose4}/>
+                                    onClick={this._handleClose4} data-id="disgardChangesButton"/>
+                            <input type="button" className="primary" value="Save"
+                                    onClick={this._handleClose4} data-id="saveButton" />
                             <br />
-                            <a className="cancel" onClick={this._handleClose4}>Cancel</a>
+                            <a className="cancel" data-id="cancelLink" onClick={this._handleClose4}>Cancel</a>
                         </div>
                     </ModalButton>
                 </div>

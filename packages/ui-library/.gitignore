@@ -1,6 +1,7 @@
 .*.swp
 node/
 node_modules/
+reports/
 mvn/
 build*
 dist

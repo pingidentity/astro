@@ -168,7 +168,7 @@ var Choose = React.createClass({
         return React.Children.map(this.props.children, function (e, i) {
             if (e.type.displayName === "Wizard" || e.type.displayName === "Choose") {
                 return (
-                    <label className="input-radio stacked">
+                    <label className="input-radio stacked" data-id={this.props["data-id"] + i}>
                         <input type="radio"
                             disabled={e.disabled}
                             key={e.i}

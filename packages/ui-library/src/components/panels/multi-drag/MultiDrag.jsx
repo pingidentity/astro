@@ -257,7 +257,8 @@ var MultiDrag = React.createClass({
                             onCancel={this._onCancel}
                             ghostRowAt={preview && preview.column === index ? preview.index : null}
                             className={this.props.classNames[index]}
-                            contentType={this.props.contentType} />);
+                            contentType={this.props.contentType}
+                            data-id={"DragDropColumn-" + index} />);
                 }.bind(this))
             }
             </div>);

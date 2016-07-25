@@ -31,6 +31,7 @@ var CollapsibleLinkDemo = React.createClass({
             <div>
                 <div>CollapsibleLink with title only</div>
                 <CollapsibleLink
+                    data-id="collapsible-link-1"
                     title="Normal link"
                     onToggle={this._toggle}
                     expanded={this.state.isOpenLink} />
@@ -41,6 +42,7 @@ var CollapsibleLinkDemo = React.createClass({
                 <br />
                 <div>CollapsibleLink with title and toggled title</div>
                 <CollapsibleLink
+                    data-id="collapsible-link-2"
                     title="Collapsed link"
                     toggledTitle="Expanded link"
                     onToggle={this._toggleCollapse}

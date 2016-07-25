@@ -1,46 +1,44 @@
-var CollapsibleLinkDemoPage = require("../../pages/general/CollapsibleLinkDemoPage.js");
-var ScreenshotUtils = require("../../../util/ScreenshotUtils.js");
+var CollapsibleLinkPage = require("../../pages/general/CollapsibleLinkPage.js");
 
-// Should provide the link to test plan on Confluence
-describe("Collapsible Link Page", function () {
+describe("Collapsible Link Integration", function () {
+    beforeEach(function () {
+        CollapsibleLinkPage.openCollapsibleLinkDemoPage();
+    });
+
     afterAll(function (done) {
-        CollapsibleLinkDemoPage.end(done);
+        CollapsibleLinkPage.end(done);
     });
 
-    it("Collapsible Link should toggle new title", function () {
-        CollapsibleLinkDemoPage.openCollapsibleLinkDemoPage();
-        var collapsibleLink = CollapsibleLinkDemoPage.getElement(CollapsibleLinkDemoPage.secondCollapsibleLinkPath);
-        CollapsibleLinkDemoPage.click(CollapsibleLinkDemoPage.secondCollapsibleLinkPath);
-        expect(collapsibleLink.getText()).toEqual("Expanded link");
-
-        // ignore custom element
-        CollapsibleLinkDemoPage.hideElement(CollapsibleLinkDemoPage.secondExpandedContentPath);
-
-        // wait for hiding element
-        CollapsibleLinkDemoPage.waitForVisible(CollapsibleLinkDemoPage.secondExpandedContentPath, 100 , true);
-
-        // take screenshot and compare
-        expect(ScreenshotUtils.takeScreenShotAndCompareWithBaseline("Collapsible-Link-01", 0)).toBeTruthy();
+    /**
+     * SCENARIO: should expand and collapse all links normally
+     * GIVEN: Goes to component Collapsible Link
+     * WHEN: Expands all Links
+     * AND: Takes screenshot
+     * AND: Compares it with the base image
+     * THEN: The base image and the current image should be identical
+     * WHEN: Collapses all links
+     * AND: Takes screenshot
+     * AND: Compares it with the base image
+     * THEN: The base image and the current image should be identical
+     */
+    it("should expand and collapse all links normally", function () {
+        //click on the "Normal link" link
+        CollapsibleLinkPage.clickCollapsibleLink(1);
+        //verify the expanded contents
+        expect(CollapsibleLinkPage.verifyExpandedTextExisting(1)).toBeTruthy();
+        //click on the "Collapsed link" link
+        CollapsibleLinkPage.clickCollapsibleLink(2);
+        //verify the expanded contents
+        expect(CollapsibleLinkPage.verifyExpandedTextExisting(2)).toBeTruthy();
+        //take screenshot and compare
+        CollapsibleLinkPage.waitForExpandedText2Exist();
+        var expandedLinksFileName = "ComponentCollapsibleLink_ExpandedLinks";
+        expect(CollapsibleLinkPage.takeScreenshotAndCompare(expandedLinksFileName)).toBeTruthy();
+        //collapse all link
+        CollapsibleLinkPage.clickCollapsibleLink(1);
+        CollapsibleLinkPage.clickCollapsibleLink(2);
+        //take screenshot and compare
+        var collapsedLinksFileName = "ComponentCollapsibleLink_CollapsedLinks";
+        expect(CollapsibleLinkPage.takeScreenshotAndCompare(collapsedLinksFileName)).toBeTruthy();
     });
-
-    it("Collapsible Link should not toggle new title if there is not toggledTitle", function () {
-        CollapsibleLinkDemoPage.openCollapsibleLinkDemoPage();
-        var collapsibleLink = CollapsibleLinkDemoPage.getElement(CollapsibleLinkDemoPage.firstCollapsibleLinkPath);
-        CollapsibleLinkDemoPage.click(CollapsibleLinkDemoPage.firstCollapsibleLinkPath);
-        expect(collapsibleLink.getText()).toEqual("Normal link");
-
-        // ignore custom element
-        CollapsibleLinkDemoPage.hideElement(CollapsibleLinkDemoPage.firstExpandedContentPath);
-
-        // wait for hiding element
-        CollapsibleLinkDemoPage.waitForVisible(CollapsibleLinkDemoPage.firstExpandedContentPath, 100 , true);
-
-        // take screenshot
-        ScreenshotUtils.takeScreenshotAndSaveToCurrentPath("Collapsible-Link-02");
-
-        // compare screenshot
-        expect(ScreenshotUtils.compareScreenshotWithBaseline("Collapsible-Link-02", 0)).toBeTruthy();
-    });
-
-
 });

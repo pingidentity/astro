@@ -230,7 +230,7 @@ var DemoApp = React.createClass({
                    */
                 }
                 <div id="content">
-                    <div className="components">
+                    <div className="components" data-id="components">
                         <DemoItem label={this._demoItem.label}
                             watch={watch}
                             replace={this.routerActions.replace}

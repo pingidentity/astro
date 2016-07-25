@@ -1,67 +1,55 @@
 var HomePage = require("../HomePage.js");
-
 var PaginationDemoPage = Object.create(HomePage, {
 
-    /*
-    * @desc this function is to get the div element with data-id: 'pagination'
-    */
-    pagePaginationDetail: {
-        get: function () {
-            return this.getElement("//div[@data-id='pagination']");
+    /**
+     * @desc this function is to check if the div element with data-id: 'pagination' existing
+     */
+    verifyPagePaginationDetailExisting: {
+        value: function () {
+            return this.isExisting("//div[@data-id='pagination']");
         }
     },
 
-    /*
-    * @desc this function is to get the top paging section
-    */
-    topPaging: {
-        get: function () {
-            return this.getElements("//div[contains(@data-reactid,'topPageLinks')]");
+    /**
+     * @desc this function is to check if the top paging section existing
+     */
+    verifyTopPagingExisting: {
+        value: function () {
+            return this.isExisting("//div[contains(@data-reactid, 'topPageLinks')]");
         }
     },
 
-    /*
-    * @desc this function is to get the bottom paging section
-    */
-    bottomPaging: {
-        get: function () {
-            return this.getElements("//div[contains(@data-reactid,'bottomPageLinks')]");
+    /**
+     * @desc this function is to check if the bottom paging section existing
+     */
+    verifyBottomPagingExisting: {
+        value: function () {
+            return this.isExisting("//div[contains(@data-reactid, 'bottomPageLinks')]");
         }
     },
 
-    /*
-    * @desc this function to get the div element with class name: 'clearfix'
-    */
-    titlePagination: {
-        get: function () {
-            return this.getElements("//div[@class='documentation']/div[@class='doc']/div[@class='clearfix']/h2");
-        }
-    },
-
-    /*
-    * @desc this function to get the div element with class name: 'item title-only'
-    *   and contains data-reactid with number as param
-    * @param {number} number - given page
-    */
-    entryNumber: {
+    /**
+     * @desc this function to check if entry number in the list existing
+     * @param {number} number - the page number to get
+     */
+    verifyEntryNumberExisting: {
         value: function (number) {
-            return this.getElements(
-                "//div[@data-id='pagination']/div[@class='item title-only'][contains(@data-reactid,'$" + number + "')]"
-            );
+            var xPath = "//div[@data-id='expandable-row'][contains(@data-reactid, '${number}')]";
+            return this.isExisting(this.formatXpath(xPath, { number: number }));
         }
     },
 
-    /*
-    * @desc this function is to click on the given page number
-    * @param {number} number - given page
-    */
+    /**
+     * @desc this function is to click on the given page number
+     * @param {number} number - the page number to click
+     */
     clickPagingNumberPath: {
         value: function (number) {
-            var paging = "//a[contains(@data-reactid,'$topPageLinks.$"+ number +"')]";
-            this.click(paging);
+            var xPath = "//a[contains(@data-reactid, '$topPageLinks.${number}')]";
+            this.click(this.formatXpath(xPath, { number: number }));
         }
     },
-
+    
     /**
      * @desc this function open the pagination page
      */
@@ -69,6 +57,7 @@ var PaginationDemoPage = Object.create(HomePage, {
         value: function () {
             this.openHomePage();
             this.click(this.navComponent("Components"));
+            this.scrollMenuNavigation(150);
             this.click(this.navComponent("Pagination"));
         }
     }

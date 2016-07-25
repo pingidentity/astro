@@ -17,8 +17,8 @@ exports.config = {
 
     // Define a specific suites
     suites: {
-        toggle: [
-            "./src/selenium/tests/forms/ToggleIntegrationTest.js"
+        dragDrop: [
+            "./src/selenium/tests/panels/MultiColumnDragDropIntegrationTest.js"
         ]
     },
 
@@ -42,7 +42,7 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 8,
+    maxInstances: 4,
     capabilities: [{
         browserName: "firefox"
     }],
@@ -58,7 +58,7 @@ exports.config = {
     sync: true,
     //
     // Level of logging verbosity: silent | verbose | command | data | result | error
-    logLevel: "result",
+    logLevel: "error",
     //
     // Enables colors for log output.
     coloredLogs: true,
@@ -124,7 +124,7 @@ exports.config = {
     jasmineNodeOpts: {
         //
         // Jasmine default timeout
-        defaultTimeoutInterval: 10000,
+        defaultTimeoutInterval: 30000,
         //
         // The Jasmine framework allows interception of each assertion in order to log the state of the application
         // or website depending on the result. For example, it is pretty handy to take a screenshot every time
@@ -132,21 +132,19 @@ exports.config = {
         // expectationResultHandler: function (passed, assertion) {
         // }
     },
+
     screenshotOpts: {
         useScreenshotTool: true, // turn on or off screenshot validation
         browsers: ["firefox"], // screenshot tool only run with these browser
-        // Screenshot directory should end with "/" character otherwise the code will not work as expected.
+        // Screenshot directory should end with "/" character otherwise the code will not work as expected
         tempRoot: "./build/temp-screenshot/",
         diffRoot: "./build/diff-screenshot/",
         baseLineRoot: "./src/selenium/base-screenshot/",
-        resolution: {
-            width: 1600,
-            height: 900
-        },
-        globalEqualRatio: 49, // 0-49 lower is more accurate,
+        globalEqualRatio: 0, // 0-49 lower is more accurate,
         maxScreenshotAttempt: 5, // number of retry time when the comparison is failed. set to 1 if you want to turn it off
-        retryInterval: 500 // delay time after failed comparison
+        retryInterval: 300 // delay time after failed comparison
     },
+
     //
     // =====
     // Hooks
@@ -166,6 +164,7 @@ exports.config = {
                 config.specs = [config.suite];
             }
         }
+
         // if(process.argv[3] !== "undefined") {
         //     config.suites = {singleSuite: [process.execArgv]};
         // }

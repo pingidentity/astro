@@ -72,6 +72,9 @@ var ScreenshotUtils = {
         var size = browser.selectorExecute(elementSelector,
             "return { width: arguments[0][0].offsetWidth, height: arguments[0][0].offsetHeight};");
         var location = browser.getLocationInView(elementSelector);
+        if (!size || !location) {
+            console.log("Error: unable to crop screenshot due to offset or location is undefined: " + path);
+        }
         return this.cropImage(path, size.width, size.height, location.x, location.y);
     },
 
@@ -93,7 +96,7 @@ var ScreenshotUtils = {
      * @desc this function to take screenshot and and save to baseline screenshot directory
      * @param {string} fileName: name of screenshot file.
      * @param {string} elementSelector: xpath to element.
-     * @returns {boolean} is completed
+     * @returns {bool} is completed
      */
     takeElementScreenshotAndSaveToBaselinePath: function (fileName, elementSelector) {
         if (isScreenshotActive) {
@@ -107,7 +110,7 @@ var ScreenshotUtils = {
      * @desc this function to take screenshot and and save to baseline screenshot directory
      * @param {string} fileName: name of screenshot file.
      * @param {string} elementSelector: xpath to element.
-     * @returns {boolean} is completed
+     * @returns {bool} is completed
      */
     takeElementScreenshotAndSaveToCurrentPath: function (fileName, elementSelector) {
         if (isScreenshotActive) {
@@ -190,7 +193,7 @@ var ScreenshotUtils = {
      * @returns {boolean} true if they are matched and false if they are difference.
      */
     takeScreenShotAndCompareWithBaseline: function (fileName, equalRatio) {
-        return this.takeScreenShotAndCompare(fileName, equalRatio? equalRatio: globalEqualRatio);
+        return this.takeElementScreenShotAndCompareWithBaseline(fileName, "//div[@data-id='components']", equalRatio);
     },
 
     /**
@@ -201,10 +204,11 @@ var ScreenshotUtils = {
      * @param {number} equalRatio By default it will be set to 0.
      * - This is an optional parameter to increase or decrease the accuracy
      * - Higher value is less accuracy
-     * @returns {boolean} true if they are matched and false if they are difference.
+     * @returns {bool} true if they are matched and false if they are difference.
      */
     takeElementScreenShotAndCompareWithBaseline: function (fileName, elementSelector, equalRatio) {
-        return this.takeScreenShotAndCompare(fileName, equalRatio? equalRatio: globalEqualRatio, elementSelector);
+        var _equalRatio = equalRatio !== undefined ? equalRatio : globalEqualRatio;
+        return this.takeScreenShotAndCompare(fileName, _equalRatio, elementSelector);
     },
 
     takeScreenShotAndCompare: function (fileName, equalRatio, elementSelector) {
@@ -219,7 +223,7 @@ var ScreenshotUtils = {
             do {
                 if (tryCount > 0) {
                     fs.unlinkSync(currentPath);
-                    console.log("Compare failed, take other screenshot");
+                    console.log("Compare failed, take other screenshot: " + fileName);
                 }
                 browser.pause(wdioConfig.screenshotOpts.retryInterval);
                 if (elementSelector) {

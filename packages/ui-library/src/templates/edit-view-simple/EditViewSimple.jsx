@@ -107,7 +107,7 @@ module.exports = React.createClass({
                                         label="Address
                                         Location"
                                         className="input-width-medium"
-                                        id="addressType"
+                                        data-id="addressType"
                                         value={this.props.inputs.addressType}
                                         onChange={this._handleInputChange}
                                         options={[
@@ -137,7 +137,7 @@ module.exports = React.createClass({
                                     <FormSelectField
                                         label="Alternate Address Location"
                                         className="input-width-medium"
-                                        id="alternateAddressType"
+                                        data-id="alternateAddressType"
                                         value={this.props.inputs.alternateAddressType}
                                         onChange={this._handleInputChange}
                                         options={[

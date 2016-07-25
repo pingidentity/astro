@@ -13,7 +13,8 @@
         "./src/demo/highlight.js",
         "./src/css",
         "./src/fonts",
-        "./src/images"
+        "./src/images",
+        "./src/selenium"
       ],
       "excludePattern": ".+/tests/.+$",
       "excludePattern": ".+/__mocks__/.+$"

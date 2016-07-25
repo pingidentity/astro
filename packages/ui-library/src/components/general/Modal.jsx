@@ -155,7 +155,7 @@ var Modal = React.createClass({
                             {this._getCloseButton()}
                         </div>
                     </If>
-                    <div className="modal-body">
+                    <div className="modal-body" data-id="modal-body">
                         <If test={!this.props.showHeader}>
                             {this._getCloseButton()}
                         </If>

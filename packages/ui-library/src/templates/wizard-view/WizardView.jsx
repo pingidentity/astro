@@ -137,6 +137,7 @@ module.exports = React.createClass({
                 {/* This outer div is only required to style inside the DemoApp */}
 
                 <ModalButton ref="modal"
+                        id="showWizard"
                         activatorButtonLabel="Show wizard"
                         modalClassName="full-width"
                         modalTitle="Object creation wizard">

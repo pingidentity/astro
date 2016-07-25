@@ -105,6 +105,7 @@ var TabbedSections = React.createClass({
                     {
                         React.Children.map(this.props.children, function (child, index) {
                             return (<li className={this.props.selectedIndex === index ? "active" : ""}
+                                        data-id={this.props["data-id"] + "-" + index}
                                         onClick={callback.bind(null, index)}
                                         key={index}>{child.props.title}</li>);
                         }.bind(this))

@@ -131,7 +131,7 @@ var DemoItem = React.createClass({
 
                     <div className={headerClassName}>
                         <div className="clearfix">
-                            <h1 className="page-title">{this.props.label}</h1>
+                            <h1 className="page-title" data-id="component-title" >{this.props.label}</h1>
                             {docToggle}
                             {demoSrcToggle}
                             {srcToggle}

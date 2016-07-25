@@ -41,7 +41,7 @@ var ColorPickerDemo = React.createClass({
             <div>
                 <div className="input-row">
                     <ColorPicker
-                        data-id="color-picker"
+                        data-id="color-picker1"
                         color={this.state.picker1color}
                         onValueChange={this._handleChange1}
                         labelText="Background color"
@@ -49,7 +49,7 @@ var ColorPickerDemo = React.createClass({
                 </div>
                 <div className="input-row">
                     <ColorPicker
-                        data-id="color-picker"
+                        data-id="color-picker2"
                         color={this.state.picker2color}
                         onValueChange={this._handleChange2}
                         labelText="Background color"

@@ -86,7 +86,8 @@ module.exports = React.createClass({
                     <Section
                         onToggle={this._toggleSection1}
                         expanded={this.props.expandedSections.indexOf(1) > -1}
-                        title="Identity">
+                        title="Identity"
+                        id="identity-section">
 
                         <div className="input-row">
                             <FormTextField
@@ -114,7 +115,8 @@ module.exports = React.createClass({
                     <Section
                         onToggle={this._toggleSection2}
                         expanded={this.props.expandedSections.indexOf(2) > -1}
-                        title="Address">
+                        title="Address"
+                        id="address-section">
 
                         <Layout.Row>
                             <Layout.Column>
@@ -138,7 +140,7 @@ module.exports = React.createClass({
                                         label="Address
                                         Location"
                                         className="input-width-medium"
-                                        id="addressType"
+                                        data-id="addressType"
                                         value={this.props.inputs.addressType}
                                         onChange={this._handleInputChange}
                                         options={[
@@ -168,7 +170,7 @@ module.exports = React.createClass({
                                     <FormSelectField
                                         label="Alternate Address Location"
                                         className="input-width-medium"
-                                        id="alternateAddressType"
+                                        data-id="alternateAddressType"
                                         value={this.props.inputs.alternateAddressType}
                                         onChange={this._handleInputChange}
                                         options={[
@@ -190,7 +192,8 @@ module.exports = React.createClass({
                     <Section
                         onToggle={this._toggleSection3}
                         expanded={this.props.expandedSections.indexOf(3) > -1}
-                        title="Miscellaneous">
+                        title="Miscellaneous"
+                        id="miscellaneous-section">
 
                         <div className="input-row">
                             <label>
