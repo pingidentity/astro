@@ -39,12 +39,11 @@ var cssTips = React.createClass({
 
                 <h3>Declaration</h3>
                 <p>
-                    Buttons can be declared by using a css class or by simply using the button markup.  See
-                    below. All three buttons look identical, but the first two don't require a class. The last
-                    (the anchor) appears as a button because of the added "button" class.
+                    Buttons should be declared by using the HTML "button" element.
+                    If "href" support is needed (e.g. a download button), the "button"
+                    className may be given to an "anchor" element. See below.
                 </p>
                 <p>
-                    <input type="button" value="button" />
                     <button>button</button>
                     <a className="button">button</a>
                 </p>
@@ -52,18 +51,18 @@ var cssTips = React.createClass({
                     content={
                         [
                             /* eslint-disable */
-                            '<input type="button" value="button" />',
                             '<button>button</button>',
-                            '<a className="button">button</a>'
+                            '<a className="button" href="#downloadFile">button</a>'
                             /* eslint-enable */
                         ].join("\n")
                     }
                 />
                 <p>
-                    The "input" or "button" markup is preferable.  The class name is provided for when a button
-                    is not ideal. For example, an "input" or "button" tag can trigger a submit action if
-                    contained within a form. Using an "a"/anchor-tag will prevent this without requiring
-                    JavaScript to prevent the event.
+                    Although we have supported "input" tags in the past, we ask that
+                    for the sake of consistency the "button" markup be used instead.
+                    Both "button" and "input" will trigger a submit action if contained in a form.
+                    Using an "a"/anchor-tag should be avoided unless an "href" property is needed.
+                    In the future, styling support will be removed from the "input" element.
                 </p>
 
                 <br />
@@ -72,19 +71,21 @@ var cssTips = React.createClass({
                     There are four main types of buttons: Primary, Secondary, Success, and inline.
                 </p>
                 <p>
-                    <input type="button" value="Primary" className="primary" />
-                    <input type="button" value="Secondary" />
-                    <input type="button" value="Success" className="success" />
-                    <input type="button" value="Inline" className="inline" />
+                    <button className="primary">Primary</button>
+                    <button className="secondary">Secondary</button>
+                    <button className="success">Success</button>
+                    <button className="cancel">Cancel</button>
+                    <button className="inline">Inline</button>
                 </p>
                 <Markup custom={true} language="html"
                     content={
                         [
                             /* eslint-disable */
-                            '<input type="button" value="Primary" className="primary" />',
-                            '<input type="button" value="Secondary" />',
-                            '<input type="button" value="Success" className="success" />',
-                            '<input type="button" value="Inline" className="inline" />'
+                            '<button className="primary">Primary</button>',
+                            '<button>Secondary</button>',
+                            '<button className="success">Success</button>',
+                            '<button className="cancel">Cancel</button>',
+                            '<button className="inline">Inline</button>'
                             /* eslint-enable */
                         ].join("\n")
                     }
@@ -229,30 +230,6 @@ var cssTips = React.createClass({
                         [
                             /* eslint-disable */
                             '<span className="inline-icon icon-thumb"></span> icon-thumb'
-                            /* eslint-enable */
-                        ].join("\n")
-                    }
-                />
-
-                <br />
-                <h2>Loader/Spinner</h2>
-                <p>
-                    There's a CSS-only spinner animation that you can use in your applications. There are
-                    currently two sizes, the default and a "large" size (shown below). An inline html-element
-                    , such as a span, is normally used but others elements will work if needed:
-                </p>
-                <p>
-                    <span className="spinner"></span>
-                </p>
-                <p>
-                    <span className="spinner large"></span>
-                </p>
-                <Markup custom={true} language="html"
-                    content={
-                        [
-                            /* eslint-disable */
-                            '<span className="spinner"></span>',
-                            '<span className="spinner large"></span>'
                             /* eslint-enable */
                         ].join("\n")
                     }
