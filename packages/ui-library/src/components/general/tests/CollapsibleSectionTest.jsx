@@ -80,4 +80,18 @@ describe("CollapsibleSection", function () {
         expect(onToggle).toBeCalled();
         expect(child).toBeTruthy();
     });
+
+    it("logs deprecated component warning message", function () {
+        console.warn = jest.genMockFunction();
+
+        ReactTestUtils.renderIntoDocument(
+            <CollapsibleSection className="iShouldBeVisible">
+                <div className="iShouldBeHidden" />
+            </CollapsibleSection>
+        );
+
+        expect(console.warn).toBeCalledWith(
+            "** This component is deprecated and will be removed in the next release. " +
+            "See the \"Section\" or \"Collapsible Link\" components for a replacement.");
+    });
 });

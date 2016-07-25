@@ -69,4 +69,19 @@ describe("BackgroundLoader", function () {
         var loadedContent = TestUtils.findRenderedDOMNodeWithDataId(component, "loaded-content");
         expect(ReactTestUtils.isDOMComponent(loadedContent)).toBeTruthy();
     });
+
+    xit("logs deprecated component warning message", function () {
+        console.warn = jest.genMockFunction();
+
+        ReactTestUtils.renderIntoDocument(
+            <BackgroundLoader interval={2000} load={loadContentFunc} loaded={loaded} loading={loadingContentFunc}>
+                <div data-id="loaded-content">content loaded</div>
+            </BackgroundLoader>
+        );
+
+        expect(console.warn).toBeCalledWith(
+            "** This component is deprecated and will be removed in the next release. " +
+            "There is no direct replacement. Timer based polling or other timer related activities is better to be " +
+            "implemented on middleware/actions/reducers layer.");
+    });
 });

@@ -155,6 +155,12 @@ var BackgroundLoader = React.createClass({
         };
     },
 
+    componentWillMount: function () {
+        console.warn("** This component is deprecated and will be removed in the next release. " +
+            "There is no direct replacement. Timer based polling or other timer related activities is better to be " +
+            "implemented on middleware/actions/reducers layer.");
+    },
+
     /*
      * When we mount we start trying to load the data.
      *
