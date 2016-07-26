@@ -36,8 +36,8 @@ describe("ConditionalFieldset", function () {
         );
     }
 
-    it("renders default configuration with minimal params", function () {
-        var component = getGenericConditionalFieldset({ "data-id": dataId });
+    it("renders default configuration with select", function () {
+        var component = getGenericConditionalFieldset({ "data-id": dataId, type: "select" });
 
         var form1 = TestUtils.findRenderedDOMNodeWithDataId(component, "option1");
         expect(form1).toBeTruthy();
@@ -58,8 +58,8 @@ describe("ConditionalFieldset", function () {
         expect(options[1].textContent).toBe("Option 2");
     });
 
-    it("renders default configuration with FormRadioGroup", function () {
-        var component = getGenericConditionalFieldset({ type: "radio" });
+    it("renders default configuration with all defaults", function () {
+        var component = getGenericConditionalFieldset({ "data-id": dataId });
 
         var form1 = TestUtils.findRenderedDOMNodeWithDataId(component, "option1");
         expect(form1).toBeTruthy();
@@ -85,7 +85,7 @@ describe("ConditionalFieldset", function () {
     });
 
     it("change option with select", function () {
-        var component = getGenericConditionalFieldset({ "data-id": dataId });
+        var component = getGenericConditionalFieldset({ "data-id": dataId, type: "select" });
         var componentRef = component.refs.ConditionalFieldsetStateful;
         expect(componentRef.state.selectedIndex).toBe(0);
 
@@ -105,7 +105,7 @@ describe("ConditionalFieldset", function () {
     });
 
     it("change option with radio", function () {
-        var component = getGenericConditionalFieldset({ type: "radio" });
+        var component = getGenericConditionalFieldset({ "data-id": dataId });
         var componentRef = component.refs.ConditionalFieldsetStateful;
         expect(componentRef.state.selectedIndex).toBe(0);
 
@@ -120,8 +120,8 @@ describe("ConditionalFieldset", function () {
         expect(options[1].checked).toBe(false);
         expect(componentRef.state.selectedIndex).toBe(0);
 
+
         ReactTestUtils.Simulate.change(options[1], { target: { value: 1 } });
-        expect(options[1].checked).toBe(true);
         expect(componentRef.state.selectedIndex).toBe(1);
 
         form1 = TestUtils.findRenderedDOMNodeWithDataId(component, "option1");
@@ -130,12 +130,29 @@ describe("ConditionalFieldset", function () {
         expect(form2).toBeTruthy();
     });
 
+    it("verify defaults change to select when 3 or more options", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <ConditionalFieldset data-id={dataId} >
+                <div data-id="option1" title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
+                <div data-id="option2" title="Option 2">Option 2</div>
+                <div data-id="option3" title="Option 3">Option 3</div>
+            </ConditionalFieldset>
+        );
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-options");
+        expect(select).toBeTruthy();
+        var formSelectField = TestUtils.findRenderedComponentWithType(component, FormSelectField);
+        expect(formSelectField).toBeTruthy();
+        var options = TestUtils.scryRenderedDOMNodesWithTag(select, "option");
+        expect(options.length).toBe(3);
+    });
+
     it("controlled change option", function () {
         var component = getGenericConditionalFieldset({
             "data-id": dataId,
             controlled: true,
             onValueChange: callback,
-            selectedIndex: selectedIndex
+            selectedIndex: selectedIndex,
+            type: "select"
         });
 
         var select = TestUtils.findRenderedDOMNodeWithTag(component, "select");
@@ -147,7 +164,8 @@ describe("ConditionalFieldset", function () {
         var component = getGenericConditionalFieldset({
             "data-id": dataId,
             supportEmpty: true,
-            emptyMessage: "DO NOTHING"
+            emptyMessage: "DO NOTHING",
+            type: "select"
         });
         var componentRef = component.refs.ConditionalFieldsetStateful;
         expect(componentRef.state.selectedIndex).toBe(0);

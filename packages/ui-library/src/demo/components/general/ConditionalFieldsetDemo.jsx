@@ -84,14 +84,14 @@ var ConditionalFieldsetDemo = React.createClass({
                 </div>
 
                 <div className="input-row">
-                    <label>ConditionalFieldset without empty support - default behaviour</label>
+                    <label>ConditionalFieldset without empty support - default behaviour, no type</label>
                     <ConditionalFieldset data-id="fieldset-2"
                                          onValueChange={this._onCondition2ValueChange}
                                          selectedIndex={this.state.selectedCondition2Index}
-                                         controlled={true}
-                                         type={this.state.selectedTypeName} >
+                                         controlled={true} >
                         <div title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
                         <div title="Option 2">Option 2</div>
+                        <div title="Option 3">Some other option</div>
                     </ConditionalFieldset>
                 </div>
 

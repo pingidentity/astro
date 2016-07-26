@@ -28,7 +28,6 @@ var ConditionalFieldsetStateless = React.createClass({
 
     getDefaultProps: function () {
         return {
-            type: Types.SELECT,
             supportEmpty: false,
             emptyMessage: "-- Select an option --",
             selectedIndex: 0
@@ -49,14 +48,14 @@ var ConditionalFieldsetStateless = React.createClass({
         }
     },
 
-    _getOptions: function () {
+    _getOptions: function (type) {
         var options = [];
         var index = 0;
         if (this.props.supportEmpty) {
             this._addEmptyNode();
         }
         var dataId = this.props["data-id"] + "-options";
-        if (this.props.type === Types.SELECT) {
+        if (type === Types.SELECT) {
             React.Children.forEach(this.props.children, function (child) {
                 options.push({ value: (index), label: child.props.title });
                 index = index + 1;
@@ -92,7 +91,8 @@ var ConditionalFieldsetStateless = React.createClass({
     },
 
     render: function () {
-        var options = this._getOptions();
+        var type = this.props.type || ((this.props.children.length > 2) ? Types.SELECT : Types.RADIO);
+        var options = this._getOptions(type);
         var showFieldset = (this.props.children[this.props.selectedIndex].props.children !== undefined);
         var className = classNames({ focused: showFieldset, unfocused: !showFieldset }, "conditional-fieldset");
         return (
@@ -153,8 +153,9 @@ var ConditionalFieldsetStateful = React.createClass({
  *          To enable the component to be externally managed. True will relinquish control to the component's owner.
  *          False or not specified will cause the component to manage state internally. If True, onValueChange and
  *          selectedIndex will be managed by the component.
- * @param {ConditionalFieldset.Type} [type=ConditionalFieldset.Type.SELECT]
- *          Type of selector to display to expose form options
+ * @param {ConditionalFieldset.Type} [type]
+ *          Type of selector to display to expose form options. If not set, it will default to RADIO for 2 options
+ *          and select for 3 or more.
  * @param {boolean} [supportEmpty=false]
  *          Set this if you want to have an empty option inserted. Alternatively you may pass an empty div in as
  *          can be seen in the examples.
