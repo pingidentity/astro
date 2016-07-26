@@ -23,9 +23,9 @@ describe("FormRadioGroup", function () {
         );
         var radios = TestUtils.scryRenderedDOMNodesWithTag(component, "input");
 
-        ReactTestUtils.Simulate.change(radios[0], { target: { checked: true } });
+        ReactTestUtils.Simulate.change(radios[0], { target: { value: "1" } });
         //make sure callback was triggered
-        expect(callback).toBeCalled();
+        expect(callback).toBeCalledWith("1");
     });
 
     // TODO To be removed once "onChange" support is discontnued.
@@ -39,9 +39,9 @@ describe("FormRadioGroup", function () {
         );
         var radios = TestUtils.scryRenderedDOMNodesWithTag(component, "input");
 
-        ReactTestUtils.Simulate.change(radios[0], { target: { checked: true } });
+        ReactTestUtils.Simulate.change(radios[0], { target: { value: "1" } });
         //make sure callback was triggered
-        expect(callback).toBeCalled();
+        expect(callback).toBeCalledWith("1");
     });
 
     it("test no default selected item", function () {
@@ -85,9 +85,9 @@ describe("FormRadioGroup", function () {
         expect(radios[1].checked).toBe(true);
         expect(radios[1].value).toBe("2");
 
-        ReactTestUtils.Simulate.change(radios[0], { target: { checked: true } });
+        ReactTestUtils.Simulate.change(radios[0], { target: { value: "1" } });
         //make sure callback was triggered
-        expect(callback).toBeCalled();
+        expect(callback).toBeCalledWith("1");
     });
 
     // TODO To be removed once "onChange" support is discontnued.
@@ -113,9 +113,9 @@ describe("FormRadioGroup", function () {
         expect(radios[1].checked).toBe(true);
         expect(radios[1].value).toBe("2");
 
-        ReactTestUtils.Simulate.change(radios[0], { target: { checked: true } });
+        ReactTestUtils.Simulate.change(radios[0], { target: { value: "1" } });
         //make sure callback was triggered
-        expect(callback).toBeCalled();
+        expect(callback).toBeCalledWith("1");
     });
 
     it("contains the proper css classes", function () {

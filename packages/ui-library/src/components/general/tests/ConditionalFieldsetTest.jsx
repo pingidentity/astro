@@ -119,13 +119,15 @@ describe("ConditionalFieldset", function () {
         expect(options[0].checked).toBe(true);
         expect(options[1].checked).toBe(false);
         expect(componentRef.state.selectedIndex).toBe(0);
-        //ReactTestUtils.Simulate.change(options[1], { target: { checked: true } });
-        //expect(componentRef.state.selectedIndex).toBe(1);
 
-        // form1 = TestUtils.findRenderedDOMNodeWithDataId(component, "option1");
-        // expect(form1).toBeFalsy();
-        // form2 = TestUtils.findRenderedDOMNodeWithDataId(component, "option2");
-        // expect(form2).toBeTruthy();
+        ReactTestUtils.Simulate.change(options[1], { target: { value: 1 } });
+        expect(options[1].checked).toBe(true);
+        expect(componentRef.state.selectedIndex).toBe(1);
+
+        form1 = TestUtils.findRenderedDOMNodeWithDataId(component, "option1");
+        expect(form1).toBeFalsy();
+        form2 = TestUtils.findRenderedDOMNodeWithDataId(component, "option2");
+        expect(form2).toBeTruthy();
     });
 
     it("controlled change option", function () {
