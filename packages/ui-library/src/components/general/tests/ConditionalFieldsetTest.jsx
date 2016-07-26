@@ -30,8 +30,8 @@ describe("ConditionalFieldset", function () {
 
         return ReactTestUtils.renderIntoDocument(
             <ConditionalFieldset {...props}>
-                 <div data-id="option1" label="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
-                 <div data-id="option2" label="Option 2">Option 2</div>
+                 <div data-id="option1" title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
+                 <div data-id="option2" title="Option 2">Option 2</div>
              </ConditionalFieldset>
         );
     }

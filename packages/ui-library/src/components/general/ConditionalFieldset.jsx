@@ -44,7 +44,7 @@ var ConditionalFieldsetStateless = React.createClass({
             }
         });
         if (!alreadyAdded) {
-            var emptyDiv = React.createElement ("div", { label: this.props.emptyMessage } );
+            var emptyDiv = React.createElement ("div", { title: this.props.emptyMessage } );
             this.props.children.splice(0, 0, emptyDiv);
         }
     },
@@ -58,7 +58,7 @@ var ConditionalFieldsetStateless = React.createClass({
         var dataId = this.props["data-id"] + "-options";
         if (this.props.type === Types.SELECT) {
             React.Children.forEach(this.props.children, function (child) {
-                options.push({ value: (index), label: child.props.label });
+                options.push({ value: (index), label: child.props.title });
                 index = index + 1;
             });
             return (
@@ -74,7 +74,7 @@ var ConditionalFieldsetStateless = React.createClass({
             );
         } else {
             React.Children.forEach(this.props.children, function (child) {
-                options.push({ id: (index), name: child.props.label });
+                options.push({ id: (index), name: child.props.title });
                 index = index + 1;
             });
             return (
