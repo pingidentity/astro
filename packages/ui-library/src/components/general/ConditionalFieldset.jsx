@@ -94,7 +94,7 @@ var ConditionalFieldsetStateless = React.createClass({
     render: function () {
         var options = this._getOptions();
         var showFieldset = (this.props.children[this.props.selectedIndex].props.children !== undefined);
-        var className = classNames({ focused: showFieldset, unfocused: !showFieldset });
+        var className = classNames({ focused: showFieldset, unfocused: !showFieldset }, "conditional-fieldset");
         return (
             <fieldset data-id={this.props["data-id"]} className={className}>
                 <legend>

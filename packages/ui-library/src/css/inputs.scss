@@ -525,7 +525,9 @@ label {
 }
 fieldset {
 	margin: 0 0 25px 0;
-
+	.input-select {
+		margin-right: 0px;
+	}
 	legend {
 		text-transform: uppercase;
 		.help-tooltip {
@@ -541,8 +543,8 @@ fieldset {
 	}
 	&.focused, &.unfocused {
 		legend {
-			padding: 0 7px;
-			margin: 0 0 0 -7px;
+			padding: 0 10px;
+			margin: 0 0 0 -10px;
 			font-size: 14px;
 			color: $color-elephant;
 
@@ -555,7 +557,7 @@ fieldset {
 	}
 	&.focused {
 		border: 1px solid $color-dolphin;
-		padding: 15px 25px 30px 25px;
+		padding: 20px;
 		@include border-radius(5px);
 
 		&.narrow {
@@ -563,10 +565,13 @@ fieldset {
 		}
 	}
 	&.unfocused {
-		padding: 15px 0 0 25px;
+		padding: 21px;
+	}
+	&.conditional-fieldset {
+		margin-left: -21px;
 	}
 	.subset {
-		margin: 0 0 0 25px;
+		margin: 0 0 0 20px;
 		label {
 			text-transform: none;
 		}
