@@ -11,15 +11,14 @@ describe("MultiDrag-Reducer", function () {
     function getInitialState () {
         return Reducer(Reducer(null, {}), Actions.init([
             { name: "Available Rows", id: 1, rows: [
-                { id: 0, name: "Jessie James" },
-                { id: 1, name: "James Bond" },
-                { id: 2, name: "Bruce Wayne" },
-                { id: 3, name: "Blade" },
-            ]
+                { id: 0, name: "Jessie James", power: "outlaw" },
+                { id: 1, name: "James Bond", power: "super spy" },
+                { id: 2, name: "Bruce Wayne", power: "batman" },
+                { id: 3, name: "Blade", power: "super hero" }]
             },
             { name: "Added Rows", id: 2, rows: [
-                { id: 10, name: "Clark Kent" },
-                { id: 11, name: "Peter Parker" }]
+                { id: 10, name: "Clark Kent", power: "superman" },
+                { id: 11, name: "Peter Parker", power: "spiderman" }]
             }
         ]));
     }
@@ -54,19 +53,30 @@ describe("MultiDrag-Reducer", function () {
     it("filters column with less than 3 chars", function () {
         var next = Reducer(getInitialState(), Actions.filterField("name", 0, "jam"));
         expect(next.columns[0].filteredRows).toEqual([
-            { id: 1, name: "James Bond" }
+            { id: 1, name: "James Bond", power: "super spy" }
         ]);
     });
 
     it("filters column with more than 3 chars", function () {
         var next = Reducer(getInitialState(), Actions.filterField("name", 0, "james"));
         expect(next.columns[0].filteredRows).toEqual([
-            { id: 0, name: "Jessie James" },
-            { id: 1, name: "James Bond" }
+            { id: 0, name: "Jessie James", power: "outlaw" },
+            { id: 1, name: "James Bond", power: "super spy" }
         ]);
 
         next = Reducer(next, Actions.filterField("name", 0, ""));
         expect(next.columns[0].filteredRows.length).toEqual(4);
+    });
+
+    it("filters all string-able row props when no fieldName given", function () {
+        var next = Reducer(getInitialState(), Actions.filter(1, "kent"));
+        expect(next.columns[1].filteredRows).toEqual([{ id: 10, name: "Clark Kent", power: "superman" }]);
+
+        var next = Reducer(getInitialState(), Actions.filter(0, "super"));
+        expect(next.columns[0].filteredRows).toEqual([
+            { id: 1, name: "James Bond", power: "super spy" },
+            { id: 3, name: "Blade", power: "super hero" }
+        ]);
     });
 
     it("sets placeholder", function () {

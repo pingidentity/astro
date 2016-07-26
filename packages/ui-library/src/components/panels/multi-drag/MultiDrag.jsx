@@ -1,8 +1,50 @@
 var React = require("re-react"),
+    ReactVanilla = require("react"),
     classnames = require("classnames"),
     DragDropColumn = require("./DragDropColumn.jsx"),
     DragDropContext = require("react-dnd").DragDropContext,
-    HTML5Backend = require("react-dnd/modules/backends/HTML5");
+    HTML5Backend = require("react-dnd/modules/backends/HTML5"),
+    search = require("./MultiDragReducer.js").search,
+    move = require("./MultiDragReducer.js").move,
+    reapplyFilters = require("./MultiDragReducer.js").reapplyFilters,
+    _ = require("underscore");
+
+/**
+ * @typedef {object} MultiDrag~IndexesDescriptor
+ *
+ * @property {number} from
+ *    The index of the dragged row.
+ * @property {number} to
+ *    The index of the destination row.
+ */
+
+/**
+ * @function MultiDrag.convertFilteredIndexes
+ * @desc When dragging items to and from a filtered list, the to/from indexes the the component reports
+ *    won't accurately describe what the underlying move in the unfiltered list should look like.
+ *    We have to do some logic to convert back the indexes relative to the unfiltered rows.
+ *
+ * @param {MultiDrag~ColumnData[]} columns
+ *    The data representing the columns in the component.
+ * @param {MultiDrag~MoveDescriptor} desc
+ *    The move descriptor for the drag.
+ *
+ * @return {MultiDrag~IndexesDescriptor}
+ *    The indexes descriptor for the drag with the indexes converted.
+ */
+function convertFilteredIndexes (columns, desc) {
+    //find the index in the unfiltered columns
+    var from = columns[desc.from.column].rows.indexOf(
+        columns[desc.from.column].filteredRows[desc.from.index]);
+
+    var to = desc.to.index >= columns[desc.to.column].filteredRows.length
+        //if an item is being dragged to the end of the list, append it to the end of the unfiltered list
+        ? columns[desc.to.column].rows.length
+        : columns[desc.to.column].rows.indexOf(
+            columns[desc.to.column].filteredRows[desc.to.index]);
+
+    return { from: from, to: to };
+}
 
 /**
  * @typedef {object} MultiDrag~ColumnData
@@ -17,20 +59,21 @@ var React = require("re-react"),
  */
 
 /**
+ * @typedef {object} MultiDrag~MoveObject
+ *
+ * @property {number} column
+ *    The dragged/target column index.
+ * @property {number} index
+ *    The index dragged from/to.
+ */
+
+/**
  * @typedef {object} MultiDrag~MoveDescriptor
  *
- * @property {object} from
- *    The dragged item description.
- * @property {number} from.column
- *    The column index.
- * @property {number} from.index
- *    The row index.
- * @property {object} to
- *    The target item description.
- * @property {number} to.column
- *    The column index.
- * @property {number} to.index
- *    The row index.
+ * @property {MultiDrag~MoveObject} from
+ *    The dragged item location description.
+ * @property {MultiDrag~MoveObject} to
+ *    The target item location description.
  */
 
  /**
@@ -81,6 +124,10 @@ var React = require("re-react"),
  *    To define the base "data-id" value for the top-level HTML container.
  * @param {string} [className]
  *    CSS classes to set on the top-level HTML container.
+ * @param {boolean} [controlled=false]
+ *     To enable the component to be externally managed. True will relinquish control to the component's owner.
+ *     False or not specified will cause the component to manage state internally.
+ *     Controlled=false will handle filtering and moving in addition to executing all callbacks if specified.
  *
  * @param {MultiDrag~ColumnData[]} columns
  *    The data representing the columns in the component.
@@ -94,6 +141,10 @@ var React = require("re-react"),
  *    Display searchbar on all columns.
  * @param {boolean} [showSearch=false]
  *    Dispaly searchbar on the first column.
+ * @param {string[]} [filterFieldNames=[]]
+ *    An array of field names of the row properties to use in a search where array index corresponds to each column index.
+ *    If unset for any column index, search will use all row properties that have a string representation for that column.
+ *    Only used when controlled=false.
  *
  * @param {MultiDrag~onSearch} onSearch
  *    Callback to be triggered when a column is searched.
@@ -104,7 +155,7 @@ var React = require("re-react"),
  * @param {MultiDrag~onCancel} onCancel
  *    Callback to be triggered when a drag event ends.
  * @param {MultiDrag~onScrolledToPosition} [onScrolledToTop]
- *    Callback to be triggered when the list is scrolled to the top.
+ *    Callback to be triggered when the list is scrolled to the top. Can be used to fetch more data.
  * @param {MultiDrag~onScrolledToPosition} [onScrolledToBottom]
  *    Callback to be triggered when the list is scrolled to the bottom. Can be used to fetch more data.
  *
@@ -122,7 +173,8 @@ var React = require("re-react"),
  *              onDrag={this.onDrag}
  *              contentType={contentType} />
  */
-var MultiDrag = React.createClass({
+var MultiDragStateless = React.createClass({
+    displayName: "MultiDragStateless",
 
     propTypes: {
         "data-id": React.PropTypes.string,
@@ -136,10 +188,9 @@ var MultiDrag = React.createClass({
         ).isRequired.affectsRendering,
         showSearchOnAllColumns: React.PropTypes.bool.affectsRendering,
         showSearch: React.PropTypes.bool.affectsRendering,
-        previewMove: React.PropTypes.shape({
-            column: React.PropTypes.number.affectsRendering,
-            row: React.PropTypes.number.affectsRendering
-        }),
+        // re-react doesn't wrap the React.PropTypes.shape validator with affectsRendering,
+        // so can't specify shape of object for previewMove otherwise it won't re-render
+        previewMove: React.PropTypes.object.affectsRendering,
         contentType: React.PropTypes.element.isRequired.affectsRendering,
         classNames: React.PropTypes.arrayOf(
             React.PropTypes.string
@@ -265,4 +316,129 @@ var MultiDrag = React.createClass({
     }
 });
 
-module.exports = DragDropContext(HTML5Backend)(MultiDrag);
+var MultiDragStateful = ReactVanilla.createClass({
+    displayName: "MultiDragStateful",
+
+    propTypes: {
+        filterFieldNames: React.PropTypes.arrayOf(React.PropTypes.string)
+    },
+
+    getDefaultProps: function () {
+        return {
+            filterFieldNames: []
+        };
+    },
+
+    _handleSearch: function (index, value) {
+        this.setState(search(this.state, {
+            column: index,
+            filter: value,
+            fieldName: this.props.filterFieldNames[index]
+        }));
+
+        if (this.props.onSearch) {
+            this.props.onSearch(index, value);
+        }
+    },
+
+    _handleCancel: function () {
+        this.setState({
+            placeholder: null
+        });
+
+        if (this.props.onCancel) {
+            this.props.onCancel();
+        }
+    },
+
+    _handleDrop: function (desc) {
+        var convertedDesc = convertFilteredIndexes(this.state.columns, desc);
+
+        var next = move(this.state, {
+            from: { column: desc.from.column, index: convertedDesc.from },
+            to: { column: desc.to.column, index: convertedDesc.to }
+        });
+
+        //reapply filters after a move so moved rows filtered as well
+        next = reapplyFilters(next);
+        this.setState(next);
+
+        if (this.props.onDrop) {
+            this.props.onDrop(desc);
+        }
+    },
+
+    _handleDrag: function (desc) {
+        this.setState({
+            placeholder: desc.to
+        });
+
+        if (this.props.onDrag) {
+            this.props.onDrag(desc);
+        }
+    },
+
+    componentWillMount: function () {
+        //apply any initial filters
+        var next = _.clone(this.state);
+        next = reapplyFilters(next);
+        this.setState(next);
+    },
+
+    componentWillReceiveProps: function (nextProps) {
+        if (!_.isEqual(nextProps.columns, this.props.columns)) {
+            //update columns and reapply filters
+            var next = _.clone(this.state);
+            next.columns = nextProps.columns;
+            next = reapplyFilters(next);
+            this.setState(next);
+        }
+    },
+
+    getInitialState: function () {
+        return {
+            columns: this.props.columns,
+            placeholder: null,
+        };
+    },
+
+    render: function () {
+        var props = _.defaults({
+            ref: "MultiDragStateless",
+            onSearch: this._handleSearch,
+            columns: this.state.columns,
+            previewMove: this.state.placeholder,
+            onCancel: this._handleCancel,
+            onDrop: this._handleDrop,
+            onDrag: this._handleDrag
+        }, this.props);
+
+        return React.createElement(MultiDragStateless, props);
+    }
+});
+
+var MultiDrag = ReactVanilla.createClass({
+    displayName: "MultiDrag",
+
+    propTypes: {
+        controlled: React.PropTypes.bool
+    },
+
+    getDefaultProps: function () {
+        return {
+            controlled: false
+        };
+    },
+
+    render: function () {
+        return this.props.controlled
+            ? React.createElement(MultiDragStateless, _.defaults({ ref: "MultiDragStateless" }, this.props))
+            : React.createElement(MultiDragStateful, _.defaults({ ref: "MultiDragStateful" }, this.props));
+    }
+});
+
+var MultiDragDropContext = DragDropContext(HTML5Backend)(MultiDrag);
+
+MultiDragDropContext.convertFilteredIndexes = convertFilteredIndexes;
+
+module.exports = MultiDragDropContext;

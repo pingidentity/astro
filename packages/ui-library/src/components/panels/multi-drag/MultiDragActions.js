@@ -34,15 +34,6 @@ exports.set = function (path, value) {
 };
 
 /**
-* @typedef MultiDrag~MoveObject
-*
-* @property {number} column
-*    The dragged/target column index.
-* @property {number} index
-*    The index dragged from/to.
-*/
-
-/**
 * @function MultiDrag~move
 * @desc Move a row from one position to another.
 *
@@ -125,7 +116,7 @@ exports.init = function (data) {
 *
 * @param {string} fieldName
 *    The field name to use in the search.
-* @param {numbe} column
+* @param {number} column
 *    The index of the column whose rows to search.
 * @param {string} filter
 *    The value of the filter string to use in the search.
@@ -144,8 +135,10 @@ exports.filterField = function (fieldName, column, filter) {
 
 /**
 * @function MultiDrag~filter
-* @desc Filters down all rows in all columns by the filter value.
+* @desc Filters down all rows in column by searching each row's fields for the filter value.
 *
+* @param {number} column
+*    The index of the column whose rows to search.
 * @param {string} filter
 *    The value of the filter string to use in the search.
 *
