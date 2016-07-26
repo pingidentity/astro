@@ -9,7 +9,7 @@ var DetailsTooltip = require("../../../components/tooltips/DetailsTooltip.jsx");
 */
 var DetailsTooltipDemo = React.createClass({
 
-    numDemos: 8,
+    numDemos: 9,
 
     _toggle: function (index) {
         var newState = {};
@@ -69,6 +69,15 @@ var DetailsTooltipDemo = React.createClass({
     },
 
     render: function () {
+        
+        var secondaryArr = [
+            { value: this._handleCancel8, label: "One" },
+            { value: this._handleCancel8, label: "Two" }
+        ];
+        var primaryArr = [
+            { value: this._handleConfirm8, label: "Save" }
+        ];
+        
         return (
             <div className="controls">
                 <DetailsTooltip
@@ -256,6 +265,25 @@ var DetailsTooltipDemo = React.createClass({
                     </div>
                 </DetailsTooltip>
                 <div>{this.state.status7}</div>
+                
+                <br/>
+                <DetailsTooltip
+                    label="Test passing buttons"
+                    positionClassName="bottom right"
+                    title="Tooltip Title"
+                    open={this.state.open8}
+                    onToggle={this._handleToggle8}
+                    secondaryLabels={secondaryArr}
+                    primaryLabels={primaryArr}
+                    cancelLabel="Cancel"
+                    >
+                    <div className="title">Pass buttons</div>
+                    <p>
+                        Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
+                        sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
+                    </p>
+                </DetailsTooltip>
+                <div>{this.state.status8}</div>
 
                 <br/>
                 <DetailsTooltip

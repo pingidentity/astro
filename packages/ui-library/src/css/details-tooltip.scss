@@ -186,6 +186,7 @@
 				button, .button, input[type=button] {
 					margin: 0;
 					&.cancel {
+						margin-top: 0;
 						margin-right: 10px;
 					}
 				}

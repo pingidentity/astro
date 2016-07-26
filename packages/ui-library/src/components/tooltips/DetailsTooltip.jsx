@@ -47,6 +47,13 @@ var React = require("re-react"),
  * @param {string} [title]
  *     Tooltip title
  *
+ * @param {array} [secondaryLabels]
+ *     Array of label strings and values to use as secondary button titles. Limit 2.
+ * @param {array} [primaryLabels]
+ *     Array of label strings and values to use as the primary button titles.
+ * @param {string} [cancelLabel]
+ *     A string that determines whether or not to show the cancel button
+ *
  * @param {boolean} [disabled=false]
  *     If true then disable button activity and add "disabled" css style to label link.
  * @param {boolean} [hideOnClick=false]
@@ -55,6 +62,8 @@ var React = require("re-react"),
  *     If true, tooltip is open or else closed.
  * @param {DetailsTooltip~onToggle} [onToggle]
  *     Callback to be triggered when label is clicked.
+ * @param {DetailsTooltip~onKeyDown} [onKeyDown]
+ *     Callback to be triggered when escape key is clicked. Closes DetailsTooltip.
  * @param {boolean} [showClose=true]
  *     Show close control.
  *
@@ -115,7 +124,11 @@ var DetailsTooltipStateless = React.createClass({
         open: React.PropTypes.bool.affectsRendering,
         onToggle: React.PropTypes.func,
         showClose: React.PropTypes.bool.affectsRendering,
-        children: React.PropTypes.node.affectsRendering
+        children: React.PropTypes.node.affectsRendering,
+        onKeyDown: React.PropTypes.func,
+        secondaryLabels: React.PropTypes.array,
+        primaryLabels: React.PropTypes.array,
+        cancelLabel: React.PropTypes.string
     },
 
     getDefaultProps: function () {
@@ -137,6 +150,76 @@ var DetailsTooltipStateless = React.createClass({
         this.props.onToggle();
     },
 
+    /*
+     * Secondary buttons
+     */
+    _getSecondaryButtonHtml: function (label, value) {
+        return (
+            <button
+                type="button"
+                className="cancel"
+                onClick={value}
+                key={label}>
+                {label}
+            </button>
+        );
+    },
+
+    /*
+     * Primary buttons
+     */
+    _getPrimaryButtonHtml: function (label, value) {
+        return (
+            <button
+                type="button"
+                data-id="confirm-action"
+                className="primary"
+                onClick={value}
+                key={label}>
+                {label}
+            </button>
+        );
+    },
+
+    /*
+     * Optional button array
+     */
+    _getButtons: function () {
+        
+        // can have multiple secondary buttons
+        var secondaryButtons = [];
+        if (this.props.secondaryLabels) {
+            secondaryButtons = this.props.secondaryLabels.map(function (secondaryLabel) {
+                return this._getSecondaryButtonHtml(secondaryLabel.label, secondaryLabel.value);
+            }.bind(this));
+        }
+        
+        // can have multiple primary buttons
+        var primaryButtons = [];
+        if (this.props.primaryLabels) {
+            primaryButtons = this.props.primaryLabels.map(function (primaryLabel) {
+                return this._getPrimaryButtonHtml(primaryLabel.label, primaryLabel.value);
+            }.bind(this));
+        }
+
+        var buttons = null;
+        // only display buttons if primary button present
+        if (this.props.primaryLabels) {
+            buttons = (<div className="buttons" data-id="buttons">
+                {secondaryButtons}
+                {primaryButtons}
+                {this.props.cancelLabel && (
+                    <span>
+                        <br />
+                        <a className="cancel"
+                           data-id="cancel-action"
+                           onClick={this.props.onToggle}>{this.props.cancelLabel}</a>
+                    </span>
+                )}
+            </div>);
+        }
+        return buttons;
+    },
 
     /*
      * Return of content based on props.open.
@@ -160,14 +243,25 @@ var DetailsTooltipStateless = React.createClass({
                     {this.props.title && (
                         <div className={titleClassName} data-id="details-title">{this.props.title}</div>
                     )}
-                    <div className="details-body" data-id="details-body">{this.props.children}</div>
+                    <div className="details-body" data-id="details-body">
+                        {this.props.children}
+                        {this._getButtons()}
+                    </div>
                 </div>
             </div>
         ) : null;
     },
 
     _handleGlobalClick: function (e) {
+        // handle click outside of container
         if (this.props.open) {
+            callIfOutsideOfContainer(ReactDOM.findDOMNode(this.refs.container), this._handleToggle, e);
+        }
+    },
+
+    _handleGlobalKeyDown: function (e) {
+        // handle escape key
+        if (e.keyCode === 27 && this.props.open) {
             callIfOutsideOfContainer(ReactDOM.findDOMNode(this.refs.container), this._handleToggle, e);
         }
     },
@@ -179,6 +273,7 @@ var DetailsTooltipStateless = React.createClass({
         //to avoid possible false positive triggers if tooltip was open as result of click outside of it (e.g. some link outside)
         _.defer(function () {
             window.addEventListener("click", self._handleGlobalClick);
+            window.addEventListener("keydown", self._handleGlobalKeyDown);
         });
     },
 
@@ -188,6 +283,7 @@ var DetailsTooltipStateless = React.createClass({
         }
         else if (this.props.open && !nextProps.open) {
             window.removeEventListener("click", this._handleGlobalClick);
+            window.removeEventListener("keydown", this._handleGlobalKeyDown);
         }
     },
 
@@ -214,10 +310,17 @@ var DetailsTooltipStateless = React.createClass({
         if (this.props.positionStyle) {
             console.warn(Utils.deprecateMessage("positionStyle", "positionClassName"));
         }
+        if (this.props.secondaryLabels && this.props.secondaryLabels.length > 2) {
+            console.warn(
+                "DetailsTooltip expecting two or less secondary button labels.",
+                this.props.secondaryLabels.length
+            );
+        }
     },
 
     componentWillUnmount: function () {
         window.removeEventListener("click", this._handleGlobalClick);
+        window.removeEventListener("keydown", this._handleGlobalKeyDown);
     },
 
     render: function () {

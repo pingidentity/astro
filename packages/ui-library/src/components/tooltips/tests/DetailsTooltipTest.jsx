@@ -226,8 +226,9 @@ describe("DetailsTooltip", function () {
             </DetailsTooltip>
         );
 
-        expect(window.addEventListener.mock.calls.length).toBe(1);
+        expect(window.addEventListener.mock.calls.length).toBe(2);
         expect(window.addEventListener.mock.calls[0][0]).toEqual("click");
+        expect(window.addEventListener.mock.calls[1][0]).toEqual("keydown");
     });
 
     it("unregister global listeners on unmount", function () {
@@ -242,8 +243,9 @@ describe("DetailsTooltip", function () {
         //trigger unmount
         ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
 
-        expect(window.removeEventListener.mock.calls.length).toBe(1);
+        expect(window.removeEventListener.mock.calls.length).toBe(2);
         expect(window.removeEventListener.mock.calls[0][0]).toEqual("click");
+        expect(window.removeEventListener.mock.calls[1][0]).toEqual("keydown");
     });
 
     it("triggers callback when clicked outside", function () {
@@ -278,8 +280,9 @@ describe("DetailsTooltip", function () {
 
         component._setProps({ open: false });
 
-        expect(window.removeEventListener.mock.calls.length).toBe(1);
+        expect(window.removeEventListener.mock.calls.length).toBe(2);
         expect(window.removeEventListener.mock.calls[0][0]).toEqual("click");
+        expect(window.removeEventListener.mock.calls[1][0]).toEqual("keydown");
     });
 
     // TODO To be removed once "id" support is discontnued.
@@ -486,5 +489,44 @@ describe("DetailsTooltip", function () {
         expect(console.warn).toBeCalledWith(
             "Deprecated: use titleClassName instead of titleClassNames. " +
             "Support for titleClassNames will be removed in next version");
+    });
+
+    it("Renders buttons when optional buttons are provided", function () {
+        var secondaryArr = [
+                { value: jest.genMockFunction(), label: "One" },
+                { value: jest.genMockFunction(), label: "Two" }
+            ],
+            primaryArr = [
+                { value: jest.genMockFunction(), label: "Save" }
+            ];
+        var component = ReactTestUtils.renderIntoDocument(
+                <DetailsTooltip
+                    title="Buttons provided"
+                    label="Action"
+                    open={true}
+                    secondaryLabels={secondaryArr}
+                    primaryLabels={primaryArr}
+                    cancelLabel="Cancel">
+                    <p>What ever callout content is</p>
+                </DetailsTooltip>
+            );
+        var saveBtn = TestUtils.scryRenderedDOMNodesWithClass(component, "primary"),
+            cancelBtn = TestUtils.findRenderedDOMNodeWithDataId(component, "cancel-action"),
+            secondaryBtns = TestUtils.scryRenderedDOMNodesWithTag(component, "button");
+
+        expect(secondaryBtns).toBeTruthy();
+        expect(saveBtn).toBeTruthy();
+        expect(cancelBtn).toBeTruthy();
+        
+        // check length of buttons
+        expect(saveBtn.length).toBe(1);
+        expect(TestUtils.scryRenderedDOMNodesWithClass(component, "cancel").length).toBe(3);
+        expect(secondaryBtns.length).toBe(3);
+        
+        // check button text
+        expect(secondaryBtns[0].textContent).toBe("One");
+        expect(secondaryBtns[1].textContent).toBe("Two");
+        expect(cancelBtn.textContent).toBe("Cancel");
+        expect(secondaryBtns[2].textContent).toBe("Save");
     });
 });
