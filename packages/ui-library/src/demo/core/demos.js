@@ -290,6 +290,13 @@ module.exports = [
                 pathToDemoSource: "demo_components_general_SectionDemo.jsx.html"
             },
             {
+                label: "Conditional Fieldset",
+                demo: require("../components/general/ConditionalFieldsetDemo.jsx"),
+                pathToDoc: "components/general/ConditionalFieldset.jsx",
+                pathToSource: "components_general_ConditionalFieldset.jsx.html",
+                pathToDemoSource: "demo_components_general_ConditionalFieldsetDemo.jsx.html"
+            },
+            {
                 label: "Context Close Button",
                 demo: require("../components/general/ContextCloseButtonDemo.jsx"),
                 pathToDoc: "components/general/ContextCloseButton.jsx",

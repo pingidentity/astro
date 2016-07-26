@@ -11,10 +11,10 @@ var FormSelectFieldDemo = React.createClass({
     getInitialState: function () {
         return {
             fieldValue1: "1",
-            fieldValue2: "1",
-            fieldValue3: "1",
-            fieldValue4: "1",
-            fieldValue5: "1"
+            fieldValue2: "2",
+            fieldValue3: "3",
+            fieldValue4: "4",
+            fieldValue5: "5"
         };
     },
 

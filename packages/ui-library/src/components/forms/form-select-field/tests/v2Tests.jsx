@@ -35,6 +35,24 @@ describe("FormSelectField", function () {
         expect(select).toBeTruthy();
     });
 
+    it("renders the component with a data object", function () {
+        var component = getComponent();
+
+        var label = TestUtils.findRenderedDOMNodeWithClass(component, "input-select");
+        var select = TestUtils.findRenderedDOMNodeWithTag(component, "select");
+        var options = TestUtils.scryRenderedDOMNodesWithTag(component, "option");
+
+        expect(ReactTestUtils.isDOMComponent(label)).toBeTruthy();
+
+        expect(select.value).toBe("2");
+
+        expect(options.length).toBe(2);
+        expect(options[0].getAttribute("value")).toBe("1");
+        expect(options[0].textContent).toBe("one");
+        expect(options[1].getAttribute("value")).toBe("2");
+        expect(options[1].textContent).toBe("two");
+    });
+
     it("should render with the data-id given", function () {
         var component = getComponent({ "data-id": "mySelect" });
 
