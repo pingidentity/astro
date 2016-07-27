@@ -706,6 +706,18 @@ input[type=file] {
 			background: none;
 		}
 	}
+	&.ie9 {
+		select {
+			// pushes default select arrow out of range
+			width: 160%;
+			option {
+				&:checked, &:hover {
+					background-color: $color-input-fill;
+					color: $color-input-text;
+				}
+			}
+		}
+	}
 	&.select-filter {
 		.input-container {
 			.wrapper {
@@ -1265,7 +1277,7 @@ input[type=file] {
         max-width: 35px;
         display: inline-block;
 
-        button{
+        button {
 			$height: 10px;
 
             height: $height;

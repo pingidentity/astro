@@ -4,7 +4,8 @@ var React = require("re-react"),
     classnames = require("classnames"),
     FormError = require("../FormError.jsx"),
     FormLabel = require("../FormLabel.jsx"),
-    _ = require("underscore");
+    _ = require("underscore"),
+    Utils = require("../../../util/Utils");
 
 /**
 * @calback FormSelectField~onChange
@@ -188,7 +189,8 @@ var FormSelectFieldStateless = React.createClass({
             "form-error": this.props.errorMessage,
             "value-entered": this.props.value !== (this.props.noneOption && this.props.noneOption.value),
             required: this.props.required,
-            disabled: this.props.disabled
+            disabled: this.props.disabled,
+            ie9: Utils.isIE9()
         });
 
         return (
