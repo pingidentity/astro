@@ -206,7 +206,7 @@ var MultiDragDemo = React.createClass({
             this.messageActions.addMessage("loading more data...");
 
             setTimeout(function () {
-                var nextColumns = deepClone(data.columns);
+                var nextColumns = deepClone(this._getStatefulRef().state.columns);
                 nextColumns[0].rows = nextColumns[0].rows.concat(data.moreRows);
                 this.setState({ columns: nextColumns });
             }.bind(this), 500);
