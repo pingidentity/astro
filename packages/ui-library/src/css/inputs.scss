@@ -566,6 +566,7 @@ fieldset {
 	}
 	&.unfocused {
 		padding: 21px;
+		padding-bottom: 0px;
 	}
 	&.conditional-fieldset {
 		margin-left: -21px;

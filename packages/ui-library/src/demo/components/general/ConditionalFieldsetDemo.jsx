@@ -58,7 +58,9 @@ var ConditionalFieldsetDemo = React.createClass({
             <div style = { { "margin-left": "20px" } }>
 
                 <div className="input-row">
-                    <label>Radio or Dropdown</label>
+                    <label className="detached">
+                        Radio or Dropdown
+                    </label>
                     <FormRadioGroup
                         groupName="dropdown-radio"
                         data-id="type-picker"
@@ -70,7 +72,9 @@ var ConditionalFieldsetDemo = React.createClass({
                 </div>
 
                 <div className="input-row">
-                    <label>ConditionalFieldset with empty support, set through props</label>
+                    <label className="detached">
+                        ConditionalFieldset with empty support, set through props
+                    </label>
                     <ConditionalFieldset data-id="fieldset-1"
                                          onValueChange={this._onCondition1ValueChange}
                                          selectedIndex={this.state.selectedCondition1Index}
@@ -84,7 +88,9 @@ var ConditionalFieldsetDemo = React.createClass({
                 </div>
 
                 <div className="input-row">
-                    <label>ConditionalFieldset without empty support - default behaviour, no type</label>
+                    <label className="detached">
+                        ConditionalFieldset without empty support - default behaviour, no type
+                    </label>
                     <ConditionalFieldset data-id="fieldset-2"
                                          onValueChange={this._onCondition2ValueChange}
                                          selectedIndex={this.state.selectedCondition2Index}
@@ -96,7 +102,9 @@ var ConditionalFieldsetDemo = React.createClass({
                 </div>
 
                 <div className="input-row">
-                    <label>ConditionalFieldset with empty support, set through dom</label>
+                    <label className="detached">
+                        ConditionalFieldset with empty support, set through dom
+                    </label>
                     <ConditionalFieldset data-id="fieldset-3"
                                          onValueChange={this._onCondition3ValueChange}
                                          selectedIndex={this.state.selectedCondition3Index}
@@ -109,7 +117,9 @@ var ConditionalFieldsetDemo = React.createClass({
                 </div>
 
                 <div className="input-row">
-                    <label>ConditionalFieldset with empty support, set through dom, stateful</label>
+                    <label className="detached">
+                        ConditionalFieldset with empty support, set through dom, stateful
+                    </label>
                     <ConditionalFieldset data-id="fieldset-4"
                                          type={this.state.selectedTypeName} >
                         <div title="Do nothing"></div>
@@ -119,7 +129,9 @@ var ConditionalFieldsetDemo = React.createClass({
                 </div>
 
                 <div className="input-row">
-                    <label>ConditionalFieldset without empty support, default settings, stateful</label>
+                    <label className="detached">
+                        ConditionalFieldset without empty support, default settings, stateful
+                    </label>
                     <ConditionalFieldset data-id="fieldset-5">
                         <div title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
                         <div title="Option 2">Option 2</div>

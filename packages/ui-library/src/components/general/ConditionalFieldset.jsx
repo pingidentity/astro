@@ -65,7 +65,6 @@ var ConditionalFieldsetStateless = React.createClass({
                     ref="options"
                     controlled={true}
                     data-id={dataId}
-                    label=""
                     options={options}
                     onValueChange={this.props.onValueChange}
                     value={this.props.selectedIndex}
@@ -169,7 +168,7 @@ var ConditionalFieldsetStateful = React.createClass({
  *          option this is not required.
  *
  * @example <div className="input-row">
- *               <label>ConditionalFieldset with empty support, set through props</label>
+ *               <label className="detached">ConditionalFieldset with empty support, set through props</label>
  *               <ConditionalFieldset data-id="fieldset-1"
  *                                       onValueChange={this._onCondition1ValueChange}
  *                                       selectedIndex={this.state.selectedCondition1Index}
@@ -183,7 +182,7 @@ var ConditionalFieldsetStateful = React.createClass({
  *           </div>
  *
  * @example <div className="input-row">
- *               <label>ConditionalFieldset with empty support, set through dom, stateful</label>
+ *               <label className="detached">ConditionalFieldset with empty support, set through dom, stateful</label>
  *               <ConditionalFieldset data-id="fieldset-4"
  *                                   type={this.state.selectedTypeName} >
  *                   <div title="Do nothing"></div>
