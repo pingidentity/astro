@@ -11,7 +11,7 @@ describe("ModalButtonTest", function () {
         TestUtils = require("../../../testutil/TestUtils"),
         ModalButton = require("../ModalButton.jsx"),
         _ = require("underscore");
-    
+
     require("../Modal.jsx"); // just so Jest include the code coverage on Modal.jsx in the report
 
     var linkCallback = function () {
@@ -319,6 +319,37 @@ describe("ModalButtonTest", function () {
 
         expect(component.refs.ModalButtonStateless).toBeDefined();
     });
+
+    it("does not call onClose callback when bg is clicked and closeOnBgClick prop is false", function () {
+        var component = getComponentWithoutDefaults({
+                activatorContent: linkCallback,
+                onOpen: jest.genMockFunction(),
+                onClose: jest.genMockFunction().mockReturnValue(true),
+                controlled: true,
+                expanded: true,
+                closeOnBgClick: false
+            }),
+            modalBg = TestUtils.findRenderedDOMNodeWithDataId(component, "modal-bg");
+
+        ReactTestUtils.Simulate.click(modalBg);
+        expect(component.props.onClose.mock.calls.length).toBe(0);
+    });
+
+    it("calls onClose callback when bg is clicked and closeOnBgClick prop is true", function () {
+        var component = getComponentWithoutDefaults({
+                activatorContent: linkCallback,
+                onOpen: jest.genMockFunction(),
+                onClose: jest.genMockFunction().mockReturnValue(true),
+                controlled: true,
+                expanded: true,
+                closeOnBgClick: true
+            }),
+            modalBg = TestUtils.findRenderedDOMNodeWithDataId(component, "modal-bg");
+
+        ReactTestUtils.Simulate.click(modalBg);
+        expect(component.props.onClose.mock.calls.length).toBe(1);
+    });
+
 
     it("Show warnings when using deprecated properties", function () {
         console.warn = jest.genMockFunction();

@@ -3,6 +3,7 @@
 $default-input-transition: all 0.3s;
 $default-input-height: 40px;
 $default-input-font-size: 14px;
+$disabled-opacity: 0.4;
 
 // MISC SUPPORTING FUNCTIONS -----------------------------------------------------------------------
 @mixin checkboxStyles() {
@@ -274,21 +275,14 @@ label {
 		}
 		&.disabled {
 			input[type=text], input[type=password], textarea {
-				background-color: $color-timberwolf;
-				color: $color-midnight;
         		@include opacity(1.0);
         		&:hover {
-					border: 1px solid $color-rabbit-fur;
+					border: 1px solid $color-input-fill;
 				}
 			}
 			.input-container {
 				&:before {
 					content: none;
-				}
-				input {
-					&:hover {
-						border: 1px solid $color-input-fill;
-					}
 				}
 			}
 		}
@@ -299,7 +293,7 @@ label {
 			font-style: normal;
 			.label-text {
 				span {
-					@include opacity(0.5);
+					@include opacity($disabled-opacity);
 				}
 			}
 		}
@@ -389,7 +383,7 @@ label {
 		}
 		&.disabled {
 			cursor: default;
-			@include opacity(0.5);
+			@include opacity($disabled-opacity);
 		}
 		&.no-label {
 			margin-right: 0;
@@ -656,9 +650,6 @@ input[type=file] {
 	&.disabled {
 		.input-container {
 			.wrapper {
-				select {
-					background-color: $color-timberwolf;
-				}
 				&:after {
 					content: '';
 				}
@@ -969,7 +960,7 @@ input[type=file] {
 		}
 	}
 	&.disabled {
-		@include opacity(0.5);
+		@include opacity($disabled-opacity);
 	}
 	&.small {
 		.toggle {
@@ -1558,7 +1549,7 @@ input[type=file] {
 }
 [disabled] {
 	cursor: default;
-	@include opacity(0.5);
+	@include opacity($disabled-opacity);
 
 	&[type=radio] + .circle {
 		cursor: default;

@@ -42,6 +42,8 @@ var Type = {
  *     If this function returns false then closing will be prevented.
  *     This function is set on the context as "close", for modal children (eg. the "close" button
  *     on the modal) to be able to close the modal by calling the context function.
+ * @param {boolean} [closeOnBgClick]
+ *     When true, the onClose callback is triggered when modal bg is clicked.
  * @param {boolean} [maximize=false]
  *     When true, modal content will always occupy the maximum modal dimensions.
  * @param {Modal.Type} [type=Modal.Type.BASIC]
@@ -64,6 +66,7 @@ var Modal = React.createClass({
         modalTitle: React.PropTypes.string.affectsRendering,
         showHeader: React.PropTypes.bool.affectsRendering,
         onClose: React.PropTypes.func,
+        closeOnBgClick: React.PropTypes.bool,
         maximize: React.PropTypes.bool.affectsRendering,
         type: React.PropTypes.oneOf([
             Type.BASIC,
@@ -147,7 +150,11 @@ var Modal = React.createClass({
 
         return (
             <div data-id={dataId} ref="container" key="modal" className={modalClasses}>
-                <div className="modal-bg">{/* applies overlay to content area */}</div>
+                <div
+                    className="modal-bg"
+                    data-id="modal-bg"
+                    onClick={this.props.closeOnBgClick && this.props.onClose}>
+                </div>
                 <div className="modal-content">
                     <If test={this.props.showHeader}>
                         <div className="modal-header">

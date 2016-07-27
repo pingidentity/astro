@@ -8,7 +8,7 @@ var Modal = require("./../../../components/general/Modal.jsx");
 */
 var ModalDemo = React.createClass({
 
-    numDemos: 4,
+    numDemos: 5,
 
     _toggle: function (index) {
         var newState = {};
@@ -48,9 +48,15 @@ var ModalDemo = React.createClass({
                         onClose={this._toggle1}>
 
                         <div>
-                            Default modals size both vertically and horizontally with the content. The modal has a
-                            maximum width of 960px.  The height will grow until it is 40px from the bottom of the users
-                            screen.
+                            <p>
+                                Default modals size both vertically and horizontally with the content.
+                            </p>
+                            <p>
+                                The modal has a maximum width of 960px.
+                            </p>
+                            <p>
+                                The height will grow until it is 40px from the bottom of the users screen.
+                            </p>
                         </div>
                     </Modal>
                 </div>
@@ -65,19 +71,38 @@ var ModalDemo = React.createClass({
                         onClose={this._toggle2}>
 
                         <div>
-                            A maximized modal always occupy the full maximum height and width that a modal may have.
+                            A maximized modal always occupy the full maximum height and width that a modal may have,
+                            regardless of content.
                         </div>
                     </Modal>
                 </div>
                 <div className="input-row">
-                    <a onClick={this._toggle3}>Open Dialog Modal</a>
+                    <a onClick={this._toggle3}>Open BG Click Enabled Modal</a>
+
+                    <Modal
+                        modalTitle="Closing a Modal with a Background Click"
+                        closeOnBgClick={true}
+                        expanded={this.state.expanded3}
+                        onOpen={this._toggle3}
+                        onClose={this._toggle3}>
+
+                        <div>
+                            When you set the "closeOnBgClick" prop to "true", clicking the modal background will trigger
+                            the onClose callback. If you are using the "controlled" or stateless version, you will
+                            need to pass the onClose callback as well. For the stateful version the onClose callback
+                            is not required.
+                        </div>
+                    </Modal>
+                </div>
+                <div className="input-row">
+                    <a onClick={this._toggle4}>Open Dialog Modal</a>
 
                     <Modal
                         modalTitle="Dialog Modal"
                         type="dialog"
                         ref="dialogModal"
-                        expanded={this.state.expanded3}
-                        onOpen={this._toggle3}>
+                        expanded={this.state.expanded4}
+                        onOpen={this._toggle4}>
 
                         <div>
                             <div className="modal-title">
@@ -88,22 +113,21 @@ var ModalDemo = React.createClass({
                                 euismod. Etiam molestie quis nunc eu ultrices.
                             </p>
                             <div className="buttons">
-                                <input type="button" value="Nope" onClick={this._toggle3} />
-                                <input type="button" className="primary" value="Yup" onClick={this._toggle3} />
+                                <input type="button" value="Nope" onClick={this._toggle4} />
+                                <input type="button" className="primary" value="Yup" onClick={this._toggle4} />
                             </div>
                         </div>
                     </Modal>
                 </div>
                 <div className="input-row">
-                    <a onClick={this._toggle4}>Open Alert Modal</a>
+                    <a onClick={this._toggle5}>Open Alert Modal</a>
 
                     <Modal
                         modalTitle=""
                         type="alert"
-                        ref="dialogModal2"
-                        expanded={this.state.expanded4}
-                        onOpen={this._toggle4}
-                        bodyClass="ballz">
+                        ref="alertModal"
+                        expanded={this.state.expanded5}
+                        onOpen={this._toggle5}>
 
                         <div className = "title">
                             Alert Modal
@@ -112,10 +136,10 @@ var ModalDemo = React.createClass({
                             This modal copies the look of details tooltip with alert class.
                         </div>
                         <div className="buttons">
-                            <input type="button" className="cancel" value="Disgard Changes" onClick={this._toggle4}/>
-                            <input type="button" className="primary" value="Save" onClick={this._toggle4}/>
+                            <input type="button" className="cancel" value="Disgard Changes" onClick={this._toggle5}/>
+                            <input type="button" className="primary" value="Save" onClick={this._toggle5}/>
                             <br />
-                            <a className="cancel" onClick={this._toggle4}>Cancel</a>
+                            <a className="cancel" onClick={this._toggle5}>Cancel</a>
                         </div>
                     </Modal>
                 </div>

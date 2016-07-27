@@ -38,14 +38,11 @@
 		z-index: 1;
 		top: 0;
 		left: 50%;
-		// transform: translateX(-50%);
-		height: 100%;
+		transform: translateX(-50%);
+		max-height: 100%;
 		max-width: $max-modal-width;
 		min-width: 360px;
 		font-family: $font-pn-regular;
-	}
-	.modal-header, .modal-body {
-		margin: 0 50% 0 -50%;
 	}
 	.modal-header {
 		position: relative;

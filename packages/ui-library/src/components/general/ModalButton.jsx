@@ -50,6 +50,9 @@ var React = require("re-react"),
  *     Callback to be triggered when the modal is closing by clicking the close modal link.
  *     If this function returns false then closing will be prevented.
  *     It is required when controlled=true.
+ * @param {boolean} [closeOnBgClick]
+ *     When true, the onClose callback is triggered when modal bg is clicked. Note that the onClose callback is also
+ *     required for the stateless/controlled version of this component
  *
  * @param {boolean} [inline=false]
  *     If true, then render the overall container as a span instead of as a div.
@@ -132,6 +135,7 @@ var ModalButtonStateless = ReactVanilla.createClass({
 
         onOpen: React.PropTypes.func.isRequired,
         onClose: React.PropTypes.func.isRequired,
+        closeOnBgClick: React.PropTypes.bool,
 
         // ModalButton only props
         inline: React.PropTypes.bool,
@@ -248,7 +252,8 @@ var ModalButtonStateless = ReactVanilla.createClass({
                     showHeader={this.props.showHeader}
                     onClose={this.close}
                     maximize={this.props.maximize}
-                    type={this.props.type}>
+                    type={this.props.type}
+                    closeOnBgClick={this.props.closeOnBgClick}>
                 {this.props.children || modalBodyContent}
             </Modal>
         );
@@ -341,7 +346,7 @@ var ModalButtonStateful = ReactVanilla.createClass({
         // return { expanded: this.props.expanded };
 
         var expanded = this.props.initiallyExpanded;
-        
+
         // this code should not be here, but I am keeping it for backwards compatibility
         if (typeof(this.props.expanded) !== "undefined" && this.props.expanded !== null) {
             expanded = !!this.props.expanded;

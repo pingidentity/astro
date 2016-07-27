@@ -8,10 +8,12 @@ var ModalButton = require("./../../../components/general/ModalButton.jsx");
 */
 var ModalButtonDemo = React.createClass({
 
+    numControlledDemos: 3,
+
     _handleOpen: function (index) {
         var newState = {};
 
-        newState["modal" + index + "Expanded"] = true;
+        newState["modalExpanded" + index] = true;
 
         this.setState(newState);
     },
@@ -19,13 +21,13 @@ var ModalButtonDemo = React.createClass({
     _handleClose: function (index) {
         var newState = {};
 
-        newState["modal" + index + "Expanded"] = false;
+        newState["modalExpanded" + index] = false;
 
         this.setState(newState);
     },
 
     componentWillMount: function () {
-        for (var i=2; i<=4; i+=1) {
+        for (var i=1; i<=this.numControlledDemos; i+=1) {
             this["_handleOpen" + i] = this._handleOpen.bind(null, i);
             this["_handleClose" + i] = this._handleClose.bind(null, i);
         }
@@ -34,8 +36,8 @@ var ModalButtonDemo = React.createClass({
     getInitialState: function () {
         var initialState = {};
 
-        for (var i=2; i<=4; i+=1) {
-            initialState["modal" + i + "Expanded"] = false;
+        for (var i=1; i<=this.numControlledDemos; i+=1) {
+            initialState["modalExpanded" + i] = false;
         }
 
         return initialState;
@@ -47,11 +49,18 @@ var ModalButtonDemo = React.createClass({
                 <div className="input-row">
                     <ModalButton data-id="default-example"
                             activatorButtonLabel="Open Default Modal"
-                            modalTitle="Default Modal">
+                            modalTitle="Default Modal"
+                            controlled={false}>
                         <div>
-                            Default modals size both vertically and horizontally with the content. The modal has a
-                            maximum width of 960px.  The height will grow until it is 40px from the bottom of the users
-                            screen.
+                            <p>
+                                Default modals size both vertically and horizontally with the content.
+                            </p>
+                            <p>
+                                The modal has a maximum width of 960px.
+                            </p>
+                            <p>
+                                The height will grow until it is 40px from the bottom of the users screen.
+                            </p>
                         </div>
                     </ModalButton>
                 </div>
@@ -60,14 +69,13 @@ var ModalButtonDemo = React.createClass({
                             activatorButtonLabel="Open Controlled Modal"
                             modalTitle="Controlled Modal"
                             controlled={true}
-                            onOpen={this._handleOpen2}
-                            onClose={this._handleClose2}
+                            onOpen={this._handleOpen1}
+                            onClose={this._handleClose1}
                             initiallyExpanded={false}
-                            expanded={this.state.modal2Expanded}>
+                            expanded={this.state.modalExpanded1}>
                         <div>
-                            Default modals size both vertically and horizontally with the content. The modal has a
-                            maximum width of 960px.  The height will grow until it is 40px from the bottom of the users
-                            screen.
+                            A controlled modals expanded state is controlled by the boolean "expanded" prop. When true
+                            the modal will display.
                         </div>
                     </ModalButton>
                 </div>
@@ -77,7 +85,21 @@ var ModalButtonDemo = React.createClass({
                             modalTitle="Maximized Modal"
                             maximize={true}>
                         <div>
-                            A maximized modal always occupy the full maximum height and width that a modal may have.
+                            A maximized modal always occupy the full maximum height and width that a modal may have,
+                            regardless of content.
+                        </div>
+                    </ModalButton>
+                </div>
+                <div className="input-row">
+                    <ModalButton activatorButtonLabel="Open BG Click Enabled Modal"
+                            data-id="bgclick-modal"
+                            modalTitle="Closing a Modal with a Background Click"
+                            closeOnBgClick={true}>
+                        <div>
+                            When you set the "closeOnBgClick" prop to "true", clicking the modal background will trigger
+                            the onClose callback. If you are using the "controlled" or stateless version, you will
+                            need to pass the onClose callback as well. For the stateful version the onClose callback
+                            is not required.
                         </div>
                     </ModalButton>
                 </div>
@@ -88,9 +110,9 @@ var ModalButtonDemo = React.createClass({
                             type={ModalButton.Modal.Type.DIALOG}
                             ref="dialogModal"
                             controlled={true}
-                            onOpen={this._handleOpen3}
-                            onClose={this._handleClose3}
-                            expanded={this.state.modal3Expanded}>
+                            onOpen={this._handleOpen2}
+                            onClose={this._handleClose2}
+                            expanded={this.state.modalExpanded2}>
                         <div>
                             <div className="modal-title">
                                 Dialog modal content here!
@@ -100,9 +122,9 @@ var ModalButtonDemo = React.createClass({
                                 euismod. Etiam molestie quis nunc eu ultrices.
                             </p>
                             <div className="buttons">
-                                <input type="button" data-id="nopeButton" value="Nope" onClick={this._handleClose3} />
+                                <input type="button" data-id="nopeButton" value="Nope" onClick={this._handleClose2} />
                                 <input type="button" data-id="yupButton" className="primary" value="Yup"
-                                    onClick={this._handleClose3} />
+                                    onClick={this._handleClose2} />
                             </div>
                         </div>
                     </ModalButton>
@@ -112,11 +134,12 @@ var ModalButtonDemo = React.createClass({
                             data-id="alert-modal"
                             modalTitle=""
                             type={ModalButton.Modal.Type.ALERT}
-                            ref="dialogModal2"
+                            ref="alertModal"
                             controlled={true}
-                            onOpen={this._handleOpen4}
-                            onClose={this._handleClose4}
-                            expanded={this.state.modal4Expanded}>
+                            onOpen={this._handleOpen3}
+                            onClose={this._handleClose3}
+                            expanded={this.state.modalExpanded3}
+                            closeOnBgClick={true}>
                         <div className = "title">
                             Alert Modal
                         </div>
@@ -125,11 +148,11 @@ var ModalButtonDemo = React.createClass({
                         </div>
                         <div className="buttons">
                             <input type="button" className="cancel" value="Disgard Changes"
-                                    onClick={this._handleClose4} data-id="disgardChangesButton"/>
+                                    onClick={this._handleClose3} data-id="disgardChangesButton"/>
                             <input type="button" className="primary" value="Save"
-                                    onClick={this._handleClose4} data-id="saveButton" />
+                                    onClick={this._handleClose3} data-id="saveButton" />
                             <br />
-                            <a className="cancel" data-id="cancelLink" onClick={this._handleClose4}>Cancel</a>
+                            <a className="cancel" data-id="cancelLink" onClick={this._handleClose3}>Cancel</a>
                         </div>
                     </ModalButton>
                 </div>
