@@ -147,13 +147,17 @@ function convertFilteredIndexes (columns, desc) {
  *    Only used when controlled=false.
  *
  * @param {MultiDrag~onSearch} onSearch
- *    Callback to be triggered when a column is searched.
+ *    Callback to be triggered when a column is searched. When controlled=false, will be executed after search has
+ *    completed and the component re-renders.
  * @param {MultiDrag~onDragDrop} onDrag
- *    Callback to be triggered when a row is dragged.
+ *    Callback to be triggered when a row is dragged. When controlled=false, will be executed after drag has
+ *    completed and the component re-renders.
  * @param {MultiDrag~onDragDrop} onDrop
- *    Callback to be triggered when a row id dropped.
+ *    Callback to be triggered when a row id dropped. When controlled=false, will be executed after drop has
+ *    completed and the component re-renders.
  * @param {MultiDrag~onCancel} onCancel
- *    Callback to be triggered when a drag event ends.
+ *    Callback to be triggered when a drag event ends. When controlled=false, will be executed after cancel has
+ *    completed and the component re-renders.
  * @param {MultiDrag~onScrolledToPosition} [onScrolledToTop]
  *    Callback to be triggered when the list is scrolled to the top. Can be used to fetch more data.
  * @param {MultiDrag~onScrolledToPosition} [onScrolledToBottom]
@@ -334,21 +338,21 @@ var MultiDragStateful = ReactVanilla.createClass({
             column: index,
             filter: value,
             fieldName: this.props.filterFieldNames[index]
-        }));
-
-        if (this.props.onSearch) {
-            this.props.onSearch(index, value);
-        }
+        }), function () {
+            if (this.props.onSearch) {
+                this.props.onSearch(index, value);
+            }
+        });
     },
 
     _handleCancel: function () {
         this.setState({
             placeholder: null
+        }, function () {
+            if (this.props.onCancel) {
+                this.props.onCancel();
+            }
         });
-
-        if (this.props.onCancel) {
-            this.props.onCancel();
-        }
     },
 
     _handleDrop: function (desc) {
@@ -361,21 +365,21 @@ var MultiDragStateful = ReactVanilla.createClass({
 
         //reapply filters after a move so moved rows filtered as well
         next = reapplyFilters(next);
-        this.setState(next);
-
-        if (this.props.onDrop) {
-            this.props.onDrop(desc);
-        }
+        this.setState(next, function () {
+            if (this.props.onDrop) {
+                this.props.onDrop(desc);
+            }
+        });
     },
 
     _handleDrag: function (desc) {
         this.setState({
             placeholder: desc.to
+        }, function () {
+            if (this.props.onDrag) {
+                this.props.onDrag(desc);
+            }
         });
-
-        if (this.props.onDrag) {
-            this.props.onDrag(desc);
-        }
     },
 
     componentWillMount: function () {
