@@ -393,7 +393,9 @@ var Stateful = React.createClass({
             var intValue = value === "" ? value : parseInt(value);
             this.setState({
                 value: intValue
-            }, this.props.onValueChange(intValue));
+            }, function () {
+                this.props.onValueChange(intValue);
+            });
         }
     },
 
@@ -408,7 +410,9 @@ var Stateful = React.createClass({
             var value = this.props.initialValue;
             this.setState({
                 value: value
-            }, this.props.onValueChange(value));
+            }, function () {
+                this.props.onValueChange(value);
+            });
         }
     },
 
