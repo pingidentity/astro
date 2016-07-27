@@ -47,9 +47,6 @@ describe("Step", function () {
 
         component = getRenderedComponent({ active: false });
         expect(ReactDOM.findDOMNode(component.refs.editButton).textContent).toBe("xxxedit");
-
-        component = getRenderedComponent({ active: true, number: 2 });
-        expect(ReactDOM.findDOMNode(component.refs.doneButton).textContent).toBe("xxxdone");
     });
 
     it("Next button executes callback", function () {
@@ -70,15 +67,6 @@ describe("Step", function () {
         expect(component.props.onEdit.mock.calls.length).toBe(1);
     });
 
-    it("Done button executes callback", function () {
-        var component = getRenderedComponent({ active: true, number: 2, canProceed: true });
-
-        ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(component.refs.doneButton));
-
-        expect(component.props.onDone.mock.calls.length).toBe(1);
-        expect(component.props.onEdit.mock.calls.length).toBe(0);
-    });
-
     it("Inactive step is collapsed", function () {
         var component = getRenderedComponent({ active: false , number: 2 });
 
@@ -94,7 +82,6 @@ describe("Step", function () {
         var component = getRenderedComponent();
 
         expect(component.refs.nextButton).toBeTruthy();
-        expect(component.refs.doneButton).toBeFalsy();
         expect(component.refs.cancelButton).toBeTruthy();
         expect(component.refs.editButton).toBeFalsy();
 
@@ -103,7 +90,6 @@ describe("Step", function () {
         component = getRenderedComponent({ number: 2 });
 
         expect(component.refs.nextButton).toBeFalsy();
-        expect(component.refs.doneButton).toBeTruthy();
         expect(component.refs.cancelButton).toBeTruthy();
         expect(component.refs.editButton).toBeFalsy();
 
@@ -122,7 +108,6 @@ describe("Step", function () {
 
         expect(component.refs.nextButton).toBeFalsy();
         expect(component.refs.cancelButton).toBeFalsy();
-        expect(component.refs.doneButton).toBeTruthy();
         expect(component.refs.editButton).toBeFalsy();
     });
 
@@ -131,7 +116,6 @@ describe("Step", function () {
 
         expect(component.refs.nextButton).toBeFalsy();
         expect(component.refs.cancelButton).toBeFalsy();
-        expect(component.refs.doneButton).toBeFalsy();
         expect(component.refs.editButton).toBeFalsy();
     });
 
@@ -141,11 +125,9 @@ describe("Step", function () {
         expect(component.refs.editButton).toBeTruthy();
     });
 
-    it("Next, cancel and done button are disabled and next button changes to loading", function () {
+    it("Next, cancel button is disabled and next button changes to loading", function () {
         var component = getRenderedComponent({ active: true, number: 2, showPulsing: true });
 
-        expect(component.refs.doneButton.props.disabled).toBeTruthy();
-        expect(component.refs.doneButton.props.loading).toBeTruthy();
         expect(component.refs.cancelButton.props.disabled).toBeTruthy();
 
         component = getRenderedComponent({ showPulsing: true });
@@ -168,13 +150,6 @@ describe("Step", function () {
         var test = TestUtils.findRenderedDOMNodeWithDataId(component, "step");
         expect(test).toBeTruthy();
         expect(console.warn).not.toBeCalled();
-    });
-
-    it("Verify warning on doneButtonStyle.", function () {
-        console.warn = jest.genMockFunction();
-        getRenderedComponent({ doneButtonStyle: "somestyle" });
-        expect(console.warn).toBeCalledWith("Deprecated: use doneButtonClassName instead of doneButtonStyle. " +
-            "Support for doneButtonStyle will be removed in next version");
     });
 
     it("Verify warning on nextButtonStyle.", function () {

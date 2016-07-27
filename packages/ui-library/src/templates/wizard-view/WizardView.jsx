@@ -53,39 +53,39 @@ var React = require("re-react"),
  *     starting poing for a wizard in modal page.
  *
  * @param {string} labelNext
- *              Label for next button
+ *     Label for next button
  * @param {string} labelCancel
- *              Label for cancel button
+ *     Label for cancel button
  * @param {string} labelEdit
- *              Label for edit button
+ *     Label for edit button
  * @param {object} fields
- *              Object for fields
+ *     Object for fields
  * @param {array} choices
- *              Array for choices
+ *     Array for choices
  * @param {number} activeStep
- *              Current active step
+ *     Current active step
  * @param {number} numSteps
- *              Number of steps
+ *     Number of steps
  * @param {array} messages
- *              Array of messages
+ *     Array of messages
  * @param {WizardView~onFieldChange} onFieldChange
- *              Callback to be triggered when an input field value changes
+ *     Callback to be triggered when an input field value changes
  * @param {WizardView~onComplexFieldChange} onComplexFieldChange
- *              Callback to be triggered when a complex input field value changes
+ *     Callback to be triggered when a complex input field value changes
  * @param {WizardView~onAddComplexFieldsRow} onAddComplexFieldsRow
- *              Callback to be triggered when a complex input field row is added
+ *     Callback to be triggered when a complex input field row is added
  * @param {WizardView~onAddMessage} onAddMessage
- *              Callback to be triggered when a message is added
+ *     Callback to be triggered when a message is added
  * @param {Messages~onRemoveMessage} onRemoveMessage
- *              Callback to be triggered when a message is removed
+ *     Callback to be triggered when a message is removed
  * @param {Wizard~onEdit} onEdit
- *              Callback to be triggered when a wizard's edit is clicked
+ *     Callback to be triggered when a wizard's edit is clicked
  * @param {WizardView~onNext} onNext
- *              Callback to be triggered when a wizard's next is clicked
+ *     Callback to be triggered when a wizard's next is clicked
  * @param {WizardView~onReset} onReset
- *              Callback to be triggered to reset a wizard
+ *     Callback to be triggered to reset a wizard
  * @param {Wizard#Choose~onValueChange} onValueChange
- *              Callback to be triggered when the choice is made on first step of wizard.
+ *     Callback to be triggered when the choice is made on first step of wizard.
  */
 module.exports = React.createClass({
     propTypes: {
@@ -156,7 +156,8 @@ module.exports = React.createClass({
                             onValueChange={this.props.onValueChange}
                             onNext={this._next}
                             onCancel={this._cancel}
-                            onReset={this.props.onReset} >
+                            onReset={this.props.onReset}
+                            onDone={this._done} >
                         <Wizard title="Two Column Step">
                             <TwoColumnStep labelCancel={this.props.labelCancel}
                                 labelDone={this.props.labelDone}

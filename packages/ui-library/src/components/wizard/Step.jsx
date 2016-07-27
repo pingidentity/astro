@@ -12,17 +12,13 @@ var React = require("re-react"),
 /**
  * @callback Wizard#Step~onNext
  * @param {number} number
- *              Step number which triggered event
+ *     Step number which triggered event
  */
 
 /**
  * @callback Wizard#Step~onEdit
  * @param {number} number
- *              Step number which triggered event
- */
-
-/**
- * @callback Wizard#Step~onDone
+ *     Step number which triggered event
  */
 
 /**@class Wizard#Step
@@ -31,59 +27,57 @@ var React = require("re-react"),
  * @see Wizard
  *
  * @param {string} [data-id="step"]
- *              To define the base "data-id" value for the top-level HTML container.
+ *     To define the base "data-id" value for the top-level HTML container.
  * @param {string} [id]
- *              Deprecated. Use data-id instead.
+ *     Deprecated. Use data-id instead.
  * @param {string} [className]
- *              CSS classes to set on the top-level HTML container
+ *     CSS classes to set on the top-level HTML container
  * @param {string} labelEdit
- *              String text of step activation link
+ *     String text of step activation link
  * @param {string} labelCancel
- *              String text for cancel button label
+ *     String text for cancel button label
  * @param {string} labelNext
- *              String text for next button label
+ *     String text for next button label
  * @param {string} labelDone
- *              String text for done button label
+ *     String text for done button label
  * @param {string} [nextButtonClassName]
- *              CSS classes to set on the next button.
+ *     CSS classes to set on the next button.
  * @param {string} [nextButtonStyle]
- *              DEPRECATED. Use nextButtonClassName.
+ *     DEPRECATED. Use nextButtonClassName.
  * @param {string} [doneButtonClassName]
- *              CSS classes to set on the done button.
+ *     CSS classes to set on the done button.
  * @param {string} [doneButtonStyle]
- *              DEPRECATED. Use doneButtonClassName.
+ *     DEPRECATED. Use doneButtonClassName.
  * @param {number} number
- *              The step number(used for progress <i>number</i> of <i>total</i>))
+ *     The step number(used for progress <i>number</i> of <i>total</i>))
  * @param {number} total
- *              The total number of steps (used for progress <i>number</i> of <i>total</i>)
+ *     The total number of steps (used for progress <i>number</i> of <i>total</i>)
  * @param {boolean} [active=false]
- *              Indicates if step is open, used for external state management
+ *     Indicates if step is open, used for external state management
  * @param {boolean} [canProceed=true]
- *              Indicates if step is open, used for external state management
+ *     Indicates if step is open, used for external state management
  * @param {boolean} [disableNavigation=false]
- *              Indicates if navigation should be hidden
+ *     Indicates if navigation should be hidden
  * @param {boolean} [hideCancel=false]
- *              Hides the cancel button
+ *     Hides the cancel button
  * @param {boolean} [showEdit=true]
- *              Controls edit label visibility, ideally step[n-1].canProceed === step[n].showEdit to be consistent defaults to true
+ *     Controls edit label visibility, ideally step[n-1].canProceed === step[n].showEdit to be consistent defaults to true
  * @param {boolean} [completed=false]
- *              Indicates if step have been completed, used to external state management
+ *     Indicates if step have been completed, used to external state management
  * @param {boolean} [isModal=true]
- *              Determines the type of the cancel button (if true ContextButton otherwise a regular input button)
+ *     Determines the type of the cancel button (if true ContextButton otherwise a regular input button)
  * @param {boolean} [when=true]
- *              Conditionally show a step (hidden if false)
+ *     Conditionally show a step (hidden if false)
  * @param {boolean} [renderHidden=false]
- *              Render the child elements to the DOM, but hidden (display: none), when the step is not active
+ *     Render the child elements to the DOM, but hidden (display: none), when the step is not active
  * @param {string} [hintText]
- *              String tooltip help text
+ *     String tooltip help text
  * @param {boolean} [showPulsing=false]
- *              If true next and done button will be change to loader when navigation buttons clicked
+ *     If true next and done button will be change to loader when navigation buttons clicked
  * @param {Wizard#Step~onNext} onNext
- *              Callback to be triggered in response of 'next' click, which will receive the current number.
+ *     Callback to be triggered in response of 'next' click, which will receive the current number.
  * @param {Wizard#Step~onEdit} onEdit
- *              Callback to be triggered in response of 'edit' click, which will receive the current number.
- * @param {Wizard#Step~onDone} onDone
- *              Callback to be triggered in response of 'done' click.
+ *     Callback to be triggered in response of 'edit' click, which will receive the current number.
  */
 var Step = React.createClass({
     propTypes: {
@@ -113,7 +107,6 @@ var Step = React.createClass({
         showPulsing: React.PropTypes.bool.affectsRendering,
         onEdit: React.PropTypes.func,
         onNext: React.PropTypes.func,
-        onDone: React.PropTypes.func,
         children: React.PropTypes.node.affectsRendering
     },
 
@@ -171,16 +164,6 @@ var Step = React.createClass({
                 className={this.props.nextButtonStyle || this.props.nextButtonClassName} />);
     },
 
-    _getDoneButton: function () {
-        return (
-            <EllipsisLoaderButton ref="doneButton" data-id="doneButton"
-                onClick={this.props.onDone}
-                text={this.props.labelDone}
-                loading={this.props.showPulsing}
-                disabled={!this.props.canProceed || this.props.showPulsing}
-                className={this.props.doneButtonStyle || this.props.doneButtonClassName} />);
-    },
-
     _getEditLink: function () {
         if (!this.props.active && this.props.showEdit) {
             return (<a ref="editButton" className="task-edit-link edit edit-directory" onClick={this._edit}>
@@ -199,7 +182,7 @@ var Step = React.createClass({
         return (
             <div className="buttons">
                 {this._getCancelButton()}
-                {showNext ? this._getNextButton() : this._getDoneButton()}
+                {showNext ? this._getNextButton() : null}
             </div>
         );
     },

@@ -1,31 +1,32 @@
 "use strict";
 
 var React = require("re-react"),
-    _ = require("underscore"),
-    Utils = require("../../util/Utils");
+    ButtonBar = require("../forms/ButtonBar.jsx"),
+    Utils = require("../../util/Utils"),
+    _ = require("underscore");
 
 /**
  * @callback Wizard~onEdit
  * @param {number} number
- *      Step number which triggered event
+ *       Step number which triggered event
  */
 
 /**
  * @typedef Wizard~choice
  * @property {string} [id]
- *          Id of step, which will be null if not passed.
+ *           Id of step, which will be null if not passed.
  * @property {Wizard#WizardActions#Types} [type]
- *          Optional type of choice.
+ *           Optional type of choice.
  * @property {number} choice
- *          Step number that was chosen.
+ *           Step number that was chosen.
  * @property {number} numSteps
- *          Total number of steps in a wizard.
+ *           Total number of steps in a wizard.
  */
 
 /**
  * @callback Wizard~onValueChange
  * @param {Wizard~choice} choice
- *          Step number that was chosen and total number of steps in a wizard.
+ *           Step number that was chosen and total number of steps in a wizard.
  */
 
 /**
@@ -43,57 +44,57 @@ var React = require("re-react"),
  * @see Step
  *
  * @param {string} [data-id="wizard"]
- *              To define the base "data-id" value for the top-level HTML container.
+ *      To define the base "data-id" value for the top-level HTML container.
  * @param {string} [id]
- *              Deprecated. Use data-id instead.
+ *      Deprecated. Use data-id instead.
  * @param {string} [className]
- *              CSS classes to set on the top-level HTML container
+ *      CSS classes to set on the top-level HTML container
  * @param {string} title
- *              The title of the Wizard
+ *      The title of the Wizard
  * @param {number} [number=1]
- *              Since wizards can be embedded inside other wizards, they need to be given a
- *              number unless they're the root
+ *      Since wizards can be embedded inside other wizards, they need to be given a
+ *      number unless they're the root
  * @param {number} [numSteps]
- *              The number of steps in the entire wizard tree (if the wizard is embedded
- *              inside another wizard numSteps != this.props.children.length
+ *      The number of steps in the entire wizard tree (if the wizard is embedded
+ *      inside another wizard numSteps != this.props.children.length
  * @param {number} activeStep
- *              The current step the wizard (since redux forces externally managed components)
+ *      The current step the wizard (since redux forces externally managed components)
  * @param {number[]} choices
- *              An array describing the state of the entire wizard tree
+ *      An array describing the state of the entire wizard tree
  * @param {string} [labelEdit]
- *              If provided, will be injected its children's props
+ *      If provided, will be injected its children's props
  * @param {string} [labelNext]
- *              If provided,will be injected its children's props
+ *      If provided,will be injected its children's props
  * @param {string} [labelCancel]
- *              If provided, will be injected its children's props
+ *      If provided, will be injected its children's props
  * @param {string} [labelDone]
- *              If provided, will be injected its children's props
+ *      If provided, will be injected its children's props
  * @param {boolean} [showPulsing=false]
- *              By default it set to false, if true next and done button will be change to loader when
- *              navigation buttons clicked.
+ *      By default it set to false, if true next and done button will be change to loader when
+ *      navigation buttons clicked.
  * @param {Wizard~onEdit} [onEdit]
- *              Callback to be triggered when a the edit link of any children is clicked.  If provided, will be injected
- *              its children's props, otherwise the actions of each step must be handled and the store updated
+ *      Callback to be triggered when a the edit link of any children is clicked.  If provided, will be injected
+ *      its children's props, otherwise the actions of each step must be handled and the store updated
  * @param {Wizard~onValueChange} [onValueChange]
- *              Callback to be triggered when a choice is made (ie a radio button of a Choose component is clicked).
- *              If provided, will be injected its children's props, otherwise the actions of each step must be
- *              handled and the store updated.
+ *      Callback to be triggered when a choice is made (ie a radio button of a Choose component is clicked).
+ *      If provided, will be injected its children's props, otherwise the actions of each step must be
+ *      handled and the store updated.
  * @param {Wizard~onChange} [onChange]
- *              DEPRECATED. Use onValueChange instead.
+ *      DEPRECATED. Use onValueChange instead.
  * @param {Wizard~onNext} [onNext]
- *              Callback to be triggered when the next button of any child is clicked.  If provided, will be injected
- *              its children's props, otherwise the actions of each step must be handled and the store updated
+ *      Callback to be triggered when the next button of any child is clicked.  If provided, will be injected
+ *      its children's props, otherwise the actions of each step must be handled and the store updated
  * @param {Wizard~onDone} [onDone]
- *              Callback to be triggered when the done button of final step is clicked.  If provided, will be injected
- *              its children's props, otherwise the done action must be handled and the store updated
+ *      Callback to be triggered when the done button of final step is clicked.  If provided, will be injected
+ *      its children's props, otherwise the done action must be handled and the store updated
  *
  * @example
  * render: function () {
- *     <Wizard title="My wizard" onNext={this.next} onEdit={this.edit} onValueChange={this.change} >
- *         <Step title="step 1">Some content here...</Step>
- *         <Step title="conditional step" when={someCondition}>Some more content</Step>
- *         <Step title="another step">Some more content</Step>
- *     </Wizard>
+ *      <Wizard title="My wizard" onNext={this.next} onEdit={this.edit} onValueChange={this.change} >
+ *          <Step title="step 1">Some content here...</Step>
+ *          <Step title="conditional step" when={someCondition}>Some more content</Step>
+ *          <Step title="another step">Some more content</Step>
+ *      </Wizard>
  *
  */
 var Wizard = React.createClass({
@@ -102,7 +103,6 @@ var Wizard = React.createClass({
         "onValueChange",
         "onChange", // DEPRECATED, remove when possible.
         "onNext",
-        "onDone",
         "onCancel",
         "labelNext",
         "labelCancel",
@@ -154,7 +154,6 @@ var Wizard = React.createClass({
             "data-id": "wizard",
             number: 1,
             activeStep: 1,
-            showDoneButton: false,
             showPulsing: false
         };
     },
@@ -195,12 +194,24 @@ var Wizard = React.createClass({
                 number: idx,
                 total: this.props.numSteps,
                 completed: this.props.activeStep > idx,
-                showEdit: this.props.activeStep > idx
+                showEdit: this.props.activeStep > idx,
+                hideCancel: this.props.activeStep === this.props.numSteps
             }, props));
         }.bind(this));
 
         return (
-            <div data-id={id} className={this.props.className}>{stepNodes}</div>
+            <div data-id={id} className={this.props.className}>
+                {stepNodes}
+                {this.props.activeStep === this.props.numSteps ? (
+                    <ButtonBar
+                        cancelText={this.props.labelCancel}
+                        onCancel={this.props.onCancel}
+                        onSave={this.props.onDone}
+                        saveText={this.props.labelDone}
+                        enableSavingAnimation={this.props.showPulsing}
+                        saveClassName="success" />
+                ) : null}
+            </div>
         );
     }
 });
