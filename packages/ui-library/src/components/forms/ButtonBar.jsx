@@ -3,6 +3,18 @@ var React = require("react"),
     EllipsisLoaderButton = require("./../general/EllipsisLoaderButton.jsx"),
     classnames = require("classnames");
 
+/**
+* @callback ButtonBar~onCancel
+*/
+
+/**
+* @callback ButtonBar~onDiscard
+*/
+
+/**
+* @callback ButtonBar~onSave
+*/
+
  /**
  * @class ButtonBar
  * @desc Displays a set of button controls, most often "Save" and "Cancel", and sometimes "Discard"
@@ -32,15 +44,15 @@ var React = require("react"),
  *     Enables the ellipsis loading animation on the save button. This also disables the "discard" and "cancel" buttons.
  * @param {boolean} [visible=true]
  *     Shows/hides the button bar. This is often set to true when a form data is "dirty"/has been edited
- * @param {ButtonBar~eventCallback} [onCancel]
+ * @param {ButtonBar~onCancel} [onCancel]
  *     Callback that will be triggered when the "cancel" button is clicked. Note that the onCancel callback and
  *     cancelText props are required to display the cancel button. If either is not provided, the button will not
  *     display.
- * @param {ButtonBar~eventCallback} [onDiscard]
+ * @param {ButtonBar~onDiscard} [onDiscard]
  *     Callback that will be triggered when the "discard" button is clicked. Note that the onDiscard callback and
  *     discardText props are required to display the discard button. If either is not provided, the button will not
  *     display.
- * @param {ButtonBar~eventCallback} onSave
+ * @param {ButtonBar~onSave} onSave
  *     Callback that will be triggered when the "save" button is clicked
  *
  * @example

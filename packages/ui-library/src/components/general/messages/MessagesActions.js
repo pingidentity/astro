@@ -9,6 +9,8 @@ exports.lastId = 0;
 
 /**
 * @enum {string}
+* @alias Actions.Types
+* @memberof Messages
 * @desc An enum of Messages action types.
 */
 exports.Types = keyMirror({
@@ -19,7 +21,8 @@ exports.Types = keyMirror({
 });
 
 /**
- * @function Messages~shiftMessage
+ * @alias Actions.shiftMessage
+ * @memberof Messages
  * @desc remove the first message from messages array
  * @param {string} [containerId="messages"]
  *     The grouping of the message
@@ -45,7 +48,8 @@ exports.pushMessage = function (containerId, text, status, timer, index) {
 };
 
 /**
- * @function Messages~addMessage
+ * @alias Actions.addMessage
+ * @memberof Messages
  * @desc Originally the messages component was designed to be a singleton, so the reducer/actions assumed there
  *     would only ever be one array of messages.  Since this is no longer the case, all actions now allow specifying
  *     a containerId.  To remain backwards compatible however, the actions will determine if the first argument is a
@@ -90,7 +94,8 @@ exports.addMessage = function (containerId, message, status, removeAfterMs) {
 };
 
 /**
- * @function Messages~removeAt
+ * @alias Actions.removeAt
+ * @memberof Messages
  * @desc remove the message at the give index
  * @param {string} [containerId="messages"]
  *     If the first parameter is a number, containerId will be set to "messages" for backwards compatibility.
@@ -114,7 +119,8 @@ exports.removeAt = function (containerId, index) {
 };
 
 /**
- * @function Messages~removeMessage
+ * @alias Actions.removeMessage
+ * @memberof Messages
  * @desc remove the message with the given id.  This is called by the scheduled job to remove the
  *     message.  Since the index of Message may change between the time it mounts and this is called, we
  *     need some way to remove a specific id.

@@ -11,9 +11,9 @@ var moment = require("moment");
 
 /**
  * @enum {string}
- * @alias Utils.browsers
+ * @alias module:util/Utils.Browsers
+ * @desc An enum of browsers.
  **/
-
 var browsers = {
     IE: "ie",
     EDGE: "edge",
@@ -22,6 +22,7 @@ var browsers = {
     SAFARI: "safari",
     OPERA: "opera"
 };
+exports.Browsers = browsers;
 
 /**
  * @alias module:util/Utils.isHtmlFileApiSupported

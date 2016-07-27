@@ -1,8 +1,12 @@
+/*eslint-disable valid-jsdoc*/
+
 /**
 * @module util/format
 */
 
 /**
+ * @alias module:util/format.format
+ *
  * @desc Format a string. The format string may call methods on the target key.
  *
  * @param {string} string

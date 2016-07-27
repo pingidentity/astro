@@ -2,6 +2,8 @@ var keyMirror = require("fbjs/lib/keyMirror");
 
 /**
 * @enum {string}
+* @alias Actions.Types
+* @memberof MultiDrag
 * @desc An enum of MultiDrag action types.
 */
 exports.Types = keyMirror({
@@ -14,7 +16,8 @@ exports.Types = keyMirror({
 });
 
 /**
-* @function MultiDrag~set
+* @alias Actions.set
+* @memberof MultiDrag
 * @desc Set a specific value at path in the MultiDrag store state.
 *
 * @param {string} path
@@ -34,7 +37,8 @@ exports.set = function (path, value) {
 };
 
 /**
-* @function MultiDrag~move
+* @alias Actions.move
+* @memberof MultiDrag
 * @desc Move a row from one position to another.
 *
 * @param {MultiDrag~MoveObject} from
@@ -54,7 +58,8 @@ exports.move = function (from, to) {
 };
 
 /**
-* @function MultiDrag~prepend
+* @alias Actions.prepend
+* @memberof MultiDrag
 * @desc Prepends rows to the the column.
 *
 * @param {string} column
@@ -74,7 +79,8 @@ exports.prepend = function (column, data) {
 };
 
 /**
-* @function MultiDrag~append
+* @alias Actions.append
+* @memberof MultiDrag
 * @desc Appends rows to the the column.
 *
 * @param {string} column
@@ -94,7 +100,8 @@ exports.append = function (column, data) {
 };
 
 /**
-* @function MultiDrag~init
+* @alias Actions.init
+* @memberof MultiDrag
 * @desc Initializes the component state's colums.
 *
 * @param {object[]} data
@@ -111,7 +118,8 @@ exports.init = function (data) {
 };
 
 /**
-* @function MultiDrag~filterField
+* @alias Actions.filterField
+* @memberof MultiDrag
 * @desc Filters down the rows in a column by searching each row's field name for the filter value.
 *
 * @param {string} fieldName
@@ -134,7 +142,8 @@ exports.filterField = function (fieldName, column, filter) {
 };
 
 /**
-* @function MultiDrag~filter
+* @alias Actions.filter
+* @memberof MultiDrag
 * @desc Filters down all rows in column by searching each row's fields for the filter value.
 *
 * @param {number} column
@@ -148,7 +157,8 @@ exports.filterField = function (fieldName, column, filter) {
 exports.filter = exports.filterField.bind(null, null);
 
 /**
-* @function MultiDrag~placeholder
+* @alias Actions.placeholder
+* @memberof MultiDrag
 * @desc Sets a placeholder preview for drag.
 *
 * @param {MultiDrag~previewLocation} to
@@ -160,7 +170,8 @@ exports.filter = exports.filterField.bind(null, null);
 exports.placeholder = exports.set.bind(null, ["placeholder"]);
 
 /**
-* @function MultiDrag~clearPlaceholder
+* @alias Actions.clearPlaceholder
+* @memberof MultiDrag
 * @desc Removes the preview placholder for drag.
 *
 * @return {object}

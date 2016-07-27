@@ -2,8 +2,8 @@ var keyMirror = require("fbjs/lib/keyMirror");
 
 /**
  * @enum {string}
- * @alias Wizard~Types
- * @ignore
+ * @alias Actions.Types
+ * @memberof Wizard
  */
 exports.Types = keyMirror({
     WIZARD_NEXT: null,
@@ -13,7 +13,8 @@ exports.Types = keyMirror({
 });
 
 /**
- * @function Wizard~reset
+ * @alias Actions.reset
+ * @memberof Wizard
  * @param {string} id
  *          Wizard identifier
  * @returns {{type: null, id: *}}
@@ -27,7 +28,8 @@ exports.reset = function (id) {
 };
 
 /**
- * @function Wizard~next
+ * @alias Actions.next
+ * @memberof Wizard
  * @param {string} id
  *          Wizard identifier
  * @returns {{type: null, id: *}}
@@ -67,7 +69,8 @@ var _buildWizardChoice = function (id, choice, numSteps) {
 };
 
 /**
- * @function Wizard~choose
+ * @alias Actions.choose
+ * @memberof Wizard
  * @deprecated
  * @desc Use change instead
  * @param {string} id
@@ -90,7 +93,8 @@ exports.choose = function (id, choice, numSteps) {
 };
 
 /**
- * @function Wizard~pick
+ * @alias Actions.pick
+ * @memberof Wizard
  * @desc Replacement for WizardActions~choose, which takes the object used by Wizard#Choose~onValueChange.
  *
  * @param {string} id
@@ -105,7 +109,8 @@ exports.pick = function (id, choice) {
 };
 
 /**
- * @function Wizard~edit
+ * @alias Actions.edit
+ * @memberof Wizard
  * @desc Edit a step in the wizard
  * @param {string} id
  *          Wizard identifier.
