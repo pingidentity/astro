@@ -33,6 +33,8 @@ var React = require("re-react"),
 *    The text to search with.
 * @param {number} searchTime
 *    The time after which to clear the search when the user delays their search.
+* @param {number} searchIndex
+*    The index of the country that was just searched.
 */
 
 /**

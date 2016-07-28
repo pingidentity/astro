@@ -28,6 +28,14 @@ var I18nPhoneInputDemo = React.createClass({
         });
     },
 
+    _handleSearch: function (string, time, index) {
+        this.setState({
+            searchString: string,
+            searchTime: time,
+            searchIndex: index
+        });
+    },
+
     getInitialState: function () {
         return {
             dialCodeStateful: "253",
@@ -54,6 +62,10 @@ var I18nPhoneInputDemo = React.createClass({
                 <br />
                 <I18nPhoneInput
                     controlled={true}
+                    onSearch={this._handleSearch}
+                    searchIndex={this.state.searchIndex}
+                    searchString={this.state.searchString}
+                    searchTime={this.state.searchTime}
                     open={this.state.open}
                     onToggle={this._handleToggle}
                     onValueChange={this._handleValueChangeStateless}
