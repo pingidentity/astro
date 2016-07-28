@@ -124,8 +124,9 @@ var IntroTutorial = React.createClass({
     _renderWelcome: function () {
         return [
             <div key={0}>{this.props.messageWelcome}</div>,
-            <input key={1} type="button" onClick={this.props.onNext} data-id="getStarted"
-                value={this.props.labelGetStarted} />
+            <button key={1} type="button" onClick={this.props.onNext} data-id="getStarted">
+                {this.props.labelGetStarted}
+            </button>
         ];
     },
 
@@ -153,24 +154,28 @@ var IntroTutorial = React.createClass({
             <div key={1} className="description">{item.description}</div>,
             <div key={2} className="page">{this.props.active} {this.props.labelOf} {this.props.steps.length}</div>,
             <div key={3} className="controls">
-                <input type="button" ref="dismissButton"
+                <button type="button"
+                        ref="dismissButton"
                         onClick={this._handleDismiss}
-                        value={this.props.labelDismiss}
                         className="dismiss"
-                        data-id="dismiss-button" />
-                <input type="button"
+                        data-id="dismiss-button" >
+                    {this.props.labelDismiss}
+                </button>
+                <button type="button"
                         ref="prevButton"
                         disabled={this.props.active === 1}
                         data-id="prev-button"
                         onClick={this.props.onPrevious}
-                        value={"« " + this.props.labelPrevious}
-                        className="prev" />
-                <input type="button"
+                        className="prev" >
+                    {"« " + this.props.labelPrevious}
+                </button>
+                <button type="button"
                         ref="nextButton"
                         className="next"
                         data-id="next-button"
-                        onClick={this._handleNext}
-                        value={this._getNextLabel()} />
+                        onClick={this._handleNext} >
+                    {this._getNextLabel()}
+                </button>
             </div>
         ];
     },

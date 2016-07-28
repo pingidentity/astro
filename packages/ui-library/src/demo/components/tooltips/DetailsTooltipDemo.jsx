@@ -92,12 +92,13 @@ var DetailsTooltipDemo = React.createClass({
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
                     <div className="buttons" data-id="delete-confirmation">
-                        <input
-                            type="button"
-                            data-id="confirm-action"
-                            value="Confirm"
-                            className="primary"
-                            onClick={this._handleConfirm1} />
+                        <button
+                                type="button"
+                                data-id="confirm-action"
+                                className="primary"
+                                onClick={this._handleConfirm1} >
+                            Confirm
+                        </button>
                         <br />
                         <a className="cancel" onClick={this._handleCancel1}>Cancel</a>
                     </div>
@@ -117,12 +118,13 @@ var DetailsTooltipDemo = React.createClass({
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
                     <div className="buttons" data-id="delete-confirmation">
-                        <input
-                            type="button"
-                            data-id="confirm-action"
-                            value="Confirm"
-                            className="primary"
-                            onClick={this._handleConfirm2}/>
+                        <button
+                                type="button"
+                                data-id="confirm-action"
+                                className="primary"
+                                onClick={this._handleConfirm2} >
+                            Confirm
+                        </button>
                         <br />
                         <a className="cancel" onClick={this._handleCancel2}>Cancel</a>
                     </div>
@@ -131,7 +133,7 @@ var DetailsTooltipDemo = React.createClass({
 
                 <br/>
                 <DetailsTooltip
-                    label={(<input type="button" value="Label as button" />)}
+                    label={(<button type="button">Label as button</button>)}
                     positionClassName="bottom right"
                     title="Tooltip Title"
                     open={this.state.open3}
@@ -142,12 +144,13 @@ var DetailsTooltipDemo = React.createClass({
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
                     <div className="buttons" data-id="delete-confirmation">
-                        <input
-                            type="button"
-                            data-id="confirm-action"
-                            value="Confirm"
-                            className="primary"
-                            onClick={this._handleConfirm3}/>
+                        <button
+                                type="button"
+                                data-id="confirm-action"
+                                className="primary"
+                                onClick={this._handleConfirm3} >
+                            Confirm
+                        </button>
                         <br />
                         <a className="cancel" onClick={this._handleCancel3}>Cancel</a>
                     </div>
@@ -167,12 +170,13 @@ var DetailsTooltipDemo = React.createClass({
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
                     <div className="buttons" data-id="delete-confirmation">
-                        <input
-                            type="button"
-                            data-id="confirm-action"
-                            value="Confirm"
-                            className="primary"
-                            onClick={this._handleConfirm4}/>
+                        <button
+                                type="button"
+                                data-id="confirm-action"
+                                className="primary"
+                                onClick={this._handleConfirm4} >
+                            Confirm
+                        </button>
                         <br />
                         <a className="cancel" onClick={this._handleCancel4}>Cancel</a>
                     </div>
@@ -192,12 +196,13 @@ var DetailsTooltipDemo = React.createClass({
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
                     <div className="buttons" data-id="delete-confirmation">
-                        <input
-                            type="button"
-                            data-id="confirm-action"
-                            value="Confirm"
-                            className="primary"
-                            onClick={this._handleConfirm5}/>
+                        <button
+                                type="button"
+                                data-id="confirm-action"
+                                className="primary"
+                                onClick={this._handleConfirm5} >
+                            Confirm
+                        </button>
                         <br />
                         <a className="cancel" onClick={this._handleCancel5}>Cancel</a>
                     </div>
@@ -217,18 +222,20 @@ var DetailsTooltipDemo = React.createClass({
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
                     <div className="buttons" data-id="delete-confirmation">
-                        <input
-                            type="button"
-                            data-id="confirm-action"
-                            value="Discard Changes"
-                            className="cancel"
-                            onClick={this._handleDiscard6} />
-                        <input
-                            type="button"
-                            data-id="confirm-action"
-                            value="Confirm"
-                            className="primary"
-                            onClick={this._handleConfirm6} />
+                        <button
+                                type="button"
+                                data-id="confirm-action"
+                                className="cancel"
+                                onClick={this._handleDiscard6} >
+                            Discard Changes
+                        </button>
+                        <button
+                                type="button"
+                                data-id="confirm-action"
+                                className="primary"
+                                onClick={this._handleConfirm6} >
+                            Confirm
+                        </button>
                         <br />
                         <a className="cancel" onClick={this._handleCancel6}>Cancel</a>
                     </div>
@@ -248,18 +255,20 @@ var DetailsTooltipDemo = React.createClass({
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
                     <div className="buttons" data-id="delete-confirmation">
-                        <input
-                            type="button"
-                            data-id="confirm-action"
-                            value="Discard Changes"
-                            className="cancel"
-                            onClick={this._handleDiscard7} />
-                        <input
-                            type="button"
-                            data-id="confirm-action"
-                            value="Confirm"
-                            className="primary"
-                            onClick={this._handleConfirm7}/>
+                        <button
+                                type="button"
+                                data-id="confirm-action"
+                                className="cancel"
+                                onClick={this._handleDiscard7} >
+                            Discard Changes
+                        </button>
+                        <button
+                                type="button"
+                                data-id="confirm-action"
+                                className="primary"
+                                onClick={this._handleConfirm7} >
+                            Confirm
+                        </button>
                         <br />
                         <a className="cancel" onClick={this._handleCancel7}>Cancel</a>
                     </div>

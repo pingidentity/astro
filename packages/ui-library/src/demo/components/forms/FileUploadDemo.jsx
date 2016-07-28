@@ -136,20 +136,20 @@ var FileUploadDemo = React.createClass({
                     </div>
 
                     <div className="buttons" data-id="delete-confirmation">
-                        <input
-                            type="button"
-                            data-id="cancel-action"
-                            value="Cancel"
-                            className="secondary"
-                            onClick={this._toggleTooltip}
-                        />
-                        <input
-                            type="button"
-                            data-id="confirm-action"
-                            value="Confirm"
-                            className="primary"
-                            onClick={this._toggleTooltip}
-                        />
+                        <button
+                                type="button"
+                                data-id="cancel-action"
+                                className="secondary"
+                                onClick={this._toggleTooltip} >
+                            Cancel
+                        </button>
+                        <button
+                                type="button"
+                                data-id="confirm-action"
+                                className="primary"
+                                onClick={this._toggleTooltip} >
+                            Confirm
+                        </button>
                     </div>
                 </DetailsTooltip>
 

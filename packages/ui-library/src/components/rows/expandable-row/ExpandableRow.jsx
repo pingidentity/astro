@@ -466,16 +466,18 @@ var ConfirmDeleteDialog = React.createClass({
                 <p>{this.props.label}</p>
 
                 <div className="buttons">
-                    <input type="button"
-                        data-id="cancel-delete"
-                        value="Cancel"
-                        className="secondary"
-                        onClick={this.props.onCancel} />
-                    <input type="button"
-                        data-id="confirm-delete"
-                        value="Confirm"
-                        className="primary"
-                        onClick={this.props.onDeleteConfirm} />
+                    <button type="button"
+                            data-id="cancel-delete"
+                            className="secondary"
+                            onClick={this.props.onCancel} >
+                        Cancel
+                    </button>
+                    <button type="button"
+                            data-id="confirm-delete"
+                            className="primary"
+                            onClick={this.props.onDeleteConfirm} >
+                        Confirm
+                    </button>
                 </div>
             </DetailsTooltip>);
     }

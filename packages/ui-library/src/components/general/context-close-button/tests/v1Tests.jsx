@@ -57,7 +57,7 @@ describe("ContextCloseButton", function () {
         );
 
         // Expect a single button to be rendered.
-        var button = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        var button = TestUtils.findRenderedDOMNodeWithTag(component, "button");
         
         expect(callback.mock.calls.length).toBe(0);
         
@@ -80,7 +80,7 @@ describe("ContextCloseButton", function () {
         );
 
         // Expect a single button to be rendered.
-        var button = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        var button = TestUtils.findRenderedDOMNodeWithTag(component, "button");
         
         expect(clickCallback.mock.calls.length).toBe(0);
         expect(closeCallback.mock.calls.length).toBe(0);
@@ -110,7 +110,7 @@ describe("ContextCloseButton", function () {
         );
 
         // Expect a single button to be rendered.
-        var button = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        var button = TestUtils.findRenderedDOMNodeWithTag(component, "button");
         
         expect(clickCallback.mock.calls.length).toBe(0);
         expect(closeCallback.mock.calls.length).toBe(0);

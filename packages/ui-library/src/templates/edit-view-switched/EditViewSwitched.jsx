@@ -5,7 +5,8 @@ var React = require("react"),
     FormSelectField = require("../../components/forms/form-select-field").v2,
     Layout = require("../../components/general/ColumnLayout.jsx"),
     RockerButton = require("../../components/forms/RockerButton.jsx"),
-    Toggle = require("../../components/forms/form-toggle").v2;
+    Toggle = require("../../components/forms/form-toggle").v2,
+    ButtonBar = require("../../components/forms/ButtonBar.jsx");
 
 /**
  * @callback EditViewSwitched~onSave
@@ -32,6 +33,10 @@ var React = require("react"),
  * @desc This is a template to demonstrate how to build a switched/button-tabbed edit/form page. Use
  *     it as a starting going for an edit page of this type.
  *
+ * @param {boolean} saving
+ *    If true, a saving animation will be added to the save button.
+ * @param {boolean} showButtonBar
+ *    If true, will show the button bar at the bottom of the page.
  * @param {EditViewSwitched~onInputChange} onInputChange
  *          Callback to be triggered when an input value changes
  * @param {EditViewSwitched~onSave} onSave
@@ -69,7 +74,7 @@ module.exports = React.createClass({
                 <h1 className="page-title">Edit Template with Switcher</h1>
 
                 <div className="page-controls-secondary">
-                    <input type="button" className="button inline" value="Inline Button" />
+                    <button type="button" className="inline">Inline Button</button>
                     <Toggle />
                 </div>
                 <RockerButton
@@ -206,18 +211,13 @@ module.exports = React.createClass({
                     </div>
                 )}
 
-                <div className="page-controls-primary">
-                    <input
-                        type="button"
-                        className="cancel"
-                        value="Cancel"
-                        onClick={this._handleCancel} />
-                    <input
-                        type="button"
-                        className="primary"
-                        value="Save"
-                        onClick={this._handleSave} />
-                </div>
+                <ButtonBar
+                        onCancel={this._handleCancel}
+                        onSave={this._handleSave}
+                        cancelText="Cancel"
+                        saveText="Save"
+                        enableSavingAnimation={this.props.saving}
+                        visible={this.props.showButtonBar} />
             </div>
         );
     }

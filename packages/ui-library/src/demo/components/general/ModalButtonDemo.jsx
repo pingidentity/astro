@@ -122,9 +122,11 @@ var ModalButtonDemo = React.createClass({
                                 euismod. Etiam molestie quis nunc eu ultrices.
                             </p>
                             <div className="buttons">
-                                <input type="button" data-id="nopeButton" value="Nope" onClick={this._handleClose2} />
-                                <input type="button" data-id="yupButton" className="primary" value="Yup"
-                                    onClick={this._handleClose2} />
+                                <button type="button" data-id="nopeButton" onClick={this._handleClose2}>Nope</button>
+                                <button type="button" data-id="yupButton" className="primary"
+                                        onClick={this._handleClose2} >
+                                    Yup
+                                </button>
                             </div>
                         </div>
                     </ModalButton>
@@ -147,10 +149,14 @@ var ModalButtonDemo = React.createClass({
                             This modal copies the look of details tooltip with alert class.
                         </div>
                         <div className="buttons">
-                            <input type="button" className="cancel" value="Disgard Changes"
-                                    onClick={this._handleClose3} data-id="disgardChangesButton"/>
-                            <input type="button" className="primary" value="Save"
-                                    onClick={this._handleClose3} data-id="saveButton" />
+                            <button type="button" className="cancel"
+                                    onClick={this._handleClose3} data-id="disgardChangesButton" >
+                                Disgard Changes
+                            </button>
+                            <button type="button" className="primary"
+                                    onClick={this._handleClose3} data-id="saveButton">
+                                Save
+                            </button>
                             <br />
                             <a className="cancel" data-id="cancelLink" onClick={this._handleClose3}>Cancel</a>
                         </div>

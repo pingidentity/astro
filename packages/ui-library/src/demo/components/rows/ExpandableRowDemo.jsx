@@ -69,7 +69,7 @@ var ExpandableRowDemo = React.createClass({
                     title="Row With Right Button"
                     subtitle="Row Subtitle"
                     status={ExpandableRow.Statuses.WARNING}
-                    rowAccessories={(<input type="button" className="button inline" value="Inline Button" />)} />
+                    rowAccessories={(<button type="button" className="button inline">Inline Button</button>)} />
                 <ExpandableRow
                     title="Row With a Variety of Right Content"
                     subtitle="Row Subtitle"
@@ -77,7 +77,7 @@ var ExpandableRowDemo = React.createClass({
                     rowAccessories={(
                         <span>
                             <a>Link</a>
-                            <input type="button" className="button inline" value="Inline Button" />
+                            <button type="button" className="button inline">Inline Button</button>
                             <Toggle />
                         </span>
                     )} />

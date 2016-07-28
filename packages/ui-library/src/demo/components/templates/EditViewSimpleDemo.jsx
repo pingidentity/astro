@@ -16,7 +16,9 @@ var EditViewSimpleDemo = React.createClass({
         return (
             <EditViewSimple {...this.props}
                 onInputChange={this.actions.setInput}
-                onSave={this.actions.saveForm} />);
+                onSave={this.actions.saveForm}
+                saving={this.props.inputs.saving}
+                showButtonBar={this.props.inputs.dirty} />);
     }
 });
 

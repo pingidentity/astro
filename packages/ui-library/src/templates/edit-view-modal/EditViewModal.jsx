@@ -4,7 +4,8 @@ var React = require("react"),
     FormRadioGroup = require("../../components/forms/FormRadioGroup.jsx"),
     FormSelectField = require("../../components/forms/form-select-field").v2,
     Layout = require("../../components/general/ColumnLayout.jsx"),
-    ModalButton = require("../../components/general/ModalButton.jsx");
+    ModalButton = require("../../components/general/ModalButton.jsx"),
+    ButtonBar = require("../../components/forms/ButtonBar.jsx");
 
 /**
  * @callback EditViewModal~onModalToggle
@@ -27,6 +28,8 @@ var React = require("react"),
  * @desc This is a template to demonstrate how to build a sectioned edit/form page.  Use it as a
  *     starting poing for a sectioned edit page.
  *
+ * @param {boolean} showButtonBar
+ *    If true, will show the button bar at the bottom of the page.
  * @param {EditViewModal~onModalToggle} onModalToggle
  *          Callback to be triggered to toggle the display of the modal
  * @param {EditViewModal~onInputChange} onInputChange
@@ -199,18 +202,12 @@ module.exports = React.createClass({
                         </div>
                     </div>
                 </div>
-                <div className="task-submit">
-                    <input
-                        type="button"
-                        className="cancel"
-                        value="Cancel"
-                        onClick={this._handleCancel} />
-                    <input
-                        type="button"
-                        className="primary"
-                        value="Save"
-                        onClick={this._handleSave} />
-                </div>
+                <ButtonBar className="task-submit"
+                        onCancel={this._handleCancel}
+                        onSave={this._handleSave}
+                        cancelText="Cancel"
+                        saveText="Save"
+                        visible={this.props.showButtonBar} />
             </div>
         );
     },

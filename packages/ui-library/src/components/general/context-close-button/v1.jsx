@@ -104,13 +104,14 @@ var ContextCloseButton = React.createClass({
 
         return (
             this.props.show ? (
-                <input id={this.props.id}
-                    type="button"
-                    value={this.props.value}
-                    className={css(styles)}
-                    data-id={this.props.id}
-                    onClick={this._close}
-                    disabled={this.props.disabled} />
+                <button id={this.props.id}
+                        type="button"
+                        className={css(styles)}
+                        data-id={this.props.id}
+                        onClick={this._close}
+                        disabled={this.props.disabled} >
+                    {this.props.value}
+                </button>
             ) : null
         );
     }

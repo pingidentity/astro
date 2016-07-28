@@ -17,7 +17,7 @@ module.exports = function (getComponent) {
         component = getComponent({
             show: shown
         });
-        var button = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        var button = TestUtils.findRenderedDOMNodeWithTag(component, "button");
         expect(ReactTestUtils.isDOMComponent(button)).toBeTruthy();
     });
 
@@ -29,7 +29,7 @@ module.exports = function (getComponent) {
         var component = getComponent({
             disabled: disabled
         });
-        var button = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        var button = TestUtils.findRenderedDOMNodeWithTag(component, "button");
         expect(ReactTestUtils.isDOMComponent(button)).toBeTruthy();
         expect(button.disabled).toBeFalsy();
 
@@ -37,7 +37,7 @@ module.exports = function (getComponent) {
         component = getComponent({
             disabled: disabled
         });
-        button = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        button = TestUtils.findRenderedDOMNodeWithTag(component, "button");
         expect(ReactTestUtils.isDOMComponent(button)).toBeTruthy();
         expect(button.disabled).toBeTruthy();
     });

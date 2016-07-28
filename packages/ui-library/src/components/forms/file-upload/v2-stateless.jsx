@@ -73,9 +73,9 @@ module.exports = React.createClass({
                             labelMaxFileSize={this.props.labelMaxFileSize}
                             labelAcceptedFileTypes={this.props.labelAcceptedFileTypes} />
 
-                    <span className="button inline choose">
+                    <button className="inline choose">
                         {(fileSelected && this.props.labelSelectOther) || this.props.labelSelect}
-                    </span>
+                    </button>
 
                     <ErrorMessage
                             value={this.props.errorMessage}

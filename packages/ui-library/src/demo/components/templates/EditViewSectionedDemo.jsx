@@ -15,7 +15,9 @@ var EditViewSectionedDemo = React.createClass({
     render: function () {
         return (<EditViewSectioned {...this.props}
             onInputChange={this.actions.setInput}
-            onSave={this.actions.saveForm} />);
+            onSave={this.actions.saveForm}
+            saving={this.props.inputs.saving}
+            showButtonBar={this.props.inputs.dirty}/>);
     }
 });
 

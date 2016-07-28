@@ -113,8 +113,8 @@ var ModalDemo = React.createClass({
                                 euismod. Etiam molestie quis nunc eu ultrices.
                             </p>
                             <div className="buttons">
-                                <input type="button" value="Nope" onClick={this._toggle4} />
-                                <input type="button" className="primary" value="Yup" onClick={this._toggle4} />
+                                <button type="button" onClick={this._toggle4}>Nope</button>
+                                <button type="button" className="primary" onClick={this._toggle4}>Yup</button>
                             </div>
                         </div>
                     </Modal>
@@ -136,8 +136,8 @@ var ModalDemo = React.createClass({
                             This modal copies the look of details tooltip with alert class.
                         </div>
                         <div className="buttons">
-                            <input type="button" className="cancel" value="Disgard Changes" onClick={this._toggle5}/>
-                            <input type="button" className="primary" value="Save" onClick={this._toggle5}/>
+                            <button type="button" className="cancel" onClick={this._toggle5}>Disgard Changes</button>
+                            <button type="button" className="primary" onClick={this._toggle5}>Save</button>
                             <br />
                             <a className="cancel" onClick={this._toggle5}>Cancel</a>
                         </div>

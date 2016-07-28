@@ -25,6 +25,7 @@ describe("IntroTutorial", function () {
                 <IntroTutorial ref="tutorial" {...this.state} />
                 <div className="app-search"></div>
                 <div className="menu-button"></div>
+                <div className="main-content"></div>
             </div>);
         }
     });
@@ -37,7 +38,8 @@ describe("IntroTutorial", function () {
             active: activeStep,
             steps: [
                { target: node.getElementsByClassName("app-search")[0], title: "title 1", description: "d1" },
-               { target: node.getElementsByClassName("menu-button")[0], title: "title 2", description: "d2" }
+               { target: node.getElementsByClassName("menu-button")[0], title: "title 2", description: "d2" },
+               { target: node.getElementsByClassName("main-content")[0], title: "title 3", description: "d3" }
             ]
         });
     };
@@ -114,10 +116,10 @@ describe("IntroTutorial", function () {
         var component = getComponent();
         var tutorial = component.refs.tutorial;
 
-        sendSteps(component, 2);
+        sendSteps(component, 3);
 
         var nextButton = ReactDOM.findDOMNode(tutorial.refs.nextButton);
-        expect(nextButton.value).toBe("Got it");
+        expect(nextButton.innerHTML).toBe("Got it");
 
         ReactTestUtils.Simulate.click(nextButton);
         expect(tutorial.props.onGotIt.mock.calls.length).toBe(1);
@@ -128,17 +130,22 @@ describe("IntroTutorial", function () {
         var tutorial = component.refs.tutorial;
 
         sendSteps(component, 1);
-
-        var dismissButton = ReactDOM.findDOMNode(tutorial.refs.dismissButton);
-        var prevButton = ReactDOM.findDOMNode(tutorial.refs.prevButton);
         var nextButton = ReactDOM.findDOMNode(tutorial.refs.nextButton);
 
         //next
         ReactTestUtils.Simulate.click(nextButton);
         expect(tutorial.props.onNext.mock.calls.length).toBe(1);
+
+        //prev disabled on active=1, so reset to active=2
+        sendSteps(component, 2);
+        var prevButton = ReactDOM.findDOMNode(tutorial.refs.prevButton);
+
         //prev
         ReactTestUtils.Simulate.click(prevButton);
         expect(tutorial.props.onPrevious.mock.calls.length).toBe(1);
+
+        var dismissButton = ReactDOM.findDOMNode(tutorial.refs.dismissButton);
+
         //dismiss
         ReactTestUtils.Simulate.click(dismissButton);
         expect(tutorial.props.onDismiss.mock.calls.length).toBe(1);
@@ -148,7 +155,7 @@ describe("IntroTutorial", function () {
         var component = getComponent();
         var tutorial = component.refs.tutorial;
 
-        sendSteps(component, 2);
+        sendSteps(component, 3);
         var gotItButton = ReactDOM.findDOMNode(tutorial.refs.nextButton);
         //got it
         ReactTestUtils.Simulate.click(gotItButton);

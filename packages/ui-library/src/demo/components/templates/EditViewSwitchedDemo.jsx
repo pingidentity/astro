@@ -17,7 +17,9 @@ var EditViewSwitchedDemo = React.createClass({
             <EditViewSwitched {...this.props}
                 onInputChange={this.actions.setInput}
                 onRockerButtonChange={this.actions.setActiveRockerButton}
-                onSave={this.actions.saveForm} />);
+                onSave={this.actions.saveForm}
+                saving={this.props.inputs.saving}
+                showButtonBar={this.props.inputs.dirty} />);
     }
 });
 

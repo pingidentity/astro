@@ -412,9 +412,9 @@ var FileUpload = React.createClass({
                             <span className="accepted-types">{acceptTypesText}</span>
                         </span>
                     }
-                    <span className="button inline choose">
+                    <button className="inline choose">
                         {buttonLabel}
-                    </span>
+                    </button>
                     <div className={errorClass} data-id={this.props.referenceName + "_errormessage"}>
                         <div className="tooltip-text">
                             {this.state.errorMessage}

@@ -17,7 +17,8 @@ var EditViewModalDemo = React.createClass({
             <EditViewModal {...this.props}
                 onInputChange={this.actions.setInput}
                 onSave={this.actions.saveForm}
-                onModalToggle={this.actions.toggleModal} />);
+                onModalToggle={this.actions.toggleModal}
+                showButtonBar={this.props.inputs.dirty} />);
     }
 });
 

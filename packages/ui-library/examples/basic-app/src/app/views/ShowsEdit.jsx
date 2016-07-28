@@ -3,7 +3,8 @@ var React = require("re-react"),
     FormTextField = require("ui-library/src/components/forms//form-text-field").v2,
     FormRadioGroup = require("ui-library/src/components/forms/FormRadioGroup.jsx"),
     FormLabel = require("ui-library/src/components/forms/FormLabel.jsx"),
-    FormTextArea = require("ui-library/src/components/forms/form-text-area");
+    FormTextArea = require("ui-library/src/components/forms/form-text-area"),
+    ButtonBar = require("ui-library/src/components/forms/ButtonBar.jsx");
 
 var ShowsEdit = React.createClass({
     /*
@@ -114,19 +115,12 @@ var ShowsEdit = React.createClass({
                     </div>
                 </div>
 
-                <div className="page-controls-primary">
-                    <input
-                        type="button"
-                        className="cancel"
-                        value="Cancel"
-                        onClick={this._handleCancel} />
-                    <input
-                        type="button"
-                        className="primary"
-                        value="Save"
-                        disabled={this.props.errors.summaryMaxLength}
-                        onClick={this._handleSave} />
-                </div>
+                <ButtonBar
+                        onCancel={this._handleCancel}
+                        onSave={this._handleSave}
+                        cancelText="Cancel"
+                        saveText="Save"
+                        saveDisabled={this.props.errors.summaryMaxLength} />
             </div>
         );
     }

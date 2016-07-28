@@ -13,7 +13,8 @@ var initialState = {
         lastName: null,
         userActive: false,
         userGroup: null,
-        username: null
+        username: null,
+        dirty: false
     },
     modalExpanded: false
 };
@@ -29,6 +30,8 @@ module.exports = function (state, action) {
     switch (action.type) {
         case Actions.Types.EDIT_VIEW_SET_INPUT:
             nextState.inputs[action.name] = action.value;
+            // set dirty once an input is set - can be changed to more complex dirty checking logic
+            nextState.inputs.dirty = true;
             break;
         case Actions.Types.EDIT_VIEW_SAVE:
             // make API call(s) to save data stored in the app state

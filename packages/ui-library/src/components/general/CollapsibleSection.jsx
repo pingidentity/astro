@@ -49,7 +49,7 @@ var noop = function () {
  *               </div>
  *                <div className="section-container">     <!-- this is body, will be expanded/collapsed -->
  *                    <div className="input-menu-button">
- *                        <a className="add button inline">Add</a>
+ *                        <button className="add inline">Add</button>
  *                    </div>
  *                </div>
  *         </Section>
@@ -61,7 +61,7 @@ var noop = function () {
  *
  *             <div className="condition">              <!-- body -->
  *                 <div className="input-menu-button">
- *                     <a className="add button inline">Add</a>
+ *                     <button className="add inline">Add</button>
  *                 </div>
  *             </div>
  *         </Section>
