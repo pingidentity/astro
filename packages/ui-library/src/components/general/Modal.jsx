@@ -111,6 +111,16 @@ var Modal = React.createClass({
         }, e);
     },
 
+    _handleBgClick: function (e) {
+        if (!this.props.closeOnBgClick ||
+            !this.props.onClose ||
+            ["modal-content", "modal-bg"].indexOf(e.target.getAttribute("data-id")) === -1) {
+            return;
+        }
+
+        this.props.onClose();
+    },
+
     _getCloseButton: function () {
         return (
             <a data-id="close-button" className="close-modal" onClick={this.props.onClose}>×</a>
@@ -153,9 +163,9 @@ var Modal = React.createClass({
                 <div
                     className="modal-bg"
                     data-id="modal-bg"
-                    onClick={this.props.closeOnBgClick && this.props.onClose}>
+                    onClick={this._handleBgClick}>
                 </div>
-                <div className="modal-content">
+                <div className="modal-content" data-id="modal-content" onClick={this._handleBgClick}>
                     <If test={this.props.showHeader}>
                         <div className="modal-header">
                             {this.props.modalTitle}
