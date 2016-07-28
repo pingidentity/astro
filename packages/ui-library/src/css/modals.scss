@@ -39,7 +39,7 @@
 		top: 0;
 		left: 50%;
 		transform: translateX(-50%);
-		max-height: 100%;
+		height: 100%;
 		max-width: $max-modal-width;
 		min-width: 360px;
 		font-family: $font-pn-regular;
@@ -240,6 +240,14 @@
 		}
 		.message {
 			padding-left: 30px;
+		}
+	}
+	.page-controls-primary {
+		@include transition(all 0.1s);
+
+		&.hidden {
+			@include transform(translateY(0));
+			@include opacity(0);
 		}
 	}
 }
