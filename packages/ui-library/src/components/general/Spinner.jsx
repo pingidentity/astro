@@ -1,4 +1,5 @@
 var React = require("react"),
+    classnames = require("classnames"),
     Utils = require("../../util/Utils");
 
 /**
@@ -49,9 +50,10 @@ var Spinner = React.createClass({
     },
 
     render: function () {
+        var className = classnames("spinner", { ie9: Utils.isIE9() } );
         if (this.props.show) {
             var dataId = this.props.id || this.props["data-id"];
-            return <span data-id={dataId} className="spinner">{this.props.defaultText}</span>;
+            return <span data-id={dataId} className={className}>{this.props.defaultText}</span>;
         } else {
             return this.props.children;
         }

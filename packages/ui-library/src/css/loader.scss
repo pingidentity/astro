@@ -48,6 +48,20 @@
 
 		@include border-radius($loader-size);
 	}
+	&.ie9 {
+		border: none;
+		background-image: url("#{$img-path}spinner.gif");
+		background-repeat: no-repeat;
+		background-position: 50%;
+		background-size: 21px;
+		height: 21px;
+		width: 21px;
+		&.large {
+			background-size: 38px;
+			height: 38px;
+			width: 38px;
+		}
+	}
 }
 button.spinner {
 	$loader-size: 9px;
