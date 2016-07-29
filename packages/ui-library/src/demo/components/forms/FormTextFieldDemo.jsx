@@ -1,7 +1,5 @@
 var React = require("react"),
-    FormTextField = require("../../../components/forms/form-text-field"),
-    FormTimeField = require("../../../components/forms/FormTimeField.jsx"),
-    Utils = require("../../../util/Utils.js");
+    FormTextField = require("../../../components/forms/form-text-field");
 
 
 /**
@@ -19,9 +17,10 @@ var FormTextFieldDemo = React.createClass({
             onBlurValidationErrorMessage: "",
             saved: false,
             undone: false,
-            timeFieldValue: "00:00:00",
-            dateTimeFieldValue: Utils.formatDate(Date.now()),
-            onUndoValue: null
+            showUndo: false,
+            onUndoValue: null,
+            originalValue: "this is the original value",
+            requiredValue: null
         };
     },
 
@@ -40,16 +39,23 @@ var FormTextFieldDemo = React.createClass({
     _handleUndoValueChange: function (value) {
         this.setState({
             onUndoValue: value,
-            showUndo: value !== "this is the original value"
+            showUndo: value !== this.state.originalValue
         });
     },
 
     _handleUndo: function () {
         this.setState({
             undone: true,
-            onUndoValue: "this is the original value"
+            onUndoValue: this.state.originalValue,
+            showUndo: false
         });
         window.setTimeout(this.setState.bind(this, { undone: false }), 5000);
+    },
+
+    _handleRequiredValueChange: function (value) {
+        this.setState({
+            requiredValue: value
+        });
     },
 
     _handleSave: function () {
@@ -80,7 +86,7 @@ var FormTextFieldDemo = React.createClass({
             onBlurValidationErrorMessage: this._validateInput(e.target.value)
         });
     },
-    
+
     _validateInput: function (value) {
         var errorMessage = "";
 
@@ -99,22 +105,6 @@ var FormTextFieldDemo = React.createClass({
         return (
             <div>
                 <div className="input-row">
-                    <FormTimeField
-                        defaultValue={this.state.timeFieldValue}
-                        onValueChange={this._handleTimeValueChange}
-                        labelText="Time Field" />
-                </div>
-                <div>{this.state.timeFieldValue}</div>
-                <br />
-                <div className="input-row">
-                    <FormTimeField type={FormTimeField.Types.DATE}
-                        defaultValue={this.state.dateTimeFieldValue}
-                        onValueChange={this._handleDateTimeValueChange}
-                        labelText="Date Time Field" />
-                </div>
-                <div>{this.state.dateTimeFieldValue}</div>
-                <br />
-                <div className="input-row">
                     <FormTextField
                         labelText="Basic"
                     />
@@ -122,11 +112,10 @@ var FormTextFieldDemo = React.createClass({
                 <div className="input-row">
                     <FormTextField
                         labelText="Default value and undo"
-                        showUndo={true}
+                        showUndo={this.state.showUndo}
                         onUndo={this._handleUndo}
-                        value={this.state.onUndoValue}
+                        value={this.state.onUndoValue || this.state.originalValue}
                         onValueChange={this._handleUndoValueChange}
-                        defaultValue="this is the original value"
                     />
                     <div>{this.state.undone ? "undone!" : null}</div>
                 </div>
@@ -135,7 +124,9 @@ var FormTextFieldDemo = React.createClass({
                         labelText="Required and save"
                         required={true}
                         showSave={true}
-                        onSave={this._handleSave} />
+                        onSave={this._handleSave}
+                        onValueChange={this._handleRequiredValueChange}
+                        value={this.state.requiredValue}/>
                     <div>{this.state.saved ? "saved!" : null}</div>
                 </div>
                 <div className="input-row">
@@ -162,7 +153,7 @@ var FormTextFieldDemo = React.createClass({
                     <FormTextField
                         labelText="Read-only"
                         defaultValue="can't touch this"
-                        mode="read_only" />
+                        readOnly={true} />
                 </div>
                 <div className="input-row">
                     <FormTextField
