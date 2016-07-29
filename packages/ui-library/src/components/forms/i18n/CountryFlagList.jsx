@@ -60,7 +60,7 @@ var Types = {
 *    CSS classes to set on the top-level HTML container.
 *
 * @param {string|number} [selectedCountryCode]
-*    The selected country's iso2, isoNum or dial code.
+*    The selected country's iso2 or isoNum code.
 * @param {CountryFlagList.CountryCodeTypes} [countryCodeDisplayType=CountryFlagList.CountryCodeTypes.ISO_2]
 *    The type of country code displayed.
 * @param {string} [countryCodeClassName]
@@ -213,13 +213,13 @@ var CountryFlagList = React.createClass({
 
     /**
     * Returns a country's data by code
-    * @param {string} code - the county iso2, isoNum or dial code
+    * @param {string} code - the country's iso2 or isoNum code
     * @return {Object} - the country data
     * @ignore
     */
     _findByCountryCode: function (code) {
         return countryCodes.filter(function (country) {
-            return country.iso2 === code || country.isoNum === code || country.dialCode === code;
+            return country.iso2 === code || country.isoNum === code;
         })[0];
     },
 

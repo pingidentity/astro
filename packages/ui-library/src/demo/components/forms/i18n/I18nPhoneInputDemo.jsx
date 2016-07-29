@@ -10,6 +10,7 @@ var I18nPhoneInputDemo = React.createClass({
 
     _handleValueChangeStateful: function (phoneInputValues) {
         this.setState({
+            countryCodeStateful: phoneInputValues.countryCode,
             dialCodeStateful: phoneInputValues.dialCode,
             phoneNumberStateful: phoneInputValues.phoneNumber
         });
@@ -17,6 +18,7 @@ var I18nPhoneInputDemo = React.createClass({
 
     _handleValueChangeStateless: function (phoneInputValues) {
         this.setState({
+            countryCodeStateless: phoneInputValues.countryCode,
             dialCodeStateless: phoneInputValues.dialCode,
             phoneNumberStateless: phoneInputValues.phoneNumber
         });
@@ -38,10 +40,12 @@ var I18nPhoneInputDemo = React.createClass({
 
     getInitialState: function () {
         return {
+            countryCodeStateful: "dj",
             dialCodeStateful: "253",
             phoneNumberStateful: "123 456 7890",
 
             open: false,
+            countryCodeStateless: "ru",
             dialCodeStateless: "7",
             phoneNumberStateless: "098 765 4321"
         };
@@ -52,6 +56,7 @@ var I18nPhoneInputDemo = React.createClass({
             <div>
                 <I18nPhoneInput
                     onValueChange={this._handleValueChangeStateful}
+                    countryCode={this.state.countryCodeStateful}
                     dialCode={this.state.dialCodeStateful}
                     phoneNumber={this.state.phoneNumberStateful} />
                 <br/><br/>
@@ -69,6 +74,7 @@ var I18nPhoneInputDemo = React.createClass({
                     open={this.state.open}
                     onToggle={this._handleToggle}
                     onValueChange={this._handleValueChangeStateless}
+                    countryCode={this.state.countryCodeStateless}
                     dialCode={this.state.dialCodeStateless}
                     phoneNumber={this.state.phoneNumberStateless} />
                 <br/><br/>

@@ -10,8 +10,10 @@ var React = require("re-react"),
 
 /**
  * @typedef I18nPhoneInput~PhoneInputValues
+ * @property {string|number} countryCode
+ *     Selected iso2 country code.
  * @property {string|number} dialCode
- *     Selected dial code (country code).
+ *     Selected dial code.
  * @property {string} phoneNumber
  *     Phone number.
  */
@@ -19,7 +21,7 @@ var React = require("re-react"),
 /**
 * @callback I18nPhoneInput~onValueChange
 * @param {I18nPhoneInput~PhoneInputValues} phoneInputValues
-*     Dial code and phone number input.
+*     Country code, dial code and phone number input.
 */
 
 /**
@@ -50,7 +52,7 @@ var React = require("re-react"),
 *    False or not specified will cause the component to manage state internally.
 *
 * @param {string} [countryCode="us" = USA]
-*     The country code to be selected by default.
+*     The country code corresponding to the dial code for the country to be selected by default.
 * @param {string|number} [dialCode="1" = USA]
 *     The dial code to be selected by default.
 * @param {string} [phoneNumber]
@@ -179,6 +181,7 @@ var I18nPhoneInputStateless = React.createClass({
     */
     _handleValueChange: function (country) {
         this.props.onValueChange({
+            countryCode: country ? country.iso2 : "",
             dialCode: country ? country.dialCode : "",
             phoneNumber: this.props.phoneNumber
         });
@@ -200,7 +203,7 @@ var I18nPhoneInputStateless = React.createClass({
                         data-id={this.props["data-id"] + "-countryFlagList"}
                         countryCodeClassName="dial-code"
                         countryCodeDisplayType={CountryFlagList.CountryCodeTypes.DIAL_CODE}
-                        selectedCountryCode={this.props.dialCode || this.props.countryCode}
+                        selectedCountryCode={this.props.countryCode}
                         onValueChange={this._handleValueChange}
                         open={this.props.open}
                         onToggle={this.props.onToggle}

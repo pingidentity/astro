@@ -111,12 +111,30 @@ describe("I18nPhoneInput", function () {
         ReactTestUtils.Simulate.click(flag);
 
         ReactTestUtils.Simulate.click(afghanistan);
-        expect(component.props.onValueChange).toBeCalledWith({ dialCode: "93", phoneNumber: "" });
+        expect(component.props.onValueChange).toBeCalledWith({ countryCode: "af", dialCode: "93", phoneNumber: "" });
 
         ReactTestUtils.Simulate.click(flag);
 
         ReactTestUtils.Simulate.click(canada);
-        expect(component.props.onValueChange).toBeCalledWith({ dialCode: "1", phoneNumber: "" });
+        expect(component.props.onValueChange).toBeCalledWith({ countryCode: "ca", dialCode: "1", phoneNumber: "" });
+    });
+
+    it("gets correct country when more than one country has the same dial code", function () {
+        var component = getComponent();
+
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var canada = TestUtils.findRenderedDOMNodeWithDataId(component, "country-ca");
+        var unitedStates = TestUtils.findRenderedDOMNodeWithDataId(component, "country-us");
+
+        ReactTestUtils.Simulate.click(flag);
+
+        ReactTestUtils.Simulate.click(canada);
+        expect(component.props.onValueChange).toBeCalledWith({ countryCode: "ca", dialCode: "1", phoneNumber: "" });
+
+        ReactTestUtils.Simulate.click(flag);
+
+        ReactTestUtils.Simulate.click(unitedStates);
+        expect(component.props.onValueChange).toBeCalledWith({ countryCode: "us", dialCode: "1", phoneNumber: "" });
     });
 
     it("handles clearing selected country", function () {
@@ -138,7 +156,8 @@ describe("I18nPhoneInput", function () {
         var noCountry = TestUtils.findRenderedDOMNodeWithDataId(component, "no-country");
 
         ReactTestUtils.Simulate.click(noCountry);
-        expect(component.props.onValueChange).toBeCalledWith({ dialCode: "", phoneNumber: phoneNumber });
+        expect(component.props.onValueChange).toBeCalledWith(
+            { countryCode: "", dialCode: "", phoneNumber: phoneNumber });
     });
 
     it("triggers callback on phone number change", function () {
@@ -182,7 +201,7 @@ describe("I18nPhoneInput", function () {
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 78 }); // n
         expect(componentRef.state.searchString).toBe("can");
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 13 }); // enter - select canada
-        expect(component.props.onValueChange).toBeCalledWith({ dialCode: "1", phoneNumber: "" });
+        expect(component.props.onValueChange).toBeCalledWith({ countryCode: "ca", dialCode: "1", phoneNumber: "" });
         // open flag, enter afg, hit enter, validate Afganistan now selected
         ReactTestUtils.Simulate.click(flag);
         expect(componentRef.state.searchString).toBe("");
@@ -190,7 +209,7 @@ describe("I18nPhoneInput", function () {
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 70 }); // f
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 71 }); // g
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 13 }); // enter - select afganistan
-        expect(component.props.onValueChange).toBeCalledWith({ dialCode: "93", phoneNumber: "" });
+        expect(component.props.onValueChange).toBeCalledWith({ countryCode: "af", dialCode: "93", phoneNumber: "" });
         // open flag, enter ag, validate that no country found
         ReactTestUtils.Simulate.click(flag);
         expect(componentRef.state.searchString).toBe("");

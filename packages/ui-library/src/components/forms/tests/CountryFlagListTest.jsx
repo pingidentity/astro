@@ -160,20 +160,6 @@ describe("CountryFlagList", function () {
         expect(flagInner.className).toContain(selectedIso2);
     });
 
-    it("preselects flag by dialCode as selectedCountryCode", function () {
-        var selectedIso2 = "ca";
-        var selectedDialCode = "1";
-
-        var component = getComponent({
-            selectedCountryCode: selectedDialCode
-        });
-
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
-        var flagInner = TestUtils.findRenderedDOMNodeWithClass(flag, "iti-flag");
-
-        expect(flagInner.className).toContain(selectedIso2);
-    });
-
     it("renders with country flag list closed by default", function () {
         var component = getComponent();
         var list = TestUtils.findRenderedDOMNodeWithDataId(component, "country-flag-list");
