@@ -4,7 +4,8 @@ var React = require("react"),
     classnames = require("classnames"),
     _ = require("underscore"),
     DetailsTooltip = require("../../tooltips/DetailsTooltip.jsx"),
-    Utils = require("../../../util/Utils.js");
+    Utils = require("../../../util/Utils.js"),
+    Translator = require("../../../util/i18n/Translator.js");
 
 /**
 * @enum {string}
@@ -459,7 +460,7 @@ var ConfirmDeleteDialog = React.createClass({
                 positionClassName="bottom left"
                 data-id="delete-confirm-dialog"
                 className="delete-confirm-dialog"
-                title="Confirm Delete"
+                title={Translator.translate("expandablerow.default.title.confirmdelete")}
                 open={true}
                 onToggle={this.props.onCancel}>
 
@@ -470,13 +471,13 @@ var ConfirmDeleteDialog = React.createClass({
                             data-id="cancel-delete"
                             className="secondary"
                             onClick={this.props.onCancel} >
-                        Cancel
+                        {Translator.translate("expandablerow.default.button.cancel")}
                     </button>
                     <button type="button"
                             data-id="confirm-delete"
                             className="primary"
                             onClick={this.props.onDeleteConfirm} >
-                        Confirm
+                        {Translator.translate("expandablerow.default.button.confirm")}
                     </button>
                 </div>
             </DetailsTooltip>);

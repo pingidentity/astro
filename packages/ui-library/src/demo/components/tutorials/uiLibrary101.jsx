@@ -3,18 +3,38 @@ var React = require("react"),
     Tutorial = require("./Tutorial.jsx"),
     Markup = require("../../core/Markup.jsx"),
     ColorPicker = require("../../../components/general/ColorPicker.jsx"),
-    ListView = require("../../../templates/list-view");
-
+    ListView = require("../../../templates/list-view"),
+    FormSelectField = require("../../../components/forms/FormSelectField.jsx"),
+    Translator = require("../../../util/i18n/Translator.js");
 var UILibrary101 = React.createClass({
 
     getInitialState: function () {
         return {
-            pickerColor: "#fff"
+            pickerColor: "#fff",
+            currentLanguage: Translator.currentLanguage
         };
     },
+    languages: [
+        {
+            label: "English",
+            value: "en_us"
+        }, {
+            label: "Vietnamese",
+            value: "vi_vn"
+        }, {
+            label: "Chinese (Traditional)",
+            value: "zh_cn"
+        }],
 
     _handleChange: function (color) {
         this.setState({ pickerColor: color });
+    },
+
+    _handleChangeLanguageChange: function (index, event) {
+        Translator.setLanguage(event.target.value);
+        var state = this.state;
+        state.currentLanguage = event.target.value;
+        this.setState(state);
     },
 
     _handleToggleSearchBar: function () {
@@ -292,7 +312,40 @@ var UILibrary101 = React.createClass({
                     The rest of the assets (fonts, images, etc) in the library should be copied as is into the assets
                      directory of your project.
                 </p>
-
+                <h2>Change UI-Library Language</h2>
+                <p>
+                    UI Library supports i18n for common strings via the translator. The default language is en_us.
+                    You can change the language of UI-Library as follows example.
+                </p>
+                <Markup custom={true}
+                    content={
+                        [
+                        /* eslint-disable */
+                            '// Translator is the global module, you just set current language it once and use it everywhere',
+                            'var translator = require("/src/util/i18n/translator.jsx");',
+                            'translator.setLanguage("vi_vn");'
+                        /* eslint-enable */
+                        ].join("\n")
+                    }
+                />
+                <p>
+                    When you change language to unsupported item or your text is not translated
+                    it will be set to default language(en_us).
+                </p>
+                <div className= "input-row">
+                    <FormSelectField controlled={true}
+                        label="Language"
+                        options={this.languages}
+                        onChange={this._handleChangeLanguageChange.bind(this, 1)}
+                        value={this.state.currentLanguage}
+                    />
+                </div>
+                <p>
+                    You can see the text below is changed when you change the language.
+                </p>
+                <p className="attention">
+                    {Translator.translate("tutorial.exampletranslatedtext")}
+                </p>
                 <h3>
                     Congratulations! You now know everything you need to start using the UI Library in your projects.
                 </h3>
