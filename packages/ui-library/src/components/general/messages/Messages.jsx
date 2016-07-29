@@ -167,7 +167,7 @@ var Message = React.createClass({
         var interval = (this.props.message.duration) ? this.props.message.duration : this.props.defaultTimeout;
 
         if (interval) {
-            this.interval = global.setInterval(this._handleClose, interval);
+            this.interval = global.setInterval(this._handleRemove, interval);
         }
     },
 
