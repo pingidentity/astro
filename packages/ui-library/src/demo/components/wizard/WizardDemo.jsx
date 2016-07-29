@@ -12,10 +12,10 @@ var React = require("react"),
 */
 var WizardDemo = React.createClass({
     BUTTON_LABELS: {
-        labelNext: "next",
-        labelCancel: "cancel",
-        labelDone: "done",
-        labelEdit: "edit"
+        labelNext: "Next",
+        labelCancel: "Cancel",
+        labelDone: "Done",
+        labelEdit: "Edit"
     },
 
     getInitialState: function () {
@@ -31,7 +31,7 @@ var WizardDemo = React.createClass({
         });
     },
 
-    next: function () {
+    _handleNext: function () {
         if (this.state.usePulsing) {
             this.setState({ isLoading: true });
 
@@ -44,7 +44,7 @@ var WizardDemo = React.createClass({
         }
     },
 
-    done: function () {
+    _handleDone: function () {
         if (this.state.usePulsing) {
             this.setState({ isLoading: true });
             setTimeout(function () {
@@ -68,7 +68,7 @@ var WizardDemo = React.createClass({
             <div style={{ float: "left", width: "100%" }}>
                 <div className="input-row">
                     <FormCheckbox
-                        label="Use pulsing"
+                        label="Demonstrate saving animation"
                         onChange={this.toggleUsePulsing}
                         checked={this.state.usePulsing}
                         className="stacked" />
@@ -77,8 +77,9 @@ var WizardDemo = React.createClass({
                 <Choose title="Choose a wizard" {...this.props} {...this.BUTTON_LABELS}
                     onValueChange={this._handlePick}
                     onEdit={this.actions.edit}
-                    onNext={this.next}
-                    onDone={this.done}
+                    onNext={this._handleNext}
+                    onDone={this._handleDone}
+                    onCancel={this._handleDone}
                     showPulsing={this.state.isLoading} >
 
                     <Wizard title="Wizard 1">
