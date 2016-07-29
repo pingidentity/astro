@@ -140,8 +140,7 @@ var ModalButtonDemo = React.createClass({
                             controlled={true}
                             onOpen={this._handleOpen3}
                             onClose={this._handleClose3}
-                            expanded={this.state.modalExpanded3}
-                            closeOnBgClick={true}>
+                            expanded={this.state.modalExpanded3}>
                         <div className = "title">
                             Alert Modal
                         </div>
