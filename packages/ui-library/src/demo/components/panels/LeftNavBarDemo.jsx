@@ -33,7 +33,6 @@ var LeftNavDemo = React.createClass({
     },
 
     render: function () {
-        //the nav bar is styled with position fixed so it's not possible to have a demo for it
         return (
             <LeftNavBar {...this.state}
                 onItemValueChange={this._handleItemClick}

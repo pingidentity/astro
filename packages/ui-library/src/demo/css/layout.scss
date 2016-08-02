@@ -232,6 +232,22 @@ $sidenav-lineheight: 22px;
 			color: $color-elephant;
 			content: 'OUTPUT';
 		}
+		#nav {
+			top: 0;
+			background: none;
+			width: 100%;
+
+			> div {
+				display: none;
+			}
+			&:before{
+				content: "Only one LeftNavBar component may be used per page. Refer to the menu on the left as an example.";
+				display: inline-block;
+				width: 100%;
+				font-size: 16px;
+				padding: 10px 20px;
+			}
+		}
 	}
 }
 input[type=text], input[type=password], textarea {
