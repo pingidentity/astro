@@ -182,7 +182,7 @@ install-node-npm: clean-node
 	tar -xzf $(NPM_FILENAME).tgz --strip=1 -C node/node_modules/npm
 	rm -r $(NPM_FILENAME).tgz
 	rm -rf node_modules
-	$(NPM_EXEC) install
+	$(NPM_EXEC) install --registry=http://art01.corp.pingidentity.com:8081/artifactory/api/npm/npm-virtual/
 
 clean-mvn:
 	rm -f $(MVN_FILENAME)
