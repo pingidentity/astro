@@ -16,36 +16,36 @@ $img-path: '../images/';
 
 // color map - DEPRECATED. Use color vars as they are more reliable
 $colors: (
-	'black': #000,
-	'white': #fff,
-	'active-blue': #2996cc,
-	'active-blue-highlighted': #3ea0d1,
-	'active-blue-inactive': #a9d5eb,
-	'blue-grey': #9bacb4,
-	'cinder-block': #e4e5e5,
-	'critical-red': #ed3a03,
-	'dolphin': #d8dbdc,
-	'elephant': #929aa1,
-	'elderly': #f4f7f9,
-	'grass': #3cb66e,
-	'manatee': #b1b5b8,
-	'midnight': #4b637c,
-	'oitnb': #f89201,
-	'rabbit-fur': #d1d3d4,
-	'required-yellow': #f2bb1a,
-	'rhino': #9ea5a8,
-	'slate': #3d454d,
-	'sonic': #f0f6f7,
-	'stone': #c2c3c4,
-	'stratus': #bcbdbf,
-	'success-green-highlighted': #4aba78,
-	'success-green-inactive': #b1e2c5,
-	'timberwolf': #e8ebed,
-	'verde': #76cc99,
-	'walrus': #575f67,
-	'warning-text': #96702c,
-	'warning-yellow': #ffd057,
-	'warning-icon-yellow': #eeb91c
+    'black': #000,
+    'white': #fff,
+    'active-blue': #2996cc,
+    'active-blue-highlighted': #3ea0d1,
+    'active-blue-inactive': #a9d5eb,
+    'blue-grey': #9bacb4,
+    'cinder-block': #e4e5e5,
+    'critical-red': #ed3a03,
+    'dolphin': #d8dbdc,
+    'elephant': #929aa1,
+    'elderly': #f4f7f9,
+    'grass': #3cb66e,
+    'manatee': #b1b5b8,
+    'midnight': #4b637c,
+    'oitnb': #f89201,
+    'rabbit-fur': #d1d3d4,
+    'required-yellow': #f2bb1a,
+    'rhino': #9ea5a8,
+    'slate': #3d454d,
+    'sonic': #f0f6f7,
+    'stone': #c2c3c4,
+    'stratus': #bcbdbf,
+    'success-green-highlighted': #4aba78,
+    'success-green-inactive': #b1e2c5,
+    'timberwolf': #e8ebed,
+    'verde': #76cc99,
+    'walrus': #575f67,
+    'warning-text': #96702c,
+    'warning-yellow': #ffd057,
+    'warning-icon-yellow': #eeb91c
 );
 
 // color vars - map-get is NOT evaluating propely
@@ -98,7 +98,7 @@ $color-link-text: $color-active-blue;
 
 
 // FONTS
-$font-stack: 'ProximaNovaRegular', Helvetica, Arial, sans-serif;
+$font-stack: 'ProximaNovaRegular', helvetica, arial, sans-serif;
 $font-pn-regular: 'ProximaNovaRegular', helvetica, arial, sans-serif;
 $font-pn-bold: 'ProximaNovaBold', helvetica, arial, sans-serif;
 $font-pn-light: 'ProximaNovaLight', helvetica, arial, sans-serif;

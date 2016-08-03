@@ -1,145 +1,162 @@
 
 .details-page {
-	.details-url {
-		margin: -10px 0 15px 0;
-		font-size: 14px;
-		color: $color-stone;
-		word-break: break-all;
-		display: block;
-	}
-	.details-actions {
-		position: relative;
-		float: right;
-		border: 1px solid $color-dolphin;
-		padding: 10px;
-		height: 20px;
-		margin: 0 0 0 10px;
+    .details-url {
+        margin: -10px 0 15px 0;
+        font-size: 14px;
+        color: $color-stone;
+        word-break: break-all;
+        display: block;
+    }
+    .details-actions {
+        position: relative;
+        float: right;
+        border: 1px solid $color-dolphin;
+        padding: 10px;
+        height: 20px;
+        margin: 0 0 0 10px;
 
-		&.status-open {
-			padding-right: 200px;
-		}
-		&.status-active {
-			border: none;
-			padding: 0;
-		}
-		.cancel-tooltip {
-			position: absolute;
-			right: 123px;
-			bottom: 5px;
-		}
-		.resend-tooltip {
-			position: absolute;
-			right: 30px;
-			bottom: 4px;
-		}
-		.inline-btn-tooltip {
-			right: 41px;
-			top: 9px;
-		}
-		&.noborder {
-			border: none;
-			background: none;
-			padding: 0;
-		}
-	}
-	.details-content {
-		margin: 15px 0 0 0;
-		border-top: 1px solid $color-dolphin;
-		padding: 40px 0 0 30px;
-	}
-	.details-section-title {
-		text-transform: uppercase;
-		font-size: 15px;
-		font-family: $font-pn-semibold;
-		color: $color-blue-grey;
-		padding: 0 0 10px 0;
-		margin: 0 0 30px 0;
-		border-bottom: 1px solid $color-manatee;
-	}
-	.details-section {
-		padding: 30px 0 0 30px;
-	}
-	.details-col-of-2, .details-col-of-3, .details-col-of-4, .details-col-of-5 {
-		float: left;
-	}
-	.details-col-of-1, .details-col-of-2, .details-col-of-3, .details-col-of-4, .details-col-of-5 {
-		margin: 0 0 30px 0;
+        &.status-open {
+            padding-right: 200px;
+        }
+        &.status-active {
+            border: none;
+            padding: 0;
+        }
+        .cancel-tooltip {
+            position: absolute;
+            right: 123px;
+            bottom: 5px;
+        }
+        .resend-tooltip {
+            position: absolute;
+            right: 30px;
+            bottom: 4px;
+        }
+        .inline-btn-tooltip {
+            right: 41px;
+            top: 9px;
+        }
+        &.noborder {
+            border: none;
+            background: none;
+            padding: 0;
+        }
+    }
+    .details-content {
+        margin: 15px 0 0;
+        border-top: 1px solid $color-dolphin;
+        padding: 40px 0 0 30px;
+    }
+    .details-section-title {
+        text-transform: uppercase;
+        font-size: 15px;
+        font-family: $font-pn-semibold;
+        color: $color-blue-grey;
+        padding: 0 0 10px;
+        margin: 0 0 30px;
+        border-bottom: 1px solid $color-manatee;
+    }
+    .details-section {
+        padding: 30px 0 0 30px;
+    }
+    .details-col-of-2,
+    .details-col-of-3,
+    .details-col-of-4,
+    .details-col-of-5 {
+        float: left;
+    }
+    .details-col-of-1,
+    .details-col-of-2,
+    .details-col-of-3,
+    .details-col-of-4,
+    .details-col-of-5 {
+        margin: 0 0 30px;
 
-		.input-row {
-			margin-right: 15px;
-		}
-	}
-	.details-col-of-1 {
-		max-width: 100%;
-	}
-	.details-col-of-2 {
-		max-width: 50%;
-	}
-	.details-col-of-3 {
-		max-width: 33%;
-	}
+        .input-row {
+            margin-right: 15px;
+        }
+    }
+    .details-col-of-1 {
+        max-width: 100%;
+    }
+    .details-col-of-2 {
+        max-width: 50%;
+    }
+    .details-col-of-3 {
+        max-width: 33%;
+    }
 
-	$btn-width: 85px;
+    $btn-width: 85px;
 
-	.reject-btn, .approve-btn, .resend-btn {
-		padding: 0 15px;
-		@include border-radius(2px);
-	}
-	.reject-btn, .approve-btn, .cancel-btn, .resend-btn {
-		position: absolute;
-		top: 5px;
-		bottom: 5px;
-		text-align: center;
-		font-size: 16px;
-		line-height: 30px;
+    .reject-btn,
+    .approve-btn,
+    .resend-btn {
+        padding: 0 15px;
 
-		&:after {
-			font-family: $icon-font;
-			position: absolute;
-			top: 7px;
-			left: 13px;
-			right: auto;
-			font-size: 16px;
-			line-height: 1em;
-		}
-		&:hover {
-			text-decoration: none;
-		}
-	}
-	.reject-btn, .cancel-btn {
-		right: 130px;
-	}
-	.approve-btn, .resend-btn {
-		padding-left: 38px;
-		right: 5px;
-	}
-	.reject-btn, .approve-btn, .resend-btn {
-		&:hover {
-			@include opacity(0.7);
-		}
-	}
-	.reject-btn {
-		color: $color-white;
-		background-color: $color-stratus;
+        @include border-radius(2px);
+    }
+    .reject-btn,
+    .approve-btn,
+    .cancel-btn,
+    .resend-btn {
+        position: absolute;
+        top: 5px;
+        bottom: 5px;
+        text-align: center;
+        font-size: 16px;
+        line-height: 30px;
 
-		&:after {
-			content: '\58';
-		}
-	}
-	.approve-btn {
-		color: $color-white;
-		background-color: $color-success;
+        &:after {
+            font-family: $icon-font;
+            position: absolute;
+            top: 7px;
+            left: 13px;
+            right: auto;
+            font-size: 16px;
+            line-height: 1em;
+        }
+        &:hover {
+            text-decoration: none;
+        }
+    }
+    .reject-btn,
+    .cancel-btn {
+        right: 130px;
+    }
+    .approve-btn,
+    .resend-btn {
+        padding-left: 38px;
+        right: 5px;
+    }
+    .reject-btn,
+    .approve-btn,
+    .resend-btn {
+        &:hover {
+            @include opacity(0.7);
+        }
+    }
+    .reject-btn {
+        color: $color-white;
+        background-color: $color-stratus;
 
-		&:after {
-			content: '\70';
-		}
-	}
-	.resend-btn {
-		color: $color-white;
-		background-color: $color-active;
+        &:after {
+            content: '\58';
+        }
+    }
+    .approve-btn {
+        color: $color-white;
+        background-color: $color-success;
 
-		&:after {
-			content: '\72';
-		}
-	}
+        &:after {
+            content: '\70';
+        }
+    }
+    .resend-btn {
+        color: $color-white;
+        background-color: $color-active;
+
+        &:after {
+            content: '\72';
+        }
+    }
 }

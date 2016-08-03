@@ -2,93 +2,98 @@
 @import 'globals';
 
 label {
-	&.input-checkbox {
-		input[type=checkbox] {
-			visibility: visible;
-		}
-		.icon {
-			background-color: none;
-			border: none;
+    &.input-checkbox {
+        input[type=checkbox] {
+            visibility: visible;
+        }
+        .icon {
+            background-color: none;
+            border: none;
 
-			height: 0;
-			width: 0;
+            height: 0;
+            width: 0;
 
-			&:after {
-				content: none !important;
-			}
-		}
-	}
-	&.input-radio {
-		input[type=radio] {
-			visibility: visible;
-			margin: 0 4px 2px 0;
-		}
-		.circle {
-			position: absolute;
-			width: 0;
-			height: 0;
-			border: none;
+            &:after {
+                content: none !important;
+            }
+        }
+    }
+    &.input-radio {
+        input[type=radio] {
+            visibility: visible;
+            margin: 0 4px 2px 0;
+        }
+        .circle {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: none;
 
-			&:after {
-				content: none;
-			}
-		}
-	}
+            &:after {
+                content: none;
+            }
+        }
+    }
 }
+
 .modal {
-	.modal-header {
-		.close-modal {
-			color: $color-link-text;
-		}
-	}
-	&.show {
-		border: 1px solid $color-stratus;
+    .modal-header {
+        .close-modal {
+            color: $color-link-text;
+        }
+    }
+    &.show {
+        border: 1px solid $color-stratus;
 
-		&:after {
-			// ie8 bg fix
-			background/*\**/: none\9;
-		}
-	}
+        &:after {
+            // ie8 bg fix
+            background/*\**/: none\9;
+        }
+    }
 }
+
 .input-select {
-	margin-left: 0;
-	padding: 0;
+    margin-left: 0;
+    padding: 0;
 }
-a.input-toggle {
-	width: 16px;
-	border-left: 28px solid $color-midnight;
 
-	&.selected {
-		border-left: none;
-		border-right: 28px solid $color-midnight;
-	}
+a.input-toggle {
+    width: 16px;
+    border-left: 28px solid $color-midnight;
+
+    &.selected {
+        border-left: none;
+        border-right: 28px solid $color-midnight;
+    }
 }
 
 .required {
 
-	input[type=text], textarea {
-		border-left: 5px solid $color-input-required;
-	}
+    input[type=text],
+    textarea {
+        border-left: 5px solid $color-input-required;
+    }
 
-	&.input-row, &.input-select {
-		border-left: 5px solid $color-input-required;
-	}
+    &.input-row,
+    &.input-select {
+        border-left: 5px solid $color-input-required;
+    }
 }
 // ie8
 .rocker-button {
-	background: transparent;
-	border: none;
-	label {
-		float: none;
-		&.right {
-			border-left: none;
-		}
-	}
-	input {
-		display: block;
-	}
-	.selected {
-		display: none;
-		background: transparent;
-	}
+    background: transparent;
+    border: none;
+    label {
+        float: none;
+        &.right {
+            border-left: none;
+        }
+    }
+    input {
+        display: block;
+    }
+    .selected {
+        display: none;
+        background: transparent;
+    }
 }

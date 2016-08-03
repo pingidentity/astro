@@ -17,6 +17,7 @@
             color: $color-midnight;
             pointer-events: none;
             text-transform: none;
+
             @include transition(all 0.3s);
         }
     }
@@ -57,6 +58,7 @@
             left: 0;
             right: 0;
             overflow: hidden;
+
             @include border-radius(3px);
 
             &:before {
@@ -69,6 +71,7 @@
 
                 box-sizing: border-box;
                 border: 1px solid rgba($color-black, 0.1);
+
                 @include background-clip(content-box);
                 @include border-radius(3px);
             }
@@ -82,114 +85,140 @@
         width: 213px;
         height: 173px;
         z-index: 1;
-    	padding: 10px;
-    	background: $color-sonic;
+        padding: 10px;
+        background: $color-sonic;
+
         @include animation(fade-in 0.3s);
     }
 }
 
-.cp, .cp *, .cp-saturation-spectrum, .cp-saturation-spectrum *, .cp-hue-spectrum, .cp-hue-spectrum * {
+.cp,
+.cp *,
+.cp-saturation-spectrum,
+.cp-saturation-spectrum *,
+.cp-hue-spectrum,
+.cp-hue-spectrum * {
     box-sizing: border-box;
 }
-.cp-saturation-spectrum, .cp-hue-spectrum {
+
+.cp-saturation-spectrum,
+.cp-hue-spectrum {
     position: relative;
     display: inline-block;
 }
-.cp-saturation-white, .cp-saturation-black {
+
+.cp-saturation-white,
+.cp-saturation-black {
     position: relative;
     width: 100%;
     height: 100%;
 }
+
 .cp-saturation-white {
-    background: linear-gradient(to right, $color-white, rgba(204,154,129,0));
+    background: linear-gradient(to right, $color-white, rgba(204, 154, 129, 0));
 }
+
 .cp-saturation-black {
-    background: linear-gradient(to top, $color-black, rgba(204,154,129,0));
+    background: linear-gradient(to top, $color-black, rgba(204, 154, 129, 0));
 }
+
 .cp-saturation-spectrum {
     cursor: pointer;
 
-	.cp-saturation-drag {
-	    display: none;
-	    border: 1px solid $color-white;
-	    border-radius: 10px;
-	    position: absolute;
-	    top: 0px;
-	    left: 0px;
+    .cp-saturation-drag {
+        display: none;
+        border: 1px solid $color-white;
+        border-radius: 10px;
+        position: absolute;
+        top: 0;
+        left: 0;
 
-		.inner {
-		    position: relative;
-		    width: 100%;
-		    height: 100%;
-		    border: 1px solid $color-black;
-		    border-radius: 10px;
-		}
-	}
+        .inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border: 1px solid $color-black;
+            border-radius: 10px;
+        }
+    }
 }
 
 .cp-hue-spectrum {
     background: linear-gradient(to bottom, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);
     cursor: pointer;
 
-	.cp-hue-drag {
-	    display: none;
-	    position: absolute;
-	    top: 0px;
-	    left: 0px;
-	    width: 100%;
-	    border: 1px solid #f0f6f7;
-	}
+    .cp-hue-drag {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        border: 1px solid #f0f6f7;
+    }
 }
 
-.react-color-picker, .react-color-picker *, .react-color-picker__saturation-spectrum, .react-color-picker__saturation-spectrum *, .react-color-picker__hue-spectrum, .react-color-picker__hue-spectrum * {
+.react-color-picker,
+.react-color-picker *,
+.react-color-picker__saturation-spectrum,
+.react-color-picker__saturation-spectrum *,
+.react-color-picker__hue-spectrum,
+.react-color-picker__hue-spectrum * {
     box-sizing: border-box;
 }
-.react-color-picker__saturation-spectrum, .react-color-picker__hue-spectrum {
+
+.react-color-picker__saturation-spectrum,
+.react-color-picker__hue-spectrum {
     position: relative;
     display: inline-block;
 }
-.react-color-picker__saturation-white, .react-color-picker__saturation-black {
+
+.react-color-picker__saturation-white,
+.react-color-picker__saturation-black {
     position: relative;
     width: 100%;
     height: 100%;
 }
+
 .react-color-picker__saturation-white {
-    background: linear-gradient(to right, $color-white, rgba(204,154,129,0));
+    background: linear-gradient(to right, $color-white, rgba(204, 154, 129, 0));
 }
+
 .react-color-picker__saturation-black {
-    background: linear-gradient(to top, $color-black, rgba(204,154,129,0));
+    background: linear-gradient(to top, $color-black, rgba(204, 154, 129, 0));
 }
+
 .react-color-picker__saturation-spectrum {
     cursor: pointer;
 
-	.react-color-picker__saturation-drag {
-	    display: none;
-	    border: 1px solid $color-white;
-	    border-radius: 10px;
-	    position: absolute;
-	    top: 0px;
-	    left: 0px;
+    .react-color-picker__saturation-drag {
+        display: none;
+        border: 1px solid $color-white;
+        border-radius: 10px;
+        position: absolute;
+        top: 0;
+        left: 0;
 
-		.react-color-picker__saturation-inner, .react-color-picker__hue-inner {
-		    position: relative;
-		    width: 100%;
-		    height: 100%;
-		    border: 1px solid $color-black;
-		    border-radius: 10px;
-		}
-	}
+        .react-color-picker__saturation-inner,
+        .react-color-picker__hue-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border: 1px solid $color-black;
+            border-radius: 10px;
+        }
+    }
 }
 
 .react-color-picker__hue-spectrum {
     background: linear-gradient(to bottom, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);
     cursor: pointer;
 
-	.react-color-picker__hue-drag {
-	    display: none;
-	    position: absolute;
-	    top: 0px;
-	    left: 0px;
-	    width: 100%;
-	    border: 1px solid $color-black;
-	}
+    .react-color-picker__hue-drag {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        border: 1px solid $color-black;
+    }
 }

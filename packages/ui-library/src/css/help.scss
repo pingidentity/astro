@@ -10,6 +10,7 @@
     background: transparent;
     cursor: pointer;
     line-height: 1em;
+
     &.inline {
         &:hover {
             .icon-help {
@@ -24,7 +25,7 @@
             color: $color-blue-grey;
             display: inline-block;
             &:before { //change to icon-help-rounded
-                content: "\48";
+                content: '\48';
             }
         }
     }
@@ -66,6 +67,7 @@
             font-weight: normal;
             line-height: 1.2em;
             font-family: $font-pn-regular;
+
             @include border-radius(4px);
 
             &:before {
@@ -95,7 +97,8 @@
             text-decoration: underline;
         }
     }
-    &:hover, &.show {
+    &:hover,
+    &.show {
         .tooltip-text {
             display: block;
         }
@@ -124,7 +127,8 @@
             }
         }
     }
-    &.medium-tooltip, &.inline { //inline added to keep same size with removal of medium-tooltip class from Form labels. Will remove when dynamic
+    &.medium-tooltip,
+    &.inline { //inline added to keep same size with removal of medium-tooltip class from Form labels. Will remove when dynamic
         $width: 260px;
 
         .tooltip-text {
@@ -262,9 +266,9 @@
         }
         &.input-toggle {
             .tooltip-text {
-        		top: 4px;
-        		left: 47px;
-        	}
+                top: 4px;
+                left: 47px;
+            }
         }
         &.bottom {
             top: 100%;
@@ -276,7 +280,7 @@
                 .tooltip-text-content {
                     top: auto;
                     bottom: auto;
-                    margin: 7px 0 0 0;
+                    margin: 7px 0 0;
 
                     &:before {
                         border-color: transparent transparent $color-critical-red transparent;
@@ -289,7 +293,7 @@
                         left: 0;
                         height: 10px;
                         top: -8px;
-                        width: 80%
+                        width: 80%;
                     }
                 }
             }

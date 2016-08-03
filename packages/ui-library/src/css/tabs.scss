@@ -83,7 +83,8 @@
                 border-bottom: 5px solid $color-active;
                 cursor: default;
                 margin-bottom: 1px;
-                @include transition(all 0.4s ease-in) ;
+
+                @include transition(all 0.4s ease-in);
             }
         }
     }

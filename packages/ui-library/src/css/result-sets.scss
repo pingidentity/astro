@@ -1,403 +1,433 @@
 .no-results {
-	margin-top: 30px;
-	line-height: 40px;
-	padding-top: 25px;
-	border-top: 1px solid $color-input-text;
-	font-family: $font-pn-regular;
-	font-size: 15px;
+    margin-top: 30px;
+    line-height: 40px;
+    padding-top: 25px;
+    border-top: 1px solid $color-input-text;
+    font-family: $font-pn-regular;
+    font-size: 15px;
 
-	&.inline {
-		line-height: 28px;
-	}
-	input[type=button], button {
-		margin: 0 0 0 30px;
-	}
-	.result-set {
-		display: none;
-	}
+    &.inline {
+        line-height: 28px;
+    }
+    input[type=button],
+    button {
+        margin: 0 0 0 30px;
+    }
+    .result-set {
+        display: none;
+    }
 }
+
 .result-count {
-	display: inline-block;
-	margin: 0 0 0 30px;
-	line-height: 24px;
-	font-size: 16px;
-	color: $color-elephant;
+    display: inline-block;
+    margin: 0 0 0 30px;
+    line-height: 24px;
+    font-size: 16px;
+    color: $color-elephant;
 }
 
 
 // V2 ------------------------------------------------------------------------------------------------------------------
 .result-set {
-	$item-height: 60px;
-	$button-height: 32px;
-	$button-width: 45px;
-	$button-top: 22px;
-	$button-bottom: 6px;
+    $item-height: 60px;
+    $button-height: 32px;
+    $button-width: 45px;
+    $button-top: 22px;
+    $button-bottom: 6px;
 
-	position: relative;
-	margin: 20px 0 0 0;
+    position: relative;
+    margin: 20px 0 0;
 
-	.item {
-		position: relative;
-		background-color: $color-elderly;
-		border: 1px solid $color-elderly;
-		margin: 0 0 12px 0;
-		max-height: $item-height;
-		@include border-radius(2px);
-		@include transition(all 0.1s);
+    .item {
+        position: relative;
+        background-color: $color-elderly;
+        border: 1px solid $color-elderly;
+        margin: 0 0 12px;
+        max-height: $item-height;
 
-		.collapsed-content {
-			position: relative;
-			box-sizing: border-box;
-			height: 60px;
-			padding: 15px 0 0 34px;
-		}
-		&.title-only {
-			.collapsed-content {
-				padding-top: 23px;
-			}
-		}
-		.expanded-content {
-			position: relative;
-			padding: 0 75px 30px 30px;
-			min-height: 3*$button-height - 4px;
-			position: relative;
+        @include border-radius(2px);
+        @include transition(all 0.1s);
 
-			.delete-confirm-dialog {
-				position: absolute;
-			    bottom: 0;
-			    right: 0;
-			}
-		}
-		.item-title {
-			font-size: 17px;
-			line-height: 1em;
-			font-weight: normal;
-			font-family: $font-pn-regular;
-			color: $color-slate;
-			margin-right: $button-width;
-			@include text-truncate;
-		}
-		.item-sub-title {
-			font-size: 13px;
-			line-height: 1em;
-			font-weight: normal;
-			font-family: $font-pn-regular;
-			color: $color-elephant;
-			margin-top: 2px;
-			margin-right: $button-width;
-			@include text-truncate;
-		}
-		.item-image {
-			position: absolute;
-			left: 10px;
-			top: 10px;
-			max-height: 42px;
-			max-width: 42px;
-		}
-		&.has-image {
-			.collapsed-content {
-				padding-left: 76px;
-			}
-		}
-		.row-accessories {
-			position: absolute;
-			right: 65px;
-			top: 0px;
-			bottom: 0;
+        .collapsed-content {
+            position: relative;
+            box-sizing: border-box;
+            height: 60px;
+            padding: 15px 0 0 34px;
+        }
+        &.title-only {
+            .collapsed-content {
+                padding-top: 23px;
+            }
+        }
+        .expanded-content {
+            position: relative;
+            padding: 0 75px 30px 30px;
+            min-height: 3 * $button-height - 4px;
 
-			.button, input[type=button], button, a, .input-toggle, .status {
-				display: inline-block;
-				vertical-align: top;
-				margin: 30px 0 0 20px;
-				@include transform(translateY(-50%));
-			}
-			.button + .button, input[type=button], button {
-				& + .button, & + .button, & + input[type=button], & + button {
-					margin-left: 10px;
-				}
-			}
-			.details-tooltip {
-				.details-content {
-					margin-top: 35px;
-				}
-			}
-			.input-toggle {
-				a.toggle {
-					margin: 0;
-					@include transform(translateY(0));
-				}
-			}
-		}
-		.expand-btn, .delete-btn, .edit-btn, .view-btn, .no-edit, .btn-fill {
-			background-color: $color-chilly;
-			position: absolute;
-			width: $button-width;
-			text-align: center;
-			right: 0;
-			padding: $button-top 0 $button-bottom 0;
+            .delete-confirm-dialog {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+            }
+        }
+        .item-title {
+            font-size: 17px;
+            line-height: 1em;
+            font-weight: normal;
+            font-family: $font-pn-regular;
+            color: $color-slate;
+            margin-right: $button-width;
 
-			&:after {
-				text-transform: none;
-				font-size: 18px;
-				font-family: 'iconfont';
-				color: $color-walrus;
-			}
-		}
-		.expand-btn, .delete-btn, .edit-btn,
-		.view-btn // deprecated
-		{
-			&:hover {
-				text-decoration: none;
-				@include opacity(0.85);
-			}
-		}
-		.expand-btn {
-			top: 0;
-			bottom: 0;
-			height: $button-height;
+            @include text-truncate;
+        }
+        .item-sub-title {
+            font-size: 13px;
+            line-height: 1em;
+            font-weight: normal;
+            font-family: $font-pn-regular;
+            color: $color-elephant;
+            margin-top: 2px;
+            margin-right: $button-width;
 
-			&:after {
-				content: '\45';
-			}
-			&:hover {
-				text-decoration: none;
-			}
-		}
-		.delete-btn {
-			bottom: 0;
-			height: $button-height;
+            @include text-truncate;
+        }
+        .item-image {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            max-height: 42px;
+            max-width: 42px;
+        }
+        &.has-image {
+            .collapsed-content {
+                padding-left: 76px;
+            }
+        }
+        .row-accessories {
+            position: absolute;
+            right: 65px;
+            top: 0;
+            bottom: 0;
 
-			&:after {
-				content: '\64';
-			}
-		}
-		.edit-btn {
-			&:after {
-				content: '\65';
-			}
-		}
-		.view-btn {
-			&:after {
-				content: '\56';
-				font-size: 13px;
-			}
-		}
-		.edit-btn, .view-btn,
-		.no-edit // deprecated
-		{
-			top: 1px;
-			bottom: $button-height + $button-top + 7px;
-			padding: 0;
+            .button,
+            input[type=button],
+            button,
+            a,
+            .input-toggle,
+            .status {
+                display: inline-block;
+                vertical-align: top;
+                margin: 30px 0 0 20px;
 
-			&:after {
-				position: absolute;
-				top: 50%;
-				left: 0;
-				right: 0;
-				margin: -10px 0 0 0;
-			}
-		}
-		&.expanded {
-			background-color: $color-white;
-			max-height: 4000px;
-			border: 1px solid $color-rabbit-fur;
-			@include transition(max-height 1s);
+                @include transform(translateY(-50%));
+            }
+            .button + .button,
+            input[type=button],
+            button {
+                & + .button,
+                & + .button,
+                & + input[type=button],
+                & + button {
+                    margin-left: 10px;
+                }
+            }
+            .details-tooltip {
+                .details-content {
+                    margin-top: 35px;
+                }
+            }
+            .input-toggle {
+                a.toggle {
+                    margin: 0;
 
-			.expand-btn {
-				&:after {
-					font-family: 'iconfont';
-					content: '\63';
-				}
-			}
-		}
-		&.no-edit {
-			.edit-btn {
-				pointer-events: none;
+                    @include transform(translateY(0));
+                }
+            }
+        }
+        .expand-btn,
+        .delete-btn,
+        .edit-btn,
+        .view-btn,
+        .no-edit,
+        .btn-fill {
+            background-color: $color-chilly;
+            position: absolute;
+            width: $button-width;
+            text-align: center;
+            right: 0;
+            padding: $button-top 0 $button-bottom 0;
 
-				&:after {
-					content: '';
-				}
-				&:hover {
-					@include opacity(1);
-				}
-			}
-		}
-		&.no-delete {
-			.edit-btn {
-				bottom: 0;
-			}
-			.resend-tooltip {
-				position: absolute;
-				top: 0;
-				right: 0;
+            &:after {
+                text-transform: none;
+                font-size: 18px;
+                font-family: 'iconfont';
+                color: $color-walrus;
+            }
+        }
+        .expand-btn,
+        .delete-btn,
+        .edit-btn,
+        .view-btn {
+            &:hover {
+                text-decoration: none;
 
-				&.bottom {
-					position: absolute;
-					bottom: 0;
-					top: auto;
-				}
-			}
-		}
-		&.no-edit {
-			.btn-fill {
-				top: 1px;
-				bottom: 61px;
-			}
-			&.no-delete {
-				.btn-fill {
-					bottom: 1px;
-				}
-			}
-		}
-		&.waiting {
-			&:after {
-				content: '';
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				left: 0;
-				right: 0;
-				background-color: $color-white;
-				@include opacity(0.6);
-			}
-		}
-		&.draggable {
-			.expanded-content {
-				padding-left: 45px;
-			}
-			.item-title, .item-sub-title {
-				margin-left: 25px;
-			}
-			.grip {
-				position: absolute;
-				top: 21px;
-				left: 20px;
-				@include grab-cursor;
+                @include opacity(0.85);
+            }
+        }
+        .expand-btn {
+            top: 0;
+            bottom: 0;
+            height: $button-height;
 
-				&:before {
-					content: '\47';
-					text-transform: none;
-					font-size: 18px;
-					font-family: 'iconfont';
-					color: $color-stone;
-				}
-			}
-			.row.dragTop {
-				border-top: 3px solid $color-active-blue;
-			}
-			.row.dragBottom, .row.dragTop.dragBottom {
-				border-bottom: 3px solid $color-active-blue;
-			}
-		}
-	}
-	.result-section-title {
-		font-family: $font-pn-semibold;
-		font-size: 16px;
-		color: $color-blue-grey;
-		margin: 30px 0 10px 0;
-	}
-	.result-set-index, // prefered
-	.item-head // deprecated
-	{
-		margin: 5px auto;
-		font-weight: bold;
-		text-align: center;
-		color: $color-midnight;
-	}
+            &:after {
+                content: '\45';
+            }
+            &:hover {
+                text-decoration: none;
+            }
+        }
+        .delete-btn {
+            bottom: 0;
+            height: $button-height;
+
+            &:after {
+                content: '\64';
+            }
+        }
+        .edit-btn {
+            &:after {
+                content: '\65';
+            }
+        }
+        .view-btn {
+            &:after {
+                content: '\56';
+                font-size: 13px;
+            }
+        }
+        .edit-btn,
+        .view-btn,
+        .no-edit {
+            top: 1px;
+            bottom: $button-height + $button-top + 7px;
+            padding: 0;
+
+            &:after {
+                position: absolute;
+                top: 50%;
+                left: 0;
+                right: 0;
+                margin: -10px 0 0 0;
+            }
+        }
+        &.expanded {
+            background-color: $color-white;
+            max-height: 4000px;
+            border: 1px solid $color-rabbit-fur;
+
+            @include transition(max-height 1s);
+
+            .expand-btn {
+                &:after {
+                    font-family: 'iconfont';
+                    content: '\63';
+                }
+            }
+        }
+        &.no-edit {
+            .edit-btn {
+                pointer-events: none;
+
+                &:after {
+                    content: '';
+                }
+                &:hover {
+                    @include opacity(1);
+                }
+            }
+        }
+        &.no-delete {
+            .edit-btn {
+                bottom: 0;
+            }
+            .resend-tooltip {
+                position: absolute;
+                top: 0;
+                right: 0;
+
+                &.bottom {
+                    position: absolute;
+                    bottom: 0;
+                    top: auto;
+                }
+            }
+        }
+        &.no-edit {
+            .btn-fill {
+                top: 1px;
+                bottom: 61px;
+            }
+            &.no-delete {
+                .btn-fill {
+                    bottom: 1px;
+                }
+            }
+        }
+        &.waiting {
+            &:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: $color-white;
+
+                @include opacity(0.6);
+            }
+        }
+        &.draggable {
+            .expanded-content {
+                padding-left: 45px;
+            }
+            .item-title,
+            .item-sub-title {
+                margin-left: 25px;
+            }
+            .grip {
+                position: absolute;
+                top: 21px;
+                left: 20px;
+
+                @include grab-cursor;
+
+                &:before {
+                    content: '\47';
+                    text-transform: none;
+                    font-size: 18px;
+                    font-family: 'iconfont';
+                    color: $color-stone;
+                }
+            }
+            .row.dragTop {
+                border-top: 3px solid $color-active-blue;
+            }
+            .row.dragBottom,
+            .row.dragTop.dragBottom {
+                border-bottom: 3px solid $color-active-blue;
+            }
+        }
+    }
+    .result-section-title {
+        font-family: $font-pn-semibold;
+        font-size: 16px;
+        color: $color-blue-grey;
+        margin: 30px 0 10px;
+    }
+    .result-set-index,
+    .item-head {
+        // item-head deprecated, .result-set-index prefered
+        margin: 5px auto;
+        font-weight: bold;
+        text-align: center;
+        color: $color-midnight;
+    }
 }
 
 
 // V1 - TO BE REMOVED OR MOVED - DEPRECATED OR SITE SPECIFIC -----------------------------------------------------------
 .result-set {
-	$item-height: 75px;
-	$button-height: 47px;
-	$button-width: 50px;
-	$button-top: 28px;
+    $item-height: 75px;
+    $button-height: 47px;
+    $button-width: 50px;
+    $button-top: 28px;
 
-	&.filter {
-		min-height: 950px;
-		margin-right: 45px;
-	}
+    &.filter {
+        min-height: 950px;
+        margin-right: 45px;
+    }
 
-	.loader-container {
-		$loader-hgt: 29px;
+    .loader-container {
+        $loader-hgt: 29px;
 
-		position: fixed;
-		bottom: -30px;
-		z-index: 100;
-		left: 50%;
-		margin: 0 0 0 ceil($layout-nav-width - $loader-hgt)/2;
-		height: $loader-hgt;
-		width: $loader-hgt;
-		background: $color-white;
-		@include border-radius(15px);
-		@include opacity(0);
-		@include transition(all 0.1s);
-		@include box-shadow(1px 1px 3px rgba(0,0, 0, 0.2));
+        position: fixed;
+        bottom: -30px;
+        z-index: 100;
+        left: 50%;
+        margin: 0 0 0 ceil($layout-nav-width - $loader-hgt) / 2;
+        height: $loader-hgt;
+        width: $loader-hgt;
+        background: $color-white;
 
-		.loader {
-			position: absolute;
-			top: 5px;
-			left: 5px;
-		}
-	}
-	.loading {
-		.loader-container {
-			bottom: 30px;
-			@include opacity(1);
-		}
-	}
-	.item {
-		&.expanded {
-			.row-controls {
-				background: none;
-				border-left: 1px solid $color-rabbit-fur;
-				border-bottom: 1px solid $color-rabbit-fur;
-			}
-			.collapsed-content {
-				.row-button {
-					display: block;
-				}
-				.inline-btn-tooltip {
-					position: absolute;
-					top: 17px;
-					right: 188px;
+        @include border-radius(15px);
+        @include opacity(0);
+        @include transition(all 0.1s);
+        @include box-shadow(1px 1px 3px rgba(0,0, 0, 0.2));
 
-					&.bottom {
-						position: absolute;
-						top: auto;
-						bottom: 19px;
-						right: 112px;
-					}
-				}
-			}
-			&.row {
-				border: none;
-				.collapsed-content {
-					height: 1px;
-					padding: 0;
-				}
-			}
-		}
-		&.no-content {
-			.row-controls {
-				right: 0;
-			}
-		}
-		.loader {
-			margin: 0 0 20px 20px;
-		}
-		.item-link {
+        .loader {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+        }
+    }
+    .loading {
+        .loader-container {
+            bottom: 30px;
+
+            @include opacity(1);
+        }
+    }
+    .item {
+        &.expanded {
+            .row-controls {
+                background: none;
+                border-left: 1px solid $color-rabbit-fur;
+                border-bottom: 1px solid $color-rabbit-fur;
+            }
+            .collapsed-content {
+                .row-button {
+                    display: block;
+                }
+                .inline-btn-tooltip {
+                    position: absolute;
+                    top: 17px;
+                    right: 188px;
+
+                    &.bottom {
+                        position: absolute;
+                        top: auto;
+                        bottom: 19px;
+                        right: 112px;
+                    }
+                }
+            }
+            &.row {
+                border: none;
+                .collapsed-content {
+                    height: 1px;
+                    padding: 0;
+                }
+            }
+        }
+        &.no-content {
+            .row-controls {
+                right: 0;
+            }
+        }
+        .loader {
+            margin: 0 0 20px 20px;
+        }
+        .item-link {
             position: absolute;
             right: 80px;
             line-height: 1em;
             font-size: 16px;
             top: 24px;
-			&.close-link {
-				top: inherit;
-				bottom: 24px;
-			}
-			&.edit-link {
+            &.close-link {
+                top: inherit;
+                bottom: 24px;
+            }
+            &.edit-link {
                 .edit {
                     right: 120px;
                     top: 3px;
@@ -406,551 +436,580 @@
                 .icon-view {
                     top: 0;
                     &.hide {
-                        @include opacity(.25);
+                        @include opacity(0.25);
                     }
                     &.disabled {
                         cursor: not-allowed;
                     }
                 }
             }
-			.deleting {
-				display: inline-block;
-				margin-left: 30px;
-				margin-top: -10px;
-				.icon-delete {
-					display: inline-block;
-					margin: 0 0 5px 10px;
-					color: $color-critical-red;
-				}
-			}
-			.undo {
-				display: inline-block;
-				margin-left: 30px;
-				margin-top: -10px;
-				.icon-undo {
-					display: inline-block;
-					margin: 0 0 5px 10px;
-					color: $color-active;
-				}
-				a {
-					&:hover {
-						text-decoration: none;
-					}
-				}
-				.spinner {
-					margin-right: 7px;
-				}
-			}
+            .deleting {
+                display: inline-block;
+                margin-left: 30px;
+                margin-top: -10px;
+                .icon-delete {
+                    display: inline-block;
+                    margin: 0 0 5px 10px;
+                    color: $color-critical-red;
+                }
+            }
+            .undo {
+                display: inline-block;
+                margin-left: 30px;
+                margin-top: -10px;
+                .icon-undo {
+                    display: inline-block;
+                    margin: 0 0 5px 10px;
+                    color: $color-active;
+                }
+                a {
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+                .spinner {
+                    margin-right: 7px;
+                }
+            }
         }
-		.status-deleting {
-			.item-title,
-			.item-sub-title,
-			.grip,
-			.action-status {
-				@include opacity(0.5);
-			}
-			.item-title,
-			.item-sub-title,
-			.action-status {
-				font-style: italic;
-			}
-		}
-		.icon-view {
+        .status-deleting {
+            .item-title,
+            .item-sub-title,
+            .grip,
+            .action-status {
+                @include opacity(0.5);
+            }
+            .item-title,
+            .item-sub-title,
+            .action-status {
+                font-style: italic;
+            }
+        }
+        .icon-view {
             position: absolute;
             top: 30px;
             right: 80px;
             &.hide {
                 display: block;
-                @include opacity(.25);
+
+                @include opacity(0.25);
             }
             &.disabled {
                 cursor: not-allowed;
             }
         }
-		.item-username {
-			font-family: $font-pn-regular;
-			font-size: 17px;
-			color: $color-text;
-			padding-top: 7px;
-		}
-		&.new-user {
-			overflow: visible;
+        .item-username {
+            font-family: $font-pn-regular;
+            font-size: 17px;
+            color: $color-text;
+            padding-top: 7px;
+        }
+        &.new-user {
+            overflow: visible;
 
-			.item-title, .item-sub-title {
-				font-style: italic;
-			}
-			.item-title {
-				color: $color-rhino;
-			}
-		}
-		.row-controls {
-			$btn-width: 75px;
-			background: darken($color-rabbit-fur, 3);
-			border-bottom: 1px solid $color-rabbit-fur;
-			border-left: 1px solid darken($color-rabbit-fur, 8%);
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			right: 51px;
+            .item-title,
+            .item-sub-title {
+                font-style: italic;
+            }
+            .item-title {
+                color: $color-rhino;
+            }
+        }
+        .row-controls {
+            $btn-width: 75px;
+            background: darken($color-rabbit-fur, 3);
+            border-bottom: 1px solid $color-rabbit-fur;
+            border-left: 1px solid darken($color-rabbit-fur, 8%);
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 51px;
 
-			&.noborder {
-				border: none;
-			}
+            &.noborder {
+                border: none;
+            }
 
-			.details {
-				padding: 15px 15px 15px 25px;
-				margin: 0 (2*$btn-width) 0 0;
-				min-width: 132px;
-				font-size: 16px;
-				height: 32px;
+            .details {
+                padding: 15px 15px 15px 25px;
+                margin: 0 (2 * $btn-width) 0 0;
+                min-width: 132px;
+                font-size: 16px;
+                height: 32px;
 
-				.title, .sub-title {
-					line-height: 1em;
-				}
-				.title {
-					margin: 7px 0 0 0;
-					font-size: 16px;
-				}
-				.sub-title {
-					margin: 2px 0 0 0;
-					font-size: 12px;
-					font-style: italic;
-				}
-			}
-			.reject-btn, .approve-btn, .cancel-btn, .resend-btn {
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				width: $btn-width;
-				text-align: center;
-				font-size: 16px;
+                .title,
+                .sub-title {
+                    line-height: 1em;
+                }
+                .title {
+                    margin: 7px 0 0;
+                    font-size: 16px;
+                }
+                .sub-title {
+                    margin: 2px 0 0;
+                    font-size: 12px;
+                    font-style: italic;
+                }
+            }
+            .reject-btn,
+            .approve-btn,
+            .cancel-btn,
+            .resend-btn {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                width: $btn-width;
+                text-align: center;
+                font-size: 16px;
 
-				&:after {
-					font-family: $icon-font;
-					position: absolute;
-					top: 20px;
-					left: 0;
-					right: 0;
-					font-size: 22px;
-				}
-				&:hover {
-					text-decoration: none;
-				}
-			}
-			.reject-btn, .cancel-btn {
-				right: $btn-width;
-			}
-			.approve-btn, .resend-btn {
-				right: 0;
-			}
-			.cancel-btn {
-				padding-top: 27px;
-			}
-			.reject-btn, .approve-btn, .resend-btn {
-				padding-top: 47px;
+                &:after {
+                    font-family: $icon-font;
+                    position: absolute;
+                    top: 20px;
+                    left: 0;
+                    right: 0;
+                    font-size: 22px;
+                }
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+            .reject-btn,
+            .cancel-btn {
+                right: $btn-width;
+            }
+            .approve-btn,
+            .resend-btn {
+                right: 0;
+            }
+            .cancel-btn {
+                padding-top: 27px;
+            }
+            .reject-btn,
+            .approve-btn,
+            .resend-btn {
+                padding-top: 47px;
 
-				&:hover {
-					@include opacity(0.7);
-				}
-			}
-			.reject-btn {
-				color: $color-slate;
-				background-color: $color-stratus;
+                &:hover {
+                    @include opacity(0.7);
+                }
+            }
+            .reject-btn {
+                color: $color-slate;
+                background-color: $color-stratus;
 
-				&:after {
-					content: '\58';
-				}
-			}
-			.approve-btn {
-				color: $color-white;
-				background-color: $color-success;
+                &:after {
+                    content: '\58';
+                }
+            }
+            .approve-btn {
+                color: $color-white;
+                background-color: $color-success;
 
-				&:after {
-					content: '\70';
-				}
-			}
-			.resend-btn {
-				color: $color-white;
-				background-color: $color-active;
+                &:after {
+                    content: '\70';
+                }
+            }
+            .resend-btn {
+                color: $color-white;
+                background-color: $color-active;
 
-				&:after {
-					content: '\72';
-				}
-			}
-			.row-button {
-				position: absolute;
-				right: 73px;
-				top: 18px;
-				display: none;
-				@include transition(all 0.2s);
-			}
-			.input-toggle {
-				position: absolute;
-				right: 25px;
-				top: 20px;
-			}
-		}
-		.no-edit {
-			bottom: 63px;
-		}
-		.expanded-content {
-			.loading-message {
-				float: right;
-				.spinner {
-					margin-right: 7px;
-				}
-			}
-		}
-		.resend-tooltip {
-			position: absolute;
-			top: 0;
-			right: 0;
-		}
-		.cancel-tooltip {
-			position: absolute;
-			right: 65px;
-		}
-	}
+                &:after {
+                    content: '\72';
+                }
+            }
+            .row-button {
+                position: absolute;
+                right: 73px;
+                top: 18px;
+                display: none;
+
+                @include transition(all 0.2s);
+            }
+            .input-toggle {
+                position: absolute;
+                right: 25px;
+                top: 20px;
+            }
+        }
+        .no-edit {
+            bottom: 63px;
+        }
+        .expanded-content {
+            .loading-message {
+                float: right;
+                .spinner {
+                    margin-right: 7px;
+                }
+            }
+        }
+        .resend-tooltip {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        .cancel-tooltip {
+            position: absolute;
+            right: 65px;
+        }
+    }
 }
 
 // POLICY EDITOR
 .result-set-list {
-	margin: 10px 0 0 0;
-	padding: 20px 0 0 30px;
+    margin: 10px 0 0;
+    padding: 20px 0 0 30px;
 
-	.result-set-title {
-		text-transform: uppercase;
-		color: $color-elephant;
-		padding: 0 0 5px 0;
-		margin: 0 0 25px 0;
-		border-bottom: 1px solid $color-elephant;
-		font-family: $font-pn-regular;
-		font-size: 16px;
-		a {
-			margin-left: 20px;
-			font-size: 14px;
-			text-transform: uppercase;
-		}
-		.actions {
-			float: right;
-			a {
-				text-transform: none;
-				color: $color-link-text;
-				font-size: 14px;
-				margin-left: 0;
-			}
-		}
-	}
-	.set-container {
-		width: 100%;
-		clear: both;
-		margin-bottom: 5px;
-		&.active {
-			display: inline-block;
-			@include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
-		}
-		.set {
-			width: 100%;
-			clear: both;
-			display: inline-block;
-			.col-1, .col-2 {
-				width: 50%;
-			}
-			.col-1 {
-				float: left;
-			}
-			.col-2 {
-				float: right;
-			}
-		}
-	}
-	.result-set {
-		margin-top: 5px;
-		.system-status {
-			display: inline-block;
-		}
-		.item {
-			overflow: hidden;
-			&.expanded {
-				overflow-y: scroll;
-			}
-			.expanded-content {
-				.row-status-toggle {
-					left: 0;
-					top: 0;
-					position: relative;
-				}
-			}
-		}
-	}
-	&.active {
-		.set-container {
-			display: block;
-		}
-		.result-set-title {
-			border-bottom: none;
-		}
-		.show-set {
-			@include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
-			@include transform(rotate(180deg));
-		}
-	}
+    .result-set-title {
+        text-transform: uppercase;
+        color: $color-elephant;
+        padding: 0 0 5px;
+        margin: 0 0 25px;
+        border-bottom: 1px solid $color-elephant;
+        font-family: $font-pn-regular;
+        font-size: 16px;
+        a {
+            margin-left: 20px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        .actions {
+            float: right;
+            a {
+                text-transform: none;
+                color: $color-link-text;
+                font-size: 14px;
+                margin-left: 0;
+            }
+        }
+    }
+    .set-container {
+        width: 100%;
+        clear: both;
+        margin-bottom: 5px;
+
+        &.active {
+            display: inline-block;
+
+            @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
+        }
+        .set {
+            width: 100%;
+            clear: both;
+            display: inline-block;
+
+            .col-1,
+            .col-2 {
+                width: 50%;
+            }
+            .col-1 {
+                float: left;
+            }
+            .col-2 {
+                float: right;
+            }
+        }
+    }
+    .result-set {
+        margin-top: 5px;
+        .system-status {
+            display: inline-block;
+        }
+        .item {
+            overflow: hidden;
+            &.expanded {
+                overflow-y: scroll;
+            }
+            .expanded-content {
+                .row-status-toggle {
+                    left: 0;
+                    top: 0;
+                    position: relative;
+                }
+            }
+        }
+    }
+    &.active {
+        .set-container {
+            display: block;
+        }
+        .result-set-title {
+            border-bottom: none;
+        }
+        .show-set {
+            @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
+            @include transform(rotate(180deg));
+        }
+    }
 }
 
-.show-set, .show-condition {
-	font-size: 12px;
-	padding: 0;
-	position: absolute;
-	left: -4px;
-	top: 4px;
-	&.expanded {
-		@include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
-		@include transform(rotate(180deg));
-	}
-	.data-col-of-4 {
-		max-width: 25%;
-	}
-	.data-col-of-5 {
-		max-width: 20%;
-	}
+.show-set,
+.show-condition {
+    font-size: 12px;
+    padding: 0;
+    position: absolute;
+    left: -4px;
+    top: 4px;
+    &.expanded {
+        @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
+        @include transform(rotate(180deg));
+    }
+    .data-col-of-4 {
+        max-width: 25%;
+    }
+    .data-col-of-5 {
+        max-width: 20%;
+    }
 }
+
 .condition-title {
-	position: relative;
-	padding-left: 21px;
-	cursor: pointer;
+    position: relative;
+    padding-left: 21px;
+    cursor: pointer;
 
-	&.active {
-		.show-condition {
-			@include rotate(-180deg);
-		}
-	}
+    &.active {
+        .show-condition {
+            @include rotate(-180deg);
+        }
+    }
 }
+
 .condition-list {
-	margin-right: 20px;
-	padding-right: 20px;
+    margin-right: 20px;
+    padding-right: 20px;
 
-	.condition-title {
-		margin: 0;
-		padding: 15px 0 15px 30px;
-		border-style: solid;
-		border-width: 1px 0 0 0;
-		border-color: $color-elderly;
-		text-transform: uppercase;
-		color: $color-rhino;
-		font-size: 14px;
-		font-family: $font-pn-regular;
-		font-weight: 600;
+    .condition-title {
+        margin: 0;
+        padding: 15px 0 15px 30px;
+        border-style: solid;
+        border-width: 1px 0 0;
+        border-color: $color-elderly;
+        text-transform: uppercase;
+        color: $color-rhino;
+        font-size: 14px;
+        font-family: $font-pn-regular;
+        font-weight: 600;
 
-		&:hover {
-			cursor: pointer;
-		}
-		&:last-child {
-			border-bottom: 1px solid $color-elderly;
-		}
-		.show-condition {
-			top: 19px;
-			left: 5px;
-		}
-		.show-condition, .value {
-			text-transform: none;
-			color: $color-input-text;
-		}
-		.value {
-			font-weight: normal;
-			&:before {
-				// only want ':' to show when condition-title followed by value
-				content: ': ';
-				color: $color-rhino;
-				font-size: 14px;
-				font-family: $font-pn-regular;
-				font-weight: 600;
-			}
-		}
-		&.active {
-			.show-condition {
-				@include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
-				@include transform(rotate(180deg));
-			}
-			.condition {
-				display: block;
-				@include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
-			}
-		}
-	}
-	.short {
-		input[type=text] {
-			width: 180px;
-		}
-	}
-	.condition {
-		display: none;
-		margin-right: 10px;
-		padding: 15px 0 0 30px;
-		position: relative;
-		text-transform: none;
-		font-weight: normal;
-		&.active {
-			display: block;
-			@include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
-		}
-		&.alone {
-			border-bottom: none;
-		}
-		.remove, .remove-rule {
-			position: absolute;
-			top: -25px;
-			right: 0;
-			margin-right: 0;
-		}
-		.condition-fields {
-			.menu {
-				position: relative;
-				&.alone {
-					border-bottom: none;
-				}
-				input[type=text] {
-					height: 30px;
-					width: 180px;
-					padding-left: 30px;
-					@include border-radius(3px);
-				}
-				.input-row {
-					margin: 0 0 10px 0;
-				}
-				.actions {
-					display: inline-block;
-					padding: 7px 0 0 0;
-					margin-top: 7px;
-					color: $color-elephant;
-					.input-row {
-						margin-top: 0;
-						label {
-							vertical-align: middle;
-						}
-						.clear-search {
-							top: 17px;
-							right: 5px;
-						}
-					}
-					.input-toggle {
-						position: relative;
-						display: inline-block;
-						top: 0;
-						right: 0;
-						.toggle {
-							margin: -5px 5px 0 10px;
-						}
-					}
-					span {
-						color: $color-text;
-					}
-				}
-			}
-			.check-all {
-				margin: 0 10px 0 0;
-			}
-			.conditions-multiselect {
-				padding: 10px 5px 10px 0;
-				margin-left: 0;
-				border: 1px solid $color-elderly;
-				.options {
-					width: 99%;
-					height: 133px;
-					max-height: 133px;
-					overflow-y: scroll;
-					padding-left: 10px;
-					label {
-						width: 220px;
-						margin-bottom: 10px;
-						text-transform: none;
-						&.input-checkbox {
-							display: inline-block;
-							padding: 0 0 0 30px;
-							.label-text {
-								display: inline-block;
-								padding-top: 5px;
-							}
-						}
-					}
-					div {
-						display: inline;
-						&.item-head {
-							display: block;
-							color: $color-walrus;
-						}
-					}
-				}
-			}
-			textarea {
-				max-width: 700px;
-			}
-		}
-	}
+        &:hover {
+            cursor: pointer;
+        }
+        &:last-child {
+            border-bottom: 1px solid $color-elderly;
+        }
+        .show-condition {
+            top: 19px;
+            left: 5px;
+        }
+        .show-condition,
+        .value {
+            text-transform: none;
+            color: $color-input-text;
+        }
+        .value {
+            font-weight: normal;
+            &:before {
+                // only want ':' to show when condition-title followed by value
+                content: ': ';
+                color: $color-rhino;
+                font-size: 14px;
+                font-family: $font-pn-regular;
+                font-weight: 600;
+            }
+        }
+        &.active {
+            .show-condition {
+                @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
+                @include transform(rotate(180deg));
+            }
+            .condition {
+                display: block;
+
+                @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
+            }
+        }
+    }
+    .short {
+        input[type=text] {
+            width: 180px;
+        }
+    }
+    .condition {
+        display: none;
+        margin-right: 10px;
+        padding: 15px 0 0 30px;
+        position: relative;
+        text-transform: none;
+        font-weight: normal;
+        &.active {
+            display: block;
+
+            @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
+        }
+        &.alone {
+            border-bottom: none;
+        }
+        .remove,
+        .remove-rule {
+            position: absolute;
+            top: -25px;
+            right: 0;
+            margin-right: 0;
+        }
+        .condition-fields {
+            .menu {
+                position: relative;
+                &.alone {
+                    border-bottom: none;
+                }
+                input[type=text] {
+                    height: 30px;
+                    width: 180px;
+                    padding-left: 30px;
+
+                    @include border-radius(3px);
+                }
+                .input-row {
+                    margin: 0 0 10px;
+                }
+                .actions {
+                    display: inline-block;
+                    padding: 7px 0 0;
+                    margin-top: 7px;
+                    color: $color-elephant;
+                    .input-row {
+                        margin-top: 0;
+                        label {
+                            vertical-align: middle;
+                        }
+                        .clear-search {
+                            top: 17px;
+                            right: 5px;
+                        }
+                    }
+                    .input-toggle {
+                        position: relative;
+                        display: inline-block;
+                        top: 0;
+                        right: 0;
+                        .toggle {
+                            margin: -5px 5px 0 10px;
+                        }
+                    }
+                    span {
+                        color: $color-text;
+                    }
+                }
+            }
+            .check-all {
+                margin: 0 10px 0 0;
+            }
+            .conditions-multiselect {
+                padding: 10px 5px 10px 0;
+                margin-left: 0;
+                border: 1px solid $color-elderly;
+                .options {
+                    width: 99%;
+                    height: 133px;
+                    max-height: 133px;
+                    overflow-y: scroll;
+                    padding-left: 10px;
+                    label {
+                        width: 220px;
+                        margin-bottom: 10px;
+                        text-transform: none;
+                        &.input-checkbox {
+                            display: inline-block;
+                            padding: 0 0 0 30px;
+                            .label-text {
+                                display: inline-block;
+                                padding-top: 5px;
+                            }
+                        }
+                    }
+                    div {
+                        display: inline;
+                        &.item-head {
+                            display: block;
+                            color: $color-walrus;
+                        }
+                    }
+                }
+            }
+            textarea {
+                max-width: 700px;
+            }
+        }
+    }
 }
+
 .result-search-inputs {
-	position: relative;
-    margin: 0 0 30px 0;
+    position: relative;
+    margin: 0 0 30px;
 
-	label {
-		&.search {
-			input {
-				width: 432px;
-			}
-		}
-	}
-	.search-text {
-		width: 270px;
-		padding-right: 40px;
-	}
-	.list-status-select {
-		position: absolute;
-		top: 0;
-		left: 368px;
-		margin: 0;
-	}
-	.add-button, .add-button-help {
-		position: absolute;
-		right: 0;
-		top: 0;
+    label {
+        &.search {
+            input {
+                width: 432px;
+            }
+        }
+    }
+    .search-text {
+        width: 270px;
+        padding-right: 40px;
+    }
+    .list-status-select {
+        position: absolute;
+        top: 0;
+        left: 368px;
+        margin: 0;
+    }
 
-		> .tooltip-text {
-			bottom: 15px;
-		}
-	}
-	.filter-link {
-		display: inline-block;
-		line-height: 50px;
-		text-decoration: none;
+    .add-button,
+    .add-button-help {
+        position: absolute;
+        right: 0;
+        top: 0;
 
-		&:after {
-			font-family: $icon-font;
-			content: '\76';
-			position: absolute;
-			font-size: 12px;
-			@include transition(all 0.3s);
-		}
-		&.show {
-			&:after {
-				@include transform(rotate(180deg));
-			}
-		}
-	}
-	.filter-options {
-		padding-top: 0;
-		padding-bottom: 0;
-		height: 0;
-		overflow: hidden;
-		@include opacity(0);
-		@include transition(all 0.3s);
+        > .tooltip-text {
+            bottom: 15px;
+        }
+    }
+    .filter-link {
+        display: inline-block;
+        line-height: 50px;
+        text-decoration: none;
 
-		&.show {
-			padding-top: 30px;
-			padding-bottom: 10px;
-			height: 24px;
-			@include opacity(1);
-		}
-		.input-checkbox {
-			padding-bottom: 0;
-		}
-	}
+        &:after {
+            font-family: $icon-font;
+            content: '\76';
+            position: absolute;
+            font-size: 12px;
+
+            @include transition(all 0.3s);
+        }
+        &.show {
+            &:after {
+                @include transform(rotate(180deg));
+            }
+        }
+    }
+    .filter-options {
+        padding-top: 0;
+        padding-bottom: 0;
+        height: 0;
+        overflow: hidden;
+
+        @include opacity(0);
+        @include transition(all 0.3s);
+
+        &.show {
+            padding-top: 30px;
+            padding-bottom: 10px;
+            height: 24px;
+
+            @include opacity(1);
+        }
+        .input-checkbox {
+            padding-bottom: 0;
+        }
+    }
 }

@@ -6,8 +6,8 @@
         text-transform: uppercase;
         font-family: $font-pn-regular;
         border-bottom: 2px solid $color-dolphin;
-        padding: 0 0 5px 0;
-        margin: 0 0 5px 0;
+        padding: 0 0 5px;
+        margin: 0 0 5px;
 
         .heading-link {
             font-size: 14px;
@@ -23,14 +23,15 @@
     }
     .section {
         position: relative;
-	    padding: 15px 0 20px 0;
-		border-bottom: 1px solid $color-cinder-block;
-		overflow: visible;
-		@include transition(max-height ease-out 0.6s);
+        padding: 15px 0 20px;
+        border-bottom: 1px solid $color-cinder-block;
+        overflow: visible;
 
-		&:last-of-type {
-			border-bottom: none;
-		}
+        @include transition(max-height ease-out 0.6s);
+
+        &:last-of-type {
+            border-bottom: none;
+        }
         &.active {
             .form-integer-container {
                 .icon-dropdown-arrow {
@@ -40,14 +41,14 @@
             }
             .icon-dropdown-arrow {
                 @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
-    			@include transform(rotate(180deg));
+                @include transform(rotate(180deg));
             }
         }
     }
     .section-title {
-		text-transform: uppercase;
+        text-transform: uppercase;
         font-size: 15px;
-	    color: $color-slate;
+        color: $color-slate;
         font-family: $font-pn-regular;
         position: relative;
 
@@ -71,22 +72,24 @@
         }
     }
     .section-sub-title {
-	    color: $color-rhino;
+        color: $color-rhino;
         font-size: 12px;
         font-family: $font-pn-light;
         text-transform: none;
         padding: 0 0 0 25px;
     }
-    .show-section, .show-condition {
+    .show-section,
+    .show-condition {
         cursor: pointer;
         font-size: 12px;
-		height: 12px;
+        height: 12px;
         margin: 0 5px 0 0;
         display: inline-block;
     }
-    .section-container, .condition {
+    .section-container,
+    .condition {
         padding-left: 27px;
-		margin: 25px 0 0 0;
+        margin: 25px 0 0;
         .menu {
             height: auto;
             .options {
@@ -110,10 +113,11 @@
         }
     }
     .expanded {
-		max-height: 600px;
+        max-height: 600px;
         .show-section {
             color: $color-elephant;
             display: inline-block;
+
             @include transition(top ease-out 0.4s);
             @include transform(rotate(180deg));
         }
@@ -133,55 +137,55 @@
 }
 
 .settings-table {
-	border: 1px solid $color-rabbit-fur;
-	display: inline-block;
-	clear: both;
+    border: 1px solid $color-rabbit-fur;
+    display: inline-block;
+    clear: both;
 
-	> div {
-		display: table-row;
-		text-align: center;
+    > div {
+        display: table-row;
+        text-align: center;
 
-		> div {
-			display: table-cell;
-			padding: 10px;
-			border-bottom: 1px dotted $color-rabbit-fur;
-			min-width: 100px;
-		}
-		&:last-of-type {
-			> div {
-				border-bottom: none;
-			}
-		}
-		.icon-check {
-			font-size: 12px;
+        > div {
+            display: table-cell;
+            padding: 10px;
+            border-bottom: 1px dotted $color-rabbit-fur;
+            min-width: 100px;
+        }
+        &:last-of-type {
+            > div {
+                border-bottom: none;
+            }
+        }
+        .icon-check {
+            font-size: 12px;
             color: $color-midnight;
-		}
+        }
 
-		&.headings {
-			font-family: $font-pn-regular;
+        &.headings {
+            font-family: $font-pn-regular;
 
-			> div {
-				display: table-cell;
-				border-bottom: 1px solid $color-rabbit-fur;
-			}
-		}
-	}
-	&.row-labels {
-		> div {
-			> div {
-				&:first-of-type {
-					text-align: left;
-					font-family: $font-pn-regular;
+            > div {
+                display: table-cell;
+                border-bottom: 1px solid $color-rabbit-fur;
+            }
+        }
+    }
+    &.row-labels {
+        > div {
+            > div {
+                &:first-of-type {
+                    text-align: left;
+                    font-family: $font-pn-regular;
                     text-transform: uppercase;
-					color: $color-elephant;
+                    color: $color-elephant;
                     &.value {
                         text-transform: none;
                         color: $color-midnight;
                     }
-				}
-			}
-		}
-	}
+                }
+            }
+        }
+    }
 }
 
 .settings-attribute-elements {
@@ -191,12 +195,12 @@
         max-height: 38px;
         border-bottom: 1px solid #ddd;
         margin: 20px 0 20px 15px;
-        padding: 0 15px 0 15px;
+        padding: 0 15px;
 
         @include transition(all ease-out 0.5s);
 
         .settings-attribute-title {
-            margin: 0 0 20px 0;
+            margin: 0 0 20px;
             padding: 3px 0 0 20px;
             display: block;
             text-transform: uppercase;
@@ -227,6 +231,7 @@
             position: absolute;
             top: 2px;
             left: 15px;
+
             @include grab-cursor;
 
             &:before {
@@ -241,6 +246,7 @@
             position: absolute;
             right: 15px;
             bottom: 25px;
+
             @include opacity(0);
             @include transition(all ease-out 0.5s);
         }
@@ -253,20 +259,24 @@
     text-align: center;
     margin-bottom: 20px;
     padding-bottom: 20px;
+
     .section {
         padding: 0;
         border-bottom: none;
+
         .section-title {
             color: $color-midnight;
             padding: 10px;
             display: block;
-    		text-transform: uppercase;
+            text-transform: uppercase;
             text-align: center;
-    		font-size: 14px;
-    		line-height: 1em;
+            font-size: 14px;
+            line-height: 1em;
+
             .icon-dropdown-arrow {
                 background-image: none;
                 padding-right: 10px;
+
                 @include transition(none);
                 @include transform(none);
             }
@@ -278,6 +288,7 @@
             .icon-dropdown-arrow {
                 &:before {
                     display: inline-block;
+
                     @include transition((top ease-out 0.4s, opacity ease-out 0.1s 0.3s));
                     @include transform(rotate(180deg));
                 }
@@ -287,8 +298,10 @@
             text-align: left;
             margin: 0;
             padding: 20px 0 0 40px;
+
             label {
-                &.input-text, &.input-textarea {
+                &.input-text,
+                &.input-textarea {
                     input[type=text],
                     input[type=password],
                     textarea {
@@ -322,14 +335,19 @@
 }
 
 // CO-BRANDING, CID SETTINGS
-.branding, .directory-settings {
+
+.branding,
+.directory-settings {
     label {
         cursor: default;
         line-height: 22px;
-        &.input-checkbox, &.input-radio {
+
+        &.input-checkbox,
+        &.input-radio {
             line-height: 20px;
             height: 20px;
             cursor: pointer;
+
             span {
                 vertical-align: top;
                 padding-right: 0;
@@ -362,7 +380,7 @@
         }
     }
     &.data-group {
-        margin: 0 0 30px 0;
+        margin: 0 0 30px;
         display: none;
 
         &.show {
@@ -401,12 +419,11 @@
         .sub-group {
             margin-top: 10px;
             .heading {
-                text-transform: uppercase;
-                font-size: 14px;
                 margin: 10px 0;
                 padding: 10px 0;
                 padding-bottom: 7px;
                 border-bottom: 1px solid $color-input-border;
+                text-transform: uppercase;
                 font-size: 14px;
                 font-weight: 600;
                 color: $color-text;
@@ -430,7 +447,6 @@
                 overflow: auto;
             }
             .col-1 {
-                padding-left: 20px;
                 float: left;
                 width: 44%;
                 min-height: 500px;
@@ -481,14 +497,17 @@
                 $modal-height: 574px;
                 $modal-wide-width: 600px;
                 $modal-wide-height: 545px;
+
                 @mixin width-height-margin {
                     width: $modal-width;
                     height: $modal-height;
                     margin: 0;
                 }
+
                 @mixin modal-background-size {
                     background-size: $modal-width $modal-height;
                 }
+
                 @mixin full-modal-body {
                     margin: 0;
                     padding: 0;
@@ -496,6 +515,7 @@
                     background-color: $color-white;
                     overflow: hidden;
                 }
+
                 @mixin close {
                     color: transparent;
                     position: absolute;
@@ -506,6 +526,7 @@
                     z-index: 10;
                     text-decoration: none;
                 }
+
                 // override modal settings for mobile previews
                 #full-preview-modal {
                     width: $modal-width;
@@ -556,13 +577,13 @@
         }
     }
     .info {
-        margin: 0 0 10px 0;
+        margin: 0 0 10px;
         display: inline-block;
 
         label {
             display: inline-block;
             width: 150px;
-            margin: 0 0 10px 0;
+            margin: 0 0 10px;
         }
         span {
             display: inline-block;

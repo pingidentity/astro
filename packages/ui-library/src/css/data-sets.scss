@@ -1,259 +1,269 @@
 
 .data {
-	.data-group {
-		padding: 0 0 30px 0;
-		max-width: 100%;
+    .data-group {
+        padding: 0 0 30px;
+        max-width: 100%;
 
-		&.data-section {
-			.data-item {
-				> label {
-					font-size: 13px;
-					color: $color-elephant;
-					padding-left: 25px;
-				}
-				&.sub-item {
-					> label {
-						padding-left: 50px;
-					}
-				}
-				&.data-title {
-					display: block;
-					margin-right: 50px;
+        &.data-section {
+            .data-item {
+                > label {
+                    font-size: 13px;
+                    color: $color-elephant;
+                    padding-left: 25px;
+                }
+                &.sub-item {
+                    > label {
+                        padding-left: 50px;
+                    }
+                }
+                &.data-title {
+                    display: block;
+                    margin-right: 50px;
 
-		            > label {
-						display: block;
-						padding: 0 0 5px 0;
-					    margin: 0 0 25px 0;
-					    color: $color-blue-grey;
-					    border-bottom: 1px solid $color-stratus;
-		            	text-transform: uppercase;
-						font-family: $font-pn-semibold;
-						font-size: 15px;
-		            	line-height: 1em;
-						&:after {
-							content: '';
-						}
-		            }
-		            &:first-of-type {
-		                > label {
-		        		    padding-top: 0;
-		                }
-		        	}
-		    	}
-			}
-			&.labels-only {
-				.data-item {
-					> label {
-						&:after {
-							content: none;
-						}
-					}
-				}
-			}
-		}
-		.section {
-			margin-left: 25px;
-			.sub-title {
-				font-size: 15px;
-				text-transform: uppercase;
-				color: $color-text;
-				margin-bottom: 5px;
-			}
-		}
-	}
-	.data-item {
+                    > label {
+                        display: block;
+                        padding: 0 0 5px;
+                        margin: 0 0 25px;
+                        color: $color-blue-grey;
+                        border-bottom: 1px solid $color-stratus;
+                        text-transform: uppercase;
+                        font-family: $font-pn-semibold;
+                        font-size: 15px;
+                        line-height: 1em;
+                        &:after {
+                            content: '';
+                        }
+                    }
+                    &:first-of-type {
+                        > label {
+                            padding-top: 0;
+                        }
+                    }
+                }
+            }
+            &.labels-only {
+                .data-item {
+                    > label {
+                        &:after {
+                            content: none;
+                        }
+                    }
+                }
+            }
+        }
+        .section {
+            margin-left: 25px;
+            .sub-title {
+                font-size: 15px;
+                text-transform: uppercase;
+                color: $color-text;
+                margin-bottom: 5px;
+            }
+        }
+    }
+    .data-item {
         display: table-row;
-		line-height: 1em;
+        line-height: 1em;
 
-        > label, > span {
+        > label,
+        > span {
             display: table-cell;
             vertical-align: top;
             line-height: 1em;
-        	font-size: 13px;
+            font-size: 13px;
         }
-		> label {
+        > label {
             padding: 0 20px 10px 0;
-        	cursor: default;
-			font-size: 14px;
-			color: $color-elephant;
+            cursor: default;
+            font-size: 14px;
+            color: $color-elephant;
 
-        	&.input-radio {
-        		cursor: pointer;
-        	}
-			&:after {
-				content: ':';
-			}
-			&.no-data {
-				&:after {
-					content: '';
-				}
-			}
-		}
-		> span {
+            &.input-radio {
+                cursor: pointer;
+            }
+            &:after {
+                content: ':';
+            }
+            &.no-data {
+                &:after {
+                    content: '';
+                }
+            }
+        }
+        > span {
             display: table-cell;
             padding: 0 20px 15px 0;
-			color: $color-midnight;
-			font-size: 14px;
+            color: $color-midnight;
+            font-size: 14px;
 
-        	a {
-        		margin: 0;
-        	}
-		}
-		&.labels-only {
-			font-size: 15px;
-			color: $color-midnight;
-			font-style: italic;
-			display: inline-block;
-			padding-left: 25px;
-			> label {
-				&:after {
-					content: none;
-				}
-			}
-		}
+            a {
+                margin: 0;
+            }
+        }
+        &.labels-only {
+            font-size: 15px;
+            color: $color-midnight;
+            font-style: italic;
+            display: inline-block;
+            padding-left: 25px;
+            > label {
+                &:after {
+                    content: none;
+                }
+            }
+        }
         &.data-title {
             > label {
                 padding-top: 25px;
                 color: $color-dolphin;
-            	text-transform: uppercase;
-            	margin-bottom: 5px;
-            	font-size: 15px;
-            	line-height: 1em;
+                text-transform: uppercase;
+                margin-bottom: 5px;
+                font-size: 15px;
+                line-height: 1em;
 
-				&:after {
-					content: none;
-				}
+                &:after {
+                    content: none;
+                }
             }
             &:first-of-type {
                 > label {
-        		    padding-top: 0;
+                    padding-top: 0;
                 }
-        	}
-    	}
+            }
+        }
         &.data-sub-title {
             > label {
-        		text-transform: uppercase;
-        		color: $color-stone;
-        		font-weight: normal;
-        		font-size: 16px;
+                text-transform: uppercase;
+                color: $color-stone;
+                font-weight: normal;
+                font-size: 16px;
             }
-    	}
-		&.data-endrow {
-			display: block;
+        }
+        &.data-endrow {
+            display: block;
 
-			> label {
-				text-transform: none;
-			}
-		}
-		.data-value-list {
-			li {
-				margin: 0 0 5px 0;
+            > label {
+                text-transform: none;
+            }
+        }
+        .data-value-list {
+            li {
+                margin: 0 0 5px;
 
-				&:last-of-type {
-					margin: 0;
-				}
-			}
-		}
-		.help-tooltip {
-			vertical-align: bottom;
-			margin: -3px 0 0 5px;
-		}
-	}
-	.data-col-of-2, .data-col-of-3, .data-col-of-4, .data-col-of-5 {
-		float: left;
+                &:last-of-type {
+                    margin: 0;
+                }
+            }
+        }
+        .help-tooltip {
+            vertical-align: bottom;
+            margin: -3px 0 0 5px;
+        }
+    }
+    .data-col-of-2,
+    .data-col-of-3,
+    .data-col-of-4,
+    .data-col-of-5 {
+        float: left;
 
-		.data-item {
-			padding: 0 45px 0 0;
-		}
-	}
-	.data-col-of-1, .data-col-of-2, .data-col-of-3, .data-col-of-4, .data-col-of-5 {
-		margin: 0 0 30px 0;
-	}
-	.data-col-of-1 {
-		max-width: 100%;
-	}
-	.data-col-of-2 {
-		max-width: 50%;
-	}
-	.data-col-of-3 {
-		max-width: 33%;
-	}
-	.data-col-of-4 {
-		max-width: 25%;
-	}
-	.delete-tooltip {
-		position: absolute;
-		right: 0;
+        .data-item {
+            padding: 0 45px 0 0;
+        }
+    }
+    .data-col-of-1,
+    .data-col-of-2,
+    .data-col-of-3,
+    .data-col-of-4,
+    .data-col-of-5 {
+        margin: 0 0 30px;
+    }
+    .data-col-of-1 {
+        max-width: 100%;
+    }
+    .data-col-of-2 {
+        max-width: 50%;
+    }
+    .data-col-of-3 {
+        max-width: 33%;
+    }
+    .data-col-of-4 {
+        max-width: 25%;
+    }
+    .delete-tooltip {
+        position: absolute;
+        right: 0;
 
-		.details-content {
-			bottom: 55px;
-		}
-	}
-	.details-tooltip {
-		.details-content {
-			.title {
-				color: $color-black;
-				text-transform: none;
-			}
-			.info {
-				label {
-					width: 200px;
-				}
-			}
-		}
-	}
+        .details-content {
+            bottom: 55px;
+        }
+    }
+    .details-tooltip {
+        .details-content {
+            .title {
+                color: $color-black;
+                text-transform: none;
+            }
+            .info {
+                label {
+                    width: 200px;
+                }
+            }
+        }
+    }
 }
 
 .data-set {
-	padding: 30px 0 10px;
-	border-top: 1px solid $color-rhino;
-	border-bottom: 1px solid $color-rhino;
+    padding: 30px 0 10px;
+    border-top: 1px solid $color-rhino;
+    border-bottom: 1px solid $color-rhino;
 
-	&.no-border {
-		border-top: none;
-		border-bottom: none;
-		padding-top: 0;
-	}
-	a {
-		margin-left: 20px;
-		text-transform: uppercase;
-		&.details-link, &.details-close {
-			margin-left: 0;
-			text-transform: none;
-		}
-	}
-	button {
-		margin: 0 0 10px 25px;
-	}
-	.description {
-		font-size: 14px;
-		a {
-			margin-left: 0;
-			text-transform: none;
-		}
-	}
-	.data-cols {
-		padding-bottom: 20px;
+    &.no-border {
+        border-top: none;
+        border-bottom: none;
+        padding-top: 0;
+    }
+    a {
+        margin-left: 20px;
+        text-transform: uppercase;
 
-		.col-1 {
-			width: 50%;
-			float: left;
-		}
-		.col-2 {
-			width: 50%;
-			float: right;
-		}
-		.col-1-3 {
-			width: 33%;
-			float: left;
-		}
-		.col-2-3 {
-			width: 33%;
-			float: left;
-		}
-		.col-3-3 {
-			width: 33%;
-			float: left;
-		}
-	}
+        &.details-link,
+        &.details-close {
+            margin-left: 0;
+            text-transform: none;
+        }
+    }
+    button {
+        margin: 0 0 10px 25px;
+    }
+    .description {
+        font-size: 14px;
+        a {
+            margin-left: 0;
+            text-transform: none;
+        }
+    }
+    .data-cols {
+        padding-bottom: 20px;
+
+        .col-1 {
+            width: 50%;
+            float: left;
+        }
+        .col-2 {
+            width: 50%;
+            float: right;
+        }
+        .col-1-3 {
+            width: 33%;
+            float: left;
+        }
+        .col-2-3 {
+            width: 33%;
+            float: left;
+        }
+        .col-3-3 {
+            width: 33%;
+            float: left;
+        }
+    }
 }

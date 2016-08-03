@@ -1,237 +1,245 @@
 
 table {
-	&.grid {
-		display: inline-block;
-		border-collapse: separate;
+    &.grid {
+        display: inline-block;
+        border-collapse: separate;
 
-		th {
-			font-size: 13px;
-			color: $color-elephant;
-			text-transform: uppercase;
+        th {
+            font-size: 13px;
+            color: $color-elephant;
+            text-transform: uppercase;
 
-			&.column-xs {
-				width: 90px;
-			}
-			&.column-sm {
-				width: 190px;
-			}
-			&.column-md {
-				width: 290px;
-			}
-			&.column-lg {
-				width: 390px;
-			}
-			&.column-xl {
-				width: 490px;
-			}
-			&.column-pg {
-				padding: 0 0 0 20px;
-				text-transform: none;
-				font-size: 12px;
-				font-weight: bold;
-				line-height: 1em;
-				white-space: nowrap;
+            &.column-xs {
+                width: 90px;
+            }
+            &.column-sm {
+                width: 190px;
+            }
+            &.column-md {
+                width: 290px;
+            }
+            &.column-lg {
+                width: 390px;
+            }
+            &.column-xl {
+                width: 490px;
+            }
+            &.column-pg {
+                padding: 0 0 0 20px;
+                text-transform: none;
+                font-size: 12px;
+                font-weight: bold;
+                line-height: 1em;
+                white-space: nowrap;
 
-				.icon-previous, .icon-next {
-					display: inline-block;
-					font-size: 11px;
-					vertical-align: text-top;
-				}
-				.icon-previous {
-					margin-right: 10px;
-				}
-				.icon-next {
-					margin-left: 10px;
-				}
-			}
+                .icon-previous,
+                .icon-next {
+                    display: inline-block;
+                    font-size: 11px;
+                    vertical-align: text-top;
+                }
+                .icon-previous {
+                    margin-right: 10px;
+                }
+                .icon-next {
+                    margin-left: 10px;
+                }
+            }
 
-			a.sort {
-				position: relative;
+            a.sort {
+                position: relative;
 
-				&:after {
-					position: absolute;
-					top: -1px;
-					right: -11px;
-					font-family: $icon-font;
-					text-transform: none;
-					content: '\7c';
-					font-size: 10px;
-					margin: 0 0 0 10px;
+                &:after {
+                    position: absolute;
+                    top: -1px;
+                    right: -11px;
+                    font-family: $icon-font;
+                    text-transform: none;
+                    content: '\7c';
+                    font-size: 10px;
+                    margin: 0 0 0 10px;
 
-				}
-				&.asc {
-					&:after {
-						top: -4px;
-						font-size: 4px;
-						content: '\41';
-					}
-				}
-				&.desc {
-					&:after {
-						top: 1px;
-						font-size: 4px;
-						content: '\2200';
-					}
-				}
-			}
-		}
-		td {
-			font-size: 14px;
-			color: $color-midnight;
+                }
+                &.asc {
+                    &:after {
+                        top: -4px;
+                        font-size: 4px;
+                        content: '\41';
+                    }
+                }
+                &.desc {
+                    &:after {
+                        top: 1px;
+                        font-size: 4px;
+                        content: '\2200';
+                    }
+                }
+            }
+        }
+        td {
+            font-size: 14px;
+            color: $color-midnight;
 
-			button.inline {
-				&.delete {
-					margin: -5px 0;
-				}
-			}
-			&.cell-btn {
-				vertical-align: middle;
-			}
-			.input-width-xsmall,
-			.input-width-small,
-			.input-width-medium,
-			.input-width-large,
-			.input-width-xlarge,
-			.input-width-full {
-				margin-bottom: 0;
-			}
-			.input-text, .input-select, .input-checkbox, .input-radio {
+            button.inline {
+                &.delete {
+                    margin: -5px 0;
+                }
+            }
+            &.cell-btn {
+                vertical-align: middle;
+            }
+            .input-width-xsmall,
+            .input-width-small,
+            .input-width-medium,
+            .input-width-large,
+            .input-width-xlarge,
+            .input-width-full {
+                margin-bottom: 0;
+            }
+            .input-text,
+            .input-select,
+            .input-checkbox,
+            .input-radio {
                 margin-bottom: 0;
             }
             .input-checkbox {
                 padding: 0;
             }
-		}
-		th, td {
-			padding: 9px 20px 8px 0;
-			border-bottom: 1px dotted $color-rabbit-fur;
-			text-align: left;
-			box-sizing: border-box;
-			font-family: $font-pn-regular;
-			line-height: 1.1em;
-			vertical-align: baseline;
+        }
+        th,
+        td {
+            padding: 9px 20px 8px 0;
+            border-bottom: 1px dotted $color-rabbit-fur;
+            text-align: left;
+            box-sizing: border-box;
+            font-family: $font-pn-regular;
+            line-height: 1.1em;
+            vertical-align: baseline;
 
-			&:last-of-type {
-				padding-right: 0;
-			}
-			&.center {
-				text-align: center;
-			}
-			&.right {
-				text-align: right;
-			}
-			&:first-child {
-				padding-left: 2px;
-			}
-			&:last-child {
-				padding-right: 5px;
-			}
-		}
-		tr {
-			&.expanded {
-				td, th {
-					border-bottom: none;
-				}
-			}
-			&.expanded-content {
-				td {
-					padding: 15px;
-					@include animation(fade-in 0.1s);
-				}
-			}
-		}
-		thead {
-			th {
-				border-bottom: 1px solid $color-rabbit-fur;
-				padding: 0 20px 10px 0;
-			}
-		}
-	}
+            &:last-of-type {
+                padding-right: 0;
+            }
+            &.center {
+                text-align: center;
+            }
+            &.right {
+                text-align: right;
+            }
+            &:first-child {
+                padding-left: 2px;
+            }
+            &:last-child {
+                padding-right: 5px;
+            }
+        }
+        tr {
+            &.expanded {
+                td,
+                th {
+                    border-bottom: none;
+                }
+            }
+            &.expanded-content {
+                td {
+                    padding: 15px;
+
+                    @include animation(fade-in 0.1s);
+                }
+            }
+        }
+        thead {
+            th {
+                border-bottom: 1px solid $color-rabbit-fur;
+                padding: 0 20px 10px 0;
+            }
+        }
+    }
 }
-
 
 // DEPRECATED OR SITE-SPECIFIC STYLES ----------------------------------------------------------------------------------
 table {
-	&.basic {
-		width: 100%;
-		&.fixed {
-			table-layout: fixed;
-		}
-		th {
-			color: $color-elephant;
-			text-transform: uppercase;
-		}
-		th, td {
-			text-align: left;
-			font-size: 14px;
-			padding: 0 12px 15px 0;
+    &.basic {
+        width: 100%;
+        &.fixed {
+            table-layout: fixed;
+        }
+        th {
+            color: $color-elephant;
+            text-transform: uppercase;
+        }
+        th,
+        td {
+            text-align: left;
+            font-size: 14px;
+            padding: 0 12px 15px 0;
 
-			&:last-of-type {
-				padding-left: 0;
-			}
-			&.center {
-				text-align: center;
-			}
-		}
-		label {
-			vertical-align: middle;
+            &:last-of-type {
+                padding-left: 0;
+            }
+            &.center {
+                text-align: center;
+            }
+        }
+        label {
+            vertical-align: middle;
 
-			&.input-checkbox {
-				&.no-label {
-					padding: 0;
-				}
-			}
-			&.input-text {
-				&.no-label {
-					margin-right: 10px;
-				}
-				&.row-item {
-					margin-right: 0;
-				}
-			}
-		}
-		thead {
-			border-bottom: 1px solid $color-rabbit-fur;
-		}
-		tbody {
-			tr {
-				border-top: 1px dotted $color-rabbit-fur;
-				&:first-child {
-					border-top: none;
-				}
-				td {
-					.input-width-xsmall,
-		            .input-width-small,
-		            .input-width-medium,
-		            .input-width-large,
-		            .input-width-xlarge,
-		            .input-width-full {
-						margin-bottom: 0;
-		            }
-					.icon-delete {
-						position: inherit;
-					}
-				}
-			}
-		}
-		.button {
-			&.inline {
-				vertical-align: middle;
-			}
-		}
-	}
+            &.input-checkbox {
+                &.no-label {
+                    padding: 0;
+                }
+            }
+            &.input-text {
+                &.no-label {
+                    margin-right: 10px;
+                }
+                &.row-item {
+                    margin-right: 0;
+                }
+            }
+        }
+        thead {
+            border-bottom: 1px solid $color-rabbit-fur;
+        }
+        tbody {
+            tr {
+                border-top: 1px dotted $color-rabbit-fur;
+                &:first-child {
+                    border-top: none;
+                }
+                td {
+                    .input-width-xsmall,
+                    .input-width-small,
+                    .input-width-medium,
+                    .input-width-large,
+                    .input-width-xlarge,
+                    .input-width-full {
+                        margin-bottom: 0;
+                    }
+                    .icon-delete {
+                        position: inherit;
+                    }
+                }
+            }
+        }
+        .button {
+            &.inline {
+                vertical-align: middle;
+            }
+        }
+    }
 }
-a.add-table-row {
-	position: relative;
-	display: inline-block;
-	padding-left: 15px;
-	font-size: 14px;
 
-	&:before {
-		content: '\2b';
-		position: absolute;
-		left: 0;
-		top: 0;
-		font-size: 20px;
-	}
+a.add-table-row {
+    position: relative;
+    display: inline-block;
+    padding-left: 15px;
+    font-size: 14px;
+
+    &:before {
+        content: '\2b';
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 20px;
+    }
 }

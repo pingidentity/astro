@@ -1,356 +1,380 @@
 
 @mixin base-button-styles {
-	position: relative;
-	display: inline-block;
-	font-family: $font-pn-regular;
-	background-color: $color-white;
-	text-align: center;
-	vertical-align: middle;
-	cursor: pointer;
-	outline: none;
-	white-space: nowrap;
+    position: relative;
+    display: inline-block;
+    font-family: $font-pn-regular;
+    background-color: $color-white;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    outline: none;
+    white-space: nowrap;
 
-	&:hover {
-		text-decoration: none;
-	}
+    &:hover {
+        text-decoration: none;
+    }
 }
+
 @mixin default-button-styles {
-	color: $color-slate;
-	background: $color-white;
+    color: $color-slate;
+    background: $color-white;
 
-	&:hover {
-		color: $color-slate;
-	}
+    &:hover {
+        color: $color-slate;
+    }
 }
 
-input[type=button], input[type=submit], button, .button {
-	$height: 36px;
+input[type=button],
+input[type=submit],
+button,
+.button {
+    $height: 36px;
 
-	padding: 0 25px;
-	margin-right: 10px;
-	font-size: 15px;
-	height: $height;
-	line-height: $height;
-	border: 1px solid $color-rhino;
-	box-sizing: border-box;
+    padding: 0 25px;
+    margin-right: 10px;
+    font-size: 15px;
+    height: $height;
+    line-height: $height;
+    border: 1px solid $color-rhino;
+    box-sizing: border-box;
 
-	@include border-radius(2px);
-	@include base-button-styles;
-	@include default-button-styles;
+    @include border-radius(2px);
+    @include base-button-styles;
+    @include default-button-styles;
 
-	&:hover {
-		color: $color-active;
-		border-color: $color-active;
-	}
-	&:focus {
-		border: 1px solid $color-rhino;
-	}
-	&.primary {
-		background: none;
-		background-color: $color-active-blue;
-		color: $color-white;
-		border: none;
+    &:hover {
+        color: $color-active;
+        border-color: $color-active;
+    }
+    &:focus {
+        border: 1px solid $color-rhino;
+    }
+    &.primary {
+        background: none;
+        background-color: $color-active-blue;
+        color: $color-white;
+        border: none;
 
-		&:hover {
-			background-color: $color-active-blue-highlighted;
-			color: $color-white;
-		}
-	}
-	&.secondary {
-		background: none;
-		background-color: $color-white;
-		color: $color-slate;
-		border: 1px solid $color-rhino;
+        &:hover {
+            background-color: $color-active-blue-highlighted;
+            color: $color-white;
+        }
+    }
+    &.secondary {
+        background: none;
+        background-color: $color-white;
+        color: $color-slate;
+        border: 1px solid $color-rhino;
 
-		&:hover {
-			color: $color-active-blue-highlighted;
-			border-color: $color-active-blue-highlighted;
-		}
-	}
-	&.success {
-		background: none;
-		background-color: $color-success;
-		color: $color-white;
-		border: none;
+        &:hover {
+            color: $color-active-blue-highlighted;
+            border-color: $color-active-blue-highlighted;
+        }
+    }
+    &.success {
+        background: none;
+        background-color: $color-success;
+        color: $color-white;
+        border: none;
 
-		&:hover {
-			color: $color-white;
-		}
-	}
-	&.cancel {
-		background: none;
-		background-color: $color-stratus;
-		color: $color-white;
-		border: none;
+        &:hover {
+            color: $color-white;
+        }
+    }
+    &.cancel {
+        background: none;
+        background-color: $color-stratus;
+        color: $color-white;
+        border: none;
 
-		&:hover {
-			background-color: $color-rabbit-fur;
-		}
-	}
-	&.inline {
-		$height: 26px;
+        &:hover {
+            background-color: $color-rabbit-fur;
+        }
+    }
+    &.inline {
+        $height: 26px;
 
-		height: $height;
-		line-height: $height;
-		font-weight: 300;
-		font-size: 14px;
-		@include border-radius(ceil($height/2));
-	}
-	&.disabled, &[disabled] {
-		cursor: default;
-		@include opacity(0.4);
+        height: $height;
+        line-height: $height;
+        font-weight: 300;
+        font-size: 14px;
 
-		&:hover {
-			color: $color-slate;
-			border-color: $color-rhino;
-		}
-		&.primary, &.secondary, &.success {
-			&:hover {
-				color: $color-white;
-			}
-		}
-		&.primary {
-			&.ellipsis {
-				color: $color-active-blue;
+        @include border-radius(ceil($height/2));
+    }
+    &.disabled,
+    &[disabled] {
+        cursor: default;
 
-				&:hover {
-					color: $color-active-blue;
-				}
-			}
-			&:hover {
-				background-color: $color-active-blue;
-			}
-		}
-	}
-	&.add {
-		padding-left: 36px;
-		margin: 0;
+        @include opacity(0.4);
 
-		&:before, &:after {
-			font-family: $icon-font;
-		}
-		&:before {
-			content: '\2b';
-			position: absolute;
-			left: 20px;
-			top: 13px;
-			font-size: 10px;
-			line-height: 1em;
-		}
-		&.user {
-			padding-right: 15px;
-			font-size: 0;
+        &:hover {
+            color: $color-slate;
+            border-color: $color-rhino;
+        }
+        &.primary,
+        &.secondary,
+        &.success {
+            &:hover {
+                color: $color-white;
+            }
+        }
+        &.primary {
+            &.ellipsis {
+                color: $color-active-blue;
 
-			&:after {
-				font-size: 19px;
-				content: '\55';
-			}
-		}
-		&.no-label {
-			width: 25px;
-			padding: 0;
+                &:hover {
+                    color: $color-active-blue;
+                }
+            }
+            &:hover {
+                background-color: $color-active-blue;
+            }
+        }
+    }
+    &.add {
+        padding-left: 36px;
+        margin: 0;
 
-			&:before {
-				left: 8px;
-			}
-		}
+        &:before,
+        &:after {
+            font-family: $icon-font;
+        }
+        &:before {
+            content: '\2b';
+            position: absolute;
+            left: 20px;
+            top: 13px;
+            font-size: 10px;
+            line-height: 1em;
+        }
+        &.user {
+            padding-right: 15px;
+            font-size: 0;
 
-		&.inline {
-			&:before {
-				top: 8px;
-			}
-		}
-	}
-	&.download {
-		padding-left: 40px;
+            &:after {
+                font-size: 19px;
+                content: '\55';
+            }
+        }
+        &.no-label {
+            width: 25px;
+            padding: 0;
 
-		&:before {
-			font-family: $icon-font;
-			content: '\44';
-			position: absolute;
-			left: 15px;
-			top: 0;
-			font-size: 15px;
-		}
+            &:before {
+                left: 8px;
+            }
+        }
 
-		&.inline {
-			padding-left: 35px;
+        &.inline {
+            &:before {
+                top: 8px;
+            }
+        }
+    }
+    &.download {
+        padding-left: 40px;
 
-			&:before {
-				font-size: 12px;
-			}
-		}
-	}
-	&.inline {
-		&.edit, &.plus, &.delete, &.remove, &.minus, &.prev, &.next  {
-			$size: 29px;
+        &:before {
+            font-family: $icon-font;
+            content: '\44';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            font-size: 15px;
+        }
 
-			padding: 0;
-			height: $size;
-			width: $size;
-			text-align: center;
-			@include border-radius(ceil($size/2));
+        &.inline {
+            padding-left: 35px;
 
-			&:before {
-				line-height: 1em;
-				position: absolute;
-				left: 0;
-				width: 100%;
-				font-family: $icon-font;
-				text-transform: none;
-			}
-		}
+            &:before {
+                font-size: 12px;
+            }
+        }
+    }
+    &.inline {
+        &.edit,
+        &.plus,
+        &.delete,
+        &.remove,
+        &.minus,
+        &.prev,
+        &.next {
+            $size: 29px;
 
-		&.plus {
-			&:before {
-				top: 7px;
-				content: '*';
-				font-size: 15px;
-			}
-		}
-		&.remove, &.minus {
-			&:before {
-				top: 7px;
-				content: '-';
-				font-size: 15px;
-			}
-		}
-		&.delete {
-			&:before {
-				top: 6px;
-				content: 'd';
-				font-size: 15px;
-			}
-		}
-		&.edit {
-			&:before {
-				top: 6px;
-				content: 'e';
-				font-size: 15px;
-			}
-		}
-		&.prev {
-			&:before {
-				top: 9px;
-				content: '<';
-				font-size: 11px;
-			}
-		}
-		&.next {
-			&:before {
-				top: 9px;
-				content: '>';
-				font-size: 11px;
-			}
-		}
-	}
-	&.large {
-		$height: 52px;
-		height: $height;
-		line-height: $height;
-		font-size: 15px;
-	}
-	&.row-button {
-		vertical-align: bottom;
+            padding: 0;
+            height: $size;
+            width: $size;
+            text-align: center;
 
-		&.inline {
-			margin: 0 0 6px 0;
-		}
-	}
+            @include border-radius(ceil($size/2));
+
+            &:before {
+                line-height: 1em;
+                position: absolute;
+                left: 0;
+                width: 100%;
+                font-family: $icon-font;
+                text-transform: none;
+            }
+        }
+
+        &.plus {
+            &:before {
+                top: 7px;
+                content: '*';
+                font-size: 15px;
+            }
+        }
+        &.remove,
+        &.minus {
+            &:before {
+                top: 7px;
+                content: '-';
+                font-size: 15px;
+            }
+        }
+        &.delete {
+            &:before {
+                top: 6px;
+                content: 'd';
+                font-size: 15px;
+            }
+        }
+        &.edit {
+            &:before {
+                top: 6px;
+                content: 'e';
+                font-size: 15px;
+            }
+        }
+        &.prev {
+            &:before {
+                top: 9px;
+                content: '<';
+                font-size: 11px;
+            }
+        }
+        &.next {
+            &:before {
+                top: 9px;
+                content: '>';
+                font-size: 11px;
+            }
+        }
+    }
+    &.large {
+        $height: 52px;
+        height: $height;
+        line-height: $height;
+        font-size: 15px;
+    }
+    &.row-button {
+        vertical-align: bottom;
+
+        &.inline {
+            margin: 0 0 6px;
+        }
+    }
 }
 
 
 button.ellipsis-loader-button {
-	.icon-ellipsis {
-		position: absolute;
-		top: 15px;
-		left: 50%;
-		margin: 0 0 0 -18px;
-		display: none;
-	}
-	&.loading {
-		color: transparent;
-		cursor: default;
+    .icon-ellipsis {
+        position: absolute;
+        top: 15px;
+        left: 50%;
+        margin: 0 0 0 -18px;
+        display: none;
+    }
+    &.loading {
+        color: transparent;
+        cursor: default;
 
-		.icon-ellipsis {
-			display: block;
-		}
-		&.primary {
-			&:hover {
-				background-color: $color-active-blue;
-				color: $color-active-blue;
-			}
-		}
-	}
+        .icon-ellipsis {
+            display: block;
+        }
+        &.primary {
+            &:hover {
+                background-color: $color-active-blue;
+                color: $color-active-blue;
+            }
+        }
+    }
 }
 
 .rocker-button {
-	$height: 35px;
+    $height: 35px;
+    $transition: left 0.4s ease-out;
 
-	height: $height;
-	line-height: $height;
-	margin-bottom: 25px;
-	@include border-radius(3px);
-	@include base-button-styles;
+    height: $height;
+    line-height: $height;
+    margin-bottom: 25px;
 
-	label {
-		position: relative;
-		z-index: 2;
-		float: left;
-		padding: 0 30px;
+    @include border-radius(3px);
+    @include base-button-styles;
 
-		width: auto;
-		line-height: $height - 2px;
-		font-size: 14px;
+    label {
+        position: relative;
+        z-index: 2;
+        float: left;
+        padding: 0 30px;
 
-		text-transform: none;
-		color: $color-slate;
-		margin: 0;
+        width: auto;
+        line-height: $height - 2px;
+        font-size: 14px;
 
-		border-style: solid;
-		border-color: $color-rhino;
-		border-width: 1px 0 1px 1px;
+        text-transform: none;
+        color: $color-slate;
+        margin: 0;
 
-		cursor: pointer;
+        border-style: solid;
+        border-color: $color-rhino;
+        border-width: 1px 0 1px 1px;
 
-		&:first-of-type {
-			@include border-radius(3px 0 0 3px);
-		}
-		&:last-of-type {
-			@include border-radius(0 3px 3px 0);
-			border-width: 1px;
-		}
-	}
-	&.sel-0 {
-		label {
-			&:nth-of-type(1) {
-				background: $color-timberwolf;
-				@include transition(left .4s ease-out);
-			}
-    	}
-	}
-	&.sel-1 {
-		label {
-			&:nth-of-type(2) {
-				background: $color-timberwolf;
-				@include transition(left .4s ease-out);
-			}
-    	}
-	}
-	&.sel-2 {
-		label {
-			&:nth-of-type(3) {
-        		background: $color-timberwolf;
-        		@include transition(left .4s ease-out);
-			}
-    	}
-	}
-	&.sel-3 {
-		label {
-			&:nth-of-type(4) {
-        		background: $color-timberwolf;
-        		@include transition(left .4s ease-out);
-			}
-    	}
-	}
+        cursor: pointer;
+
+        &:first-of-type {
+            @include border-radius(3px 0 0 3px);
+        }
+        &:last-of-type {
+            @include border-radius(0 3px 3px 0);
+            border-width: 1px;
+        }
+    }
+    &.sel-0 {
+        label {
+            &:nth-of-type(1) {
+                background: $color-timberwolf;
+
+                @include transition($transition);
+            }
+        }
+    }
+    &.sel-1 {
+        label {
+            &:nth-of-type(2) {
+                background: $color-timberwolf;
+
+                @include transition($transition);
+            }
+        }
+    }
+    &.sel-2 {
+        label {
+            &:nth-of-type(3) {
+                background: $color-timberwolf;
+
+                @include transition($transition);
+            }
+        }
+    }
+    &.sel-3 {
+        label {
+            &:nth-of-type(4) {
+                background: $color-timberwolf;
+
+                @include transition($transition);
+            }
+        }
+    }
 }

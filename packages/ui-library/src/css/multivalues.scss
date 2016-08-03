@@ -1,113 +1,111 @@
 .input-multivalues {
-	position: relative;
-	display: inline-block;
-	width: 350px;
-	height: 200px;
-	background-color: $color-input-fill;
-	font-size: 16px;
-	text-transform: none;
-	cursor: text;
-	margin: 0;
-	overflow: scroll;
-	padding: 12px 7px 12px 12px;
+    position: relative;
+    display: inline-block;
+    width: 350px;
+    height: 200px;
+    background-color: $color-input-fill;
+    font-size: 16px;
+    text-transform: none;
+    cursor: text;
+    margin: 0;
+    overflow: scroll;
+    padding: 12px 7px 12px 12px;
 
-	.clear {
-		font-family: $icon-font;
-		font-size: 10px;
-		position: absolute;
-		top: 28px;
-		right: 26px;
-		color: $color-input-text;
-	}
-	.entries {
-		@include box-sizing(border-box);
-		z-index: 10;
-	    display: block;
-		min-height: 36px;
-	    outline: none;
-	    overflow: hidden;
-	    position: relative;
-	    width: 100%;
+    .clear {
+        font-family: $icon-font;
+        font-size: 10px;
+        position: absolute;
+        top: 28px;
+        right: 26px;
+        color: $color-input-text;
+    }
+    .entries {
+        @include box-sizing(border-box);
+        z-index: 10;
+        display: block;
+        min-height: 36px;
+        outline: none;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
 
-		.entry {
-			@include box-sizing(border-box);
-			border: 1px solid $color-input-border;
-			background: $color-white;
-			color: $color-midnight;
-			max-width: 100%;
-			display: inline-block;
-			font-size: 0.9em;
-			margin: 0 5px 5px 0;
-			vertical-align: top;
-			padding: 10px 30px 10px 10px;
-			text-transform: none;
-			@include border-radius(2px);
+        .entry {
+            border: 1px solid $color-input-border;
+            background: $color-white;
+            color: $color-midnight;
+            max-width: 100%;
+            display: inline-block;
+            font-size: 0.9em;
+            margin: 0 5px 5px 0;
+            vertical-align: top;
+            padding: 10px 30px 10px 10px;
+            text-transform: none;
 
-			.delete {
-				font-size: 11px;
-				position: absolute;
-				top: 11px;
-				right: 11px;
+            @include box-sizing(border-box);
+            @include border-radius(2px);
 
-				&:before {
-					content: 'X';
-					font-family: $icon-font;
-					font-size: 8px;
-					color: $color-midnight;
-				}
-				&:hover {
-					text-decoration: none;
-				}
-			}
-			span {
-				max-width: 100%;
-				text-overflow: ellipsis;
-				display: block;
-				overflow: hidden;
-			}
-		}
-		[draggable]{
-			cursor: grab;
-			cursor: -webkit-grab;
-			cursor: -moz-grab;
-			&:active{
-				cursor: grabbing;
-				cursor: -webkit-grabbing;
-				cursor: -moz-grabbing;
-			}
-		}
-		.placeholder {
-			background: #2996cc;
-			width: 5px;
-			height: 36px;
-			display: inline-block;
-		}
-		.value-input {
-			display: inline-block;
-			outline: none;
-			vertical-align: middle;
-			padding: 0;
-			max-width: 100%;
-			input {
-				width:auto;
-				width: 1em;
-				max-width: 100%;
-				color: $color-input-text;
-				box-sizing: content-box;
-				background: none transparent;
-			    border: 0 none;
-			    box-shadow: none;
-			    cursor: default;
-			    display: inline-block;
-			    font-family: inherit;
-			    font-size: inherit;
-			    height: 34px;
-			    margin: 0;
-			    outline: none;
-			    padding: 0;
-			    -webkit-appearance: none;
-				margin-left: 5px;
-			}
-		}
-	}
+            .delete {
+                font-size: 11px;
+                position: absolute;
+                top: 11px;
+                right: 11px;
+
+                &:before {
+                    content: 'X';
+                    font-family: $icon-font;
+                    font-size: 8px;
+                    color: $color-midnight;
+                }
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+            span {
+                max-width: 100%;
+                text-overflow: ellipsis;
+                display: block;
+                overflow: hidden;
+            }
+        }
+        [draggable] {
+            @include grab-cursor;
+
+            &:active {
+                @include grab-cursor;
+            }
+        }
+        .placeholder {
+            background: #2996cc;
+            width: 5px;
+            height: 36px;
+            display: inline-block;
+        }
+        .value-input {
+            display: inline-block;
+            outline: none;
+            vertical-align: middle;
+            padding: 0;
+            max-width: 100%;
+
+            input {
+                width: 1em;
+                max-width: 100%;
+                color: $color-input-text;
+                box-sizing: content-box;
+                background: none transparent;
+                border: 0 none;
+                box-shadow: none;
+                cursor: default;
+                display: inline-block;
+                font-family: inherit;
+                font-size: inherit;
+                height: 34px;
+                margin: 0;
+                outline: none;
+                padding: 0;
+                -webkit-appearance: none;
+                margin-left: 5px;
+            }
+        }
+    }
 }

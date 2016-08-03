@@ -2,34 +2,34 @@
 @import 'globals';
 
 .input-select {
-	background: none;
-	border: none;
-	border-radius: 0;
-	
-	&:after {
-		content: none;
-	}
-	select {
-		padding: 0;
-		border: 1px solid $color-input-border;
-		width: 160%; 		// pushes default select arrow out of range
-		option {
-			&:checked {
-				background-color: $color-input-fill;
-			}
-			&:hover {
-				background-color: $color-input-fill;
-			}
-		}
-	}
-	&.error {
-		select {
-			border-color: 1px solid $color-critical-red;
-		}
-	}
-	&.required {
-		select {
-			padding-right: 0;
-		}
-	}
+    background: none;
+    border: none;
+    border-radius: 0;
+
+    &:after {
+        content: none;
+    }
+    select {
+        padding: 0;
+        border: 1px solid $color-input-border;
+        width: 160%; // pushes default select arrow out of range
+        option {
+            &:checked {
+                background-color: $color-input-fill;
+            }
+            &:hover {
+                background-color: $color-input-fill;
+            }
+        }
+    }
+    &.error {
+        select {
+            border-color: 1px solid $color-critical-red;
+        }
+    }
+    &.required {
+        select {
+            padding-right: 0;
+        }
+    }
 }

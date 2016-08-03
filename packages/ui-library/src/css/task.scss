@@ -1,241 +1,255 @@
 .task {
-	$inactive-opacity: 0.5;
+    $inactive-opacity: 0.5;
 
-	padding: 12px;
-	border: 1px solid transparentize($color-timberwolf, $inactive-opacity);
-	background-color: transparentize($color-white, $inactive-opacity);
-	margin: 0 0 20px 0;
+    padding: 12px;
+    border: 1px solid transparentize($color-timberwolf, $inactive-opacity);
+    background-color: transparentize($color-white, $inactive-opacity);
+    margin: 0 0 20px;
 
-	.task-content {
-		position: relative;
-		max-height: 0;
-		margin: 15px 8px 0 68px;
-		padding: 0;
-		@include transition(all 0.5s);
+    .task-content {
+        position: relative;
+        max-height: 0;
+        margin: 15px 8px 0 68px;
+        padding: 0;
 
-		&.content-only {
-			margin: 45px;
-		}
-		.primary-instructions {
-			color: $color-elephant;
-			margin: -10px 0 10px -20px;
-			font-size: 15px;
-		}
-		textarea {
-			max-width: 600px;
-		}
-	}
-	&.active {
-		border: 1px solid $color-timberwolf;
-		background-color: $color-white;
+        @include transition(all 0.5s);
 
-		.task-title {
-			.progress, .task-title-text {
-				@include opacity(1);
-			}
-		}
-		.task-content {
-			max-height: 12000px;
-		}
-		.task-title-selection {
-			@include opacity(1);
-		}
-	}
-	.task-title {
-		font-size: 18px;
-		line-height: 1em;
-		height: 33px;
-		font-family: $font-pn-light;
-		color: $color-slate;
-		text-transform: uppercase;
+        &.content-only {
+            margin: 45px;
+        }
+        .primary-instructions {
+            color: $color-elephant;
+            margin: -10px 0 10px -20px;
+            font-size: 15px;
+        }
+        textarea {
+            max-width: 600px;
+        }
+    }
+    &.active {
+        border: 1px solid $color-timberwolf;
+        background-color: $color-white;
 
-		.progress, .task-title-text {
-			@include opacity($inactive-opacity);
-		}
-		.progress {
-			text-transform: none;
-			margin: 0 15px 0 0;
-			font-family: $font-pn-semibold;
-			i {
-				font-style: normal;
-			}
-		}
-		.help-tooltip {
-			margin-left: 10px;
-			vertical-align: 1px;
-			.icon-help {
-				width: 17px;
-			}
-		}
-	}
-	.task-title-selection {
-		padding: 0 0 0 6px;
-		font-family: $font-pn-regular;
-		text-transform: initial;
-		@include opacity($inactive-opacity);
-	}
-	.task-edit-link {
-		margin: 0 0 0 20px;
-		font-size: 16px;
-		text-transform: capitalize;
-	}
-	.sub-task {
-		margin: 0 0 45px 0;
+        .task-title {
+            .progress,
+            .task-title-text {
+                @include opacity(1);
+            }
+        }
+        .task-content {
+            max-height: 12000px;
+        }
+        .task-title-selection {
+            @include opacity(1);
+        }
+    }
+    .task-title {
+        font-size: 18px;
+        line-height: 1em;
+        height: 33px;
+        font-family: $font-pn-light;
+        color: $color-slate;
+        text-transform: uppercase;
 
-		&:last-of-type {
-			margin-bottom: 0;
-		}
-		.input-row, > label, .input-image-upload {
-			margin-left: 20px;
-			&.section-heading {
-				margin-left: 0;
-			}
-		}
-		.hide {
-			display: none;
-		}
-	}
-	.sub-task-title {
-		font-size: 15px;
-		line-height: 1em;
-		padding: 0 0 5px 0;
-		margin: 40px 0 25px 0;
-		color: $color-blue-grey;
-		border-bottom: 1px solid $color-stone;
-		font-family: $font-pn-bold;
-		.help-tooltip {
-			margin: 0 0 0 10px;
-			line-height: 1em;
-			height: 18px;
-			width: 18px;
-			vertical-align: middle;
-		}
-	}
-	&.item {
-		padding: 10px 30px 0 15px;
-	}
-	.indent {
-		padding-left: 50px;
-		.normal {
-			font-weight: normal;
-		}
-	}
-	.loading-message, .complete-message {
-		text-align: center;
-		margin: 0 0 30px -50px;
-	}
-	.loading-message {
-		font-size: 19px;
-		font-weight: bold;
-		color: $color-elephant;
+        .progress,
+        .task-title-text {
+            @include opacity($inactive-opacity);
+        }
+        .progress {
+            text-transform: none;
+            margin: 0 15px 0 0;
+            font-family: $font-pn-semibold;
+            i {
+                font-style: normal;
+            }
+        }
+        .help-tooltip {
+            margin-left: 10px;
+            vertical-align: 1px;
+            .icon-help {
+                width: 17px;
+            }
+        }
+    }
+    .task-title-selection {
+        padding: 0 0 0 6px;
+        font-family: $font-pn-regular;
+        text-transform: initial;
 
-		.loader {
-			margin: 0 10px -4px 0;
-		}
-	}
-	.complete-message {
-		color: $color-success;
-		text-transform: uppercase;
-		font-size: 22px;
-		font-weight: bold;
+        @include opacity($inactive-opacity);
+    }
+    .task-edit-link {
+        margin: 0 0 0 20px;
+        font-size: 16px;
+        text-transform: capitalize;
+    }
+    .sub-task {
+        margin: 0 0 45px;
 
-		&:before {
-			font-family: $icon-font;
-			content: '\79';
-			text-transform: none;
-			font-size: 18px;
-			margin: 0 10px 0 0;
-		}
-	}
-	ol.task-list {
-		counter-reset: step-counter;
-		margin: 30px 0 0 0;
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+        .input-row,
+        > label,
+        .input-image-upload {
+            margin-left: 20px;
+            &.section-heading {
+                margin-left: 0;
+            }
+        }
+        .hide {
+            display: none;
+        }
+    }
+    .sub-task-title {
+        font-size: 15px;
+        line-height: 1em;
+        padding: 0 0 5px;
+        margin: 40px 0 25px;
+        color: $color-blue-grey;
+        border-bottom: 1px solid $color-stone;
+        font-family: $font-pn-bold;
 
-		> li {
-			$size: 20px;
-			$indent: $size + 10;
+        .help-tooltip {
+            margin: 0 0 0 10px;
+            line-height: 1em;
+            height: 18px;
+            width: 18px;
+            vertical-align: middle;
+        }
+    }
+    &.item {
+        padding: 10px 30px 0 15px;
+    }
+    .indent {
+        padding-left: 50px;
+        .normal {
+            font-weight: normal;
+        }
+    }
+    .loading-message,
+    .complete-message {
+        text-align: center;
+        margin: 0 0 30px -50px;
+    }
+    .loading-message {
+        font-size: 19px;
+        font-weight: bold;
+        color: $color-elephant;
 
-			.task-list-title {
-				display: block;
-				text-transform: uppercase;
-				margin-bottom: 25px;
-				color: $color-slate;
-				font-size: 16px;
+        .loader {
+            margin: 0 10px -4px 0;
+        }
+    }
+    .complete-message {
+        color: $color-success;
+        text-transform: uppercase;
+        font-size: 22px;
+        font-weight: bold;
 
-				.remove {
-					display: inline-block;
-					margin: 0 0 0 30px;
-					text-transform: capitalize;
-					font-size: 14px;
-				}
-			}
+        &:before {
+            font-family: $icon-font;
+            content: '\79';
+            text-transform: none;
+            font-size: 18px;
+            margin: 0 10px 0 0;
+        }
+    }
+    ol.task-list {
+        counter-reset: step-counter;
+        margin: 30px 0 0;
 
-			counter-increment: step-counter;
-			position: relative;
-			margin: 0 0 15px $indent;
-			padding-top: 1px;
+        > li {
+            $size: 20px;
+            $indent: $size + 10;
 
-			&:before {
-			    content: counter(step-counter);
-				position: absolute;
-				top: -1px;
-				left: 0;
-			    font-size: 12px;
-			    background-color: $color-midnight;
-			    color: $color-white;
-			    height: $size;
-				width: $size;
-				line-height: $size + 2;
-				text-align: center;
-				margin: 0 0 0 #{-$indent};
-				font-weight: 100;
+            counter-increment: step-counter;
+            position: relative;
+            margin: 0 0 15px $indent;
+            padding-top: 1px;
 
-			    @include border-radius(#{ceil($size/2)});
-			}
-		}
-		&.divided {
-			li {
-				border-bottom: 1px solid $color-stratus;
-				padding-bottom: 15px;
-				margin-bottom: 30px;
+            .task-list-title {
+                display: block;
+                text-transform: uppercase;
+                margin-bottom: 25px;
+                color: $color-slate;
+                font-size: 16px;
 
-				&:last-of-type {
-					border-bottom: none;
-					margin-bottom: 0;
-				}
-			}
-		}
-	}
-	.buttons,
-	.button-container // DEPRECATED
-	{
-		margin: 20px 0 0 0;
-		text-align: right;
+                .remove {
+                    display: inline-block;
+                    margin: 0 0 0 30px;
+                    text-transform: capitalize;
+                    font-size: 14px;
+                }
+            }
+            &:before {
+                content: counter(step-counter);
+                position: absolute;
+                top: -1px;
+                left: 0;
+                font-size: 12px;
+                background-color: $color-midnight;
+                color: $color-white;
+                height: $size;
+                width: $size;
+                line-height: $size + 2;
+                text-align: center;
+                margin: 0 0 0 #{-$indent};
+                font-weight: 100;
 
-		input[type=button], button, .button {
-			margin: 0;
+                @include border-radius(#{ceil($size/2)});
+            }
+        }
+        &.divided {
+            li {
+                border-bottom: 1px solid $color-stratus;
+                padding-bottom: 15px;
+                margin-bottom: 30px;
 
-			& ~ input[type=button], & ~ button, & ~ .button {
-				margin-left: 10px;
-			}
-		}
-	}
-	input[type=text], input[type=password], textarea {
-		width: 300px;
+                &:last-of-type {
+                    border-bottom: none;
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+    // .button-container is DEPRECATED
+    .buttons,
+    .button-container {
+        margin: 20px 0 0;
+        text-align: right;
 
-		&.extended {
-			width: 400px;
-		}
-	}
+        input[type=button],
+        button,
+        .button {
+            margin: 0;
+
+            & ~ input[type=button],
+            & ~ button,
+            & ~ .button {
+                margin-left: 10px;
+            }
+        }
+    }
+    input[type=text],
+    input[type=password],
+    textarea {
+        width: 300px;
+
+        &.extended {
+            width: 400px;
+        }
+    }
 }
+
 .task-submit {
-	float: right;
+    float: right;
 
-	input[type=button] {
-		margin-right: 9px;
+    input[type=button] {
+        margin-right: 9px;
 
-		&:last-of-type {
-			margin-right: 0;
-		}
-	}
+        &:last-of-type {
+            margin-right: 0;
+        }
+    }
 }

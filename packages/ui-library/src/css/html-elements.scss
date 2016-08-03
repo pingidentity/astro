@@ -1,63 +1,77 @@
-// HTML ELEMENTS
-body {
-	font-family: $font-pn-regular;
-	font-size: 14px;
-	line-height: 1.3em;
-	color: $color-elephant;
-	font-weight: 300;
-}
-a {
-	cursor: pointer;
-	text-decoration: none;
-	color: $color-link-text;
 
-	&:hover {
-		text-decoration: underline;
-	}
-	&.link {
-		border-bottom: 1px solid  $color-active;
-		padding-bottom: 0px;
-		text-transform: uppercase;
-	}
+body {
+    font-family: $font-pn-regular;
+    font-size: 14px;
+    line-height: 1.3em;
+    color: $color-elephant;
+    font-weight: 300;
 }
-h1, h2, h3, h4, h5 {
-	color: $color-slate;
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+    color: $color-link-text;
+
+    &:hover {
+        text-decoration: underline;
+    }
+    &.link {
+        border-bottom: 1px solid  $color-active;
+        padding-bottom: 0;
+        text-transform: uppercase;
+    }
 }
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    color: $color-slate;
+}
+
 h1 {
-	font-size: 24px;
-	font-weight: 400;
-	margin: 25px 0;
+    font-size: 24px;
+    font-weight: 400;
+    margin: 25px 0;
 }
+
 h2 {
-	font-size: 20px;
-	font-weight: 500;
-	margin: 0 0 10px 0;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 10px;
 }
+
 h3 {
-	font-size: 16px;
-	margin: 0 0 10px 0;
+    font-size: 16px;
+    margin: 0 0 10px;
 }
+
 p {
-	margin: 0 0 1em 0;
-	font-family: $font-pn-regular;
-	font-size: 14px;
+    margin: 0 0 1em;
+    font-family: $font-pn-regular;
+    font-size: 14px;
 }
+
 strong {
-	font-weight: bold;
-	font-family: $font-pn-bold;
+    font-weight: bold;
+    font-family: $font-pn-bold;
 }
+
 i {
-	font-style: italic;
+    font-style: italic;
 }
+
 ul.ul {
-	margin: 5px 0 15px 20px;
-	li {
-		list-style: disc;
-	}
+    margin: 5px 0 15px 20px;
+    li {
+        list-style: disc;
+    }
 }
+
 ol.ol {
-	margin: 5px 0 15px 20px;
-	li {
-		list-style: decimal;
-	}
+    margin: 5px 0 15px 20px;
+    li {
+        list-style: decimal;
+    }
 }

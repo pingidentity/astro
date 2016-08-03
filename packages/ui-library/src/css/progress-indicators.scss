@@ -1,186 +1,192 @@
 .progress {
-	$progress-size: 36px;
+    $progress-size: 36px;
 
-	position: relative;
-	display: inline-block;
-	height: $progress-size;
-	width: $progress-size;
-	padding-top: 3px;
-	line-height: 2.43em;
-	text-align: center;
-	font-size: 14px;
-	font-weight: 500;
-	color: $color-midnight;
+    position: relative;
+    display: inline-block;
+    height: $progress-size;
+    width: $progress-size;
+    padding-top: 3px;
+    line-height: 2.43em;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: $color-midnight;
 
-	&:before, &:after {
-		font-family: $icon-font;
-		font-size: $progress-size;
-		line-height: $progress-size;
-		position: absolute;
-		top: 0;
-		left: 0;
-	}
-	&:before {
-		color: rgba($color-midnight, 0.2);
-	}
-	&:after {
-		color: $color-midnight;
-	}
+    &:before,
+    &:after {
+        font-family: $icon-font;
+        font-size: $progress-size;
+        line-height: $progress-size;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    &:before {
+        color: rgba($color-midnight, 0.2);
+    }
+    &:after {
+        color: $color-midnight;
+    }
 
-	&.of1, &.of2, &.of3, &.of4, &.of5, &.of6 {
-		&.done {
-			i {
-				display: inline-block;
-				height: $progress-size;
-				width: $progress-size;
-				color: transparent;
-				font-size: 0;
-				font-style: normal;
+    &.of1,
+    &.of2,
+    &.of3,
+    &.of4,
+    &.of5,
+    &.of6 {
+        &.done {
+            i {
+                display: inline-block;
+                height: $progress-size;
+                width: $progress-size;
+                color: transparent;
+                font-size: 0;
+                font-style: normal;
 
-				&:after {
-					position: absolute;
-					top: 2px;
-					left: -1px;
-					font-family: $icon-font;
-					content: '\79';
-					height: $progress-size;
-					width: $progress-size;
-					color: $color-midnight;
-					font-size: 12px;
-				}
-			}
-		}
-	}
-	&.of1 {
-		&.step1 {
-			&:after {
-				content: '\e4';
-			}
-		}
-	}
-	&.of2 {
-		&:before {
-			content: '\d1';
-		}
-		&.step1 {
-			&:after {
-				content: '\d0';
-			}
-		}
-		&.step2 {
-			&:after {
-				content: '\d1';
-			}
-		}
-	}
-	&.of3 {
-		&:before {
-			content: '\d4';
-		}
-		&.step1 {
-			&:after {
-				content: '\d2';
-			}
-		}
-		&.step2 {
-			&:after {
-				content: '\d3';
-			}
-		}
-		&.step3 {
-			&:after {
-				content: '\d4';
-			}
-		}
-	}
-	&.of4 {
-		&:before {
-			content: '\d8';
-		}
-		&.step1 {
-			&:after {
-				content: '\d5';
-			}
-		}
-		&.step2 {
-			&:after {
-				content: '\d6';
-			}
-		}
-		&.step3 {
-			&:after {
-				content: '\d7';
-			}
-		}
-		&.step4 {
-			&:after {
-				content: '\d8';
-			}
-		}
-	}
-	&.of5 {
-		&:before {
-			content: '\dd';
-		}
-		&.step1 {
-			&:after {
-				content: '\d9';
-			}
-		}
-		&.step2 {
-			&:after {
-				content: '\da';
-			}
-		}
-		&.step3 {
-			&:after {
-				content: '\db';
-			}
-		}
-		&.step4 {
-			&:after {
-				content: '\dc';
-			}
-		}
-		&.step5{
-			&:after {
-				content: '\dd';
-			}
-		}
-	}
-	&.of6 {
-		&:before {
-			content: '\e3';
-		}
-		&.step1 {
-			&:after {
-				content: '\de';
-			}
-		}
-		&.step2 {
-			&:after {
-				content: '\df';
-			}
-		}
-		&.step3 {
-			&:after {
-				content: '\e0';
-			}
-		}
-		&.step4 {
-			&:after {
-				content: '\e1';
-			}
-		}
-		&.step5 {
-			&:after {
-				content: '\e2';
-			}
-		}
-		&.step6 {
-			&:after {
-				content: '\e3';
-			}
-		}
-	}
+                &:after {
+                    position: absolute;
+                    top: 2px;
+                    left: -1px;
+                    font-family: $icon-font;
+                    content: '\79';
+                    height: $progress-size;
+                    width: $progress-size;
+                    color: $color-midnight;
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+    &.of1 {
+        &.step1 {
+            &:after {
+                content: '\e4';
+            }
+        }
+    }
+    &.of2 {
+        &:before {
+            content: '\d1';
+        }
+        &.step1 {
+            &:after {
+                content: '\d0';
+            }
+        }
+        &.step2 {
+            &:after {
+                content: '\d1';
+            }
+        }
+    }
+    &.of3 {
+        &:before {
+            content: '\d4';
+        }
+        &.step1 {
+            &:after {
+                content: '\d2';
+            }
+        }
+        &.step2 {
+            &:after {
+                content: '\d3';
+            }
+        }
+        &.step3 {
+            &:after {
+                content: '\d4';
+            }
+        }
+    }
+    &.of4 {
+        &:before {
+            content: '\d8';
+        }
+        &.step1 {
+            &:after {
+                content: '\d5';
+            }
+        }
+        &.step2 {
+            &:after {
+                content: '\d6';
+            }
+        }
+        &.step3 {
+            &:after {
+                content: '\d7';
+            }
+        }
+        &.step4 {
+            &:after {
+                content: '\d8';
+            }
+        }
+    }
+    &.of5 {
+        &:before {
+            content: '\dd';
+        }
+        &.step1 {
+            &:after {
+                content: '\d9';
+            }
+        }
+        &.step2 {
+            &:after {
+                content: '\da';
+            }
+        }
+        &.step3 {
+            &:after {
+                content: '\db';
+            }
+        }
+        &.step4 {
+            &:after {
+                content: '\dc';
+            }
+        }
+        &.step5 {
+            &:after {
+                content: '\dd';
+            }
+        }
+    }
+    &.of6 {
+        &:before {
+            content: '\e3';
+        }
+        &.step1 {
+            &:after {
+                content: '\de';
+            }
+        }
+        &.step2 {
+            &:after {
+                content: '\df';
+            }
+        }
+        &.step3 {
+            &:after {
+                content: '\e0';
+            }
+        }
+        &.step4 {
+            &:after {
+                content: '\e1';
+            }
+        }
+        &.step5 {
+            &:after {
+                content: '\e2';
+            }
+        }
+        &.step6 {
+            &:after {
+                content: '\e3';
+            }
+        }
+    }
 }

@@ -129,7 +129,7 @@
     "start": "npm run doc && npm run webpack-start",
     "doc": "jsdoc -c ./jsdoc.json",
     "jslint": "eslint --ext .js,.jsx .",
-    "stylelint": "stylelint --syntax scss ./src/**/*.scss --config ./style-lint-config.json",
+    "stylelint": "stylelint --syntax scss ./src/**/*.scss --config ./.stylelintrc",
     "jest": "jest && node ./clean-after.js",
     "coverage": "jest --coverage && node ./clean-after.js",
     "test": "jest",

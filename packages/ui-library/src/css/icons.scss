@@ -2,7 +2,7 @@
 // FONT BASED ICONS ----------------------------------------------------------------------------------------------------
 
 @font-face {
-	$font-path: '../fonts/icons/';
+    $font-path: '../fonts/icons/';
 
     font-family: 'iconfont';
     src:
@@ -13,7 +13,8 @@
     font-style: normal;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^='icon-'],
+[class*=' icon-'] {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'iconfont' !important;
     speak: none;
@@ -29,121 +30,385 @@
 }
 
 .inline-icon {
-	display: inline-block;
-	vertical-align: text-bottom;
-	margin: 0 5px 0 0;
+    display: inline-block;
+    vertical-align: text-bottom;
+    margin: 0 5px 0 0;
 
-	&.icon-approve {
-		font-size: 90%;
-		line-height: 1.2em;
-	}
-	&.icon-expand-arrow {
-		font-size: 60%;
-    	line-height: 1.55em;
-	}
-	&.icon-left, &.icon-right {
-		font-size: 70%;
-		line-height: 1.4em;
-	}
-	&.icon-menu {
-		font-size: 65%;
-    	line-height: 1.55em;
-	}
-	&.icon-next {
-		font-size: 90%;
-   		line-height: 1.2em;
-	}
-	&.icon-view {
-		font-size: 70%;
-		line-height: 1.4em;
-	}
+    &.icon-approve {
+        font-size: 90%;
+        line-height: 1.2em;
+    }
+    &.icon-expand-arrow {
+        font-size: 60%;
+        line-height: 1.55em;
+    }
+    &.icon-left,
+    &.icon-right {
+        font-size: 70%;
+        line-height: 1.4em;
+    }
+    &.icon-menu {
+        font-size: 65%;
+        line-height: 1.55em;
+    }
+    &.icon-next {
+        font-size: 90%;
+        line-height: 1.2em;
+    }
+    &.icon-view {
+        font-size: 70%;
+        line-height: 1.4em;
+    }
 }
 
-.icon-account:before { content: "\61"; }
-.icon-admin-account:before { content: "\74"; }
-.icon-alert:before { content: "\21"; }
-.icon-approve:before { content: "\70"; }
-.icon-apps:before { content: "\6c"; }
-.icon-badge:before { content: "\62"; }
-.icon-cabinet:before { content: "\24"; }
-.icon-calendar:before { content: "\43"; }
-.icon-check:before { content: "\79"; }
-.icon-circle-o:before { content: "\4f"; }
-.icon-circle:before { content: "\2e"; }
-.icon-clear:before { content: "\58"; }
-.icon-close:before { content: "\78"; }
-.icon-close-arrow:before { content: "\5e"; }
-.icon-cog:before { content: "\67"; }
-.icon-collapse:before { content: "\63"; }
-.icon-delete:before { content: "\64"; }
-.icon-directory:before { content: "\3d"; }
-.icon-directory-hollow:before { content: "\23"; }
-.icon-download:before { content: "\44"; }
-.icon-dropdown-arrow:before { content: "\76"; }
-.icon-edit:before { content: "\65"; }
-.icon-expand:before { content: "\45"; }
-.icon-expand-arrow:before { content: "\59"; }
-.icon-file:before { content: "\2c"; }
-.icon-filter:before { content: "\66"; }
-.icon-globe:before { content: "\a1"; }
-.icon-grip:before { content: "\47"; }
-.icon-help:before { content: "\68"; }
-.icon-help-rounded:before { content: "\48"; }
-.icon-image:before { content: "\69"; }
-.icon-info:before { content: "\49"; }
-.icon-key:before { content: "\4b"; }
-.icon-left:before { content: "\3c"; }
-.icon-lock:before { content: "\4c"; }
-.icon-menu:before { content: "\6d"; }
-.icon-minus:before { content: "\2d"; }
-.icon-minus-rounded:before { content: "\5f"; }
-.icon-network:before { content: "\25"; }
-.icon-next:before { content: "\7d"; }
-.icon-overview:before { content: "\6f"; }
-.icon-pin:before { content: "\4e"; }
-.icon-plus:before { content: "\2b"; }
-.icon-plus-rounded:before { content: "\2a"; }
-.icon-puzzle:before { content: "\7a"; }
-.icon-previous:before { content: "\7b"; }
-.icon-progress-2-1:before { content: "\d0"; }
-.icon-progress-2-2:before { content: "\d1"; }
-.icon-progress-3-1:before { content: "\d2"; }
-.icon-progress-3-2:before { content: "\d3"; }
-.icon-progress-3-3:before { content: "\d4"; }
-.icon-progress-4-1:before { content: "\d5"; }
-.icon-progress-4-2:before { content: "\d6"; }
-.icon-progress-4-3:before { content: "\d7"; }
-.icon-progress-4-4:before { content: "\d8"; }
-.icon-progress-5-1:before { content: "\d9"; }
-.icon-progress-5-2:before { content: "\da"; }
-.icon-progress-5-3:before { content: "\db"; }
-.icon-progress-5-4:before { content: "\dc"; }
-.icon-progress-5-5:before { content: "\dd"; }
-.icon-progress-6-1:before { content: "\de"; }
-.icon-progress-6-2:before { content: "\df"; }
-.icon-progress-6-3:before { content: "\e0"; }
-.icon-progress-6-4:before { content: "\e1"; }
-.icon-progress-6-5:before { content: "\e2"; }
-.icon-progress-6-6:before { content: "\e3"; }
-.icon-resend:before { content: "\72"; }
-.icon-right:before { content: "\3e"; }
-.icon-search:before { content: "\73"; }
-.icon-settings:before { content: "\53"; }
-.icon-slider:before { content: "\7e"; }
-.icon-sort-asc:before { content: "\41"; }
-.icon-sort-desc:before { content: "\2200"; }
-.icon-sort-none:before { content: "\7c"; }
-.icon-spinner:before { content: "\50"; } // should this be deleted?
-.icon-spin-down:before { content: "\30"; }
-.icon-spin-up:before { content: "\31"; }
-.icon-success:before { content: "\79"; }
-.icon-support:before { content: "\71"; }
-.icon-thumb:before { content: "\54"; }
-.icon-undo:before { content: "\6e"; }
-.icon-user:before { content: "\75"; }
-.icon-users:before { content: "\55"; }
-.icon-view:before { content: "\56"; }
-.icon-view-hidden:before { content: "\2f"; }
-.icon-walkthrough:before { content: "\4d"; }
-.icon-wand:before { content: "\57"; }
-.icon-welcome:before { content: "\77"; }
+.icon-account:before {
+    content: '\61';
+}
+
+.icon-admin-account:before {
+    content: '\74';
+}
+
+.icon-alert:before {
+    content: '\21';
+}
+
+.icon-approve:before {
+    content: '\70';
+}
+
+.icon-apps:before {
+    content: '\6c';
+}
+
+.icon-badge:before {
+    content: '\62';
+}
+
+.icon-cabinet:before {
+    content: '\24';
+}
+
+.icon-calendar:before {
+    content: '\43';
+}
+
+.icon-check:before {
+    content: '\79';
+}
+
+.icon-circle-o:before {
+    content: '\4f';
+}
+
+.icon-circle:before {
+    content: '\2e';
+}
+
+.icon-clear:before {
+    content: '\58';
+}
+
+.icon-close:before {
+    content: '\78';
+}
+
+.icon-close-arrow:before {
+    content: '\5e';
+}
+
+.icon-cog:before {
+    content: '\67';
+}
+
+.icon-collapse:before {
+    content: '\63';
+}
+
+.icon-delete:before {
+    content: '\64';
+}
+
+.icon-directory:before {
+    content: '\3d';
+}
+
+.icon-directory-hollow:before {
+    content: '\23';
+}
+
+.icon-download:before {
+    content: '\44';
+}
+
+.icon-dropdown-arrow:before {
+    content: '\76';
+}
+
+.icon-edit:before {
+    content: '\65';
+}
+
+.icon-expand:before {
+    content: '\45';
+}
+
+.icon-expand-arrow:before {
+    content: '\59';
+}
+
+.icon-file:before {
+    content: '\2c';
+}
+
+.icon-filter:before {
+    content: '\66';
+}
+
+.icon-globe:before {
+    content: '\a1';
+}
+
+.icon-grip:before {
+    content: '\47';
+}
+
+.icon-help:before {
+    content: '\68';
+}
+
+.icon-help-rounded:before {
+    content: '\48';
+}
+
+.icon-image:before {
+    content: '\69';
+}
+
+.icon-info:before {
+    content: '\49';
+}
+
+.icon-key:before {
+    content: '\4b';
+}
+
+.icon-left:before {
+    content: '\3c';
+}
+
+.icon-lock:before {
+    content: '\4c';
+}
+
+.icon-menu:before {
+    content: '\6d';
+}
+
+.icon-minus:before {
+    content: '\2d';
+}
+
+.icon-minus-rounded:before {
+    content: '\5f';
+}
+
+.icon-network:before {
+    content: '\25';
+}
+
+.icon-next:before {
+    content: '\7d';
+}
+
+.icon-overview:before {
+    content: '\6f';
+}
+
+.icon-pin:before {
+    content: '\4e';
+}
+
+.icon-plus:before {
+    content: '\2b';
+}
+
+.icon-plus-rounded:before {
+    content: '\2a';
+}
+
+.icon-puzzle:before {
+    content: '\7a';
+}
+
+.icon-previous:before {
+    content: '\7b';
+}
+
+.icon-progress-2-1:before {
+    content: '\d0';
+}
+
+.icon-progress-2-2:before {
+    content: '\d1';
+}
+
+.icon-progress-3-1:before {
+    content: '\d2';
+}
+
+.icon-progress-3-2:before {
+    content: '\d3';
+}
+
+.icon-progress-3-3:before {
+    content: '\d4';
+}
+
+.icon-progress-4-1:before {
+    content: '\d5';
+}
+
+.icon-progress-4-2:before {
+    content: '\d6';
+}
+
+.icon-progress-4-3:before {
+    content: '\d7';
+}
+
+.icon-progress-4-4:before {
+    content: '\d8';
+}
+
+.icon-progress-5-1:before {
+    content: '\d9';
+}
+
+.icon-progress-5-2:before {
+    content: '\da';
+}
+
+.icon-progress-5-3:before {
+    content: '\db';
+}
+
+.icon-progress-5-4:before {
+    content: '\dc';
+}
+
+.icon-progress-5-5:before {
+    content: '\dd';
+}
+
+.icon-progress-6-1:before {
+    content: '\de';
+}
+
+.icon-progress-6-2:before {
+    content: '\df';
+}
+
+.icon-progress-6-3:before {
+    content: '\e0';
+}
+
+.icon-progress-6-4:before {
+    content: '\e1';
+}
+
+.icon-progress-6-5:before {
+    content: '\e2';
+}
+
+.icon-progress-6-6:before {
+    content: '\e3';
+}
+
+.icon-resend:before {
+    content: '\72';
+}
+
+.icon-right:before {
+    content: '\3e';
+}
+
+.icon-search:before {
+    content: '\73';
+}
+
+.icon-settings:before {
+    content: '\53';
+}
+
+.icon-slider:before {
+    content: '\7e';
+}
+
+.icon-sort-asc:before {
+    content: '\41';
+}
+
+.icon-sort-desc:before {
+    content: '\2200';
+}
+
+.icon-sort-none:before {
+    content: '\7c';
+}
+
+.icon-spinner:before { // should this be deleted?
+    content: '\50';
+}
+
+.icon-spin-down:before {
+    content: '\30';
+}
+
+.icon-spin-up:before {
+    content: '\31';
+}
+
+.icon-success:before {
+    content: '\79';
+}
+
+.icon-support:before {
+    content: '\71';
+}
+
+.icon-thumb:before {
+    content: '\54';
+}
+
+.icon-undo:before {
+    content: '\6e';
+}
+
+.icon-user:before {
+    content: '\75';
+}
+
+.icon-users:before {
+    content: '\55';
+}
+
+.icon-view:before {
+    content: '\56';
+}
+
+.icon-view-hidden:before {
+    content: '\2f';
+}
+
+.icon-walkthrough:before {
+    content: '\4d';
+}
+
+.icon-wand:before {
+    content: '\57';
+}
+
+.icon-welcome:before {
+    content: '\77';
+}

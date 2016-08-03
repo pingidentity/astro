@@ -7,79 +7,80 @@ $disabled-opacity: 0.4;
 
 // MISC SUPPORTING FUNCTIONS -----------------------------------------------------------------------
 @mixin checkboxStyles() {
-	$checkbox-size: 24px;
-	$border-width: 3px;
+    $checkbox-size: 24px;
+    $border-width: 3px;
 
-	position: relative;
-	display: inline-block;
-	box-sizing: border-box;
-	min-width: $checkbox-size;
-	min-height: $checkbox-size;
-	padding: 0 0 22px 0;
-	cursor: pointer;
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    min-width: $checkbox-size;
+    min-height: $checkbox-size;
+    padding: 0 0 22px;
+    cursor: pointer;
 
-	.label-text {
-		display: block;
-		text-transform: uppercase;
-	}
-	input[type=checkbox] {
-		position: absolute;
-		visibility: hidden;
-		margin: 0;
-		top: 0;
-		left: 0;
-		width: $checkbox-size;
-		height: $checkbox-size;
+    .label-text {
+        display: block;
+        text-transform: uppercase;
+    }
+    input[type=checkbox] {
+        position: absolute;
+        visibility: hidden;
+        margin: 0;
+        top: 0;
+        left: 0;
+        width: $checkbox-size;
+        height: $checkbox-size;
 
-		&:checked + .icon:after {
-			color: $color-input-text;
-		}
-	}
-	.icon {
-		position: absolute;
-		left: 0;
-		bottom: 0;
-		display: inline-block;
+        &:checked + .icon:after {
+            color: $color-input-text;
+        }
+    }
+    .icon {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        display: inline-block;
 
-		&:before {
-			content: '';
-			display: block;
-			box-sizing: border-box;
-			border: 3px solid $color-timberwolf;
-			background-color: $color-elderly;
-			height: $checkbox-size;
-			width: $checkbox-size;
-			line-height: $checkbox-size;
-			@include border-radius(2px);
-		}
-		&:after {
-			content: '\79';
-			position: absolute;
-			text-transform: none;
-			color: transparent;
-			font-family: $icon-font;
-			font-size: 10px;
-			left: 0;
-  			bottom: 0;
-			text-align: center;
-			height: $checkbox-size;
-			width: $checkbox-size;
-			line-height: $checkbox-size;
-			text-align: center;
-			@include transition($default-input-transition);
-		}
-	}
-	&.top-label {
-		padding: 0;
-		height: 47px;
+        &:before {
+            content: '';
+            display: block;
+            box-sizing: border-box;
+            border: 3px solid $color-timberwolf;
+            background-color: $color-elderly;
+            height: $checkbox-size;
+            width: $checkbox-size;
+            line-height: $checkbox-size;
 
-		.icon {
-			top: 23px;
-		}
-	}
-	&.no-label {
-		margin-right: 0;
-	}
+            @include border-radius(2px);
+        }
+        &:after {
+            content: '\79';
+            position: absolute;
+            text-transform: none;
+            color: transparent;
+            font-family: $icon-font;
+            font-size: 10px;
+            left: 0;
+            bottom: 0;
+            height: $checkbox-size;
+            width: $checkbox-size;
+            line-height: $checkbox-size;
+            text-align: center;
+
+            @include transition($default-input-transition);
+        }
+    }
+    &.top-label {
+        padding: 0;
+        height: 47px;
+
+        .icon {
+            top: 23px;
+        }
+    }
+    &.no-label {
+        margin-right: 0;
+    }
 }
 
 
@@ -88,391 +89,418 @@ $disabled-opacity: 0.4;
 
 // Tag styling
 // TODO : move styles under class names?
-input[type=text], input[type=password], textarea {
-	color: $color-input-text;
-	background-color: $color-input-fill;
-	border-width: 1px;
-	border-style: solid;
-	border-color: $color-input-fill;
-	font-size: 14px;
-	height: $default-input-height;
-	box-sizing: border-box;
-	outline: none;
-	font-family: $font-pn-regular;
-	@include border-radius(3px);
-	@include transition($default-input-transition);
-
-	&.error, &.form-error {
-		border-color: $color-input-error;
-		&:focus {
-			border-color: $color-input-error;
-		}
-	}
-	&:visited {
-		border: 1px solid $color-input-fill;
-	}
-	&:hover {
-		border: 1px solid $color-input-border;
-	}
-	&:focus {
-		border-color: $color-active-blue;
-	}
-	&::-moz-selection {
-		// prevents odd FF text selection on undo
-		background: none;
-	}
-	&.extended {
-		width: 350px;
-	}
-	&.short {
-		vertical-align: top;
-		margin-top: 5px;
-		width: 75px;
-	}
-	&::-ms-clear {
-		display: none;
-	}
-	&[readonly], &[readonly="readonly"], &[disabled] {
-		resize: none !important;
-	}
-}
+input[type=text],
+input[type=password],
 textarea {
-	overflow: auto;
-	max-width: 930px;
+    color: $color-input-text;
+    background-color: $color-input-fill;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $color-input-fill;
+    font-size: 14px;
+    height: $default-input-height;
+    box-sizing: border-box;
+    outline: none;
+    font-family: $font-pn-regular;
+
+    @include border-radius(3px);
+    @include transition($default-input-transition);
+
+    &.error,
+    &.form-error {
+        border-color: $color-input-error;
+        &:focus {
+            border-color: $color-input-error;
+        }
+    }
+    &:visited {
+        border: 1px solid $color-input-fill;
+    }
+    &:hover {
+        border: 1px solid $color-input-border;
+    }
+    &:focus {
+        border-color: $color-active-blue;
+    }
+    &::-moz-selection {
+        // prevents odd FF text selection on undo
+        background: none;
+    }
+    &.extended {
+        width: 350px;
+    }
+    &.short {
+        vertical-align: top;
+        margin-top: 5px;
+        width: 75px;
+    }
+    &::-ms-clear {
+        display: none;
+    }
+    &[readonly],
+    &[readonly=readonly],
+    &[disabled] {
+        resize: none !important;
+    }
 }
+
+textarea {
+    overflow: auto;
+    max-width: 930px;
+}
+
 label {
-	position: relative;
-	display: inline-block;
-	margin: 0 20px 0 0;
-	font-size: 13px;
-	text-transform: uppercase;
-	vertical-align: top;
-	line-height: 1em;
-	font-family: $font-pn-regular;
-	cursor: default;
+    position: relative;
+    display: inline-block;
+    margin: 0 20px 0 0;
+    font-size: 13px;
+    text-transform: uppercase;
+    vertical-align: top;
+    line-height: 1em;
+    font-family: $font-pn-regular;
+    cursor: default;
 
-	.label-text, .input-container {
-		position: relative;
-		display: block;
-		@include transition($default-input-transition);
+    .label-text,
+    .input-container {
+        position: relative;
+        display: block;
 
-		&:before {
-			@include transition($default-input-transition);
-		}
-	}
-	.label-text {
-		color: $color-elephant;
-		margin: 0 0 8px 0;
+        @include transition($default-input-transition);
 
-		.help-tooltip {
-			margin-left: 10px;
-			margin-top: -3px;
-			line-height: 14px;
-			vertical-align: middle;
-		}
-		.help-tooltip.inline {
-			margin-left: 5px;
-			margin-top: 0px;
-		}
-	}
-	&.input-text {
-		input {
-			padding: 4px 15px 3px;
-		}
-		&.search {
-			.input-container {
-				input {
-					padding-left: 40px;
-				}
-				&:before {
-					font-family: $icon-font;
-					content: '\73';
-					text-transform: none;
-					position: absolute;
-					bottom: 10px;
-					left: 13px;
-					font-size: 18px;
-					font-weight: bold;
-					line-height: 1em;
-					color: $color-input-text;
-				}
-			}
-			a.clear-search {
-				position: absolute;
-				font-family: $icon-font;
-				text-transform: none;
-				font-size: 1px;
-				color: transparent;
-				top: 12px;
-				right: 10px;
+        &:before {
+            @include transition($default-input-transition);
+        }
+    }
+    .label-text {
+        color: $color-elephant;
+        margin: 0 0 8px;
 
-				&:before {
-					content: 'X';
-				}
-			}
-			a.undo {
-				&:before {
-					content: 'X';
-					font-size: 14px;
-				}
-			}
-		}
-		&.no-label {
-			input {
-				margin-top: 0;
-			}
-		}
-		&.extended {
-			input {
-				width: 350px;
-			}
-		}
+        .help-tooltip {
+            margin-left: 10px;
+            margin-top: -3px;
+            line-height: 14px;
+            vertical-align: middle;
+        }
+        .help-tooltip.inline {
+            margin-left: 5px;
+            margin-top: 0;
+        }
+    }
+    &.input-text {
+        input {
+            padding: 4px 15px 3px;
+        }
+        &.search {
+            .input-container {
+                input {
+                    padding-left: 40px;
+                }
+                &:before {
+                    font-family: $icon-font;
+                    content: '\73';
+                    text-transform: none;
+                    position: absolute;
+                    bottom: 10px;
+                    left: 13px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    line-height: 1em;
+                    color: $color-input-text;
+                }
+            }
+            a.clear-search {
+                position: absolute;
+                font-family: $icon-font;
+                text-transform: none;
+                font-size: 1px;
+                color: transparent;
+                top: 12px;
+                right: 10px;
 
-		// temporary sizing classes
-		&.input-width-1 {
-			input {
-				width: 70px;
-			}
-		}
-		&.input-width-2 {
-			input {
-				width: 210px;
-			}
-		}
-		&.input-width-3 {
-			input {
-				width: 492px;
-			}
-		}
-	}
-	&.input-textarea {
-		textarea {
-			padding: 12px 15px;
-			margin-top: 2px;
-			line-height: 1.2em;
-		}
-		&.extended {
-			textarea {
-				width: 350px;
-			}
-		}
-		&.no-label {
-			textarea {
-				margin-top: 0;
-			}
-		}
-	}
-	&.input-text, &.input-textarea, &.input-multivalues {
-		&.short {
-			input[type=text], input[type=password] {
-				width: 75px;
-			}
-		}
-		&.actions {
-			input[type=text], input[type=password], textarea {
-				padding-right: 40px;
-			}
-		}
-		&.disabled {
-			input[type=text], input[type=password], textarea {
-        		@include opacity(1.0);
-        		&:hover {
-					border: 1px solid $color-input-fill;
-				}
-			}
-			.input-container {
-				&:before {
-					content: none;
-				}
-			}
-		}
-	}
-	&.input-text, &.input-textarea, &.input-multivalues, &.input-checkbox, &.input-select {
-		// handle disabled label for inputs w helptext
-		&.disabled {
-			font-style: normal;
-			.label-text {
-				span {
-					@include opacity($disabled-opacity);
-				}
-			}
-		}
-	}
-	&.input-checkbox {
-		// TODO: nix checkboxStyles mixin (no longer needed since input-multiselect is not used in a component - check wp)
-		@include checkboxStyles();
+                &:before {
+                    content: 'X';
+                }
+            }
+            a.undo {
+                &:before {
+                    content: 'X';
+                    font-size: 14px;
+                }
+            }
+        }
+        &.no-label {
+            input {
+                margin-top: 0;
+            }
+        }
+        &.extended {
+            input {
+                width: 350px;
+            }
+        }
 
-		&.side-label {
-			.icon {
-				position: relative;
-				top: auto;
-				left: auto;
-				vertical-align: middle;
-				margin: 0 5px 0 0;
-			}
-			.label-text {
-				display: inline-block;
-				vertical-align: middle;
-			}
-		}
-		&.stacked, &.inline {
-			margin-bottom: 5px;
-			margin-right: 20px;
-			padding: 0 0 0 36px;
-			text-transform: none;
+        // temporary sizing classes
+        &.input-width-1 {
+            input {
+                width: 70px;
+            }
+        }
+        &.input-width-2 {
+            input {
+                width: 210px;
+            }
+        }
+        &.input-width-3 {
+            input {
+                width: 492px;
+            }
+        }
+    }
+    &.input-textarea {
+        textarea {
+            padding: 12px 15px;
+            margin-top: 2px;
+            line-height: 1.2em;
+        }
+        &.extended {
+            textarea {
+                width: 350px;
+            }
+        }
+        &.no-label {
+            textarea {
+                margin-top: 0;
+            }
+        }
+    }
+    &.input-text,
+    &.input-textarea,
+    &.input-multivalues {
+        &.short {
+            input[type=text],
+            input[type=password] {
+                width: 75px;
+            }
+        }
+        &.actions {
+            input[type=text],
+            input[type=password],
+            textarea {
+                padding-right: 40px;
+            }
+        }
+        &.disabled {
+            input[type=text],
+            input[type=password],
+            textarea {
+                &:hover {
+                    border: 1px solid $color-input-fill;
+                }
 
-			.label-text {
-				display: inline-block;
-				text-transform: none;
-				font-size: 14px;
-				color: $color-midnight;
-				padding: 6px 0 0 0;
-				margin: 0;
-				line-height: 1em;
-			}
-		}
-		&.stacked {
-			display: block;
+                @include opacity(1);
+            }
+            .input-container {
+                &:before {
+                    content: none;
+                }
+            }
+        }
+    }
+    &.input-text,
+    &.input-textarea,
+    &.input-multivalues,
+    &.input-checkbox,
+    &.input-select {
+        // handle disabled label for inputs w helptext
+        &.disabled {
+            font-style: normal;
+            .label-text {
+                span {
+                    @include opacity($disabled-opacity);
+                }
+            }
+        }
+    }
+    &.input-checkbox {
+        // TODO: nix checkboxStyles mixin (no longer needed since input-multiselect is not used in a component - check wp)
 
-			.icon {
-				top: -1px;
-				bottom: auto;
-			}
-		}
-	}
-	&.input-radio {
-		$radio-height: 24px;
-		$border-width: 3px;
+        @include checkboxStyles();
 
-		position: relative;
-		display: inline-block;
-		box-sizing: border-box;
-		line-height: $radio-height;
-		min-height: $radio-height;
-		min-width: $radio-height;
-		font-size: 14px;
-		text-transform: none;
-		color: $color-midnight;
-		padding: 0 0 0 35px;
-		margin-right: 20px;
-		cursor: pointer;
+        &.side-label {
+            .icon {
+                position: relative;
+                top: auto;
+                left: auto;
+                vertical-align: middle;
+                margin: 0 5px 0 0;
+            }
+            .label-text {
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+        &.stacked,
+        &.inline {
+            margin-bottom: 5px;
+            margin-right: 20px;
+            padding: 0 0 0 36px;
+            text-transform: none;
 
-		.circle {
-			position: absolute;
-			left: 0;
-			top: -1px;
-			box-sizing: border-box;
-			width: $radio-height;
-			height: $radio-height;
-			cursor: pointer;
-			border: $border-width solid $color-timberwolf;
-			background: $color-elderly;
-			@include border-radius(ceil($radio-height/2) + $border-width);
+            .label-text {
+                display: inline-block;
+                text-transform: none;
+                font-size: 14px;
+                color: $color-midnight;
+                padding: 6px 0 0;
+                margin: 0;
+                line-height: 1em;
+            }
+        }
+        &.stacked {
+            display: block;
 
-			&:after {
-				content: '';
-				position: absolute;
-				left: 4px;
-				top: 4px;
-				width: 10px;
-				height: 10px;
-				background-color: $color-elderly;
-				@include border-radius(ceil($radio-height/2) + 1);
-				@include transition($default-input-transition);
-			}
-		}
-		&.disabled {
-			cursor: default;
-			@include opacity($disabled-opacity);
-		}
-		&.no-label {
-			margin-right: 0;
-		}
-		&.stacked {
-			display: block;
-			margin-bottom: 13px;
-			.label-text {
-				text-transform: uppercase;
-			}
-			&:last-of-type {
-				margin-bottom: 0;
-			}
-		}
-		input[type=radio] {
-			position: absolute;
-			visibility: hidden;
-			margin: 0;
+            .icon {
+                top: -1px;
+                bottom: auto;
+            }
+        }
+    }
+    &.input-radio {
+        $radio-height: 24px;
+        $border-width: 3px;
 
-			&:checked + .circle:after {
-				background-color: $color-midnight;
-			}
-		}
-		&.input-text {
-			.circle {
-				bottom: 9px;
-			}
-			input[type=text] {
-				display: inline-block;
-				margin: 0;
-			}
-		}
-		&.hidden {
-			display: none;
-		}
-		.help-tooltip {
-			height: 23px;
-    		vertical-align: bottom;
-			margin: 0 0 0 10px;
-		}
-	}
-	.input-toggle {
-		display: block;
-	}
-	&.input-group {
-		font-size: 14px;
-		color: $color-elephant;
-		text-transform: uppercase;
-		margin: 0 0 20px 0;
-	}
-	&.detached {
-		margin-bottom: 8px;
-		margin-right: 10px;
-		display: block;
+        position: relative;
+        display: inline-block;
+        box-sizing: border-box;
+        line-height: $radio-height;
+        min-height: $radio-height;
+        min-width: $radio-height;
+        font-size: 14px;
+        text-transform: none;
+        color: $color-midnight;
+        padding: 0 0 0 35px;
+        margin-right: 20px;
+        cursor: pointer;
 
-		.help-tooltip {
-			margin: 0 0 0 10px;
-			height: 18px;
-			width: 18px;
-			vertical-align: text-bottom;
-		}
-	}
-	&.inline-save {
-		.input-container {
-			padding-right: 50px;
-		}
-		.undo {
-			right: 61px;
-		}
-		.save {
-			position: absolute;
-			top: 18px;
-			right: 0;
-		}
-	}
-	&.radio-group {
-		display: block;
-		margin: 0 0 10px 0;
+        .circle {
+            position: absolute;
+            left: 0;
+            top: -1px;
+            box-sizing: border-box;
+            width: $radio-height;
+            height: $radio-height;
+            cursor: pointer;
+            border: $border-width solid $color-timberwolf;
+            background: $color-elderly;
 
-		.help-tooltip {
-			line-height: 1em;
-			height: 18px;
-			width: 18px;
-			vertical-align: middle;
-			margin: 0 0 0 10px;
-		}
-	}
-	a {
-		&.password-show-button {
+            @include border-radius(ceil($radio-height/2) + $border-width);
+
+            &:after {
+                content: '';
+                position: absolute;
+                left: 4px;
+                top: 4px;
+                width: 10px;
+                height: 10px;
+                background-color: $color-elderly;
+
+                @include border-radius(ceil($radio-height/2) + 1);
+                @include transition($default-input-transition);
+            }
+        }
+        &.disabled {
+            cursor: default;
+
+            @include opacity($disabled-opacity);
+        }
+        &.no-label {
+            margin-right: 0;
+        }
+        &.stacked {
+            display: block;
+            margin-bottom: 13px;
+            .label-text {
+                text-transform: uppercase;
+            }
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+        }
+        input[type=radio] {
+            position: absolute;
+            visibility: hidden;
+            margin: 0;
+
+            &:checked + .circle:after {
+                background-color: $color-midnight;
+            }
+        }
+        &.input-text {
+            .circle {
+                bottom: 9px;
+            }
+            input[type=text] {
+                display: inline-block;
+                margin: 0;
+            }
+        }
+        &.hidden {
+            display: none;
+        }
+        .help-tooltip {
+            height: 23px;
+            vertical-align: bottom;
+            margin: 0 0 0 10px;
+        }
+    }
+    .input-toggle {
+        display: block;
+    }
+    &.input-group {
+        font-size: 14px;
+        color: $color-elephant;
+        text-transform: uppercase;
+        margin: 0 0 20px;
+    }
+    &.detached {
+        margin-bottom: 8px;
+        margin-right: 10px;
+        display: block;
+
+        .help-tooltip {
+            margin: 0 0 0 10px;
+            height: 18px;
+            width: 18px;
+            vertical-align: text-bottom;
+        }
+    }
+    &.inline-save {
+        .input-container {
+            padding-right: 50px;
+        }
+        .undo {
+            right: 61px;
+        }
+        .save {
+            position: absolute;
+            top: 18px;
+            right: 0;
+        }
+    }
+    &.radio-group {
+        display: block;
+        margin: 0 0 10px;
+
+        .help-tooltip {
+            line-height: 1em;
+            height: 18px;
+            width: 18px;
+            vertical-align: middle;
+            margin: 0 0 0 10px;
+        }
+    }
+    a {
+        &.password-show-button {
             position: absolute;
             right: 14px;
 
@@ -488,767 +516,813 @@ label {
                 font-size: 20px;
             }
         }
-		&.input-toggle {
-			display: block;
-		}
-		&.undo {
-			position: absolute;
-			top: 13px;
-			right: 11px;
-			font-size: 0;
-			color: transparent;
-			width: 14px;
+        &.input-toggle {
+            display: block;
+        }
+        &.undo {
+            position: absolute;
+            top: 13px;
+            right: 11px;
+            font-size: 0;
+            color: transparent;
+            width: 14px;
 
-			&:before {
-				content: '\6e';
-				font-family: $icon-font;
-				font-size: 16px;
-				color: $color-active;
-				text-transform: none;
-				@include transition($default-input-transition);
-			}
-		}
-	}
-	.value-container {
-		display: block;
-		margin: 6px 0 0 0;
-		color: $color-midnight;
-		text-transform: none;
-		font-size: 16px;
-	}
+            &:before {
+                content: '\6e';
+                font-family: $icon-font;
+                font-size: 16px;
+                color: $color-active;
+                text-transform: none;
+
+                @include transition($default-input-transition);
+            }
+        }
+    }
+    .value-container {
+        display: block;
+        margin: 6px 0 0;
+        color: $color-midnight;
+        text-transform: none;
+        font-size: 16px;
+    }
 }
+
 fieldset {
-	margin: 0 0 25px 0;
-	.input-select {
-		margin-right: 0px;
-	}
-	legend {
-		text-transform: uppercase;
-		.help-tooltip {
-			margin: 0 5px 0 10px;
-			height: 14px;
-			height: 18px;
-			width: 18px;
-			vertical-align: text-bottom;
-		}
-		label {
-			margin-right: 5px;
-		}
-	}
-	&.focused, &.unfocused {
-		legend {
-			padding: 0 10px;
-			margin: 0 0 0 -10px;
-			font-size: 14px;
-			color: $color-elephant;
+    margin: 0 0 25px;
 
-			.input-radio {
-				&:last-of-type {
-					margin-right: 0;
-				}
-			}
-		}
-	}
-	&.focused {
-		border: 1px solid $color-dolphin;
-		padding: 20px;
-		@include border-radius(5px);
+    .input-select {
+        margin-right: 0;
+    }
+    legend {
+        text-transform: uppercase;
+        .help-tooltip {
+            margin: 0 5px 0 10px;
+            height: 18px;
+            width: 18px;
+            vertical-align: text-bottom;
+        }
+        label {
+            margin-right: 5px;
+        }
+    }
+    &.focused,
+    &.unfocused {
+        legend {
+            padding: 0 10px;
+            margin: 0 0 0 -10px;
+            font-size: 14px;
+            color: $color-elephant;
 
-		&.narrow {
-			width: 500px;
-		}
-	}
-	&.unfocused {
-		padding: 21px;
-		padding-bottom: 0px;
-	}
-	&.conditional-fieldset {
-		margin-left: -21px;
-	}
-	.subset {
-		margin: 0 0 0 20px;
-		label {
-			text-transform: none;
-		}
-	}
+            .input-radio {
+                &:last-of-type {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+    &.focused {
+        border: 1px solid $color-dolphin;
+        padding: 20px;
+
+        @include border-radius(5px);
+
+        &.narrow {
+            width: 500px;
+        }
+    }
+    &.unfocused {
+        padding: 21px;
+        padding-bottom: 0;
+    }
+    &.conditional-fieldset {
+        margin-left: -21px;
+    }
+    .subset {
+        margin: 0 0 0 20px;
+        label {
+            text-transform: none;
+        }
+    }
 }
+
 input[type=file] {
-	line-height: 1em;
+    line-height: 1em;
 }
+
 @include placeholder-css($color-input-placeholder, normal, 0);
 
 // Input types
-.input-text, .input-textarea, .input-select, .input-file-upload, .input-integer, .input-radio, .input-checkbox, .input-color-picker {
-	margin: 0 10px 20px 0;
+.input-text,
+.input-textarea,
+.input-select,
+.input-file-upload,
+.input-integer,
+.input-radio,
+.input-checkbox,
+.input-color-picker {
+    margin: 0 10px 20px 0;
 }
+
 .radio-text-input {
-	margin: -12px 0 0 32px;
+    margin: -12px 0 0 32px;
 }
+
 .radio-input-link {
-	margin: 2px 0 0 32px;
+    margin: 2px 0 0 32px;
 }
+
 .input-select {
-	> span {
-		line-height: 1em;
-		display: block;
+    > span {
+        line-height: 1em;
+        display: block;
 
-		.help-tooltip {
-			margin-left: 10px;
-		}
-		&.inline {
-			display: inline-block;
-			vertical-align: top;
-			line-height: 50px;
-			padding-right: 10px;
-		}
-	}
-	.input-container {
-		height: $default-input-height;
+        .help-tooltip {
+            margin-left: 10px;
+        }
+        &.inline {
+            display: inline-block;
+            vertical-align: top;
+            line-height: 50px;
+            padding-right: 10px;
+        }
+    }
+    .input-container {
+        height: $default-input-height;
 
-		.wrapper {
-			position: relative;
-			clear: both;
-			display: inline-block;
-			height: $default-input-height;
-			overflow: hidden;
-			cursor: pointer;
-			border: 1px solid $color-input-fill;
-			box-sizing: border-box;
-			@include border-radius(4px);
+        .wrapper {
+            position: relative;
+            clear: both;
+            display: inline-block;
+            height: $default-input-height;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid $color-input-fill;
+            box-sizing: border-box;
 
-			&:after {
-				position: absolute;
-				content: 'v';
-				font-family: $icon-font;
-				font-size: 10px;
-				text-transform: none;
-				right: 10px;
-				top: 0;
-				line-height: 41px;
-				color: $color-midnight;
-				pointer-events: none;
-			}
-		}
-	}
-	&.no-label {
-		.input-container {
-			margin: 0;
-		}
-	}
-	&.large {
-		.input-container {
-			div {
-				height: 50px;
-				line-height: 50px;
-			}
-			&:after {
-				top: 0;
-				line-height: 50px;
-			}
-		}
-	}
-	&.disabled {
-		.input-container {
-			.wrapper {
-				&:after {
-					content: '';
-				}
-			}
-		}
-	}
-	select {
-		-webkit-appearance: none;
-		-moz-appearance: none;
-		appearance: none;
-		border: 0;
-		border-radius: 0;
-		color: $color-input-text;
-		background-color: $color-input-fill;
-		font-size: $default-input-font-size;
-		line-height: 20px;
-		height: $default-input-height;
-		-webkit-appearance: none;
-		outline:none;
-		cursor: pointer;
-		padding: 0 40px 0 10px;
-		width: 110%;
-		font-family: $font-stack;
-		text-transform: none;
-		@include transition($default-input-transition);
+            @include border-radius(4px);
 
-		// IE FIXES
-		option {
-			&:checked {
-				background-color: $color-active-blue-option;
-			}
-			&:hover {
-				background-color: $color-active-blue-option;
-				color: $color-white;
-			}
-		}
-		&:-moz-focusring {
-			color: transparent;
-			text-shadow: 0 0 0 $color-black;
-		}
-		&::-ms-expand {
-			display: none;
-		}
-		&::-ms-value {
-			color: $color-midnight;
-			background: none;
-		}
-	}
-	&.ie9 {
-		select {
-			// pushes default select arrow out of range
-			width: 160%;
-			option {
-				&:checked, &:hover {
-					background-color: $color-input-fill;
-					color: $color-input-text;
-				}
-			}
-		}
-	}
-	&.select-filter {
-		.input-container {
-			.wrapper {
-				border: 1px solid $color-rhino;
-				select {
-					background: $color-white;
-				}
-			}
-		}
-	}
+            &:after {
+                position: absolute;
+                content: 'v';
+                font-family: $icon-font;
+                font-size: 10px;
+                text-transform: none;
+                right: 10px;
+                top: 0;
+                line-height: 41px;
+                color: $color-midnight;
+                pointer-events: none;
+            }
+        }
+    }
+    &.no-label {
+        .input-container {
+            margin: 0;
+        }
+    }
+    &.large {
+        .input-container {
+            div {
+                height: 50px;
+                line-height: 50px;
+            }
+            &:after {
+                top: 0;
+                line-height: 50px;
+            }
+        }
+    }
+    &.disabled {
+        .input-container {
+            .wrapper {
+                &:after {
+                    content: '';
+                }
+            }
+        }
+    }
+    select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border: 0;
+        border-radius: 0;
+        color: $color-input-text;
+        background-color: $color-input-fill;
+        font-size: $default-input-font-size;
+        line-height: 20px;
+        height: $default-input-height;
+        outline: none;
+        cursor: pointer;
+        padding: 0 40px 0 10px;
+        width: 110%;
+        font-family: $font-stack;
+        text-transform: none;
+
+        @include transition($default-input-transition);
+
+        // IE FIXES
+        option {
+            &:checked {
+                background-color: $color-active-blue-option;
+            }
+            &:hover {
+                background-color: $color-active-blue-option;
+                color: $color-white;
+            }
+        }
+        &:-moz-focusring {
+            color: transparent;
+            text-shadow: 0 0 0 $color-black;
+        }
+        &::-ms-expand {
+            display: none;
+        }
+        &::-ms-value {
+            color: $color-midnight;
+            background: none;
+        }
+    }
+    &.ie9 {
+        select {
+            // pushes default select arrow out of range
+            width: 160%;
+            option {
+                &:checked,
+                &:hover {
+                    background-color: $color-input-fill;
+                    color: $color-input-text;
+                }
+            }
+        }
+    }
+    &.select-filter {
+        .input-container {
+            .wrapper {
+                border: 1px solid $color-rhino;
+                select {
+                    background: $color-white;
+                }
+            }
+        }
+    }
 }
+
 .input-file-upload {
-	position: relative;
-	display: block;
+    position: relative;
+    display: block;
 
-	&.no-label {
-		margin-top: 0;
-	}
-	.form-error.help-tooltip {
-		.tooltip-text {
-			top: 7px;
-		}
-	}
-	input[type=file] {
-		position: absolute;
-		top: 0;
-		right: 0;
-		margin: 0;
-		padding: 0;
-		font-size: 1px;
-		z-index: 1;
-		width: 100%;
-		height: 100%;
-		cursor: pointer;
-		@include opacity(0);
-	}
-	.choose {
-		display: block;
-		text-transform: none;
-	}
-	.file-info {
-		line-height: 1em;
-		padding: 0;
-		font-family: $font-pn-regular;
-		display: inline-block;
+    &.no-label {
+        margin-top: 0;
+    }
+    .form-error.help-tooltip {
+        .tooltip-text {
+            top: 7px;
+        }
+    }
+    input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 1px;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
 
-		a.file-remove {
-			display: none;
-			font-size: 14px;
-			line-height: 1em;
-			margin: 5px 10px 0 0;
-		}
-		.file-name {
-			font-size: 14px;
-			line-height: 1em;
-			margin: 0 20px 0 0;
-			color: $color-midnight;
-			display: block;
-			.icon-file {
-				display: none;
-			}
-		}
-		// within a details tooltip, login modal
-		&.stacked {
-			.file-name {
-				vertical-align: top;
-				max-width: 250px;
-				@include text-truncate;
-			}
-		}
-	}
-	&.file-selected {
-		.button.inline, .file-size {
-			display: none;
-		}
-		.file-info {
-			position: relative;
-			float: left;
-			.icon-file {
-				font-size: 10px;
-				padding-right: 5px;
-				display: inline-block;
-			}
-			&:before {
-				display: none;
-			}
-		}
-		a.file-remove {
-			display: inline-block;
-		}
-	}
-	&.image-upload {
-		$img-width: 90px;
+        @include opacity(0);
+    }
+    .choose {
+        display: block;
+        text-transform: none;
+    }
+    .file-info {
+        line-height: 1em;
+        padding: 0;
+        font-family: $font-pn-regular;
+        display: inline-block;
 
-		&.selected, &.not-selected {
-			.image-icon {
-				&:after {
-					content: '';
-					border: none;
-				}
-			}
-		}
-		.image-icon {
-			display: inline-block;
-			width: 67px;
-			height: 67px;
-			border: 1px solid $color-stratus;
-			padding: 0;
-			position: relative;
-			overflow: hidden;
+        a.file-remove {
+            display: none;
+            font-size: 14px;
+            line-height: 1em;
+            margin: 5px 10px 0 0;
+        }
+        .file-name {
+            font-size: 14px;
+            line-height: 1em;
+            margin: 0 20px 0 0;
+            color: $color-midnight;
+            display: block;
+            .icon-file {
+                display: none;
+            }
+        }
+        // within a details tooltip, login modal
+        &.stacked {
+            .file-name {
+                vertical-align: top;
+                max-width: 250px;
 
-			@include border-radius(2px);
+                @include text-truncate;
+            }
+        }
+    }
+    &.file-selected {
+        .button.inline,
+        .file-size {
+            display: none;
+        }
+        .file-info {
+            position: relative;
+            float: left;
+            .icon-file {
+                font-size: 10px;
+                padding-right: 5px;
+                display: inline-block;
+            }
+            &:before {
+                display: none;
+            }
+        }
+        a.file-remove {
+            display: inline-block;
+        }
+    }
+    &.image-upload {
+        $img-width: 90px;
 
-			&:before {
-				display: block;
-				position: absolute;
-				left: -10px;
-				color: $color-stratus;
-				font-family: $icon-font;
-				text-transform: none;
-				content: '\69';
-				font-size: 60px;
-				height: 67px;
-				line-height: 1.3em;
-			}
-			&:after {
-				line-height: 1em;
-				position: absolute;
-				width: 15px;
-				font-family: $icon-font;
-				text-transform: none;
-				right: 5px;
-				bottom: 5px;
-				content: '*';
-				font-size: 15px;
-				padding: 5px;
-				color: $color-slate;
-				background-color: $color-white;
-				border: 1px solid $color-rhino;
-				@include border-radius(18px);
-			}
-			&.no-logo {
-				display: inline-block;
-				color: $color-stratus;
-				border: 1px solid $color-stratus;
-				height: 72px;
-				width: 72px;
-				padding: 5px 0 0 0;
-			}
-		}
-		.with-logo {
-			width: 90px;
-		}
-		.input-image-thumb {
-			display: none;
-			@include border-radius(4px);
-			img {
-				width: $img-width;
-			}
-		}
-		.choose {
-			display: none;
-		}
-		.file-size {
-			position: absolute;
-			bottom: 4px;
-			left: $img-width - 1px;
-			min-width: 300px;
-			color: $color-stratus;
-			line-height: 1em;
-			font-size: 13px;
-			span:first-child {
-				display: block;
-			}
-		}
-		.image-types {
-			font-size: 14px;
-			position: absolute;
-			top: 65px;
-			left: $img-width + 15px;
-		}
-		.form-error-message {
-			.tooltip-text {
-				min-width: 250px;
-				margin-left: 20px;
-			}
-		}
-		.file-info {
-			display: block;
-			float: none;
-		}
-		&.file-selected {
-			.input-image-thumb {
-				display: block;
-			}
-			.image-icon {
-				display: none;
-			}
-		}
-		&.inactive {
-			display: none;
-		}
-	}
+        &.selected,
+        &.not-selected {
+            .image-icon {
+                &:after {
+                    content: '';
+                    border: none;
+                }
+            }
+        }
+        .image-icon {
+            display: inline-block;
+            width: 67px;
+            height: 67px;
+            border: 1px solid $color-stratus;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+
+            @include border-radius(2px);
+
+            &:before {
+                display: block;
+                position: absolute;
+                left: -10px;
+                color: $color-stratus;
+                font-family: $icon-font;
+                text-transform: none;
+                content: '\69';
+                font-size: 60px;
+                height: 67px;
+                line-height: 1.3em;
+            }
+            &:after {
+                line-height: 1em;
+                position: absolute;
+                width: 15px;
+                font-family: $icon-font;
+                text-transform: none;
+                right: 5px;
+                bottom: 5px;
+                content: '*';
+                font-size: 15px;
+                padding: 5px;
+                color: $color-slate;
+                background-color: $color-white;
+                border: 1px solid $color-rhino;
+
+                @include border-radius(18px);
+            }
+            &.no-logo {
+                display: inline-block;
+                color: $color-stratus;
+                border: 1px solid $color-stratus;
+                height: 72px;
+                width: 72px;
+                padding: 5px 0 0;
+            }
+        }
+        .with-logo {
+            width: 90px;
+        }
+        .input-image-thumb {
+            display: none;
+
+            @include border-radius(4px);
+
+            img {
+                width: $img-width;
+            }
+        }
+        .choose {
+            display: none;
+        }
+        .file-size {
+            position: absolute;
+            bottom: 4px;
+            left: $img-width - 1px;
+            min-width: 300px;
+            color: $color-stratus;
+            line-height: 1em;
+            font-size: 13px;
+            span:first-child {
+                display: block;
+            }
+        }
+        .image-types {
+            font-size: 14px;
+            position: absolute;
+            top: 65px;
+            left: $img-width + 15px;
+        }
+        .form-error-message {
+            .tooltip-text {
+                min-width: 250px;
+                margin-left: 20px;
+            }
+        }
+        .file-info {
+            display: block;
+            float: none;
+        }
+        &.file-selected {
+            .input-image-thumb {
+                display: block;
+            }
+            .image-icon {
+                display: none;
+            }
+        }
+        &.inactive {
+            display: none;
+        }
+    }
 }
+
 .input-toggle {
-	$toggle-height: 24px;
-	$toggle-width: 40px;
-	$toggle-time: 0.1s;
+    $toggle-height: 24px;
+    $toggle-width: 40px;
+    $toggle-time: 0.1s;
 
-	$toggle-diameter: $toggle-height - 2;
-	$toggle-border-radius: ceil($toggle-height / 2) + 1;
+    $toggle-diameter: $toggle-height - 2;
+    $toggle-border-radius: ceil($toggle-height / 2) + 1;
 
-	display: inline-block;
+    display: inline-block;
 
-	.toggle {
-		position: relative;
-		height: $toggle-height - 2;
-		width: $toggle-width - 2;
-		background-color: $color-stratus;
-		display: inline-block;
-		vertical-align: middle;
-		box-sizing: border-box;
-		border: 1px solid $color-stratus;
-		@include border-radius($toggle-border-radius);
-		@include transition(all $toggle-time);
+    .toggle {
+        position: relative;
+        height: $toggle-height - 2;
+        width: $toggle-width - 2;
+        background-color: $color-stratus;
+        display: inline-block;
+        vertical-align: middle;
+        box-sizing: border-box;
+        border: 1px solid $color-stratus;
 
-		&:after {
-			content: '';
-			background-color: $color-white;
-			position: absolute;
-			left: 0;
-			top: 0;
-			height: $toggle-diameter - 2;
-			width: $toggle-diameter - 2;
-			box-sizing: border-box;
-			@include border-radius($toggle-border-radius);
-			@include transition(all $toggle-time);
-			@include box-shadow((1px 1px 3px 0px rgba(0, 0, 0, 0.3)));
-		}
-	}
-	&.selected {
-		.toggle {
-			background-color: $color-success;
-			border-color: $color-success;
+        @include border-radius($toggle-border-radius);
+        @include transition(all $toggle-time);
 
-			&:after {
-				left: $toggle-width - $toggle-diameter - 1;
-			}
-		}
-	}
-	&.disabled {
-		@include opacity($disabled-opacity);
-	}
-	&.small {
-		.toggle {
-			$toggle-height: 18px;
-			$toggle-width: 30px;
-			$toggle-diameter: $toggle-height - 2;
+        &:after {
+            content: '';
+            background-color: $color-white;
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: $toggle-diameter - 2;
+            width: $toggle-diameter - 2;
+            box-sizing: border-box;
 
-			height: $toggle-height;
-			width: $toggle-width;
+            @include border-radius($toggle-border-radius);
+            @include transition(all $toggle-time);
+            @include box-shadow((1px 1px 3px 0 rgba(0, 0, 0, 0.3)));
+        }
+    }
+    &.selected {
+        .toggle {
+            background-color: $color-success;
+            border-color: $color-success;
 
-			&:after {
-				height: $toggle-diameter - 2;
-				width: $toggle-diameter - 2;
-			}
-		}
-		&.selected {
-			.toggle {
-				&:after {
-					left: $toggle-width - $toggle-diameter - 1; //13px
-				}
-			}
-		}
-	}
+            &:after {
+                left: $toggle-width - $toggle-diameter - 1;
+            }
+        }
+    }
+    &.disabled {
+        @include opacity($disabled-opacity);
+    }
+    &.small {
+        .toggle {
+            $toggle-height: 18px;
+            $toggle-width: 30px;
+            $toggle-diameter: $toggle-height - 2;
+
+            height: $toggle-height;
+            width: $toggle-width;
+
+            &:after {
+                height: $toggle-diameter - 2;
+                width: $toggle-diameter - 2;
+            }
+        }
+        &.selected {
+            .toggle {
+                &:after {
+                    left: $toggle-width - $toggle-diameter - 1; //13px
+                }
+            }
+        }
+    }
 }
+
 .input-multiselect {
-	position: relative;
-	display: inline-block;
+    position: relative;
+    display: inline-block;
 
-	.button {
-		padding-right: 50px;
+    .button {
+        padding-right: 50px;
 
-		&:after {
-			position: absolute;
-			content: 'v';
-			font-family: $icon-font;
-			font-size: 12px;
-			text-transform: none;
-			right: 10px;
-			top: 1px;
-			color: $color-midnight;
-			pointer-events: none;
-		}
-	}
-	input[type=text] {
-		position: absolute;
-		top: 15px;
-		left: 15px;
-		right: 15px;
-		width: 156px;
-		height: 20px;
-	}
-	.clear {
-		font-family: $icon-font;
-		font-size: 10px;
-		position: absolute;
-		top: 28px;
-		right: 26px;
-		color: $color-input-text;
-	}
-	.menu {
-		display: none;
-		position: absolute;
-		top: 50px;
-		left: 0;
-		padding: 15px 15px 0 15px;
-		border: 1px solid $color-input-border;
-		background: $color-white;
-		z-index: 10;
+        &:after {
+            position: absolute;
+            content: 'v';
+            font-family: $icon-font;
+            font-size: 12px;
+            text-transform: none;
+            right: 10px;
+            top: 1px;
+            color: $color-midnight;
+            pointer-events: none;
+        }
+    }
+    input[type=text] {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        right: 15px;
+        width: 156px;
+        height: 20px;
+    }
+    .clear {
+        font-family: $icon-font;
+        font-size: 10px;
+        position: absolute;
+        top: 28px;
+        right: 26px;
+        color: $color-input-text;
+    }
+    .menu {
+        display: none;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        padding: 15px 15px 0;
+        border: 1px solid $color-input-border;
+        background: $color-white;
+        z-index: 10;
 
-		@include border-radius(3px);
+        @include border-radius(3px);
 
-		.options {
-			margin: 61px 0 0 0;
-			max-height: 285px;
-			min-width: 202px;
-			overflow: auto;
-		}
-		.hidden {
-			display: none;
-		}
-		&:before, &:after {
-			content: '';
-			position: absolute;
-			border-style: solid;
-			border-width: 10px;
-			left: 15px;
-		}
-		&:before {
-			top: -21px;
-			border-color: transparent transparent $color-input-border transparent;
+        .options {
+            margin: 61px 0 0;
+            max-height: 285px;
+            min-width: 202px;
+            overflow: auto;
+        }
+        .hidden {
+            display: none;
+        }
+        &:before,
+        &:after {
+            content: '';
+            position: absolute;
+            border-style: solid;
+            border-width: 10px;
+            left: 15px;
+        }
+        &:before {
+            top: -21px;
+            border-color: transparent transparent $color-input-border transparent;
 
-		}
-		&:after {
-			top: -20px;
-			border-color: transparent transparent $color-white transparent;
-		}
-		label {
-			// TODO - change multi-select component to use checkbox component
-			@include checkboxStyles();
-			display: block;
-			margin: 0 0 5px 0;
+        }
+        &:after {
+            top: -20px;
+            border-color: transparent transparent $color-white transparent;
+        }
+        label {
+            // TODO - change multi-select component to use checkbox component
 
-			&:last-child {
-				margin-bottom: 12px
-			}
-		}
-	}
-	&.open {
-		.menu {
-			display: block;
-		}
-	}
+            @include checkboxStyles();
+            display: block;
+            margin: 0 0 5px;
+
+            &:last-child {
+                margin-bottom: 12px;
+            }
+        }
+    }
+    &.open {
+        .menu {
+            display: block;
+        }
+    }
 }
+
 .input-calendar {
-	display: inline-block;
-	position: relative;
-	font-family: $font-stack;
-	margin-bottom: 7px;
+    display: inline-block;
+    position: relative;
+    font-family: $font-stack;
+    margin-bottom: 7px;
 
-	&:before, &:after {
-		font-family: $icon-font;
-		font-size: 14px;
-		line-height: 1em;
-		text-transform: none;
-		position: absolute;
-		color: $color-midnight;
-		cursor: pointer;
-	}
-	&:before {
-		content: '\43';
-		left: 10px;
-		top: 12px;
-		@include transition($default-input-transition);
-	}
-	&:after {
-		content: "v";
-		right: 9px;
-		top: 14px;
-		@include transition($default-input-transition);
-	}
-	&.active {
-		input[type=text] {
-			border: 1px solid $color-stone;
-		}
-		&:after {
-			@include transform(rotate(180deg));
-		}
-	}
-	input[type=text].input-calendar-value {
-		padding: 0 30px;
-		font-size: $default-input-font-size;
-		width: 226px;
-		height: $default-input-height;
-		line-height: 32px;
-		&:focus {
-			border: 1px solid $color-stone;
-		}
-	}
+    &:before,
+    &:after {
+        font-family: $icon-font;
+        font-size: 14px;
+        line-height: 1em;
+        text-transform: none;
+        position: absolute;
+        color: $color-midnight;
+        cursor: pointer;
+    }
+    &:before {
+        content: '\43';
+        left: 10px;
+        top: 12px;
 
-	// display
-	.input-calendar-wrapper {
-		display: none;
-		font-family: $font-stack;
+        @include transition($default-input-transition);
+    }
+    &:after {
+        content: 'v';
+        right: 9px;
+        top: 14px;
 
-		&.active {
-			position: absolute;
-			display: block;
-			padding: 5px 12px;
-			border: 1px solid $color-stone;
-			background-color: $color-input-fill;
-			width: 200px;
-			text-align: center;
-			left: 0;
-			top: $default-input-height + 1;
-			-webkit-touch-callout: none;
-			z-index: 2;
+        @include transition($default-input-transition);
+    }
+    &.active {
+        input[type=text] {
+            border: 1px solid $color-stone;
+        }
+        &:after {
+            @include transform(rotate(180deg));
+        }
+    }
+    input[type=text].input-calendar-value {
+        padding: 0 30px;
+        font-size: $default-input-font-size;
+        width: 226px;
+        height: $default-input-height;
+        line-height: 32px;
+        &:focus {
+            border: 1px solid $color-stone;
+        }
+    }
 
-			@include border-radius(2px);
-			@include user-select(none);
-		}
-		.today-btn {
-			display: none;
-		}
-		.days-view, .months-view, .years-view {
-			.navigation-wrapper {
-				.navigation-title {
-					width: 100px;
-					display: inline-block;
-					cursor: pointer;
-					color: $color-input-text;
-					font-weight: 600;
-				}
-				.icon {
-					display: inline-block;
+    // display
+    .input-calendar-wrapper {
+        display: none;
+        font-family: $font-stack;
 
-					.fa {
-						display: inline-block;
-						height: 25px;
-						width: 25px;
-						color: $color-midnight;
-						font-size: 13px;
-						cursor: pointer;
+        &.active {
+            position: absolute;
+            display: block;
+            padding: 5px 12px;
+            border: 1px solid $color-stone;
+            background-color: $color-input-fill;
+            width: 200px;
+            text-align: center;
+            left: 0;
+            top: $default-input-height + 1;
+            -webkit-touch-callout: none;
+            z-index: 2;
 
-						&.fa-angle-left {
-							margin-right: 20px;
-						}
-						&.fa-angle-right {
-							margin-left: 20px;
-						}
-					}
-				}
-			}
-			.days-title {
-				.cell {
-					height: 25px;
-					line-height: 25px;
-					cursor: default;
-					font-weight: 600;
-					margin: 0;
-					color: $color-input-text;
-				}
-			}
-			.days, .months, .years {
-				padding-bottom: 2px;
-				.day {
-					width: 26px;
-					height: 25px;
-					font-weight: 600;
-				}
-				.month {
-					width: 58px;
-					height: 38px;
-					line-height: 38px;
-				}
-			}
-			.year {
-				width: 58px;
-				height: 38px;
-				line-height: 38px;
-			}
-			.day {
-				width: 26px;
-				height: 25px;
-				line-height: 25px;
-				color: $color-input-text;
-				&.prev, &.next {
-					@include opacity(0.4);
-				}
-			}
-			.cell {
-				display: inline-block;
-				text-align: center;
-				cursor: pointer;
-				border: none;
-				-webkit-touch-callout: none;
-				font-size: 13px;
-				@include  user-select(none);
-				@include transition($default-input-transition);
+            @include border-radius(2px);
+            @include user-select(none);
+        }
+        .today-btn {
+            display: none;
+        }
+        .days-view,
+        .months-view,
+        .years-view {
+            .navigation-wrapper {
+                .navigation-title {
+                    width: 100px;
+                    display: inline-block;
+                    cursor: pointer;
+                    color: $color-input-text;
+                    font-weight: 600;
+                }
+                .icon {
+                    display: inline-block;
 
-				&.hover {
-					color: $color-input-text;
-				}
-				&.current, &:hover {
-					@include opacity(.8);
-					@include border-radius(3px);
-				}
-				&.current {
-					color: $color-white;
-					background: $color-input-text;
-				}
-				&:hover {
-					background: transparentize($color-input-text, 0.85);
-				}
-				&.title {
-					&:hover {
-						@include opacity(1);
-						background: transparent;
-					}
-				}
-			}
-		}
-	}
+                    .fa {
+                        display: inline-block;
+                        height: 25px;
+                        width: 25px;
+                        color: $color-midnight;
+                        font-size: 13px;
+                        cursor: pointer;
+
+                        &.fa-angle-left {
+                            margin-right: 20px;
+                        }
+                        &.fa-angle-right {
+                            margin-left: 20px;
+                        }
+                    }
+                }
+            }
+            .days-title {
+                .cell {
+                    height: 25px;
+                    line-height: 25px;
+                    cursor: default;
+                    font-weight: 600;
+                    margin: 0;
+                    color: $color-input-text;
+                }
+            }
+            .days,
+            .months,
+            .years {
+                padding-bottom: 2px;
+                .day {
+                    width: 26px;
+                    height: 25px;
+                    font-weight: 600;
+                }
+                .month {
+                    width: 58px;
+                    height: 38px;
+                    line-height: 38px;
+                }
+            }
+            .year {
+                width: 58px;
+                height: 38px;
+                line-height: 38px;
+            }
+            .day {
+                width: 26px;
+                height: 25px;
+                line-height: 25px;
+                color: $color-input-text;
+                &.prev,
+                &.next {
+                    @include opacity(0.4);
+                }
+            }
+            .cell {
+                display: inline-block;
+                text-align: center;
+                cursor: pointer;
+                border: none;
+                -webkit-touch-callout: none;
+                font-size: 13px;
+
+                @include user-select(none);
+                @include transition($default-input-transition);
+
+                &.hover {
+                    color: $color-input-text;
+                }
+                &.current,
+                &:hover {
+                    @include opacity(0.8);
+                    @include border-radius(3px);
+                }
+                &.current {
+                    color: $color-white;
+                    background: $color-input-text;
+                }
+                &:hover {
+                    background: transparentize($color-input-text, 0.85);
+                }
+                &.title {
+                    &:hover {
+                        @include opacity(1);
+                        background: transparent;
+                    }
+                }
+            }
+        }
+    }
 }
-.input-integer, .form-integer-container {
+
+.input-integer,
+.form-integer-container {
     position: relative;
 
-    &:after, a.undo {
+    &:after,
+    a.undo {
         right: 40px;
     }
     .input-container {
@@ -1256,346 +1330,369 @@ input[type=file] {
         display: inline-block;
         vertical-align: bottom;
     }
-	.input-text {
-		margin: 0;
-	}
+    .input-text {
+        margin: 0;
+    }
 
     .integer-controls {
         position: absolute;
-		right: 13px;
-		bottom: 8px;
+        right: 13px;
+        bottom: 8px;
         font-family: $icon-font;
         cursor: pointer;
-        vertical-align: baseline;
         max-width: 35px;
         display: inline-block;
 
         button {
-			$height: 10px;
+            $height: 10px;
 
             height: $height;
-			width: 12px;
+            width: 12px;
             padding: 0;
-			margin: 0;
+            margin: 0;
             display: block;
-			text-align: center;
+            text-align: center;
             text-decoration: none;
             color: $color-active-blue;
             border: none;
             background-color: transparent;
-			line-height: $height;
+            line-height: $height;
 
-			&:before {
-				content: "Y";
-				font-family: $icon-font;
-				font-size: 6px;
-				line-height: $height;
-				height: $height;
-			}
-			&.integer-up {
-				margin: 0 0 3px 0;
-				@include rotate(180deg);
-			}
+            &:before {
+                content: 'Y';
+                font-family: $icon-font;
+                font-size: 6px;
+                line-height: $height;
+                height: $height;
+            }
+            &.integer-up {
+                margin: 0 0 3px;
+
+                @include rotate(180deg);
+            }
         }
     }
-	input[type=text] {
-		padding-right: 40px;
-	}
-    [disabled], [readonly] {
+    input[type=text] {
+        padding-right: 40px;
+    }
+    [disabled],
+    [readonly] {
         .integer-controls {
             pointer-events: none;
         }
     }
 }
+
 .input-selection-list {
-	position: relative;
-	display: inline-block;
-	padding: 10px;
-	border: 1px solid $color-timberwolf;
-	width: 200px;
-	box-sizing: border-box;
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid $color-timberwolf;
+    width: 200px;
+    box-sizing: border-box;
 
-	.input-text.search {
-		position: absolute;
-		top: 10px;
-		left: 10px;
-		margin: 0;
-		padding: 0;
+    .input-text.search {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        margin: 0;
+        padding: 0;
 
-		.input-container {
-			input {
-				height: 36px;
-				width: 180px;
-				padding-left: 35px;
-				padding-right: 5px;
-			}
-			&:before {
-				font-size: 16px;
-				bottom: 10px;
-	    		left: 10px;
-			}
-		}
-	}
-	.input-row {
-		margin: 2px 0 0 0;
-	}
-	.input-selection-list-items {
-		max-height: 228px;
-		margin: 0;
-		overflow-x: hidden;
-		overflow-y: auto;
+        .input-container {
+            input {
+                height: 36px;
+                width: 180px;
+                padding-left: 35px;
+                padding-right: 5px;
+            }
+            &:before {
+                font-size: 16px;
+                bottom: 10px;
+                left: 10px;
+            }
+        }
+    }
+    .input-row {
+        margin: 2px 0 0;
+    }
+    .input-selection-list-items {
+        max-height: 228px;
+        margin: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
 
-		.input-radio {
-			margin: 0 15px 10px 0;
-		}
-		.input-checkbox {
-			margin: 0 15px 10px 0;
+        .input-radio {
+            margin: 0 15px 10px 0;
+        }
+        .input-checkbox {
+            margin: 0 15px 10px 0;
 
-			.label-text {
-				text-transform: none;
-			}
-		}
-	}
-	&.searchable {
-		.input-selection-list-items {
-			max-height: 228px - 46px;
-			margin: 46px 0 0 0;
-		}
-	}
+            .label-text {
+                text-transform: none;
+            }
+        }
+    }
+    &.searchable {
+        .input-selection-list-items {
+            max-height: 228px - 46px;
+            margin: 46px 0 0;
+        }
+    }
 
-	@include border-radius(3px);
+    @include border-radius(3px);
 }
 
 // Input variants
 .required {
-	@mixin requiredCss {
-		content: '';
-		position: absolute;
-		background-color: $color-input-required;
-		color: $color-white;
-		font-size: 16px;
-		text-align: center;
-		width: 5px;
-		z-index: 1;
-		@include border-radius(1px);
-		@include transition($default-input-transition);
-	}
-	@mixin requiredPadding {
-		font-family: $font-stack;
-		padding-left: 15px;
-	}
-	@mixin requiredPaddingEntered {
-		padding-left: 10px;
-	}
+    @mixin requiredCss {
+        content: '';
+        position: absolute;
+        background-color: $color-input-required;
+        color: $color-white;
+        font-size: 16px;
+        text-align: center;
+        width: 5px;
+        z-index: 1;
 
-	&.input-text, &.input-calendar {
-		input[type=text] {
-			@include requiredPadding;
-		}
-		.input-container {
-			&:before {
-				@include requiredCss;
-				top: 5px;
-				bottom: 5px;
-				left: 5px;
-			}
-		}
-	}
-	&.input-calendar {
-		&:before {
-			left: 16px;
-		}
-		input[type=text].input-calendar-value {
-			padding-left: 36px;
-		}
-	}
-	&.input-textarea {
-		textarea {
-			@include requiredPadding;
-		}
-		.input-container {
-			&:before {
-				@include requiredCss;
-				top: 7px;
-				bottom: 8px;
-				left: 6px;
-			}
-		}
-	}
-	&.input-multivalues {
-		@include requiredPadding;
-		width: 315px;
-		&:before {
-			@include requiredCss;
-			top: 7px;
-			bottom: 8px;
-			left: 0;
-		}
-	}
-	&.input-select {
-		select {
-			padding-left: 25px;
-		}
-		.input-container {
-			&:before {
-				@include requiredCss;
-				top: 5px;
-				bottom: 7px;
-				left: 5px;
-			}
-		}
-	}
-	&.input-toggle {
-		margin: 0 0 0 15px;
+        @include border-radius(1px);
+        @include transition($default-input-transition);
+    }
 
-		&:before {
-			top: 0;
-			bottom: 0;
-			left: -14px;
-		}
-	}
-	&.legend {
-		float: right;
-		margin: 0 0 0 15px;
+    @mixin requiredPadding {
+        font-family: $font-stack;
+        padding-left: 15px;
+    }
 
-		&:before {
-			top: 0;
-			bottom: 2px;
-			left: -14px;
-		}
-	}
-	&.value-entered {
-		&.input-text, &.input-textarea, &.input-select, &.input-calendar {
-			.input-container {
-				&:before {
-					width: 0;
-				}
-			}
-		}
-		&.input-calendar {
-			&:before {
-				left: 10px;
-			}
-			input[type=text] {
-				padding-left: 30px;
-			}
-		}
-		&.input-multivalues {
-			&:before {
-				width: 0;
-			}
-		}
-		&.input-text {
-			input {
-				@include requiredPaddingEntered;
-			}
-		}
-		&.input-textarea {
-			textarea {
-				@include requiredPaddingEntered;
-			}
-		}
-		&.input-multivalues {
-			@include requiredPaddingEntered;
-		}
-		&.input-select {
-			select {
-				padding-left: 10px;
-			}
-		}
-	}
+    @mixin requiredPaddingEntered {
+        padding-left: 10px;
+    }
+
+    &.input-text,
+    &.input-calendar {
+        input[type=text] {
+            @include requiredPadding;
+        }
+        .input-container {
+            &:before {
+                @include requiredCss;
+                top: 5px;
+                bottom: 5px;
+                left: 5px;
+            }
+        }
+    }
+    &.input-calendar {
+        &:before {
+            left: 16px;
+        }
+        input[type=text].input-calendar-value {
+            padding-left: 36px;
+        }
+    }
+    &.input-textarea {
+        textarea {
+            @include requiredPadding;
+        }
+        .input-container {
+            &:before {
+                @include requiredCss;
+                top: 7px;
+                bottom: 8px;
+                left: 6px;
+            }
+        }
+    }
+    &.input-multivalues {
+        @include requiredPadding;
+        width: 315px;
+        &:before {
+            @include requiredCss;
+            top: 7px;
+            bottom: 8px;
+            left: 0;
+        }
+    }
+    &.input-select {
+        select {
+            padding-left: 25px;
+        }
+        .input-container {
+            &:before {
+                @include requiredCss;
+                top: 5px;
+                bottom: 7px;
+                left: 5px;
+            }
+        }
+    }
+    &.input-toggle {
+        margin: 0 0 0 15px;
+
+        &:before {
+            top: 0;
+            bottom: 0;
+            left: -14px;
+        }
+    }
+    &.legend {
+        float: right;
+        margin: 0 0 0 15px;
+
+        &:before {
+            top: 0;
+            bottom: 2px;
+            left: -14px;
+        }
+    }
+    &.value-entered {
+        &.input-text,
+        &.input-textarea,
+        &.input-select,
+        &.input-calendar {
+            .input-container {
+                &:before {
+                    width: 0;
+                }
+            }
+        }
+        &.input-calendar {
+            &:before {
+                left: 10px;
+            }
+            input[type=text] {
+                padding-left: 30px;
+            }
+        }
+        &.input-multivalues {
+            &:before {
+                width: 0;
+            }
+        }
+        &.input-text {
+            input {
+                @include requiredPaddingEntered;
+            }
+        }
+        &.input-textarea {
+            textarea {
+                @include requiredPaddingEntered;
+            }
+        }
+        &.input-multivalues {
+            @include requiredPaddingEntered;
+        }
+        &.input-select {
+            select {
+                padding-left: 10px;
+            }
+        }
+    }
 }
+
 .form-error {
-	&.input-text, &.input-integer {
-		input[type=text] {
-			border-color: $color-input-error;
-		}
-	}
-	&.input-textarea {
-		textarea {
-			border-color: $color-input-error;
-		}
-	}
-	&.input-select {
-		.wrapper {
-			border-color: $color-input-error;
-		}
-	}
-	&.input-toggle {
-		.toggle {
-			border-color: $color-input-error;
+    &.input-text,
+    &.input-integer {
+        input[type=text] {
+            border-color: $color-input-error;
+        }
+    }
+    &.input-textarea {
+        textarea {
+            border-color: $color-input-error;
+        }
+    }
+    &.input-select {
+        .wrapper {
+            border-color: $color-input-error;
+        }
+    }
+    &.input-toggle {
+        .toggle {
+            border-color: $color-input-error;
 
-			&:after {
-				border-color: $color-input-error;
-			}
-		}
-	}
-	&.input-checkbox {
-		.icon {
-			&:before {
-				border-color: $color-input-error;
-			}
-		}
-	}
-	&.input-radio {
-		.circle {
-			border-color: $color-input-error;
-		}
-	}
-	&.intl-tel-input {
-		input[type=text] {
-			border-color: $color-input-error;
-		}
-	}
+            &:after {
+                border-color: $color-input-error;
+            }
+        }
+    }
+    &.input-checkbox {
+        .icon {
+            &:before {
+                border-color: $color-input-error;
+            }
+        }
+    }
+    &.input-radio {
+        .circle {
+            border-color: $color-input-error;
+        }
+    }
+    &.intl-tel-input {
+        input[type=text] {
+            border-color: $color-input-error;
+        }
+    }
 }
+
 [disabled] {
-	cursor: default;
-	@include opacity($disabled-opacity);
+    cursor: default;
 
-	&[type=radio] + .circle {
-		cursor: default;
-	}
+    @include opacity($disabled-opacity);
+
+    &[type=radio] + .circle {
+        cursor: default;
+    }
 
 }
-.readonly {
-	&.input-text, &.input-textarea {
-		input[type=text], input[type=password], textarea {
-			cursor: text;
-			color: $color-input-text-readonly;
 
-			&:hover, &:focus {
-				border: 1px solid $color-input-fill;
-			}
-		}
-		textarea {
-			resize: none !important;
-		}
-	}
-	&.required {
-		&.input-text {
-			input[type=text], input[type=password] {
-				padding-left: 15px;
-			}
-		}
-		&.input-textarea {
-			textarea {
-				padding-left: 15px;
-			}
-		}
-		&.input-text, &.input-textarea, &.input-toggle, &.input-select > div, &.legend {
-			&:before {
-				content: none;
-			}
-		}
-		&.input-select {
-			select {
-				padding: 0 30px 0 10px;
-			}
-		}
-		&.input-toggle {
-			margin: 0;
-		}
-	}
+.readonly {
+    &.input-text,
+    &.input-textarea {
+        input[type=text],
+        input[type=password],
+        textarea {
+            cursor: text;
+            color: $color-input-text-readonly;
+
+            &:hover,
+            &:focus {
+                border: 1px solid $color-input-fill;
+            }
+        }
+        textarea {
+            resize: none !important;
+        }
+    }
+    &.required {
+        &.input-text {
+            input[type=text],
+            input[type=password] {
+                padding-left: 15px;
+            }
+        }
+        &.input-textarea {
+            textarea {
+                padding-left: 15px;
+            }
+        }
+        &.input-text,
+        &.input-textarea,
+        &.input-toggle,
+        &.input-select > div,
+        &.legend {
+            &:before {
+                content: none;
+            }
+        }
+        &.input-select {
+            select {
+                padding: 0 30px 0 10px;
+            }
+        }
+        &.input-toggle {
+            margin: 0;
+        }
+    }
 }
 
 
@@ -1603,183 +1700,199 @@ input[type=file] {
 // MISC SUPPORTING STYLES --------------------------------------------------------------------------
 
 .input-row {
-	position: relative;
-	margin: 0 0 25px 0;
+    position: relative;
+    margin: 0 0 25px;
 
-	.input-text, .input-textarea, .input-select, .input-file-upload, .input-integer, .input-radio, .input-checkbox, .input-color-picker {
-		margin-bottom: 0;
-	}
+    .input-text,
+    .input-textarea,
+    .input-select,
+    .input-file-upload,
+    .input-integer,
+    .input-radio,
+    .input-checkbox,
+    .input-color-picker {
+        margin-bottom: 0;
+    }
 }
+
 .checkbox-list {
-	padding: 10px 5px 10px 0;
-	margin-left: 0;
-	border: 1px solid $color-elderly;
+    padding: 10px 5px 10px 0;
+    margin-left: 0;
+    border: 1px solid $color-elderly;
 
-	.filters {
-		margin: 0 0 0 10px;
-	}
-	.options {
-		width: 99%;
-		max-height: 133px;
-		overflow-y: auto;
-		padding-left: 10px;
+    .filters {
+        margin: 0 0 0 10px;
+    }
+    .options {
+        width: 99%;
+        max-height: 133px;
+        overflow-y: auto;
+        padding-left: 10px;
 
-		label.input-checkbox {
-			width: 190px;
-			margin-bottom: 10px;
-			text-transform: none;
-			display: inline-block;
-			padding: 0 0 0 30px;
+        label.input-checkbox {
+            width: 190px;
+            margin-bottom: 10px;
+            text-transform: none;
+            display: inline-block;
+            padding: 0 0 0 30px;
 
-			.label-text {
-				display: inline-block;
-				padding-top: 6px;
-				margin: 0;
-			}
-		}
-		&.item-head {
-			display: block;
-			color: $color-walrus;
-		}
-	}
-	.actions {
-		display: inline-block;
-		line-height: 48px;
+            .label-text {
+                display: inline-block;
+                padding-top: 6px;
+                margin: 0;
+            }
+        }
+        &.item-head {
+            display: block;
+            color: $color-walrus;
+        }
+    }
+    .actions {
+        display: inline-block;
+        line-height: 48px;
 
-		.toggle-container {
-			display: inline-block;
-			margin: 0 0 0 20px;
+        .toggle-container {
+            display: inline-block;
+            margin: 0 0 0 20px;
 
-			.input-toggle {
-				margin: 0 0 0 10px;
-			}
-		}
-	}
+            .input-toggle {
+                margin: 0 0 0 10px;
+            }
+        }
+    }
 }
+
 .input-datetime {
-	.input-time {
-		margin-right: 0;
-		margin-left: 3px;
-	}
+    .input-time {
+        margin-right: 0;
+        margin-left: 3px;
+    }
 }
+
 a {
-	&.input-link {
-		display: block;
-		margin: 2px 0 0 1px;
-	}
+    &.input-link {
+        display: block;
+        margin: 2px 0 0 1px;
+    }
 }
+
 .drop-link {
-	position: relative;
-	text-transform: uppercase;
+    position: relative;
+    text-transform: uppercase;
 
-	&:hover {
-		text-decoration: none;
-	}
-	&:after {
-		content: 'v';
-		font-family: $icon-font;
-		font-size: 12px;
-		text-transform: none;
-		right: 10px;
-		top: 1px;
-		pointer-events: none;
-	}
-	&.open {
-		&:after {
-			content: '^';
-		}
-	}
+    &:hover {
+        text-decoration: none;
+    }
+    &:after {
+        content: 'v';
+        font-family: $icon-font;
+        font-size: 12px;
+        text-transform: none;
+        right: 10px;
+        top: 1px;
+        pointer-events: none;
+    }
+    &.open {
+        &:after {
+            content: '^';
+        }
+    }
 }
+
 .input-divider {
-	display: block;
-	margin: 0 0 15px 0;
-	border-top: 1px solid $color-rabbit-fur;
-	&.dotted {
-		border-top-style: dotted;
-	}
+    display: block;
+    margin: 0 0 15px;
+    border-top: 1px solid $color-rabbit-fur;
+    &.dotted {
+        border-top-style: dotted;
+    }
 }
+
 .input-child {
-	margin: 0 0 0 25px;
+    margin: 0 0 0 25px;
 }
 
-// Input width functions
-@function calc-input-width($container-width, $divisions, $hor-margin){
-	@return (
-		(($container-width - (($divisions - 1) * $hor-margin)) / $divisions)
-	);
+@function calc-input-width($container-width, $divisions, $hor-margin) {
+    @return (
+        (($container-width - (($divisions - 1) * $hor-margin)) / $divisions)
+    );
 }
+
 @function calc-input-part-width($fraction-num, $fraction-width, $hor-margin) {
-	@return (
-		round($fraction-width*$fraction-num + (($fraction-num - 1)*$hor-margin))
-	);
+    @return (
+        round($fraction-width*$fraction-num + (($fraction-num - 1)*$hor-margin))
+    );
 }
+
 @function input-width-map($width-smallest, $hor-margin) {
-	@return ((
-		'xsmall': $width-smallest,
-		'small': calc-input-part-width(2, $width-smallest, $hor-margin),
-		'medium': calc-input-part-width(3, $width-smallest, $hor-margin),
-		'large': calc-input-part-width(4, $width-smallest, $hor-margin),
-		'xlarge': calc-input-part-width(5, $width-smallest, $hor-margin),
-		'full': calc-input-part-width(6, $width-smallest, $hor-margin)
-	));
+    @return ((
+        'xsmall': $width-smallest,
+        'small': calc-input-part-width(2, $width-smallest, $hor-margin),
+        'medium': calc-input-part-width(3, $width-smallest, $hor-margin),
+        'large': calc-input-part-width(4, $width-smallest, $hor-margin),
+        'xlarge': calc-input-part-width(5, $width-smallest, $hor-margin),
+        'full': calc-input-part-width(6, $width-smallest, $hor-margin)
+    ));
 }
+
 @mixin input-width-css($size) {
-	vertical-align: bottom;
+    vertical-align: bottom;
 
-	.label-text {
-		word-break: normal;
-		width: map-get($input-width-settings-map-default, $size);
-	}
-	&.input-text {
-		input[type=text], input[type=password] {
-			width: map-get($input-width-settings-map-text, $size);
-		}
-	}
-	&.input-textarea {
-		textarea {
-			width: map-get($input-width-settings-map-textarea, $size);
-		}
-	}
-	&.input-select {
-		select {
-			width: map-get($input-width-settings-map-select, $size) - 2px; // subtract wrapper border width
-		}
-	}
-	&.input-checkbox {
-		width: map-get($input-width-settings-map-default, $size);
-	}
-	&.input-calendar {
-		input[type=text] {
-			width: map-get($input-width-settings-map-default, $size);
-		}
-	}
-	&.input-datetime {
-		$dt-width: map-get($input-width-settings-map-default, $size);
-		$cal-percent: 0.66;
-		$cal-width: ceil($dt-width * $cal-percent);
-		$time-width: floor(($dt-width - 4) * (1 - $cal-percent));
+    .label-text {
+        word-break: normal;
+        width: map-get($input-width-settings-map-default, $size);
+    }
+    &.input-text {
+        input[type=text],
+        input[type=password] {
+            width: map-get($input-width-settings-map-text, $size);
+        }
+    }
+    &.input-textarea {
+        textarea {
+            width: map-get($input-width-settings-map-textarea, $size);
+        }
+    }
+    &.input-select {
+        select {
+            width: map-get($input-width-settings-map-select, $size) - 2px; // subtract wrapper border width
+        }
+    }
+    &.input-checkbox {
+        width: map-get($input-width-settings-map-default, $size);
+    }
+    &.input-calendar {
+        input[type=text] {
+            width: map-get($input-width-settings-map-default, $size);
+        }
+    }
+    &.input-datetime {
+        $dt-width: map-get($input-width-settings-map-default, $size);
+        $cal-percent: 0.66;
+        $cal-width: ceil($dt-width * $cal-percent);
+        $time-width: floor(($dt-width - 4) * (1 - $cal-percent));
 
-		display: inline-block;
+        display: inline-block;
 
-		.input-calendar {
-			input[type=text] {
-				width: $cal-width;
-			}
-		}
-		.input-time {
-			select {
-				width: $time-width;
-			}
-		}
-	}
+        .input-calendar {
+            input[type=text] {
+                width: $cal-width;
+            }
+        }
+        .input-time {
+            select {
+                width: $time-width;
+            }
+        }
+    }
 }
 
 // Input width settings
 $input-width-settings: (
-	'width-max': 590px,
-	'num-increments': 6,
-	'hor-margin': 10px,
-	'vert-margin': 20px
+    'width-max': 590px,
+    'num-increments': 6,
+    'hor-margin': 10px,
+    'vert-margin': 20px
 );
 
 $input-width-settings-smallest-default: calc-input-width(map-get($input-width-settings, 'width-max'), map-get($input-width-settings, 'num-increments'), map-get($input-width-settings, 'hor-margin'));
@@ -1792,26 +1905,37 @@ $input-width-settings-map-text: input-width-map($input-width-settings-smallest-t
 $input-width-settings-map-textarea: input-width-map($input-width-settings-smallest-textarea, map-get($input-width-settings, 'hor-margin'));
 $input-width-settings-map-select: input-width-map($input-width-settings-smallest-select, map-get($input-width-settings, 'hor-margin'));
 
-.input-width-xsmall, .input-width-small, .input-width-medium, .input-width-large, .input-width-xlarge, .input-width-full {
-	margin-bottom: map-get($input-width-settings, 'vert-margin');
-}
-.input-width-xsmall {
-	@include input-width-css('xsmall');
-}
-.input-width-small {
-	@include input-width-css('small');
-}
-.input-width-medium {
-	@include input-width-css('medium');
-}
-.input-width-large {
-	@include input-width-css('large');
-}
-.input-width-xlarge {
-	@include input-width-css('xlarge');
-}
+.input-width-xsmall,
+.input-width-small,
+.input-width-medium,
+.input-width-large,
+.input-width-xlarge,
 .input-width-full {
-	@include input-width-css('full');
+    margin-bottom: map-get($input-width-settings, 'vert-margin');
+}
+
+.input-width-xsmall {
+    @include input-width-css('xsmall');
+}
+
+.input-width-small {
+    @include input-width-css('small');
+}
+
+.input-width-medium {
+    @include input-width-css('medium');
+}
+
+.input-width-large {
+    @include input-width-css('large');
+}
+
+.input-width-xlarge {
+    @include input-width-css('xlarge');
+}
+
+.input-width-full {
+    @include input-width-css('full');
 }
 
 
@@ -1820,146 +1944,155 @@ $input-width-settings-map-select: input-width-map($input-width-settings-smallest
 // TODO : move WP styles to WP
 
 label {
-	&.input-text {
-		&.large {
-			.input-container {
-				input {
-					height: 48px;
-					font-size: 16px;
-				}
-			}
-			&.search {
-				.input-container {
-					&:before {
-						bottom: 18px;
-						left: 14px;
-					}
-					.undo {
-						bottom: 13px;
-						right: 12px;
-					}
-				}
-			}
-		}
-	}
-	&.main {
-		display: block;
-		margin: 0 0 5px 0;
-	}
+    &.input-text {
+        &.large {
+            .input-container {
+                input {
+                    height: 48px;
+                    font-size: 16px;
+                }
+            }
+            &.search {
+                .input-container {
+                    &:before {
+                        bottom: 18px;
+                        left: 14px;
+                    }
+                    .undo {
+                        bottom: 13px;
+                        right: 12px;
+                    }
+                }
+            }
+        }
+    }
+    &.main {
+        display: block;
+        margin: 0 0 5px;
+    }
 }
+
 .inline-input-labels {
-	> label {
-		display: table-row;
+    > label {
+        display: table-row;
 
-		&:before {
-			content: none !important;
-		}
-		.label-text, .input-container {
-			display: table-cell;
-			vertical-align: middle;
-			border-bottom: 15px solid transparent;
-		}
-		.label-text {
-			padding: 0 15px 0 0;;
-		}
-		.input-container {
-			display: table-cell;
-			padding: 0;
-		}
-		input, textarea {
-			margin: 0;
-		}
-		&.input-select {
-			.input-container {
-				margin: 0;
+        &:before {
+            content: none !important;
+        }
+        .label-text,
+        .input-container {
+            display: table-cell;
+            vertical-align: middle;
+            border-bottom: 15px solid transparent;
+        }
+        .label-text {
+            padding: 0 15px 0 0;
+        }
+        .input-container {
+            display: table-cell;
+            padding: 0;
+        }
+        input,
+        textarea {
+            margin: 0;
+        }
+        &.input-select {
+            .input-container {
+                margin: 0;
 
-				select {
-					margin: 0;
-				}
-			}
-		}
-		&.input-checkbox {
-			input {
-				display: none;
-			}
-			.label-text {
-				height: 25px;
-			}
-			.icon {
-				display: table-cell;
-				position: relative;
-				&:after {
-					bottom: auto;
-					top: 5px;
-				}
-			}
-		}
-	}
+                select {
+                    margin: 0;
+                }
+            }
+        }
+        &.input-checkbox {
+            input {
+                display: none;
+            }
+            .label-text {
+                height: 25px;
+            }
+            .icon {
+                display: table-cell;
+                position: relative;
+                &:after {
+                    bottom: auto;
+                    top: 5px;
+                }
+            }
+        }
+    }
 }
+
 .password-errors {
-	margin: 10px 0 0 2px;
+    margin: 10px 0 0 2px;
 
-	> div {
-		display: inline-block;
-		margin: 0 15px 5px 0;
-		width: 164px;
+    > div {
+        display: inline-block;
+        margin: 0 15px 5px 0;
+        width: 164px;
 
-		&:before {
-			content: '\00D7';
-			background: $color-critical-red;
-			color: $color-white;
-			font-size: 14px;
-			height: 14px;
-			width: 14px;
-			line-height: 16px;
-			margin: 0 5px 0 0;
-			text-align: center;
-			display: inline-block;
+        &:before {
+            content: '\00D7';
+            background: $color-critical-red;
+            color: $color-white;
+            font-size: 14px;
+            height: 14px;
+            width: 14px;
+            line-height: 16px;
+            margin: 0 5px 0 0;
+            text-align: center;
+            display: inline-block;
 
-			@include border-radius(10px);
-		}
-	}
+            @include border-radius(10px);
+        }
+    }
 }
+
 .radio-inputs {
-	position: relative;
-	margin: 15px 0 0 23px;
+    position: relative;
+    margin: 15px 0 0 23px;
 }
+
 .input-row {
-	&.lead-item {
-		margin-bottom: 10px;
-	}
-	.inactive, &.inactive {
-		display: none;
-	}
-	.text-input, .input-checkbox {
-		text-align: left;
-		.comment {
-			display: block;
-			padding: 5px;
-			margin-top: -3px;
-			&.error {
-				background-color: $color-critical-red;
-				color: $color-white;
-				padding: 15px;
-				@include border-radius(0 0 4px 4px);
-			}
-		}
-	}
+    &.lead-item {
+        margin-bottom: 10px;
+    }
+    .inactive,
+    &.inactive {
+        display: none;
+    }
+    .text-input,
+    .input-checkbox {
+        text-align: left;
+        .comment {
+            display: block;
+            padding: 5px;
+            margin-top: -3px;
+            &.error {
+                background-color: $color-critical-red;
+                color: $color-white;
+                padding: 15px;
+
+                @include border-radius(0 0 4px 4px);
+            }
+        }
+    }
 }
 
 .input-menu-button {
-	.menu {
-		.options-title {
-			margin: 20px 0 0 0;
-		}
-		.options {
-			a {
-				padding-right: 15px;
-				&:last-child {
-					padding-right: 0px;
-				}
-			}
+    .menu {
+        .options-title {
+            margin: 20px 0 0;
+        }
+        .options {
+            a {
+                padding-right: 15px;
+                &:last-child {
+                    padding-right: 0;
+                }
+            }
 
-		}
-	}
+        }
+    }
 }
