@@ -30,7 +30,7 @@ var filterSelector = createSelector(
         //and apply a filter to it.  In a real example we would divide the results into batches of some
         //size or more often, re-query the server and let the endpoint perform the filtering.
         rows = rows.all.filter(function (row) {
-            return (!filters.text || row.title.indexOf(filters.text) > -1) &&
+            return (!filters.text || row.title.toLowerCase().indexOf(filters.text.toLowerCase()) > -1) &&
               (!filters.even || row.id % 2 === 0) &&
               (!filters.odd || row.id % 2 === 1);
         });
@@ -75,6 +75,9 @@ module.exports = function (state, action) {
         case Actions.Types.LIST_VIEW_FILTER:
             nextState = update.set(nextState, ["filters", action.name], action.value);
             nextState = update.set(nextState, ["rows", "filtered"], filterSelector(nextState));
+            
+            // Always view results from page 1
+            nextState = update.set(nextState, ["page"], 1);
             nextState = update.set(nextState, ["rows", "page"], pageSelector(nextState));
             break;
         case Actions.Types.LIST_VIEW_PAGE:
