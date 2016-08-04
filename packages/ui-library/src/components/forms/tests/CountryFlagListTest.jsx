@@ -43,11 +43,11 @@ describe("CountryFlagList", function () {
         ReactTestUtils = require("react-addons-test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         CountryFlagList = require("../i18n/CountryFlagList.jsx"),
+        Translator = require("../../../util/i18n/Translator.js"),
         _ = require("underscore");
 
     window.addEventListener = jest.genMockFunction();
     window.removeEventListener = jest.genMockFunction();
-
     function getComponent (props) {
         props = _.defaults(props || {}, {
             onValueChange: jest.genMockFunction(),
@@ -348,6 +348,40 @@ describe("CountryFlagList", function () {
         component._setSearchListPosition = jest.genMockFunction();
         component.componentDidUpdate();
         expect(component._setSearchListPosition).toBeCalled();
+    });
+
+    it("call component will mount", function () {
+        var component = getComponent();
+        component._translateCountryNames = jest.genMockFunction();
+        component.componentWillMount();
+        expect(component._translateCountryNames).toBeCalled();
+    });
+
+    it("translates and sorts country names when current language is not en_us", function () {
+        Translator.translate = jest.genMockFunction().mockReturnValueOnce("translated text 2")
+            .mockReturnValueOnce("translated text 1");
+        Translator.currentLanguage = "vi_vn";
+        var component = getComponent();
+        var countryList = [
+            {
+                name: "Afghanistan (‫افغانستان‬‎)",
+                iso2: "af",
+                isoNum: "004",
+                dialCode: "93",
+                priority: 0,
+                areaCodes: null
+            },
+            {
+                name: "Canada",
+                iso2: "ca",
+                isoNum: "124",
+                dialCode: "1",
+                priority: 1,
+                areaCodes: null
+            }];
+        countryList = component._translateCountryNames(countryList);
+        expect(countryList[0].name).toBe("translated text 1");
+        expect(countryList[0].iso2).toBe("ca");
     });
 
 });

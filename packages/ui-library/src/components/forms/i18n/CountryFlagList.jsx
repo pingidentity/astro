@@ -228,6 +228,17 @@ var CountryFlagList = React.createClass({
         })[0];
     },
 
+    _translateCountryNames: function (listCountry) {
+        if (listCountry !== undefined) {
+            listCountry.forEach(function (country) {
+                country.name = Translator.translate("forms.i18n.countryNames."+ country.iso2);
+            });
+        }
+        listCountry = _.sortBy(listCountry, "name");
+
+        return listCountry;
+    },
+
     componentDidUpdate: function () {
         this._setSearchListPosition();
     },
@@ -238,6 +249,10 @@ var CountryFlagList = React.createClass({
 
     componentWillUnmount: function () {
         window.removeEventListener("click", this._handleGlobalClick);
+    },
+
+    componentWillMount: function () {
+        countryCodes = this._translateCountryNames(countryCodes);
     },
 
     getDefaultProps: function () {
@@ -284,7 +299,7 @@ var CountryFlagList = React.createClass({
                             return (
                                 <Flag key={item.iso2} data-id={"country-" + item.iso2} iso2={item.iso2}
                                       highlighted={index === this.props.searchIndex}
-                                      name={Translator.translate("forms.i18n.countryNames."+item.iso2)}
+                                      name={item.name}
                                       code={item[this.props.countryCodeDisplayType]}
                                       onClick={this.props.onValueChange.bind(null, item)}
                                       ref={item.iso2}
