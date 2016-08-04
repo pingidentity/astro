@@ -1,3 +1,9 @@
+/* So fonts get bundled by webpack */
+@font-face { font-family: 'ProximaNovaRegular'; font-weight: normal; src: url('../fonts/proxima-nova/ProximaNova-Regular.otf'); }
+@font-face { font-family: 'ProximaNovaBold'; font-weight: bold; src: url('../fonts/proxima-nova/ProximaNova-Bold.otf'); }
+@font-face { font-family: 'ProximaNovaLight'; font-weight: normal; src: url('../fonts/proxima-nova/ProximaNova-Light.otf'); }
+@font-face { font-family: 'ProximaNovaSemibold'; font-weight: normal; src: url('../fonts/proxima-nova/ProximaNova-Semibold.otf'); }
+@font-face { font-family: 'ProximaNovaCondRegular'; font-weight: normal; src: url('../fonts/proxima-nova/ProximaNovaCond-Regular.otf'); }
 
 html {
     height: 100%;
@@ -65,6 +71,14 @@ ol > li:before {
     left: 0;
     margin: 0px;
     text-align: left; }
+
+#header {
+    background-color: #3d454d;
+}
+
+#nav {
+    border-right-width: 0px;
+}
 
 #library-content {
     z-index: 1;
