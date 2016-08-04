@@ -4,7 +4,7 @@ var React = require("re-react"),
     FormCheckbox = require("../../components/forms/FormCheckbox.jsx"),
     FormTextField = require("../../components/forms/form-text-field"),
     Pagination = require("../../components/list/Pagination.jsx"),
-    Toggle = require("../../components/forms/Toggle.jsx"),
+    Toggle = require("../../components/forms/form-toggle"),
     classnames = require("classnames");
 
 /**

@@ -4,7 +4,7 @@ var React = require("react"),
     Markup = require("../../core/Markup.jsx"),
     ColorPicker = require("../../../components/general/ColorPicker.jsx"),
     ListView = require("../../../templates/list-view"),
-    FormSelectField = require("../../../components/forms/FormSelectField.jsx"),
+    FormSelectField = require("../../../components/forms/form-select-field"),
     Translator = require("../../../util/i18n/Translator.js");
 var UILibrary101 = React.createClass({
 

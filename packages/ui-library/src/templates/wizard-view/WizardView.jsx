@@ -137,12 +137,11 @@ module.exports = React.createClass({
                 {/* This outer div is only required to style inside the DemoApp */}
 
                 <ModalButton ref="modal"
-                        id="showWizard"
+                        data-id="showWizard"
                         activatorButtonLabel="Show wizard"
                         modalClassName="full-width"
                         modalTitle="Object creation wizard">
                     <Messages messages={this.props.messages}
-                        containerType={Messages.ContainerTypes.MODAL}
                         onRemoveMessage={this.props.onRemoveMessage} />
                     <Wizard.Choose labelCancel={this.props.labelCancel}
                             labelDone={this.props.labelDone}

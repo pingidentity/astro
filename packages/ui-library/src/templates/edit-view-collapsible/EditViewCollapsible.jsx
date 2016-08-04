@@ -89,10 +89,11 @@ module.exports = React.createClass({
                 </div>
                 <div className="page-section-content">
                     <Section
+                        controlled={true}
                         onToggle={this._toggleSection1}
                         expanded={this.props.expandedSections.indexOf(1) > -1}
                         title="Identity"
-                        id="identity-section">
+                        data-id="identity-section">
 
                         <div className="input-row">
                             <FormTextField
@@ -118,10 +119,11 @@ module.exports = React.createClass({
                         </div>
                     </Section>
                     <Section
+                        controlled={true}
                         onToggle={this._toggleSection2}
                         expanded={this.props.expandedSections.indexOf(2) > -1}
                         title="Address"
-                        id="address-section">
+                        data-id="address-section">
 
                         <Layout.Row>
                             <Layout.Column>
@@ -195,10 +197,11 @@ module.exports = React.createClass({
                         </Layout.Row>
                     </Section>
                     <Section
+                        controlled={true}
                         onToggle={this._toggleSection3}
                         expanded={this.props.expandedSections.indexOf(3) > -1}
                         title="Miscellaneous"
-                        id="miscellaneous-section">
+                        data-id="miscellaneous-section">
 
                         <div className="input-row">
                             <label>

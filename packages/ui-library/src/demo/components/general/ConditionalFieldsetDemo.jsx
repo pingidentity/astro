@@ -55,7 +55,7 @@ var ConditionalFieldsetDemo = React.createClass({
     render: function () {
         return (
 
-            <div style = { { "margin-left": "20px" } }>
+            <div style = { { marginLeft: "20px" } }>
 
                 <div className="input-row">
                     <label className="detached">
