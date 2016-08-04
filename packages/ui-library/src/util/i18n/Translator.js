@@ -17,7 +17,7 @@ module.exports = (function () {
      */
     translator.setLanguage = function (lang) {
         translator.currentLanguage = lang;
-        importLanguage(translator.currentLanguage);
+        translator.importLanguage(translator.currentLanguage);
     };
 
     /**
@@ -27,11 +27,12 @@ module.exports = (function () {
      */
     translator.translate = function (key) {
         var useI18N = translator.isUseInternationalization;
-        var strings = useI18N ? importLanguage(translator.currentLanguage) : importLanguage(translator.defaultLanguage);
-        return strings[key] ? strings[key] : translator.languages[translator.currentLanguage][key];
+        var strings = useI18N ? translator.importLanguage(translator.currentLanguage)
+            : translator.importLanguage(translator.defaultLanguage);
+        return strings[key] ? strings[key] : translator.languages[translator.defaultLanguage][key];
     };
 
-    function importLanguage (languageCode) {
+    translator.importLanguage = function (languageCode) {
         languageCode = languageCode.toLowerCase();
         if (translator.languages[languageCode] === undefined) {
             try {
@@ -42,7 +43,7 @@ module.exports = (function () {
             }
         }
         return translator.languages[languageCode];
-    }
+    };
 
     return translator;
 }());
