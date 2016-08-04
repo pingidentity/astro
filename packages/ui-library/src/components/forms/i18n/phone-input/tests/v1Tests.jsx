@@ -31,6 +31,7 @@ jest.dontMock("../v1.jsx");
 jest.dontMock("../../CountryFlagList.jsx");
 jest.dontMock("../../../form-text-field/index.js");
 jest.dontMock("../../../form-text-field/v1.jsx");
+jest.dontMock("../../../../../util/i18n/Translator.js");
 
 describe("I18nPhoneInput", function () {
     var React = require("react"),

@@ -29,6 +29,7 @@ jest.setMock("../i18n/countryCodes", [
 
 jest.dontMock("../i18n/I18nCountrySelector.jsx");
 jest.dontMock("../i18n/CountryFlagList.jsx");
+jest.dontMock("../../../util/i18n/Translator.js");
 
 describe("I18nCountrySelector", function () {
     var React = require("react"),
