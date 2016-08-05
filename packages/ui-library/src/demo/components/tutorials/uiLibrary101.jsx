@@ -337,7 +337,7 @@ var UILibrary101 = React.createClass({
                     <FormSelectField controlled={true}
                         label="Language"
                         options={this.languages}
-                        onChange={this._handleChangeLanguageChange.bind(this, 1)}
+                        onChange={this._handleLanguageChange.bind(this, 1)}
                         value={this.state.currentLanguage}
                     />
                 </div>
