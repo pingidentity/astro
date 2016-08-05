@@ -7,6 +7,7 @@ var React = require("react"),
     FormFieldConstants = require("../../../constants/FormFieldConstants"),
     HelpHint = require("../../tooltips/HelpHint.jsx"),
     Utils = require("../../../util/Utils.js"),
+    Translator = require("../../../util/i18n/Translator.js"),
     _ = require("underscore");
 
 /**
@@ -281,6 +282,9 @@ var FormTextField = React.createClass({
             save,
             labelHelp;
 
+        var labelUndo = Translator.translate("formtextfield.default.button.undo"),
+            labelSave = Translator.translate("formtextfield.default.button.save");
+
         var labelCss = classnames(this.props.labelCss, {
             "input-text": true,
             required: this.props.isRequired,
@@ -298,11 +302,11 @@ var FormTextField = React.createClass({
         if (edited) {
             // only show the undo icon if an original value is passed in and the field's value has changed
             // empty strings are OK
-            undo = (<a data-id="undo" className="undo" onClick={this._handleUndo}>undo</a>);
+            undo = (<a data-id="undo" className="undo" onClick={this._handleUndo}>{labelUndo}</a>);
         }
 
         if (this.props.save && this.state.fieldValue !== this.props.originalValue) {
-            save = (<a data-id="save" className="save" onClick={this._handleSave}>save</a>);
+            save = (<a data-id="save" className="save" onClick={this._handleSave}>{labelSave}</a>);
 
             labelCss += " inline-save";
         }

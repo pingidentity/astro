@@ -4,6 +4,7 @@ var React = require("react"),
     classnames = require("classnames"),
     FormLabel = require("../FormLabel.jsx"),
     FormError = require("../FormError.jsx"),
+    Translator = require("../../../util/i18n/Translator.js"),
     _ = require("underscore");
 
 /**
@@ -255,6 +256,7 @@ var Stateless = React.createClass({
     },
 
     render: function () {
+
         var id = this.props["data-id"],
             className = classnames(this.props.className, "input-text", {
                 edited: this.props.isEdited,
@@ -266,6 +268,8 @@ var Stateless = React.createClass({
                 actions: this.props.showReveal || this.props.showUndo
             }),
             type = this.props._type || (this.props.maskValue && !this.props.reveal ? "password" : "text");
+        var undo = Translator.translate("formtextfield.default.button.undo"),
+            save = Translator.translate("formtextfield.default.button.save");
 
         return (
             <FormLabel className={className}
@@ -301,9 +305,11 @@ var Stateless = React.createClass({
                             })} />
                     }
                     { this.props.showUndo &&
-                        <a data-id="undo" className="undo" onClick={this.props.onUndo}>undo</a>}
+                        <a data-id="undo" className="undo"
+                            onClick={this.props.onUndo}>{undo}</a>}
                     { this.props.showSave &&
-                        <a data-id="save" className="save" onClick={this.props.onSave}>save</a>}
+                        <a data-id="save" className="save"
+                            onClick={this.props.onSave}>{save}</a>}
                     { this.props.controls }
 
                     <FormError value={this.props.errorMessage}

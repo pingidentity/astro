@@ -150,8 +150,22 @@ var FormSelectField = React.createClass({
         }
     },
 
-    _getOptionHtml: function (value, label) {
-        return (<option value={value} key={value}>{label}</option>);
+    /**
+     * @desc Build options select
+     * @param  {string} value
+     *         Value of option
+     * @param  {string} label
+     *         Label of option
+     * @param  {string} index
+     *         Index to make key unique. For example, 12:00AM and 12:00PM
+     *         will be translated into the same value such as 12:00XX.
+     * @return {string}
+     *         Option string
+     * @private
+     * @ignore
+     */
+    _getOptionHtml: function (value, label, index) {
+        return (<option value={value} key={value + "_" + index}>{label}</option>);
     },
 
     render: function () {
@@ -177,7 +191,7 @@ var FormSelectField = React.createClass({
             option = this.props.options[index];
             optionValue = optionsIsArray ? option.value : index;
             optionLabel = optionsIsArray ? option.label : option;
-            optionsHtml.push(this._getOptionHtml(optionValue, optionLabel));
+            optionsHtml.push(this._getOptionHtml(optionValue, optionLabel, index));
         }
 
         if (this.props.noneOptionText) {

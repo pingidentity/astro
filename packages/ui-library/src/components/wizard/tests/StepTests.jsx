@@ -39,6 +39,26 @@ describe("Step", function () {
         );
     }
 
+    function getRenderedComponentForTranslation (opts) {
+        var defaults = {
+            active: true,
+            number: 1,
+            total: 2,
+            onNext: jest.genMockFunction(),
+            onEdit: jest.genMockFunction(),
+            onDone: jest.genMockFunction(),
+            labelDone: "xxxdone",
+            titleSelection: "title selection",
+            hintText: "hint"
+        };
+
+        return ReactTestUtils.renderIntoDocument(
+            <Step {...assign(defaults, opts)}>
+                <div className="childNode"><span>Hello</span><span>World</span></div>
+            </Step>
+        );
+    }
+
     it("Specifies button labels", function () {
         var component = getRenderedComponent({ isModal: false });
 
@@ -159,4 +179,10 @@ describe("Step", function () {
             "Support for nextButtonStyle will be removed in next version");
     });
 
+    it("Verify the component should render correctly when uses translation.", function () {
+        console.warn = jest.genMockFunction();
+        var component = getRenderedComponentForTranslation();
+        var step = TestUtils.findRenderedDOMNodeWithDataId(component, "step");
+        expect(ReactTestUtils.isDOMComponent(step)).toBeTruthy();
+    });
 });

@@ -4,6 +4,8 @@ var React = require("react"),
     _ = require("underscore"),
     FormSelectField = require("../forms/form-select-field"),
     Utils = require("../../util/Utils"),
+    moment = require("moment-range"),
+    Translator = require("../../util/i18n/Translator.js"),
     cx = require("classnames");
 
 /**
@@ -163,9 +165,11 @@ module.exports = React.createClass({
                             this._getPaddedNumber(formattedTime.minutes) +
                             (formattedTime.amPm || "");
 
+            if (this.props.increments === 30) {
+                formattedTime = moment(formattedTime, ["hh:mm A"]).format("h:mma");
+            }
             times.push({ label: formattedTime, value: formattedTime });
         }
-
         return times;
     },
 
@@ -179,6 +183,8 @@ module.exports = React.createClass({
     },
 
     componentWillMount: function () {
+        moment.locale(Translator.currentLanguage);
+
         if (this.props.id) {
             console.warn(Utils.deprecateMessage("id", "data-id"));
         }

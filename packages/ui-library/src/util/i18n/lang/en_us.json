@@ -244,7 +244,15 @@
     "forms.i18n.countryNames.ye": "Yemen (‫اليمن‬‎)",
     "forms.i18n.countryNames.zm": "Zambia",
     "forms.i18n.countryNames.zw": "Zimbabwe",
-    "forms.i18n.countryNames.ax": "Åland Islands"
-
+    "forms.i18n.countryNames.ax": "Åland Islands",
+    "calendar.default.format.dateformat": "MM-DD-YYYY",
+    "buttonbar.default.button.discard": "Discard",
+    "buttonbar.default.button.save": "Save",
+    "buttonbar.default.button.cancel": "Cancel",
+    "formtextfield.default.button.undo": "Undo",
+    "formtextfield.default.button.save": "Save",
+    "step.default.label.next": "Next",
+    "step.default.label.cancel": "Cancel",
+    "step.default.label.done": "Done"
 }
 

@@ -29,6 +29,14 @@
     "forms.i18n.countryNames.tr": "Thổ Nhĩ Kỳ (Türkiye)",
     "forms.i18n.countryNames.gb": "Vương quốc Anh",
     "forms.i18n.countryNames.us": "Hoa Kỳ",
-    "forms.i18n.countryNames.vn": "Việt Nam"
+    "forms.i18n.countryNames.vn": "Việt Nam",
+    "calendar.default.format.dateformat": "DD-MM-YYYY",
+    "buttonbar.default.button.discard": "Loại bỏ",
+    "buttonbar.default.button.save": "Lưu",
+    "buttonbar.default.button.cancel": "Huỷ",
+    "formtextfield.default.button.undo": "Hoàn tác",
+    "formtextfield.default.button.save": "Lưu",
+    "step.default.label.next": "Tiếp",
+    "step.default.label.cancel": "Huỷ",
+    "step.default.label.done": "Hoàn thành"
 }
-

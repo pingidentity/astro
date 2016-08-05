@@ -7,6 +7,7 @@ var React = require("re-react"),
     EllipsisLoaderButton = require("../general/EllipsisLoaderButton.jsx"),
     classnames = require("classnames"),
     Utils = require("../../util/Utils"),
+    Translator = require("../../util/i18n/Translator.js"),
     _ = require("underscore");
 
 /**
@@ -143,31 +144,44 @@ var Step = React.createClass({
 
     _getCancelButton: function () {
         if (!this.props.hideCancel) {
+            var labelCancel = this.props.labelCancel;
+            if (!this.props.labelCancel) {
+                labelCancel = Translator.translate("step.default.label.cancel");
+            }
+
             return React.createElement(this.props.isModal ? ContextButton : "input", {
                 onClick: this.props.onCancel,
                 type: "button",
                 ref: "cancelButton",
-                className: "cancel cancel-step",
-                value: this.props.labelCancel,
+                className: "default cancel-step",
+                value: labelCancel,
                 disabled: this.props.showPulsing
             });
         }
     },
 
     _getNextButton: function () {
+        var labelNext = this.props.labelNext;
+        if (!this.props.labelNext) {
+            labelNext = Translator.translate("step.default.label.next");
+        }
         return (
             <EllipsisLoaderButton ref="nextButton" data-id="nextButton"
                 onClick={this._next}
-                text={this.props.labelNext}
+                text={labelNext}
                 loading={this.props.showPulsing}
                 disabled={!this.props.canProceed || this.props.showPulsing}
                 className={this.props.nextButtonStyle || this.props.nextButtonClassName} />);
     },
 
     _getEditLink: function () {
+        var labelEdit = this.props.labelEdit;
+        if (!this.props.labelEdit) {
+            labelEdit = Translator.translate("step.default.label.edit");
+        }
         if (!this.props.active && this.props.showEdit) {
             return (<a ref="editButton" className="task-edit-link edit edit-directory" onClick={this._edit}>
-                {this.props.labelEdit}
+                {labelEdit}
             </a>);
         }
     },

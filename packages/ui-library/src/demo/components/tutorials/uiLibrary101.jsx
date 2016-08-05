@@ -6,6 +6,7 @@ var React = require("react"),
     ListView = require("../../../templates/list-view"),
     FormSelectField = require("../../../components/forms/form-select-field"),
     Translator = require("../../../util/i18n/Translator.js");
+
 var UILibrary101 = React.createClass({
 
     getInitialState: function () {
@@ -30,11 +31,11 @@ var UILibrary101 = React.createClass({
         this.setState({ pickerColor: color });
     },
 
-    _handleChangeLanguageChange: function (index, event) {
+    _handleLanguageChange: function (index, event) {
         Translator.setLanguage(event.target.value);
-        var state = this.state;
-        state.currentLanguage = event.target.value;
-        this.setState(state);
+        this.setState({
+            currentLanguage: event.target.value
+        });
     },
 
     _handleToggleSearchBar: function () {
@@ -314,14 +315,14 @@ var UILibrary101 = React.createClass({
                 </p>
                 <h2>Change UI-Library Language</h2>
                 <p>
-                    UI Library supports i18n for common strings via the translator. The default language is en_us.
-                    You can change the language of UI-Library as follows example.
+                    The UI Library supports i18n for common strings via the translator. The default language is English.
+                    You can change the language of the UI-Library as shown in the following example.
                 </p>
                 <Markup custom={true}
                     content={
                         [
                         /* eslint-disable */
-                            '// Translator is the global module, you just set current language it once and use it everywhere',
+                            '// The translator is a global module. You just set the current language once and it is used everywhere.',
                             'var translator = require("/src/util/i18n/translator.jsx");',
                             'translator.setLanguage("vi_vn");'
                         /* eslint-enable */
@@ -329,8 +330,8 @@ var UILibrary101 = React.createClass({
                     }
                 />
                 <p>
-                    When you change language to unsupported item or your text is not translated
-                    it will be set to default language(en_us).
+                    If you change to an unsupported language or your text isn't translated,
+                    the language will be set to the default (English).
                 </p>
                 <div className= "input-row">
                     <FormSelectField controlled={true}

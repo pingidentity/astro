@@ -1,7 +1,16 @@
 {
-    "expandablerow.default.button.cancel": "Cancel",
-    "expandablerow.default.button.confirm": "Confirm",
-    "expandablerow.default.title.confirmdelete": "Confirm delete"
-
+    "expandablerow.default.button.cancel": "取消",
+    "expandablerow.default.button.confirm": "确认",
+    "expandablerow.default.title.confirmdelete": "确认删除",
+    "calendar.default.format.dateformat": "MM-DD-YYYY",
+    "buttonbar.default.button.discard": "丢弃",
+    "buttonbar.default.button.save": "保存",
+    "buttonbar.default.button.cancel": "取消",
+    "formtextfield.default.button.undo": "解开",
+    "formtextfield.default.button.save": "保存",
+    "step.default.label.next": "下一个",
+    "step.default.label.cancel": "取消",
+    "step.default.label.done": "做",
+    "tutorial.exampletranslatedtext": "欢迎到用户界面库，当前的语言为英语（美国"
 }
 

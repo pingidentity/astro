@@ -5,10 +5,10 @@ var React = require("react"),
     MonthsView = require("./MonthsView.jsx"),
     YearsView = require("./YearsView.jsx"),
     CalendarUtils = require("./Utils"),
+    Translator = require("../../util/i18n/Translator.js"),
     Utils = require("../../util/Utils.js");
 
 var _keyDownActions = CalendarUtils.keyDownActions;
-
 /**
 * @enum {number}
 * @alias Calendar.Views
@@ -123,7 +123,6 @@ var Calendar = React.createClass({
     getDefaultProps: function () {
         return {
             "data-id": "calendar",
-            format: "MM-DD-YYYY",
             computableFormat: "MM-DD-YYYY",
             minView: Views.DAYS,
             closeOnSelect: false,
@@ -133,11 +132,16 @@ var Calendar = React.createClass({
 
     getInitialState: function () {
         var date = this.props.date ? moment(this.props.date) : null,
-            minView = parseInt(this.props.minView, 10);
+            minView = parseInt(this.props.minView, 10),
+            format = this.props.format;
+
+        if (!this.props.format) {
+            format = Translator.translate("calendar.default.format.dateformat");
+        }
 
         return {
             date: date,
-            format: this.props.format,
+            format: format,
             computableFormat: this.props.computableFormat,
             inputValue: date ? date.format(this.props.format) : null,
             views: ["days", "months", "years"],
@@ -148,6 +152,8 @@ var Calendar = React.createClass({
     },
 
     componentWillMount: function () {
+        moment.locale(Translator.currentLanguage);
+
         if (this.props.id) {
             console.warn(Utils.deprecateMessage("id", "data-id"));
         }
@@ -358,10 +364,12 @@ var Calendar = React.createClass({
         // pass null for the date into the calendar pop up, as we want
         // it to just start on todays date if there is no date set
         var calendarDate = this.state.date || moment();
-
         var view;
         switch (this.state.currentView) {
             case Views.DAYS:
+                if (typeof calendarDate === "object") {
+                    calendarDate.locale(Translator.currentLanguage);
+                }
                 view = <DaysView date={calendarDate} onSetDate={this.setDate} onNextView={this.nextView} />;
                 break;
             case Views.MONTHS:

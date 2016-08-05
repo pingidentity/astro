@@ -1,6 +1,7 @@
 
 var React = require("react"),
     EllipsisLoaderButton = require("./../general/EllipsisLoaderButton.jsx"),
+    Translator = require("../../util/i18n/Translator.js"),
     classnames = require("classnames");
 
 /**
@@ -107,6 +108,20 @@ var ButtonBar = React.createClass({
     },
 
     render: function () {
+        var discardText = this.props.discardText,
+            saveText = this.props.saveText,
+            cancelText = this.props.cancelText;
+
+        if (!this.props.discardText) {
+            discardText = Translator.translate("buttonbar.default.button.discard");
+        }
+        if (!this.props.saveText) {
+            saveText = Translator.translate("buttonbar.default.button.save");
+        }
+        if (!this.props.cancelText) {
+            cancelText = Translator.translate("buttonbar.default.button.cancel");
+        }
+
         var containerClassName = {
                 "page-controls-primary": true,
                 hidden: !this.props.visible
@@ -133,7 +148,7 @@ var ButtonBar = React.createClass({
                             className={discardClassName}
                             onClick={this.props.onDiscard}
                             disabled={this.props.enableSavingAnimation}>
-                        {this.props.discardText}
+                        {discardText}
                     </button>
                 )}
                 {this.props.cancelText && this.props.onCancel && (
@@ -141,7 +156,7 @@ var ButtonBar = React.createClass({
                             className={cancelClassName}
                             onClick={this.props.onCancel}
                             disabled={this.props.enableSavingAnimation}>
-                        {this.props.cancelText}
+                        {cancelText}
                     </button>
                 )}
                 <EllipsisLoaderButton data-id={this.props["data-id"] + "-save"}
@@ -149,7 +164,7 @@ var ButtonBar = React.createClass({
                         disabled={this.props.saveDisabled}
                         loading={this.props.enableSavingAnimation}
                         onClick={this._handleSave}
-                        text={this.props.saveText} />
+                        text={saveText} />
             </div>
         );
     }
