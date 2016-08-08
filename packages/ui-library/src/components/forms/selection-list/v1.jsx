@@ -4,7 +4,8 @@ var React = require("react"),
     If = require("../../general/If.jsx"),
     FormSearchBox = require("./FormSearchBox.jsx"),
     FormCheckbox = require("../FormCheckbox.jsx"),
-    FormRadioGroup = require("../FormRadioGroup.jsx");
+    FormRadioGroup = require("../FormRadioGroup.jsx"),
+    FilterUtils = require("../../../util/FilterUtils.js");
 
 /**
  * @typedef {(Object.<number|string, string>)} SelectionListItem
@@ -82,16 +83,8 @@ var SelectionList = React.createClass({
         if (this.props.customSearchFunc) {
             matchedItems = this.props.customSearchFunc(this.props.items, queryString);
         } else {
-            var trimmedQueryString = queryString.trim();
-            if (trimmedQueryString.length > 3) {
-                matchedItems = this.props.items.filter(function (item) {
-                    return item.name.toLowerCase().match(trimmedQueryString.toLowerCase());
-                });
-            } else {
-                matchedItems = this.props.items.filter(function (item) {
-                    return item.name.toLowerCase().indexOf(trimmedQueryString.toLowerCase()) === 0;
-                });
-            }
+            var filterFn = FilterUtils.getFilterFunction(queryString.trim(), "name");
+            matchedItems = this.props.items.filter(filterFn);
         }
         this.setState({
             queryString: queryString,

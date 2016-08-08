@@ -13,6 +13,7 @@ jest.dontMock("../v2-stateless.jsx");
 jest.dontMock("../v2-stateful.jsx");
 jest.dontMock("../v2-reducer.js");
 jest.dontMock("../v2-constants.js");
+jest.dontMock("../../../../util/FilterUtils.js");
 
 describe("SelectionList", function () {
     var React = require("react");

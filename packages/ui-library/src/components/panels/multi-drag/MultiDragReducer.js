@@ -1,153 +1,11 @@
 var Actions = require("./MultiDragActions.js"),
     deepClone = require("clone"),
-    update = require("re-mutable");
+    update = require("re-mutable"),
+    FilterUtils = require("../../../util/FilterUtils.js");
 
 var initialState = {
     columns: []
 };
-
-/**
- * @function MultiDrag~filterFieldStartsWith
- * @private
- * @ignore
- *
- * @desc Searches the specified field within item for a starts with match of filter.
- *
- * @param {string} field
- *    The field to use in the search.
- * @param {string} filter
- *    The value to search for.
- * @param {object} item
- *    The object to search.
- *
- * @return {boolean}
- *    True if filter matches the start of the field within item, false otherwise.
- */
-function filterFieldStartsWith (field, filter, item) {
-    //TODO: Investigate if this can be converted to string function "startsWith" instead of using regex
-    var regex = new RegExp("^" + escapeForRegex(filter), "i");
-
-    if (field) {
-        return item[field].match(regex);
-    } else {
-        for (var key in item) {
-            if (item[key].toString && item[key].toString().match(regex)) {
-                return true;
-            }
-        }
-    }
-}
-
-/**
- * @function MultiDrag~filterField
- * @private
- * @ignore
- *
- * @desc Searches the specified field within item for a match of filter.
- *
- * @param {string} field
- *    The field to use in the search.
- * @param {string} filter
- *    The value to search for.
- * @param {object} item
- *    The object to search.
- *
- * @return {boolean}
- *    True if filter matches some portion of the field within item, false otherwise.
- */
-function filterField (field, filter, item) {
-    //TODO: Investigate if this can be converted to string function "includes" instead of using regex
-    var regex = new RegExp(escapeForRegex(filter), "i");
-
-    if (field) {
-        return item[field].match(regex);
-    } else {
-        for (var key in item) {
-            if (item[key].toString && item[key].toString().match(regex)) {
-                return true;
-            }
-        }
-    }
-}
-
-/**
- * @function MultiDrag~filterStartsWith
- * @private
- * @ignore
- *
- * @desc Searches the specified item for a starts with match of filter in any string-able field.
- *
- * @param {string} filter
- *    The value to search for.
- * @param {object} item
- *    The object to search.
- *
- * @return {boolean}
- *    True if filter matches the start of any string-able field within item, false otherwise.
- */
-var filterStartsWith = filterFieldStartsWith.bind(null, null);
-
-/**
- * @function MultiDrag~filter
- * @private
- * @ignore
- *
- * @desc Searches the specified the specified item for a match of filter in any string-able field.
- *
- * @param {string} filter
- *    The value to search for.
- * @param {object} item
- *    The object to search.
- *
- * @return {boolean}
- *    True if filter matches some portion of any string-able field within item, false otherwise.
- */
-var filter = filterField.bind(null, null);
-
-/**
- * @function MultiDrag~getFilterFn
- * @private
- * @ignore
- *
- * @desc Returns the appropriate filter function based on the search string's length
- *    and whether a field name to search was given.
- *
- * @param {string} fieldName
- *    The field to use in the search.
- * @param {object} str
- *    The value to search for.
- *
- * @return {function}
- *    A filter function.
- */
-function getFilterFn (fieldName, str) {
-    if (str.length <= 3) {
-        return fieldName
-            ? filterFieldStartsWith.bind(null, fieldName, str)
-            : filterStartsWith.bind(null, str);
-    } else {
-        return fieldName
-            ? filterField.bind(null, fieldName, str)
-            : filter.bind(null, str);
-    }
-}
-
-/**
- * @function MultiDrag~escapeForRegex
- * @private
- * @ignore
- *
- * @desc Escapes a string for use in regular expressions.
- *
- * @param {string} s
- *    The string to escape.
- *
- * @return {string}
- *    The escaped string.
- */
-function escapeForRegex (s) {
-    return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
-}
 
 /**
  * @typedef {object} MultiDrag~searchAction
@@ -177,7 +35,7 @@ function escapeForRegex (s) {
  */
 function search (state, action) {
     var filterStr = action.filter || "";
-    var filterFn = getFilterFn (action.fieldName, filterStr);
+    var filterFn = FilterUtils.getFilterFunction(filterStr, action.fieldName);
 
     var next = update(state)
         .set(["columns", action.column, "filter"], filterStr)

@@ -2,6 +2,7 @@ window.__DEV__ = true;
 
 jest.dontMock("../MultiDragReducer.js");
 jest.dontMock("../MultiDragActions.js");
+jest.dontMock("../../../../util/FilterUtils.js");
 
 describe("MultiDrag-Reducer", function () {
     var Reducer = require("../MultiDragReducer.js"),

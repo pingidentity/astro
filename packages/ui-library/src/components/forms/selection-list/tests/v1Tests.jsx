@@ -8,6 +8,7 @@ jest.dontMock("../../FormRadioGroup.jsx");
 jest.dontMock("../../FormCheckbox.jsx");
 jest.dontMock("../../FormLabel.jsx");
 jest.dontMock("../../../general/If.jsx");
+jest.dontMock("../../../../util/FilterUtils.js");
 
 describe("SelectionList-v1", function () {
     var React = require("react");

@@ -1,5 +1,6 @@
 var Actions = require("./v2-actions"),
-    _ = require("underscore");
+    _ = require("underscore"),
+    FilterUtils = require("../../../util/FilterUtils.js");
 
 // this is the initial state for any given component
 var initialState = {
@@ -11,11 +12,8 @@ var initialState = {
 };
 
 var filterItems = function (items, queryString) {
-    var queryString = queryString.trim();
-    var regex = new RegExp(queryString.length > 3 ? queryString : "^" + queryString, "i");
-    return _.filter(items, function (item) {
-        return item.name.match(regex);
-    });
+    var filterFn = FilterUtils.getFilterFunction(queryString, "name");
+    return items.filter(filterFn);
 };
 
 module.exports = function (state, action) {

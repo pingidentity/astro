@@ -2,6 +2,7 @@ window.__DEV__ = true;
 
 jest.dontMock("../v2-actions.js");
 jest.dontMock("../v2-reducer.js");
+jest.dontMock("../../../../util/FilterUtils.js");
 
 describe("SelectionList-v2-Reducer", function () {
     var Actions = require("../v2-actions"),
