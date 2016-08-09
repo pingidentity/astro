@@ -109,6 +109,9 @@ var React = require("react"),
 *     CSS classes to set on the input element.
 * @param {number} [maxLength]
 *     Maximum length supported by the text field.
+* @param {number} [type]
+*     An input type to be applied to the input. The input type often adds easily accessable and type-specific input
+*     controls that often makes it easier to enter the field data.
 *
 * @param {string} [errorMessage]
 *     The message to display if defined when external validation failed.
@@ -181,7 +184,9 @@ var Stateless = React.createClass({
     propTypes: {
         "data-id": React.PropTypes.string,
         className: React.PropTypes.string,
+
         value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+        controls: React.PropTypes.object,
         onChange: React.PropTypes.func,
         onValueChange: React.PropTypes.func,
         onBlur: React.PropTypes.func,
@@ -189,28 +194,30 @@ var Stateless = React.createClass({
         onKeyDown: React.PropTypes.func,
         onKeyPress: React.PropTypes.func,
         onMouseDown: React.PropTypes.func,
+        onSave: React.PropTypes.func,
+        onToggleReveal: React.PropTypes.func,
+        onUndo: React.PropTypes.func,
+
+        errorMessage: React.PropTypes.string,
+        errorClassName: React.PropTypes.string,
+        inputClassName: React.PropTypes.string,
         labelClassName: React.PropTypes.string,
         labelHelpText: React.PropTypes.string,
         labelText: React.PropTypes.string,
-        placeholder: React.PropTypes.string,
-        inputClassName: React.PropTypes.string,
         maxLength: React.PropTypes.number,
-        errorMessage: React.PropTypes.string,
-        errorClassName: React.PropTypes.string,
-        disabled: React.PropTypes.bool,
-        required: React.PropTypes.bool,
+        type: React.PropTypes.string,
+        placeholder: React.PropTypes.string,
+
         autoComplete: React.PropTypes.bool,
         autoFocus: React.PropTypes.bool,
+        disabled: React.PropTypes.bool,
         maskValue: React.PropTypes.bool,
         readOnly: React.PropTypes.bool,
-        showSave: React.PropTypes.bool,
-        onSave: React.PropTypes.func,
-        showUndo: React.PropTypes.bool,
-        onUndo: React.PropTypes.func,
+        required: React.PropTypes.bool,
         reveal: React.PropTypes.bool,
         showReveal: React.PropTypes.bool,
-        onToggleReveal: React.PropTypes.func,
-        controls: React.PropTypes.object
+        showSave: React.PropTypes.bool,
+        showUndo: React.PropTypes.bool
     },
 
     /**
@@ -264,35 +271,51 @@ var Stateless = React.createClass({
                 "form-error": this.props.errorMessage,
                 actions: this.props.showReveal || this.props.showUndo
             }),
-            type = this.props._type || (this.props.maskValue && !this.props.reveal ? "password" : "text");
-        var undo = Translator.translate("undo"),
-            save = Translator.translate("save");
+            undo = Translator.translate("undo"),
+            save = Translator.translate("save"),
+            inputType;
+
+        if (this.props.maskValue && !this.props.reveal) {
+            inputType = "password";
+
+        } else if (this.props.type) {
+            inputType = this.props.type;
+
+            if (this.props.type === "color") {
+                console.warn("Please use the ColorPicker component.");
+            }
+
+        } else {
+            inputType = "text";
+        }
 
         return (
-            <FormLabel className={className}
-                       ref="container"
-                       data-id={id}
-                       value={this.props.labelText}
-                       hint={this.props.labelHelpText}>
+            <FormLabel
+                    className={className}
+                    ref="container"
+                    data-id={id}
+                    value={this.props.labelText}
+                    hint={this.props.labelHelpText}>
                 <span className="input-container">
-                    <input className={this.props.inputClassName}
-                           onFocus={this.props.onFocus}
-                           onBlur={this.props.onBlur}
-                           onKeyPress={this.props.onKeyPress}
-                           onKeyDown={this.props.onKeyDown}
-                           onMouseDown={this.props.onMouseDown}
-                           onChange={this._handleFieldChange}
-                           placeholder={this.props.placeholder}
-                           ref={id + "-input"}
-                           readOnly={this.props.readOnly}
-                           data-id={id + "-input"}
-                           type={type}
-                           maxLength={this.props.maxLength}
-                           value={this.props.value}
-                           autoComplete={this.props.autoComplete ? "on" : "off"}
-                           disabled={this.props.disabled}
-                           autoFocus={this.props.autoFocus} />
-
+                    <input
+                        className={this.props.inputClassName}
+                        onFocus={this.props.onFocus}
+                        onBlur={this.props.onBlur}
+                        onKeyPress={this.props.onKeyPress}
+                        onKeyDown={this.props.onKeyDown}
+                        onMouseDown={this.props.onMouseDown}
+                        onChange={this._handleFieldChange}
+                        placeholder={this.props.placeholder}
+                        ref={id + "-input"}
+                        readOnly={this.props.readOnly}
+                        data-id={id + "-input"}
+                        type={inputType}
+                        maxLength={this.props.maxLength}
+                        value={this.props.value}
+                        autoComplete={this.props.autoComplete ? "on" : "off"}
+                        disabled={this.props.disabled}
+                        autoFocus={this.props.autoFocus}
+                    />
                     { this.props.showReveal &&
                         <a data-id="reveal" onClick={this.props.onToggleReveal}
                             className={classnames("password-show-button", {

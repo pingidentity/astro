@@ -3,100 +3,58 @@
 $default-input-transition: all 0.3s;
 $default-input-height: 40px;
 $default-input-font-size: 14px;
-$disabled-opacity: 0.4;
-
-// MISC SUPPORTING FUNCTIONS -----------------------------------------------------------------------
-@mixin checkboxStyles() {
-    $checkbox-size: 24px;
-    $border-width: 3px;
-
-    position: relative;
-    display: inline-block;
-    box-sizing: border-box;
-    min-width: $checkbox-size;
-    min-height: $checkbox-size;
-    padding: 0 0 22px;
-    cursor: pointer;
-
-    .label-text {
-        display: block;
-        text-transform: uppercase;
-    }
-    input[type=checkbox] {
-        position: absolute;
-        visibility: hidden;
-        margin: 0;
-        top: 0;
-        left: 0;
-        width: $checkbox-size;
-        height: $checkbox-size;
-
-        &:checked + .icon:after {
-            color: $color-input-text;
-        }
-    }
-    .icon {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        display: inline-block;
-
-        &:before {
-            content: '';
-            display: block;
-            box-sizing: border-box;
-            border: 3px solid $color-timberwolf;
-            background-color: $color-elderly;
-            height: $checkbox-size;
-            width: $checkbox-size;
-            line-height: $checkbox-size;
-
-            @include border-radius(2px);
-        }
-        &:after {
-            content: '\79';
-            position: absolute;
-            text-transform: none;
-            color: transparent;
-            font-family: $icon-font;
-            font-size: 10px;
-            left: 0;
-            bottom: 0;
-            height: $checkbox-size;
-            width: $checkbox-size;
-            line-height: $checkbox-size;
-            text-align: center;
-
-            @include transition($default-input-transition);
-        }
-    }
-    &.top-label {
-        padding: 0;
-        height: 47px;
-
-        .icon {
-            top: 23px;
-        }
-    }
-    &.no-label {
-        margin-right: 0;
-    }
-}
-
 
 
 // CORE INPUT STYLES -------------------------------------------------------------------------------
 
+// General browser-specific overrides (not needed specifically for each input type below - reduces bloat having it here)
+input,
+textarea,
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    &::-moz-selection {
+        background: none; // prevents odd FF text selection on undo
+    }
+    &:-moz-focusring {
+        color: transparent;
+        text-shadow: 0 0 0 $color-black;
+    }
+
+    &::-ms-clear {
+        display: none;
+    }
+
+    &::-ms-expand {
+        display: none;
+    }
+    &::-ms-value {
+        color: $color-midnight;
+        background: none;
+    }
+}
+
 // Tag styling
-// TODO : move styles under class names?
 input[type=text],
 input[type=password],
+input[type=color],
+input[type=date],
+input[type=datetime],
+input[type=datetime-local],
+input[type=email],
+input[type=month],
+input[type=number],
+input[type=range],
+input[type=search],
+input[type=tel],
+input[type=time],
+input[type=url],
+input[type=week],
 textarea {
     color: $color-input-text;
     background-color: $color-input-fill;
-    border-width: 1px;
-    border-style: solid;
-    border-color: $color-input-fill;
+    border: 1px solid $color-input-fill;
     font-size: 14px;
     height: $default-input-height;
     box-sizing: border-box;
@@ -106,13 +64,6 @@ textarea {
     @include border-radius(3px);
     @include transition($default-input-transition);
 
-    &.error,
-    &.form-error {
-        border-color: $color-input-error;
-        &:focus {
-            border-color: $color-input-error;
-        }
-    }
     &:visited {
         border: 1px solid $color-input-fill;
     }
@@ -122,31 +73,16 @@ textarea {
     &:focus {
         border-color: $color-active-blue;
     }
-    &::-moz-selection {
-        // prevents odd FF text selection on undo
-        background: none;
-    }
-    &.extended {
-        width: 350px;
-    }
-    &.short {
-        vertical-align: top;
-        margin-top: 5px;
-        width: 75px;
-    }
-    &::-ms-clear {
-        display: none;
-    }
-    &[readonly],
-    &[readonly=readonly],
-    &[disabled] {
-        resize: none !important;
-    }
 }
 
 textarea {
     overflow: auto;
     max-width: 930px;
+
+    &[readonly],
+    &[disabled] {
+        resize: none !important;
+    }
 }
 
 label {
@@ -171,6 +107,7 @@ label {
             @include transition($default-input-transition);
         }
     }
+
     .label-text {
         color: $color-elephant;
         margin: 0 0 8px;
@@ -186,6 +123,7 @@ label {
             margin-top: 0;
         }
     }
+
     &.input-text {
         input {
             padding: 4px 15px 3px;
@@ -256,6 +194,7 @@ label {
             }
         }
     }
+
     &.input-textarea {
         textarea {
             padding: 12px 15px;
@@ -273,6 +212,7 @@ label {
             }
         }
     }
+
     &.input-text,
     &.input-textarea,
     &.input-multivalues {
@@ -289,42 +229,83 @@ label {
                 padding-right: 40px;
             }
         }
-        &.disabled {
-            input[type=text],
-            input[type=password],
-            textarea {
-                &:hover {
-                    border: 1px solid $color-input-fill;
-                }
+    }
 
-                @include opacity(1);
-            }
-            .input-container {
-                &:before {
-                    content: none;
-                }
-            }
-        }
-    }
-    &.input-text,
-    &.input-textarea,
-    &.input-multivalues,
-    &.input-checkbox,
-    &.input-select {
-        // handle disabled label for inputs w helptext
-        &.disabled {
-            font-style: normal;
-            .label-text {
-                span {
-                    @include opacity($disabled-opacity);
-                }
-            }
-        }
-    }
     &.input-checkbox {
-        // TODO: nix checkboxStyles mixin (no longer needed since input-multiselect is not used in a component - check wp)
+        $checkbox-size: 24px;
+        $border-width: 3px;
 
-        @include checkboxStyles();
+        position: relative;
+        display: inline-block;
+        box-sizing: border-box;
+        min-width: $checkbox-size;
+        min-height: $checkbox-size;
+        padding: 0 0 22px;
+        cursor: pointer;
+
+        .label-text {
+            display: block;
+            text-transform: uppercase;
+        }
+        input[type=checkbox] {
+            position: absolute;
+            visibility: hidden;
+            margin: 0;
+            top: 0;
+            left: 0;
+            width: $checkbox-size;
+            height: $checkbox-size;
+
+            &:checked + .icon:after {
+                color: $color-input-text;
+            }
+        }
+        .icon {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            display: inline-block;
+
+            &:before {
+                content: '';
+                display: block;
+                box-sizing: border-box;
+                border: 3px solid $color-timberwolf;
+                background-color: $color-elderly;
+                height: $checkbox-size;
+                width: $checkbox-size;
+                line-height: $checkbox-size;
+
+                @include border-radius(2px);
+            }
+            &:after {
+                content: '\79';
+                position: absolute;
+                text-transform: none;
+                color: transparent;
+                font-family: $icon-font;
+                font-size: 10px;
+                left: 0;
+                bottom: 0;
+                height: $checkbox-size;
+                width: $checkbox-size;
+                line-height: $checkbox-size;
+                text-align: center;
+
+                @include transition($default-input-transition);
+            }
+        }
+        &.top-label {
+            padding: 0;
+            height: 47px;
+
+            .icon {
+                top: 23px;
+            }
+        }
+        &.no-label {
+            margin-right: 0;
+        }
 
         &.side-label {
             .icon {
@@ -365,6 +346,7 @@ label {
             }
         }
     }
+
     &.input-radio {
         $radio-height: 24px;
         $border-width: 3px;
@@ -407,11 +389,6 @@ label {
                 @include border-radius(ceil($radio-height/2) + 1);
                 @include transition($default-input-transition);
             }
-        }
-        &.disabled {
-            cursor: default;
-
-            @include opacity($disabled-opacity);
         }
         &.no-label {
             margin-right: 0;
@@ -459,15 +436,14 @@ label {
             margin: 0 0 0 10px;
         }
     }
-    .input-toggle {
-        display: block;
-    }
+
     &.input-group {
         font-size: 14px;
         color: $color-elephant;
         text-transform: uppercase;
         margin: 0 0 20px;
     }
+
     &.detached {
         margin-bottom: 8px;
         margin-right: 10px;
@@ -480,6 +456,7 @@ label {
             vertical-align: text-bottom;
         }
     }
+
     &.inline-save {
         .input-container {
             padding-right: 50px;
@@ -493,6 +470,7 @@ label {
             right: 0;
         }
     }
+
     &.radio-group {
         display: block;
         margin: 0 0 10px;
@@ -505,6 +483,11 @@ label {
             margin: 0 0 0 10px;
         }
     }
+
+    .input-toggle {
+        display: block;
+    }
+
     a {
         &.password-show-button {
             position: absolute;
@@ -544,6 +527,7 @@ label {
             }
         }
     }
+
     .value-container {
         display: block;
         margin: 6px 0 0;
@@ -698,18 +682,7 @@ input[type=file] {
             }
         }
     }
-    &.disabled {
-        .input-container {
-            .wrapper {
-                &:after {
-                    content: '';
-                }
-            }
-        }
-    }
     select {
-        -webkit-appearance: none;
-        -moz-appearance: none;
         appearance: none;
         border: 0;
         border-radius: 0;
@@ -737,39 +710,28 @@ input[type=file] {
                 color: $color-white;
             }
         }
-        &:-moz-focusring {
-            color: transparent;
-            text-shadow: 0 0 0 $color-black;
-        }
-        &::-ms-expand {
-            display: none;
-        }
-        &::-ms-value {
-            color: $color-midnight;
-            background: none;
-        }
     }
     &.ie9 {
-		.input-container {
-			.wrapper {
-				&:after {
-					content: '';
-				}
-		        
-			}
-		}
-		select {
-			// allow input widths to override
-			width: 100%;
-			padding-right: 0;
-			option {
-				&:checked,
-				&:hover {
-					background-color: $color-input-fill;
-					color: $color-input-text;
-				}
-			}
-		}
+        .input-container {
+            .wrapper {
+                &:after {
+                    content: '';
+                }
+
+            }
+        }
+        select {
+            // allow input widths to override
+            width: 100%;
+            padding-right: 0;
+            option {
+                &:checked,
+                &:hover {
+                    background-color: $color-input-fill;
+                    color: $color-input-text;
+                }
+            }
+        }
     }
     &.select-filter {
         .input-container {
@@ -1032,9 +994,6 @@ input[type=file] {
             }
         }
     }
-    &.disabled {
-        @include opacity($disabled-opacity);
-    }
     &.small {
         .toggle {
             $toggle-height: 18px;
@@ -1055,98 +1014,6 @@ input[type=file] {
                     left: $toggle-width - $toggle-diameter - 1; //13px
                 }
             }
-        }
-    }
-}
-
-.input-multiselect {
-    position: relative;
-    display: inline-block;
-
-    .button {
-        padding-right: 50px;
-
-        &:after {
-            position: absolute;
-            content: 'v';
-            font-family: $icon-font;
-            font-size: 12px;
-            text-transform: none;
-            right: 10px;
-            top: 1px;
-            color: $color-midnight;
-            pointer-events: none;
-        }
-    }
-    input[type=text] {
-        position: absolute;
-        top: 15px;
-        left: 15px;
-        right: 15px;
-        width: 156px;
-        height: 20px;
-    }
-    .clear {
-        font-family: $icon-font;
-        font-size: 10px;
-        position: absolute;
-        top: 28px;
-        right: 26px;
-        color: $color-input-text;
-    }
-    .menu {
-        display: none;
-        position: absolute;
-        top: 50px;
-        left: 0;
-        padding: 15px 15px 0;
-        border: 1px solid $color-input-border;
-        background: $color-white;
-        z-index: 10;
-
-        @include border-radius(3px);
-
-        .options {
-            margin: 61px 0 0;
-            max-height: 285px;
-            min-width: 202px;
-            overflow: auto;
-        }
-        .hidden {
-            display: none;
-        }
-        &:before,
-        &:after {
-            content: '';
-            position: absolute;
-            border-style: solid;
-            border-width: 10px;
-            left: 15px;
-        }
-        &:before {
-            top: -21px;
-            border-color: transparent transparent $color-input-border transparent;
-
-        }
-        &:after {
-            top: -20px;
-            border-color: transparent transparent $color-white transparent;
-        }
-        label {
-            // TODO - change multi-select component to use checkbox component
-
-            @include checkboxStyles();
-            display: block;
-            margin: 0 0 5px;
-
-            &:last-child {
-                margin-bottom: 12px;
-            }
-        }
-    }
-    &.open {
-        .menu {
-            display: block;
         }
     }
 }
@@ -1661,15 +1528,74 @@ input[type=file] {
     }
 }
 
-[disabled] {
+.disabled {
+    $disabled-opacity: 0.4;
+
+    font-style: normal;
     cursor: default;
 
-    @include opacity($disabled-opacity);
-
-    &[type=radio] + .circle {
+    [disabled] {
         cursor: default;
     }
 
+    &.input-text,
+    &.input-textarea,
+    &.input-multivalues,
+    &.input-checkbox,
+    &.input-select {
+        .input-container {
+            @include opacity($disabled-opacity);
+        }
+        .label-text {
+            span {
+                @include opacity($disabled-opacity);
+            }
+        }
+    }
+
+    &.input-text {
+        input {
+            border: 1px solid $color-input-fill;
+        }
+    }
+    &.input-radio {
+        @include opacity($disabled-opacity);
+
+        input[type=radio] + .circle {
+            cursor: default;
+        }
+    }
+
+    &.input-multivalues {
+        input[type=text],
+        input[type=password],
+        textarea {
+            &:hover {
+                border: 1px solid $color-input-fill;
+            }
+
+            @include opacity(1);
+        }
+        .input-container {
+            &:before {
+                content: none;
+            }
+        }
+    }
+
+    &.input-select {
+        .input-container {
+            .wrapper {
+                &:after {
+                    content: '';
+                }
+            }
+        }
+    }
+
+    &.input-toggle {
+        @include opacity($disabled-opacity);
+    }
 }
 
 .readonly {
@@ -1870,8 +1796,7 @@ a {
         width: map-get($input-width-settings-map-default, $size);
     }
     &.input-text {
-        input[type=text],
-        input[type=password] {
+        input[type] {
             width: map-get($input-width-settings-map-text, $size);
         }
     }

@@ -124,14 +124,16 @@ var FormTimeField = React.createClass({
     render: function () {
         return (
             <FormTextField {...this.props}
-                    className={this.props.className}
-                    _type={this.props.type || Types.TIME}
-                    controlled={true}
-                    maskValue={false}
-                    showSave={false}
-                    showUndo={false}
-                    showReveal={false}
-                    data-id={this.props["data-id"]} />);
+                className={this.props.className}
+                type={this.props.type || Types.TIME}
+                controlled={true}
+                maskValue={false}
+                showSave={false}
+                showUndo={false}
+                showReveal={false}
+                data-id={this.props["data-id"]}
+            />
+        );
     }
 });
 

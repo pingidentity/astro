@@ -127,6 +127,7 @@ var FormTextFieldDemo = React.createClass({
                     <FormTextField
                         labelText="Default value"
                         value="default"
+                        className="input-width-medium"
                     />
                 </div>
                 <div className="input-row">
@@ -136,6 +137,7 @@ var FormTextFieldDemo = React.createClass({
                         onUndo={this._handleUndo}
                         value={this.state.onUndoValue || this.state.originalValue}
                         onValueChange={this._handleUndoValueChange}
+                        className="input-width-medium"
                     />
                     {this.state.onUndoValue}
                     <div>{this.state.undone ? "undone!" : null}</div>
@@ -147,44 +149,58 @@ var FormTextFieldDemo = React.createClass({
                         showSave={true}
                         onSave={this._handleSave}
                         onValueChange={this._handleRequiredValueChange}
-                        value={this.state.requiredValue}/>
+                        value={this.state.requiredValue}
+                        className="input-width-medium"
+                    />
                     <div>{this.state.saved ? "saved!" : null}</div>
                 </div>
                 <div className="input-row">
                     <FormTextField
                         labelText="Reveal"
                         maskValue={true}
-                        showReveal={true} />
+                        showReveal={true}
+                        className="input-width-medium"
+                    />
                 </div>
                 <div className="input-row">
                     <FormTextField
                         labelText="onChange callback and maxLength (10 chars)"
                         onValueChange={this._handleValueChange}
-                        maxLength={10} />
+                        maxLength={10}
+                        className="input-width-medium"
+                    />
                     <span>{this.state.onValueChangeFieldValue}</span>
                 </div>
                 <div className="input-row">
                     <FormTextField
                         labelText="onBlur callback and placeholder"
                         onBlur={this._handleBlur}
-                        placeholder="placeholder" />
+                        placeholder="placeholder"
+                        className="input-width-medium"
+                    />
                     <span>{this.state.onBlurFieldValue}</span>
                 </div>
                 <div className="input-row">
                     <FormTextField
                         labelText="Read-only"
                         defaultValue="can't touch this"
-                        readOnly={true} />
+                        readOnly={true}
+                        className="input-width-medium"
+                    />
                 </div>
                 <div className="input-row">
                     <FormTextField
                         labelText="With error message"
-                        errorMessage="error!" />
+                        errorMessage="error!"
+                        className="input-width-medium"
+                    />
                 </div>
                 <div className="input-row">
                     <FormTextField
                         labelText="With help tooltip"
-                        labelHelpText="This is my help text." />
+                        labelHelpText="This is my help text."
+                        className="input-width-medium"
+                    />
                 </div>
                 <div className="input-row">
                     <FormTextField
@@ -192,6 +208,7 @@ var FormTextFieldDemo = React.createClass({
                         labelHelpText="Valid when have 5 or more chars"
                         errorMessage={this.state.onChangeValidationErrorMessage}
                         onChange={this._handleChangeErrorValidation}
+                        className="input-width-medium"
                     />
                 </div>
                 <div className="input-row">
@@ -200,6 +217,7 @@ var FormTextFieldDemo = React.createClass({
                         labelHelpText="Valid when have 5 or more chars"
                         errorMessage={this.state.onBlurValidationErrorMessage}
                         onBlur={this._handleBlurErrorValidation}
+                        className="input-width-medium"
                     />
                 </div>
                 <div className="input-row">
@@ -207,6 +225,7 @@ var FormTextFieldDemo = React.createClass({
                         labelText="Disabled field with help"
                         labelHelpText="Disabled field with help"
                         disabled={true}
+                        className="input-width-medium"
                     />
                 </div>
             </div>

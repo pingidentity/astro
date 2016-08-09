@@ -15,6 +15,7 @@ describe("FormTextField", function () {
         CommonTests = require("./common.jsx"),
         _ = require("underscore");
 
+
     //Use this function to extract a property by either the new name or the legacy name with precedence give
     //to new name, legacy name, default.
     function legacyProp (opts, name, legacyName, deflt) {
@@ -241,5 +242,24 @@ describe("FormTextField", function () {
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         expect(ReactTestUtils.isDOMComponent(input)).toBeTruthy();
         expect(input.disabled).toBeTruthy();
+    });
+
+
+    it("it does not apply the input type is not specified", function () {
+        var component = getComponent(),
+            input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+
+        expect(input.getAttribute("type")).toEqual("text");
+    });
+
+    it("it applies the input type when specified", function () {
+        var type = "email",
+            component = getComponent({
+                type: type,
+                controlled: true
+            }),
+            input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+
+        expect(input.getAttribute("type")).toEqual(type);
     });
 });
