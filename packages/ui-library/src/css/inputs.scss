@@ -744,17 +744,26 @@ input[type=file] {
         }
     }
     &.ie9 {
-        select {
-            // pushes default select arrow out of range
-            width: 160%;
-            option {
-                &:checked,
-                &:hover {
-                    background-color: $color-input-fill;
-                    color: $color-input-text;
-                }
-            }
-        }
+		.input-container {
+			.wrapper {
+				&:after {
+					content: '';
+				}
+		        
+			}
+		}
+		select {
+			// allow input widths to override
+			width: 100%;
+			padding-right: 0;
+			option {
+				&:checked,
+				&:hover {
+					background-color: $color-input-fill;
+					color: $color-input-text;
+				}
+			}
+		}
     }
     &.select-filter {
         .input-container {
