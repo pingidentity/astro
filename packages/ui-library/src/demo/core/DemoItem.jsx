@@ -2,6 +2,8 @@ var React = require("react"),
     classnames = require("classnames"),
     marked = require("marked"),
     Markup = require("./Markup.jsx"),
+    RockerButton = require("../../components/forms/RockerButton.jsx"),
+    If = require("../../components/general/If.jsx"),
     _ = require("underscore");
 
 var DemoItem = React.createClass({
@@ -12,31 +14,21 @@ var DemoItem = React.createClass({
         return {
             open: false,
             source: false,
-            demoSource: false
+            selectedSource: 0
         };
     },
 
     _toggle: function () {
         this.setState({
             open: !this.state.open,
-            source: false,
-            demoSource: false
+            source: false
         });
     },
     
     _toggleSource: function () {
         this.setState({
             open: !this.state.open,
-            source: true,
-            demoSource: false
-        });
-    },
-
-    _toggleDemoSource: function () {
-        this.setState({
-            open: !this.state.open,
-            source: false,
-            demoSource: true
+            source: true
         });
     },
 
@@ -46,28 +38,55 @@ var DemoItem = React.createClass({
         });
     },
 
+    _handleSelectedSourceValueChange: function (selectedSource) {
+        this.setState({ selectedSource: selectedSource.index });
+    },
+
+    _getConditionalSourceFrame: function (url, test) {
+        return (
+            <If key={url} test={this.state.selectedSource === test}>
+                <iframe src={url} />
+            </If>
+        );
+    },
+
     _getComponentSourceFrame: function () {
-        var sourceClassName = classnames("js-source", { hidden: !this.state.source || this.state.demoSource });
+        var sourceClassName = classnames("js-source", { hidden: !this.state.source }),
+            sourceLabels = [],
+            sourceFrames = [],
+            frameIndex = 0;
+
+        // Some demos may not have demo source (e.g. tutorials)
+        if (this.props.demoCodePathUrl) {
+            sourceLabels.push("Demo");
+            sourceFrames.push(this._getConditionalSourceFrame(this.props.demoCodePathUrl, frameIndex));
+            frameIndex = frameIndex + 1;
+        }
 
         if (Array.isArray(this.props.codePathUrl)) {
-            return (
-                <div className={sourceClassName}>
-                    {
-                        this.props.codePathUrl.map(function (url, index) {
-                            var title = url.match("[^_]+\\.jsx.html$")[0].replace(".jsx.html", "");
-
-                            if (index !== 0) {
-                                return <a key={title} href={url} target="_blank">{title}</a>;
-                            }
-                        })
-                    }
-
-                    <iframe src={this.props.codePathUrl[0]} />
-                </div>
-            );
+            this.props.codePathUrl.forEach(function (url) {
+                sourceLabels.push("Component_" + url.match("[^_]+\\.jsx.html$")[0].replace(".jsx.html", ""));
+                sourceFrames.push(this._getConditionalSourceFrame(url, frameIndex));
+                frameIndex = frameIndex + 1;
+            }.bind(this));
         } else {
-            return <iframe src={this.props.codePathUrl} className={sourceClassName} />;
+            // Some demos may be demo only, without component source code (e.g. input widths)
+            if (this.props.codePathUrl) {
+                sourceLabels.push("Component");
+                sourceFrames.push(this._getConditionalSourceFrame(this.props.codePathUrl, frameIndex));
+                frameIndex = frameIndex + 1;
+            }
         }
+
+        return (
+            <div className={sourceClassName}>
+                <RockerButton className="source-select" labels={sourceLabels}
+                        controlled={true}
+                        selectedIndex={this.state.selectedSource}
+                        onValueChange={this._handleSelectedSourceValueChange} />
+                {sourceFrames}
+            </div>
+        );
     },
 
     /*
@@ -88,6 +107,8 @@ var DemoItem = React.createClass({
                 this.unsubscribe = newProps.store.subscribe(this._handleChange);
                 this.setState({ store: newProps.store.getState() });
             }
+
+            this.setState({ selectedSource: 0 }); // Reset default source to demo for each new demo change
         }
     },
 
@@ -102,28 +123,22 @@ var DemoItem = React.createClass({
 
         // Some demo items do not have documentation (e.g. Tutorial items)
         var docToggle,
-            srcToggle,
-            demoSrcToggle;
+            srcToggle;
         if (this.props.jsdocUrl) {
             docToggle = <span className="toggle" onClick={this._toggle} />;
         }
-        if (this.props.codePathUrl) {
+        if (this.props.codePathUrl || this.props.demoCodePathUrl) {
             srcToggle = <span className="toggle-source" onClick={this._toggleSource} />;
-        }
-        if (this.props.demoCodePathUrl) {
-            demoSrcToggle = <span className="toggle-demo-source" onClick={this._toggleDemoSource} />;
         }
         
         var markdown = this.props.description && marked(this.props.description),
             props = _.extend({}, this.props, this.state.store),
             containerClassName = classnames("section", { fullscreen: this.props.fullscreen }),
             headerClassName = classnames("doc", {
-                open: this.state.open,
-                source: this.state.source,
-                "demo-source": this.state.demoSource
+                open: this.state.open && (this.props.demoCodePathUrl || this.state.codePathUrl),
+                source: this.state.source
             }),
-            docsClassName = classnames("js-doc", { hidden: this.state.source || this.state.demoSource }),
-            demoSourceClassname = classnames("js-demo-source", { hidden: !this.state.demoSource || this.state.source });
+            docsClassName = classnames("js-doc", { hidden: this.state.source });
 
         return (
             <div className={containerClassName}>
@@ -133,11 +148,9 @@ var DemoItem = React.createClass({
                         <div className="clearfix">
                             <h1 className="page-title" data-id="component-title" >{this.props.label}</h1>
                             {docToggle}
-                            {demoSrcToggle}
                             {srcToggle}
                         </div>
                         <iframe src={this.props.jsdocUrl} className={docsClassName} />
-                        <iframe src={this.props.demoCodePathUrl} className={demoSourceClassname} />
                         {this._getComponentSourceFrame()}
                     </div>
                     

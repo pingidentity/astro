@@ -54,11 +54,6 @@ $sidenav-lineheight: 22px;
 				content: '';
 			}
 		}
-		.toggle-demo-source {
-			&:before {
-				content: '';
-			}
-		}
 		&.source {
 			.toggle {
 				&:before {
@@ -70,42 +65,19 @@ $sidenav-lineheight: 22px;
 					content: 'close source -';
 				}
 			}
-			.toggle-demo-source {
-				&:before {
-					content: '';
-				}
-			}
-		}
-		&.demo-source {
-			.toggle {
-				&:before {
-					content: '';
-				}
-			}
-			.toggle-source {
-				&:before {
-					content: '';
-				}
-			}
-			.toggle-demo-source {
-				&:before {
-					content: 'close demo source -';
-				}
-			}
 		}
 		iframe, .js-source {
-			height: 100%;
+			height: calc(100% - 35px);
 			&.hidden {
 				display: none;
 			}
 		}
-		.js-source a {
-			display: inline;
-			margin-right: 5px;
+		.js-source .source-select {
+			display: block;
 		}
 	}
 
-	.toggle, .toggle-source, .toggle-demo-source {
+	.toggle, .toggle-source {
 		position: absolute;
 		right: 30px;
 		cursor: pointer;
@@ -121,15 +93,8 @@ $sidenav-lineheight: 22px;
 			content: 'expand documentation +'
 		}
 	}
-	.toggle-demo-source {
-		top: 50px;
-
-		&:before {
-			content: 'view demo source +';
-		}
-	}
 	.toggle-source {
-		top: 70px;
+		top: 50px;
 
 		&:before {
 			content: 'view source +'
@@ -139,7 +104,7 @@ $sidenav-lineheight: 22px;
 		width: 100%;
 		height: 0;
 	}
-	.js-source a {
+	.js-source .source-select {
 		display: none;
 	}
 }
