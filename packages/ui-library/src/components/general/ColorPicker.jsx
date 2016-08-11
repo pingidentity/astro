@@ -230,7 +230,10 @@ var Stateless = React.createClass({
      *     The new color
      */
     _handleValueChange: function (color) {
-        this._valueChange()(color);
+        if (Validator.isHexColor(color)) {
+            this._valueChange()(color);
+            this.props.onError(null);   // clear the errorMessage
+        }
     },
 
     /*
@@ -325,7 +328,8 @@ var Stateless = React.createClass({
                     </span>
                     <If test={this.props.open && !this.props.disabled}>
                         <span className="colorpicker-container">
-                            <Picker ref="reactColorPicker" value={this.props.color}
+                            <Picker ref="reactColorPicker"
+                                    value={Validator.isHexColor(this.props.color) ? this.props.color : ""}
                                     onChange={this._handleValueChange}
                                     onDrag={this._handleDrag}
                                     saturationWidth={173}
