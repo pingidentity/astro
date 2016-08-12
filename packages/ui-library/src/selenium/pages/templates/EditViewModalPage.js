@@ -224,7 +224,7 @@ var EditViewModalDemoPage = Object.create(HomePage, {
      */
     clickButtonCancel: {
         value: function () {
-            this.click("//input[@value='Cancel']");
+            this.click("//button[@data-id='button-bar-cancel']");
         }
     },
 
@@ -233,7 +233,7 @@ var EditViewModalDemoPage = Object.create(HomePage, {
      */
     clickButtonSave: {
         value: function () {
-            this.click("//input[@value='Save']");
+            this.click("//button[@data-id='button-bar-save']");
         }
     },
 

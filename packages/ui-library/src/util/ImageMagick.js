@@ -127,6 +127,19 @@ var ImageMagick = {
         });
 
         return deferred.promise;
+    },
+
+    /**
+     * @alias module:util/ImageMagick.createBlankImageWithText
+     *
+     * @desc Create a default diff screenshot if base and new screenshot have different size.
+     * @param {string} text
+     *     The text to print to the image. Should no include single quotes.
+     * @param {string} fileName
+     *     The screenshot filename.
+     */
+    createBlankImageWithText: function (text, fileName) {
+        cp.exec("convert -size 300x300 -stroke red -fill red -gravity center label:'" + text + "' " + fileName);
     }
 
 };

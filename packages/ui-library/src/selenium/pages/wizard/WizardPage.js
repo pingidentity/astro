@@ -24,7 +24,7 @@ var WizardDemoPage = Object.create(HomePage, {
 
     xpathDoneButton: {
         get: function () {
-            return "//button[@data-id='doneButton']";
+            return "//button[@data-id='button-bar-save']";
         }
     },
 
@@ -48,7 +48,7 @@ var WizardDemoPage = Object.create(HomePage, {
 
     xpathDoneButtonPulsing: {
         get: function () {
-            return "//button[contains(@class,'loading')][@data-id='doneButton']";
+            return "//button[contains(@class,'loading')][@data-id='button-bar-save']";
         }
     },
 

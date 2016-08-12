@@ -4,7 +4,7 @@ var HomePage = require("../HomePage.js"),
 var CalendarDemoPage = Object.create(HomePage, {
 
     /**
-     * @desc this section is to get xpath of elements
+     * @desc this section is to get xpath of element
      */
     xpathCalendar: {
         get: function () {
@@ -56,6 +56,9 @@ var CalendarDemoPage = Object.create(HomePage, {
     clickCalendarField: {
         value: function () {
             this.click(this.xpathCalendar);
+
+            // wait until wrapper exist
+            this.waitForCalendarWrapperExist();
         }
     },
 
@@ -66,6 +69,26 @@ var CalendarDemoPage = Object.create(HomePage, {
     setValueToCalendar: {
         value: function (valueText) {
             this.getCalendarField.setValue(valueText);
+
+            // wait until wrapper refresh value
+            this.waitUntilWrapperRefreshValue();
+        }
+    },
+
+    /**
+     * @desc this function is to wait for the wrapper to refresh the value until it has selected day equals to given day
+     */
+    waitUntilWrapperRefreshValue: {
+        value: function () {
+            this.waitForCondition(function () {
+                this.click("//h1[@data-id='component-title']");
+                this.click(this.xpathCalendar);
+                this.waitForCalendarWrapperExist();
+
+                var daysCell25 = this.getElement("//div[@data-id='days-cell-25']");
+
+                return "20" === daysCell25.getText();
+            }.bind(this), 500, 100, 100);
         }
     },
 

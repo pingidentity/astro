@@ -1,6 +1,6 @@
 var HomePage = require("../HomePage.js");
 
-var WizardViewDemoPage = Object.create(HomePage, {
+var WizardViewPage = Object.create(HomePage, {
 
     /**
      * @desc this section is to get xpath of elements
@@ -13,7 +13,7 @@ var WizardViewDemoPage = Object.create(HomePage, {
 
     xpathButtonDone: {
         get: function () {
-            return "//button[@data-id='doneButton']";
+            return "//button[@data-id='button-bar-save']";
         }
     },
 
@@ -32,7 +32,7 @@ var WizardViewDemoPage = Object.create(HomePage, {
     /**
      * @desc this function is to hide message area
      * @private
-     * ignore
+     * @ignore
      */
     preTakeScreenshot: {
         value: function () {
@@ -43,7 +43,7 @@ var WizardViewDemoPage = Object.create(HomePage, {
     /**
      * @desc this function is to show message area
      * @private
-     * ignore
+     * @ignore
      */
     postTakeScreenshot: {
         value: function () {
@@ -340,10 +340,9 @@ var WizardViewDemoPage = Object.create(HomePage, {
         value: function () {
             this.openHomePage();
             this.click(this.navComponent("Templates"));
-            this.scrollMenuNavigation(100);
             this.click(this.navComponent("WizardView"));
         }
     }
 });
 
-module.exports = WizardViewDemoPage;
+module.exports = WizardViewPage;

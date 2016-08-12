@@ -33,7 +33,7 @@ var DetailsTooltipDemoPage = Object.create(HomePage, {
      */
     clickLabelAsButton: {
         value: function () {
-            this.click("//input[@value='Label as button']");
+            this.click("//button[contains(text(), 'Label as button')]");
         }
     },
 
@@ -78,7 +78,7 @@ var DetailsTooltipDemoPage = Object.create(HomePage, {
      */
     clickConfirmButton: {
         value: function () {
-            this.click("//input[@data-id='confirm-action']");
+            this.click("//button[@data-id='confirm-action']");
         }
     },
 

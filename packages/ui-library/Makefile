@@ -212,7 +212,6 @@ verify: install-node-npm
 	$(call install_reference_coverage_report,$(COVERAGE_VERSION))
 	$(NODE_EXEC) tools/verify_coverage.js
 
-# run integration test
 integration: install-node-npm
 	rm -rf reports
 	node_modules/.bin/selenium-standalone install

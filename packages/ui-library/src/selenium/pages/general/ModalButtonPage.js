@@ -132,7 +132,7 @@ var ModalButtonDemoPage = Object.create(HomePage, {
      */
     clickNopeButton: {
         value: function () {
-            this.click("//input[@data-id='nopeButton']");
+            this.click("//button[@data-id='nopeButton']");
         }
     },
 
@@ -141,7 +141,7 @@ var ModalButtonDemoPage = Object.create(HomePage, {
      */
     clickYupButton: {
         value: function () {
-            this.click("//input[@data-id='yupButton']");
+            this.click("//button[@data-id='yupButton']");
         }
     },
 
@@ -150,7 +150,7 @@ var ModalButtonDemoPage = Object.create(HomePage, {
      */
     clickDisgardChangesButton: {
         value: function () {
-            this.click("//input[@data-id='disgardChangesButton']");
+            this.click("//button[@data-id='disgardChangesButton']");
         }
     },
 
@@ -159,7 +159,7 @@ var ModalButtonDemoPage = Object.create(HomePage, {
      */
     clickSaveButton: {
         value: function () {
-            this.click("//input[@data-id='saveButton']");
+            this.click("//button[@data-id='saveButton']");
         }
     },
 

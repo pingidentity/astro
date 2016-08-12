@@ -20,7 +20,7 @@ describe("Wizard View Integration", function () {
      * THEN: All steps should be processed normally
      */
     it("should go through all steps of wizard Two Column Step", function () {
-        var contentDemoXpath = "//div[@id='content']";
+        var contentDemoXpath = "//div[@data-id='modal-content']";
 
         //clicks on button Show wizard
         WizardViewPage.clickButtonShowWizard();
@@ -61,7 +61,7 @@ describe("Wizard View Integration", function () {
      * THEN: All steps should be processed normally
      */
     it("should go through all steps of wizard Form Template", function () {
-        var contentDemoXpath = "//div[@id='content']";
+        var contentDemoXpath = "//div[@data-id='modal-content']";
 
         //clicks on button Show wizard
         WizardViewPage.clickButtonShowWizard();

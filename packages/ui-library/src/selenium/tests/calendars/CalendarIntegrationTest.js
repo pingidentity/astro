@@ -30,11 +30,6 @@ describe("Calendar Integration", function () {
         CalendarPage.focusOutCurrentElement();
         expect(CalendarPage.getValueOfCalendar()).toEqual(changedDate);
 
-        CalendarPage.clickCalendarField();
-        CalendarPage.waitForCalendarWrapperExist();
-        CalendarPage.clickCalendarField();
-        CalendarPage.clickCalendarField();
-        CalendarPage.waitForCalendarWrapperExist();
         //take screenshot and compare
         expect(CalendarPage.takeScreenshotAndCompare("ComponentCalendar_InputValue")).toBeTruthy();
     });
@@ -52,7 +47,6 @@ describe("Calendar Integration", function () {
      */
     it("should be clickable for the calendar field and left, right icon as well", function () {
         CalendarPage.clickCalendarField();
-        CalendarPage.waitForCalendarWrapperExist();
         expect(CalendarPage.verifyCalendarWrapperExisting()).toBeTruthy();
         //click on left icon in date-view
         CalendarPage.clickLeftNavigationIcon();

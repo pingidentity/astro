@@ -118,13 +118,14 @@ Page.prototype.getElements = function (path, params) {
 };
 
 /**
- * @desc this function is to pause integration process for a given time
+ * @desc this function is to pause integration process for a given time,
+ *     only if time is a positive number.
  * @param {number} time - number of interval to wait
  *
  * @returns {object} browser - execute object
  */
 Page.prototype.pause = function (time) {
-    return browser.pause(time);
+    return time > 0 ? browser.pause(time) : browser;
 };
 
 /**
@@ -243,5 +244,39 @@ Page.prototype.outHover = function () {
     browser.moveToObject("/*", 0, 0);
 };
 
+/**
+ * @desc Execute the provided callback repeateadly until it returns true.
+ *     If the callback still returns false after "timeout" millis, throw exception.
+ * @param {function} callback - a function which returns true or false.
+ * @param {number} timeout - the time (in millis) to wait until callback returns true.
+ *     If the timeout is reached and callback still hasn't returned true,
+ *     this function will return false.
+ * @param {number} delay - the time (in millis) to wait between consecutive executions
+ *     of the callback.
+ * @param {number} initialDelay - the time (in millis) to wait before executing the callback
+ *     the first time.
+ * @throws Throw error if the callback hasn't succeeded.
+ */
+Page.prototype.waitForCondition = function (callback, timeout, delay, initialDelay) {
+    var start = Date.now();
+    var result = false;
+
+    this.pause(initialDelay);
+
+    do {
+        result = callback();
+
+        // if the callback hasn't succedded, wait
+        if (result === false) {
+            this.pause(delay);
+        }
+    }
+    // execute the block above while the callback hasn't succedded and while there's time left
+    while (result === false && Date.now() < (start + timeout));
+
+    if (result === false) {
+        throw "Timed out waiting for the callback to return true";
+    }
+};
 
 module.exports = new Page();

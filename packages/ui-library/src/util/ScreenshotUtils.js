@@ -137,6 +137,7 @@ var ScreenshotUtils = {
         browser.waitUntil(crop, 5000, 100);
         return result;
     },
+
     /**
      * @desc this function to compare screenshot with baseline and create diff image
      * @param {string} fileName: name of screenshot file.
@@ -148,6 +149,8 @@ var ScreenshotUtils = {
      */
     compareScreenshotWithBaseline: function (fileName, equalRatio, elementSelector) {
         var result = false;
+        var differentScreenshotSize = false;
+
         if (isScreenshotActive) {
             this.initializeScreenshotDir();
             var baselinePath = this.getBaseLineScreenshotPath(fileName);
@@ -166,6 +169,9 @@ var ScreenshotUtils = {
                         // remove diff screenshot if there is nothing difference
                         fs.unlinkSync(diffPath);
                     } else {
+                        if (data.stderr.indexOf("compare: image widths or heights differ") > -1) {
+                            differentScreenshotSize = true;
+                        }
                         console.log("Error: "+ data.stderr);
                         result = false;
                     }
@@ -176,6 +182,12 @@ var ScreenshotUtils = {
             } else {
                 this.takeScreenshotThenSaveToCurrentDiff(fileName, elementSelector);
                 result = false;
+            }
+
+            if (differentScreenshotSize && !fs.existsSync(diffPath)) {
+                var label = "Cannot compare\n\nBase and New screenshot\nhave different size";
+                im.createBlankImageWithText(label, diffPath);
+                console.log("Error: Screenshot dimensions are different. Created a default diff screenshot");
             }
         } else {
             result = true;
