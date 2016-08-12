@@ -6,6 +6,7 @@ jest.dontMock("../../../tooltips/HelpHint.jsx");
 jest.dontMock("../../form-text-field/index.js");
 jest.dontMock("../../form-text-field/v2.jsx");
 jest.dontMock("underscore");
+jest.dontMock("../../../../util/KeyboardUtils.js");
 
 describe("FormSearchBox", function () {
     var React = require("react");
@@ -14,6 +15,7 @@ describe("FormSearchBox", function () {
     var TestUtils = require("../../../../testutil/TestUtils");
     var FormSearchBox = require("../FormSearchBox.jsx");
     var FormTextField = require("../../form-text-field/index");
+    var KeyboardUtils = require("../../../../util/KeyboardUtils.js");
 
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
@@ -58,5 +60,58 @@ describe("FormSearchBox", function () {
         var searchInput = TestUtils.findRenderedDOMNodeWithTag(formTextField, "input");
         ReactTestUtils.Simulate.change(searchInput, { target: { value: "something" } });
         expect(handleOnChange.mock.calls.length).toBe(1);
+    });
+
+    it("should clear query string on ESC key", function () {
+        var queryString = "test",
+            component = getComponent({ queryString: queryString }),
+            searchInput = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+
+        expect(searchInput.value).toBe(queryString);
+
+        ReactTestUtils.Simulate.keyDown(searchInput, {
+            key: "esc",
+            keyCode: KeyboardUtils.KeyCodes.ESC,
+            which: KeyboardUtils.KeyCodes.ESC
+        });
+
+        expect(component.props.onValueChange).toBeCalledWith("");
+    });
+
+    it("should not clear query string when not ESC key", function () {
+        var queryString = "test",
+            component = getComponent({ queryString: queryString }),
+            searchInput = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+
+        expect(searchInput.value).toBe(queryString);
+
+        ReactTestUtils.Simulate.keyDown(searchInput, {
+            key: "enter",
+            keyCode: KeyboardUtils.KeyCodes.ENTER,
+            which: KeyboardUtils.KeyCodes.ENTER
+        });
+
+        expect(component.props.onValueChange).not.toBeCalled();
+
+        ReactTestUtils.Simulate.keyDown(searchInput, {
+            key: "tab",
+            keyCode: KeyboardUtils.KeyCodes.TAB,
+            which: KeyboardUtils.KeyCodes.TAB
+        });
+
+        expect(component.props.onValueChange).not.toBeCalled();
+    });
+
+    it("should clear query string on (X) button click", function () {
+        var queryString = "test",
+            component = getComponent({ queryString: queryString }),
+            searchInput = TestUtils.findRenderedDOMNodeWithTag(component, "input"),
+            clearButton = TestUtils.findRenderedDOMNodeWithDataId(component, "clear");
+
+        expect(searchInput.value).toBe(queryString);
+
+        ReactTestUtils.Simulate.click(clearButton);
+
+        expect(component.props.onValueChange).toBeCalledWith("");
     });
 });

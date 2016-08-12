@@ -14,6 +14,7 @@ jest.dontMock("../v2-stateful.jsx");
 jest.dontMock("../v2-reducer.js");
 jest.dontMock("../v2-constants.js");
 jest.dontMock("../../../../util/FilterUtils.js");
+jest.dontMock("../../../../util/KeyboardUtils.js");
 
 describe("SelectionList", function () {
     var React = require("react");
@@ -25,6 +26,7 @@ describe("SelectionList", function () {
     var FormCheckbox = require("../../FormCheckbox.jsx");
     var FormRadioGroup = require("../../FormRadioGroup.jsx");
     var FormLabel = require("../../FormLabel.jsx");
+    var KeyboardUtils = require("../../../../util/KeyboardUtils.js");
 
     // just so that they are included in the coverage report
     require("../v2-stateful.jsx");
@@ -322,6 +324,86 @@ describe("SelectionList", function () {
         var checkboxes = TestUtils.scryRenderedDOMNodesWithTag(selectionList, "input");
 
         expect(checkboxes.length).toEqual(1);
+    });
+
+    it("clears search on ESC", function () {
+        var component = getComponent({
+            showSearchBox: true
+        });
+        var componentRef = component.refs.SelectionListStateful;
+
+        var queryString = "Nam",
+            searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-search-box"),
+            searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
+        ReactTestUtils.Simulate.change(searchInput, { target: { value: queryString } });
+
+        expect(componentRef.state.queryString).toBe(queryString);
+        expect(componentRef.state.matchedItems).toEqual([
+            { name: "Nam Tu", id: 2 },
+            { name: "Nam Duong", id: 7 }
+        ]);
+
+        ReactTestUtils.Simulate.keyDown(searchInput, {
+            key: "esc",
+            keyCode: KeyboardUtils.KeyCodes.ESC,
+            which: KeyboardUtils.KeyCodes.ESC
+        });
+
+        expect(componentRef.state.queryString).toBe("");
+        expect(componentRef.state.matchedItems).toEqual(listItems);
+    });
+
+    it("does not clear search when not ESC", function () {
+        var component = getComponent({
+            showSearchBox: true
+        });
+        var componentRef = component.refs.SelectionListStateful;
+
+        var queryString = "Tran",
+            searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-search-box"),
+            searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
+        ReactTestUtils.Simulate.change(searchInput, { target: { value: queryString } });
+
+        expect(componentRef.state.queryString).toBe(queryString);
+        expect(componentRef.state.matchedItems).toEqual([
+            { name: "Long Tran", id: 1 },
+            { name: "Thai Tran", id: 8 }
+        ]);
+
+        ReactTestUtils.Simulate.keyDown(searchInput, {
+            key: "enter",
+            keyCode: KeyboardUtils.KeyCodes.ENTER,
+            which: KeyboardUtils.KeyCodes.ENTER
+        });
+
+        expect(componentRef.state.queryString).toBe(queryString);
+        expect(componentRef.state.matchedItems).toEqual([
+            { name: "Long Tran", id: 1 },
+            { name: "Thai Tran", id: 8 }
+        ]);
+    });
+
+    it("clears search on (X) button click", function () {
+        var component = getComponent({
+            showSearchBox: true
+        });
+        var componentRef = component.refs.SelectionListStateful;
+
+        var queryString = "Chi",
+            searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-search-box"),
+            searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
+        ReactTestUtils.Simulate.change(searchInput, { target: { value: queryString } });
+
+        expect(componentRef.state.queryString).toBe(queryString);
+        expect(componentRef.state.matchedItems).toEqual([
+            { name: "Chien Cao", id: 4 }
+        ]);
+
+        var clearButton = TestUtils.findRenderedDOMNodeWithDataId(searchBoxDiv, "clear");
+        ReactTestUtils.Simulate.click(clearButton);
+
+        expect(componentRef.state.queryString).toBe("");
+        expect(componentRef.state.matchedItems).toEqual(listItems);
     });
 
     it("check stateless rendering", function () {

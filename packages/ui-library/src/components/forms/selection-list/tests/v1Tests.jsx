@@ -9,6 +9,7 @@ jest.dontMock("../../FormCheckbox.jsx");
 jest.dontMock("../../FormLabel.jsx");
 jest.dontMock("../../../general/If.jsx");
 jest.dontMock("../../../../util/FilterUtils.js");
+jest.dontMock("../../../../util/KeyboardUtils.js");
 
 describe("SelectionList-v1", function () {
     var React = require("react");
@@ -20,6 +21,7 @@ describe("SelectionList-v1", function () {
     var FormCheckbox = require("../../FormCheckbox.jsx");
     var FormRadioGroup = require("../../FormRadioGroup.jsx");
     var FormLabel = require("../../FormLabel.jsx");
+    var KeyboardUtils = require("../../../../util/KeyboardUtils.js");
 
     var listItems;
 
@@ -308,6 +310,83 @@ describe("SelectionList-v1", function () {
         var checkboxes = TestUtils.scryRenderedDOMNodesWithTag(selectionList, "input");
 
         expect(checkboxes.length).toEqual(1);
+    });
+
+    it("clears search on ESC", function () {
+        var component = getComponent({
+            showSearchBox: true
+        });
+
+        var queryString = "Nam",
+            searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "selection-list-search-box"),
+            searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
+        ReactTestUtils.Simulate.change(searchInput, { target: { value: queryString } });
+
+        expect(component.state.queryString).toBe(queryString);
+        expect(component.state.matchedItems).toEqual([
+            { name: "Nam Tu", id: 2 },
+            { name: "Nam Duong", id: 7 }
+        ]);
+
+        ReactTestUtils.Simulate.keyDown(searchInput, {
+            key: "esc",
+            keyCode: KeyboardUtils.KeyCodes.ESC,
+            which: KeyboardUtils.KeyCodes.ESC
+        });
+
+        expect(component.state.queryString).toBe("");
+        expect(component.state.matchedItems).toEqual(listItems);
+    });
+
+    it("does not clear search when not ESC", function () {
+        var component = getComponent({
+            showSearchBox: true
+        });
+
+        var queryString = "Tran",
+            searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "selection-list-search-box"),
+            searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
+        ReactTestUtils.Simulate.change(searchInput, { target: { value: queryString } });
+
+        expect(component.state.queryString).toBe(queryString);
+        expect(component.state.matchedItems).toEqual([
+            { name: "Long Tran", id: 1 },
+            { name: "Thai Tran", id: 8 }
+        ]);
+
+        ReactTestUtils.Simulate.keyDown(searchInput, {
+            key: "enter",
+            keyCode: KeyboardUtils.KeyCodes.ENTER,
+            which: KeyboardUtils.KeyCodes.ENTER
+        });
+
+        expect(component.state.queryString).toBe(queryString);
+        expect(component.state.matchedItems).toEqual([
+            { name: "Long Tran", id: 1 },
+            { name: "Thai Tran", id: 8 }
+        ]);
+    });
+
+    it("clears search on (X) button click", function () {
+        var component = getComponent({
+            showSearchBox: true
+        });
+
+        var queryString = "Chi",
+            searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "selection-list-search-box"),
+            searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
+        ReactTestUtils.Simulate.change(searchInput, { target: { value: queryString } });
+
+        expect(component.state.queryString).toBe(queryString);
+        expect(component.state.matchedItems).toEqual([
+            { name: "Chien Cao", id: 4 }
+        ]);
+
+        var clearButton = TestUtils.findRenderedDOMNodeWithDataId(searchBoxDiv, "clear");
+        ReactTestUtils.Simulate.click(clearButton);
+
+        expect(component.state.queryString).toBe("");
+        expect(component.state.matchedItems).toEqual(listItems);
     });
 
     it("log warning in console for deprecated component", function () {

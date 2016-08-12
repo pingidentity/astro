@@ -1,5 +1,6 @@
 var React = require("react"),
-    FormTextField = require("../form-text-field/index");
+    FormTextField = require("../form-text-field/index"),
+    KeyboardUtils = require("../../../util/KeyboardUtils.js");
 
 /**
  * @callback FormSearchBox~onValueChange
@@ -10,6 +11,7 @@ var React = require("react"),
 /**
  * @class FormSearchBox
  * @desc A search input box which calls the provided callback function on change.
+ *     Will also clear query string on ESC or (X) button click.
  *
  * @param {string} [data-id="searchBox"]
  *     To define the base "data-id" value for top-level HTML container
@@ -48,23 +50,40 @@ var FormSearchBox = React.createClass({
 
     /**
      * @desc Search when the searchBox has a new value.
-     * @param {object} e
-     *     The ReactJS synthetic event object
+     * @param {object} value
+     *     The query string value.
      * @private
      * @ignore
      */
-    _search: function (e) {
-        this.props.onValueChange(e.target.value);
+    _search: function (value) {
+        this.props.onValueChange(value);
+    },
+
+    _clear: function () {
+        this.props.onValueChange("");
+    },
+
+    _handleSearchBoxKeyDown: function (e) {
+        if (e.keyCode === KeyboardUtils.KeyCodes.ESC) {
+            this._clear();
+        }
     },
 
     render: function () {
+        var showClear = this.props.queryString !== "";
+
         return (
             <div data-id={this.props["data-id"]} className={this.props.className} >
                 <FormTextField data-id="searchBox"
                         className="search"
                         value={this.props.queryString}
                         placeholder={this.props.placeholder}
-                        onChange={this._search} />
+                        onValueChange={this._search}
+                        onKeyDown={this._handleSearchBoxKeyDown}
+                        clear={true} />
+                { showClear &&
+                    <a data-id="clear" className="clear-search" onClick={this._clear} />
+                }
             </div>
         );
     }

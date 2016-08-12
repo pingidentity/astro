@@ -1452,6 +1452,18 @@ input[type=file] {
             max-height: 228px - 46px;
             margin: 46px 0 0;
         }
+        a.clear-search {
+            position: absolute;
+            font-family: $icon-font;
+            text-decoration: none;
+            font-size: 12px;
+            top: 19px;
+            right: 20px;
+
+            &:before {
+                content: 'X';
+            }
+        }
     }
 
     @include border-radius(3px);
