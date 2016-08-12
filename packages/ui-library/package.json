@@ -135,7 +135,7 @@
     "coverage": "jest --coverage && node ./clean-after.js",
     "test": "jest",
     "verify": "npm run jslint && npm run test",
-    "preintegration": "selenium-standalone install && selenium-standalone start & http-server ./build & npm run pack",
+    "preintegration": "selenium-standalone install && selenium-standalone start -- -log ./selenium-standalone.log & http-server ./build > ./http-server.log 2>&1 & npm run pack",
     "integration": "wdio wdio.conf.js --suite $PATH_FILE",
     "postintegration": "npm run clean-processes",
     "clean-screenshots": "node ./clean-screenshot.js",

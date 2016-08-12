@@ -22,3 +22,6 @@ prepros.cfg
 # Eclipse
 .project
 .settings
+
+selenium-standalone.log
+http-server.log
