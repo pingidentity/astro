@@ -471,7 +471,7 @@ var ConfirmDeleteDialog = React.createClass({
                             data-id="cancel-delete"
                             className="secondary"
                             onClick={this.props.onCancel} >
-                        {Translator.translate("expandablerow.default.button.cancel")}
+                        {Translator.translate("cancel")}
                     </button>
                     <button type="button"
                             data-id="confirm-delete"

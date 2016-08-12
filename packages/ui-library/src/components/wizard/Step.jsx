@@ -177,7 +177,7 @@ var Step = React.createClass({
     _getEditLink: function () {
         var labelEdit = this.props.labelEdit;
         if (!this.props.labelEdit) {
-            labelEdit = Translator.translate("step.default.label.edit");
+            labelEdit = Translator.translate("edit");
         }
         if (!this.props.active && this.props.showEdit) {
             return (<a ref="editButton" className="task-edit-link edit edit-directory" onClick={this._edit}>
