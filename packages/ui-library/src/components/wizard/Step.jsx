@@ -146,7 +146,7 @@ var Step = React.createClass({
         if (!this.props.hideCancel) {
             var labelCancel = this.props.labelCancel;
             if (!this.props.labelCancel) {
-                labelCancel = Translator.translate("step.default.label.cancel");
+                labelCancel = Translator.translate("cancel");
             }
 
             return React.createElement(this.props.isModal ? ContextButton : "input", {
@@ -163,7 +163,7 @@ var Step = React.createClass({
     _getNextButton: function () {
         var labelNext = this.props.labelNext;
         if (!this.props.labelNext) {
-            labelNext = Translator.translate("step.default.label.next");
+            labelNext = Translator.translate("next");
         }
         return (
             <EllipsisLoaderButton ref="nextButton" data-id="nextButton"

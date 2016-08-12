@@ -268,8 +268,8 @@ var Stateless = React.createClass({
                 actions: this.props.showReveal || this.props.showUndo
             }),
             type = this.props._type || (this.props.maskValue && !this.props.reveal ? "password" : "text");
-        var undo = Translator.translate("formtextfield.default.button.undo"),
-            save = Translator.translate("formtextfield.default.button.save");
+        var undo = Translator.translate("undo"),
+            save = Translator.translate("save");
 
         return (
             <FormLabel className={className}

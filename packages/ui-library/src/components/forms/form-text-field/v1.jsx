@@ -282,8 +282,8 @@ var FormTextField = React.createClass({
             save,
             labelHelp;
 
-        var labelUndo = Translator.translate("formtextfield.default.button.undo"),
-            labelSave = Translator.translate("formtextfield.default.button.save");
+        var labelUndo = Translator.translate("undo"),
+            labelSave = Translator.translate("save");
 
         var labelCss = classnames(this.props.labelCss, {
             "input-text": true,

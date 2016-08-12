@@ -136,7 +136,7 @@ var Calendar = React.createClass({
             format = this.props.format;
 
         if (!this.props.format) {
-            format = Translator.translate("calendar.default.format.dateformat");
+            format = Translator.translate("dateformat");
         }
 
         return {

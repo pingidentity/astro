@@ -10,7 +10,22 @@
 module.exports = {
     isUseInternationalization: true,
     defaultLanguage: "en_us",
-    languages: {},
+    languages: {
+        /*eslint-disable camelcase*/
+        de_de: require("./lang/de_de.json"),
+        fr_fr: require("./lang/fr_fr.json"),
+        es_es: require("./lang/es_es.json"),
+        en_us: require("./lang/en_us.json"),
+        it_it: require("./lang/it_it.json"),
+        ja_jp: require("./lang/ja_jp.json"),
+        ko_kr: require("./lang/ko_kr.json"),
+        ln_ln: require("./lang/ln_ln.json"),
+        pt_pt: require("./lang/pt_pt.json"),
+        ru_ru: require("./lang/ru_ru.json"),
+        th_th: require("./lang/th_th.json"),
+        zh_cn: require("./lang/zh_cn.json")
+        /*eslint-enable camelcase*/
+    },
     currentLanguage: "en_us",
 
     /**
@@ -21,7 +36,6 @@ module.exports = {
      */
     setLanguage: function (lang) {
         this.currentLanguage = lang;
-        this.importLanguage(this.currentLanguage);
     },
 
     /**
@@ -50,13 +64,9 @@ module.exports = {
     importLanguage: function (languageCode) {
         var languageCode = languageCode.toLowerCase();
         if (this.languages[languageCode] === undefined) {
-            try {
-                this.languages[languageCode] = require("./lang/"+languageCode+".json");
-            } catch (e) {
-                this.languages[languageCode] = require("./lang/"+
-                    this.defaultLanguage.toLowerCase() +".json");
-            }
+            return this.languages[this.defaultLanguage];
+        } else {
+            return this.languages[languageCode];
         }
-        return this.languages[languageCode];
     }
 };

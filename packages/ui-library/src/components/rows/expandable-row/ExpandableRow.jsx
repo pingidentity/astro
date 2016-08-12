@@ -460,7 +460,7 @@ var ConfirmDeleteDialog = React.createClass({
                 positionClassName="bottom left"
                 data-id="delete-confirm-dialog"
                 className="delete-confirm-dialog"
-                title={Translator.translate("expandablerow.default.title.confirmdelete")}
+                title={Translator.translate("confirmdelete")}
                 open={true}
                 onToggle={this.props.onCancel}>
 
@@ -477,7 +477,7 @@ var ConfirmDeleteDialog = React.createClass({
                             data-id="confirm-delete"
                             className="primary"
                             onClick={this.props.onDeleteConfirm} >
-                        {Translator.translate("expandablerow.default.button.confirm")}
+                        {Translator.translate("confirm")}
                     </button>
                 </div>
             </DetailsTooltip>);

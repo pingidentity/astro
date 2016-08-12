@@ -20,9 +20,6 @@ var UILibrary101 = React.createClass({
             label: "English",
             value: "en_us"
         }, {
-            label: "Vietnamese",
-            value: "vi_vn"
-        }, {
             label: "Chinese (Traditional)",
             value: "zh_cn"
         }],
@@ -345,7 +342,7 @@ var UILibrary101 = React.createClass({
                     You can see the text below is changed when you change the language.
                 </p>
                 <p className="attention">
-                    {Translator.translate("tutorial.exampletranslatedtext")}
+                    Welcome to UI Library, your current language code is {Translator.currentLanguage}
                 </p>
                 <h3>
                     Congratulations! You now know everything you need to start using the UI Library in your projects.

@@ -231,7 +231,7 @@ var CountryFlagList = React.createClass({
     _translateCountryNames: function (listCountry) {
         if (listCountry !== undefined) {
             listCountry.forEach(function (country) {
-                country.name = Translator.translate("forms.i18n.countryNames."+ country.iso2);
+                country.name = Translator.translate(country.iso2);
             });
         }
         listCountry = _.sortBy(listCountry, "name");

@@ -113,13 +113,13 @@ var ButtonBar = React.createClass({
             cancelText = this.props.cancelText;
 
         if (!this.props.discardText) {
-            discardText = Translator.translate("buttonbar.default.button.discard");
+            discardText = Translator.translate("discard");
         }
         if (!this.props.saveText) {
-            saveText = Translator.translate("buttonbar.default.button.save");
+            saveText = Translator.translate("save");
         }
         if (!this.props.cancelText) {
-            cancelText = Translator.translate("buttonbar.default.button.cancel");
+            cancelText = Translator.translate("cancel");
         }
 
         var containerClassName = {
