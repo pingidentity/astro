@@ -5,7 +5,8 @@ var React = require("react"),
     classnames = require("classnames"),
     _ = require("underscore"),
     Utils = require("../../util/Utils.js"),
-    placeholder = document.createElement("span");
+    placeholder = document.createElement("span"),
+    FormLabel = require("./FormLabel.jsx");
 
 placeholder.className = "placeholder";
 
@@ -262,7 +263,7 @@ var Multivalues = React.createClass({
         var id = this.props.id || this.props["data-id"];
 
         return (
-            <label className={className} data-id={id} >
+            <FormLabel className={className} data-id={id} >
                 <div className="entries" data-id="entries">
                     {entryNodes}
                     <div className="value-input">
@@ -278,7 +279,7 @@ var Multivalues = React.createClass({
                     </div>
                     <div ref = "hidden-div" style = {hiddenStyle} />
                 </div>
-            </label>
+            </FormLabel>
         );
     }
 });

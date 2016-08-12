@@ -1,6 +1,7 @@
 window.__DEV__ = true;
 
 jest.dontMock("../FormRadioGroup.jsx");
+jest.dontMock("../FormLabel.jsx");
 
 describe("FormRadioGroup", function () {
     var React = require("react"),

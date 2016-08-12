@@ -4,7 +4,9 @@ var React = require("react"),
     fixOrientation = require("fix-orientation"),
     readExif = require("exif-js"),
     classnames = require("classnames"),
-    _ = require("underscore");
+    _ = require("underscore"),
+    FormLabel = require("../FormLabel.jsx"),
+    FormError = require("../FormError.jsx");
 
 var Accept = {
     IMAGE: "image/jpeg, image/jpg, image/gif, image/png",
@@ -369,9 +371,6 @@ var FileUpload = React.createClass({
             }),
             fileInfoClass = classnames("file-info", {
                 stacked: this.props.stacked
-            }),
-            errorClass = classnames("form-error-message help-tooltip", {
-                show: this.state.errorMessage
             });
 
         var buttonText = this.props.buttonText,
@@ -384,10 +383,10 @@ var FileUpload = React.createClass({
             // types, then default 'image/jpeg, image/jpg, image/gif, image/png' will be displayed
             acceptTypesText = this.props.accept.replace(/\s+/g, " ").split("image/");
         }
-
+        
         return (
             <div className={containerClass}>
-                <label className={labelClass}>
+                <FormLabel className={labelClass}>
                     {imageUpload &&
                     <div>
                         {this.props.title && <div>{this.props.title}</div>}
@@ -415,12 +414,10 @@ var FileUpload = React.createClass({
                     <button className="inline choose">
                         {buttonLabel}
                     </button>
-                    <div className={errorClass} data-id={this.props.referenceName + "_errormessage"}>
-                        <div className="tooltip-text">
-                            {this.state.errorMessage}
-                        </div>
-                    </div>
-                </label>
+                    <FormError
+                            data-id={this.props.referenceName + "_errormessage"}
+                            value={this.state.errorMessage} />
+                </FormLabel>
 
                 <div className={fileInfoClass}>
                     {!imageUpload &&

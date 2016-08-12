@@ -4,7 +4,8 @@ var React = require("react"),
     Toggle = require("./form-toggle"),
     If = require("../general/If.jsx"),
     _ = require("underscore"),
-    Utils = require("../../util/Utils.js");
+    Utils = require("../../util/Utils.js"),
+    FormLabel = require("./FormLabel.jsx");
 
 var _includesIgnoreCase = function (propName, substr) {
     return function (item) {
@@ -333,12 +334,11 @@ var Stateless = React.createClass({
                                     {groupName}
                                 </div>
                             </If>
-                            <label className="input-checkbox inline">
-                                <span className="label-text">{item.name}</span>
+                            <FormLabel className="input-checkbox inline" value={item.name}>
                                 <input data-id="checkbox" type="checkbox" name={groupName}
                                        value={item.id} onChange={onChange} checked={checked}/>
                                 <div className="icon"></div>
-                            </label>
+                            </FormLabel>
                         </span>
                     );
                 }

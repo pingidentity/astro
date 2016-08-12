@@ -4,6 +4,8 @@ jest.dontMock("../index.js");
 jest.dontMock("../v1.jsx");
 jest.dontMock("./commonTests.jsx");
 jest.dontMock("../../../../util/Utils");
+jest.dontMock("../../FormLabel.jsx");
+jest.dontMock("../../FormError.jsx");
 //mock the exif api
 jest.setMock("exif-js", { getData: jest.genMockFunction() });
 jest.setMock("fix-orientation", jest.genMockFunction() );
@@ -101,20 +103,27 @@ describe("FileUpload", function () {
         var component = getComponent();
         var error = get(component, "error-message");
 
-        expect(error.textContent).toEqual("");
+        expect(error).toBeFalsy();
 
         component.setState({ errorMessage: fileUploadErrorMsg });
+        var componentUpdated = ReactDOM.findDOMNode(component);
+        error = TestUtils.findRenderedDOMNodeWithDataId(componentUpdated,
+            component.props["referenceName"] + "_errormessage");
         expect(error.textContent).toEqual(fileUploadErrorMsg);
 
         component.setState({ errorMessage: "" });
-        expect(error.textContent).toEqual("");
+        componentUpdated = ReactDOM.findDOMNode(component);
+        error = TestUtils.findRenderedDOMNodeWithDataId(componentUpdated,
+            component.props["referenceName"] + "_errormessage");
+        expect(error).toBeFalsy();
     });
 
     it("displays error returned by validator", function () {
         var component = getComponent({ validator: function () { return "this is my error"; } });
-        var errorContainer = get(component, "error-message");
 
         simulateChange(component);
+
+        var errorContainer = get(component, "error-message");
 
         expect(errorContainer.getAttribute("class")).toContain("show");
         expect(errorContainer.textContent).toEqual("this is my error");

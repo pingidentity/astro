@@ -426,6 +426,12 @@ label {
                 margin-bottom: 0;
             }
         }
+        &.group {
+            .label-text {
+                text-transform: none;
+                color: $color-midnight;
+            }
+        }
         input[type=radio] {
             position: absolute;
             visibility: hidden;

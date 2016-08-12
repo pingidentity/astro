@@ -1,6 +1,8 @@
 var React = require("react"),
     ReactDOM = require("react-dom"),
-    classnames = require("classnames");
+    classnames = require("classnames"),
+    FormLabel = require("../FormLabel.jsx"),
+    FormError = require("../FormError.jsx");
 
 /**
  * @name FileUploadStateless
@@ -52,7 +54,7 @@ module.exports = React.createClass({
 
         return (
             <div className={containerClass} data-id={this.props["data-id"]}>
-                <label className={classnames({ "form-error": this.props.errorMessage }) }>
+                <FormLabel className={classnames({ "form-error": this.props.errorMessage }) }>
                     <ImagePreview
                             show={this.props.showThumbnail}
                             title={this.props.title}
@@ -77,10 +79,10 @@ module.exports = React.createClass({
                         {(fileSelected && this.props.labelSelectOther) || this.props.labelSelect}
                     </button>
 
-                    <ErrorMessage
+                    <FormError
                             value={this.props.errorMessage}
                             data-id={this.props["data-id"] + "-errormessage"} />
-                </label>
+                </FormLabel>
 
                 <div className={classnames("file-info", { stacked: this.props.stacked })}>
                     <Filename
@@ -129,17 +131,6 @@ var FileRestrictions = React.createClass({
                     {this.props.labelAcceptedFileTypes}
                 </span>
             </span>);
-    }
-});
-
-var ErrorMessage = React.createClass({
-    render: function () {
-        var className = classnames("form-error-message help-tooltip", { show: this.props.value });
-
-        return (
-            <div className={className} data-id={this.props["data-id"]}>
-                <div className="tooltip-text">{this.props.value}</div>
-            </div>);
     }
 });
 

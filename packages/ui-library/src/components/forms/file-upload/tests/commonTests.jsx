@@ -77,8 +77,8 @@ exports.run = function (getComponent, get) {
 
         simulateChange(component);
 
-        expect(errorContainer.getAttribute("class")).not.toContain("show");
-        expect(errorContainer.textContent).toEqual("");
+        expect(errorContainer).toBeFalsy();
+
     });
 
     it("has no max file size", function () {

@@ -1,6 +1,7 @@
 window.__DEV__ = true;
 
 jest.dontMock("../Multivalues.jsx");
+jest.dontMock("../FormLabel.jsx");
 
 describe("FormTextField", function () {
 

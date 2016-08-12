@@ -7,6 +7,8 @@ jest.dontMock("../v2-stateless.jsx");
 jest.dontMock("../v2-constants.js");
 jest.dontMock("./commonTests.jsx");
 jest.dontMock("../../../../util/Utils");
+jest.dontMock("../../FormLabel.jsx");
+jest.dontMock("../../FormError.jsx");
 //mock the exif api
 jest.setMock("exif-js", { getData: jest.genMockFunction() });
 jest.setMock("fix-orientation", jest.genMockFunction() );
@@ -93,25 +95,27 @@ describe("FileUpload", function () {
         expect(component.props.onChange).toBeCalled();
     });
 
-    it("shows an error message when one is set", function () {
-        var fileUploadErrorMsg = "Please upload a valid file";
-        var component = getComponent();
-        var error = get(component, "error-message");
+    it("shows an error message when set", function () {
+        var fileUploadErrorMsg = "Please upload a valid file",
+            component = getComponent({ errorMessage: fileUploadErrorMsg }),
+            error = get(component, "error-message");
 
-        expect(error.textContent).toEqual("");
-
-        component.refs.FileUploadStateful.setState({ errorMessage: fileUploadErrorMsg });
         expect(error.textContent).toEqual(fileUploadErrorMsg);
+    });
 
-        component.refs.FileUploadStateful.setState({ errorMessage: "" });
-        expect(error.textContent).toEqual("");
+    it("does not show an error message when not set", function () {
+        var component = getComponent(),
+            error = get(component, "error-message");
+
+        expect(error).toBeFalsy();
     });
 
     it("displays error returned by onValidate", function () {
         var component = getComponent({ onValidate: function () { return "this is my error"; } });
-        var errorContainer = get(component, "error-message");
 
         simulateChange(component);
+
+        var errorContainer = get(component, "error-message");
 
         expect(errorContainer.getAttribute("class")).toContain("show");
         expect(errorContainer.textContent).toEqual("this is my error");

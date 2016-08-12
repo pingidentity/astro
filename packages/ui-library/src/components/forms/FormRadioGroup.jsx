@@ -1,6 +1,7 @@
 var React = require("react"),
     classnames = require("classnames"),
-    Utils = require("../../util/Utils");
+    Utils = require("../../util/Utils"),
+    FormLabel = require("./FormLabel.jsx");
 
 /**
  * @callback FormRadioGroup~onValueChange
@@ -114,7 +115,7 @@ var FormRadioGroup = React.createClass({
         return this.props.items.map(function (item) {
             var radioDisabled = this.props.disabled || item.disabled;
 
-            var className = classnames("input-radio", this.props.className, {
+            var className = classnames("input-radio", "group", this.props.className, {
                 stacked: this.props.stacked,
                 disabled: radioDisabled,
                 hidden: item.hidden
@@ -123,10 +124,11 @@ var FormRadioGroup = React.createClass({
             var dataId = this.props.id || this.props["data-id"];
 
             return (
-                <label
+                <FormLabel
                     className={className}
                     key={item.id}
-                    data-id={dataId + "_label_" + item.id}>
+                    data-id={dataId + "_label_" + item.id}
+                    value={item.name}>
 
                     <input
                         data-id={dataId + "_" + item.id}
@@ -137,8 +139,8 @@ var FormRadioGroup = React.createClass({
                         onChange={this._handleChange}
                         disabled={radioDisabled} />
                     <div className="circle"></div>
-                    {item.name}
-                </label>
+                    
+                </FormLabel>
             );
         }.bind(this));
     },
