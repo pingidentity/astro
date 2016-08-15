@@ -18,6 +18,17 @@ var BasicApp = React.createClass({
                      the source code and follow along as the tutorial progresses. You can also run the
                      app using "npm install && npm run start" to see it working.
                 </p>
+                <p>
+                    We also suggest downloading the UI Library source code to follow along with the tutorial as we
+                     will be refering to the source code from the UI Library as the tutorial progresses.
+                     To download the latest UI Library or a specific version of the library you can either download
+                     it from artifactory, where each version is uploaded with the release, or check out the code from
+                     Gerrit <a href="https://hg-od01.corp.pingidentity.com/r/#/admin/projects/ui-library"
+                        target="_blank">here</a>.
+                     If you choose to download the source from Gerrit, you can access a specific release by branching
+                     from a tag. You can check which version of the UI Library the basic app is running on by looking
+                     in the &quot;basic-app/package.json&quot; file for the &quot;ui-library&quot; dependency.
+                </p>
                 <p className="attention">
                     For simplicity, the basic app doesn't interact with a server and uses mock data. This tutorial
                      will point out which parts of the code are using mocks as we reach them and the source code will
@@ -59,6 +70,10 @@ var BasicApp = React.createClass({
                                 '   > ui-lib-assets (folder containing static UI Library assets)',
                                 '> clean-ui-lib.js (script for cleaning ui-lib-assets folder)',
                                 '> copy-styles.js (script for copying static UI Library assets into the ui-lib-assets folder)',
+                                '> package.json',
+                                '> README.md',
+                                '> webpack.config.js (webpack config for building static assets)',
+                                '> webpack.dev.config.js (webpack config for running webpack-dev-server for development)'
                             /* eslint-enable */
                             ].join("\n")
                         } />
@@ -104,14 +119,55 @@ var BasicApp = React.createClass({
                             /* eslint-enable */
                             ].join("\n")
                         } />
+                <p>
+                    We will be adding a lot more to this file as the tutorial progresses, but for now just think of it
+                     as your standard React component class definition.
+                </p>
 
-                    <h2>Loading styles</h2>
+                <h2>Loading styles</h2>
                 <p>
                     We incorporate the UI Library's static assets (CSS, fonts, images) into our project by copying
                      the files over into the &quot;ui-lib-assets&quot; folder using the &quot;clean-ui-lib&quot;
                      and &quot;copy-styles&quot; scripts. The CSS, fonts, and images belonging to the basic app itself
-                     are located in the correspondingly named folders under &quot;src&quot;.
+                     are located in the correspondingly named folders under &quot;src&quot;. The root CSS file for
+                     the basic app is &quot;app.scss&quot;. This file will &quot;@import&quot; all of the other
+                     basic app specific CSS inside it so that requiring this single file will give us all of the
+                     styles defined for the basic app.
                 </p>
+                <p className="attention">
+                    There is an additional manual step that we need to do in order to use the UI Library's fonts.
+                     To use the UI Library's fonts, we must go into the file
+                     &quot;node_modules/ui-library/src/css/globals.scss&quot; and copy over the commented out
+                     font section from the top of the file into the &quot;src/css/app.scss&quot; file within the
+                     basic app. The paths to the fonts should be edited to point to the location of the UI Library
+                     fonts that have been copied over into the &quot;ui-lib-assets&quot; directory of our project.
+                </p>
+                <Markup custom={true} language="js"
+                        content={
+                            [
+                            /* eslint-disable */
+                            '/** app.scss */',
+                            ' ',
+                            '/*',
+                            '* IMPORT EXTERNAL FILES',
+                            '*/',
+                            ' ',
+                            '/* So fonts get bundled by webpack */',
+                            '@font-face { font-family: \'ProximaNovaRegular\'; font-weight: normal; src: url(\'../ui-lib-assets/fonts/proxima-nova/ProximaNova-Regular.otf\'); }',
+                            '@font-face { font-family: \'ProximaNovaBold\'; font-weight: bold; src: url(\'../ui-lib-assets/fonts/proxima-nova/ProximaNova-Bold.otf\'); }',
+                            '@font-face { font-family: \'ProximaNovaLight\'; font-weight: normal; src: url(\'../ui-lib-assets/fonts/proxima-nova/ProximaNova-Light.otf\'); }',
+                            '@font-face { font-family: \'ProximaNovaSemibold\'; font-weight: normal; src: url(\'../ui-lib-assets/fonts/proxima-nova/ProximaNova-Semibold.otf\'); }',
+                            '@font-face { font-family: \'ProximaNovaCondRegular\'; font-weight: normal; src: url(\'../ui-lib-assets/fonts/proxima-nova/ProximaNovaCond-Regular.otf\'); }',
+                            ' ',
+                            '/*',
+                            '* Any css belonging to the basic-app itself should be imported here',
+                            '*/',
+                            ' ',
+                            '@import \'shows\';'
+                            /* eslint-enable */
+                            ].join("\n")
+                        }
+                />
                 <p>
                     The root CSS files for the UI Library and the basic app should be loaded via &quot;require&quot;
                      statements within &quot;App.jsx&quot;:
@@ -124,13 +180,13 @@ var BasicApp = React.createClass({
                             ' ',
                             '// the SCSS files will be compiled by a webpack plugin',
                             '// and injected into the head section of the HTML page by another plugin',
-                            'require("../ui-lib-assets/css/ui-library.scss");',
-                            'require("../css/app.scss");',
+                            'require("../ui-lib-assets/css/ui-library.scss");       // UI Library styles',
+                            'require("../css/app.scss");    // Basic app specific styles',
                             /* eslint-enable */
                             ].join("\n")
                         } />
 
-                    <h2>Routing set up</h2>
+                <h2>Routing set up</h2>
                 <p>
                     The basic app uses a combination of
                      <a href="https://github.com/reactjs/react-router" target="_blank"> React Router</a>,
@@ -184,7 +240,7 @@ var BasicApp = React.createClass({
                     To enable the basic app to use Redux we need to create a store, actions, and reducer.
                      Then we need to tie the store into our app (which includes wiring in all reducers),
                      create callbacks that can be passed down to non-Redux aware child components to dispatch actions,
-                     and pass in any necessary state as props into our root component.
+                     and pass in any necessary state as props into our root component. We will go over each step below.
                 </p>
                 <p className="attention">
                     As a best practice, the recommended architecture for working with Redux is to only have ONE
@@ -256,7 +312,7 @@ var BasicApp = React.createClass({
                         } />
                 <p>
                     This reducer file is also very simple. It specifies an &quot;initialState&quot; for this reducer
-                     and handles the &quot;SET&quot; action.
+                     and handles the state update for the &quot;SET&quot; action.
                 </p>
                 <p className="attention">
                     Note that we have begun making use of the UI Library's assets! Here, we are using the
@@ -264,7 +320,7 @@ var BasicApp = React.createClass({
                      logic in our reducer.
                 </p>
                 <p>
-                    Now that we have some actions and a reducer, the store can be created like this:
+                    Now that we have some actions and a reducer to register, the store can be created like this:
                 </p>
                 <Markup custom={true} language="js"
                         content={
@@ -344,12 +400,13 @@ var BasicApp = React.createClass({
                     The first argument to &quot;connect&quot; is a function that will map portions of the state to
                      props that will be injected into the component connect is wrapping. In this case, the root
                      component &quot;App&quot; will receive &quot;all&quot; as a prop that contains all state in the
-                     store state tree. We'll be adding more specific state to props mappings within this funcion as
+                     store state tree. We'll be adding more specific state to props mappings within this function as
                      our app and state tree grows later on in this tutorial.
                 </p>
                 <p>
-                    There's also a special component in &quot;react-redux&quot; that will take care of making the
-                     store available to all container components. We just have to alter how the app is rendered again:
+                    There's also a special &quot;Provider&quot; component in &quot;react-redux&quot; that will
+                     take care of making the store available to all container components.
+                     We just have to alter how the app is rendered again:
                 </p>
                 <Markup custom={true} language="js"
                         content={
@@ -407,6 +464,48 @@ var BasicApp = React.createClass({
                         } />
                 <p>
                     Now that we have everything set up, we can start adding some more components and views!
+                </p>
+
+                <h2>Views</h2>
+                <p>
+                    We will be creating a total of 5 views:
+                </p>
+                <ul className="ul">
+                    <li>Base View</li>
+                    <li>Shows - List view</li>
+                    <li>Shows - Expanded view</li>
+                    <li>Shows - Add view</li>
+                    <li>Shows - Edit view</li>
+                </ul>
+                <p>
+                    As we will be using the UI Library's templates in creating our views, the workflow for setting up
+                     each view will be something like the following:
+                </p>
+                <ul className="ul">
+                    <li>Register reducers for components and views inside &quot;store.js&quot;</li>
+                    <li>Add the state for the newly registered reducers to the state to props mapping inside
+                         &quot;App.jsx&quot;</li>
+                    <li>Actions for newly registered components and views are bound to the store's dispatch
+                        to create callbacks</li>
+                    <li>Callbacks are passed down as props to the appropriate views</li>
+                    <li>View template markup is updated to use the callbacks and state props passed down to them</li>
+                </ul>
+                <p>
+                    This is standard React/Redux workflow. In order for views to render with information from the app
+                     state and to provide behavior that will alter app state, the view markup must use callbacks for
+                     actions that are dispatched to reducers and the state props that were defined in the state
+                     to props mapping. Callbacks are created by binding action creators to dispatch within Redux
+                     aware components, and then passed down to non-redux aware components - in our case this is done
+                     in &quot;App.jsx&quot;. And in order for any of the above to alter state reducers that understand
+                     the dispatched actions and provide state must have been registered to the store.
+                </p>
+                <p>
+                    Since the UI Library's templates already provide us with actions, reducers and view markup all we
+                     have to do is alter them a bit to work with the basic app and link them as explained above.
+                </p>
+                <p className="attention">
+                    The basic app will have partial functionality after the completion of each view,
+                     and will be fully functional upon completion of all the views.
                 </p>
 
                 <h2>Base view</h2>
@@ -767,7 +866,8 @@ var BasicApp = React.createClass({
                 <p>
                     Great! We've completed the base view and so far it should render the following after defining the
                      &quot;basic-app/src/app/views/shows/Shows.jsx&quot; and
-                     &quot;basic-app/src/app/views/Movies.jsx&quot; files:
+                     &quot;basic-app/src/app/views/Movies.jsx&quot; files. We can now change between the TV Shows and
+                     Movies views in the left navigation and see a page header.
                 </p>
                 <img src={require("../../images/basic-app-base-view.png")} />
 
@@ -1301,7 +1401,9 @@ var BasicApp = React.createClass({
                         } />
                 <p>
                     Now we've completed the Shows list view and it'll be rendered when we navigate to the
-                     &quot;Shows&quot; section in the left nav:
+                     &quot;Shows&quot; section in the left nav. Within the list view we can change tabs between the
+                     shows list and the genre descriptions, scroll through the list of shows from our mock data,
+                     and filter down the shows.
                 </p>
                 <img src={require("../../images/basic-app-shows-list-view.png")} />
 
@@ -1342,7 +1444,8 @@ var BasicApp = React.createClass({
                             ].join("\n")
                         } />
                 <p>
-                    The expanded row will look something like this now:
+                    The expanded row will look something like this now. We can now see the status and summary for a
+                     show when expanding its row.
                 </p>
                 <img src={require("../../images/basic-app-expanded-view.png")} />
 
@@ -1818,7 +1921,9 @@ var BasicApp = React.createClass({
                             ].join("\n")
                         } />
                 <p>
-                    Now the add view should be rendered when the &quot;+ Add Show&quot; button is clicked:
+                    Now the add view should be rendered when the &quot;+ Add Show&quot; button is clicked.
+                     Within the add view we can fill in the form and create a show that will be added to the list of
+                     shows in the list view.
                 </p>
                 <img src={require("../../images/basic-app-add-view.png")} />
 
@@ -2233,7 +2338,8 @@ var BasicApp = React.createClass({
                             ].join("\n")
                         } />
                 <p>
-                    With that, our final view is done and will be rendered when a row's edit button is clicked:
+                    With that, our final view is done and will be rendered when a row's edit button is clicked.
+                    Here, we can use the form to change and update the information associated with a show.
                 </p>
                 <img src={require("../../images/basic-app-edit-view.png")} />
 

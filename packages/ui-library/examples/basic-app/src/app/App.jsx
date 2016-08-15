@@ -19,8 +19,8 @@ var React = require("react"),
 
 // the SCSS files will be compiled by a webpack plugin
 // and injected into the head section of the HTML page by another plugin
-require("../ui-lib-assets/css/ui-library.scss");
-require("../css/app.scss");
+require("../ui-lib-assets/css/ui-library.scss");    // UI Library styles
+require("../css/app.scss");     // Basic app specific styles
 
 var App = React.createClass({
 

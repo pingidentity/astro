@@ -473,6 +473,11 @@ module.exports = [
                 fullscreen: true
             },
             {
+                label: "Prototyping",
+                demo: require("../components/tutorials/prototyping.jsx"),
+                fullscreen: true
+            },
+            {
                 label: "CSS Tips & Tricks",
                 demo: require("../components/tutorials/cssTips.jsx"),
                 fullscreen: true

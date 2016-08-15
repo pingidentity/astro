@@ -57,6 +57,7 @@
     "npm": ">= 3.7.x"
   },
   "scripts": {
+    "pack": "./copy-styles.js && webpack --progress --colors --config webpack.config.js",
     "webpack-start": "./copy-styles.js && webpack-dev-server --port 8081 -d --hot --inline --progress --colors --config webpack.dev.config.js",
     "start": "npm run webpack-start",
     "lint": "eslint --ext .js,.jsx ."

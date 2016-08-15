@@ -310,6 +310,12 @@ var UILibrary101 = React.createClass({
                     The rest of the assets (fonts, images, etc) in the library should be copied as is into the assets
                      directory of your project.
                 </p>
+                <p className="attention">
+                    To use the UI Library's fonts, you must go into the file &quot;src/css/globals.scss&quot; and copy
+                     over the commented out font section from the top of the file into a public styles folder within
+                     your own app. The paths to the fonts should be edited to point to the location of the UI Library
+                     fonts that have been copied over into the assets directory of your project.
+                </p>
                 <h2>Change UI-Library Language</h2>
                 <p>
                     The UI Library supports i18n for common strings via the translator. The default language is English.

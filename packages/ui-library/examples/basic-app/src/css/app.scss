@@ -1,4 +1,13 @@
-// IMPORT EXTERNAL FILES
+/*
+* IMPORT EXTERNAL FILES
+*/
+
+/* So fonts get bundled by webpack */
+@font-face { font-family: 'ProximaNovaRegular'; font-weight: normal; src: url('../ui-lib-assets/fonts/proxima-nova/ProximaNova-Regular.otf'); }
+@font-face { font-family: 'ProximaNovaBold'; font-weight: bold; src: url('../ui-lib-assets/fonts/proxima-nova/ProximaNova-Bold.otf'); }
+@font-face { font-family: 'ProximaNovaLight'; font-weight: normal; src: url('../ui-lib-assets/fonts/proxima-nova/ProximaNova-Light.otf'); }
+@font-face { font-family: 'ProximaNovaSemibold'; font-weight: normal; src: url('../ui-lib-assets/fonts/proxima-nova/ProximaNova-Semibold.otf'); }
+@font-face { font-family: 'ProximaNovaCondRegular'; font-weight: normal; src: url('../ui-lib-assets/fonts/proxima-nova/ProximaNovaCond-Regular.otf'); }
 
 /*
 * Any css belonging to the basic-app itself should be imported here
