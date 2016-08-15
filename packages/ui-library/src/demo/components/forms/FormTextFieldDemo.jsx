@@ -20,8 +20,15 @@ var FormTextFieldDemo = React.createClass({
             showUndo: false,
             onUndoValue: null,
             originalValue: "this is the original value",
-            requiredValue: null
+            requiredValue: null,
+            statelessValue: "stateless default"
         };
+    },
+
+    _handleStatelessValueChange: function (value) {
+        this.setState({
+            statelessValue: value
+        });
     },
 
     _handleValueChange: function (value) {
@@ -105,8 +112,21 @@ var FormTextFieldDemo = React.createClass({
         return (
             <div>
                 <div className="input-row">
+                        <FormTextField
+                            labelText="Basic (stateful)"
+                        />
+                </div>
+                <div className="input-row">
                     <FormTextField
-                        labelText="Basic"
+                        controlled={true}
+                        labelText="Basic (stateless)"
+                        value={this.state.statelessValue}
+                        onValueChange={this._handleStatelessValueChange} />
+                </div>
+                <div className="input-row">
+                    <FormTextField
+                        labelText="Default value"
+                        value="default"
                     />
                 </div>
                 <div className="input-row">
@@ -117,6 +137,7 @@ var FormTextFieldDemo = React.createClass({
                         value={this.state.onUndoValue || this.state.originalValue}
                         onValueChange={this._handleUndoValueChange}
                     />
+                    {this.state.onUndoValue}
                     <div>{this.state.undone ? "undone!" : null}</div>
                 </div>
                 <div className="input-row">

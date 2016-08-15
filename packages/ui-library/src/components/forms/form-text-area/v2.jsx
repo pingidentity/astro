@@ -40,11 +40,9 @@ var React = require("re-react"),
 *     To enable the component to be externally managed. True will relinquish control to the component's owner.
 *     False or not specified will cause the component to manage state internally.
 *
-* @param {string} [value]
+* @param {string} [value=""]
 *     The current text field value, used when state is managed outside of component.
 *     Must be used with onValueChange handle to get updates.
-* @param {string} [defaultValue]
-*     The default (initial) value to be shown in the field, when component managing state itself.
 * @param {FormTextArea~onChange} [onChange]
 *     Callback to be triggered when the field changes. It will receive the triggering event.
 *     The onValueChange callback will also be triggered.
@@ -101,7 +99,7 @@ var React = require("re-react"),
 *                       data-id={name}
 *                       labelText={element.viewName}
 *                       required={element.required}
-*                       defaultValue={element ? element.value : ''}
+*                       value={element ? element.value : ''}
 *                       onValueChange={myFunction} />
 */
 
@@ -134,7 +132,6 @@ var FormTextAreaStateless = React.createClass({
         "data-id": React.PropTypes.string,
         className: React.PropTypes.string.affectsRendering,
         value: React.PropTypes.string.affectsRendering,
-        defaultValue: React.PropTypes.string.affectsRendering,
         onChange: React.PropTypes.func,
         onValueChange: React.PropTypes.func,
         originalValue: React.PropTypes.string.affectsRendering,
@@ -163,7 +160,6 @@ var FormTextAreaStateless = React.createClass({
         return {
             "data-id": "form-text-area",
             mode: FormFieldConstants.FormFieldMode.EDIT,
-            defaultValue: "",
             labelText: "",
             edited: false,
             showUndo: false,
@@ -174,7 +170,8 @@ var FormTextAreaStateless = React.createClass({
             onChange: _.noop,
             onValueChange: _.noop,
             onBlur: _.noop,
-            onUndo: _.noop
+            onUndo: _.noop,
+            value: ""
         };
     },
 
@@ -211,7 +208,6 @@ var FormTextAreaStateless = React.createClass({
                             readOnly={readonly}
                             maxLength={this.props.maxLength}
                             value={this.props.value}
-                            defaultValue={this.props.defaultValue}
                             onChange={this._handleChange}
                             onBlur={this.props.onBlur}
                             cols={this.props.cols}
@@ -249,6 +245,10 @@ var FormTextAreaStateful = React.createClass({
     _handleValueChange: function (value) {
         this.setState({
             value: value
+        }, function () {
+            if (this.props.onValueChange) {
+                this.props.onValueChange(value);
+            }
         });
     },
 
@@ -262,13 +262,14 @@ var FormTextAreaStateful = React.createClass({
 
     getInitialState: function () {
         return {
-            value: this.props.value || this.props.defaultValue || ""
+            value: this.props.value || ""
         };
     },
 
     render: function () {
         var props = _.defaults({
             ref: "FormTextAreaStateless",
+            value: this.state.value,
             onValueChange: this._handleValueChange,
             edited: this.props.originalValue && this.state.value !== this.props.originalValue,
             showUndo: this.props.originalValue && this.state.value !== this.props.originalValue,

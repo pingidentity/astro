@@ -30,7 +30,7 @@ module.exports = function (getComponent) {
 
     it("shows the default value", function () {
         var component = getComponent({
-            defaultValue: "my random value"
+            value: "my random value"
         });
 
         // verify that the component is rendered

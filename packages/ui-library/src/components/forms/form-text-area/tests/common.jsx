@@ -27,7 +27,7 @@ module.exports = function (getComponent) {
 
     it("shows the default value", function () {
         var defaultValue = "my random value";
-        var component = getComponent({ defaultValue: defaultValue });
+        var component = getComponent({ value: defaultValue });
 
         // verify that the component is rendered
         var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");

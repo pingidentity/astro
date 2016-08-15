@@ -69,7 +69,7 @@ var FormTextAreaDemo = React.createClass({
                 <div className="input-row">
                     <FormTextArea
                         labelText="With defaultValue and undo (stateful)"
-                        defaultValue="Lorem ipsum dolor sit amet"
+                        value="Lorem ipsum dolor sit amet"
                         originalValue="Lorem ipsum dolor sit amet"
                         className="input-width-medium"
                     />
@@ -78,9 +78,8 @@ var FormTextAreaDemo = React.createClass({
                     <FormTextArea
                         controlled={true}
                         labelText="With defaultValue and undo (stateless)"
-                        value={this.state.onUndoValue}
+                        value={this.state.onUndoValue || "Lorem ipsum dolor sit amet"}
                         onValueChange={this._handleUndoValueChange}
-                        defaultValue="Lorem ipsum dolor sit amet"
                         edited={this.state.edited}
                         showUndo={this.state.showUndo}
                         onUndo={this._handleUndo}

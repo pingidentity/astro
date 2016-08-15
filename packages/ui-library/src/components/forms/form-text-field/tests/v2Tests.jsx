@@ -78,7 +78,7 @@ describe("FormTextField", function () {
 
         expect(componentRef.state.reveal).toBe(false);
 
-        componentRef._toggleReveal();
+        componentRef._handleToggleReveal();
 
         expect(componentRef.state.reveal).toBe(true);
     });
@@ -167,6 +167,34 @@ describe("FormTextField", function () {
         ReactTestUtils.Simulate.click(undo);
 
         expect(onUndo).toBeCalled();
+    });
+
+    it("stateful: displays a modified value state upon changing value prop", function () {
+        var initialValue = "init";
+        var TestParent = React.createFactory(React.createClass({
+            getInitialState: function () {
+                return { value: initialValue };
+            },
+
+            render: function () {
+                return <FormTextField value={this.state.value} />;
+            }
+        }));
+
+        var parent = ReactTestUtils.renderIntoDocument(TestParent());
+        var component = TestUtils.findRenderedComponentWithType(parent, FormTextField);
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+
+        expect(component.props.value).toBe(initialValue);
+        expect(input.value).toBe(initialValue);
+
+        var newValue = "changed";
+        parent.setState({
+            value: newValue
+        });
+
+        expect(component.props.value).toBe(newValue);
+        expect(input.value).toBe(newValue);
     });
 
     it("renders custom className", function () {

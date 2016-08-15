@@ -81,10 +81,8 @@ var React = require("react"),
 *     To enable the component to be externally managed. True will relinquish control to the component's owner.
 *     False or not specified will cause the component to manage state internally.
 *
-* @param {string|number} [value]
+* @param {string|number} [value=""]
 *     Current text field value.
-* @param {string} [defaultValue]
-*     The default (initial) value to be shown in the text field.
 * @param {FormTextField~onChange} [onChange]
 *     Callback to be triggered when the field value changes. It will receive the triggering event.
 * @param {FormTextField~onValueChange} [onValueChange]
@@ -154,7 +152,7 @@ var React = require("react"),
 *              data-id="my-data-id"
 *              labelText={element.viewName}
 *              required={element.required}
-*              defaultValue="default value"
+*              value="default value"
 *              onValueChange={myFunction} />
 */
 
@@ -184,7 +182,6 @@ var Stateless = React.createClass({
         "data-id": React.PropTypes.string,
         className: React.PropTypes.string,
         value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
-        defaultValue: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
         onChange: React.PropTypes.func,
         onValueChange: React.PropTypes.func,
         onBlur: React.PropTypes.func,
@@ -230,7 +227,6 @@ var Stateless = React.createClass({
     getDefaultProps: function () {
         return {
             "data-id": "form-text-field",
-            defaultValue: "",
             onChange: _.noop,
             onValueChange: _.noop,
             onBlur: _.noop,
@@ -251,7 +247,8 @@ var Stateless = React.createClass({
             onUndo: _.noop,
             reveal: false,
             showReveal: false,
-            onToggleReveal: _.noop
+            onToggleReveal: _.noop,
+            value: ""
         };
     },
 
@@ -286,7 +283,6 @@ var Stateless = React.createClass({
                            onMouseDown={this.props.onMouseDown}
                            onChange={this._handleFieldChange}
                            placeholder={this.props.placeholder}
-                           defaultValue={this.props.defaultValue}
                            ref={id + "-input"}
                            readOnly={this.props.readOnly}
                            data-id={id + "-input"}
@@ -326,21 +322,42 @@ var Stateful = React.createClass({
 
     getInitialState: function () {
         return {
-            reveal: false
+            reveal: false,
+            value: this.props.value || ""
         };
     },
 
-    _toggleReveal: function () {
+    _handleToggleReveal: function () {
         this.setState({
             reveal: !this.state.reveal
         });
+    },
+
+    _handleValueChange: function (value) {
+        this.setState({
+            value: value
+        }, function () {
+            if (this.props.onValueChange) {
+                this.props.onValueChange(value);
+            }
+        });
+    },
+
+    componentWillReceiveProps: function (newProps) {
+        if (newProps.value !== this.props.value) {
+            this.setState({
+                value: newProps.value
+            });
+        }
     },
 
     render: function () {
         var props = _.defaults({
             ref: "stateless",
             reveal: this.state.reveal,
-            onToggleReveal: this._toggleReveal
+            onToggleReveal: this._handleToggleReveal,
+            value: this.state.value,
+            onValueChange: this._handleValueChange
         }, this.props);
 
         return React.createElement(Stateless, props);
