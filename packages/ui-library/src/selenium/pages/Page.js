@@ -43,7 +43,7 @@ Page.prototype.formatXpath = function (string, keys) {
 Page.prototype.open = function (path) {
     // set default size for browsers
     browser.windowHandleSize({ width: 1400, height: 800 });
-    browser.url("/" + path);
+    browser.url(path);
 };
 
 /**
@@ -101,6 +101,7 @@ Page.prototype.end = function (done) {
 Page.prototype.getElement = function (path, params) {
     var formattedPath = this.formatXpath(path, params);
 
+    this.assertExistingElement(formattedPath);
     return browser.element(formattedPath);
 };
 
@@ -114,6 +115,7 @@ Page.prototype.getElement = function (path, params) {
 Page.prototype.getElements = function (path, params) {
     var formattedPath = this.formatXpath(path, params);
 
+    this.assertExistingElement(formattedPath);
     return browser.elements(formattedPath);
 };
 
@@ -185,6 +187,7 @@ Page.prototype.showElement = function (elementPath) {
  * @param {number} offset position(pixel)
  */
 Page.prototype.scrollElementToTop = function (elementPath, offset) {
+    this.assertExistingElement(elementPath);
     browser.selectorExecute(elementPath, "arguments[0][0].scrollTop = "+ offset);
 };
 
@@ -195,6 +198,7 @@ Page.prototype.scrollElementToTop = function (elementPath, offset) {
  * @param {number} offset position(pixel)
  */
 Page.prototype.scrollElementToLeft = function (elementPath, offset) {
+    this.assertExistingElement(elementPath);
     browser.selectorExecute(elementPath, "arguments[0][0].scrollLeft = "+ offset);
 };
 
@@ -206,7 +210,7 @@ Page.prototype.scrollElementToLeft = function (elementPath, offset) {
  * @param {number} y offsetY
  */
 Page.prototype.scrollPage = function (elementPath, x, y) {
-    if (elementPath) {
+    if (browser.isExisting(elementPath)) {
         browser.scroll(elementPath, x, y);
     } else {
         browser.scroll(x, y);
@@ -221,6 +225,8 @@ Page.prototype.scrollPage = function (elementPath, x, y) {
  * @returns {object} browser execute object
  */
 Page.prototype.scrollElementToTopSync = function (elementPath, offset) {
+    this.assertExistingElement(elementPath);
+
     var newOffset = browser.selectorExecute(elementPath, "return arguments[0][0].scrollTop = "+ offset);
     return browser.waitUntil(browser.selectorExecute(elementPath,
         "return arguments[0][0].scrollTop") === newOffset , 5000, "Error: Cannot wait for scrolling", 100);
@@ -266,12 +272,12 @@ Page.prototype.waitForCondition = function (callback, timeout, delay, initialDel
     do {
         result = callback();
 
-        // if the callback hasn't succedded, wait
+        // if the callback hasn't succeeded, wait
         if (result === false) {
             this.pause(delay);
         }
     }
-    // execute the block above while the callback hasn't succedded and while there's time left
+    // execute the block above while the callback hasn't succeeded and while there's time left
     while (result === false && Date.now() < (start + timeout));
 
     if (result === false) {

@@ -28,7 +28,7 @@ var HomePage = Object.create(Page, {
      */
     openHomePage: {
         value: function () {
-            this.open("index.html");
+            this.open("http://localhost:8080/index.html");
         }
     },
 

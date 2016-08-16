@@ -238,7 +238,7 @@ var ScreenshotUtils = {
                     console.log("Compare failed, take other screenshot: " + fileName);
                 }
                 browser.pause(wdioConfig.screenshotOpts.retryInterval);
-                if (elementSelector) {
+                if (browser.isExisting(elementSelector)) {
                     this.takeElementScreenshotAndSaveToCurrentPath(fileName, elementSelector);
                     isNoDiff = this.compareScreenshotWithBaseline(fileName, equalRatio, elementSelector);
                 } else {

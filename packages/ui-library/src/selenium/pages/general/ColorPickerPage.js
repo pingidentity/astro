@@ -62,7 +62,6 @@ var ColorPickerDemoPage = Object.create(HomePage, {
      */
     setColorPickerValue: {
         value: function (index, color) {
-            this.getColorPicker(index).clearElement();
             this.getColorPicker(index).setValue(color);
         }
     },
