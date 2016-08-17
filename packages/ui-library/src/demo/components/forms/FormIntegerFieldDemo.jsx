@@ -110,6 +110,7 @@ var FormIntegerFieldDemo = React.createClass({
                     <FormIntegerField
                             labelText={"Basic - Value : " + this.state.integerField1}
                             onValueChange = {this._changeCallback}
+                            className="input-width-medium"
                             controlled={false}
                     />
                 </div>

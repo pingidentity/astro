@@ -376,4 +376,14 @@ describe("FormIntegerField", function () {
         expect(input.value).toEqual("3");
     });
 
+    it("will add css class to container", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormIntegerField
+                    className="added"
+                    controlled={false}
+                    />
+        );
+        expect(TestUtils.findRenderedDOMNodeWithClass(component, "added")).not.toBeNull();
+    });
+
 });

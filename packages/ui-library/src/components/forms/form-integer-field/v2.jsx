@@ -306,7 +306,8 @@ var Stateless = React.createClass({
     },
 
     render: function () {
-        var integerControls;
+        var integerControls,
+            styles = classnames("form-integer-container input-integer", this.props.className);
 
         if (!this.props.disabled && !this.props.readOnly) {
             integerControls = (
@@ -336,7 +337,7 @@ var Stateless = React.createClass({
                 <FormTextField {...this.props}
                         ref="formTextField"
                         data-id={this.props["data-id"] + "-text-field"}
-                        className="form-integer-container input-integer"
+                        className={styles}
                         labelClassName={classnames(this.props.labelClassName)}
                         onValueChange={this.props.onValueChange}
                         controls={integerControls}

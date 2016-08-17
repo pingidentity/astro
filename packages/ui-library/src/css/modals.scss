@@ -39,11 +39,12 @@
         z-index: 1;
         top: 0;
         left: 50%;
-        transform: translateX(-50%);
         height: 100%;
         max-width: $max-modal-width;
         min-width: 360px;
         font-family: $font-pn-regular;
+        
+        @include transform(translateX(-50%));
     }
     .modal-header {
         position: relative;

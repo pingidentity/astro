@@ -1,5 +1,6 @@
 var React = require("react"),
-    InfiniteScroll = require("../../../components/list/InfiniteScroll.jsx");
+    InfiniteScroll = require("../../../components/list/InfiniteScroll.jsx"),
+    Utils = require("../../../util/Utils");
 
 /**
 * @name InfiniteScrollDemo
@@ -14,14 +15,31 @@ var Demo = React.createClass({
 
         var bs = 20;
         /*eslint-disable */
+        // ie9 doesn't support TypedArrays (Int8Array)
+        // need to create a false TypedArray
+        var typedArray;
+        if (typeof (bs + 1) === "number") {
+            typedArray = new Array(bs + 1);
+            for (var i = 0; i < (bs + 1); ++i)
+                typedArray[i] = 0;
+        } else
+            typedArray = (bs + 1).slice(0);
+        typedArray.buffer = typedArray;
+        typedArray.byteLength = typedArray.length;
+        if (typeof (bs + 1) === "object" && (bs + 1).buffer)
+            typedArray.buffer = (bs + 1).buffer;
+
         for (var batchI = 0; batchI < 10; batchI += 1) {
-            var data = Object.keys(new Int8Array(bs + 1)).map(function (e){
+            var aTypedArray = Utils.isIE9() ? typedArray : new Int8Array(bs + 1);
+
+            var data = Object.keys(aTypedArray).map(function (e) {
                 return { num: parseInt(e) + (bs * batchI) }
             }).slice(1);
 
             this.batches.push({
                 id: batchI,
-                data: data});
+                data: data
+            });
         }
         /*eslint-enable */
 
