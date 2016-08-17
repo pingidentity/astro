@@ -9,7 +9,7 @@ function Page () {
 
 /**
  * @desc this function is to format an xpath
- * @param {string} string - text to format
+ * @param {string} unformattedXPath - text to format
  * @param {string} keys - params
  *
  * @returns {string} formatted path
@@ -18,8 +18,8 @@ function Page () {
  *           params = { type: "*", name: "Calendar" }
  *           return //*[@data-id='Calendar-label']
  */
-Page.prototype.formatXpath = function (string, keys) {
-    var parts = string.split(/(?=[{])|}/);
+Page.prototype.formatXpath = function (unformattedXPath, keys) {
+    var parts = unformattedXPath.split(/(?=[{])|}/);
     var l = parts.length;
 
     for (var i = 0; i < l; i += 1) {

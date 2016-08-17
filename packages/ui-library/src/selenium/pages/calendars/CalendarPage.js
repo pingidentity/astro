@@ -72,6 +72,8 @@ var CalendarDemoPage = Object.create(HomePage, {
 
             // wait until wrapper refresh value
             this.waitUntilWrapperRefreshValue();
+
+            this.blurElement();
         }
     },
 
@@ -145,6 +147,16 @@ var CalendarDemoPage = Object.create(HomePage, {
     getCurrentMonth: {
         value: function () {
             var currentMonth = moment().month();
+            return currentMonth + 1;
+        }
+    },
+
+    /**
+     * @desc this function is to return the month of a given date: (1 - 12)
+     */
+    getMonthByDate: {
+        value: function (date) {
+            var currentMonth = new Date(date).getMonth();
             return currentMonth + 1;
         }
     },

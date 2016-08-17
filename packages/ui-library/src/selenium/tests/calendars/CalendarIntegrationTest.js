@@ -27,7 +27,6 @@ describe("Calendar Integration", function () {
 
         var changedDate = "2017-07-20";
         CalendarPage.setValueToCalendar(changedDate);
-        CalendarPage.focusOutCurrentElement();
         expect(CalendarPage.getValueOfCalendar()).toEqual(changedDate);
 
         //take screenshot and compare
@@ -53,7 +52,7 @@ describe("Calendar Integration", function () {
         //click on right icon in date-view
         CalendarPage.clickRightNavigationIcon();
         var date = CalendarPage.getValueOfCalendar();
-        var month = parseInt(date.split("-")[1]);
+        var month = CalendarPage.getMonthByDate(date);
         expect(CalendarPage.getCurrentMonth()).toEqual(month);
     });
 });

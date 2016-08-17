@@ -1,5 +1,6 @@
 var Page = require("./Page.js");
 var ScreenshotUtils = require("../../util/ScreenshotUtils.js");
+var wdioConfig = require("../../../wdio.conf.js").config;
 
 var HomePage = Object.create(Page, {
 
@@ -28,7 +29,7 @@ var HomePage = Object.create(Page, {
      */
     openHomePage: {
         value: function () {
-            this.open("http://localhost:8080/index.html");
+            this.open(wdioConfig.baseUrl + "/index.html");
         }
     },
 
