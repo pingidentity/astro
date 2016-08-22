@@ -160,9 +160,11 @@ label {
                 }
             }
             a.undo {
+                top: 15px;
+
                 &:before {
                     content: 'X';
-                    font-size: 14px;
+                    font-size: 13px;
                 }
             }
         }
@@ -466,7 +468,7 @@ label {
         }
         .save {
             position: absolute;
-            top: 18px;
+            top: 15px;
             right: 0;
         }
     }
@@ -545,6 +547,7 @@ fieldset {
     }
     legend {
         text-transform: uppercase;
+
         .help-tooltip {
             margin: 0 5px 0 10px;
             height: 18px;
@@ -553,6 +556,7 @@ fieldset {
         }
         label {
             margin-right: 5px;
+            margin-bottom: 0;
         }
     }
     &.focused,
@@ -1799,7 +1803,7 @@ input[type=file] {
     }
     .actions {
         display: inline-block;
-        line-height: 48px;
+        margin: 12px 0 0;
 
         .toggle-container {
             display: inline-block;

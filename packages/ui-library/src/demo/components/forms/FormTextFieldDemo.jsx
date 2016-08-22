@@ -112,16 +112,19 @@ var FormTextFieldDemo = React.createClass({
         return (
             <div>
                 <div className="input-row">
-                        <FormTextField
-                            labelText="Basic (stateful)"
-                        />
+                    <FormTextField
+                        labelText="Basic (stateful)"
+                        className="input-width-medium"
+                    />
                 </div>
                 <div className="input-row">
                     <FormTextField
                         controlled={true}
                         labelText="Basic (stateless)"
                         value={this.state.statelessValue}
-                        onValueChange={this._handleStatelessValueChange} />
+                        onValueChange={this._handleStatelessValueChange}
+                        className="input-width-medium"
+                    />
                 </div>
                 <div className="input-row">
                     <FormTextField
@@ -183,7 +186,7 @@ var FormTextFieldDemo = React.createClass({
                 <div className="input-row">
                     <FormTextField
                         labelText="Read-only"
-                        defaultValue="can't touch this"
+                        value="text content cannot be edited"
                         readOnly={true}
                         className="input-width-medium"
                     />
@@ -224,6 +227,7 @@ var FormTextFieldDemo = React.createClass({
                     <FormTextField
                         labelText="Disabled field with help"
                         labelHelpText="Disabled field with help"
+                        value="text content cannot be edited"
                         disabled={true}
                         className="input-width-medium"
                     />
