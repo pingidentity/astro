@@ -2,7 +2,6 @@
     position: relative;
     display: inline-block;
 
-
     .color-picker {
         position: relative;
         display: inline-block;
@@ -68,7 +67,6 @@
                 bottom: 0;
                 left: 0;
                 right: 0;
-
                 box-sizing: border-box;
                 border: 1px solid rgba($color-black, 0.1);
 
@@ -106,22 +104,22 @@
     position: relative;
     display: inline-block;
 }
-
 .cp-saturation-white,
 .cp-saturation-black {
     position: relative;
     width: 100%;
     height: 100%;
 }
-
 .cp-saturation-white {
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#FFFFFFFF', endColorstr='#00CC9A81')";   // IE9
+    background: -ms-linear-gradient(to right, $color-white, rgba(204, 154, 129, 0));  // IE10
     background: linear-gradient(to right, $color-white, rgba(204, 154, 129, 0));
 }
-
 .cp-saturation-black {
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#00CC9A81', endColorstr='#FF000000')";   // IE9
+    background: -ms-linear-gradient(to top, $color-black, rgba(204, 154, 129, 0));  // IE10
     background: linear-gradient(to top, $color-black, rgba(204, 154, 129, 0));
 }
-
 .cp-saturation-spectrum {
     cursor: pointer;
 
@@ -142,8 +140,10 @@
         }
     }
 }
-
 .cp-hue-spectrum {
+    // IE9 only allows a start and end color. unable to produce a multiple color gradient background
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFFF0000', endColorstr='#FF0000FF')";   // IE9
+    background: -ms-linear-gradient(to bottom, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);  // IE10
     background: linear-gradient(to bottom, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);
     cursor: pointer;
 
@@ -165,28 +165,27 @@
 .react-color-picker__hue-spectrum * {
     box-sizing: border-box;
 }
-
 .react-color-picker__saturation-spectrum,
 .react-color-picker__hue-spectrum {
     position: relative;
     display: inline-block;
 }
-
 .react-color-picker__saturation-white,
 .react-color-picker__saturation-black {
     position: relative;
     width: 100%;
     height: 100%;
 }
-
 .react-color-picker__saturation-white {
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#FFFFFFFF', endColorstr='#00CC9A81')";   // IE9
+    background: -ms-linear-gradient(to right, $color-white, rgba(204, 154, 129, 0));  // IE10
     background: linear-gradient(to right, $color-white, rgba(204, 154, 129, 0));
 }
-
 .react-color-picker__saturation-black {
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#00CC9A81', endColorstr='#FF000000')";   // IE9
+    background: -ms-linear-gradient(to top, $color-black, rgba(204, 154, 129, 0));  // IE10
     background: linear-gradient(to top, $color-black, rgba(204, 154, 129, 0));
 }
-
 .react-color-picker__saturation-spectrum {
     cursor: pointer;
 
@@ -208,8 +207,10 @@
         }
     }
 }
-
 .react-color-picker__hue-spectrum {
+    // IE9 only allows a start and end color. unable to produce a multiple color gradient background
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFFF0000', endColorstr='#FF0000FF')";   // IE9
+    background: -ms-linear-gradient(to bottom, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);  // IE10
     background: linear-gradient(to bottom, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);
     cursor: pointer;
 
