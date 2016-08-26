@@ -33,6 +33,7 @@ jest.dontMock("../../../form-text-field/index.js");
 jest.dontMock("../../../form-text-field/v2.jsx");
 jest.dontMock("../../../FormLabel.jsx");
 jest.dontMock("../../../../../util/i18n/Translator.js");
+jest.dontMock("../../../FormDropDownList.jsx");
 
 describe("I18nPhoneInput", function () {
     var React = require("react"),
@@ -105,7 +106,7 @@ describe("I18nPhoneInput", function () {
     it("updates callback on country select", function () {
         var component = getComponent();
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         var canada = TestUtils.findRenderedDOMNodeWithDataId(component, "country-ca");
         var afghanistan = TestUtils.findRenderedDOMNodeWithDataId(component, "country-af");
 
@@ -123,7 +124,7 @@ describe("I18nPhoneInput", function () {
     it("gets correct country when more than one country has the same dial code", function () {
         var component = getComponent();
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         var canada = TestUtils.findRenderedDOMNodeWithDataId(component, "country-ca");
         var unitedStates = TestUtils.findRenderedDOMNodeWithDataId(component, "country-us");
 
@@ -147,14 +148,14 @@ describe("I18nPhoneInput", function () {
             open: true
         });
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         var flagInner = TestUtils.findRenderedDOMNodeWithClass(flag, "iti-flag");
 
         expect(flagInner.className).toContain("us");
 
         ReactTestUtils.Simulate.click(flag);
 
-        var noCountry = TestUtils.findRenderedDOMNodeWithDataId(component, "no-country");
+        var noCountry = TestUtils.findRenderedDOMNodeWithDataId(component, "none-option");
 
         ReactTestUtils.Simulate.click(noCountry);
         expect(component.props.onValueChange).toBeCalledWith(
@@ -195,7 +196,7 @@ describe("I18nPhoneInput", function () {
         });
         var componentRef = component.refs.I18nPhoneInputStateful;
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(componentRef, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(componentRef, "selected-option");
         // enter can, validate still not selected, hit enter, validate Canada now selected
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 65 }); // a
@@ -225,7 +226,7 @@ describe("I18nPhoneInput", function () {
         });
         var componentRef = component.refs.I18nPhoneInputStateful;
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(componentRef, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(componentRef, "selected-option");
 
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 65 }); // a
@@ -242,7 +243,7 @@ describe("I18nPhoneInput", function () {
         });
         var componentRef = component.refs.I18nPhoneInputStateful;
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(componentRef, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(componentRef, "selected-option");
 
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
         componentRef.setState({ searchTime: (componentRef.state.searchTime - 2000) }); // simulate a 2 second wait
@@ -259,7 +260,7 @@ describe("I18nPhoneInput", function () {
             searchTime: 0
         });
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
         expect(component.props.onSearch).toBeCalled();
     });
@@ -274,7 +275,7 @@ describe("I18nPhoneInput", function () {
             onCountrySearch: jest.genMockFunction()
         });
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
         expect(component.props.onCountrySearch).toBeCalled();
     });

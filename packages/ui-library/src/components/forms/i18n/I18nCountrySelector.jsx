@@ -132,7 +132,7 @@ var I18nCountrySelectorStateless = React.createClass({
     *     The clicked country item.
     */
     _handleValueChange: function (country) {
-        this.props.onValueChange(country ? country.isoNum : "" );
+        this.props.onValueChange(country.isoNum || "");
         this.props.onToggle();
     },
 

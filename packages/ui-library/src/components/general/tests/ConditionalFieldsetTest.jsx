@@ -1,8 +1,7 @@
 window.__DEV__ = true;
 
 jest.dontMock("../ConditionalFieldset.jsx");
-jest.dontMock("../../forms/form-select-field/index.js");
-jest.dontMock("../../forms/form-select-field/v2.jsx");
+jest.dontMock("../../forms/FormDropDownList.jsx");
 jest.dontMock("../../forms/FormLabel.jsx");
 jest.dontMock("../../forms/FormError.jsx");
 jest.dontMock("../../forms/FormRadioGroup.jsx");
@@ -11,7 +10,7 @@ describe("ConditionalFieldset", function () {
     var React = require("react"),
         ReactTestUtils = require("react-addons-test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        FormSelectField = require("../../forms/form-select-field").v2,
+        FormDropDownList = require("../../forms/FormDropDownList.jsx"),
         FormRadioGroup = require("../../forms/FormRadioGroup.jsx"),
         ConditionalFieldset = require("../ConditionalFieldset.jsx"),
         _ = require("underscore"),
@@ -47,14 +46,12 @@ describe("ConditionalFieldset", function () {
 
         var select = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-options");
         expect(select).toBeTruthy();
-        var formSelectField = TestUtils.findRenderedComponentWithType(component, FormSelectField);
-        expect(formSelectField).toBeTruthy();
+        var dropDownList = TestUtils.findRenderedComponentWithType(component, FormDropDownList);
+        expect(dropDownList).toBeTruthy();
 
-        var options = TestUtils.scryRenderedDOMNodesWithTag(select, "option");
+        var options = TestUtils.scryRenderedDOMNodesWithTag(dropDownList, "li");
         expect(options.length).toBe(2);
-        expect(options[0].getAttribute("value")).toBe("0");
         expect(options[0].textContent).toBe("Option 1");
-        expect(options[1].getAttribute("value")).toBe("1");
         expect(options[1].textContent).toBe("Option 2");
     });
 
@@ -94,8 +91,9 @@ describe("ConditionalFieldset", function () {
         var form2 = TestUtils.findRenderedDOMNodeWithDataId(component, "option2");
         expect(form2).toBeFalsy();
 
-        var select = TestUtils.findRenderedDOMNodeWithTag(component, "select");
-        ReactTestUtils.Simulate.change(select, { target: { value: 1 } } );
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "select-list");
+        var options = TestUtils.scryRenderedDOMNodesWithTag(select, "li");
+        ReactTestUtils.Simulate.click(options[1]);
         expect(componentRef.state.selectedIndex).toBe(1);
 
         form1 = TestUtils.findRenderedDOMNodeWithDataId(component, "option1");
@@ -140,9 +138,9 @@ describe("ConditionalFieldset", function () {
         );
         var select = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-options");
         expect(select).toBeTruthy();
-        var formSelectField = TestUtils.findRenderedComponentWithType(component, FormSelectField);
-        expect(formSelectField).toBeTruthy();
-        var options = TestUtils.scryRenderedDOMNodesWithTag(select, "option");
+        var dropDownList = TestUtils.findRenderedComponentWithType(component, FormDropDownList);
+        expect(dropDownList).toBeTruthy();
+        var options = TestUtils.scryRenderedDOMNodesWithTag(select, "li");
         expect(options.length).toBe(3);
     });
 
@@ -155,8 +153,9 @@ describe("ConditionalFieldset", function () {
             type: "select"
         });
 
-        var select = TestUtils.findRenderedDOMNodeWithTag(component, "select");
-        ReactTestUtils.Simulate.change(select, { target: { value: 1 } } );
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "select-list");
+        var options = TestUtils.scryRenderedDOMNodesWithTag(select, "li");
+        ReactTestUtils.Simulate.click(options[1]);
         expect(callback).toBeCalledWith(1);
     });
 
@@ -175,17 +174,14 @@ describe("ConditionalFieldset", function () {
         var form2 = TestUtils.findRenderedDOMNodeWithDataId(component, "option2");
         expect(form2).toBeFalsy();
 
-        var select = TestUtils.findRenderedDOMNodeWithTag(component, "select");
-        var options = TestUtils.scryRenderedDOMNodesWithTag(select, "option");
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "select-list");
+        var options = TestUtils.scryRenderedDOMNodesWithTag(select, "li");
         expect(options.length).toBe(3);
-        expect(options[0].getAttribute("value")).toBe("0");
         expect(options[0].textContent).toBe("DO NOTHING");
-        expect(options[1].getAttribute("value")).toBe("1");
         expect(options[1].textContent).toBe("Option 1");
-        expect(options[2].getAttribute("value")).toBe("2");
         expect(options[2].textContent).toBe("Option 2");
 
-        ReactTestUtils.Simulate.change(select, { target: { value: 1 } } );
+        ReactTestUtils.Simulate.click(options[1]);
         expect(componentRef.state.selectedIndex).toBe(1);
 
         form1 = TestUtils.findRenderedDOMNodeWithDataId(component, "option1");

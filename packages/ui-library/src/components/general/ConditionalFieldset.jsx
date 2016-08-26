@@ -1,6 +1,6 @@
 var React = require("react"),
     classNames = require("classnames"),
-    FormSelectField = require("../forms/form-select-field/index").v2,
+    FormDropDownList = require("../forms/FormDropDownList.jsx"),
     FormRadioGroup = require("../forms/FormRadioGroup.jsx"),
     _ = require("underscore");
 
@@ -48,6 +48,10 @@ var ConditionalFieldsetStateless = React.createClass({
         }
     },
 
+    _handleSelectValueChange: function (option) {
+        this.props.onValueChange(option.value);
+    },
+
     _getOptions: function (type) {
         var options = [];
         var index = 0;
@@ -60,15 +64,13 @@ var ConditionalFieldsetStateless = React.createClass({
                 options.push({ value: (index), label: child.props.title });
                 index = index + 1;
             });
+
             return (
-                <FormSelectField
-                    ref="options"
-                    controlled={true}
-                    data-id={dataId}
+                <FormDropDownList data-id={dataId}
                     options={options}
-                    onValueChange={this.props.onValueChange}
-                    value={this.props.selectedIndex}
-                />
+                    onValueChange={this._handleSelectValueChange}
+                    selectedOption={options[this.props.selectedIndex]}
+                    title={options[this.props.selectedIndex].label} />
             );
         } else {
             React.Children.forEach(this.props.children, function (child) {

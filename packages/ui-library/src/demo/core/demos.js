@@ -136,6 +136,13 @@ module.exports = [
                 pathToDemoSource: "demo_components_forms_FormSelectFieldDemo.jsx.html"
             },
             {
+                label: "Drop Down List",
+                demo: require("../components/forms/FormDropDownListDemo.jsx"),
+                pathToDoc: "components/forms/FormDropDownList.jsx",
+                pathToSource: "components_forms_FormDropDownList.jsx.html",
+                pathToDemoSource: "demo_components_forms_FormDropDownListDemo.jsx.html"
+            },
+            {
                 label: "Input Widths",
                 demo: require("../components/forms/FormInputWidthsDemo.jsx"),
                 pathToDemoSource: "demo_components_forms_FormInputWidthsDemo.jsx.html"

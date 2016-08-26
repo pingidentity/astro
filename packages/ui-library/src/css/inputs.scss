@@ -605,6 +605,7 @@ input[type=file] {
 .input-text,
 .input-textarea,
 .input-select,
+.input-custom-select,
 .input-file-upload,
 .input-integer,
 .input-radio,
@@ -682,7 +683,7 @@ input[type=file] {
             }
         }
     }
-    select {
+    select, .selected-option {
         appearance: none;
         border: 0;
         border-radius: 0;
@@ -742,6 +743,92 @@ input[type=file] {
                 }
             }
         }
+    }
+}
+
+.input-custom-select {
+    // prevent the highlighted child from overlapping the input border
+    padding: $borderSize;
+    .input-container {
+        .wrapper {
+            overflow: visible; //override the input-select behavior
+        }
+            &:after {
+                z-index: 1;
+            }
+
+    }
+    &:hover {
+        cursor: pointer;
+    }
+    &.open {
+        .select-list {
+            visibility: visible;
+            @include animation(fade-in 0.2s);
+        }
+        .input-container {
+
+        }
+        .selected-option {
+            .arrow {
+                @include rotate(-180deg);
+            }
+        }
+    }
+
+    .selected-option {
+         z-index: 1; // render above the input
+         width: auto;
+         border-radius: inherit;
+         height: $default-input-height - 2px;
+        div {
+            line-height: $default-input-height;
+        }
+    }
+
+    // the dropdown
+    .select-list {
+        visibility: hidden;
+        list-style: none;
+        position: relative;
+        z-index: 2; // popup so render above everything else
+        border-radius: 0 2px 2px;
+        background: $color-sonic;
+        padding: 0;
+        margin: 0 0 0 (-$borderSize); // margin-left to compensate for the padding on the parent
+        white-space: nowrap;
+        border: $borderSize solid $greyBorder;
+        max-height: 200px;
+        overflow-y: scroll;
+
+        // place menu above the input element
+        &.dropup {
+            bottom: 100%;
+            margin-bottom: (-$borderSize);
+        }
+
+        @media (max-width: 500px) { // except on small screens, where we force the dropdown width to match the input
+            white-space: normal;
+        }
+
+        // each item in dropdown
+        .select-option,
+        .none-option {
+            // Note: decided not to use line-height here for alignment because it causes issues e.g. large font-sizes will overlap, and also looks bad if one item overflows onto 2 lines
+            padding: 7px 40px 7px 10px;
+            font-size: 14px;
+
+            &:hover,
+            &.highlighted {
+                background: $hoverColor;
+            }
+        }
+    }
+
+    .selected-option,
+    .select-option,
+    .none-option {
+        text-transform: none;
     }
 }
 
@@ -1407,10 +1494,20 @@ input[type=file] {
         }
     }
     &.input-select {
-        select {
+        select, .selected-option {
             padding-left: 25px;
         }
         .input-container {
+            &:before {
+                @include requiredCss;
+                top: 5px;
+                bottom: 7px;
+                left: 5px;
+            }
+        }
+    }
+    &.input-custom-select {
+        .selected-option {
             &:before {
                 @include requiredCss;
                 top: 5px;
@@ -1810,6 +1907,11 @@ a {
             width: map-get($input-width-settings-map-select, $size) - 2px; // subtract wrapper border width
         }
     }
+    &.input-custom-select {
+        .wrapper {
+            width: map-get($input-width-settings-map-select, $size) - 2px; // subtract wrapper border width
+        }
+    }
     &.input-checkbox {
         width: map-get($input-width-settings-map-default, $size);
     }
@@ -1955,6 +2057,11 @@ label {
                 select {
                     margin: 0;
                 }
+            }
+        }
+        &.input-custom-select {
+            .selected-option {
+                margin: 0;
             }
         }
         &.input-checkbox {

@@ -30,6 +30,7 @@ jest.setMock("../i18n/countryCodes", [
 jest.dontMock("../i18n/I18nCountrySelector.jsx");
 jest.dontMock("../i18n/CountryFlagList.jsx");
 jest.dontMock("../../../util/i18n/Translator.js");
+jest.dontMock("../FormDropDownList.jsx");
 
 describe("I18nCountrySelector", function () {
     var React = require("react"),
@@ -63,7 +64,7 @@ describe("I18nCountrySelector", function () {
         var component = getComponent({
             controlled: true
         });
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         var canada = TestUtils.findRenderedDOMNodeWithDataId(component, "country-ca");
         var afghanistan = TestUtils.findRenderedDOMNodeWithDataId(component, "country-af");
 
@@ -80,7 +81,7 @@ describe("I18nCountrySelector", function () {
 
     it("stateful: updates callback on country select", function () {
         var component = getComponent();
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         var canada = TestUtils.findRenderedDOMNodeWithDataId(component, "country-ca");
         var afghanistan = TestUtils.findRenderedDOMNodeWithDataId(component, "country-af");
 
@@ -102,12 +103,12 @@ describe("I18nCountrySelector", function () {
             open: true
         });
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         var flagInner = TestUtils.findRenderedDOMNodeWithClass(flag, "iti-flag");
 
         expect(flagInner.className).toContain("us");
 
-        var noCountry = TestUtils.findRenderedDOMNodeWithDataId(component, "no-country");
+        var noCountry = TestUtils.findRenderedDOMNodeWithDataId(component, "none-option");
 
         ReactTestUtils.Simulate.click(noCountry);
         expect(component.props.onValueChange).toBeCalledWith("");
@@ -119,12 +120,12 @@ describe("I18nCountrySelector", function () {
             open: true
         });
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         var flagInner = TestUtils.findRenderedDOMNodeWithClass(flag, "iti-flag");
 
         expect(flagInner.className).toContain("us");
 
-        var noCountry = TestUtils.findRenderedDOMNodeWithDataId(component, "no-country");
+        var noCountry = TestUtils.findRenderedDOMNodeWithDataId(component, "none-option");
 
         ReactTestUtils.Simulate.click(noCountry);
         expect(component.props.onValueChange).toBeCalledWith("");
@@ -145,7 +146,7 @@ describe("I18nCountrySelector", function () {
         });
         var componentRef = component.refs.I18nCountrySelectorStateful;
         
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(componentRef, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(componentRef, "selected-option");
         // var currentCountryIso = componentRef.state.selected.iso2;
         // enter can, validate still not selected, hit enter, validate Canada now selected
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
@@ -177,7 +178,7 @@ describe("I18nCountrySelector", function () {
         });
         var componentRef = component.refs.I18nCountrySelectorStateful;
         
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(componentRef, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(componentRef, "selected-option");
 
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 65 }); // a
@@ -196,7 +197,7 @@ describe("I18nCountrySelector", function () {
             searchTime: 0
         });
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
         expect(component.props.onSearch).toBeCalled();
     });
@@ -211,7 +212,7 @@ describe("I18nCountrySelector", function () {
             onCountrySearch: jest.genMockFunction()
         });
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
         expect(component.props.onCountrySearch).toBeCalled();
     });

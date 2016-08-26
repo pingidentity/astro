@@ -1,12 +1,11 @@
 "use strict";
 
 var React = require("react"),
-    _ = require("underscore"),
-    FormSelectField = require("../forms/form-select-field"),
+    FormDropDownList = require("../forms/FormDropDownList.jsx"),
     Utils = require("../../util/Utils"),
     moment = require("moment-range"),
     Translator = require("../../util/i18n/Translator.js"),
-    cx = require("classnames");
+    classnames = require("classnames");
 
 /**
  * @callback TimePicker~onValueChange
@@ -190,11 +189,15 @@ module.exports = React.createClass({
         }
     },
 
+    _handleValueChange: function (time) {
+        this.props.onValueChange(time.value || "");
+    },
+
     render: function () {
         var id = this.props.id || this.props["data-id"];
 
         var times = this._getTimes();
-        var classes = cx("input-time", this.props.className);
+        var containerClassName = classnames("input-time", this.props.className);
         var value = this.props.value;
 
         // if a moment object, parse to human-readable
@@ -204,14 +207,25 @@ module.exports = React.createClass({
             value = hourType.hours + ":" + this._getPaddedNumber(minutes) + hourType.amPm;
         }
 
-        var props = _.defaults({
-            "data-id": id,
-            value: value,
-            options: times,
-            className: classes,
-            label: this.props.labelText
-        }, this.props);
+        var selectedTime;
+        if (value) {
+            selectedTime = times.filter(function (time) {
+                return time.value === value;
+            })[0];
+        }
 
-        return React.createElement(FormSelectField, props);
+        var noTime = { label: "--" };
+
+        return (
+            <FormDropDownList data-id={id}
+                    label={this.props.labelText}
+                    className={containerClassName}
+                    options={times}
+                    onValueChange={this._handleValueChange}
+                    selectedOption={selectedTime || noTime}
+                    validSearchCharsRegex="/[^\d:\s]+/"
+                    title={value}
+                    noneOption={noTime} />
+        );
     }
 });

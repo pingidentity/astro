@@ -36,6 +36,10 @@ jest.setMock("../i18n/countryCodes", [
 ]);
 jest.dontMock("../i18n/CountryFlagList.jsx");
 jest.dontMock("../../../util/i18n/Translator.js");
+jest.dontMock("../../../util/EventUtils.js");
+jest.dontMock("../FormDropDownList.jsx");
+jest.dontMock("../FormLabel.jsx");
+jest.dontMock("../FormError.jsx");
 
 describe("CountryFlagList", function () {
     var React = require("react"),
@@ -141,7 +145,7 @@ describe("CountryFlagList", function () {
             selectedCountryCode: selectedIso2
         });
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         var flagInner = TestUtils.findRenderedDOMNodeWithClass(flag, "iti-flag");
 
         expect(flagInner.className).toContain(selectedIso2);
@@ -155,7 +159,7 @@ describe("CountryFlagList", function () {
             selectedCountryCode: selectedIsoNum
         });
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         var flagInner = TestUtils.findRenderedDOMNodeWithClass(flag, "iti-flag");
 
         expect(flagInner.className).toContain(selectedIso2);
@@ -182,7 +186,7 @@ describe("CountryFlagList", function () {
 
     it("opens country flag list on list button click", function () {
         var component = getComponent();
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
 
         expect(component.props.onToggle.mock.calls.length).toBe(0);
 
@@ -208,7 +212,7 @@ describe("CountryFlagList", function () {
         expect(component.props.onToggle).not.toBeCalled();
 
         // click outside
-        handler({ target: { dataset: {} } });
+        handler({ target: document.body });
 
         expect(component.props.onToggle).toBeCalled();
     });
@@ -218,7 +222,7 @@ describe("CountryFlagList", function () {
         var handler = window.addEventListener.mock.calls[0][1];
 
         // click on component
-        handler({ target: { dataset: component } });
+        handler({ target: document.body });
 
         expect(component.props.onToggle).not.toBeCalled();
     });
@@ -239,7 +243,7 @@ describe("CountryFlagList", function () {
             searchTime: 0
         });
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
         expect(component.props.onSearch).toBeCalled();
         expect(component.props.onSearch.mock.calls[0][0]).toBe("c");
@@ -249,7 +253,7 @@ describe("CountryFlagList", function () {
             searchString: component.props.onSearch.mock.calls[0][0],
             searchTime: component.props.onSearch.mock.calls[0][1]
         });
-        flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 65 }); // a
         expect(component.props.onSearch.mock.calls[0][0]).toBe("ca");
     });
@@ -262,7 +266,7 @@ describe("CountryFlagList", function () {
             searchTime: 0
         });
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 13 }); // enter
         expect(component.props.onValueChange).toBeCalled();
         expect(component.props.onValueChange.mock.calls[0][0].iso2).toBe("ca");
@@ -275,7 +279,7 @@ describe("CountryFlagList", function () {
             searchTime: 0
         });
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 27 }); // esc
         expect(component.props.onSearch).toBeCalled();
         expect(component.props.onSearch.mock.calls[0][0]).toBe("");
@@ -288,7 +292,7 @@ describe("CountryFlagList", function () {
             searchTime: (Date.now() - 2000)
         });
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 65 }); // a
         expect(component.props.onSearch).toBeCalled();
         expect(component.props.onSearch.mock.calls[0][0]).toBe("a");
@@ -310,16 +314,6 @@ describe("CountryFlagList", function () {
         expect(flagItem).toBeDefined();
     });
 
-    it("flag list item triggers onClick callback on item click", function () {
-        var component = ReactTestUtils.renderIntoDocument(<CountryFlagList.Flag onClick={jest.genMockFunction()} />);
-
-        var flagItem = TestUtils.findRenderedDOMNodeWithDataId(component, "flag");
-
-        ReactTestUtils.Simulate.click(flagItem);
-
-        expect(component.props.onClick).toBeCalled();
-    });
-
     it("cycle though options with up/down arrows", function () {
         var component = getComponent({
             open: true,
@@ -328,7 +322,7 @@ describe("CountryFlagList", function () {
             searchTime: (Date.now() - 2000)
         });
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 40 }); // down arrow
         expect(component.props.onSearch).toBeCalled();
         expect(component.props.onSearch.mock.calls[0][0]).toBe("");
@@ -336,18 +330,6 @@ describe("CountryFlagList", function () {
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 38 }); // up arrow
         expect(component.props.onSearch).toBeCalled();
         expect(component.props.onSearch.mock.calls[1][2]).toBe(0); //subtract 1 from searchIndex
-    });
-
-    it("calls function for list placement on componentDidUpdate", function () {
-        var component = getComponent({
-            open: true,
-            searchIndex: 1,
-            searchString: "c",
-            searchTime: (Date.now() - 2000)
-        });
-        component._setSearchListPosition = jest.genMockFunction();
-        component.componentDidUpdate();
-        expect(component._setSearchListPosition).toBeCalled();
     });
 
     it("call component will mount", function () {

@@ -33,10 +33,11 @@ var React = require("re-react"),
 */
 
 /**
+* @deprecated The component is deprecated and subject to be removed in future library versions. See FormDropDownList control as replacement.
+*
 * @class FormSelectField
-* @desc A generic select (dropdown) component. Encapsulates common markup and designed to be a drop-in replacement.
-*       Options data may be either an array of objects with 'value' and 'label' properties or an object. Only the array
-*       will insure display order of options.
+* @desc <b>DEPRECATED</b> (see deprecate note below). A generic select (dropdown) component. Encapsulates common markup and designed to be a drop-in replacement.
+*       The array of options will insure display order of options.
 *
 * @param {string} [data-id="form-select-field"]
 *     To define the base "data-id" value for top-level HTML container.
@@ -159,6 +160,11 @@ var FormSelectFieldStateless = React.createClass({
             required: false,
             disabled: false
         };
+    },
+
+    componentWillMount: function () {
+        console.warn("** This component is deprecated and will be removed in an upcoming release. " +
+            "See the \"FormDropDownList\" component for a replacement.");
     },
 
     _handleChange: function (e) {

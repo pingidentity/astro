@@ -181,8 +181,8 @@ var I18nPhoneInputStateless = React.createClass({
     */
     _handleValueChange: function (country) {
         this.props.onValueChange({
-            countryCode: country ? country.iso2 : "",
-            dialCode: country ? country.dialCode : "",
+            countryCode: country.iso2 || "",
+            dialCode: country.dialCode || "",
             phoneNumber: this.props.phoneNumber
         });
         this.props.onToggle();

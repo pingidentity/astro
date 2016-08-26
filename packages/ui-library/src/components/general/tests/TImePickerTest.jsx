@@ -3,7 +3,7 @@ window.__DEV__ = true;
 jest.dontMock("../TimePicker.jsx");
 jest.dontMock("../../forms/form-select-field/index.js");
 jest.dontMock("../../forms/form-select-field/v2.jsx");
-jest.dontMock("../../forms/FormSelectField.jsx");
+jest.dontMock("../../forms/FormDropDownList.jsx");
 jest.dontMock("moment");
 
 describe("TimePicker", function () {
@@ -121,12 +121,13 @@ describe("TimePicker", function () {
             format: "24"
         });
 
-        var select = TestUtils.findRenderedDOMNodeWithTag(component, "select");
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "select-list");
 
-        expect(select.children.length).toEqual(24);
-        expect(select.children[0].value).toEqual("0:00");
-        expect(select.children[12].value).toEqual("12:00");
-        expect(select.children[23].value).toEqual("23:00");
+        expect(select.children.length).toEqual(25);
+        expect(select.children[0].textContent).toEqual("--");
+        expect(select.children[1].textContent).toEqual("0:00");
+        expect(select.children[13].textContent).toEqual("12:00");
+        expect(select.children[24].textContent).toEqual("23:00");
     });
 
     it("updates the value on change", function () {
@@ -135,16 +136,16 @@ describe("TimePicker", function () {
             format: "24"
         });
 
-        var select = TestUtils.findRenderedDOMNodeWithTag(component, "select");
-        var evt = {
-            target: {
-                value: "8:16"
-            }
-        };
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "select-list");
 
-        ReactTestUtils.Simulate.change(select, evt);
+        ReactTestUtils.Simulate.click(select.children[0]);
+        expect(onValueChange).toBeCalledWith("");
 
-        expect(onValueChange).toBeCalledWith(evt.target.value);
+        ReactTestUtils.Simulate.click(select.children[14]);
+        expect(onValueChange).toBeCalledWith("13:00");
+
+        ReactTestUtils.Simulate.click(select.children[24]);
+        expect(onValueChange).toBeCalledWith("23:00");
     });
 
     it("takes a `moment` object as a value", function () {
@@ -156,10 +157,10 @@ describe("TimePicker", function () {
 
         var date = new Date("April 1 2016");
         var offset = date.getTimezoneOffset() / 60;
-        var select = TestUtils.findRenderedDOMNodeWithTag(component, "select");
+        var selected = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
 
         // subtract time zone ofset from 1400 hours eg: 14 - 7 (PDT -700)
-        expect(select.value).toEqual((14 - offset) + ":00am");
+        expect(selected.textContent).toEqual((14 - offset) + ":00am");
     });
 
     it("verify default data-id", function () {

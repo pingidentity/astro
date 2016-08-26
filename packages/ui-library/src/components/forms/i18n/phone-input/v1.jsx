@@ -102,7 +102,7 @@ var I18nPhoneInput = React.createClass({
             selected: country,
             listOpen: false
         }, function () {
-            var dialCode = country ? this.state.selected.dialCode : "";
+            var dialCode = this.state.selected.dialCode || "";
             this.props.onValueChange(dialCode, this.state.phoneNumber);
         }.bind(this));
     },

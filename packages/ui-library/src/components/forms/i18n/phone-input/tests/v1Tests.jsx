@@ -32,6 +32,7 @@ jest.dontMock("../../CountryFlagList.jsx");
 jest.dontMock("../../../form-text-field/index.js");
 jest.dontMock("../../../form-text-field/v1.jsx");
 jest.dontMock("../../../../../util/i18n/Translator.js");
+jest.dontMock("../../../FormDropDownList.jsx");
 
 describe("I18nPhoneInput", function () {
     var React = require("react"),
@@ -88,7 +89,7 @@ describe("I18nPhoneInput", function () {
     it("updates callback on country select", function () {
         var component = getComponent();
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         var canada = TestUtils.findRenderedDOMNodeWithDataId(component, "country-ca");
         var afghanistan = TestUtils.findRenderedDOMNodeWithDataId(component, "country-af");
 
@@ -112,14 +113,14 @@ describe("I18nPhoneInput", function () {
             phoneNumber: phoneNumber
         });
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         var flagInner = TestUtils.findRenderedDOMNodeWithClass(flag, "iti-flag");
 
         expect(flagInner.className).toContain("us");
 
         ReactTestUtils.Simulate.click(flag);
 
-        var noCountry = TestUtils.findRenderedDOMNodeWithDataId(component, "no-country");
+        var noCountry = TestUtils.findRenderedDOMNodeWithDataId(component, "none-option");
 
         ReactTestUtils.Simulate.click(noCountry);
         expect(component.props.onValueChange).toBeCalledWith("", phoneNumber);
@@ -145,7 +146,7 @@ describe("I18nPhoneInput", function () {
     it("find and select country by typing", function () {
         var component = getComponent();
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         var currentCountryIso = component.state.selected.iso2;
         // open flag, enter can, validate still not selected, hit enter, validate Canada now selected
         ReactTestUtils.Simulate.click(flag);
@@ -177,7 +178,7 @@ describe("I18nPhoneInput", function () {
     it("find and select country by typing empty with esc", function () {
         var component = getComponent();
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         var currentCountryIso = component.state.selected.iso2;
         ReactTestUtils.Simulate.click(flag);
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
@@ -193,7 +194,7 @@ describe("I18nPhoneInput", function () {
     it("find and select country by typing empty with delay", function () {
         var component = getComponent();
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-flag");
+        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.click(flag);
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
         component.setState({ searchTime: (component.state.searchTime - 2000) }); // simulate a 2 second wait

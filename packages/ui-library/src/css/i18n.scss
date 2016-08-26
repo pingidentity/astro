@@ -42,6 +42,30 @@ $selectedFlagWidth: $flagWidth + $flagPadding + $arrowWidth + (2 * $arrowPadding
 $flagsImageName: 'flags' !default;
 $flagsImageExtension: 'png' !default;
 
+.flag-container {
+    &.input-custom-select {
+        .select-list {
+            position: absolute;
+        }
+        .input-container {
+            .wrapper {
+                height: 38px;
+                .selected-option {
+                    height: 38px;
+                    z-index: 1;
+                    position: relative;
+                    width: 42px;
+                    height: 100%;
+                    padding: 0 0 0 8px;
+                }
+                &:after {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
 .intl-tel-input {
     margin: 0 20px 20px 0;
 
@@ -50,10 +74,13 @@ $flagsImageExtension: 'png' !default;
         position: absolute;
         top: 0;
         bottom: 0;
+
     }
-    .country-list .country {
-        .dial-code:before {
-            content: '+';
+    .input-custom-select {
+        .select-list .country {
+            .dial-code:before {
+                content: '+';
+            }
         }
     }
     .input-text {
@@ -66,8 +93,7 @@ $flagsImageExtension: 'png' !default;
         height: 40px;
         width: 52px;
         background: $color-sonic;
-
-        .selected-flag {
+        .selected-option {
             padding: 0 0 0 10px;
 
             .arrow {
@@ -75,7 +101,7 @@ $flagsImageExtension: 'png' !default;
             }
         }
     }
-    .country-list .country {
+    .select-list .country {
         .country-name:before,
         .isoNum-code:before {
             margin-right: 6px;
@@ -142,38 +168,22 @@ $flagsImageExtension: 'png' !default;
         background-color: #ffc7c7;
     }
 
-    .flag-container {
-        // prevent the highlighted child from overlapping the input border
-        padding: $borderSize;
-
-        &:hover {
-            cursor: pointer;
-        }
-        &.open {
-            .country-list {
-                display: block;
-
-                @include animation(fade-in 0.2s);
-            }
-            .selected-flag {
-                .arrow {
-                    @include rotate(-180deg);
-                }
-            }
-        }
-    }
     // disable hover state when input is disabled
     input[disabled] + .flag-container:hover,
     input[readonly] + .flag-container:hover {
         cursor: default;
     }
 
-    .selected-flag {
-        z-index: 1; // render above the input
-        position: relative;
+    .input-custom-select .selected-option {
+        &:focus {
+            border-color: $color-input-fill;
+        }
+    }
+
+    .selected-option {
         width: $selectedFlagWidth;
-        // this must be full-height both for the hover highlight, and to push down the
-        // dropdown so it appears below the input
+        // // this must be full-height both for the hover highlight, and to push down the
+        // // dropdown so it appears below the input
         height: 100%;
         padding: 0 0 0 $flagPadding;
 
@@ -215,47 +225,25 @@ $flagsImageExtension: 'png' !default;
                 border-top: none;
                 border-bottom: $arrowHeight solid $arrowColor;
             }
-        }
-        &:hover {
-            .selected-flag {
-                background-color: transparent;
+
+            &:after {
+                //clear default arrow
+                content: none !important;
             }
         }
-        &:focus {
-            outline: none;
+        &:hover {
+            .selected-option {
+                background-color: transparent;
+            }
         }
     }
 
     // the dropdown
-    .country-list {
-        display: none;
-        list-style: none;
-        position: absolute;
-        z-index: 2; // popup so render above everything else
-        border-radius: 0 2px 2px;
-        background: $color-sonic;
-        padding: 0;
-        margin: 0 0 0 (-$borderSize); // margin-left to compensate for the padding on the parent
-        white-space: nowrap;
-        // box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        border: $borderSize solid $greyBorder;
-        max-height: 200px;
-        overflow-y: scroll;
-
-        // place menu above the input element
-        &.dropup {
-            bottom: 100%;
-            margin-bottom: (-$borderSize);
-        }
-
+    .select-list {
         // inline flags
         .flag {
             display: inline-block;
             width: $flagWidth;
-        }
-
-        @media (max-width: 500px) { // except on small screens, where we force the dropdown width to match the input
-            white-space: normal;
         }
 
         // the divider below the preferred countries
@@ -263,22 +251,6 @@ $flagsImageExtension: 'png' !default;
             padding-bottom: 5px;
             margin-bottom: 5px;
             border-bottom: $borderSize solid $greyBorder;
-        }
-
-        // each country item in dropdown
-        .country,
-        .no-country {
-            // Note: decided not to use line-height here for alignment because it causes issues e.g. large font-sizes will overlap, and also looks bad if one country overflows onto 2 lines
-            padding: 5px 10px;
-            // the country codes after the country names are greyed out
-            .country-code {
-                color: $greyText;
-            }
-
-            &:hover,
-            &.highlighted {
-                background: $hoverColor;
-            }
         }
 
         // spacing between country flag, name and country code

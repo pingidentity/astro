@@ -6,7 +6,8 @@ var React = require("react"),
     FormTextArea = require("./../../../components/forms/form-text-area"),
     FormTextField = require("./../../../components/forms/form-text-field"),
     FormSelectField = require("./../../../components/forms/form-select-field"),
-    FormCheckbox = require("./../../../components/forms/FormCheckbox.jsx");
+    FormCheckbox = require("./../../../components/forms/FormCheckbox.jsx"),
+    FormDropDownList = require("./../../../components/forms/FormDropDownList.jsx");
 
 /**
 * @name FormInputWidthsDemo
@@ -100,6 +101,51 @@ var FormInputWidthsDemo = React.createClass({
                     <FormSelectField value="" options={selectOptions} label="X-Small" className="input-width-xsmall" />
                     <FormSelectField value="" options={selectOptions} label="X-Small" className="input-width-xsmall" />
                     <FormSelectField value="" options={selectOptions} label="X-Small" className="input-width-xsmall" />
+                </div>
+
+                <div>
+                    <FormDropDownList selectedOption={{}} options={selectOptions}
+                            label="Full"className="input-width-full" />
+                </div>
+                <div>
+                    <FormDropDownList selectedOption={{}} options={selectOptions}
+                            label="X-Large" className="input-width-xlarge" />
+                    <FormDropDownList selectedOption={{}} options={selectOptions}
+                            label="X-Small" className="input-width-xsmall" />
+                </div>
+                <div>
+                    <FormDropDownList selectedOption={{}} options={selectOptions}
+                            label="Large" className="input-width-large" />
+                    <FormDropDownList selectedOption={{}} options={selectOptions}
+                            label="Small" className="input-width-small" />
+                </div>
+                <div>
+                    <FormDropDownList selectedOption={{}} options={selectOptions}
+                            label="Medium" className="input-width-medium" />
+                    <FormDropDownList selectedOption={{}} options={selectOptions}
+                            label="Medium" className="input-width-medium" />
+                </div>
+                <div>
+                    <FormDropDownList selectedOption={{}} options={selectOptions}
+                            label="Small" className="input-width-small" />
+                    <FormDropDownList selectedOption={{}} options={selectOptions}
+                            label="Small" className="input-width-small" />
+                    <FormDropDownList selectedOption={{}} options={selectOptions}
+                            label="Small" className="input-width-small" />
+                </div>
+                <div>
+                    <FormDropDownList selectedOption={{}} options={selectOptions}
+                            label="X-Small" className="input-width-xsmall" />
+                    <FormDropDownList selectedOption={{}} options={selectOptions}
+                            label="X-Small" className="input-width-xsmall" />
+                    <FormDropDownList selectedOption={{}} options={selectOptions}
+                            label="X-Small" className="input-width-xsmall" />
+                    <FormDropDownList selectedOption={{}} options={selectOptions}
+                            label="X-Small" className="input-width-xsmall" />
+                    <FormDropDownList selectedOption={{}} options={selectOptions}
+                            label="X-Small" className="input-width-xsmall" />
+                    <FormDropDownList selectedOption={{}} options={selectOptions}
+                            label="X-Small" className="input-width-xsmall" />
                 </div>
 
                 <br />

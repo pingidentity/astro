@@ -37,7 +37,7 @@ var TimePickerDemo = React.createClass({
                     <TimePicker
                         onValueChange={this._handleValueChange.bind(null, "a")}
                         increments={30}
-                        label="12 Hour Format"
+                        labelText="12 Hour Format"
                         value={this.state.a}
                     />
                     <br /><br />
@@ -48,7 +48,7 @@ var TimePickerDemo = React.createClass({
                         onValueChange={this._handleValueChange.bind(null, "b")}
                         increments={60}
                         format="24"
-                        label="24 Hour Format"
+                        labelText="24 Hour Format"
                         value={this.state.b}
                     />
                     <br /><br />
