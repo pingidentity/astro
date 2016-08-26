@@ -200,7 +200,7 @@ var DemoApp = React.createClass({
             name = this._getDocumentationName(),
             path = this._demoItem.pathToSource,
             demoPath = this._demoItem.pathToDemoSource,
-            watch = _.pick(this.props.nav, "openNode", "selectedNode");
+            watch = _.pick(this.props.nav, "selectedSection", "selectedNode");
 
         return (
             <div className="components-container">

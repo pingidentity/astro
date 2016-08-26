@@ -60,6 +60,8 @@ var App = React.createClass({
             return section;
         }.bind(this)));
 
+        // this.navActions.setAutocollapse(true); //Autocollapse is default disabled, uncomment this to enable it
+
         //Set up the HeaderBar
         this.headerActions.init([
             { id: "help", title: "Help", label: "Help" },

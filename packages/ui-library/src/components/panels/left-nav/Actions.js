@@ -11,7 +11,8 @@ exports.Types = keyMirror({
     NAV_BAR_SELECT_PREV: null,
     NAV_BAR_SELECT_ITEM: null,
     NAV_BAR_TOGGLE_SECTION: null,
-    NAV_BAR_INIT: null
+    NAV_BAR_INIT: null,
+    NAV_BAR_SET: null
 });
 
 /**
@@ -30,6 +31,42 @@ exports.init = function (tree) {
         tree: tree
     };
 };
+
+/**
+* @function
+* @alias Actions.set
+* @memberof LeftNavBar
+* @desc Sets value at the specified path in the state object.
+*
+* @param {string} path
+*    The path to set value at.
+* @param {*} value
+*    The value to set at path.
+*
+* @return {object}
+*    The action.
+*/
+exports.set = function (path, value) {
+    return {
+        type: exports.Types.NAV_BAR_SET,
+        path: path,
+        value: value
+    };
+};
+
+/**
+* @function
+* @alias Actions.setAutocollapse
+* @memberof LeftNavBar
+* @desc Sets whether or not autocollapse should be enabled for the LeftNavBar.
+*
+* @param {boolean} useAutocollapse
+*    Whether or not autocollapse should be used.
+*
+* @return {object}
+*    The action.
+*/
+exports.setAutocollapse = exports.set.bind(null, "autocollapse");
 
 /**
  * @alias Actions.toggleSection
@@ -53,13 +90,16 @@ exports.toggleSection = function (id) {
  * @desc This will make the specified item selected
  * @param {number|string} id
  *          The id of the item to select
+ * @param {number|string} sectionId
+*           The id of the section the item to select belongs to.
  * @returns {object}
  *          Action object
  */
-exports.selectItem = function (id) {
+exports.selectItem = function (id, sectionId) {
     return {
         type: exports.Types.NAV_BAR_SELECT_ITEM,
-        id: id
+        id: id,
+        sectionId: sectionId
     };
 };
 

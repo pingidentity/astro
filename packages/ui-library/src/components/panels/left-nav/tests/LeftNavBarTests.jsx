@@ -43,7 +43,7 @@ describe("LeftNavBar", function () {
         expect(component.props.onSectionValueChange).lastCalledWith("section-1");
 
         ReactTestUtils.Simulate.click(itemLabel);
-        expect(component.props.onItemValueChange).lastCalledWith("item-1");
+        expect(component.props.onItemValueChange).lastCalledWith("item-1", "section-1");
     });
 
     it("clicks trigger correct callback and onItemClick warning", function () {
@@ -75,7 +75,7 @@ describe("LeftNavBar", function () {
         expect(component.props.onSectionValueChange).lastCalledWith("section-1");
 
         ReactTestUtils.Simulate.click(itemLabel);
-        expect(component.props.onItemClick).lastCalledWith("item-1");
+        expect(component.props.onItemClick).lastCalledWith("item-1", "section-1");
         expect(console.warn).toBeCalledWith(
             "Deprecated: use onItemValueChange instead of onItemClick. Support for onItemClick " +
             "will be removed in next version");
@@ -109,7 +109,7 @@ describe("LeftNavBar", function () {
         expect(component.props.onSectionClick).lastCalledWith("section-1");
 
         ReactTestUtils.Simulate.click(itemLabel);
-        expect(component.props.onItemValueChange).lastCalledWith("item-1");
+        expect(component.props.onItemValueChange).lastCalledWith("item-1", "section-1");
         expect(console.warn).toBeCalledWith(
             "Deprecated: use onSectionValueChange instead of onSectionClick. Support for onSectionClick " +
             "will be removed in next version");
@@ -123,18 +123,6 @@ describe("LeftNavBar", function () {
 
         expect(children.length).toEqual(1);
         expect(children[0].textContent).toEqual("Item 1");
-    });
-
-    it("renders specified open as open", function () {
-        var wrapper = getWrappedComponent();
-        var component = wrapper.refs.target;
-        var section1 = TestUtils.findRenderedDOMNodeWithDataId(component, "section-1-menu");
-        var section2 = TestUtils.findRenderedDOMNodeWithDataId(component, "section-2-menu");
-
-        wrapper.sendProps({ openNode: "section-1" });
-
-        expect(section1.parentNode.className).toContain("open");
-        expect(section2.parentNode.className).not.toContain("open");
     });
 
     it("detaches animation listener after re-render", function () {
@@ -182,9 +170,68 @@ describe("LeftNavBar", function () {
 
     //just here to satisfy code coverage
     it("gets new selected item", function () {
-        var wrapper = getWrappedComponent({ openNode: "section-1", selectedNode: "item-1" });
+        var wrapper = getWrappedComponent({ selectedSection: "section-1", selectedNode: "item-1" });
 
-        wrapper.sendProps({ openNode: "section-2", selectedNode: "item-2" });
-        wrapper.sendProps({ openNode: "section-1", selectedNode: "item-1" });
+        wrapper.sendProps({ selectedSection: "section-2", selectedNode: "item-2" });
+        wrapper.sendProps({ selectedSection: "section-1", selectedNode: "item-1" });
+    });
+
+    it("closes previously opened section when new section opened and autocollapse enabled", function () {
+        var wrapper = getWrappedComponent({ autocollapse: true });
+        var component = wrapper.refs.target;
+        var section1 = TestUtils.findRenderedDOMNodeWithDataId(component, "section-1-menu");
+        var section2 = TestUtils.findRenderedDOMNodeWithDataId(component, "section-2-menu");
+
+        wrapper.sendProps({ openSections: { "section-1": true } });
+
+        expect(section1.parentNode.className).toContain("open");
+        expect(section2.parentNode.className).not.toContain("open");
+
+        wrapper.sendProps({ openSections: { "section-1": false, "section-2": true } });
+
+        expect(section1.parentNode.className).not.toContain("open");
+        expect(section2.parentNode.className).toContain("open");
+    });
+
+    it("keeps previously opened sections open when new section opened and autocollapse disabled", function () {
+        var wrapper = getWrappedComponent();
+        var component = wrapper.refs.target;
+        var section1 = TestUtils.findRenderedDOMNodeWithDataId(component, "section-1-menu");
+        var section2 = TestUtils.findRenderedDOMNodeWithDataId(component, "section-2-menu");
+
+        wrapper.sendProps({ openSections: { "section-1": true } });
+
+        expect(section1.parentNode.className).toContain("open");
+        expect(section2.parentNode.className).not.toContain("open");
+
+        wrapper.sendProps({ openSections: { "section-1": true, "section-2": true } });
+
+        expect(section1.parentNode.className).toContain("open");
+        expect(section2.parentNode.className).toContain("open");
+    });
+
+    [true, false].forEach(function (autocollapse) {
+        it("renders specified open as open", function () {
+            var wrapper = getWrappedComponent({ autocollapse: autocollapse });
+            var component = wrapper.refs.target;
+            var section1 = TestUtils.findRenderedDOMNodeWithDataId(component, "section-1-menu");
+            var section2 = TestUtils.findRenderedDOMNodeWithDataId(component, "section-2-menu");
+
+            wrapper.sendProps({ openSections: { "section-1": true } });
+
+            expect(section1.parentNode.className).toContain("open");
+            expect(section2.parentNode.className).not.toContain("open");
+        });
+
+        it("selectedSection is not set when all sections are closed", function () {
+            var wrapper = getWrappedComponent({ autocollapse: autocollapse });
+            var component = wrapper.refs.target;
+            var section1 = TestUtils.findRenderedDOMNodeWithDataId(component, "section-1-menu");
+            var section2 = TestUtils.findRenderedDOMNodeWithDataId(component, "section-2-menu");
+
+            expect(section1.parentNode.className).not.toContain("open");
+            expect(section2.parentNode.className).not.toContain("open");
+            expect(component.props.selectedSection).toBeFalsy();
+        });
     });
 });

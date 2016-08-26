@@ -1,21 +1,24 @@
 var Actions = require("./Actions.js"),
     deepClone = require("clone"),
-    _ = require("underscore");
+    _ = require("underscore"),
+    update = require("re-mutable");
 
 var initialState = {
-    tree: []
+    tree: [],
+    openSections: {},
+    autocollapse: false
 };
 
 /**
  * @function LeftNavBar#Reducer~findFirstChildIdUnlessSelected
- * @desc Returns the id of the openNode's first child unless state.selectedNode belongs to the openNode.
+ * @desc Returns the id of the selectedSection's first child unless state.selectedNode belongs to the selectedSection.
  * @param {object} state
  *          The state object
  * @returns {string}
  *          The id of the first child
  */
 function findFirstChildIdUnlessSelected (state) {
-    var section = _.findWhere(state.tree, { id: state.openNode });
+    var section = _.findWhere(state.tree, { id: state.selectedSection });
 
     if (section && section.children) {
         if (_.findWhere(section.children, { id: state.selectedNode })) {
@@ -23,6 +26,15 @@ function findFirstChildIdUnlessSelected (state) {
         }
         return section.children[0].id;
     }
+}
+
+function closeAllNotSelected (state, selectedId) {
+    for (var sectionId in state.openSections) {
+        if (sectionId!== selectedId) {
+            state = update.set(state, ["openSections", sectionId], false);
+        }
+    }
+    return state;
 }
 
 /**
@@ -33,9 +45,11 @@ function findFirstChildIdUnlessSelected (state) {
  *          State object (will be mutated so must be a clone!)
  * @param {number} offset
  *          The number of positions to offset the selected Item by
+ * @returns {object}
+ *          The updated state object.
  */
 function selectByOffset (state, offset) {
-    var sectionIndex = _.findIndex(state.tree, { id: state.openNode });
+    var sectionIndex = _.findIndex(state.tree, { id: state.selectedSection });
     var itemIndex = _.findIndex(state.tree[sectionIndex].children, { id: state.selectedNode });
     var moveSection = (offset > 0 && itemIndex === (state.tree[sectionIndex].children.length - 1)) ||
                       (offset < 0 && itemIndex === 0);
@@ -44,37 +58,56 @@ function selectByOffset (state, offset) {
     if (moveSection) {
         //previous on the first item or next on the last wont work
         if ((sectionIndex === 0 && offset < 0) || ((sectionIndex === state.tree.length - 1) && offset > 0)) {
-            return;
+            return state;
         }
 
         sectionIndex += offset;
         itemIndex = offset < 0 ? state.tree[sectionIndex].children.length : -1;
     }
 
-    state.openNode = state.tree[sectionIndex].id;
+    state.selectedSection = state.tree[sectionIndex].id;
     state.selectedNode = state.tree[sectionIndex].children[itemIndex + offset].id;
+    state = update.set(state, ["openSections", state.tree[sectionIndex].id], true);
+
+    if (state.autocollapse) {
+        state = closeAllNotSelected(state, state.selectedSection);
+    }
+
+    return state;
 }
 
 module.exports = function (state, action) {
     var nextState = _.clone(state);
 
     switch (action.type) {
+        case Actions.Types.NAV_BAR_SET:
+            nextState = update.set(nextState, action.path, action.value);
+            break;
         case Actions.Types.NAV_BAR_SELECT_NEXT:
-            selectByOffset(nextState, 1);
+            nextState = selectByOffset(nextState, 1);
             break;
         case Actions.Types.NAV_BAR_SELECT_PREV:
-            selectByOffset(nextState, -1);
+            nextState = selectByOffset(nextState, -1);
             break;
         case Actions.Types.NAV_BAR_SELECT_ITEM:
             nextState.selectedNode = action.id;
+            nextState.selectedSection = action.sectionId;
             break;
         case Actions.Types.NAV_BAR_TOGGLE_SECTION:
-            nextState.openNode = null;
+            nextState = update.set(nextState, ["openSections", action.id], !state.openSections[action.id]);
 
-            if (state.openNode !== action.id) {
-                nextState.openNode = action.id;
-                nextState.selectedNode = findFirstChildIdUnlessSelected(nextState);
+            if (state.autocollapse) {
+                nextState = closeAllNotSelected(nextState, action.id);
             }
+
+            // Auto-select the first child node of a newly opened section
+            if (state.autocollapse || !state.autocollapse && !state.openSections[action.id]) {
+                if (state.selectedSection !== action.id) {
+                    nextState.selectedSection = action.id;
+                    nextState.selectedNode = findFirstChildIdUnlessSelected(nextState);
+                }
+            }
+
             break;
         case Actions.Types.NAV_BAR_INIT:
             nextState.tree = deepClone(action.tree);

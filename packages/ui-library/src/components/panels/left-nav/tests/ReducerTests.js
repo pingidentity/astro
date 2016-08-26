@@ -5,7 +5,8 @@ jest.dontMock("../Actions.js");
 
 describe("LeftNavBar-Reducer", function () {
     var Reducer = require("../Reducer.js"),
-        Actions = require("../Actions.js");
+        Actions = require("../Actions.js"),
+        _ = require("underscore");
 
     function getData () {
         return [
@@ -22,59 +23,161 @@ describe("LeftNavBar-Reducer", function () {
         ];
     }
 
-    function getInitialState () {
-        return Reducer(Reducer(null, {}), Actions.init(getData()));
+    function getInitialState (opts) {
+        return Reducer(Reducer(_.defaults({
+            tree: [],
+            openSections: {}
+        }, opts), {}), Actions.init(getData()));
     }
 
-    it("toggles item", function () {
-        var state = Reducer(getInitialState(), Actions.toggleSection("section-1"));
-        expect(state.openNode).toBe("section-1");
+    it("sets autocollapse", function () {
+        var state = Reducer(getInitialState(), Actions.setAutocollapse(true));
+        expect(state.autocollapse).toBe(true);
+
+        state = Reducer(state, Actions.setAutocollapse(false));
+        expect(state.autocollapse).toBe(false);
+    });
+
+    it("keeps track of openSections", function () {
+        //Autocollapse disabled
+        var state = Reducer(getInitialState({ autocollapse: false }), {});
+        expect(state.openSections).toEqual({});
+
+        state = Reducer(state, Actions.toggleSection("section-1"));
+        expect(state.openSections).toEqual({ "section-1": true });
 
         state = Reducer(state, Actions.toggleSection("section-2"));
-        expect(state.openNode).toBe("section-2");
+        expect(state.openSections).toEqual({ "section-1": true, "section-2": true });
+
+        state = Reducer(state, Actions.toggleSection("section-1"));
+        expect(state.openSections).toEqual({ "section-1": false, "section-2": true });
 
         state = Reducer(state, Actions.toggleSection("section-2"));
-        expect(state.openNode).toBe(null);
+        expect(state.openSections).toEqual({ "section-1": false, "section-2": false });
+
+        //Autocollapse enabled
+        var state = Reducer(getInitialState({ autocollapse: true }), {});
+        expect(state.openSections).toEqual({});
+
+        state = Reducer(state, Actions.toggleSection("section-1"));
+        expect(state.openSections).toEqual({ "section-1": true });
+
+        state = Reducer(state, Actions.toggleSection("section-2"));
+        expect(state.openSections).toEqual({ "section-1": false, "section-2": true });
+
+        state = Reducer(state, Actions.toggleSection("section-1"));
+        expect(state.openSections).toEqual({ "section-1": true, "section-2": false });
+
+        state = Reducer(state, Actions.toggleSection("section-2"));
+        expect(state.openSections).toEqual({ "section-1": false, "section-2": true });
     });
 
-    it("selects item", function () {
-        var state = Reducer(getInitialState(), Actions.selectItem("item-2.2"));
-        expect(state.selectedNode).toBe("item-2.2");
-    });
+    [true, false].forEach(function (autocollapse) {
+        it("selects item", function () {
+            var state = Reducer(getInitialState({ autocollapse: autocollapse }),
+                Actions.selectItem("item-2.2", "section-2"));
+            expect(state.selectedNode).toBe("item-2.2");
+        });
 
-    it("next on last item does nothing", function () {
-        var state = Reducer(getInitialState(), Actions.toggleSection("section-2"));
-        state = Reducer(state, Actions.selectItem("item-2.2"));
+        it("toggles section", function () {
+            var state = Reducer(getInitialState({ autocollapse: autocollapse }), Actions.toggleSection("section-1"));
+            expect(state.selectedSection).toBe("section-1");
 
-        //it's the last item, nothing changes
-        state = Reducer(state, Actions.selectNextItem());
-        expect(state.selectedNode).toBe("item-2.2");
-    });
+            state = Reducer(state, Actions.toggleSection("section-2"));
+            expect(state.selectedSection).toBe("section-2");
 
-    it("select previous", function () {
-        var state = Reducer(getInitialState(), Actions.toggleSection("section-2"));
-        state = Reducer(state, Actions.selectItem("item-2.2"));
+            state = Reducer(state, Actions.toggleSection("section-2"));
+            expect(state.selectedSection).toBe("section-2");
+        });
 
-        state = Reducer(state, Actions.selectPrevItem());
-        expect(state.selectedNode).toBe("item-2.1");
-    });
+        it("autoselects first item of newly opened section", function () {
+            var state = Reducer(getInitialState({ autocollapse: autocollapse }), Actions.toggleSection("section-1"));
+            expect(state.selectedSection).toBe("section-1");
+            expect(state.selectedNode).toBe("item-1.1");
 
-    it("select previous moves to previous section", function () {
-        var state = Reducer(getInitialState(), Actions.toggleSection("section-2"));
-        state = Reducer(state, Actions.selectItem("item-2.1"));
+            state = Reducer(state, Actions.toggleSection("section-2"));
+            expect(state.selectedSection).toBe("section-2");
+            expect(state.selectedNode).toBe("item-2.1");
+        });
 
-        state = Reducer(state, Actions.selectPrevItem());
-        expect(state.selectedNode).toBe("item-1.2");
-        expect(state.openNode).toBe("section-1");
-    });
+        it("remains on selected section and node when collapsing section", function () {
+            var state = Reducer(getInitialState({ autocollapse: autocollapse }), Actions.toggleSection("section-1"));
+            expect(state.selectedSection).toBe("section-1");
 
-    it("select previous when first item is selected does nothing", function () {
-        var state = Reducer(getInitialState(), Actions.toggleSection("section-1"));
-        state = Reducer(state, Actions.selectItem("item-1.1"));
+            state = Reducer(state, Actions.toggleSection("section-2"));
+            expect(state.selectedSection).toBe("section-2");
 
-        state = Reducer(state, Actions.selectPrevItem());
-        expect(state.selectedNode).toBe("item-1.1");
-        expect(state.openNode).toBe("section-1");
+            state = Reducer(state, Actions.selectItem("item-2.2", "section-2"));
+            expect(state.selectedNode).toBe("item-2.2");
+
+            state = Reducer(state, Actions.toggleSection("section-2"));
+            expect(state.selectedSection).toBe("section-2");
+            expect(state.selectedNode).toBe("item-2.2");
+        });
+
+        it("select next", function () {
+            var state = Reducer(getInitialState({ autocollapse: autocollapse }), Actions.toggleSection("section-1"));
+            state = Reducer(state, Actions.selectItem("item-1.1", "section-1"));
+            expect(state.selectedNode).toBe("item-1.1");
+
+            state = Reducer(state, Actions.selectNextItem());
+            expect(state.selectedNode).toBe("item-1.2");
+        });
+
+        it("select next moves to next section", function () {
+            var state = Reducer(getInitialState({ autocollapse: autocollapse }), Actions.toggleSection("section-1"));
+            state = Reducer(state, Actions.selectItem("item-1.2", "section-1"));
+            expect(state.selectedNode).toBe("item-1.2");
+            expect(state.selectedSection).toBe("section-1");
+
+            state = Reducer(state, Actions.selectNextItem());
+            expect(state.selectedNode).toBe("item-2.1");
+            expect(state.selectedSection).toBe("section-2");
+        });
+
+        it("select next on last item does nothing", function () {
+            var state = Reducer(getInitialState({ autocollapse: autocollapse }), Actions.toggleSection("section-2"));
+            state = Reducer(state, Actions.selectItem("item-2.2", "section-2"));
+            expect(state.selectedNode).toBe("item-2.2");
+            expect(state.selectedSection).toBe("section-2");
+
+            //it's the last item, nothing changes
+            state = Reducer(state, Actions.selectNextItem());
+            expect(state.selectedNode).toBe("item-2.2");
+            expect(state.selectedSection).toBe("section-2");
+        });
+
+        it("select previous", function () {
+            var state = Reducer(getInitialState({ autocollapse: autocollapse }), Actions.toggleSection("section-2"));
+            state = Reducer(state, Actions.selectItem("item-2.2", "section-2"));
+            expect(state.selectedNode).toBe("item-2.2");
+
+            state = Reducer(state, Actions.selectPrevItem());
+            expect(state.selectedNode).toBe("item-2.1");
+        });
+
+        it("select previous moves to previous section", function () {
+            var state = Reducer(getInitialState({ autocollapse: autocollapse }), Actions.toggleSection("section-2"));
+            state = Reducer(state, Actions.selectItem("item-2.1", "section-2"));
+            expect(state.selectedNode).toBe("item-2.1");
+            expect(state.selectedSection).toBe("section-2");
+
+            state = Reducer(state, Actions.selectPrevItem());
+            expect(state.selectedNode).toBe("item-1.2");
+            expect(state.selectedSection).toBe("section-1");
+        });
+
+        it("select previous when first item is selected does nothing", function () {
+            var state = Reducer(getInitialState({ autocollapse: autocollapse }), Actions.toggleSection("section-1"));
+            state = Reducer(state, Actions.selectItem("item-1.1", "section-1"));
+            expect(state.selectedNode).toBe("item-1.1");
+            expect(state.selectedSection).toBe("section-1");
+
+            //it's the first item, nothing changes
+            state = Reducer(state, Actions.selectPrevItem());
+            expect(state.selectedNode).toBe("item-1.1");
+            expect(state.selectedSection).toBe("section-1");
+        });
     });
 });
 

@@ -24,7 +24,7 @@
     "redux": "3.0.5",
     "redux-thunk": "1.0.0",
     "reselect": "2.5.1",
-    "ui-library": "http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library/1.8.0/ui-library-1.8.0.tar.gz",
+    "ui-library": "http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library/2.1.0-SNAPSHOT/ui-library-2.1.0-SNAPSHOT.tar.gz",
     "underscore": "1.8.3"
   },
   "devDependencies": {

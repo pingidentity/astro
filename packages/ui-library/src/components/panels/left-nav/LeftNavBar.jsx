@@ -10,7 +10,7 @@ var React = require("re-react"),
  * @desc An object describing a leaf in the LeftNav
  * @property {string} label
  *              The label of the node
- * @property {string} id
+ * @property {string|number} id
  *              A unique string identifier.  This value will be passed back to the onItemValueChange callback.
  */
 
@@ -18,7 +18,7 @@ var React = require("re-react"),
  * @typedef {object} LeftNavBar#Section
  * @property {string} label
  *              The label of the section
- * @property {string} id
+ * @property {string|number} id
  *              A unique string identifier.  This value will be passed back to the onSectionValueChange callback.
  * @property {LeftNavBar#Node[]} [children]
  *              An optional array of children under this section
@@ -26,14 +26,16 @@ var React = require("re-react"),
 
 /**
  * @callback LeftNavBar~onSectionValueChange
- * @param {string} id
+ * @param {string|number} id
  *             The id of the item that was clicked
  */
 
 /**
  * @callback LeftNavBar~onItemValueChange
- * @param {string} id
+ * @param {string|number} id
  *             The id of the item that was clicked
+ * @param {string|number} sectionId
+ *             The id of the section the item that was clicked belongs to.
  */
 
 /**
@@ -57,9 +59,15 @@ var React = require("re-react"),
  *          A prop which describes the structure of the nav tree.  This will be an array of
  *          Section objects, each of which may have an array of Node objects as its children.
  *          Please refer to the example below.
- * @param {object} [openNode]
+ * @param {string|number} [selectedNode]
+ *          The id of the selected node.
+ * @param {string|number} [selectedSection]
+ *          The id of the selected section.
+ * @param {object} [openSections={}]
  *          A hash map of ids and their open state. This is used internally by the Reducer to maintain
  *          expand/collapse state.
+ * @param {boolean} [autocollapse=false]
+ *          Whether or not the sections should autocollapse.
  * @param {LeftNavBar~onSectionValueChange} [onSectionValueChange]
  *          A callback which will be excuted when any section node is clicked. The callback will be given 1 parameter
  *          equal to the id of the item clicked.
@@ -84,7 +92,9 @@ var LeftNavBar = React.createClass({
         "data-id": React.PropTypes.string,
         tree: React.PropTypes.array.isRequired.affectsRendering,
         selectedNode: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).affectsRendering,
-        openNode: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).affectsRendering,
+        selectedSection: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).affectsRendering,
+        openSections: React.PropTypes.object.affectsRendering,
+        autocollapse: React.PropTypes.bool,
         onSectionClick: React.PropTypes.func,
         onItemClick: React.PropTypes.func,
         onSectionValueChange: React.PropTypes.func,
@@ -103,12 +113,13 @@ var LeftNavBar = React.createClass({
     _renderSection: function (section) {
         var itemclick = this.props.onItemClick || this.props.onItemValueChange;
         var sectionclick = this.props.onSectionClick || this.props.onSectionValueChange;
+
         return (
             <LeftNavSection {...section} key={section.id} data-id={section.id}
                     selectedNode={this.props.selectedNode}
                     onItemValueChange={itemclick}
                     onSectionValueChange={sectionclick}
-                    open={this.props.openNode === section.id} />);
+                    open={this.props.openSections[section.id]} />);
     },
 
     _handleResize: function () {
@@ -148,7 +159,9 @@ var LeftNavBar = React.createClass({
 
     getDefaultProps: function () {
         return {
-            "data-id": "left-nav-bar"
+            "data-id": "left-nav-bar",
+            openSections: {},
+            autocollapse: false
         };
     },
 
@@ -169,7 +182,8 @@ var LeftNavBar = React.createClass({
 
         if (!prevProps ||
             prevProps.selectedNode !== this.props.selectedNode ||
-            prevProps.openNode !== this.props.openNode)
+            prevProps.selectedSection !== this.props.selectedSection ||
+            !_.isEqual(prevProps.openSections, this.props.openSections))
         {
             var parent = ReactDOM.findDOMNode(this.refs.container);
             var itemSelectors = parent.getElementsByClassName("highlighted");
@@ -182,11 +196,12 @@ var LeftNavBar = React.createClass({
                 var copyrightDims = ReactDOM.findDOMNode(this.refs.nav).getElementsByClassName("copyright")[0]
                     .getBoundingClientRect();
                 var parentDims = parent.getBoundingClientRect();
+                var sectionOpen = this.props.selectedSection && this.props.openSections[this.props.selectedSection];
 
                 style = {
                     top: parseInt(dims.top - parentDims.top + parent.scrollTop),
-                    height: this.props.openNode ? parseInt(dims.height) : 0,
-                    opacity: this.props.openNode ? 1 : 0
+                    height: sectionOpen ? parseInt(dims.height) : 0,
+                    opacity: sectionOpen ? 1 : 0
                 };
 
                 //if the selected item is outside the visible area of the navbar, page down
@@ -201,9 +216,10 @@ var LeftNavBar = React.createClass({
 
             //since the old menu will be collapsing, we need to calculate how much height is going to disappear so that
             //the selector ends up in the right place.
-            if (prevProps && this.props.openNode && prevProps.openNode && this.props.openNode !== prevProps.openNode) {
-                var oldIndex = _.findIndex(this.props.tree, { id: prevProps.openNode });
-                var newIndex = _.findIndex(this.props.tree, { id: this.props.openNode });
+            if (prevProps && this.props.selectedSection && prevProps.selectedSection &&
+                this.props.selectedSection !== prevProps.selectedSection) {
+                var oldIndex = _.findIndex(this.props.tree, { id: prevProps.selectedSection });
+                var newIndex = _.findIndex(this.props.tree, { id: this.props.selectedSection });
 
                 if (newIndex > oldIndex) {
                     var oldUl = ReactDOM.findDOMNode(this.refs.container).getElementsByClassName("menu")[oldIndex];
@@ -282,8 +298,8 @@ var LeftNavSection = React.createClass({
      * Instead of using bind to create a partial after ever render, just use the data-id to pass the
      * right id back to the click handler.
      */
-    _handleItemClick: function (id) {
-        this.props.onItemValueChange(id);
+    _handleItemClick: function (id, sectionId) {
+        this.props.onItemValueChange(id, sectionId);
     },
 
     _handleSectionClick: function (e) {
@@ -315,7 +331,8 @@ var LeftNavSection = React.createClass({
                         };
                         return (
                             <li key={i} className={classnames(itemClassName)}>
-                                <a data-id={item.id + "-label"} onClick={this._handleItemClick.bind(null, item.id)}>
+                                <a data-id={item.id + "-label"}
+                                        onClick={this._handleItemClick.bind(null, item.id, this.props.id)}>
                                     {item.icon ? (<span className={"icon-" + item.icon}></span>) : null}{item.label}
                                 </a>
                             </li>);
