@@ -50,7 +50,7 @@ var DemoApp = React.createClass({
             path: path
         });
     },
-    
+
     /**
      * @method
      * @name DemoApp#_getSourceUrl
@@ -133,8 +133,13 @@ var DemoApp = React.createClass({
 
         //Set up the HeaderBar
         this.headerActions.init([
-            { id: "help", url: this._getDocumentationUrl("index"), title: "Documentation", label: "JSoc" },
-            { id: "cog", children: [{ id: "cog", label: "Cog" }] }
+            {
+                id: "help",
+                iconSrc: "icon-help",
+                url: this._getDocumentationUrl("index"),
+                title: "Documentation", label: "JSoc"
+            },
+            { id: "cog", iconClassName: "icon-cog", children: [{ id: "cog", label: "Cog" }] }
         ]);
 
         //Watch arrow keys and map them to the corresponding actions

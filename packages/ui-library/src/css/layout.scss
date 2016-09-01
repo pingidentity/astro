@@ -94,11 +94,18 @@ $layout-nav-width-offset: 15px;
                 text-decoration: none;
             }
         }
-        [class^='icon-'],
-        [class*=' icon-'] {
+        .icon {
             display: inline-block;
             height: $item-size;
             width: $item-size;
+        }
+        img {
+            &.icon {
+                height: auto;
+                width: auto;
+                max-height: $item-size;
+                max-width: $item-size;
+            }
         }
     }
     .product-menu {

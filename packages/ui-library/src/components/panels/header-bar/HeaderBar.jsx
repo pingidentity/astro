@@ -1,6 +1,7 @@
 var React = require("re-react"),
     ReactDOM = require("react-dom"),
     EventUtils = require("../../../util/EventUtils.js"),
+    classnames = require("classnames"),
     _ = require("underscore");
 
 /**
@@ -139,7 +140,7 @@ module.exports = React.createClass({
      * the clicked on nav item.  There is a performance overhead of creating partials on every render.
      */
     _handleNavClick: function (e) {
-        this.props.onItemValueChange(e.target.getAttribute("data-id"));
+        this.props.onItemValueChange(e.currentTarget.getAttribute("data-id"));
     },
 
     render: function () {
@@ -191,6 +192,10 @@ module.exports = React.createClass({
  *          This may be "" or "_blank"
  * @param {string} [url]
  *          If provided the NavItem will be a clickable link instead of executing a callback
+ * @param {string} [iconClassName]
+ *          The className for the menu icon. Takes priority over the iconSrc prop.
+ * @param {string} [iconSrc]
+ *          Allows the passage of an image url (most likely an svg) for the icon.
  * @param {boolean} [showMenu=false]
  *          Menu state, while this is defined, it's managed internally to this component and doesn't require the
  *          developer to do anything when they use the headerbar.
@@ -206,7 +211,21 @@ var NavItem = React.createClass({
     },
 
     _handleMenuClick: function (e) {
-        this.props.onMenuValueChange(e.target.getAttribute("data-id"), this.props.id);
+        this.props.onMenuValueChange(e.currentTarget.getAttribute("data-id"), this.props.id);
+    },
+
+
+    _getIcon: function (item) {
+        if (item.iconClassName) {
+            return (
+                <span className={classnames("icon", item.iconClassName)}/>
+            );
+        }
+        else if (item.iconSrc) {
+            return (
+                <img src={item.iconSrc} className="icon"/>
+            );
+        }
     },
 
     getDefaultProps: function () {
@@ -217,12 +236,14 @@ var NavItem = React.createClass({
     },
 
     render: function () {
+
         return (
             <li>
                  <a onClick={this.props.onClick} href={this.props.url}
+                        data-id={this.props["data-id"] || this.props.id}
                         title={this.props.title}
                         target={this.props.target}>
-                     <span data-id={this.props["data-id"]} className={"icon-" + this.props.id}></span>
+                     {this._getIcon(this.props)}
                  </a>
                  { this.props.children && this.props.showMenu &&
                      <ul className="product-menu show">
@@ -230,7 +251,10 @@ var NavItem = React.createClass({
                         this.props.children.map(function (item) {
                             return (
                                 <li key={item.id} onClick={this._handleMenuClick} data-id={item.id}>
-                                    <a href={item.url}><span className={"icon-" + item.id} />{item.label}</a>
+                                    <a href={item.url}>
+                                        {this._getIcon(item)}
+                                        <span>{item.label}</span>
+                                    </a>
                                 </li>);
                         }.bind(this))
                      }

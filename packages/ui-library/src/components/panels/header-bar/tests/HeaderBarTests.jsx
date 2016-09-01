@@ -80,4 +80,32 @@ describe("HeaderBar", function () {
         logo = TestUtils.findRenderedDOMNodeWithDataId(component, "header-site-logo");
         expect(logo).toBeFalsy();
     });
+
+    it("renders icon with iconClassName", function () {
+        var wrapper = getWrappedComponent({ siteLogo: "blah" });
+        var component = wrapper.refs.target;
+
+        var icon = TestUtils.findRenderedDOMNodeWithClass(component, "icon");
+        expect(icon).toBeFalsy();
+
+        wrapper.sendProps({ tree: [
+                                { id: "help", iconClassName: "icon-help", url: "http://www.yahoo.com" }
+        ] });
+        var icon = TestUtils.findRenderedDOMNodeWithClass(component, "icon");
+        expect(icon).toBeTruthy();
+    });
+
+    it("renders icon with iconSrc", function () {
+        var wrapper = getWrappedComponent({ siteLogo: "blah" });
+        var component = wrapper.refs.target;
+
+        var icon = TestUtils.findRenderedDOMNodeWithClass(component, "icon");
+        expect(icon).toBeFalsy();
+
+        wrapper.sendProps({ tree: [
+                                { id: "help", iconSrc: "http://somesite.com/logo.png", url: "http://www.yahoo.com" }
+        ] });
+        var icon = TestUtils.findRenderedDOMNodeWithClass(component, "icon");
+        expect(icon).toBeTruthy();
+    });
 });

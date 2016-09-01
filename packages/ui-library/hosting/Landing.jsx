@@ -63,6 +63,7 @@ var LandingPage = React.createClass({
                         headerBarTree: [
                             {
                                 id: "help",
+                                iconClassName: "icon-help",
                                 title: "Documentation",
                                 url: latestVersion + "/build-doc/ui-library/" + latestVersion + "/index.html"
                             }
@@ -85,6 +86,7 @@ var LandingPage = React.createClass({
                         headerBarTree: [
                             {
                                 id: "help",
+                                iconClassName: "icon-help",
                                 title: "Documentation"
                             }
                         ],
