@@ -10,7 +10,7 @@ var FormCheckboxDemo = React.createClass({
     getInitialState: function () {
         var initialState = {};
 
-        for (var i=1; i<=10; i+=1) {
+        for (var i=1; i<=11; i+=1) {
             initialState["checkboxChecked" + i] = Math.random() < 0.5;
         }
 
@@ -84,7 +84,7 @@ var FormCheckboxDemo = React.createClass({
                 </div>
                 <div className="input-row">
                     <label className="detached">
-                        Example of Inline Options
+                        Example of Inline Options together and alone
                     </label>
                     <FormCheckbox
                         label="Inline Checkbox"
@@ -102,6 +102,14 @@ var FormCheckboxDemo = React.createClass({
                         label="Inline Checkbox"
                         onChange={this._onChange.bind(this, 10)}
                         checked={this.state.checkboxChecked10}
+                        className="inline"
+                    />
+                </div>
+                <div className="input-row">
+                    <FormCheckbox
+                        label="Single Inline Checkbox"
+                        onChange={this._onChange.bind(this, 11)}
+                        checked={this.state.checkboxChecked11}
                         className="inline"
                     />
                 </div>
