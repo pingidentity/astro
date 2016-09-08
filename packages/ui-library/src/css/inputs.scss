@@ -839,7 +839,8 @@ input[type=file] {
 
 .input-file-upload {
     position: relative;
-    display: block;
+    display: inline-block;
+    width: 100%;
 
     &.no-label {
         margin-top: 0;
@@ -882,31 +883,37 @@ input[type=file] {
         .file-name {
             font-size: 14px;
             line-height: 1em;
-            margin: 0 20px 0 0;
+            margin: 10px 20px 0 0;
             color: $color-midnight;
-            display: block;
             .icon-file {
                 display: none;
             }
         }
         // within a details tooltip, login modal
         &.stacked {
+            .file-info {
+                margin-bottom: 0;
+            }
             .file-name {
                 vertical-align: top;
                 max-width: 250px;
+                display: block;
 
                 @include text-truncate;
+                a.file-remove {
+                    margin-bottom: 0;
+                }
             }
         }
     }
     &.file-selected {
-        .button.inline,
         .file-size {
             display: none;
         }
         .file-info {
             position: relative;
-            float: left;
+            display: inline-block;
+            margin-bottom: 10px;
             .icon-file {
                 font-size: 10px;
                 padding-right: 5px;
@@ -915,9 +922,16 @@ input[type=file] {
             &:before {
                 display: none;
             }
+            &.stacked {
+                margin-bottom: 0;
+                a.file-remove {
+                    margin-bottom: 0;
+                }
+            }
         }
         a.file-remove {
             display: inline-block;
+            margin-bottom: 10px;
         }
     }
     &.image-upload {
@@ -1006,6 +1020,9 @@ input[type=file] {
             font-size: 13px;
             span:first-child {
                 display: block;
+            }
+            .max-size {
+                text-transform: none;
             }
         }
         .image-types {

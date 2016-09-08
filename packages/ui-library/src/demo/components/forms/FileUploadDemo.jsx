@@ -108,50 +108,50 @@ var FileUploadDemo = React.createClass({
                     <label>
                         <span className="label-text">File Upload</span>
                     </label>
-                    <FileUpload onError={this._onError} accept="" labelSelect="Choose a File"
-                            labelRemove="Remove a File" />
+                    <FileUpload
+                        onError={this._onError}
+                        accept=""
+                        labelSelect="Choose a File"
+                        labelRemove="Remove" />
                 </div>
 
-                <a onClick={this._toggleTooltip}>Stacked File Name in a DetailsTooltip</a>
-                <DetailsTooltip
-                    positionClassName="top right"
-                    labelClassName="my-css-class"
-                    title="File Upload in a Details Tooltip"
-                    open={this.state.tooltipOpen}
-                    onToggle={this._toggleTooltip}>
+                <div className="input-row">
+                    <a onClick={this._toggleTooltip}>Stacked File Name in a DetailsTooltip</a>
+                    <DetailsTooltip
+                        positionClassName="top right"
+                        labelClassName="my-css-class"
+                        title="File Upload in a Details Tooltip"
+                        open={this.state.tooltipOpen}
+                        onToggle={this._toggleTooltip}>
 
-                    <div className="input-row">
-                        <label>
-                            <span className="label-text">File Upload</span>
-                        </label>
+                        <div className="input-row">
+                            <label>
+                                <span className="label-text">File Upload</span>
+                            </label>
 
-                        <FileUpload
-                            onError={this._onError}
-                            data-id="uploadedFile"
-                            accept=""
-                            buttonText="Choose a File"
-                            stacked={true}
-                            labelSelect="Choose a File"
-                            labelRemove="Remove" />
-                    </div>
+                            <FileUpload
+                                onError={this._onError}
+                                data-id="uploadedFile"
+                                accept=""
+                                buttonText="Choose a File"
+                                stacked={true}
+                                labelSelect="Choose a File"
+                                labelRemove="Remove" />
+                        </div>
 
-                    <div className="buttons" data-id="delete-confirmation">
-                        <button
-                                type="button"
-                                data-id="cancel-action"
-                                className="secondary"
-                                onClick={this._toggleTooltip} >
-                            Cancel
-                        </button>
-                        <button
+                        <div className="buttons" data-id="delete-confirmation">
+                            <button
                                 type="button"
                                 data-id="confirm-action"
                                 className="primary"
                                 onClick={this._toggleTooltip} >
-                            Confirm
-                        </button>
-                    </div>
-                </DetailsTooltip>
+                                Confirm
+                            </button>
+                            <br />
+                            <a className="cancel" onClick={this._toggleTooltip}>Cancel</a>
+                        </div>
+                    </DetailsTooltip>
+                </div>
 
             </div>
 
