@@ -135,7 +135,7 @@ var DemoApp = React.createClass({
         this.headerActions.init([
             {
                 id: "help",
-                iconSrc: "icon-help",
+                iconClassName: "icon-help",
                 url: this._getDocumentationUrl("index"),
                 title: "Documentation", label: "JSoc"
             },
