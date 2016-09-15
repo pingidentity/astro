@@ -165,12 +165,14 @@ label {
             }
             a.undo {
                 top: 15px;
+                line-height: 1em;
 
                 @include transition($default-input-transition);
 
                 &:before {
                     content: 'X';
                     font-size: 13px;
+                    line-height: 1em;
                 }
             }
         }
@@ -1108,8 +1110,8 @@ input[type=file] {
             width: $toggle-width;
 
             &:after {
-                height: $toggle-diameter - 2;
-                width: $toggle-diameter - 2;
+                height: $toggle-diameter;
+                width: $toggle-diameter;
             }
         }
         &.selected {
@@ -1820,9 +1822,19 @@ input[type=file] {
     &.input-text,
     &.input-textarea,
     &.input-multivalues,
-    &.input-checkbox,
     &.input-select {
         .input-container {
+            @include opacity($disabled-opacity);
+        }
+        .label-text {
+            span {
+                @include opacity($disabled-opacity);
+            }
+        }
+    }
+
+    &.input-checkbox {
+        .icon {
             @include opacity($disabled-opacity);
         }
         .label-text {
@@ -1982,6 +1994,7 @@ input[type=file] {
     .actions {
         display: inline-block;
         margin: 12px 0 0;
+        font-size: 14px;
 
         .toggle-container {
             display: inline-block;
@@ -2315,19 +2328,81 @@ label {
     }
 }
 
+
 .input-menu-button {
+    position: relative;
+    display: inline-block;
+
+    .description {
+        position: absolute;
+        top: 0;
+        padding: 20px;
+        color: $color-rhino;
+    }
     .menu {
+        display: block;
+        position: absolute;
+        top: 41px;
+        left: 0;
+        z-index: 10;
+        border: 1px solid $color-input-border;
+        background: $color-white;
+
+        @include border-radius(3px);
+        @include animation(fade-in 0.2s);
+
         .options-title {
-            margin: 20px 0 0;
+            margin: 20px 0 7px 22px;
         }
         .options {
+            max-height: 285px;
+            min-width: 202px;
+            overflow: auto;
+
             a {
-                padding-right: 15px;
-                &:last-child {
-                    padding-right: 0;
+                display: block;
+                position: relative;
+                padding: 8px 15px 7px 22px;
+                line-height: 20px;
+
+                @include transition($default-input-transition);
+
+                &:before {
+                    font-family: $icon-font;
+                    content: '\2b';
+                    font-size: 10px;
+                    position: absolute;
+                    left: 7px;
+                    top: 8px;
+                    color: $color-white;
+
+                    @include transition($default-input-transition);
+                }
+                &:hover {
+                    background: $color-elderly;
+                    text-decoration: none;
+
+                    &:before {
+                        color: inherit;
+                    }
                 }
             }
-
+        }
+        &:before,
+        &:after {
+            content: '';
+            position: absolute;
+            border-style: solid;
+            border-width: 10px;
+            left: 15px;
+        }
+        &:before {
+            top: -21px;
+            border-color: transparent transparent $color-input-border transparent;
+        }
+        &:after {
+            top: -20px;
+            border-color: transparent transparent $color-white transparent;
         }
     }
 }

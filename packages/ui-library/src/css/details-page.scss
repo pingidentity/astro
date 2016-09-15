@@ -15,6 +15,18 @@
         height: 20px;
         margin: 0 0 0 10px;
 
+        button,
+        input[type=button],
+        .button,
+        .input-toggle,
+        .status {
+            display: inline-block;
+            vertical-align: top;
+            margin: 30px 0 0 20px;
+
+            @include transform(translateY(-50%));
+        }
+
         &.status-open {
             padding-right: 200px;
         }

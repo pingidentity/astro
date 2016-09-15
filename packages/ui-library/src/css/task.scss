@@ -219,6 +219,7 @@
         margin: 20px 0 0;
         text-align: right;
 
+
         input[type=button],
         button,
         .button {
@@ -238,18 +239,6 @@
 
         &.extended {
             width: 400px;
-        }
-    }
-}
-
-.task-submit {
-    float: right;
-
-    input[type=button] {
-        margin-right: 9px;
-
-        &:last-of-type {
-            margin-right: 0;
         }
     }
 }

@@ -43,7 +43,7 @@
         max-width: $max-modal-width;
         min-width: 360px;
         font-family: $font-pn-regular;
-        
+
         @include transform(translateX(-50%));
     }
     .modal-header {
@@ -67,7 +67,7 @@
         }
         .close-modal {
             position: absolute;
-            top: 9px;
+            top: 13px;
             right: 15px;
             line-height: 1em;
             color: transparent;
@@ -194,6 +194,7 @@
                 right: 0;
                 text-align: center;
                 font-size: 22px;
+                line-height: 1;
                 z-index: 1;
                 color: $color-warning-text;
             }

@@ -1,3 +1,4 @@
+
 /*eslint-disable valid-jsdoc*/
 
 //For some very odd reason linting picks up the "/**"  JSDoc definitions of the @alias as having a JSDoc syntax error. So we disable.

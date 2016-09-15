@@ -69,7 +69,7 @@ var DetailsTooltipDemo = React.createClass({
     },
 
     render: function () {
-        
+
         var secondaryArr = [
             { value: this._handleCancel8, label: "One" },
             { value: this._handleCancel8, label: "Two" }
@@ -77,7 +77,7 @@ var DetailsTooltipDemo = React.createClass({
         var primaryArr = [
             { value: this._handleConfirm8, label: "Save" }
         ];
-        
+
         return (
             <div className="controls">
                 <DetailsTooltip
@@ -241,7 +241,7 @@ var DetailsTooltipDemo = React.createClass({
                     </div>
                 </DetailsTooltip>
                 <div>{this.state.status6}</div>
-                
+
                 <br/>
                 <DetailsTooltip
                     label="Alert styling with three buttons"
@@ -274,7 +274,7 @@ var DetailsTooltipDemo = React.createClass({
                     </div>
                 </DetailsTooltip>
                 <div>{this.state.status7}</div>
-                
+
                 <br/>
                 <DetailsTooltip
                     label="Test passing buttons"

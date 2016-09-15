@@ -183,6 +183,7 @@
             .buttons {
                 margin: 25px 0 0;
                 text-align: center;
+                white-space: nowrap;
 
                 button,
                 .button,
@@ -202,7 +203,6 @@
                     margin-right: 10px;
                 }
                 a {
-                    color: $color-active-blue;
                     text-transform: none;
                     &.secondary {
                         color: $color-rhino;

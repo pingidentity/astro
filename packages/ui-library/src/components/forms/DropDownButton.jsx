@@ -160,9 +160,7 @@ var Stateless = React.createClass({
 
         var that = this,
             styles = cx(
-                "input-menu-button", {
-                    open: this.props.open
-                },
+                "input-menu-button",
                 this.props.className
             ),
             content = null,
