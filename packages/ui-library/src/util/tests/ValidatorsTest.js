@@ -14,6 +14,7 @@ describe("Validators", function () {
             expect(Validators.isValidEmail("graham.mitchell@pingidentity.com.and.some.other.stuff")).toBe(true);
             expect(Validators.isValidEmail("gmitchell@pingidentity.anewtldwith18chars")).toBe(true);
             expect(Validators.isValidEmail("GMITCHELL@PingIdentity.Anewtldwith18chars")).toBe(true);
+            expect(Validators.isValidEmail("p1sqe+ort+2016-09-16-13-35-44.572@pingidentity.com")).toBe(true);
         });
 
         it("returns false for invalid email addresses", function () {
