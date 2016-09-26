@@ -49,55 +49,62 @@ module.exports = React.createClass({
         var containerClass = classnames(this.props.className, "input-file-upload", {
             "image-upload": this.props.showThumbnail,
             "file-selected": fileSelected,
-            disabled: this.props.disabled
+            disabled: this.props.disabled,
+            "form-error": !!this.props.errorMessage
         });
 
         return (
             <div className={containerClass} data-id={this.props["data-id"]}>
                 <FormLabel className={classnames({ "form-error": this.props.errorMessage }) }>
                     <ImagePreview
-                            show={this.props.showThumbnail}
-                            title={this.props.title}
-                            src={this.props.thumbnailSrc} />
-
+                        show={this.props.showThumbnail}
+                        title={this.props.title}
+                        src={this.props.thumbnailSrc}
+                    />
                     <input
-                            disabled={this.props.disabled}
-                            type="file"
-                            ref="fileInput"
-                            name={this.props.fileName}
-                            accept={this.props.accept}
-                            onChange={this.props.onChange}
-                            data-id={this.props["data-id"] + "-input"} />
+                        disabled={this.props.disabled}
+                        type="file"
+                        ref="fileInput"
+                        name={this.props.fileName}
+                        accept={this.props.accept}
+                        onChange={this.props.onChange}
+                        data-id={this.props["data-id"] + "-input"} />
 
                     <FileRestrictions
                             show={this.props.showThumbnail}
                             data-id={this.props["data-id"] + "-restrictions"}
                             labelMaxFileSize={this.props.labelMaxFileSize}
-                            labelAcceptedFileTypes={this.props.labelAcceptedFileTypes} />
-
+                            labelAcceptedFileTypes={this.props.labelAcceptedFileTypes}
+                    />
                     <button className="inline choose">
                         {(fileSelected && this.props.labelSelectOther) || this.props.labelSelect}
                     </button>
-
-                    <FormError
+                    {this.props.errorMessage && (
+                        <FormError.Icon data-id={this.props["data-id"] + "-errormessage-icon"} />
+                    )}
+                    {this.props.errorMessage && (
+                        <FormError.Message
                             value={this.props.errorMessage}
-                            data-id={this.props["data-id"] + "-errormessage"} />
+                            data-id={this.props["data-id"] + "-errormessage"}
+                        />
+                    )}
                 </FormLabel>
 
                 <div className={classnames("file-info", { stacked: this.props.stacked })}>
                     <Filename
-                            show={this.props.showFilename}
-                            data-id={this.props["data-id"] + "-fileName"}
-                            value={this.props.fileName} />
-
+                        show={this.props.showFilename}
+                        data-id={this.props["data-id"] + "-fileName"}
+                        value={this.props.fileName}
+                    />
                     <a className="file-remove" ref="remove" onClick={this.props.onRemove}>
                         {this.props.labelRemove}
                     </a>
                 </div>
 
                 <AcceptMessage
-                        data-id={this.props["data-id"] + "-filesAcceptedMessage"}
-                        label={this.props.filesAcceptedMessage} />
+                    data-id={this.props["data-id"] + "-filesAcceptedMessage"}
+                    label={this.props.filesAcceptedMessage}
+                />
             </div>
         );
     }

@@ -4,6 +4,7 @@ jest.dontMock("./common.jsx");
 jest.dontMock("../v1.jsx");
 jest.dontMock("../index.js");
 jest.dontMock("../../FormLabel.jsx");
+jest.dontMock("../../FormError.jsx");
 jest.dontMock("../../../tooltips/HelpHint.jsx");
 
 describe("FormTextField", function () {

@@ -355,8 +355,15 @@ var FormTextField = React.createClass({
 
                     {this.props.controls}
 
-                    <FormError value={this.state.errorMessage}
-                        data-id={this.props.referenceName + "_errormessage"} />
+                    {this.state.errorMessage && (
+                        <FormError.Icon data-id={this.props.referenceName + "_errormessage-icon"} />
+                    )}
+                    {this.state.errorMessage && (
+                        <FormError.Message
+                            value={this.state.errorMessage}
+                            data-id={this.props.referenceName + "_errormessage"}
+                        />
+                    )}
                 </span>
                 {this.props.children}
             </label>

@@ -1,6 +1,8 @@
+
 jest.dontMock("../v2.jsx");
 jest.dontMock("./common.jsx");
 jest.dontMock("../../FormLabel.jsx");
+jest.dontMock("../../FormError.jsx");
 
 describe("FormTextArea", function () {
 

@@ -1,5 +1,5 @@
 var React = require("react"),
-    FormTextField = require("../../../components/forms/form-text-field");
+    FormTextField = require("../../../components/forms/form-text-field").v2;
 
 
 /**
@@ -194,8 +194,10 @@ var FormTextFieldDemo = React.createClass({
                 <div className="input-row">
                     <FormTextField
                         labelText="With error message"
-                        errorMessage="error!"
+                        errorMessage="The error message appears when hovering over the error icon or when focus is
+                            placed on the input."
                         className="input-width-medium"
+                        required={true}
                     />
                 </div>
                 <div className="input-row">

@@ -291,11 +291,12 @@ var Stateless = React.createClass({
 
         return (
             <FormLabel
-                    className={className}
-                    ref="container"
-                    data-id={id}
-                    value={this.props.labelText}
-                    hint={this.props.labelHelpText}>
+                className={className}
+                ref="container"
+                data-id={id}
+                value={this.props.labelText}
+                hint={this.props.labelHelpText}>
+
                 <span className="input-container">
                     <input
                         className={this.props.inputClassName}
@@ -316,24 +317,42 @@ var Stateless = React.createClass({
                         disabled={this.props.disabled}
                         autoFocus={this.props.autoFocus}
                     />
-                    { this.props.showReveal &&
-                        <a data-id="reveal" onClick={this.props.onToggleReveal}
+                    {this.props.showReveal && (
+                        <a
+                            data-id="reveal"
+                            onClick={this.props.onToggleReveal}
                             className={classnames("password-show-button", {
                                 "icon-view-hidden": !this.props.reveal,
                                 "icon-view": this.props.reveal
-                            })} />
-                    }
-                    { this.props.showUndo &&
-                        <a data-id="undo" className="undo"
-                            onClick={this.props.onUndo}>{undo}</a>}
-                    { this.props.showSave &&
-                        <a data-id="save" className="save"
-                            onClick={this.props.onSave}>{save}</a>}
-                    { this.props.controls }
-
-                    <FormError value={this.props.errorMessage}
-                        data-id={this.props["data-id"] + "-error-message"} />
-
+                            })}
+                        />
+                    )}
+                    {this.props.showUndo && (
+                        <a
+                            data-id="undo"
+                            className="undo"
+                            onClick={this.props.onUndo}>
+                            {undo}
+                        </a>
+                    )}
+                    {this.props.showSave && (
+                        <a
+                            data-id="save"
+                            className="save"
+                            onClick={this.props.onSave}>
+                            {save}
+                        </a>
+                    )}
+                    {this.props.controls}
+                    {this.props.errorMessage && (
+                        <FormError.Icon data-id={this.props["data-id"] + "-error-message-icon"} />
+                    )}
+                    {this.props.errorMessage && (
+                        <FormError.Message
+                            value={this.props.errorMessage}
+                            data-id={this.props["data-id"] + "-error-message"}
+                        />
+                    )}
                 </span>
             </FormLabel>
         );

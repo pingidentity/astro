@@ -1,7 +1,8 @@
 window.__DEV__ = true;
 
-jest.dontMock("../v1.jsx");
 jest.dontMock("./common.jsx");
+jest.dontMock("../v1.jsx");
+jest.dontMock("../../FormError.jsx");
 
 describe("FormTextArea", function () {
 
@@ -89,7 +90,7 @@ describe("FormTextArea", function () {
         console.warn = jest.genMockFunction();
 
         getComponent();
-    
+
         expect(console.warn).toBeCalledWith(
             "** This version of the FormTextArea is deprecated and will be removed in the next release");
     });

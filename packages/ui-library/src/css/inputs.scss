@@ -4,6 +4,7 @@ $default-input-transition: all 0.3s;
 $default-input-height: 40px;
 $default-input-font-size: 14px;
 $borderSize: 1px !default;
+$default-input-border-radius: 2px;
 
 
 // CORE INPUT STYLES -------------------------------------------------------------------------------
@@ -53,6 +54,7 @@ input[type=time],
 input[type=url],
 input[type=week],
 textarea {
+    display: block;
     color: $color-input-text;
     background-color: $color-input-fill;
     border: 1px solid $color-input-fill;
@@ -62,7 +64,7 @@ textarea {
     outline: none;
     font-family: $font-pn-regular;
 
-    @include border-radius(3px);
+    @include border-radius($default-input-border-radius);
     @include transition($default-input-transition);
 
     &:visited {
@@ -97,10 +99,11 @@ label {
     font-family: $font-pn-regular;
     cursor: default;
 
+
     .label-text,
     .input-container {
-        position: relative;
         display: block;
+        position: relative;
 
         @include transition($default-input-transition);
 
@@ -163,6 +166,8 @@ label {
             a.undo {
                 top: 15px;
 
+                @include transition($default-input-transition);
+
                 &:before {
                     content: 'X';
                     font-size: 13px;
@@ -201,7 +206,6 @@ label {
     &.input-textarea {
         textarea {
             padding: 12px 15px;
-            margin-top: 2px;
             line-height: 1.2em;
         }
         &.extended {
@@ -279,7 +283,7 @@ label {
                 width: $checkbox-size;
                 line-height: $checkbox-size;
 
-                @include border-radius(2px);
+                @include border-radius($default-input-border-radius);
             }
             &:after {
                 content: '\79';
@@ -648,14 +652,14 @@ input[type=file] {
         .wrapper {
             position: relative;
             clear: both;
-            display: inline-block;
+            display: block;
             height: $default-input-height;
             overflow: hidden;
             cursor: pointer;
             border: 1px solid $color-input-fill;
             box-sizing: border-box;
 
-            @include border-radius(4px);
+            @include border-radius($default-input-border-radius);
 
             &:after {
                 position: absolute;
@@ -688,7 +692,8 @@ input[type=file] {
             }
         }
     }
-    select, .selected-option {
+    select,
+    .selected-option {
         appearance: none;
         border: 0;
         border-radius: 0;
@@ -758,9 +763,9 @@ input[type=file] {
         .wrapper {
             overflow: visible; //override the input-select behavior
         }
-            &:after {
-                z-index: 1;
-            }
+        &:after {
+            z-index: 1;
+        }
 
     }
     &:hover {
@@ -769,10 +774,8 @@ input[type=file] {
     &.open {
         .select-list {
             visibility: visible;
-            @include animation(fade-in 0.2s);
-        }
-        .input-container {
 
+            @include animation(fade-in 0.2s);
         }
         .selected-option {
             .arrow {
@@ -782,10 +785,11 @@ input[type=file] {
     }
 
     .selected-option {
-         z-index: 1; // render above the input
-         width: auto;
-         border-radius: inherit;
-         height: $default-input-height - 2px;
+        z-index: 1; // render above the input
+        width: auto;
+        border-radius: inherit;
+        height: $default-input-height - 2px;
+
         div {
             line-height: $default-input-height;
         }
@@ -797,7 +801,7 @@ input[type=file] {
         list-style: none;
         position: relative;
         z-index: 2; // popup so render above everything else
-        border-radius: 0 2px 2px;
+        border-radius: 0 $default-input-border-radius $default-input-border-radius;
         background: $color-sonic;
         padding: 0;
         margin: 0 0 0 (-$borderSize); // margin-left to compensate for the padding on the parent
@@ -844,11 +848,6 @@ input[type=file] {
 
     &.no-label {
         margin-top: 0;
-    }
-    .form-error.help-tooltip {
-        .tooltip-text {
-            top: 7px;
-        }
     }
     input[type=file] {
         position: absolute;
@@ -947,7 +946,7 @@ input[type=file] {
             }
         }
         .image-icon {
-            display: inline-block;
+            display: block;
             width: 67px;
             height: 67px;
             border: 1px solid $color-stratus;
@@ -1004,7 +1003,9 @@ input[type=file] {
             @include border-radius(4px);
 
             img {
+                display: block;
                 width: $img-width;
+                border: 1px solid $color-timberwolf;
             }
         }
         .choose {
@@ -1030,12 +1031,6 @@ input[type=file] {
             position: absolute;
             top: 65px;
             left: $img-width + 15px;
-        }
-        .form-error-message {
-            .tooltip-text {
-                min-width: 250px;
-                margin-left: 20px;
-            }
         }
         .file-info {
             display: block;
@@ -1194,7 +1189,7 @@ input[type=file] {
             -webkit-touch-callout: none;
             z-index: 2;
 
-            @include border-radius(2px);
+            @include border-radius($default-input-border-radius);
             @include user-select(none);
         }
         .today-btn {
@@ -1308,8 +1303,7 @@ input[type=file] {
     }
 }
 
-.input-integer,
-.form-integer-container {
+.input-integer {
     position: relative;
 
     &:after,
@@ -1317,6 +1311,7 @@ input[type=file] {
         right: 40px;
     }
     .input-container {
+        width: 100%;
         position: relative;
         display: inline-block;
         vertical-align: bottom;
@@ -1362,6 +1357,8 @@ input[type=file] {
                 @include rotate(180deg);
             }
         }
+
+        @include transition($default-input-transition);
     }
     input[type=text] {
         padding-right: 40px;
@@ -1499,9 +1496,9 @@ input[type=file] {
         .input-container {
             &:before {
                 @include requiredCss;
-                top: 7px;
-                bottom: 8px;
-                left: 6px;
+                top: 5px;
+                bottom: 5px;
+                left: 5px;
             }
         }
     }
@@ -1516,7 +1513,8 @@ input[type=file] {
         }
     }
     &.input-select {
-        select, .selected-option {
+        select,
+        .selected-option {
             padding-left: 25px;
         }
         .input-container {
@@ -1533,7 +1531,7 @@ input[type=file] {
             &:before {
                 @include requiredCss;
                 top: 5px;
-                bottom: 7px;
+                bottom: 5px;
                 left: 5px;
             }
         }
@@ -1603,20 +1601,61 @@ input[type=file] {
 }
 
 .form-error {
-    &.input-text,
-    &.input-integer {
+    $icon-size: 16px;
+    $icon-margin: 5px;
+    $icon-spacing: $icon-size + $icon-margin;
+    $input-width: calc(100% - #{$icon-spacing});
+
+    @mixin errorDisplayCss {
+        ~ .form-error-message {
+            display: block;
+        }
+    }
+
+    @include keyframes('fade-down-in') {
+        0% {
+            opacity: 0;
+            margin-top: -4px;
+        }
+        100% {
+            opacity: 1;
+            margin-top: 0;
+        }
+    }
+
+    &.input-text {
         input[type=text] {
             border-color: $color-input-error;
+
+            &:focus {
+                @include errorDisplayCss;
+            }
         }
     }
     &.input-textarea {
         textarea {
             border-color: $color-input-error;
+
+            &:focus {
+                @include errorDisplayCss;
+            }
+        }
+        .form-error-icon {
+            top: $icon-margin;
         }
     }
     &.input-select {
         .wrapper {
             border-color: $color-input-error;
+
+            &:hover {
+                @include errorDisplayCss;
+            }
+        }
+        select {
+            &:focus {
+                @include errorDisplayCss;
+            }
         }
     }
     &.input-toggle {
@@ -1643,6 +1682,127 @@ input[type=file] {
     &.intl-tel-input {
         input[type=text] {
             border-color: $color-input-error;
+
+            &:focus {
+                @include errorDisplayCss;
+            }
+        }
+    }
+    &.input-file-upload {
+        .form-error-icon {
+            top: 5px;
+            right: -$icon-spacing;
+        }
+        .form-error-message {
+            top: calc(100% + 5px);
+
+            @include border-radius($default-input-border-radius);
+        }
+
+        &.image-upload {
+            .form-error-icon {
+                right: -35px;
+            }
+            .form-error-message {
+                top: 100%;
+
+                @include border-radius(0 0 $default-input-border-radius $default-input-border-radius);
+            }
+        }
+        input {
+            &:focus {
+                @include errorDisplayCss;
+            }
+        }
+    }
+    &.input-integer {
+        .integer-controls {
+            right: 34px;
+        }
+        a.undo {
+            right: 61px;
+        }
+        &:focus {
+            @include errorDisplayCss;
+        }
+    }
+
+    .form-error-icon {
+        position: absolute;
+        top: round(($default-input-height - $icon-size) / 2);
+        right: -$icon-spacing;
+        cursor: pointer;
+
+        &:before {
+            position: absolute;
+            right: 0;
+            content: '!';
+            font-family: $icon-font;
+            color: $color-critical-red;
+            height: $icon-size;
+            width: $icon-size;
+            font-size: $icon-size;
+            line-height: 1em;
+        }
+        &:hover {
+            @include errorDisplayCss;
+        }
+    }
+
+    .form-error-message {
+        position: absolute;
+        top: calc(100% - 1px);
+        left: 0;
+        right: 0;
+        display: none;
+        z-index: 1;
+        padding: 15px;
+        box-sizing: border-box;
+        min-width: 169px;
+        background-color: $color-critical-red;
+        color: $color-white;
+        text-transform: none;
+        -webkit-backface-visibility: hidden; // keeps animation from flickering in Chrome
+
+        @include border-radius(0 0 $default-input-border-radius $default-input-border-radius);
+        @include animation(fade-down-in 0.2s);
+    }
+
+    &.input-width-xsmall,
+    &.input-width-small,
+    &.input-width-medium,
+    &.input-width-large,
+    &.input-width-xlarge,
+    &.input-width-full {
+        .form-error-message {
+            right: $icon-spacing;
+        }
+        .form-error-icon {
+            right: 0;
+        }
+        &.input-text {
+            input[type=text] {
+                width: $input-width;
+            }
+        }
+        &.input-textarea {
+            textarea {
+                width: $input-width;
+            }
+        }
+        &.input-select {
+            .wrapper {
+                width: $input-width;
+            }
+        }
+    }
+    &.required {
+        .input-container,
+        .wrapper,
+        .selected-option {
+            &:before {
+                background-color: $color-critical-red;
+            }
         }
     }
 }
@@ -1924,15 +2084,9 @@ a {
             width: map-get($input-width-settings-map-textarea, $size);
         }
     }
-    &.input-select {
-        select {
-            width: map-get($input-width-settings-map-select, $size) - 2px; // subtract wrapper border width
-        }
-    }
-    &.input-custom-select {
-        .wrapper {
-            width: map-get($input-width-settings-map-select, $size) - 2px; // subtract wrapper border width
-        }
+    &.input-select select,
+    &.input-custom-select .wrapper {
+        width: map-get($input-width-settings-map-select, $size) - 2px; // subtract wrapper border width
     }
     &.input-checkbox {
         width: map-get($input-width-settings-map-default, $size);

@@ -1,18 +1,19 @@
 window.__DEV__ = true;
 
-jest.dontMock("../../../tooltips/HelpHint.jsx");
+jest.dontMock("../v2.jsx");
+jest.dontMock("../FormSearchBox.jsx");
+jest.dontMock("../v2-constants.js");
+jest.dontMock("../v2-reducer.js");
+jest.dontMock("../v2-stateless.jsx");
+jest.dontMock("../v2-stateful.jsx");
 jest.dontMock("../../form-text-field/index.js");
 jest.dontMock("../../form-text-field/v2.jsx");
 jest.dontMock("../../FormRadioGroup.jsx");
 jest.dontMock("../../FormCheckbox.jsx");
+jest.dontMock("../../FormError.jsx");
 jest.dontMock("../../FormLabel.jsx");
 jest.dontMock("../../../general/If.jsx");
-jest.dontMock("../v2.jsx");
-jest.dontMock("../FormSearchBox.jsx");
-jest.dontMock("../v2-stateless.jsx");
-jest.dontMock("../v2-stateful.jsx");
-jest.dontMock("../v2-reducer.js");
-jest.dontMock("../v2-constants.js");
+jest.dontMock("../../../tooltips/HelpHint.jsx");
 jest.dontMock("../../../../util/FilterUtils.js");
 jest.dontMock("../../../../util/KeyboardUtils.js");
 
@@ -57,16 +58,16 @@ describe("SelectionList", function () {
 
         return ReactTestUtils.renderIntoDocument(<SelectionList {...opts} />);
     }
-    
+
     it("should render the component as single selection list by default", function () {
         var component = getComponent();
- 
+
         var list = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list");
         expect(ReactTestUtils.isDOMComponent(list)).toBeTruthy();
 
         var radioGroup = TestUtils.findRenderedComponentWithType(component, FormRadioGroup);
         expect(radioGroup).toBeDefined();
-        
+
         var radios = TestUtils.scryRenderedDOMNodesWithTag(radioGroup, "input");
         expect(radios.length).toBe(listItems.length);
     });
@@ -82,11 +83,11 @@ describe("SelectionList", function () {
 
         var radioGroup = TestUtils.findRenderedComponentWithType(component, FormRadioGroup);
         expect(radioGroup).toBeDefined();
-        
+
         var radios = TestUtils.scryRenderedDOMNodesWithTag(radioGroup, "input");
         expect(radios.length).toBe(listItems.length);
     });
-    
+
     it("should render the component as a multi selection list when specified", function () {
         var component = getComponent({
             "data-id": "multi-selection-list",
@@ -108,7 +109,7 @@ describe("SelectionList", function () {
         var searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-search-box");
         expect(searchBoxDiv).toBeNull();
     });
-    
+
     it("should render the component with searchbox and placeholder", function () {
         var component = getComponent({
             searchPlaceholder: "search..."
@@ -119,7 +120,7 @@ describe("SelectionList", function () {
 
         expect(searchBox.getAttribute("placeholder")).toEqual("search...");
     });
-    
+
     it("should render the component with a checked radio", function () {
         var component = getComponent({
             selectedItemIds: 1,
@@ -131,7 +132,7 @@ describe("SelectionList", function () {
 
         expect(radios[0].checked).toBeTruthy();
     });
-    
+
     it("triggers callback on radio change", function () {
         var component = getComponent({
             type: SelectionList.ListType.SINGLE
@@ -143,7 +144,7 @@ describe("SelectionList", function () {
         ReactTestUtils.Simulate.change(radios[0]);
         expect(component.props.onValueChange).toBeCalled();
     });
-    
+
     it("should check one radio", function () {
         var component = getComponent({
             type: SelectionList.ListType.SINGLE
@@ -413,13 +414,13 @@ describe("SelectionList", function () {
             onFilter: _.noop,
             queryString: "my query"
         });
-        
+
         var list = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list");
         expect(ReactTestUtils.isDOMComponent(list)).toBeTruthy();
 
         var radioGroup = TestUtils.findRenderedComponentWithType(component, FormRadioGroup);
         expect(radioGroup).toBeDefined();
-        
+
         var radios = TestUtils.scryRenderedDOMNodesWithTag(radioGroup, "input");
         expect(radios.length).toBe(listItems.length);
 

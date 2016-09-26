@@ -218,8 +218,15 @@ var FormTextAreaStateless = React.createClass({
                     {this.props.edited && this.props.showUndo &&
                         <a data-id="undo" className="undo" onClick={this.props.onUndo}>undo</a>
                     }
-                    <FormError data-id={this.props["data-id"] + "-errorMessage"}
-                            value={this.props.errorMessage} />
+                    {this.props.errorMessage && (
+                        <FormError.Icon data-id={this.props["data-id"] + "-errorMessage-icon"} />
+                    )}
+                    {this.props.errorMessage && (
+                        <FormError.Message
+                            value={this.props.errorMessage}
+                            data-id={this.props["data-id"] + "-errorMessage"}
+                        />
+                    )}
                 </span>
                 {this.props.children}
             </FormLabel>

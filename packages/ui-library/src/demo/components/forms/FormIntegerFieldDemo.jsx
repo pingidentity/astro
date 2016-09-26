@@ -45,7 +45,7 @@ var FormIntegerFieldDemo = React.createClass({
             });
         }
     },
-    
+
     _blurCallback4: function () {
         var value = this.state.integerField4;
 
@@ -62,7 +62,7 @@ var FormIntegerFieldDemo = React.createClass({
         }
 
     },
-    
+
     _changeCallback5: function (value) {
 
         if (value !== "" && (value % 5 !== 0 || value < 50 || value > 300 )) {
@@ -79,13 +79,13 @@ var FormIntegerFieldDemo = React.createClass({
             integerField5: value
         });
     },
-    
+
     _changeCallback6: function (value) {
         this.setState({
             integerField6: value
         });
     },
-    
+
     _changeMode: function (value,event) {
         var name = event.target.name;
         if (name === "read-only") {
@@ -120,6 +120,7 @@ var FormIntegerFieldDemo = React.createClass({
                             labelText={"With default value and undo - Value : " + this.state.integerField2}
                             initialValue = {8800}
                             onValueChange = {this._changeCallback2}
+                            className="input-width-medium"
                             controlled={false}
                     />
                 </div>
@@ -131,6 +132,7 @@ var FormIntegerFieldDemo = React.createClass({
                             initialValue = ""
                             required = {true}
                             placeholder = "This field is required"
+                            className="input-width-medium"
                             controlled={false}
                     />
                 </div>
@@ -145,6 +147,7 @@ var FormIntegerFieldDemo = React.createClass({
                             min = {0}
                             labelHelpText = "Prop enforceRange is true by default.
                                     This doesn't allow keyboard input above the maximum range."
+                            className="input-width-medium"
                             controlled={false}
                     />
                 </div>
@@ -165,6 +168,7 @@ var FormIntegerFieldDemo = React.createClass({
                                 "Prop enforceRange set to false to allow keyboard input" +
                                 " of out of range numbers"
                             }
+                            className="input-width-medium"
                             controlled={false}
                     />
                 </div>
@@ -177,6 +181,7 @@ var FormIntegerFieldDemo = React.createClass({
                             increment = {5}
                             min = {50}
                             max = {300}
+                            className="input-width-medium"
                             controlled={false}
                     />
                 </div>
@@ -189,10 +194,11 @@ var FormIntegerFieldDemo = React.createClass({
                             disabled = {this.state.integerField7Disabled}
                             onValueChange = {this._changeCallback}
                             initialValue = {30}
+                            className="input-width-medium"
                             controlled={false}
                     />
                 </div>
-                
+
                 <div className="input-row">
                     <FormIntegerField
                             labelText = {"Disabled with help text"}
@@ -201,6 +207,7 @@ var FormIntegerFieldDemo = React.createClass({
                             onValueChange = {this._changeCallback}
                             labelHelpText = "Disabled with help text"
                             initialValue = {40}
+                            className="input-width-medium"
                             controlled={false}
                     />
                 </div>

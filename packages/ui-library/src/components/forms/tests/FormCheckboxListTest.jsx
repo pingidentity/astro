@@ -1,14 +1,15 @@
 window.__DEV__ = true;
 
-jest.dontMock("../../../testutil/TestUtils");
+jest.dontMock("underscore");
+jest.dontMock("../FormCheckboxList.jsx");
+jest.dontMock("../FormLabel.jsx");
+jest.dontMock("../FormError.jsx");
 jest.dontMock("../form-text-field/index.js");
 jest.dontMock("../form-text-field/v2.jsx");
 jest.dontMock("../form-toggle/index.js");
 jest.dontMock("../form-toggle/v2.jsx");
 jest.dontMock("../../general/If.jsx");
-jest.dontMock("../FormCheckboxList.jsx");
-jest.dontMock("../FormLabel.jsx");
-jest.dontMock("underscore");
+jest.dontMock("../../../testutil/TestUtils");
 
 describe("FormCheckboxList", function () {
     var _ = require("underscore");

@@ -13,26 +13,54 @@ var React = require("react"),
  *    Optional data-id
  * @private
  */
-var FormError = React.createClass({
+
+ /**
+ * @class Message
+ * @memberof FormError
+ * @desc The child tag/object used to display the error message text
+ *
+ * @param {string} [data-id="row"]
+ *     To define the base "data-id" value for the top-level HTML container.
+ * @param {string} [className]
+ *     CSS classes to set on the top-level HTML container.
+ */
+var Message = React.createClass({
     propTypes: {
         value: React.PropTypes.string,
         "data-id": React.PropTypes.string
     },
 
     render: function () {
-        if (!this.props.value) {
-            return null;
-        }
-
-        var className = classnames(this.props.className, "help-tooltip form-error-message show");
-
         return (
-            <div className={className} data-id={this.props["data-id"]}>
-                <div className="tooltip-text">
-                    <div className="tooltip-text-content">{this.props.value}</div>
-                </div>
-            </div>);
+            <div
+                data-id={this.props["data-id"]}
+                className={classnames(this.props.className, "form-error-message")}>
+                {this.props.value}
+            </div>
+        );
     }
 });
 
-module.exports = FormError;
+/**
+* @class Icon
+* @memberof FormError
+* @desc The child tag/object used to display the error icon.
+*
+* @param {string} [data-id="row"]
+*     To define the base "data-id" value for the top-level HTML container.
+*/
+var Icon = React.createClass({
+    propTypes: {
+        show: React.PropTypes.bool,
+        "data-id": React.PropTypes.string
+    },
+
+    render: function () {
+        return (
+            <div data-id={this.props["data-id"]} className="form-error-icon" />
+        );
+    }
+});
+
+exports.Message = Message;
+exports.Icon = Icon;

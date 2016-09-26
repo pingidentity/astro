@@ -59,51 +59,65 @@ var FormDropDownListDemo = React.createClass({
         return (
             <div>
                 <div className="input-row">
-                    <FormDropDownList options={options} autofocus={true}
-                            label="Basic with autofocus"
-                            selectedOption={this.state.selectedValue1}
-                            onValueChange={this._handleValueChange1} />
+                    <FormDropDownList
+                        options={options}
+                        autofocus={true}
+                        label="Basic with autofocus"
+                        selectedOption={this.state.selectedValue1}
+                        onValueChange={this._handleValueChange1}
+                    />
                     <div>Selected value: {this.state.selectedValue1.label}</div>
                 </div>
                 <div className="input-row">
-                    <FormDropDownList options={options} contentType={customType}
-                            label="With custom content type & search field"
-                            searchField="value"
-                            selectedOption={this.state.selectedValue2}
-                            onValueChange={this._handleValueChange2} />
+                    <FormDropDownList
+                        options={options}
+                        contentType={customType}
+                        label="With custom content type & search field"
+                        searchField="value"
+                        selectedOption={this.state.selectedValue2}
+                        onValueChange={this._handleValueChange2}
+                    />
                     <div>Selected value: {this.state.selectedValue2.value}</div>
                 </div>
                 <div className="input-row">
-                    <FormDropDownList options={options}
-                            label="With help"
-                            labelHelpText="Some help tip"
-                            selectedOption={this.state.selectedValue3}
-                            onValueChange={this._handleValueChange3} />
+                    <FormDropDownList
+                        options={options}
+                        label="With help"
+                        labelHelpText="Some help tip"
+                        selectedOption={this.state.selectedValue3}
+                        onValueChange={this._handleValueChange3}
+                    />
                     <div>Selected value: {this.state.selectedValue3.label}</div>
                 </div>
                 <div className="input-row">
-                    <FormDropDownList options={options}
-                            label="With error"
-                            errorMessage="Something is wrong"
-                            selectedOption={this.state.selectedValue4}
-                            onValueChange={this._handleValueChange4} />
+                    <FormDropDownList
+                        options={options}
+                        label="With error"
+                        errorMessage="The error message appears when hovering over the input or the error icon."
+                        selectedOption={this.state.selectedValue4}
+                        onValueChange={this._handleValueChange4}
+                    />
                     <div>Selected value: {this.state.selectedValue4.label}</div>
                 </div>
                 <div className="input-row">
-                    <FormDropDownList options={options}
-                            label="Disabled"
-                            disabled={true}
-                            selectedOption={this.state.selectedValue5}
-                            onValueChange={this._handleValueChange5} />
+                    <FormDropDownList
+                        options={options}
+                        label="Disabled"
+                        disabled={true}
+                        selectedOption={this.state.selectedValue5}
+                        onValueChange={this._handleValueChange5}
+                    />
                     <div>Selected value: {this.state.selectedValue5.label}</div>
                 </div>
                 <div className="input-row">
-                    <FormDropDownList options={options}
-                            label="Required with none option"
-                            required={this.state.selectedValue6.label === "--"}
-                            selectedOption={this.state.selectedValue6}
-                            noneOption={{ label: "--" }}
-                            onValueChange={this._handleValueChange6} />
+                    <FormDropDownList
+                        options={options}
+                        label="Required with none option"
+                        required={this.state.selectedValue6.label === "--"}
+                        selectedOption={this.state.selectedValue6}
+                        noneOption={{ label: "--" }}
+                        onValueChange={this._handleValueChange6}
+                    />
                     <div>Selected value: {this.state.selectedValue6 && this.state.selectedValue6.label}</div>
                 </div>
             </div>

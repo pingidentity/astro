@@ -97,8 +97,10 @@ var FormTextAreaDemo = React.createClass({
                 <div className="input-row">
                     <FormTextArea
                         labelText="With error message"
-                        errorMessage="error!"
+                        errorMessage="The error message appears when hovering over the error icon or when focus is
+                            placed on the textarea."
                         className="input-width-medium"
+                        required={true}
                     />
                 </div>
                 <div className="input-row">

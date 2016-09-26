@@ -29,8 +29,9 @@ jest.setMock("../i18n/countryCodes", [
 
 jest.dontMock("../i18n/I18nCountrySelector.jsx");
 jest.dontMock("../i18n/CountryFlagList.jsx");
-jest.dontMock("../../../util/i18n/Translator.js");
 jest.dontMock("../FormDropDownList.jsx");
+jest.dontMock("../FormError.jsx");
+jest.dontMock("../../../util/i18n/Translator.js");
 
 describe("I18nCountrySelector", function () {
     var React = require("react"),
@@ -145,7 +146,7 @@ describe("I18nCountrySelector", function () {
             open: true
         });
         var componentRef = component.refs.I18nCountrySelectorStateful;
-        
+
         var flag = TestUtils.findRenderedDOMNodeWithDataId(componentRef, "selected-option");
         // var currentCountryIso = componentRef.state.selected.iso2;
         // enter can, validate still not selected, hit enter, validate Canada now selected
@@ -177,7 +178,7 @@ describe("I18nCountrySelector", function () {
             open: true
         });
         var componentRef = component.refs.I18nCountrySelectorStateful;
-        
+
         var flag = TestUtils.findRenderedDOMNodeWithDataId(componentRef, "selected-option");
 
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c

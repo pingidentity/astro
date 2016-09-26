@@ -395,10 +395,10 @@ var FormDropDownListStateless = React.createClass({
                                     });
                                     return (
                                         <li key={"option-" + index}
-                                                ref={"option-" + index}
-                                                data-id={"option-" + index}
-                                                className={className}
-                                                onClick={this._handleOptionClick.bind(null, item)}>
+                                            ref={"option-" + index}
+                                            data-id={"option-" + index}
+                                            className={className}
+                                            onClick={this._handleOptionClick.bind(null, item)}>
                                             {React.cloneElement(this.props.contentType, item)}
                                         </li>
                                     );
@@ -406,8 +406,15 @@ var FormDropDownListStateless = React.createClass({
                             }
                         </ul>
                     </div>
-                    <FormError data-id="errorMessage"
-                            value={this.props.errorMessage} />
+                    {this.props.errorMessage && (
+                        <FormError.Icon data-id={this.props["data-id"] + "-errorMessage-icon"} />
+                    )}
+                    {this.props.errorMessage && (
+                        <FormError.Message
+                            value={this.props.errorMessage}
+                            data-id={this.props["data-id"] + "-errorMessage"}
+                        />
+                    )}
                 </div>
             </FormLabel>
         );

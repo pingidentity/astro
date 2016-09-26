@@ -1,11 +1,12 @@
 window.__DEV__ = true;
 
-jest.dontMock("../../../../testutil/TestUtils");
+jest.dontMock("underscore");
 jest.dontMock("../FormSearchBox.jsx");
-jest.dontMock("../../../tooltips/HelpHint.jsx");
 jest.dontMock("../../form-text-field/index.js");
 jest.dontMock("../../form-text-field/v2.jsx");
-jest.dontMock("underscore");
+jest.dontMock("../../FormError.jsx");
+jest.dontMock("../../../tooltips/HelpHint.jsx");
+jest.dontMock("../../../../testutil/TestUtils");
 jest.dontMock("../../../../util/KeyboardUtils.js");
 
 describe("FormSearchBox", function () {

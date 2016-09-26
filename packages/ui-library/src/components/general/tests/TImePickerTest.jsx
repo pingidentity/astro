@@ -1,10 +1,11 @@
 window.__DEV__ = true;
 
+jest.dontMock("moment");
 jest.dontMock("../TimePicker.jsx");
+jest.dontMock("../../forms/FormError.jsx");
 jest.dontMock("../../forms/form-select-field/index.js");
 jest.dontMock("../../forms/form-select-field/v2.jsx");
 jest.dontMock("../../forms/FormDropDownList.jsx");
-jest.dontMock("moment");
 
 describe("TimePicker", function () {
     var React = require("react"),

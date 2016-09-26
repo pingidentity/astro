@@ -252,9 +252,15 @@ var FormTextArea = React.createClass({
                         autoFocus={this.props.autoFocus}>
                     </textarea>
                     {undo}
-
-                    <FormError value={this.props.errorMessage}
-                        data-id={this.props.referenceName + "_errormessage"} />
+                    {this.props.errorMessage && (
+                        <FormError.Icon data-id={this.props.referenceName + "_errormessage-icon"} />
+                    )}
+                    {this.props.errorMessage && (
+                        <FormError.Message
+                            value={this.props.errorMessage}
+                            data-id={this.props.referenceName + "_errormessage"}
+                        />
+                    )}
                 </span>
                 {this.props.children}
             </label>

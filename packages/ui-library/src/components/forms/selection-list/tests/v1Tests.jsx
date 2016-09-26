@@ -1,12 +1,13 @@
 window.__DEV__ = true;
 
-jest.dontMock("../../form-text-field/index.js");
-jest.dontMock("../../form-text-field/v2.jsx");
 jest.dontMock("../v1.jsx");
 jest.dontMock("../FormSearchBox.jsx");
-jest.dontMock("../../FormRadioGroup.jsx");
+jest.dontMock("../../form-text-field/index.js");
+jest.dontMock("../../form-text-field/v2.jsx");
 jest.dontMock("../../FormCheckbox.jsx");
+jest.dontMock("../../FormError.jsx");
 jest.dontMock("../../FormLabel.jsx");
+jest.dontMock("../../FormRadioGroup.jsx");
 jest.dontMock("../../../general/If.jsx");
 jest.dontMock("../../../../util/FilterUtils.js");
 jest.dontMock("../../../../util/KeyboardUtils.js");

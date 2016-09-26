@@ -62,10 +62,11 @@ var FormSelectFieldDemo = React.createClass({
                 </div>
                 <div className="input-row">
                     <FormSelectField controlled={true}
-                        label="With error message"
+                        label="With error"
                         options={optionsArr}
                         onChange={this._changeCallback.bind(this, 3)}
-                        errorMessage="error!"
+                        errorMessage="The error message appears when hovering over the input or the error icon."
+                        required={true}
                         value={this.state.fieldValue3}
                     />
                     <div>

@@ -33,7 +33,7 @@
             border-bottom: none;
         }
         &.active {
-            .form-integer-container {
+            .input-integer {
                 .icon-dropdown-arrow {
                     @include transition(none);
                     @include transform(none);

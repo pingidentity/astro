@@ -49,6 +49,8 @@
         margin: 0;
         z-index: 1000;
 
+        -webkit-backface-visibility: hidden; // keeps animation from flickering in Chrome
+
         @include animation(fade-in 0.5s);
 
         .tooltip-text-content {
@@ -225,76 +227,6 @@
             .tooltip-text {
                 &:before {
                     border-color: transparent transparent $color-critical-red transparent;
-                }
-            }
-        }
-    }
-    &.form-error-message {
-        position: absolute;
-        right: 0;
-        top: 0;
-
-        .tooltip-text {
-            bottom: auto;
-
-            .tooltip-text-content {
-                margin: 0 0 0 $pointer-size;
-                min-height: 15px;
-                width: auto;
-                min-width: 240px;
-                max-width: 360px;
-                background: $color-critical-red;
-
-                &:before {
-                    border-color: transparent $color-critical-red transparent transparent;
-                    top: 10px;
-                    bottom: auto;
-                    right: auto;
-                    left: (-$pointer-size);
-                }
-                &:after {
-                    left: -26px;
-                    height: 100%;
-                    top: 0;
-                    width: 30px;
-                }
-            }
-        }
-        &:after {
-            content: none;
-            display: none;
-        }
-        &.input-toggle {
-            .tooltip-text {
-                top: 4px;
-                left: 47px;
-            }
-        }
-        &.bottom {
-            top: 100%;
-            left: 0;
-            bottom: auto;
-            right: auto;
-
-            .tooltip-text {
-                .tooltip-text-content {
-                    top: auto;
-                    bottom: auto;
-                    margin: 7px 0 0;
-
-                    &:before {
-                        border-color: transparent transparent $color-critical-red transparent;
-                        top: -12px;
-                        bottom: auto;
-                        right: auto;
-                        left: 15px;
-                    }
-                    &:after {
-                        left: 0;
-                        height: 10px;
-                        top: -8px;
-                        width: 80%;
-                    }
                 }
             }
         }

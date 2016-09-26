@@ -221,17 +221,25 @@ var FormSelectFieldStateless = React.createClass({
                     helpClassName={this.props.helpClassName}>
                 <div className="input-container">
                     <div className="wrapper">
-                        <select data-id={this.props["data-id"] + "-select"}
-                                name={this.props["data-id"] + "-select"}
-                                className={this.props.selectClassName}
-                                value={this.props.value}
-                                onChange={this._handleChange}
-                                disabled={this.props.disabled} >
+                        <select
+                            data-id={this.props["data-id"] + "-select"}
+                            name={this.props["data-id"] + "-select"}
+                            className={this.props.selectClassName}
+                            value={this.props.value}
+                            onChange={this._handleChange}
+                            disabled={this.props.disabled} >
                             {this._getOptions()}
                         </select>
                     </div>
-                    <FormError data-id={this.props["data-id"] + "-errorMessage"}
-                            value={this.props.errorMessage} />
+                    {this.props.errorMessage && (
+                        <FormError.Icon data-id={this.props["data-id"] + "-errorMessage-icon"} />
+                    )}
+                    {this.props.errorMessage && (
+                        <FormError.Message
+                            value={this.props.errorMessage}
+                            data-id={this.props["data-id"] + "-errorMessage"}
+                        />
+                    )}
                 </div>
             </FormLabel>
         );

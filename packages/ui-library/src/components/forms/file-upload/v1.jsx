@@ -383,7 +383,7 @@ var FileUpload = React.createClass({
             // types, then default 'image/jpeg, image/jpg, image/gif, image/png' will be displayed
             acceptTypesText = this.props.accept.replace(/\s+/g, " ").split("image/");
         }
-        
+
         return (
             <div className={containerClass}>
                 <FormLabel className={labelClass}>
@@ -391,9 +391,9 @@ var FileUpload = React.createClass({
                     <div>
                         {this.props.title && <div>{this.props.title}</div>}
                         <span className="image-icon"></span>
-                            <span className="input-image-thumb">
-                                <img src={this.state.thumbnailSrc} ref="imageThumb" />
-                            </span>
+                        <span className="input-image-thumb">
+                            <img src={this.state.thumbnailSrc} ref="imageThumb" />
+                        </span>
                     </div>
                     }
                     <input
@@ -414,9 +414,16 @@ var FileUpload = React.createClass({
                     <button className="inline choose">
                         {buttonLabel}
                     </button>
-                    <FormError
+
+                    {this.state.errorMessage && (
+                        <FormError.Icon data-id={this.props.referenceName + "_errormessage-icon"} />
+                    )}
+                    {this.state.errorMessage && (
+                        <FormError.Message
+                            value={this.state.errorMessage}
                             data-id={this.props.referenceName + "_errormessage"}
-                            value={this.state.errorMessage} />
+                        />
+                    )}
                 </FormLabel>
 
                 <div className={fileInfoClass}>
@@ -431,11 +438,11 @@ var FileUpload = React.createClass({
                     </a>
                 </div>
 
-                {this.props.filesAcceptedMsg &&
-                <div className="image-types" data-id="filesAcceptedMsg">
-                    {this.props.filesAcceptedMsg}
-                </div>
-                }
+                {this.props.filesAcceptedMsg && (
+                    <div className="image-types" data-id="filesAcceptedMsg">
+                        {this.props.filesAcceptedMsg}
+                    </div>
+                )}
             </div>
         );
     }

@@ -29,10 +29,11 @@ jest.setMock("../../countryCodes", [
 
 jest.dontMock("../v1.jsx");
 jest.dontMock("../../CountryFlagList.jsx");
+jest.dontMock("../../../FormError.jsx");
+jest.dontMock("../../../FormDropDownList.jsx");
 jest.dontMock("../../../form-text-field/index.js");
 jest.dontMock("../../../form-text-field/v1.jsx");
 jest.dontMock("../../../../../util/i18n/Translator.js");
-jest.dontMock("../../../FormDropDownList.jsx");
 
 describe("I18nPhoneInput", function () {
     var React = require("react"),
@@ -211,5 +212,5 @@ describe("I18nPhoneInput", function () {
         expect(console.warn).toBeCalledWith(
             "** This version of the I18nPhoneInput is deprecated and will be removed in the next release");
     });
-    
+
 });

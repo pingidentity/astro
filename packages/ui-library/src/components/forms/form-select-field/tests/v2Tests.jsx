@@ -1,5 +1,7 @@
-jest.dontMock("../v2.jsx");
+
 jest.dontMock("./common.jsx");
+jest.dontMock("../v2.jsx");
+jest.dontMock("../../FormError.jsx");
 jest.dontMock("../../FormLabel.jsx");
 
 describe("FormSelectField", function () {

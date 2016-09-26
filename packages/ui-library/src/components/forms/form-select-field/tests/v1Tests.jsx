@@ -1,7 +1,9 @@
-jest.dontMock("../v1.jsx");
-jest.dontMock("../index.js");
+
 jest.dontMock("./common.jsx");
+jest.dontMock("../index.js");
+jest.dontMock("../v1.jsx");
 jest.dontMock("../../FormLabel.jsx");
+jest.dontMock("../../FormError.jsx");
 
 describe("FormSelectField", function () {
     var React = require("react"),

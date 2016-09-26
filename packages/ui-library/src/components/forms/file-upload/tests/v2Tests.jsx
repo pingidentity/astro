@@ -1,14 +1,15 @@
 window.__DEV__ = true;
 
+jest.dontMock("./commonTests.jsx");
 jest.dontMock("../index.js");
 jest.dontMock("../v2.jsx");
 jest.dontMock("../v2-stateful.jsx");
 jest.dontMock("../v2-stateless.jsx");
 jest.dontMock("../v2-constants.js");
-jest.dontMock("./commonTests.jsx");
-jest.dontMock("../../../../util/Utils");
-jest.dontMock("../../FormLabel.jsx");
 jest.dontMock("../../FormError.jsx");
+jest.dontMock("../../FormLabel.jsx");
+jest.dontMock("../../../../util/Utils");
+
 //mock the exif api
 jest.setMock("exif-js", { getData: jest.genMockFunction() });
 jest.setMock("fix-orientation", jest.genMockFunction() );
@@ -117,7 +118,7 @@ describe("FileUpload", function () {
 
         var errorContainer = get(component, "error-message");
 
-        expect(errorContainer.getAttribute("class")).toContain("show");
+        expect(errorContainer).toBeTruthy();
         expect(errorContainer.textContent).toEqual("this is my error");
     });
 

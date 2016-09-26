@@ -29,11 +29,12 @@ jest.setMock("../../countryCodes", [
 
 jest.dontMock("../v2.jsx");
 jest.dontMock("../../CountryFlagList.jsx");
+jest.dontMock("../../../FormError.jsx");
+jest.dontMock("../../../FormLabel.jsx");
+jest.dontMock("../../../FormDropDownList.jsx");
 jest.dontMock("../../../form-text-field/index.js");
 jest.dontMock("../../../form-text-field/v2.jsx");
-jest.dontMock("../../../FormLabel.jsx");
 jest.dontMock("../../../../../util/i18n/Translator.js");
-jest.dontMock("../../../FormDropDownList.jsx");
 
 describe("I18nPhoneInput", function () {
     var React = require("react"),

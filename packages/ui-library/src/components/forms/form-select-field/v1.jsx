@@ -226,8 +226,15 @@ var FormSelectField = React.createClass({
                             {optionsHtml}
                         </select>
                     </div>
-                    <FormError value={this.props.errorMessage}
-                        data-id={this.props.id + "_errormessage"} />
+                    {this.props.errorMessage && (
+                        <FormError.Icon data-id={this.props.id + "_errormessage-icon"} />
+                    )}
+                    {this.props.errorMessage && (
+                        <FormError.Message
+                            value={this.props.errorMessage}
+                            data-id={this.props.id + "_errormessage"}
+                        />
+                    )}
                 </div>
             </label>
         );

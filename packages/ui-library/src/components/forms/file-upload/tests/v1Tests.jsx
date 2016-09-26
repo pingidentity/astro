@@ -6,6 +6,7 @@ jest.dontMock("./commonTests.jsx");
 jest.dontMock("../../../../util/Utils");
 jest.dontMock("../../FormLabel.jsx");
 jest.dontMock("../../FormError.jsx");
+
 //mock the exif api
 jest.setMock("exif-js", { getData: jest.genMockFunction() });
 jest.setMock("fix-orientation", jest.genMockFunction() );
@@ -109,6 +110,7 @@ describe("FileUpload", function () {
         var componentUpdated = ReactDOM.findDOMNode(component);
         error = TestUtils.findRenderedDOMNodeWithDataId(componentUpdated,
             component.props["referenceName"] + "_errormessage");
+
         expect(error.textContent).toEqual(fileUploadErrorMsg);
 
         component.setState({ errorMessage: "" });
@@ -125,7 +127,7 @@ describe("FileUpload", function () {
 
         var errorContainer = get(component, "error-message");
 
-        expect(errorContainer.getAttribute("class")).toContain("show");
+        expect(errorContainer).toBeTruthy();
         expect(errorContainer.textContent).toEqual("this is my error");
     });
 
