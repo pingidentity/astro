@@ -808,7 +808,7 @@ input[type=file] {
         padding: 0;
         margin: 0 0 0 (-$borderSize); // margin-left to compensate for the padding on the parent
         white-space: nowrap;
-        border: $borderSize solid $greyBorder;
+        border: $borderSize solid $color-rabbit-fur;
         max-height: 200px;
         overflow-y: scroll;
 

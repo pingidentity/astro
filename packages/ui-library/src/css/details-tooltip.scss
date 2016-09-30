@@ -75,10 +75,10 @@
             }
         }
     }
-    .details-target {
+    > .details-target {
         display: inline-block;
     }
-    .details-content {
+    > .details-content {
         display: none;
         position: absolute;
         z-index: 1001;
@@ -92,7 +92,7 @@
         padding: 0;
         margin: 0;
 
-        .details-content-inner {
+        > .details-content-inner {
             position: relative;
             box-sizing: border-box;
 
@@ -121,7 +121,7 @@
 
                 @include transform(scale(1.9,1));
             }
-            .details-title {
+            > .details-title {
                 min-height: $title-height;
                 box-sizing: border-box;
                 padding: 18px 10px 10px;
@@ -151,7 +151,7 @@
                 text-decoration: uppercase;
                 padding: 10px 0;
             }
-            .details-body {
+            > .details-body {
                 font-size: 15px;
                 padding: 25px;
                 color: $color-slate;
@@ -161,17 +161,22 @@
                 border-color: $color-timberwolf;
                 border-radius: 0 0 $border-radius $border-radius;
             }
-            .details {
-                padding: 10px 10px 0;
-            }
-            .primary-action {
+            > .details-close {
                 position: absolute;
-                bottom: 20px;
-                right: 20px;
-                margin: 0;
-            }
-            &.primary-button {
-                padding-bottom: 70px;
+                top: 18px;
+                right: 15px;
+                color: transparent;
+                z-index: 2;
+                line-height: 1em;
+                cursor: pointer;
+
+                &:after {
+                    font-family: 'iconfont';
+                    content: '\78';
+                    text-transform: none;
+                    font-size: 18px;
+                    color: rgba($color-white, 0.3);
+                }
             }
             .loader {
                 position: relative;
@@ -209,23 +214,6 @@
                     }
                 }
             }
-            .details-close {
-                position: absolute;
-                top: 18px;
-                right: 15px;
-                color: transparent;
-                z-index: 2;
-                line-height: 1em;
-                cursor: pointer;
-
-                &:after {
-                    font-family: 'iconfont';
-                    content: '\78';
-                    text-transform: none;
-                    font-size: 18px;
-                    color: rgba($color-white, 0.3);
-                }
-            }
             .input-text {
                 input {
                     width: 304px;
@@ -235,11 +223,11 @@
         }
     }
     &.top {
-        .details-content {
+        > .details-content {
             top: auto;
             bottom: 100%;
 
-            .details-content-inner {
+            > .details-content-inner {
                 margin-top: 0;
                 margin-bottom: $arrow-height;
 
@@ -248,20 +236,15 @@
                     top: auto;
                     bottom: -$arrow-height + 2;
                     color: $color-white;
-
                     text-shadow: $text-shadow;
-                }
-                .confirm-buttons {
-                    margin: 20px auto;
-                    text-align: center;
                 }
             }
 
         }
     }
     &.center {
-        .details-content {
-            .details-content-inner {
+        > .details-content {
+            > .details-content-inner {
                 margin-left: -(round($width/2));
 
                 &:before {
@@ -272,8 +255,8 @@
         }
     }
     &.left {
-        .details-content {
-            .details-content-inner {
+        > .details-content {
+            > .details-content-inner {
                 margin-left: -($width - $arrow-offset - $arrow-width-offset);
 
                 &:before {
@@ -318,6 +301,24 @@
 // DEPRECATED OR SITE-SPECIFIC STYLES ----------------------------------------------------------------------------------
 
 .details-tooltip {
+    .details-content-inner {
+        .primary-action {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            margin: 0;
+        }
+        &.primary-button {
+            padding-bottom: 70px;
+        }
+        .confirm-buttons {
+            margin: 20px auto;
+            text-align: center;
+        }
+        .details {
+            padding: 10px 10px 0;
+        }
+    }
     &.alert {
         .details-content-inner {
             p {
