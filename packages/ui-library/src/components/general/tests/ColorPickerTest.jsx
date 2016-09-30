@@ -668,6 +668,22 @@ describe("ColorPicker", function () {
         expect(element).toBeDefined();
     });
 
+    it("stateless: render component with null color", function () {
+        var component = getComponent({
+            color: null,
+            controlled: true
+        });
+
+        var componentRef = component.refs.stateless;
+
+        var colorSample = componentRef.refs.colorSample;
+        expect(colorSample.style.backgroundColor).toEqual("");
+
+        var colorInput = TestUtils.findRenderedDOMNodeWithDataId(component, "input");
+        expect(colorInput.disabled).toBe(false);
+        expect(colorInput.value).toEqual("");
+    });
+
     // TODO To be removed once "id" support is discontnued.
     it("log warning in console for id", function () {
         console.warn = jest.genMockFunction();
