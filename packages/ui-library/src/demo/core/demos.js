@@ -402,6 +402,13 @@ module.exports = [
                 pathToDemoSource: "demo_components_rows_DragDropRowDemo.jsx.html"
             },
             {
+                label: "Drag-N-Drop Table",
+                demo: require("../components/tables/DragDropTableDemo.jsx"),
+                pathToDoc: "components/tables/DragDropTable.jsx",
+                pathToSource: "components_tables_DragDropTable.jsx.html",
+                pathToDemoSource: "demo_components_tables_DragDropTableDemo.jsx.html"
+            },
+            {
                 label: "Calendar",
                 demo: require("../components/calendars/CalendarDemo.jsx"),
                 pathToDoc: "components/calendars/Calendar.jsx",

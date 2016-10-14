@@ -190,7 +190,7 @@ var MultiColumnDragDropDemoPage = Object.create(HomePage, {
      */
     verifyAddedItemToRightColumnExisting: {
         value: function (itemNumber) {
-            var prefixXpath = "//div[@data-id='DragDropColumn-1']//div[@data-id='drag-drop-row']";
+            var prefixXpath = "//div[@data-id='DragDropColumn-1']//div[@data-id='drag-drop-item']";
             var xPath = prefixXpath + "[contains(@data-reactid,'$1.2.${itemNumber}')]";
             return this.isExisting(this.formatXpath(xPath, { itemNumber: itemNumber }));
         }
@@ -202,7 +202,7 @@ var MultiColumnDragDropDemoPage = Object.create(HomePage, {
      */
     verifyRemovedItemToLeftColumnExisting: {
         value: function (itemNumber) {
-            var prefixXpath = "//div[@data-id='DragDropColumn-0']//div[@data-id='drag-drop-row']";
+            var prefixXpath = "//div[@data-id='DragDropColumn-0']//div[@data-id='drag-drop-item']";
             var xPath = prefixXpath + "[contains(@data-reactid, '$0.2.${itemNumber}')]";
             return this.isExisting(this.formatXpath(xPath, { itemNumber: itemNumber }));
         }
@@ -263,7 +263,7 @@ var MultiColumnDragDropDemoPage = Object.create(HomePage, {
             this.waitForExist(this.xpathRightColumn);
         }
     },
-    
+
     /**
      * @desc this function is to scroll page to top
      */
