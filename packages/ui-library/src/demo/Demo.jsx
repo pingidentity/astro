@@ -111,6 +111,8 @@ var DemoApp = React.createClass({
             40: this.navActions.selectNextItem
         }, true);
 
+        this.navActions.setCollapsible(true);   //Enable collapsible for LeftNav
+
         //The demos list doesn't have ids, so this loop will just duplicate the label and use it as an ID.
         //IDs are required by the LeftNavBar.
         //While looping through the demos, register their reducers

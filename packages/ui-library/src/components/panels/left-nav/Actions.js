@@ -56,6 +56,20 @@ exports.set = function (path, value) {
 
 /**
 * @function
+* @alias Actions.setCollapsible
+* @memberof LeftNavBar
+* @desc Sets whether or not collapsible should be enabled for the LeftNavBar.
+*
+* @param {boolean} collapsible
+*    Whether or not all sections should be open by default.
+*
+* @return {objet}
+*    The action.
+*/
+exports.setCollapsible = exports.set.bind(null, "collapsible");
+
+/**
+* @function
 * @alias Actions.setAutocollapse
 * @memberof LeftNavBar
 * @desc Sets whether or not autocollapse should be enabled for the LeftNavBar.

@@ -199,42 +199,11 @@ $layout-nav-width-offset: 15px;
         &:first-of-type {
             margin-top: -15px;
         }
-
-        &.open,
-        &.closed {
-            .title {
-                &:after {
-                    font-family: $icon-font;
-                    text-transform: none;
-                    content: 'Y';
-                    font-size: 5px;
-                    font-weight: bold;
-                    display: inline-block;
-                    margin: 2px 0 0 10px;
-                    line-height: 1em;
-                    vertical-align: top;
-
-                    @include transition(all 0.3s);
-                }
-            }
-        }
-        &.closed {
-            .title {
-                &:after {
-                    @include rotate(0deg);
-                }
-            }
-        }
         &.open {
             padding-bottom: 25px;
 
             .menu {
                 max-height: 2000px;
-            }
-            .title {
-                &:after {
-                    @include rotate(-180deg);
-                }
             }
         }
     }
@@ -248,7 +217,6 @@ $layout-nav-width-offset: 15px;
         line-height: 1em;
         text-transform: uppercase;
         font-family: $font-pn-semibold;
-        cursor: pointer;
 
         &.narrow {
             margin-top: 5px;
@@ -437,6 +405,45 @@ $layout-nav-width-offset: 15px;
 
                 @include gradient-vertical(transparent, rgba($color-black, 0.05));
             }
+        }
+    }
+    &.collapsible {
+        .nav-section {
+            &.open,
+            &.closed {
+                .title {
+                    &:after {
+                        font-family: $icon-font;
+                        text-transform: none;
+                        content: 'Y';
+                        font-size: 5px;
+                        font-weight: bold;
+                        display: inline-block;
+                        margin: 2px 0 0 10px;
+                        line-height: 1em;
+                        vertical-align: top;
+
+                        @include transition(all 0.3s);
+                    }
+                }
+            }
+            &.closed {
+                .title {
+                    &:after {
+                        @include rotate(0deg);
+                    }
+                }
+            }
+            &.open {
+                .title {
+                    &:after {
+                        @include rotate(-180deg);
+                    }
+                }
+            }
+        }
+        .title {
+            cursor: pointer;
         }
     }
 }

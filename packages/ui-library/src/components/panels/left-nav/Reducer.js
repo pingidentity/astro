@@ -6,6 +6,7 @@ var Actions = require("./Actions.js"),
 var initialState = {
     tree: [],
     openSections: {},
+    collapsible: false,
     autocollapse: false
 };
 
@@ -34,6 +35,13 @@ function closeAllNotSelected (state, selectedId) {
             state = update.set(state, ["openSections", sectionId], false);
         }
     }
+    return state;
+}
+
+function openAllSections (state) {
+    state.tree.forEach(function (section) {
+        state = update.set(state, ["openSections", section.id], true);
+    });
     return state;
 }
 
@@ -82,6 +90,10 @@ module.exports = function (state, action) {
     switch (action.type) {
         case Actions.Types.NAV_BAR_SET:
             nextState = update.set(nextState, action.path, action.value);
+
+            if (action.path === "collapsible" && action.value === false) {
+                nextState = openAllSections(nextState);
+            }
             break;
         case Actions.Types.NAV_BAR_SELECT_NEXT:
             nextState = selectByOffset(nextState, 1);
@@ -94,6 +106,9 @@ module.exports = function (state, action) {
             nextState.selectedSection = action.sectionId;
             break;
         case Actions.Types.NAV_BAR_TOGGLE_SECTION:
+            if (!state.collapsible) {
+                break;
+            }
             nextState = update.set(nextState, ["openSections", action.id], !state.openSections[action.id]);
 
             if (state.autocollapse) {
@@ -107,10 +122,13 @@ module.exports = function (state, action) {
                     nextState.selectedNode = findFirstChildIdUnlessSelected(nextState);
                 }
             }
-
             break;
         case Actions.Types.NAV_BAR_INIT:
             nextState.tree = deepClone(action.tree);
+
+            if (!state.collapsible) {
+                nextState = openAllSections(nextState);
+            }
             break;
         default:
             return state || initialState;

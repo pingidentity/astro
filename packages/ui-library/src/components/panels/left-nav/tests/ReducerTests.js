@@ -30,6 +30,14 @@ describe("LeftNavBar-Reducer", function () {
         }, opts), {}), Actions.init(getData()));
     }
 
+    it("sets collapsible", function () {
+        var state = Reducer(getInitialState(), Actions.setCollapsible(true));
+        expect(state.collapsible).toBe(true);
+
+        state = Reducer(state, Actions.setCollapsible(false));
+        expect(state.collapsible).toBe(false);
+    });
+
     it("sets autocollapse", function () {
         var state = Reducer(getInitialState(), Actions.setAutocollapse(true));
         expect(state.autocollapse).toBe(true);
@@ -38,9 +46,30 @@ describe("LeftNavBar-Reducer", function () {
         expect(state.autocollapse).toBe(false);
     });
 
+    it("init adds all sections to openSections if not collapsible", function () {
+        var state = Reducer(getInitialState({ collapsible: false }), {});
+        expect(state.collapsible).toBe(false);
+
+        //All sections should be open by default
+        expect(state.openSections).toEqual({ "section-1": true, "section-2": true });
+    });
+
+    it("does not toggle sections when sections are not collapsible", function () {
+        var state = Reducer(getInitialState({ collapsible: false }), {});
+        expect(state.collapsible).toBe(false);
+        expect(state.openSections).toEqual({ "section-1": true, "section-2": true });
+
+        //Toggle should not collapse any section
+        state = Reducer(state, Actions.toggleSection("section-1"));
+        expect(state.openSections["section-1"]).toBe(true);
+
+        state = Reducer(state, Actions.toggleSection("section-2"));
+        expect(state.openSections["section-2"]).toBe(true);
+    });
+
     it("keeps track of openSections", function () {
         //Autocollapse disabled
-        var state = Reducer(getInitialState({ autocollapse: false }), {});
+        var state = Reducer(getInitialState({ autocollapse: false, collapsible: true }), {});
         expect(state.openSections).toEqual({});
 
         state = Reducer(state, Actions.toggleSection("section-1"));
@@ -56,7 +85,7 @@ describe("LeftNavBar-Reducer", function () {
         expect(state.openSections).toEqual({ "section-1": false, "section-2": false });
 
         //Autocollapse enabled
-        var state = Reducer(getInitialState({ autocollapse: true }), {});
+        var state = Reducer(getInitialState({ autocollapse: true, collapsible: true }), {});
         expect(state.openSections).toEqual({});
 
         state = Reducer(state, Actions.toggleSection("section-1"));
@@ -80,7 +109,10 @@ describe("LeftNavBar-Reducer", function () {
         });
 
         it("toggles section", function () {
-            var state = Reducer(getInitialState({ autocollapse: autocollapse }), Actions.toggleSection("section-1"));
+            var state = Reducer(getInitialState({
+                autocollapse: autocollapse,
+                collapsible: true
+            }), Actions.toggleSection("section-1"));
             expect(state.selectedSection).toBe("section-1");
 
             state = Reducer(state, Actions.toggleSection("section-2"));
@@ -91,7 +123,10 @@ describe("LeftNavBar-Reducer", function () {
         });
 
         it("autoselects first item of newly opened section", function () {
-            var state = Reducer(getInitialState({ autocollapse: autocollapse }), Actions.toggleSection("section-1"));
+            var state = Reducer(getInitialState({
+                autocollapse: autocollapse,
+                collapsible: true
+            }), Actions.toggleSection("section-1"));
             expect(state.selectedSection).toBe("section-1");
             expect(state.selectedNode).toBe("item-1.1");
 
@@ -101,7 +136,10 @@ describe("LeftNavBar-Reducer", function () {
         });
 
         it("remains on selected section and node when collapsing section", function () {
-            var state = Reducer(getInitialState({ autocollapse: autocollapse }), Actions.toggleSection("section-1"));
+            var state = Reducer(getInitialState({
+                autocollapse: autocollapse,
+                collapsible: true
+            }), Actions.toggleSection("section-1"));
             expect(state.selectedSection).toBe("section-1");
 
             state = Reducer(state, Actions.toggleSection("section-2"));

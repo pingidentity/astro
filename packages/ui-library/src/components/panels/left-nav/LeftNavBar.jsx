@@ -66,8 +66,10 @@ var React = require("re-react"),
  * @param {object} [openSections={}]
  *          A hash map of ids and their open state. This is used internally by the Reducer to maintain
  *          expand/collapse state.
+ * @param {boolean} [collapsible=false]
+ *          If false, will have all sections open at once by default and disable the collapse feature.
  * @param {boolean} [autocollapse=false]
- *          Whether or not the sections should autocollapse.
+ *          Whether or not the sections should autocollapse. Disabled if the collapsible prop is set to false.
  * @param {LeftNavBar~onSectionValueChange} [onSectionValueChange]
  *          A callback which will be excuted when any section node is clicked. The callback will be given 1 parameter
  *          equal to the id of the item clicked.
@@ -94,6 +96,7 @@ var LeftNavBar = React.createClass({
         selectedNode: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).affectsRendering,
         selectedSection: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).affectsRendering,
         openSections: React.PropTypes.object.affectsRendering,
+        collapsible: React.PropTypes.bool,
         autocollapse: React.PropTypes.bool,
         onSectionClick: React.PropTypes.func,
         onItemClick: React.PropTypes.func,
@@ -161,6 +164,7 @@ var LeftNavBar = React.createClass({
         return {
             "data-id": "left-nav-bar",
             openSections: {},
+            collapsible: false,
             autocollapse: false
         };
     },
@@ -196,7 +200,8 @@ var LeftNavBar = React.createClass({
                 var copyrightDims = ReactDOM.findDOMNode(this.refs.nav).getElementsByClassName("copyright")[0]
                     .getBoundingClientRect();
                 var parentDims = parent.getBoundingClientRect();
-                var sectionOpen = this.props.selectedSection && this.props.openSections[this.props.selectedSection];
+                var sectionOpen = !this.props.collapsible ||
+                    (this.props.selectedSection && this.props.openSections[this.props.selectedSection]);
 
                 style = {
                     top: parseInt(dims.top - parentDims.top + parent.scrollTop),
@@ -255,8 +260,13 @@ var LeftNavBar = React.createClass({
     },
 
     render: function () {
+        var className = classnames({
+            scrollable: this.state.scrollable,
+            collapsible: this.props.collapsible
+        });
+
         return (
-            <div id="nav" ref="nav" className={classnames({ scrollable: this.state.scrollable })}>
+            <div id="nav" ref="nav" className={className}>
                 <div className="nav-menus" ref="container"
                         style={{ bottom: this.state.copyrightHeight }}>
                     <div ref="itemSelector" className="selected-item" style={this.state.selectorStyle}></div>

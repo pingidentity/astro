@@ -60,6 +60,7 @@ var App = React.createClass({
             return section;
         }.bind(this)));
 
+        // this.navActions.setCollapsible(true); //Makes sections collapsible, uncomment this to enable it
         // this.navActions.setAutocollapse(true); //Autocollapse is default disabled, uncomment this to enable it
 
         //Set up the HeaderBar
