@@ -171,18 +171,22 @@ var Stateless = React.createClass({
             var optionNodes = _.map(this.props.options, function (value, key) {
 
                 return (
-                    <a data-id={key} onClick={_.partial(that._onValueChanged, key)} key={key}>
+                    <a
+                        data-id={key}
+                        onClick={_.partial(that._onValueChanged, key)}
+                        key={key}
+                        className="tooltip-menu-option">
                         {value}
                     </a>
                 );
             });
 
             content = (
-                <div className="menu" ref="menu" data-id="menu">
+                <div className="tooltip-menu" ref="menu" data-id="menu">
                     <If test={this.props.title}>
-                        <div className="options-title" data-id="options-title">{this.props.title}</div>
+                        <div className="tooltip-menu-options-title" data-id="options-title">{this.props.title}</div>
                     </If>
-                    <div className="options" data-id="options">
+                    <div className="tooltip-menu-options" data-id="options">
                         {optionNodes}
                     </div>
                 </div>

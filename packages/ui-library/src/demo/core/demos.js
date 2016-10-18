@@ -208,6 +208,13 @@ module.exports = [
                 pathToDoc: "components/forms/ButtonBar.jsx",
                 pathToSource: "components_forms_ButtonBar.jsx.html",
                 pathToDemoSource: "demo_components_forms_ButtonBarDemo.jsx.html"
+            },
+            {
+                label: "Time Zone",
+                demo: require("../components/forms/TimeZoneDemo.jsx"),
+                pathToDoc: "components/forms/TimeZone.jsx",
+                pathToSource: "components_forms_TimeZone.jsx.html",
+                pathToDemoSource: "demo_components_forms_TimeZoneDemo.jsx.html"
             }
         ]
     },

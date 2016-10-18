@@ -1728,6 +1728,19 @@ input[type=file] {
             @include errorDisplayCss;
         }
     }
+    &.input-timezone {
+        padding-right: 26px;
+
+        .form-error-icon {
+            top: 0;
+            right: 0;
+        }
+        .form-error-message {
+            top: calc(100% - 20px);
+
+            @include border-radius($default-input-border-radius);
+        }
+    }
 
     .form-error-icon {
         position: absolute;
@@ -2014,6 +2027,101 @@ input[type=file] {
     }
 }
 
+.input-textselect {
+    display: inline-block;
+
+    .input-container .input-select {
+        margin: 0 0 0 -2px;
+        vertical-align: middle;
+        display: inline-block;
+
+        .wrapper {
+            @include border-radius(0 $default-input-border-radius $default-input-border-radius 0);
+        }
+    }
+    .input-text {
+        margin: 0 !important;
+
+        input[type=text] {
+            text-align: right;
+            vertical-align: middle;
+            display: inline-block;
+
+            @include border-radius($default-input-border-radius 0 0 $default-input-border-radius);
+        }
+
+        &.form-error {
+            input[type=text] {
+                text-align: right;
+
+                @include border-radius($default-input-border-radius 0 0 $default-input-border-radius);
+            }
+        }
+
+        .form-error-icon {
+            right: -21px;
+        }
+        .form-error-message {
+            right: 1px;
+        }
+    }
+}
+
+.report-filters {
+    $border-color: $color-dolphin;
+    $background-color: $color-white;
+    $input-margin: 15px;
+
+    padding: 20px;
+    margin: 0 0 30px;
+    background-color: $color-timberwolf;
+
+    .input-text,
+    .input-textselect {
+        margin: 0 $input-margin 0 0;
+        vertical-align: bottom;
+
+        input[type=text] {
+            background: $background-color;
+            border-color: $border-color;
+        }
+    }
+    .input-select {
+        margin: 0 $input-margin 0 0;
+        vertical-align: bottom;
+
+        .wrapper {
+            background: $background-color;
+            border-color: $border-color;
+        }
+        .selected-option,
+        .select-list {
+            background: $background-color;
+        }
+        .select-list {
+            .select-option:hover {
+                background: $color-elderly;
+            }
+        }
+    }
+    .input-timezone {
+        vertical-align: bottom;
+    }
+
+    .divider {
+        display: inline-block;
+        width: 1px;
+        height: 83px;
+        margin: -10px $input-margin -10px 0;
+        background-color: $color-stratus;
+        vertical-align: bottom;
+    }
+    button.primary {
+        margin: 22px 0 3px $input-margin;
+        float: right;
+    }
+}
+
 a {
     &.input-link {
         display: block;
@@ -2087,7 +2195,9 @@ a {
         word-break: normal;
         width: map-get($input-width-settings-map-default, $size);
     }
-    &.input-text {
+    &.input-text,
+    &.input-textselect,
+    &.input-textselect .input-text.form-error {
         input[type] {
             width: map-get($input-width-settings-map-text, $size);
         }
@@ -2329,20 +2439,10 @@ label {
 }
 
 
-.input-menu-button {
-    position: relative;
-    display: inline-block;
-
-    .description {
-        position: absolute;
-        top: 0;
-        padding: 20px;
-        color: $color-rhino;
-    }
-    .menu {
+@mixin tooltip-menu {
+    .tooltip-menu {
         display: block;
         position: absolute;
-        top: 41px;
         left: 0;
         z-index: 10;
         border: 1px solid $color-input-border;
@@ -2351,43 +2451,6 @@ label {
         @include border-radius(3px);
         @include animation(fade-in 0.2s);
 
-        .options-title {
-            margin: 20px 0 7px 22px;
-        }
-        .options {
-            max-height: 285px;
-            min-width: 202px;
-            overflow: auto;
-
-            a {
-                display: block;
-                position: relative;
-                padding: 8px 15px 7px 22px;
-                line-height: 20px;
-
-                @include transition($default-input-transition);
-
-                &:before {
-                    font-family: $icon-font;
-                    content: '\2b';
-                    font-size: 10px;
-                    position: absolute;
-                    left: 7px;
-                    top: 8px;
-                    color: $color-white;
-
-                    @include transition($default-input-transition);
-                }
-                &:hover {
-                    background: $color-elderly;
-                    text-decoration: none;
-
-                    &:before {
-                        color: inherit;
-                    }
-                }
-            }
-        }
         &:before,
         &:after {
             content: '';
@@ -2404,5 +2467,158 @@ label {
             top: -20px;
             border-color: transparent transparent $color-white transparent;
         }
+
+        .tooltip-menu-options {
+            position: relative;
+            box-sizing: border-box;
+            max-height: 285px;
+            width: 202px;
+            overflow: auto;
+            margin: 0 0 10px;
+        }
+        .tooltip-menu-option {
+            display: block;
+            position: relative;
+            cursor: pointer;
+
+            &:hover,
+            &.selected {
+                background-color: $color-elderly;
+            }
+
+            @include transition(all 0.1s);
+        }
+        .tooltip-menu-search {
+            position: relative;
+            margin: 10px;
+
+            &:before {
+                font-family: $icon-font;
+                content: '\73';
+                position: absolute;
+                top: 12px;
+                left: 10px;
+                font-size: 17px;
+            }
+
+            input {
+                padding-left: 35px;
+            }
+        }
+        .tooltip-menu-search-clear {
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            font-size: 12px;
+
+            &:before {
+                content: 'X';
+                font-family: $icon-font;
+            }
+        }
+    }
+}
+
+.input-timezone {
+    position: relative;
+    display: inline-block;
+    vertical-align: bottom;
+
+    @include tooltip-menu;
+
+    .collapsible-link {
+        text-transform: none;
+    }
+    .tooltip-menu {
+        top: 32px;
+
+        .tooltip-menu-search {
+            input {
+                width: 330px;
+            }
+        }
+        .tooltip-menu-options {
+            width: 350px;
+        }
+        .tooltip-menu-option,
+        .tooltip-menu-option-title {
+            padding: 11px 5px 9px;
+            margin: 0 10px;
+            border-bottom: 1px solid $color-cinder-block;
+        }
+        .tooltip-menu-option {
+            color: $color-midnight;
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+        .tooltip-menu-option-title {
+            color: $color-walrus;
+            background-color: $color-white;
+
+            .icon-clear {
+                &:before {
+                    font-size: 11px;
+                    margin: 0 0 0 7px;
+                }
+            }
+        }
+        .timezone-offset {
+            float: right;
+        }
+    }
+    &.countries {
+        .tooltip-menu-search {
+            height: 0;
+            overflow: hidden;
+
+            @include opacity(0);
+        }
+    }
+}
+
+.input-menu-button {
+    position: relative;
+    display: inline-block;
+
+    @include tooltip-menu;
+
+    .tooltip-menu {
+        top: 41px;
+
+        .tooltip-menu-options-title {
+            margin: 20px 0 7px 22px;
+        }
+        .tooltip-menu-option {
+            padding: 8px 15px 7px 22px;
+            line-height: 20px;
+
+            &:before {
+                font-family: $icon-font;
+                content: '\2b';
+                font-size: 10px;
+                position: absolute;
+                left: 7px;
+                top: 8px;
+                color: $color-white;
+
+                @include transition($default-input-transition);
+            }
+            &:hover {
+                background: $color-elderly;
+                text-decoration: none;
+
+                &:before {
+                    color: inherit;
+                }
+            }
+        }
+    }
+    .tooltip-menu-description {
+        position: absolute;
+        top: 0;
+        padding: 20px;
+        color: $color-rhino;
     }
 }

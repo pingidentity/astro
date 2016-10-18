@@ -327,6 +327,7 @@ var Stateless = React.createClass({
                             })}
                         />
                     )}
+                    {this.props.children}
                     {this.props.showUndo && (
                         <a
                             data-id="undo"
