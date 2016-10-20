@@ -1,7 +1,7 @@
 var React = require("react"),
     ReactDOM = require("react-dom"),
     moment = require("moment-timezone"),
-    zonesMetadata = require("../../../node_modules/moment-timezone/data/meta/latest.json"),
+    zonesMetadata = require("moment-timezone/data/meta/latest.json"),
     classnames = require("classnames"),
     CollapsibleLink = require("../general/CollapsibleLink.jsx"),
     EventUtils = require("../../util/EventUtils.js"),
