@@ -244,7 +244,9 @@ dist: install-mvn install-node-npm
 	$(call package,$(PACKAGE_VERSION_FINAL))
 	$(call deploy,$(PACKAGE_VERSION_FINAL))
 
-	$(call version_and_tag,$(GIT_VERSION_NEXT),"Prepare for the next release cycle")
+	@echo "UI_LIBRARY_FINAL_VERSION=$(PACKAGE_VERSION_FINAL)\nUI_LIBRARY_SNAPSHOT_VERSION=$(PACKAGE_VERSION_NEXT)" > version
+
+	$(call version_and_tag,$(PACKAGE_VERSION_NEXT),"Prepare for the next release cycle")
 	$(call package,$(PACKAGE_VERSION_NEXT))
 	$(call deploy,$(PACKAGE_VERSION_NEXT))
 
