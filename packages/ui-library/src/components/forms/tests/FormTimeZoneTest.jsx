@@ -1,7 +1,8 @@
 
-jest.dontMock("../../general/CollapsibleLink.jsx");
 jest.dontMock("../FormTimeZone.jsx");
 jest.dontMock("../FormError.jsx");
+jest.dontMock("../../general/CollapsibleLink.jsx");
+jest.dontMock("../../../util/KeyboardUtils.js");
 
 
 describe("FormTimeZone", function () {
@@ -57,11 +58,11 @@ describe("FormTimeZone", function () {
     }
 
     function getValueLink (component) {
-        return TestUtils.findRenderedDOMNodeWithDataId(component, "collapsible-link");
+        return TestUtils.findRenderedDOMNodeWithDataId(component, componentId + "-collapsible-link");
     }
 
     function getSearchInput (component) {
-        return TestUtils.findRenderedDOMNodeWithDataId(component, "country-search");
+        return TestUtils.findRenderedDOMNodeWithDataId(component, componentId + "-search-input");
     }
 
     function getRows (component) {
@@ -148,7 +149,7 @@ describe("FormTimeZone", function () {
                 searchString: searchString
             }),
             searchInput = getSearchInput(component),
-            clearSearch = TestUtils.findRenderedDOMNodeWithDataId(component, "clear-search");
+            clearSearch = TestUtils.findRenderedDOMNodeWithDataId(component, componentId + "-search-clear");
 
         expect(searchInput.value).toEqual(searchString);
         ReactTestUtils.Simulate.click(clearSearch);
@@ -177,13 +178,15 @@ describe("FormTimeZone", function () {
         expect(countryRows[0].className).toContain("selected");
     });
 
-    it("selects the second country when the DOWN-ARROW key is pressed then ENTER key is pressed", function () {
+    it("selects the second country when the UP/DOWN-ARROW keys are pressed then ENTER key is pressed", function () {
         var component = getComponent({ open: true }),
             countryRows = getRows(component),
             searchInput = getSearchInput(component),
             selectedCountry;
 
         ReactTestUtils.Simulate.keyDown(searchInput, { keyCode: KeyboardUtils.KeyCodes.ARROW_DOWN });
+        ReactTestUtils.Simulate.keyDown(searchInput, { keyCode: KeyboardUtils.KeyCodes.ARROW_DOWN });
+        ReactTestUtils.Simulate.keyDown(searchInput, { keyCode: KeyboardUtils.KeyCodes.ARROW_UP });
         ReactTestUtils.Simulate.keyDown(searchInput, { keyCode: KeyboardUtils.KeyCodes.ENTER });
         selectedCountry = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-country");
         expect(selectedCountry.textContent).toContain(countryMetadata[1].name);
@@ -358,5 +361,17 @@ describe("FormTimeZone", function () {
         expect(errorIcon).toBeTruthy();
         expect(errorMessage).toBeTruthy();
         expect(errorMessage).toEqual(errorMessage);
+    });
+
+    it("public function isValidTimeZone works properly", function () {
+        var component = getComponent(),
+            checkZone = component.refs.TimeZoneStateful.isValidTimeZone("badZoneName"),
+            realZoneName = zoneMetadata[10].name;
+
+        expect(checkZone).toEqual(false);
+
+        checkZone = component.refs.TimeZoneStateful.isValidTimeZone(realZoneName);
+        expect(checkZone).toBeTruthy();
+        expect(checkZone.name).toEqual(realZoneName);
     });
 });

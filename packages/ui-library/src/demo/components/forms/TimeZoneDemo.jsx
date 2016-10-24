@@ -25,7 +25,8 @@ var FormTimeZoneDemo = React.createClass({
             newState.searchString = "";
 
         } else if (type === "zone") {
-            newState.value = value;
+            newState.value = value.name;
+            newState.offset = value.offset;
             newState.filterByCountry = undefined;
             newState.open = false;
         }
@@ -51,14 +52,6 @@ var FormTimeZoneDemo = React.createClass({
         return (
             <div>
                 <div className="input-row">
-                    <FormLabel value="Stateful Version" className="detached" />
-                    <FormTimeZone
-                        data-id="timezone-stateful"
-                        controlled={false}
-                        countryLabel="Select a Country"
-                    />
-                </div>
-                <div className="input-row">
                     <FormLabel value="Stateless Version" className="detached" />
                     <FormTimeZone
                         data-id="timezone-stateless"
@@ -72,10 +65,19 @@ var FormTimeZoneDemo = React.createClass({
                         selectedIndex={this.state.selectedIndex}
                         countryLabel="Select a Country"
                         value={this.state.value}
+                        ref="tzStateless"
                     />
                     <p>
                         Note that the browser's timezone is guessed if the passed value is undefined.
                     </p>
+                </div>
+                <div className="input-row">
+                    <FormLabel value="Stateful Version" className="detached" />
+                    <FormTimeZone
+                        data-id="timezone-stateful"
+                        controlled={false}
+                        countryLabel="Select a Country"
+                    />
                 </div>
             </div>
         );
