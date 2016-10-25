@@ -24,10 +24,14 @@ var CalendarDemo = React.createClass({
     render: function () {
         return (
             <Calendar
-                format="YYYY-MM-DD"
-                date={this.state.selectedDate}
-                computableFormat="x"
+                data-id="calendar"
                 closeOnSelect={true}
+                computableFormat="x"
+                date={this.state.selectedDate}
+                format="YYYY-MM-DD"
+                helpClassName="right"
+                labelText="Date"
+                labelHelpText="Help text can go here"
                 onValueChange={this._onEnrollmentDateChanged} />
         );
     }

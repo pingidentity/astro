@@ -621,7 +621,8 @@ input[type=file] {
 .input-integer,
 .input-radio,
 .input-checkbox,
-.input-color-picker {
+.input-color-picker,
+.input-calendar {
     margin: 0 10px 20px 0;
 }
 
@@ -1143,14 +1144,14 @@ input[type=file] {
     &:before {
         content: '\43';
         left: 10px;
-        top: 12px;
+        bottom: 14px;
 
         @include transition($default-input-transition);
     }
     &:after {
         content: 'v';
         right: 9px;
-        top: 14px;
+        bottom: 12px;
 
         @include transition($default-input-transition);
     }
@@ -1187,11 +1188,11 @@ input[type=file] {
             width: 200px;
             text-align: center;
             left: 0;
-            top: $default-input-height + 1;
+            top: calc(100% - 1px);
             -webkit-touch-callout: none;
             z-index: 2;
 
-            @include border-radius($default-input-border-radius);
+            @include border-radius(0 0 $default-input-border-radius $default-input-border-radius);
             @include user-select(none);
         }
         .today-btn {

@@ -2,6 +2,7 @@ var React = require("react"),
     classnames = require("classnames"),
     moment = require("moment-range"),
     DaysView = require("./DaysView.jsx"),
+    FormLabel = require("../forms/FormLabel.jsx"),
     MonthsView = require("./MonthsView.jsx"),
     YearsView = require("./YearsView.jsx"),
     CalendarUtils = require("./Utils"),
@@ -49,7 +50,11 @@ var Views = {
  * @param {string} [id]
  *    DEPRECATED. Use "data-id" instead.
  * @param {string} [className]
- *    CSS classes to set on the top-level HTML container.
+ *    CSS classes to apply to the top-level HTML container.
+ * @param {string} [labelClassName]
+ *    CSS classes to apply to the label container.
+ * @param {string} [helpClassName]
+ *    CSS classes to apply to the label help container.
  *
  * @param {*} date
  *    Numeric value for the selected date.
@@ -57,6 +62,11 @@ var Views = {
  *    String value of the date format you want to display (e.g. "YYYY-MM-DD").
  * @param {string} [computableFormat="MM-DD-YYYY"]
  *    If unsure, leave as "x". Refer to moment#formatTokenFunctions for more info.
+ * @param {string} [labelHelpText]
+ *     The text to display for the help tooltip.
+ * @param {string} [labelText]
+ *     The text to show as the field's label.
+ *
  * @param {Calendar.Views} [minView=Calendar.Views.DAYS]
  *    Set the minimal view.
  * @param {Calendar~onValueChange} [onValueChange]
@@ -93,6 +103,7 @@ var Views = {
  *                          date={this.state.selectedDate}
  *                          computableFormat="x"
  *                          closeOnSelect={true}
+ *                          labelText="Start Date"
  *                          onValueChange={this._onEnrollmentDateChanged}/>
  *             );
  *     }
@@ -102,22 +113,27 @@ var Calendar = React.createClass({
 
     propTypes: {
         "data-id": React.PropTypes.string,
-        //TODO: remove when v1 no longer supported
-        id: React.PropTypes.string,
+
         className: React.PropTypes.string,
+        closeOnSelect: React.PropTypes.bool,
+        computableFormat: React.PropTypes.string,
         date: React.PropTypes.any.isRequired,
         format: React.PropTypes.string,
-        computableFormat: React.PropTypes.string,
+        helpClassName: React.PropTypes.string,
+        labelClassName: React.PropTypes.string,
+        labelText: React.PropTypes.string,
+        labelHelpText: React.PropTypes.string,
         minView: React.PropTypes.oneOf([Views.DAYS, Views.MONTHS, Views.YEARS]),
+        placeholder: React.PropTypes.string,
+        required: React.PropTypes.bool,
+
         //TODO: set as required when v1 no longer supported
         onValueChange: React.PropTypes.func,
+
         //TODO: remove when v1 no longer supported
-        onChange: React.PropTypes.func,
-        placeholder: React.PropTypes.string,
-        closeOnSelect: React.PropTypes.bool,
-        required: React.PropTypes.bool,
-        //TODO: remove when v1 no longer supported
-        isRequired: React.PropTypes.bool
+        id: React.PropTypes.string,
+        isRequired: React.PropTypes.bool,
+        onChange: React.PropTypes.func
     },
 
     getDefaultProps: function () {
@@ -396,8 +412,17 @@ var Calendar = React.createClass({
         var id = this.props.id || this.props["data-id"];
 
         return (
-            <div className={className}
-                 onClick={this.toggleClick}>
+            <div
+                className={className}
+                onClick={this.toggleClick}>
+
+                <FormLabel
+                    className={classnames(this.props.labelClassName)}
+                    helpClassName={classnames(this.props.helpClassName)}
+                    data-id={id + "-label"}
+                    value={this.props.labelText}
+                    hint={this.props.labelHelpText}
+                />
                 <div className="input-container">
                     <input type="text"
                         data-id={id}

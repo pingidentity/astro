@@ -10,6 +10,8 @@ jest.dontMock("../ViewHeader.jsx");
 jest.dontMock("../YearsView.jsx");
 jest.dontMock("../Utils");
 jest.dontMock("../Constants");
+jest.dontMock("../../forms/FormLabel.jsx");
+jest.dontMock("../../tooltips/HelpHint.jsx");
 
 describe("Calendar", function () {
     var React = require("react"),
@@ -56,6 +58,35 @@ describe("Calendar", function () {
         var calendar = TestUtils.findRenderedDOMNodeWithDataId(component, "myCalendar");
 
         expect(calendar).toBeDefined();
+    });
+
+    it("renders the label and label help text with a custom label css class and custom help css class", function () {
+        var dataId = "my-label",
+            customLabelText = "My Label",
+            customLabelClass = "label-css-class",
+            customHelpClass = "help-css-class",
+            labelHelpText = "Some help text",
+            component = ReactTestUtils.renderIntoDocument(
+                <Calendar
+                    data-id={dataId}
+                    date={selectedDate}
+                    labelText={customLabelText}
+                    labelHelpText={labelHelpText}
+                    labelClassName={customLabelClass}
+                    helpClassName={customHelpClass}
+                />
+            ),
+            label = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-label"),
+            labelText = TestUtils.findRenderedDOMNodeWithDataId(component, "label"),
+            help = TestUtils.findRenderedDOMNodeWithDataId(component, "help-tooltip");
+
+        expect(labelText).toBeTruthy();
+        expect(labelText.textContent).toContain(customLabelText);
+        expect(label.className).toContain(customLabelClass);
+
+        expect(help).toBeTruthy();
+        expect(help.textContent).toContain(labelHelpText);
+        expect(help.className).toContain(customHelpClass);
     });
 
     it("renders will null date and inputValue state it date not specified", function () {
