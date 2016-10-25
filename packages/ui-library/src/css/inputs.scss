@@ -2077,6 +2077,13 @@ input[type=file] {
     margin: 0 0 30px;
     background-color: $color-timberwolf;
 
+    .input-select,
+    .input-textselect,
+    .input-text,
+    .input-calendar,
+    .input-timezone {
+        margin-bottom: 20px;
+    }
     .input-text,
     .input-textselect {
         margin: 0 $input-margin 0 0;
@@ -2108,14 +2115,17 @@ input[type=file] {
     .input-timezone {
         vertical-align: bottom;
     }
+    .input-calendar input[type=text].input-calendar-value {
+        width: 145px;
+    }
 
     .divider {
         display: inline-block;
         width: 1px;
-        height: 83px;
-        margin: -10px $input-margin -10px 0;
+        height: 81px;
+        margin: -10px $input-margin 5px 0;
         background-color: $color-stratus;
-        vertical-align: bottom;
+        vertical-align: top;
     }
     button.primary {
         margin: 22px 0 3px $input-margin;
