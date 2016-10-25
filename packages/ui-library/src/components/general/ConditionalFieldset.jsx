@@ -23,14 +23,16 @@ var ConditionalFieldsetStateless = React.createClass({
         supportEmpty: React.PropTypes.bool,
         emptyMessage: React.PropTypes.string,
         onValueChange: React.PropTypes.func,
-        selectedIndex: React.PropTypes.number
+        selectedIndex: React.PropTypes.number,
+        disabled: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
         return {
             supportEmpty: false,
             emptyMessage: "-- Select an option --",
-            selectedIndex: 0
+            selectedIndex: 0,
+            disabled: false
         };
     },
 
@@ -52,6 +54,10 @@ var ConditionalFieldsetStateless = React.createClass({
         this.props.onValueChange(option.value);
     },
 
+    _handleRadioValueChange: function (value) {
+        this.props.onValueChange(Number(value));
+    },
+
     _getOptions: function (type) {
         var options = [];
         var index = 0;
@@ -67,6 +73,7 @@ var ConditionalFieldsetStateless = React.createClass({
 
             return (
                 <FormDropDownList data-id={dataId}
+                    disabled={this.props.disabled}
                     options={options}
                     onValueChange={this._handleSelectValueChange}
                     selectedOption={options[this.props.selectedIndex]}
@@ -81,10 +88,11 @@ var ConditionalFieldsetStateless = React.createClass({
                 <FormRadioGroup
                     ref="options"
                     data-id={dataId}
+                    disabled={this.props.disabled}
                     groupName={this.props["data-id"]+"-radio-group"}
                     stacked={false}
                     selected={this.props.selectedIndex}
-                    onValueChange={this.props.onValueChange}
+                    onValueChange={this._handleRadioValueChange}
                     items={options}
                 />
             );
@@ -168,6 +176,8 @@ var ConditionalFieldsetStateful = React.createClass({
  * @param {ConditionalFieldset~onValueChange} onValueChange
  *          Callback to be triggered when the selection is changed. If using the controlled=false
  *          option this is not required.
+ * @param {boolean} [disabled=false]
+ *          Disables the ConditionalFieldset options
  *
  * @example <div className="input-row">
  *               <label className="detached">ConditionalFieldset with empty support, set through props</label>
