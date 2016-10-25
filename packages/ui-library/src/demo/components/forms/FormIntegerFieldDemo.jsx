@@ -10,17 +10,26 @@ var FormIntegerFieldDemo = React.createClass({
 
     getInitialState: function () {
         return {
+            integerField1: undefined,
             integerField4Error: "",
             integerField5Error: "",
             integerField7Mode: "read_only",
             integerField7Disabled: false
         };
     },
+    _changeCallback0: function (value) {
+        this.setState({
+            integerField0: value
+        });
+    },
 
     _changeCallback: function (value) {
-        this.setState({
-            integerField1: value
-        });
+        if (FormIntegerField.isValid(value)) {
+            this.setState({
+                integerField1: value
+            });
+        }
+
     },
 
     _changeCallback2: function (value) {
@@ -108,10 +117,22 @@ var FormIntegerFieldDemo = React.createClass({
             <div>
                 <div className="input-row">
                     <FormIntegerField
-                            labelText={"Basic - Value : " + this.state.integerField1}
-                            onValueChange = {this._changeCallback}
-                            className="input-width-medium"
+                            labelText={"Basic - Value : " + this.state.integerField0}
+                            onValueChange = {this._changeCallback0}
+                            initialValue = ""
                             controlled={false}
+                            className="input-width-medium"
+                    />
+                </div>
+                <div className="input-row">
+                    <FormIntegerField
+                            labelText={"Basic Controlled with validation helper and with hidden controls - Value : " +
+                                this.state.integerField1}
+                            onValueChange = {this._changeCallback}
+                            value={this.state.integerField1}
+                            className="input-width-medium"
+                            controlled={true}
+                            hideControls={true}
                     />
                 </div>
                 <div className="input-row">

@@ -6,19 +6,19 @@ var React = require("react"),
     _ = require("underscore");
 
 var isValid = function (value, enforceRange, min, max) {
-
     if (value === "") {
         return true;
     }
-    if (typeof(value) === "string" && value.indexOf(".") !== -1) {
+
+    if (String(value).search(/[A-Z\.]/i) !== -1) {
+        return false;
+    }
+
+    if (isNaN(value)) {
         return false;
     }
 
     var intValue = parseInt(value);
-
-    if (isNaN(intValue)) {
-        return false;
-    }
     //check max range if enforceRange is true
     if (enforceRange && (intValue > max || intValue < min)) {
         return false;
@@ -51,6 +51,8 @@ var isValid = function (value, enforceRange, min, max) {
  *     Whether the field is disabled or not.
  * @param {boolean} [readOnly=false]
  *     Whether or not the input field is readonly.
+ * @param {boolean} [hideControls=false]
+ *     Whether or not the controls are displayed.
  *
  * @param {string} [labelHelpText]
  *     The text to display for the help tooltip.
@@ -139,6 +141,7 @@ var Stateless = React.createClass({
         required: React.PropTypes.bool,
         disabled: React.PropTypes.bool,
         readOnly: React.PropTypes.bool,
+        hideControls: React.PropTypes.bool,
 
         labelHelpText: React.PropTypes.string,
         labelText: React.PropTypes.string,
@@ -275,6 +278,7 @@ var Stateless = React.createClass({
             required: false,
             disabled: false,
             readOnly: false,
+            hideControls: false,
 
             value: "",
 
@@ -309,7 +313,7 @@ var Stateless = React.createClass({
         var integerControls,
             styles = classnames("form-integer-container input-integer", this.props.className);
 
-        if (!this.props.disabled && !this.props.readOnly) {
+        if (!this.props.disabled && !this.props.readOnly && !this.props.hideControls) {
             integerControls = (
                 <span className="integer-controls" onMouseOut={this._handleSpinnerRelease}>
                     <button data-id={this.props["data-id"] + "-up-btn"}
@@ -331,12 +335,12 @@ var Stateless = React.createClass({
                 </span>
             );
         }
-
         return (
             <div onKeyDown={this._handleKeyDown}>
                 <FormTextField {...this.props}
                         ref="formTextField"
                         data-id={this.props["data-id"] + "-text-field"}
+                        controlled={true}
                         className={styles}
                         labelClassName={classnames(this.props.labelClassName)}
                         onValueChange={this.props.onValueChange}

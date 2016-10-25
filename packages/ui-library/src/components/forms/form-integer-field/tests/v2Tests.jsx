@@ -145,6 +145,7 @@ describe("FormIntegerField", function () {
         ReactTestUtils.Simulate.change(input, { target: { value: "A" } } );
 
         expect(callback).not.toBeCalled();
+        expect(input.textContent).toBe("");
     });
 
 
@@ -384,6 +385,44 @@ describe("FormIntegerField", function () {
                     />
         );
         expect(TestUtils.findRenderedDOMNodeWithClass(component, "added")).not.toBeNull();
+    });
+
+    it("hides controls", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormIntegerField hideControls={true} />);
+
+        var spinnerUp = TestUtils.findRenderedDOMNodeWithDataId(component, "int-up-btn");
+        var spinnerDown = TestUtils.findRenderedDOMNodeWithDataId(component, "int-down-btn");
+
+        expect(spinnerUp).toBeFalsy();
+        expect(spinnerDown).toBeFalsy();
+
+    });
+
+    //Tests for isValid() method
+    it("validation for integer", function () {
+        expect(FormIntegerField.isValid(5)).toBe(true);
+    });
+
+    it("validation returns false for alphabetic key", function () {
+        expect(FormIntegerField.isValid("r")).toBe(false);
+    });
+
+    it("validation returns false for none number", function () {
+        expect(FormIntegerField.isValid("r")).toBe(false);
+        expect(FormIntegerField.isValid("-")).toBe(false);
+    });
+
+    it("validation returns false for non-integer number", function () {
+        expect(FormIntegerField.isValid(5.9)).toBe(false);
+    });
+
+    it("validation with enforce range", function () {
+        expect(FormIntegerField.isValid(5, true, 0, 10)).toBe(true);
+    });
+
+    it("validation out of range", function () {
+        expect(FormIntegerField.isValid(5, true, 10, 20)).toBe(false);
     });
 
 });
