@@ -258,6 +258,10 @@ var Stateless = React.createClass({
     _handleKeyDown: function (e) {
         var key = e.keyCode;
 
+        if (this.props.readOnly) {
+            return;
+        }
+
         // do nothing for all other keys
         if (key !== 38 && key !== 40) {
             return;

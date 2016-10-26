@@ -86,6 +86,15 @@ describe("FormIntegerField", function () {
         jest.clearAllTimers();
     });
 
+    it("disables up/down keys when in read only mode", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormIntegerField data-id="int" readOnly={true} onValueChange={callback} value={40} />
+        );
+        var input = TestUtils.findRenderedDOMNodeWithDataId(component,"int-text-field-input");
+        ReactTestUtils.Simulate.keyDown(input, { key: "up arrow", keyCode: 38, which: 38 } );
+        expect(callback).not.toBeCalled();
+    });
+
     it("shows field as required", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormIntegerField onChange = {callback} isRequired={true} />
