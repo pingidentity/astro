@@ -304,6 +304,13 @@ module.exports = [
                 pathToDemoSource: "demo_components_general_SectionDemo.jsx.html"
             },
             {
+                label: "Condensed Table",
+                demo: require("../components/tables/CondensedTableDemo.jsx"),
+                pathToDoc: "components/tables/CondensedTable.jsx",
+                pathToSource: "components_table_CondensedTable.jsx.html",
+                pathToDemoSource: "demo_components_table_CondensedTable.jsx.html"
+            },
+            {
                 label: "Conditional Fieldset",
                 demo: require("../components/general/ConditionalFieldsetDemo.jsx"),
                 pathToDoc: "components/general/ConditionalFieldset.jsx",

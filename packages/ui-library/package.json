@@ -75,6 +75,7 @@
     "stylelint-config-standard": "11.0.0",
     "tty-table": "1.0.7",
     "url-loader": "0.5.7",
+    "uuid": "2.0.3",
     "validator": "5.2.0 ",
     "wdio": "0.3.1",
     "wdio-jasmine-framework": "0.2.5",

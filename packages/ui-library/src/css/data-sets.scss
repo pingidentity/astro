@@ -1,5 +1,33 @@
 
 .data {
+    
+    &.condensed {
+        display: inline-block;
+        border: 1px solid $color-rabbit-fur;
+        
+        @include border-radius(4px);
+        
+        .data-group {
+            padding: 20px 0 10px;
+            max-width: 100%;
+            border-bottom: 1px dotted $color-rabbit-fur;
+
+            &:last-of-type {
+                border-bottom: none;
+            }
+            &.data-section {
+                .data-item {
+                    > label {
+                        padding-left: 20px;
+                    }
+                    > label,
+                    > span {
+                        padding-bottom: 10px;
+                    }
+                }
+            }
+        }
+    }
     .data-group {
         padding: 0 0 30px;
         max-width: 100%;
@@ -40,6 +68,43 @@
                         }
                     }
                 }
+                
+                // CHILD DATA SETS
+                .data {
+                    &.child {
+                        border: 1px solid $color-rabbit-fur;
+                        
+                        @include border-radius(4px);
+                        
+                        .data-group {
+                            
+                            &.data-section {
+                                padding: 25px 0 5px;
+                                margin-bottom: 0;
+                                
+                                .data-item {
+                                    &.data-title {
+                                        margin-right: 0;
+                                        
+                                        > label {
+                                            border-bottom: none;
+                                            font-size: 13px;
+                                            font-weight: 500;
+                                            color: $color-elephant;
+                                            margin-bottom: 10px;
+                                            padding-left: 25px;
+                                        }
+                                        > span {
+                                            padding-right: 25px;
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+                
             }
             &.labels-only {
                 .data-item {
