@@ -92,9 +92,9 @@ var ButtonBar = React.createClass({
         visible: React.PropTypes.bool
     },
 
-    _handleSave: function () {
+    _handleSave: function (e) {
         if (!this.props.enableSavingAnimation) {
-            this.props.onSave();
+            this.props.onSave(e);
         }
     },
 
@@ -140,31 +140,38 @@ var ButtonBar = React.createClass({
             );
 
         return (
-            <div data-id={this.props["data-id"]}
-                    className={classnames(this.props.className, containerClassName)}>
+            <div
+                data-id={this.props["data-id"]}
+                className={classnames(this.props.className, containerClassName)}>
                 {this.props.children}
                 {this.props.discardText && this.props.onDiscard && (
-                    <button data-id={this.props["data-id"] + "-discard"}
-                            className={discardClassName}
-                            onClick={this.props.onDiscard}
-                            disabled={this.props.enableSavingAnimation}>
+                    <button
+                        data-id={this.props["data-id"] + "-discard"}
+                        className={discardClassName}
+                        onClick={this.props.onDiscard}
+                        disabled={this.props.enableSavingAnimation}
+                        type="button">
                         {discardText}
                     </button>
                 )}
                 {this.props.cancelText && this.props.onCancel && (
-                    <button data-id={this.props["data-id"] + "-cancel"}
-                            className={cancelClassName}
-                            onClick={this.props.onCancel}
-                            disabled={this.props.enableSavingAnimation}>
+                    <button
+                        data-id={this.props["data-id"] + "-cancel"}
+                        className={cancelClassName}
+                        onClick={this.props.onCancel}
+                        disabled={this.props.enableSavingAnimation}
+                        type="button">
                         {cancelText}
                     </button>
                 )}
-                <EllipsisLoaderButton data-id={this.props["data-id"] + "-save"}
-                        className={saveClassName}
-                        disabled={this.props.saveDisabled}
-                        loading={this.props.enableSavingAnimation}
-                        onClick={this._handleSave}
-                        text={saveText} />
+                <EllipsisLoaderButton
+                    data-id={this.props["data-id"] + "-save"}
+                    className={saveClassName}
+                    disabled={this.props.saveDisabled}
+                    loading={this.props.enableSavingAnimation}
+                    onClick={this._handleSave}
+                    text={saveText}
+                />
             </div>
         );
     }
