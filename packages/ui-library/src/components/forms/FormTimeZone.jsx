@@ -11,10 +11,22 @@ var React = require("react"),
 
 /**
 * @callback FormTimeZone~onValueChange
+*
+* @param {type} type
+*    What has changed (either "country" or "zone")
+* @param {value} value
+*    When type=="country", this is the country name.
+*    When type=="zone", this is an object with the unique zone name "name", the UTC offset "offset", the abbreviation,
+*        and time.
 */
 
 /**
 * @callback FormTimeZone~onSearch
+*
+* @param {string}
+*     The value currently entered into the search field
+* @param {selectedIndex}
+*     The index of the item that is selected and that will be selected if ENTER is pressed
 */
 
 /**
@@ -33,15 +45,19 @@ var React = require("react"),
 * @param {string} [className]
 *     Class name(s) to add to the top-level container/div
 *
-* @param {string} countryLabel
+* @param {string=Select a Country} selectCountryLabel
 *     The text prompt/label that is displayed above the list of countries
+* @param {string=Country} selectCountryLabel
+*     The text to display over the selected country (usually "Country")
+* @param {string} [displayValue] Value to be displayed other than the unique string value. For example the abbreviation
+*     could be displayed instead.
 * @param {string} [errorMessage]
 *     The message to display if defined when external validation failed.
 * @param {string} [filterByCountry]
 *     The two character country code that, when set, displays a list of time zones associated with that country
 * @param {boolean} [open=false]
 *     Shows/opens the time zone menu when true
-* @param {string} searchString
+* @param {string} [searchString]
 *     Text to used filter the full list of time zone options
 * @param {string} value
 *     The initial value of the input
@@ -62,6 +78,8 @@ var React = require("react"),
 *         onChange={this._handleChange}
 *         onSearch={this._handleSearchChange}
 *         onToggle={this._handleToggle}
+*         selectCountryLabel="Select a Country"
+*         countryLabel="Country"
 *     />
 *
 **/
@@ -99,7 +117,8 @@ var TimeZoneStateless = React.createClass({
     propTypes: {
         "data-id": React.PropTypes.string,
         className: React.PropTypes.string,
-        countryLabel: React.PropTypes.string.isRequired,
+        countryLabel: React.PropTypes.string,
+        displayValue: React.PropTypes.string,
         errorMessage: React.PropTypes.string,
         filterByCountry: React.PropTypes.string,
         onValueChange: React.PropTypes.func,
@@ -107,6 +126,7 @@ var TimeZoneStateless = React.createClass({
         onToggle: React.PropTypes.func,
         open: React.PropTypes.bool,
         searchString: React.PropTypes.string,
+        selectCountryLabel: React.PropTypes.string.isRequired,
         selectedIndex: React.PropTypes.number,
         value: React.PropTypes.string,
     },
@@ -120,12 +140,8 @@ var TimeZoneStateless = React.createClass({
     },
 
     _onZoneChange: function (e) {
-        var value = {};
-
-        value.name = e.target.getAttribute("data-name") || e.target.parentElement.getAttribute("data-name");
-        value.offset = e.target.getAttribute("data-offset") || e.target.parentElement.getAttribute("data-offset");
-
-        this._onValueChange("zone", value);
+        var index = e.target.getAttribute("data-index") || e.target.parentElement.getAttribute("data-index");
+        this._onValueChange("zone", this.state.renderedZones[index]);
     },
 
     _onValueChange: function (type, value) {
@@ -198,7 +214,7 @@ var TimeZoneStateless = React.createClass({
         return (
             <div>
                 <div className="tooltip-menu-option-title">
-                    {this.props.countryLabel}
+                    {this.props.selectCountryLabel}
                 </div>
                 <div
                     className="tooltip-menu-options"
@@ -230,6 +246,7 @@ var TimeZoneStateless = React.createClass({
             <div>
                 {zonesMetadata.countries[this.props.filterByCountry] && (
                     <div className="tooltip-menu-option-title" data-id="selected-country">
+                        <div className="country-label">{this.props.countryLabel}</div>
                         {zonesMetadata.countries[this.props.filterByCountry].name}
                         <a
                             data-id={this.props["data-id"] + "-clear-country"}
@@ -247,8 +264,7 @@ var TimeZoneStateless = React.createClass({
                         rowCss = i === self.props.selectedIndex ? "selected" : null;
                         return (
                             <div
-                                data-name={tz.name}
-                                data-offset={tz.offset}
+                                data-index={i}
                                 onClick={self._onZoneChange}
                                 ref={"zone-option-" + i}
                                 key={tz.name}
@@ -407,12 +423,20 @@ var TimeZoneStateless = React.createClass({
     },
 
     getDefaultProps: function () {
+
+        this.labelDefaults = {
+            COUNTRY: "Country",
+            "SELECT-COUNTRY": "Select a Country"
+        };
+
         return {
+            countryLabel: this.labelDefaults.COUNTRY,
             filterByCountry: undefined,
             onValueChange: _.noop,
             onSearch: _.noop,
             onToggle: _.noop,
             open: false,
+            selectCountryLabel: this.labelDefaults["SELECT-COUNTRY"],
             selectedIndex: 0,
             value: moment.tz.guess()
         };
@@ -431,7 +455,7 @@ var TimeZoneStateless = React.createClass({
                 ref="input-timezone">
                 <CollapsibleLink
                     data-id={this.props["data-id"] + "-collapsible-link"}
-                    title={this.props.value}
+                    title={this.props.displayValue || this.props.value}
                     expanded={this.props.open}
                     onToggle={this.props.onToggle}
                 />

@@ -2542,6 +2542,7 @@ label {
     }
     .tooltip-menu {
         top: 32px;
+        font-size: 14px;
 
         .tooltip-menu-search {
             input {
@@ -2574,6 +2575,9 @@ label {
                     margin: 0 0 0 7px;
                 }
             }
+            .country-label {
+                color: $color-elephant;
+            }
         }
         .timezone-offset {
             float: right;
@@ -2583,6 +2587,7 @@ label {
         .tooltip-menu-search {
             height: 0;
             overflow: hidden;
+            margin: 0;
 
             @include opacity(0);
         }

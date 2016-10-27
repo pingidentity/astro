@@ -374,4 +374,16 @@ describe("FormTimeZone", function () {
         expect(checkZone).toBeTruthy();
         expect(checkZone.name).toEqual(realZoneName);
     });
+
+    it("renders the displayValue when provided", function () {
+        var displayValue = "MDT",
+            component = getComponent({
+                open: true,
+                value: "America/Denver",
+                displayValue: displayValue
+            }),
+            linkValue = getValueLink(component);
+
+        expect(linkValue.textContent).toEqual(displayValue);
+    });
 });

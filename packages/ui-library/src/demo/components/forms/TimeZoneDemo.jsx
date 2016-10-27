@@ -25,8 +25,7 @@ var FormTimeZoneDemo = React.createClass({
             newState.searchString = "";
 
         } else if (type === "zone") {
-            newState.value = value.name;
-            newState.offset = value.offset;
+            newState.value = value;
             newState.filterByCountry = undefined;
             newState.open = false;
         }
@@ -44,7 +43,10 @@ var FormTimeZoneDemo = React.createClass({
         return {
             open: false,
             searchString: "",
-            value: undefined,
+            value: {
+                name: "America/Denver",
+                abbr: "MDT"
+            },
         };
     },
 
@@ -52,7 +54,10 @@ var FormTimeZoneDemo = React.createClass({
         return (
             <div>
                 <div className="input-row">
-                    <FormLabel value="Stateless Version" className="detached" />
+                    <FormLabel
+                        value="Stateless Version (where abbreviation is displayed instead)"
+                        className="detached"
+                    />
                     <FormTimeZone
                         data-id="timezone-stateless"
                         controlled={true}
@@ -63,21 +68,20 @@ var FormTimeZoneDemo = React.createClass({
                         open={this.state.open}
                         searchString={this.state.searchString}
                         selectedIndex={this.state.selectedIndex}
-                        countryLabel="Select a Country"
-                        value={this.state.value}
+                        value={this.state.value.name}
+                        displayValue={this.state.value.abbr}
                         ref="tzStateless"
                     />
-                    <p>
-                        Note that the browser's timezone is guessed if the passed value is undefined.
-                    </p>
                 </div>
                 <div className="input-row">
                     <FormLabel value="Stateful Version" className="detached" />
                     <FormTimeZone
                         data-id="timezone-stateful"
                         controlled={false}
-                        countryLabel="Select a Country"
                     />
+                    <p>
+                        * Note that the browser's timezone is guessed if the passed value is undefined.
+                    </p>
                 </div>
             </div>
         );
