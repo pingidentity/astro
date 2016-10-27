@@ -266,4 +266,20 @@ describe("SelectText", function () {
         expect(console.warn).not.toBeCalled();
     });
 
+    //TODO: remove when dataId no longer supported
+    it("does not log warning for dataId when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <SelectText dataId="selectTextWithOldDataId" className="testClass" select={true}>
+                Just some test text
+            </SelectText>
+        );
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
+
 });

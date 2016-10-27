@@ -146,4 +146,17 @@ describe("ModalTest", function () {
         //but close link is here
         TestUtils.findRenderedDOMNodeWithClass(modal, "close-modal");
     });
+
+    //TODO: remove when id no longer supported
+    it("does not log warning for id when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        getComponent({ id: "someId", expanded: true });
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
+
 });

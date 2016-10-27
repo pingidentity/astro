@@ -133,4 +133,22 @@ describe("InlineMessage", function () {
         ReactTestUtils.Simulate.click(buttonElement);
         expect(view.props.callback).toBeCalled();
     });
+
+    //TODO: remove when deprecated props no longer supported
+    it("does not log warning for callback when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        var text = "Your message here";
+        var label = "Do Something";
+        var clickHandler = jest.genMockFunction();
+        getComponent({ "data-id": "notice-message-button",
+                                type: InlineMessage.MessageTypes.NOTICE,
+                                label: label, callback: clickHandler }, text);
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
+
 });

@@ -45,7 +45,7 @@ var CheckboxCell = React.createClass({
     },
 
     componentWillMount: function () {
-        if (this.props.onCallBack) {
+        if (this.props.onCallBack && !Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("onCallBack", "onGridCellAction"));
         }
     },

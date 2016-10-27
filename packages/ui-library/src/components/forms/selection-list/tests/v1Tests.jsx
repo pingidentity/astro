@@ -398,4 +398,15 @@ describe("SelectionList-v1", function () {
             "** This version of the SelectionList is deprecated and will be removed in the next release"
         );
     });
+
+    it("does not log deprecation message when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        getComponent();
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
 });

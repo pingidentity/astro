@@ -263,4 +263,22 @@ describe("FormTextField", function () {
 
         expect(input.getAttribute("type")).toEqual(type);
     });
+
+    it("logs warning for type color when not in production", function () {
+        console.warn = jest.genMockFunction();
+        getComponent({ type: "color" });
+
+        expect(console.warn).toBeCalledWith("Please use the ColorPicker component.");
+    });
+
+    it("does not log warning for type color when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        getComponent({ type: "color" });
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
 });

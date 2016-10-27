@@ -729,4 +729,18 @@ describe("ColorPicker", function () {
             "Warning: Failed propType: Required prop onValueChange was not specified in `ColorPicker`.");
     });
 
+    //TODO: remove when deprecated props no longer supported
+    it("does not log warning for id, onChange when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        getComponent({
+            id: "colorPickerWithOnChange",
+            onChange: jest.genMockFunction()
+        });
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
 });

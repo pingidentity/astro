@@ -742,4 +742,22 @@ describe("FormCheckboxList", function () {
             "Deprecated: use onGetDeselectAllLabel instead of labelDeselectAll. " +
             "Support for labelDeselectAll will be removed in next version");
     });
+
+    //TODO: remove when v1 no longer supported
+    it("does not log warning for id, onSelectionChange, labelSelectAll or labelDeselectAll in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        getComponent({
+            id: "myFormCheckboxListId",
+            onSelectionChange: jest.genMockFunction(),
+            labelSelectAll: jest.genMockFunction(),
+            labelDeselectAll: jest.genMockFunction()
+        });
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
+
 });

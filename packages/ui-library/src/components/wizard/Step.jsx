@@ -214,14 +214,16 @@ var Step = React.createClass({
     },
 
     componentWillMount: function () {
-        if (this.props.id) {
-            console.warn(Utils.deprecateMessage("id", "data-id"));
-        }
-        if (this.props.doneButtonStyle) {
-            console.warn(Utils.deprecateMessage("doneButtonStyle", "doneButtonClassName"));
-        }
-        if (this.props.nextButtonStyle) {
-            console.warn(Utils.deprecateMessage("nextButtonStyle", "nextButtonClassName"));
+        if (!Utils.isProduction()) {
+            if (this.props.id) {
+                console.warn(Utils.deprecateMessage("id", "data-id"));
+            }
+            if (this.props.doneButtonStyle) {
+                console.warn(Utils.deprecateMessage("doneButtonStyle", "doneButtonClassName"));
+            }
+            if (this.props.nextButtonStyle) {
+                console.warn(Utils.deprecateMessage("nextButtonStyle", "nextButtonClassName"));
+            }
         }
     },
 

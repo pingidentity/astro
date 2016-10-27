@@ -86,12 +86,23 @@ describe("FormTextArea", function () {
 
     });
 
-    it("warns of deprecated v1", function () {
+    it("warns of deprecated v1 when not in production", function () {
         console.warn = jest.genMockFunction();
 
         getComponent();
 
         expect(console.warn).toBeCalledWith(
             "** This version of the FormTextArea is deprecated and will be removed in the next release");
+    });
+
+    it("does not log deprecation message when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        getComponent();
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
     });
 });

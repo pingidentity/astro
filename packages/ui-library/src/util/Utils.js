@@ -165,6 +165,17 @@ var Utils = {
     },
 
     /**
+    * @alias module:util/Utils.isProduction
+    * @desc Checks if the current build is a production build.
+    *
+    * @return {boolean}
+    *    Returns true if on production build, false otherwise.
+    */
+    isProduction: function () {
+        return process.env.NODE_ENV === "production";
+    },
+
+    /**
      * @alias module:util/Utils.browserType
      * @desc Return a string with the name of current browser from the userAgent.
      * @return {string}

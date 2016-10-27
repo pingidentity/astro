@@ -431,6 +431,20 @@ describe("DropDownButton", function () {
         expect(element).toBeDefined();
     });
 
+    //TODO: remove when deprecated props no longer supported
+    it("does not log warning for id or onSelect when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <DropDownButton id="myDropdown" options={{}} label="Add" onSelect={jest.genMockFunction()} />
+        );
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
+
     // TODO To be removed once "id" support is discontinued.
     it("render component with id and log warning", function () {
         console.warn = jest.genMockFunction();

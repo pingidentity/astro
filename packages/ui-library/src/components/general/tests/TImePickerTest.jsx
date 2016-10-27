@@ -175,4 +175,16 @@ describe("TimePicker", function () {
         expect(console.warn).toBeCalledWith("Deprecated: use data-id instead of id. " +
                                                 "Support for id will be removed in next version");
     });
+
+    //TODO: remove when id no longer supported
+    it("does not log warning for id when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        render({ id: "testId" });
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
 });

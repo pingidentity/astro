@@ -108,15 +108,16 @@ var RockerButtonStateless = React.createClass({
     },
 
     componentWillMount: function () {
-        if (this.props.id) {
-            console.warn(Utils.deprecateMessage("id", "data-id"));
-        }
-        if (this.props.onChange) {
-            console.warn(Utils.deprecateMessage("onChange", "onValueChange"));
-        }
-
-        if (this.props.labels && (this.props.labels.length < 2 || this.props.labels.length > 4)) {
-            console.warn("RockerButton expecting two to four labels, but was given ", this.props.labels.length);
+        if (!Utils.isProduction()) {
+            if (this.props.id) {
+                console.warn(Utils.deprecateMessage("id", "data-id"));
+            }
+            if (this.props.onChange) {
+                console.warn(Utils.deprecateMessage("onChange", "onValueChange"));
+            }
+            if (this.props.labels && (this.props.labels.length < 2 || this.props.labels.length > 4)) {
+                console.warn("RockerButton expecting two to four labels, but was given ", this.props.labels.length);
+            }
         }
     },
 
@@ -165,7 +166,9 @@ var RockerButtonStateful = React.createClass({
     },
 
     componentWillMount: function () {
-        console.warn("Deprecated: the stateful option for this component will be removed in next version");
+        if (!Utils.isProduction()) {
+            console.warn("Deprecated: the stateful option for this component will be removed in next version");
+        }
     },
 
     getInitialState: function () {

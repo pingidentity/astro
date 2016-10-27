@@ -118,4 +118,19 @@ describe("If component", function () {
             "Support for id will be removed in next version");
     });
 
+    //TODO: remove when deprecated props no longer supported
+    it("does not log warning for deprecated props when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <TabbedSections id="myId" selectedIndex={-1} onSectionChange={jest.genMockFunction()}>
+                <div data-id="section1" title="section 1">section 1</div>
+                <div data-id="section2" title="section 2">section 2</div>
+            </TabbedSections>);
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
 });

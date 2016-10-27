@@ -50,7 +50,7 @@ var Row = React.createClass({
     },
 
     componentWillMount: function () {
-        if (this.props.id) {
+        if (this.props.id && !Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("id", "data-id"));
         }
     },

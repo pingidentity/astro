@@ -95,4 +95,20 @@ describe("Ellipsis loader button", function () {
         expect(console.warn).toBeCalled();
     });
 
+    it("does not log warning for id, onChange or isRequired when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <EllipsisLoaderButton
+                id={buttonId}
+                text={buttonText}
+                loading={false}
+                onButtonClick={callback} />
+        );
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
 });

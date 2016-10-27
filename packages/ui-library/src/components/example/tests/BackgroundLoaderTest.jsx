@@ -84,4 +84,19 @@ describe("BackgroundLoader", function () {
             "There is no direct replacement. Timer based polling or other timer related activities is better to be " +
             "implemented on middleware/actions/reducers layer.");
     });
+
+    it("does not log deprecation message when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <BackgroundLoader interval={2000} load={loadContentFunc} loaded={loaded} loading={loadingContentFunc}>
+                <div data-id="loaded-content">content loaded</div>
+            </BackgroundLoader>
+        );
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
 });

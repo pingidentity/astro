@@ -6,7 +6,8 @@ var React = require("react"),
     FormTextField = require("../../form-text-field").v1,
     Validators = require("../../../../util/Validators"),
     _ = require("underscore"),
-    classnames = require("classnames");
+    classnames = require("classnames"),
+    Utils = require("../../../../util/Utils.js");
 
 
 /**
@@ -202,7 +203,9 @@ var I18nPhoneInput = React.createClass({
     },
 
     componentWillMount: function () {
-        console.warn("** This version of the I18nPhoneInput is deprecated and will be removed in the next release");
+        if (!Utils.isProduction()) {
+            console.warn("** This version of the I18nPhoneInput is deprecated and will be removed in the next release");
+        }
     },
 
     getInitialState: function () {

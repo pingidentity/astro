@@ -5,7 +5,8 @@ var React = require("react"),
     FormLabel = require("../FormLabel.jsx"),
     FormError = require("../FormError.jsx"),
     Translator = require("../../../util/i18n/Translator.js"),
-    _ = require("underscore");
+    _ = require("underscore"),
+    Utils = require("../../../util/Utils.js");
 
 /**
 /**
@@ -282,7 +283,7 @@ var Stateless = React.createClass({
             inputType = this.props.type;
 
             if (this.props.type === "color") {
-                console.warn("Please use the ColorPicker component.");
+                if (!Utils.isProduction()) { console.warn("Please use the ColorPicker component."); }
             }
 
         } else {

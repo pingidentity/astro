@@ -187,4 +187,17 @@ describe("Row", function () {
             "Support for id will be removed in next version");
     });
 
+    //TODO: remove when v1 no longer supported
+    it("does not log warning for id when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <Layout.Row id="columns-2" className={customRowCss[0]} />
+        );
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
 });

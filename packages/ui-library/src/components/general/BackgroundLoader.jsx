@@ -1,4 +1,5 @@
-var React = require("react");
+var React = require("react"),
+    Utils = require("../../util/Utils.js");
 
 /**
  * @deprecated The component is deprecated and subject to be removed in future library versions. There is no direct
@@ -156,9 +157,11 @@ var BackgroundLoader = React.createClass({
     },
 
     componentWillMount: function () {
-        console.warn("** This component is deprecated and will be removed in the next release. " +
+        if (!Utils.isProduction()) {
+            console.warn("** This component is deprecated and will be removed in the next release. " +
             "There is no direct replacement. Timer based polling or other timer related activities is better to be " +
             "implemented on middleware/actions/reducers layer.");
+        }
     },
 
     /*

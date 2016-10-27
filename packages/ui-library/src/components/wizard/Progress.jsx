@@ -42,11 +42,13 @@ var Progress = React.createClass({
     },
 
     componentWillReceiveProps: function (nextProps) {
-        if (nextProps.step < 1 || nextProps.step > 7) {
-            console.warn("Progress expecting 'step' param between 1 and 6, but was given ", nextProps.step);
-        }
-        if (nextProps.of < 1 || nextProps.step > 7) {
-            console.warn("Progress expecting 'of' param between 1 and 6, but was given ", nextProps.of);
+        if (!Utils.isProduction()) {
+            if (nextProps.step < 1 || nextProps.step > 7) {
+                console.warn("Progress expecting 'step' param between 1 and 6, but was given ", nextProps.step);
+            }
+            if (nextProps.of < 1 || nextProps.step > 7) {
+                console.warn("Progress expecting 'of' param between 1 and 6, but was given ", nextProps.of);
+            }
         }
     },
 

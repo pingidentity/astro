@@ -281,15 +281,17 @@ var Stateless = React.createClass({
     },
 
     componentWillMount: function () {
-        if (this.props.id) {
-            console.warn(Utils.deprecateMessage("id", "data-id"));
-        }
-        if (this.props.onChange) {
-            console.warn(Utils.deprecateMessage("onChange", "onValueChange"));
-        }
-        if (!(this.props.onValueChange || this.props.onChange)) {
-            console.error(
-                "Warning: Failed propType: Required prop onValueChange was not specified in `ColorPicker`.");
+        if (!Utils.isProduction()) {
+            if (this.props.id) {
+                console.warn(Utils.deprecateMessage("id", "data-id"));
+            }
+            if (this.props.onChange) {
+                console.warn(Utils.deprecateMessage("onChange", "onValueChange"));
+            }
+            if (!(this.props.onValueChange || this.props.onChange)) {
+                console.error(
+                    "Warning: Failed propType: Required prop onValueChange was not specified in `ColorPicker`.");
+            }
         }
     },
 

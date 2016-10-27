@@ -249,4 +249,21 @@ describe("Messages", function () {
 
         expect(console.warn).not.toBeCalled();
     });
+
+    //TODO: remove when deprecated props no longer supported
+    it("does not log warning for id, removeMessage or i18n when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        getComponent({
+            id: "messagesWithI18n",
+            removeMessage: jest.genMockFunction(),
+            i18n: jest.genMockFunction()
+        });
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
+
 });

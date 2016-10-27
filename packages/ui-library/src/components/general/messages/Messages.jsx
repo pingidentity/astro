@@ -112,14 +112,16 @@ module.exports = React.createClass({
     },
 
     componentWillMount: function () {
-        if (this.props.id) {
-            console.warn(Utils.deprecateMessage("id", "data-id"));
-        }
-        if (this.props.removeMessage) {
-            console.warn(Utils.deprecateMessage("removeMessage", "onRemoveMessage"));
-        }
-        if (this.props.i18n) {
-            console.warn(Utils.deprecateMessage("i18n", "onI18n"));
+        if (!Utils.isProduction()) {
+            if (this.props.id) {
+                console.warn(Utils.deprecateMessage("id", "data-id"));
+            }
+            if (this.props.removeMessage) {
+                console.warn(Utils.deprecateMessage("removeMessage", "onRemoveMessage"));
+            }
+            if (this.props.i18n) {
+                console.warn(Utils.deprecateMessage("i18n", "onI18n"));
+            }
         }
     },
 

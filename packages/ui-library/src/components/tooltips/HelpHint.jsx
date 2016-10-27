@@ -50,8 +50,8 @@ var HelpHint = React.createClass({
     },
 
     componentWillMount: function () {
-        if (this.props.id) {
-            console.warn(Utils.deprecateMessage("data-id", "id"));
+        if (this.props.id && !Utils.isProduction()) {
+            console.warn(Utils.deprecateMessage("id", "data-id"));
         }
     },
     

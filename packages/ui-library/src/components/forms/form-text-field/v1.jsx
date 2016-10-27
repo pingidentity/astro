@@ -114,7 +114,7 @@ var FormTextField = React.createClass({
     },
 
     componentWillMount: function () {
-        console.warn(Utils.deprecateMessage("FormTextField v1", "FormTextField v2"));
+        if (!Utils.isProduction()) { console.warn(Utils.deprecateMessage("FormTextField v1", "FormTextField v2")); }
     },
 
     /**

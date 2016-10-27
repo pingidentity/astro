@@ -3,7 +3,8 @@
 var React = require("react"),
     classnames = require("classnames"),
     FormError = require("../FormError.jsx"),
-    HelpHint = require("../../tooltips/HelpHint.jsx");
+    HelpHint = require("../../tooltips/HelpHint.jsx"),
+    Utils = require("../../../util/Utils.js");
 
 /**
 * @callback FormSelectField~onChange
@@ -121,7 +122,10 @@ var FormSelectField = React.createClass({
     },
 
     componentWillMount: function () {
-        console.warn("** This version of the FormSelectField is deprecated and will be removed in the next release");
+        if (!Utils.isProduction()) {
+            console.warn(
+                "** This version of the FormSelectField is deprecated and will be removed in the next release");
+        }
     },
 
     componentWillReceiveProps: function (nextProps) {

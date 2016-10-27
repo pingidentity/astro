@@ -440,4 +440,21 @@ describe("ExpandableRow", function () {
             "Deprecated: use expanded instead of defaultToExpanded. " +
             "Support for defaultToExpanded will be removed in next version");
     });
+
+    //TODO: remove when v1 no longer supported
+    it("does not log warning for id, onChange or isRequired when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        getComponent({
+            controlled: false,
+            defaultToExpanded: true,
+            showEdit: true,
+            onEditButtonClick: jest.genMockFunction()
+        });
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
 });

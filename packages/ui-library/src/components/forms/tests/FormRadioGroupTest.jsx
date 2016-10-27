@@ -316,4 +316,21 @@ describe("FormRadioGroup", function () {
 
         expect(console.warn).not.toBeCalled();
     });
+
+    //TODO: remove when deprecated props no longer supported
+    it("does not log warning for id or onChange when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <FormRadioGroup id="radioGroupWithDataId"
+                            groupName="test_radio_group"
+                            items={items} onChange={jest.genMockFunction}/>
+        );
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
+
 });

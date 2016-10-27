@@ -163,8 +163,10 @@ var FormSelectFieldStateless = React.createClass({
     },
 
     componentWillMount: function () {
-        console.warn("** This component is deprecated and will be removed in an upcoming release. " +
+        if (!Utils.isProduction()) {
+            console.warn("** This component is deprecated and will be removed in an upcoming release. " +
             "See the \"FormDropDownList\" component for a replacement.");
+        }
     },
 
     _handleChange: function (e) {

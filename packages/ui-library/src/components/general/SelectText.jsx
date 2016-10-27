@@ -130,7 +130,7 @@ var SelectText = React.createClass({
     },
 
     componentWillMount: function () {
-        if (this.props.dataId) {
+        if (this.props.dataId && !Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("dataId", "data-id"));
         }
     },

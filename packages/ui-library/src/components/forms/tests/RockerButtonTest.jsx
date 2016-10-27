@@ -166,4 +166,18 @@ describe("RockerButton", function () {
         expect(console.warn).toBeCalledWith("RockerButton expecting two to four labels, but was given ", 5);
     });
 
+    it("does not log warning for id or onChange when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        var callback = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <RockerButton id="test"
+                labels={["Profile", "Groups", "Services", "Users", "Security"]} onChange={callback} />
+        );
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
 });

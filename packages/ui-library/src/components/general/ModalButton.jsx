@@ -184,26 +184,28 @@ var ModalButtonStateless = ReactVanilla.createClass({
     },
 
     componentWillMount: function () {
-        if (this.props.id) {
-            console.warn(Utils.deprecateMessage("id", "data-id"));
-        }
-        if (this.props.containerStyle) {
-            console.warn(Utils.deprecateMessage("containerStyle", "className"));
-        }
-        if (this.props.activatorContainerStyle) {
-            console.warn(Utils.deprecateMessage("activatorContainerStyle", "activatorContainerClassName"));
-        }
-        if (this.props.linkContent) {
-            console.warn(Utils.deprecateMessage("linkContent", "activatorContent"));
-        }
-        if (this.props.linkStyle) {
-            console.warn(Utils.deprecateMessage("linkStyle", "activatorContentClassName"));
-        }
-        if (this.props.value) {
-            console.warn(Utils.deprecateMessage("value", "activatorButtonLabel"));
-        }
-        if (this.props.buttonStyle) {
-            console.warn(Utils.deprecateMessage("buttonStyle", "activatorButtonClassName"));
+        if (!Utils.isProduction()) {
+            if (this.props.id) {
+                console.warn(Utils.deprecateMessage("id", "data-id"));
+            }
+            if (this.props.containerStyle) {
+                console.warn(Utils.deprecateMessage("containerStyle", "className"));
+            }
+            if (this.props.activatorContainerStyle) {
+                console.warn(Utils.deprecateMessage("activatorContainerStyle", "activatorContainerClassName"));
+            }
+            if (this.props.linkContent) {
+                console.warn(Utils.deprecateMessage("linkContent", "activatorContent"));
+            }
+            if (this.props.linkStyle) {
+                console.warn(Utils.deprecateMessage("linkStyle", "activatorContentClassName"));
+            }
+            if (this.props.value) {
+                console.warn(Utils.deprecateMessage("value", "activatorButtonLabel"));
+            }
+            if (this.props.buttonStyle) {
+                console.warn(Utils.deprecateMessage("buttonStyle", "activatorButtonClassName"));
+            }
         }
     },
 
@@ -471,7 +473,7 @@ var ModalActivator = React.createClass({
     },
 
     componentWillMount: function () {
-        if (this.props.content && this.props.buttonLabel) {
+        if (this.props.content && this.props.buttonLabel && !Utils.isProduction()) {
             global.console.warn("Only one of ('content', 'buttonLabel') is required");
         }
         // no warning for not providing any of the two; the rendering will fail

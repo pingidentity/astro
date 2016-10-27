@@ -393,4 +393,25 @@ describe("ModalButtonTest", function () {
             "Deprecated: use activatorButtonClassName instead of buttonStyle. Support for buttonStyle will be removed in next version" // eslint-disable-line max-len
         );
     });
+
+    //TODO: remove when deprecated props no longer supported
+    it("does not log warning for deprecated props when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        getComponent({
+            id: "deprecated",
+            containerStyle: "deprecated",
+            activatorContainerStyle: "deprecated",
+            linkContent: "deprecated",
+            linkStyle: "deprecated",
+            value: "deprecated",
+            buttonStyle: "deprecated"
+        });
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
+
 });

@@ -1,7 +1,8 @@
 "use strict";
 var React = require("react"),
     css = require("classnames"),
-    _ = require("underscore");
+    _ = require("underscore"),
+    Utils = require("../../util/Utils.js");
 
 var noop = function () {
 };
@@ -81,8 +82,10 @@ module.exports = React.createClass({
     },
 
     componentWillMount: function () {
-        console.warn("** This component is deprecated and will be removed in the next release. " +
+        if (!Utils.isProduction()) {
+            console.warn("** This component is deprecated and will be removed in the next release. " +
             "See the \"Section\" or \"Collapsible Link\" components for a replacement.");
+        }
     },
 
     render: function () {

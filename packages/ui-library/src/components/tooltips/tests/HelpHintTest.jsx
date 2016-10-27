@@ -83,7 +83,7 @@ describe("HelpHint", function () {
         );
 
         expect(console.warn).toBeCalledWith(
-            "Deprecated: use id instead of data-id. Support for data-id will be removed in next version");
+            "Deprecated: use data-id instead of id. Support for id will be removed in next version");
     });
 
     // TODO To be removed once "id" support is discontnued.
@@ -105,5 +105,18 @@ describe("HelpHint", function () {
         ReactTestUtils.Simulate.click(container, event);
         
         expect(event.preventDefault.mock.calls.length).toEqual(1);
+    });
+
+    it("does not log warning for id when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <HelpHint id="myHint" hintText={text} className={classValue} />
+        );
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
     });
 });

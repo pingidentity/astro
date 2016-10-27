@@ -326,7 +326,7 @@ var StatelessExpandableRow = React.createClass({
     },
 
     componentWillMount: function () {
-        if (this.props.defaultToExpanded) {
+        if (this.props.defaultToExpanded && !Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("defaultToExpanded", "expanded"));
         }
     },

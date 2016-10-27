@@ -163,7 +163,7 @@ var I18nPhoneInputStateless = React.createClass({
     },
 
     componentWillMount: function () {
-        if (this.props.onCountrySearch) {
+        if (this.props.onCountrySearch && !Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("onCountrySearch", "onSearch"));
         }
     },

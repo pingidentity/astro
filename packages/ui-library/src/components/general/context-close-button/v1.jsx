@@ -1,5 +1,6 @@
 var React = require("react"),
-    css = require("classnames");
+    css = require("classnames"),
+    Utils = require("../../../util/Utils.js");
 
 
 /**
@@ -95,7 +96,10 @@ var ContextCloseButton = React.createClass({
     },
 
     componentWillMount: function () {
-        console.warn("** This version of the ContextCloseButton is deprecated and will be removed in the next release");
+        if (!Utils.isProduction()) {
+            console.warn(
+                "** This version of the ContextCloseButton is deprecated and will be removed in the next release");
+        }
     },
 
     render: function () {

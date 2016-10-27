@@ -252,4 +252,16 @@ describe("FormTextField", function () {
         // now we can verify that the callback gets triggered
         expect(handleChange.mock.calls.length).toBe(1);
     });
+
+    //TODO: remove when v1 no longer supported
+    it("does not log deprecate warning when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        getComponent();
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
 });

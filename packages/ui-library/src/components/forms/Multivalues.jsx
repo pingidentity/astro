@@ -134,14 +134,16 @@ var Multivalues = React.createClass({
     },
 
     componentWillMount: function () {
-        if (this.props.id) {
-            console.warn(Utils.deprecateMessage("id", "data-id"));
-        }
-        if (this.props.onChange) {
-            console.warn(Utils.deprecateMessage("onChange", "onValueChange"));
-        }
-        if (this.props.isRequired) {
-            console.warn(Utils.deprecateMessage("isRequired", "required"));
+        if (!Utils.isProduction()) {
+            if (this.props.id) {
+                console.warn(Utils.deprecateMessage("id", "data-id"));
+            }
+            if (this.props.onChange) {
+                console.warn(Utils.deprecateMessage("onChange", "onValueChange"));
+            }
+            if (this.props.isRequired) {
+                console.warn(Utils.deprecateMessage("isRequired", "required"));
+            }
         }
     },
 

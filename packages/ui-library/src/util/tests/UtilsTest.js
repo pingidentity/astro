@@ -55,6 +55,25 @@ describe("Utils", function () {
         });
     });
 
+    describe("isProduction", function () {
+        afterEach(function () {
+            delete process.env.NODE_ENV;
+        });
+        it("returns false if not production build", function () {
+            process.env.NODE_ENV = "";
+            
+            expect(process.env.NODE_ENV).not.toBe("production");
+            expect(Utils.isProduction()).toBe(false);
+        });
+
+        it("returns true if on production build", function () {
+            process.env.NODE_ENV = "production";
+
+            expect(process.env.NODE_ENV).toBe("production");
+            expect(Utils.isProduction()).toBe(true);
+        });
+    });
+
     describe("triggerFileDownload", function () {
         it("uses the correct function to save the blob file in IE", function () {
             // mocks for the navigator and Blob globals

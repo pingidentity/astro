@@ -205,4 +205,36 @@ describe("Section", function () {
         expect(console.warn).not.toBeCalledWith(
             "Deprecated: use data-id instead of id. Support for id will be removed in next version");
     });
+
+    //TODO: remove when id no longer supported
+    it("does not log warning for id  when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <Section id="sectionWithId" title="My Section" controlled={false}>
+                <div data-id="iShouldBeHidden">My Content</div>
+            </Section>
+        );
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
+
+    it("does not log deprecation message when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <Section title="My Section" controlled={false}>
+                <div data-id="iShouldBeHidden">My Content</div>
+            </Section>
+        );
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
+
 });

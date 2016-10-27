@@ -288,33 +288,36 @@ var DetailsTooltipStateless = React.createClass({
     },
 
     componentWillMount: function () {
-        console.warn(
-            "** Default value for 'controlled' in `DetailsTooltip` component will be set to 'false' from next version");
-
         if (this.props.open) {
             this._bindWindowsEvents();
         }
 
-        if (this.props.id) {
-            console.warn(Utils.deprecateMessage("id", "data-id"));
-        }
-        if (this.props.contentClassNames) {
-            console.warn(Utils.deprecateMessage("contentClassNames", "contentClassName"));
-        }
-        if (this.props.titleClassNames) {
-            console.warn(Utils.deprecateMessage("titleClassNames", "titleClassName"));
-        }
-        if (this.props.labelStyle) {
-            console.warn(Utils.deprecateMessage("labelStyle", "labelClassName"));
-        }
-        if (this.props.positionStyle) {
-            console.warn(Utils.deprecateMessage("positionStyle", "positionClassName"));
-        }
-        if (this.props.secondaryLabels && this.props.secondaryLabels.length > 2) {
+        if (!Utils.isProduction()) {
             console.warn(
-                "DetailsTooltip expecting two or less secondary button labels.",
-                this.props.secondaryLabels.length
-            );
+                "** Default value for 'controlled' in `DetailsTooltip` component " +
+                "will be set to 'false' from next version");
+            
+            if (this.props.id) {
+                console.warn(Utils.deprecateMessage("id", "data-id"));
+            }
+            if (this.props.contentClassNames) {
+                console.warn(Utils.deprecateMessage("contentClassNames", "contentClassName"));
+            }
+            if (this.props.titleClassNames) {
+                console.warn(Utils.deprecateMessage("titleClassNames", "titleClassName"));
+            }
+            if (this.props.labelStyle) {
+                console.warn(Utils.deprecateMessage("labelStyle", "labelClassName"));
+            }
+            if (this.props.positionStyle) {
+                console.warn(Utils.deprecateMessage("positionStyle", "positionClassName"));
+            }
+            if (this.props.secondaryLabels && this.props.secondaryLabels.length > 2) {
+                console.warn(
+                    "DetailsTooltip expecting two or less secondary button labels.",
+                    this.props.secondaryLabels.length
+                );
+            }
         }
     },
 

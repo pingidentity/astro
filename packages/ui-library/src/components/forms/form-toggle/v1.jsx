@@ -1,6 +1,7 @@
 var React = require("react"),
     classnames = require("classnames"),
-    _ = require("underscore");
+    _ = require("underscore"),
+    Utils = require("../../../util/Utils.js");
 
 /**
  * @callback Toggle~onToggle
@@ -69,7 +70,9 @@ var Toggle = React.createClass({
     },
 
     componentWillMount: function () {
-        console.warn("** This version of the Toggle is deprecated and will be removed in the next release");
+        if (!Utils.isProduction()) {
+            console.warn("** This version of the Toggle is deprecated and will be removed in the next release");
+        }
     },
 
    /**

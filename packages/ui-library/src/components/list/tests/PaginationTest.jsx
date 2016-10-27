@@ -248,4 +248,24 @@ describe("Pagination", function () {
         topLinks = top.childNodes;
         expect(topLinks.length).toEqual(0);
     });
+
+    //TODO: remove when deprecated props no longer supported
+    it("does not log warning for deprecated props when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <Pagination
+                id="some-id"
+                perPage = {5}
+                total = {30}
+                onChange={jest.genMockFunction()}>
+                <ExpandableRow className="row" key={1} />
+            </Pagination>
+        );
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
 });

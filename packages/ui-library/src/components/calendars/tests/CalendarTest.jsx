@@ -478,6 +478,20 @@ describe("Calendar", function () {
     });
 
     //TODO: remove when v1 no longer supported
+    it("does not log warning for id, onChange or isRequired when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <Calendar id="myCalendar" onChange={jest.genMockFunction()} isRequired={true} date={selectedDate} />
+        );
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
+
+    //TODO: remove when v1 no longer supported
     it("logs warning for id prop", function () {
         console.warn = jest.genMockFunction();
         ReactTestUtils.renderIntoDocument(

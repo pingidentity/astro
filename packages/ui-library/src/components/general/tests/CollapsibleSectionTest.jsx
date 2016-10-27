@@ -94,4 +94,19 @@ describe("CollapsibleSection", function () {
             "** This component is deprecated and will be removed in the next release. " +
             "See the \"Section\" or \"Collapsible Link\" components for a replacement.");
     });
+
+    it("does not log deprecation message when in production", function () {
+        //Mock process.env.NODE_ENV
+        process.env.NODE_ENV = "production";
+
+        console.warn = jest.genMockFunction();
+        ReactTestUtils.renderIntoDocument(
+            <CollapsibleSection className="iShouldBeVisible">
+                <div className="iShouldBeHidden" />
+            </CollapsibleSection>
+        );
+
+        expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
+    });
 });

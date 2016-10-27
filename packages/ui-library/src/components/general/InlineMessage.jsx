@@ -69,7 +69,7 @@ var InlineMessage = React.createClass({
     },
 
     componentWillMount: function () {
-        if (this.props.callback) {
+        if (this.props.callback && !Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("callback", "onClick"));
         }
     },

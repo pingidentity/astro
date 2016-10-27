@@ -89,10 +89,12 @@ var SectionStateless = React.createClass({
     },
 
     componentWillMount: function () {
-        console.warn(
-            "** Default value for 'controlled' in Section component will be set to 'false' from next version");
-        if (this.props.id) {
-            console.warn(Utils.deprecateMessage("id", "data-id"));
+        if (!Utils.isProduction()) {
+            console.warn(
+                "** Default value for 'controlled' in Section component will be set to 'false' from next version");
+            if (this.props.id) {
+                console.warn(Utils.deprecateMessage("id", "data-id"));
+            }
         }
     },
 

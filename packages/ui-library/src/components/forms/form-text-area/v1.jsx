@@ -6,7 +6,8 @@ var React = require("react"),
     FormFieldConstants = require("../../../constants/FormFieldConstants"),
     FormError = require("../FormError.jsx"),
     HelpHint = require("../../tooltips/HelpHint.jsx"),
-    _ = require("underscore");
+    _ = require("underscore"),
+    Utils = require("../../../util/Utils.js");
 
 /**
 * @callback FormTextArea~onChange
@@ -144,7 +145,9 @@ var FormTextArea = React.createClass({
     },
 
     componentWillMount: function () {
-        console.warn("** This version of the FormTextArea is deprecated and will be removed in the next release");
+        if (!Utils.isProduction()) {
+            console.warn("** This version of the FormTextArea is deprecated and will be removed in the next release");
+        }
     },
 
     /**
