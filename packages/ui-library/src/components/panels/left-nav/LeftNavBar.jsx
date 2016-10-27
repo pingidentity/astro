@@ -80,6 +80,10 @@ var React = require("re-react"),
  *          equal to the id of the item clicked.
  * @param {LeftNavBar~onItemClick} [onItemClick]
  *          DEPRECATED. Use onItemValueChange instead.
+ * @param {boolean} [pingoneLogo=false]
+ *          Determines whether to show the PingOne Logo.
+ * @param {string} [logoSrc]
+ *          An optional URL that can be provided for a logo.
  *
  * @example
  * var item1 = {label: "Item 1", id: "item1"};
@@ -101,7 +105,9 @@ var LeftNavBar = React.createClass({
         onSectionClick: React.PropTypes.func,
         onItemClick: React.PropTypes.func,
         onSectionValueChange: React.PropTypes.func,
-        onItemValueChange: React.PropTypes.func
+        onItemValueChange: React.PropTypes.func,
+        pingoneLogo: React.PropTypes.bool,
+        logoSrc: React.PropTypes.string
     },
 
     _rerender: function () {
@@ -165,7 +171,8 @@ var LeftNavBar = React.createClass({
             "data-id": "left-nav-bar",
             openSections: {},
             collapsible: false,
-            autocollapse: false
+            autocollapse: false,
+            pingoneLogo: false
         };
     },
 
@@ -193,7 +200,6 @@ var LeftNavBar = React.createClass({
             var itemSelectors = parent.getElementsByClassName("highlighted");
             var style = { height: 0, top: 0 };
             var arrowStyle = { top: 0 };
-
 
             if (itemSelectors.length > 0) {
                 var dims = itemSelectors[0].getBoundingClientRect();
@@ -277,7 +283,10 @@ var LeftNavBar = React.createClass({
                     </div>
                     { this.props.tree.map(this._renderSection) }
                 </div>
-                <Copyright ref="copyright" />
+                <Copyright ref="copyright"
+                           pingoneLogo={this.props.pingoneLogo}
+                           logoSrc={this.props.logoSrc}
+                />
             </div>);
     }
 });

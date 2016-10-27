@@ -373,6 +373,14 @@ $layout-nav-width-offset: 15px;
             margin: 0 0 7px;
             fill: $color-elephant;
         }
+        // application logos
+        .logo-container {
+            @include clearfix();
+            .ping-application {
+                max-width: 175px;
+                height: auto;
+            }
+        }
     }
     &.scrollable {
         .copyright {

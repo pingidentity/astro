@@ -234,6 +234,44 @@ describe("LeftNavBar", function () {
             expect(component.props.selectedSection).toBeFalsy();
         });
     });
+    
+    it("renders an application logo when logo source is present", function () {
+        var logoSource = "https://www.pingidentity.com/etc/designs/pic/clientlibs-all/logos/PingIdentity_logo.png";
+        var wrapper = getWrappedComponent({ logoSrc: logoSource });
+        var component = wrapper.refs.target;
+        
+        var copyright = TestUtils.findRenderedDOMNodeWithDataId(component, "copyright");
+        expect(copyright).toBeTruthy();
+        
+        var logo = TestUtils.findRenderedDOMNodeWithDataId(component, "logo-container");
+        expect(logo).toBeTruthy();
+        
+        var application = TestUtils.findRenderedDOMNodeWithClass(component, "ping-application");
+        expect(application).toBeTruthy();
+        expect(application.getAttribute("src")).toBe(logoSource);
+    });
+
+    it("renders a pingone logo when pingoneLogo variable is set to true", function () {
+        var wrapper = getWrappedComponent({ pingoneLogo: true });
+        var component = wrapper.refs.target;
+        
+        var copyright = TestUtils.findRenderedDOMNodeWithDataId(component, "copyright");
+        expect(copyright).toBeTruthy();
+        
+        var logo = TestUtils.findRenderedDOMNodeWithDataId(component, "logo-container");
+        expect(logo).toBeTruthy();
+    });
+    
+    it("renders no logo when logoSrc is not provided and pingoneLogo is not declared ", function () {
+        var wrapper = getWrappedComponent({ });
+        var component = wrapper.refs.target;
+        
+        var copyright = TestUtils.findRenderedDOMNodeWithDataId(component, "copyright");
+        expect(copyright).toBeTruthy();
+        
+        var logo = TestUtils.findRenderedDOMNodeWithDataId(component, "logo-container");
+        expect(logo).toBeFalsy();
+    });
 
     //TODO: remove when deprecated props no longer supported
     it("does not log warning for id, onChange or isRequired when in production", function () {
