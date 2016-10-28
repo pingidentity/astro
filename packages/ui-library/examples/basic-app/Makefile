@@ -1,7 +1,7 @@
 NODE_VERSION=4.2.4
 NPM_VERSION=3.7.1
 
-# HOSTING_SERVER_ADDRESS=TBD_address --> TODO: Update "TBD_address" with the server's address (e.g. 52.26.244.241)
+# HOSTING_SERVER_ADDRESS=TBD_address --> TODO: Update "TBD_address" with the server's address (e.g. 35.162.25.94)
 # HOSTING_SERVER_USERNAME=TBD_name --> TODO: Update "TBD_name" with the server's name (e.g. ubuntu)
 
 

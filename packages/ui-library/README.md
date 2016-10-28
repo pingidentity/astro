@@ -102,9 +102,9 @@ Note, you may need to modify the permissions on the ssh key file to allow read p
 > chmod 400 FARM-33-341f336d.us-west-2.pem
 
 Example:
-> ssh -i ./hosting/FARM-33-341f336d.us-west-2.pem ubuntu@52.26.244.241
+> ssh -i ./hosting/FARM-33-341f336d.us-west-2.pem ubuntu@35.162.25.94
 
-> scp -i ./hosting/FARM-33-341f336d.us-west-2.pem <src> ubuntu@52.26.244.241:<dest>
+> scp -i ./hosting/FARM-33-341f336d.us-west-2.pem <src> ubuntu@35.162.25.94:<dest>
 
 
 References
