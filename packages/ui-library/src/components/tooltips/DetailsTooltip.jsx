@@ -89,6 +89,14 @@ var DetailsTooltip = React.createClass({
             this.refs.manager.close();
         }
     },
+    
+    componentWillMount: function () {
+        if (this.props.controlled && !Utils.isProduction()) {
+            console.warn(
+                "** Default value for 'controlled' in `DetailsTooltip` " +
+                "component will be set to 'false' from next version");
+        }
+    },
 
     render: function () {
         return (
@@ -293,10 +301,6 @@ var DetailsTooltipStateless = React.createClass({
         }
 
         if (!Utils.isProduction()) {
-            console.warn(
-                "** Default value for 'controlled' in `DetailsTooltip` component " +
-                "will be set to 'false' from next version");
-            
             if (this.props.id) {
                 console.warn(Utils.deprecateMessage("id", "data-id"));
             }

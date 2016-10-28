@@ -209,6 +209,7 @@ label {
         textarea {
             padding: 12px 15px;
             line-height: 1.2em;
+            height: auto;
         }
         &.extended {
             textarea {
@@ -348,6 +349,7 @@ label {
         }
         &.stacked {
             display: block;
+            margin-bottom: 10px;
 
             .icon {
                 top: -1px;

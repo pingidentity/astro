@@ -99,7 +99,7 @@ module.exports = React.createClass({
 
 
                         <CollapsibleLink data-id="narrow-by"
-                            title="Narrow By"
+                            title="Narrow by"
                             onToggle={this.props.onSearchAdvancedToggle}
                             arrowPosition={CollapsibleLink.arrowPositions.RIGHT}
                             expanded={this.props.advancedSearch}

@@ -150,7 +150,7 @@ var Shows = React.createClass({
 
                             <span data-id="narrow-by"
                                     className="filter-by"
-                                    onClick={this.props.onSearchToggleAdvanced}>Narrow By</span>
+                                    onClick={this.props.onSearchToggleAdvanced}>Narrow by</span>
                       
                             <ShowsAddWizardView {...this.props} genres={Genres} statuses={Statuses} />
                         </div>
