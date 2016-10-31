@@ -45,10 +45,8 @@ var React = require("react"),
 * @param {string} [className]
 *     Class name(s) to add to the top-level container/div
 *
-* @param {string=Select a Country} selectCountryLabel
-*     The text prompt/label that is displayed above the list of countries
-* @param {string=Country} selectCountryLabel
-*     The text to display over the selected country (usually "Country")
+* @param {string} [countryLabel="Country"]
+*     The text to display over the selected country
 * @param {string} [displayValue] Value to be displayed other than the unique string value. For example the abbreviation
 *     could be displayed instead.
 * @param {string} [errorMessage]
@@ -59,6 +57,8 @@ var React = require("react"),
 *     Shows/opens the time zone menu when true
 * @param {string} [searchString]
 *     Text to used filter the full list of time zone options
+* @param {string} [selectCountryLabel="Select a Country"]
+*     The text prompt/label that is displayed above the list of countries
 * @param {string} value
 *     The initial value of the input
 *
