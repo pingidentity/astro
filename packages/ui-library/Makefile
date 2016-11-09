@@ -244,7 +244,7 @@ dist: install-mvn install-node-npm
 	$(call package,$(PACKAGE_VERSION_FINAL))
 	$(call deploy,$(PACKAGE_VERSION_FINAL))
 
-	@echo "UI_LIBRARY_FINAL_VERSION=$(PACKAGE_VERSION_FINAL)" >> version
+	@echo "UI_LIBRARY_FINAL_VERSION=$(PACKAGE_VERSION_FINAL)" > version
 	@echo "UI_LIBRARY_SNAPSHOT_VERSION=$(PACKAGE_VERSION_NEXT)" >> version
 
 	$(call version_and_tag,$(PACKAGE_VERSION_NEXT),"Prepare for the next release cycle")
@@ -287,4 +287,4 @@ package-and-upload-for-hosting: install-node-npm
 		rm -f ./versions.json;\
 		rm -f $${LIB_VERSION}.tar.gz;\
 	fi
-	
+
