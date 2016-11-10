@@ -202,6 +202,16 @@ var FormTextFieldDemo = React.createClass({
                 </div>
                 <div className="input-row">
                     <FormTextField
+                        labelText="Required password field with error message"
+                        errorMessage="The error message."
+                        required={true}
+                        maskValue={true}
+                        showReveal={true}
+                        className="input-width-medium"
+                    />
+                </div>
+                <div className="input-row">
+                    <FormTextField
                         labelText="With help tooltip"
                         labelHelpText="This is my help text."
                         className="input-width-medium"
