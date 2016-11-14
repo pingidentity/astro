@@ -19,6 +19,7 @@
         font-family: $font-pn-regular;
     }
     > .collapsible-section-content {
+        position: relative;
         overflow: hidden;
         max-height: 0;
 

@@ -761,6 +761,13 @@ $layout-nav-width-offset: 15px;
 .page-section {
     margin: 0 0 40px 25px;
 
+    .page-section-title-desc {
+        margin: -10px 0 25px 0;
+
+        &.only {
+            margin-bottom: 40px;
+        }
+    }
     .page-section-content {
         margin: 0 0 40px 25px;
     }

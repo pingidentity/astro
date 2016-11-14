@@ -2075,8 +2075,8 @@ input[type=file] {
     $background-color: $color-white;
     $input-margin: 15px;
 
-    padding: 20px;
-    margin: 0 0 30px;
+    position: relative;
+    padding: 20px 20px 0;
     background-color: $color-timberwolf;
 
     .input-select,
@@ -2129,10 +2129,17 @@ input[type=file] {
         background-color: $color-stratus;
         vertical-align: top;
     }
-    button.primary {
-        margin: 22px 0 3px $input-margin;
-        float: right;
+    .more-option-inputs {
+        border-top: 1px solid $color-dolphin;
+        padding: 20px 0 0;
     }
+    button.primary {
+        margin: 20px 0 20px 15px;
+    }
+}
+
+.reporting-more-options-link {
+    margin: 15px 0 30px;
 }
 
 a {
