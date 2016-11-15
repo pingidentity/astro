@@ -224,6 +224,7 @@ var FormTextFieldDemo = React.createClass({
                         errorMessage={this.state.onChangeValidationErrorMessage}
                         onChange={this._handleChangeErrorValidation}
                         className="input-width-medium"
+                        helpClassName="right"
                     />
                 </div>
                 <div className="input-row">

@@ -1,7 +1,9 @@
 
 jest.dontMock("../FormTimeZone.jsx");
 jest.dontMock("../FormError.jsx");
+jest.dontMock("../FormLabel.jsx");
 jest.dontMock("../../general/CollapsibleLink.jsx");
+jest.dontMock("../../tooltips/HelpHint.jsx");
 jest.dontMock("../../../util/KeyboardUtils.js");
 
 
@@ -385,5 +387,28 @@ describe("FormTimeZone", function () {
             linkValue = getValueLink(component);
 
         expect(linkValue.textContent).toEqual(displayValue);
+    });
+
+    it("does not render the label text when not specified", function () {
+        var component = getComponent(),
+            renderedLabelText = TestUtils.findRenderedDOMNodeWithDataId(component, "label");
+
+        expect(renderedLabelText).toBeFalsy();
+    });
+
+    it("renders the label text and help text when specified", function () {
+        var labelText = "My TZ Picker",
+            labelHelpText = "Help text here!",
+            component = getComponent({
+                labelText: labelText,
+                labelHelpText: labelHelpText
+            }),
+            renderedHelpIcon = TestUtils.findRenderedDOMNodeWithClass(component, "icon-help"),
+            renderedHelpText = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text"),
+            renderedLabelText = TestUtils.findRenderedDOMNodeWithDataId(component, "label");
+
+        expect(renderedLabelText.textContent).toContain(labelText);
+        expect(renderedHelpIcon).toBeTruthy();
+        expect(renderedHelpText.textContent).toEqual(labelHelpText);
     });
 });

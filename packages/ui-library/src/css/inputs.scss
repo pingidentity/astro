@@ -2526,6 +2526,8 @@ label {
                 top: 12px;
                 left: 10px;
                 font-size: 17px;
+                line-height: 1em;
+                text-transform: none;
             }
 
             input {
@@ -2555,9 +2557,10 @@ label {
 
     .collapsible-link {
         text-transform: none;
+        padding: 0;
     }
     .tooltip-menu {
-        top: 32px;
+        top: calc(100% + 10px);
         font-size: 14px;
 
         .tooltip-menu-search {

@@ -193,27 +193,30 @@ var FormTextAreaStateless = React.createClass({
             });
 
         return (
-            <FormLabel data-id={this.props["data-id"]}
-                    className={className}
-                    value={this.props.labelText}
-                    hint={this.props.labelHelpText}>
+            <FormLabel
+                data-id={this.props["data-id"]}
+                className={className}
+                value={this.props.labelText}
+                hint={this.props.labelHelpText}
+                helpClassName={this.props.helpClassName}>
                 <span className="input-container">
-                    <textarea data-id={this.props["data-id"] + "-textarea"}
-                            ref={this.props["data-id"] + "-textarea"}
-                            name={this.props["data-id"] + "-textarea"}
-                            className={this.props.inputClassName}
-                            disabled={this.props.disabled}
-                            placeholder={this.props.placeholder}
-                            required={this.props.required}
-                            readOnly={readonly}
-                            maxLength={this.props.maxLength}
-                            value={this.props.value}
-                            onChange={this._handleChange}
-                            onBlur={this.props.onBlur}
-                            cols={this.props.cols}
-                            rows={this.props.rows}
-                            autoFocus={this.props.autoFocus}
-                            autoComplete={this.props.useAutocomplete ? "on" : "off"}>
+                    <textarea
+                        data-id={this.props["data-id"] + "-textarea"}
+                        ref={this.props["data-id"] + "-textarea"}
+                        name={this.props["data-id"] + "-textarea"}
+                        className={this.props.inputClassName}
+                        disabled={this.props.disabled}
+                        placeholder={this.props.placeholder}
+                        required={this.props.required}
+                        readOnly={readonly}
+                        maxLength={this.props.maxLength}
+                        value={this.props.value}
+                        onChange={this._handleChange}
+                        onBlur={this.props.onBlur}
+                        cols={this.props.cols}
+                        rows={this.props.rows}
+                        autoFocus={this.props.autoFocus}
+                        autoComplete={this.props.useAutocomplete ? "on" : "off"}>
                     </textarea>
                     {this.props.edited && this.props.showUndo &&
                         <a data-id="undo" className="undo" onClick={this.props.onUndo}>undo</a>

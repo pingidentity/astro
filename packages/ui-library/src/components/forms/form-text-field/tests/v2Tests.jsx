@@ -216,11 +216,13 @@ describe("FormTextField", function () {
     it("renders help tooltip", function () {
         var component = getComponent({
             labelText: "some label",
-            labelHelpText: "some help"
+            labelHelpText: "some help",
+            helpClassName: "bottom right"
         });
         var help = TestUtils.findRenderedDOMNodeWithDataId(component, "help-tooltip");
 
         expect(help.textContent).toBe("some help");
+        expect(help.getAttribute("class")).toContain("bottom right");
     });
 
     it("gives a default data-id", function () {

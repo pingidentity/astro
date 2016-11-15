@@ -129,7 +129,7 @@ module.exports = function (getComponent) {
             TestUtils.findRenderedDOMNodeWithDataId(component, "form-text-area_errormessage");
         expect(errorDiv.textContent).toBe(errorMessage);
     });
-    
+
     it("is disabled when it is specified", function () {
         var component = getComponent({ disabled: true });
 

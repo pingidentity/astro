@@ -6,6 +6,7 @@ var React = require("react"),
     CollapsibleLink = require("../general/CollapsibleLink.jsx"),
     EventUtils = require("../../util/EventUtils.js"),
     FormError = require("./FormError.jsx"),
+    FormLabel = require("./FormLabel.jsx"),
     KeyCodes = require("../../util/KeyboardUtils.js").KeyCodes,
     _ = require("underscore");
 
@@ -53,6 +54,12 @@ var React = require("react"),
 *     The message to display if defined when external validation failed.
 * @param {string} [filterByCountry]
 *     The two character country code that, when set, displays a list of time zones associated with that country
+* @param {string} [helpClassName]
+*     CSS classes to apply to the label help hint (bottom, left, etc)
+* @param {string} [labelHelpText]
+*     The text to display for the help tooltip.
+* @param {string} [labelText]
+*     The text to show as the field's label.
 * @param {boolean} [open=false]
 *     Shows/opens the time zone menu when true
 * @param {string} [searchString]
@@ -121,6 +128,9 @@ var TimeZoneStateless = React.createClass({
         displayValue: React.PropTypes.string,
         errorMessage: React.PropTypes.string,
         filterByCountry: React.PropTypes.string,
+        helpClassName: React.PropTypes.string,
+        labelHelpText: React.PropTypes.string,
+        labelText: React.PropTypes.string,
         onValueChange: React.PropTypes.func,
         onSearch: React.PropTypes.func,
         onToggle: React.PropTypes.func,
@@ -449,10 +459,13 @@ var TimeZoneStateless = React.createClass({
         };
 
         return (
-            <div
+            <FormLabel
+                value={this.props.labelText}
                 data-id={this.props["data-id"]}
                 className={classnames("input-timezone", classNames, this.props.className)}
-                ref="input-timezone">
+                hint={this.props.labelHelpText}
+                helpClassName={this.props.helpClassName}
+                ref="input-timezone" >
                 <CollapsibleLink
                     data-id={this.props["data-id"] + "-collapsible-link"}
                     title={this.props.displayValue || this.props.value}
@@ -488,7 +501,7 @@ var TimeZoneStateless = React.createClass({
                         data-id={this.props["data-id"] + "-error-message"}
                     />
                 )}
-            </div>
+            </FormLabel>
         );
     }
 });

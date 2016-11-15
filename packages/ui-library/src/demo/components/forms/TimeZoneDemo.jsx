@@ -1,6 +1,5 @@
 
 var React = require("react"),
-    FormLabel = require("../../../components/forms/FormLabel.jsx"),
     FormTimeZone = require("../../../components/forms/FormTimeZone.jsx");
 
 /**
@@ -54,14 +53,11 @@ var FormTimeZoneDemo = React.createClass({
         return (
             <div>
                 <div className="input-row">
-                    <FormLabel
-                        value="Stateless Version (where abbreviation is displayed instead)"
-                        className="detached"
-                    />
                     <FormTimeZone
                         data-id="timezone-stateless"
                         controlled={true}
                         filterByCountry={this.state.filterByCountry}
+                        labelText="Stateless Version (where abbreviation is displayed instead)"
                         onValueChange={this._handleChange}
                         onSearch={this._handleSearch}
                         onToggle={this._handleToggle}
@@ -74,15 +70,17 @@ var FormTimeZoneDemo = React.createClass({
                     />
                 </div>
                 <div className="input-row">
-                    <FormLabel value="Stateful Version" className="detached" />
                     <FormTimeZone
                         data-id="timezone-stateful"
                         controlled={false}
+                        labelText="Stateful Version"
+                        labelHelpText="Help hints are optional for both versions"
+                        helpClassName="bottom right"
                     />
-                    <p>
-                        * Note that the browser's timezone is guessed if the passed value is undefined.
-                    </p>
                 </div>
+                <p>
+                    * Note that the browser's timezone is guessed if the passed value is undefined.
+                </p>
             </div>
         );
     }

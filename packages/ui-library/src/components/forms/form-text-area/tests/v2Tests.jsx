@@ -3,6 +3,7 @@ jest.dontMock("../v2.jsx");
 jest.dontMock("./common.jsx");
 jest.dontMock("../../FormLabel.jsx");
 jest.dontMock("../../FormError.jsx");
+jest.dontMock("../../../tooltips/HelpHint.jsx");
 
 describe("FormTextArea", function () {
 
@@ -123,5 +124,19 @@ describe("FormTextArea", function () {
         ReactTestUtils.Simulate.click(undo);
         // now we can verify that the callback gets triggered
         expect(component.props.onValueChange).toBeCalled();
+    });
+
+    it("shows labelHelpText with the labelClassName applied", function () {
+        var helpText = "help!";
+        var component = getComponent({
+            labelText: "label",
+            labelHelpText: helpText,
+            helpClassName: "bottom right"
+        });
+
+        var help = TestUtils.findRenderedDOMNodeWithDataId(component, "help-tooltip");
+
+        expect(help).toBeTruthy();
+        expect(help.getAttribute("class")).toContain("bottom right");
     });
 });

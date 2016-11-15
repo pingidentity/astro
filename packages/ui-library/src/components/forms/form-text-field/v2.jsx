@@ -99,6 +99,8 @@ var React = require("react"),
 * @param {FormTextField~onMouseDown} [onMouseDown]
 *     Callback to be triggered when the field registers a mouse down.
 *
+* @param {string} [helpClassName]
+*     CSS classes to apply to the label help hint (bottom, left, etc)
 * @param {string} [labelHelpText]
 *     The text to display for the help tooltip.
 * @param {string} [labelText]
@@ -202,6 +204,7 @@ var Stateless = React.createClass({
         errorMessage: React.PropTypes.string,
         errorClassName: React.PropTypes.string,
         inputClassName: React.PropTypes.string,
+        helpClassName: React.PropTypes.string,
         labelClassName: React.PropTypes.string,
         labelHelpText: React.PropTypes.string,
         labelText: React.PropTypes.string,
@@ -296,7 +299,8 @@ var Stateless = React.createClass({
                 ref="container"
                 data-id={id}
                 value={this.props.labelText}
-                hint={this.props.labelHelpText}>
+                hint={this.props.labelHelpText}
+                helpClassName={this.props.helpClassName}>
 
                 <span className="input-container">
                     <input
