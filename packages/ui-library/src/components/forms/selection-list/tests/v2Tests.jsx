@@ -157,10 +157,22 @@ describe("SelectionList", function () {
         expect(component.props.onValueChange).toBeCalledWith("1");
     });
 
-    it("should render with few checked checkboxes", function () {
+
+
+
+    it("should render with few checked checkboxes and uncheck all when selected", function () {
+        var callback = jest.genMockFunction();
         var component = getComponent({
+            controlled: true,
             selectedItemIds: [1, 2],
-            type: SelectionList.ListType.MULTI
+            type: SelectionList.ListType.MULTI,
+            showSelectionOptions: true,
+            labelUnselectAll: "Unselect All",
+            labelOnlySelected: "Show Only Selected",
+            labelShowAll: "Show All",
+            onValueChange: callback,
+            onSearch: jest.genMockFunction(),
+            showOnlySelected: true
         });
 
         var formCheckboxes = TestUtils.scryRenderedComponentsWithType(component, FormCheckbox);
@@ -173,6 +185,32 @@ describe("SelectionList", function () {
 
         expect(checkbox1.checked).toBeTruthy();
         expect(checkbox2.checked).toBeTruthy();
+
+        var unselectAll = TestUtils.findRenderedDOMNodeWithDataId(component, "unselect-all");
+
+        ReactTestUtils.Simulate.click(unselectAll);
+        expect(callback).toBeCalledWith([]);
+
+        expect(formCheckboxes.length).toBe(2);
+    });
+
+    it("toggles showOnlySelected on visibility change", function () {
+        var component = getComponent({
+            selectedItemIds: [1, 2],
+            type: SelectionList.ListType.MULTI,
+            showSelectionOptions: true,
+            labelUnselectAll: "Unselect All",
+            labelOnlySelected: "Show Only Selected",
+            labelShowAll: "Show All"
+        });
+
+        var formCheckboxes = TestUtils.scryRenderedComponentsWithType(component, FormCheckbox);
+        expect(formCheckboxes.length).toBe(9);
+
+        var showOnlySelected = TestUtils.findRenderedDOMNodeWithDataId(component, "show-only-or-all");
+        ReactTestUtils.Simulate.click(showOnlySelected);
+        formCheckboxes = TestUtils.scryRenderedComponentsWithType(component, FormCheckbox);
+        expect(formCheckboxes.length).toBe(2);
     });
 
     it("triggers callback on checkbox change", function () {
@@ -411,7 +449,6 @@ describe("SelectionList", function () {
         var component = getComponent({
             controlled: true,
             onSearch: _.noop,
-            onFilter: _.noop,
             queryString: "my query"
         });
 

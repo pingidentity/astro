@@ -40,23 +40,90 @@ module.exports = React.createClass({
         showSearchBox: React.PropTypes.bool.affectsRendering,
         searchPlaceholder: React.PropTypes.string.affectsRendering,
         onSearch: React.PropTypes.func.isRequired,
-        onFilter: React.PropTypes.func.isRequired,
-        queryString: React.PropTypes.string.affectsRendering
+        queryString: React.PropTypes.string.affectsRendering,
+        showCount: React.PropTypes.bool.affectsRendering,
+        onVisibilityChange: React.PropTypes.func,
+        showSelectionOptions: React.PropTypes.bool.affectsRendering,
+        showOnlySelected: React.PropTypes.bool.affectsRendering,
+        labelUnselectAll: React.PropTypes.string,
+        labelOnlySelected: React.PropTypes.string,
+        labelShowAll: React.PropTypes.string
     },
 
     getDefaultProps: function () {
         return {
             "data-id": "selection-list",
             showSearchBox: true,
-            type: Constants.ListType.SINGLE
+            type: Constants.ListType.SINGLE,
+            showSelectionOptions: false,
+            showOnlySelected: false
         };
+    },
+
+    /**
+     * @desc Toggle unchecking all checkboxes
+     *
+     * @param {object} visibleItems currently displayed items on screen
+     * @param {array} e the event object
+     * @private
+     */
+    _unselectAll: function (visibleItems) {
+        // extract id from visibleItems list
+        var newIds = _.pluck(visibleItems, "id");
+
+        // extract ids in selected list that are not in newIds list
+        var newSelection = [];
+        newSelection = _.difference(this.props.selectedItemIds, newIds);
+        this.props.onValueChange(newSelection);
+    },
+
+    /**
+     * @desc Toggle showing all or selected checkboxes
+     *
+     * @param {object} visibleItems currently displayed items on screen
+     * @param {array} e the event object
+     * @private
+     */
+    _onShowOnlyAllToggle: function () {
+        this.props.onVisibilityChange();
+    },
+
+    /**
+     * @desc Filter currently visible data on screen based on search string, toggles state, e.t.c.
+     * @returns {array} the currently visible list of items
+     * @private
+     */
+    _filterVisible: function () {
+        return _.filter(this.props.items, function (item) {
+            return this.props.selectedItemIds.indexOf(item.id) > -1;
+        }.bind(this));
+    },
+
+    _getSelectionOptions: function (visibleItems) {
+        return (
+            <div data-id={this.props["data-id"]} className="selection-options">
+                <a
+                    data-id="show-only-or-all"
+                    className="option"
+                    onClick={this._onShowOnlyAllToggle}>
+                    {this.props.showOnlySelected ? this.props.labelShowAll : this.props.labelOnlySelected}
+                </a>
+                <a
+                    data-id="unselect-all"
+                    className="option"
+                    onClick={_.partial(this._unselectAll, visibleItems)}>
+                    {this.props.labelUnselectAll}
+                </a>
+            </div>
+        );
     },
 
     render: function () {
         var className = classnames(this.props.className, {
-            "input-selection-list": true,
-            searchable: this.props.showSearchBox
-        });
+                "input-selection-list": true,
+                searchable: this.props.showSearchBox
+            }),
+            visibleItems = this.props.showOnlySelected ? this._filterVisible() : this.props.items;
 
         return (
             <div data-id={this.props["data-id"]} className={className}>
@@ -64,14 +131,19 @@ module.exports = React.createClass({
                     <div data-id={this.props["data-id"] + "-search-box"}>
                         <FormSearchBox queryString={this.props.queryString}
                                 placeholder={this.props.searchPlaceholder}
-                                onValueChange={this.props.onFilter} />
+                                onValueChange={this.props.onSearch} />
                     </div>
                 </If>
-                <ListOptions data-id={this.props["data-id"] + "-options"}
-                        type={this.props.type}
-                        selectedItemIds={this.props.selectedItemIds}
-                        items={this.props.items}
-                        onValueChange={this.props.onValueChange} />
+                <ListOptions
+                    data-id={this.props["data-id"] + "-options"}
+                    type={this.props.type}
+                    selectedItemIds={this.props.selectedItemIds}
+                    items={visibleItems}
+                    onValueChange={this.props.onValueChange}
+                />
+                <If test={this.props.showSelectionOptions}>
+                    {this._getSelectionOptions(visibleItems)}
+                </If>
             </div>
         );
     }

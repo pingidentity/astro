@@ -38,7 +38,7 @@ module.exports = React.createClass({
      *     The new query string
      * @private
      */
-    _onFilter: function (queryString) {
+    _onSearch: function (queryString) {
         var matchedItems = this.props.onSearch(this.props.items, queryString);
         this.setState({
             queryString: queryString,
@@ -46,13 +46,26 @@ module.exports = React.createClass({
         });
     },
 
+    /**
+     * @desc toggle visibility of unselected items
+     *
+     * @private
+     */
+    _handleVisibilityChange: function () {
+        this.setState({
+            showOnlySelected: !this.state.showOnlySelected
+        });
+    },
+
     render: function () {
         var statelessProps = _.defaults(
             {
                 ref: "SelectionListStateless",
-                onFilter: this._onFilter,
+                onSearch: this._onSearch,
                 items: this.state.matchedItems,
-                queryString: this.state.queryString
+                queryString: this.state.queryString,
+                showOnlySelected: this.state.showOnlySelected,
+                onVisibilityChange: this._handleVisibilityChange
             },
             this.props
         );

@@ -1,42 +1,44 @@
 .dragDropRowDemo {
     .instructions {
         font-style: italic;
-        margin-bottom:20px;
+        margin-bottom: 20px;
     }
 
     .row {
-        border:1px solid #eee;
-        padding:5px;
-        background:ghostwhite;
-        margin:5px;
+        border: 1px solid $color-elderly;
+        padding: 5px;
+        background: $color-elderly;
+        margin: 5px;
         cursor:move;
     }
 
     .row.dragTop {
-        border-top: 3px solid cornFlowerBlue;
+        border-top: 3px solid $color-active-blue;
     }
 
-    .row.dragBottom, .row.dragTop.dragBottom {
-        border-bottom: 3px solid cornFlowerBlue;
+    .row.dragBottom,
+    .row.dragTop.dragBottom {
+        border-bottom: 3px solid $color-active-blue;
     }
 }
 
 .infiniteScrollDemo {
     height: 300px;
 
-    .row, .item-head {
-        border:1px solid #eee;
-        padding:5px;
-        background:ghostwhite;
-        margin:5px;
-        cursor:move;
+    .row,
+    .item-head {
+        border: 1px solid $color-elderly;
+        padding: 5px;
+        background: $color-elderly;
+        margin: 5px;
+        cursor: move;
     }
 
     .item-head {
-        color:white;
+        color: $color-white;
         background: lightblue;
-        border-color:#aaa;
-        text-align:center;
+        border-color: $color-elephant;
+        text-align: center;
     }
 }
 
@@ -52,37 +54,45 @@
     }
 
     .with-icon .name {
-        margin-left:40px;
+        margin-left: 40px;
     }
 
     .name {
         @include transition(all 0.3s);
-        margin-left:0px;
+        margin-left: 0;
     }
 
     .demo-options {
-        padding-bottom:10px;
-        margin-bottom:20px;
-        border-bottom:1px solid #eee;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid $color-elderly;
 
         & > div {
             display: inline-block;
-            width:50%;
+            width: 50%;
         }
     }
 
 }
 
 table {
-	&.grid {
-		td {
-			&.cell-background-test {
-                background-color: #EBECCB;
+    &.grid {
+        td {
+            &.cell-background-test {
+                background-color: $color-elderly;
             }
             &.cell-border-test {
                 border-width: 3px;
                 border-style: double;
             }
-		}
-	}
+        }
+    }
+}
+
+hr {
+    margin: 30px 0;
+    height: 0;
+    border-style: solid;
+    border-width: 1px 0 0;
+    border-color: $color-timberwolf;
 }

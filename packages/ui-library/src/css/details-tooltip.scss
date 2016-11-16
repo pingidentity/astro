@@ -11,8 +11,8 @@
     $arrow-width-offset: 6px;
 
     $border-radius: 4px;
-    $box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
-    $text-shadow: 0 7px 6px rgba(0, 0, 0, 0.2);
+    $box-shadow: 0 5px 15px 0 rgba($color-black, 0.2);
+    $text-shadow: 0 7px 6px rgba($color-black, 0.2);
 
     $border: 1px solid $color-timberwolf;
 
@@ -23,6 +23,12 @@
         .details-content,
         &.details-content {
             display: block;
+        }
+        .filter-container {
+            &:after {
+                @include rotate(-180deg);
+                @include transition((all 0.2s linear));
+            }
         }
     }
     &.alert {
@@ -293,13 +299,108 @@
                 }
             }
         }
+        // filter bar
+        .filter-container {
+            margin: 0;
+            padding: 0 38px 0 15px;
+            font-size: 13px;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid $color-rabbit-fur;
+            position: relative;
+            display: inline-block;
+            font-family: $font-pn-regular;
+            background-color: $color-white;
+            text-align: left;
+            text-transform: uppercase;
+            vertical-align: middle;
+            cursor: pointer;
+            outline: none;
+            white-space: nowrap;
+            color: $color-midnight;
+
+            @include border-radius(2px);
+            @include box-sizing(border-box);
+
+            &:after {
+                position: absolute;
+                top: 0;
+                right: 15px;
+                content: '\59';
+                font-family: $icon-font;
+                font-size: 5px;
+                color: $color-midnight;
+
+                @include transition((all 0.2s linear));
+            }
+            .count {
+                color: inherit;
+                border: 1px solid $color-midnight;
+                margin-left: 5px;
+                padding: 0 5px;
+                box-sizing: border-box;
+                display: inline-block;
+                min-width: 19px;
+                height: 19px;
+                line-height: 19px;
+                text-align: center;
+
+                @include border-radius(10px);
+            }
+        }
+        &.filter {
+            .details-content {
+                left: 35px;
+                .details-content-inner {
+                    width: 220px;
+
+                    .input-selection-list {
+                        width: 220px;
+                        padding-bottom: 5px;
+                    }
+                }
+            }
+            .input-text {
+                &.search {
+                    .input-container {
+                        input {
+                            width: 198px;
+                        }
+                    }
+                }
+            }
+            .selection-options {
+                border-top: 1px solid $color-input-fill;
+                padding: 5px 0 0;
+                .option {
+                    font-size: 13px;
+                    font-family: $font-pn-regular;
+                    color: $color-active-blue;
+                    display: inline-block;
+                    padding: 0;
+                    cursor: pointer;
+                    &:after {
+                        content: "|";
+                        padding: 0 5px;
+                        &:hover {
+                            text-decoration: none;
+                        }
+                    }
+                    &:last-of-type {
+                        &:after {
+                            content: "";
+                            padding: 0;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
 
 
 // DEPRECATED OR SITE-SPECIFIC STYLES ----------------------------------------------------------------------------------
-
 .details-tooltip {
     .details-content-inner {
         .primary-action {
