@@ -465,7 +465,7 @@ $layout-nav-width-offset: 15px;
     bottom: 0;
     left: $layout-nav-width + 11px - $layout-nav-width-offset;
     background-color: $color-white;
-    padding: 25px 40px 80px;
+    padding: 25px 40px 0;
 
     .detail-primary-buttons {
         position: absolute;
@@ -478,8 +478,13 @@ $layout-nav-width-offset: 15px;
         text-align: right;
         background: rgba($color-white, 0.9);
         border-top: 1px solid $color-input-border;
+    }
 
-        // @include chrome-fixed-positioning-bug-hack;
+    // workaround for bottom padding - bottom padding is ignored in scrolling elements in FF and IE
+    &:after {
+        content: '';
+        display: block;
+        height: 78px;
     }
 }
 
