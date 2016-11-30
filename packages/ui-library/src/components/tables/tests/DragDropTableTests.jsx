@@ -109,13 +109,13 @@ describe("DragDropTable", function () {
         var tr = TestUtils.scryRenderedDOMNodesWithClass(tbody, "tr");
         var td = TestUtils.scryRenderedDOMNodesWithClass(tr[0], "td");
 
-        var highlightedItems = TestUtils.scryRenderedDOMNodesWithClass(component, "dragLeft");
+        var highlightedItems = TestUtils.scryRenderedDOMNodesWithClass(component, "drag-left");
 
         expect(highlightedItems.length).toBe(6);
         expect(thead[1]).toEqual(highlightedItems[0]);
         expect(td[1]).toEqual(highlightedItems[1]);
 
-        expect(thead[1].className).toContain("dragLeft");
+        expect(thead[1].className).toContain("drag-left");
 
     });
 

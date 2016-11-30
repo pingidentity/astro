@@ -221,7 +221,7 @@ var DragDropTable = React.createClass({
     _getDropClass: function (item, index) {
         var dragRight= this.props.headData.length - 1 === index &&
                 this.props.dropTarget === this.props.headData.length;
-        return classnames("row", { dragLeft: this.props.dropTarget === index }, { dragRight: dragRight });
+        return classnames("dd-column", { "drag-left": this.props.dropTarget === index }, { "drag-right": dragRight });
     },
 
     componentDidMount: function () {

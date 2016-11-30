@@ -26,6 +26,7 @@
         display: inline-block;
         .table {
             border-collapse:collapse;
+            overflow: hidden;
             .th {
                 position:relative;
                 background-color: white;
@@ -78,21 +79,23 @@
                 min-width: 140px;
                 height: 100%;
                 &:first-child {
-                    border-left: none;
+                    border-left-color: transparent;
                 }
                 &:last-child {
-                    border-right: none;
+                    border-right-color: transparent;
                 }
 
             }
             .dragging {
                 opacity: 0.2;
             }
-            .row.dragLeft {
-                border-left: 3px solid $color-active-blue;
-            }
-            .row.dragRight, .row.dragLeft.dragRight{
-                border-left: 3px solid $color-active-blue;
+            .dd-column {
+                &.drag-left {
+                    border-left: 3px solid $color-active-blue;
+                }
+                &.drag-right {
+                    border-left: 3px solid $color-active-blue;
+                }
             }
         }
     }
@@ -131,7 +134,8 @@
             }
             .batch {
                 display: table;
-                table-layout: fixed;
+                //table-layout: fixed;
+                overflow: hidden;
                 > div {
                     display: table-row-group;
                     > div {
