@@ -278,11 +278,14 @@ var LeftNavBar = React.createClass({
                 <div className="nav-menus" ref="container"
                         style={{ bottom: this.state.copyrightHeight }}>
                     <div ref="itemSelector" className="selected-item" style={this.state.selectorStyle}></div>
-                    <div ref="itemSelectorArrow" className="selected-item-arrow" style={this.state.selectorArrowStyle}>
-                        <div></div>
+                    <div ref="itemSelectorArrow" className="selected-item-arrow" style={this.state.selectorStyle}>
+                        <svg version="1.1" width="10px" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+                            <polyline points="0,0 100,50 0,100" className="arrow" />
+                        </svg>
                     </div>
                     { this.props.tree.map(this._renderSection) }
                 </div>
+                
                 <Copyright ref="copyright"
                            pingoneLogo={this.props.pingoneLogo}
                            logoSrc={this.props.logoSrc}

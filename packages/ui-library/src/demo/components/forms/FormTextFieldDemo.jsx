@@ -50,7 +50,10 @@ var FormTextFieldDemo = React.createClass({
         });
     },
 
-    _handleUndo: function () {
+    _handleUndo: function (e) {
+        // prevents focus on characters in input field
+        e.preventDefault();
+        e.stopPropagation();
         this.setState({
             undone: true,
             onUndoValue: this.state.originalValue,

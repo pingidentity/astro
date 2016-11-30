@@ -11,6 +11,7 @@ $sidenav-lineheight: 22px;
 
 	.nav-menus {
 		width: $sidenav-width - 5;
+		-ms-overflow-style: -ms-autohiding-scrollbar;
 	}
 	.copyright {
 		width: $sidenav-width - $layout-nav-offset;
@@ -19,7 +20,7 @@ $sidenav-lineheight: 22px;
 		width: $sidenav-width - $layout-nav-offset;
 	}
 	.selected-item-arrow {
-		left: $sidenav-width + $layout-nav-offset - 5;
+		left: $sidenav-width - $layout-nav-offset;
 	}
 	ul.menu {
 		li {

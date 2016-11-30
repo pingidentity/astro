@@ -376,6 +376,7 @@ var Stateful = React.createClass({
     },
 
     _handleToggleReveal: function () {
+        // prevents focus on characters in input field
         this.setState({
             reveal: !this.state.reveal
         });

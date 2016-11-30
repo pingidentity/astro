@@ -233,7 +233,7 @@ $layout-nav-width-offset: 15px;
         background-color: $color-white;
         border-style: solid;
         border-color: $color-rabbit-fur;
-        border-width: 1px 1px 1px 0;
+        border-width: 1px 0;
         height: $layout-nav-link-height;
         overflow: hidden;
 
@@ -253,39 +253,15 @@ $layout-nav-width-offset: 15px;
         position: absolute;
         left: 215px;
         z-index: -1;
-        height: 0;
         opacity: 0;
 
         @include transition(all 0.3s);
 
-        div {
-            height: 0;
-            &:before,
-            &:after {
-                content: '';
-                display: block;
-                position: absolute;
-                height: 0;
-                width: 10px;
-            }
-            &:before {
-                top: 0;
-                border-width: 26px 8px;
-                border-style: solid;
-                z-index: 2;
-                border-color: transparent transparent transparent $color-rabbit-fur;
-                right: 0;
-            }
-            &:after {
-                top: 3px;
-                border-width: 23px 7px;
-                border-style: solid;
-                z-index: 2;
-                border-color: transparent transparent transparent $color-white;
-                right: 2px;
-            }
+        .arrow {
+            stroke: $color-rabbit-fur;
+            fill: none;
+            stroke-width: 2;
         }
-
     }
     .nav-menus {
         position: absolute;
