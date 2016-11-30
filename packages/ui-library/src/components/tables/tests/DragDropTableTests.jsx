@@ -1,7 +1,7 @@
 window.__DEV__ = true;
 
-//jest.dontMock("../DragDrop.jsx");
 jest.dontMock("../DragDropTable.jsx");
+jest.dontMock("../../list/InfiniteScroll.jsx");
 
 
 describe("DragDropTable", function () {
@@ -10,8 +10,6 @@ describe("DragDropTable", function () {
         TestUtils = require("../../../testutil/TestUtils"),
         _ = require("underscore"),
         DragDropTable = require("../DragDropTable.jsx");
-
-
 
     var mockData = {
         cols: [
@@ -50,18 +48,19 @@ describe("DragDropTable", function () {
 
     function getComponent (props) {
         props = _.defaults(props || {}, {
+            "data-id": "drag-drop-table",
             onDrag: jest.genMockFunction(),
             onDrop: jest.genMockFunction(),
             onCancel: jest.genMockFunction(),
             headData: mockData.cols,
             bodyData: mockData.data
         });
-        return ReactTestUtils.renderIntoDocument(<div><DragDropTable {...props}/></div>);
+        return ReactTestUtils.renderIntoDocument(<DragDropTable {...props} />);
     }
 
     it("Correctly renders number of th and content", function () {
         var component = getComponent();
-        var thead = TestUtils.scryRenderedDOMNodesWithTag(component, "th");
+        var thead = TestUtils.scryRenderedDOMNodesWithClass(component, "th");
 
         expect(thead.length).toBe(3);
 
@@ -69,22 +68,22 @@ describe("DragDropTable", function () {
 
     it("Correctly renders number of body rows and cells with correct content", function () {
         var component = getComponent();
-        var tbody = TestUtils.findRenderedDOMNodeWithTag(component, "tbody");
-        var tr = TestUtils.scryRenderedDOMNodesWithTag(tbody, "tr");
+        var tbody = TestUtils.findRenderedDOMNodeWithClass(component, "tbody");
+        var tr = TestUtils.scryRenderedDOMNodesWithClass(tbody, "tr");
 
         expect(tr.length).toBe(5);
 
-        var td = TestUtils.scryRenderedDOMNodesWithTag(tr[0], "td");
+        var td = TestUtils.scryRenderedDOMNodesWithClass(tr[0], "td");
         expect(td.length).toBe(3);
     });
 
 
     it("displays columns in default order ", function () {
         var component = getComponent();
-        var thead = TestUtils.scryRenderedDOMNodesWithTag(component, "th");
-        var tbody = TestUtils.findRenderedDOMNodeWithTag(component, "tbody");
-        var tr = TestUtils.scryRenderedDOMNodesWithTag(tbody, "tr");
-        var td = TestUtils.scryRenderedDOMNodesWithTag(tr[2], "td");
+        var thead = TestUtils.scryRenderedDOMNodesWithClass(component, "th");
+        var tbody = TestUtils.findRenderedDOMNodeWithClass(component, "tbody");
+        var tr = TestUtils.scryRenderedDOMNodesWithClass(tbody, "tr");
+        var td = TestUtils.scryRenderedDOMNodesWithClass(tr[2], "td");
 
         expect(thead[0].innerHTML).toBe("name");
         expect(td[0].innerHTML).toBe("roy");
@@ -93,10 +92,10 @@ describe("DragDropTable", function () {
 
     it("sorts columns by order prop", function () {
         var component = getComponent({ columnOrder: [2, 0, 1] });
-        var thead = TestUtils.scryRenderedDOMNodesWithTag(component, "th");
-        var tbody = TestUtils.findRenderedDOMNodeWithTag(component, "tbody");
-        var tr = TestUtils.scryRenderedDOMNodesWithTag(tbody, "tr");
-        var td = TestUtils.scryRenderedDOMNodesWithTag(tr[2], "td");
+        var thead = TestUtils.scryRenderedDOMNodesWithClass(component, "th");
+        var tbody = TestUtils.findRenderedDOMNodeWithClass(component, "tbody");
+        var tr = TestUtils.scryRenderedDOMNodesWithClass(tbody, "tr");
+        var td = TestUtils.scryRenderedDOMNodesWithClass(tr[2], "td");
 
         expect(thead[0].innerHTML).toBe("city");
         expect(td[0].innerHTML).toBe("arvada");
@@ -105,10 +104,10 @@ describe("DragDropTable", function () {
     it("displays highlight based on drop target", function () {
         var component = getComponent({ dropTarget: 1 });
 
-        var thead = TestUtils.scryRenderedDOMNodesWithTag(component, "th");
-        var tbody = TestUtils.findRenderedDOMNodeWithTag(component, "tbody");
-        var tr = TestUtils.scryRenderedDOMNodesWithTag(tbody, "tr");
-        var td = TestUtils.scryRenderedDOMNodesWithTag(tr[0], "td");
+        var thead = TestUtils.scryRenderedDOMNodesWithClass(component, "th");
+        var tbody = TestUtils.findRenderedDOMNodeWithClass(component, "tbody");
+        var tr = TestUtils.scryRenderedDOMNodesWithClass(tbody, "tr");
+        var td = TestUtils.scryRenderedDOMNodesWithClass(tr[0], "td");
 
         var highlightedItems = TestUtils.scryRenderedDOMNodesWithClass(component, "dragLeft");
 
@@ -123,9 +122,9 @@ describe("DragDropTable", function () {
     it("adds class to dragged column", function () {
         var component = getComponent({ beingDragged: 0 });
 
-        var tbody = TestUtils.findRenderedDOMNodeWithTag(component, "tbody");
-        var tr = TestUtils.scryRenderedDOMNodesWithTag(tbody, "tr");
-        var td = TestUtils.scryRenderedDOMNodesWithTag(tr[0], "td");
+        var tbody = TestUtils.findRenderedDOMNodeWithClass(component, "tbody");
+        var tr = TestUtils.scryRenderedDOMNodesWithClass(tbody, "tr");
+        var td = TestUtils.scryRenderedDOMNodesWithClass(tr[0], "td");
 
         expect(td[0].className).toContain("dragging");
         expect(td[1].className).not.toContain("dragging");
@@ -143,11 +142,43 @@ describe("DragDropTable", function () {
 
         var component = getComponent({ headContentType: getHeader() });
 
-        var thead = TestUtils.scryRenderedDOMNodesWithTag(component, "th");
+        var thead = TestUtils.scryRenderedDOMNodesWithClass(component, "th");
 
         expect(thead[0].childNodes[0].tagName).toBe("A");
         expect(thead[0].childNodes[0].innerHTML).toBe("name");
     });
 
+    it("adds fixed header based on prop", function () {
+        var component = getComponent({ fixedHead: true });
+        var fixedHead = TestUtils.findRenderedDOMNodeWithDataId(component, "drag-drop-table-fixedHead");
+
+        expect(fixedHead).toBeDefined();
+
+    });
+
+    it("sets widths for fixed header", function () {
+        var component = getComponent({ fixedHead: true });
+
+        expect(component.state.columnWidths).toBe(null);
+        //setWidths is on a timeout so need to run timers
+        jest.runAllTimers();
+        expect(component.state.columnWidths.length).toBe(3);
+    });
+
+    it("renders with InfiniteScroll", function () {
+        var infiniteScrollProps = {
+            onNext: jest.genMockFunction,
+            hasNext: true,
+            batches: [
+                { id: 1, data: mockData.data }
+            ]
+        };
+        var component = getComponent({ fixedHead: true, infiniteScroll: infiniteScrollProps });
+
+        jest.runAllTimers();
+
+        var infiniteScroll = TestUtils.findRenderedDOMNodeWithDataId(component, "infinite-scroll");
+        expect(infiniteScroll).toBeTruthy();
+    });
 
 });

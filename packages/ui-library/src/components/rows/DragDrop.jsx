@@ -8,6 +8,7 @@ var dragSource = dnd.DragSource;
 var dropTarget = dnd.DropTarget;
 var PropTypes = React.PropTypes;
 var TYPE = "DragDrop";
+var _= require("underscore");
 
 var dragSpec = {
     beginDrag: function (props) {
@@ -120,11 +121,12 @@ var dropCollect = function (connect) {
  * @param {DragDrop~onCancel} onCancel
  *          A callback which is executed when the dragging is cancelled (dropped outside a droppable area
  *          or esc button pressed).
- * @param {string} type
+ * @param {string} [type]
  *          String to specify whether the component is a row or a column. Default "row".
- * @param {string} tagName
+ * @param {string} [tagName]
  *          The DOM node to wrap the draggable component. Default "div"
- *
+ * @param {object} [style]
+ *          Inline style object for child
  * @example
  *
  *  <Draggable id={index} index={index} onDrag={this._onDrag} onDrop={this._onDrop}
@@ -147,6 +149,7 @@ var DragDrop = React.createClass({
 
         type: PropTypes.string,
         tagName: PropTypes.string,
+        style: PropTypes.object,
 
         disabled: PropTypes.bool,
         removeDraggableAttribute: PropTypes.bool
@@ -168,7 +171,7 @@ var DragDrop = React.createClass({
         var rowProps = {
             className: classnames("drag-drop-item", this.props.className),
             "data-id": "drag-drop-item",
-            style: { opacity: opacity }
+            style: _.clone(_.extend(this.props.style, { opacity: opacity }))
         };
 
         var row = (

@@ -1,5 +1,7 @@
 var React = require("react");
 
-module.exports = function (props) {
-    return (React.createElement(props.tagName, props, props.children));
-};
+module.exports = React.createClass({
+    render: function () {
+        return (<div {...this.props}>{this.props.children}</div>);
+    }
+});
