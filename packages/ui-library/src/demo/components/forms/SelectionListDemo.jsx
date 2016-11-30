@@ -15,6 +15,30 @@ var SelectionListDemo = React.createClass({
     numSingleSelectDemos: 3,
     numMultiSelectDemos: 4,
 
+    _singleSelectItems: [
+        { name: "Hockey", id: 1 },
+        { name: "Soccer", id: 2 },
+        { name: "Basketball", id: 3 },
+        { name: "Swimming", id: 4 },
+        { name: "Chess", id: 5 },
+        { name: "Cross Country Skiing", id: 6 },
+        { name: "Wrestling", id: 7 },
+        { name: "Diving", id: 8 },
+        { name: "Boxing", id: 9 }
+    ],
+
+    _multiSelectItems: [
+        { name: "Apple", id: 1 },
+        { name: "Orange", id: 2 },
+        { name: "Banana", id: 3 },
+        { name: "Watermelon", id: 4 },
+        { name: "Grape Fruit", id: 5 },
+        { name: "Peach", id: 6 },
+        { name: "Plum", id: 7 },
+        { name: "Strawberry", id: 8 },
+        { name: "Kiwi", id: 9 }
+    ],
+
     _onSingleSelectionListChange: function (index, selectedItemId) {
         var newState = {};
         newState["singleSelectId" + index] = selectedItemId;
@@ -27,8 +51,8 @@ var SelectionListDemo = React.createClass({
         this.setState(newState);
     },
 
-    _myCustomSearch: function (items, queryString) {
-        var matchedItems = _.filter(items, function (item) {
+    _myCustomSearch: function (queryString) {
+        var matchedItems = _.filter(this._multiSelectItems, function (item) {
             return _s.endsWith(item.name.toLowerCase(), queryString.toLowerCase());
         });
         return matchedItems;
@@ -59,33 +83,6 @@ var SelectionListDemo = React.createClass({
     },
 
     render: function () {
-
-        var singleSelectItems = [
-            { name: "Hockey", id: 1 },
-            { name: "Soccer", id: 2 },
-            { name: "Basketball", id: 3 },
-            { name: "Swimming", id: 4 },
-            { name: "Chess", id: 5 },
-            { name: "Cross Country Skiing", id: 6 },
-            { name: "Wrestling", id: 7 },
-            { name: "Diving", id: 8 },
-            { name: "Boxing", id: 9 }
-        ];
-
-        var multiSelectItems = [
-            { name: "Apple", id: 1 },
-            { name: "Orange", id: 2 },
-            { name: "Banana", id: 3 },
-            { name: "Watermelon", id: 4 },
-            { name: "Grapefruit", id: 5 },
-            { name: "Peach", id: 6 },
-            { name: "Plum", id: 7 },
-            { name: "Strawberry", id: 8 },
-            { name: "Kiwi", id: 9 },
-            { name: "Rhubarb", id: 10 },
-            { name: "Starfruit", id: 11 }
-        ];
-
         return (
             <div>
                 <h2>
@@ -112,7 +109,7 @@ var SelectionListDemo = React.createClass({
                         data-id="single-select-1"
                         controlled={false}
                         type={SelectionList.ListType.SINGLE}
-                        items={singleSelectItems}
+                        items={this._singleSelectItems}
                         selectedItemIds={this.state.singleSelectId1}
                         showSearchBox={true}
                         searchPlaceholder="Search..."
@@ -132,7 +129,7 @@ var SelectionListDemo = React.createClass({
                     data-id="single-select-2"
                     controlled={false}
                     type={SelectionList.ListType.SINGLE}
-                    items={singleSelectItems}
+                    items={this._singleSelectItems}
                     selectedItemIds={this.state.singleSelectId2}
                     showSearchBox={true}
                     searchPlaceholder="Search..."
@@ -151,7 +148,7 @@ var SelectionListDemo = React.createClass({
                     data-id="single-select-3"
                     controlled={false}
                     type={SelectionList.ListType.SINGLE}
-                    items={singleSelectItems}
+                    items={this._singleSelectItems}
                     selectedItemIds={this.state.singleSelectId3}
                     showSearchBox={false}
                     searchPlaceholder="Search..."
@@ -184,7 +181,7 @@ var SelectionListDemo = React.createClass({
                         data-id="multi-select-1"
                         controlled={false}
                         type={SelectionList.ListType.MULTI}
-                        items={multiSelectItems}
+                        items={this._multiSelectItems}
                         selectedItemIds={this.state.multiSelectIds1}
                         showSearchBox={true}
                         searchPlaceholder={"Search..."}
@@ -214,7 +211,7 @@ var SelectionListDemo = React.createClass({
                         data-id="multi-select-4"
                         controlled={false}
                         type={SelectionList.ListType.MULTI}
-                        items={multiSelectItems}
+                        items={this._multiSelectItems}
                         selectedItemIds={this.state.multiSelectIds4}
                         showSearchBox={true}
                         searchPlaceholder={"Search..."}
@@ -237,7 +234,7 @@ var SelectionListDemo = React.createClass({
                 <SelectionList
                     data-id="multi-select-2"
                     type={SelectionList.ListType.MULTI}
-                    items={multiSelectItems}
+                    items={this._multiSelectItems}
                     selectedItemIds={this.state.multiSelectIds2}
                     showSearchBox={true}
                     searchPlaceholder={"Search..."}
@@ -257,7 +254,7 @@ var SelectionListDemo = React.createClass({
                     data-id="multi-select-3"
                     controlled={false}
                     type={SelectionList.ListType.MULTI}
-                    items={multiSelectItems}
+                    items={this._multiSelectItems}
                     selectedItemIds={this.state.multiSelectIds3}
                     showSearchBox={false}
                     onValueChange={this._onMultiSelectionListChange3}

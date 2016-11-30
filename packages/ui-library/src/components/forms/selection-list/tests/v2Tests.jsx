@@ -328,8 +328,8 @@ describe("SelectionList", function () {
     });
 
     it("should do a custom search and return an expected result", function () {
-        var customSearchFunc = function (items, queryString) {
-            var matchedItems = _.filter(items, function (item) {
+        var customSearchFunc = function (queryString) {
+            var matchedItems = _.filter(listItems, function (item) {
                 return _s.endsWith(item.name.toLowerCase(), queryString.toLowerCase());
             });
 
@@ -348,6 +348,24 @@ describe("SelectionList", function () {
         var checkboxes = TestUtils.scryRenderedDOMNodesWithTag(selectionList, "input");
 
         expect(checkboxes.length).toEqual(1);
+    });
+
+    it("stateful: triggers onSearch callback when search input changes", function () {
+        var component = getComponent({ showSearchBox: true, onSearch: jest.genMockFunction() });
+        var searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-search-box");
+        var searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
+
+        ReactTestUtils.Simulate.change(searchInput, { target: { value: "foo" } });
+        expect(component.props.onSearch).toBeCalledWith("foo");
+    });
+
+    it("stateless: triggers onSearch callback when search input changes", function () {
+        var component = getComponent({ showSearchBox: true, controlled: true, onSearch: jest.genMockFunction() });
+        var searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-search-box");
+        var searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
+
+        ReactTestUtils.Simulate.change(searchInput, { target: { value: "foo" } });
+        expect(component.props.onSearch).toBeCalledWith("foo");
     });
 
     it("should trim space before performing a start search", function () {

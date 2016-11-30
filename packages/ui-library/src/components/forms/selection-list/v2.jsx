@@ -16,6 +16,9 @@ var React = require("react"),
  * @callback SelectionList~onSearch
  * @param {string} queryString
  *     The new query string to use in filtering the items
+ *
+ * @return {SelectionListItem[]}
+ *    returns the filtered list of items
  */
 
 /**

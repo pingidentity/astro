@@ -12,16 +12,6 @@ var React = require("react"),
 module.exports = React.createClass({
     displayName: "SelectionListStateful",
 
-    getDefaultProps: function () {
-        return {
-            /*
-             * The default search function does a "startsWith" search for query strings
-             * less than or equal to 3 chars, otherwise is does a "contains" search.
-             */
-            onSearch: filterItemsFunction
-        };
-    },
-
     getInitialState: function () {
         return {
             queryString: "",
@@ -38,8 +28,19 @@ module.exports = React.createClass({
      *     The new query string
      * @private
      */
-    _onSearch: function (queryString) {
-        var matchedItems = this.props.onSearch(this.props.items, queryString);
+    _handleSearch: function (queryString) {
+        var matchedItems = this.props.items;
+        // Use custom onSearch if specified, otherwise use default filter
+        if (this.props.onSearch) {
+            matchedItems = this.props.onSearch(queryString);
+        } else {
+            /*
+             * The default search function does a "startsWith" search for query strings
+             * less than or equal to 3 chars, otherwise is does a "contains" search.
+             */
+            matchedItems = filterItemsFunction(this.props.items, queryString);
+        }
+        
         this.setState({
             queryString: queryString,
             matchedItems: matchedItems
@@ -61,7 +62,7 @@ module.exports = React.createClass({
         var statelessProps = _.defaults(
             {
                 ref: "SelectionListStateless",
-                onSearch: this._onSearch,
+                onSearch: this._handleSearch,
                 items: this.state.matchedItems,
                 queryString: this.state.queryString,
                 showOnlySelected: this.state.showOnlySelected,
