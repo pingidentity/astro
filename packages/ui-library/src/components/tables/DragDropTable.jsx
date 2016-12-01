@@ -260,7 +260,7 @@ var DragDropTable = React.createClass({
 
         return (
             <div data-id={this.props["data-id"]} className={className}>
-                <div className="container" data-id={this.props["data-id"] + "-container"}>
+                <div className="dd-table-container" data-id={this.props["data-id"] + "-container"}>
                     <div className="table" data-id={this.props["data-id"] + "-table"}>
                         {tableHead}
                         {tableBody}
