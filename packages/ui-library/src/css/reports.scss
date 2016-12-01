@@ -1,3 +1,109 @@
+.report-filters {
+    $border-color: $color-dolphin;
+    $background-color: $color-white;
+    $input-margin: 15px;
+
+    position: relative;
+    padding: 20px 20px 0;
+    background-color: $color-timberwolf;
+
+    .input-select,
+    .input-textselect,
+    .input-text,
+    .input-calendar,
+    .input-timezone {
+        margin-bottom: 20px;
+    }
+    .input-text,
+    .input-textselect {
+        margin: 0 $input-margin 0 0;
+        vertical-align: bottom;
+
+        input[type=text] {
+            background: $background-color;
+            border-color: $border-color;
+        }
+    }
+    .input-select {
+        margin: 0 $input-margin 0 0;
+        vertical-align: bottom;
+
+        .input-container {
+            select {
+                background: $background-color;
+            }
+        }
+        .wrapper {
+            border-color: $border-color;
+        }
+        .selected-option,
+        .select-list {
+            background: $background-color;
+        }
+        .select-list {
+            .select-option:hover {
+                background: $color-elderly;
+            }
+        }
+    }
+    .input-timezone {
+        vertical-align: bottom;
+    }
+    .input-calendar {
+        input[type=text].input-calendar-value {
+            border-color: $border-color;
+            width: 145px;
+        }
+        .input-calendar-wrapper {
+            background: $color-white;
+        }
+    }
+    .form-error {
+        margin-right: 36px;
+    }
+
+    .divider {
+        display: inline-block;
+        width: 1px;
+        height: 81px;
+        margin: -10px $input-margin 5px 0;
+        background-color: $color-stratus;
+        vertical-align: top;
+    }
+    .more-option-inputs {
+        border-top: 1px solid $color-dolphin;
+        padding: 20px 0 0;
+    }
+    button.primary {
+        margin: 20px 0 20px 15px;
+    }
+}
+
+.reports-add-btn {
+    text-align: right;
+
+    button {
+        margin: 0;
+    }
+}
+
+.reports-more-options-link {
+    margin: 15px 0 30px;
+    padding: 0;
+}
+
+.reports-export-btn {
+    float: right;
+    margin: 15px 0 0;
+
+    .icon-ellipsis {
+        margin: 5px 36px 0 0;
+    }
+    button {
+        margin: 0;
+    }
+}
+
 .report-table {
     position: relative;
     overflow: auto;
