@@ -21,7 +21,6 @@ To verify if a package is installed globally, run:
 
 
 
-
 Resources
 ---------
 See this Confluence page
