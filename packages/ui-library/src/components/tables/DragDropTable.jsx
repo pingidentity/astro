@@ -4,6 +4,7 @@ var DragDrop = require("../rows/DragDrop.jsx");
 var InfiniteScroll = require("../list/InfiniteScroll.jsx");
 var classnames = require("classnames");
 var _ = require("underscore");
+var uuid = require("uuid");
 
 var Head = function (props) {
     var dataId = props.fixed ? props["data-id"] + "-fixedHead" : props["data-id"] + "-Head";
@@ -91,7 +92,7 @@ var ISRow = function (props) {
                 ? { minWidth: props.widths[columnIndex], maxWidth: props.widths[columnIndex] }
                 : null;
             return (
-                <div key={columnIndex + props[columnIndex]}
+                <div key={uuid.v4()}
                     className={classnames(props.getDropClass(props[columnIndex], dataIndex), "td", dragClass)}
                     style={style}>
                     {props[columnIndex]}

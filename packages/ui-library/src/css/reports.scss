@@ -114,6 +114,7 @@
     }
     .thead {
         display: table-header-group;
+        transform: translateZ(0);
     }
     .tbody {
         display: table-row-group;
@@ -131,13 +132,15 @@
         overflow: auto;
         display: inline-block;
         .table {
-            border-collapse:collapse;
+            border-collapse: collapse;
             overflow: hidden;
             .th {
                 position:relative;
                 background-color: white;
                 padding: 20px 30px 10px;
                 border: 1px solid $color-stone;
+                //fix issues with border-collapse in Firefox.
+                background-clip: padding-box;
                 text-align: left;
                 &[draggable] {
                     cursor: move; /* fallback if grab cursor is unsupported */
