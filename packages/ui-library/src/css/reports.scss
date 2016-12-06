@@ -1,3 +1,6 @@
+@import 'globals';
+@import 'mixins';
+
 .report-filters {
     $border-color: $color-dolphin;
     $background-color: $color-white;
@@ -105,6 +108,11 @@
 }
 
 .report-table {
+    @mixin vertical-scroll {
+        max-height: 600px;
+        overflow-x: hidden !important; //override for the style of InfiniteScroll
+        overflow-y: auto;
+    }
     position: relative;
     overflow: auto;
     max-width: 100%;
@@ -128,8 +136,7 @@
 
     .dd-table-container {
         text-align: left;
-        max-height: 600px;
-        overflow: auto;
+        @include vertical-scroll;
         display: inline-block;
         .table {
             border-collapse: collapse;
@@ -237,8 +244,7 @@
             .infinite-scroll-wrapper {
                 //infinite scroll element
                 > div {
-                    max-height: 600px;
-                    overflow: auto;
+                    @include vertical-scroll;
                 }
             }
             .batch {
