@@ -68,6 +68,10 @@
         .input-text.form-error {
             > .input-container {
                 margin-right: 21px;
+
+                input {
+                    width: 70px;
+                }
             }
         }
     }
@@ -96,7 +100,7 @@
     text-align: right;
 
     button {
-        margin: 0;
+        margin: -25px 0 0;
     }
 }
 

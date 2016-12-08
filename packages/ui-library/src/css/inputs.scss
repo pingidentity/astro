@@ -2064,6 +2064,11 @@ input[type=file] {
     }
 }
 
+.input-selectionfilter {
+    display: inline-block;
+    margin: 0 15px 20px 0;
+}
+
 a {
     &.input-link {
         display: block;
