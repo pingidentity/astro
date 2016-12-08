@@ -2458,9 +2458,9 @@ label {
         }
         .tooltip-menu-search-clear {
             position: absolute;
-            top: 12px;
+            top: 14px;
             right: 14px;
-            font-size: 12px;
+            font-size: 11px;
 
             &:before {
                 content: 'X';
@@ -2478,6 +2478,7 @@ label {
     @include tooltip-menu;
 
     .collapsible-link {
+        line-height: 40px;
         text-transform: none;
         padding: 0;
     }

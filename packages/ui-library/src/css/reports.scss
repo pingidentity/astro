@@ -4,7 +4,6 @@
 .report-filters {
     $border-color: $color-dolphin;
     $background-color: $color-white;
-    $input-margin: 15px;
 
     position: relative;
     padding: 20px 20px 0;
@@ -15,11 +14,10 @@
     .input-text,
     .input-calendar,
     .input-timezone {
-        margin-bottom: 20px;
+        margin: 0 15px 20px 0;
     }
     .input-text,
     .input-textselect {
-        margin: 0 $input-margin 0 0;
         vertical-align: bottom;
 
         input[type=text] {
@@ -28,7 +26,6 @@
         }
     }
     .input-select {
-        margin: 0 $input-margin 0 0;
         vertical-align: bottom;
 
         .input-container {
@@ -61,24 +58,37 @@
             background: $color-white;
         }
     }
+
     .form-error {
         margin-right: 36px;
+
+        @include transition(all 0.3s);
+    }
+    .input-textselect {
+        .input-text.form-error {
+            > .input-container {
+                margin-right: 21px;
+            }
+        }
     }
 
     .divider {
         display: inline-block;
         width: 1px;
         height: 81px;
-        margin: -10px $input-margin 5px 0;
+        margin: -10px 15px 5px 0;
         background-color: $color-stratus;
         vertical-align: top;
     }
-    .more-option-inputs {
+    .more-option-inputs, // support for bad name until fixed in WP
+    .more-options-inputs {
         border-top: 1px solid $color-dolphin;
-        padding: 20px 0 0;
+        padding: 20px 0;
     }
     button.primary {
-        margin: 20px 0 20px 15px;
+        position: absolute;
+        right: 20px;
+        bottom: 22px;
     }
 }
 
