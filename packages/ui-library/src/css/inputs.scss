@@ -574,6 +574,9 @@ fieldset {
                 &:last-of-type {
                     margin-right: 0;
                 }
+                .label-text {
+                    margin-bottom: 0;
+                }
             }
         }
     }
@@ -1578,22 +1581,12 @@ input[type=file] {
                 width: 0;
             }
         }
-        &.input-text {
-            input {
-                @include requiredPaddingEntered;
-            }
-        }
-        &.input-textarea {
-            textarea {
-                @include requiredPaddingEntered;
-            }
-        }
         &.input-multivalues {
             @include requiredPaddingEntered;
         }
         &.input-select {
             select {
-                padding-left: 10px;
+                padding-left: 15px;
             }
         }
     }
