@@ -123,9 +123,11 @@ describe("Step", function () {
     });
 
     it("Done and cancel buttons are visible when on last step", function () {
-        var component = getRenderedComponent({ numSteps: 3 , activeStep: 3 });
+        var component = getRenderedComponent({ numSteps: 3 , activeStep: 3 }),
+            doneBtn = getDoneButton(component);
         expect(getCancelButton(component)).toBeTruthy();
-        expect(getDoneButton(component)).toBeTruthy();
+        expect(doneBtn).toBeTruthy();
+        expect(doneBtn.disabled).toBeFalsy();
     });
 
     it("Done and cancel button texts are correct", function () {
@@ -165,5 +167,13 @@ describe("Step", function () {
         var test = TestUtils.findRenderedDOMNodeWithDataId(component, "wizard");
         expect(test).toBeTruthy();
         expect(console.warn).not.toBeCalled();
+    });
+
+    it("Disables the save/done button when specified", function () {
+        var component = getRenderedComponent({ numSteps: 1, saveDisabled: true }),
+            doneBtn = getDoneButton(component);
+
+        expect(doneBtn.className).toContain("disabled");
+        expect(doneBtn.disabled).toBeTruthy();
     });
 });

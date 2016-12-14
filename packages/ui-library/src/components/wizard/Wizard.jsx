@@ -61,6 +61,8 @@ var React = require("re-react"),
  *      The current step the wizard (since redux forces externally managed components)
  * @param {number[]} choices
  *      An array describing the state of the entire wizard tree
+ * @param {boolean} [saveDisabled]
+ *     Disables the final save button when true
  * @param {string} [labelEdit]
  *      If provided, will be injected its children's props
  * @param {string} [labelNext]
@@ -209,6 +211,7 @@ var Wizard = React.createClass({
                         cancelText={this.props.labelCancel}
                         onCancel={this.props.onCancel}
                         onSave={this.props.onDone}
+                        saveDisabled={this.props.saveDisabled}
                         saveText={this.props.labelDone}
                         enableSavingAnimation={this.props.showPulsing}
                         saveClassName="success" />
