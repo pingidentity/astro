@@ -52,10 +52,8 @@ describe("Calendar Integration", function () {
         //click on right icon in date-view
         CalendarPage.clickRightNavigationIcon();
 
-        // TODO: fix this test
-        // TEST IS BREAKING. MOMENT IS GENERATING THE WRONG MONTH
-        // var date = CalendarPage.getValueOfCalendar();
-        // var month = CalendarPage.getMonthByDate(date);
-        // expect(CalendarPage.getCurrentMonth()).toEqual(month);
+        var date = CalendarPage.getValueOfCalendar();
+        var month = CalendarPage.getMonthByDate(date);
+        expect(CalendarPage.getCurrentMonth()).toEqual(month);
     });
 });

@@ -156,7 +156,9 @@ var CalendarDemoPage = Object.create(HomePage, {
      */
     getMonthByDate: {
         value: function (date) {
-            var currentMonth = new Date(date).getMonth();
+            // use moment(date) and not new Date(date), for moment is tz aware;
+            // Date is not and will use UTC as timezone instead of local
+            var currentMonth = moment(date).month();
             return currentMonth + 1;
         }
     },
