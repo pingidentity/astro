@@ -256,7 +256,8 @@ var DragDropTable = React.createClass({
         var className = classnames(
             this.props.className,
             { "infinite-scroll-container": this.props.infiniteScroll && this.state.columnWidths },
-            { "fixed-head": (this.props.fixedHead || this.props.infiniteScroll) && this.state.columnWidths }
+            { "fixed-head": (this.props.fixedHead || this.props.infiniteScroll) && this.state.columnWidths },
+            { "has-next": this.props.infiniteScroll && this.state.columnWidths && this.props.infiniteScroll.hasNext }
         );
 
         return (

@@ -264,6 +264,8 @@
             .batch {
                 display: table;
                 overflow: hidden;
+                border-bottom: 1px dashed $color-stone;
+                overflow-y: visible;
                 > div {
                     display: table-row-group;
                     > div {
@@ -272,6 +274,26 @@
                             display: table-cell;
                         }
                     }
+                }
+            }
+        }
+    }
+    &.has-next {
+        .batch:last-of-type {
+            > div:last-of-type .td {
+                position:relative;
+                overflow: visible;
+                    &:before {
+                        content: ('');
+                        position: absolute;
+                        display: block;
+                        top: 0;
+                        right: -1px;
+                        bottom: 0;
+                        left: 0;
+                        background-color: $color-white;
+                        opacity: 0.5;
+                        border-right: 1px solid $color-stone;
                 }
             }
         }

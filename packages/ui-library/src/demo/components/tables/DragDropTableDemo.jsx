@@ -11,7 +11,7 @@ var React = require("react"),
 * @desc A demo for DragDropTable
 */
 var DragDropTableDemo = React.createClass({
-    SIMULATED_DELAY_MS: 200,
+    SIMULATED_DELAY_MS: 2000,
     ENTRIES_PER_BATCH: 20,
 
     getInitialState: function () {
@@ -153,6 +153,7 @@ var DragDropTableDemo = React.createClass({
             <div data-id="dragDropRowDemo" id="dragDemoParent">
 
                 <div className="instructions">Basic Drag and drop table with fixed head</div>
+
                 <DragDropTable
                     headData={this.state.headings}
                     columnOrder={this.state.order}
@@ -165,6 +166,7 @@ var DragDropTableDemo = React.createClass({
                     onCancel={this._onCancel}
                     fixedHead={true}
                 />
+
                 <br />
                 <div className="instructions">Drag and drop table with infinite scroll</div>
                 <DragDropTable
