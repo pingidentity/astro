@@ -2422,6 +2422,7 @@ label {
             width: 202px;
             overflow: auto;
             margin: 0 0 10px;
+            text-transform: none;
         }
         .tooltip-menu-option {
             display: block;
@@ -2508,6 +2509,7 @@ label {
         .tooltip-menu-option-title {
             color: $color-walrus;
             background-color: $color-white;
+            text-transform: none;
 
             .icon-clear {
                 &:before {
@@ -2516,6 +2518,7 @@ label {
                 }
             }
             .country-label {
+                text-transform: uppercase;
                 color: $color-elephant;
             }
         }
