@@ -80,6 +80,10 @@ textarea {
     &[disabled] {
         resize: none !important;
     }
+    // being resized
+    &[style] {
+        @include transition(none);
+    }
 }
 
 label {

@@ -501,7 +501,8 @@ var ModalActivator = React.createClass({
                         className={this.props.buttonLabelClassName}
                         onClick={this.props.onOpen}
                         title={this.props.buttonLabel}
-                        disabled={this.props.disabled}>
+                        disabled={this.props.disabled}
+                        type="button">
                     {this.props.buttonLabel}
                 </button>
             );
