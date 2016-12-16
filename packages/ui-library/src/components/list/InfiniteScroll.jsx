@@ -48,6 +48,7 @@ var Batch = React.createClass({
         var container = ReactDOM.findDOMNode(this.refs.container);
         if (container) {
             this.containerHeight = ReactDOM.findDOMNode(this.refs.container).scrollHeight;
+            this.containerWidth = ReactDOM.findDOMNode(this.refs.container).scrollWidth;
         }
     },
 
@@ -59,6 +60,7 @@ var Batch = React.createClass({
 
         if (!visible) {
             style.height = this.containerHeight;
+            style.width = this.containerWidth;
         } else {
             rows = [];
 
@@ -295,7 +297,7 @@ var InfiniteScroll = React.createClass({
             ReactDOM.findDOMNode(this.refs.spinnerPrev).getBoundingClientRect().bottom >= containerBounds.top;
     },
 
-    _handleScroll: function () {
+    _handleScroll: function (e) {
         //dont handle scrolls before there's any data
         if (!this.batchRange) {
             return;
@@ -322,7 +324,7 @@ var InfiniteScroll = React.createClass({
             }
         }
         if (this.props.onScroll) {
-            this.props.onScroll(this._getFirstVisibleItem());
+            this.props.onScroll(this._getFirstVisibleItem(), e);
         }
     },
 

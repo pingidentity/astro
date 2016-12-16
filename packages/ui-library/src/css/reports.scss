@@ -124,12 +124,11 @@
 .report-table {
     @mixin vertical-scroll {
         max-height: 600px;
-        overflow-x: hidden !important; //override for the style of InfiniteScroll
-        overflow-y: auto;
+        overflow: auto;
+        max-width: 100%;
     }
     position: relative;
-    overflow: auto;
-    max-width: 100%;
+    overflow: hidden;
     //set divs to act like table
     .table {
         display: table;
@@ -146,6 +145,9 @@
     }
     .th, .td {
         display: table-cell;
+        -moz-background-clip: padding;     /* Firefox 3.6 */
+        -webkit-background-clip: padding;  /* Safari 4? Chrome 6? */
+        background-clip: padding-box;      /* Firefox 4, Safari 5, Opera 10, IE 9 */
     }
 
     .dd-table-container {
@@ -230,8 +232,12 @@
         }
     }
     &.fixed-head {
+        overflow:hidden;
         .dd-table-container {
             margin-top: 52px;
+            max-height: 600px;
+            max-width: 100%;
+            overflow-x: auto;
             .thead {
                 position: absolute;
                 top: 0;
@@ -241,6 +247,9 @@
                         box-sizing:border-box;
                     }
                 }
+            }
+            .tbody {
+                max-height: 660px;
             }
             .td {
                 box-sizing: border-box;
@@ -253,12 +262,11 @@
         .dd-table-container {
             max-height: none;
             .table {
-                display: inline-block;
+                display: block;
             }
             .infinite-scroll-wrapper {
-                //infinite scroll element
                 > div {
-                    @include vertical-scroll;
+                    max-height: 600px;
                 }
             }
             .batch {

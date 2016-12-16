@@ -150,9 +150,11 @@ describe("DragDropTable", function () {
 
     it("adds fixed header based on prop", function () {
         var component = getComponent({ fixedHead: true });
-        var fixedHead = TestUtils.findRenderedDOMNodeWithDataId(component, "drag-drop-table-fixedHead");
 
-        expect(fixedHead).toBeDefined();
+        jest.runAllTimers();
+
+        var fixedHead = TestUtils.findRenderedDOMNodeWithDataId(component, "drag-drop-table-fixedHead");
+        expect(fixedHead).toBeTruthy();
 
     });
 
@@ -165,7 +167,7 @@ describe("DragDropTable", function () {
         expect(component.state.columnWidths.length).toBe(3);
     });
 
-    it("renders with InfiniteScroll", function () {
+    it("renders with InfiniteScroll and fires scroll callback", function () {
         var infiniteScrollProps = {
             onNext: jest.genMockFunction,
             hasNext: true,
@@ -177,8 +179,45 @@ describe("DragDropTable", function () {
 
         jest.runAllTimers();
 
-        var infiniteScroll = TestUtils.findRenderedDOMNodeWithDataId(component, "infinite-scroll");
-        expect(infiniteScroll).toBeTruthy();
+        //access the infinite scroll node variable
+        expect(component.infiniteScrollNode).toBeTruthy();
+
     });
+
+    it("calls scroll callback for fixedhead", function () {
+        var component = getComponent({ fixedHead: true });
+        var container = TestUtils.findRenderedDOMNodeWithDataId(component, "drag-drop-table-container");
+        component.initialX = 30;
+        container.scrollLeft = 80;
+
+        jest.runAllTimers();
+
+        var fixedHead = TestUtils.findRenderedDOMNodeWithDataId(component, "drag-drop-table-fixedHead");
+
+        expect(fixedHead.style.left).toBe("");
+        ReactTestUtils.Simulate.scroll(TestUtils.findRenderedDOMNodeWithDataId(component, "drag-drop-table-container"));
+        expect(component.initialX).toBe(80);
+        expect(fixedHead.style.left).toBe("-80px");
+    });
+
+    it("calls scroll callback for InfiniteScroll", function () {
+        var infiniteScrollProps = {
+            onNext: jest.genMockFunction,
+            hasNext: true,
+            batches: [
+                { id: 1, data: mockData.data }
+            ]
+        };
+        var component = getComponent({ fixedHead: true, infiniteScroll: infiniteScrollProps });
+        component._handleHorizontalScroll = jest.genMockFunction();
+
+        jest.runAllTimers();
+
+        expect(component._handleHorizontalScroll.mock.calls.length).toBe(0);
+        ReactTestUtils.Simulate.scroll(component.infiniteScrollNode);
+        expect(component._handleHorizontalScroll.mock.calls.length).toBe(1);
+
+    });
+
 
 });

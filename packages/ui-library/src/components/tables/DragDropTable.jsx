@@ -77,6 +77,7 @@ var ISBody = function (props) {
         <InfiniteScroll
             {...props.infiniteScroll}
             contentType={<ISRow {...props}/>}
+            onScroll={props.onISScroll}
             batches={
                 props.infiniteScroll.batches || [{ id: 1, data: props.bodyData }]}
             />
@@ -219,6 +220,22 @@ var DragDropTable = React.createClass({
         this.setState({ columnWidths: widths });
     },
 
+    _handleHorizontalScroll: function (e) {
+        if (this.initialX === e.currentTarget.scrollLeft) {
+            return;
+        }
+        this.tableHead.style.left = -(e.currentTarget.scrollLeft) + "px";
+        this.initialX = e.currentTarget.scrollLeft;
+    },
+
+    _handleISHorizontalScroll: function (param, e) {
+        this._handleHorizontalScroll(e);
+    },
+
+    _infiniteScrollRef: function (component) {
+        this.infiniteScrollNode = ReactDOM.findDOMNode(component);
+    },
+
     _getDropClass: function (item, index) {
         var dragRight= this.props.headData.length - 1 === index &&
                 this.props.dropTarget === this.props.headData.length;
@@ -232,6 +249,9 @@ var DragDropTable = React.createClass({
                 this._setWidths();
             }.bind(this), 0);
         }
+        var thisElement = ReactDOM.findDOMNode(this);
+        this.tableHead = ReactDOM.findDOMNode(thisElement.getElementsByClassName("thead")[0]);
+        this.intialY = 0;
     },
 
     render: function () {
@@ -240,13 +260,23 @@ var DragDropTable = React.createClass({
             ? (this.props.infiniteScroll.batches[0].data || this.props.bodyData)
             : this.props.bodyData;
 
+        var infiniteScrollActive = this.props.infiniteScroll && this.state.columnWidths;
+        var fixedHeadActive = (this.props.fixedHead || this.props.infiniteScroll) && this.state.columnWidths;
+
         var props = _.defaults({
             columnOrder: order,
             getDropClass: this._getDropClass,
             widths: this.state.columnWidths,
-            fixed: this.props.fixedHead && this.state.columnWidths,
-            bodyData: bodyData
+            fixed: fixedHeadActive,
+            bodyData: bodyData,
+            onISScroll: infiniteScrollActive ? this._handleISHorizontalScroll : null
         }, this.props);
+
+        var onScroll = (fixedHeadActive && !infiniteScrollActive) && this._handleHorizontalScroll;
+
+        if (this.props.infiniteScroll) {
+            this.props.infiniteScroll.ref = this._infiniteScrollRef;
+        }
 
         var tableHead = React.createElement(Head, props);
         var tableBody = this.props.infiniteScroll && this.state.columnWidths
@@ -255,14 +285,14 @@ var DragDropTable = React.createClass({
 
         var className = classnames(
             this.props.className,
-            { "infinite-scroll-container": this.props.infiniteScroll && this.state.columnWidths },
-            { "fixed-head": (this.props.fixedHead || this.props.infiniteScroll) && this.state.columnWidths },
-            { "has-next": this.props.infiniteScroll && this.state.columnWidths && this.props.infiniteScroll.hasNext }
+            { "infinite-scroll-container": infiniteScrollActive },
+            { "fixed-head": fixedHeadActive },
+            { "has-next": infiniteScrollActive && this.props.infiniteScroll.hasNext }
         );
 
         return (
             <div data-id={this.props["data-id"]} className={className}>
-                <div className="dd-table-container" data-id={this.props["data-id"] + "-container"}>
+                <div className="dd-table-container" onScroll={onScroll} data-id={this.props["data-id"] + "-container"}>
                     <div className="table" data-id={this.props["data-id"] + "-table"}>
                         {tableHead}
                         {tableBody}
