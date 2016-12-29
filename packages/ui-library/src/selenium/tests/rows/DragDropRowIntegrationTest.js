@@ -17,10 +17,12 @@ describe("Drag Drop Row Integration", function () {
      * AND: Compares it with the base image
      * THEN: The base image and the current image should be identical
      */
-    it("should have a correct layout", function () {
+    it("should have a correct layout", DragDropRowPage.retriable(function () {
+        DragDropRowPage.openDragDropRowDemoPage();
+
         expect(DragDropRowPage.verifyDragAndDropPageExisting()).toBeTruthy();
         //take screenshot and compare
         var generalPageFilename = "ComponentDragDropRowPage_GeneralPage";
-        expect(DragDropRowPage.takeScreenshotAndCompare(generalPageFilename)).toBeTruthy();
-    });
+        DragDropRowPage.takeScreenshotAndCompare(generalPageFilename);
+    }));
 });

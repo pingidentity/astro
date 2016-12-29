@@ -19,7 +19,9 @@ describe("List View Infinite Scroll Integration", function () {
      * AND: Compares it with the base image
      * THEN: The base image and the current image should be identical
      */
-    it("should open the page after selecting page", function () {
+    it("should open the page after selecting page", ListViewInfiniteScrollPage.retriable(function () {
+        ListViewInfiniteScrollPage.openListViewInfiniteScrollDemoPage();
+
         //click on the first page
         ListViewInfiniteScrollPage.clickOnTab(0);
         expect(ListViewInfiniteScrollPage.verifyDisplayedPageExisting("0")).toBeTruthy();
@@ -28,14 +30,14 @@ describe("List View Infinite Scroll Integration", function () {
         expect(ListViewInfiniteScrollPage.verifyDisplayedPageExisting("1")).toBeTruthy();
         //take screenshot and compare
         var secondPageFileName = "TemplateListViewInfiniteScroll_SecondPage";
-        expect(ListViewInfiniteScrollPage.takeScreenshotAndCompare(secondPageFileName)).toBeTruthy();
+        ListViewInfiniteScrollPage.takeScreenshotAndCompare(secondPageFileName);
         //click on the third page
         ListViewInfiniteScrollPage.clickOnTab(2);
         expect(ListViewInfiniteScrollPage.verifyDisplayedPageExisting("2")).toBeTruthy();
         //take screenshot and compare
         var thirdPageFileName = "TemplateListViewInfiniteScroll_ThirdPage";
-        expect(ListViewInfiniteScrollPage.takeScreenshotAndCompare(thirdPageFileName)).toBeTruthy();
-    });
+        ListViewInfiniteScrollPage.takeScreenshotAndCompare(thirdPageFileName);
+    }));
 
     /**
      * SCENARIO: Should filter odd rows and even rows

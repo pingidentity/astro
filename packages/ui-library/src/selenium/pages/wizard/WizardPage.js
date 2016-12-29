@@ -254,10 +254,7 @@ var WizardDemoPage = Object.create(HomePage, {
     openWizardDemoPage: {
         value: function () {
             this.openHomePage();
-            this.click(this.navComponent("Components"));
-            this.scrollMenuNavigation(300);
-            this.waitForExist(this.navComponent("Wizard"));
-            this.click(this.navComponent("Wizard"));
+            this.navigateToPath("Components", "Wizard");
         }
     }
 });

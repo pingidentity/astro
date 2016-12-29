@@ -19,7 +19,9 @@ describe("List View Paginated Integration", function () {
      * AND: Compares it with the base image
      * THEN: The base image and the current image should be identical
      */
-    it("should search rows normally", function () {
+    it("should search rows normally", ListViewPaginatedPage.retriable(function () {
+        ListViewPaginatedPage.openListViewPaginatedDemoPage();
+
         //searches with item "Row 15"
         ListViewPaginatedPage.setSearchValue("Row 15");
         //verifies result
@@ -27,8 +29,8 @@ describe("List View Paginated Integration", function () {
         //takes screenshot and compare
         var searchingResultFileName = "TemplatesListViewPaginated_SearchingResult";
         ListViewPaginatedPage.clickRowNumber(15);
-        expect(ListViewPaginatedPage.takeScreenshotAndCompare(searchingResultFileName)).toBeTruthy();
-    });
+        ListViewPaginatedPage.takeScreenshotAndCompare(searchingResultFileName);
+    }));
 
     /**
      * SCENARIO: Should be clickable for the next, previous, last, first page
@@ -44,7 +46,9 @@ describe("List View Paginated Integration", function () {
      * WHEN: Clicks on the final page
      * THEN: The final page should be selected
      */
-    it("should be clickable for the next, previous, last, first page", function () {
+    it("should be clickable for the next, previous, last, first page", ListViewPaginatedPage.retriable(function () {
+        ListViewPaginatedPage.openListViewPaginatedDemoPage();
+
         //clicks on the third page
         ListViewPaginatedPage.clickPagingNumberPath(3);
         for (var i = 21; i < 31; i = i + 1) {
@@ -53,7 +57,7 @@ describe("List View Paginated Integration", function () {
 
         //takes screenshot and compare
         var theThirdPageFileName = "TemplatesListViewPaginated_TheThirdPage";
-        expect(ListViewPaginatedPage.takeScreenshotAndCompare(theThirdPageFileName)).toBeTruthy();
+        ListViewPaginatedPage.takeScreenshotAndCompare(theThirdPageFileName);
 
         //clicks on the previous page
         ListViewPaginatedPage.clickPagingNumberPath("previous");
@@ -63,7 +67,7 @@ describe("List View Paginated Integration", function () {
 
         //takes screenshot and compare
         var thePreviousPageFileName = "TemplatesListViewPaginated_ThePreviousPage";
-        expect(ListViewPaginatedPage.takeScreenshotAndCompare(thePreviousPageFileName)).toBeTruthy();
+        ListViewPaginatedPage.takeScreenshotAndCompare(thePreviousPageFileName);
 
         //clicks on the next page
         ListViewPaginatedPage.clickPagingNumberPath("next");
@@ -73,7 +77,7 @@ describe("List View Paginated Integration", function () {
 
         //take screenshot and compare
         var theNextPageFileName = "TemplatesListViewPaginated_TheNextPage";
-        expect(ListViewPaginatedPage.takeScreenshotAndCompare(theNextPageFileName)).toBeTruthy();
+        ListViewPaginatedPage.takeScreenshotAndCompare(theNextPageFileName);
 
         //clicks on the first page
         ListViewPaginatedPage.clickPagingNumberPath(1);
@@ -83,7 +87,7 @@ describe("List View Paginated Integration", function () {
 
         //takes screenshot and compare
         var theFirstPageFileName = "TemplatesListViewPaginated_TheFirstPage";
-        expect(ListViewPaginatedPage.takeScreenshotAndCompare(theFirstPageFileName)).toBeTruthy();
+        ListViewPaginatedPage.takeScreenshotAndCompare(theFirstPageFileName);
 
         //clicks on the last page
         ListViewPaginatedPage.clickPagingNumberPath(5);
@@ -93,7 +97,7 @@ describe("List View Paginated Integration", function () {
 
         //take screenshot and compare
         var theLastPageFileName = "TemplatesListViewPaginated_ThelastPage";
-        expect(ListViewPaginatedPage.takeScreenshotAndCompare(theLastPageFileName)).toBeTruthy();
-    });
+        ListViewPaginatedPage.takeScreenshotAndCompare(theLastPageFileName);
+    }));
 });
 

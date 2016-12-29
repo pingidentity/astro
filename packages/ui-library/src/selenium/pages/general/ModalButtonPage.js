@@ -178,9 +178,7 @@ var ModalButtonDemoPage = Object.create(HomePage, {
     openModalButtonDemoPage: {
         value: function () {
             this.openHomePage();
-            this.click(this.navComponent("Components"));
-            this.scrollMenuNavigation(300);
-            this.click(this.navComponent("ModalButton"));
+            this.navigateToPath("Components", "ModalButton");
             this.waitForExist(this.xpathOpenDefaultModalButton);
         }
     }

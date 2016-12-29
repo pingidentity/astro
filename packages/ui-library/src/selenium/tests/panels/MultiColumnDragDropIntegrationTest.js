@@ -19,14 +19,16 @@ describe("Multi Column Drag Drop Integration", function () {
      * WHEN: Selects each search option
      * THEN: The search field should display the same as the selected option
      */
-    it("should select Search options", function () {
+    it("should select Search options", MultiColumnDragDropPage.retriable(function () {
+        MultiColumnDragDropPage.openMultiColumnDragDropDemoPage();
+
         var leftSearch = "//div[@data-id='DragDropColumn-0']//input[@data-id='form-text-field-input']";
         var rightSearch = "//div[@data-id='DragDropColumn-1']//input[@data-id='form-text-field-input']";
 
         expect(MultiColumnDragDropPage.verifyMultiColumnDragDropDemoPageExisting()).toBeTruthy();
         //take screenshot and compare
         var generalPageFileName = "MultiColumnDragDrop_GeneralPage";
-        expect(MultiColumnDragDropPage.takeScreenshotAndCompare(generalPageFileName)).toBeTruthy();
+        MultiColumnDragDropPage.takeScreenshotAndCompare(generalPageFileName);
         //select Search option "None"
         MultiColumnDragDropPage.selectSearchOptionNone();
         //verify all search field are disappeared
@@ -35,7 +37,7 @@ describe("Multi Column Drag Drop Integration", function () {
         expect(MultiColumnDragDropPage.isExisting(rightSearch)).toBeFalsy();
         //take screenshot and compare
         var NoneSearchFileName = "MultiColumnDragDrop_NoneSearchField";
-        expect(MultiColumnDragDropPage.takeScreenshotAndCompare(NoneSearchFileName)).toBeTruthy();
+        MultiColumnDragDropPage.takeScreenshotAndCompare(NoneSearchFileName);
         //select search option first column only
         MultiColumnDragDropPage.selectSearchOptionFirstColumnOnly();
         MultiColumnDragDropPage.waitForLeftSearchFieldExist();
@@ -48,7 +50,7 @@ describe("Multi Column Drag Drop Integration", function () {
         //verify there is only left search field exist
         expect(MultiColumnDragDropPage.verifyLeftSearchFieldExisting()).toBeTruthy();
         expect(MultiColumnDragDropPage.verifyRightSearchFieldExisting()).toBeTruthy();
-    });
+    }));
 
     /**
      * SCENARIO: Should select Row options
@@ -59,7 +61,9 @@ describe("Multi Column Drag Drop Integration", function () {
      * AND: Compares it with the base image
      * THEN: The base image and the current image should be identical
      */
-    it("should select Row options", function () {
+    it("should select Row options", MultiColumnDragDropPage.retriable(function () {
+        MultiColumnDragDropPage.openMultiColumnDragDropDemoPage();
+
         expect(MultiColumnDragDropPage.verifyMultiColumnDragDropDemoPageExisting()).toBeTruthy();
         //select row option icon only
         MultiColumnDragDropPage.selectRowOptionIconOnly();
@@ -76,7 +80,7 @@ describe("Multi Column Drag Drop Integration", function () {
         expect(MultiColumnDragDropPage.verifyNameOfItemExisting(12)).toBeFalsy();
         //take screenshot and compare
         var rowOnlyIconFileName = "MultiColumnDragDrop_RowOnlyIcon";
-        expect(MultiColumnDragDropPage.takeScreenshotAndCompare(rowOnlyIconFileName)).toBeTruthy();
+        MultiColumnDragDropPage.takeScreenshotAndCompare(rowOnlyIconFileName);
         //select row option text only
         MultiColumnDragDropPage.selectRowOptionTextOnly();
         //verify there is only text of the item
@@ -92,7 +96,7 @@ describe("Multi Column Drag Drop Integration", function () {
         expect(MultiColumnDragDropPage.verifyIconOfItemExisting(12)).toBeFalsy();
         //take screenshot and compare
         var rowOnlyTextFileName = "MultiColumnDragDrop_RowOnlyText";
-        expect(MultiColumnDragDropPage.takeScreenshotAndCompare(rowOnlyTextFileName)).toBeTruthy();
+        MultiColumnDragDropPage.takeScreenshotAndCompare(rowOnlyTextFileName);
         //select row option text and icon
         MultiColumnDragDropPage.selectRowOptionIconAndText();
         //verify the items display with both icon and text
@@ -108,8 +112,8 @@ describe("Multi Column Drag Drop Integration", function () {
         expect(MultiColumnDragDropPage.verifyIconOfItemExisting(12)).toBeTruthy();
         //take screenshot and compare
         var rowIconAndTextFileName = "MultiColumnDragDrop_RowWithIconAndText";
-        expect(MultiColumnDragDropPage.takeScreenshotAndCompare(rowIconAndTextFileName)).toBeTruthy();
-    });
+        MultiColumnDragDropPage.takeScreenshotAndCompare(rowIconAndTextFileName);
+    }));
     
     /**
      * SCENARIO: Should add and remove item
@@ -122,7 +126,9 @@ describe("Multi Column Drag Drop Integration", function () {
      * WHEN: Removes some items to the left column
      * THEN: The items should be removed
      */
-    it("should add and remove item", function () {
+    it("should add and remove item", MultiColumnDragDropPage.retriable(function () {
+        MultiColumnDragDropPage.openMultiColumnDragDropDemoPage();
+
         expect(MultiColumnDragDropPage.verifyMultiColumnDragDropDemoPageExisting()).toBeTruthy();
         //add some items to the right column
         MultiColumnDragDropPage.addItemToRightColumn(0);
@@ -131,8 +137,7 @@ describe("Multi Column Drag Drop Integration", function () {
         //take screenshot and compare
         MultiColumnDragDropPage.scrollLeftItemsColumn();
         var addedItemsFileName = "MultiColumnDragDrop_addedItemsToRightColumn";
-        expect(MultiColumnDragDropPage.takeScreenshotAndCompare(addedItemsFileName)).toBeTruthy();
-        //expect(ScreenshotUtils.takeElementScreenShotAndCompareWithBaseline(addedItemsFileName, "//div[@id='content']")).toBeTruthy();
+        MultiColumnDragDropPage.takeScreenshotAndCompare(addedItemsFileName);
 
         //remove some items to the left column
         MultiColumnDragDropPage.removeItemToLeftColumn(12);
@@ -141,6 +146,6 @@ describe("Multi Column Drag Drop Integration", function () {
         //take screenshot and compare
         MultiColumnDragDropPage.scrollLeftItemsColumn();
         var removedItemsFileName = "MultiColumnDragDrop_removedItemsToLeftColumn";
-        expect(MultiColumnDragDropPage.takeScreenshotAndCompare(removedItemsFileName)).toBeTruthy();
-    });
+        MultiColumnDragDropPage.takeScreenshotAndCompare(removedItemsFileName);
+    }));
 });

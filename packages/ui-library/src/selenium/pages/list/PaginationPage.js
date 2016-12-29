@@ -56,9 +56,7 @@ var PaginationDemoPage = Object.create(HomePage, {
     openPaginationDemoPage: {
         value: function () {
             this.openHomePage();
-            this.click(this.navComponent("Components"));
-            this.scrollMenuNavigation(150);
-            this.click(this.navComponent("Pagination"));
+            this.navigateToPath("Components", "Pagination");
         }
     }
 });

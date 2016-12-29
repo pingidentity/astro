@@ -21,10 +21,12 @@ describe("Edit View Sectioned Integration", function () {
      * AND: Compares it with the base image
      * THEN: The base image and the current image should be identical
      */
-    it("should input data into all fields and take screenshot", function () {
+    it("should input data into all fields and take screenshot", EditViewSectionedPage.retriable(function () {
+        EditViewSectionedPage.EditViewSectionedDemoPage();
+
         //take screenshot and compare
         var generalPageFileName = "TemplatesEditViewSectioned_GeneralPage";
-        expect(EditViewSectionedPage.takeScreenshotAndCompare(generalPageFileName)).toBeTruthy();
+        EditViewSectionedPage.takeScreenshotAndCompare(generalPageFileName);
         //input data into all fields
         EditViewSectionedPage.setFirstNameValue("First Name");
         EditViewSectionedPage.setLastNameValue("Last Name");
@@ -40,7 +42,7 @@ describe("Edit View Sectioned Integration", function () {
         EditViewSectionedPage.clickCheckboxActiveUser();
         //take screenshot and compare
         var inputDataFilename = "TemplatesEditViewSectioned_InputData";
-        expect(EditViewSectionedPage.takeScreenshotAndCompare(inputDataFilename)).toBeTruthy();
-    });
+        EditViewSectionedPage.takeScreenshotAndCompare(inputDataFilename);
+    }));
 });
 

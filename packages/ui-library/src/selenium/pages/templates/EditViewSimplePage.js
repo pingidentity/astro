@@ -181,8 +181,7 @@ var EditViewSimpleDemoPage = Object.create(HomePage, {
     openEditViewSimpleDemoPage: {
         value: function () {
             this.openHomePage();
-            this.click(this.navComponent("Templates"));
-            this.click(this.navComponent("EditViewSimple"));
+            this.navigateToPath("Templates", "EditViewSimple");
         }
     }
 });

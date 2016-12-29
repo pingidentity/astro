@@ -122,7 +122,7 @@ Page.prototype.getElements = function (path, params) {
 /**
  * @desc this function is to pause integration process for a given time,
  *     only if time is a positive number.
- * @param {number} time - number of interval to wait
+ * @param {number} time - number of milliseconds to wait
  *
  * @returns {object} browser - execute object
  */
@@ -230,6 +230,19 @@ Page.prototype.scrollElementToTopSync = function (elementPath, offset) {
     var newOffset = browser.selectorExecute(elementPath, "return arguments[0][0].scrollTop = "+ offset);
     return browser.waitUntil(browser.selectorExecute(elementPath,
         "return arguments[0][0].scrollTop") === newOffset , 5000, "Error: Cannot wait for scrolling", 100);
+};
+
+/**
+ * @desc Scroll the element with the given name and data-id into view.
+ *    If more than one element with the given coordinates exist on the page,
+ *    only the first element is scrolled.
+ * @param {string} tagName - the tag name of the element to scroll to
+ * @param {string} dataId - the value of the data-id attribute on the element to scroll to
+ */
+Page.prototype.scrollToElement = function (tagName, dataId) {
+    browser.execute(
+        "document.querySelector(\"" + tagName + "[data-id='" + dataId + "']\").scrollIntoView();"
+    );
 };
 
 /**

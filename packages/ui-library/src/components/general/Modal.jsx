@@ -166,18 +166,20 @@ var Modal = React.createClass({
                     onClick={this._handleBgClick}>
                 </div>
                 <div className="modal-content" data-id="modal-content" onClick={this._handleBgClick}>
-                    <If test={this.props.showHeader}>
-                        <div className="modal-header">
-                            {this.props.modalTitle}
-                            {this._getCloseButton()}
-                        </div>
-                    </If>
-                    <div className="modal-body" data-id="modal-body">
-                        <If test={!this.props.showHeader}>
-                            {this._getCloseButton()}
+                    <span data-id="modal-inner-content">
+                        <If test={this.props.showHeader}>
+                            <div className="modal-header" data-id="modal-header">
+                                {this.props.modalTitle}
+                                {this._getCloseButton()}
+                            </div>
                         </If>
-                        {this.props.children}
-                    </div>
+                        <div className="modal-body" data-id="modal-body">
+                            <If test={!this.props.showHeader}>
+                                {this._getCloseButton()}
+                            </If>
+                            {this.props.children}
+                        </div>
+                    </span>
                 </div>
             </div>
         );

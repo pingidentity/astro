@@ -2,6 +2,8 @@
 var fs = require("fs");
 var im = require("./ImageMagick.js");
 var wdioConfig = require("../../wdio.conf.js").config;
+var ScreenshotComparisonException = require("./ScreenshotComparisonException.js");
+var ComparisonExitCode = ScreenshotComparisonException.ComparisonExitCode;
 var tempRoot = wdioConfig.screenshotOpts.tempRoot;
 var baseLineRoot = wdioConfig.screenshotOpts.baseLineRoot;
 var diffRoot = wdioConfig.screenshotOpts.diffRoot;
@@ -145,10 +147,15 @@ var ScreenshotUtils = {
      * @param {string} elementSelector: xpath to element.
      * - This is an optional parameter to increase or decrease the accuracy
      * - Higher value is less accuracy
-     * @returns {boolean} true if they are matched and false if they are difference.
+     * @returns {number} number of different pixels between the current and the base screenshots;
+     *     0 means that the two screenshots are identical;
+     *     any value greater than 0 means there are differences between the two screenshots;
+     *     -1 means that the comparison could not be done due to different image sizes;
+     *     -2 means the baseline doesn't exist
+     *     -100 means an unknown error occured
      */
     compareScreenshotWithBaseline: function (fileName, equalRatio, elementSelector) {
-        var result = false;
+        var result = 0;
         var differentScreenshotSize = false;
 
         if (isScreenshotActive) {
@@ -162,18 +169,23 @@ var ScreenshotUtils = {
 
                 // execute IM command line
                 comp.then(function (data) {
-                    if (data.error && parseInt(data.stderr) > 0) {
-                        result = false;
-                    } else if (!data.error && parseInt(data.stderr) === 0) {
-                        result = true;
+                    var diffPixelCount = parseInt(data.stderr);
+
+                    if (data.error && diffPixelCount > 0) {
+                        result = diffPixelCount;
+                    } else if (!data.error && diffPixelCount === 0) {
+                        result = ComparisonExitCode.SUCCESS;
                         // remove diff screenshot if there is nothing difference
                         fs.unlinkSync(diffPath);
                     } else {
                         if (data.stderr.indexOf("compare: image widths or heights differ") > -1) {
+                            result = ComparisonExitCode.DIFFERENT_IMAGE_SIZE;
                             differentScreenshotSize = true;
                         }
+                        else {
+                            result = ComparisonExitCode.UNKNOWN_ERROR;
+                        }
                         console.log("Error: "+ data.stderr);
-                        result = false;
                     }
                 });
 
@@ -181,7 +193,7 @@ var ScreenshotUtils = {
                 browser.waitUntil(comp, 5000, 100);
             } else {
                 this.takeScreenshotThenSaveToCurrentDiff(fileName, elementSelector);
-                result = false;
+                result = ComparisonExitCode.NO_BASELINE;
             }
 
             if (differentScreenshotSize && !fs.existsSync(diffPath)) {
@@ -189,8 +201,6 @@ var ScreenshotUtils = {
                 im.createBlankImageWithText(label, diffPath);
                 console.log("Error: Screenshot dimensions are different. Created a default diff screenshot");
             }
-        } else {
-            result = true;
         }
         return result;
     },
@@ -202,10 +212,11 @@ var ScreenshotUtils = {
      * @param {number} equalRatio By default it will be set to 0.
      * - This is an optional parameter to increase or decrease the accuracy
      * - Higher value is less accuracy
-     * @returns {boolean} true if they are matched and false if they are difference.
+     * @throws {ScreenshotComparisonException}
+     *    if the current screenshot does not match the baseline
      */
     takeScreenShotAndCompareWithBaseline: function (fileName, equalRatio) {
-        return this.takeElementScreenShotAndCompareWithBaseline(fileName, "//div[@data-id='components']", equalRatio);
+        this.takeElementScreenShotAndCompareWithBaseline(fileName, "//div[@data-id='components']", equalRatio);
     },
 
     /**
@@ -216,11 +227,12 @@ var ScreenshotUtils = {
      * @param {number} equalRatio By default it will be set to 0.
      * - This is an optional parameter to increase or decrease the accuracy
      * - Higher value is less accuracy
-     * @returns {bool} true if they are matched and false if they are difference.
+     * @throws {ScreenshotComparisonException}
+     *    if the current screenshot does not match the baseline
      */
     takeElementScreenShotAndCompareWithBaseline: function (fileName, elementSelector, equalRatio) {
         var _equalRatio = equalRatio !== undefined ? equalRatio : globalEqualRatio;
-        return this.takeScreenShotAndCompare(fileName, _equalRatio, elementSelector);
+        this.takeScreenShotAndCompare(fileName, _equalRatio, elementSelector);
     },
 
     takeScreenShotAndCompare: function (fileName, equalRatio, elementSelector) {
@@ -229,30 +241,30 @@ var ScreenshotUtils = {
             var currentPath = this.getCurrentScreenshotPath(fileName),
                 tryCount = 0,
                 maxRetry = wdioConfig.screenshotOpts.maxScreenshotAttempt,
-                isNoDiff = false,
+                result = 0,
                 baselinePath = this.getBaseLineScreenshotPath(fileName);
 
             do {
                 if (tryCount > 0) {
                     fs.unlinkSync(currentPath);
-                    console.log("Compare failed, take other screenshot: " + fileName);
+                    console.log("Comparison failed, taking other screenshot: " + fileName);
                 }
                 browser.pause(wdioConfig.screenshotOpts.retryInterval);
                 if (browser.isExisting(elementSelector)) {
                     this.takeElementScreenshotAndSaveToCurrentPath(fileName, elementSelector);
-                    isNoDiff = this.compareScreenshotWithBaseline(fileName, equalRatio, elementSelector);
+                    result = this.compareScreenshotWithBaseline(fileName, equalRatio, elementSelector);
                 } else {
                     this.takeScreenshotAndSave(currentPath);
-                    isNoDiff = this.compareScreenshotWithBaseline(fileName, equalRatio);
+                    result = this.compareScreenshotWithBaseline(fileName, equalRatio);
                 }
                 tryCount += 1;
             }
-            while (!isNoDiff && tryCount < maxRetry && fs.existsSync(baselinePath));
+            while (result !== 0 && tryCount < maxRetry && fs.existsSync(baselinePath));
 
-            return isNoDiff;
-        } else {
-            return true;
+            if (result !== 0) {
+                throw new ScreenshotComparisonException(fileName, result);
+            }
         }
-    },
+    }
 };
 module.exports = ScreenshotUtils;

@@ -15,13 +15,6 @@ exports.config = {
         "./src/selenium/tests/**/*IntegrationTest.js"
     ],
 
-    // Define a specific suites
-    suites: {
-        dragDrop: [
-            "./src/selenium/tests/panels/MultiColumnDragDropIntegrationTest.js"
-        ]
-    },
-
     // Patterns to exclude.
     exclude: [
         // "path/to/excluded/files"
@@ -124,7 +117,7 @@ exports.config = {
     jasmineNodeOpts: {
         //
         // Jasmine default timeout
-        defaultTimeoutInterval: 30000,
+        defaultTimeoutInterval: 45000,
         //
         // The Jasmine framework allows interception of each assertion in order to log the state of the application
         // or website depending on the result. For example, it is pretty handy to take a screenshot every time
@@ -141,9 +134,14 @@ exports.config = {
         diffRoot: "./build/diff-screenshot/",
         baseLineRoot: "./src/selenium/base-screenshot/",
         globalEqualRatio: 0, // 0-49 lower is more accurate,
-        maxScreenshotAttempt: 5, // number of retry time when the comparison is failed. set to 1 if you want to turn it off
-        retryInterval: 300 // delay time after failed comparison
+        maxScreenshotAttempt: 2, // number of retry time when the comparison is failed. set to 1 if you want to turn it off
+        retryInterval: 500 // delay time after failed comparison
     },
+
+    // number of retries (set to 0 for no retry) for failed tests
+    testRetryCount: 2,
+    // how many milliseconds to wait between test retries
+    testRetryWaitTime: 1000,
 
     //
     // =====

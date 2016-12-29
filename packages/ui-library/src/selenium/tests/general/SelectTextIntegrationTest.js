@@ -21,11 +21,13 @@ describe("SelectText Integration", function () {
      * AND: Compares it with the base image
      * THEN: The base image and the current image should be identical
      */
-    it("should have a correct layout", function () {
+    it("should have a correct layout", SelectTextPage.retriable(function () {
+        SelectTextPage.openSelectTextDemoPage();
+
         expect(SelectTextPage.verifyTextFieldExisting()).toBeTruthy();
         //take screenshot and compare
-        expect(SelectTextPage.takeScreenshotAndCompare("ComponentSelectText_GeneralPage")).toBeTruthy();
+        SelectTextPage.takeScreenshotAndCompare("ComponentSelectText_GeneralPage");
         expect(SelectTextPage.clickTextField());
-        expect(SelectTextPage.takeScreenshotAndCompare("ComponentSelectText_SelectedText")).toBeTruthy();
-    });
+        SelectTextPage.takeScreenshotAndCompare("ComponentSelectText_SelectedText");
+    }));
 });

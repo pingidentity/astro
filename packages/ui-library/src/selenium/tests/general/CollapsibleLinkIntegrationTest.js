@@ -21,7 +21,9 @@ describe("Collapsible Link Integration", function () {
      * AND: Compares it with the base image
      * THEN: The base image and the current image should be identical
      */
-    it("should expand and collapse all links normally", function () {
+    it("should expand and collapse all links normally", CollapsibleLinkPage.retriable(function () {
+        CollapsibleLinkPage.openCollapsibleLinkDemoPage();
+
         //click on the "Normal link" link
         CollapsibleLinkPage.clickCollapsibleLink(1);
         //verify the expanded contents
@@ -33,12 +35,12 @@ describe("Collapsible Link Integration", function () {
         //take screenshot and compare
         CollapsibleLinkPage.waitForExpandedText2Exist();
         var expandedLinksFileName = "ComponentCollapsibleLink_ExpandedLinks";
-        expect(CollapsibleLinkPage.takeScreenshotAndCompare(expandedLinksFileName)).toBeTruthy();
+        CollapsibleLinkPage.takeScreenshotAndCompare(expandedLinksFileName);
         //collapse all link
         CollapsibleLinkPage.clickCollapsibleLink(1);
         CollapsibleLinkPage.clickCollapsibleLink(2);
         //take screenshot and compare
         var collapsedLinksFileName = "ComponentCollapsibleLink_CollapsedLinks";
-        expect(CollapsibleLinkPage.takeScreenshotAndCompare(collapsedLinksFileName)).toBeTruthy();
-    });
+        CollapsibleLinkPage.takeScreenshotAndCompare(collapsedLinksFileName);
+    }));
 });

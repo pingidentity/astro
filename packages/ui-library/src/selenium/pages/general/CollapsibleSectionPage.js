@@ -52,8 +52,7 @@ var CollapsibleSectionDemoPage = Object.create(HomePage, {
     openCollapsibleSectionDemoPage: {
         value: function () {
             this.openHomePage();
-            this.click(this.navComponent("Components"));
-            this.click(this.navComponent("CollapsibleSectionstateless"));
+            this.navigateToPath("Components", "CollapsibleSectionstateless");
         }
     }
 });

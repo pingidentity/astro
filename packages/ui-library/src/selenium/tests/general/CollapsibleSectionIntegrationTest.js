@@ -22,7 +22,9 @@ describe("Collapsible Link Integration", function () {
      * AND: Compares it with the base image
      * THEN: The base image and the current image should be identical
      */
-    it("should expand and collapse the section normally", function () {
+    it("should expand and collapse the section normally", CollapsibleSectionPage.retriable(function () {
+        CollapsibleSectionPage.openCollapsibleSectionDemoPage();
+
         //click on the "Collapsible Title" link to expand
         CollapsibleSectionPage.clickCollapsibleTitleLink();
         //verify the expanded contents
@@ -30,12 +32,12 @@ describe("Collapsible Link Integration", function () {
         expect(CollapsibleSectionPage.verifyTextDetailsExisting()).toBeTruthy();
         //take screenshot and compare
         var expandedSectionFileName = "ComponentCollapsibleSection_ExpandedSection";
-        expect(CollapsibleSectionPage.takeScreenshotAndCompare(expandedSectionFileName)).toBeTruthy();
+        CollapsibleSectionPage.takeScreenshotAndCompare(expandedSectionFileName);
         //click on the "Collapsible Title" link to collapse
         CollapsibleSectionPage.clickCollapsibleTitleLink();
         CollapsibleSectionPage.waitForTextDetailsInvisible();
         //take screenshot and compare
         var collapsedSectionFileName = "ComponentCollapsibleSection_CollapsedSection";
-        expect(CollapsibleSectionPage.takeScreenshotAndCompare(collapsedSectionFileName)).toBeTruthy();
-    });
+        CollapsibleSectionPage.takeScreenshotAndCompare(collapsedSectionFileName);
+    }));
 });

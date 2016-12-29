@@ -34,9 +34,7 @@ var SelectTextDemoPage = Object.create(HomePage, {
     openSelectTextDemoPage: {
         value: function () {
             this.openHomePage();
-            this.click(this.navComponent("Components"));
-            this.scrollMenuNavigation(200);
-            this.click(this.navComponent("SelectText"));
+            this.navigateToPath("Components", "SelectText");
         }
     }
 });

@@ -29,7 +29,9 @@ describe("Edit View Switched Integration", function () {
      * AND: Compares it with the base image
      * THEN: The base image and the current image should be identical
      */
-    it("should be clickable all sections and input value into all fields", function () {
+    it("should be clickable all sections and input value into all fields", EditViewSwitchedPage.retriable(function () {
+        EditViewSwitchedPage.openEditViewSwitchedDemoPage();
+
         //clicks on Identity section and input data into all fields
         EditViewSwitchedPage.clickIdentitySection();
         EditViewSwitchedPage.setFirstNameValue("First Name");
@@ -38,7 +40,7 @@ describe("Edit View Switched Integration", function () {
         //take screenshot and compare
         var identitySectionFilename = "TemplatesEditViewSwitched_IdentitySection";
         EditViewSwitchedPage.clickIdentitySection();
-        expect(EditViewSwitchedPage.takeScreenshotAndCompare(identitySectionFilename)).toBeTruthy();
+        EditViewSwitchedPage.takeScreenshotAndCompare(identitySectionFilename);
         //clicks on Address section and input data into all fields
         EditViewSwitchedPage.clickAddressSection();
         EditViewSwitchedPage.setAddressValue(1, "Address1");
@@ -49,14 +51,14 @@ describe("Edit View Switched Integration", function () {
         EditViewSwitchedPage.selectAlternateAddressLocation("home");
         //take screenshot and compare
         var addressSectionFilename = "TemplatesEditViewSwitched_AddressSection";
-        expect(EditViewSwitchedPage.takeScreenshotAndCompare(addressSectionFilename)).toBeTruthy();
+        EditViewSwitchedPage.takeScreenshotAndCompare(addressSectionFilename);
         //Clicks on Miscellaneous section and select some options
         EditViewSwitchedPage.clickMiscellaneousSection();
         EditViewSwitchedPage.clickUserGroup(3);
         EditViewSwitchedPage.clickCheckboxActiveUser();
         //take screenshot and compare
         var miscellaneousSectionFilename = "TemplatesEditViewSwitchedMiscellaneousSection";
-        expect(EditViewSwitchedPage.takeScreenshotAndCompare(miscellaneousSectionFilename)).toBeTruthy();
-    });
+        EditViewSwitchedPage.takeScreenshotAndCompare(miscellaneousSectionFilename);
+    }));
 });
 

@@ -19,8 +19,8 @@ describe("Wizard View Integration", function () {
      * AND: Goes through all steps of wizard Two Column Step
      * THEN: All steps should be processed normally
      */
-    it("should go through all steps of wizard Two Column Step", function () {
-        var contentDemoXpath = "//div[@data-id='modal-content']";
+    it("should go through all steps of wizard Two Column Step", WizardViewPage.retriable(function () {
+        WizardViewPage.openWizardViewDemoPage();
 
         //clicks on button Show wizard
         WizardViewPage.clickButtonShowWizard();
@@ -29,7 +29,10 @@ describe("Wizard View Integration", function () {
         //take screenshot and compare
         var generalPageFileName = "TemplatesWizardView_GeneralPage";
         WizardViewPage.clickChooseWizardBox();
-        expect(WizardViewPage.takeElementScreenshotAndCompare(generalPageFileName, contentDemoXpath)).toBeTruthy();
+        WizardViewPage.takeElementScreenshotAndCompare(
+            generalPageFileName,
+            WizardViewPage.xpathInnerContent
+        );
 
         //select wizard "Two Column Step"
         WizardViewPage.clickOptionTwoColumnStep();
@@ -37,7 +40,10 @@ describe("Wizard View Integration", function () {
         expect(WizardViewPage.verifyIconStep2Existing()).toBeTruthy();
         WizardViewPage.waitForNextButtonExist();
         var wizard1Step1FileName = "TemplatesWizardView_Wizard1Step1";
-        expect(WizardViewPage.takeElementScreenshotAndCompare(wizard1Step1FileName, contentDemoXpath)).toBeTruthy();
+        WizardViewPage.takeElementScreenshotAndCompare(
+            wizard1Step1FileName,
+            WizardViewPage.xpathInnerContent
+        );
 
         //click on Next button
         WizardViewPage.clickButtonNext();
@@ -48,8 +54,11 @@ describe("Wizard View Integration", function () {
         WizardViewPage.clickRightCheckboxWithoutValue();
         WizardViewPage.clickOptionChoice(2);
         var wizard1Step2FileName = "TemplatesWizardView_Wizard1Step2";
-        expect(WizardViewPage.takeElementScreenshotAndCompare(wizard1Step2FileName, contentDemoXpath)).toBeTruthy();
-    });
+        WizardViewPage.takeElementScreenshotAndCompare(
+            wizard1Step2FileName,
+            WizardViewPage.xpathInnerContent
+        );
+    }));
 
     /**
      * SCENARIO: Should go through all steps of wizard Form Template
@@ -60,8 +69,8 @@ describe("Wizard View Integration", function () {
      * AND: Goes through all steps of wizard Two Column Step
      * THEN: All steps should be processed normally
      */
-    it("should go through all steps of wizard Form Template", function () {
-        var contentDemoXpath = "//div[@data-id='modal-content']";
+    it("should go through all steps of wizard Form Template", WizardViewPage.retriable(function () {
+        WizardViewPage.openWizardViewDemoPage();
 
         //clicks on button Show wizard
         WizardViewPage.clickButtonShowWizard();
@@ -73,7 +82,10 @@ describe("Wizard View Integration", function () {
         expect(WizardViewPage.verifyIconStep2Existing()).toBeTruthy();
         WizardViewPage.waitForNextButtonExist();
         var wizard2Step1FileName = "TemplatesWizardView_Wizard2Step1";
-        expect(WizardViewPage.takeElementScreenshotAndCompare(wizard2Step1FileName, contentDemoXpath)).toBeTruthy();
+        WizardViewPage.takeElementScreenshotAndCompare(
+            wizard2Step1FileName,
+            WizardViewPage.xpathInnerContent
+        );
 
         //click on Next button
         WizardViewPage.clickButtonNext();
@@ -82,13 +94,19 @@ describe("Wizard View Integration", function () {
         WizardViewPage.scrollDownDialog(300);
         WizardViewPage.clickCheckboxWithoutValueWizard2();
         var wizard2Step2FileName = "TemplatesWizardView_Wizard2Step2";
-        expect(WizardViewPage.takeElementScreenshotAndCompare(wizard2Step2FileName, contentDemoXpath)).toBeTruthy();
+        WizardViewPage.takeElementScreenshotAndCompare(
+            wizard2Step2FileName,
+            WizardViewPage.xpathInnerContent
+        );
 
         //click on Next button
         WizardViewPage.clickButtonNext();
         WizardViewPage.waitForDoneButtonExist();
         var wizard2Step3FileName = "TemplatesWizardView_Wizard2Step3";
-        expect(WizardViewPage.takeElementScreenshotAndCompare(wizard2Step3FileName, contentDemoXpath)).toBeTruthy();
-    });
+        WizardViewPage.takeElementScreenshotAndCompare(
+            wizard2Step3FileName,
+            WizardViewPage.xpathInnerContent
+        );
+    }));
 });
 

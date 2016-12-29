@@ -21,10 +21,12 @@ describe("Edit View Simple Integration", function () {
      * AND: Compares it with the base image
      * THEN: The base image and the current image should be identical
      */
-    it("should input data into all fields and take screenshot", function () {
+    it("should input data into all fields and take screenshot", EditViewSimplePage.retriable(function () {
+        EditViewSimplePage.openEditViewSimpleDemoPage();
+
         //take screenshot and compare
         var generalPageFileName = "TemplatesEditViewSimple_GeneralPage";
-        expect(EditViewSimplePage.takeScreenshotAndCompare(generalPageFileName)).toBeTruthy();
+        EditViewSimplePage.takeScreenshotAndCompare(generalPageFileName);
         //input data into all fields
         EditViewSimplePage.setFirstNameValue("First Name");
         EditViewSimplePage.setLastNameValue("Last Name");
@@ -40,7 +42,7 @@ describe("Edit View Simple Integration", function () {
         EditViewSimplePage.clickCheckboxActiveUser();
         //take screenshot and compare
         var inputDataFilename = "TemplatesEditViewSimple_InputData";
-        expect(EditViewSimplePage.takeScreenshotAndCompare(inputDataFilename)).toBeTruthy();
-    });
+        EditViewSimplePage.takeScreenshotAndCompare(inputDataFilename);
+    }));
 });
 

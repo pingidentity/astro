@@ -18,7 +18,9 @@ describe("ColorPicker Integration", function () {
      * AND: Compares it with the base image
      * THEN: The base image and the current image should be identical
      */
-    it("should have color wrappers when clicking on Color Pickers", function () {
+    it("should have color wrappers when clicking on Color Pickers", ColorPickerPage.retriable(function () {
+        ColorPickerPage.openColorPickerDemoPage();
+
         expect(ColorPickerPage.verifyColorPickerExisting(1)).toBeTruthy();
         //click on the first color picker
         ColorPickerPage.clickColorPicker(1);
@@ -26,7 +28,7 @@ describe("ColorPicker Integration", function () {
         ColorPickerPage.waitForColorWrapperEnabled(1);
         expect(ColorPickerPage.verifyColorWrapperExisting(1)).toBeTruthy();
         //take screenshot and compare
-        expect(ColorPickerPage.takeScreenshotAndCompare("ComponentColorPicker_Wrapper1")).toBeTruthy();
+        ColorPickerPage.takeScreenshotAndCompare("ComponentColorPicker_Wrapper1");
         //click on the first color picker
         ColorPickerPage.clickColorPicker(1);
         ColorPickerPage.waitForColorWrapperInvisible(1);
@@ -36,8 +38,8 @@ describe("ColorPicker Integration", function () {
         ColorPickerPage.waitForColorWrapperEnabled(2);
         expect(ColorPickerPage.verifyColorWrapperExisting(2)).toBeTruthy();
         //take screenshot and compare
-        expect(ColorPickerPage.takeScreenshotAndCompare("ComponentColorPicker_Wrapper2")).toBeTruthy();
-    });
+        ColorPickerPage.takeScreenshotAndCompare("ComponentColorPicker_Wrapper2");
+    }));
     
     /**
      * SCENARIO: Should change the color value
@@ -46,7 +48,9 @@ describe("ColorPicker Integration", function () {
      * THEN: The input color should be selected
      */
      
-    it("should change the color value", function () {
+    it("should change the color value", ColorPickerPage.retriable(function () {
+        ColorPickerPage.openColorPickerDemoPage();
+
         var correctColor1 = "#586fad";
         var selectedColor1 = "rgb(88, 111, 173)";
         var correctColor2 = "#c01b1b";
@@ -62,6 +66,6 @@ describe("ColorPicker Integration", function () {
         expect(ColorPickerPage.verifyDisplayedColor(2, selectedColor2)).toBeTruthy();
         //take screenshot and compare
         var inputColorValueFileName = "ComponentColorPicker_InputColorValue";
-        expect(ColorPickerPage.takeScreenshotAndCompare(inputColorValueFileName)).toBeTruthy();
-    });
+        ColorPickerPage.takeScreenshotAndCompare(inputColorValueFileName);
+    }));
 });

@@ -29,6 +29,12 @@ var WizardViewPage = Object.create(HomePage, {
         }
     },
 
+    xpathInnerContent: {
+        get: function () {
+            return "//span[@data-id='modal-inner-content']";
+        }
+    },
+
     /**
      * @desc this function is to hide message area
      * @private
@@ -56,16 +62,14 @@ var WizardViewPage = Object.create(HomePage, {
      *      all transitions should have finished by the time this method is called
      * @param {string} fileName - name of screenshot file.
      * @param {string} elementSelector - xpath to element.
-     *
-     * @returns {bool} true if they are matched and false if they are difference.
+     * @throws {ScreenshotComparisonException}
+     *    if the current screenshot does not match the baseline
      */
     takeElementScreenshotAndCompare: {
         value: function (filename, elementSelector) {
             this.preTakeScreenshot();
-            var comparedResult = HomePage.takeElementScreenshotAndCompare(filename, elementSelector);
+            HomePage.takeElementScreenshotAndCompare(filename, elementSelector);
             this.postTakeScreenshot();
-
-            return comparedResult;
         }
     },
 
@@ -339,8 +343,7 @@ var WizardViewPage = Object.create(HomePage, {
     openWizardViewDemoPage: {
         value: function () {
             this.openHomePage();
-            this.click(this.navComponent("Templates"));
-            this.click(this.navComponent("WizardView"));
+            this.navigateToPath("Templates", "WizardView");
         }
     }
 });

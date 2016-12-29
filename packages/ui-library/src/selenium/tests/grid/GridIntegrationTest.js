@@ -28,7 +28,9 @@ describe("SelectText Integration", function () {
      * WHEN: Clicks on the previous page
      * THEN: The previous page should be returned
      */
-    it("should be clickable for next, previous page and expand row", function () {
+    it("should be clickable for next, previous page and expand row", GridPage.retriable(function () {
+        GridPage.openGridDemoPage();
+
         //verify the current grid tables
         expect(GridPage.verifyGridTableExisting(1)).toBeTruthy();
         expect(GridPage.verifyGridTableExisting(2)).toBeTruthy();
@@ -38,7 +40,7 @@ describe("SelectText Integration", function () {
         GridPage.waitForExpandedRowInvisible(0);
         expect(GridPage.verifyExpandedRowExisting(0)).toBeFalsy();
         //take screenshot and compare
-        expect(GridPage.takeScreenshotAndCompare("ComponentGrid_GeneralPage")).toBeTruthy();
+        GridPage.takeScreenshotAndCompare("ComponentGrid_GeneralPage");
         //expand the second row
         GridPage.expandOrCollapseRow(1);
         GridPage.waitForExpandedRowVisible(1);
@@ -54,10 +56,10 @@ describe("SelectText Integration", function () {
         //verify the second page is selected
         expect(GridPage.verifyCurrentPageExisting(2)).toBeTruthy();
         //take screenshot and compare
-        expect(GridPage.takeScreenshotAndCompare("ComponentGrid_NextPage")).toBeTruthy();
+        GridPage.takeScreenshotAndCompare("ComponentGrid_NextPage");
         //click on previous page
         GridPage.clickIconPreviousPage();
         //verify the first page is returned
         expect(GridPage.verifyCurrentPageExisting(1)).toBeTruthy();
-    });
+    }));
 });

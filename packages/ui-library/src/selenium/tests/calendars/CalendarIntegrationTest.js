@@ -20,7 +20,9 @@ describe("Calendar Integration", function () {
      * WHEN: Takes screenshot to compare with the base image
      * THEN: The base image and the current image should be identical
      */
-    it("should have the default current date value and change other date value", function () {
+    it("should have the default current date value and change other date value", CalendarPage.retriable(function () {
+        CalendarPage.openCalendarDemoPage();
+
         expect(CalendarPage.verifyCalendarFieldExisting()).toBeTruthy();
         var currentDate = CalendarPage.getCurrentDate();
         expect(CalendarPage.getValueOfCalendar()).toEqual(currentDate);
@@ -30,8 +32,8 @@ describe("Calendar Integration", function () {
         expect(CalendarPage.getValueOfCalendar()).toEqual(changedDate);
 
         //take screenshot and compare
-        expect(CalendarPage.takeScreenshotAndCompare("ComponentCalendar_InputValue")).toBeTruthy();
-    });
+        CalendarPage.takeScreenshotAndCompare("ComponentCalendar_InputValue");
+    }));
 
     /**
      * SCENARIO: Should be clickable for the calendar field and left, right icon as well

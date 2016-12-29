@@ -22,16 +22,18 @@ describe("Wizard Integration", function () {
      * AND: Compares it with the base image
      * THEN: The base image and the current image should be identical
      */
-    it("should have the pulsing when clicking on the Next buttons and Done button", function () {
+    it("should have the pulsing when clicking on the Next buttons and Done button", WizardPage.retriable(function () {
+        WizardPage.openWizardDemoPage();
+
         expect(WizardPage.verifyPulsingCheckboxExisting()).toBeTruthy();
         //take screenshot and compare
-        expect(WizardPage.takeScreenshotAndCompare("ComponentWizard_GeneralPage")).toBeTruthy();
+        WizardPage.takeScreenshotAndCompare("ComponentWizard_GeneralPage");
         //check use Pulsing checkbox
         WizardPage.clickPulsingCheckbox();
         //Select wizard 1
         WizardPage.selectWizardCheckbox(0);
         //take screenshot and compare
-        expect(WizardPage.takeScreenshotAndCompare("ComponentWizard_Wizard1Step1")).toBeTruthy();
+        WizardPage.takeScreenshotAndCompare("ComponentWizard_Wizard1Step1");
         //click button next
         WizardPage.clickNextButton();
         //Verify the pulsing loading
@@ -40,7 +42,7 @@ describe("Wizard Integration", function () {
         expect(WizardPage.verifyIconStep2Existing()).toBeTruthy();
         WizardPage.waitForNextButtonPulsingInvisible();
         //take screenshot and compare
-        expect(WizardPage.takeScreenshotAndCompare("ComponentWizard_Wizard1Step2")).toBeTruthy();
+        WizardPage.takeScreenshotAndCompare("ComponentWizard_Wizard1Step2");
         //click button next
         WizardPage.clickNextButton();
         //Verify the pulsing loading
@@ -49,7 +51,7 @@ describe("Wizard Integration", function () {
         //verify the step 3 appears
         expect(WizardPage.verifyIconStep3Existing()).toBeTruthy();
         //take screenshot and compare
-        expect(WizardPage.takeScreenshotAndCompare("ComponentWizard_Wizard1Step3")).toBeTruthy();
+        WizardPage.takeScreenshotAndCompare("ComponentWizard_Wizard1Step3");
         //Verify edit link at step 1  and step 2
         expect(WizardPage.verifyLinkEditStep1Existing()).toBeTruthy();
         expect(WizardPage.verifyLinkEditStep2Existing()).toBeTruthy();
@@ -65,7 +67,7 @@ describe("Wizard Integration", function () {
         //Verify the pulsing loading
         expect(WizardPage.verifyDoneButtonPulsingExisting()).toBeTruthy();
         WizardPage.waitForDoneButtonPulsingInvisible();
-    });
+    }));
 
     /**
      * SCENARIO: Should have not the pulsing when clicking on the Next buttons and Done button
@@ -79,51 +81,55 @@ describe("Wizard Integration", function () {
      * AND: Compares it with the base image
      * THEN: The base image and the current image should be identical
      */
-    it("should not have the pulsing when clicking on the Next buttons and Done button", function () {
-        expect(WizardPage.verifyPulsingCheckboxExisting()).toBeTruthy();
-        //Select wizard 2
-        WizardPage.selectWizardCheckbox(2);
-        //take screenshot and compare
-        expect(WizardPage.takeScreenshotAndCompare("ComponentWizard_Wizard2Step1")).toBeTruthy();
-        //click button next
-        WizardPage.clickNextButton();
-        //Verify there is no the pulsing
-        expect(WizardPage.verifyNextButtonPulsingExisting()).toBeFalsy();
-        //verify the step 2 appears
-        expect(WizardPage.verifyIconStep2Existing()).toBeTruthy();
-        WizardPage.waitForNextButtonExist();
-        //take screenshot and compare
-        expect(WizardPage.takeScreenshotAndCompare("ComponentWizard_Wizard2Step2")).toBeTruthy();
-        //click button next
-        WizardPage.clickNextButton();
-        //Verify there is no the pulsing
-        expect(WizardPage.verifyNextButtonPulsingExisting()).toBeFalsy();
-        WizardPage.waitForNextButtonExist();
-        //verify the step 3 appears
-        expect(WizardPage.verifyIconStep3Existing()).toBeTruthy();
-        //take screenshot and compare
-        expect(WizardPage.takeScreenshotAndCompare("ComponentWizard_Wizard2Step3")).toBeTruthy();
-        //click button next step 3
-        WizardPage.clickNextButton();
-        expect(WizardPage.verifyIconStep4Existing()).toBeTruthy();
-        WizardPage.waitForDoneButtonExist();
-        //Verify edit link at step 1  and step 2
-        expect(WizardPage.verifyLinkEditStep1Existing()).toBeTruthy();
-        expect(WizardPage.verifyLinkEditStep2Existing()).toBeTruthy();
-        expect(WizardPage.verifyLinkEditStep3Existing()).toBeTruthy();
-        //click on edit link at step 3
-        WizardPage.clickLinkEditStep3();
-        //click button next
-        WizardPage.clickNextButton();
-        //Verify there is no the pulsing
-        expect(WizardPage.verifyNextButtonPulsingExisting()).toBeFalsy();
-        //click button Done
-        WizardPage.waitForDoneButtonExist();
-        //take screenshot and compare
-        expect(WizardPage.takeScreenshotAndCompare("ComponentWizard_Wizard2Step4")).toBeTruthy();
-        WizardPage.clickDoneButton();
-        //Verify there is no the pulsing
-        expect(WizardPage.verifyDoneButtonPulsingExisting()).toBeFalsy();
-    });
+    it("should not have the pulsing when clicking on the Next buttons and Done button", WizardPage.retriable(
+        function () {
+            WizardPage.openWizardDemoPage();
+
+            expect(WizardPage.verifyPulsingCheckboxExisting()).toBeTruthy();
+            //Select wizard 2
+            WizardPage.selectWizardCheckbox(2);
+            //take screenshot and compare
+            WizardPage.takeScreenshotAndCompare("ComponentWizard_Wizard2Step1");
+            //click button next
+            WizardPage.clickNextButton();
+            //Verify there is no the pulsing
+            expect(WizardPage.verifyNextButtonPulsingExisting()).toBeFalsy();
+            //verify the step 2 appears
+            expect(WizardPage.verifyIconStep2Existing()).toBeTruthy();
+            WizardPage.waitForNextButtonExist();
+            //take screenshot and compare
+            WizardPage.takeScreenshotAndCompare("ComponentWizard_Wizard2Step2");
+            //click button next
+            WizardPage.clickNextButton();
+            //Verify there is no the pulsing
+            expect(WizardPage.verifyNextButtonPulsingExisting()).toBeFalsy();
+            WizardPage.waitForNextButtonExist();
+            //verify the step 3 appears
+            expect(WizardPage.verifyIconStep3Existing()).toBeTruthy();
+            //take screenshot and compare
+            WizardPage.takeScreenshotAndCompare("ComponentWizard_Wizard2Step3");
+            //click button next step 3
+            WizardPage.clickNextButton();
+            expect(WizardPage.verifyIconStep4Existing()).toBeTruthy();
+            WizardPage.waitForDoneButtonExist();
+            //Verify edit link at step 1  and step 2
+            expect(WizardPage.verifyLinkEditStep1Existing()).toBeTruthy();
+            expect(WizardPage.verifyLinkEditStep2Existing()).toBeTruthy();
+            expect(WizardPage.verifyLinkEditStep3Existing()).toBeTruthy();
+            //click on edit link at step 3
+            WizardPage.clickLinkEditStep3();
+            //click button next
+            WizardPage.clickNextButton();
+            //Verify there is no the pulsing
+            expect(WizardPage.verifyNextButtonPulsingExisting()).toBeFalsy();
+            //click button Done
+            WizardPage.waitForDoneButtonExist();
+            //take screenshot and compare
+            WizardPage.takeScreenshotAndCompare("ComponentWizard_Wizard2Step4");
+            WizardPage.clickDoneButton();
+            //Verify there is no the pulsing
+            expect(WizardPage.verifyDoneButtonPulsingExisting()).toBeFalsy();
+        }
+    ));
 });
 

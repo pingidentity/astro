@@ -1,5 +1,6 @@
 var Page = require("./Page.js");
 var ScreenshotUtils = require("../../util/ScreenshotUtils.js");
+var ScreenshotComparisonException = require("../../util/ScreenshotComparisonException.js");
 var wdioConfig = require("../../../wdio.conf.js").config;
 
 var HomePage = Object.create(Page, {
@@ -16,11 +17,56 @@ var HomePage = Object.create(Page, {
     /**
      * @desc this function is to return a given component path
      * @param {string} name - name of the element
-     * @param {string} type - type of the element
+     * @param {string} [type="*"] - type of the element
      */
     navComponent: {
         value: function (name, type) {
             return this.formatXpath("//{type}[@data-id='{name}-label']", { type: type ? type : "*", name: name });
+        }
+    },
+
+    /**
+     * @desc open the navigation node (not leaf) with the given name and wait until it's open
+     * @param {string} name - the node name (eg. Templates)
+     */
+    openNavNode: {
+        value: function (name) {
+            var path = this.navComponent(name, "div");
+            this.click(path);
+            this.waitForExist(
+                path + "/parent::div[contains(concat(' ', @class, ' '), ' open ')]",
+                2000);
+        }
+    },
+
+    /**
+     * @desc open the navigation leaf (not node) with the given name and wait until it's open
+     * @param {string} name - the leaf name (eg. Edit View - Collapsible)
+     */
+    openNavLeaf: {
+        value: function (name) {
+            var path = this.navComponent(name, "a");
+            this.click(path);
+            this.waitForExist(
+                path + "/parent::li[contains(concat(' ', @class, ' '), ' highlighted ')]",
+                2000);
+        }
+    },
+
+    /**
+     * @desc navigate to the given path in the navigation menu
+     * @param {string} categoryName - the node name (eg. Templates)
+     * @param {string} pageName - the leaf name (eg. Edit View - Collapsible)
+     */
+    navigateToPath: {
+        value: function (categoryName, pageName) {
+            this.openNavNode(categoryName);
+
+            // wait for the menu item to be on the page (ie. the node has fully opened)
+            this.waitForExist(this.navComponent(pageName));
+            this.scrollMenuNavigation(pageName);
+
+            this.openNavLeaf(pageName);
         }
     },
 
@@ -34,11 +80,19 @@ var HomePage = Object.create(Page, {
     },
 
     /**
-     * @desc this function is to scroll the nemu navigation
+     * @desc this function is to scroll the navigation menu
+     *    to the element with the given name, and wait up to 1000ms
+     *    for the element to get into the viewport
+     * @param {string} labelName - the name of the label to scroll to
+     *    (the '-label' suffix will be appended automatically)
      */
     scrollMenuNavigation: {
-        value: function (y) {
-            this.scrollElementToTop("//div[@data-id='header-bar']/following-sibling::div/div", y);
+        value: function (labelName) {
+            this.scrollToElement("a", labelName + "-label");
+
+            // the isVisibleWithinViewport state verification doesn't seem to work properly;
+            // instead, wait blindly 1000ms
+            this.pause(1000);
         }
     },
 
@@ -46,14 +100,14 @@ var HomePage = Object.create(Page, {
      * @desc this function to take screenshot then compare screenshot with baseline and create diff image
      * all transitions should have finished by the time this method is called
      * @param {string} fileName - name of screenshot file.
-     *
-     * @returns {bool} true if they are matched and false if they are difference.
+     * @throws {ScreenshotComparisonException}
+     *    if the current screenshot does not match the baseline
      */
     takeScreenshotAndCompare: {
         value: function (filename) {
             this.blurElement();
             this.outHover();
-            return ScreenshotUtils.takeScreenShotAndCompareWithBaseline(filename);
+            ScreenshotUtils.takeScreenShotAndCompareWithBaseline(filename);
         }
     },
 
@@ -62,14 +116,14 @@ var HomePage = Object.create(Page, {
      * all transitions should have finished by the time this method is called
      * @param {string} fileName - name of screenshot file.
      * @param {string} elementSelector - xpath to element.
-     *
-     * @returns {bool} true if they are matched and false if they are difference.
+     * @throws {ScreenshotComparisonException}
+     *    if the current screenshot does not match the baseline
      */
     takeElementScreenshotAndCompare: {
         value: function (filename, elementSelector) {
             this.blurElement();
             this.outHover();
-            return ScreenshotUtils.takeElementScreenShotAndCompareWithBaseline(filename, elementSelector);
+            ScreenshotUtils.takeElementScreenShotAndCompareWithBaseline(filename, elementSelector);
         }
     },
 
@@ -81,6 +135,56 @@ var HomePage = Object.create(Page, {
             this.blurElement();
             this.outHover();
         }
-    }
+    },
+
+    /**
+     * @desc wrap the given retriable function
+     *    which is to be retried on failure (the number of retries is defined in the wdio config)
+     *    if there is a screen comparison exception
+     * @param {function} retriableFunction - the function to be executed; since it's retried
+     *    on failure, it should reset the page/context itself
+     * @return {function} - the wrapper function which will be retried on failure
+     */
+    retriable: {
+        value: function (retriableFunction) {
+            var self = this;
+
+            return function () {
+                var retryCount = 0;
+                var maxRetryCount = wdioConfig.testRetryCount;
+                var retryWaitTime = wdioConfig.testRetryWaitTime;
+                var error;
+
+                do {
+                    if (retryCount > 0) {
+                        self.pause(retryWaitTime);
+                    }
+                    try {
+                        retriableFunction();
+                        error = null;
+                    }
+                    catch (err) {
+                        // let it bubble up if it's not a screenshot comparison exception
+                        if (err instanceof ScreenshotComparisonException) {
+                            console.log("ERROR: try #" + retryCount +
+                                        "; failure: " + err.message +
+                                        ";\n    stack: " + err.stack);
+                        }
+                        else {
+                            throw err;
+                        }
+
+                        retryCount += 1;
+                        error = err;
+                    }
+                }
+                while ((retryCount <= maxRetryCount) && (error !== null));
+
+                if (error !== null) {
+                    throw new Error(error.message);
+                }
+            };
+        }
+    },
 });
 module.exports = HomePage;

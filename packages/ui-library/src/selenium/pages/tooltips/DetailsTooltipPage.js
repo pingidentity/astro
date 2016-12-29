@@ -116,10 +116,7 @@ var DetailsTooltipDemoPage = Object.create(HomePage, {
     openDetailsTooltipDemoPage: {
         value: function () {
             this.openHomePage();
-            this.click(this.navComponent("Components"));
-            this.scrollMenuNavigation(100);
-            this.waitForExist(this.navComponent("DetailsTooltip"));
-            this.click(this.navComponent("DetailsTooltip"));
+            this.navigateToPath("Components", "DetailsTooltip");
         }
     }
 });

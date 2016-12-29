@@ -23,5 +23,5 @@ prepros.cfg
 .project
 .settings
 
-selenium-standalone.log
+selenium-standalone.log*
 http-server.log

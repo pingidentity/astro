@@ -18,18 +18,22 @@ describe("Edit View Modal Integration", function () {
      * WHEN: Clicks on icon close
      * THEN: The dialog should be closed
      */
-    it("should be clickable for button Open Default Modal and icon to close dialog", function () {
-        expect(EditViewModalPage.verifyButtonOpenDefaultModalExisting).toBeTruthy();
-        //click on button Open Default Modal
-        EditViewModalPage.clickButtonOpenDefaultModal();
-        EditViewModalPage.waitForDialogDefaultModalExist();
-        expect(EditViewModalPage.verifyDialogDefaultModalExisting).toBeTruthy();
-        //take screenshot and compare
-        var dialogDefaultModalFilename = "TemplatesEditViewModal_DialogDefaultModal";
-        expect(EditViewModalPage.takeScreenshotAndCompare(dialogDefaultModalFilename)).toBeTruthy();
-        //click on icon close to close dialog
-        EditViewModalPage.clickIconCloseDialog();
-    });
+    it("should be clickable for button Open Default Modal and icon to close dialog", EditViewModalPage.retriable(
+        function () {
+            EditViewModalPage.openEditViewModalDemoPage();
+
+            expect(EditViewModalPage.verifyButtonOpenDefaultModalExisting).toBeTruthy();
+            //click on button Open Default Modal
+            EditViewModalPage.clickButtonOpenDefaultModal();
+            EditViewModalPage.waitForDialogDefaultModalExist();
+            expect(EditViewModalPage.verifyDialogDefaultModalExisting).toBeTruthy();
+            //take screenshot and compare
+            var dialogDefaultModalFilename = "TemplatesEditViewModal_DialogDefaultModal";
+            EditViewModalPage.takeScreenshotAndCompare(dialogDefaultModalFilename);
+            //click on icon close to close dialog
+            EditViewModalPage.clickIconCloseDialog();
+        }
+    ));
 
     /**
      * SCENARIO: Should input value for all field and click on cancel button

@@ -10,6 +10,42 @@ var EditViewCollapsibleDemoPage = Object.create(HomePage, {
         }
     },
 
+    xpathIdentitySectionOpen: {
+        get: function () {
+            return "//div[contains(@class,'open')][@data-id='identity-section-title']";
+        }
+    },
+
+    xpathIdentitySectionClosed: {
+        get: function () {
+            return "//div[not(contains(@class,'open'))][@data-id='identity-section-title']";
+        }
+    },
+
+    xpathAddressSectionOpen: {
+        get: function () {
+            return "//div[contains(@class,'open')][@data-id='address-section-title']";
+        }
+    },
+
+    xpathAddressSectionClosed: {
+        get: function () {
+            return "//div[not(contains(@class,'open'))][@data-id='address-section-title']";
+        }
+    },
+
+    xpathMiscellaneousSectionOpen: {
+        get: function () {
+            return "//div[contains(@class,'open')][@data-id='miscellaneous-section-title']";
+        }
+    },
+
+    xpathMiscellaneousSectionClosed: {
+        get: function () {
+            return "//div[not(contains(@class,'open'))][@data-id='miscellaneous-section-title']";
+        }
+    },
+
     /**
      * @desc this function is to click on button toggle
      */
@@ -37,6 +73,20 @@ var EditViewCollapsibleDemoPage = Object.create(HomePage, {
         }
     },
 
+    waitForIdentitySectionToOpen: {
+        value: function () {
+            this.waitForExist(this.xpathIdentitySectionOpen);
+            this.waitForVisible("//input[@data-id='firstName-input']");
+        }
+    },
+
+    waitForIdentitySectionToClose: {
+        value: function () {
+            this.waitForExist(this.xpathIdentitySectionClosed);
+            this.waitForVisible("//input[@data-id='firstName-input']", false);
+        }
+    },
+
     /**
      * @desc this function is to click on Address Section
      */
@@ -46,12 +96,40 @@ var EditViewCollapsibleDemoPage = Object.create(HomePage, {
         }
     },
 
+    waitForAddressSectionToOpen: {
+        value: function () {
+            this.waitForExist(this.xpathAddressSectionOpen);
+            this.waitForExist("//select[@data-id='addressType-select']");
+        }
+    },
+
+    waitForAddressSectionToClose: {
+        value: function () {
+            this.waitForExist(this.xpathAddressSectionClosed);
+            this.waitForExist("//select[@data-id='addressType-select']", false);
+        }
+    },
+
     /**
      * @desc this function is to click on Miscellaneous Section
      */
     clickMiscellaneousSection: {
         value: function () {
             this.click("//div[@data-id='miscellaneous-section-title']");
+        }
+    },
+
+    waitForMiscellaneousSectionToOpen: {
+        value: function () {
+            this.waitForExist(this.xpathMiscellaneousSectionOpen);
+            this.waitForVisible(this.xpathCheckboxActiveUser);
+        }
+    },
+
+    waitForMiscellaneousSectionToClose: {
+        value: function () {
+            this.waitForExist(this.xpathMiscellaneousSectionClosed);
+            this.waitForVisible(this.xpathCheckboxActiveUser, false);
         }
     },
 
@@ -273,8 +351,7 @@ var EditViewCollapsibleDemoPage = Object.create(HomePage, {
     openEditViewCollapsibleDemoPage: {
         value: function () {
             this.openHomePage();
-            this.click(this.navComponent("Templates"));
-            this.click(this.navComponent("EditViewCollapsible"));
+            this.navigateToPath("Templates", "EditViewCollapsible");
         }
     }
 });
