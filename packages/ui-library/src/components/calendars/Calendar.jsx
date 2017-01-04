@@ -56,7 +56,7 @@ var Views = {
  * @param {string} [helpClassName]
  *    CSS classes to apply to the label help container.
  *
- * @param {*} date
+ * @param {*} [date]
  *    Numeric value for the selected date.
  * @param {string} [format="MM-DD-YYYY"]
  *    String value of the date format you want to display (e.g. "YYYY-MM-DD").
@@ -117,7 +117,7 @@ var Calendar = React.createClass({
         className: React.PropTypes.string,
         closeOnSelect: React.PropTypes.bool,
         computableFormat: React.PropTypes.string,
-        date: React.PropTypes.any.isRequired,
+        date: React.PropTypes.any,
         format: React.PropTypes.string,
         helpClassName: React.PropTypes.string,
         labelClassName: React.PropTypes.string,
@@ -204,6 +204,7 @@ var Calendar = React.createClass({
      * @param  {Object} e The event object
      */
     keyDown: function (e) {
+        e.stopPropagation();
         _keyDownActions.call(this, e.keyCode);
     },
 

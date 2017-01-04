@@ -17,7 +17,7 @@ describe("Calendar", function () {
     var React = require("react"),
         Calendar = require("../Calendar.jsx"),
         moment = require("moment-range"),
-
+        _ = require("underscore"),
         ReactTestUtils = require("react-addons-test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
 
@@ -338,7 +338,7 @@ describe("Calendar", function () {
         //open calendar
         ReactTestUtils.Simulate.click(container, {});
 
-        globalKeyListener({ keyCode: 39 }); //arrow right
+        globalKeyListener({ keyCode: 39, stopPropagation: _.noop }); //arrow right
 
         expect(callback).toBeCalledWith("1444953600000");
     });
@@ -359,9 +359,32 @@ describe("Calendar", function () {
         //open calendar
         ReactTestUtils.Simulate.click(container, {});
 
-        globalKeyListener({ keyCode: 39 }); //arrow right
+        globalKeyListener({ keyCode: 39, stopPropagation: _.noop }); //arrow right
 
         expect(callback).toBeCalledWith("1444953600000");
+    });
+
+    it("stops arrow nagivation keyDown event propogation", function () {
+        var globalKeyListener = TestUtils.captureGlobalListener("keyDown", document);
+
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar format="YYYY-MM-DD"
+                      date={selectedDate}
+                      computableFormat="x"
+                      closeOnSelect={true}
+                      onValueChange={callback} />
+        );
+
+        var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
+
+        //open calendar
+        ReactTestUtils.Simulate.click(container, {});
+
+        var mockStopPropagation = jest.genMockFunction();
+        globalKeyListener({ keyCode: 39, stopPropagation: mockStopPropagation }); //arrow right
+
+        expect(callback).toBeCalledWith("1444953600000");
+        expect(mockStopPropagation).toBeCalled(); //check event won't propagate
     });
 
     it("register/unregister global listeners", function () {
