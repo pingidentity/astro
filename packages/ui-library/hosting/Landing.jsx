@@ -5,7 +5,8 @@ var React = require("react"),
     // Promise use inside of fetch, fetch should go with Promise to avoid page crashing in IE.
     Promise = require("es6-promise").Promise, // eslint-disable-line
     HeaderBar = require("../src/components/panels/header-bar/HeaderBar.jsx"),
-    LeftNavBar = require("../src/components/panels/left-nav/LeftNavBar.jsx");
+    LeftNavBar = require("../src/components/panels/left-nav/LeftNavBar.jsx"),
+    _ = require("underscore");
 
 // the CSS files will be compiled by a webpack plugin
 // and injected into the head section of the HTML page by another plugin
@@ -36,7 +37,9 @@ var LandingPage = React.createClass({
     },
 
     _handleLeftNavBarSectionValueChange: function (sectionId) {
-        this.setState({ leftNavOpenNode: sectionId });
+        var nextState = _.clone(this.state.leftNavOpenSections);
+        nextState[sectionId] = !nextState[sectionId];
+        this.setState({ leftNavOpenSections: nextState });
     },
 
     componentWillMount: function () {
@@ -73,7 +76,7 @@ var LandingPage = React.createClass({
                             {
                                 label: "Versions",
                                 id: "versions",
-                                children: versions.map(function (version) {
+                                children: versions.slice().reverse().map(function (version) {
                                     return { label: version, id: version };
                                 })
                             }
@@ -108,7 +111,7 @@ var LandingPage = React.createClass({
             version: "",
             headerBarTree: [],
             leftNavBarTree: [],
-            leftNavOpenNode: "versions"
+            leftNavOpenSections: { versions: true }
         };
     },
 
@@ -120,9 +123,10 @@ var LandingPage = React.createClass({
                             label="UI Library" />
 
                     <LeftNavBar tree={this.state.leftNavBarTree}
-                            openNode={this.state.leftNavOpenNode}
+                            openSections={this.state.leftNavOpenSections}
                             onItemValueChange={this._handleLeftNavBarItemValueChange}
-                            onSectionValueChange={this._handleLeftNavBarSectionValueChange} />
+                            onSectionValueChange={this._handleLeftNavBarSectionValueChange}
+                            collapsible={true}/>
 
 
                  <div id="library-content" className="contrast">
