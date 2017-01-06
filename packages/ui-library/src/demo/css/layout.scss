@@ -216,6 +216,17 @@ $sidenav-lineheight: 22px;
 		}
 	}
 }
+
+.attention {
+    position: relative;
+    margin: 15px 0 30px;
+    padding: 10px;
+    color: $color-walrus;
+    border-left: 10px solid $color-warning-yellow;
+    background: $color-elderly;
+    font-family: $font-pn-regular;
+}
+
 input[type=text], input[type=password], textarea {
 	width: 340px;
 }
