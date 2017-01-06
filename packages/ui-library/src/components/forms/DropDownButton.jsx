@@ -28,9 +28,11 @@ var React = require("react"),
  *     DEPRECATED. Use "data-id" instead. To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
- * @param {boolean} [controlled=false]
+ * @param {boolean} [stateless]
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally.
+ * @param {boolean} [controlled=false]
+ *     DEPRECATED. Use "stateless" instead.
  *
  * @param {object} options
  *     An object where the keys are the item IDs, and the values are the corresponding labels.
@@ -39,9 +41,9 @@ var React = require("react"),
  * @param {DropDownButton~onSelect} [onSelect]
  *     DEPRECATED. Use "onValueChange" instead.
  * @param {DropDownButton~onToggle} [onToggle]
- *     Callback to be triggered when open/closed state changed. Used only when controlled=true.
+ *     Callback to be triggered when open/closed state changed. Used only when stateless=true.
  * @param {boolean} [open=false]
- *     Boolean state of open/closed menu. Used only when controlled=true.
+ *     Boolean state of open/closed menu. Used only when stateless=true.
  * @param {string} label
  *     Label text for button
  * @param {string} [title]
@@ -55,7 +57,7 @@ var React = require("react"),
  *              options={optionsMenu}
  *      />
  *
- *      <DropDownButton controlled={true}
+ *      <DropDownButton stateless={true}
  *          data-id="drop-down-menu"
  *          title="My menu"
  *          onValueChange={this._changeARule}
@@ -254,7 +256,8 @@ module.exports = React.createClass({
         "data-id": React.PropTypes.string,
         id: React.PropTypes.string,
         className: React.PropTypes.string,
-        controlled: React.PropTypes.bool,
+        controlled: React.PropTypes.bool, //TODO: remove in new version
+        stateless: React.PropTypes.bool,
         options: React.PropTypes.object,
         onValueChange: React.PropTypes.func,
         onSelect: React.PropTypes.func,
@@ -267,13 +270,21 @@ module.exports = React.createClass({
     getDefaultProps: function () {
         return {
             "data-id": "drop-down-button",
-            controlled: false,
+            controlled: false, //TODO: change to stateless in new version
             open: false
         };
     },
 
+    componentWillMount: function () {
+        if (!Utils.isProduction()) {
+            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+        }
+    },
+
     render: function () {
-        return this.props.controlled
+        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
+
+        return stateless
             ? React.createElement(Stateless, _.defaults({ ref: "Stateless" }, this.props))
             : React.createElement(Stateful, _.defaults({ ref: "Stateful" }, this.props));
     }

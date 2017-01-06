@@ -16,7 +16,7 @@ describe("FormTextArea", function () {
 
     function getComponent (props) {
         props = _.defaults(props || {}, {
-            controlled: true,
+            stateless: true,
             onChange: jest.genMockFunction(),
             onValueChange: jest.genMockFunction(),
             onBlur: jest.genMockFunction()
@@ -52,7 +52,7 @@ describe("FormTextArea", function () {
     });
 
     it("stateful: assigns empty string to value state when no value or defaultValue given", function () {
-        var component = getComponent({ controlled: false }),
+        var component = getComponent({ stateless: false }),
             componentRef = component.refs.FormTextAreaStateful;
 
         expect(componentRef.state.value).toBe("");
@@ -61,7 +61,7 @@ describe("FormTextArea", function () {
     it("stateful: does not show the undo button if the originalValue param is not passed in", function () {
         var originalValue = "my original value";
         var component = getComponent({
-            controlled: false,
+            stateless: false,
             defaultValue: originalValue
         });
 
@@ -74,7 +74,7 @@ describe("FormTextArea", function () {
     it("stateful: shows the undo icon when text changes", function () {
         var originalValue = "my original value";
         var component = getComponent({
-            controlled: false,
+            stateless: false,
             defaultValue: originalValue,
             originalValue: originalValue
         });
@@ -88,7 +88,7 @@ describe("FormTextArea", function () {
     it("stateful: reverts the input text to its original value if the undo icon is clicked", function () {
         var originalValue = "my original value";
         var component = getComponent({
-            controlled: false,
+            stateless: false,
             defaultValue: originalValue,
             originalValue: originalValue
         });
@@ -109,7 +109,7 @@ describe("FormTextArea", function () {
     it("stateful: fires the onValueChange callback when clicking on the undo icon", function () {
         var originalValue = "my original value";
         var component = getComponent({
-            controlled: false,
+            stateless: false,
             defaultValue: originalValue,
             originalValue: originalValue
         });
@@ -138,5 +138,34 @@ describe("FormTextArea", function () {
 
         expect(help).toBeTruthy();
         expect(help.getAttribute("class")).toContain("bottom right");
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("produces stateful/stateless components correctly given controlled prop", function () {
+        var component = ReactTestUtils.renderIntoDocument(<FormTextArea controlled={false} />);
+        var stateful = component.refs.FormTextAreaStateful;
+        var stateless = component.refs.FormTextAreaStateless;
+
+        expect(stateful).toBeTruthy();
+        expect(stateless).toBeFalsy();
+
+        component = ReactTestUtils.renderIntoDocument(<FormTextArea controlled={true} />);
+        stateful = component.refs.FormTextAreaStateful;
+        stateless = component.refs.FormTextAreaStateless;
+        
+        expect(stateless).toBeTruthy();
+        expect(stateful).toBeFalsy();
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("logs warning for deprecated controlled prop", function () {
+        console.warn = jest.genMockFunction();
+
+        getComponent();
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use stateless instead of controlled. " +
+            "The default for stateless will be true instead of false. " +
+            "Support for controlled will be removed in next version");
     });
 });

@@ -58,7 +58,7 @@ var ColorPickerDemo = React.createClass({
                         onError={this._handleError}
                         errorMessage={this.state.errorMessage}
                         open={this.state.picker2open}
-                        controlled={true} />
+                        stateless={true} />
                     </div>
             </div>);
     }

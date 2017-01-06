@@ -15,9 +15,12 @@ var React = require("re-react"),
 *     To define the base "data-id" value for top-level HTML container.
 * @param {string} [className]
 *     CSS classes to be set on the top-level HTML container.
-* @param {boolean} [controlled=false]
+* @param {boolean} [stateless]
+*     WARNING. Default value for "stateless" will be set to true from next version.
 *     To enable the component to be externally managed. True will relinquish control to the component's owner.
 *     False or not specified will cause the component to manage state internally.
+* @param {boolean} [controlled=false]
+*     DEPRECATED. Use "stateless" instead.
 *
 * @param {boolean} [toggled=false]
 *     Toggle state; either true for "on" or false for "off".
@@ -34,17 +37,26 @@ var React = require("re-react"),
 module.exports = React.createClass({
 
     propTypes: {
-        controlled: React.PropTypes.bool
+        controlled: React.PropTypes.bool, //TODO: remove in new version
+        stateless: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
         return {
-            controlled: false
+            controlled: false //TODO: change to stateless with true default in new version
         };
     },
 
+    componentWillMount: function () {
+        if (!Utils.isProduction()) {
+            console.warn(Utils.deprecateMessage("controlled", "stateless", "false", "true"));
+        }
+    },
+
     render: function () {
-        return this.props.controlled
+        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
+
+        return stateless
             ? React.createElement(ToggleStateless, //eslint-disable-line no-use-before-define
                 _.defaults({ ref: "ToggleStateless" }, this.props))
             : React.createElement(ToggleStateful, //eslint-disable-line no-use-before-define

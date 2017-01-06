@@ -2,6 +2,7 @@ var React = require("react"),
     classNames = require("classnames"),
     FormDropDownList = require("../forms/FormDropDownList.jsx"),
     FormRadioGroup = require("../forms/FormRadioGroup.jsx"),
+    Utils = require("../../util/Utils.js"),
     _ = require("underscore");
 
 /**
@@ -158,10 +159,12 @@ var ConditionalFieldsetStateful = React.createClass({
  *          required.
  * @param {string} [className]
  *          CSS class to set on the top HTML element
- * @param {boolean} [controlled=false]
+ * @param {boolean} [stateless]
  *          To enable the component to be externally managed. True will relinquish control to the component's owner.
  *          False or not specified will cause the component to manage state internally. If True, onValueChange and
  *          selectedIndex will be managed by the component.
+ * @param {boolean} [controlled=false]
+ *     DEPRECATED. Use "stateless" instead.
  * @param {ConditionalFieldset.Type} [type]
  *          Type of selector to display to expose form options. If not set, it will default to RADIO for 2 options
  *          and select for 3 or more.
@@ -172,9 +175,9 @@ var ConditionalFieldsetStateful = React.createClass({
  *          Only really applies if supportEmpty is set to true and no empty div was passed. If that's the case it will
  *          insert an empty div with the emptyMessage as the option.
  * @param {number} selectedIndex
- *          The currently selected option. If using the controlled=false option this is not required.
+ *          The currently selected option. If using the stateless=false option this is not required.
  * @param {ConditionalFieldset~onValueChange} onValueChange
- *          Callback to be triggered when the selection is changed. If using the controlled=false
+ *          Callback to be triggered when the selection is changed. If using the stateless=false
  *          option this is not required.
  * @param {boolean} [disabled=false]
  *          Disables the ConditionalFieldset options
@@ -185,7 +188,7 @@ var ConditionalFieldsetStateful = React.createClass({
  *                                       onValueChange={this._onCondition1ValueChange}
  *                                       selectedIndex={this.state.selectedCondition1Index}
  *                                       supportEmpty={true}
- *                                       controlled={true}
+ *                                       stateless={true}
  *                                       emptyMessage={"Do Nothing"}
  *                                       type={this.state.selectedTypeName} >
  *                   <div title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
@@ -207,17 +210,26 @@ var ConditionalFieldsetStateful = React.createClass({
 var ConditionalFieldset = React.createClass({
 
     propTypes: {
-        controlled: React.PropTypes.bool
+        controlled: React.PropTypes.bool, //TODO: remove in new version
+        stateless: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
         return {
-            controlled: false
+            controlled: false //TODO: change to stateless in new version
         };
     },
 
+    componentWillMount: function () {
+        if (!Utils.isProduction()) {
+            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+        }
+    },
+
     render: function () {
-        return this.props.controlled
+        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
+
+        return stateless
             ? React.createElement(ConditionalFieldsetStateless, //eslint-disable-line no-use-before-define
             _.defaults({ ref: "ConditionalFieldsetStateless" }, this.props), this.props.children)
             : React.createElement(ConditionalFieldsetStateful, //eslint-disable-line no-use-before-define

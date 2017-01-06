@@ -15,7 +15,7 @@ describe("RockerButton", function () {
         opts = _.defaults(opts || {}, {
             onChange: jest.genMockFunction(),
             onValueChange: jest.genMockFunction(),
-            controlled: true,
+            stateless: true,
             labels: ["A", "B", "C"],
             className: "myRocker"
         });
@@ -55,7 +55,7 @@ describe("RockerButton", function () {
     it("stateless: will trigger onChange callback when selection changes", function () {
         var callback = jest.genMockFunction();
         var component = ReactTestUtils.renderIntoDocument(
-            <RockerButton controlled={true} labels={["A", "B", "C"]} onChange={callback} />);
+            <RockerButton stateless={true} labels={["A", "B", "C"]} onChange={callback} />);
 
         var labels = TestUtils.scryRenderedDOMNodesWithTag(component, "label");
 
@@ -66,7 +66,7 @@ describe("RockerButton", function () {
     it("stateful: will trigger onChange callback when selection changes", function () {
         var callback = jest.genMockFunction();
         var component = ReactTestUtils.renderIntoDocument(
-            <RockerButton controlled={true} labels={["A", "B", "C"]} onChange={callback} />);
+            <RockerButton stateless={true} labels={["A", "B", "C"]} onChange={callback} />);
 
         var labels = TestUtils.scryRenderedDOMNodesWithTag(component, "label");
 
@@ -83,7 +83,7 @@ describe("RockerButton", function () {
     });
 
     it("stateful: will trigger onValueChange callback when selection changes", function () {
-        var component = getComponent({ controlled: false });
+        var component = getComponent({ stateless: false });
         var labels = TestUtils.scryRenderedDOMNodesWithTag(component, "label");
 
         ReactTestUtils.Simulate.click(labels[2], {});
@@ -94,7 +94,7 @@ describe("RockerButton", function () {
         var callback = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
-            <RockerButton controlled={true} labels={["A", "B", "C"]} />);
+            <RockerButton stateless={true} labels={["A", "B", "C"]} />);
         var labels = TestUtils.scryRenderedDOMNodesWithTag(component, "label");
 
         ReactTestUtils.Simulate.click(labels[2], {});
@@ -105,7 +105,7 @@ describe("RockerButton", function () {
         var callback = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
-            <RockerButton controlled={false} labels={["A", "B", "C"]} />);
+            <RockerButton stateless={false} labels={["A", "B", "C"]} />);
         var labels = TestUtils.scryRenderedDOMNodesWithTag(component, "label");
 
         ReactTestUtils.Simulate.click(labels[2], {});
@@ -122,7 +122,7 @@ describe("RockerButton", function () {
     });
 
     it("stateless: will select initial index", function () {
-        var component = getComponent({ controlled: false, selectedIndex: 2 });
+        var component = getComponent({ stateless: false, selectedIndex: 2 });
         var manager = component.refs.RockerButtonStateful;
         var rocker = manager.refs.RockerButtonStateless;
         var container = rocker.refs.container;
@@ -132,7 +132,7 @@ describe("RockerButton", function () {
     });
 
     it("stateless: will select initial item", function () {
-        var component = getComponent({ controlled: false, selected: "C" });
+        var component = getComponent({ stateless: false, selected: "C" });
         var manager = component.refs.RockerButtonStateful;
         var rocker = manager.refs.RockerButtonStateless;
         var container = rocker.refs.container;
@@ -179,5 +179,33 @@ describe("RockerButton", function () {
 
         expect(console.warn).not.toBeCalled();
         delete process.env.NODE_ENV;
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("produces stateful/stateless components correctly given controlled prop", function () {
+        var component = ReactTestUtils.renderIntoDocument(<RockerButton controlled={false} labels={["1", "2"]} />);
+        var stateful = component.refs.RockerButtonStateful;
+        var stateless = component.refs.RockerButtonStateless;
+
+        expect(stateful).toBeTruthy();
+        expect(stateless).toBeFalsy();
+
+        component = ReactTestUtils.renderIntoDocument(<RockerButton controlled={true} labels={["1", "2"]} />);
+        stateful = component.refs.RockerButtonStateful;
+        stateless = component.refs.RockerButtonStateless;
+        
+        expect(stateless).toBeTruthy();
+        expect(stateful).toBeFalsy();
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("logs warning for deprecated controlled prop", function () {
+        console.warn = jest.genMockFunction();
+
+        ReactTestUtils.renderIntoDocument(<RockerButton labels={["1", "2"]} />);
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use stateless instead of controlled. " +
+            "Support for controlled will be removed in next version");
     });
 });

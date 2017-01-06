@@ -102,12 +102,12 @@ var SelectionListDemo = React.createClass({
                     className="input-selection-list-tooltip"
                     label="Single Selection List"
                     showClose={false}
-                    controlled={false}
+                    stateless={false}
                     onToggle={function () {}}>
 
                     <SelectionList
                         data-id="single-select-1"
-                        controlled={false}
+                        stateless={false}
                         type={SelectionList.ListType.SINGLE}
                         items={this._singleSelectItems}
                         selectedItemIds={this.state.singleSelectId1}
@@ -127,7 +127,7 @@ var SelectionListDemo = React.createClass({
                 </p>
                 <SelectionList
                     data-id="single-select-2"
-                    controlled={false}
+                    stateless={false}
                     type={SelectionList.ListType.SINGLE}
                     items={this._singleSelectItems}
                     selectedItemIds={this.state.singleSelectId2}
@@ -146,7 +146,7 @@ var SelectionListDemo = React.createClass({
                 </p>
                 <SelectionList
                     data-id="single-select-3"
-                    controlled={false}
+                    stateless={false}
                     type={SelectionList.ListType.SINGLE}
                     items={this._singleSelectItems}
                     selectedItemIds={this.state.singleSelectId3}
@@ -174,12 +174,12 @@ var SelectionListDemo = React.createClass({
                     className="input-selection-list-tooltip"
                     label="Multi Selection List"
                     showClose={false}
-                    controlled={false}
+                    stateless={false}
                     onToggle={function () {}}>
 
                     <SelectionList
                         data-id="multi-select-1"
-                        controlled={false}
+                        stateless={false}
                         type={SelectionList.ListType.MULTI}
                         items={this._multiSelectItems}
                         selectedItemIds={this.state.multiSelectIds1}
@@ -204,12 +204,12 @@ var SelectionListDemo = React.createClass({
                             count={this.state.multiSelectIds4.length} />
                         )}
                     showClose={false}
-                    controlled={false}
+                    stateless={false}
                     onToggle={function () {}}>
 
                     <SelectionList
                         data-id="multi-select-4"
-                        controlled={false}
+                        stateless={false}
                         type={SelectionList.ListType.MULTI}
                         items={this._multiSelectItems}
                         selectedItemIds={this.state.multiSelectIds4}
@@ -252,7 +252,7 @@ var SelectionListDemo = React.createClass({
                 </div>
                 <SelectionList
                     data-id="multi-select-3"
-                    controlled={false}
+                    stateless={false}
                     type={SelectionList.ListType.MULTI}
                     items={this._multiSelectItems}
                     selectedItemIds={this.state.multiSelectIds3}

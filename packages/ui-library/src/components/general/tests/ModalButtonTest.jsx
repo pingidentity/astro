@@ -314,7 +314,7 @@ describe("ModalButtonTest", function () {
             activatorContent: "some text",
             onOpen: jest.genMockFunction().mockReturnValue(true),
             onClose: jest.genMockFunction().mockReturnValue(true),
-            controlled: true
+            stateless: true
         });
 
         expect(component.refs.ModalButtonStateless).toBeDefined();
@@ -325,7 +325,7 @@ describe("ModalButtonTest", function () {
                 activatorContent: linkCallback,
                 onOpen: jest.genMockFunction(),
                 onClose: jest.genMockFunction().mockReturnValue(true),
-                controlled: true,
+                stateless: true,
                 expanded: true,
                 closeOnBgClick: false
             }),
@@ -340,7 +340,7 @@ describe("ModalButtonTest", function () {
                 activatorContent: linkCallback,
                 onOpen: jest.genMockFunction(),
                 onClose: jest.genMockFunction().mockReturnValue(true),
-                controlled: true,
+                stateless: true,
                 expanded: true,
                 closeOnBgClick: true
             }),
@@ -348,6 +348,34 @@ describe("ModalButtonTest", function () {
 
         ReactTestUtils.Simulate.click(modalBg);
         expect(component.props.onClose.mock.calls.length).toBe(1);
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("produces stateful/stateless components correctly given controlled prop", function () {
+        var component = getComponentWithoutDefaults({ controlled: false });
+        var stateful = component.refs.ModalButtonStateful;
+        var stateless = component.refs.ModalButtonStateless;
+
+        expect(stateful).toBeTruthy();
+        expect(stateless).toBeFalsy();
+
+        component = getComponentWithoutDefaults({ controlled: true });
+        stateful = component.refs.ModalButtonStateful;
+        stateless = component.refs.ModalButtonStateless;
+        
+        expect(stateless).toBeTruthy();
+        expect(stateful).toBeFalsy();
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("logs warning for deprecated controlled prop", function () {
+        console.warn = jest.genMockFunction();
+
+        getComponent();
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use stateless instead of controlled. " +
+            "Support for controlled will be removed in next version");
     });
 
 
@@ -359,13 +387,13 @@ describe("ModalButtonTest", function () {
             containerStyle: "deprecated",
             activatorContainerStyle: "deprecated"
         });
-        expect(console.warn.mock.calls[0][0]).toEqual(
+        expect(console.warn.mock.calls[1][0]).toEqual(
             "Deprecated: use data-id instead of id. Support for id will be removed in next version"
         );
-        expect(console.warn.mock.calls[1][0]).toEqual(
+        expect(console.warn.mock.calls[2][0]).toEqual(
             "Deprecated: use className instead of containerStyle. Support for containerStyle will be removed in next version" // eslint-disable-line max-len
         );
-        expect(console.warn.mock.calls[2][0]).toEqual(
+        expect(console.warn.mock.calls[3][0]).toEqual(
             "Deprecated: use activatorContainerClassName instead of activatorContainerStyle. Support for activatorContainerStyle will be removed in next version" // eslint-disable-line max-len
         );
 
@@ -374,10 +402,10 @@ describe("ModalButtonTest", function () {
             linkContent: "deprecated",
             linkStyle: "deprecated"
         });
-        expect(console.warn.mock.calls[0][0]).toEqual(
+        expect(console.warn.mock.calls[1][0]).toEqual(
             "Deprecated: use activatorContent instead of linkContent. Support for linkContent will be removed in next version" // eslint-disable-line max-len
         );
-        expect(console.warn.mock.calls[1][0]).toEqual(
+        expect(console.warn.mock.calls[2][0]).toEqual(
             "Deprecated: use activatorContentClassName instead of linkStyle. Support for linkStyle will be removed in next version" // eslint-disable-line max-len
         );
 
@@ -386,10 +414,10 @@ describe("ModalButtonTest", function () {
             value: "deprecated",
             buttonStyle: "deprecated"
         });
-        expect(console.warn.mock.calls[0][0]).toEqual(
+        expect(console.warn.mock.calls[1][0]).toEqual(
             "Deprecated: use activatorButtonLabel instead of value. Support for value will be removed in next version" // eslint-disable-line max-len
         );
-        expect(console.warn.mock.calls[1][0]).toEqual(
+        expect(console.warn.mock.calls[2][0]).toEqual(
             "Deprecated: use activatorButtonClassName instead of buttonStyle. Support for buttonStyle will be removed in next version" // eslint-disable-line max-len
         );
     });

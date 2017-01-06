@@ -20,10 +20,13 @@ var React = require("re-react"),
  *     DEPRECATED. Use "data-id" instead.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
- * @param {boolean} [controlled=true]
- *     WARNING. Default value will be set to false from next version. To enable the component to be externally managed.
+ * @param {boolean} [stateless]
+ *     WARNING. Default value for "stateless" will be set to false from next version.
+ *     To enable the component to be externally managed.
  *     True will relinquish control to the component's owner. False or not specified will cause the component to manage
  *     state internally.
+ * @param {boolean} [controlled=true]
+ *     DEPRECATED. Use "stateless" instead.
  * @param {string} [contentClassName]
  *     CSS classes to apply to content container
  * @param {string} [contentClassNames]
@@ -78,29 +81,36 @@ var React = require("re-react"),
  **/
 
 var DetailsTooltip = React.createClass({
+    displayName: "DetailsTooltip",
+
+    propTypes: {
+        controlled: React.PropTypes.bool, //TODO: Remove in new version
+        stateless: React.PropTypes.bool
+    },
+
     getDefaultProps: function () {
         return {
-            controlled: true
+            controlled: true //TODO: change to stateless with false default in new version
         };
     },
 
     close: function () {
-        if (!this.props.controlled) {
+        if (!this.props.stateless || !this.props.controlled) { //TODO: remove "controlled" in new version
             this.refs.manager.close();
         }
     },
     
     componentWillMount: function () {
-        if (this.props.controlled && !Utils.isProduction()) {
-            console.warn(
-                "** Default value for 'controlled' in `DetailsTooltip` " +
-                "component will be set to 'false' from next version");
+        if (!Utils.isProduction()) {
+            console.warn(Utils.deprecateMessage("controlled", "stateless", "true", "false"));
         }
     },
 
     render: function () {
+        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
+
         return (
-            this.props.controlled
+            stateless
                 ? React.createElement(DetailsTooltipStateless, //eslint-disable-line
                     _.defaults({ ref: "tooltip" }, this.props), this.props.children)
                 : React.createElement(DetailsTooltipStateful, //eslint-disable-line
@@ -110,6 +120,7 @@ var DetailsTooltip = React.createClass({
 });
 
 var DetailsTooltipStateless = React.createClass({
+    displayName: "DetailsTooltipStateless",
 
     propTypes: {
         "data-id": React.PropTypes.string,
@@ -366,6 +377,8 @@ var DetailsTooltipStateless = React.createClass({
 });
 
 var DetailsTooltipStateful = React.createClass({
+    displayName: "DetailsTooltipStateful",
+
     getInitialState: function () {
         return {
             open: this.props.open

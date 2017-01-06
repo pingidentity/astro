@@ -30,7 +30,7 @@ describe("Section", function () {
 
     it("Stateful: renders collapsed state", function () {
         var view = ReactTestUtils.renderIntoDocument(
-            <Section title="My Section" controlled={false}>
+            <Section title="My Section" stateless={false}>
                 <div data-id="iShouldBeHidden">My Content</div>
             </Section>
         );
@@ -66,7 +66,7 @@ describe("Section", function () {
 
     it("Stateful: renders expanded state", function () {
         var view = ReactTestUtils.renderIntoDocument(
-            <Section title="My Section" expanded={true} controlled={false}>
+            <Section title="My Section" expanded={true} stateless={false}>
                 <div data-id="iShouldBeVisible">My Content</div>
             </Section>
         );
@@ -98,7 +98,7 @@ describe("Section", function () {
 
     it("Stateful: renders custom classname and data-id", function () {
         var view = ReactTestUtils.renderIntoDocument(
-            <Section title="My Section" className="extra" data-id="my-section" expanded={true} controlled={false}>
+            <Section title="My Section" className="extra" data-id="my-section" expanded={true} stateless={false}>
                 content
             </Section>
         );
@@ -129,7 +129,7 @@ describe("Section", function () {
 
     it("Stateful: callback toggles expanded", function () {
         var view = ReactTestUtils.renderIntoDocument(
-            <Section title="My Section" controlled={false}>
+            <Section title="My Section" stateless={false}>
                 <div data-id="iShouldBeHidden">My Content</div>
             </Section>
         );
@@ -146,7 +146,7 @@ describe("Section", function () {
     // TODO To be removed once "id" support is discontnued.
     it("render component with id", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            <Section id="sectionWithId" title="My Section" controlled={false}>
+            <Section id="sectionWithId" title="My Section" stateless={false}>
                 <div data-id="iShouldBeHidden">My Content</div>
             </Section>
         );
@@ -158,7 +158,7 @@ describe("Section", function () {
 
     it("render component with default data-id", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            <Section title="My Section" controlled={false}>
+            <Section title="My Section" stateless={false}>
                 <div data-id="iShouldBeHidden">My Content</div>
             </Section>
         );
@@ -168,23 +168,40 @@ describe("Section", function () {
         expect(element).toBeDefined();
     });
 
-    it("log warning in console for controlled default value", function () {
+    //TODO: remove when controlled no longer supported
+    it("produces stateful/stateless components correctly given controlled prop", function () {
+        var component = ReactTestUtils.renderIntoDocument(<Section controlled={false} />);
+        var stateful = component.refs.SectionStateful;
+        var stateless = component.refs.SectionStateless;
+
+        expect(stateful).toBeTruthy();
+        expect(stateless).toBeFalsy();
+
+        component = ReactTestUtils.renderIntoDocument(<Section controlled={true} />);
+        stateful = component.refs.SectionStateful;
+        stateless = component.refs.SectionStateless;
+        
+        expect(stateless).toBeTruthy();
+        expect(stateful).toBeFalsy();
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("logs warning for deprecated controlled prop", function () {
         console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <Section title="My Section">
-                <div data-id="content">My Content</div>
-            </Section>
-        );
+
+        ReactTestUtils.renderIntoDocument(<Section />);
 
         expect(console.warn).toBeCalledWith(
-            "** Default value for 'controlled' in Section component will be set to 'false' from next version");
+            "Deprecated: use stateless instead of controlled. " +
+            "The default for stateless will be false instead of true. " +
+            "Support for controlled will be removed in next version");
     });
 
     // TODO To be removed once "id" support is discontinued.
     it("log warning in console for id", function () {
         console.warn = jest.genMockFunction();
         ReactTestUtils.renderIntoDocument(
-            <Section id="sectionWithId" title="My Section" controlled={false}>
+            <Section id="sectionWithId" title="My Section" stateless={false}>
                 <div data-id="iShouldBeHidden">My Content</div>
             </Section>
         );
@@ -197,7 +214,7 @@ describe("Section", function () {
     it("does not log warning in console without id", function () {
         console.warn = jest.genMockFunction();
         ReactTestUtils.renderIntoDocument(
-            <Section data-id="sectionWithDataId" title="My Section" controlled={false}>
+            <Section data-id="sectionWithDataId" title="My Section" stateless={false}>
                 <div data-id="iShouldBeHidden">My Content</div>
             </Section>
         );
@@ -213,7 +230,7 @@ describe("Section", function () {
 
         console.warn = jest.genMockFunction();
         ReactTestUtils.renderIntoDocument(
-            <Section id="sectionWithId" title="My Section" controlled={false}>
+            <Section id="sectionWithId" title="My Section" stateless={false}>
                 <div data-id="iShouldBeHidden">My Content</div>
             </Section>
         );
@@ -228,7 +245,7 @@ describe("Section", function () {
 
         console.warn = jest.genMockFunction();
         ReactTestUtils.renderIntoDocument(
-            <Section title="My Section" controlled={false}>
+            <Section title="My Section" stateless={false}>
                 <div data-id="iShouldBeHidden">My Content</div>
             </Section>
         );

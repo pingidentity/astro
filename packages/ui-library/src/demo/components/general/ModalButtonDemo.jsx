@@ -8,7 +8,7 @@ var ModalButton = require("./../../../components/general/ModalButton.jsx");
 */
 var ModalButtonDemo = React.createClass({
 
-    numControlledDemos: 3,
+    numStatelessDemos: 3,
 
     _handleOpen: function (index) {
         var newState = {};
@@ -27,7 +27,7 @@ var ModalButtonDemo = React.createClass({
     },
 
     componentWillMount: function () {
-        for (var i=1; i<=this.numControlledDemos; i+=1) {
+        for (var i=1; i<=this.numStatelessDemos; i+=1) {
             this["_handleOpen" + i] = this._handleOpen.bind(null, i);
             this["_handleClose" + i] = this._handleClose.bind(null, i);
         }
@@ -36,7 +36,7 @@ var ModalButtonDemo = React.createClass({
     getInitialState: function () {
         var initialState = {};
 
-        for (var i=1; i<=this.numControlledDemos; i+=1) {
+        for (var i=1; i<=this.numStatelessDemos; i+=1) {
             initialState["modalExpanded" + i] = false;
         }
 
@@ -50,7 +50,7 @@ var ModalButtonDemo = React.createClass({
                     <ModalButton data-id="default-example"
                             activatorButtonLabel="Open Default Modal"
                             modalTitle="Default Modal"
-                            controlled={false}>
+                            stateless={false}>
                         <div>
                             <p>
                                 Default modals size both vertically and horizontally with the content.
@@ -65,16 +65,16 @@ var ModalButtonDemo = React.createClass({
                     </ModalButton>
                 </div>
                 <div className="input-row">
-                    <ModalButton data-id="controlled-example"
-                            activatorButtonLabel="Open Controlled Modal"
-                            modalTitle="Controlled Modal"
-                            controlled={true}
+                    <ModalButton data-id="stateless-example"
+                            activatorButtonLabel="Open Stateless Modal"
+                            modalTitle="Stateless Modal"
+                            stateless={true}
                             onOpen={this._handleOpen1}
                             onClose={this._handleClose1}
                             initiallyExpanded={false}
                             expanded={this.state.modalExpanded1}>
                         <div>
-                            A controlled modals expanded state is controlled by the boolean "expanded" prop. When true
+                            A stateless modals expanded state is stateless by the boolean "expanded" prop. When true
                             the modal will display.
                         </div>
                     </ModalButton>
@@ -97,7 +97,7 @@ var ModalButtonDemo = React.createClass({
                             closeOnBgClick={true}>
                         <div>
                             When you set the "closeOnBgClick" prop to "true", clicking the modal background will trigger
-                            the onClose callback. If you are using the "controlled" or stateless version, you will
+                            the onClose callback. If you are using the "stateless" or stateless version, you will
                             need to pass the onClose callback as well. For the stateful version the onClose callback
                             is not required.
                         </div>
@@ -109,7 +109,7 @@ var ModalButtonDemo = React.createClass({
                             modalTitle="Dialog Modal"
                             type={ModalButton.Modal.Type.DIALOG}
                             ref="dialogModal"
-                            controlled={true}
+                            stateless={true}
                             onOpen={this._handleOpen2}
                             onClose={this._handleClose2}
                             expanded={this.state.modalExpanded2}>
@@ -137,7 +137,7 @@ var ModalButtonDemo = React.createClass({
                             modalTitle=""
                             type={ModalButton.Modal.Type.ALERT}
                             ref="alertModal"
-                            controlled={true}
+                            stateless={true}
                             onOpen={this._handleOpen3}
                             onClose={this._handleClose3}
                             expanded={this.state.modalExpanded3}>

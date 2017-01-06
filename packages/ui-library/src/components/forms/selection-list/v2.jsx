@@ -1,5 +1,6 @@
 var React = require("react"),
     _ = require("underscore"),
+    Utils = require("../../../util/Utils.js"),
     Constants = require("./v2-constants"),
     Stateless = require("./v2-stateless.jsx"),
     Stateful = require("./v2-stateful.jsx");
@@ -35,9 +36,11 @@ var React = require("react"),
  *     To define the base "data-id" value for top-level HTML container
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container
- * @param {boolean} [controlled=false]
+ * @param {boolean} [stateless]
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally.
+ * @param {boolean} [controlled=false]
+*     DEPRECATED. Use "stateless" instead.
  * @param {SelectionList.types} [type=SelectionList.types.SINGLE]
  *     Enum to specify the type of selection list
  * @param {SelectionListItem[]} items
@@ -56,18 +59,28 @@ var React = require("react"),
  *     (for the first 3 chars is uses the "startsWith" operator, then "contains" from there on).
  */
 var SelectionList = React.createClass({
+
     propTypes: {
-        controlled: React.PropTypes.bool
+        controlled: React.PropTypes.bool, //TODO: remove in new version
+        stateless: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
         return {
-            controlled: false
+            controlled: false //TODO: change to stateless prop in new version
         };
     },
 
+    componentWillMount: function () {
+        if (!Utils.isProduction()) {
+            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+        }
+    },
+
     render: function () {
-        return this.props.controlled
+        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
+
+        return stateless
             ? React.createElement(Stateless, _.defaults({ ref: "SelectionListStateless" }, this.props))
             : React.createElement(Stateful, _.defaults({ ref: "SelectionListStateful" }, this.props));
     }

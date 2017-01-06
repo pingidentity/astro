@@ -6,7 +6,7 @@ var React = require("react"),
 /**
  * @name SelectionListStateful
  * @memberof SelectionList
- * @desc This is a wrapper around the stateful (controlled=false) SelectionList to give the user search support
+ * @desc This is a wrapper around the stateful (stateless=false) SelectionList to give the user search support
  *    without having to implement that logic.
  */
 module.exports = React.createClass({

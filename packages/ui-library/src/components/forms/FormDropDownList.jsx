@@ -4,6 +4,7 @@ var React = require("react"),
     classnames = require("classnames"),
     FormLabel = require("./FormLabel.jsx"),
     FormError = require("./FormError.jsx"),
+    Utils = require("../../util/Utils.js"),
     KeyboardUtils = require("../../util/KeyboardUtils.js"),
     callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutsideOfContainer;
 
@@ -48,9 +49,11 @@ var React = require("react"),
 *    To define the base "data-id" value for the top-level HTML container.
 * @param {string} [className]
 *    CSS classes to set on the top-level HTML container.
-* @param {boolean} [controlled=false]
+* @param {boolean} [stateless]
 *     To enable the component to be externally managed. True will relinquish control to the component's owner.
 *     False or not specified will cause the component to manage state internally.
+* @param {boolean} [controlled=false]
+*     DEPRECATED. Use "stateless" instead.
 *
 * @param {array<FormDropDownList~option>} options
 *    Array of options for the dropdown list. Each option should have a label.
@@ -469,18 +472,27 @@ var FormDropDownList = React.createClass({
     displayName: "FormDropDownList",
 
     propTypes: {
-        controlled: React.PropTypes.bool
+        controlled: React.PropTypes.bool, //TODO: remove in new version
+        stateless: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
         return {
-            controlled: false
+            controlled: false //TODO: change to stateless with in new version
         };
     },
 
+    componentWillMount: function () {
+        if (!Utils.isProduction()) {
+            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+        }
+    },
+
     render: function () {
+        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
+
         return (
-            this.props.controlled
+            stateless
                 ? React.createElement(FormDropDownListStateless,
                     _.defaults({ ref: "FormDropDownListStateless" }, this.props))
                 : React.createElement(FormDropDownListStateful,

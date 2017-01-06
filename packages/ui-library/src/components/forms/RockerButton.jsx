@@ -35,9 +35,11 @@ var React = require("react"),
 *     DEPRECATED. Use "data-id" instead. To define the base "id" value for the top-level HTML container.
 * @param {string} [className]
 *     CSS classes to be set on the top-level HTML container.
-* @param {boolean} [controlled=false]
+* @param {boolean} [stateless]
 *     To enable the component to be externally managed. True will relinquish control to the component's owner.
 *     False or not specified will cause the component to manage state internally.
+* @param {boolean} [controlled=false]
+ *     DEPRECATED. Use "stateless" instead.
 *
 * @param {array} labels
 *     Array of label strings to use as button titles.
@@ -48,8 +50,8 @@ var React = require("react"),
 *     Callback to be triggered when selection changes.
 *
 * @param {string} [selected]
-*     The text value of the item to select initially. Used only when controlled=false.
-*     Controlled components must use 'selectedIndex'. Is mutually exclusive with "selectedIndex".
+*     The text value of the item to select initially. Used only when stateless=false.
+*     stateless components must use 'selectedIndex'. Is mutually exclusive with "selectedIndex".
 * @param {number} [selectedIndex=0]
 *     The index of the selected label. Is mutually exclusive with "selected".
 *
@@ -67,18 +69,27 @@ var React = require("react"),
 module.exports = React.createClass({
 
     propTypes: {
-        controlled: React.PropTypes.bool
+        controlled: React.PropTypes.bool, //TODO: remove in new version
+        stateless: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
         return {
-            controlled: false
+            controlled: false //TODO: change to stateless in new version
         };
     },
 
+    componentWillMount: function () {
+        if (!Utils.isProduction()) {
+            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+        }
+    },
+
     render: function () {
+        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
+
         return (
-            this.props.controlled
+            stateless
                 ? <RockerButtonStateless ref="RockerButtonStateless" {...this.props} />
                 : <RockerButtonStateful ref="RockerButtonStateful" {...this.props} />);
     }

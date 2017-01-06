@@ -10,7 +10,7 @@ var React = require("re-react"),
 /**
  * @name SelectionListStateless
  * @memberof SelectionList
- * @desc This is a wrapper around the stateful (controlled=true) SelectionList.
+ * @desc This is a wrapper around the stateful (stateless=true) SelectionList.
  */
 module.exports = React.createClass({
     displayName: "SelectionListStateless",

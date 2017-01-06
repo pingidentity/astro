@@ -144,10 +144,10 @@ describe("ConditionalFieldset", function () {
         expect(options.length).toBe(3);
     });
 
-    it("controlled change option", function () {
+    it("stateless change option", function () {
         var component = getGenericConditionalFieldset({
             "data-id": dataId,
-            controlled: true,
+            stateless: true,
             onValueChange: callback,
             selectedIndex: selectedIndex,
             type: "select"
@@ -188,5 +188,33 @@ describe("ConditionalFieldset", function () {
         expect(form1).toBeTruthy();
         form2 = TestUtils.findRenderedDOMNodeWithDataId(component, "option2");
         expect(form2).toBeFalsy();
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("produces stateful/stateless components correctly given controlled prop", function () {
+        var component = getGenericConditionalFieldset({ controlled: false });
+        var stateful = component.refs.ConditionalFieldsetStateful;
+        var stateless = component.refs.ConditionalFieldsetStateless;
+
+        expect(stateful).toBeTruthy();
+        expect(stateless).toBeFalsy();
+
+        component = getGenericConditionalFieldset({ controlled: true });
+        stateful = component.refs.ConditionalFieldsetStateful;
+        stateless = component.refs.ConditionalFieldsetStateless;
+        
+        expect(stateless).toBeTruthy();
+        expect(stateful).toBeFalsy();
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("logs warning for deprecated controlled prop", function () {
+        console.warn = jest.genMockFunction();
+
+        getGenericConditionalFieldset();
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use stateless instead of controlled. " +
+            "Support for controlled will be removed in next version");
     });
 });

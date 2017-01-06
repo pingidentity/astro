@@ -55,7 +55,7 @@ var FormTimeZoneDemo = React.createClass({
                 <div className="input-row">
                     <FormTimeZone
                         data-id="timezone-stateless"
-                        controlled={true}
+                        stateless={true}
                         filterByCountry={this.state.filterByCountry}
                         labelText="Stateless Version (where abbreviation is displayed instead)"
                         onValueChange={this._handleChange}
@@ -72,7 +72,7 @@ var FormTimeZoneDemo = React.createClass({
                 <div className="input-row">
                     <FormTimeZone
                         data-id="timezone-stateful"
-                        controlled={false}
+                        stateless={false}
                         labelText="Stateful Version"
                         labelHelpText="Help hints are optional for both versions"
                         helpClassName="bottom right"

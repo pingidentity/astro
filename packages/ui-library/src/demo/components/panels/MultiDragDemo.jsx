@@ -148,7 +148,7 @@ var MultiDragDemo = React.createClass({
     },
 
     /*
-     * When a drop event happens, the MultiDragStateless (controlled=true) component simply makes a callback describing
+     * When a drop event happens, the MultiDragStateless (stateless=true) component simply makes a callback describing
      * what happend. It's up to the user to decide what to do with that operation.
      *
      * Where it gets hairy is if a drop is happening to and from a filtered list.
@@ -253,7 +253,7 @@ var MultiDragDemo = React.createClass({
     getInitialState: function () {
         return {
             demoType: "STATEFUL",
-            columns: data.columns //used for stateful (controlled=false) demo
+            columns: data.columns //used for stateful (stateless=false) demo
         };
     },
 
@@ -290,9 +290,9 @@ var MultiDragDemo = React.createClass({
 
                 {this.state.demoType === "STATELESS" &&
                     <div>
-                        <h2>Stateless (controlled=true)</h2>
+                        <h2>Stateless (stateless=true)</h2>
                         <MultiDrag
-                                controlled={true}
+                                stateless={true}
                                 showSearchOnAllColumns={this.props.demo.search === "all"}
                                 showSearch={this.props.demo.search === "first"}
                                 onSearch={this._handleSearchStateless}
@@ -313,7 +313,7 @@ var MultiDragDemo = React.createClass({
                 }
                 {this.state.demoType === "STATEFUL" &&
                     <div>
-                        <h2>Stateful (controlled=false)</h2>
+                        <h2>Stateful (stateless=false)</h2>
                         <MultiDrag ref="multi-drag-demo-stateful"
                                 showSearchOnAllColumns={this.props.demo.search === "all"}
                                 showSearch={this.props.demo.search === "first"}

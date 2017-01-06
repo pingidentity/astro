@@ -8,6 +8,7 @@ var React = require("react"),
     FormError = require("./FormError.jsx"),
     FormLabel = require("./FormLabel.jsx"),
     KeyCodes = require("../../util/KeyboardUtils.js").KeyCodes,
+    Utils = require("../../util/Utils.js"),
     _ = require("underscore");
 
 /**
@@ -40,9 +41,12 @@ var React = require("react"),
 *
 * @param {string} [data-id=time-zone]
 *     The data-id of the component
-* @param {boolean} [controlled=false]
+* @param {boolean} [stateless]
+*     WARNING. Default value for "stateless" will be set to true from next version.
 *     To enable the component to be externally managed. True will relinquish control to the component's owner.
 *     False or not specified will cause the component to manage state internally.
+* @param {boolean} [controlled=false]
+*     DEPRECATED. Use "stateless" instead.
 * @param {string} [className]
 *     Class name(s) to add to the top-level container/div
 *
@@ -78,7 +82,7 @@ var React = require("react"),
 *
 * @example
 *     <FormTimeZone
-*         controlled={true}
+*         stateless={true}
 *         open={this.state.open}
 *         searchString={this.state.searchString}
 *         value={this.state.value}
@@ -94,23 +98,34 @@ var React = require("react"),
 module.exports = React.createClass({
 
     propTypes: {
-        controlled: React.PropTypes.bool
+        controlled: React.PropTypes.bool, //TODO: remove in new version
+        stateless: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
         return {
-            controlled: false
+            controlled: false //TODO: change to stateless with true default in new version
         };
     },
 
+    componentWillMount: function () {
+        if (!Utils.isProduction()) {
+            console.warn(Utils.deprecateMessage("controlled", "stateless", "false", "true"));
+        }
+    },
+
     isValidTimeZone: function (zoneText) {
-        return this.props.controlled
+        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
+
+        return stateless
             ? this.refs.TimeZoneStateless.isValidTimeZone(zoneText)
             : this.refs.TimeZoneStateful.isValidTimeZone(zoneText);
     },
 
     render: function () {
-        return this.props.controlled
+        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
+
+        return stateless
             ? React.createElement(TimeZoneStateless, //eslint-disable-line no-use-before-define
                 _.defaults({ ref: "TimeZoneStateless" }, this.props))
             : React.createElement(TimeZoneStateful, //eslint-disable-line no-use-before-define

@@ -47,9 +47,11 @@ var React = require("re-react"),
 *     To define the base "data-id" value for top-level HTML container.
 * @param {string} [className]
 *     CSS classes to set on the top-level HTML container.
-* @param {boolean} [controlled=false]
+* @param {boolean} [stateless]
 *    To enable the component to be externally managed. True will relinquish control to the component's owner.
 *    False or not specified will cause the component to manage state internally.
+* @param {boolean} [controlled=false]
+*     DEPRECATED. Use "stateless" instead.
 *
 * @param {string} [countryCode="us" = USA]
 *     The country code corresponding to the dial code for the country to be selected by default.
@@ -63,7 +65,7 @@ var React = require("re-react"),
 * @param {boolean} [open=false]
 *     State of the open/closed dropdown menu.
 * @param {I18nPhoneInput~onToggle} [onToggle]
-*     Callback to be triggered when open/close state changes. Used only when controlled=true.
+*     Callback to be triggered when open/close state changes. Used only when stateless=true.
 *
 * @param {number} [searchIndex]
 *     The index of the country that was just searched to enable highlighing.
@@ -96,17 +98,26 @@ var React = require("re-react"),
 module.exports = React.createClass({
 
     propTypes: {
-        controlled: React.PropTypes.bool
+        controlled: React.PropTypes.bool, //TODO: remove in new version
+        stateless: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
         return {
-            controlled: false
+            controlled: false //TODO: change to stateless in new version
         };
     },
 
+    componentWillMount: function () {
+        if (!Utils.isProduction()) {
+            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+        }
+    },
+
     render: function () {
-        return this.props.controlled
+        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
+
+        return stateless
             ? React.createElement(I18nPhoneInputStateless, //eslint-disable-line
                 _.defaults({ ref: "I18nPhoneInputStateless" }, this.props))
             : React.createElement(I18nPhoneInputStateful, //eslint-disable-line
@@ -119,7 +130,6 @@ var I18nPhoneInputStateless = React.createClass({
     propTypes: {
         "data-id": React.PropTypes.string,
         className: React.PropTypes.string,
-        controlled: React.PropTypes.bool,
         countryCode: React.PropTypes.string.affectsRendering,
         dialCode: React.PropTypes.oneOfType([
             React.PropTypes.string,
@@ -144,7 +154,6 @@ var I18nPhoneInputStateless = React.createClass({
         return {
             "data-id": "i18n-phone-input",
             className: "",
-            controlled: false,
             countryCode: "",
             dialCode: "",
             phoneNumber: "",

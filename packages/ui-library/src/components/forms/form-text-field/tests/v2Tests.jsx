@@ -33,7 +33,7 @@ describe("FormTextField", function () {
 
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
-            controlled: false,
+            stateless: false,
             labelText: "",
             required: legacyProp(opts, "required", "isRequired", false)
         });
@@ -64,7 +64,7 @@ describe("FormTextField", function () {
         var handleReveal = jest.genMockFunction();
         var component = getComponent({
             showReveal: true,
-            controlled: true,
+            stateless: true,
             onToggleReveal: handleReveal
         });
         var reveal = TestUtils.findRenderedDOMNodeWithDataId(component, "reveal");
@@ -259,11 +259,40 @@ describe("FormTextField", function () {
         var type = "email",
             component = getComponent({
                 type: type,
-                controlled: true
+                stateless: true
             }),
             input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
 
         expect(input.getAttribute("type")).toEqual(type);
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("produces stateful/stateless components correctly given controlled prop", function () {
+        var component = ReactTestUtils.renderIntoDocument(<FormTextField controlled={false} />);
+        var stateful = component.refs.stateful;
+        var stateless = component.refs.stateless;
+
+        expect(stateful).toBeTruthy();
+        expect(stateless).toBeFalsy();
+
+        component = ReactTestUtils.renderIntoDocument(<FormTextField controlled={true} />);
+        stateful = component.refs.stateful;
+        stateless = component.refs.stateless;
+        
+        expect(stateless).toBeTruthy();
+        expect(stateful).toBeFalsy();
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("logs warning for deprecated controlled prop", function () {
+        console.warn = jest.genMockFunction();
+
+        getComponent();
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use stateless instead of controlled. " +
+            "The default for stateless will be true instead of false. " +
+            "Support for controlled will be removed in next version");
     });
 
     it("logs warning for type color when not in production", function () {

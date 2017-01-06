@@ -23,7 +23,8 @@ var SectionDemo = React.createClass({
     render: function () {
         return (
             <div>
-                <Section title="My section Stateless"
+                <Section stateless={true}
+                        title="My section Stateless"
                         onToggle={this._toggleFirst}
                         expanded={this.state.firstSectionOpen}>
                     <div>
@@ -34,7 +35,7 @@ var SectionDemo = React.createClass({
                     </div>
                 </Section>
                 <Section title="My section Stateful"
-                        controlled={false}
+                        stateless={false}
                         data-id="section-2"
                         className="extra">
                      <div>

@@ -37,9 +37,11 @@ var React = require("react"),
 *     To define the base "data-id" value for top-level HTML container.
 * @param {string} [className]
 *     CSS classes to set on the top-level HTML container.
-* @param {boolean} [controlled=false]
+* @param {boolean} [stateless]
 *    To enable the component to be externally managed. True will relinquish control to the component's owner.
 *    False or not specified will cause the component to manage state internally.
+* @param {boolean} [controlled=false]
+*     DEPRECATED. Use "stateless" instead.
 * @param {string} [countryCode]
 *     The country code to be selected by default.
 * @param {I18nCountrySelector~onValueChange}
@@ -47,7 +49,7 @@ var React = require("react"),
 * @param {boolean} [open=false]
 *     State of the open/closed dropdown menu.
 * @param {I18nCountrySelector~onToggle} [onToggle]
-*     Callback to be triggered when open/close state changes. Used only when controlled=true.
+*     Callback to be triggered when open/close state changes. Used only when stateless=true.
 * @param {number} [searchIndex]
 *     Index of searched element if found
 * @param {string} [searchString]
@@ -62,17 +64,26 @@ var React = require("react"),
 
 module.exports = React.createClass({
     propTypes: {
-        controlled: React.PropTypes.bool
+        controlled: React.PropTypes.bool, //TODO: remove in new version
+        stateless: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
         return {
-            controlled: false
+            controlled: false //TODO: change to stateless in new version
         };
     },
 
+    componentWillMount: function () {
+        if (!Utils.isProduction()) {
+            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+        }
+    },
+
     render: function () {
-        return this.props.controlled
+        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
+
+        return stateless
             ? React.createElement(I18nCountrySelectorStateless, //eslint-disable-line
                 _.defaults({ ref: "I18nCountrySelectorStateless" }, this.props))
             : React.createElement(I18nCountrySelectorStateful, //eslint-disable-line

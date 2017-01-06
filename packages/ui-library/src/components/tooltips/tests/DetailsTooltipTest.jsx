@@ -26,12 +26,12 @@ describe("DetailsTooltip", function () {
     }
 
     it("managed component that starts open", function () {
-        var component = getComponent({ controlled: false });
+        var component = getComponent({ stateless: false });
         expect(component.refs.manager.state.open).toBe(true);
     });
 
     it("managed component", function () {
-        var component = getComponent({ controlled: false, open: false });
+        var component = getComponent({ stateless: false, open: false });
         var link = TestUtils.findRenderedDOMNodeWithDataId(component, "action-btn");
         expect(component.refs.manager.state.open).toBe(false);
 
@@ -126,7 +126,7 @@ describe("DetailsTooltip", function () {
         var callback = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip title="Title" label="Action" open={false} onToggle={callback}>
+            <DetailsTooltip stateless={true} title="Title" label="Action" open={false} onToggle={callback}>
                 <p>what ever callout content is</p>
             </DetailsTooltip>
         );
@@ -144,7 +144,7 @@ describe("DetailsTooltip", function () {
         var callback = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip title="Title" label="Action" open={true}
+            <DetailsTooltip stateless={true} title="Title" label="Action" open={true}
              onToggle={callback} showClose={false} hideOnClick={true}>
                 <p>what ever callout content is</p>
             </DetailsTooltip>
@@ -163,7 +163,7 @@ describe("DetailsTooltip", function () {
         var callback = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip title="Title" label="Action" open={true} onToggle={callback}>
+            <DetailsTooltip stateless={true} title="Title" label="Action" open={true} onToggle={callback}>
                 <p>what ever callout content is</p>
             </DetailsTooltip>
         );
@@ -180,7 +180,8 @@ describe("DetailsTooltip", function () {
         var callback = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip title="Title" label="Action" open={false} onToggle={callback} disabled={true}>
+            <DetailsTooltip stateless={true}
+                    title="Title" label="Action" open={false} onToggle={callback} disabled={true}>
                 <p>what ever callout content is</p>
             </DetailsTooltip>
         );
@@ -198,7 +199,7 @@ describe("DetailsTooltip", function () {
 
     it("is closing stateful component programatically", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip title="Title" label="Action" controlled={false} open={true}>
+            <DetailsTooltip title="Title" label="Action" stateless={false} open={true}>
                 <p>what ever callout content is</p>
             </DetailsTooltip>
         );
@@ -252,7 +253,7 @@ describe("DetailsTooltip", function () {
         var callback = jest.genMockFunction();
 
         ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip title="Title" label="Action" open={true} onToggle={callback}>
+            <DetailsTooltip stateless={true} title="Title" label="Action" open={true} onToggle={callback}>
                 <p>what ever callout content is</p>
             </DetailsTooltip>
         );
@@ -274,7 +275,8 @@ describe("DetailsTooltip", function () {
         window.removeEventListener = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
-                <Wrapper type={DetailsTooltip} title="Title" label="Action" open={true} onToggle={jest.genMockFn}>
+                <Wrapper type={DetailsTooltip}
+                        stateless={true} title="Title" label="Action" open={true} onToggle={jest.genMockFn}>
                     <p>what ever callout content is</p>
                 </Wrapper>);
 
@@ -348,17 +350,33 @@ describe("DetailsTooltip", function () {
             "Deprecated: use data-id instead of id.  Support for id will be removed in next version");
     });
 
-    // TODO To be removed once default value for controlled is changed to v2 standards
-    it("log warning in console for controlled default value", function () {
+    //TODO: remove when controlled no longer supported
+    it("produces stateful/stateless components correctly given controlled prop", function () {
+        var component = ReactTestUtils.renderIntoDocument(<DetailsTooltip controlled={false} />);
+        var stateful = component.refs.manager;
+        var stateless = component.refs.tooltip;
+
+        expect(stateful).toBeTruthy();
+        expect(stateless).toBeFalsy();
+
+        component = ReactTestUtils.renderIntoDocument(<DetailsTooltip controlled={true} />);
+        stateful = component.refs.manager;
+        stateless = component.refs.tooltip;
+        
+        expect(stateless).toBeTruthy();
+        expect(stateful).toBeFalsy();
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("logs warning for deprecated controlled prop", function () {
         console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip title="Title" label="Action">
-                <p>what ever callout content is</p>
-            </DetailsTooltip>
-        );
+
+        getComponent();
 
         expect(console.warn).toBeCalledWith(
-            "** Default value for 'controlled' in `DetailsTooltip` component will be set to 'false' from next version");
+            "Deprecated: use stateless instead of controlled. " +
+            "The default for stateless will be false instead of true. " +
+            "Support for controlled will be removed in next version");
     });
 
     it("is rendering position styling with positionClassName", function () {

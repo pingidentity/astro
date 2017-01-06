@@ -21,7 +21,7 @@ describe("DropDownButton", function () {
 
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
             <DropDownButton title="Test Drop Down"
-                            controlled={true}
+                            stateless={true}
                             onValueChange={callback}
                             options={menu}
                             onToggle={jest.genMockFunction()}
@@ -47,7 +47,7 @@ describe("DropDownButton", function () {
 
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
             <DropDownButton label="Test Drop Down"
-                            controlled={true}
+                            stateless={true}
                             open={true}
                             onValueChange={callback}
                             options={menu}
@@ -75,7 +75,7 @@ describe("DropDownButton", function () {
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
             <DropDownButton label="Test Drop Down"
                             className="extra"
-                            controlled={true}
+                            stateless={true}
                             open={true}
                             onValueChange={callback}
                             options={menu}
@@ -98,7 +98,7 @@ describe("DropDownButton", function () {
 
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
             <DropDownButton label="Test Drop Down"
-                            controlled={true}
+                            stateless={true}
                             open={false}
                             onValueChange={jest.genMockFunction()}
                             onToggle={callback}
@@ -242,7 +242,7 @@ describe("DropDownButton", function () {
 
         ReactTestUtils.renderIntoDocument(
             <DropDownButton label="Test Drop Down"
-                            controlled={true}
+                            stateless={true}
                             open={true}
                             options={menu}
                             onToggle={jest.genMockFunction()} />
@@ -264,7 +264,7 @@ describe("DropDownButton", function () {
 
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
             <DropDownButton label="Test Drop Down"
-                            controlled={true}
+                            stateless={true}
                             open={true}
                             options={menu}
                             onToggle={jest.genMockFunction()} />
@@ -288,7 +288,7 @@ describe("DropDownButton", function () {
 
         ReactTestUtils.renderIntoDocument(
             <DropDownButton label="Test Drop Down"
-                            controlled={true}
+                            stateless={true}
                             open={true}
                             onValueChange={jest.genMockFunction()}
                             options={menu}
@@ -318,7 +318,7 @@ describe("DropDownButton", function () {
 
         ReactTestUtils.renderIntoDocument(
             <DropDownButton label="Test Drop Down"
-                            controlled={true}
+                            stateless={true}
                             open={false}
                             onValueChange={jest.genMockFunction()}
                             options={menu}
@@ -351,7 +351,7 @@ describe("DropDownButton", function () {
 
         ReactTestUtils.renderIntoDocument(
             <DropDownButton label="Test Drop Down"
-                            controlled={true}
+                            stateless={true}
                             open={true}
                             onValueChange={jest.genMockFunction()}
                             options={menu}
@@ -379,7 +379,7 @@ describe("DropDownButton", function () {
 
         ReactTestUtils.renderIntoDocument(
             <DropDownButton label="Test Drop Down"
-                            controlled={true}
+                            stateless={true}
                             open={false}
                             onValueChange={jest.genMockFunction()}
                             options={menu}
@@ -429,6 +429,34 @@ describe("DropDownButton", function () {
 
         var element = TestUtils.findRenderedDOMNodeWithDataId(component, "drop-down-button");
         expect(element).toBeDefined();
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("produces stateful/stateless components correctly given controlled prop", function () {
+        var component = ReactTestUtils.renderIntoDocument(<DropDownButton controlled={false} />);
+        var stateful = component.refs.Stateful;
+        var stateless = component.refs.Stateless;
+
+        expect(stateful).toBeTruthy();
+        expect(stateless).toBeFalsy();
+
+        component = ReactTestUtils.renderIntoDocument(<DropDownButton controlled={true} />);
+        stateful = component.refs.Stateful;
+        stateless = component.refs.Stateless;
+        
+        expect(stateless).toBeTruthy();
+        expect(stateful).toBeFalsy();
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("logs warning for deprecated controlled prop", function () {
+        console.warn = jest.genMockFunction();
+
+        ReactTestUtils.renderIntoDocument(<DropDownButton />);
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use stateless instead of controlled. " +
+            "Support for controlled will be removed in next version");
     });
 
     //TODO: remove when deprecated props no longer supported
@@ -505,7 +533,8 @@ describe("DropDownButton", function () {
             <DropDownButton options={{}} label="Add" />
         );
 
-        expect(console.warn).not.toBeCalled();
+        // Check 2nd call b/c 1st warns for "controlled" prop
+        expect(console.warn.mock.calls[1]).toBeUndefined();
     });
 
 });

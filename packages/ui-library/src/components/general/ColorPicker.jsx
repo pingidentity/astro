@@ -47,9 +47,11 @@ var callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutside
  *     DEPRECATED. Use "data-id" instead. To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
- * @param {boolean} [controlled=false]
+ * @param {boolean} [stateless]
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally.
+ * @param {boolean} [controlled=false]
+ *     DEPRECATED. Use "stateless" instead.
  *
  * @param {string} [labelText]
  *     A label to render at the top of the color picker
@@ -89,7 +91,7 @@ var callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutside
  *       color={this.props.data.enrollmentBgColor}
  *       onToggle={this._onColorPickerToggle}
  *       open={this.state.colorPickerOpen}
- *       controlled={true} />
+ *       stateless={true} />
  */
 
 module.exports = React.createClass({
@@ -105,9 +107,17 @@ module.exports = React.createClass({
         };
     },
 
+    componentWillMount: function () {
+        if (!Utils.isProduction()) {
+            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+        }
+    },
+
     render: function () {
+        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
+
         return (
-            this.props.controlled
+            stateless
                     ? <Stateless ref="stateless" {...this.props} />
                     : <Stateful ref="stateful" {...this.props} />);
     }

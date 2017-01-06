@@ -281,7 +281,7 @@ describe("FormTimeZone", function () {
 
     it("calls global click handler when a click occurs outside of component", function () {
         var component = getComponent({
-                controlled: true,
+                stateless: true,
                 open: true,
                 onSearch: jest.genMockFunction(),
                 onToggle: jest.genMockFunction(),
@@ -303,7 +303,7 @@ describe("FormTimeZone", function () {
 
     it("skips the global click handler if not open and click on component", function () {
         var component = getComponent({
-                controlled: true,
+                stateless: true,
                 onToggle: jest.genMockFunction(),
                 onSearch: jest.genMockFunction(),
                 onValueChange: jest.genMockFunction()
@@ -318,7 +318,7 @@ describe("FormTimeZone", function () {
 
     it("detaches global listeners on unmount", function () {
         var component = getComponent({
-                controlled: true,
+                stateless: true,
                 onToggle: jest.genMockFunction(),
                 onSearch: jest.genMockFunction(),
                 onValueChange: jest.genMockFunction()
@@ -334,7 +334,7 @@ describe("FormTimeZone", function () {
     it("calls function for list placement on componentDidUpdate", function () {
         var component = getComponent({
             open: true,
-            controlled: true
+            stateless: true
         });
         var componentRef = component.refs.TimeZoneStateless;
 
@@ -410,5 +410,34 @@ describe("FormTimeZone", function () {
         expect(renderedLabelText.textContent).toContain(labelText);
         expect(renderedHelpIcon).toBeTruthy();
         expect(renderedHelpText.textContent).toEqual(labelHelpText);
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("produces stateful/stateless components correctly given controlled prop", function () {
+        var component = getComponent({ controlled: false });
+        var stateful = component.refs.TimeZoneStateful;
+        var stateless = component.refs.TimeZoneStateless;
+
+        expect(stateful).toBeTruthy();
+        expect(stateless).toBeFalsy();
+
+        component = getComponent({ controlled: true });
+        stateful = component.refs.TimeZoneStateful;
+        stateless = component.refs.TimeZoneStateless;
+        
+        expect(stateless).toBeTruthy();
+        expect(stateful).toBeFalsy();
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("logs warning for deprecated controlled prop", function () {
+        console.warn = jest.genMockFunction();
+
+        getComponent();
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use stateless instead of controlled. " +
+            "The default for stateless will be true instead of false. " +
+            "Support for controlled will be removed in next version");
     });
 });

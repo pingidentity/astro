@@ -4,6 +4,7 @@ var React = require("re-react"),
     FormFieldConstants = require("../../../constants/FormFieldConstants"),
     FormLabel = require("../FormLabel.jsx"),
     FormError = require("../FormError.jsx"),
+    Utils = require("../../../util/Utils.js"),
     _ = require("underscore");
 
 /**
@@ -36,9 +37,12 @@ var React = require("re-react"),
 *     To define the base "data-id" value for the top-level HTML container.
 * @param {string} [className]
 *     CSS classes to se ton the top-level HTML container.
-* @param {boolean} [controlled=false]
+* @param {boolean} [stateless]
+*     WARNING. Default value for "stateless" will be set to true from next version.
 *     To enable the component to be externally managed. True will relinquish control to the component's owner.
 *     False or not specified will cause the component to manage state internally.
+* @param {boolean} [controlled=false]
+*     DEPRECATED. Use "stateless" instead.
 *
 * @param {string} [value=""]
 *     The current text field value, used when state is managed outside of component.
@@ -53,14 +57,14 @@ var React = require("re-react"),
 *     Callback to be triggered when the field loses focus (is blurred).
 *
 * @param {String} [originalValue]
-*     The original value of the field. Also used for handling undo when controlled=false as
+*     The original value of the field. Also used for handling undo when stateless=false as
 *     the value to set the field to if the undo icon is clicked - if not specified, no undo control will be shown.
 * @param {boolean} [edited=false]
 *     Whether or not the field has been edited.
 * @param {boolean} [showUndo=false]
-*     Whether or not to display an undo option when field is edited. Only used when controlled=true.
+*     Whether or not to display an undo option when field is edited. Only used when stateless=true.
 * @param {FormTextArea~onUndo} [onUndo]
-*     Callback to be triggered when the 'undo' icon is clicked. Only used when controlled=true.
+*     Callback to be triggered when the 'undo' icon is clicked. Only used when stateless=true.
 *
 * @param {string} [labelText]
 *     The text to show as the field's label.
@@ -106,18 +110,27 @@ var React = require("re-react"),
 module.exports = React.createClass({
 
     propTypes: {
-        controlled: React.PropTypes.bool
+        controlled: React.PropTypes.bool, //TODO: remove in new version
+        stateless: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
         return {
-            controlled: false
+            controlled: false //TODO: change to stateless with true default in new version
         };
     },
 
+    componentWillMount: function () {
+        if (!Utils.isProduction()) {
+            console.warn(Utils.deprecateMessage("controlled", "stateless", "false", "true"));
+        }
+    },
+
     render: function () {
+        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
+
         return (
-            this.props.controlled
+            stateless
                 ? React.createElement(FormTextAreaStateless, //eslint-disable-line no-use-before-define
                     _.defaults({ ref: "FormTextAreaStateless" }, this.props), this.props.children)
                 : React.createElement(FormTextAreaStateful, //eslint-disable-line no-use-before-define

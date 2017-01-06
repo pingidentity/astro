@@ -1,5 +1,6 @@
 var React = require("react"),
     _ = require("underscore"),
+    Utils = require("../../../util/Utils.js"),
     StatelessFileUpload = require("./v2-stateless.jsx"),
     StatefulFileUpload = require("./v2-stateful.jsx"),
     Constants = require("./v2-constants.js");
@@ -53,9 +54,11 @@ var React = require("react"),
  *    To define the base "data-id" for the top-level HTML container.
  * @param {string} [className]
  *    CSS classes to set on the top-level HTML container.
- * @param {boolean} [controlled=false]
+ * @param {boolean} [stateless]
  *    To enable the component to be externally managed. True will relinquish control to the component's owner.
  *    False or not specified will cause the component to manage state internally.
+ * @param {boolean} [controlled=false]
+ *     DEPRECATED. Use "stateless" instead.
  *
  * @param {string} labelSelect
  *    Text to display on the button when no file has been selected.
@@ -121,8 +124,16 @@ var FileUpload = React.createClass({
         };
     },
 
+    componentWillMount: function () {
+        if (!Utils.isProduction()) {
+            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+        }
+    },
+
     render: function () {
-        return this.props.controlled
+        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
+
+        return stateless
             ? React.createElement(StatelessFileUpload, _.defaults({ ref: "FileUploadStateless" }, this.props))
             : React.createElement(StatefulFileUpload, _.defaults({ ref: "FileUploadStateful" }, this.props));
     }

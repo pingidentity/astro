@@ -148,7 +148,7 @@ describe("FormIntegerField", function () {
 
     it("is not triggering onValueChange callback on invalid input in stateful component", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            <FormIntegerField onValueChange={callback} controlled={false} />
+            <FormIntegerField onValueChange={callback} stateless={false} />
         );
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         ReactTestUtils.Simulate.change(input, { target: { value: "A" } } );
@@ -161,7 +161,7 @@ describe("FormIntegerField", function () {
 
     it("is not triggering onChange callback when max limit exceeded", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            <FormIntegerField onValueChange={callback} max={5} controlled={false} />
+            <FormIntegerField onValueChange={callback} max={5} stateless={false} />
         );
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         ReactTestUtils.Simulate.change(input, { target: { value: "6" } } );
@@ -171,7 +171,7 @@ describe("FormIntegerField", function () {
 
     it("is triggering onChange callback when max limit exceeded and range is not enforced", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            <FormIntegerField onValueChange={callback} max={5} enforceRange={false} controlled={false} />
+            <FormIntegerField onValueChange={callback} max={5} enforceRange={false} stateless={false} />
         );
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         ReactTestUtils.Simulate.change(input, { target: { value: "6" } } );
@@ -301,7 +301,7 @@ describe("FormIntegerField", function () {
 
     it("show initial value if provided to stateful component", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            <FormIntegerField initialValue="123" onValueChange={callback} controlled={false} />
+            <FormIntegerField initialValue="123" onValueChange={callback} stateless={false} />
         );
 
         //Expect a single checkbox to be rendered with default data-id.
@@ -315,7 +315,7 @@ describe("FormIntegerField", function () {
 
     it("does not trigger onValueChange for non integer value in stateless component", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            <FormIntegerField value="" onValueChange={callback} controlled={false} />
+            <FormIntegerField value="" onValueChange={callback} stateless={false} />
         );
 
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
@@ -325,7 +325,7 @@ describe("FormIntegerField", function () {
 
     it("does trigger onValueChange for valid value in stateful component", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            <FormIntegerField onValueChange={callback} controlled={false} />
+            <FormIntegerField onValueChange={callback} stateless={false} />
         );
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         ReactTestUtils.Simulate.change(input, { target: { value: "3" } } );
@@ -336,7 +336,7 @@ describe("FormIntegerField", function () {
 
     it("does trigger onValueChange for empty value in stateful component", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            <FormIntegerField onValueChange={callback} controlled={false} />
+            <FormIntegerField onValueChange={callback} stateless={false} />
         );
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         ReactTestUtils.Simulate.change(input, { target: { value: "" } } );
@@ -349,7 +349,7 @@ describe("FormIntegerField", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormIntegerField value={3}
                     onValueChange={callback}
-                    controlled={false}
+                    stateless={false}
                     showReveal={true}
                     maskValue={true} />
         );
@@ -367,7 +367,7 @@ describe("FormIntegerField", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormIntegerField initialValue={3}
                     onValueChange={callback}
-                    controlled={false}
+                    stateless={false}
                     showUndo={true} />
         );
 
@@ -390,7 +390,7 @@ describe("FormIntegerField", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormIntegerField
                     className="added"
-                    controlled={false}
+                    stateless={false}
                     />
         );
         expect(TestUtils.findRenderedDOMNodeWithClass(component, "added")).not.toBeNull();
@@ -432,6 +432,34 @@ describe("FormIntegerField", function () {
 
     it("validation out of range", function () {
         expect(FormIntegerField.isValid(5, true, 10, 20)).toBe(false);
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("produces stateful/stateless components correctly given controlled prop", function () {
+        var component = ReactTestUtils.renderIntoDocument(<FormIntegerField controlled={false} />);
+        var stateful = component.refs.formIntegerFieldStateful;
+        var stateless = component.refs.formIntegerFieldStateless;
+
+        expect(stateful).toBeTruthy();
+        expect(stateless).toBeFalsy();
+
+        component = ReactTestUtils.renderIntoDocument(<FormIntegerField controlled={true} />);
+        stateful = component.refs.formIntegerFieldStateful;
+        stateless = component.refs.formIntegerFieldStateless;
+        
+        expect(stateless).toBeTruthy();
+        expect(stateful).toBeFalsy();
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("logs warning for deprecated controlled prop", function () {
+        console.warn = jest.genMockFunction();
+
+        ReactTestUtils.renderIntoDocument(<FormIntegerField />);
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use stateless instead of controlled. " +
+            "Support for controlled will be removed in next version");
     });
 
 });

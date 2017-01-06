@@ -163,7 +163,7 @@ describe("SelectionList", function () {
     it("should render with few checked checkboxes and uncheck all when selected", function () {
         var callback = jest.genMockFunction();
         var component = getComponent({
-            controlled: true,
+            stateless: true,
             selectedItemIds: [1, 2],
             type: SelectionList.ListType.MULTI,
             showSelectionOptions: true,
@@ -360,7 +360,7 @@ describe("SelectionList", function () {
     });
 
     it("stateless: triggers onSearch callback when search input changes", function () {
-        var component = getComponent({ showSearchBox: true, controlled: true, onSearch: jest.genMockFunction() });
+        var component = getComponent({ showSearchBox: true, stateless: true, onSearch: jest.genMockFunction() });
         var searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-search-box");
         var searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
 
@@ -465,7 +465,7 @@ describe("SelectionList", function () {
 
     it("check stateless rendering", function () {
         var component = getComponent({
-            controlled: true,
+            stateless: true,
             onSearch: _.noop,
             queryString: "my query"
         });
@@ -482,5 +482,33 @@ describe("SelectionList", function () {
         var searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-search-box");
         var searchBox = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
         expect(searchBox.getAttribute("value")).toEqual("my query");
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("produces stateful/stateless components correctly given controlled prop", function () {
+        var component = getComponent({ controlled: false });
+        var stateful = component.refs.SelectionListStateful;
+        var stateless = component.refs.SelectionListStateless;
+
+        expect(stateful).toBeTruthy();
+        expect(stateless).toBeFalsy();
+
+        component = getComponent({ controlled: true });
+        stateful = component.refs.SelectionListStateful;
+        stateless = component.refs.SelectionListStateless;
+        
+        expect(stateless).toBeTruthy();
+        expect(stateful).toBeFalsy();
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("logs warning for deprecated controlled prop", function () {
+        console.warn = jest.genMockFunction();
+
+        getComponent();
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use stateless instead of controlled. " +
+            "Support for controlled will be removed in next version");
     });
 });

@@ -17,7 +17,7 @@ describe("MultiDrag", function () {
 
     function getWrappedComponent (opts) {
         opts = _.defaults(opts || {}, {
-            controlled: true,
+            stateless: true,
             onSearch: jest.genMockFunction(),
             onDrag: jest.genMockFunction(),
             onDrop: jest.genMockFunction(),
@@ -153,7 +153,7 @@ describe("MultiDrag", function () {
     });
 
     it("stateful: renders", function () {
-        var wrapper = getWrappedComponent({ controlled: false });
+        var wrapper = getWrappedComponent({ stateless: false });
         var component = getUnderlyingComp(wrapper);
         var componentRef = component.refs.MultiDragStateful;
 
@@ -161,7 +161,7 @@ describe("MultiDrag", function () {
     });
 
     it("stateful: _handleSearch callback triggers onSearch callback", function () {
-        var wrapper = getWrappedComponent({ controlled: false });
+        var wrapper = getWrappedComponent({ stateless: false });
         var component = getUnderlyingComp(wrapper);
         var componentRef = component.refs.MultiDragStateful;
 
@@ -171,7 +171,7 @@ describe("MultiDrag", function () {
     });
 
     it("stateful: _handleCancel callback triggers onCancel callback and clears placeholder", function () {
-        var wrapper = getWrappedComponent({ controlled: false });
+        var wrapper = getWrappedComponent({ stateless: false });
         var component = getUnderlyingComp(wrapper);
         var componentRef = component.refs.MultiDragStateful;
 
@@ -182,7 +182,7 @@ describe("MultiDrag", function () {
     });
 
     it("stateful: _handleDrop callback triggers onDrop callback", function () {
-        var wrapper = getWrappedComponent({ controlled: false });
+        var wrapper = getWrappedComponent({ stateless: false });
         var component = getUnderlyingComp(wrapper);
         var componentRef = component.refs.MultiDragStateful;
 
@@ -193,7 +193,7 @@ describe("MultiDrag", function () {
     });
 
     it("stateful: _handleDrag callback triggers onDrag callback and sets placeholder at destination", function () {
-        var wrapper = getWrappedComponent({ controlled: false });
+        var wrapper = getWrappedComponent({ stateless: false });
         var component = getUnderlyingComp(wrapper);
         var componentRef = component.refs.MultiDragStateful;
 
@@ -202,6 +202,57 @@ describe("MultiDrag", function () {
 
         expect(component.props.onDrag).toBeCalledWith(desc);
         expect(componentRef.state.placeholder).toBe(desc.to);
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("produces stateful components correctly given controlled prop", function () {
+        var opts = {
+            controlled: false,
+            onSearch: _.noop,
+            onDrag: _.noop,
+            onDrop: _.noop,
+            onCancel: _.noop,
+            contentType: <div />,
+            columns: []
+        };
+        var wrapper = ReactTestUtils.renderIntoDocument(<ReduxTestUtils.Wrapper type={MultiDrag} opts={opts} />);
+        var component = getUnderlyingComp(wrapper);
+        var stateful = component.refs.MultiDragStateful;
+        var stateless = component.refs.MultiDragStateless;
+
+        expect(stateful).toBeTruthy();
+        expect(stateless).toBeFalsy();
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("produces stateless components correctly given controlled prop", function () {
+        var opts = {
+            controlled: true,
+            onSearch: _.noop,
+            onDrag: _.noop,
+            onDrop: _.noop,
+            onCancel: _.noop,
+            contentType: <div />,
+            columns: []
+        };
+        var wrapper = ReactTestUtils.renderIntoDocument(<ReduxTestUtils.Wrapper type={MultiDrag} opts={opts} />);
+        var component = getUnderlyingComp(wrapper);
+        var stateful = component.refs.MultiDragStateful;
+        var stateless = component.refs.MultiDragStateless;
+
+        expect(stateless).toBeTruthy();
+        expect(stateful).toBeFalsy();
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("logs warning for deprecated controlled prop", function () {
+        console.warn = jest.genMockFunction();
+
+        getWrappedComponent();
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use stateless instead of controlled. " +
+            "Support for controlled will be removed in next version");
     });
 
     describe("convertFilteredIndexes", function () {

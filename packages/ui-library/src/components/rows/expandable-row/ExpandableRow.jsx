@@ -65,10 +65,12 @@ var Statuses = {
  *     Row id, which may be used as a numeric counter rather. Can compliment data-id.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
- * @param {boolean} [controlled=false]
+ * @param {boolean} [stateless]
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally.
  *     The "onToggle" callback will still be executed in case the owner is interested.
+ * @param {boolean} [controlled=false]
+ *     DEPRECATED. Use "stateless" instead.
  *
  * @param {boolean} [expanded=false]
  *     Whether the row is expanded or collapsed.
@@ -173,17 +175,26 @@ var ExpandableRow = React.createClass({
     displayName: "ExpandableRow",
 
     propTypes: {
-        controlled: React.PropTypes.bool
+        controlled: React.PropTypes.bool, //TODO: remove in new version
+        stateless: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
         return {
-            controlled: false
+            controlled: false //TODO: change to stateless prop in new version
         };
     },
 
+    componentWillMount: function () {
+        if (!Utils.isProduction()) {
+            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+        }
+    },
+
     render: function () {
-        return this.props.controlled
+        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
+
+        return stateless
             ? React.createElement(StatelessExpandableRow, //eslint-disable-line no-use-before-define
                 _.defaults({ ref: "StatelessExpandableRow" }, this.props), this.props.children)
             : React.createElement(StatefulExpandableRow, //eslint-disable-line no-use-before-define

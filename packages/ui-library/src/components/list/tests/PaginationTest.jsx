@@ -206,7 +206,7 @@ describe("Pagination", function () {
     it ("verify large number of pages", function () {
         component = ReactTestUtils.renderIntoDocument(
             <Pagination
-                controlled={true}
+                stateless={true}
                 data-id="test-pagination"
                 page={6}
                 perPage = {5}
@@ -230,7 +230,7 @@ describe("Pagination", function () {
     it ("verify no pages", function () {
         component = ReactTestUtils.renderIntoDocument(
             <Pagination
-                controlled={true}
+                stateless={true}
                 data-id="test-pagination"
                 page={1}
                 perPage = {5}
@@ -247,6 +247,43 @@ describe("Pagination", function () {
         top = pageLinks[0];
         topLinks = top.childNodes;
         expect(topLinks.length).toEqual(0);
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("produces stateful/stateless components correctly given controlled prop", function () {
+        component = ReactTestUtils.renderIntoDocument(
+            <Pagination controlled={false} total={1} perPage={1}>
+                <ExpandableRow className="row" key={1} />
+            </Pagination>);
+        var stateful = component.refs.PaginationStateful;
+        var stateless = component.refs.PaginationStateless;
+
+        expect(stateful).toBeTruthy();
+        expect(stateless).toBeFalsy();
+
+        component = ReactTestUtils.renderIntoDocument(
+            <Pagination controlled={true} total={1} perPage={1}>
+                <ExpandableRow className="row" key={1} />
+            </Pagination>);
+        stateful = component.refs.PaginationStateful;
+        stateless = component.refs.PaginationStateless;
+        
+        expect(stateless).toBeTruthy();
+        expect(stateful).toBeFalsy();
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("logs warning for deprecated controlled prop", function () {
+        console.warn = jest.genMockFunction();
+
+        ReactTestUtils.renderIntoDocument(
+            <Pagination controlled={false} total={1} perPage={1}>
+                <ExpandableRow className="row" key={1} />
+            </Pagination>);
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use stateless instead of controlled. " +
+            "Support for controlled will be removed in next version");
     });
 
     //TODO: remove when deprecated props no longer supported

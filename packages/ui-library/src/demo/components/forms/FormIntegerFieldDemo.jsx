@@ -120,18 +120,18 @@ var FormIntegerFieldDemo = React.createClass({
                             labelText={"Basic - Value : " + this.state.integerField0}
                             onValueChange = {this._changeCallback0}
                             initialValue = ""
-                            controlled={false}
+                            stateless={false}
                             className="input-width-medium"
                     />
                 </div>
                 <div className="input-row">
                     <FormIntegerField
-                            labelText={"Basic Controlled with validation helper and with hidden controls - Value : " +
+                            labelText={"Basic stateless with validation helper and with hidden controls - Value : " +
                                 this.state.integerField1}
                             onValueChange = {this._changeCallback}
                             value={this.state.integerField1}
                             className="input-width-medium"
-                            controlled={true}
+                            stateless={true}
                             hideControls={true}
                     />
                 </div>
@@ -142,7 +142,7 @@ var FormIntegerFieldDemo = React.createClass({
                             initialValue = {8800}
                             onValueChange = {this._changeCallback2}
                             className="input-width-medium"
-                            controlled={false}
+                            stateless={false}
                     />
                 </div>
                 <div className="input-row">
@@ -154,7 +154,7 @@ var FormIntegerFieldDemo = React.createClass({
                             required = {true}
                             placeholder = "This field is required"
                             className="input-width-medium"
-                            controlled={false}
+                            stateless={false}
                     />
                 </div>
                 <div className="input-row">
@@ -169,7 +169,7 @@ var FormIntegerFieldDemo = React.createClass({
                             labelHelpText = "Prop enforceRange is true by default.
                                     This doesn't allow keyboard input above the maximum range."
                             className="input-width-medium"
-                            controlled={false}
+                            stateless={false}
                     />
                 </div>
                 <div className="input-row">
@@ -190,7 +190,7 @@ var FormIntegerFieldDemo = React.createClass({
                                 " of out of range numbers"
                             }
                             className="input-width-medium"
-                            controlled={false}
+                            stateless={false}
                     />
                 </div>
                 <div className="input-row">
@@ -203,7 +203,7 @@ var FormIntegerFieldDemo = React.createClass({
                             min = {50}
                             max = {300}
                             className="input-width-medium"
-                            controlled={false}
+                            stateless={false}
                     />
                 </div>
 
@@ -216,7 +216,7 @@ var FormIntegerFieldDemo = React.createClass({
                             onValueChange = {this._changeCallback}
                             initialValue = {30}
                             className="input-width-medium"
-                            controlled={false}
+                            stateless={false}
                     />
                 </div>
 
@@ -229,7 +229,7 @@ var FormIntegerFieldDemo = React.createClass({
                             labelHelpText = "Disabled with help text"
                             initialValue = {40}
                             className="input-width-medium"
-                            controlled={false}
+                            stateless={false}
                     />
                 </div>
 

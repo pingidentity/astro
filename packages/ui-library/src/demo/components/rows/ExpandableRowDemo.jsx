@@ -90,7 +90,7 @@ var ExpandableRowDemo = React.createClass({
                 <ExpandableRow
                     title="Collapsed Expandable Row"
                     subtitle="stateless"
-                    controlled={true}
+                    stateless={true}
                     expanded={this.state.expanded1}
                     onToggle={this._onToggle.bind(null, 1)}/>
                 <ExpandableRow
@@ -110,7 +110,7 @@ var ExpandableRowDemo = React.createClass({
                 <ExpandableRow
                     title="Expandable Row"
                     subtitle="stateless"
-                    controlled={true}
+                    stateless={true}
                     expanded={this.state.expanded2}
                     onToggle={this._onToggle.bind(null, 2)} />
                 {this.state.deletedRow
@@ -128,7 +128,7 @@ var ExpandableRowDemo = React.createClass({
                     : <ExpandableRow
                         title="Collapsed Row with Delete Confirmation"
                         subtitle="stateless"
-                        controlled={true}
+                        stateless={true}
                         expanded={this.state.expanded3}
                         onToggle={this._onToggle.bind(null, 3)}
                         onDeleteCancelClick={this._handleDeleteCancel}

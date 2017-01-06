@@ -26,7 +26,7 @@ var ToggleDemo = React.createClass({
         return (
             <div>
                 <Toggle data-id="user-toggle" className="row-status-toggle"
-                        controlled={true}
+                        stateless={true}
                         toggled={this.state.toggled}
                         onToggle={this._handleToggle} />
                 <br/><br/>

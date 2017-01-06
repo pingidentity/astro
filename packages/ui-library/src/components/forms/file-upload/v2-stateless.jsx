@@ -7,7 +7,7 @@ var React = require("react"),
 /**
  * @name FileUploadStateless
  * @memberof FileUpload
- * @desc This is a wrapper around the stateless (controlled=true) FileUpload.
+ * @desc This is a wrapper around the stateless (stateless=true) FileUpload.
  */
 module.exports = React.createClass({
     displayName: "FileUploadStateless",

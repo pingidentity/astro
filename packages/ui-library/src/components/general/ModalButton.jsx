@@ -29,30 +29,31 @@ var React = require("re-react"),
  *     CSS classes to set on the top-level HTML container.
  * @param {string} [containerStyle]
  *     DEPRECATED. Use className instead.
- * @param {boolean} [controlled=true]
- *     WARNING. Default value will be set to false from next version.
+ * @param {boolean} [stateless]
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally.
+ * @param {boolean} [controlled=false]
+ *     DEPRECATED. Use "stateless" instead.
  *
  * @param {boolean} [initiallyExpanded=false]
- *     Initial modal expanded state. Used only when controlled=false.
+ *     Initial modal expanded state. Used only when stateless=false.
  *     if the expanded property is provided, it overrides the initiallyExpanded.
  * @param {boolean} [expanded=false]
- *     Modal expanded state.  If set on a controlled modal,
+ *     Modal expanded state.  If set on a stateless modal,
  *     then the modal will not keep its own expanded state,
  *     and closing the modal must be managed externally.
  *
  * @param {function} [onOpen]
  *     Callback to be triggered when the activator is clicked and the modal is about to open.
  *     If this function returns false, the opening will be prevented.
- *     It is required when controlled=true.
+ *     It is required when stateless=true.
  * @param {function} [onClose]
  *     Callback to be triggered when the modal is closing by clicking the close modal link.
  *     If this function returns false then closing will be prevented.
- *     It is required when controlled=true.
+ *     It is required when stateless=true.
  * @param {boolean} [closeOnBgClick]
  *     When true, the onClose callback is triggered when modal bg is clicked. Note that the onClose callback is also
- *     required for the stateless/controlled version of this component
+ *     required for the stateless version of this component
  *
  * @param {boolean} [inline=false]
  *     If true, then render the overall container as a span instead of as a div.
@@ -105,16 +106,16 @@ var React = require("re-react"),
  *
  * @example
  *     <ModalButton modalTitle="My wonderful modal"
- *             controlled={true} expanded={this.state.expanded}
+ *             stateless={true} expanded={this.state.expanded}
  *             onOpen={this._onOpen} onClose={this._onCloseModal}>
  *         <p>Thank you for opening this modal</p>
  *     </ModalButton>
  * @example
- *     <ModalButton controlled={false} initiallyExpanded={true} expanded={false}>
+ *     <ModalButton stateless={false} initiallyExpanded={true} expanded={false}>
  *         <p>test</p>
  *     </ModalButton>
  * @example
- *     <ModalButton controlled={false} expanded={false}
+ *     <ModalButton stateless={false} expanded={false}
  *             onOpen={this._openModal} onClose={this._closeModal}
  *             type={Modal.Type.DIALOG} >
  *         <p>test</p>
@@ -343,7 +344,7 @@ var ModalButtonStateful = ReactVanilla.createClass({
      */
     getInitialState: function () {
         // TODO - in a future version, the initiallyExpanded prop should be removed
-        // and the expanded prop (used with a controlled modal) should mean the initial expanded state;
+        // and the expanded prop (used with a stateless modal) should mean the initial expanded state;
         // in that case, replace the code below with just:
         // return { expanded: this.props.expanded };
 
@@ -381,19 +382,27 @@ var ModalButton = React.createClass({
     displayName: "ModalButton",
 
     propTypes: {
-        controlled: React.PropTypes.bool
+        controlled: React.PropTypes.bool, //TODO: remove in new version
+        stateless: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
         return {
-            // TODO - default to true in a future version
-            controlled: false
+            controlled: false //TODO: change to stateless in new version
         };
     },
 
+    componentWillMount: function () {
+        if (!Utils.isProduction()) {
+            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+        }
+    },
+
     render: function () {
+        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
+
         return (
-            this.props.controlled
+            stateless
                 ? React.createElement(
                     ModalButtonStateless,
                     _.defaults({ ref: "ModalButtonStateless" }, this.props)

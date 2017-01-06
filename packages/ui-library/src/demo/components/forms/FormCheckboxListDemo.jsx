@@ -46,7 +46,7 @@ var FormCheckboxListDemo = React.createClass({
         return (
                 <div>
                     <FormCheckboxList
-                        controlled={true}
+                        stateless={true}
                         hideUnchecked={this.state.hideUnchecked}
                         items={checkboxItems}
                         onGetSelectAllLabel={function (count) { return "Select " + count + " items"; }}

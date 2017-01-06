@@ -32,9 +32,11 @@ var React = require("react"),
  *     DEPRECATED. Use "data-id" instead.
  * @param {string} [className]
  *          CSS classes to set on the top-level HTML container
- * @param {boolean} [controlled=false]
+ * @param {boolean} [stateless]
  *          To enable the component to be externally managed. True will relinquish control to the component's owner.
  *          False or not specified will cause the component to manage state internally.
+ * @param {boolean} [controlled=false]
+ *          DEPRECATED. Use "stateless" instead.
  * @param {number} [perPage=10]
  *          Number of results per page
  * @param {number} total
@@ -72,20 +74,30 @@ var React = require("react"),
  */
 
 module.exports = React.createClass({
+    displayName: "Pagination",
 
     propTypes: {
-        controlled: React.PropTypes.bool
+        controlled: React.PropTypes.bool, //TODO: remove in new version
+        stateless: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
         return {
-            controlled: false
+            controlled: false //TODO: change to stateless in new version
         };
     },
 
+    componentWillMount: function () {
+        if (!Utils.isProduction()) {
+            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+        }
+    },
+
     render: function () {
+        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
+
         return (
-            this.props.controlled
+            stateless
                 ? <PaginationStateless ref="PaginationStateless" {...this.props} />
                 : <PaginationStateful ref="PaginationStateful" {...this.props} />);
     }
@@ -116,6 +128,8 @@ module.exports = React.createClass({
  */
 
 var PageLinks = React.createClass({
+    displayName: "PageLinks",
+
     propTypes: {
         numPages: React.PropTypes.number.isRequired,
         currentPage: React.PropTypes.number.isRequired,
@@ -215,8 +229,7 @@ var PageLinks = React.createClass({
 });
 
 var PaginationStateless = React.createClass({
-
-    displayName: "Pagination",
+    displayName: "PaginationStateless",
 
     propTypes: {
         className: React.PropTypes.string,
@@ -299,6 +312,7 @@ var PaginationStateless = React.createClass({
 });
 
 var PaginationStateful = React.createClass({
+    displayName: "PaginationStateful",
 
     getInitialState: function () {
         return {

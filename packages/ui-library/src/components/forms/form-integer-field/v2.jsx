@@ -3,6 +3,7 @@
 var React = require("react"),
     FormTextField = require("../form-text-field").v2,
     classnames = require("classnames"),
+    Utils = require("../../../util/Utils.js"),
     _ = require("underscore");
 
 var isValid = function (value, enforceRange, min, max) {
@@ -41,9 +42,11 @@ var isValid = function (value, enforceRange, min, max) {
  *     To define the base "data-id" value for the top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
- * @param {boolean} [controlled=true]
+ * @param {boolean} [stateless]
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally.
+ * @param {boolean} [controlled=true]
+ *     DEPRECATED. Use "stateless" instead.
  *
  * @param {boolean} [required=false]
  *     Whether the field is required or not.
@@ -60,9 +63,9 @@ var isValid = function (value, enforceRange, min, max) {
  *     The text to show as the field's label.
  *
  * @param {string|number} [value=""]
- *     Current text field value used when controlled=true.
+ *     Current text field value used when stateless=true.
  * @param {string|number} [initialValue=""]
- *     Initial value (also to be used in conjuction with the undo button) when controlled=false.
+ *     Initial value (also to be used in conjuction with the undo button) when stateless=false.
  *
  * @param {FormIntegerField~onValueChange} [onValueChange]
  *     Callback to be triggered when the field value changes. It will receive the component's value.
@@ -81,12 +84,12 @@ var isValid = function (value, enforceRange, min, max) {
  * @param {boolean} [maskValue=false]
  *     If true, the value shown in the input field will be masked with '*****'. (i.e: passwords).
  * @param {boolean} [reveal=false]
- *     If true, will remove value masking. Use only when controlled=true.
+ *     If true, will remove value masking. Use only when stateless=true.
  * @param {boolean} [showReveal=false]
  *    Whether or not to display a reveal option to remove value masking.
  *     If true, the value shown in the input field will be masked with '*****'. (i.e: passwords).
  * @param {FormTextField~onToggleReveal} [onToggleReveal]
- *    Callack to be triggered when the 'reveal' button is clicked. Use only when controlled=true.
+ *    Callack to be triggered when the 'reveal' button is clicked. Use only when stateless=true.
  *
  * @param {boolean} [showSave=false]
  *     Whether or not to display a save option.
@@ -344,7 +347,7 @@ var Stateless = React.createClass({
                 <FormTextField {...this.props}
                         ref="formTextField"
                         data-id={this.props["data-id"] + "-text-field"}
-                        controlled={true}
+                        stateless={true}
                         className={styles}
                         labelClassName={classnames(this.props.labelClassName)}
                         onValueChange={this.props.onValueChange}
@@ -441,17 +444,26 @@ var Stateful = React.createClass({
 
 var FormIntegerFieldV2 = React.createClass({
     propTypes: {
-        controlled: React.PropTypes.bool
+        controlled: React.PropTypes.bool, //TODO: remove in new version
+        stateless: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
         return {
-            controlled: true
+            controlled: true //TODO: change to stateless in new version
         };
     },
 
+    componentWillMount: function () {
+        if (!Utils.isProduction()) {
+            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+        }
+    },
+
     render: function () {
-        return (this.props.controlled
+        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
+
+        return (stateless
                 ? React.createElement(Stateless, _.defaults({ ref: "formIntegerFieldStateless" }, this.props))
                 : React.createElement(Stateful, _.defaults({ ref: "formIntegerFieldStateful" }, this.props)));
     }

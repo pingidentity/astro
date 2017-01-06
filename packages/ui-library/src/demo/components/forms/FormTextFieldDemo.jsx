@@ -122,7 +122,7 @@ var FormTextFieldDemo = React.createClass({
                 </div>
                 <div className="input-row">
                     <FormTextField
-                        controlled={true}
+                        stateless={true}
                         labelText="Basic (stateless)"
                         value={this.state.statelessValue}
                         onValueChange={this._handleStatelessValueChange}

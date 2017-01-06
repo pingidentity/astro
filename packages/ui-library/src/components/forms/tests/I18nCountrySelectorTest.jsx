@@ -51,7 +51,7 @@ describe("I18nCountrySelector", function () {
 
     it("stateless: renders the component", function () {
         var component = getComponent({
-            controlled: true
+            stateless: true
         });
         expect(TestUtils.findRenderedDOMNodeWithDataId(component, "i18n-country-selector")).toBeTruthy();
     });
@@ -63,7 +63,7 @@ describe("I18nCountrySelector", function () {
 
     it("stateless: updates callback on country select", function () {
         var component = getComponent({
-            controlled: true
+            stateless: true
         });
         var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         var canada = TestUtils.findRenderedDOMNodeWithDataId(component, "country-ca");
@@ -99,7 +99,7 @@ describe("I18nCountrySelector", function () {
 
     it("stateless: handles clearing selected country", function () {
         var component = getComponent({
-            controlled: true,
+            stateless: true,
             countryCode: "840",
             open: true
         });
@@ -192,7 +192,7 @@ describe("I18nCountrySelector", function () {
 
     it("stateless: triggers onSearch callback when typing and search string provided", function () {
         var component = getComponent({
-            controlled: true,
+            stateless: true,
             open: true,
             searchString: "",
             searchTime: 0
@@ -203,10 +203,38 @@ describe("I18nCountrySelector", function () {
         expect(component.props.onSearch).toBeCalled();
     });
 
+    //TODO: remove when controlled no longer supported
+    it("produces stateful/stateless components correctly given controlled prop", function () {
+        var component = ReactTestUtils.renderIntoDocument(<I18nCountrySelector controlled={false} />);
+        var stateful = component.refs.I18nCountrySelectorStateful;
+        var stateless = component.refs.I18nCountrySelectorStateless;
+
+        expect(stateful).toBeTruthy();
+        expect(stateless).toBeFalsy();
+
+        component = ReactTestUtils.renderIntoDocument(<I18nCountrySelector controlled={true} />);
+        stateful = component.refs.I18nCountrySelectorStateful;
+        stateless = component.refs.I18nCountrySelectorStateless;
+        
+        expect(stateless).toBeTruthy();
+        expect(stateful).toBeFalsy();
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("logs warning for deprecated controlled prop", function () {
+        console.warn = jest.genMockFunction();
+
+        getComponent();
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use stateless instead of controlled. " +
+            "Support for controlled will be removed in next version");
+    });
+
     //TODO: remove when v1 no longer supported
     it("stateless: triggers onCountrySearch callback when typing and search string provided", function () {
         var component = getComponent({
-            controlled: true,
+            stateless: true,
             open: true,
             searchString: "",
             searchTime: 0,

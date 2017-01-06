@@ -53,6 +53,15 @@ describe("Utils", function () {
             expect(message).toBe(
                 "Deprecated: use onClick instead of click. Support for click will be removed in next version");
         });
+
+        it("includes optional default value change message", function () {
+            var message = Utils.deprecateMessage("prop", "newProp", "old", "new");
+
+            expect(message).toBe(
+                "Deprecated: use newProp instead of prop. " +
+                "The default for newProp will be new instead of old. " +
+                "Support for prop will be removed in next version");
+        });
     });
 
     describe("isProduction", function () {

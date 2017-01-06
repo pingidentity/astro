@@ -81,6 +81,7 @@ var DetailsTooltipDemo = React.createClass({
         return (
             <div className="controls">
                 <DetailsTooltip
+                    stateless={true}
                     positionClassName="bottom right"
                     label="With a label (label is passed into component)"
                     title="Tooltip Title"
@@ -108,6 +109,7 @@ var DetailsTooltipDemo = React.createClass({
                 <br/>
                 <a onClick={this._handleToggle2}>Without label (label is outside component)</a>
                 <DetailsTooltip
+                    stateless={true}
                     positionClassName="bottom right"
                     title="Tooltip Title"
                     open={this.state.open2}
@@ -133,6 +135,7 @@ var DetailsTooltipDemo = React.createClass({
 
                 <br/>
                 <DetailsTooltip
+                    stateless={true}
                     label={(<button type="button">Label as button</button>)}
                     positionClassName="bottom right"
                     title="Tooltip Title"
@@ -159,6 +162,7 @@ var DetailsTooltipDemo = React.createClass({
 
                 <br/>
                 <DetailsTooltip
+                    stateless={true}
                     positionClassName="bottom"
                     label="Open by default"
                     title="Tooltip Title"
@@ -185,6 +189,7 @@ var DetailsTooltipDemo = React.createClass({
 
                 <br/>
                 <DetailsTooltip
+                    stateless={true}
                     label="With alert styling"
                     positionClassName="alert"
                     title="Title won't display"
@@ -211,6 +216,7 @@ var DetailsTooltipDemo = React.createClass({
 
                 <br/>
                 <DetailsTooltip
+                    stateless={true}
                     positionClassName="bottom right"
                     label="Three Buttons"
                     title="Three Buttons"
@@ -244,6 +250,7 @@ var DetailsTooltipDemo = React.createClass({
 
                 <br/>
                 <DetailsTooltip
+                    stateless={true}
                     label="Alert styling with three buttons"
                     positionClassName="alert"
                     title="Tooltip Title"
@@ -277,6 +284,7 @@ var DetailsTooltipDemo = React.createClass({
 
                 <br/>
                 <DetailsTooltip
+                    stateless={true}
                     label="Test passing buttons"
                     positionClassName="bottom right"
                     title="Tooltip Title"
@@ -300,7 +308,7 @@ var DetailsTooltipDemo = React.createClass({
                     labelClassName="my-css-class"
                     label="Stateful tooltip"
                     title="Tooltip Title"
-                    controlled={false}
+                    stateless={false}
                     onToggle={_.noop}>
 
                     <p>

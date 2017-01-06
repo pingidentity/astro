@@ -55,7 +55,7 @@ var DropDownButtonDemo = React.createClass({
                     onValueChange={this._onValueChange}
                     onToggle={this._onToggle}
                     open={this.state.open}
-                    controlled={true}
+                    stateless={true}
                     options={optionsMenu}
                 />
                 <br/><br/>

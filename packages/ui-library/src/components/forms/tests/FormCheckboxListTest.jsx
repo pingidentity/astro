@@ -29,7 +29,7 @@ describe("FormCheckboxList", function () {
 
     function getComponent (props) {
         props = _.defaults(props || {}, {
-            controlled: true,
+            stateless: true,
             labelHideUnselected: "Hide Unselected",
             labelSearchPlaceholder: "Search",
             onGetSelectAllLabel: jest.genMockFunction(),
@@ -97,7 +97,7 @@ describe("FormCheckboxList", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
             <FormCheckboxList
-                controlled={true}
+                stateless={true}
                 labelSelectAll={selectAllLabel}
                 labelDeselectAll={deselectAllLabel}
                 labelHideUnselected="Hide Unselected"
@@ -137,7 +137,7 @@ describe("FormCheckboxList", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
             <FormCheckboxList
-                controlled={true}
+                stateless={true}
                 labelSelectAll={selectAllLabel}
                 labelDeselectAll={deselectAllLabel}
                 labelHideUnselected="Hide Unselected"
@@ -243,7 +243,7 @@ describe("FormCheckboxList", function () {
 
         ReactTestUtils.renderIntoDocument(
             <FormCheckboxList
-                controlled={true}
+                stateless={true}
                 labelSelectAll={selectLabelCallback}
                 labelDeselectAll={unselectLabelCallback}
                 labelHideUnselected="Hide Unselected"
@@ -276,7 +276,7 @@ describe("FormCheckboxList", function () {
 
         ReactTestUtils.renderIntoDocument(
             <FormCheckboxList
-                controlled={true}
+                stateless={true}
                 labelSelectAll={selectLabelCallback}
                 labelDeselectAll={unselectLabelCallback}
                 labelHideUnselected="Hide Unselected"
@@ -311,7 +311,7 @@ describe("FormCheckboxList", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
             <FormCheckboxList
-                controlled={true}
+                stateless={true}
                 labelSelectAll={selectLabelCallback}
                 labelDeselectAll={unselectLabelCallback}
                 labelHideUnselected="Hide Unselected"
@@ -364,7 +364,7 @@ describe("FormCheckboxList", function () {
         var unselectLabelCallback = jest.genMockFunction();
         var component = ReactTestUtils.renderIntoDocument(
             <FormCheckboxList
-                controlled={true}
+                stateless={true}
                 labelSelectAll={selectLabelCallback}
                 labelDeselectAll={unselectLabelCallback}
                 labelHideUnselected="Hide Unselected"
@@ -443,7 +443,7 @@ describe("FormCheckboxList", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
             <FormCheckboxList
-                controlled={true}
+                stateless={true}
                 labelSelectAll={selectLabelCallback}
                 labelDeselectAll={unselectLabelCallback}
                 labelHideUnselected="Hide Unselected"
@@ -518,7 +518,7 @@ describe("FormCheckboxList", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
             <FormCheckboxList
-                controlled={false}
+                stateless={false}
                 labelSelectAll={selectAllLabel}
                 labelDeselectAll={deselectAllLabel}
                 labelHideUnselected="Hide Unselected"
@@ -542,7 +542,7 @@ describe("FormCheckboxList", function () {
 
     it("Stateful: triggers change", function () {
         var component = getComponent({
-            controlled: false,
+            stateless: false,
             items: [{ id: 1, name: "Salesforce", group: "Marketing" },
                     { id: 2, name: "Google Mail", group: "Personal" },
                     { id: 3, name: "Concur", group: "Marketing" }
@@ -564,7 +564,7 @@ describe("FormCheckboxList", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
             <FormCheckboxList
-                controlled={false}
+                stateless={false}
                 labelSelectAll={selectAllLabel}
                 labelDeselectAll={deselectAllLabel}
                 labelHideUnselected="Hide Unselected"
@@ -586,7 +586,7 @@ describe("FormCheckboxList", function () {
 
     it("Stateful: triggers select all", function () {
         var component = getComponent({
-            controlled: false,
+            stateless: false,
             items: [{ id: 1, name: "Salesforce", group: "Marketing" },
                     { id: 2, name: "Google Mail", group: "Personal" },
                     { id: 3, name: "Concur", group: "Marketing" }
@@ -608,7 +608,7 @@ describe("FormCheckboxList", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
             <FormCheckboxList
-                controlled={false}
+                stateless={false}
                 labelSelectAll={selectLabelCallback}
                 labelDeselectAll={unselectLabelCallback}
                 labelHideUnselected="Hide Unselected"
@@ -658,7 +658,7 @@ describe("FormCheckboxList", function () {
 
     it("Stateful: supports ui mechanics", function () {
         var component = getComponent({
-            controlled: false,
+            stateless: false,
             items: [{ id: 1, name: "Salesforce", group: "Marketing" },
                     { id: 2, name: "Google Mail", group: "Personal" },
                     { id: 3, name: "Concur", group: "Marketing" }
@@ -698,6 +698,43 @@ describe("FormCheckboxList", function () {
         expect(checkboxes.length).toEqual(1);
         expect(checkboxes[0].value).toBe("2");
         expect(checkboxes[0].checked).toBe(true);
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("produces stateful/stateless components correctly given controlled prop", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormCheckboxList controlled={false} items={[]}
+                    labelSearchPlaceholder="search" onQueryChange={_.noop}
+                    labelHideUnselected="hide" onVisibilityChange={_.noop}
+                    onGetDeselectAllLabel={_.noop} onGetSelectAllLabel={_.noop} />);
+        var stateful = component.refs.FormCheckboxListStateful;
+        var stateless = component.refs.FormCheckboxListStateless;
+
+        expect(stateful).toBeTruthy();
+        expect(stateless).toBeFalsy();
+
+        component = ReactTestUtils.renderIntoDocument(
+            <FormCheckboxList controlled={true} items={[]}
+                    labelSearchPlaceholder="search" onQueryChange={_.noop}
+                    labelHideUnselected="hide" onVisibilityChange={_.noop}
+                    onGetDeselectAllLabel={_.noop} onGetSelectAllLabel={_.noop} />);
+        stateful = component.refs.FormCheckboxListStateful;
+        stateless = component.refs.FormCheckboxListStateless;
+        
+        expect(stateless).toBeTruthy();
+        expect(stateful).toBeFalsy();
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("logs warning for deprecated controlled prop", function () {
+        console.warn = jest.genMockFunction();
+
+        getComponent();
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use stateless instead of controlled. " +
+            "The default for stateless will be true instead of false. " +
+            "Support for controlled will be removed in next version");
     });
 
     //TODO: remove when v1 no longer supported

@@ -25,7 +25,7 @@ describe("FormDropDownList", function () {
 
     function getComponent (props) {
         props = _.defaults(props || {}, {
-            controlled: true,
+            stateless: true,
             options: options,
             selectedOption: options[0],
             onToggle: jest.genMockFunction(),
@@ -167,7 +167,7 @@ describe("FormDropDownList", function () {
     });
 
     it("stateful: onToggle callback updates open state", function () {
-        var component = getComponent({ controlled: false });
+        var component = getComponent({ stateless: false });
         var componentRef = component.refs.FormDropDownListStateful;
 
         expect(componentRef.state.open).toBe(false);
@@ -184,7 +184,7 @@ describe("FormDropDownList", function () {
     });
 
     it("stateful: onSearch callback updates search state", function () {
-        var component = getComponent({ controlled: false });
+        var component = getComponent({ stateless: false });
         var componentRef = component.refs.FormDropDownListStateful;
 
         expect(componentRef.state.open).toBe(false);
@@ -371,5 +371,35 @@ describe("FormDropDownList", function () {
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ARROW_UP });
         expect(component.props.onSearch).toBeCalled();
         expect(component.props.onSearch.mock.calls[1][2]).toBe(0); //subtract 1 from searchIndex
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("produces stateful/stateless components correctly given controlled prop", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormDropDownList controlled={false} options={[]} selectedOption={{}} />);
+        var stateful = component.refs.FormDropDownListStateful;
+        var stateless = component.refs.FormDropDownListStateless;
+
+        expect(stateful).toBeTruthy();
+        expect(stateless).toBeFalsy();
+
+        component = ReactTestUtils.renderIntoDocument(
+            <FormDropDownList controlled={true} options={[]} selectedOption={{}} />);
+        stateful = component.refs.FormDropDownListStateful;
+        stateless = component.refs.FormDropDownListStateless;
+        
+        expect(stateless).toBeTruthy();
+        expect(stateful).toBeFalsy();
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("logs warning for deprecated controlled prop", function () {
+        console.warn = jest.genMockFunction();
+
+        getComponent();
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use stateless instead of controlled. " +
+            "Support for controlled will be removed in next version");
     });
 });

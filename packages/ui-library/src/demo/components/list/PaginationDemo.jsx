@@ -44,7 +44,7 @@ var PaginationDemo = React.createClass({
                     Slice To: {this.state.last},
                     Current Page: {this.state.currentPage},
                 </div>
-                <Pagination controlled={true}
+                <Pagination stateless={true}
                     className = "result-set"
                     perPage = {this.state.perPage}
                     page = {this.state.currentPage}

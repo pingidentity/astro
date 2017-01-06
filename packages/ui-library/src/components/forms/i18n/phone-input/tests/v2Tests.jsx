@@ -63,7 +63,7 @@ describe("I18nPhoneInput", function () {
 
     it("stateless: renders the component", function () {
         var component = getComponent({
-            controlled: true
+            stateless: true
         });
 
         var input = TestUtils.findRenderedDOMNodeWithDataId(component, "i18n-phone-input");
@@ -255,7 +255,7 @@ describe("I18nPhoneInput", function () {
 
     it("stateless: triggers onSearch callback when typing and search string provided", function () {
         var component = getComponent({
-            controlled: true,
+            stateless: true,
             open: true,
             searchString: "",
             searchTime: 0
@@ -266,10 +266,38 @@ describe("I18nPhoneInput", function () {
         expect(component.props.onSearch).toBeCalled();
     });
 
+    //TODO: remove when controlled no longer supported
+    it("produces stateful/stateless components correctly given controlled prop", function () {
+        var component = ReactTestUtils.renderIntoDocument(<I18nPhoneInput controlled={false} />);
+        var stateful = component.refs.I18nPhoneInputStateful;
+        var stateless = component.refs.I18nPhoneInputStateless;
+
+        expect(stateful).toBeTruthy();
+        expect(stateless).toBeFalsy();
+
+        component = ReactTestUtils.renderIntoDocument(<I18nPhoneInput controlled={true} />);
+        stateful = component.refs.I18nPhoneInputStateful;
+        stateless = component.refs.I18nPhoneInputStateless;
+        
+        expect(stateless).toBeTruthy();
+        expect(stateful).toBeFalsy();
+    });
+
+    //TODO: remove when controlled no longer supported
+    it("logs warning for deprecated controlled prop", function () {
+        console.warn = jest.genMockFunction();
+
+        getComponent();
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use stateless instead of controlled. " +
+            "Support for controlled will be removed in next version");
+    });
+
     //TODO: remove when v1 no longer supported
     it("stateless: triggers onCountrySearch callback when typing and search string provided", function () {
         var component = getComponent({
-            controlled: true,
+            stateless: true,
             open: true,
             searchString: "",
             searchTime: 0,

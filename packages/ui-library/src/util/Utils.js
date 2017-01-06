@@ -153,13 +153,24 @@ var Utils = {
      *    The name of the feature that is now deprecated.
      * @param {string} useInstead
      *    The name of the feature to use instead.
+     * @param {string} [oldDefault]
+     *    The old default value for the feature.
+     * @param {string} [newDefault]
+     *    The new default value for the feature.
      * @return {string}
      *    Formatted warning string.
      */
-    deprecateMessage: function (feature, useInstead) {
+    deprecateMessage: function (feature, useInstead, oldDefault, newDefault) {
+        var defaultMsg = "";
+        if (newDefault) {
+            defaultMsg = "The default for " + useInstead + " will be " +
+                newDefault + " instead of " + oldDefault + ". ";
+        }
+
         var warning = [
-            "Deprecated: use ", useInstead, " instead of ", feature,
-            ". Support for ", feature, " will be removed in next version"
+            "Deprecated: use ", useInstead, " instead of ", feature, ". ",
+            defaultMsg,
+            "Support for ", feature, " will be removed in next version"
         ].join("");
         return warning;
     },

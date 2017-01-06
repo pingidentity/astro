@@ -23,10 +23,13 @@ var React = require("react"),
  *     DEPRECATED. Use "data-id" instead. To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
- * @param {boolean} [controlled=true]
+ * @param {boolean} [stateless]
+ *     WARNING. Default value for "stateless" will be set to false from next version.
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally. WARNING. Default value will be
  *     set to false from next version.
+ * @param {boolean} [controlled=true]
+ *     DEPRECATED. Use "stateless" instead.
  *
  * @param {boolean} [expanded=false]
  *     Whether or not section is expanded and showing body content.
@@ -48,17 +51,26 @@ var React = require("react"),
 var Section = React.createClass({
 
     propTypes: {
-        controlled: React.PropTypes.bool
+        controlled: React.PropTypes.bool, //TODO: remove in new version
+        stateless: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
         return {
-            controlled: true
+            controlled: true //TODO: change to stateless with false default in new version
         };
     },
 
+    componentWillMount: function () {
+        if (!Utils.isProduction()) {
+            console.warn(Utils.deprecateMessage("controlled", "stateless", "true", "false"));
+        }
+    },
+
     render: function () {
-        return this.props.controlled
+        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
+
+        return stateless
             ? React.createElement(SectionStateless, //eslint-disable-line no-use-before-define
                 _.defaults({ ref: "SectionStateless" }, this.props), this.props.children)
             : React.createElement(SectionStateful, //eslint-disable-line no-use-before-define
@@ -90,8 +102,6 @@ var SectionStateless = React.createClass({
 
     componentWillMount: function () {
         if (!Utils.isProduction()) {
-            console.warn(
-                "** Default value for 'controlled' in Section component will be set to 'false' from next version");
             if (this.props.id) {
                 console.warn(Utils.deprecateMessage("id", "data-id"));
             }

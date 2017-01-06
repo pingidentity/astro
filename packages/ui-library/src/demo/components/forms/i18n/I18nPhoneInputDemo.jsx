@@ -66,7 +66,7 @@ var I18nPhoneInputDemo = React.createClass({
                 </div>
                 <br />
                 <I18nPhoneInput
-                    controlled={true}
+                    stateless={true}
                     onSearch={this._handleSearch}
                     searchIndex={this.state.searchIndex}
                     searchString={this.state.searchString}

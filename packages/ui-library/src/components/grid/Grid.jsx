@@ -3,6 +3,7 @@
 var React = require("re-react"),
     classnames = require("classnames"),
     _ = require("underscore"),
+    Utils = require("../../util/Utils.js"),
     Row = require("./Row.jsx"),
     ColumnPagination = require("./ColumnPagination.jsx"),
     FormCheckbox = require("../forms/FormCheckbox.jsx");
@@ -43,9 +44,11 @@ var React = require("re-react"),
  *     To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
- * @param {boolean} [controlled=false]
+ * @param {boolean} [stateless]
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally.
+ * @param {boolean} [controlled=false]
+ *     DEPRECATED. Use "stateless" instead.
  *
  * @param {Grid#Row[]} [rows]
  *     Rows to display on the table
@@ -307,18 +310,27 @@ var Grid = React.createClass({
     displayName: "Grid",
 
     propTypes: {
-        controlled: React.PropTypes.bool
+        controlled: React.PropTypes.bool, //TODO: remove in new version
+        stateless: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
         return {
-            controlled: false
+            controlled: false //TODO: change to stateless in new version
         };
     },
 
+    componentWillMount: function () {
+        if (!Utils.isProduction()) {
+            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+        }
+    },
+
     render: function () {
+        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
+
         return (
-            this.props.controlled
+            stateless
                 ? React.createElement(
                     GridStateless, _.defaults({ ref: "GridStateless" }, this.props), this.props.children)
                 : React.createElement(

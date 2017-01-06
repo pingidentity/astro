@@ -9,7 +9,7 @@ var React = require("react"),
 /**
  * @name FileUploadStateful
  * @memberof FileUpload
- * @desc This is a wrapper around the stateful (controlled=false) FileUpload to give the user image preview
+ * @desc This is a wrapper around the stateful (stateless=false) FileUpload to give the user image preview
  *    and error messages without having to implement that logic.
  */
 module.exports = React.createClass({

@@ -76,7 +76,7 @@ var FormTextAreaDemo = React.createClass({
                 </div>
                 <div className="input-row">
                     <FormTextArea
-                        controlled={true}
+                        stateless={true}
                         labelText="With defaultValue and undo (stateless)"
                         value={this.state.onUndoValue || "Lorem ipsum dolor sit amet"}
                         onValueChange={this._handleUndoValueChange}
