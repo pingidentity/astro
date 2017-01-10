@@ -184,6 +184,12 @@ label {
                 width: 350px;
             }
         }
+        &.masking-controls {
+            input[type=text],
+            input[type=password] {
+                padding-right: 40px;
+            }
+        }
 
         // temporary sizing classes
         &.input-width-1 {
@@ -1397,7 +1403,7 @@ input[type=file] {
                 height: 36px;
                 width: 180px;
                 padding-left: 35px;
-                padding-right: 5px;
+                padding-right: 25px;
             }
             &:before {
                 font-size: 16px;

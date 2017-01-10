@@ -286,7 +286,8 @@ var Stateless = React.createClass({
                 "value-entered": this.props.value,
                 "inline-save": this.props.showSave,
                 "form-error": this.props.errorMessage,
-                readonly: this.props.readOnly
+                readonly: this.props.readOnly,
+                "masking-controls": this.props.showReveal
             }),
             undo = Translator.translate("undo"),
             save = Translator.translate("save"),
