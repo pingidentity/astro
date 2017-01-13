@@ -2,7 +2,8 @@ var React = require("react"),
     ReactDOM = require("react-dom"),
     classnames = require("classnames"),
     FormLabel = require("../FormLabel.jsx"),
-    FormError = require("../FormError.jsx");
+    FormError = require("../FormError.jsx"),
+    Utils = require("../../../util/Utils.js");
 
 /**
  * @name FileUploadStateless
@@ -14,6 +15,7 @@ module.exports = React.createClass({
 
     propTypes: {
         //labels
+        labelText: React.PropTypes.string,
         labelSelect: React.PropTypes.string.isRequired,
         labelSelectOther: React.PropTypes.string,
         labelRemove: React.PropTypes.string.isRequired,
@@ -44,6 +46,12 @@ module.exports = React.createClass({
         ReactDOM.findDOMNode(this.refs.fileInput).value = "";
     },
 
+    componentWillMount: function () {
+        if (!Utils.isProduction() && this.props.title) {
+            console.warn(Utils.deprecateMessage("title", "labelText"));
+        }
+    },
+
     render: function () {
         var fileSelected = !!(this.props.thumbnailSrc || this.props.fileName);
         var containerClass = classnames(this.props.className, "input-file-upload", {
@@ -55,10 +63,12 @@ module.exports = React.createClass({
 
         return (
             <div className={containerClass} data-id={this.props["data-id"]}>
-                <FormLabel className={classnames({ "form-error": this.props.errorMessage }) }>
+                <FormLabel
+                    className={classnames({ "form-error": this.props.errorMessage }) }
+                    value={this.props.labelText || this.props.title}>
+
                     <ImagePreview
                         show={this.props.showThumbnail}
-                        title={this.props.title}
                         src={this.props.thumbnailSrc}
                     />
                     <input
@@ -68,13 +78,13 @@ module.exports = React.createClass({
                         name={this.props.fileName}
                         accept={this.props.accept}
                         onChange={this.props.onChange}
-                        data-id={this.props["data-id"] + "-input"} />
-
+                        data-id={this.props["data-id"] + "-input"}
+                    />
                     <FileRestrictions
-                            show={this.props.showThumbnail}
-                            data-id={this.props["data-id"] + "-restrictions"}
-                            labelMaxFileSize={this.props.labelMaxFileSize}
-                            labelAcceptedFileTypes={this.props.labelAcceptedFileTypes}
+                        show={this.props.showThumbnail}
+                        data-id={this.props["data-id"] + "-restrictions"}
+                        labelMaxFileSize={this.props.labelMaxFileSize}
+                        labelAcceptedFileTypes={this.props.labelAcceptedFileTypes}
                     />
                     <button className="inline choose">
                         {(fileSelected && this.props.labelSelectOther) || this.props.labelSelect}
@@ -116,11 +126,10 @@ var ImagePreview = React.createClass({
 
         return (
             <div>
-                {this.props.title && <div>{this.props.title}</div>}
                 <span className="image-icon"></span>
-                    <span className="input-image-thumb">
-                        <img src={this.props.src} ref="imageThumb" data-id="imageThumb" />
-                    </span>
+                <span className="input-image-thumb">
+                    <img src={this.props.src} ref="imageThumb" data-id="imageThumb" />
+                </span>
             </div>);
     }
 });

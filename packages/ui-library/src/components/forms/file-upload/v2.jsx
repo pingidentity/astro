@@ -76,20 +76,34 @@ var React = require("react"),
  *    Callback to be triggered when an error is encountered.
  * @param {FileUpload~onChange} onChange
  *    Callback to be triggered when a new file is selected.
+ * @param {FileUpload~onRemove} [onRemove]
+ *    Callback triggered when the selected image for file is removed
  * @param {FileUpload~onValidate} [onValidate]
  *    Callback to be triggered to validate file selection when a selection is made.
  *    The message returned by the validator will be displayed in the component.
  *
- * @param {number} maxFileSizeKb
- *    The maximum size (in KB) of the uploaded file (default 5MB).
+ * @param {string} [errorMessage]
+ *    When defined this value is displayed as an error message.
+ * @param {string} [fileName]
+ *    The current/default value or name of the file upload input.
  * @param {string} accept
  *    Comma-separated string of MIME types that are fed to the 'accept' attribute of the &lt;input&gt;
  *    element and used in the file type validation. Pass an empty string to the property to disable validation.
- * @param {string} [filesAcceptedMsg]
+ * @param {string} [filesAcceptedMessage]
  *    Text describing the accepted file types.
  * @param {string} [defaultImage]
  *    The url for the default image to use.
+ * @param {string} [labelText]
+ *     The text to show as the input's label.
+ * @param [title] {string}
+ *    DEPRECATED. Use "labelText" instead.
+ * @param {number} maxFileSizeKb
+ *    The maximum size (in KB) of the uploaded file (default 5MB).
+ * @param {string} [thumbnailSrc]
+ *    The current/default thumbnail image to display
  *
+ * @param {boolean} [showFilename]
+ *    When true, the value of the select file name is displayed as text
  * @param {boolean} [showThumbnail=false]
  *    Whether or not a thumbnail should be displayed if an image file is selected.
  * @param {boolean} [showRemoveButton=true]

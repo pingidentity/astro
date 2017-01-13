@@ -88,10 +88,8 @@ var FileUploadDemo = React.createClass({
         return (
             <div>
                 <div className="input-row">
-                    <label className="detached">
-                        Basic File Input
-                    </label>
                     <FileUpload
+                        labelText="Basic File Input"
                         onError={this._onError}
                         accept=""
                         labelSelect="Choose a File"
@@ -100,10 +98,8 @@ var FileUploadDemo = React.createClass({
                 </div>
 
                 <div className="input-row">
-                    <label className="detached">
-                        Image File Input with a Max Size
-                    </label>
                     <FileUpload
+                        labelText="Image File Input with a Max Size"
                         data-id="fileUpload"
                         maxFileSizeKb={4096}
                         showThumbnail={true}
@@ -120,10 +116,8 @@ var FileUploadDemo = React.createClass({
                 </div>
 
                 <div className="input-row">
-                    <label className="detached">
-                        File Input with Default on Page Load
-                    </label>
                     <FileUpload
+                        labelText="File Input with Default on Page Load"
                         accept="image/png"
                         validator={this._fileValidator}
                         showThumbnail={true}
@@ -150,10 +144,8 @@ var FileUploadDemo = React.createClass({
                         label="Toggle Tooltip">
 
                         <div className="input-row">
-                            <label className="detached">
-                                Select a File
-                            </label>
                             <FileUpload
+                                labelText="Select a File"
                                 onError={this._onError}
                                 data-id="uploadedFile"
                                 accept=""

@@ -192,7 +192,7 @@ describe("FileUpload", function () {
         component = getComponent({ controlled: true });
         stateful = component.refs.FileUploadStateful;
         stateless = component.refs.FileUploadStateless;
-        
+
         expect(stateless).toBeTruthy();
         expect(stateful).toBeFalsy();
     });
@@ -206,5 +206,16 @@ describe("FileUpload", function () {
         expect(console.warn).toBeCalledWith(
             "Deprecated: use stateless instead of controlled. " +
             "Support for controlled will be removed in next version");
+    });
+
+    //TODO: remove when title no longer supported
+    it("logs warning for deprecated title prop", function () {
+        console.warn = jest.genMockFunction();
+
+        getComponent({ title: "Input Title" });
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use labelText instead of title. " +
+            "Support for title will be removed in next version");
     });
 });
