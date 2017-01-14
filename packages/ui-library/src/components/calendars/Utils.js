@@ -1,4 +1,5 @@
 var Const = require("./Constants");
+var moment = require("moment-range");
 
 var _keyDownViewHelper = [
     {
@@ -27,23 +28,25 @@ module.exports = {
     keyDownActions: function (code) {
         var _viewHelper = _keyDownViewHelper[this.state.currentView];
         var unit = _viewHelper.unit;
+        // Use today's date if no date given
+        var date = this.state.date || moment();
 
         switch (code) {
             case Const.keys.left:
-                this.setDate(this.state.date.subtract(1, unit));
+                this.setDate(date.subtract(1, unit));
                 break;
             case Const.keys.right:
-                this.setDate(this.state.date.add(1, unit));
+                this.setDate(date.add(1, unit));
                 break;
             case Const.keys.up:
-                this.setDate(this.state.date.subtract(_viewHelper.upDown, unit));
+                this.setDate(date.subtract(_viewHelper.upDown, unit));
                 break;
             case Const.keys.down:
-                this.setDate(this.state.date.add(_viewHelper.upDown, unit));
+                this.setDate(date.add(_viewHelper.upDown, unit));
                 break;
             case Const.keys.enter:
                 if (_viewHelper.prev) {
-                    this.prevView(this.state.date);
+                    this.prevView(date);
                 }
 
                 if (_viewHelper.exit) {

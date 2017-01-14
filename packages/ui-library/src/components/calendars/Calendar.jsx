@@ -204,7 +204,7 @@ var Calendar = React.createClass({
      * @param  {Object} e The event object
      */
     keyDown: function (e) {
-        e.stopPropagation();
+        e.preventDefault();
         _keyDownActions.call(this, e.keyCode);
     },
 
@@ -283,14 +283,8 @@ var Calendar = React.createClass({
     /**
      * Handles input blur
      * @method Calendar#inputBlur
-     * @param {Object} e The event object
      */
-    inputBlur: function (e) {
-        //ignore blank inputs to avoid inputBlur setting date to be invalid before setDate can be called
-        if (e.target.value === "") {
-            return;
-        }
-
+    inputBlur: function () {
         var date = this.state.inputValue,
             newDate = null,
             computableDate = null,

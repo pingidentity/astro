@@ -108,7 +108,10 @@ module.exports = React.createClass({
                     onClick={this.props.onNextView} />
 
                 <div className="days-title">{titles}</div>
-                <div className="days" onClick={this.cellClick} >{days}</div>
+                {
+                    /* onMouseDown instead of onClick so cell selection event is caught BEFORE input blur event */
+                }
+                <div className="days" onMouseDown={this.cellClick} >{days}</div>
             </div>
         );
     }

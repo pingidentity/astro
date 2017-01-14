@@ -236,7 +236,7 @@ describe("Calendar", function () {
 
         var cells = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "day");
 
-        ReactTestUtils.Simulate.click(cells[7], {});
+        ReactTestUtils.Simulate.mouseDown(cells[7], {});
 
         expect(callback).toBeCalled();
     });
@@ -257,7 +257,7 @@ describe("Calendar", function () {
 
         var cells = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "day");
 
-        ReactTestUtils.Simulate.click(cells[7], {});
+        ReactTestUtils.Simulate.mouseDown(cells[7], {});
 
         expect(callback).toBeCalled();
     });
@@ -338,7 +338,7 @@ describe("Calendar", function () {
         //open calendar
         ReactTestUtils.Simulate.click(container, {});
 
-        globalKeyListener({ keyCode: 39, stopPropagation: _.noop }); //arrow right
+        globalKeyListener({ keyCode: 39, preventDefault: _.noop }); //arrow right
 
         expect(callback).toBeCalledWith("1444953600000");
     });
@@ -359,7 +359,7 @@ describe("Calendar", function () {
         //open calendar
         ReactTestUtils.Simulate.click(container, {});
 
-        globalKeyListener({ keyCode: 39, stopPropagation: _.noop }); //arrow right
+        globalKeyListener({ keyCode: 39, preventDefault: _.noop }); //arrow right
 
         expect(callback).toBeCalledWith("1444953600000");
     });
@@ -380,11 +380,11 @@ describe("Calendar", function () {
         //open calendar
         ReactTestUtils.Simulate.click(container, {});
 
-        var mockStopPropagation = jest.genMockFunction();
-        globalKeyListener({ keyCode: 39, stopPropagation: mockStopPropagation }); //arrow right
+        var mockpreventDefault = jest.genMockFunction();
+        globalKeyListener({ keyCode: 39, preventDefault: mockpreventDefault }); //arrow right
 
         expect(callback).toBeCalledWith("1444953600000");
-        expect(mockStopPropagation).toBeCalled(); //check event won't propagate
+        expect(mockpreventDefault).toBeCalled(); //check event won't propagate
     });
 
     it("register/unregister global listeners", function () {
@@ -439,39 +439,6 @@ describe("Calendar", function () {
         ReactTestUtils.Simulate.blur(input, {});
 
         expect(callback).toBeCalled();
-    });
-
-    //TODO: remove when v1 no longer supported
-    it("does not trigger onChange callback for empty string date input", function () {
-        var component = ReactTestUtils.renderIntoDocument(
-            <Calendar format="YYYY-MM-DD"
-                      date={selectedDate}
-                      computableFormat="x"
-                      closeOnSelect={true}
-                      onChange={callback}/>
-        );
-
-        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
-
-        ReactTestUtils.Simulate.blur(input, { target: { value: "" } });
-
-        expect(callback).not.toBeCalled();
-    });
-
-    it("does not trigger onValueChange callback for empty string date input", function () {
-        var component = ReactTestUtils.renderIntoDocument(
-            <Calendar format="YYYY-MM-DD"
-                      date={selectedDate}
-                      computableFormat="x"
-                      closeOnSelect={true}
-                      onValueChange={callback}/>
-        );
-
-        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
-
-        ReactTestUtils.Simulate.blur(input, { target: { value: "" } });
-
-        expect(callback).not.toBeCalled();
     });
 
     it("is closing calendar on click outside", function () {
