@@ -101,6 +101,31 @@ describe("LeftNavBar-Reducer", function () {
         expect(state.openSections).toEqual({ "section-1": false, "section-2": true });
     });
 
+    ["prev", "next"].forEach(function (direction) {
+        it("select prev/next when all sections collapsed does nothing", function () {
+            var state = Reducer(getInitialState({ collapsible: true }), Actions.toggleSection("section-1"));
+            state = Reducer(state, Actions.selectItem("item-1.1", "section-1"));
+            expect(state.selectedNode).toBe("item-1.1");
+            expect(state.selectedSection).toBe("section-1");
+
+            // Close the section; all sections closed no
+            state = Reducer(state, Actions.toggleSection("section-1"));
+            expect(state.openSections).toEqual({ "section-1": false });
+            
+            // Attempting to select prev/next section when all sections collapsed should do nothing
+            switch (direction) {
+                case "prev":
+                    state = Reducer(state, Actions.selectPrevItem());
+                    break;
+                case "next":
+                    state = Reducer(state, Actions.selectNextItem());
+                    break;
+            }
+            expect(state.selectedNode).toBe("item-1.1");
+            expect(state.selectedSection).toBe("section-1");
+        });
+    });
+
     [true, false].forEach(function (autocollapse) {
         it("selects item", function () {
             var state = Reducer(getInitialState({ autocollapse: autocollapse }),

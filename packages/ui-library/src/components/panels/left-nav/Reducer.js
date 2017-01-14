@@ -57,6 +57,14 @@ function openAllSections (state) {
  *          The updated state object.
  */
 function selectByOffset (state, offset) {
+    // Do nothing if all sections collapsed
+    var allColllapsed = _.values(state.openSections).every(function (open) {
+        return !open;
+    });
+    if (allColllapsed) {
+        return state;
+    }
+
     var sectionIndex = _.findIndex(state.tree, { id: state.selectedSection });
     var itemIndex = _.findIndex(state.tree[sectionIndex].children, { id: state.selectedNode });
     var moveSection = (offset > 0 && itemIndex === (state.tree[sectionIndex].children.length - 1)) ||
