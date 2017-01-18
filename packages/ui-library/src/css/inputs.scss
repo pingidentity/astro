@@ -1831,6 +1831,7 @@ input[type=file] {
 
 .disabled {
     $disabled-opacity: 0.4;
+    $normal-opacity: 1.0;
 
     font-style: normal;
     cursor: default;
@@ -1849,6 +1850,9 @@ input[type=file] {
         .label-text {
             span {
                 @include opacity($disabled-opacity);
+                &.icon-help {
+                    @include opacity($normal-opacity);
+                }
             }
         }
     }
@@ -1860,6 +1864,9 @@ input[type=file] {
         .label-text {
             span {
                 @include opacity($disabled-opacity);
+                &.icon-help {
+                    @include opacity($normal-opacity);
+                }
             }
         }
     }
