@@ -153,6 +153,20 @@ describe("RockerButton", function () {
         expect(labels[1].innerHTML).toBe("B");
         expect(labels[2].innerHTML).toBe("C");
     });
+    
+    it("disabled will not do anything for button clicks", function () {
+        var callback = jest.genMockFunction(),
+            component = ReactTestUtils.renderIntoDocument(
+            <RockerButton stateless={false} disabled={true} labels={["A", "B", "C"]} />),
+            labels = TestUtils.scryRenderedDOMNodesWithTag(component, "label"),
+            container = ReactDOM.findDOMNode(component);
+
+        expect(component).toBeTruthy();
+        expect(container.getAttribute("class")).toContain("disabled");
+
+        ReactTestUtils.Simulate.click(labels[2], {});
+        expect(callback).not.toBeCalled();
+    });
 
     it("is logging warning if more than 4 labels given", function () {
 

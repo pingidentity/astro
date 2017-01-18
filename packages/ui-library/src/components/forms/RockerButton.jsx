@@ -39,7 +39,9 @@ var React = require("react"),
 *     To enable the component to be externally managed. True will relinquish control to the component's owner.
 *     False or not specified will cause the component to manage state internally.
 * @param {boolean} [controlled=false]
- *     DEPRECATED. Use "stateless" instead.
+*     DEPRECATED. Use "stateless" instead.
+* @param {boolean} [disabled=false]
+*     Indicates whether component is disabled.
 *
 * @param {array} labels
 *     Array of label strings to use as button titles.
@@ -105,7 +107,8 @@ var RockerButtonStateless = React.createClass({
         onChange: React.PropTypes.func,
         onValueChange: React.PropTypes.func,
         selected: React.PropTypes.string,
-        selectedIndex: React.PropTypes.number
+        selectedIndex: React.PropTypes.number,
+        disabled: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
@@ -114,7 +117,8 @@ var RockerButtonStateless = React.createClass({
             className: "",
             onValueChange: _.noop,
             selected: "",
-            selectedIndex: 0
+            selectedIndex: 0,
+            disabled: false
         };
     },
 
@@ -133,7 +137,10 @@ var RockerButtonStateless = React.createClass({
     },
 
     _handleClick: function (label, index) {
-        //TODO: remove v1 support for onChange when switch to v2
+        // TODO: remove v1 support for onChange when switch to v2
+        if (this.props.disabled) {
+            return;
+        }
         if (this.props.onValueChange) {
             this.props.onValueChange({ label: label, index: index });
         }
@@ -144,7 +151,9 @@ var RockerButtonStateless = React.createClass({
 
     render: function () {
         var id = this.props.id || this.props["data-id"],
-            className = classnames("rocker-button sel-" + this.props.selectedIndex, this.props.className);
+            className = classnames("rocker-button sel-" + this.props.selectedIndex, this.props.className, {
+                disabled: this.props.disabled
+            });
 
         return (
             <div ref="container" data-id={id} className={className}>

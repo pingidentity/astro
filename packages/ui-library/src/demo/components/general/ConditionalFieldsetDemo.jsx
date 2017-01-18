@@ -127,6 +127,19 @@ var ConditionalFieldsetDemo = React.createClass({
                         <div title="Option 2">Option 2</div>
                     </ConditionalFieldset>
                 </div>
+                
+                <div className="input-row">
+                    <label className="detached">
+                        ConditionalFieldset, disabled, with empty support, set through dom, stateful
+                    </label>
+                    <ConditionalFieldset data-id="fieldset-4"
+                                         type={this.state.selectedTypeName}
+                                         disabled={true}>
+                        <div title="Do nothing"></div>
+                        <div title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
+                        <div title="Option 2">Option 2</div>
+                    </ConditionalFieldset>
+                </div>
 
                 <div className="input-row">
                     <label className="detached">

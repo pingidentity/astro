@@ -26,11 +26,26 @@ var RockerButtonDemo = React.createClass({
 
         return (
             <div>
-                <RockerButton onValueChange={this._handleValueChange}
-                    labels={["Label One", "Label 2", "Label Three", "Longer Label Four"]} />
 
-                <div>Selected rocker label = {this.state.selectedLabel}, index = {this.state.selectedIndex}</div>
+                <div>
+                    <RockerButton onValueChange={this._handleValueChange}
+                                  labels={["Label One", "Label 2", "Label Three", "Longer Label Four"]} />
+
+                    <div className="input-row">
+                        Selected rocker label = {this.state.selectedLabel}, index = {this.state.selectedIndex}
+                    </div>
+                </div>
+                
+                <div>
+                    <RockerButton disabled={true}
+                                  labels={["Label One", "Label 2", "Label Three", "Longer Label Four"]} />
+
+                    <div>Disabled rocker button.</div>
+                </div>
+                
             </div>
+            
+            
         );
     }
 

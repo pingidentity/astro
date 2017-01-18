@@ -341,6 +341,13 @@ button.ellipsis-loader-button {
             border-width: 1px;
         }
     }
+    &.disabled {
+        @include opacity(0.4);
+        cursor: default;
+        label {
+            pointer-events: none;
+        }
+    }
     &.sel-0 {
         label {
             &:nth-of-type(1) {
