@@ -484,6 +484,24 @@ describe("SelectionList", function () {
         expect(searchBox.getAttribute("value")).toEqual("my query");
     });
 
+    it("check that rendered items update if changed", function () {
+        var component = getComponent({
+            type: SelectionList.ListType.MULTI
+        });
+        var componentRef = component.refs.SelectionListStateful;
+        var inputs = TestUtils.scryRenderedComponentsWithType(component, FormCheckbox);
+
+        expect(inputs.length).toBe(9);
+
+        componentRef.componentDidUpdate(
+            { listItems: listItems },
+            { listItems: listItems.push({ name: "Juan Moore", id: 10 })
+        });
+
+        inputs = TestUtils.scryRenderedComponentsWithType(component, FormCheckbox);
+        expect(inputs.length).toBe(10);
+    });
+
     //TODO: remove when controlled no longer supported
     it("produces stateful/stateless components correctly given controlled prop", function () {
         var component = getComponent({ controlled: false });
@@ -496,7 +514,7 @@ describe("SelectionList", function () {
         component = getComponent({ controlled: true });
         stateful = component.refs.SelectionListStateful;
         stateless = component.refs.SelectionListStateless;
-        
+
         expect(stateless).toBeTruthy();
         expect(stateful).toBeFalsy();
     });

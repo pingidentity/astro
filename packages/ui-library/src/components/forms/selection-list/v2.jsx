@@ -41,7 +41,7 @@ var React = require("react"),
  *     False or not specified will cause the component to manage state internally.
  * @param {boolean} [controlled=false]
 *     DEPRECATED. Use "stateless" instead.
- * @param {SelectionList.types} [type=SelectionList.types.SINGLE]
+ * @param {SelectionList.ListType} [type=SelectionList.ListType.SINGLE]
  *     Enum to specify the type of selection list
  * @param {SelectionListItem[]} items
  *     Actual data to display in the component

@@ -40,11 +40,18 @@ module.exports = React.createClass({
              */
             matchedItems = filterItemsFunction(this.props.items, queryString);
         }
-        
+
         this.setState({
             queryString: queryString,
             matchedItems: matchedItems
         });
+    },
+
+    componentDidUpdate: function (prevProps) {
+        if (this.props.items !== prevProps.items) {
+            var queryString = this.props.queryString || "";
+            this._handleSearch(queryString);
+        }
     },
 
     /**
