@@ -1889,7 +1889,8 @@ input[type=file] {
         .label-text {
             span {
                 @include opacity($disabled-opacity);
-                &.icon-help {
+                &.icon-help,
+                &.icon-lock {
                     @include opacity($normal-opacity);
                 }
             }
@@ -1903,7 +1904,8 @@ input[type=file] {
         .label-text {
             span {
                 @include opacity($disabled-opacity);
-                &.icon-help {
+                &.icon-help,
+                &.icon-lock {
                     @include opacity($normal-opacity);
                 }
             }

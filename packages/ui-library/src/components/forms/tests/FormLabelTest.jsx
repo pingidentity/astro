@@ -37,10 +37,20 @@ describe("FormLabel", function () {
     });
 
     it("render label and hint", function () {
-        var label = ReactTestUtils.renderIntoDocument(<FormLabel value="hello" hint="my hint"/>);
+        var label = ReactTestUtils.renderIntoDocument(<FormLabel value="hello" hint="my hint" />);
         var hint = ReactDOM.findDOMNode(label.refs.hint);
 
         expect(hint.textContent.trim()).toBe("my hint");
+    });
+    
+    it("renders label, hint and lock", function () {
+        var label = ReactTestUtils.renderIntoDocument(
+            <FormLabel value="hello" hint="my hint" lockText="why locked" />),
+            hint = ReactDOM.findDOMNode(label.refs.hint),
+            lockText = ReactDOM.findDOMNode(label.refs.lock);
+
+        expect(hint.textContent).toEqual("my hint");
+        expect(lockText.textContent).toEqual("why locked");
     });
 
     it("renders classname and data-id", function () {

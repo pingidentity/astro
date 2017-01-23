@@ -222,6 +222,15 @@ var FormTextFieldDemo = React.createClass({
                 </div>
                 <div className="input-row">
                     <FormTextField
+                        labelText="With help and lock tooltips"
+                        labelHelpText="This is my help text."
+                        labelLockText="This is the reason the field is locked."
+                        className="input-width-medium"
+                        disabled={true}
+                    />
+                </div>
+                <div className="input-row">
+                    <FormTextField
                         labelText="Validate onChange"
                         labelHelpText="Valid when have 5 or more chars"
                         errorMessage={this.state.onChangeValidationErrorMessage}

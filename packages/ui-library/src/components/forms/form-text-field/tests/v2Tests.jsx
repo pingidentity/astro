@@ -220,9 +220,25 @@ describe("FormTextField", function () {
             helpClassName: "bottom right"
         });
         var help = TestUtils.findRenderedDOMNodeWithDataId(component, "help-tooltip");
+        var lock = TestUtils.findRenderedDOMNodeWithDataId(component, "lock-tooltip");
 
+        expect(lock).toBeFalsy();
         expect(help.textContent).toBe("some help");
         expect(help.getAttribute("class")).toContain("bottom right");
+    });
+    
+    it("renders lock tooltip", function () {
+        var component = getComponent({
+            labelText: "some label",
+            labelLockText: "some lock text",
+            helpClassName: "bottom right"
+        });
+        var labelLockText = TestUtils.findRenderedDOMNodeWithDataId(component, "lock-tooltip");
+        var help = TestUtils.findRenderedDOMNodeWithDataId(component, "help-tooltip");
+
+        expect(help).toBeFalsy();
+        expect(labelLockText.textContent).toBe("some lock text");
+        expect(labelLockText.getAttribute("class")).toContain("bottom right");
     });
 
     it("gives a default data-id", function () {

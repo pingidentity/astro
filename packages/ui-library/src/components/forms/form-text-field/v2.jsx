@@ -106,6 +106,8 @@ var React = require("react"),
 *     CSS classes to apply to the label help hint (bottom, left, etc)
 * @param {string} [labelHelpText]
 *     The text to display for the help tooltip.
+* @param {string} [labelLockText]
+*     The text to display for the lock help tooltip.
 * @param {string} [labelText]
 *     The text to show as the field's label.
 *
@@ -221,6 +223,7 @@ var Stateless = React.createClass({
         labelClassName: React.PropTypes.string,
         labelHelpText: React.PropTypes.string,
         labelText: React.PropTypes.string,
+        labelLockText: React.PropTypes.string,
         maxLength: React.PropTypes.number,
         type: React.PropTypes.string,
         placeholder: React.PropTypes.string,
@@ -314,6 +317,7 @@ var Stateless = React.createClass({
                 data-id={id}
                 value={this.props.labelText}
                 hint={this.props.labelHelpText}
+                lockText={this.props.labelLockText}
                 helpClassName={this.props.helpClassName}>
 
                 <span className="input-container">

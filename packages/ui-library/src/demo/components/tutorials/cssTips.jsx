@@ -171,7 +171,7 @@ var cssTips = React.createClass({
                         <br /><span className="inline-icon icon-filter"></span> icon-filter
                         <br /><span className="inline-icon icon-globe"></span> icon-globe
                         <br /><span className="inline-icon icon-grip"></span> icon-grip
-                        <br /><span className="inline-icon icon-help"></span> icon-help
+                        <br /><span className="inline-icon icon-help"></span>icon-help
                     </Layout.Column>
                     <Layout.Column>
                         <span className="inline-icon icon-help-rounded"></span> icon-help
@@ -180,6 +180,7 @@ var cssTips = React.createClass({
                         <br /><span className="inline-icon icon-key"></span> icon-key
                         <br /><span className="inline-icon icon-left"></span> icon-left
                         <br /><span className="inline-icon icon-lock"></span> icon-lock
+                        <br /><span className="inline-icon icon-lock-large"></span> icon-lock-large
                         <br /><span className="inline-icon icon-menu"></span> icon-menu
                         <br /><span className="inline-icon icon-minus"></span> icon-minus
                         <br /><span className="inline-icon icon-minus-rounded"></span> icon-minus
@@ -187,10 +188,10 @@ var cssTips = React.createClass({
                         <br /><span className="inline-icon icon-next"></span> icon-next
                         <br /><span className="inline-icon icon-overview"></span> icon-overview
                         <br /><span className="inline-icon icon-pin"></span> icon-pin
-                        <br /><span className="inline-icon icon-plus"></span> icon-plus
                     </Layout.Column>
                     <Layout.Column>
-                        <span className="inline-icon icon-plus-rounded"></span> icon-plus-rounded
+                        <span className="inline-icon icon-plus"></span> icon-plus
+                        <br /><span className="inline-icon icon-plus-rounded"></span> icon-plus-rounded
                         <br /><span className="inline-icon icon-puzzle"></span> icon-puzzle
                         <br /><span className="inline-icon icon-previous"></span> icon-previous
                         <br /><span className="inline-icon icon-resend"></span> icon-resend
@@ -203,10 +204,10 @@ var cssTips = React.createClass({
                         <br /><span className="inline-icon icon-sort-none"></span> icon-sort
                         <br /><span className="inline-icon icon-spinner"></span> icon-spinner
                         <br /><span className="inline-icon icon-spin-down"></span> icon-spin
-                        <br /><span className="inline-icon icon-spin-up"></span> icon-spin
                     </Layout.Column>
                     <Layout.Column>
-                        <span className="inline-icon icon-success"></span> icon-success
+                        <span className="inline-icon icon-spin-up"></span> icon-spin
+                        <br /><span className="inline-icon icon-success"></span> icon-success
                         <br /><span className="inline-icon icon-support"></span> icon-support
                         <br /><span className="inline-icon icon-thumb"></span> icon-thumb
                         <br /><span className="inline-icon icon-undo"></span> icon-undo

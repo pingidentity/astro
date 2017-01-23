@@ -198,6 +198,10 @@
 }
 
 .icon-lock:before {
+    content: '\42';
+}
+
+.icon-lock-large:before {
     content: '\4c';
 }
 

@@ -56,13 +56,14 @@ var HelpHint = React.createClass({
     },
     
     render: function () {
-        var dataId = this.props.id || this.props["data-id"];
+        var dataId = this.props.id || this.props["data-id"],
+            iconName = this.props.lock ? "icon-lock" : "icon-help";
         return (
             <div
                 className={classnames("help-tooltip", this.props.className)}
                 data-id={dataId}
                 onClick={this._handleClick}>
-                {this.props.children || (<div><span className="icon-help"></span></div>)}
+                {this.props.children || (<div><span className={iconName}></span></div>)}
                 <div className="tooltip-text"><div className="tooltip-text-content">{this.props.hintText}</div></div>
             </div>
         );

@@ -10,6 +10,14 @@
     background: transparent;
     cursor: pointer;
     line-height: 1em;
+    
+    @mixin default-icon-styles {
+        height: $inline-icon-height;
+        font-size: $inline-icon-height;
+        line-height: $inline-icon-height;
+        color: $color-blue-grey;
+        display: inline-block;
+    }
 
     &.inline {
         &:hover {
@@ -18,15 +26,16 @@
             }
         }
         .icon-help {
-            height: $inline-icon-height;
+            @include default-icon-styles;
             width: $inline-icon-height - 1px;
-            font-size: $inline-icon-height;
-            line-height: $inline-icon-height;
-            color: $color-blue-grey;
-            display: inline-block;
-            &:before { //change to icon-help-rounded
+            &:before { 
+                //change to icon-help-rounded
                 content: '\48';
             }
+        }
+        .icon-lock {
+            @include default-icon-styles;
+            padding-left: 2px;
         }
     }
     .icon-help {
@@ -193,7 +202,6 @@
         .tooltip-text {
             top: 100%;
             bottom: auto;
-
 
             .tooltip-text-content {
                 margin-top: $pointer-size;

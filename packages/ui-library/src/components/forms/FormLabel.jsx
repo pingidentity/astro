@@ -20,6 +20,8 @@ var React = require("react"),
  *     The label text.  If omitted and if this element has no children, nothing is rendered.
  * @param {string} [hint]
  *     The hint text. If omitted, the help hint is not rendered.
+ * @param {string} [lockText]
+ *     The lock text. If omitted, the lock hint is not rendered.
  * @param {string} [helpClassName]
  *     CSS classes to set on the help hint.
  */
@@ -30,6 +32,7 @@ var FormLabel = React.createClass({
         className: React.PropTypes.string,
         value: React.PropTypes.string,
         hint: React.PropTypes.string,
+        lockText: React.PropTypes.string,
         helpClassName: React.PropTypes.string
     },
 
@@ -58,6 +61,21 @@ var FormLabel = React.createClass({
                 />
         );
     },
+    
+    _renderLockHint: function () {
+        if (!this.props.lockText) {
+            return null;
+        }
+
+        return (
+            <HelpHint ref="lock"
+                    data-id="lock-tooltip"
+                    className={classnames("inline", this.props.helpClassName)}
+                    hintText={this.props.lockText}
+                    lock={true}
+                />
+        );
+    },
 
     render: function () {
         var noLabel = typeof(this.props.value) === "undefined" || this.props.value === null;
@@ -73,6 +91,7 @@ var FormLabel = React.createClass({
                     <span className="label-text" data-id="label">
                         { this.props.value }
                         { this._renderHint() }
+                        { this._renderLockHint() }
                     </span>
                 )}
                 {this.props.children}
