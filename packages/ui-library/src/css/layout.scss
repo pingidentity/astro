@@ -932,6 +932,17 @@ $layout-nav-width-offset: 15px;
             }
         }
     }
+    &.columns-width-auto {
+        &.columns-1,
+        &.columns-2,
+        &.columns-3,
+        &.columns-4,
+        &.columns-5 {
+            .content-column {
+                width: auto;
+            }
+        }
+    }
 }
 
 

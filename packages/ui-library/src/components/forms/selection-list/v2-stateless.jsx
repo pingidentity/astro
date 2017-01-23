@@ -121,7 +121,8 @@ module.exports = React.createClass({
     render: function () {
         var className = classnames(this.props.className, {
                 "input-selection-list": true,
-                searchable: this.props.showSearchBox
+                searchable: this.props.showSearchBox,
+                "show-selection-options": this.props.showSelectionOptions
             }),
             visibleItems = this.props.showOnlySelected ? this._filterVisible() : this.props.items;
 

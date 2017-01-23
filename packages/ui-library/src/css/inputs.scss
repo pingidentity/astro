@@ -1391,6 +1391,8 @@ input[type=file] {
     width: 200px;
     box-sizing: border-box;
 
+    @include border-radius(3px);
+
     .input-text.search {
         position: absolute;
         top: 10px;
@@ -1432,6 +1434,31 @@ input[type=file] {
             }
         }
     }
+    .selection-options {
+        border-top: 1px solid $color-input-fill;
+        padding: 5px 0 0;
+        .option {
+            font-size: 13px;
+            font-family: $font-pn-regular;
+            color: $color-active-blue;
+            display: inline-block;
+            padding: 0;
+            cursor: pointer;
+            &:after {
+                content: "|";
+                padding: 0 5px;
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+            &:last-of-type {
+                &:after {
+                    content: "";
+                    padding: 0;
+                }
+            }
+        }
+    }
     &.searchable {
         .input-selection-list-items {
             max-height: 228px - 46px;
@@ -1450,8 +1477,20 @@ input[type=file] {
             }
         }
     }
+    &.show-selection-options {
+        width: 220px;
+        padding-bottom: 5px;
 
-    @include border-radius(3px);
+        .input-text {
+            &.search {
+                .input-container {
+                    input {
+                        width: 198px;
+                    }
+                }
+            }
+        }
+    }
 }
 
 // Input variants
