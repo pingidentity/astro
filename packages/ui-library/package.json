@@ -54,7 +54,7 @@
     "json-loader": "0.5.4",
     "lcov-parse": "0.0.10",
     "marked": "0.3.5",
-    "node-sass": "3.4.2",
+    "node-sass": "4.3.0",
     "process": "0.11.2",
     "q": "1.4.1",
     "react": "0.14.6",
@@ -143,7 +143,8 @@
     "postintegration": "npm run clean-processes",
     "clean-screenshots": "node ./clean-screenshot.js",
     "clean-selenium-log": "node ./clean-selenium-log.js",
-    "clean-processes": "kill $(ps -ef | grep -E 'selenium|http-server' | awk '{print $2}')"
+    "clean-processes": "kill $(ps -ef | grep -E 'selenium|http-server' | awk '{print $2}')",
+    "compile-sass": "node ./compile-sass.js"
   },
   "browserify": {
     "transform": [

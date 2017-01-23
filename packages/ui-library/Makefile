@@ -123,6 +123,23 @@ define package_coverage
 	tar -czf dist/ui-library-coverage-$(1).tar.gz coverage
 endef
 
+define package_css
+	rm -rf build-css
+
+	mkdir -p build-css/css
+	$(NPM_EXEC) run compile-sass
+
+	mkdir build-css/$(1)
+	mv build-css/css build-css/$(1)
+
+	cp -rf src/images build-css/$(1)
+	rm -f build-css/$(1)/images/README
+	
+	cp -rf src/fonts build-css/$(1)
+	rm -f build-css/$(1)/fonts/README
+	rm -rf build-css/$(1)/fonts/proxima-nova
+endef
+
 define deploy
 	mvn deploy:deploy-file \
 		-DgroupId=com.pingone.ui-library \
@@ -225,6 +242,8 @@ package: install-mvn install-node-npm
 
 	$(call package,$(PACKAGE_VERSION))
 	$(call package_coverage,$(PACKAGE_VERSION))
+
+	$(call package_css,$(PACKAGE_VERSION))
 
 # package the module and name the file to include the current version
 # deploy the package as a maven artifact
