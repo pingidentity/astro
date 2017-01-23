@@ -18,6 +18,11 @@
         cursor: pointer;
         font-family: $font-pn-regular;
     }
+    > .collapsible-section-title-value {
+        text-transform: none;
+        margin: 0 0 0 5px;
+        color: $color-midnight;
+    }
     > .collapsible-section-content {
         position: relative;
         overflow: hidden;
@@ -37,9 +42,18 @@
             @include animation(fade-in 0.2s);
         }
     }
+    &.has-title-value {
+        > .collapsible-section-title {
+            &:after {
+                content: ':';
+            }
+        }
+    }
 
     // Override for default collapsible-link styles
     .collapsible-link {
+        margin: 0;
+
         &:hover {
             color: $color-slate;
             text-decoration: none;

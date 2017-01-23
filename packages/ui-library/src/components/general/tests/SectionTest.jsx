@@ -66,18 +66,20 @@ describe("Section", function () {
 
     it("Stateful: renders expanded state", function () {
         var view = ReactTestUtils.renderIntoDocument(
-            <Section title="My Section" expanded={true} stateless={false}>
+            <Section title="My Section" titleValue="some value" expanded={true} stateless={false}>
                 <div data-id="iShouldBeVisible">My Content</div>
             </Section>
         );
 
         var container = TestUtils.findRenderedDOMNodeWithDataId(view, "section");
         var title = TestUtils.findRenderedDOMNodeWithDataId(view, "section-title");
+        var titleValue = TestUtils.findRenderedDOMNodeWithDataId(view, "section-title-value");
         var content = TestUtils.findRenderedDOMNodeWithDataId(view, "iShouldBeVisible");
         var body = TestUtils.findRenderedDOMNodeWithDataId(view, "section-content");
 
         expect(container.getAttribute("class")).toContain("open");
         expect(title.textContent).toEqual("My Section");
+        expect(titleValue.textContent).toEqual("some value");
         expect(body.textContent).toEqual("My Content");
         expect(content.textContent).toEqual("My Content");
     });
@@ -168,6 +170,20 @@ describe("Section", function () {
         expect(element).toBeDefined();
     });
 
+    it("does not render the title colon when the title-value is not defined", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Section title="My Section" stateless={false}>
+                content
+            </Section>
+        );
+
+        var title = TestUtils.findRenderedDOMNodeWithDataId(component, "section-title");
+        var titleValue = TestUtils.findRenderedDOMNodeWithDataId(component, "section-title-value");
+
+        expect(title.textContent).toEqual("My Section");
+        expect(titleValue).toBeFalsy();
+    });
+
     //TODO: remove when controlled no longer supported
     it("produces stateful/stateless components correctly given controlled prop", function () {
         var component = ReactTestUtils.renderIntoDocument(<Section controlled={false} />);
@@ -180,7 +196,7 @@ describe("Section", function () {
         component = ReactTestUtils.renderIntoDocument(<Section controlled={true} />);
         stateful = component.refs.SectionStateful;
         stateless = component.refs.SectionStateless;
-        
+
         expect(stateless).toBeTruthy();
         expect(stateful).toBeFalsy();
     });

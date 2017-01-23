@@ -28,6 +28,10 @@ var React = require("react"),
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally. WARNING. Default value will be
  *     set to false from next version.
+ * @param {string|object} [title]
+ *     The text to display in the the collapsed view and along the top in the expanded view (adjacent to the arrow)
+ * @param {string|object} [titleValue]
+ *     The text to display just to the right of the title (separated by a colon)
  * @param {boolean} [controlled=true]
  *     DEPRECATED. Use "stateless" instead.
  *
@@ -85,7 +89,15 @@ var SectionStateless = React.createClass({
         id: React.PropTypes.string,
         className: React.PropTypes.string,
         expanded: React.PropTypes.bool,
-        onToggle: React.PropTypes.func
+        onToggle: React.PropTypes.func,
+        title: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.object
+        ]),
+        titleValue: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.object
+        ])
     },
 
     getDefaultProps: function () {
@@ -109,21 +121,34 @@ var SectionStateless = React.createClass({
     },
 
     render: function () {
-
         var styles = {
-            "collapsible-section": true,
-            open: this.props.expanded
-        };
+                "collapsible-section": true,
+                open: this.props.expanded
+            },
+            dataId = this.props.id || this.props["data-id"],
+            title = this.props.title;
 
         styles[this.props.className] = !!this.props.className;
 
-        var dataId = this.props.id || this.props["data-id"];
+        if (this.props.titleValue) {
+            styles["has-title-value"] = true;
+        }
 
         return (
             <div className={classnames(styles)} data-id={dataId}>
-                <CollapsibleLink data-id={dataId + "-title"} className="collapsible-section-title"
-                    arrowPosition={CollapsibleLink.arrowPositions.LEFT} title={this.props.title}
-                    expanded={this.props.expanded} onToggle={this._handleToggle} />
+                <CollapsibleLink
+                    data-id={dataId + "-title"}
+                    className="collapsible-section-title"
+                    arrowPosition={CollapsibleLink.arrowPositions.LEFT}
+                    title={title}
+                    expanded={this.props.expanded}
+                    onToggle={this._handleToggle}
+                />
+                {this.props.titleValue && (
+                    <span className="collapsible-section-title-value" data-id={dataId + "-title-value"}>
+                        {this.props.titleValue}
+                    </span>
+                )}
                 <div className="collapsible-section-content" data-id={dataId + "-content"}>
                     <div className="collapsible-section-content-inner">
                         {this.props.children}
