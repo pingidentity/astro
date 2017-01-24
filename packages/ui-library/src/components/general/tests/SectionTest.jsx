@@ -144,6 +144,45 @@ describe("Section", function () {
         expect(stateful.state.expanded).toBeTruthy();
     });
 
+    it("Stateful: renders the right-side/row-accessories text content", function () {
+        var accessoriesContent = "Some text";
+
+        var view = ReactTestUtils.renderIntoDocument(
+            <Section
+                title="My Section"
+                stateless={false}
+                accessories={accessoriesContent}
+            />
+        );
+
+        var accessories = ReactTestUtils.findRenderedDOMComponentWithClass(
+            view,
+            "collapsible-section-accessories"
+        );
+        expect(accessories).toBeTruthy();
+        expect(accessories.textContent).toEqual(accessoriesContent);
+    });
+
+    it("Stateful: renders the right-side/row-accessories html content", function () {
+        var accessoriesText = "Some Content",
+            accessoriesContent = (<span>{accessoriesText}</span>);
+
+        var view = ReactTestUtils.renderIntoDocument(
+            <Section
+                title="My Section"
+                stateless={false}
+                accessories={accessoriesContent}
+            />
+        );
+
+        var accessories = ReactTestUtils.findRenderedDOMComponentWithClass(
+            view,
+            "collapsible-section-accessories"
+        );
+        expect(accessories).toBeTruthy();
+        expect(accessories.textContent).toContain(accessoriesText);
+    });
+
 
     // TODO To be removed once "id" support is discontnued.
     it("render component with id", function () {

@@ -23,6 +23,8 @@ var React = require("react"),
  *     DEPRECATED. Use "data-id" instead. To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
+ * @param {object} [accessories]
+ *     A container where text, buttons, etc may be passed in to render on the right side of the collapsed section
  * @param {boolean} [stateless]
  *     WARNING. Default value for "stateless" will be set to false from next version.
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
@@ -90,6 +92,10 @@ var SectionStateless = React.createClass({
         className: React.PropTypes.string,
         expanded: React.PropTypes.bool,
         onToggle: React.PropTypes.func,
+        accessories: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.object
+        ]),
         title: React.PropTypes.oneOfType([
             React.PropTypes.string,
             React.PropTypes.object
@@ -149,6 +155,9 @@ var SectionStateless = React.createClass({
                         {this.props.titleValue}
                     </span>
                 )}
+                <div data-id={dataId + "-collapsible-section-accessories"} className="collapsible-section-accessories">
+                    {this.props.accessories}
+                </div>
                 <div className="collapsible-section-content" data-id={dataId + "-content"}>
                     <div className="collapsible-section-content-inner">
                         {this.props.children}

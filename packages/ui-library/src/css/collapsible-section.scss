@@ -2,6 +2,7 @@
 .collapsible-section {
     $line-indent: 17px;
 
+    position: relative;
     border-top: 1px solid $color-rabbit-fur;
     border-bottom: 1px solid $color-rabbit-fur;
     padding: 25px 0 22px;
@@ -34,6 +35,32 @@
             margin: 19px 0 0 25px;
         }
     }
+    > .collapsible-section-accessories {
+        float: right;
+
+        .button,
+        input[type=button],
+        button,
+        a,
+        .input-toggle,
+        .status {
+            display: inline-block;
+            vertical-align: top;
+            margin: 8px 0 0 20px;
+
+            @include transform(translateY(-50%));
+        }
+        .button + .button,
+        input[type=button],
+        button {
+            & + .button,
+            & + .button,
+            & + input[type=button],
+            & + button {
+                margin-left: 10px;
+            }
+        }
+    }
     &.open {
         > .collapsible-section-content {
             overflow: visible;
@@ -47,6 +74,21 @@
             &:after {
                 content: ':';
             }
+        }
+    }
+
+    &.draggable {
+        &:before {
+            content: 'G';
+            font-family: $icon-font;
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            margin-top: -9px;
+            color: $color-stone;
+        }
+        .collapsible-section-title {
+            padding-left: 21px;
         }
     }
 
