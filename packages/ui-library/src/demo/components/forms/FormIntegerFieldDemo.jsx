@@ -72,9 +72,26 @@ var FormIntegerFieldDemo = React.createClass({
 
     },
 
+    _blurCallback5: function () {
+        var value = this.state.integerField5;
+
+        if (value < 50 | value > 300) {
+            this.setState({
+                integerField5Error: "Please enter a number between 50 and 300"
+            });
+        }
+
+        else {
+            this.setState({
+                integerField5Error: ""
+            });
+        }
+
+    },
+
     _changeCallback5: function (value) {
 
-        if (value !== "" && (value % 5 !== 0 || value < 50 || value > 300 )) {
+        if (value !== "" && (value % 5 !== 0 || value > 300 )) {
             this.setState({
                 integerField5Error: "Number must be an increment of 5 between 50 and 300"
             });
@@ -196,6 +213,7 @@ var FormIntegerFieldDemo = React.createClass({
                 <div className="input-row">
                     <FormIntegerField
                             onValueChange = {this._changeCallback5}
+                            onBlur={this._blurCallback5}
                             data-id = "integerField5"
                             labelText={"Range 50 - 300, Increment 5 - Value : " + this.state.integerField5}
                             errorMessage = {this.state.integerField5Error}

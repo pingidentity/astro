@@ -4,28 +4,20 @@ var React = require("react"),
     FormTextField = require("../form-text-field").v2,
     classnames = require("classnames"),
     Utils = require("../../../util/Utils.js"),
-    _ = require("underscore");
+    _ = require("underscore"),
+    validator = require("validator");
 
 var isValid = function (value, enforceRange, min, max) {
     if (value === "") {
         return true;
     }
 
-    if (String(value).search(/[A-Z\.]/i) !== -1) {
-        return false;
+    var options = { allow_leading_zeroes: false }; //eslint-disable-line camelcase
+    if (enforceRange) {
+        return validator.isInt(value.toString(), _.extend(options, { min: min, max: max }));
+    } else {
+        return validator.isInt(value.toString(), options);
     }
-
-    if (isNaN(value)) {
-        return false;
-    }
-
-    var intValue = parseInt(value);
-    //check max range if enforceRange is true
-    if (enforceRange && (intValue > max || intValue < min)) {
-        return false;
-    }
-    //check int
-    return intValue % 1 === 0;
 };
 
 /**
@@ -118,7 +110,7 @@ var isValid = function (value, enforceRange, min, max) {
  * @param {number} [min=0]
  *     The minimum number allowed in field.
  * @param {boolean} [enforceRange=true]
- *     Whether or not enforce max value limit.
+ *     Whether or not enforce min/max value limit.
  *
  *  @param {number} [tabIndex=-1]
  *     The tab index to use on the up/down buttons.
@@ -395,7 +387,8 @@ var Stateful = React.createClass({
      * @ignore
      */
     _handleValueChange: function (value) {
-        if (!isValid(value, this.props.enforceRange, this.props.min, this.props.max)) {
+        // Don't restrict "min" when checking typing
+        if (!isValid(value, this.props.enforceRange, null, this.props.max)) {
             // reset the field to the previous valid value
             this.setState({
                 value: this.state.value
