@@ -155,9 +155,13 @@ var SectionStateless = React.createClass({
                         {this.props.titleValue}
                     </span>
                 )}
-                <div data-id={dataId + "-collapsible-section-accessories"} className="collapsible-section-accessories">
-                    {this.props.accessories}
-                </div>
+                {this.props.accessories && (
+                    <div
+                        data-id={dataId + "-collapsible-section-accessories"}
+                        className="collapsible-section-accessories">
+                        {this.props.accessories}
+                    </div>
+                )}
                 <div className="collapsible-section-content" data-id={dataId + "-content"}>
                     <div className="collapsible-section-content-inner">
                         {this.props.children}
