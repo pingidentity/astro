@@ -179,6 +179,7 @@ var cssTips = React.createClass({
                         <br /><span className="inline-icon icon-info"></span> icon-info
                         <br /><span className="inline-icon icon-key"></span> icon-key
                         <br /><span className="inline-icon icon-left"></span> icon-left
+                        <br /><span className="inline-icon icon-link"></span> icon-link
                         <br /><span className="inline-icon icon-lock"></span> icon-lock
                         <br /><span className="inline-icon icon-lock-large"></span> icon-lock-large
                         <br /><span className="inline-icon icon-menu"></span> icon-menu
@@ -187,10 +188,10 @@ var cssTips = React.createClass({
                         <br /><span className="inline-icon icon-network"></span> icon-network
                         <br /><span className="inline-icon icon-next"></span> icon-next
                         <br /><span className="inline-icon icon-overview"></span> icon-overview
-                        <br /><span className="inline-icon icon-pin"></span> icon-pin
                     </Layout.Column>
                     <Layout.Column>
-                        <span className="inline-icon icon-plus"></span> icon-plus
+                        <span className="inline-icon icon-pin"></span> icon-pin
+                        <br /><span className="inline-icon icon-plus"></span> icon-plus
                         <br /><span className="inline-icon icon-plus-rounded"></span> icon-plus-rounded
                         <br /><span className="inline-icon icon-puzzle"></span> icon-puzzle
                         <br /><span className="inline-icon icon-previous"></span> icon-previous
@@ -203,10 +204,10 @@ var cssTips = React.createClass({
                         <br /><span className="inline-icon icon-sort-desc"></span> icon-sort
                         <br /><span className="inline-icon icon-sort-none"></span> icon-sort
                         <br /><span className="inline-icon icon-spinner"></span> icon-spinner
-                        <br /><span className="inline-icon icon-spin-down"></span> icon-spin
                     </Layout.Column>
                     <Layout.Column>
-                        <span className="inline-icon icon-spin-up"></span> icon-spin
+                        <span className="inline-icon icon-spin-down"></span> icon-spin
+                        <br /><span className="inline-icon icon-spin-up"></span> icon-spin
                         <br /><span className="inline-icon icon-success"></span> icon-success
                         <br /><span className="inline-icon icon-support"></span> icon-support
                         <br /><span className="inline-icon icon-thumb"></span> icon-thumb
