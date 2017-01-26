@@ -1390,18 +1390,16 @@ input[type=file] {
     border: 1px solid $color-timberwolf;
     width: 200px;
     box-sizing: border-box;
+    overflow: hidden;
 
     @include border-radius(3px);
 
-    .input-text.search {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        margin: 0;
-        padding: 0;
-
+    .selection-list-search {
+        .input-text {
+            margin: 0 0 10px;
+        }
         .input-container {
-            input {
+            input[type=text] {
                 height: 36px;
                 width: 180px;
                 padding-left: 35px;
@@ -1437,6 +1435,7 @@ input[type=file] {
     .selection-options {
         border-top: 1px solid $color-input-fill;
         padding: 5px 0 0;
+
         .option {
             font-size: 13px;
             font-family: $font-pn-regular;
@@ -1445,7 +1444,7 @@ input[type=file] {
             padding: 0;
             cursor: pointer;
             &:after {
-                content: "|";
+                content: '|';
                 padding: 0 5px;
                 &:hover {
                     text-decoration: none;
@@ -1453,16 +1452,32 @@ input[type=file] {
             }
             &:last-of-type {
                 &:after {
-                    content: "";
+                    content: '';
                     padding: 0;
                 }
             }
         }
     }
+    .required-message {
+        background-color: $color-warning-icon-yellow;
+        color: $color-white;
+        margin: -10px -10px 10px;
+        padding: 7px 10px;
+        font-size: 15px;
+        line-height: 1em;
+        text-align: center;
+
+        @include animation(fade-in 0.5s);
+
+        > span {
+            display: inline-block;
+            text-align: left;
+        }
+    }
     &.searchable {
         .input-selection-list-items {
             max-height: 228px - 46px;
-            margin: 46px 0 0;
+            margin-top: 1px;
         }
         a.clear-search {
             position: absolute;
@@ -1481,8 +1496,8 @@ input[type=file] {
         width: 220px;
         padding-bottom: 5px;
 
-        .input-text {
-            &.search {
+        .selection-list-search {
+            .search {
                 .input-container {
                     input {
                         width: 198px;

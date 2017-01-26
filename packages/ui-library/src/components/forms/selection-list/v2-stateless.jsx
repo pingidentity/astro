@@ -47,7 +47,8 @@ module.exports = React.createClass({
         showOnlySelected: React.PropTypes.bool.affectsRendering,
         labelUnselectAll: React.PropTypes.string,
         labelOnlySelected: React.PropTypes.string,
-        labelShowAll: React.PropTypes.string
+        labelShowAll: React.PropTypes.string,
+        requiredText: React.PropTypes.string.affectsRendering
     },
 
     getDefaultProps: function () {
@@ -128,13 +129,20 @@ module.exports = React.createClass({
 
         return (
             <div data-id={this.props["data-id"]} className={className}>
-                <If test={this.props.showSearchBox}>
-                    <div data-id={this.props["data-id"] + "-search-box"}>
-                        <FormSearchBox queryString={this.props.queryString}
-                                placeholder={this.props.searchPlaceholder}
-                                onValueChange={this.props.onSearch} />
+                {this.props.requiredText && (
+                    <div data-id={this.props["data-id"] + "-required-message"} className="required-message">
+                        <span>{this.props.requiredText}</span>
                     </div>
-                </If>
+                )}
+                {this.props.showSearchBox && (
+                    <div data-id={this.props["data-id"] + "-search-box"} className="selection-list-search">
+                        <FormSearchBox
+                            queryString={this.props.queryString}
+                            placeholder={this.props.searchPlaceholder}
+                            onValueChange={this.props.onSearch}
+                        />
+                    </div>
+                )}
                 <ListOptions
                     data-id={this.props["data-id"] + "-options"}
                     type={this.props.type}

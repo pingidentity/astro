@@ -157,9 +157,6 @@ describe("SelectionList", function () {
         expect(component.props.onValueChange).toBeCalledWith("1");
     });
 
-
-
-
     it("should render with few checked checkboxes and uncheck all when selected", function () {
         var callback = jest.genMockFunction();
         var component = getComponent({
@@ -348,6 +345,20 @@ describe("SelectionList", function () {
         var checkboxes = TestUtils.scryRenderedDOMNodesWithTag(selectionList, "input");
 
         expect(checkboxes.length).toEqual(1);
+    });
+
+    it("displays required text when provided", function () {
+        var requiredText = "this is required";
+
+        var component1 = getComponent();
+        var component2 = getComponent({ requiredText: requiredText });
+
+        var reqMssg1 = TestUtils.findRenderedDOMNodeWithDataId(component1, "my-selection-list-required-message");
+        var reqMssg2 = TestUtils.findRenderedDOMNodeWithDataId(component2, "my-selection-list-required-message");
+
+        expect(reqMssg1).toBeFalsy();
+        expect(reqMssg2).toBeTruthy();
+        expect(reqMssg2.textContent).toContain(requiredText);
     });
 
     it("stateful: triggers onSearch callback when search input changes", function () {

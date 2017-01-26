@@ -58,6 +58,12 @@ var SelectionListDemo = React.createClass({
         return matchedItems;
     },
 
+    _toggleRequired: function () {
+        this.setState({
+            required: !this.state.required
+        });
+    },
+
     componentWillMount: function () {
         var i;
 
@@ -78,7 +84,9 @@ var SelectionListDemo = React.createClass({
             multiSelectIds1: [1, 2],
             multiSelectIds2: [1, 2, 5],
             multiSelectIds3: [1, 7],
-            multiSelectIds4: [1, 3]
+            multiSelectIds4: [1, 3],
+
+            required: false
         };
     },
 
@@ -125,6 +133,11 @@ var SelectionListDemo = React.createClass({
                 <p>
                     Selected Radio ID = {this.state.singleSelectId2}
                 </p>
+                <p>
+                    <button onClick={this._toggleRequired}>
+                        Toggle Required Text
+                    </button>
+                </p>
                 <SelectionList
                     data-id="single-select-2"
                     stateless={false}
@@ -134,6 +147,7 @@ var SelectionListDemo = React.createClass({
                     showSearchBox={true}
                     searchPlaceholder="Search..."
                     onValueChange={this._onSingleSelectionListChange2}
+                    requiredText={this.state.required && "Select at least one"}
                 />
 
                 <hr />

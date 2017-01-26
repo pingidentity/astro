@@ -36,6 +36,8 @@ var React = require("react"),
  *     To define the base "data-id" value for top-level HTML container
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container
+ * @param {string} [requiredText]
+ *     Text to display in required message. When defined, the message is displayed.
  * @param {boolean} [stateless]
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally.
