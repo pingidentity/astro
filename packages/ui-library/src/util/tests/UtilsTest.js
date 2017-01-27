@@ -156,10 +156,20 @@ describe("Utils", function () {
             });
     });
 
+    //TODO: remove in new version when deprecated function removed
     describe("formatDate", function () {
         expect(Utils.formatDate(1444860746000)).toBe("2015-10-14");
         expect(Utils.formatDate(0)).toBe("1970-01-01");
         expect(Utils.formatDate(2525465544000)).toBe("2050-01-10");
+
+        it("logs deprecated warning", function () {
+            console.warn = jest.genMockFunction();
+
+            Utils.formatDate(0);
+            expect(console.warn).toBeCalledWith(
+                "This function is deprecated and will be removed in future versions. " +
+                "Use formatDate in DateUtils instead.");
+        });
     });
 
 

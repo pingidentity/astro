@@ -86,7 +86,8 @@ var Utils = {
 
     /**
      * @alias module:util/Utils.formatDate
-     * @desc Format the given timestamp in milliseconds as a YYYY-MM-DD date.
+     * @desc DEPRECATED. Format the given timestamp in milliseconds as a YYYY-MM-DD date.
+     * @deprecated This function is deprecated and will be removed in future versions. Use formatDate in DateUtils instead.
      *
      * @param {number} timestamp
      *     The timestamp (UNIX time * 1000)
@@ -94,6 +95,11 @@ var Utils = {
      *     Formatted date
      */
     formatDate: function (timestamp) {
+        if (!Utils.isProduction()) {
+            console.warn(
+                "This function is deprecated and will be removed in future versions. " +
+                "Use formatDate in DateUtils instead.");
+        }
         return moment.utc(timestamp).format("YYYY-MM-DD");
     },
 
