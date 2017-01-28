@@ -31,10 +31,12 @@ var Markup = React.createClass({
         return (
             <div className="markup-wrapper">
                 <pre className="language-markup">
-                    <code className="language-markup"
-                          dangerouslySetInnerHTML={{ __html: this.props.custom
-                            ? this._extractCustomCode() : this._extractRenderCode() }}>
-                    </code>
+                    <div className="inner-markup-wrapper">
+                        <code className="language-markup"
+                              dangerouslySetInnerHTML={{ __html: this.props.custom
+                                ? this._extractCustomCode() : this._extractRenderCode() }}>
+                        </code>
+                    </div>
                 </pre>
             </div>);
     }

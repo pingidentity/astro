@@ -157,10 +157,15 @@ $sidenav-lineheight: 22px;
 	.markup-wrapper {
 		overflow:hidden;
 	}
+	.inner-markup-wrapper {
+		overflow-x: auto;
+		padding: 1em;
+	}
 	pre.language-markup, pre.language-javascript, .output {
 		position: relative;
 		margin-top: 32px;
 		margin-bottom: 0;
+		padding: 0;
 		@include border-radius(3px);
 
 		&:before {
