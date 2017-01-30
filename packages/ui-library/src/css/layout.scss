@@ -4,7 +4,6 @@ $layout-nav-link-height: 47px; // works better as odd number
 $layout-nav-width-offset: 15px;
 
 
-
 // CORE PAGE LAYOUT STYLES -------------------------------------------------------------------------
 #header {
     z-index: 1;
@@ -188,7 +187,6 @@ $layout-nav-width-offset: 15px;
     left: 0;
     width: $layout-nav-width + $layout-nav-width-offset;
     box-sizing: border-box;
-
     background-color: $color-timberwolf;
     border-right: $layout-nav-width-offset solid $color-white;
 
@@ -251,7 +249,7 @@ $layout-nav-width-offset: 15px;
     }
     .selected-item-arrow {
         position: absolute;
-        left: 215px;
+        left: $layout-nav-width;
         z-index: -1;
         opacity: 0;
 
@@ -439,9 +437,9 @@ $layout-nav-width-offset: 15px;
     top: $layout-header-height;
     right: 0;
     bottom: 0;
-    left: $layout-nav-width + 11px - $layout-nav-width-offset;
+    left: $layout-nav-width + $layout-nav-width-offset;
     background-color: $color-white;
-    padding: 25px 40px 0;
+    padding: 25px 40px 40px;
 
     .detail-primary-buttons {
         position: absolute;
@@ -468,7 +466,7 @@ $layout-nav-width-offset: 15px;
     position: fixed;
     z-index: 1;
     top: $layout-header-height;
-    left: $layout-nav-width + $layout-nav-width-offset;
+    left: $layout-nav-width;
     right: 0;
     color: $color-white;
     padding: 0;
