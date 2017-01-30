@@ -299,6 +299,11 @@ button.ellipsis-loader-button {
                 color: $color-active-blue;
             }
         }
+        &.inline {
+            .icon-ellipsis {
+                top: 9px;
+            }
+        }
     }
 }
 

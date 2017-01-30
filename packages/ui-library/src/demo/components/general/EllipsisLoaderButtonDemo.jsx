@@ -7,6 +7,7 @@ var EllipsisLoaderButton = require("./../../../components/general/EllipsisLoader
 * @desc A demo for EllipsisLoaderButton
 */
 var EllipsisLoaderDemo = React.createClass({
+    numDemos: 3,
 
     getInitialState: function () {
         return {
@@ -15,33 +16,44 @@ var EllipsisLoaderDemo = React.createClass({
         };
     },
 
-    _toggleLoadingButton1: function () {
-        this.setState({
-            loading1: !this.state.loading1
-        });
+    componentWillMount: function () {
+        var i;
+
+        for (i=1; i<=this.numDemos; i+=1) {
+            this["_toggleLoadingButton" + i] = this._toggleLoadingButton.bind(null, i);
+        }
     },
 
-    _toggleLoadingButton2: function () {
-        this.setState({
-            loading2: !this.state.loading2
-        });
+    _toggleLoadingButton: function (i) {
+        var newState = {};
+
+        newState["loading" + i] = !this.state["loading" + i];
+
+        this.setState(newState);
     },
 
     render: function () {
         return (
             <div>
                 <EllipsisLoaderButton
-                    data-id="demo-ellipsis-loader-button"
+                    data-id="demo-ellipsis-loader-button-primary"
                     loading={this.state.loading1}
-                    text="My Ellipsis Button Test Button"
+                    text="Primary Loader Button"
                     onClick={this._toggleLoadingButton1}
                     className="primary"
                 />
                 <EllipsisLoaderButton
-                    data-id="demo-ellipsis-loader-button"
+                    data-id="demo-ellipsis-loader-button-secondary"
                     loading={this.state.loading2}
-                    text="My Ellipsis Button Test Button"
+                    text="Secondary Loader Button"
                     onClick={this._toggleLoadingButton2}
+                />
+                <EllipsisLoaderButton
+                    data-id="demo-ellipsis-loader-button-inline"
+                    loading={this.state.loading3}
+                    text="Inline / Pill-style Loader Button"
+                    onClick={this._toggleLoadingButton3}
+                    className="inline"
                 />
             </div>
         );
