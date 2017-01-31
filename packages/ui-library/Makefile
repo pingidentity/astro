@@ -137,7 +137,6 @@ define package_css
 	
 	cp -rf src/fonts build-css/$(1)
 	rm -f build-css/$(1)/fonts/README
-	rm -rf build-css/$(1)/fonts/proxima-nova
 endef
 
 define deploy
