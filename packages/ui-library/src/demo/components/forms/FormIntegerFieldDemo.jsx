@@ -17,10 +17,35 @@ var FormIntegerFieldDemo = React.createClass({
             integerField7Disabled: false
         };
     },
-    _changeCallback0: function (value) {
-        this.setState({
-            integerField0: value
-        });
+
+    _handleValueChange: function (index, value) {
+        var newState = {};
+        newState["integerField" + index] = value;
+        this.setState(newState);
+    },
+
+    _handleBlur: function (index, min, max) {
+        var value = this.state["integerField" + index];
+        var newState = {};
+
+        if (value < min | value > max) {
+            newState["integerField" + index + "Error"] = "Please enter a number between " + min + " and " + max;
+            this.setState(newState);
+        } else {
+            newState["integerField" + index + "Error"] = "";
+            this.setState(newState);
+        }
+    },
+
+    componentDidMount: function () {
+        // Bind "onValueChange" callbacks
+        this._handleValueChange2 = this._handleValueChange.bind(null, 2);
+        this._handleValueChange3 = this._handleValueChange.bind(null, 3);
+        this._handleValueChange6 = this._handleValueChange.bind(null, 6);
+
+        // Bind "onBlur" callbacks
+        this._handleBlur4 = this._handleBlur.bind(null, 4, 0, 25);
+        this._handleBlur5 = this._handleBlur.bind(null, 5, 50, 300);
     },
 
     _changeCallback: function (value) {
@@ -32,18 +57,6 @@ var FormIntegerFieldDemo = React.createClass({
 
     },
 
-    _changeCallback2: function (value) {
-        this.setState({
-            integerField2: value
-        });
-    },
-
-    _changeCallback3: function (value) {
-        this.setState({
-            integerField3: value
-        });
-    },
-
     _changeCallback4: function (value) {
         this.setState({
             integerField4: value
@@ -53,40 +66,6 @@ var FormIntegerFieldDemo = React.createClass({
                 integerField4Error: ""
             });
         }
-    },
-
-    _blurCallback4: function () {
-        var value = this.state.integerField4;
-
-        if (value < 0 | value > 25) {
-            this.setState({
-                integerField4Error: "Please enter a number between 0 and 25"
-            });
-        }
-
-        else {
-            this.setState({
-                integerField4Error: ""
-            });
-        }
-
-    },
-
-    _blurCallback5: function () {
-        var value = this.state.integerField5;
-
-        if (value < 50 | value > 300) {
-            this.setState({
-                integerField5Error: "Please enter a number between 50 and 300"
-            });
-        }
-
-        else {
-            this.setState({
-                integerField5Error: ""
-            });
-        }
-
     },
 
     _changeCallback5: function (value) {
@@ -103,12 +82,6 @@ var FormIntegerFieldDemo = React.createClass({
         }
         this.setState({
             integerField5: value
-        });
-    },
-
-    _changeCallback6: function (value) {
-        this.setState({
-            integerField6: value
         });
     },
 
@@ -135,7 +108,7 @@ var FormIntegerFieldDemo = React.createClass({
                 <div className="input-row">
                     <FormIntegerField
                             labelText={"Basic - Value : " + this.state.integerField0}
-                            onValueChange = {this._changeCallback0}
+                            onValueChange = {this._handleValueChange0}
                             initialValue = ""
                             stateless={false}
                             className="input-width-medium"
@@ -157,14 +130,14 @@ var FormIntegerFieldDemo = React.createClass({
                             showUndo = {true}
                             labelText={"With default value and undo - Value : " + this.state.integerField2}
                             initialValue = {8800}
-                            onValueChange = {this._changeCallback2}
+                            onValueChange = {this._handleValueChange2}
                             className="input-width-medium"
                             stateless={false}
                     />
                 </div>
                 <div className="input-row">
                     <FormIntegerField
-                            onValueChange = {this._changeCallback3}
+                            onValueChange = {this._handleValueChange3}
                             data-id = "integerField3"
                             labelText={"Required - Value : " + this.state.integerField3}
                             initialValue = ""
@@ -176,7 +149,7 @@ var FormIntegerFieldDemo = React.createClass({
                 </div>
                 <div className="input-row">
                     <FormIntegerField
-                            onValueChange = {this._changeCallback6}
+                            onValueChange = {this._handleValueChange6}
                             data-id = "integerField6"
                             labelText={"Range 0 - 15 - Value : " + this.state.integerField6}
                             initialValue = {this.state.integerField6}
@@ -198,7 +171,7 @@ var FormIntegerFieldDemo = React.createClass({
                                 this.state.integerField4
                             }
                             enforceRange={false}
-                            onBlur = {this._blurCallback4}
+                            onBlur = {this._handleBlur4}
                             errorMessage = {this.state.integerField4Error}
                             max = {25}
                             min = {0}
@@ -213,7 +186,7 @@ var FormIntegerFieldDemo = React.createClass({
                 <div className="input-row">
                     <FormIntegerField
                             onValueChange = {this._changeCallback5}
-                            onBlur={this._blurCallback5}
+                            onBlur={this._handleBlur5}
                             data-id = "integerField5"
                             labelText={"Range 50 - 300, Increment 5 - Value : " + this.state.integerField5}
                             errorMessage = {this.state.integerField5Error}
