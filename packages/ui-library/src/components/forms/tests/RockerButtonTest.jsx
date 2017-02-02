@@ -11,12 +11,14 @@ describe("RockerButton", function () {
         RockerButton = require("../RockerButton.jsx"),
         _ = require("underscore");
 
+    var labelsArray = ["A", "B", "C"];
+
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
             onChange: jest.genMockFunction(),
             onValueChange: jest.genMockFunction(),
             stateless: true,
-            labels: ["A", "B", "C"],
+            labels: labelsArray,
             className: "myRocker"
         });
 
@@ -55,46 +57,63 @@ describe("RockerButton", function () {
     it("stateless: will trigger onChange callback when selection changes", function () {
         var callback = jest.genMockFunction();
         var component = ReactTestUtils.renderIntoDocument(
-            <RockerButton stateless={true} labels={["A", "B", "C"]} onChange={callback} />);
+            <RockerButton stateless={true} labels={labelsArray} onChange={callback} />);
 
         var labels = TestUtils.scryRenderedDOMNodesWithTag(component, "label");
+        var testIndex = 2;
 
-        ReactTestUtils.Simulate.click(labels[2], {});
-        expect(component.props.onChange).toBeCalledWith("C", 2);
+        ReactTestUtils.Simulate.click(labels[testIndex], {});
+        expect(component.props.onChange).toBeCalledWith(labelsArray[testIndex], testIndex);
     });
 
     it("stateful: will trigger onChange callback when selection changes", function () {
         var callback = jest.genMockFunction();
         var component = ReactTestUtils.renderIntoDocument(
-            <RockerButton stateless={true} labels={["A", "B", "C"]} onChange={callback} />);
+            <RockerButton stateless={false} labels={labelsArray} onChange={callback} />
+        );
+        var labels = TestUtils.scryRenderedDOMNodesWithTag(component, "label");
+        var testIndex = 2;
 
+        ReactTestUtils.Simulate.click(labels[testIndex], {});
+        expect(component.props.onChange).toBeCalledWith(labelsArray[testIndex], testIndex);
+    });
+
+    it("stateful: onChange callback is not called when selection does not change", function () {
+        var callback = jest.genMockFunction();
+        var component = ReactTestUtils.renderIntoDocument(
+            <RockerButton stateless={false} selectedIndex={0} labels={labelsArray} onChange={callback} />
+        );
         var labels = TestUtils.scryRenderedDOMNodesWithTag(component, "label");
 
-        ReactTestUtils.Simulate.click(labels[2], {});
-        expect(component.props.onChange).toBeCalledWith("C", 2);
+        ReactTestUtils.Simulate.click(labels[0], {});
+        expect(component.props.onChange).not.toBeCalled();
     });
 
     it("stateless: will trigger onValueChange callback when selection changes", function () {
         var component = getComponent();
         var labels = TestUtils.scryRenderedDOMNodesWithTag(component, "label");
+        var testIndex = 2;
 
         ReactTestUtils.Simulate.click(labels[2], {});
-        expect(component.props.onValueChange).toBeCalledWith({ label: "C", index: 2 });
+        expect(component.props.onValueChange).toBeCalledWith({ label: labelsArray[testIndex], index: testIndex });
     });
 
     it("stateful: will trigger onValueChange callback when selection changes", function () {
-        var component = getComponent({ stateless: false });
+        var callback = jest.genMockFunction();
+        var component = ReactTestUtils.renderIntoDocument(
+            <RockerButton stateless={false} labels={labelsArray} onValueChange={callback} />
+        );
         var labels = TestUtils.scryRenderedDOMNodesWithTag(component, "label");
+        var testIndex = 2;
 
-        ReactTestUtils.Simulate.click(labels[2], {});
-        expect(component.props.onValueChange).toBeCalledWith({ label: "C", index: 2 });
+        ReactTestUtils.Simulate.click(labels[testIndex], {});
+        expect(component.props.onValueChange).toBeCalledWith({ label: labelsArray[testIndex], index: testIndex });
     });
 
     it("steteless: will not trigger callbacks if not given", function () {
         var callback = jest.genMockFunction();
-
         var component = ReactTestUtils.renderIntoDocument(
-            <RockerButton stateless={true} labels={["A", "B", "C"]} />);
+            <RockerButton stateless={true} labels={labelsArray} />);
         var labels = TestUtils.scryRenderedDOMNodesWithTag(component, "label");
 
         ReactTestUtils.Simulate.click(labels[2], {});
@@ -103,9 +122,8 @@ describe("RockerButton", function () {
 
     it("stateful: will not trigger callbacks if not given", function () {
         var callback = jest.genMockFunction();
-
         var component = ReactTestUtils.renderIntoDocument(
-            <RockerButton stateless={false} labels={["A", "B", "C"]} />);
+            <RockerButton stateless={false} labels={labelsArray} />);
         var labels = TestUtils.scryRenderedDOMNodesWithTag(component, "label");
 
         ReactTestUtils.Simulate.click(labels[2], {});
@@ -153,11 +171,11 @@ describe("RockerButton", function () {
         expect(labels[1].innerHTML).toBe("B");
         expect(labels[2].innerHTML).toBe("C");
     });
-    
+
     it("disabled will not do anything for button clicks", function () {
         var callback = jest.genMockFunction(),
             component = ReactTestUtils.renderIntoDocument(
-            <RockerButton stateless={false} disabled={true} labels={["A", "B", "C"]} />),
+            <RockerButton stateless={false} disabled={true} labels={labelsArray} />),
             labels = TestUtils.scryRenderedDOMNodesWithTag(component, "label"),
             container = ReactDOM.findDOMNode(component);
 
@@ -207,7 +225,7 @@ describe("RockerButton", function () {
         component = ReactTestUtils.renderIntoDocument(<RockerButton controlled={true} labels={["1", "2"]} />);
         stateful = component.refs.RockerButtonStateful;
         stateless = component.refs.RockerButtonStateless;
-        
+
         expect(stateless).toBeTruthy();
         expect(stateful).toBeFalsy();
     });

@@ -8,13 +8,6 @@ var React = require("react"),
 */
 var RockerButtonDemo = React.createClass({
 
-    getInitialState: function () {
-        return {
-            selectedLabel: "Label One",
-            selectedIndex: 0
-        };
-    },
-
     _handleValueChange: function (labelValues) {
         this.setState({
             selectedLabel: labelValues.label,
@@ -22,33 +15,35 @@ var RockerButtonDemo = React.createClass({
         });
     },
 
-    render: function () {
+    getInitialState: function () {
+        return {
+            selectedLabel: "Label One",
+            selectedIndex: 0
+        };
+    },
 
+    render: function () {
+        var labels = ["Label One", "Label 2", "Label Three", "Longer Label Four"];
         return (
             <div>
+                <RockerButton
+                    stateless={false}
+                    onValueChange={this._handleValueChange}
+                    labels={labels}
+                />
+                <div>Selected rocker label = {this.state.selectedLabel}, index = {this.state.selectedIndex}</div>
 
-                <div>
-                    <RockerButton onValueChange={this._handleValueChange}
-                                  labels={["Label One", "Label 2", "Label Three", "Longer Label Four"]} />
+                <br /><br />
 
-                    <div className="input-row">
-                        Selected rocker label = {this.state.selectedLabel}, index = {this.state.selectedIndex}
-                    </div>
-                </div>
-                
-                <div>
-                    <RockerButton disabled={true}
-                                  labels={["Label One", "Label 2", "Label Three", "Longer Label Four"]} />
-
-                    <div>Disabled rocker button.</div>
-                </div>
-                
+                <RockerButton
+                    stateless={false}
+                    disabled={true}
+                    labels={labels}
+                />
+                <div>Disabled rocker button.</div>
             </div>
-            
-            
         );
     }
-
 });
 
 module.exports = RockerButtonDemo;

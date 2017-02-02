@@ -137,13 +137,15 @@ var RockerButtonStateless = React.createClass({
     },
 
     _handleClick: function (label, index) {
-        // TODO: remove v1 support for onChange when switch to v2
         if (this.props.disabled) {
             return;
         }
+
         if (this.props.onValueChange) {
             this.props.onValueChange({ label: label, index: index });
         }
+
+        // TODO: remove v1 support for onChange when switch to v2
         if (this.props.onChange) {
             this.props.onChange(label, index);
         }
@@ -165,23 +167,33 @@ var RockerButtonStateless = React.createClass({
                                 key={text}>{text}</label>);
                     }.bind(this))
                 }
-            </div>);
+            </div>
+        );
     }
 });
 
 var RockerButtonStateful = React.createClass({
 
-    _handleValueChange: function (labelValues) {
-        //TODO: remove v1 support for onChange when switch to v2
+    //TODO: remove v1 support for onChange when switch to v2
+    _handleOnChange: function (label, index) {
+        this._handleOnValueChange({ label: label, index: index });
+    },
+
+    _handleOnValueChange: function (selectedButton) {
+        // Don't trigger callback if index is the same
+        if (selectedButton.index === this.state.selectedIndex) {
+            return;
+        }
+
         if (this.props.onValueChange) {
-            this.props.onValueChange({ label: labelValues.label, index: labelValues.index });
+            this.props.onValueChange(selectedButton);
         }
         if (this.props.onChange) {
-            this.props.onChange(labelValues.label, labelValues.index);
+            this.props.onChange(selectedButton.label, selectedButton.index);
         }
 
         this.setState({
-            selectedIndex: labelValues.index
+            selectedIndex: selectedButton.index
         });
     },
 
@@ -198,8 +210,13 @@ var RockerButtonStateful = React.createClass({
     },
 
     render: function () {
-        return (<RockerButtonStateless ref="RockerButtonStateless" {...this.props}
-            selectedIndex={this.state.selectedIndex}
-            onValueChange={this._handleValueChange} />);
+        var props = _.defaults({
+            ref: "RockerButtonStateless",
+            selectedIndex: this.state.selectedIndex,
+            onChange: this.props.onChange ? this._handleOnChange : null,
+            onValueChange: this.props.onValueChange ? this._handleOnValueChange : null
+        }, this.props);
+
+        return React.createElement(RockerButtonStateless, props);
     }
 });
