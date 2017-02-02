@@ -105,6 +105,22 @@ describe("FormTimeZone", function () {
         expect(valueLink.textContent).toEqual(initialValue);
     });
 
+    it("stateful: renders the value link without underscores", function () {
+        var component = getComponent({ value: "America/Los_Angeles" }),
+            valueLink = getValueLink(component);
+
+        expect(valueLink).toBeTruthy();
+        expect(valueLink.textContent).toEqual("America/Los Angeles");
+    });
+
+    it("stateless: using getZoneNameDisplayValue renders value link without underscores", function () {
+        var component = getComponent({ value: FormTimeZone.getZoneNameDisplayValue("America/Fort_Nelson") }),
+            valueLink = getValueLink(component);
+
+        expect(valueLink).toBeTruthy();
+        expect(valueLink.textContent).toEqual("America/Fort Nelson");
+    });
+
     it("renders the menu when the link is clicked", function () {
         var component = getComponent(),
             valueLink = getValueLink(component),

@@ -11,6 +11,21 @@ var React = require("react"),
     Utils = require("../../util/Utils.js"),
     _ = require("underscore");
 
+
+/**
+* @function FormTimeZone~getZoneNameDisplayValue
+* @desc Replaces underscores in time zone names with a space and returns this display value.
+*
+* @param {string} zoneName
+*    The name of the time zone to be filtered.
+*
+* @returns {string} The filtered time zone name
+*/
+var getZoneNameDisplayValue = function (zoneName) {
+    return zoneName.replace(/_/g, " ");
+};
+
+
 /**
 * @callback FormTimeZone~onValueChange
 *
@@ -95,7 +110,7 @@ var React = require("react"),
 *
 **/
 
-module.exports = React.createClass({
+var FormTimeZone = React.createClass({
 
     propTypes: {
         controlled: React.PropTypes.bool, //TODO: remove in new version
@@ -568,6 +583,7 @@ var TimeZoneStateful = React.createClass({
     },
 
     render: function () {
+        var value = this.state.value || moment.tz.guess();
         var props = _.defaults({
             filterByCountry: this.state.filterByCountry,
             onToggle: this._toggleMenu,
@@ -577,9 +593,14 @@ var TimeZoneStateful = React.createClass({
             ref: "TimeZoneStateless",
             searchString: this.state.searchString,
             selectedIndex: this.state.selectedIndex,
-            value: this.state.value
+            value: value,
+            displayValue: this.props.displayValue || getZoneNameDisplayValue(value)
         }, this.props);
 
         return React.createElement(TimeZoneStateless, props);
     }
 });
+
+FormTimeZone.getZoneNameDisplayValue = getZoneNameDisplayValue;
+
+module.exports = FormTimeZone;
