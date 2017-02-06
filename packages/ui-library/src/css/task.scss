@@ -6,6 +6,32 @@
     background-color: transparentize($color-white, $inactive-opacity);
     margin: 0 0 20px;
 
+    &.active {
+        border: 1px solid $color-timberwolf;
+        background-color: $color-white;
+
+        .task-title {
+            .progress,
+            .task-title-text {
+                @include opacity(1);
+            }
+        }
+        .task-content {
+            max-height: 12000px;
+        }
+        .task-title-selection {
+            @include opacity(1);
+        }
+    }
+    &.item {
+        padding: 10px 30px 0 15px;
+    }
+    &.align-title {
+        .task-content {
+            margin-left: 53px;
+        }
+    }
+
     .task-content {
         position: relative;
         max-height: 0;
@@ -24,23 +50,6 @@
         }
         textarea {
             max-width: 600px;
-        }
-    }
-    &.active {
-        border: 1px solid $color-timberwolf;
-        background-color: $color-white;
-
-        .task-title {
-            .progress,
-            .task-title-text {
-                @include opacity(1);
-            }
-        }
-        .task-content {
-            max-height: 12000px;
-        }
-        .task-title-selection {
-            @include opacity(1);
         }
     }
     .task-title {
@@ -117,9 +126,6 @@
             width: 18px;
             vertical-align: middle;
         }
-    }
-    &.item {
-        padding: 10px 30px 0 15px;
     }
     .indent {
         padding-left: 50px;
