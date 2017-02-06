@@ -112,7 +112,7 @@ label {
 
     .label-text {
         color: $color-elephant;
-        margin: 0 0 8px;
+        margin: 0 0 7px;
 
         .help-tooltip {
             margin-left: 10px;
@@ -460,7 +460,7 @@ label {
     }
 
     &.detached {
-        margin-bottom: 8px;
+        margin-bottom: 7px;
         margin-right: 10px;
         display: block;
 
@@ -470,6 +470,12 @@ label {
             width: 18px;
             vertical-align: text-bottom;
         }
+    }
+    &.parent {
+        font-family: $font-pn-bold;
+        display: block;
+        font-size: 14px;
+        margin: 0 0 10px;
     }
 
     &.inline-save {
