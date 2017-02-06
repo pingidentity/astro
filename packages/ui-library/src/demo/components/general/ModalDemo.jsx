@@ -71,8 +71,9 @@ var ModalDemo = React.createClass({
                         onClose={this._toggle2}>
 
                         <div>
-                            A maximized modal always occupy the full maximum height and width that a modal may have,
-                            regardless of content.
+                            A maximized modal always occupies the full width that a modal may have, regardless of
+                            its content.  As with the regular modal, the height of a maximized modal grows with its
+                            content until it reaches a specified distance from the bottom of the browser window.
                         </div>
                     </Modal>
                 </div>

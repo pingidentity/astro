@@ -119,13 +119,7 @@
     }
     &.maximize {
         &.show {
-            .modal-content {
-                bottom: $min-bottom;
-            }
             .modal-body {
-                bottom: 0;
-                min-height: inherit;
-                height: calc(100% - #{$min-bottom});
                 width: $max-modal-width;
             }
         }
