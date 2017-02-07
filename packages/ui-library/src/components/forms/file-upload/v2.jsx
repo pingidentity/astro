@@ -110,14 +110,13 @@ var React = require("react"),
  *    Whether or not the remove button should be displayed.
  * @param {boolean} [disabled=false]
  *    controls whether the component is disabled
- * @param {boolean} [stacked=false]
- *    controls whether to display file names inline or on a separate line
  *
  *
  * @example
  *   <FileUpload accept="image/jpeg, image/jpg, image/gif, image/png" maxFileSizeKb={10} labelSelect="" />
  *
  */
+
 
 var FileUpload = React.createClass({
     displayName: "FileUpload",
@@ -133,8 +132,7 @@ var FileUpload = React.createClass({
             accept: Constants.Accept.IMAGE,
             showThumbnail: false,
             showRemoveButton: true,
-            disabled: false,
-            stacked: false
+            disabled: false
         };
     },
 

@@ -25,7 +25,6 @@ module.exports = React.createClass({
         onChange: React.PropTypes.func.isRequired,
         //flags
         disabled: React.PropTypes.bool,
-        stacked: React.PropTypes.bool,
         showFilename: React.PropTypes.bool,
         showThumbnail: React.PropTypes.bool,
         showRemoveButton: React.PropTypes.bool,
@@ -100,16 +99,18 @@ module.exports = React.createClass({
                     )}
                 </FormLabel>
 
-                <div className={classnames("file-info", { stacked: this.props.stacked })}>
-                    <Filename
-                        show={this.props.showFilename}
-                        data-id={this.props["data-id"] + "-fileName"}
-                        value={this.props.fileName}
-                    />
-                    <a className="file-remove" ref="remove" onClick={this.props.onRemove}>
-                        {this.props.labelRemove}
-                    </a>
-                </div>
+                {fileSelected &&
+                    <div className="file-info">
+                        <Filename
+                            show={this.props.showFilename}
+                            data-id={this.props["data-id"] + "-fileName"}
+                            value={this.props.fileName}
+                        />
+                        <a className="file-remove" ref="remove" onClick={this.props.onRemove}>
+                            {this.props.labelRemove}
+                        </a>
+                    </div>
+                }
 
                 <AcceptMessage
                     data-id={this.props["data-id"] + "-filesAcceptedMessage"}

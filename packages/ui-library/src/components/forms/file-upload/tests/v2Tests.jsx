@@ -141,7 +141,7 @@ describe("FileUpload", function () {
     });
 
     it("will reset without onValidate", function () {
-        var component = getComponent({ onValidate: null });
+        var component = getComponent({ onValidate: null, fileName: "file.jpg" });
         var fileInput = get(component, "input");
         var removeButton = get(component, "removeButton");
 
@@ -151,7 +151,7 @@ describe("FileUpload", function () {
     });
 
     it("will reset the value of the file input value when the remove link is clicked.", function () {
-        var component = getComponent({ onValidate: jest.genMockFunction() });
+        var component = getComponent({ onValidate: jest.genMockFunction(), fileName: "file.jpg" });
         var fileInput = get(component, "input");
         var removeButton = get(component, "removeButton");
 

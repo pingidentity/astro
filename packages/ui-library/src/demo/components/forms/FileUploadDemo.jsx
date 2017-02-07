@@ -128,6 +128,7 @@ var FileUploadDemo = React.createClass({
                         labelSelect="Choose a File"
                         labelRemove="Remove"
                     />
+                    <br /><br />
                     Selected file = {this.state.file2}
                 </div>
 
@@ -198,6 +199,7 @@ var FileUploadDemo = React.createClass({
                         labelSelect="Choose a File"
                         labelRemove="Remove"
                     />
+                    <br /><br />
                     Input status = {this.state.status3}
 
                     <div className="attention">
