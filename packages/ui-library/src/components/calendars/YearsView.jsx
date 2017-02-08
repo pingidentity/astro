@@ -3,6 +3,7 @@ var classnames = require("classnames");
 var moment = require("moment-range");
 var Cell = require("./Cell.jsx");
 var ViewHeader = require("./ViewHeader.jsx");
+var CalendarUtils = require("./Utils.js");
 
 module.exports = React.createClass({
 
@@ -22,11 +23,19 @@ module.exports = React.createClass({
     years: [],
 
     next: function () {
-        this.props.onSetDate(this.props.date.add(10, "years"));
+        var date = this.props.date.clone().add(10, "years");
+
+        // Get nearest year that falls in range
+        date = CalendarUtils.getNearestInRange(date, this.props.dateRange, "years");
+        this.props.onSetDate(date);
     },
 
     prev: function () {
-        this.props.onSetDate(this.props.date.subtract(10, "years"));
+        var date = this.props.date.clone().subtract(10, "years");
+
+        // Get nearest year that falls in range
+        date = CalendarUtils.getNearestInRange(date, this.props.dateRange, "years");
+        this.props.onSetDate(date);
     },
 
     rangeCheck: function (currYear) {
@@ -54,9 +63,10 @@ module.exports = React.createClass({
             .by("years", function (year) {
                 items.push({
                     label: year.format("YYYY"),
-                    curr: currYear === year.year()
+                    curr: currYear === year.year(),
+                    outOfRange: !CalendarUtils.inDateRange(year, this.props.dateRange, "years")
                 });
-            });
+            }.bind(this));
 
         this.years = items;
         return items;
@@ -64,8 +74,13 @@ module.exports = React.createClass({
 
     cellClick: function (e) {
         var year = parseInt(e.target.innerHTML, 10);
-        var date = this.props.date.year(year);
-        this.props.onPrevView(date);
+        var date = this.props.date.clone().year(year);
+        // Check year falls in range
+        if (CalendarUtils.inDateRange(date, this.props.dateRange, "years")) {
+            // Get nearest month within year that falls in range
+            date = CalendarUtils.getNearestInRange(date, this.props.dateRange, "months");
+            this.props.onPrevView(date);
+        }
     },
 
 
@@ -76,18 +91,23 @@ module.exports = React.createClass({
         var yearsCells = years.map(function (item, i) {
             var className = classnames({
                 year: true,
-                current: item.label === currYear
+                current: parseInt(item.label) === currYear,
+                disabled: item.outOfRange
             });
             return <Cell data-id={"years-cell-" + i} value={item.label} className={className} key={i} />;
         });
 
         var currentDate = [years[0].label, years[years.length - 1].label].join("-");
+        var start = this.props.dateRange && this.props.dateRange.startDate && moment(this.props.dateRange.startDate);
+        var end = this.props.dateRange && this.props.dateRange.endDate && moment(this.props.dateRange.endDate);
 
         return (
             <div data-id={this.props["data-id"]} className="years-view">
                 <ViewHeader
                     onPrev={this.prev}
                     onNext={this.next}
+                    prevDisabled={start && (parseInt(years[0].label) - 1) < start.year()}
+                    nextDisabled={end && (parseInt(years[years.length - 1].label) + 1) > end.year()}
                     data={currentDate} />
                 <div className="years" onClick={this.cellClick}>{yearsCells}</div>
             </div>

@@ -1210,6 +1210,11 @@ input[type=file] {
                             margin-left: 20px;
                         }
                     }
+                    &.disabled {
+                        .fa {
+                            @include opacity(0.4);
+                        }
+                    }
                 }
             }
             .days-title {
@@ -1235,12 +1240,14 @@ input[type=file] {
                     width: 58px;
                     height: 38px;
                     line-height: 38px;
+                    color: $color-input-text;
                 }
             }
             .year {
                 width: 58px;
                 height: 38px;
                 line-height: 38px;
+                color: $color-input-text;
             }
             .day {
                 width: 26px;
@@ -1250,6 +1257,8 @@ input[type=file] {
                 &.prev,
                 &.next {
                     @include opacity(0.4);
+                    @include transition(opacity 0.5s ease);
+                    visibility: hidden;
                 }
             }
             .cell {
@@ -1283,6 +1292,9 @@ input[type=file] {
                         @include opacity(1);
                         background: transparent;
                     }
+                }
+                &.disabled {
+                    @include opacity(0.4);;
                 }
             }
         }

@@ -3,6 +3,7 @@ var classnames = require("classnames");
 var moment = require("moment-range");
 var Cell = require("./Cell.jsx");
 var ViewHeader = require("./ViewHeader.jsx");
+var CalendarUtils = require("./Utils.js");
 
 module.exports = React.createClass({
 
@@ -29,17 +30,25 @@ module.exports = React.createClass({
     },
 
     next: function () {
-        this.props.onSetDate(this.props.date.add(1, "months"));
+        var date = this.props.date.clone().add(1, "months");
+
+        // Get nearest date within month that falls in range
+        date = CalendarUtils.getNearestInRange(date, this.props.dateRange);
+        this.props.onSetDate(date);
     },
 
     prev: function () {
-        this.props.onSetDate(this.props.date.subtract(1, "months"));
+        var date = this.props.date.clone().subtract(1, "months");
+
+        // Get nearest date within month that falls in range
+        date = CalendarUtils.getNearestInRange(date, this.props.dateRange);
+        this.props.onSetDate(date);
     },
 
     cellClick: function (e) {
         var cell = e.target,
             date = parseInt(cell.innerHTML, 10),
-            newDate = this.props.date ? this.props.date : moment();
+            newDate = this.props.date ? this.props.date.clone() : moment();
 
         if (isNaN(date)) {
             return;
@@ -52,7 +61,9 @@ module.exports = React.createClass({
         }
 
         newDate.date(date);
-        this.props.onSetDate(newDate, true);
+        if (CalendarUtils.inDateRange(newDate, this.props.dateRange)) {
+            this.props.onSetDate(newDate, true);
+        }
     },
 
 
@@ -74,9 +85,10 @@ module.exports = React.createClass({
                     prev: (day.month() < month && (day.year() <= year)) || day.year() < year,
                     next: day.month() > month || day.year() > year,
                     curr: day.date() === currDay && day.month() === month,
-                    today: day.date() === today.date() && day.month() === today.month()
+                    today: day.date() === today.date() && day.month() === today.month(),
+                    outOfRange: !CalendarUtils.inDateRange(day, this.props.dateRange)
                 });
-            });
+            }.bind(this));
 
         return days;
     },
@@ -92,18 +104,25 @@ module.exports = React.createClass({
                 next: item.next,
                 prev: item.prev,
                 current: item.curr,
-                today: item.today
+                today: item.today,
+                disabled: item.outOfRange
             });
             return <Cell data-id={"days-cell-" + i} value={item.label} className={className} key={i} />;
         });
 
-        var currentDate = this.props.date ? this.props.date.format("MMMM") : moment().format("MMMM");
+        var currentDate = this.props.date ? this.props.date.clone().format("MMMM") : moment().format("MMMM");
+        var start = this.props.dateRange && this.props.dateRange.startDate && moment(this.props.dateRange.startDate);
+        var end = this.props.dateRange && this.props.dateRange.endDate && moment(this.props.dateRange.endDate);
 
         return (
             <div data-id={this.props["data-id"]} className="view days-view">
+                { /* Clone & alter to first & last days to only compare month & year ranges w/o days */ }
                 <ViewHeader
                     onPrev={this.prev}
                     onNext={this.next}
+                    prevDisabled={start &&
+                        this.props.date.clone().date(1).subtract(1, "months").isBefore(start.date(1))}
+                    nextDisabled={end && this.props.date.clone().date(31).add(1, "months").isAfter(end.date(31))}
                     data={currentDate}
                     onClick={this.props.onNextView} />
 

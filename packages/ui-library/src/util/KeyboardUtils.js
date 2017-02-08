@@ -68,6 +68,22 @@ exports.isModifier = function (code) {
 };
 
 /**
+* @alias module:util/KeyboardUtils.isArrowKey
+* @desc Checks whether code is a keyboard arrow (up/down/left/right) key code.
+*
+* @param {number} code
+*    The code to check.
+*
+* @return {boolean}
+*    Whether or not the code is a keyboard arrow (up/down/left/right) key code.
+*/
+exports.isArrowKey = function (code) {
+    return exports.isArrowUp(code) || exports.isArrowDown(code) ||
+        exports.isArrowLeft(code) || exports.isArrowRight(code);
+};
+
+
+/**
 * @function module:util/KeyboardUtils.isTag
 * @desc Checks whether code is a keyboard modifier tag key code.
 *

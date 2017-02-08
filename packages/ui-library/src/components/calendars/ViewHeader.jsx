@@ -1,4 +1,5 @@
 var React = require("react");
+var classnames = require("classnames");
 
 module.exports = React.createClass({
 
@@ -7,7 +8,9 @@ module.exports = React.createClass({
         onNext: React.PropTypes.func,
         onPrev: React.PropTypes.func,
         onClick: React.PropTypes.func,
-        data: React.PropTypes.string
+        data: React.PropTypes.string,
+        prevDisabled: React.PropTypes.bool,
+        nextDisabled: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
@@ -18,14 +21,16 @@ module.exports = React.createClass({
 
     render: function () {
         var prop = this.props;
+        var prevClassName = classnames("icon", { disabled: this.props.prevDisabled });
+        var nextClassName = classnames("icon", { disabled: this.props.nextDisabled });
 
         return (
             <div data-id={this.props["data-id"]} className="navigation-wrapper">
-                <span onClick={prop.onPrev} className="icon" >
+                <span onClick={this.props.prevDisabled ? null : prop.onPrev} className={prevClassName} >
                     <i className="fa fa-angle-left icon-left"></i>
                 </span>
                 <span onClick={prop.onClick} className="navigation-title" >{prop.data}</span>
-                <span onClick={prop.onNext} className="icon" >
+                <span onClick={this.props.nextDisabled ? null : prop.onNext} className={nextClassName} >
                     <i className="fa fa-angle-right icon-right"></i>
                 </span>
             </div>

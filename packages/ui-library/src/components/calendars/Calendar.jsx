@@ -22,6 +22,17 @@ var Views = {
 };
 
 /**
+* @typedef Calendar~dateRange
+* @desc An object describing the start and end dates (inclusive) of a selectable date range.
+*
+* @property {*} [startDate]
+*    The numeric value for the start date of the date range.
+* @property {*} [endDate]
+*    The numeric value for the end date of the date range.
+*
+*/
+
+/**
 * @deprecated
 * @callback Calendar~onChange
 *
@@ -57,7 +68,11 @@ var Views = {
  *    CSS classes to apply to the label help container.
  *
  * @param {*} [date]
- *    Numeric value for the selected date.
+ *    Numeric value for the selected date. If not provided, will use the today's date.
+ * @param {Calendar~dateRange} [dateRange]
+ *    A date range to restrict the selectable dates in the calendar.
+ *    If provided, will restrict calendar date selection so it can't be less and/or can't be greater than the date range.
+ *    An undefined start/end date will result in no restrictions in that direction for the allowable calendar dates.
  * @param {string} [format="MM-DD-YYYY"]
  *    String value of the date format you want to display (e.g. "YYYY-MM-DD").
  * @param {string} [computableFormat="MM-DD-YYYY"]
@@ -118,6 +133,10 @@ var Calendar = React.createClass({
         closeOnSelect: React.PropTypes.bool,
         computableFormat: React.PropTypes.string,
         date: React.PropTypes.any,
+        dateRange: React.PropTypes.shape({
+            startDate: React.PropTypes.any,
+            endDate: React.PropTypes.any
+        }),
         format: React.PropTypes.string,
         helpClassName: React.PropTypes.string,
         labelClassName: React.PropTypes.string,
@@ -231,12 +250,14 @@ var Calendar = React.createClass({
                 isVisible: false
             });
 
-            //TODO: remove when v1 no longer supported
-            if (this.props.onChange) {
-                this.props.onChange(date.format(this.state.computableFormat));
-            }
-            if (this.props.onValueChange) {
-                this.props.onValueChange(date.format(this.state.computableFormat));
+            if (CalendarUtils.inDateRange(date, this.props.dateRange)) {
+                //TODO: remove when v1 no longer supported
+                if (this.props.onChange) {
+                    this.props.onChange(date.format(this.state.computableFormat));
+                }
+                if (this.props.onValueChange) {
+                    this.props.onValueChange(date.format(this.state.computableFormat));
+                }
             }
 
         } else {
@@ -260,12 +281,14 @@ var Calendar = React.createClass({
             isVisible: this.props.closeOnSelect && isDayView ? !this.state.isVisible : this.state.isVisible
         });
 
-        //TODO: remove when v1 no longer supported
-        if (this.props.onChange) {
-            this.props.onChange(date.format(this.state.computableFormat));
-        }
-        if (this.props.onValueChange) {
-            this.props.onValueChange(date.format(this.state.computableFormat));
+        if (CalendarUtils.inDateRange(date, this.props.dateRange)) {
+            //TODO: remove when v1 no longer supported
+            if (this.props.onChange) {
+                this.props.onChange(date.format(this.state.computableFormat));
+            }
+            if (this.props.onValueChange) {
+                this.props.onValueChange(date.format(this.state.computableFormat));
+            }
         }
     },
 
@@ -310,17 +333,24 @@ var Calendar = React.createClass({
             computableDate = newDate.format(this.state.computableFormat);
         }
 
-        this.setState({
-            date: newDate,
-            inputValue: newDate ? newDate.format(format) : null
-        });
+        if (CalendarUtils.inDateRange(date, this.props.dateRange)) {
+            this.setState({
+                date: newDate,
+                inputValue: newDate ? newDate.format(format) : null
+            });
 
-        //TODO: remove when v1 no longer supported
-        if (this.props.onChange) {
-            this.props.onChange(computableDate);
-        }
-        if (this.props.onValueChange) {
-            this.props.onValueChange(computableDate);
+            //TODO: remove when v1 no longer supported
+            if (this.props.onChange) {
+                this.props.onChange(computableDate);
+            }
+            if (this.props.onValueChange) {
+                this.props.onValueChange(computableDate);
+            }
+        } else {
+            this.setState({
+                date: this.state.date,
+                inputValue: this.state.date.format(format)
+            });
         }
     },
 
@@ -383,14 +413,17 @@ var Calendar = React.createClass({
                 if (typeof calendarDate === "object") {
                     calendarDate.locale(Translator.currentLanguage);
                 }
-                view = <DaysView date={calendarDate} onSetDate={this.setDate} onNextView={this.nextView} />;
+                view = (<DaysView date={calendarDate} onSetDate={this.setDate} onNextView={this.nextView}
+                                dateRange={this.props.dateRange} />);
                 break;
             case Views.MONTHS:
-                view = <MonthsView date={calendarDate} onSetDate={this.setDate} //eslint-disable-line
-                                   onNextView={this.nextView} onPrevView={this.prevView} />;
+                view = (<MonthsView date={calendarDate} onSetDate={this.setDate} //eslint-disable-line
+                                   onNextView={this.nextView} onPrevView={this.prevView}
+                                   dateRange={this.props.dateRange} />);
                 break;
             case Views.YEARS:
-                view = <YearsView date={calendarDate} onSetDate={this.setDate} onPrevView={this.prevView} />;
+                view = (<YearsView date={calendarDate} onSetDate={this.setDate} onPrevView={this.prevView}
+                                dateRange={this.props.dateRange} />);
                 break;
         }
 

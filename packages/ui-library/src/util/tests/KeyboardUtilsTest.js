@@ -43,6 +43,27 @@ describe("KeyboardUtils", function () {
         });
     });
 
+    describe("isArrowKey", function () {
+        it("returns true for arrow key codes", function () {
+            expect(KeyboardUtils.isArrowKey(KeyboardUtils.KeyCodes.ARROW_UP)).toBe(true);
+            expect(KeyboardUtils.isArrowKey(KeyboardUtils.KeyCodes.ARROW_DOWN)).toBe(true);
+            expect(KeyboardUtils.isArrowKey(KeyboardUtils.KeyCodes.ARROW_LEFT)).toBe(true);
+            expect(KeyboardUtils.isArrowKey(KeyboardUtils.KeyCodes.ARROW_RIGHT)).toBe(true);
+        });
+
+        it("returns false for non-arrow key codes", function () {
+            expect(KeyboardUtils.isArrowKey(KeyboardUtils.KeyCodes.TAB)).toBe(false);
+            expect(KeyboardUtils.isArrowKey(KeyboardUtils.KeyCodes.ESC)).toBe(false);
+            expect(KeyboardUtils.isArrowKey(KeyboardUtils.KeyCodes.ENTER)).toBe(false);
+            expect(KeyboardUtils.isArrowKey(KeyboardUtils.KeyCodes.LEFT_SHIFT)).toBe(false);
+            expect(KeyboardUtils.isArrowKey(KeyboardUtils.KeyCodes.LEFT_CTRL)).toBe(false);
+            expect(KeyboardUtils.isArrowKey(KeyboardUtils.KeyCodes.LEFT_ALT)).toBe(false);
+            expect(KeyboardUtils.isArrowKey(KeyboardUtils.KeyCodes.LEFT_CMD)).toBe(false);
+            expect(KeyboardUtils.isArrowKey(KeyboardUtils.KeyCodes.RIGHT_CMD)).toBe(false);
+            expect(KeyboardUtils.isArrowKey(KeyboardUtils.KeyCodes.RIGHT_ALT)).toBe(false);
+        });
+    });
+
     describe("isTab", function () {
         it("returns true for tab key code", function () {
             expect(KeyboardUtils.isTab(KeyboardUtils.KeyCodes.TAB)).toBe(true);

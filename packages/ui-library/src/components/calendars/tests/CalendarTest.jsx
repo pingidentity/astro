@@ -12,6 +12,7 @@ jest.dontMock("../Utils");
 jest.dontMock("../Constants");
 jest.dontMock("../../forms/FormLabel.jsx");
 jest.dontMock("../../tooltips/HelpHint.jsx");
+jest.dontMock("../../../util/KeyboardUtils.js");
 
 describe("Calendar", function () {
     var React = require("react"),
@@ -23,6 +24,10 @@ describe("Calendar", function () {
 
         callback = jest.genMockFunction(),
         selectedDateString = "2015-10-15",
+        dateRange = {
+            startDate: new Date(2015, 9, 10),   //Oct 10 2015
+            endDate: new Date(2015, 10, 20)  //Nov 20 2015
+        },
         selectedDate = moment(new Date(selectedDateString));
 
     beforeEach(function () {
@@ -465,6 +470,319 @@ describe("Calendar", function () {
 
         //make sure calendar was closed
         expect(cells.length).toEqual(0);
+    });
+
+    it("renders with dates outside range disabled", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar date={selectedDate} dateRange={dateRange} />
+        );
+
+        var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
+
+        //open calendar
+        ReactTestUtils.Simulate.click(container, {});
+
+        //In October
+        var cells = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "day");
+        cells = cells.filter(function (cell) {
+            return cell.classList.contains("disabled") && !cell.classList.contains("prev");
+        });
+
+        expect(cells.length).toBe(9); // dates 1 to 9 out of range
+
+        //Navigate to November
+        var next = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "icon")[1];
+        ReactTestUtils.Simulate.click(next, {});
+        var month = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        expect(month.textContent).toBe("November");
+
+        cells = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "day");
+        cells = cells.filter(function (cell) {
+            return cell.classList.contains("disabled") && !cell.classList.contains("next");
+        });
+
+        expect(cells.length).toBe(10); // dates 21 - 30 out of range
+    });
+
+    it("renders with months outside range disabled", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar date={new Date(2015, 9, 15)} dateRange={dateRange} />
+        );
+
+        var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
+
+        //open calendar
+        ReactTestUtils.Simulate.click(container, {});
+
+        //In October & Switch to months view
+        var navigation = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        ReactTestUtils.Simulate.click(navigation, {});
+
+        var cells = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "month");
+        var disabled = cells.filter(function (cell) {
+            return cell.classList.contains("disabled");
+        });
+        expect(disabled.length).toBe(10);
+
+        var enabled = cells.filter(function (cell) {
+            return !cell.classList.contains("disabled");
+        });
+        expect(enabled.length).toBe(2); // only Oct & Nov not disabled
+        expect(enabled[0].textContent).toBe("Oct");
+        expect(enabled[1].textContent).toBe("Nov");
+    });
+
+    it("renders with years outside range disabled", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar date={selectedDate} dateRange={dateRange} />
+        );
+
+        var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
+
+        //open calendar
+        ReactTestUtils.Simulate.click(container, {});
+
+        //In October & Switch to months view
+        var navigation = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        ReactTestUtils.Simulate.click(navigation, {});
+
+        //Switch to years view
+        navigation = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        ReactTestUtils.Simulate.click(navigation, {});
+
+        var cells = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "year");
+        var disabled = cells.filter(function (cell) {
+            return cell.classList.contains("disabled");
+        });
+        expect(disabled.length).toBe(11);
+
+        var enabled = cells.filter(function (cell) {
+            return !cell.classList.contains("disabled");
+        });
+        expect(enabled.length).toBe(1);  // only 2015 not disabled
+        expect(enabled[0].textContent).toBe("2015");
+    });
+
+    it("input display date can't be out of range", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar date={selectedDate} dateRange={dateRange} format="YYYY-MM-DD" />
+        );
+
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+
+        ReactTestUtils.Simulate.change(input, { target: { value: "2080-12-04" } });
+        ReactTestUtils.Simulate.blur(input, {});
+
+        //input was not updated
+        expect(input.value).not.toBe("2080-12-04");
+    });
+
+    it("disables header arrow navigation if date out of range", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar date={selectedDate} dateRange={dateRange} />
+        );
+
+        var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
+
+        //open calendar
+        ReactTestUtils.Simulate.click(container, {});
+
+        //In October
+        var month = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        expect(month.textContent).toBe("October");
+
+        var arrows = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "icon");
+        expect(arrows.length).toBe(2); // prev & next
+
+        //Nothing happens clicking disabled prev
+        var prev = arrows[0];
+        expect(prev.classList.contains("disabled")).toBe(true);
+        ReactTestUtils.Simulate.click(prev, {});
+        month = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        expect(month.textContent).toBe("October");
+
+        //Navigate to with enabled next
+        var next = arrows[1];
+        ReactTestUtils.Simulate.click(next, {});
+        month = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        expect(month.textContent).toBe("November");
+
+        arrows = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "icon");
+        expect(arrows.length).toBe(2); // prev & next
+
+        //Nothing happens clicking disabled next
+        next = arrows[1];
+        expect(next.classList.contains("disabled")).toBe(true);
+        ReactTestUtils.Simulate.click(next, {});
+        month = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        expect(month.textContent).toBe("November");
+    });
+
+    it("disables header arrow navigation if month out of range", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar date={selectedDate} dateRange={dateRange} />
+        );
+
+        var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
+
+        //open calendar
+        ReactTestUtils.Simulate.click(container, {});
+
+        //In October
+        var month = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        expect(month.textContent).toBe("October");
+
+        //Switch to months view
+        ReactTestUtils.Simulate.click(month, {});
+        var year = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        expect(year.textContent).toBe("2015");
+
+        var arrows = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "icon");
+        expect(arrows.length).toBe(2); // prev & next
+
+        //Nothing happens clicking disabled prev
+        var prev = arrows[0];
+        expect(prev.classList.contains("disabled")).toBe(true);
+        ReactTestUtils.Simulate.click(prev, {});
+        year = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        expect(year.textContent).toBe("2015");
+
+        //Nothing happens clicking disabled next
+        var next = arrows[1];
+        expect(next.classList.contains("disabled")).toBe(true);
+        ReactTestUtils.Simulate.click(next, {});
+        year = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        expect(year.textContent).toBe("2015");
+    });
+
+    it("disables header arrow navigation if year out of range", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar date={selectedDate} dateRange={dateRange} />
+        );
+
+        var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
+
+        //open calendar
+        ReactTestUtils.Simulate.click(container, {});
+
+        //In October
+        var month = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        expect(month.textContent).toBe("October");
+
+        //Switch to years view
+        ReactTestUtils.Simulate.click(month, {});
+        var year = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        expect(year.textContent).toBe("2015");
+
+        ReactTestUtils.Simulate.click(year, {});
+        var years = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        expect(years.textContent).toBe("2010-2021");
+
+        var arrows = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "icon");
+        expect(arrows.length).toBe(2); // prev & next
+
+        //Nothing happens clicking disabled prev
+        var prev = arrows[0];
+        expect(prev.classList.contains("disabled")).toBe(true);
+        ReactTestUtils.Simulate.click(prev, {});
+        years = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        expect(years.textContent).toBe("2010-2021");
+
+        //Nothing happens clicking disabled next
+        var next = arrows[1];
+        expect(next.classList.contains("disabled")).toBe(true);
+        ReactTestUtils.Simulate.click(next, {});
+        years = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        expect(years.textContent).toBe("2010-2021");
+    });
+
+    it("does not change date if out of range date selected", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar date={selectedDate} dateRange={dateRange} onValueChange={callback} />
+        );
+
+        var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
+
+        //open calendar
+        ReactTestUtils.Simulate.click(container, {});
+
+        //In October
+        var cells = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "day");
+        cells = cells.filter(function (cell) {
+            return cell.classList.contains("disabled") && !cell.classList.contains("prev");
+        });
+
+        expect(cells[0].textContent).toBe("1");
+        ReactTestUtils.Simulate.click(cells[0], {});
+        expect(callback).not.toBeCalled();
+    });
+
+    it("does not change date if out of range month selected", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar date={selectedDate} dateRange={dateRange} onValueChange={callback} />
+        );
+
+        var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
+
+        //open calendar
+        ReactTestUtils.Simulate.click(container, {});
+
+        //In October & switch to months view
+        var month = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        ReactTestUtils.Simulate.click(month, {});
+
+        var cells = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "month");
+        cells = cells.filter(function (cell) {
+            return cell.classList.contains("disabled");
+        });
+
+        expect(cells[0].textContent).toBe("Jan");
+        ReactTestUtils.Simulate.click(cells[0], {});
+        expect(callback).not.toBeCalled();
+    });
+
+    it("does not change year if out of range year selected", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar date={selectedDate} dateRange={dateRange} onValueChange={callback} />
+        );
+
+        var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
+
+        //open calendar
+        ReactTestUtils.Simulate.click(container, {});
+
+        //In October & switch to years view
+        var month = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        ReactTestUtils.Simulate.click(month, {});
+        var year = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        ReactTestUtils.Simulate.click(year, {});
+
+        var cells = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "year");
+        cells = cells.filter(function (cell) {
+            return cell.classList.contains("disabled");
+        });
+
+        expect(cells[0].textContent).toBe("2010");
+        ReactTestUtils.Simulate.click(cells[0], {});
+        expect(callback).not.toBeCalled();
+    });
+
+    it("prevView navigation does not trigger onValueChange callback when date out of range", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar date={selectedDate} dateRange={dateRange} onValueChange={callback} />
+        );
+
+        component.prevView(moment(new Date(2015, 9, 1))); // Oct 1st is out of date range
+        expect(callback).not.toBeCalled();
+    });
+
+    it("setDate does not trigger onValueChange callback when date out of range", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar date={selectedDate} dateRange={dateRange} onValueChange={callback} />
+        );
+
+        component.setDate(moment(new Date(2015, 9, 1))); // Oct 1st is out of date range
+        expect(callback).not.toBeCalled();
     });
 
     //TODO: remove when v1 no longer supported
