@@ -109,9 +109,9 @@ var ToggleStateless = React.createClass({
 
         return (
             <div data-id={id} className={className} onClick={this._handleToggle}>
-                <a className="toggle">
+                <span className="toggle">
                     <input type="hidden" />
-                </a>
+                </span>
             </div>
         );
     }

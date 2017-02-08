@@ -99,7 +99,7 @@ var DetailsTooltip = React.createClass({
             this.refs.manager.close();
         }
     },
-    
+
     componentWillMount: function () {
         if (!Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("controlled", "stateless", "true", "false"));
@@ -204,7 +204,7 @@ var DetailsTooltipStateless = React.createClass({
      * Optional button array
      */
     _getButtons: function () {
-        
+
         // can have multiple secondary buttons
         var secondaryButtons = [];
         if (this.props.secondaryLabels) {
@@ -212,7 +212,7 @@ var DetailsTooltipStateless = React.createClass({
                 return this._getSecondaryButtonHtml(secondaryLabel.label, secondaryLabel.value);
             }.bind(this));
         }
-        
+
         // can have multiple primary buttons
         var primaryButtons = [];
         if (this.props.primaryLabels) {

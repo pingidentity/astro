@@ -75,7 +75,7 @@ var ExpandableRowDemo = React.createClass({
                     subtitle="Row Subtitle"
                     status={ExpandableRow.Statuses.GOOD}
                     rowAccessories={(
-                        <span>
+                        <span className="row-accessories-content">
                             <a>Link</a>
                             <button type="button" className="button inline">Inline Button</button>
                             <Toggle />

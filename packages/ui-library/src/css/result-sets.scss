@@ -106,20 +106,17 @@
         .row-accessories {
             position: absolute;
             right: 65px;
-            top: 0;
+            top: 50%;
             bottom: 0;
 
-            .button,
-            input[type=button],
-            button,
-            a,
-            .input-toggle,
-            .status {
-                display: inline-block;
-                vertical-align: top;
-                margin: 30px 0 0 20px;
-
+            > * {
                 @include transform(translateY(-50%));
+            }
+
+            > *,
+            .row-accessories-content > * {
+                display: inline-block;
+                margin: 0 0 0 20px;
             }
             .button + .button,
             input[type=button],
@@ -132,16 +129,7 @@
                 }
             }
             .details-tooltip {
-                .details-content {
-                    margin-top: 35px;
-                }
-            }
-            .input-toggle {
-                a.toggle {
-                    margin: 0;
-
-                    @include transform(translateY(0));
-                }
+                z-index: 1;
             }
         }
         .expand-btn,
