@@ -309,8 +309,7 @@ var Stateless = React.createClass({
     },
 
     render: function () {
-        var integerControls,
-            styles = classnames("form-integer-container input-integer", this.props.className);
+        var integerControls;
 
         if (!this.props.disabled && !this.props.readOnly && !this.props.hideControls) {
             integerControls = (
@@ -335,12 +334,12 @@ var Stateless = React.createClass({
             );
         }
         return (
-            <div onKeyDown={this._handleKeyDown}>
+            <div onKeyDown={this._handleKeyDown} className="form-integer-container input-integer">
                 <FormTextField {...this.props}
                         ref="formTextField"
                         data-id={this.props["data-id"] + "-text-field"}
                         stateless={true}
-                        className={styles}
+                        className={this.props.className}
                         labelClassName={classnames(this.props.labelClassName)}
                         onValueChange={this.props.onValueChange}
                         controls={integerControls}

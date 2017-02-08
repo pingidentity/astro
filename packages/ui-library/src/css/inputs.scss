@@ -1303,6 +1303,7 @@ input[type=file] {
 
 .input-integer {
     position: relative;
+    display: inline-block;
 
     &:after,
     a.undo {
