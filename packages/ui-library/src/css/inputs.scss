@@ -881,9 +881,10 @@ input[type=file] {
 
         @include opacity(0);
     }
-    .choose {
+    button.choose {
         display: block;
         text-transform: none;
+        margin: 0 10px 0 0;
     }
     .file-info {
         display: block;
