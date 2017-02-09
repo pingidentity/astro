@@ -1,4 +1,4 @@
-var ListViewPaginated = require("./ListViewPaginated");
+var ListViewPaginated = require("./ListViewPaginated.jsx");
 
 ListViewPaginated.Reducer = require("./Reducer");
 ListViewPaginated.Actions = require("./Actions");
