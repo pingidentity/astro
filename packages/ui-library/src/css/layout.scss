@@ -802,17 +802,12 @@ $layout-nav-width-offset: 15px;
 
 .page-controls-secondary {
     float: right;
-    margin: -70px 0 0 0;
+    margin: -42px 0 0 0;
 
-    .button,
-    input[type=button],
-    button,
-    a,
-    .input-toggle,
-    .status {
+    > * {
         display: inline-block;
         vertical-align: top;
-        margin: 30px 15px 0 0;
+        margin: 0 15px 0 0;
 
         @include transform(translateY(-50%));
     }
@@ -821,6 +816,15 @@ $layout-nav-width-offset: 15px;
             margin: 0;
 
             @include transform(translateY(0));
+        }
+    }
+    .details-tooltip {
+        z-index: 1;
+
+        button,
+        .button,
+        input[type=button] {
+            margin: 0;
         }
     }
 }
