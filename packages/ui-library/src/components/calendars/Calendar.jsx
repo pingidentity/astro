@@ -161,27 +161,18 @@ var Calendar = React.createClass({
             computableFormat: "MM-DD-YYYY",
             minView: Views.DAYS,
             closeOnSelect: false,
-            required: false
+            required: false,
+            format: Translator.translate("dateformat")
         };
     },
 
     getInitialState: function () {
-        var date = this.props.date ? moment(this.props.date) : null,
-            minView = parseInt(this.props.minView, 10),
-            format = this.props.format;
-
-        if (!this.props.format) {
-            format = Translator.translate("dateformat");
-        }
+        var date = this.props.date ? moment(this.props.date) : null;
 
         return {
             date: date,
-            format: format,
-            computableFormat: this.props.computableFormat,
             inputValue: date ? date.format(this.props.format) : null,
-            views: ["days", "months", "years"],
-            minView: minView,
-            currentView: minView || Views.DAYS,
+            currentView: this.props.minView,
             isVisible: false
         };
     },
@@ -213,7 +204,7 @@ var Calendar = React.createClass({
     componentWillReceiveProps: function (nextProps) {
         this.setState({
             date: nextProps.date ? moment(nextProps.date) : this.state.date,
-            inputValue: nextProps.date ? moment(nextProps.date).format(this.state.format) : null
+            inputValue: nextProps.date ? moment(nextProps.date).format(this.props.format) : null
         });
     },
 
@@ -243,20 +234,20 @@ var Calendar = React.createClass({
      * @param {?} date [description]
      */
     prevView: function (date) {
-        if (this.state.currentView === this.state.minView) {
+        if (this.state.currentView === this.props.minView) {
             this.setState({
                 date: date,
-                inputValue: date.format(this.state.format),
+                inputValue: date.format(this.props.format),
                 isVisible: false
             });
 
             if (CalendarUtils.inDateRange(date, this.props.dateRange)) {
                 //TODO: remove when v1 no longer supported
                 if (this.props.onChange) {
-                    this.props.onChange(date.format(this.state.computableFormat));
+                    this.props.onChange(date.format(this.props.computableFormat));
                 }
                 if (this.props.onValueChange) {
-                    this.props.onValueChange(date.format(this.state.computableFormat));
+                    this.props.onValueChange(date.format(this.props.computableFormat));
                 }
             }
 
@@ -277,17 +268,17 @@ var Calendar = React.createClass({
     setDate: function (date, isDayView) {
         this.setState({
             date: date,
-            inputValue: date.format(this.state.format),
+            inputValue: date.format(this.props.format),
             isVisible: this.props.closeOnSelect && isDayView ? !this.state.isVisible : this.state.isVisible
         });
 
         if (CalendarUtils.inDateRange(date, this.props.dateRange)) {
             //TODO: remove when v1 no longer supported
             if (this.props.onChange) {
-                this.props.onChange(date.format(this.state.computableFormat));
+                this.props.onChange(date.format(this.props.computableFormat));
             }
             if (this.props.onValueChange) {
-                this.props.onValueChange(date.format(this.state.computableFormat));
+                this.props.onValueChange(date.format(this.props.computableFormat));
             }
         }
     },
@@ -311,7 +302,7 @@ var Calendar = React.createClass({
         var date = this.state.inputValue,
             newDate = null,
             computableDate = null,
-            format = this.state.format;
+            format = this.props.format;
 
         if (date) {
             // format, with strict parsing true, so we catch bad dates
@@ -330,7 +321,7 @@ var Calendar = React.createClass({
                 newDate = moment(d);
             }
 
-            computableDate = newDate.format(this.state.computableFormat);
+            computableDate = newDate.format(this.props.computableFormat);
         }
 
         if (CalendarUtils.inDateRange(date, this.props.dateRange)) {
