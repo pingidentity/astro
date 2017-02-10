@@ -1,4 +1,4 @@
-var React = require("react"),
+var React = require("re-react"),
     classnames = require("classnames"),
     moment = require("moment-range"),
     DaysView = require("./DaysView.jsx"),
@@ -129,29 +129,29 @@ var Calendar = React.createClass({
     propTypes: {
         "data-id": React.PropTypes.string,
 
-        className: React.PropTypes.string,
-        closeOnSelect: React.PropTypes.bool,
-        computableFormat: React.PropTypes.string,
-        date: React.PropTypes.any,
+        className: React.PropTypes.string.affectsRendering,
+        closeOnSelect: React.PropTypes.bool.affectsRendering,
+        computableFormat: React.PropTypes.string.affectsRendering,
+        date: React.PropTypes.any.affectsRendering,
         dateRange: React.PropTypes.shape({
-            startDate: React.PropTypes.any,
-            endDate: React.PropTypes.any
+            startDate: React.PropTypes.any.affectsRendering,
+            endDate: React.PropTypes.any.affectsRendering
         }),
-        format: React.PropTypes.string,
-        helpClassName: React.PropTypes.string,
-        labelClassName: React.PropTypes.string,
-        labelText: React.PropTypes.string,
-        labelHelpText: React.PropTypes.string,
-        minView: React.PropTypes.oneOf([Views.DAYS, Views.MONTHS, Views.YEARS]),
-        placeholder: React.PropTypes.string,
-        required: React.PropTypes.bool,
+        format: React.PropTypes.string.affectsRendering,
+        helpClassName: React.PropTypes.string.affectsRendering,
+        labelClassName: React.PropTypes.string.affectsRendering,
+        labelText: React.PropTypes.string.affectsRendering,
+        labelHelpText: React.PropTypes.string.affectsRendering,
+        minView: React.PropTypes.oneOf([Views.DAYS, Views.MONTHS, Views.YEARS]).affectsRendering,
+        placeholder: React.PropTypes.string.affectsRendering,
+        required: React.PropTypes.bool.affectsRendering,
 
         //TODO: set as required when v1 no longer supported
         onValueChange: React.PropTypes.func,
 
         //TODO: remove when v1 no longer supported
         id: React.PropTypes.string,
-        isRequired: React.PropTypes.bool,
+        isRequired: React.PropTypes.bool.affectsRendering,
         onChange: React.PropTypes.func
     },
 

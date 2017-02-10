@@ -1,4 +1,4 @@
-var React = require("react");
+var React = require("re-react");
 var classnames = require("classnames");
 var moment = require("moment-range");
 var Cell = require("./Cell.jsx");
@@ -9,7 +9,7 @@ module.exports = React.createClass({
 
     propTypes: {
         "data-id": React.PropTypes.string,
-        date: React.PropTypes.object.isRequired,
+        date: React.PropTypes.object.isRequired.affectsRendering,
         onSetDate: React.PropTypes.func,
         onNextView: React.PropTypes.func
     },
