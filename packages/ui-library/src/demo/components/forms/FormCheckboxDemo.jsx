@@ -7,10 +7,13 @@ var FormCheckbox = require("./../../../components/forms/FormCheckbox.jsx");
 * @desc A demo for FormCheckbox
 */
 var FormCheckboxDemo = React.createClass({
+
+    _numDemos: 12,
+
     getInitialState: function () {
         var initialState = {};
 
-        for (var i=1; i<=11; i+=1) {
+        for (var i=1; i<=this._numDemos; i+=1) {
             initialState["checkboxChecked" + i] = Math.random() < 0.5;
         }
 
@@ -111,6 +114,15 @@ var FormCheckboxDemo = React.createClass({
                         onChange={this._onChange.bind(this, 11)}
                         checked={this.state.checkboxChecked11}
                         className="inline"
+                    />
+                </div>
+                <div className="input-row">
+                    <FormCheckbox
+                        label={"With Error Message; checked: " + this.state.checkboxChecked12}
+                        value=""
+                        onChange={this._onChange.bind(this, 12)}
+                        checked={this.state.checkboxChecked12}
+                        errorMessage="An error has occurred"
                     />
                 </div>
             </div>

@@ -3,6 +3,7 @@ window.__DEV__ = true;
 jest.dontMock("../FormCheckbox.jsx");
 jest.dontMock("../../tooltips/HelpHint.jsx");
 jest.dontMock("../FormLabel.jsx");
+jest.dontMock("../FormError.jsx");
 
 describe("FormCheckbox", function () {
     var React = require("react"),
@@ -133,6 +134,18 @@ describe("FormCheckbox", function () {
         
         var tooltip = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text");
         expect(tooltip.textContent).toEqual("Disabled with help text");
+    });
+
+    it("renders with error message when specified", function () {
+        var errorMessage = "some error";
+        var component = getComponent({ errorMessage: errorMessage });
+
+        var error = TestUtils.findRenderedDOMNodeWithDataId(component, "form-checkbox-error-message");
+        expect(error).toBeTruthy();
+        expect(error.textContent).toEqual(errorMessage);
+
+        var icon = TestUtils.findRenderedDOMNodeWithDataId(component, "form-checkbox-error-message-icon");
+        expect(icon).toBeTruthy();
     });
 
     //TODO: remove when v1 no longer supported

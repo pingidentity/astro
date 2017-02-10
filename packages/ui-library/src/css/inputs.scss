@@ -1723,6 +1723,22 @@ input[type=file] {
                 border-color: $color-input-error;
             }
         }
+        .form-error-icon {
+            top: auto;
+            left: 31px;
+            right: auto;
+            margin: 3px 0 0;
+        }
+        &.inline {
+            .label-text {
+                padding-right: 20px;
+            }
+            .form-error-icon {
+                top: 5px;
+                left: 100%;
+                margin: 0;
+            }
+        }
     }
     &.input-radio {
         .circle {
@@ -1795,6 +1811,8 @@ input[type=file] {
         position: absolute;
         top: round(($default-input-height - $icon-size) / 2);
         right: -$icon-spacing;
+        height: $icon-size;
+        width: $icon-size;
         cursor: pointer;
 
         &:before {

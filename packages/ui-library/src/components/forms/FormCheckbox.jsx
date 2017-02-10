@@ -1,6 +1,7 @@
 var React=require("react"),
     classnames = require("classnames"),
     FormLabel = require("./FormLabel.jsx"),
+    FormError = require("./FormError.jsx"),
     Utils = require("../../util/Utils.js");
 
 /**
@@ -51,6 +52,8 @@ var React=require("react"),
  *
  * @param {boolean} [disabled=false]
  *    If true, disables current checkbox and styles opacity.
+ * @param {string} [errorMessage]
+ *    The message to display if defined when external validation failed.
  *
  * @example
  *
@@ -72,7 +75,8 @@ var FormCheckbox=React.createClass({
         helpClassName: React.PropTypes.string,
         name: React.PropTypes.string,
         value: React.PropTypes.string,
-        disabled: React.PropTypes.bool
+        disabled: React.PropTypes.bool,
+        errorMessage: React.PropTypes.string
     },
 
     getDefaultProps: function () {
@@ -101,7 +105,8 @@ var FormCheckbox=React.createClass({
     render: function () {
         var id = this.props.id || this.props["data-id"],
             labelClassName = classnames("input-checkbox", this.props.className, {
-                disabled: this.props.disabled
+                disabled: this.props.disabled,
+                "form-error": this.props.errorMessage,
             });
 
         return (
@@ -120,6 +125,15 @@ var FormCheckbox=React.createClass({
                         disabled={this.props.disabled}
                 />
                 <div className="icon"/>
+                {this.props.errorMessage && (
+                    <FormError.Icon data-id={id + "-error-message-icon"} />
+                )}
+                {this.props.errorMessage && (
+                    <FormError.Message
+                        value={this.props.errorMessage}
+                        data-id={id + "-error-message"}
+                    />
+                )}
             </FormLabel>
         );
     }
