@@ -39,6 +39,7 @@ var FormIntegerFieldDemo = React.createClass({
 
     componentDidMount: function () {
         // Bind "onValueChange" callbacks
+        this._handleValueChange0 = this._handleValueChange.bind(null, 0);
         this._handleValueChange2 = this._handleValueChange.bind(null, 2);
         this._handleValueChange3 = this._handleValueChange.bind(null, 3);
         this._handleValueChange6 = this._handleValueChange.bind(null, 6);

@@ -1,6 +1,6 @@
 "use strict";
 
-var React = require("react"),
+var React = require("re-react"),
     FormTextField = require("../form-text-field").v2,
     classnames = require("classnames"),
     Utils = require("../../../util/Utils.js"),
@@ -131,49 +131,49 @@ var Stateless = React.createClass({
 
     propTypes: {
         "data-id": React.PropTypes.string,
-        className: React.PropTypes.string,
+        className: React.PropTypes.string.affectsRendering,
 
-        required: React.PropTypes.bool,
-        disabled: React.PropTypes.bool,
-        readOnly: React.PropTypes.bool,
-        hideControls: React.PropTypes.bool,
+        required: React.PropTypes.bool.affectsRendering,
+        disabled: React.PropTypes.bool.affectsRendering,
+        readOnly: React.PropTypes.bool.affectsRendering,
+        hideControls: React.PropTypes.bool.affectsRendering,
 
-        labelHelpText: React.PropTypes.string,
-        labelText: React.PropTypes.string,
+        labelHelpText: React.PropTypes.string.affectsRendering,
+        labelText: React.PropTypes.string.affectsRendering,
 
-        value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+        value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).affectsRendering,
 
         onValueChange: React.PropTypes.func,
         onBlur: React.PropTypes.func,
         onFocus: React.PropTypes.func,
 
-        placeholder: React.PropTypes.string,
-        inputClassName: React.PropTypes.string,
-        maxLength: React.PropTypes.number,
+        placeholder: React.PropTypes.string.affectsRendering,
+        inputClassName: React.PropTypes.string.affectsRendering,
+        maxLength: React.PropTypes.number.affectsRendering,
 
-        maskValue: React.PropTypes.bool,
-        reveal: React.PropTypes.bool,
-        showReveal: React.PropTypes.bool,
+        maskValue: React.PropTypes.bool.affectsRendering,
+        reveal: React.PropTypes.bool.affectsRendering,
+        showReveal: React.PropTypes.bool.affectsRendering,
         onToggleReveal: React.PropTypes.func,
 
-        showSave: React.PropTypes.bool,
+        showSave: React.PropTypes.bool.affectsRendering,
         onSave: React.PropTypes.func,
 
-        showUndo: React.PropTypes.bool,
+        showUndo: React.PropTypes.bool.affectsRendering,
         onUndo: React.PropTypes.func,
 
-        errorMessage: React.PropTypes.string,
-        errorClassName: React.PropTypes.string,
+        errorMessage: React.PropTypes.string.affectsRendering,
+        errorClassName: React.PropTypes.string.affectsRendering,
 
-        autoFocus: React.PropTypes.bool,
-        autoComplete: React.PropTypes.bool,
+        autoFocus: React.PropTypes.bool.affectsRendering,
+        autoComplete: React.PropTypes.bool.affectsRendering,
 
-        increment: React.PropTypes.number,
-        max: React.PropTypes.number,
-        min: React.PropTypes.number,
-        enforceRange: React.PropTypes.bool,
+        increment: React.PropTypes.number.affectsRendering,
+        max: React.PropTypes.number.affectsRendering,
+        min: React.PropTypes.number.affectsRendering,
+        enforceRange: React.PropTypes.bool.affectsRendering,
 
-        tabIndex: React.PropTypes.number
+        tabIndex: React.PropTypes.number.affectsRendering
     },
 
     /**
