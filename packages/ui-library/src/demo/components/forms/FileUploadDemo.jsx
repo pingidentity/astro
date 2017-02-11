@@ -21,7 +21,13 @@ var FileUploadDemo = React.createClass({
         };
     },
 
-    _onChange1: function (file) {
+    _getFile: function (e) {
+        return e && e.target && e.target.files && e.target.files[0];
+    },
+
+    _onChange1: function (e) {
+        var file = this._getFile(e);
+
         this.setState({ file1: file ? file.name : "none" });
     },
 
@@ -29,8 +35,10 @@ var FileUploadDemo = React.createClass({
         this.setState({ file1: "none" });
     },
 
-    _onChange2: function (file) {
-        this.setState({ file2: file ? (file.name + " " + file.size + " bytes") : "none" });
+    _onChange2: function (e) {
+        var file = this._getFile(e);
+
+        this.setState({ file2: file ? (file.name + " " + "(" + file.size + " bytes)") : "none" });
     },
 
     _onRemove2: function () {

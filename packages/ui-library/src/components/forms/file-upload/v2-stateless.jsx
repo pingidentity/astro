@@ -1,4 +1,4 @@
-var React = require("react"),
+var React = require("re-react"),
     ReactDOM = require("react-dom"),
     classnames = require("classnames"),
     FormLabel = require("../FormLabel.jsx"),
@@ -15,27 +15,27 @@ module.exports = React.createClass({
 
     propTypes: {
         //labels
-        labelText: React.PropTypes.string,
-        labelSelect: React.PropTypes.string.isRequired,
-        labelSelectOther: React.PropTypes.string,
-        labelRemove: React.PropTypes.string.isRequired,
-        labelMaxFileSize: React.PropTypes.string,
+        labelText: React.PropTypes.string.affectsRendering,
+        labelSelect: React.PropTypes.string.isRequired.affectsRendering,
+        labelSelectOther: React.PropTypes.string.affectsRendering,
+        labelRemove: React.PropTypes.string.isRequired.affectsRendering,
+        labelMaxFileSize: React.PropTypes.string.affectsRendering,
         //callbacks
         onRemove: React.PropTypes.func.isRequired,
         onChange: React.PropTypes.func.isRequired,
         //flags
-        disabled: React.PropTypes.bool,
-        showFilename: React.PropTypes.bool,
-        showThumbnail: React.PropTypes.bool,
-        showRemoveButton: React.PropTypes.bool,
+        disabled: React.PropTypes.bool.affectsRendering,
+        showFilename: React.PropTypes.bool.affectsRendering,
+        showThumbnail: React.PropTypes.bool.affectsRendering,
+        showRemoveButton: React.PropTypes.bool.affectsRendering,
         //properties
-        errorMessage: React.PropTypes.string,
-        filesAcceptedMessage: React.PropTypes.string,
-        fileName: React.PropTypes.string,
-        title: React.PropTypes.string,
-        accept: React.PropTypes.string,
+        errorMessage: React.PropTypes.string.affectsRendering,
+        filesAcceptedMessage: React.PropTypes.string.affectsRendering,
+        fileName: React.PropTypes.string.affectsRendering,
+        title: React.PropTypes.string.affectsRendering,
+        accept: React.PropTypes.string.affectsRendering,
         "data-id": React.PropTypes.string,
-        thumbnailSrc: React.PropTypes.string
+        thumbnailSrc: React.PropTypes.string.affectsRendering
     },
 
     /*

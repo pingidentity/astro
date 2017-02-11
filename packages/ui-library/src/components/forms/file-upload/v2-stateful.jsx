@@ -115,7 +115,7 @@ module.exports = React.createClass({
 
     _handleChange: function (e) {
         if (this.props.onChange) {
-            this.props.onChange();
+            this.props.onChange(e);
         }
 
         this._process(e.target.files, e.target.value);
