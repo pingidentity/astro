@@ -1,6 +1,6 @@
 "use strict";
 
-var React = require("react"),
+var React = require("re-react"),
     _ = require("underscore"),
     classnames = require("classnames"),
     CountryFlagList = require("./CountryFlagList.jsx"),
@@ -95,17 +95,17 @@ var I18nCountrySelectorStateless = React.createClass({
 
     propTypes: {
         "data-id": React.PropTypes.string,
-        className: React.PropTypes.string,
+        className: React.PropTypes.string.affectsRendering,
         countryCode: React.PropTypes.oneOfType([
             React.PropTypes.string,
             React.PropTypes.number
-        ]),
+        ]).affectsRendering,
         onValueChange: React.PropTypes.func,
-        open: React.PropTypes.bool,
+        open: React.PropTypes.bool.affectsRendering,
         onToggle: React.PropTypes.func,
-        searchIndex: React.PropTypes.number,
-        searchString: React.PropTypes.string,
-        searchTime: React.PropTypes.number,
+        searchIndex: React.PropTypes.number.affectsRendering,
+        searchString: React.PropTypes.string.affectsRendering,
+        searchTime: React.PropTypes.number.affectsRendering,
         onSearch: React.PropTypes.func,
         onCountrySearch: React.PropTypes.func //TODO: remove when v1 no longer supported
     },

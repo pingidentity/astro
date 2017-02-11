@@ -1,4 +1,4 @@
-var React = require("react"),
+var React = require("re-react"),
     classNames = require("classnames"),
     FormDropDownList = require("../forms/FormDropDownList.jsx"),
     FormRadioGroup = require("../forms/FormRadioGroup.jsx"),
@@ -19,13 +19,13 @@ var Types = {
 var ConditionalFieldsetStateless = React.createClass({
     propTypes: {
         "data-id": React.PropTypes.string.isRequired,
-        className: React.PropTypes.string,
-        type: React.PropTypes.string,
-        supportEmpty: React.PropTypes.bool,
-        emptyMessage: React.PropTypes.string,
+        className: React.PropTypes.string.affectsRendering,
+        type: React.PropTypes.string.affectsRendering,
+        supportEmpty: React.PropTypes.bool.affectsRendering,
+        emptyMessage: React.PropTypes.string.affectsRendering,
         onValueChange: React.PropTypes.func,
-        selectedIndex: React.PropTypes.number,
-        disabled: React.PropTypes.bool
+        selectedIndex: React.PropTypes.number.affectsRendering,
+        disabled: React.PropTypes.bool.affectsRendering
     },
 
     getDefaultProps: function () {

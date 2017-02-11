@@ -66,7 +66,10 @@ var batchSelector = createSelector(
 for (var i = 1; i < 51; i += 1) {
     var type = types[Math.min(types.length, Math.floor((Math.random() * 10) % types.length))];
 
-    initialState.rows.push({ id: i, "data-id": "" + i, type: type, title: "Row number " + i + " (" + type + ")" });
+    //NOTE: "key" property is required to prevent unexpected rendering results for iterative data
+    //  see here for more details: https://facebook.github.io/react/docs/lists-and-keys.html#keys
+    initialState.rows.push({ key: "row-" + i, id: i, "data-id": "" + i,
+        type: type, title: "Row number " + i + " (" + type + ")" });
 }
 
 initialState.batches = batchSelector(initialState);

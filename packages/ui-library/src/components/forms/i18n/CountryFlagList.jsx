@@ -1,6 +1,6 @@
 "use strict";
 
-var React = require("react"),
+var React = require("re-react"),
     _ = require("underscore"),
     classnames = require("classnames"),
     Translator = require("../../../util/i18n/Translator.js"),
@@ -89,19 +89,19 @@ var CountryFlagList = React.createClass({
 
     propTypes: {
         "data-id": React.PropTypes.string,
-        className: React.PropTypes.string,
+        className: React.PropTypes.string.affectsRendering,
         selectedCountryCode: React.PropTypes.oneOfType([
             React.PropTypes.string,
             React.PropTypes.number
-        ]),
-        countryCodeDisplayType: React.PropTypes.oneOf([Types.ISO_2, Types.ISO_NUM, Types.DIAL_CODE]),
-        countryCodeClassName: React.PropTypes.string,
+        ]).affectsRendering,
+        countryCodeDisplayType: React.PropTypes.oneOf([Types.ISO_2, Types.ISO_NUM, Types.DIAL_CODE]).affectsRendering,
+        countryCodeClassName: React.PropTypes.string.affectsRendering,
         onValueChange: React.PropTypes.func,
-        labelNoCountry: React.PropTypes.string,
-        open: React.PropTypes.bool,
+        labelNoCountry: React.PropTypes.string.affectsRendering,
+        open: React.PropTypes.bool.affectsRendering,
         onToggle: React.PropTypes.func,
-        searchString: React.PropTypes.string,
-        searchTime: React.PropTypes.number,
+        searchString: React.PropTypes.string.affectsRendering,
+        searchTime: React.PropTypes.number.affectsRendering,
         onSearch: React.PropTypes.func
     },
 
@@ -216,10 +216,10 @@ var Flag = React.createClass({
 
     propTypes: {
         "data-id": React.PropTypes.string,
-        countryCodeClassName: React.PropTypes.string,
-        name: React.PropTypes.string,
-        code: React.PropTypes.string,
-        iso2: React.PropTypes.string
+        countryCodeClassName: React.PropTypes.string.affectsRendering,
+        name: React.PropTypes.string.affectsRendering,
+        code: React.PropTypes.string.affectsRendering,
+        iso2: React.PropTypes.string.affectsRendering
     },
 
     getDefaultProps: function () {

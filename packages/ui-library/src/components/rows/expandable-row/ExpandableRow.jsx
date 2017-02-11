@@ -1,6 +1,6 @@
 "use strict";
 
-var React = require("react"),
+var React = require("re-react"),
     classnames = require("classnames"),
     _ = require("underscore"),
     DetailsTooltip = require("../../tooltips/DetailsTooltip.jsx"),
@@ -207,8 +207,8 @@ var StatefulExpandableRow = React.createClass({
     displayName: "StatefulExpandableRow",
 
     propTypes: {
-        defaultToExpanded: React.PropTypes.bool,
-        showDeleteConfirm: React.PropTypes.bool
+        defaultToExpanded: React.PropTypes.bool.affectsRendering,
+        showDeleteConfirm: React.PropTypes.bool.affectsRendering
     },
 
     getDefaultProps: function () {
@@ -286,36 +286,36 @@ var StatelessExpandableRow = React.createClass({
             React.PropTypes.number,
             React.PropTypes.string
         ]),
-        className: React.PropTypes.string,
-        expanded: React.PropTypes.bool,
+        className: React.PropTypes.string.affectsRendering,
+        expanded: React.PropTypes.bool.affectsRendering,
         onToggle: React.PropTypes.func,
         title: React.PropTypes.oneOfType([
             React.PropTypes.object,
             React.PropTypes.string
-        ]),
-        titleClassName: React.PropTypes.string,
+        ]).affectsRendering,
+        titleClassName: React.PropTypes.string.affectsRendering,
         subtitle: React.PropTypes.oneOfType([
             React.PropTypes.object,
             React.PropTypes.string
-        ]),
-        image: React.PropTypes.string,
-        content: React.PropTypes.object,
-        editViewRoute: React.PropTypes.string,
-        isEditEnabled: React.PropTypes.bool,
-        showEdit: React.PropTypes.bool,
-        editButton: React.PropTypes.object,
+        ]).affectsRendering,
+        image: React.PropTypes.string.affectsRendering,
+        content: React.PropTypes.object.affectsRendering,
+        editViewRoute: React.PropTypes.string.affectsRendering,
+        isEditEnabled: React.PropTypes.bool.affectsRendering,
+        showEdit: React.PropTypes.bool.affectsRendering,
+        editButton: React.PropTypes.object.affectsRendering,
         onEditButtonClick: React.PropTypes.func,
-        showDelete: React.PropTypes.bool,
-        deleteButton: React.PropTypes.object,
+        showDelete: React.PropTypes.bool.affectsRendering,
+        deleteButton: React.PropTypes.object.affectsRendering,
         onDelete: React.PropTypes.func,
-        labelDeleteConfirm: React.PropTypes.string,
-        confirmDelete: React.PropTypes.bool,
-        showDeleteConfirm: React.PropTypes.bool,
+        labelDeleteConfirm: React.PropTypes.string.affectsRendering,
+        confirmDelete: React.PropTypes.bool.affectsRendering,
+        showDeleteConfirm: React.PropTypes.bool.affectsRendering,
         onDeleteCancelClick: React.PropTypes.func,
         onDeleteConfirmClick: React.PropTypes.func,
-        status: React.PropTypes.oneOf([Statuses.GOOD, Statuses.ERROR, Statuses.WARNING]),
-        rowAccessories: React.PropTypes.object,
-        waiting: React.PropTypes.bool
+        status: React.PropTypes.oneOf([Statuses.GOOD, Statuses.ERROR, Statuses.WARNING]).affectsRendering,
+        rowAccessories: React.PropTypes.object.affectsRendering,
+        waiting: React.PropTypes.bool.affectsRendering
     },
 
     getDefaultProps: function () {

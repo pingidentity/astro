@@ -129,7 +129,7 @@ var I18nPhoneInputStateless = React.createClass({
 
     propTypes: {
         "data-id": React.PropTypes.string,
-        className: React.PropTypes.string,
+        className: React.PropTypes.string.affectsRendering,
         countryCode: React.PropTypes.string.affectsRendering,
         dialCode: React.PropTypes.oneOfType([
             React.PropTypes.string,

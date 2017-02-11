@@ -54,6 +54,8 @@ var pageSelector = createSelector(
  * the request returned from the server with the rows.
  */
 for (var i = 1; i < 51; i += 1) {
+    //NOTE: "key" property is required to prevent unexpected rendering results for iterative data
+    //  see here for more details: https://facebook.github.io/react/docs/lists-and-keys.html#keys
     initialState.rows.all.push({ id: i, key: "row-" + i, "data-id": "row-" + i,
                                  title: "Row " + i, subtitle: "subtitle for row " + i });
 }
