@@ -1,12 +1,12 @@
 
 .data {
-    
+
     &.condensed {
         display: inline-block;
         border: 1px solid $color-rabbit-fur;
-        
+
         @include border-radius(4px);
-        
+
         .data-group {
             padding: 20px 0 10px;
             max-width: 100%;
@@ -68,24 +68,24 @@
                         }
                     }
                 }
-                
+
                 // CHILD DATA SETS
                 .data {
                     &.child {
                         border: 1px solid $color-rabbit-fur;
-                        
+
                         @include border-radius(4px);
-                        
+
                         .data-group {
-                            
+
                             &.data-section {
                                 padding: 25px 0 5px;
                                 margin-bottom: 0;
-                                
+
                                 .data-item {
                                     &.data-title {
                                         margin-right: 0;
-                                        
+
                                         > label {
                                             border-bottom: none;
                                             font-size: 13px;
@@ -98,13 +98,13 @@
                                             padding-right: 25px;
                                         }
                                     }
-                                    
+
                                 }
                             }
                         }
                     }
                 }
-                
+
             }
             &.labels-only {
                 .data-item {
@@ -163,6 +163,11 @@
 
             a {
                 margin: 0;
+            }
+        }
+        &.no-value {
+            > span {
+                font-style: italic;
             }
         }
         &.labels-only {
