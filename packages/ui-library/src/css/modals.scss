@@ -37,6 +37,7 @@
         display: none;
         position: relative;
         z-index: 1;
+        outline: none; //prevent outline when focused
         top: 0;
         left: 50%;
         height: 100%;

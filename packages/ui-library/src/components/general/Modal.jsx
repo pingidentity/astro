@@ -165,7 +165,11 @@ var Modal = React.createClass({
                     data-id="modal-bg"
                     onClick={this._handleBgClick}>
                 </div>
-                <div className="modal-content" data-id="modal-content" onClick={this._handleBgClick}>
+                <div
+                    className="modal-content"
+                    tabIndex="-1"
+                    data-id="modal-content"
+                    onClick={this._handleBgClick}>
                     <span data-id="modal-inner-content">
                         <If test={this.props.showHeader}>
                             <div className="modal-header" data-id="modal-header">
