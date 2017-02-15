@@ -124,7 +124,8 @@ define package_coverage
 endef
 
 define package_css
-	rm -rf build-css
+	rm -rf build-css/css
+	rm -rf build-css/$(1)
 
 	mkdir -p build-css/css
 	$(NPM_EXEC) run compile-sass
@@ -235,13 +236,15 @@ integration: install-node-npm
 	$(NPM_EXEC) run pack
 	node_modules/.bin/wdio wdio.conf.js
 
+clean-css:
+	rm -rf build-css
+
 # package the module and name the file to include the current version
-package: install-mvn install-node-npm
+package: install-mvn install-node-npm clean-css
 	$(call run_coverage)
 
 	$(call package,$(PACKAGE_VERSION))
 	$(call package_coverage,$(PACKAGE_VERSION))
-
 	$(call package_css,$(PACKAGE_VERSION))
 
 # package the module and name the file to include the current version
@@ -257,10 +260,11 @@ deploy: package
 # package the module and name the file to include the current version
 # deploy the package as a maven artifact
 # no verification is done here, meaning node/npm are not needed
-dist: install-mvn install-node-npm
+dist: install-mvn install-node-npm clean-css
 	$(call version_and_tag,$(GIT_VERSION_FINAL),"Release the project")
 	$(call package,$(PACKAGE_VERSION_FINAL))
 	$(call deploy,$(PACKAGE_VERSION_FINAL))
+	$(call package_css,$(PACKAGE_VERSION_FINAL))
 
 	@echo "UI_LIBRARY_FINAL_VERSION=$(PACKAGE_VERSION_FINAL)" > version
 	@echo "UI_LIBRARY_SNAPSHOT_VERSION=$(PACKAGE_VERSION_NEXT)" >> version
@@ -268,6 +272,7 @@ dist: install-mvn install-node-npm
 	$(call version_and_tag,$(PACKAGE_VERSION_NEXT),"Prepare for the next release cycle")
 	$(call package,$(PACKAGE_VERSION_NEXT))
 	$(call deploy,$(PACKAGE_VERSION_NEXT))
+	$(call package_css,$(PACKAGE_VERSION_NEXT))
 
 	# generate the coverage, package and deploy it
 	$(call run_coverage)
