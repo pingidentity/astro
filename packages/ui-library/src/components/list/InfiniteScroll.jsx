@@ -1,4 +1,4 @@
-var React = require("react"),
+var React = require("re-react"),
     ReactDOM = require("react-dom"),
     Spinner = require("../general/Spinner.jsx"),
     _ = require("underscore"),
@@ -211,21 +211,21 @@ var InfiniteScroll = React.createClass({
             React.PropTypes.shape({
                 id: React.PropTypes.number,
                 data: React.PropTypes.array
-            })).isRequired,
-        initalItem: React.PropTypes.object,
+            })).isRequired.affectsRendering,
+        initalItem: React.PropTypes.object.affectsRendering,
         onScroll: React.PropTypes.func,
-        hasPrev: React.PropTypes.bool,
+        hasPrev: React.PropTypes.bool.affectsRendering,
         onLoadPrev: React.PropTypes.func, //TODO: set as required when v1 removed
         loadPrev: React.PropTypes.func, //TODO: remove when v1 no longer supported
-        hasNext: React.PropTypes.bool,
+        hasNext: React.PropTypes.bool.affectsRendering,
         onLoadNext: React.PropTypes.func, //TODO: set as required when v1 removed
         loadNext: React.PropTypes.func, //TODO: remove when v1 no longer supported
-        contentType: React.PropTypes.object,
+        contentType: React.PropTypes.object.affectsRendering,
         onGenerateHeading: React.PropTypes.func,
         headingGenerator: React.PropTypes.func, //TODO: remove when v1 no longer supported
-        height: React.PropTypes.number,
-        minHeight: React.PropTypes.number,
-        attachToWindow: React.PropTypes.bool
+        height: React.PropTypes.number.affectsRendering,
+        minHeight: React.PropTypes.number.affectsRendering,
+        attachToWindow: React.PropTypes.bool.affectsRendering
     },
 
     getDefaultProps: function () {

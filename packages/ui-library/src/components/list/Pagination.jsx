@@ -1,6 +1,6 @@
 "use strict";
 
-var React = require("react"),
+var React = require("re-react"),
     _ = require("underscore"),
     Utils = require("../../util/Utils");
 
@@ -131,8 +131,8 @@ var PageLinks = React.createClass({
     displayName: "PageLinks",
 
     propTypes: {
-        numPages: React.PropTypes.number.isRequired,
-        currentPage: React.PropTypes.number.isRequired,
+        numPages: React.PropTypes.number.isRequired.affectsRendering,
+        currentPage: React.PropTypes.number.isRequired.affectsRendering,
         onValueChange: React.PropTypes.func, // mark as isRequired once onClick is removed.
         onClick: React.PropTypes.func
     },
@@ -232,15 +232,15 @@ var PaginationStateless = React.createClass({
     displayName: "PaginationStateless",
 
     propTypes: {
-        className: React.PropTypes.string,
+        className: React.PropTypes.string.affectsRendering,
         "data-id": React.PropTypes.string,
         id: React.PropTypes.string,
-        totalPages: React.PropTypes.number,
+        totalPages: React.PropTypes.number.affectsRendering,
         onValueChange: React.PropTypes.func, // add isRequired to this once onChange is removed.
         onChange: React.PropTypes.func,
-        page: React.PropTypes.number,
-        perPage: React.PropTypes.number,
-        total: React.PropTypes.number
+        page: React.PropTypes.number.affectsRendering,
+        perPage: React.PropTypes.number.affectsRendering,
+        total: React.PropTypes.number.affectsRendering
     },
 
     getDefaultProps: function () {
