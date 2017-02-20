@@ -28,26 +28,34 @@ var ImageMagick = {
      *    The compareTo image path.
      * @param {string} diff
      *    The diff image path.
-     * @param {number} equalRatio
-     *    By default it will be set to 0.
-     *     - This is an optional parameter to increase or decrease the accuracy
-     *     - Higher value is more accuracy
      *
      * @returns {module:util/ImageMagick.PromiseObject}
      *    A promise object.
      */
-    compare: function (origin, compareTo, diff, equalRatio) {
+    compare: function (origin, compareTo, diff) {
         var deferred = Q.defer();
         var command = "compare";
         // more info about arguments at: http://www.imagemagick.org/script/command-line-options.php#metric
-        var args = ["-metric", "ae", "-fuzz", equalRatio+"%", origin, compareTo, diff];
-        var fullCommand = command;
+        var args = [
+            "-metric", "ae",
+            '"' + origin + '"',
+            '"' + compareTo + '"',
+            '"' + diff + '"'
+        ];
 
+        var fullCommand = command;
         fullCommand += args.length ? " " + args.join(" ") : "";
         cp.exec(fullCommand, function (error, stdout, stderr) {
+            console.log("Comparison result for src '" + origin +
+                        "' and target '" + compareTo + "':" +
+                       "\nSTDOUT: " + stdout.trim() +
+                       "\nSTDERR: " + stderr.trim() +
+                       "\n ERROR: " + error);
+
             var output = {
                 error: error,
-                stderr: stderr
+                stderr: stderr,
+                stdout: stdout
             };
             deferred.resolve(output);
         });
@@ -140,7 +148,38 @@ var ImageMagick = {
      */
     createBlankImageWithText: function (text, fileName) {
         cp.exec("convert -size 300x300 -stroke red -fill red -gravity center label:'" + text + "' " + fileName);
-    }
+    },
 
+    /**
+     * @alias module:util/ImageMagick.getSize
+     *
+     * @desc Get the size of the given image.
+     *    {width: 0, height: 0} is returned if the image cannot be read
+     * @param {string} imagepath
+     *     the image file path
+     * @return {object}
+     *     the image size as {width: x, height: y}
+     */
+    getSize: function (imagepath) {
+        var deferred = Q.defer();
+        var command = "identify " + imagepath;
+        cp.exec(command, function (error, stdout, stderr) {
+            console.log("getSize results for image file '" + imagepath + "':" +
+                        "\nSTDOUT: " + stdout.trim() +
+                        "\nSTDERR: " + stderr.trim());
+
+            // the output looks like:
+            // src/selenium/base-screenshot/img.png PNG 960x399 960x399+0+0 8-bit sRGB 22.5KB 0.000u 0:00.000
+            var re = /^[^\s]+\s+[^\s]+\s+(\d+)x(\d+)\s+.+$/g;
+            var match = re.exec(stdout.trim());
+            var result = {
+                width: match ? Number(match[1]) : 0,
+                height: match ? Number(match[2]) : 0
+            };
+
+            deferred.resolve(result);
+        });
+        return deferred.promise;
+    }
 };
 module.exports = ImageMagick;

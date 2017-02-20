@@ -104,10 +104,10 @@ var HomePage = Object.create(Page, {
      *    if the current screenshot does not match the baseline
      */
     takeScreenshotAndCompare: {
-        value: function (filename) {
+        value: function (filename, tolerance) {
             this.blurElement();
             this.outHover();
-            ScreenshotUtils.takeScreenShotAndCompareWithBaseline(filename);
+            ScreenshotUtils.takeScreenShotAndCompareWithBaseline(filename, tolerance);
         }
     },
 
@@ -120,10 +120,11 @@ var HomePage = Object.create(Page, {
      *    if the current screenshot does not match the baseline
      */
     takeElementScreenshotAndCompare: {
-        value: function (filename, elementSelector) {
+        value: function (filename, elementSelector, tolerance) {
             this.blurElement();
             this.outHover();
-            ScreenshotUtils.takeElementScreenShotAndCompareWithBaseline(filename, elementSelector);
+            ScreenshotUtils.takeElementScreenShotAndCompareWithBaseline(
+                filename, elementSelector, tolerance);
         }
     },
 

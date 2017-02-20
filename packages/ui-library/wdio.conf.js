@@ -117,7 +117,7 @@ exports.config = {
     jasmineNodeOpts: {
         //
         // Jasmine default timeout
-        defaultTimeoutInterval: 45000,
+        defaultTimeoutInterval: 60000,
         //
         // The Jasmine framework allows interception of each assertion in order to log the state of the application
         // or website depending on the result. For example, it is pretty handy to take a screenshot every time
@@ -133,9 +133,14 @@ exports.config = {
         tempRoot: "./build/temp-screenshot/",
         diffRoot: "./build/diff-screenshot/",
         baseLineRoot: "./src/selenium/base-screenshot/",
-        globalEqualRatio: 0, // 0-49 lower is more accurate,
+        tolerance: 0, // 0..100 - floating point values are allowed; the percentage of pixels which are allowed for the screenshot comparison to still succeed
         maxScreenshotAttempt: 2, // number of retry time when the comparison is failed. set to 1 if you want to turn it off
-        retryInterval: 500 // delay time after failed comparison
+        retryInterval: 500, // delay time after failed comparison
+        unstableScreenshots: [ // list of baseline screenshots which are flaky during validation; an error will be logged, but they will not fail the build
+            "TemplatesEditViewCollapsible_ExpandedAddress",
+            "TemplatesWizardView_Wizard2Step3"
+        ],
+        comparisonWaitTime: 10000 // how long to wait for the comparison to finish
     },
 
     // number of retries (set to 0 for no retry) for failed tests

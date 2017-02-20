@@ -2,6 +2,7 @@ var ComparisonExitCode = {
     SUCCESS: 0,
     DIFFERENT_IMAGE_SIZE: -1,
     NO_BASELINE: -2,
+    COMPARISON_TIMEOUT: -3,
     UNKNOWN_ERROR: -100
 };
 
@@ -18,6 +19,10 @@ function ScreenshotComparisonException (fileName, comparisonResult) {
             break;
         case ComparisonExitCode.NO_BASELINE:
             this.message = "There is no baseline screenshot for '" + fileName + "'";
+            break;
+        case ComparisonExitCode.COMPARISON_TIMEOUT:
+            this.message = "The image comparison for '" + fileName +
+                    "' did not finish in 5s and it was cancelled";
             break;
         case ComparisonExitCode.UNKNOWN_ERROR:
             this.message = "There was an unknown error while comparing the baseline and the current" +
