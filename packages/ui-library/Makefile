@@ -27,6 +27,9 @@ NPM_FILENAME=npm-$(NPM_VERSION)
 NODE_EXEC=$(CURRENT_DIR)/node/node
 NPM_EXEC=$(NODE_EXEC) $(CURRENT_DIR)/node/node_modules/npm/bin/npm-cli.js
 MVN_FILENAME=apache-maven-3.2.2-bin.tar.gz
+SC_FILENAME=sc-4.4.1-linux.tar.gz
+CREATING_TUNNEL_TIMEOUT=60
+CREATING_TUNNEL_ATTEMPT=0
 
 CURRENT_DIR := $(shell pwd)
 
@@ -135,7 +138,7 @@ define package_css
 
 	cp -rf src/images build-css/$(1)
 	rm -f build-css/$(1)/images/README
-	
+
 	cp -rf src/fonts build-css/$(1)
 	rm -f build-css/$(1)/fonts/README
 endef
@@ -235,6 +238,38 @@ integration: install-node-npm
 	node_modules/.bin/selenium-standalone start & node_modules/.bin/http-server ./build &
 	$(NPM_EXEC) run pack
 	node_modules/.bin/wdio wdio.conf.js
+
+# $(SAUCELABS_BROWSER) is parameter from Jenkins variable SAUCELABS_BROWSER
+integration-saucelabs: install-node-npm
+	rm -rf reports
+	node_modules/.bin/selenium-standalone install
+	node_modules/.bin/selenium-standalone start & node_modules/.bin/http-server ./build &
+	$(NPM_EXEC) run pack
+
+	# create tunnel to connect to Sauce Labs
+	wget https://saucelabs.com/downloads/$(SC_FILENAME)
+	mkdir -p node/sc
+	tar -xvf $(SC_FILENAME) --strip=1 -C node/sc
+	rm -r $(SC_FILENAME)
+
+	# SAUCELABS_USER & SAUCELABS_KEY are stored on Jenkins
+	./node/sc/bin/sc -u $(SAUCELABS_USER) -k $(SAUCELABS_KEY) -i uilibrary -f ./node/sc/tunnel_is_ready.txt &
+
+	# wait for the Sauce Labs tunnel started
+	$(eval CREATING_TUNNEL_ATTEMPT=0)
+	while [[ ! -e ./node/sc/tunnel_is_ready.txt ]] && [[ $$CREATING_TUNNEL_ATTEMPT -lt $(CREATING_TUNNEL_TIMEOUT) ]]; \
+	do \
+		CREATING_TUNNEL_ATTEMPT=$$CREATING_TUNNEL_ATTEMPT+1; \
+		sleep 1; \
+	done
+
+	# start integration on Sauce Labs
+	if [ -e ./node/sc/tunnel_is_ready.txt ]; then \
+		node_modules/.bin/wdio -u $(SAUCELABS_USER) -k $(SAUCELABS_KEY) wdio.conf.js --$(SAUCELABS_BROWSER);\
+	else \
+		echo "Cannot start Sauce Labs tunnel when running on " + $(SAUCELABS_BROWSER); \
+		exit 2; \
+	fi
 
 clean-css:
 	rm -rf build-css

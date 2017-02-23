@@ -11,10 +11,7 @@ var diffRoot = wdioConfig.screenshotOpts.diffRoot;
 var globalTolerance = wdioConfig.screenshotOpts.tolerance || 0;
 var unstableScreenshots = wdioConfig.screenshotOpts.unstableScreenshots || [];
 var comparisonWaitTime = wdioConfig.screenshotOpts.comparisonWaitTime;
-var useScreenshotTool = wdioConfig.screenshotOpts.useScreenshotTool;
-var activeBrowsers = wdioConfig.screenshotOpts.browsers;
-var browserName = wdioConfig.capabilities[0].browserName;
-var isScreenshotActive= (useScreenshotTool && activeBrowsers.indexOf(browserName) > -1)? true : false;
+var isScreenshotActive = wdioConfig.screenshotOpts.useScreenshotTool;
 
 var ScreenshotUtils = {
     /**

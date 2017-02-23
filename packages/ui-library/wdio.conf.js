@@ -1,3 +1,29 @@
+// added sub folders to store baseline for specific browser
+var baseLineRoot = "./src/selenium/base-screenshot/";
+var browserName = "";
+var argv7 = (process && process.argv && (process.argv.length > 7)) ? process.argv[7] : "";
+switch (argv7) {
+    case "--ie11":
+        baseLineRoot += "InternetExplorer11/";
+        browserName = "ie11";
+        break;
+    case "--ie10":
+        baseLineRoot += "InternetExplorer10/";
+        browserName = "ie10";
+        break;
+    case "--chrome":
+        baseLineRoot += "chrome/";
+        browserName = "chrome";
+        break;
+    case "--safari":
+        baseLineRoot += "safari/";
+        browserName = "safari";
+        break;
+    default:
+        baseLineRoot += "firefox/";
+        browserName = "firefox";
+}
+
 exports.config = {
 
     host: "127.0.0.1",
@@ -128,11 +154,10 @@ exports.config = {
 
     screenshotOpts: {
         useScreenshotTool: true, // turn on or off screenshot validation
-        browsers: ["firefox"], // screenshot tool only run with these browser
         // Screenshot directory should end with "/" character otherwise the code will not work as expected
         tempRoot: "./build/temp-screenshot/",
         diffRoot: "./build/diff-screenshot/",
-        baseLineRoot: "./src/selenium/base-screenshot/",
+        baseLineRoot: baseLineRoot,
         tolerance: 0, // 0..100 - floating point values are allowed; the percentage of pixels which are allowed for the screenshot comparison to still succeed
         maxScreenshotAttempt: 2, // number of retry time when the comparison is failed. set to 1 if you want to turn it off
         retryInterval: 500, // delay time after failed comparison
@@ -158,7 +183,8 @@ exports.config = {
     // resolved to continue.
     //
     // Gets executed once before all workers get launched.
-    onPrepare: function (config) {
+    onPrepare: function (config, capabilities) {
+        // this is to support running a single IT instead of all ITs
         if (config.suite) {
             var re = /(?:\.([^./]+))?$/;
             var fileExt = re.exec(config.suite)[0];
@@ -168,16 +194,56 @@ exports.config = {
             }
         }
 
-        // if(process.argv[3] !== "undefined") {
-        //     config.suites = {singleSuite: [process.execArgv]};
-        // }
+        switch (browserName) {
+            case "chrome":
+                capabilities[0].browserName = "chrome";
+                capabilities[0].platform = "OS X 10.11";
+                capabilities[0].version = "54";
+                capabilities[0].screenResolution = "1376x1032";
+                capabilities[0].maxInstances = 1;
+                capabilities[0].tunnelIdentifier = "uilibrary";
+                break;
+            case "safari":
+                capabilities[0].browserName = "safari";
+                capabilities[0].platform = "OS X 10.11";
+                capabilities[0].version = "10";
+                capabilities[0].screenResolution = "1376x1032";
+                capabilities[0].maxInstances = 1;
+                capabilities[0].tunnelIdentifier = "uilibrary";
+                break;
+            case "ie11":
+                capabilities[0].browserName = "internet explorer";
+                capabilities[0].platform = "WIN10";
+                capabilities[0].version = "11";
+                capabilities[0].screenResolution = "1400x1050";
+                capabilities[0].maxInstances = 1;
+                capabilities[0].tunnelIdentifier = "uilibrary";
+                break;
+            case "ie10":
+                capabilities[0].browserName = "internet explorer";
+                capabilities[0].platform = "WIN8";
+                capabilities[0].version = "10";
+                capabilities[0].screenResolution = "1400x1050";
+                capabilities[0].maxInstances = 1;
+                capabilities[0].tunnelIdentifier = "uilibrary";
+                break;
+            default:
+                break;
+        }
 
-        //console.log(process.env.npm_config_argv.original);
-        /* {   "remain":[],
-            "cooked":["run","integration","-/Users/chiencao/DEV/ui-library/src/demo/components/forms/tests/ToggleIntegrationTest.js"],
-            "original":["run","integration","-/Users/chiencao/DEV/ui-library/src/demo/components/forms/tests/ToggleIntegrationTest.js"]
-        }*/
+        // support job name for single IT on Saucelab (only for other browser except firefox)
+        if (browserName === "chrome" ||
+            browserName === "safari" ||
+            browserName === "ie11" ||
+            browserName === "ie10") {
+            var folders = config.specs[0].split("/");
+            var testFile = folders[folders.length - 1];
+            capabilities.forEach(function (capability) {
+                capability.name = testFile;
+            });
+        }
     },
+
     //
     // Gets executed before test execution begins. At this point you can access all global
     // variables, such as `browser`. It is the perfect place to define custom commands.
