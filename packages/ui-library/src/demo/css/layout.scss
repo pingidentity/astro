@@ -1,26 +1,14 @@
 // LAYOUT
 
 // VARS
-$sidenav-width: 250px;
 $layout-nav-link-height: 31px; 	// works better as odd number
 $layout-nav-offset: 15px;
 $sidenav-lineheight: 22px;
 
 #nav {
-	width: $sidenav-width;
 
 	.nav-menus {
-		width: $sidenav-width - 5;
 		-ms-overflow-style: -ms-autohiding-scrollbar;
-	}
-	.copyright {
-		width: $sidenav-width - $layout-nav-offset;
-	}
-	ul.menu, .selected-item, &:before {
-		width: $sidenav-width - $layout-nav-offset;
-	}
-	.selected-item-arrow {
-		left: $sidenav-width - $layout-nav-offset;
 	}
 	ul.menu {
 		li {
@@ -114,14 +102,7 @@ $sidenav-lineheight: 22px;
 	clear: both;
 }
 
-.page-controls-primary {
-	left: $sidenav-width - $layout-nav-offset + 40px;
-}
-.page-messages {
-	left: $sidenav-width - $layout-nav-offset;
-}
 #content {
-	left: $sidenav-width + $layout-nav-offset;
 
 	.section {
 		padding: 10px 0 30px 0;
