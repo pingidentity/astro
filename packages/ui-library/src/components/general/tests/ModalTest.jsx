@@ -1,6 +1,8 @@
 jest.dontMock("../Modal.jsx");
 jest.dontMock("../If.jsx");
 jest.dontMock("../../../util/EventUtils.js");
+jest.dontMock("../../tooltips/CancelTooltip.jsx");
+jest.dontMock("../../tooltips/DetailsTooltip.jsx");
 
 describe("ModalTest", function () {
     var React = require("react"),
@@ -145,6 +147,51 @@ describe("ModalTest", function () {
 
         //but close link is here
         TestUtils.findRenderedDOMNodeWithClass(modal, "close-modal");
+    });
+
+    it("Cancel tooltip renders and triggers callbacks.", function () {
+        var cancelConfirm = jest.genMockFunction(),
+            cancelDeny = jest.genMockFunction(),
+            modalParams = {
+                expanded: true,
+                cancelTooltip: {
+                    title: "Cancel Confirmation",
+                    open: false,
+                    onConfirm: cancelConfirm,
+                    onCancel: cancelDeny,
+                    messageText: "Are you sure?",
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "No"
+                }
+            },
+            component = getComponent(modalParams),
+            cancelTooltip = TestUtils.findRenderedDOMNodeWithDataId(component, "modal-button-cancel-tooltip"),
+            cancelTooltipContent = TestUtils.findRenderedDOMNodeWithDataId(cancelTooltip, "details-content");
+
+        expect(cancelTooltipContent).toBeFalsy();
+
+        modalParams.cancelTooltip.open = true;
+        component = getComponent(modalParams);
+        cancelTooltip = TestUtils.findRenderedDOMNodeWithDataId(component, "modal-button-cancel-tooltip");
+        cancelTooltipContent = TestUtils.findRenderedDOMNodeWithDataId(cancelTooltip, "details-content");
+        expect(cancelTooltip).toBeTruthy();
+
+        var tooltipConfirmBtn = TestUtils.findRenderedDOMNodeWithDataId(component, "modal-button-cancel-confirm-btn"),
+            tooltipDenyBtn = TestUtils.findRenderedDOMNodeWithDataId(component, "modal-button-cancel-deny-btn"),
+            tooltipTitle = TestUtils.findRenderedDOMNodeWithDataId(component, "details-title"),
+            tooltipText = TestUtils.findRenderedDOMNodeWithDataId(component, "modal-button-cancel-tooltip-text");
+
+        ReactTestUtils.Simulate.click(tooltipConfirmBtn);
+        expect(cancelConfirm).toBeCalled();
+        expect(cancelDeny).not.toBeCalled();
+
+        ReactTestUtils.Simulate.click(tooltipDenyBtn);
+        expect(cancelDeny).toBeCalled();
+
+        expect(tooltipConfirmBtn.textContent).toBe(modalParams.cancelTooltip.confirmButtonText);
+        expect(tooltipDenyBtn.textContent).toBe(modalParams.cancelTooltip.cancelButtonText);
+        expect(tooltipTitle.textContent).toBe(modalParams.cancelTooltip.title);
+        expect(tooltipText.textContent).toBe(modalParams.cancelTooltip.messageText);
     });
 
     //TODO: remove when id no longer supported

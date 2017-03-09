@@ -108,6 +108,7 @@
             right: 65px;
             top: 50%;
             bottom: 0;
+            z-index: 1;
 
             > * {
                 @include transform(translateY(-50%));

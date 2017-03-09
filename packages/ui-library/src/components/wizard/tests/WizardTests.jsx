@@ -5,6 +5,8 @@ jest.dontMock("../Wizard.jsx");
 jest.dontMock("../../general/EllipsisLoaderButton.jsx");
 jest.dontMock("../../forms/ButtonBar.jsx");
 jest.dontMock("../../../util/format.js");
+jest.dontMock("../../tooltips/CancelTooltip.jsx");
+jest.dontMock("../../tooltips/DetailsTooltip.jsx");
 
 describe("Step", function () {
     var React = require("react"),
@@ -175,5 +177,47 @@ describe("Step", function () {
 
         expect(doneBtn.className).toContain("disabled");
         expect(doneBtn.disabled).toBeTruthy();
+    });
+
+    it("Cancel tooltip renders and triggers callbacks.", function () {
+        var cancelConfirm = jest.genMockFunction(),
+            cancelDeny = jest.genMockFunction(),
+            cancelTooltipParams = {
+                title: "Cancel Confirmation",
+                open: false,
+                onConfirm: cancelConfirm,
+                onCancel: cancelDeny,
+                messageText: "Are you sure?",
+                confirmButtonText: "Yes",
+                cancelButtonText: "No"
+            },
+            component = getRenderedComponent({ cancelTooltip: cancelTooltipParams }),
+            cancelTooltip = TestUtils.findRenderedDOMNodeWithDataId(component, "step-cancel-tooltip"),
+            cancelTooltipContent = TestUtils.findRenderedDOMNodeWithDataId(cancelTooltip, "details-content");
+
+        expect(cancelTooltipContent).toBeFalsy();
+
+        cancelTooltipParams.open = true;
+        component = getRenderedComponent({ cancelTooltip: cancelTooltipParams });
+        cancelTooltip = TestUtils.findRenderedDOMNodeWithDataId(component, "step-cancel-tooltip");
+        cancelTooltipContent = TestUtils.findRenderedDOMNodeWithDataId(cancelTooltip, "details-content");
+        expect(cancelTooltip).toBeTruthy();
+
+        var tooltipConfirmBtn = TestUtils.findRenderedDOMNodeWithDataId(component, "step-cancel-confirm-btn"),
+            tooltipDenyBtn = TestUtils.findRenderedDOMNodeWithDataId(component, "step-cancel-deny-btn"),
+            tooltipTitle = TestUtils.findRenderedDOMNodeWithDataId(component, "details-title"),
+            tooltipText = TestUtils.findRenderedDOMNodeWithDataId(component, "step-cancel-tooltip-text");
+
+        ReactTestUtils.Simulate.click(tooltipConfirmBtn);
+        expect(cancelConfirm).toBeCalled();
+        expect(cancelDeny).not.toBeCalled();
+
+        ReactTestUtils.Simulate.click(tooltipDenyBtn);
+        expect(cancelDeny).toBeCalled();
+
+        expect(tooltipConfirmBtn.textContent).toBe(cancelTooltipParams.confirmButtonText);
+        expect(tooltipDenyBtn.textContent).toBe(cancelTooltipParams.cancelButtonText);
+        expect(tooltipTitle.textContent).toBe(cancelTooltipParams.title);
+        expect(tooltipText.textContent).toBe(cancelTooltipParams.messageText);
     });
 });

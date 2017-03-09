@@ -1333,7 +1333,7 @@ input[type=file] {
             $height: 10px;
 
             height: $height;
-            width: 12px;
+            width: 9px;
             padding: 0;
             margin: 0;
             display: block;
@@ -1681,6 +1681,9 @@ input[type=file] {
                 right: 35px;
             }
         }
+        .integer-controls {
+            right: 33px;
+        }
     }
     &.input-textarea {
         textarea {
@@ -1780,17 +1783,6 @@ input[type=file] {
             &:focus {
                 @include errorDisplayCss;
             }
-        }
-    }
-    &.input-integer {
-        .integer-controls {
-            right: 34px;
-        }
-        a.undo {
-            right: 61px;
-        }
-        &:focus {
-            @include errorDisplayCss;
         }
     }
     &.input-timezone {

@@ -49,8 +49,18 @@ var React = require("re-react"),
  *      Deprecated. Use data-id instead.
  * @param {string} [className]
  *      CSS classes to set on the top-level HTML container
+ *
+ * @param {string} [labelEdit]
+ *      If provided, will be injected its children's props
+ * @param {string} [labelNext]
+ *      If provided,will be injected its children's props
+ * @param {string} [labelCancel]
+ *      If provided, will be injected its children's props
+ * @param {string} [labelDone]
+ *      If provided, will be injected its children's props
  * @param {string} title
  *      The title of the Wizard
+ *
  * @param {number} [number=1]
  *      Since wizards can be embedded inside other wizards, they need to be given a
  *      number unless they're the root
@@ -61,19 +71,24 @@ var React = require("re-react"),
  *      The current step the wizard (since redux forces externally managed components)
  * @param {number[]} choices
  *      An array describing the state of the entire wizard tree
+ *
  * @param {boolean} [saveDisabled]
  *     Disables the final save button when true
- * @param {string} [labelEdit]
- *      If provided, will be injected its children's props
- * @param {string} [labelNext]
- *      If provided,will be injected its children's props
- * @param {string} [labelCancel]
- *      If provided, will be injected its children's props
- * @param {string} [labelDone]
- *      If provided, will be injected its children's props
  * @param {boolean} [showPulsing=false]
  *      By default it set to false, if true next and done button will be change to loader when
  *      navigation buttons clicked.
+ *
+ * @param {object} [cancelTooltip]
+ *     An object containing the props required to generate a details tooltip to confirm the canceling of a wizard.
+ *     The properties required by this object are:
+ *         cancelTooltip.title : the title of the details tooltip
+ *         cancelTooltip.cancelButtonText : the text of the cancel link
+ *         cancelTooltip.confirmButtonText : the text of the confirm button
+ *         cancelTooltip.onCancel : the callback triggered when the cancel button is pressed
+ *         cancelTooltip.onConfirm : the callback triggered when the confirm button is pressed
+ *         cancelTooltip.messageText : the text to display in the body of the tooltip
+ *         cancelTooltip.open : the prop that controls whether the tooltip is visible or not
+ *
  * @param {Wizard~onEdit} [onEdit]
  *      Callback to be triggered when a the edit link of any children is clicked.  If provided, will be injected
  *      its children's props, otherwise the actions of each step must be handled and the store updated
@@ -101,18 +116,19 @@ var React = require("re-react"),
  */
 var Wizard = React.createClass({
     INHERIT_PROPS: [
+        "activeStep",
+        "cancelTooltip",
+        "choices",
+        "labelNext",
+        "labelCancel",
+        "labelEdit",
+        "labelDone",
+        "numSteps",
         "onEdit",
         "onValueChange",
         "onChange", // DEPRECATED, remove when possible.
         "onNext",
         "onCancel",
-        "labelNext",
-        "labelCancel",
-        "labelEdit",
-        "labelDone",
-        "choices",
-        "activeStep",
-        "numSteps",
         "showPulsing"
     ],
 
@@ -120,6 +136,7 @@ var Wizard = React.createClass({
         "data-id": React.PropTypes.string.affectsRendering,
         id: React.PropTypes.string.affectsRendering,
         className: React.PropTypes.string.affectsRendering,
+        cancelTooltip: React.PropTypes.object.affectsRendering,
         title: React.PropTypes.string.isRequired.affectsRendering,
         number: React.PropTypes.number.affectsRendering,
         activeStep: React.PropTypes.number.affectsRendering,
@@ -183,10 +200,9 @@ var Wizard = React.createClass({
     },
 
     render: function () {
-        var id = this.props.id || this.props["data-id"];
-
-        var steps = this._filter(this.props.children);
-        var props = _.pick(this.props, this.INHERIT_PROPS);
+        var dataId = this.props.id || this.props["data-id"],
+            steps = this._filter(this.props.children),
+            props = _.pick(this.props, this.INHERIT_PROPS);
 
         var stepNodes = React.Children.map(steps, function (step, i) {
             var idx = this.props.number + i;
@@ -204,7 +220,7 @@ var Wizard = React.createClass({
         }.bind(this));
 
         return (
-            <div data-id={id} className={this.props.className}>
+            <div data-id={dataId} className={this.props.className}>
                 {stepNodes}
                 {this.props.activeStep === this.props.numSteps ? (
                     <ButtonBar
@@ -214,7 +230,9 @@ var Wizard = React.createClass({
                         saveDisabled={this.props.saveDisabled}
                         saveText={this.props.labelDone}
                         enableSavingAnimation={this.props.showPulsing}
-                        saveClassName="success" />
+                        saveClassName="success"
+                        cancelTooltip={this.props.cancelTooltip}
+                    />
                 ) : null}
             </div>
         );

@@ -847,36 +847,14 @@ $layout-nav-width-offset: 15px;
         @include transform(translateY(100%));
     }
 
-    input[type=button],
-    button,
-    .button {
-        margin: 0;
-
-        & ~ input[type=button],
-        & ~ button,
-        & ~ .button {
-            margin-left: 10px;
-        }
-    }
+    @include button-spacing();
 }
 
-
-
 .content-columns {
-    $column-margin: 40px;
-
-    @function get-width($divisions) {
-        @return calc(#{to-fixed(percentage(1 / $divisions))} - #{to-fixed(($column-margin * ($divisions - 1)) / $divisions)});
-    }
-
-    @function get-width-nopad($divisions) {
-        @return #{to-fixed(percentage(1 / $divisions))};
-    }
-
-    @include clearfix;
+    @include flexbox;
 
     .content-column {
-        float: left;
+        @include flexbox-grow(1);
         box-sizing: border-box;
         margin: 0 40px 0 0;
 
@@ -884,70 +862,38 @@ $layout-nav-width-offset: 15px;
             margin: 0;
         }
     }
-    &.columns-1 {
-        .content-column {
-            float: none;
-            width: 100%;
-        }
-    }
-    &.columns-2 {
-        .content-column {
-            width: get-width(2);
-        }
-    }
-    &.columns-3 {
-        .content-column {
-            width: get-width(3);
-        }
-    }
-    &.columns-4 {
-        .content-column {
-            width: get-width(4);
-        }
-    }
-    &.columns-5 {
-        .content-column {
-            width: get-width(5);
-        }
-    }
-    &.columns-nopad {
+    &.columns-margin-none,
+    &.columns-nopad {  // nopad DEPRICATED
         .content-column {
             margin: 0;
         }
-        &.columns-2 {
-            .content-column {
-                width: get-width-nopad(2);
-            }
-        }
-        &.columns-3 {
-            .content-column {
-                width: get-width-nopad(3);
-            }
-        }
-        &.columns-4 {
-            .content-column {
-                width: get-width-nopad(4);
-            }
-        }
-        &.columns-5 {
-            .content-column {
-                width: get-width-nopad(5);
+    }
+    &.columns-margin-20 {
+        .content-column {
+            margin: 0 20px 0 0;
+
+            &:last-of-type {
+                margin: 0;
             }
         }
     }
     &.columns-width-auto {
-        &.columns-1,
-        &.columns-2,
-        &.columns-3,
-        &.columns-4,
-        &.columns-5 {
-            .content-column {
-                width: auto;
-            }
+        .content-column {
+            @include flexbox-grow(0);
         }
     }
 }
 
+// flakey but one of only a few options : use with caution
+.valign-container {
+    display: table !important;
+    height: 100%;
+
+    .valign-content {
+        display: table-cell !important;
+        vertical-align: middle !important;
+    }
+}
 
 
 // DEPRECATED OR SITE-SPECIFIC STYLES --------------------------------------------------------------

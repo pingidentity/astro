@@ -219,24 +219,11 @@
             }
         }
     }
-    // .button-container is DEPRECATED
-    .buttons,
-    .button-container {
+    .buttons {
         margin: 20px 0 0;
         text-align: right;
 
-
-        input[type=button],
-        button,
-        .button {
-            margin: 0;
-
-            & ~ input[type=button],
-            & ~ button,
-            & ~ .button {
-                margin-left: 10px;
-            }
-        }
+        @include button-spacing();
     }
     input[type=text],
     input[type=password],

@@ -205,7 +205,7 @@ var EditViewModalDemoPage = Object.create(HomePage, {
      */
     clickIconCloseDialog: {
         value: function () {
-            this.click("//div[@data-id='default-example-modal']//div/a");
+            this.click("//span[@data-id='close-button']");
         }
     },
 

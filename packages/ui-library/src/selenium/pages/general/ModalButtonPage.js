@@ -21,7 +21,7 @@ var ModalButtonDemoPage = Object.create(HomePage, {
             return "//button[@data-id='dialog-modal-button']";
         }
     },
-    
+
     xpathOpenAlertModal: {
         get: function () {
             return "//button[@data-id='alert-modal-button']";
@@ -123,7 +123,7 @@ var ModalButtonDemoPage = Object.create(HomePage, {
      */
     clickIconCloseDialog: {
         value: function () {
-            this.click("//a[@data-id='close-button']");
+            this.click("//span[@data-id='close-button']");
         }
     },
 

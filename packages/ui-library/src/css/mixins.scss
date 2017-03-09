@@ -196,6 +196,25 @@
 }
 
 
+// FLEXBOX ----------------------------------------------------------------------------------------
+
+@mixin flexbox {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+@mixin flexbox-grow($value) {
+    -webkit-box-flex: $value;
+    -webkit-flex-grow: $value;
+    -moz-flex-grow: $value;
+    -ms-flex-positive: $value;
+    flex-grow: $value;
+}
+
+
 
 // MISC --------------------------------------------------------------------------------------------
 
@@ -245,6 +264,26 @@
     -moz-background-clip: $clip-property;
     -webkit-background-clip: $clip-property;
     background-clip: $clip-property;
+}
+
+@mixin button-spacing($spacing: 10px) {
+    > .details-tooltip .details-target button {
+        margin: 0;
+    }
+
+    > input[type=button],
+    > button,
+    > .button,
+    > .details-tooltip {
+        margin: 0;
+
+        & ~ input[type=button],
+        & ~ button,
+        & ~ .button,
+        & ~ .details-tooltip {
+            margin-left: $spacing;
+        }
+    }
 }
 
 

@@ -13,6 +13,7 @@ var ButtonBarDemo = React.createClass({
         this.setState({
             statusText: "Cancel button pressed"
         });
+        this._closeTooltip();
     },
 
     _handleDiscard: function () {
@@ -48,11 +49,20 @@ var ButtonBarDemo = React.createClass({
         });
     },
 
+    _openTooltip: function () {
+        this.setState({ showCancelTooltip: true });
+    },
+
+    _closeTooltip: function () {
+        this.setState({ showCancelTooltip: false });
+    },
+
     getInitialState: function () {
         return {
             saving: false,
             showBar: true,
-            statusText: "-"
+            statusText: "-",
+            showCancelTooltip: false
         };
     },
 
@@ -72,17 +82,29 @@ var ButtonBarDemo = React.createClass({
                 Demo status: &nbsp; <i>{this.state.statusText}</i>
 
                 <ButtonBar
-                    onCancel={this._handleCancel}
-                    onDiscard={this._handleDiscard}
-                    onSave={this._handleSave}
+                    data-id="buttonbar"
 
                     cancelText="Cancel"
                     discardText="Discard"
                     saveText="Save"
 
+                    onCancel={this._openTooltip}
+                    onDiscard={this._handleDiscard}
+                    onSave={this._handleSave}
+
                     enableSavingAnimation={this.state.saving}
                     visible={this.state.showBar}
-                    saveDisabled={this.state.saveDisabled}>
+                    saveDisabled={this.state.saveDisabled}
+
+                    cancelTooltip={{
+                        title: "Cancel Confirmation",
+                        open: this.state.showCancelTooltip,
+                        onConfirm: this._handleCancel,
+                        onCancel: this._closeTooltip,
+                        messageText: "Are you sure you want to cancel these changes?",
+                        confirmButtonText: "Yes",
+                        cancelButtonText: "No"
+                    }}>
 
                     <span style={{ margin: "0 30px 0 0" }}>
                         Child content can added and will display to the left of the buttons by default.

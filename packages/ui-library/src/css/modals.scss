@@ -66,19 +66,31 @@
             color: $color-white;
             padding: 18px 0 0 18px;
         }
-        .close-modal {
+        > .close-modal,
+        > .details-tooltip {
+            display: block;
             position: absolute;
             top: 13px;
             right: 15px;
             line-height: 1em;
             color: transparent;
-
+        }
+        .close-modal {
             &:after {
                 color: $color-rhino;
                 font-size: 18px;
                 content: '\78';
                 font-family: 'iconfont';
             }
+        }
+        .close-modal,
+        .details-tooltip,
+        .details-target {
+            height: 18px;
+            width: 18px;
+        }
+        .details-content {
+            top: 29px;
         }
     }
     .modal-body {

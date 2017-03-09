@@ -155,6 +155,7 @@ var DetailsTooltipStateless = React.createClass({
             "data-id": "details-tooltip",
             positionClassName: "top",
             titleClassName: "details-title",
+            onToggle: _.noop,
             open: false,
             disabled: false,
             showClose: true,
@@ -172,10 +173,17 @@ var DetailsTooltipStateless = React.createClass({
     /*
      * Secondary buttons
      */
-    _getSecondaryButtonHtml: function (label, value) {
+    _getSecondaryButtonHtml: function (label, value, i) {
+        var dataId = "secondary-action";
+
+        if (i > 1) {
+            dataId = dataId + "-" + i;
+        }
+
         return (
             <button
                 type="button"
+                data-id={dataId}
                 className="cancel"
                 onClick={value}
                 key={label}>
@@ -187,11 +195,17 @@ var DetailsTooltipStateless = React.createClass({
     /*
      * Primary buttons
      */
-    _getPrimaryButtonHtml: function (label, value) {
+    _getPrimaryButtonHtml: function (label, value, i) {
+        var dataId = "confirm-action";
+
+        if (i > 1) {
+            dataId = dataId + "-" + i;
+        }
+
         return (
             <button
                 type="button"
-                data-id="confirm-action"
+                data-id={dataId}
                 className="primary"
                 onClick={value}
                 key={label}>
@@ -204,35 +218,38 @@ var DetailsTooltipStateless = React.createClass({
      * Optional button array
      */
     _getButtons: function () {
+        var secondaryButtons,
+            primaryButtons,
+            buttons = null;
 
         // can have multiple secondary buttons
-        var secondaryButtons = [];
         if (this.props.secondaryLabels) {
-            secondaryButtons = this.props.secondaryLabels.map(function (secondaryLabel) {
-                return this._getSecondaryButtonHtml(secondaryLabel.label, secondaryLabel.value);
+            secondaryButtons = this.props.secondaryLabels.map(function (secondaryLabel, i) {
+                return this._getSecondaryButtonHtml(secondaryLabel.label, secondaryLabel.value, i);
             }.bind(this));
         }
 
         // can have multiple primary buttons
-        var primaryButtons = [];
         if (this.props.primaryLabels) {
-            primaryButtons = this.props.primaryLabels.map(function (primaryLabel) {
-                return this._getPrimaryButtonHtml(primaryLabel.label, primaryLabel.value);
+            primaryButtons = this.props.primaryLabels.map(function (primaryLabel, i) {
+                return this._getPrimaryButtonHtml(primaryLabel.label, primaryLabel.value, i);
             }.bind(this));
         }
 
-        var buttons = null;
-        // only display buttons if primary button present
-        if (this.props.primaryLabels) {
+        // only display if buttons present
+        if (this.props.primaryLabels || this.props.secondaryLabels) {
             buttons = (<div className="buttons" data-id="buttons">
                 {secondaryButtons}
                 {primaryButtons}
                 {this.props.cancelLabel && (
                     <span>
                         <br />
-                        <a className="cancel"
-                           data-id="cancel-action"
-                           onClick={this.props.onToggle}>{this.props.cancelLabel}</a>
+                        <a
+                            className="cancel"
+                            data-id="cancel-action"
+                            onClick={this._handleToggle}>
+                            {this.props.cancelLabel}
+                        </a>
                     </span>
                 )}
             </div>);
@@ -247,7 +264,7 @@ var DetailsTooltipStateless = React.createClass({
      */
     _content: function () {
 
-        var hide = this.props.hideOnClick ? this.props.onToggle : _.noop;
+        var hide = this.props.hideOnClick ? this._handleToggle : _.noop;
         var contentClassName =
             classnames("details-content", (this.props.contentClassNames || this.props.contentClassName)) ;
         var titleClassName = this.props.titleClassNames || this.props.titleClassName;
@@ -257,7 +274,7 @@ var DetailsTooltipStateless = React.createClass({
                     onClick={hide}>
                 <div className="details-content-inner">
                     {this.props.showClose && (
-                        <span className="details-close" data-id="details-close" onClick={this.props.onToggle}></span>
+                        <span className="details-close" data-id="details-close" onClick={this._handleToggle}></span>
                     )}
                     {this.props.title && (
                         <div className={titleClassName} data-id="details-title">{this.props.title}</div>
@@ -367,9 +384,14 @@ var DetailsTooltipStateless = React.createClass({
 
         return (
             <span className={containerClassName} data-id={dataId} ref="container">
-                {this.props.label ? (
-                    <a className={classnames("details-target", targetCss)} data-id="action-btn"
-                        onClick={!this.props.disabled && this._handleToggle}>{this.props.label}</a>) : null }
+                {this.props.label && (
+                    <a
+                        data-id="action-btn"
+                        className={classnames("details-target", targetCss)}
+                        onClick={!this.props.disabled && this._handleToggle}>
+                        {this.props.label}
+                    </a>
+                )}
                 {this._content()}
             </span>
         );

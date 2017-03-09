@@ -1,10 +1,11 @@
 "use strict";
 
 var React = require("re-react"),
-    HelpHint = require("../tooltips/HelpHint.jsx"),
-    Progress = require("./Progress.jsx"),
+    CancelTooltip = require("./../tooltips/CancelTooltip.jsx"),
     ContextButton = require("../general/context-close-button").v2,
     EllipsisLoaderButton = require("../general/EllipsisLoaderButton.jsx"),
+    HelpHint = require("../tooltips/HelpHint.jsx"),
+    Progress = require("./Progress.jsx"),
     classnames = require("classnames"),
     Utils = require("../../util/Utils"),
     Translator = require("../../util/i18n/Translator.js"),
@@ -33,6 +34,9 @@ var React = require("re-react"),
  *     Deprecated. Use data-id instead.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container
+ *
+ * @param {string} [hintText]
+ *     String tooltip help text
  * @param {string} labelEdit
  *     String text of step activation link
  * @param {string} labelCancel
@@ -49,10 +53,12 @@ var React = require("re-react"),
  *     CSS classes to set on the done button.
  * @param {string} [doneButtonStyle]
  *     DEPRECATED. Use doneButtonClassName.
+ *
  * @param {number} number
  *     The step number(used for progress <i>number</i> of <i>total</i>))
  * @param {number} total
  *     The total number of steps (used for progress <i>number</i> of <i>total</i>)
+ *
  * @param {boolean} [active=false]
  *     Indicates if step is open, used for external state management
  * @param {boolean} [canProceed=true]
@@ -71,10 +77,12 @@ var React = require("re-react"),
  *     Conditionally show a step (hidden if false)
  * @param {boolean} [renderHidden=false]
  *     Render the child elements to the DOM, but hidden (display: none), when the step is not active
- * @param {string} [hintText]
- *     String tooltip help text
  * @param {boolean} [showPulsing=false]
  *     If true next and done button will be change to loader when navigation buttons clicked
+ *
+ * @param {object} [cancelTooltip]
+ *     An object containing the props required to generate a details tooltip to confirm the canceling of a wizard.
+ *
  * @param {Wizard#Step~onNext} onNext
  *     Callback to be triggered in response of 'next' click, which will receive the current number.
  * @param {Wizard#Step~onEdit} onEdit
@@ -85,6 +93,7 @@ var Step = React.createClass({
         "data-id": React.PropTypes.string.affectsRendering,
         id: React.PropTypes.string.affectsRendering,
         className: React.PropTypes.string.affectsRendering,
+        cancelTooltip: React.PropTypes.object.affectsRendering,
         labelEdit: React.PropTypes.string.affectsRendering,
         labelCancel: React.PropTypes.string.affectsRendering,
         labelNext: React.PropTypes.string.affectsRendering,
@@ -142,21 +151,44 @@ var Step = React.createClass({
         }
     },
 
+    _getCancelButtonMarkup: function () {
+        var labelCancel = this.props.labelCancel || Translator.translate("cancel");
+
+        return React.createElement(this.props.isModal ? ContextButton : "input", {
+            onClick: this.props.onCancel,
+            type: "button",
+            ref: "cancelButton",
+            className: "cancel-step",
+            value: labelCancel,
+            disabled: this.props.showPulsing
+        });
+    },
+
     _getCancelButton: function () {
         if (!this.props.hideCancel) {
-            var labelCancel = this.props.labelCancel;
-            if (!this.props.labelCancel) {
-                labelCancel = Translator.translate("cancel");
+            var cancelButton,
+                dataId = this.props.id || this.props["data-id"];
+
+            if (this.props.cancelTooltip) {
+                cancelButton = (
+                    <CancelTooltip
+                        data-id={dataId}
+                        confirmButtonText={this.props.cancelTooltip.confirmButtonText}
+                        cancelButtonText={this.props.cancelTooltip.cancelButtonText}
+                        label={this._getCancelButtonMarkup()}
+                        messageText={this.props.cancelTooltip.messageText}
+                        onConfirm={this.props.cancelTooltip.onConfirm}
+                        onCancel={this.props.cancelTooltip.onCancel}
+                        open={this.props.cancelTooltip.open}
+                        positionClassName="top left"
+                        title={this.props.cancelTooltip.title}
+                    />
+                );
+            } else {
+                cancelButton = this._getCancelButtonMarkup();
             }
 
-            return React.createElement(this.props.isModal ? ContextButton : "input", {
-                onClick: this.props.onCancel,
-                type: "button",
-                ref: "cancelButton",
-                className: "default cancel-step",
-                value: labelCancel,
-                disabled: this.props.showPulsing
-            });
+            return cancelButton;
         }
     },
 
@@ -228,7 +260,7 @@ var Step = React.createClass({
     },
 
     render: function () {
-        var id = this.props.id || this.props["data-id"];
+        var dataId = this.props.id || this.props["data-id"];
 
         var inlineStyles;
         var className = classnames(this.props.className, {
@@ -244,7 +276,7 @@ var Step = React.createClass({
         }
 
         return (
-            <div className={className} data-id={id}>
+            <div className={className} data-id={dataId}>
                 <div className="task-title">
                     <Progress
                         ref="progress"

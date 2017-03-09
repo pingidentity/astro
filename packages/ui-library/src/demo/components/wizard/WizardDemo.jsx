@@ -20,8 +20,9 @@ var WizardDemo = React.createClass({
 
     getInitialState: function () {
         return {
-            usePulsing: false,
-            isLoading: false
+            isLoading: false,
+            showCancelTooltip: false,
+            usePulsing: false
         };
     },
 
@@ -32,6 +33,8 @@ var WizardDemo = React.createClass({
     },
 
     _handleNext: function () {
+        this._closeTooltip();
+
         if (this.state.usePulsing) {
             this.setState({ isLoading: true });
 
@@ -44,16 +47,27 @@ var WizardDemo = React.createClass({
         }
     },
 
+    _reset: function () {
+        this.actions.reset();
+    },
+
     _handleDone: function () {
         if (this.state.usePulsing) {
             this.setState({ isLoading: true });
             setTimeout(function () {
                 this.setState({ isLoading: false });
-                this.actions.reset();
             }.bind(this), 2500);
         } else {
-            this.actions.reset();
+            this._reset();
         }
+    },
+
+    _openTooltip: function () {
+        this.setState({ showCancelTooltip: true });
+    },
+
+    _closeTooltip: function () {
+        this.setState({ showCancelTooltip: false });
     },
 
     componentWillMount: function () {
@@ -64,35 +78,56 @@ var WizardDemo = React.createClass({
     },
 
     render: function () {
+        var cancelTooltipParams = {
+            title: "Cancel Confirmation",
+            open: this.state.showCancelTooltip,
+            onConfirm: this._reset,
+            onCancel: this._closeTooltip,
+            messageText: "Are you sure you want to cancel this wizard?",
+            confirmButtonText: "Yes",
+            cancelButtonText: "No"
+        };
+
         return (
-            <div style={{ float: "left", width: "100%" }}>
+            <div>
                 <div className="input-row">
                     <FormCheckbox
                         label="Demonstrate saving animation"
                         onChange={this.toggleUsePulsing}
                         checked={this.state.usePulsing}
-                        className="stacked" />
+                        className="stacked"
+                    />
                 </div>
 
-                <Choose title="Choose a wizard" {...this.props} {...this.BUTTON_LABELS}
+                <Choose
+                    title="Choose a wizard"
                     onValueChange={this._handlePick}
                     onEdit={this.actions.edit}
                     onNext={this._handleNext}
                     onDone={this._handleDone}
-                    onCancel={this._handleDone}
-                    showPulsing={this.state.isLoading} >
+                    onCancel={this._openTooltip}
+                    showPulsing={this.state.isLoading}
+                    {...this.props}
+                    {...this.BUTTON_LABELS}>
 
-                    <Wizard title="Wizard 1">
-                        <Step title="Wizard 1 - Step 1">some content herreeeeeeeeeeeee</Step>
-                        <Step title="Wizard 1 - Step 2">some content herreeeeeeeeeeeee</Step>
+                    <Wizard
+                        title="Wizard 1"
+                        cancelTooltip={cancelTooltipParams}>
+                        <Step title="Wizard 1 - Step 1" cancelTooltip={cancelTooltipParams}>
+                            Step 1 content goes here.
+                        </Step>
+                        <Step title="Wizard 1 - Step 2" cancelTooltip={cancelTooltipParams}>
+                            Step 2 content goes here.
+                        </Step>
                     </Wizard>
 
                     <div style={{ marginBottom: 10 }}>OR</div>
 
-                    <Wizard title="Wizard 2">
-                        <Step title="Wizard 2 - Step 1">some content herreeeeeeeeeeeee</Step>
-                        <Step title="Wizard 2 - Step 2">some content herreeeeeeeeeeeee</Step>
-                        <Step title="Wizard 2 - Step 3">some content herreeeeeeeeeeeee</Step>
+                    <Wizard
+                        title="Wizard 2">
+                        <Step title="Wizard 2 - Step 1">Step 1 content goes here.</Step>
+                        <Step title="Wizard 2 - Step 2">Step 2 content goes here.</Step>
+                        <Step title="Wizard 2 - Step 3">Step 3 content goes here.</Step>
                     </Wizard>
                 </Choose>
                 <div>{this.state.isLoading && "Making some async call..."}</div>

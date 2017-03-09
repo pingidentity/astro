@@ -8,7 +8,7 @@ var Modal = require("./../../../components/general/Modal.jsx");
 */
 var ModalDemo = React.createClass({
 
-    numDemos: 5,
+    numDemos: 6,
 
     _toggle: function (index) {
         var newState = {};
@@ -18,12 +18,30 @@ var ModalDemo = React.createClass({
         this.setState(newState);
     },
 
+    _openTooltip: function () {
+        this.setState({ showCancelTooltip: true });
+    },
+
+    _closeTooltip: function () {
+        this.setState({ showCancelTooltip: false });
+    },
+
+    _resetModal: function () {
+
+        console.log("_resetModal");
+
+        this._closeTooltip();
+        this._toggle(6);
+    },
+
     getInitialState: function () {
         var initState = {};
 
         for (var i=1; i<=this.numDemos; i+=1) {
             initState["expanded" + i] = false;
         }
+
+        initState["showCloseTooltip"] = false;
 
         return initState;
     },
@@ -124,7 +142,6 @@ var ModalDemo = React.createClass({
                     <a onClick={this._toggle5}>Open Alert Modal</a>
 
                     <Modal
-                        modalTitle=""
                         type="alert"
                         ref="alertModal"
                         expanded={this.state.expanded5}
@@ -141,6 +158,32 @@ var ModalDemo = React.createClass({
                             <button type="button" className="primary" onClick={this._toggle5}>Save</button>
                             <br />
                             <a className="cancel" onClick={this._toggle5}>Cancel</a>
+                        </div>
+                    </Modal>
+                </div>
+                <div className="input-row">
+                    <a onClick={this._toggle6}>Open Modal with Close Confirm</a>
+
+                    <Modal
+                        modalTitle="Maximized Modal"
+                        maximize={true}
+                        expanded={this.state.expanded6}
+                        onOpen={this._toggle6}
+                        onClose={this._openTooltip}
+                        cancelTooltip={{
+                            title: "Close Modal Confirmation",
+                            open: this.state.showCancelTooltip,
+                            onConfirm: this._resetModal,
+                            onCancel: this._closeTooltip,
+                            messageText: "Are you sure you want to close this modal?",
+                            confirmButtonText: "Yes",
+                            cancelButtonText: "No"
+                        }}>
+
+                        <div>
+                            A maximized modal always occupies the full width that a modal may have, regardless of
+                            its content.  As with the regular modal, the height of a maximized modal grows with its
+                            content until it reaches a specified distance from the bottom of the browser window.
                         </div>
                     </Modal>
                 </div>

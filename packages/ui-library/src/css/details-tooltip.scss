@@ -81,6 +81,13 @@
             }
         }
     }
+    &.cancel-tooltip {
+        .buttons {
+            .cancel {
+                margin-right: 0 !important;
+            }
+        }
+    }
     > .details-target {
         display: inline-block;
     }
@@ -161,6 +168,7 @@
                 font-size: 15px;
                 padding: 25px;
                 color: $color-slate;
+                text-align: left;
 
                 border-style: solid;
                 border-width: 0 1px 1px;
