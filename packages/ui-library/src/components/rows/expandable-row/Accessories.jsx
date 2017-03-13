@@ -1,6 +1,7 @@
 var React = require("react"),
     classnames = require("classnames"),
     _ = require("underscore"),
+    HelpHint = require("../../tooltips/HelpHint.jsx"),
     Statuses = require("./ExpandableRow.jsx").Statuses;
 
 /**
@@ -83,5 +84,49 @@ exports.PillButton = React.createClass({
         }, this.props);
 
         return React.createElement("input", props);
+    }
+});
+
+/**
+ * @class HelpLabel
+ * @memberof ExpandableRow
+ * @desc An expandable row help label component.
+ *
+ * @param {string} [data-id="help-label"]
+ *    To define the base "data-id" value for the top-level HTML container.
+ *
+ * @param {string} label
+ *    The label for the help tooltip.
+ * @param {string} hintText
+ *    The help hint text for the help label.
+ *
+ * @example
+ *      <HelpLabel data-id="basic-help-label" label="Help Label" hintText="Help Hint Text" />
+ */
+exports.HelpLabel = React.createClass({
+
+    propTypes: {
+        "data-id": React.PropTypes.string,
+        label: React.PropTypes.string.isRequired,
+        className: React.PropTypes.string,
+        hintText: React.PropTypes.string.isRequired
+    },
+
+    getDefaultProps: function () {
+        return {
+            "data-id": "help-label",
+            className: "width-auto bottom"
+        };
+    },
+
+    render: function () {
+
+        return (
+            <HelpHint
+                className={this.props.className}
+                hintText={this.props.hintText}>
+                <label className="row-help">{this.props.label}</label>
+            </HelpHint>
+        );
     }
 });

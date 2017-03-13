@@ -1,4 +1,6 @@
 var React = require("react");
+var RowAccessories = require("../../../components/rows/expandable-row/Accessories.jsx");
+var HelpHint = require("../../../components/tooltips/HelpHint.jsx");
 var ExpandableRow = require("../../../components/rows/ExpandableRow.jsx");
 var Toggle = require("../../../components/forms/form-toggle");
 
@@ -76,23 +78,30 @@ var ExpandableRowDemo = React.createClass({
                     status={ExpandableRow.Statuses.GOOD}
                     rowAccessories={(
                         <span className="row-accessories-content">
+                            <HelpHint className="width-auto bottom" hintText="Provisioning">
+                                <label className="row-help">PROV</label>
+                            </HelpHint>
                             <a>Link</a>
                             <button type="button" className="button inline">Inline Button</button>
                             <Toggle />
                         </span>
                     )} />
                 <ExpandableRow
-                    title="Collapsed Expandable Row"
+                    title="Collapsed Expandable Row, and which has a very long name and a RowAccessories Help Label"
                     subtitle="stateful"
                     expanded={false}
                     showDelete={false}
-                    showEdit={true} />
+                    showEdit={true}
+                    rowAccessories={<RowAccessories.HelpLabel label="Prov" hintText="Provisioning" />}
+                />
                 <ExpandableRow
-                    title="Collapsed Expandable Row"
+                    title="Collapsed Expandable Row with RowAccessories PillButton"
                     subtitle="stateless"
                     stateless={true}
                     expanded={this.state.expanded1}
-                    onToggle={this._onToggle.bind(null, 1)}/>
+                    onToggle={this._onToggle.bind(null, 1)}
+                    rowAccessories={<RowAccessories.PillButton label="Pill Button" />}
+                />
                 <ExpandableRow
                     title="Row With Image"
                     subtitle="Row Subtitle"

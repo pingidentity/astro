@@ -2,12 +2,14 @@ window.__DEV__ = true;
 
 jest.dontMock("../ExpandableRow.jsx");
 jest.dontMock("../../../tooltips/DetailsTooltip.jsx");
+jest.dontMock("../../../tooltips/HelpHint.jsx");
 
 describe("ExpandableRow", function () {
     var React = require("react"),
         ReactTestUtils = require("react-addons-test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
         ExpandableRow = require("../ExpandableRow.jsx"),
+        HelpHint = require("../../../tooltips/HelpHint.jsx"),
         _ = require("underscore");
 
     function getComponent (opts) {
@@ -250,6 +252,41 @@ describe("ExpandableRow", function () {
         expect(rowAccessoriesContent).toBeTruthy();
 
         expect(rowAccessoriesContent.textContent).toEqual(linkText);
+    });
+    
+    it("stateless: renders the right-side/row-accessories help hint", function () {
+        var helpText = "I need help",
+            labelText = "Help, I need somebody",
+            rowAccessoriesHelp = (
+                <HelpHint
+                    data-id="help-me"
+                    className="width-auto bottom"
+                    hintText="I need help">
+                    <label className="row-help">Help, I need somebody</label>
+                </HelpHint>
+            ),
+            rowAccessories,
+            rowAccessoriesHelpElement,
+            rowAccessoriesHelpContent,
+            rowAccessoriesLabelContent;
+
+        var component = getComponent({ rowAccessories: rowAccessoriesHelp });
+
+        rowAccessories = TestUtils.findRenderedDOMNodeWithDataId(component, "row-accessories");
+        expect(rowAccessories).toBeTruthy();
+
+        rowAccessoriesHelpElement = TestUtils.findRenderedDOMNodeWithDataId(component, "help-me");
+        expect(rowAccessoriesHelpElement).toBeDefined();
+
+        rowAccessoriesHelpContent = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text-content");
+        expect(rowAccessoriesHelpContent).toBeTruthy();
+
+        expect(rowAccessoriesHelpContent.textContent).toEqual(helpText);
+
+        rowAccessoriesLabelContent = ReactTestUtils.findRenderedDOMComponentWithClass(component, "row-help");
+        expect(rowAccessoriesLabelContent).toBeTruthy();
+
+        expect(rowAccessoriesLabelContent.textContent).toEqual(labelText);
     });
 
     it("stateless: renders a row image when provided", function () {

@@ -97,6 +97,7 @@ var HelpHintDemo = React.createClass({
                     className="right short-tooltip"
                     hintText="Short length tooltip"
                 />
+            
                 <br /><br />
                 <strong>
                     Inline help hint style.
@@ -108,6 +109,16 @@ var HelpHintDemo = React.createClass({
                     helpClassName="short-tooltip inline"
                 />
 
+                <br />
+                <strong>
+                    Help Label with Auto Width.
+                </strong>
+                <br />
+                <HelpHint
+                    className="width-auto bottom"
+                    hintText="Provisioning">
+                    <label className="row-help">PROV</label>
+                </HelpHint>
 
             </div>
         );

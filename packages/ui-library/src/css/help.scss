@@ -239,4 +239,38 @@
             }
         }
     }
+    // auto width tooltips
+    &.width-auto {
+        .tooltip-text {
+            width: auto;
+            left: auto;
+            .tooltip-text-content {
+                width: auto;
+                margin-left: 0;
+                &:before {
+                    left: 0;
+                    margin: 0 0 0 $tooltip-edge-offset;
+                }
+                &:after {
+                    left: 0;
+                    right: 30%;
+                }
+            }
+        }
+    }
+    label {
+        &.row-help {
+            display: inline-block;
+            vertical-align: top;
+            margin: 0;
+            font-size: 13px;
+            text-transform: uppercase;
+            color: $color-white;
+            padding: 3px 5px 0;
+            background-color: $color-elephant;
+            line-height: 14px;
+                            
+            @include border-radius(3px);
+        }
+    }
 }

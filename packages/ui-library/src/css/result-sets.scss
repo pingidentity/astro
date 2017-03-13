@@ -118,6 +118,9 @@
             .row-accessories-content > * {
                 display: inline-block;
                 margin: 0 0 0 20px;
+                .help-tooltip {
+                    vertical-align: middle;
+                }
             }
             .button + .button,
             input[type=button],
