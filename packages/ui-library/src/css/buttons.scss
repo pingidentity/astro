@@ -45,6 +45,9 @@ button,
     &:hover {
         color: $color-active;
         border-color: $color-active;
+        &.inline .badge {
+            border-color: $color-active;
+        }
     }
     &:focus {
         border: 1px solid $color-rhino;
@@ -100,6 +103,21 @@ button,
         font-size: 14px;
 
         @include border-radius(ceil($height/2));
+        
+        .badge {
+            color: inherit;
+            border: 1px solid $color-stratus;
+            margin-left: 5px;
+            padding: 0 5px;
+            box-sizing: border-box;
+            display: inline-block;
+            min-width: 19px;
+            height: 19px;
+            line-height: 19px;
+            text-align: center;
+            
+            @include border-radius(10px);
+        }
     }
     &.disabled,
     &[disabled] {
