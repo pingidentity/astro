@@ -320,7 +320,6 @@ label {
         &.no-label {
             margin-right: 0;
         }
-
         &.side-label {
             .icon {
                 position: relative;
@@ -358,6 +357,11 @@ label {
             .icon {
                 top: -1px;
                 bottom: auto;
+            }
+        }
+        &.align-inputs {
+            .icon {
+                bottom: -8px;
             }
         }
     }

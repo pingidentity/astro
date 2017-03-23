@@ -248,7 +248,7 @@ button,
             &:before {
                 top: 7px;
                 content: '-';
-                font-size: 15px;
+                font-size: 14px;
             }
         }
         &.delete {
@@ -277,6 +277,41 @@ button,
                 top: 9px;
                 content: '>';
                 font-size: 11px;
+            }
+        }
+
+        &.small {
+            $size: 21px;
+            height: $size;
+            width: $size;
+            line-height: $height;
+            font-size: 13px;
+            margin: 0;
+            vertical-align: text-bottom;
+
+            &.edit {
+                &:before {
+                    top: 5px;
+                    font-size: 10px;
+                }
+            }
+            &.plus {
+                &:before {
+                    top: 7px;
+                    font-size: 10px;
+                }
+            }
+            &.remove,
+            &.minus {
+                &:before {
+                    top: 10px;
+                    left: 1px;
+                    right: 0;
+                    font-size: 9px;
+                    width: auto;
+                    height: 2px;
+                    line-height: 2px;
+                }
             }
         }
     }

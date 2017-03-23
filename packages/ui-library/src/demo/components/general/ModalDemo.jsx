@@ -162,10 +162,10 @@ var ModalDemo = React.createClass({
                     </Modal>
                 </div>
                 <div className="input-row">
-                    <a onClick={this._toggle6}>Open Modal with Close Confirm</a>
+                    <a onClick={this._toggle6}>Open Modal with Close Confirmation</a>
 
                     <Modal
-                        modalTitle="Maximized Modal"
+                        modalTitle="Modal with Close Confirmation"
                         maximize={true}
                         expanded={this.state.expanded6}
                         onOpen={this._toggle6}
