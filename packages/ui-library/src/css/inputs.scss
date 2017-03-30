@@ -845,13 +845,14 @@ input[type=file] {
         // each item in dropdown
         .select-option,
         .none-option {
-            // Note: decided not to use line-height here for alignment because it causes issues e.g. large font-sizes will overlap, and also looks bad if one item overflows onto 2 lines
+            // Note: decided not to use line-height here for alignment because it causes issues 
+            // e.g. large font-sizes will overlap, and also looks bad if one item overflows onto 2 lines
             padding: 7px 40px 7px 10px;
             font-size: 14px;
 
             &:hover,
             &.highlighted {
-                background: $hoverColor;
+                background: rgba($color-white, 0.5);
             }
         }
     }
