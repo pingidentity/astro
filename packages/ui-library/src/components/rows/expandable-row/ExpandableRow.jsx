@@ -299,6 +299,7 @@ var StatelessExpandableRow = React.createClass({
             React.PropTypes.string
         ]).affectsRendering,
         image: React.PropTypes.string.affectsRendering,
+        children: React.PropTypes.node.affectsRendering,
         content: React.PropTypes.object.affectsRendering,
         editViewRoute: React.PropTypes.string.affectsRendering,
         isEditEnabled: React.PropTypes.bool.affectsRendering,

@@ -232,6 +232,7 @@ var PaginationStateless = React.createClass({
     displayName: "PaginationStateless",
 
     propTypes: {
+        children: React.PropTypes.node.affectsRendering,
         className: React.PropTypes.string.affectsRendering,
         "data-id": React.PropTypes.string,
         id: React.PropTypes.string,
@@ -332,7 +333,7 @@ var PaginationStateful = React.createClass({
                     { first: pagingDetails.first, last: pagingDetails.last, page: pagingDetails.page }
                 );
             }
-            
+
         });
     },
 

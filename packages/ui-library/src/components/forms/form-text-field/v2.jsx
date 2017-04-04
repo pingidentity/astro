@@ -237,7 +237,9 @@ var Stateless = React.createClass({
         reveal: React.PropTypes.bool.affectsRendering,
         showReveal: React.PropTypes.bool.affectsRendering,
         showSave: React.PropTypes.bool.affectsRendering,
-        showUndo: React.PropTypes.bool.affectsRendering
+        showUndo: React.PropTypes.bool.affectsRendering,
+
+        children: React.PropTypes.node.affectsRendering
     },
 
     /**

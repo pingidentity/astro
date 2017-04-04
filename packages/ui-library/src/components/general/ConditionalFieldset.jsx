@@ -25,7 +25,8 @@ var ConditionalFieldsetStateless = React.createClass({
         emptyMessage: React.PropTypes.string.affectsRendering,
         onValueChange: React.PropTypes.func,
         selectedIndex: React.PropTypes.number.affectsRendering,
-        disabled: React.PropTypes.bool.affectsRendering
+        disabled: React.PropTypes.bool.affectsRendering,
+        children: React.PropTypes.node.affectsRendering
     },
 
     getDefaultProps: function () {
