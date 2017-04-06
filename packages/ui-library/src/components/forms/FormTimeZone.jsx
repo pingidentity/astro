@@ -311,7 +311,7 @@ var TimeZoneStateless = React.createClass({
                                 className={classnames("tooltip-menu-option", rowCss)}>
                                 <span className="timezone-abbr">{tz.abbr}</span>
                                 &nbsp;-&nbsp;
-                                <span className="timezone-name">{tz.name}</span>
+                                <span className="timezone-name">{getZoneNameDisplayValue(tz.name)}</span>
                                 <span className="timezone-offset">{tz.time}</span>
                             </div>
                         );

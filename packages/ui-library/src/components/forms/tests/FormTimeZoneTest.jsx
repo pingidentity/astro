@@ -227,7 +227,7 @@ describe("FormTimeZone", function () {
            for the selected country */
         for (var i=0; i<zoneRows.length; i+=1) {
             zoneName = TestUtils.findRenderedDOMNodeWithClass(zoneRows[i], "timezone-name").textContent;
-            expect(zoneName).toEqual(dataZones[i].name);
+            expect(zoneName).toEqual(FormTimeZone.getZoneNameDisplayValue(dataZones[i].name));
         }
     });
 
@@ -440,7 +440,7 @@ describe("FormTimeZone", function () {
         component = getComponent({ controlled: true });
         stateful = component.refs.TimeZoneStateful;
         stateless = component.refs.TimeZoneStateless;
-        
+
         expect(stateless).toBeTruthy();
         expect(stateful).toBeFalsy();
     });
