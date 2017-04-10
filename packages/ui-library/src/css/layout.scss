@@ -698,7 +698,8 @@ $layout-nav-width-offset: 15px;
     position: relative;
     display: inline-block;
     font-size: 14px;
-    margin: 0 0 25px 13px;
+    margin: 0 100% 25px 13px;
+    white-space: nowrap;
 
     &:before {
         content: 'Y';
@@ -717,6 +718,7 @@ $layout-nav-width-offset: 15px;
     font-family: $font-pn-regular;
     color: $color-slate;
     margin: 0 0 30px;
+    word-wrap: break-word;
 
     .page-subtitle {
         margin: 5px 0 0;
@@ -802,20 +804,15 @@ $layout-nav-width-offset: 15px;
 
 .page-controls-secondary {
     float: right;
-    margin: -42px 0 0 0;
+    margin: -4px 0 0 0;
 
     > * {
         display: inline-block;
-        vertical-align: top;
-        margin: 0 15px 0 0;
-
-        @include transform(translateY(-50%));
+        margin: 0 0 0 15px;
     }
     .input-toggle {
         a.toggle {
             margin: 0;
-
-            @include transform(translateY(0));
         }
     }
     .details-tooltip {

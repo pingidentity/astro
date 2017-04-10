@@ -60,12 +60,12 @@ module.exports = React.createClass({
             <div>
                 <a className="page-return-link">To record list</a>
 
-                <h1 className="page-title">Edit Template with Sections</h1>
-
                 <div className="page-controls-secondary">
                     <button type="button" className="inline">Inline Button</button>
                     <Toggle />
                 </div>
+
+                <h1 className="page-title">Edit Template with Sections</h1>
 
                 <div className="page-section">
                     <div className="page-section-title">

@@ -81,12 +81,13 @@ module.exports = React.createClass({
             <div>
                 <a className="page-return-link">To record list</a>
 
-                <h1 className="page-title">Edit Template</h1>
-
                 <div className="page-controls-secondary">
                     <button type="button" className="inline">Inline Button</button>
                     <Toggle />
                 </div>
+
+                <div className="page-title">Edit Template</div>
+
                 <div className="page-section-content">
                     <Section
                         controlled={true}
