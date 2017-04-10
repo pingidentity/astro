@@ -89,6 +89,8 @@ var Statuses = {
  *
  * @param {string} [image]
  *     HTTP path to an image. When specified, the image displays to the left of the title and subtitle.
+ * @param {string} [icon]
+ *     HTTP path to an icon. When specified, the icon displays to the left of the title and subtitle.
  *
  * @param {object} [content]
  *     A JSX object that represents the content to be shown when expanding the row.
@@ -299,6 +301,7 @@ var StatelessExpandableRow = React.createClass({
             React.PropTypes.string
         ]).affectsRendering,
         image: React.PropTypes.string.affectsRendering,
+        icon: React.PropTypes.string.affectsRendering,
         children: React.PropTypes.node.affectsRendering,
         content: React.PropTypes.object.affectsRendering,
         editViewRoute: React.PropTypes.string.affectsRendering,
@@ -376,6 +379,7 @@ var StatelessExpandableRow = React.createClass({
                 expanded: this.props.expanded,
                 waiting: this.props.waiting,
                 "has-image": !!this.props.image,
+                "has-icon": !!this.props.icon,
                 "no-delete": !this.props.showDelete,
                 "title-only": !this.props.subtitle,
                 "no-edit": !showEditIcon
@@ -410,6 +414,9 @@ var StatelessExpandableRow = React.createClass({
                     {this.props.image && (
                         <img src={this.props.image} className="item-image" />
                     )}
+                    {this.props.icon && (
+                        <span className={"item-icon " + this.props.icon} />
+                    )}
                     <div className={titleClassName}>{this.props.title}</div>
                     {this.props.subtitle && (
                         <div className="item-sub-title">{this.props.subtitle}</div>
@@ -418,7 +425,7 @@ var StatelessExpandableRow = React.createClass({
                         <div data-id="row-accessories" className="row-accessories">
                             {this.props.rowAccessories}
                             {this.props.status && (
-                                <div data-id="status" className={"status "+ this.props.status}></div>
+                                <div data-id="status" className={"status " + this.props.status}></div>
                             )}
                         </div>
                     )}

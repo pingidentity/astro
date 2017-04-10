@@ -98,7 +98,14 @@
             max-height: 42px;
             max-width: 42px;
         }
-        &.has-image {
+        .item-icon {
+            position: absolute;
+            left: 19px;
+            top: 18px;
+            font-size: 24px;
+        }
+        &.has-image,
+        &.has-icon {
             .collapsed-content {
                 padding-left: 76px;
             }

@@ -107,6 +107,10 @@ var ExpandableRowDemo = React.createClass({
                     subtitle="Row Subtitle"
                     image="src/demo/images/example-expandable-row-image.png" />
                 <ExpandableRow
+                    title="Row With Icon"
+                    subtitle="Row Subtitle"
+                    icon="icon-cog" />
+                <ExpandableRow
                     title="Open Expandable Row"
                     subtitle="stateful"
                     expanded={true}

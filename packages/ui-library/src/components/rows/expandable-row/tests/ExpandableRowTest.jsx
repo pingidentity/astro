@@ -305,6 +305,25 @@ describe("ExpandableRow", function () {
         expect(imageContent.length).toEqual(1);
         expect(imageContent[0].src).toEqual(imagePath);
     });
+    
+    it("stateless: renders a row icon when provided", function () {
+        var iconType = "icon-cog",
+            component,
+            iconContent;
+
+        // test without icon
+        component = getComponent();
+        iconContent = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "item-icon");
+        expect(iconContent.length).toEqual(0);
+
+        // test with icon
+        component = getComponent({ icon: iconType });
+        iconContent = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "item-icon");
+        expect(iconContent.length).toEqual(1);
+        
+        iconContent = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "icon-cog");
+        expect(iconContent.length).toEqual(1);
+    });
 
     it("stateless: should genereate delete button with confirmation when confirmDelete provided", function () {
         var component = getComponent({
