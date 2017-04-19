@@ -210,7 +210,33 @@ var StatefulExpandableRow = React.createClass({
 
     propTypes: {
         defaultToExpanded: React.PropTypes.bool.affectsRendering,
-        showDeleteConfirm: React.PropTypes.bool.affectsRendering
+        className: React.PropTypes.string.affectsRendering,
+        expanded: React.PropTypes.bool.affectsRendering,
+        title: React.PropTypes.oneOfType([
+            React.PropTypes.object,
+            React.PropTypes.string
+        ]).affectsRendering,
+        titleClassName: React.PropTypes.string.affectsRendering,
+        subtitle: React.PropTypes.oneOfType([
+            React.PropTypes.object,
+            React.PropTypes.string
+        ]).affectsRendering,
+        image: React.PropTypes.string.affectsRendering,
+        icon: React.PropTypes.string.affectsRendering,
+        children: React.PropTypes.node.affectsRendering,
+        content: React.PropTypes.object.affectsRendering,
+        editViewRoute: React.PropTypes.string.affectsRendering,
+        isEditEnabled: React.PropTypes.bool.affectsRendering,
+        showEdit: React.PropTypes.bool.affectsRendering,
+        editButton: React.PropTypes.object.affectsRendering,
+        showDelete: React.PropTypes.bool.affectsRendering,
+        deleteButton: React.PropTypes.object.affectsRendering,
+        labelDeleteConfirm: React.PropTypes.string.affectsRendering,
+        confirmDelete: React.PropTypes.bool.affectsRendering,
+        showDeleteConfirm: React.PropTypes.bool.affectsRendering,
+        status: React.PropTypes.oneOf([Statuses.GOOD, Statuses.ERROR, Statuses.WARNING]).affectsRendering,
+        rowAccessories: React.PropTypes.object.affectsRendering,
+        waiting: React.PropTypes.bool.affectsRendering
     },
 
     getDefaultProps: function () {
