@@ -60,7 +60,6 @@ describe("Multi Column Drag Drop Integration", function () {
      * WHEN: Takes screenshot
      * AND: Compares it with the base image
      * THEN: The base image and the current image should be identical
-     */
     it("should select Row options", MultiColumnDragDropPage.retriable(function () {
         MultiColumnDragDropPage.openMultiColumnDragDropDemoPage();
 
@@ -114,6 +113,7 @@ describe("Multi Column Drag Drop Integration", function () {
         var rowIconAndTextFileName = "MultiColumnDragDrop_RowWithIconAndText";
         MultiColumnDragDropPage.takeScreenshotAndCompare(rowIconAndTextFileName);
     }));
+     */
     
     /**
      * SCENARIO: Should add and remove item

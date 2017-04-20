@@ -43,25 +43,6 @@
 }
 
 .multidrag-demo {
-    .row-icon {
-        width: 32px;
-        height: 32px;
-        background-position: center;
-        background-size: cover;
-        position: absolute;
-        top: 8px;
-        left: 30px;
-    }
-
-    .with-icon .name {
-        margin-left: 40px;
-    }
-
-    .name {
-        @include transition(all 0.3s);
-        margin-left: 0;
-    }
-
     .demo-options {
         padding-bottom: 10px;
         margin-bottom: 20px;

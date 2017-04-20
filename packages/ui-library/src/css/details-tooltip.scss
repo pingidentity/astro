@@ -342,18 +342,7 @@
                 @include transition((all 0.2s linear));
             }
             .count {
-                color: inherit;
-                border: 1px solid $color-midnight;
                 margin-left: 5px;
-                padding: 0 5px;
-                box-sizing: border-box;
-                display: inline-block;
-                min-width: 19px;
-                height: 19px;
-                line-height: 19px;
-                text-align: center;
-
-                @include border-radius(10px);
             }
         }
         &.filter {

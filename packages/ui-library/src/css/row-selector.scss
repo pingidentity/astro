@@ -45,6 +45,7 @@
     }
     .item {
         position: relative;
+        vertical-align: middle;
         background-color: $color-white;
         border-top: 1px solid $color-rabbit-fur;
         color: $color-text;
@@ -63,9 +64,42 @@
                 color: $color-stratus;
             }
         }
+        .item-image,
+        .item-icon,
+        .item-count {
+            position: absolute;
+            &:right {
+                
+            }
+        }
+        &.item-decoration {
+            .name {
+                margin-left: 40px;
+            }    
+        }
+        .item-image {
+            background-position: center;
+            top: 8px;
+            left: 30px;
+            width: 32px;
+            height: 32px;
+            @include background-size(cover);
+        }
+        .item-icon {
+            left: 30px;
+            top: 13px;
+            font-size: 24px;
+        }
+        .item-count.count {
+            top: 15px;
+            left: 30px;
+        }
         .name {
             font-size: 18px;
+            vertical-align: middle;
             color: $color-midnight;
+            margin-left: 0;
+            @include transition(all 0.3s);
         }
         a.button {
             position: absolute;

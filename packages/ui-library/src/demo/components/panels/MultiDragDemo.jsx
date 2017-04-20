@@ -70,19 +70,30 @@ var Row = React.createClass({
     },
 
     render: function () {
-        var hasIcon = this.props.style !== "text";
-        var hasText = this.props.style !== "icon";
+        var hasImage = this.props.style === "image";
+        var hasIcon = this.props.style === "icon";
+        var hasCount = this.props.style === "count";
 
         return (
-            <div className={classnames("item", { preview: this.props.preview, "with-icon": hasIcon })}>
+            <div className={classnames(
+                    "item",
+                    { preview: this.props.preview,
+                    "item-decoration": hasImage || hasIcon || hasCount
+                })}>
                 <span className="icon-grip"></span>
-                { hasIcon &&
-                    <div className="row-icon" data-id="row-icon"
+                { hasImage &&
+                    <div className="item-image" data-id="row-image"
                         style={{ backgroundImage: "url(" + this.props.icon + ")" }} />
                 }
-                { hasText &&
-                    <span className="name" data-id="row-name">{this.props.name}</span>
+                { hasIcon &&
+                    <span className="item-icon icon-cog" data-id="row-icon" />
                 }
+                { hasCount &&
+                    <span className="item-count count" data-id="row-count">
+                        2
+                    </span>
+                }
+                <span className="name" data-id="row-name">{this.props.name}</span>
                 {this._getButton()}
             </div>);
     }
@@ -242,9 +253,10 @@ var MultiDragDemo = React.createClass({
                         groupName="row-opts"
                         stacked={false}
                         items={[
-                            { id: "icon", name: "icon only" },
-                            { id: "text", name: "text only" },
-                            { id: "both", name: "icon + text" }
+                            { id: "none", name: "none" },
+                            { id: "image", name: "with image" },
+                            { id: "icon", name: "with icon" },
+                            { id: "count", name: "with count" }
                         ]} />
                 </div>
             </div>);
@@ -281,8 +293,6 @@ var MultiDragDemo = React.createClass({
                             { id: "STATELESS", name: "Stateless demo" },
                             { id: "STATEFUL", name: "Stateful demo" }
                         ]} />
-
-                <br />
                 <hr />
                 <br />
 

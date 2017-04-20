@@ -105,7 +105,13 @@ var ExpandableRowDemo = React.createClass({
                 <ExpandableRow
                     title="Row With Image"
                     subtitle="Row Subtitle"
-                    image="src/demo/images/example-expandable-row-image.png" />
+                    image="src/demo/images/example-expandable-row-image.png"
+                    rowAccessories={(
+                        <span className="row-accessories-content">
+                            <span className="icon-cog" />
+                            <span className="count">2</span>
+                        </span>
+                    )} />
                 <ExpandableRow
                     title="Row With Icon"
                     subtitle="Row Subtitle"

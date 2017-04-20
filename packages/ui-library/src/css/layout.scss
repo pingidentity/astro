@@ -649,7 +649,18 @@ $layout-nav-width-offset: 15px;
 
 
 // REUSABLE PAGE STYLES ----------------------------------------------------------------------------
-
+.count {
+    color: inherit;
+    border: 1px solid $color-midnight;
+    padding: 0 5px;
+    display: inline-block;
+    min-width: 19px;
+    height: 19px;
+    line-height: 19px;
+    text-align: center;
+    @include box-sizing(border-box);
+    @include border-radius(10px);
+}
 .collapsible-link {
     position: relative;
     display: inline-block;
