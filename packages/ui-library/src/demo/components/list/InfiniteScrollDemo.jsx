@@ -65,8 +65,9 @@ var Demo = React.createClass({
         setTimeout(function () {
             this.setState({ pending: { prev: false } });
             if (this.state.batches[0].id > 0) {
-                this.state.batches.unshift(this.batches[this.state.batches[0].id - 1]);
-                this.forceUpdate();
+                this.setState({
+                    batches: [this.batches[this.state.batches[0].id - 1]].concat(this.state.batches)
+                });
             }
         }.bind(this), this.SIMULATED_DELAY_MS);
     },
@@ -76,8 +77,10 @@ var Demo = React.createClass({
         setTimeout(function () {
             this.setState({ pending: { next: false } });
             if (this.hasMore()) {
-                this.state.batches.push(this.batches[this.state.batches[this.state.batches.length - 1].id + 1]);
-                this.forceUpdate();
+                this.setState({
+                    batches: this.state.batches.concat(
+                        this.batches[this.state.batches[this.state.batches.length - 1].id + 1])
+                });
             }
         }.bind(this), this.SIMULATED_DELAY_MS);
     },

@@ -100,6 +100,15 @@ describe("Infinite Scroll", function () {
         expect(component.render.mock.calls.length).toBe(1);
     });
 
+    it("_padVisibility pads visibility array", function () {
+        var component = getRenderedComponent();
+
+        expect(component._padVisibility([false, false, false])).toEqual([false, false, false]);
+        expect(component._padVisibility([false, true, false])).toEqual([true, true, true]);
+        expect(component._padVisibility([false, false, true])).toEqual([false, true, true]);
+        expect(component._padVisibility([true, false, false])).toEqual([true, true, false]);
+    });
+
     it("renders child if data is empty", function () {
         var component = getRenderedComponent({ batches: [] });
         var node = ReactDOM.findDOMNode(component.refs.container);

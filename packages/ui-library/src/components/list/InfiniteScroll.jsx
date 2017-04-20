@@ -237,8 +237,25 @@ var InfiniteScroll = React.createClass({
         };
     },
 
+    _padVisibility: function (visibility) {
+        // Pad visibility with a batch before & after the batches currently visible in the container viewport
+        // to fix Chrome & Firefox getBoundingClientRect() timing issue when scrolling returning incorrect
+        // element calculations boxes resulting in buggy scrolling: UIP-1179, UIP-1195
+        var firstVisible = visibility.indexOf(true);
+        var lastVisible = visibility.lastIndexOf(true);
+
+        if (firstVisible !== -1 && firstVisible !== 0) {
+            visibility[firstVisible - 1] = true;
+        }
+        if (lastVisible !== -1 && lastVisible !== (visibility.length - 1)) {
+            visibility[lastVisible + 1] = true;
+        }
+        return visibility;
+    },
+
     _getBatchVisibility: function () {
-        return this.props.batches.map(function (e,i) {return this._isBatchVisible(i);}.bind(this));
+        return this._padVisibility(
+            this.props.batches.map(function (e,i) {return this._isBatchVisible(i);}.bind(this)));
     },
 
     _rectIntersect: function (r1, r2) {
@@ -305,21 +322,23 @@ var InfiniteScroll = React.createClass({
         if (!_.isEqual(this._getBatchVisibility(), this.visibilityArray)) {
             this.forceUpdate();
         }
-        if (this._didScrollToTop()) {
+        if (this._didScrollToTop() && !this._prepending) {
             //TODO: remove loadPrev logic when v1 removed.
             //Also, if check can be removed as onLoadPrev should be made required then as well
             var onLoadPrev = this.props.onLoadPrev || this.props.loadPrev;
 
             if (onLoadPrev) {
+                this._prepending = true;
                 onLoadPrev();
             }
         }
-        if (this._didScrollToBottom()) {
+        if (this._didScrollToBottom() && !this._appending) {
             //TODO: remove loadNext logic when v1 removed.
             //Also, if check can be removed as onLoadNext should be made required then as well
             var onLoadNext = this.props.onLoadNext || this.props.loadNext;
 
             if (onLoadNext) {
+                this._appending = true;
                 onLoadNext();
             }
         }
@@ -425,6 +444,7 @@ var InfiniteScroll = React.createClass({
         //so that the content in view doesnt change
         if (this.batchRange && newRange.start !== this.batchRange.start) {
             this._scrollContainerBy(ReactDOM.findDOMNode(this.refs.batch0).clientHeight);
+            this._prepending = false; // clear prepending state when new batch is prepended
         }
         //after the first render with data, jump to the offset specified in the props
         if (!this.inited && this.props.batches.length > 0 && this.props.initialItem) {
@@ -436,6 +456,10 @@ var InfiniteScroll = React.createClass({
             if (batchIndex !== -1) {
                 this.inited = this.jumpToItem(batchIndex, this.props.initialItem.itemIndex);
             }
+        }
+        // clear appending state when new batch is appended
+        if (this.batchRange && newRange.end !== this.batchRange.end) {
+            this._appending = false;
         }
 
         this.batchRange = newRange;
