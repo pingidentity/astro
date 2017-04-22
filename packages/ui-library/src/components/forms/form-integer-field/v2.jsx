@@ -1,6 +1,7 @@
 "use strict";
 
 var React = require("re-react"),
+    ReactVanilla = require("react"),
     FormTextField = require("../form-text-field").v2,
     classnames = require("classnames"),
     Utils = require("../../../util/Utils.js"),
@@ -350,7 +351,7 @@ var Stateless = React.createClass({
 
 });
 
-var Stateful = React.createClass({
+var Stateful = ReactVanilla.createClass({
 
     displayName: "FormIntegerFieldStateful",
 
@@ -434,7 +435,7 @@ var Stateful = React.createClass({
     }
 });
 
-var FormIntegerFieldV2 = React.createClass({
+var FormIntegerFieldV2 = ReactVanilla.createClass({
     propTypes: {
         controlled: React.PropTypes.bool, //TODO: remove in new version
         stateless: React.PropTypes.bool

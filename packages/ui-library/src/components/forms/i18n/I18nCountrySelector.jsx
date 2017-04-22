@@ -1,6 +1,7 @@
 "use strict";
 
 var React = require("re-react"),
+    ReactVanilla = require("react"),
     _ = require("underscore"),
     classnames = require("classnames"),
     CountryFlagList = require("./CountryFlagList.jsx"),
@@ -62,7 +63,7 @@ var React = require("re-react"),
 *    DEPRECATED. Use "onSearch" instead.
 */
 
-module.exports = React.createClass({
+module.exports = ReactVanilla.createClass({
     propTypes: {
         controlled: React.PropTypes.bool, //TODO: remove in new version
         stateless: React.PropTypes.bool
@@ -168,7 +169,7 @@ var I18nCountrySelectorStateless = React.createClass({
     }
 });
 
-var I18nCountrySelectorStateful = React.createClass({
+var I18nCountrySelectorStateful = ReactVanilla.createClass({
 
     _handleToggle: function () {
         this.setState({

@@ -1,6 +1,7 @@
 "use strict";
 
 var React = require("re-react"),
+    ReactVanilla = require("react"),
     classnames = require("classnames"),
     FormError = require("../FormError.jsx"),
     FormLabel = require("../FormLabel.jsx"),
@@ -93,7 +94,7 @@ var React = require("re-react"),
 *     </FormSelectField>
 */
 
-module.exports = React.createClass({
+module.exports = ReactVanilla.createClass({
 
     propTypes: {
         controlled: React.PropTypes.bool
@@ -248,7 +249,7 @@ var FormSelectFieldStateless = React.createClass({
     }
 });
 
-var FormSelectFieldStateful = React.createClass({
+var FormSelectFieldStateful = ReactVanilla.createClass({
 
     _handleChange: function (e) {
         this.setState({

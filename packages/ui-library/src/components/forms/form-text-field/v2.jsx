@@ -2,6 +2,7 @@
 
 var React = require("re-react"),
     ReactDOM = require("react-dom"),
+    ReactVanilla = require("react"),
     classnames = require("classnames"),
     FormLabel = require("../FormLabel.jsx"),
     FormError = require("../FormError.jsx"),
@@ -170,7 +171,7 @@ var React = require("re-react"),
 *              onValueChange={myFunction} />
 */
 
-module.exports = React.createClass({
+module.exports = ReactVanilla.createClass({
 
     propTypes: {
         controlled: React.PropTypes.bool, //TODO: remove in new version
@@ -527,7 +528,7 @@ var Stateless = React.createClass({
     }
 });
 
-var Stateful = React.createClass({
+var Stateful = ReactVanilla.createClass({
     displayName: "FormTextFieldStateful",
 
     getInitialState: function () {

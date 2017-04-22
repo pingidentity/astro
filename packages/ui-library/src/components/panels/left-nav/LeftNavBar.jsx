@@ -100,14 +100,14 @@ var LeftNavBar = React.createClass({
         selectedNode: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).affectsRendering,
         selectedSection: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).affectsRendering,
         openSections: React.PropTypes.object.affectsRendering,
-        collapsible: React.PropTypes.bool,
-        autocollapse: React.PropTypes.bool,
+        collapsible: React.PropTypes.bool.affectsRendering,
+        autocollapse: React.PropTypes.bool.affectsRendering,
         onSectionClick: React.PropTypes.func,
         onItemClick: React.PropTypes.func,
         onSectionValueChange: React.PropTypes.func,
         onItemValueChange: React.PropTypes.func,
-        pingoneLogo: React.PropTypes.bool,
-        logoSrc: React.PropTypes.string
+        pingoneLogo: React.PropTypes.bool.affectsRendering,
+        logoSrc: React.PropTypes.string.affectsRendering
     },
 
     _rerender: function () {
@@ -313,9 +313,11 @@ var LeftNavSection = React.createClass({
     propTypes: {
         onItemValueChange: React.PropTypes.func,
         onSectionValueChange: React.PropTypes.func,
-        open: React.PropTypes.bool,
+        open: React.PropTypes.bool.affectsRendering,
         id: React.PropTypes.string,
-        "data-id": React.PropTypes.string
+        "data-id": React.PropTypes.string,
+        selectedNode: React.PropTypes.string.affectsRendering,
+        children: React.PropTypes.array.affectsRendering
     },
 
     /*

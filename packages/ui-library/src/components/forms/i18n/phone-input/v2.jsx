@@ -1,6 +1,7 @@
 "use strict";
 
 var React = require("re-react"),
+    ReactVanilla = require("react"),
     _ = require("underscore"),
     classnames = require("classnames"),
     CountryFlagList = require("../CountryFlagList.jsx"),
@@ -95,7 +96,7 @@ var React = require("re-react"),
 *           phoneNumber={this.state.phoneNumberStateful} />
 */
 
-module.exports = React.createClass({
+module.exports = ReactVanilla.createClass({
 
     propTypes: {
         controlled: React.PropTypes.bool, //TODO: remove in new version
@@ -238,7 +239,7 @@ var I18nPhoneInputStateless = React.createClass({
     }
 });
 
-var I18nPhoneInputStateful = React.createClass({
+var I18nPhoneInputStateful = ReactVanilla.createClass({
 
     _handleToggle: function () {
         this.setState({

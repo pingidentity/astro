@@ -204,10 +204,13 @@ var NavItem = React.createClass({
     propTypes: {
         id: React.PropTypes.string.isRequired,
         "data-id": React.PropTypes.string,
-        title: React.PropTypes.string,
-        target: React.PropTypes.string,
-        url: React.PropTypes.string,
-        showMenu: React.PropTypes.bool
+        title: React.PropTypes.string.affectsRendering,
+        target: React.PropTypes.string.affectsRendering,
+        url: React.PropTypes.string.affectsRendering,
+        iconClassName: React.PropTypes.string.affectsRendering,
+        iconSrc: React.PropTypes.string.affectsRendering,
+        showMenu: React.PropTypes.bool.affectsRendering,
+        children: React.PropTypes.array.affectsRendering
     },
 
     _handleMenuClick: function (e) {

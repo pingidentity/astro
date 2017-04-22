@@ -1,4 +1,5 @@
 var React = require("re-react"),
+    ReactVanilla = require("react"),
     ReactDOM = require("react-dom"),
     classnames = require("classnames"),
     FormFieldConstants = require("../../../constants/FormFieldConstants"),
@@ -107,7 +108,7 @@ var React = require("re-react"),
 *                       onValueChange={myFunction} />
 */
 
-module.exports = React.createClass({
+module.exports = ReactVanilla.createClass({
 
     propTypes: {
         controlled: React.PropTypes.bool, //TODO: remove in new version
@@ -250,7 +251,7 @@ var FormTextAreaStateless = React.createClass({
     }
 });
 
-var FormTextAreaStateful = React.createClass({
+var FormTextAreaStateful = ReactVanilla.createClass({
 
     _handleUndo: function (e) {
         // update the event with the reverted data and send back to the parent

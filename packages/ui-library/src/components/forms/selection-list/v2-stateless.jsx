@@ -189,7 +189,7 @@ var ListOptions = React.createClass({
         type: React.PropTypes.oneOf([
             Constants.ListType.SINGLE,
             Constants.ListType.MULTI
-        ]),
+        ]).affectsRendering,
         items: React.PropTypes.arrayOf(
             React.PropTypes.shape({
                 id: React.PropTypes.oneOfType([
@@ -198,12 +198,12 @@ var ListOptions = React.createClass({
                 ]).isRequired,
                 name: React.PropTypes.string.isRequired
             })
-        ),
+        ).affectsRendering,
         selectedItemIds: React.PropTypes.oneOfType([
             React.PropTypes.array,
             React.PropTypes.string,
             React.PropTypes.number
-        ]),
+        ]).affectsRendering,
         onValueChange: React.PropTypes.func
     },
 

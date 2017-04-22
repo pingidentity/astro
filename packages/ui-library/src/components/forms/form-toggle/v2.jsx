@@ -1,4 +1,5 @@
 var React = require("re-react"),
+    ReactVanilla = require("react"),
     classnames = require("classnames"),
     Utils = require("../../../util/Utils"),
     _ = require("underscore");
@@ -34,7 +35,7 @@ var React = require("re-react"),
 *     <Toggle className="small" onToggle={this._handleToggle} toggled={true} />
 */
 
-module.exports = React.createClass({
+module.exports = ReactVanilla.createClass({
 
     propTypes: {
         controlled: React.PropTypes.bool, //TODO: remove in new version
@@ -117,7 +118,7 @@ var ToggleStateless = React.createClass({
     }
 });
 
-var ToggleStateful = React.createClass({
+var ToggleStateful = ReactVanilla.createClass({
 
     _handleToggle: function () {
         this.setState({

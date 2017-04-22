@@ -1,4 +1,5 @@
 var React = require("re-react"),
+    ReactVanilla = require("react"),
     classNames = require("classnames"),
     FormDropDownList = require("../forms/FormDropDownList.jsx"),
     FormRadioGroup = require("../forms/FormRadioGroup.jsx"),
@@ -117,7 +118,7 @@ var ConditionalFieldsetStateless = React.createClass({
     }
 });
 
-var ConditionalFieldsetStateful = React.createClass({
+var ConditionalFieldsetStateful = ReactVanilla.createClass({
 
     _handleValueChange: function (index) {
         this.setState({
@@ -208,7 +209,7 @@ var ConditionalFieldsetStateful = React.createClass({
  *           </div>
  *
  */
-var ConditionalFieldset = React.createClass({
+var ConditionalFieldset = ReactVanilla.createClass({
 
     propTypes: {
         controlled: React.PropTypes.bool, //TODO: remove in new version

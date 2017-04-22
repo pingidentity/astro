@@ -1,5 +1,6 @@
 "use strict";
 var React = require("re-react"),
+    ReactVanilla = require("react"),
     ReactDOM = require("react-dom"),
     classnames = require("classnames"),
     _ = require("underscore"),
@@ -80,7 +81,7 @@ var React = require("re-react"),
  *     </DetailsTooltip>
  **/
 
-var DetailsTooltip = React.createClass({
+var DetailsTooltip = ReactVanilla.createClass({
     displayName: "DetailsTooltip",
 
     propTypes: {
@@ -398,7 +399,7 @@ var DetailsTooltipStateless = React.createClass({
     }
 });
 
-var DetailsTooltipStateful = React.createClass({
+var DetailsTooltipStateful = ReactVanilla.createClass({
     displayName: "DetailsTooltipStateful",
 
     getInitialState: function () {

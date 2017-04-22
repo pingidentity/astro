@@ -1,6 +1,7 @@
 "use strict";
 
 var React = require("re-react");
+var ReactVanilla = require("react");
 var ReactDOM = require("react-dom");
 var Picker = require("ping-react-color-picker");
 var css = require("classnames");
@@ -94,7 +95,7 @@ var callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutside
  *       stateless={true} />
  */
 
-module.exports = React.createClass({
+module.exports = ReactVanilla.createClass({
     displayName: "ColorPicker",
 
     propTypes: {
@@ -355,7 +356,7 @@ var Stateless = React.createClass({
     }
 });
 
-var Stateful = React.createClass({
+var Stateful = ReactVanilla.createClass({
     displayName: "ColorPickerStateful",
 
     _handleToggle: function () {

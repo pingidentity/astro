@@ -225,7 +225,9 @@ var InfiniteScroll = React.createClass({
         headingGenerator: React.PropTypes.func, //TODO: remove when v1 no longer supported
         height: React.PropTypes.number.affectsRendering,
         minHeight: React.PropTypes.number.affectsRendering,
-        attachToWindow: React.PropTypes.bool.affectsRendering
+        attachToWindow: React.PropTypes.bool.affectsRendering,
+
+        children: React.PropTypes.node.affectsRendering
     },
 
     getDefaultProps: function () {

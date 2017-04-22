@@ -1,6 +1,7 @@
 "use strict";
 
 var React = require("re-react"),
+    ReactVanilla = require("react"),
     _ = require("underscore"),
     Utils = require("../../util/Utils");
 
@@ -73,7 +74,7 @@ var React = require("re-react"),
  *
  */
 
-module.exports = React.createClass({
+module.exports = ReactVanilla.createClass({
     displayName: "Pagination",
 
     propTypes: {
@@ -312,7 +313,7 @@ var PaginationStateless = React.createClass({
     }
 });
 
-var PaginationStateful = React.createClass({
+var PaginationStateful = ReactVanilla.createClass({
     displayName: "PaginationStateful",
 
     getInitialState: function () {

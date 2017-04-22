@@ -1,4 +1,5 @@
 var React = require("re-react"),
+    ReactVanilla = require("react"),
     ReactDOM = require("react-dom"),
     classnames = require("classnames"),
     FormLabel = require("../FormLabel.jsx"),
@@ -121,7 +122,7 @@ module.exports = React.createClass({
     }
 });
 
-var ImagePreview = React.createClass({
+var ImagePreview = ReactVanilla.createClass({
     render: function () {
         if (!this.props.show) { return null; }
 
@@ -135,7 +136,7 @@ var ImagePreview = React.createClass({
     }
 });
 
-var FileRestrictions = React.createClass({
+var FileRestrictions = ReactVanilla.createClass({
     render: function () {
         if (!this.props.show) { return null; }
 
@@ -151,7 +152,7 @@ var FileRestrictions = React.createClass({
     }
 });
 
-var AcceptMessage = React.createClass({
+var AcceptMessage = ReactVanilla.createClass({
     render: function () {
         if (!this.props.value) { return null; }
 
@@ -162,7 +163,7 @@ var AcceptMessage = React.createClass({
     }
 });
 
-var Filename = React.createClass({
+var Filename = ReactVanilla.createClass({
     render: function () {
         if (!this.props.show) { return null; }
 

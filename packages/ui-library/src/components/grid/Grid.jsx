@@ -1,6 +1,7 @@
 "use strict";
 
 var React = require("re-react"),
+    ReactVanilla = require("react"),
     classnames = require("classnames"),
     _ = require("underscore"),
     Utils = require("../../util/Utils.js"),
@@ -268,7 +269,7 @@ var GridStateless = React.createClass({
     }
 });
 
-var GridStateful = React.createClass({
+var GridStateful = ReactVanilla.createClass({
     displayName: "GridStateful",
 
     getDefaultProps: function () {
@@ -306,7 +307,7 @@ var GridStateful = React.createClass({
     }
 });
 
-var Grid = React.createClass({
+var Grid = ReactVanilla.createClass({
     displayName: "Grid",
 
     propTypes: {
