@@ -117,19 +117,20 @@
         }
         .row-accessories {
             position: absolute;
-            right: 65px;
+            right: 45px;
             top: 50%;
             bottom: 0;
             z-index: 1;
-
-            > * {
-                @include transform(translateY(-50%));
-            }
+            padding: 0 20px 0 0;
 
             > *,
             .row-accessories-content > * {
                 display: inline-block;
                 margin: 0 0 0 20px;
+                vertical-align: top;
+
+                @include transform(translateY(-50%));
+
                 .help-tooltip {
                     vertical-align: middle;
                 }
@@ -139,6 +140,17 @@
                     line-height: 20px;
                 }
             }
+            .row-accessories-content {
+                margin: 0;
+
+                @include transform(translateY(0));
+            }
+
+            > a,
+            .row-accessories-content > a {
+                vertical-align: text-top;
+            }
+
             .button + .button,
             input[type=button],
             button {
@@ -326,6 +338,45 @@
                 border-bottom: 3px solid $color-active-blue;
             }
         }
+        &.invited {
+            .row-accessories {
+                right: 46px;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    top: -100%;
+                    bottom: 0;
+                    background-color: $color-chilly;
+                    right: 0;
+                    left: 0;
+                }
+
+                button.inline {
+                    border-color: $color-chilly;
+                }
+            }
+            &.expanded {
+                .row-accessories {
+                    &:before {
+                        content: none;
+                    }
+                }
+                .button.inline {
+                    border-color: $color-rhino;
+                }
+            }
+            .invite-info {
+                .invite-status {
+                    font-size: 14px;
+                    color: $color-slate;
+                }
+                .invite-date {
+                    font-size: 12px;
+                    color: $color-rhino;
+                }
+            }
+        }
     }
     .result-section-title {
         font-family: $font-pn-semibold;
@@ -341,6 +392,19 @@
         text-align: center;
         color: $color-midnight;
     }
+}
+
+.row-help {
+    display: inline-block;
+    margin: 0;
+    padding: 4px 5px 1px;
+    font-size: 13px;
+    line-height: 1em;
+    text-transform: uppercase;
+    color: $color-white;
+    background-color: $color-elephant;
+
+    @include border-radius(3px);
 }
 
 

@@ -78,12 +78,11 @@ exports.PillButton = React.createClass({
     render: function () {
         var props = _.defaults({
             "data-id": this.props["data-id"],
-            value: this.props.label,
-            type: "button",
-            className: "button inline"
+            children: this.props.label,
+            className: "inline"
         }, this.props);
 
-        return React.createElement("input", props);
+        return React.createElement("button", props);
     }
 });
 

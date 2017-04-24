@@ -10,7 +10,7 @@
     background: transparent;
     cursor: pointer;
     line-height: 1em;
-    
+
     @mixin default-icon-styles {
         height: $inline-icon-height;
         font-size: $inline-icon-height;
@@ -28,7 +28,7 @@
         .icon-help {
             @include default-icon-styles;
             width: $inline-icon-height - 1px;
-            &:before { 
+            &:before {
                 //change to icon-help-rounded
                 content: '\48';
             }
@@ -256,21 +256,6 @@
                     right: 30%;
                 }
             }
-        }
-    }
-    label {
-        &.row-help {
-            display: inline-block;
-            vertical-align: top;
-            margin: 0;
-            font-size: 13px;
-            text-transform: uppercase;
-            color: $color-white;
-            padding: 3px 5px 0;
-            background-color: $color-elephant;
-            line-height: 14px;
-                            
-            @include border-radius(3px);
         }
     }
 }

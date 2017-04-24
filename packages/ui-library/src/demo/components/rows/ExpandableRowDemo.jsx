@@ -22,12 +22,6 @@ var ExpandableRowDemo = React.createClass({
 
     _handleDelete: function () {
         this.setState({
-            deletedRow: true
-        });
-    },
-
-    _handleDelete2: function () {
-        this.setState({
             showDeleteConfirm: true
         });
     },
@@ -41,15 +35,14 @@ var ExpandableRowDemo = React.createClass({
     _handleDeleteConfirm: function () {
         this.setState({
             showDeleteConfirm: false,
-            deletedRow2: true
+            rowDeleted: true
         });
     },
 
     getInitialState: function () {
         return {
             expanded: false,
-            deletedRow: false,
-            deletedRow2: false
+            rowDeleted: false
         };
     },
 
@@ -58,44 +51,26 @@ var ExpandableRowDemo = React.createClass({
         return (
             <div data-id="idp-row" className="result-set">
                 <ExpandableRow
-                    title="Row With Only a Title" />
-                <ExpandableRow
-                    title="Row With Right Status Indicator"
+                    title="Basic Row"
                     subtitle="Row Subtitle"
-                    status={ExpandableRow.Statuses.ERROR} />
-                <ExpandableRow
-                    title="Row With Right Toggle"
-                    subtitle="Row Subtitle"
-                    rowAccessories={(<Toggle />)} />
-                <ExpandableRow
-                    title="Row With Right Button"
-                    subtitle="Row Subtitle"
-                    status={ExpandableRow.Statuses.WARNING}
-                    rowAccessories={(<button type="button" className="button inline">Inline Button</button>)} />
-                <ExpandableRow
-                    title="Row With a Variety of Right Content"
-                    subtitle="Row Subtitle"
-                    status={ExpandableRow.Statuses.GOOD}
-                    rowAccessories={(
-                        <span className="row-accessories-content">
-                            <HelpHint className="width-auto bottom" hintText="Provisioning">
-                                <label className="row-help">PROV</label>
-                            </HelpHint>
-                            <a>Link</a>
-                            <button type="button" className="button inline">Inline Button</button>
-                            <Toggle />
-                        </span>
-                    )} />
-                <ExpandableRow
-                    title="Collapsed Expandable Row, and which has a very long name and a RowAccessories Help Label"
-                    subtitle="stateful"
-                    expanded={false}
-                    showDelete={false}
-                    showEdit={true}
-                    rowAccessories={<RowAccessories.HelpLabel label="Prov" hintText="Provisioning" />}
                 />
                 <ExpandableRow
-                    title="Collapsed Expandable Row with RowAccessories PillButton"
+                    title="Expanded Row"
+                    expanded={true}
+                />
+                <ExpandableRow
+                    title="Row with Status Indicator"
+                    subtitle="Row Subtitle"
+                    status={ExpandableRow.Statuses.ERROR}
+                />
+                <ExpandableRow
+                    title="Row with Toggle"
+                    subtitle="stateful"
+                    expanded={false}
+                    rowAccessories={<Toggle />}
+                />
+                <ExpandableRow
+                    title="Row with Pill Button"
                     subtitle="stateless"
                     stateless={true}
                     expanded={this.state.expanded1}
@@ -103,49 +78,53 @@ var ExpandableRowDemo = React.createClass({
                     rowAccessories={<RowAccessories.PillButton label="Pill Button" />}
                 />
                 <ExpandableRow
+                    title="Row With a Variety of Right Content"
+                    subtitle="Row Subtitle"
+                    rowAccessories={(
+                        <span className="row-accessories-content">
+                            <a>Link</a>
+                            <span className="icon-cog" />
+                            <HelpHint className="width-auto bottom" hintText="Provisioning">
+                                <label className="row-help">PROV</label>
+                            </HelpHint>
+                            <button className="inline">Inline Button</button>
+                            <Toggle />
+                            <span className="count">2</span>
+                        </span>
+                    )}
+                />
+                <ExpandableRow
                     title="Row With Image"
                     subtitle="Row Subtitle"
                     image="src/demo/images/example-expandable-row-image.png"
-                    rowAccessories={(
-                        <span className="row-accessories-content">
-                            <span className="icon-cog" />
-                            <span className="count">2</span>
-                        </span>
-                    )} />
+                />
                 <ExpandableRow
                     title="Row With Icon"
                     subtitle="Row Subtitle"
-                    icon="icon-cog" />
+                    icon="icon-cog"
+                />
                 <ExpandableRow
-                    title="Open Expandable Row"
+                    title="Row in Waiting Mode"
                     subtitle="stateful"
-                    expanded={true}
-                    showDelete={true}
-                    showEdit={false} />
+                    waiting={true}
+                />
                 <ExpandableRow
-                    title="Open Expandable Row in Waiting Mode"
-                    subtitle="stateful"
-                    waiting={true}/>
-                <ExpandableRow
-                    title="Expandable Row"
-                    subtitle="stateless"
-                    stateless={true}
-                    expanded={this.state.expanded2}
-                    onToggle={this._onToggle.bind(null, 2)} />
-                {this.state.deletedRow
-                    ? <span>Delete confirmed!</span>
-                    : <ExpandableRow
-                        title="Expanded Row with Delete Confirmation"
-                        expanded={true}
-                        showDelete={true}
-                        confirmDelete={true}
-                        onDelete={this._handleDelete}
-                        labelDeleteConfirm="Are you sure you want to delete this row?" />
-                }
-                {this.state.deletedRow2
-                    ? <span>Delete confirmed!</span>
-                    : <ExpandableRow
-                        title="Collapsed Row with Delete Confirmation"
+                    title="Row With Invited Styling"
+                    className="invited"
+                    expanded={false}
+                    rowAccessories={
+                        <div className="row-accessories-content">
+                            <div className="invite-info">
+                                <div className="invite-status">Invited (Open)</div>
+                                <div className="invite-date">2017-4-10 4:35pm</div>
+                            </div>
+                            <button className="inline">Resend Invitation</button>
+                        </div>
+                    }
+                />
+                {this.state.rowDeleted && (
+                    <ExpandableRow
+                        title="Row with Delete Confirmation"
                         subtitle="stateless"
                         stateless={true}
                         expanded={this.state.expanded3}
@@ -155,9 +134,10 @@ var ExpandableRowDemo = React.createClass({
                         showDelete={true}
                         confirmDelete={true}
                         showDeleteConfirm={this.state.showDeleteConfirm}
-                        onDelete={this._handleDelete2}
-                        labelDeleteConfirm="Are you sure you want to delete this row?" />
-                }
+                        onDelete={this._handleDelete}
+                        labelDeleteConfirm="Are you sure you want to delete this row?"
+                    />
+                )}
             </div>
         );
     }
