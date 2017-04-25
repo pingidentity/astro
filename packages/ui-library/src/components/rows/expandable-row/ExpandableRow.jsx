@@ -455,6 +455,10 @@ var StatelessExpandableRow = React.createClass({
                             )}
                         </div>
                     )}
+                    <a data-id="expand-btn"
+                       className="expand-btn"
+                       onClick={this._handleExpandButtonClick}>
+                    </a>
                 </div>
                 {this.props.expanded && (
                     <div data-id="expanded-row" className="expanded-content clearfix">
@@ -472,10 +476,6 @@ var StatelessExpandableRow = React.createClass({
                         }
                     </div>
                 )}
-                <a data-id="expand-btn"
-                   className="expand-btn"
-                   onClick={this._handleExpandButtonClick}>
-                </a>
             </div>
         );
     }

@@ -51,7 +51,7 @@
         .collapsed-content {
             position: relative;
             box-sizing: border-box;
-            height: 60px;
+            min-height: 60px;
             padding: 15px 0 0 34px;
         }
         &.title-only {
@@ -77,8 +77,6 @@
             font-family: $font-pn-regular;
             color: $color-slate;
             margin-right: $button-width;
-
-            @include text-truncate;
         }
         .item-sub-title {
             font-size: 13px;
@@ -88,8 +86,11 @@
             color: $color-elephant;
             margin-top: 2px;
             margin-right: $button-width;
-
+        }
+        .item-title,
+        .item-sub-title {
             @include text-truncate;
+            max-width: 50%;
         }
         .item-image {
             position: absolute;
@@ -198,7 +199,7 @@
         .expand-btn {
             top: 0;
             bottom: 0;
-            height: $button-height;
+            min-height: $button-height;
 
             &:after {
                 content: '\45';
@@ -253,6 +254,10 @@
                     font-family: 'iconfont';
                     content: '\63';
                 }
+            }
+            .item-title,
+            .item-sub-title {
+                white-space: normal;
             }
         }
         &.no-edit {

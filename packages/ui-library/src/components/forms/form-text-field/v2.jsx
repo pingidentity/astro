@@ -288,7 +288,7 @@ var Stateless = React.createClass({
                 edited: this.props.isEdited,
                 required: this.props.required,
                 disabled: this.props.disabled,
-                "value-entered": this.props.value,
+                "value-entered": this.props.value || this.props.value !== "",
                 "inline-save": this.props.showSave,
                 "form-error": this.props.errorMessage,
                 readonly: this.props.readOnly,
