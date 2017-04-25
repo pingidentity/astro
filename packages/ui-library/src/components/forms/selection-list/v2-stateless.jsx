@@ -45,6 +45,7 @@ module.exports = React.createClass({
         onVisibilityChange: React.PropTypes.func,
         showSelectionOptions: React.PropTypes.bool.affectsRendering,
         showOnlySelected: React.PropTypes.bool.affectsRendering,
+        labelSelectAll: React.PropTypes.string,
         labelUnselectAll: React.PropTypes.string,
         labelOnlySelected: React.PropTypes.string,
         labelShowAll: React.PropTypes.string,
@@ -59,6 +60,19 @@ module.exports = React.createClass({
             showSelectionOptions: false,
             showOnlySelected: false
         };
+    },
+
+    /**
+     * @desc Selects all checkboxes
+     *
+     * @param {object} visibleItems currently displayed items on screen
+     * @param {array} e the event object
+     * @private
+     */
+    _selectAll: function (visibleItems) {
+        // extract id from visibleItems list and return as selection
+        var newIds = _.pluck(visibleItems, "id");
+        this.props.onValueChange(newIds);
     },
 
     /**
@@ -101,6 +115,9 @@ module.exports = React.createClass({
     },
 
     _getSelectionOptions: function (visibleItems) {
+        var itemsSelected = typeof(this.props.selectedItemIds) === "object"
+            ? this.props.selectedItemIds.length : !!this.props.selectedItemIds;
+
         return (
             <div data-id={this.props["data-id"]} className="selection-options">
                 <a
@@ -109,12 +126,15 @@ module.exports = React.createClass({
                     onClick={this._onShowOnlyAllToggle}>
                     {this.props.showOnlySelected ? this.props.labelShowAll : this.props.labelOnlySelected}
                 </a>
-                <a
-                    data-id="unselect-all"
-                    className="option"
-                    onClick={_.partial(this._unselectAll, visibleItems)}>
-                    {this.props.labelUnselectAll}
-                </a>
+                {itemsSelected || !this.props.labelSelectAll
+                    ? <a data-id="unselect-all" className="option" onClick={_.partial(this._unselectAll, visibleItems)}>
+                        {this.props.labelUnselectAll}
+                    </a>
+                    : <a data-id="select-all" className="option" onClick={_.partial(this._selectAll, visibleItems)}>
+                        {this.props.labelSelectAll}
+                    </a>
+                }
+
             </div>
         );
     },

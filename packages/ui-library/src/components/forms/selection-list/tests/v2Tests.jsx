@@ -135,6 +135,7 @@ describe("SelectionList", function () {
 
     it("triggers callback on radio change", function () {
         var component = getComponent({
+            stateless: true,
             type: SelectionList.ListType.SINGLE
         });
 
@@ -147,6 +148,7 @@ describe("SelectionList", function () {
 
     it("should check one radio", function () {
         var component = getComponent({
+            stateless: true,
             type: SelectionList.ListType.SINGLE
         });
 
@@ -159,18 +161,20 @@ describe("SelectionList", function () {
 
     it("should render with few checked checkboxes and uncheck all when selected", function () {
         var callback = jest.genMockFunction();
-        var component = getComponent({
+        var props = {
             stateless: true,
             selectedItemIds: [1, 2],
             type: SelectionList.ListType.MULTI,
             showSelectionOptions: true,
+            labelSelectAll: "Unselect All",
             labelUnselectAll: "Unselect All",
             labelOnlySelected: "Show Only Selected",
             labelShowAll: "Show All",
             onValueChange: callback,
             onSearch: jest.genMockFunction(),
             showOnlySelected: true
-        });
+        };
+        var component = getComponent(props);
 
         var formCheckboxes = TestUtils.scryRenderedComponentsWithType(component, FormCheckbox);
 
@@ -182,13 +186,42 @@ describe("SelectionList", function () {
 
         expect(checkbox1.checked).toBeTruthy();
         expect(checkbox2.checked).toBeTruthy();
+        expect(formCheckboxes.length).toBe(2);
 
         var unselectAll = TestUtils.findRenderedDOMNodeWithDataId(component, "unselect-all");
+        expect(unselectAll.textContent).toBe(props.labelUnselectAll);
 
         ReactTestUtils.Simulate.click(unselectAll);
         expect(callback).toBeCalledWith([]);
+    });
 
-        expect(formCheckboxes.length).toBe(2);
+    it("should render with no checked checkboxes and check all when selected", function () {
+        var callback = jest.genMockFunction();
+        var props = {
+            stateless: false,
+            selectedItemIds: [],
+            type: SelectionList.ListType.MULTI,
+            showSelectionOptions: true,
+            labelSelectAll: "Select All",
+            labelUnselectAll: "Unselect All",
+            labelOnlySelected: "Show Only Selected",
+            labelShowAll: "Show All",
+            onValueChange: callback,
+            onSearch: jest.genMockFunction()
+        };
+        var component = getComponent(props);
+        var selectAll = TestUtils.findRenderedDOMNodeWithDataId(component, "select-all");
+        var allCheckboxIds = listItems.map(function (item) {
+            return item.id;
+        });
+
+        expect(selectAll.textContent).toBe(props.labelSelectAll);
+        ReactTestUtils.Simulate.click(selectAll);
+
+        expect(callback).toBeCalledWith(allCheckboxIds);
+
+        var formCheckboxes = TestUtils.scryRenderedComponentsWithType(component, FormCheckbox);
+        expect(formCheckboxes.length).toBe(allCheckboxIds.length);
     });
 
     it("toggles showOnlySelected on visibility change", function () {
