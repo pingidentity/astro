@@ -346,6 +346,13 @@ module.exports = [
                 pathToDemoSource: "demo_components_general_IfDemo.jsx.html"
             },
             {
+                label: "Indent",
+                demo: require("../components/general/IndentDemo.jsx"),
+                pathToDoc: "components/general/Indent.jsx",
+                pathToSource: "components_general_Indent.jsx.html",
+                pathToDemoSource: "demo_components_general_IndentDemo.jsx.html"
+            },
+            {
                 label: "Modal",
                 demo: require("../components/general/ModalDemo.jsx"),
                 pathToDoc: "components/general/Modal.jsx",
