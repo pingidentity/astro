@@ -147,7 +147,7 @@ var SelectionListDemo = React.createClass({
                     showSearchBox={true}
                     searchPlaceholder="Search..."
                     onValueChange={this._onSingleSelectionListChange2}
-                    requiredText={this.state.required && "Select at least one"}
+                    requiredText={this.state.required ? "Select at least one" : ""}
                 />
 
                 <hr />
