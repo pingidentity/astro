@@ -845,7 +845,7 @@ input[type=file] {
         // each item in dropdown
         .select-option,
         .none-option {
-            // Note: decided not to use line-height here for alignment because it causes issues 
+            // Note: decided not to use line-height here for alignment because it causes issues
             // e.g. large font-sizes will overlap, and also looks bad if one item overflows onto 2 lines
             padding: 7px 40px 7px 10px;
             font-size: 14px;
@@ -1388,6 +1388,8 @@ input[type=file] {
     @include border-radius(3px);
 
     .selection-list-search {
+        position: relative;
+
         .input-text {
             margin: 0 0 10px;
         }
@@ -1477,8 +1479,8 @@ input[type=file] {
             font-family: $icon-font;
             text-decoration: none;
             font-size: 12px;
-            top: 19px;
-            right: 20px;
+            bottom: 18px;
+            right: 10px;
 
             &:before {
                 content: 'X';

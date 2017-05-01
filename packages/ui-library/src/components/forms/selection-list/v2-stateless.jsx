@@ -41,7 +41,6 @@ module.exports = React.createClass({
         searchPlaceholder: React.PropTypes.string.affectsRendering,
         onSearch: React.PropTypes.func.isRequired,
         queryString: React.PropTypes.string.affectsRendering,
-        showCount: React.PropTypes.bool.affectsRendering,
         onVisibilityChange: React.PropTypes.func,
         showSelectionOptions: React.PropTypes.bool.affectsRendering,
         showOnlySelected: React.PropTypes.bool.affectsRendering,
