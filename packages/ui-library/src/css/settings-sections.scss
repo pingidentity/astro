@@ -535,7 +535,7 @@
                     }
                     .modal-body {
                         @include full-modal-body;
-                        a.close-modal {
+                        .close-modal {
                             @include close;
                         }
                         .tab-group {
@@ -554,7 +554,7 @@
                     }
                     .modal-body {
                         @include full-modal-body;
-                        a.close-modal {
+                        .close-modal {
                             @include close;
                             width: $modal-wide-width;
                             height: $modal-wide-height;

@@ -76,6 +76,8 @@
             color: transparent;
         }
         .close-modal {
+            cursor: pointer;
+
             &:after {
                 color: $color-rhino;
                 font-size: 18px;
