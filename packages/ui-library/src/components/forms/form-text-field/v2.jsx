@@ -1,6 +1,7 @@
 "use strict";
 
 var React = require("re-react"),
+    ReactDOM = require("react-dom"),
     classnames = require("classnames"),
     FormLabel = require("../FormLabel.jsx"),
     FormError = require("../FormError.jsx"),
@@ -138,6 +139,8 @@ var React = require("re-react"),
 *     If true, the value shown in the input field will be masked with '*****'. (i.e: passwords).
 * @param {boolean} [readOnly=false]
 *     Whether or not the input field is readonly.
+* @param {boolean} [flexWidth=false]
+*     When true the width of the input will grow to fit the size of its content.
 *
 * @param {boolean} [showSave=false]
 *     Whether or not to display a save option.
@@ -231,6 +234,7 @@ var Stateless = React.createClass({
         autoComplete: React.PropTypes.bool.affectsRendering,
         autoFocus: React.PropTypes.bool.affectsRendering,
         disabled: React.PropTypes.bool.affectsRendering,
+        flexWidth: React.PropTypes.bool.affectsRendering,
         maskValue: React.PropTypes.bool.affectsRendering,
         readOnly: React.PropTypes.bool.affectsRendering,
         required: React.PropTypes.bool.affectsRendering,
@@ -251,52 +255,38 @@ var Stateless = React.createClass({
     _handleFieldChange: function (e) {
         this.props.onValueChange(e.target.value);
         this.props.onChange(e);
+        this._setFlexWidth();
     },
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "form-text-field",
-            onChange: _.noop,
-            onValueChange: _.noop,
-            onBlur: _.noop,
-            onFocus: _.noop,
-            onKeyDown: _.noop,
-            onKeyPress: _.noop,
-            onMouseDown: _.noop,
-            errorClassName: "",
-            disabled: false,
-            required: false,
-            autoComplete: false,
-            autoFocus: false,
-            maskValue: false,
-            readOnly: false,
-            showSave: false,
-            onSave: _.noop,
-            showUndo: false,
-            onUndo: _.noop,
-            reveal: false,
-            showReveal: false,
-            onToggleReveal: _.noop,
-            value: ""
-        };
+    _setFlexWidth: function () {
+        if (this.props.flexWidth) {
+            setTimeout(function () {
+                var inputType = this._getInputType(),
+                    contentMeasurer = ReactDOM.findDOMNode(this.refs["content-measurer"]),
+                    content = inputType === "password" ? Array(this.props.value.length + 1).join(this.pwChar)
+                        : this.props.value,
+                    contentWidth,
+                    newWidth;
+
+                contentMeasurer.innerHTML = content;
+                contentWidth = contentMeasurer.offsetWidth;
+
+                if (contentWidth > this.initialInputWidth) {
+                    newWidth = contentWidth + 10;
+
+                } else if (contentWidth < this.initialInputWidth) {
+                    newWidth = this.initialInputWidth;
+                }
+
+                this.setState({
+                    inputWidth: newWidth
+                });
+            }.bind(this), 0);
+        }
     },
 
-    render: function () {
-
-        var id = this.props["data-id"],
-            className = classnames(this.props.className, "input-text", {
-                edited: this.props.isEdited,
-                required: this.props.required,
-                disabled: this.props.disabled,
-                "value-entered": this.props.value || this.props.value !== "",
-                "inline-save": this.props.showSave,
-                "form-error": this.props.errorMessage,
-                readonly: this.props.readOnly,
-                "masking-controls": this.props.showReveal
-            }),
-            undo = Translator.translate("undo"),
-            save = Translator.translate("save"),
-            inputType;
+    _getInputType: function () {
+        var inputType;
 
         if (this.props.maskValue && !this.props.reveal) {
             inputType = "password";
@@ -311,6 +301,99 @@ var Stateless = React.createClass({
         } else {
             inputType = "text";
         }
+
+        return inputType;
+    },
+
+    getDefaultProps: function () {
+        return {
+            "data-id": "form-text-field",
+            errorClassName: "",
+            value: "",
+            onBlur: _.noop,
+            onChange: _.noop,
+            onFocus: _.noop,
+            onKeyDown: _.noop,
+            onKeyPress: _.noop,
+            onMouseDown: _.noop,
+            onSave: _.noop,
+            onToggleReveal: _.noop,
+            onUndo: _.noop,
+            onValueChange: _.noop,
+            autoComplete: false,
+            autoFocus: false,
+            disabled: false,
+            flexWidth: false,
+            maskValue: false,
+            readOnly: false,
+            required: false,
+            reveal: false,
+            showReveal: false,
+            showSave: false,
+            showUndo: false
+        };
+    },
+
+    getInitialState: function () {
+        return {
+            inputWidth: 0
+        };
+    },
+
+    componentDidMount: function () {
+        var input = this.refs[this.props["data-id"] + "-input"],
+            contentMeasure = this.refs["content-measurer"],
+            copyProperties = [ // no short-hand properties can be used
+                "box-sizing",
+                "padding-left",
+                "padding-right",
+                "font-size",
+                "font-family",
+                "text-transform",
+                "border-left-width",
+                "border-right-width",
+                "border-left-style",
+                "border-right-style"
+            ],
+            styles = "white-space: nowrap; ";
+
+        if (this.props.flexWidth) {
+
+            // copy input css to width measuring element
+            copyProperties.map(function (property) {
+                styles += property;
+                styles += ":";
+                styles += window.getComputedStyle(input, null).getPropertyValue(property);
+                styles += "; ";
+            });
+            contentMeasure.setAttribute("style", styles);
+
+            // get input intitial width for later use
+            this.initialInputWidth = input.offsetWidth;
+
+            // detect if IE and set password character
+            this.pwChar = Utils.browserType() === Utils.Browsers.IE ? "●" : "•";
+
+            this._setFlexWidth();
+        }
+    },
+
+    render: function () {
+        var id = this.props["data-id"],
+            className = classnames(this.props.className, "input-text", {
+                disabled: this.props.disabled,
+                edited: this.props.isEdited,
+                "flex-width": this.props.flexWidth,
+                "form-error": this.props.errorMessage,
+                "inline-save": this.props.showSave,
+                "masking-controls": this.props.showReveal,
+                readonly: this.props.readOnly,
+                required: this.props.required,
+                "value-entered": this.props.value || this.props.value !== ""
+            }),
+            undo = Translator.translate("undo"),
+            save = Translator.translate("save"),
+            inputType = this._getInputType();
 
         return (
             <FormLabel
@@ -341,7 +424,11 @@ var Stateless = React.createClass({
                         autoComplete={this.props.autoComplete ? "on" : "off"}
                         disabled={this.props.disabled}
                         autoFocus={this.props.autoFocus}
+                        style={this.state.inputWidth ? { width: this.state.inputWidth } : null}
                     />
+                    {this.props.flexWidth && (
+                        <div data-id={id + "-content-measurer"} ref="content-measurer" className="content-measurer" />
+                    )}
                     {this.props.showReveal && (
                         <a
                             data-id="reveal"

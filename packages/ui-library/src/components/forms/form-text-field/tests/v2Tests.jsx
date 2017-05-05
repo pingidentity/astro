@@ -226,7 +226,7 @@ describe("FormTextField", function () {
         expect(help.textContent).toBe("some help");
         expect(help.getAttribute("class")).toContain("bottom right");
     });
-    
+
     it("renders lock tooltip", function () {
         var component = getComponent({
             labelText: "some label",
@@ -264,7 +264,7 @@ describe("FormTextField", function () {
     });
 
 
-    it("it does not apply the input type is not specified", function () {
+    it("does not apply the input type if not specified", function () {
         var component = getComponent(),
             input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
 
@@ -282,6 +282,59 @@ describe("FormTextField", function () {
         expect(input.getAttribute("type")).toEqual(type);
     });
 
+    it("shows content measuring DOM when flexWidth is true", function () {
+        var initialValue = "initial input text",
+            newValue = "something really long entered into the text input for testing purposes",
+            component = getComponent({
+                "data-id": "ftf",
+                stateless: false,
+                flexWidth: true,
+                required: false,
+                label: "test",
+                value: initialValue
+            }),
+            input = TestUtils.findRenderedDOMNodeWithDataId(component, "ftf-input"),
+            componentRef = component.refs.stateful.refs.stateless,
+            contentMeasurer = TestUtils.findRenderedDOMNodeWithDataId(component, "ftf-content-measurer");
+
+        jest.runAllTimers();
+
+        expect(input.value).toEqual(initialValue);
+        expect(contentMeasurer).toBeTruthy();
+        expect(componentRef.pwChar).toEqual("•");
+
+        ReactTestUtils.Simulate.change(input, { target: { value: newValue } });
+        expect(input.value).toEqual(newValue);
+
+        // Im not able get any information from the content-measurer and it seems that the style attribute of the
+        // input is not updating in the test even though it does so in a browser
+        // TODO: figure out a way to test this functionality
+    });
+
+    it("sets the proper input type", function () {
+        var component = getComponent({
+                "data-id": "ftf",
+                type: "password"
+            }),
+            input = TestUtils.findRenderedDOMNodeWithDataId(component, "ftf-input");
+
+        expect(input.type).toEqual("password");
+    });
+
+    it("uses proper password character for IE when flexWidth is true", function () {
+        window.navigator.__defineGetter__("userAgent", function () {
+            return "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko";
+        });
+
+        var component = getComponent({
+                "data-id": "ftf",
+                flexWidth: true
+            }),
+            componentRef = component.refs.stateful.refs.stateless;
+
+        expect(componentRef.pwChar).toEqual("●");
+    });
+
     //TODO: remove when controlled no longer supported
     it("produces stateful/stateless components correctly given controlled prop", function () {
         var component = ReactTestUtils.renderIntoDocument(<FormTextField controlled={false} />);
@@ -294,7 +347,7 @@ describe("FormTextField", function () {
         component = ReactTestUtils.renderIntoDocument(<FormTextField controlled={true} />);
         stateful = component.refs.stateful;
         stateless = component.refs.stateless;
-        
+
         expect(stateless).toBeTruthy();
         expect(stateful).toBeFalsy();
     });
