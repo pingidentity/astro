@@ -73,6 +73,18 @@ module.exports = React.createClass({
         this.props.onValueChange(newIds);
     },
 
+    _handelSelectAll: function () {
+        var newIds = this.props.items.map(function (item) {
+            return item.id;
+        });
+
+        this.setState({
+            selectedItemIds: newIds
+        });
+
+        this.props.onSelectAll(newIds);
+    },
+
     render: function () {
         var statelessProps = _.defaults(
             {
@@ -83,6 +95,7 @@ module.exports = React.createClass({
                 showOnlySelected: this.state.showOnlySelected,
                 onVisibilityChange: this._handleVisibilityChange,
                 onValueChange: this._handleValueChange,
+                onSelectAll: this._handelSelectAll,
                 selectedItemIds: this.state.selectedItemIds
             },
             this.props

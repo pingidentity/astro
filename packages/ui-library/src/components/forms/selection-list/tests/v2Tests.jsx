@@ -206,7 +206,8 @@ describe("SelectionList", function () {
             labelUnselectAll: "Unselect All",
             labelOnlySelected: "Show Only Selected",
             labelShowAll: "Show All",
-            onValueChange: callback,
+            onValueChange: jest.genMockFunction(),
+            onSelectAll: callback,
             onSearch: jest.genMockFunction()
         };
         var component = getComponent(props);
@@ -216,9 +217,10 @@ describe("SelectionList", function () {
         });
 
         expect(selectAll.textContent).toBe(props.labelSelectAll);
+
         ReactTestUtils.Simulate.click(selectAll);
 
-        expect(callback).toBeCalledWith(allCheckboxIds);
+        expect(callback).toBeCalled();
 
         var formCheckboxes = TestUtils.scryRenderedComponentsWithType(component, FormCheckbox);
         expect(formCheckboxes.length).toBe(allCheckboxIds.length);

@@ -37,6 +37,7 @@ module.exports = React.createClass({
             React.PropTypes.number
         ]).affectsRendering,
         onValueChange: React.PropTypes.func.isRequired,
+        onSelectAll: React.PropTypes.func,
         showSearchBox: React.PropTypes.bool.affectsRendering,
         searchPlaceholder: React.PropTypes.string.affectsRendering,
         onSearch: React.PropTypes.func.isRequired,
@@ -64,31 +65,19 @@ module.exports = React.createClass({
     /**
      * @desc Selects all checkboxes
      *
-     * @param {object} visibleItems currently displayed items on screen
-     * @param {array} e the event object
      * @private
      */
-    _selectAll: function (visibleItems) {
-        // extract id from visibleItems list and return as selection
-        var newIds = _.pluck(visibleItems, "id");
-        this.props.onValueChange(newIds);
+    _selectAll: function () {
+        this.props.onSelectAll();
     },
 
     /**
      * @desc Toggle unchecking all checkboxes
      *
-     * @param {object} visibleItems currently displayed items on screen
-     * @param {array} e the event object
      * @private
      */
-    _unselectAll: function (visibleItems) {
-        // extract id from visibleItems list
-        var newIds = _.pluck(visibleItems, "id");
-
-        // extract ids in selected list that are not in newIds list
-        var newSelection = [];
-        newSelection = _.difference(this.props.selectedItemIds, newIds);
-        this.props.onValueChange(newSelection);
+    _unselectAll: function () {
+        this.props.onValueChange([]);
     },
 
     /**
@@ -113,7 +102,7 @@ module.exports = React.createClass({
         }.bind(this));
     },
 
-    _getSelectionOptions: function (visibleItems) {
+    _getSelectionOptions: function () {
         var itemsSelected = typeof(this.props.selectedItemIds) === "object"
             ? this.props.selectedItemIds.length : !!this.props.selectedItemIds;
 
@@ -126,14 +115,13 @@ module.exports = React.createClass({
                     {this.props.showOnlySelected ? this.props.labelShowAll : this.props.labelOnlySelected}
                 </a>
                 {itemsSelected || !this.props.labelSelectAll
-                    ? <a data-id="unselect-all" className="option" onClick={_.partial(this._unselectAll, visibleItems)}>
+                    ? <a data-id="unselect-all" className="option" onClick={this._unselectAll}>
                         {this.props.labelUnselectAll}
                     </a>
-                    : <a data-id="select-all" className="option" onClick={_.partial(this._selectAll, visibleItems)}>
+                    : <a data-id="select-all" className="option" onClick={this._selectAll}>
                         {this.props.labelSelectAll}
                     </a>
                 }
-
             </div>
         );
     },

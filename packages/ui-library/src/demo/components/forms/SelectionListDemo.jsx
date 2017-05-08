@@ -39,15 +39,30 @@ var SelectionListDemo = React.createClass({
         { name: "Kiwi", id: 9 }
     ],
 
-    _onSingleSelectionListChange: function (index, selectedItemId) {
+    _labels: {
+        labelSelectAll: "Select All",
+        labelUnselectAll: "Unselect All",
+        labelOnlySelected: "Show Only Selected",
+        labelShowAll: "Show All"
+    },
+
+    _onSingleSelectChange: function (index, selectedItemId) {
         var newState = {};
         newState["singleSelectId" + index] = selectedItemId;
         this.setState(newState);
     },
 
-    _onMultiSelectionListChange: function (index, selectedItemIds) {
+    _onMultiSelectChange: function (index, selectedItemIds) {
         var newState = {};
         newState["multiSelectIds" + index] = selectedItemIds;
+        this.setState(newState);
+    },
+
+    _onMultiSelectAll: function (index) {
+        var newState = {};
+        newState["multiSelectIds" + index] = this._multiSelectItems.map(function (item) {
+            return item.id;
+        });
         this.setState(newState);
     },
 
@@ -68,10 +83,11 @@ var SelectionListDemo = React.createClass({
         var i;
 
         for (i=1; i<=this.numSingleSelectDemos; i+=1) {
-            this["_onSingleSelectionListChange" + i] = this._onSingleSelectionListChange.bind(null, i);
+            this["_onSingleSelectChange" + i] = this._onSingleSelectChange.bind(null, i);
         }
         for (i=1; i<=this.numMultiSelectDemos; i+=1) {
-            this["_onMultiSelectionListChange" + i] = this._onMultiSelectionListChange.bind(null, i);
+            this["_onMultiSelectChange" + i] = this._onMultiSelectChange.bind(null, i);
+            this["_onMultiSelectAll" + i] = this._onMultiSelectAll.bind(null, i);
         }
     },
 
@@ -121,7 +137,7 @@ var SelectionListDemo = React.createClass({
                         selectedItemIds={this.state.singleSelectId1}
                         showSearchBox={true}
                         searchPlaceholder="Search..."
-                        onValueChange={this._onSingleSelectionListChange1}
+                        onValueChange={this._onSingleSelectChange1}
                     />
                 </DetailsTooltip>
 
@@ -146,7 +162,7 @@ var SelectionListDemo = React.createClass({
                     selectedItemIds={this.state.singleSelectId2}
                     showSearchBox={true}
                     searchPlaceholder="Search..."
-                    onValueChange={this._onSingleSelectionListChange2}
+                    onValueChange={this._onSingleSelectChange2}
                     requiredText={this.state.required ? "Select at least one" : ""}
                 />
 
@@ -166,7 +182,7 @@ var SelectionListDemo = React.createClass({
                     selectedItemIds={this.state.singleSelectId3}
                     showSearchBox={false}
                     searchPlaceholder="Search..."
-                    onValueChange={this._onSingleSelectionListChange3}
+                    onValueChange={this._onSingleSelectChange3}
                 />
 
                 <hr />
@@ -185,7 +201,7 @@ var SelectionListDemo = React.createClass({
                 </div>
                 <DetailsTooltip
                     positionClassName="bottom right"
-                    className="input-selection-list-tooltip"
+                    className="input-selection-list-tooltip filter"
                     label="Multi Selection List"
                     showClose={false}
                     stateless={false}
@@ -199,7 +215,11 @@ var SelectionListDemo = React.createClass({
                         selectedItemIds={this.state.multiSelectIds1}
                         showSearchBox={true}
                         searchPlaceholder={"Search..."}
-                        onValueChange={this._onMultiSelectionListChange1} />
+                        showSelectionOptions={true}
+                        onValueChange={this._onMultiSelectChange1}
+                        onSelectAll={this._onMultiSelectAll1}
+                        {...this._labels}
+                    />
                 </DetailsTooltip>
 
                 <hr />
@@ -230,10 +250,9 @@ var SelectionListDemo = React.createClass({
                         showSearchBox={true}
                         searchPlaceholder={"Search..."}
                         showSelectionOptions={true}
-                        labelUnselectAll="Unselect All"
-                        labelOnlySelected="Show Only Selected"
-                        labelShowAll="Show All"
-                        onValueChange={this._onMultiSelectionListChange4}
+                        onValueChange={this._onMultiSelectChange4}
+                        onSelectAll={this._onMultiSelectAll4}
+                        {...this._labels}
                     />
                 </DetailsTooltip>
 
@@ -253,13 +272,16 @@ var SelectionListDemo = React.createClass({
                     showSearchBox={true}
                     searchPlaceholder={"Search..."}
                     onSearch={this._myCustomSearch}
-                    onValueChange={this._onMultiSelectionListChange2}
+                    showSelectionOptions={true}
+                    onValueChange={this._onMultiSelectChange2}
+                    onSelectAll={this._onMultiSelectAll2}
+                    {...this._labels}
                 />
 
                 <hr />
 
                 <h3>
-                    A standing multi-select list (no search box)
+                    A standard multi-select list (no search box)
                 </h3>
                 <div>
                     Selected Radio ID = {this.state.multiSelectIds3.join()}
@@ -271,7 +293,8 @@ var SelectionListDemo = React.createClass({
                     items={this._multiSelectItems}
                     selectedItemIds={this.state.multiSelectIds3}
                     showSearchBox={false}
-                    onValueChange={this._onMultiSelectionListChange3}
+                    onValueChange={this._onMultiSelectChange3}
+                    onSelectAll={this._onMultiSelectAll3}
                 />
             </div>
         );

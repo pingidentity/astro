@@ -51,6 +51,8 @@ var React = require("react"),
  *     IDs of the list items which are selected
  * @param {SelectionList~onValueChange} onValueChange
  *     Callback to be triggered when the item selection changes
+ * @param {SelectionList~onSelectAll} onValueonSelectAllChange
+ *     Callback to be triggered when the select-all link is clicked
  * @param {boolean} [showSearchBox=true]
  *     Flag to determine the visibility of the search box
  * @param {string} [searchPlaceholder]
