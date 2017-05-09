@@ -150,7 +150,7 @@ var EditViewCollapsibleDemoPage = Object.create(HomePage, {
             return this.getElement("//div[contains(@class,'open')][@data-id='address-section-title']");
         }
     },
-    
+
     /**
      * @desc this function is to get Expanded Miscellaneous Section
      */

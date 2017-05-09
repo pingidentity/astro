@@ -30,14 +30,14 @@ describe("Edit View Collapsible Integration", function () {
         EditViewCollapsiblePage.setFirstNameValue("First Name");
         EditViewCollapsiblePage.setLastNameValue("Last Name");
         EditViewCollapsiblePage.setUserNameValue("UserName");
- 
+
         var expandedIdentityFilename = "TemplatesEditViewCollapsible_ExpandedIdentity";
         EditViewCollapsiblePage.clickUserNameInput();
         EditViewCollapsiblePage.takeScreenshotAndCompare(expandedIdentityFilename);
 
         //collapse Identity section
         EditViewCollapsiblePage.clickIdentitySection();
-        EditViewCollapsiblePage.waitForIdentitySectionToClose();
+        // EditViewCollapsiblePage.waitForIdentitySectionToClose();
 
         //expand Address section
         EditViewCollapsiblePage.clickAddressSection();
@@ -78,11 +78,10 @@ describe("Edit View Collapsible Integration", function () {
 
         //collapse Miscellaneous
         EditViewCollapsiblePage.clickMiscellaneousSection();
-        EditViewCollapsiblePage.waitForMiscellaneousSectionToClose();
+        // EditViewCollapsiblePage.waitForMiscellaneousSectionToClose();
 
         //take screenshot and compare
         var collapsedAllSectionsFilename = "TemplatesEditViewCollapsible_CollapsedAllSections";
         EditViewCollapsiblePage.takeScreenshotAndCompare(collapsedAllSectionsFilename);
     }));
 });
-

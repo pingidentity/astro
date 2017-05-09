@@ -25,14 +25,14 @@
         color: $color-midnight;
     }
     > .collapsible-section-content {
+        display: none;
+        visibility: hidden;
         position: relative;
-        overflow: hidden;
-        max-height: 0;
 
         @include transition(all 0.3s);
 
         > .collapsible-section-content-inner {
-            margin: 19px 0 0 25px;
+            margin: 25px 0 0 25px;
         }
     }
     > .collapsible-section-accessories {
@@ -63,8 +63,8 @@
     }
     &.open {
         > .collapsible-section-content {
-            overflow: visible;
-            max-height: 4000px;
+            display: block;
+            visibility: visible;
 
             @include animation(fade-in 0.2s);
         }
