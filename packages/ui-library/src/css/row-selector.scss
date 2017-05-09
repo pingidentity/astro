@@ -1,13 +1,32 @@
 .row-selector {
     height: 450px;
+    &.disabled {
+        @include opacity(0.4);
+        .rows-available,
+        .rows-added {
+            pointer-events: none;
+            @include user-select(none);
+        }
+    }
     .column-title {
         font-size: 15px;
         color: $color-slate;
         padding: 0 0 10px;
         text-transform: uppercase;
     }
-    .input-search {
-        margin: 0 0 30px;
+    // needed for specifity to override inputs
+    label {
+        .input-search {
+            width: 100%;
+            input[type=text] {
+                width: 100%;
+            }
+            a.clear-search {
+                font-size: 10px;
+                color: $color-active-blue;
+                top: 14px;
+            }
+        }
     }
     .rows-available,
     .rows-added {
@@ -18,6 +37,20 @@
     }
     .rows-available {
         margin: 0 20px 0 0;
+        .items {
+            border-top: 1px solid $color-rabbit-fur;
+            border-bottom: 1px solid $color-rabbit-fur;
+            .no-items {
+                border: none;
+            }
+            .drag-drop-item {
+                &:first-of-type {
+                    .item {
+                        border-top: none;
+                    }
+                }
+            }
+        }
     }
     .rows-added {
         .items {
@@ -33,11 +66,14 @@
         margin-bottom: 4px;
         text-align: center;
         font-size: 14px;
-        border: 1px dotted $color-rabbit-fur;
+        border: 1px dashed $color-rabbit-fur;
         left: 0;
         right: 0;
         z-index: 10;
         background-color: $color-white;
+        min-height: 50px;
+        
+        @include box-sizing(border-box);
 
         &.preview {
             border: 1px dotted $color-active-blue;

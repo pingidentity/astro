@@ -5,6 +5,7 @@ var React = require("react"),
     FormRadioGroup = require("../../../components/forms/FormRadioGroup.jsx"),
     MultiDrag = require("../../../components/panels/multi-drag"),
     Messages = require("../../../components/general/messages/"),
+    Toggle = require("../../../components/forms/form-toggle"),
     classnames = require("classnames"),
     update = require("re-mutable"),
     keyMirror = require("fbjs/lib/keyMirror"),
@@ -104,6 +105,7 @@ var Row = React.createClass({
  * the type for each row.
  */
 var MultiDragDemo = React.createClass({
+    
     componentWillMount: function () {
         this.actions = Redux.bindActionCreators(MultiDrag.Actions, this.props.store.dispatch);
         this.messageActions = Redux.bindActionCreators(Messages.Actions, this.props.store.dispatch);
@@ -118,6 +120,12 @@ var MultiDragDemo = React.createClass({
     _handleDemoTypeValueChange: function (value) {
         this.setState({
             demoType: value
+        });
+    },
+    
+    _handleDisabledToggle: function () {
+        this.setState({
+            disabled: !this.state.disabled
         });
     },
 
@@ -197,7 +205,9 @@ var MultiDragDemo = React.createClass({
     },
 
     _handleSearchStateful: function (column, str) {
-        console.log("Search column " + column + " for value " + str);
+        if (str !== "") {
+            console.log("Search column " + column + " for value " + str);
+        }
     },
 
     _handleScrolledToBottomStateless: function (column) {
@@ -265,7 +275,8 @@ var MultiDragDemo = React.createClass({
     getInitialState: function () {
         return {
             demoType: "STATEFUL",
-            columns: data.columns //used for stateful (stateless=false) demo
+            columns: data.columns, //used for stateful (stateless=false) demo
+            disabled: false
         };
     },
 
@@ -284,23 +295,40 @@ var MultiDragDemo = React.createClass({
             <div className="multidrag-demo" data-id="multidragDemoDiv">
                 <Messages messages={this.props.messages.messages} onRemoveMessage={this.messageActions.removeAt} />
 
-                <FormLabel>Select the type of demo</FormLabel>
-                <FormRadioGroup stacked={false}
-                        groupName="stateless-stateful-choice"
-                        selected={this.state.demoType}
-                        onValueChange={this._handleDemoTypeValueChange}
-                        items={[
-                            { id: "STATELESS", name: "Stateless demo" },
-                            { id: "STATEFUL", name: "Stateful demo" }
-                        ]} />
-                <hr />
+                <div className="demo-options">
+                    <div>
+                        
+                        <FormLabel>Select the type of demo</FormLabel>
+                        <FormRadioGroup stacked={false}
+                                groupName="stateless-stateful-choice"
+                                selected={this.state.demoType}
+                                onValueChange={this._handleDemoTypeValueChange}
+                                items={[
+                                    { id: "STATELESS", name: "Stateless demo" },
+                                    { id: "STATEFUL", name: "Stateful demo" }
+                                ]} />
+                        
+                    </div>
+                    <div>
+                    
+                        <FormLabel>Disable Component?</FormLabel>
+                        <br/>
+                        <Toggle data-id="disable-toggle"
+                                className="row-status-toggle"
+                                stateless={true}
+                                toggled={this.state.disabled}
+                                onToggle={this._handleDisabledToggle} />
+
+                    </div>
+                </div>
+
                 <br />
 
                 {this.renderOptions()}
 
                 {this.state.demoType === "STATELESS" &&
                     <div>
-                        <h2>Stateless (stateless=true)</h2>
+                        <h2>Stateless (stateless=true), Empty Label Set</h2>
                         <MultiDrag
                                 stateless={true}
                                 showSearchOnAllColumns={this.props.demo.search === "all"}
@@ -313,7 +341,9 @@ var MultiDragDemo = React.createClass({
                                 onCancel={this._handleCancelStateless}
                                 onDrop={this._handleDropStateless}
                                 onDrag={this._handleDragStateless}
-                                contentType={contentTypeStateless} />
+                                contentType={contentTypeStateless}
+                                labelEmpty="No Items Available"
+                                disabled={this.state.disabled} />
                     </div>
                 }
                 {
@@ -334,7 +364,9 @@ var MultiDragDemo = React.createClass({
                                 onCancel={this._handleCancelStateful}
                                 onDrop={this._handleDropStateful}
                                 onDrag={this._handleDragStateful}
-                                contentType={contentTypeStateful} />
+                                contentType={contentTypeStateful}
+                                labelEmpty="No Items Available"
+                                disabled={this.state.disabled} />
                     </div>
                 }
           </div>);

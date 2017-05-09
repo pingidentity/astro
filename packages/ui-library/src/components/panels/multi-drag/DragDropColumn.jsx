@@ -77,7 +77,8 @@ module.exports = React.createClass({
             "data-id": "drag-drop-column",
             showSearch: false,
             onScrolledToBottom: _.noop,
-            onScrolledToTop: _.noop
+            onScrolledToTop: _.noop,
+            labelEmpty: "No Items Added"
         };
     },
 
@@ -87,6 +88,13 @@ module.exports = React.createClass({
      */
     _handleSearch: function (value) {
         this.props.onSearch(this.props.index, value);
+    },
+
+    /*
+     * Clear search input
+     */
+    _clear: function () {
+        this.props.onSearch(this.props.index, "");
     },
 
     /*
@@ -110,13 +118,19 @@ module.exports = React.createClass({
         if (!this.props.showSearch) {
             return null;
         }
+        var showClear = this.props.filter !== "";
 
         return (
             <div className="input-row" data-id="search">
-                <FormTextField controlled={true}
+                <FormTextField
+                    controlled={true}
                     onValueChange={this._handleSearch}
                     value={this.props.filter}
-                    className="search" />
+                    className="search input-search">
+                    { showClear &&
+                        <a className="clear-search" data-id="clear" onClick={this._clear} />
+                    }
+                </FormTextField>
             </div>);
     },
 

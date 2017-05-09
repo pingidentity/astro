@@ -148,6 +148,10 @@ function convertFilteredIndexes (columns, desc) {
  *    An array of field names of the row properties to use in a search where array index corresponds to each column index.
  *    If unset for any column index, search will use all row properties that have a string representation for that column.
  *    Only used when stateless=false.
+ * @param {boolean} [disabled=false]
+ *    Disables the MultiDrag component
+ * @param {string} [labelEmpty]
+ *    Sets the text for the right column when no items are added
  *
  * @param {MultiDrag~onSearch} onSearch
  *    Callback to be triggered when a column is searched. When stateless=false, will be executed after search has
@@ -202,13 +206,16 @@ var MultiDragStateless = React.createClass({
         classNames: React.PropTypes.arrayOf(
             React.PropTypes.string
         ).affectsRendering,
-        //callbacks
+        // callbacks
         onSearch: React.PropTypes.func.isRequired,
         onDrag: React.PropTypes.func.isRequired,
         onDrop: React.PropTypes.func.isRequired,
         onCancel: React.PropTypes.func.isRequired,
         onScrolledToBottom: React.PropTypes.func,
-        onScrolledToTop: React.PropTypes.func
+        onScrolledToTop: React.PropTypes.func,
+        // optional items
+        labelEmpty: React.PropTypes.string,
+        disabled: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
@@ -216,7 +223,8 @@ var MultiDragStateless = React.createClass({
             "data-id": "multi-drag",
             classNames: ["rows-available", "rows-added"],
             showSearchOnAllColumns: false,
-            showSearch: false
+            showSearch: false,
+            disabled: false
         };
     },
 
@@ -296,8 +304,11 @@ var MultiDragStateless = React.createClass({
 
     render: function () {
         var preview = this.props.previewMove;
-
-        var className = classnames("input-row row-selector", this.props.className);
+        var className = classnames(
+                            "input-row row-selector",
+                            this.props.className, {
+                                disabled: this.props.disabled
+                            });
 
         return (
             <div data-id={this.props["data-id"]} className={className}>
@@ -316,7 +327,8 @@ var MultiDragStateless = React.createClass({
                             ghostRowAt={preview && preview.column === index ? preview.index : null}
                             className={this.props.classNames[index]}
                             contentType={this.props.contentType}
-                            data-id={"DragDropColumn-" + index} />);
+                            data-id={"DragDropColumn-" + index}
+                            labelEmpty={this.props.labelEmpty} />);
                 }.bind(this))
             }
             </div>);
@@ -405,7 +417,7 @@ var MultiDragStateful = ReactVanilla.createClass({
     getInitialState: function () {
         return {
             columns: this.props.columns,
-            placeholder: null,
+            placeholder: null
         };
     },
 
