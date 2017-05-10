@@ -93,6 +93,10 @@
     content: '\43';
 }
 
+.icon-certificate:before {
+    content: '\e901';
+}
+
 .icon-check:before {
     content: '\79';
 }
@@ -127,6 +131,10 @@
 
 .icon-delete:before {
     content: '\64';
+}
+
+.icon-details:before {
+    content: '\e900';
 }
 
 .icon-directory:before {
@@ -171,6 +179,10 @@
 
 .icon-grip:before {
     content: '\47';
+}
+
+.icon-group:before {
+    content: '\e902';
 }
 
 .icon-help:before {
