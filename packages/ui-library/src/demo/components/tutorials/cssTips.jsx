@@ -8,10 +8,109 @@ var React = require("react"),
 
 var cssTips = React.createClass({
 
+    icons: [
+        "account",
+        "admin-account",
+        "alert",
+        "approve",
+        "apps",
+        "badge",
+        "cabinet",
+        "calendar",
+        "certificate",
+        "check",
+        "circle-o",
+        "circle",
+        "clear",
+        "close",
+        "close-arrow",
+        "cog",
+        "collapse",
+        "delete",
+        "details",
+        "directory",
+        "directory-hollow",
+        "download",
+        "dropdown-arrow",
+        "edit",
+        "expand",
+        "expand-arrow",
+        "file",
+        "filter",
+        "globe",
+        "grip",
+        "group",
+        "help",
+        "help-rounded",
+        "image",
+        "info",
+        "key",
+        "left",
+        "link",
+        "lock",
+        "lock-large",
+        "menu",
+        "minus",
+        "minus-rounded",
+        "network",
+        "next",
+        "overview",
+        "pin",
+        "plus",
+        "plus-rounded",
+        "puzzle",
+        "previous",
+        "resend",
+        "right",
+        "search",
+        "settings",
+        "slider",
+        "sort-asc",
+        "sort-desc",
+        "sort-none",
+        "spinner",
+        "spin-down",
+        "spin-up",
+        "success",
+        "support",
+        "thumb",
+        "undo",
+        "user",
+        "users",
+        "view",
+        "view-hidden",
+        "walkthrough",
+        "wand",
+        "welcome"
+    ],
+    iconColumns: 5,
+
     _toggleFieldset: function () {
         this.setState ({
             showFieldset: !this.state.showFieldset
         });
+    },
+
+    _renderIcon: function (icon) {
+        return (<div><span className={"inline-icon icon-" + icon}></span> icon-{icon}</div>);
+    },
+
+    _renderIconColumn: function (col) {
+        var iconsPerCol = Math.ceil(this.icons.length / this.iconColumns);
+
+        return this.icons.slice(iconsPerCol*(col-1), iconsPerCol*col).map(function (item) {
+            return this._renderIcon(item);
+        }.bind(this));
+    },
+
+    _renderIconColumns: function () {
+        var content = [];
+
+        for (var i=1; i<=this.iconColumns; i+=1) {
+            content.push(<Layout.Column>{this._renderIconColumn(i)}</Layout.Column>);
+        }
+
+        return content;
     },
 
     getInitialState: function () {
@@ -141,87 +240,7 @@ var cssTips = React.createClass({
                     an "icon font". This means that they are vector-based and may be resized and styled using
                     the same CSS rules as text.
                 </p>
-                <Layout.Row data-id="columns-5" className="icons">
-                    <Layout.Column>
-                        <span className="inline-icon icon-account"></span> icon-account
-                        <br /><span className="inline-icon icon-admin-account"></span> icon-admin-account
-                        <br /><span className="inline-icon icon-alert"></span> icon-alert
-                        <br /><span className="inline-icon icon-approve"></span> icon-approve
-                        <br /><span className="inline-icon icon-apps"></span> icon-apps
-                        <br /><span className="inline-icon icon-badge"></span> icon-badge
-                        <br /><span className="inline-icon icon-cabinet"></span> icon-cabinet
-                        <br /><span className="inline-icon icon-calendar"></span> icon-calendar
-                        <br /><span className="inline-icon icon-check"></span> icon-check
-                        <br /><span className="inline-icon icon-circle-o"></span> icon-circle-o
-                        <br /><span className="inline-icon icon-circle"></span> icon-circle
-                        <br /><span className="inline-icon icon-clear"></span> icon-clear
-                        <br /><span className="inline-icon icon-close"></span> icon-close
-                        <br /><span className="inline-icon icon-cog"></span> icon-cog
-                    </Layout.Column>
-                    <Layout.Column>
-                        <span className="inline-icon icon-collapse"></span> icon-collapse
-                        <br /><span className="inline-icon icon-delete"></span> icon-delete
-                        <br /><span className="inline-icon icon-directory"></span> icon-directory
-                        <br /><span className="inline-icon icon-directory-hollow"></span> icon-directory-hollow
-                        <br /><span className="inline-icon icon-download"></span> icon-download
-                        <br /><span className="inline-icon icon-dropdown-arrow"></span> icon-dropdown-arrow
-                        <br /><span className="inline-icon icon-edit"></span> icon-edit
-                        <br /><span className="inline-icon icon-expand"></span> icon-expand
-                        <br /><span className="inline-icon icon-expand-arrow"></span> icon-expand-arrow
-                        <br /><span className="inline-icon icon-file"></span> icon-file
-                        <br /><span className="inline-icon icon-filter"></span> icon-filter
-                        <br /><span className="inline-icon icon-globe"></span> icon-globe
-                        <br /><span className="inline-icon icon-grip"></span> icon-grip
-                        <br /><span className="inline-icon icon-help"></span>icon-help
-                    </Layout.Column>
-                    <Layout.Column>
-                        <span className="inline-icon icon-help-rounded"></span> icon-help
-                        <br /><span className="inline-icon icon-image"></span> icon-image
-                        <br /><span className="inline-icon icon-info"></span> icon-info
-                        <br /><span className="inline-icon icon-key"></span> icon-key
-                        <br /><span className="inline-icon icon-left"></span> icon-left
-                        <br /><span className="inline-icon icon-link"></span> icon-link
-                        <br /><span className="inline-icon icon-lock"></span> icon-lock
-                        <br /><span className="inline-icon icon-lock-large"></span> icon-lock-large
-                        <br /><span className="inline-icon icon-menu"></span> icon-menu
-                        <br /><span className="inline-icon icon-minus"></span> icon-minus
-                        <br /><span className="inline-icon icon-minus-rounded"></span> icon-minus
-                        <br /><span className="inline-icon icon-network"></span> icon-network
-                        <br /><span className="inline-icon icon-next"></span> icon-next
-                        <br /><span className="inline-icon icon-overview"></span> icon-overview
-                    </Layout.Column>
-                    <Layout.Column>
-                        <span className="inline-icon icon-pin"></span> icon-pin
-                        <br /><span className="inline-icon icon-plus"></span> icon-plus
-                        <br /><span className="inline-icon icon-plus-rounded"></span> icon-plus-rounded
-                        <br /><span className="inline-icon icon-puzzle"></span> icon-puzzle
-                        <br /><span className="inline-icon icon-previous"></span> icon-previous
-                        <br /><span className="inline-icon icon-resend"></span> icon-resend
-                        <br /><span className="inline-icon icon-right"></span> icon-right
-                        <br /><span className="inline-icon icon-search"></span> icon-search
-                        <br /><span className="inline-icon icon-settings"></span> icon-settings
-                        <br /><span className="inline-icon icon-slider"></span> icon-slider
-                        <br /><span className="inline-icon icon-sort-asc"></span> icon-sort
-                        <br /><span className="inline-icon icon-sort-desc"></span> icon-sort
-                        <br /><span className="inline-icon icon-sort-none"></span> icon-sort
-                        <br /><span className="inline-icon icon-spinner"></span> icon-spinner
-                    </Layout.Column>
-                    <Layout.Column>
-                        <span className="inline-icon icon-spin-down"></span> icon-spin
-                        <br /><span className="inline-icon icon-spin-up"></span> icon-spin
-                        <br /><span className="inline-icon icon-success"></span> icon-success
-                        <br /><span className="inline-icon icon-support"></span> icon-support
-                        <br /><span className="inline-icon icon-thumb"></span> icon-thumb
-                        <br /><span className="inline-icon icon-undo"></span> icon-undo
-                        <br /><span className="inline-icon icon-user"></span> icon-user
-                        <br /><span className="inline-icon icon-users"></span> icon-users
-                        <br /><span className="inline-icon icon-view"></span> icon-view
-                        <br /><span className="inline-icon icon-view-hidden"></span> icon-view-hidden
-                        <br /><span className="inline-icon icon-walkthrough"></span> icon-walkthrough
-                        <br /><span className="inline-icon icon-wand"></span> icon-wand
-                        <br /><span className="inline-icon icon-welcome"></span> icon-welcome
-                    </Layout.Column>
-                </Layout.Row>
+                <Layout.Row className="icons">{this._renderIconColumns()}</Layout.Row>
                 <br />
                 <p>
                     It's not always required, but when displaying an icon with text, it's good practice to
