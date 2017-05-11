@@ -16,7 +16,7 @@
     }
     // needed for specifity to override inputs
     label {
-        .input-search {
+        &.input-search {
             width: 100%;
             input[type=text] {
                 width: 100%;
