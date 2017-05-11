@@ -151,9 +151,15 @@
             &:after {
                 content: ':';
             }
-            &.no-data {
+            &.no-data,
+            &.simple {
                 &:after {
                     content: '';
+                }
+            }
+            &.simple {
+                a {
+                    text-transform: none;
                 }
             }
         }
@@ -230,6 +236,14 @@
         .help-tooltip {
             vertical-align: bottom;
             margin: -3px 0 0 5px;
+        }
+        ul {
+            li {
+                margin-bottom: 7px;
+                a {
+                    margin: 0 20px 0 10px;
+                }
+            }
         }
     }
     .data-col-of-2,
