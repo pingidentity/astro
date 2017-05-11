@@ -129,6 +129,7 @@
     .data-item {
         display: table-row;
         line-height: 1em;
+        word-break: break-word;
 
         > label,
         > span {
@@ -142,6 +143,7 @@
             cursor: default;
             font-size: 14px;
             color: $color-elephant;
+            word-break: normal;
 
             &.input-radio {
                 cursor: pointer;
