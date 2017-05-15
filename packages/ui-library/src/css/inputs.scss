@@ -570,9 +570,13 @@ label {
 }
 
 .flex-width {
+    max-width: 100%;
+
     .input-container {
         input[type=text],
         input[type=password] {
+            max-width: 100%;
+
             @include transition((width 0s));
         }
     }
