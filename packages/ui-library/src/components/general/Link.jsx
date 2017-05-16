@@ -50,7 +50,7 @@ var Link = function (props) {
             disabled: props.disabled
         });
     return (
-        <div data-id={props["data-id"]} className="link">
+        <div data-id={props["data-id"]} className="content-link">
             <a href={props.url}
                className={linkCss}
                onClick={_handleClick}
@@ -79,7 +79,7 @@ Link.propTypes = {
 };
 
 Link.defaultProps = {
-    "data-id": "link",
+    "data-id": "content-link",
     disabled: false,
     className: ""
 };

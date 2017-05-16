@@ -5,6 +5,9 @@
     overflow: hidden;
     line-height: 1.0em;
     
+    &.grouped {
+        margin-bottom: 10px;
+    }
     .count {
         background-color: $color-white;
         min-width: 16px;
@@ -43,7 +46,7 @@
         &.no-border {
             border-left: none;
         }
-        .link {
+        .content-link {
             padding: 7px 3px 5px;
             margin-left: -8px;
             a {

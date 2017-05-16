@@ -1,0 +1,32 @@
+.content-link {
+    a {
+        &.detached {
+            display: inline-block;
+            padding: 10px 0 10px 5px;
+        }
+        &.text-first {
+            position: relative;
+            .count,
+            [class^='icon-'],
+            [class*=' icon-'] {
+                position: absolute;
+                right: -30px;
+            }
+        }
+        .count {
+            color: $color-elephant;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+        [class^='icon-'],
+        [class*=' icon-'] {
+            padding-right: 8px;
+            color: $color-elephant;
+            display: inline-block;
+            &:hover {
+                text-decoration: none;
+            }
+        }    
+    }
+}

@@ -45,7 +45,7 @@ describe("Link", function () {
             <Link title="Link Name" url="#" count="2" />
         );
 
-        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "link");
+        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "content-link");
         expect(element).toBeDefined();
     });
         

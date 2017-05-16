@@ -57,7 +57,6 @@ var IndentDemo = React.createClass({
                 <br />
                 <Indent title="all">
                     <Link title="HR Apps Base Policy" url="#" count="2" />
-
                     <Indent title="any">
                         <Link icon="cog" title="Rule.. truncates" url="#" />
                         <Link icon="thumb" title="HR Group" url="#" />
@@ -89,7 +88,6 @@ var IndentDemo = React.createClass({
                 <br />
                 <Indent title="all">
                     <Link icon="cabinet" title="Advanced Content Rewrite" url="#" className="example" />
-
                     <Indent>
                         <Link icon="cog" title="Basic Content Rewrite" url="#" className="example" />
                         <Link icon="thumb" title="Super User Group" url="#" className="example" />
@@ -118,6 +116,35 @@ var IndentDemo = React.createClass({
                         <li>Test Item One</li>
                         <li>Test Item Two</li>
                     </ul>
+                </Indent>
+                <br />
+                
+                <strong>
+                    Two Indents, Separated by a Link (example of icon on right)
+                </strong>
+                <br />
+                <Indent border={true} title="all">
+                    <Link icon="cabinet" title="Advanced Content Rewrite" url="#" />
+                    <Link icon="cog" className="text-first" title="Basic Content Rewrite" url="#" />
+                </Indent>
+                <Link icon="cabinet" title="Advanced Content Rewrite" url="#" className="detached" />
+                <Indent border={true} title="any">
+                    <Link icon="cabinet" title="Advanced Content Rewrite" url="#" />
+                    <Link icon="cog" title="Basic Content Rewrite" url="#" />
+                </Indent>
+                <br /><br />
+                
+                <strong>
+                    Two Grouped Indents
+                </strong>
+                <br />
+                <Indent border={true} title="all" className="grouped">
+                    <Link icon="cabinet" title="Advanced Content Rewrite" url="#" />
+                    <Link icon="cog" title="Basic Content Rewrite" url="#" />
+                </Indent>
+                <Indent border={true} title="any">
+                    <Link icon="cabinet" title="Advanced Content Rewrite" url="#" />
+                    <Link icon="cog" title="Basic Content Rewrite" url="#" />
                 </Indent>
                 <br />
             </div>
