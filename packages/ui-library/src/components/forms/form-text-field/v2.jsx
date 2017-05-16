@@ -432,7 +432,7 @@ var Stateless = React.createClass({
                     {this.props.showReveal && (
                         <a
                             data-id="reveal"
-                            onClick={this.props.onToggleReveal}
+                            onClick={!this.props.disabled ? this.props.onToggleReveal : false}
                             className={classnames("password-show-button", {
                                 "icon-view-hidden": !this.props.reveal,
                                 "icon-view": this.props.reveal

@@ -170,6 +170,15 @@ var FormTextFieldDemo = React.createClass({
                 </div>
                 <div className="input-row">
                     <FormTextField
+                        labelText="Reveal and disabled"
+                        maskValue={true}
+                        showReveal={true}
+                        disabled={true}
+                        className="input-width-medium"
+                    />
+                </div>
+                <div className="input-row">
+                    <FormTextField
                         labelText="onChange callback and maxLength (10 chars)"
                         onValueChange={this._handleValueChange}
                         maxLength={10}

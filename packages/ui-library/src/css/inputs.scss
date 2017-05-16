@@ -1936,6 +1936,10 @@ input[type=file] {
                 }
             }
         }
+        .password-show-button {
+            cursor: default;
+            pointer-events: none;
+        }
     }
 
     &.input-checkbox {
