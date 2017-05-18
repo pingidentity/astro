@@ -258,6 +258,7 @@
             .item-title,
             .item-sub-title {
                 white-space: normal;
+                word-break: break-word;
             }
         }
         &.no-edit {
