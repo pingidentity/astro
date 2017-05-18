@@ -115,13 +115,7 @@ exports.filterContains = exports.filterFieldContains.bind(null, null);
 exports.getFilterFunction = function (str, fieldName) {
     str = str.trim();
 
-    if (str.length <= 3) {
-        return fieldName
-            ? exports.filterFieldStartsWith.bind(null, fieldName, str)
-            : exports.filterStartsWith.bind(null, str);
-    } else {
-        return fieldName
-            ? exports.filterFieldContains.bind(null, fieldName, str)
-            : exports.filterContains.bind(null, str);
-    }
+    return fieldName
+        ? exports.filterFieldContains.bind(null, fieldName, str)
+        : exports.filterContains.bind(null, str);
 };

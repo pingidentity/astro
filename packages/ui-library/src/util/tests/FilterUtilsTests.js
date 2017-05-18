@@ -153,15 +153,7 @@ describe("FilterUtils", function () {
     describe("getFilterFunction", function () {
         var getFilterFunction = FilterUtils.getFilterFunction;
 
-        it("gets filterFieldStarts for given fieldName and filter strings <= 3 characters in length", function () {
-            var filterFn = getFilterFunction("s", "name");
-            expect(items.filter(filterFn)).toEqual([
-                { id: "6", name: "Saturday", status: "play" },
-                { id: "7", name: "Sunday", status: "play" }
-            ]);
-        });
-
-        it("gets filterFieldContains for given fieldName and filter strings > 3 characters in length", function () {
+        it("gets filterFieldContains for given fieldName and filter strings", function () {
             var filterFn = getFilterFunction("sday", "name");
             expect(items.filter(filterFn)).toEqual([
                 { id: "2", name: "Tuesday", status: "work" },
@@ -170,7 +162,7 @@ describe("FilterUtils", function () {
             ]);
         });
 
-        it("gets filterStartsWith for no fieldName and filter strings <= 3 characters in length", function () {
+        it("gets filterStartsWith for no fieldName and filter strings", function () {
             var filterFn = getFilterFunction("wor");
             expect(items.filter(filterFn)).toEqual([
                 { id: "1", name: "Monday", status: "work" },
@@ -181,7 +173,7 @@ describe("FilterUtils", function () {
             ]);
         });
 
-        it("gets filterContains for no fieldName and filter strings > 3 characters in length", function () {
+        it("gets filterContains for no fieldName and filter strings", function () {
             var filterFn = getFilterFunction("play");
             expect(items.filter(filterFn)).toEqual([
                 { id: "6", name: "Saturday", status: "play" },
@@ -192,6 +184,9 @@ describe("FilterUtils", function () {
         it("ignores leading/trailing whitespace", function () {
             var filterFn = getFilterFunction("  S ");
             expect(items.filter(filterFn)).toEqual([
+                { id: "2", name: "Tuesday", status: "work" },
+                { id: "3", name: "Wednesday", status: "work" },
+                { id: "4", name: "Thursday", status: "work" },
                 { id: "6", name: "Saturday", status: "play" },
                 { id: "7", name: "Sunday", status: "play" }
             ]);

@@ -33,7 +33,7 @@ describe("MultiDrag-Reducer", function () {
         //expect that the item gets removed from the source column
         expect(_.pluck(next.columns[0].filteredRows, "id")).toEqual([1, 2, 3]);
         //expect that the item gets added to the source column but it's empty because of the filter on the 2nd column
-        expect(_.pluck(next.columns[1].filteredRows, "id")).toEqual([]);
+        expect(_.pluck(next.columns[1].filteredRows, "id")).toEqual([0]);
         //now take away the filter
         next = Reducer(next, Actions.filterField("name", 1, ""));
         expect(_.pluck(next.columns[1].filteredRows, "id")).toEqual([0, 10, 11]);
@@ -51,14 +51,7 @@ describe("MultiDrag-Reducer", function () {
         expect(_.pluck(next.columns[1].rows, "id")).toEqual([10, 11, 1]);
     });
 
-    it("filters column with less than 3 chars", function () {
-        var next = Reducer(getInitialState(), Actions.filterField("name", 0, "jam"));
-        expect(next.columns[0].filteredRows).toEqual([
-            { id: 1, name: "James Bond", power: "super spy" }
-        ]);
-    });
-
-    it("filters column with more than 3 chars", function () {
+    it("filters column", function () {
         var next = Reducer(getInitialState(), Actions.filterField("name", 0, "james"));
         expect(next.columns[0].filteredRows).toEqual([
             { id: 0, name: "Jessie James", power: "outlaw" },
@@ -111,4 +104,3 @@ describe("MultiDrag-Reducer", function () {
         expect(next.columns[0].rows).toEqual(getInitialState().columns[0].rows.concat(newRows));
     });
 });
-
