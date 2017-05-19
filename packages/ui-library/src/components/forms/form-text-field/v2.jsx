@@ -260,28 +260,26 @@ var Stateless = React.createClass({
 
     _setFlexWidth: function () {
         if (this.props.flexWidth) {
-            setTimeout(function () {
-                var inputType = this._getInputType(),
-                    contentMeasurer = ReactDOM.findDOMNode(this.refs["content-measurer"]),
-                    content = inputType === "password" ? Array(this.props.value.length + 1).join(this.pwChar)
-                        : this.props.value,
-                    contentWidth,
-                    newWidth;
+            var inputType = this._getInputType(),
+                contentMeasurer = ReactDOM.findDOMNode(this.contentMeasurer),
+                content = inputType === "password" ? Array(this.props.value.length + 1).join(this.pwChar)
+                    : this.props.value,
+                contentWidth,
+                newWidth;
 
-                contentMeasurer.innerHTML = content;
-                contentWidth = contentMeasurer.offsetWidth;
+            contentMeasurer.innerHTML = content;
+            contentWidth = contentMeasurer.offsetWidth;
 
-                if (contentWidth > this.initialInputWidth) {
-                    newWidth = contentWidth + 10;
+            if (contentWidth > this.initialInputWidth) {
+                newWidth = contentWidth + 10;
 
-                } else if (contentWidth < this.initialInputWidth) {
-                    newWidth = this.initialInputWidth;
-                }
+            } else if (contentWidth < this.initialInputWidth) {
+                newWidth = this.initialInputWidth;
+            }
 
-                this.setState({
-                    inputWidth: newWidth
-                });
-            }.bind(this), 0);
+            this.setState({
+                inputWidth: newWidth
+            });
         }
     },
 
@@ -342,7 +340,7 @@ var Stateless = React.createClass({
 
     componentDidMount: function () {
         var input = this.refs[this.props["data-id"] + "-input"],
-            contentMeasure = this.refs["content-measurer"],
+            contentMeasure = this.contentMeasurer,
             copyProperties = [ // no short-hand properties can be used
                 "box-sizing",
                 "padding-left",
@@ -427,7 +425,11 @@ var Stateless = React.createClass({
                         style={this.state.inputWidth ? { width: this.state.inputWidth } : null}
                     />
                     {this.props.flexWidth && (
-                        <div data-id={id + "-content-measurer"} ref="content-measurer" className="content-measurer" />
+                        <div
+                            data-id={id + "-content-measurer"}
+                            ref={function (node) { this.contentMeasurer = node; }.bind(this)}
+                            className="content-measurer"
+                        />
                     )}
                     {this.props.showReveal && (
                         <a
