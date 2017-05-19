@@ -1,8 +1,10 @@
+
 var React = require("react"),
     DragDropContext = require("react-dnd").DragDropContext,
     HTML5Backend = require("react-dnd-html5-backend"),
     Draggable = require("./../../../components/rows/DragDropRow.jsx"),
     _ = require("underscore");
+
 
 /**
 * @name DragDropRowDemo
@@ -14,7 +16,9 @@ var DragDropRowDemo = React.createClass({
     getInitialState: function () {
         return {
             loading: false,
-            rows: [1, 2, 3, 4],
+            rows: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+                11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
             dropTarget: -1
         };
     },
@@ -51,6 +55,8 @@ var DragDropRowDemo = React.createClass({
             this.state.dropTarget === this.state.rows.length;
         return "row" + (this.state.dropTarget === index ? " dragTop" : "") + (dragBottom ? " dragBottom" : "");
     },
+
+
 
     render: function () {
         return (

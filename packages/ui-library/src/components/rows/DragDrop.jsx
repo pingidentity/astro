@@ -11,7 +11,8 @@ var TYPE = "DragDrop";
 var _= require("underscore");
 
 var dragSpec = {
-    beginDrag: function (props) {
+    beginDrag: function (props, monitor, component) {//eslint-disable-line
+        props.onDragStart && props.onDragStart();//eslint-disable-line
         return {
             id: props.id,
             index: props.index,
@@ -20,6 +21,7 @@ var dragSpec = {
     },
 
     endDrag: function (props, monitor, component) {//eslint-disable-line
+        props.onDragEnd && props.onDragEnd();//eslint-disable-line
         if (props.id === monitor.getItem().id) {
             props.onCancel();
         }
@@ -52,11 +54,13 @@ var isInLeftHalf = function (monitor, node) {
     return (clientOffset.x - boundingRect.left) <= ownMiddleX;
 };
 
+
 function handleDragEvent (callback, props, monitor, component) {
+    var renderedNode = ReactDOM.findDOMNode(component);
     var itemBeingDragged = monitor.getItem();
     var locationType = props.type === "column" ? isInLeftHalf : isInTopHalf;
-    var offset = locationType(monitor, ReactDOM.findDOMNode(component)) ? 0 : 1;
-    //this is awkward but backward compatible
+    var offset = locationType(monitor, renderedNode) ? 0 : 1;
+
     props[callback](props.index + offset, itemBeingDragged.index, props.column, itemBeingDragged.column);
 }
 
@@ -118,6 +122,10 @@ var dropCollect = function (connect) {
  *          A callback which is execute when the row is moved.  Must have signature function (targetIndex, ownIndex)
  * @param {DragDrop~onDrop} onDrop
  *          A callback which is execute when the row is dropped.  Must have signature function (targetIndex, ownIndex)
+ * @param {DragDrop~onDrag} onDragStart
+ *          A callback fired when dragging starts. Different from onDrag as this is tied to the dragged object itself rather than being fired when over a droppable area.
+ * @param {DragDrop~onDrag} onDragEnd
+ *          A callback fired when dragging starts. Different from onDrop as this is tied to the dragged object itself rather than being fired when over a droppable area.
  * @param {DragDrop~onCancel} onCancel
  *          A callback which is executed when the dragging is cancelled (dropped outside a droppable area
  *          or esc button pressed).
@@ -147,6 +155,9 @@ var DragDrop = React.createClass({
         onDrop: PropTypes.func.isRequired,
         onCancel: PropTypes.func.isRequired,
 
+        onDragStart: PropTypes.func,
+        onDragEnd: PropTypes.func,
+
         type: PropTypes.string,
         tagName: PropTypes.string,
         style: PropTypes.object,
@@ -158,11 +169,14 @@ var DragDrop = React.createClass({
     getDefaultProps: function () {
         return {
             disabled: false,
-            tagName: "div"
+            tagName: "div",
+            onDragStart: _.noop,
+            onDragEnd: _.noop
         };
     },
 
     render: function () {
+        //console.log(this.props)
         var connectDragSource = this.props.connectDragSource;
         var connectDropTarget = this.props.connectDropTarget;
 

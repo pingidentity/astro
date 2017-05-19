@@ -9,7 +9,8 @@ var React = require("react"),
     classnames = require("classnames"),
     update = require("re-mutable"),
     keyMirror = require("fbjs/lib/keyMirror"),
-    data = require("./MultiDragData.js");
+    data = require("./MultiDragData.js"),
+    dragScroll = require("../../../util/dragScroll");
 
 /**
 * @name MultiDragDemo
@@ -105,7 +106,7 @@ var Row = React.createClass({
  * the type for each row.
  */
 var MultiDragDemo = React.createClass({
-    
+
     componentWillMount: function () {
         this.actions = Redux.bindActionCreators(MultiDrag.Actions, this.props.store.dispatch);
         this.messageActions = Redux.bindActionCreators(Messages.Actions, this.props.store.dispatch);
@@ -122,7 +123,7 @@ var MultiDragDemo = React.createClass({
             demoType: value
         });
     },
-    
+
     _handleDisabledToggle: function () {
         this.setState({
             disabled: !this.state.disabled
@@ -297,7 +298,7 @@ var MultiDragDemo = React.createClass({
 
                 <div className="demo-options">
                     <div>
-                        
+
                         <FormLabel>Select the type of demo</FormLabel>
                         <FormRadioGroup stacked={false}
                                 groupName="stateless-stateful-choice"
@@ -307,10 +308,10 @@ var MultiDragDemo = React.createClass({
                                     { id: "STATELESS", name: "Stateless demo" },
                                     { id: "STATEFUL", name: "Stateful demo" }
                                 ]} />
-                        
+
                     </div>
                     <div>
-                    
+
                         <FormLabel>Disable Component?</FormLabel>
                         <br/>
                         <Toggle data-id="disable-toggle"
@@ -341,6 +342,8 @@ var MultiDragDemo = React.createClass({
                                 onCancel={this._handleCancelStateless}
                                 onDrop={this._handleDropStateless}
                                 onDrag={this._handleDragStateless}
+                                onDragStart={dragScroll.start}
+                                onDragEnd={dragScroll.end}
                                 contentType={contentTypeStateless}
                                 labelEmpty="No Items Available"
                                 disabled={this.state.disabled} />
@@ -364,6 +367,8 @@ var MultiDragDemo = React.createClass({
                                 onCancel={this._handleCancelStateful}
                                 onDrop={this._handleDropStateful}
                                 onDrag={this._handleDragStateful}
+                                onDragStart={dragScroll.start}
+                                onDragEnd={dragScroll.end}
                                 contentType={contentTypeStateful}
                                 labelEmpty="No Items Available"
                                 disabled={this.state.disabled} />

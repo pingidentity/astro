@@ -114,6 +114,14 @@ function convertFilteredIndexes (columns, desc) {
  *     The column index for the column scrolled.
  */
 
+ /**
+ * @callback MultiDrag~onDragStart
+ */
+
+ /**
+ * @callback MultiDrag~onDragEnd
+ */
+
 /**
  * @class MultiDrag
  * @desc A multi-column drag and drop view. This is designed to allow more than two columns though,
@@ -170,6 +178,11 @@ function convertFilteredIndexes (columns, desc) {
  * @param {MultiDrag~onScrolledToPosition} [onScrolledToBottom]
  *    Callback to be triggered when the list is scrolled to the bottom. Can be used to fetch more data.
  *
+ * @param {MultiDrag~onDragStart} [onDragStart]
+ *    Callback to be triggered when a drag event starts.
+ * @param {MultiDrag~onDragEnd} [onDragEnd]
+ *    Callback to be triggered when a drag even ends.
+ *
  * @example
  *    <MultiDrag
  *               showSearchOnAllColumns={this.props.demo.search === "all"}
@@ -215,7 +228,9 @@ var MultiDragStateless = React.createClass({
         onScrolledToTop: React.PropTypes.func,
         // optional items
         labelEmpty: React.PropTypes.string,
-        disabled: React.PropTypes.bool
+        disabled: React.PropTypes.bool,
+        onDragStart: React.PropTypes.func,
+        onDragEnd: React.PropTypes.func
     },
 
     getDefaultProps: function () {
@@ -323,6 +338,8 @@ var MultiDragStateless = React.createClass({
                             onScrolledToTop={this.props.onScrolledToTop}
                             onDrag={this._onDrag}
                             onDrop={this._onDrop}
+                            onDragStart={this.props.onDragStart}
+                            onDragEnd={this.props.onDragEnd}
                             onCancel={this._onCancel}
                             ghostRowAt={preview && preview.column === index ? preview.index : null}
                             className={this.props.classNames[index]}

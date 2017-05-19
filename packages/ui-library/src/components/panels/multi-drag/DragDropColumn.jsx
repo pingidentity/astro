@@ -47,6 +47,12 @@ var React = require("re-react"),
  *    Callback to be triggered when the list is scrolled to the top.
  * @param {MultiDrag~onScrolledToPosition} [onScrolledToBottom]
  *    Callback to be triggered when the list is scrolled to the bottom. Can be used to fetch more data.
+ *
+ * @param {MultiDrag~onDragStart} [onDragStart]
+ *    Callback to be triggered when a drag event starts.
+ * @param {MultiDrag~onDragEnd} [onDragEnd]
+ *    Callback to be triggered when a drag even ends.
+ *
  */
 module.exports = React.createClass({
     propTypes: {
@@ -69,7 +75,9 @@ module.exports = React.createClass({
         onDrop: React.PropTypes.func.isRequired,
         onCancel: React.PropTypes.func.isRequired,
         onScrolledToBottom: React.PropTypes.func,
-        onScrolledToTop: React.PropTypes.func
+        onScrolledToTop: React.PropTypes.func,
+        onDragStart: React.PropTypes.func,
+        onDragEnd: React.PropTypes.func
     },
 
     getDefaultProps: function () {
@@ -78,7 +86,9 @@ module.exports = React.createClass({
             showSearch: false,
             onScrolledToBottom: _.noop,
             onScrolledToTop: _.noop,
-            labelEmpty: "No Items Added"
+            labelEmpty: "No Items Added",
+            onDragStart: _.noop,
+            onDragEnd: _.noop
         };
     },
 
@@ -151,6 +161,8 @@ module.exports = React.createClass({
                    column={this.props.index}
                    onDrag={this.props.onDrag}
                    onDrop={this.props.onDrop}
+                   onDragStart={this.props.onDragStart}
+                   onDragEnd={this.props.onDragEnd}
                    onCancel={this.props.onCancel}>
             {
                 inner
