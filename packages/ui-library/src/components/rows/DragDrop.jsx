@@ -176,10 +176,8 @@ var DragDrop = React.createClass({
     },
 
     render: function () {
-        //console.log(this.props)
         var connectDragSource = this.props.connectDragSource;
         var connectDropTarget = this.props.connectDropTarget;
-
         var opacity = this.props.isDragging ? 0.2 : 1;
 
         var rowProps = {
@@ -188,10 +186,12 @@ var DragDrop = React.createClass({
             style: _.clone(_.extend(this.props.style, { opacity: opacity }))
         };
 
-        var row = (
-        React.createElement(this.props.tagName, rowProps, this.props.children));
+        var row = (React.createElement(this.props.tagName, rowProps, this.props.children));
+
         //IE must have a drop target even if dragging is disabled.  Enabling after the first render has no effect.
-        return this.props.removeDraggableAttribute ? connectDropTarget(row) : connectDragSource(connectDropTarget(row));
+        return this.props.removeDraggableAttribute
+            ? connectDropTarget(row)
+            : connectDragSource(connectDropTarget(row));
     }
 });
 

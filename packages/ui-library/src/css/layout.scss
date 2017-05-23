@@ -862,9 +862,11 @@ $layout-nav-width-offset: 15px;
     @include flexbox;
 
     .content-column {
-        @include flexbox-grow(1);
+        flex: 1;
         box-sizing: border-box;
         margin: 0 40px 0 0;
+
+        @include flexbox-grow(1);
 
         &:last-of-type {
             margin: 0;

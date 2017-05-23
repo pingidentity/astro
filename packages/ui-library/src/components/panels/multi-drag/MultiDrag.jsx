@@ -34,9 +34,11 @@ var React = require("re-react"),
  *    The indexes descriptor for the drag with the indexes converted.
  */
 function convertFilteredIndexes (columns, desc) {
+
     //find the index in the unfiltered columns
     var from = columns[desc.from.column].rows.indexOf(
-        columns[desc.from.column].filteredRows[desc.from.index]);
+        columns[desc.from.column].filteredRows[desc.from.index]
+    );
 
     var to = desc.to.index >= columns[desc.to.column].filteredRows.length
         //if an item is being dragged to the end of the list, append it to the end of the unfiltered list
@@ -185,17 +187,18 @@ function convertFilteredIndexes (columns, desc) {
  *
  * @example
  *    <MultiDrag
- *               showSearchOnAllColumns={this.props.demo.search === "all"}
- *              showSearch={this.props.demo.search === "first"}
- *              onSearch={this.onSearch}
- *              columns={this.props.drag.columns}
- *              previewMove={this.props.drag.placeholder}
- *              onScrolledToTop={this.onScrolledToTop}
- *              onScrolledToBottom={this.onScrolledToBottom}
- *              onCancel={this.onCancel}
- *              onDrop={this.onDrop}
- *              onDrag={this.onDrag}
- *              contentType={contentType} />
+ *        showSearchOnAllColumns={this.props.demo.search === "all"}
+ *        showSearch={this.props.demo.search === "first"}
+ *        onSearch={this.onSearch}
+ *        columns={this.props.drag.columns}
+ *        previewMove={this.props.drag.placeholder}
+ *        onScrolledToTop={this.onScrolledToTop}
+ *        onScrolledToBottom={this.onScrolledToBottom}
+ *        onCancel={this.onCancel}
+ *        onDrop={this.onDrop}
+ *        onDrag={this.onDrag}
+ *        contentType={contentType}
+ *    />
  */
 var MultiDragStateless = React.createClass({
     displayName: "MultiDragStateless",
@@ -272,9 +275,9 @@ var MultiDragStateless = React.createClass({
             this._lastDrag &&
             this._lastDrag.from.column === this._lastDrag.to.column &&
             (
-                this._lastDrag.from.index - this._lastDrag.to.index === -1 ||
                 this._lastDrag.from.index - this._lastDrag.to.index === 0
-            ));
+            )
+        );
     },
 
     /*
@@ -301,6 +304,14 @@ var MultiDragStateless = React.createClass({
             return;
         }
 
+
+        // to index returned from onDrag event is always +1 off when dragging down
+        // includes dragged item in "to" index?
+        // removing the drop preview (ghostRowAt) has no effect on this issue
+        if (desc.from.index < desc.to.index ) {
+            desc.to.index -= 1;
+        }
+
         this._lastDrag = desc;
 
         if (this._isValidDrag()) {
@@ -320,17 +331,28 @@ var MultiDragStateless = React.createClass({
     render: function () {
         var preview = this.props.previewMove;
         var className = classnames(
-                            "input-row row-selector",
-                            this.props.className, {
-                                disabled: this.props.disabled
-                            });
+            "input-row row-selector",
+            this.props.className, {
+                disabled: this.props.disabled
+            }
+        );
 
         return (
             <div data-id={this.props["data-id"]} className={className}>
             {
                 this.props.columns.map(function (column, index) {
+
+                    var ghostRowAt = preview && preview.column === index ? preview.index : null;
+
+                    if (this._lastDrag && this._lastDrag.from.index < this._lastDrag.to.index) {
+                        ghostRowAt += 1;
+                    }
+
                     return (
-                        <DragDropColumn {...column} key={index} index={index}
+                        <DragDropColumn
+                            {...column}
+                            key={index}
+                            index={index}
                             rows={column.filteredRows || column.rows}
                             showSearch={(this.props.showSearch && index === 0) || this.props.showSearchOnAllColumns}
                             onSearch={this.props.onSearch}
@@ -341,14 +363,17 @@ var MultiDragStateless = React.createClass({
                             onDragStart={this.props.onDragStart}
                             onDragEnd={this.props.onDragEnd}
                             onCancel={this._onCancel}
-                            ghostRowAt={preview && preview.column === index ? preview.index : null}
+                            ghostRowAt={ghostRowAt}
                             className={this.props.classNames[index]}
                             contentType={this.props.contentType}
                             data-id={"DragDropColumn-" + index}
-                            labelEmpty={this.props.labelEmpty} />);
+                            labelEmpty={this.props.labelEmpty}
+                        />
+                    );
                 }.bind(this))
             }
-            </div>);
+            </div>
+        );
     }
 });
 
@@ -366,15 +391,18 @@ var MultiDragStateful = ReactVanilla.createClass({
     },
 
     _handleSearch: function (index, value) {
-        this.setState(search(this.state, {
-            column: index,
-            filter: value,
-            fieldName: this.props.filterFieldNames[index]
-        }), function () {
-            if (this.props.onSearch) {
-                this.props.onSearch(index, value);
+        this.setState(
+            search(this.state, {
+                column: index,
+                filter: value,
+                fieldName: this.props.filterFieldNames[index]
+            }),
+            function () {
+                if (this.props.onSearch) {
+                    this.props.onSearch(index, value);
+                }
             }
-        });
+        );
     },
 
     _handleCancel: function () {
@@ -389,13 +417,12 @@ var MultiDragStateful = ReactVanilla.createClass({
 
     _handleDrop: function (desc) {
         var convertedDesc = convertFilteredIndexes(this.state.columns, desc);
-
         var next = move(this.state, {
             from: { column: desc.from.column, index: convertedDesc.from },
             to: { column: desc.to.column, index: convertedDesc.to }
         });
 
-        //reapply filters after a move so moved rows filtered as well
+        // reapply filters after a move so moved rows filtered as well
         next = reapplyFilters(next);
         this.setState(next, function () {
             if (this.props.onDrop) {
@@ -415,7 +442,7 @@ var MultiDragStateful = ReactVanilla.createClass({
     },
 
     componentWillMount: function () {
-        //apply any initial filters
+        // apply any initial filters
         var next = _.clone(this.state);
         next = reapplyFilters(next);
         this.setState(next);
@@ -423,7 +450,7 @@ var MultiDragStateful = ReactVanilla.createClass({
 
     componentWillReceiveProps: function (nextProps) {
         if (!_.isEqual(nextProps.columns, this.props.columns)) {
-            //update columns and reapply filters
+            // update columns and reapply filters
             var next = _.clone(this.state);
             next.columns = nextProps.columns;
             next = reapplyFilters(next);

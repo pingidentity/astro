@@ -101,7 +101,7 @@ exports.filterContains = exports.filterFieldContains.bind(null, null);
  * @alias module:util/FilterUtils.getFilterFunction
  * @desc Returns the appropriate filter function based on the search string's length
  *    (leading/trailing whitespace ignored) and whether a field name to search was given.
- *    Search strings <= 3 characters in length will use a "startsWith" search, otherwise a "contains" search is done.
+ *    Search returns true if the filter string is contained within the string being searched.
  *    If no field name is given to search will return filters that search all string-able properties of an object.
  *
  * @param {object} str

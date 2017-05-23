@@ -3,6 +3,7 @@ var React = require("react"),
     deepClone = require("clone"),
     FormLabel = require("../../../components/forms/FormLabel.jsx"),
     FormRadioGroup = require("../../../components/forms/FormRadioGroup.jsx"),
+    Layout = require("../../../components/general/ColumnLayout.jsx"),
     MultiDrag = require("../../../components/panels/multi-drag"),
     Messages = require("../../../components/general/messages/"),
     Toggle = require("../../../components/forms/form-toggle"),
@@ -92,7 +93,7 @@ var Row = React.createClass({
                 }
                 { hasCount &&
                     <span className="item-count count" data-id="row-count">
-                        2
+                        {Math.round(Math.random() * 10)}
                     </span>
                 }
                 <span className="name" data-id="row-name">{this.props.name}</span>
@@ -240,113 +241,113 @@ var MultiDragDemo = React.createClass({
         this.messageActions.addMessage(msg);
     },
 
-    renderOptions: function () {
-        return (
-            <div className="demo-options">
-                <div>
-                    <FormLabel value="Search options" />
-                    <FormRadioGroup
-                        onValueChange={this.demoActions.setSearch}
-                        selected={this.props.demo.search}
-                        groupName="search-opts"
-                        stacked={false}
-                        items={[
-                            { id: "none", name: "none" },
-                            { id: "first", name: "first column only" },
-                            { id: "all", name: "all" }
-                        ]} />
-                </div>
-                <div>
-                    <FormLabel value="row options" />
-                    <FormRadioGroup
-                        onValueChange={this.demoActions.setStyle}
-                        selected={this.props.demo.style}
-                        groupName="row-opts"
-                        stacked={false}
-                        items={[
-                            { id: "none", name: "none" },
-                            { id: "image", name: "with image" },
-                            { id: "icon", name: "with icon" },
-                            { id: "count", name: "with count" }
-                        ]} />
-                </div>
-            </div>);
-    },
-
     getInitialState: function () {
         return {
             demoType: "STATEFUL",
-            columns: data.columns, //used for stateful (stateless=false) demo
+            columns: data.columns, // used for stateful (stateless=false) demo
             disabled: false
         };
     },
 
     render: function () {
         var contentTypeStateless = (
-            <Row onRemove={this._handleRemoveStateless}
-                    onAdd={this._handleAddStateless}
-                    style={this.props.demo.style} />);
-
+            <Row
+                onRemove={this._handleRemoveStateless}
+                onAdd={this._handleAddStateless}
+                style={this.props.demo.style}
+            />
+        );
         var contentTypeStateful = (
-            <Row onRemove={this._handleRemoveStateful}
-                    onAdd={this._handleAddStateful}
-                    style={this.props.demo.style} />);
+            <Row
+                onRemove={this._handleRemoveStateful}
+                onAdd={this._handleAddStateful}
+                style={this.props.demo.style}
+            />
+        );
 
         return (
             <div className="multidrag-demo" data-id="multidragDemoDiv">
                 <Messages messages={this.props.messages.messages} onRemoveMessage={this.messageActions.removeAt} />
 
-                <div className="demo-options">
-                    <div>
-
+                <Layout.Row className="columns-nopad">
+                    <Layout.Column>
                         <FormLabel>Select the type of demo</FormLabel>
-                        <FormRadioGroup stacked={false}
-                                groupName="stateless-stateful-choice"
-                                selected={this.state.demoType}
-                                onValueChange={this._handleDemoTypeValueChange}
-                                items={[
-                                    { id: "STATELESS", name: "Stateless demo" },
-                                    { id: "STATEFUL", name: "Stateful demo" }
-                                ]} />
-
-                    </div>
-                    <div>
-
+                        <FormRadioGroup
+                            stacked={false}
+                            groupName="stateless-stateful-choice"
+                            selected={this.state.demoType}
+                            onValueChange={this._handleDemoTypeValueChange}
+                            items={[
+                                { id: "STATELESS", name: "Stateless demo" },
+                                { id: "STATEFUL", name: "Stateful demo" }
+                            ]}
+                        />
+                    </Layout.Column>
+                    <Layout.Column>
                         <FormLabel>Disable Component?</FormLabel>
                         <br/>
-                        <Toggle data-id="disable-toggle"
-                                className="row-status-toggle"
-                                stateless={true}
-                                toggled={this.state.disabled}
-                                onToggle={this._handleDisabledToggle} />
-
-                    </div>
-                </div>
-
-                <br />
-
-                {this.renderOptions()}
+                        <Toggle
+                            data-id="disable-toggle"
+                            className="row-status-toggle"
+                            stateless={true}
+                            toggled={this.state.disabled}
+                            onToggle={this._handleDisabledToggle}
+                        />
+                    </Layout.Column>
+                </Layout.Row>
+                <Layout.Row className="columns-nopad">
+                    <Layout.Column>
+                        <FormLabel value="Search options" />
+                        <FormRadioGroup
+                            onValueChange={this.demoActions.setSearch}
+                            selected={this.props.demo.search}
+                            groupName="search-opts"
+                            stacked={false}
+                            items={[
+                                { id: "none", name: "none" },
+                                { id: "first", name: "first column only" },
+                                { id: "all", name: "all" }
+                            ]}
+                        />
+                    </Layout.Column>
+                    <Layout.Column>
+                        <FormLabel value="row options" />
+                        <FormRadioGroup
+                            onValueChange={this.demoActions.setStyle}
+                            selected={this.props.demo.style}
+                            groupName="row-opts"
+                            stacked={false}
+                            items={[
+                                { id: "none", name: "none" },
+                                { id: "image", name: "with image" },
+                                { id: "icon", name: "with icon" },
+                                { id: "count", name: "with count" }
+                            ]}
+                        />
+                    </Layout.Column>
+                </Layout.Row>
 
                 {this.state.demoType === "STATELESS" &&
                     <div>
                         <h2>Stateless (stateless=true), Empty Label Set</h2>
                         <MultiDrag
-                                stateless={true}
-                                showSearchOnAllColumns={this.props.demo.search === "all"}
-                                showSearch={this.props.demo.search === "first"}
-                                onSearch={this._handleSearchStateless}
-                                columns={this.props.drag.columns}
-                                previewMove={this.props.drag.placeholder}
-                                onScrolledToTop={this._handleScrolledToTop}
-                                onScrolledToBottom={this._handleScrolledToBottomStateless}
-                                onCancel={this._handleCancelStateless}
-                                onDrop={this._handleDropStateless}
-                                onDrag={this._handleDragStateless}
-                                onDragStart={dragScroll.start}
-                                onDragEnd={dragScroll.end}
-                                contentType={contentTypeStateless}
-                                labelEmpty="No Items Available"
-                                disabled={this.state.disabled} />
+                            stateless={true}
+                            showSearchOnAllColumns={this.props.demo.search === "all"}
+                            showSearch={this.props.demo.search === "first"}
+                            onSearch={this._handleSearchStateless}
+                            columns={this.props.drag.columns}
+                            previewMove={this.props.drag.placeholder}
+                            onScrolledToTop={this._handleScrolledToTop}
+                            onScrolledToBottom={this._handleScrolledToBottomStateless}
+                            onCancel={this._handleCancelStateless}
+                            onDrop={this._handleDropStateless}
+                            onDrag={this._handleDragStateless}
+                            onDragStart={dragScroll.start}
+                            onDragEnd={dragScroll.end}
+                            contentType={contentTypeStateless}
+                            labelEmpty="No Items Available"
+                            disabled={this.state.disabled}
+                        />
                     </div>
                 }
                 {
@@ -357,21 +358,23 @@ var MultiDragDemo = React.createClass({
                 {this.state.demoType === "STATEFUL" &&
                     <div>
                         <h2>Stateful (stateless=false)</h2>
-                        <MultiDrag ref="multi-drag-demo-stateful"
-                                showSearchOnAllColumns={this.props.demo.search === "all"}
-                                showSearch={this.props.demo.search === "first"}
-                                onSearch={this._handleSearchStateful}
-                                columns={this.state.columns}
-                                onScrolledToTop={this._handleScrolledToTop}
-                                onScrolledToBottom={this._handleScrollToBottomStateful}
-                                onCancel={this._handleCancelStateful}
-                                onDrop={this._handleDropStateful}
-                                onDrag={this._handleDragStateful}
-                                onDragStart={dragScroll.start}
-                                onDragEnd={dragScroll.end}
-                                contentType={contentTypeStateful}
-                                labelEmpty="No Items Available"
-                                disabled={this.state.disabled} />
+                        <MultiDrag
+                            ref="multi-drag-demo-stateful"
+                            showSearchOnAllColumns={this.props.demo.search === "all"}
+                            showSearch={this.props.demo.search === "first"}
+                            onSearch={this._handleSearchStateful}
+                            columns={this.state.columns}
+                            onScrolledToTop={this._handleScrolledToTop}
+                            onScrolledToBottom={this._handleScrollToBottomStateful}
+                            onCancel={this._handleCancelStateful}
+                            onDrop={this._handleDropStateful}
+                            onDrag={this._handleDragStateful}
+                            onDragStart={dragScroll.start}
+                            onDragEnd={dragScroll.end}
+                            contentType={contentTypeStateful}
+                            labelEmpty="No Items Available"
+                            disabled={this.state.disabled}
+                        />
                     </div>
                 }
           </div>);
