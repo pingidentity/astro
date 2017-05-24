@@ -1703,13 +1703,11 @@ input[type=file] {
                 @include errorDisplayCss;
             }
         }
-        &.required {
-            a.password-show-button {
-                right: 35px;
-            }
-        }
         .integer-controls {
             right: 33px;
+        }
+        a.password-show-button {
+            right: 35px;
         }
     }
     &.input-textarea {
