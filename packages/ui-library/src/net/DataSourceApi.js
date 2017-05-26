@@ -76,7 +76,7 @@ var verifyCache = function (options) {
 };
 
 /**
-* @callback module:net/DataSourceApi.processRequestCallback
+* @typedef module:net/DataSourceApi.processRequestCallbackObject
 * @private
 *
 * @param {string} error
@@ -87,6 +87,14 @@ var verifyCache = function (options) {
 *    The request data.
 * @param {boolean} fromCache
 *    Whether or not the request is from the Cache.
+*/
+
+/**
+* @callback module:net/DataSourceApi.processRequestCallback
+* @private
+*
+* @param {module:net/DataSourceApi.processRequestCallbackObject} object
+*    An object of callback values.
 */
 
 /**
