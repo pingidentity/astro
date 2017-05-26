@@ -1,7 +1,7 @@
 window.__DEV__ = true;
 
 jest.dontMock("../v1.jsx");
-jest.dontMock("../FormSearchBox.jsx");
+jest.dontMock("../../FormSearchBox.jsx");
 jest.dontMock("../../form-text-field/index.js");
 jest.dontMock("../../form-text-field/v2.jsx");
 jest.dontMock("../../FormCheckbox.jsx");

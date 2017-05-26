@@ -4,6 +4,7 @@ jest.dontMock("underscore");
 jest.dontMock("../FormCheckboxList.jsx");
 jest.dontMock("../FormLabel.jsx");
 jest.dontMock("../FormError.jsx");
+jest.dontMock("../FormSearchBox.jsx");
 jest.dontMock("../form-text-field/index.js");
 jest.dontMock("../form-text-field/v2.jsx");
 jest.dontMock("../form-toggle/index.js");
@@ -184,7 +185,7 @@ describe("FormCheckboxList", function () {
         var component = getComponent();
 
         //enter something in query field
-        var searchInput = TestUtils.findRenderedDOMNodeWithDataId(component, "dataobject-search-input");
+        var searchInput = TestUtils.findRenderedDOMNodeWithDataId(component, "searchBox-input");
 
         ReactTestUtils.Simulate.change(searchInput, {
             target: {
@@ -626,7 +627,7 @@ describe("FormCheckboxList", function () {
         expect(unselectLabelCallback).not.toBeCalled();
 
         var checkboxContainer = TestUtils.findRenderedDOMNodeWithDataId(component, "dataobjects");
-        var searchInput = TestUtils.findRenderedDOMNodeWithDataId(component, "dataobject-search-input");
+        var searchInput = TestUtils.findRenderedDOMNodeWithDataId(component, "searchBox-input");
         var hideUncheckedToggle = TestUtils.findRenderedDOMNodeWithDataId(component, "hide-unchecked");
 
         ReactTestUtils.Simulate.click(hideUncheckedToggle);
@@ -670,7 +671,7 @@ describe("FormCheckboxList", function () {
         expect(component.props.onGetDeselectAllLabel).not.toBeCalled();
 
         var checkboxContainer = TestUtils.findRenderedDOMNodeWithDataId(component, "dataobjects");
-        var searchInput = TestUtils.findRenderedDOMNodeWithDataId(component, "dataobject-search-input");
+        var searchInput = TestUtils.findRenderedDOMNodeWithDataId(component, "searchBox-input");
         var hideUncheckedToggle = TestUtils.findRenderedDOMNodeWithDataId(component, "hide-unchecked");
 
         ReactTestUtils.Simulate.click(hideUncheckedToggle);
@@ -723,6 +724,29 @@ describe("FormCheckboxList", function () {
         
         expect(stateless).toBeTruthy();
         expect(stateful).toBeFalsy();
+    });
+
+    it("_handleSearchUndo fires onQueryChange callback", function () {
+        var component = getComponent();
+
+        component.refs.FormCheckboxListStateless._handleSearchUndo();
+        expect(component.props.onQueryChange).toBeCalled();
+    });
+
+    it("_searchOnType fires onQueryChange callback", function () {
+        var component = getComponent();
+
+        component.refs.FormCheckboxListStateless._searchOnType();
+        expect(component.props.onQueryChange).toBeCalled();
+    });
+
+    it("_handleQueryChange updates queryString state", function () {
+        var component = getComponent({ stateless: false }),
+            queryString = "test";
+
+        expect(component.refs.FormCheckboxListStateful.state.queryString).toBe("");
+        component.refs.FormCheckboxListStateful._handleQueryChange(queryString);
+        expect(component.refs.FormCheckboxListStateful.state.queryString).toBe(queryString);
     });
 
     //TODO: remove when controlled no longer supported

@@ -7,7 +7,7 @@ var ListViewPaginatedDemoPage = Object.create(HomePage, {
      */
     getSearchField: {
         get: function () {
-            return this.getElement("//input[@data-id='form-text-field-input']");
+            return this.getElement("//input[@data-id='searchBox-input']");
         }
     },
 

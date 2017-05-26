@@ -215,6 +215,13 @@ module.exports = [
                 pathToDoc: "components/forms/TimeZone.jsx",
                 pathToSource: "components_forms_TimeZone.jsx.html",
                 pathToDemoSource: "demo_components_forms_TimeZoneDemo.jsx.html"
+            },
+            {
+                label: "Search Box",
+                demo: require("../components/forms/FormSearchBoxDemo.jsx"),
+                pathToDoc: "components/forms/FormSearchBox.jsx",
+                pathToSource: "components_forms_FormSearchBox.jsx.html",
+                pathToDemoSource: "demo_components_forms_FormSearchBoxDemo.jsx.html"
             }
         ]
     },

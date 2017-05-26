@@ -1,11 +1,11 @@
 var React = require("react"),
     classnames = require("classnames"),
-    FormTextField = require("./form-text-field"),
     Toggle = require("./form-toggle"),
     If = require("../general/If.jsx"),
     _ = require("underscore"),
     Utils = require("../../util/Utils.js"),
-    FormLabel = require("./FormLabel.jsx");
+    FormLabel = require("./FormLabel.jsx"),
+    FormSearchBox = require("./FormSearchBox.jsx");
 
 var _includesIgnoreCase = function (propName, substr) {
     return function (item) {
@@ -303,11 +303,11 @@ var Stateless = React.createClass({
     /**
      * @desc Search when the value in the search box changes.
      *
-     * @param {object} e the event object
+     * @param {string} value the query string
      * @private
      */
-    _searchOnType: function (e) {
-        this.props.onQueryChange(e.target.value);
+    _searchOnType: function (value) {
+        this.props.onQueryChange(value);
     },
 
     /**
@@ -411,18 +411,15 @@ var Stateless = React.createClass({
             : onGetSelectAllLabel(visibleItems.length);
 
         var id = this.props.id || this.props["data-id"],
-            className = classnames("checkbox-list", this.props.className),
-            showSearchUndo = this.props.queryString !== "";
+            className = classnames("checkbox-list", this.props.className);
 
         return (
             <div className={className} data-id={id}>
                 <div className="filters">
-                    <FormTextField data-id="dataobject-search"
-                            className="search"
-                            showUndo={showSearchUndo}
-                            onUndo={this._handleSearchUndo}
-                            onChange={this._searchOnType}
-                            value={this.props.queryString}
+                    <FormSearchBox data-id="dataobject-search"
+                            onClear={this._handleSearchUndo}
+                            onValueChange={this._searchOnType}
+                            queryString={this.props.queryString}
                             placeholder={this.props.labelSearchPlaceholder}/>
 
                     <div className="actions">

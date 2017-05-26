@@ -1056,6 +1056,11 @@ a {
 .search-bar {
     $animation-timing: ease-out 0.2s;
 
+    .search-box {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
     .filter-by {
         font-size: 14px;
         margin: 12px 7px 0 40px;

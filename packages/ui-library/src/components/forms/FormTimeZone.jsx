@@ -7,6 +7,7 @@ var React = require("react"),
     EventUtils = require("../../util/EventUtils.js"),
     FormError = require("./FormError.jsx"),
     FormLabel = require("./FormLabel.jsx"),
+    FormSearchBox = require("./FormSearchBox.jsx"),
     KeyCodes = require("../../util/KeyboardUtils.js").KeyCodes,
     Utils = require("../../util/Utils.js"),
     _ = require("underscore");
@@ -243,8 +244,8 @@ var TimeZoneStateless = React.createClass({
         e.stopPropagation();
     },
 
-    _onSearch: function (e) {
-        this.props.onSearch(e.target.value, this.props.selectedIndex);
+    _onSearch: function (value) {
+        this.props.onSearch(value, this.props.selectedIndex);
     },
 
     _renderCountries: function () {
@@ -505,19 +506,13 @@ var TimeZoneStateless = React.createClass({
                 {this.props.open && (
                     <div className="tooltip-menu" data-id="tooltip-menu">
                         <div className="tooltip-menu-search">
-                            <input
-                                data-id={this.props["data-id"] + "-search-input"}
-                                type="text"
-                                value={this.props.searchString}
-                                onChange={this._onSearch}
+                            <FormSearchBox data-id={this.props["data-id"] + "-search-input"}
+                                queryString={this.props.searchString}
+                                onValueChange={this._onSearch}
                                 onKeyDown={this._onKeyDown}
+                                onClear={this._clearSearchString}
                                 ref="searchString"
                             />
-                            <a
-                                className="tooltip-menu-search-clear"
-                                data-id={this.props["data-id"] + "-search-clear"}
-                                onClick={this._clearSearchString}>
-                            </a>
                         </div>
                         {this.props.filterByCountry ? this._renderZones() : this._renderCountries()}
                     </div>

@@ -1,6 +1,6 @@
 var React = require("re-react"),
     ReactDOM = require("react-dom"),
-    FormTextField = require("../../forms/form-text-field"),
+    FormSearchBox = require("../../forms/FormSearchBox.jsx"),
     FormLabel = require("../../forms/FormLabel.jsx"),
     DDRow = require("../../rows/DragDropRow.jsx"),
     classnames = require("classnames"),
@@ -101,13 +101,6 @@ module.exports = React.createClass({
     },
 
     /*
-     * Clear search input
-     */
-    _clear: function () {
-        this.props.onSearch(this.props.index, "");
-    },
-
-    /*
      * Handler for scrolls.  This is useful for implementing lazy loading of rows
      */
     _handleScroll: function () {
@@ -128,19 +121,13 @@ module.exports = React.createClass({
         if (!this.props.showSearch) {
             return null;
         }
-        var showClear = this.props.filter !== "";
 
         return (
             <div className="input-row" data-id="search">
-                <FormTextField
-                    controlled={true}
+                <FormSearchBox
                     onValueChange={this._handleSearch}
-                    value={this.props.filter}
-                    className="search input-search">
-                    { showClear &&
-                        <a className="clear-search" data-id="clear" onClick={this._clear} />
-                    }
-                </FormTextField>
+                    queryString={this.props.filter}
+                    className="input-search"/>
             </div>);
     },
 

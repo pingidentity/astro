@@ -2,7 +2,7 @@ var React = require("re-react"),
     CollapsibleLink = require("../../components/general/CollapsibleLink.jsx"),
     ExpandableRow = require("../../components/rows/expandable-row"),
     FormCheckbox = require("../../components/forms/FormCheckbox.jsx"),
-    FormTextField = require("../../components/forms/form-text-field"),
+    FormSearchBox = require("../../components/forms/FormSearchBox.jsx"),
     InfiniteScroll = require("../../components/list/InfiniteScroll.jsx"),
     ModalButton = require("../../components/general/ModalButton.jsx"),
     RowAccessories = require("../../components/rows/expandable-row/Accessories.jsx"),
@@ -102,10 +102,10 @@ module.exports = React.createClass({
                 <div title="First Page">
                     <div className={classnames("search-bar", { expanded: this.props.advancedSearch })}>
                         <div>
-                            <FormTextField controlled={true}
+                            <FormSearchBox
+                                className="search-box"
                                 onValueChange={this._handleTextChange}
-                                value={this.props.filters.text}
-                                className="search" />
+                                queryString={this.props.filters.text} />
                             <CollapsibleLink data-id="narrow-by"
                                 title="Narrow by"
                                 onToggle={this.props.onSearchAdvancedToggle}

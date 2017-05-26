@@ -70,17 +70,6 @@ describe("DragDropColumn", function () {
         expect(TestUtils.findRenderedDOMNodeWithDataId(component, "search")).toBeFalsy();
     });
 
-    it("Should clear query string", function () {
-        var wrapper = getWrappedComponent({ showSearch: true }),
-            component = wrapper.refs.target;
-
-        component._handleSearch("test");
-        expect(component.props.onSearch).toBeCalledWith(0, "test");
-
-        component._clear();
-        expect(component.props.onSearch).toBeCalledWith(0, "");
-    });
-
     it("Renders drop target when no rows", function () {
         var wrapper = getWrappedComponent({ rows: [] });
         var component = wrapper.refs.target;

@@ -134,6 +134,7 @@ label {
             .input-container {
                 input {
                     padding-left: 40px;
+                    padding-right: 30px;
                 }
                 &:before {
                     font-family: $icon-font;
@@ -152,9 +153,9 @@ label {
                 position: absolute;
                 font-family: $icon-font;
                 text-transform: none;
-                font-size: 1px;
-                color: transparent;
-                top: 12px;
+                font-size: inherit;
+                color: inherit;
+                top: 14px;
                 right: 10px;
 
                 &:before {

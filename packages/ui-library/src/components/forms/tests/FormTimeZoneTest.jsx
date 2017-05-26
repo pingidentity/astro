@@ -2,6 +2,9 @@
 jest.dontMock("../FormTimeZone.jsx");
 jest.dontMock("../FormError.jsx");
 jest.dontMock("../FormLabel.jsx");
+jest.dontMock("../FormSearchBox.jsx");
+jest.dontMock("../form-text-field/index.js");
+jest.dontMock("../form-text-field/v2.jsx");
 jest.dontMock("../../general/CollapsibleLink.jsx");
 jest.dontMock("../../tooltips/HelpHint.jsx");
 jest.dontMock("../../../util/KeyboardUtils.js");
@@ -64,7 +67,7 @@ describe("FormTimeZone", function () {
     }
 
     function getSearchInput (component) {
-        return TestUtils.findRenderedDOMNodeWithDataId(component, componentId + "-search-input");
+        return TestUtils.findRenderedDOMNodeWithDataId(component, "searchBox-input");
     }
 
     function getRows (component) {
@@ -167,7 +170,7 @@ describe("FormTimeZone", function () {
                 searchString: searchString
             }),
             searchInput = getSearchInput(component),
-            clearSearch = TestUtils.findRenderedDOMNodeWithDataId(component, componentId + "-search-clear");
+            clearSearch = TestUtils.findRenderedDOMNodeWithClass(component, "clear-search");
 
         expect(searchInput.value).toEqual(searchString);
         ReactTestUtils.Simulate.click(clearSearch);

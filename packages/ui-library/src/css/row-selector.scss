@@ -17,17 +17,11 @@
         text-transform: uppercase;
     }
     // needed for specifity to override inputs
-    label {
-        &.input-search {
+    label.search,
+    .input-search {
+        width: 100%;
+        input[type=text] {
             width: 100%;
-            input[type=text] {
-                width: 100%;
-            }
-            a.clear-search {
-                font-size: 10px;
-                color: $color-active-blue;
-                top: 14px;
-            }
         }
     }
     .rows-available,

@@ -1,7 +1,7 @@
 window.__DEV__ = true;
 
 jest.dontMock("../v2.jsx");
-jest.dontMock("../FormSearchBox.jsx");
+jest.dontMock("../../FormSearchBox.jsx");
 jest.dontMock("../v2-constants.js");
 jest.dontMock("../v2-reducer.js");
 jest.dontMock("../v2-stateless.jsx");

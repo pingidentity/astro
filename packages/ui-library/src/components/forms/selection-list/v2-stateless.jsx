@@ -4,7 +4,7 @@ var React = require("re-react"),
     If = require("../../general/If.jsx"),
     FormRadioGroup = require("../FormRadioGroup.jsx"),
     FormCheckbox = require("../FormCheckbox.jsx"),
-    FormSearchBox = require("./FormSearchBox.jsx"),
+    FormSearchBox = require("../FormSearchBox.jsx"),
     Constants = require("./v2-constants");
 
 /**
