@@ -70,6 +70,10 @@
                 right: 0;
             }
         }
+        .expanded-content-scroll {
+            max-height: 700px;
+            overflow-y: auto;
+        }
         .item-title {
             font-size: 17px;
             line-height: 1em;
