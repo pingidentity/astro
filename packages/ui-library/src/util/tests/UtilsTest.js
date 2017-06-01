@@ -70,7 +70,7 @@ describe("Utils", function () {
         });
         it("returns false if not production build", function () {
             process.env.NODE_ENV = "";
-            
+
             expect(process.env.NODE_ENV).not.toBe("production");
             expect(Utils.isProduction()).toBe(false);
         });
@@ -277,6 +277,45 @@ describe("Utils", function () {
             expect(Utils.isMobile()).toBe(false);
         });
 
+        it("correctly detects handheld devices (phones and tablets)", function () {
+            // PC
+            window.navigator.__defineGetter__("userAgent", function () {
+                return "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 \
+                    Safari/537.36";
+            });
+            expect(Utils.isHandheldDevice()).toBe(false);
 
+            // Android Phone - Nexus 5x
+            window.navigator.__defineGetter__("userAgent", function () {
+                return "mozilla/5.0 (Linux; Android 6.0.1; Nexus 5x build/mtc19t applewebkit/537.36 (KHTML, \
+                    like Gecko) Chrome/51.0.2702.81 Mobile Safari/537.36";
+            });
+            expect(Utils.isHandheldDevice()).toBe(true);
+
+            // Android Tablet - Nexus 10
+            window.navigator.__defineGetter__("userAgent", function () {
+                return "Mozilla/5.0 (Linux; Android 4.4.2; Nexus 10 Build/KOT49H) AppleWebKit/537.36 (KHTML, like \
+                    Gecko) Chrome/33.0.1750.93 Safari/537.36";
+            });
+            expect(Utils.isHandheldDevice()).toBe(true);
+
+            // iPhone 5
+            window.navigator.__defineGetter__("userAgent", function () {
+                return "Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) \
+                    Version/6.0 Mobile/10A5376e Safari/8536.25";
+            });
+            expect(Utils.isHandheldDevice()).toBe(true);
+
+            // iPad
+            window.navigator.__defineGetter__("userAgent", function () {
+                return "Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) \
+                    Version/6.0 Mobile/10A5376e Safari/8536.25";
+            });
+            expect(Utils.isHandheldDevice()).toBe(true);
+
+
+
+
+        });
     });
 });
