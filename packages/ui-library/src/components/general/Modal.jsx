@@ -159,6 +159,14 @@ var Modal = React.createClass({
         return closeBtn;
     },
 
+    _toggleIeScrollHack: function () {
+        if (this.isIeBrowser) {
+            this.showIeScrollHack = !this.showIeScrollHack;
+        }
+
+        return this.showIeScrollHack ? { height: "auto" } : null;
+    },
+
     componentWillMount: function () {
         if (this.props.id && !Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("id", "data-id"));
@@ -167,6 +175,9 @@ var Modal = React.createClass({
 
     componentDidMount: function () {
         window.addEventListener("keydown", this._handleKeyDown);
+
+        this.isIeBrowser = Utils.isIE();
+        this.showIeScrollHack = false;
     },
 
     componentWillUnmount: function () {
@@ -209,7 +220,7 @@ var Modal = React.createClass({
                                 {this._getCloseButton()}
                             </div>
                         </If>
-                        <div className="modal-body" data-id="modal-body">
+                        <div className="modal-body" data-id="modal-body" style={this._toggleIeScrollHack()}>
                             <If test={!this.props.showHeader}>
                                 {this._getCloseButton()}
                             </If>
