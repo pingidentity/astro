@@ -2,9 +2,11 @@
     height: 450px;
     &.disabled {
         @include opacity(0.4);
+
         .rows-available,
         .rows-added {
             pointer-events: none;
+
             @include user-select(none);
         }
     }
@@ -72,7 +74,7 @@
         z-index: 10;
         background-color: $color-white;
         min-height: 50px;
-        
+
         @include box-sizing(border-box);
 
         &.preview {
@@ -94,7 +96,8 @@
         .icon-grip {
             display: inline-block;
             margin-right: 20px;
-            vertical-align: middle;
+            float: left;
+
             &:before {
                 font-size: 16px;
                 color: $color-stratus;
@@ -104,14 +107,11 @@
         .item-icon,
         .item-count {
             position: absolute;
-            &:right {
-                
-            }
         }
         &.item-decoration {
             .name {
                 margin-left: 40px;
-            }    
+            }
         }
         .item-image {
             background-position: center;
@@ -119,6 +119,7 @@
             left: 30px;
             width: 32px;
             height: 32px;
+
             @include background-size(cover);
         }
         .item-icon {
@@ -132,9 +133,13 @@
         }
         .name {
             font-size: 18px;
-            vertical-align: middle;
             color: $color-midnight;
             margin-left: 0;
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: calc(100% - 65px);
+
             @include transition(all 0.3s);
         }
         a.button {
