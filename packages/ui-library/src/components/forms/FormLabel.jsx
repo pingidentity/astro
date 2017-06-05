@@ -24,6 +24,8 @@ var React = require("react"),
  *     The lock text. If omitted, the lock hint is not rendered.
  * @param {string} [helpClassName]
  *     CSS classes to set on the help hint.
+ * @param {object} [style]
+ *     For passing through direct style attribute from parent
  */
 var FormLabel = React.createClass({
     propTypes: {
@@ -33,12 +35,14 @@ var FormLabel = React.createClass({
         value: React.PropTypes.string,
         hint: React.PropTypes.string,
         lockText: React.PropTypes.string,
-        helpClassName: React.PropTypes.string
+        helpClassName: React.PropTypes.string,
+        style: React.PropTypes.object
     },
 
     getDefaultProps: function () {
         return {
-            "data-id": "formLabel"
+            "data-id": "formLabel",
+            style: {}
         };
     },
 
@@ -54,26 +58,28 @@ var FormLabel = React.createClass({
         }
 
         return (
-            <HelpHint ref="hint"
-                    data-id="help-tooltip"
-                    className={classnames("inline", this.props.helpClassName)}
-                    hintText={this.props.hint}
-                />
+            <HelpHint
+                ref="hint"
+                data-id="help-tooltip"
+                className={classnames("inline", this.props.helpClassName)}
+                hintText={this.props.hint}
+            />
         );
     },
-    
+
     _renderLockHint: function () {
         if (!this.props.lockText) {
             return null;
         }
 
         return (
-            <HelpHint ref="lock"
-                    data-id="lock-tooltip"
-                    className={classnames("inline", this.props.helpClassName)}
-                    hintText={this.props.lockText}
-                    lock={true}
-                />
+            <HelpHint
+                ref="lock"
+                data-id="lock-tooltip"
+                className={classnames("inline", this.props.helpClassName)}
+                hintText={this.props.lockText}
+                lock={true}
+            />
         );
     },
 
@@ -86,7 +92,7 @@ var FormLabel = React.createClass({
 
         var dataId = this.props.id || this.props["data-id"];
         return (
-            <label data-id={dataId} className={this.props.className}>
+            <label data-id={dataId} className={this.props.className} style={this.props.style}>
                 { !noLabel && (
                     <span className="label-text" data-id="label">
                         { this.props.value }
@@ -95,7 +101,8 @@ var FormLabel = React.createClass({
                     </span>
                 )}
                 {this.props.children}
-            </label>);
+            </label>
+        );
     }
 });
 

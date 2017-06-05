@@ -255,20 +255,17 @@ var Stateless = React.createClass({
     _handleFieldChange: function (e) {
         this.props.onValueChange(e.target.value);
         this.props.onChange(e);
-        this._setFlexWidth();
     },
 
     _setFlexWidth: function () {
         if (this.props.flexWidth) {
-            var inputType = this._getInputType(),
-                contentMeasurer = ReactDOM.findDOMNode(this.contentMeasurer),
-                content = inputType === "password" ? Array(this.props.value.length + 1).join(this.pwChar)
+            var content = this._getInputType() === "password" ? Array(this.props.value.length + 1).join(this.pwChar)
                     : this.props.value,
                 contentWidth,
                 newWidth;
 
-            contentMeasurer.innerHTML = content;
-            contentWidth = contentMeasurer.offsetWidth;
+            this._contentMeasurerInput.innerHTML = content;
+            contentWidth = this._contentMeasurerLabel.offsetWidth;
 
             if (contentWidth > this.initialInputWidth) {
                 newWidth = contentWidth + 10;
@@ -278,7 +275,7 @@ var Stateless = React.createClass({
             }
 
             this.setState({
-                inputWidth: newWidth
+                labelWidth: newWidth
             });
         }
     },
@@ -334,14 +331,27 @@ var Stateless = React.createClass({
 
     getInitialState: function () {
         return {
-            inputWidth: 0
+            labelWidth: 0
         };
     },
 
     componentDidMount: function () {
-        var input = this.refs[this.props["data-id"] + "-input"],
-            contentMeasure = this.contentMeasurer,
-            copyProperties = [ // no short-hand properties can be used
+        var label = ReactDOM.findDOMNode(this.refs["container"]),
+            container = this.refs["input-container"],
+            input = this.refs[this.props["data-id"] + "-input"],
+            copyLabelProperties = [
+                "box-sizing",
+                "padding-left",
+                "padding-right",
+            ],
+            copyContainerProperties = [
+                "box-sizing",
+                "padding-left",
+                "padding-right",
+                "margin-left",
+                "margin-right"
+            ],
+            copyInputProperties = [
                 "box-sizing",
                 "padding-left",
                 "padding-right",
@@ -353,26 +363,60 @@ var Stateless = React.createClass({
                 "border-left-style",
                 "border-right-style"
             ],
-            styles = "white-space: nowrap; ";
+            labelStyles = "",
+            containerStyles = "",
+            inputStyles = "white-space: nowrap; ";
 
         if (this.props.flexWidth) {
-
-            // copy input css to width measuring element
-            copyProperties.map(function (property) {
-                styles += property;
-                styles += ":";
-                styles += window.getComputedStyle(input, null).getPropertyValue(property);
-                styles += "; ";
+            // copy label, container, and input css to width measuring elements
+            copyLabelProperties.map(function (property) {
+                labelStyles += property;
+                labelStyles += ":";
+                labelStyles += window.getComputedStyle(label, null).getPropertyValue(property);
+                labelStyles += "; ";
             });
-            contentMeasure.setAttribute("style", styles);
+            copyContainerProperties.map(function (property) {
+                containerStyles += property;
+                containerStyles += ":";
+                containerStyles += window.getComputedStyle(container, null).getPropertyValue(property);
+                containerStyles += "; ";
+            });
+            copyInputProperties.map(function (property) {
+                inputStyles += property;
+                inputStyles += ":";
+                inputStyles += window.getComputedStyle(input, null).getPropertyValue(property);
+                inputStyles += "; ";
+            });
+            this.contentMeasurerLabel.setAttribute("style", labelStyles);
+            this.contentMeasurerContainer.setAttribute("style", containerStyles);
+            this.contentMeasurerInput.setAttribute("style", inputStyles);
 
-            // get input intitial width for later use
-            this.initialInputWidth = input.offsetWidth;
+            // get intitial width for later use
+            this.initialInputWidth = label.offsetWidth;
 
-            // detect if IE and set password character
+            // detect if IE and set password character for later use
             this.pwChar = Utils.browserType() === Utils.Browsers.IE ? "●" : "•";
 
-            this._setFlexWidth();
+            // set ref to content measuring elements
+            this._contentMeasurerLabel = ReactDOM.findDOMNode(this.contentMeasurerLabel);
+            this._contentMeasurerContainer = ReactDOM.findDOMNode(this.contentMeasurerContainer);
+            this._contentMeasurerInput = ReactDOM.findDOMNode(this.contentMeasurerInput);
+
+            this.lastValue = this.props.value;
+
+            // initial call with long content was measuring wrong width - delay allows for comnplete loading of DOM
+            setTimeout(function () {
+                this._setFlexWidth();
+            }.bind(this), 10);
+        }
+    },
+
+    componentDidUpdate: function () {
+        if (this.props.flexWidth) {
+            if (this.lastValue !== this.props.value) {
+                this._setFlexWidth();
+            }
+            this.lastValue = this.props.value;
         }
     },
 
@@ -401,9 +445,10 @@ var Stateless = React.createClass({
                 value={this.props.labelText}
                 hint={this.props.labelHelpText}
                 lockText={this.props.labelLockText}
-                helpClassName={this.props.helpClassName}>
+                helpClassName={this.props.helpClassName}
+                style={this.state.labelWidth ? { width: this.state.labelWidth } : null}>
 
-                <span className="input-container">
+                <span className="input-container" ref="input-container">
                     <input
                         className={this.props.inputClassName}
                         onFocus={this.props.onFocus}
@@ -412,6 +457,7 @@ var Stateless = React.createClass({
                         onKeyDown={this.props.onKeyDown}
                         onMouseDown={this.props.onMouseDown}
                         onChange={this._handleFieldChange}
+                        onPaste={this._handleFieldChange}
                         placeholder={this.props.placeholder}
                         ref={id + "-input"}
                         readOnly={this.props.readOnly}
@@ -422,14 +468,21 @@ var Stateless = React.createClass({
                         autoComplete={this.props.autoComplete ? "on" : "off"}
                         disabled={this.props.disabled}
                         autoFocus={this.props.autoFocus}
-                        style={this.state.inputWidth ? { width: this.state.inputWidth } : null}
                     />
                     {this.props.flexWidth && (
                         <div
                             data-id={id + "-content-measurer"}
-                            ref={function (node) { this.contentMeasurer = node; }.bind(this)}
                             className="content-measurer"
-                        />
+                            ref={function (node) { this.contentMeasurerLabel = node; }.bind(this)}>
+                            <div
+                                className="content-measurer-container"
+                                ref={function (node) { this.contentMeasurerContainer = node; }.bind(this)}>
+                                <div
+                                    className="content-measurer-input"
+                                    ref={function (node) { this.contentMeasurerInput = node; }.bind(this)}
+                                />
+                            </div>
+                        </div>
                     )}
                     {this.props.showReveal && (
                         <a

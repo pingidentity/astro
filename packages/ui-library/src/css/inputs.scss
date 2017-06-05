@@ -95,6 +95,7 @@ label {
     vertical-align: top;
     line-height: 1em;
     font-family: $font-pn-regular;
+    box-sizing: border-box;
     cursor: default;
 
 
@@ -128,6 +129,7 @@ label {
 
     &.input-text {
         input {
+            width: 100%;
             padding: 4px 15px 3px;
         }
         &.search {
@@ -215,6 +217,7 @@ label {
             padding: 12px 15px;
             line-height: 1.2em;
             height: auto;
+            width: 100%;
         }
         &.extended {
             textarea {
@@ -1676,7 +1679,6 @@ input[type=file] {
     $icon-size: 16px;
     $icon-margin: 5px;
     $icon-spacing: $icon-size + $icon-margin;
-    $input-width: calc(100% - #{$icon-spacing});
 
     @mixin errorDisplayCss {
         ~ .form-error-message {
@@ -1704,6 +1706,9 @@ input[type=file] {
                 @include errorDisplayCss;
             }
         }
+        .input-container {
+            padding-right: $icon-spacing;
+        }
         .integer-controls {
             right: 33px;
         }
@@ -1719,11 +1724,17 @@ input[type=file] {
                 @include errorDisplayCss;
             }
         }
+        .input-container {
+            padding-right: $icon-spacing;
+        }
         .form-error-icon {
             top: $icon-margin;
         }
     }
     &.input-select {
+        .input-container {
+            padding-right: $icon-spacing;
+        }
         .wrapper {
             border-color: $color-input-error;
 
@@ -1828,7 +1839,7 @@ input[type=file] {
     .form-error-icon {
         position: absolute;
         top: round(($default-input-height - $icon-size) / 2);
-        right: -$icon-spacing;
+        right: 0;
         height: $icon-size;
         width: $icon-size;
         cursor: pointer;
@@ -1853,7 +1864,7 @@ input[type=file] {
         position: absolute;
         top: calc(100% - 1px);
         left: 0;
-        right: 0;
+        right: 21px;
         display: none;
         z-index: 1;
         padding: 15px;
@@ -1866,36 +1877,6 @@ input[type=file] {
 
         @include border-radius(0 0 $default-input-border-radius $default-input-border-radius);
         @include animation(fade-down-in 0.2s);
-    }
-
-    &.input-width-xsmall,
-    &.input-width-small,
-    &.input-width-medium,
-    &.input-width-large,
-    &.input-width-xlarge,
-    &.input-width-full {
-        .form-error-message {
-            right: $icon-spacing;
-        }
-        .form-error-icon {
-            right: 0;
-        }
-        &.input-text {
-            input[type=text],
-            input[type=password] {
-                width: $input-width;
-            }
-        }
-        &.input-textarea {
-            textarea {
-                width: $input-width;
-            }
-        }
-        &.input-select {
-            .wrapper {
-                width: $input-width;
-            }
-        }
     }
     &.required {
         .input-container,
@@ -2242,23 +2223,18 @@ a {
 
     .label-text {
         word-break: normal;
-        width: map-get($input-width-settings-map-default, $size);
     }
     &.input-text,
     &.input-textselect,
     &.input-textselect .input-text.form-error {
-        input[type] {
-            width: map-get($input-width-settings-map-text, $size);
-        }
+        width: map-get($input-width-settings-map-text, $size);
     }
     &.input-textarea {
-        textarea {
-            width: map-get($input-width-settings-map-textarea, $size);
-        }
+        width: map-get($input-width-settings-map-textarea, $size);
     }
-    &.input-select select,
-    &.input-custom-select .wrapper {
-        width: map-get($input-width-settings-map-select, $size) - 2px; // subtract wrapper border width
+    &.input-select,
+    &.input-custom-select {
+        width: map-get($input-width-settings-map-select, $size);
     }
     &.input-checkbox {
         width: map-get($input-width-settings-map-default, $size);
@@ -2296,53 +2272,86 @@ $input-width-settings: (
     'hor-margin': 10px,
     'vert-margin': 20px
 );
+$input-width-settings-smallest-default: calc-input-width(
+    map-get($input-width-settings, 'width-max'),
+    map-get($input-width-settings, 'num-increments'),
+    map-get($input-width-settings, 'hor-margin')
+);
+$input-width-settings-smallest-text: calc-input-width(
+    map-get($input-width-settings, 'width-max'),
+    map-get($input-width-settings, 'num-increments'),
+    map-get($input-width-settings, 'hor-margin')
+);
+$input-width-settings-smallest-textarea: calc-input-width(
+    map-get($input-width-settings, 'width-max'),
+    map-get($input-width-settings, 'num-increments'),
+    map-get($input-width-settings, 'hor-margin')
+);
+$input-width-settings-smallest-select: calc-input-width(
+    map-get($input-width-settings, 'width-max'),
+    map-get($input-width-settings, 'num-increments'),
+    map-get($input-width-settings, 'hor-margin')
+);
+$input-width-settings-map-default: input-width-map(
+    $input-width-settings-smallest-default,
+    map-get($input-width-settings, 'hor-margin')
+);
+$input-width-settings-map-text: input-width-map(
+    $input-width-settings-smallest-text,
+    map-get($input-width-settings, 'hor-margin')
+);
+$input-width-settings-map-textarea: input-width-map(
+    $input-width-settings-smallest-textarea,
+    map-get($input-width-settings, 'hor-margin')
+);
+$input-width-settings-map-select: input-width-map(
+    $input-width-settings-smallest-select,
+    map-get($input-width-settings, 'hor-margin')
+);
 
-$input-width-settings-smallest-default: calc-input-width(map-get($input-width-settings, 'width-max'), map-get($input-width-settings, 'num-increments'), map-get($input-width-settings, 'hor-margin'));
-$input-width-settings-smallest-text: calc-input-width(map-get($input-width-settings, 'width-max'), map-get($input-width-settings, 'num-increments'), map-get($input-width-settings, 'hor-margin'));
-$input-width-settings-smallest-textarea: calc-input-width(map-get($input-width-settings, 'width-max'), map-get($input-width-settings, 'num-increments'), map-get($input-width-settings, 'hor-margin'));
-$input-width-settings-smallest-select: calc-input-width(map-get($input-width-settings, 'width-max'), map-get($input-width-settings, 'num-increments'), map-get($input-width-settings, 'hor-margin'));
+label {
+    &.input-width-xsmall,
+    &.input-width-small,
+    &.input-width-medium,
+    &.input-width-large,
+    &.input-width-xlarge,
+    &.input-width-full {
+        margin-bottom: map-get($input-width-settings, 'vert-margin');
 
-$input-width-settings-map-default: input-width-map($input-width-settings-smallest-default, map-get($input-width-settings, 'hor-margin'));
-$input-width-settings-map-text: input-width-map($input-width-settings-smallest-text, map-get($input-width-settings, 'hor-margin'));
-$input-width-settings-map-textarea: input-width-map($input-width-settings-smallest-textarea, map-get($input-width-settings, 'hor-margin'));
-$input-width-settings-map-select: input-width-map($input-width-settings-smallest-select, map-get($input-width-settings, 'hor-margin'));
+        input[type=text],
+        input[type=password],
+        textarea {
+            width: auto;
+        }
+    }
 
-.input-width-xsmall,
-.input-width-small,
-.input-width-medium,
-.input-width-large,
-.input-width-xlarge,
-.input-width-full {
-    margin-bottom: map-get($input-width-settings, 'vert-margin');
+    &.input-width-xsmall {
+        @include input-width-css('xsmall');
+    }
+
+    &.input-width-small {
+        @include input-width-css('small');
+    }
+
+    &.input-width-medium {
+        @include input-width-css('medium');
+    }
+
+    &.input-width-large {
+        @include input-width-css('large');
+    }
+
+    &.input-width-xlarge {
+        @include input-width-css('xlarge');
+    }
+
+    &.input-width-full {
+        @include input-width-css('full');
+    }
 }
 
-.input-width-xsmall {
-    @include input-width-css('xsmall');
-}
 
-.input-width-small {
-    @include input-width-css('small');
-}
-
-.input-width-medium {
-    @include input-width-css('medium');
-}
-
-.input-width-large {
-    @include input-width-css('large');
-}
-
-.input-width-xlarge {
-    @include input-width-css('xlarge');
-}
-
-.input-width-full {
-    @include input-width-css('full');
-}
-
-
-
-// DEPRECATED OR SITE-SPECIFIC STYLES --------------------------------------------------------------
+// DEPRECATED OR SITE-SPECIFIC STYLES ----------------------------------------------------------------------------------
 // TODO : move WP styles to WP
 
 label {

@@ -269,7 +269,8 @@ var FormTextFieldDemo = React.createClass({
                 <div className="input-row">
                     <FormTextField
                         labelText="Flex Width Input"
-                        labelHelpText="A flex-width input grows with the content gets wider than the intial width"
+                        labelHelpText="A flex-width input grows with the content once it gets wider than the intial
+                            width"
                         className="input-width-medium"
                         flexWidth={true}
                         placeholder="try entering text longer than this field"
