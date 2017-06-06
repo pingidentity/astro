@@ -326,6 +326,8 @@ package-and-upload-for-hosting: install-node-npm
 		LIB_VERSION=`sed -n -e 's/.*"version"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' package.json`;\
 		$(NPM_EXEC) run doc;\
 		$(NPM_EXEC) run pack;\
+		cp -rf src build;\
+		cp -rf build-doc build;\
 		rm -rf $${LIB_VERSION}.tar.gz;\
 		mkdir -p build/examples;\
 		tar -czf build/examples/basic-app.tar.gz --directory=examples basic-app;\
