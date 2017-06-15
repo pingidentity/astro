@@ -889,6 +889,8 @@ $layout-nav-width-offset: 15px;
     }
     &.columns-width-auto {
         .content-column {
+            flex: none;
+
             @include flexbox-grow(0);
         }
     }
