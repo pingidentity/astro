@@ -548,6 +548,19 @@ describe("SelectionList", function () {
         expect(inputs.length).toBe(10);
     });
 
+    it("renders view-only mode", function () {
+        var component = getComponent({
+            type: SelectionList.ListType.VIEWONLY
+        });
+        var viewItems = TestUtils.scryRenderedDOMNodesWithClass(component, "view-item");
+
+        expect(viewItems.length).toBe(9);
+
+        listItems.map(function (listItem, index) {
+            expect(viewItems[index].textContent).toEqual(listItem.name);
+        });
+    });
+
     //TODO: remove when controlled no longer supported
     it("produces stateful/stateless components correctly given controlled prop", function () {
         var component = getComponent({ controlled: false });

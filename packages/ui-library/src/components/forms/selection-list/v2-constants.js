@@ -7,5 +7,6 @@
  **/
 exports.ListType = {
     SINGLE: "single",
-    MULTI: "multi"
+    MULTI: "multi",
+    VIEWONLY: "viewonly"
 };

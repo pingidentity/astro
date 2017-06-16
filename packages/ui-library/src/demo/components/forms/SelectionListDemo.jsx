@@ -110,13 +110,57 @@ var SelectionListDemo = React.createClass({
         return (
             <div>
                 <h2>
-                    Selection List for single-selection
+                    Single-Selection Lists
                 </h2>
 
                 <hr />
 
                 <h3>
-                    Single-select list placed inside a Dropdown (default search)
+                    Single-Selection Inline
+                </h3>
+                <p>
+                    Selected Radio ID = {this.state.singleSelectId2}
+                </p>
+                <p>
+                    <button onClick={this._toggleRequired} className="inline">
+                        Toggle Required Text
+                    </button>
+                </p>
+                <SelectionList
+                    data-id="single-select-2"
+                    stateless={false}
+                    type={SelectionList.ListType.SINGLE}
+                    items={this._singleSelectItems}
+                    selectedItemIds={this.state.singleSelectId2}
+                    showSearchBox={true}
+                    searchPlaceholder="Search..."
+                    onValueChange={this._onSingleSelectChange2}
+                    requiredText={this.state.required ? "Select at least one" : ""}
+                />
+
+                <hr />
+
+                <h3>
+                    Single-Selection Inline Without Search
+                </h3>
+                <p>
+                    Selected Radio ID = {this.state.singleSelectId3}
+                </p>
+                <SelectionList
+                    data-id="single-select-3"
+                    stateless={false}
+                    type={SelectionList.ListType.SINGLE}
+                    items={this._singleSelectItems}
+                    selectedItemIds={this.state.singleSelectId3}
+                    showSearchBox={false}
+                    searchPlaceholder="Search..."
+                    onValueChange={this._onSingleSelectChange3}
+                />
+
+                <hr />
+
+                <h3>
+                    Single-Selection In Tooltip
                 </h3>
                 <p>
                     Selected Radio ID = {this.state.singleSelectId1}
@@ -143,58 +187,54 @@ var SelectionListDemo = React.createClass({
 
                 <hr />
 
-                <h3>
-                    A standing single-select list (default search)
-                </h3>
-                <p>
-                    Selected Radio ID = {this.state.singleSelectId2}
-                </p>
-                <p>
-                    <button onClick={this._toggleRequired}>
-                        Toggle Required Text
-                    </button>
-                </p>
-                <SelectionList
-                    data-id="single-select-2"
-                    stateless={false}
-                    type={SelectionList.ListType.SINGLE}
-                    items={this._singleSelectItems}
-                    selectedItemIds={this.state.singleSelectId2}
-                    showSearchBox={true}
-                    searchPlaceholder="Search..."
-                    onValueChange={this._onSingleSelectChange2}
-                    requiredText={this.state.required ? "Select at least one" : ""}
-                />
-
-                <hr />
-
-                <h3>
-                    A standing single-select list (no searchbox)
-                </h3>
-                <p>
-                    Selected Radio ID = {this.state.singleSelectId3}
-                </p>
-                <SelectionList
-                    data-id="single-select-3"
-                    stateless={false}
-                    type={SelectionList.ListType.SINGLE}
-                    items={this._singleSelectItems}
-                    selectedItemIds={this.state.singleSelectId3}
-                    showSearchBox={false}
-                    searchPlaceholder="Search..."
-                    onValueChange={this._onSingleSelectChange3}
-                />
-
-                <hr />
-
                 <h2>
-                    Selection List for multi-selection
+                    Multi-Selection Lists
                 </h2>
 
                 <hr />
 
                 <h3>
-                    Multi-select list placed inside a Dropdown (default search)
+                    Inline Multi-Selection
+                </h3>
+                <div>
+                    Selected Radio ID = {this.state.multiSelectIds3.join()}
+                </div>
+                <SelectionList
+                    data-id="multi-select-3"
+                    stateless={false}
+                    type={SelectionList.ListType.MULTI}
+                    items={this._multiSelectItems}
+                    selectedItemIds={this.state.multiSelectIds3}
+                    onValueChange={this._onMultiSelectChange3}
+                    onSelectAll={this._onMultiSelectAll3}
+                />
+
+                <hr />
+
+                <h3>
+                    Inline Multi-Selection With Custom Search (using the endsWith operator)
+                </h3>
+                <div>
+                    Selected Radio ID = {this.state.multiSelectIds2.join()}
+                </div>
+                <SelectionList
+                    data-id="multi-select-2"
+                    type={SelectionList.ListType.MULTI}
+                    items={this._multiSelectItems}
+                    selectedItemIds={this.state.multiSelectIds2}
+                    showSearchBox={true}
+                    searchPlaceholder={"Search..."}
+                    onSearch={this._myCustomSearch}
+                    showSelectionOptions={true}
+                    onValueChange={this._onMultiSelectChange2}
+                    onSelectAll={this._onMultiSelectAll2}
+                    {...this._labels}
+                />
+
+                <hr />
+
+                <h3>
+                    Multi-Selection in Tooltip
                 </h3>
                 <div>
                     Selected Radio ID = {this.state.multiSelectIds1.join()}
@@ -225,7 +265,7 @@ var SelectionListDemo = React.createClass({
                 <hr />
 
                 <h3>
-                    Multi-select list placed inside a Dropdown (default search) with Selected Filters</h3>
+                    Multi-Selection in Tooltip with Drop-down Styling and Filter Count</h3>
                 <div>
                     Selected Radio IDs = {this.state.multiSelectIds4.join()}
                 </div>
@@ -259,42 +299,15 @@ var SelectionListDemo = React.createClass({
                 <hr />
 
                 <h3>
-                    A standing multi-select list (custom search using the endsWith operator)
+                    Inline View-Only List
                 </h3>
-                <div>
-                    Selected Radio ID = {this.state.multiSelectIds2.join()}
-                </div>
                 <SelectionList
-                    data-id="multi-select-2"
-                    type={SelectionList.ListType.MULTI}
-                    items={this._multiSelectItems}
-                    selectedItemIds={this.state.multiSelectIds2}
-                    showSearchBox={true}
-                    searchPlaceholder={"Search..."}
-                    onSearch={this._myCustomSearch}
-                    showSelectionOptions={true}
-                    onValueChange={this._onMultiSelectChange2}
-                    onSelectAll={this._onMultiSelectAll2}
-                    {...this._labels}
-                />
-
-                <hr />
-
-                <h3>
-                    A standard multi-select list (no search box)
-                </h3>
-                <div>
-                    Selected Radio ID = {this.state.multiSelectIds3.join()}
-                </div>
-                <SelectionList
-                    data-id="multi-select-3"
                     stateless={false}
-                    type={SelectionList.ListType.MULTI}
-                    items={this._multiSelectItems}
-                    selectedItemIds={this.state.multiSelectIds3}
-                    showSearchBox={false}
-                    onValueChange={this._onMultiSelectChange3}
-                    onSelectAll={this._onMultiSelectAll3}
+                    type={SelectionList.ListType.VIEWONLY}
+                    items={this._singleSelectItems}
+                    selectedItemIds={this.state.singleSelectId1}
+                    showSearchBox={true}
+                    searchPlaceholder="Search..."
                 />
             </div>
         );

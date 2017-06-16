@@ -225,12 +225,13 @@ var ListOptions = React.createClass({
     _genRadioOptions: function () {
         return (
             <FormRadioGroup
-                    data-id={this.props["data-id"] + "-single-selection"}
-                    groupName={"input-selection-list-items-" + this.props["data-id"]}
-                    items={this.props.items}
-                    stacked={true}
-                    selected={this.props.selectedItemIds}
-                    onValueChange={this.props.onValueChange} />
+                data-id={this.props["data-id"] + "-single-selection"}
+                groupName={"input-selection-list-items-" + this.props["data-id"]}
+                items={this.props.items}
+                stacked={true}
+                selected={this.props.selectedItemIds}
+                onValueChange={this.props.onValueChange}
+            />
         );
     },
 
@@ -242,30 +243,40 @@ var ListOptions = React.createClass({
     * @ignore
     */
     _genCheckboxOptions: function () {
-        var self = this;
-
         var isSelected = function (item) {
-            return _.contains(self.props.selectedItemIds, item.id);
-        };
+            return _.contains(this.props.selectedItemIds, item.id);
+        }.bind(this);
 
         // add to the array of selected items (if it does not exist) or remove it (if it exists)
         var onSelectionValueChange = function (item, checked) {
             var updateFunction = checked ? _.union : _.difference;
-            var updatedSelection = updateFunction(self.props.selectedItemIds, [item.id]);
-            self.props.onValueChange(updatedSelection);
-        };
+            var updatedSelection = updateFunction(this.props.selectedItemIds, [item.id]);
+            this.props.onValueChange(updatedSelection);
+        }.bind(this);
 
         return this.props.items.map(function (item, index) {
             var checked = isSelected(item);
             var onValueChangeFunc = onSelectionValueChange.bind(this, item, !checked);
 
             return (
-                <FormCheckbox data-id={"selectionList-Checkbox-" + index}
-                        key={item.id + "-" + index}
-                        label={item.name}
-                        className="stacked"
-                        checked={checked}
-                        onValueChange={onValueChangeFunc} />
+                <FormCheckbox
+                    data-id={"selectionList-Checkbox-" + index}
+                    key={item.id + "-" + index}
+                    label={item.name}
+                    className="stacked"
+                    checked={checked}
+                    onValueChange={onValueChangeFunc}
+                />
+            );
+        }.bind(this));
+    },
+
+    _genViewonlyOptions: function () {
+        return this.props.items.map(function (item) {
+            return (
+                <div className="view-item">
+                    {item.name}
+                </div>
             );
         }.bind(this));
     },
@@ -282,6 +293,8 @@ var ListOptions = React.createClass({
             return this._genRadioOptions();
         } else if (this.props.type === Constants.ListType.MULTI) {
             return this._genCheckboxOptions();
+        } else if (this.props.type === Constants.ListType.VIEWONLY) {
+            return this._genViewonlyOptions();
         }
     },
 

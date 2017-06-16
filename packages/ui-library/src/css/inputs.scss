@@ -144,8 +144,8 @@ label {
                     text-transform: none;
                     position: absolute;
                     bottom: 10px;
-                    left: 13px;
-                    font-size: 18px;
+                    left: 10px;
+                    font-size: 16px;
                     font-weight: bold;
                     line-height: 1em;
                     color: $color-input-text;
@@ -155,7 +155,7 @@ label {
                 position: absolute;
                 font-family: $icon-font;
                 text-transform: none;
-                font-size: inherit;
+                font-size: 12px;
                 color: inherit;
                 top: 14px;
                 right: 10px;
@@ -1431,9 +1431,6 @@ input[type=file] {
             }
         }
     }
-    .input-row {
-        margin: 2px 0 0;
-    }
     .input-selection-list-items {
         max-height: 228px;
         margin: 0;
@@ -1493,6 +1490,12 @@ input[type=file] {
             text-align: left;
         }
     }
+    .view-item {
+        color: $color-midnight;
+        font-size: 14px;
+        margin: 0 0 10px 1px;
+    }
+
     &.searchable {
         .input-selection-list-items {
             max-height: 228px - 46px;
