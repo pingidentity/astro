@@ -67,6 +67,15 @@ var MultivaluesOption = React.createClass({
  */
 
 /**
+ * @callback Multivalues~onNewValue
+ *
+ * @param {number} keyCode
+ *     keyCode of keyDown event.
+ * @return {boolean}
+ *     true if the keyCode is the key to finish typing a token
+ */
+
+/**
  * @class Multivalues
  *
  * @desc Multivalues takes an array of strings and creates "boxed" text entries of each. Free form typing creates
@@ -85,6 +94,10 @@ var MultivaluesOption = React.createClass({
  *     Callback triggered when a new entry is added or removed.
  * @param {Multivalues~onChange} [onChange]
  *     DEPRECATED. Use "onValueChange" instead.
+ *
+ * @param {Multivalues~onNewValue} [onNewValue]
+ *     Callback triggered and return a boolean when a new value is completed typing.
+ *     Default keyCode to detect completed typing are 13, 188, 9 and 32
  *
  * @param {boolean} [required=false]
  *     If true, the user must enter an entry to the field.
@@ -115,6 +128,7 @@ var Multivalues = React.createClass({
         entries: React.PropTypes.arrayOf(React.PropTypes.string),
         onValueChange: React.PropTypes.func, //TODO: mark as required when onChange has been removed.
         onChange: React.PropTypes.func, //TODO: remove when v1 no longer supported.
+        onNewValue: React.PropTypes.func,
         required: React.PropTypes.bool,
         isRequired: React.PropTypes.bool //TODO: remove when v1 no longer supported.
     },
@@ -129,7 +143,13 @@ var Multivalues = React.createClass({
         return {
             "data-id": "multivalues",
             entries: [],
-            required: false
+            required: false,
+            onNewValue: function (keyCode) {
+                if (keyCode === 13 || keyCode === 188 || keyCode === 9 || keyCode === 32) {
+                    return true;
+                }
+                return false;
+            }
         };
     },
 
@@ -186,9 +206,14 @@ var Multivalues = React.createClass({
 
         enteredValue = e.target.value.trim();
         //Adds input value to array when Enter and Comma key are pressed
-        if (e.keyCode === 13 || e.keyCode === 188) {
+        if (this.props.onNewValue(e.keyCode)) {
+            if (!enteredValue) {
+                if (e.keyCode !== 9) { //let key tab take you to the next field if input is empty
+                    e.preventDefault();
+                }
+                return;
+            }
             e.preventDefault();
-            if (!enteredValue) {return;}
             e.target.value = "";
             var entries = this.props.entries;
             entries.push(enteredValue);

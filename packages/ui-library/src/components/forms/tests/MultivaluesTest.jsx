@@ -182,18 +182,66 @@ describe("FormTextField", function () {
         expect(callback.mock.calls.length).toBe(1);
     });
 
-    it ("trigger onValuechange callback with comma", function () {
+    it ("trigger onValuechange callback with tab", function () {
+        var _onNewValueCallback = function (keyCode) {
+            if (keyCode === 9) {
+                return true;
+            }
+            return false;
+        };
+        component = ReactTestUtils.renderIntoDocument(
+            <Multivalues title="Sites" id="multiselect"
+                 entries={[
+                     "Entry 1",
+                     "Entry 2",
+                     "Entry 3",
+                     "Entry 4"
+                 ]}
+                 onValueChange={callback}
+                 onNewValue={_onNewValueCallback} />
+        );
+        input = TestUtils.findRenderedDOMNodeWithDataId(component,"value-entry");
 
         //simulate typing a letter
-        input.value = "a";
-        ReactTestUtils.Simulate.keyDown(input, { key: "a" } );
+        input.value = "b";
+        ReactTestUtils.Simulate.keyDown(input, { key: "enter", keyCode: 13, which: 13 } );
         //expect no callback called
         expect(callback.mock.calls.length).toBe(0);
 
-        //comma key for callback
-        ReactTestUtils.Simulate.keyDown(input, { key: "comma", keyCode: 188, which: 188 } );
+        //tab key for callback
+        ReactTestUtils.Simulate.keyDown(input, { key: "tab", keyCode: 9, which: 9 } );
         expect(callback.mock.calls.length).toBe(1);
+    });
 
+    it ("trigger onValuechange callback with space", function () {
+        var _onNewValueCallback = function (keyCode) {
+            if (keyCode === 32) {
+                return true;
+            }
+            return false;
+        };
+        component = ReactTestUtils.renderIntoDocument(
+            <Multivalues title="Sites" id="multiselect"
+                         entries={[
+                             "Entry 1",
+                             "Entry 2",
+                             "Entry 3",
+                             "Entry 4"
+                         ]}
+                         onValueChange={callback}
+                         onNewValue={_onNewValueCallback} />
+        );
+        input = TestUtils.findRenderedDOMNodeWithDataId(component,"value-entry");
+
+        //simulate typing a letter
+        input.value = "c";
+        ReactTestUtils.Simulate.keyDown(input, { key: "enter", keyCode: 13, which: 13 } );
+        //expect no callback called
+        expect(callback.mock.calls.length).toBe(0);
+
+        //space key for callback
+        ReactTestUtils.Simulate.keyDown(input, { key: "space", keyCode: 32, which: 32 } );
+        expect(callback.mock.calls.length).toBe(1);
     });
 
     //TODO: remove when v1 no longer supported
