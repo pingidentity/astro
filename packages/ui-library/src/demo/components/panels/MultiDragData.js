@@ -3,6 +3,7 @@ exports.columns = [
     {
         name: "Available Rows",
         id: 1,
+        disableSort: true,
         rows: [
             {
                 id: 0,
@@ -64,6 +65,7 @@ exports.columns = [
     {
         name: "Added Rows",
         id: 2,
+        disableSort: false,
         rows: [
             {
                 id: 11,

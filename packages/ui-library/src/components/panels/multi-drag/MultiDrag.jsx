@@ -200,9 +200,11 @@ function convertFilteredIndexes (columns, desc) {
  *        contentType={contentType}
  *    />
  */
+ 
 var MultiDragStateless = React.createClass({
     displayName: "MultiDragStateless",
-
+    colSortDisabledArr: [],
+    
     propTypes: {
         "data-id": React.PropTypes.string,
         className: React.PropTypes.string,
@@ -244,6 +246,16 @@ var MultiDragStateless = React.createClass({
             showSearch: false,
             disabled: false
         };
+    },
+    
+    /*
+     * This function will iterate through the columns and build an
+     * array indicating whether the items are sortable within each column
+     */
+    componentDidMount: function () {
+        this.props.columns.map(function (column) {
+            this.colSortDisabledArr.push(column.disableSort);
+        }.bind(this));
     },
 
     /*
@@ -296,14 +308,18 @@ var MultiDragStateless = React.createClass({
      * Determines if the current onDrag call has changed since the last call, and if so executes the
      * component's onDrag callback.
      */
-    _onDrag: function (targetIndex, beingDraggedIndex, targetColumn, beingDraggedColumn) {//eslint-disable-line
+    _onDrag: function (targetIndex, beingDraggedIndex, targetColumn, beingDraggedColumn) { //eslint-disable-line
         var desc = this._changedSinceLastDrag.apply(this, arguments);
 
-        //if nothing has changed, dont execute the callback
+        // if nothing has changed, dont execute the callback
         if (!desc || typeof(targetIndex) === "undefined") {
             return;
         }
-
+        
+        // don't allow sorting of column if disableSort is enabled
+        if ((targetColumn === beingDraggedColumn) && this.colSortDisabledArr[beingDraggedColumn]) {
+            return;
+        }
 
         // to index returned from onDrag event is always +1 off when dragging down
         // includes dragged item in "to" index?
@@ -329,6 +345,7 @@ var MultiDragStateless = React.createClass({
     },
 
     render: function () {
+
         var preview = this.props.previewMove;
         var className = classnames(
             "input-row row-selector",

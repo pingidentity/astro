@@ -42,7 +42,7 @@ function DemoReducer (state, action) {
         case Types.GRID_DEMO_SET:
             return update.set(state, action.path, action.value);
         default:
-            return state || { search: "all", style: "both" };
+            return state || { search: "all", style: "none" };
     }
 }
 
@@ -113,7 +113,7 @@ var MultiDragDemo = React.createClass({
         this.messageActions = Redux.bindActionCreators(Messages.Actions, this.props.store.dispatch);
         this.demoActions = Redux.bindActionCreators(Actions, this.props.store.dispatch);
 
-        //initialize the multi drag data
+        // initialize the multi drag data
         this.actions.init(data.columns);
         this.rowsAvailableStateless = true;
         this.rowsAvailableStateful = true;
@@ -243,7 +243,7 @@ var MultiDragDemo = React.createClass({
 
     getInitialState: function () {
         return {
-            demoType: "STATEFUL",
+            demoType: "STATELESS",
             columns: data.columns, // used for stateful (stateless=false) demo
             disabled: false
         };
@@ -329,7 +329,10 @@ var MultiDragDemo = React.createClass({
 
                 {this.state.demoType === "STATELESS" &&
                     <div>
-                        <h2>Stateless (stateless=true), Empty Label Set</h2>
+                        <h2>
+                            Stateless (stateless=true), Empty Label Set.
+                            First column has sort within column disabled.
+                        </h2>
                         <MultiDrag
                             stateless={true}
                             showSearchOnAllColumns={this.props.demo.search === "all"}

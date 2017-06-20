@@ -34,6 +34,8 @@ var React = require("re-react"),
  *    CSS classes to set on the top-level HTML container.
  * @param {number} [ghostRowAt]
  *    Display a ghost row to preview where a row would be inserted
+ * @param {boolean} [disableSort=false]
+ *    Determines whether the column in internally sortable
  *
  * @param {MultiDrag~onSearch} onSearch
  *    Callback to be triggered when a column is searched.
@@ -65,11 +67,12 @@ module.exports = React.createClass({
         filter: React.PropTypes.string.affectsRendering,
         contentType: React.PropTypes.element.isRequired.affectsRendering,
         labelEmpty: React.PropTypes.string.affectsRendering,
-        //optional
+        // optional
         showSearch: React.PropTypes.bool.affectsRendering,
         ghostRowAt: React.PropTypes.number.affectsRendering,
         className: React.PropTypes.string.affectsRendering,
-        //callbacks
+        disableSort: React.PropTypes.bool.affectsRendering,
+        // callbacks
         onSearch: React.PropTypes.func.isRequired,
         onDrag: React.PropTypes.func.isRequired,
         onDrop: React.PropTypes.func.isRequired,
@@ -185,8 +188,15 @@ module.exports = React.createClass({
     },
 
     render: function () {
+        
+        var className = classnames(
+            this.props.className, {
+                "disable-sort": this.props.disableSort
+            }
+        );
+        
         return (
-            <div data-id={this.props["data-id"]} className={this.props.className}>
+            <div data-id={this.props["data-id"]} className={className}>
                 <FormLabel value={this.props.name} />
 
                 { this._renderSearch() }
