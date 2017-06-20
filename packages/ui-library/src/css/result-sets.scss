@@ -387,6 +387,9 @@
                 }
             }
         }
+        &.z-index-priority {
+            z-index: 100;
+        }
     }
     .result-section-title {
         font-family: $font-pn-semibold;

@@ -865,6 +865,7 @@ $layout-nav-width-offset: 15px;
         flex: 1;
         box-sizing: border-box;
         margin: 0 40px 0 0;
+        max-width: 100%;
 
         @include flexbox-grow(1);
 
