@@ -12,12 +12,12 @@ var ColumnLayoutDemo = React.createClass({
         var style1 = {
                 background: "#ddd",
                 padding: "10px",
-                "margin-bottom": "10px"
+                marginBottom: "10px"
             },
             style2 = {
                 background: "#eee",
                 padding: "10px",
-                "margin-bottom": "10px"
+                marginBottom: "10px"
             };
 
         return (
