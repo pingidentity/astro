@@ -25,6 +25,7 @@
     "re-react": "1.1.5",
     "react-dnd": "2.1.4",
     "react-dnd-html5-backend": "2.1.2",
+    "react-tooltip": "^3.3.0",
     "superagent": "0.21.0",
     "underscore": "1.8.3",
     "underscore.string": "3.2.2",

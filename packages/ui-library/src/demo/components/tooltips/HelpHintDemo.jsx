@@ -1,6 +1,6 @@
 var React = require("react");
 var HelpHint = require("../../../components/tooltips/HelpHint.jsx");
-var FormTextField = require("../../../components/forms/form-text-field");
+var FormLabel = require("../../../components/forms/FormLabel.jsx");
 
 
 /**
@@ -17,109 +17,57 @@ var HelpHintDemo = React.createClass({
     render: function () {
         return (
             <div>
-                <strong>
-                    Types of Tooltips
-                </strong>
-                <br /><br />
+                <FormLabel value="Help Hints On Various Elements" className="detached" />
                 <HelpHint
-                    className="short-tooltip right"
-                    hintText="Regular help tooltip with icon" />
+                    data-id="helphint-regular"
+                    ref="testTip"
+                    hintText="Regular help hint with icon"
+                />
                 &nbsp; &nbsp;
                 <HelpHint
-                    className="short-tooltip"
-                    hintText="Help tooltip text">
-                    <button onClick={this._onClick}>Button with tooltip</button>
+                    data-id="helphint-button"
+                    hintText="Help hint text">
+                    <button onClick={this._onClick}>Button with help hint</button>
                 </HelpHint>
                 &nbsp; &nbsp;
                 <HelpHint
-                    className="short-tooltip"
-                    hintText="Help tooltip text">
-                    <a onClick={this._onClick}>Text Link with tooltip</a>
+                    data-id="helphint-link"
+                    hintText="Help hint text">
+                    <a onClick={this._onClick}>Link with help hint</a>
                 </HelpHint>
                 &nbsp; &nbsp;
                 <HelpHint
-                    className="short"
-                    hintText="Help tooltip text">
-                    <button onClick={this._onClick} className="inline">Inline button with tooltip</button>
+                    data-id="helphint-inlinebutton"
+                    hintText="Help hint text">
+                    <button onClick={this._onClick} className="inline">Inline button with help hint</button>
                 </HelpHint>
 
-                <br /><br />
-                <strong>
-                    Tooltip Placement
-                </strong>
-                <br /><br />
-                <HelpHint
-                    className="right short-tooltip"
-                    hintText="Top right placement"
-                />
-                &nbsp; &nbsp;
-                <HelpHint
-                    className="bottom right short-tooltip"
-                    hintText="Bottom right placement"
-                />
-                &nbsp; &nbsp;
-                <HelpHint
-                    className="short-tooltip"
-                    hintText="Top center placement (default)"
-                />
-                &nbsp; &nbsp;
-                <HelpHint
-                    className="bottom short-tooltip"
-                    hintText="Bottom center placement"
-                />
-                &nbsp; &nbsp;
-                <HelpHint
-                    className="left short-tooltip"
-                    hintText="Top left placement"
-                />
-                &nbsp; &nbsp;
-                <HelpHint
-                    className="bottom left short-tooltip"
-                    hintText="Bottom left placement"
-                />
+                <br /><br /><br />
 
-                <br /><br />
-                <strong>
-                    Tooltip Lengths
-                </strong>
-                <br /><br />
+                <FormLabel value="Help Hint Placement" className="detached" />
                 <HelpHint
-                    className="right"
-                    hintText="Regular length tooltip (default)"
+                    data-id="helphint-topplacement"
+                    placement="top"
+                    hintText="Top placement"
                 />
                 &nbsp; &nbsp;
                 <HelpHint
-                    className="right medium-tooltip"
-                    hintText="Medium length tooltip"
+                    data-id="helphint-bottomplacement"
+                    placement="bottom"
+                    hintText="Bottom placement"
                 />
                 &nbsp; &nbsp;
                 <HelpHint
-                    className="right short-tooltip"
-                    hintText="Short length tooltip"
+                    data-id="helphint-leftplacement"
+                    placement="left"
+                    hintText="Left placement"
                 />
-            
-                <br /><br />
-                <strong>
-                    Inline help hint style.
-                </strong>
-                <br /><br />
-                <FormTextField
-                    labelText="Label"
-                    labelHelpText="Here is an inline help hint"
-                    helpClassName="short-tooltip inline"
-                />
-
-                <br />
-                <strong>
-                    Help Label with Auto Width.
-                </strong>
-                <br />
+                &nbsp; &nbsp;
                 <HelpHint
-                    className="width-auto bottom"
-                    hintText="Provisioning">
-                    <label className="row-help">PROV</label>
-                </HelpHint>
-
+                    data-id="helphint-rightplacement"
+                    placement="right"
+                    hintText="Right placement"
+                />
             </div>
         );
     }

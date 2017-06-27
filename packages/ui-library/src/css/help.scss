@@ -1,15 +1,24 @@
-.help-tooltip {
-    $tooltip-edge-offset: 10px;
-    $help-icon-size: 18px;
-    $animation-timing: 0.5s;
-    $inline-icon-height: 12px;
-    $pointer-size: 6px;
 
-    display: inline-block;
-    position: relative;
-    background: transparent;
-    cursor: pointer;
-    line-height: 1em;
+.help-tooltip {
+    $help-icon-size: 18px;
+    $inline-icon-height: 12px;
+
+    @mixin bg-styles($bg-color) {
+        background-color: $bg-color;
+
+        &.place-right:after {
+            border-right-color: $bg-color;
+        }
+        &.place-left:after {
+            border-left-color: $bg-color;
+        }
+        &.place-top:after {
+            border-top-color: $bg-color;
+        }
+        &.place-bottom:after {
+            border-bottom-color: $bg-color;
+        }
+    }
 
     @mixin default-icon-styles {
         height: $inline-icon-height;
@@ -19,7 +28,25 @@
         display: inline-block;
     }
 
-    &.inline {
+    display: inline-block;
+    background: transparent;
+    line-height: 1em;
+
+    // overrides for the default react-tooltip styling
+    .__react_component_tooltip {
+        color: $color-white;
+        font-size: 14px;
+        text-transform: none;
+        white-space: normal;
+        font-weight: normal;
+        padding: 8px 10px;
+
+        &.type-dark {
+            @include bg-styles($color-midnight);
+        }
+    }
+
+    .inline {
         &:hover {
             .icon-help {
                 color: $color-midnight;
@@ -28,9 +55,9 @@
         .icon-help {
             @include default-icon-styles;
             width: $inline-icon-height - 1px;
+
             &:before {
-                //change to icon-help-rounded
-                content: '\48';
+                content: '\48'; //change to icon-help-rounded
             }
         }
         .icon-lock {
@@ -46,216 +73,12 @@
         color: $color-midnight;
         display: inline-block;
         vertical-align: baseline;
+        cursor: pointer;
     }
-    .tooltip-text {
-        display: none;
-        position: absolute;
-        bottom: 100%;
-        left: 50%;
 
-        width: 0;
-        padding: 0;
-        margin: 0;
-        z-index: 1000;
-
-        -webkit-backface-visibility: hidden; // keeps animation from flickering in Chrome
-
-        @include animation(fade-in 0.5s);
-
-        .tooltip-text-content {
-            $width: 340px;
-
-            position: relative;
-            box-sizing: border-box;
-            width: $width;
-            margin: 0 0 $pointer-size floor($width/-2);
-            background: $color-midnight;
-            color: $color-white;
-            padding: 10px;
-            font-size: 14px;
-            text-transform: none;
-            white-space: normal;
-            font-weight: normal;
-            line-height: 1.2em;
-            font-family: $font-pn-regular;
-
-            @include border-radius(4px);
-
-            &:before {
-                content: '';
-                position: absolute;
-                border-style: solid;
-                border-width: $pointer-size;
-                line-height: 1em;
-                border-color: $color-midnight transparent transparent transparent;
-                bottom: -12px;
-                left: 50%;
-                margin: 0 0 0 (-$pointer-size);
-            }
-            &:after {
-                $hover-width: floor($width*0.6);
-                content: '';
-                position: absolute;
-                height: 10px;
-                bottom: -10px;
-                left: 10%;
-                right: 10%;
-                background: transparent;
-            }
-        }
-        a {
-            color: $color-white;
-            text-decoration: underline;
-        }
-    }
-    &:hover,
-    &.show {
-        .tooltip-text {
-            display: block;
-        }
-    }
-    &.short-tooltip {
-        $width: 180px;
-
-        .tooltip-text {
-            .tooltip-text-content {
-                width: $width;
-                margin: 0 0 $pointer-size floor($width/-2);
-            }
-        }
-        &.left {
-            .tooltip-text {
-                .tooltip-text-content {
-                    margin: 0 0 $pointer-size (-($width - 16));
-                }
-            }
-            &.bottom {
-                .tooltip-text {
-                    .tooltip-text-content {
-                        margin: $pointer-size 0 0 (-($width - 16));
-                    }
-                }
-            }
-        }
-    }
-    &.medium-tooltip,
-    &.inline { //inline added to keep same size with removal of medium-tooltip class from Form labels. Will remove when dynamic
-        $width: 260px;
-
-        .tooltip-text {
-            .tooltip-text-content {
-                width: $width;
-                margin: 0 0 $pointer-size floor($width/-2);
-            }
-        }
-        &.left {
-            .tooltip-text {
-                .tooltip-text-content {
-                    margin: 0 0 $pointer-size (-($width - 16));
-                }
-            }
-            &.bottom {
-                .tooltip-text {
-                    .tooltip-text-content {
-                        margin: $pointer-size 0 0 (-($width - 16));
-                    }
-                }
-            }
-        }
-    }
-    &.right {
-        .tooltip-text {
-            .tooltip-text-content {
-                margin: 0 0 $pointer-size -16px;
-
-                &:before {
-                    left: 0;
-                    margin: 0 0 0 $tooltip-edge-offset;
-                }
-                &:after {
-                    left: 0;
-                    right: 30%;
-                }
-            }
-        }
-    }
-    &.left {
-        $width: 340px;
-
-        .tooltip-text {
-            .tooltip-text-content {
-                margin: 0 0 $pointer-size (-($width - 16));
-
-                &:before {
-                    right: 0;
-                    left: auto;
-                    margin: 0 $tooltip-edge-offset 0 0;
-                }
-                &:after {
-                    right: 0;
-                    left: 30%;
-                }
-            }
-        }
-    }
-    &.bottom {
-        .tooltip-text {
-            top: 100%;
-            bottom: auto;
-
-            .tooltip-text-content {
-                margin-top: $pointer-size;
-
-                &:after {
-                    top: auto;
-                    bottom: 100%;
-                }
-                &:before {
-                    border-color: transparent transparent $color-midnight transparent;
-                    top: -12px;
-                    bottom: auto;
-
-                }
-            }
-            &:after {
-                top: -25px;
-                bottom: auto;
-            }
-        }
-    }
     &.warning {
-        .tooltip-text {
-            background: $color-critical-red;
-
-            &:before {
-                border-color: $color-critical-red transparent transparent transparent;
-            }
-        }
-        &.bottom {
-            .tooltip-text {
-                &:before {
-                    border-color: transparent transparent $color-critical-red transparent;
-                }
-            }
-        }
-    }
-    // auto width tooltips
-    &.width-auto {
-        .tooltip-text {
-            width: auto;
-            left: auto;
-            .tooltip-text-content {
-                width: auto;
-                margin-left: 0;
-                &:before {
-                    left: 0;
-                    margin: 0 0 0 $tooltip-edge-offset;
-                }
-                &:after {
-                    left: 0;
-                    right: 30%;
-                }
-            }
+        .__react_component_tooltip {
+            @include bg-styles($color-critical-red);
         }
     }
 }

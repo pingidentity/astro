@@ -15,6 +15,8 @@ var React = require("react"),
  *     The item's identifier
  * @property {string} name
  *     The item's display text
+ * @property {string} helpHintText
+ *     Text to display in help hint next to the item's name
  * @property {boolean} disabled
  *     Disables the input
  * @property {boolean} hidden
@@ -65,7 +67,8 @@ var React = require("react"),
  *         {
  *             id: PolicyConditionsConstants.ConditionType.APS_CUSTOMERS,
  *             name: "Customers",
- *             hidden: !this.props.apsCustomersEnabled
+ *             hidden: !this.props.apsCustomersEnabled,
+               helpHintText: "Sample help hint text"
  *         },
  *         {
  *             id: PolicyConditionsConstants.ConditionType.APS_WHATEVER,
@@ -128,7 +131,8 @@ var FormRadioGroup = React.createClass({
                     className={className}
                     key={item.id}
                     data-id={dataId + "_label_" + item.id}
-                    value={item.name}>
+                    value={item.name}
+                    hint={item.helpHintText}>
 
                     <input
                         data-id={dataId + "_" + item.id}
@@ -139,7 +143,7 @@ var FormRadioGroup = React.createClass({
                         onChange={this._handleChange}
                         disabled={radioDisabled} />
                     <div className="circle"></div>
-                    
+
                 </FormLabel>
             );
         }.bind(this));

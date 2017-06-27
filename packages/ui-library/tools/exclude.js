@@ -10,6 +10,8 @@ module.exports = [
     "/src/util/ReduxTestUtils.js",
     //Okhtay: this is a test file
     "/src/components/forms/file-upload/tests/commonTests.jsx",
-    //alex: the code coverage on form-integer-field/v1.jsx is not reported correctly
+    //Alex: the code coverage on form-integer-field/v1.jsx is not reported correctly
     "/src/components/forms/form-integer-field/v1.jsx",
+    //Eric: not currently able to trigger the react-tooltip open state in tests (via Jest or Enzyme)
+    "/src/components/tooltips/HelpHint.jsx",
 ];

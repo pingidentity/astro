@@ -5,6 +5,7 @@ var React = require("re-react"),
     FormRadioGroup = require("../FormRadioGroup.jsx"),
     FormCheckbox = require("../FormCheckbox.jsx"),
     FormSearchBox = require("../FormSearchBox.jsx"),
+    HelpHint = require("../../tooltips/HelpHint.jsx"),
     Constants = require("./v2-constants");
 
 /**
@@ -20,7 +21,8 @@ module.exports = React.createClass({
         className: React.PropTypes.string.affectsRendering,
         type: React.PropTypes.oneOf([
             Constants.ListType.SINGLE,
-            Constants.ListType.MULTI
+            Constants.ListType.MULTI,
+            Constants.ListType.VIEWONLY
         ]).affectsRendering,
         items: React.PropTypes.arrayOf(
             React.PropTypes.shape({
@@ -174,7 +176,10 @@ module.exports = React.createClass({
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container
  * @param {SelectionList.types} [type=SelectionList.types.SINGLE]
- *     Enum to specify the type of input fields to render (radio for SINGLE, checkboxes for MULTI)
+ *     Enum to specify the type of list items to render
+ *         SINGLE for radio inputs next to each list item
+ *         MULTI for checkboxe inputs next to each list item
+ *         VIEWONLY for text only list items
  * @param {SelectionListItem[]} items
  *     Actual data to display in the component
  * @param {array|string|number} [selectedItemIds]
@@ -188,7 +193,8 @@ var ListOptions = React.createClass({
         "data-id": React.PropTypes.string,
         type: React.PropTypes.oneOf([
             Constants.ListType.SINGLE,
-            Constants.ListType.MULTI
+            Constants.ListType.MULTI,
+            Constants.ListType.VIEWONLY
         ]).affectsRendering,
         items: React.PropTypes.arrayOf(
             React.PropTypes.shape({
@@ -266,16 +272,43 @@ var ListOptions = React.createClass({
                     className="stacked"
                     checked={checked}
                     onValueChange={onValueChangeFunc}
+                    labelHelpText={item.helpHintText}
                 />
             );
         }.bind(this));
     },
 
+    /**
+    * @desc Generate tooltip for item with helpHintText property
+    * @param {object} item
+    *     and object with the items properties including the helpHintText
+    * @return {object}
+    *     The help icon with tooltip text
+    * @private
+    * @ignore
+    */
+    _genTooltip: function (item) {
+        return item.helpHintText
+            ? <HelpHint
+                hintText={item.helpHintText}
+                placement="right"
+                className="inline"
+            />
+            : null;
+    },
+
+    /**
+    * @desc Generate list of view-only items
+    * @return {object}
+    *     The list of view-only options
+    * @private
+    * @ignore
+    */
     _genViewonlyOptions: function () {
         return this.props.items.map(function (item) {
             return (
                 <div className="view-item">
-                    {item.name}
+                    {item.name}{this._genTooltip(item)}
                 </div>
             );
         }.bind(this));

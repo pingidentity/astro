@@ -18,7 +18,7 @@ var SelectionListDemo = React.createClass({
     _singleSelectItems: [
         { name: "Hockey", id: 1 },
         { name: "Soccer", id: 2 },
-        { name: "Basketball", id: 3 },
+        { name: "Basketball", id: 3, helpHintText: "Selection List items may have Help Hints" },
         { name: "Swimming", id: 4 },
         { name: "Chess", id: 5 },
         { name: "Cross Country Skiing", id: 6 },
@@ -30,7 +30,7 @@ var SelectionListDemo = React.createClass({
     _multiSelectItems: [
         { name: "Apple", id: 1 },
         { name: "Orange", id: 2 },
-        { name: "Banana", id: 3 },
+        { name: "Banana", id: 3, helpHintText: "Selection List items may have Help Hints" },
         { name: "Watermelon", id: 4 },
         { name: "Grape Fruit", id: 5 },
         { name: "Peach", id: 6 },

@@ -27,7 +27,7 @@ var FormRadioGroupDemo = React.createClass({
     render: function () {
         var radioItems = [
             { id: "1", name: "Radio 1" },
-            { id: "2", name: "Radio 2" },
+            { id: "2", name: "Radio 2", helpHintText: "Radio 2 help hint" },
             { id: "3", name: "Radio 3", disabled: true }
         ];
 

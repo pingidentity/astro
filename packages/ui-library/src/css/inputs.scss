@@ -116,14 +116,9 @@ label {
         margin: 0 0 7px;
 
         .help-tooltip {
-            margin-left: 10px;
-            margin-top: -3px;
+            margin-left: 7px;
             line-height: 14px;
             vertical-align: middle;
-        }
-        .help-tooltip.inline {
-            margin-left: 5px;
-            margin-top: 0;
         }
     }
 
@@ -454,9 +449,9 @@ label {
             display: none;
         }
         .help-tooltip {
-            height: 23px;
+            height: 19px;
             vertical-align: bottom;
-            margin: 0 0 0 10px;
+            margin: 0 0 0 7px;
         }
     }
 
@@ -1527,6 +1522,9 @@ input[type=file] {
                 }
             }
         }
+    }
+    .help-tooltip {
+        margin: 0 0 0 7px;
     }
 }
 

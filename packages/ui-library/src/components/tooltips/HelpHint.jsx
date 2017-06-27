@@ -1,6 +1,20 @@
 var React = require("react");
-var classnames = require("classnames");
 var Utils = require("../../util/Utils");
+var ReactTooltip = require("react-tooltip");
+var _ = require("underscore");
+
+
+/**
+ * @enum {string}
+ * @alias HelpHint.Positions
+ */
+var Placements = {
+    TOP: "top",
+    BOTTOM: "bottom",
+    LEFT: "left",
+    RIGHT: "right"
+};
+
 
 /**
  * @class HelpHint
@@ -35,12 +49,19 @@ var HelpHint = React.createClass({
         "data-id": React.PropTypes.string,
         id: React.PropTypes.string,
         className: React.PropTypes.string,
+        placement: React.PropTypes.oneOf([
+            Placements.TOP,
+            Placements.BOTTOM,
+            Placements.LEFT,
+            Placements.RIGHT
+        ]),
         hintText: React.PropTypes.any.isRequired
     },
 
     getDefaultProps: function () {
         return {
-            "data-id": "helpHint"
+            "data-id": "helpHint",
+            className: ""
         };
     },
 
@@ -49,25 +70,72 @@ var HelpHint = React.createClass({
         e.preventDefault();
     },
 
+    _getPlacement: function () {
+        var classNames = this.props.className,
+            placement = "right";
+
+        // use newer placement prop if present
+        if (this.props.placement) {
+            placement = this.props.placement;
+
+        // otherwise try parsing it from the className prop
+        // since react tooltip only has 4 postions, precedence is given to top/bottom over left/right
+        } else if (classNames) {
+            placement = classNames.indexOf("left") > -1 ? "left" : placement;
+            placement = classNames.indexOf("top") > -1 ? "top" : placement;
+            placement = classNames.indexOf("bottom") > -1 ? "bottom" : placement;
+
+            if (!Utils.isProduction() && placement !== "right") {
+                console.warn(Utils.deprecateMessage("className css positioning", "position"));
+            }
+        }
+
+        return placement;
+    },
+
     componentWillMount: function () {
         if (this.props.id && !Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("id", "data-id"));
         }
     },
-    
+
+    componentDidMount: function () {
+        if (this.props.show || this.props.className.indexOf("show") > -1) {
+            this.show();
+        }
+    },
+
+    show: function () {
+        ReactTooltip.show(this.target);
+    },
+
     render: function () {
         var dataId = this.props.id || this.props["data-id"],
-            iconName = this.props.lock ? "icon-lock" : "icon-help";
+            iconName = this.props.lock ? "icon-lock" : "icon-help",
+            uid = _.uniqueId("rtt_");
+
         return (
-            <div
-                className={classnames("help-tooltip", this.props.className)}
-                data-id={dataId}
-                onClick={this._handleClick}>
-                {this.props.children || (<div><span className={iconName}></span></div>)}
-                <div className="tooltip-text"><div className="tooltip-text-content">{this.props.hintText}</div></div>
+            <div className="help-tooltip" data-id={dataId}>
+                <div
+                    data-id={dataId + "-target"}
+                    className={this.props.className}
+                    onClick={this._handleClick}
+                    data-tip={true}
+                    data-for={uid}
+                    ref={function (target) { this.target = target; }.bind(this)}>
+                    {this.props.children || (<span className={iconName} data-id={dataId + "-icon"} />)}
+                </div>
+                <ReactTooltip
+                    id={uid}
+                    place={this._getPlacement()}
+                    className="tooltip-text"
+                    effect="solid">
+                    {this.props.hintText}
+                </ReactTooltip>
             </div>
         );
     }
 });
 
 module.exports = HelpHint;
+module.exports.Placements = Placements;
