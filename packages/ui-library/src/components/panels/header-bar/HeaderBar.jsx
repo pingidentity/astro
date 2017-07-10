@@ -1,6 +1,7 @@
 var React = require("re-react"),
     ReactDOM = require("react-dom"),
     EventUtils = require("../../../util/EventUtils.js"),
+    Utils = require("../../../util/Utils.js"),
     classnames = require("classnames"),
     _ = require("underscore");
 
@@ -48,10 +49,14 @@ var React = require("re-react"),
  *          To define the base "data-id" value for the top-level HTML container.
  * @param {string} [logo]
  *          Leftmost generic company logo or branded logo
+ * @param {string|object} [additionalContent]
+ *          Content to display to the right of the "siteLogo" and "siteTitle"
  * @param {string} [siteLogo]
  *          Site or service specific logo
  * @param {string} [label]
- *          Headerbar label
+ *          DEPRECATED. Use "siteTitle" instead.
+ * @param {string|object} [siteTitle]
+ *          Content to display to the right of the "siteLogo" and to the left of "additionalContent"
  * @param {HeaderBar~navigationLink[]} tree
  *          The data structure of the menus of the headerbar
  * @param {string} [openNode]
@@ -73,23 +78,37 @@ var React = require("re-react"),
 module.exports = React.createClass({
     propTypes: {
         "data-id": React.PropTypes.string.affectsRendering,
-        logo: React.PropTypes.string.affectsRendering,
-        siteLogo: React.PropTypes.string.affectsRendering,
-        tree: React.PropTypes.arrayOf(React.PropTypes.object).affectsRendering,
-        openNode: React.PropTypes.string.affectsRendering,
+        additionalContent: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.object
+        ]).affectsRendering,
         label: React.PropTypes.string.affectsRendering,
+        logo: React.PropTypes.string.affectsRendering,
+        openNode: React.PropTypes.string.affectsRendering,
+        siteLogo: React.PropTypes.string.affectsRendering,
+        siteTitle: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.object
+        ]).affectsRendering,
+        tree: React.PropTypes.arrayOf(React.PropTypes.object).affectsRendering,
         onMenuValueChange: React.PropTypes.func,
         onItemValueChange: React.PropTypes.func
     },
 
     getDefaultProps: function () {
         return {
-            logo: "",
-            siteLogo: "",
             onItemValueChange: _.noop,
             onMenuValueChange: _.noop,
             "data-id": "header-bar"
         };
+    },
+
+    componentWillMount: function () {
+        if (!Utils.isProduction()) {
+            if (this.props.label) {
+                console.warn(Utils.deprecateMessage("label", "siteTitle"));
+            }
+        }
     },
 
     /**
@@ -144,6 +163,8 @@ module.exports = React.createClass({
     },
 
     render: function () {
+        var siteTitle = this.props.siteTitle ? this.props.siteTitle : this.props.label;
+
         return (
             <div id="header" data-id={this.props["data-id"]}>
                 <div className="logo" data-id="header-logo" />
@@ -151,26 +172,31 @@ module.exports = React.createClass({
                 {this.props.siteLogo &&
                     <img className="site-logo" data-id="header-site-logo" src={this.props.siteLogo} />
                 }
-
-                {this.props.label &&
-                    <span className="site-title">{this.props.label}</span>
+                {siteTitle &&
+                    <span className="site-title" data-id={this.props["data-id"] + "-site-title"}>
+                        {siteTitle}
+                    </span>
                 }
-
+                {this.props.additionalContent &&
+                    <span className="additional-content" data-id={this.props["data-id"] + "-additional-content"}>
+                        {this.props.additionalContent}
+                    </span>
+                }
                 <ul className="product-nav" ref="navContainer">
-                {
-                    this.props.tree.map(function (item) {
-                        var props = _.defaults({
-                            key: item.id,
-                            id: item.id,
-                            "data-id": item.id,
-                            onClick: this._handleNavClick,
-                            onMenuValueChange: this.props.onMenuValueChange,
-                            showMenu: item.id === this.props.openNode
-                        }, item);
+                    {
+                        this.props.tree.map(function (item) {
+                            var props = _.defaults({
+                                key: item.id,
+                                id: item.id,
+                                "data-id": item.id,
+                                onClick: this._handleNavClick,
+                                onMenuValueChange: this.props.onMenuValueChange,
+                                showMenu: item.id === this.props.openNode
+                            }, item);
 
-                        return React.createElement(NavItem, props, item.children); //eslint-disable-line no-use-before-define
-                    }.bind(this))
-                }
+                            return React.createElement(NavItem, props, item.children); //eslint-disable-line no-use-before-define
+                        }.bind(this))
+                    }
                 </ul>
             </div>);
     }

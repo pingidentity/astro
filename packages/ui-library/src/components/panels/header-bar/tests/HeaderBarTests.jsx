@@ -12,8 +12,11 @@ describe("HeaderBar", function () {
         HeaderBar = require("../HeaderBar.jsx"),
         _ = require("underscore");
 
+    var dataId = "test-header";
+
     function getWrappedComponent (opts) {
         opts = _.defaults(opts || {}, {
+            "data-id": dataId,
             onItemValueChange: jest.genMockFunction(),
             onMenuValueChange: jest.genMockFunction(),
             tree: [
@@ -107,5 +110,31 @@ describe("HeaderBar", function () {
         ] });
         var icon = TestUtils.findRenderedDOMNodeWithClass(component, "icon");
         expect(icon).toBeTruthy();
+    });
+
+    it("renders the siteTitle when provided", function () {
+        var siteTitleText = "Site Title";
+        var wrapper = getWrappedComponent({ siteTitle: siteTitleText });
+        var component = wrapper.refs.target;
+
+        var siteTitle = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-site-title");
+        expect(siteTitle).toBeTruthy();
+        expect(siteTitle.textContent).toEqual(siteTitleText);
+
+        wrapper.sendProps({ siteTitle: null });
+        siteTitle = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-site-title");
+        expect(siteTitle).toBeFalsy();
+    });
+
+    //TODO: remove when label no longer supported
+    it("logs warning for deprecated label prop", function () {
+        console.warn = jest.genMockFunction();
+
+        var wrapper = getWrappedComponent({ label: "something" });
+        var component = wrapper.refs.target; // eslint-disable-line no-unused-vars
+
+        expect(console.warn).toBeCalledWith(
+            "Deprecated: use siteTitle instead of label. Support for label will be removed in next version"
+        );
     });
 });

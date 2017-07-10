@@ -15,16 +15,15 @@ $layout-nav-width-offset: 15px;
     background-color: $color-walrus;
 
     .logo {
-        $logo-env-hgt: 52px;
-        $logo-env-wdt: 300px;
+        $logo-env-size: 52px;
         $logo-env-pad: 5px;
 
-        height: $logo-env-hgt;
-        width: $logo-env-wdt;
+        height: $logo-env-size;
+        width: $logo-env-size;
 
-        position: absolute;
-        top: 0;
-        left: 20px;
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0 0 0 20px;
         background-image: url('#{$img-path}logo-pingidentity.png');
         background-size: contain;
         background-repeat: no-repeat;
@@ -32,8 +31,8 @@ $layout-nav-width-offset: 15px;
 
         img {
             margin: 5px 0 0;
-            max-height: $logo-env-hgt - 2 * $logo-env-pad;
-            max-width: $logo-env-wdt - 2 * $logo-env-pad;
+            max-height: $logo-env-size - 2 * $logo-env-pad;
+            max-width: $logo-env-size - 2 * $logo-env-pad;
 
             &.ping {
                 margin: 0;
@@ -45,22 +44,31 @@ $layout-nav-width-offset: 15px;
         }
     }
     .site-logo {
-        $logo-hgt: 22px;
-
-        position: absolute;
+        display: inline-block;
+        vertical-align: middle;
         top: 14px;
         left: 87px;
-        height: $logo-hgt;
+        height: 22px;
         overflow: visible;
+        margin: 0 0 4px 15px;
+    }
+    .site-title,
+    .additional-content {
+        display: inline-block;
+        height: 46px;
+        line-height: $layout-header-height + 3;
+        color: $color-white;
+        vertical-align: top;
     }
     .site-title {
-        position: absolute;
-        top: 0;
-        left: 86px;
+        margin: 0 0 0 15px;
         font-family: $font-pn-regular;
         font-size: 20px;
-        color: $color-white;
-        line-height: $layout-header-height;
+        min-width: 130px;
+    }
+    .additional-content {
+        margin: 0 0 0 30px;
+        font-family: $font-pn-light;
     }
     .product-nav {
         $item-size: 20px;

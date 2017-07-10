@@ -218,7 +218,7 @@ var DemoApp = React.createClass({
                    */
                 }
                 <HeaderBar {...this.props.header}
-                    label="UI Library"
+                    siteTitle="UI Library"
                     onItemValueChange={this.headerActions.toggleItem} />
 
                 {

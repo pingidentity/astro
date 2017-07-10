@@ -12,8 +12,16 @@ var HeaderBarDemo = React.createClass({
 
         return HeaderBar.Reducer(initState, HeaderBar.Actions.init([
             { id: "help", title: "Help" },
-            { id: "account", label: "John Doe",
-                    children: [{ id: "globe", iconClassName: "icon-globe", title: "Internet", label: "Internet" }] }
+            {
+                id: "account",
+                label: "John Doe",
+                children: [{
+                    id: "globe",
+                    iconClassName: "icon-globe",
+                    title: "Internet",
+                    label: "Internet" }
+                ]
+            }
         ]));
     },
 
@@ -22,10 +30,12 @@ var HeaderBarDemo = React.createClass({
     },
 
     render: function () {
-        //the header bar is styled with position fixed so it's not possible to have a demo for it
+        // by default the header bar is styled with position:fixed, but it has been changed to position:absolute for
+        // purposes of this demo
         return (
             <HeaderBar {...this.state}
-                onItemValueChange={this._handleItemClick}/>);
+                onItemValueChange={this._handleItemClick}
+            />);
     }
 });
 
