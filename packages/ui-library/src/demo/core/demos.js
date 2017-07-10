@@ -226,6 +226,39 @@ module.exports = [
         ]
     },
     {
+        label: "Charting",
+        children: [
+            {
+                label: "Line Chart",
+                demo: require("../components/general/charting/LineChartDemo.jsx"),
+                pathToDoc: "components/general/charting/LineChart.jsx",
+                pathToSource: "components_general_charting_LineChart.jsx.html",
+                pathToDemoSource: "demo_components_general_charting_LineChartDemo.jsx.html"
+            },
+            {
+                label: "Bar Chart",
+                demo: require("../components/general/charting/BarChartDemo.jsx"),
+                pathToDoc: "components/general/charting/BarChart.jsx",
+                pathToSource: "components_general_charting_BarChart.jsx.html",
+                pathToDemoSource: "demo_components_general_charting_BarChartDemo.jsx.html"
+            },
+            {
+                label: "Pie & Donut Chart",
+                demo: require("../components/general/charting/PieChartDemo.jsx"),
+                pathToDoc: "components/general/charting/PieChart.jsx",
+                pathToSource: "components_general_charting_PieChart.jsx.html",
+                pathToDemoSource: "demo_components_general_charting_PieChartDemo.jsx.html"
+            },
+            {
+                label: "Area Chart",
+                demo: require("../components/general/charting/AreaChartDemo.jsx"),
+                pathToDoc: "components/general/charting/AreaChart.jsx",
+                pathToSource: "components_general_charting_AreaChart.jsx.html",
+                pathToDemoSource: "demo_components_general_charting_AreaChartDemo.jsx.html"
+            }
+        ]
+    },
+    {
         label: "Panels",
         children: [
             {
