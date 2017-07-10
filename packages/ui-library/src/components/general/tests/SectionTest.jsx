@@ -98,6 +98,25 @@ describe("Section", function () {
         expect(root.getAttribute("class")).toContain("extra");
     });
 
+    it("Stateless: renders unopenable", function () {
+        var view = ReactTestUtils.renderIntoDocument(
+            <Section title="My Section" className="extra" data-id="my-section" disableExpand={true}>
+                content
+            </Section>
+        );
+        var root = TestUtils.findRenderedDOMNodeWithDataId(view, "my-section");
+
+        expect(root.getAttribute("class")).toContain("disable-expand");
+
+        var title = TestUtils.findRenderedDOMNodeWithDataId(view, "my-section");
+
+        ReactTestUtils.Simulate.click(title);
+
+        expect(view.props.open).toBeFalsy();
+
+        expect(title.getAttribute("class")).not.toContain("open");
+    });
+
     it("Stateful: renders custom classname and data-id", function () {
         var view = ReactTestUtils.renderIntoDocument(
             <Section title="My Section" className="extra" data-id="my-section" expanded={true} stateless={false}>

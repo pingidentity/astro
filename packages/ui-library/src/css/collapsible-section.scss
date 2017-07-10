@@ -61,6 +61,16 @@
             }
         }
     }
+    &.disable-expand {
+        .left:before, 
+        .right:after {
+            content: '';
+        }
+        .collapsible-section-title {
+            pointer-events: none;
+            cursor: default;
+        }
+    }
     &.open {
         > .collapsible-section-content {
             display: block;

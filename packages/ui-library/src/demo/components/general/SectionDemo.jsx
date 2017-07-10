@@ -48,6 +48,19 @@ var SectionDemo = React.createClass({
                         vitae risus ac, venenatis luctus lacus.
                     </div>
                 </Section>
+                <Section
+                    title="My unopenable section"
+                    stateless={true}
+                    data-id="section-2"
+                    className="extra"
+                    disableExpand={true}>
+                    <div>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas lectus vulputate
+                        diam porta rhoncus. Aenean sollicitudin nunc dui, eget cursus nisi interdum vitae. Donec
+                        nec justo quis velit ullamcorper dictum vel sed quam. Etiam purus libero, porttitor
+                        vitae risus ac, venenatis luctus lacus.
+                    </div>
+                </Section>
             </div>
         );
     }

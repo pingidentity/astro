@@ -23,6 +23,8 @@ var React = require("react"),
  *     DEPRECATED. Use "data-id" instead. To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
+ * @param {boolean} [disableExpand]
+ *     Optional attribute to indicate that section is unopenable.
  * @param {object} [accessories]
  *     A container where text, buttons, etc may be passed in to render on the right side of the collapsed section
  * @param {boolean} [stateless]
@@ -103,18 +105,23 @@ var SectionStateless = React.createClass({
         titleValue: React.PropTypes.oneOfType([
             React.PropTypes.string,
             React.PropTypes.object
-        ])
+        ]),
+        disableExpand: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
         return {
             "data-id": "section",
             expanded: false,
-            onToggle: _.noop
+            onToggle: _.noop,
+            disableExpand: false
         };
     },
 
     _handleToggle: function () {
+        if (this.props.disableExpand) {
+            return;
+        }
         this.props.onToggle(this.props.expanded);
     },
 
@@ -129,7 +136,8 @@ var SectionStateless = React.createClass({
     render: function () {
         var styles = {
                 "collapsible-section": true,
-                open: this.props.expanded
+                open: this.props.expanded,
+                "disable-expand": this.props.disableExpand
             },
             dataId = this.props.id || this.props["data-id"],
             title = this.props.title;
