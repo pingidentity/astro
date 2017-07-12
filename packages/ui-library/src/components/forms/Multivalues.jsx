@@ -187,6 +187,21 @@ var Multivalues = React.createClass({
     },
 
     /**
+     * add the last entered value to the multivalue list if enter/comma/tab wasn't used
+     * @param {object} e - the event
+     * @private
+     */
+    _handleBlur: function (e) {
+        // simulate a tab key press
+        var syntheticEvent = {
+            target: e.target,
+            preventDefault: _.noop,
+            keyCode: 9
+        };
+        this._handleKeyDown(syntheticEvent);
+    },
+
+    /**
     * Add string to array and pass to parent
     *
     *
@@ -301,6 +316,7 @@ var Multivalues = React.createClass({
                             ref="value-entry"
                             tabIndex="0"
                             name="value-entry"
+                            onBlur={this._handleBlur}
                             onChange={this._handleChange}
                             onKeyDown={this._handleKeyDown} />
                     </div>

@@ -213,6 +213,36 @@ describe("FormTextField", function () {
         expect(callback.mock.calls.length).toBe(1);
     });
 
+    it ("triggers onValuechange callback on blur", function () {
+        var _onNewValueCallback = function (keyCode) {
+            if (keyCode === 9) {
+                return true;
+            }
+            return false;
+        };
+        component = ReactTestUtils.renderIntoDocument(
+            <Multivalues title="Sites" id="multiselect"
+                         entries={[
+                             "Entry 1",
+                             "Entry 2",
+                             "Entry 3",
+                             "Entry 4"
+                         ]}
+                         onValueChange={callback}
+                         onNewValue={_onNewValueCallback} />
+        );
+        input = TestUtils.findRenderedDOMNodeWithDataId(component,"value-entry");
+
+        expect(component.props.entries.length).toBe(4);
+
+        //simulate typing a letter
+        input.value = "Entry 5";
+        ReactTestUtils.Simulate.blur(input);
+
+        expect(callback.mock.calls.length).toBe(1);
+        expect(component.props.entries.length).toBe(5);
+    });
+
     it ("trigger onValuechange callback with space", function () {
         var _onNewValueCallback = function (keyCode) {
             if (keyCode === 32) {
