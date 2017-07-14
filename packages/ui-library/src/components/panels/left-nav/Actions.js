@@ -105,7 +105,7 @@ exports.toggleSection = function (id) {
  * @param {number|string} id
  *          The id of the item to select
  * @param {number|string} sectionId
-*           The id of the section the item to select belongs to.
+ *          The id of the section the item to select belongs to.
  * @returns {object}
  *          Action object
  */

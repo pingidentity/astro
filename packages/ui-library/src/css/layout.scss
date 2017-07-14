@@ -198,6 +198,21 @@ $layout-nav-width-offset: 15px;
     background-color: $color-timberwolf;
     border-right: $layout-nav-width-offset solid $color-white;
 
+    .collapsible-link {
+        display: block;
+
+        &:after {
+            display: inline-block;
+            top: auto;
+            left: auto;
+            right: auto;
+            margin: 0 0 0 10px;
+            color: inherit;
+        }
+        &:hover {
+            text-decoration: none;
+        }
+    }
     .nav-section {
         padding: 16px 0 14px;
         border-bottom: 1px solid $color-rabbit-fur;
@@ -288,7 +303,7 @@ $layout-nav-width-offset: 15px;
 
         @include transition(max-height ease-out 0.3s);
 
-        li {
+        > li {
             position: relative;
 
             @include transition(all 0.3s);
@@ -305,6 +320,7 @@ $layout-nav-width-offset: 15px;
                 background-color: transparent;
 
                 &:hover {
+                    background-color: rgba($color-white, 0.5);
                     text-decoration: none;
                 }
                 span {
@@ -312,12 +328,8 @@ $layout-nav-width-offset: 15px;
                     pointer-events: inherit;
                 }
             }
-            &:hover {
-                background-color: rgba($color-white, 0.5);
-                text-decoration: none;
-            }
             &.highlighted {
-                &:hover {
+                a:hover {
                     background-color: inherit;
                 }
             }
@@ -398,42 +410,89 @@ $layout-nav-width-offset: 15px;
         }
     }
     &.collapsible {
-        .nav-section {
-            &.open,
-            &.closed {
-                .title {
-                    &:after {
-                        font-family: $icon-font;
-                        text-transform: none;
-                        content: 'Y';
-                        font-size: 5px;
-                        font-weight: bold;
-                        display: inline-block;
-                        margin: 2px 0 0 10px;
-                        line-height: 1em;
-                        vertical-align: top;
+        .title {
+            cursor: pointer;
+        }
+    }
+    .context-selector {
+        padding-bottom: 0;
 
-                        @include transition(all 0.3s);
-                    }
-                }
+        &.context-selector-open {
+            .context-selector-menu {
+                display: block;
             }
-            &.closed {
-                .title {
-                    &:after {
-                        @include rotate(0deg);
-                    }
-                }
+        }
+        .menu {
+            max-height: none;
+            overflow: visible;
+        }
+        .context-selector-value {
+            margin: 0;
+            min-height: 46px;
+
+            &:hover {
+                background-color: inherit;
             }
-            &.open {
-                .title {
-                    &:after {
-                        @include rotate(-180deg);
+            &:after {
+                right: 15px;
+            }
+            &.has-icon {
+                padding-left: 56px;
+            }
+        }
+        .context-selector-menu {
+            display: none;
+            padding: 5px 0 10px;
+            background-color: rgba($color-black, 0.05);
+            z-index: 1;
+
+            @include animation(fade-in 0.3s);
+
+            a {
+                padding: 10px 10px 10px 25px;
+                color: $color-walrus;
+                font-size: 14px;
+
+
+                &:hover {
+                    background-color: inherit;
+                }
+                &.context-selector-add {
+                    padding: 0 10px 0 25px;
+                    margin: 15px 0;
+                    color: $color-active;
+
+                    &:before {
+                        content: '+';
+                        font-family: $icon-font;
+                        font-size: 8px;
+                        display: inline-block;
+                        margin: 0 5px 0 0;
                     }
                 }
             }
         }
-        .title {
-            cursor: pointer;
+    }
+    .top-content {
+        padding: 0 10px 10px;
+
+        .return-btn {
+            position: relative;
+            background-color: transparent;
+            width: 100%;
+            text-align: left;
+            padding-left: 30px;
+
+            &:before {
+                content: '\59';
+                font-family: $icon-font;
+                font-size: 6px;
+                position: absolute;
+                margin: -1px 0 0 0;
+                left: 15px;
+
+                @include rotate(90deg);
+            }
         }
     }
 }
@@ -666,9 +725,11 @@ $layout-nav-width-offset: 15px;
     height: 19px;
     line-height: 19px;
     text-align: center;
+
     @include box-sizing(border-box);
     @include border-radius(10px);
 }
+
 .collapsible-link {
     position: relative;
     display: inline-block;

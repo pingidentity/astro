@@ -13,22 +13,24 @@ describe("LeftNavBar", function () {
         LeftNavBar = require("../LeftNavBar.jsx"),
         _ = require("underscore");
 
+    var navData = [
+        {
+            label: "Section 1",
+            id: "section-1",
+            children: [{ label: "Item 1", id: "item-1" }]
+        },
+        {
+            label: "Section 2",
+            id: "section-2",
+            children: [{ label: "Item 2", id: "item-2" }]
+        }
+    ];
+
     function getWrappedComponent (opts) {
         opts = _.defaults(opts || {}, {
             onItemValueChange: jest.genMockFunction(),
             onSectionValueChange: jest.genMockFunction(),
-            tree: [
-                {
-                    label: "Section 1",
-                    id: "section-1",
-                    children: [{ label: "Item 1", id: "item-1" }]
-                },
-                {
-                    label: "Section 2",
-                    id: "section-2",
-                    children: [{ label: "Item 2", id: "item-2" }]
-                }
-            ]
+            tree: navData
         });
         return ReactTestUtils.renderIntoDocument(<ReduxTestUtils.Wrapper type={LeftNavBar} opts={opts} />);
     }
@@ -52,18 +54,7 @@ describe("LeftNavBar", function () {
         var opts = _.defaults(opts || {}, {
             onItemClick: jest.genMockFunction(),
             onSectionValueChange: jest.genMockFunction(),
-            tree: [
-                {
-                    label: "Section 1",
-                    id: "section-1",
-                    children: [{ label: "Item 1", id: "item-1" }]
-                },
-                {
-                    label: "Section 2",
-                    id: "section-2",
-                    children: [{ label: "Item 2", id: "item-2" }]
-                }
-            ]
+            tree: navData
         });
         var wrapper = ReactTestUtils.renderIntoDocument(<ReduxTestUtils.Wrapper type={LeftNavBar} opts={opts} />);
 
@@ -86,18 +77,7 @@ describe("LeftNavBar", function () {
         var opts = _.defaults(opts || {}, {
             onItemValueChange: jest.genMockFunction(),
             onSectionClick: jest.genMockFunction(),
-            tree: [
-                {
-                    label: "Section 1",
-                    id: "section-1",
-                    children: [{ label: "Item 1", id: "item-1" }]
-                },
-                {
-                    label: "Section 2",
-                    id: "section-2",
-                    children: [{ label: "Item 2", id: "item-2" }]
-                }
-            ]
+            tree: navData
         });
         var wrapper = ReactTestUtils.renderIntoDocument(<ReduxTestUtils.Wrapper type={LeftNavBar} opts={opts} />);
 
@@ -234,18 +214,18 @@ describe("LeftNavBar", function () {
             expect(component.props.selectedSection).toBeFalsy();
         });
     });
-    
+
     it("renders an application logo when logo source is present", function () {
         var logoSource = "https://www.pingidentity.com/etc/designs/pic/clientlibs-all/logos/PingIdentity_logo.png";
         var wrapper = getWrappedComponent({ logoSrc: logoSource });
         var component = wrapper.refs.target;
-        
+
         var copyright = TestUtils.findRenderedDOMNodeWithDataId(component, "copyright");
         expect(copyright).toBeTruthy();
-        
+
         var logo = TestUtils.findRenderedDOMNodeWithDataId(component, "logo-container");
         expect(logo).toBeTruthy();
-        
+
         var application = TestUtils.findRenderedDOMNodeWithClass(component, "ping-application");
         expect(application).toBeTruthy();
         expect(application.getAttribute("src")).toBe(logoSource);
@@ -254,23 +234,109 @@ describe("LeftNavBar", function () {
     it("renders a pingone logo when pingoneLogo variable is set to true", function () {
         var wrapper = getWrappedComponent({ pingoneLogo: true });
         var component = wrapper.refs.target;
-        
+
         var copyright = TestUtils.findRenderedDOMNodeWithDataId(component, "copyright");
         expect(copyright).toBeTruthy();
-        
+
         var logo = TestUtils.findRenderedDOMNodeWithDataId(component, "logo-container");
         expect(logo).toBeTruthy();
     });
-    
+
     it("renders no logo when logoSrc is not provided and pingoneLogo is not declared ", function () {
         var wrapper = getWrappedComponent({ });
         var component = wrapper.refs.target;
-        
+
         var copyright = TestUtils.findRenderedDOMNodeWithDataId(component, "copyright");
         expect(copyright).toBeTruthy();
-        
+
         var logo = TestUtils.findRenderedDOMNodeWithDataId(component, "logo-container");
         expect(logo).toBeFalsy();
+    });
+
+    it("renders a topContent when specified", function () {
+        var text = "Something";
+        var content = <span>{text}</span>;
+        var wrapper = getWrappedComponent({ topContent: content });
+        var component = wrapper.refs.target;
+
+        var topContent = TestUtils.findRenderedDOMNodeWithDataId(component, "nav-top-content");
+        expect(topContent).toBeTruthy();
+        expect(topContent.textContent).toBe(text);
+    });
+
+    it("renders a tree item as a context selector when specified", function () {
+        var id = "my-context-selector";
+        var addLinkCb = jest.genMockFunction();
+        var menuItemData = [
+            {
+                label: "Item 1",
+                id: "context-item-1"
+            },
+            {
+                label: "Item 2",
+                id: "context-item-2"
+            },
+            {
+                label: "Item 22",
+                id: "context-item-3"
+            }
+        ];
+        var contextSelectorData = [{
+            id: id,
+            type: "context",
+            label: "Environement",
+            icon: "globe",
+            addLink: {
+                text: "Environment",
+                callback: addLinkCb
+            },
+            children: menuItemData
+        }];
+        var wrapper = getWrappedComponent({
+            tree: contextSelectorData.concat(navData),
+            selectedContexts: {
+                "my-context-selector": "context-item-3"
+            }
+        });
+        var component = wrapper.refs.target;
+
+        var selector = TestUtils.findRenderedDOMNodeWithDataId(component, id);
+        expect(selector).toBeTruthy();
+        expect(selector.className).not.toContain("context-selector-open");
+
+        var label = TestUtils.findRenderedDOMNodeWithDataId(component, id + "-label");
+        expect(label).toBeTruthy();
+        expect(label.className).not.toContain("open");
+        expect(label.textContent).toBe(menuItemData[2].label);
+
+        ReactTestUtils.Simulate.click(label);
+        expect(component.props.onSectionValueChange).lastCalledWith(id);
+
+        // when an icon is specified react injects extra DOM that needed to be accounted for in the onClick (data-id)
+        ReactTestUtils.Simulate.click(label.childNodes[1]);
+        expect(component.props.onSectionValueChange).lastCalledWith(id);
+
+        var menu = TestUtils.findRenderedDOMNodeWithDataId(component, id + "-menu");
+        var menuItems = menu.childNodes;
+        var menuItem2 = menuItems[1].getElementsByTagName("a")[0];
+        var addLink = menuItems[3].getElementsByTagName("a")[0];
+
+        expect(menuItems.length).toBe(menuItemData.length + 1); // +1 for the addLink
+        expect(menuItem2.textContent).toBe(menuItemData[1].label);
+        expect(addLink.textContent).toBe(contextSelectorData[0].addLink.text);
+        expect(addLink.className).toContain("context-selector-add");
+
+        ReactTestUtils.Simulate.click(addLink);
+        expect(addLinkCb).toBeCalled();
+
+        var openSections = {};
+        openSections[id] = true;
+        wrapper.sendProps({ openSections: openSections });
+        expect(selector.className).toContain("context-selector-open");
+        expect(label.className).toContain("open");
+
+        ReactTestUtils.Simulate.click(menuItem2);
+        expect(component.props.onItemValueChange).lastCalledWith(menuItemData[1].id, id);
     });
 
     //TODO: remove when deprecated props no longer supported

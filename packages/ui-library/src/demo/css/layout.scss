@@ -1,206 +1,204 @@
 // LAYOUT
 
 // VARS
-$layout-nav-link-height: 31px; 	// works better as odd number
+$layout-nav-link-height: 31px;     // works better as odd number
 $layout-nav-offset: 15px;
 $sidenav-lineheight: 22px;
 
 #nav {
-
-	.nav-menus {
-		-ms-overflow-style: -ms-autohiding-scrollbar;
-	}
-	ul.menu {
-		li {
-			a {
-				padding-left: 33px;
-			}
-		}
-	}
+    .nav-menus {
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
 }
 
 .doc {
-	width: 100%;
-	height: 20px;
-	position: inherit;
-	@include transition(all 0.3s);
+    width: 100%;
+    height: 20px;
+    position: inherit;
 
-	h2 {
-		float: left;
-	}
+    @include transition(all 0.3s);
 
-	&.open {
-		height: 1000px;
-		overflow: hidden;
+    h2 {
+        float: left;
+    }
 
-		.toggle {
-			&:before {
-				content: 'close documentation -';
-			}
-		}
-		.toggle-source {
-			&:before {
-				content: '';
-			}
-		}
-		&.source {
-			.toggle {
-				&:before {
-					content: '';
-				}
-			}
-			.toggle-source {
-				&:before {
-					content: 'close source -';
-				}
-			}
-		}
-		iframe, .js-source {
-			height: calc(100% - 35px);
-			&.hidden {
-				display: none;
-			}
-		}
-		.js-source .source-select {
-			display: block;
-		}
-	}
+    &.open {
+        height: 1000px;
+        overflow: hidden;
 
-	.toggle, .toggle-source {
-		position: absolute;
-		right: 30px;
-		cursor: pointer;
+        .toggle {
+            &:before {
+                content: 'close documentation -';
+            }
+        }
+        .toggle-source {
+            &:before {
+                content: '';
+            }
+        }
+        &.source {
+            .toggle {
+                &:before {
+                    content: '';
+                }
+            }
+            .toggle-source {
+                &:before {
+                    content: 'close source -';
+                }
+            }
+        }
+        iframe,
+        .js-source {
+            height: calc(100% - 35px);
+            &.hidden {
+                display: none;
+            }
+        }
+        .js-source .source-select {
+            display: block;
+        }
+    }
 
-		&:before {
-			color: $color-active;
-		}
-	}
-	.toggle {
-		top: 30px;
+    .toggle,
+    .toggle-source {
+        position: absolute;
+        right: 30px;
+        cursor: pointer;
 
-		&:before {
-			content: 'expand documentation +'
-		}
-	}
-	.toggle-source {
-		top: 50px;
+        &:before {
+            color: $color-active;
+        }
+    }
+    .toggle {
+        top: 30px;
 
-		&:before {
-			content: 'view source +'
-		}
-	}
-	iframe {
-		width: 100%;
-		height: 0;
-	}
-	.js-source .source-select {
-		display: none;
-	}
+        &:before {
+            content: 'expand documentation +';
+        }
+    }
+    .toggle-source {
+        top: 50px;
+
+        &:before {
+            content: 'view source +';
+        }
+    }
+    iframe {
+        width: 100%;
+        height: 0;
+    }
+    .js-source .source-select {
+        display: none;
+    }
 }
 
 .clear-both {
-	clear: both;
+    clear: both;
 }
 
 #content {
 
-	.section {
-		padding: 10px 0 30px 0;
-	}
-	.fullscreen {
-		.output {
-			padding:0;
-			margin: 25px 0 0 0;
-			border: none;
+    .section {
+        padding: 10px 0 30px;
+    }
+    .fullscreen {
+        .output {
+            padding: 0;
+            margin: 25px 0 0;
+            border: none;
 
-			&:before {
-				display: none;
-			}
-		}
+            &:before {
+                display: none;
+            }
+        }
 
-		.section-content {
-			margin: 0;
-		}
-	}
-	.section-content {
-		margin: 0 0 0 15px;
-	}
-	.sub-section {
-		padding: 0 0 20px 0;
-	}
-	.demo-description {
-		line-height: 1.4em;
-		margin: 0 0 0 2px;
-		ul {
-			list-style: square inside;
-		}
-	}
-	.markup-wrapper {
-		overflow:hidden;
-	}
-	.inner-markup-wrapper {
-		overflow-x: auto;
-		padding: 1em;
-	}
-	pre.language-markup, pre.language-javascript, .output {
-		position: relative;
-		margin-top: 32px;
-		margin-bottom: 0;
-		padding: 0;
-		@include border-radius(3px);
+        .section-content {
+            margin: 0;
+        }
+    }
+    .section-content {
+        margin: 0 0 0 15px;
+    }
+    .sub-section {
+        padding: 0 0 20px;
+    }
+    .demo-description {
+        line-height: 1.4em;
+        margin: 0 0 0 2px;
+        ul {
+            list-style: square inside;
+        }
+    }
+    .markup-wrapper {
+        overflow: hidden;
+    }
+    .inner-markup-wrapper {
+        overflow-x: auto;
+        padding: 1em;
+    }
+    pre.language-markup,
+    pre.language-javascript,
+    .output {
+        position: relative;
+        margin-top: 32px;
+        margin-bottom: 0;
+        padding: 0;
 
-		&:before {
-			position: absolute;
-			top: -18px;
-			left: 2px;
-			font-size: 14px;
-			font-family: $font-pn-semibold;
-		}
-	}
-	pre.language-markup {
-		overflow: visible;
+        @include border-radius(3px);
 
-		&:before {
-			font-size: 13px;
-			color: $color-elephant;
-			content: 'MARKUP';
-		}
-	}
-	pre.language-javascript {
-		overflow: visible;
+        &:before {
+            position: absolute;
+            top: -18px;
+            left: 2px;
+            font-size: 14px;
+            font-family: $font-pn-semibold;
+        }
+    }
+    pre.language-markup {
+        overflow: visible;
 
-		&:before {
-			font-size: 13px;
-			color: $color-elephant;
-			content: 'JAVASCRIPT';
-		}
-	}
-	.output {
-		padding: 20px;
-		border: 1px dashed $color-elephant;
+        &:before {
+            font-size: 13px;
+            color: $color-elephant;
+            content: 'MARKUP';
+        }
+    }
+    pre.language-javascript {
+        overflow: visible;
 
-		&:before {
-			font-size: 13px;
-			color: $color-elephant;
-			content: 'OUTPUT';
-		}
-		#nav {
-			top: 0;
-			background: none;
-			width: 100%;
+        &:before {
+            font-size: 13px;
+            color: $color-elephant;
+            content: 'JAVASCRIPT';
+        }
+    }
+    .output {
+        padding: 20px;
+        border: 1px dashed $color-elephant;
 
-			> div {
-				display: none;
-			}
-			&:before{
-				content: "Only one LeftNavBar component may be used per page. Refer to the menu on the left as an example.";
-				display: inline-block;
-				width: 100%;
-				font-size: 16px;
-				padding: 10px 20px;
-			}
-		}
-	}
+        &:before {
+            font-size: 13px;
+            color: $color-elephant;
+            content: 'OUTPUT';
+        }
+        #nav {
+            top: 0;
+            background: none;
+            width: 100%;
+
+            > div {
+                display: none;
+            }
+            &:before {
+                content: "Only one LeftNavBar component may be used per page. Refer to the menu on the left as an example.";
+                display: inline-block;
+                width: 100%;
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+        }
+    }
 }
 
 .attention {

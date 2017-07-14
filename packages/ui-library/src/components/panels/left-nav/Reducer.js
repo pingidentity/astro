@@ -6,6 +6,7 @@ var Actions = require("./Actions.js"),
 var initialState = {
     tree: [],
     openSections: {},
+    selectedContexts: {},
     collapsible: false,
     autocollapse: false
 };
@@ -110,8 +111,17 @@ module.exports = function (state, action) {
             nextState = selectByOffset(nextState, -1);
             break;
         case Actions.Types.NAV_BAR_SELECT_ITEM:
-            nextState.selectedNode = action.id;
-            nextState.selectedSection = action.sectionId;
+            var sectionData = _.find(state.tree, function (item) {
+                return item.id === action.sectionId;
+            });
+            var sectionType = sectionData && sectionData.type ? sectionData.type : null;
+
+            if (sectionType === "context") {
+                nextState.selectedContexts[action.sectionId] = action.id;
+            } else {
+                nextState.selectedNode = action.id;
+                nextState.selectedSection = action.sectionId;
+            }
             break;
         case Actions.Types.NAV_BAR_TOGGLE_SECTION:
             if (!state.collapsible) {
@@ -124,12 +134,18 @@ module.exports = function (state, action) {
             }
 
             // Auto-select the first child node of a newly opened section
-            if (state.autocollapse || !state.autocollapse && !state.openSections[action.id]) {
-                if (state.selectedSection !== action.id) {
-                    nextState.selectedSection = action.id;
-                    nextState.selectedNode = findFirstChildIdUnlessSelected(nextState);
+            var sectionData = _.find(state.tree, function (item) {
+                return item.id === action.id;
+            });
+            if (sectionData.type !== "context") {
+                if (state.autocollapse || !state.autocollapse && !state.openSections[action.id]) {
+                    if (state.selectedSection !== action.id) {
+                        nextState.selectedSection = action.id;
+                        nextState.selectedNode = findFirstChildIdUnlessSelected(nextState);
+                    }
                 }
             }
+
             break;
         case Actions.Types.NAV_BAR_INIT:
             nextState.tree = deepClone(action.tree);
