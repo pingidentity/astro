@@ -60,10 +60,10 @@ describe("LeftNavBar-Reducer", function () {
         expect(state.openSections).toEqual({ "section-1": true, "section-2": true });
 
         //Toggle should not collapse any section
-        state = Reducer(state, Actions.toggleSection("section-1", "nav"));
+        state = Reducer(state, Actions.toggleSection("section-1"));
         expect(state.openSections["section-1"]).toBe(true);
 
-        state = Reducer(state, Actions.toggleSection("section-2", "nav"));
+        state = Reducer(state, Actions.toggleSection("section-2"));
         expect(state.openSections["section-2"]).toBe(true);
     });
 
@@ -72,44 +72,44 @@ describe("LeftNavBar-Reducer", function () {
         var state = Reducer(getInitialState({ autocollapse: false, collapsible: true }), {});
         expect(state.openSections).toEqual({});
 
-        state = Reducer(state, Actions.toggleSection("section-1", "nav"));
+        state = Reducer(state, Actions.toggleSection("section-1"));
         expect(state.openSections).toEqual({ "section-1": true });
 
-        state = Reducer(state, Actions.toggleSection("section-2", "nav"));
+        state = Reducer(state, Actions.toggleSection("section-2"));
         expect(state.openSections).toEqual({ "section-1": true, "section-2": true });
 
-        state = Reducer(state, Actions.toggleSection("section-1", "nav"));
+        state = Reducer(state, Actions.toggleSection("section-1"));
         expect(state.openSections).toEqual({ "section-1": false, "section-2": true });
 
-        state = Reducer(state, Actions.toggleSection("section-2", "nav"));
+        state = Reducer(state, Actions.toggleSection("section-2"));
         expect(state.openSections).toEqual({ "section-1": false, "section-2": false });
 
         //Autocollapse enabled
         var state = Reducer(getInitialState({ autocollapse: true, collapsible: true }), {});
         expect(state.openSections).toEqual({});
 
-        state = Reducer(state, Actions.toggleSection("section-1", "nav"));
+        state = Reducer(state, Actions.toggleSection("section-1"));
         expect(state.openSections).toEqual({ "section-1": true });
 
-        state = Reducer(state, Actions.toggleSection("section-2", "nav"));
+        state = Reducer(state, Actions.toggleSection("section-2"));
         expect(state.openSections).toEqual({ "section-1": false, "section-2": true });
 
-        state = Reducer(state, Actions.toggleSection("section-1", "nav"));
+        state = Reducer(state, Actions.toggleSection("section-1"));
         expect(state.openSections).toEqual({ "section-1": true, "section-2": false });
 
-        state = Reducer(state, Actions.toggleSection("section-2", "nav"));
+        state = Reducer(state, Actions.toggleSection("section-2"));
         expect(state.openSections).toEqual({ "section-1": false, "section-2": true });
     });
 
     ["prev", "next"].forEach(function (direction) {
         it("select prev/next when all sections collapsed does nothing", function () {
-            var state = Reducer(getInitialState({ collapsible: true }), Actions.toggleSection("section-1", "nav"));
+            var state = Reducer(getInitialState({ collapsible: true }), Actions.toggleSection("section-1"));
             state = Reducer(state, Actions.selectItem("item-1.1", "section-1"));
             expect(state.selectedNode).toBe("item-1.1");
             expect(state.selectedSection).toBe("section-1");
 
             // Close the section; all sections closed no
-            state = Reducer(state, Actions.toggleSection("section-1", "nav"));
+            state = Reducer(state, Actions.toggleSection("section-1"));
             expect(state.openSections).toEqual({ "section-1": false });
 
             // Attempting to select prev/next section when all sections collapsed should do nothing
@@ -137,13 +137,13 @@ describe("LeftNavBar-Reducer", function () {
             var state = Reducer(getInitialState({
                 autocollapse: autocollapse,
                 collapsible: true
-            }), Actions.toggleSection("section-1", "nav"));
+            }), Actions.toggleSection("section-1"));
             expect(state.selectedSection).toBe("section-1");
 
-            state = Reducer(state, Actions.toggleSection("section-2", "nav"));
+            state = Reducer(state, Actions.toggleSection("section-2"));
             expect(state.selectedSection).toBe("section-2");
 
-            state = Reducer(state, Actions.toggleSection("section-2", "nav"));
+            state = Reducer(state, Actions.toggleSection("section-2"));
             expect(state.selectedSection).toBe("section-2");
         });
 
@@ -151,11 +151,11 @@ describe("LeftNavBar-Reducer", function () {
             var state = Reducer(getInitialState({
                 autocollapse: autocollapse,
                 collapsible: true
-            }), Actions.toggleSection("section-1", "nav"));
+            }), Actions.toggleSection("section-1"));
             expect(state.selectedSection).toBe("section-1");
             expect(state.selectedNode).toBe("item-1.1");
 
-            state = Reducer(state, Actions.toggleSection("section-2", "nav"));
+            state = Reducer(state, Actions.toggleSection("section-2"));
             expect(state.selectedSection).toBe("section-2");
             expect(state.selectedNode).toBe("item-2.1");
         });
@@ -164,16 +164,16 @@ describe("LeftNavBar-Reducer", function () {
             var state = Reducer(getInitialState({
                 autocollapse: autocollapse,
                 collapsible: true
-            }), Actions.toggleSection("section-1", "nav"));
+            }), Actions.toggleSection("section-1"));
             expect(state.selectedSection).toBe("section-1");
 
-            state = Reducer(state, Actions.toggleSection("section-2", "nav"));
+            state = Reducer(state, Actions.toggleSection("section-2"));
             expect(state.selectedSection).toBe("section-2");
 
             state = Reducer(state, Actions.selectItem("item-2.2", "section-2"));
             expect(state.selectedNode).toBe("item-2.2");
 
-            state = Reducer(state, Actions.toggleSection("section-2", "nav"));
+            state = Reducer(state, Actions.toggleSection("section-2"));
             expect(state.selectedSection).toBe("section-2");
             expect(state.selectedNode).toBe("item-2.2");
         });
@@ -181,7 +181,7 @@ describe("LeftNavBar-Reducer", function () {
         it("select next", function () {
             var state = Reducer(
                 getInitialState({ autocollapse: autocollapse }),
-                Actions.toggleSection("section-1", "nav")
+                Actions.toggleSection("section-1")
             );
             state = Reducer(state, Actions.selectItem("item-1.1", "section-1"));
             expect(state.selectedNode).toBe("item-1.1");
@@ -193,7 +193,7 @@ describe("LeftNavBar-Reducer", function () {
         it("select next moves to next section", function () {
             var state = Reducer(
                 getInitialState({ autocollapse: autocollapse }),
-                Actions.toggleSection("section-1", "nav")
+                Actions.toggleSection("section-1")
             );
             state = Reducer(state, Actions.selectItem("item-1.2", "section-1"));
             expect(state.selectedNode).toBe("item-1.2");
@@ -207,7 +207,7 @@ describe("LeftNavBar-Reducer", function () {
         it("select next on last item does nothing", function () {
             var state = Reducer(
                 getInitialState({ autocollapse: autocollapse }),
-                Actions.toggleSection("section-2", "nav")
+                Actions.toggleSection("section-2")
             );
             state = Reducer(state, Actions.selectItem("item-2.2", "section-2"));
             expect(state.selectedNode).toBe("item-2.2");
@@ -222,7 +222,7 @@ describe("LeftNavBar-Reducer", function () {
         it("select previous", function () {
             var state = Reducer(
                 getInitialState({ autocollapse: autocollapse }),
-                Actions.toggleSection("section-2", "nav")
+                Actions.toggleSection("section-2")
             );
             state = Reducer(state, Actions.selectItem("item-2.2", "section-2"));
             expect(state.selectedNode).toBe("item-2.2");
@@ -234,7 +234,7 @@ describe("LeftNavBar-Reducer", function () {
         it("select previous moves to previous section", function () {
             var state = Reducer(
                 getInitialState({ autocollapse: autocollapse }),
-                Actions.toggleSection("section-2", "nav")
+                Actions.toggleSection("section-2")
             );
             state = Reducer(state, Actions.selectItem("item-2.1", "section-2"));
             expect(state.selectedNode).toBe("item-2.1");
@@ -248,7 +248,7 @@ describe("LeftNavBar-Reducer", function () {
         it("select previous when first item is selected does nothing", function () {
             var state = Reducer(
                 getInitialState({ autocollapse: autocollapse }),
-                Actions.toggleSection("section-1", "nav")
+                Actions.toggleSection("section-1")
             );
             state = Reducer(state, Actions.selectItem("item-1.1", "section-1"));
             expect(state.selectedNode).toBe("item-1.1");

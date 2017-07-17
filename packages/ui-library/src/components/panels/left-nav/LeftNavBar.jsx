@@ -457,7 +457,7 @@ var LeftNavSection = React.createClass({
 });
 
 /**
- * @class LeftNavSection
+ * @class LeftNavContextSelector
  * @private
  * @desc Internal class which renders a navigation section of the LeftNavBar
  * @param {string} data-id
