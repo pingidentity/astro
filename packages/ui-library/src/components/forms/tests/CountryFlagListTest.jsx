@@ -40,6 +40,8 @@ jest.dontMock("../../../util/EventUtils.js");
 jest.dontMock("../FormDropDownList.jsx");
 jest.dontMock("../FormLabel.jsx");
 jest.dontMock("../FormError.jsx");
+jest.dontMock("../form-text-field/index.js");
+jest.dontMock("../form-text-field/v2.jsx");
 
 describe("CountryFlagList", function () {
     var React = require("react"),
@@ -325,7 +327,7 @@ describe("CountryFlagList", function () {
         var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 40 }); // down arrow
         expect(component.props.onSearch).toBeCalled();
-        expect(component.props.onSearch.mock.calls[0][0]).toBe("");
+        expect(component.props.onSearch.mock.calls[0][0]).toBe("c"); // up/down keys don't change searchString
         expect(component.props.onSearch.mock.calls[0][2]).toBe(2); //added 1 to searchIndex
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 38 }); // up arrow
         expect(component.props.onSearch).toBeCalled();
@@ -340,9 +342,6 @@ describe("CountryFlagList", function () {
     });
 
     it("translates and sorts country names when current language is not en_us", function () {
-        Translator.translate = jest.genMockFunction().mockReturnValueOnce("translated text 2")
-            .mockReturnValueOnce("translated text 1");
-        Translator.currentLanguage = "vi_vn";
         var component = getComponent();
         var countryList = [
             {
@@ -361,6 +360,12 @@ describe("CountryFlagList", function () {
                 priority: 1,
                 areaCodes: null
             }];
+        // Override Translator to mocks after getComponent so any Translator initialized as part of
+        // the component's creation gets overriden with our latest mocks
+        Translator.translate = jest.genMockFunction().mockReturnValueOnce("translated text 2")
+            .mockReturnValueOnce("translated text 1");
+        Translator.currentLanguage = "vi_vn";
+
         countryList = component._translateCountryNames(countryList);
         expect(countryList[0].name).toBe("translated text 1");
         expect(countryList[0].iso2).toBe("ca");

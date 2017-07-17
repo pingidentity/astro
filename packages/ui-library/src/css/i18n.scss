@@ -49,14 +49,12 @@ $flagsImageExtension: 'png' !default;
         }
         .input-container {
             .wrapper {
-                height: 38px;
                 .selected-option {
-                    height: 38px;
                     z-index: 1;
                     position: relative;
                     width: 42px;
                     height: 100%;
-                    padding: 0 0 0 8px;
+                    padding: 0;
                 }
                 &:after {
                     display: none;
@@ -83,9 +81,6 @@ $flagsImageExtension: 'png' !default;
             }
         }
     }
-    .input-text {
-        margin: 0;
-    }
 }
 
 .intl-country-selector {
@@ -108,7 +103,6 @@ $flagsImageExtension: 'png' !default;
         }
     }
 }
-
 
 .intl-tel-input,
 .intl-country-selector {
@@ -133,50 +127,62 @@ $flagsImageExtension: 'png' !default;
         visibility: hidden;
     }
 
-    // specify types to increase specificity e.g. to override bootstrap v2.3
-    input,
-    input[type=text],
-    input[type=tel] {
-        position: relative;
-        // input is bottom level, below selected flag and dropdown
-        z-index: 0;
+    .form-control {
+        // specify types to increase specificity e.g. to override bootstrap v2.3
+        input,
+        input[type=text],
+        input[type=tel] {
+            position: relative;
+            // input is bottom level, below selected flag and dropdown
+            z-index: 0;
 
-        // any vertical margin the user has on their inputs would no longer work as expected
-        // because we wrap everything in a container div. i justify the use of !important
-        // here because i don't think the user should ever have vertical margin here - when
-        // the input is wrapped in a container, vertical margin messes up alignment with other
-        // inline elements (e.g. an adjacent button) in firefox, and probably other browsers.
-        margin-top: 0 !important;
-        margin-bottom: 0 !important;
+            // any vertical margin the user has on their inputs would no longer work as expected
+            // because we wrap everything in a container div. i justify the use of !important
+            // here because i don't think the user should ever have vertical margin here - when
+            // the input is wrapped in a container, vertical margin messes up alignment with other
+            // inline elements (e.g. an adjacent button) in firefox, and probably other browsers.
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
 
-        // make space for the selected flag
-        // Note: no !important here, as the user may want to tweak this so that the
-        // perceived input padding matches their existing styles
-        padding: $inputPadding $inputPadding $inputPadding $selectedFlagWidth + $inputPadding;
+            // make space for the selected flag
+            // Note: no !important here, as the user may want to tweak this so that the
+            // perceived input padding matches their existing styles
+            padding: $inputPadding $inputPadding $inputPadding $selectedFlagWidth + $inputPadding;
 
-        // any margin-left here will push the selected-flag away
-        margin-left: 0;
+            // any margin-left here will push the selected-flag away
+            margin-left: 0;
 
-        // when user presses invalid key, we add a class which instantly adds a bg color,
-        // then when we remove that class, this does a quick fade back to no bg
-        transition: background-color 100ms ease-out;
+            // when user presses invalid key, we add a class which instantly adds a bg color,
+            // then when we remove that class, this does a quick fade back to no bg
+            transition: background-color 100ms ease-out;
+        }
+        // when user presses invalid key, add this class temporarily to change bg color
+        input.iti-invalid-key {
+            // override the default transition state to show the change instantly
+            transition: background-color 0;
+            background-color: #ffc7c7;
+        }
+
+        // disable hover state when input is disabled
+        input[disabled] + .flag-container:hover,
+        input[readonly] + .flag-container:hover {
+            cursor: default;
+        }
     }
-    // when user presses invalid key, add this class temporarily to change bg color
-    input.iti-invalid-key {
-        // override the default transition state to show the change instantly
-        transition: background-color 0;
-        background-color: #ffc7c7;
-    }
 
-    // disable hover state when input is disabled
-    input[disabled] + .flag-container:hover,
-    input[readonly] + .flag-container:hover {
-        cursor: default;
-    }
+    .input-custom-select {
+        .selected-option {
+            &:focus {
+                border-color: $color-input-fill;
+            }
+        }
 
-    .input-custom-select .selected-option {
-        &:focus {
-            border-color: $color-input-fill;
+        // Override default input styles
+        input[type=text].selected-option-label {
+            width: 20px;
+            height: 15px;
+            padding: 0;
+            border-radius: 0;
         }
     }
 
@@ -187,14 +193,6 @@ $flagsImageExtension: 'png' !default;
         height: 100%;
         padding: 0 0 0 $flagPadding;
 
-        // vertically center the flag
-        .iti-flag {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            margin: auto;
-        }
-
         .no-selection:before {
             content: ' ';
             position: absolute;
@@ -204,7 +202,6 @@ $flagsImageExtension: 'png' !default;
             width: 20px;
             background: darken($color-sonic, 5);
         }
-
         .arrow {
             position: absolute;
             // split the difference between the flag and the arrow height to verically center
@@ -286,6 +283,27 @@ $flagsImageExtension: 'png' !default;
 
         &:hover {
             cursor: pointer;
+        }
+    }
+
+    // hacks for bad dom
+    .input-text {
+        margin: 0;
+
+        .input-container {
+            display: inline;
+        }
+        .iti-flag,
+        .iti-flag[readonly] {
+            border-style: solid !important;
+            border-color: $color-sonic !important;
+            border-width: 12px 10px 11px !important;
+        }
+        .iti-flag {
+            position: relative;
+            display: inline-block;
+            box-sizing: content-box;
+            box-shadow: none;
         }
     }
 }

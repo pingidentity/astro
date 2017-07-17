@@ -5,6 +5,8 @@ jest.dontMock("../TimePicker.jsx");
 jest.dontMock("../../forms/FormError.jsx");
 jest.dontMock("../../forms/form-select-field/index.js");
 jest.dontMock("../../forms/form-select-field/v2.jsx");
+jest.dontMock("../../forms/form-text-field/index.js");
+jest.dontMock("../../forms/form-text-field/v2.jsx");
 jest.dontMock("../../forms/FormDropDownList.jsx");
 
 describe("TimePicker", function () {
@@ -158,10 +160,9 @@ describe("TimePicker", function () {
 
         var date = new Date("April 1 2016");
         var offset = date.getTimezoneOffset() / 60;
-        var selected = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
-
+        var selected = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-input-input");
         // subtract time zone ofset from 1400 hours eg: 14 - 7 (PDT -700)
-        expect(selected.textContent).toEqual((14 - offset) + ":00am");
+        expect(selected.value).toEqual((14 - offset) + ":00am");
     });
 
     it("verify default data-id", function () {

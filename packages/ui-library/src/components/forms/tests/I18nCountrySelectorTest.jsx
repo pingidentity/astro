@@ -31,6 +31,8 @@ jest.dontMock("../i18n/I18nCountrySelector.jsx");
 jest.dontMock("../i18n/CountryFlagList.jsx");
 jest.dontMock("../FormDropDownList.jsx");
 jest.dontMock("../FormError.jsx");
+jest.dontMock("../form-text-field/index.js");
+jest.dontMock("../form-text-field/v2.jsx");
 jest.dontMock("../../../util/i18n/Translator.js");
 
 describe("I18nCountrySelector", function () {

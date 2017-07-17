@@ -59,30 +59,30 @@
     -ms-text-size-adjust: $tsa;
 }
 
-@mixin placeholder-css($color, $font-weight, $padding-top) {
+@mixin placeholder-css($color, $font-weight, $padding-top, $font-style: italic) {
     ::-webkit-input-placeholder {
         color: $color;
         font-weight: $font-weight;
         padding: $padding-top 0 0;
-        font-style: italic;
+        font-style: $font-style;
     }
     :-moz-placeholder { // Firefox 18-
         color: $color;
         font-weight: $font-weight;
         padding: $padding-top 0 0;
-        font-style: italic;
+        font-style: $font-style;
     }
     ::-moz-placeholder {  // Firefox 19+
         color: $color;
         font-weight: $font-weight;
         padding: $padding-top 0 0;
-        font-style: italic;
+        font-style: $font-style;
     }
     :-ms-input-placeholder {
         color: $color;
         font-weight: $font-weight;
         padding: $padding-top 0 0;
-        font-style: italic;
+        font-style: $font-style;
     }
 }
 

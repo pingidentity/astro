@@ -164,7 +164,9 @@ var CountryFlagList = React.createClass({
         countryCodes = countryCodes.map(function (item) {
             return _.defaults({
                 "data-id": "country-" + item.iso2,
-                code: item[this.props.countryCodeDisplayType]
+                code: item[this.props.countryCodeDisplayType],
+                value: item[this.props.countryCodeDisplayType],
+                label: item.name
             }, item);
         }.bind(this));
 
@@ -181,11 +183,13 @@ var CountryFlagList = React.createClass({
                     searchString={this.props.searchString}
                     searchField="name"
                     searchTime={this.props.searchTime}
+                    searchType={FormDropDownList.SearchTypes.KEYBOARD}
                     onSearch={this.props.onSearch}
                     validSearchCharsRegex="/[^a-zA-Z\s]+/"
                     title={title}
                     selectedOption={selectedCountry}
                     selectedOptionLabelClassName={selectorFlagClassName}
+                    showSelectedOptionLabel={false}
                     noneOption={{ label: this.props.labelNoCountry }}
                     noneOptionLabelClassName="country-name" />
         );

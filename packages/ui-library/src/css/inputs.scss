@@ -15,13 +15,19 @@ textarea,
 select {
     -webkit-appearance: none;
     -moz-appearance: none;
+
+    &::-moz-selection {
+        background: none; // prevents odd FF text selection on undo
+    }
     &:-moz-focusring {
         color: transparent;
         text-shadow: 0 0 0 $color-black;
     }
+
     &::-ms-clear {
         display: none;
     }
+
     &::-ms-expand {
         display: none;
     }
@@ -80,24 +86,19 @@ textarea {
     &[disabled] {
         resize: none !important;
     }
-    // being resized
-    &[style] {
-        @include transition(none);
-    }
 }
 
 label {
     position: relative;
     display: inline-block;
+    box-sizing: border-box;
     margin: 0 20px 0 0;
     font-size: 13px;
     text-transform: uppercase;
     vertical-align: top;
     line-height: 1em;
     font-family: $font-pn-regular;
-    box-sizing: border-box;
     cursor: default;
-
 
     .label-text,
     .input-container {
@@ -113,12 +114,17 @@ label {
 
     .label-text {
         color: $color-elephant;
-        margin: 0 0 7px;
+        margin: 0 0 8px;
 
         .help-tooltip {
-            margin-left: 7px;
+            margin-left: 10px;
+            margin-top: -3px;
             line-height: 14px;
             vertical-align: middle;
+        }
+        .help-tooltip.inline {
+            margin-left: 5px;
+            margin-top: 0;
         }
     }
 
@@ -130,7 +136,7 @@ label {
         &.search {
             .input-container {
                 input {
-                    padding-left: 40px;
+                    padding-left: 35px;
                     padding-right: 30px;
                 }
                 &:before {
@@ -138,7 +144,7 @@ label {
                     content: '\73';
                     text-transform: none;
                     position: absolute;
-                    bottom: 10px;
+                    bottom: 12px;
                     left: 10px;
                     font-size: 16px;
                     font-weight: bold;
@@ -150,7 +156,7 @@ label {
                 position: absolute;
                 font-family: $icon-font;
                 text-transform: none;
-                font-size: 12px;
+                font-size: 11px;
                 color: inherit;
                 top: 14px;
                 right: 10px;
@@ -469,11 +475,12 @@ label {
 
         .help-tooltip {
             margin: 0 0 0 10px;
-            height: 14px;
+            height: 18px;
             width: 18px;
             vertical-align: text-bottom;
         }
     }
+
     &.parent {
         font-family: $font-pn-bold;
         display: block;
@@ -654,7 +661,6 @@ input[type=file] {
 .input-text,
 .input-textarea,
 .input-select,
-.input-custom-select,
 .input-file-upload,
 .input-integer,
 .input-radio,
@@ -733,8 +739,7 @@ input[type=file] {
             }
         }
     }
-    select,
-    .selected-option {
+    select {
         appearance: none;
         border: 0;
         border-radius: 0;
@@ -800,23 +805,26 @@ input[type=file] {
 .input-custom-select {
     // prevent the highlighted child from overlapping the input border
     padding: $borderSize;
-    .input-container {
-        .wrapper {
-            overflow: visible; //override the input-select behavior
-        }
-        &:after {
-            z-index: 1;
-        }
 
-    }
-    &:hover {
-        cursor: pointer;
-    }
+    display: inline-block;
+    vertical-align: top;
+
+    width: 190px; // default width
+
     &.open {
         .select-list {
             visibility: visible;
 
             @include animation(fade-in 0.2s);
+        }
+        .input-container {
+            &:last-of-type {
+                .wrapper {
+                    &:after {
+                        @include rotate(-180deg);
+                    }
+                }
+            }
         }
         .selected-option {
             .arrow {
@@ -824,17 +832,96 @@ input[type=file] {
             }
         }
     }
-
-    .selected-option {
-        z-index: 1; // render above the input
-        width: auto;
-        border-radius: inherit;
-        height: $default-input-height - 2px;
-
-        div {
-            line-height: $default-input-height;
+    &.disabled {
+        .input-text {
+            .input-container {
+                @include opacity(1);
+                input {
+                    cursor: default !important;
+                }
+            }
         }
     }
+    // override the input-select behavior
+    .input-container {
+        height: auto;
+
+        @include transition(none);
+        &:before,
+        &:focus {
+            @include transition(none);
+        }
+        &:last-of-type {
+            .wrapper {
+                overflow: visible;
+                border: none;
+            }
+        }
+    }
+
+    // override default input readonly styles
+    .input-text {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 0;
+
+        input[type=text] {
+            width: 100%;
+        }
+    }
+    .readonly {
+        &.input-text {
+            input[type=text] {
+                color: $color-midnight;
+                cursor: pointer;
+                &:hover,
+                &:focus {
+                    @include transition(none);
+                }
+            }
+        }
+        &.form-error {
+            &.input-text {
+                input[type=text] {
+                    &:hover {
+                        border: 1px solid $color-critical-red;
+                    }
+                }
+            }
+        }
+    }
+    .selected-option {
+        @include transition(none);
+        &:hover {
+            @include transition(none);
+        }
+    }
+    // override input defaults
+    &.form-error {
+        &.input-text {
+            input[type=text] {
+                &:hover {
+                    border: 1px solid $color-critical-red;
+                }
+            }
+        }
+        .wrapper:after {
+            right: 28px;
+        }
+    }
+    input[type=text] {
+        @include transition(none);
+        &.selected-option-label {
+            border-radius: $default-input-border-radius $default-input-border-radius 0 0;
+            &:hover,
+            &:focus {
+                cursor: pointer;
+                border-color: $color-input-fill;
+            }
+        }
+    }
+
+    @include placeholder-css($color-midnight, normal, 0, normal); // override placeholder styles on selected option preview
 
     // the dropdown
     .select-list {
@@ -842,14 +929,15 @@ input[type=file] {
         list-style: none;
         position: relative;
         z-index: 2; // popup so render above everything else
-        border-radius: 0 $default-input-border-radius $default-input-border-radius;
-        background: $color-sonic;
-        padding: 0;
-        margin: 0 0 0 (-$borderSize); // margin-left to compensate for the padding on the parent
+        background: $color-white;
+        padding: 8px 0;
         white-space: nowrap;
-        border: $borderSize solid $color-rabbit-fur;
         max-height: 200px;
         overflow-y: scroll;
+        border: 1px solid $color-rabbit-fur;
+
+        @include box-shadow(0 3px 4px rgba($color-black, 0.1));
+        @include border-radius(0 0 $default-input-border-radius $default-input-border-radius);
 
         // place menu above the input element
         &.dropup {
@@ -861,21 +949,100 @@ input[type=file] {
             white-space: normal;
         }
 
+        // selected option
+        .selected {
+            font-family: $font-pn-semibold;
+
+            &:before {
+                content: '';
+                width: 3px;
+                height: 3px;
+                background-color: $color-midnight;
+                display: inline-block;
+                position: absolute;
+                top: 12px;
+                left: 7px;
+
+                @include border-radius(1.5px);
+            }
+        }
+
+        // horizontal rule separator between groups
+        .group-separator {
+            border-top: 1px dotted $color-rabbit-fur;
+            margin: 5px 10px;
+
+            &:first-child {
+                border: none;
+            }
+        }
+        .select-prompt {
+            padding: 7px 40px 7px 15px;
+            font-size: 14px;
+        }
+        .select-search-prompt {
+            font-family: $font-pn-light;
+            font-style: italic;
+            color: $color-stratus;
+        }
+        .select-add {
+            .label {
+                color: $color-elephant;
+                font-size: 13px;
+                margin-right: 4px;
+
+                &:after {
+                    content: ':';
+                }
+            }
+            &.highlighted {
+                background-color: $color-active-blue;
+                color: $color-white;
+
+                .label {
+                    color: $color-white;
+                }
+            }
+        }
+
+        // each group header in dropdown
+        .select-group {
+            padding: 7px 40px 7px 10px;
+            color: $color-elephant;
+            text-transform: uppercase;
+            font-size: 13px;
+
+            &.disabled {
+                color: $color-rabbit-fur;
+            }
+        }
+
         // each item in dropdown
         .select-option,
         .none-option {
-            // Note: decided not to use line-height here for alignment because it causes issues
-            // e.g. large font-sizes will overlap, and also looks bad if one item overflows onto 2 lines
-            padding: 7px 40px 7px 10px;
+            // Note: decided not to use line-height here for alignment because it causes issues e.g. large font-sizes
+            // will overlap, and also looks bad if one item overflows onto 2 lines
+            padding: 7px 40px 7px 15px;
             font-size: 14px;
+            position: relative;
+            line-height: 13px;
+            color: $color-midnight;
 
             &:hover,
             &.highlighted {
-                background: rgba($color-white, 0.5);
+                background-color: $color-active-blue;
+                color: $color-white;
+
+                &:before {
+                    background-color: $color-white;
+                }
+            }
+            &.disabled {
+                background: none;
+                color: $color-rabbit-fur;
             }
         }
     }
-
     .selected-option,
     .select-option,
     .none-option {
@@ -1319,7 +1486,7 @@ input[type=file] {
                     }
                 }
                 &.disabled {
-                    @include opacity(0.4);;
+                    @include opacity(0.4);
                 }
             }
         }
@@ -1599,8 +1766,7 @@ input[type=file] {
         }
     }
     &.input-select {
-        select,
-        .selected-option {
+        select {
             padding-left: 25px;
         }
         .input-container {
@@ -1608,16 +1774,6 @@ input[type=file] {
                 @include requiredCss;
                 top: 5px;
                 bottom: 7px;
-                left: 5px;
-            }
-        }
-    }
-    &.input-custom-select {
-        .selected-option {
-            &:before {
-                @include requiredCss;
-                top: 5px;
-                bottom: 5px;
                 left: 5px;
             }
         }
@@ -1665,12 +1821,22 @@ input[type=file] {
                 width: 0;
             }
         }
+        &.input-text {
+            input {
+                @include requiredPaddingEntered;
+            }
+        }
+        &.input-textarea {
+            textarea {
+                @include requiredPaddingEntered;
+            }
+        }
         &.input-multivalues {
             @include requiredPaddingEntered;
         }
         &.input-select {
             select {
-                padding-left: 15px;
+                padding-left: 10px;
             }
         }
     }
@@ -1733,9 +1899,6 @@ input[type=file] {
         }
     }
     &.input-select {
-        .input-container {
-            padding-right: $icon-spacing;
-        }
         .wrapper {
             border-color: $color-input-error;
 
@@ -1747,6 +1910,11 @@ input[type=file] {
             &:focus {
                 @include errorDisplayCss;
             }
+        }
+    }
+    &.input-select:not(.input-custom-select) {
+        .form-error-icon {
+            right: -21px;
         }
     }
     &.input-toggle {
@@ -1823,6 +1991,17 @@ input[type=file] {
             }
         }
     }
+    &.input-integer {
+        .integer-controls {
+            right: 34px;
+        }
+        a.undo {
+            right: 61px;
+        }
+        &:focus {
+            @include errorDisplayCss;
+        }
+    }
     &.input-timezone {
         padding-right: 26px;
 
@@ -1879,6 +2058,7 @@ input[type=file] {
         @include border-radius(0 0 $default-input-border-radius $default-input-border-radius);
         @include animation(fade-down-in 0.2s);
     }
+
     &.required {
         .input-container,
         .wrapper,
@@ -2051,6 +2231,7 @@ input[type=file] {
     .input-color-picker {
         margin-bottom: 0;
     }
+
     .row-selector {
         margin-bottom: 50px;
     }
@@ -2355,7 +2536,7 @@ label {
 }
 
 
-// DEPRECATED OR SITE-SPECIFIC STYLES ----------------------------------------------------------------------------------
+// DEPRECATED OR SITE-SPECIFIC STYLES --------------------------------------------------------------
 // TODO : move WP styles to WP
 
 label {
@@ -2420,10 +2601,8 @@ label {
                 }
             }
         }
-        &.input-custom-select {
-            .selected-option {
-                margin: 0;
-            }
+        .selected-option-label {
+            margin: 0;
         }
         &.input-checkbox {
             input {
@@ -2537,7 +2716,6 @@ label {
             width: 202px;
             overflow: auto;
             margin: 0 0 10px;
-            text-transform: none;
         }
         .tooltip-menu-option {
             display: block;
@@ -2572,9 +2750,9 @@ label {
         }
         .tooltip-menu-search-clear {
             position: absolute;
-            top: 14px;
+            top: 12px;
             right: 14px;
-            font-size: 11px;
+            font-size: 12px;
 
             &:before {
                 content: 'X';
@@ -2592,7 +2770,6 @@ label {
     @include tooltip-menu;
 
     .collapsible-link {
-        line-height: 40px;
         text-transform: none;
         padding: 0;
     }
@@ -2624,7 +2801,6 @@ label {
         .tooltip-menu-option-title {
             color: $color-walrus;
             background-color: $color-white;
-            text-transform: none;
 
             .icon-clear {
                 &:before {
@@ -2633,7 +2809,6 @@ label {
                 }
             }
             .country-label {
-                text-transform: uppercase;
                 color: $color-elephant;
             }
         }

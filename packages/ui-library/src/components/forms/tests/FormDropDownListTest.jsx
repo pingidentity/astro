@@ -2,9 +2,12 @@ window.__DEV__ = true;
 
 jest.dontMock("../../../util/KeyboardUtils.js");
 jest.dontMock("../../../util/EventUtils.js");
+jest.dontMock("../../../util/FilterUtils.js");
 jest.dontMock("../FormDropDownList.jsx");
 jest.dontMock("../FormLabel.jsx");
 jest.dontMock("../FormError.jsx");
+jest.dontMock("../form-text-field/index.js");
+jest.dontMock("../form-text-field/v2.jsx");
 
 describe("FormDropDownList", function () {
     var React = require("react"),
@@ -17,15 +20,21 @@ describe("FormDropDownList", function () {
 
     var options = [
         { label: "One", value: 1 },
-        { label: "Two", value: 2 },
-        { label: "Three", value: 3 },
-        { label: "Four", value: 4 },
+        { label: "Two", value: 2, group: 3 },
+        { label: "Three", value: 3, group: 2 },
+        { label: "Four", value: 4, group: 1 },
         { label: "Five", value: 5 }
+    ];
+
+    var groups = [
+        { label: "Group A", id: 1 },
+        { label: "Group B", id: 2 },
+        { label: "Group C", id: 3 }
     ];
 
     function getComponent (props) {
         props = _.defaults(props || {}, {
-            stateless: true,
+            controlled: true,
             options: options,
             selectedOption: options[0],
             onToggle: jest.genMockFunction(),
@@ -98,14 +107,14 @@ describe("FormDropDownList", function () {
 
     it("supports autofocus when set", function () {
         var component = getComponent({ autofocus: true });
-        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
+        var selectInput = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-input-input");
 
-        expect(document.activeElement).toEqual(select);
+        expect(document.activeElement).toEqual(selectInput);
     });
 
     it("opens list on arrow up when focused", function () {
         var component = getComponent({ autofocus: true });
-        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-input-input");
 
         expect(document.activeElement).toEqual(select);
 
@@ -116,7 +125,7 @@ describe("FormDropDownList", function () {
 
     it("opens list on arrow down when focused", function () {
         var component = getComponent({ autofocus: true });
-        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-input-input");
 
         expect(document.activeElement).toEqual(select);
         
@@ -127,7 +136,7 @@ describe("FormDropDownList", function () {
 
     it("closes open list on tab when focused", function () {
         var component = getComponent({ open: true, autofocus: true });
-        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-input-input");
 
         expect(document.activeElement).toEqual(select);
         
@@ -166,8 +175,19 @@ describe("FormDropDownList", function () {
         expect(component.props.onToggle.mock.calls.length).toBe(1);
     });
 
+    it("does not open list on list button click when disabled", function () {
+        var component = getComponent({ disabled: true });
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
+
+        expect(component.props.onToggle).not.toBeCalled();
+
+        ReactTestUtils.Simulate.click(select);
+
+        expect(component.props.onToggle).not.toBeCalled();
+    });
+
     it("stateful: onToggle callback updates open state", function () {
-        var component = getComponent({ stateless: false });
+        var component = getComponent({ controlled: false });
         var componentRef = component.refs.FormDropDownListStateful;
 
         expect(componentRef.state.open).toBe(false);
@@ -184,7 +204,7 @@ describe("FormDropDownList", function () {
     });
 
     it("stateful: onSearch callback updates search state", function () {
-        var component = getComponent({ stateless: false });
+        var component = getComponent({ controlled: false });
         var componentRef = component.refs.FormDropDownListStateful;
 
         expect(componentRef.state.open).toBe(false);
@@ -198,6 +218,38 @@ describe("FormDropDownList", function () {
         expect(componentRef.state.searchIndex).toBe(3);
         expect(componentRef.state.searchString).toBe("newSearch");
         expect(componentRef.state.searchTime).toBe(1);
+    });
+
+    it("stateful: filters options when BOX search input changes", function () {
+        var component = getComponent({ controlled: false, canAdd: true, searchType: FormDropDownList.SearchTypes.BOX });
+        var componentRef = component.refs.FormDropDownListStateful;
+        var input = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-input-input");
+
+        ReactTestUtils.Simulate.change(input, { target: { value: "f" } });
+
+        expect(componentRef.state.matchedOptions).toEqual([
+            { label: "Four", value: 4, group: 1 },
+            { label: "Five", value: 5 }
+        ]);
+    });
+
+    it("stateful: updates filtered options when it receives new options", function () {
+        var component = getComponent({ controlled: false });
+        var componentRef = component.refs.FormDropDownListStateful;
+
+        expect(componentRef.state.matchedOptions.length).toBe(5);
+        componentRef.componentWillReceiveProps({ options: [] });
+        expect(componentRef.state.matchedOptions.length).toBe(0);
+    });
+
+    it("renders error message icon and message", function () {
+        var component = getComponent({ errorMessage: "some error msg" });
+        var list = TestUtils.findRenderedDOMNodeWithDataId(component, "form-drop-down-list");
+        var errorIcon = TestUtils.findRenderedDOMNodeWithDataId(list, "selected-input-error-message-icon");
+        var errorMessage = TestUtils.findRenderedDOMNodeWithDataId(list, "selected-input-error-message");
+
+        expect(errorIcon).toBeTruthy();
+        expect(errorMessage).toBeTruthy();
     });
 
     it("renders list of options", function () {
@@ -227,9 +279,100 @@ describe("FormDropDownList", function () {
 
     it("renders with selected option", function () {
         var component = getComponent();
-        var selected = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
+        var selected = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-input-input");
 
-        expect(selected.textContent).toEqual("One");
+        expect(selected.value).toEqual("One");
+    });
+
+    it("renders with grouped options", function () {
+        var component = getComponent({ open: true, groups: groups });
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "select-list");
+        var listOptions = TestUtils.scryRenderedDOMNodesWithTag(select, "li");
+
+        expect(listOptions.length).toEqual(8);  // 5 options + 3 groups
+        expect(listOptions[0].textContent).toEqual("One");
+        expect(listOptions[1].textContent).toEqual("Five");
+        expect(listOptions[2].textContent).toEqual("Group A");
+        expect(listOptions[3].textContent).toEqual("Four");
+        expect(listOptions[4].textContent).toEqual("Group B");
+        expect(listOptions[5].textContent).toEqual("Three");
+        expect(listOptions[6].textContent).toEqual("Group C");
+        expect(listOptions[7].textContent).toEqual("Two");
+    });
+
+    it("renders with grouped options and noneOption", function () {
+        var component = getComponent({ open: true, groups: groups, noneOption: { label: "none" } });
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "select-list");
+        var listOptions = TestUtils.scryRenderedDOMNodesWithTag(select, "li");
+
+        expect(listOptions.length).toEqual(9);  // 5 listOptions + 3 groups + noneOption
+        expect(listOptions[0].textContent).toEqual("none");
+        expect(listOptions[1].textContent).toEqual("One");
+        expect(listOptions[2].textContent).toEqual("Five");
+        expect(listOptions[3].textContent).toEqual("Group A");
+        expect(listOptions[4].textContent).toEqual("Four");
+        expect(listOptions[5].textContent).toEqual("Group B");
+        expect(listOptions[6].textContent).toEqual("Three");
+        expect(listOptions[7].textContent).toEqual("Group C");
+        expect(listOptions[8].textContent).toEqual("Two");
+    });
+
+    it("renders search prompt when using BOX search", function () {
+        var component = getComponent({ open: true, canAdd: true, labelPrompt: "prompt" });
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "select-list");
+        var prompt = TestUtils.findRenderedDOMNodeWithDataId(select, "search-prompt");
+
+        expect(prompt).toBeTruthy();
+    });
+
+    it("renders add prompt when canAdd enabled and searchString does not duplicate existing option", function () {
+        var component = getComponent({ open: true, canAdd: true, searchString: "foo", labelAdd: "prompt" });
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "select-list");
+        var prompt = TestUtils.findRenderedDOMNodeWithDataId(select, "add-prompt");
+
+        expect(prompt).toBeTruthy();
+    });
+
+    it("does not render add prompt when canAdd enabled and searchString duplicates existing option", function () {
+        var component = getComponent({ open: true, canAdd: true, searchString: "One", labelAdd: "prompt" });
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "select-list");
+        var prompt = TestUtils.findRenderedDOMNodeWithDataId(select, "add-prompt");
+
+        expect(prompt).toBeFalsy();
+    });
+
+    it("triggers callbacks when add prompt clicked to add, clear seach, and close list", function () {
+        var searchString = "bar";
+        var component = getComponent({
+            open: true,
+            canAdd: true,
+            searchString: searchString,
+            labelAdd: "prompt",
+            onAdd: jest.genMockFunction()
+        });
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "select-list");
+        var prompt = TestUtils.findRenderedDOMNodeWithDataId(select, "add-prompt");
+
+        ReactTestUtils.Simulate.click(prompt);
+        expect(component.props.onAdd).toBeCalledWith(searchString);
+        expect(component.props.onSearch).toBeCalledWith("", 0 ,0);
+        expect(component.props.onToggle).toBeCalled();
+    });
+
+    it("triggers onToggle for closed list when typing into input of BOX search", function () {
+        var component = getComponent({ open: false, searchType: FormDropDownList.SearchTypes.BOX });
+        var input = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-input-input");
+
+        ReactTestUtils.Simulate.change(input, { target: { value: "foo" } });
+        expect(component.props.onToggle).toBeCalled();
+    });
+
+    it("triggers onSearch callback when input into BOX search", function () {
+        var component = getComponent({ open: false, searchType: FormDropDownList.SearchTypes.BOX });
+        var input = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-input-input");
+
+        ReactTestUtils.Simulate.change(input, { target: { value: "foo" } });
+        expect(component.props.onSearch).toBeCalledWith("foo", 0, 0);
     });
 
     it("list option triggers onValueChange callback on item click", function () {
@@ -287,6 +430,48 @@ describe("FormDropDownList", function () {
         expect(componentRef._setSearchListPosition).toBeCalled();
     });
 
+    it("sets up groups and options on componentWillMount", function () {
+        var component = getComponent({
+            open: true,
+            groups: groups
+        });
+        var componentRef = component.refs.FormDropDownListStateless;
+
+        componentRef._setupGroups = jest.genMockFunction();
+        componentRef.componentWillMount();
+        expect(componentRef._setupGroups).toBeCalled();
+    });
+
+    it("sets up groups and options on componentWillReceiveProps when options are different", function () {
+        var component = getComponent({
+            open: true,
+            groups: groups
+        });
+        var componentRef = component.refs.FormDropDownListStateless;
+
+        componentRef._setupGroups = jest.genMockFunction();
+        componentRef.componentWillReceiveProps({ options: [] });
+        expect(componentRef._setupGroups).toBeCalled();
+    });
+
+    it("sets up groups and options on componentWillReceiveProps when groups are different", function () {
+        var component = getComponent({
+            open: true,
+            groups: groups
+        });
+        var componentRef = component.refs.FormDropDownListStateless;
+
+        componentRef._setupGroups = jest.genMockFunction();
+        componentRef.componentWillReceiveProps({ groups: [] });
+        expect(componentRef._setupGroups).toBeCalled();
+    });
+
+    it("filterOptions function correctly filters options", function () {
+        var filterOptions = FormDropDownList.filterOptions;
+
+        expect(filterOptions(options, "One")).toEqual([{ label: "One", value: 1 }]);
+    });
+
     it("does not search on keydown and list is not open", function () {
         var component = getComponent();
         var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
@@ -314,6 +499,34 @@ describe("FormDropDownList", function () {
         expect(component.props.onSearch.mock.calls[0][0]).toBe("fo");
     });
 
+    it("find by typing with grouped options", function () {
+        var component = getComponent({ open: true, groups: groups });
+
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
+        ReactTestUtils.Simulate.keyDown(select, { keyCode: 70 }); // f
+        expect(component.props.onSearch).toBeCalled();
+        expect(component.props.onSearch.mock.calls[0][0]).toBe("f");
+
+        component = getComponent({ // simulate the change since mock onSearch wouldn't have changed stuff
+            open: true,
+            searchString: component.props.onSearch.mock.calls[0][0],
+            searchTime: component.props.onSearch.mock.calls[0][1]
+        });
+
+        select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
+        ReactTestUtils.Simulate.keyDown(select, { keyCode: 79 }); // o
+        expect(component.props.onSearch.mock.calls[0][0]).toBe("fo");
+    });
+
+    it("resets search when no option found", function () {
+        var component = getComponent({ open: true });
+
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
+        ReactTestUtils.Simulate.keyDown(select, { keyCode: "&amp;" });
+        expect(component.props.onSearch.mock.calls[0][0]).toBe(""); // search = ""
+        expect(component.props.onSearch.mock.calls[0][2]).toBe(-1); // searchIndex = -1
+    });
+
     it("find and select option by hitting enter then close list", function () {
         var component = getComponent({
             open: true,
@@ -329,11 +542,82 @@ describe("FormDropDownList", function () {
         expect(component.props.onToggle).toBeCalled();
     });
 
-    it("find by typing - clear with esc", function () {
+    it("find and select with enter on grouped options", function () {
+        var component = getComponent({
+            open: true,
+            groups: groups,
+            searchIndex: 4,
+            searchString: "two",
+            searchTime: 0
+        });
+
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
+        ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ENTER });
+        expect(component.props.onValueChange).toBeCalled();
+        expect(component.props.onValueChange.mock.calls[0][0].label).toBe("Two");
+        expect(component.props.onToggle).toBeCalled();
+    });
+
+    it("find does not select with enter on grouped options when option in disabled group", function () {
+        var component = getComponent({
+            open: true,
+            groups: [
+                { label: "Group A", id: 1 },
+                { label: "Group B", id: 2 },
+                { label: "Group C", id: 3, disabled: true }
+            ],
+            searchIndex: 4,
+            searchString: "two",
+            searchTime: 0
+        });
+
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
+        ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ENTER });
+        expect(component.props.onValueChange).not.toBeCalled();
+        expect(component.props.onToggle).toBeCalled();
+    });
+
+    it("triggers onAdd callback to add new option on enter when no options match filter searchString", function () {
+        var component = getComponent({ open: true,
+            options: [],
+            canAdd: true,
+            onAdd: jest.genMockFunction(),
+            searchString: "foo"
+        });
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
+        ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ENTER });
+        expect(component.props.onAdd).toBeCalledWith("foo");
+    });
+
+    it("enter closes list", function () {
+        var component = getComponent({
+            open: true
+        });
+
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
+        ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ENTER });
+        expect(component.props.onToggle).toBeCalled();
+    });
+
+    it("find by typing - KEYBOARD seach clear with esc", function () {
         var component = getComponent({
             open: true,
             searchString: "tw",
             searchTime: 0
+        });
+
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
+        ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ESC });
+        expect(component.props.onSearch).toBeCalled();
+        expect(component.props.onSearch.mock.calls[0][0]).toBe("");
+    });
+
+    it("find by typing - BOX search clear with esc", function () {
+        var component = getComponent({
+            open: true,
+            searchString: "tw",
+            searchTime: 0,
+            SearchType: FormDropDownList.SearchTypes.BOX
         });
 
         var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
@@ -366,40 +650,25 @@ describe("FormDropDownList", function () {
         var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ARROW_DOWN });
         expect(component.props.onSearch).toBeCalled();
-        expect(component.props.onSearch.mock.calls[0][0]).toBe("");
+        expect(component.props.onSearch.mock.calls[0][0]).toBe("f"); // up/down should not clear searchString
         expect(component.props.onSearch.mock.calls[0][2]).toBe(2); //added 1 to searchIndex
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ARROW_UP });
         expect(component.props.onSearch).toBeCalled();
         expect(component.props.onSearch.mock.calls[1][2]).toBe(0); //subtract 1 from searchIndex
     });
 
-    //TODO: remove when controlled no longer supported
-    it("produces stateful/stateless components correctly given controlled prop", function () {
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormDropDownList controlled={false} options={[]} selectedOption={{}} />);
-        var stateful = component.refs.FormDropDownListStateful;
-        var stateless = component.refs.FormDropDownListStateless;
+    it("up/down arorws do not call onToggle when list is disabled", function () {
+        var component = getComponent({
+            open: false,
+            disabled: true,
+            searchIndex: 1,
+            searchString: "f",
+            searchTime: 0
+        });
 
-        expect(stateful).toBeTruthy();
-        expect(stateless).toBeFalsy();
-
-        component = ReactTestUtils.renderIntoDocument(
-            <FormDropDownList controlled={true} options={[]} selectedOption={{}} />);
-        stateful = component.refs.FormDropDownListStateful;
-        stateless = component.refs.FormDropDownListStateless;
-        
-        expect(stateless).toBeTruthy();
-        expect(stateful).toBeFalsy();
-    });
-
-    //TODO: remove when controlled no longer supported
-    it("logs warning for deprecated controlled prop", function () {
-        console.warn = jest.genMockFunction();
-
-        getComponent();
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use stateless instead of controlled. " +
-            "Support for controlled will be removed in next version");
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
+        ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ARROW_DOWN });
+        expect(component.props.onSearch).not.toBeCalled();
+        expect(component.props.onToggle).not.toBeCalled();
     });
 });
