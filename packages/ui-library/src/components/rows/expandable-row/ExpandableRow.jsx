@@ -437,7 +437,7 @@ var StatelessExpandableRow = React.createClass({
                 </div>
                 {this.props.expanded && (
                     <div data-id="expanded-row" className="expanded-content clearfix">
-                        <div className="expanded-content-scroll">
+                        <div className="expanded-content-scroller">
                             {this.props.children || this.props.content}
                         </div>
 
