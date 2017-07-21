@@ -803,12 +803,10 @@ input[type=file] {
 }
 
 .input-custom-select {
-    // prevent the highlighted child from overlapping the input border
-    padding: $borderSize;
-
+    padding: $borderSize; // prevent the highlighted child from overlapping the input border
     display: inline-block;
     vertical-align: top;
-
+    text-align: left;
     width: 190px; // default width
 
     &.open {
