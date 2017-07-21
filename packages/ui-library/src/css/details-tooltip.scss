@@ -24,7 +24,7 @@
         &.details-content {
             display: block;
         }
-        .filter-container {
+        .selection-filter-label {
             &:after {
                 @include rotate(-180deg);
                 @include transition((all 0.2s linear));
@@ -303,7 +303,7 @@
             }
         }
         // filter bar
-        .filter-container {
+        .selection-filter-label {
             margin: 0;
             padding: 0 38px 0 15px;
             font-size: 13px;
