@@ -129,7 +129,8 @@ var HelpHint = React.createClass({
                     id={uid}
                     place={this._getPlacement()}
                     className="tooltip-text"
-                    effect="solid">
+                    effect="solid"
+                    delayHide={400}>
                     {this.props.hintText}
                 </ReactTooltip>
             </div>

@@ -75,7 +75,20 @@
         vertical-align: baseline;
         cursor: pointer;
     }
+    .tooltip-text {
+        max-width: 400px;
+        pointer-events: auto !important;
+        @include opacity(1);
 
+        &:hover {
+            visibility: visible !important;
+            @include opacity(1);
+        }
+        a {
+            color: $color-white;
+            text-decoration: underline;
+        }
+    }
     &.warning {
         .__react_component_tooltip {
             @include bg-styles($color-critical-red);
