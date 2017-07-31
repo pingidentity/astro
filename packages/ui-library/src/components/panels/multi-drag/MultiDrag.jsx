@@ -84,7 +84,7 @@ function convertFilteredIndexes (columns, desc) {
  *
  * @property {number} column
  *    The column index of the preview.
- * @property {numer} row
+ * @property {number} row
  *    The row index of the preview.
  */
 
@@ -293,11 +293,12 @@ var MultiDragStateless = React.createClass({
     },
 
     /*
-     * Call onDrop here because suppose the user drags a row to the top of a list but the mouse overshoots
-     * the boundary of the list.  We still want to apply the last valid move in this case.
+     * Apply the last valid move
      */
-    _onCancel: function () {
-        if (this._lastDrag && this._isValidDrag()) {
+    _onCancel: function (droppedInContainer) {
+        // only apply drop if row dragged within a valid drop target
+        // otherwise you can't cancel a drag that has started
+        if ((this._lastDrag && this._isValidDrag()) && droppedInContainer) {
             this.props.onDrop(this._lastDrag);
         }
         this._lastDrag = null;
@@ -324,7 +325,8 @@ var MultiDragStateless = React.createClass({
         // to index returned from onDrag event is always +1 off when dragging down
         // includes dragged item in "to" index?
         // removing the drop preview (ghostRowAt) has no effect on this issue
-        if (desc.from.index < desc.to.index ) {
+        // only applicable if targetColumn === being DraggedColumn
+        if ((targetColumn === beingDraggedColumn) && desc.from.index < desc.to.index ) {
             desc.to.index -= 1;
         }
 
@@ -361,7 +363,12 @@ var MultiDragStateless = React.createClass({
 
                     var ghostRowAt = preview && preview.column === index ? preview.index : null;
 
-                    if (this._lastDrag && this._lastDrag.from.index < this._lastDrag.to.index) {
+                    // don't increment if ghostRowAt is null, otherwise a preview row
+                    // gets created in each column.
+                    // not applicable if from or to index is for a different column.
+                    if ((this._lastDrag && this._lastDrag.from.index < this._lastDrag.to.index) &&
+                        (this._lastDrag.from.column === this._lastDrag.to.column) &&
+                        ghostRowAt !== null) {
                         ghostRowAt += 1;
                     }
 

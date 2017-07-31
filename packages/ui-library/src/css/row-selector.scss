@@ -58,6 +58,7 @@
     .rows-added {
         .items {
             position: relative;
+            padding-bottom: 50px;
         }
     }
     .items {
@@ -169,6 +170,7 @@
         }
         &.preview {
             border: 1px dotted $color-active-blue;
+            height: 49px;
         }
         &.item-disabled {
             background: $color-dolphin;

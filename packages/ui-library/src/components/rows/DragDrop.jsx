@@ -22,8 +22,9 @@ var dragSpec = {
 
     endDrag: function (props, monitor, component) {//eslint-disable-line
         props.onDragEnd && props.onDragEnd();//eslint-disable-line
+        // pass the value that indicates if item was dropped outside of container
         if (props.id === monitor.getItem().id) {
-            props.onCancel();
+            props.onCancel(monitor.didDrop());
         }
     },
 
@@ -188,7 +189,7 @@ var DragDrop = React.createClass({
 
         var row = (React.createElement(this.props.tagName, rowProps, this.props.children));
 
-        //IE must have a drop target even if dragging is disabled.  Enabling after the first render has no effect.
+        // IE must have a drop target even if dragging is disabled.  Enabling after the first render has no effect.
         return this.props.removeDraggableAttribute
             ? connectDropTarget(row)
             : connectDragSource(connectDropTarget(row));

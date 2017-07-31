@@ -174,7 +174,7 @@ module.exports = React.createClass({
 
         var rows = this.props.rows.map(this._renderRow);
 
-        //if there's a preview add it after so it doesnt screw up the indexing
+        // if there's a preview add it after so it doesnt screw up the indexing
         if (typeof(this.props.ghostRowAt) === "number") {
             var index = Math.min(this.props.rows.length, this.props.ghostRowAt);
 
