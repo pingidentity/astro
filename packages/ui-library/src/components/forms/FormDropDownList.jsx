@@ -269,12 +269,16 @@ var FormDropDownListStateless = React.createClass({
     },
 
     componentWillMount: function () {
+        this.didPressKey = false;
         this._setupGroups(this.props.options, this.props.groups);
     },
 
     componentWillReceiveProps: function (nextProps) {
         if (!_.isEqual(this.props.options, nextProps.options) || !_.isEqual(this.props.groups, nextProps.groups)) {
             this._setupGroups(nextProps.options, nextProps.groups);
+        }
+        if (this.props.open && !nextProps.open) {
+            this.didPressKey = false;
         }
     },
 
@@ -397,12 +401,12 @@ var FormDropDownListStateless = React.createClass({
         if (!this.props.open) {
             this.props.onToggle();
         }
-        this.props.onSearch(searchString, 0, 0);
+        this.props.onSearch(searchString, 0, this.props.noneOption ? -1 : 0);
     },
 
     _handleAdd: function () {
         this.props.onAdd(this.props.searchString);
-        this.props.onSearch("",0,0);
+        this.props.onSearch("",0,this.props.noneOption ? -1 : 0);
         this.props.onToggle();
     },
 
@@ -423,12 +427,15 @@ var FormDropDownListStateless = React.createClass({
      * @ignore
      */
     _handleKeyDown: function (e) {
+        this.didPressKey = true;
         if (this.props.open) { // only do search when select list expanded
             var search;
             var time = Date.now();
             if (e.keyCode === KeyboardUtils.KeyCodes.ENTER) { //enter, so pull previously entered search string
-                if (this.props.canAdd && this.props.options.length === 0 && this.props.searchString !== "") {
-                    this._handleAdd();
+                if (this.props.canAdd && this.props.options.length === 0) {
+                    if (this.props.searchString !== "" || this.props.noneOption) {
+                        this._handleAdd();
+                    }
                 } else if (this.props.searchIndex > -1) {
                     if (this.props.groups) {
                         var option = this._orderedOptions[this.props.searchIndex];
@@ -439,13 +446,15 @@ var FormDropDownListStateless = React.createClass({
                     } else {
                         this.props.onValueChange(this.props.options[this.props.searchIndex]);
                     }
+                } else if (this.props.searchIndex === -1 && this.props.noneOption) {
+                    this.props.onValueChange(this.props.noneOption);
                 }
-                this.props.onSearch("",0,0);
+                this.props.onSearch("", 0, this.props.noneOption ? -1 : 0);
                 this.props.onToggle();
             } else if (e.keyCode === KeyboardUtils.KeyCodes.ESC) { // esc, so clear
                 search = "";
                 if (this._isBoxSearch()) {
-                    this.props.onSearch("", 0, 0);
+                    this.props.onSearch("", 0, this.props.noneOption ? -1 : 0);
                 }
             } else if (e.keyCode === KeyboardUtils.KeyCodes.ARROW_UP ||
                 e.keyCode === KeyboardUtils.KeyCodes.ARROW_DOWN) {
@@ -624,7 +633,7 @@ var FormDropDownListStateless = React.createClass({
     _generateOptions: function () {
         var options = [];
         // If noneOption exits, always at the top of the list
-        if (this.props.noneOption) {
+        if (this.props.noneOption && (!this.props.searchString || this.props.searchString === "" )) {
             options.push(this._getNoneOption());
         }
         // If groups, sort options by groups
@@ -649,8 +658,7 @@ var FormDropDownListStateless = React.createClass({
         var selectClassName = classnames("selected-option", this.props.selectClassName);
         var selectedOptionLabelClassName = classnames("selected-option-label", this.props.selectedOptionLabelClassName);
         var selectedOptionLabel = this.props.showSelectedOptionLabel ? this.props.selectedOption.label : null;
-        var inputValue = this._isBoxSearch() ? this.props.searchString : selectedOptionLabel;
-
+        var inputValue = this._isBoxSearch() && this.didPressKey ? this.props.searchString : selectedOptionLabel;
         return (
             <FormLabel
                 value={this.props.label}
@@ -674,10 +682,11 @@ var FormDropDownListStateless = React.createClass({
                                 helpClassName={this.props.helpClassName}
                                 errorMessage={this.props.errorMessage}
                                 autoFocus={this.props.autofocus}
-                                placeholder={selectedOptionLabel}
+                                selectOnFocus={this._isBoxSearch()}
+                                stateless={true}
                                 value={inputValue}
                                 onValueChange={this._handleInputValueChange}
-                                readOnly={this._isKeyboardSearch()}
+                                readOnly={this.props.disabled || this._isKeyboardSearch()}
                             />
                             <div className={!this.props.disabled && "arrow"}></div>
                         </div>

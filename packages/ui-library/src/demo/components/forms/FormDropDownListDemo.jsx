@@ -183,8 +183,9 @@ var FormDropDownListDemo = React.createClass({
                 <div className="input-row">
                     <FormDropDownList
                         options={this.state.addOptions7}
-                        label="With add"
+                        label="With add and none option"
                         canAdd={true}
+                        noneOption={{ label: "None" }}
                         onAdd={this._handleAdd7}
                         labelAdd="ADD"
                         labelPrompt="Type to search or add"
@@ -241,7 +242,6 @@ var FormDropDownListDemo = React.createClass({
                 <div>Selected value: {this.state["selectedValue" + this.numDemos] &&
                     this.state["selectedValue" + this.numDemos].label}
                 </div>
-
             </div>
         );
     }

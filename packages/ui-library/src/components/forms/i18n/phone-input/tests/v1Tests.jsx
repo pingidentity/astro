@@ -181,7 +181,7 @@ describe("I18nPhoneInput", function () {
         var component = getComponent();
 
         var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
-        var currentCountryIso = component.state.selected.iso2;
+
         ReactTestUtils.Simulate.click(flag);
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 65 }); // a
@@ -190,7 +190,6 @@ describe("I18nPhoneInput", function () {
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 27 }); // esc
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 13 }); // enter - don't do anything because empty
         expect(component.state.searchString).toBe("");
-        expect(component.state.selected.iso2).toBe(currentCountryIso);
     });
 
     it("find and select country by typing empty with delay", function () {

@@ -324,10 +324,22 @@ var Stateless = React.createClass({
             readOnly: false,
             required: false,
             reveal: false,
+            selectOnFocus: false,
             showReveal: false,
             showSave: false,
             showUndo: false
         };
+    },
+
+    _handleFocus: function () {
+        if (this.props.selectOnFocus && this.refs[this.props["data-id"] + "-input"]) {
+            this.selectField();
+        }
+        this.props.onFocus();
+    },
+
+    selectField: function () {
+        this.refs[this.props["data-id"] + "-input"].select();
     },
 
     getInitialState: function () {
@@ -452,7 +464,7 @@ var Stateless = React.createClass({
                 <span className="input-container" ref="input-container">
                     <input
                         className={this.props.inputClassName}
-                        onFocus={this.props.onFocus}
+                        onFocus={this._handleFocus}
                         onBlur={this.props.onBlur}
                         onKeyPress={this.props.onKeyPress}
                         onKeyDown={this.props.onKeyDown}

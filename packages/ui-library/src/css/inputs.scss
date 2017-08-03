@@ -1040,6 +1040,10 @@ input[type=file] {
                 color: $color-rabbit-fur;
             }
         }
+        .none-option {
+            font-style: italic;
+            color: $color-elephant;
+        }
     }
     .selected-option,
     .select-option,
