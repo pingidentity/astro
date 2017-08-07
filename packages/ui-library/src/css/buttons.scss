@@ -52,19 +52,49 @@ button,
     &:focus {
         border: 1px solid $color-rhino;
     }
-    &.primary {
-        background: none;
-        background-color: $color-active-blue;
+
+
+    &.primary,
+    &.success,
+    &.cancel,
+    &.danger {
         color: $color-white;
         border: none;
+        background: none;
 
         &:hover {
-            background-color: $color-active-blue-highlighted;
             color: $color-white;
         }
     }
+    &.primary {
+        background-color: $color-active-blue;
+
+        &:hover {
+            background-color: $color-active-blue-highlighted;
+        }
+    }
+    &.success {
+        background-color: $color-success;
+
+        &:hover {
+            background-color: $color-success-highlighted;
+        }
+    }
+    &.cancel {
+        background-color: $color-stratus;
+
+        &:hover {
+            background-color: tint($color-stratus, 10%);
+        }
+    }
+    &.danger {
+        background-color: $color-critical-red;
+
+        &:hover {
+            background-color: $color-critical-red-highlighted;
+        }
+    }
     &.secondary {
-        background: none;
         background-color: $color-white;
         color: $color-slate;
         border: 1px solid $color-rhino;
@@ -74,26 +104,7 @@ button,
             border-color: $color-active-blue-highlighted;
         }
     }
-    &.success {
-        background: none;
-        background-color: $color-success;
-        color: $color-white;
-        border: none;
 
-        &:hover {
-            color: $color-white;
-        }
-    }
-    &.cancel {
-        background: none;
-        background-color: $color-stratus;
-        color: $color-white;
-        border: none;
-
-        &:hover {
-            background-color: $color-rabbit-fur;
-        }
-    }
     &.inline {
         $height: 26px;
 
@@ -103,7 +114,7 @@ button,
         font-size: 14px;
 
         @include border-radius(ceil($height/2));
-        
+
         .badge {
             color: inherit;
             border: 1px solid $color-stratus;
@@ -115,7 +126,7 @@ button,
             height: 19px;
             line-height: 19px;
             text-align: center;
-            
+
             @include border-radius(10px);
         }
     }
@@ -233,6 +244,17 @@ button,
                 width: 100%;
                 font-family: $icon-font;
                 text-transform: none;
+            }
+
+            // if the icon button has text then adjust the spacing accordingly
+            &:not(:empty) {
+                width: auto;
+                padding: 0 25px 0 43px;
+
+                &:before {
+                    width: auto;
+                    left: 18px;
+                }
             }
         }
 

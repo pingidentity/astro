@@ -174,6 +174,7 @@ var cssTips = React.createClass({
                     <button className="secondary">Secondary</button>
                     <button className="success">Success</button>
                     <button className="cancel">Cancel</button>
+                    <button className="danger">Danger</button>
                     <button className="inline">Inline</button>
                     <button className="inline">Inline<span className="badge">4</span></button>
                 </p>
