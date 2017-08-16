@@ -1,4 +1,5 @@
-var React = require("react"),
+var React = require("re-react"),
+    ReactVanilla = require("react"),
     ReactDOM = require("react-dom"),
     _ = require("underscore"),
     classnames = require("classnames"),
@@ -192,7 +193,7 @@ var SearchTypes = {
 * @param {string} label
 *    The label to render.
 */
-var FormDropDownListDefaultContent = React.createClass({
+var FormDropDownListDefaultContent = ReactVanilla.createClass({
 
     propTypes: {
         label: React.PropTypes.string
@@ -203,46 +204,78 @@ var FormDropDownListDefaultContent = React.createClass({
     }
 });
 
+var OptionItem = ReactVanilla.createClass({
+
+    propTypes: {
+        "data-id": React.PropTypes.string,
+        className: React.PropTypes.string,
+        key: React.PropTypes.string,
+        ref: React.PropTypes.string,
+        onClick: React.PropTypes.func,
+        content: React.PropTypes.node,
+        option: React.PropTypes.object
+    },
+
+    _handleClick: function (event) {
+        if (this.props.onClick) {
+            this.props.onClick(this.props.option, event);
+        }
+    },
+
+    render: function () {
+        return (
+            <li
+                key={this.props.key} // add prop allows re-ordering, so must have unique key
+                ref={this.props.ref}
+                data-id={this.props["data-id"]}
+                className={this.props.className}
+                onClick={this._handleClick}>
+                {this.props.content}
+            </li>
+        );
+    }
+});
+
 var FormDropDownListStateless = React.createClass({
     displayName: "FormDropDownListStateless",
 
     propTypes: {
         "data-id": React.PropTypes.string,
-        className: React.PropTypes.string,
-        options: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-        selectedOption: React.PropTypes.object.isRequired,
+        className: React.PropTypes.string.affectsRendering,
+        options: React.PropTypes.arrayOf(React.PropTypes.object).isRequired.affectsRendering,
+        selectedOption: React.PropTypes.object.isRequired.affectsRendering,
         onValueChange: React.PropTypes.func,
-        contentType: React.PropTypes.element,
+        contentType: React.PropTypes.element.affectsRendering,
         groups: React.PropTypes.arrayOf(
             React.PropTypes.shape({
                 id: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
                 label: React.PropTypes.string,
                 disabled: React.PropTypes.bool
-            })),
-        open: React.PropTypes.bool,
+            })).affectsRendering,
+        open: React.PropTypes.bool.affectsRendering,
         onToggle: React.PropTypes.func,
-        labelPrompt: React.PropTypes.string,
-        labelAdd: React.PropTypes.string,
-        canAdd: React.PropTypes.bool,
-        searchString: React.PropTypes.string,
-        searchField: React.PropTypes.string,
-        validSearchCharsRegex: React.PropTypes.string,
-        searchIndex: React.PropTypes.number,
-        searchTime: React.PropTypes.number,
-        searchType: React.PropTypes.oneOf([SearchTypes.KEYBOARD, SearchTypes.BOX]),
+        labelPrompt: React.PropTypes.string.affectsRendering,
+        labelAdd: React.PropTypes.string.affectsRendering,
+        canAdd: React.PropTypes.bool.affectsRendering,
+        searchString: React.PropTypes.string.affectsRendering,
+        searchField: React.PropTypes.string.affectsRendering,
+        validSearchCharsRegex: React.PropTypes.string.affectsRendering,
+        searchIndex: React.PropTypes.number.affectsRendering,
+        searchTime: React.PropTypes.number.affectsRendering,
+        searchType: React.PropTypes.oneOf([SearchTypes.KEYBOARD, SearchTypes.BOX]).affectsRendering,
         onSearch: React.PropTypes.func,
-        selectClassName: React.PropTypes.string,
-        selectedOptionLabelClassName: React.PropTypes.string,
-        title: React.PropTypes.string,
-        noneOption: React.PropTypes.object,
-        noneOptionLabelClassName: React.PropTypes.string,
-        label: React.PropTypes.string,
-        labelHelpText: React.PropTypes.string,
-        helpClassName: React.PropTypes.string,
-        errorMessage: React.PropTypes.string,
-        required: React.PropTypes.bool,
-        disabled: React.PropTypes.bool,
-        autofocus: React.PropTypes.bool
+        selectClassName: React.PropTypes.string.affectsRendering,
+        selectedOptionLabelClassName: React.PropTypes.string.affectsRendering,
+        title: React.PropTypes.string.affectsRendering,
+        noneOption: React.PropTypes.object.affectsRendering,
+        noneOptionLabelClassName: React.PropTypes.string.affectsRendering,
+        label: React.PropTypes.string.affectsRendering,
+        labelHelpText: React.PropTypes.string.affectsRendering,
+        helpClassName: React.PropTypes.string.affectsRendering,
+        errorMessage: React.PropTypes.string.affectsRendering,
+        required: React.PropTypes.bool.affectsRendering,
+        disabled: React.PropTypes.bool.affectsRendering,
+        autofocus: React.PropTypes.bool.affectsRendering
     },
 
     getDefaultProps: function () {
@@ -591,28 +624,32 @@ var FormDropDownListStateless = React.createClass({
             disabled: disabled
         });
         return (
-            <li
+            <OptionItem
                 key={"option-" + option.label} // add prop allows re-ordering, so must have unique key
                 ref={"option-" + index}
                 data-id={"option-" + index}
                 className={className}
-                onClick={!disabled && this._handleOptionClick.bind(null, option)}>
-                {React.cloneElement(this.props.contentType, option)}
-            </li>
+                onClick={!disabled ? this._handleOptionClick : _.noop}
+                option={option}
+                content={React.cloneElement(this.props.contentType, option)} />
         );
     },
 
     _getNoneOption: function () {
         var noneOptionContainerClassName = classnames("none-option",
             { highlighted: this.props.searchIndex === -1 });
+        var content = (
+            <span className={this.props.noneOptionLabelClassName}>
+                {this.props.noneOption.label}
+            </span>
+        );
 
         return(
-            <li key="none-option" data-id="none-option" ref="none-option" className={noneOptionContainerClassName}
-                onClick={this._handleOptionClick.bind(null, this.props.noneOption)}>
-                <span className={this.props.noneOptionLabelClassName}>
-                    {this.props.noneOption.label}
-                </span>
-            </li>
+            <OptionItem key="none-option" data-id="none-option" ref="none-option"
+                className={noneOptionContainerClassName}
+                onClick={this._handleOptionClick}
+                option={this.props.noneOption}
+                content={content} />
         );
     },
 
@@ -701,7 +738,7 @@ var FormDropDownListStateless = React.createClass({
     }
 });
 
-var FormDropDownListStateful = React.createClass({
+var FormDropDownListStateful = ReactVanilla.createClass({
     displayName: "FormDropDownListStateful",
 
     componentWillReceiveProps: function (nextProps) {
@@ -766,7 +803,7 @@ var FormDropDownListStateful = React.createClass({
     }
 });
 
-var FormDropDownList = React.createClass({
+var FormDropDownList = ReactVanilla.createClass({
     displayName: "FormDropDownList",
 
     propTypes: {

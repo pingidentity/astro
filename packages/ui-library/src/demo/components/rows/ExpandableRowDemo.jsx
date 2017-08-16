@@ -40,6 +40,9 @@ var ExpandableRowDemo = React.createClass({
     },
 
     getInitialState: function () {
+        this._onToggle1 = this._onToggle.bind(null, 1);
+        this._onToggle3 = this._onToggle.bind(null, 3);
+
         return {
             expanded: false,
             rowDeleted: false
@@ -74,7 +77,7 @@ var ExpandableRowDemo = React.createClass({
                     subtitle="stateless"
                     stateless={true}
                     expanded={this.state.expanded1}
-                    onToggle={this._onToggle.bind(null, 1)}
+                    onToggle={this._onToggle1}
                     rowAccessories={<RowAccessories.PillButton label="Pill Button" />}
                 />
                 <ExpandableRow
@@ -128,7 +131,7 @@ var ExpandableRowDemo = React.createClass({
                         subtitle="stateless"
                         stateless={true}
                         expanded={this.state.expanded3}
-                        onToggle={this._onToggle.bind(null, 3)}
+                        onToggle={this._onToggle3}
                         onDeleteCancelClick={this._handleDeleteCancel}
                         onDeleteConfirmClick={this._handleDeleteConfirm}
                         showDelete={true}

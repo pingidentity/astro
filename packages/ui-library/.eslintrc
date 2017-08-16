@@ -123,7 +123,8 @@
 		"react/no-unknown-property": [2],
 		"react/react-in-jsx-scope": [2],
 		"react/self-closing-comp": [1],
-		"react/wrap-multilines": [2]
+		"react/wrap-multilines": [2],
+		"react/jsx-no-bind": [2, { "ignoreRefs": true }]
 	},
 	"plugins": [
 		"react"

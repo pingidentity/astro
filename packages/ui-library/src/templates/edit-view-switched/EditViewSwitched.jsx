@@ -66,6 +66,10 @@ module.exports = React.createClass({
         this.props.onInputChange(name, value);
     },
 
+    componentDidMount: function () {
+        this._handleRadioInputChangeUserGroup = this._handleRadioInputChange.bind(this, "userGroup");
+    },
+
     render: function () {
         return (
             <div>
@@ -194,7 +198,7 @@ module.exports = React.createClass({
                                 label="User Group"
                                 groupName="user-group"
                                 selected={this.props.inputs.userGroup}
-                                onValueChange={this._handleRadioInputChange.bind(this, "userGroup")}
+                                onValueChange={this._handleRadioInputChangeUserGroup}
                                 items={[
                                     { id: 1, name: "Group 1" },
                                     { id: 2, name: "Group 2" },

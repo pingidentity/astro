@@ -10,6 +10,8 @@ var React = require("react"),
 var UILibrary101 = React.createClass({
 
     getInitialState: function () {
+        this._handleLanguageChange1 = this._handleLanguageChange.bind(null, 1);
+
         return {
             pickerColor: "#fff",
             currentLanguage: Translator.currentLanguage
@@ -340,7 +342,7 @@ var UILibrary101 = React.createClass({
                     <FormSelectField controlled={true}
                         label="Language"
                         options={this.languages}
-                        onChange={this._handleLanguageChange.bind(this, 1)}
+                        onChange={this._handleLanguageChange1}
                         value={this.state.currentLanguage}
                     />
                 </div>

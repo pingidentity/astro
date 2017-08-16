@@ -162,15 +162,30 @@ var RockerButtonStateless = React.createClass({
                 {
                     this.props.labels.map(function (text, index) {
                         return (
-                            <label data-id={text}
-                                onClick={this._handleClick.bind(this, text, index)}
-                                key={text}>{text}</label>);
+                            <RockerButtonLabel data-id={text} onClick={this._handleClick}
+                                key={text} text={text} index={index} />);
                     }.bind(this))
                 }
             </div>
         );
     }
 });
+
+var RockerButtonLabel = function (props) {
+    var _handleClick = function (event) {
+        props.onClick(props.text, props.index, event);
+    };
+
+    return <label data-id={props["data-id"]} onClick={_handleClick} key={props.key}>{props.text}</label>;
+};
+
+RockerButtonLabel.propTypes = {
+    "data-id": React.PropTypes.string,
+    key: React.PropTypes.string,
+    onClick: React.PropTypes.func,
+    text: React.PropTypes.string,
+    index: React.PropTypes.number
+};
 
 var RockerButtonStateful = React.createClass({
 

@@ -20,9 +20,7 @@ var Tutorial = React.createClass({
             return el.type === "h2";
         }).map(function (el, i) {
             return (
-                <li key={i}>
-                    <a onClick={this._scrollIntoView.bind(null, i)}>{el.props.children}</a>
-                </li>
+                <TutorialLinkItem key={i} onClick={this._scrollIntoView} content={el.props.children} index={i} />
             );
         }.bind(this));
 
@@ -42,5 +40,24 @@ var Tutorial = React.createClass({
         );
     }
 });
+
+var TutorialLinkItem = function (props) {
+    var _handleClick = function (event) {
+        props.onClick(props.index, event);
+    };
+
+    return (
+        <li key={props.key}>
+            <a onClick={_handleClick}>{props.content}</a>
+        </li>
+    );
+};
+
+TutorialLinkItem.propTypes = {
+    key: React.PropTypes.string,
+    onClick: React.PropTypes.func,
+    index: React.PropTypes.number,
+    content: React.PropTypes.node
+};
 
 module.exports = Tutorial;

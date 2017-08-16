@@ -106,10 +106,12 @@ var TabbedSections = React.createClass({
                     <ul ref="tabs">
                     {
                         React.Children.map(this.props.children, function (child, index) {
-                            return (<li className={this.props.selectedIndex === index ? "active" : ""}
+                            return (<TabbedSectionChild className={this.props.selectedIndex === index ? "active" : ""}
                                         data-id={this.props["data-id"] + "-" + index}
-                                        onClick={callback.bind(null, index)}
-                                        key={index}>{child.props.title}</li>);
+                                        onClick={callback}
+                                        key={index}
+                                        index={index}
+                                        content={child.props.title} />);
                         }.bind(this))
                     }
                     </ul>
@@ -122,5 +124,29 @@ var TabbedSections = React.createClass({
         /* jshint ignore:end */
     }
 });
+
+var TabbedSectionChild = function (props) {
+    var _handleClick = function (event) {
+        props.onClick(props.index, event);
+    };
+
+    return (
+        <li className={props.className}
+                data-id={props["data-id"]}
+                onClick={_handleClick}
+                key={props.key}>
+            {props.content}
+        </li>
+    );
+};
+
+TabbedSectionChild.propTypes = {
+    "data-id": React.PropTypes.string,
+    key: React.PropTypes.string,
+    className: React.PropTypes.string,
+    index: React.PropTypes.string,
+    onClick: React.PropTypes.func,
+    content: React.PropTypes.node
+};
 
 module.exports = TabbedSections;

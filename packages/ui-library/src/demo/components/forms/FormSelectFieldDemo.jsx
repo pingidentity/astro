@@ -8,14 +8,17 @@ var FormSelectField = require("./../../../components/forms/form-select-field");
 */
 var FormSelectFieldDemo = React.createClass({
 
+    _numDemos: 5,
+
     getInitialState: function () {
-        return {
-            fieldValue1: "1",
-            fieldValue2: "2",
-            fieldValue3: "3",
-            fieldValue4: "4",
-            fieldValue5: "5"
-        };
+        var initialState = {};
+
+        for (var i=1; i<=this._numDemos; i+=1) {
+            initialState["fieldValue" + i] = i;
+            this["_changeCallback" + i] = this._changeCallback.bind(this, i);
+        }
+
+        return initialState;
     },
 
     _changeCallback: function (index, event) {
@@ -40,7 +43,7 @@ var FormSelectFieldDemo = React.createClass({
                     <FormSelectField controlled={true}
                         label="Basic"
                         options={optionsArr}
-                        onChange={this._changeCallback.bind(this, 1)}
+                        onChange={this._changeCallback1}
                         value={this.state.fieldValue1}
                     />
                     <div>
@@ -52,7 +55,7 @@ var FormSelectFieldDemo = React.createClass({
                         label="Required Select With None Option"
                         options={optionsArr}
                         noneOption={{ label: "Select an option", value: "0" }}
-                        onChange={this._changeCallback.bind(this, 2)}
+                        onChange={this._changeCallback2}
                         required={true}
                         value={this.state.fieldValue2}
                     />
@@ -64,7 +67,7 @@ var FormSelectFieldDemo = React.createClass({
                     <FormSelectField controlled={true}
                         label="With error"
                         options={optionsArr}
-                        onChange={this._changeCallback.bind(this, 3)}
+                        onChange={this._changeCallback3}
                         errorMessage="The error message appears when hovering over the input or the error icon."
                         required={true}
                         value={this.state.fieldValue3}
@@ -78,7 +81,7 @@ var FormSelectFieldDemo = React.createClass({
                         label="With help text"
                         labelHelpText="Help text goes here!"
                         options={optionsArr}
-                        onChange={this._changeCallback.bind(this, 4)}
+                        onChange={this._changeCallback4}
                         value={this.state.fieldValue4}
                     />
                     <div>
@@ -90,7 +93,7 @@ var FormSelectFieldDemo = React.createClass({
                         label="Disabled With help text"
                         labelHelpText="Help text goes here!"
                         options={optionsArr}
-                        onChange={this._changeCallback.bind(this, 5)}
+                        onChange={this._changeCallback5}
                         value={this.state.fieldValue5}
                         disabled={true}
                     />

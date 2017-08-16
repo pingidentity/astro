@@ -83,8 +83,13 @@ var DragDropTableDemo = React.createClass({
             var linkClass = (this.state.sort.column === props.index)
                 ? (this.state.sort.ascending ? "ascending" : "descending")
                 : null;
+
+            var _handleOnClick = function (event) {
+                sortFunction(props.index, event);
+            };
+
             return (
-                    <a onClick={sortFunction.bind(null, props.index)} className={linkClass}>
+                    <a onClick={_handleOnClick} className={linkClass}>
                         {props.data}
                     </a>
                 );

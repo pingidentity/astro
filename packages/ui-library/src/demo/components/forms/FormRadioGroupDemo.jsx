@@ -8,14 +8,17 @@ var React = require("react"),
 */
 var FormRadioGroupDemo = React.createClass({
 
+    _numDemos: 4,
+
     getInitialState: function () {
-        return {
-            showSpinner: true,
-            selectedId1: 1,
-            selectedId2: 2,
-            selectedId3: 3,
-            selectedId4: 4
-        };
+        var initialState = { showSpinner: true };
+
+        for (var i=1; i<=this._numDemos; i+=1) {
+            initialState["selectedId" + i] = i;
+            this["_handleChange" + i] = this._handleChange.bind(this, i);
+        }
+
+        return initialState;
     },
 
     _handleChange: function (i, value) {
@@ -46,7 +49,7 @@ var FormRadioGroupDemo = React.createClass({
                     <FormRadioGroup
                         groupName="horizontal-group"
                         selected={this.state.selectedId1}
-                        onValueChange={this._handleChange.bind(this, 1)}
+                        onValueChange={this._handleChange1}
                         items={radioItems}
                         stacked={false}
                     />
@@ -61,7 +64,7 @@ var FormRadioGroupDemo = React.createClass({
                     <FormRadioGroup
                         groupName="stacked-group"
                         selected={this.state.selectedId2}
-                        onValueChange={this._handleChange.bind(this, 2)}
+                        onValueChange={this._handleChange2}
                         items={radioItems}
                     />
                 </div>
@@ -75,7 +78,7 @@ var FormRadioGroupDemo = React.createClass({
                     <FormRadioGroup
                         groupName="disabled-stacked-group"
                         selected={this.state.selectedId3}
-                        onValueChange={this._handleChange.bind(this, 3)}
+                        onValueChange={this._handleChange3}
                         items={radioItems}
                         disabled={true}
                     />
@@ -86,7 +89,7 @@ var FormRadioGroupDemo = React.createClass({
                     <FormRadioGroup
                         groupName="hidden-stacked-group"
                         selected={this.state.selectedId4}
-                        onValueChange={this._handleChange.bind(this, 4)}
+                        onValueChange={this._handleChange4}
                         items={radioItemsWithHidden}
                     />
                 </div>

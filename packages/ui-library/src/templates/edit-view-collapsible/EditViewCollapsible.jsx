@@ -74,6 +74,8 @@ module.exports = React.createClass({
         this._toggleSection1 = this._toggleSection.bind(null, 1);
         this._toggleSection2 = this._toggleSection.bind(null, 2);
         this._toggleSection3 = this._toggleSection.bind(null, 3);
+
+        this._handleRadioInputChangeUserGroup = this._handleRadioInputChange.bind(this, "userGroup");
     },
 
     render: function () {
@@ -212,7 +214,7 @@ module.exports = React.createClass({
                                 label="User Group"
                                 groupName="user-group"
                                 selected={this.props.inputs.userGroup}
-                                onValueChange={this._handleRadioInputChange.bind(this, "userGroup")}
+                                onValueChange={this._handleRadioInputChangeUserGroup}
                                 items={[
                                     { id: 1, name: "Group 1" },
                                     { id: 2, name: "Group 2" },

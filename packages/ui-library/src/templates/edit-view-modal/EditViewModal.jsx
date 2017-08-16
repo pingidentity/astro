@@ -62,6 +62,10 @@ module.exports = React.createClass({
         this.props.onModalToggle();
     },
 
+    componentDidMount: function () {
+        this._handleRadioInputChangeUserGroup = this._handleRadioInputChange.bind(this, "userGroup");
+    },
+
     _renderModalContent: function () {
         return (
             <div>
@@ -185,7 +189,7 @@ module.exports = React.createClass({
                                 label="User Group"
                                 groupName="user-group"
                                 selected={this.props.inputs.userGroup}
-                                onValueChange={this._handleRadioInputChange.bind(this, "userGroup")}
+                                onValueChange={this._handleRadioInputChangeUserGroup}
                                 items={[
                                     { id: 1, name: "Group 1" },
                                     { id: 2, name: "Group 2" },

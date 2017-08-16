@@ -22,12 +22,18 @@ var TimePickerDemo = React.createClass({
     },
 
     getInitialState: function () {
-        return {
+        var initialState = {
             a: "--",
             b: "--",
             c1: "",
             c2: ""
         };
+
+        for (var key in initialState) {
+            this["_handleValueChange" + key.toUpperCase()] = this._handleValueChange.bind(null, key);
+        }
+
+        return initialState;
     },
 
     render: function () {
@@ -35,7 +41,7 @@ var TimePickerDemo = React.createClass({
             <div>
                 <div className="input-row">
                     <TimePicker
-                        onValueChange={this._handleValueChange.bind(null, "a")}
+                        onValueChange={this._handleValueChangeA}
                         increments={30}
                         labelText="12 Hour Format"
                         value={this.state.a}
@@ -45,7 +51,7 @@ var TimePickerDemo = React.createClass({
                 </div>
                 <div className="input-row">
                     <TimePicker
-                        onValueChange={this._handleValueChange.bind(null, "b")}
+                        onValueChange={this._handleValueChangeB}
                         increments={60}
                         format="24"
                         labelText="24 Hour Format"
@@ -63,11 +69,11 @@ var TimePickerDemo = React.createClass({
                         format="YYYY-MM-DD"
                         computableFormat="x"
                         closeOnSelect={true}
-                        onValueChange={this._handleValueChange.bind(null, "c1")}
+                        onValueChange={this._handleValueChangeC1}
                         date={this.state.c1}
                     />
                     <TimePicker
-                        onValueChange={this._handleValueChange.bind(null, "c2")}
+                        onValueChange={this._handleValueChangeC2}
                         increments={60}
                         format="24"
                         value={this.state.c2}
