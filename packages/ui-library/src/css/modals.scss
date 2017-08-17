@@ -174,13 +174,12 @@
         }
     }
     &.alert {
-        $modal-width: 360px;
-
         .modal-header,
         .modal-body {
             border-width: 1px 1px 0;
             border-style: solid;
             border-color: $color-warning-icon-yellow;
+            width: 360px;
         }
         .modal-header {
             background: $color-warning-icon-yellow;
