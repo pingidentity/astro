@@ -36,6 +36,9 @@ var React = require("re-react"),
  *    Display a ghost row to preview where a row would be inserted
  * @param {boolean} [disableSort=false]
  *    Determines whether the column in internally sortable
+ * @param {number} [dragToEdge=false]
+ *    If true, the drag index will only increment when the drag location has passed the edge of the row instead
+ *    of being incremented after the halfway mark which is the default behaviour.
  *
  * @param {MultiDrag~onSearch} onSearch
  *    Callback to be triggered when a column is searched.
@@ -72,6 +75,7 @@ module.exports = React.createClass({
         ghostRowAt: React.PropTypes.number.affectsRendering,
         className: React.PropTypes.string.affectsRendering,
         disableSort: React.PropTypes.bool.affectsRendering,
+        dragToEdge: React.PropTypes.bool.affectsRendering,
         // callbacks
         onSearch: React.PropTypes.func.isRequired,
         onDrag: React.PropTypes.func.isRequired,
@@ -91,7 +95,8 @@ module.exports = React.createClass({
             onScrolledToTop: _.noop,
             labelEmpty: "No Items Added",
             onDragStart: _.noop,
-            onDragEnd: _.noop
+            onDragEnd: _.noop,
+            dragToEdge: false
         };
     },
 
@@ -153,7 +158,8 @@ module.exports = React.createClass({
                    onDrop={this.props.onDrop}
                    onDragStart={this.props.onDragStart}
                    onDragEnd={this.props.onDragEnd}
-                   onCancel={this.props.onCancel}>
+                   onCancel={this.props.onCancel}
+                   dragToEdge={this.props.dragToEdge}>
             {
                 inner
             }
@@ -188,13 +194,13 @@ module.exports = React.createClass({
     },
 
     render: function () {
-        
+
         var className = classnames(
             this.props.className, {
                 "disable-sort": this.props.disableSort
             }
         );
-        
+
         return (
             <div data-id={this.props["data-id"]} className={className}>
                 <FormLabel value={this.props.name} />

@@ -40,19 +40,19 @@ var dragCollect = function (connect, monitor) {
     };
 };
 
-var isInTopHalf = function (monitor, node) {
+var isInTopHalf = function (monitor, node, dragToEdge) {
     var boundingRect = node.getBoundingClientRect();
     var clientOffset = monitor.getClientOffset();
     var ownMiddleY = (boundingRect.bottom - boundingRect.top) / 2;
 
-    return (clientOffset.y - boundingRect.top) <= ownMiddleY;
+    return (clientOffset.y - boundingRect.top) <= (ownMiddleY * (dragToEdge ? 2 : 1));
 };
-var isInLeftHalf = function (monitor, node) {
+var isInLeftHalf = function (monitor, node, dragToEdge) {
     var boundingRect = node.getBoundingClientRect();
     var clientOffset = monitor.getClientOffset();
     var ownMiddleX = (boundingRect.right - boundingRect.left) / 2;
 
-    return (clientOffset.x - boundingRect.left) <= ownMiddleX;
+    return (clientOffset.x - boundingRect.left) <= (ownMiddleX * (dragToEdge ? 2 : 1));
 };
 
 
@@ -60,7 +60,7 @@ function handleDragEvent (callback, props, monitor, component) {
     var renderedNode = ReactDOM.findDOMNode(component);
     var itemBeingDragged = monitor.getItem();
     var locationType = props.type === "column" ? isInLeftHalf : isInTopHalf;
-    var offset = locationType(monitor, renderedNode) ? 0 : 1;
+    var offset = locationType(monitor, renderedNode, props.dragToEdge) ? 0 : 1;
 
     props[callback](props.index + offset, itemBeingDragged.index, props.column, itemBeingDragged.column);
 }
@@ -136,6 +136,9 @@ var dropCollect = function (connect) {
  *          The DOM node to wrap the draggable component. Default "div"
  * @param {object} [style]
  *          Inline style object for child
+ * @param {number} [dragToEdge=false]
+ *          If true, the drag index will only increment when the drag location has passed the edge of the row instead
+ *          of being incremented after the halfway mark which is the default behaviour.
  * @example
  *
  *  <Draggable id={index} index={index} onDrag={this._onDrag} onDrop={this._onDrop}
@@ -164,7 +167,8 @@ var DragDrop = React.createClass({
         style: PropTypes.object,
 
         disabled: PropTypes.bool,
-        removeDraggableAttribute: PropTypes.bool
+        removeDraggableAttribute: PropTypes.bool,
+        dragToEdge: PropTypes.bool
     },
 
     getDefaultProps: function () {
@@ -172,7 +176,8 @@ var DragDrop = React.createClass({
             disabled: false,
             tagName: "div",
             onDragStart: _.noop,
-            onDragEnd: _.noop
+            onDragEnd: _.noop,
+            dragToEdge: false
         };
     },
 

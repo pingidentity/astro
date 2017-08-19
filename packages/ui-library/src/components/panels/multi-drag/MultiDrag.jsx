@@ -200,11 +200,11 @@ function convertFilteredIndexes (columns, desc) {
  *        contentType={contentType}
  *    />
  */
- 
+
 var MultiDragStateless = React.createClass({
     displayName: "MultiDragStateless",
     colSortDisabledArr: [],
-    
+
     propTypes: {
         "data-id": React.PropTypes.string,
         className: React.PropTypes.string,
@@ -247,7 +247,7 @@ var MultiDragStateless = React.createClass({
             disabled: false
         };
     },
-    
+
     /*
      * This function will iterate through the columns and build an
      * array indicating whether the items are sortable within each column
@@ -316,18 +316,10 @@ var MultiDragStateless = React.createClass({
         if (!desc || typeof(targetIndex) === "undefined") {
             return;
         }
-        
+
         // don't allow sorting of column if disableSort is enabled
         if ((targetColumn === beingDraggedColumn) && this.colSortDisabledArr[beingDraggedColumn]) {
             return;
-        }
-
-        // to index returned from onDrag event is always +1 off when dragging down
-        // includes dragged item in "to" index?
-        // removing the drop preview (ghostRowAt) has no effect on this issue
-        // only applicable if targetColumn === being DraggedColumn
-        if ((targetColumn === beingDraggedColumn) && desc.from.index < desc.to.index ) {
-            desc.to.index -= 1;
         }
 
         this._lastDrag = desc;
@@ -388,6 +380,7 @@ var MultiDragStateless = React.createClass({
                             onDragEnd={this.props.onDragEnd}
                             onCancel={this._onCancel}
                             ghostRowAt={ghostRowAt}
+                            dragToEdge={true}
                             className={this.props.classNames[index]}
                             contentType={this.props.contentType}
                             data-id={"DragDropColumn-" + index}

@@ -106,7 +106,7 @@ describe("MultiDrag", function () {
         expect(component.props.onDrag).not.toBeCalled();
         var componentRef = component.refs.MultiDragStateless;
 
-        componentRef._onDrag(1, 0, 0, 0);
+        componentRef._onDrag(1, 1, 1, 1);
         expect(component.props.onDrag).not.toBeCalled();
     });
 

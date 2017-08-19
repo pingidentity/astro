@@ -162,6 +162,44 @@ describe("DragDrop", function () {
             genMockNode(0, 0, 100, 100))).toBe(false);
     });
 
+    it("Determines whether the mouse is over the bottom/right edge of the component", function () {
+        //mouse is not at the bottom edge yet
+        expect(DragDrop.isInTopHalf(
+            genMockMonitor(0, 151),
+            genMockNode(0, 100, 100, 100),
+            true)).toBe(true);
+
+        //mouse is at exactly the bottom edge
+        expect(DragDrop.isInTopHalf(
+            genMockMonitor(0, 200),
+            genMockNode(0, 100, 100, 100),
+            true)).toBe(true);
+
+        //mouse is over the bottom edge
+        expect(DragDrop.isInTopHalf(
+            genMockMonitor(0, 201),
+            genMockNode(0, 100, 100, 100),
+            true)).toBe(false);
+
+        //mouse is not at the right edge yet
+        expect(DragDrop.isInLeftHalf(
+            genMockMonitor(51, 0),
+            genMockNode(0, 0, 100, 100),
+            true)).toBe(true);
+
+        //mouse is at exatcly the right edge
+        expect(DragDrop.isInLeftHalf(
+            genMockMonitor(100, 0),
+            genMockNode(0, 0, 100, 100),
+            true)).toBe(true);
+
+        //mouse is over the right edge
+        expect(DragDrop.isInLeftHalf(
+            genMockMonitor(101, 0),
+            genMockNode(0, 0, 100, 100),
+            true)).toBe(false);
+    });
+
     it("Processes dropped to same index", function () {
         var props = genMockProps(1);
         var monitor = genMockMonitor(0, 0, props);
