@@ -253,8 +253,10 @@
             }
             .td {
                 box-sizing: border-box;
-                overflow: hidden;
-                text-overflow: ellipsis;
+                word-wrap: break-word;
+                //this truncated text that overflowed. May be added back if detailstooltip chagnes to fixed position.
+                // overflow: hidden;
+                // text-overflow: ellipsis;
             }
         }
     }
