@@ -1,5 +1,6 @@
 var React = require("react"),
-    classnames = require("classnames");
+    classnames = require("classnames"),
+    FormLabel = require("./FormLabel.jsx");
 
  /**
  * @class SelectionFilterLabel
@@ -12,37 +13,56 @@ var React = require("react"),
  * @param {number} [count]
  *     The number that is displayed to the right of the filterLabel
  * @param {string} filterLabel
- *     The label text that is displayed
+ *     The text to display inside of the SelectionFilterLabel
+ * @param {string} labelText
+ *     The text to display as an input label above the SelectionFilterLabel
  *
  * @example
  *     <SelectionFilterLabel
  *         data-id="filter-data-id"
  *         filterLabel="Selected Filters"
+ *         labelText="My Label"
  *         count={count}
  *         className="custom-css-class"
  *     />
  *
  **/
 
-var SelectionFilterLabel = function (props) {
-    return (
-        <div data-id={props["data-id"]}
-             className={classnames("selection-filter-label", props.className)}>
-            {props.filterLabel}
-            {props.count && <span className="count">{props.count}</span>}
-        </div>
-    );
-};
+var SelectionFilterLabel = React.createClass({
+    propTypes: {
+        "data-id": React.PropTypes.string,
+        className: React.PropTypes.string.affectsRendering,
+        count: React.PropTypes.number.affectsRendering,
+        filterLabel: React.PropTypes.string.isRequired.affectsRendering,
+        labelText: React.PropTypes.string.affectsRendering
+    },
 
-SelectionFilterLabel.defaultProps = {
-    "data-id": "selection-filter"
-};
+    defaultProps: {
+        "data-id": "selection-filter"
+    },
 
-SelectionFilterLabel.propTypes = {
-    "data-id": React.PropTypes.string,
-    className: React.PropTypes.string.affectsRendering,
-    filterLabel: React.PropTypes.string.isRequired.affectsRendering,
-    count: React.PropTypes.number.affectsRendering
-};
+    _renderSelectionFilter: function () {
+        return (
+            <div
+                data-id={this.props["data-id"]}
+                className={classnames("selection-filter-label", this.props.className)}>
+                {this.props.filterLabel}
+                {this.props.count >= 0 && (
+                    <span data-id={this.props["data-id"] + "-count"} className="count">
+                        {this.props.count}
+                    </span>
+                )}
+            </div>
+        );
+    },
+
+    render: function () {
+        return this.props.labelText ? (
+                <FormLabel data-id={this.props["data-id"] + "-label"} value={this.props.labelText}>
+                    {this._renderSelectionFilter()}
+                </FormLabel>
+            ) : this._renderSelectionFilter();
+    }
+});
 
 module.exports = SelectionFilterLabel;
