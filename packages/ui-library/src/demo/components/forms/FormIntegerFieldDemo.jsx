@@ -152,11 +152,12 @@ var FormIntegerFieldDemo = React.createClass({
                     <FormIntegerField
                             onValueChange = {this._handleValueChange6}
                             data-id = "integerField6"
-                            labelText={"Range 0 - 15 - Value : " + this.state.integerField6}
+                            labelText={"Range 1 - 15 - Value : " + this.state.integerField6}
                             initialValue = {this.state.integerField6}
-                            placeholder = "Enter an integer between 0 and 15"
+                            placeholder = "Enter an integer between 1 and 15"
                             max = {15}
-                            min = {0}
+                            min = {1}
+                            outOfRangeErrorMessage="Please enter a number between 1 and 15"
                             labelHelpText = "Prop enforceRange is true by default.
                                     This doesn't allow keyboard input above the maximum range."
                             className="input-width-medium"

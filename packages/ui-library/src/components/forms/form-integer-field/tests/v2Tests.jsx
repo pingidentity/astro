@@ -157,7 +157,36 @@ describe("FormIntegerField", function () {
         expect(input.textContent).toBe("");
     });
 
+    it("Validity check sets out of range error message onBlur in stateful component", function () {
+        var error = "This is out of range";
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormIntegerField onValueChange={callback} stateless={false} enforceRange={true}
+                    min={1} max={5} outOfRangeErrorMessage={error} />
+        );
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
 
+        expect(component.refs.formIntegerFieldStateful.state.errorMessage).toBeUndefined();
+
+        ReactTestUtils.Simulate.change(input, { target: { value: "0" } });
+        ReactTestUtils.Simulate.blur(input);
+
+        expect(component.refs.formIntegerFieldStateful.state.errorMessage).toEqual(error);
+    });
+
+    it("Validity check reverts invalid values onBlur in stateful component", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <FormIntegerField onValueChange={callback} stateless={false} enforceRange={true} min={1} max={5} />
+        );
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+
+        expect(component.refs.formIntegerFieldStateful.state.value).toEqual("");
+
+        ReactTestUtils.Simulate.change(input, { target: { value: "0" } });
+        ReactTestUtils.Simulate.blur(input);
+
+        // Value was reverted back to empty string instead of being 0 b/c 0 is invalid in the range
+        expect(component.refs.formIntegerFieldStateful.state.value).toEqual("");
+    });
 
     it("is not triggering onChange callback when max limit exceeded", function () {
         var component = ReactTestUtils.renderIntoDocument(
@@ -446,7 +475,7 @@ describe("FormIntegerField", function () {
         component = ReactTestUtils.renderIntoDocument(<FormIntegerField controlled={true} />);
         stateful = component.refs.formIntegerFieldStateful;
         stateless = component.refs.formIntegerFieldStateless;
-        
+
         expect(stateless).toBeTruthy();
         expect(stateful).toBeFalsy();
     });

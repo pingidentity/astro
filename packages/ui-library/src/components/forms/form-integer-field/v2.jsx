@@ -96,6 +96,9 @@ var isValid = function (value, enforceRange, min, max) {
  *
  * @param {string} [errorMessage]
  *     The message to display if defined when external validation failed.
+ * @param {string} [outOfRangeErrorMessage]
+ *     The message displayed when the value is out of range of the min/max.
+ *     Oly applied for stateful component (when stateless = false).
  * @param {string} [errorClassName]
  *     CSS classes to set on the FormTextFieldError component.
  *
@@ -359,7 +362,8 @@ var Stateful = ReactVanilla.createClass({
         initialValue: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
         max: React.PropTypes.number,
         min: React.PropTypes.number,
-        enforceRange: React.PropTypes.bool
+        enforceRange: React.PropTypes.bool,
+        outOfRangeErrorMessage: React.PropTypes.string,
     },
 
     getDefaultProps: function () {
@@ -387,7 +391,8 @@ var Stateful = ReactVanilla.createClass({
      * @ignore
      */
     _handleValueChange: function (value) {
-        // Don't restrict "min" when checking typing
+        // Don't restrict "min" when checking typing so that numbers outside range can be inputed
+        // e.g. If range is restricted to 3 - 30, we want users to be able to input 2 and 1 for 21
         if (!isValid(value, this.props.enforceRange, null, this.props.max)) {
             // reset the field to the previous valid value
             this.setState({
@@ -397,10 +402,27 @@ var Stateful = ReactVanilla.createClass({
         } else {
             var intValue = value === "" ? value : parseInt(value);
             this.setState({
-                value: intValue
+                value: intValue,
+                lastValue: this.state.value,
+                errorMessage: this.props.errorMessage || ""
             }, function () {
                 this.props.onValueChange(intValue);
             });
+        }
+    },
+
+    _handleBlur: function () {
+        // Check validity of value onBlur to enforce min restriction that's not checked onValueChange above
+        if (!isValid(this.state.value, this.props.enforceRange, this.props.min, this.props.max)) {
+            // reset the field to the previous valid value
+            // set error message
+            this.setState({
+                value: this.state.lastValue,
+                errorMessage: this.props.outOfRangeErrorMessage
+            });
+        }
+        if (this.props.onBlur) {
+            this.props.onBlur();
         }
     },
 
@@ -428,7 +450,9 @@ var Stateful = ReactVanilla.createClass({
             onToggleReveal: this._toggleReveal,
             onValueChange: this._handleValueChange,
             onUndo: this._handleUndo,
-            value: this.state.value
+            value: this.state.value,
+            onBlur: this._handleBlur,
+            errorMessage: this.state.errorMessage
         };
         var props = _.defaults(defaultProps, this.props);
         return React.createElement(Stateless, props);
