@@ -13,13 +13,17 @@
     .input-textselect,
     .input-text,
     .input-calendar,
-    .input-timezone {
+    .input-timezone,
+    .input-selection-list-tooltip {
         margin: 0 15px 20px 0;
     }
     .input-text,
     .input-textselect {
         vertical-align: bottom;
 
+        .input-container {
+            padding-right: 0;
+        }
         input[type=text] {
             background: $background-color;
             border-color: $border-color;
@@ -65,12 +69,17 @@
         @include transition(all 0.3s);
     }
     .input-textselect {
-        .input-text.form-error {
-            > .input-container {
-                margin-right: 21px;
+        .input-text {
+            input {
+                width: 90px;
+            }
+            &.form-error {
+                > .input-container {
+                    margin-right: 21px;
 
-                input {
-                    width: 70px;
+                    > input {
+                        width: 70px;
+                    }
                 }
             }
         }
