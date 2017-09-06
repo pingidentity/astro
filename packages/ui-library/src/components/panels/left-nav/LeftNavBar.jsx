@@ -127,7 +127,7 @@ var LeftNavBar = React.createClass({
 
     _rerender: function () {
         this.componentDidUpdate();
-        this._getItemSelector().removeEventListener("animationend", this._rerender);
+        this._getItemSelector().removeEventListener("transitionend", this._rerender);
     },
 
     _getItemSelector: function () {
@@ -207,8 +207,8 @@ var LeftNavBar = React.createClass({
     },
 
     componentWillUnmount: function () {
-        this._getItemSelector().removeEventListener("animationend", this._rerender);
-        this._getItemSelector().removeEventListener("resize", this._handleResize);
+        this._getItemSelector().removeEventListener("transitionend", this._rerender);
+        window.removeEventListener("resize", this._handleResize);
     },
 
     getInitialState: function () {
