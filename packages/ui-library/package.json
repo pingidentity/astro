@@ -28,8 +28,7 @@
     "react-dnd-html5-backend": "2.1.2",
     "recharts": "0.21.2",
     "react-tooltip": "^3.3.0",
-    "superagent": "0.21.0",
-    "superagent": "3.5.2",
+    "superagent": "3.6.0",
     "underscore": "1.8.3",
     "underscore.string": "3.2.2",
     "uuid": "2.0.3",
@@ -96,7 +95,7 @@
     "validator": "5.2.0"
   },
   "engines": {
-    "node": ">= 4.2.x",
+    "node": ">= 4.3.x",
     "npm": ">= 3.7.x"
   },
   "jest": {
