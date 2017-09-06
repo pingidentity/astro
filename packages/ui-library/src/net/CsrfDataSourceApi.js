@@ -326,6 +326,32 @@ var Api = {
     },
 
     /**
+    * @alias module:net/CsrfDataSourceApi.patch
+    * @desc Makes a PATCH request and calls the callback with the response.
+    *
+    * @param {string} endpoint
+    *    The endpoint to send the request to.
+    * @param {object} data
+    *    The form data to be sent in the body.
+    * @param {object} params
+    *    The request query parameters as an associative array (string -> string).
+    * @param {function} callback
+    *    The callback function to be triggered once response is ready.
+    * @param {object} [headers]
+    *    Request headers as an associative array (string -> string).
+    */
+    patch: function (endpoint, data, params, callback, headers) {
+        Api._execMiddlewareCallbacks(Api.MiddlewareTiming.CALL_BEFORE_REQUEST);
+
+        DataSourceApi.patch(
+                Api.rootPath + endpoint,
+                data,
+                params,
+                Api._handleResponse.bind(null, callback),
+                _.extend(buildCsrfHeader(Api.csrfHeaderName, Api.csrfCookieName), headers));
+    },
+
+    /**
     * @alias module:net/CsrfDataSourceApi.post
     * @desc Makes a POST request and calls the callback with the response.
     *

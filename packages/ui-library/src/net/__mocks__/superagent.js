@@ -29,6 +29,9 @@ var agent = {
     get: jest.genMockFunction().mockImplementation(function (path) {
         return this.request;
     }),
+    patch: jest.genMockFunction().mockImplementation(function (path) {
+        return this.request;
+    }),
     post: jest.genMockFunction().mockImplementation(function (path) {
         return this.request;
     }),

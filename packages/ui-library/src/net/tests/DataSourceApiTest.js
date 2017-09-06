@@ -2,7 +2,7 @@ jest.dontMock("../DataSourceApi");
 
 var api;
 var callback;
-var cacheGet, cachePut, cacheClear;
+var cacheGet, cachePatch, cachePut, cacheClear;
 var superagent;
 var response;
 
@@ -26,13 +26,14 @@ describe("DataSourceApi", function () {
 
         // by default no request exists in the cache
         cacheGet = jest.genMockFunction();
-
+        cachePatch = jest.genMockFunction().mockReturnValue(true);
         cachePut = jest.genMockFunction().mockReturnValue(true);
         cacheClear = jest.genMockFunction();
 
         // configure the cache mock instance, to allow controlling the cache mock
         var cacheExports = function () {
             this.get = cacheGet;
+            this.patch = cachePatch;
             this.put = cachePut;
             this.clear = cacheClear;
         };
@@ -97,6 +98,9 @@ describe("DataSourceApi", function () {
         // the cache GET should have not been called
         expect(cacheGet.mock.calls.length).toEqual(0);
 
+        // the cache PATCH should have not been called
+        expect(cachePatch.mock.calls.length).toEqual(0);
+
         // the cache PUT should have not been called
         expect(cachePut.mock.calls.length).toEqual(0);
 
@@ -111,6 +115,9 @@ describe("DataSourceApi", function () {
 
         // the cache GET should have not been called
         expect(cacheGet.mock.calls.length).toEqual(0);
+
+        // the cache PATCH should have not been called
+        expect(cachePatch.mock.calls.length).toEqual(0);
 
         // the cache PUT should have not been called
         expect(cachePut.mock.calls.length).toEqual(0);
@@ -161,6 +168,24 @@ describe("DataSourceApi", function () {
         expect(superagent.request.attach.mock.calls[1][1]).toEqual(files.file2);
     });
 
+    it("performs PATCH requests", function () {
+        api.patch("/testendpoint", {}, { param: "testPATCH" }, callback);
+
+        verifyResponse(callback, response, false);
+
+        // the cache GET should have not been called
+        expect(cacheGet.mock.calls.length).toEqual(0);
+
+        // the cache PATCH should have not been called
+        expect(cachePatch.mock.calls.length).toEqual(0);
+
+        // the cache PUT should have not been called
+        expect(cachePut.mock.calls.length).toEqual(0);
+
+        // the cache CLEAR should have been called
+        expect(cacheClear.mock.calls.length).toEqual(1);
+    });
+
     it("performs PUT requests", function () {
         api.put("/testendpoint", {}, { param: "testPUT" }, callback);
 
@@ -168,6 +193,9 @@ describe("DataSourceApi", function () {
 
         // the cache GET should have not been called
         expect(cacheGet.mock.calls.length).toEqual(0);
+
+        // the cache PATCH should have not been called
+        expect(cachePatch.mock.calls.length).toEqual(0);
 
         // the cache PUT should have not been called
         expect(cachePut.mock.calls.length).toEqual(0);
@@ -184,6 +212,9 @@ describe("DataSourceApi", function () {
         // the cache GET should have not been called
         expect(cacheGet.mock.calls.length).toEqual(0);
 
+        // the cache PATCH should have not been called
+        expect(cachePatch.mock.calls.length).toEqual(0);
+
         // the cache PUT should have not been called
         expect(cachePut.mock.calls.length).toEqual(0);
 
@@ -197,6 +228,9 @@ describe("DataSourceApi", function () {
 
         verifyResponse(callback, response, false, "validation_error");
 
+        // the cache PATCH should have not been called
+        expect(cachePatch.mock.calls.length).toEqual(0);
+
         // the cache PUT should have not been called
         expect(cachePut.mock.calls.length).toEqual(0);
 
@@ -209,6 +243,9 @@ describe("DataSourceApi", function () {
         api.get("/testendpoint", { param: "testGET" }, callback);
 
         verifyResponse(callback, response, false, "ERROR");
+
+        // the cache PATCH should have not been called
+        expect(cachePatch.mock.calls.length).toEqual(0);
 
         // the cache PUT should have not been called
         expect(cachePut.mock.calls.length).toEqual(0);
@@ -225,10 +262,10 @@ describe("DataSourceApi", function () {
                 { "xsrf-token": "abc", Accept: "text/plain" });
 
         expect(superagent.request.set.mock.calls.length).toEqual(2);
-        
+
         expect(superagent.request.set.mock.calls[0][0]).toEqual("Accept");
         expect(superagent.request.set.mock.calls[0][1]).toEqual("text/plain");
-        
+
         expect(superagent.request.set.mock.calls[1][0]).toEqual("xsrf-token");
         expect(superagent.request.set.mock.calls[1][1]).toEqual("abc");
     });

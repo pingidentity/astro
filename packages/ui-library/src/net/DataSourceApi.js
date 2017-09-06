@@ -31,6 +31,7 @@ var memCache = new Cache(Constants.CacheTypes.MEMORY, "memCache", 180);
 
 // constants
 var GET_REQUEST = "GET",
+    PATCH_REQUEST = "PATCH",
     POST_REQUEST = "POST",
     PUT_REQUEST = "PUT",
     DELETE_REQUEST = "DELETE";
@@ -145,6 +146,9 @@ var processRequest = function (options) {
     switch (options.type) {
         case GET_REQUEST:
             req = request.get(options.endpoint);
+            break;
+        case PATCH_REQUEST:
+            req = request.patch(options.endpoint);
             break;
         case POST_REQUEST:
             req = request.post(options.endpoint);
@@ -356,6 +360,53 @@ var DataSourceApi = {
                 callback: callback,
                 headers: headers,
                 bypassCache: true,
+                cache: memCache
+            }
+        );
+    },
+
+    /**
+     * @alias module:net/DataSourceApi.patch
+     *
+     * @desc Makes a PATCH request and calls the callback with the response.
+     *
+     * @param {string} endpoint
+     *    The endpoint to send the request to.
+     * @param {object} data
+     *    The form data to be sent in the body.
+     * @param {object} params
+     *    The request query parameters as an associative array (string -> string).
+     * @param {module:net/DataSourceApi.responseCallback} callback
+     *    Callback to be triggered once response is ready.
+     * @param {object} [headers]
+     *    Request headers as an associative array (string -> string).
+     *
+     * @example
+     *      var api = require('ui-library/src/net/DataSourceAPI');
+     *
+     *      api.patch(
+     *          'http://localhost:9090/web-portal/myendpoint/action',
+     *          { query: 'search string', count: 10 },
+     *          { param1: "value1, param2: "value2},
+     *          function(response) {
+     *              if (!response.error) {
+     *                  console.log('Received ' + response.status + ' with data: ' + response.data);
+     *              } else {
+     *                  console.log('Received error: '  + response.error);
+     *              }
+     *          },
+     *          { 'Accept': 'application/json' );
+     */
+    patch: function (endpoint, data, params, callback, headers) {
+        processRequest(
+            {
+                type: PATCH_REQUEST,
+                endpoint: endpoint,
+                data: data,
+                params: params,
+                callback: callback,
+                headers: headers,
+                bypassCache: false,
                 cache: memCache
             }
         );
