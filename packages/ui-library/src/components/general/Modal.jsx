@@ -197,7 +197,8 @@ var Modal = React.createClass({
                 maximize: this.props.maximize,
                 dialog: this.props.type === Type.DIALOG,
                 alert: this.props.type === Type.ALERT,
-                show: this.props.expanded
+                show: this.props.expanded,
+                "no-close": !this.props.onClose
             }
         );
 
@@ -217,7 +218,7 @@ var Modal = React.createClass({
                         <If test={this.props.showHeader}>
                             <div className="modal-header" data-id="modal-header">
                                 {this.props.modalTitle}
-                                {this._getCloseButton()}
+                                {this.props.onClose && this._getCloseButton()}
                             </div>
                         </If>
                         <div className="modal-body" data-id="modal-body" style={this._toggleIeScrollHack()}>

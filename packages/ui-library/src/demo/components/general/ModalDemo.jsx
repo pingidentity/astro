@@ -8,7 +8,7 @@ var Modal = require("./../../../components/general/Modal.jsx");
 */
 var ModalDemo = React.createClass({
 
-    numDemos: 6,
+    numDemos: 7,
 
     _toggle: function (index) {
         var newState = {};
@@ -110,6 +110,25 @@ var ModalDemo = React.createClass({
                             the onClose callback. If you are using the "controlled" or stateless version, you will
                             need to pass the onClose callback as well. For the stateful version the onClose callback
                             is not required.
+                        </div>
+                    </Modal>
+                </div>
+                <div className="input-row">
+                    <a onClick={this._toggle7}>Open Modal with Developer Controlled Close</a>
+
+                    <Modal
+                        modalTitle="Dev Controlled Close"
+                        maximize={false}
+                        expanded={this.state.expanded7}
+                        onOpen={this._toggle7}>
+                        <div className="input-row">
+                            This modal has no onClose prop, so it is up to the developer to
+                             provide the closing behavior as with the buttons below. <br/>
+                             This also removes the close button at the top of the modal, and centers the header.
+                        </div>
+                        <div className="button-group">
+                            <button className="primary" onClick={this._toggle7}>Save</button><br/>
+                            <a className="cancel" onClick={this._toggle7}>Cancel</a>
                         </div>
                     </Modal>
                 </div>

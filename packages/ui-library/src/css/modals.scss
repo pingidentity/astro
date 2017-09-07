@@ -33,6 +33,7 @@
             width: 100%;
         }
     }
+  
     .modal-content {
         display: none;
         position: relative;
@@ -93,6 +94,11 @@
         }
         .details-content {
             top: 29px;
+        }
+    }
+    &.no-close {
+        .modal-header {
+            text-align: center;
         }
     }
     .modal-body {
