@@ -9,7 +9,7 @@ var request = {
     query: jest.genMockFunction().mockReturnThis(),
     send: jest.genMockFunction().mockReturnThis(),
     end: jest.genMockFunction().mockImplementation(function (callback) {
-        callback(this.response);
+        callback(null, this.response);
     }),
     set: jest.genMockFunction().mockImplementation(function (name, value) {
         return request;

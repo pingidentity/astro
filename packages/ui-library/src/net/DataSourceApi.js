@@ -216,11 +216,17 @@ var processRequest = function (options) {
         cachedData.fromCache = true;
         options.callback(cachedData);
     } else {
-        req.query(options.params).end(function (res) {
+        req.query(options.params).end(function (err, res) {
             var error;
+
+
+
             // this is to comply with the way the webportal endpoints return certain failures
             if (res.text === "ERROR") {
                 error = res.text;
+            } else if (err) {
+                error = err.response.body.message ;
+
             } else {
                 error = res.error ? res.error.message : "";
             }
