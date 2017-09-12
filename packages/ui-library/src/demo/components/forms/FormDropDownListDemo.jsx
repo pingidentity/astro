@@ -131,7 +131,7 @@ var FormDropDownListDemo = React.createClass({
                 <div className="input-row">
                     <FormDropDownList
                         options={this._options}
-                        label="With help"
+                        label="With a help hint"
                         labelHelpText="Some help tip"
                         selectedOption={this.state.selectedValue3}
                         onValueChange={this._handleValueChange3}

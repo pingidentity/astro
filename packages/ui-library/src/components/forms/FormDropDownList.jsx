@@ -701,7 +701,8 @@ var FormDropDownListStateless = React.createClass({
                 value={this.props.label}
                 data-id={this.props["data-id"]}
                 ref="form-drop-down-list"
-                className={containerClassName}>
+                className={containerClassName}
+                hint={this.props.labelHelpText}>
                 <div className="input-container" ref="input-container">
                     <div className="wrapper">
                         <div
@@ -715,7 +716,6 @@ var FormDropDownListStateless = React.createClass({
                             <FormTextField
                                 data-id="selected-input"
                                 inputClassName={selectedOptionLabelClassName}
-                                labelHelpText={this.props.labelHelpText}
                                 helpClassName={this.props.helpClassName}
                                 errorMessage={this.props.errorMessage}
                                 autoFocus={this.props.autofocus}
