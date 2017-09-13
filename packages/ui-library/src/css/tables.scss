@@ -266,6 +266,11 @@ table {
     }
 }
 
+.table-title {
+    font-size: 18px;
+    margin: 30px 0 10px 0;
+    color: $color-slate;
+}
 a.add-table-row {
     position: relative;
     display: inline-block;
