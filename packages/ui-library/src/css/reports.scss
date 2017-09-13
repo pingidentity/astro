@@ -50,10 +50,9 @@
             }
         }
     }
-    .input-timezone {
-        vertical-align: bottom;
-    }
     .input-calendar {
+        vertical-align: bottom;
+
         input[type=text].input-calendar-value {
             border-color: $border-color;
             width: 145px;

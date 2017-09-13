@@ -2827,6 +2827,13 @@ label {
             @include opacity(0);
         }
     }
+    &.align-inputs {
+        vertical-align: top;
+
+        .label-text {
+            margin-bottom: 20px;
+        }
+    }
 }
 
 .input-menu-button {
