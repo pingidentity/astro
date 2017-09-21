@@ -215,7 +215,6 @@ var LeftNavBar = React.createClass({
         return {
             copyrightHeight: 0,
             selectorStyle: { top: 0, height: 0 },
-            selectorArrowStyle: { top: 0 },
             scrollable: false
         };
     },
@@ -249,57 +248,89 @@ var LeftNavBar = React.createClass({
         if (!prevProps ||
             prevProps.selectedNode !== this.props.selectedNode ||
             prevProps.selectedSection !== this.props.selectedSection ||
-            !_.isEqual(prevProps.openSections, this.props.openSections))
-        {
+            !_.isEqual(prevProps.openSections, this.props.openSections)) {
 
-            var parent = ReactDOM.findDOMNode(this.refs.container);
-            var itemSelectors = parent.getElementsByClassName("highlighted");
-            var style = { height: 0, top: 0 };
-            var arrowStyle = { top: 0 };
+            var navDom = ReactDOM.findDOMNode(this.refs.container),
+                itemSelectors = navDom.getElementsByClassName("highlighted"),
+                style = { height: 0, top: 0 };
+
 
             if (itemSelectors.length > 0) {
-                var dims = itemSelectors[0].getBoundingClientRect();
-                var parentDims = parent.getBoundingClientRect();
-                var sectionOpen = !this.props.collapsible ||
-                    (this.props.selectedSection && this.props.openSections[this.props.selectedSection]);
+                var selectedDims = itemSelectors[0].getBoundingClientRect(),
+                    navDims = navDom.getBoundingClientRect(),
+                    sectionOpen = !this.props.collapsible ||
+                        (this.props.selectedSection && this.props.openSections[this.props.selectedSection]);
 
                 style = {
-                    top: parseInt(dims.top - parentDims.top + parent.scrollTop),
-                    height: sectionOpen ? parseInt(dims.height) : 0,
+                    top: parseInt(selectedDims.top - navDims.top + navDom.scrollTop),
+                    height: sectionOpen ? parseInt(selectedDims.height) : 0,
                     opacity: sectionOpen ? 1 : 0
                 };
+            }
 
-                // if the selected item is outside the visible area of the navbar, scroll up
-                if (dims.top < 0) {
-                    parent.scrollTop -= parentDims.height;
+            // if a new section is selected...
+            /* istanbul ignore if  */
+            if (prevProps && prevProps.selectedSection && this.props.selectedSection) {
+
+                var oldSectionIndex = _.findIndex(this.props.tree, { id: prevProps.selectedSection }),
+                    newSectionIndex = _.findIndex(this.props.tree, { id: this.props.selectedSection }),
+                    closedSection, closedSectionIndex, closedSectionDOM, oldOpenSections, newOpenSections;
+
+                // if autocollapse is TRUE, then account for the closing section height only if the newly selected
+                // section is lower in the nav than the previously selected section
+                if (this.props.autocollapse && prevProps.selectedSection !== this.props.selectedSection &&
+                    newSectionIndex > oldSectionIndex) {
+                    closedSectionIndex = oldSectionIndex;
+                }
+
+                // if autocollapse is FALSE, then check if a section has been closed above the selected section
+                if (!this.props.autocollapse) {
+                    oldOpenSections = _.filter( _.keys(prevProps.openSections), function (key) {
+                        return prevProps.openSections.hasOwnProperty(key) && prevProps.openSections[key] === true;
+                    });
+                    newOpenSections = _.filter( _.keys(this.props.openSections), function (key) {
+                        return this.props.openSections.hasOwnProperty(key) && this.props.openSections[key] === true;
+                    }.bind(this));
+
+                    closedSection = _.difference(oldOpenSections, newOpenSections);
+
+                    if (closedSection.length) {
+                        closedSectionIndex = _.findIndex(this.props.tree, { id: closedSection[0] });
+                    }
+                }
+
+                if (closedSectionIndex >= 0) {
+                    closedSectionDOM = ReactDOM.findDOMNode(this.refs.container)
+                        .getElementsByClassName("menu")[closedSectionIndex];
+                    style.top -= closedSectionDOM.getBoundingClientRect().height;
                 }
             }
 
-            // since the old menu will be collapsing, we need to calculate how much height is going to disappear so that
-            // the selector ends up in the right place.
-            if (prevProps && this.props.selectedSection && prevProps.selectedSection &&
-                this.props.selectedSection !== prevProps.selectedSection) {
-                var oldIndex = _.findIndex(this.props.tree, { id: prevProps.selectedSection });
-                var newIndex = _.findIndex(this.props.tree, { id: this.props.selectedSection });
+            // if the selected item is outside the visible area of the navbar, scroll it into view
+            // timeout is used to allow css animation to complete
+            /* istanbul ignore if  */
+            if (itemSelectors.length > 0) {
+                setTimeout(function () {
+                    var selectedTop = document.getElementsByClassName("highlighted")[0].getBoundingClientRect().top,
+                        headerHeight = 46;
 
-                if (newIndex > oldIndex) {
-                    var oldUl = ReactDOM.findDOMNode(this.refs.container).getElementsByClassName("menu")[oldIndex];
-                    style.top -= oldUl.getBoundingClientRect().height;
-                }
+                    if ((
+                            selectedTop + selectedDims.height - headerHeight) > navDims.height ||
+                            selectedTop - headerHeight < 0
+                        ) {
+
+                        // scroll the selected item so that it is 15px from top of nav
+                        navDom.scrollTop = style.top - 15;
+                    }
+                }, 800);
             }
-
-            // set styles for arrow element based on selected item styles
-            arrowStyle = {
-                top: style.top + Math.floor((style.height - 52) / 2), // 52 == height of arrow
-                opacity: style.opacity
-            };
 
             // set whether nav is tall enough to scroll (toggles class on nav to trigger shadow on copyright)
             this._handleResize();
 
             /* eslint-disable react/no-did-update-set-state */
             if (!_.isEqual(this.state.selectorStyle, style)) {
-                this.setState({ selectorStyle: style, selectorArrowStyle: arrowStyle });
+                this.setState({ selectorStyle: style });
             }
             /* eslint-enable react/no-did-update-set-state */
         }
