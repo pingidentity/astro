@@ -1570,12 +1570,13 @@ input[type=file] {
         position: relative;
 
         .input-text {
+            display: block;
             margin: 0 0 10px;
         }
         .input-container {
             input[type=text] {
                 height: 36px;
-                width: 180px;
+                width: 100%;
                 padding-left: 35px;
                 padding-right: 25px;
             }
@@ -1614,11 +1615,13 @@ input[type=file] {
             display: inline-block;
             padding: 0;
             cursor: pointer;
+
             &:after {
                 content: '|';
                 padding: 0 5px;
+
                 &:hover {
-                    text-decoration: none;
+                    text-decoration: none !important;
                 }
             }
             &:last-of-type {
@@ -1650,6 +1653,9 @@ input[type=file] {
         font-size: 14px;
         margin: 0 0 10px 1px;
     }
+    .help-tooltip {
+        margin: 0 0 0 7px;
+    }
 
     &.searchable {
         .input-selection-list-items {
@@ -1672,19 +1678,10 @@ input[type=file] {
     &.show-selection-options {
         width: 220px;
         padding-bottom: 5px;
-
-        .selection-list-search {
-            .search {
-                .input-container {
-                    input {
-                        width: 198px;
-                    }
-                }
-            }
-        }
     }
-    .help-tooltip {
-        margin: 0 0 0 7px;
+    &.fluid-width {
+        max-width: 400px;
+        width: auto;
     }
 }
 

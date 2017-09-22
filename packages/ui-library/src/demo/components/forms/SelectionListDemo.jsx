@@ -24,7 +24,8 @@ var SelectionListDemo = React.createClass({
         { name: "Cross Country Skiing", id: 6 },
         { name: "Wrestling", id: 7 },
         { name: "Diving", id: 8 },
-        { name: "Boxing", id: 9 }
+        { name: "Boxing", id: 9 },
+        { name: "Cross-country Mountain Biking", id: 10 }
     ],
 
     _multiSelectItems: [
@@ -127,7 +128,6 @@ var SelectionListDemo = React.createClass({
                     </button>
                 </p>
                 <SelectionList
-                    data-id="single-select-2"
                     stateless={false}
                     type={SelectionList.ListType.SINGLE}
                     items={this._singleSelectItems}
@@ -147,7 +147,6 @@ var SelectionListDemo = React.createClass({
                     Selected Radio ID = {this.state.singleSelectId3}
                 </p>
                 <SelectionList
-                    data-id="single-select-3"
                     stateless={false}
                     type={SelectionList.ListType.SINGLE}
                     items={this._singleSelectItems}
@@ -174,7 +173,6 @@ var SelectionListDemo = React.createClass({
                     onToggle={function () {}}>
 
                     <SelectionList
-                        data-id="single-select-1"
                         stateless={false}
                         type={SelectionList.ListType.SINGLE}
                         items={this._singleSelectItems}
@@ -200,7 +198,6 @@ var SelectionListDemo = React.createClass({
                     Selected Radio ID = {this.state.multiSelectIds3.join()}
                 </div>
                 <SelectionList
-                    data-id="multi-select-3"
                     stateless={false}
                     type={SelectionList.ListType.MULTI}
                     items={this._multiSelectItems}
@@ -218,7 +215,6 @@ var SelectionListDemo = React.createClass({
                     Selected Radio ID = {this.state.multiSelectIds2.join()}
                 </div>
                 <SelectionList
-                    data-id="multi-select-2"
                     type={SelectionList.ListType.MULTI}
                     items={this._multiSelectItems}
                     selectedItemIds={this.state.multiSelectIds2}
@@ -248,7 +244,6 @@ var SelectionListDemo = React.createClass({
                     onToggle={function () {}}>
 
                     <SelectionList
-                        data-id="multi-select-1"
                         stateless={false}
                         type={SelectionList.ListType.MULTI}
                         items={this._multiSelectItems}
@@ -282,7 +277,6 @@ var SelectionListDemo = React.createClass({
                     onToggle={function () {}}>
 
                     <SelectionList
-                        data-id="multi-select-4"
                         stateless={false}
                         type={SelectionList.ListType.MULTI}
                         items={this._multiSelectItems}
@@ -308,6 +302,23 @@ var SelectionListDemo = React.createClass({
                     selectedItemIds={this.state.singleSelectId1}
                     showSearchBox={true}
                     searchPlaceholder="Search..."
+                />
+
+                <hr />
+
+                <h3>
+                    Fluid-Width Selection List (grows to max-width of 400px)
+                </h3>
+                <SelectionList
+                    stateless={false}
+                    type={SelectionList.ListType.SINGLE}
+                    items={this._singleSelectItems}
+                    selectedItemIds={this.state.singleSelectId2}
+                    showSearchBox={true}
+                    searchPlaceholder="Search..."
+                    onValueChange={this._onSingleSelectChange2}
+                    requiredText={this.state.required ? "Select at least one" : ""}
+                    className="fluid-width"
                 />
             </div>
         );
