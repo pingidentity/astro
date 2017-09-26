@@ -19,15 +19,10 @@ select {
     &::-moz-selection {
         background: none; // prevents odd FF text selection on undo
     }
-    &:-moz-focusring {
-        color: transparent;
-        text-shadow: 0 0 0 $color-black;
-    }
 
     &::-ms-clear {
         display: none;
     }
-
     &::-ms-expand {
         display: none;
     }
@@ -766,6 +761,12 @@ input[type=file] {
                 background-color: $color-active-blue-option;
                 color: $color-white;
             }
+        }
+
+        // FF FIXES
+        &:-moz-focusring {
+            color: transparent;
+            text-shadow: 0 0 0 $color-black;
         }
     }
     &.ie9 {
