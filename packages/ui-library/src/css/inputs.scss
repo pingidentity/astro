@@ -113,9 +113,8 @@ label {
 
         .help-tooltip {
             margin-left: 10px;
-            margin-top: -3px;
-            line-height: 14px;
-            vertical-align: middle;
+            height: 12px;
+            vertical-align: baseline;
         }
         .help-tooltip.inline {
             margin-left: 5px;
@@ -464,16 +463,7 @@ label {
     }
 
     &.detached {
-        margin-bottom: 7px;
-        margin-right: 10px;
         display: block;
-
-        .help-tooltip {
-            margin: 0 0 0 10px;
-            height: 18px;
-            width: 18px;
-            vertical-align: text-bottom;
-        }
     }
 
     &.parent {
