@@ -20,6 +20,7 @@
         font-family: $font-pn-regular;
     }
     > .collapsible-section-title-value {
+        font-size: 14px;
         text-transform: none;
         margin: 0 0 0 5px;
         color: $color-midnight;
@@ -62,7 +63,7 @@
         }
     }
     &.disable-expand {
-        .left:before, 
+        .left:before,
         .right:after {
             content: '';
         }
@@ -117,6 +118,14 @@
         &.left:before {
             left: -$line-indent;
             color: $color-midnight;
+        }
+    }
+}
+.collapsible-form {
+    .collapsible-section {
+        .collapsible-section-title {
+            color: $color-elephant;
+            font-size: 13px;
         }
     }
 }
