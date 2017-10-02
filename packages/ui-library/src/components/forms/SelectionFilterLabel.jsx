@@ -37,8 +37,10 @@ var SelectionFilterLabel = React.createClass({
         labelText: React.PropTypes.string.affectsRendering
     },
 
-    defaultProps: {
-        "data-id": "selection-filter"
+    getDefaultProps: function () {
+        return {
+            "data-id": "selection-filter"
+        };
     },
 
     _renderSelectionFilter: function () {
