@@ -5,9 +5,14 @@
     $border-color: $color-dolphin;
     $background-color: $color-white;
 
+    display: inline-block;
     position: relative;
+    box-sizing: border-box;
+    min-width: 960px;
     padding: 20px 20px 0;
     background-color: $color-timberwolf;
+
+    @include clearfix;
 
     .input-select,
     .input-textselect,
@@ -44,10 +49,10 @@
         .select-list {
             background: $background-color;
         }
-        .select-list {
-            .select-option:hover {
-                background: $color-elderly;
-            }
+    }
+    .input-custom-select {
+        .input-text {
+            margin: 0;
         }
     }
     .input-calendar {
@@ -98,9 +103,8 @@
         padding: 20px 0;
     }
     button.primary {
-        position: absolute;
-        right: 20px;
-        bottom: 22px;
+        float: right;
+        margin: 25px 0 20px;
     }
 }
 

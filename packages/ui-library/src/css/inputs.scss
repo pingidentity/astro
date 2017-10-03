@@ -700,8 +700,8 @@ input[type=file] {
                 font-size: 10px;
                 text-transform: none;
                 right: 10px;
-                top: 0;
-                line-height: 41px;
+                top: 16px;
+                line-height: 1em;
                 color: $color-midnight;
                 pointer-events: none;
             }
@@ -2294,6 +2294,15 @@ input[type=file] {
             @include border-radius(0 $default-input-border-radius $default-input-border-radius 0);
         }
     }
+
+    .input-container .input-custom-select {
+        input[type=text] {
+            width: 100%;
+            text-align: left;
+            @include border-radius(0 $default-input-border-radius $default-input-border-radius 0);
+        }
+    }
+
     .input-text {
         margin: 0 !important;
 
@@ -2816,10 +2825,13 @@ label {
         }
     }
     &.align-inputs {
-        vertical-align: top;
+        vertical-align: bottom;
 
         .label-text {
             margin-bottom: 20px;
+        }
+        .collapsible-link {
+            height: 28px;
         }
     }
 }
