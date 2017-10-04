@@ -16,10 +16,6 @@ select {
     -webkit-appearance: none;
     -moz-appearance: none;
 
-    &::-moz-selection {
-        background: none; // prevents odd FF text selection on undo
-    }
-
     &::-ms-clear {
         display: none;
     }
