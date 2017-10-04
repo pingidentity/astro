@@ -33,7 +33,7 @@
             width: 100%;
         }
     }
-  
+
     .modal-content {
         display: none;
         position: relative;
@@ -106,7 +106,7 @@
         padding: 25px;
         font-weight: normal;
         box-sizing: border-box;
-        background-color: $color-elderly;
+        background-color: $color-white;
         overflow-x: visible;
         overflow-y: auto;
         max-height: calc(100% - #{2 * $min-bottom});
@@ -136,6 +136,11 @@
             background: transparent;
             padding: 0;
             border: none;
+        }
+    }
+    &.wizard-modal {
+        .modal-body {
+            background-color: $color-elderly;
         }
     }
     &.maximize {

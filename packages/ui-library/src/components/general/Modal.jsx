@@ -178,6 +178,14 @@ var Modal = React.createClass({
 
         this.isIeBrowser = Utils.isIE();
         this.showIeScrollHack = false;
+        this.isWizard = null;
+    },
+
+    componentDidUpdate: function () {
+        if (this.isWizard === null && this.props.expanded) {
+            this.isWizard = !!document.getElementsByClassName("task-wizard").length;
+            this.forceUpdate();
+        }
     },
 
     componentWillUnmount: function () {
@@ -189,26 +197,27 @@ var Modal = React.createClass({
             return null;
         }
 
-        var dataId = this.props.id || this.props["data-id"];
-        var modalClasses = classnames(
-            "modal",
-            this.props.className,
-            {
-                maximize: this.props.maximize,
-                dialog: this.props.type === Type.DIALOG,
+        var dataId = this.props.id || this.props["data-id"],
+            modalClasses = {
                 alert: this.props.type === Type.ALERT,
+                dialog: this.props.type === Type.DIALOG,
+                "no-close": !this.props.onClose,
+                maximize: this.props.maximize,
                 show: this.props.expanded,
-                "no-close": !this.props.onClose
-            }
-        );
+                "wizard-modal": this.isWizard
+            };
 
         return (
-            <div data-id={dataId} ref="container" key="modal" className={modalClasses}>
+            <div
+                data-id={dataId}
+                ref="container"
+                key="modal"
+                className={classnames("modal", this.props.className, modalClasses)}>
                 <div
                     className="modal-bg"
                     data-id="modal-bg"
-                    onClick={this._handleBgClick}>
-                </div>
+                    onClick={this._handleBgClick}
+                />
                 <div
                     className="modal-content"
                     tabIndex="-1"

@@ -3,6 +3,7 @@
 var React = require("re-react"),
     ButtonBar = require("../forms/ButtonBar.jsx"),
     Utils = require("../../util/Utils"),
+    classnames = require("classnames"),
     _ = require("underscore");
 
 /**
@@ -220,7 +221,7 @@ var Wizard = React.createClass({
         }.bind(this));
 
         return (
-            <div data-id={dataId} className={this.props.className}>
+            <div data-id={dataId} className={classnames("task-wizard", this.props.className)}>
                 {stepNodes}
                 {this.props.activeStep === this.props.numSteps ? (
                     <ButtonBar
