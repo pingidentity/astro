@@ -225,8 +225,7 @@ var processRequest = function (options) {
             if (res.text === "ERROR") {
                 error = res.text;
             } else if (err) {
-                error = err.response.body.message ;
-
+                error = err.response.body.message || err.response.error.message;
             } else {
                 error = res.error ? res.error.message : "";
             }
