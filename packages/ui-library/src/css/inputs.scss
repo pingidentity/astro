@@ -1236,6 +1236,7 @@ input[type=file] {
         vertical-align: middle;
         box-sizing: border-box;
         border: 1px solid $color-stratus;
+        cursor: pointer;
 
         @include border-radius($toggle-border-radius);
         @include transition(all $toggle-time);
@@ -1263,6 +1264,12 @@ input[type=file] {
             &:after {
                 left: $toggle-width - $toggle-diameter - 1;
             }
+        }
+    }
+    &.locked:not(.selected) {
+        .toggle {
+            background-color: $color-warning-icon-yellow;
+            border-color: $color-warning-icon-yellow;
         }
     }
     &.small {

@@ -5,6 +5,14 @@ var React = require("re-react"),
     _ = require("underscore");
 
 /**
+ * @enum {string}
+ * @alias Toggle.Status
+ */
+var Status = {
+    LOCKED: "locked"
+};
+
+/**
 * @callback Toggle~onToggle
 */
 
@@ -12,30 +20,34 @@ var React = require("re-react"),
 * @class Toggle
 * @desc Toggles between two states on click. Is either "off" or "on".
 *
-* @param {string} [data-id="toggle"]
+* @param {string} [data-id=toggle]
 *     To define the base "data-id" value for top-level HTML container.
 * @param {string} [className]
 *     CSS classes to be set on the top-level HTML container.
+*
+* @param {boolean} [controlled=false]
+*     DEPRECATED. Use "stateless" instead.
+* @param {boolean} [disabled=false]
+*     If disabled then the toggle will be styled with a "disabled" class and will not be clickable.
 * @param {boolean} [stateless]
 *     WARNING. Default value for "stateless" will be set to true from next version.
 *     To enable the component to be externally managed. True will relinquish control to the component's owner.
 *     False or not specified will cause the component to manage state internally.
-* @param {boolean} [controlled=false]
-*     DEPRECATED. Use "stateless" instead.
-*
 * @param {boolean} [toggled=false]
 *     Toggle state; either true for "on" or false for "off".
+*
+* @param {Toggle.Status} [status]
+*     The status determines aspects of the visual presentation of the toggle. Ex: if status=locked then the off state
+*     of the toggle has a yellow bg color instead of the default gray
 * @param {Toggle~onToggle} [onToggle]
 *     Callback to be triggered when toggled state changes.
 *
-* @param {boolean} [disabled=false]
-*     If disabled then the toggle will be styled with a "disabled" class and will not be clickable.
 *
 * @example
 *     <Toggle className="small" onToggle={this._handleToggle} toggled={true} />
 */
 
-module.exports = ReactVanilla.createClass({
+var Toggle = ReactVanilla.createClass({
 
     propTypes: {
         controlled: React.PropTypes.bool, //TODO: remove in new version
@@ -74,7 +86,8 @@ var ToggleStateless = React.createClass({
         className: React.PropTypes.string,
         toggled: React.PropTypes.bool.affectsRendering,
         onToggle: React.PropTypes.func,
-        disabled: React.PropTypes.bool.affectsRendering
+        disabled: React.PropTypes.bool.affectsRendering,
+        status: React.PropTypes.string.affectsRendering
     },
 
     getDefaultProps: function () {
@@ -97,13 +110,13 @@ var ToggleStateless = React.createClass({
         if (this.props.disabled) {
             return;
         }
-
         this.props.onToggle();
     },
 
     render: function () {
         var id = this.props.id || this.props["data-id"],
-            className = classnames("input-toggle", this.props.className, {
+            status = this.props.status ? Status[this.props.status.toUpperCase()] : null,
+            className = classnames("input-toggle", this.props.className, status, {
                 selected: this.props.toggled,
                 disabled: this.props.disabled
             });
@@ -142,3 +155,7 @@ var ToggleStateful = ReactVanilla.createClass({
         return React.createElement(ToggleStateless, props);
     }
 });
+
+Toggle.Status = Status;
+
+module.exports = Toggle;

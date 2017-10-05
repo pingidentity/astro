@@ -10,27 +10,52 @@ var ToggleDemo = React.createClass({
 
     getInitialState: function () {
         return {
-            toggled: false,
-            userStatus: "USER DISABLED"
+            toggled1: false,
+            toggled2: false,
+            userStatus1: "OFF",
+            userStatus2: "LOCKED"
         };
     },
 
-    _handleToggle: function () {
+    _handleToggle1: function () {
         this.setState({
-            toggled: !this.state.toggled,
-            userStatus: !this.state.toggled ? "USER ACTIVE" : "USER DISABLED"
+            toggled1: !this.state.toggled1,
+            userStatus1: !this.state.toggled1 ? "ON" : "OFF"
+        });
+    },
+
+    _handleToggle2: function () {
+        this.setState({
+            toggled2: !this.state.toggled2,
+            userStatus2: !this.state.toggled2 ? "ON" : "LOCKED"
         });
     },
 
     render: function () {
         return (
             <div>
-                <Toggle data-id="user-toggle" className="row-status-toggle"
+                <div className="input-row">
+                    <Toggle
+                        data-id="user-toggle"
+                        className="row-status-toggle"
                         stateless={true}
-                        toggled={this.state.toggled}
-                        onToggle={this._handleToggle} />
+                        toggled={this.state.toggled1}
+                        onToggle={this._handleToggle1}
+                    />
+                    <br/><br/>
+                    "{this.state.userStatus1}" state
+                </div>
+                <p>Optional locked styling:</p>
+                <Toggle
+                    data-id="user-toggle"
+                    className="row-status-toggle"
+                    stateless={true}
+                    status={Toggle.Status.LOCKED}
+                    toggled={this.state.toggled2}
+                    onToggle={this._handleToggle2}
+                />
                 <br/><br/>
-                <div data-id="userStatus">{this.state.userStatus}</div>
+                "{this.state.userStatus2}" state
             </div>
         );
     }
