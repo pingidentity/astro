@@ -1,6 +1,9 @@
 var React = require("react"),
     ConditionalFieldset = require("./../../../components/general/ConditionalFieldset"),
     FormRadioGroup = require("./../../../components/forms/FormRadioGroup"),
+    FormTextField = require("./../../../components/forms/FormTextField"),
+    Link = require("./../../../components/general/Link"),
+    ValidationMessages = require("./../../../components/forms/ValidationMessages"),
     _ = require("underscore");
 
 
@@ -94,10 +97,31 @@ var ConditionalFieldsetDemo = React.createClass({
                     <ConditionalFieldset data-id="fieldset-2"
                                          onValueChange={this._onCondition2ValueChange}
                                          selectedIndex={this.state.selectedCondition2Index}
-                                         stateless={true} >
-                        <div title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
-                        <div title="Option 2">Option 2</div>
-                        <div title="Option 3">Some other option</div>
+                                         stateless={true}
+                                         type={this.state.selectedTypeName} >
+                        <div title="Invite By Email">
+                            <span>Option with some <strong>MARKUP</strong></span>
+                        </div>
+                        <div title="Create Password">
+                            <p>This is a one-time password that must be reset after the
+                               user's first sign on.</p>
+                            <div className="input-row">
+                                <FormTextField
+                                    labelText="Password"
+                                    className="input-width-medium"
+                                    data-id="username"
+                                    required={true}
+                                    maskValue={true}
+                                    showReveal={true} />
+                            </div>
+                            <Link title="Generate password" className="inline" url="#" />
+                            <ValidationMessages className="show"
+                                        messages={[
+                                            { text: "At least 6 characters", status: ValidationMessages.Status.FAIL },
+                                            { text: "1 number", status: ValidationMessages.Status.PASS },
+                                            { text: "1 UPPERCASE letter", status: ValidationMessages.Status.PASS }
+                                        ]} />
+                        </div>
                     </ConditionalFieldset>
                 </div>
 
@@ -150,7 +174,6 @@ var ConditionalFieldsetDemo = React.createClass({
                         <div title="Option 2">Option 2</div>
                     </ConditionalFieldset>
                 </div>
-
 
             </div>
 

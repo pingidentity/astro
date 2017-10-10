@@ -222,6 +222,13 @@ module.exports = [
                 pathToDoc: "components/forms/FormSearchBox.jsx",
                 pathToSource: "components_forms_FormSearchBox.jsx.html",
                 pathToDemoSource: "demo_components_forms_FormSearchBoxDemo.jsx.html"
+            },
+            {
+                label: "Validation Messages",
+                demo: require("../components/forms/ValidationMessagesDemo.jsx"),
+                pathToDoc: "components/forms/ValidationMessages.jsx",
+                pathToSource: "components_forms_ValidationMessages.jsx.html",
+                pathToDemoSource: "demo_components_forms_ValidationMessagesDemo.jsx.html"
             }
         ]
     },
