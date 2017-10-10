@@ -465,3 +465,26 @@ button.ellipsis-loader-button {
         }
     }
 }
+
+//Consolidates styles for centered group of buttons with optional cancel link
+.button-group {
+    margin: 25px 0 0;
+    text-align: center;
+    white-space: nowrap;
+    button,
+    .button,
+    input[type=button] {
+        margin: 0 5px;
+    }
+    a {
+        text-transform: none;
+        &.secondary {
+            color: $color-rhino;
+        }
+        &.cancel {
+            display: inline-block;
+            margin-top: 15px;
+            font-weight: normal;
+        }
+    }
+}

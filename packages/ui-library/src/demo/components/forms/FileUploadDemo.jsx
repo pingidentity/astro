@@ -164,7 +164,7 @@ var FileUploadDemo = React.createClass({
                                 labelRemove="Remove"
                             />
                         </div>
-                        <div className="buttons" data-id="delete-confirmation">
+                        <div className="button-group" data-id="delete-confirmation">
                             <button
                                 type="button"
                                 data-id="confirm-action"

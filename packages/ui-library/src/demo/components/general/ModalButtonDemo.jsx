@@ -121,7 +121,7 @@ var ModalButtonDemo = React.createClass({
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam venenatis eu eros id
                                 euismod. Etiam molestie quis nunc eu ultrices.
                             </p>
-                            <div className="buttons">
+                            <div className="button-group">
                                 <button type="button" data-id="nopeButton" onClick={this._handleClose2}>Nope</button>
                                 <button type="button" data-id="yupButton" className="primary"
                                         onClick={this._handleClose2} >
@@ -147,7 +147,7 @@ var ModalButtonDemo = React.createClass({
                         <div>
                             This modal copies the look of details tooltip with alert class.
                         </div>
-                        <div className="buttons">
+                        <div className="button-group">
                             <button type="button" className="cancel"
                                     onClick={this._handleClose3} data-id="disgardChangesButton" >
                                 Disgard Changes

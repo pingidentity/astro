@@ -81,13 +81,6 @@
             }
         }
     }
-    &.cancel-tooltip {
-        .buttons {
-            .cancel {
-                margin-right: 0 !important;
-            }
-        }
-    }
     > .details-target {
         display: inline-block;
     }
@@ -199,35 +192,6 @@
                 margin: 10px 49%;
                 top: auto;
                 left: auto;
-            }
-            .buttons {
-                margin: 25px 0 0;
-                text-align: center;
-                white-space: nowrap;
-
-                button,
-                .button,
-                input[type=button] {
-                    margin: 0;
-                    &.cancel {
-                        margin-top: 0;
-                        margin-right: 10px;
-                    }
-                }
-                .cancel {
-                    display: inline-block;
-                    margin-top: 15px;
-                    font-weight: normal;
-                }
-                .nevermind {
-                    margin-right: 10px;
-                }
-                a {
-                    text-transform: none;
-                    &.secondary {
-                        color: $color-rhino;
-                    }
-                }
             }
         }
     }
@@ -373,21 +337,22 @@
             padding: 10px 10px 0;
         }
     }
-    &.alert {
+    &.alert, &.confirm {
         .details-content-inner {
             p {
                 margin-bottom: 0.5em;
             }
-            .buttons,
             div {
-                padding: 20px;
-                margin-top: 0;
-                .input-row {
-                    padding-top: 0;
-                    margin-bottom: 0;
-                }
-                .alone {
-                    margin-right: 0;
+                &:not(.button-group) {
+                    padding: 20px;
+                    margin-top: 0;
+                    .input-row {
+                        padding-top: 0;
+                        margin-bottom: 0;
+                    }
+                    .alone {
+                        margin-right: 0;
+                    }
                 }
             }
         }
@@ -404,19 +369,6 @@
                 }
                 p {
                     text-align: center;
-                    margin-bottom: 0.5em;
-                }
-                .buttons,
-                div {
-                    padding: 20px;
-                    margin-top: 0;
-                    .input-row {
-                        padding-top: 0;
-                        margin-bottom: 0;
-                    }
-                    .alone {
-                        margin-right: 0;
-                    }
                 }
             }
         }

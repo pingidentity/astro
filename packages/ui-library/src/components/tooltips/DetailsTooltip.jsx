@@ -239,7 +239,7 @@ var DetailsTooltipStateless = React.createClass({
 
         // only display if buttons present
         if (this.props.primaryLabels || this.props.secondaryLabels) {
-            buttons = (<div className="buttons" data-id="buttons">
+            buttons = (<div className="button-group" data-id="buttons">
                 {secondaryButtons}
                 {primaryButtons}
                 {this.props.cancelLabel && (

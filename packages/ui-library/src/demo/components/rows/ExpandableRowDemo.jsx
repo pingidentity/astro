@@ -125,7 +125,7 @@ var ExpandableRowDemo = React.createClass({
                         </div>
                     }
                 />
-                {this.state.rowDeleted && (
+                {!this.state.rowDeleted && (
                     <ExpandableRow
                         title="Row with Delete Confirmation"
                         subtitle="stateless"

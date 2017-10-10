@@ -74,7 +74,7 @@ var CancelTooltip = React.createClass({
                 <p data-id={this.props["data-id"] + "-cancel-tooltip-text"}>
                     {this.props.messageText}
                 </p>
-                <div className="buttons">
+                <div className="button-group">
                     <button
                         className="cancel"
                         data-id={this.props["data-id"] + "-cancel-confirm-btn"}

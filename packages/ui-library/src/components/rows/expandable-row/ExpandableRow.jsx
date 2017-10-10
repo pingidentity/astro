@@ -489,7 +489,7 @@ var ConfirmDeleteDialog = ReactVanilla.createClass({
 
                 <p>{this.props.label}</p>
 
-                <div className="buttons">
+                <div className="button-group">
                     <button type="button"
                             data-id="cancel-delete"
                             className="secondary"

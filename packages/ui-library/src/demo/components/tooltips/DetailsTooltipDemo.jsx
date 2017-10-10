@@ -92,7 +92,7 @@ var DetailsTooltipDemo = React.createClass({
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
-                    <div className="buttons" data-id="delete-confirmation">
+                    <div className="button-group" data-id="delete-confirmation">
                         <button
                                 type="button"
                                 data-id="confirm-action"
@@ -119,7 +119,7 @@ var DetailsTooltipDemo = React.createClass({
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
-                    <div className="buttons" data-id="delete-confirmation">
+                    <div className="button-group" data-id="delete-confirmation">
                         <button
                                 type="button"
                                 data-id="confirm-action"
@@ -131,12 +131,13 @@ var DetailsTooltipDemo = React.createClass({
                         <a className="cancel" onClick={this._handleCancel2}>Cancel</a>
                     </div>
                 </DetailsTooltip>
+
                 <div>{this.state.status2}</div>
 
                 <br/>
                 <DetailsTooltip
                     stateless={true}
-                    label={(<button type="button">Label as button</button>)}
+                    label={(<button type="button" className="delete-btn">Label as button</button>)}
                     positionClassName="bottom right"
                     title="Tooltip Title"
                     open={this.state.open3}
@@ -146,7 +147,7 @@ var DetailsTooltipDemo = React.createClass({
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
-                    <div className="buttons" data-id="delete-confirmation">
+                    <div className="button-group" data-id="delete-confirmation">
                         <button
                                 type="button"
                                 data-id="confirm-action"
@@ -173,7 +174,7 @@ var DetailsTooltipDemo = React.createClass({
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
-                    <div className="buttons" data-id="delete-confirmation">
+                    <div className="button-group" data-id="delete-confirmation">
                         <button
                                 type="button"
                                 data-id="confirm-action"
@@ -200,7 +201,7 @@ var DetailsTooltipDemo = React.createClass({
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
-                    <div className="buttons" data-id="delete-confirmation">
+                    <div className="button-group" data-id="delete-confirmation">
                         <button
                             data-id="confirm-action"
                             className="primary"
@@ -226,7 +227,7 @@ var DetailsTooltipDemo = React.createClass({
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
-                    <div className="buttons" data-id="delete-confirmation">
+                    <div className="button-group" data-id="delete-confirmation">
                         <button
                             data-id="confirm-action"
                             className="cancel"
@@ -258,7 +259,7 @@ var DetailsTooltipDemo = React.createClass({
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
-                    <div className="buttons" data-id="delete-confirmation">
+                    <div className="button-group" data-id="delete-confirmation">
                         <button
                             data-id="confirm-action"
                             className="cancel"
