@@ -1,6 +1,7 @@
 var React = require("react");
 var Utils = require("../../util/Utils");
 var ReactTooltip = require("react-tooltip");
+var classnames = require("classnames");
 var _ = require("underscore");
 
 
@@ -36,6 +37,8 @@ var Placements = {
  *     DEPRECATED. Use "data-id" instead. To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
+ * @param {number} [delayHide=400]
+ *     Sets the number of milliseconds to wait before hiding the tooltip.
  *
  * @param {any} hintText
  *     Provides the text that will appear in the hint.
@@ -49,6 +52,7 @@ var HelpHint = React.createClass({
         "data-id": React.PropTypes.string,
         id: React.PropTypes.string,
         className: React.PropTypes.string,
+        delayHide: React.PropTypes.number,
         placement: React.PropTypes.oneOf([
             Placements.TOP,
             Placements.BOTTOM,
@@ -61,6 +65,7 @@ var HelpHint = React.createClass({
     getDefaultProps: function () {
         return {
             "data-id": "helpHint",
+            delayHide: 400,
             className: ""
         };
     },
@@ -118,7 +123,7 @@ var HelpHint = React.createClass({
             <div className="help-tooltip" data-id={dataId}>
                 <div
                     data-id={dataId + "-target"}
-                    className={this.props.className}
+                    className={classnames(this.props.className, "help-tooltip-target")}
                     onClick={this._handleClick}
                     data-tip={true}
                     data-for={uid}
@@ -130,7 +135,7 @@ var HelpHint = React.createClass({
                     place={this._getPlacement()}
                     className="tooltip-text"
                     effect="solid"
-                    delayHide={400}>
+                    delayHide={this.props.delayHide}>
                     {this.props.hintText}
                 </ReactTooltip>
             </div>

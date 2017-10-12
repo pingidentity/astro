@@ -33,16 +33,25 @@
     line-height: 14px;
 
     // overrides for the default react-tooltip styling
-    .__react_component_tooltip {
+    .tooltip-text {
         color: $color-white;
         font-size: 14px;
         text-transform: none;
         white-space: normal;
         font-weight: normal;
         padding: 8px 10px;
+        max-width: 400px;
+        pointer-events: auto !important;
 
+        &.show {
+            @include opacity(1);
+        }
         &.type-dark {
             @include bg-styles($color-midnight);
+        }
+        a {
+            color: $color-white;
+            text-decoration: underline;
         }
     }
 
@@ -75,22 +84,8 @@
         vertical-align: baseline;
         cursor: pointer;
     }
-    .tooltip-text {
-        max-width: 400px;
-        pointer-events: auto !important;
-        @include opacity(1);
-
-        &:hover {
-            visibility: visible !important;
-            @include opacity(1);
-        }
-        a {
-            color: $color-white;
-            text-decoration: underline;
-        }
-    }
     &.warning {
-        .__react_component_tooltip {
+        .tooltip-text {
             @include bg-styles($color-critical-red);
         }
     }

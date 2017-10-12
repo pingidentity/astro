@@ -11,7 +11,7 @@ var FormDropDownListDemo = React.createClass({
     numDemos: 10,
 
     _options: [
-        { label: "One", value: "1" },
+        { label: "One", value: "1", helpHintText: "Help text may be added to any drop-down option." },
         { label: "Two", value: "2", group: 4 },
         { label: "Three", value: "3", group: 1 },
         { label: "Four", value: "4", group: 2 },

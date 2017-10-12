@@ -855,8 +855,10 @@ input[type=file] {
     width: 190px; // default width
 
     &.open {
+        z-index: 2; // make sure menu appears above other elements on the page
+
         .select-list {
-            visibility: visible;
+            display: block;
 
             @include animation(fade-in 0.2s);
         }
@@ -968,9 +970,18 @@ input[type=file] {
     @include drop-down-styles;
 
     .select-list {
-        visibility: hidden;
+        $option-padding: 7px 40px 7px 15px;
+
+        display: none;
         z-index: 2; // popup so render above everything else
+        max-height: 200px;
+        overflow-y: scroll;
         border: 1px solid $color-rabbit-fur;
+        list-style: none;
+        position: relative;
+        background: $color-white;
+        padding: 8px 0;
+        white-space: nowrap;
 
         @include box-shadow(0 3px 4px rgba($color-black, 0.1));
         @include border-radius(0 0 $default-input-border-radius $default-input-border-radius);
@@ -995,7 +1006,7 @@ input[type=file] {
             }
         }
         .select-prompt {
-            padding: 7px 40px 7px 15px;
+            padding: $option-padding;
             font-size: 14px;
         }
         .select-search-prompt {

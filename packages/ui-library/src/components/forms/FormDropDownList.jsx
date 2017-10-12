@@ -1,13 +1,18 @@
 var React = require("re-react"),
     ReactVanilla = require("react"),
     ReactDOM = require("react-dom"),
-    _ = require("underscore"),
-    classnames = require("classnames"),
-    FormTextField = require("./form-text-field").v2,
+
     FormLabel = require("./FormLabel.jsx"),
-    KeyboardUtils = require("../../util/KeyboardUtils.js"),
+    FormTextField = require("./form-text-field").v2,
+    HelpHint = require("../tooltips/HelpHint.jsx"),
+
+    callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutsideOfContainer,
     FilterUtils = require("../../util/FilterUtils.js"),
-    callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutsideOfContainer;
+    KeyboardUtils = require("../../util/KeyboardUtils.js"),
+    Utils = require("../../util/Utils.js"),
+
+    classnames = require("classnames"),
+    _ = require("underscore");
 
 /**
 * @function FormDropDownList~filterOptions
@@ -77,6 +82,8 @@ var SearchTypes = {
 *     The value of the option.
 * @property {string|number} [group]
 *     The id of the group the option belongs to.
+* @property {string} helpHintText
+*     The help text to display in a tooltip when hovering over an option
 */
 
 /**
@@ -222,6 +229,22 @@ var OptionItem = ReactVanilla.createClass({
         }
     },
 
+    _renderContent: function () {
+        if (this.props.option.helpHintText) {
+            return (
+                <HelpHint
+                    data-id={this.props["data-id"] + "-helphint"}
+                    delayHide={0}
+                    placement="right"
+                    hintText={this.props.option.helpHintText}>
+                        {this.props.content}
+                </HelpHint>
+            );
+        } else {
+            return this.props.content;
+        }
+    },
+
     render: function () {
         return (
             <li
@@ -230,7 +253,7 @@ var OptionItem = ReactVanilla.createClass({
                 data-id={this.props["data-id"]}
                 className={this.props.className}
                 onClick={this._handleClick}>
-                {this.props.content}
+                {this._renderContent()}
             </li>
         );
     }
@@ -303,6 +326,7 @@ var FormDropDownListStateless = React.createClass({
 
     componentWillMount: function () {
         this.didPressKey = false;
+        this.inlineMenuStyle = Utils.isIE() ? { border: "none" } : {};
         this._setupGroups(this.props.options, this.props.groups);
     },
 
@@ -386,6 +410,7 @@ var FormDropDownListStateless = React.createClass({
 
     _getOrderedOptionsIndex: function (option) {
         var index = -1;
+
         if (this.props.groups && option) {
             this._orderedOptions.forEach(function (opt, i) {
                 if (opt.value === option.value) {
@@ -406,9 +431,9 @@ var FormDropDownListStateless = React.createClass({
 
     _getPrompt: function () {
         if (this._isBoxSearch()) {
-            var className = "select-prompt";
-            var searchClassName = classnames(className, "select-search-prompt");
-            var addClassName = classnames(className, "select-add", { highlighted: this.props.options.length === 0 });
+            var className = "select-prompt",
+                searchClassName = classnames(className, "select-search-prompt"),
+                addClassName = classnames(className, "select-add", { highlighted: this.props.options.length === 0 });
 
             if (this.props.searchString === "") {
                 return <li data-id="search-prompt" className={searchClassName}>{this.props.labelPrompt}</li>;
@@ -462,8 +487,9 @@ var FormDropDownListStateless = React.createClass({
     _handleKeyDown: function (e) {
         this.didPressKey = true;
         if (this.props.open) { // only do search when select list expanded
-            var search;
-            var time = Date.now();
+            var search,
+                time = Date.now();
+
             if (e.keyCode === KeyboardUtils.KeyCodes.ENTER) { //enter, so pull previously entered search string
                 if (this.props.canAdd && this.props.options.length === 0) {
                     if (this.props.searchString !== "" || this.props.noneOption) {
@@ -616,13 +642,13 @@ var FormDropDownListStateless = React.createClass({
     },
 
     _getSingleOption: function (option, index) {
-        var group = this.props.groups && this._groupById[option.group];
-        var disabled = group && group.disabled;
-        var className = classnames("select-option", {
-            highlighted: !disabled && index === this.props.searchIndex,
-            selected: option.value === this.props.selectedOption.value,
-            disabled: disabled
-        });
+        var group = this.props.groups && this._groupById[option.group],
+            disabled = group && group.disabled,
+            className = classnames("select-option", {
+                highlighted: !disabled && index === this.props.searchIndex,
+                selected: option.value === this.props.selectedOption.value,
+                disabled: disabled
+            });
         return (
             <OptionItem
                 key={"option-" + option.label} // add prop allows re-ordering, so must have unique key
@@ -631,31 +657,36 @@ var FormDropDownListStateless = React.createClass({
                 className={className}
                 onClick={!disabled ? this._handleOptionClick : _.noop}
                 option={option}
-                content={React.cloneElement(this.props.contentType, option)} />
+                content={React.cloneElement(this.props.contentType, option)}
+            />
         );
     },
 
     _getNoneOption: function () {
-        var noneOptionContainerClassName = classnames("none-option",
-            { highlighted: this.props.searchIndex === -1 });
-        var content = (
-            <span className={this.props.noneOptionLabelClassName}>
-                {this.props.noneOption.label}
-            </span>
-        );
+        var noneOptionContainerClassName = classnames("none-option", { highlighted: this.props.searchIndex === -1 }),
+            content = (
+                <span className={this.props.noneOptionLabelClassName}>
+                    {this.props.noneOption.label}
+                </span>
+            );
 
         return(
-            <OptionItem key="none-option" data-id="none-option" ref="none-option"
+            <OptionItem
+                key="none-option"
+                data-id="none-option"
+                ref="none-option"
                 className={noneOptionContainerClassName}
                 onClick={this._handleOptionClick}
                 option={this.props.noneOption}
-                content={content} />
+                content={content}
+            />
         );
     },
 
     _getGroupedOptions: function () {
-        var options = [];
-        var lastGroup;
+        var options = [],
+            lastGroup;
+
         this._orderedOptions.forEach(function (option, index) {
             if (lastGroup !== option.group) {
                 lastGroup = option.group;
@@ -664,11 +695,13 @@ var FormDropDownListStateless = React.createClass({
             }
             return options.push(this._getSingleOption(option, index));
         }.bind(this));
+
         return options;
     },
 
     _generateOptions: function () {
         var options = [];
+
         // If noneOption exits, always at the top of the list
         if (this.props.noneOption && (!this.props.searchString || this.props.searchString === "" )) {
             options.push(this._getNoneOption());
@@ -685,17 +718,18 @@ var FormDropDownListStateless = React.createClass({
 
     render: function () {
         var containerClassName = classnames("input-custom-select", "input-select", this.props.className, {
-            open: this.props.open,
-            "form-error": this.props.errorMessage,
-            "value-entered": this.props.selectedOption &&
-                (!this.props.noneOption || this.props.noneOption.label !== this.props.selectedOption.label),
-            required: this.props.required,
-            disabled: this.props.disabled
-        });
-        var selectClassName = classnames("selected-option", this.props.selectClassName);
-        var selectedOptionLabelClassName = classnames("selected-option-label", this.props.selectedOptionLabelClassName);
-        var selectedOptionLabel = this.props.showSelectedOptionLabel ? this.props.selectedOption.label : null;
-        var inputValue = this._isBoxSearch() && this.didPressKey ? this.props.searchString : selectedOptionLabel;
+                open: this.props.open,
+                "form-error": this.props.errorMessage,
+                "value-entered": this.props.selectedOption &&
+                    (!this.props.noneOption || this.props.noneOption.label !== this.props.selectedOption.label),
+                required: this.props.required,
+                disabled: this.props.disabled
+            }),
+            selectClassName = classnames("selected-option", this.props.selectClassName),
+            selectedOptionLabelClassName = classnames("selected-option-label", this.props.selectedOptionLabelClassName),
+            selectedOptionLabel = this.props.showSelectedOptionLabel ? this.props.selectedOption.label : null,
+            inputValue = this._isBoxSearch() && this.didPressKey ? this.props.searchString : selectedOptionLabel;
+
         return (
             <FormLabel
                 value={this.props.label}
@@ -725,9 +759,13 @@ var FormDropDownListStateless = React.createClass({
                                 onValueChange={this._handleInputValueChange}
                                 readOnly={this.props.disabled || this._isKeyboardSearch()}
                             />
-                            <div className={!this.props.disabled && "arrow"}></div>
+                            <div className={!this.props.disabled && "arrow"} />
                         </div>
-                        <ul data-id="select-list" className="select-list" ref="selectList">
+                        <ul
+                            data-id="select-list"
+                            className="select-list"
+                            ref="selectList"
+                            style={this.inlineMenuStyle}>
                             {this._getPrompt()}
                             {this._generateOptions()}
                         </ul>
