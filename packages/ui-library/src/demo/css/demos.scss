@@ -1,9 +1,4 @@
 .dragDropRowDemo {
-    .instructions {
-        font-style: italic;
-        margin-bottom: 20px;
-    }
-
     .row {
         border: 1px solid $color-elderly;
         padding: 5px;
@@ -20,6 +15,11 @@
     .row.dragTop.dragBottom {
         border-bottom: 3px solid $color-active-blue;
     }
+}
+
+.instructions {
+    font-style: italic;
+    margin-bottom: 20px;
 }
 
 .infiniteScrollDemo {

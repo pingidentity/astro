@@ -1,0 +1,71 @@
+.result-set {
+    position: relative;
+
+    .row-index-nav {
+        position: absolute;
+        right: -30px;
+        top: 0;
+        bottom: 0;
+    }
+    .row-index-nav-items {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+    }
+}
+
+.row-index-nav {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    width: 22px;
+
+    .row-index-nav-items {
+        width: 50px; // wider width insures vertical scrollbars are hidden
+        overflow-x: hidden;
+        overflow-y: auto;
+        min-height: 300px;
+    }
+
+    &::-webkit-scrollbar {
+        width: 0 !important;
+    }
+
+    li {
+        $size: 20px;
+
+        display: block;
+        width: $size;
+        height: $size;
+        line-height: $size + 2;
+        text-align: center;
+        font-size: 14px;
+        color: $color-midnight;
+        border: 1px solid transparent;
+        margin: 0 0 10px 0;
+        cursor: pointer;
+
+        @include transition(all 0.2s);
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+        &:hover {
+            border-color: $color-rabbit-fur;
+        }
+        &.selected {
+            color: $color-active;
+            border-color: $color-active;
+            cursor: default;
+        }
+        &.disabled {
+            color: $color-rabbit-fur;
+            cursor: default;
+
+            &:hover {
+                border-color: transparent;
+            }
+        }
+    }
+}

@@ -533,7 +533,14 @@ module.exports = [
                 pathToDoc: "components/grid/Grid.jsx",
                 pathToSource: "components_grid_Grid.jsx.html",
                 pathToDemoSource: "demo_components_grid_GridDemo.jsx.html"
-            }
+            },
+            {
+                label: "Row Index Navigation",
+                demo: require("../components/general/RowIndexNavDemo.jsx"),
+                pathToDoc: "components/general/RowIndexNav.jsx",
+                pathToSource: "components_general_RowIndexNav.jsx.html",
+                pathToDemoSource: "demo_components_general_RowIndexNavDemo.jsx.html"
+            },
         ]
     },
     {

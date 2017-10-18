@@ -437,6 +437,10 @@
         font-weight: bold;
         text-align: center;
         color: $color-midnight;
+
+        &:empty {
+            margin: 0;
+        }
     }
 }
 
