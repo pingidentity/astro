@@ -1909,6 +1909,9 @@ input[type=file] {
         .form-error-icon {
             right: -21px;
         }
+        .input-container {
+            width: calc(100% - 21px);
+        }
     }
     &.input-toggle {
         .toggle {
@@ -2319,9 +2322,10 @@ input[type=file] {
 
         &.form-error {
             input[type=text] {
-                text-align: right;
-
                 @include border-radius($default-input-border-radius 0 0 $default-input-border-radius);
+            }
+            .input-container {
+            	padding-right: 0;
             }
         }
 

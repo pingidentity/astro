@@ -1,6 +1,7 @@
 @import 'globals';
 @import 'mixins';
 
+
 .report-filters {
     $border-color: $color-dolphin;
     $background-color: $color-white;
@@ -26,9 +27,6 @@
     .input-textselect {
         vertical-align: bottom;
 
-        .input-container {
-            padding-right: 0;
-        }
         input[type=text] {
             background: $background-color;
             border-color: $border-color;
@@ -44,10 +42,6 @@
         }
         .wrapper {
             border-color: $border-color;
-        }
-        .selected-option,
-        .select-list {
-            background: $background-color;
         }
     }
     .input-custom-select {
@@ -67,11 +61,6 @@
         }
     }
 
-    .form-error {
-        margin-right: 36px;
-
-        @include transition(all 0.3s);
-    }
     .input-textselect {
         .input-text {
             input {
