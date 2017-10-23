@@ -247,10 +247,9 @@
             margin-bottom: 20px;
         }
     }
-    &.input-selection-list-tooltip {
+    &.input-selection-list-tooltip, &.link-dropdown-list {
         .details-content {
             .details-content-inner {
-                width: 200px;
                 border-color: $color-timberwolf;
 
                 .details-body {
@@ -264,6 +263,13 @@
                 .input-selection-list {
                     border: none;
                 }
+            }
+        }
+    }
+    &.input-selection-list-tooltip {
+        .details-content {
+            .details-content-inner {
+                width: 200px;
             }
         }
         // filter bar
@@ -310,6 +316,13 @@
                 .details-content-inner {
                     width: 220px;
                 }
+            }
+        }
+    }
+    &.link-dropdown-list {
+        .details-content {
+            .details-content-inner {
+                width: 200px;
             }
         }
     }

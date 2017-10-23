@@ -789,6 +789,64 @@ input[type=file] {
     }
 }
 
+@mixin drop-down-styles {
+    .select-list {
+        list-style: none;
+        position: relative;
+        background: $color-white;
+        padding: 8px 0;
+        max-height: 200px;
+        overflow-y: scroll;
+
+        // each item in dropdown
+        .select-option,
+        .none-option {
+            // Note: decided not to use line-height here for alignment because it causes issues e.g. large font-sizes
+            // will overlap, and also looks bad if one item overflows onto 2 lines
+            padding: 7px 40px 7px 15px;
+            font-size: 14px;
+            position: relative;
+            line-height: 13px;
+            color: $color-midnight;
+            cursor: pointer;
+
+            &:hover,
+            &.highlighted {
+                background-color: $color-active-blue;
+                color: $color-white;
+
+                &:before {
+                    background-color: $color-white;
+                }
+            }
+            &.disabled {
+                background: none;
+                color: $color-rabbit-fur;
+            }
+        }
+        .selected {
+            font-family: $font-pn-semibold;
+
+            &:before {
+                content: '';
+                width: 3px;
+                height: 3px;
+                background-color: $color-midnight;
+                display: inline-block;
+                position: absolute;
+                top: 12px;
+                left: 7px;
+
+                @include border-radius(1.5px);
+            }
+        }
+        .none-option {
+            font-style: italic;
+            color: $color-elephant;
+        }
+    }
+}
+
 .input-custom-select {
     padding: $borderSize; // prevent the highlighted child from overlapping the input border
     display: inline-block;
@@ -907,18 +965,11 @@ input[type=file] {
     }
 
     @include placeholder-css($color-midnight, normal, 0, normal); // override placeholder styles on selected option preview
+    @include drop-down-styles;
 
-    // the dropdown
     .select-list {
         visibility: hidden;
-        list-style: none;
-        position: relative;
         z-index: 2; // popup so render above everything else
-        background: $color-white;
-        padding: 8px 0;
-        white-space: nowrap;
-        max-height: 200px;
-        overflow-y: scroll;
         border: 1px solid $color-rabbit-fur;
 
         @include box-shadow(0 3px 4px rgba($color-black, 0.1));
@@ -932,24 +983,6 @@ input[type=file] {
 
         @media (max-width: 500px) { // except on small screens, where we force the dropdown width to match the input
             white-space: normal;
-        }
-
-        // selected option
-        .selected {
-            font-family: $font-pn-semibold;
-
-            &:before {
-                content: '';
-                width: 3px;
-                height: 3px;
-                background-color: $color-midnight;
-                display: inline-block;
-                position: absolute;
-                top: 12px;
-                left: 7px;
-
-                @include border-radius(1.5px);
-            }
         }
 
         // horizontal rule separator between groups
@@ -1000,36 +1033,6 @@ input[type=file] {
             &.disabled {
                 color: $color-rabbit-fur;
             }
-        }
-
-        // each item in dropdown
-        .select-option,
-        .none-option {
-            // Note: decided not to use line-height here for alignment because it causes issues e.g. large font-sizes
-            // will overlap, and also looks bad if one item overflows onto 2 lines
-            padding: 7px 40px 7px 15px;
-            font-size: 14px;
-            position: relative;
-            line-height: 13px;
-            color: $color-midnight;
-
-            &:hover,
-            &.highlighted {
-                background-color: $color-active-blue;
-                color: $color-white;
-
-                &:before {
-                    background-color: $color-white;
-                }
-            }
-            &.disabled {
-                background: none;
-                color: $color-rabbit-fur;
-            }
-        }
-        .none-option {
-            font-style: italic;
-            color: $color-elephant;
         }
     }
     .selected-option,
@@ -1686,6 +1689,13 @@ input[type=file] {
         max-width: 400px;
         width: auto;
     }
+}
+
+.link-dropdown-list {
+    .collapsible-link {
+        padding: 0;
+    }
+    @include drop-down-styles;
 }
 
 // Input variants

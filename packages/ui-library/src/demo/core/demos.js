@@ -229,6 +229,13 @@ module.exports = [
                 pathToDoc: "components/forms/ValidationMessages.jsx",
                 pathToSource: "components_forms_ValidationMessages.jsx.html",
                 pathToDemoSource: "demo_components_forms_ValidationMessagesDemo.jsx.html"
+            },
+            {
+                label: "Link Drop Down List",
+                demo: require("../components/forms/LinkDropDownListDemo.jsx"),
+                pathToDoc: "components/forms/LinkDropDownList.jsx",
+                pathToSource: "components_forms_LinkDropDownList.jsx.html",
+                pathToDemoSource: "demo_components_forms_LinkDropDownListDemo.jsx.html"
             }
         ]
     },
