@@ -30,7 +30,7 @@
 // V2 ------------------------------------------------------------------------------------------------------------------
 .result-set {
     $item-height: 60px;
-    $button-height: 32px;
+    $button-height: $item-height;
     $button-width: 45px;
     $button-top: 22px;
     $button-bottom: 6px;
@@ -51,24 +51,25 @@
         .collapsed-content {
             position: relative;
             box-sizing: border-box;
-            min-height: 60px;
-            padding: 15px 0 0 34px;
+            height: 60px;
+            padding: 23px 0 0 34px;
+            margin: 0 45px 0 0;
         }
-        &.title-only {
+        &.has-subtitle {
             .collapsed-content {
-                padding-top: 23px;
+                padding-top: 15px;
+            }
+        }
+        &.has-subtitle,
+        &.has-image {
+            .expanded-content {
+                margin-top: 7px;
             }
         }
         .expanded-content {
             position: relative;
             padding: 0 75px 30px 34px;
             min-height: 3 * $button-height - 4px;
-
-            .delete-confirm-dialog {
-                position: absolute;
-                bottom: 0;
-                right: 0;
-            }
         }
         &.expanded-content-scroll {
             .expanded-content-scroller {
@@ -82,7 +83,6 @@
             font-weight: normal;
             font-family: $font-pn-regular;
             color: $color-slate;
-            margin-right: $button-width;
         }
         .item-sub-title {
             font-size: 13px;
@@ -91,7 +91,6 @@
             font-family: $font-pn-regular;
             color: $color-elephant;
             margin-top: 2px;
-            margin-right: $button-width;
         }
         .item-title,
         .item-sub-title {
@@ -124,7 +123,7 @@
         }
         .row-accessories {
             position: absolute;
-            right: 45px;
+            right: 0;
             top: 50%;
             bottom: 0;
             z-index: 1;
@@ -172,55 +171,60 @@
                 z-index: 1;
             }
         }
+
+        .row-btns {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: $button-width;
+        }
+
         .expand-btn,
         .delete-btn,
         .edit-btn,
         .view-btn,
         .no-edit,
         .btn-fill {
+            position: relative;
             background-color: $color-chilly;
-            position: absolute;
-            width: $button-width;
             text-align: center;
-            right: 0;
-            padding: $button-top 0 $button-bottom 0;
 
             &:after {
+                position: absolute;
+                top: 50%;
+                left: 50%;
                 text-transform: none;
                 font-size: 18px;
-                font-family: 'iconfont';
+                font-family: $icon-font;
                 color: $color-walrus;
-            }
-        }
-        .expand-btn,
-        .delete-btn,
-        .edit-btn,
-        .view-btn {
-            &:hover {
-                text-decoration: none;
 
-                @include opacity(0.85);
+                @include transform(translateX(-50%) translateY(-50%));
+            }
+            &:hover {
+                &:after {
+                    text-decoration: none;
+                    @include opacity(0.65);
+                }
             }
         }
         .expand-btn {
+            display: block;
+            position: absolute;
+            left: 0;
+            right: 0;
             top: 0;
             bottom: 0;
-            min-height: $button-height;
 
             &:after {
                 content: '\45';
             }
-            &:hover {
-                text-decoration: none;
-            }
         }
-        .delete-btn {
-            bottom: 0;
-            height: $button-height;
-
-            &:after {
-                content: '\64';
-            }
+        .edit-btn,
+        .view-btn,
+        .btn-fill {
+            display: none;
+            height: calc(100% - #{2 * $button-height} - 2px);
         }
         .edit-btn {
             &:after {
@@ -233,19 +237,26 @@
                 font-size: 13px;
             }
         }
-        .edit-btn,
-        .view-btn,
-        .no-edit {
-            top: 1px;
-            bottom: $button-height + $button-top + 7px;
-            padding: 0;
+        .delete-btn {
+            display: none;
+            height: $button-height;
 
             &:after {
-                position: absolute;
-                top: 50%;
-                left: 0;
-                right: 0;
-                margin: -10px 0 0 0;
+                content: '\64';
+            }
+        }
+        .delete-confirm-dialog {
+            position: absolute;
+
+            &.left {
+                right: 23px;
+
+                &.top {
+                    bottom: $button-height;
+                }
+                &.bottom {
+                    bottom: 0;
+                }
             }
         }
         &.expanded {
@@ -256,15 +267,35 @@
             @include transition(max-height 1s);
 
             .expand-btn {
+                position: relative;
+                height: $item-height;
+                top: auto;
+                bottom: auto;
+                margin: 0 0 1px;
+
                 &:after {
                     font-family: 'iconfont';
                     content: '\63';
                 }
             }
+            .edit-btn,
+            .view-btn,
+            .btn-fill {
+                display: block;
+            }
+            .delete-btn {
+                display: block;
+                margin: 1px 0 0;
+            }
+
             .item-title,
             .item-sub-title {
                 white-space: normal;
                 word-break: break-word;
+            }
+
+            .item-message {
+                display: block;
             }
         }
         &.no-edit {
@@ -280,8 +311,9 @@
             }
         }
         &.no-delete {
-            .edit-btn {
-                bottom: 0;
+            .edit-btn,
+            .view-btn {
+                height: calc(100% - #{$button-height} - 1px);
             }
             .resend-tooltip {
                 position: absolute;
@@ -295,15 +327,9 @@
                 }
             }
         }
-        &.no-edit {
+        &.no-edit.no-delete {
             .btn-fill {
-                top: 1px;
-                bottom: 61px;
-            }
-            &.no-delete {
-                .btn-fill {
-                    bottom: 1px;
-                }
+                height: calc(100% - #{$button-height} - 1px);
             }
         }
         &.waiting {
@@ -352,7 +378,7 @@
         }
         &.invited {
             .row-accessories {
-                right: 46px;
+                right: 1px;
 
                 &:before {
                     content: '';
@@ -391,6 +417,19 @@
         }
         &.z-index-priority {
             z-index: 100;
+        }
+        .item-message {
+            display: none;
+            padding: 15px 30px;
+            margin: 0 45px 10px 0;
+            font-size: 14px;
+            line-height: 1.3;
+            text-align: center;
+            color: $color-white;
+
+            &.warning {
+                background: $color-warning-icon-yellow;
+            }
         }
     }
     .result-section-title {

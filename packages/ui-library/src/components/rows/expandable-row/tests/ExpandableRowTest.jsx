@@ -64,6 +64,39 @@ describe("ExpandableRow", function () {
         expect(row).toBeDefined();
     });
 
+    it("renders the row message if provided", function () {
+        var rowMessageObj = {
+                text: "The row message appears at the top of the expanded row only when the row is expanded.",
+                type: ExpandableRow.RowMessageTypes.WARNING
+            },
+            component = getComponent({ rowMessage: rowMessageObj, expanded: true });
+
+        var rowMessage = TestUtils.findRenderedDOMNodeWithDataId(component, "item-message");
+
+        expect(rowMessage).toBeDefined();
+        expect(rowMessage.getAttribute("class")).toContain(rowMessageObj.type);
+        expect(rowMessage.textContent).toContain(rowMessageObj.text);
+    });
+
+    it("renders the custom delete tooltip content when provided", function () {
+        var deleteTtText = "My custom content";
+        var deleteTtClass = "my-delete-tt";
+        var deleteTtContent = (
+            <div className={deleteTtClass}>
+                {deleteTtText}
+            </div>
+        );
+        var component = getComponent({
+            confirmDeleteContent: deleteTtContent,
+            expanded: true,
+            showDeleteConfirm: true
+        });
+        var ttContent = ReactTestUtils.findRenderedDOMComponentWithClass(component, deleteTtClass);
+
+        expect(ttContent).toBeDefined();
+        expect(ttContent.textContent).toEqual(deleteTtText);
+    });
+
     it("stateless: renders component as collapsed (by default)", function () {
         var component = getComponent();
         var expandedRow = TestUtils.findRenderedDOMNodeWithDataId(component, "expanded-row");
@@ -331,6 +364,8 @@ describe("ExpandableRow", function () {
         expect(iconContent.length).toEqual(1);
     });
 
+
+
     it("stateless: should genereate delete button with confirmation when confirmDelete provided", function () {
         var component = getComponent({
             expanded: true,
@@ -338,11 +373,12 @@ describe("ExpandableRow", function () {
             confirmDelete: true
         });
 
-        var expandedRow = TestUtils.findRenderedDOMNodeWithDataId(component, "expanded-row");
-        var deleteConfirm = TestUtils.findRenderedDOMNodeWithDataId(expandedRow, "delete-btn-confirm");
+        var deleteConfirm = TestUtils.findRenderedDOMNodeWithDataId(component, "delete-btn-confirm");
         expect(deleteConfirm).toBeTruthy();
-        expect(getDeleteButton(expandedRow)).toBeNull();
+        expect(getDeleteButton(component)).toBeNull();
     });
+
+
 
     it("stateful: should genereate delete button with confirmation when confirmDelete provided", function () {
         var component = getComponent({
@@ -352,10 +388,9 @@ describe("ExpandableRow", function () {
             stateless: false
         });
 
-        var expandedRow = TestUtils.findRenderedDOMNodeWithDataId(component, "expanded-row");
-        var deleteConfirm = TestUtils.findRenderedDOMNodeWithDataId(expandedRow, "delete-btn-confirm");
+        var deleteConfirm = TestUtils.findRenderedDOMNodeWithDataId(component, "delete-btn-confirm");
         expect(deleteConfirm).toBeTruthy();
-        expect(getDeleteButton(expandedRow)).toBeNull();
+        expect(getDeleteButton(component)).toBeNull();
     });
 
     it("stateless: should genereate delete button without confirmation when confirmDelete not provided", function () {
@@ -364,10 +399,9 @@ describe("ExpandableRow", function () {
             showDelete: true
         });
 
-        var expandedRow = TestUtils.findRenderedDOMNodeWithDataId(component, "expanded-row");
-        var deleteConfirm = TestUtils.findRenderedDOMNodeWithDataId(expandedRow, "delete-btn-confirm");
+        var deleteConfirm = TestUtils.findRenderedDOMNodeWithDataId(component, "delete-btn-confirm");
         expect(deleteConfirm).toBeNull();
-        expect(getDeleteButton(expandedRow)).toBeTruthy();
+        expect(getDeleteButton(component)).toBeTruthy();
     });
 
     it("stateful: should genereate delete button without confirmation when confirmDelete not provided", function () {
@@ -377,10 +411,9 @@ describe("ExpandableRow", function () {
             stateless: false
         });
 
-        var expandedRow = TestUtils.findRenderedDOMNodeWithDataId(component, "expanded-row");
-        var deleteConfirm = TestUtils.findRenderedDOMNodeWithDataId(expandedRow, "delete-btn-confirm");
+        var deleteConfirm = TestUtils.findRenderedDOMNodeWithDataId(component, "delete-btn-confirm");
         expect(deleteConfirm).toBeNull();
-        expect(getDeleteButton(expandedRow)).toBeTruthy();
+        expect(getDeleteButton(component)).toBeTruthy();
     });
 
     it("stateful: should show delete confirm dialog", function () {

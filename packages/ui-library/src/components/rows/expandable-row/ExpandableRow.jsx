@@ -20,6 +20,23 @@ var Statuses = {
 };
 
 /**
+ * @enum {string}
+ * @alias ExpandableRow.RowMessageTypes
+ */
+var RowMessageTypes = {
+    WARNING: "warning"
+};
+
+/**
+ * @enum {string}
+ * @alias ExpandableRow.ConfirmDeletePositions
+ */
+var ConfirmDeletePositions = {
+    TOP: "top",
+    BOTTOM: "bottom"
+};
+
+/**
  * @callback ExpandableRow~eventCallback
  * @param {object} event - reactjs synthetic event object
  */
@@ -140,6 +157,10 @@ var Statuses = {
  *     The message to display within the delete confirm dialog when asking for confirmation to delete a row.
  * @param {boolean} [confirmDelete=false]
  *     Whether or not a 'delete' action should show a confirmation dialog.
+ * @param {string} [confirmDeletePosition=bottom]
+ *     Used to determine whether the confirm delete dialog will appear above or below the delete button.
+ * @param {object} [confirmDeleteContent]
+ *     Optional custom content to replace the default delete confirmation tooltip content
  * @param {boolean} [showDeleteConfirm=false]
  *     Whether or not the confirm delete dialog is visible.
  * @param {ExpandableRow~onDeleteCancelClick} [onDeleteCancelClick]
@@ -149,6 +170,9 @@ var Statuses = {
  *
  * @param {ExpandableRow.Statuses} [status]
  *     The ExpandableRow.Statuses status to show on the right hand side of the row.
+ * @param {ExpandableRow.RowMessageTypes} [rowMessage]
+ *     Displays a message along the top of the expanded row above all row content including the title and row
+  *    accessories.
  * @param {object} [rowAccessories]
  *     A "span" (don't use a "div") where buttons and toggles may be passed in to render on the right side of the row
  *     just to the left of the expand button.
@@ -171,7 +195,6 @@ var Statuses = {
  *             {contentChildrenJsx}
  *         </ExpandableRow>
  */
-
 
 var ExpandableRow = ReactVanilla.createClass({
 
@@ -315,11 +338,14 @@ var StatelessExpandableRow = React.createClass({
         onDelete: React.PropTypes.func,
         labelDeleteConfirm: React.PropTypes.string.affectsRendering,
         confirmDelete: React.PropTypes.bool.affectsRendering,
+        confirmDeletePosition: React.PropTypes.string.affectsRendering,
+        confirmDeleteContent: React.PropTypes.object.affectsRendering,
         showDeleteConfirm: React.PropTypes.bool.affectsRendering,
         onDeleteCancelClick: React.PropTypes.func,
         onDeleteConfirmClick: React.PropTypes.func,
         status: React.PropTypes.oneOf([Statuses.GOOD, Statuses.ERROR, Statuses.WARNING]).affectsRendering,
         rowAccessories: React.PropTypes.object.affectsRendering,
+        rowMessage: React.PropTypes.oneOf([RowMessageTypes.WARNING]).affectsRendering,
         waiting: React.PropTypes.bool.affectsRendering
     },
 
@@ -334,6 +360,7 @@ var StatelessExpandableRow = React.createClass({
             showDelete: true,
             onDelete: _.noop,
             confirmDelete: false,
+            confirmDeletePosition: ConfirmDeletePositions.BOTTOM,
             showDeleteConfirm: false,
             onDeleteCancelClick: _.noop,
             onDeleteConfirmClick: _.noop,
@@ -382,7 +409,7 @@ var StatelessExpandableRow = React.createClass({
                 "has-image": !!this.props.image,
                 "has-icon": !!this.props.icon,
                 "no-delete": !this.props.showDelete,
-                "title-only": !this.props.subtitle,
+                "has-subtitle": this.props.subtitle,
                 "no-edit": !showEditIcon
             }),
             editButtonClassname = classnames({
@@ -411,6 +438,11 @@ var StatelessExpandableRow = React.createClass({
 
         return (
             <div data-id={id} className={containerClassname}>
+                {this.props.rowMessage && (
+                    <div data-id="item-message" className={classnames("item-message", this.props.rowMessage.type)}>
+                        {this.props.rowMessage.text}
+                    </div>
+                )}
                 <div className="collapsed-content">
                     {this.props.image && (
                         <img src={this.props.image} className="item-image" />
@@ -430,30 +462,36 @@ var StatelessExpandableRow = React.createClass({
                             )}
                         </div>
                     )}
-                    <a data-id="expand-btn"
-                       className="expand-btn"
-                       onClick={this._handleExpandButtonClick}>
-                    </a>
                 </div>
                 {this.props.expanded && (
                     <div data-id="expanded-row" className="expanded-content clearfix">
                         <div className="expanded-content-scroller">
                             {this.props.children || this.props.content}
                         </div>
-
-                        {editButton}
-                        {deleteButton}
-                        {!this.props.showEdit && (
-                            <div className="btn-fill"></div>
-                        )}
-                        {this.props.confirmDelete && this.props.showDeleteConfirm &&
-                            <ConfirmDeleteDialog
-                                label={this.props.labelDeleteConfirm}
-                                onCancel={this.props.onDeleteCancelClick}
-                                onDeleteConfirm={this.props.onDeleteConfirmClick} />
-                        }
                     </div>
                 )}
+                <div className="row-btns">
+                    <a
+                        data-id="expand-btn"
+                        className="expand-btn"
+                        onClick={this._handleExpandButtonClick}
+                    />
+                    {!this.props.showEdit && (
+                        <div className="btn-fill" />
+                    )}
+                    {editButton}
+                    {deleteButton}
+                    {this.props.expanded && (this.props.confirmDelete || this.props.confirmDeleteContent) &&
+                        this.props.showDeleteConfirm &&
+                        <ConfirmDeleteDialog
+                            label={this.props.labelDeleteConfirm}
+                            onCancel={this.props.onDeleteCancelClick}
+                            onDeleteConfirm={this.props.onDeleteConfirmClick}
+                            confirmDeletePosition={this.props.confirmDeletePosition}>
+                            {this.props.confirmDeleteContent}
+                        </ConfirmDeleteDialog>
+                    }
+                </div>
             </div>
         );
     }
@@ -464,48 +502,66 @@ var ConfirmDeleteDialog = ReactVanilla.createClass({
     displayName: "ConfirmDeleteDialog",
 
     propTypes: {
+        confirmDeletePosition: React.PropTypes.string,
         label: React.PropTypes.string,
         onCancel: React.PropTypes.func,
         onDeleteConfirm: React.PropTypes.func
+    },
+
+    _renderTooltipContent: function () {
+        if (this.props.children) {
+            return this.props.children;
+        } else {
+            return (
+                <div>
+                    <p>
+                        {this.props.label}
+                    </p>
+                    <div className="button-group">
+                        <button
+                            type="button"
+                            data-id="cancel-delete"
+                            className="secondary"
+                            onClick={this.props.onCancel}>
+                            {Translator.translate("cancel")}
+                        </button>
+                        <button
+                            type="button"
+                            data-id="confirm-delete"
+                            className="primary"
+                            onClick={this.props.onDeleteConfirm}>
+                            {Translator.translate("confirm")}
+                        </button>
+                    </div>
+                </div>
+            );
+        }
     },
 
     getDefaultProps: function () {
         return {
             label: "",
             onCancel: _.noop,
-            onDeleteConfirm: _.noop,
+            onDeleteConfirm: _.noop
         };
     },
 
     render: function () {
         return (
-            <DetailsTooltip label=" "
-                positionClassName="bottom left"
+            <DetailsTooltip
+                positionClassName={classnames("left", this.props.confirmDeletePosition)}
                 data-id="delete-confirm-dialog"
                 className="delete-confirm-dialog"
                 title={Translator.translate("confirmdelete")}
                 open={true}
                 onToggle={this.props.onCancel}>
-
-                <p>{this.props.label}</p>
-
-                <div className="button-group">
-                    <button type="button"
-                            data-id="cancel-delete"
-                            className="secondary"
-                            onClick={this.props.onCancel} >
-                        {Translator.translate("cancel")}
-                    </button>
-                    <button type="button"
-                            data-id="confirm-delete"
-                            className="primary"
-                            onClick={this.props.onDeleteConfirm} >
-                        {Translator.translate("confirm")}
-                    </button>
-                </div>
-            </DetailsTooltip>);
+                {this._renderTooltipContent()}
+            </DetailsTooltip>
+        );
     }
 });
 
 ExpandableRow.Statuses = Statuses;
+ExpandableRow.RowMessageTypes = RowMessageTypes;
+ExpandableRow.ConfirmDeletePositions = ConfirmDeletePositions;
 module.exports = ExpandableRow;

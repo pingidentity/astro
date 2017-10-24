@@ -58,7 +58,12 @@ var ExpandableRowDemo = React.createClass({
                     subtitle="Row Subtitle"
                 />
                 <ExpandableRow
-                    title="Expanded Row"
+                    title="Expanded Row with Row Message"
+                    rowMessage={{
+                        text: "The optional row message appears at the top of the expanded row only when the row is \
+                            expanded.",
+                        type: ExpandableRow.RowMessageTypes.WARNING
+                    }}
                     expanded={true}
                 />
                 <ExpandableRow
