@@ -51,6 +51,8 @@ var React = require("react"),
  *     IDs of the list items which are selected
  * @param {SelectionList~onValueChange} onValueChange
  *     Callback to be triggered when the item selection changes
+ * @param {SelectionList~onVisibilityChange} onVisibilityChange
+ *     Callback to be triggered when toggled to show selected or all items
  * @param {SelectionList~onSelectAll} onValueonSelectAllChange
  *     Callback to be triggered when the select-all link is clicked
  * @param {boolean} [showSearchBox=true]
