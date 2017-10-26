@@ -1,20 +1,12 @@
 .no-results {
-    margin-top: 30px;
-    line-height: 40px;
-    padding-top: 25px;
-    border-top: 1px solid $color-input-text;
+    margin: 45px 0 25px 0;
+    font-size: 14px;
+    line-height: 1.3;
+    color: $color-manatee;
     font-family: $font-pn-regular;
-    font-size: 15px;
 
-    &.inline {
-        line-height: 28px;
-    }
-    input[type=button],
     button {
         margin: 0 0 0 30px;
-    }
-    .result-set {
-        display: none;
     }
 }
 
