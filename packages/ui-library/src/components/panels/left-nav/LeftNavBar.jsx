@@ -254,7 +254,7 @@ var LeftNavBar = React.createClass({
                 itemSelectors = navDom.getElementsByClassName("highlighted"),
                 style = { height: 0, top: 0 };
 
-
+            // if a nav item is currently selected then calulate the position of the selected item within the nav
             if (itemSelectors.length > 0) {
                 var selectedDims = itemSelectors[0].getBoundingClientRect(),
                     navDims = navDom.getBoundingClientRect(),
@@ -271,7 +271,6 @@ var LeftNavBar = React.createClass({
             // if a new section is selected...
             /* istanbul ignore if  */
             if (prevProps && prevProps.selectedSection && this.props.selectedSection) {
-
                 var oldSectionIndex = _.findIndex(this.props.tree, { id: prevProps.selectedSection }),
                     newSectionIndex = _.findIndex(this.props.tree, { id: this.props.selectedSection }),
                     closedSection, closedSectionIndex, closedSectionDOM, oldOpenSections, newOpenSections;
@@ -284,7 +283,9 @@ var LeftNavBar = React.createClass({
                 }
 
                 // if autocollapse is FALSE, then check if a section has been closed above the selected section
-                if (!this.props.autocollapse) {
+                // ONLY if the selected section stays the same
+                if (!this.props.autocollapse && prevProps.selectedSection === this.props.selectedSection) {
+
                     oldOpenSections = _.filter( _.keys(prevProps.openSections), function (key) {
                         return prevProps.openSections.hasOwnProperty(key) && prevProps.openSections[key] === true;
                     });
@@ -299,11 +300,14 @@ var LeftNavBar = React.createClass({
                     }
                 }
 
-                if (closedSectionIndex >= 0) {
+                // subtract the height of the closed section from the top of the nav highlighter
+                // ONLY if the closed section is above the current one
+                if (closedSectionIndex < newSectionIndex) {
                     closedSectionDOM = ReactDOM.findDOMNode(this.refs.container)
                         .getElementsByClassName("menu")[closedSectionIndex];
                     style.top -= closedSectionDOM.getBoundingClientRect().height;
                 }
+
             }
 
             // if the selected item is outside the visible area of the navbar, scroll it into view
