@@ -117,7 +117,14 @@ var HelpHint = React.createClass({
     render: function () {
         var dataId = this.props.id || this.props["data-id"],
             iconName = this.props.lock ? "icon-lock" : "icon-help",
-            uid = _.uniqueId("rtt_");
+            uid = _.uniqueId("rtt_"),
+            display;
+
+        if (this.props.children) {
+            display = this.props.children;
+        } else {
+            display = (<span className={iconName} data-id={dataId + "-icon"} />);
+        }
 
         return (
             <div className="help-tooltip" data-id={dataId}>
@@ -128,7 +135,7 @@ var HelpHint = React.createClass({
                     data-tip={true}
                     data-for={uid}
                     ref={function (target) { this.target = target; }.bind(this)}>
-                    {this.props.children || (<span className={iconName} data-id={dataId + "-icon"} />)}
+                    {display}
                 </div>
                 <ReactTooltip
                     id={uid}

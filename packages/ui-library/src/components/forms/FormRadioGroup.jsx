@@ -17,6 +17,8 @@ var React = require("react"),
  *     The item's display text
  * @property {string} helpHintText
  *     Text to display in help hint next to the item's name
+ * @param {object} [helpTarget]
+ *     An optional icon or image to replace standard help hint icon
  * @property {boolean} disabled
  *     Disables the input
  * @property {boolean} hidden
@@ -132,8 +134,8 @@ var FormRadioGroup = React.createClass({
                     key={item.id}
                     data-id={dataId + "_label_" + item.id}
                     value={item.name}
-                    hint={item.helpHintText}>
-
+                    hint={item.helpHintText}
+                    helpTarget={item.helpTarget}>
                     <input
                         data-id={dataId + "_" + item.id}
                         type="radio"

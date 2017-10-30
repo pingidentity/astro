@@ -273,6 +273,7 @@ var ListOptions = React.createClass({
                     checked={checked}
                     onValueChange={onValueChangeFunc}
                     labelHelpText={item.helpHintText}
+                    helpTarget={item.helpTarget}
                 />
             );
         }.bind(this));
@@ -305,9 +306,9 @@ var ListOptions = React.createClass({
     * @ignore
     */
     _genViewonlyOptions: function () {
-        return this.props.items.map(function (item) {
+        return this.props.items.map(function (item, i) {
             return (
-                <div className="view-item">
+                <div className="view-item" key={i}>
                     {item.name}{this._genTooltip(item)}
                 </div>
             );

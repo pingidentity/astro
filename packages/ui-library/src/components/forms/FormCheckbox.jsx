@@ -44,6 +44,8 @@ var React=require("react"),
  *    Label help text to be displayed.
  * @param {string} [helpClassName]
  *    CSS classes to set on the HelpHint component.
+ * @param {object} [helpTarget]
+ *     An optional icon or image to replace standard help hint icon
  *
  * @param {string} [name]
  *    The name value for the input.
@@ -73,6 +75,7 @@ var FormCheckbox=React.createClass({
         label: React.PropTypes.string,
         labelHelpText: React.PropTypes.string,
         helpClassName: React.PropTypes.string,
+        helpTarget: React.PropTypes.object,
         name: React.PropTypes.string,
         value: React.PropTypes.string,
         disabled: React.PropTypes.bool,
@@ -113,6 +116,7 @@ var FormCheckbox=React.createClass({
             <FormLabel data-id={id + "-container"}
                     className={labelClassName}
                     helpClassName={this.props.helpClassName}
+                    helpTarget={this.props.helpTarget}
                     disabled={this.props.disabled}
                     value={this.props.label}
                     hint={this.props.labelHelpText}>

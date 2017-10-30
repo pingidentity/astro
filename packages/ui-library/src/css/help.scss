@@ -73,6 +73,13 @@
             @include default-icon-styles;
             padding-left: 2px;
         }
+        img {
+            display: inline-block;
+            height: 14px;
+            width: auto;
+            max-width: 20px;
+            vertical-align: text-bottom;
+        }
     }
     .icon-help {
         text-transform: none;

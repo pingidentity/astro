@@ -24,6 +24,8 @@ var React = require("react"),
  *     The lock text. If omitted, the lock hint is not rendered.
  * @param {string} [helpClassName]
  *     CSS classes to set on the help hint.
+ * @param {object} [helpTarget]
+ *     An optional icon or image to replace standard help hint icon
  * @param {object} [style]
  *     For passing through direct style attribute from parent
  */
@@ -36,6 +38,7 @@ var FormLabel = React.createClass({
         hint: React.PropTypes.string,
         lockText: React.PropTypes.string,
         helpClassName: React.PropTypes.string,
+        helpTarget: React.PropTypes.object,
         style: React.PropTypes.object
     },
 
@@ -62,8 +65,9 @@ var FormLabel = React.createClass({
                 ref="hint"
                 data-id="help-tooltip"
                 className={classnames("inline", this.props.helpClassName)}
-                hintText={this.props.hint}
-            />
+                hintText={this.props.hint}>
+                {this.props.helpTarget}
+            </HelpHint>
         );
     },
 

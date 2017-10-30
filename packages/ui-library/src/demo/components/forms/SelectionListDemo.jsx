@@ -5,6 +5,9 @@ var React = require("react"),
     SelectionFilterLabel = require("../../../components/forms/SelectionFilterLabel.jsx"),
     DetailsTooltip = require("../../../components/tooltips/DetailsTooltip.jsx");
 
+var testIcon = <span className="icon-cog inline-icon"></span>;
+var testImage = <img src="./favicon.png" />;
+
 /**
 * @name SelectionListDemo
 * @memberof SelectionList
@@ -17,10 +20,15 @@ var SelectionListDemo = React.createClass({
 
     _singleSelectItems: [
         { name: "Hockey", id: 1 },
-        { name: "Soccer", id: 2 },
-        { name: "Basketball", id: 3, helpHintText: "Selection List items may have Help Hints" },
+        { name: "Soccer", id: 2,
+          helpHintText: "Selection List items may have Help Hints" },
+        { name: "Basketball", id: 3,
+          helpHintText: "Help Hint with dynamic icon",
+          helpTarget: testIcon },
         { name: "Swimming", id: 4 },
-        { name: "Chess", id: 5 },
+        { name: "Chess", id: 5,
+          helpHintText: "Help Hint with custom image",
+          helpTarget: testImage },
         { name: "Cross Country Skiing", id: 6 },
         { name: "Wrestling", id: 7 },
         { name: "Diving", id: 8 },
@@ -31,11 +39,16 @@ var SelectionListDemo = React.createClass({
     _multiSelectItems: [
         { name: "Apple", id: 1 },
         { name: "Orange", id: 2 },
-        { name: "Banana", id: 3, helpHintText: "Selection List items may have Help Hints" },
-        { name: "Watermelon", id: 4 },
+        { name: "Banana", id: 3,
+          helpHintText: "Help Hint with dynamic icon",
+          helpTarget: testIcon },
+        { name: "Watermelon", id: 4,
+          helpHintText: "Help Hint with custom image",
+          helpTarget: testImage } ,
         { name: "Grape Fruit", id: 5 },
         { name: "Peach", id: 6 },
-        { name: "Plum", id: 7 },
+        { name: "Plum", id: 7,
+          helpHintText: "Selection List items may have Help Hints" },
         { name: "Strawberry", id: 8 },
         { name: "Kiwi", id: 9 }
     ],
