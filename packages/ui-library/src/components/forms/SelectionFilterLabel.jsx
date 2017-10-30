@@ -18,6 +18,9 @@ var React = require("react"),
  *     The text to display as an input label above the SelectionFilterLabel
  * @param {bool} [required=false]
  *     When true the required styling is applied to the component
+ * @param {object} [style]
+ *     A react-style style object used to inject hard-coded styles into the parent label container.
+ *     *** Note that this prop should be used sparingly and only with the consent of the UX dev team. ***
  *
  * @example
  *     <SelectionFilterLabel
@@ -37,7 +40,8 @@ var SelectionFilterLabel = React.createClass({
         count: React.PropTypes.number.affectsRendering,
         filterLabel: React.PropTypes.string.isRequired.affectsRendering,
         labelText: React.PropTypes.string.affectsRendering,
-        required: React.PropTypes.bool.affectsRendering
+        required: React.PropTypes.bool.affectsRendering,
+        style: React.PropTypes.object
     },
 
     getDefaultProps: function () {
@@ -54,7 +58,8 @@ var SelectionFilterLabel = React.createClass({
         return (
             <div
                 data-id={this.props["data-id"]}
-                className={classnames("selection-filter-label", this.props.className, classNames)}>
+                className={classnames("selection-filter-label", this.props.className, classNames)}
+                style={this.props.style}>
                 {this.props.filterLabel}
                 {this.props.count >= 0 && (
                     <span data-id={this.props["data-id"] + "-count"} className="count">

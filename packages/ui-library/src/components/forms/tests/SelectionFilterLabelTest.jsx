@@ -69,4 +69,11 @@ describe("SelectionFilterLabel", function () {
 
         expect(componentDom.getAttribute("class")).toContain(requiredClassName);
     });
+
+    it("Renders hard-coded style when specified", function () {
+        var component = getComponent({ style: { "min-width": "100px" } }),
+            componentDom = TestUtils.findRenderedDOMNodeWithDataId(component, componentId);
+
+        expect(componentDom.getAttribute("style")).toEqual("min-width:100px;");
+    });
 });
