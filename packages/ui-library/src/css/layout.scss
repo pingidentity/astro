@@ -595,7 +595,7 @@ $layout-nav-width-offset: 15px;
             margin: 0 0 0 17px;
             border: none;
         }
-        &.warning {
+        &.warning, &.error {
             background-color: $color-critical-red;
 
             input[type=button] {
