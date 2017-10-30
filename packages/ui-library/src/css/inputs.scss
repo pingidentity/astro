@@ -1511,12 +1511,6 @@ input[type=file] {
     a.undo {
         right: 40px;
     }
-    .input-container {
-        width: 100%;
-        position: relative;
-        display: inline-block;
-        vertical-align: bottom;
-    }
     .input-text {
         margin: 0;
     }
@@ -1560,9 +1554,6 @@ input[type=file] {
         }
 
         @include transition($default-input-transition);
-    }
-    input[type=text] {
-        padding-right: 40px;
     }
     [disabled],
     [readonly] {
