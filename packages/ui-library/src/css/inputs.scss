@@ -1854,6 +1854,17 @@ input[type=file] {
             }
         }
     }
+    &.selection-filter-label {
+        padding-left: 20px;
+
+        &:before {
+            top: 5px;
+            bottom: 5px;
+            left: 5px;
+
+            @include requiredCss;
+        }
+    }
 }
 
 .form-error {
@@ -2942,5 +2953,44 @@ label {
         top: 0;
         padding: 20px;
         color: $color-rhino;
+    }
+}
+
+// filter bar
+.selection-filter-label {
+    margin: 0;
+    padding: 1px 38px 0 15px;
+    font-size: 13px;
+    height: $default-input-height;
+    line-height: $default-input-height;
+    border: $borderSize solid $color-rabbit-fur;
+    position: relative;
+    display: inline-block;
+    font-family: $font-pn-regular;
+    background-color: $color-white;
+    text-align: left;
+    text-transform: uppercase;
+    vertical-align: middle;
+    cursor: pointer;
+    outline: none;
+    white-space: nowrap;
+    color: $color-midnight;
+
+    @include border-radius($default-input-border-radius);
+    @include box-sizing(border-box);
+
+    &:after {
+        position: absolute;
+        top: 0;
+        right: 15px;
+        content: '\59';
+        font-family: $icon-font;
+        font-size: 5px;
+        color: $color-midnight;
+
+        @include transition(($default-input-transition));
+    }
+    .count {
+        margin-left: 5px;
     }
 }

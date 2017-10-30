@@ -272,44 +272,7 @@
                 width: 200px;
             }
         }
-        // filter bar
-        .selection-filter-label {
-            margin: 0;
-            padding: 0 38px 0 15px;
-            font-size: 13px;
-            height: 40px;
-            line-height: 40px;
-            border: 1px solid $color-rabbit-fur;
-            position: relative;
-            display: inline-block;
-            font-family: $font-pn-regular;
-            background-color: $color-white;
-            text-align: left;
-            text-transform: uppercase;
-            vertical-align: middle;
-            cursor: pointer;
-            outline: none;
-            white-space: nowrap;
-            color: $color-midnight;
 
-            @include border-radius(2px);
-            @include box-sizing(border-box);
-
-            &:after {
-                position: absolute;
-                top: 0;
-                right: 15px;
-                content: '\59';
-                font-family: $icon-font;
-                font-size: 5px;
-                color: $color-midnight;
-
-                @include transition((all 0.2s linear));
-            }
-            .count {
-                margin-left: 5px;
-            }
-        }
         &.filter {
             .details-content {
                 left: 35px;

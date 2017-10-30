@@ -11,7 +11,8 @@ describe("SelectionFilterLabel", function () {
         TestUtils = require("../../../testutil/TestUtils"),
         _ = require("underscore");
 
-    var componentId = "sfl";
+    var componentId = "sfl",
+        requiredClassName = "required";
 
 
     function getComponent (opts) {
@@ -39,6 +40,7 @@ describe("SelectionFilterLabel", function () {
             componentDom = TestUtils.findRenderedDOMNodeWithDataId(component, componentId);
 
         expect(componentDom.getAttribute("class")).toContain(className);
+        expect(componentDom.getAttribute("class")).not.toContain(requiredClassName);
     });
 
     it("Renders the count when specified", function () {
@@ -59,5 +61,12 @@ describe("SelectionFilterLabel", function () {
         expect(labelDom).toBeTruthy();
         expect(labelTextDom).toBeTruthy();
         expect(labelTextDom.textContent).toEqual(labelText);
+    });
+
+    it("Renders as required when specified", function () {
+        var component = getComponent({ required: true }),
+            componentDom = TestUtils.findRenderedDOMNodeWithDataId(component, componentId);
+
+        expect(componentDom.getAttribute("class")).toContain(requiredClassName);
     });
 });

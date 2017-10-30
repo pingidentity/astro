@@ -16,6 +16,8 @@ var React = require("react"),
  *     The text to display inside of the SelectionFilterLabel
  * @param {string} labelText
  *     The text to display as an input label above the SelectionFilterLabel
+ * @param {bool} [required=false]
+ *     When true the required styling is applied to the component
  *
  * @example
  *     <SelectionFilterLabel
@@ -34,7 +36,8 @@ var SelectionFilterLabel = React.createClass({
         className: React.PropTypes.string.affectsRendering,
         count: React.PropTypes.number.affectsRendering,
         filterLabel: React.PropTypes.string.isRequired.affectsRendering,
-        labelText: React.PropTypes.string.affectsRendering
+        labelText: React.PropTypes.string.affectsRendering,
+        required: React.PropTypes.bool.affectsRendering
     },
 
     getDefaultProps: function () {
@@ -44,10 +47,14 @@ var SelectionFilterLabel = React.createClass({
     },
 
     _renderSelectionFilter: function () {
+        var classNames = {
+            required: this.props.required
+        };
+
         return (
             <div
                 data-id={this.props["data-id"]}
-                className={classnames("selection-filter-label", this.props.className)}>
+                className={classnames("selection-filter-label", this.props.className, classNames)}>
                 {this.props.filterLabel}
                 {this.props.count >= 0 && (
                     <span data-id={this.props["data-id"] + "-count"} className="count">
