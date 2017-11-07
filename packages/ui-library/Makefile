@@ -88,7 +88,10 @@ endif
 # if not available, get the latest from master (with no suffix);
 # if no coverage is found, fail the build
 COVERAGE_VERSION=$(GIT_VERSION)-$(GIT_BRANCH)
-COVERAGE_STATUS_CODE=$(shell curl -s -I http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library-coverage/$(COVERAGE_VERSION)/ui-library-coverage-$(COVERAGE_VERSION).tar.gz | grep "HTTP/1.1" | awk {'print $$2'})
+
+# COVERAGE_STATUS_CODE=$(shell curl -s -I http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library-coverage/$(COVERAGE_VERSION)/ui-library-coverage-$(COVERAGE_VERSION).tar.gz | grep "HTTP/1.1" | awk {'print $$2'})
+COVERAGE_STATUS_CODE=$(shell curl -s -I http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library-coverage/2.31.0-SNAPSHOT/ui-library-coverage-2.31.0-SNAPSHOT.tar.gz | grep "HTTP/1.1" | awk {'print $$2'})
+
 ifneq ($(COVERAGE_STATUS_CODE),200)
 	COVERAGE_VERSION=$(GIT_VERSION)
 	COVERAGE_STATUS_CODE=$(shell curl -s -I http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library-coverage/$(COVERAGE_VERSION)/ui-library-coverage-$(COVERAGE_VERSION).tar.gz | grep "HTTP/1.1" | awk {'print $$2'})
@@ -168,14 +171,16 @@ define deploy_coverage
 endef
 
 define install_reference_coverage_report
-	echo "FOOBAR -->"
-	echo http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library-coverage/$(1)/ui-library-coverage-$(1).tar.gz
-
 	rm -f ui-library-coverage-*.tar.gz
 	rm -rf coverage-reference
-	wget http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library-coverage/$(1)/ui-library-coverage-$(1).tar.gz
+
+	# wget http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library-coverage/$(1)/ui-library-coverage-$(1).tar.gz
+	wget http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library-coverage/2.31.0-SNAPSHOT/ui-library-coverage-2.31.0-SNAPSHOT.tar.gz
+
 	mkdir coverage-reference
-	tar -xzf ui-library-coverage-$(1).tar.gz --strip 1 -C coverage-reference
+
+	# tar -xzf ui-library-coverage-$(1).tar.gz --strip 1 -C coverage-reference
+	tar -xzf ui-library-coverage-2.31.0-SNAPSHOT.tar.gz --strip 1 -C coverage-reference
 endef
 
 
