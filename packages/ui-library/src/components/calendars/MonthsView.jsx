@@ -1,43 +1,41 @@
-var React = require("re-react");
+var PropTypes = require("prop-types");
+var React = require("react");
 var classnames = require("classnames");
 var moment = require("moment-range");
 var Cell = require("./Cell.jsx");
 var ViewHeader = require("./ViewHeader.jsx");
 var CalendarUtils = require("./Utils.js");
 
-module.exports = React.createClass({
+module.exports = class extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        date: PropTypes.object.isRequired,
+        onPrevView: PropTypes.func,
+        onNextView: PropTypes.func,
+        onSetDate: PropTypes.func
+    };
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        date: React.PropTypes.object.isRequired.affectsRendering,
-        onPrevView: React.PropTypes.func,
-        onNextView: React.PropTypes.func,
-        onSetDate: React.PropTypes.func
-    },
+    static defaultProps = {
+        "data-id": "months-view"
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "months-view"
-        };
-    },
-
-    next: function () {
+    next = () => {
         var date = this.props.date.clone().add(1, "years");
 
         // Get nearest month within next year that falls in range
         date = CalendarUtils.getNearestInRange(date, this.props.dateRange, "months");
         this.props.onSetDate(date);
-    },
+    };
 
-    prev: function () {
+    prev = () => {
         var date = this.props.date.clone().subtract(1, "years");
 
         // Get nearest month within next year that falls in range
         date = CalendarUtils.getNearestInRange(date, this.props.dateRange, "months");
         this.props.onSetDate(date);
-    },
+    };
 
-    cellClick: function (e) {
+    cellClick = (e) => {
         var month = e.target.innerHTML;
         var date = this.props.date.clone().month(month);
         // Check month falls in range
@@ -46,9 +44,9 @@ module.exports = React.createClass({
             date = CalendarUtils.getNearestInRange(date, this.props.dateRange);
             this.props.onPrevView(date);
         }
-    },
+    };
 
-    getMonth: function () {
+    getMonth = () => {
         var now = this.props.date,
             month = now.month();
 
@@ -59,9 +57,9 @@ module.exports = React.createClass({
                 outOfRange: !CalendarUtils.inDateRange(now.clone().month(i), this.props.dateRange, "months")
             };
         }.bind(this));
-    },
+    };
 
-    render: function () {
+    render() {
         var months = this.getMonth().map(function (item, i) {
             var className = classnames({
                 month: true,
@@ -89,5 +87,4 @@ module.exports = React.createClass({
             </div>
         );
     }
-
-});
+};

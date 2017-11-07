@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames"),
     Utils = require("../../util/Utils"),
@@ -88,35 +89,32 @@ var React = require("react"),
  *         items={apsConditionTypes} />
  */
 
-var FormRadioGroup = React.createClass({
+class FormRadioGroup extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        id: PropTypes.string,
+        className: PropTypes.string,
+        groupName: PropTypes.string.isRequired,
+        items: PropTypes.array.isRequired,
+        selected: PropTypes.any,
+        onValueChange: PropTypes.func,
+        onChange: PropTypes.func,
+        disabled: PropTypes.bool,
+        stacked: PropTypes.bool
+    };
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        id: React.PropTypes.string,
-        className: React.PropTypes.string,
-        groupName: React.PropTypes.string.isRequired,
-        items: React.PropTypes.array.isRequired,
-        selected: React.PropTypes.any,
-        onValueChange: React.PropTypes.func,
-        onChange: React.PropTypes.func,
-        disabled: React.PropTypes.bool,
-        stacked: React.PropTypes.bool
-    },
+    static defaultProps = {
+        "data-id": "radio-btn",
+        stacked: true,
+        disabled: false
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "radio-btn",
-            stacked: true,
-            disabled: false
-        };
-    },
-
-    _handleChange: function (e) {
+    _handleChange = (e) => {
         var onValueChange = this.props.onValueChange || this.props.onChange;
         onValueChange(e.target.value);
-    },
+    };
 
-    _getRadioButtons: function () {
+    _getRadioButtons = () => {
         return this.props.items.map(function (item) {
             var radioDisabled = this.props.disabled || item.disabled;
 
@@ -149,9 +147,9 @@ var FormRadioGroup = React.createClass({
                 </FormLabel>
             );
         }.bind(this));
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
                 console.warn(Utils.deprecateMessage("id", "data-id"));
@@ -160,13 +158,12 @@ var FormRadioGroup = React.createClass({
                 console.warn(Utils.deprecateMessage("onChange", "onValueChange"));
             }
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var dataId = this.props.id || this.props["data-id"];
         return <div data-id={dataId} className="list">{this._getRadioButtons()}</div>;
     }
-
-});
+}
 
 module.exports = FormRadioGroup;

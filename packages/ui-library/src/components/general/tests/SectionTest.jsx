@@ -6,7 +6,7 @@ jest.dontMock("../If.jsx");
 
 describe("Section", function () {
     var React = require("react");
-    var ReactTestUtils = require("react-addons-test-utils");
+    var ReactTestUtils = require("react-dom/test-utils");
     var Section = require("../Section.jsx");
     var TestUtils = require("../../../testutil/TestUtils");
 

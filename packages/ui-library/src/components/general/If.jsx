@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react");
 
 /**
@@ -26,19 +27,18 @@ var React = require("react");
  *         </If>
  *
  */
-var If = React.createClass({
+class If extends React.Component {
+    static propTypes = {
+        test: PropTypes.any.isRequired
+    };
 
-    propTypes: {
-        test: React.PropTypes.any.isRequired
-    },
-
-    render: function () {
+    render() {
         if (!this.props.test) {
             return null;
         }
 
         return this.props.children;
     }
-});
+}
 
 module.exports = If;

@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react");
 var ContextCloseButton = require("./../../../components/general/context-close-button");
 
@@ -6,59 +7,56 @@ var ContextCloseButton = require("./../../../components/general/context-close-bu
 * @memberof ContextCloseButton
 * @desc A demo for ContextCloseButton
 */
-var ContextComponent = React.createClass({
-    propTypes: {
-        clickCallback: React.PropTypes.func,
-        closeCallback: React.PropTypes.func,
-        value: React.PropTypes.string
-    },
+class ContextComponent extends React.Component {
+    static propTypes = {
+        clickCallback: PropTypes.func,
+        closeCallback: PropTypes.func,
+        value: PropTypes.string
+    };
 
-    childContextTypes: {
-        close: React.PropTypes.func
-    },
+    static childContextTypes = {
+        close: PropTypes.func
+    };
 
-    getChildContext: function () {
+    getChildContext() {
         return {
             close: this._close
         };
-    },
+    }
 
-    _close: function () {
+    _close = () => {
         if (this.props.closeCallback) {
             this.props.closeCallback();
         }
-    },
+    };
 
-    render: function () {
+    render() {
         return (<ContextCloseButton onClick={this.props.clickCallback} value={this.props.value}/>);
     }
-});
+}
 
-var ContextCloseButtonDemo = React.createClass({
+class ContextCloseButtonDemo extends React.Component {
+    state = {
+        clickCallbackCalled: false,
+        contextCloseCalled: false
+    };
 
-    getInitialState: function () {
-        return {
-            clickCallbackCalled: false,
-            contextCloseCalled: false
-        };
-    },
-
-    _resetState: function () {
+    _resetState = () => {
         this.setState({
             clickCallbackCalled: false,
             contextCloseCalled: false
         });
-    },
+    };
 
-    _handleClick: function () {
+    _handleClick = () => {
         this.setState({ clickCallbackCalled: true });
-    },
+    };
 
-    _handleContextClose: function () {
+    _handleContextClose = () => {
         this.setState({ contextCloseCalled: true });
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <div>
                 <div className="input-row">
@@ -94,6 +92,6 @@ var ContextCloseButtonDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = ContextCloseButtonDemo;

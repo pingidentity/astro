@@ -2,9 +2,8 @@ var React = require("react"),
     Tutorial = require("./Tutorial.jsx"),
     Markup = require("../../core/Markup.jsx");
 
-var BasicApp = React.createClass({
-
-    render: function () {
+class BasicApp extends React.Component {
+    render() {
         return (
             <Tutorial generateTOC={true}>
                 <p>
@@ -1140,7 +1139,7 @@ var BasicApp = React.createClass({
                             /* eslint-disable */
                                 '/** Shows.jsx */',
                                 ' ',
-                                'var React = require("re-react"),',
+                                'var React = require("react"),',
                                 '    Genres = require("../mocks").Genres',
                                 '    Statuses = require("../mocks").StatusEnum',
                                 '    FormTextField = require("ui-library/src/components/forms/form-text-field"),',
@@ -1157,11 +1156,11 @@ var BasicApp = React.createClass({
                         } />
                 <p className="attention">
                     Note the use of the
-                    <a href="https://www.npmjs.com/package/re-react" target="_blank"> re-react </a>
+                    <a href="https://www.npmjs.com/package/react" target="_blank"> react </a>
                      library here instead of React's &quot;react&quot; library. With Redux, the simplest state changes
                      could potentially cause the entire app to re-render. To avoid this, Redux suggests implementing
                      the &quot;shouldComponentUpdate&quot; function but that introduces a lot of boilerplate code.
-                     To combat this, we use the &quot;re-react&quot; library which wraps react and allows for
+                     To combat this, we use the &quot;react&quot; library which wraps react and allows for
                      &quot;propType&quot; decorating to indicate which properties should cause a re-render.
                 </p>
                 <p>
@@ -1739,7 +1738,7 @@ var BasicApp = React.createClass({
                             /* eslint-disable */
                                 '/** ShowsAddWizard.jsx */',
                                 ' ',
-                                'var React = require("re-react"),',
+                                'var React = require("react"),',
                                 '    ModalButton = require("ui-library/src/components/general/ModalButton.jsx"),',
                                 '    Wizard = require("ui-library/src/components/wizard"),',
                                 '    Layout = require("ui-library/src/components/general/ColumnLayout.jsx"),',
@@ -1751,11 +1750,11 @@ var BasicApp = React.createClass({
                                 ' ',
                                 'var ShowsAddWizard = React.createClass({',
                                 '    /*',
-                                '    * Declare which variables affect rendering.  The shouldComponentUpdate method will be be injected by re-react.',
+                                '    * Declare which variables affect rendering.  The shouldComponentUpdate method will be be injected by react.',
                                 '    */',
                                 '    propTypes: {',
                                 '       ...',
-                                '        errors: React.PropTypes.object.affectsRendering,',
+                                '        errors: PropTypes.object,',
                                 '       //messages removed b/c no longer used',
                                 '    },',
                                 ' ',
@@ -1870,9 +1869,9 @@ var BasicApp = React.createClass({
                         } />
                 <p className="attention">
                     Note the use of the
-                    <a href="https://www.npmjs.com/package/re-react" target="_blank"> re-react </a>
-                     library's &quot;affectsRendering&quot; here to indicate that the &quot;error&quot; prop can
-                     trigger a re-render. This is how we use the &quot;re-react&quot; library's propType decorating
+                    <a href="https://www.npmjs.com/package/react" target="_blank"> react </a>
+                     library's &quot&quot; here to indicate that the &quot;error&quot; prop can
+                     trigger a re-render. This is how we use the &quot;react&quot; library's propType decorating
                      that we introduced earlier.
                 </p>
                 <p>
@@ -1888,19 +1887,19 @@ var BasicApp = React.createClass({
                             /* eslint-disable */
                                 '/** Shows.jsx */',
                                 ' ',
-                                'var React = require("re-react"),',
+                                'var React = require("react"),',
                                 '    ShowsAddWizardView = require("../ShowsAddWizard.jsx"),',
                                 '    ...',
                                 '...',
                                 'var Shows = React.createClass({',
                                 '   ...',
                                 '    /*',
-                                '     * Declare which variables affect rendering.  The shouldComponentUpdate method will be be injected by re-react.',
+                                '     * Declare which variables affect rendering.  The shouldComponentUpdate method will be be injected by react.',
                                 '     */',
                                 '    propTypes: {',
                                 '       ...',
-                                '        wizard: React.PropTypes.object.affectsRendering,',
-                                '        addWizardFields: React.PropTypes.object.affectsRendering',
+                                '        wizard: PropTypes.object,',
+                                '        addWizardFields: PropTypes.object',
                                 '    },',
                                 '   ...',
                                 '    render: function () {',
@@ -2103,7 +2102,7 @@ var BasicApp = React.createClass({
                             /* eslint-disable */
                                 '/** Shows.jsx */',
                                 ' ',
-                                'var React = require("re-react"),',
+                                'var React = require("react"),',
                                 '    ...',
                                 '    ShowsEditView = require("../ShowsEdit.jsx"),',
                                 '    ...',
@@ -2188,7 +2187,7 @@ var BasicApp = React.createClass({
                             /* eslint-disable */
                                 '/** ShowsEdit.jsx */',
                                 ' ',
-                                'var React = require("re-react"),',
+                                'var React = require("react"),',
                                 '    FormCheckbox = require("ui-library/src/components/forms/FormCheckbox.jsx"),',
                                 '    FormTextField = require("ui-library/src/components/forms//form-text-field").v2,',
                                 '    FormRadioGroup = require("ui-library/src/components/forms/FormRadioGroup.jsx"),',
@@ -2198,11 +2197,11 @@ var BasicApp = React.createClass({
                                 ' ',
                                 'var ShowsEdit = React.createClass({',
                                 '    /*',
-                                '     * Declare which variables affect rendering.  The shouldComponentUpdate method will be be injected by re-react.',
+                                '     * Declare which variables affect rendering.  The shouldComponentUpdate method will be be injected by react.',
                                 '     */',
                                 '    propTypes: {',
-                                '        inputs: React.PropTypes.object.affectsRendering,',
-                                '        errors: React.PropTypes.object.affectsRendering',
+                                '        inputs: PropTypes.object,',
+                                '        errors: PropTypes.object',
                                 '    },',
                                 ' ',
                                 '    /*',
@@ -2353,6 +2352,6 @@ var BasicApp = React.createClass({
             </Tutorial>
         );
     }
-});
+}
 
 module.exports = BasicApp;

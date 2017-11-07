@@ -1,4 +1,5 @@
-var React = require("re-react"),
+var PropTypes = require("prop-types");
+var React = require("react"),
     ReactDOM = require("react-dom"),
     Spinner = require("../general/Spinner.jsx"),
     _ = require("underscore"),
@@ -30,29 +31,27 @@ var React = require("re-react"),
  * @private
  * @ignore
  */
-var Batch = React.createClass({
-    displayName: "Batch",
+class Batch extends React.Component {
+    static displayName = "Batch";
 
-    propTypes: {
-        "data-id": React.PropTypes.string
-    },
+    static propTypes = {
+        "data-id": PropTypes.string
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "batch",
-            onGenerateHeading: _.noop
-        };
-    },
+    static defaultProps = {
+        "data-id": "batch",
+        onGenerateHeading: _.noop
+    };
 
-    componentWillUpdate: function () {
+    componentWillUpdate() {
         var container = ReactDOM.findDOMNode(this.refs.container);
         if (container) {
             this.containerHeight = ReactDOM.findDOMNode(this.refs.container).scrollHeight;
             this.containerWidth = ReactDOM.findDOMNode(this.refs.container).scrollWidth;
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var visible = this.props.isVisible !== false;
         var style = {};
         var rows = null;
@@ -90,7 +89,7 @@ var Batch = React.createClass({
 
         return <div data-id={this.props["data-id"]} ref="container" className="batch" style={style}>{rows}</div>;
     }
-});
+}
 
 /**
 * @typedef InfiniteScroll~BatchItem
@@ -129,13 +128,13 @@ var Batch = React.createClass({
  *    The new top visible item.
  */
 
- /**
- * @callback InfiniteScroll~onLoadPrev
- */
+/**
+* @callback InfiniteScroll~onLoadPrev
+*/
 
- /**
- * @callback InfiniteScroll~onLoadNext
- */
+/**
+* @callback InfiniteScroll~onLoadNext
+*/
 
 /**
  * @callback InfiniteScroll~onGenerateHeading
@@ -202,44 +201,42 @@ var Batch = React.createClass({
  *   var batches=[{id: 1, data: ['some', 'data', 'here']}...];
  *   <InfiniteScroll onLoadNext={this.loadNext} hasNext={true} hasPrev={false} batches={batches} contentType={MyRow} />
  */
-var InfiniteScroll = React.createClass({
-    displayName: "InfiniteScroll",
+class InfiniteScroll extends React.Component {
+    static displayName = "InfiniteScroll";
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        batches: React.PropTypes.arrayOf(
-            React.PropTypes.shape({
-                id: React.PropTypes.number,
-                data: React.PropTypes.array
-            })).isRequired.affectsRendering,
-        initalItem: React.PropTypes.object.affectsRendering,
-        onScroll: React.PropTypes.func,
-        hasPrev: React.PropTypes.bool.affectsRendering,
-        onLoadPrev: React.PropTypes.func, //TODO: set as required when v1 removed
-        loadPrev: React.PropTypes.func, //TODO: remove when v1 no longer supported
-        hasNext: React.PropTypes.bool.affectsRendering,
-        onLoadNext: React.PropTypes.func, //TODO: set as required when v1 removed
-        loadNext: React.PropTypes.func, //TODO: remove when v1 no longer supported
-        contentType: React.PropTypes.object.affectsRendering,
-        onGenerateHeading: React.PropTypes.func,
-        headingGenerator: React.PropTypes.func, //TODO: remove when v1 no longer supported
-        height: React.PropTypes.number.affectsRendering,
-        minHeight: React.PropTypes.number.affectsRendering,
-        attachToWindow: React.PropTypes.bool.affectsRendering,
+    static propTypes = {
+        "data-id": PropTypes.string,
+        batches: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.number,
+                data: PropTypes.array
+            })).isRequired,
+        initalItem: PropTypes.object,
+        onScroll: PropTypes.func,
+        hasPrev: PropTypes.bool,
+        onLoadPrev: PropTypes.func, //TODO: set as required when v1 removed
+        loadPrev: PropTypes.func, //TODO: remove when v1 no longer supported
+        hasNext: PropTypes.bool,
+        onLoadNext: PropTypes.func, //TODO: set as required when v1 removed
+        loadNext: PropTypes.func, //TODO: remove when v1 no longer supported
+        contentType: PropTypes.object,
+        onGenerateHeading: PropTypes.func,
+        headingGenerator: PropTypes.func, //TODO: remove when v1 no longer supported
+        height: PropTypes.number,
+        minHeight: PropTypes.number,
+        attachToWindow: PropTypes.bool,
 
-        children: React.PropTypes.node.affectsRendering
-    },
+        children: PropTypes.node
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "infinite-scroll",
-            hasPrev: false,
-            hasNext: false,
-            attachToWindow: false
-        };
-    },
+    static defaultProps = {
+        "data-id": "infinite-scroll",
+        hasPrev: false,
+        hasNext: false,
+        attachToWindow: false
+    };
 
-    _padVisibility: function (visibility) {
+    _padVisibility = (visibility) => {
         // Pad visibility with a batch before & after the batches currently visible in the container viewport
         // to fix Chrome & Firefox getBoundingClientRect() timing issue when scrolling returning incorrect
         // element calculations boxes resulting in buggy scrolling: UIP-1179, UIP-1195
@@ -253,24 +250,24 @@ var InfiniteScroll = React.createClass({
             visibility[lastVisible + 1] = true;
         }
         return visibility;
-    },
+    };
 
-    _getBatchVisibility: function () {
+    _getBatchVisibility = () => {
         return this._padVisibility(
             this.props.batches.map(function (e,i) {return this._isBatchVisible(i);}.bind(this)));
-    },
+    };
 
-    _rectIntersect: function (r1, r2) {
+    _rectIntersect = (r1, r2) => {
         return !(r2.left > r1.right || r2.right < r1.left || r2.top > r1.bottom || r2.bottom < r1.top);
-    },
+    };
 
-    _isBatchVisible: function (batchIndex) {
+    _isBatchVisible = (batchIndex) => {
         var batch = this._getBatchNode(batchIndex);
 
         return !batch || this._rectIntersect(batch.getBoundingClientRect(), this._getContainerBounds());
-    },
+    };
 
-    _getFirstVisibleItem: function () {
+    _getFirstVisibleItem = () => {
         var containerOffset = this._getContainerBounds().top;
 
         for (var i = 0; i < this.props.batches.length; i += 1) {
@@ -288,35 +285,35 @@ var InfiniteScroll = React.createClass({
                 }
             }
         }
-    },
+    };
 
-    _scrollContainerBy: function (y) {
+    _scrollContainerBy = (y) => {
         if (this.props.attachToWindow) {
             window.scrollTo(0, window.scrollY + y);
         } else {
             ReactDOM.findDOMNode(this.refs.container).scrollTop += y;
         }
-    },
+    };
 
-    _getContainerBounds: function () {
+    _getContainerBounds = () => {
         return this.props.attachToWindow
             ? { top: 0, bottom: window.innerHeight }
             : ReactDOM.findDOMNode(this.refs.container).getBoundingClientRect();
-    },
+    };
 
-    _didScrollToBottom: function () {
+    _didScrollToBottom = () => {
         var containerBounds = this._getContainerBounds();
         return this.props.hasNext &&
             ReactDOM.findDOMNode(this.refs.spinnerNext).getBoundingClientRect().top <= containerBounds.bottom;
-    },
+    };
 
-    _didScrollToTop: function () {
+    _didScrollToTop = () => {
         var containerBounds = this._getContainerBounds();
         return this.props.hasPrev &&
             ReactDOM.findDOMNode(this.refs.spinnerPrev).getBoundingClientRect().bottom >= containerBounds.top;
-    },
+    };
 
-    _handleScroll: function (e) {
+    _handleScroll = (e) => {
         //dont handle scrolls before there's any data
         if (!this.batchRange) {
             return;
@@ -347,11 +344,11 @@ var InfiniteScroll = React.createClass({
         if (this.props.onScroll) {
             this.props.onScroll(this._getFirstVisibleItem(), e);
         }
-    },
+    };
 
-    _getBatchNode: function (batchIndex) {
+    _getBatchNode = (batchIndex) => {
         return ReactDOM.findDOMNode(this.refs["batch" + batchIndex]);
-    },
+    };
 
     /** @method InfiniteScroll#jumpToItem
      * @desc scroll the infinite scroll to the give item
@@ -361,7 +358,7 @@ var InfiniteScroll = React.createClass({
      *   visible item.  If this param is set to true, it will only scroll if the item is out of view
      * @returns {bool} - true if jumping to the item was successful, false otherwise
      */
-    jumpToItem: function (batchIndex, itemIndex, scrollIfOutOfView) {
+    jumpToItem = (batchIndex, itemIndex, scrollIfOutOfView) => {
         var batch = this._getBatchNode(batchIndex);
 
         if (batch && batch.childNodes.length > itemIndex) {
@@ -389,9 +386,9 @@ var InfiniteScroll = React.createClass({
         } else {
             return false;
         }
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         this.componentWillUpdate();
         this.inited = false;
 
@@ -411,23 +408,23 @@ var InfiniteScroll = React.createClass({
                 console.warn(Utils.deprecateMessage("headingGenerator", "onGenerateHeading"));
             }
         }
-    },
+    }
 
-    componentWillUnmount: function () {
+    componentWillUnmount() {
         if (this.props.attachToWindow) {
             window.removeEventListener("scroll", this._handleScroll);
         }
-    },
+    }
 
-    componentWillUpdate: function () {
+    componentWillUpdate() {
         this.visibilityArray = this._getBatchVisibility();
-    },
+    }
 
-    componentDidMount: function () {
+    componentDidMount() {
         this.componentDidUpdate();
-    },
+    }
 
-    componentDidUpdate: function () {
+    componentDidUpdate() {
         if (this.props.batches.length === 0) {
             return;
         }
@@ -465,9 +462,9 @@ var InfiniteScroll = React.createClass({
         }
 
         this.batchRange = newRange;
-    },
+    }
 
-    render: function () {
+    render() {
         if (this.props.batches.length === 0) {
             return (<div ref="container">{this.props.children}</div>);
         }
@@ -509,7 +506,7 @@ var InfiniteScroll = React.createClass({
             </div>
         );
     }
-});
+}
 
 InfiniteScroll.Batch = Batch;
 

@@ -1,5 +1,5 @@
-var React = require("re-react"),
-    ReactVanilla = require("react"),
+var PropTypes = require("prop-types");
+var React = require("react"),
     ReactDOM = require("react-dom"),
     classnames = require("classnames"),
     FormFieldConstants = require("../../../constants/FormFieldConstants"),
@@ -108,26 +108,23 @@ var React = require("re-react"),
 *                       onValueChange={myFunction} />
 */
 
-module.exports = ReactVanilla.createClass({
+module.exports = class extends React.Component {
+    static propTypes = {
+        controlled: PropTypes.bool, //TODO: remove in new version
+        stateless: PropTypes.bool
+    };
 
-    propTypes: {
-        controlled: React.PropTypes.bool, //TODO: remove in new version
-        stateless: React.PropTypes.bool
-    },
+    static defaultProps = {
+        controlled: false //TODO: change to stateless with true default in new version
+    };
 
-    getDefaultProps: function () {
-        return {
-            controlled: false //TODO: change to stateless with true default in new version
-        };
-    },
-
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("controlled", "stateless", "false", "true"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
 
         return (
@@ -138,63 +135,60 @@ module.exports = ReactVanilla.createClass({
                     _.defaults({ ref: "FormTextAreaStateful" }, this.props), this.props.children)
         );
     }
-});
+};
 
-var FormTextAreaStateless = React.createClass({
+class FormTextAreaStateless extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
+        value: PropTypes.string,
+        onChange: PropTypes.func,
+        onValueChange: PropTypes.func,
+        originalValue: PropTypes.string,
+        edited: PropTypes.bool,
+        showUndo: PropTypes.bool,
+        onUndo: PropTypes.func,
+        onBlur: PropTypes.func,
+        labelText: PropTypes.string,
+        labelHelpText: PropTypes.string,
+        helpClassName: PropTypes.string,
+        inputClassName: PropTypes.string,
+        mode: PropTypes.string,
+        maxLength: PropTypes.number,
+        cols: PropTypes.number,
+        rows: PropTypes.number,
+        errorMessage: PropTypes.string,
+        placeholder: PropTypes.string,
+        disabled: PropTypes.bool,
+        required: PropTypes.bool,
+        autoFocus: PropTypes.bool,
+        useAutocomplete: PropTypes.bool,
+        children: PropTypes.node
+    };
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        className: React.PropTypes.string.affectsRendering,
-        value: React.PropTypes.string.affectsRendering,
-        onChange: React.PropTypes.func,
-        onValueChange: React.PropTypes.func,
-        originalValue: React.PropTypes.string.affectsRendering,
-        edited: React.PropTypes.bool.affectsRendering,
-        showUndo: React.PropTypes.bool.affectsRendering,
-        onUndo: React.PropTypes.func,
-        onBlur: React.PropTypes.func,
-        labelText: React.PropTypes.string.affectsRendering,
-        labelHelpText: React.PropTypes.string.affectsRendering,
-        helpClassName: React.PropTypes.string.affectsRendering,
-        inputClassName: React.PropTypes.string.affectsRendering,
-        mode: React.PropTypes.string.affectsRendering,
-        maxLength: React.PropTypes.number.affectsRendering,
-        cols: React.PropTypes.number.affectsRendering,
-        rows: React.PropTypes.number.affectsRendering,
-        errorMessage: React.PropTypes.string.affectsRendering,
-        placeholder: React.PropTypes.string.affectsRendering,
-        disabled: React.PropTypes.bool.affectsRendering,
-        required: React.PropTypes.bool.affectsRendering,
-        autoFocus: React.PropTypes.bool,
-        useAutocomplete: React.PropTypes.bool,
-        children: React.PropTypes.node.affectsRendering
-    },
+    static defaultProps = {
+        "data-id": "form-text-area",
+        mode: FormFieldConstants.FormFieldMode.EDIT,
+        labelText: "",
+        edited: false,
+        showUndo: false,
+        disabled: false,
+        required: false,
+        autoFocus: false,
+        useAutocomplete: false,
+        onChange: _.noop,
+        onValueChange: _.noop,
+        onBlur: _.noop,
+        onUndo: _.noop,
+        value: ""
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "form-text-area",
-            mode: FormFieldConstants.FormFieldMode.EDIT,
-            labelText: "",
-            edited: false,
-            showUndo: false,
-            disabled: false,
-            required: false,
-            autoFocus: false,
-            useAutocomplete: false,
-            onChange: _.noop,
-            onValueChange: _.noop,
-            onBlur: _.noop,
-            onUndo: _.noop,
-            value: ""
-        };
-    },
-
-    _handleChange: function (e) {
+    _handleChange = (e) => {
         this.props.onChange(e);
         this.props.onValueChange(e.target.value);
-    },
+    };
 
-    render: function () {
+    render() {
         var readonly = this.props.mode.toUpperCase() === FormFieldConstants.FormFieldMode.READ_ONLY,
             className = classnames("input-textarea", this.props.className, {
                 required: this.props.required,
@@ -249,11 +243,20 @@ var FormTextAreaStateless = React.createClass({
             </FormLabel>
         );
     }
-});
+}
 
-var FormTextAreaStateful = ReactVanilla.createClass({
+class FormTextAreaStateful extends React.Component {
+    static defaultProps = {
+        "data-id": "form-text-area",
+        onChange: _.noop,
+        onValueChange: _.noop
+    };
 
-    _handleUndo: function (e) {
+    state = {
+        value: this.props.value || ""
+    };
+
+    _handleUndo = (e) => {
         // update the event with the reverted data and send back to the parent
         // otherwise the parent won't be aware of the reverted field even though the browser displays the original value
         e.target = ReactDOM.findDOMNode(this.refs.FormTextAreaStateless.refs[this.props["data-id"] + "-textarea"]);
@@ -264,9 +267,9 @@ var FormTextAreaStateful = ReactVanilla.createClass({
         this.setState({
             value: this.props.originalValue
         });
-    },
+    };
 
-    _handleValueChange: function (value) {
+    _handleValueChange = (value) => {
         this.setState({
             value: value
         }, function () {
@@ -274,23 +277,9 @@ var FormTextAreaStateful = ReactVanilla.createClass({
                 this.props.onValueChange(value);
             }
         });
-    },
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "form-text-area",
-            onChange: _.noop,
-            onValueChange: _.noop
-        };
-    },
-
-    getInitialState: function () {
-        return {
-            value: this.props.value || ""
-        };
-    },
-
-    render: function () {
+    render() {
         var props = _.defaults({
             ref: "FormTextAreaStateless",
             value: this.state.value,
@@ -302,4 +291,4 @@ var FormTextAreaStateful = ReactVanilla.createClass({
 
         return React.createElement(FormTextAreaStateless, props, this.props.children);
     }
-});
+}

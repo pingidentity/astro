@@ -180,6 +180,25 @@ var Utils = {
         ].join("");
         return warning;
     },
+    
+    /**
+     * @alias module:util/Utils.deprecatedError
+     * @desc Return a formatted string for a deprecated component version.
+     *
+     * @param {string} version
+     *    The version of the feature that is no longer supported.
+     * @param {string} useInstead
+     *    The name of the feature to use instead.
+     * @return {string}
+     *    Formatted error string.
+     */
+    deprecatedError: function (component, version, useInstead) {
+        var warning = [
+            "The ", version, " version of the ", component, " component no longer exists. ",
+            "Please use the ", useInstead, " version."
+        ].join("");
+        return warning;
+    },
 
     /**
     * @alias module:util/Utils.isProduction
@@ -189,6 +208,7 @@ var Utils = {
     *    Returns true if on production build, false otherwise.
     */
     isProduction: function () {
+        //return true;
         return process.env.NODE_ENV === "production";
     },
 

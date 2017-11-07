@@ -4,7 +4,7 @@ jest.dontMock("../BackgroundLoader.jsx");
 
 describe("BackgroundLoader", function () {
     var React = require("react");
-    var ReactTestUtils = require("react-addons-test-utils");
+    var ReactTestUtils = require("react-dom/test-utils");
     var TestUtils = require("../../../testutil/TestUtils");
     var BackgroundLoader = require("../BackgroundLoader.jsx");
 

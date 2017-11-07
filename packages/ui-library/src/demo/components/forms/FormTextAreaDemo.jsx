@@ -6,36 +6,33 @@ var FormTextArea = require("./../../../components/forms/form-text-area");
 * @memberof FormTextArea
 * @desc A demo for FormTextArea
 */
-var FormTextAreaDemo = React.createClass({
+class FormTextAreaDemo extends React.Component {
+    state = {
+        onValueChangeFieldValue: "",
+        onUndoValue: null
+    };
 
-    getInitialState: function () {
-        return {
-            onValueChangeFieldValue: "",
-            onUndoValue: null
-        };
-    },
-
-    _handleValueChange: function (value) {
+    _handleValueChange = (value) => {
         this.setState({
             onValueChangeFieldValue: value
         });
-    },
+    };
 
-    _handleUndoValueChange: function (value) {
+    _handleUndoValueChange = (value) => {
         this.setState({
             onUndoValue: value,
             edited: value !== "Lorem ipsum dolor sit amet",
             showUndo: value !== "Lorem ipsum dolor sit amet"
         });
-    },
+    };
 
-    _handleUndo: function () {
+    _handleUndo = () => {
         this.setState({
             onUndoValue: "Lorem ipsum dolor sit amet"
         });
-    },
+    };
 
-    render: function () {
+    render() {
         var options = { 1: "one", 2: "two", 3: "three" };
 
         return (
@@ -121,7 +118,7 @@ var FormTextAreaDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 
 module.exports = FormTextAreaDemo;

@@ -1,7 +1,7 @@
 var React = require("react");
 
-var Markup = React.createClass({
-    _extractRenderCode: function () {
+class Markup extends React.Component {
+    _extractRenderCode = () => {
         //get all matches for 'render: function() {...}'
         var matches = this.props.content.replace(/\n|\r/g, "!!!").match(/\s*render: .*?!!!(.*?)!!!\s{4}}/g);
 
@@ -16,14 +16,14 @@ var Markup = React.createClass({
 
         // hljs below is provided by a script tag
         return hljs.highlight('xml', renderCode).value; //eslint-disable-line
-    },
+    };
 
-    _extractCustomCode: function () {
+    _extractCustomCode = () => {
         // hljs below is provided by a script tag
         return hljs.highlight(this.props.language || 'xml', this.props.content).value; //eslint-disable-line
-    },
+    };
 
-    render: function () {
+    render() {
         if (!this.props.content) {
             return null;
         }
@@ -40,6 +40,6 @@ var Markup = React.createClass({
                 </pre>
             </div>);
     }
-});
+}
 
 module.exports = Markup;

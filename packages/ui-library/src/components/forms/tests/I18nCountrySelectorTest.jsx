@@ -37,7 +37,7 @@ jest.dontMock("../../../util/i18n/Translator.js");
 
 describe("I18nCountrySelector", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         I18nCountrySelector = require("../i18n/I18nCountrySelector.jsx"),
         _ = require("underscore");

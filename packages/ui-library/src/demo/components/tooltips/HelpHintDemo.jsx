@@ -8,13 +8,12 @@ var FormLabel = require("../../../components/forms/FormLabel.jsx");
 * @memberof HelpHint
 * @desc A demo for HelpHint
 */
-var HelpHintDemo = React.createClass({
-
-    _onClick: function () {
+class HelpHintDemo extends React.Component {
+    _onClick = () => {
         alert("clicked!");
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <div>
                 <FormLabel value="Help Hints On Various Elements" className="detached" />
@@ -71,6 +70,6 @@ var HelpHintDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = HelpHintDemo;

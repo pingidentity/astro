@@ -5,7 +5,7 @@ jest.dontMock("../Spotlight.jsx");
 describe("IntroTutorial", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         Spotlight = require("../Spotlight.jsx");
 
     beforeEach(function () {

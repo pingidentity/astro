@@ -5,17 +5,24 @@ module.exports = [
     "/src/components/rows/DragDropRow.jsx",
     "/src/components/panels/multi-drag/MultiDrag.jsx",
 
+    // Eric: the following currently do not have any test coverage
+    "/src/components/wizard/Choose.jsx",
+    "/src/components/wizard/Progress.jsx",
+    "/src/testutil/TestUtils.js",
+
+    // Eric: These are deprecated and now fail after upgrading Jest and to React 16
+    "/src/components/general/BackgroundLoader.jsx",
+    "/src/components/example/BackgroundLoader.jsx",
+
+    // Eric : this component needs to be changed substantially before the testing is complete
+    "/src/components/help/intro-tutorial/IntroTutorial.jsx",
+    "/src/components/help/intro-tutorial/Spotlight.jsx",
+
     // Tyler: Same issues as above with dragging
     "/src/util/dragScroll.js",
 
     // Okhtay: TestUtils shouldnt be included in the coverage
     "/src/util/ReduxTestUtils.js",
-
-    // Okhtay: this is a test file
-    "/src/components/forms/file-upload/tests/commonTests.jsx",
-
-    // Alex: the code coverage on form-integer-field/v1.jsx is not reported correctly
-    "/src/components/forms/form-integer-field/v1.jsx",
 
     // Eric: not currently able to trigger the react-tooltip open state in tests (via Jest or Enzyme)
     "/src/components/tooltips/HelpHint.jsx",
@@ -23,4 +30,17 @@ module.exports = [
     // Eric: tests are written but Istanbul does not let me ignore certain function declarations that require actual
     // rendered DOM so I'm unable to get the require function coverage
     "/src/components/general/RowIndexNav.jsx",
+
+    // Eric: No tests currently exist for this file - tech debt
+    "/src/components/calendars/Utils.js",
+
+    // Tyler: Coverage is included for stateless and stateful files
+    "/src/components/forms/file-upload/v2.jsx",
+
+    // Tyler: These are just warnings about deprecated components
+    "/src/components/forms/file-upload/v1.jsx",
+    "/src/components/forms/form-text-field/v1.jsx",
+    "/src/components/forms/form-toggle/v1.jsx",
+    "/src/components/general/context-close-button/v1.jsx",
+    "/src/components/forms/form-integer-field/v1.jsx",
 ];

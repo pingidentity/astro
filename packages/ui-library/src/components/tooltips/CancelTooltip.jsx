@@ -1,4 +1,5 @@
 "use strict";
+var PropTypes = require("prop-types");
 var React = require("react"),
     DetailsTooltip = require("./DetailsTooltip.jsx");
 
@@ -46,21 +47,21 @@ var React = require("react"),
  *     </CancelTooltip>
  **/
 
-var CancelTooltip = React.createClass({
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        cancelButtonText: React.PropTypes.string.isRequired,
-        confirmButtonText: React.PropTypes.string.isRequired,
-        label: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.object
+class CancelTooltip extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        cancelButtonText: PropTypes.string.isRequired,
+        confirmButtonText: PropTypes.string.isRequired,
+        label: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.object
         ]),
-        onConfirm: React.PropTypes.func.isRequired,
-        onCancel: React.PropTypes.func.isRequired,
-        positionClassName: React.PropTypes.string
-    },
+        onConfirm: PropTypes.func.isRequired,
+        onCancel: PropTypes.func.isRequired,
+        positionClassName: PropTypes.string
+    };
 
-    render: function () {
+    render() {
         return (
             <DetailsTooltip
                 data-id={this.props["data-id"] + "-cancel-tooltip"}
@@ -93,6 +94,6 @@ var CancelTooltip = React.createClass({
             </DetailsTooltip>
         );
     }
-});
+}
 
 module.exports = CancelTooltip;

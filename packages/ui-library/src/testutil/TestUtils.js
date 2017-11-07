@@ -12,7 +12,7 @@
 
 var ReactDOM = require("react-dom");
 var React = require("react");
-var ReactTestUtils = require("react-addons-test-utils");
+var ReactTestUtils = require("react-dom/test-utils");
 var _ = require("underscore");
 var assign = require("object-assign");
 
@@ -328,6 +328,66 @@ var TestUtils = {
         return function () {
             return captured.apply(this, arguments);
         };
+    },
+    /**
+     * @alias module:util/TestUtils.findMockCall
+     * @desc Searches a mock function calls to see if value exists and returns the call. Written because new react-dom.development.js adds error calls to window object
+     *
+     * @param {function} mockFunction
+     *     The mock function to search
+     * @param {string} value
+     *     the string to look for in the falue
+     * @returns {array}
+     *     returns the found call or undefined
+     *
+     * @example
+     *
+     *     //expect click handler to be execute
+     *     const clickCallback = TestUtils.findMockCall(window.addEventListener, "click")[1];
+     *     clickCallback(); trigger a callback
+     */
+    findMockCall: function (mockFunction, value) {
+        return _.find(mockFunction.mock.calls, call => _.contains(call, value));
+    },
+     /**
+      * @alias module:util/TestUtils.findMockCallIndex
+      * @desc Searches a mock function calls to see if value exists and returns the index of the call. Written because new react-dom.development.js adds error calls to window object
+      *
+      * @param {function} mockFunction
+      *     The mock function to search
+      * @param {string} value
+      *     the string to look for in the falue
+      * @returns {number}
+      *     returns index if found
+      *
+      * @example
+      *
+      *     //expect click handler to be executed
+      *     const index = TestUtils.findMockCallIndex(window.addEventListener, "click")
+      *
+      */
+    findMockCallIndex: function (mockFunction, value) {
+        return _.findIndex(mockFunction.mock.calls, call => _.contains(call, value));
+    },
+     /**
+      * @alias module:util/TestUtils.mockCallsContains
+      * @desc Finds searches a mock function calls to see if value exists. Written because new react-dom.development.js adds error calls to window object
+      *
+      * @param {function} mockFunction
+      *     The mock function to search
+      * @param {string} value
+      *     the string to look for in the falue
+      * @returns {boolean}
+      *     returns true if found and false if not
+      *
+      * @example
+      *
+      *     //expect click handler to be executed
+      *     expect(TestUtils.mockCallsContains(window.addEventListener, "click")).toEqual(true);
+      *
+      */
+    mockCallsContains: function (mockFunction, value) {
+        return _.contains(_.flatten(mockFunction.mock.calls), value);
     }
 
 };
@@ -359,7 +419,8 @@ var TestUtils = {
  *     component._setProps({ selectedIndex: 0 });
  *
  */
-TestUtils.UpdatePropsWrapper = React.createClass({
+TestUtils.UpdatePropsWrapper = class extends React.Component {
+    state = assign({ ref: "wrapper" }, this.props);
 
     /*
      * Re-render the wrapped component using the new property.
@@ -368,20 +429,16 @@ TestUtils.UpdatePropsWrapper = React.createClass({
      * @param {object} props
      *     New property(ies) to set
      */
-    _setProps: function (props) {
+    _setProps = (props) => {
         this.setState(props);
-    },
+    };
 
-    getInitialState: function () {
-        return assign({ ref: "wrapper" }, this.props);
-    },
-
-    render: function () {
+    render() {
         return React.createElement(
             this.props.type, // this is the type of element to create, provided as prop
             this.state // this is the rest of props to set on the element
         );
     }
-});
+};
 
 module.exports = TestUtils;

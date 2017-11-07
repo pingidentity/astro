@@ -7,15 +7,19 @@ jest.dontMock("../../tooltips/DetailsTooltip.jsx");
 describe("ModalTest", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         Modal = require("../Modal.jsx"),
         _ = require("underscore");
 
+    window.addEventListener = jest.genMockFunction();
+    window.removeEventListener = jest.genMockFunction();
+    window.setTimeout = jest.genMockFunction();
     beforeEach(function () {
-        window.addEventListener = jest.genMockFunction();
-        window.removeEventListener = jest.genMockFunction();
-        window.setTimeout = jest.genMockFunction();
+        window.addEventListener.mockClear();
+        window.removeEventListener.mockClear();
+        window.setTimeout.mockClear();
+
     });
 
     function getComponent (opts) {
@@ -29,7 +33,7 @@ describe("ModalTest", function () {
 
     it("detaches event listeners on unmount", function () {
         var component = getComponent({ expanded: true });
-        var handler = window.addEventListener.mock.calls[0][1];
+        var handler = TestUtils.findMockCall(window.addEventListener, "keydown")[1];
 
         expect(window.addEventListener).toBeCalled();
 
@@ -40,7 +44,7 @@ describe("ModalTest", function () {
 
     it("keydown event listener does not trigger when modal is closed", function () {
         var component = getComponent(); //eslint-disable-line
-        var handler = window.addEventListener.mock.calls[0][1];
+        var handler = TestUtils.findMockCall(window.addEventListener, "keydown")[1];
         var e = {
             target: { parentNode: document.body },
             stopPropagation: jest.genMockFunction(),
@@ -54,7 +58,7 @@ describe("ModalTest", function () {
 
     it("keydown event listener triggers when modal is expanded", function () {
         var component = getComponent({ expanded: true }); //eslint-disable-line
-        var handler = window.addEventListener.mock.calls[0][1];
+        var handler = TestUtils.findMockCall(window.addEventListener, "keydown")[1];
         var e = {
             target: { parentNode: document.body },
             stopPropagation: jest.genMockFunction(),

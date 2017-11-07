@@ -1,5 +1,5 @@
-var React = require("re-react"),
-    ReactVanilla = require("react"),
+var PropTypes = require("prop-types");
+var React = require("react"),
     classnames = require("classnames"),
     Utils = require("../../../util/Utils"),
     _ = require("underscore");
@@ -47,26 +47,23 @@ var Status = {
 *     <Toggle className="small" onToggle={this._handleToggle} toggled={true} />
 */
 
-var Toggle = ReactVanilla.createClass({
+class Toggle extends React.Component {
+    static propTypes = {
+        controlled: PropTypes.bool, //TODO: remove in new version
+        stateless: PropTypes.bool
+    };
 
-    propTypes: {
-        controlled: React.PropTypes.bool, //TODO: remove in new version
-        stateless: React.PropTypes.bool
-    },
+    static defaultProps = {
+        controlled: false //TODO: change to stateless with true default in new version
+    };
 
-    getDefaultProps: function () {
-        return {
-            controlled: false //TODO: change to stateless with true default in new version
-        };
-    },
-
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("controlled", "stateless", "false", "true"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
 
         return stateless
@@ -76,44 +73,40 @@ var Toggle = ReactVanilla.createClass({
                 _.defaults({ ref: "ToggleStateful" }, this.props));
 
     }
-});
+}
 
-var ToggleStateless = React.createClass({
+class ToggleStateless extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        id: PropTypes.string,
+        className: PropTypes.string,
+        toggled: PropTypes.bool,
+        onToggle: PropTypes.func,
+        disabled: PropTypes.bool
+    };
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        id: React.PropTypes.string,
-        className: React.PropTypes.string,
-        toggled: React.PropTypes.bool.affectsRendering,
-        onToggle: React.PropTypes.func,
-        disabled: React.PropTypes.bool.affectsRendering,
-        status: React.PropTypes.string.affectsRendering
-    },
+    static defaultProps = {
+        "data-id": "toggle",
+        className: "",
+        toggled: false,
+        onToggle: _.noop,
+        disabled: false
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "toggle",
-            className: "",
-            toggled: false,
-            onToggle: _.noop,
-            disabled: false
-        };
-    },
-
-    componentWillMount: function () {
+    componentWillMount() {
         if (this.props.id && !Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("id", "data-id"));
         }
-    },
+    }
 
-    _handleToggle: function () {
+    _handleToggle = () => {
         if (this.props.disabled) {
             return;
         }
         this.props.onToggle();
-    },
+    };
 
-    render: function () {
+    render() {
         var id = this.props.id || this.props["data-id"],
             status = this.props.status ? Status[this.props.status.toUpperCase()] : null,
             className = classnames("input-toggle", this.props.className, status, {
@@ -129,23 +122,20 @@ var ToggleStateless = React.createClass({
             </div>
         );
     }
-});
+}
 
-var ToggleStateful = ReactVanilla.createClass({
+class ToggleStateful extends React.Component {
+    state = {
+        toggled: this.props.toggled || false
+    };
 
-    _handleToggle: function () {
+    _handleToggle = () => {
         this.setState({
             toggled: !this.state.toggled
         });
-    },
+    };
 
-    getInitialState: function () {
-        return {
-            toggled: this.props.toggled || false
-        };
-    },
-
-    render: function () {
+    render() {
         var props = _.defaults({
             ref: "ToggleStateless",
             toggled: this.state.toggled,
@@ -154,7 +144,7 @@ var ToggleStateful = ReactVanilla.createClass({
 
         return React.createElement(ToggleStateless, props);
     }
-});
+}
 
 Toggle.Status = Status;
 

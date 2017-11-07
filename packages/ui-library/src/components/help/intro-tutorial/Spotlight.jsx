@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react"),
     _ = require("underscore");
 
@@ -14,33 +15,29 @@ var React = require("react"),
  *     The DOM element on which we want to cast a spotlight
  */
 
-var Spotlight = React.createClass({
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        padding: React.PropTypes.number,
-        target: React.PropTypes.object.isRequired
-    },
+class Spotlight extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        padding: PropTypes.number,
+        target: PropTypes.object.isRequired
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "spotlight",
-            padding: 10
-        };
-    },
+    static defaultProps = {
+        "data-id": "spotlight",
+        padding: 10
+    };
 
-    getInitialState: function () {
-        return {
-            left: 0,
-            right: 0,
-            clone: ""
-        };
-    },
+    state = {
+        left: 0,
+        right: 0,
+        clone: ""
+    };
 
-    componentDidMount: function () {
+    componentDidMount() {
         this.componentWillReceiveProps(this.props);
-    },
+    }
 
-    componentWillReceiveProps: function (newProps) {
+    componentWillReceiveProps(newProps) {
         if (newProps.target) {
             var targetBounds = newProps.target.getBoundingClientRect();
             var marginLeft = 0, marginRight = 0;
@@ -58,9 +55,9 @@ var Spotlight = React.createClass({
                 clone: newProps.target.outerHTML
             });
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var style = _.pick(this.state, ["left", "top", "width"]);
         style.padding = this.props.padding;
 
@@ -69,6 +66,6 @@ var Spotlight = React.createClass({
                     dangerouslySetInnerHTML={{ __html: this.state.clone }} />
         );
     }
-});
+}
 
 module.exports = Spotlight;

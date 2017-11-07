@@ -7,50 +7,47 @@ var React = require("react"),
 * @memberof FormTextField
 * @desc A demo for FormTextField
 */
-var FormTextFieldDemo = React.createClass({
+class FormTextFieldDemo extends React.Component {
+    state = {
+        onValueChangeFieldValue: "",
+        onBlurFieldValue: "",
+        onChangeValidationErrorMessage: "",
+        onBlurValidationErrorMessage: "",
+        saved: false,
+        undone: false,
+        showUndo: false,
+        onUndoValue: null,
+        originalValue: "this is the original value",
+        requiredValue: null,
+        statelessValue: "stateless default"
+    };
 
-    getInitialState: function () {
-        return {
-            onValueChangeFieldValue: "",
-            onBlurFieldValue: "",
-            onChangeValidationErrorMessage: "",
-            onBlurValidationErrorMessage: "",
-            saved: false,
-            undone: false,
-            showUndo: false,
-            onUndoValue: null,
-            originalValue: "this is the original value",
-            requiredValue: null,
-            statelessValue: "stateless default"
-        };
-    },
-
-    _handleStatelessValueChange: function (value) {
+    _handleStatelessValueChange = (value) => {
         this.setState({
             statelessValue: value
         });
-    },
+    };
 
-    _handleValueChange: function (value) {
+    _handleValueChange = (value) => {
         this.setState({
             onValueChangeFieldValue: value
         });
-    },
+    };
 
-    _handleBlur: function (e) {
+    _handleBlur = (e) => {
         this.setState({
             onBlurFieldValue: e.target.value
         });
-    },
+    };
 
-    _handleUndoValueChange: function (value) {
+    _handleUndoValueChange = (value) => {
         this.setState({
             onUndoValue: value,
             showUndo: value !== this.state.originalValue
         });
-    },
+    };
 
-    _handleUndo: function (e) {
+    _handleUndo = (e) => {
         // prevents focus on characters in input field
         e.preventDefault();
         e.stopPropagation();
@@ -60,44 +57,44 @@ var FormTextFieldDemo = React.createClass({
             showUndo: false
         });
         window.setTimeout(this.setState.bind(this, { undone: false }), 5000);
-    },
+    };
 
-    _handleRequiredValueChange: function (value) {
+    _handleRequiredValueChange = (value) => {
         this.setState({
             requiredValue: value
         });
-    },
+    };
 
-    _handleSave: function () {
+    _handleSave = () => {
         this.setState({ saved: true });
         window.setTimeout(this.setState.bind(this, { saved: false }), 5000);
-    },
+    };
 
-    _handleTimeValueChange: function (value) {
+    _handleTimeValueChange = (value) => {
         this.setState({
             timeFieldValue: value
         });
-    },
+    };
 
-    _handleDateTimeValueChange: function (value) {
+    _handleDateTimeValueChange = (value) => {
         this.setState({
             dateTimeFieldValue: value
         });
-    },
+    };
 
-    _handleChangeErrorValidation: function (e) {
+    _handleChangeErrorValidation = (e) => {
         this.setState({
             onChangeValidationErrorMessage: this._validateInput(e.target.value)
         });
-    },
+    };
 
-    _handleBlurErrorValidation: function (e) {
+    _handleBlurErrorValidation = (e) => {
         this.setState({
             onBlurValidationErrorMessage: this._validateInput(e.target.value)
         });
-    },
+    };
 
-    _validateInput: function (value) {
+    _validateInput = (value) => {
         var errorMessage = "";
 
         if (value.length === 0) {
@@ -108,9 +105,9 @@ var FormTextFieldDemo = React.createClass({
             }
         }
         return errorMessage;
-    },
+    };
 
-    render: function () {
+    render() {
 
         return (
             <div>
@@ -279,6 +276,6 @@ var FormTextFieldDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = FormTextFieldDemo;

@@ -5,16 +5,16 @@ jest.dontMock("../InfiniteScroll.jsx");
 describe("Infinite Scroll", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         InfiniteScroll = require("../InfiniteScroll.jsx"),
         assign = require("object-assign");
 
-    var MyRow = React.createClass({
-        render: function () {
+    class MyRow extends React.Component {
+        render() {
             return <div ref="container" className="row">My row: {this.props.num}</div>;
         }
-    });
+    }
 
     window.addEventListener = jest.genMockFunction();
     window.removeEventListener = jest.genMockFunction();
@@ -32,14 +32,12 @@ describe("Infinite Scroll", function () {
             batches: batches,
             attachToWindow: false,
             onScroll: jest.genMockFunction(),
-            contentType: React.createElement(MyRow)
+            contentType: <MyRow />
         };
 
-        return ReactTestUtils.renderIntoDocument(React.createElement(
-            InfiniteScroll,
-            assign(defaults, opts),
-            <span>No results found</span>
-        ));
+        return ReactTestUtils.renderIntoDocument(<InfiniteScroll {...assign(defaults, opts)}>
+            {<span>No results found</span>}
+        </InfiniteScroll>);
     }
 
     beforeEach(function () {
@@ -89,15 +87,15 @@ describe("Infinite Scroll", function () {
         var node = ReactDOM.findDOMNode(component.refs.container);
 
         component._getBatchVisibility = jest.genMockFunction().mockReturnValue([false, false, true]);
-        component.render = jest.genMockFunction();
-
+        //change from mocking render because of react error
+        component.componentDidUpdate = jest.genMockFunction().mockReturnValue(component.componentDidUpdate);
         //simulate a change of visibility
         ReactTestUtils.Simulate.scroll(node);
-        expect(component.render.mock.calls.length).toBe(1);
+        expect(component.componentDidUpdate.mock.calls.length).toBe(1);
 
         //simulate a scroll without a change of visibility - render not called again
         ReactTestUtils.Simulate.scroll(node);
-        expect(component.render.mock.calls.length).toBe(1);
+        expect(component.componentDidUpdate.mock.calls.length).toBe(1);
     });
 
     it("_padVisibility pads visibility array", function () {
@@ -152,35 +150,36 @@ describe("Infinite Scroll", function () {
         component._didScrollToTop = jest.genMockFunction().mockReturnValue(true);
         component._didScrollToBottom = jest.genMockFunction().mockReturnValue(false);
 
-        window.addEventListener.mock.calls[0][1]();
+        //trigger scroll
+        TestUtils.findMockCall(window.addEventListener, "scroll")[1]();
 
         expect(component.props.onLoadPrev.mock.calls.length).toBe(1);
         expect(component.props.onLoadNext.mock.calls.length).toBe(0);
 
+        expect(TestUtils.mockCallsContains(window.removeEventListener, "scroll")).toBe(false);
         ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
 
-        expect(removeEventListener.mock.calls.length).toBe(1);
+        expect(TestUtils.mockCallsContains(window.removeEventListener, "scroll")).toBe(true);
     });
 
     it("adds and removes scroll event listener if attachToWindow is true", function () {
         var component = getRenderedComponent({ attachToWindow: true });
-        var handler = window.addEventListener.mock.calls[0][1];
 
-        expect(window.addEventListener).toBeCalled();
+        expect(TestUtils.mockCallsContains(window.addEventListener, "scroll")).toBe(true);
 
         ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
 
-        expect(window.removeEventListener).toBeCalledWith("scroll", handler);
+        expect(TestUtils.mockCallsContains(window.addEventListener, "scroll")).toBe(true);
     });
 
     it("does not add or remove scroll event listener if attachToWindow is false", function () {
         var component = getRenderedComponent({ attachToWindow: false });
 
-        expect(window.addEventListener).not.toBeCalled();
+        expect(TestUtils.mockCallsContains(window.addEventListener, "scroll")).toBe(false);
 
         ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
 
-        expect(window.removeEventListener).not.toBeCalled();
+        expect(TestUtils.mockCallsContains(window.addEventListener, "scroll")).toBe(false);
     });
 
 
@@ -299,4 +298,3 @@ describe("Infinite Scroll", function () {
             "Support for headingGenerator will be removed in next version");
     });
 });
-

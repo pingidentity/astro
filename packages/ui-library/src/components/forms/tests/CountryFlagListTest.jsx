@@ -45,8 +45,7 @@ jest.dontMock("../form-text-field/v2.jsx");
 
 describe("CountryFlagList", function () {
     var React = require("react"),
-        ReactDOM = require("react-dom"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         CountryFlagList = require("../i18n/CountryFlagList.jsx"),
         Translator = require("../../../util/i18n/Translator.js"),
@@ -209,7 +208,7 @@ describe("CountryFlagList", function () {
 
     it("global click handler closes open list when click outside of component", function () {
         var component = getComponent({ open: true });
-        var handler = window.addEventListener.mock.calls[0][1];
+        var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
 
         expect(component.props.onToggle).not.toBeCalled();
 
@@ -221,21 +220,12 @@ describe("CountryFlagList", function () {
 
     it("skips the global click handler if not open and click on component", function () {
         var component = getComponent();
-        var handler = window.addEventListener.mock.calls[0][1];
+        var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
 
         // click on component
         handler({ target: document.body });
 
         expect(component.props.onToggle).not.toBeCalled();
-    });
-
-    it("detaches global listeners on unmount", function () {
-        var component = getComponent();
-
-        expect(window.addEventListener).toBeCalledWith("click", component._handleGlobalClick);
-
-        ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
-        expect(window.removeEventListener).toBeCalledWith("click", component._handleGlobalClick);
     });
 
     it("find by typing", function () {

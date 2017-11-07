@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react"),
     Arrow = require("./Arrow.jsx"),
     _ = require("underscore"),
@@ -86,67 +87,65 @@ var React = require("react"),
  *             visible={this.state.visible} />
  **/
 
-var IntroTutorial = React.createClass({
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        steps: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-        active: React.PropTypes.number.isRequired,
-        onDismiss: React.PropTypes.func,
-        onNext: React.PropTypes.func,
-        onPrevious: React.PropTypes.func,
-        onGotIt: React.PropTypes.func,
-        visible: React.PropTypes.bool,
-        messageWelcome: React.PropTypes.string.isRequired,
-        labelGetStarted: React.PropTypes.string.isRequired,
-        labelNext: React.PropTypes.string.isRequired,
-        labelPrevious: React.PropTypes.string.isRequired,
-        labelDismiss: React.PropTypes.string.isRequired,
-        labelOf: React.PropTypes.string.isRequired,
-        labelGotIt: React.PropTypes.string.isRequired
-    },
+class IntroTutorial extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        steps: PropTypes.arrayOf(PropTypes.object).isRequired,
+        active: PropTypes.number.isRequired,
+        onDismiss: PropTypes.func,
+        onNext: PropTypes.func,
+        onPrevious: PropTypes.func,
+        onGotIt: PropTypes.func,
+        visible: PropTypes.bool,
+        messageWelcome: PropTypes.string.isRequired,
+        labelGetStarted: PropTypes.string.isRequired,
+        labelNext: PropTypes.string.isRequired,
+        labelPrevious: PropTypes.string.isRequired,
+        labelDismiss: PropTypes.string.isRequired,
+        labelOf: PropTypes.string.isRequired,
+        labelGotIt: PropTypes.string.isRequired
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "intro-tutorial",
-            onDismiss: _.noop,
-            onNext: _.noop,
-            onPrevious: _.noop,
-            onGotIt: _.noop,
-            visible: true
-        };
-    },
+    static defaultProps = {
+        "data-id": "intro-tutorial",
+        onDismiss: _.noop,
+        onNext: _.noop,
+        onPrevious: _.noop,
+        onGotIt: _.noop,
+        visible: true
+    };
 
-    _handleDismiss: function () {
+    _handleDismiss = () => {
         this.targetClone = null;
         this.props.onDismiss();
-    },
+    };
 
-    _renderWelcome: function () {
+    _renderWelcome = () => {
         return [
             <div key={0}>{this.props.messageWelcome}</div>,
             <button key={1} type="button" onClick={this.props.onNext} data-id="getStarted">
                 {this.props.labelGetStarted}
             </button>
         ];
-    },
+    };
 
-    _handleWindowResize: function () {
+    _handleWindowResize = () => {
         this.forceUpdate();
-    },
+    };
 
-    _getNextLabel: function () {
+    _getNextLabel = () => {
         return this.props.active === this.props.steps.length ? this.props.labelGotIt : this.props.labelNext + " »";
-    },
+    };
 
-    _handleNext: function () {
+    _handleNext = () => {
         if (this.props.active === this.props.steps.length) {
             this.props.onGotIt();
         } else {
             this.props.onNext();
         }
-    },
+    };
 
-    _renderStep: function () {
+    _renderStep = () => {
         var item = this.props.steps[this.props.active - 1];
 
         return [
@@ -178,17 +177,17 @@ var IntroTutorial = React.createClass({
                 </button>
             </div>
         ];
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         window.addEventListener("resize", this._handleWindowResize);
-    },
+    }
 
-    componentWillUnmount: function () {
+    componentWillUnmount() {
         window.removeEventListener("resize", this._handleWindowResize);
-    },
+    }
 
-    render: function () {
+    render() {
         if (!this.props.visible) {
             return null;
         }
@@ -207,7 +206,7 @@ var IntroTutorial = React.createClass({
             </div>
         );
     }
-});
+}
 
 IntroTutorial.Reducer = require("./Reducer");
 IntroTutorial.Actions = require("./Actions");

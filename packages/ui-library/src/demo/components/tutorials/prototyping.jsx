@@ -2,9 +2,8 @@ var React = require("react"),
     Tutorial = require("./Tutorial.jsx"),
     Markup = require("../../core/Markup.jsx");
 
-var Prototyping = React.createClass({
-
-    render: function () {
+class Prototyping extends React.Component {
+    render() {
         return (
             <Tutorial generateTOC={true}>
                 <p>
@@ -613,6 +612,6 @@ var Prototyping = React.createClass({
             </Tutorial>
         );
     }
-});
+}
 
 module.exports = Prototyping;

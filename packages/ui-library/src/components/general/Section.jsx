@@ -1,4 +1,5 @@
 "use strict";
+var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames"),
     CollapsibleLink = require("./CollapsibleLink.jsx"),
@@ -56,84 +57,80 @@ var React = require("react"),
  *
  **/
 
-var Section = React.createClass({
+class Section extends React.Component {
+    static propTypes = {
+        controlled: PropTypes.bool, //TODO: remove in new version
+        stateless: PropTypes.bool
+    };
 
-    propTypes: {
-        controlled: React.PropTypes.bool, //TODO: remove in new version
-        stateless: React.PropTypes.bool
-    },
+    static defaultProps = {
+        controlled: true //TODO: change to stateless with false default in new version
+    };
 
-    getDefaultProps: function () {
-        return {
-            controlled: true //TODO: change to stateless with false default in new version
-        };
-    },
-
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("controlled", "stateless", "true", "false"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
 
         return stateless
-            ? React.createElement(SectionStateless, //eslint-disable-line no-use-before-define
-                _.defaults({ ref: "SectionStateless" }, this.props), this.props.children)
-            : React.createElement(SectionStateful, //eslint-disable-line no-use-before-define
-                _.defaults({ ref: "SectionStateful" }, this.props), this.props.children);
+            ? <SectionStateless {..._.defaults({ ref: "SectionStateless" }, this.props)}>
+                {this.props.children}
+            </SectionStateless>
+            : <SectionStateful {..._.defaults({ ref: "SectionStateful" }, this.props)}>
+                {this.props.children}
+            </SectionStateful>;
     }
-});
+}
 
-var SectionStateless = React.createClass({
-
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        id: React.PropTypes.string,
-        className: React.PropTypes.string,
-        expanded: React.PropTypes.bool,
-        onToggle: React.PropTypes.func,
-        accessories: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.object
+class SectionStateless extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        id: PropTypes.string,
+        className: PropTypes.string,
+        expanded: PropTypes.bool,
+        onToggle: PropTypes.func,
+        accessories: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.object
         ]),
-        title: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.object
+        title: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.object
         ]),
-        titleValue: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.object
+        titleValue: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.object
         ]),
-        disableExpand: React.PropTypes.bool
-    },
+        disableExpand: PropTypes.bool
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "section",
-            expanded: false,
-            onToggle: _.noop,
-            disableExpand: false
-        };
-    },
+    static defaultProps = {
+        "data-id": "section",
+        expanded: false,
+        onToggle: _.noop,
+        disableExpand: false
+    };
 
-    _handleToggle: function () {
+    _handleToggle = () => {
         if (this.props.disableExpand) {
             return;
         }
         this.props.onToggle(this.props.expanded);
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
                 console.warn(Utils.deprecateMessage("id", "data-id"));
             }
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var styles = {
                 "collapsible-section": true,
                 open: this.props.expanded,
@@ -178,31 +175,32 @@ var SectionStateless = React.createClass({
             </div>
         );
     }
-});
+}
 
-var SectionStateful = React.createClass({
+class SectionStateful extends React.Component {
+    state = {
+        expanded: this.props.expanded || false
+    };
 
-    _handleToggle: function () {
+    _handleToggle = () => {
         this.setState({
             expanded: !this.state.expanded
         });
-    },
+    };
 
-    getInitialState: function () {
-        return {
-            expanded: this.props.expanded || false
-        };
-    },
-
-    render: function () {
+    render() {
         var props = _.defaults({
             ref: "SectionStateless",
             expanded: this.state.expanded,
             onToggle: this._handleToggle
         }, this.props);
 
-        return React.createElement(SectionStateless, props, this.props.children);
+        return (
+            <SectionStateless {...props}>
+                {this.props.children}
+            </SectionStateless>
+        );
     }
-});
+}
 
 module.exports = Section;

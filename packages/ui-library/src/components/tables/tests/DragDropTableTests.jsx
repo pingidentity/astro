@@ -3,13 +3,28 @@ window.__DEV__ = true;
 jest.dontMock("../DragDropTable.jsx");
 jest.dontMock("../../list/InfiniteScroll.jsx");
 
+jest.useFakeTimers();
+
 
 describe("DragDropTable", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         _ = require("underscore"),
-        DragDropTable = require("../DragDropTable.jsx");
+        DragDropTable = require("../DragDropTable.jsx"),
+        TestBackend = require("react-dnd-test-backend"),
+        DragDropContext = require("react-dnd").DragDropContext;
+
+    var thisComponent;
+
+    function wrapInTestContext (Component) {
+        return DragDropContext(TestBackend)( class extends React.Component {
+            render() {
+                return <Component {...this.props} ref={ c => thisComponent = c }/>;
+            }
+        });
+    }
+
 
     var mockData = {
         cols: [
@@ -55,11 +70,17 @@ describe("DragDropTable", function () {
             headData: mockData.cols,
             bodyData: mockData.data
         });
-        return ReactTestUtils.renderIntoDocument(<DragDropTable {...props} />);
+        var WrappedComponent = wrapInTestContext(DragDropTable);
+        return ReactTestUtils.renderIntoDocument(<WrappedComponent {...props} />);
     }
 
+    beforeEach(function () {
+        thisComponent = null;
+    });
+
     it("Correctly renders number of th and content", function () {
-        var component = getComponent();
+        getComponent();
+        var component = thisComponent;
         var thead = TestUtils.scryRenderedDOMNodesWithClass(component, "th");
 
         expect(thead.length).toBe(3);
@@ -67,7 +88,8 @@ describe("DragDropTable", function () {
     });
 
     it("Correctly renders number of body rows and cells with correct content", function () {
-        var component = getComponent();
+        getComponent();
+        var component = thisComponent;
         var tbody = TestUtils.findRenderedDOMNodeWithClass(component, "tbody");
         var tr = TestUtils.scryRenderedDOMNodesWithClass(tbody, "tr");
 
@@ -79,7 +101,8 @@ describe("DragDropTable", function () {
 
 
     it("displays columns in default order ", function () {
-        var component = getComponent();
+        getComponent();
+        var component = thisComponent;
         var thead = TestUtils.scryRenderedDOMNodesWithClass(component, "th");
         var tbody = TestUtils.findRenderedDOMNodeWithClass(component, "tbody");
         var tr = TestUtils.scryRenderedDOMNodesWithClass(tbody, "tr");
@@ -91,7 +114,8 @@ describe("DragDropTable", function () {
     });
 
     it("sorts columns by order prop", function () {
-        var component = getComponent({ columnOrder: [2, 0, 1] });
+        getComponent({ columnOrder: [2, 0, 1] });
+        var component = thisComponent;
         var thead = TestUtils.scryRenderedDOMNodesWithClass(component, "th");
         var tbody = TestUtils.findRenderedDOMNodeWithClass(component, "tbody");
         var tr = TestUtils.scryRenderedDOMNodesWithClass(tbody, "tr");
@@ -102,7 +126,8 @@ describe("DragDropTable", function () {
     });
 
     it("displays highlight based on drop target", function () {
-        var component = getComponent({ dropTarget: 1 });
+        getComponent({ dropTarget: 1 });
+        var component = thisComponent;
 
         var thead = TestUtils.scryRenderedDOMNodesWithClass(component, "th");
         var tbody = TestUtils.findRenderedDOMNodeWithClass(component, "tbody");
@@ -120,7 +145,8 @@ describe("DragDropTable", function () {
     });
 
     it("adds class to dragged column", function () {
-        var component = getComponent({ beingDragged: 0 });
+        getComponent({ beingDragged: 0 });
+        var component = thisComponent;
 
         var tbody = TestUtils.findRenderedDOMNodeWithClass(component, "tbody");
         var tr = TestUtils.scryRenderedDOMNodesWithClass(tbody, "tr");
@@ -140,7 +166,8 @@ describe("DragDropTable", function () {
             return (<ReactObject />);
         };
 
-        var component = getComponent({ headContentType: getHeader() });
+        getComponent({ headContentType: getHeader() });
+        var component = thisComponent;
 
         var thead = TestUtils.scryRenderedDOMNodesWithClass(component, "th");
 
@@ -149,7 +176,8 @@ describe("DragDropTable", function () {
     });
 
     it("adds fixed header based on prop", function () {
-        var component = getComponent({ fixedHead: true });
+        getComponent({ fixedHead: true });
+        var component = thisComponent;
 
         jest.runAllTimers();
 
@@ -159,7 +187,8 @@ describe("DragDropTable", function () {
     });
 
     it("sets widths for fixed header", function () {
-        var component = getComponent({ fixedHead: true });
+        getComponent({ fixedHead: true });
+        var component = thisComponent;
 
         expect(component.state.columnWidths).toBe(null);
         //setWidths is on a timeout so need to run timers
@@ -175,7 +204,8 @@ describe("DragDropTable", function () {
                 { id: 1, data: mockData.data }
             ]
         };
-        var component = getComponent({ fixedHead: true, infiniteScroll: infiniteScrollProps });
+        getComponent({ fixedHead: true, infiniteScroll: infiniteScrollProps });
+        var component = thisComponent;
 
         jest.runAllTimers();
 
@@ -185,7 +215,8 @@ describe("DragDropTable", function () {
     });
 
     it("calls scroll callback for fixedhead", function () {
-        var component = getComponent({ fixedHead: true });
+        getComponent({ fixedHead: true });
+        var component = thisComponent;
         var container = TestUtils.findRenderedDOMNodeWithDataId(component, "drag-drop-table-container");
         component.initialX = 30;
         container.scrollLeft = 80;
@@ -208,7 +239,8 @@ describe("DragDropTable", function () {
                 { id: 1, data: mockData.data }
             ]
         };
-        var component = getComponent({ fixedHead: true, infiniteScroll: infiniteScrollProps });
+        getComponent({ fixedHead: true, infiniteScroll: infiniteScrollProps });
+        var component = thisComponent;
         component._handleHorizontalScroll = jest.genMockFunction();
 
         jest.runAllTimers();

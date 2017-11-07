@@ -2,53 +2,50 @@ var React = require("react"),
     FilterUtils = require("../../../util/FilterUtils.js"),
     FormSearchBox = require("../../../components/forms/FormSearchBox.jsx");
 
+var ITEMS = [
+    { id: 1, name: "apples" },
+    { id: 2, name: "oranges" },
+    { id: 3, name: "bananas" },
+    { id: 4, name: "grape" }
+];
+
 
 /**
 * @name FormSearchBoxDemo
 * @memberof FormSearchBox
 * @desc A demo for FormSearchBox
 */
-var FormSearchBoxDemo = React.createClass({
+class FormSearchBoxDemo extends React.Component {
+    state = {
+        items: ITEMS,
+        queryString: "",
+        actionMessages: ["Type into field to search items for a match"]
+    };
 
-    _items: [
-        { id: 1, name: "apples" },
-        { id: 2, name: "oranges" },
-        { id: 3, name: "bananas" },
-        { id: 4, name: "grape" }
-    ],
-
-    getInitialState: function () {
-        return {
-            items: this._items,
-            queryString: "",
-            actionMessages: ["Type into field to search items for a match"]
-        };
-    },
-
-    _handleValueChange: function (value) {
+    _handleValueChange = (value) => {
         this.setState({
-            items: this._items.filter(FilterUtils.getFilterFunction(value)),
+            items: ITEMS.filter(FilterUtils.getFilterFunction(value)),
             queryString: value
         });
-    },
+    };
 
-    _handleKeyDown: function (e) {
+    _handleKeyDown = (e) => {
         this.setState({ actionMessages: this.state.actionMessages.concat("Key pressed in search field: " + e.key) });
-    },
+    };
 
-    _handleFocus: function () {
+    _handleFocus = () => {
         this.setState({ actionMessages: this.state.actionMessages.concat("Focused on search field") });
-    },
+    };
 
-    _handleBlur: function () {
+    _handleBlur = () => {
         this.setState({ actionMessages: this.state.actionMessages.concat("Blurred search field") });
-    },
+    };
 
-    _handleClear: function () {
+    _handleClear = () => {
         this.setState({ actionMessages: ["Cleared search field"] });
-    },
+    };
 
-    _renderItems: function () {
+    _renderItems = () => {
         return (
             <ul style={{ listStyleType: "circle", marginLeft: 20 }}>
                 {
@@ -58,9 +55,9 @@ var FormSearchBoxDemo = React.createClass({
                 }
             </ul>
         );
-    },
+    };
 
-    _renderMessages: function () {
+    _renderMessages = () => {
         return (
             <ul style={{ listStyleType: "circle", marginLeft: 20 }}>
                 {
@@ -70,9 +67,9 @@ var FormSearchBoxDemo = React.createClass({
                 }
             </ul>
         );
-    },
+    };
 
-    render: function () {
+    render() {
 
         return (
             <div>
@@ -93,6 +90,6 @@ var FormSearchBoxDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = FormSearchBoxDemo;

@@ -20,14 +20,14 @@ var Shows = React.createClass({
      * Declare which variables affect rendering.  The shouldComponentUpdate method will be be injected by re-react.
      */
     propTypes: {
-        activeTab: React.PropTypes.number.isRequired.affectsRendering,
-        advancedSearch: React.PropTypes.bool.affectsRendering,
-        filters: React.PropTypes.object.affectsRendering,
-        batches: React.PropTypes.array.affectsRendering,
-        hasNext: React.PropTypes.bool.affectsRendering,
-        hasPrev: React.PropTypes.bool.affectsRendering,
-        wizard: React.PropTypes.object.affectsRendering,
-        addWizardFields: React.PropTypes.object.affectsRendering
+        activeTab: React.PropTypes.number.isRequired,
+        advancedSearch: React.PropTypes.bool,
+        filters: React.PropTypes.object,
+        batches: React.PropTypes.array,
+        hasNext: React.PropTypes.bool,
+        hasPrev: React.PropTypes.bool,
+        wizard: React.PropTypes.object,
+        addWizardFields: React.PropTypes.object
     },
 
     /*
@@ -151,7 +151,7 @@ var Shows = React.createClass({
                             <span data-id="narrow-by"
                                     className="filter-by"
                                     onClick={this.props.onSearchToggleAdvanced}>Narrow by</span>
-                      
+
                             <ShowsAddWizardView {...this.props} genres={Genres} statuses={Statuses} />
                         </div>
                         <div className="filters">
@@ -251,7 +251,7 @@ var ShowsView = React.createClass({
         var watch = _.pick(this.props.shows, "position", "activeTab", "filters", "advancedSearch");
         var showsViewProps = _.pick(this.props, "wizard", "onWizardReset", "onWizardNext", "onWizardEdit",
             "onWizardChoose", "onShowsValueChange", "onShowsAddWizardReset", "onShowsAdd", "onShowsEdit");
-        
+
         return (
             <div>
                 {_.isEmpty(this.props.shows.editingRowInputs)

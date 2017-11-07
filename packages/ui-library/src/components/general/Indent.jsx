@@ -1,5 +1,7 @@
 "use strict";
 
+var PropTypes = require("prop-types");
+
 var React = require("react"),
     classnames = require("classnames");
 /**
@@ -25,7 +27,7 @@ var React = require("react"),
  * </Indent>
  *
  */
- 
+
 var Indent = function (props) {
     var contentClass = classnames("indent-content", {
         "no-border": !props.border
@@ -47,11 +49,11 @@ var Indent = function (props) {
 };
 
 Indent.propTypes = {
-    "data-id": React.PropTypes.string,
-    className: React.PropTypes.string,
-    children: React.PropTypes.node,
-    title: React.PropTypes.string,
-    border: React.PropTypes.bool
+    "data-id": PropTypes.string,
+    className: PropTypes.string,
+    children: PropTypes.node,
+    title: PropTypes.string,
+    border: PropTypes.bool
 };
 
 Indent.defaultProps = {

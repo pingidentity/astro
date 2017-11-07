@@ -6,21 +6,18 @@ var React = require("react"),
 * @memberof I18nCountrySelector
 * @desc A demo for I18nCountrySelector
 */
-var I18nCountrySelectorDemo = React.createClass({
+class I18nCountrySelectorDemo extends React.Component {
+    state = {
+        countryCode: "840"
+    };
 
-    _handleValueChange: function (countryCode) {
+    _handleValueChange = (countryCode) => {
         this.setState({
             countryCode: countryCode
         });
-    },
+    };
 
-    getInitialState: function () {
-        return {
-            countryCode: "840"
-        };
-    },
-
-    render: function () {
+    render() {
         return (
             <div>
                 <I18nCountrySelector
@@ -32,6 +29,6 @@ var I18nCountrySelectorDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = I18nCountrySelectorDemo;

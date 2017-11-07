@@ -4,7 +4,7 @@ jest.dontMock("../LineChart.jsx");
 
 describe("LineChart", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
         _ = require("underscore"),
         Line = require("recharts").Line,

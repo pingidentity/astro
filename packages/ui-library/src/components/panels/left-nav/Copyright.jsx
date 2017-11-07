@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react");
 
 /**
@@ -10,23 +11,21 @@ var React = require("react");
  *          Site or service specific logo source
  *
  */
-var Copyright = React.createClass({
-    propTypes: {
-        pingoneLogo: React.PropTypes.bool,
-        logoSrc: React.PropTypes.string.affectsRendering
-    },
+class Copyright extends React.Component {
+    static propTypes = {
+        pingoneLogo: PropTypes.bool,
+        logoSrc: PropTypes.string
+    };
 
-    getDefaultProps: function () {
-        return {
-            pingoneLogo: false
-        };
-    },
+    static defaultProps = {
+        pingoneLogo: false
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         this._year = new Date().getFullYear();
-    },
+    }
 
-    _getLogo: function () {
+    _getLogo = () => {
 
         if (this.props.logoSrc) {
             return (
@@ -69,9 +68,9 @@ var Copyright = React.createClass({
         else {
             return "";
         }
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <div className="copyright" data-id="copyright">
 
@@ -82,6 +81,6 @@ var Copyright = React.createClass({
                 <br />All rights reserved
             </div>);
     }
-});
+}
 
 module.exports = Copyright;

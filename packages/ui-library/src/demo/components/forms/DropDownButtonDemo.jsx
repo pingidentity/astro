@@ -6,29 +6,26 @@ var React = require("react"),
 * @memberof DropDownButton
 * @desc A demo for DropDownButton
 */
-var DropDownButtonDemo = React.createClass({
+class DropDownButtonDemo extends React.Component {
+    state = {
+        selectedLabel: "None.",
+        open: false
+    };
 
-    getInitialState: function () {
-        return {
-            selectedLabel: "None.",
-            open: false
-        };
-    },
-
-    _onToggle: function () {
+    _onToggle = () => {
         this.setState({
             open: !this.state.open
         });
-    },
+    };
 
-    _onValueChange: function (selectedLabel) {
+    _onValueChange = (selectedLabel) => {
         this.setState({
             selectedLabel: this._dropDownOptions()[selectedLabel],
             open: false
         });
-    },
+    };
 
-    _dropDownOptions: function () {
+    _dropDownOptions = () => {
 
         var menu = {
             optionOne: "Option One",
@@ -41,9 +38,9 @@ var DropDownButtonDemo = React.createClass({
         };
 
         return menu;
-    },
+    };
 
-    render: function () {
+    render() {
 
         var optionsMenu = this._dropDownOptions();
 
@@ -65,7 +62,6 @@ var DropDownButtonDemo = React.createClass({
             </div>
         );
     }
-
-});
+}
 
 module.exports = DropDownButtonDemo;

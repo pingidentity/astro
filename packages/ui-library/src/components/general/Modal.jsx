@@ -1,6 +1,8 @@
 "use strict";
 
-var React = require("re-react"),
+var PropTypes = require("prop-types");
+
+var React = require("react"),
     Utils = require("../../util/Utils"),
     EventUtils = require("../../util/EventUtils.js"),
     CancelTooltip = require("./../tooltips/CancelTooltip.jsx"),
@@ -63,52 +65,49 @@ var Type = {
  *          <p>Thank you for opening this modal.</p>
  *      </Modal>
  */
-var Modal = React.createClass({
-
-    propTypes: {
-        "data-id": React.PropTypes.string.affectsRendering,
-        id: React.PropTypes.string.affectsRendering,
-        className: React.PropTypes.string.affectsRendering,
-        expanded: React.PropTypes.bool.affectsRendering,
-        modalTitle: React.PropTypes.string.affectsRendering,
-        showHeader: React.PropTypes.bool.affectsRendering,
-        onClose: React.PropTypes.func,
-        closeOnBgClick: React.PropTypes.bool,
-        maximize: React.PropTypes.bool.affectsRendering,
-        type: React.PropTypes.oneOf([
+class Modal extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        id: PropTypes.string,
+        className: PropTypes.string,
+        expanded: PropTypes.bool,
+        modalTitle: PropTypes.string,
+        showHeader: PropTypes.bool,
+        onClose: PropTypes.func,
+        closeOnBgClick: PropTypes.bool,
+        maximize: PropTypes.bool,
+        type: PropTypes.oneOf([
             Type.BASIC,
             Type.DIALOG,
             Type.ALERT
-        ]).affectsRendering,
-        cancelTooltip: React.PropTypes.object.affectsRendering,
-        children: React.PropTypes.node.affectsRendering
-    },
+        ]),
+        cancelTooltip: PropTypes.object,
+        children: PropTypes.node
+    };
 
-    childContextTypes: {
-        close: React.PropTypes.func
-    },
+    static childContextTypes = {
+        close: PropTypes.func
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "modal-button",
-            expanded: false,
-            showHeader: true,
-            maximize: false,
-            type: Type.BASIC
-        };
-    },
+    static defaultProps = {
+        "data-id": "modal-button",
+        expanded: false,
+        showHeader: true,
+        maximize: false,
+        type: Type.BASIC
+    };
 
     /*
      * Set close method into context to allow children
      * to easily close modal.
      */
-    getChildContext: function () {
+    getChildContext() {
         return {
             close: this.props.onClose
         };
-    },
+    }
 
-    _handleKeyDown: function (e) {
+    _handleKeyDown = (e) => {
         if (!this.props.expanded) {
             return;
         }
@@ -117,9 +116,9 @@ var Modal = React.createClass({
             e.stopPropagation();
             e.preventDefault();
         }, e);
-    },
+    };
 
-    _handleBgClick: function (e) {
+    _handleBgClick = (e) => {
         if (!this.props.closeOnBgClick ||
             !this.props.onClose ||
             ["modal-content", "modal-bg"].indexOf(e.target.getAttribute("data-id")) === -1) {
@@ -127,13 +126,13 @@ var Modal = React.createClass({
         }
 
         this.props.onClose();
-    },
+    };
 
-    _getCloseButtonMarkup: function () {
+    _getCloseButtonMarkup = () => {
         return <span data-id="close-button" className="close-modal" onClick={this.props.onClose}></span>;
-    },
+    };
 
-    _getCloseButton: function () {
+    _getCloseButton = () => {
         var closeBtn,
             dataId = this.props.id || this.props["data-id"];
 
@@ -157,42 +156,42 @@ var Modal = React.createClass({
         }
 
         return closeBtn;
-    },
+    };
 
-    _toggleIeScrollHack: function () {
+    _toggleIeScrollHack = () => {
         if (this.isIeBrowser) {
             this.showIeScrollHack = !this.showIeScrollHack;
         }
 
         return this.showIeScrollHack ? { height: "auto" } : null;
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (this.props.id && !Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("id", "data-id"));
         }
-    },
+    }
 
-    componentDidMount: function () {
+    componentDidMount() {
         window.addEventListener("keydown", this._handleKeyDown);
 
         this.isIeBrowser = Utils.isIE();
         this.showIeScrollHack = false;
         this.isWizard = null;
-    },
+    }
 
-    componentDidUpdate: function () {
+    componentDidUpdate() {
         if (this.isWizard === null && this.props.expanded) {
             this.isWizard = !!document.getElementsByClassName("task-wizard").length;
             this.forceUpdate();
         }
-    },
+    }
 
-    componentWillUnmount: function () {
+    componentWillUnmount() {
         window.removeEventListener("keydown", this._handleKeyDown);
-    },
+    }
 
-    render: function () {
+    render() {
         if (!this.props.expanded) {
             return null;
         }
@@ -241,7 +240,7 @@ var Modal = React.createClass({
             </div>
         );
     }
-});
+}
 
 Modal.Type = Type;
 

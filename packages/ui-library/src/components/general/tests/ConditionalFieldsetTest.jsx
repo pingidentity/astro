@@ -8,7 +8,7 @@ jest.dontMock("../../forms/FormRadioGroup.jsx");
 
 describe("ConditionalFieldset", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         FormDropDownList = require("../../forms/FormDropDownList.jsx"),
         FormRadioGroup = require("../../forms/FormRadioGroup.jsx"),

@@ -1,9 +1,7 @@
 module.exports = function (getComponent) {
     var TestUtils = require("../../../../testutil/TestUtils"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         HelpHint = require("../../../tooltips/HelpHint.jsx");
-
-    //XXX: Once v1 is deprecated, combine with v2Tests
 
     it("renders the component with a data array", function () {
         var component = getComponent({
@@ -52,7 +50,6 @@ module.exports = function (getComponent) {
         });
 
         var help = TestUtils.findRenderedComponentWithType(component, HelpHint);
-
         expect(help).toBeTruthy();
     });
 
@@ -69,8 +66,7 @@ module.exports = function (getComponent) {
             label: "myLabel"
         });
 
-        expect(function () { TestUtils.findRenderedComponentWithType(component, HelpHint); }).toThrow(
-            new Error("Did not find exactly one match for componentType:" + HelpHint + " (found " + 0 + ")")
-        );
+        var icon = TestUtils.findRenderedDOMNodeWithClass(component, "icon-help");
+        expect(icon).toBeFalsy();
     });
 };

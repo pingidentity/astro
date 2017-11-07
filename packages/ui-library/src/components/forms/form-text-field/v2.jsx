@@ -1,8 +1,9 @@
 "use strict";
 
-var React = require("re-react"),
+var PropTypes = require("prop-types");
+
+var React = require("react"),
     ReactDOM = require("react-dom"),
-    ReactVanilla = require("react"),
     classnames = require("classnames"),
     FormLabel = require("../FormLabel.jsx"),
     FormError = require("../FormError.jsx"),
@@ -171,81 +172,110 @@ var React = require("re-react"),
 *              onValueChange={myFunction} />
 */
 
-module.exports = ReactVanilla.createClass({
+module.exports = class extends React.Component {
+    static propTypes = {
+        controlled: PropTypes.bool, //TODO: remove in new version
+        stateless: PropTypes.bool
+    };
 
-    propTypes: {
-        controlled: React.PropTypes.bool, //TODO: remove in new version
-        stateless: React.PropTypes.bool
-    },
+    static defaultProps = {
+        controlled: false //TODO: change to stateless with true default in new version
+    };
 
-    getDefaultProps: function () {
-        return {
-            controlled: false //TODO: change to stateless with true default in new version
-        };
-    },
-
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("controlled", "stateless", "false", "true"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
 
         return (stateless
             ? React.createElement(Stateless, _.defaults({ ref: "stateless" }, this.props)) //eslint-disable-line no-use-before-define
             : React.createElement(Stateful, _.defaults({ ref: "stateful" }, this.props))); //eslint-disable-line no-use-before-define
     }
-});
+};
 
 
-var Stateless = React.createClass({
-    displayName: "FormTextFieldStateless",
+class Stateless extends React.Component {
+    static displayName = "FormTextFieldStateless";
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        className: React.PropTypes.string.affectsRendering,
+    static propTypes = {
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
 
-        value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).affectsRendering,
-        controls: React.PropTypes.object.affectsRendering,
-        onChange: React.PropTypes.func,
-        onValueChange: React.PropTypes.func,
-        onBlur: React.PropTypes.func,
-        onFocus: React.PropTypes.func,
-        onKeyDown: React.PropTypes.func,
-        onKeyPress: React.PropTypes.func,
-        onMouseDown: React.PropTypes.func,
-        onSave: React.PropTypes.func,
-        onToggleReveal: React.PropTypes.func,
-        onUndo: React.PropTypes.func,
+        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        controls: PropTypes.object,
+        onChange: PropTypes.func,
+        onValueChange: PropTypes.func,
+        onBlur: PropTypes.func,
+        onFocus: PropTypes.func,
+        onKeyDown: PropTypes.func,
+        onKeyPress: PropTypes.func,
+        onMouseDown: PropTypes.func,
+        onSave: PropTypes.func,
+        onToggleReveal: PropTypes.func,
+        onUndo: PropTypes.func,
 
-        errorMessage: React.PropTypes.string.affectsRendering,
-        errorClassName: React.PropTypes.string.affectsRendering,
-        inputClassName: React.PropTypes.string.affectsRendering,
-        helpClassName: React.PropTypes.string.affectsRendering,
-        labelClassName: React.PropTypes.string.affectsRendering,
-        labelHelpText: React.PropTypes.string.affectsRendering,
-        labelText: React.PropTypes.string.affectsRendering,
-        labelLockText: React.PropTypes.string.affectsRendering,
-        maxLength: React.PropTypes.number.affectsRendering,
-        type: React.PropTypes.string.affectsRendering,
-        placeholder: React.PropTypes.string.affectsRendering,
+        errorMessage: PropTypes.string,
+        errorClassName: PropTypes.string,
+        inputClassName: PropTypes.string,
+        helpClassName: PropTypes.string,
+        labelClassName: PropTypes.string,
+        labelHelpText: PropTypes.string,
+        labelText: PropTypes.string,
+        labelLockText: PropTypes.string,
+        maxLength: PropTypes.number,
+        type: PropTypes.string,
+        placeholder: PropTypes.string,
 
-        autoComplete: React.PropTypes.bool.affectsRendering,
-        autoFocus: React.PropTypes.bool.affectsRendering,
-        disabled: React.PropTypes.bool.affectsRendering,
-        flexWidth: React.PropTypes.bool.affectsRendering,
-        maskValue: React.PropTypes.bool.affectsRendering,
-        readOnly: React.PropTypes.bool.affectsRendering,
-        required: React.PropTypes.bool.affectsRendering,
-        reveal: React.PropTypes.bool.affectsRendering,
-        showReveal: React.PropTypes.bool.affectsRendering,
-        showSave: React.PropTypes.bool.affectsRendering,
-        showUndo: React.PropTypes.bool.affectsRendering,
+        autoComplete: PropTypes.bool,
+        autoFocus: PropTypes.bool,
+        disabled: PropTypes.bool,
+        flexWidth: PropTypes.bool,
+        maskValue: PropTypes.bool,
+        readOnly: PropTypes.bool,
+        required: PropTypes.bool,
+        reveal: PropTypes.bool,
+        showReveal: PropTypes.bool,
+        showSave: PropTypes.bool,
+        showUndo: PropTypes.bool,
 
-        children: React.PropTypes.node.affectsRendering
-    },
+        children: PropTypes.node
+    };
+
+    static defaultProps = {
+        "data-id": "form-text-field",
+        errorClassName: "",
+        value: "",
+        onBlur: _.noop,
+        onChange: _.noop,
+        onFocus: _.noop,
+        onKeyDown: _.noop,
+        onKeyPress: _.noop,
+        onMouseDown: _.noop,
+        onSave: _.noop,
+        onToggleReveal: _.noop,
+        onUndo: _.noop,
+        onValueChange: _.noop,
+        autoComplete: false,
+        autoFocus: false,
+        disabled: false,
+        flexWidth: false,
+        maskValue: false,
+        readOnly: false,
+        required: false,
+        reveal: false,
+        selectOnFocus: false,
+        showReveal: false,
+        showSave: false,
+        showUndo: false
+    };
+
+    state = {
+        labelWidth: 0
+    };
 
     /**
      * Perform any operations that need to happen when the field value changes.
@@ -253,12 +283,12 @@ var Stateless = React.createClass({
      * @param {object} e the event object
      * @private
      */
-    _handleFieldChange: function (e) {
+    _handleFieldChange = (e) => {
         this.props.onValueChange(e.target.value);
         this.props.onChange(e);
-    },
+    };
 
-    _setFlexWidth: function () {
+    _setFlexWidth = () => {
         if (this.props.flexWidth) {
             var content = this._getInputType() === "password" ? Array(this.props.value.length + 1).join(this.pwChar)
                     : this.props.value,
@@ -279,9 +309,9 @@ var Stateless = React.createClass({
                 labelWidth: newWidth
             });
         }
-    },
+    };
 
-    _getInputType: function () {
+    _getInputType = () => {
         var inputType;
 
         if (this.props.maskValue && !this.props.reveal) {
@@ -299,56 +329,20 @@ var Stateless = React.createClass({
         }
 
         return inputType;
-    },
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "form-text-field",
-            errorClassName: "",
-            value: "",
-            onBlur: _.noop,
-            onChange: _.noop,
-            onFocus: _.noop,
-            onKeyDown: _.noop,
-            onKeyPress: _.noop,
-            onMouseDown: _.noop,
-            onSave: _.noop,
-            onToggleReveal: _.noop,
-            onUndo: _.noop,
-            onValueChange: _.noop,
-            autoComplete: false,
-            autoFocus: false,
-            disabled: false,
-            flexWidth: false,
-            maskValue: false,
-            readOnly: false,
-            required: false,
-            reveal: false,
-            selectOnFocus: false,
-            showReveal: false,
-            showSave: false,
-            showUndo: false
-        };
-    },
-
-    _handleFocus: function () {
+    _handleFocus = () => {
         if (this.props.selectOnFocus && this.refs[this.props["data-id"] + "-input"]) {
             this.selectField();
         }
         this.props.onFocus();
-    },
+    };
 
-    selectField: function () {
+    selectField = /* istanbul ignore next */ () => {
         this.refs[this.props["data-id"] + "-input"].select();
-    },
+    };
 
-    getInitialState: function () {
-        return {
-            labelWidth: 0
-        };
-    },
-
-    componentDidMount: function () {
+    componentDidMount() {
         var label = ReactDOM.findDOMNode(this.refs["container"]),
             container = this.refs["input-container"],
             input = this.refs[this.props["data-id"] + "-input"],
@@ -422,18 +416,18 @@ var Stateless = React.createClass({
                 this._setFlexWidth();
             }.bind(this), 10);
         }
-    },
+    }
 
-    componentDidUpdate: function () {
+    componentDidUpdate() {
         if (this.props.flexWidth) {
             if (this.lastValue !== this.props.value) {
                 this._setFlexWidth();
             }
             this.lastValue = this.props.value;
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var id = this.props["data-id"],
             className = classnames(this.props.className, "input-text", {
                 disabled: this.props.disabled,
@@ -538,26 +532,24 @@ var Stateless = React.createClass({
             </FormLabel>
         );
     }
-});
+}
 
-var Stateful = ReactVanilla.createClass({
-    displayName: "FormTextFieldStateful",
+class Stateful extends React.Component {
+    static displayName = "FormTextFieldStateful";
 
-    getInitialState: function () {
-        return {
-            reveal: false,
-            value: this.props.value || ""
-        };
-    },
+    state = {
+        reveal: false,
+        value: this.props.value || ""
+    };
 
-    _handleToggleReveal: function () {
+    _handleToggleReveal = () => {
         // prevents focus on characters in input field
         this.setState({
             reveal: !this.state.reveal
         });
-    },
+    };
 
-    _handleValueChange: function (value) {
+    _handleValueChange = (value) => {
         this.setState({
             value: value
         }, function () {
@@ -565,17 +557,17 @@ var Stateful = ReactVanilla.createClass({
                 this.props.onValueChange(value);
             }
         });
-    },
+    };
 
-    componentWillReceiveProps: function (newProps) {
+    componentWillReceiveProps(newProps) {
         if (newProps.value !== this.props.value) {
             this.setState({
                 value: newProps.value
             });
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var props = _.defaults({
             ref: "stateless",
             reveal: this.state.reveal,
@@ -586,4 +578,4 @@ var Stateful = ReactVanilla.createClass({
 
         return React.createElement(Stateless, props);
     }
-});
+}

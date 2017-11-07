@@ -4,7 +4,7 @@ jest.dontMock("../AreaChart.jsx");
 
 describe("AreaChart", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
         _ = require("underscore"),
         Area = require("recharts").Area,

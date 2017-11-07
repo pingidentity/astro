@@ -1,7 +1,8 @@
 "use strict";
 
-var React = require("re-react"),
-    ReactVanilla = require("react"),
+var PropTypes = require("prop-types");
+
+var React = require("react"),
     classnames = require("classnames"),
     _ = require("underscore"),
     Utils = require("../../util/Utils.js"),
@@ -91,36 +92,34 @@ var React = require("re-react"),
  *
  **/
 
-var GridStateless = React.createClass({
-    displayName: "GridStateless",
+class GridStateless extends React.Component {
+    static displayName = "GridStateless";
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        className: React.PropTypes.string.affectsRendering,
-        rows: React.PropTypes.array.affectsRendering,
-        rowExpandable: React.PropTypes.bool.affectsRendering,
-        expandedRowContentType: React.PropTypes.object,
-        onRowExpanded: React.PropTypes.func,
-        columnsPerPage: React.PropTypes.number.isRequired.affectsRendering,
-        firstColumn: React.PropTypes.number.isRequired.affectsRendering,
-        lastColumn: React.PropTypes.number.isRequired.affectsRendering,
-        currentPage: React.PropTypes.number.isRequired.affectsRendering,
-        onPaginationChanged: React.PropTypes.func.isRequired,
-        children: React.PropTypes.node.affectsRendering
-    },
+    static propTypes = {
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
+        rows: PropTypes.array,
+        rowExpandable: PropTypes.bool,
+        expandedRowContentType: PropTypes.object,
+        onRowExpanded: PropTypes.func,
+        columnsPerPage: PropTypes.number.isRequired,
+        firstColumn: PropTypes.number.isRequired,
+        lastColumn: PropTypes.number.isRequired,
+        currentPage: PropTypes.number.isRequired,
+        onPaginationChanged: PropTypes.func.isRequired,
+        children: PropTypes.node
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "grid-table",
-            rowExpandable: false
-        };
-    },
+    static defaultProps = {
+        "data-id": "grid-table",
+        rowExpandable: false
+    };
 
     /*
      * Loops the array of rows and returns an array of TR tags using Row component.
      * Also adds one more row for each Row to display expandable row
      */
-    _getRows: function () {
+    _getRows = () => {
         var rows = [];
         var visibleColumnList = this._getVisibleColumns();
 
@@ -156,9 +155,9 @@ var GridStateless = React.createClass({
         }.bind(this));
 
         return rows;
-    },
+    };
 
-    _getCellHeader: function (column) {
+    _getCellHeader = (column) => {
         var headerText = "";
 
         if (column.props.isLeftHeader !== true) {
@@ -181,12 +180,12 @@ var GridStateless = React.createClass({
                 {headerText}
             </th>
         );
-    },
+    };
 
     /*
      * Gets visible columns. Ex: fixed columns, left header column and columns on current page (column paging)
      */
-    _getVisibleColumns: function () {
+    _getVisibleColumns = () => {
         var firstColumn = this.props.firstColumn;
         var lastColumn = this.props.lastColumn;
 
@@ -202,12 +201,12 @@ var GridStateless = React.createClass({
                 // else nothing to return. this column is invisible because it does not belong to current page.
             }
         }.bind(this));
-    },
+    };
 
     /*
      * Gets all visible column headers
      */
-    _getColumnHeaders: function () {
+    _getColumnHeaders = () => {
         var visibleColumnList = this._getVisibleColumns();
         var self = this;
         var dataColumnHeaders = visibleColumnList.map(function (column) {
@@ -235,12 +234,12 @@ var GridStateless = React.createClass({
         );
 
         return allColumnHeaders;
-    },
+    };
 
     /*
      * Calculates total columns for paging
      */
-    _getPageableColumns: function () {
+    _getPageableColumns = () => {
         var pageableColumns = 0;
         React.Children.forEach(this.props.children, function (column) {
             if (column.type.displayName === "Column" && !column.props.fixed && !column.props.isLeftHeader) {
@@ -249,9 +248,9 @@ var GridStateless = React.createClass({
         });
 
         return pageableColumns;
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <div data-id={this.props["data-id"]}>
                 <table className={classnames("grid", this.props.className)} >
@@ -267,37 +266,33 @@ var GridStateless = React.createClass({
             </div>
         );
     }
-});
+}
 
-var GridStateful = ReactVanilla.createClass({
-    displayName: "GridStateful",
+class GridStateful extends React.Component {
+    static displayName = "GridStateful";
 
-    getDefaultProps: function () {
-        return {
-            columnsPerPage: 1
-        };
-    },
+    static defaultProps = {
+        columnsPerPage: 1
+    };
 
-    getInitialState: function () {
-        return {
-            firstColumn: 0,
-            lastColumn: this.props.columnsPerPage,
-            currentPage: 1
-        };
-    },
+    state = {
+        firstColumn: 0,
+        lastColumn: this.props.columnsPerPage,
+        currentPage: 1
+    };
 
     /*
      * Handles pagination changed
      */
-    _handlePaginationChanged: function (firstColumn, lastColumn, newPage) {
+    _handlePaginationChanged = (firstColumn, lastColumn, newPage) => {
         this.setState({
             firstColumn: firstColumn,
             lastColumn: lastColumn,
             currentPage: newPage
         });
-    },
+    };
 
-    render: function () {
+    render() {
         var props = _.defaults(
             {
                 ref: "GridStateless", firstColumn: this.state.firstColumn, lastColumn: this.state.lastColumn,
@@ -305,29 +300,27 @@ var GridStateful = ReactVanilla.createClass({
             }, this.props);
         return React.createElement(GridStateless, props, this.props.children);
     }
-});
+}
 
-var Grid = ReactVanilla.createClass({
-    displayName: "Grid",
+class Grid extends React.Component {
+    static displayName = "Grid";
 
-    propTypes: {
-        controlled: React.PropTypes.bool, //TODO: remove in new version
-        stateless: React.PropTypes.bool
-    },
+    static propTypes = {
+        controlled: PropTypes.bool, //TODO: remove in new version
+        stateless: PropTypes.bool
+    };
 
-    getDefaultProps: function () {
-        return {
-            controlled: false //TODO: change to stateless in new version
-        };
-    },
+    static defaultProps = {
+        controlled: false //TODO: change to stateless in new version
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("controlled", "stateless"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
 
         return (
@@ -338,7 +331,7 @@ var Grid = ReactVanilla.createClass({
                     GridStateful, _.defaults({ ref: "GridStateful" }, this.props), this.props.children)
         );
     }
-});
+}
 
 module.exports = Grid;
 

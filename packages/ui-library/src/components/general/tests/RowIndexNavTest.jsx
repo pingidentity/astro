@@ -4,7 +4,7 @@ jest.dontMock("../RowIndexNav.jsx");
 
 describe("Indent", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         RowIndexNav = require("../RowIndexNav.jsx"),
         _ = require("underscore");

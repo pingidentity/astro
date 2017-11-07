@@ -1,7 +1,8 @@
 "use strict";
 
-var React = require("re-react"),
-    ReactVanilla = require("react"),
+var PropTypes = require("prop-types");
+
+var React = require("react"),
     _ = require("underscore"),
     Utils = require("../../util/Utils");
 
@@ -74,27 +75,25 @@ var React = require("re-react"),
  *
  */
 
-module.exports = ReactVanilla.createClass({
-    displayName: "Pagination",
+module.exports = class extends React.Component {
+    static displayName = "Pagination";
 
-    propTypes: {
-        controlled: React.PropTypes.bool, //TODO: remove in new version
-        stateless: React.PropTypes.bool
-    },
+    static propTypes = {
+        controlled: PropTypes.bool, //TODO: remove in new version
+        stateless: PropTypes.bool
+    };
 
-    getDefaultProps: function () {
-        return {
-            controlled: false //TODO: change to stateless in new version
-        };
-    },
+    static defaultProps = {
+        controlled: false //TODO: change to stateless in new version
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("controlled", "stateless"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
 
         return (
@@ -102,7 +101,7 @@ module.exports = ReactVanilla.createClass({
                 ? <PaginationStateless ref="PaginationStateless" {...this.props} />
                 : <PaginationStateful ref="PaginationStateful" {...this.props} />);
     }
-});
+};
 
 /**
  * @callback PageLinks~onValueChange
@@ -128,23 +127,24 @@ module.exports = ReactVanilla.createClass({
  *       onValueChange = {this._handlePageChange}/>
  */
 
-var PageLinks = React.createClass({
-    displayName: "PageLinks",
+class PageLinks extends React.Component {
+    static displayName = "PageLinks";
 
-    propTypes: {
-        numPages: React.PropTypes.number.isRequired.affectsRendering,
-        currentPage: React.PropTypes.number.isRequired.affectsRendering,
-        onValueChange: React.PropTypes.func, // mark as isRequired once onClick is removed.
-        onClick: React.PropTypes.func
-    },
+    static propTypes = {
+        "data-id": PropTypes.string,
+        numPages: PropTypes.number.isRequired,
+        currentPage: PropTypes.number.isRequired,
+        onValueChange: PropTypes.func, // mark as isRequired once onClick is removed.
+        onClick: PropTypes.func
+    };
 
-    _onLinkClick: function (e, page) {
+    _onLinkClick = (e, page) => {
         if (this.props.currentPage !== page) {
             this.props.onValueChange(page);
         }
-    },
+    };
 
-    render: function () {
+    render() {
         var currentPage = this.props.currentPage,
             numPages = this.props.numPages,
             pageLinks = [];
@@ -152,6 +152,7 @@ var PageLinks = React.createClass({
         //previous page link
         pageLinks.push(
             <a key="previous"
+                data-id={this.props["data-id"] + "previous"}
                onClick={_.partial(this._onLinkClick, _, (currentPage <= 1 ? currentPage : currentPage - 1))}
                className={currentPage === 1 ? "disabled" : ""}>
                     <span className="icon-previous"></span>
@@ -161,8 +162,12 @@ var PageLinks = React.createClass({
         if (numPages <= 6) {
             for (var i = 0; i < this.props.numPages; i = i + 1) {
                 var active = (i + 1) === currentPage ? "active" : "";
+                var key = i + 1;
                 var link = (
-                    <a key={i + 1} className={active} onClick={_.partial(this._onLinkClick, _, i+1)}>{i + 1}</a>
+                    <a key={key}
+                        data-id={this.props["data-id"] + key}
+                        className={active}
+                        onClick={_.partial(this._onLinkClick, _, i+1)}>{i + 1}</a>
                 );
                 pageLinks.push(link);
             }
@@ -170,7 +175,9 @@ var PageLinks = React.createClass({
         else {
             //first page link
             pageLinks.push(
-                <a key="first" className={currentPage === 1 ? "active" : "" }
+                <a key="first"
+                    data-id={this.props["data-id"] + "first"}
+                    className={currentPage === 1 ? "active" : "" }
                     onClick={_.partial(this._onLinkClick, _, 1)}>{1}</a>
             );
             //add ellipsis if needed
@@ -191,8 +198,12 @@ var PageLinks = React.createClass({
 
             for (var i = middleStart; i < middleStart + 5; i = i + 1) {
                 var active = (i + 1) === currentPage ? "active" : "";
+                var key = i + 1;
                 var link = (
-                    <a key={i + 1} className={active} onClick={_.partial(this._onLinkClick, _, i+1)}>{i + 1}</a>
+                    <a key={key}
+                        data-id={this.props["data-id"] + key}
+                        className={active}
+                        onClick={_.partial(this._onLinkClick, _, i+1)}>{i + 1}</a>
                 );
                 pageLinks.push(link);
             }
@@ -202,14 +213,18 @@ var PageLinks = React.createClass({
             }
             //last page link
             pageLinks.push(
-                <a key={numPages} className={currentPage === numPages ? "active" : "" }
+                <a key={numPages}
+                    data-id={this.props["data-id"] + numPages}
+                    className={currentPage === numPages ? "active" : "" }
                     onClick={_.partial(this._onLinkClick, _, numPages)}>{numPages}</a>
             );
         }
 
         //next page link
         pageLinks.push(
-            <a key="next" className={currentPage === numPages ? "disabled" : ""}
+            <a key="next"
+                data-id={this.props["data-id"] + "next"}
+                className={currentPage === numPages ? "disabled" : ""}
                 onClick={_.partial(this._onLinkClick, _, (currentPage >= numPages ? currentPage : currentPage + 1))}>
                     <span className="icon-next"></span>
             </a>
@@ -220,40 +235,37 @@ var PageLinks = React.createClass({
         }
 
         return (
-            <div className="page-links">
+            <div className="page-links" data-id={this.props["data-id"]}>
                 {pageLinks}
             </div>
         );
 
     }
+}
 
-});
+class PaginationStateless extends React.Component {
+    static displayName = "PaginationStateless";
 
-var PaginationStateless = React.createClass({
-    displayName: "PaginationStateless",
+    static propTypes = {
+        children: PropTypes.node,
+        className: PropTypes.string,
+        "data-id": PropTypes.string,
+        id: PropTypes.string,
+        totalPages: PropTypes.number,
+        onValueChange: PropTypes.func, // add isRequired to this once onChange is removed.
+        onChange: PropTypes.func,
+        page: PropTypes.number,
+        perPage: PropTypes.number,
+        total: PropTypes.number
+    };
 
-    propTypes: {
-        children: React.PropTypes.node.affectsRendering,
-        className: React.PropTypes.string.affectsRendering,
-        "data-id": React.PropTypes.string,
-        id: React.PropTypes.string,
-        totalPages: React.PropTypes.number.affectsRendering,
-        onValueChange: React.PropTypes.func, // add isRequired to this once onChange is removed.
-        onChange: React.PropTypes.func,
-        page: React.PropTypes.number.affectsRendering,
-        perPage: React.PropTypes.number.affectsRendering,
-        total: React.PropTypes.number.affectsRendering
-    },
+    static defaultProps = {
+        "data-id": "pagination",
+        perPage: 10,
+        totalPages: null
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "pagination",
-            perPage: 10,
-            totalPages: null
-        };
-    },
-
-    _getNumPages: function () {
+    _getNumPages = () => {
         if (this.props.totalPages) {
             return this.props.totalPages;
         } else if (this.props.total && this.props.perPage) {
@@ -262,9 +274,9 @@ var PaginationStateless = React.createClass({
             throw("Either props.totalPages OR (props.total and props.perPage) must be defined to \
                 determine the number of page links to render!");
         }
-    },
+    };
 
-    _handlePageChange: function (newPage) {
+    _handlePageChange = (newPage) => {
         var page = newPage,
             numPages = this._getNumPages(),
             currentPage = page > numPages ? numPages : page,
@@ -275,9 +287,9 @@ var PaginationStateless = React.createClass({
         } else {
             this.props.onValueChange({ first: start, last: last, page: currentPage });
         }
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
                 console.warn(Utils.deprecateMessage("id", "data-id"));
@@ -286,9 +298,9 @@ var PaginationStateless = React.createClass({
                 console.warn(Utils.deprecateMessage("onChange", "onValueChange"));
             }
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var numPages = this._getNumPages();
         var id = this.props.id || this.props["data-id"];
         //make sure current page isn't greater than number of pages
@@ -301,28 +313,28 @@ var PaginationStateless = React.createClass({
                     currentPage={currentPage}
                     numPages={numPages}
                     onValueChange={this._handlePageChange}
-                    key="topPageLinks" />
+                    key="topPageLinks"
+                    data-id="topPageLinks" />
                 {this.props.children}
                 <PageLinks
                     currentPage={currentPage}
                     numPages={numPages}
                     onValueChange={this._handlePageChange}
-                    key="bottomPageLinks" />
+                    key="bottomPageLinks"
+                    data-id="bottomPageLinks" />
             </div>
         );
     }
-});
+}
 
-var PaginationStateful = ReactVanilla.createClass({
-    displayName: "PaginationStateful",
+class PaginationStateful extends React.Component {
+    static displayName = "PaginationStateful";
 
-    getInitialState: function () {
-        return {
-            page: 0
-        };
-    },
+    state = {
+        page: 0
+    };
 
-    _onPageChange: function (pagingDetails) {
+    _onPageChange = (pagingDetails) => {
         var self = this;
         this.setState({
             page: pagingDetails.page
@@ -336,11 +348,11 @@ var PaginationStateful = ReactVanilla.createClass({
             }
 
         });
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <PaginationStateless {...this.props} page={this.state.page} onValueChange={this._onPageChange}/>
         );
     }
-});
+}

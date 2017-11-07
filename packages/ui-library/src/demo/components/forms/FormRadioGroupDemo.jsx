@@ -6,11 +6,9 @@ var React = require("react"),
 * @memberof FormRadioGroup
 * @desc A demo for FormRadioGroup
 */
-var FormRadioGroupDemo = React.createClass({
-
-    _numDemos: 4,
-
-    getInitialState: function () {
+class FormRadioGroupDemo extends React.Component {
+    constructor(props, context) {
+        super(props, context);
         var initialState = { showSpinner: true };
 
         for (var i=1; i<=this._numDemos; i+=1) {
@@ -18,16 +16,18 @@ var FormRadioGroupDemo = React.createClass({
             this["_handleChange" + i] = this._handleChange.bind(this, i);
         }
 
-        return initialState;
-    },
+        this.state = initialState;
+    }
 
-    _handleChange: function (i, value) {
+    _numDemos = 4;
+
+    _handleChange = (i, value) => {
         var newState = {};
         newState["selectedId" + i] = value;
         this.setState(newState);
-    },
+    };
 
-    render: function () {
+    render() {
         var radioItems = [
             { id: "1", name: "Radio 1" },
             { id: "2", name: "Radio 2", helpHintText: "Radio 2 help hint" },
@@ -97,7 +97,7 @@ var FormRadioGroupDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 
 module.exports = FormRadioGroupDemo;

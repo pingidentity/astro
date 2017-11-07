@@ -1,5 +1,7 @@
 "use strict";
 
+var PropTypes = require("prop-types");
+
 var React = require("react"),
     classnames = require("classnames"),
     If = require("../general/If.jsx"),
@@ -39,42 +41,39 @@ var React = require("react"),
  *              Your message here
  *          </InlineMessage>
  **/
-var InlineMessage = React.createClass({
-
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        type: React.PropTypes.oneOf([
+class InlineMessage extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        type: PropTypes.oneOf([
             MessageTypes.NOTICE, MessageTypes.ERROR, MessageTypes.WARNING, MessageTypes.SUCCESS
         ]),
-        label: React.PropTypes.string,
-        onClick: React.PropTypes.func,
-        callback: React.PropTypes.func
-    },
-    
-    getDefaultProps: function () {
-        return {
-            "data-id": "inline-message",
-            type: MessageTypes.NOTICE
-        };
-    },
+        label: PropTypes.string,
+        onClick: PropTypes.func,
+        callback: PropTypes.func
+    };
 
-    _showAction: function () {
+    static defaultProps = {
+        "data-id": "inline-message",
+        type: MessageTypes.NOTICE
+    };
+
+    _showAction = () => {
         return (this.props.label !== undefined &&
                     (this.props.onClick !== undefined || this.props.callback !== undefined));
-    },
+    };
 
-    _onClick: function (e) {
+    _onClick = (e) => {
         var clickHandler = this.props.callback || this.props.onClick;
         clickHandler(e);
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (this.props.callback && !Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("callback", "onClick"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var className = classnames("inline-message", this.props.type);
 
         return (
@@ -91,7 +90,7 @@ var InlineMessage = React.createClass({
             </div>
         );
     }
-});
+}
 
 InlineMessage.MessageTypes = MessageTypes;
 

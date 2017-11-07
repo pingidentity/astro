@@ -7,7 +7,7 @@ describe("DropDownButton", function () {
 
     var React = require("react"),
         ReactDOM = require("react-dom"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         DropDownButton = require("../DropDownButton.jsx");
 
@@ -233,6 +233,7 @@ describe("DropDownButton", function () {
 
     it("register global listeners on mount", function () {
 
+
         window.addEventListener = jest.genMockFunction();
 
         var menu = {
@@ -248,9 +249,8 @@ describe("DropDownButton", function () {
                             onToggle={jest.genMockFunction()} />
         );
 
-        expect(window.addEventListener.mock.calls.length).toBe(2);
-        expect(window.addEventListener.mock.calls[0][0]).toEqual("click");
-        expect(window.addEventListener.mock.calls[1][0]).toEqual("keydown");
+        expect(TestUtils.mockCallsContains(window.addEventListener, "click")).toEqual(true);
+        expect(TestUtils.mockCallsContains(window.addEventListener, "keydown")).toEqual(true);
     });
 
     it("unregister global listeners on unmount", function () {
@@ -273,12 +273,12 @@ describe("DropDownButton", function () {
         //trigger unmount
         ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(dropDownButtonComponent).parentNode);
 
-        expect(window.removeEventListener.mock.calls.length).toBe(2);
-        expect(window.removeEventListener.mock.calls[0][0]).toEqual("click");
-        expect(window.removeEventListener.mock.calls[1][0]).toEqual("keydown");
+        expect(TestUtils.mockCallsContains(window.removeEventListener, "click")).toEqual(true);
+        expect(TestUtils.mockCallsContains(window.removeEventListener, "keydown")).toEqual(true);
     });
 
     it("triggers callback when clicked outside", function () {
+        window.addEventListener = jest.genMockFunction();
         var callback = jest.genMockFunction();
 
         var menu = {
@@ -295,7 +295,9 @@ describe("DropDownButton", function () {
                             onToggle={callback} />
         );
 
-        var handler = window.addEventListener.mock.calls[0][1];
+        var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
+
+
         var e = {
             target: { parentNode: document.body },
             stopPropagation: jest.genMockFunction(),
@@ -304,8 +306,7 @@ describe("DropDownButton", function () {
 
         //click outside
         handler(e);
-
-        expect(callback).toBeCalled();
+        expect(callback).toHaveBeenCalled();
     });
 
     it("doesn't trigger callback when clicked outside and drop down is not open", function () {
@@ -325,7 +326,7 @@ describe("DropDownButton", function () {
                             onToggle={callback} />
         );
 
-        var handler = window.addEventListener.mock.calls[0][1];
+        var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
         var e = {
             target: { parentNode: document.body },
             stopPropagation: jest.genMockFunction(),
@@ -443,7 +444,7 @@ describe("DropDownButton", function () {
         component = ReactTestUtils.renderIntoDocument(<DropDownButton controlled={true} />);
         stateful = component.refs.Stateful;
         stateless = component.refs.Stateless;
-        
+
         expect(stateless).toBeTruthy();
         expect(stateful).toBeFalsy();
     });

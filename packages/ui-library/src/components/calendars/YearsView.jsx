@@ -1,52 +1,48 @@
-var React = require("re-react");
+var PropTypes = require("prop-types");
+var React = require("react");
 var classnames = require("classnames");
 var moment = require("moment-range");
 var Cell = require("./Cell.jsx");
 var ViewHeader = require("./ViewHeader.jsx");
 var CalendarUtils = require("./Utils.js");
 
-module.exports = React.createClass({
+module.exports = class extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        date: PropTypes.object,
+        onSetDate: PropTypes.func,
+        onPrevView: PropTypes.func
+    };
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        date: React.PropTypes.object.affectsRendering,
-        onSetDate: React.PropTypes.func,
-        onPrevView: React.PropTypes.func
-    },
+    static defaultProps = {
+        "data-id": "years-view"
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "years-view"
-        };
-    },
-
-    years: [],
-
-    next: function () {
+    next = () => {
         var date = this.props.date.clone().add(10, "years");
 
         // Get nearest year that falls in range
         date = CalendarUtils.getNearestInRange(date, this.props.dateRange, "years");
         this.props.onSetDate(date);
-    },
+    };
 
-    prev: function () {
+    prev = () => {
         var date = this.props.date.clone().subtract(10, "years");
 
         // Get nearest year that falls in range
         date = CalendarUtils.getNearestInRange(date, this.props.dateRange, "years");
         this.props.onSetDate(date);
-    },
+    };
 
-    rangeCheck: function (currYear) {
+    rangeCheck = (currYear) => {
         if (this.years.length === 0) {
             return false;
         }
 
         return this.years[0].label <= currYear && this.years[this.years.length - 1].label >= currYear;
-    },
+    };
 
-    getYears: function () {
+    getYears = () => {
         var now = this.props.date,
             start = now.clone().subtract(5, "year"),
             end = now.clone().add(6, "year"),
@@ -70,9 +66,9 @@ module.exports = React.createClass({
 
         this.years = items;
         return items;
-    },
+    };
 
-    cellClick: function (e) {
+    cellClick = (e) => {
         var year = parseInt(e.target.innerHTML, 10);
         var date = this.props.date.clone().year(year);
         // Check year falls in range
@@ -81,10 +77,13 @@ module.exports = React.createClass({
             date = CalendarUtils.getNearestInRange(date, this.props.dateRange, "months");
             this.props.onPrevView(date);
         }
-    },
+    };
 
+    componentWillMount() {
+        this.years = [];
+    }
 
-    render: function () {
+    render() {
         var years = this.getYears();
         var currYear = this.props.date.year();
 
@@ -113,5 +112,4 @@ module.exports = React.createClass({
             </div>
         );
     }
-
-});
+};

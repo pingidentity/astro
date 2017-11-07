@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react"),
     Utils = require("../../util/Utils.js");
 
@@ -55,56 +56,60 @@ var React = require("react"),
  *
  *
  */
-var BackgroundLoader = React.createClass({
-
-    propTypes: {
+class BackgroundLoader extends React.Component {
+    static propTypes = {
         // The CSS class to set on the top HTML element
-        className: React.PropTypes.string,
+        className: PropTypes.string,
         // Time in ms between load calls,
         // can be a callback to change the interval dynamically
-        interval: React.PropTypes.oneOfType([
-            React.PropTypes.func,
-            React.PropTypes.number
+        interval: PropTypes.oneOfType([
+            PropTypes.func,
+            PropTypes.number
         ]).isRequired,
         // Function to call to load data.
-        load: React.PropTypes.func.isRequired,
+        load: PropTypes.func.isRequired,
         // Content to display while loading data,
         // can be a callback or already rendered content.
-        loading: React.PropTypes.oneOfType([
-            React.PropTypes.func,
-            React.PropTypes.object
+        loading: PropTypes.oneOfType([
+            PropTypes.func,
+            PropTypes.object
         ]),
         // Whether the data has been loaded yet.
-        loaded: React.PropTypes.bool
-    },
+        loaded: PropTypes.bool
+    };
+
+    state = {
+        hidden: "hidden",
+        allowPoll: true
+    };
 
     /*
      * Remove the timer from the timer queue.
      *
      */
-    _clearTimeout: function () {
+    _clearTimeout = () => {
         if (this.timerId) {
             global.clearTimeout(this.timerId);
         }
-    },
+    };
 
     /*
      * Start a load loop if one has not already been started.
      *
      */
-    _startLoadLoop: function () {
-        if ((this.isMounted()) && (!this.props.loaded) && (!this.timerId)) {
+    _startLoadLoop = () => {
+        if (this._isMounted && !this.props.loaded && !this.timerId) {
             this._loadLoop();
         }
-    },
+    };
 
     /*
      * Attempt to load the data and schedule another timer to load the
      * data again.
      *
      */
-    _loadLoop: function () {
-        if (this.isMounted() && !this.props.loaded) {
+    _loadLoop = () => {
+        if (this._isMounted && !this.props.loaded) {
             //only call function if window is in focus
             if (this.state.allowPoll) {
                 this.props.load();
@@ -113,14 +118,14 @@ var BackgroundLoader = React.createClass({
         } else {
             this.timerId = null;
         }
-    },
+    };
 
     /*
      * Get the loading content, which can either be already rendered content
      * or a function to render the content.
      *
      */
-    _loadingContent: function () {
+    _loadingContent = () => {
         if (this.props.loading) {
             if ((typeof this.props.loading) === "function") {
                 return this.props.loading();
@@ -128,7 +133,7 @@ var BackgroundLoader = React.createClass({
                 return this.props.loading;
             }
         }
-    },
+    };
 
     /*
      * Determine the interval between load calls.
@@ -137,7 +142,7 @@ var BackgroundLoader = React.createClass({
      * the prop.
      *
      */
-    _getInterval: function () {
+    _getInterval = () => {
         var interval;
         if (this.props.interval) {
             if ((typeof this.props.interval) === "function") {
@@ -147,55 +152,50 @@ var BackgroundLoader = React.createClass({
             }
         }
         return (interval > 2000) ? interval : 2000;
-    },
+    };
 
-    getInitialState: function () {
-        return {
-            hidden: "hidden",
-            allowPoll: true
-        };
-    },
-
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             console.warn("** This component is deprecated and will be removed in the next release. " +
             "There is no direct replacement. Timer based polling or other timer related activities is better to be " +
             "implemented on middleware/actions/reducers layer.");
         }
-    },
+    }
 
     /*
      * When we mount we start trying to load the data.
      *
      */
-    componentDidMount: function () {
+    componentDidMount() {
+        this._isMounted = true;
         this._startLoadLoop();
         this.initHidden();
-    },
+    }
 
     /*
      * Listen for the data to have been loaded.
      *
      */
-    componentWillReceiveProps: function (nextProps) {
+    componentWillReceiveProps(nextProps) {
         if (!this.props.loaded && nextProps.loaded) {
             this._clearTimeout();
         }
-    },
+    }
 
     /*
      * Clear timers when we unmount so we do not leave any
      * memory leaks or un-expected behaviour lurking.
      *
      */
-    componentWillUnmount: function () {
+    componentWillUnmount() {
         this._clearTimeout();
-    },
+        this._isMounted = false;
+    }
 
     /*
      * When document is not in focus, do not allow any calls to the function to load the data
      */
-    changeHidden: function (evt) {
+    changeHidden = (evt) => {
         var evtMap = {
             focus: true,
             focusin: true,
@@ -205,7 +205,7 @@ var BackgroundLoader = React.createClass({
             pagehide: false
         };
 
-        if (this.isMounted()) {
+        if (this._isMounted) {
             evt = evt || window.event;
             if (evt.type in evtMap) {
                 this.setState({ allowPoll: evtMap[evt.type] });
@@ -214,14 +214,13 @@ var BackgroundLoader = React.createClass({
                 this.setState({ allowPoll: (document[this.state.hidden] ? false : true) });
             }
         }
-    },
-
+    }
     /*
      * Set the initial page focus state, based on whether
      * the browser window is in focus or not.
      *
      */
-    initHidden: function () {
+    initHidden = () => {
         var hidden = null;
 
         // Standards:
@@ -258,9 +257,9 @@ var BackgroundLoader = React.createClass({
         if (hidden !== null && document[hidden] !== undefined) {
             this.changeHidden({ type: document[hidden] ? "blur" : "focus" });
         }
-    },
+    }
 
-    render: function () {
+    render () {
 
         var content;
         if (this.props.loaded) {
@@ -279,6 +278,6 @@ var BackgroundLoader = React.createClass({
             return null;
         }
     }
-});
+}
 
 module.exports = BackgroundLoader;

@@ -1,7 +1,8 @@
 "use strict";
 
-var React = require("re-react"),
-    ReactVanilla = require("re-react"),
+var PropTypes = require("prop-types");
+
+var React = require("react"),
     classnames = require("classnames"),
     _ = require("underscore"),
     DetailsTooltip = require("../../tooltips/DetailsTooltip.jsx"),
@@ -48,30 +49,30 @@ var ConfirmDeletePositions = {
  *     Current expanded/collapsed state.
  */
 
- /**
- * @callback ExpandableRow~onEditButtonClick
- *
- * @param {object} e
- *    The ReactJS synthetic event object.
- */
+/**
+* @callback ExpandableRow~onEditButtonClick
+*
+* @param {object} e
+*    The ReactJS synthetic event object.
+*/
 
- /**
- * @callback ExpandableRow~onDelete
- */
+/**
+* @callback ExpandableRow~onDelete
+*/
 
- /**
- * @callback ExpandableRow~onDeleteCancelClick
- *
- * @param {object} e
- *    The ReactJS synthetic event object.
- */
+/**
+* @callback ExpandableRow~onDeleteCancelClick
+*
+* @param {object} e
+*    The ReactJS synthetic event object.
+*/
 
- /**
- * @callback ExpandableRow~onDeleteConfirmClick
- *
- * @param {object} e
- *    The ReactJS synthetic event object.
- */
+/**
+* @callback ExpandableRow~onDeleteConfirmClick
+*
+* @param {object} e
+*    The ReactJS synthetic event object.
+*/
 
 /**
  * @class ExpandableRow
@@ -196,28 +197,25 @@ var ConfirmDeletePositions = {
  *         </ExpandableRow>
  */
 
-var ExpandableRow = ReactVanilla.createClass({
+class ExpandableRow extends React.Component {
+    static displayName = "ExpandableRow";
 
-    displayName: "ExpandableRow",
+    static propTypes = {
+        controlled: PropTypes.bool, //TODO: remove in new version
+        stateless: PropTypes.bool
+    };
 
-    propTypes: {
-        controlled: React.PropTypes.bool, //TODO: remove in new version
-        stateless: React.PropTypes.bool
-    },
+    static defaultProps = {
+        controlled: false //TODO: change to stateless prop in new version
+    };
 
-    getDefaultProps: function () {
-        return {
-            controlled: false //TODO: change to stateless prop in new version
-        };
-    },
-
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("controlled", "stateless"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
 
         return stateless
@@ -226,26 +224,29 @@ var ExpandableRow = ReactVanilla.createClass({
             : React.createElement(StatefulExpandableRow, //eslint-disable-line no-use-before-define
                 _.defaults({ ref: "StatefulExpandableRow" }, this.props), this.props.children);
     }
-});
+}
 
-var StatefulExpandableRow = ReactVanilla.createClass({
+class StatefulExpandableRow extends React.Component {
+    static displayName = "StatefulExpandableRow";
 
-    displayName: "StatefulExpandableRow",
+    static propTypes = {
+        defaultToExpanded: PropTypes.bool,
+        showDeleteConfirm: PropTypes.bool
+    };
 
-    propTypes: {
-        defaultToExpanded: React.PropTypes.bool,
-        showDeleteConfirm: React.PropTypes.bool
-    },
+    static defaultProps = {
+        defaultToExpanded: false,
+        showDeleteConfirm: false,
+        expanded: false
+    };
 
-    getDefaultProps: function () {
-        return {
-            defaultToExpanded: false,
-            showDeleteConfirm: false,
-            expanded: false
-        };
-    },
+    state = {
+        //TODO: remove defaultToExpanded when v1 no longer supported
+        expanded: this.props.defaultToExpanded || this.props.expanded,
+        showDeleteConfirm: this.props.showDeleteConfirm
+    };
 
-    _handleToggle: function () {
+    _handleToggle = () => {
         if (typeof(this.props.onToggle) === "function") {
             this.props.onToggle(!this.state.expanded);
         }
@@ -253,22 +254,22 @@ var StatefulExpandableRow = ReactVanilla.createClass({
         this.setState({
             expanded: !this.state.expanded
         });
-    },
+    };
 
-    _hideDeleteConfirm: function () {
+    _hideDeleteConfirm = () => {
         this.setState({
             showDeleteConfirm: false
         });
-    },
+    };
 
-    _handleDeleteConfirm: function () {
+    _handleDeleteConfirm = () => {
         this._hideDeleteConfirm();
         if (this.props.onDelete) {
             this.props.onDelete();
         }
-    },
+    };
 
-    _handleDelete: function () {
+    _handleDelete = () => {
         if (!this.props.confirmDelete && this.props.onDelete) {
             this.props.onDelete();
         } else {
@@ -276,17 +277,9 @@ var StatefulExpandableRow = ReactVanilla.createClass({
                 showDeleteConfirm: true
             });
         }
-    },
+    };
 
-    getInitialState: function () {
-        return {
-            //TODO: remove defaultToExpanded when v1 no longer supported
-            expanded: this.props.defaultToExpanded || this.props.expanded,
-            showDeleteConfirm: this.props.showDeleteConfirm
-        };
-    },
-
-    render: function () {
+    render() {
         var props = _.defaults({
             ref: "StatelessExpandableRow",
             expanded: this.state.expanded,
@@ -299,98 +292,94 @@ var StatefulExpandableRow = ReactVanilla.createClass({
 
         return React.createElement(StatelessExpandableRow, props, this.props.children); //eslint-disable-line no-use-before-define
     }
-});
+}
 
+class StatelessExpandableRow extends React.Component {
+    static displayName = "StatelessExpandableRow";
 
-var StatelessExpandableRow = React.createClass({
-
-    displayName: "StatelessExpandableRow",
-
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        id: React.PropTypes.oneOfType([ //TODO: remove id when v1 no longer supported
-            React.PropTypes.number,
-            React.PropTypes.string
+    static propTypes = {
+        "data-id": PropTypes.string,
+        id: PropTypes.oneOfType([ //TODO: remove id when v1 no longer supported
+            PropTypes.number,
+            PropTypes.string
         ]),
-        className: React.PropTypes.string.affectsRendering,
-        expanded: React.PropTypes.bool.affectsRendering,
-        onToggle: React.PropTypes.func,
-        title: React.PropTypes.oneOfType([
-            React.PropTypes.object,
-            React.PropTypes.string
-        ]).affectsRendering,
-        titleClassName: React.PropTypes.string.affectsRendering,
-        subtitle: React.PropTypes.oneOfType([
-            React.PropTypes.object,
-            React.PropTypes.string
-        ]).affectsRendering,
-        image: React.PropTypes.string.affectsRendering,
-        icon: React.PropTypes.string.affectsRendering,
-        children: React.PropTypes.node.affectsRendering,
-        content: React.PropTypes.object.affectsRendering,
-        editViewRoute: React.PropTypes.string.affectsRendering,
-        isEditEnabled: React.PropTypes.bool.affectsRendering,
-        showEdit: React.PropTypes.bool.affectsRendering,
-        editButton: React.PropTypes.object.affectsRendering,
-        onEditButtonClick: React.PropTypes.func,
-        showDelete: React.PropTypes.bool.affectsRendering,
-        deleteButton: React.PropTypes.object.affectsRendering,
-        onDelete: React.PropTypes.func,
-        labelDeleteConfirm: React.PropTypes.string.affectsRendering,
-        confirmDelete: React.PropTypes.bool.affectsRendering,
-        confirmDeletePosition: React.PropTypes.string.affectsRendering,
-        confirmDeleteContent: React.PropTypes.object.affectsRendering,
-        showDeleteConfirm: React.PropTypes.bool.affectsRendering,
-        onDeleteCancelClick: React.PropTypes.func,
-        onDeleteConfirmClick: React.PropTypes.func,
-        status: React.PropTypes.oneOf([Statuses.GOOD, Statuses.ERROR, Statuses.WARNING]).affectsRendering,
-        rowAccessories: React.PropTypes.object.affectsRendering,
-        rowMessage: React.PropTypes.oneOf([RowMessageTypes.WARNING]).affectsRendering,
-        waiting: React.PropTypes.bool.affectsRendering
-    },
+        className: PropTypes.string,
+        expanded: PropTypes.bool,
+        onToggle: PropTypes.func,
+        title: PropTypes.oneOfType([
+            PropTypes.object,
+            PropTypes.string
+        ]),
+        titleClassName: PropTypes.string,
+        subtitle: PropTypes.oneOfType([
+            PropTypes.object,
+            PropTypes.string
+        ]),
+        image: PropTypes.string,
+        icon: PropTypes.string,
+        children: PropTypes.node,
+        content: PropTypes.object,
+        editViewRoute: PropTypes.string,
+        isEditEnabled: PropTypes.bool,
+        showEdit: PropTypes.bool,
+        editButton: PropTypes.object,
+        onEditButtonClick: PropTypes.func,
+        showDelete: PropTypes.bool,
+        deleteButton: PropTypes.object,
+        onDelete: PropTypes.func,
+        labelDeleteConfirm: PropTypes.string,
+        confirmDelete: PropTypes.bool,
+        confirmDeletePosition: PropTypes.string,
+        confirmDeleteContent: PropTypes.object,
+        showDeleteConfirm: PropTypes.bool,
+        onDeleteCancelClick: PropTypes.func,
+        onDeleteConfirmClick: PropTypes.func,
+        status: PropTypes.oneOf([Statuses.GOOD, Statuses.ERROR, Statuses.WARNING]),
+        rowAccessories: PropTypes.object,
+        rowMessage: PropTypes.oneOf([RowMessageTypes.WARNING]),
+        waiting: PropTypes.bool
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "expandable-row",
-            expanded: false,
-            editViewRoute: "",
-            isEditEnabled: true,
-            showEdit: true,
-            onEditButtonClick: _.noop,
-            showDelete: true,
-            onDelete: _.noop,
-            confirmDelete: false,
-            confirmDeletePosition: ConfirmDeletePositions.BOTTOM,
-            showDeleteConfirm: false,
-            onDeleteCancelClick: _.noop,
-            onDeleteConfirmClick: _.noop,
-            waiting: false,
-        };
-    },
+    static defaultProps = {
+        "data-id": "expandable-row",
+        expanded: false,
+        editViewRoute: "",
+        isEditEnabled: true,
+        showEdit: true,
+        onEditButtonClick: _.noop,
+        showDelete: true,
+        onDelete: _.noop,
+        confirmDelete: false,
+        showDeleteConfirm: false,
+        confirmDeletePosition: ConfirmDeletePositions.BOTTOM,
+        onDeleteCancelClick: _.noop,
+        onDeleteConfirmClick: _.noop,
+        waiting: false,
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (this.props.defaultToExpanded && !Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("defaultToExpanded", "expanded"));
         }
-    },
+    }
 
     /**
      * Propagate expanded/collapse toggle event to owner.
      *
      * @private
      */
-    _handleExpandButtonClick: function () {
+    _handleExpandButtonClick = () => {
         if (this.props.onToggle) {
             this.props.onToggle(this.props.expanded);
         }
-    },
+    };
 
     /*
      * PingAccess guys need the ability to specify a non-hash route to edit rows.  In order to maintain
      * backwards compatibility, the component will only skip adding a hash to the edit url if the editViewRoute
      * starts with a '/'.
      */
-    _getEditViewRoute: function (route) {
+    _getEditViewRoute = (route) => {
         if (!route) {
             return null;
         }
@@ -398,9 +387,9 @@ var StatelessExpandableRow = React.createClass({
             return route;
         }
         return "#/" + route;
-    },
+    };
 
-    render: function () {
+    render() {
         var showEditIcon = this.props.showEdit && this.props.isEditEnabled,
             showViewIcon = this.props.showEdit && !this.props.isEditEnabled,
             containerClassname = classnames("item", this.props.className, {
@@ -495,20 +484,25 @@ var StatelessExpandableRow = React.createClass({
             </div>
         );
     }
-});
+}
 
-var ConfirmDeleteDialog = ReactVanilla.createClass({
+class ConfirmDeleteDialog extends React.Component {
+    static displayName = "ConfirmDeleteDialog";
 
-    displayName: "ConfirmDeleteDialog",
+    static propTypes = {
+        confirmDeletePosition: PropTypes.string,
+        label: PropTypes.string,
+        onCancel: PropTypes.func,
+        onDeleteConfirm: PropTypes.func
+    };
 
-    propTypes: {
-        confirmDeletePosition: React.PropTypes.string,
-        label: React.PropTypes.string,
-        onCancel: React.PropTypes.func,
-        onDeleteConfirm: React.PropTypes.func
-    },
+    static defaultProps = {
+        label: "",
+        onCancel: _.noop,
+        onDeleteConfirm: _.noop,
+    };
 
-    _renderTooltipContent: function () {
+    _renderTooltipContent = () => {
         if (this.props.children) {
             return this.props.children;
         } else {
@@ -536,17 +530,9 @@ var ConfirmDeleteDialog = ReactVanilla.createClass({
                 </div>
             );
         }
-    },
+    };
 
-    getDefaultProps: function () {
-        return {
-            label: "",
-            onCancel: _.noop,
-            onDeleteConfirm: _.noop
-        };
-    },
-
-    render: function () {
+    render() {
         return (
             <DetailsTooltip
                 positionClassName={classnames("left", this.props.confirmDeletePosition)}
@@ -559,7 +545,7 @@ var ConfirmDeleteDialog = ReactVanilla.createClass({
             </DetailsTooltip>
         );
     }
-});
+}
 
 ExpandableRow.Statuses = Statuses;
 ExpandableRow.RowMessageTypes = RowMessageTypes;

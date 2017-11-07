@@ -1,5 +1,7 @@
 "use strict";
 
+var PropTypes = require("prop-types");
+
 var React = require("react"),
     classnames = require("classnames");
 
@@ -68,14 +70,14 @@ var Link = function (props) {
 };
 
 Link.propTypes = {
-    "data-id": React.PropTypes.string,
-    icon: React.PropTypes.string,
-    count: React.PropTypes.string,
-    url: React.PropTypes.string,
-    title: React.PropTypes.string,
-    disabled: React.PropTypes.bool,
-    onClick: React.PropTypes.func,
-    className: React.PropTypes.string
+    "data-id": PropTypes.string,
+    icon: PropTypes.string,
+    count: PropTypes.string,
+    url: PropTypes.string,
+    title: PropTypes.string,
+    disabled: PropTypes.bool,
+    onClick: PropTypes.func,
+    className: PropTypes.string
 };
 
 Link.defaultProps = {

@@ -1,7 +1,8 @@
 "use strict";
 
-var React = require("re-react"),
-    ReactVanilla = require("react"),
+var PropTypes = require("prop-types");
+
+var React = require("react"),
     _ = require("underscore"),
     Utils = require("../../util/Utils"),
     Modal = require("./Modal.jsx");
@@ -122,69 +123,67 @@ var React = require("re-react"),
  *     </ModalButton>
  */
 
-var ModalButtonStateless = ReactVanilla.createClass({
-    displayName: "ModalButtonStateless",
+class ModalButtonStateless extends React.Component {
+    static displayName = "ModalButtonStateless";
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        id: React.PropTypes.string,
+    static propTypes = {
+        "data-id": PropTypes.string,
+        id: PropTypes.string,
 
-        className: React.PropTypes.string,
-        containerStyle: React.PropTypes.string,
+        className: PropTypes.string,
+        containerStyle: PropTypes.string,
 
-        expanded: React.PropTypes.bool,
+        expanded: PropTypes.bool,
 
-        onOpen: React.PropTypes.func.isRequired,
-        onClose: React.PropTypes.func.isRequired,
-        closeOnBgClick: React.PropTypes.bool,
+        onOpen: PropTypes.func.isRequired,
+        onClose: PropTypes.func.isRequired,
+        closeOnBgClick: PropTypes.bool,
 
         // ModalButton only props
-        inline: React.PropTypes.bool,
-        disabled: React.PropTypes.bool,
+        inline: PropTypes.bool,
+        disabled: PropTypes.bool,
 
-        activatorContainerClassName: React.PropTypes.string,
-        activatorContainerStyle: React.PropTypes.string,
+        activatorContainerClassName: PropTypes.string,
+        activatorContainerStyle: PropTypes.string,
 
-        activatorContent: React.PropTypes.any,
-        linkContent: React.PropTypes.any,
-        activatorContentClassName: React.PropTypes.string,
-        linkStyle: React.PropTypes.string,
+        activatorContent: PropTypes.any,
+        linkContent: PropTypes.any,
+        activatorContentClassName: PropTypes.string,
+        linkStyle: PropTypes.string,
 
-        activatorButtonLabel: React.PropTypes.string,
-        value: React.PropTypes.string,
-        activatorButtonClassName: React.PropTypes.string,
-        buttonStyle: React.PropTypes.string,
+        activatorButtonLabel: PropTypes.string,
+        value: PropTypes.string,
+        activatorButtonClassName: PropTypes.string,
+        buttonStyle: PropTypes.string,
 
         // Modal/ModalButton props (passed through to modal component)
-        modalClassName: React.PropTypes.string,
-        modalTitle: React.PropTypes.string,
-        modalBody: React.PropTypes.func,
-        showHeader: React.PropTypes.bool,
-        maximize: React.PropTypes.bool,
-        type: React.PropTypes.string
-    },
+        modalClassName: PropTypes.string,
+        modalTitle: PropTypes.string,
+        modalBody: PropTypes.func,
+        showHeader: PropTypes.bool,
+        maximize: PropTypes.bool,
+        type: PropTypes.string
+    };
 
-    childContextTypes: {
-        close: React.PropTypes.func
-    },
+    static childContextTypes = {
+        close: PropTypes.func
+    };
 
-    close: function () {
+    static defaultProps = {
+        "data-id": "modal-button",
+        expanded: false,
+        inline: false,
+        disabled: false,
+        showHeader: true,
+        maximize: false,
+        type: Modal.Type.BASIC
+    };
+
+    close = () => {
         this.props.onClose();
-    },
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "modal-button",
-            expanded: false,
-            inline: false,
-            disabled: false,
-            showHeader: true,
-            maximize: false,
-            type: Modal.Type.BASIC
-        };
-    },
-
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
                 console.warn(Utils.deprecateMessage("id", "data-id"));
@@ -208,9 +207,9 @@ var ModalButtonStateless = ReactVanilla.createClass({
                 console.warn(Utils.deprecateMessage("buttonStyle", "activatorButtonClassName"));
             }
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var id = this.props.id || this.props["data-id"];
 
         var activator = (
@@ -271,23 +270,46 @@ var ModalButtonStateless = ReactVanilla.createClass({
             [activator, modal]
         );
     }
-});
+}
 
-var ModalButtonStateful = ReactVanilla.createClass({
-    displayName: "ModalButtonStateful",
+class ModalButtonStateful extends React.Component {
+    static displayName = "ModalButtonStateful";
 
-    propTypes: {
-        initiallyExpanded: React.PropTypes.bool,
-        expanded: React.PropTypes.bool,
-        onOpen: React.PropTypes.func,
-        onClose: React.PropTypes.func
-    },
+    static propTypes = {
+        initiallyExpanded: PropTypes.bool,
+        expanded: PropTypes.bool,
+        onOpen: PropTypes.func,
+        onClose: PropTypes.func
+    };
+
+    static defaultProps = {
+        initiallyExpanded: false
+    };
+
+    constructor(props) {
+        super(props);
+        // TODO - in a future version, the initiallyExpanded prop should be removed
+        // and the expanded prop (used with a stateless modal) should mean the initial expanded state;
+        // in that case, replace the code below with just:
+        // return { expanded: this.props.expanded };
+
+        var expanded = props.initiallyExpanded;
+
+        // this code should not be here, but I am keeping it for backwards compatibility
+        if (typeof(props.expanded) !== "undefined" && props.expanded !== null) {
+            expanded = !!props.expanded;
+        }
+
+        this.state = {
+            expanded: expanded
+        };
+    }
 
     /*
      * Expand the modal if it is not already expanded,
      * triggered by clicking on the modal button.
      */
-    _handleOpen: function () {
+    _handleOpen = () => {
         if (!this.props.disabled && !this._isExpanded()) {
             if (this.props.onOpen) {
                 this.props.onOpen();
@@ -297,13 +319,13 @@ var ModalButtonStateful = ReactVanilla.createClass({
                 expanded: true
             });
         }
-    },
+    };
 
     /*
      * Close the modal if it is expanded,
      * triggered by clicking the close modal button.
      */
-    _handleClose: function () {
+    _handleClose = () => {
         if (!this.props.disabled && this._isExpanded()) {
             var doClose = this.props.onClose ? this.props.onClose() : true;
 
@@ -314,13 +336,13 @@ var ModalButtonStateful = ReactVanilla.createClass({
                 });
             }
         }
-    },
+    };
 
     /*
      * Since the expanded flag can be provided through props
      * (as on override of the local state attribute), check both.
      */
-    _isExpanded: function () {
+    _isExpanded = () => {
         // TODO - in a future version, where the expanded property on the stateful modal button
         // means the initial expanded state, replace the code below with just:
         // return this.state.expanded;
@@ -330,37 +352,9 @@ var ModalButtonStateful = ReactVanilla.createClass({
         } else {
             return this.state.expanded;
         }
-    },
+    };
 
-    getDefaultProps: function () {
-        return {
-            initiallyExpanded: false
-        };
-    },
-
-    /*
-     * Since the expanded flag can be provided through props
-     * (as an override of the local state attribute), check both.
-     */
-    getInitialState: function () {
-        // TODO - in a future version, the initiallyExpanded prop should be removed
-        // and the expanded prop (used with a stateless modal) should mean the initial expanded state;
-        // in that case, replace the code below with just:
-        // return { expanded: this.props.expanded };
-
-        var expanded = this.props.initiallyExpanded;
-
-        // this code should not be here, but I am keeping it for backwards compatibility
-        if (typeof(this.props.expanded) !== "undefined" && this.props.expanded !== null) {
-            expanded = !!this.props.expanded;
-        }
-
-        return {
-            expanded: expanded
-        };
-    },
-
-    render: function () {
+    render() {
         var expanded = this._isExpanded();
 
         var props = _.defaults(
@@ -376,29 +370,27 @@ var ModalButtonStateful = ReactVanilla.createClass({
 
         return React.createElement(ModalButtonStateless, props);
     }
-});
+}
 
-var ModalButton = React.createClass({
-    displayName: "ModalButton",
+class ModalButton extends React.Component {
+    static displayName = "ModalButton";
 
-    propTypes: {
-        controlled: React.PropTypes.bool, //TODO: remove in new version
-        stateless: React.PropTypes.bool
-    },
+    static propTypes = {
+        controlled: PropTypes.bool, //TODO: remove in new version
+        stateless: PropTypes.bool
+    };
 
-    getDefaultProps: function () {
-        return {
-            controlled: false //TODO: change to stateless in new version
-        };
-    },
+    static defaultProps = {
+        controlled: false //TODO: change to stateless in new version
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("controlled", "stateless"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
 
         return (
@@ -413,8 +405,7 @@ var ModalButton = React.createClass({
                 )
         );
     }
-});
-
+}
 
 /**
 * @callback ModalButton#ModalActivator~onOpen
@@ -459,36 +450,34 @@ var ModalButton = React.createClass({
  * @param {boolean} [disabled=false]
  *     Whether to disable the activator.
  */
-var ModalActivator = React.createClass({
-    displayName: "ModalActivator",
+class ModalActivator extends React.Component {
+    static displayName = "ModalActivator";
 
-    propTypes: {
-        "data-id": React.PropTypes.string.affectsRendering,
-        containerClassName: React.PropTypes.string.affectsRendering,
-        content: React.PropTypes.any.affectsRendering,
-        contentClassName: React.PropTypes.string.affectsRendering,
-        buttonLabel: React.PropTypes.string.affectsRendering,
-        buttonLabelClassName: React.PropTypes.string.affectsRendering,
-        onOpen: React.PropTypes.func.isRequired,
-        disabled: React.PropTypes.bool.affectsRendering
-    },
+    static propTypes = {
+        "data-id": PropTypes.string,
+        containerClassName: PropTypes.string,
+        content: PropTypes.any,
+        contentClassName: PropTypes.string,
+        buttonLabel: PropTypes.string,
+        buttonLabelClassName: PropTypes.string,
+        onOpen: PropTypes.func.isRequired,
+        disabled: PropTypes.bool
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "modal-activator",
-            labelClassName: "default",
-            disabled: false
-        };
-    },
+    static defaultProps = {
+        "data-id": "modal-activator",
+        labelClassName: "default",
+        disabled: false
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (this.props.content && this.props.buttonLabel && !Utils.isProduction()) {
             global.console.warn("Only one of ('content', 'buttonLabel') is required");
         }
         // no warning for not providing any of the two; the rendering will fail
-    },
+    }
 
-    render: function () {
+    render() {
         var activator = null;
 
         if (this.props.content) {
@@ -528,7 +517,7 @@ var ModalActivator = React.createClass({
 
         return activator;
     }
-});
+}
 
 ModalButton.Modal = Modal;
 

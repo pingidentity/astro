@@ -7,14 +7,15 @@ var React = require("react"),
 * @memberof Pagination
 * @desc A demo for Pagination
 */
-var PaginationDemo = React.createClass({
-
-    getInitialState: function () {
+class PaginationDemo extends React.Component {
+    constructor(props) {
+        super(props);
         var items = [];
         for (var i = 0; i < 100; i = i + 1) {
-            items.push(<ExpandableRow title = {"Entry " + (i + 1)} key = {i}/>);
+            items.push(<ExpandableRow title = {"Entry " + (i + 1)} data-id={"expandable-row" + i} key = {i}/>);
         }
-        return {
+
+        this.state = {
             total: items.length,
             perPage: 5,
             items: items,
@@ -23,18 +24,18 @@ var PaginationDemo = React.createClass({
             last: 5,
             currentPage: 1
         };
-    },
+    }
 
-    _changeCallback: function (pagingDetails) {
+    _changeCallback = (pagingDetails) => {
         this.setState({
             display: this.state.items.slice(pagingDetails.first,pagingDetails.last),
             first: pagingDetails.first,
             last: pagingDetails.last,
             currentPage: pagingDetails.page
         });
-    },
+    };
 
-    render: function () {
+    render() {
 
         return (
             <div>
@@ -55,6 +56,6 @@ var PaginationDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = PaginationDemo;

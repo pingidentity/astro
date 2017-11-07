@@ -4,7 +4,7 @@ jest.dontMock("../ColumnLayout.jsx");
 
 describe("Row", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         Layout = require("../ColumnLayout.jsx"),
         TestUtils = require("../../../testutil/TestUtils");
 

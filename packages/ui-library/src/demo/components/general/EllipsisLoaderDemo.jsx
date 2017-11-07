@@ -6,38 +6,35 @@ var EllipsisLoader = require("./../../../components/general/EllipsisLoader.jsx")
 * @memberof EllipsisLoader
 * @desc A demo for EllipsisLoader
 */
-var EllipsisLoaderDemo = React.createClass({
-
-    getInitialState: function () {
-        return {
-            loading: false
-        };
-    },
+class EllipsisLoaderDemo extends React.Component {
+    state = {
+        loading: false
+    };
 
     /**
      * Set the loading flag to true, then call _finishLoading after 5000 ms.
      *
      * @private
      */
-    _load: function () {
+    _load = () => {
         this.setState({
             loading: true
         });
         window.setTimeout(this._finishLoading, 5000);
-    },
+    };
 
     /**
      * Set the loading flag to false.
      *
      * @private
      */
-    _finishLoading: function () {
+    _finishLoading = () => {
         this.setState({
             loading: false
         });
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <div>
                 <button type="button" onClick={this._load} >Load</button>
@@ -45,6 +42,6 @@ var EllipsisLoaderDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = EllipsisLoaderDemo;

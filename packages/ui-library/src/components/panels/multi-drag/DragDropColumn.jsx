@@ -1,4 +1,5 @@
-var React = require("re-react"),
+var PropTypes = require("prop-types");
+var React = require("react"),
     ReactDOM = require("react-dom"),
     FormSearchBox = require("../../forms/FormSearchBox.jsx"),
     FormLabel = require("../../forms/FormLabel.jsx"),
@@ -59,59 +60,57 @@ var React = require("re-react"),
  *    Callback to be triggered when a drag even ends.
  *
  */
-module.exports = React.createClass({
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        rows: React.PropTypes.arrayOf(
-            React.PropTypes.object
-        ).isRequired.affectsRendering,
-        name: React.PropTypes.string.isRequired.affectsRendering,
-        index: React.PropTypes.number.isRequired.affectsRendering,
-        filter: React.PropTypes.string.affectsRendering,
-        contentType: React.PropTypes.element.isRequired.affectsRendering,
-        labelEmpty: React.PropTypes.string.affectsRendering,
+module.exports = class extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        rows: PropTypes.arrayOf(
+            PropTypes.object
+        ).isRequired,
+        name: PropTypes.string.isRequired,
+        index: PropTypes.number.isRequired,
+        filter: PropTypes.string,
+        contentType: PropTypes.element.isRequired,
+        labelEmpty: PropTypes.string,
         // optional
-        showSearch: React.PropTypes.bool.affectsRendering,
-        ghostRowAt: React.PropTypes.number.affectsRendering,
-        className: React.PropTypes.string.affectsRendering,
-        disableSort: React.PropTypes.bool.affectsRendering,
-        dragToEdge: React.PropTypes.bool.affectsRendering,
+        showSearch: PropTypes.bool,
+        ghostRowAt: PropTypes.number,
+        className: PropTypes.string,
+        disableSort: PropTypes.bool,
+        dragToEdge: PropTypes.bool,
         // callbacks
-        onSearch: React.PropTypes.func.isRequired,
-        onDrag: React.PropTypes.func.isRequired,
-        onDrop: React.PropTypes.func.isRequired,
-        onCancel: React.PropTypes.func.isRequired,
-        onScrolledToBottom: React.PropTypes.func,
-        onScrolledToTop: React.PropTypes.func,
-        onDragStart: React.PropTypes.func,
-        onDragEnd: React.PropTypes.func
-    },
+        onSearch: PropTypes.func.isRequired,
+        onDrag: PropTypes.func.isRequired,
+        onDrop: PropTypes.func.isRequired,
+        onCancel: PropTypes.func.isRequired,
+        onScrolledToBottom: PropTypes.func,
+        onScrolledToTop: PropTypes.func,
+        onDragStart: PropTypes.func,
+        onDragEnd: PropTypes.func
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "drag-drop-column",
-            showSearch: false,
-            onScrolledToBottom: _.noop,
-            onScrolledToTop: _.noop,
-            labelEmpty: "No Items Added",
-            onDragStart: _.noop,
-            onDragEnd: _.noop,
-            dragToEdge: false
-        };
-    },
+    static defaultProps = {
+        "data-id": "drag-drop-column",
+        showSearch: false,
+        onScrolledToBottom: _.noop,
+        onScrolledToTop: _.noop,
+        labelEmpty: "No Items Added",
+        onDragStart: _.noop,
+        onDragEnd: _.noop,
+        dragToEdge: false
+    };
 
     /*
      * Since the multi-Drag component supports search in all columns, each column needs to report which
      * column a search affects.
      */
-    _handleSearch: function (value) {
+    _handleSearch = (value) => {
         this.props.onSearch(this.props.index, value);
-    },
+    };
 
     /*
      * Handler for scrolls.  This is useful for implementing lazy loading of rows
      */
-    _handleScroll: function () {
+    _handleScroll = () => {
         var container = ReactDOM.findDOMNode(this.refs.items);
         var rect = container.getBoundingClientRect();
 
@@ -120,12 +119,12 @@ module.exports = React.createClass({
         } else if (container.scrollTop + rect.height === container.scrollHeight) {
             this.props.onScrolledToBottom(this.props.index);
         }
-    },
+    };
 
     /*
      * Renders the searchbar if the prop is set
      */
-    _renderSearch: function () {
+    _renderSearch = () => {
         if (!this.props.showSearch) {
             return null;
         }
@@ -137,16 +136,16 @@ module.exports = React.createClass({
                     queryString={this.props.filter}
                     className="input-search"/>
             </div>);
-    },
+    };
 
     /*
      * Renders a drag/drop from give a data object
      */
-    _renderRow: function (row, index, opts) {
+    _renderRow = (row, index, opts) => {
         var inner = opts && opts.content;
 
         if (!inner) {
-            var props = _.extend({ column: this.props.index, index: index }, row);
+            var props = _.extend({ column: this.props.index, index: index, "data-id": row.id }, row);
             inner = React.cloneElement(this.props.contentType, props);
         }
 
@@ -164,9 +163,9 @@ module.exports = React.createClass({
                 inner
             }
             </DDRow>);
-    },
+    };
 
-    _renderRows: function () {
+    _renderRows = () => {
         if (!this.props.rows || this.props.rows.length === 0) {
             var className = classnames("no-items", {
                 preview: typeof(this.props.ghostRowAt) === "number"
@@ -191,9 +190,9 @@ module.exports = React.createClass({
         }
 
         return rows;
-    },
+    };
 
-    render: function () {
+    render() {
 
         var className = classnames(
             this.props.className, {
@@ -212,4 +211,4 @@ module.exports = React.createClass({
                 </div>
             </div>);
     }
-});
+};

@@ -3,6 +3,23 @@ var React = require("react"),
     Utils = require("../../util/Utils"),
     Step = require("./Step.jsx");
 
+var INHERIT_PROPS = [
+    "onEdit",
+    "onValueChange",
+    "onChange", // Deprecated - remove
+    "onNext",
+    "onDone",
+    "onCancel",
+    "labelNext",
+    "labelCancel",
+    "labelEdit",
+    "labelDone",
+    "choices",
+    "activeStep",
+    "numSteps",
+    "showPulsing"
+];
+
 /**
  * @callback Wizard#Choose~onEdit
  * @param {number} number
@@ -83,66 +100,49 @@ var React = require("react"),
  * </Choose>
  *
  */
-var Choose = React.createClass({
-    INHERIT_PROPS: [
-        "onEdit",
-        "onValueChange",
-        "onChange", // Deprecated - remove
-        "onNext",
-        "onDone",
-        "onCancel",
-        "labelNext",
-        "labelCancel",
-        "labelEdit",
-        "labelDone",
-        "choices",
-        "activeStep",
-        "numSteps",
-        "showPulsing"
-    ],
+class Choose extends React.Component {
+    static displayName = "Choose";
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "choose",
-            number: 1,
-            showPulsing: false
-        };
-    },
+    static defaultProps = {
+        "data-id": "choose",
+        number: 1,
+        showPulsing: false
+    };
 
-    _getChoice: function () {
+    _getChoice = () => {
         return this.props.choices && this.props.choices[this.props.number - 1];
-    },
+    };
 
-    _isComplete: function () {
+    _isComplete = () => {
         return this.props.choices.length >= this.props.number;
-    },
+    };
 
-    _getSelectedChild: function () {
+    _getSelectedChild = () => {
         if (typeof(this._getChoice()) === "undefined") {
             return undefined;
         }
 
         return React.Children.count(this.props.children) === 1
             ? this.props.children : this.props.children[this._getChoice()];
-    },
+    };
 
-    _getWizard: function () {
+    _getWizard = () => {
         var selectedChild = this._getSelectedChild();
 
         if (selectedChild) {
-            var props = _.pick(this.props, this.INHERIT_PROPS);
+            var props = _.pick(this.props, INHERIT_PROPS);
             props.number = this.props.number + 1;
 
             return React.cloneElement(selectedChild, props);
         }
-    },
+    };
 
-    _getChoiceTitle: function () {
+    _getChoiceTitle = () => {
         var selectedChild = this._getSelectedChild();
         return selectedChild ? selectedChild.props.title : "";
-    },
+    };
 
-    _getSubChildCount: function (i) {
+    _getSubChildCount = (i) => {
         var count = 0;
 
         React.Children.forEach(this.props.children[i].props.children, function (child) {
@@ -152,17 +152,17 @@ var Choose = React.createClass({
         });
 
         return count;
-    },
+    };
 
-    _getChangeHandler: function (choice, total) {
+    _getChangeHandler = (choice, total) => {
         if (this.props.onChange) { // DEPRECATED can remove
             return this.props.onChange.bind (null, choice, total);
         } else {
             return this.props.onValueChange.bind (null, { choice: choice, numSteps: total });
         }
-    },
+    };
 
-    _generateRadioOptions: function () {
+    _generateRadioOptions = () => {
         var choice = this._getChoice();
 
         return React.Children.map(this.props.children, function (e, i) {
@@ -183,9 +183,9 @@ var Choose = React.createClass({
                 return e;
             }
         }.bind(this));
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
                 console.warn(Utils.deprecateMessage("id", "data-id"));
@@ -194,12 +194,12 @@ var Choose = React.createClass({
                 console.warn(Utils.deprecateMessage("onChange", "onValueChange"));
             }
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var id = this.props.id || this.props["data-id"];
 
-        var props = _.pick(this.props, this.INHERIT_PROPS.concat(["number", "title"]));
+        var props = _.pick(this.props, INHERIT_PROPS.concat(["number", "title"]));
         props.active = this.props.activeStep === this.props.number;
         props.completed = this.props.choices && (this.props.choices.length >= this.props.number);
         props.total = this.props.numSteps;
@@ -208,11 +208,13 @@ var Choose = React.createClass({
 
         return (
             <div data-id={id} className={this.props.className}>
-                { React.createElement(Step, props, this._generateRadioOptions()) }
+                { <Step {...props}>
+                    {this._generateRadioOptions()}
+                </Step> }
                 { this._getWizard() }
             </div>
         );
     }
-});
+}
 
 module.exports = Choose;

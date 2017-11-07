@@ -3,7 +3,7 @@ jest.dontMock("../DataSourceApi");
 var api;
 var callback;
 var cacheGet, cachePatch, cachePut, cacheClear;
-var superagent;
+var superagent = require("superagent");
 var response;
 
 
@@ -20,15 +20,24 @@ var verifyResponse = function (responseCallback, expectedResponse, expectedCache
 };
 
 describe("DataSourceApi", function () {
+    callback = jest.genMockFunction();
+
+    // by default no request exists in the cache
+    cacheGet = jest.genMockFunction();
+    cachePatch = jest.genMockFunction().mockReturnValue(true);
+    cachePut = jest.genMockFunction().mockReturnValue(true);
+    cacheClear = jest.genMockFunction();
 
     beforeEach(function () {
-        callback = jest.genMockFunction();
+        callback.mockReset();
+        cacheGet.mockReset();
+        cachePatch.mockReset();
+        cachePut.mockReset();
+        cacheClear.mockReset();
 
-        // by default no request exists in the cache
-        cacheGet = jest.genMockFunction();
-        cachePatch = jest.genMockFunction().mockReturnValue(true);
-        cachePut = jest.genMockFunction().mockReturnValue(true);
-        cacheClear = jest.genMockFunction();
+        //reset the super agent mocks
+        jest.clearAllMocks();
+
 
         // configure the cache mock instance, to allow controlling the cache mock
         var cacheExports = function () {
@@ -42,7 +51,6 @@ describe("DataSourceApi", function () {
         api = require("../DataSourceApi");
 
         // allow customizing the superagent mock/response (I need it for mocking response w/ errors)
-        superagent = require("superagent");
         response = {
             status: 200,
             body: "value",

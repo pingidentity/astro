@@ -1,5 +1,7 @@
 "use strict";
 
+var PropTypes = require("prop-types");
+
 var React = require("react"),
     ReactDOM = require("react-dom"),
     classnames = require("classnames"),
@@ -16,13 +18,13 @@ placeholder.className = "placeholder";
  * @private
  * @ignore
  **/
-var MultivaluesOption = React.createClass({
+class MultivaluesOption extends React.Component {
+    static propTypes = {
+        label: PropTypes.string.isRequired,
+        onChange: PropTypes.func.isRequired
 
-    propTypes: {
-        label: React.PropTypes.string.isRequired,
-        onChange: React.PropTypes.func.isRequired
+    };
 
-    },
     /**
     * Passes entry index to delete function
     *
@@ -31,12 +33,12 @@ var MultivaluesOption = React.createClass({
     * @private
     * @ignore
     */
-    _delete: function (e) {
+    _delete = (e) => {
         var id = e.target.id;
         this.props.onDelete(id);
-    },
+    };
 
-    render: function () {
+    render() {
 
         return (
             <label data-id={this.props.id} className="entry">
@@ -48,8 +50,7 @@ var MultivaluesOption = React.createClass({
             </label>
         );
     }
-});
-
+}
 
 /**
  * @deprecated
@@ -59,12 +60,12 @@ var MultivaluesOption = React.createClass({
  *     Array of strings, contains new list of entries.
  */
 
- /**
- * @callback Multivalues~onValueChange
- *
- * @param {arrray<string>} newValues
- *     Array of strings, contains new list of entries.
- */
+/**
+* @callback Multivalues~onValueChange
+*
+* @param {arrray<string>} newValues
+*     Array of strings, contains new list of entries.
+*/
 
 /**
  * @callback Multivalues~onNewValue
@@ -117,43 +118,38 @@ var MultivaluesOption = React.createClass({
  *
  **/
 
-var Multivalues = React.createClass({
+class Multivalues extends React.Component {
+    static displayName = "Multivalues";
 
-    displayName: "Multivalues",
+    static propTypes = {
+        "data-id": PropTypes.string,
+        id: PropTypes.string, //TODO: remove when v1 no longer supported.
+        className: PropTypes.string,
+        entries: PropTypes.arrayOf(PropTypes.string),
+        onValueChange: PropTypes.func, //TODO: mark as required when onChange has been removed.
+        onChange: PropTypes.func, //TODO: remove when v1 no longer supported.
+        onNewValue: PropTypes.func,
+        required: PropTypes.bool,
+        isRequired: PropTypes.bool //TODO: remove when v1 no longer supported.
+    };
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        id: React.PropTypes.string, //TODO: remove when v1 no longer supported.
-        className: React.PropTypes.string,
-        entries: React.PropTypes.arrayOf(React.PropTypes.string),
-        onValueChange: React.PropTypes.func, //TODO: mark as required when onChange has been removed.
-        onChange: React.PropTypes.func, //TODO: remove when v1 no longer supported.
-        onNewValue: React.PropTypes.func,
-        required: React.PropTypes.bool,
-        isRequired: React.PropTypes.bool //TODO: remove when v1 no longer supported.
-    },
-
-    getInitialState: function () {
-        return {
-            inputWidth: "20px"
-        };
-    },
-
-    getDefaultProps: function () {
-        return {
-            "data-id": "multivalues",
-            entries: [],
-            required: false,
-            onNewValue: function (keyCode) {
-                if (keyCode === 13 || keyCode === 188 || keyCode === 9 || keyCode === 32) {
-                    return true;
-                }
-                return false;
+    static defaultProps = {
+        "data-id": "multivalues",
+        entries: [],
+        required: false,
+        onNewValue: function (keyCode) {
+            if (keyCode === 13 || keyCode === 188 || keyCode === 9 || keyCode === 32) {
+                return true;
             }
-        };
-    },
+            return false;
+        }
+    };
 
-    componentWillMount: function () {
+    state = {
+        inputWidth: "20px"
+    };
+
+    componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
                 console.warn(Utils.deprecateMessage("id", "data-id"));
@@ -165,7 +161,7 @@ var Multivalues = React.createClass({
                 console.warn(Utils.deprecateMessage("isRequired", "required"));
             }
         }
-    },
+    }
 
     /**
     * Dynamically expand the input as the user types
@@ -174,7 +170,7 @@ var Multivalues = React.createClass({
     * @param {object} e - the event
     * @private
     */
-    _handleChange: function (e) {
+    _handleChange = (e) => {
         //Sets the html of a hidden div to calculate exact pixel width of the input string
         var hidden = ReactDOM.findDOMNode(this.refs["hidden-div"]);
         hidden.innerHTML = e.target.value;
@@ -184,14 +180,14 @@ var Multivalues = React.createClass({
         var newState = {};
         newState["inputWidth"] = newWidth;
         this.setState(newState);
-    },
+    };
 
     /**
      * add the last entered value to the multivalue list if enter/comma/tab wasn't used
      * @param {object} e - the event
      * @private
      */
-    _handleBlur: function (e) {
+    _handleBlur = (e) => {
         // simulate a tab key press
         var syntheticEvent = {
             target: e.target,
@@ -199,7 +195,7 @@ var Multivalues = React.createClass({
             keyCode: 9
         };
         this._handleKeyDown(syntheticEvent);
-    },
+    };
 
     /**
     * Add string to array and pass to parent
@@ -208,7 +204,7 @@ var Multivalues = React.createClass({
     * @param {object} e - the event
     * @private
     */
-    _handleKeyDown: function (e) {
+    _handleKeyDown = (e) => {
         var enteredValue = e.target.value ? e.target.value : "";
 
         //When delete key is pressed, delete previous string if nothing is entered
@@ -246,7 +242,7 @@ var Multivalues = React.createClass({
                 inputWidth: "20px"
             });
         }
-    },
+    };
 
     /**
     * Delete string from array based on index and returns array to parent
@@ -255,7 +251,7 @@ var Multivalues = React.createClass({
     * @param {number} index - index of item to be deleted
     * @private
     */
-    _handleDelete: function (index) {
+    _handleDelete = (index) => {
         var entries = this.props.entries;
         entries.splice(index,1);
 
@@ -266,9 +262,9 @@ var Multivalues = React.createClass({
         if (this.props.onValueChange) {
             this.props.onValueChange(entries);
         }
-    },
+    };
 
-    render: function () {
+    render() {
         var className = classnames(this.props.className, {
             "input-multivalues": true,
             required: this.props.isRequired || this.props.required,
@@ -325,6 +321,6 @@ var Multivalues = React.createClass({
             </FormLabel>
         );
     }
-});
+}
 
 module.exports = Multivalues;

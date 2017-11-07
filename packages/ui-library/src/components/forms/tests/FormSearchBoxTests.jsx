@@ -11,7 +11,7 @@ jest.dontMock("../../../util/KeyboardUtils.js");
 
 describe("FormSearchBox", function () {
     var React = require("react");
-    var ReactTestUtils = require("react-addons-test-utils");
+    var ReactTestUtils = require("react-dom/test-utils");
     var _ = require("underscore");
     var TestUtils = require("../../../testutil/TestUtils");
     var FormSearchBox = require("../FormSearchBox.jsx");
@@ -241,7 +241,7 @@ describe("FormSearchBox", function () {
         var component = getComponent(),
             searchInput = TestUtils.findRenderedDOMNodeWithTag(component, "input");
 
-        expect(document.activeElement).toBeFalsy();
+        expect(document.activeElement).toBe(document.body);
         component.searchBoxFocus();
         expect(document.activeElement).toBe(searchInput);
     });

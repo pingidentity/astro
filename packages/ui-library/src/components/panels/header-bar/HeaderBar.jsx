@@ -1,4 +1,5 @@
-var React = require("re-react"),
+var PropTypes = require("prop-types");
+var React = require("react"),
     ReactDOM = require("react-dom"),
     EventUtils = require("../../../util/EventUtils.js"),
     Utils = require("../../../util/Utils.js"),
@@ -75,41 +76,39 @@ var React = require("re-react"),
  *
  * <HeaderBar tree={headerTree} label="Basic UI Library App" onItemValueChange={this.headerActions.toggleItem} />
 **/
-module.exports = React.createClass({
-    propTypes: {
-        "data-id": React.PropTypes.string.affectsRendering,
-        additionalContent: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.object
-        ]).affectsRendering,
-        label: React.PropTypes.string.affectsRendering,
-        logo: React.PropTypes.string.affectsRendering,
-        openNode: React.PropTypes.string.affectsRendering,
-        siteLogo: React.PropTypes.string.affectsRendering,
-        siteTitle: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.object
-        ]).affectsRendering,
-        tree: React.PropTypes.arrayOf(React.PropTypes.object).affectsRendering,
-        onMenuValueChange: React.PropTypes.func,
-        onItemValueChange: React.PropTypes.func
-    },
+module.exports = class extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        additionalContent: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.object
+        ]),
+        label: PropTypes.string,
+        logo: PropTypes.string,
+        openNode: PropTypes.string,
+        siteLogo: PropTypes.string,
+        siteTitle: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.object
+        ]),
+        tree: PropTypes.arrayOf(PropTypes.object),
+        onMenuValueChange: PropTypes.func,
+        onItemValueChange: PropTypes.func
+    };
 
-    getDefaultProps: function () {
-        return {
-            onItemValueChange: _.noop,
-            onMenuValueChange: _.noop,
-            "data-id": "header-bar"
-        };
-    },
+    static defaultProps = {
+        onItemValueChange: _.noop,
+        onMenuValueChange: _.noop,
+        "data-id": "header-bar"
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.label) {
                 console.warn(Utils.deprecateMessage("label", "siteTitle"));
             }
         }
-    },
+    }
 
     /**
      * @method
@@ -117,18 +116,18 @@ module.exports = React.createClass({
      * @desc Upon mounting, register a callback for global click events to be used to hide any visible menu items when
      * the user clicks outside of it
      */
-    componentDidMount: function () {
+    componentDidMount() {
         window.addEventListener("click", this._handleGlobalClick);
-    },
+    }
 
     /**
      * @method
      * @name HeaderBar#componentWillUnmount
      * @desc Before unmounting, unregister the global click listener
      */
-    componentWillUnmount: function () {
+    componentWillUnmount() {
         window.removeEventListener("click", this._handleGlobalClick);
-    },
+    }
 
     /**
      * @method
@@ -137,7 +136,7 @@ module.exports = React.createClass({
      * @private
      * @desc The function which gets called on window clicks to determine if the menu should be hidden
      */
-    _handleGlobalClick: function (e) {
+    _handleGlobalClick = (e) => {
         //if no menus are open, do nothing
         if (!this.props.openNode) {
             return;
@@ -148,7 +147,7 @@ module.exports = React.createClass({
             ReactDOM.findDOMNode(this.refs.navContainer),
             this.props.onItemValueChange.bind(null, ""),
             e);
-    },
+    };
 
     /**
      * @method
@@ -158,11 +157,11 @@ module.exports = React.createClass({
      * @desc Instead of creating partials using bind, we have one function which will pass back the id of
      * the clicked on nav item.  There is a performance overhead of creating partials on every render.
      */
-    _handleNavClick: function (e) {
+    _handleNavClick = (e) => {
         this.props.onItemValueChange(e.currentTarget.getAttribute("data-id"));
-    },
+    };
 
-    render: function () {
+    render() {
         var siteTitle = this.props.siteTitle ? this.props.siteTitle : this.props.label;
 
         return (
@@ -194,13 +193,18 @@ module.exports = React.createClass({
                                 showMenu: item.id === this.props.openNode
                             }, item);
 
-                            return React.createElement(NavItem, props, item.children); //eslint-disable-line no-use-before-define
+                            return (
+                                <NavItem {...props}>
+                                    {item.children}
+                                </NavItem>
+                            ); //eslint-disable-line no-use-before-define
                         }.bind(this))
                     }
                 </ul>
-            </div>);
+            </div>
+        );
     }
-});
+};
 
 /**
  * @class NavItem
@@ -226,25 +230,29 @@ module.exports = React.createClass({
  *          Menu state, while this is defined, it's managed internally to this component and doesn't require the
  *          developer to do anything when they use the headerbar.
  */
-var NavItem = React.createClass({
-    propTypes: {
-        id: React.PropTypes.string.isRequired,
-        "data-id": React.PropTypes.string,
-        title: React.PropTypes.string.affectsRendering,
-        target: React.PropTypes.string.affectsRendering,
-        url: React.PropTypes.string.affectsRendering,
-        iconClassName: React.PropTypes.string.affectsRendering,
-        iconSrc: React.PropTypes.string.affectsRendering,
-        showMenu: React.PropTypes.bool.affectsRendering,
-        children: React.PropTypes.array.affectsRendering
-    },
+class NavItem extends React.Component {
+    static propTypes = {
+        id: PropTypes.string.isRequired,
+        "data-id": PropTypes.string,
+        title: PropTypes.string,
+        target: PropTypes.string,
+        url: PropTypes.string,
+        iconClassName: PropTypes.string,
+        iconSrc: PropTypes.string,
+        showMenu: PropTypes.bool,
+        children: PropTypes.array
+    };
 
-    _handleMenuClick: function (e) {
+    static defaultProps = {
+        target: "_blank",
+        "data-id": "nav-item"
+    };
+
+    _handleMenuClick = (e) => {
         this.props.onMenuValueChange(e.currentTarget.getAttribute("data-id"), this.props.id);
-    },
+    };
 
-
-    _getIcon: function (item) {
+    _getIcon = (item) => {
         if (item.iconClassName) {
             return (
                 <span className={classnames("icon", item.iconClassName)}/>
@@ -255,16 +263,9 @@ var NavItem = React.createClass({
                 <img src={item.iconSrc} className="icon"/>
             );
         }
-    },
+    };
 
-    getDefaultProps: function () {
-        return {
-            target: "_blank",
-            "data-id": "nav-item"
-        };
-    },
-
-    render: function () {
+    render() {
 
         return (
             <li>
@@ -291,4 +292,4 @@ var NavItem = React.createClass({
                  }
             </li>);
     }
-});
+}

@@ -1,3 +1,7 @@
+import HTML5Backend from "react-dnd-html5-backend";
+import { DragDropContext } from "react-dnd";
+import "../util/polyfills.js";
+
 var React = require("react"),
     thunk = require("redux-thunk"),
     Redux = require("redux"),
@@ -22,7 +26,7 @@ var React = require("react"),
 require("../css/ui-library.scss");
 require("./css/ui-library-demo.scss");
 
-var DemoApp = React.createClass({
+class DemoApp extends React.Component {
     /**
      * @method
      * @name DemoApp#_getDocumentationUrl
@@ -31,7 +35,7 @@ var DemoApp = React.createClass({
      * @desc Compute the path to the demo item's jsdoc
      * @returns {string} - The jsdoc url
      */
-    _getDocumentationUrl: function (name) {
+    _getDocumentationUrl = (name) => {
         if (!name) {
             return null;
         }
@@ -41,15 +45,15 @@ var DemoApp = React.createClass({
             packageVersion: packageJson.version,
             name: name
         });
-    },
+    };
 
-    _buildSourceUrl: function (path) {
+    _buildSourceUrl = (path) => {
         return format("build-doc/{packageName}/{packageVersion}/{path}", {
             packageName: packageJson.name,
             packageVersion: packageJson.version,
             path: path
         });
-    },
+    };
 
     /**
      * @method
@@ -59,7 +63,7 @@ var DemoApp = React.createClass({
      * @desc Compute the path to the demo item's source code
      * @returns {string|array<string>} - The source code url or an array or source code url if more that one sourc file
      */
-    _getSourceUrl: function (path) {
+    _getSourceUrl = (path) => {
         if (!path) {
             return null;
         }
@@ -71,7 +75,7 @@ var DemoApp = React.createClass({
         } else {
             return this._buildSourceUrl(path);
         }
-    },
+    };
 
     /**
     * @method
@@ -80,7 +84,7 @@ var DemoApp = React.createClass({
     * @desc Compute the name of the demo item's jsdoc
     * @returns {string} = the jsdoc name
     */
-    _getDocumentationName: function () {
+    _getDocumentationName = () => {
         if (this._demoItem) {
             if (this._demoItem.module) {
                 return this._demoItem.pathToDoc && "module-" + this._demoItem.pathToDoc.match(/(\w*)\//)[1] + "_" +
@@ -89,14 +93,14 @@ var DemoApp = React.createClass({
                 return this._demoItem.pathToDoc && this._demoItem.pathToDoc.match(/(\w*).jsx/)[1];
             }
         }
-    },
+    };
 
     /**
      * @method
      * @name DemoApp#componentWillMount
      * @desc Initialize the app
      */
-    componentWillMount: function () {
+    componentWillMount() {
         //bind action creators
         this.appActions = Redux.bindActionCreators(Actions, this.props.dispatch);
         this.routerActions = Redux.bindActionCreators(ReactRouterRedux.routerActions, this.props.dispatch);
@@ -146,7 +150,7 @@ var DemoApp = React.createClass({
 
         //Watch arrow keys and map them to the corresponding actions
         window.addEventListener("keydown", this._handleKeydown , false);
-    },
+    }
 
     /**
      * @method
@@ -154,9 +158,9 @@ var DemoApp = React.createClass({
      * @desc Remove event listeners, references to DOM nodes and cleanup.
      *
      */
-    componentWillUnmount: function () {
+    componentWillUnmount() {
         window.removeEventListener("keydown", this._handleKeydown);
-    },
+    }
 
     /**
      * @method
@@ -164,7 +168,7 @@ var DemoApp = React.createClass({
      * @desc Some initialization cannot take place until the app has mounted and rendered.  That code will be
      * put here.  For instance, loading the query string.
      */
-    componentDidMount: function () {
+    componentDidMount() {
         //load the arguments from the query string
         if (this.props.location.query.openNode) {
             this.navActions.toggleSection(this.props.location.query.openNode);
@@ -172,7 +176,7 @@ var DemoApp = React.createClass({
         if (this.props.location.query.selectedNode) {
             this.navActions.selectItem(this.props.location.query.selectedNode);
         }
-    },
+    }
 
     /**
      * @method
@@ -180,7 +184,7 @@ var DemoApp = React.createClass({
      * @param {object} newProps - Next props
      * @desc If the app receives a new selectedNode then fetch the markup for the displayed demo
      */
-    componentWillReceiveProps: function (newProps) {
+    componentWillReceiveProps(newProps) {
         var id = newProps.nav.selectedNode;
 
         //Make sure the demo item exists since an invalid component id could be set in the URL when the demoApp loads
@@ -200,9 +204,9 @@ var DemoApp = React.createClass({
                 this._demoStore = Redux.applyMiddleware(thunk)(Redux.createStore)(this._demo.Reducer);
             }
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var id = this.props.nav.selectedNode,
             name = this._getDocumentationName(),
             path = this._demoItem.pathToSource,
@@ -263,7 +267,7 @@ var DemoApp = React.createClass({
                     watch={watch} />
             </div>);
     }
-});
+}
 
 /** Connect the app to the redux store */
 DemoApp = ReactRedux.connect(function (state) {
@@ -273,7 +277,7 @@ DemoApp = ReactRedux.connect(function (state) {
         header: state.header,
         all: state
     };
-})(DemoApp);
+})(DragDropContext(HTML5Backend)(DemoApp));
 
 /** Setup the router with a single route */
 ReactDOM.render(

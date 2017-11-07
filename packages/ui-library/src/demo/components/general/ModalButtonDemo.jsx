@@ -1,49 +1,49 @@
 var React = require("react");
 var ModalButton = require("./../../../components/general/ModalButton.jsx");
 
+const NUM_STATELESS_DEMOS = 3;
+
 /**
 * @name ModalButtonDemo
 * @memberof ModalButton
 * @desc A demo for ModalButton
 */
-var ModalButtonDemo = React.createClass({
+class ModalButtonDemo extends React.Component {
+    constructor(props) {
+        super(props);
+        var initialState = {};
 
-    numStatelessDemos: 3,
+        for (var i=1; i<=NUM_STATELESS_DEMOS; i+=1) {
+            initialState["modalExpanded" + i] = false;
+        }
 
-    _handleOpen: function (index) {
+        this.state = initialState;
+    }
+
+    _handleOpen = (index) => {
         var newState = {};
 
         newState["modalExpanded" + index] = true;
 
         this.setState(newState);
-    },
+    };
 
-    _handleClose: function (index) {
+    _handleClose = (index) => {
         var newState = {};
 
         newState["modalExpanded" + index] = false;
 
         this.setState(newState);
-    },
+    };
 
-    componentWillMount: function () {
-        for (var i=1; i<=this.numStatelessDemos; i+=1) {
+    componentWillMount() {
+        for (var i=1; i<=NUM_STATELESS_DEMOS; i+=1) {
             this["_handleOpen" + i] = this._handleOpen.bind(null, i);
             this["_handleClose" + i] = this._handleClose.bind(null, i);
         }
-    },
+    }
 
-    getInitialState: function () {
-        var initialState = {};
-
-        for (var i=1; i<=this.numStatelessDemos; i+=1) {
-            initialState["modalExpanded" + i] = false;
-        }
-
-        return initialState;
-    },
-
-    render: function () {
+    render() {
         return (
             <div>
                 <div className="input-row">
@@ -164,6 +164,6 @@ var ModalButtonDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = ModalButtonDemo;

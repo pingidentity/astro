@@ -1,5 +1,7 @@
 "use strict";
 
+var PropTypes = require("prop-types");
+
 var React = require("react"),
     classnames = require("classnames"),
     Utils = require("../../../util/Utils");
@@ -90,28 +92,26 @@ var React = require("react"),
  *
  */
 
-module.exports = React.createClass({
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        id: React.PropTypes.string,
-        containerType: React.PropTypes.oneOf(["full"]),
-        messages: React.PropTypes.array,
-        onRemoveMessage: React.PropTypes.func,
-        removeMessage: React.PropTypes.func,
-        onI18n: React.PropTypes.func,
-        i18n: React.PropTypes.func,
-        defaultMessageTimeout: React.PropTypes.number
-    },
+module.exports = class extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        id: PropTypes.string,
+        containerType: PropTypes.oneOf(["full"]),
+        messages: PropTypes.array,
+        onRemoveMessage: PropTypes.func,
+        removeMessage: PropTypes.func,
+        onI18n: PropTypes.func,
+        i18n: PropTypes.func,
+        defaultMessageTimeout: PropTypes.number
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "messages",
-            onRemoveMessage: null,
-            onI18n: function (key) { return key; }
-        };
-    },
+    static defaultProps = {
+        "data-id": "messages",
+        onRemoveMessage: null,
+        onI18n: function (key) { return key; }
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
                 console.warn(Utils.deprecateMessage("id", "data-id"));
@@ -123,9 +123,9 @@ module.exports = React.createClass({
                 console.warn(Utils.deprecateMessage("i18n", "onI18n"));
             }
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var className = classnames("page-messages", this.props.containerType );
         var dataId = this.props.id || this.props["data-id"];
         var onRemoveMsg = this.props.removeMessage || this.props.onRemoveMessage;
@@ -145,25 +145,24 @@ module.exports = React.createClass({
             </div>
         );
     }
-});
+};
 
 /*
  * @class Message
  * @desc Message sub-component to render an individual message and handle its closing (and removal from the store).
  *
  */
-var Message = React.createClass({
-
+class Message extends React.Component {
     /*
      * Remove the message by calling the removeMessage callback if it exists.
      */
-    _handleRemove: function () {
+    _handleRemove = () => {
         if (this.props.onRemoveMessage) {
             this.props.onRemoveMessage(this.props.index);
         }
-    },
+    };
 
-    componentDidMount: function () {
+    componentDidMount() {
         // Close after configured time interval
         // Interval of 0 (or undefined) will result in no automatic message clearing (which is intended).
         var interval = (this.props.message.duration) ? this.props.message.duration : this.props.defaultTimeout;
@@ -171,16 +170,16 @@ var Message = React.createClass({
         if (interval) {
             this.interval = global.setInterval(this._handleRemove, interval);
         }
-    },
+    }
 
-    componentWillUnmount: function () {
+    componentWillUnmount() {
         if (this.interval) {
             // clear the timer before unmounting the component
             global.clearInterval(this.interval);
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var text = this.props.message.text || this.props.onI18n(this.props.message.key, this.props.message.params);
         var classes = classnames("message show", this.props.message.type);
 
@@ -197,5 +196,4 @@ var Message = React.createClass({
             </div>
         );
     }
-
-});
+}

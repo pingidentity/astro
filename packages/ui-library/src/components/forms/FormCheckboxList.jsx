@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames"),
     Toggle = require("./form-toggle"),
@@ -34,12 +35,12 @@ var _includesIgnoreCase = function (propName, substr) {
  *    An array of selected IDs (from items).
  */
 
- /**
- * @callback FormCheckboxList~onQueryChange
- *
- * @param {string} newQueryString
- *    The new query field value.
- */
+/**
+* @callback FormCheckboxList~onQueryChange
+*
+* @param {string} newQueryString
+*    The new query field value.
+*/
 
 /**
  * @callback FormCheckboxList~onVisibilityChange
@@ -188,39 +189,37 @@ var _includesIgnoreCase = function (propName, substr) {
  *         selected={this.state.selectedCheckboxIds} />
  */
 
-var Stateless = React.createClass({
-    displayName: "FormCheckboxListStateless",
+class Stateless extends React.Component {
+    static displayName = "FormCheckboxListStateless";
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        id: React.PropTypes.string, //TODO: remove when v1 no longer supported
-        className: React.PropTypes.string,
-        items: React.PropTypes.array.isRequired,
-        selected: React.PropTypes.array,
-        onValueChange: React.PropTypes.func, //TODO: set to required when onSelectionChange removed with v1
-        onSelectionChange: React.PropTypes.func, //TODO: remove when v1 no longer supported
-        labelSearchPlaceholder: React.PropTypes.string.isRequired,
-        queryString: React.PropTypes.string,
-        onQueryChange: React.PropTypes.func.isRequired,
-        labelHideUnselected: React.PropTypes.string.isRequired,
-        hideUnchecked: React.PropTypes.bool,
-        onVisibilityChange: React.PropTypes.func.isRequired,
-        onGetSelectAllLabel: React.PropTypes.func, //TODO: set to required when labelSelectAll removed with v1
-        labelSelectAll: React.PropTypes.func, //TODO: remove when v1 no longer supported
-        onGetDeselectAllLabel: React.PropTypes.func, //TODO: set to required when labelDeselectAll removed with v1
-        labelDeselectAll: React.PropTypes.func//TODO: remove when v1 no longer supported
-    },
+    static propTypes = {
+        "data-id": PropTypes.string,
+        id: PropTypes.string, //TODO: remove when v1 no longer supported
+        className: PropTypes.string,
+        items: PropTypes.array.isRequired,
+        selected: PropTypes.array,
+        onValueChange: PropTypes.func, //TODO: set to required when onSelectionChange removed with v1
+        onSelectionChange: PropTypes.func, //TODO: remove when v1 no longer supported
+        labelSearchPlaceholder: PropTypes.string.isRequired,
+        queryString: PropTypes.string,
+        onQueryChange: PropTypes.func.isRequired,
+        labelHideUnselected: PropTypes.string.isRequired,
+        hideUnchecked: PropTypes.bool,
+        onVisibilityChange: PropTypes.func.isRequired,
+        onGetSelectAllLabel: PropTypes.func, //TODO: set to required when labelSelectAll removed with v1
+        labelSelectAll: PropTypes.func, //TODO: remove when v1 no longer supported
+        onGetDeselectAllLabel: PropTypes.func, //TODO: set to required when labelDeselectAll removed with v1
+        labelDeselectAll: PropTypes.func//TODO: remove when v1 no longer supported
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "form-checkbox-list",
-            selected: [],
-            queryString: "",
-            hideUnchecked: false
-        };
-    },
+    static defaultProps = {
+        "data-id": "form-checkbox-list",
+        selected: [],
+        queryString: "",
+        hideUnchecked: false
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
                 console.warn(Utils.deprecateMessage("id", "data-id"));
@@ -235,11 +234,11 @@ var Stateless = React.createClass({
                 console.warn(Utils.deprecateMessage("labelDeselectAll", "onGetDeselectAllLabel"));
             }
         }
-    },
+    }
 
-    _isAllSelected: function (visibleItems, isSelected) {
+    _isAllSelected = (visibleItems, isSelected) => {
         return _.every(visibleItems, isSelected);
-    },
+    };
 
     /**
      * @desc Toggle checking all checkboxes.
@@ -249,7 +248,7 @@ var Stateless = React.createClass({
      * @param {array} e the event object
      * @private
      */
-    _toggleCheckAll: function (visibleItems, selector, e) {
+    _toggleCheckAll = (visibleItems, selector, e) => {
 
         e.preventDefault();
 
@@ -270,7 +269,7 @@ var Stateless = React.createClass({
         var onValueChange = this.props.onValueChange || this.props.onSelectionChange;
 
         onValueChange(newSelection);
-    },
+    };
 
     /**
      * @desc Fired when the selection changes.
@@ -279,7 +278,7 @@ var Stateless = React.createClass({
      * @param {function} isSelected - function(item) {..} will return if item selected or not
      * @private
      */
-    _onSelectionChange: function (value, isSelected) {
+    _onSelectionChange = (value, isSelected) => {
         // add to the array of selected items (if it does not exist) or remove it (if it does exist)
         var updatedSelection;
 
@@ -293,12 +292,12 @@ var Stateless = React.createClass({
         var onValueChange = this.props.onValueChange || this.props.onSelectionChange;
 
         onValueChange(updatedSelection);
-    },
+    };
 
-    _onHideUncheckedToggle: function () {
+    _onHideUncheckedToggle = () => {
         this.props.onVisibilityChange(this.props.hideUnchecked);
         return true;
-    },
+    };
 
     /**
      * @desc Search when the value in the search box changes.
@@ -306,9 +305,9 @@ var Stateless = React.createClass({
      * @param {string} value the query string
      * @private
      */
-    _searchOnType: function (value) {
+    _searchOnType = (value) => {
         this.props.onQueryChange(value);
-    },
+    };
 
     /**
      * @desc returns list of react nodes to be displayed based on current data state
@@ -320,7 +319,7 @@ var Stateless = React.createClass({
      *
      * @private
      */
-    _getCheckboxNodes: function (visibleItems, isSelected, useGrouping) {
+    _getCheckboxNodes = (visibleItems, isSelected, useGrouping) => {
         var self = this;
 
         return _.map(visibleItems, function (items, groupName) {
@@ -349,7 +348,7 @@ var Stateless = React.createClass({
                 }
             });
         });
-    },
+    };
 
     /**
      * @desc Filter currently visible data on screen based on search string, toggles state, e.t.c.
@@ -358,7 +357,7 @@ var Stateless = React.createClass({
      * @returns {array} the currently visible list of items
      * @private
      */
-    _filterVisible: function (isItemSelected, useGrouping) {
+    _filterVisible = (isItemSelected, useGrouping) => {
         var items = this.props.hideUnchecked ? _.filter(this.props.items, isItemSelected) : this.props.items;
 
         var itemResults = [],
@@ -377,13 +376,13 @@ var Stateless = React.createClass({
 
         return items;
 
-    },
+    };
 
-    _handleSearchUndo: function () {
+    _handleSearchUndo = () => {
         this.props.onQueryChange("");
-    },
+    };
 
-    render: function () {
+    render() {
         var groupedItems = _.groupBy(this.props.items, "group");
         var useGrouping = _.keys(groupedItems).length > 1;
 
@@ -446,12 +445,18 @@ var Stateless = React.createClass({
             </div>
         );
     }
-});
+}
 
-var Stateful = React.createClass({
-    displayName: "FormCheckboxListStateful",
+class Stateful extends React.Component {
+    static displayName = "FormCheckboxListStateful";
 
-    _handleValueChange: function (selectedIds) {
+    state = {
+        selected: [],
+        hideUnchecked: false,
+        queryString: ""
+    };
+
+    _handleValueChange = (selectedIds) => {
         var self = this;
 
         this.setState({
@@ -462,35 +467,27 @@ var Stateful = React.createClass({
 
             onValueChange(selectedIds);
         });
-    },
+    };
 
-    _handleQueryChange: function (queryString) {
+    _handleQueryChange = (queryString) => {
         this.setState({
             queryString: queryString
         });
-    },
+    };
 
-    _handleVisibilityChange: function (hideUnchecked) {
+    _handleVisibilityChange = (hideUnchecked) => {
         this.setState({
             hideUnchecked: !hideUnchecked
         });
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         this.setState({
             selected: this.props.selected
         });
-    },
+    }
 
-    getInitialState: function () {
-        return {
-            selected: [],
-            hideUnchecked: false,
-            queryString: ""
-        };
-    },
-
-    render: function () {
+    render() {
         var props = _.defaults({
             ref: "FormCheckboxListStateless",
             onValueChange: this._handleValueChange,
@@ -501,35 +498,33 @@ var Stateful = React.createClass({
             hideUnchecked: this.state.hideUnchecked
         }, this.props);
 
-        return React.createElement(Stateless, props);
+        return <Stateless {...props} />;
     }
-});
+}
 
-module.exports = React.createClass({
-    displayName: "FormCheckboxList",
+module.exports = class extends React.Component {
+    static displayName = "FormCheckboxList";
 
-    propTypes: {
-        controlled: React.PropTypes.bool, //TODO: remove in new version
-        stateless: React.PropTypes.bool
-    },
+    static propTypes = {
+        controlled: PropTypes.bool, //TODO: remove in new version
+        stateless: PropTypes.bool
+    };
 
-    getDefaultProps: function () {
-        return {
-            controlled: false //TODO: change to stateless with true default in new version
-        };
-    },
+    static defaultProps = {
+        controlled: false //TODO: change to stateless with true default in new version
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("controlled", "stateless", "false", "true"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
 
         return stateless
-            ? React.createElement(Stateless, _.defaults({ ref: "FormCheckboxListStateless" }, this.props))
-            : React.createElement(Stateful, _.defaults({ ref: "FormCheckboxListStateful" }, this.props));
+            ? <Stateless {..._.defaults({ ref: "FormCheckboxListStateless" }, this.props)} />
+            : <Stateful {..._.defaults({ ref: "FormCheckboxListStateful" }, this.props)} />;
     }
-});
+};

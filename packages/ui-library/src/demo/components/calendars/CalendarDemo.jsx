@@ -7,40 +7,37 @@ var React = require("react"),
 * @memberof Calendar
 * @desc A demo for Calendar
 */
-var CalendarDemo = React.createClass({
+class CalendarDemo extends React.Component {
+    state = {
+        selectedDate1: moment(new Date()), //current date
+        selectedDate2: new Date(2017, 1, 20), //Feb 20 2017
+        dateRange: {
+            startDate: new Date(2017, 1, 14),   //Feb 14 2017
+            endDate: new Date(2018, 3, 28)  //Apr 28 2018
+        }
+    };
 
-    numDemos: 2,
+    numDemos = 2;
 
-    getInitialState: function () {
-        return {
-            selectedDate1: moment(new Date()), //current date
-            selectedDate2: new Date(2017, 1, 20), //Feb 20 2017
-            dateRange: {
-                startDate: new Date(2017, 1, 14),   //Feb 14 2017
-                endDate: new Date(2018, 3, 28)  //Apr 28 2018
-            }
-        };
-    },
-
-    componentWillMount: function () {
+    componentWillMount() {
         for (var i=1; i<=this.numDemos; i+=1) {
             this["_onEnrollmentDateChanged" + i] = this._onEnrollmentDateChanged.bind(null, i);
         }
-    },
+    }
 
-    _onEnrollmentDateChanged: function (index, newValue) {
+    _onEnrollmentDateChanged = (index, newValue) => {
         var newState = {};
 
         newState["selectedDate" + index] = parseInt(newValue);
 
         this.setState(newState);
-    },
+    };
 
-    _getSelectedDateLabel: function (date) {
+    _getSelectedDateLabel = (date) => {
         return date ? moment(date).format("MMMM Do YYYY") : "NONE";
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <div>
                 <Calendar data-id="calendar"
@@ -70,6 +67,6 @@ var CalendarDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = CalendarDemo;

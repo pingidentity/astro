@@ -1,6 +1,6 @@
 window.__DEV__ = true;
 
-jest.dontMock("./common.jsx");
+jest.dontMock("./commonTests.jsx");
 jest.dontMock("../v2.jsx");
 jest.dontMock("../index.js");
 jest.dontMock("../../FormLabel.jsx");
@@ -10,10 +10,10 @@ jest.dontMock("../../../tooltips/HelpHint.jsx");
 describe("FormTextField", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
         FormTextField = require("../v2.jsx"),
-        CommonTests = require("./common.jsx"),
+        CommonTests = require("./commonTests.jsx"),
         _ = require("underscore");
 
 
@@ -173,15 +173,13 @@ describe("FormTextField", function () {
 
     it("stateful: displays a modified value state upon changing value prop", function () {
         var initialValue = "init";
-        var TestParent = React.createFactory(React.createClass({
-            getInitialState: function () {
-                return { value: initialValue };
-            },
+        var TestParent = React.createFactory( class extends React.Component {
+            state = { value: initialValue };
 
-            render: function () {
+            render() {
                 return <FormTextField value={this.state.value} />;
             }
-        }));
+        });
 
         var parent = ReactTestUtils.renderIntoDocument(TestParent());
         var component = TestUtils.findRenderedComponentWithType(parent, FormTextField);

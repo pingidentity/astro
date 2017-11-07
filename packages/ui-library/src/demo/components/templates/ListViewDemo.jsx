@@ -9,20 +9,20 @@ var React = require("react"),
 * @memberof ListView
 * @desc A demo for ListView
 */
-var ListViewDemo = React.createClass({
-    _handleToggleSearchBar: function () {
+class ListViewDemo extends React.Component {
+    _handleToggleSearchBar = () => {
         this.actions.setExpandedSearch(!this.props.advancedSearch);
-    },
+    };
 
-    _handleSearchFilterChange: function (name, value) {
+    _handleSearchFilterChange = (name, value) => {
         this.actions.setFilter(name, value);
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         this.actions = Redux.bindActionCreators(ListView.Actions, this.props.store.dispatch);
-    },
+    }
 
-    render: function () {
+    render() {
         var demoWatch = _.pick(this.props, "position", "activeTab", "filters", "advancedSearch");
 
         return (
@@ -42,7 +42,7 @@ var ListViewDemo = React.createClass({
                     watch={_.defaults(demoWatch, this.props.watch)} />
             </div>);
     }
-});
+}
 
 /*
  * Expose the Reducer.  Doing so will tell the DemoApp to create an isolated store for the Demo to use.  Normally

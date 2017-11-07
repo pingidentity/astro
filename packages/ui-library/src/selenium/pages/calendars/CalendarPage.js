@@ -14,19 +14,19 @@ var CalendarDemoPage = Object.create(HomePage, {
 
     xpathCalendarWrapper: {
         get: function () {
-            return "//input[@data-id='calendar']/../following-sibling::div";
+            return "//div[@data-id='input-calendar-wrapper']";
         }
     },
 
     xpathLeftNavigationIcon: {
         get: function () {
-            return "//input[@data-id='calendar']/../following-sibling::div//i[1]";
+            return "//i[@data-id='calendar-nav-icon-left']";
         }
     },
 
     xpathRightNavigationIcon: {
         get: function () {
-            return "//input[@data-id='calendar']/../following-sibling::div//span[3]/i";
+            return "//i[@data-id='calendar-nav-icon-right']";
         }
     },
 
@@ -171,7 +171,7 @@ var CalendarDemoPage = Object.create(HomePage, {
             this.waitForExist(this.xpathCalendarWrapper);
         }
     },
-    
+
     /**
      * @desc this function is to go to calendar page
      */

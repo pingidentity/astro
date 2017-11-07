@@ -1,1 +1,1 @@
-module.exports = require("./form-toggle").v1;
+module.exports = require("./form-toggle").v2;

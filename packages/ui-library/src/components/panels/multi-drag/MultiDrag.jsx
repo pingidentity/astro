@@ -1,9 +1,7 @@
-var React = require("re-react"),
-    ReactVanilla = require("react"),
+var PropTypes = require("prop-types");
+var React = require("react"),
     classnames = require("classnames"),
     DragDropColumn = require("./DragDropColumn.jsx"),
-    DragDropContext = require("react-dnd").DragDropContext,
-    HTML5Backend = require("react-dnd-html5-backend"),
     search = require("./MultiDragReducer.js").search,
     move = require("./MultiDragReducer.js").move,
     reapplyFilters = require("./MultiDragReducer.js").reapplyFilters,
@@ -34,7 +32,6 @@ var React = require("re-react"),
  *    The indexes descriptor for the drag with the indexes converted.
  */
 function convertFilteredIndexes (columns, desc) {
-
     //find the index in the unfiltered columns
     var from = columns[desc.from.column].rows.indexOf(
         columns[desc.from.column].filteredRows[desc.from.index]
@@ -79,50 +76,50 @@ function convertFilteredIndexes (columns, desc) {
  *    The target item location description.
  */
 
- /**
- * @typedef {object} MultiDrag~previewLocation
- *
- * @property {number} column
- *    The column index of the preview.
- * @property {number} row
- *    The row index of the preview.
- */
+/**
+* @typedef {object} MultiDrag~previewLocation
+*
+* @property {number} column
+*    The column index of the preview.
+* @property {number} row
+*    The row index of the preview.
+*/
 
- /**
- * @callback MultiDrag~onSearch
- *
- * @param {number} index
- *    Since the multi-Drag component supports search in all columns,
- *    each column needs to report which column (via the column index) a search affects.
- * @param {string} value
- *    The value to search for.
- */
+/**
+* @callback MultiDrag~onSearch
+*
+* @param {number} index
+*    Since the multi-Drag component supports search in all columns,
+*    each column needs to report which column (via the column index) a search affects.
+* @param {string} value
+*    The value to search for.
+*/
 
- /**
- * @callback MultiDrag~onDragDrop
- *
- * @param {MultiDrag~MoveDescriptor} moveDescriptor
- *    The move descriptor for the drag.
- */
+/**
+* @callback MultiDrag~onDragDrop
+*
+* @param {MultiDrag~MoveDescriptor} moveDescriptor
+*    The move descriptor for the drag.
+*/
 
- /**
- * @callback MultiDrag~onCancel
- */
+/**
+* @callback MultiDrag~onCancel
+*/
 
- /**
- * @callback MultiDrag~onScrolledToPosition
- *
- * @param {number} columnIndex
- *     The column index for the column scrolled.
- */
+/**
+* @callback MultiDrag~onScrolledToPosition
+*
+* @param {number} columnIndex
+*     The column index for the column scrolled.
+*/
 
- /**
- * @callback MultiDrag~onDragStart
- */
+/**
+* @callback MultiDrag~onDragStart
+*/
 
- /**
- * @callback MultiDrag~onDragEnd
- */
+/**
+* @callback MultiDrag~onDragEnd
+*/
 
 /**
  * @class MultiDrag
@@ -201,68 +198,66 @@ function convertFilteredIndexes (columns, desc) {
  *    />
  */
 
-var MultiDragStateless = React.createClass({
-    displayName: "MultiDragStateless",
-    colSortDisabledArr: [],
+class MultiDragStateless extends React.Component {
+    static displayName = "MultiDragStateless";
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        className: React.PropTypes.string,
-        columns: React.PropTypes.arrayOf(
-            React.PropTypes.shape({
-                name: React.PropTypes.string,
-                filter: React.PropTypes.string,
-                rows: React.PropTypes.array
+    static propTypes = {
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
+        columns: PropTypes.arrayOf(
+            PropTypes.shape({
+                name: PropTypes.string,
+                filter: PropTypes.string,
+                rows: PropTypes.array
             })
-        ).isRequired.affectsRendering,
-        showSearchOnAllColumns: React.PropTypes.bool.affectsRendering,
-        showSearch: React.PropTypes.bool.affectsRendering,
-        // re-react doesn't wrap the React.PropTypes.shape validator with affectsRendering,
+        ).isRequired,
+        showSearchOnAllColumns: PropTypes.bool,
+        showSearch: PropTypes.bool,
+        // react doesn't wrap the PropTypes.shape validator with,
         // so can't specify shape of object for previewMove otherwise it won't re-render
-        previewMove: React.PropTypes.object.affectsRendering,
-        contentType: React.PropTypes.element.isRequired.affectsRendering,
-        classNames: React.PropTypes.arrayOf(
-            React.PropTypes.string
-        ).affectsRendering,
+        previewMove: PropTypes.object,
+        contentType: PropTypes.element.isRequired,
+        classNames: PropTypes.arrayOf(
+            PropTypes.string
+        ),
         // callbacks
-        onSearch: React.PropTypes.func.isRequired,
-        onDrag: React.PropTypes.func.isRequired,
-        onDrop: React.PropTypes.func.isRequired,
-        onCancel: React.PropTypes.func.isRequired,
-        onScrolledToBottom: React.PropTypes.func,
-        onScrolledToTop: React.PropTypes.func,
+        onSearch: PropTypes.func.isRequired,
+        onDrag: PropTypes.func.isRequired,
+        onDrop: PropTypes.func.isRequired,
+        onCancel: PropTypes.func.isRequired,
+        onScrolledToBottom: PropTypes.func,
+        onScrolledToTop: PropTypes.func,
         // optional items
-        labelEmpty: React.PropTypes.string,
-        disabled: React.PropTypes.bool,
-        onDragStart: React.PropTypes.func,
-        onDragEnd: React.PropTypes.func
-    },
+        labelEmpty: PropTypes.string,
+        disabled: PropTypes.bool,
+        onDragStart: PropTypes.func,
+        onDragEnd: PropTypes.func
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "multi-drag",
-            classNames: ["rows-available", "rows-added"],
-            showSearchOnAllColumns: false,
-            showSearch: false,
-            disabled: false
-        };
-    },
+    static defaultProps = {
+        "data-id": "multi-drag",
+        classNames: ["rows-available", "rows-added"],
+        showSearchOnAllColumns: false,
+        showSearch: false,
+        disabled: false
+    };
 
     /*
      * This function will iterate through the columns and build an
      * array indicating whether the items are sortable within each column
      */
-    componentDidMount: function () {
+    componentDidMount() {
+        this.colSortDisabledArr = [];
         this.props.columns.map(function (column) {
             this.colSortDisabledArr.push(column.disableSort);
         }.bind(this));
-    },
+    }
 
     /*
      * This function will compare the current move to the last reported drag and if there is no change
      * return null, otherwise the MoveDescriptor
      */
-    _changedSinceLastDrag: function (targetIndex, beingDraggedIndex, targetColumn, beingDraggedColumn) {
+    _changedSinceLastDrag = (targetIndex, beingDraggedIndex, targetColumn, beingDraggedColumn) => {
         if (this._lastDrag &&
             this._lastDrag.from.column === beingDraggedColumn &&
             this._lastDrag.from.index === beingDraggedIndex &&
@@ -276,13 +271,13 @@ var MultiDragStateless = React.createClass({
             from: { column: beingDraggedColumn, index: beingDraggedIndex },
             to: { column: targetColumn, index: targetIndex }
         };
-    },
+    };
 
     /*
      * Check the MoveDescriptor and block moving from the current position the same position or
      * the one position higher.
      */
-    _isValidDrag: function () {
+    _isValidDrag = () => {
         return !(
             this._lastDrag &&
             this._lastDrag.from.column === this._lastDrag.to.column &&
@@ -290,12 +285,12 @@ var MultiDragStateless = React.createClass({
                 this._lastDrag.from.index - this._lastDrag.to.index === 0
             )
         );
-    },
+    };
 
     /*
      * Apply the last valid move
      */
-    _onCancel: function (droppedInContainer) {
+    _onCancel = (droppedInContainer) => {
         // only apply drop if row dragged within a valid drop target
         // otherwise you can't cancel a drag that has started
         if ((this._lastDrag && this._isValidDrag()) && droppedInContainer) {
@@ -303,14 +298,14 @@ var MultiDragStateless = React.createClass({
         }
         this._lastDrag = null;
         this.props.onCancel();
-    },
+    };
 
     /*
      * Determines if the current onDrag call has changed since the last call, and if so executes the
      * component's onDrag callback.
      */
-    _onDrag: function (targetIndex, beingDraggedIndex, targetColumn, beingDraggedColumn) { //eslint-disable-line
-        var desc = this._changedSinceLastDrag.apply(this, arguments);
+    _onDrag = (targetIndex, beingDraggedIndex, targetColumn, beingDraggedColumn) => { //eslint-disable-line
+        var desc = this._changedSinceLastDrag(targetIndex, beingDraggedIndex, targetColumn, beingDraggedColumn);
 
         // if nothing has changed, dont execute the callback
         if (!desc || typeof(targetIndex) === "undefined") {
@@ -327,7 +322,7 @@ var MultiDragStateless = React.createClass({
         if (this._isValidDrag()) {
             this.props.onDrag(desc);
         }
-    },
+    };
 
     /*
      * Dont actually need to implement onDrop because onCancel is always called and we want to
@@ -335,10 +330,10 @@ var MultiDragStateless = React.createClass({
      *
      * Only here because DragDropRow mandates passing something
      */
-    _onDrop: function () {
-    },
+    _onDrop = () => {
+    };
 
-    render: function () {
+    render() {
 
         var preview = this.props.previewMove;
         var className = classnames(
@@ -392,22 +387,25 @@ var MultiDragStateless = React.createClass({
             </div>
         );
     }
-});
+}
 
-var MultiDragStateful = ReactVanilla.createClass({
-    displayName: "MultiDragStateful",
+class MultiDragStateful extends React.Component {
+    static displayName = "MultiDragStateful";
 
-    propTypes: {
-        filterFieldNames: React.PropTypes.arrayOf(React.PropTypes.string)
-    },
+    static propTypes = {
+        filterFieldNames: PropTypes.arrayOf(PropTypes.string)
+    };
 
-    getDefaultProps: function () {
-        return {
-            filterFieldNames: []
-        };
-    },
+    static defaultProps = {
+        filterFieldNames: []
+    };
 
-    _handleSearch: function (index, value) {
+    state = {
+        columns: this.props.columns,
+        placeholder: null
+    };
+
+    _handleSearch = (index, value) => {
         this.setState(
             search(this.state, {
                 column: index,
@@ -420,9 +418,9 @@ var MultiDragStateful = ReactVanilla.createClass({
                 }
             }
         );
-    },
+    };
 
-    _handleCancel: function () {
+    _handleCancel = () => {
         this.setState({
             placeholder: null
         }, function () {
@@ -430,9 +428,9 @@ var MultiDragStateful = ReactVanilla.createClass({
                 this.props.onCancel();
             }
         });
-    },
+    };
 
-    _handleDrop: function (desc) {
+    _handleDrop = (desc) => {
         var convertedDesc = convertFilteredIndexes(this.state.columns, desc);
         var next = move(this.state, {
             from: { column: desc.from.column, index: convertedDesc.from },
@@ -446,9 +444,9 @@ var MultiDragStateful = ReactVanilla.createClass({
                 this.props.onDrop(desc);
             }
         });
-    },
+    };
 
-    _handleDrag: function (desc) {
+    _handleDrag = (desc) => {
         this.setState({
             placeholder: desc.to
         }, function () {
@@ -456,16 +454,16 @@ var MultiDragStateful = ReactVanilla.createClass({
                 this.props.onDrag(desc);
             }
         });
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         // apply any initial filters
         var next = _.clone(this.state);
         next = reapplyFilters(next);
         this.setState(next);
-    },
+    }
 
-    componentWillReceiveProps: function (nextProps) {
+    componentWillReceiveProps(nextProps) {
         if (!_.isEqual(nextProps.columns, this.props.columns)) {
             // update columns and reapply filters
             var next = _.clone(this.state);
@@ -473,16 +471,9 @@ var MultiDragStateful = ReactVanilla.createClass({
             next = reapplyFilters(next);
             this.setState(next);
         }
-    },
+    }
 
-    getInitialState: function () {
-        return {
-            columns: this.props.columns,
-            placeholder: null
-        };
-    },
-
-    render: function () {
+    render() {
         var props = _.defaults({
             ref: "MultiDragStateless",
             onSearch: this._handleSearch,
@@ -495,39 +486,36 @@ var MultiDragStateful = ReactVanilla.createClass({
 
         return React.createElement(MultiDragStateless, props);
     }
-});
+}
 
-var MultiDrag = ReactVanilla.createClass({
-    displayName: "MultiDrag",
+class MultiDrag extends React.Component {
+    static displayName = "MultiDrag";
 
-    propTypes: {
-        controlled: React.PropTypes.bool, //TODO remove in new version
-        stateless: React.PropTypes.bool
-    },
+    static propTypes = {
+        controlled: PropTypes.bool, //TODO remove in new version
+        stateless: PropTypes.bool
+    };
 
-    getDefaultProps: function () {
-        return {
-            controlled: false //TODO: change to stateless in new version
-        };
-    },
+    static defaultProps = {
+        controlled: false //TODO: change to stateless in new version
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("controlled", "stateless"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
 
         return stateless
             ? React.createElement(MultiDragStateless, _.defaults({ ref: "MultiDragStateless" }, this.props))
             : React.createElement(MultiDragStateful, _.defaults({ ref: "MultiDragStateful" }, this.props));
     }
-});
+}
 
-var MultiDragDropContext = DragDropContext(HTML5Backend)(MultiDrag);
 
-MultiDragDropContext.convertFilteredIndexes = convertFilteredIndexes;
+MultiDrag.convertFilteredIndexes = convertFilteredIndexes;
 
-module.exports = MultiDragDropContext;
+module.exports = MultiDrag;

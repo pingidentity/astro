@@ -5,34 +5,32 @@ var React = require("react"),
     Step = Wizard.Step,
     Choose = Wizard.Choose;
 
+var BUTTON_LABELS = {
+    labelNext: "Next",
+    labelCancel: "Cancel",
+    labelDone: "Done",
+    labelEdit: "Edit"
+};
+
 /**
 * @name WizardDemo
 * @memberof Wizard
 * @desc A demo for Wizard
 */
-var WizardDemo = React.createClass({
-    BUTTON_LABELS: {
-        labelNext: "Next",
-        labelCancel: "Cancel",
-        labelDone: "Done",
-        labelEdit: "Edit"
-    },
+class WizardDemo extends React.Component {
+    state = {
+        isLoading: false,
+        showCancelTooltip: false,
+        usePulsing: false
+    };
 
-    getInitialState: function () {
-        return {
-            isLoading: false,
-            showCancelTooltip: false,
-            usePulsing: false
-        };
-    },
-
-    toggleUsePulsing: function () {
+    toggleUsePulsing = () => {
         this.setState({
             usePulsing: !this.state.usePulsing
         });
-    },
+    };
 
-    _handleNext: function () {
+    _handleNext = () => {
         this._closeTooltip();
 
         if (this.state.usePulsing) {
@@ -45,13 +43,13 @@ var WizardDemo = React.createClass({
         } else {
             this.actions.next();
         }
-    },
+    };
 
-    _reset: function () {
+    _reset = () => {
         this.actions.reset();
-    },
+    };
 
-    _handleDone: function () {
+    _handleDone = () => {
         if (this.state.usePulsing) {
             this.setState({ isLoading: true });
             setTimeout(function () {
@@ -60,24 +58,24 @@ var WizardDemo = React.createClass({
         } else {
             this._reset();
         }
-    },
+    };
 
-    _openTooltip: function () {
+    _openTooltip = () => {
         this.setState({ showCancelTooltip: true });
-    },
+    };
 
-    _closeTooltip: function () {
+    _closeTooltip = () => {
         this.setState({ showCancelTooltip: false });
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         this.actions = Redux.bindActionCreators(Wizard.Actions, this.props.store.dispatch);
 
         //Root level reducer so null id
         this._handlePick = this.actions.pick.bind(null, null);
-    },
+    }
 
-    render: function () {
+    render() {
         var cancelTooltipParams = {
             title: "Cancel Confirmation",
             open: this.state.showCancelTooltip,
@@ -108,7 +106,7 @@ var WizardDemo = React.createClass({
                     onCancel={this._openTooltip}
                     showPulsing={this.state.isLoading}
                     {...this.props}
-                    {...this.BUTTON_LABELS}>
+                    {...BUTTON_LABELS}>
 
                     <Wizard
                         title="Wizard 1"
@@ -133,7 +131,7 @@ var WizardDemo = React.createClass({
                 <div>{this.state.isLoading && "Making some async call..."}</div>
            </div>);
     }
-});
+}
 
 /*
  * Expose the Reducer.  Doing so will tell the DemoApp to create an isolated store for the Demo to use.  Normally

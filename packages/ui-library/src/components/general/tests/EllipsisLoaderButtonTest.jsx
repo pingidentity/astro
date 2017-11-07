@@ -5,7 +5,7 @@ jest.dontMock("../EllipsisLoaderButton.jsx");
 
 describe("Ellipsis loader button", function () {
     var React = require("react");
-    var ReactTestUtils = require("react-addons-test-utils");
+    var ReactTestUtils = require("react-dom/test-utils");
     var TestUtils = require("../../../testutil/TestUtils");
     var EllipsisLoaderButton = require("../EllipsisLoaderButton.jsx");
     var callback;

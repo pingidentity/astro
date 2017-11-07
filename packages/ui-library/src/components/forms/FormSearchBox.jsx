@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react"),
     _ = require("underscore"),
     FormTextField = require("./form-text-field/index"),
@@ -68,31 +69,29 @@ var React = require("react"),
 *         placeholder="Search"
 *         onChange={this._filterOptions} />
 **/
-var FormSearchBox = React.createClass({
-    displayName: "FormSearchBox",
-    
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        className: React.PropTypes.string,
-        queryString: React.PropTypes.string,
-        placeholder: React.PropTypes.string,
-        inputFieldClassName: React.PropTypes.string,
-        onValueChange: React.PropTypes.func.isRequired,
-        onKeyDown: React.PropTypes.func,
-        onFocus: React.PropTypes.func,
-        onBlur: React.PropTypes.func,
-        onClear: React.PropTypes.func
-    },
+class FormSearchBox extends React.Component {
+    static displayName = "FormSearchBox";
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "FormSearchBox",
-            onKeyDown: _.noop,
-            onFocus: _.noop,
-            onBlur: _.noop,
-            onClear: _.noop,
-        };
-    },
+    static propTypes = {
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
+        queryString: PropTypes.string,
+        placeholder: PropTypes.string,
+        inputFieldClassName: PropTypes.string,
+        onValueChange: PropTypes.func.isRequired,
+        onKeyDown: PropTypes.func,
+        onFocus: PropTypes.func,
+        onBlur: PropTypes.func,
+        onClear: PropTypes.func
+    };
+
+    static defaultProps = {
+        "data-id": "FormSearchBox",
+        onKeyDown: _.noop,
+        onFocus: _.noop,
+        onBlur: _.noop,
+        onClear: _.noop,
+    };
 
     /**
      * @desc Search when the searchBox has a new value.
@@ -101,44 +100,44 @@ var FormSearchBox = React.createClass({
      * @private
      * @ignore
      */
-    _search: function (value) {
+    _search = (value) => {
         this.props.onValueChange(value);
-    },
+    };
 
-    _clear: function () {
+    _clear = () => {
         this.props.onValueChange("");
         this.props.onClear();
-    },
+    };
 
-    _handleSearchBoxKeyDown: function (e) {
+    _handleSearchBoxKeyDown = (e) => {
         if (e.keyCode === KeyboardUtils.KeyCodes.ESC) {
             this._clear();
         }
         this.props.onKeyDown(e);
-    },
+    };
 
-    _getSearchInputRef: function () {
+    _getSearchInputRef = () => {
         return this.refs.searchBox.refs.stateful.refs.stateless.refs["searchBox-input"];
-    },
+    };
 
     /**
     * @function FormSearchBox~searchBoxFocus
     * @desc Sets focus on the search box field.
     */
-    searchBoxFocus: function () {
+    searchBoxFocus = () => {
         this._getSearchInputRef().focus();
-    },
+    };
 
     /**
     * @function FormSearchBox~isFocused
     * @desc Whether or not this search box is the currently focused element.
     * @return {boolean} True if this search box is focused, false otherwise.
     */
-    isFocused: function () {
+    isFocused = () => {
         return document.activeElement === this._getSearchInputRef();
-    },
+    };
 
-    render: function () {
+    render() {
         var showClear = this.props.queryString && (this.props.queryString !== "");
 
         return (
@@ -160,6 +159,6 @@ var FormSearchBox = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = FormSearchBox;

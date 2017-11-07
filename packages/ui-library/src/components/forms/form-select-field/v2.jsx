@@ -1,7 +1,8 @@
 "use strict";
 
-var React = require("re-react"),
-    ReactVanilla = require("react"),
+var PropTypes = require("prop-types");
+
+var React = require("react"),
     classnames = require("classnames"),
     FormError = require("../FormError.jsx"),
     FormLabel = require("../FormLabel.jsx"),
@@ -94,19 +95,16 @@ var React = require("re-react"),
 *     </FormSelectField>
 */
 
-module.exports = ReactVanilla.createClass({
+module.exports = class extends React.Component {
+    static propTypes = {
+        controlled: PropTypes.bool
+    };
 
-    propTypes: {
-        controlled: React.PropTypes.bool
-    },
+    static defaultProps = {
+        controlled: false
+    };
 
-    getDefaultProps: function () {
-        return {
-            controlled: false
-        };
-    },
-
-    render: function () {
+    render() {
         return (
             this.props.controlled
                 ? React.createElement(FormSelectFieldStateless, //eslint-disable-line no-use-before-define
@@ -115,65 +113,62 @@ module.exports = ReactVanilla.createClass({
                     _.defaults({ ref: "FormSelectFieldStateful" }, this.props))
         );
     }
-});
+};
 
-var FormSelectFieldStateless = React.createClass({
-
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        className: React.PropTypes.string.affectsRendering,
-        value: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.number
-        ]).isRequired.affectsRendering,
-        options: React.PropTypes.arrayOf(
-            React.PropTypes.shape({
-                label: React.PropTypes.string,
-                value: React.PropTypes.oneOfType([
-                    React.PropTypes.string,
-                    React.PropTypes.number
+class FormSelectFieldStateless extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
+        value: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number
+        ]).isRequired,
+        options: PropTypes.arrayOf(
+            PropTypes.shape({
+                label: PropTypes.string,
+                value: PropTypes.oneOfType([
+                    PropTypes.string,
+                    PropTypes.number
                 ])
             })
-        ).affectsRendering,
-        onChange: React.PropTypes.func.isRequired,
-        onValueChange: React.PropTypes.func.isRequired,
-        label: React.PropTypes.string.affectsRendering,
-        labelHelpText: React.PropTypes.string.affectsRendering,
-        noneOption: React.PropTypes.shape({
-            label: React.PropTypes.string,
-            value: React.PropTypes.oneOfType([
-                React.PropTypes.string,
-                React.PropTypes.number
+        ),
+        onChange: PropTypes.func.isRequired,
+        onValueChange: PropTypes.func.isRequired,
+        label: PropTypes.string,
+        labelHelpText: PropTypes.string,
+        noneOption: PropTypes.shape({
+            label: PropTypes.string,
+            value: PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.number
             ])
         }),
-        helpClassName: React.PropTypes.string.affectsRendering,
-        selectClassName: React.PropTypes.string.affectsRendering,
-        errorMessage: React.PropTypes.string.affectsRendering,
-        required: React.PropTypes.bool.affectsRendering,
-        disabled: React.PropTypes.bool.affectsRendering
-    },
+        helpClassName: PropTypes.string,
+        selectClassName: PropTypes.string,
+        errorMessage: PropTypes.string,
+        required: PropTypes.bool,
+        disabled: PropTypes.bool
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "form-select-field",
-            onChange: _.noop,
-            onValueChange: _.noop,
-            required: false,
-            disabled: false
-        };
-    },
+    static defaultProps = {
+        "data-id": "form-select-field",
+        onChange: _.noop,
+        onValueChange: _.noop,
+        required: false,
+        disabled: false
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             console.warn("** This component is deprecated and will be removed in an upcoming release. " +
             "See the \"FormDropDownList\" component for a replacement.");
         }
-    },
+    }
 
-    _handleChange: function (e) {
+    _handleChange = (e) => {
         this.props.onChange(e);
         this.props.onValueChange(e.target.value);
-    },
+    };
 
     /**
      * @desc Build options select
@@ -189,11 +184,11 @@ var FormSelectFieldStateless = React.createClass({
      * @private
      * @ignore
      */
-    _getOptionHtml: function (value, label, index) {
+    _getOptionHtml = (value, label, index) => {
         return (<option value={value} key={value + "_" + index}>{label}</option>);
-    },
+    };
 
-    _getOptions: function () {
+    _getOptions = () => {
         var options = [];
 
         options = this.props.options.map(function (option, index) {
@@ -205,9 +200,9 @@ var FormSelectFieldStateless = React.createClass({
         }
 
         return options;
-    },
+    };
 
-    render: function () {
+    render() {
         var className = classnames("input-select", this.props.className, {
             "form-error": this.props.errorMessage,
             "value-entered": this.props.value !== (this.props.noneOption && this.props.noneOption.value),
@@ -247,26 +242,23 @@ var FormSelectFieldStateless = React.createClass({
             </FormLabel>
         );
     }
-});
+}
 
-var FormSelectFieldStateful = ReactVanilla.createClass({
+class FormSelectFieldStateful extends React.Component {
+    state = {
+        value: this.props.value
+    };
 
-    _handleChange: function (e) {
+    _handleChange = (e) => {
         this.setState({
             value: e.target.value
         });
-    },
+    };
 
-    getInitialState: function () {
-        return {
-            value: this.props.value
-        };
-    },
-
-    render: function () {
+    render() {
         var props = _.defaults(
             { ref: "FormSelectFieldStateless", value: this.state.value, onChange: this._handleChange }, this.props);
 
         return React.createElement(FormSelectFieldStateless, props);
     }
-});
+}

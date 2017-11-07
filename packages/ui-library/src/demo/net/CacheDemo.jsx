@@ -23,14 +23,12 @@ function sleep (seconds) {
 var KEY = "myKey", VALUE = "myValue", CACHE_NAME = "local-cache",
     TIMEOUT = 0.2;
 
-var CacheDemo = React.createClass({
-    getInitialState: function () {
-        return {
-            localCache: new Cache("LOCAL", CACHE_NAME, TIMEOUT)
-        };
-    },
+class CacheDemo extends React.Component {
+    state = {
+        localCache: new Cache("LOCAL", CACHE_NAME, TIMEOUT)
+    };
 
-    render: function () {
+    render() {
         this.state.localCache.put(KEY, VALUE);
         var putGetBlock = (
             <div>
@@ -61,6 +59,6 @@ var CacheDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = CacheDemo;

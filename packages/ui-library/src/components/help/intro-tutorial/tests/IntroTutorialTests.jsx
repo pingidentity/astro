@@ -6,21 +6,22 @@ jest.dontMock("../IntroTutorial.jsx");
 describe("IntroTutorial", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
+        TestUtils = require("../../../../testutil/TestUtils"),
         assign = require("object-assign"),
         IntroTutorial = require("../IntroTutorial.jsx");
 
-    var Doc = React.createClass({
+    class Doc extends React.Component {
+        state = this.props;
+
         /*
          * use this function to avoid setting the props directly on the component (anti pattern)
          */
-        _setProps: function (props) {
+        _setProps = (props) => {
             this.setState(props);
-        },
-        getInitialState: function () {
-            return this.props;
-        },
-        render: function () {
+        };
+
+        render() {
             return (<div>
                 <IntroTutorial ref="tutorial" {...this.state} />
                 <div className="app-search"></div>
@@ -28,7 +29,7 @@ describe("IntroTutorial", function () {
                 <div className="main-content"></div>
             </div>);
         }
-    });
+    }
 
     //have to do this because the divs wont exist on the first render
     var sendSteps = function (component, activeStep) {
@@ -84,12 +85,12 @@ describe("IntroTutorial", function () {
 
     it("Removes event listener on unmount", function () {
         var component = getComponent();
-        expect(window.addEventListener.mock.calls.length).toBe(1);
-        expect(removeEventListener.mock.calls.length).toBe(0);
+        expect(TestUtils.mockCallsContains(window.addEventListener, "resize")).toBe(true);
+        expect(TestUtils.mockCallsContains(window.removeEventListener, "resize")).toBe(false);
 
         ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
 
-        expect(removeEventListener.mock.calls.length).toBe(1);
+        expect(TestUtils.mockCallsContains(window.removeEventListener, "resize")).toBe(true);
     });
 
     it("Show welcome text when step is 0", function () {
@@ -162,4 +163,3 @@ describe("IntroTutorial", function () {
         expect(tutorial.props.onGotIt.mock.calls.length).toBe(1);
     });
 });
-

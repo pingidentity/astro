@@ -1,8 +1,8 @@
 {
   "name": "ui-library",
   "version": "2.31.0-SNAPSHOT",
-  "description": "A UI library made of reusable React components, util functions and static assets (e.g. CSS)",
-  "author": "Ping Identity SaaS Interface Development",
+  "description": "A UI library made of reusable React components, util functions and static assets (including CSS, Fonts, and Icons)",
+  "author": "UX Front-End Development Team",
   "license": "ISC",
   "private": true,
   "repository": {
@@ -11,23 +11,28 @@
   },
   "dependencies": {
     "classnames": "1.2.1",
+    "core-js": "^2.5.1",
     "es6-promise": "3.2.1",
     "exif-js": "2.1.1",
     "fbjs": "0.4.0",
     "fix-orientation": "0.0.2",
+    "history": "^4.7.2",
     "isomorphic-fetch": "2.1.1",
     "moment": "2.11.1",
     "moment-range": "1.0.5",
     "moment-timezone": "0.5.5",
     "object-assign": "4.0.1",
     "ping-react-color-picker": "3.1.3",
+    "raf": "^3.4.0",
     "re-mutable": "1.1.1",
     "re-react": "1.1.5",
-    "react-addons-transition-group": "0.14.6",
-    "react-dnd": "2.1.4",
-    "react-dnd-html5-backend": "2.1.2",
-    "recharts": "0.21.2",
+    "react-color": "^2.13.8",
+    "react-color-picker": "^4.0.2",
+    "react-dnd": "2.5.4",
+    "react-dnd-html5-backend": "^2.5.4",
+    "react-router-dom": "^4.2.2",
     "react-tooltip": "^3.3.1",
+    "recharts": "1.0.0-beta.0",
     "superagent": "3.6.0",
     "underscore": "1.8.3",
     "underscore.string": "3.2.2",
@@ -35,10 +40,12 @@
     "validator": "5.2.0"
   },
   "devDependencies": {
-    "babel-core": "6.4.0",
-    "babel-eslint": "4.1.8",
-    "babel-loader": "6.2.1",
-    "babel-preset-react": "6.3.13",
+    "babel-core": "6.26.0",
+    "babel-eslint": "8.0.1",
+    "babel-loader": "6.4.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "1.6.1",
+    "babel-preset-react": "6.24.1",
     "chalk": "1.1.3",
     "clean-webpack-plugin": "0.1.8",
     "clone": "1.0.2",
@@ -52,8 +59,9 @@
     "html-webpack-plugin": "2.9.0",
     "http-server": "0.9.0",
     "jasmine": "2.4.1",
-    "jest-cli": "0.8.2",
+    "jest-cli": "21.2.1",
     "jsdoc": "3.3.3",
+    "jsdoc-babel": "^0.3.0",
     "jsdoc-jsx": "0.1.0",
     "json-loader": "0.5.4",
     "lcov-parse": "0.0.10",
@@ -61,14 +69,15 @@
     "node-sass": "4.3.0",
     "process": "0.11.2",
     "q": "1.4.1",
-    "react": "0.14.6",
-    "react-addons-test-utils": "0.14.6",
-    "react-dnd-test-backend": "^1.0.2",
-    "react-dom": "0.14.6",
-    "react-hot-loader": "1.3.0",
-    "react-redux": "4.4.5",
-    "react-router": "2.3.0",
+    "react": "16.0.0",
+    "react-addons-test-utils": "16.0.0-alpha.3",
+    "react-dnd-test-backend": "^2.5.4",
+    "react-dom": "16.0.0",
+    "react-hot-loader": "3.0.0-beta.7",
+    "react-redux": "5.0.6",
+    "react-router": "3.2.0",
     "react-router-redux": "4.0.2",
+    "react-test-renderer": "^16.0.0",
     "redux": "3.0.5",
     "redux-thunk": "1.0.0",
     "reselect": "2.5.1",
@@ -90,8 +99,8 @@
   "peerDependencies": {
     "clone": "1.x",
     "reselect": "2.x",
-    "react": "0.13 - 0.14",
-    "react-dom": "0.14",
+    "react": "15.3.0 || 16.0.0",
+    "react-dom": "15.3.0 || 16.0.0",
     "validator": "5.2.0"
   },
   "engines": {
@@ -100,8 +109,6 @@
   },
   "jest": {
     "rootDir": "./",
-    "testRunner": "<rootDir>/node_modules/jest-cli/src/testRunners/jasmine/jasmine1",
-    "scriptPreprocessor": "<rootDir>/jest/preprocessor.js",
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules",
       "<rootDir>/src/util/Utils.js",
@@ -109,10 +116,8 @@
       "<rootDir>/src/util/ReduxTestUtils.js",
       "<rootDir>/src/util/ReactWithDefaultMethods.js"
     ],
-    "testDirectoryName": "tests",
-    "testFileExtensions": [
-      "js",
-      "jsx"
+    "testMatch": [
+      "**/tests/**/*.js?(x)"
     ],
     "testPathIgnorePatterns": [
       "/node/",
@@ -120,12 +125,16 @@
       "/tests/coverage/",
       "/build/",
       "/dist/",
-      "/src/selenium/tests"
+      "/src/selenium/tests",
+      "commonTests.js?(x)"
     ],
     "modulePathIgnorePatterns": [
       "/node/",
       "/build/",
       "/dist/"
+    ],
+    "setupFiles": [
+      "<rootDir>/src/util/polyfills.js"
     ]
   },
   "scripts": {
@@ -133,7 +142,8 @@
     "pack-landing": "webpack --progress --colors --config webpack.landing.config.js",
     "webpack-start-landing": "webpack-dev-server --content-base hosting/ -d --hot --port 8082 --host 0.0.0.0 --inline --progress --colors --config webpack.landing.config.js",
     "webpack-start": "webpack-dev-server -d --hot --host 0.0.0.0 --inline --progress --colors --config webpack.dev.config.js",
-    "start": "npm run doc && npm run webpack-start",
+    "start": "npm run webpack-start",
+    "start-w-doc": "npm run doc && npm run webpack-start",
     "doc": "jsdoc -c ./jsdoc.json",
     "jslint": "eslint --ext .js,.jsx .",
     "stylelint": "stylelint --syntax scss ./src/**/*.scss --config ./.stylelintrc",
@@ -155,6 +165,7 @@
         "babelify",
         {
           "presets": [
+            "env",
             "react"
           ]
         }

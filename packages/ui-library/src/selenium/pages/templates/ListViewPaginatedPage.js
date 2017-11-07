@@ -1,7 +1,7 @@
 var HomePage = require("../HomePage.js");
 var ListViewPaginatedDemoPage = Object.create(HomePage, {
 
-    
+
     /**
      * @desc this function is to get Search field
      */
@@ -53,7 +53,7 @@ var ListViewPaginatedDemoPage = Object.create(HomePage, {
      */
     getTopPaging: {
         get: function () {
-            return this.getElements("//div[contains(@data-reactid,'topPageLinks')]");
+            return this.getElements("//div[contains(@data-id,'topPageLinks')]");
         }
     },
 
@@ -62,7 +62,7 @@ var ListViewPaginatedDemoPage = Object.create(HomePage, {
      */
     getBottomPaging: {
         get: function () {
-            return this.getElements("//div[contains(@data-reactid,'bottomPageLinks')]");
+            return this.getElements("//div[contains(@data-id,'bottomPageLinks')]");
         }
     },
 
@@ -92,11 +92,11 @@ var ListViewPaginatedDemoPage = Object.create(HomePage, {
      */
     clickPagingNumberPath: {
         value: function (number) {
-            var xPath = "//a[contains(@data-reactid,'$topPageLinks.${number}')]";
+            var xPath = "//a[contains(@data-id,'topPageLinks{number}')]";
             this.click(this.formatXpath(xPath, { number: number }));
         }
     },
-    
+
     /**
      * @desc this function open the List View Paginated template
      */

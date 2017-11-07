@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames"),
     _ = require("underscore"),
@@ -18,25 +19,22 @@ var React = require("react"),
  * @example
  *      <Status data-id="row-status-good" status={ExpandableRow.Statuses.GOOD} />
  */
-exports.Status = React.createClass({
+exports.Status = class extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        status: PropTypes.oneOf([Statuses.GOOD, Statuses.ERROR, Statuses.WARNING])
+    };
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        status: React.PropTypes.oneOf([Statuses.GOOD, Statuses.ERROR, Statuses.WARNING])
-    },
+    static defaultProps = {
+        "data-id": "status"
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "status"
-        };
-    },
-
-    render: function () {
+    render() {
         var className = classnames("status", this.props.status);
 
         return <div data-id={this.props["data-id"]} className={className} />;
     }
-});
+};
 
 /**
 * @callback PillButton~onClick
@@ -61,30 +59,27 @@ exports.Status = React.createClass({
  * @example
  *      <PillButton data-id="basic-pill-button" label="Pill Button" onClick={this.props.onClick} />
  */
-exports.PillButton = React.createClass({
+exports.PillButton = class extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        label: PropTypes.string,
+        onClick: PropTypes.func
+    };
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        label: React.PropTypes.string,
-        onClick: React.PropTypes.func
-    },
+    static defaultProps = {
+        "data-id": "pill-button"
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "pill-button"
-        };
-    },
-
-    render: function () {
+    render() {
         var props = _.defaults({
             "data-id": this.props["data-id"],
             children: this.props.label,
             className: "inline"
         }, this.props);
 
-        return React.createElement("button", props);
+        return <button {...props} />;
     }
-});
+};
 
 /**
  * @class HelpLabel
@@ -102,23 +97,20 @@ exports.PillButton = React.createClass({
  * @example
  *      <HelpLabel data-id="basic-help-label" label="Help Label" hintText="Help Hint Text" />
  */
-exports.HelpLabel = React.createClass({
+exports.HelpLabel = class extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        label: PropTypes.string.isRequired,
+        className: PropTypes.string,
+        hintText: PropTypes.string.isRequired
+    };
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        label: React.PropTypes.string.isRequired,
-        className: React.PropTypes.string,
-        hintText: React.PropTypes.string.isRequired
-    },
+    static defaultProps = {
+        "data-id": "help-label",
+        className: "width-auto bottom"
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "help-label",
-            className: "width-auto bottom"
-        };
-    },
-
-    render: function () {
+    render() {
 
         return (
             <HelpHint
@@ -128,4 +120,4 @@ exports.HelpLabel = React.createClass({
             </HelpHint>
         );
     }
-});
+};

@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames"),
     HelpHint = require("../tooltips/HelpHint.jsx"),
@@ -29,33 +30,32 @@ var React = require("react"),
  * @param {object} [style]
  *     For passing through direct style attribute from parent
  */
-var FormLabel = React.createClass({
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        id: React.PropTypes.string,
-        className: React.PropTypes.string,
-        value: React.PropTypes.string,
-        hint: React.PropTypes.string,
-        lockText: React.PropTypes.string,
-        helpClassName: React.PropTypes.string,
-        helpTarget: React.PropTypes.object,
-        style: React.PropTypes.object
-    },
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "formLabel",
-            style: {}
-        };
-    },
+class FormLabel extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        id: PropTypes.string,
+        className: PropTypes.string,
+        value: PropTypes.string,
+        hint: PropTypes.string,
+        lockText: PropTypes.string,
+        helpClassName: PropTypes.string,
+        helpTarget: PropTypes.object,
+        style: PropTypes.object
+    };
 
-    componentWillMount: function () {
+    static defaultProps = {
+        "data-id": "formLabel",
+        style: {}
+    };
+
+    componentWillMount() {
         if (this.props.id && !Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("data-id", "id"));
         }
-    },
+    }
 
-    _renderHint: function () {
+    _renderHint = () => {
         if (!this.props.hint) {
             return null;
         }
@@ -69,9 +69,9 @@ var FormLabel = React.createClass({
                 {this.props.helpTarget}
             </HelpHint>
         );
-    },
+    };
 
-    _renderLockHint: function () {
+    _renderLockHint = () => {
         if (!this.props.lockText) {
             return null;
         }
@@ -85,9 +85,9 @@ var FormLabel = React.createClass({
                 lock={true}
             />
         );
-    },
+    };
 
-    render: function () {
+    render() {
         var noLabel = typeof(this.props.value) === "undefined" || this.props.value === null;
 
         if (noLabel && !this.props.children) {
@@ -108,6 +108,6 @@ var FormLabel = React.createClass({
             </label>
         );
     }
-});
+}
 
 module.exports = FormLabel;

@@ -1,1 +1,1 @@
-module.exports = require("./form-text-area").v1;
+module.exports = require("./form-text-area").v2;

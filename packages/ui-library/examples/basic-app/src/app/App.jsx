@@ -22,12 +22,11 @@ var React = require("react"),
 require("../ui-lib-assets/css/ui-library.scss");    // UI Library styles
 require("../css/app.scss");     // Basic app specific styles
 
-var App = React.createClass({
-
+class App extends React.Component {
     /*
     * Initialize the app
     */
-    componentWillMount: function () {
+    componentWillMount () {
 
         //bind action creators
         this.appActions = Redux.bindActionCreators(Actions, this.props.dispatch);
@@ -71,20 +70,20 @@ var App = React.createClass({
 
         //Watch arrow keys and map them to the corresponding actions
         window.addEventListener("keydown", this._handleKeydown, false);
-    },
+    }
 
     /*
     * Remove event listeners, references to DOM nodes and cleanup
     */
-    componentWillUnmount: function () {
+    componentWillUnmount () {
         window.removeEventListener("keydown", this._handleKeydown);
-    },
+    }
 
     /*
     * Some initialization cannot take place until the app has mounted and rendered.
     *   That code will be put here. For instance, loading the query string.
     */
-    componentDidMount: function () {
+    componentDidMount () {
         //load the arguments from the query string
         if (this.props.location.query.openNode) {
             this.navActions.toggleSection(this.props.location.query.openNode);
@@ -92,12 +91,12 @@ var App = React.createClass({
         if (this.props.location.query.selectedNode) {
             this.navActions.selectItem(this.props.location.query.selectedNode);
         }
-    },
+    }
 
     /*
     * Get the correct view for the current nav item
     */
-    _getViewContent: function (id, props) {
+    _getViewContent = (id, props) => {
         switch (this._navItemsById[id].type) {
             case NavItems.Types.SHOWS:
                 return (
@@ -125,9 +124,9 @@ var App = React.createClass({
                             content={this._navItemsById[id].content} />
                 );
         }
-    },
+    };
 
-    render: function () {
+    render () {
         var id = this.props.nav.selectedNode;
         var watch = _.pick(this.props.nav, "openNode", "selectedNode");
 
@@ -169,7 +168,7 @@ var App = React.createClass({
             </div>
         );
     }
-});
+}
 
 /** Connect the app to the redux store */
 App = ReactRedux.connect(function (state) {

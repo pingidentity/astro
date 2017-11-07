@@ -1,12 +1,12 @@
 "use strict";
 
+var PropTypes = require("prop-types");
 var React = require("react");
 var ReactDOM = require("react-dom");
 var dnd = require("react-dnd");
 var classnames = require("classnames");
 var dragSource = dnd.DragSource;
 var dropTarget = dnd.DropTarget;
-var PropTypes = React.PropTypes;
 var TYPE = "DragDrop";
 var _= require("underscore");
 
@@ -61,7 +61,6 @@ function handleDragEvent (callback, props, monitor, component) {
     var itemBeingDragged = monitor.getItem();
     var locationType = props.type === "column" ? isInLeftHalf : isInTopHalf;
     var offset = locationType(monitor, renderedNode, props.dragToEdge) ? 0 : 1;
-
     props[callback](props.index + offset, itemBeingDragged.index, props.column, itemBeingDragged.column);
 }
 
@@ -147,8 +146,8 @@ var dropCollect = function (connect) {
  *  </Draggable>
  *
  */
-var DragDrop = React.createClass({
-    propTypes: {
+class DragDrop extends React.Component {
+    static propTypes = {
         connectDragSource: PropTypes.func.isRequired,
         connectDropTarget: PropTypes.func.isRequired,
         isDragging: PropTypes.bool.isRequired,
@@ -169,19 +168,17 @@ var DragDrop = React.createClass({
         disabled: PropTypes.bool,
         removeDraggableAttribute: PropTypes.bool,
         dragToEdge: PropTypes.bool
-    },
+    };
 
-    getDefaultProps: function () {
-        return {
-            disabled: false,
-            tagName: "div",
-            onDragStart: _.noop,
-            onDragEnd: _.noop,
-            dragToEdge: false
-        };
-    },
+    static defaultProps = {
+        disabled: false,
+        tagName: "div",
+        onDragStart: _.noop,
+        onDragEnd: _.noop,
+        dragToEdge: false
+    };
 
-    render: function () {
+    render() {
         var connectDragSource = this.props.connectDragSource;
         var connectDropTarget = this.props.connectDropTarget;
         var opacity = this.props.isDragging ? 0.2 : 1;
@@ -199,7 +196,7 @@ var DragDrop = React.createClass({
             ? connectDropTarget(row)
             : connectDragSource(connectDropTarget(row));
     }
-});
+}
 
 DragDrop = dropTarget(TYPE, dropSpec, dropCollect)(
     dragSource(TYPE, dragSpec, dragCollect)(DragDrop)

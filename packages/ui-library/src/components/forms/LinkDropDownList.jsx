@@ -1,4 +1,5 @@
 
+var PropTypes = require("prop-types");
 var React = require("react"),
 
     CollapsibleLink = require("../general/CollapsibleLink.jsx"),
@@ -49,54 +50,50 @@ var React = require("react"),
  */
 
 
-var LinkDropDownList = React.createClass({
-    propTypes: {
-        stateless: React.PropTypes.bool
-    },
+class LinkDropDownList extends React.Component {
+    static propTypes = {
+        stateless: PropTypes.bool
+    };
 
-    getDefaultProps: function () {
-        return {
-            stateless: false
-        };
-    },
+    static defaultProps = {
+        stateless: false
+    };
 
-    render: function () {
+    render() {
         return this.props.stateless
             ? React.createElement(LinkDropDownListStateless, //eslint-disable-line no-use-before-define
                 _.defaults({ ref: "LinkDropDownListStateless" }, this.props))
             : React.createElement(LinkDropDownListStateful, //eslint-disable-line no-use-before-define
                 _.defaults({ ref: "LinkDropDownListStateful" }, this.props));
     }
-});
+}
 
-var LinkDropDownListStateless = React.createClass({
-    propTypes: {
-        className: React.PropTypes.string,
-        "data-id": React.PropTypes.string,
-        label: React.PropTypes.string,
-        onClick: React.PropTypes.func,
-        onToggle: React.PropTypes.func,
-        open: React.PropTypes.bool,
-        options: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-        selectedOption: React.PropTypes.object
-    },
+class LinkDropDownListStateless extends React.Component {
+    static propTypes = {
+        className: PropTypes.string,
+        "data-id": PropTypes.string,
+        label: PropTypes.string,
+        onClick: PropTypes.func,
+        onToggle: PropTypes.func,
+        open: PropTypes.bool,
+        options: PropTypes.arrayOf(PropTypes.object).isRequired,
+        selectedOption: PropTypes.object
+    };
 
-    getDefaultProps: function () {
-        return {
-            closeOnSelection: true,
-            "data-id": "link-dropdown-list"
-        };
-    },
+    static defaultProps = {
+        closeOnSelection: true,
+        "data-id": "link-dropdown-list"
+    };
 
-    _handleClick: function (selectedOption) {
+    _handleClick = (selectedOption) => {
         if (this.props.closeOnSelection) {
             this.props.onToggle();
         }
 
         this.props.onClick(selectedOption);
-    },
+    };
 
-    _renderLabel: function () {
+    _renderLabel = () => {
         return (
             <CollapsibleLink
                 data-id={this.props["data-id"] + "-label"}
@@ -104,9 +101,9 @@ var LinkDropDownListStateless = React.createClass({
                 title={this.props.label}
             />
         );
-    },
+    };
 
-    _renderOptions: function () {
+    _renderOptions = () => {
         return this.props.options.map(function (option, i) {
             return (
                 <LinkDropDownListOption
@@ -117,9 +114,9 @@ var LinkDropDownListStateless = React.createClass({
                 />
             );
         }.bind(this));
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <DetailsTooltip
                 data-id={this.props["data-id"]}
@@ -135,42 +132,40 @@ var LinkDropDownListStateless = React.createClass({
             </DetailsTooltip>
         );
     }
-});
+}
 
-var LinkDropDownListStateful = React.createClass({
-    propTypes: {
-        className: React.PropTypes.string,
-        "data-id": React.PropTypes.string,
-        label: React.PropTypes.string,
-        onClick: React.PropTypes.func,
-        onToggle: React.PropTypes.func,
-        open: React.PropTypes.bool,
-        options: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-        selectedOption: React.PropTypes.object
-    },
+class LinkDropDownListStateful extends React.Component {
+    static propTypes = {
+        className: PropTypes.string,
+        "data-id": PropTypes.string,
+        label: PropTypes.string,
+        onClick: PropTypes.func,
+        onToggle: PropTypes.func,
+        open: PropTypes.bool,
+        options: PropTypes.arrayOf(PropTypes.object).isRequired,
+        selectedOption: PropTypes.object
+    };
 
-    _handleClick: function (selectedOption) {
+    state = {
+        open: this.props.open || false,
+        selectedOption: this.props.selectedOption
+    };
+
+    _handleClick = (selectedOption) => {
         this.setState({
             selectedOption: selectedOption
         });
         this.props.onClick(selectedOption);
-    },
+    };
 
-    _handleToggle: function () {
+    _handleToggle = () => {
         this.setState({
             open: !this.state.open
         });
         this.props.onToggle();
-    },
+    };
 
-    getInitialState: function () {
-        return {
-            open: this.props.open || false,
-            selectedOption: this.props.selectedOption
-        };
-    },
-
-    render: function () {
+    render() {
         var props = _.defaults({
             onClick: this._handleClick,
             onToggle: this._handleToggle,
@@ -181,19 +176,19 @@ var LinkDropDownListStateful = React.createClass({
 
         return React.createElement(LinkDropDownListStateless, props);
     }
-});
+}
 
-var LinkDropDownListOption = React.createClass({
-    propTypes: {
-        option: React.PropTypes.object,
-        selected: React.PropTypes.bool
-    },
+class LinkDropDownListOption extends React.Component {
+    static propTypes = {
+        option: PropTypes.object,
+        selected: PropTypes.bool
+    };
 
-    _handleClick: function () {
+    _handleClick = () => {
         this.props.onClick(this.props.option);
-    },
+    };
 
-    render: function () {
+    render() {
         var classNames = {
             "select-option": true,
             selected: this.props.selected
@@ -207,6 +202,6 @@ var LinkDropDownListOption = React.createClass({
             </li>
         );
     }
-});
+}
 
 module.exports = LinkDropDownList;

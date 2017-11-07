@@ -1,4 +1,5 @@
-var React = require("re-react"),
+var PropTypes = require("prop-types");
+var React = require("react"),
     CollapsibleLink = require("../../components/general/CollapsibleLink.jsx"),
     ExpandableRow = require("../../components/rows/expandable-row"),
     FormCheckbox = require("../../components/forms/FormCheckbox.jsx"),
@@ -51,24 +52,24 @@ var React = require("re-react"),
  * @param {ListView~onActiveTabChange} onActiveTabChange
  *          Callback to be triggered when the active tab is changed.
  */
-module.exports = React.createClass({
+module.exports = class extends React.Component {
     /*
      * Declare which variables affect rendering.  The shouldComponentUpdate method will be be injected by ReactDefaultMethods
      * utility.
      */
-    propTypes: {
-        activeTab: React.PropTypes.number.isRequired.affectsRendering,
-        advancedSearch: React.PropTypes.bool.affectsRendering,
-        filters: React.PropTypes.object.affectsRendering,
-        batches: React.PropTypes.array.affectsRendering,
-        hasNext: React.PropTypes.bool.affectsRendering,
-        hasPrev: React.PropTypes.bool.affectsRendering
-    },
+    static propTypes = {
+        activeTab: PropTypes.number.isRequired,
+        advancedSearch: PropTypes.bool,
+        filters: PropTypes.object,
+        batches: PropTypes.array,
+        hasNext: PropTypes.bool,
+        hasPrev: PropTypes.bool
+    };
 
     /*
      * When the component mounts, do a bunch of initialization
      */
-    componentWillMount: function () {
+    componentWillMount() {
         //Create an instance of the row type with the right accessory type
         this._contentType = <Row data-id={"row"} showEdit={true} />;
 
@@ -77,26 +78,26 @@ module.exports = React.createClass({
         this._handleTextChange = this._handleFilter.bind(null, "text");
         this._handleOddFilterToggle = this._handleFilter.bind(null, "odd");
         this._handleEvenFilterToggle = this._handleFilter.bind(null, "even");
-    },
+    }
 
     /*
      * Wrap the callback in a function so that we can create partials without having to worry about the
      * callback changing.
      */
-    _handleFilter: function (name, value) {
+    _handleFilter = (name, value) => {
         this.props.onSearchFilterChange(name, value);
-    },
+    };
 
     /*
      * Only execute the scroll callback if the the position changes
      */
-    _handleScroll: function (pos) {
+    _handleScroll = (pos) => {
         if (this.props.position.batchId !== pos.batchId || this.props.position.itemIndex !== pos.itemIndex) {
             this.props.onScrollPositionChange(pos);
         }
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <TabbedSections selectedIndex={this.props.activeTab} onValueChange={this.props.onActiveTabChange}>
                 <div title="First Page">
@@ -159,14 +160,14 @@ module.exports = React.createClass({
                 </div>
             </TabbedSections>);
     }
-});
+};
 
 /*
  * This component just serves as a proxy to choose the type of row to return.  This is obviously verbose so
  * that the code for each row type is not obfuscated.  This could easily be boiled down to one return statement
  */
-var Row = React.createClass({
-    render: function () {
+class Row extends React.Component {
+    render() {
         switch (this.props.type) {
             case "1 line with icon, no accessories":
                 return (
@@ -261,4 +262,4 @@ var Row = React.createClass({
                         title={"Row number " + this.props["data-id"] + " (" + this.props.type + ")"} />);
         }
     }
-});
+}

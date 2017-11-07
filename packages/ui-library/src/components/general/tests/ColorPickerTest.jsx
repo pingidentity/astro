@@ -5,11 +5,12 @@ jest.dontMock("../If.jsx");
 jest.dontMock("../../../util/EventUtils.js");
 jest.dontMock("../../../util/Validators.js");
 jest.dontMock("../../../util/Utils.js");
+jest.dontMock("react-color");
 
 describe("ColorPicker", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         ColorPicker = require("../ColorPicker.jsx"),
         FormLabel = require("../../forms/FormLabel.jsx"),
@@ -31,8 +32,8 @@ describe("ColorPicker", function () {
     function getParts (component) {
         var componentRef = component.refs.stateless || component.refs.stateful.refs.stateless;
         return {
-            input: TestUtils.findRenderedDOMNodeWithDataId(component, "input"),
-            picker: componentRef.refs.reactColorPicker
+            input: TestUtils.scryRenderedDOMNodesWithTag(component, "input")[0],
+            picker: componentRef.reactColorPicker
         };
     }
 
@@ -64,12 +65,12 @@ describe("ColorPicker", function () {
         var colorSample = componentRef.refs.colorSample;
         expect(colorSample.style.backgroundColor).toEqual("rgb(255, 0, 255)");
 
-        var colorInput = TestUtils.findRenderedDOMNodeWithDataId(component, "input");
+        var colorInput = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         expect(colorInput.disabled).toBe(false);
         expect(colorInput.value).toEqual("#ff00ff");
 
         // the picker is not visible by default
-        var picker = componentRef.refs.reactColorPicker;
+        var picker = componentRef.reactColorPicker;
         expect(picker).toBeUndefined();
     });
 
@@ -84,7 +85,7 @@ describe("ColorPicker", function () {
 
     it("stateless: closes on a global click", function () {
         var component = getComponent({ stateless: true, open: true });
-        var handler = window.addEventListener.mock.calls[0][1];
+        var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
         var e = { target: document.body };
 
         expect(component.props.onToggle).not.toBeCalled();
@@ -97,7 +98,7 @@ describe("ColorPicker", function () {
 
     it("stateless: skips the global click handler if not open and click outside of picker", function () {
         var component = getComponent({ stateless: true });
-        var handler = window.addEventListener.mock.calls[0][1];
+        var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
         var e = { target: document.body };
 
         expect(component.props.onToggle).not.toBeCalled();
@@ -111,20 +112,20 @@ describe("ColorPicker", function () {
     it("stateless: skips the global click handler if not open and click inside picker", function () {
         var component = getComponent({ stateless: true });
         var innerSwatch = component.refs.stateless.refs.innerSwatch;
-        var handler = window.addEventListener.mock.calls[0][1];
+        var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
 
         //click on the inner swatch
         handler({ target: innerSwatch });
         expect(component.props.onToggle).not.toBeCalled();
     });
 
-    it("stateless: skips global click handler if the click is inside the hue-spectrum", function () {
+    it("stateless: skips global click handler if the click is inside the component", function () {
         var component = getComponent({ stateless: true, open: true });
-        var handler = window.addEventListener.mock.calls[0][1];
-        var hue = ReactDOM.findDOMNode(component).getElementsByClassName("react-color-picker__hue-spectrum")[0];
+        var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
+        var pickerNode = ReactDOM.findDOMNode(getParts(component).picker);
 
-        //click inside hue spectrum
-        handler({ target: hue });
+
+        handler({ target: pickerNode });
         expect(component.props.onToggle).not.toBeCalled();
     });
 
@@ -136,11 +137,11 @@ describe("ColorPicker", function () {
         var componentRef = component.refs.stateless;
 
         // input should be enabled
-        var colorInput = TestUtils.findRenderedDOMNodeWithDataId(component, "input");
+        var colorInput = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         expect(colorInput.disabled).toBe(false);
 
         // the picker should not be visible
-        var picker = componentRef.refs.reactColorPicker;
+        var picker = componentRef.reactColorPicker;
         expect(picker).toBeUndefined();
     });
 
@@ -153,7 +154,7 @@ describe("ColorPicker", function () {
         });
         var componentRef = component.refs.stateless;
 
-        var picker = componentRef.refs.reactColorPicker;
+        var picker = componentRef.reactColorPicker;
         expect(picker).toBeTruthy();
 
         var container = TestUtils.findRenderedDOMNodeWithDataId(component, "container");
@@ -167,11 +168,11 @@ describe("ColorPicker", function () {
         });
         var componentRef = component.refs.stateless;
 
-        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithDataId(component, "input"));
+        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithTag(component, "input"));
         expect(input.disabled).toBeTruthy();
 
         // the picker should not be rendered (due to the disable state), even after forcibly toggling it
-        var picker = componentRef.refs.reactColorPicker;
+        var picker = componentRef.reactColorPicker;
         expect(picker).toBeUndefined();
     });
 
@@ -183,7 +184,7 @@ describe("ColorPicker", function () {
         });
         var componentRef = component.refs.stateless;
 
-        var picker = componentRef.refs.reactColorPicker;
+        var picker = componentRef.reactColorPicker;
         expect(picker).toBeUndefined();
     });
 
@@ -191,14 +192,14 @@ describe("ColorPicker", function () {
         var component = getComponent({ disabled: true });
         var componentRef = component.refs.stateful.refs.stateless;
 
-        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithDataId(component, "input"));
+        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithTag(component, "input"));
         expect(input.disabled).toBeTruthy();
 
         // the picker should not be rendered (due to the disable state), even after forcibly toggling it
-        var picker = componentRef.refs.reactColorPicker;
+        var picker = componentRef.reactColorPicker;
         expect(picker).toBeUndefined();
         component.refs.stateful._handleToggle();
-        var picker = componentRef.refs.reactColorPicker;
+        var picker = componentRef.reactColorPicker;
         expect(picker).toBeUndefined();
     });
 
@@ -206,7 +207,7 @@ describe("ColorPicker", function () {
         var component = getComponent({
             stateless: true
         });
-        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithDataId(component, "input"));
+        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithTag(component, "input"));
 
         //return key should make it expand.  This is weak but simulating keydowns didnt work
         ReactTestUtils.Simulate.change(input, { target: { value: "#ff00aa" } });
@@ -215,7 +216,7 @@ describe("ColorPicker", function () {
 
     it("stateful: accepts valid user typed color", function () {
         var component = getComponent();
-        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithDataId(component, "input"));
+        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithTag(component, "input"));
 
         //return key should make it expand.  This is weak but simulating keydowns didnt work
         ReactTestUtils.Simulate.change(input, { target: { value: "#ff00aa" } });
@@ -226,7 +227,7 @@ describe("ColorPicker", function () {
         var component = getComponent({
             stateless: true
         });
-        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithDataId(component, "input"));
+        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithTag(component, "input"));
 
         //return key should make it expand.  This is weak but simulating keydowns didnt work
         ReactTestUtils.Simulate.change(input, { target: { value: "#xxi" } });
@@ -235,7 +236,7 @@ describe("ColorPicker", function () {
 
     it("stateful: does not accept invalid user typed color", function () {
         var component = getComponent();
-        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithDataId(component, "input"));
+        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithTag(component, "input"));
 
         //return key should make it expand.  This is weak but simulating keydowns didnt work
         ReactTestUtils.Simulate.change(input, { target: { value: "#xxi" } });
@@ -246,7 +247,7 @@ describe("ColorPicker", function () {
         var component = getComponent({
             stateless: true
         });
-        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithDataId(component, "input"));
+        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithTag(component, "input"));
 
         ReactTestUtils.Simulate.blur(input, { target: { value: "#ff" } });
         expect(component.props.onError).toBeCalled();
@@ -256,7 +257,7 @@ describe("ColorPicker", function () {
         var component = getComponent({
             stateless: true
         });
-        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithDataId(component, "input"));
+        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithTag(component, "input"));
 
         ReactTestUtils.Simulate.blur(input, { target: { value: "#000" } });
         expect(component.props.onError).not.toBeCalled();
@@ -266,7 +267,7 @@ describe("ColorPicker", function () {
         var component = getComponent({
             stateless: true
         });
-        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithDataId(component, "input"));
+        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithTag(component, "input"));
 
         //return key should make it expand.  This is weak but simulating keydowns didnt work
         ReactTestUtils.Simulate.change(input, { target: { value: "ff00aa" } });
@@ -278,7 +279,7 @@ describe("ColorPicker", function () {
 
     it("stateful: prepends '#' to user typed color if it does not start with '#'", function () {
         var component = getComponent();
-        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithDataId(component, "input"));
+        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithTag(component, "input"));
 
         //return key should make it expand.  This is weak but simulating keydowns didnt work
         ReactTestUtils.Simulate.change(input, { target: { value: "ff00aa" } });
@@ -353,7 +354,7 @@ describe("ColorPicker", function () {
     it("stateful: expands and collapses with key presses", function () {
         var component = getComponent();
         var componentRef = component.refs.stateful.refs.stateless;
-        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithDataId(component, "input"));
+        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithTag(component, "input"));
 
         //return key should make it expand
         ReactTestUtils.Simulate.keyDown(input, { keyCode: 13 });
@@ -383,7 +384,7 @@ describe("ColorPicker", function () {
             stateless: true,
             onToggle: onToggle
         });
-        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithDataId(component, "input"));
+        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithTag(component, "input"));
 
         //return key should toggle
         ReactTestUtils.Simulate.keyDown(input, { keyCode: 13 });
@@ -403,7 +404,7 @@ describe("ColorPicker", function () {
             onToggle: onToggle,
             open: true
         });
-        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithDataId(component, "input"));
+        var input = ReactDOM.findDOMNode(TestUtils.scryRenderedDOMNodesWithTag(component, "input")[0]);
 
         //return key should not toggle
         ReactTestUtils.Simulate.keyDown(input, { keyCode: 13 });
@@ -420,7 +421,7 @@ describe("ColorPicker", function () {
             onToggle: onToggle,
             open: true
         });
-        var input = ReactDOM.findDOMNode(TestUtils.findRenderedDOMNodeWithDataId(component, "input"));
+        var input = ReactDOM.findDOMNode(TestUtils.scryRenderedDOMNodesWithTag(component, "input")[0]);
 
         //return key should not toggle
         ReactTestUtils.Simulate.keyDown(input, { keyCode: 13 });
@@ -477,7 +478,6 @@ describe("ColorPicker", function () {
         expect(component.props.onToggle).not.toBeCalled();
     });
 
-
     it("stateful: open when the inner swatch is clicked", function () {
         var component = getComponent();
         var componentRef = component.refs.stateful.refs.stateless;
@@ -496,7 +496,7 @@ describe("ColorPicker", function () {
         var componentRef = component.refs.stateless;
 
         // simulate a call back from the react color picker component
-        componentRef._handleValueChange("#aaa");
+        componentRef._handleValueChange({ hex: "#aaa" });
 
         expect(component.props.onValueChange.mock.calls.length).toBe(1);
         expect(component.props.onValueChange.mock.calls[0][0]).toBe("#aaa");
@@ -523,7 +523,7 @@ describe("ColorPicker", function () {
         var componentRef = component.refs.stateless;
 
         // simulate a call back from the react color picker component
-        componentRef._handleDrag("#aaa");
+        componentRef._handleDrag({ hex: "#aaa" });
 
         expect(component.props.onValueChange.mock.calls.length).toBe(1);
         expect(component.props.onValueChange.mock.calls[0][0]).toBe("#aaa");
@@ -558,7 +558,7 @@ describe("ColorPicker", function () {
         var componentRef = component.refs.stateless;
 
         // simulate a call back from the react color picker component
-        componentRef._handleValueChange("#aaa");
+        componentRef._handleValueChange({ hex: "#aaa" });
 
         expect(component.props.onChange.mock.calls.length).toBe(1);
         expect(component.props.onChange.mock.calls[0][0]).toBe("#aaa");
@@ -598,7 +598,7 @@ describe("ColorPicker", function () {
         var componentRef = component.refs.stateless;
 
         // simulate a call back from the react color picker component
-        componentRef._handleDrag("#aaa");
+        componentRef._handleDrag({ hex: "#aaa" });
 
         expect(component.props.onChange.mock.calls.length).toBe(1);
         expect(component.props.onChange.mock.calls[0][0]).toBe("#aaa");
@@ -619,7 +619,7 @@ describe("ColorPicker", function () {
         ReactTestUtils.Simulate.click(componentRef.refs.innerSwatch);
 
         // simulate a call back from the react color picker component
-        componentRef._handleDrag("#aaa");
+        componentRef._handleDrag({ hex: "#aaa" });
 
         expect(component.props.onChange.mock.calls.length).toBe(1);
         // and the color picker should not close
@@ -635,8 +635,9 @@ describe("ColorPicker", function () {
         var componentRef = component.refs.stateless;
 
         // the picker is not visible by default
-        var picker = componentRef.refs.reactColorPicker;
-        expect(picker.props.value).toBe("#ff00ff");
+        var picker = componentRef.reactColorPicker;
+
+        expect(picker.props.color).toBe("#ff00ff");
     });
 
     // TODO To be removed once "id" support is discontnued.
@@ -679,7 +680,7 @@ describe("ColorPicker", function () {
         var colorSample = componentRef.refs.colorSample;
         expect(colorSample.style.backgroundColor).toEqual("");
 
-        var colorInput = TestUtils.findRenderedDOMNodeWithDataId(component, "input");
+        var colorInput = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         expect(colorInput.disabled).toBe(false);
         expect(colorInput.value).toEqual("");
     });
@@ -696,7 +697,7 @@ describe("ColorPicker", function () {
         component = getComponent({ controlled: true });
         stateful = component.refs.stateful;
         stateless = component.refs.stateless;
-        
+
         expect(stateless).toBeTruthy();
         expect(stateful).toBeFalsy();
     });
@@ -728,8 +729,8 @@ describe("ColorPicker", function () {
         console.warn = jest.genMockFunction();
         getComponent();
 
-        // Checking 2nd call b/c 1st logs warning for "controlled" prop
-        expect(console.warn.mock.calls[1]).toBeUndefined();
+        expect(TestUtils.mockCallsContains(console.warn,
+            "Deprecated: use data-id instead of id. Support for id will be removed in next version")).toBe(false);
     });
 
     // TODO To be removed once "onChange" support is discontnued.

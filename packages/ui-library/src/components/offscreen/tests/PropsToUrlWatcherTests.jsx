@@ -5,7 +5,7 @@ jest.dontMock("../../../util/ReduxTestUtils.js");
 
 describe("HistoryWriter", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         ReduxTestUtils = require("../../../util/ReduxTestUtils.js"),
         PropsToUrlWatcher = require("../PropsToUrlWatcher.jsx"),
         TestUtils = require("../../../testutil/TestUtils"),

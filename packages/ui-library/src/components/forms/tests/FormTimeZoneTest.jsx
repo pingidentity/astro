@@ -13,7 +13,7 @@ jest.dontMock("../../../util/KeyboardUtils.js");
 describe("FormTimeZone", function () {
 
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         ReactDOM = require("react-dom"),
         TestUtils = require("../../../testutil/TestUtils"),
         FormTimeZone = require("../FormTimeZone.jsx"),
@@ -327,7 +327,7 @@ describe("FormTimeZone", function () {
                 onSearch: jest.genMockFunction(),
                 onValueChange: jest.genMockFunction()
             }),
-            handler = window.addEventListener.mock.calls[0][1];
+            handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
 
         // click on component
         handler({ target: { dataset: component } });

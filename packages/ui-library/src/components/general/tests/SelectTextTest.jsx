@@ -15,9 +15,10 @@ jest.dontMock("../SelectText.jsx");
  */
 describe("SelectText", function () {
     var React = require("react");
-    var ReactTestUtils = require("react-addons-test-utils");
+    var ReactTestUtils = require("react-dom/test-utils");
     var TestUtils = require("../../../testutil/TestUtils");
     var SelectText = require("../SelectText.jsx");
+    var Wrapper = TestUtils.UpdatePropsWrapper;
 
     afterEach(function () {
         global.getSelection = undefined;
@@ -100,6 +101,23 @@ describe("SelectText", function () {
         expect(moveToElement).toBeCalled();
         expect(moveToElement.mock.calls[0][0].textContent).toEqual("Just some text");
         expect(select).toBeCalled();
+    });
+
+    it("calls _selectText when props change", function () {
+
+        var component = ReactTestUtils.renderIntoDocument(
+            <Wrapper type={SelectText} className="testClass" select={false} >
+                Just some text
+            </Wrapper>
+        );
+        component.refs.wrapper._selectText = jest.fn();
+        component._setProps({ select: false });
+
+        expect(component.refs.wrapper._selectText.mock.calls.length).toBe(0);
+
+        component._setProps({ select: true });
+
+        expect(component.refs.wrapper._selectText.mock.calls.length).toBe(1);
     });
 
 

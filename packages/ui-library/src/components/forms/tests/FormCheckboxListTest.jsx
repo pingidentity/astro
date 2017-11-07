@@ -15,7 +15,7 @@ jest.dontMock("../../../testutil/TestUtils");
 describe("FormCheckboxList", function () {
     var _ = require("underscore");
     var React = require("react");
-    var ReactTestUtils = require("react-addons-test-utils");
+    var ReactTestUtils = require("react-dom/test-utils");
     var TestUtils = require("../../../testutil/TestUtils");
     var FormCheckboxList = require("../FormCheckboxList.jsx");
     var Toggle = require("../form-toggle/v2.jsx");
@@ -80,7 +80,7 @@ describe("FormCheckboxList", function () {
         // Check for rendered elements
         expect(checkboxes.length).toBe(2);
         expect(searchInput).toBeDefined();
-        expect(checkAllToggle).toBeDefined(1);
+        expect(checkAllToggle).toBeDefined();
         expect(hideUncheckedToggle.length).toBe(1);
 
         // validate rendered dataobject checkbox values
@@ -721,7 +721,7 @@ describe("FormCheckboxList", function () {
                     onGetDeselectAllLabel={_.noop} onGetSelectAllLabel={_.noop} />);
         stateful = component.refs.FormCheckboxListStateful;
         stateless = component.refs.FormCheckboxListStateless;
-        
+
         expect(stateless).toBeTruthy();
         expect(stateful).toBeFalsy();
     });

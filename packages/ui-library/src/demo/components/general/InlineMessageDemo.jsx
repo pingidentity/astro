@@ -11,9 +11,8 @@ var doSomething = function (e) {
     console.log("Did something with " + e);
 };
 
-var InlineMessageDemo = React.createClass({
-
-    render: function () {
+class InlineMessageDemo extends React.Component {
+    render() {
         return (
             <div>
                 <p>
@@ -57,6 +56,6 @@ var InlineMessageDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = InlineMessageDemo;

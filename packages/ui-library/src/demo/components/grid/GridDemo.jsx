@@ -15,21 +15,18 @@ var Calendar = require("./../../../components/calendars/Calendar.jsx");
 * @desc A demo for Grid
 */
 
-var ExpandedRow = React.createClass({
+class ExpandedRow extends React.Component {
+    state = {
+        selectedDate: moment(new Date()) //current date
+    };
 
-    getInitialState: function () {
-        return {
-            selectedDate: moment(new Date()) //current date
-        };
-    },
-
-    _handleEnrollmentDateChanged: function (newValue) {
+    _handleEnrollmentDateChanged = (newValue) => {
         this.setState({
             selectedDate: parseInt(newValue)
         });
-    },
+    };
 
-    render: function () {
+    render() {
         switch (this.props.type) {
             /*
             case "with-color-picker":
@@ -58,10 +55,10 @@ var ExpandedRow = React.createClass({
                 );
         }
     }
-});
+}
 
-var GridDemo = React.createClass({
-    componentWillMount: function () {
+class GridDemo extends React.Component {
+    componentWillMount() {
         this.actions = Redux.bindActionCreators(Grid.Actions, this.props.store.dispatch);
         this.id = "GridDemo";
         this.id2 = "GridDemo2";
@@ -72,22 +69,22 @@ var GridDemo = React.createClass({
         this.actions.init(this.id2, data);
 
         this.actions.setPagination(this.id, 0, 3, 1);
-    },
+    }
 
     /*
      * Handle when the selectAll checkbox is toggled
      */
-    _handleSelectAllHasLaptop: function (checked) {
+    _handleSelectAllHasLaptop = (checked) => {
         this.actions.setFieldInAllRows(this.id, "hasLaptop", checked);
         this.actions.set([this.id, "hasLaptopForAll"], checked);
-    },
+    };
 
-    _handleRowExpanded: function (rowIndex) {
+    _handleRowExpanded = (rowIndex) => {
         // changes status (expand or collapse)
         this.actions.toggleRow(this.id, rowIndex);
-    },
+    };
 
-    _handleLaptopChecked: function (rowObject, e) {
+    _handleLaptopChecked = (rowObject, e) => {
         //this would not be scalable.  For big sets we'd want an index
         var index = this.props[this.id].rows.indexOf(rowObject);
 
@@ -105,9 +102,9 @@ var GridDemo = React.createClass({
         }
 
         console.log(e.target.checked);
-    },
+    };
 
-    _handleBirthYearChanged: function (rowObject, e) {
+    _handleBirthYearChanged = (rowObject, e) => {
         console.log(e.target.value);
 
         var index = this.props[this.id].rows.indexOf(rowObject);
@@ -118,13 +115,13 @@ var GridDemo = React.createClass({
             birthyear = e.target.value;
         }
         this.actions.setField("birthyear", this.id, index, birthyear);
-    },
+    };
 
-    _handlePaginationChange: function (firstColumn, lastColumn, currentPage) {
+    _handlePaginationChange = (firstColumn, lastColumn, currentPage) => {
         this.actions.setPagination(this.id, firstColumn, lastColumn, currentPage);
-    },
+    };
 
-    render: function () {
+    render() {
         if (!this.props[this.id]) {
             return null;
         }
@@ -176,7 +173,7 @@ var GridDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 GridDemo.Reducer = Grid.Reducer;
 

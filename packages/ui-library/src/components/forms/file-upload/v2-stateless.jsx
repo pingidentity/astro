@@ -1,5 +1,5 @@
-var React = require("re-react"),
-    ReactVanilla = require("react"),
+var PropTypes = require("prop-types");
+var React = require("react"),
     ReactDOM = require("react-dom"),
     classnames = require("classnames"),
     FormLabel = require("../FormLabel.jsx"),
@@ -11,48 +11,48 @@ var React = require("re-react"),
  * @memberof FileUpload
  * @desc This is a wrapper around the stateless (stateless=true) FileUpload.
  */
-module.exports = React.createClass({
-    displayName: "FileUploadStateless",
+module.exports = class extends React.Component {
+    static displayName = "FileUploadStateless";
 
-    propTypes: {
+    static propTypes = {
         //labels
-        labelText: React.PropTypes.string.affectsRendering,
-        labelSelect: React.PropTypes.string.isRequired.affectsRendering,
-        labelSelectOther: React.PropTypes.string.affectsRendering,
-        labelRemove: React.PropTypes.string.isRequired.affectsRendering,
-        labelMaxFileSize: React.PropTypes.string.affectsRendering,
+        labelText: PropTypes.string,
+        labelSelect: PropTypes.string.isRequired,
+        labelSelectOther: PropTypes.string,
+        labelRemove: PropTypes.string.isRequired,
+        labelMaxFileSize: PropTypes.string,
         //callbacks
-        onRemove: React.PropTypes.func.isRequired,
-        onChange: React.PropTypes.func.isRequired,
+        onRemove: PropTypes.func.isRequired,
+        onChange: PropTypes.func.isRequired,
         //flags
-        disabled: React.PropTypes.bool.affectsRendering,
-        showFilename: React.PropTypes.bool.affectsRendering,
-        showThumbnail: React.PropTypes.bool.affectsRendering,
-        showRemoveButton: React.PropTypes.bool.affectsRendering,
+        disabled: PropTypes.bool,
+        showFilename: PropTypes.bool,
+        showThumbnail: PropTypes.bool,
+        showRemoveButton: PropTypes.bool,
         //properties
-        errorMessage: React.PropTypes.string.affectsRendering,
-        filesAcceptedMessage: React.PropTypes.string.affectsRendering,
-        fileName: React.PropTypes.string.affectsRendering,
-        title: React.PropTypes.string.affectsRendering,
-        accept: React.PropTypes.string.affectsRendering,
-        "data-id": React.PropTypes.string,
-        thumbnailSrc: React.PropTypes.string.affectsRendering
-    },
+        errorMessage: PropTypes.string,
+        filesAcceptedMessage: PropTypes.string,
+        fileName: PropTypes.string,
+        title: PropTypes.string,
+        accept: PropTypes.string,
+        "data-id": PropTypes.string,
+        thumbnailSrc: PropTypes.string
+    };
 
     /*
      * Reset the input to the original state
      */
-    resetComponent: function () {
+    resetComponent = () => {
         ReactDOM.findDOMNode(this.refs.fileInput).value = "";
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction() && this.props.title) {
             console.warn(Utils.deprecateMessage("title", "labelText"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var fileSelected = !!(this.props.thumbnailSrc || this.props.fileName);
         var containerClass = classnames(this.props.className, "input-file-upload", {
             "image-upload": this.props.showThumbnail,
@@ -120,10 +120,10 @@ module.exports = React.createClass({
             </div>
         );
     }
-});
+};
 
-var ImagePreview = ReactVanilla.createClass({
-    render: function () {
+class ImagePreview extends React.Component {
+    render() {
         if (!this.props.show) { return null; }
 
         return (
@@ -134,10 +134,10 @@ var ImagePreview = ReactVanilla.createClass({
                 </span>
             </div>);
     }
-});
+}
 
-var FileRestrictions = ReactVanilla.createClass({
-    render: function () {
+class FileRestrictions extends React.Component {
+    render() {
         if (!this.props.show) { return null; }
 
         return (
@@ -150,10 +150,10 @@ var FileRestrictions = ReactVanilla.createClass({
                 </span>
             </span>);
     }
-});
+}
 
-var AcceptMessage = ReactVanilla.createClass({
-    render: function () {
+class AcceptMessage extends React.Component {
+    render() {
         if (!this.props.value) { return null; }
 
         return (
@@ -161,10 +161,10 @@ var AcceptMessage = ReactVanilla.createClass({
                 {this.props.value}
             </div>);
     }
-});
+}
 
-var Filename = ReactVanilla.createClass({
-    render: function () {
+class Filename extends React.Component {
+    render() {
         if (!this.props.show) { return null; }
 
         return (
@@ -173,4 +173,4 @@ var Filename = ReactVanilla.createClass({
                 {this.props.value}
             </span>);
     }
-});
+}

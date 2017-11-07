@@ -6,18 +6,16 @@ var TabbedSections = require("./../../../components/general/TabbedSections.jsx")
 * @memberof TabbedSections
 * @desc A demo for TabbedSections
 */
-var TabbedSectionsDemo = React.createClass({
-    _handleSectionChange: function (index) {
+class TabbedSectionsDemo extends React.Component {
+    state = { selectedIndex: -1 };
+
+    _handleSectionChange = (index) => {
         this.setState({
             selectedIndex: index
         });
-    },
+    };
 
-    getInitialState: function () {
-        return { selectedIndex: -1 };
-    },
-
-    render: function () {
+    render() {
         return (
             <TabbedSections selectedIndex={this.state.selectedIndex}
                             onValueChange={this._handleSectionChange} >
@@ -32,7 +30,7 @@ var TabbedSectionsDemo = React.createClass({
             </TabbedSections>
         );
     }
-});
+}
 
 
 module.exports = TabbedSectionsDemo;

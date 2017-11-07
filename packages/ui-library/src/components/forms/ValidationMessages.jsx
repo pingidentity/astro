@@ -1,5 +1,5 @@
 "use strict";
-
+var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames");
 
@@ -37,7 +37,7 @@ var Status = {
 };
 
 var ValidationMessages = function (props) {
-        
+
     var _getMessages = function () {
         var messages = [];
 
@@ -62,9 +62,9 @@ var ValidationMessages = function (props) {
 };
 
 ValidationMessages.propTypes = {
-    "data-id": React.PropTypes.string,
-    messages: React.PropTypes.array.isRequired,
-    className: React.PropTypes.string
+    "data-id": PropTypes.string,
+    messages: PropTypes.array.isRequired,
+    className: PropTypes.string
 };
 
 ValidationMessages.defaultProps = {

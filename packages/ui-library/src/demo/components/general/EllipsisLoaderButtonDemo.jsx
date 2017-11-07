@@ -6,33 +6,31 @@ var EllipsisLoaderButton = require("./../../../components/general/EllipsisLoader
 * @memberof EllipsisLoaderButton
 * @desc A demo for EllipsisLoaderButton
 */
-var EllipsisLoaderDemo = React.createClass({
-    numDemos: 3,
+class EllipsisLoaderDemo extends React.Component {
+    state = {
+        loading1: false,
+        loading2: false
+    };
 
-    getInitialState: function () {
-        return {
-            loading1: false,
-            loading2: false
-        };
-    },
+    numDemos = 3;
 
-    componentWillMount: function () {
+    componentWillMount() {
         var i;
 
         for (i=1; i<=this.numDemos; i+=1) {
             this["_toggleLoadingButton" + i] = this._toggleLoadingButton.bind(null, i);
         }
-    },
+    }
 
-    _toggleLoadingButton: function (i) {
+    _toggleLoadingButton = (i) => {
         var newState = {};
 
         newState["loading" + i] = !this.state["loading" + i];
 
         this.setState(newState);
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <div>
                 <EllipsisLoaderButton
@@ -58,6 +56,6 @@ var EllipsisLoaderDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = EllipsisLoaderDemo;

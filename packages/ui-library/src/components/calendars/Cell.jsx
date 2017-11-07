@@ -1,20 +1,18 @@
+var PropTypes = require("prop-types");
 var React = require("react");
 
-module.exports = React.createClass({
+module.exports = class extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
+        value: PropTypes.string
+    };
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        className: React.PropTypes.string,
-        value: React.PropTypes.string
-    },
+    static defaultProps = {
+        "data-id": "cell"
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "cell"
-        };
-    },
-
-    render: function () {
+    render() {
         var label = this.props.value;
         var className = this.props.className + " cell";
 
@@ -22,5 +20,4 @@ module.exports = React.createClass({
             <div data-id={this.props["data-id"]} className={className}>{label}</div>
         );
     }
-
-});
+};

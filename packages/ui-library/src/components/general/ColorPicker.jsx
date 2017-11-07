@@ -1,9 +1,12 @@
 "use strict";
 
-var React = require("re-react");
-var ReactVanilla = require("react");
+
+import { ChromePicker } from "react-color";
+
+var PropTypes = require("prop-types");
+
+var React = require("react");
 var ReactDOM = require("react-dom");
-var Picker = require("ping-react-color-picker");
 var css = require("classnames");
 var _ = require("underscore");
 var FormLabel = require("../forms/FormLabel.jsx");
@@ -95,26 +98,24 @@ var callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutside
  *       stateless={true} />
  */
 
-module.exports = ReactVanilla.createClass({
-    displayName: "ColorPicker",
+module.exports = class extends React.Component {
+    static displayName = "ColorPicker";
 
-    propTypes: {
-        controlled: React.PropTypes.bool
-    },
+    static propTypes = {
+        controlled: PropTypes.bool
+    };
 
-    getDefaultProps: function () {
-        return {
-            controlled: false
-        };
-    },
+    static defaultProps = {
+        controlled: false
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("controlled", "stateless"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
 
         return (
@@ -122,60 +123,68 @@ module.exports = ReactVanilla.createClass({
                     ? <Stateless ref="stateless" {...this.props} />
                     : <Stateful ref="stateful" {...this.props} />);
     }
-});
+};
 
-var Stateless = React.createClass({
-    displayName: "ColorPickerStateless",
+class Stateless extends React.Component {
+    static displayName = "ColorPickerStateless";
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        id: React.PropTypes.string,
-        className: React.PropTypes.string,
-        hintText: React.PropTypes.string.affectsRendering,
-        labelText: React.PropTypes.string.affectsRendering,
-        color: React.PropTypes.string.isRequired.affectsRendering,
-        disabled: React.PropTypes.bool.affectsRendering,
-        onValueChange: React.PropTypes.func,
-        onChange: React.PropTypes.func,
-        open: React.PropTypes.bool.affectsRendering,
-        onToggle: React.PropTypes.func.isRequired,
-        errorMessage: React.PropTypes.string.affectsRendering,
-        onError: React.PropTypes.func
-    },
+    static propTypes = {
+        "data-id": PropTypes.string,
+        id: PropTypes.string,
+        className: PropTypes.string,
+        hintText: PropTypes.string,
+        labelText: PropTypes.string,
+        color: PropTypes.string.isRequired,
+        disabled: PropTypes.bool,
+        onValueChange: PropTypes.func,
+        onChange: PropTypes.func,
+        open: PropTypes.bool,
+        onToggle: PropTypes.func.isRequired,
+        errorMessage: PropTypes.string,
+        onError: PropTypes.func
+    };
+
+    static defaultProps = {
+        "data-id": "color-picker",
+        open: false,
+        disabled: false,
+        cpid: Math.random(),
+        onError: _.noop,
+        errorMessage: ""
+    };
 
     /*
      * Toggle the color picker. If a mouse click happens outside the color picker area and if the color picker is open.
      * @param {MouseEvent} e
      *     The ReactJS synthetic event object
      */
-    _handleGlobalClick: function (e) {
+    _handleGlobalClick = (e) => {
         //if the click event isn't the click that opened the color picker
         if (this.props.open && this._clickEvent !== e) {
-            var picker = ReactDOM.findDOMNode(this.refs.reactColorPicker);
-            var hue = picker.getElementsByClassName("react-color-picker__hue-spectrum")[0];
+            var picker = ReactDOM.findDOMNode(this.reactColorPicker);
 
-            //dont close the color picker if the click is in the hue slider
-            callIfOutsideOfContainer(hue, this.props.onToggle, e);
+            //dont close the color picker if the click is inside
+            callIfOutsideOfContainer(picker, this.props.onToggle, e);
         }
-    },
+    };
 
     /*
      * Close the color picker if open and the ESC key is pressed.
      * @param {KeyEvent} e
      *     The ReactJS synthetic event object
      */
-    _handleGlobalKeyDown: function (e) {
+    _handleGlobalKeyDown = (e) => {
         if (e.keyCode === 27) {
             this._close();
         }
-    },
+    };
 
     /*
      * Open the color picker if ENTER is pressed in the input field. Close it if ESCAPE is pressed in the input field.
      * @param {KeyEvent} e
      *     The ReactJS synthetic event object
      */
-    _handleColorInputKeyDown: function (e) {
+    _handleColorInputKeyDown = (e) => {
         switch (e.keyCode) {
             case 13:  //return key
                 this._open();
@@ -185,113 +194,103 @@ var Stateless = React.createClass({
                 this._close();
                 break;
         }
-    },
+    };
 
     /*
     * Check if the input value is a valid hex color, trigger onError callback if not
     * @param {KeyEvent} e
     *     The ReactJS synthetic event object
     */
-    _handleColorInputBlur: function (e) {
+    _handleColorInputBlur = (e) => {
         if (e.target.value !== "" && !Validator.isHexColor(e.target.value)) {
             this.props.onError("This is not a valid hex color.");
         }
-    },
+    };
 
-    _open: function () {
+    _open = () => {
         if (!this.props.open) {
             this.props.onToggle();
         }
-    },
+    };
 
-    _close: function () {
+    _close = () => {
         if (this.props.open) {
             this.props.onToggle();
         }
-    },
+    };
 
     /*
      * Toggle the color picker, but only if it is not disabled.
      * @param {KeyEvent} e
      *     The ReactJS synthetic event object
      */
-    _handleClick: function (e) {
+    _handleClick = (e) => {
         if (!this.props.disabled) {
             //store a reference to this event so that we dont open and then close the colorpicker when the
             //global click event listener gets triggered.
             this._clickEvent = e.nativeEvent;
             this.props.onToggle();
         }
-    },
+    };
 
-    _handleFocus: function (e) {
+    _handleFocus = (e) => {
         if (e.nativeEvent.relatedTarget) {
             this._open();
         }
-    },
+    };
 
     //TODO remove when onChange is discontinued.
-    _valueChange: function () {
-        return this.props.onValueChange || this.props.onChange;
-    },
+    _valueChange = (hex) => {
+        if (this.props.onChange) {
+            return this.props.onChange(hex);
+        } else {
+            return this.props.onValueChange(hex);
+        }
+    };
 
     /*
      * Call the onChange callback when a color is selected in the color picker.
      * @param {string} color
      *     The new color
      */
-    _handleValueChange: function (color) {
-        if (Validator.isHexColor(color)) {
-            this._valueChange()(color);
-            this.props.onError(null);   // clear the errorMessage
-        }
-    },
+    _handleValueChange = (color) => {
+        this._valueChange(color.hex);
+    };
 
     /*
      * Call the onChange callback when a color is selected by dragging in the color picker.
      * @param {string} color
      *     The new color
      */
-    _handleDrag: function (color) {
-        this._valueChange()(color);
-    },
+    _handleDrag = (color) => {
+        this._valueChange(color.hex);
+    };
 
     /*
      * Call the onChange callback when a valid hex color code is typed into the input field.
      * @param {string} value
      *     The input field value
      */
-    _handleColorInputChange: function (value) {
+    _handleColorInputChange = (value) => {
         var val = value && value[0] !== "#" ? ("#" + value) : value;
 
         if (Validators.isValidHexColorCharacter(val)) {
-            this._valueChange()(val);
+            this._valueChange(val);
             this.props.onError(null);   // clear the errorMessage
         }
-    },
+    };
 
-    componentDidMount: function () {
+    componentDidMount() {
         window.addEventListener("click", this._handleGlobalClick);
         window.addEventListener("keydown", this._handleGlobalKeyDown);
-    },
+    }
 
-    componentWillUnmount: function () {
+    componentWillUnmount() {
         window.removeEventListener("click", this._handleGlobalClick);
         window.removeEventListener("keydown", this._handleGlobalKeyDown);
-    },
+    }
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "color-picker",
-            open: false,
-            disabled: false,
-            cpid: Math.random(),
-            onError: _.noop,
-            errorMessage: ""
-        };
-    },
-
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
                 console.warn(Utils.deprecateMessage("id", "data-id"));
@@ -304,9 +303,9 @@ var Stateless = React.createClass({
                     "Warning: Failed propType: Required prop onValueChange was not specified in `ColorPicker`.");
             }
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var containerCss = {
             "input-color-picker": true,
             open: this.props.open
@@ -314,7 +313,7 @@ var Stateless = React.createClass({
         containerCss[this.props.className] = !!this.props.className;
 
         var dataId = this.props.id || this.props["data-id"];
-        
+
         return (
             /* eslint-disable max-len */
             <div data-id={dataId} className={css(containerCss)}>
@@ -341,12 +340,14 @@ var Stateless = React.createClass({
                     </span>
                     <If test={this.props.open && !this.props.disabled}>
                         <span className="colorpicker-container">
-                            <Picker ref="reactColorPicker"
-                                    value={Validator.isHexColor(this.props.color || "") ? this.props.color : ""}
-                                    onChange={this._handleValueChange}
-                                    onDrag={this._handleDrag}
-                                    saturationWidth={173}
-                                    saturationHeight={173} />
+                            <ChromePicker
+                                    ref={component => this.reactColorPicker = component}
+                                    color={Validator.isHexColor(this.props.color || "") ? this.props.color : ""}
+                                    handleChangeComplete={this._handleValueChange}
+                                    disableAlpha={true}
+                                    onChange={this._handleDrag}
+
+                                     />
                         </span>
                     </If>
                 </div>
@@ -354,29 +355,27 @@ var Stateless = React.createClass({
             /* eslint-enable max-len */
         );
     }
-});
+}
 
-var Stateful = ReactVanilla.createClass({
-    displayName: "ColorPickerStateful",
+class Stateful extends React.Component {
+    static displayName = "ColorPickerStateful";
 
-    _handleToggle: function () {
+    state = {
+        open: false,
+        errorMessage: ""
+    };
+
+    _handleToggle = () => {
         this.setState({
             open: !this.state.open
         });
-    },
+    };
 
-    _handleError: function (message) {
+    _handleError = (message) => {
         this.setState({ errorMessage: message });
-    },
+    };
 
-    getInitialState: function () {
-        return {
-            open: false,
-            errorMessage: ""
-        };
-    },
-
-    render: function () {
+    render() {
         //TODO remove when onChange is discontinued.
         var valueChangeFn = this.props.onValueChange || this.props.onChange;
         return (
@@ -388,4 +387,4 @@ var Stateful = ReactVanilla.createClass({
                     open={this.state.open}/>
         );
     }
-});
+}

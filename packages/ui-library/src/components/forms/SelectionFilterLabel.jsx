@@ -1,60 +1,58 @@
+var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames"),
     FormLabel = require("./FormLabel.jsx");
 
- /**
- * @class SelectionFilterLabel
- * @desc Displays a label with the appearance of a select input, showing a count of the number of filters selected
- *
- * @param {string} [data-id="selection-filter"]
- *     The "data-id" attribute for top-level HTML container.
- * @param {string} [className]
- *     Additional CSS classes that are added to the top-level HTML container
- * @param {number} [count]
- *     The number that is displayed to the right of the filterLabel
- * @param {string} filterLabel
- *     The text to display inside of the SelectionFilterLabel
- * @param {string} labelText
- *     The text to display as an input label above the SelectionFilterLabel
- * @param {bool} [required=false]
- *     When true the required styling is applied to the component
- * @param {object} [style]
- *     A react-style style object used to inject hard-coded styles into the parent label container.
- *     *** Note that this prop should be used sparingly and only with the consent of the UX dev team. ***
- *
- * @example
- *     <SelectionFilterLabel
- *         data-id="filter-data-id"
- *         filterLabel="Selected Filters"
- *         labelText="My Label"
- *         count={count}
- *         className="custom-css-class"
- *     />
- *
- **/
+/**
+* @class SelectionFilterLabel
+* @desc Displays a label with the appearance of a select input, showing a count of the number of filters selected
+*
+* @param {string} [data-id="selection-filter"]
+*     The "data-id" attribute for top-level HTML container.
+* @param {string} [className]
+*     Additional CSS classes that are added to the top-level HTML container
+* @param {number} [count]
+*     The number that is displayed to the right of the filterLabel
+* @param {string} filterLabel
+*     The text to display inside of the SelectionFilterLabel
+* @param {string} labelText
+*     The text to display as an input label above the SelectionFilterLabel
+* @param {bool} [required=false]
+*     When true the required styling is applied to the component
+* @param {object} [style]
+*     A react-style style object used to inject hard-coded styles into the parent label container.
+*     *** Note that this prop should be used sparingly and only with the consent of the UX dev team. ***
+*
+* @example
+*     <SelectionFilterLabel
+*         data-id="filter-data-id"
+*         filterLabel="Selected Filters"
+*         labelText="My Label"
+*         count={count}
+*         className="custom-css-class"
+*     />
+*
+**/
 
-var SelectionFilterLabel = React.createClass({
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        className: React.PropTypes.string.affectsRendering,
-        count: React.PropTypes.number.affectsRendering,
-        filterLabel: React.PropTypes.string.isRequired.affectsRendering,
-        labelText: React.PropTypes.string.affectsRendering,
-        required: React.PropTypes.bool.affectsRendering,
-        style: React.PropTypes.object
-    },
+class SelectionFilterLabel extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
+        count: PropTypes.number,
+        filterLabel: PropTypes.string.isRequired,
+        labelText: PropTypes.string,
+        required: PropTypes.bool,
+        style: PropTypes.object
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "selection-filter"
-        };
-    },
+    static defaultProps = {
+        "data-id": "selection-filter"
+    };
 
-    _renderSelectionFilter: function () {
+    _renderSelectionFilter = () => {
         var classNames = {
             required: this.props.required
         };
-
         return (
             <div
                 data-id={this.props["data-id"]}
@@ -68,15 +66,15 @@ var SelectionFilterLabel = React.createClass({
                 )}
             </div>
         );
-    },
+    };
 
-    render: function () {
+    render() {
         return this.props.labelText ? (
                 <FormLabel data-id={this.props["data-id"] + "-label"} value={this.props.labelText}>
                     {this._renderSelectionFilter()}
                 </FormLabel>
             ) : this._renderSelectionFilter();
     }
-});
+}
 
 module.exports = SelectionFilterLabel;

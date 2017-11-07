@@ -1,5 +1,7 @@
 "use strict";
 
+var PropTypes = require("prop-types");
+
 var React = require("react"),
     FormDropDownList = require("../forms/FormDropDownList.jsx"),
     Utils = require("../../util/Utils"),
@@ -34,21 +36,27 @@ var React = require("react"),
  * @param {TimePicker~onValueChange} onValueChange
  *              Callback to be triggered when the select element value changes
  */
-module.exports = React.createClass({
-
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        id: React.PropTypes.string,
-        className: React.PropTypes.string,
-        increments: React.PropTypes.number,
-        format: React.PropTypes.string,
-        labelText: React.PropTypes.string,
-        value: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.object
+module.exports = class extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        id: PropTypes.string,
+        className: PropTypes.string,
+        increments: PropTypes.number,
+        format: PropTypes.string,
+        labelText: PropTypes.string,
+        value: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.object
         ]),
-        onValueChange: React.PropTypes.func.isRequired
-    },
+        onValueChange: PropTypes.func.isRequired
+    };
+
+    static defaultProps = {
+        increments: 15,
+        format: "12",
+        value: "12:00pm",
+        "data-id": "time-picker"
+    };
 
     /**
      * Adjusts hours based on format, adds am/pm property if needed
@@ -60,14 +68,14 @@ module.exports = React.createClass({
      * @param  {String} format       The time format
      * @return {Object}              The modified parameter
      */
-    _getFormattedHourType: function (hoursMinutes, format) {
+    _getFormattedHourType = (hoursMinutes, format) => {
         var hourType = this._getHourType(hoursMinutes.hours, format);
 
         hoursMinutes.amPm = hourType.amPm;
         hoursMinutes.hours = hourType.hours;
 
         return hoursMinutes;
-    },
+    };
 
     /**
      * Returns an object with the correct hours (based on format) and am/pm if 12 hour format
@@ -80,7 +88,7 @@ module.exports = React.createClass({
      * @param  {String}   format The hour format
      * @return {Object}          {amPm, hours}
      */
-    _getHourType: function (hours, format) {
+    _getHourType = (hours, format) => {
         var amPm = "";
 
         switch (format) {
@@ -102,7 +110,7 @@ module.exports = React.createClass({
             amPm: amPm,
             hours: hours
         };
-    },
+    };
 
     /**
      * Pads with a zero if necessary
@@ -113,10 +121,10 @@ module.exports = React.createClass({
      * @param  {String|Number} number The number
      * @return {String}               The padded number
      */
-    _getPaddedNumber: function (number) {
+    _getPaddedNumber = (number) => {
         number = "" + number;
         return number.length === 1 ? "0" + number : number;
-    },
+    };
 
     /**
      * Breaks minutes into hours and minutes
@@ -130,12 +138,12 @@ module.exports = React.createClass({
      *                                  minutes: 15
      *                              }
      */
-    _getHoursMinutes: function (minutes) {
+    _getHoursMinutes = (minutes) => {
         return {
             hours: Math.floor(minutes / 60),
             minutes: minutes % 60
         };
-    },
+    };
 
     /**
      * Populate an object of times
@@ -151,7 +159,7 @@ module.exports = React.createClass({
      *                         ...
      *                     ]
      */
-    _getTimes: function () {
+    _getTimes = () => {
         var increments = this.props.increments;
         var times = [];
         var count = 24 * 60 / increments;
@@ -170,30 +178,21 @@ module.exports = React.createClass({
             times.push({ label: formattedTime, value: formattedTime });
         }
         return times;
-    },
+    };
 
-    getDefaultProps: function () {
-        return {
-            increments: 15,
-            format: "12",
-            value: "12:00pm",
-            "data-id": "time-picker"
-        };
-    },
-
-    componentWillMount: function () {
+    componentWillMount() {
         moment.locale(Translator.currentLanguage);
 
         if (this.props.id && !Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("id", "data-id"));
         }
-    },
+    }
 
-    _handleValueChange: function (time) {
+    _handleValueChange = (time) => {
         this.props.onValueChange(time.value || "");
-    },
+    };
 
-    render: function () {
+    render() {
         var id = this.props.id || this.props["data-id"];
 
         var times = this._getTimes();
@@ -228,4 +227,4 @@ module.exports = React.createClass({
                     noneOption={noTime} />
         );
     }
-});
+};

@@ -1,5 +1,7 @@
 "use strict";
 
+var PropTypes = require("prop-types");
+
 var React = require("react"),
     classnames = require("classnames");
 
@@ -14,23 +16,23 @@ var React = require("react"),
  * @private
  */
 
- /**
- * @class Message
- * @memberof FormError
- * @desc The child tag/object used to display the error message text
- *
- * @param {string} [data-id="row"]
- *     To define the base "data-id" value for the top-level HTML container.
- * @param {string} [className]
- *     CSS classes to set on the top-level HTML container.
- */
-var Message = React.createClass({
-    propTypes: {
-        value: React.PropTypes.string,
-        "data-id": React.PropTypes.string
-    },
+/**
+* @class Message
+* @memberof FormError
+* @desc The child tag/object used to display the error message text
+*
+* @param {string} [data-id="row"]
+*     To define the base "data-id" value for the top-level HTML container.
+* @param {string} [className]
+*     CSS classes to set on the top-level HTML container.
+*/
+class Message extends React.Component {
+    static propTypes = {
+        value: PropTypes.string,
+        "data-id": PropTypes.string
+    };
 
-    render: function () {
+    render() {
         return (
             <div
                 data-id={this.props["data-id"]}
@@ -39,7 +41,7 @@ var Message = React.createClass({
             </div>
         );
     }
-});
+}
 
 /**
 * @class Icon
@@ -49,18 +51,18 @@ var Message = React.createClass({
 * @param {string} [data-id="row"]
 *     To define the base "data-id" value for the top-level HTML container.
 */
-var Icon = React.createClass({
-    propTypes: {
-        show: React.PropTypes.bool,
-        "data-id": React.PropTypes.string
-    },
+class Icon extends React.Component {
+    static propTypes = {
+        show: PropTypes.bool,
+        "data-id": PropTypes.string
+    };
 
-    render: function () {
+    render() {
         return (
             <div data-id={this.props["data-id"]} className="form-error-icon" />
         );
     }
-});
+}
 
 exports.Message = Message;
 exports.Icon = Icon;

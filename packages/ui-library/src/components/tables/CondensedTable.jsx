@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames"),
     uuid = require("uuid");
@@ -78,11 +79,11 @@ var CondensedTable = function (props) {
 };
 
 CondensedTable.propTypes = {
-    "data-id": React.PropTypes.string,
-    data: React.PropTypes.array,
-    headData: React.PropTypes.array,
-    bodyData: React.PropTypes.array,
-    className: React.PropTypes.string,
+    "data-id": PropTypes.string,
+    data: PropTypes.array,
+    headData: PropTypes.array,
+    bodyData: PropTypes.array,
+    className: PropTypes.string,
 };
 
 CondensedTable.defaultProps = {

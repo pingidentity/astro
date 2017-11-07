@@ -6,7 +6,7 @@ jest.dontMock("../FormLabel.jsx");
 describe("SelectionFilterLabel", function () {
 
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         SelectionFilterLabel = require("../SelectionFilterLabel.jsx"),
         TestUtils = require("../../../testutil/TestUtils"),
         _ = require("underscore");
@@ -17,7 +17,8 @@ describe("SelectionFilterLabel", function () {
 
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
-            "data-id": componentId
+            "data-id": componentId,
+            filterLabel: "Test"
         });
         return ReactTestUtils.renderIntoDocument(<SelectionFilterLabel {...opts} />);
     }
@@ -71,9 +72,9 @@ describe("SelectionFilterLabel", function () {
     });
 
     it("Renders hard-coded style when specified", function () {
-        var component = getComponent({ style: { "min-width": "100px" } }),
+        var component = getComponent({ style: { minWidth: "100px" } }),
             componentDom = TestUtils.findRenderedDOMNodeWithDataId(component, componentId);
 
-        expect(componentDom.getAttribute("style")).toEqual("min-width:100px;");
+        expect(componentDom.getAttribute("style")).toEqual("min-width: 100px;");
     });
 });

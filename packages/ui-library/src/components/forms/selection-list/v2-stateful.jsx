@@ -9,15 +9,13 @@ var React = require("react"),
  * @desc This is a wrapper around the stateful (stateless=false) SelectionList to give the user search support
  *    without having to implement that logic.
  */
-module.exports = React.createClass({
-    displayName: "SelectionListStateful",
+module.exports = class extends React.Component {
+    static displayName = "SelectionListStateful";
 
-    getInitialState: function () {
-        return {
-            queryString: "",
-            matchedItems: this.props.items
-        };
-    },
+    state = {
+        queryString: "",
+        matchedItems: this.props.items
+    };
 
     /**
      * @desc Filter items by search criteria.
@@ -28,7 +26,7 @@ module.exports = React.createClass({
      *     The new query string
      * @private
      */
-    _handleSearch: function (queryString) {
+    _handleSearch = (queryString) => {
         var matchedItems = this.props.items;
         // Use custom onSearch if specified, otherwise use default filter
         if (this.props.onSearch) {
@@ -45,35 +43,35 @@ module.exports = React.createClass({
             queryString: queryString,
             matchedItems: matchedItems
         });
-    },
+    };
 
-    componentDidUpdate: function (prevProps) {
+    componentDidUpdate(prevProps) {
         if (this.props.items !== prevProps.items) {
             var queryString = this.props.queryString || "";
             this._handleSearch(queryString);
         }
-    },
+    }
 
     /**
      * @desc toggle visibility of unselected items
      *
      * @private
      */
-    _handleVisibilityChange: function () {
+    _handleVisibilityChange = () => {
         this.setState({
             showOnlySelected: !this.state.showOnlySelected
         });
-    },
+    };
 
-    _handleValueChange: function (newIds) {
+    _handleValueChange = (newIds) => {
         this.setState({
             selectedItemIds: newIds
         });
 
         this.props.onValueChange(newIds);
-    },
+    };
 
-    _handelSelectAll: function () {
+    _handelSelectAll = () => {
         var newIds = this.props.items.map(function (item) {
             return item.id;
         });
@@ -83,9 +81,9 @@ module.exports = React.createClass({
         });
 
         this.props.onSelectAll(newIds);
-    },
+    };
 
-    render: function () {
+    render() {
         var statelessProps = _.defaults(
             {
                 ref: "SelectionListStateless",
@@ -101,6 +99,6 @@ module.exports = React.createClass({
             this.props
         );
 
-        return React.createElement(Stateless, statelessProps);
+        return <Stateless {...statelessProps} />;
     }
-});
+};

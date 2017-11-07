@@ -51,16 +51,16 @@ function DemoReducer (state, action) {
  * interaction, we're free to mark up each individual row as we please.  In this case, we have implemented
  * a row which has Plus/Remove buttons
  */
-var Row = React.createClass({
-    _handleRemove: function () {
+class Row extends React.Component {
+    _handleRemove = () => {
         this.props.onRemove({ column: this.props.column, index: this.props.index });
-    },
+    };
 
-    _handleAdd: function () {
+    _handleAdd = () => {
         this.props.onAdd({ column: this.props.column, index: this.props.index });
-    },
+    };
 
-    _getButton: function () {
+    _getButton = () => {
         if (this.props.column === 0) {
             return <button className="inline plus" data-id="row-button-add" onClick={this._handleAdd} type="button" />;
         }
@@ -70,9 +70,9 @@ var Row = React.createClass({
                     onClick={this._handleRemove}
                     type="button" />
         );
-    },
+    };
 
-    render: function () {
+    render() {
         var hasImage = this.props.style === "image";
         var hasIcon = this.props.style === "icon";
         var hasCount = this.props.style === "count";
@@ -82,7 +82,7 @@ var Row = React.createClass({
                     "item",
                     { preview: this.props.preview,
                     "item-decoration": hasImage || hasIcon || hasCount
-                })}>
+                })} data-id={this.props["data-id"]}>
                 <span className="icon-grip"></span>
                 { hasImage &&
                     <div className="item-image" data-id="row-image"
@@ -100,15 +100,20 @@ var Row = React.createClass({
                 {this._getButton()}
             </div>);
     }
-});
+}
 
 /*
  * Demo component for the MultiDrag component.  It uses the Row type above to tell the MultiDrag component
  * the type for each row.
  */
-var MultiDragDemo = React.createClass({
+class MultiDragDemo extends React.Component {
+    state = {
+        demoType: "STATELESS",
+        columns: data.columns, // used for stateful (stateless=false) demo
+        disabled: false
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         this.actions = Redux.bindActionCreators(MultiDrag.Actions, this.props.store.dispatch);
         this.messageActions = Redux.bindActionCreators(Messages.Actions, this.props.store.dispatch);
         this.demoActions = Redux.bindActionCreators(Actions, this.props.store.dispatch);
@@ -117,56 +122,56 @@ var MultiDragDemo = React.createClass({
         this.actions.init(data.columns);
         this.rowsAvailableStateless = true;
         this.rowsAvailableStateful = true;
-    },
+    }
 
-    _handleDemoTypeValueChange: function (value) {
+    _handleDemoTypeValueChange = (value) => {
         this.setState({
             demoType: value
         });
-    },
+    };
 
-    _handleDisabledToggle: function () {
+    _handleDisabledToggle = () => {
         this.setState({
             disabled: !this.state.disabled
         });
-    },
+    };
 
     /*
      * Callbacks passed to the Row component instance.  Since the logic of what happens when clicking add/remove
      * is up to the individual application, it's outside the realm of the MultiDrag
      */
-    _handleAddStateless: function (from) {
+    _handleAddStateless = (from) => {
         this._handleDropStateless({ from: from, to: { column: 1, index: 0 } });
-    },
+    };
 
-    _handleRemoveStateless: function (from) {
+    _handleRemoveStateless = (from) => {
         this._handleDropStateless({ from: from, to: { column: 0, index: 0 } });
-    },
+    };
 
-    _getStatefulRef: function () {
+    _getStatefulRef = () => {
         //MultiDragStateful ref is nested under the dragDropContext child ref
         return this.refs["multi-drag-demo-stateful"].refs.child.refs.MultiDragStateful;
-    },
+    };
 
-    _handleAddStateful: function (from) {
+    _handleAddStateful = (from) => {
         this._getStatefulRef()._handleDrop({ from: from, to: { column: 1, index: 0 } });
-    },
+    };
 
-    _handleRemoveStateful: function (from) {
+    _handleRemoveStateful = (from) => {
         this._getStatefulRef()._handleDrop({ from: from, to: { column: 0, index: 0 } });
-    },
+    };
 
     /*
      * Callbacks for different events on the MultiDrag
      */
-    _handleDragStateless: function (desc) {
+    _handleDragStateless = (desc) => {
         this.actions.placeholder(desc.to);
-    },
+    };
 
-    _handleDragStateful: function (desc) {
+    _handleDragStateful = (desc) => {
         console.log("Drag from column and index: " + desc.from.column + ", " + desc.from.index +
             " to column and index: " + desc.to.column + ", " + desc.to.index);
-    },
+    };
 
     /*
      * When a drop event happens, the MultiDragStateless (stateless=true) component simply makes a callback describing
@@ -177,42 +182,42 @@ var MultiDragDemo = React.createClass({
      * unfiltered list should look like. We have to do some logic to covert back the indexes
      * relative to the unfiltered rows.
      */
-    _handleDropStateless: function (desc) {
+    _handleDropStateless = (desc) => {
         var convertedDesc = MultiDrag.convertFilteredIndexes(this.props.drag.columns, desc);
 
         this.actions.move(
             { column: desc.from.column, index: convertedDesc.from },
             { column: desc.to.column, index: convertedDesc.to });
-    },
+    };
 
-    _handleDropStateful: function (desc) {
+    _handleDropStateful = (desc) => {
         console.log("Drop from column and index: " + desc.from.column + ", " + desc.from.index +
             " to column and index: " + desc.to.column + ", " + desc.to.index);
-    },
+    };
 
-    _handleCancelStateless: function () {
+    _handleCancelStateless = () => {
         this.actions.clearPlaceholder();
-    },
+    };
 
-    _handleCancelStateful: function () {
+    _handleCancelStateful = () => {
         console.log("Cancel called");
-    },
+    };
 
-    _handleSearchStateless: function (column, str) {
+    _handleSearchStateless = (column, str) => {
         /*
          * If the search should be on the server side, instead of calling this action, we would call an action
          * which requests data from the server but with the given filter
          */
         this.actions.filterField("name", column, str);
-    },
+    };
 
-    _handleSearchStateful: function (column, str) {
+    _handleSearchStateful = (column, str) => {
         if (str !== "") {
             console.log("Search column " + column + " for value " + str);
         }
-    },
+    };
 
-    _handleScrolledToBottomStateless: function (column) {
+    _handleScrolledToBottomStateless = (column) => {
         if (column === 0 && this.rowsAvailableStateless) {
             this.rowsAvailableStateless = false;
             this.messageActions.addMessage("loading more data...");
@@ -221,9 +226,9 @@ var MultiDragDemo = React.createClass({
                 this.actions.append(0, data.moreRows);
             }.bind(this), 500);
         }
-    },
+    };
 
-    _handleScrollToBottomStateful: function (column) {
+    _handleScrollToBottomStateful = (column) => {
         if (column === 0 && this.rowsAvailableStateful) {
             this.rowsAvailableStateful = false;
             this.messageActions.addMessage("loading more data...");
@@ -234,22 +239,14 @@ var MultiDragDemo = React.createClass({
                 this.setState({ columns: nextColumns });
             }.bind(this), 500);
         }
-    },
+    };
 
-    _handleScrolledToTop: function (column) {
+    _handleScrolledToTop = (column) => {
         var msg = "onScrolledToTop called for column " + column + " , could use this to load more data";
         this.messageActions.addMessage(msg);
-    },
+    };
 
-    getInitialState: function () {
-        return {
-            demoType: "STATELESS",
-            columns: data.columns, // used for stateful (stateless=false) demo
-            disabled: false
-        };
-    },
-
-    render: function () {
+    render() {
         var contentTypeStateless = (
             <Row
                 onRemove={this._handleRemoveStateless}
@@ -382,7 +379,7 @@ var MultiDragDemo = React.createClass({
                 }
           </div>);
     }
-});
+}
 
 /*
  * Expose the reducer just to get it tied to the local store

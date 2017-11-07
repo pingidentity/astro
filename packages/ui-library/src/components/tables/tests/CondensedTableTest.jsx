@@ -2,7 +2,7 @@ jest.dontMock("../CondensedTable.jsx");
 
 describe("CondensedTable", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         CondensedTable = require("../CondensedTable.jsx");
 

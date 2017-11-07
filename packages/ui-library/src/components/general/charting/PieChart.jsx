@@ -1,4 +1,5 @@
-var React = require("re-react");
+var PropTypes = require("prop-types");
+var React = require("react");
 var PieChart = require("recharts").PieChart;
 var Pie = require("recharts").Pie;
 var Cell = require("recharts").Cell;
@@ -56,55 +57,53 @@ var LegendTypes = require("../../../constants/ChartingConstants.js").LegendTypes
 * @param {Array<PieChart~SectorItem>} series
 *    The series data for the chart.
 */
-var Chart = React.createClass({
-    displayName: "PieChart",
+class Chart extends React.Component {
+    static displayName = "PieChart";
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        width: React.PropTypes.number.affectsRendering,
-        height: React.PropTypes.number.affectsRendering,
-        margin: React.PropTypes.object.affectsRendering,
-        showTooltips: React.PropTypes.bool,
-        showLegend: React.PropTypes.bool,
-        legendType: React.PropTypes.oneOf([ LegendTypes.LINE, LegendTypes.SQUARE, LegendTypes.RECTANGLE,
+    static propTypes = {
+        "data-id": PropTypes.string,
+        width: PropTypes.number,
+        height: PropTypes.number,
+        margin: PropTypes.object,
+        showTooltips: PropTypes.bool,
+        showLegend: PropTypes.bool,
+        legendType: PropTypes.oneOf([ LegendTypes.LINE, LegendTypes.SQUARE, LegendTypes.RECTANGLE,
             LegendTypes.CIRCLE, LegendTypes.CROSS, LegendTypes.DIAMOND, LegendTypes.STAR,
             LegendTypes.TRIANGLE, LegendTypes.WYE, LegendTypes.NONE
         ]),
-        animate: React.PropTypes.bool,
-        donut: React.PropTypes.bool,
+        animate: PropTypes.bool,
+        donut: PropTypes.bool,
 
-        data: React.PropTypes.arrayOf(React.PropTypes.shape({
-            id: React.PropTypes.oneOfType([ React.PropTypes.string, React.PropTypes.number ]).isRequired
-        })).isRequired.affectsRendering,
+        data: PropTypes.arrayOf(PropTypes.shape({
+            id: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]).isRequired
+        })).isRequired,
 
-        series: React.PropTypes.arrayOf(React.PropTypes.shape({
-            id: React.PropTypes.oneOfType([ React.PropTypes.string, React.PropTypes.number]).isRequired,
-            color: React.PropTypes.string
-        })).isRequired.affectsRendering
-    },
+        series: PropTypes.arrayOf(PropTypes.shape({
+            id: PropTypes.oneOfType([ PropTypes.string, PropTypes.number]).isRequired,
+            color: PropTypes.string
+        })).isRequired
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "pie-chart",
-            showTooltips: true,
-            showLegend: true,
-            legendType: LegendTypes.TRIANGLE,
-            animate: false,
-            donut: false,
-            // TODO: Confirm with designers what would be appropriate defaults
-            width: 550,
-            height: 350,
-            margin: { top: 20, right: 20, bottom: 20, left: 20 }
-        };
-    },
+    static defaultProps = {
+        "data-id": "pie-chart",
+        showTooltips: true,
+        showLegend: true,
+        legendType: LegendTypes.TRIANGLE,
+        animate: false,
+        donut: false,
+        // TODO: Confirm with designers what would be appropriate defaults
+        width: 550,
+        height: 350,
+        margin: { top: 20, right: 20, bottom: 20, left: 20 }
+    };
 
-    _renderCells: function () {
+    _renderCells = () => {
         return this.props.series.map(function (item) {
             return <Cell key={"cell-" + item.id} fill={item.color} />;
         });
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <div data-id={this.props["data-id"]}>
                 <PieChart width={this.props.width} height={this.props.height} margin={this.props.margin}>
@@ -119,6 +118,6 @@ var Chart = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = Chart;

@@ -1,15 +1,15 @@
 
-jest.dontMock("./common.jsx");
+jest.dontMock("./commonTests.jsx");
 jest.dontMock("../v2.jsx");
 jest.dontMock("../../FormError.jsx");
 jest.dontMock("../../FormLabel.jsx");
 
 describe("FormSelectField", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
         FormSelectField = require("../v2.jsx"),
-        CommonTests = require("./common.jsx"),
+        CommonTests = require("./commonTests.jsx"),
         _ = require("underscore");
 
     function getComponent (props) {

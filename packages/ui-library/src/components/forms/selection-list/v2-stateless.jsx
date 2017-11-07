@@ -1,4 +1,5 @@
-var React = require("re-react"),
+var PropTypes = require("prop-types");
+var React = require("react"),
     classnames = require("classnames"),
     _ = require("underscore"),
     If = require("../../general/If.jsx"),
@@ -13,74 +14,72 @@ var React = require("re-react"),
  * @memberof SelectionList
  * @desc This is a wrapper around the stateful (stateless=true) SelectionList.
  */
-module.exports = React.createClass({
-    displayName: "SelectionListStateless",
+module.exports = class extends React.Component {
+    static displayName = "SelectionListStateless";
 
-    propTypes: {
-        "data-id": React.PropTypes.string.affectsRendering,
-        className: React.PropTypes.string.affectsRendering,
-        type: React.PropTypes.oneOf([
+    static propTypes = {
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
+        type: PropTypes.oneOf([
             Constants.ListType.SINGLE,
             Constants.ListType.MULTI,
             Constants.ListType.VIEWONLY
-        ]).affectsRendering,
-        items: React.PropTypes.arrayOf(
-            React.PropTypes.shape({
-                id: React.PropTypes.oneOfType([
-                    React.PropTypes.number,
-                    React.PropTypes.string
+        ]),
+        items: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.oneOfType([
+                    PropTypes.number,
+                    PropTypes.string
                 ]).isRequired,
-                name: React.PropTypes.string.isRequired
+                name: PropTypes.string.isRequired
             })
-        ).affectsRendering,
-        selectedItemIds: React.PropTypes.oneOfType([
-            React.PropTypes.array,
-            React.PropTypes.string,
-            React.PropTypes.number
-        ]).affectsRendering,
-        onValueChange: React.PropTypes.func.isRequired,
-        onSelectAll: React.PropTypes.func,
-        showSearchBox: React.PropTypes.bool.affectsRendering,
-        searchPlaceholder: React.PropTypes.string.affectsRendering,
-        onSearch: React.PropTypes.func.isRequired,
-        queryString: React.PropTypes.string.affectsRendering,
-        onVisibilityChange: React.PropTypes.func,
-        showSelectionOptions: React.PropTypes.bool.affectsRendering,
-        showOnlySelected: React.PropTypes.bool.affectsRendering,
-        labelSelectAll: React.PropTypes.string,
-        labelUnselectAll: React.PropTypes.string,
-        labelOnlySelected: React.PropTypes.string,
-        labelShowAll: React.PropTypes.string,
-        requiredText: React.PropTypes.string.affectsRendering
-    },
+        ),
+        selectedItemIds: PropTypes.oneOfType([
+            PropTypes.array,
+            PropTypes.string,
+            PropTypes.number
+        ]),
+        onValueChange: PropTypes.func.isRequired,
+        onSelectAll: PropTypes.func,
+        showSearchBox: PropTypes.bool,
+        searchPlaceholder: PropTypes.string,
+        onSearch: PropTypes.func.isRequired,
+        queryString: PropTypes.string,
+        onVisibilityChange: PropTypes.func,
+        showSelectionOptions: PropTypes.bool,
+        showOnlySelected: PropTypes.bool,
+        labelSelectAll: PropTypes.string,
+        labelUnselectAll: PropTypes.string,
+        labelOnlySelected: PropTypes.string,
+        labelShowAll: PropTypes.string,
+        requiredText: PropTypes.string
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "selection-list",
-            showSearchBox: true,
-            type: Constants.ListType.SINGLE,
-            showSelectionOptions: false,
-            showOnlySelected: false
-        };
-    },
+    static defaultProps = {
+        "data-id": "selection-list",
+        showSearchBox: true,
+        type: Constants.ListType.SINGLE,
+        showSelectionOptions: false,
+        showOnlySelected: false
+    };
 
     /**
      * @desc Selects all checkboxes
      *
      * @private
      */
-    _selectAll: function () {
+    _selectAll = () => {
         this.props.onSelectAll();
-    },
+    };
 
     /**
      * @desc Toggle unchecking all checkboxes
      *
      * @private
      */
-    _unselectAll: function () {
+    _unselectAll = () => {
         this.props.onValueChange([]);
-    },
+    };
 
     /**
      * @desc Toggle showing all or selected checkboxes
@@ -89,22 +88,22 @@ module.exports = React.createClass({
      * @param {array} e the event object
      * @private
      */
-    _onShowOnlyAllToggle: function () {
+    _onShowOnlyAllToggle = () => {
         this.props.onVisibilityChange();
-    },
+    };
 
     /**
      * @desc Filter currently visible data on screen based on search string, toggles state, e.t.c.
      * @returns {array} the currently visible list of items
      * @private
      */
-    _filterVisible: function () {
+    _filterVisible = () => {
         return _.filter(this.props.items, function (item) {
             return this.props.selectedItemIds.indexOf(item.id) > -1;
         }.bind(this));
-    },
+    };
 
-    _getSelectionOptions: function () {
+    _getSelectionOptions = () => {
         var itemsSelected = typeof(this.props.selectedItemIds) === "object"
             ? this.props.selectedItemIds.length : !!this.props.selectedItemIds;
 
@@ -126,9 +125,9 @@ module.exports = React.createClass({
                 }
             </div>
         );
-    },
+    };
 
-    render: function () {
+    render() {
         var className = classnames(this.props.className, {
                 "input-selection-list": true,
                 searchable: this.props.showSearchBox,
@@ -165,7 +164,7 @@ module.exports = React.createClass({
             </div>
         );
     }
-});
+};
 
 /**
  * @class ListOptions
@@ -188,38 +187,36 @@ module.exports = React.createClass({
  *     Callback to be triggered when the item selection changes
  * @ignore
  */
-var ListOptions = React.createClass({
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        type: React.PropTypes.oneOf([
+class ListOptions extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        type: PropTypes.oneOf([
             Constants.ListType.SINGLE,
             Constants.ListType.MULTI,
             Constants.ListType.VIEWONLY
-        ]).affectsRendering,
-        items: React.PropTypes.arrayOf(
-            React.PropTypes.shape({
-                id: React.PropTypes.oneOfType([
-                    React.PropTypes.number,
-                    React.PropTypes.string
+        ]),
+        items: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.oneOfType([
+                    PropTypes.number,
+                    PropTypes.string
                 ]).isRequired,
-                name: React.PropTypes.string.isRequired
+                name: PropTypes.string.isRequired
             })
-        ).affectsRendering,
-        selectedItemIds: React.PropTypes.oneOfType([
-            React.PropTypes.array,
-            React.PropTypes.string,
-            React.PropTypes.number
-        ]).affectsRendering,
-        onValueChange: React.PropTypes.func
-    },
+        ),
+        selectedItemIds: PropTypes.oneOfType([
+            PropTypes.array,
+            PropTypes.string,
+            PropTypes.number
+        ]),
+        onValueChange: PropTypes.func
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "list-options",
-            type: Constants.ListType.SINGLE,
-            onValueChange: _.noop
-        };
-    },
+    static defaultProps = {
+        "data-id": "list-options",
+        type: Constants.ListType.SINGLE,
+        onValueChange: _.noop
+    };
 
     /**
     * @desc Generate list options as radio buttons
@@ -228,7 +225,7 @@ var ListOptions = React.createClass({
     * @private
     * @ignore
     */
-    _genRadioOptions: function () {
+    _genRadioOptions = () => {
         return (
             <FormRadioGroup
                 data-id={this.props["data-id"] + "-single-selection"}
@@ -239,7 +236,7 @@ var ListOptions = React.createClass({
                 onValueChange={this.props.onValueChange}
             />
         );
-    },
+    };
 
     /**
     * @desc Generate list options as checkboxes
@@ -248,7 +245,7 @@ var ListOptions = React.createClass({
     * @private
     * @ignore
     */
-    _genCheckboxOptions: function () {
+    _genCheckboxOptions = () => {
         var isSelected = function (item) {
             return _.contains(this.props.selectedItemIds, item.id);
         }.bind(this);
@@ -277,7 +274,7 @@ var ListOptions = React.createClass({
                 />
             );
         }.bind(this));
-    },
+    };
 
     /**
     * @desc Generate tooltip for item with helpHintText property
@@ -288,7 +285,7 @@ var ListOptions = React.createClass({
     * @private
     * @ignore
     */
-    _genTooltip: function (item) {
+    _genTooltip = (item) => {
         return item.helpHintText
             ? <HelpHint
                 hintText={item.helpHintText}
@@ -296,7 +293,7 @@ var ListOptions = React.createClass({
                 className="inline"
             />
             : null;
-    },
+    };
 
     /**
     * @desc Generate list of view-only items
@@ -305,7 +302,7 @@ var ListOptions = React.createClass({
     * @private
     * @ignore
     */
-    _genViewonlyOptions: function () {
+    _genViewonlyOptions = () => {
         return this.props.items.map(function (item, i) {
             return (
                 <div className="view-item" key={i}>
@@ -313,7 +310,7 @@ var ListOptions = React.createClass({
                 </div>
             );
         }.bind(this));
-    },
+    };
 
     /**
     * @desc Generate the set of list options based on the type
@@ -322,7 +319,7 @@ var ListOptions = React.createClass({
     * @private
     * @ignore
     */
-    _genListOptions: function () {
+    _genListOptions = () => {
         if (this.props.type === Constants.ListType.SINGLE) {
             return this._genRadioOptions();
         } else if (this.props.type === Constants.ListType.MULTI) {
@@ -330,13 +327,13 @@ var ListOptions = React.createClass({
         } else if (this.props.type === Constants.ListType.VIEWONLY) {
             return this._genViewonlyOptions();
         }
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <div data-id={this.props["data-id"]} className="input-selection-list-items">
                 {this._genListOptions()}
             </div>
         );
     }
-});
+}

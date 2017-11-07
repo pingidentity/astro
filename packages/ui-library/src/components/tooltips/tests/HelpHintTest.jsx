@@ -4,7 +4,7 @@ jest.dontMock("../HelpHint.jsx");
 
 describe("HelpHint", function () {
     var React = require("react");
-    var ReactTestUtils = require("react-addons-test-utils");
+    var ReactTestUtils = require("react-dom/test-utils");
     var TestUtils = require("../../../testutil/TestUtils");
     var HelpHint = require("../HelpHint.jsx");
     var text = "test help text!";

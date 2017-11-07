@@ -21,28 +21,25 @@ var _options = [
     { label: "Ten", value: "10" }
 ];
 
-var LinkDropDownListDemo = React.createClass({
+class LinkDropDownListDemo extends React.Component {
+    state = {
+        open: false,
+        selectedOption: _options[0]
+    };
 
-    getInitialState: function () {
-        return {
-            open: false,
-            selectedOption: _options[0]
-        };
-    },
-
-    _handleToggle: function () {
+    _handleToggle = () => {
         this.setState({
             open: !this.state.open
         });
-    },
+    };
 
-    _handleClick: function (selectedOption) {
+    _handleClick = (selectedOption) => {
         this.setState({
             selectedOption: selectedOption
         });
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <div>
                 <div className="input-row">
@@ -67,6 +64,6 @@ var LinkDropDownListDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = LinkDropDownListDemo;

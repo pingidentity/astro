@@ -4,7 +4,7 @@ jest.dontMock("../BarChart.jsx");
 
 describe("BarChart", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
         _ = require("underscore"),
         Bar = require("recharts").Bar,

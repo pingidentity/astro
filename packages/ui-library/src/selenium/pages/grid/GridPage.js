@@ -79,7 +79,7 @@ var GridDemoPage = Object.create(HomePage, {
      */
     verifyCurrentPageExisting: {
         value: function (currentPage) {
-            var xPath = "//div[@data-id='pagination']/span[1][contains(text(),'{currentPage}')]";
+            var xPath = "//div[@data-id='pagination'][contains(text(),'{currentPage}')]";
             return this.isExisting(this.formatXpath(xPath, { currentPage: currentPage }));
         }
     },
@@ -106,7 +106,7 @@ var GridDemoPage = Object.create(HomePage, {
 
         }
     },
-    
+
     /**
      * @desc this function open the Grid page
      */

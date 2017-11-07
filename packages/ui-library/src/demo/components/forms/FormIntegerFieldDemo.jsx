@@ -6,25 +6,22 @@ var FormIntegerField = require("./../../../components/forms/form-integer-field/i
 * @memberof FormIntegerField
 * @desc A demo for FormIntegerField
 */
-var FormIntegerFieldDemo = React.createClass({
+class FormIntegerFieldDemo extends React.Component {
+    state = {
+        integerField1: undefined,
+        integerField4Error: "",
+        integerField5Error: "",
+        integerField7Mode: "read_only",
+        integerField7Disabled: false
+    };
 
-    getInitialState: function () {
-        return {
-            integerField1: undefined,
-            integerField4Error: "",
-            integerField5Error: "",
-            integerField7Mode: "read_only",
-            integerField7Disabled: false
-        };
-    },
-
-    _handleValueChange: function (index, value) {
+    _handleValueChange = (index, value) => {
         var newState = {};
         newState["integerField" + index] = value;
         this.setState(newState);
-    },
+    };
 
-    _handleBlur: function (index, min, max) {
+    _handleBlur = (index, min, max) => {
         var value = this.state["integerField" + index];
         var newState = {};
 
@@ -35,9 +32,9 @@ var FormIntegerFieldDemo = React.createClass({
             newState["integerField" + index + "Error"] = "";
             this.setState(newState);
         }
-    },
+    };
 
-    componentDidMount: function () {
+    componentDidMount() {
         // Bind "onValueChange" callbacks
         this._handleValueChange0 = this._handleValueChange.bind(null, 0);
         this._handleValueChange2 = this._handleValueChange.bind(null, 2);
@@ -47,18 +44,18 @@ var FormIntegerFieldDemo = React.createClass({
         // Bind "onBlur" callbacks
         this._handleBlur4 = this._handleBlur.bind(null, 4, 0, 25);
         this._handleBlur5 = this._handleBlur.bind(null, 5, 50, 300);
-    },
+    }
 
-    _changeCallback: function (value) {
+    _changeCallback = (value) => {
         if (FormIntegerField.isValid(value)) {
             this.setState({
                 integerField1: value
             });
         }
 
-    },
+    };
 
-    _changeCallback4: function (value) {
+    _changeCallback4 = (value) => {
         this.setState({
             integerField4: value
         });
@@ -67,9 +64,9 @@ var FormIntegerFieldDemo = React.createClass({
                 integerField4Error: ""
             });
         }
-    },
+    };
 
-    _changeCallback5: function (value) {
+    _changeCallback5 = (value) => {
 
         if (value !== "" && (value % 5 !== 0 || value > 300 )) {
             this.setState({
@@ -84,9 +81,9 @@ var FormIntegerFieldDemo = React.createClass({
         this.setState({
             integerField5: value
         });
-    },
+    };
 
-    _changeMode: function (value,event) {
+    _changeMode = (value, event) => {
         var name = event.target.name;
         if (name === "read-only") {
             this.setState({
@@ -101,9 +98,9 @@ var FormIntegerFieldDemo = React.createClass({
             });
         }
 
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <div>
                 <div className="input-row">
@@ -229,7 +226,7 @@ var FormIntegerFieldDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 
 module.exports = FormIntegerFieldDemo;

@@ -7,49 +7,52 @@ var React = require("react"),
     FormSelectField = require("../../../components/forms/form-select-field"),
     Translator = require("../../../util/i18n/Translator.js");
 
-var UILibrary101 = React.createClass({
+var LANGUAGES = [
+    {
+        label: "English",
+        value: "en_us"
+    },
+    {
+        label: "Chinese (Traditional)",
+        value: "zh_cn"
+    }
+];
 
-    getInitialState: function () {
+class UILibrary101 extends React.Component {
+    constructor(props) {
+        super(props);
         this._handleLanguageChange1 = this._handleLanguageChange.bind(null, 1);
 
-        return {
+        this.state = {
             pickerColor: "#fff",
             currentLanguage: Translator.currentLanguage
         };
-    },
-    languages: [
-        {
-            label: "English",
-            value: "en_us"
-        }, {
-            label: "Chinese (Traditional)",
-            value: "zh_cn"
-        }],
+    }
 
-    _handleChange: function (color) {
+    _handleChange = (color) => {
         this.setState({ pickerColor: color });
-    },
+    };
 
-    _handleLanguageChange: function (index, event) {
+    _handleLanguageChange = (index, event) => {
         Translator.setLanguage(event.target.value);
         this.setState({
             currentLanguage: event.target.value
         });
-    },
+    };
 
-    _handleToggleSearchBar: function () {
+    _handleToggleSearchBar = () => {
         this.actions.setExpandedSearch(!this.props.advancedSearch);
-    },
+    };
 
-    _handleSearchFilterChange: function (name, value) {
+    _handleSearchFilterChange = (name, value) => {
         this.actions.setFilter(name, value);
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         this.actions = Redux.bindActionCreators(ListView.Actions, this.props.store.dispatch);
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <Tutorial generateTOC={true}>
                 <p>
@@ -341,7 +344,7 @@ var UILibrary101 = React.createClass({
                 <div className= "input-row">
                     <FormSelectField controlled={true}
                         label="Language"
-                        options={this.languages}
+                        options={LANGUAGES}
                         onChange={this._handleLanguageChange1}
                         value={this.state.currentLanguage}
                     />
@@ -358,7 +361,7 @@ var UILibrary101 = React.createClass({
             </Tutorial>
         );
     }
-});
+}
 
 /*
  * Expose the Reducer.  Doing so will tell the DemoApp to create an isolated store for the Demo to use.  Normally

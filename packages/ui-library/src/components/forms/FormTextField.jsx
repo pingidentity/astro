@@ -1,1 +1,1 @@
-module.exports = require("./form-text-field").v1;
+module.exports = require("./form-text-field").v2;

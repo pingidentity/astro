@@ -4,6 +4,7 @@
 
 var React = require("react"),
     ReactDOM = require("react-dom"),
+    TestUtils = require("../testutil/TestUtils"),
     _ = require("underscore");
 
 /**
@@ -50,19 +51,19 @@ exports.createTestDispatcher = function (reducer, initialState) {
  * @desc Since react has deprecated using set props, we need to wrap components in another component to enable
  *    sending properties to them by exposing a function.
  */
-exports.Wrapper = React.createClass({
-    sendProps: function (state) {
+exports.Wrapper = class extends React.Component {
+    sendProps = (state) => {
         this.setState(state);
-    },
+    };
 
-    render: function () {
+    render() {
         var opts = _.extend({}, this.props.opts, this.state, { ref: "target" });
 
         /* eslint-disable */
         return React.createElement(this.props.type, opts);
         /* eslint-enable */
     }
-});
+};
 
 /**
  * @alias module:util/ReduxTest.unmountDetachesWindowListener
@@ -93,12 +94,12 @@ exports.unmountDetachesWindowListener = function (getComponent, type) {
     });
 
     //attaches listener
-    var attached = window.addEventListener.mock.calls.length > 0;
+    var attached = TestUtils.mockCallsContains(window.addEventListener, type);
 
     ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
 
     return (attached &&
-        window.removeEventListener.mock.calls.length > 0 &&
-        window.removeEventListener.mock.calls[0][0] === type &&
-        window.removeEventListener.mock.calls[0][1] === handler);
+        TestUtils.mockCallsContains(window.addEventListener, type) &&
+        TestUtils.findMockCall(window.addEventListener, type)[0] === type &&
+        TestUtils.findMockCall(window.addEventListener, type)[1] === handler);
 };

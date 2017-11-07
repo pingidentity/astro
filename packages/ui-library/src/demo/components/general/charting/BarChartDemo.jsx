@@ -10,9 +10,8 @@ var React = require("react"),
 * @memberof BarChart
 * @desc A demo for BarChart
 */
-var BarChartDemo = React.createClass({
-
-    render: function () {
+class BarChartDemo extends React.Component {
+    render() {
         var data = [
             { id: "Monday", s1: 4000, s2: 2400, s3: -2400 },
             { id: "Tuesday", s1: 3000, s2: 1398, s3: -2210 },
@@ -81,6 +80,6 @@ var BarChartDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = BarChartDemo;

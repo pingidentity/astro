@@ -114,7 +114,7 @@ describe("Multi Column Drag Drop Integration", function () {
         MultiColumnDragDropPage.takeScreenshotAndCompare(rowIconAndTextFileName);
     }));
      */
-    
+
     /**
      * SCENARIO: Should add and remove item
      * GIVEN: Goes to Multi Column Drag Drop from panels section

@@ -1,7 +1,5 @@
 
 var React = require("react"),
-    DragDropContext = require("react-dnd").DragDropContext,
-    HTML5Backend = require("react-dnd-html5-backend"),
     Draggable = require("./../../../components/rows/DragDropRow.jsx"),
     _ = require("underscore");
 
@@ -11,27 +9,24 @@ var React = require("react"),
 * @memberof DragDropRow
 * @desc A demo for DragDropRow
 */
-var DragDropRowDemo = React.createClass({
+class DragDropRowDemo extends React.Component {
+    state = {
+        loading: false,
+        rows: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+            11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+            21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
+        dropTarget: -1
+    };
 
-    getInitialState: function () {
-        return {
-            loading: false,
-            rows: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-                11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-                21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
-            dropTarget: -1
-        };
-    },
-
-    _onCancel: function () {
+    _onCancel = () => {
         this.setState({ dropTarget: -1 });
-    },
+    };
 
-    _onDrag: function (targetId, beingDraggedId) {
+    _onDrag = (targetId, beingDraggedId) => {
         this.setState({ dropTarget: targetId === beingDraggedId ? -1 : targetId });
-    },
+    };
 
-    _onDrop: function (targetId, beingDraggedId) {
+    _onDrop = (targetId, beingDraggedId) => {
         if (targetId === beingDraggedId) {
             return;
         }
@@ -48,17 +43,15 @@ var DragDropRowDemo = React.createClass({
         }
 
         this.setState({ rows: nextState, dropTarget: -1 });
-    },
+    };
 
-    _getDragClass: function (item, index) {
+    _getDragClass = (item, index) => {
         var dragBottom = this.state.rows.length - 1 === index &&
             this.state.dropTarget === this.state.rows.length;
         return "row" + (this.state.dropTarget === index ? " dragTop" : "") + (dragBottom ? " dragBottom" : "");
-    },
+    };
 
-
-
-    render: function () {
+    render() {
         return (
             <div className="dragDropRowDemo" data-id="dragDropRowDemo">
                 <div className="instructions">Drag and drop rows into to re-order them</div>
@@ -83,6 +76,6 @@ var DragDropRowDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
-module.exports = DragDropContext(HTML5Backend)(DragDropRowDemo);
+module.exports = DragDropRowDemo;

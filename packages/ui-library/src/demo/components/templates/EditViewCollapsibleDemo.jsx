@@ -7,12 +7,12 @@ var React = require("react"),
 * @memberof EditViewCollapsible
 * @desc A demo for EditViewCollapsible
 */
-var EditViewCollapsibleDemo = React.createClass({
-    componentWillMount: function () {
+class EditViewCollapsibleDemo extends React.Component {
+    componentWillMount() {
         this.actions = Redux.bindActionCreators(EditViewCollapsible.Actions, this.props.store.dispatch);
-    },
+    }
 
-    render: function () {
+    render() {
         return (<EditViewCollapsible {...this.props}
             onInputChange={this.actions.setInput}
             onSectionToggle={this.actions.toggleSection}
@@ -20,7 +20,7 @@ var EditViewCollapsibleDemo = React.createClass({
             saving={this.props.inputs.saving}
             showButtonBar={this.props.inputs.dirty} />);
     }
-});
+}
 
 /*
  * Expose the Reducer.  Doing so will tell the DemoApp to create an isolated store for the Demo to use.  Normally

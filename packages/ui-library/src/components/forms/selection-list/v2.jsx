@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react"),
     _ = require("underscore"),
     Utils = require("../../../util/Utils.js"),
@@ -64,33 +65,30 @@ var React = require("react"),
  *     if not provided, the default search function will be used
  *     (for the first 3 chars is uses the "startsWith" operator, then "contains" from there on).
  */
-var SelectionList = React.createClass({
+class SelectionList extends React.Component {
+    static propTypes = {
+        controlled: PropTypes.bool, //TODO: remove in new version
+        stateless: PropTypes.bool
+    };
 
-    propTypes: {
-        controlled: React.PropTypes.bool, //TODO: remove in new version
-        stateless: React.PropTypes.bool
-    },
+    static defaultProps = {
+        controlled: false //TODO: change to stateless prop in new version
+    };
 
-    getDefaultProps: function () {
-        return {
-            controlled: false //TODO: change to stateless prop in new version
-        };
-    },
-
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("controlled", "stateless"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
 
         return stateless
-            ? React.createElement(Stateless, _.defaults({ ref: "SelectionListStateless" }, this.props))
-            : React.createElement(Stateful, _.defaults({ ref: "SelectionListStateful" }, this.props));
+            ? <Stateless {..._.defaults({ ref: "SelectionListStateless" }, this.props)} />
+            : <Stateful {..._.defaults({ ref: "SelectionListStateful" }, this.props)} />;
     }
-});
+}
 
 SelectionList.ListType = Constants.ListType;
 

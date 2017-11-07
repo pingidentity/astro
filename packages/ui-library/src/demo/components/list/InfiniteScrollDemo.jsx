@@ -7,10 +7,9 @@ var React = require("react"),
 * @memberof InfiniteScroll
 * @desc A demo for InfiniteScroll
 */
-var Demo = React.createClass({
-    SIMULATED_DELAY_MS: 200,
-
-    getInitialState: function () {
+class Demo extends React.Component {
+    constructor(props) {
+        super(props);
         this.batches = [];
 
         var bs = 20;
@@ -41,26 +40,27 @@ var Demo = React.createClass({
                 data: data
             });
         }
-        /*eslint-enable */
 
-        return {
+        this.state = {
             batches: this.batches.slice(4,5),
             pending: {
                 next: false,
                 prev: false
             }
         };
-    },
+    }
 
-    hasPrev: function () {
+    SIMULATED_DELAY_MS = 200;
+
+    hasPrev = () => {
         return this.state.batches[0].id > 0;
-    },
+    };
 
-    hasMore: function () {
+    hasMore = () => {
         return this.state.batches[this.state.batches.length - 1].id < 9;
-    },
+    };
 
-    _handleLoadPrev: function () {
+    _handleLoadPrev = () => {
         this.setState({ pending: { prev: true } });
         setTimeout(function () {
             this.setState({ pending: { prev: false } });
@@ -70,9 +70,9 @@ var Demo = React.createClass({
                 });
             }
         }.bind(this), this.SIMULATED_DELAY_MS);
-    },
+    };
 
-    _handleLoadNext: function () {
+    _handleLoadNext = () => {
         this.setState({ pending: { next: true } });
         setTimeout(function () {
             this.setState({ pending: { next: false } });
@@ -83,15 +83,15 @@ var Demo = React.createClass({
                 });
             }
         }.bind(this), this.SIMULATED_DELAY_MS);
-    },
+    };
 
-    _handleGenerateHeading: function (data) {
+    _handleGenerateHeading = (data) => {
         var start = data.num - (data.num % 10);
         var end = start + 10;
         return data.num % 10 === 0 ? ("Heading " + start + " to " + end) : null;
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <div className="infiniteScrollDemo">
                 <InfiniteScroll
@@ -109,12 +109,12 @@ var Demo = React.createClass({
             </div>
         );
     }
-});
+}
 
-var MyRow = React.createClass({
-    render: function () {
+class MyRow extends React.Component {
+    render() {
         return <div ref="container" className="row" onClick={this.handleClick}>My row: {this.props.num}</div>;
     }
-});
+}
 
 module.exports = Demo;

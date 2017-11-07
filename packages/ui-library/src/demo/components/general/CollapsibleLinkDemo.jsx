@@ -7,26 +7,25 @@ var CollapsibleLink = require("../../../components/general/CollapsibleLink.jsx")
 * @memberof CollapsibleLink
 * @desc A demo for CollapsibleLink
 */
-var CollapsibleLinkDemo = React.createClass({
+class CollapsibleLinkDemo extends React.Component {
+    state = {
+        isOpen: false,
+        isOpenLink: false
+    };
 
-    getInitialState: function () {
-        return {
-            isOpen: false,
-            isOpenLink: false
-        };
-    },
-
-    _toggle: function () {
+    _toggle = () => {
         this.setState({
             isOpenLink: !this.state.isOpenLink,
         });
-    },
-    _toggleCollapse: function () {
+    };
+
+    _toggleCollapse = () => {
         this.setState({
             isOpen: !this.state.isOpen,
         });
-    },
-    render: function () {
+    };
+
+    render() {
         return (
             <div>
                 <div>CollapsibleLink with title only</div>
@@ -53,6 +52,6 @@ var CollapsibleLinkDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = CollapsibleLinkDemo;

@@ -6,23 +6,20 @@ var React = require("react"),
 * @memberof RockerButton
 * @desc A demo for RockerButton
 */
-var RockerButtonDemo = React.createClass({
+class RockerButtonDemo extends React.Component {
+    state = {
+        selectedLabel: "Label One",
+        selectedIndex: 0
+    };
 
-    _handleValueChange: function (labelValues) {
+    _handleValueChange = (labelValues) => {
         this.setState({
             selectedLabel: labelValues.label,
             selectedIndex: labelValues.index
         });
-    },
+    };
 
-    getInitialState: function () {
-        return {
-            selectedLabel: "Label One",
-            selectedIndex: 0
-        };
-    },
-
-    render: function () {
+    render() {
         var labels = ["Label One", "Label 2", "Label Three", "Longer Label Four"];
         return (
             <div>
@@ -44,6 +41,6 @@ var RockerButtonDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = RockerButtonDemo;

@@ -1,1 +1,1 @@
-module.exports = require("./form-integer-field").v1;
+module.exports = require("./form-integer-field").v2;

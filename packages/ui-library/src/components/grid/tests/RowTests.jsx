@@ -14,7 +14,7 @@ jest.dontMock("../../tooltips/HelpHint.jsx");
 
 describe("Row", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         CheckboxCell = require("../cells/CheckboxCell.jsx"),
         ButtonCell = require("../cells/ButtonCell.jsx"),

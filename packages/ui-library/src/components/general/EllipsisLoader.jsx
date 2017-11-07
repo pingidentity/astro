@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react"),
     css = require("classnames"),
     Utils = require("../../util/Utils");
@@ -17,27 +18,25 @@ var React = require("react"),
  *
  * @example <EllipsisLoader id="my-loader" loading={this.state.isLoading} className="css-class" />
  */
-var EllipsisLoader = React.createClass({
-    propTypes: {
-        id: React.PropTypes.string,
-        "data-id": React.PropTypes.string,
-        className: React.PropTypes.string,
-        loading: React.PropTypes.bool.isRequired
-    },
+class EllipsisLoader extends React.Component {
+    static propTypes = {
+        id: PropTypes.string,
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
+        loading: PropTypes.bool.isRequired
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "ellipsis-loader"
-        };
-    },
+    static defaultProps = {
+        "data-id": "ellipsis-loader"
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (this.props.id && !Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("id", "data-id"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         if (this.props.loading) {
             var id = this.props.id || this.props["data-id"];
             var spanClass = css("icon-ellipsis", this.props.className, { ie9: Utils.isIE9() } );
@@ -46,6 +45,6 @@ var EllipsisLoader = React.createClass({
             return null;
         }
     }
-});
+}
 
 module.exports = EllipsisLoader;

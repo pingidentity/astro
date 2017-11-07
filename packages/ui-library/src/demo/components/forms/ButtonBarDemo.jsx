@@ -7,66 +7,63 @@ var React = require("react"),
 * @memberof ButtonBar
 * @desc A demo for ButtonBar
 */
-var ButtonBarDemo = React.createClass({
+class ButtonBarDemo extends React.Component {
+    state = {
+        saving: false,
+        showBar: true,
+        statusText: "-",
+        showCancelTooltip: false
+    };
 
-    _handleCancel: function () {
+    _handleCancel = () => {
         this.setState({
             statusText: "Cancel button pressed"
         });
         this._closeTooltip();
-    },
+    };
 
-    _handleDiscard: function () {
+    _handleDiscard = () => {
         this.setState({
             statusText: "Discard button pressed"
         });
-    },
+    };
 
-    _handleSave: function () {
+    _handleSave = () => {
         this.setState({
             statusText: "Save button pressed"
         });
-    },
+    };
 
-    _toggleBar: function () {
+    _toggleBar = () => {
         this.setState({
             showBar: !this.state.showBar,
             statusText: this.state.showBar ? '"visible" prop set to FALSE' : '"visible" prop set to TRUE'
         });
-    },
+    };
 
-    _toggleSaving: function () {
+    _toggleSaving = () => {
         this.setState({
             saving: !this.state.saving,
             statusText: this.state.saving ? '"saving" prop set to FALSE' : '"saving" prop set to TRUE'
         });
-    },
+    };
 
-    _toggleDisabled: function () {
+    _toggleDisabled = () => {
         this.setState({
             saveDisabled: !this.state.saveDisabled,
             statusText: this.state.saveDisabled ? '"saveDisabled" prop set to FALSE' : '"saveDisabled" prop set to TRUE'
         });
-    },
+    };
 
-    _openTooltip: function () {
+    _openTooltip = () => {
         this.setState({ showCancelTooltip: true });
-    },
+    };
 
-    _closeTooltip: function () {
+    _closeTooltip = () => {
         this.setState({ showCancelTooltip: false });
-    },
+    };
 
-    getInitialState: function () {
-        return {
-            saving: false,
-            showBar: true,
-            statusText: "-",
-            showCancelTooltip: false
-        };
-    },
-
-    render: function () {
+    render() {
         var toggleButtonText = this.state.showBar ? "FALSE" : "TRUE",
             saveButtonSaving = this.state.saving ? "FALSE" : "TRUE",
             saveButtonStatus = this.state.saveDisabled ? "FALSE" : "TRUE";
@@ -113,6 +110,6 @@ var ButtonBarDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = ButtonBarDemo;

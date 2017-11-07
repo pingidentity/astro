@@ -7,7 +7,7 @@ jest.dontMock("../FormError.jsx");
 
 describe("FormCheckbox", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         FormCheckbox= require("../FormCheckbox.jsx"),
         TestUtils = require("../../../testutil/TestUtils"),
         _ = require("underscore");

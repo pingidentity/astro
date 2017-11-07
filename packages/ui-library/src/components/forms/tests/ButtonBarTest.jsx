@@ -8,7 +8,7 @@ jest.dontMock("../../tooltips/DetailsTooltip.jsx");
 describe("ButtonBar", function () {
 
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         ButtonBar = require("../ButtonBar.jsx"),
         _ = require("underscore");

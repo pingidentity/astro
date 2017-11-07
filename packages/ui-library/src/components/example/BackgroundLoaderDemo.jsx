@@ -1,31 +1,28 @@
 var React = require("react");
 var BackgroundLoader = require("./BackgroundLoader.jsx");
 
-var BackgroundLoaderDemo = React.createClass({
+class BackgroundLoaderDemo extends React.Component {
+    state = {
+        interval: 2000,
+        timeout: 10000,
+        isLoaded: false
+    };
 
-    _loadData: function () {
+    _loadData = () => {
         var remaining = this.state.timeout - this.state.interval;
         this.setState({
             timeout: remaining,
             isLoaded: remaining <= 0
         });
-    },
+    };
 
-    _showLoading: function () {
+    _showLoading = () => {
         return (
             <span>Data will be available in {this.state.timeout} millis.</span>
         );
-    },
-    
-    getInitialState: function () {
-        return {
-            interval: 2000,
-            timeout: 10000,
-            isLoaded: false
-        };
-    },
-    
-    render: function () {
+    };
+
+    render() {
         return (
             <div>
                 <BackgroundLoader
@@ -39,7 +36,7 @@ var BackgroundLoaderDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 
 module.exports = BackgroundLoaderDemo;

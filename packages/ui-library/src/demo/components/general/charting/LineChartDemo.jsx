@@ -12,9 +12,8 @@ var React = require("react"),
 * @memberof LineChart
 * @desc A demo for LineChart
 */
-var LineChartDemo = React.createClass({
-
-    render: function () {
+class LineChartDemo extends React.Component {
+    render() {
         var data = [
             { id: "Monday", s1: 4000, s2: 2400, s3: -2400 },
             { id: "Tuesday", s1: 3000, s2: 1398, s3: -2210 },
@@ -94,6 +93,6 @@ var LineChartDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = LineChartDemo;

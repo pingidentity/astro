@@ -1,4 +1,5 @@
-var React = require("re-react"),
+var PropTypes = require("prop-types");
+var React = require("react"),
     classnames = require("classnames"),
     moment = require("moment-range"),
     DaysView = require("./DaysView.jsx"),
@@ -124,60 +125,58 @@ var Views = {
  *     }
  */
 
-var Calendar = React.createClass({
+class Calendar extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-
-        className: React.PropTypes.string.affectsRendering,
-        closeOnSelect: React.PropTypes.bool.affectsRendering,
-        computableFormat: React.PropTypes.string.affectsRendering,
-        date: React.PropTypes.any.affectsRendering,
-        dateRange: React.PropTypes.shape({
-            startDate: React.PropTypes.any.affectsRendering,
-            endDate: React.PropTypes.any.affectsRendering
+        className: PropTypes.string,
+        closeOnSelect: PropTypes.bool,
+        computableFormat: PropTypes.string,
+        date: PropTypes.any,
+        dateRange: PropTypes.shape({
+            startDate: PropTypes.any,
+            endDate: PropTypes.any
         }),
-        format: React.PropTypes.string.affectsRendering,
-        helpClassName: React.PropTypes.string.affectsRendering,
-        labelClassName: React.PropTypes.string.affectsRendering,
-        labelText: React.PropTypes.string.affectsRendering,
-        labelHelpText: React.PropTypes.string.affectsRendering,
-        minView: React.PropTypes.oneOf([Views.DAYS, Views.MONTHS, Views.YEARS]).affectsRendering,
-        placeholder: React.PropTypes.string.affectsRendering,
-        required: React.PropTypes.bool.affectsRendering,
+        format: PropTypes.string,
+        helpClassName: PropTypes.string,
+        labelClassName: PropTypes.string,
+        labelText: PropTypes.string,
+        labelHelpText: PropTypes.string,
+        minView: PropTypes.oneOf([Views.DAYS, Views.MONTHS, Views.YEARS]),
+        placeholder: PropTypes.string,
+        required: PropTypes.bool,
 
         //TODO: set as required when v1 no longer supported
-        onValueChange: React.PropTypes.func,
+        onValueChange: PropTypes.func,
 
         //TODO: remove when v1 no longer supported
-        id: React.PropTypes.string,
-        isRequired: React.PropTypes.bool.affectsRendering,
-        onChange: React.PropTypes.func
-    },
+        id: PropTypes.string,
+        isRequired: PropTypes.bool,
+        onChange: PropTypes.func
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "calendar",
-            computableFormat: "MM-DD-YYYY",
-            minView: Views.DAYS,
-            closeOnSelect: false,
-            required: false,
-            format: Translator.translate("dateformat")
-        };
-    },
+    static defaultProps = {
+        "data-id": "calendar",
+        computableFormat: "MM-DD-YYYY",
+        minView: Views.DAYS,
+        closeOnSelect: false,
+        required: false,
+        format: Translator.translate("dateformat")
+    };
 
-    getInitialState: function () {
-        var date = this.props.date ? moment(this.props.date) : null;
+    constructor(props) {
+        super(props);
+        var date = props.date ? moment(props.date) : null;
 
-        return {
+        this.state = {
             date: date,
-            inputValue: date ? date.format(this.props.format) : null,
-            currentView: this.props.minView,
+            inputValue: date ? date.format(props.format) : null,
+            currentView: props.minView,
             isVisible: false
         };
-    },
+    }
 
-    componentWillMount: function () {
+    componentWillMount() {
         moment.locale(Translator.currentLanguage);
 
         if (!Utils.isProduction()) {
@@ -191,49 +190,49 @@ var Calendar = React.createClass({
                 console.warn(Utils.deprecateMessage("isRequired", "required"));
             }
         }
-    },
+    }
 
-    componentDidMount: function () {
+    componentDidMount() {
         document.addEventListener("click", this.documentClick);
-    },
+    }
 
-    componentWillUnmount: function () {
+    componentWillUnmount() {
         document.removeEventListener("click", this.documentClick);
-    },
+    }
 
-    componentWillReceiveProps: function (nextProps) {
+    componentWillReceiveProps(nextProps) {
         this.setState({
             date: nextProps.date ? moment(nextProps.date) : this.state.date,
             inputValue: nextProps.date ? moment(nextProps.date).format(this.props.format) : null
         });
-    },
+    }
 
     /**
      * [keyDown description]
      * @method Calendar#keydown
      * @param  {Object} e The event object
      */
-    keyDown: function (e) {
+    keyDown = (e) => {
         e.preventDefault();
         _keyDownActions.call(this, e.keyCode);
-    },
+    };
 
     /**
      * Increments the currentView state
      * @method Calendar#nextView
      */
-    nextView: function () {
+    nextView = () => {
         this.setState({
             currentView: this.state.currentView + 1
         });
-    },
+    };
 
     /**
      * Decrements the currentView state
      * @method Calendar#prevView
      * @param {?} date [description]
      */
-    prevView: function (date) {
+    prevView = (date) => {
         if (this.state.currentView === this.props.minView) {
             this.setState({
                 date: date,
@@ -257,7 +256,7 @@ var Calendar = React.createClass({
                 currentView: this.state.currentView - 1
             });
         }
-    },
+    };
 
     /**
      * [setDate description]
@@ -265,7 +264,7 @@ var Calendar = React.createClass({
      * @param {?}  date      [description]
      * @param {Boolean} isDayView [description]
      */
-    setDate: function (date, isDayView) {
+    setDate = (date, isDayView) => {
         this.setState({
             date: date,
             inputValue: date.format(this.props.format),
@@ -281,24 +280,24 @@ var Calendar = React.createClass({
                 this.props.onValueChange(date.format(this.props.computableFormat));
             }
         }
-    },
+    };
 
     /**
      * Sets the inputValue state
      * @method Calendar#changeDate
      * @param  {Object} e The event object
      */
-    changeDate: function (e) {
+    changeDate = (e) => {
         this.setState({
             inputValue: e.target.value
         });
-    },
+    };
 
     /**
      * Handles input blur
      * @method Calendar#inputBlur
      */
-    inputBlur: function () {
+    inputBlur = () => {
         var date = this.state.inputValue,
             newDate = null,
             computableDate = null,
@@ -343,46 +342,46 @@ var Calendar = React.createClass({
                 inputValue: this.state.date.format(format)
             });
         }
-    },
+    };
 
     // notify document click handler that event originated from calendar elements
-    isCalendar: false,
+    isCalendar = false;
 
     /**
      * Handles document click
      * @method Calendar#documentClick
      */
-    documentClick: function () {
+    documentClick = () => {
         if (!this.isCalendar) {
             this.setVisibility(false);
         }
         this.isCalendar = false;
-    },
+    };
 
     /**
      * Handles calendar click
      * @method Calendar#calendarClick
      * @param  {Object} e The event object
      */
-    calendarClick: function (e) {
+    calendarClick = (e) => {
         e.stopPropagation();
         this.isCalendar = true;
-    },
+    };
 
     /**
      * @method Calendar#toggleClick
      */
-    toggleClick: function () {
+    toggleClick = () => {
         this.isCalendar = true;
         this.setVisibility();
-    },
+    };
 
     /**
      * Sets Visibility
      * @method Calendar#setVisibility
      * @param {?} val [description]
      */
-    setVisibility: function (val) {
+    setVisibility = (val) => {
         var value = val !== undefined ? val : !this.state.isVisible;
         var eventMethod = value ? "addEventListener" : "removeEventListener";
         document[eventMethod]("keydown", this.keyDown);
@@ -390,9 +389,9 @@ var Calendar = React.createClass({
         this.setState({
             isVisible: value
         });
-    },
+    };
 
-    render: function () {
+    render() {
 
         // its ok for this.state.date to be null, but we should never
         // pass null for the date into the calendar pop up, as we want
@@ -419,7 +418,9 @@ var Calendar = React.createClass({
         }
 
         var calendar = !this.state.isVisible ? "" : (
-            <div className="input-calendar-wrapper active" onClick={this.calendarClick}>
+            <div className="input-calendar-wrapper active"
+                data-id="input-calendar-wrapper"
+                onClick={this.calendarClick}>
                 {view}
             </div>
         );
@@ -457,8 +458,7 @@ var Calendar = React.createClass({
             </div>
         );
     }
-
-});
+}
 
 Calendar.Views = Views;
 

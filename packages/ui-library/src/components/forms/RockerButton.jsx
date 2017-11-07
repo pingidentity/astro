@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames"),
     _ = require("underscore"),
@@ -68,26 +69,23 @@ var React = require("react"),
 *      }
 */
 
-module.exports = React.createClass({
+module.exports = class extends React.Component {
+    static propTypes = {
+        controlled: PropTypes.bool, //TODO: remove in new version
+        stateless: PropTypes.bool
+    };
 
-    propTypes: {
-        controlled: React.PropTypes.bool, //TODO: remove in new version
-        stateless: React.PropTypes.bool
-    },
+    static defaultProps = {
+        controlled: false //TODO: change to stateless in new version
+    };
 
-    getDefaultProps: function () {
-        return {
-            controlled: false //TODO: change to stateless in new version
-        };
-    },
-
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("controlled", "stateless"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
 
         return (
@@ -95,34 +93,31 @@ module.exports = React.createClass({
                 ? <RockerButtonStateless ref="RockerButtonStateless" {...this.props} />
                 : <RockerButtonStateful ref="RockerButtonStateful" {...this.props} />);
     }
-});
+};
 
-var RockerButtonStateless = React.createClass({
+class RockerButtonStateless extends React.Component {
+    static propTypes = {
+        id: PropTypes.string,
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
+        labels: PropTypes.array.isRequired,
+        onChange: PropTypes.func,
+        onValueChange: PropTypes.func,
+        selected: PropTypes.string,
+        selectedIndex: PropTypes.number,
+        disabled: PropTypes.bool
+    };
 
-    propTypes: {
-        id: React.PropTypes.string,
-        "data-id": React.PropTypes.string,
-        className: React.PropTypes.string,
-        labels: React.PropTypes.array.isRequired,
-        onChange: React.PropTypes.func,
-        onValueChange: React.PropTypes.func,
-        selected: React.PropTypes.string,
-        selectedIndex: React.PropTypes.number,
-        disabled: React.PropTypes.bool
-    },
+    static defaultProps = {
+        "data-id": "rocker-button",
+        className: "",
+        onValueChange: _.noop,
+        selected: "",
+        selectedIndex: 0,
+        disabled: false
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "rocker-button",
-            className: "",
-            onValueChange: _.noop,
-            selected: "",
-            selectedIndex: 0,
-            disabled: false
-        };
-    },
-
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
                 console.warn(Utils.deprecateMessage("id", "data-id"));
@@ -134,9 +129,9 @@ var RockerButtonStateless = React.createClass({
                 console.warn("RockerButton expecting two to four labels, but was given ", this.props.labels.length);
             }
         }
-    },
+    }
 
-    _handleClick: function (label, index) {
+    _handleClick = (label, index) => {
         if (this.props.disabled) {
             return;
         }
@@ -149,9 +144,9 @@ var RockerButtonStateless = React.createClass({
         if (this.props.onChange) {
             this.props.onChange(label, index);
         }
-    },
+    };
 
-    render: function () {
+    render() {
         var id = this.props.id || this.props["data-id"],
             className = classnames("rocker-button sel-" + this.props.selectedIndex, this.props.className, {
                 disabled: this.props.disabled
@@ -169,7 +164,7 @@ var RockerButtonStateless = React.createClass({
             </div>
         );
     }
-});
+}
 
 var RockerButtonLabel = function (props) {
     var _handleClick = function (event) {
@@ -180,21 +175,24 @@ var RockerButtonLabel = function (props) {
 };
 
 RockerButtonLabel.propTypes = {
-    "data-id": React.PropTypes.string,
-    key: React.PropTypes.string,
-    onClick: React.PropTypes.func,
-    text: React.PropTypes.string,
-    index: React.PropTypes.number
+    "data-id": PropTypes.string,
+    key: PropTypes.string,
+    onClick: PropTypes.func,
+    text: PropTypes.string,
+    index: PropTypes.number
 };
 
-var RockerButtonStateful = React.createClass({
+class RockerButtonStateful extends React.Component {
+    state = {
+        selectedIndex: this.props.selectedIndex || Math.max(0, this.props.labels.indexOf(this.props.selected))
+    };
 
     //TODO: remove v1 support for onChange when switch to v2
-    _handleOnChange: function (label, index) {
+    _handleOnChange = (label, index) => {
         this._handleOnValueChange({ label: label, index: index });
-    },
+    };
 
-    _handleOnValueChange: function (selectedButton) {
+    _handleOnValueChange = (selectedButton) => {
         // Don't trigger callback if index is the same
         if (selectedButton.index === this.state.selectedIndex) {
             return;
@@ -210,21 +208,15 @@ var RockerButtonStateful = React.createClass({
         this.setState({
             selectedIndex: selectedButton.index
         });
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             console.warn("Deprecated: the stateful option for this component will be removed in next version");
         }
-    },
+    }
 
-    getInitialState: function () {
-        return {
-            selectedIndex: this.props.selectedIndex || Math.max(0, this.props.labels.indexOf(this.props.selected))
-        };
-    },
-
-    render: function () {
+    render() {
         var props = _.defaults({
             ref: "RockerButtonStateless",
             selectedIndex: this.state.selectedIndex,
@@ -232,6 +224,6 @@ var RockerButtonStateful = React.createClass({
             onValueChange: this.props.onValueChange ? this._handleOnValueChange : null
         }, this.props);
 
-        return React.createElement(RockerButtonStateless, props);
+        return <RockerButtonStateless {...props} />;
     }
-});
+}

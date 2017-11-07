@@ -4,7 +4,7 @@ jest.dontMock("../CollapsibleLink.jsx");
 
 describe("CollapsibleLink", function () {
     var React = require("react");
-    var ReactTestUtils = require("react-addons-test-utils");
+    var ReactTestUtils = require("react-dom/test-utils");
     var CollapsibleLink = require("../CollapsibleLink.jsx");
     var TestUtils = require("../../../testutil/TestUtils");
 

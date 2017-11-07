@@ -1,6 +1,6 @@
 
 jest.dontMock("../v2.jsx");
-jest.dontMock("./common.jsx");
+jest.dontMock("./commonTests.jsx");
 jest.dontMock("../../FormLabel.jsx");
 jest.dontMock("../../FormError.jsx");
 jest.dontMock("../../../tooltips/HelpHint.jsx");
@@ -8,11 +8,11 @@ jest.dontMock("../../../tooltips/HelpHint.jsx");
 describe("FormTextArea", function () {
 
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
         FormTextArea = require("../v2.jsx"),
         _ = require("underscore"),
-        CommonTests = require("./common.jsx");
+        CommonTests = require("./commonTests.jsx");
 
     function getComponent (props) {
         props = _.defaults(props || {}, {

@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react"),
     update = require("re-mutable"),
     _ = require("underscore");
@@ -37,12 +38,16 @@ var React = require("react"),
  *     }
  * })
  */
-var PropsToUrlWatcher = React.createClass({
-    propTypes: {
-        watch: React.PropTypes.object.isRequired,
-        onReplaceUrl: React.PropTypes.func.isRequired,
-        location: React.PropTypes.object.isRequired
-    },
+class PropsToUrlWatcher extends React.Component {
+    static propTypes = {
+        watch: PropTypes.object.isRequired,
+        onReplaceUrl: PropTypes.func.isRequired,
+        location: PropTypes.object.isRequired
+    };
+
+    static defaultProps = {
+        "data-id": "props-to-url-watcher"
+    };
 
     /**
      * @method
@@ -50,9 +55,9 @@ var PropsToUrlWatcher = React.createClass({
      * @desc since this is an offscreen component, never update the dom
      * @returns {bool} - false
      */
-    shouldComponentUpdate: function () {
+    shouldComponentUpdate() {
         return false;
-    },
+    }
 
     /**
      * @method
@@ -61,7 +66,7 @@ var PropsToUrlWatcher = React.createClass({
      * props, determine if anything has changed, and if so, recompute the query string and push it to the callback.
      * @param {object} nextProps - next props
      */
-    componentWillReceiveProps: function (nextProps) {
+    componentWillReceiveProps(nextProps) {
         var vals = [], v;
 
         //only recompute the string if the input props have changed
@@ -112,18 +117,12 @@ var PropsToUrlWatcher = React.createClass({
         }
 
         this.props.onReplaceUrl(this.props.location.pathname + "?" + vals.join("&"));
-    },
+    }
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "props-to-url-watcher"
-        };
-    },
-
-    render: function () {
+    render() {
         return <div data-id={this.props["data-id"]} style={{ display: "none" }} />;
     }
-});
+}
 
 /**
  * @memberof PropsToUrlWatcher

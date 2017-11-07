@@ -1,56 +1,54 @@
 var React = require("react"),
     classnames = require("classnames"),
     marked = require("marked"),
-    Markup = require("./Markup.jsx"),
+    //Markup = require("./Markup.jsx"),
     RockerButton = require("../../components/forms/RockerButton.jsx"),
     If = require("../../components/general/If.jsx"),
     _ = require("underscore");
 
-var DemoItem = React.createClass({
-    propTypes: {
-    },
+class DemoItem extends React.Component {
+    static propTypes = {
+    };
 
-    getInitialState: function () {
-        return {
-            open: false,
-            source: false,
-            selectedSource: 0
-        };
-    },
+    state = {
+        open: false,
+        source: false,
+        selectedSource: 0
+    };
 
-    _toggle: function () {
+    _toggle = () => {
         this.setState({
             open: !this.state.open,
             source: false
         });
-    },
-    
-    _toggleSource: function () {
+    };
+
+    _toggleSource = () => {
         this.setState({
             open: !this.state.open,
             source: true
         });
-    },
+    };
 
-    _handleChange: function () {
+    _handleChange = () => {
         this.setState({
             store: this.props.store.getState()
         });
-    },
+    };
 
-    _handleSelectedSourceValueChange: function (selectedSource) {
+    _handleSelectedSourceValueChange = (selectedSource) => {
         this.setState({ selectedSource: selectedSource.index });
-    },
+    };
 
-    _getConditionalSourceFrame: function (url, test) {
+    _getConditionalSourceFrame = (url, test) => {
         return (
             <If key={url} test={this.state.selectedSource === test}>
                 <iframe src={url} />
             </If>
         );
-    },
+    };
 
-    _getComponentSourceFrame: function () {
+    _getComponentSourceFrame = () => {
         var sourceClassName = classnames("js-source", { hidden: !this.state.source }),
             sourceLabels = [],
             sourceFrames = [],
@@ -87,7 +85,7 @@ var DemoItem = React.createClass({
                 {sourceFrames}
             </div>
         );
-    },
+    };
 
     /*
      * When a new demo is selected, inspect the properties of the demo and determine if it's requesting an
@@ -96,7 +94,7 @@ var DemoItem = React.createClass({
      * Also, ReactRedux.connect does not work reliably here (probably because of the multiple stores), so
      * instead we just subscribe directly to the store and use the updates to re-render
      */
-    componentWillReceiveProps: function (newProps) {
+    componentWillReceiveProps(newProps) {
         if (this.props.type !== newProps.type) {
             if (this.unsubscribe) {
                 this.unsubscribe();
@@ -110,9 +108,9 @@ var DemoItem = React.createClass({
 
             this.setState({ selectedSource: 0 }); // Reset default source to demo for each new demo change
         }
-    },
+    }
 
-    render: function () {
+    render() {
         // This is very important because Redux updates are not instant.  When replacing the demoItemReducer,
         // The new state will take some type to propagate.  We dont want to try and render without an initial
         // state being injected into the store.  Demo actions are computed inside the Demo.jsx so they are
@@ -130,7 +128,7 @@ var DemoItem = React.createClass({
         if (this.props.codePathUrl || this.props.demoCodePathUrl) {
             srcToggle = <span className="toggle-source" onClick={this._toggleSource} />;
         }
-        
+
         var markdown = this.props.description && marked(this.props.description),
             props = _.extend({}, this.props, this.state.store),
             containerClassName = classnames("section", { fullscreen: this.props.fullscreen }),
@@ -153,7 +151,7 @@ var DemoItem = React.createClass({
                         <iframe src={this.props.jsdocUrl} className={docsClassName} />
                         {this._getComponentSourceFrame()}
                     </div>
-                    
+
                 </div>
                 <div className="section-content">
                     <div className="demo-description"
@@ -163,11 +161,13 @@ var DemoItem = React.createClass({
                         {React.createElement(this.props.type, props)}
                     </div>
 
-                    {!this.props.fullscreen && <Markup content={this.props.code} />}
+                    {!this.props.fullscreen
+                        //&& <Markup content={this.props.code} />
+                }
                 </div>
             </div>
         );
     }
-});
+}
 
 module.exports = DemoItem;

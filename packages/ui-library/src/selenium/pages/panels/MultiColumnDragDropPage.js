@@ -157,7 +157,7 @@ var MultiColumnDragDropDemoPage = Object.create(HomePage, {
      */
     verifyIconOfItemExisting: {
         value: function (itemNumber) {
-            var xPath = "//div[contains(@data-reactid, '${itemNumber}')]//div[@data-id='row-icon']";
+            var xPath = "//div[contains(@data-id, '{itemNumber}')]//div[@data-id='row-icon']";
             return this.isExisting(this.formatXpath(xPath, { itemNumber: itemNumber }));
         }
     },
@@ -168,7 +168,7 @@ var MultiColumnDragDropDemoPage = Object.create(HomePage, {
      */
     verifyNameOfItemExisting: {
         value: function (itemNumber) {
-            var xPath = "//div[contains(@data-reactid,'${itemNumber}')]//span[@data-id='row-name']";
+            var xPath = "//div[contains(@data-id,'{itemNumber}')]//span[@data-id='row-name']";
             return this.isExisting(this.formatXpath(xPath, { itemNumber: itemNumber }));
         }
     },
@@ -179,7 +179,7 @@ var MultiColumnDragDropDemoPage = Object.create(HomePage, {
      */
     addItemToRightColumn: {
         value: function (itemNumber) {
-            var xPath = "//div[contains(@data-reactid, '$0.2.${itemNumber}')]//button[@data-id='row-button-add']";
+            var xPath = "//div[contains(@data-id, '{itemNumber}')]//button[@data-id='row-button-add']";
             this.click(this.formatXpath(xPath, { itemNumber: itemNumber }));
         }
     },
@@ -191,7 +191,7 @@ var MultiColumnDragDropDemoPage = Object.create(HomePage, {
     verifyAddedItemToRightColumnExisting: {
         value: function (itemNumber) {
             var prefixXpath = "//div[@data-id='DragDropColumn-1']//div[@data-id='drag-drop-item']";
-            var xPath = prefixXpath + "[contains(@data-reactid,'$1.2.${itemNumber}')]";
+            var xPath = prefixXpath + "//div[contains(@data-id,'{itemNumber}')]";
             return this.isExisting(this.formatXpath(xPath, { itemNumber: itemNumber }));
         }
     },
@@ -203,7 +203,7 @@ var MultiColumnDragDropDemoPage = Object.create(HomePage, {
     verifyRemovedItemToLeftColumnExisting: {
         value: function (itemNumber) {
             var prefixXpath = "//div[@data-id='DragDropColumn-0']//div[@data-id='drag-drop-item']";
-            var xPath = prefixXpath + "[contains(@data-reactid, '$0.2.${itemNumber}')]";
+            var xPath = prefixXpath + "//div[contains(@data-id, '{itemNumber}')]";
             return this.isExisting(this.formatXpath(xPath, { itemNumber: itemNumber }));
         }
     },
@@ -214,7 +214,7 @@ var MultiColumnDragDropDemoPage = Object.create(HomePage, {
      */
     removeItemToLeftColumn: {
         value: function (itemNumber) {
-            var xPath = "//div[contains(@data-reactid, '$1.2.${itemNumber}')]//button[@data-id='row-button-remove']";
+            var xPath = "//div[contains(@data-id, '{itemNumber}')]//button[@data-id='row-button-remove']";
             this.click(this.formatXpath(xPath, { itemNumber: itemNumber }));
         }
     },

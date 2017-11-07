@@ -9,16 +9,16 @@ var React = require("react"),
 * @memberof ListViewPaginated
 * @desc A demo for ListViewPaginated
 */
-var ListViewPaginatedDemo = React.createClass({
-    _handleToggleSearchBar: function () {
+class ListViewPaginatedDemo extends React.Component {
+    _handleToggleSearchBar = () => {
         this.actions.setExpandedSearch(!this.props.advancedSearch);
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         this.actions = Redux.bindActionCreators(ListViewPaginated.Actions, this.props.store.dispatch);
-    },
+    }
 
-    render: function () {
+    render() {
         var demoWatch = _.pick(this.props, "page", "filters", "advancedSearch");
 
         return (
@@ -37,7 +37,7 @@ var ListViewPaginatedDemo = React.createClass({
             </div>
             );
     }
-});
+}
 
 /*
  * Expose the Reducer.  Doing so will tell the DemoApp to create an isolated store for the Demo to use.  Normally

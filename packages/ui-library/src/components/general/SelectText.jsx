@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react"),
     ReactDOM = require("react-dom"),
     Utils = require("../../util/Utils");
@@ -75,15 +76,18 @@ var React = require("react"),
  * </SelectText>
  */
 
-var SelectText = React.createClass({
+class SelectText extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        dataId: PropTypes.string,
+        className: PropTypes.string,
+        select: PropTypes.bool,
+        onClick: PropTypes.func
+    };
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        dataId: React.PropTypes.string,
-        className: React.PropTypes.string,
-        select: React.PropTypes.bool,
-        onClick: React.PropTypes.func
-    },
+    static defaultProps = {
+        "data-id": "select-text"
+    };
 
     /*
      * Select the text of the clicked element using
@@ -91,7 +95,7 @@ var SelectText = React.createClass({
      * as part of the global object.
      *
      */
-    _selectText: function (event) {
+    _selectText = (event) => {
         // Handle input elements (which have their
         // own select method) specially to provide
         // better / un-styled selection.  It is assumed
@@ -121,33 +125,27 @@ var SelectText = React.createClass({
         if (this.props.onClick) {
             this.props.onClick();
         }
-    },
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "select-text"
-        };
-    },
-
-    componentWillMount: function () {
+    componentWillMount() {
         if (this.props.dataId && !Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("dataId", "data-id"));
         }
-    },
+    }
 
-    componentDidMount: function () {
+    componentDidMount() {
         if (this.props.select) {
             this._selectText();
         }
-    },
+    }
 
-    componentWillReceiveProps: function (nextProps) {
+    componentWillReceiveProps(nextProps) {
         if (!this.props.select && nextProps.select) {
             this._selectText();
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var dataId = this.props.dataId || this.props["data-id"];
         return (
             <span className={this.props.className}
@@ -157,6 +155,6 @@ var SelectText = React.createClass({
             </span>
         );
     }
-});
+}
 
 module.exports = SelectText;

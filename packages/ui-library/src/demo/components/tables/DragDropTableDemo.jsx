@@ -1,6 +1,4 @@
 var React = require("react"),
-    DragDropContext = require("react-dnd").DragDropContext,
-    HTML5Backend = require("react-dnd-html5-backend"),
     DragDropTable = require("./../../../components/tables/DragDropTable.jsx"),
     mockData = require("./mockData.json"),
     _ = require("underscore");
@@ -10,14 +8,13 @@ var React = require("react"),
 * @memberof DragDropTable
 * @desc A demo for DragDropTable
 */
-var DragDropTableDemo = React.createClass({
-    SIMULATED_DELAY_MS: 2000,
-    ENTRIES_PER_BATCH: 20,
-
-    getInitialState: function () {
+class DragDropTableDemo extends React.Component {
+    constructor(props) {
+        super(props);
         //slice of 20 for infinite scroll
         var dataSlice = (mockData.data).slice(0, this.ENTRIES_PER_BATCH);
-        return {
+
+        this.state = {
             loading: false,
             headings: mockData.cols,
             rows: mockData.data,
@@ -28,24 +25,27 @@ var DragDropTableDemo = React.createClass({
             hasNext: true,
             batches: [{ id: 0, data: dataSlice }]
         };
-    },
+    }
 
-    componentWillMount: function () {
+    SIMULATED_DELAY_MS = 2000;
+    ENTRIES_PER_BATCH = 20;
+
+    componentWillMount() {
         var order = Array.apply(this, { length: this.state.headings.length }).map(Number.call, Number);
         this.setState({ order: order });
-    },
+    }
 
-    _onCancel: function () {
+    _onCancel = () => {
         this.setState({ dropTarget: -1, beingDragged: -1 });
-    },
+    };
 
-    _onDrag: function (targetId, beingDraggedId) {
+    _onDrag = (targetId, beingDraggedId) => {
         if (this.state.dropTarget !== targetId) {
             this.setState({ dropTarget: targetId, beingDragged: beingDraggedId });
         }
-    },
+    };
 
-    _onDrop: function (targetId, beingDraggedId) {
+    _onDrop = (targetId, beingDraggedId) => {
         if (targetId === beingDraggedId) {
             return;
         }
@@ -59,9 +59,9 @@ var DragDropTableDemo = React.createClass({
             nextState.splice(insertAt, 0, beingDraggedObj);
         }
         this.setState({ order: nextState, dropTarget: -1, beingDragged: -1 });
-    },
+    };
 
-    _sort: function (index) {
+    _sort = (index) => {
         var ascending = this.state.sort && this.state.sort.column === index ? !this.state.sort.ascending : true;
 
         var nextRows = _.sortBy(this.state.rows, function (a) {
@@ -76,9 +76,9 @@ var DragDropTableDemo = React.createClass({
         };
 
         this.setState({ rows: nextRows, sort: sort });
-    },
+    };
 
-    _getHeadContentType: function (sortFunction) {
+    _getHeadContentType = (sortFunction) => {
         var HeaderCell = function (props) {
             var linkClass = (this.state.sort.column === props.index)
                 ? (this.state.sort.ascending ? "ascending" : "descending")
@@ -95,10 +95,10 @@ var DragDropTableDemo = React.createClass({
                 );
         }.bind(this);
         return (<HeaderCell />);
-    },
+    };
 
     //infinite scroll callbacks
-    _onNext: function () {
+    _onNext = () => {
         var numBatches = this.state.batches.length;
         var newBatchStart = numBatches * this.ENTRIES_PER_BATCH;
         var newBatchEnd = newBatchStart + this.ENTRIES_PER_BATCH;
@@ -112,9 +112,9 @@ var DragDropTableDemo = React.createClass({
         setTimeout(function () {
             this.setState({ batches: newBatches, hasNext: hasNext });
         }.bind(this), this.SIMULATED_DELAY_MS);
-    },
+    };
 
-    _sortBatches: function (index) {
+    _sortBatches = (index) => {
         var ascending = this.state.sort && this.state.sort.column === index ? !this.state.sort.ascending : true;
         var nextBatchData = _.sortBy(
                 _.flatten(
@@ -146,9 +146,9 @@ var DragDropTableDemo = React.createClass({
 
         this.setState({ batches: newBatches, sort: sort });
 
-    },
+    };
 
-    render: function () {
+    render() {
         var infiniteScrollProps = {
             onLoadNext: this._onNext,
             hasNext: this.state.hasNext,
@@ -189,6 +189,6 @@ var DragDropTableDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
-module.exports = DragDropContext(HTML5Backend)(DragDropTableDemo);
+module.exports = DragDropTableDemo;

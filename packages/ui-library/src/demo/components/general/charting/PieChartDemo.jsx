@@ -7,9 +7,8 @@ var React = require("react"),
 * @memberof PieChart
 * @desc A demo for PieChart
 */
-var PieChartDemo = React.createClass({
-
-    render: function () {
+class PieChartDemo extends React.Component {
+    render() {
         var data = [
             { id: "Monday", s1: 4000, s2: 2400, s3: -2400 },
             { id: "Tuesday", s1: 3000, s2: 1398, s3: -2210 },
@@ -60,6 +59,6 @@ var PieChartDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = PieChartDemo;

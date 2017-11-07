@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react"),
     ReactDOM = require("react-dom"),
     moment = require("moment-timezone"),
@@ -111,86 +112,108 @@ var getZoneNameDisplayValue = function (zoneName) {
 *
 **/
 
-var FormTimeZone = React.createClass({
+class FormTimeZone extends React.Component {
+    static propTypes = {
+        controlled: PropTypes.bool, //TODO: remove in new version
+        stateless: PropTypes.bool
+    };
 
-    propTypes: {
-        controlled: React.PropTypes.bool, //TODO: remove in new version
-        stateless: React.PropTypes.bool
-    },
+    static defaultProps = {
+        controlled: false //TODO: change to stateless with true default in new version
+    };
 
-    getDefaultProps: function () {
-        return {
-            controlled: false //TODO: change to stateless with true default in new version
-        };
-    },
-
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("controlled", "stateless", "false", "true"));
         }
-    },
+    }
 
-    isValidTimeZone: function (zoneText) {
+    isValidTimeZone = (zoneText) => {
         var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
 
         return stateless
             ? this.refs.TimeZoneStateless.isValidTimeZone(zoneText)
             : this.refs.TimeZoneStateful.isValidTimeZone(zoneText);
-    },
+    };
 
-    render: function () {
+    render() {
         var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
 
         return stateless
-            ? React.createElement(TimeZoneStateless, //eslint-disable-line no-use-before-define
-                _.defaults({ ref: "TimeZoneStateless" }, this.props))
-            : React.createElement(TimeZoneStateful, //eslint-disable-line no-use-before-define
-                _.defaults({ ref: "TimeZoneStateful" }, this.props));
+            ? <TimeZoneStateless {..._.defaults({ ref: "TimeZoneStateless" }, this.props)} />
+            : <TimeZoneStateful {..._.defaults({ ref: "TimeZoneStateful" }, this.props)} />;
 
     }
-});
+}
 
-var TimeZoneStateless = React.createClass({
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        className: React.PropTypes.string,
-        countryLabel: React.PropTypes.string,
-        displayValue: React.PropTypes.string,
-        errorMessage: React.PropTypes.string,
-        filterByCountry: React.PropTypes.string,
-        helpClassName: React.PropTypes.string,
-        labelHelpText: React.PropTypes.string,
-        labelText: React.PropTypes.string,
-        onValueChange: React.PropTypes.func,
-        onSearch: React.PropTypes.func,
-        onToggle: React.PropTypes.func,
-        open: React.PropTypes.bool,
-        searchString: React.PropTypes.string,
-        selectCountryLabel: React.PropTypes.string.isRequired,
-        selectedIndex: React.PropTypes.number,
-        value: React.PropTypes.string,
-    },
+var LABEL_DEFAULTS = {
+    COUNTRY: "Country",
+    "SELECT-COUNTRY": "Select a Country"
+};
 
-    _clearSearchString: function () {
+class TimeZoneStateless extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
+        countryLabel: PropTypes.string,
+        displayValue: PropTypes.string,
+        errorMessage: PropTypes.string,
+        filterByCountry: PropTypes.string,
+        helpClassName: PropTypes.string,
+        labelHelpText: PropTypes.string,
+        labelText: PropTypes.string,
+        onValueChange: PropTypes.func,
+        onSearch: PropTypes.func,
+        onToggle: PropTypes.func,
+        open: PropTypes.bool,
+        searchString: PropTypes.string,
+        selectCountryLabel: PropTypes.string.isRequired,
+        selectedIndex: PropTypes.number,
+        value: PropTypes.string,
+    };
+
+    static defaultProps = function () {
+
+        return {
+            countryLabel: LABEL_DEFAULTS.COUNTRY,
+            filterByCountry: undefined,
+            onValueChange: _.noop,
+            onSearch: _.noop,
+            onToggle: _.noop,
+            open: false,
+            selectCountryLabel: LABEL_DEFAULTS["SELECT-COUNTRY"],
+            selectedIndex: 0,
+            value: moment.tz.guess()
+        };
+    }();
+
+    state = {
+        countryData: null,
+        renderedCountries: [],
+        renderedZones: [],
+        zoneData: null
+    };
+
+    _clearSearchString = () => {
         this.props.onSearch("", this.props.selectedIndex);
-    },
+    };
 
-    _onCountryChange: function (e) {
+    _onCountryChange = (e) => {
         this._onValueChange("country", e.target.getAttribute("data-value"));
-    },
+    };
 
-    _onZoneChange: function (e) {
+    _onZoneChange = (e) => {
         var index = e.target.getAttribute("data-index") || e.target.parentElement.getAttribute("data-index");
         this._onValueChange("zone", this.state.renderedZones[index]);
-    },
+    };
 
-    _onValueChange: function (type, value) {
+    _onValueChange = (type, value) => {
         this.props.onValueChange(type, value);
         this.props.onSearch(this.props.searchString, 0);
-    },
+    };
 
-    _onGlobalClick: function (e) {
+    _onGlobalClick = (e) => {
         if (!this.props.open) {
             return;
         }
@@ -198,9 +221,9 @@ var TimeZoneStateless = React.createClass({
         var timezoneInput = ReactDOM.findDOMNode(this.refs["input-timezone"]);
         EventUtils.callIfOutsideOfContainer(timezoneInput, this.props.onToggle, e);
         this.props.onSearch(this.props.searchString, 0);
-    },
+    };
 
-    _onKeyDown: function (e) {
+    _onKeyDown = (e) => {
         var newIndex,
             renderedItems;
 
@@ -237,18 +260,18 @@ var TimeZoneStateless = React.createClass({
             }
             this._killEvent(e);
         }
-    },
+    };
 
-    _killEvent: function (e) {
+    _killEvent = (e) => {
         e.preventDefault();
         e.stopPropagation();
-    },
+    };
 
-    _onSearch: function (value) {
+    _onSearch = (value) => {
         this.props.onSearch(value, this.props.selectedIndex);
-    },
+    };
 
-    _renderCountries: function () {
+    _renderCountries = () => {
         var rowCss,
             self = this;
 
@@ -277,9 +300,9 @@ var TimeZoneStateless = React.createClass({
                 </div>
             </div>
         );
-    },
+    };
 
-    _renderZones: function () {
+    _renderZones = () => {
         var rowCss,
             self = this;
 
@@ -320,9 +343,9 @@ var TimeZoneStateless = React.createClass({
                 </div>
             </div>
         );
-    },
+    };
 
-    _refreshData: function (nextProps) {
+    _refreshData = (nextProps) => {
         var countryZones,
             countryZoneNames,
             filteredCountries,
@@ -362,9 +385,9 @@ var TimeZoneStateless = React.createClass({
         }
 
         this.setState(newState);
-    },
+    };
 
-    _setListPosition: function () {
+    _setListPosition = () => {
         if (!this.props.open) {
             return;
         }
@@ -375,16 +398,16 @@ var TimeZoneStateless = React.createClass({
         if (menuItem && menuItem.offsetTop) {
             menu.scrollTop = menuItem.offsetTop;
         }
-    },
+    };
 
-    isValidTimeZone: function (zoneName) {
+    isValidTimeZone = (zoneName) => {
         var matchedZone = this.state.zoneData.filter(function (tz) {
             return zoneName === tz.name;
         });
         return matchedZone[0] ? matchedZone[0] : false;
-    },
+    };
 
-    _getCountryData: function () {
+    _getCountryData = () => {
         var countryCode,
             countryData = [];
 
@@ -395,9 +418,9 @@ var TimeZoneStateless = React.createClass({
         return _.sortBy(countryData, function (country) {
             return country.name;
         });
-    },
+    };
 
-    _getZoneData: function () {
+    _getZoneData = () => {
         var currentUtcTime = moment().utc(),
             zoneNames = moment.tz.names();
 
@@ -409,26 +432,26 @@ var TimeZoneStateless = React.createClass({
                 offset: moment.tz(currentUtcTime, tz).format("Z")
             };
         });
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         this.setState({
             zoneData: this._getZoneData(),
             countryData: this._getCountryData()
         }, function () {
             this._refreshData(this.props);
         });
-    },
+    }
 
-    componentDidMount: function () {
+    componentDidMount() {
         window.addEventListener("click", this._onGlobalClick);
-    },
+    }
 
-    componentWillUnmount: function () {
+    componentWillUnmount() {
         window.removeEventListener("click", this._onGlobalClick);
-    },
+    }
 
-    componentWillReceiveProps: function (nextProps) {
+    componentWillReceiveProps(nextProps) {
 
         // refresh the time for each of the zones
         var currentUtcTime = moment().utc();
@@ -445,45 +468,16 @@ var TimeZoneStateless = React.createClass({
         });
 
         this._refreshData(nextProps);
-    },
+    }
 
-    componentDidUpdate: function () {
+    componentDidUpdate() {
         if (this.props.open) {
             ReactDOM.findDOMNode(this.refs.searchString).focus();
         }
         this._setListPosition();
-    },
+    }
 
-    getInitialState: function () {
-        return {
-            countryData: null,
-            renderedCountries: [],
-            renderedZones: [],
-            zoneData: null
-        };
-    },
-
-    getDefaultProps: function () {
-
-        this.labelDefaults = {
-            COUNTRY: "Country",
-            "SELECT-COUNTRY": "Select a Country"
-        };
-
-        return {
-            countryLabel: this.labelDefaults.COUNTRY,
-            filterByCountry: undefined,
-            onValueChange: _.noop,
-            onSearch: _.noop,
-            onToggle: _.noop,
-            open: false,
-            selectCountryLabel: this.labelDefaults["SELECT-COUNTRY"],
-            selectedIndex: 0,
-            value: moment.tz.guess()
-        };
-    },
-
-    render: function () {
+    render() {
         var classNames = {
             "form-error": !!this.props.errorMessage,
             countries: !!this.props.filterByCountry
@@ -529,24 +523,31 @@ var TimeZoneStateless = React.createClass({
             </FormLabel>
         );
     }
-});
+}
 
-var TimeZoneStateful = React.createClass({
+class TimeZoneStateful extends React.Component {
+    state = {
+        filterByCountry: this.props.filterByCountry,
+        index: 0,
+        open: this.props.open,
+        searchString: this.props.searchString || "",
+        value: this.props.value
+    };
 
-    _toggleMenu: function () {
+    _toggleMenu = () => {
         this.setState({
             open: !this.state.open
         });
-    },
+    };
 
-    _onSearch: function (searchString, selectedIndex) {
+    _onSearch = (searchString, selectedIndex) => {
         this.setState({
             searchString: searchString,
             selectedIndex: selectedIndex
         });
-    },
+    };
 
-    _onValueChange: function (type, value) {
+    _onValueChange = (type, value) => {
         var newState = {};
 
         if (type === "country") {
@@ -561,23 +562,13 @@ var TimeZoneStateful = React.createClass({
         }
 
         this.setState(newState);
-    },
+    };
 
-    isValidTimeZone: function (zoneText) {
+    isValidTimeZone = (zoneText) => {
         return this.refs.TimeZoneStateless.isValidTimeZone(zoneText);
-    },
+    };
 
-    getInitialState: function () {
-        return {
-            filterByCountry: this.props.filterByCountry,
-            index: 0,
-            open: this.props.open,
-            searchString: this.props.searchString || "",
-            value: this.props.value
-        };
-    },
-
-    render: function () {
+    render() {
         var value = this.state.value || moment.tz.guess();
         var props = _.defaults({
             filterByCountry: this.state.filterByCountry,
@@ -592,9 +583,9 @@ var TimeZoneStateful = React.createClass({
             displayValue: this.props.displayValue || getZoneNameDisplayValue(value)
         }, this.props);
 
-        return React.createElement(TimeZoneStateless, props);
+        return <TimeZoneStateless {...props} />;
     }
-});
+}
 
 FormTimeZone.getZoneNameDisplayValue = getZoneNameDisplayValue;
 

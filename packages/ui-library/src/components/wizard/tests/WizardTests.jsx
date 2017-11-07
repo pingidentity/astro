@@ -12,7 +12,7 @@ describe("Step", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
         TestUtils = require("../../../testutil/TestUtils"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         Wizard = require("../Wizard.jsx"),
         Step = Wizard.Step,
         assign = require("object-assign");

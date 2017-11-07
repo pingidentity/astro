@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react");
 var ReactDOM = require("react-dom");
 var DragDrop = require("../rows/DragDrop.jsx");
@@ -171,39 +172,34 @@ var ISRow = function (props) {
  *
  */
 
-var DragDropTable = React.createClass({
+class DragDropTable extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        onDrag: PropTypes.func.isRequired,
+        onDrop: PropTypes.func.isRequired,
+        onCancel: PropTypes.func.isRequired,
+        headData: PropTypes.array.isRequired,
+        bodyData: PropTypes.array,
+        columnOrder: PropTypes.array,
+        headContentType: PropTypes.object,
+        className: PropTypes.string,
+        beingDragged: PropTypes.number,
+        dropTarget: PropTypes.number,
+        fixedHead: PropTypes.bool,
+        infiniteScroll: PropTypes.object
+    };
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        onDrag: React.PropTypes.func.isRequired,
-        onDrop: React.PropTypes.func.isRequired,
-        onCancel: React.PropTypes.func.isRequired,
-        headData: React.PropTypes.array.isRequired,
-        bodyData: React.PropTypes.array,
-        columnOrder: React.PropTypes.array,
-        headContentType: React.PropTypes.object,
-        className: React.PropTypes.string,
-        beingDragged: React.PropTypes.number,
-        dropTarget: React.PropTypes.number,
-        fixedHead: React.PropTypes.bool,
-        infiniteScroll: React.PropTypes.object
-    },
+    static defaultProps = {
+        "data-id": "drag-drop-table",
+        className: "report-table",
+        fixedHead: false
+    };
 
-    getInitialState: function () {
-        return {
-            columnWidths: null
-        };
-    },
+    state = {
+        columnWidths: null
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "drag-drop-table",
-            className: "report-table",
-            fixedHead: false
-        };
-    },
-
-    _setWidths: function () {
+    _setWidths = () => {
         //this function reads the width of the initial table columns and uses it to set widths for the fixed table
         var thisElement = ReactDOM.findDOMNode(this);
         var tableHead = thisElement.getElementsByClassName("thead");
@@ -218,31 +214,31 @@ var DragDropTable = React.createClass({
         });
 
         this.setState({ columnWidths: widths });
-    },
+    };
 
-    _handleHorizontalScroll: function (e) {
+    _handleHorizontalScroll = (e) => {
         if (this.initialX === e.currentTarget.scrollLeft) {
             return;
         }
         this.tableHead.style.left = -(e.currentTarget.scrollLeft) + "px";
         this.initialX = e.currentTarget.scrollLeft;
-    },
+    };
 
-    _handleISHorizontalScroll: function (param, e) {
+    _handleISHorizontalScroll = (param, e) => {
         this._handleHorizontalScroll(e);
-    },
+    };
 
-    _infiniteScrollRef: function (component) {
+    _infiniteScrollRef = (component) => {
         this.infiniteScrollNode = ReactDOM.findDOMNode(component);
-    },
+    };
 
-    _getDropClass: function (item, index) {
+    _getDropClass = (item, index) => {
         var dragRight= this.props.headData.length - 1 === index &&
                 this.props.dropTarget === this.props.headData.length;
         return classnames("dd-column", { "drag-left": this.props.dropTarget === index }, { "drag-right": dragRight });
-    },
+    };
 
-    componentDidMount: function () {
+    componentDidMount() {
         if (this.props.fixedHead && !this.state.columnWidths) {
             //Because componentDidMount is called before the dom is painted, the timeout is required to make sure the measured widths are accurate
             setTimeout(function () {
@@ -252,9 +248,9 @@ var DragDropTable = React.createClass({
         var thisElement = ReactDOM.findDOMNode(this);
         this.tableHead = ReactDOM.findDOMNode(thisElement.getElementsByClassName("thead")[0]);
         this.intialY = 0;
-    },
+    }
 
-    render: function () {
+    render() {
         var order = this.props.columnOrder || _.range(this.props.headData.length).map(Number.call, Number);
         var bodyData = this.props.infiniteScroll
             ? (this.props.infiniteScroll.batches[0].data || this.props.bodyData)
@@ -278,10 +274,10 @@ var DragDropTable = React.createClass({
             this.props.infiniteScroll.ref = this._infiniteScrollRef;
         }
 
-        var tableHead = React.createElement(Head, props);
+        var tableHead = <Head {...props} />;
         var tableBody = this.props.infiniteScroll && this.state.columnWidths
-            ? React.createElement(ISBody, props)
-            : React.createElement(Body, props);
+            ? <ISBody {...props} />
+            : <Body {...props} />;
 
         var className = classnames(
             this.props.className,
@@ -301,6 +297,6 @@ var DragDropTable = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = DragDropTable;

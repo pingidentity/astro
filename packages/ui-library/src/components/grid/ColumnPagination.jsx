@@ -1,5 +1,7 @@
 "use strict";
 
+var PropTypes = require("prop-types");
+
 var React = require("react");
 var _ = require("underscore");
 
@@ -26,21 +28,21 @@ var _ = require("underscore");
  *
  **/
 
-var PageLinks = React.createClass({
-    propTypes: {
-        "data-id": React.PropTypes.string.isRequired,
-        numPages: React.PropTypes.number.isRequired,
-        currentPage: React.PropTypes.number.isRequired,
-        onClick: React.PropTypes.func.isRequired
-    },
+class PageLinks extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string.isRequired,
+        numPages: PropTypes.number.isRequired,
+        currentPage: PropTypes.number.isRequired,
+        onClick: PropTypes.func.isRequired
+    };
 
-    _handleClick: function (e, page) {
+    _handleClick = (e, page) => {
         if (this.props.currentPage !== page) {
             this.props.onClick(page);
         }
-    },
+    };
 
-    render: function () {
+    render() {
         var currentPage = this.props.currentPage;
         var numPages = this.props.numPages;
 
@@ -67,8 +69,7 @@ var PageLinks = React.createClass({
             </div>
         );
     }
-
-});
+}
 
 /**
  * @private
@@ -100,35 +101,32 @@ var PageLinks = React.createClass({
  *
  **/
 
-module.exports = React.createClass({
+module.exports = class extends React.Component {
+    static displayName = "ColumnPagination";
 
-    displayName: "ColumnPagination",
+    static propTypes = {
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
+        page: PropTypes.number,
+        perPage: PropTypes.number,
+        total: PropTypes.number,
+        onChange: PropTypes.func.isRequired
+    };
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        className: React.PropTypes.string,
-        page: React.PropTypes.number,
-        perPage: React.PropTypes.number,
-        total: React.PropTypes.number,
-        onChange: React.PropTypes.func.isRequired
-    },
+    static defaultProps = {
+        "data-id": "columnPagination",
+        perPage: 5
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "columnPagination",
-            perPage: 5
-        };
-    },
-
-    _getNumPages: function () {
+    _getNumPages = () => {
         if (this.props.total && this.props.perPage) {
             return Math.ceil(this.props.total / this.props.perPage);
         } else {
             throw("props.total and props.perPage must be defined to determine the number of page links!");
         }
-    },
+    };
 
-    _handlePageChange: function (newPage) {
+    _handlePageChange = (newPage) => {
         var page = newPage,
             numPages = this._getNumPages(),
             currentPage = page > numPages ? numPages : page,
@@ -136,9 +134,9 @@ module.exports = React.createClass({
             last = start + this.props.perPage;
 
         this.props.onChange(start, last, currentPage);
-    },
+    };
 
-    render: function () {
+    render() {
         var numPages = this._getNumPages();
 
         //make sure current page isn't greater than number of pages
@@ -153,4 +151,4 @@ module.exports = React.createClass({
                 key="pageLinks" />
         );
     }
-});
+};

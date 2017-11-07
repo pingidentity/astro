@@ -1,4 +1,5 @@
-var React = require("re-react"),
+var PropTypes = require("prop-types");
+var React = require("react"),
     CollapsibleLink = require("../../components/general/CollapsibleLink.jsx"),
     ExpandableRow = require("../../components/rows/ExpandableRow.jsx"),
     FormCheckbox = require("../../components/forms/FormCheckbox.jsx"),
@@ -44,50 +45,50 @@ var React = require("re-react"),
  * @param {ListView~onPageChange} onPageChange
  *          Callback to be triggered when the page has changed.
  */
-module.exports = React.createClass({
+module.exports = class extends React.Component {
     /*
      * Declare which variables affect rendering.  The shouldComponentUpdate method will be be injected by ReactDefaultMethods
      * utility.
      */
-    propTypes: {
-        advancedSearch: React.PropTypes.bool.affectsRendering,
-        filters: React.PropTypes.object.affectsRendering,
-        page: React.PropTypes.number.affectsRendering,
-        onSearchFilterChange: React.PropTypes.func,
-        onSearchAdvancedToggle: React.PropTypes.func,
-        onPageChange: React.PropTypes.func
-    },
+    static propTypes = {
+        advancedSearch: PropTypes.bool,
+        filters: PropTypes.object,
+        page: PropTypes.number,
+        onSearchFilterChange: PropTypes.func,
+        onSearchAdvancedToggle: PropTypes.func,
+        onPageChange: PropTypes.func
+    };
 
     /*
      * When the component mounts, do a bunch of initialization
      */
-    componentWillMount: function () {
+    componentWillMount() {
         //Instead of creating partials in the render function, which get computed on ever render, or
         //extracting the data-id of the target.  Created partials on mount and use them
         this._handleTextChange = this._handleFilter.bind(null, "text");
         this._handleOddFilterToggle = this._handleFilter.bind(null, "odd");
         this._handleEvenFilterToggle = this._handleFilter.bind(null, "even");
-    },
+    }
 
     /*
      * Wrap the callback in a function so that we can create partials without having to worry about the
      * callback changing.
      */
-    _handleFilter: function (name, value) {
+    _handleFilter = (name, value) => {
         this.props.onSearchFilterChange(name, value);
-    },
+    };
 
-    _handlePageChange: function (pageDetails) {
+    _handlePageChange = (pageDetails) => {
         this.props.onPageChange(pageDetails.page);
-    },
+    };
 
-    _generatePageRows: function () {
+    _generatePageRows = () => {
         return this.props.rows.page.map(function (obj) {
             return (<ExpandableRow {...obj} showEdit={true} rowAccessories={ <Toggle /> } />);
         });
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <div>
                 <div className={classnames("search-bar", { expanded: this.props.advancedSearch })}>
@@ -134,4 +135,4 @@ module.exports = React.createClass({
             </div>
         );
     }
-});
+};

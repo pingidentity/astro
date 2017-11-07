@@ -1,5 +1,7 @@
 "use strict";
 
+var PropTypes = require("prop-types");
+
 var React = require("react"),
     classnames = require("classnames");
 
@@ -44,35 +46,32 @@ var React = require("react"),
  *     </CollapsibleLink>
  **/
 
-var CollapsibleLink = React.createClass({
+class CollapsibleLink extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
+        title: PropTypes.string,
+        toggledTitle: PropTypes.string,
+        arrowPosition: PropTypes.oneOf(["left", "right"]),
+        expanded: PropTypes.bool,
+        onToggle: PropTypes.func
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        className: React.PropTypes.string,
-        title: React.PropTypes.string,
-        toggledTitle: React.PropTypes.string,
-        arrowPosition: React.PropTypes.oneOf(["left", "right"]),
-        expanded: React.PropTypes.bool,
-        onToggle: React.PropTypes.func
+    };
 
-    },
+    static defaultProps = {
+        "data-id": "collapsible-link",
+        arrowPosition: "right",
+        expanded: false
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "collapsible-link",
-            arrowPosition: "right",
-            expanded: false
-        };
-    },
-
-    _handleToggle: function () {
+    _handleToggle = () => {
         if (this.props.onToggle) {
             // do callback in case it has passed callback function.
             this.props.onToggle();
         }
-    },
+    };
 
-    render: function () {
+    render() {
         var className= classnames(this.props.className, {
             open: this.props.expanded,
             "collapsible-link": true
@@ -89,7 +88,7 @@ var CollapsibleLink = React.createClass({
             </div>
         );
     }
-});
+}
 
 /**
  * @enum {string}

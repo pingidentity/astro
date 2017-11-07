@@ -1,6 +1,6 @@
 module.exports = function (getComponent) {
     var ReactDOM = require("react-dom"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../testutil/TestUtils");
 
     /**

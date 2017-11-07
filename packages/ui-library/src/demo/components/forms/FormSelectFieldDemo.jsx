@@ -6,11 +6,9 @@ var FormSelectField = require("./../../../components/forms/form-select-field");
 * @memberof FormSelectField
 * @desc A demo for FormSelectField
 */
-var FormSelectFieldDemo = React.createClass({
-
-    _numDemos: 5,
-
-    getInitialState: function () {
+class FormSelectFieldDemo extends React.Component {
+    constructor(props, context) {
+        super(props, context);
         var initialState = {};
 
         for (var i=1; i<=this._numDemos; i+=1) {
@@ -18,16 +16,18 @@ var FormSelectFieldDemo = React.createClass({
             this["_changeCallback" + i] = this._changeCallback.bind(this, i);
         }
 
-        return initialState;
-    },
+        this.state = initialState;
+    }
 
-    _changeCallback: function (index, event) {
+    _numDemos = 5;
+
+    _changeCallback = (index, event) => {
         var stateObj = {};
         stateObj["fieldValue" + index] = event.target.value;
         this.setState(stateObj);
-    },
+    };
 
-    render: function () {
+    render() {
         // data may be either an array of objects or an object. Only the array will insure display order of options
         var optionsArr = [
             { value: 1, label: "one" },
@@ -104,7 +104,7 @@ var FormSelectFieldDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 
 module.exports = FormSelectFieldDemo;

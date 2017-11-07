@@ -7,7 +7,7 @@ jest.dontMock("../../tooltips/DetailsTooltip.jsx");
 describe("LinkDropDownList", function () {
 
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         LinkDropDownList = require("../LinkDropDownList.jsx"),
         _ = require("underscore");

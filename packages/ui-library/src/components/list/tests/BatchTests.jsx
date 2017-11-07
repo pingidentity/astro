@@ -5,25 +5,25 @@ jest.dontMock("../InfiniteScroll.jsx");
 describe("Batch", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         Wrapper = require("../../../testutil/TestUtils").UpdatePropsWrapper,
         InfiniteScroll = require("../InfiniteScroll.jsx"),
         assign = require("object-assign");
     var batches;
 
-    var MyRow = React.createClass({
-        render: function () {
+    class MyRow extends React.Component {
+        render() {
             return <div ref="container" className="row">My row: {this.props.num}</div>;
         }
-    });
+    }
 
     window.addEventListener = jest.genMockFunction();
 
     function getRenderedComponent (opts) {
         var defaults = {
             onGenerateHeading: jest.genMockFunction(),
-            contentType: React.createElement(MyRow),
+            contentType: <MyRow />,
             data: batches[1].data
         };
 
@@ -65,22 +65,19 @@ describe("Batch", function () {
         expect(batch).toBeDefined();
     });
 
-    it("Hides content when invisible", function () {
+    it("hides content when invisible", function () {
         var component = getRenderedComponent();
         var node = ReactDOM.findDOMNode(component.refs.wrapper.refs.container);
 
         expect(node.style.height).toBe("");
         expect(node.childNodes.length).toBe(50);
 
-        node.scrollHeight = 100;
-
         component._setProps({ isVisible: false });
 
-        expect(node.style.height).toBe("100px");
         expect(node.childNodes.length).toBe(0);
     });
 
-    it("Only passes last item of previous batch to heading generator", function () {
+    it("only passes last item of previous batch to heading generator", function () {
         var component = getRenderedComponent({
             prev: batches[0].data,
             onGenerateHeading: jest.genMockFunction()
@@ -92,4 +89,3 @@ describe("Batch", function () {
         expect(component.props.onGenerateHeading.mock.calls[1]).toEqual([{ num: 50 }, "A"]);
     });
 });
-

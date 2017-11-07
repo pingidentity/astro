@@ -6,7 +6,7 @@ jest.dontMock("../FormLabel.jsx");
 describe("FormTextField", function () {
 
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         Multivalues = require("../Multivalues.jsx"),
         callback,

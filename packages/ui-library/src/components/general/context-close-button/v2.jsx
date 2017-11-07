@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react");
 var css = require("classnames");
 
@@ -30,26 +31,31 @@ var css = require("classnames");
  *          value="ContextCloseButton" onClick={this._onClick} />
  */
 
-var ContextCloseButton = React.createClass({
+class ContextCloseButton extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
+        value: PropTypes.string,
+        disabled: PropTypes.bool,
+        show: PropTypes.bool,
+        onClick: PropTypes.func
+    };
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        className: React.PropTypes.string,
-        value: React.PropTypes.string,
-        disabled: React.PropTypes.bool,
-        show: React.PropTypes.bool,
-        onClick: React.PropTypes.func
-    },
-
-    contextTypes: {
+    static contextTypes = {
         // Not renamed to avoid impact on context usage triggered from top level containers.
-        close: React.PropTypes.func
-    },
+        close: PropTypes.func
+    };
+
+    static defaultProps = {
+        "data-id": "context-close-button",
+        show: true,
+        disabled: false
+    };
 
     /*
      * Call the onClick callback followed by context close function if they exist.
      */
-    _handleClick: function () {
+    _handleClick = () => {
 
         if (this.props.onClick && (typeof(this.props.onClick) === "function")) {
             this.props.onClick();
@@ -59,17 +65,9 @@ var ContextCloseButton = React.createClass({
             this.context.close();
         }
 
-    },
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "context-close-button",
-            show: true,
-            disabled: false
-        };
-    },
-
-    render: function () {
+    render() {
         var styles = { disabled: this.props.disabled };
         styles[this.props.className] = true;
 
@@ -85,6 +83,6 @@ var ContextCloseButton = React.createClass({
             ) : null
         );
     }
-});
+}
 
 module.exports = ContextCloseButton;

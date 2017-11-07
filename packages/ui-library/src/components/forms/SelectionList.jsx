@@ -1,1 +1,1 @@
-module.exports = require("./selection-list").v1;
+module.exports = require("./selection-list").v2;

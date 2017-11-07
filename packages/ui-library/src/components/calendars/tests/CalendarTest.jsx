@@ -1,7 +1,5 @@
 window.__DEV__ = true;
 
-var ReactDOM = require("react-dom");
-
 jest.dontMock("../Calendar.jsx");
 jest.dontMock("../Cell.jsx");
 jest.dontMock("../DaysView.jsx");
@@ -16,10 +14,11 @@ jest.dontMock("../../../util/KeyboardUtils.js");
 
 describe("Calendar", function () {
     var React = require("react"),
+        ReactDOM = require("react-dom"),
         Calendar = require("../Calendar.jsx"),
         moment = require("moment-range"),
         _ = require("underscore"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
 
         callback = jest.genMockFunction(),
@@ -126,39 +125,55 @@ describe("Calendar", function () {
 
     it("is rendering days view", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            <Calendar format="YYYY-MM-DD"
-                      date={selectedDate}
-                      computableFormat="x"
-                      closeOnSelect={true}
-                      onValueChange={callback}/>
+            <Calendar
+                format="YYYY-MM-DD"
+                date={selectedDate}
+                computableFormat="x"
+                closeOnSelect={true}
+                onValueChange={callback}
+            />
         );
 
         var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
 
-        //open calendar
+        // open calendar
         ReactTestUtils.Simulate.click(container, {});
 
         var cells = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "day");
 
-        //make sure calendar cells rendered: 35 days + 7 headers (MON-SUN)
+        // make sure calendar cells rendered: 35 days + 7 headers (MON-SUN)
         expect(cells.length).toEqual(42);
+
+        // Navigate to September (previous month)
+        var prev = ReactTestUtils.findRenderedDOMComponentWithClass(component, "icon-left");
+        ReactTestUtils.Simulate.click(prev, {});
+        var month = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        expect(month.textContent).toBe("September");
+
+        // Navigate back to October (next month)
+        var next = ReactTestUtils.findRenderedDOMComponentWithClass(component, "icon-right");
+        ReactTestUtils.Simulate.click(next, {});
+        month = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        expect(month.textContent).toBe("October");
     });
 
     it("is rendering months view", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            <Calendar format="YYYY-MM-DD"
-                      date={selectedDate}
-                      computableFormat="x"
-                      closeOnSelect={true}
-                      onValueChange={callback}/>
+            <Calendar
+                format="YYYY-MM-DD"
+                date={selectedDate}
+                computableFormat="x"
+                closeOnSelect={true}
+                onValueChange={callback}
+            />
         );
 
         var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
 
-        //open calendar
+        // open calendar
         ReactTestUtils.Simulate.click(container, {});
 
-        //Switch to months view
+        // switch to months view
         var navigation = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
         ReactTestUtils.Simulate.click(navigation, {});
 
@@ -166,9 +181,20 @@ describe("Calendar", function () {
 
         expect(cells.length).toEqual(12);
 
-        ReactTestUtils.Simulate.click(cells[0]);
+        // Navigate to previous year
+        var prev = ReactTestUtils.findRenderedDOMComponentWithClass(component, "icon-left");
+        ReactTestUtils.Simulate.click(prev, {});
+        var year = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        expect(parseInt(year.textContent)).toBe(moment(selectedDate).subtract(1, "years").year());
 
-        //let's select month and make sure we go back to days view
+        // Navigate back to selectedDate year
+        var next = ReactTestUtils.findRenderedDOMComponentWithClass(component, "icon-right");
+        ReactTestUtils.Simulate.click(next, {});
+        year = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        expect(parseInt(year.textContent)).toBe(moment(selectedDate).year());
+
+        // let's select month and make sure we go back to days view
+        ReactTestUtils.Simulate.click(cells[0]);
         cells = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "day");
         expect(cells.length).toEqual(42);
 
@@ -176,11 +202,13 @@ describe("Calendar", function () {
 
     it("is rendering years view", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            <Calendar format="YYYY-MM-DD"
-                      date={selectedDate}
-                      computableFormat="x"
-                      closeOnSelect={true}
-                      onValueChange={callback}/>
+            <Calendar
+                format="YYYY-MM-DD"
+                date={selectedDate}
+                computableFormat="x"
+                closeOnSelect={true}
+                onValueChange={callback}
+            />
         );
 
         var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
@@ -195,6 +223,18 @@ describe("Calendar", function () {
         //Switch to years view
         navigation = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
         ReactTestUtils.Simulate.click(navigation, {});
+
+        // Navigate to previous year range
+        var prev = ReactTestUtils.findRenderedDOMComponentWithClass(component, "icon-left");
+        ReactTestUtils.Simulate.click(prev, {});
+        var yearRange = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        expect(yearRange.textContent).toBe("2000-2011");
+
+        // Navigate back to current year range
+        var next = ReactTestUtils.findRenderedDOMComponentWithClass(component, "icon-right");
+        ReactTestUtils.Simulate.click(next, {});
+        yearRange = ReactTestUtils.findRenderedDOMComponentWithClass(component, "navigation-title");
+        expect(yearRange.textContent).toBe("2010-2021");
 
         var cells = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "year");
 
@@ -270,6 +310,27 @@ describe("Calendar", function () {
         ReactTestUtils.Simulate.mouseDown(cells[7], {});
 
         expect(callback).toBeCalled();
+    });
+
+    it("is not triggering onValueChange callback when an empty cell is clicked", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar
+                format="YYYY-MM-DD"
+                date={selectedDate}
+                onValueChange={callback}
+            />
+        );
+
+        var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
+
+        //open calendar
+        ReactTestUtils.Simulate.click(container, {});
+
+        var cells = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "day");
+
+        ReactTestUtils.Simulate.mouseDown(cells[0], {});
+
+        expect(callback).not.toBeCalled();
     });
 
     //TODO: remove when v1 no longer supported

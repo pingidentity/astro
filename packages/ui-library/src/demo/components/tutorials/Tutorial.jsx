@@ -1,8 +1,9 @@
+var PropTypes = require("prop-types");
 var React = require("react"),
     ReactDOM = require("react-dom");
 
-var Tutorial = React.createClass({
-    _scrollIntoView: function (i) {
+class Tutorial extends React.Component {
+    _scrollIntoView = (i) => {
         var container = ReactDOM.findDOMNode(this.refs.container);
 
         //get the h2 specified by i and scroll it into view
@@ -13,9 +14,9 @@ var Tutorial = React.createClass({
         if (h2 && h2.scrollIntoView) {
             h2.scrollIntoView();
         }
-    },
+    };
 
-    _generateTOC: function () {
+    _generateTOC = () => {
         var links = React.Children.toArray(this.props.children).filter(function (el) {
             return el.type === "h2";
         }).map(function (el, i) {
@@ -29,9 +30,9 @@ var Tutorial = React.createClass({
                 <ul className="ul">{links}</ul>
             </div>
         );
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <div className="tutorial" ref="container">
                 {this.props.generateTOC ? this._generateTOC() : ""}
@@ -39,7 +40,7 @@ var Tutorial = React.createClass({
             </div>
         );
     }
-});
+}
 
 var TutorialLinkItem = function (props) {
     var _handleClick = function (event) {
@@ -54,10 +55,10 @@ var TutorialLinkItem = function (props) {
 };
 
 TutorialLinkItem.propTypes = {
-    key: React.PropTypes.string,
-    onClick: React.PropTypes.func,
-    index: React.PropTypes.number,
-    content: React.PropTypes.node
+    key: PropTypes.string,
+    onClick: PropTypes.func,
+    index: PropTypes.number,
+    content: PropTypes.node
 };
 
 module.exports = Tutorial;

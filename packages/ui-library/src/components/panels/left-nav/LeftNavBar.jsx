@@ -1,4 +1,5 @@
-var React = require("re-react"),
+var PropTypes = require("prop-types");
+var React = require("react"),
     ReactDOM = require("react-dom"),
     classnames = require("classnames"),
     Copyright = require("./Copyright.jsx"),
@@ -107,42 +108,57 @@ var React = require("re-react"),
  *
  * <LeftNavBar tree={[section1, section2]}
  */
-var LeftNavBar = React.createClass({
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        tree: React.PropTypes.array.isRequired.affectsRendering,
-        selectedNode: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).affectsRendering,
-        selectedSection: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).affectsRendering,
-        openSections: React.PropTypes.object.affectsRendering,
-        collapsible: React.PropTypes.bool.affectsRendering,
-        autocollapse: React.PropTypes.bool.affectsRendering,
-        onSectionClick: React.PropTypes.func,
-        onItemClick: React.PropTypes.func,
-        onSectionValueChange: React.PropTypes.func,
-        onItemValueChange: React.PropTypes.func,
-        pingoneLogo: React.PropTypes.bool.affectsRendering,
-        logoSrc: React.PropTypes.string.affectsRendering,
-        topContent: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.object]).affectsRendering
-    },
+class LeftNavBar extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        tree: PropTypes.array.isRequired,
+        selectedNode: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        selectedSection: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        openSections: PropTypes.object,
+        collapsible: PropTypes.bool,
+        autocollapse: PropTypes.bool,
+        onSectionClick: PropTypes.func,
+        onItemClick: PropTypes.func,
+        onSectionValueChange: PropTypes.func,
+        onItemValueChange: PropTypes.func,
+        pingoneLogo: PropTypes.bool,
+        logoSrc: PropTypes.string,
+        topContent: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+    };
 
-    _rerender: function () {
+    static defaultProps = {
+        "data-id": "left-nav-bar",
+        openSections: {},
+        selectedContexts: {},
+        collapsible: false,
+        autocollapse: false,
+        pingoneLogo: false
+    };
+
+    state = {
+        copyrightHeight: 0,
+        selectorStyle: { top: 0, height: 0 },
+        scrollable: false
+    };
+
+    _rerender = () => {
         this.componentDidUpdate();
         this._getItemSelector().removeEventListener("transitionend", this._rerender);
-    },
+    };
 
-    _getItemSelector: function () {
+    _getItemSelector = () => {
         return ReactDOM.findDOMNode(this.refs.itemSelector);
-    },
+    };
 
-    _renderItem: function (item) {
+    _renderItem = (item) => {
         if (item.type === "context") {
             return this._renderContextSelector(item);
         } else {
             return this._renderSection(item);
         }
-    },
+    };
 
-    _renderSection: function (section) {
+    _renderSection = (section) => {
         return (
             <LeftNavSection
                 {...section}
@@ -154,9 +170,9 @@ var LeftNavBar = React.createClass({
                 open={this.props.openSections[section.id]}
             />
         );
-    },
+    };
 
-    _renderContextSelector: function (selector) {
+    _renderContextSelector = (selector) => {
         return (
             <LeftNavContextSelector
                 {...selector}
@@ -169,26 +185,26 @@ var LeftNavBar = React.createClass({
                 onSectionValueChange={this._handleSectionClick}
             />
         );
-    },
+    };
 
-    _handleSectionClick: function (sectionId) {
+    _handleSectionClick = (sectionId) => {
         var onSectionClick = this.props.onSectionClick || this.props.onSectionValueChange;
 
         onSectionClick(sectionId);
-    },
+    };
 
-    _handleItemClick: function (sectionId, itemId) {
+    _handleItemClick = (sectionId, itemId) => {
         var onValueChange = this.props.onItemClick || this.props.onItemValueChange;
 
         onValueChange(sectionId, itemId);
-    },
+    };
 
-    _handleResize: function () {
+    _handleResize = () => {
         var nav = ReactDOM.findDOMNode(this.refs.container);
         this.setState({ scrollable: nav.scrollHeight > nav.offsetHeight });
-    },
+    };
 
-    componentDidMount: function () {
+    componentDidMount() {
         // Occasionally the first calculation of the position of the selector is wrong because there are still
         // animations happening on the page.  Recalculate after the initialRender
         this._getItemSelector().addEventListener("transitionend", this._rerender, false);
@@ -204,31 +220,12 @@ var LeftNavBar = React.createClass({
         window.addEventListener("resize", this._handleResize);
 
         this.componentDidUpdate();
-    },
+    }
 
-    componentWillUnmount: function () {
+    componentWillUnmount() {
         this._getItemSelector().removeEventListener("transitionend", this._rerender);
         window.removeEventListener("resize", this._handleResize);
-    },
-
-    getInitialState: function () {
-        return {
-            copyrightHeight: 0,
-            selectorStyle: { top: 0, height: 0 },
-            scrollable: false
-        };
-    },
-
-    getDefaultProps: function () {
-        return {
-            "data-id": "left-nav-bar",
-            openSections: {},
-            selectedContexts: {},
-            collapsible: false,
-            autocollapse: false,
-            pingoneLogo: false
-        };
-    },
+    }
 
     /**
      * @ignore
@@ -238,7 +235,7 @@ var LeftNavBar = React.createClass({
      * @param {object} prevProps
      *          Previous props
      */
-    componentDidUpdate: function (prevProps) {
+    componentDidUpdate(prevProps) {
         // it is generally bad practice to touch the dom after rendering and also bad practice to set state within
         // componentDidUpdate because how easily you can get into an infinite loop of
         // setState -> componentDidUpdate -> setState.  This is why we make sure the specific props have changed
@@ -338,9 +335,9 @@ var LeftNavBar = React.createClass({
             }
             /* eslint-enable react/no-did-update-set-state */
         }
-    },
+    }
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.onItemClick) {
                 console.warn(Utils.deprecateMessage("onItemClick", "onItemValueChange"));
@@ -349,9 +346,9 @@ var LeftNavBar = React.createClass({
                 console.warn(Utils.deprecateMessage("onSectionClick", "onSectionValueChange"));
             }
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var className = classnames({
             scrollable: this.state.scrollable,
             collapsible: this.props.collapsible
@@ -379,7 +376,7 @@ var LeftNavBar = React.createClass({
             </div>
         );
     }
-});
+}
 
 /**
  * @class LeftNavSection
@@ -396,26 +393,26 @@ var LeftNavBar = React.createClass({
  * @param {function} onSectionValueChange
  *          The callback for when a section label is clicked.  Will be passed back the id of the clicked section.
  */
-var LeftNavSection = React.createClass({
-    propTypes: {
-        onItemValueChange: React.PropTypes.func,
-        onSectionValueChange: React.PropTypes.func,
-        open: React.PropTypes.bool.affectsRendering,
-        id: React.PropTypes.string,
-        "data-id": React.PropTypes.string,
-        selectedNode: React.PropTypes.string.affectsRendering,
-        children: React.PropTypes.array.affectsRendering
-    },
+class LeftNavSection extends React.Component {
+    static propTypes = {
+        onItemValueChange: PropTypes.func,
+        onSectionValueChange: PropTypes.func,
+        open: PropTypes.bool,
+        id: PropTypes.string,
+        "data-id": PropTypes.string,
+        selectedNode: PropTypes.string,
+        children: PropTypes.array
+    };
 
     /*
      * Instead of using bind to create a partial after ever render, just use the data-id to pass the
      * right id back to the click handler.
      */
-    _handleItemClick: function (id, sectionId) {
+    _handleItemClick = (id, sectionId) => {
         this.props.onItemValueChange(id, sectionId);
-    },
+    };
 
-    _handleSectionClick: function (e) {
+    _handleSectionClick = (e) => {
         var dataId = e.target.getAttribute("data-id");
 
         // react adds DOM when the icon is present, and clicking on the autogenerated spans will yeild a data-id=null
@@ -425,9 +422,9 @@ var LeftNavSection = React.createClass({
         }
 
         this.props.onSectionValueChange(dataId.slice(0, -6));
-    },
+    };
 
-    _getItems: function () {
+    _getItems = () => {
         var items = [],
             item,
             itemClassName;
@@ -451,9 +448,9 @@ var LeftNavSection = React.createClass({
         }
 
         return items;
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         this._handleItemClicks = [];
 
         // bind the click functions for each item here instead of in the render
@@ -462,9 +459,9 @@ var LeftNavSection = React.createClass({
                 this._handleItemClick.bind(null, item.id, this.props.id)
             );
         }.bind(this));
-    },
+    }
 
-    render: function () {
+    render() {
         var isOpen = !this.props.label || this.props.open,
             className = classnames("nav-section", {
                 open: isOpen
@@ -489,7 +486,7 @@ var LeftNavSection = React.createClass({
             </div>
         );
     }
-});
+}
 
 /**
  * @class LeftNavContextSelector
@@ -506,24 +503,24 @@ var LeftNavSection = React.createClass({
  * @param {function} onSectionValueChange
  *          The callback for when a section label is clicked.  Will be passed back the id of the clicked section.
  */
-var LeftNavContextSelector = React.createClass({
-    propTypes: {
-        onItemValueChange: React.PropTypes.func,
-        onSectionValueChange: React.PropTypes.func,
-        open: React.PropTypes.bool.affectsRendering,
-        id: React.PropTypes.string,
-        "data-id": React.PropTypes.string,
-        selectedNode: React.PropTypes.string.affectsRendering,
-        children: React.PropTypes.array.affectsRendering
-    },
+class LeftNavContextSelector extends React.Component {
+    static propTypes = {
+        onItemValueChange: PropTypes.func,
+        onSectionValueChange: PropTypes.func,
+        open: PropTypes.bool,
+        id: PropTypes.string,
+        "data-id": PropTypes.string,
+        selectedNode: PropTypes.string,
+        children: PropTypes.array
+    };
 
-    _getSelectedChild: function () {
+    _getSelectedChild = () => {
         return _.find(this.props.children, function (item) {
             return this.props.selectedNode === item.id;
         }.bind(this)) || "";
-    },
+    };
 
-    _getMenuItems: function () {
+    _getMenuItems = () => {
         var items = [],
             item;
 
@@ -542,9 +539,9 @@ var LeftNavContextSelector = React.createClass({
         }
 
         return items;
-    },
+    };
 
-    _handleSectionClick: function (e) {
+    _handleSectionClick = (e) => {
         var dataId = e.target.getAttribute("data-id");
 
         // react adds DOM when the icon is present, and clicking on the autogenerated spans will yeild a data-id=null
@@ -554,19 +551,19 @@ var LeftNavContextSelector = React.createClass({
         }
 
         this.props.onSectionValueChange(dataId.slice(0, -6));
-    },
+    };
 
-    _handleItemClick: function (id, sectionId) {
+    _handleItemClick = (id, sectionId) => {
         this.props.onItemValueChange(id, sectionId);
         this.props.onSectionValueChange(sectionId);
-    },
+    };
 
-    _handleAddLinkClick: function () {
+    _handleAddLinkClick = () => {
         this.props.addLink.callback();
         this.props.onSectionValueChange(this.props.id);
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         this._handleItemClicks = [];
 
         // bind the click functions for each item here instead of in the render
@@ -575,9 +572,9 @@ var LeftNavContextSelector = React.createClass({
                 this._handleItemClick.bind(null, item.id, this.props.id)
             );
         }.bind(this));
-    },
+    }
 
-    render: function () {
+    render() {
         var className = {
                 "context-selector-open": this.props.open
             },
@@ -618,6 +615,6 @@ var LeftNavContextSelector = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = LeftNavBar;

@@ -13,7 +13,7 @@ describe("FormDropDownList", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
         _ = require("underscore"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         KeyBoardUtils = require("../../../util/KeyboardUtils.js"),
         FormDropDownList = require("../FormDropDownList.jsx");
@@ -102,7 +102,7 @@ describe("FormDropDownList", function () {
     it("default not autofocus", function () {
         getComponent();
 
-        expect(document.activeElement).toBeUndefined();
+        expect(document.activeElement).toBe(document.body);
     });
 
     it("supports autofocus when set", function () {
@@ -128,7 +128,7 @@ describe("FormDropDownList", function () {
         var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-input-input");
 
         expect(document.activeElement).toEqual(select);
-        
+
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ARROW_DOWN });
 
         expect(component.props.onToggle).toBeCalled();
@@ -139,7 +139,7 @@ describe("FormDropDownList", function () {
         var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-input-input");
 
         expect(document.activeElement).toEqual(select);
-        
+
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.TAB });
 
         expect(component.props.onToggle).toBeCalled();
@@ -398,7 +398,7 @@ describe("FormDropDownList", function () {
 
     it("skips the global click handler if not open and click on component", function () {
         var component = getComponent();
-        var handler = window.addEventListener.mock.calls[0][1];
+        var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
 
         // click on component
         handler({ target: { dataset: component } });

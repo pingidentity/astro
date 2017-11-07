@@ -1,1 +1,1 @@
-module.exports = require("./file-upload");
+module.exports = require("./file-upload").v2;

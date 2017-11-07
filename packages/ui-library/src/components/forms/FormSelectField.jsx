@@ -1,1 +1,1 @@
-module.exports = require("./form-select-field").v1;
+module.exports = require("./form-select-field").v2;

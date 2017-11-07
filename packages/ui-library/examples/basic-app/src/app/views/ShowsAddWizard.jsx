@@ -13,14 +13,14 @@ var ShowsAddWizard = React.createClass({
      * Declare which variables affect rendering.  The shouldComponentUpdate method will be be injected by re-react.
      */
     propTypes: {
-        labelNext: React.PropTypes.string.affectsRendering,
-        labelCancel: React.PropTypes.string.affectsRendering,
-        labelEdit: React.PropTypes.string.affectsRendering,
-        fields: React.PropTypes.object.affectsRendering,
-        errors: React.PropTypes.object.affectsRendering,
-        choices: React.PropTypes.array.affectsRendering,
-        activeStep: React.PropTypes.number.affectsRendering,
-        numSteps: React.PropTypes.number.affectsRendering
+        labelNext: React.PropTypes.string,
+        labelCancel: React.PropTypes.string,
+        labelEdit: React.PropTypes.string,
+        fields: React.PropTypes.object,
+        errors: React.PropTypes.object,
+        choices: React.PropTypes.array,
+        activeStep: React.PropTypes.number,
+        numSteps: React.PropTypes.number
     },
 
     /*
@@ -57,7 +57,7 @@ var ShowsAddWizard = React.createClass({
                 genres.push(this.props.genres[genre]);
             }
         }
-        
+
         this.props.onAdd(this.props.fields.title, genres, this.props.statuses[this.props.fields.status],
             this.props.fields.summary);
         this.refs["shows-add-wizard-modal"].refs.ModalButtonStateful._handleClose();

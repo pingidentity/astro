@@ -1,10 +1,29 @@
 "use strict";
 
-var React = require("re-react"),
+var PropTypes = require("prop-types");
+
+var React = require("react"),
     ButtonBar = require("../forms/ButtonBar.jsx"),
     Utils = require("../../util/Utils"),
     classnames = require("classnames"),
     _ = require("underscore");
+
+var INHERIT_PROPS = [
+    "activeStep",
+    "cancelTooltip",
+    "choices",
+    "labelNext",
+    "labelCancel",
+    "labelEdit",
+    "labelDone",
+    "numSteps",
+    "onEdit",
+    "onValueChange",
+    "onChange", // DEPRECATED, remove when possible.
+    "onNext",
+    "onCancel",
+    "showPulsing"
+];
 
 /**
  * @callback Wizard~onEdit
@@ -115,49 +134,41 @@ var React = require("re-react"),
  *      </Wizard>
  *
  */
-var Wizard = React.createClass({
-    INHERIT_PROPS: [
-        "activeStep",
-        "cancelTooltip",
-        "choices",
-        "labelNext",
-        "labelCancel",
-        "labelEdit",
-        "labelDone",
-        "numSteps",
-        "onEdit",
-        "onValueChange",
-        "onChange", // DEPRECATED, remove when possible.
-        "onNext",
-        "onCancel",
-        "showPulsing"
-    ],
-
-    propTypes: {
-        "data-id": React.PropTypes.string.affectsRendering,
-        id: React.PropTypes.string.affectsRendering,
-        className: React.PropTypes.string.affectsRendering,
-        cancelTooltip: React.PropTypes.object.affectsRendering,
-        title: React.PropTypes.string.isRequired.affectsRendering,
-        number: React.PropTypes.number.affectsRendering,
-        activeStep: React.PropTypes.number.affectsRendering,
-        choices: React.PropTypes.arrayOf(React.PropTypes.number).affectsRendering,
-        numSteps: React.PropTypes.number.affectsRendering,
-        labelEdit: React.PropTypes.string.affectsRendering,
-        labelCancel: React.PropTypes.string.affectsRendering,
-        labelNext: React.PropTypes.string.affectsRendering,
-        labelDone: React.PropTypes.string.affectsRendering,
-        showPulsing: React.PropTypes.bool.affectsRendering,
-        onChange: React.PropTypes.func, // DEPRECATED, remove when possible.
-        onValueChange: React.PropTypes.func,
-        onNext: React.PropTypes.func,
-        onEdit: React.PropTypes.func,
-        onDone: React.PropTypes.func,
-        children: React.PropTypes.node.affectsRendering
-    },
+class Wizard extends React.Component {
+    static displayName = "Wizard";
 
 
-    _filter: function (children) {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        id: PropTypes.string,
+        className: PropTypes.string,
+        cancelTooltip: PropTypes.object,
+        title: PropTypes.string.isRequired,
+        number: PropTypes.number,
+        activeStep: PropTypes.number,
+        choices: PropTypes.arrayOf(PropTypes.number),
+        numSteps: PropTypes.number,
+        labelEdit: PropTypes.string,
+        labelCancel: PropTypes.string,
+        labelNext: PropTypes.string,
+        labelDone: PropTypes.string,
+        showPulsing: PropTypes.bool,
+        onChange: PropTypes.func, // DEPRECATED, remove when possible.
+        onValueChange: PropTypes.func,
+        onNext: PropTypes.func,
+        onEdit: PropTypes.func,
+        onDone: PropTypes.func,
+        children: PropTypes.node
+    };
+
+    static defaultProps = {
+        "data-id": "wizard",
+        number: 1,
+        activeStep: 1,
+        showPulsing: false
+    };
+
+    _filter = (children) => {
         var result = [];
 
         React.Children.forEach(children, function (child) {
@@ -167,19 +178,10 @@ var Wizard = React.createClass({
         });
 
         return result;
-    },
-
-    getDefaultProps: function () {
-        return {
-            "data-id": "wizard",
-            number: 1,
-            activeStep: 1,
-            showPulsing: false
-        };
-    },
+    };
 
     //if this is the root wizard, report the number of steps up to the reducer
-    componentDidMount: function () {
+    componentDidMount() {
         if (this.props.number === 1) {
             if (this.props.onChange) {
                 this.props.onChange(0, this._filter(this.props.children).length);
@@ -187,9 +189,9 @@ var Wizard = React.createClass({
                 this.props.onValueChange({ choice: 0, numSteps: this._filter(this.props.children).length });
             }
         }
-    },
+    }
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
                 console.warn(Utils.deprecateMessage("id", "data-id"));
@@ -198,12 +200,12 @@ var Wizard = React.createClass({
                 console.warn(Utils.deprecateMessage("onChange", "onValueChange"));
             }
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var dataId = this.props.id || this.props["data-id"],
             steps = this._filter(this.props.children),
-            props = _.pick(this.props, this.INHERIT_PROPS);
+            props = _.pick(this.props, INHERIT_PROPS);
 
         var stepNodes = React.Children.map(steps, function (step, i) {
             var idx = this.props.number + i;
@@ -238,7 +240,7 @@ var Wizard = React.createClass({
             </div>
         );
     }
-});
+}
 
 Wizard.Step = require("./Step.jsx");
 Wizard.Choose = require("./Choose.jsx");

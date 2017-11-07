@@ -44,41 +44,40 @@ var React = require("react"),
  * @param {EditViewCollapsible~onSectionToggle} onSectionToggle
  *          Callback to be triggered when a collapsible section is clicked/toggled.
  */
-module.exports = React.createClass({
-
-    _handleCancel: function () {
+module.exports = class extends React.Component {
+    _handleCancel = () => {
         // do something on cancel
-    },
+    };
 
-    _handleSave: function () {
+    _handleSave = () => {
         this.props.onSave();
-    },
+    };
 
-    _handleInputChange: function (e) {
+    _handleInputChange = (e) => {
         var value = e.target.type === "checkbox" ? !!e.target.checked : e.target.value,
             dataId = e.target.type === "text" ? e.target.getAttribute("data-id").slice(0,-6)
                 : e.target.getAttribute("data-id");
 
         this.props.onInputChange(dataId, value);
-    },
+    };
 
-    _handleRadioInputChange: function (name, value) {
+    _handleRadioInputChange = (name, value) => {
         this.props.onInputChange(name, value);
-    },
+    };
 
-    _toggleSection: function (index, expanded) {
+    _toggleSection = (index, expanded) => {
         this.props.onSectionToggle(index, !expanded);
-    },
+    };
 
-    componentDidMount: function () {
+    componentDidMount() {
         this._toggleSection1 = this._toggleSection.bind(null, 1);
         this._toggleSection2 = this._toggleSection.bind(null, 2);
         this._toggleSection3 = this._toggleSection.bind(null, 3);
 
         this._handleRadioInputChangeUserGroup = this._handleRadioInputChange.bind(this, "userGroup");
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <div>
                 <a className="page-return-link">To record list</a>
@@ -242,4 +241,4 @@ module.exports = React.createClass({
             </div>
         );
     }
-});
+};

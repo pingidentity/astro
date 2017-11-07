@@ -16,6 +16,25 @@ describe("Translator", function () {
         expect(Translator.currentLanguage).toBe("zh_cn");
     });
 
+    it("Import language file correctly", function () {
+        Translator = require("../Translator.js");
+        var imported = Translator.importLanguage("zh_cn");
+        expect(Translator.languages["zh_cn"]).not.toBe(null);
+        expect(imported.english).toBe("It is not English");
+    });
+
+    it("Import language file correctly", function () {
+        Translator = require("../Translator.js");
+        Translator.importLanguage("zh_cn");
+        expect(Translator.languages["zh_cn"]).not.toBe({});
+    });
+
+    it("Import default language file if there is not input language file", function () {
+        Translator = require("../Translator.js");
+        var imported = Translator.importLanguage("UNSUPPORTEDLANGUAGE");
+        expect(imported.english).toBe("English");
+    });
+
     it("Translate correctly", function () {
         Translator.isUseInternationalization = true;
         Translator.importLanguage = jest.genMockFunction()
@@ -46,26 +65,4 @@ describe("Translator", function () {
         expect(Translator.translate("myKey2")).toBe("translated2");
         expect(Translator.importLanguage).toBeCalledWith("en_us");
     });
-
-    it("Import language file correctly", function () {
-        Translator = require("../Translator.js");
-        var imported = Translator.importLanguage("zh_cn");
-        expect(Translator.languages["zh_cn"]).not.toBe(null);
-        expect(imported.english).toBe("It is not English");
-    });
-
-    it("Import language file correctly", function () {
-        Translator = require("../Translator.js");
-        Translator.importLanguage("zh_cn");
-        expect(Translator.languages["zh_cn"]).not.toBe({});
-    });
-
-    it("Import default language file if there is not input language file", function () {
-        Translator = require("../Translator.js");
-        var imported = Translator.importLanguage("UNSUPPORTEDLANGUAGE");
-        expect(imported.english).toBe("English");
-    });
-
-
-
 });

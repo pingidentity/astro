@@ -8,8 +8,8 @@ var React = require("react"),
 * @desc A demo for CondensedTable
 */
 
-var CondensedTableDemo = React.createClass({
-    render: function () {
+class CondensedTableDemo extends React.Component {
+    render() {
         var mockData = {
             head: [
                 "name",
@@ -67,7 +67,6 @@ var CondensedTableDemo = React.createClass({
             </div>
         );
     }
-
-});
+}
 
 module.exports = CondensedTableDemo;

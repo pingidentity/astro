@@ -1,6 +1,8 @@
 "use strict";
 
-var React = require("re-react"),
+var PropTypes = require("prop-types");
+
+var React = require("react"),
     Utils = require("../../util/Utils");
 
 /**
@@ -42,24 +44,22 @@ var React = require("re-react"),
  *           </div>
  *       </TabbedSections>
  */
-var TabbedSections = React.createClass({
-    propTypes: {
-        "data-id": React.PropTypes.string.affectsRendering,
-        id: React.PropTypes.string.affectsRendering,
-        className: React.PropTypes.string.affectsRendering,
-        selectedIndex: React.PropTypes.number.isRequired.affectsRendering,
-        renderHidden: React.PropTypes.bool.affectsRendering,
-        onSectionChange: React.PropTypes.func,
-        onValueChange: React.PropTypes.func, // add isRequired once the onSectionChange is removed
-        children: React.PropTypes.node.affectsRendering
-    },
+class TabbedSections extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        id: PropTypes.string,
+        className: PropTypes.string,
+        selectedIndex: PropTypes.number.isRequired,
+        renderHidden: PropTypes.bool,
+        onSectionChange: PropTypes.func,
+        onValueChange: PropTypes.func, // add isRequired once the onSectionChange is removed
+        children: PropTypes.node
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "tabbed-sections",
-            renderHidden: false
-        };
-    },
+    static defaultProps = {
+        "data-id": "tabbed-sections",
+        renderHidden: false
+    };
 
     /**
      * Returns all children
@@ -67,11 +67,11 @@ var TabbedSections = React.createClass({
      * @private
      * @return {Object[]} The React child components
      */
-    _renderAllChildren: function () {
+    _renderAllChildren = () => {
         return React.Children.map(this.props.children, function (item, index) {
             return <div style={{ display: this.props.selectedIndex === index ? "" : "none" }}> {item} </div>;
         }.bind(this));
-    },
+    };
 
     /**
      * Returns selected child
@@ -79,12 +79,12 @@ var TabbedSections = React.createClass({
      * @private
      * @return {Object[]} [description]
      */
-    _renderSelectedChild: function () {
+    _renderSelectedChild = () => {
         return React.Children.count(this.props.children) === 1
             ? this.props.children : this.props.children[this.props.selectedIndex];
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
                 console.warn(Utils.deprecateMessage("id", "data-id"));
@@ -93,9 +93,9 @@ var TabbedSections = React.createClass({
                 console.warn(Utils.deprecateMessage("onSectionChange", "onValueChange"));
             }
         }
-    },
-    
-    render: function () {
+    }
+
+    render() {
         var id = this.props.id || this.props["data-id"];
         var callback = this.props.onSectionChange || this.props.onValueChange;
         
@@ -123,7 +123,7 @@ var TabbedSections = React.createClass({
         );
         /* jshint ignore:end */
     }
-});
+}
 
 var TabbedSectionChild = function (props) {
     var _handleClick = function (event) {
@@ -141,12 +141,12 @@ var TabbedSectionChild = function (props) {
 };
 
 TabbedSectionChild.propTypes = {
-    "data-id": React.PropTypes.string,
-    key: React.PropTypes.string,
-    className: React.PropTypes.string,
-    index: React.PropTypes.string,
-    onClick: React.PropTypes.func,
-    content: React.PropTypes.node
+    "data-id": PropTypes.string,
+    key: PropTypes.string,
+    className: PropTypes.string,
+    index: PropTypes.string,
+    onClick: PropTypes.func,
+    content: PropTypes.node
 };
 
 module.exports = TabbedSections;

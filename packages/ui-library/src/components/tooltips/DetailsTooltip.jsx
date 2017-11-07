@@ -1,6 +1,6 @@
 "use strict";
-var React = require("re-react"),
-    ReactVanilla = require("react"),
+var PropTypes = require("prop-types");
+var React = require("react"),
     ReactDOM = require("react-dom"),
     classnames = require("classnames"),
     _ = require("underscore"),
@@ -81,33 +81,31 @@ var React = require("re-react"),
  *     </DetailsTooltip>
  **/
 
-var DetailsTooltip = ReactVanilla.createClass({
-    displayName: "DetailsTooltip",
+class DetailsTooltip extends React.Component {
+    static displayName = "DetailsTooltip";
 
-    propTypes: {
-        controlled: React.PropTypes.bool, //TODO: Remove in new version
-        stateless: React.PropTypes.bool
-    },
+    static propTypes = {
+        controlled: PropTypes.bool, //TODO: Remove in new version
+        stateless: PropTypes.bool
+    };
 
-    getDefaultProps: function () {
-        return {
-            controlled: true //TODO: change to stateless with false default in new version
-        };
-    },
+    static defaultProps = {
+        controlled: true //TODO: change to stateless with false default in new version
+    };
 
-    close: function () {
+    close = () => {
         if (!this.props.stateless || !this.props.controlled) { //TODO: remove "controlled" in new version
             this.refs.manager.close();
         }
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("controlled", "stateless", "true", "false"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
 
         return (
@@ -118,63 +116,61 @@ var DetailsTooltip = ReactVanilla.createClass({
                     _.defaults({ ref: "manager" }, this.props), this.props.children)
         );
     }
-});
+}
 
-var DetailsTooltipStateless = React.createClass({
-    displayName: "DetailsTooltipStateless",
+class DetailsTooltipStateless extends React.Component {
+    static displayName = "DetailsTooltipStateless";
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        id: React.PropTypes.string,
-        className: React.PropTypes.string.affectsRendering,
-        contentClassName: React.PropTypes.string.affectsRendering,
-        contentClassNames: React.PropTypes.string.affectsRendering,
-        titleClassName: React.PropTypes.string.affectsRendering,
-        titleClassNames: React.PropTypes.string.affectsRendering,
-        labelClassname: React.PropTypes.string.affectsRendering,
-        labelStyle: React.PropTypes.string.affectsRendering,
-        positionClassname: React.PropTypes.string.affectsRendering,
-        positionStyle: React.PropTypes.string.affectsRendering,
-        label: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.object]).affectsRendering,
-        title: React.PropTypes.string.affectsRendering,
-        disabled: React.PropTypes.bool.affectsRendering,
-        hideOnClick: React.PropTypes.bool.affectsRendering,
-        open: React.PropTypes.bool.affectsRendering,
-        onToggle: React.PropTypes.func,
-        showClose: React.PropTypes.bool.affectsRendering,
-        children: React.PropTypes.node.affectsRendering,
-        onKeyDown: React.PropTypes.func,
-        secondaryLabels: React.PropTypes.array,
-        primaryLabels: React.PropTypes.array,
-        cancelLabel: React.PropTypes.string
-    },
+    static propTypes = {
+        "data-id": PropTypes.string,
+        id: PropTypes.string,
+        className: PropTypes.string,
+        contentClassName: PropTypes.string,
+        contentClassNames: PropTypes.string,
+        titleClassName: PropTypes.string,
+        titleClassNames: PropTypes.string,
+        labelClassname: PropTypes.string,
+        labelStyle: PropTypes.string,
+        positionClassname: PropTypes.string,
+        positionStyle: PropTypes.string,
+        label: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.object]),
+        title: PropTypes.string,
+        disabled: PropTypes.bool,
+        hideOnClick: PropTypes.bool,
+        open: PropTypes.bool,
+        onToggle: PropTypes.func,
+        showClose: PropTypes.bool,
+        children: PropTypes.node,
+        onKeyDown: PropTypes.func,
+        secondaryLabels: PropTypes.array,
+        primaryLabels: PropTypes.array,
+        cancelLabel: PropTypes.string
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "details-tooltip",
-            positionClassName: "top",
-            titleClassName: "details-title",
-            onToggle: _.noop,
-            open: false,
-            disabled: false,
-            showClose: true,
-            hideOnClick: false
-        };
-    },
+    static defaultProps = {
+        "data-id": "details-tooltip",
+        positionClassName: "top",
+        titleClassName: "details-title",
+        onToggle: _.noop,
+        open: false,
+        disabled: false,
+        showClose: true,
+        hideOnClick: false
+    };
 
     /*
      * Call the props toggle() function .
      */
-    _handleToggle: function () {
+    _handleToggle = () => {
         this.props.onToggle();
-    },
+    };
 
     /*
      * Secondary buttons
      */
-    _getSecondaryButtonHtml: function (label, value, i) {
+    _getSecondaryButtonHtml = (label, value, i) => {
         var dataId = "secondary-action";
 
         if (i > 1) {
@@ -191,12 +187,12 @@ var DetailsTooltipStateless = React.createClass({
                 {label}
             </button>
         );
-    },
+    };
 
     /*
      * Primary buttons
      */
-    _getPrimaryButtonHtml: function (label, value, i) {
+    _getPrimaryButtonHtml = (label, value, i) => {
         var dataId = "confirm-action";
 
         if (i > 1) {
@@ -213,12 +209,12 @@ var DetailsTooltipStateless = React.createClass({
                 {label}
             </button>
         );
-    },
+    };
 
     /*
      * Optional button array
      */
-    _getButtons: function () {
+    _getButtons = () => {
         var secondaryButtons,
             primaryButtons,
             buttons = null;
@@ -256,14 +252,14 @@ var DetailsTooltipStateless = React.createClass({
             </div>);
         }
         return buttons;
-    },
+    };
 
     /*
      * Return of content based on props.open.
      *
      * @return {React.Component} the React component to be used as tooltip content
      */
-    _content: function () {
+    _content = () => {
 
         var hide = this.props.hideOnClick ? this._handleToggle : _.noop;
         var contentClassName =
@@ -287,34 +283,34 @@ var DetailsTooltipStateless = React.createClass({
                 </div>
             </div>
         ) : null;
-    },
+    };
 
-    _handleGlobalClick: function (e) {
+    _handleGlobalClick = (e) => {
         // handle click outside of container
         if (this.props.open) {
             callIfOutsideOfContainer(ReactDOM.findDOMNode(this.refs.container), this._handleToggle, e);
         }
-    },
+    };
 
-    _handleGlobalKeyDown: function (e) {
+    _handleGlobalKeyDown = (e) => {
         // handle escape key
         if (e.keyCode === 27 && this.props.open) {
             callIfOutsideOfContainer(ReactDOM.findDOMNode(this.refs.container), this._handleToggle, e);
         }
-    },
+    };
 
-    _bindWindowsEvents: function () {
+    _bindWindowsEvents = () => {
         var self = this;
 
-        //bind once current execution stack is cleared (e.g. current window event processed).
-        //to avoid possible false positive triggers if tooltip was open as result of click outside of it (e.g. some link outside)
+        // bind once current execution stack is cleared (e.g. current window event processed).
+        // to avoid possible false positive triggers if tooltip was open as result of click outside of it (e.g. some link outside)
         _.defer(function () {
             window.addEventListener("click", self._handleGlobalClick);
             window.addEventListener("keydown", self._handleGlobalKeyDown);
         });
-    },
+    };
 
-    componentWillReceiveProps: function (nextProps) {
+    componentWillReceiveProps(nextProps) {
         if (!this.props.open && nextProps.open) {
             this._bindWindowsEvents();
         }
@@ -322,13 +318,15 @@ var DetailsTooltipStateless = React.createClass({
             window.removeEventListener("click", this._handleGlobalClick);
             window.removeEventListener("keydown", this._handleGlobalKeyDown);
         }
-    },
-
-    componentWillMount: function () {
+    }
+    
+    componentDidMount() {
         if (this.props.open) {
             this._bindWindowsEvents();
         }
+    }
 
+    componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
                 console.warn(Utils.deprecateMessage("id", "data-id"));
@@ -352,14 +350,14 @@ var DetailsTooltipStateless = React.createClass({
                 );
             }
         }
-    },
+    }
 
-    componentWillUnmount: function () {
+    componentWillUnmount() {
         window.removeEventListener("click", this._handleGlobalClick);
         window.removeEventListener("keydown", this._handleGlobalKeyDown);
-    },
+    }
 
-    render: function () {
+    render() {
 
         var containerCss = {
                 show: this.props.open
@@ -389,7 +387,7 @@ var DetailsTooltipStateless = React.createClass({
                     <a
                         data-id="action-btn"
                         className={classnames("details-target", targetCss)}
-                        onClick={!this.props.disabled && this._handleToggle}>
+                        onClick={!this.props.disabled ? this._handleToggle : null}>
                         {this.props.label}
                     </a>
                 )}
@@ -397,35 +395,33 @@ var DetailsTooltipStateless = React.createClass({
             </span>
         );
     }
-});
+}
 
-var DetailsTooltipStateful = ReactVanilla.createClass({
-    displayName: "DetailsTooltipStateful",
+class DetailsTooltipStateful extends React.Component {
+    static displayName = "DetailsTooltipStateful";
 
-    getInitialState: function () {
-        return {
-            open: this.props.open
-        };
-    },
+    state = {
+        open: this.props.open
+    };
 
-    _handleToggle: function () {
+    _handleToggle = () => {
         this.setState({
             open: !this.state.open
         });
-    },
+    };
 
-    close: function () {
+    close = () => {
         this.setState({
             open: false
         });
-    },
+    };
 
-    render: function () {
+    render() {
         var props = _.defaults(
             { ref: "tooltip", open: this.state.open, onToggle: this._handleToggle }, this.props);
         return React.createElement(DetailsTooltipStateless, props, this.props.children);
     }
-});
+}
 
 /**
  * @enum {string}

@@ -4,7 +4,7 @@ jest.dontMock("../DragDrop.jsx");
 describe("DragDrop", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         DragDrop = require("../DragDrop.jsx"),
         DragDropContext = require("react-dnd").DragDropContext,
         _ = require("underscore"),
@@ -13,13 +13,11 @@ describe("DragDrop", function () {
 
 
     function wrapInTestContext (Component) {
-        return DragDropContext(TestBackend)(
-            React.createClass({
-                render: function () {
-                    return <Component {...this.props} />;
-                }
-            })
-          );
+        return DragDropContext(TestBackend)( class extends React.Component {
+            render() {
+                return <Component {...this.props} />;
+            }
+        });
     }
 
     function getComponent (props) {

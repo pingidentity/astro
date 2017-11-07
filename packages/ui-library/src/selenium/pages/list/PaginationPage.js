@@ -15,7 +15,7 @@ var PaginationDemoPage = Object.create(HomePage, {
      */
     verifyTopPagingExisting: {
         value: function () {
-            return this.isExisting("//div[contains(@data-reactid, 'topPageLinks')]");
+            return this.isExisting("//div[contains(@data-id, 'topPageLinks')]");
         }
     },
 
@@ -24,7 +24,7 @@ var PaginationDemoPage = Object.create(HomePage, {
      */
     verifyBottomPagingExisting: {
         value: function () {
-            return this.isExisting("//div[contains(@data-reactid, 'bottomPageLinks')]");
+            return this.isExisting("//div[contains(@data-id, 'bottomPageLinks')]");
         }
     },
 
@@ -34,7 +34,7 @@ var PaginationDemoPage = Object.create(HomePage, {
      */
     verifyEntryNumberExisting: {
         value: function (number) {
-            var xPath = "//div[@data-id='expandable-row'][contains(@data-reactid, '${number}')]";
+            var xPath = "//div[@data-id='expandable-row{number}']";
             return this.isExisting(this.formatXpath(xPath, { number: number }));
         }
     },
@@ -45,11 +45,11 @@ var PaginationDemoPage = Object.create(HomePage, {
      */
     clickPagingNumberPath: {
         value: function (number) {
-            var xPath = "//a[contains(@data-reactid, '$topPageLinks.${number}')]";
+            var xPath = "//a[contains(@data-id, 'topPageLinks{number}')]";
             this.click(this.formatXpath(xPath, { number: number }));
         }
     },
-    
+
     /**
      * @desc this function open the pagination page
      */

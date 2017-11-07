@@ -2,9 +2,8 @@ var React = require("react"),
     Tutorial = require("./Tutorial.jsx"),
     Markup = require("../../core/Markup.jsx");
 
-var componentsInDepth = React.createClass({
-
-    render: function () {
+class componentsInDepth extends React.Component {
+    render() {
         return (
             <Tutorial generateTOC={true}>
                 <p>
@@ -197,6 +196,6 @@ var componentsInDepth = React.createClass({
             </Tutorial>
         );
     }
-});
+}
 
 module.exports = componentsInDepth;

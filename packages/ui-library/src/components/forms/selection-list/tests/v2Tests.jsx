@@ -19,7 +19,7 @@ jest.dontMock("../../../../util/KeyboardUtils.js");
 
 describe("SelectionList", function () {
     var React = require("react");
-    var ReactTestUtils = require("react-addons-test-utils");
+    var ReactTestUtils = require("react-dom/test-utils");
     var _ = require("underscore");
     var _s = require("underscore.string");
     var TestUtils = require("../../../../testutil/TestUtils");

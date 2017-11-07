@@ -38,7 +38,7 @@ jest.dontMock("../../../../../util/i18n/Translator.js");
 
 describe("I18nPhoneInput", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../../testutil/TestUtils"),
         I18nPhoneInput = require("../v2.jsx"),
         _ = require("underscore");
@@ -72,21 +72,14 @@ describe("I18nPhoneInput", function () {
     });
 
     it("shows error message", function () {
-        var component = getComponent({
-            "data-id": "phoneInput",
-            dialCode: "1"
-        });
+        var dataId = "phoneInput",
+            component = getComponent({
+                "data-id": "phoneInput",
+                dialCode: "1",
+                phoneNumber: "asdf"
+            });
 
-        var phoneInput = TestUtils.findRenderedDOMNodeWithDataId(component, "phoneInput" + "-phoneNumber" + "-input");
-
-        ReactTestUtils.Simulate.change(phoneInput, {
-            target: {
-                value: "abc def"
-            }
-        });
-
-        var error = TestUtils.findRenderedDOMNodeWithDataId(component, "phoneInput-phoneNumber-error-message");
-
+        var error = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-phoneNumber-error-message");
         expect(error.textContent).toEqual("Please enter a valid phone number.");
     });
 
@@ -278,7 +271,7 @@ describe("I18nPhoneInput", function () {
         component = ReactTestUtils.renderIntoDocument(<I18nPhoneInput controlled={true} />);
         stateful = component.refs.I18nPhoneInputStateful;
         stateless = component.refs.I18nPhoneInputStateless;
-        
+
         expect(stateless).toBeTruthy();
         expect(stateful).toBeFalsy();
     });

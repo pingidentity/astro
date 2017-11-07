@@ -6,11 +6,12 @@ var HeaderBar = require("../../../components/panels/header-bar");
 * @memberof HeaderBar
 * @desc A demo for HeaderBar
 */
-var HeaderBarDemo = React.createClass({
-    getInitialState: function () {
+class HeaderBarDemo extends React.Component {
+    constructor(props) {
+        super(props);
         var initState = HeaderBar.Reducer(null, {});
 
-        return HeaderBar.Reducer(initState, HeaderBar.Actions.init([
+        this.state = HeaderBar.Reducer(initState, HeaderBar.Actions.init([
             { id: "help", title: "Help" },
             {
                 id: "account",
@@ -23,13 +24,13 @@ var HeaderBarDemo = React.createClass({
                 ]
             }
         ]));
-    },
+    }
 
-    _handleItemClick: function (id) {
+    _handleItemClick = (id) => {
         this.setState(HeaderBar.Reducer(this.state, HeaderBar.Actions.selectItemUnselectOthers(id)));
-    },
+    };
 
-    render: function () {
+    render() {
         // by default the header bar is styled with position:fixed, but it has been changed to position:absolute for
         // purposes of this demo
         return (
@@ -37,6 +38,6 @@ var HeaderBarDemo = React.createClass({
                 onItemValueChange={this._handleItemClick}
             />);
     }
-});
+}
 
 module.exports = HeaderBarDemo;

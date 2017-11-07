@@ -6,120 +6,118 @@ var React = require("react"),
     Layout = require("../../../components/general/ColumnLayout.jsx"),
     Toggle = require("../../../components/forms/form-toggle").v2;
 
-var cssTips = React.createClass({
+var ICONS = [
+    "account",
+    "admin-account",
+    "alert",
+    "approve",
+    "apps",
+    "badge",
+    "cabinet",
+    "calendar",
+    "certificate",
+    "check",
+    "circle-o",
+    "circle",
+    "clear",
+    "close",
+    "close-arrow",
+    "cog",
+    "collapse",
+    "delete",
+    "details",
+    "directory",
+    "directory-hollow",
+    "download",
+    "dropdown-arrow",
+    "edit",
+    "expand",
+    "expand-arrow",
+    "file",
+    "filter",
+    "globe",
+    "grip",
+    "group",
+    "help",
+    "help-rounded",
+    "image",
+    "info",
+    "key",
+    "left",
+    "link",
+    "lock",
+    "lock-large",
+    "menu",
+    "minus",
+    "minus-rounded",
+    "network",
+    "next",
+    "overview",
+    "pin",
+    "plus",
+    "plus-rounded",
+    "puzzle",
+    "previous",
+    "resend",
+    "right",
+    "search",
+    "settings",
+    "slider",
+    "sort-asc",
+    "sort-desc",
+    "sort-none",
+    "spinner",
+    "spin-down",
+    "spin-up",
+    "success",
+    "support",
+    "thumb",
+    "undo",
+    "user",
+    "users",
+    "view",
+    "view-hidden",
+    "walkthrough",
+    "wand",
+    "welcome"
+];
 
-    icons: [
-        "account",
-        "admin-account",
-        "alert",
-        "approve",
-        "apps",
-        "badge",
-        "cabinet",
-        "calendar",
-        "certificate",
-        "check",
-        "circle-o",
-        "circle",
-        "clear",
-        "close",
-        "close-arrow",
-        "cog",
-        "collapse",
-        "delete",
-        "details",
-        "directory",
-        "directory-hollow",
-        "download",
-        "dropdown-arrow",
-        "edit",
-        "expand",
-        "expand-arrow",
-        "file",
-        "filter",
-        "globe",
-        "grip",
-        "group",
-        "help",
-        "help-rounded",
-        "image",
-        "info",
-        "key",
-        "left",
-        "link",
-        "lock",
-        "lock-large",
-        "menu",
-        "minus",
-        "minus-rounded",
-        "network",
-        "next",
-        "overview",
-        "pin",
-        "plus",
-        "plus-rounded",
-        "puzzle",
-        "previous",
-        "resend",
-        "right",
-        "search",
-        "settings",
-        "slider",
-        "sort-asc",
-        "sort-desc",
-        "sort-none",
-        "spinner",
-        "spin-down",
-        "spin-up",
-        "success",
-        "support",
-        "thumb",
-        "undo",
-        "user",
-        "users",
-        "view",
-        "view-hidden",
-        "walkthrough",
-        "wand",
-        "welcome"
-    ],
-    iconColumns: 5,
+var ICON_COLUMNS = 5;
 
-    _toggleFieldset: function () {
+class cssTips extends React.Component {
+    state = {
+        showFieldset: false
+    };
+
+    _toggleFieldset = () => {
         this.setState ({
             showFieldset: !this.state.showFieldset
         });
-    },
+    };
 
-    _renderIcon: function (icon) {
+    _renderIcon = (icon) => {
         return (<div><span className={"inline-icon icon-" + icon}></span> icon-{icon}</div>);
-    },
+    };
 
-    _renderIconColumn: function (col) {
-        var iconsPerCol = Math.ceil(this.icons.length / this.iconColumns);
+    _renderIconColumn = (col) => {
+        var iconsPerCol = Math.ceil(ICONS.length / ICON_COLUMNS);
 
-        return this.icons.slice(iconsPerCol*(col-1), iconsPerCol*col).map(function (item) {
+        return ICONS.slice(iconsPerCol*(col-1), iconsPerCol*col).map(function (item) {
             return this._renderIcon(item);
         }.bind(this));
-    },
+    };
 
-    _renderIconColumns: function () {
+    _renderIconColumns = () => {
         var content = [];
 
-        for (var i=1; i<=this.iconColumns; i+=1) {
+        for (var i=1; i<=ICON_COLUMNS; i+=1) {
             content.push(<Layout.Column>{this._renderIconColumn(i)}</Layout.Column>);
         }
 
         return content;
-    },
+    };
 
-    getInitialState: function () {
-        return {
-            showFieldset: false
-        };
-    },
-
-    render: function () {
+    render() {
         var fieldsetCss = {
             focused: this.state.showFieldset,
             unfocused: !this.state.showFieldset
@@ -320,6 +318,6 @@ var cssTips = React.createClass({
             </Tutorial>
         );
     }
-});
+}
 
 module.exports = cssTips;

@@ -1,16 +1,13 @@
-var React = require("re-react"),
-    ReactVanilla = require("react"),
+var PropTypes = require("prop-types");
+var React = require("react"),
     ReactDOM = require("react-dom"),
-
     FormLabel = require("./FormLabel.jsx"),
     FormTextField = require("./form-text-field").v2,
     HelpHint = require("../tooltips/HelpHint.jsx"),
-
     callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutsideOfContainer,
     FilterUtils = require("../../util/FilterUtils.js"),
     KeyboardUtils = require("../../util/KeyboardUtils.js"),
     Utils = require("../../util/Utils.js"),
-
     classnames = require("classnames"),
     _ = require("underscore");
 
@@ -200,36 +197,34 @@ var SearchTypes = {
 * @param {string} label
 *    The label to render.
 */
-var FormDropDownListDefaultContent = ReactVanilla.createClass({
+class FormDropDownListDefaultContent extends React.Component {
+    static propTypes = {
+        label: PropTypes.string
+    };
 
-    propTypes: {
-        label: React.PropTypes.string
-    },
-
-    render: function () {
+    render() {
         return <div>{this.props.label}</div>;
     }
-});
+}
 
-var OptionItem = ReactVanilla.createClass({
+class OptionItem extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
+        key: PropTypes.string,
+        ref: PropTypes.string,
+        onClick: PropTypes.func,
+        content: PropTypes.node,
+        option: PropTypes.object
+    };
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        className: React.PropTypes.string,
-        key: React.PropTypes.string,
-        ref: React.PropTypes.string,
-        onClick: React.PropTypes.func,
-        content: React.PropTypes.node,
-        option: React.PropTypes.object
-    },
-
-    _handleClick: function (event) {
+    _handleClick = (event) => {
         if (this.props.onClick) {
             this.props.onClick(this.props.option, event);
         }
-    },
+    };
 
-    _renderContent: function () {
+    _renderContent = () => {
         if (this.props.option.helpHintText) {
             return (
                 <HelpHint
@@ -243,9 +238,9 @@ var OptionItem = ReactVanilla.createClass({
         } else {
             return this.props.content;
         }
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <li
                 key={this.props.key} // add prop allows re-ordering, so must have unique key
@@ -257,101 +252,99 @@ var OptionItem = ReactVanilla.createClass({
             </li>
         );
     }
-});
+}
 
-var FormDropDownListStateless = React.createClass({
-    displayName: "FormDropDownListStateless",
+class FormDropDownListStateless extends React.Component {
+    static displayName = "FormDropDownListStateless";
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        className: React.PropTypes.string.affectsRendering,
-        options: React.PropTypes.arrayOf(React.PropTypes.object).isRequired.affectsRendering,
-        selectedOption: React.PropTypes.object.isRequired.affectsRendering,
-        onValueChange: React.PropTypes.func,
-        contentType: React.PropTypes.element.affectsRendering,
-        groups: React.PropTypes.arrayOf(
-            React.PropTypes.shape({
-                id: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
-                label: React.PropTypes.string,
-                disabled: React.PropTypes.bool
-            })).affectsRendering,
-        open: React.PropTypes.bool.affectsRendering,
-        onToggle: React.PropTypes.func,
-        labelPrompt: React.PropTypes.string.affectsRendering,
-        labelAdd: React.PropTypes.string.affectsRendering,
-        canAdd: React.PropTypes.bool.affectsRendering,
-        searchString: React.PropTypes.string.affectsRendering,
-        searchField: React.PropTypes.string.affectsRendering,
-        validSearchCharsRegex: React.PropTypes.string.affectsRendering,
-        searchIndex: React.PropTypes.number.affectsRendering,
-        searchTime: React.PropTypes.number.affectsRendering,
-        searchType: React.PropTypes.oneOf([SearchTypes.KEYBOARD, SearchTypes.BOX]).affectsRendering,
-        onSearch: React.PropTypes.func,
-        selectClassName: React.PropTypes.string.affectsRendering,
-        selectedOptionLabelClassName: React.PropTypes.string.affectsRendering,
-        title: React.PropTypes.string.affectsRendering,
-        noneOption: React.PropTypes.object.affectsRendering,
-        noneOptionLabelClassName: React.PropTypes.string.affectsRendering,
-        label: React.PropTypes.string.affectsRendering,
-        labelHelpText: React.PropTypes.string.affectsRendering,
-        helpClassName: React.PropTypes.string.affectsRendering,
-        errorMessage: React.PropTypes.string.affectsRendering,
-        required: React.PropTypes.bool.affectsRendering,
-        disabled: React.PropTypes.bool.affectsRendering,
-        autofocus: React.PropTypes.bool.affectsRendering
-    },
+    static propTypes = {
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
+        options: PropTypes.arrayOf(PropTypes.object).isRequired,
+        selectedOption: PropTypes.object.isRequired,
+        onValueChange: PropTypes.func,
+        contentType: PropTypes.element,
+        groups: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+                label: PropTypes.string,
+                disabled: PropTypes.bool
+            })),
+        open: PropTypes.bool,
+        onToggle: PropTypes.func,
+        labelPrompt: PropTypes.string,
+        labelAdd: PropTypes.string,
+        canAdd: PropTypes.bool,
+        searchString: PropTypes.string,
+        searchField: PropTypes.string,
+        validSearchCharsRegex: PropTypes.string,
+        searchIndex: PropTypes.number,
+        searchTime: PropTypes.number,
+        searchType: PropTypes.oneOf([SearchTypes.KEYBOARD, SearchTypes.BOX]),
+        onSearch: PropTypes.func,
+        selectClassName: PropTypes.string,
+        selectedOptionLabelClassName: PropTypes.string,
+        title: PropTypes.string,
+        noneOption: PropTypes.object,
+        noneOptionLabelClassName: PropTypes.string,
+        label: PropTypes.string,
+        labelHelpText: PropTypes.string,
+        helpClassName: PropTypes.string,
+        errorMessage: PropTypes.string,
+        required: PropTypes.bool,
+        disabled: PropTypes.bool,
+        autofocus: PropTypes.bool
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "form-drop-down-list",
-            onValueChange: _.noop,
-            contentType: <FormDropDownListDefaultContent />,
-            open: false,
-            onToggle: _.noop,
-            canAdd: false,
-            searchString: "",
-            searchField: "label",
-            validSearchCharsRegex: "/[^a-zA-Z\d\s]+/",
-            searchIndex: -1,
-            searchTime: 0,
-            searchType: SearchTypes.KEYBOARD,
-            onSearch: _.noop,
-            title: "",
-            showSelectedOptionLabel: true,
-            required: false,
-            disabled: false,
-            autofocus: false,
-        };
-    },
+    static defaultProps = {
+        "data-id": "form-drop-down-list",
+        onValueChange: _.noop,
+        contentType: <FormDropDownListDefaultContent />,
+        open: false,
+        onToggle: _.noop,
+        canAdd: false,
+        searchString: "",
+        searchField: "label",
+        validSearchCharsRegex: "/[^a-zA-Z\d\s]+/",
+        searchIndex: -1,
+        searchTime: 0,
+        searchType: SearchTypes.KEYBOARD,
+        onSearch: _.noop,
+        title: "",
+        showSelectedOptionLabel: true,
+        required: false,
+        disabled: false,
+        autofocus: false,
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         this.didPressKey = false;
         this.inlineMenuStyle = Utils.isIE() ? { border: "none" } : {};
         this._setupGroups(this.props.options, this.props.groups);
-    },
+    }
 
-    componentWillReceiveProps: function (nextProps) {
+    componentWillReceiveProps(nextProps) {
         if (!_.isEqual(this.props.options, nextProps.options) || !_.isEqual(this.props.groups, nextProps.groups)) {
             this._setupGroups(nextProps.options, nextProps.groups);
         }
         if (this.props.open && !nextProps.open) {
             this.didPressKey = false;
         }
-    },
+    }
 
-    componentDidUpdate: function () {
+    componentDidUpdate() {
         this._setSearchListPosition(this.props.options);
-    },
+    }
 
-    componentDidMount: function () {
+    componentDidMount() {
         window.addEventListener("click", this._handleGlobalClick);
-    },
+    }
 
-    componentWillUnmount: function () {
+    componentWillUnmount() {
         window.removeEventListener("click", this._handleGlobalClick);
-    },
+    }
 
-    _setupGroups: function (options, groups) {
+    _setupGroups = (options, groups) => {
         if (groups) {
             // Groups by id
             this._groupById = {};
@@ -381,7 +374,7 @@ var FormDropDownListStateless = React.createClass({
                 }
             }.bind(this));
         }
-    },
+    };
 
     /**
     * Toggle the select list if a mouse click happens outside of the select list area
@@ -393,7 +386,7 @@ var FormDropDownListStateless = React.createClass({
     * @private
     * @ignore
     */
-    _handleGlobalClick: function (e) {
+    _handleGlobalClick = (e) => {
         // if the click event isn't the click that opened the list
         if (this.props.open && this._clickEvent !== e) {
             var picker = ReactDOM.findDOMNode(this.refs["input-container"]);
@@ -401,14 +394,14 @@ var FormDropDownListStateless = React.createClass({
             //dont close the list if the click is on the select
             callIfOutsideOfContainer(picker, this._closeList, e);
         }
-    },
+    };
 
-    _closeList: function () {
+    _closeList = () => {
         this.props.onToggle();
         this.props.onSearch("",0,0);
-    },
+    };
 
-    _getOrderedOptionsIndex: function (option) {
+    _getOrderedOptionsIndex = (option) => {
         var index = -1;
 
         if (this.props.groups && option) {
@@ -419,17 +412,17 @@ var FormDropDownListStateless = React.createClass({
             });
         }
         return index;
-    },
+    };
 
-    _isBoxSearch: function () {
+    _isBoxSearch = () => {
         return this.props.canAdd || this.props.searchType === SearchTypes.BOX;
-    },
+    };
 
-    _isKeyboardSearch: function () {
+    _isKeyboardSearch = () => {
         return !this.props.canAdd && this.props.searchType === SearchTypes.KEYBOARD;
-    },
+    };
 
-    _getPrompt: function () {
+    _getPrompt = () => {
         if (this._isBoxSearch()) {
             var className = "select-prompt",
                 searchClassName = classnames(className, "select-search-prompt"),
@@ -453,20 +446,20 @@ var FormDropDownListStateless = React.createClass({
                 );
             }
         }
-    },
+    };
 
-    _handleInputValueChange: function (searchString) {
+    _handleInputValueChange = (searchString) => {
         if (!this.props.open) {
             this.props.onToggle();
         }
         this.props.onSearch(searchString, 0, this.props.noneOption ? -1 : 0);
-    },
+    };
 
-    _handleAdd: function () {
+    _handleAdd = () => {
         this.props.onAdd(this.props.searchString);
         this.props.onSearch("",0,this.props.noneOption ? -1 : 0);
         this.props.onToggle();
-    },
+    };
 
     /**
      * On key press open/close list or try and auto find the option that matches the characters typed on a starts with.
@@ -484,7 +477,7 @@ var FormDropDownListStateless = React.createClass({
      * @private
      * @ignore
      */
-    _handleKeyDown: function (e) {
+    _handleKeyDown = (e) => {
         this.didPressKey = true;
         if (this.props.open) { // only do search when select list expanded
             var search,
@@ -551,7 +544,7 @@ var FormDropDownListStateless = React.createClass({
                 this._handleUpDownKeys(e);
             }
         }
-    },
+    };
 
     /**
      * When Up or Down keys are pressed, increment/decrement the searchIndex accordingly
@@ -563,7 +556,7 @@ var FormDropDownListStateless = React.createClass({
      * @private
      * @ignore
      */
-    _handleUpDownKeys: function (e) {
+    _handleUpDownKeys = (e) => {
         if (this.props.open) {
             var index = this.props.searchIndex;
             if (e.keyCode === KeyboardUtils.KeyCodes.ARROW_UP) {
@@ -586,7 +579,7 @@ var FormDropDownListStateless = React.createClass({
         }
         e.preventDefault();
         e.stopPropagation();
-    },
+    };
 
     /**
      * Centers the search list on last searched item. Called on componentDidUpdate.
@@ -594,7 +587,7 @@ var FormDropDownListStateless = React.createClass({
      * @private
      * @ignore
      */
-    _setSearchListPosition: function () {
+    _setSearchListPosition = () => {
         if (!this.props.open) {
             return;
         }
@@ -606,29 +599,29 @@ var FormDropDownListStateless = React.createClass({
             selectListItem = ReactDOM.findDOMNode(this.refs[selectListTarget]);
 
         selectList.scrollTop = selectListItem ? (selectListItem.offsetTop - 50) : 0;
-    },
+    };
 
-    _handleToggle: function (e) {
+    _handleToggle = (e) => {
         if (!this.props.disabled) {
             // store a reference to this event so that we dont open and then close the list when the
             // global click event listener gets triggered.
             this._clickEvent = e.nativeEvent;
             this.props.onToggle();
         }
-    },
+    };
 
-    _handleOptionClick: function (item, e) {
+    _handleOptionClick = (item, e) => {
         e.preventDefault(); // TODO: remove after refactor of DOM
 
         this.props.onValueChange(item);
         this.props.onToggle();
-    },
+    };
 
-    _getGroupSeparator: function (index) {
+    _getGroupSeparator = (index) => {
         return <div key={"group-separator" + index} className="group-separator" />;
-    },
+    };
 
-    _getSingleGroupHeader: function (group) {
+    _getSingleGroupHeader = (group) => {
         var className = classnames("select-group", { disabled: group.disabled });
         return (
             <li
@@ -639,9 +632,9 @@ var FormDropDownListStateless = React.createClass({
                 {group.label}
             </li>
         );
-    },
+    };
 
-    _getSingleOption: function (option, index) {
+    _getSingleOption = (option, index) => {
         var group = this.props.groups && this._groupById[option.group],
             disabled = group && group.disabled,
             className = classnames("select-option", {
@@ -660,9 +653,9 @@ var FormDropDownListStateless = React.createClass({
                 content={React.cloneElement(this.props.contentType, option)}
             />
         );
-    },
+    };
 
-    _getNoneOption: function () {
+    _getNoneOption = () => {
         var noneOptionContainerClassName = classnames("none-option", { highlighted: this.props.searchIndex === -1 }),
             content = (
                 <span className={this.props.noneOptionLabelClassName}>
@@ -681,9 +674,9 @@ var FormDropDownListStateless = React.createClass({
                 content={content}
             />
         );
-    },
+    };
 
-    _getGroupedOptions: function () {
+    _getGroupedOptions = () => {
         var options = [],
             lastGroup;
 
@@ -697,9 +690,9 @@ var FormDropDownListStateless = React.createClass({
         }.bind(this));
 
         return options;
-    },
+    };
 
-    _generateOptions: function () {
+    _generateOptions = () => {
         var options = [];
 
         // If noneOption exits, always at the top of the list
@@ -714,9 +707,9 @@ var FormDropDownListStateless = React.createClass({
             options = options.concat(this.props.options.map(this._getSingleOption));
         }
         return options;
-    },
+    };
 
-    render: function () {
+    render() {
         var containerClassName = classnames("input-custom-select", "input-select", this.props.className, {
                 open: this.props.open,
                 "form-error": this.props.errorMessage,
@@ -774,39 +767,37 @@ var FormDropDownListStateless = React.createClass({
             </FormLabel>
         );
     }
-});
+}
 
-var FormDropDownListStateful = ReactVanilla.createClass({
-    displayName: "FormDropDownListStateful",
+class FormDropDownListStateful extends React.Component {
+    static displayName = "FormDropDownListStateful";
 
-    componentWillReceiveProps: function (nextProps) {
+    state = {
+        open: this.props.open || false,
+        searchIndex: -1,
+        searchString: "",
+        searchTime: 0,
+        matchedOptions: this.props.options
+    };
+
+    componentWillReceiveProps(nextProps) {
         if (!_.isEqual(this.props.options, nextProps.options)) {
             this.setState({
                 matchedOptions: nextProps.options
             });
         }
-    },
+    }
 
-    getInitialState: function () {
-        return {
-            open: this.props.open || false,
-            searchIndex: -1,
-            searchString: "",
-            searchTime: 0,
-            matchedOptions: this.props.options
-        };
-    },
-
-    _handleToggle: function () {
+    _handleToggle = () => {
         this.setState({
             open: !this.state.open,
             searchIndex: -1,
             searchString: "",
             searchTime: 0
         });
-    },
+    };
 
-    _handleSearch: function (search, time, index) {
+    _handleSearch = (search, time, index) => {
         var matchedOptions = this.state.matchedOptions;
 
         if (this.props.canAdd || this.props.searchType === SearchTypes.BOX) {
@@ -823,9 +814,9 @@ var FormDropDownListStateful = ReactVanilla.createClass({
             searchIndex: index,
             matchedOptions: matchedOptions
         });
-    },
+    };
 
-    render: function () {
+    render() {
         var props = _.defaults({
             ref: "FormDropDownListStateless",
             options: this.state.matchedOptions,
@@ -839,22 +830,20 @@ var FormDropDownListStateful = ReactVanilla.createClass({
 
         return React.createElement(FormDropDownListStateless, props);
     }
-});
+}
 
-var FormDropDownList = ReactVanilla.createClass({
-    displayName: "FormDropDownList",
+class FormDropDownList extends React.Component {
+    static displayName = "FormDropDownList";
 
-    propTypes: {
-        controlled: React.PropTypes.bool
-    },
+    static propTypes = {
+        controlled: PropTypes.bool
+    };
 
-    getDefaultProps: function () {
-        return {
-            controlled: false
-        };
-    },
+    static defaultProps = {
+        controlled: false
+    };
 
-    render: function () {
+    render() {
         return (
             this.props.controlled
                 ? React.createElement(FormDropDownListStateless,
@@ -863,7 +852,7 @@ var FormDropDownList = ReactVanilla.createClass({
                     _.defaults({ ref: "FormDropDownListStateful" }, this.props))
         );
     }
-});
+}
 
 FormDropDownList.SearchTypes = SearchTypes;
 FormDropDownList.filterOptions = filterOptions;

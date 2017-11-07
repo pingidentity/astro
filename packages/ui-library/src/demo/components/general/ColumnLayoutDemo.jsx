@@ -6,9 +6,8 @@ var React = require("react"),
 * @memberof ColumnLayout
 * @desc A demo for ColumnLayout
 */
-var ColumnLayoutDemo = React.createClass({
-
-    render: function () {
+class ColumnLayoutDemo extends React.Component {
+    render() {
         var style1 = {
                 background: "#ddd",
                 padding: "10px",
@@ -165,8 +164,7 @@ var ColumnLayoutDemo = React.createClass({
             </div>
         );
     }
-
-});
+}
 
 
 module.exports = ColumnLayoutDemo;

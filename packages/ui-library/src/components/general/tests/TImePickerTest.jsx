@@ -11,7 +11,7 @@ jest.dontMock("../../forms/FormDropDownList.jsx");
 
 describe("TimePicker", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         TimePicker = require("../TimePicker.jsx"),
         moment = require("moment"),

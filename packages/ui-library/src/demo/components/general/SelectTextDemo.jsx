@@ -8,8 +8,8 @@ var FormFieldConstants = require("./../../../constants/FormFieldConstants");
 * @memberof SelectText
 * @desc A demo for SelectText
 */
-var SelectTextDemo = React.createClass({
-    render: function () {
+class SelectTextDemo extends React.Component {
+    render() {
         return (
             <div>
                 <div className="input-row">
@@ -28,6 +28,6 @@ var SelectTextDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = SelectTextDemo;

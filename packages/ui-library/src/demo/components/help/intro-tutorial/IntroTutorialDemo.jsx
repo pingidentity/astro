@@ -2,44 +2,42 @@ var React = require("react"),
     ReactDOM = require("react-dom"),
     IntroTutorial = require("../../../../components/help/intro-tutorial");
 
+var LABELS = {
+    messageWelcome: "Welcome to the tutorial",
+    labelNext: "Next",
+    labelPrevious: "Previous",
+    labelDismiss: "Dismiss",
+    labelGetStarted: "GetStarted",
+    labelOf: "of",
+    labelGotIt: "Finish"
+};
+
 /**
 * @name IntroTutorialDemo
 * @memberof IntroTutorial
 * @desc A demo for IntroTutorial
 */
-var Demo = React.createClass({
-    LABELS: {
-        messageWelcome: "Welcome to the tutorial",
-        labelNext: "Next",
-        labelPrevious: "Previous",
-        labelDismiss: "Dismiss",
-        labelGetStarted: "GetStarted",
-        labelOf: "of",
-        labelGotIt: "Finish"
-    },
+class Demo extends React.Component {
+    state = {
+        active: 0,
+        visible: true,
+        steps: []
+    };
 
-    getInitialState: function () {
-        return {
-            active: 0,
-            visible: true,
-            steps: []
-        };
-    },
-
-    _handleDismiss: function () {
+    _handleDismiss = () => {
         this.setState({ visible: false });
         ReactDOM.findDOMNode(this.refs.container).style.display = "none";
-    },
+    };
 
-    _handleNext: function () {
+    _handleNext = () => {
         this.setState({ active: this.state.active + 1 });
-    },
+    };
 
-    _handlePrev: function () {
+    _handlePrev = () => {
         this.setState({ active: this.state.active - 1 });
-    },
+    };
 
-    componentDidMount: function () {
+    componentDidMount() {
         setTimeout(function () {
             this.setState({
                 steps: [
@@ -65,15 +63,15 @@ var Demo = React.createClass({
                     }
                 ] });
         }.bind(this), 500);
-    },
+    }
 
-    render: function () {
+    render() {
         var style = { left: 0, top: 0, width: "100%", position: "fixed", height: "100%", zIndex: 10 };
 
         return (
             <div ref="container" style={style}>
                 <IntroTutorial
-                    {...this.LABELS}
+                    {...LABELS}
                     onNext={this._handleNext}
                     onPrevious={this._handlePrev}
                     onDismiss={this._handleDismiss}
@@ -83,6 +81,6 @@ var Demo = React.createClass({
                     active={this.state.active} />
             </div>);
     }
-});
+}
 
 module.exports = Demo;

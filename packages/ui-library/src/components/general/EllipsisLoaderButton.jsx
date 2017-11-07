@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react"),
     css = require("classnames"),
     Utils = require("../../util/Utils"),
@@ -37,26 +38,24 @@ var React = require("react"),
  *         className="css-class"
  *         onButtonClick={this._onButtonClick} />
  */
-var EllipsisLoaderButton = React.createClass({
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        id: React.PropTypes.string,
-        className: React.PropTypes.string,
-        text: React.PropTypes.string.isRequired,
-        disabled: React.PropTypes.bool,
-        loading: React.PropTypes.bool.isRequired,
-        onClick: React.PropTypes.func, /// Should be isRequired once DEPRECATED onButtonClick is removed.
-        onButtonClick: React.PropTypes.func
-    },
+class EllipsisLoaderButton extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        id: PropTypes.string,
+        className: PropTypes.string,
+        text: PropTypes.string.isRequired,
+        disabled: PropTypes.bool,
+        loading: PropTypes.bool.isRequired,
+        onClick: PropTypes.func, /// Should be isRequired once DEPRECATED onButtonClick is removed.
+        onButtonClick: PropTypes.func
+    };
 
-    getDefaultProps: function () {
-        return {
-            disabled: false,
-            "data-id": "ellipsis-loader-button"
-        };
-    },
+    static defaultProps = {
+        disabled: false,
+        "data-id": "ellipsis-loader-button"
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
                 console.warn(Utils.deprecateMessage("id", "data-id"));
@@ -65,9 +64,9 @@ var EllipsisLoaderButton = React.createClass({
                 console.warn(Utils.deprecateMessage("onButtonClick", "onClick"));
             }
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var id = this.props.id || this.props["data-id"];
 
         var buttonCss = {};
@@ -93,6 +92,6 @@ var EllipsisLoaderButton = React.createClass({
             </button>
         );
     }
-});
+}
 
 module.exports = EllipsisLoaderButton;

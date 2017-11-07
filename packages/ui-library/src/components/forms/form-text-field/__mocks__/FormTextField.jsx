@@ -4,26 +4,23 @@ var _ = require("underscore");
 /** @class FormTextFieldMock
  * @desc A mock of the FormTextField component
  */
-var FormTextFieldMock = React.createClass({
+class FormTextFieldMock extends React.Component {
+    static defaultProps = {
+        onChange: _.noop,
+        onValueChange: _.noop
+    };
 
-    getDefaultProps: function () {
-        return {
-            onChange: _.noop,
-            onValueChange: _.noop
-        };
-    },
-
-    _handleFieldChange: function (e) {
+    _handleFieldChange = (e) => {
         this.props.onValueChange(e.target.value);
         this.props.onChange(e);
-    },
+    };
 
-    render: function () {
+    render() {
         return (<input {...this.props} data-id="input"
             onChange={this._handleFieldChange}
             className="form-text-field-mock"/>
         );
     }
-});
+}
 
 module.exports = FormTextFieldMock;

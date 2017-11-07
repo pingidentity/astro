@@ -1,6 +1,8 @@
 "use strict";
 
-var React = require("re-react"),
+var PropTypes = require("prop-types");
+
+var React = require("react"),
     CancelTooltip = require("./../tooltips/CancelTooltip.jsx"),
     ContextButton = require("../general/context-close-button").v2,
     EllipsisLoaderButton = require("../general/EllipsisLoaderButton.jsx"),
@@ -88,70 +90,68 @@ var React = require("re-react"),
  * @param {Wizard#Step~onEdit} onEdit
  *     Callback to be triggered in response of 'edit' click, which will receive the current number.
  */
-var Step = React.createClass({
-    propTypes: {
-        "data-id": React.PropTypes.string.affectsRendering,
-        id: React.PropTypes.string.affectsRendering,
-        className: React.PropTypes.string.affectsRendering,
-        cancelTooltip: React.PropTypes.object.affectsRendering,
-        labelEdit: React.PropTypes.string.affectsRendering,
-        labelCancel: React.PropTypes.string.affectsRendering,
-        labelNext: React.PropTypes.string.affectsRendering,
-        labelDone: React.PropTypes.string.affectsRendering,
-        number: React.PropTypes.number.affectsRendering,
-        total: React.PropTypes.number.affectsRendering,
-        active: React.PropTypes.bool.affectsRendering,
-        canProceed: React.PropTypes.bool.affectsRendering,
-        disableNavigation: React.PropTypes.bool.affectsRendering,
-        hideCancel: React.PropTypes.bool.affectsRendering,
-        showEdit: React.PropTypes.bool.affectsRendering,
-        completed: React.PropTypes.bool.affectsRendering,
-        isModal: React.PropTypes.bool.affectsRendering,
-        when: React.PropTypes.bool.affectsRendering,
-        renderHidden: React.PropTypes.bool.affectsRendering,
-        hintText: React.PropTypes.string.affectsRendering,
-        nextButtonStyle: React.PropTypes.string.affectsRendering, // DEPRECATED. Remove when possible.
-        doneButtonStyle: React.PropTypes.string.affectsRendering, // DEPRECATED. Remove when possible.
-        nextButtonClassName: React.PropTypes.string.affectsRendering,
-        doneButtonClassName: React.PropTypes.string.affectsRendering,
-        showPulsing: React.PropTypes.bool.affectsRendering,
-        onEdit: React.PropTypes.func,
-        onNext: React.PropTypes.func,
-        children: React.PropTypes.node.affectsRendering
-    },
+class Step extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        id: PropTypes.string,
+        className: PropTypes.string,
+        cancelTooltip: PropTypes.object,
+        labelEdit: PropTypes.string,
+        labelCancel: PropTypes.string,
+        labelNext: PropTypes.string,
+        labelDone: PropTypes.string,
+        number: PropTypes.number,
+        total: PropTypes.number,
+        active: PropTypes.bool,
+        canProceed: PropTypes.bool,
+        disableNavigation: PropTypes.bool,
+        hideCancel: PropTypes.bool,
+        showEdit: PropTypes.bool,
+        completed: PropTypes.bool,
+        isModal: PropTypes.bool,
+        when: PropTypes.bool,
+        renderHidden: PropTypes.bool,
+        hintText: PropTypes.string,
+        nextButtonStyle: PropTypes.string, // DEPRECATED. Remove when possible.
+        doneButtonStyle: PropTypes.string, // DEPRECATED. Remove when possible.
+        nextButtonClassName: PropTypes.string,
+        doneButtonClassName: PropTypes.string,
+        showPulsing: PropTypes.bool,
+        onEdit: PropTypes.func,
+        onNext: PropTypes.func,
+        children: PropTypes.node
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "step",
-            active: false,
-            disableNavigation: false,
-            hideCancel: false,
-            completed: false,
-            renderHidden: false,
-            canProceed: true,
-            isModal: true,
-            showEdit: true,
-            when: true,
-            onCancel: _.noop,
-            showPulsing: false,
-            nextButtonClassName: "primary next-step",
-            doneButtonClassName: "primary final-step"
-        };
-    },
+    static defaultProps = {
+        "data-id": "step",
+        active: false,
+        disableNavigation: false,
+        hideCancel: false,
+        completed: false,
+        renderHidden: false,
+        canProceed: true,
+        isModal: true,
+        showEdit: true,
+        when: true,
+        onCancel: _.noop,
+        showPulsing: false,
+        nextButtonClassName: "primary next-step",
+        doneButtonClassName: "primary final-step"
+    };
 
-    _edit: function () {
+    _edit = () => {
         if (this.props.onEdit && !this.props.showPulsing) {
             this.props.onEdit(this.props.number);
         }
-    },
+    };
 
-    _next: function () {
+    _next = () => {
         if (this.props.canProceed && this.props.onNext) {
             this.props.onNext(this.props.number);
         }
-    },
+    };
 
-    _getCancelButtonMarkup: function () {
+    _getCancelButtonMarkup = () => {
         var labelCancel = this.props.labelCancel || Translator.translate("cancel");
 
         return React.createElement(this.props.isModal ? ContextButton : "input", {
@@ -162,9 +162,9 @@ var Step = React.createClass({
             value: labelCancel,
             disabled: this.props.showPulsing
         });
-    },
+    };
 
-    _getCancelButton: function () {
+    _getCancelButton = () => {
         if (!this.props.hideCancel) {
             var cancelButton,
                 dataId = this.props.id || this.props["data-id"];
@@ -190,9 +190,9 @@ var Step = React.createClass({
 
             return cancelButton;
         }
-    },
+    };
 
-    _getNextButton: function () {
+    _getNextButton = () => {
         var labelNext = this.props.labelNext;
         if (!this.props.labelNext) {
             labelNext = Translator.translate("next");
@@ -204,9 +204,9 @@ var Step = React.createClass({
                 loading={this.props.showPulsing}
                 disabled={!this.props.canProceed || this.props.showPulsing}
                 className={this.props.nextButtonStyle || this.props.nextButtonClassName} />);
-    },
+    };
 
-    _getEditLink: function () {
+    _getEditLink = () => {
         var labelEdit = this.props.labelEdit;
         if (!this.props.labelEdit) {
             labelEdit = Translator.translate("edit");
@@ -216,9 +216,9 @@ var Step = React.createClass({
                 {labelEdit}
             </a>);
         }
-    },
+    };
 
-    _getNavigation: function () {
+    _getNavigation = () => {
         if (!this.props.active || this.props.disableNavigation) {
             return null;
         }
@@ -231,21 +231,21 @@ var Step = React.createClass({
                 {showNext ? this._getNextButton() : null}
             </div>
         );
-    },
+    };
 
-    _getHint: function () {
+    _getHint = () => {
         if (this.props.active && this.props.hintText) {
             return <HelpHint hintText={this.props.hintText} hintStyle="short"/>;
         }
-    },
+    };
 
-    _getTitle: function () {
+    _getTitle = () => {
         if (this.props.titleSelection) {
             return <span className="task-title-selection">{this.props.titleSelection}</span>;
         }
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
                 console.warn(Utils.deprecateMessage("id", "data-id"));
@@ -257,9 +257,9 @@ var Step = React.createClass({
                 console.warn(Utils.deprecateMessage("nextButtonStyle", "nextButtonClassName"));
             }
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var dataId = this.props.id || this.props["data-id"];
 
         var inlineStyles;
@@ -298,6 +298,6 @@ var Step = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = Step;

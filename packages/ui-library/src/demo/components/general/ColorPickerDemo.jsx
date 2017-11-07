@@ -6,37 +6,34 @@ var React = require("react"),
 * @memberof ColorPicker
 * @desc A demo for ColorPicker
 */
-var ColorPickerDemo = React.createClass({
-
-    getInitialState: function () {
-        return {
-            picker1color: "#fff",
-            picker2color: "#000",
-            picker2open: false,
-            errorMessage: ""
-        };
-    },
+class ColorPickerDemo extends React.Component {
+    state = {
+        picker1color: "#fff",
+        picker2color: "#000",
+        picker2open: false,
+        errorMessage: ""
+    };
 
     // There is a lot of duplication in the methods below.
     // It's better than building the prop names on the state dynamically.
 
-    _handleChange1: function (color) {
+    _handleChange1 = (color) => {
         this.setState({ picker1color: color });
-    },
+    };
 
-    _handleChange2: function (color) {
+    _handleChange2 = (color) => {
         this.setState({ picker2color: color });
-    },
+    };
 
-    _handleToggle: function () {
+    _handleToggle = () => {
         this.setState({ picker2open: !this.state.picker2open });
-    },
+    };
 
-    _handleError: function (message) {
+    _handleError = (message) => {
         this.setState({ errorMessage: message });
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <div>
                 <div className="input-row">
@@ -62,6 +59,6 @@ var ColorPickerDemo = React.createClass({
                     </div>
             </div>);
     }
-});
+}
 
 module.exports = ColorPickerDemo;

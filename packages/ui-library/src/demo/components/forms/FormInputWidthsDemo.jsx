@@ -14,9 +14,8 @@ var React = require("react"),
 * @memberof module:constants/FormFieldConstants
 * @desc A demo of CSS classes to set form field inputs
 */
-var FormInputWidthsDemo = React.createClass({
-
-    render: function () {
+class FormInputWidthsDemo extends React.Component {
+    render() {
         var selectOptions = [
             { label: "value1", value: "Option One" },
             { label: "value2", value: "Option Two" },
@@ -210,6 +209,6 @@ var FormInputWidthsDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = FormInputWidthsDemo;

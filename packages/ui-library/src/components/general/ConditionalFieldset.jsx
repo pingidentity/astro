@@ -1,5 +1,5 @@
-var React = require("re-react"),
-    ReactVanilla = require("react"),
+var PropTypes = require("prop-types");
+var React = require("react"),
     classNames = require("classnames"),
     FormDropDownList = require("../forms/FormDropDownList.jsx"),
     FormRadioGroup = require("../forms/FormRadioGroup.jsx"),
@@ -17,63 +17,49 @@ var Types = {
     SELECT: "select",
 };
 
-var ConditionalFieldsetStateless = React.createClass({
-    propTypes: {
-        "data-id": React.PropTypes.string.isRequired,
-        className: React.PropTypes.string.affectsRendering,
-        type: React.PropTypes.string.affectsRendering,
-        supportEmpty: React.PropTypes.bool.affectsRendering,
-        emptyMessage: React.PropTypes.string.affectsRendering,
-        onValueChange: React.PropTypes.func,
-        selectedIndex: React.PropTypes.number.affectsRendering,
-        disabled: React.PropTypes.bool.affectsRendering,
-        children: React.PropTypes.node.affectsRendering
-    },
+class ConditionalFieldsetStateless extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string.isRequired,
+        className: PropTypes.string,
+        type: PropTypes.string,
+        supportEmpty: PropTypes.bool,
+        emptyMessage: PropTypes.string,
+        onValueChange: PropTypes.func,
+        selectedIndex: PropTypes.number,
+        disabled: PropTypes.bool,
+        children: PropTypes.node
+    };
 
-    getDefaultProps: function () {
-        return {
-            supportEmpty: false,
-            emptyMessage: "-- Select an option --",
-            selectedIndex: 0,
-            disabled: false
-        };
-    },
+    static defaultProps = {
+        supportEmpty: false,
+        emptyMessage: "-- Select an option --",
+        selectedIndex: 0,
+        disabled: false
+    };
 
-    _addEmptyNode: function () {
-        var alreadyAdded = false;
-        React.Children.forEach(this.props.children, function (child) {
-            if (child.props.children === undefined) {
-                alreadyAdded = true;
-                return;
-            }
-        });
-        if (!alreadyAdded) {
-            var emptyDiv = React.createElement ("div", { title: this.props.emptyMessage } );
-            this.props.children.splice(0, 0, emptyDiv);
-        }
-    },
-
-    _handleSelectValueChange: function (option) {
+    _handleSelectValueChange = (option) => {
         this.props.onValueChange(option.value);
-    },
+    };
 
-    _handleRadioValueChange: function (value) {
+    _handleRadioValueChange = (value) => {
         this.props.onValueChange(Number(value));
-    },
+    };
 
-    _getOptions: function (type) {
-        var options = [];
-        var index = 0;
+    _getOptions = (type) => {
+        let children = this.props.children.slice();
+        //add empty child to the array
         if (this.props.supportEmpty) {
-            this._addEmptyNode();
+            children.unshift(React.createElement ("div", { title: this.props.emptyMessage } ));
         }
+
         var dataId = this.props["data-id"] + "-options";
         if (type === Types.SELECT) {
-            React.Children.forEach(this.props.children, function (child) {
-                options.push({ value: (index), label: child.props.title });
-                index = index + 1;
+            let options = _.map(children, (child, i) => {
+                return ({
+                    value: i,
+                    label: child.props.title
+                });
             });
-
             return (
                 <FormDropDownList data-id={dataId}
                     disabled={this.props.disabled}
@@ -83,10 +69,13 @@ var ConditionalFieldsetStateless = React.createClass({
                     title={options[this.props.selectedIndex].label} />
             );
         } else {
-            React.Children.forEach(this.props.children, function (child) {
-                options.push({ id: (index), name: child.props.title });
-                index = index + 1;
+            let options = _.map(children, (child, i) => {
+                return ({
+                    id: i,
+                    name: child.props.title
+                });
             });
+
             return (
                 <FormRadioGroup
                     ref="options"
@@ -100,39 +89,53 @@ var ConditionalFieldsetStateless = React.createClass({
                 />
             );
         }
-    },
+    };
 
-    render: function () {
+    render() {
         var type = this.props.type || ((this.props.children.length > 2) ? Types.SELECT : Types.RADIO);
         var options = this._getOptions(type);
-        var showFieldset = (this.props.children[this.props.selectedIndex].props.children !== undefined);
+
+        var childIndex;
+        var showFieldset;
+
+        //crazy code, but now that we removed mutating of children (terrible thing to do anyway) we need these calculations
+        if (this.props.supportEmpty) {
+            showFieldset = this.props.selectedIndex === 0 ? false : true;
+            //add to child index if there is an empty option
+            if (showFieldset) {
+                childIndex = this.props.selectedIndex - 1;
+            }
+        }
+        else {
+            showFieldset = this.props.children[this.props.selectedIndex].props.children !== undefined;
+            childIndex = this.props.selectedIndex;
+        }
+
         var className = classNames({ focused: showFieldset, unfocused: !showFieldset }, "conditional-fieldset");
+        
         return (
             <fieldset data-id={this.props["data-id"]} className={className}>
                 <legend>
                     {options}
                 </legend>
-                {this.props.children[this.props.selectedIndex]}
+                {showFieldset ? this.props.children[childIndex] : null}
             </fieldset>
         );
     }
-});
+}
 
-var ConditionalFieldsetStateful = ReactVanilla.createClass({
+class ConditionalFieldsetStateful extends React.Component {
+    state = {
+        selectedIndex: this.props.selectedIndex || 0
+    };
 
-    _handleValueChange: function (index) {
+    _handleValueChange = (index) => {
         this.setState({
             selectedIndex: Number(index)
         });
-    },
+    };
 
-    getInitialState: function () {
-        return {
-            selectedIndex: this.props.selectedIndex || 0
-        };
-    },
-
-    render: function () {
+    render() {
         var props = _.defaults({
             ref: "ConditionalFieldsetStateless",
             selectedIndex: this.state.selectedIndex,
@@ -141,7 +144,7 @@ var ConditionalFieldsetStateful = ReactVanilla.createClass({
 
         return React.createElement(ConditionalFieldsetStateless, props, this.props.children);
     }
-});
+}
 
 /**
  * @callback ConditionalFieldset~onValueChange
@@ -209,26 +212,23 @@ var ConditionalFieldsetStateful = ReactVanilla.createClass({
  *           </div>
  *
  */
-var ConditionalFieldset = ReactVanilla.createClass({
+class ConditionalFieldset extends React.Component {
+    static propTypes = {
+        controlled: PropTypes.bool, //TODO: remove in new version
+        stateless: PropTypes.bool
+    };
 
-    propTypes: {
-        controlled: React.PropTypes.bool, //TODO: remove in new version
-        stateless: React.PropTypes.bool
-    },
+    static defaultProps = {
+        controlled: false //TODO: change to stateless in new version
+    };
 
-    getDefaultProps: function () {
-        return {
-            controlled: false //TODO: change to stateless in new version
-        };
-    },
-
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("controlled", "stateless"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
 
         return stateless
@@ -237,7 +237,7 @@ var ConditionalFieldset = ReactVanilla.createClass({
             : React.createElement(ConditionalFieldsetStateful, //eslint-disable-line no-use-before-define
             _.defaults({ ref: "ConditionalFieldsetStateful" }, this.props), this.props.children);
     }
-});
+}
 
 ConditionalFieldset.Types = Types;
 

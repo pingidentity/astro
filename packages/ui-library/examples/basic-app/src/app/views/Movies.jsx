@@ -1,14 +1,13 @@
 var React = require("react");
 
-var Movies = React.createClass({
-
-    render: function () {
+class Movies extends React.Component {
+    render () {
         return (
             <div>
                 Movies Placeholder
             </div>
         );
     }
-});
+}
 
 module.exports = Movies;

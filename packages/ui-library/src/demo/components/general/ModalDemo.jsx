@@ -6,35 +6,9 @@ var Modal = require("./../../../components/general/Modal.jsx");
 * @memberof Modal
 * @desc A demo for Modal
 */
-var ModalDemo = React.createClass({
-
-    numDemos: 7,
-
-    _toggle: function (index) {
-        var newState = {};
-
-        newState["expanded" + index] = !this.state["expanded" + index];
-
-        this.setState(newState);
-    },
-
-    _openTooltip: function () {
-        this.setState({ showCancelTooltip: true });
-    },
-
-    _closeTooltip: function () {
-        this.setState({ showCancelTooltip: false });
-    },
-
-    _resetModal: function () {
-
-        console.log("_resetModal");
-
-        this._closeTooltip();
-        this._toggle(6);
-    },
-
-    getInitialState: function () {
+class ModalDemo extends React.Component {
+    constructor(props) {
+        super(props);
         var initState = {};
 
         for (var i=1; i<=this.numDemos; i+=1) {
@@ -43,16 +17,42 @@ var ModalDemo = React.createClass({
 
         initState["showCloseTooltip"] = false;
 
-        return initState;
-    },
+        this.state = initState;
+    }
 
-    componentDidMount: function () {
+    numDemos = 7;
+
+    _toggle = (index) => {
+        var newState = {};
+
+        newState["expanded" + index] = !this.state["expanded" + index];
+
+        this.setState(newState);
+    };
+
+    _openTooltip = () => {
+        this.setState({ showCancelTooltip: true });
+    };
+
+    _closeTooltip = () => {
+        this.setState({ showCancelTooltip: false });
+    };
+
+    _resetModal = () => {
+
+        console.log("_resetModal");
+
+        this._closeTooltip();
+        this._toggle(6);
+    };
+
+    componentDidMount() {
         for (var i=1; i<=this.numDemos; i+=1) {
             this["_toggle" + i] = this._toggle.bind(null, i);
         }
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <div>
                 <div className="input-row">
@@ -209,6 +209,6 @@ var ModalDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = ModalDemo;

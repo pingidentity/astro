@@ -6,7 +6,7 @@ jest.dontMock("../../rows/expandable-row/ExpandableRow.jsx");
 describe("Pagination", function () {
 
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         Pagination = require("../Pagination.jsx"),
         ExpandableRow = require("../../rows/expandable-row/ExpandableRow.jsx"),

@@ -1,1 +1,1 @@
-module.exports = require("./context-close-button").v1;
+module.exports = require("./context-close-button").v2;

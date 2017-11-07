@@ -1,7 +1,7 @@
 window.__DEV__ = true;
 
 var ReactDOM = require("react-dom"),
-    ReactTestUtils = require("react-addons-test-utils"),
+    ReactTestUtils = require("react-dom/test-utils"),
     TestUtils = require("../../../../testutil/TestUtils"),
     //mocks
     exif = require("exif-js"),

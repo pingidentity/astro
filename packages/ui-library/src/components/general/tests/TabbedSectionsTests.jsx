@@ -5,7 +5,7 @@ jest.dontMock("../TabbedSections.jsx");
 describe("If component", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         Wrapper = TestUtils.UpdatePropsWrapper,
         TabbedSections = require("../TabbedSections.jsx"),

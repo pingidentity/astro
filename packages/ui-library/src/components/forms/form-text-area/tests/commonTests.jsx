@@ -1,5 +1,5 @@
 module.exports = function (getComponent) {
-    var ReactTestUtils = require("react-addons-test-utils"),
+    var ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
         HelpHint = require("../../../tooltips/HelpHint.jsx");
 

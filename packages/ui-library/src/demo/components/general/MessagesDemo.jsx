@@ -7,32 +7,32 @@ var React = require("react"),
 * @memberof Messages
 * @desc A demo for Messages
 */
-var MessagesDemo = React.createClass({
-    _addSuccessMessage: function () {
+class MessagesDemo extends React.Component {
+    _addSuccessMessage = () => {
         this.actions.addMessage("New Success Message Added at " + (new Date()).toString(),
                                 Messages.MessageTypes.SUCCESS);
-    },
+    };
 
-    _addErrorMessage: function () {
+    _addErrorMessage = () => {
         this.actions.addMessage("New Error Message Added at " + (new Date()).toString(),
                                 Messages.MessageTypes.WARNING);
-    },
+    };
 
-    _addWarningMessage: function () {
+    _addWarningMessage = () => {
         this.actions.addMessage("New Warning Message Added at " + (new Date()).toString(),
                                 Messages.MessageTypes.NOTICE);
-    },
+    };
 
-    _addInfoMessage: function () {
+    _addInfoMessage = () => {
         this.actions.addMessage("New Info Message Added at " + (new Date()).toString(),
                                 Messages.MessageTypes.FEATURE);
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         this.actions = Redux.bindActionCreators(Messages.Actions, this.props.store.dispatch);
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <div>
                 <p>For messages that will appear in full width pages like Login or Change Password pages, add
@@ -50,7 +50,7 @@ var MessagesDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 /*
  * Expose the Reducer.  Doing so will tell the DemoApp to create an isolated store for the Demo to use.  Normally

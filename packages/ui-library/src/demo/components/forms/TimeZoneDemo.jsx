@@ -7,40 +7,9 @@ var React = require("react"),
 * @memberof FormTimeZone
 * @desc A demo for FormTimeZone
 */
-var FormTimeZoneDemo = React.createClass({
-
-    _numDemos: 2,
-
-    _handleSearch: function (demoIndex, value, index) {
-        var newState = {};
-        newState["searchString" + demoIndex] = value;
-        newState["selectedIndex" + demoIndex] = index;
-        this.setState(newState);
-    },
-
-    _handleChange: function (demoIndex, type, value) {
-        var newState = {};
-
-        if (type === "country") {
-            newState["filterByCountry" + demoIndex] = value;
-            newState["searchString" + demoIndex] = "";
-
-        } else if (type === "zone") {
-            newState["value" + demoIndex] = value;
-            newState["filterByCountry" + demoIndex] = undefined;
-            newState["open" + demoIndex] = false;
-        }
-
-        this.setState(newState);
-    },
-
-    _handleToggle: function (demoIndex) {
-        var newState = {};
-        newState["open" + demoIndex] = !this.state["open" + demoIndex];
-        this.setState(newState);
-    },
-
-    getInitialState: function () {
+class FormTimeZoneDemo extends React.Component {
+    constructor(props) {
+        super(props);
         var state = {};
         for (var i = 0; i < this._numDemos; i += 1) {
             state["open" + i] = false;
@@ -54,18 +23,49 @@ var FormTimeZoneDemo = React.createClass({
             name: "America/Denver",
             abbr: "MDT"
         };
-        return state;
-    },
+        this.state = state;
+    }
 
-    componentDidMount: function () {
+    _numDemos = 2;
+
+    _handleSearch = (demoIndex, value, index) => {
+        var newState = {};
+        newState["searchString" + demoIndex] = value;
+        newState["selectedIndex" + demoIndex] = index;
+        this.setState(newState);
+    };
+
+    _handleChange = (demoIndex, type, value) => {
+        var newState = {};
+
+        if (type === "country") {
+            newState["filterByCountry" + demoIndex] = value;
+            newState["searchString" + demoIndex] = "";
+
+        } else if (type === "zone") {
+            newState["value" + demoIndex] = value;
+            newState["filterByCountry" + demoIndex] = undefined;
+            newState["open" + demoIndex] = false;
+        }
+
+        this.setState(newState);
+    };
+
+    _handleToggle = (demoIndex) => {
+        var newState = {};
+        newState["open" + demoIndex] = !this.state["open" + demoIndex];
+        this.setState(newState);
+    };
+
+    componentDidMount() {
         for (var i = 0; i < this._numDemos; i += 1) {
             this["_handleSearch" + i] = this._handleSearch.bind(null, i);
             this["_handleChange" + i] = this._handleChange.bind(null, i);
             this["_handleToggle" + i] = this._handleToggle.bind(null, i);
         }
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <div>
                 <div className="input-row">
@@ -117,6 +117,6 @@ var FormTimeZoneDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = FormTimeZoneDemo;

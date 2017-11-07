@@ -6,35 +6,32 @@ var React = require("react"),
 * @memberof FormCheckboxList
 * @desc A demo for FormCheckboxList
 */
-var FormCheckboxListDemo = React.createClass({
+class FormCheckboxListDemo extends React.Component {
+    state = {
+        hideUnchecked: false,
+        queryString: "",
+        selectedIds: [1, 3]
+    };
 
-    getInitialState: function () {
-        return {
-            hideUnchecked: false,
-            queryString: "",
-            selectedIds: [1, 3]
-        };
-    },
-
-    _handleValueChange: function (selectedIds) {
+    _handleValueChange = (selectedIds) => {
         this.setState({
             selectedIds: selectedIds
         });
-    },
+    };
 
-    _handleQueryChange: function (queryString) {
+    _handleQueryChange = (queryString) => {
         this.setState({
             queryString: queryString
         });
-    },
+    };
 
-    _handleVisibilityChange: function (hideUnchecked) {
+    _handleVisibilityChange = (hideUnchecked) => {
         this.setState({
             hideUnchecked: !hideUnchecked
         });
-    },
+    };
 
-    render: function () {
+    render() {
         var checkboxItems = [
             { name: "Checkbox 4", id: 4, group: "Group B" },
             { name: "Checkbox 1", id: 1, group: "Group A" },
@@ -65,8 +62,7 @@ var FormCheckboxListDemo = React.createClass({
                 </div>
         );
     }
-
-});
+}
 
 
 module.exports = FormCheckboxListDemo;

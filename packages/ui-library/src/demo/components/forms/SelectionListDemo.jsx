@@ -5,20 +5,13 @@ var React = require("react"),
     SelectionFilterLabel = require("../../../components/forms/SelectionFilterLabel.jsx"),
     DetailsTooltip = require("../../../components/tooltips/DetailsTooltip.jsx");
 
+
 var testIcon = <span className="icon-cog inline-icon"></span>;
 var testImage = <img src="./favicon.png" />;
 
-/**
-* @name SelectionListDemo
-* @memberof SelectionList
-* @desc A demo for SelectionList
-*/
-var SelectionListDemo = React.createClass({
-
-    numSingleSelectDemos: 3,
-    numMultiSelectDemos: 4,
-
-    _singleSelectItems: [
+var NUM_SINGLE_SELECT_DEMOS = 3,
+    NUM_MULTI_SELECT_DEMOS = 4,
+    SINGLE_SELECT_ITEMS = [
         { name: "Hockey", id: 1 },
         { name: "Soccer", id: 2,
           helpHintText: "Selection List items may have Help Hints" },
@@ -36,7 +29,7 @@ var SelectionListDemo = React.createClass({
         { name: "Cross-country Mountain Biking", id: 10 }
     ],
 
-    _multiSelectItems: [
+    MULTI_SELECT_ITEMS = [
         { name: "Apple", id: 1 },
         { name: "Orange", id: 2 },
         { name: "Banana", id: 3,
@@ -53,74 +46,78 @@ var SelectionListDemo = React.createClass({
         { name: "Kiwi", id: 9 }
     ],
 
-    _labels: {
+    LABELS = {
         labelSelectAll: "Select All",
         labelUnselectAll: "Unselect All",
         labelOnlySelected: "Show Only Selected",
         labelShowAll: "Show All"
-    },
+    };
 
-    _onSingleSelectChange: function (index, selectedItemId) {
+/**
+* @name SelectionListDemo
+* @memberof SelectionList
+* @desc A demo for SelectionList
+*/
+class SelectionListDemo extends React.Component {
+    state = {
+        singleSelectId1: 1,
+        singleSelectId2: 3,
+        singleSelectId3: 2,
+
+        multiSelectIds1: [1, 2],
+        multiSelectIds2: [1, 2, 5],
+        multiSelectIds3: [1, 7],
+        multiSelectIds4: [1, 3],
+
+        required: false
+    };
+
+    _onSingleSelectChange = (index, selectedItemId) => {
         var newState = {};
         newState["singleSelectId" + index] = selectedItemId;
         this.setState(newState);
-    },
+    };
 
-    _onMultiSelectChange: function (index, selectedItemIds) {
+    _onMultiSelectChange = (index, selectedItemIds) => {
         var newState = {};
         newState["multiSelectIds" + index] = selectedItemIds;
         this.setState(newState);
-    },
+    };
 
-    _onMultiSelectAll: function (index) {
+    _onMultiSelectAll = (index) => {
         var newState = {};
-        newState["multiSelectIds" + index] = this._multiSelectItems.map(function (item) {
+        newState["multiSelectIds" + index] = MULTI_SELECT_ITEMS.map(function (item) {
             return item.id;
         });
         this.setState(newState);
-    },
+    };
 
-    _myCustomSearch: function (queryString) {
-        var matchedItems = _.filter(this._multiSelectItems, function (item) {
+    _myCustomSearch = (queryString) => {
+        var matchedItems = _.filter(MULTI_SELECT_ITEMS, function (item) {
             return _s.endsWith(item.name.toLowerCase(), queryString.toLowerCase());
         });
         return matchedItems;
-    },
+    };
 
-    _toggleRequired: function () {
+    _toggleRequired = () => {
         this.setState({
             required: !this.state.required
         });
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         var i;
 
-        for (i=1; i<=this.numSingleSelectDemos; i+=1) {
+        for (i=1; i<=NUM_SINGLE_SELECT_DEMOS; i+=1) {
             this["_onSingleSelectChange" + i] = this._onSingleSelectChange.bind(null, i);
         }
-        for (i=1; i<=this.numMultiSelectDemos; i+=1) {
+        for (i=1; i<=NUM_MULTI_SELECT_DEMOS; i+=1) {
             this["_onMultiSelectChange" + i] = this._onMultiSelectChange.bind(null, i);
             this["_onMultiSelectAll" + i] = this._onMultiSelectAll.bind(null, i);
         }
-    },
+    }
 
-    getInitialState: function () {
-        return {
-            singleSelectId1: 1,
-            singleSelectId2: 3,
-            singleSelectId3: 2,
-
-            multiSelectIds1: [1, 2],
-            multiSelectIds2: [1, 2, 5],
-            multiSelectIds3: [1, 7],
-            multiSelectIds4: [1, 3],
-
-            required: false
-        };
-    },
-
-    render: function () {
+    render() {
         return (
             <div>
                 <h2>
@@ -143,7 +140,7 @@ var SelectionListDemo = React.createClass({
                 <SelectionList
                     stateless={false}
                     type={SelectionList.ListType.SINGLE}
-                    items={this._singleSelectItems}
+                    items={SINGLE_SELECT_ITEMS}
                     selectedItemIds={this.state.singleSelectId2}
                     showSearchBox={true}
                     searchPlaceholder="Search..."
@@ -162,7 +159,7 @@ var SelectionListDemo = React.createClass({
                 <SelectionList
                     stateless={false}
                     type={SelectionList.ListType.SINGLE}
-                    items={this._singleSelectItems}
+                    items={SINGLE_SELECT_ITEMS}
                     selectedItemIds={this.state.singleSelectId3}
                     showSearchBox={false}
                     searchPlaceholder="Search..."
@@ -188,7 +185,7 @@ var SelectionListDemo = React.createClass({
                     <SelectionList
                         stateless={false}
                         type={SelectionList.ListType.SINGLE}
-                        items={this._singleSelectItems}
+                        items={SINGLE_SELECT_ITEMS}
                         selectedItemIds={this.state.singleSelectId1}
                         showSearchBox={true}
                         searchPlaceholder="Search..."
@@ -213,7 +210,7 @@ var SelectionListDemo = React.createClass({
                 <SelectionList
                     stateless={false}
                     type={SelectionList.ListType.MULTI}
-                    items={this._multiSelectItems}
+                    items={MULTI_SELECT_ITEMS}
                     selectedItemIds={this.state.multiSelectIds3}
                     onValueChange={this._onMultiSelectChange3}
                     onSelectAll={this._onMultiSelectAll3}
@@ -229,7 +226,7 @@ var SelectionListDemo = React.createClass({
                 </div>
                 <SelectionList
                     type={SelectionList.ListType.MULTI}
-                    items={this._multiSelectItems}
+                    items={MULTI_SELECT_ITEMS}
                     selectedItemIds={this.state.multiSelectIds2}
                     showSearchBox={true}
                     searchPlaceholder={"Search..."}
@@ -237,7 +234,7 @@ var SelectionListDemo = React.createClass({
                     showSelectionOptions={true}
                     onValueChange={this._onMultiSelectChange2}
                     onSelectAll={this._onMultiSelectAll2}
-                    {...this._labels}
+                    {...LABELS}
                 />
 
                 <hr />
@@ -259,14 +256,14 @@ var SelectionListDemo = React.createClass({
                     <SelectionList
                         stateless={false}
                         type={SelectionList.ListType.MULTI}
-                        items={this._multiSelectItems}
+                        items={MULTI_SELECT_ITEMS}
                         selectedItemIds={this.state.multiSelectIds1}
                         showSearchBox={true}
                         searchPlaceholder={"Search..."}
                         showSelectionOptions={true}
                         onValueChange={this._onMultiSelectChange1}
                         onSelectAll={this._onMultiSelectAll1}
-                        {...this._labels}
+                        {...LABELS}
                     />
                 </DetailsTooltip>
 
@@ -292,14 +289,14 @@ var SelectionListDemo = React.createClass({
                     <SelectionList
                         stateless={false}
                         type={SelectionList.ListType.MULTI}
-                        items={this._multiSelectItems}
+                        items={MULTI_SELECT_ITEMS}
                         selectedItemIds={this.state.multiSelectIds4}
                         showSearchBox={true}
                         searchPlaceholder={"Search..."}
                         showSelectionOptions={true}
                         onValueChange={this._onMultiSelectChange4}
                         onSelectAll={this._onMultiSelectAll4}
-                        {...this._labels}
+                        {...LABELS}
                     />
                 </DetailsTooltip>
 
@@ -311,7 +308,7 @@ var SelectionListDemo = React.createClass({
                 <SelectionList
                     stateless={false}
                     type={SelectionList.ListType.VIEWONLY}
-                    items={this._singleSelectItems}
+                    items={SINGLE_SELECT_ITEMS}
                     selectedItemIds={this.state.singleSelectId1}
                     showSearchBox={true}
                     searchPlaceholder="Search..."
@@ -336,6 +333,6 @@ var SelectionListDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = SelectionListDemo;

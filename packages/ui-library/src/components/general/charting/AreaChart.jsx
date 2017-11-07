@@ -1,4 +1,5 @@
-var React = require("re-react");
+var PropTypes = require("prop-types");
+var React = require("react");
 var AreaChart = require("recharts").AreaChart;
 var XAxis = require("recharts").XAxis;
 var YAxis = require("recharts").YAxis;
@@ -110,81 +111,79 @@ var LegendTypes = require("../../../constants/ChartingConstants.js").LegendTypes
 *    The density of ticks on the y-axis (only applicable when the y-axis is of type AreaChart.AxisTypes.NUMBER).
 *
 */
-var Chart = React.createClass({
-    displayName: "AreaChart",
+class Chart extends React.Component {
+    static displayName = "AreaChart";
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        layout: React.PropTypes.oneOf([ Layouts.HORIZONTAL, Layouts.VERTICAL ]).affectsRendering,
-        width: React.PropTypes.number.affectsRendering,
-        height: React.PropTypes.number.affectsRendering,
-        margin: React.PropTypes.object.affectsRendering,
-        showTooltips: React.PropTypes.bool,
-        showLegend: React.PropTypes.bool,
+    static propTypes = {
+        "data-id": PropTypes.string,
+        layout: PropTypes.oneOf([ Layouts.HORIZONTAL, Layouts.VERTICAL ]),
+        width: PropTypes.number,
+        height: PropTypes.number,
+        margin: PropTypes.object,
+        showTooltips: PropTypes.bool,
+        showLegend: PropTypes.bool,
 
-        data: React.PropTypes.arrayOf(React.PropTypes.shape({
-            id: React.PropTypes.oneOfType([ React.PropTypes.string, React.PropTypes.number ]).isRequired
-        })).isRequired.affectsRendering,
+        data: PropTypes.arrayOf(PropTypes.shape({
+            id: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]).isRequired
+        })).isRequired,
 
-        series: React.PropTypes.arrayOf(React.PropTypes.shape({
-            id: React.PropTypes.oneOfType([ React.PropTypes.string, React.PropTypes.number]).isRequired,
-            label: React.PropTypes.string,
-            lineType: React.PropTypes.oneOf([ LineTypes.BASIS, LineTypes.BASIS_CLOSED, LineTypes.BASIS_OPEN,
+        series: PropTypes.arrayOf(PropTypes.shape({
+            id: PropTypes.oneOfType([ PropTypes.string, PropTypes.number]).isRequired,
+            label: PropTypes.string,
+            lineType: PropTypes.oneOf([ LineTypes.BASIS, LineTypes.BASIS_CLOSED, LineTypes.BASIS_OPEN,
                 LineTypes.LINEAR, LineTypes.LINEAR_CLOSED, LineTypes.NATURAL, LineTypes.MONOTONE_X,
                 LineTypes.MONOTONE_Y, LineTypes.MONOTONE, LineTypes.STEP, LineTypes.STEP_BEFORE, LineTypes.STEP_AFTER,
-                React.PropTypes.func
+                PropTypes.func
             ]),
-            legendType: React.PropTypes.oneOf([ LegendTypes.LINE, LegendTypes.SQUARE, LegendTypes.RECTANGLE,
+            legendType: PropTypes.oneOf([ LegendTypes.LINE, LegendTypes.SQUARE, LegendTypes.RECTANGLE,
                 LegendTypes.CIRCLE, LegendTypes.CROSS, LegendTypes.DIAMOND, LegendTypes.STAR,
                 LegendTypes.TRIANGLE, LegendTypes.WYE, LegendTypes.NONE
             ]),
-            dots: React.PropTypes.bool,
-            color: React.PropTypes.string,
-            connectNulls: React.PropTypes.bool,
-            animate: React.PropTypes.bool
-        })).isRequired.affectsRendering,
+            dots: PropTypes.bool,
+            color: PropTypes.string,
+            connectNulls: PropTypes.bool,
+            animate: PropTypes.bool
+        })).isRequired,
 
-        hideX: React.PropTypes.bool.affectsRendering,
-        xDataKey: React.PropTypes.string.affectsRendering,
-        xAxisType: React.PropTypes.oneOf([ AxisTypes.NUMBER, AxisTypes.STRING ]).affectsRendering,
-        xLabel: React.PropTypes.string.affectsRendering,
-        xMin: React.PropTypes.number.affectsRendering,
-        xMax: React.PropTypes.number.affectsRendering,
-        xOrientation: React.PropTypes.oneOf([ AxisOrientations.TOP, AxisOrientations.BOTTOM ]).affectsRendering,
-        xTickDensity: React.PropTypes.number.affectsRendering,
+        hideX: PropTypes.bool,
+        xDataKey: PropTypes.string,
+        xAxisType: PropTypes.oneOf([ AxisTypes.NUMBER, AxisTypes.STRING ]),
+        xLabel: PropTypes.string,
+        xMin: PropTypes.number,
+        xMax: PropTypes.number,
+        xOrientation: PropTypes.oneOf([ AxisOrientations.TOP, AxisOrientations.BOTTOM ]),
+        xTickDensity: PropTypes.number,
 
-        hideY: React.PropTypes.bool.affectsRendering,
-        yDataKey: React.PropTypes.string.affectsRendering,
-        yAxisType: React.PropTypes.oneOf([ AxisTypes.NUMBER, AxisTypes.STRING ]).affectsRendering,
-        yLabel: React.PropTypes.string.affectsRendering,
-        yMin: React.PropTypes.number.affectsRendering,
-        yMax: React.PropTypes.number.affectsRendering,
-        yOrientation: React.PropTypes.oneOf([ AxisOrientations.LEFT, AxisOrientations.RIGHT ]).affectsRendering,
-        yTickDensity: React.PropTypes.number.affectsRendering,
-    },
+        hideY: PropTypes.bool,
+        yDataKey: PropTypes.string,
+        yAxisType: PropTypes.oneOf([ AxisTypes.NUMBER, AxisTypes.STRING ]),
+        yLabel: PropTypes.string,
+        yMin: PropTypes.number,
+        yMax: PropTypes.number,
+        yOrientation: PropTypes.oneOf([ AxisOrientations.LEFT, AxisOrientations.RIGHT ]),
+        yTickDensity: PropTypes.number,
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "area-chart",
-            layout: Layouts.HORIZONTAL,
-            showTooltips: true,
-            showLegend: true,
-            hideX: false,
-            xAxisType: AxisTypes.STRING,
-            xTickDensity: 5,
-            xOrientation: AxisOrientations.BOTTOM,
-            hideY: false,
-            yAxisType: AxisTypes.NUMBER,
-            yTickDensity: 5,
-            yOrientation: AxisOrientations.LEFT,
-            // TODO: Confirm with designers what would be appropriate defaults
-            width: 550,
-            height: 350,
-            margin: { top: 20, right: 20, bottom: 20, left: 20 }
-        };
-    },
+    static defaultProps = {
+        "data-id": "area-chart",
+        layout: Layouts.HORIZONTAL,
+        showTooltips: true,
+        showLegend: true,
+        hideX: false,
+        xAxisType: AxisTypes.STRING,
+        xTickDensity: 5,
+        xOrientation: AxisOrientations.BOTTOM,
+        hideY: false,
+        yAxisType: AxisTypes.NUMBER,
+        yTickDensity: 5,
+        yOrientation: AxisOrientations.LEFT,
+        // TODO: Confirm with designers what would be appropriate defaults
+        width: 550,
+        height: 350,
+        margin: { top: 20, right: 20, bottom: 20, left: 20 }
+    };
 
-    _renderAreas: function () {
+    _renderAreas = () => {
         return this.props.series.map(function (item) {
             return (
                 <Area key={"area-" + item.id} dataKey={item.id} name={item.label || item.id}
@@ -197,25 +196,25 @@ var Chart = React.createClass({
                         isAnimationActive={item.animate || false} />
             );
         }.bind(this));
-    },
+    };
 
-    _renderXAxis: function () {
+    _renderXAxis = () => {
         return (
             <XAxis dataKey={this.props.xDataKey} type={this.props.xAxisType} hide={this.props.hideX}
                     domain={[(this.props.xMin || "auto"), (this.props.xMax || "auto")]} label={this.props.xLabel}
                     tickCount={this.props.xTickDensity} orientation={this.props.xOrientation} />
         );
-    },
+    };
 
-    _renderYAxis: function () {
+    _renderYAxis = () => {
         return (
             <YAxis dataKey={this.props.yDataKey} type={this.props.yAxisType} hide={this.props.hideY}
                     domain={[(this.props.yMin || "auto"), (this.props.yMax || "auto")]} label={this.props.yLabel}
                     tickCount={this.props.yTickDensity} orientation={this.props.yOrientation} />
         );
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <div data-id={this.props["data-id"]}>
                 <AreaChart layout={this.props.layout}
@@ -233,6 +232,6 @@ var Chart = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = Chart;

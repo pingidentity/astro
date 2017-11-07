@@ -6,21 +6,18 @@ var React = require("react"),
 * @memberof Spinner
 * @desc A demo for Spinner
 */
-var SpinnerDemo = React.createClass({
+class SpinnerDemo extends React.Component {
+    state = {
+        showSpinner: true
+    };
 
-    getInitialState: function () {
-        return {
-            showSpinner: true
-        };
-    },
-
-    _toggleSpinner: function () {
+    _toggleSpinner = () => {
         this.setState({
             showSpinner: !this.state.showSpinner
         });
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <div>
                 <p>
@@ -38,8 +35,7 @@ var SpinnerDemo = React.createClass({
             </div>
         );
     }
-
-});
+}
 
 
 module.exports = SpinnerDemo;

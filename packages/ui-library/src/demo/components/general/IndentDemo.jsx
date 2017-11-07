@@ -7,21 +7,18 @@ var Link = require("./../../../components/general/Link.jsx");
 * @memberof Indent
 * @desc A demo for Indent
 */
-var IndentDemo = React.createClass({
+class IndentDemo extends React.Component {
+    state = {
+        selectedLabel: "No link clicked"
+    };
 
-    _handleOnClick: function () {
+    _handleOnClick = () => {
         this.setState({
             selectedLabel: "Link clicked"
         });
-    },
+    };
 
-    getInitialState: function () {
-        return {
-            selectedLabel: "No link clicked"
-        };
-    },
-
-    render: function () {
+    render() {
         return (
             <div>
                 <strong>
@@ -150,6 +147,6 @@ var IndentDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = IndentDemo;

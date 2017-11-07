@@ -4,7 +4,7 @@ jest.dontMock("../Spinner.jsx");
 
 describe("Spinner", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         Spinner = require("../Spinner.jsx"),
         _ = require("underscore"),

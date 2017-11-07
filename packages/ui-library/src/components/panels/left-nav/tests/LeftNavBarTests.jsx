@@ -7,7 +7,7 @@ jest.dontMock("../../../../util/Utils");
 describe("LeftNavBar", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         ReduxTestUtils = require("../../../../util/ReduxTestUtils"),
         TestUtils = require("../../../../testutil/TestUtils"),
         LeftNavBar = require("../LeftNavBar.jsx"),
@@ -312,8 +312,7 @@ describe("LeftNavBar", function () {
         ReactTestUtils.Simulate.click(label);
         expect(component.props.onSectionValueChange).lastCalledWith(id);
 
-        // when an icon is specified react injects extra DOM that needed to be accounted for in the onClick (data-id)
-        ReactTestUtils.Simulate.click(label.childNodes[1]);
+        ReactTestUtils.Simulate.click(label.childNodes[0]);
         expect(component.props.onSectionValueChange).lastCalledWith(id);
 
         var menu = TestUtils.findRenderedDOMNodeWithDataId(component, id + "-menu");

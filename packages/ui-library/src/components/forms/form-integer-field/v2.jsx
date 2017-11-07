@@ -1,7 +1,8 @@
 "use strict";
 
-var React = require("re-react"),
-    ReactVanilla = require("react"),
+var PropTypes = require("prop-types");
+
+var React = require("react"),
     FormTextField = require("../form-text-field").v2,
     classnames = require("classnames"),
     Utils = require("../../../util/Utils.js"),
@@ -129,56 +130,90 @@ var isValid = function (value, enforceRange, min, max) {
  */
 
 
-var Stateless = React.createClass({
+class Stateless extends React.Component {
+    static displayName = "FormIntegerFieldStateless";
 
-    displayName: "FormIntegerFieldStateless",
+    static propTypes = {
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        className: React.PropTypes.string.affectsRendering,
+        required: PropTypes.bool,
+        disabled: PropTypes.bool,
+        readOnly: PropTypes.bool,
+        hideControls: PropTypes.bool,
 
-        required: React.PropTypes.bool.affectsRendering,
-        disabled: React.PropTypes.bool.affectsRendering,
-        readOnly: React.PropTypes.bool.affectsRendering,
-        hideControls: React.PropTypes.bool.affectsRendering,
+        labelHelpText: PropTypes.string,
+        labelText: PropTypes.string,
 
-        labelHelpText: React.PropTypes.string.affectsRendering,
-        labelText: React.PropTypes.string.affectsRendering,
+        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
-        value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).affectsRendering,
+        onValueChange: PropTypes.func,
+        onBlur: PropTypes.func,
+        onFocus: PropTypes.func,
 
-        onValueChange: React.PropTypes.func,
-        onBlur: React.PropTypes.func,
-        onFocus: React.PropTypes.func,
+        placeholder: PropTypes.string,
+        inputClassName: PropTypes.string,
+        maxLength: PropTypes.number,
 
-        placeholder: React.PropTypes.string.affectsRendering,
-        inputClassName: React.PropTypes.string.affectsRendering,
-        maxLength: React.PropTypes.number.affectsRendering,
+        maskValue: PropTypes.bool,
+        reveal: PropTypes.bool,
+        showReveal: PropTypes.bool,
+        onToggleReveal: PropTypes.func,
 
-        maskValue: React.PropTypes.bool.affectsRendering,
-        reveal: React.PropTypes.bool.affectsRendering,
-        showReveal: React.PropTypes.bool.affectsRendering,
-        onToggleReveal: React.PropTypes.func,
+        showSave: PropTypes.bool,
+        onSave: PropTypes.func,
 
-        showSave: React.PropTypes.bool.affectsRendering,
-        onSave: React.PropTypes.func,
+        showUndo: PropTypes.bool,
+        onUndo: PropTypes.func,
 
-        showUndo: React.PropTypes.bool.affectsRendering,
-        onUndo: React.PropTypes.func,
+        errorMessage: PropTypes.string,
+        errorClassName: PropTypes.string,
 
-        errorMessage: React.PropTypes.string.affectsRendering,
-        errorClassName: React.PropTypes.string.affectsRendering,
+        autoFocus: PropTypes.bool,
+        autoComplete: PropTypes.bool,
 
-        autoFocus: React.PropTypes.bool.affectsRendering,
-        autoComplete: React.PropTypes.bool.affectsRendering,
+        increment: PropTypes.number,
+        max: PropTypes.number,
+        min: PropTypes.number,
+        enforceRange: PropTypes.bool,
 
-        increment: React.PropTypes.number.affectsRendering,
-        max: React.PropTypes.number.affectsRendering,
-        min: React.PropTypes.number.affectsRendering,
-        enforceRange: React.PropTypes.bool.affectsRendering,
+        tabIndex: PropTypes.number
+    };
 
-        tabIndex: React.PropTypes.number.affectsRendering
-    },
+    static defaultProps = {
+        "data-id": "form-integer-field",
+        required: false,
+        disabled: false,
+        readOnly: false,
+        hideControls: false,
+
+        value: "",
+
+        onValueChange: _.noop,
+        onBlur: _.noop,
+        onFocus: _.noop,
+
+        maxLength: 16,
+
+        maskValue: false,
+        reveal: false,
+        showReveal: false,
+        onToggleReveal: _.noop,
+        showSave: false,
+        onSave: _.noop,
+        showUndo: false,
+        onUndo: _.noop,
+
+        autoComplete: false,
+        autoFocus: false,
+
+        max: 999999999999999,
+        min: 0,
+        increment: 1,
+        enforceRange: true,
+
+        tabIndex: -1
+    };
 
     /**
      * @desc Handles down press of the spinner arrows.
@@ -187,7 +222,7 @@ var Stateless = React.createClass({
      * @private
      * @ignore
      */
-    _handleSpinnerPress: function (e) {
+    _handleSpinnerPress = (e) => {
         var inc = this.props.increment;
 
         //set negative increment for down spinner
@@ -198,7 +233,7 @@ var Stateless = React.createClass({
 
         //set timeout for rapid addition or subtraction when held
         this.timeout = setTimeout(this._interval.bind(this, inc), 700);
-    },
+    };
 
     /**
      * @desc Handles release of the spinner arrows. Clears timeout and interval.
@@ -207,10 +242,10 @@ var Stateless = React.createClass({
      * @private
      * @ignore
      */
-    _handleSpinnerRelease: function () {
+    _handleSpinnerRelease = () => {
         clearTimeout(this.timeout);
         clearInterval(this.interval);
-    },
+    };
 
     /**
      * @desc Handle interval for rapid counting when spinner or arrow pressed
@@ -219,10 +254,10 @@ var Stateless = React.createClass({
      * @private
      * @ignore
      */
-    _interval: function (inc) {
+    _interval = (inc) => {
         clearInterval(this.interval);
         this.interval = setInterval(this._counter.bind(this, inc), 50);
-    },
+    };
 
     /**
      * @desc Preforms internal count operation for rapid counting without sending to parent.
@@ -232,7 +267,7 @@ var Stateless = React.createClass({
      * @private
      * @ignore
      */
-    _counter: function (inc) {
+    _counter = (inc) => {
         var value = this.props.value;
         var newValue = isNaN(parseInt(value)) ? this.props.min : parseInt(value) + inc;
 
@@ -245,7 +280,7 @@ var Stateless = React.createClass({
         }
 
         this.props.onValueChange(newValue);
-    },
+    };
 
     /**
      * @desc Handles key down on the field to increment with up and down arrows.
@@ -254,7 +289,7 @@ var Stateless = React.createClass({
      * @private
      * @ignore
      */
-    _handleKeyDown: function (e) {
+    _handleKeyDown = (e) => {
         var key = e.keyCode;
 
         if (this.props.readOnly) {
@@ -273,46 +308,9 @@ var Stateless = React.createClass({
         var newValue = intValue + (key === 38 ? 1 : -1) * this.props.increment;
 
         this.props.onValueChange(newValue);
-    },
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "form-integer-field",
-            required: false,
-            disabled: false,
-            readOnly: false,
-            hideControls: false,
-
-            value: "",
-
-            onValueChange: _.noop,
-            onBlur: _.noop,
-            onFocus: _.noop,
-
-            maxLength: 16,
-
-            maskValue: false,
-            reveal: false,
-            showReveal: false,
-            onToggleReveal: _.noop,
-            showSave: false,
-            onSave: _.noop,
-            showUndo: false,
-            onUndo: _.noop,
-
-            autoComplete: false,
-            autoFocus: false,
-
-            max: 999999999999999,
-            min: 0,
-            increment: 1,
-            enforceRange: true,
-
-            tabIndex: -1
-        };
-    },
-
-    render: function () {
+    render() {
         var integerControls;
 
         if (!this.props.disabled && !this.props.readOnly && !this.props.hideControls) {
@@ -351,36 +349,30 @@ var Stateless = React.createClass({
             </div>
         );
     }
+}
 
-});
+class Stateful extends React.Component {
+    static displayName = "FormIntegerFieldStateful";
 
-var Stateful = ReactVanilla.createClass({
+    static propTypes = {
+        initialValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        max: PropTypes.number,
+        min: PropTypes.number,
+        enforceRange: PropTypes.bool,
+        outOfRangeErrorMessage: PropTypes.string,
+    };
 
-    displayName: "FormIntegerFieldStateful",
+    static defaultProps = {
+        initialValue: "",
+        max: 999999999999999,
+        min: 0,
+        enforceRange: true
+    };
 
-    propTypes: {
-        initialValue: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
-        max: React.PropTypes.number,
-        min: React.PropTypes.number,
-        enforceRange: React.PropTypes.bool,
-        outOfRangeErrorMessage: React.PropTypes.string,
-    },
-
-    getDefaultProps: function () {
-        return {
-            initialValue: "",
-            max: 999999999999999,
-            min: 0,
-            enforceRange: true
-        };
-    },
-
-    getInitialState: function () {
-        return {
-            reveal: false,
-            value: this.props.initialValue
-        };
-    },
+    state = {
+        reveal: false,
+        value: this.props.initialValue
+    };
 
     /**
      * @desc Verify the new value and call the onValueChange callback
@@ -390,7 +382,7 @@ var Stateful = ReactVanilla.createClass({
      * @private
      * @ignore
      */
-    _handleValueChange: function (value) {
+    _handleValueChange = (value) => {
         // Don't restrict "min" when checking typing so that numbers outside range can be inputed
         // e.g. If range is restricted to 3 - 30, we want users to be able to input 2 and 1 for 21
         if (!isValid(value, this.props.enforceRange, null, this.props.max)) {
@@ -409,9 +401,9 @@ var Stateful = ReactVanilla.createClass({
                 this.props.onValueChange(intValue);
             });
         }
-    },
+    };
 
-    _handleBlur: function () {
+    _handleBlur = () => {
         // Check validity of value onBlur to enforce min restriction that's not checked onValueChange above
         if (!isValid(this.state.value, this.props.enforceRange, this.props.min, this.props.max)) {
             // reset the field to the previous valid value
@@ -424,15 +416,15 @@ var Stateful = ReactVanilla.createClass({
         if (this.props.onBlur) {
             this.props.onBlur();
         }
-    },
+    };
 
-    _toggleReveal: function () {
+    _toggleReveal = () => {
         this.setState({
             reveal: !this.state.reveal
         });
-    },
+    };
 
-    _handleUndo: function () {
+    _handleUndo = () => {
         if (this.props.initialValue) {
             var value = this.props.initialValue;
             this.setState({
@@ -441,9 +433,9 @@ var Stateful = ReactVanilla.createClass({
                 this.props.onValueChange(value);
             });
         }
-    },
+    };
 
-    render: function () {
+    render() {
         var defaultProps = {
             ref: "stateless",
             reveal: this.state.reveal,
@@ -457,34 +449,32 @@ var Stateful = ReactVanilla.createClass({
         var props = _.defaults(defaultProps, this.props);
         return React.createElement(Stateless, props);
     }
-});
+}
 
-var FormIntegerFieldV2 = ReactVanilla.createClass({
-    propTypes: {
-        controlled: React.PropTypes.bool, //TODO: remove in new version
-        stateless: React.PropTypes.bool
-    },
+class FormIntegerFieldV2 extends React.Component {
+    static propTypes = {
+        controlled: PropTypes.bool, //TODO: remove in new version
+        stateless: PropTypes.bool
+    };
 
-    getDefaultProps: function () {
-        return {
-            controlled: true //TODO: change to stateless in new version
-        };
-    },
+    static defaultProps = {
+        controlled: true //TODO: change to stateless in new version
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("controlled", "stateless"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
 
         return (stateless
                 ? React.createElement(Stateless, _.defaults({ ref: "formIntegerFieldStateless" }, this.props))
                 : React.createElement(Stateful, _.defaults({ ref: "formIntegerFieldStateful" }, this.props)));
     }
-});
+}
 
 /**
  * @alias FormIntegerField.isValid

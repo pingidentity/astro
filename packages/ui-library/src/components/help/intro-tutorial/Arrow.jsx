@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react"),
     ReactDOM = require("react-dom"),
     format = require("../../../util/format.js");
@@ -26,38 +27,34 @@ var React = require("react"),
  * @example
  *     <Arrow to={target} />
  */
-var Arrow = React.createClass({
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        arrowGapToTarget: React.PropTypes.number,
-        arrowMinimumCurviture: React.PropTypes.number,
-        arrowOffsetFromEnd: React.PropTypes.number,
-        to: React.PropTypes.object.isRequired,
-        from: React.PropTypes.object
-    },
+class Arrow extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        arrowGapToTarget: PropTypes.number,
+        arrowMinimumCurviture: PropTypes.number,
+        arrowOffsetFromEnd: PropTypes.number,
+        to: PropTypes.object.isRequired,
+        from: PropTypes.object
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "arrow",
-            arrowGapToTarget: 20,
-            arrowMinimumCurviture: 150,
-            arrowOffsetFromEnd: 30,
-            arcAway: 400
-        };
-    },
+    static defaultProps = {
+        "data-id": "arrow",
+        arrowGapToTarget: 20,
+        arrowMinimumCurviture: 150,
+        arrowOffsetFromEnd: 30,
+        arcAway: 400
+    };
 
-    getInitialState: function () {
-        return {
-            command: ""
-        };
-    },
+    state = {
+        command: ""
+    };
 
-    componentDidMount: function () {
+    componentDidMount() {
         ReactDOM.findDOMNode(this.refs.focusPointer).setAttribute("marker-end", "url(#Triangle)");
         this.componentWillReceiveProps(this.props);
-    },
+    }
 
-    componentWillReceiveProps: function (newProps) {
+    componentWillReceiveProps(newProps) {
         if (newProps.to) {
             var targetBounds = newProps.to.getBoundingClientRect();
             var fromBounds = (this.props.from || ReactDOM.findDOMNode(this)).getBoundingClientRect();
@@ -98,10 +95,10 @@ var Arrow = React.createClass({
                 });
             }
         }
-    },
+    }
 
-     /* React isnt passing svg attributes correctly so have to resort to setting the innerHTML instead */
-    render: function () {
+    /* React isnt passing svg attributes correctly so have to resort to setting the innerHTML instead */
+    render() {
         return (
             <svg data-id={this.props["data-id"]}>
                 <defs dangerouslySetInnerHTML={{ __html:
@@ -112,6 +109,6 @@ var Arrow = React.createClass({
                 <path className="line" d={this.state.command} ref="focusPointer" />
             </svg>);
     }
-});
+}
 
 module.exports = Arrow;

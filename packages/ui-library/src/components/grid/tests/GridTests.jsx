@@ -20,10 +20,11 @@ jest.dontMock("../../forms/form-text-field/v1.jsx");
 jest.dontMock("../../forms/form-text-field");
 
 describe("Grid", function () {
-    var React = require("re-react");
-    var ReactTestUtils = require("react-addons-test-utils");
+    var React = require("react");
+    var ReactTestUtils = require("react-dom/test-utils");
     var _ = require("underscore");
     var TestUtils = require("../../../testutil/TestUtils");
+    var ShallowRenderer = require("react-test-renderer/shallow");
     var Grid = require("../Grid.jsx");
     var TextFieldCell = require("../cells/TextFieldCell.jsx");
     var ButtonCell = require("../cells/ButtonCell.jsx");
@@ -255,8 +256,7 @@ describe("Grid", function () {
         ReactTestUtils.Simulate.click(paginationNext);
 
         var pagination = TestUtils.findRenderedDOMNodeWithDataId(component, "pagination");
-        var spans = TestUtils.scryRenderedDOMNodesWithTag(pagination, "span");
-        expect(spans[0].textContent).toBe("2");
+        expect(pagination.textContent).toBe("2 of 2");
 
         var headerRow = TestUtils.findRenderedDOMNodeWithDataId(component, "grid-row-header");
         var ths = TestUtils.scryRenderedDOMNodesWithTag(headerRow, "th");
@@ -372,7 +372,7 @@ describe("Grid", function () {
             </Grid>);
         stateful = component.refs.GridStateful;
         stateless = component.refs.GridStateless;
-        
+
         expect(stateless).toBeTruthy();
         expect(stateful).toBeFalsy();
     });
@@ -404,7 +404,7 @@ describe("Grid", function () {
     });
 
     it("should return null for Column", function () {
-        var shallowRenderer = ReactTestUtils.createRenderer();
+        var shallowRenderer = new ShallowRenderer();
         shallowRenderer.render(<Grid.Column field="firstname" />);
         var output = shallowRenderer.getRenderOutput();
 

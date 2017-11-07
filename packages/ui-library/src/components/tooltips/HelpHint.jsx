@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react");
 var Utils = require("../../util/Utils");
 var ReactTooltip = require("react-tooltip");
@@ -47,35 +48,33 @@ var Placements = {
  *     <HelpHint className="short-tooltip right" hintText="My first HelpHint!">SomeTextWithHelp</HelpHint>
  */
 
-var HelpHint = React.createClass({
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        id: React.PropTypes.string,
-        className: React.PropTypes.string,
-        delayHide: React.PropTypes.number,
-        placement: React.PropTypes.oneOf([
+class HelpHint extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        id: PropTypes.string,
+        className: PropTypes.string,
+        delayHide: PropTypes.number,
+        placement: PropTypes.oneOf([
             Placements.TOP,
             Placements.BOTTOM,
             Placements.LEFT,
             Placements.RIGHT
         ]),
-        hintText: React.PropTypes.any.isRequired
-    },
+        hintText: PropTypes.any.isRequired
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "helpHint",
-            delayHide: 400,
-            className: ""
-        };
-    },
+    static defaultProps = {
+        "data-id": "helpHint",
+        delayHide: 400,
+        className: ""
+    };
 
-    _handleClick: function (e) {
+    _handleClick = (e) => {
         // kill click event to prevent event from triggering label from checking a checkbox/radio
         e.preventDefault();
-    },
+    };
 
-    _getPlacement: function () {
+    _getPlacement = () => {
         var classNames = this.props.className,
             placement = "right";
 
@@ -96,25 +95,25 @@ var HelpHint = React.createClass({
         }
 
         return placement;
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (this.props.id && !Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("id", "data-id"));
         }
-    },
+    }
 
-    componentDidMount: function () {
+    componentDidMount() {
         if (this.props.show || this.props.className.indexOf("show") > -1) {
             this.show();
         }
-    },
+    }
 
-    show: function () {
+    show = () => {
         ReactTooltip.show(this.target);
-    },
+    };
 
-    render: function () {
+    render() {
         var dataId = this.props.id || this.props["data-id"],
             iconName = this.props.lock ? "icon-lock" : "icon-help",
             uid = _.uniqueId("rtt_"),
@@ -148,7 +147,7 @@ var HelpHint = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = HelpHint;
 module.exports.Placements = Placements;

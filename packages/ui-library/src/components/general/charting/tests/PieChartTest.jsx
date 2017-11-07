@@ -4,7 +4,7 @@ jest.dontMock("../PieChart.jsx");
 
 describe("PieChart", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
         _ = require("underscore"),
         PieChart = require("../PieChart.jsx");

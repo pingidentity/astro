@@ -1,7 +1,8 @@
 "use strict";
 
-var React = require("re-react"),
-    ReactVanilla = require("react"),
+var PropTypes = require("prop-types");
+
+var React = require("react"),
     _ = require("underscore"),
     classnames = require("classnames"),
     CountryFlagList = require("../CountryFlagList.jsx"),
@@ -96,26 +97,23 @@ var React = require("re-react"),
 *           phoneNumber={this.state.phoneNumberStateful} />
 */
 
-module.exports = ReactVanilla.createClass({
+module.exports = class extends React.Component {
+    static propTypes = {
+        controlled: PropTypes.bool, //TODO: remove in new version
+        stateless: PropTypes.bool
+    };
 
-    propTypes: {
-        controlled: React.PropTypes.bool, //TODO: remove in new version
-        stateless: React.PropTypes.bool
-    },
+    static defaultProps = {
+        controlled: false //TODO: change to stateless in new version
+    };
 
-    getDefaultProps: function () {
-        return {
-            controlled: false //TODO: change to stateless in new version
-        };
-    },
-
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("controlled", "stateless"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
 
         return stateless
@@ -124,59 +122,56 @@ module.exports = ReactVanilla.createClass({
             : React.createElement(I18nPhoneInputStateful, //eslint-disable-line
                 _.defaults({ ref: "I18nPhoneInputStateful" }, this.props));
     }
-});
+};
 
-var I18nPhoneInputStateless = React.createClass({
+class I18nPhoneInputStateless extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
+        countryCode: PropTypes.string,
+        dialCode: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number
+        ]),
+        phoneNumber: PropTypes.string,
+        onValueChange: PropTypes.func,
+        open: PropTypes.bool,
+        onToggle: PropTypes.func,
+        searchIndex: PropTypes.number,
+        searchString: PropTypes.string,
+        searchTime: PropTypes.number,
+        onSearch: PropTypes.func,
+        onCountrySearch: PropTypes.func, //TODO: remove when v1 no longer supported
+        errorMessage: PropTypes.string,
+        placeholder: PropTypes.string,
+        autoFocus: PropTypes.bool,
+        useAutoComplete: PropTypes.bool
+    };
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        className: React.PropTypes.string.affectsRendering,
-        countryCode: React.PropTypes.string.affectsRendering,
-        dialCode: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.number
-        ]).affectsRendering,
-        phoneNumber: React.PropTypes.string.affectsRendering,
-        onValueChange: React.PropTypes.func,
-        open: React.PropTypes.bool.affectsRendering,
-        onToggle: React.PropTypes.func,
-        searchIndex: React.PropTypes.number.affectsRendering,
-        searchString: React.PropTypes.string.affectsRendering,
-        searchTime: React.PropTypes.number.affectsRendering,
-        onSearch: React.PropTypes.func,
-        onCountrySearch: React.PropTypes.func, //TODO: remove when v1 no longer supported
-        errorMessage: React.PropTypes.string.affectsRendering,
-        placeholder: React.PropTypes.string.affectsRendering,
-        autoFocus: React.PropTypes.bool,
-        useAutoComplete: React.PropTypes.bool
-    },
+    static defaultProps = {
+        "data-id": "i18n-phone-input",
+        className: "",
+        countryCode: "",
+        dialCode: "",
+        phoneNumber: "",
+        onValueChange: _.noop,
+        open: false,
+        onToggle: _.noop,
+        searchIndex: -1,
+        searchString: "",
+        searchTime: 0,
+        onSearch: _.noop,
+        errorMessage: "Please enter a valid phone number.",
+        placeholder: "",
+        autoFocus: false,
+        useAutoComplete: false
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "i18n-phone-input",
-            className: "",
-            countryCode: "",
-            dialCode: "",
-            phoneNumber: "",
-            onValueChange: _.noop,
-            open: false,
-            onToggle: _.noop,
-            searchIndex: -1,
-            searchString: "",
-            searchTime: 0,
-            onSearch: _.noop,
-            errorMessage: "Please enter a valid phone number.",
-            placeholder: "",
-            autoFocus: false,
-            useAutoComplete: false
-        };
-    },
-
-    componentWillMount: function () {
+    componentWillMount() {
         if (this.props.onCountrySearch && !Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("onCountrySearch", "onSearch"));
         }
-    },
+    }
 
     /**
     * @method handleCountryClick
@@ -189,22 +184,22 @@ var I18nPhoneInputStateless = React.createClass({
     * @param {object} country
     *     The clicked country item.
     */
-    _handleValueChange: function (country) {
+    _handleValueChange = (country) => {
         this.props.onValueChange({
             countryCode: country.iso2 || "",
             dialCode: country.dialCode || "",
             phoneNumber: this.props.phoneNumber
         });
         this.props.onToggle();
-    },
+    };
 
-    _handlePhoneNumberChange: function (e) {
+    _handlePhoneNumberChange = (e) => {
         var val = e.target.value;
 
         this.props.onValueChange({ dialCode: this.props.dialCode, phoneNumber: val });
-    },
+    };
 
-    render: function () {
+    render() {
         var classname = classnames("intl-tel-input", this.props.className);
 
         return (
@@ -237,18 +232,24 @@ var I18nPhoneInputStateless = React.createClass({
             </div>
         );
     }
-});
+}
 
-var I18nPhoneInputStateful = ReactVanilla.createClass({
+class I18nPhoneInputStateful extends React.Component {
+    state = {
+        open: this.props.open || false,
+        searchIndex: -1,
+        searchString: "",
+        searchTime: 0
+    };
 
-    _handleToggle: function () {
+    _handleToggle = () => {
         this.setState({
             open: !this.state.open,
             searchIndex: -1,
             searchString: "",
             searchTime: 0
         });
-    },
+    };
 
     /**
     * @method _handleSearch
@@ -265,24 +266,15 @@ var I18nPhoneInputStateful = ReactVanilla.createClass({
     * @param {Number} index
     *     The index of country searched
     */
-    _handleSearch: function (search, time, index) {
+    _handleSearch = (search, time, index) => {
         this.setState({
             searchString: search,
             searchTime: time,
             searchIndex: index
         });
-    },
+    };
 
-    getInitialState: function () {
-        return {
-            open: this.props.open || false,
-            searchIndex: -1,
-            searchString: "",
-            searchTime: 0
-        };
-    },
-
-    render: function () {
+    render() {
         var props = _.defaults({
             ref: "I18nPhoneInputStateless",
             open: this.state.open,
@@ -295,4 +287,4 @@ var I18nPhoneInputStateful = ReactVanilla.createClass({
 
         return React.createElement(I18nPhoneInputStateless, props);
     }
-});
+}

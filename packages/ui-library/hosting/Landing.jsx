@@ -14,35 +14,41 @@ require("../src/css/ui-library.scss"); // UI Library styles
 require("../src/demo/css/ui-library-demo.scss"); // UI Library demo styles
 require("./assets/css/landing.css");   // Override undesired styles from ui-library.scss and ui-library-demo.scss
 
-var LandingPage = React.createClass({
+class LandingPage extends React.Component {
+    state = {
+        version: "",
+        headerBarTree: [],
+        leftNavBarTree: [],
+        leftNavOpenSections: { versions: true }
+    };
 
-    _gotoTutorials: function () {
+    _gotoTutorials = () => {
         window.location.href = this.state.version + "/index.html#/?openNode=Tutorials";
-    },
+    };
 
-    _gotoQuickstartPage: function () {
+    _gotoQuickstartPage = () => {
         window.location.href = this.state.version + "/index.html#/?openNode=Tutorials&selectedNode=UILibrary101";
-    },
+    };
 
-    _gotoDemoVersion: function (version) {
+    _gotoDemoVersion = (version) => {
         window.location.href = version + "/index.html";
-    },
+    };
 
-    _handleLeftNavBarItemValueChange: function (itemId) {
+    _handleLeftNavBarItemValueChange = (itemId) => {
         if (itemId === "getting-started") {
             this._gotoQuickstartPage();
         } else {
             this._gotoDemoVersion(itemId);
         }
-    },
+    };
 
-    _handleLeftNavBarSectionValueChange: function (sectionId) {
+    _handleLeftNavBarSectionValueChange = (sectionId) => {
         var nextState = _.clone(this.state.leftNavOpenSections);
         nextState[sectionId] = !nextState[sectionId];
         this.setState({ leftNavOpenSections: nextState });
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         fetch("versions.json?_=" + new Date().getTime())
             .then(function (resp) {
                 if (resp.status >= 400) {
@@ -104,18 +110,9 @@ var LandingPage = React.createClass({
                     });
                 }
             }.bind(this));
-    },
+    }
 
-    getInitialState: function () {
-        return {
-            version: "",
-            headerBarTree: [],
-            leftNavBarTree: [],
-            leftNavOpenSections: { versions: true }
-        };
-    },
-
-    render: function () {
+    render() {
         return (
             <div>
                 <div className="components-container">
@@ -245,6 +242,6 @@ var LandingPage = React.createClass({
             </div>
         </div>);
     }
-});
+}
 
 ReactDOM.render(<LandingPage />, document.getElementById("landing"));

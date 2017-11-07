@@ -1,4 +1,5 @@
-var React = require("re-react"),
+var PropTypes = require("prop-types");
+var React = require("react"),
     ModalButton = require("../../components/general/ModalButton.jsx"),
     Wizard = require("../../components/wizard/Wizard.jsx"),
     Layout = require("../../components/general/ColumnLayout.jsx"),
@@ -87,51 +88,51 @@ var React = require("re-react"),
  * @param {Wizard#Choose~onValueChange} onValueChange
  *     Callback to be triggered when the choice is made on first step of wizard.
  */
-module.exports = React.createClass({
-    propTypes: {
-        labelNext: React.PropTypes.string.affectsRendering,
-        labelCancel: React.PropTypes.string.affectsRendering,
-        labelEdit: React.PropTypes.string.affectsRendering,
-        fields: React.PropTypes.object.affectsRendering,
-        choices: React.PropTypes.array.affectsRendering,
-        activeStep: React.PropTypes.number.affectsRendering,
-        numSteps: React.PropTypes.number.affectsRendering,
-        messages: React.PropTypes.array.affectsRendering,
+module.exports = class extends React.Component {
+    static propTypes = {
+        labelNext: PropTypes.string,
+        labelCancel: PropTypes.string,
+        labelEdit: PropTypes.string,
+        fields: PropTypes.object,
+        choices: PropTypes.array,
+        activeStep: PropTypes.number,
+        numSteps: PropTypes.number,
+        messages: PropTypes.array,
 
-        onFieldChange: React.PropTypes.func,
-        onComplexFieldChange: React.PropTypes.func,
-        onAddComplexFieldsRow: React.PropTypes.func,
-        onAddMessage: React.PropTypes.func,
-        onRemoveMessage: React.PropTypes.func,
-        onNext: React.PropTypes.func,
-        onReset: React.PropTypes.func
-    },
+        onFieldChange: PropTypes.func,
+        onComplexFieldChange: PropTypes.func,
+        onAddComplexFieldsRow: PropTypes.func,
+        onAddMessage: PropTypes.func,
+        onRemoveMessage: PropTypes.func,
+        onNext: PropTypes.func,
+        onReset: PropTypes.func
+    };
 
-    _next: function () {
+    _next = () => {
         this.props.onNext();
         this.props.onAddMessage("Next clicked");
-    },
+    };
 
-    _done: function () {
+    _done = () => {
         alert("done");
         this.refs.modal.refs.ModalButtonStateful._handleClose();
-    },
+    };
 
-    _cancel: function () {
+    _cancel = () => {
         alert("cancel");
         this.props.onReset();
-    },
+    };
 
-    _onFieldChange: function (name, value) {
+    _onFieldChange = (name, value) => {
         this.props.onAddMessage(name + " changed to " + value);
         this.props.onFieldChange(name, value);
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         this.props.onReset();
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <div className="clear-both">
                 {/* This outer div is only required to style inside the DemoApp */}
@@ -203,28 +204,28 @@ module.exports = React.createClass({
                 </ModalButton>
             </div>);
     }
-});
+};
+
+var RADIO_OPTS = [
+    { id: "1", name: "First Choice" },
+    { id: "2", name: "Second Choice" },
+    { id: "3", name: "Third Choice" }
+];
 
 /*
  * Instead of having a really messy render function, let's break this particular step into its own
  * component
  */
-var TwoColumnStep = React.createClass({
-    RADIO_OPTS: [
-        { id: "1", name: "First Choice" },
-        { id: "2", name: "Second Choice" },
-        { id: "3", name: "Third Choice" }
-    ],
-
+class TwoColumnStep extends React.Component {
     //create the partials on bind for better performance, instead of binding on every render
-    componentWillMount: function () {
+    componentWillMount() {
         this._handleField1Change = this.props.onFieldChange.bind(null, "field1");
         this._handleCheckboxChange1 = this.props.onFieldChange.bind(null, "checkbox1");
         this._handleCheckboxChange2 = this.props.onFieldChange.bind(null, "checkbox2");
         this._handleRadioChange = this.props.onFieldChange.bind(null, "radio");
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <Wizard.Step {...this.props} title="Two Column Step">
                 <Layout.Row>
@@ -239,7 +240,7 @@ var TwoColumnStep = React.createClass({
                             <FormRadioGroup groupName="stackedRadioGroup"
                                 selected={this.props.fields.radio}
                                 onValueChange={this._handleRadioChange}
-                                items={this.RADIO_OPTS} />
+                                items={RADIO_OPTS} />
                         </div>
                     </Layout.Column>
                     <Layout.Column>
@@ -255,15 +256,15 @@ var TwoColumnStep = React.createClass({
                 </Layout.Row>
             </Wizard.Step>);
     }
-});
+}
 
-var FormStep = React.createClass({
-    componentWillMount: function () {
+class FormStep extends React.Component {
+    componentWillMount() {
         this._handleField1Change = this.props.onFieldChange.bind(null, "field1");
         this._handleCheckboxChange = this.props.onFieldChange.bind(null, "checkbox");
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <Wizard.Step {...this.props} title="Wizard Form">
                 <div className="input-row">
@@ -296,26 +297,26 @@ var FormStep = React.createClass({
                 </div>
             </Wizard.Step>);
     }
-});
+}
 
-var Or = React.createClass({
-    render: function () {
+class Or extends React.Component {
+    render() {
         return <div style={{ marginBottom: 10 }}>OR</div>;
     }
-});
+}
 
 /*
  * The complex field has 3 input fields.  Better to put it into its own component than to have all these
  * lines of jsx inline inside another component
  */
-var ComplexField = React.createClass({
-    componentWillMount: function () {
+class ComplexField extends React.Component {
+    componentWillMount() {
         this._handleField1Change = this.props.onComplexFieldChange.bind(null, this.props.id, "field1");
         this._handleField2Change = this.props.onComplexFieldChange.bind(null, this.props.id, "field2");
         this._handleField3Change = this.props.onComplexFieldChange.bind(null, this.props.id, "field3");
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <div className="input-row">
                 <FormTextField labelText="First part"
@@ -337,4 +338,4 @@ var ComplexField = React.createClass({
                     onValueChange={this._handleField3Change} />
             </div>);
     }
-});
+}

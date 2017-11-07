@@ -2,13 +2,15 @@ var React = require("react"),
     ExpandableRow = require("../../../components/rows/ExpandableRow.jsx"),
     RowIndexNav = require("../../../components/general/RowIndexNav.jsx");
 
+var createReactClass = require("create-react-class");
+
 /**
 * @name RowIndexNavDemo
 * @memberof RowIndexNav
 * @desc A demo illustrating the layout and basic functionalty of the RowIndexNav (alphabet navigation) component
 */
-var RowIndexNavDemo = React.createClass({
-
+var RowIndexNavDemo = createReactClass({
+    displayName: "RowIndexNavDemo",
     activeIndexes: "ABCEFGHIJLMNOPSTUVX".split(""),
 
     _handleOnClick: function (index) {
@@ -69,7 +71,7 @@ var RowIndexNavDemo = React.createClass({
                 </div>
             </div>
         );
-    }
+    },
 });
 
 module.exports = RowIndexNavDemo;

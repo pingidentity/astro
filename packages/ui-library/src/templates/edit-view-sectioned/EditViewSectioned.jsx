@@ -33,33 +33,32 @@ var React = require("react"),
  * @param {EditViewSectioned~onSave} onSave
  *          Callback to be triggered when the save button is clicked
  */
-module.exports = React.createClass({
-
-    _handleCancel: function () {
+module.exports = class extends React.Component {
+    _handleCancel = () => {
         // do something on cancel
-    },
+    };
 
-    _handleSave: function () {
+    _handleSave = () => {
         this.props.onSave();
-    },
+    };
 
-    _handleInputChange: function (e) {
+    _handleInputChange = (e) => {
         var value = e.target.type === "checkbox" ? !!e.target.checked : e.target.value,
             dataId = e.target.type === "text" ? e.target.getAttribute("data-id").slice(0,-6)
                 : e.target.getAttribute("data-id");
 
         this.props.onInputChange(dataId, value);
-    },
+    };
 
-    _handleRadioInputChange: function (name, value) {
+    _handleRadioInputChange = (name, value) => {
         this.props.onInputChange(name, value);
-    },
+    };
 
-    componentDidMount: function () {
+    componentDidMount() {
         this._handleRadioInputChangeUserGroup = this._handleRadioInputChange.bind(this, "userGroup");
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <div>
                 <a className="page-return-link">To record list</a>
@@ -217,4 +216,4 @@ module.exports = React.createClass({
             </div>
         );
     }
-});
+};

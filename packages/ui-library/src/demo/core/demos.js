@@ -337,13 +337,6 @@ module.exports = [
                 pathToDemoSource: "demo_components_tooltips_DetailsTooltipDemo.jsx.html"
             },
             {
-                label: "Collapsible Section (stateless)",
-                demo: require("../components/general/CollapsibleSectionDemo.jsx"),
-                pathToDoc: "components/general/CollapsibleSection.jsx",
-                pathToSource: "components_general_CollapsibleSection.jsx.html",
-                pathToDemoSource: "demo_components_general_CollapsibleSectionDemo.jsx.html"
-            },
-            {
                 label: "Collapsible Link",
                 demo: require("../components/general/CollapsibleLinkDemo.jsx"),
                 pathToDoc: "components/general/CollapsibleLink.jsx",

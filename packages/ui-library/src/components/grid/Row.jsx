@@ -1,6 +1,8 @@
 "use strict";
 
-var React = require("re-react"),
+var PropTypes = require("prop-types");
+
+var React = require("react"),
     classnames = require("classnames"),
     ButtonCell = require("./cells/ButtonCell.jsx");
 
@@ -44,28 +46,25 @@ var React = require("re-react"),
  *     Callback to be triggered when a row is expanded
  **/
 
-var Row = React.createClass({
+class Row extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string.isRequired,
+        rowObject: PropTypes.object,
+        rowIndex: PropTypes.number,
+        columns: PropTypes.array,
+        rowExpandable: PropTypes.bool,
+        onRowExpanded: PropTypes.func
+    };
 
-    propTypes: {
-        "data-id": React.PropTypes.string.isRequired,
-        rowObject: React.PropTypes.object.affectsRendering,
-        rowIndex: React.PropTypes.number.affectsRendering,
-        columns: React.PropTypes.array.affectsRendering,
-        rowExpandable: React.PropTypes.bool.affectsRendering,
-        onRowExpanded: React.PropTypes.func
-    },
-
-    getDefaultProps: function () {
-        return {
-            rowExpandable: false
-        };
-    },
+    static defaultProps = {
+        rowExpandable: false
+    };
 
     /*
      * Prepares content for a cell. Content can be a text, a component or a html element.
      * Any React component that needs to be rendered within a cell needs to have the callback onGridCellAction.
      */
-    _getCellContent: function (cellContent, column, rowObject) {
+    _getCellContent = (cellContent, column, rowObject) => {
         var cell = column.props.children;
 
         if (React.isValidElement(cell)) {
@@ -81,12 +80,12 @@ var Row = React.createClass({
         }
 
         return cellContent;
-    },
+    };
 
     /*
      * Renders all cells for a row with given data.
      */
-    _getCells: function () {
+    _getCells = () => {
         var self = this;
 
         return this.props.columns.map(function (column, columnIndex) {
@@ -123,13 +122,13 @@ var Row = React.createClass({
 
             return cell;
         });
-    },
+    };
 
-    _handleRowToggle: function () {
+    _handleRowToggle = () => {
         this.props.onRowExpanded(this.props.rowIndex);
-    },
+    };
 
-    render: function () {
+    render() {
         var cssClassName = classnames({
             "inline plus": !this.props.rowObject.expanded,
             "inline minus": this.props.rowObject.expanded
@@ -154,6 +153,6 @@ var Row = React.createClass({
             </tr>
         );
     }
-});
+}
 
 module.exports = Row;

@@ -6,7 +6,7 @@ jest.dontMock("../ColorPicker.jsx");
 
 describe("InlineMessage", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         InlineMessage = require("../InlineMessage.jsx"),
         TestUtils = require("../../../testutil/TestUtils"),
         _ = require("underscore");

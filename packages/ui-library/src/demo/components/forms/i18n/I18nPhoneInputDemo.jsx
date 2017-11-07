@@ -6,52 +6,49 @@ var React = require("react"),
 * @memberof I18nPhoneInput
 * @desc A demo for I18nPhoneInput
 */
-var I18nPhoneInputDemo = React.createClass({
+class I18nPhoneInputDemo extends React.Component {
+    state = {
+        countryCodeStateful: "dj",
+        dialCodeStateful: "253",
+        phoneNumberStateful: "123 456 7890",
 
-    _handleValueChangeStateful: function (phoneInputValues) {
+        open: false,
+        countryCodeStateless: "ru",
+        dialCodeStateless: "7",
+        phoneNumberStateless: "098 765 4321"
+    };
+
+    _handleValueChangeStateful = (phoneInputValues) => {
         this.setState({
             countryCodeStateful: phoneInputValues.countryCode,
             dialCodeStateful: phoneInputValues.dialCode,
             phoneNumberStateful: phoneInputValues.phoneNumber
         });
-    },
+    };
 
-    _handleValueChangeStateless: function (phoneInputValues) {
+    _handleValueChangeStateless = (phoneInputValues) => {
         this.setState({
             countryCodeStateless: phoneInputValues.countryCode,
             dialCodeStateless: phoneInputValues.dialCode,
             phoneNumberStateless: phoneInputValues.phoneNumber
         });
-    },
+    };
 
-    _handleToggle: function () {
+    _handleToggle = () => {
         this.setState({
             open: !this.state.open
         });
-    },
+    };
 
-    _handleSearch: function (string, time, index) {
+    _handleSearch = (string, time, index) => {
         this.setState({
             searchString: string,
             searchTime: time,
             searchIndex: index
         });
-    },
+    };
 
-    getInitialState: function () {
-        return {
-            countryCodeStateful: "dj",
-            dialCodeStateful: "253",
-            phoneNumberStateful: "123 456 7890",
-
-            open: false,
-            countryCodeStateless: "ru",
-            dialCodeStateless: "7",
-            phoneNumberStateless: "098 765 4321"
-        };
-    },
-
-    render: function () {
+    render() {
         return (
             <div>
                 <I18nPhoneInput
@@ -85,6 +82,6 @@ var I18nPhoneInputDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = I18nPhoneInputDemo;

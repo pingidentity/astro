@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react"),
     FormTextField = require("./form-text-field"),
     _ = require("underscore");
@@ -101,27 +102,25 @@ var Types = {
 * @param {string} [labelText]
 *     The text to show as the field's label.
 */
-var FormTimeField = React.createClass({
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        type: React.PropTypes.oneOf(_.values(Types)),
-        value: React.PropTypes.string,
-        errorMessage: React.PropTypes.string,
+class FormTimeField extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        type: PropTypes.oneOf(_.values(Types)),
+        value: PropTypes.string,
+        errorMessage: PropTypes.string,
         //callbacks
-        onFocus: React.PropTypes.func,
-        onBlur: React.PropTypes.func,
-        onKeyDown: React.PropTypes.func,
-        onChange: React.PropTypes.func,
-        onValueChange: React.PropTypes.func,
-    },
+        onFocus: PropTypes.func,
+        onBlur: PropTypes.func,
+        onKeyDown: PropTypes.func,
+        onChange: PropTypes.func,
+        onValueChange: PropTypes.func,
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "form-time-field"
-        };
-    },
+    static defaultProps = {
+        "data-id": "form-time-field"
+    };
 
-    render: function () {
+    render() {
         return (
             <FormTextField {...this.props}
                 className={this.props.className}
@@ -135,7 +134,7 @@ var FormTimeField = React.createClass({
             />
         );
     }
-});
+}
 
 FormTimeField.Types = Types;
 

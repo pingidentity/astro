@@ -8,20 +8,9 @@ var Calendar = require("./../../../components/calendars/Calendar.jsx");
 * @memberof TimePicker
 * @desc A demo for TimePicker
 */
-var TimePickerDemo = React.createClass({
-    _handleValueChange: function (index, value) {
-        var newState = {};
-
-        // special handling for the calendar value
-        if (index === "c1") {
-            value = parseInt(value);
-        }
-
-        newState[index] = value;
-        this.setState(newState);
-    },
-
-    getInitialState: function () {
+class TimePickerDemo extends React.Component {
+    constructor(props) {
+        super(props);
         var initialState = {
             a: "--",
             b: "--",
@@ -33,10 +22,22 @@ var TimePickerDemo = React.createClass({
             this["_handleValueChange" + key.toUpperCase()] = this._handleValueChange.bind(null, key);
         }
 
-        return initialState;
-    },
+        this.state = initialState;
+    }
 
-    render: function () {
+    _handleValueChange = (index, value) => {
+        var newState = {};
+
+        // special handling for the calendar value
+        if (index === "c1") {
+            value = parseInt(value);
+        }
+
+        newState[index] = value;
+        this.setState(newState);
+    };
+
+    render() {
         return (
             <div>
                 <div className="input-row">
@@ -82,6 +83,6 @@ var TimePickerDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = TimePickerDemo;

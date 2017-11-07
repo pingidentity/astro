@@ -6,11 +6,9 @@ var FormCheckbox = require("./../../../components/forms/FormCheckbox.jsx");
 * @memberof FormCheckbox
 * @desc A demo for FormCheckbox
 */
-var FormCheckboxDemo = React.createClass({
-
-    _numDemos: 12,
-
-    getInitialState: function () {
+class FormCheckboxDemo extends React.Component {
+    constructor(props, context) {
+        super(props, context);
         var initialState = {};
 
         for (var i=1; i<=this._numDemos; i+=1) {
@@ -18,14 +16,18 @@ var FormCheckboxDemo = React.createClass({
             this["_onChange" + i] = this._onChange.bind(this, i);
         }
 
-        return initialState;
-    },
-    _onChange: function (i, event) {
+        this.state = initialState;
+    }
+
+    _numDemos = 12;
+
+    _onChange = (i, event) => {
         var newState = {};
         newState["checkboxChecked" + i] = event.target.checked;
         this.setState(newState);
-    },
-    render: function () {
+    };
+
+    render() {
         return (
             <div>
                 <div className="input-row">
@@ -129,5 +131,6 @@ var FormCheckboxDemo = React.createClass({
             </div>
         );
     }
-});
+}
+
 module.exports = FormCheckboxDemo;

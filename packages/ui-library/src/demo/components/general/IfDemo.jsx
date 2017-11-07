@@ -6,19 +6,16 @@ var If = require("./../../../components/general/If.jsx");
 * @memberof If
 * @desc A demo for If
 */
-var IfDemo = React.createClass({
+class IfDemo extends React.Component {
+    state = {
+        toggle: false
+    };
 
-    getInitialState: function () {
-        return {
-            toggle: false
-        };
-    },
-
-    _toggle: function () {
+    _toggle = () => {
         this.setState({ toggle: !this.state.toggle });
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <div>
                 <p>
@@ -35,6 +32,6 @@ var IfDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = IfDemo;

@@ -1,1 +1,1 @@
-module.exports = require("./phone-input").v1;
+module.exports = require("./phone-input").v2;

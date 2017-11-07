@@ -4,44 +4,44 @@ var React = require("react"),
     Messages = require("../../../components/general/messages/"),
     WizardView = require("../../../templates/wizard-view");
 
+var LABELS = {
+    labelNext: "Next",
+    labelDone: "Done",
+    labelCancel: "Cancel",
+    labelEdit: "Edit"
+};
+
 /**
 * @name WizardViewDemo
 * @memberof WizardView
 * @desc A demo for WizardView
 */
-var WizardViewDemo = React.createClass({
-    LABELS: {
-        labelNext: "Next",
-        labelDone: "Done",
-        labelCancel: "Cancel",
-        labelEdit: "Edit"
-    },
-
-    _handleFieldChange: function (name, value) {
+class WizardViewDemo extends React.Component {
+    _handleFieldChange = (name, value) => {
         this.fieldActions.set(["fields", name], value);
-    },
+    };
 
-    _handleComplexFieldChange: function (rowIndex, fieldName, value) {
+    _handleComplexFieldChange = (rowIndex, fieldName, value) => {
         this.fieldActions.set(["fields", "complex", rowIndex, fieldName], value);
-    },
+    };
 
-    _handleReset: function (id) {
+    _handleReset = (id) => {
         this.wizardActions.reset(id);
         this.fieldActions.reset();
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         this.messageActions = Redux.bindActionCreators(Messages.Actions, this.props.store.dispatch);
         this.wizardActions = Redux.bindActionCreators(Wizard.Actions, this.props.store.dispatch);
         this.fieldActions = Redux.bindActionCreators(WizardView.Actions, this.props.store.dispatch);
 
         //Root level reducer so null id
         this._handlePick = this.wizardActions.pick.bind(null, null);
-    },
+    }
 
-    render: function () {
+    render() {
         return (
-            <WizardView {...this.LABELS} {...this.props.wizard} {...this.props.messages} {...this.props.fields}
+            <WizardView {...LABELS} {...this.props.wizard} {...this.props.messages} {...this.props.fields}
                 onFieldChange={this._handleFieldChange}
                 onComplexFieldChange={this._handleComplexFieldChange}
                 onAddComplexFieldsRow={this.fieldActions.addComplexRow}
@@ -52,7 +52,7 @@ var WizardViewDemo = React.createClass({
                 onReset={this._handleReset}
                 onValueChange={this._handlePick} />);
     }
-});
+}
 
 /*
  * Expose the Reducer.  Doing so will tell the DemoApp to create an isolated store for the Demo to use.  Normally

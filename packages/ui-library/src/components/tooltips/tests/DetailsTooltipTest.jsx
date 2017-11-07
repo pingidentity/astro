@@ -8,22 +8,30 @@ describe("DetailsTooltip", function () {
 
     var React = require("react"),
         ReactDOM = require("react-dom"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         DetailsTooltip = require("../DetailsTooltip.jsx"),
         Wrapper = TestUtils.UpdatePropsWrapper,
         _ = require("underscore");
 
+    window.addEventListener = jest.genMockFunction();
+    window.removeEventListener = jest.genMockFunction();
     function getComponent (opts) {
         opts = _.defaults(opts, {
             title: "Title",
             label: "Label",
-            open: true
+            open: true,
+            onValueChange: jest.genMockFunction(),
+            onToggle: jest.genMockFunction(),
         });
 
         return ReactTestUtils.renderIntoDocument(
             <DetailsTooltip {...opts}><p>what ever callout content is</p></DetailsTooltip>);
     }
+    beforeEach(function () {
+        window.addEventListener.mockClear();
+        window.removeEventListener.mockClear();
+    });
 
     it("managed component that starts open", function () {
         var component = getComponent({ stateless: false });
@@ -214,8 +222,6 @@ describe("DetailsTooltip", function () {
     });
 
     it("registers global listener on mount if component is open", function () {
-        window.addEventListener = jest.genMockFunction();
-
         //let's override defer or execute func immediately for tests
         _.defer = function (func) {
             func();
@@ -227,14 +233,11 @@ describe("DetailsTooltip", function () {
             </DetailsTooltip>
         );
 
-        expect(window.addEventListener.mock.calls.length).toBe(2);
-        expect(window.addEventListener.mock.calls[0][0]).toEqual("click");
-        expect(window.addEventListener.mock.calls[1][0]).toEqual("keydown");
+        expect(TestUtils.mockCallsContains(window.addEventListener, "click")).toBe(true);
+        expect(TestUtils.mockCallsContains(window.addEventListener, "keydown")).toBe(true);
     });
 
     it("unregister global listeners on unmount", function () {
-        window.removeEventListener = jest.genMockFunction();
-
         var component = ReactTestUtils.renderIntoDocument(
             <DetailsTooltip title="Title" label="Action">
                 <p>what ever callout content is</p>
@@ -244,11 +247,11 @@ describe("DetailsTooltip", function () {
         //trigger unmount
         ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
 
-        expect(window.removeEventListener.mock.calls.length).toBe(2);
-        expect(window.removeEventListener.mock.calls[0][0]).toEqual("click");
-        expect(window.removeEventListener.mock.calls[1][0]).toEqual("keydown");
+        expect(TestUtils.mockCallsContains(window.removeEventListener, "click")).toBe(true);
+        expect(TestUtils.mockCallsContains(window.removeEventListener, "keydown")).toBe(true);
     });
 
+    //TODO no idea why this isn't working. can console log the full stack, it just isn't being called
     it("triggers callback when clicked outside", function () {
         var callback = jest.genMockFunction();
 
@@ -258,7 +261,7 @@ describe("DetailsTooltip", function () {
             </DetailsTooltip>
         );
 
-        var handler = window.addEventListener.mock.calls[0][1];
+        var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
         var e = {
             target: { parentNode: document.body },
             stopPropagation: jest.genMockFunction(),
@@ -272,8 +275,6 @@ describe("DetailsTooltip", function () {
     });
 
     it("unregister listener when transitioning from open to closed", function () {
-        window.removeEventListener = jest.genMockFunction();
-
         var component = ReactTestUtils.renderIntoDocument(
                 <Wrapper type={DetailsTooltip}
                         stateless={true} title="Title" label="Action" open={true} onToggle={jest.genMockFn}>
@@ -282,9 +283,8 @@ describe("DetailsTooltip", function () {
 
         component._setProps({ open: false });
 
-        expect(window.removeEventListener.mock.calls.length).toBe(2);
-        expect(window.removeEventListener.mock.calls[0][0]).toEqual("click");
-        expect(window.removeEventListener.mock.calls[1][0]).toEqual("keydown");
+        expect(TestUtils.mockCallsContains(window.removeEventListener, "click")).toBe(true);
+        expect(TestUtils.mockCallsContains(window.removeEventListener, "keydown")).toBe(true);
     });
 
     // TODO To be removed once "id" support is discontnued.
@@ -362,7 +362,7 @@ describe("DetailsTooltip", function () {
         component = ReactTestUtils.renderIntoDocument(<DetailsTooltip controlled={true} />);
         stateful = component.refs.manager;
         stateless = component.refs.tooltip;
-        
+
         expect(stateless).toBeTruthy();
         expect(stateful).toBeFalsy();
     });
@@ -421,7 +421,7 @@ describe("DetailsTooltip", function () {
         //make sure anchor tag got customLabel CSS classes
         expect(ReactDOM.findDOMNode(link).getAttribute("class")).toContain("customLabel");
     });
-    
+
     // TODO To be removed once "labelStyle" is discontinued
     it("is rendering label styling with deprecated labelStyle with warning", function () {
 
@@ -535,12 +535,12 @@ describe("DetailsTooltip", function () {
         expect(secondaryBtns).toBeTruthy();
         expect(saveBtn).toBeTruthy();
         expect(cancelBtn).toBeTruthy();
-        
+
         // check length of buttons
         expect(saveBtn.length).toBe(1);
         expect(TestUtils.scryRenderedDOMNodesWithClass(component, "cancel").length).toBe(3);
         expect(secondaryBtns.length).toBe(3);
-        
+
         // check button text
         expect(secondaryBtns[0].textContent).toBe("One");
         expect(secondaryBtns[1].textContent).toBe("Two");

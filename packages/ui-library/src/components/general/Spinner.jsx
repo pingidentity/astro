@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames"),
     Utils = require("../../util/Utils");
@@ -27,29 +28,26 @@ var React = require("react"),
  *     </Spinner>
  **/
 
-var Spinner = React.createClass({
+class Spinner extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        id: PropTypes.string,
+        defaultText: PropTypes.string,
+        show: PropTypes.bool.isRequired
+    };
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        id: React.PropTypes.string,
-        defaultText: React.PropTypes.string,
-        show: React.PropTypes.bool.isRequired
-    },
+    static defaultProps = {
+        "data-id": "spinner",
+        defaultText: ""
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "spinner",
-            defaultText: ""
-        };
-    },
-
-    componentWillMount: function () {
+    componentWillMount() {
         if (this.props.id && !Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("id", "data-id"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var className = classnames("spinner", { ie9: Utils.isIE9() } );
         if (this.props.show) {
             var dataId = this.props.id || this.props["data-id"];
@@ -58,6 +56,6 @@ var Spinner = React.createClass({
             return this.props.children;
         }
     }
-});
+}
 
 module.exports = Spinner;

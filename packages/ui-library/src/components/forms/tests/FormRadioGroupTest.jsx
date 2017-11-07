@@ -5,7 +5,7 @@ jest.dontMock("../FormLabel.jsx");
 
 describe("FormRadioGroup", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         FormRadioGroup = require("../FormRadioGroup.jsx"),
         callback = jest.genMockFunction(),

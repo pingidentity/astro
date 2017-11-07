@@ -6,32 +6,36 @@ var Toggle = require("../../../components/forms/form-toggle");
 * @memberof Toggle
 * @desc A demo for Toggle
 */
-var ToggleDemo = React.createClass({
+class ToggleDemo extends React.Component {
+    state = {
+        toggled: false,
+        userStatus: "USER DISABLED"
+    };
 
-    getInitialState: function () {
+    getInitialState() {
         return {
             toggled1: false,
             toggled2: false,
             userStatus1: "OFF",
             userStatus2: "LOCKED"
         };
-    },
+    }
 
-    _handleToggle1: function () {
+    _handleToggle1 = () => {
         this.setState({
             toggled1: !this.state.toggled1,
             userStatus1: !this.state.toggled1 ? "ON" : "OFF"
         });
-    },
+    };
 
-    _handleToggle2: function () {
+    _handleToggle2 = () => {
         this.setState({
             toggled2: !this.state.toggled2,
             userStatus2: !this.state.toggled2 ? "ON" : "LOCKED"
         });
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <div>
                 <div className="input-row">
@@ -59,6 +63,6 @@ var ToggleDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = ToggleDemo;

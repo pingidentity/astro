@@ -8,7 +8,7 @@ jest.dontMock("../../FormError.jsx");
 
 describe("FormIntegerField", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         FormIntegerField= require("../v2.jsx"),
         TestUtils = require("../../../../testutil/TestUtils"),
         callback;
@@ -237,8 +237,7 @@ describe("FormIntegerField", function () {
     });
 
     it("is releasing timer tasks on mouse up", function () {
-        clearTimeout = jest.genMockFunction(); //eslint-disable-line
-        clearInterval = jest.genMockFunction(); //eslint-disable-line
+        jest.useFakeTimers();
 
         var component = ReactTestUtils.renderIntoDocument(
             <FormIntegerField onChange={callback} max={5} min={3} value={4} increment={3} />
@@ -249,8 +248,8 @@ describe("FormIntegerField", function () {
 
         ReactTestUtils.Simulate.mouseUp(spinnerUp);
 
-        expect(clearTimeout).toBeCalled();
-        expect(clearInterval).toBeCalled();
+        expect(clearTimeout.mock.calls.length).toBe(1);
+        expect(clearInterval.mock.calls.length).toBe(1);
     });
 
     it("is autoincrementing field while spinner is pressed", function () {

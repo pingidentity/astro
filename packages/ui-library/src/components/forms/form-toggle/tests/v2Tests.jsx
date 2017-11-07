@@ -2,7 +2,7 @@ jest.dontMock("../v2.jsx");
 
 describe("Toggle", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         _ = require("underscore"),
         TestUtils = require("../../../../testutil/TestUtils"),
         Toggle = require("../v2.jsx");

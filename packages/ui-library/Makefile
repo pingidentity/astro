@@ -168,6 +168,9 @@ define deploy_coverage
 endef
 
 define install_reference_coverage_report
+	echo "FOOBAR -->"
+	echo http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library-coverage/$(1)/ui-library-coverage-$(1).tar.gz
+
 	rm -f ui-library-coverage-*.tar.gz
 	rm -rf coverage-reference
 	wget http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library-coverage/$(1)/ui-library-coverage-$(1).tar.gz
@@ -347,4 +350,3 @@ package-and-upload-for-hosting: install-node-npm
 		rm -f ./versions.json;\
 		rm -f $${LIB_VERSION}.tar.gz;\
 	fi
-

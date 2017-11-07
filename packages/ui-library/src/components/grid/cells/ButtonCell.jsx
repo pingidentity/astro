@@ -1,6 +1,8 @@
 "use strict";
 
-var React = require("re-react"),
+var PropTypes = require("prop-types");
+
+var React = require("react"),
     Utils = require("../../../util/Utils");
 
 /**
@@ -26,35 +28,32 @@ var React = require("re-react"),
  *
  **/
 
-var ButtonCell = React.createClass({
+class ButtonCell extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
+        value: PropTypes.string,
+        onGridCellAction: PropTypes.func,
+        onCallBack: PropTypes.func
+    };
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        className: React.PropTypes.string.affectsRendering,
-        value: React.PropTypes.string.affectsRendering,
-        onGridCellAction: React.PropTypes.func,
-        onCallBack: React.PropTypes.func
-    },
+    static defaultProps = {
+        "data-id": "grid-button-cell"
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "grid-button-cell"
-        };
-    },
-
-    componentWillMount: function () {
+    componentWillMount() {
         if (this.props.onCallBack && !Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("onCallBack", "onGridCellAction"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         // Grid Row component will rebind onCallBack and set it to onGridCellAction
         return (
             <button data-id={this.props["data-id"]}
                     className={this.props.className} onClick={this.props.onGridCellAction} />
         );
     }
-});
+}
 
 module.exports = ButtonCell;

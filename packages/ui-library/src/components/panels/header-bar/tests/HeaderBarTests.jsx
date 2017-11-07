@@ -6,7 +6,7 @@ jest.dontMock("../../../../util/Utils");
 
 describe("HeaderBar", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         ReduxTestUtils = require("../../../../util/ReduxTestUtils"),
         TestUtils = require("../../../../testutil/TestUtils"),
         HeaderBar = require("../HeaderBar.jsx"),
@@ -56,7 +56,7 @@ describe("HeaderBar", function () {
         var component = wrapper.refs.target;
         var e = { target: document.body };
 
-        var handler = window.addEventListener.mock.calls[0][1];
+        var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
         handler(e);
 
         expect(component.props.onItemValueChange).toBeCalledWith("", e);
@@ -66,7 +66,7 @@ describe("HeaderBar", function () {
         var wrapper = getWrappedComponent();
         var component = wrapper.refs.target;
 
-        var handler = window.addEventListener.mock.calls[0][1];
+        var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
         handler({ target: document.body });
 
         expect(component.props.onItemValueChange).not.toBeCalled();

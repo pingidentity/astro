@@ -3,17 +3,18 @@ window.__DEV__ = true;
 jest.dontMock("../CsrfDataSourceApi");
 
 describe("CsrfDataSourceApi", function () {
-    var api, callback, apiExport;
+    var api, callback;
+    var apiExport = {
+        get: jest.genMockFunction(),
+        getNoCache: jest.genMockFunction(),
+        post: jest.genMockFunction(),
+        put: jest.genMockFunction(),
+        doDelete: jest.genMockFunction()
+    };
 
     beforeEach(function () {
         // configure the DataSourceApi mock instance, to allow controlling the DataSourceApi mock
-        apiExport = {
-            get: jest.genMockFunction(),
-            getNoCache: jest.genMockFunction(),
-            post: jest.genMockFunction(),
-            put: jest.genMockFunction(),
-            doDelete: jest.genMockFunction()
-        };
+        jest.clearAllMocks();
         jest.setMock("../DataSourceApi", apiExport);
 
         api = require("../CsrfDataSourceApi");
@@ -302,7 +303,8 @@ describe("CsrfDataSourceApi", function () {
 
         var cbAfter = jest.genMockFunction();
         api.registerMiddleware("after", cbAfter);
-        expect(api.callbacks.before).toEqual([cbAfter]);
+        //stringify to get a good comparaison of the two
+        expect(JSON.stringify(api.callbacks.before)).toEqual(JSON.stringify([cbAfter]));
 
         api.unregisterAllMiddleware();
         expect(api.callbacks.before).toEqual([]);

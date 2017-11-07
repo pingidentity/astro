@@ -1,4 +1,4 @@
-var React = require("re-react");
+var React = require("react");
 var _ = require("underscore");
 var DetailsTooltip = require("../../../components/tooltips/DetailsTooltip.jsx");
 
@@ -7,46 +7,9 @@ var DetailsTooltip = require("../../../components/tooltips/DetailsTooltip.jsx");
 * @memberof DetailsTooltip
 * @desc A demo for DetailsTooltip
 */
-var DetailsTooltipDemo = React.createClass({
-
-    numDemos: 9,
-
-    _toggle: function (index) {
-        var newState = {};
-
-        newState["open" + index] = !this.state["open" + index];
-
-        this.setState(newState);
-    },
-
-    _confirm: function (index) {
-        var newState = {};
-
-        newState["status" + index] = "confirmed";
-        this._toggle(index);
-
-        this.setState(newState);
-    },
-
-    _cancel: function (index) {
-        var newState = {};
-
-        newState["status" + index] = "cancelled";
-        this._toggle(index);
-
-        this.setState(newState);
-    },
-
-    _discard: function (index) {
-        var newState = {};
-
-        newState["status" + index] = "changes discarded";
-        this._toggle(index);
-
-        this.setState(newState);
-    },
-
-    getInitialState: function () {
+class DetailsTooltipDemo extends React.Component {
+    constructor(props) {
+        super(props);
         var initState = {};
 
         for (var i=1; i<=this.numDemos; i+=1) {
@@ -56,19 +19,56 @@ var DetailsTooltipDemo = React.createClass({
 
         initState.open4 = true; // tooltip that is open by default
 
-        return initState;
-    },
+        this.state = initState;
+    }
 
-    componentDidMount: function () {
+    numDemos = 9;
+
+    _toggle = (index) => {
+        var newState = {};
+
+        newState["open" + index] = !this.state["open" + index];
+
+        this.setState(newState);
+    };
+
+    _confirm = (index) => {
+        var newState = {};
+
+        newState["status" + index] = "confirmed";
+        this._toggle(index);
+
+        this.setState(newState);
+    };
+
+    _cancel = (index) => {
+        var newState = {};
+
+        newState["status" + index] = "cancelled";
+        this._toggle(index);
+
+        this.setState(newState);
+    };
+
+    _discard = (index) => {
+        var newState = {};
+
+        newState["status" + index] = "changes discarded";
+        this._toggle(index);
+
+        this.setState(newState);
+    };
+
+    componentDidMount() {
         for (var i=1; i<=this.numDemos; i+=1) {
             this["_handleToggle" + i] = this._toggle.bind(null, i);
             this["_handleCancel" + i] = this._cancel.bind(null, i);
             this["_handleConfirm" + i] = this._confirm.bind(null, i);
             this["_handleDiscard" + i] = this._discard.bind(null, i);
         }
-    },
+    }
 
-    render: function () {
+    render() {
 
         var secondaryArr = [
             { value: this._handleCancel8, label: "One" },
@@ -315,6 +315,6 @@ var DetailsTooltipDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = DetailsTooltipDemo;

@@ -6,7 +6,7 @@ jest.dontMock("../../../tooltips/HelpHint.jsx");
 
 describe("ExpandableRow", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
         ExpandableRow = require("../ExpandableRow.jsx"),
         HelpHint = require("../../../tooltips/HelpHint.jsx"),

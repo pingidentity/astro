@@ -7,19 +7,19 @@ var React = require("react"),
 * @memberof EditViewSectioned
 * @desc A demo for EditViewSectioned
 */
-var EditViewSectionedDemo = React.createClass({
-    componentWillMount: function () {
+class EditViewSectionedDemo extends React.Component {
+    componentWillMount() {
         this.actions = Redux.bindActionCreators(EditViewSectioned.Actions, this.props.store.dispatch);
-    },
+    }
 
-    render: function () {
+    render() {
         return (<EditViewSectioned {...this.props}
             onInputChange={this.actions.setInput}
             onSave={this.actions.saveForm}
             saving={this.props.inputs.saving}
             showButtonBar={this.props.inputs.dirty}/>);
     }
-});
+}
 
 /*
  * Expose the Reducer.  Doing so will tell the DemoApp to create an isolated store for the Demo to use.  Normally

@@ -14,9 +14,8 @@ var React = require("react"),
 * @memberof AreaChart
 * @desc A demo for AreaChart
 */
-var AreaChartDemo = React.createClass({
-
-    render: function () {
+class AreaChartDemo extends React.Component {
+    render() {
         var data = [
             { id: "Monday", s1: 4000, s2: 2400, s3: -2400 },
             { id: "Tuesday", s1: 3000, s2: 1398, s3: -2210 },
@@ -96,6 +95,6 @@ var AreaChartDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = AreaChartDemo;

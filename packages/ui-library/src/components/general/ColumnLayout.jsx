@@ -1,4 +1,5 @@
 "use strict";
+var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames"),
     Utils = require("../../util/Utils.js");
@@ -36,26 +37,24 @@ var React = require("react"),
 *     CSS classes to set on the top-level HTML container.
 */
 
-var Row = React.createClass({
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        id: React.PropTypes.string, //TODO: remove when v1 no longer supported
-        className: React.PropTypes.string
-    },
+class Row extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        id: PropTypes.string, //TODO: remove when v1 no longer supported
+        className: PropTypes.string
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "row"
-        };
-    },
+    static defaultProps = {
+        "data-id": "row"
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (this.props.id && !Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("id", "data-id"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var id = this.props.id || this.props["data-id"],
             className = classnames("content-columns", this.props.className,
                 "columns-" + (React.Children.count(this.props.children) || 1));
@@ -66,8 +65,7 @@ var Row = React.createClass({
             </div>
         );
     }
-});
-
+}
 
 /**
  * @class Column
@@ -82,26 +80,24 @@ var Row = React.createClass({
  *     CSS classes to set on the top-level HTML container.
  */
 
-var Column = React.createClass({
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        id: React.PropTypes.string, //TODO: remove when v1 no longer supported
-        className: React.PropTypes.string
-    },
+class Column extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        id: PropTypes.string, //TODO: remove when v1 no longer supported
+        className: PropTypes.string
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "column-layout"
-        };
-    },
+    static defaultProps = {
+        "data-id": "column-layout"
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (this.props.id) {
             console.warn(Utils.deprecateMessage("id", "data-id"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var id = this.props.id || this.props["data-id"],
             className = classnames("content-column", this.props.className);
 
@@ -111,7 +107,7 @@ var Column = React.createClass({
             </div>
         );
     }
-});
+}
 
 exports.Column = Column;
 exports.Row = Row;

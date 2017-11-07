@@ -1,3 +1,4 @@
+var PropTypes = require("prop-types");
 var React = require("react"),
     _ = require("underscore"),
     Utils = require("../../../util/Utils.js"),
@@ -32,12 +33,12 @@ var React = require("react"),
  *       - fileupload.error.size - selected file exceeding size limit.
  */
 
- /**
- * @callback FileUpload~onChange
- *
- * @param {object} e
- *    The ReactJS synthetic event object.
- */
+/**
+* @callback FileUpload~onChange
+*
+* @param {object} e
+*    The ReactJS synthetic event object.
+*/
 
 /**
  * @class FileUpload
@@ -118,38 +119,36 @@ var React = require("react"),
  */
 
 
-var FileUpload = React.createClass({
-    displayName: "FileUpload",
+class FileUpload extends React.Component {
+    static displayName = "FileUpload";
 
-    propTypes: {
-        controlled: React.PropTypes.bool
-    },
+    static propTypes = {
+        controlled: PropTypes.bool
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "file-upload",
-            controlled: false,
-            accept: Constants.Accept.IMAGE,
-            showThumbnail: false,
-            showRemoveButton: true,
-            disabled: false
-        };
-    },
+    static defaultProps = {
+        "data-id": "file-upload",
+        controlled: false,
+        accept: Constants.Accept.IMAGE,
+        showThumbnail: false,
+        showRemoveButton: true,
+        disabled: false
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         if (!Utils.isProduction()) {
             console.warn(Utils.deprecateMessage("controlled", "stateless"));
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
 
         return stateless
-            ? React.createElement(StatelessFileUpload, _.defaults({ ref: "FileUploadStateless" }, this.props))
-            : React.createElement(StatefulFileUpload, _.defaults({ ref: "FileUploadStateful" }, this.props));
+            ? <StatelessFileUpload {..._.defaults({ ref: "FileUploadStateless" }, this.props)} />
+            : <StatefulFileUpload {..._.defaults({ ref: "FileUploadStateful" }, this.props)} />;
     }
-});
+}
 
 FileUpload.ErrorCodes = Constants.ErrorCodes;
 FileUpload.Accept = Constants.Accept;

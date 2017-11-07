@@ -11,8 +11,8 @@ var ShowsEdit = React.createClass({
      * Declare which variables affect rendering.  The shouldComponentUpdate method will be be injected by re-react.
      */
     propTypes: {
-        inputs: React.PropTypes.object.affectsRendering,
-        errors: React.PropTypes.object.affectsRendering
+        inputs: React.PropTypes.object,
+        errors: React.PropTypes.object
     },
 
     /*

@@ -7,80 +7,77 @@ var React = require("react"),
 * @memberof FileUpload
 * @desc A demo for FileUpload
 */
-var FileUploadDemo = React.createClass({
+class FileUploadDemo extends React.Component {
+    state = {
+        file3: "none",
+        file1: "none",
+        file2: "favicon.png (4762 bytes)",
+        status3: "",
+        thumb3: "src/demo/images/favicon.png",
+        tooltipOpen: false,
+        tooltipConfirmed: ""
+    };
 
-    getInitialState: function () {
-        return {
-            file3: "none",
-            file1: "none",
-            file2: "favicon.png (4762 bytes)",
-            status3: "",
-            thumb3: "src/demo/images/favicon.png",
-            tooltipOpen: false,
-            tooltipConfirmed: ""
-        };
-    },
-
-    _getFile: function (e) {
+    _getFile = (e) => {
         return e && e.target && e.target.files && e.target.files[0];
-    },
+    };
 
-    _onChange1: function (e) {
+    _onChange1 = (e) => {
         var file = this._getFile(e);
 
         this.setState({ file1: file ? file.name : "none" });
-    },
+    };
 
-    _onRemove1: function () {
+    _onRemove1 = () => {
         this.setState({ file1: "none" });
-    },
+    };
 
-    _onChange2: function (e) {
+    _onChange2 = (e) => {
         var file = this._getFile(e);
 
         this.setState({ file2: file ? (file.name + " " + "(" + file.size + " bytes)") : "none" });
-    },
+    };
 
-    _onRemove2: function () {
+    _onRemove2 = () => {
         this.setState({ file2: "none" });
-    },
+    };
 
-    _onChange3: function () {
+    _onChange3 = () => {
         this.setState({
             file3: "something",
             thumb3: "src/demo/images/favicon.png",
             status3: "onChange callback triggered"
         });
-    },
+    };
 
-    _onRemove3: function () {
+    _onRemove3 = () => {
         this.setState({
             file3: undefined,
             thumb3: undefined,
             status3: "onRemove callback triggered"
         });
         this.fileUploadStateless.resetComponent();
-    },
+    };
 
-    _toggleTooltip: function () {
+    _toggleTooltip = () => {
         this.setState({
             tooltipOpen: !this.state.tooltipOpen,
             tooltipConfirmed: ""
         });
-    },
+    };
 
     /*
      * Simple error handling function to log errors to the console.
      */
-    _onError: function (errorCode) {
+    _onError = (errorCode) => {
         // TODO replace with messaging when messaging ported
         console.log("Error in file upload: " + errorCode);
-    },
+    };
 
     /*
      * Simple validating function that always returns valid.
      */
-    _fileValidator: function (file) {
+    _fileValidator = (file) => {
         if (file) {
             if (file.size > 102400) {
                 return "Opps, too big for me (100Kb max)";
@@ -90,9 +87,9 @@ var FileUploadDemo = React.createClass({
                 return "Sorry, can handle only PNG.";
             }
         }
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <div>
                 <div className="input-row">
@@ -191,7 +188,7 @@ var FileUploadDemo = React.createClass({
                     </div>
                     <FileUpload
                         data-id="statelessFileUpload"
-                        ref={function (component) {
+                        ref={(component) => {
                             if (component && !this.fileUploadStateless) {
                                 this.fileUploadStateless = component.refs.FileUploadStateless;
                             }
@@ -230,6 +227,6 @@ var FileUploadDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = FileUploadDemo;

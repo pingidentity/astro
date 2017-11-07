@@ -7,13 +7,14 @@ jest.dontMock("../MessagesConstants.js");
 describe("Messages", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
         Messages = require("../index.js"),
         setTimeout = window.setTimeout,
         _ = require("underscore");
 
     beforeEach(function () {
+        jest.useFakeTimers();
         window.setTimeout = jest.genMockFunction();
     });
 
@@ -102,7 +103,7 @@ describe("Messages", function () {
         var messages = TestUtils.scryRenderedDOMNodesWithClass(component, "message");
 
         expect(messages.length).toEqual(1);
-        expect(global.setInterval.mock.calls[0][1]).toBe(5000);
+        expect(setInterval.mock.calls[0][1]).toBe(5000);
     });
 
     it("Test unmount clears timers", function () {
@@ -110,11 +111,11 @@ describe("Messages", function () {
             messages: [{ key: "Test message text", duration: 5000 }]
         });
 
-        expect(global.clearInterval.mock.calls.length).toBe(0);
+        expect(clearInterval.mock.calls.length).toBe(0);
 
         ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
 
-        expect(global.clearInterval.mock.calls.length).toBe(1);
+        expect(clearInterval.mock.calls.length).toBe(1);
     });
 
     it("Test unmount with no timer", function () {
@@ -122,11 +123,11 @@ describe("Messages", function () {
             messages: [{ key: "Test message text" }]
         });
 
-        expect(global.clearInterval.mock.calls.length).toBe(0);
+        expect(clearInterval.mock.calls.length).toBe(0);
 
         ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
 
-        expect(global.clearInterval.mock.calls.length).toBe(0);
+        expect(clearInterval.mock.calls.length).toBe(0);
     });
 
     it("Render html message", function () {

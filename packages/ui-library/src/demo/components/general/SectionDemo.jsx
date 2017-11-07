@@ -6,21 +6,18 @@ var Section = require("../../../components/general/Section.jsx");
 * @memberof Section
 * @desc A demo for Section
 */
-var SectionDemo = React.createClass({
+class SectionDemo extends React.Component {
+    state = {
+        firstSectionOpen: false
+    };
 
-    getInitialState: function () {
-        return {
-            firstSectionOpen: false
-        };
-    },
-
-    _toggleFirst: function () {
+    _toggleFirst = () => {
         this.setState({
             firstSectionOpen: !this.state.firstSectionOpen
         });
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <div>
                 <Section
@@ -64,6 +61,6 @@ var SectionDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = SectionDemo;

@@ -9,47 +9,47 @@ var Toggle = require("../../../components/forms/form-toggle");
 * @memberof ExpandableRow
 * @desc A demo for ExpandableRow
 */
-var ExpandableRowDemo = React.createClass({
+class ExpandableRowDemo extends React.Component {
+    constructor(props) {
+        super(props);
+        this._onToggle1 = this._onToggle.bind(null, 1);
+        this._onToggle3 = this._onToggle.bind(null, 3);
 
-    _onToggle: function (index) {
+        this.state = {
+            expanded: false,
+            rowDeleted: false
+        };
+    }
+
+    _onToggle = (index) => {
         var newState = {},
             key = "expanded" + index;
 
         newState[key] = !this.state[key];
 
         this.setState(newState);
-    },
+    };
 
-    _handleDelete: function () {
+    _handleDelete = () => {
         this.setState({
             showDeleteConfirm: true
         });
-    },
+    };
 
-    _handleDeleteCancel: function () {
+    _handleDeleteCancel = () => {
         this.setState({
             showDeleteConfirm: false
         });
-    },
+    };
 
-    _handleDeleteConfirm: function () {
+    _handleDeleteConfirm = () => {
         this.setState({
             showDeleteConfirm: false,
             rowDeleted: true
         });
-    },
+    };
 
-    getInitialState: function () {
-        this._onToggle1 = this._onToggle.bind(null, 1);
-        this._onToggle3 = this._onToggle.bind(null, 3);
-
-        return {
-            expanded: false,
-            rowDeleted: false
-        };
-    },
-
-    render: function () {
+    render() {
 
         return (
             <div data-id="idp-row" className="result-set">
@@ -149,6 +149,6 @@ var ExpandableRowDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = ExpandableRowDemo;

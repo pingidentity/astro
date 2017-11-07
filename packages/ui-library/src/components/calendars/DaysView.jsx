@@ -1,62 +1,66 @@
-var React = require("re-react");
+var PropTypes = require("prop-types");
+var React = require("react");
 var classnames = require("classnames");
 var moment = require("moment-range");
 var Cell = require("./Cell.jsx");
 var ViewHeader = require("./ViewHeader.jsx");
 var CalendarUtils = require("./Utils.js");
 
-module.exports = React.createClass({
+module.exports = class extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        date: PropTypes.object.isRequired,
+        onSetDate: PropTypes.func,
+        onNextView: PropTypes.func
+    };
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        date: React.PropTypes.object.isRequired.affectsRendering,
-        onSetDate: React.PropTypes.func,
-        onNextView: React.PropTypes.func
-    },
+    static defaultProps = {
+        "data-id": "days-view"
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "days-view"
-        };
-    },
-
-    getDaysTitles: function () {
+    getDaysTitles = () => {
         return moment.weekdaysMin().map(function (item) {
             return {
                 val: item,
                 label: item
             };
         });
-    },
+    };
 
-    next: function () {
+    next = () => {
         var date = this.props.date.clone().add(1, "months");
 
         // Get nearest date within month that falls in range
         date = CalendarUtils.getNearestInRange(date, this.props.dateRange);
         this.props.onSetDate(date);
-    },
+    };
 
-    prev: function () {
+    prev = () => {
         var date = this.props.date.clone().subtract(1, "months");
 
         // Get nearest date within month that falls in range
         date = CalendarUtils.getNearestInRange(date, this.props.dateRange);
         this.props.onSetDate(date);
-    },
+    };
 
-    cellClick: function (e) {
+    cellClick = (e) => {
+        /* istanbul ignore next  */
         var cell = e.target,
             date = parseInt(cell.innerHTML, 10),
             newDate = this.props.date ? this.props.date.clone() : moment();
 
+        /* istanbul ignore if  */
         if (isNaN(date)) {
             return;
         }
 
+        /* istanbul ignore if  */
         if (cell.className.indexOf("prev") > -1) {
             newDate.subtract(1, "months");
+
+        /* istanbul ignore elseif */
         } else if (cell.className.indexOf("next") > -1) {
+            /* istanbul ignore next  */
             newDate.add(1, "months");
         }
 
@@ -64,10 +68,10 @@ module.exports = React.createClass({
         if (CalendarUtils.inDateRange(newDate, this.props.dateRange)) {
             this.props.onSetDate(newDate, true);
         }
-    },
+    };
 
-
-    getDays: function () {
+    getDays = () => {
+        /* istanbul ignore next  */
         var now = this.props.date ? this.props.date : moment(),
             start = now.clone().startOf("month").day(0),
             end = now.clone().endOf("month").day(6),
@@ -91,9 +95,9 @@ module.exports = React.createClass({
             }.bind(this));
 
         return days;
-    },
+    };
 
-    render: function () {
+    render() {
         var titles = this.getDaysTitles().map(function (item, i) {
             return <Cell data-id={"titles-cell-" + i} value={item.label} className="day title" key={i} />;
         });
@@ -110,6 +114,7 @@ module.exports = React.createClass({
             return <Cell data-id={"days-cell-" + i} value={item.label} className={className} key={i} />;
         });
 
+        /* istanbul ignore next  */
         var currentDate = this.props.date ? this.props.date.clone().format("MMMM") : moment().format("MMMM");
         var start = this.props.dateRange && this.props.dateRange.startDate && moment(this.props.dateRange.startDate);
         var end = this.props.dateRange && this.props.dateRange.endDate && moment(this.props.dateRange.endDate);
@@ -134,5 +139,4 @@ module.exports = React.createClass({
             </div>
         );
     }
-
-});
+};

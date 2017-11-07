@@ -1,6 +1,8 @@
 "use strict";
 
-var React = require("re-react"),
+var PropTypes = require("prop-types");
+
+var React = require("react"),
     _ = require("underscore"),
     classnames = require("classnames"),
     Translator = require("../../../util/i18n/Translator.js"),
@@ -85,25 +87,36 @@ var Types = {
 *    Callback to be triggered when the state of the search of a country when the flag dropdown is expanded changes.
 */
 
-var CountryFlagList = React.createClass({
+class CountryFlagList extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
+        selectedCountryCode: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number
+        ]),
+        countryCodeDisplayType: PropTypes.oneOf([Types.ISO_2, Types.ISO_NUM, Types.DIAL_CODE]),
+        countryCodeClassName: PropTypes.string,
+        onValueChange: PropTypes.func,
+        labelNoCountry: PropTypes.string,
+        open: PropTypes.bool,
+        onToggle: PropTypes.func,
+        searchString: PropTypes.string,
+        searchTime: PropTypes.number,
+        onSearch: PropTypes.func
+    };
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        className: React.PropTypes.string.affectsRendering,
-        selectedCountryCode: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.number
-        ]).affectsRendering,
-        countryCodeDisplayType: React.PropTypes.oneOf([Types.ISO_2, Types.ISO_NUM, Types.DIAL_CODE]).affectsRendering,
-        countryCodeClassName: React.PropTypes.string.affectsRendering,
-        onValueChange: React.PropTypes.func,
-        labelNoCountry: React.PropTypes.string.affectsRendering,
-        open: React.PropTypes.bool.affectsRendering,
-        onToggle: React.PropTypes.func,
-        searchString: React.PropTypes.string.affectsRendering,
-        searchTime: React.PropTypes.number.affectsRendering,
-        onSearch: React.PropTypes.func
-    },
+    static defaultProps = {
+        labelNoCountry: "— Select a country —",
+        "data-id": "country-flag-list",
+        className: "",
+        countryCodeClassName: "",
+        countryCodeDisplayType: Types.ISO_2,
+        selectedCountryCode: "",
+        open: false,
+        onValueChange: _.noop,
+        onToggle: _.noop
+    };
 
     /**
     * Returns a country's data by code
@@ -111,13 +124,13 @@ var CountryFlagList = React.createClass({
     * @return {Object} - the country data
     * @ignore
     */
-    _findByCountryCode: function (code) {
+    _findByCountryCode = (code) => {
         return countryCodes.filter(function (country) {
             return country.iso2 === code || country.isoNum === code;
         })[0];
-    },
+    };
 
-    _translateCountryNames: function (listCountry) {
+    _translateCountryNames = (listCountry) => {
         if (listCountry !== undefined) {
             listCountry.forEach(function (country) {
                 country.name = Translator.translate(country.iso2);
@@ -126,27 +139,13 @@ var CountryFlagList = React.createClass({
         listCountry = _.sortBy(listCountry, "name");
 
         return listCountry;
-    },
+    };
 
-    componentWillMount: function () {
+    componentWillMount() {
         countryCodes = this._translateCountryNames(countryCodes);
-    },
+    }
 
-    getDefaultProps: function () {
-        return {
-            labelNoCountry: "— Select a country —",
-            "data-id": "country-flag-list",
-            className: "",
-            countryCodeClassName: "",
-            countryCodeDisplayType: Types.ISO_2,
-            selectedCountryCode: "",
-            open: false,
-            onValueChange: _.noop,
-            onToggle: _.noop
-        };
-    },
-
-    render: function () {
+    render() {
         var containerClassName = classnames("flag-container", this.props.className);
         var selectedCountry = this.props.selectedCountryCode
             ? this._findByCountryCode(this.props.selectedCountryCode)
@@ -194,7 +193,7 @@ var CountryFlagList = React.createClass({
                     noneOptionLabelClassName="country-name" />
         );
     }
-});
+}
 
 /**
 * @class CountryFlagList~Flag
@@ -216,23 +215,20 @@ var CountryFlagList = React.createClass({
 *    CSS classes to set on the country code text.
 */
 
-var Flag = React.createClass({
+class Flag extends React.Component {
+    static propTypes = {
+        "data-id": PropTypes.string,
+        countryCodeClassName: PropTypes.string,
+        name: PropTypes.string,
+        code: PropTypes.string,
+        iso2: PropTypes.string
+    };
 
-    propTypes: {
-        "data-id": React.PropTypes.string,
-        countryCodeClassName: React.PropTypes.string.affectsRendering,
-        name: React.PropTypes.string.affectsRendering,
-        code: React.PropTypes.string.affectsRendering,
-        iso2: React.PropTypes.string.affectsRendering
-    },
+    static defaultProps = {
+        "data-id": "flag"
+    };
 
-    getDefaultProps: function () {
-        return {
-            "data-id": "flag"
-        };
-    },
-
-    render: function () {
+    render() {
         var flagClassName = classnames("iti-flag", this.props.iso2),
             countryCodeClassName = classnames("country-code", this.props.countryCodeClassName);
 
@@ -246,7 +242,7 @@ var Flag = React.createClass({
             </div>
         );
     }
-});
+}
 
 CountryFlagList.CountryCodeTypes = Types;
 

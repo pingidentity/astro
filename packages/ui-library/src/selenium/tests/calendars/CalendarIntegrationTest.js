@@ -21,8 +21,6 @@ describe("Calendar Integration", function () {
      * THEN: The base image and the current image should be identical
      */
     it("should have the default current date value and change other date value", CalendarPage.retriable(function () {
-        CalendarPage.openCalendarDemoPage();
-
         expect(CalendarPage.verifyCalendarFieldExisting()).toBeTruthy();
         var currentDate = CalendarPage.getCurrentDate();
         expect(CalendarPage.getValueOfCalendar()).toEqual(currentDate);

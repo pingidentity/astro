@@ -7,12 +7,12 @@ var React = require("react"),
 * @memberof EditViewSimple
 * @desc A demo for EditViewSimple
 */
-var EditViewSimpleDemo = React.createClass({
-    componentWillMount: function () {
+class EditViewSimpleDemo extends React.Component {
+    componentWillMount() {
         this.actions = Redux.bindActionCreators(EditViewSimple.Actions, this.props.store.dispatch);
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <EditViewSimple {...this.props}
                 onInputChange={this.actions.setInput}
@@ -20,7 +20,7 @@ var EditViewSimpleDemo = React.createClass({
                 saving={this.props.inputs.saving}
                 showButtonBar={this.props.inputs.dirty} />);
     }
-});
+}
 
 /*
  * Expose the Reducer.  Doing so will tell the DemoApp to create an isolated store for the Demo to use.  Normally

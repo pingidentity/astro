@@ -6,11 +6,12 @@ var LeftNavBar = require("../../../components/panels/left-nav");
 * @memberof LeftNavBar
 * @desc A demo for LeftNavBar
 */
-var LeftNavDemo = React.createClass({
-    getInitialState: function () {
+class LeftNavDemo extends React.Component {
+    constructor(props) {
+        super(props);
         var initState = LeftNavBar.Reducer(null, {});
 
-        return LeftNavBar.Reducer(initState, LeftNavBar.Actions.init([
+        this.state = LeftNavBar.Reducer(initState, LeftNavBar.Actions.init([
             {
                 label: "Section 1",
                 id: "section1",
@@ -22,22 +23,22 @@ var LeftNavDemo = React.createClass({
                 children: [ { label: "Item 2", id: "item2" } ]
             }
         ]));
-    },
+    }
 
-    _handleSectionClick: function (id) {
+    _handleSectionClick = (id) => {
         this.setState(LeftNavBar.Reducer(this.state, LeftNavBar.Actions.toggleSectionCloseOthers(id)));
-    },
+    };
 
-    _handleItemClick: function (id) {
+    _handleItemClick = (id) => {
         this.setState(LeftNavBar.Reducer(this.state, LeftNavBar.Actions.selectItemUnselectOthers(id)));
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <LeftNavBar {...this.state}
                 onItemValueChange={this._handleItemClick}
                 onSectionValueChange={this._handleSectionClick} />);
     }
-});
+}
 
 module.exports = LeftNavDemo;

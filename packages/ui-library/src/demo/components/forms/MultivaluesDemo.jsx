@@ -6,33 +6,30 @@ var Multivalues = require("../../../components/forms/Multivalues.jsx");
 * @memberof Multivalues
 * @desc A demo for Multivalues
 */
-var MultivaluesDemo = React.createClass({
+class MultivaluesDemo extends React.Component {
+    state = {
+        entries: [
+            "First Entry",
+            "Second Entry",
+            "Another Entry",
+            "Last Entry"
+        ]
+    };
 
-    getInitialState: function () {
-        return {
-            entries: [
-                "First Entry",
-                "Second Entry",
-                "Another Entry",
-                "Last Entry"
-            ]
-        };
-    },
-
-    _handleValueChange: function (entries) {
+    _handleValueChange = (entries) => {
         this.setState({
             entries: entries
         });
-    },
+    };
 
-    _onNewValue: function (keyCode) {
+    _onNewValue = (keyCode) => {
         if (keyCode === 13) {
             return true;
         }
         return false;
-    },
+    };
 
-    render: function () {
+    render() {
         return (
             <div>
                 <p>Type ahead. Press "return" or "," or "tab" or "space" to add an item,
@@ -56,6 +53,6 @@ var MultivaluesDemo = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = MultivaluesDemo;

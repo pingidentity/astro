@@ -2,7 +2,7 @@ jest.dontMock("../Link.jsx");
 
 describe("Link", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         Link = require("../Link.jsx");
 

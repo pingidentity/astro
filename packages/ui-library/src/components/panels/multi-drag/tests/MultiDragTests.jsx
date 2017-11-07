@@ -6,11 +6,23 @@ jest.dontMock("../../../../util/Utils");
 
 describe("MultiDrag", function () {
     var React = require("react"),
-        ReactTestUtils = require("react-addons-test-utils"),
+        ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
         ReduxTestUtils = require("../../../../util/ReduxTestUtils"),
         MultiDrag = require("../MultiDrag.jsx"),
-        _ = require("underscore");
+        _ = require("underscore"),
+        TestBackend = require("react-dnd-test-backend"),
+        DragDropContext = require("react-dnd").DragDropContext;
+
+    var thisComponent;
+
+    function wrapInTestContext (Component) {
+        return DragDropContext(TestBackend)( class extends React.Component {
+            render() {
+                return <Component {...this.props} ref={c => thisComponent = c}/>;
+            }
+        });
+    }
 
     var availableRows = [{ id: 1, n: 1 }, { id: 2, n: 2 }],
         addedRows = [{ id: 3, n: 3 }, { id: 4, n: 4 }];
@@ -29,18 +41,14 @@ describe("MultiDrag", function () {
             ]
         });
 
-        return ReactTestUtils.renderIntoDocument(<ReduxTestUtils.Wrapper type={MultiDrag} opts={opts} />);
+        var WrappedComponent = wrapInTestContext(MultiDrag);
+        return ReactTestUtils.renderIntoDocument(<ReduxTestUtils.Wrapper type={WrappedComponent} opts={opts} />);
     }
 
     beforeEach(function () {
+        thisComponent = null;
     });
-
-    function getUnderlyingComp (wrapper) {
-        //because the MultiDrag is wrapped in a DragDropContext we have to go through one extra step
-        //to get to the component.
-        return wrapper.refs.target.refs.child;
-    }
-
+    
     function getDesc (fromC, fromI, toC, toI) {
         return {
             from: { column: fromC, index: fromI },
@@ -49,8 +57,8 @@ describe("MultiDrag", function () {
     }
 
     it("renders with default data-id", function () {
-        var wrapper = getWrappedComponent();
-        var component = getUnderlyingComp(wrapper);
+        getWrappedComponent();
+        var component = thisComponent;
 
         var multiDrag = TestUtils.findRenderedDOMNodeWithDataId(component, "multi-drag");
 
@@ -58,8 +66,8 @@ describe("MultiDrag", function () {
     });
 
     it("renders with given data-id", function () {
-        var wrapper = getWrappedComponent({ "data-id": "myMultiDrag" });
-        var component = getUnderlyingComp(wrapper);
+        getWrappedComponent({ "data-id": "myMultiDrag" });
+        var component = thisComponent;
 
         var multiDrag = TestUtils.findRenderedDOMNodeWithDataId(component, "myMultiDrag");
 
@@ -67,8 +75,8 @@ describe("MultiDrag", function () {
     });
 
     it("renders with given className", function () {
-        var wrapper = getWrappedComponent({ className: "myMultiDragClass" });
-        var component = getUnderlyingComp(wrapper);
+        getWrappedComponent({ className: "myMultiDragClass" });
+        var component = thisComponent;
 
         var multiDrag = TestUtils.findRenderedDOMNodeWithClass(component, "myMultiDragClass");
 
@@ -76,8 +84,8 @@ describe("MultiDrag", function () {
     });
 
     it("cancels drag while invalid", function () {
-        var wrapper = getWrappedComponent();
-        var component = getUnderlyingComp(wrapper);
+        getWrappedComponent();
+        var component = thisComponent;
         var componentRef = component.refs.MultiDragStateless;
 
         componentRef._onDrag(1, 1, 0, 0);
@@ -89,8 +97,8 @@ describe("MultiDrag", function () {
     });
 
     it("_onDrop is a noop", function () {
-        var wrapper = getWrappedComponent();
-        var component = getUnderlyingComp(wrapper);
+        getWrappedComponent();
+        var component = thisComponent;
         var componentRef = component.refs.MultiDragStateless;
 
         componentRef._onDrop();
@@ -98,8 +106,8 @@ describe("MultiDrag", function () {
     });
 
     it("blocks moving item to same location", function () {
-        var wrapper = getWrappedComponent();
-        var component = getUnderlyingComp(wrapper);
+        getWrappedComponent();
+        var component = thisComponent;
         var componentRef = component.refs.MultiDragStateless;
 
         componentRef._onDrag(1, 1, 0, 0);
@@ -111,8 +119,8 @@ describe("MultiDrag", function () {
     });
 
     it("drags item 1 from first column to second", function () {
-        var wrapper = getWrappedComponent();
-        var component = getUnderlyingComp(wrapper);
+        getWrappedComponent();
+        var component = thisComponent;
         var componentRef = component.refs.MultiDragStateless;
 
         componentRef._onDrag(0, 0, 1, 0);
@@ -120,8 +128,8 @@ describe("MultiDrag", function () {
     });
 
     it("avoids redundant calls to onDrag", function () {
-        var wrapper = getWrappedComponent();
-        var component = getUnderlyingComp(wrapper);
+        getWrappedComponent();
+        var component = thisComponent;
         var componentRef = component.refs.MultiDragStateless;
 
         //the first call execs the callback
@@ -139,8 +147,8 @@ describe("MultiDrag", function () {
     });
 
     it("clears cached move on drag end", function () {
-        var wrapper = getWrappedComponent();
-        var component = getUnderlyingComp(wrapper);
+        getWrappedComponent();
+        var component = thisComponent;
         var componentRef = component.refs.MultiDragStateless;
 
         //the first call execs the callback
@@ -153,16 +161,16 @@ describe("MultiDrag", function () {
     });
 
     it("stateful: renders", function () {
-        var wrapper = getWrappedComponent({ stateless: false });
-        var component = getUnderlyingComp(wrapper);
+        getWrappedComponent({ stateless: false });
+        var component = thisComponent;
         var componentRef = component.refs.MultiDragStateful;
 
         expect(componentRef).toBeTruthy();
     });
 
     it("stateful: _handleSearch callback triggers onSearch callback", function () {
-        var wrapper = getWrappedComponent({ stateless: false });
-        var component = getUnderlyingComp(wrapper);
+        getWrappedComponent({ stateless: false });
+        var component = thisComponent;
         var componentRef = component.refs.MultiDragStateful;
 
         componentRef._handleSearch(0, "filter");
@@ -171,8 +179,8 @@ describe("MultiDrag", function () {
     });
 
     it("stateful: _handleCancel callback triggers onCancel callback and clears placeholder", function () {
-        var wrapper = getWrappedComponent({ stateless: false });
-        var component = getUnderlyingComp(wrapper);
+        getWrappedComponent({ stateless: false });
+        var component = thisComponent;
         var componentRef = component.refs.MultiDragStateful;
 
         componentRef._handleCancel();
@@ -182,8 +190,8 @@ describe("MultiDrag", function () {
     });
 
     it("stateful: _handleDrop callback triggers onDrop callback", function () {
-        var wrapper = getWrappedComponent({ stateless: false });
-        var component = getUnderlyingComp(wrapper);
+        getWrappedComponent({ stateless: false });
+        var component = thisComponent;
         var componentRef = component.refs.MultiDragStateful;
 
         var desc = { from: { column: 0, index: 0 }, to: { column: 0, index: 0 } };
@@ -193,8 +201,8 @@ describe("MultiDrag", function () {
     });
 
     it("stateful: _handleDrag callback triggers onDrag callback and sets placeholder at destination", function () {
-        var wrapper = getWrappedComponent({ stateless: false });
-        var component = getUnderlyingComp(wrapper);
+        getWrappedComponent({ stateless: false });
+        var component = thisComponent;
         var componentRef = component.refs.MultiDragStateful;
 
         var desc = { from: { column: 0, index: 0 }, to: { column: 0, index: 0 } };
@@ -204,45 +212,6 @@ describe("MultiDrag", function () {
         expect(componentRef.state.placeholder).toBe(desc.to);
     });
 
-    //TODO: remove when controlled no longer supported
-    it("produces stateful components correctly given controlled prop", function () {
-        var opts = {
-            controlled: false,
-            onSearch: _.noop,
-            onDrag: _.noop,
-            onDrop: _.noop,
-            onCancel: _.noop,
-            contentType: <div />,
-            columns: []
-        };
-        var wrapper = ReactTestUtils.renderIntoDocument(<ReduxTestUtils.Wrapper type={MultiDrag} opts={opts} />);
-        var component = getUnderlyingComp(wrapper);
-        var stateful = component.refs.MultiDragStateful;
-        var stateless = component.refs.MultiDragStateless;
-
-        expect(stateful).toBeTruthy();
-        expect(stateless).toBeFalsy();
-    });
-
-    //TODO: remove when controlled no longer supported
-    it("produces stateless components correctly given controlled prop", function () {
-        var opts = {
-            controlled: true,
-            onSearch: _.noop,
-            onDrag: _.noop,
-            onDrop: _.noop,
-            onCancel: _.noop,
-            contentType: <div />,
-            columns: []
-        };
-        var wrapper = ReactTestUtils.renderIntoDocument(<ReduxTestUtils.Wrapper type={MultiDrag} opts={opts} />);
-        var component = getUnderlyingComp(wrapper);
-        var stateful = component.refs.MultiDragStateful;
-        var stateless = component.refs.MultiDragStateless;
-
-        expect(stateless).toBeTruthy();
-        expect(stateful).toBeFalsy();
-    });
 
     //TODO: remove when controlled no longer supported
     it("logs warning for deprecated controlled prop", function () {

@@ -17,45 +17,42 @@ var fieldSetOptions = [
  * @memberof ConditionalFieldset
  * @desc A demo for ConditionalFieldset
  */
-var ConditionalFieldsetDemo = React.createClass({
+class ConditionalFieldsetDemo extends React.Component {
+    state = {
+        selectedCondition1Index: 1,
+        selectedCondition2Index: 0,
+        selectedCondition3Index: 1,
+        selectedTypeIndex: 0,
+        selectedTypeName: ConditionalFieldset.Types.RADIO
+    };
 
-    _onCondition1ValueChange: function (index) {
+    _onCondition1ValueChange = (index) => {
         this.setState({
             selectedCondition1Index: Number(index)
         });
-    },
+    };
 
-    _onCondition2ValueChange: function (index) {
+    _onCondition2ValueChange = (index) => {
         this.setState({
             selectedCondition2Index: Number(index)
         });
-    },
+    };
 
-    _onCondition3ValueChange: function (index) {
+    _onCondition3ValueChange = (index) => {
         this.setState({
             selectedCondition3Index: Number(index)
         });
-    },
+    };
 
-    _onTypeValueChange: function (index) {
+    _onTypeValueChange = (index) => {
         var type = _.findWhere(fieldSetOptions, { id: Number(index) });
         this.setState({
             selectedTypeIndex: type.id,
             selectedTypeName: type.name
         });
-    },
+    };
 
-    getInitialState: function () {
-        return {
-            selectedCondition1Index: 1,
-            selectedCondition2Index: 0,
-            selectedCondition3Index: 1,
-            selectedTypeIndex: 0,
-            selectedTypeName: ConditionalFieldset.Types.RADIO
-        };
-    },
-
-    render: function () {
+    render() {
         return (
 
             <div style = { { marginLeft: "20px" } }>
@@ -151,12 +148,12 @@ var ConditionalFieldsetDemo = React.createClass({
                         <div title="Option 2">Option 2</div>
                     </ConditionalFieldset>
                 </div>
-                
+
                 <div className="input-row">
                     <label className="detached">
                         ConditionalFieldset, disabled, with empty support, set through dom, stateful
                     </label>
-                    <ConditionalFieldset data-id="fieldset-4"
+                    <ConditionalFieldset data-id="fieldset-5"
                                          type={this.state.selectedTypeName}
                                          disabled={true}>
                         <div title="Do nothing"></div>
@@ -169,7 +166,7 @@ var ConditionalFieldsetDemo = React.createClass({
                     <label className="detached">
                         ConditionalFieldset without empty support, default settings, stateful
                     </label>
-                    <ConditionalFieldset data-id="fieldset-5">
+                    <ConditionalFieldset data-id="fieldset-6">
                         <div title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
                         <div title="Option 2">Option 2</div>
                     </ConditionalFieldset>
@@ -179,6 +176,6 @@ var ConditionalFieldsetDemo = React.createClass({
 
         );
     }
-});
+}
 
 module.exports = ConditionalFieldsetDemo;
