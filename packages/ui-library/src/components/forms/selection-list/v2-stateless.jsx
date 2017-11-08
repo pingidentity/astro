@@ -60,7 +60,8 @@ module.exports = class extends React.Component {
         showSearchBox: true,
         type: Constants.ListType.SINGLE,
         showSelectionOptions: false,
-        showOnlySelected: false
+        showOnlySelected: false,
+        items: []
     };
 
     /**
