@@ -1,7 +1,7 @@
 var React = require("react"),
     classnames = require("classnames"),
     marked = require("marked"),
-    //Markup = require("./Markup.jsx"),
+    Markup = require("./Markup.jsx"),
     RockerButton = require("../../components/forms/RockerButton.jsx"),
     If = require("../../components/general/If.jsx"),
     _ = require("underscore");
@@ -161,9 +161,7 @@ class DemoItem extends React.Component {
                         {React.createElement(this.props.type, props)}
                     </div>
 
-                    {!this.props.fullscreen
-                        //&& <Markup content={this.props.code} />
-                }
+                    {!this.props.fullscreen && <Markup content={this.props.code} />}
                 </div>
             </div>
         );

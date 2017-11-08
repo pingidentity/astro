@@ -3,7 +3,7 @@ var React = require("react");
 class Markup extends React.Component {
     _extractRenderCode = () => {
         //get all matches for 'render: function() {...}'
-        var matches = this.props.content.replace(/\n|\r/g, "!!!").match(/\s*render: .*?!!!(.*?)!!!\s{4}}/g);
+        var matches = this.props.content.replace(/\n|\r/g, "!!!").match(/\s*render.*?!!!(.*?)!!!\s{4}}/g);
 
         //take latest one (we can have helper react components before demo class)
         var latestMatch = matches[matches.length - 1];
