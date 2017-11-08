@@ -56,10 +56,13 @@ exports.filterFieldContains = function (field, filter, item) {
     filter = filter.trim().toLowerCase();
 
     if (field) {
-        return item[field].toLowerCase().includes(filter);
+        // .includes not supported by IE
+        return item[field].toLowerCase().indexOf(filter) !== -1;
+        
     } else {
         for (var key in item) {
-            if (item[key].toString && item[key].toString().toLowerCase().includes(filter)) {
+            // .includes not supported by IE
+            if (item[key].toString && item[key].toString().toLowerCase().indexOf(filter) !== -1) {
                 return true;
             }
         }
