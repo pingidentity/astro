@@ -537,10 +537,15 @@ module.exports = [
         ]
     },
     {
-        label: "Tutorials",
+        label: "Docs",
         //Override alphabetical ordering in Demo.jsx to order children as they appear in the list
         listOrder: true,
         children: [
+            {
+                label: "Release Notes",
+                demo: require("../components/docs/releaseNotes.jsx"),
+                fullscreen: true
+            },
             {
                 label: "UI Library 101",
                 demo: require("../components/tutorials/uiLibrary101.jsx"),

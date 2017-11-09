@@ -1,0 +1,109 @@
+
+.markdown {
+    line-height: 1.5em;
+    color: black;
+    h1 {
+        font-size: 40px;
+        margin: 24px 0;
+    }
+    h2 {
+        font-size: 30px;
+        margin: 30px 0 20px;
+    }
+    h3 {
+        font-size: 24px;
+        margin: 20px 0 15px;
+    }
+    p, li, ul {
+        font-size: 16px;
+    }
+    em {
+        font-style: italic;
+    }
+    ul {
+        margin: 5px 0 15px 20px;
+        li {
+            list-style: disc;
+        }
+        ul {
+            li {
+                list-style: circle;
+            }
+            ul {
+                li {
+                    list-style: square;
+                }
+                ul {
+                    li {
+                        &:before {
+                            content: "- ";
+                        }
+                        list-style-type: none;
+                    }
+                }
+            }
+        }
+    }
+    // MARKUP
+
+    code,
+    pre {
+    	color: black;
+    	text-shadow: 0 1px white;
+    	font-family: Consolas, Monaco, 'Andale Mono', monospace;
+    	font-size: 14px;
+    	direction: ltr;
+    	text-align: left;
+    	white-space: pre;
+    	word-spacing: normal;
+    	word-break: normal;
+    	line-height: 1.5;
+
+    	-moz-tab-size: 4;
+    	-o-tab-size: 4;
+    	tab-size: 4;
+
+    	-webkit-hyphens: none;
+    	-moz-hyphens: none;
+    	-ms-hyphens: none;
+    	hyphens: none;
+    }
+
+    pre::-moz-selection, pre ::-moz-selection,
+    code::-moz-selection, code ::-moz-selection {
+    	text-shadow: none;
+    	background: #b3d4fc;
+    }
+
+    pre::selection, pre ::selection,
+    code::selection, code ::selection {
+    	text-shadow: none;
+    	background: #b3d4fc;
+    }
+
+    @media print {
+    	code,
+    	pre {
+    		text-shadow: none;
+    	}
+    }
+
+    /* Code blocks */
+    pre {
+    	padding: 1em;
+    	margin: .5em 0;
+    	overflow: auto;
+    }
+
+    :not(pre) > code,
+    pre {
+    	background: #f5f2f0;
+    }
+
+    /* Inline code */
+    :not(pre) > code {
+    	padding: .1em;
+    	border-radius: .3em;
+    }
+
+}

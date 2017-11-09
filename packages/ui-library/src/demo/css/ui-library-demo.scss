@@ -6,6 +6,7 @@
 // IMPORT EXTERNAL DEMO-ONLY FILES
 @import 'layout';
 @import 'markup';
+@import '_markdown';
 @import 'demos';
 @import 'tutorial';
 
@@ -16,6 +17,7 @@ $font-path: '../fonts/proxima-nova/';
 @font-face { font-family: 'ProximaNovaLight'; font-weight: normal; src: url('#{$font-path}ProximaNova-Light.otf'); }
 @font-face { font-family: 'ProximaNovaSemibold'; font-weight: normal; src: url('#{$font-path}ProximaNova-Semibold.otf'); }
 @font-face { font-family: 'ProximaNovaCondRegular'; font-weight: normal; src: url('#{$font-path}ProximaNovaCond-Regular.otf'); }
+
 
 // COMPONENTS
 #content {

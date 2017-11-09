@@ -33,6 +33,10 @@ module.exports = {
                 test: /\.json$/,
                 loaders: ["json-loader"]
             },
+            {
+                test: /\.md$/,
+                loaders: ["html-loader","markdown-loader"]
+            },
             // the core css gets embedded in the JS file
             {
                 test: /\.css$/,
