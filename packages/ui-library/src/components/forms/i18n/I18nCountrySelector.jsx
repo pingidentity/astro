@@ -42,8 +42,6 @@ var React = require("react"),
 * @param {boolean} [stateless]
 *    To enable the component to be externally managed. True will relinquish control to the component's owner.
 *    False or not specified will cause the component to manage state internally.
-* @param {boolean} [controlled=false]
-*     DEPRECATED. Use "stateless" instead.
 * @param {string} [countryCode]
 *     The country code to be selected by default.
 * @param {I18nCountrySelector~onValueChange}
@@ -60,30 +58,30 @@ var React = require("react"),
 *     Time to help clear the search when the user delays their search.
 * @param {I18nCountrySelector~onSearch} [onSearch]
 *    Callback to be triggered when the state of the search of a country when the flag dropdown is expanded changes.
-* @param {I18nCountrySelector~onSearch} [onCountrySearch]
-*    DEPRECATED. Use "onSearch" instead.
 */
 
 module.exports = class extends React.Component {
     static propTypes = {
-        controlled: PropTypes.bool, //TODO: remove in new version
         stateless: PropTypes.bool
     };
 
     static defaultProps = {
-        controlled: false //TODO: change to stateless in new version
+        stateless: false
     };
 
     componentWillMount() {
         if (!Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+            if (this.props.controlled) {
+                throw(Utils.deprecatePropError("controlled", "stateless"));
+            }
+            if (this.props.onCountrySearch) {
+                throw(Utils.deprecatePropError("onCountrySearch", "onSearch"));
+            }
         }
     }
 
     render() {
-        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
-
-        return stateless
+        return this.props.stateless
             ? React.createElement(I18nCountrySelectorStateless, //eslint-disable-line
                 _.defaults({ ref: "I18nCountrySelectorStateless" }, this.props))
             : React.createElement(I18nCountrySelectorStateful, //eslint-disable-line
@@ -105,8 +103,7 @@ class I18nCountrySelectorStateless extends React.Component {
         searchIndex: PropTypes.number,
         searchString: PropTypes.string,
         searchTime: PropTypes.number,
-        onSearch: PropTypes.func,
-        onCountrySearch: PropTypes.func //TODO: remove when v1 no longer supported
+        onSearch: PropTypes.func
     };
 
     static defaultProps = {
@@ -121,12 +118,6 @@ class I18nCountrySelectorStateless extends React.Component {
         searchTime: 0,
         onSearch: _.noop
     };
-
-    componentWillMount() {
-        if (this.props.onCountrySearch && !Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("onCountrySearch", "onSearch"));
-        }
-    }
 
     /**
     * @method _handleValueChange
@@ -155,7 +146,7 @@ class I18nCountrySelectorStateless extends React.Component {
                     open={this.props.open}
                     onValueChange={this._handleValueChange}
                     onToggle={this.props.onToggle}
-                    onSearch={this.props.onCountrySearch || this.props.onSearch}
+                    onSearch={this.props.onSearch}
                     searchIndex={this.props.searchIndex}
                     searchString={this.props.searchString}
                     searchTime={this.props.searchTime}

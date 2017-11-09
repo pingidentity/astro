@@ -31,8 +31,6 @@ var React = require("react"),
 *
 * @param {string} [data-id="row"]
 *     To define the base "data-id" value for the top-level HTML container.
-* @param {string} [id]
-*     DEPRECATED. Use "data-id" instead.
 * @param {string} [className]
 *     CSS classes to set on the top-level HTML container.
 */
@@ -40,7 +38,6 @@ var React = require("react"),
 class Row extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
-        id: PropTypes.string, //TODO: remove when v1 no longer supported
         className: PropTypes.string
     };
 
@@ -49,18 +46,17 @@ class Row extends React.Component {
     };
 
     componentWillMount() {
-        if (this.props.id && !Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("id", "data-id"));
+        if (!Utils.isProduction() && this.props.id) {
+            throw(Utils.deprecatePropError("id", "data-id"));
         }
     }
 
     render() {
-        var id = this.props.id || this.props["data-id"],
-            className = classnames("content-columns", this.props.className,
+        var className = classnames("content-columns", this.props.className,
                 "columns-" + (React.Children.count(this.props.children) || 1));
 
         return (
-            <div data-id={id} className={classnames(className)}>
+            <div data-id={this.props["data-id"]} className={classnames(className)}>
                 {this.props.children}
             </div>
         );
@@ -74,8 +70,6 @@ class Row extends React.Component {
  *
  * @param {string} [data-id="column-layout"]
  *     To define the base "data-id" value for the top-level HTML container.
- * @param {string} [id]
- *     DEPRECATED. Use "data-id" instead.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
  */
@@ -83,7 +77,6 @@ class Row extends React.Component {
 class Column extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
-        id: PropTypes.string, //TODO: remove when v1 no longer supported
         className: PropTypes.string
     };
 
@@ -92,17 +85,14 @@ class Column extends React.Component {
     };
 
     componentWillMount() {
-        if (this.props.id) {
-            console.warn(Utils.deprecateMessage("id", "data-id"));
+        if (!Utils.isProduction() && this.props.id) {
+            throw(Utils.deprecatePropError("id", "data-id"));
         }
     }
 
     render() {
-        var id = this.props.id || this.props["data-id"],
-            className = classnames("content-column", this.props.className);
-
         return (
-            <div data-id={id} className={className}>
+            <div data-id={this.props["data-id"]} className={classnames("content-column", this.props.className)}>
                 {this.props.children}
             </div>
         );

@@ -12,6 +12,7 @@ describe("Step", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
         TestUtils = require("../../../testutil/TestUtils"),
+        Utils = require("../../../util/Utils"),
         ReactTestUtils = require("react-dom/test-utils"),
         Wizard = require("../Wizard.jsx"),
         Step = Wizard.Step,
@@ -63,17 +64,6 @@ describe("Step", function () {
 
         //when the root wizard mounts, it should broadcast how many steps it contains to the reducer
         expect(args).toEqual([{ choice: 0, numSteps: 3 }]);
-    });
-
-    it("Check for warning onChange", function () {
-        console.warn = jest.genMockFunction();
-        var component = getRenderedComponent({ onChange: jest.genMockFunction() });
-        var args = component.props.onChange.mock.calls[0];
-
-        //when the root wizard mounts, it should broadcast how many steps it contains to the reducer
-        expect(args).toEqual([0, 3]);
-        expect(console.warn).toBeCalledWith("Deprecated: use onValueChange instead of onChange. " +
-            "Support for onChange will be removed in next version");
     });
 
     it("Calls onNext when next is clicked", function () {
@@ -156,19 +146,10 @@ describe("Step", function () {
         expect(cancelBtn.disabled).toBeTruthy();
     });
 
-    it("Verify warning when id set.", function () {
-        console.warn = jest.genMockFunction();
-        getRenderedComponent({ id: "myid" });
-        expect(console.warn).toBeCalledWith("Deprecated: use data-id instead of id. " +
-            "Support for id will be removed in next version");
-    });
-
     it("Verify default data-id set.", function () {
-        console.warn = jest.genMockFunction();
         var component = getRenderedComponent();
         var test = TestUtils.findRenderedDOMNodeWithDataId(component, "wizard");
         expect(test).toBeTruthy();
-        expect(console.warn).not.toBeCalled();
     });
 
     it("Disables the save/done button when specified", function () {
@@ -219,5 +200,21 @@ describe("Step", function () {
         expect(tooltipDenyBtn.textContent).toBe(cancelTooltipParams.cancelButtonText);
         expect(tooltipTitle.textContent).toBe(cancelTooltipParams.title);
         expect(tooltipText.textContent).toBe(cancelTooltipParams.messageText);
+    });
+
+    it("throws error when deprecated prop 'id' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
+
+        expect(function () {
+            getRenderedComponent({ id: "foo" });
+        }).toThrow(expectedError);
+    });
+
+    it("throws error when deprecated prop 'onChange' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("onChange", "onValueChange"));
+
+        expect(function () {
+            getRenderedComponent({ onChange: jest.genMockFunction() });
+        }).toThrow(expectedError);
     });
 });

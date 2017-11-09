@@ -8,6 +8,7 @@ describe("Pagination", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
+        Utils = require("../../../util/Utils"),
         Pagination = require("../Pagination.jsx"),
         ExpandableRow = require("../../rows/expandable-row/ExpandableRow.jsx"),
         callback,
@@ -161,35 +162,6 @@ describe("Pagination", function () {
         expect(children.length).toEqual(5);
     });
 
-    it ("use deprecated id and verify warning", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <Pagination
-                id="some-id"
-                perPage = {5}
-                total = {30}
-                onValueChange={callback}>
-                <ExpandableRow className="row" key={1} />
-            </Pagination>
-        );
-        expect(console.warn).toBeCalledWith("Deprecated: use data-id instead of id. " +
-                                            "Support for id will be removed in next version");
-    });
-
-    it ("use deprecated onChange and verify warning", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <Pagination
-                perPage = {5}
-                total = {30}
-                onChange={callback}>
-                <ExpandableRow className="row" key={1} />
-            </Pagination>
-        );
-        expect(console.warn).toBeCalledWith("Deprecated: use onValueChange instead of onChange. " +
-                                            "Support for onChange will be removed in next version");
-    });
-
     it ("verify default data-id", function () {
         var paging = ReactTestUtils.renderIntoDocument(
             <Pagination
@@ -249,60 +221,43 @@ describe("Pagination", function () {
         expect(topLinks.length).toEqual(0);
     });
 
-    //TODO: remove when controlled no longer supported
-    it("produces stateful/stateless components correctly given controlled prop", function () {
-        component = ReactTestUtils.renderIntoDocument(
-            <Pagination controlled={false} total={1} perPage={1}>
-                <ExpandableRow className="row" key={1} />
-            </Pagination>);
-        var stateful = component.refs.PaginationStateful;
-        var stateless = component.refs.PaginationStateless;
+    it("throws error when deprecated prop 'id' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
 
-        expect(stateful).toBeTruthy();
-        expect(stateless).toBeFalsy();
-
-        component = ReactTestUtils.renderIntoDocument(
-            <Pagination controlled={true} total={1} perPage={1}>
-                <ExpandableRow className="row" key={1} />
-            </Pagination>);
-        stateful = component.refs.PaginationStateful;
-        stateless = component.refs.PaginationStateless;
-        
-        expect(stateless).toBeTruthy();
-        expect(stateful).toBeFalsy();
+        expect(function () {
+            ReactTestUtils.renderIntoDocument(
+                <Pagination id="foo" totalPages={2} perPage={1} onValueChange={jest.genMockFunction()}>
+                    <ExpandableRow className="row" key={1} />
+                    <ExpandableRow className="row" key={2} />
+                </Pagination>
+            );
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when controlled no longer supported
-    it("logs warning for deprecated controlled prop", function () {
-        console.warn = jest.genMockFunction();
+    it("throws error when deprecated prop 'controlled' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
 
-        ReactTestUtils.renderIntoDocument(
-            <Pagination controlled={false} total={1} perPage={1}>
-                <ExpandableRow className="row" key={1} />
-            </Pagination>);
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use stateless instead of controlled. " +
-            "Support for controlled will be removed in next version");
+        expect(function () {
+            ReactTestUtils.renderIntoDocument(
+                <Pagination controlled={true} totalPages={2} perPage={1} onValueChange={jest.genMockFunction()}>
+                    <ExpandableRow className="row" key={1} />
+                    <ExpandableRow className="row" key={2} />
+                </Pagination>
+            );
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when deprecated props no longer supported
-    it("does not log warning for deprecated props when in production", function () {
-        //Mock process.env.NODE_ENV
-        process.env.NODE_ENV = "production";
+    it("throws error when deprecated prop 'onChange' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("onChange", "onValueChange"));
 
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <Pagination
-                id="some-id"
-                perPage = {5}
-                total = {30}
-                onChange={jest.genMockFunction()}>
-                <ExpandableRow className="row" key={1} />
-            </Pagination>
-        );
-
-        expect(console.warn).not.toBeCalled();
-        delete process.env.NODE_ENV;
+        expect(function () {
+            ReactTestUtils.renderIntoDocument(
+                <Pagination onChange={jest.genMockFunction()} totalPages={2} perPage={1}>
+                    <ExpandableRow className="row" key={1} />
+                    <ExpandableRow className="row" key={2} />
+                </Pagination>
+            );
+        }).toThrow(expectedError);
     });
+
 });

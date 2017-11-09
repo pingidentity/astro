@@ -16,13 +16,13 @@ jest.dontMock("../../forms/FormTextField.jsx");
 jest.dontMock("../../forms/FormLabel.jsx");
 jest.dontMock("../../tooltips/HelpHint.jsx");
 jest.dontMock("../../forms/form-text-field/index.js");
-jest.dontMock("../../forms/form-text-field/v1.jsx");
 jest.dontMock("../../forms/form-text-field");
 
 describe("Grid", function () {
     var React = require("react");
     var ReactTestUtils = require("react-dom/test-utils");
     var _ = require("underscore");
+    var Utils = require("../../../util/Utils");
     var TestUtils = require("../../../testutil/TestUtils");
     var ShallowRenderer = require("react-test-renderer/shallow");
     var Grid = require("../Grid.jsx");
@@ -216,28 +216,6 @@ describe("Grid", function () {
         expect(callback).toBeCalled();
     });
 
-    // TODO To be removed once onCallback is discontinued
-    it("triggers deprecated onCallBack on Checkbox cell change", function () {
-        var props = {
-            rows: rows,
-            columnsPerPage: 2
-        };
-        var callback = jest.genMockFunction();
-        var component = ReactTestUtils.renderIntoDocument(
-            <Grid data-id="grid-test" {...props}>
-                <Grid.Column headerText="Firstname" field="firstname" width={Grid.ColumnSizes.S} />
-                <Grid.Column headerText="Has Laptop" field="hasLaptop" >
-                    <CheckboxCell onCallBack={callback} className="stacked" />
-                </Grid.Column>
-            </Grid>
-        );
-
-        var node = TestUtils.findRenderedDOMNodeWithDataId(component, "grid-row-0-cell-1");
-        var checkbox = TestUtils.findRenderedDOMNodeWithTag(node, "input");
-        ReactTestUtils.Simulate.change(checkbox);
-        expect(callback).toBeCalled();
-    });
-
     it("should go to next column page if pagination changed", function () {
         var props = {
             rows: rows,
@@ -300,24 +278,6 @@ describe("Grid", function () {
         expect(callback).toBeCalled();
     });
 
-    // TODO To be removed once onCallback is discontinued
-    it("triggers deprecated onCallBack on TextField cell change", function () {
-        var callback = jest.genMockFunction();
-        var component = ReactTestUtils.renderIntoDocument(
-            <Grid rows={rows} stateless={false} >
-                <Grid.Column headerText="Email" field="email" >
-                    <TextFieldCell onCallBack={callback} />
-                </Grid.Column>
-            </Grid>
-        );
-
-        var trs = TestUtils.scryRenderedDOMNodesWithTag(component, "tr");
-        var td = TestUtils.scryRenderedDOMNodesWithTag(trs[1], "td")[0];
-        var input = TestUtils.scryRenderedDOMNodesWithTag(td, "input")[0];
-        ReactTestUtils.Simulate.change(input);
-        expect(callback).toBeCalled();
-    });
-
     it("should have Button in cells", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Grid rows={rows} stateless={false} >
@@ -350,59 +310,6 @@ describe("Grid", function () {
         expect(callback).toBeCalled();
     });
 
-    //TODO: remove when controlled no longer supported
-    it("produces stateful/stateless components correctly given controlled prop", function () {
-        var component = ReactTestUtils.renderIntoDocument(
-            <Grid rows={rows} controlled={false} >
-                <Grid.Column headerText="Email" field="email" >
-                    <ButtonCell data-id="cellWithonGridCellAction" onGridCellAction={_.noop} />
-                </Grid.Column>
-            </Grid>);
-        var stateful = component.refs.GridStateful;
-        var stateless = component.refs.GridStateless;
-
-        expect(stateful).toBeTruthy();
-        expect(stateless).toBeFalsy();
-
-        component = ReactTestUtils.renderIntoDocument(
-            <Grid rows={rows} controlled={true} >
-                <Grid.Column headerText="Email" field="email" >
-                    <ButtonCell data-id="cellWithonGridCellAction" onGridCellAction={_.noop} />
-                </Grid.Column>
-            </Grid>);
-        stateful = component.refs.GridStateful;
-        stateless = component.refs.GridStateless;
-
-        expect(stateless).toBeTruthy();
-        expect(stateful).toBeFalsy();
-    });
-
-    //TODO: remove when controlled no longer supported
-    it("logs warning for deprecated controlled prop", function () {
-        console.warn = jest.genMockFunction();
-
-        getComponent();
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use stateless instead of controlled. " +
-            "Support for controlled will be removed in next version");
-    });
-
-    // TODO To be removed once onCallback is discontinued
-    it("triggers deprecated onCallBack on button cell click", function () {
-        var callback = jest.genMockFunction();
-        var component = ReactTestUtils.renderIntoDocument(
-            <Grid rows={rows} stateless={false} >
-                <Grid.Column headerText="Email" field="email" >
-                    <ButtonCell data-id="cellWithOnCallback" onCallBack={callback} />
-                </Grid.Column>
-            </Grid>
-        );
-        var button = TestUtils.scryRenderedDOMNodesWithDataId(component, "cellWithOnCallback")[0];
-        ReactTestUtils.Simulate.click(button);
-        expect(callback).toBeCalled();
-    });
-
     it("should return null for Column", function () {
         var shallowRenderer = new ShallowRenderer();
         shallowRenderer.render(<Grid.Column field="firstname" />);
@@ -411,51 +318,12 @@ describe("Grid", function () {
         expect(output).toBeNull();
     });
 
-    // TODO To be removed once onCallBack is discontinued
-    it("should have warning for Button cell with deprecated onCallBack", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <Grid rows={rows} stateless={false} >
-                <Grid.Column headerText="Email" field="email" >
-                    <ButtonCell onCallBack={jest.genMockFunction()} />
-                </Grid.Column>
-            </Grid>
-        );
+    it("throws error when deprecated prop 'controlled' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
 
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use onGridCellAction instead of onCallBack. " +
-            "Support for onCallBack will be removed in next version");
+        expect(function () {
+            getComponent({ controlled: true });
+        }).toThrow(expectedError);
     });
 
-    // TODO To be removed once onCallBack is discontinued
-    it("should have warning for Checkbox cell with deprecated onCallBack", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <Grid rows={rows} stateless={false} >
-                <Grid.Column headerText="Email" field="email" >
-                    <CheckboxCell onCallBack={jest.genMockFunction()} />
-                </Grid.Column>
-            </Grid>
-        );
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use onGridCellAction instead of onCallBack. " +
-            "Support for onCallBack will be removed in next version");
-    });
-
-    // TODO To be removed once onCallBack is discontinued
-    it("should have warning for TextField cell with deprecated onCallBack", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <Grid rows={rows} stateless={false} >
-                <Grid.Column headerText="Email" field="email" >
-                    <TextFieldCell onCallBack={jest.genMockFunction()} />
-                </Grid.Column>
-            </Grid>
-        );
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use onGridCellAction instead of onCallBack. " +
-            "Support for onCallBack will be removed in next version");
-    });
 });

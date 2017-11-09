@@ -29,8 +29,6 @@ var Type = {
  *
  * @param {string} [data-id="modal-button"]
  *     To define the base "data-id" value for top-level HTML container.
- * @param {string} [id]
- *     DEPRECATED. Use "data-id" instead. To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
  *
@@ -68,7 +66,6 @@ var Type = {
 class Modal extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
-        id: PropTypes.string,
         className: PropTypes.string,
         expanded: PropTypes.bool,
         modalTitle: PropTypes.string,
@@ -133,13 +130,12 @@ class Modal extends React.Component {
     };
 
     _getCloseButton = () => {
-        var closeBtn,
-            dataId = this.props.id || this.props["data-id"];
+        var closeBtn;
 
         if (this.props.cancelTooltip) {
             closeBtn = (
                 <CancelTooltip
-                    data-id={dataId}
+                    data-id={this.props["data-id"]}
                     confirmButtonText={this.props.cancelTooltip.confirmButtonText}
                     cancelButtonText={this.props.cancelTooltip.cancelButtonText}
                     label={this._getCloseButtonMarkup()}
@@ -167,8 +163,11 @@ class Modal extends React.Component {
     };
 
     componentWillMount() {
-        if (this.props.id && !Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("id", "data-id"));
+        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
+        /* istanbul ignore if  */
+        if (!Utils.isProduction() && this.props.id) {
+            /* istanbul ignore next  */
+            throw(Utils.deprecatePropError("id", "data-id"));
         }
     }
 
@@ -196,19 +195,18 @@ class Modal extends React.Component {
             return null;
         }
 
-        var dataId = this.props.id || this.props["data-id"],
-            modalClasses = {
-                alert: this.props.type === Type.ALERT,
-                dialog: this.props.type === Type.DIALOG,
-                "no-close": !this.props.onClose,
-                maximize: this.props.maximize,
-                show: this.props.expanded,
-                "wizard-modal": this.isWizard
-            };
+        var modalClasses = {
+            alert: this.props.type === Type.ALERT,
+            dialog: this.props.type === Type.DIALOG,
+            "no-close": !this.props.onClose,
+            maximize: this.props.maximize,
+            show: this.props.expanded,
+            "wizard-modal": this.isWizard
+        };
 
         return (
             <div
-                data-id={dataId}
+                data-id={this.props["data-id"]}
                 ref="container"
                 key="modal"
                 className={classnames("modal", this.props.className, modalClasses)}>

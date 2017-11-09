@@ -27,8 +27,6 @@ var React=require("react"),
  *    To define the base "data-id" value for the top-level HTML container.
  *    Note that "-container" will be appended to the "data-id" set on the top-level HTML container,
  *    and the "data-id" string will be set on the checkbox "input" elelment under the top-level HTML container.
- * @param {string} [id]
- *    DEPRECATED. Use "data-id" instead.
  * @param {string} [className]
  *    CSS classes to set on the top-level HTML container.
  *
@@ -90,8 +88,8 @@ class FormCheckbox extends React.Component {
     };
 
     componentWillMount() {
-        if (this.props.id && !Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("id", "data-id"));
+        if (!Utils.isProduction() && this.props.id) {
+            throw(Utils.deprecatePropError("id", "data-id"));
         }
     }
 
@@ -105,36 +103,35 @@ class FormCheckbox extends React.Component {
     };
 
     render() {
-        var id = this.props.id || this.props["data-id"],
-            labelClassName = classnames("input-checkbox", this.props.className, {
-                disabled: this.props.disabled,
-                "form-error": this.props.errorMessage,
-            });
+        var labelClassName = classnames("input-checkbox", this.props.className, {
+            disabled: this.props.disabled,
+            "form-error": this.props.errorMessage,
+        });
 
         return (
-            <FormLabel data-id={id + "-container"}
+            <FormLabel data-id={this.props["data-id"] + "-container"}
                     className={labelClassName}
                     helpClassName={this.props.helpClassName}
                     helpTarget={this.props.helpTarget}
                     disabled={this.props.disabled}
                     value={this.props.label}
                     hint={this.props.labelHelpText}>
-                <input data-id={id}
+                <input data-id={this.props["data-id"]}
                         type="checkbox"
-                        name={this.props.name ? this.props.name : id}
-                        value={this.props.value ? this.props.value: id}
+                        name={this.props.name ? this.props.name : this.props["data-id"]}
+                        value={this.props.value ? this.props.value: this.props["data-id"]}
                         onChange={this._handleChange}
                         checked={this.props.checked}
                         disabled={this.props.disabled}
                 />
                 <div className="icon"/>
                 {this.props.errorMessage && (
-                    <FormError.Icon data-id={id + "-error-message-icon"} />
+                    <FormError.Icon data-id={this.props["data-id"] + "-error-message-icon"} />
                 )}
                 {this.props.errorMessage && (
                     <FormError.Message
                         value={this.props.errorMessage}
-                        data-id={id + "-error-message"}
+                        data-id={this.props["data-id"] + "-error-message"}
                     />
                 )}
             </FormLabel>

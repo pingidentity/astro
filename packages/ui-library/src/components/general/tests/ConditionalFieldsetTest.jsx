@@ -10,6 +10,7 @@ describe("ConditionalFieldset", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
+        Utils = require("../../../util/Utils"),
         FormDropDownList = require("../../forms/FormDropDownList.jsx"),
         FormRadioGroup = require("../../forms/FormRadioGroup.jsx"),
         ConditionalFieldset = require("../ConditionalFieldset.jsx"),
@@ -190,31 +191,12 @@ describe("ConditionalFieldset", function () {
         expect(form2).toBeFalsy();
     });
 
-    //TODO: remove when controlled no longer supported
-    it("produces stateful/stateless components correctly given controlled prop", function () {
-        var component = getGenericConditionalFieldset({ controlled: false });
-        var stateful = component.refs.ConditionalFieldsetStateful;
-        var stateless = component.refs.ConditionalFieldsetStateless;
+    it("throws error when deprecated prop 'controlled' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
 
-        expect(stateful).toBeTruthy();
-        expect(stateless).toBeFalsy();
-
-        component = getGenericConditionalFieldset({ controlled: true });
-        stateful = component.refs.ConditionalFieldsetStateful;
-        stateless = component.refs.ConditionalFieldsetStateless;
-        
-        expect(stateless).toBeTruthy();
-        expect(stateful).toBeFalsy();
+        expect(function () {
+            getGenericConditionalFieldset({ controlled: true });
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when controlled no longer supported
-    it("logs warning for deprecated controlled prop", function () {
-        console.warn = jest.genMockFunction();
-
-        getGenericConditionalFieldset();
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use stateless instead of controlled. " +
-            "Support for controlled will be removed in next version");
-    });
 });

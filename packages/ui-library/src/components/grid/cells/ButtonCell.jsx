@@ -18,10 +18,7 @@ var React = require("react"),
  *     Label to display on the button
  * @param {Grid~onGridCellAction} [onGridCellAction]
  *     Callback to be triggered when button is clicked. This is a mandatory callback to be rendered as a Grid cell.
- *     If this callback is omitted, this component won't be rendered as a Grid cell. Current version also supports
- *     using the deprecated onCallBack.
- * @param {Grid~onGridCellAction} [onCallBack]
- *     DEPRECATED. Use onGridCellAction instead.
+ *     If this callback is omitted, this component won't be rendered as a Grid cell.
  *
  * @example
  *     <ButtonCell value="Submit" onGridCellAction={this._handleCellSubmit} />
@@ -33,8 +30,7 @@ class ButtonCell extends React.Component {
         "data-id": PropTypes.string,
         className: PropTypes.string,
         value: PropTypes.string,
-        onGridCellAction: PropTypes.func,
-        onCallBack: PropTypes.func
+        onGridCellAction: PropTypes.func
     };
 
     static defaultProps = {
@@ -42,13 +38,15 @@ class ButtonCell extends React.Component {
     };
 
     componentWillMount() {
-        if (this.props.onCallBack && !Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("onCallBack", "onGridCellAction"));
+        // TODO: figure out how to test separage throws in Jest and implement
+        /* istanbul ignore if  */
+        if (!Utils.isProduction() && this.props.onCallBack) {
+            /* istanbul ignore next  */
+            throw(Utils.deprecatePropError("onCallBack", "onGridCellAction"));
         }
     }
 
     render() {
-        // Grid Row component will rebind onCallBack and set it to onGridCellAction
         return (
             <button data-id={this.props["data-id"]}
                     className={this.props.className} onClick={this.props.onGridCellAction} />

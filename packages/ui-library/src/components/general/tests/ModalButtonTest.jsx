@@ -8,6 +8,7 @@ jest.dontMock("../../../util/EventUtils.js");
 describe("ModalButtonTest", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
+        Utils = require("../../../util/Utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         ModalButton = require("../ModalButton.jsx"),
         _ = require("underscore");
@@ -350,96 +351,70 @@ describe("ModalButtonTest", function () {
         expect(component.props.onClose.mock.calls.length).toBe(1);
     });
 
-    //TODO: remove when controlled no longer supported
-    it("produces stateful/stateless components correctly given controlled prop", function () {
-        var component = getComponentWithoutDefaults({ controlled: false });
-        var stateful = component.refs.ModalButtonStateful;
-        var stateless = component.refs.ModalButtonStateless;
+    it("throws error when deprecated prop 'id' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
 
-        expect(stateful).toBeTruthy();
-        expect(stateless).toBeFalsy();
-
-        component = getComponentWithoutDefaults({ controlled: true });
-        stateful = component.refs.ModalButtonStateful;
-        stateless = component.refs.ModalButtonStateless;
-        
-        expect(stateless).toBeTruthy();
-        expect(stateful).toBeFalsy();
+        expect(function () {
+            getComponent({ id: "foo" });
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when controlled no longer supported
-    it("logs warning for deprecated controlled prop", function () {
-        console.warn = jest.genMockFunction();
+    it("throws error when deprecated prop 'controlled' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
 
-        getComponent();
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use stateless instead of controlled. " +
-            "Support for controlled will be removed in next version");
+        expect(function () {
+            getComponent({ controlled: true });
+        }).toThrow(expectedError);
     });
 
+    it("throws error when deprecated prop 'containerStyle' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("containerStyle", "className"));
 
-    it("Show warnings when using deprecated properties", function () {
-        console.warn = jest.genMockFunction();
-
-        getComponent({
-            id: "deprecated",
-            containerStyle: "deprecated",
-            activatorContainerStyle: "deprecated"
-        });
-        expect(console.warn.mock.calls[1][0]).toEqual(
-            "Deprecated: use data-id instead of id. Support for id will be removed in next version"
-        );
-        expect(console.warn.mock.calls[2][0]).toEqual(
-            "Deprecated: use className instead of containerStyle. Support for containerStyle will be removed in next version" // eslint-disable-line max-len
-        );
-        expect(console.warn.mock.calls[3][0]).toEqual(
-            "Deprecated: use activatorContainerClassName instead of activatorContainerStyle. Support for activatorContainerStyle will be removed in next version" // eslint-disable-line max-len
-        );
-
-        console.warn.mockClear();
-        getComponentWithoutDefaults({
-            linkContent: "deprecated",
-            linkStyle: "deprecated"
-        });
-        expect(console.warn.mock.calls[1][0]).toEqual(
-            "Deprecated: use activatorContent instead of linkContent. Support for linkContent will be removed in next version" // eslint-disable-line max-len
-        );
-        expect(console.warn.mock.calls[2][0]).toEqual(
-            "Deprecated: use activatorContentClassName instead of linkStyle. Support for linkStyle will be removed in next version" // eslint-disable-line max-len
-        );
-
-        console.warn.mockClear();
-        getComponentWithoutDefaults({
-            value: "deprecated",
-            buttonStyle: "deprecated"
-        });
-        expect(console.warn.mock.calls[1][0]).toEqual(
-            "Deprecated: use activatorButtonLabel instead of value. Support for value will be removed in next version" // eslint-disable-line max-len
-        );
-        expect(console.warn.mock.calls[2][0]).toEqual(
-            "Deprecated: use activatorButtonClassName instead of buttonStyle. Support for buttonStyle will be removed in next version" // eslint-disable-line max-len
-        );
+        expect(function () {
+            getComponent({ containerStyle: "foo" });
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when deprecated props no longer supported
-    it("does not log warning for deprecated props when in production", function () {
-        //Mock process.env.NODE_ENV
-        process.env.NODE_ENV = "production";
+    it("throws error when deprecated prop 'activatorContainerStyle' is passed in", function () {
+        var expectedError = new Error(
+            Utils.deprecatePropError("activatorContainerStyle", "activatorContainerClassName")
+        );
 
-        console.warn = jest.genMockFunction();
-        getComponent({
-            id: "deprecated",
-            containerStyle: "deprecated",
-            activatorContainerStyle: "deprecated",
-            linkContent: "deprecated",
-            linkStyle: "deprecated",
-            value: "deprecated",
-            buttonStyle: "deprecated"
-        });
+        expect(function () {
+            getComponent({ activatorContainerStyle: "foo" });
+        }).toThrow(expectedError);
+    });
 
-        expect(console.warn).not.toBeCalled();
-        delete process.env.NODE_ENV;
+    it("throws error when deprecated prop 'linkContent' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("linkContent", "activatorContent"));
+
+        expect(function () {
+            getComponent({ linkContent: "foo" });
+        }).toThrow(expectedError);
+    });
+
+    it("throws error when deprecated prop 'linkStyle' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("linkStyle", "activatorContentClassName"));
+
+        expect(function () {
+            getComponent({ linkStyle: "foo" });
+        }).toThrow(expectedError);
+    });
+
+    it("throws error when deprecated prop 'value' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("value", "activatorButtonLabel"));
+
+        expect(function () {
+            getComponent({ value: "foo" });
+        }).toThrow(expectedError);
+    });
+
+    it("throws error when deprecated prop 'buttonStyle' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("buttonStyle", "activatorButtonClassName"));
+
+        expect(function () {
+            getComponent({ buttonStyle: "foo" });
+        }).toThrow(expectedError);
     });
 
 });

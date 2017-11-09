@@ -1,7 +1,7 @@
 var EditViewSwitchedPage = require("../../pages/templates/EditViewSwitchedPage.js");
 
 describe("Edit View Switched Integration", function () {
-    
+
     beforeEach(function () {
         EditViewSwitchedPage.openEditViewSwitchedDemoPage();
     });
@@ -61,4 +61,3 @@ describe("Edit View Switched Integration", function () {
         EditViewSwitchedPage.takeScreenshotAndCompare(miscellaneousSectionFilename);
     }));
 });
-

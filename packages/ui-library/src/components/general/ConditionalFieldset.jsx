@@ -112,7 +112,7 @@ class ConditionalFieldsetStateless extends React.Component {
         }
 
         var className = classNames({ focused: showFieldset, unfocused: !showFieldset }, "conditional-fieldset");
-        
+
         return (
             <fieldset data-id={this.props["data-id"]} className={className}>
                 <legend>
@@ -168,8 +168,6 @@ class ConditionalFieldsetStateful extends React.Component {
  *          To enable the component to be externally managed. True will relinquish control to the component's owner.
  *          False or not specified will cause the component to manage state internally. If True, onValueChange and
  *          selectedIndex will be managed by the component.
- * @param {boolean} [controlled=false]
- *     DEPRECATED. Use "stateless" instead.
  * @param {ConditionalFieldset.Type} [type]
  *          Type of selector to display to expose form options. If not set, it will default to RADIO for 2 options
  *          and select for 3 or more.
@@ -214,24 +212,21 @@ class ConditionalFieldsetStateful extends React.Component {
  */
 class ConditionalFieldset extends React.Component {
     static propTypes = {
-        controlled: PropTypes.bool, //TODO: remove in new version
         stateless: PropTypes.bool
     };
 
     static defaultProps = {
-        controlled: false //TODO: change to stateless in new version
+        stateless: false
     };
 
     componentWillMount() {
-        if (!Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+        if (!Utils.isProduction() && this.props.controlled) {
+            throw(Utils.deprecatePropError("controlled", "stateless"));
         }
     }
 
     render() {
-        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
-
-        return stateless
+        return this.props.stateless
             ? React.createElement(ConditionalFieldsetStateless, //eslint-disable-line no-use-before-define
             _.defaults({ ref: "ConditionalFieldsetStateless" }, this.props), this.props.children)
             : React.createElement(ConditionalFieldsetStateful, //eslint-disable-line no-use-before-define

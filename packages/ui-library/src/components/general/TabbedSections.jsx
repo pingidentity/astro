@@ -17,8 +17,6 @@ var React = require("react"),
  *
  * @param {string} [data-id="tabbed-sections"]
  *          To define the base "data-id" value for the top-level HTML container.
- * @param {string} [id]
- *          DEPRECATED. Use "data-id" instead.
  * @param {string} [className]
  *          CSS classes to set on the top-level HTML container.
  * @param {number} selectedIndex
@@ -27,8 +25,6 @@ var React = require("react"),
  *              Hide hidden children by applying a style instead of not rendering
  * @param {TabbedSections~onValueChange} onValueChange
  *              Callback to be triggered when a new tab selected.
- * @param {TabbedSections~onSectionChange} onSectionChange
- *              DEPRECATED. Use onValueChange instead.
  *
  * @example
  *
@@ -47,12 +43,10 @@ var React = require("react"),
 class TabbedSections extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
-        id: PropTypes.string,
         className: PropTypes.string,
         selectedIndex: PropTypes.number.isRequired,
         renderHidden: PropTypes.bool,
-        onSectionChange: PropTypes.func,
-        onValueChange: PropTypes.func, // add isRequired once the onSectionChange is removed
+        onValueChange: PropTypes.func.isRequired,
         children: PropTypes.node
     };
 
@@ -87,28 +81,25 @@ class TabbedSections extends React.Component {
     componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
-                console.warn(Utils.deprecateMessage("id", "data-id"));
+                throw(Utils.deprecatePropError("id", "data-id"));
             }
             if (this.props.onSectionChange) {
-                console.warn(Utils.deprecateMessage("onSectionChange", "onValueChange"));
+                throw(Utils.deprecatePropError("onSectionChange", "onValueChange"));
             }
         }
     }
 
     render() {
-        var id = this.props.id || this.props["data-id"];
-        var callback = this.props.onSectionChange || this.props.onValueChange;
-        
         /* jshint ignore:start */
         return (
-            <div data-id={id} className={this.props.className}>
+            <div data-id={this.props["data-id"]} className={this.props.className}>
                 <div className="tabs">
                     <ul ref="tabs">
                     {
                         React.Children.map(this.props.children, function (child, index) {
                             return (<TabbedSectionChild className={this.props.selectedIndex === index ? "active" : ""}
                                         data-id={this.props["data-id"] + "-" + index}
-                                        onClick={callback}
+                                        onClick={this.props.onValueChange}
                                         key={index}
                                         index={index}
                                         content={child.props.title} />);

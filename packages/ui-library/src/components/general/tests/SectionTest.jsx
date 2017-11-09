@@ -8,6 +8,7 @@ describe("Section", function () {
     var React = require("react");
     var ReactTestUtils = require("react-dom/test-utils");
     var Section = require("../Section.jsx");
+    var Utils = require("../../../util/Utils");
     var TestUtils = require("../../../testutil/TestUtils");
 
     it("Stateless: renders collapsed state", function () {
@@ -202,20 +203,6 @@ describe("Section", function () {
         expect(accessories.textContent).toContain(accessoriesText);
     });
 
-
-    // TODO To be removed once "id" support is discontnued.
-    it("render component with id", function () {
-        var component = ReactTestUtils.renderIntoDocument(
-            <Section id="sectionWithId" title="My Section" stateless={false}>
-                <div data-id="iShouldBeHidden">My Content</div>
-            </Section>
-        );
-
-        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "sectionWithId");
-
-        expect(element).toBeDefined();
-    });
-
     it("render component with default data-id", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Section title="My Section" stateless={false}>
@@ -242,90 +229,20 @@ describe("Section", function () {
         expect(titleValue).toBeFalsy();
     });
 
-    //TODO: remove when controlled no longer supported
-    it("produces stateful/stateless components correctly given controlled prop", function () {
-        var component = ReactTestUtils.renderIntoDocument(<Section controlled={false} />);
-        var stateful = component.refs.SectionStateful;
-        var stateless = component.refs.SectionStateless;
+    it("throws error when deprecated prop 'id' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
 
-        expect(stateful).toBeTruthy();
-        expect(stateless).toBeFalsy();
-
-        component = ReactTestUtils.renderIntoDocument(<Section controlled={true} />);
-        stateful = component.refs.SectionStateful;
-        stateless = component.refs.SectionStateless;
-
-        expect(stateless).toBeTruthy();
-        expect(stateful).toBeFalsy();
+        expect(function () {
+            ReactTestUtils.renderIntoDocument(<Section id="foo" title="My Section">content</Section>);
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when controlled no longer supported
-    it("logs warning for deprecated controlled prop", function () {
-        console.warn = jest.genMockFunction();
+    it("throws error when deprecated prop 'controlled' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless", "true", "false"));
 
-        ReactTestUtils.renderIntoDocument(<Section />);
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use stateless instead of controlled. " +
-            "The default for stateless will be false instead of true. " +
-            "Support for controlled will be removed in next version");
-    });
-
-    // TODO To be removed once "id" support is discontinued.
-    it("log warning in console for id", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <Section id="sectionWithId" title="My Section" stateless={false}>
-                <div data-id="iShouldBeHidden">My Content</div>
-            </Section>
-        );
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use data-id instead of id. Support for id will be removed in next version");
-    });
-
-    // TODO To be removed once "id" support is discontinued.
-    it("does not log warning in console without id", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <Section data-id="sectionWithDataId" title="My Section" stateless={false}>
-                <div data-id="iShouldBeHidden">My Content</div>
-            </Section>
-        );
-
-        expect(console.warn).not.toBeCalledWith(
-            "Deprecated: use data-id instead of id. Support for id will be removed in next version");
-    });
-
-    //TODO: remove when id no longer supported
-    it("does not log warning for id  when in production", function () {
-        //Mock process.env.NODE_ENV
-        process.env.NODE_ENV = "production";
-
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <Section id="sectionWithId" title="My Section" stateless={false}>
-                <div data-id="iShouldBeHidden">My Content</div>
-            </Section>
-        );
-
-        expect(console.warn).not.toBeCalled();
-        delete process.env.NODE_ENV;
-    });
-
-    it("does not log deprecation message when in production", function () {
-        //Mock process.env.NODE_ENV
-        process.env.NODE_ENV = "production";
-
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <Section title="My Section" stateless={false}>
-                <div data-id="iShouldBeHidden">My Content</div>
-            </Section>
-        );
-
-        expect(console.warn).not.toBeCalled();
-        delete process.env.NODE_ENV;
+        expect(function () {
+            ReactTestUtils.renderIntoDocument(<Section controlled={true} title="My Section">content</Section>);
+        }).toThrow(expectedError);
     });
 
 });

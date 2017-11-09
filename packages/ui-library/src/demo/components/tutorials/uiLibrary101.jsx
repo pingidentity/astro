@@ -4,7 +4,7 @@ var React = require("react"),
     Markup = require("../../core/Markup.jsx"),
     ColorPicker = require("../../../components/general/ColorPicker.jsx"),
     ListView = require("../../../templates/list-view"),
-    FormSelectField = require("../../../components/forms/form-select-field"),
+    FormDropDownList = require("../../../components/forms/FormDropDownList.jsx"),
     Translator = require("../../../util/i18n/Translator.js");
 
 var LANGUAGES = [
@@ -342,11 +342,11 @@ class UILibrary101 extends React.Component {
                     the language will be set to the default (English).
                 </p>
                 <div className= "input-row">
-                    <FormSelectField controlled={true}
+                    <FormDropDownList stateless={true}
                         label="Language"
                         options={LANGUAGES}
-                        onChange={this._handleLanguageChange1}
-                        value={this.state.currentLanguage}
+                        onValueChange={this._handleLanguageChange1}
+                        selectedOption={this.state.currentLanguage}
                     />
                 </div>
                 <p>

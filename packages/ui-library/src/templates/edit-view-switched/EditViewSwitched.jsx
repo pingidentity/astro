@@ -2,7 +2,7 @@ var React = require("react"),
     FormCheckbox = require("../../components/forms/FormCheckbox.jsx"),
     FormTextField = require("../../components/forms//form-text-field").v2,
     FormRadioGroup = require("../../components/forms/FormRadioGroup.jsx"),
-    FormSelectField = require("../../components/forms/form-select-field").v2,
+    FormDropDownList = require("../../components/forms/FormDropDownList.jsx"),
     Layout = require("../../components/general/ColumnLayout.jsx"),
     RockerButton = require("../../components/forms/RockerButton.jsx"),
     Toggle = require("../../components/forms/form-toggle").v2,
@@ -80,12 +80,12 @@ module.exports = class extends React.Component {
                 </div>
 
                 <h1 className="page-title">Edit Template with Switcher</h1>
-                
+
                 <RockerButton
                     labels={["Identity", "Address", "Miscellaneous"]}
                     onValueChange={this.props.onRockerButtonChange}
                     selectedIndex={this.props.activeRockerButton}
-                    controlled={true} />
+                    stateless={true} />
 
                 {this.props.activeRockerButton === 0 && (
                     <div className="page-section">
@@ -133,13 +133,12 @@ module.exports = class extends React.Component {
                                     onChange={this._handleInputChange} />
                             </div>
                             <div className="input-row">
-                                <FormSelectField
-                                    label="Address
-                                    Location"
+                                <FormDropDownList
+                                    label="Address Location"
                                     className="input-width-medium"
                                     data-id="addressType"
-                                    value={this.props.inputs.addressType}
-                                    onChange={this._handleInputChange}
+                                    selectedOption={this.props.inputs.addressType}
+                                    onValueChange={this._handleInputChange}
                                     options={[
                                         { value: "home", label: "Home" },
                                         { value: "work", label: "Work" },
@@ -164,12 +163,12 @@ module.exports = class extends React.Component {
                                     onChange={this._handleInputChange} />
                             </div>
                             <div className="input-row">
-                                <FormSelectField
+                                <FormDropDownList
                                     label="Alternate Address Location"
                                     className="input-width-medium"
                                     data-id="alternateAddressType"
-                                    value={this.props.inputs.alternateAddressType}
-                                    onChange={this._handleInputChange}
+                                    selectedOption={this.props.inputs.alternateAddressType}
+                                    onValueChange={this._handleInputChange}
                                     options={[
                                         { value: "home", label: "Home" },
                                         { value: "work", label: "Work" },

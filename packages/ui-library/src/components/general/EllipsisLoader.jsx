@@ -9,8 +9,6 @@ var React = require("react"),
  *
  * @param {string} [data-id="ellipsis-loader"]
  *          To define the base "data-id" value for the top-level HTML container.
- * @param {string} [id]
- *          DEPRECATED. Use "data-id" instead.
  * @param {string} [className]
  *          CSS class to set on the top HTML element (optional)
  * @param {boolean} loading
@@ -31,8 +29,8 @@ class EllipsisLoader extends React.Component {
     };
 
     componentWillMount() {
-        if (this.props.id && !Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("id", "data-id"));
+        if (!Utils.isProduction() && this.props.id) {
+            throw(Utils.deprecatePropError("id", "data-id"));
         }
     }
 

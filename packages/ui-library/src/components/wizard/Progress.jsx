@@ -9,8 +9,6 @@ var React = require("react"),
  *
  * @param {string} [data-id="progress"]
  *              To define the base "data-id" value for the top-level HTML container.
- * @param {string} [id]
- *              Deprecated. Use data-id instead.
  * @param {string} [className]
  *              CSS classes to set on the top-level HTML container
  * @param {number} step
@@ -22,7 +20,6 @@ var React = require("react"),
 class Progress extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
-        id: PropTypes.string,
         className: PropTypes.string,
         step: PropTypes.number.isRequired,
         of: PropTypes.number.isRequired,
@@ -51,16 +48,16 @@ class Progress extends React.Component {
     }
 
     componentWillMount() {
-        if (this.props.id) {
-            console.warn(Utils.deprecateMessage("id", "data-id"));
+        if (!Utils.isProduction() && this.props.id) {
+            throw(Utils.deprecatePropError("id", "data-id"));
         }
     }
 
     render() {
-        var id = this.props.id || this.props["data-id"];
-
         return (
-            <div ref="container" className={this._style()} data-id={id}><i>{this.props.step}</i></div>
+            <div ref="container" className={this._style()} data-id={this.props["data-id"]}>
+                <i>{this.props.step}</i>
+            </div>
         );
     }
 }

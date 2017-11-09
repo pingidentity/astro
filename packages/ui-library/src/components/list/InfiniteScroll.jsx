@@ -170,16 +170,12 @@ class Batch extends React.Component {
  * @param {InfiniteScroll~onLoadPrev} [onLoadPrev]
  *    Callback to be triggered when the previous batch of data is fetched.
  *    Executed when the user scrolls to the top of the container.
- * @param {InfiniteScroll~onLoadPrev} [loadPrev]
- *    DEPRECATED. Use "onLoadPrev" instead.
  *
  * @param {boolean} [hasNext=false]
  *    Whether or not there are more batches following the last batch loaded.
  * @param {InfiniteScroll~onLoadNext} [onLoadNext]
  *    Callback to be triggered when the next batch of data is fetched.
  *    Executed when the user scrolls to the bottom of the container.
- * @param {InfiniteScroll~onLoadNext} [loadNext]
- *    DEPRECATED. Use "onLoadNext" instead.
  *
  * @param {Component} contentType
  *    A ReactJS component representing the row type.
@@ -187,8 +183,6 @@ class Batch extends React.Component {
  * @param {InfiniteScroll~onGenerateHeading} [onGenerateHeading]
  *    A heading generator function. If the result is anything but null, a new heading will be generated
  *    the content of which will be set to the result of the call.
- * @param {InfiniteScroll~onGenerateHeading} [headingGenerator]
- *    DEPRECATED. Use "onGenerateHeading" instead.
  *
  * @param {number} [height]
  *    The height of the container. Required when not attached to the window.
@@ -199,7 +193,7 @@ class Batch extends React.Component {
  *
  * @example
  *   var batches=[{id: 1, data: ['some', 'data', 'here']}...];
- *   <InfiniteScroll onLoadNext={this.loadNext} hasNext={true} hasPrev={false} batches={batches} contentType={MyRow} />
+ *   <InfiniteScroll onLoadNext={this.onLoadNext} hasNext={true} hasPrev={false} batches={batches} contentType={MyRow} />
  */
 class InfiniteScroll extends React.Component {
     static displayName = "InfiniteScroll";
@@ -214,11 +208,9 @@ class InfiniteScroll extends React.Component {
         initalItem: PropTypes.object,
         onScroll: PropTypes.func,
         hasPrev: PropTypes.bool,
-        onLoadPrev: PropTypes.func, //TODO: set as required when v1 removed
-        loadPrev: PropTypes.func, //TODO: remove when v1 no longer supported
+        onLoadPrev: PropTypes.func.isRequired,
         hasNext: PropTypes.bool,
-        onLoadNext: PropTypes.func, //TODO: set as required when v1 removed
-        loadNext: PropTypes.func, //TODO: remove when v1 no longer supported
+        onLoadNext: PropTypes.func.isRequired,
         contentType: PropTypes.object,
         onGenerateHeading: PropTypes.func,
         headingGenerator: PropTypes.func, //TODO: remove when v1 no longer supported
@@ -322,23 +314,15 @@ class InfiniteScroll extends React.Component {
             this.forceUpdate();
         }
         if (this._didScrollToTop() && !this._prepending) {
-            //TODO: remove loadPrev logic when v1 removed.
-            //Also, if check can be removed as onLoadPrev should be made required then as well
-            var onLoadPrev = this.props.onLoadPrev || this.props.loadPrev;
-
-            if (onLoadPrev) {
+            if (this.props.onLoadPrev) {
                 this._prepending = true;
-                onLoadPrev();
+                this.props.onLoadPrev();
             }
         }
         if (this._didScrollToBottom() && !this._appending) {
-            //TODO: remove loadNext logic when v1 removed.
-            //Also, if check can be removed as onLoadNext should be made required then as well
-            var onLoadNext = this.props.onLoadNext || this.props.loadNext;
-
-            if (onLoadNext) {
+            if (this.props.onLoadNext) {
                 this._appending = true;
-                onLoadNext();
+                this.props.onLoadNext();
             }
         }
         if (this.props.onScroll) {
@@ -396,16 +380,23 @@ class InfiniteScroll extends React.Component {
             window.addEventListener("scroll", this._handleScroll);
         }
 
-        //TODO: remove these when v1 no longer supported:
+        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
+        /* istanbul ignore if  */
         if (!Utils.isProduction()) {
+            /* istanbul ignore if  */
             if (this.props.loadPrev) {
-                console.warn(Utils.deprecateMessage("loadPrev", "onLoadPrev"));
+                /* istanbul ignore next  */
+                throw(Utils.deprecatePropError("loadPrev", "onLoadPrev"));
             }
+            /* istanbul ignore if  */
             if (this.props.loadNext) {
-                console.warn(Utils.deprecateMessage("loadNext", "onLoadNext"));
+                /* istanbul ignore next  */
+                throw(Utils.deprecatePropError("loadNext", "onLoadNext"));
             }
+            /* istanbul ignore if  */
             if (this.props.headingGenerator) {
-                console.warn(Utils.deprecateMessage("headingGenerator", "onGenerateHeading"));
+                /* istanbul ignore next  */
+                throw(Utils.deprecatePropError("headingGenerator", "onGenerateHeading"));
             }
         }
     }

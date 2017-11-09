@@ -1,6 +1,5 @@
 window.__DEV__ = true;
 
-jest.dontMock("./commonTests.jsx");
 jest.dontMock("../v2.jsx");
 jest.dontMock("../index.js");
 jest.dontMock("../../FormLabel.jsx");
@@ -13,7 +12,7 @@ describe("FormTextField", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
         FormTextField = require("../v2.jsx"),
-        CommonTests = require("./commonTests.jsx"),
+        Utils = require("../../../../util/Utils"),
         _ = require("underscore");
 
 
@@ -42,7 +41,118 @@ describe("FormTextField", function () {
     }
 
 
-    CommonTests(getComponent);
+    it("renders the component", function () {
+        var component = getComponent();
+
+        // verify that the component is rendered
+        var input = ReactDOM.findDOMNode(component);
+        expect(ReactTestUtils.isDOMComponent(input)).toBeTruthy();
+
+        // make sure that the input is not required by default
+        var elements = TestUtils.scryRenderedDOMNodesWithClass(component, "required");
+        expect(elements.length).toBe(0);
+    });
+
+    it("shows input as required", function () {
+        var component = getComponent({
+            isRequired: true
+        });
+
+        // verify that the component is rendered
+        var input = TestUtils.findRenderedDOMNodeWithClass(component, "required");
+        expect(ReactTestUtils.isDOMComponent(input)).toBeTruthy();
+    });
+
+    it("shows the default value", function () {
+        var component = getComponent({
+            value: "my random value"
+        });
+
+        // verify that the component is rendered
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        expect(input.value).toEqual("my random value");
+    });
+
+    it("shows placeholder", function () {
+        var component = getComponent({
+            placeholder: "edit me"
+        });
+
+        // verify that the component is rendered
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        expect(input.getAttribute("placeholder")).toEqual("edit me");
+    });
+
+    it("respects value over defaultValue and state precedence", function () {
+        var component = getComponent({
+            defaultValue: "my random value",
+            value: "my value"
+        });
+
+        // verify that the component is rendered
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        expect(input.value).toEqual("my value");
+    });
+
+    it("fire onFocus callback when input gains focus", function () {
+        var handleFocus = jest.genMockFunction();
+        var component = getComponent({
+            onFocus: handleFocus
+        });
+
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+        ReactTestUtils.Simulate.focus(input);
+        expect(handleFocus.mock.calls.length).toBe(1);
+    });
+
+    it("shows the error message when it is specified", function () {
+        var errorMessage = "help!";
+        var component = getComponent({
+            errorMessage: errorMessage
+        });
+
+        var errorDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "form-text-field-error-message") ||
+                       TestUtils.findRenderedDOMNodeWithDataId(component, "formTextField_errormessage");
+
+        expect(errorDiv.textContent).toBe(errorMessage);
+    });
+
+    it("triggers onChange callback when input updated", function () {
+        var callback = jest.genMockFunction();
+        var component = getComponent({ onChange: callback });
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+
+        ReactTestUtils.Simulate.change(input, { target: { value: "abc" } });
+
+        expect(callback.mock.calls[0][0].target.value).toBe("abc");
+    });
+
+    it("renders label", function () {
+        var component = getComponent({
+            labelText: "some label",
+        });
+
+        expect(ReactDOM.findDOMNode(component).textContent).toBe("some label");
+    });
+
+    it("enables autocomplete", function () {
+        var component = getComponent({
+            autoComplete: true,
+            useAutocomplete: true
+        });
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+
+        expect(input.getAttribute("autoComplete")).toBe("on");
+    });
+
+    it("masks field if property set", function () {
+        var component = getComponent({
+            maskValue: true
+        });
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+
+        expect(input.getAttribute("type")).toBe("password");
+    });
 
     it("renders with default data-id", function () {
         var component = getComponent();
@@ -348,35 +458,6 @@ describe("FormTextField", function () {
         expect(componentRef.pwChar).toEqual("●");
     });
 
-    //TODO: remove when controlled no longer supported
-    it("produces stateful/stateless components correctly given controlled prop", function () {
-        var component = ReactTestUtils.renderIntoDocument(<FormTextField controlled={false} />);
-        var stateful = component.refs.stateful;
-        var stateless = component.refs.stateless;
-
-        expect(stateful).toBeTruthy();
-        expect(stateless).toBeFalsy();
-
-        component = ReactTestUtils.renderIntoDocument(<FormTextField controlled={true} />);
-        stateful = component.refs.stateful;
-        stateless = component.refs.stateless;
-
-        expect(stateless).toBeTruthy();
-        expect(stateful).toBeFalsy();
-    });
-
-    //TODO: remove when controlled no longer supported
-    it("logs warning for deprecated controlled prop", function () {
-        console.warn = jest.genMockFunction();
-
-        getComponent();
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use stateless instead of controlled. " +
-            "The default for stateless will be true instead of false. " +
-            "Support for controlled will be removed in next version");
-    });
-
     it("logs warning for type color when not in production", function () {
         console.warn = jest.genMockFunction();
         getComponent({ type: "color" });
@@ -394,4 +475,13 @@ describe("FormTextField", function () {
         expect(console.warn).not.toBeCalled();
         delete process.env.NODE_ENV;
     });
+
+    it("throws error when deprecated prop 'controlled' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
+
+        expect(function () {
+            getComponent({ controlled: true });
+        }).toThrow(expectedError);
+    });
+
 });

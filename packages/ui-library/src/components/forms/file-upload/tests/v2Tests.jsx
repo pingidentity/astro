@@ -8,7 +8,6 @@ jest.dontMock("../v2-stateless.jsx");
 jest.dontMock("../v2-constants.js");
 jest.dontMock("../../FormError.jsx");
 jest.dontMock("../../FormLabel.jsx");
-jest.dontMock("../../../../util/Utils");
 
 //mock the exif api
 jest.setMock("exif-js", { getData: jest.genMockFunction() });
@@ -21,6 +20,7 @@ describe("FileUpload", function () {
         TestUtils = require("../../../../testutil/TestUtils"),
         FileUpload = require("../index.js"),
         CommonTests = require("./commonTests.jsx"),
+        Utils = require("../../../../util/Utils"),
         _ = require("underscore");
 
     //require these files so that jest will count them in coverage
@@ -180,42 +180,20 @@ describe("FileUpload", function () {
         }
     });
 
-    //TODO: remove when controlled no longer supported
-    it("produces stateful/stateless components correctly given controlled prop", function () {
-        var component = getComponent({ controlled: false });
-        var stateful = component.refs.FileUploadStateful;
-        var stateless = component.refs.FileUploadStateless;
+    it("throws error when deprecated prop 'controlled' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
 
-        expect(stateful).toBeTruthy();
-        expect(stateless).toBeFalsy();
-
-        component = getComponent({ controlled: true });
-        stateful = component.refs.FileUploadStateful;
-        stateless = component.refs.FileUploadStateless;
-
-        expect(stateless).toBeTruthy();
-        expect(stateful).toBeFalsy();
+        expect(function () {
+            getComponent({ controlled: true });
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when controlled no longer supported
-    it("logs warning for deprecated controlled prop", function () {
-        console.warn = jest.genMockFunction();
+    it("throws error when deprecated prop 'title' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("title", "labelText"));
 
-        getComponent();
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use stateless instead of controlled. " +
-            "Support for controlled will be removed in next version");
+        expect(function () {
+            getComponent({ title: "something" });
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when title no longer supported
-    it("logs warning for deprecated title prop", function () {
-        console.warn = jest.genMockFunction();
-
-        getComponent({ title: "Input Title" });
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use labelText instead of title. " +
-            "Support for title will be removed in next version");
-    });
 });

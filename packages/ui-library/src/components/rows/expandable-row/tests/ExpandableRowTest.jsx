@@ -8,6 +8,7 @@ describe("ExpandableRow", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
+        Utils = require("../../../../util/Utils"),
         ExpandableRow = require("../ExpandableRow.jsx"),
         HelpHint = require("../../../tooltips/HelpHint.jsx"),
         _ = require("underscore");
@@ -230,8 +231,8 @@ describe("ExpandableRow", function () {
         expect(component.props.onToggle).lastCalledWith(false);
     });
 
-    it("stateful: renders the row as expanded if defaultToExpanded prop is set to true", function () {
-        var component = getComponent({ stateless: false, defaultToExpanded: true });
+    it("stateful: renders the row as expanded if expanded prop is set to true", function () {
+        var component = getComponent({ stateless: false, expanded: true });
         var expandedRow = TestUtils.findRenderedDOMNodeWithDataId(component, "expanded-row");
         var content = TestUtils.findRenderedDOMNodeWithDataId(component, "content");
 
@@ -382,7 +383,7 @@ describe("ExpandableRow", function () {
 
     it("stateful: should genereate delete button with confirmation when confirmDelete provided", function () {
         var component = getComponent({
-            defaultToExpanded: true,
+            expanded: true,
             showDelete: true,
             confirmDelete: true,
             stateless: false
@@ -406,7 +407,7 @@ describe("ExpandableRow", function () {
 
     it("stateful: should genereate delete button without confirmation when confirmDelete not provided", function () {
         var component = getComponent({
-            defaultToExpanded: true,
+            expanded: true,
             showDelete: true,
             stateless: false
         });
@@ -419,7 +420,7 @@ describe("ExpandableRow", function () {
     it("stateful: should show delete confirm dialog", function () {
         var component = getComponent({
             stateless: false,
-            defaultToExpanded: true,
+            expanded: true,
             showDelete: true,
             confirmDelete: true
         });
@@ -438,7 +439,7 @@ describe("ExpandableRow", function () {
     it("stateful: should hide delete confirm dialog", function () {
         var component = getComponent({
             stateless: false,
-            defaultToExpanded: true,
+            expanded: true,
             showDelete: true,
             confirmDelete: true,
             showDeleteConfirm: true
@@ -456,7 +457,7 @@ describe("ExpandableRow", function () {
     it("stateful: should trigger onDelete callback on click confirm-delete", function () {
         var component = getComponent({
             stateless: false,
-            defaultToExpanded: true,
+            expanded: true,
             showDelete: true,
             confirmDelete: true,
             showDeleteConfirm: true,
@@ -474,7 +475,7 @@ describe("ExpandableRow", function () {
     it("stateful: should trigger onDelete callback when confirmDelete is false", function () {
         var component = getComponent({
             stateless: false,
-            defaultToExpanded: true,
+            expanded: true,
             showDelete: true,
             confirmDelete: false,
             showDeleteConfirm: true,
@@ -513,7 +514,7 @@ describe("ExpandableRow", function () {
     it("stateful: should trigger onEditButtonClick callback on edit-btn click", function () {
         var component = getComponent({
             stateless: false,
-            defaultToExpanded: true,
+            expanded: true,
             showEdit: true,
             onEditButtonClick: jest.genMockFunction()
         });
@@ -525,59 +526,20 @@ describe("ExpandableRow", function () {
         expect(component.props.onEditButtonClick).toBeCalled();
     });
 
-    //TODO: remove when controlled no longer supported
-    it("produces stateful/stateless components correctly given controlled prop", function () {
-        var component = ReactTestUtils.renderIntoDocument(<ExpandableRow controlled={false} />);
-        var stateful = component.refs.StatefulExpandableRow;
-        var stateless = component.refs.StatelessExpandableRow;
+    it("throws error when deprecated prop 'controlled' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
 
-        expect(stateful).toBeTruthy();
-        expect(stateless).toBeFalsy();
-
-        component = ReactTestUtils.renderIntoDocument(<ExpandableRow controlled={true} />);
-        stateful = component.refs.StatefulExpandableRow;
-        stateless = component.refs.StatelessExpandableRow;
-
-        expect(stateless).toBeTruthy();
-        expect(stateful).toBeFalsy();
+        expect(function () {
+            getComponent({ controlled: true });
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when controlled no longer supported
-    it("logs warning for deprecated controlled prop", function () {
-        console.warn = jest.genMockFunction();
+    it("throws error when deprecated prop 'defaultToExpanded' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("defaultToExpanded", "expanded"));
 
-        getComponent();
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use stateless instead of controlled. " +
-            "Support for controlled will be removed in next version");
+        expect(function () {
+            getComponent({ defaultToExpanded: true });
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when v1 no longer supported
-    it("logs wanring when defaultToExpanded prop given", function () {
-        console.warn = jest.genMockFunction();
-
-        getComponent({ defaultToExpanded: true });
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use expanded instead of defaultToExpanded. " +
-            "Support for defaultToExpanded will be removed in next version");
-    });
-
-    //TODO: remove when v1 no longer supported
-    it("does not log warning for id, onChange or isRequired when in production", function () {
-        //Mock process.env.NODE_ENV
-        process.env.NODE_ENV = "production";
-
-        console.warn = jest.genMockFunction();
-        getComponent({
-            stateless: false,
-            defaultToExpanded: true,
-            showEdit: true,
-            onEditButtonClick: jest.genMockFunction()
-        });
-
-        expect(console.warn).not.toBeCalled();
-        delete process.env.NODE_ENV;
-    });
 });

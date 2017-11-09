@@ -7,6 +7,7 @@ describe("FormRadioGroup", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
+        Utils = require("../../../util/Utils"),
         FormRadioGroup = require("../FormRadioGroup.jsx"),
         callback = jest.genMockFunction(),
         items = [
@@ -17,25 +18,9 @@ describe("FormRadioGroup", function () {
     it("tests onValueChanged", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormRadioGroup
-                id="test-radio-group"
+                data-id="test-radio-group"
                 groupName="test_radio_group"
                 onValueChange={callback}
-                items={items}/>
-        );
-        var radios = TestUtils.scryRenderedDOMNodesWithTag(component, "input");
-
-        ReactTestUtils.Simulate.change(radios[0], { target: { value: "1" } });
-        //make sure callback was triggered
-        expect(callback).toBeCalledWith("1");
-    });
-
-    // TODO To be removed once "onChange" support is discontnued.
-    it("tests onChanged", function () {
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormRadioGroup
-                id="test-radio-group"
-                groupName="test_radio_group"
-                onChange={callback}
                 items={items}/>
         );
         var radios = TestUtils.scryRenderedDOMNodesWithTag(component, "input");
@@ -48,9 +33,9 @@ describe("FormRadioGroup", function () {
     it("test no default selected item", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormRadioGroup
-                id="test-radio-group"
+                data-id="test-radio-group"
                 groupName="test_radio_group"
-                onChange={callback}
+                onValueChange={callback}
                 items={items}/>
         );
 
@@ -91,34 +76,6 @@ describe("FormRadioGroup", function () {
         expect(callback).toBeCalledWith("1");
     });
 
-    // TODO To be removed once "onChange" support is discontnued.
-    it("will trigger onChange on radio selection change", function () {
-        var selectedItem = "2";
-
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormRadioGroup
-                groupName="test_radio_group"
-                selected={selectedItem}
-                onChange={callback}
-                items={items}/>
-        );
-
-        var radios = TestUtils.scryRenderedDOMNodesWithTag(component, "input");
-
-        // make sure there are 2 radios
-        expect(radios.length).toBe(2);
-
-        // make sure second radio button is checked by default
-        expect(radios[0].checked).toBe(false);
-        expect(radios[0].value).toBe("1");
-        expect(radios[1].checked).toBe(true);
-        expect(radios[1].value).toBe("2");
-
-        ReactTestUtils.Simulate.change(radios[0], { target: { value: "1" } });
-        //make sure callback was triggered
-        expect(callback).toBeCalledWith("1");
-    });
-
     it("contains the proper css classes", function () {
         var customClass = "my-test-class";
 
@@ -126,7 +83,7 @@ describe("FormRadioGroup", function () {
             <FormRadioGroup
                 groupName="test_radio_group"
                 className={customClass}
-                onChange={callback}
+                onValueChange={callback}
                 items={items}/>
         );
 
@@ -134,7 +91,7 @@ describe("FormRadioGroup", function () {
             <FormRadioGroup
                 stacked={false}
                 groupName="test_radio_group"
-                onChange={callback}
+                onValueChange={callback}
                 items={items}/>
         );
 
@@ -158,7 +115,7 @@ describe("FormRadioGroup", function () {
             <FormRadioGroup
                 groupName="test_radio_group"
                 disabled={true}
-                onChange={callback}
+                onValueChange={callback}
                 items={items} />
         );
 
@@ -178,7 +135,7 @@ describe("FormRadioGroup", function () {
         var viewIndividualDisabled = ReactTestUtils.renderIntoDocument(
             <FormRadioGroup
                 groupName="test_radio_group"
-                onChange={callback}
+                onValueChange={callback}
                 items={items} />
         );
 
@@ -199,7 +156,7 @@ describe("FormRadioGroup", function () {
             <FormRadioGroup
                 groupName="test_radio_group"
                 disabled={false}
-                onChange={callback}
+                onValueChange={callback}
                 items={items} />
         );
 
@@ -220,26 +177,13 @@ describe("FormRadioGroup", function () {
         var view = ReactTestUtils.renderIntoDocument(
             <FormRadioGroup
                 groupName="test_radio_group"
-                onChange={callback}
+                onValueChange={callback}
                 items={items} />
         );
 
         // test for "hidden" class on labels
         var labels = TestUtils.scryRenderedDOMNodesWithClass(view, "hidden");
         expect(labels.length).toBe(1);
-    });
-
-    // TODO To be removed once "id" support is discontnued.
-    it("render component with id", function () {
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormRadioGroup id="radioGroupWithId"
-                groupName="test_radio_group"
-                items={items} />
-        );
-
-        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "messagesWithId");
-
-        expect(element).toBeDefined();
     });
 
     it("render component with data-id", function () {
@@ -266,71 +210,24 @@ describe("FormRadioGroup", function () {
         expect(element).toBeDefined();
     });
 
-    // TODO To be removed once "id" support is discontnued.
-    it("log warning in console for id", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <FormRadioGroup id="radioGroupWithId"
-                            groupName="test_radio_group"
-                            items={items} />
-        );
+    it("throws error when deprecated prop 'id' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
 
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use data-id instead of id. Support for id will be removed in next version");
+        expect(function () {
+            ReactTestUtils.renderIntoDocument(
+                <FormRadioGroup id="foo" items={items} />
+            );
+        }).toThrow(expectedError);
     });
 
-    // TODO To be removed once "id" support is discontnued.
-    it("does not log warning in console without id", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <FormRadioGroup data-id="radioGroupWithDataId"
-                            groupName="test_radio_group"
-                            items={items} />
-        );
+    it("throws error when deprecated prop 'onChange' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("onChange", "onValueChange"));
 
-        expect(console.warn).not.toBeCalled();
-    });
-
-    // TODO To be removed once "onChange" support is discontnued.
-    it("log warning in console for onChange", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <FormRadioGroup data-id="radioGroupWithDataId"
-                            groupName="test_radio_group"
-                            items={items} onChange={jest.genMockFunction}/>
-        );
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use onValueChange instead of onChange. " +
-            "Support for onChange will be removed in next version");
-    });
-
-    // TODO To be removed once "onChange" support is discontnued.
-    it("log no warning in console with onValueChange", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <FormRadioGroup data-id="radioGroupWithDataId"
-                            groupName="test_radio_group"
-                            items={items} onValueChange={jest.genMockFunction}/>
-        );
-
-        expect(console.warn).not.toBeCalled();
-    });
-
-    //TODO: remove when deprecated props no longer supported
-    it("does not log warning for id or onChange when in production", function () {
-        //Mock process.env.NODE_ENV
-        process.env.NODE_ENV = "production";
-
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <FormRadioGroup id="radioGroupWithDataId"
-                            groupName="test_radio_group"
-                            items={items} onChange={jest.genMockFunction}/>
-        );
-
-        expect(console.warn).not.toBeCalled();
-        delete process.env.NODE_ENV;
+        expect(function () {
+            ReactTestUtils.renderIntoDocument(
+                <FormRadioGroup onChange={jest.genMockFunction()} items={items} />
+            );
+        }).toThrow(expectedError);
     });
 
 });

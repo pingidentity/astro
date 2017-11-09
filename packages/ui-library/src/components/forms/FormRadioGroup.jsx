@@ -32,8 +32,6 @@ var React = require("react"),
  *
  * @param {string} [data-id="radio-btn"]
  *     To define the base "data-id" value for top-level HTML container.
- * @param {string} [id]
- *     DEPRECATED. Use "data-id" instead.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
  *
@@ -45,8 +43,6 @@ var React = require("react"),
  *     The selected "id" from the items object above. If none is passed-in, all radio buttons are left unchecked
  * @param {FormRadioGroup~onValueChange} [onValueChange]
  *     Callback to be triggered when the selection is changed.
- * @param {FormRadioGroup~onValueChange} [onChange]
- *     DEPRECATED. Use "onValueChange" instead.
  *
  * @param {boolean} [stacked=true]
  *     When true, radios inputs are stacked vertically. When false radio inputs appear on same line
@@ -92,13 +88,11 @@ var React = require("react"),
 class FormRadioGroup extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
-        id: PropTypes.string,
         className: PropTypes.string,
         groupName: PropTypes.string.isRequired,
         items: PropTypes.array.isRequired,
         selected: PropTypes.any,
         onValueChange: PropTypes.func,
-        onChange: PropTypes.func,
         disabled: PropTypes.bool,
         stacked: PropTypes.bool
     };
@@ -110,8 +104,7 @@ class FormRadioGroup extends React.Component {
     };
 
     _handleChange = (e) => {
-        var onValueChange = this.props.onValueChange || this.props.onChange;
-        onValueChange(e.target.value);
+        this.props.onValueChange(e.target.value);
     };
 
     _getRadioButtons = () => {
@@ -124,18 +117,16 @@ class FormRadioGroup extends React.Component {
                 hidden: item.hidden
             });
 
-            var dataId = this.props.id || this.props["data-id"];
-
             return (
                 <FormLabel
                     className={className}
                     key={item.id}
-                    data-id={dataId + "_label_" + item.id}
+                    data-id={this.props["data-id"] + "_label_" + item.id}
                     value={item.name}
                     hint={item.helpHintText}
                     helpTarget={item.helpTarget}>
                     <input
-                        data-id={dataId + "_" + item.id}
+                        data-id={this.props["data-id"] + "_" + item.id}
                         type="radio"
                         name={this.props.groupName}
                         value={item.id}
@@ -152,17 +143,16 @@ class FormRadioGroup extends React.Component {
     componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
-                console.warn(Utils.deprecateMessage("id", "data-id"));
+                throw(Utils.deprecatePropError("id", "data-id"));
             }
             if (this.props.onChange) {
-                console.warn(Utils.deprecateMessage("onChange", "onValueChange"));
+                throw(Utils.deprecatePropError("onChange", "onValueChange"));
             }
         }
     }
 
     render() {
-        var dataId = this.props.id || this.props["data-id"];
-        return <div data-id={dataId} className="list">{this._getRadioButtons()}</div>;
+        return <div data-id={this.props["data-id"]} className="list">{this._getRadioButtons()}</div>;
     }
 }
 

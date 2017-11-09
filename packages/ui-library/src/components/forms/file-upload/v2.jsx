@@ -58,8 +58,6 @@ var React = require("react"),
  * @param {boolean} [stateless]
  *    To enable the component to be externally managed. True will relinquish control to the component's owner.
  *    False or not specified will cause the component to manage state internally.
- * @param {boolean} [controlled=false]
- *     DEPRECATED. Use "stateless" instead.
  *
  * @param {string} labelSelect
  *    Text to display on the button when no file has been selected.
@@ -96,8 +94,6 @@ var React = require("react"),
  *    The url for the default image to use.
  * @param {string} [labelText]
  *     The text to show as the input's label.
- * @param [title] {string}
- *    DEPRECATED. Use "labelText" instead.
  * @param {number} maxFileSizeKb
  *    The maximum size (in KB) of the uploaded file (default 5MB).
  * @param {string} [thumbnailSrc]
@@ -123,12 +119,12 @@ class FileUpload extends React.Component {
     static displayName = "FileUpload";
 
     static propTypes = {
-        controlled: PropTypes.bool
+        stateless: PropTypes.bool
     };
 
     static defaultProps = {
         "data-id": "file-upload",
-        controlled: false,
+        stateless: false,
         accept: Constants.Accept.IMAGE,
         showThumbnail: false,
         showRemoveButton: true,
@@ -137,14 +133,18 @@ class FileUpload extends React.Component {
 
     componentWillMount() {
         if (!Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+            if (this.props.controlled) {
+                throw(Utils.deprecatePropError("controlled", "stateless"));
+            }
+            if (this.props.title) {
+                throw(Utils.deprecatePropError("title", "labelText"));
+            }
         }
     }
 
     render() {
-        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
-
-        return stateless
+        return this.props.stateless
+            /* istanbul ignore next  */
             ? <StatelessFileUpload {..._.defaults({ ref: "FileUploadStateless" }, this.props)} />
             : <StatefulFileUpload {..._.defaults({ ref: "FileUploadStateful" }, this.props)} />;
     }

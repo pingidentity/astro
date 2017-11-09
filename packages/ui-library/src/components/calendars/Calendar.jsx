@@ -34,14 +34,6 @@ var Views = {
 */
 
 /**
-* @deprecated
-* @callback Calendar~onChange
-*
-* @param {number} date
-*    The numeric value for the selected date.
-*/
-
-/**
 * @callback Calendar~onValueChange
 *
 * @param {number} date
@@ -59,8 +51,6 @@ var Views = {
  *
  * @param {string} [data-id="calendar"]
  *    To define the base "data-id" value for the top-level HTML container.
- * @param {string} [id]
- *    DEPRECATED. Use "data-id" instead.
  * @param {string} [className]
  *    CSS classes to apply to the top-level HTML container.
  * @param {string} [labelClassName]
@@ -87,8 +77,6 @@ var Views = {
  *    Set the minimal view.
  * @param {Calendar~onValueChange} [onValueChange]
  *    Callback to be triggered when a date is selected.
- * @param {Calendar~onChange} [onChnage]
- *    DEPRECATED. Use "onValueChange" instead.
  *
  * @param {string} [placeholder]
  *    Placeholder text for the calendar field.
@@ -96,8 +84,6 @@ var Views = {
  *    Whether or not the calendar should close once a date is selected.
  * @param {boolean} [required=false]
  *    If true, the user must select a date for the calendar.
- * @param {boolean} [isRequired]
- *    DEPRECATED. Use "required" instead.
  *
  * @example
  *
@@ -146,13 +132,7 @@ class Calendar extends React.Component {
         placeholder: PropTypes.string,
         required: PropTypes.bool,
 
-        //TODO: set as required when v1 no longer supported
-        onValueChange: PropTypes.func,
-
-        //TODO: remove when v1 no longer supported
-        id: PropTypes.string,
-        isRequired: PropTypes.bool,
-        onChange: PropTypes.func
+        onValueChange: PropTypes.func.isRequired,
     };
 
     static defaultProps = {
@@ -181,13 +161,13 @@ class Calendar extends React.Component {
 
         if (!Utils.isProduction()) {
             if (this.props.id) {
-                console.warn(Utils.deprecateMessage("id", "data-id"));
+                throw(Utils.deprecatePropError("id", "data-id"));
             }
             if (this.props.onChange) {
-                console.warn(Utils.deprecateMessage("onChange", "onValueChange"));
+                throw(Utils.deprecatePropError("onChange", "onValueChange"));
             }
             if (this.props.isRequired) {
-                console.warn(Utils.deprecateMessage("isRequired", "required"));
+                throw(Utils.deprecatePropError("isRequired", "required"));
             }
         }
     }
@@ -240,14 +220,8 @@ class Calendar extends React.Component {
                 isVisible: false
             });
 
-            if (CalendarUtils.inDateRange(date, this.props.dateRange)) {
-                //TODO: remove when v1 no longer supported
-                if (this.props.onChange) {
-                    this.props.onChange(date.format(this.props.computableFormat));
-                }
-                if (this.props.onValueChange) {
-                    this.props.onValueChange(date.format(this.props.computableFormat));
-                }
+            if (CalendarUtils.inDateRange(date, this.props.dateRange) && this.props.onValueChange) {
+                this.props.onValueChange(date.format(this.props.computableFormat));
             }
 
         } else {
@@ -271,14 +245,8 @@ class Calendar extends React.Component {
             isVisible: this.props.closeOnSelect && isDayView ? !this.state.isVisible : this.state.isVisible
         });
 
-        if (CalendarUtils.inDateRange(date, this.props.dateRange)) {
-            //TODO: remove when v1 no longer supported
-            if (this.props.onChange) {
-                this.props.onChange(date.format(this.props.computableFormat));
-            }
-            if (this.props.onValueChange) {
-                this.props.onValueChange(date.format(this.props.computableFormat));
-            }
+        if (CalendarUtils.inDateRange(date, this.props.dateRange) && this.props.onValueChange) {
+            this.props.onValueChange(date.format(this.props.computableFormat));
         }
     };
 
@@ -329,10 +297,6 @@ class Calendar extends React.Component {
                 inputValue: newDate ? newDate.format(format) : null
             });
 
-            //TODO: remove when v1 no longer supported
-            if (this.props.onChange) {
-                this.props.onChange(computableDate);
-            }
             if (this.props.onValueChange) {
                 this.props.onValueChange(computableDate);
             }
@@ -427,11 +391,9 @@ class Calendar extends React.Component {
 
         var className = classnames("input-calendar", this.props.className, {
             active: this.state.isVisible,
-            required: this.props.isRequired || this.props.required,
+            required: this.props.required,
             "value-entered": !!this.state.inputValue
         });
-
-        var id = this.props.id || this.props["data-id"];
 
         return (
             <div
@@ -441,13 +403,13 @@ class Calendar extends React.Component {
                 <FormLabel
                     className={classnames(this.props.labelClassName)}
                     helpClassName={classnames(this.props.helpClassName)}
-                    data-id={id + "-label"}
+                    data-id={this.props["data-id"] + "-label"}
                     value={this.props.labelText}
                     hint={this.props.labelHelpText}
                 />
                 <div className="input-container">
                     <input type="text"
-                        data-id={id}
+                        data-id={this.props["data-id"]}
                         className="input-calendar-value"
                         value={this.state.inputValue}
                         onBlur={this.inputBlur}

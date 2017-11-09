@@ -9,7 +9,8 @@ describe("FormLabel", function () {
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        FormLabel = require("../FormLabel.jsx");
+        FormLabel = require("../FormLabel.jsx"),
+        Utils = require("../../../util/Utils");
 
     it("renders if it has children", function () {
         var label = ReactTestUtils.renderIntoDocument(
@@ -82,44 +83,14 @@ describe("FormLabel", function () {
         expect(element).toBeDefined();
     });
 
-    // TODO To be removed once "id" support is discontnued.
-    it("render component with id and log warning", function () {
-        console.warn = jest.genMockFunction();
+    it("throws error when deprecated prop 'id' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
 
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormLabel value="foo" id="deprecated" />
-        );
-
-        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "deprecated");
-        expect(element).toBeDefined();
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use id instead of data-id. Support for data-id will be removed in next version"
-        );
-    });
-
-    // TODO To be removed once "id" support is discontnued.
-    it("does not log warning in console without id", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <FormLabel value="foo" />
-        );
-
-        expect(console.warn).not.toBeCalled();
-    });
-
-    //TODO: remove when deprecated props no longer supported
-    it("does not log warning for id when in production", function () {
-        //Mock process.env.NODE_ENV
-        process.env.NODE_ENV = "production";
-
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <FormLabel value="foo" id="deprecated" />
-        );
-
-        expect(console.warn).not.toBeCalled();
-        delete process.env.NODE_ENV;
+        expect(function () {
+            ReactTestUtils.renderIntoDocument(
+                <FormLabel id="foo" />
+            );
+        }).toThrow(expectedError);
     });
 
 });

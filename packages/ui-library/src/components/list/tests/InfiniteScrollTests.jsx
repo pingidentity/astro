@@ -195,19 +195,6 @@ describe("Infinite Scroll", function () {
         }
     });
 
-    //TODO: remove when v1 no longer supported
-    it("calls the heading generator with deprecated headingGenerator callback", function () {
-        var generator = function (data) {
-            return data.num % 25 === 0 ? "Every 25 Heading..." : null;
-        };
-        var component = getRenderedComponent({ headingGenerator: generator });
-        var batch = ReactDOM.findDOMNode(component.refs.batch0);
-
-        for (var i = 0; i < batch.childNodes.length; i += 1) {
-            expect(batch.childNodes[i].getElementsByClassName("item-head").length).toBe(i % 25 === 0 ? 1 : 0);
-        }
-    });
-
     it("loads prev upon hitting bottom of container", function () {
         var component = getRenderedComponent({
             onLoadPrev: jest.genMockFunction(),
@@ -221,22 +208,6 @@ describe("Infinite Scroll", function () {
 
         expect(component.props.onLoadPrev.mock.calls.length).toBe(1);
         expect(component.props.onLoadNext.mock.calls.length).toBe(0);
-    });
-
-    //TODO: remove when v1 no longer supported
-    it("loads prev upon hitting bottom of container with deprecated loadPrev callback", function () {
-        var component = getRenderedComponent({
-            loadPrev: jest.genMockFunction(),
-            loadNext: jest.genMockFunction()
-        });
-        component._didScrollToTop = jest.genMockFunction().mockReturnValue(true);
-        component._didScrollToBottom = jest.genMockFunction().mockReturnValue(false);
-        component.componentDidUpdate();
-
-        ReactTestUtils.Simulate.scroll(ReactDOM.findDOMNode(component.refs.container));
-
-        expect(component.props.loadPrev.mock.calls.length).toBe(1);
-        expect(component.props.loadNext.mock.calls.length).toBe(0);
     });
 
     it("loads next upon hitting bottom of container", function () {
@@ -254,47 +225,4 @@ describe("Infinite Scroll", function () {
         expect(component.props.onLoadNext.mock.calls.length).toBe(1);
     });
 
-    //TODO: remove when v1 no longer supported
-    it("loads next upon hitting bottom of container with deprecated loadNext callback", function () {
-        var component = getRenderedComponent({
-            loadPrev: jest.genMockFunction(),
-            loadNext: jest.genMockFunction()
-        });
-        component._didScrollToTop = jest.genMockFunction().mockReturnValue(false);
-        component._didScrollToBottom = jest.genMockFunction().mockReturnValue(true);
-        component.componentDidUpdate();
-
-        ReactTestUtils.Simulate.scroll(ReactDOM.findDOMNode(component.refs.container));
-
-        expect(component.props.loadPrev.mock.calls.length).toBe(0);
-        expect(component.props.loadNext.mock.calls.length).toBe(1);
-    });
-
-    it("logs warning when given loadPrev prop", function () {
-        console.warn = jest.genMockFunction();
-
-        getRenderedComponent({ loadPrev: jest.genMockFunction() });
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use onLoadPrev instead of loadPrev. Support for loadPrev will be removed in next version");
-    });
-
-    it("logs warning when given loadNext prop", function () {
-        console.warn = jest.genMockFunction();
-
-        getRenderedComponent({ loadNext: jest.genMockFunction() });
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use onLoadNext instead of loadNext. Support for loadNext will be removed in next version");
-    });
-
-    it("logs warning when given headingGenerator prop", function () {
-        console.warn = jest.genMockFunction();
-
-        getRenderedComponent({ headingGenerator: jest.genMockFunction() });
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use onGenerateHeading instead of headingGenerator. " +
-            "Support for headingGenerator will be removed in next version");
-    });
 });

@@ -55,6 +55,7 @@ describe("FormTimeZone", function () {
 
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
+            stateless: false,
             countryLabel: countryLabel,
             "data-id": componentId,
             value: initialValue
@@ -436,32 +437,4 @@ describe("FormTimeZone", function () {
         // expect(renderedHelpText.textContent).toEqual(labelHelpText);
     });
 
-    //TODO: remove when controlled no longer supported
-    it("produces stateful/stateless components correctly given controlled prop", function () {
-        var component = getComponent({ controlled: false });
-        var stateful = component.refs.TimeZoneStateful;
-        var stateless = component.refs.TimeZoneStateless;
-
-        expect(stateful).toBeTruthy();
-        expect(stateless).toBeFalsy();
-
-        component = getComponent({ controlled: true });
-        stateful = component.refs.TimeZoneStateful;
-        stateless = component.refs.TimeZoneStateless;
-
-        expect(stateless).toBeTruthy();
-        expect(stateful).toBeFalsy();
-    });
-
-    //TODO: remove when controlled no longer supported
-    it("logs warning for deprecated controlled prop", function () {
-        console.warn = jest.genMockFunction();
-
-        getComponent();
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use stateless instead of controlled. " +
-            "The default for stateless will be true instead of false. " +
-            "Support for controlled will be removed in next version");
-    });
 });

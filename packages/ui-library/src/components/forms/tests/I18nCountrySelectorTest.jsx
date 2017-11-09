@@ -38,6 +38,7 @@ jest.dontMock("../../../util/i18n/Translator.js");
 describe("I18nCountrySelector", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
+        Utils = require("../../../util/Utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         I18nCountrySelector = require("../i18n/I18nCountrySelector.jsx"),
         _ = require("underscore");
@@ -205,73 +206,20 @@ describe("I18nCountrySelector", function () {
         expect(component.props.onSearch).toBeCalled();
     });
 
-    //TODO: remove when controlled no longer supported
-    it("produces stateful/stateless components correctly given controlled prop", function () {
-        var component = ReactTestUtils.renderIntoDocument(<I18nCountrySelector controlled={false} />);
-        var stateful = component.refs.I18nCountrySelectorStateful;
-        var stateless = component.refs.I18nCountrySelectorStateless;
+    it("throws error when deprecated prop 'controlled' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
 
-        expect(stateful).toBeTruthy();
-        expect(stateless).toBeFalsy();
-
-        component = ReactTestUtils.renderIntoDocument(<I18nCountrySelector controlled={true} />);
-        stateful = component.refs.I18nCountrySelectorStateful;
-        stateless = component.refs.I18nCountrySelectorStateless;
-        
-        expect(stateless).toBeTruthy();
-        expect(stateful).toBeFalsy();
+        expect(function () {
+            getComponent({ controlled: true });
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when controlled no longer supported
-    it("logs warning for deprecated controlled prop", function () {
-        console.warn = jest.genMockFunction();
+    it("throws error when deprecated prop 'onCountrySearch' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("onCountrySearch", "onSearch"));
 
-        getComponent();
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use stateless instead of controlled. " +
-            "Support for controlled will be removed in next version");
-    });
-
-    //TODO: remove when v1 no longer supported
-    it("stateless: triggers onCountrySearch callback when typing and search string provided", function () {
-        var component = getComponent({
-            stateless: true,
-            open: true,
-            searchString: "",
-            searchTime: 0,
-            onCountrySearch: jest.genMockFunction()
-        });
-
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
-        ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
-        expect(component.props.onCountrySearch).toBeCalled();
-    });
-
-    //TODO: remove when v1 no longer supported
-    it("logs warning when onCountrySearch prop given", function () {
-        console.warn = jest.genMockFunction();
-        getComponent({
-            onCountrySearch: jest.genMockFunction()
-        });
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use onSearch instead of onCountrySearch. " +
-            "Support for onCountrySearch will be removed in next version");
-    });
-
-    //TODO: remove when v1 no longer supported
-    it("does not log warning for onCountrySearch when in production", function () {
-        //Mock process.env.NODE_ENV
-        process.env.NODE_ENV = "production";
-
-        console.warn = jest.genMockFunction();
-        getComponent({
-            onCountrySearch: jest.genMockFunction()
-        });
-
-        expect(console.warn).not.toBeCalled();
-        delete process.env.NODE_ENV;
+        expect(function () {
+            getComponent({ onCountrySearch: jest.genMockFunction() });
+        }).toThrow(expectedError);
     });
 
 });

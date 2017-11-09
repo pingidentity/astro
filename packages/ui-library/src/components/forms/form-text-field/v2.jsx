@@ -85,8 +85,6 @@ var React = require("react"),
 *     WARNING. Default value for "stateless" will be set to true from next version.
 *     To enable the component to be externally managed. True will relinquish control to the component's owner.
 *     False or not specified will cause the component to manage state internally.
-* @param {boolean} [controlled=false]
-*     DEPRECATED. Use "stateless" instead.
 *
 * @param {string|number} [value=""]
 *     Current text field value.
@@ -174,24 +172,21 @@ var React = require("react"),
 
 module.exports = class extends React.Component {
     static propTypes = {
-        controlled: PropTypes.bool, //TODO: remove in new version
         stateless: PropTypes.bool
     };
 
     static defaultProps = {
-        controlled: false //TODO: change to stateless with true default in new version
+        stateless: true
     };
 
     componentWillMount() {
-        if (!Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("controlled", "stateless", "false", "true"));
+        if (!Utils.isProduction() && this.props.controlled) {
+            throw(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
         }
     }
 
     render() {
-        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
-
-        return (stateless
+        return (this.props.stateless
             ? React.createElement(Stateless, _.defaults({ ref: "stateless" }, this.props)) //eslint-disable-line no-use-before-define
             : React.createElement(Stateful, _.defaults({ ref: "stateful" }, this.props))); //eslint-disable-line no-use-before-define
     }

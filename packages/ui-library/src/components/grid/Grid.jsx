@@ -49,8 +49,6 @@ var React = require("react"),
  * @param {boolean} [stateless]
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally.
- * @param {boolean} [controlled=false]
- *     DEPRECATED. Use "stateless" instead.
  *
  * @param {Grid#Row[]} [rows]
  *     Rows to display on the table
@@ -224,7 +222,8 @@ class GridStateless extends React.Component {
 
         allColumnHeaders.push(
             <th className="column-pg" data-id="paginationColumn" key="paginationColumn">
-                <ColumnPagination controlled={true}
+                <ColumnPagination
+                    stateless={true}
                     perPage = {this.props.columnsPerPage}
                     page = {this.props.currentPage}
                     total = {this._getPageableColumns()}
@@ -306,25 +305,22 @@ class Grid extends React.Component {
     static displayName = "Grid";
 
     static propTypes = {
-        controlled: PropTypes.bool, //TODO: remove in new version
         stateless: PropTypes.bool
     };
 
     static defaultProps = {
-        controlled: false //TODO: change to stateless in new version
+        stateless: false
     };
 
     componentWillMount() {
-        if (!Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+        if (!Utils.isProduction() && this.props.controlled) {
+            throw(Utils.deprecatePropError("controlled", "stateless"));
         }
     }
 
     render() {
-        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
-
         return (
-            stateless
+            this.props.stateless
                 ? React.createElement(
                     GridStateless, _.defaults({ ref: "GridStateless" }, this.props), this.props.children)
                 : React.createElement(

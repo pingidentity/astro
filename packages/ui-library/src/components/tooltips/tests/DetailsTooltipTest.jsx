@@ -83,8 +83,8 @@ describe("DetailsTooltip", function () {
     it("is rendering open state with custom styles and no close control", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip title="Title" label="Action" open={true} titleClassNames="title"
-                     contentClassNames="content" showClose={false} labelStyle="label" className="extra">
+            <DetailsTooltip title="Title" label="Action" open={true} titleClassName="title"
+                     contentClassName="content" showClose={false} labelClassName="label" className="extra">
                 <p>what ever callout content is</p>
             </DetailsTooltip>
         );
@@ -287,19 +287,6 @@ describe("DetailsTooltip", function () {
         expect(TestUtils.mockCallsContains(window.removeEventListener, "keydown")).toBe(true);
     });
 
-    // TODO To be removed once "id" support is discontnued.
-    it("render component with id", function () {
-        var component = ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip id="detailsTooltipWithId" title="Title" label="Action">
-                <p>what ever callout content is</p>
-            </DetailsTooltip>
-        );
-
-        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "detailsTooltipWithId");
-
-        expect(element).toBeDefined();
-    });
-
     it("render component with data-id", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <DetailsTooltip data-id="detailsTooltipWithDataId" title="Title" label="Action">
@@ -324,60 +311,6 @@ describe("DetailsTooltip", function () {
         expect(element).toBeDefined();
     });
 
-    // TODO To be removed once "id" support is discontnued.
-    it("log warning in console for id", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip id="detailsTooltipWithId" title="Title" label="Action">
-                <p>what ever callout content is</p>
-            </DetailsTooltip>
-        );
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use data-id instead of id. Support for id will be removed in next version");
-    });
-
-    // TODO To be removed once "id" support is discontnued.
-    it("does not log warning in console without id", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip title="Title" label="Action">
-                <p>what ever callout content is</p>
-            </DetailsTooltip>
-        );
-
-        expect(console.warn).not.toBeCalledWith(
-            "Deprecated: use data-id instead of id.  Support for id will be removed in next version");
-    });
-
-    //TODO: remove when controlled no longer supported
-    it("produces stateful/stateless components correctly given controlled prop", function () {
-        var component = ReactTestUtils.renderIntoDocument(<DetailsTooltip controlled={false} />);
-        var stateful = component.refs.manager;
-        var stateless = component.refs.tooltip;
-
-        expect(stateful).toBeTruthy();
-        expect(stateless).toBeFalsy();
-
-        component = ReactTestUtils.renderIntoDocument(<DetailsTooltip controlled={true} />);
-        stateful = component.refs.manager;
-        stateless = component.refs.tooltip;
-
-        expect(stateless).toBeTruthy();
-        expect(stateful).toBeFalsy();
-    });
-
-    //TODO: remove when controlled no longer supported
-    it("logs warning for deprecated controlled prop", function () {
-        console.warn = jest.genMockFunction();
-
-        getComponent();
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use stateless instead of controlled. " +
-            "The default for stateless will be false instead of true. " +
-            "Support for controlled will be removed in next version");
-    });
 
     it("is rendering position styling with positionClassName", function () {
 
@@ -389,22 +322,6 @@ describe("DetailsTooltip", function () {
 
         //make sure root div got position CSS classes
         expect(ReactDOM.findDOMNode(component).getAttribute("class")).toContain("position");
-    });
-
-    // TODO To be removed once "positionStyle" is discontinued
-    it("is rendering position styling with deprecated positionStyle with warning", function () {
-
-        var component = ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip title="Title" label="Action" open={true} positionStyle="position">
-                <p>what ever callout content is</p>
-            </DetailsTooltip>
-        );
-
-        //make sure root div got position CSS classes
-        expect(ReactDOM.findDOMNode(component).getAttribute("class")).toContain("position");
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use positionClassName instead of positionStyle. " +
-            "Support for positionStyle will be removed in next version");
     });
 
     it("is rendering label styling with labelClassName", function () {
@@ -422,25 +339,6 @@ describe("DetailsTooltip", function () {
         expect(ReactDOM.findDOMNode(link).getAttribute("class")).toContain("customLabel");
     });
 
-    // TODO To be removed once "labelStyle" is discontinued
-    it("is rendering label styling with deprecated labelStyle with warning", function () {
-
-        var component = ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip title="Title" label="Action" open={true} labelStyle="customLabel">
-                <p>what ever callout content is</p>
-            </DetailsTooltip>
-        );
-
-        var details = TestUtils.findRenderedComponentWithType(component, DetailsTooltip);
-        var link = TestUtils.findRenderedDOMNodeWithDataId(details, "action-btn");
-
-        //make sure root div got customLabel CSS classes
-        expect(ReactDOM.findDOMNode(link).getAttribute("class")).toContain("customLabel");
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use labelClassName instead of labelStyle. " +
-            "Support for labelStyle will be removed in next version");
-    });
-
     it("is rendering content styling with contentClassName", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
@@ -456,25 +354,6 @@ describe("DetailsTooltip", function () {
         expect(ReactDOM.findDOMNode(content).getAttribute("class")).toContain("customContent");
     });
 
-    // TODO To be removed once "contentClassNames" is discontinued
-    it("is rendering content styling with deprecated contentClassNames with warning", function () {
-
-        var component = ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip title="Title" label="Action" open={true} contentClassNames="customContents">
-                <p>what ever callout content is</p>
-            </DetailsTooltip>
-        );
-
-        var details = TestUtils.findRenderedComponentWithType(component, DetailsTooltip);
-        var content = TestUtils.findRenderedDOMNodeWithDataId(details, "details-content");
-
-        //make sure content div got customContents CSS classes
-        expect(ReactDOM.findDOMNode(content).getAttribute("class")).toContain("customContent");
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use contentClassName instead of contentClassNames. " +
-            "Support for contentClassNames will be removed in next version");
-    });
-
     it("is rendering title styling with titleClassName", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
@@ -488,25 +367,6 @@ describe("DetailsTooltip", function () {
 
         //make sure context div got customContent CSS classes
         expect(ReactDOM.findDOMNode(title).getAttribute("class")).toContain("customTitle");
-    });
-
-    // TODO To be removed once "titleClassNames" is discontinued
-    it("is rendering title styling with deprecated titleClassNames with warning", function () {
-
-        var component = ReactTestUtils.renderIntoDocument(
-            <DetailsTooltip title="Title" label="Action" open={true} titleClassNames="customTitles">
-                <p>what ever callout content is</p>
-            </DetailsTooltip>
-        );
-
-        var details = TestUtils.findRenderedComponentWithType(component, DetailsTooltip);
-        var title = TestUtils.findRenderedDOMNodeWithDataId(details, "details-title");
-
-        //make sure content div got customContents CSS classes
-        expect(ReactDOM.findDOMNode(title).getAttribute("class")).toContain("customTitles");
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use titleClassName instead of titleClassNames. " +
-            "Support for titleClassNames will be removed in next version");
     });
 
     it("Renders buttons when optional buttons are provided", function () {
@@ -548,32 +408,4 @@ describe("DetailsTooltip", function () {
         expect(secondaryBtns[2].textContent).toBe("Save");
     });
 
-    //TODO: remove when deprecated props no longer supported
-    it("does not log warning for deprecated props when in production", function () {
-        //Mock process.env.NODE_ENV
-        process.env.NODE_ENV = "production";
-
-        console.warn = jest.genMockFunction();
-        getComponent({
-            id: "testId",
-            contentClassNames: "classes",
-            titleClassNames: "classes",
-            labelStyle: "styles",
-            positionStyle: "styles"
-        });
-
-        expect(console.warn).not.toBeCalled();
-        delete process.env.NODE_ENV;
-    });
-
-    it("does not log deprecation message when in production", function () {
-        //Mock process.env.NODE_ENV
-        process.env.NODE_ENV = "production";
-
-        console.warn = jest.genMockFunction();
-        getComponent();
-
-        expect(console.warn).not.toBeCalled();
-        delete process.env.NODE_ENV;
-    });
 });

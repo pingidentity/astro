@@ -10,6 +10,7 @@ describe("FormCheckbox", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         FormCheckbox= require("../FormCheckbox.jsx"),
         TestUtils = require("../../../testutil/TestUtils"),
+        Utils = require("../../../util/Utils"),
         _ = require("underscore");
 
     function getComponent (opts) {
@@ -44,13 +45,6 @@ describe("FormCheckbox", function () {
         });
 
         expect(TestUtils.findRenderedDOMNodeWithDataId(component, "my-new-id-container")).toBeTruthy();
-    });
-
-    //TODO: remove when v1 no longer supported
-    it("renders with given id", function () {
-        var component = getComponent({ id: "myCheckboxId" });
-
-        expect(TestUtils.findRenderedDOMNodeWithDataId(component, "myCheckboxId-container")).toBeDefined();
     });
 
     it("test default render with minimum required params", function () {
@@ -158,28 +152,12 @@ describe("FormCheckbox", function () {
         expect(icon).toBeTruthy();
     });
 
-    //TODO: remove when v1 no longer supported
-    it("logs warning when id prop given", function () {
-        console.warn = jest.genMockFunction();
-        getComponent(
-            { id: "FormCheckboxId" }
-        );
+    it("throws error when deprecated prop 'id' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
 
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use data-id instead of id. Support for id will be removed in next version");
+        expect(function () {
+            getComponent({ id: "foo" });
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when v1 no longer supported
-    it("does not log warning for id when in production", function () {
-        //Mock process.env.NODE_ENV
-        process.env.NODE_ENV = "production";
-
-        console.warn = jest.genMockFunction();
-        getComponent(
-            { id: "FormCheckboxId" }
-        );
-
-        expect(console.warn).not.toBeCalled();
-        delete process.env.NODE_ENV;
-    });
 });

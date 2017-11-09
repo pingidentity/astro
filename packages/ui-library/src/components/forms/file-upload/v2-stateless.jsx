@@ -3,8 +3,7 @@ var React = require("react"),
     ReactDOM = require("react-dom"),
     classnames = require("classnames"),
     FormLabel = require("../FormLabel.jsx"),
-    FormError = require("../FormError.jsx"),
-    Utils = require("../../../util/Utils.js");
+    FormError = require("../FormError.jsx");
 
 /**
  * @name FileUploadStateless
@@ -33,7 +32,6 @@ module.exports = class extends React.Component {
         errorMessage: PropTypes.string,
         filesAcceptedMessage: PropTypes.string,
         fileName: PropTypes.string,
-        title: PropTypes.string,
         accept: PropTypes.string,
         "data-id": PropTypes.string,
         thumbnailSrc: PropTypes.string
@@ -45,12 +43,6 @@ module.exports = class extends React.Component {
     resetComponent = () => {
         ReactDOM.findDOMNode(this.refs.fileInput).value = "";
     };
-
-    componentWillMount() {
-        if (!Utils.isProduction() && this.props.title) {
-            console.warn(Utils.deprecateMessage("title", "labelText"));
-        }
-    }
 
     render() {
         var fileSelected = !!(this.props.thumbnailSrc || this.props.fileName);
@@ -65,7 +57,7 @@ module.exports = class extends React.Component {
             <div className={containerClass} data-id={this.props["data-id"]}>
                 <FormLabel
                     className={classnames({ "form-error": this.props.errorMessage }) }
-                    value={this.props.labelText || this.props.title}>
+                    value={this.props.labelText}>
 
                     <ImagePreview
                         show={this.props.showThumbnail}

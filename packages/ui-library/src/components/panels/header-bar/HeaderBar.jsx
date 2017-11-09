@@ -54,8 +54,6 @@ var React = require("react"),
  *          Content to display to the right of the "siteLogo" and "siteTitle"
  * @param {string} [siteLogo]
  *          Site or service specific logo
- * @param {string} [label]
- *          DEPRECATED. Use "siteTitle" instead.
  * @param {string|object} [siteTitle]
  *          Content to display to the right of the "siteLogo" and to the left of "additionalContent"
  * @param {HeaderBar~navigationLink[]} tree
@@ -83,7 +81,6 @@ module.exports = class extends React.Component {
             PropTypes.string,
             PropTypes.object
         ]),
-        label: PropTypes.string,
         logo: PropTypes.string,
         openNode: PropTypes.string,
         siteLogo: PropTypes.string,
@@ -103,10 +100,11 @@ module.exports = class extends React.Component {
     };
 
     componentWillMount() {
-        if (!Utils.isProduction()) {
-            if (this.props.label) {
-                console.warn(Utils.deprecateMessage("label", "siteTitle"));
-            }
+        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
+        /* istanbul ignore if  */
+        if (!Utils.isProduction() && this.props.label) {
+            /* istanbul ignore next  */
+            throw(Utils.deprecatePropError("label", "siteTitle"));
         }
     }
 
@@ -162,8 +160,6 @@ module.exports = class extends React.Component {
     };
 
     render() {
-        var siteTitle = this.props.siteTitle ? this.props.siteTitle : this.props.label;
-
         return (
             <div id="header" data-id={this.props["data-id"]}>
                 <div className="logo" data-id="header-logo" />
@@ -171,9 +167,9 @@ module.exports = class extends React.Component {
                 {this.props.siteLogo &&
                     <img className="site-logo" data-id="header-site-logo" src={this.props.siteLogo} />
                 }
-                {siteTitle &&
+                {this.props.siteTitle &&
                     <span className="site-title" data-id={this.props["data-id"] + "-site-title"}>
-                        {siteTitle}
+                        {this.props.siteTitle}
                     </span>
                 }
                 {this.props.additionalContent &&

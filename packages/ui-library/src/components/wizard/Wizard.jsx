@@ -19,7 +19,6 @@ var INHERIT_PROPS = [
     "numSteps",
     "onEdit",
     "onValueChange",
-    "onChange", // DEPRECATED, remove when possible.
     "onNext",
     "onCancel",
     "showPulsing"
@@ -65,8 +64,6 @@ var INHERIT_PROPS = [
  *
  * @param {string} [data-id="wizard"]
  *      To define the base "data-id" value for the top-level HTML container.
- * @param {string} [id]
- *      Deprecated. Use data-id instead.
  * @param {string} [className]
  *      CSS classes to set on the top-level HTML container
  *
@@ -116,8 +113,6 @@ var INHERIT_PROPS = [
  *      Callback to be triggered when a choice is made (ie a radio button of a Choose component is clicked).
  *      If provided, will be injected its children's props, otherwise the actions of each step must be
  *      handled and the store updated.
- * @param {Wizard~onChange} [onChange]
- *      DEPRECATED. Use onValueChange instead.
  * @param {Wizard~onNext} [onNext]
  *      Callback to be triggered when the next button of any child is clicked.  If provided, will be injected
  *      its children's props, otherwise the actions of each step must be handled and the store updated
@@ -140,7 +135,6 @@ class Wizard extends React.Component {
 
     static propTypes = {
         "data-id": PropTypes.string,
-        id: PropTypes.string,
         className: PropTypes.string,
         cancelTooltip: PropTypes.object,
         title: PropTypes.string.isRequired,
@@ -153,7 +147,6 @@ class Wizard extends React.Component {
         labelNext: PropTypes.string,
         labelDone: PropTypes.string,
         showPulsing: PropTypes.bool,
-        onChange: PropTypes.func, // DEPRECATED, remove when possible.
         onValueChange: PropTypes.func,
         onNext: PropTypes.func,
         onEdit: PropTypes.func,
@@ -183,28 +176,23 @@ class Wizard extends React.Component {
     //if this is the root wizard, report the number of steps up to the reducer
     componentDidMount() {
         if (this.props.number === 1) {
-            if (this.props.onChange) {
-                this.props.onChange(0, this._filter(this.props.children).length);
-            } else {
-                this.props.onValueChange({ choice: 0, numSteps: this._filter(this.props.children).length });
-            }
+            this.props.onValueChange({ choice: 0, numSteps: this._filter(this.props.children).length });
         }
     }
 
     componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
-                console.warn(Utils.deprecateMessage("id", "data-id"));
+                throw(Utils.deprecatePropError("id", "data-id"));
             }
             if (this.props.onChange) {
-                console.warn(Utils.deprecateMessage("onChange", "onValueChange"));
+                throw(Utils.deprecatePropError("onChange", "onValueChange"));
             }
         }
     }
 
     render() {
-        var dataId = this.props.id || this.props["data-id"],
-            steps = this._filter(this.props.children),
+        var steps = this._filter(this.props.children),
             props = _.pick(this.props, INHERIT_PROPS);
 
         var stepNodes = React.Children.map(steps, function (step, i) {
@@ -223,7 +211,7 @@ class Wizard extends React.Component {
         }.bind(this));
 
         return (
-            <div data-id={dataId} className={classnames("task-wizard", this.props.className)}>
+            <div data-id={this.props["data-id"]} className={classnames("task-wizard", this.props.className)}>
                 {stepNodes}
                 {this.props.activeStep === this.props.numSteps ? (
                     <ButtonBar

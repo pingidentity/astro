@@ -27,8 +27,6 @@ var React = require("react"),
  *                  also pass the callback function.
  * @param {InlineMessage~onClick} [onClick]
  *                  Callback to be triggered when the button is clicked.
- * @param {InlineMessage~callback} [callback]
- *                  DEPRECATED use onClick instead
  *
  * @example
  *          No action button button:
@@ -48,8 +46,7 @@ class InlineMessage extends React.Component {
             MessageTypes.NOTICE, MessageTypes.ERROR, MessageTypes.WARNING, MessageTypes.SUCCESS
         ]),
         label: PropTypes.string,
-        onClick: PropTypes.func,
-        callback: PropTypes.func
+        onClick: PropTypes.func
     };
 
     static defaultProps = {
@@ -58,18 +55,16 @@ class InlineMessage extends React.Component {
     };
 
     _showAction = () => {
-        return (this.props.label !== undefined &&
-                    (this.props.onClick !== undefined || this.props.callback !== undefined));
+        return (this.props.label !== undefined && this.props.onClick !== undefined);
     };
 
     _onClick = (e) => {
-        var clickHandler = this.props.callback || this.props.onClick;
-        clickHandler(e);
+        this.props.onClick(e);
     };
 
     componentWillMount() {
-        if (this.props.callback && !Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("callback", "onClick"));
+        if (!Utils.isProduction() && this.props.callback) {
+            throw(Utils.deprecatePropError("callback", "onClick"));
         }
     }
 
@@ -83,8 +78,7 @@ class InlineMessage extends React.Component {
                 </div>
                 <If test={ this._showAction() } >
                     <div data-id="inline-message-btn" className="inline-message-btn">
-                        <button type="button" className="inline"
-                                onClick={ this._onClick }>{this.props.label}</button>
+                        <button type="button" className="inline" onClick={this._onClick }>{this.props.label}</button>
                     </div>
                 </If>
             </div>

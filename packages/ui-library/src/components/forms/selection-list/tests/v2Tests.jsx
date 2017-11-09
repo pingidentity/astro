@@ -22,6 +22,7 @@ describe("SelectionList", function () {
     var ReactTestUtils = require("react-dom/test-utils");
     var _ = require("underscore");
     var _s = require("underscore.string");
+    var Utils = require("../../../../util/Utils");
     var TestUtils = require("../../../../testutil/TestUtils");
     var SelectionList = require("../v2.jsx");
     var FormCheckbox = require("../../FormCheckbox.jsx");
@@ -561,31 +562,12 @@ describe("SelectionList", function () {
         });
     });
 
-    //TODO: remove when controlled no longer supported
-    it("produces stateful/stateless components correctly given controlled prop", function () {
-        var component = getComponent({ controlled: false });
-        var stateful = component.refs.SelectionListStateful;
-        var stateless = component.refs.SelectionListStateless;
+    it("throws error when deprecated prop 'controlled' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
 
-        expect(stateful).toBeTruthy();
-        expect(stateless).toBeFalsy();
-
-        component = getComponent({ controlled: true });
-        stateful = component.refs.SelectionListStateful;
-        stateless = component.refs.SelectionListStateless;
-
-        expect(stateless).toBeTruthy();
-        expect(stateful).toBeFalsy();
+        expect(function () {
+            getComponent({ controlled: true });
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when controlled no longer supported
-    it("logs warning for deprecated controlled prop", function () {
-        console.warn = jest.genMockFunction();
-
-        getComponent();
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use stateless instead of controlled. " +
-            "Support for controlled will be removed in next version");
-    });
 });

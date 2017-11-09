@@ -180,7 +180,38 @@ var Utils = {
         ].join("");
         return warning;
     },
-    
+
+    /**
+     * @alias module:util/Utils.deprecatePropError
+     * @desc Return a formatted string for deprecated prop.
+     *
+     * @param {string} feature
+     *    The name of the feature that is now deprecated.
+     * @param {string} useInstead
+     *    The name of the feature to use instead.
+     * @param {string} [oldDefault]
+     *    The old default value for the feature.
+     * @param {string} [newDefault]
+     *    The new default value for the feature.
+     * @return {string}
+     *    Formatted warning string.
+     */
+    deprecatePropError: function (feature, useInstead, oldDefault, newDefault) {
+        var defaultMsg = "";
+        if (newDefault) {
+            defaultMsg = "The default for " + useInstead + " will be " +
+                newDefault + " instead of " + oldDefault + ". ";
+        }
+
+        var warning = [
+            "Deprecated: use ", useInstead, " instead of ", feature, ". ",
+            defaultMsg,
+            "Support for ", feature, " has been removed."
+        ].join("");
+        return warning;
+    },
+
+
     /**
      * @alias module:util/Utils.deprecatedError
      * @desc Return a formatted string for a deprecated component version.

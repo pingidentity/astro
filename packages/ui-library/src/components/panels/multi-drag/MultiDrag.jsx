@@ -136,8 +136,6 @@ function convertFilteredIndexes (columns, desc) {
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally.
  *     stateless=false will handle filtering and moving in addition to executing all callbacks if specified.
- * @param {boolean} [controlled=false]
- *     DEPRECATED. Use "stateless" instead.
  *
  * @param {MultiDrag~ColumnData[]} columns
  *    The data representing the columns in the component.
@@ -492,24 +490,21 @@ class MultiDrag extends React.Component {
     static displayName = "MultiDrag";
 
     static propTypes = {
-        controlled: PropTypes.bool, //TODO remove in new version
         stateless: PropTypes.bool
     };
 
     static defaultProps = {
-        controlled: false //TODO: change to stateless in new version
+        stateless: false
     };
 
     componentWillMount() {
-        if (!Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+        if (!Utils.isProduction() && this.props.controlled) {
+            throw(Utils.deprecatePropError("controlled", "stateless"));
         }
     }
 
     render() {
-        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
-
-        return stateless
+        return this.props.stateless
             ? React.createElement(MultiDragStateless, _.defaults({ ref: "MultiDragStateless" }, this.props))
             : React.createElement(MultiDragStateful, _.defaults({ ref: "MultiDragStateful" }, this.props));
     }

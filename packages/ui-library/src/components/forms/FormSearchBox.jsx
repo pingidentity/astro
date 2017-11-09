@@ -143,6 +143,7 @@ class FormSearchBox extends React.Component {
         return (
             <div data-id={this.props["data-id"]} className={this.props.className} >
                 <FormTextField data-id="searchBox"
+                        stateless={false}
                         ref="searchBox"
                         className="search"
                         value={this.props.queryString}

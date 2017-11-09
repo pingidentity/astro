@@ -94,13 +94,6 @@ module.exports = [
 
             },
             {
-                label: "Checkbox List (stateless)",
-                demo: require("../components/forms/FormCheckboxListDemo.jsx"),
-                pathToDoc: "components/forms/FormCheckboxList.jsx",
-                pathToSource: "components_forms_FormCheckboxList.jsx.html",
-                pathToDemoSource: "demo_components_forms_FormCheckboxListDemo.jsx.html"
-            },
-            {
                 label: "Radio Group",
                 demo: require("../components/forms/FormRadioGroupDemo.jsx"),
                 pathToDoc: "components/forms/FormRadioGroup.jsx",
@@ -127,13 +120,6 @@ module.exports = [
                 pathToDoc: "components/forms/FormTextArea.jsx",
                 pathToSource: "components_forms_form-text-area_v2.jsx.html",
                 pathToDemoSource: "demo_components_forms_FormTextAreaDemo.jsx.html"
-            },
-            {
-                label: "Select Field",
-                demo: require("../components/forms/FormSelectFieldDemo.jsx"),
-                pathToDoc: "components/forms/FormSelectField.jsx",
-                pathToSource: "components_forms_form-select-field_v2.jsx.html",
-                pathToDemoSource: "demo_components_forms_FormSelectFieldDemo.jsx.html"
             },
             {
                 label: "Drop Down List",
@@ -419,13 +405,6 @@ module.exports = [
                 pathToDoc: "components/general/Spinner.jsx",
                 pathToSource: "components_general_Spinner.jsx.html",
                 pathToDemoSource: "demo_components_general_SpinnerDemo.jsx.html"
-            },
-            {
-                label: "BackgroundLoader",
-                demo: require("../components/general/BackgroundLoaderDemo.jsx"),
-                pathToDoc: "components/general/BackgroundLoader.jsx",
-                pathToSource: "components_general_BackgroundLoader.jsx.html",
-                pathToDemoSource: "demo_components_general_BackgroundLoaderDemo.jsx.html"
             },
             {
                 label: "SelectText",

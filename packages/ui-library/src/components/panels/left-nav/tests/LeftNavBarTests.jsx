@@ -10,6 +10,7 @@ describe("LeftNavBar", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         ReduxTestUtils = require("../../../../util/ReduxTestUtils"),
         TestUtils = require("../../../../testutil/TestUtils"),
+        Utils = require("../../../../util/Utils"),
         LeftNavBar = require("../LeftNavBar.jsx"),
         _ = require("underscore");
 
@@ -46,53 +47,6 @@ describe("LeftNavBar", function () {
 
         ReactTestUtils.Simulate.click(itemLabel);
         expect(component.props.onItemValueChange).lastCalledWith("item-1", "section-1");
-    });
-
-    it("clicks trigger correct callback and onItemClick warning", function () {
-        console.warn = jest.genMockFunction();
-
-        var opts = _.defaults(opts || {}, {
-            onItemClick: jest.genMockFunction(),
-            onSectionValueChange: jest.genMockFunction(),
-            tree: navData
-        });
-        var wrapper = ReactTestUtils.renderIntoDocument(<ReduxTestUtils.Wrapper type={LeftNavBar} opts={opts} />);
-
-        var component = wrapper.refs.target;
-        var sectionLabel = TestUtils.findRenderedDOMNodeWithDataId(component, "section-1-label");
-        var itemLabel = TestUtils.findRenderedDOMNodeWithDataId(component, "item-1-label");
-
-        ReactTestUtils.Simulate.click(sectionLabel);
-        expect(component.props.onSectionValueChange).lastCalledWith("section-1");
-
-        ReactTestUtils.Simulate.click(itemLabel);
-        expect(component.props.onItemClick).lastCalledWith("item-1", "section-1");
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use onItemValueChange instead of onItemClick. Support for onItemClick " +
-            "will be removed in next version");
-    });
-
-    it("clicks trigger correct callback and onSectionClick warning", function () {
-        console.warn = jest.genMockFunction();
-        var opts = _.defaults(opts || {}, {
-            onItemValueChange: jest.genMockFunction(),
-            onSectionClick: jest.genMockFunction(),
-            tree: navData
-        });
-        var wrapper = ReactTestUtils.renderIntoDocument(<ReduxTestUtils.Wrapper type={LeftNavBar} opts={opts} />);
-
-        var component = wrapper.refs.target;
-        var sectionLabel = TestUtils.findRenderedDOMNodeWithDataId(component, "section-1-label");
-        var itemLabel = TestUtils.findRenderedDOMNodeWithDataId(component, "item-1-label");
-
-        ReactTestUtils.Simulate.click(sectionLabel);
-        expect(component.props.onSectionClick).lastCalledWith("section-1");
-
-        ReactTestUtils.Simulate.click(itemLabel);
-        expect(component.props.onItemValueChange).lastCalledWith("item-1", "section-1");
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use onSectionValueChange instead of onSectionClick. Support for onSectionClick " +
-            "will be removed in next version");
     });
 
     it("renders the tree structure", function () {
@@ -338,18 +292,20 @@ describe("LeftNavBar", function () {
         expect(component.props.onItemValueChange).lastCalledWith(menuItemData[1].id, id);
     });
 
-    //TODO: remove when deprecated props no longer supported
-    it("does not log warning for id, onChange or isRequired when in production", function () {
-        //Mock process.env.NODE_ENV
-        process.env.NODE_ENV = "production";
+    it("throws error when deprecated prop 'onItemClick' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("onItemClick", "onItemValueChange"));
 
-        console.warn = jest.genMockFunction();
-        getWrappedComponent({
-            onItemClick: jest.genMockFunction(),
-            onSectionClick: jest.genMockFunction()
-        });
-
-        expect(console.warn).not.toBeCalled();
-        delete process.env.NODE_ENV;
+        expect(function () {
+            getWrappedComponent({ onItemClick: jest.genMockFunction() });
+        }).toThrow(expectedError);
     });
+
+    it("throws error when deprecated prop 'onSectionClick' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("onSectionClick", "onSectionValueChange"));
+
+        expect(function () {
+            getWrappedComponent({ onSectionClick: jest.genMockFunction() });
+        }).toThrow(expectedError);
+    });
+
 });

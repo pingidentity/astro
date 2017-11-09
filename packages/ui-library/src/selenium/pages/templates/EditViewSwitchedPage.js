@@ -28,7 +28,7 @@ var EditViewSwitchedDemoPage = Object.create(HomePage, {
             this.click("//label[@data-id='Miscellaneous']");
         }
     },
-    
+
     /**
      * @desc this function is to get First Name
      */
@@ -139,9 +139,10 @@ var EditViewSwitchedDemoPage = Object.create(HomePage, {
      * @param {string} valueOption - the address to set
      */
     selectAddressLocation: {
-        value: function (valueOption) {
-            this.waitForExist("//select[@data-id='addressType-select']");
-            this.setDropDownValue("//select[@data-id='addressType-select']", valueOption);
+        value: function (valueOption) { //eslint-disable-line no-unused-vars
+            this.waitForExist("//label[@data-id='addressType']");
+            this.click("//label[@data-id='addressType']");
+            this.click("//label[@data-id='addressType']//li//div[contains(string(), valueOption)]");
         }
     },
 
@@ -150,9 +151,10 @@ var EditViewSwitchedDemoPage = Object.create(HomePage, {
      * @param {string} valueOption - the address to set
      */
     selectAlternateAddressLocation: {
-        value: function (valueOption) {
-            this.waitForExist("//select[@data-id='alternateAddressType-select']");
-            this.setDropDownValue("//select[@data-id='alternateAddressType-select']", valueOption);
+        value: function (valueOption) { //eslint-disable-line no-unused-vars
+            this.waitForExist("//label[@data-id='alternateAddressType']");
+            this.click("//label[@data-id='alternateAddressType']");
+            this.click("//label[@data-id='alternateAddressType']//li//div[contains(string(), valueOption)]");
         }
     },
 

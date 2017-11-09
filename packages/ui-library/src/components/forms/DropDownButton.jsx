@@ -25,22 +25,16 @@ var React = require("react"),
  *
  * @param {string} [data-id="drop-down-button"]
  *     To define the base "data-id" value for top-level HTML container.
- * @param {string} [id]
- *     DEPRECATED. Use "data-id" instead. To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
  * @param {boolean} [stateless]
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally.
- * @param {boolean} [controlled=false]
- *     DEPRECATED. Use "stateless" instead.
  *
  * @param {object} options
  *     An object where the keys are the item IDs, and the values are the corresponding labels.
  * @param {DropDownButton~onValueChange} [onValueChange]
  *     Callback to be triggered when the selection changed.
- * @param {DropDownButton~onSelect} [onSelect]
- *     DEPRECATED. Use "onValueChange" instead.
  * @param {DropDownButton~onToggle} [onToggle]
  *     Callback to be triggered when open/closed state changed. Used only when stateless=true.
  * @param {boolean} [open=false]
@@ -78,11 +72,9 @@ class Stateless extends React.Component {
 
     static propTypes = {
         "data-id": PropTypes.string,
-        id: PropTypes.string,
         className: PropTypes.string,
         options: PropTypes.object.isRequired,
         onValueChange: PropTypes.func,
-        onSelect: PropTypes.func,
         onToggle: PropTypes.func.isRequired,
         open: PropTypes.bool.isRequired,
         label: PropTypes.string.isRequired,
@@ -118,8 +110,7 @@ class Stateless extends React.Component {
      * @ignore
      */
     _onValueChanged = (value) => {
-        // onSelect first, for onValueChange has a default
-        (this.props.onSelect || this.props.onValueChange)(value);
+        this.props.onValueChange(value);
     };
 
     _handleGlobalClick = (e) => {
@@ -139,12 +130,23 @@ class Stateless extends React.Component {
     };
 
     componentWillMount() {
+        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
+        /* istanbul ignore if  */
         if (!Utils.isProduction()) {
+            /* istanbul ignore if  */
             if (this.props.id) {
-                console.warn(Utils.deprecateMessage("id", "data-id"));
+                /* istanbul ignore next  */
+                throw(Utils.deprecatePropError("id", "data-id"));
             }
+            /* istanbul ignore if  */
+            if (this.props.controlled) {
+                /* istanbul ignore next  */
+                throw(Utils.deprecatePropError("controlled", "stateless"));
+            }
+            /* istanbul ignore if  */
             if (this.props.onSelect) {
-                console.warn(Utils.deprecateMessage("onSelect", "onValueChange"));
+                /* istanbul ignore next  */
+                throw(Utils.deprecatePropError("onSelect", "onValueChange"));
             }
         }
     }
@@ -166,8 +168,7 @@ class Stateless extends React.Component {
                 "input-menu-button",
                 this.props.className
             ),
-            content = null,
-            dataId = this.props.id || this.props["data-id"];
+            content = null;
 
         if (this.props.open) {
 
@@ -197,7 +198,7 @@ class Stateless extends React.Component {
         }
 
         return (
-            <div className={styles} data-id={dataId}>
+            <div className={styles} data-id={this.props["data-id"]}>
                 <a data-id="action" className="add button inline" onClick={this._toggle}>
                     {this.props.label}
                 </a>
@@ -228,8 +229,7 @@ class Stateful extends React.Component {
         this.setState({
             open: false
         }, function () {
-            // onSelect first, for onValueChange has a default
-            (this.props.onSelect || this.props.onValueChange)(value);
+            this.props.onValueChange(value);
         });
     };
 
@@ -248,13 +248,10 @@ module.exports = class extends React.Component {
 
     static propTypes = {
         "data-id": PropTypes.string,
-        id: PropTypes.string,
         className: PropTypes.string,
-        controlled: PropTypes.bool, //TODO: remove in new version
         stateless: PropTypes.bool,
         options: PropTypes.object,
         onValueChange: PropTypes.func,
-        onSelect: PropTypes.func,
         onToggle: PropTypes.func,
         open: PropTypes.bool,
         label: PropTypes.string,
@@ -263,20 +260,12 @@ module.exports = class extends React.Component {
 
     static defaultProps = {
         "data-id": "drop-down-button",
-        controlled: false, //TODO: change to stateless in new version
+        stateless: false,
         open: false
     };
 
-    componentWillMount() {
-        if (!Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("controlled", "stateless"));
-        }
-    }
-
     render() {
-        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
-
-        return stateless
+        return this.props.stateless
             ? <Stateless {..._.defaults({ ref: "Stateless" }, this.props)} />
             : <Stateful {..._.defaults({ ref: "Stateful" }, this.props)} />;
     }

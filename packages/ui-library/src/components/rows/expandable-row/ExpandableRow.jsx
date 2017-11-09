@@ -88,13 +88,9 @@ var ConfirmDeletePositions = {
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally.
  *     The "onToggle" callback will still be executed in case the owner is interested.
- * @param {boolean} [controlled=false]
- *     DEPRECATED. Use "stateless" instead.
  *
  * @param {boolean} [expanded=false]
  *     Whether the row is expanded or collapsed.
- * @param {boolean} [defaultToExpanded=false]
- *     DEPRECATED. Use "expanded" instead.
  * @param {ExpandableRow~onToggle} [onToggle]
  *     Callback to be triggered when the expand/collapse button is clicked.
  *
@@ -201,24 +197,26 @@ class ExpandableRow extends React.Component {
     static displayName = "ExpandableRow";
 
     static propTypes = {
-        controlled: PropTypes.bool, //TODO: remove in new version
         stateless: PropTypes.bool
     };
 
     static defaultProps = {
-        controlled: false //TODO: change to stateless prop in new version
+        stateless: false
     };
 
     componentWillMount() {
         if (!Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+            if (this.props.controlled) {
+                throw(Utils.deprecatePropError("controlled", "stateless"));
+            }
+            if (this.props.defaultToExpanded) {
+                throw(Utils.deprecatePropError("defaultToExpanded", "expanded"));
+            }
         }
     }
 
     render() {
-        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
-
-        return stateless
+        return this.props.stateless
             ? React.createElement(StatelessExpandableRow, //eslint-disable-line no-use-before-define
                 _.defaults({ ref: "StatelessExpandableRow" }, this.props), this.props.children)
             : React.createElement(StatefulExpandableRow, //eslint-disable-line no-use-before-define
@@ -230,19 +228,16 @@ class StatefulExpandableRow extends React.Component {
     static displayName = "StatefulExpandableRow";
 
     static propTypes = {
-        defaultToExpanded: PropTypes.bool,
         showDeleteConfirm: PropTypes.bool
     };
 
     static defaultProps = {
-        defaultToExpanded: false,
         showDeleteConfirm: false,
         expanded: false
     };
 
     state = {
-        //TODO: remove defaultToExpanded when v1 no longer supported
-        expanded: this.props.defaultToExpanded || this.props.expanded,
+        expanded: this.props.expanded,
         showDeleteConfirm: this.props.showDeleteConfirm
     };
 
@@ -356,12 +351,6 @@ class StatelessExpandableRow extends React.Component {
         onDeleteConfirmClick: _.noop,
         waiting: false,
     };
-
-    componentWillMount() {
-        if (this.props.defaultToExpanded && !Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("defaultToExpanded", "expanded"));
-        }
-    }
 
     /**
      * Propagate expanded/collapse toggle event to owner.

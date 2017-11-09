@@ -8,6 +8,7 @@ describe("RockerButton", function () {
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
+        Utils = require("../../../util/Utils.js"),
         RockerButton = require("../RockerButton.jsx"),
         _ = require("underscore");
 
@@ -15,7 +16,6 @@ describe("RockerButton", function () {
 
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
-            onChange: jest.genMockFunction(),
             onValueChange: jest.genMockFunction(),
             stateless: true,
             labels: labelsArray,
@@ -24,17 +24,6 @@ describe("RockerButton", function () {
 
         return ReactTestUtils.renderIntoDocument(<RockerButton {...opts} />);
     }
-
-    it("stateless: will render component with id", function () {
-        var component = getComponent({
-            id: "myRockerButton",
-            "data-id": null
-        });
-
-        var rocker = TestUtils.findRenderedDOMNodeWithDataId(component, "myRockerButton");
-
-        expect(rocker).toBeDefined();
-    });
 
     it("stateless: will render component with data-id", function () {
         var component = getComponent({
@@ -54,39 +43,15 @@ describe("RockerButton", function () {
         expect(rocker).toBeDefined();
     });
 
-    it("stateless: will trigger onChange callback when selection changes", function () {
+    it("stateful: onValueChange callback is not called when selection does not change", function () {
         var callback = jest.genMockFunction();
         var component = ReactTestUtils.renderIntoDocument(
-            <RockerButton stateless={true} labels={labelsArray} onChange={callback} />);
-
-        var labels = TestUtils.scryRenderedDOMNodesWithTag(component, "label");
-        var testIndex = 2;
-
-        ReactTestUtils.Simulate.click(labels[testIndex], {});
-        expect(component.props.onChange).toBeCalledWith(labelsArray[testIndex], testIndex);
-    });
-
-    it("stateful: will trigger onChange callback when selection changes", function () {
-        var callback = jest.genMockFunction();
-        var component = ReactTestUtils.renderIntoDocument(
-            <RockerButton stateless={false} labels={labelsArray} onChange={callback} />
-        );
-        var labels = TestUtils.scryRenderedDOMNodesWithTag(component, "label");
-        var testIndex = 2;
-
-        ReactTestUtils.Simulate.click(labels[testIndex], {});
-        expect(component.props.onChange).toBeCalledWith(labelsArray[testIndex], testIndex);
-    });
-
-    it("stateful: onChange callback is not called when selection does not change", function () {
-        var callback = jest.genMockFunction();
-        var component = ReactTestUtils.renderIntoDocument(
-            <RockerButton stateless={false} selectedIndex={0} labels={labelsArray} onChange={callback} />
+            <RockerButton stateless={false} selectedIndex={0} labels={labelsArray} onValueChange={callback} />
         );
         var labels = TestUtils.scryRenderedDOMNodesWithTag(component, "label");
 
         ReactTestUtils.Simulate.click(labels[0], {});
-        expect(component.props.onChange).not.toBeCalled();
+        expect(component.props.onValueChange).not.toBeCalled();
     });
 
     it("stateless: will trigger onValueChange callback when selection changes", function () {
@@ -192,52 +157,34 @@ describe("RockerButton", function () {
         var callback = jest.genMockFunction();
 
         ReactTestUtils.renderIntoDocument(
-            <RockerButton labels={["Profile", "Groups", "Services", "Users", "Security"]} onChange={callback} />
+            <RockerButton labels={["Profile", "Groups", "Services", "Users", "Security"]} onValueChange={callback} />
         );
 
         expect(console.warn).toBeCalledWith("RockerButton expecting two to four labels, but was given ", 5);
     });
 
-    it("does not log warning for id or onChange when in production", function () {
-        //Mock process.env.NODE_ENV
-        process.env.NODE_ENV = "production";
+    it("throws error when deprecated prop 'id' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
 
-        console.warn = jest.genMockFunction();
-        var callback = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <RockerButton id="test"
-                labels={["Profile", "Groups", "Services", "Users", "Security"]} onChange={callback} />
-        );
-
-        expect(console.warn).not.toBeCalled();
-        delete process.env.NODE_ENV;
+        expect(function () {
+            getComponent({ id: "foo" });
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when controlled no longer supported
-    it("produces stateful/stateless components correctly given controlled prop", function () {
-        var component = ReactTestUtils.renderIntoDocument(<RockerButton controlled={false} labels={["1", "2"]} />);
-        var stateful = component.refs.RockerButtonStateful;
-        var stateless = component.refs.RockerButtonStateless;
+    it("throws error when deprecated prop 'controlled' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
 
-        expect(stateful).toBeTruthy();
-        expect(stateless).toBeFalsy();
-
-        component = ReactTestUtils.renderIntoDocument(<RockerButton controlled={true} labels={["1", "2"]} />);
-        stateful = component.refs.RockerButtonStateful;
-        stateless = component.refs.RockerButtonStateless;
-
-        expect(stateless).toBeTruthy();
-        expect(stateful).toBeFalsy();
+        expect(function () {
+            getComponent({ controlled: true });
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when controlled no longer supported
-    it("logs warning for deprecated controlled prop", function () {
-        console.warn = jest.genMockFunction();
+    it("throws error when deprecated prop 'onChange' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("onChange", "onValueChange"));
 
-        ReactTestUtils.renderIntoDocument(<RockerButton labels={["1", "2"]} />);
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use stateless instead of controlled. " +
-            "Support for controlled will be removed in next version");
+        expect(function () {
+            getComponent({ onChange: jest.genMockFunction() });
+        }).toThrow(expectedError);
     });
+
 });

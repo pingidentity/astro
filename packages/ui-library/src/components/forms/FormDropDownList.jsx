@@ -105,7 +105,7 @@ var SearchTypes = {
 *    To define the base "data-id" value for the top-level HTML container.
 * @param {string} [className]
 *    CSS classes to set on the top-level HTML container.
-* @param {boolean} [controlled=false]
+* @param {boolean} [stateless=false]
 *     To enable the component to be externally managed. True will relinquish control to the component's owner.
 *     False or not specified will cause the component to manage state internally.
 *
@@ -836,16 +836,25 @@ class FormDropDownList extends React.Component {
     static displayName = "FormDropDownList";
 
     static propTypes = {
-        controlled: PropTypes.bool
+        stateless: PropTypes.bool
     };
 
     static defaultProps = {
-        controlled: false
+        stateless: false
     };
+
+    componentWillMount() {
+        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
+        /* istanbul ignore if  */
+        if (!Utils.isProduction() && this.props.controlled) {
+            /* istanbul ignore next  */
+            throw(Utils.deprecatePropError("controlled", "stateless"));
+        }
+    }
 
     render() {
         return (
-            this.props.controlled
+            this.props.stateless
                 ? React.createElement(FormDropDownListStateless,
                     _.defaults({ ref: "FormDropDownListStateless" }, this.props))
                 : React.createElement(FormDropDownListStateful,

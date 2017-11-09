@@ -8,6 +8,7 @@ describe("MultiDrag", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
+        Utils = require("../../../../util/Utils"),
         ReduxTestUtils = require("../../../../util/ReduxTestUtils"),
         MultiDrag = require("../MultiDrag.jsx"),
         _ = require("underscore"),
@@ -48,7 +49,7 @@ describe("MultiDrag", function () {
     beforeEach(function () {
         thisComponent = null;
     });
-    
+
     function getDesc (fromC, fromI, toC, toI) {
         return {
             from: { column: fromC, index: fromI },
@@ -212,18 +213,6 @@ describe("MultiDrag", function () {
         expect(componentRef.state.placeholder).toBe(desc.to);
     });
 
-
-    //TODO: remove when controlled no longer supported
-    it("logs warning for deprecated controlled prop", function () {
-        console.warn = jest.genMockFunction();
-
-        getWrappedComponent();
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use stateless instead of controlled. " +
-            "Support for controlled will be removed in next version");
-    });
-
     describe("convertFilteredIndexes", function () {
         var rows1 = [{ id: 1, n: 1 }, { id: 2, n: 2 }];
         var rows2 = [{ id: 3, n: 3 }, { id: 4, n: 4 }];
@@ -284,5 +273,13 @@ describe("MultiDrag", function () {
             });
             expect(convertedIndexes).toEqual({ from: 1, to: 2 });
         });
+    });
+
+    it("throws error when deprecated prop 'controlled' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
+
+        expect(function () {
+            getWrappedComponent({ controlled: true });
+        }).toThrow(expectedError);
     });
 });

@@ -71,7 +71,7 @@ describe("BackgroundLoader", function () {
     });
 
     xit("logs deprecated component warning message", function () {
-        console.warn = jest.genMockFunction();
+        console.error = jest.genMockFunction();
 
         ReactTestUtils.renderIntoDocument(
             <BackgroundLoader interval={2000} load={loadContentFunc} loaded={loaded} loading={loadingContentFunc}>
@@ -79,7 +79,7 @@ describe("BackgroundLoader", function () {
             </BackgroundLoader>
         );
 
-        expect(console.warn).toBeCalledWith(
+        expect(console.error).toBeCalledWith(
             "** This component is deprecated and will be removed in the next release. " +
             "There is no direct replacement. Timer based polling or other timer related activities is better to be " +
             "implemented on middleware/actions/reducers layer.");
@@ -89,14 +89,14 @@ describe("BackgroundLoader", function () {
         //Mock process.env.NODE_ENV
         process.env.NODE_ENV = "production";
 
-        console.warn = jest.genMockFunction();
+        console.error = jest.genMockFunction();
         ReactTestUtils.renderIntoDocument(
             <BackgroundLoader interval={2000} load={loadContentFunc} loaded={loaded} loading={loadingContentFunc}>
                 <div data-id="loaded-content">content loaded</div>
             </BackgroundLoader>
         );
 
-        expect(console.warn).not.toBeCalled();
+        expect(console.error).not.toBeCalled();
         delete process.env.NODE_ENV;
     });
 });

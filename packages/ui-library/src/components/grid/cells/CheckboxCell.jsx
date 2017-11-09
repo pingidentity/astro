@@ -20,9 +20,6 @@ var React = require("react"),
  * @param {Grid~onGridCellAction} [onGridCellAction]
  *     Callback to be triggered when checkbox is checked or unchecked. This is a mandatory callback to be
  *     rendered as a Grid cell. If this callback is omitted, this component won't be rendered as a Grid cell.
- *     Current version also supports using the deprecated onCallBack.
- * @param {Grid~onGridCellAction} [onCallBack]
- *     DEPRECATED. Use onGridCellAction instead.
  *
  * @example
  *     <CheckboxCell onGridCellAction={this._handleLaptopChecked} className="stacked" />
@@ -34,8 +31,7 @@ class CheckboxCell extends React.Component {
         "data-id": PropTypes.string,
         className: PropTypes.string,
         value: PropTypes.bool,
-        onGridCellAction: PropTypes.func,
-        onCallBack: PropTypes.func
+        onGridCellAction: PropTypes.func
     };
 
     static defaultProps = {
@@ -44,13 +40,15 @@ class CheckboxCell extends React.Component {
     };
 
     componentWillMount() {
-        if (this.props.onCallBack && !Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("onCallBack", "onGridCellAction"));
+        // TODO: figure out how to test separage throws in Jest and implement
+        /* istanbul ignore if  */
+        if (!Utils.isProduction() && this.props.onCallBack) {
+            /* istanbul ignore next  */
+            throw(Utils.deprecatePropError("onCallBack", "onGridCellAction"));
         }
     }
 
     render() {
-        // Grid Row component will rebind onCallBack and set it to onGridCellAction
         return (
             <FormCheckbox data-id={this.props["data-id"]}
                     className={this.props.className}

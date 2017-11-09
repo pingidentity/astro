@@ -119,7 +119,7 @@ module.exports = class extends React.Component {
 
                 </div>
                 {this.props.rows.filtered.length && (
-                    <Pagination controlled={true}
+                    <Pagination stateless={true}
                         className = "result-set"
                         perPage = {this.props.perPage}
                         page = {this.props.page}

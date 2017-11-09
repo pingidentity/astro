@@ -96,16 +96,12 @@ var _includesIgnoreCase = function (propName, substr) {
  *
  * @param {string} [data-id="form-checkbox-list"]
  *    To define the base "data-id" value for the top-level HTML container.
- * @param {string} [id]
- *    DEPRECATED. Use "data-id" instead.
  * @param {string} [className]
  *    CSS classes to set on the top-level HTML container.
  * @param {boolean} [stateless]
  *     WARNING. Default value for "stateless" will be set to true from next version.
  *    To enable the component to be externally managed. True will relinquish control to the component's owner.
  *    False or not specified will cause the component to manage state internally.
- * @param {boolean} [controlled=false]
- *     DEPRECATED. Use "stateless" instead.
  *
  * @param {array<FormCheckboxList~CheckboxItem>} items
  *    An array of the actual data to show.
@@ -113,8 +109,6 @@ var _includesIgnoreCase = function (propName, substr) {
  *    An array of IDs (from items) that are currently selected.
  * @param {FormCheckboxList~onValueChange} [onValueChange]
  *    Callback to be triggered when items are selected/deselected.
- * @param {FormCheckboxList~onValueChange} [onSelectionChange]
- *    DEPRECATED. Use "onValueChange" instead.
  *
  * @param {string} labelSearchPlaceholder
  *    The query text field placeholder.
@@ -132,13 +126,9 @@ var _includesIgnoreCase = function (propName, substr) {
  *
  * @param {FormCheckboxList~onGetLabelWithCount} [onGetSelectAllLabel]
  *    Callback to be triggered to get the text message for the 'select all' label.
- * @param {FormCheckboxList~onGetLabelWithCount} [labelSelectAll]
- *    DEPRECATED. Use "onGetSelectAllLabel" instead.
  *
  * @param {FormCheckboxList~onGetLabelWithCount} [onGetDeselectAllLabel]
  *    Callback to be triggered to get the text message for the 'unselect all' label.
- * @param {FormCheckboxList~onGetLabelWithCount} [labelDeselectAll]
- *    DEPRECATED. Use "onGetSelectAllLabel" instead.
  *
  * @example
  *
@@ -194,22 +184,18 @@ class Stateless extends React.Component {
 
     static propTypes = {
         "data-id": PropTypes.string,
-        id: PropTypes.string, //TODO: remove when v1 no longer supported
         className: PropTypes.string,
         items: PropTypes.array.isRequired,
         selected: PropTypes.array,
-        onValueChange: PropTypes.func, //TODO: set to required when onSelectionChange removed with v1
-        onSelectionChange: PropTypes.func, //TODO: remove when v1 no longer supported
+        onValueChange: PropTypes.func.isRequired,
         labelSearchPlaceholder: PropTypes.string.isRequired,
         queryString: PropTypes.string,
         onQueryChange: PropTypes.func.isRequired,
         labelHideUnselected: PropTypes.string.isRequired,
         hideUnchecked: PropTypes.bool,
         onVisibilityChange: PropTypes.func.isRequired,
-        onGetSelectAllLabel: PropTypes.func, //TODO: set to required when labelSelectAll removed with v1
-        labelSelectAll: PropTypes.func, //TODO: remove when v1 no longer supported
-        onGetDeselectAllLabel: PropTypes.func, //TODO: set to required when labelDeselectAll removed with v1
-        labelDeselectAll: PropTypes.func//TODO: remove when v1 no longer supported
+        onGetSelectAllLabel: PropTypes.func.isRequired,
+        onGetDeselectAllLabel: PropTypes.func.isRequired,
     };
 
     static defaultProps = {
@@ -221,17 +207,20 @@ class Stateless extends React.Component {
 
     componentWillMount() {
         if (!Utils.isProduction()) {
+            if (this.props.controlled) {
+                throw(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
+            }
             if (this.props.id) {
-                console.warn(Utils.deprecateMessage("id", "data-id"));
+                throw(Utils.deprecatePropError("id", "data-id"));
             }
             if (this.props.onSelectionChange) {
-                console.warn(Utils.deprecateMessage("onSelectionChange", "onValueChange"));
+                throw(Utils.deprecatePropError("onSelectionChange", "onValueChange"));
             }
             if (this.props.labelSelectAll) {
-                console.warn(Utils.deprecateMessage("labelSelectAll", "onGetSelectAllLabel"));
+                throw(Utils.deprecatePropError("labelSelectAll", "onGetSelectAllLabel"));
             }
             if (this.props.labelDeselectAll) {
-                console.warn(Utils.deprecateMessage("labelDeselectAll", "onGetDeselectAllLabel"));
+                throw(Utils.deprecatePropError("labelDeselectAll", "onGetDeselectAllLabel"));
             }
         }
     }
@@ -265,10 +254,7 @@ class Stateless extends React.Component {
             newSelection = _.difference(this.props.selected, newIds);
         }
 
-        //TODO: remove onSelectionChange logic when v1 removed
-        var onValueChange = this.props.onValueChange || this.props.onSelectionChange;
-
-        onValueChange(newSelection);
+        this.props.onValueChange(newSelection);
     };
 
     /**
@@ -288,10 +274,7 @@ class Stateless extends React.Component {
             updatedSelection = this.props.selected.concat([value.id]);
         }
 
-        //TODO: remove onSelectionChange logic when v1 removed
-        var onValueChange = this.props.onValueChange || this.props.onSelectionChange;
-
-        onValueChange(updatedSelection);
+        this.props.onValueChange(updatedSelection);
     };
 
     _onHideUncheckedToggle = () => {
@@ -401,19 +384,14 @@ class Stateless extends React.Component {
 
         var itemNodes = this._getCheckboxNodes(toDisplay, selector, useGrouping);
 
-        //TODO: remove labelSelectAll and labelDeselectAll logic when v1 removed
-        var onGetSelectAllLabel = this.props.labelSelectAll || this.props.onGetSelectAllLabel,
-            onGetDeselectAllLabel = this.props.labelDeselectAll || this.props.onGetDeselectAllLabel;
-
         var selectAllLabel = this._isAllSelected(visibleItems, selector)
-            ? onGetDeselectAllLabel(visibleItems.length)
-            : onGetSelectAllLabel(visibleItems.length);
+            ? this.props.onGetDeselectAllLabel(visibleItems.length)
+            : this.props.onGetSelectAllLabel(visibleItems.length);
 
-        var id = this.props.id || this.props["data-id"],
-            className = classnames("checkbox-list", this.props.className);
+        var className = classnames("checkbox-list", this.props.className);
 
         return (
-            <div className={className} data-id={id}>
+            <div className={className} data-id={this.props["data-id"]}>
                 <div className="filters">
                     <FormSearchBox data-id="dataobject-search"
                             onClear={this._handleSearchUndo}
@@ -462,10 +440,7 @@ class Stateful extends React.Component {
         this.setState({
             selected: selectedIds
         }, function () {
-            //TODO: remove onSelectionChange logic when v1 removed
-            var onValueChange = self.props.onValueChange || self.props.onSelectionChange;
-
-            onValueChange(selectedIds);
+            self.props.onValueChange(selectedIds);
         });
     };
 
@@ -506,24 +481,15 @@ module.exports = class extends React.Component {
     static displayName = "FormCheckboxList";
 
     static propTypes = {
-        controlled: PropTypes.bool, //TODO: remove in new version
         stateless: PropTypes.bool
     };
 
     static defaultProps = {
-        controlled: false //TODO: change to stateless with true default in new version
+        stateless: true
     };
 
-    componentWillMount() {
-        if (!Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("controlled", "stateless", "false", "true"));
-        }
-    }
-
     render() {
-        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
-
-        return stateless
+        return this.props.stateless
             ? <Stateless {..._.defaults({ ref: "FormCheckboxListStateless" }, this.props)} />
             : <Stateful {..._.defaults({ ref: "FormCheckboxListStateful" }, this.props)} />;
     }

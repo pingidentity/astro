@@ -6,6 +6,7 @@ describe("If component", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-dom/test-utils"),
+        Utils = require("../../../util/Utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         Wrapper = TestUtils.UpdatePropsWrapper,
         TabbedSections = require("../TabbedSections.jsx"),
@@ -89,48 +90,20 @@ describe("If component", function () {
         expect(onValueChange).toBeCalled();
     });
 
-    it("Verify onSectionChange warning called", function () {
-        var onValueChange = jest.genMockFunction();
-        console.warn = jest.genMockFunction();
+    it("throws error when deprecated prop 'id' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
 
-        var component = ReactTestUtils.renderIntoDocument(
-            <TabbedSections selectedIndex={-1} onSectionChange={onValueChange}>
-                <div data-id="section1" title="section 1">section 1</div>
-                <div data-id="section2" title="section 2">section 2</div>
-            </TabbedSections>);
-        var tabs = ReactDOM.findDOMNode(component.refs.tabs);
-        ReactTestUtils.Simulate.click(tabs.childNodes[1]);
-
-        expect(onValueChange).toBeCalled();
-        expect(console.warn).toBeCalledWith("Deprecated: use onValueChange instead of onSectionChange. " +
-            "Support for onSectionChange will be removed in next version");
+        expect(function () {
+            getComponent({ id: "foo" });
+        }).toThrow(expectedError);
     });
 
-    it("Verify id warning called", function () {
-        var onValueChange = jest.genMockFunction();
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <TabbedSections id="myId" selectedIndex={-1} onValueChange={onValueChange}>
-                <div data-id="section1" title="section 1">section 1</div>
-                <div data-id="section2" title="section 2">section 2</div>
-            </TabbedSections>);
-        expect(console.warn).toBeCalledWith("Deprecated: use data-id instead of id. " +
-            "Support for id will be removed in next version");
+    it("throws error when deprecated prop 'onSectionChange' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("onSectionChange", "onValueChange"));
+
+        expect(function () {
+            getComponent({ onSectionChange: jest.genMockFunction() });
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when deprecated props no longer supported
-    it("does not log warning for deprecated props when in production", function () {
-        //Mock process.env.NODE_ENV
-        process.env.NODE_ENV = "production";
-
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <TabbedSections id="myId" selectedIndex={-1} onSectionChange={jest.genMockFunction()}>
-                <div data-id="section1" title="section 1">section 1</div>
-                <div data-id="section2" title="section 2">section 2</div>
-            </TabbedSections>);
-
-        expect(console.warn).not.toBeCalled();
-        delete process.env.NODE_ENV;
-    });
 });

@@ -18,13 +18,6 @@ var React = require("react"),
 *     Label and label index.
 */
 
-/**
-* @callback RockerButton~onChange
-* @deprecated Use onValueChange insted. Support for onChange will be removed in next version.
-* @param {string} label - selected label from labels array prop
-* @param {number} index - index of selected label from labels array prop
-*/
-
 
 /**
 * @class RockerButton
@@ -32,23 +25,17 @@ var React = require("react"),
 *
 * @param {string} [data-id="rocker-button"]
 *     To define the base "data-id" value for the top-level HTML container.
-* @param {string} [id="rocker-button"]
-*     DEPRECATED. Use "data-id" instead. To define the base "id" value for the top-level HTML container.
 * @param {string} [className]
 *     CSS classes to be set on the top-level HTML container.
 * @param {boolean} [stateless]
 *     To enable the component to be externally managed. True will relinquish control to the component's owner.
 *     False or not specified will cause the component to manage state internally.
-* @param {boolean} [controlled=false]
-*     DEPRECATED. Use "stateless" instead.
 * @param {boolean} [disabled=false]
 *     Indicates whether component is disabled.
 *
 * @param {array} labels
 *     Array of label strings to use as button titles.
 *
-* @param {RockerButton~onChange} [onChange]
-*     DEPRECATED. Use "onValueChange" instead. Callback to be triggered when selection changes.
 * @param {RockerButton~onValueChange} [onValueChange]
 *     Callback to be triggered when selection changes.
 *
@@ -59,7 +46,7 @@ var React = require("react"),
 *     The index of the selected label. Is mutually exclusive with "selected".
 *
 * @example
-*      <RockerButton onChange={this._changeSubview}
+*      <RockerButton onValueChange={this._changeSubview}
 *                    labels={["Profile", "Groups", "Services"]} />
 *
 *      , where this._changeSubview can be defined as:
@@ -71,25 +58,36 @@ var React = require("react"),
 
 module.exports = class extends React.Component {
     static propTypes = {
-        controlled: PropTypes.bool, //TODO: remove in new version
         stateless: PropTypes.bool
     };
 
     static defaultProps = {
-        controlled: false //TODO: change to stateless in new version
+        stateless: false
     };
 
     componentWillMount() {
         if (!Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+            if (this.props.controlled) {
+                throw(Utils.deprecatePropError("controlled", "stateless"));
+            }
+            if (this.props.id) {
+                throw(Utils.deprecatePropError("id", "data-id"));
+            }
+            if (this.props.onChange) {
+                throw(Utils.deprecatePropError("onChange", "onValueChange"));
+            }
+            if (this.props.labels && (this.props.labels.length < 2 || this.props.labels.length > 4)) {
+                console.warn("RockerButton expecting two to four labels, but was given ", this.props.labels.length);
+            }
+            if (this.props.stateless === false) {
+                console.warn("Deprecated: the stateful option for this component will be removed in next version");
+            }
         }
     }
 
     render() {
-        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
-
         return (
-            stateless
+            this.props.stateless
                 ? <RockerButtonStateless ref="RockerButtonStateless" {...this.props} />
                 : <RockerButtonStateful ref="RockerButtonStateful" {...this.props} />);
     }
@@ -97,11 +95,9 @@ module.exports = class extends React.Component {
 
 class RockerButtonStateless extends React.Component {
     static propTypes = {
-        id: PropTypes.string,
         "data-id": PropTypes.string,
         className: PropTypes.string,
         labels: PropTypes.array.isRequired,
-        onChange: PropTypes.func,
         onValueChange: PropTypes.func,
         selected: PropTypes.string,
         selectedIndex: PropTypes.number,
@@ -117,20 +113,6 @@ class RockerButtonStateless extends React.Component {
         disabled: false
     };
 
-    componentWillMount() {
-        if (!Utils.isProduction()) {
-            if (this.props.id) {
-                console.warn(Utils.deprecateMessage("id", "data-id"));
-            }
-            if (this.props.onChange) {
-                console.warn(Utils.deprecateMessage("onChange", "onValueChange"));
-            }
-            if (this.props.labels && (this.props.labels.length < 2 || this.props.labels.length > 4)) {
-                console.warn("RockerButton expecting two to four labels, but was given ", this.props.labels.length);
-            }
-        }
-    }
-
     _handleClick = (label, index) => {
         if (this.props.disabled) {
             return;
@@ -139,21 +121,15 @@ class RockerButtonStateless extends React.Component {
         if (this.props.onValueChange) {
             this.props.onValueChange({ label: label, index: index });
         }
-
-        // TODO: remove v1 support for onChange when switch to v2
-        if (this.props.onChange) {
-            this.props.onChange(label, index);
-        }
     };
 
     render() {
-        var id = this.props.id || this.props["data-id"],
-            className = classnames("rocker-button sel-" + this.props.selectedIndex, this.props.className, {
-                disabled: this.props.disabled
-            });
+        var className = classnames("rocker-button sel-" + this.props.selectedIndex, this.props.className, {
+            disabled: this.props.disabled
+        });
 
         return (
-            <div ref="container" data-id={id} className={className}>
+            <div ref="container" data-id={this.props["data-id"]} className={className}>
                 {
                     this.props.labels.map(function (text, index) {
                         return (
@@ -187,11 +163,6 @@ class RockerButtonStateful extends React.Component {
         selectedIndex: this.props.selectedIndex || Math.max(0, this.props.labels.indexOf(this.props.selected))
     };
 
-    //TODO: remove v1 support for onChange when switch to v2
-    _handleOnChange = (label, index) => {
-        this._handleOnValueChange({ label: label, index: index });
-    };
-
     _handleOnValueChange = (selectedButton) => {
         // Don't trigger callback if index is the same
         if (selectedButton.index === this.state.selectedIndex) {
@@ -201,26 +172,16 @@ class RockerButtonStateful extends React.Component {
         if (this.props.onValueChange) {
             this.props.onValueChange(selectedButton);
         }
-        if (this.props.onChange) {
-            this.props.onChange(selectedButton.label, selectedButton.index);
-        }
 
         this.setState({
             selectedIndex: selectedButton.index
         });
     };
 
-    componentWillMount() {
-        if (!Utils.isProduction()) {
-            console.warn("Deprecated: the stateful option for this component will be removed in next version");
-        }
-    }
-
     render() {
         var props = _.defaults({
             ref: "RockerButtonStateless",
             selectedIndex: this.state.selectedIndex,
-            onChange: this.props.onChange ? this._handleOnChange : null,
             onValueChange: this.props.onValueChange ? this._handleOnValueChange : null
         }, this.props);
 

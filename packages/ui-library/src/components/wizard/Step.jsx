@@ -32,8 +32,6 @@ var React = require("react"),
  *
  * @param {string} [data-id="step"]
  *     To define the base "data-id" value for the top-level HTML container.
- * @param {string} [id]
- *     Deprecated. Use data-id instead.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container
  *
@@ -49,12 +47,8 @@ var React = require("react"),
  *     String text for done button label
  * @param {string} [nextButtonClassName]
  *     CSS classes to set on the next button.
- * @param {string} [nextButtonStyle]
- *     DEPRECATED. Use nextButtonClassName.
  * @param {string} [doneButtonClassName]
  *     CSS classes to set on the done button.
- * @param {string} [doneButtonStyle]
- *     DEPRECATED. Use doneButtonClassName.
  *
  * @param {number} number
  *     The step number(used for progress <i>number</i> of <i>total</i>))
@@ -93,7 +87,6 @@ var React = require("react"),
 class Step extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
-        id: PropTypes.string,
         className: PropTypes.string,
         cancelTooltip: PropTypes.object,
         labelEdit: PropTypes.string,
@@ -112,8 +105,6 @@ class Step extends React.Component {
         when: PropTypes.bool,
         renderHidden: PropTypes.bool,
         hintText: PropTypes.string,
-        nextButtonStyle: PropTypes.string, // DEPRECATED. Remove when possible.
-        doneButtonStyle: PropTypes.string, // DEPRECATED. Remove when possible.
         nextButtonClassName: PropTypes.string,
         doneButtonClassName: PropTypes.string,
         showPulsing: PropTypes.bool,
@@ -166,13 +157,12 @@ class Step extends React.Component {
 
     _getCancelButton = () => {
         if (!this.props.hideCancel) {
-            var cancelButton,
-                dataId = this.props.id || this.props["data-id"];
+            var cancelButton;
 
             if (this.props.cancelTooltip) {
                 cancelButton = (
                     <CancelTooltip
-                        data-id={dataId}
+                        data-id={this.props["data-id"]}
                         confirmButtonText={this.props.cancelTooltip.confirmButtonText}
                         cancelButtonText={this.props.cancelTooltip.cancelButtonText}
                         label={this._getCancelButtonMarkup()}
@@ -203,7 +193,7 @@ class Step extends React.Component {
                 text={labelNext}
                 loading={this.props.showPulsing}
                 disabled={!this.props.canProceed || this.props.showPulsing}
-                className={this.props.nextButtonStyle || this.props.nextButtonClassName} />);
+                className={this.props.nextButtonClassName} />);
     };
 
     _getEditLink = () => {
@@ -248,20 +238,18 @@ class Step extends React.Component {
     componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
-                console.warn(Utils.deprecateMessage("id", "data-id"));
+                throw(Utils.deprecatePropError("id", "data-id"));
             }
             if (this.props.doneButtonStyle) {
-                console.warn(Utils.deprecateMessage("doneButtonStyle", "doneButtonClassName"));
+                throw(Utils.deprecatePropError("doneButtonStyle", "doneButtonClassName"));
             }
             if (this.props.nextButtonStyle) {
-                console.warn(Utils.deprecateMessage("nextButtonStyle", "nextButtonClassName"));
+                throw(Utils.deprecatePropError("nextButtonStyle", "nextButtonClassName"));
             }
         }
     }
 
     render() {
-        var dataId = this.props.id || this.props["data-id"];
-
         var inlineStyles;
         var className = classnames(this.props.className, {
             task: true,
@@ -276,7 +264,7 @@ class Step extends React.Component {
         }
 
         return (
-            <div className={className} data-id={dataId}>
+            <div className={className} data-id={this.props["data-id"]}>
                 <div className="task-title">
                     <Progress
                         ref="progress"

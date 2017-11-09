@@ -99,14 +99,14 @@ var EditViewCollapsibleDemoPage = Object.create(HomePage, {
     waitForAddressSectionToOpen: {
         value: function () {
             this.waitForExist(this.xpathAddressSectionOpen);
-            this.waitForExist("//select[@data-id='addressType-select']");
+            this.waitForExist("//label[@data-id='addressType']");
         }
     },
 
     waitForAddressSectionToClose: {
         value: function () {
             this.waitForExist(this.xpathAddressSectionClosed);
-            this.waitForExist("//select[@data-id='addressType-select']", false);
+            this.waitForExist("//label[@data-id='addressType']", false);
         }
     },
 
@@ -289,9 +289,10 @@ var EditViewCollapsibleDemoPage = Object.create(HomePage, {
      * @param {string} valueOption - the value to set to select
      */
     selectAddressLocation: {
-        value: function (valueOption) {
-            this.waitForExist("//select[@data-id='addressType-select']");
-            this.setDropDownValue("//select[@data-id='addressType-select']", valueOption);
+        value: function (valueOption) { //eslint-disable-line no-unused-vars
+            this.waitForExist("//label[@data-id='addressType']");
+            this.click("//label[@data-id='addressType']");
+            this.click("//label[@data-id='addressType']//li//div[contains(string(), valueOption)]");
         }
     },
 
@@ -300,9 +301,10 @@ var EditViewCollapsibleDemoPage = Object.create(HomePage, {
      * @param {string} valueOption - the value to set to select
      */
     selectAlternateAddressLocation: {
-        value: function (valueOption) {
-            this.waitForExist("//select[@data-id='alternateAddressType-select']");
-            this.setDropDownValue("//select[@data-id='alternateAddressType-select']", valueOption);
+        value: function (valueOption) { //eslint-disable-line no-unused-vars
+            this.waitForExist("//label[@data-id='alternateAddressType']");
+            this.click("//label[@data-id='alternateAddressType']");
+            this.click("//label[@data-id='alternateAddressType']//li//div[contains(string(), valueOption)]");
         }
     },
 

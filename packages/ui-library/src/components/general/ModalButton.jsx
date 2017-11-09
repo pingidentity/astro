@@ -24,17 +24,11 @@ var React = require("react"),
  * @param {string} [data-id="modal-button"]
  *     To define the base "data-id" value for top-level HTML container.
  *     Modal will have "{data-id}-modal" as data-id; the activation button will have "{data-id}-button".
- * @param {string} [id]
- *     DEPRECATED. Use "data-id" instead.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
- * @param {string} [containerStyle]
- *     DEPRECATED. Use className instead.
  * @param {boolean} [stateless]
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally.
- * @param {boolean} [controlled=false]
- *     DEPRECATED. Use "stateless" instead.
  *
  * @param {boolean} [initiallyExpanded=false]
  *     Initial modal expanded state. Used only when stateless=false.
@@ -63,8 +57,6 @@ var React = require("react"),
  *
  * @param {string} [activatorContainerClassName]
  *     When specified the button/link/etc will wrapped in div with this css class
- * @param {string} [activatorContainerStyle]
- *     DEPRECATED. Use activatorContainerClassName instead.
  *
  * @param {ModalButton~contentCallback | object} [activatorContent]
  *     Alternative content / ReactJS component (eg. button) to trigger the modal to render,
@@ -72,21 +64,13 @@ var React = require("react"),
  *     whose onClick event will trigger the modal.
  *     If this is a function, then the function will be called to render the content,
  *     otherwise the content is rendered as is.
- * @param {ModalButton~contentCallback | object} [linkContent]
- *     DEPRECATED. Use activatorContent instead.
  * @param {string} [activatorContentClassName]
  *     CSS classes to set on the containing span when rendering the alternative activator content.
- * @param {string} [linkStyle]
- *     DEPRECATED. Use activatorContentClassName instead.
  *
  * @param {string} [activatorButtonLabel]
  *     If provided, the modal activator will be rendered as a button with the given value as text.
- * @param {string} [value]
- *     DEPRECATED. Use activatorButtonLabel instead.
  * @param {string} [activatorButtonClassName]
  *     CSS classes to set on the activator button.
- * @param {string} [buttonStyle]
- *     DEPRECATED. Use activatorButtonClassName instead.
  *
  * @param {string} [modalClassName]
  *     CSS classes to set on the container of the modal element.
@@ -128,10 +112,8 @@ class ModalButtonStateless extends React.Component {
 
     static propTypes = {
         "data-id": PropTypes.string,
-        id: PropTypes.string,
 
         className: PropTypes.string,
-        containerStyle: PropTypes.string,
 
         expanded: PropTypes.bool,
 
@@ -144,17 +126,13 @@ class ModalButtonStateless extends React.Component {
         disabled: PropTypes.bool,
 
         activatorContainerClassName: PropTypes.string,
-        activatorContainerStyle: PropTypes.string,
 
         activatorContent: PropTypes.any,
-        linkContent: PropTypes.any,
         activatorContentClassName: PropTypes.string,
-        linkStyle: PropTypes.string,
 
         activatorButtonLabel: PropTypes.string,
         value: PropTypes.string,
         activatorButtonClassName: PropTypes.string,
-        buttonStyle: PropTypes.string,
 
         // Modal/ModalButton props (passed through to modal component)
         modalClassName: PropTypes.string,
@@ -185,41 +163,42 @@ class ModalButtonStateless extends React.Component {
 
     componentWillMount() {
         if (!Utils.isProduction()) {
+            if (this.props.controlled) {
+                throw(Utils.deprecatePropError("controlled", "stateless"));
+            }
             if (this.props.id) {
-                console.warn(Utils.deprecateMessage("id", "data-id"));
+                throw(Utils.deprecatePropError("id", "data-id"));
             }
             if (this.props.containerStyle) {
-                console.warn(Utils.deprecateMessage("containerStyle", "className"));
+                throw(Utils.deprecatePropError("containerStyle", "className"));
             }
             if (this.props.activatorContainerStyle) {
-                console.warn(Utils.deprecateMessage("activatorContainerStyle", "activatorContainerClassName"));
+                throw(Utils.deprecatePropError("activatorContainerStyle", "activatorContainerClassName"));
             }
             if (this.props.linkContent) {
-                console.warn(Utils.deprecateMessage("linkContent", "activatorContent"));
+                throw(Utils.deprecatePropError("linkContent", "activatorContent"));
             }
             if (this.props.linkStyle) {
-                console.warn(Utils.deprecateMessage("linkStyle", "activatorContentClassName"));
+                throw(Utils.deprecatePropError("linkStyle", "activatorContentClassName"));
             }
             if (this.props.value) {
-                console.warn(Utils.deprecateMessage("value", "activatorButtonLabel"));
+                throw(Utils.deprecatePropError("value", "activatorButtonLabel"));
             }
             if (this.props.buttonStyle) {
-                console.warn(Utils.deprecateMessage("buttonStyle", "activatorButtonClassName"));
+                throw(Utils.deprecatePropError("buttonStyle", "activatorButtonClassName"));
             }
         }
     }
 
     render() {
-        var id = this.props.id || this.props["data-id"];
-
         var activator = (
             <ModalActivator key="activator"
-                    data-id={id + "-button"}
-                    containerClassName={this.props.activatorContainerStyle || this.props.activatorContainerClassName}
-                    content={this.props.linkContent || this.props.activatorContent}
-                    contentClassName={this.props.linkStyle || this.props.activatorContentClassName}
-                    buttonLabel={this.props.value || this.props.activatorButtonLabel}
-                    buttonLabelClassName={this.props.buttonStyle || this.props.activatorButtonClassName}
+                    data-id={this.props["data-id"] + "-button"}
+                    containerClassName={this.props.activatorContainerClassName}
+                    content={this.props.activatorContent}
+                    contentClassName={this.props.activatorContentClassName}
+                    buttonLabel={this.props.activatorButtonLabel}
+                    buttonLabelClassName={this.props.activatorButtonClassName}
                     onOpen={this.props.onOpen}
                     disabled={this.props.disabled} />
         );
@@ -247,7 +226,7 @@ class ModalButtonStateless extends React.Component {
 
         var modal = (
             <Modal key="modal"
-                    data-id={id + "-modal"}
+                    data-id={this.props["data-id"] + "-modal"}
                     className={this.props.modalClassName}
                     expanded={this.props.expanded}
                     modalTitle={this.props.modalTitle}
@@ -264,8 +243,8 @@ class ModalButtonStateless extends React.Component {
             this.props.inline ? "span" : "div",
             {
                 ref: "container",
-                "data-id": id,
-                className: this.props.containerStyle || this.props.className
+                "data-id": this.props["data-id"],
+                className: this.props.className
             },
             [activator, modal]
         );
@@ -376,25 +355,16 @@ class ModalButton extends React.Component {
     static displayName = "ModalButton";
 
     static propTypes = {
-        controlled: PropTypes.bool, //TODO: remove in new version
         stateless: PropTypes.bool
     };
 
     static defaultProps = {
-        controlled: false //TODO: change to stateless in new version
+        stateless: false
     };
 
-    componentWillMount() {
-        if (!Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("controlled", "stateless"));
-        }
-    }
-
     render() {
-        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
-
         return (
-            stateless
+            this.props.stateless
                 ? React.createElement(
                     ModalButtonStateless,
                     _.defaults({ ref: "ModalButtonStateless" }, this.props)

@@ -53,14 +53,6 @@ class MultivaluesOption extends React.Component {
 }
 
 /**
- * @deprecated
- * @callback Multivalues~onChange
- *
- * @param {array<string>} newValues
- *     Array of strings, contains new list of entries.
- */
-
-/**
 * @callback Multivalues~onValueChange
 *
 * @param {arrray<string>} newValues
@@ -84,8 +76,6 @@ class MultivaluesOption extends React.Component {
  *
  * @param {string} [data-id="multivalues"]
  *     To define the base "data-id" value for the top-level HTML container.
- * @param {string} [id]
- *     DEPRECATED. Use "data-id" instead.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
  *
@@ -93,8 +83,6 @@ class MultivaluesOption extends React.Component {
  *     Array of strings used to display initial entry boxes.
  * @param {Multivalues~onValueChange} [onValueChange]
  *     Callback triggered when a new entry is added or removed.
- * @param {Multivalues~onChange} [onChange]
- *     DEPRECATED. Use "onValueChange" instead.
  *
  * @param {Multivalues~onNewValue} [onNewValue]
  *     Callback triggered and return a boolean when a new value is completed typing.
@@ -102,8 +90,6 @@ class MultivaluesOption extends React.Component {
  *
  * @param {boolean} [required=false]
  *     If true, the user must enter an entry to the field.
- * @param {boolean} [isRequired]
- *     DEPRECATED. Use "required" instead.
  *
  * @example
  *
@@ -114,7 +100,7 @@ class MultivaluesOption extends React.Component {
  *                                "Entry 3"
  *                          ]}
  *                          required={element.required}
- *                          onChange={this._addEntries} />
+ *                          onValueChange={this._addEntries} />
  *
  **/
 
@@ -123,14 +109,11 @@ class Multivalues extends React.Component {
 
     static propTypes = {
         "data-id": PropTypes.string,
-        id: PropTypes.string, //TODO: remove when v1 no longer supported.
         className: PropTypes.string,
         entries: PropTypes.arrayOf(PropTypes.string),
-        onValueChange: PropTypes.func, //TODO: mark as required when onChange has been removed.
-        onChange: PropTypes.func, //TODO: remove when v1 no longer supported.
+        onValueChange: PropTypes.func.isRequired,
         onNewValue: PropTypes.func,
-        required: PropTypes.bool,
-        isRequired: PropTypes.bool //TODO: remove when v1 no longer supported.
+        required: PropTypes.bool
     };
 
     static defaultProps = {
@@ -152,13 +135,13 @@ class Multivalues extends React.Component {
     componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
-                console.warn(Utils.deprecateMessage("id", "data-id"));
+                throw(Utils.deprecatePropError("id", "data-id"));
             }
             if (this.props.onChange) {
-                console.warn(Utils.deprecateMessage("onChange", "onValueChange"));
+                throw(Utils.deprecatePropError("onChange", "onValueChange"));
             }
             if (this.props.isRequired) {
-                console.warn(Utils.deprecateMessage("isRequired", "required"));
+                throw(Utils.deprecatePropError("isRequired", "required"));
             }
         }
     }
@@ -229,10 +212,6 @@ class Multivalues extends React.Component {
             var entries = this.props.entries;
             entries.push(enteredValue);
 
-            //TODO: remove when v1 no longer supported.
-            if (this.props.onChange) {
-                this.props.onChange(entries);
-            }
             if (this.props.onValueChange) {
                 this.props.onValueChange(entries);
             }
@@ -255,10 +234,6 @@ class Multivalues extends React.Component {
         var entries = this.props.entries;
         entries.splice(index,1);
 
-        //TODO: remove when v1 no longer supported.
-        if (this.props.onChange) {
-            this.props.onChange(entries);
-        }
         if (this.props.onValueChange) {
             this.props.onValueChange(entries);
         }
@@ -267,7 +242,7 @@ class Multivalues extends React.Component {
     render() {
         var className = classnames(this.props.className, {
             "input-multivalues": true,
-            required: this.props.isRequired || this.props.required,
+            required: this.props.required,
             "value-entered": (this.props.entries.length !== 0)
         });
 
@@ -291,17 +266,15 @@ class Multivalues extends React.Component {
                 <MultivaluesOption
                     id={index}
                     label={label}
-                    onChange={this.props.onChange || this.props.onValueChange}
+                    onChange={this.props.onValueChange}
                     onDelete = {this._handleDelete}
                     key={index}
                     />
             );
         }.bind(this));
 
-        var id = this.props.id || this.props["data-id"];
-
         return (
-            <FormLabel className={className} data-id={id} >
+            <FormLabel className={className} data-id={this.props["data-id"]} >
                 <div className="entries" data-id="entries">
                     {entryNodes}
                     <div className="value-input">

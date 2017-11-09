@@ -34,8 +34,6 @@ var Placements = {
  *
  * @param {string} [data-id="helpHint"]
  *     To define the base "data-id" value for top-level HTML container.
- * @param {string} [id]
- *     DEPRECATED. Use "data-id" instead. To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
  * @param {number} [delayHide=400]
@@ -51,7 +49,6 @@ var Placements = {
 class HelpHint extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
-        id: PropTypes.string,
         className: PropTypes.string,
         delayHide: PropTypes.number,
         placement: PropTypes.oneOf([
@@ -90,7 +87,7 @@ class HelpHint extends React.Component {
             placement = classNames.indexOf("bottom") > -1 ? "bottom" : placement;
 
             if (!Utils.isProduction() && placement !== "right") {
-                console.warn(Utils.deprecateMessage("className css positioning", "position"));
+                console.warn(Utils.deprecatePropError("className css positioning", "position"));
             }
         }
 
@@ -98,8 +95,8 @@ class HelpHint extends React.Component {
     };
 
     componentWillMount() {
-        if (this.props.id && !Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("id", "data-id"));
+        if (!Utils.isProduction() && this.props.id) {
+            throw(Utils.deprecatePropError("id", "data-id"));
         }
     }
 
@@ -114,21 +111,20 @@ class HelpHint extends React.Component {
     };
 
     render() {
-        var dataId = this.props.id || this.props["data-id"],
-            iconName = this.props.lock ? "icon-lock" : "icon-help",
+        var iconName = this.props.lock ? "icon-lock" : "icon-help",
             uid = _.uniqueId("rtt_"),
             display;
 
         if (this.props.children) {
             display = this.props.children;
         } else {
-            display = (<span className={iconName} data-id={dataId + "-icon"} />);
+            display = (<span className={iconName} data-id={this.props["data-id"] + "-icon"} />);
         }
 
         return (
-            <div className="help-tooltip" data-id={dataId}>
+            <div className="help-tooltip" data-id={this.props["data-id"]}>
                 <div
-                    data-id={dataId + "-target"}
+                    data-id={this.props["data-id"] + "-target"}
                     className={classnames(this.props.className, "help-tooltip-target")}
                     onClick={this._handleClick}
                     data-tip={true}

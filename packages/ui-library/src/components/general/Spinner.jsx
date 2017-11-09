@@ -11,8 +11,6 @@ var React = require("react"),
  *
  * @param {string} [data-id="spinner"]
  *     To define the base "data-id" value for top-level HTML container.
- * @param {string} [id]
- *     DEPRECATED. Use "data-id" instead. To define the base "data-id" value for top-level HTML container.
  *
  * @param {string} [defaultText]
  *     Text that shows if CSS rotations are not supported
@@ -31,7 +29,6 @@ var React = require("react"),
 class Spinner extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
-        id: PropTypes.string,
         defaultText: PropTypes.string,
         show: PropTypes.bool.isRequired
     };
@@ -42,16 +39,15 @@ class Spinner extends React.Component {
     };
 
     componentWillMount() {
-        if (this.props.id && !Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("id", "data-id"));
+        if (!Utils.isProduction() && this.props.id) {
+            throw(Utils.deprecatePropError("id", "data-id"));
         }
     }
 
     render() {
-        var className = classnames("spinner", { ie9: Utils.isIE9() } );
+        var className = classnames("spinner", { ie9: Utils.isIE9() });
         if (this.props.show) {
-            var dataId = this.props.id || this.props["data-id"];
-            return <span data-id={dataId} className={className}>{this.props.defaultText}</span>;
+            return <span data-id={this.props["data-id"]} className={className}>{this.props.defaultText}</span>;
         } else {
             return this.props.children;
         }

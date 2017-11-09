@@ -12,8 +12,6 @@ var React = require("react"),
  *
  * @param {string} [data-id="formLabel"]
  *     To define the base "data-id" value for top-level HTML container.
- * @param {string} [id]
- *     DEPRECATED. Use "data-id" instead. To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
  *
@@ -34,7 +32,6 @@ var React = require("react"),
 class FormLabel extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
-        id: PropTypes.string,
         className: PropTypes.string,
         value: PropTypes.string,
         hint: PropTypes.string,
@@ -50,8 +47,8 @@ class FormLabel extends React.Component {
     };
 
     componentWillMount() {
-        if (this.props.id && !Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("data-id", "id"));
+        if (!Utils.isProduction() && this.props.id) {
+            throw(Utils.deprecatePropError("id", "data-id"));
         }
     }
 
@@ -94,9 +91,8 @@ class FormLabel extends React.Component {
             return null;
         }
 
-        var dataId = this.props.id || this.props["data-id"];
         return (
-            <label data-id={dataId} className={this.props.className} style={this.props.style}>
+            <label data-id={this.props["data-id"]} className={this.props.className} style={this.props.style}>
                 { !noLabel && (
                     <span className="label-text" data-id="label">
                         { this.props.value }

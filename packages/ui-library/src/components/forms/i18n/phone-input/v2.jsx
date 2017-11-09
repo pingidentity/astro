@@ -52,8 +52,6 @@ var React = require("react"),
 * @param {boolean} [stateless]
 *    To enable the component to be externally managed. True will relinquish control to the component's owner.
 *    False or not specified will cause the component to manage state internally.
-* @param {boolean} [controlled=false]
-*     DEPRECATED. Use "stateless" instead.
 *
 * @param {string} [countryCode="us" = USA]
 *     The country code corresponding to the dial code for the country to be selected by default.
@@ -77,8 +75,6 @@ var React = require("react"),
 *     Time to help clear the search when the user delays their search.
 * @param {I18nPhoneInput~onSearch} [onSearch]
 *     Callback to be triggered when the state of the search of a country when the flag dropdown is expanded changes.
-* @param {I18nPhoneInput~onSearch} [onCountrySearch]
-*     DEPRECATED. Use "onSearch" instead.
 *
 * @param {string} [errorMessage="Please enter a valid phone number."]
 *     The message to display if an invalid phone number is entered.
@@ -99,24 +95,15 @@ var React = require("react"),
 
 module.exports = class extends React.Component {
     static propTypes = {
-        controlled: PropTypes.bool, //TODO: remove in new version
         stateless: PropTypes.bool
     };
 
     static defaultProps = {
-        controlled: false //TODO: change to stateless in new version
+        stateless: false
     };
 
-    componentWillMount() {
-        if (!Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("controlled", "stateless"));
-        }
-    }
-
     render() {
-        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
-
-        return stateless
+        return this.props.stateless
             ? React.createElement(I18nPhoneInputStateless, //eslint-disable-line
                 _.defaults({ ref: "I18nPhoneInputStateless" }, this.props))
             : React.createElement(I18nPhoneInputStateful, //eslint-disable-line
@@ -141,7 +128,6 @@ class I18nPhoneInputStateless extends React.Component {
         searchString: PropTypes.string,
         searchTime: PropTypes.number,
         onSearch: PropTypes.func,
-        onCountrySearch: PropTypes.func, //TODO: remove when v1 no longer supported
         errorMessage: PropTypes.string,
         placeholder: PropTypes.string,
         autoFocus: PropTypes.bool,
@@ -168,8 +154,13 @@ class I18nPhoneInputStateless extends React.Component {
     };
 
     componentWillMount() {
-        if (this.props.onCountrySearch && !Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("onCountrySearch", "onSearch"));
+        if (!Utils.isProduction()) {
+            if (this.props.controlled) {
+                throw(Utils.deprecatePropError("controlled", "stateless"));
+            }
+            if (this.props.onCountrySearch) {
+                throw(Utils.deprecatePropError("onCountrySearch", "onSearch"));
+            }
         }
     }
 
@@ -215,7 +206,7 @@ class I18nPhoneInputStateless extends React.Component {
                         searchIndex={this.props.searchIndex}
                         searchString={this.props.searchString}
                         searchTime={this.props.searchTime}
-                        onSearch={this.props.onCountrySearch || this.props.onSearch} />
+                        onSearch={this.props.onSearch} />
                 <FormTextField
                         data-id={this.props["data-id"] + "-phoneNumber"}
                         className="form-control"

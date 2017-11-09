@@ -107,7 +107,7 @@ class ModalDemo extends React.Component {
 
                         <div>
                             When you set the "closeOnBgClick" prop to "true", clicking the modal background will trigger
-                            the onClose callback. If you are using the "controlled" or stateless version, you will
+                            the onClose callback. If you are using the stateless version, you will
                             need to pass the onClose callback as well. For the stateful version the onClose callback
                             is not required.
                         </div>

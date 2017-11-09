@@ -170,7 +170,8 @@ class CountryFlagList extends React.Component {
         }.bind(this));
 
         return (
-            <FormDropDownList controlled={true}
+            <FormDropDownList
+                    stateless={true}
                     data-id={this.props["data-id"]}
                     className={containerClassName}
                     options={countryCodes}

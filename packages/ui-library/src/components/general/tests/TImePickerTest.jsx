@@ -3,8 +3,7 @@ window.__DEV__ = true;
 jest.dontMock("moment");
 jest.dontMock("../TimePicker.jsx");
 jest.dontMock("../../forms/FormError.jsx");
-jest.dontMock("../../forms/form-select-field/index.js");
-jest.dontMock("../../forms/form-select-field/v2.jsx");
+jest.dontMock("../../forms/FormDropDownList.jsx");
 jest.dontMock("../../forms/form-text-field/index.js");
 jest.dontMock("../../forms/form-text-field/v2.jsx");
 jest.dontMock("../../forms/FormDropDownList.jsx");
@@ -12,6 +11,7 @@ jest.dontMock("../../forms/FormDropDownList.jsx");
 describe("TimePicker", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
+        Utils = require("../../../util/Utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         TimePicker = require("../TimePicker.jsx"),
         moment = require("moment"),
@@ -118,7 +118,7 @@ describe("TimePicker", function () {
         ]);
     });
 
-    it("properly populates the FormSelectField's options", function () {
+    it("properly populates the FormDropDown's options", function () {
         component = render({
             increments: 60,
             format: "24"
@@ -170,22 +170,12 @@ describe("TimePicker", function () {
         expect(component.props["data-id"]).toBe("time-picker");
     });
 
-    it("verify id causes warning to be output", function () {
-        console.warn = jest.genMockFunction();
-        component = render({ id: "some-id", increments: 60, format: "12" });
-        expect(console.warn).toBeCalledWith("Deprecated: use data-id instead of id. " +
-                                                "Support for id will be removed in next version");
+    it("throws error when deprecated prop 'id' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
+
+        expect(function () {
+            render({ id: "foo" });
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when id no longer supported
-    it("does not log warning for id when in production", function () {
-        //Mock process.env.NODE_ENV
-        process.env.NODE_ENV = "production";
-
-        console.warn = jest.genMockFunction();
-        render({ id: "testId" });
-
-        expect(console.warn).not.toBeCalled();
-        delete process.env.NODE_ENV;
-    });
 });

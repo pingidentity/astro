@@ -6,6 +6,7 @@ describe("Row", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         Layout = require("../ColumnLayout.jsx"),
+        Utils = require("../../../util/Utils"),
         TestUtils = require("../../../testutil/TestUtils");
 
     var colContent, customRowCss, customColCss, columns2, columns3, columns4, testNodeParent, testNodeChildren, i;
@@ -16,20 +17,20 @@ describe("Row", function () {
         customColCss = ["colClass1", "colClass2", "colClass3", "colClass4"];
 
         columns2 = ReactTestUtils.renderIntoDocument(
-            <Layout.Row id="columns-2" className={customRowCss[0]}>
+            <Layout.Row data-id="columns-2" className={customRowCss[0]}>
                 <Layout.Column className={customColCss[0]}>{colContent[0]}</Layout.Column>
                 <Layout.Column className={customColCss[1]}>{colContent[1]}</Layout.Column>
             </Layout.Row>
         );
         columns3 = ReactTestUtils.renderIntoDocument(
-            <Layout.Row id="columns-3" className={customRowCss[1]}>
+            <Layout.Row data-id="columns-3" className={customRowCss[1]}>
                 <Layout.Column className={customColCss[0]}>{colContent[0]}</Layout.Column>
                 <Layout.Column className={customColCss[1]}>{colContent[1]}</Layout.Column>
                 <Layout.Column className={customColCss[2]}>{colContent[2]}</Layout.Column>
             </Layout.Row>
         );
         columns4 = ReactTestUtils.renderIntoDocument(
-            <Layout.Row id="columns-4" className={customRowCss[2]}>
+            <Layout.Row data-id="columns-4" className={customRowCss[2]}>
                 <Layout.Column className={customColCss[0]}>{colContent[0]}</Layout.Column>
                 <Layout.Column className={customColCss[1]}>{colContent[1]}</Layout.Column>
                 <Layout.Column className={customColCss[2]}>{colContent[2]}</Layout.Column>
@@ -54,14 +55,6 @@ describe("Row", function () {
         expect(row).toBeDefined();
     });
 
-    it("row renders with given id", function () {
-        var component = ReactTestUtils.renderIntoDocument(<Layout.Row id="myRow" />);
-
-        var row = TestUtils.findRenderedDOMNodeWithDataId(component, "myRow");
-
-        expect(row).toBeDefined();
-    });
-
     it("column renders with default data-id", function () {
         var component = ReactTestUtils.renderIntoDocument(<Layout.Column />);
 
@@ -72,14 +65,6 @@ describe("Row", function () {
 
     it("column renders with given data-id", function () {
         var component = ReactTestUtils.renderIntoDocument(<Layout.Column data-id="myColumnLayout" />);
-
-        var column = TestUtils.findRenderedDOMNodeWithDataId(component, "myColumnLayout");
-
-        expect(column).toBeDefined();
-    });
-
-    it("column renders with given id", function () {
-        var component = ReactTestUtils.renderIntoDocument(<Layout.Column id="myColumnLayout" />);
 
         var column = TestUtils.findRenderedDOMNodeWithDataId(component, "myColumnLayout");
 
@@ -163,41 +148,16 @@ describe("Row", function () {
 
     });
 
-    //TODO: remove when v1 no longer supported
-    it("row logs warning when id prop given", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <Layout.Row id="columns-2" className={customRowCss[0]} />
-        );
+    it("throws error when deprecated prop 'id' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
 
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use data-id instead of id. " +
-            "Support for id will be removed in next version");
+        expect(function () {
+            ReactTestUtils.renderIntoDocument(
+                <Layout.Row id="foo">
+                    <Layout.Column>something</Layout.Column>
+                </Layout.Row>
+            );
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when v1 no longer supported
-    it("column logs wanring when id prop given", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <Layout.Column id="myLayoutColumn" className={customColCss[0]} />
-        );
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use data-id instead of id. " +
-            "Support for id will be removed in next version");
-    });
-
-    //TODO: remove when v1 no longer supported
-    it("does not log warning for id when in production", function () {
-        //Mock process.env.NODE_ENV
-        process.env.NODE_ENV = "production";
-
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <Layout.Row id="columns-2" className={customRowCss[0]} />
-        );
-
-        expect(console.warn).not.toBeCalled();
-        delete process.env.NODE_ENV;
-    });
 });

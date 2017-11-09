@@ -86,13 +86,9 @@ var React = require("react"),
  * @param {LeftNavBar~onSectionValueChange} [onSectionValueChange]
  *          A callback which will be excuted when any section node is clicked. The callback will be given 1 parameter
  *          equal to the id of the item clicked.
- * @param {LeftNavBar~onSectionClick} [onSectionClick]
- *          DEPRECATED. Use onSectionValueChange instead.
  * @param {LeftNavBar~onItemValueChange} [onItemValueChange]
  *          A callback which will be executed when any leaf node is clicked. The callback will be given 1 parameter
  *          equal to the id of the item clicked.
- * @param {LeftNavBar~onItemClick} [onItemClick]
- *          DEPRECATED. Use onItemValueChange instead.
  * @param {boolean} [pingoneLogo=false]
  *          Determines whether to show the PingOne Logo.
  * @param {string} [logoSrc]
@@ -117,8 +113,6 @@ class LeftNavBar extends React.Component {
         openSections: PropTypes.object,
         collapsible: PropTypes.bool,
         autocollapse: PropTypes.bool,
-        onSectionClick: PropTypes.func,
-        onItemClick: PropTypes.func,
         onSectionValueChange: PropTypes.func,
         onItemValueChange: PropTypes.func,
         pingoneLogo: PropTypes.bool,
@@ -188,15 +182,11 @@ class LeftNavBar extends React.Component {
     };
 
     _handleSectionClick = (sectionId) => {
-        var onSectionClick = this.props.onSectionClick || this.props.onSectionValueChange;
-
-        onSectionClick(sectionId);
+        this.props.onSectionValueChange(sectionId);
     };
 
     _handleItemClick = (sectionId, itemId) => {
-        var onValueChange = this.props.onItemClick || this.props.onItemValueChange;
-
-        onValueChange(sectionId, itemId);
+        this.props.onItemValueChange(sectionId, itemId);
     };
 
     _handleResize = () => {
@@ -340,10 +330,10 @@ class LeftNavBar extends React.Component {
     componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.onItemClick) {
-                console.warn(Utils.deprecateMessage("onItemClick", "onItemValueChange"));
+                throw(Utils.deprecatePropError("onItemClick", "onItemValueChange"));
             }
             if (this.props.onSectionClick) {
-                console.warn(Utils.deprecateMessage("onSectionClick", "onSectionValueChange"));
+                throw(Utils.deprecatePropError("onSectionClick", "onSectionValueChange"));
             }
         }
     }

@@ -79,7 +79,7 @@ class DemoItem extends React.Component {
         return (
             <div className={sourceClassName}>
                 <RockerButton className="source-select" labels={sourceLabels}
-                        controlled={true}
+                        stateless={true}
                         selectedIndex={this.state.selectedSource}
                         onValueChange={this._handleSelectedSourceValueChange} />
                 {sourceFrames}

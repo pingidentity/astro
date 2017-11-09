@@ -34,7 +34,7 @@ describe("FormDropDownList", function () {
 
     function getComponent (props) {
         props = _.defaults(props || {}, {
-            controlled: true,
+            stateless: true,
             options: options,
             selectedOption: options[0],
             onToggle: jest.genMockFunction(),
@@ -187,7 +187,7 @@ describe("FormDropDownList", function () {
     });
 
     it("stateful: onToggle callback updates open state", function () {
-        var component = getComponent({ controlled: false });
+        var component = getComponent({ stateless: false });
         var componentRef = component.refs.FormDropDownListStateful;
 
         expect(componentRef.state.open).toBe(false);
@@ -204,7 +204,7 @@ describe("FormDropDownList", function () {
     });
 
     it("stateful: onSearch callback updates search state", function () {
-        var component = getComponent({ controlled: false });
+        var component = getComponent({ stateless: false });
         var componentRef = component.refs.FormDropDownListStateful;
 
         expect(componentRef.state.open).toBe(false);
@@ -221,7 +221,7 @@ describe("FormDropDownList", function () {
     });
 
     it("stateful: filters options when BOX search input changes", function () {
-        var component = getComponent({ controlled: false, canAdd: true, searchType: FormDropDownList.SearchTypes.BOX });
+        var component = getComponent({ stateless: false, canAdd: true, searchType: FormDropDownList.SearchTypes.BOX });
         var componentRef = component.refs.FormDropDownListStateful;
         var input = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-input-input");
 
@@ -234,7 +234,7 @@ describe("FormDropDownList", function () {
     });
 
     it("stateful: updates filtered options when it receives new options", function () {
-        var component = getComponent({ controlled: false });
+        var component = getComponent({ stateless: false });
         var componentRef = component.refs.FormDropDownListStateful;
 
         expect(componentRef.state.matchedOptions.length).toBe(5);

@@ -62,8 +62,6 @@ var getZoneNameDisplayValue = function (zoneName) {
 *     WARNING. Default value for "stateless" will be set to true from next version.
 *     To enable the component to be externally managed. True will relinquish control to the component's owner.
 *     False or not specified will cause the component to manage state internally.
-* @param {boolean} [controlled=false]
-*     DEPRECATED. Use "stateless" instead.
 * @param {string} [className]
 *     Class name(s) to add to the top-level container/div
 *
@@ -114,32 +112,30 @@ var getZoneNameDisplayValue = function (zoneName) {
 
 class FormTimeZone extends React.Component {
     static propTypes = {
-        controlled: PropTypes.bool, //TODO: remove in new version
         stateless: PropTypes.bool
     };
 
     static defaultProps = {
-        controlled: false //TODO: change to stateless with true default in new version
+        stateless: true
     };
 
     componentWillMount() {
-        if (!Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("controlled", "stateless", "false", "true"));
+        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
+        /* istanbul ignore if  */
+        if (!Utils.isProduction() && this.props.controlled) {
+            /* istanbul ignore next  */
+            throw(Utils.deprecatePropError("controlled", "stateless"));
         }
     }
 
     isValidTimeZone = (zoneText) => {
-        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
-
-        return stateless
+        return this.props.stateless
             ? this.refs.TimeZoneStateless.isValidTimeZone(zoneText)
             : this.refs.TimeZoneStateful.isValidTimeZone(zoneText);
     };
 
     render() {
-        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
-
-        return stateless
+        return this.props.stateless
             ? <TimeZoneStateless {..._.defaults({ ref: "TimeZoneStateless" }, this.props)} />
             : <TimeZoneStateful {..._.defaults({ ref: "TimeZoneStateful" }, this.props)} />;
 

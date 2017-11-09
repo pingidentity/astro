@@ -2,7 +2,7 @@ var React = require("react"),
     FormCheckbox = require("../../components/forms/FormCheckbox.jsx"),
     FormTextField = require("../../components/forms//form-text-field").v2,
     FormRadioGroup = require("../../components/forms/FormRadioGroup.jsx"),
-    FormSelectField = require("../../components/forms/form-select-field").v2,
+    FormDropDownList = require("../../components/forms/FormDropDownList.jsx"),
     Layout = require("../../components/general/ColumnLayout.jsx"),
     Section = require("../../components/general/Section.jsx"),
     Toggle = require("../../components/forms/form-toggle").v2,
@@ -91,7 +91,7 @@ module.exports = class extends React.Component {
 
                 <div className="page-section-content">
                     <Section
-                        controlled={true}
+                        stateless={true}
                         onToggle={this._toggleSection1}
                         expanded={this.props.expandedSections.indexOf(1) > -1}
                         title="Identity"
@@ -121,7 +121,7 @@ module.exports = class extends React.Component {
                         </div>
                     </Section>
                     <Section
-                        controlled={true}
+                        stateless={true}
                         onToggle={this._toggleSection2}
                         expanded={this.props.expandedSections.indexOf(2) > -1}
                         title="Address"
@@ -145,13 +145,12 @@ module.exports = class extends React.Component {
                                         onChange={this._handleInputChange} />
                                 </div>
                                 <div className="input-row">
-                                    <FormSelectField
-                                        label="Address
-                                        Location"
+                                    <FormDropDownList
+                                        label="Address Location"
                                         className="input-width-medium"
                                         data-id="addressType"
-                                        value={this.props.inputs.addressType}
-                                        onChange={this._handleInputChange}
+                                        selectedOption={this.props.inputs.addressType}
+                                        onValueChange={this._handleInputChange}
                                         options={[
                                             { value: "home", label: "Home" },
                                             { value: "work", label: "Work" },
@@ -176,12 +175,12 @@ module.exports = class extends React.Component {
                                         onChange={this._handleInputChange} />
                                 </div>
                                 <div className="input-row">
-                                    <FormSelectField
+                                    <FormDropDownList
                                         label="Alternate Address Location"
                                         className="input-width-medium"
                                         data-id="alternateAddressType"
-                                        value={this.props.inputs.alternateAddressType}
-                                        onChange={this._handleInputChange}
+                                        selectedOption={this.props.inputs.alternateAddressType}
+                                        onValueChange={this._handleInputChange}
                                         options={[
                                             { value: "home", label: "Home" },
                                             { value: "work", label: "Work" },
@@ -199,7 +198,7 @@ module.exports = class extends React.Component {
                         </Layout.Row>
                     </Section>
                     <Section
-                        controlled={true}
+                        stateless={true}
                         onToggle={this._toggleSection3}
                         expanded={this.props.expandedSections.indexOf(3) > -1}
                         title="Miscellaneous"

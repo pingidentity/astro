@@ -6,6 +6,7 @@ describe("HelpHint", function () {
     var React = require("react");
     var ReactTestUtils = require("react-dom/test-utils");
     var TestUtils = require("../../../testutil/TestUtils");
+    var Utils = require("../../../util/Utils");
     var HelpHint = require("../HelpHint.jsx");
     var text = "test help text!";
     var classValue = "short-tooltip";
@@ -82,17 +83,6 @@ describe("HelpHint", function () {
         // expect(div.className).toContain(classValue);
     });
 
-    // TODO To be removed once "id" support is discontnued.
-    it("render component with id", function () {
-        component = ReactTestUtils.renderIntoDocument(
-            <HelpHint hintText={text} id="helpHintOld" className={classValue} />
-        );
-
-        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "helpHintOld");
-
-        expect(element).toBeDefined();
-    });
-
     it("render component with data-id", function () {
         component = ReactTestUtils.renderIntoDocument(
             <HelpHint hintText={text} data-id="helpHintNew" className={classValue} />
@@ -113,27 +103,6 @@ describe("HelpHint", function () {
         expect(element).toBeDefined();
     });
 
-    // TODO To be removed once "id" support is discontnued.
-    it("log warning in console for id", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <HelpHint hintText={text} id="helpTooltipOld" className={classValue} />
-        );
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use data-id instead of id. Support for id will be removed in next version");
-    });
-
-    // TODO To be removed once "id" support is discontnued.
-    it("does not log warning in console without id", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <HelpHint hintText={text} className={classValue} />
-        );
-
-        expect(console.warn).not.toBeCalled();
-    });
-
     /*
     TODO: fix this test
     NOTE: Currently we've not been able to test the react-tooltip helpHint in it's shown state. Since the React Tooltip
@@ -150,16 +119,14 @@ describe("HelpHint", function () {
         // expect(event.preventDefault.mock.calls.length).toEqual(1);
     });
 
-    it("does not log warning for id when in production", function () {
-        //Mock process.env.NODE_ENV
-        process.env.NODE_ENV = "production";
+    it("throws error when deprecated prop 'id' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
 
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <HelpHint id="myHint" hintText={text} className={classValue} />
-        );
-
-        expect(console.warn).not.toBeCalled();
-        delete process.env.NODE_ENV;
+        expect(function () {
+            ReactTestUtils.renderIntoDocument(
+                <HelpHint id="foo" hintText="bar" />
+            );
+        }).toThrow(expectedError);
     });
+
 });

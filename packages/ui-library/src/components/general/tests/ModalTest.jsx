@@ -101,21 +101,10 @@ describe("ModalTest", function () {
 
     it("Modal render data-ids if provided", function () {
         var did = "myid",
-            component = getComponent({ id: did, expanded: true }),
+            component = getComponent({ "data-id": did, expanded: true }),
             modal = TestUtils.findRenderedDOMNodeWithDataId(component, did);
 
         expect(ReactTestUtils.isDOMComponent(modal)).toBeTruthy();
-    });
-
-    it("Modal render id if provided", function () {
-        console.warn = jest.genMockFunction();
-
-        var component = getComponent({ expanded: true, id: "myid" }),
-            modal = TestUtils.findRenderedDOMNodeWithClass(component, "modal");
-
-        expect(console.warn).toBeCalledWith("Deprecated: use data-id instead of id. " +
-                                            "Support for id will be removed in next version");
-        expect(modal.getAttribute("data-id")).toEqual("myid");
     });
 
     /*
@@ -196,18 +185,6 @@ describe("ModalTest", function () {
         expect(tooltipDenyBtn.textContent).toBe(modalParams.cancelTooltip.cancelButtonText);
         expect(tooltipTitle.textContent).toBe(modalParams.cancelTooltip.title);
         expect(tooltipText.textContent).toBe(modalParams.cancelTooltip.messageText);
-    });
-
-    //TODO: remove when id no longer supported
-    it("does not log warning for id when in production", function () {
-        //Mock process.env.NODE_ENV
-        process.env.NODE_ENV = "production";
-
-        console.warn = jest.genMockFunction();
-        getComponent({ id: "someId", expanded: true });
-
-        expect(console.warn).not.toBeCalled();
-        delete process.env.NODE_ENV;
     });
 
 });

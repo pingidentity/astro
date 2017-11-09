@@ -20,6 +20,7 @@ describe("FormSearchBox", function () {
 
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
+            stateless: false,
             onValueChange: jest.genMockFunction(),
             onKeyDown: jest.genMockFunction(),
             onFocus: jest.genMockFunction(),

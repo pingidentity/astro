@@ -24,13 +24,6 @@ var callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutside
  */
 
 /**
- * @deprecated
- * @callback ColorPicker~onChange
- * @param {string} color
- *     Newly chosen color
- */
-
-/**
  * @callback ColorPicker~onToggle
  */
 
@@ -47,15 +40,11 @@ var callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutside
  *
  * @param {string} [data-id="color-picker"]
  *     To define the base "data-id" value for top-level HTML container.
- * @param {string} [id]
- *     DEPRECATED. Use "data-id" instead. To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
  * @param {boolean} [stateless]
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally.
- * @param {boolean} [controlled=false]
- *     DEPRECATED. Use "stateless" instead.
  *
  * @param {string} [labelText]
  *     A label to render at the top of the color picker
@@ -66,11 +55,7 @@ var callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutside
  * @param {boolean} [disabled=false]
  *     A property to disable the component
  * @param {ColorPicker~onValueChange} onValueChange
- *     Callback to be triggered when a color is chosen by passing the new color. For current version, either
- *     onValueChange or onChange can be provided but from next version onValueChange will be the required prop.
- * @param {ColorPicker~onChange} [onChange]
- *     DEPRECATED. Callback to be triggered when a color is chosen by passing the new color. For current version, either
- *     onValueChange or onChange can be provided but from next version onValueChange will be the required prop.
+ *     Callback to be triggered when a color is chosen by passing the new color.
  *
  * @param {boolean} [open=false]
  *     Boolean state of open/closed menu. Used only in stateless mode.
@@ -102,24 +87,38 @@ module.exports = class extends React.Component {
     static displayName = "ColorPicker";
 
     static propTypes = {
-        controlled: PropTypes.bool
+        stateless: PropTypes.bool
     };
 
     static defaultProps = {
-        controlled: false
+        stateless: false
     };
 
     componentWillMount() {
+        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
+        /* istanbul ignore if  */
         if (!Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+            /* istanbul ignore if  */
+            if (this.props.controlled) {
+                /* istanbul ignore next  */
+                throw(Utils.deprecatePropError("controlled", "stateless"));
+            }
+            /* istanbul ignore if  */
+            if (this.props.id) {
+                /* istanbul ignore next  */
+                throw(Utils.deprecatePropError("id", "data-id"));
+            }
+            /* istanbul ignore if  */
+            if (this.props.onChange) {
+                /* istanbul ignore next  */
+                throw(Utils.deprecatePropError("onChange", "onValueChange"));
+            }
         }
     }
 
     render() {
-        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
-
         return (
-            stateless
+            this.props.stateless
                     ? <Stateless ref="stateless" {...this.props} />
                     : <Stateful ref="stateful" {...this.props} />);
     }
@@ -136,8 +135,7 @@ class Stateless extends React.Component {
         labelText: PropTypes.string,
         color: PropTypes.string.isRequired,
         disabled: PropTypes.bool,
-        onValueChange: PropTypes.func,
-        onChange: PropTypes.func,
+        onValueChange: PropTypes.func.isRequired,
         open: PropTypes.bool,
         onToggle: PropTypes.func.isRequired,
         errorMessage: PropTypes.string,
@@ -239,17 +237,12 @@ class Stateless extends React.Component {
         }
     };
 
-    //TODO remove when onChange is discontinued.
     _valueChange = (hex) => {
-        if (this.props.onChange) {
-            return this.props.onChange(hex);
-        } else {
-            return this.props.onValueChange(hex);
-        }
+        return this.props.onValueChange(hex);
     };
 
     /*
-     * Call the onChange callback when a color is selected in the color picker.
+     * Call the onValueChange callback when a color is selected in the color picker.
      * @param {string} color
      *     The new color
      */
@@ -258,7 +251,7 @@ class Stateless extends React.Component {
     };
 
     /*
-     * Call the onChange callback when a color is selected by dragging in the color picker.
+     * Call the onValueChange callback when a color is selected by dragging in the color picker.
      * @param {string} color
      *     The new color
      */
@@ -267,7 +260,7 @@ class Stateless extends React.Component {
     };
 
     /*
-     * Call the onChange callback when a valid hex color code is typed into the input field.
+     * Call the onValueChange callback when a valid hex color code is typed into the input field.
      * @param {string} value
      *     The input field value
      */
@@ -290,21 +283,6 @@ class Stateless extends React.Component {
         window.removeEventListener("keydown", this._handleGlobalKeyDown);
     }
 
-    componentWillMount() {
-        if (!Utils.isProduction()) {
-            if (this.props.id) {
-                console.warn(Utils.deprecateMessage("id", "data-id"));
-            }
-            if (this.props.onChange) {
-                console.warn(Utils.deprecateMessage("onChange", "onValueChange"));
-            }
-            if (!(this.props.onValueChange || this.props.onChange)) {
-                console.error(
-                    "Warning: Failed propType: Required prop onValueChange was not specified in `ColorPicker`.");
-            }
-        }
-    }
-
     render() {
         var containerCss = {
             "input-color-picker": true,
@@ -312,11 +290,9 @@ class Stateless extends React.Component {
         };
         containerCss[this.props.className] = !!this.props.className;
 
-        var dataId = this.props.id || this.props["data-id"];
-
         return (
             /* eslint-disable max-len */
-            <div data-id={dataId} className={css(containerCss)}>
+            <div data-id={this.props["data-id"]} className={css(containerCss)}>
                 <FormLabel data-id="colorLabel" value={this.props.labelText} hint={this.props.hintText}/>
                 <div className="color-picker" ref="swatch">
                     <span className="colors colors-theme-default colors-swatch-position-left colors-swatch-left colors-position-default"
@@ -376,14 +352,12 @@ class Stateful extends React.Component {
     };
 
     render() {
-        //TODO remove when onChange is discontinued.
-        var valueChangeFn = this.props.onValueChange || this.props.onChange;
         return (
             <Stateless ref="stateless" {...this.props}
                     errorMessage={this.state.errorMessage}
                     onError={this._handleError}
                     onToggle={this._handleToggle}
-                    onValueChange={valueChangeFn}
+                    onValueChange={this.props.onValueChange}
                     open={this.state.open}/>
         );
     }

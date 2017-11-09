@@ -30,15 +30,11 @@ var React = require("react"),
  *
  * @param {string} [data-id="pagination"]
  *          To define the base "data-id" value for the top-level HTML container.
- * @param {string} [id]
- *     DEPRECATED. Use "data-id" instead.
  * @param {string} [className]
  *          CSS classes to set on the top-level HTML container
  * @param {boolean} [stateless]
  *          To enable the component to be externally managed. True will relinquish control to the component's owner.
  *          False or not specified will cause the component to manage state internally.
- * @param {boolean} [controlled=false]
- *          DEPRECATED. Use "stateless" instead.
  * @param {number} [perPage=10]
  *          Number of results per page
  * @param {number} total
@@ -49,8 +45,6 @@ var React = require("react"),
  *          Currently selected page number. Respected only with externally managed variant.
  * @param {Pagination~onValueChange} onValueChange
  *          Callback to be triggered when a new page selected.
- *  @param {Pagination~onChange} [onChange]
- *          DEPRECATED. Use onValueChange instead, passing in an object as defined in JS Docs.
  *
  * @example
  *
@@ -79,25 +73,30 @@ module.exports = class extends React.Component {
     static displayName = "Pagination";
 
     static propTypes = {
-        controlled: PropTypes.bool, //TODO: remove in new version
         stateless: PropTypes.bool
     };
 
     static defaultProps = {
-        controlled: false //TODO: change to stateless in new version
+        stateless: false
     };
 
     componentWillMount() {
         if (!Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+            if (this.props.id) {
+                throw(Utils.deprecatePropError("id", "data-id"));
+            }
+            if (this.props.controlled) {
+                throw(Utils.deprecatePropError("controlled", "stateless"));
+            }
+            if (this.props.onChange) {
+                throw(Utils.deprecatePropError("onChange", "onValueChange"));
+            }
         }
     }
 
     render() {
-        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
-
         return (
-            stateless
+            this.props.stateless
                 ? <PaginationStateless ref="PaginationStateless" {...this.props} />
                 : <PaginationStateful ref="PaginationStateful" {...this.props} />);
     }
@@ -250,10 +249,8 @@ class PaginationStateless extends React.Component {
         children: PropTypes.node,
         className: PropTypes.string,
         "data-id": PropTypes.string,
-        id: PropTypes.string,
         totalPages: PropTypes.number,
-        onValueChange: PropTypes.func, // add isRequired to this once onChange is removed.
-        onChange: PropTypes.func,
+        onValueChange: PropTypes.func.isRequired,
         page: PropTypes.number,
         perPage: PropTypes.number,
         total: PropTypes.number
@@ -282,33 +279,19 @@ class PaginationStateless extends React.Component {
             currentPage = page > numPages ? numPages : page,
             start = (currentPage - 1) * this.props.perPage,
             last = start + this.props.perPage;
-        if (this.props.onChange) { ///TODO We don't need this if statement once onChange is removed.
-            this.props.onChange(start, last, currentPage);
-        } else {
-            this.props.onValueChange({ first: start, last: last, page: currentPage });
-        }
-    };
 
-    componentWillMount() {
-        if (!Utils.isProduction()) {
-            if (this.props.id) {
-                console.warn(Utils.deprecateMessage("id", "data-id"));
-            }
-            if (this.props.onChange) {
-                console.warn(Utils.deprecateMessage("onChange", "onValueChange"));
-            }
-        }
-    }
+        this.props.onValueChange({ first: start, last: last, page: currentPage });
+    };
 
     render() {
         var numPages = this._getNumPages();
-        var id = this.props.id || this.props["data-id"];
+
         //make sure current page isn't greater than number of pages
         var currentPage = parseInt(this.props.page) > numPages ? numPages : parseInt(this.props.page);
         return (
             <div
                 className={this.props.className}
-                data-id={id}>
+                data-id={this.props["data-id"]}>
                 <PageLinks
                     currentPage={currentPage}
                     numPages={numPages}
@@ -339,14 +322,9 @@ class PaginationStateful extends React.Component {
         this.setState({
             page: pagingDetails.page
         }, function () {
-            if (self.props.onChange) { ///TODO We don't need this if statement once onChange is removed.
-                self.props.onChange(pagingDetails.first, pagingDetails.last, pagingDetails.page);
-            } else {
-                self.props.onValueChange(
-                    { first: pagingDetails.first, last: pagingDetails.last, page: pagingDetails.page }
-                );
-            }
-
+            self.props.onValueChange(
+                { first: pagingDetails.first, last: pagingDetails.last, page: pagingDetails.page }
+            );
         });
     };
 

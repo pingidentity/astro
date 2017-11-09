@@ -173,7 +173,7 @@ describe("Row", function () {
             <Grid data-id="grid-test" {...props}>
                 <Grid.Column headerText="Firstname" field="firstname" width={Grid.ColumnSizes.S} />
                 <Grid.Column headerText="Has Laptop" field="hasLaptop" >
-                    <CheckboxCell onCallBack={callback} className="stacked" />
+                    <CheckboxCell onGridCellAction={callback} className="stacked" />
                 </Grid.Column>
             </Grid>
         );

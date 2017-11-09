@@ -21,8 +21,6 @@ var React = require("react"),
  *
  * @param {string} [data-id="time-picker"]
  *              To define the base "data-id" value for the top-level HTML container.
- * @param {string}   [id]
- *              DEPRECATED. Use "data-id" instead.
  * @param {string}   [className]
  *              CSS classes to set on the top-level HTML container
  * @param {number}   [increments]
@@ -39,7 +37,6 @@ var React = require("react"),
 module.exports = class extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
-        id: PropTypes.string,
         className: PropTypes.string,
         increments: PropTypes.number,
         format: PropTypes.string,
@@ -183,8 +180,8 @@ module.exports = class extends React.Component {
     componentWillMount() {
         moment.locale(Translator.currentLanguage);
 
-        if (this.props.id && !Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("id", "data-id"));
+        if (!Utils.isProduction() && this.props.id) {
+            throw(Utils.deprecatePropError("id", "data-id"));
         }
     }
 
@@ -193,8 +190,6 @@ module.exports = class extends React.Component {
     };
 
     render() {
-        var id = this.props.id || this.props["data-id"];
-
         var times = this._getTimes();
         var containerClassName = classnames("input-time", this.props.className);
         var value = this.props.value;
@@ -216,7 +211,7 @@ module.exports = class extends React.Component {
         var noTime = { label: "--" };
 
         return (
-            <FormDropDownList data-id={id}
+            <FormDropDownList data-id={this.props["data-id"]}
                     label={this.props.labelText}
                     className={containerClassName}
                     options={times}

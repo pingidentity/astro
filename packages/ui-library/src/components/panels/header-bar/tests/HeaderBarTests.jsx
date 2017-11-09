@@ -126,15 +126,4 @@ describe("HeaderBar", function () {
         expect(siteTitle).toBeFalsy();
     });
 
-    //TODO: remove when label no longer supported
-    it("logs warning for deprecated label prop", function () {
-        console.warn = jest.genMockFunction();
-
-        var wrapper = getWrappedComponent({ label: "something" });
-        var component = wrapper.refs.target; // eslint-disable-line no-unused-vars
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use siteTitle instead of label. Support for label will be removed in next version"
-        );
-    });
 });

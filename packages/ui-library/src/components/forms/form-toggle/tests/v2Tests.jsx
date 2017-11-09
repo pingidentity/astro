@@ -5,6 +5,7 @@ describe("Toggle", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         _ = require("underscore"),
         TestUtils = require("../../../../testutil/TestUtils"),
+        Utils = require("../../../../util/Utils"),
         Toggle = require("../v2.jsx");
 
     function getComponent (props) {
@@ -101,62 +102,20 @@ describe("Toggle", function () {
         expect(component.props.onToggle).not.toBeCalled();
     });
 
-    //TODO: remove when controlled no longer supported
-    it("produces stateful/stateless components correctly given controlled prop", function () {
-        var component = ReactTestUtils.renderIntoDocument(<Toggle controlled={false} />);
-        var stateful = component.refs.ToggleStateful;
-        var stateless = component.refs.ToggleStateless;
+    it("throws error when deprecated prop 'id' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
 
-        expect(stateful).toBeTruthy();
-        expect(stateless).toBeFalsy();
-
-        component = ReactTestUtils.renderIntoDocument(<Toggle controlled={true} />);
-        stateful = component.refs.ToggleStateful;
-        stateless = component.refs.ToggleStateless;
-        
-        expect(stateless).toBeTruthy();
-        expect(stateful).toBeFalsy();
+        expect(function () {
+            getComponent({ id: "foo" });
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when controlled no longer supported
-    it("logs warning for deprecated controlled prop", function () {
-        console.warn = jest.genMockFunction();
+    it("throws error when deprecated prop 'controlled' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
 
-        getComponent();
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use stateless instead of controlled. " +
-            "The default for stateless will be true instead of false. " +
-            "Support for controlled will be removed in next version");
-    });
-
-    it("logs warning when id prop is given", function () {
-        console.warn = jest.genMockFunction();
-
-        getComponent({ id: "myToggle" });
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use data-id instead of id. Support for id will be removed in next version");
-    });
-
-    it("does not log warning when no id prop is given", function () {
-        console.warn = jest.genMockFunction();
-
-        getComponent();
-
-        // Check 2nd call b/c 1st is logging the "controlled" warning
-        expect(console.warn.mock.calls[1]).toBeUndefined();
-    });
-
-    it("does not log warning for id when in production", function () {
-        //Mock process.env.NODE_ENV
-        process.env.NODE_ENV = "production";
-
-        console.warn = jest.genMockFunction();
-        getComponent({ id: "myToggle" });
-
-        expect(console.warn).not.toBeCalled();
-        delete process.env.NODE_ENV;
+        expect(function () {
+            getComponent({ controlled: true });
+        }).toThrow(expectedError);
     });
 
 });

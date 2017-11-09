@@ -7,6 +7,7 @@ describe("Ellipsis loader button", function () {
     var React = require("react");
     var ReactTestUtils = require("react-dom/test-utils");
     var TestUtils = require("../../../testutil/TestUtils");
+    var Utils = require("../../../util/Utils");
     var EllipsisLoaderButton = require("../EllipsisLoaderButton.jsx");
     var callback;
     var buttonId = "test-loader";
@@ -58,57 +59,31 @@ describe("Ellipsis loader button", function () {
         expect(button.textContent).toEqual(buttonText);
     });
 
-    it("check if warning with id vs data-id", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <EllipsisLoaderButton
-                id={buttonId}
-                text={buttonText}
-                loading={false}
-                onClick={callback} />
-        );
-        expect(console.warn).toBeCalled();
+    it("throws error when deprecated prop 'id' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
+
+        expect(function () {
+            ReactTestUtils.renderIntoDocument(
+                <EllipsisLoaderButton
+                    id="foo"
+                    text="bar"
+                    loading={false}
+                    onClick={jest.genMockFunction()}
+                />
+            );
+        }).toThrow(expectedError);
     });
 
-    it("check if warning with id vs data-id", function () {
-        console.warn = jest.genMockFunction();
-        var component = ReactTestUtils.renderIntoDocument(
-            <EllipsisLoaderButton
-                text={buttonText}
-                loading={false}
-                onClick={callback} />
-        );
-        var button = TestUtils.findRenderedDOMNodeWithDataId(component, "ellipsis-loader-button");
-        expect(button.textContent).toEqual(buttonText);
-        expect(console.warn).not.toBeCalled();
-    });
+    // it("throws error when deprecated prop 'onButtonClick' is passed in", function () {
+    //     var expectedError = new Error(Utils.deprecatePropError("onButtonClick", "onClick"));
+    //
+    //     expect(function () {
+    //         <EllipsisLoaderButton
+    //             onButtonClick={jest.genMockFunction()}
+    //             loading={false}
+    //             text="bar"
+    //         />
+    //     }).toThrow(expectedError);
+    // });
 
-    it("check if warning with onButtonClick vs onClick", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <EllipsisLoaderButton
-                data-id={buttonId}
-                text={buttonText}
-                loading={false}
-                onButtonClick={callback} />
-        );
-        expect(console.warn).toBeCalled();
-    });
-
-    it("does not log warning for id, onChange or isRequired when in production", function () {
-        //Mock process.env.NODE_ENV
-        process.env.NODE_ENV = "production";
-
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <EllipsisLoaderButton
-                id={buttonId}
-                text={buttonText}
-                loading={false}
-                onButtonClick={callback} />
-        );
-
-        expect(console.warn).not.toBeCalled();
-        delete process.env.NODE_ENV;
-    });
 });

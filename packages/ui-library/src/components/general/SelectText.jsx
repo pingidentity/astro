@@ -16,8 +16,6 @@ var React = require("react"),
  *
  * @param {string} [data-id="select-text"]
  *     To define the base "data-id" value for top-level HTML container.
- * @param {string} [dataId]
- *     DEPRECATED. Use "data-id" instead. To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
  *
@@ -128,8 +126,8 @@ class SelectText extends React.Component {
     };
 
     componentWillMount() {
-        if (this.props.dataId && !Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("dataId", "data-id"));
+        if (!Utils.isProduction() && this.props.dataId) {
+            throw(Utils.deprecatePropError("dataId", "data-id"));
         }
     }
 

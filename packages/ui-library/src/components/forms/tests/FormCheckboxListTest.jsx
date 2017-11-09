@@ -17,16 +17,9 @@ describe("FormCheckboxList", function () {
     var React = require("react");
     var ReactTestUtils = require("react-dom/test-utils");
     var TestUtils = require("../../../testutil/TestUtils");
+    var Utils = require("../../../util/Utils");
     var FormCheckboxList = require("../FormCheckboxList.jsx");
     var Toggle = require("../form-toggle/v2.jsx");
-
-    var selectAllLabel = function () {
-        return "Select All";
-    };
-
-    var deselectAllLabel = function () {
-        return "Deselect All";
-    };
 
     function getComponent (props) {
         props = _.defaults(props || {}, {
@@ -61,13 +54,6 @@ describe("FormCheckboxList", function () {
         expect(checkboxList).toBeDefined();
     });
 
-    it("renders with given id", function () {
-        var component = getComponent({ id: "myFormCheckboxListId" }),
-            checkboxList = TestUtils.findRenderedDOMNodeWithDataId(component, "myFormCheckboxListId");
-
-        expect(checkboxList).toBeDefined();
-    });
-
     it("renders ungrouped data", function () {
         var component = getComponent();
 
@@ -92,35 +78,6 @@ describe("FormCheckboxList", function () {
         expect(checkboxes[1].checked).toBe(true);
     });
 
-    //TODO: remove when v1 no longer supported
-    it("triggers onSelectionChange callback on checkbox change", function () {
-        var callback = jest.genMockFunction();
-
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormCheckboxList
-                stateless={true}
-                labelSelectAll={selectAllLabel}
-                labelDeselectAll={deselectAllLabel}
-                labelHideUnselected="Hide Unselected"
-                labelSearchPlaceholder="Search"
-                onSelectionChange={callback}
-                onQueryChange={_.noop}
-                onVisibilityChange={_.noop}
-                items={[{ id: 1, name: "Salesforce" },
-                        { id: 2, name: "Google Mail" }
-                ]}
-                selected={[2]}
-            />
-        );
-
-        var checkboxContainer = TestUtils.findRenderedDOMNodeWithDataId(component, "dataobjects");
-        var checkboxes = TestUtils.scryRenderedDOMNodesWithTag(checkboxContainer, "input");
-
-        ReactTestUtils.Simulate.change(checkboxes[0]);
-
-        expect(callback).toBeCalledWith([2, 1]);
-    });
-
     it("triggers onValueChange callback on checkbox change", function () {
         var component = getComponent();
 
@@ -130,34 +87,6 @@ describe("FormCheckboxList", function () {
         ReactTestUtils.Simulate.change(checkboxes[0]);
 
         expect(component.props.onValueChange).toBeCalledWith([2, 1]);
-    });
-
-    //TODO: remove when v1 no longer supported
-    it("triggers onSelectionChange callback on select all", function () {
-        var callback = jest.genMockFunction();
-
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormCheckboxList
-                stateless={true}
-                labelSelectAll={selectAllLabel}
-                labelDeselectAll={deselectAllLabel}
-                labelHideUnselected="Hide Unselected"
-                labelSearchPlaceholder="Search"
-                onSelectionChange={callback}
-                onQueryChange={_.noop}
-                onVisibilityChange={_.noop}
-                items={[{ id: 1, name: "Salesforce" },
-                        { id: 2, name: "Google Mail" }
-                ]}
-                selected={[2]}
-            />
-        );
-
-        //click 'Select all' link
-        var checkAllToggle = TestUtils.findRenderedDOMNodeWithDataId(component, "check-all");
-        ReactTestUtils.Simulate.click(checkAllToggle);
-
-        expect(callback).toBeCalledWith([2, 1]);
     });
 
     it("triggers onValueChange callback on select all", function () {
@@ -236,63 +165,11 @@ describe("FormCheckboxList", function () {
         expect(component.props.onQueryChange.mock.calls[0][0]).toEqual("Marketing"); //hack around failing .toBeCalledWith(...)
     });
 
-    //TODO: remove when v1 no longer supported
-    it("is calling select label callbacks on render", function () {
-
-        var selectLabelCallback = jest.genMockFunction();
-        var unselectLabelCallback = jest.genMockFunction();
-
-        ReactTestUtils.renderIntoDocument(
-            <FormCheckboxList
-                stateless={true}
-                labelSelectAll={selectLabelCallback}
-                labelDeselectAll={unselectLabelCallback}
-                labelHideUnselected="Hide Unselected"
-                labelSearchPlaceholder="Search"
-                onSelectionChange={_.noop}
-                onQueryChange={_.noop}
-                onVisibilityChange={_.noop}
-                items={[{ id: 1, name: "Salesforce" },
-                        { id: 2, name: "Google Mail" }
-                ]}
-                selected={[2]} />
-        );
-
-        expect(selectLabelCallback).toBeCalledWith(2);
-        expect(unselectLabelCallback).not.toBeCalled();
-    });
-
     it("is calling select label callbacks on render", function () {
         var component = getComponent();
 
         expect(component.props.onGetSelectAllLabel).toBeCalledWith(2);
         expect(component.props.onGetDeselectAllLabel).not.toBeCalled();
-    });
-
-    //TODO: remove when v1 no longer supported
-    it("is calling unselect label callbacks on render", function () {
-
-        var selectLabelCallback = jest.genMockFunction();
-        var unselectLabelCallback = jest.genMockFunction();
-
-        ReactTestUtils.renderIntoDocument(
-            <FormCheckboxList
-                stateless={true}
-                labelSelectAll={selectLabelCallback}
-                labelDeselectAll={unselectLabelCallback}
-                labelHideUnselected="Hide Unselected"
-                labelSearchPlaceholder="Search"
-                onSelectionChange={_.noop}
-                onQueryChange={_.noop}
-                onVisibilityChange={_.noop}
-                items={[{ id: 1, name: "Salesforce" },
-                        { id: 2, name: "Google Mail" }
-                ]}
-                selected={[1,2]} />
-        );
-
-        expect(selectLabelCallback).not.toBeCalled();
-        expect(unselectLabelCallback).toBeCalledWith(2);
     });
 
     it("is calling unselect label callbacks on render", function () {
@@ -302,42 +179,6 @@ describe("FormCheckboxList", function () {
 
         expect(component.props.onGetSelectAllLabel).not.toBeCalled();
         expect(component.props.onGetDeselectAllLabel).toBeCalledWith(2);
-    });
-
-    //TODO: remove when v1 no longer supported
-    it("is filtering unselected options", function () {
-
-        var selectLabelCallback = jest.genMockFunction();
-        var unselectLabelCallback = jest.genMockFunction();
-
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormCheckboxList
-                stateless={true}
-                labelSelectAll={selectLabelCallback}
-                labelDeselectAll={unselectLabelCallback}
-                labelHideUnselected="Hide Unselected"
-                labelSearchPlaceholder="Search"
-                onSelectionChange={_.noop}
-                onQueryChange={_.noop}
-                onVisibilityChange={_.noop}
-                hideUnchecked={true}
-                items={[{ id: 1, name: "Salesforce" },
-                        { id: 2, name: "Google Mail" }
-                ]}
-                selected={[2]} />
-        );
-
-        var checkboxContainer = TestUtils.findRenderedDOMNodeWithDataId(component, "dataobjects");
-        var checkboxes = TestUtils.scryRenderedDOMNodesWithTag(checkboxContainer, "input");
-
-        expect(checkboxes.length).toBe(1);
-        expect(checkboxes[0].value).toBe("2");
-
-        // ensure checkboxes selection
-        expect(checkboxes[0].checked).toBe(true);
-
-        expect(unselectLabelCallback).toBeCalledWith(1);
-        expect(selectLabelCallback).not.toBeCalled();
     });
 
     it("is filtering unselected options", function () {
@@ -356,52 +197,6 @@ describe("FormCheckboxList", function () {
 
         expect(component.props.onGetDeselectAllLabel).toBeCalledWith(1);
         expect(component.props.onGetSelectAllLabel).not.toBeCalled();
-    });
-
-    //TODO: remove when v1 no longer supported
-    it("filtering options based on search query", function () {
-
-        var selectLabelCallback = jest.genMockFunction();
-        var unselectLabelCallback = jest.genMockFunction();
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormCheckboxList
-                stateless={true}
-                labelSelectAll={selectLabelCallback}
-                labelDeselectAll={unselectLabelCallback}
-                labelHideUnselected="Hide Unselected"
-                labelSearchPlaceholder="Search"
-                onSelectionChange={_.noop}
-                onQueryChange={_.noop}
-                queryString="Marketing"
-                onVisibilityChange={_.noop}
-                items={[{ id: 1, name: "Salesforce", group: "Marketing" },
-                        { id: 2, name: "Google Mail", group: "Personal" },
-                        { id: 3, name: "Concur", group: "Marketing" }
-                ]}
-                selected={[2]} />
-        );
-
-        var checkboxContainer = TestUtils.findRenderedDOMNodeWithDataId(component, "dataobjects");
-        var checkboxes = TestUtils.scryRenderedDOMNodesWithTag(checkboxContainer, "input");
-
-        var group1Label = TestUtils.scryRenderedDOMNodesWithDataId(component, "data-label-Personal");
-        var group2Label = TestUtils.scryRenderedDOMNodesWithDataId(component, "data-label-Marketing");
-
-        //ensure we have only one group label
-        expect(group1Label.length).toEqual(0);
-        expect(group2Label.length).toEqual(1);
-
-        expect(checkboxes.length).toBe(2);
-        expect(checkboxes[0].value).toBe("1");
-        expect(checkboxes[1].value).toBe("3");
-
-        // ensure checkboxes selection
-        expect(checkboxes[0].checked).toBe(false);
-        expect(checkboxes[1].checked).toBe(false);
-
-        expect(selectLabelCallback).toBeCalledWith(2);
-        expect(unselectLabelCallback).not.toBeCalled();
-
     });
 
     it("filtering options based on search query", function () {
@@ -434,51 +229,6 @@ describe("FormCheckboxList", function () {
         expect(component.props.onGetSelectAllLabel).toBeCalledWith(2);
         expect(component.props.onGetDeselectAllLabel).not.toBeCalled();
 
-    });
-
-    //TODO: remove when v1 no longer supported
-    it("filtering options based on search query and toggle", function () {
-
-        var selectLabelCallback = jest.genMockFunction();
-        var unselectLabelCallback = jest.genMockFunction();
-
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormCheckboxList
-                stateless={true}
-                labelSelectAll={selectLabelCallback}
-                labelDeselectAll={unselectLabelCallback}
-                labelHideUnselected="Hide Unselected"
-                labelSearchPlaceholder="Search"
-                onSelectionChange={_.noop}
-                onQueryChange={_.noop}
-                queryString="Marketing"
-                hideUnchecked={true}
-                onVisibilityChange={_.noop}
-                items={[{ id: 1, name: "Salesforce", group: "Marketing" },
-                        { id: 2, name: "Google Mail", group: "Personal" },
-                        { id: 3, name: "Concur", group: "Marketing" }
-                ]}
-                selected={[3]} />
-        );
-
-        var checkboxContainer = TestUtils.findRenderedDOMNodeWithDataId(component, "dataobjects");
-        var checkboxes = TestUtils.scryRenderedDOMNodesWithTag(checkboxContainer, "input");
-
-        var group1Label = TestUtils.scryRenderedDOMNodesWithDataId(component, "data-label-Personal");
-        var group2Label = TestUtils.scryRenderedDOMNodesWithDataId(component, "data-label-Marketing");
-
-        //ensure we have only one group label
-        expect(group1Label.length).toEqual(0);
-        expect(group2Label.length).toEqual(1);
-
-        expect(checkboxes.length).toBe(1);
-        expect(checkboxes[0].value).toBe("3");
-
-        // ensure checkboxes selection
-        expect(checkboxes[0].checked).toBe(true);
-
-        expect(unselectLabelCallback).toBeCalledWith(1);
-        expect(selectLabelCallback).not.toBeCalled();
     });
 
     it("filtering options based on search query and toggle", function () {
@@ -512,35 +262,6 @@ describe("FormCheckboxList", function () {
         expect(component.props.onGetSelectAllLabel).not.toBeCalled();
     });
 
-    //TODO: remove when v1 no longer supported
-    it("Stateful: triggers change", function () {
-
-        var callback = jest.genMockFunction();
-
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormCheckboxList
-                stateless={false}
-                labelSelectAll={selectAllLabel}
-                labelDeselectAll={deselectAllLabel}
-                labelHideUnselected="Hide Unselected"
-                labelSearchPlaceholder="Search"
-                onSelectionChange={callback}
-                items={[{ id: 1, name: "Salesforce", group: "Marketing" },
-                        { id: 2, name: "Google Mail", group: "Personal" },
-                        { id: 3, name: "Concur", group: "Marketing" }
-                ]}
-                selected={[2]}
-            />
-        );
-
-        var checkboxContainer = TestUtils.findRenderedDOMNodeWithDataId(component, "dataobjects");
-        var checkboxes = TestUtils.scryRenderedDOMNodesWithTag(checkboxContainer, "input");
-
-        ReactTestUtils.Simulate.change(checkboxes[0]);
-
-        expect(callback).toBeCalledWith([2, 1]);
-    });
-
     it("Stateful: triggers change", function () {
         var component = getComponent({
             stateless: false,
@@ -558,33 +279,6 @@ describe("FormCheckboxList", function () {
         expect(component.props.onValueChange).toBeCalledWith([2, 1]);
     });
 
-    //TODO: remove when v1 no longer supported
-    it("Stateful: triggers select all", function () {
-
-        var callback = jest.genMockFunction();
-
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormCheckboxList
-                stateless={false}
-                labelSelectAll={selectAllLabel}
-                labelDeselectAll={deselectAllLabel}
-                labelHideUnselected="Hide Unselected"
-                labelSearchPlaceholder="Search"
-                onSelectionChange={callback}
-                items={[{ id: 1, name: "Salesforce", group: "Marketing" },
-                        { id: 2, name: "Google Mail", group: "Personal" },
-                        { id: 3, name: "Concur", group: "Marketing" }
-                ]}
-                selected={[2]}
-            />
-        );
-
-        var checkAllToggle = TestUtils.findRenderedDOMNodeWithDataId(component, "check-all");
-        ReactTestUtils.Simulate.click(checkAllToggle);
-
-        expect(callback).toBeCalledWith([2, 1, 3]);
-    });
-
     it("Stateful: triggers select all", function () {
         var component = getComponent({
             stateless: false,
@@ -598,63 +292,6 @@ describe("FormCheckboxList", function () {
         ReactTestUtils.Simulate.click(checkAllToggle);
 
         expect(component.props.onValueChange).toBeCalledWith([2, 1, 3]);
-    });
-
-    //TODO: remove when v1 no longer supported
-    it("Stateful: supports ui mechanics", function () {
-
-        var callback = jest.genMockFunction();
-        var selectLabelCallback = jest.genMockFunction();
-        var unselectLabelCallback = jest.genMockFunction();
-
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormCheckboxList
-                stateless={false}
-                labelSelectAll={selectLabelCallback}
-                labelDeselectAll={unselectLabelCallback}
-                labelHideUnselected="Hide Unselected"
-                labelSearchPlaceholder="Search"
-                onSelectionChange={callback}
-                items={[{ id: 1, name: "Salesforce", group: "Marketing" },
-                        { id: 2, name: "Google Mail", group: "Personal" },
-                        { id: 3, name: "Concur", group: "Marketing" }
-                ]}
-                selected={[2, 1]}
-            />
-        );
-
-        expect(selectLabelCallback).toBeCalledWith(3);
-        expect(unselectLabelCallback).not.toBeCalled();
-
-        var checkboxContainer = TestUtils.findRenderedDOMNodeWithDataId(component, "dataobjects");
-        var searchInput = TestUtils.findRenderedDOMNodeWithDataId(component, "searchBox-input");
-        var hideUncheckedToggle = TestUtils.findRenderedDOMNodeWithDataId(component, "hide-unchecked");
-
-        ReactTestUtils.Simulate.click(hideUncheckedToggle);
-
-        expect(unselectLabelCallback).toBeCalledWith(2);
-        expect(selectLabelCallback).toBeCalledWith(3);
-
-        //ensure only checked checkboxes are here
-        var checkboxes = TestUtils.scryRenderedDOMNodesWithTag(checkboxContainer, "input");
-
-        expect(checkboxes.length).toEqual(2);
-        expect(checkboxes[0].value).toBe("1");
-        expect(checkboxes[0].checked).toBe(true);
-        expect(checkboxes[1].value).toBe("2");
-        expect(checkboxes[1].checked).toBe(true);
-
-        ReactTestUtils.Simulate.change(searchInput, {
-            target: {
-                value: "Personal"
-            }
-        });
-
-        checkboxes = TestUtils.scryRenderedDOMNodesWithTag(checkboxContainer, "input");
-
-        expect(checkboxes.length).toEqual(1);
-        expect(checkboxes[0].value).toBe("2");
-        expect(checkboxes[0].checked).toBe(true);
     });
 
     it("Stateful: supports ui mechanics", function () {
@@ -701,31 +338,6 @@ describe("FormCheckboxList", function () {
         expect(checkboxes[0].checked).toBe(true);
     });
 
-    //TODO: remove when controlled no longer supported
-    it("produces stateful/stateless components correctly given controlled prop", function () {
-        var component = ReactTestUtils.renderIntoDocument(
-            <FormCheckboxList controlled={false} items={[]}
-                    labelSearchPlaceholder="search" onQueryChange={_.noop}
-                    labelHideUnselected="hide" onVisibilityChange={_.noop}
-                    onGetDeselectAllLabel={_.noop} onGetSelectAllLabel={_.noop} />);
-        var stateful = component.refs.FormCheckboxListStateful;
-        var stateless = component.refs.FormCheckboxListStateless;
-
-        expect(stateful).toBeTruthy();
-        expect(stateless).toBeFalsy();
-
-        component = ReactTestUtils.renderIntoDocument(
-            <FormCheckboxList controlled={true} items={[]}
-                    labelSearchPlaceholder="search" onQueryChange={_.noop}
-                    labelHideUnselected="hide" onVisibilityChange={_.noop}
-                    onGetDeselectAllLabel={_.noop} onGetSelectAllLabel={_.noop} />);
-        stateful = component.refs.FormCheckboxListStateful;
-        stateless = component.refs.FormCheckboxListStateless;
-
-        expect(stateless).toBeTruthy();
-        expect(stateful).toBeFalsy();
-    });
-
     it("_handleSearchUndo fires onQueryChange callback", function () {
         var component = getComponent();
 
@@ -749,76 +361,44 @@ describe("FormCheckboxList", function () {
         expect(component.refs.FormCheckboxListStateful.state.queryString).toBe(queryString);
     });
 
-    //TODO: remove when controlled no longer supported
-    it("logs warning for deprecated controlled prop", function () {
-        console.warn = jest.genMockFunction();
+    it("throws error when deprecated prop 'controlled' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
 
-        getComponent();
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use stateless instead of controlled. " +
-            "The default for stateless will be true instead of false. " +
-            "Support for controlled will be removed in next version");
+        expect(function () {
+            getComponent({ controlled: true });
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when v1 no longer supported
-    it("logs warning when id prop given", function () {
-        console.warn = jest.genMockFunction();
+    it("throws error when deprecated prop 'id' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
 
-        getComponent({ id: "myFormCheckboxListId" });
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use data-id instead of id. Support for id will be removed in next version");
+        expect(function () {
+            getComponent({ id: "foo" });
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when v1 no longer supported
-    it("logs warning when onSelectionChange prop given", function () {
-        console.warn = jest.genMockFunction();
+    it("throws error when deprecated prop 'onSelectionChange' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("onSelectionChange", "onValueChange"));
 
-        getComponent({ onSelectionChange: jest.genMockFunction() });
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use onValueChange instead of onSelectionChange. " +
-            "Support for onSelectionChange will be removed in next version");
+        expect(function () {
+            getComponent({ onSelectionChange: jest.genMockFunction() });
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when v1 no longer supported
-    it("logs warning when labelSelectAll prop given", function () {
-        console.warn = jest.genMockFunction();
+    it("throws error when deprecated prop 'labelSelectAll' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("labelSelectAll", "onGetSelectAllLabel"));
 
-        getComponent({ labelSelectAll: jest.genMockFunction() });
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use onGetSelectAllLabel instead of labelSelectAll. " +
-            "Support for labelSelectAll will be removed in next version");
+        expect(function () {
+            getComponent({ labelSelectAll: "foo" });
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when v1 no longer supported
-    it("logs warning when labelDeselectAll prop given", function () {
-        console.warn = jest.genMockFunction();
+    it("throws error when deprecated prop 'labelDeselectAll' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("labelDeselectAll", "onGetDeselectAllLabel"));
 
-        getComponent({ labelDeselectAll: jest.genMockFunction() });
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use onGetDeselectAllLabel instead of labelDeselectAll. " +
-            "Support for labelDeselectAll will be removed in next version");
-    });
-
-    //TODO: remove when v1 no longer supported
-    it("does not log warning for id, onSelectionChange, labelSelectAll or labelDeselectAll in production", function () {
-        //Mock process.env.NODE_ENV
-        process.env.NODE_ENV = "production";
-
-        console.warn = jest.genMockFunction();
-        getComponent({
-            id: "myFormCheckboxListId",
-            onSelectionChange: jest.genMockFunction(),
-            labelSelectAll: jest.genMockFunction(),
-            labelDeselectAll: jest.genMockFunction()
-        });
-
-        expect(console.warn).not.toBeCalled();
-        delete process.env.NODE_ENV;
+        expect(function () {
+            getComponent({ labelDeselectAll: "foo" });
+        }).toThrow(expectedError);
     });
 
 });

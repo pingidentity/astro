@@ -39,8 +39,6 @@ var isValid = function (value, enforceRange, min, max) {
  * @param {boolean} [stateless]
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally.
- * @param {boolean} [controlled=true]
- *     DEPRECATED. Use "stateless" instead.
  *
  * @param {boolean} [required=false]
  *     Whether the field is required or not.
@@ -453,24 +451,21 @@ class Stateful extends React.Component {
 
 class FormIntegerFieldV2 extends React.Component {
     static propTypes = {
-        controlled: PropTypes.bool, //TODO: remove in new version
         stateless: PropTypes.bool
     };
 
     static defaultProps = {
-        controlled: true //TODO: change to stateless in new version
+        stateless: true
     };
 
     componentWillMount() {
-        if (!Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+        if (!Utils.isProduction() && this.props.controlled) {
+            throw(Utils.deprecatePropError("controlled", "stateless"));
         }
     }
 
     render() {
-        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
-
-        return (stateless
+        return (this.props.stateless
                 ? React.createElement(Stateless, _.defaults({ ref: "formIntegerFieldStateless" }, this.props))
                 : React.createElement(Stateful, _.defaults({ ref: "formIntegerFieldStateful" }, this.props)));
     }

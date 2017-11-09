@@ -25,26 +25,6 @@ var React = require("react"),
  */
 
 /**
- * @deprecated
- * @callback Messages~removeMessage
- * @param {string} [containerId]
- *     The container id
- * @param {number} messageIndex
- *     Message index to remove
- */
-
-/**
- * @deprecated
- * @callback Messages~i18n
- * @param {string} key
- *     I18n message key
- * @param {object} [params]
- *     Params for i18n message
- * @returns {string}
- *     Result of i18n given message key
- */
-
-/**
  * @typedef Messages~MessageItem
  * @property {string} text
  *     Message text
@@ -63,8 +43,6 @@ var React = require("react"),
  *
  * @param {string} [data-id="messages"]
  *     To define the base "data-id" value for top-level HTML container.
- * @param {string} [id]
- *     DEPRECATED. Use "data-id" instead. To define the base "data-id" value for top-level HTML container.
  * @param {Messages.ContainerTypes} [containerType]
  *     Enum which specifies the container type. Do not set for messages that should only fill the content area to the
  *     right of a left-nav. FULL takes the width of the entire window. MODAL is used for Messages within modals.
@@ -73,13 +51,8 @@ var React = require("react"),
  *     List of messages to render.
  * @param {Messages~onRemoveMessage} [onRemoveMessage]
  *     Callback to be triggered when a message is removed.
- * @param {Messages~removeMessage} [removeMessage]
- *     DEPRECATED. Use onRemoveMessage instead. Callback to be triggered when a message is removed.
  * @param {Messages~onI18n} [onI18n]
  *     Callback to be triggered for internationalization of message keys to message text.
- * @param {Messages~i18n} [i18n]
- *     DEPRECATED. Use onI18n instead. Callback to be triggered for internationalization of message keys
- *     to message text.
  * @param {number} [defaultMessageTimeout]
  *     Default message timeout in ms. Messages will remove themselves after this time, unless the message specifically
  *     overrides the default timeout itself.
@@ -95,7 +68,6 @@ var React = require("react"),
 module.exports = class extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
-        id: PropTypes.string,
         containerType: PropTypes.oneOf(["full"]),
         messages: PropTypes.array,
         onRemoveMessage: PropTypes.func,
@@ -114,31 +86,28 @@ module.exports = class extends React.Component {
     componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
-                console.warn(Utils.deprecateMessage("id", "data-id"));
+                throw(Utils.deprecatePropError("id", "data-id"));
             }
             if (this.props.removeMessage) {
-                console.warn(Utils.deprecateMessage("removeMessage", "onRemoveMessage"));
+                throw(Utils.deprecatePropError("removeMessage", "onRemoveMessage"));
             }
             if (this.props.i18n) {
-                console.warn(Utils.deprecateMessage("i18n", "onI18n"));
+                throw(Utils.deprecatePropError("i18n", "onI18n"));
             }
         }
     }
 
     render() {
         var className = classnames("page-messages", this.props.containerType );
-        var dataId = this.props.id || this.props["data-id"];
-        var onRemoveMsg = this.props.removeMessage || this.props.onRemoveMessage;
-        var onI18n = this.props.i18n || this.props.onI18n;
 
         return (
-            <div data-id={dataId} className={className}>
+            <div data-id={this.props["data-id"]} className={className}>
             {
                 this.props.messages && this.props.messages.map(function (item, i) {
                     return (
                         <Message key={i} index={i} message={item}
-                            onI18n={onI18n}
-                            onRemoveMessage={onRemoveMsg}
+                            onI18n={this.props.onI18n}
+                            onRemoveMessage={this.props.onRemoveMessage}
                             defaultTimeout={this.props.defaultMessageTimeout} />);
                 }.bind(this))
             }

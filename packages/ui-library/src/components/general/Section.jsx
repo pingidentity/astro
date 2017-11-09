@@ -20,8 +20,6 @@ var React = require("react"),
  *
  * @param {string} [data-id="section"]
  *     To define the base "data-id" value for top-level HTML container.
- * @param {string} [id]
- *     DEPRECATED. Use "data-id" instead. To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
  * @param {boolean} [disableExpand]
@@ -37,8 +35,6 @@ var React = require("react"),
  *     The text to display in the the collapsed view and along the top in the expanded view (adjacent to the arrow)
  * @param {string|object} [titleValue]
  *     The text to display just to the right of the title (separated by a colon)
- * @param {boolean} [controlled=true]
- *     DEPRECATED. Use "stateless" instead.
  *
  * @param {boolean} [expanded=false]
  *     Whether or not section is expanded and showing body content.
@@ -59,24 +55,26 @@ var React = require("react"),
 
 class Section extends React.Component {
     static propTypes = {
-        controlled: PropTypes.bool, //TODO: remove in new version
         stateless: PropTypes.bool
     };
 
     static defaultProps = {
-        controlled: true //TODO: change to stateless with false default in new version
+        stateless: true
     };
 
     componentWillMount() {
         if (!Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("controlled", "stateless", "true", "false"));
+            if (this.props.id) {
+                throw(Utils.deprecatePropError("id", "data-id"));
+            }
+            if (this.props.controlled) {
+                throw(Utils.deprecatePropError("controlled", "stateless", "true", "false"));
+            }
         }
     }
 
     render() {
-        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
-
-        return stateless
+        return this.props.stateless
             ? <SectionStateless {..._.defaults({ ref: "SectionStateless" }, this.props)}>
                 {this.props.children}
             </SectionStateless>
@@ -89,7 +87,6 @@ class Section extends React.Component {
 class SectionStateless extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
-        id: PropTypes.string,
         className: PropTypes.string,
         expanded: PropTypes.bool,
         onToggle: PropTypes.func,
@@ -122,21 +119,12 @@ class SectionStateless extends React.Component {
         this.props.onToggle(this.props.expanded);
     };
 
-    componentWillMount() {
-        if (!Utils.isProduction()) {
-            if (this.props.id) {
-                console.warn(Utils.deprecateMessage("id", "data-id"));
-            }
-        }
-    }
-
     render() {
         var styles = {
                 "collapsible-section": true,
                 open: this.props.expanded,
                 "disable-expand": this.props.disableExpand
             },
-            dataId = this.props.id || this.props["data-id"],
             title = this.props.title;
 
         styles[this.props.className] = !!this.props.className;
@@ -146,9 +134,9 @@ class SectionStateless extends React.Component {
         }
 
         return (
-            <div className={classnames(styles)} data-id={dataId}>
+            <div className={classnames(styles)} data-id={this.props["data-id"]}>
                 <CollapsibleLink
-                    data-id={dataId + "-title"}
+                    data-id={this.props["data-id"] + "-title"}
                     className="collapsible-section-title"
                     arrowPosition={CollapsibleLink.arrowPositions.LEFT}
                     title={title}
@@ -156,18 +144,18 @@ class SectionStateless extends React.Component {
                     onToggle={this._handleToggle}
                 />
                 {this.props.titleValue && (
-                    <span className="collapsible-section-title-value" data-id={dataId + "-title-value"}>
+                    <span className="collapsible-section-title-value" data-id={this.props["data-id"] + "-title-value"}>
                         {this.props.titleValue}
                     </span>
                 )}
                 {this.props.accessories && (
                     <div
-                        data-id={dataId + "-collapsible-section-accessories"}
+                        data-id={this.props["data-id"] + "-collapsible-section-accessories"}
                         className="collapsible-section-accessories">
                         {this.props.accessories}
                     </div>
                 )}
-                <div className="collapsible-section-content" data-id={dataId + "-content"}>
+                <div className="collapsible-section-content" data-id={this.props["data-id"] + "-content"}>
                     <div className="collapsible-section-content-inner">
                         {this.props.children}
                     </div>

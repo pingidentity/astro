@@ -5,7 +5,6 @@
 var React = require("react"),
     FormTextArea = require("./../../../components/forms/form-text-area"),
     FormTextField = require("./../../../components/forms/form-text-field"),
-    FormSelectField = require("./../../../components/forms/form-select-field"),
     FormCheckbox = require("./../../../components/forms/FormCheckbox.jsx"),
     FormDropDownList = require("./../../../components/forms/FormDropDownList.jsx");
 
@@ -67,37 +66,6 @@ class FormInputWidthsDemo extends React.Component {
                     <FormTextField labelText="X-Small" className="input-width-xsmall" />
                     <FormTextField labelText="X-Small and with a veryvery longlabelname"
                         className="input-width-xsmall" />
-                </div>
-
-                <br />
-
-                <div>
-                    <FormSelectField value="" options={selectOptions} label="Full" className="input-width-full" />
-                </div>
-                <div>
-                    <FormSelectField value="" options={selectOptions} label="X-Large" className="input-width-xlarge" />
-                    <FormSelectField value="" options={selectOptions} label="X-Small" className="input-width-xsmall" />
-                </div>
-                <div>
-                    <FormSelectField value="" options={selectOptions} label="Large" className="input-width-large" />
-                    <FormSelectField value="" options={selectOptions} label="Small" className="input-width-small" />
-                </div>
-                <div>
-                    <FormSelectField value="" options={selectOptions} label="Medium" className="input-width-medium" />
-                    <FormSelectField value="" options={selectOptions} label="Medium" className="input-width-medium" />
-                </div>
-                <div>
-                    <FormSelectField value="" options={selectOptions} label="Small" className="input-width-small" />
-                    <FormSelectField value="" options={selectOptions} label="Small" className="input-width-small" />
-                    <FormSelectField value="" options={selectOptions} label="Small" className="input-width-small" />
-                </div>
-                <div>
-                    <FormSelectField value="" options={selectOptions} label="X-Small" className="input-width-xsmall" />
-                    <FormSelectField value="" options={selectOptions} label="X-Small" className="input-width-xsmall" />
-                    <FormSelectField value="" options={selectOptions} label="X-Small" className="input-width-xsmall" />
-                    <FormSelectField value="" options={selectOptions} label="X-Small" className="input-width-xsmall" />
-                    <FormSelectField value="" options={selectOptions} label="X-Small" className="input-width-xsmall" />
-                    <FormSelectField value="" options={selectOptions} label="X-Small" className="input-width-xsmall" />
                 </div>
 
                 <div>

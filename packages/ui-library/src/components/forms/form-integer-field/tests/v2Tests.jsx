@@ -11,7 +11,13 @@ describe("FormIntegerField", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         FormIntegerField= require("../v2.jsx"),
         TestUtils = require("../../../../testutil/TestUtils"),
+        Utils = require("../../../../util/Utils"),
         callback;
+
+    function getComponent (opts) {
+        opts.onValueChange = jest.genMockFunction();
+        return ReactTestUtils.renderIntoDocument(<FormIntegerField {...opts} />);
+    }
 
     beforeEach(function () {
         callback = jest.genMockFunction();
@@ -462,32 +468,12 @@ describe("FormIntegerField", function () {
         expect(FormIntegerField.isValid(5, true, 10, 20)).toBe(false);
     });
 
-    //TODO: remove when controlled no longer supported
-    it("produces stateful/stateless components correctly given controlled prop", function () {
-        var component = ReactTestUtils.renderIntoDocument(<FormIntegerField controlled={false} />);
-        var stateful = component.refs.formIntegerFieldStateful;
-        var stateless = component.refs.formIntegerFieldStateless;
+    it("throws error when deprecated prop 'controlled' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
 
-        expect(stateful).toBeTruthy();
-        expect(stateless).toBeFalsy();
-
-        component = ReactTestUtils.renderIntoDocument(<FormIntegerField controlled={true} />);
-        stateful = component.refs.formIntegerFieldStateful;
-        stateless = component.refs.formIntegerFieldStateless;
-
-        expect(stateless).toBeTruthy();
-        expect(stateful).toBeFalsy();
-    });
-
-    //TODO: remove when controlled no longer supported
-    it("logs warning for deprecated controlled prop", function () {
-        console.warn = jest.genMockFunction();
-
-        ReactTestUtils.renderIntoDocument(<FormIntegerField />);
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use stateless instead of controlled. " +
-            "Support for controlled will be removed in next version");
+        expect(function () {
+            getComponent({ controlled: true });
+        }).toThrow(expectedError);
     });
 
 });

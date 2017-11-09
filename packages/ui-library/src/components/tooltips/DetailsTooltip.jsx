@@ -17,8 +17,6 @@ var React = require("react"),
  *
  * @param {string} [data-id="details-tooltip"]
  *     To define the base "data-id" value for top-level HTML container.
- * @param {string} [id]
- *     DEPRECATED. Use "data-id" instead.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
  * @param {boolean} [stateless]
@@ -26,25 +24,15 @@ var React = require("react"),
  *     To enable the component to be externally managed.
  *     True will relinquish control to the component's owner. False or not specified will cause the component to manage
  *     state internally.
- * @param {boolean} [controlled=true]
- *     DEPRECATED. Use "stateless" instead.
  * @param {string} [contentClassName]
  *     CSS classes to apply to content container
- * @param {string} [contentClassNames]
- *     DEPRECATED. Use "contentClassName" instead.
  * @param {string} [titleClassName]
  *     CSS classes to apply to title container.
- * @param {string} [titleClassNames]
- *     DEPRECATED. Use "titleClassName" instead.
  * @param {string} [labelClassName]
  *     CSS classes to set on the trigger label.
- * @param {string} [labelStyle]
- *     DEPRECATED. Use "labelClassName" instead.
  * @param {DetailsTooltip.positionStyles|string} [positionClassName]
  *     CSS classes to set on the top-level HTML container. Used to manage tooltip callout positioning with the
  *     DetailsTooltip.positionStyles enum and/or any extra css styling if needed.
- * @param {DetailsTooltip.positionStyles|string} [positionStyle]
- *     DEPRECATED. Use "positionClassName" instead.
  *
  * @param {object|string} [label]
  *     A string or JSX object that serves as the trigger label.
@@ -72,7 +60,7 @@ var React = require("react"),
  *     Show close control.
  *
  * @example
- *     <DetailsTooltip positionStyle="resend-tooltip bottom left" labelStyle="resend-btn"
+ *     <DetailsTooltip positionClassName="resend-tooltip bottom left" labelClassName="resend-btn"
  *          title={this.im("pingid.policies.deleterule.label")}
  *          label={this.im("pingid.policies.deleterule.title")}
  *          open={this.state.isInviteOpen} onToggle={this._handleToggle}
@@ -85,31 +73,65 @@ class DetailsTooltip extends React.Component {
     static displayName = "DetailsTooltip";
 
     static propTypes = {
-        controlled: PropTypes.bool, //TODO: Remove in new version
         stateless: PropTypes.bool
     };
 
     static defaultProps = {
-        controlled: true //TODO: change to stateless with false default in new version
+        stateless: true //TODO: change to stateless with false default in new version
     };
 
     close = () => {
-        if (!this.props.stateless || !this.props.controlled) { //TODO: remove "controlled" in new version
+        if (!this.props.stateless) {
             this.refs.manager.close();
         }
     };
 
     componentWillMount() {
+        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
+        /* istanbul ignore if  */
         if (!Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("controlled", "stateless", "true", "false"));
+            /* istanbul ignore if  */
+            if (this.props.id) {
+                /* istanbul ignore next  */
+                throw(Utils.deprecatePropError("id", "data-id"));
+            }
+            /* istanbul ignore if  */
+            if (this.props.controlled) {
+                /* istanbul ignore next  */
+                throw(Utils.deprecatePropError("controlled", "stateless", "true", "false"));
+            }
+            /* istanbul ignore if  */
+            if (this.props.contentClassNames) {
+                /* istanbul ignore next  */
+                throw(Utils.deprecatePropError("contentClassNames", "contentClassName"));
+            }
+            /* istanbul ignore if  */
+            if (this.props.titleClassNames) {
+                /* istanbul ignore next  */
+                throw(Utils.deprecatePropError("titleClassNames", "titleClassName"));
+            }
+            /* istanbul ignore if  */
+            if (this.props.labelStyle) {
+                /* istanbul ignore next  */
+                throw(Utils.deprecatePropError("labelStyle", "labelClassName"));
+            }
+            /* istanbul ignore if  */
+            if (this.props.positionStyle) {
+                /* istanbul ignore next  */
+                throw(Utils.deprecatePropError("positionStyle", "positionClassName"));
+            }
+            if (this.props.secondaryLabels && this.props.secondaryLabels.length > 2) {
+                console.warn(
+                    "DetailsTooltip expecting two or less secondary button labels.",
+                    this.props.secondaryLabels.length
+                );
+            }
         }
     }
 
     render() {
-        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
-
         return (
-            stateless
+            this.props.stateless
                 ? React.createElement(DetailsTooltipStateless, //eslint-disable-line
                     _.defaults({ ref: "tooltip" }, this.props), this.props.children)
                 : React.createElement(DetailsTooltipStateful, //eslint-disable-line
@@ -123,16 +145,11 @@ class DetailsTooltipStateless extends React.Component {
 
     static propTypes = {
         "data-id": PropTypes.string,
-        id: PropTypes.string,
         className: PropTypes.string,
         contentClassName: PropTypes.string,
-        contentClassNames: PropTypes.string,
         titleClassName: PropTypes.string,
-        titleClassNames: PropTypes.string,
         labelClassname: PropTypes.string,
-        labelStyle: PropTypes.string,
         positionClassname: PropTypes.string,
-        positionStyle: PropTypes.string,
         label: PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.object]),
@@ -263,8 +280,7 @@ class DetailsTooltipStateless extends React.Component {
 
         var hide = this.props.hideOnClick ? this._handleToggle : _.noop;
         var contentClassName =
-            classnames("details-content", (this.props.contentClassNames || this.props.contentClassName)) ;
-        var titleClassName = this.props.titleClassNames || this.props.titleClassName;
+            classnames("details-content", this.props.contentClassName) ;
 
         return this.props.open ? (
             <div className={contentClassName} data-id="details-content"
@@ -274,7 +290,7 @@ class DetailsTooltipStateless extends React.Component {
                         <span className="details-close" data-id="details-close" onClick={this._handleToggle}></span>
                     )}
                     {this.props.title && (
-                        <div className={titleClassName} data-id="details-title">{this.props.title}</div>
+                        <div className={this.props.titleClassName} data-id="details-title">{this.props.title}</div>
                     )}
                     <div className="details-body" data-id="details-body">
                         {this.props.children}
@@ -319,36 +335,10 @@ class DetailsTooltipStateless extends React.Component {
             window.removeEventListener("keydown", this._handleGlobalKeyDown);
         }
     }
-    
+
     componentDidMount() {
         if (this.props.open) {
             this._bindWindowsEvents();
-        }
-    }
-
-    componentWillMount() {
-        if (!Utils.isProduction()) {
-            if (this.props.id) {
-                console.warn(Utils.deprecateMessage("id", "data-id"));
-            }
-            if (this.props.contentClassNames) {
-                console.warn(Utils.deprecateMessage("contentClassNames", "contentClassName"));
-            }
-            if (this.props.titleClassNames) {
-                console.warn(Utils.deprecateMessage("titleClassNames", "titleClassName"));
-            }
-            if (this.props.labelStyle) {
-                console.warn(Utils.deprecateMessage("labelStyle", "labelClassName"));
-            }
-            if (this.props.positionStyle) {
-                console.warn(Utils.deprecateMessage("positionStyle", "positionClassName"));
-            }
-            if (this.props.secondaryLabels && this.props.secondaryLabels.length > 2) {
-                console.warn(
-                    "DetailsTooltip expecting two or less secondary button labels.",
-                    this.props.secondaryLabels.length
-                );
-            }
         }
     }
 
@@ -358,7 +348,6 @@ class DetailsTooltipStateless extends React.Component {
     }
 
     render() {
-
         var containerCss = {
                 show: this.props.open
             },
@@ -366,27 +355,19 @@ class DetailsTooltipStateless extends React.Component {
                 disabled: this.props.disabled
             };
 
-        var positionClassName = this.props.positionStyle || this.props.positionClassName;
-        containerCss[positionClassName] = true;
-
-        var labelClassName = this.props.labelStyle || this.props.labelClassName;
-        if (labelClassName) {
-            targetCss[labelClassName] = true;
-        }
-
-        if (this.props.className) {
-            containerCss[this.props.className] = true;
-        }
-
-        var containerClassName = classnames("details-tooltip", containerCss);
-        var dataId = this.props.id || this.props["data-id"];
+        var containerClassName = classnames(
+            "details-tooltip",
+            containerCss,
+            this.props.className,
+            this.props.positionClassName
+        );
 
         return (
-            <span className={containerClassName} data-id={dataId} ref="container">
+            <span className={containerClassName} data-id={this.props["data-id"]} ref="container">
                 {this.props.label && (
                     <a
                         data-id="action-btn"
-                        className={classnames("details-target", targetCss)}
+                        className={classnames("details-target", targetCss, this.props.labelClassName)}
                         onClick={!this.props.disabled ? this._handleToggle : null}>
                         {this.props.label}
                     </a>

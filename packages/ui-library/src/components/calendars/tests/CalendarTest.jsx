@@ -6,7 +6,7 @@ jest.dontMock("../DaysView.jsx");
 jest.dontMock("../MonthsView.jsx");
 jest.dontMock("../ViewHeader.jsx");
 jest.dontMock("../YearsView.jsx");
-jest.dontMock("../Utils");
+jest.dontMock("../../../util/Utils.js");
 jest.dontMock("../Constants");
 jest.dontMock("../../forms/FormLabel.jsx");
 jest.dontMock("../../tooltips/HelpHint.jsx");
@@ -20,6 +20,7 @@ describe("Calendar", function () {
         _ = require("underscore"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
+        Utils = require("../../../util/Utils.js"),
 
         callback = jest.genMockFunction(),
         selectedDateString = "2015-10-15",
@@ -28,6 +29,12 @@ describe("Calendar", function () {
             endDate: new Date(2015, 10, 20)  //Nov 20 2015
         },
         selectedDate = moment(new Date(selectedDateString));
+
+    function getComponent (props) {
+        return ReactTestUtils.renderIntoDocument(
+            <Calendar {...props} />
+        );
+    }
 
     beforeEach(function () {
         callback.mockClear();
@@ -46,17 +53,6 @@ describe("Calendar", function () {
     it("renders with given data-id", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Calendar data-id="myCalendar" date={selectedDate} />
-        );
-
-        var calendar = TestUtils.findRenderedDOMNodeWithDataId(component, "myCalendar");
-
-        expect(calendar).toBeDefined();
-    });
-
-    //TODO: remove when v1 no longer supported
-    it("renders with given id", function () {
-        var component = ReactTestUtils.renderIntoDocument(
-            <Calendar id="myCalendar" date={selectedDate} />
         );
 
         var calendar = TestUtils.findRenderedDOMNodeWithDataId(component, "myCalendar");
@@ -242,20 +238,6 @@ describe("Calendar", function () {
         expect(cells.length).toEqual(12);
     });
 
-    //TODO: remove when v1 no longer supported
-    it("renders as required when isRequired set", function () {
-        var component = ReactTestUtils.renderIntoDocument(
-            <Calendar format="YYYY-MM-DD"
-                      date={selectedDate}
-                      computableFormat="x"
-                      closeOnSelect={true}
-                      onChange={callback}
-                      isRequired={true}/>
-        );
-
-        expect(ReactDOM.findDOMNode(component).className).toContain("required");
-    });
-
     it("renders as required when required set", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Calendar format="YYYY-MM-DD"
@@ -267,28 +249,6 @@ describe("Calendar", function () {
         );
 
         expect(ReactDOM.findDOMNode(component).className).toContain("required");
-    });
-
-    //TODO: remove when v1 no longer supported
-    it("is triggering onChange callback on date selection", function () {
-        var component = ReactTestUtils.renderIntoDocument(
-            <Calendar format="YYYY-MM-DD"
-                      date={selectedDate}
-                      computableFormat="x"
-                      closeOnSelect={true}
-                      onChange={callback}/>
-        );
-
-        var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
-
-        //open calendar
-        ReactTestUtils.Simulate.click(container, {});
-
-        var cells = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "day");
-
-        ReactTestUtils.Simulate.mouseDown(cells[7], {});
-
-        expect(callback).toBeCalled();
     });
 
     it("is triggering onValueChange callback on date selection", function () {
@@ -333,24 +293,6 @@ describe("Calendar", function () {
         expect(callback).not.toBeCalled();
     });
 
-    //TODO: remove when v1 no longer supported
-    it("onChange changes date via input field", function () {
-        var component = ReactTestUtils.renderIntoDocument(
-            <Calendar format="YYYY-MM-DD"
-                      date={selectedDate}
-                      computableFormat="x"
-                      closeOnSelect={true}
-                      onChange={callback}/>
-        );
-
-        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
-
-        ReactTestUtils.Simulate.change(input, { target: { value: "2016-10-15" } });
-
-        //input was updated
-        expect(input.value).toBe("2016-10-15");
-    });
-
     it("onValueChange changes date via input field", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Calendar format="YYYY-MM-DD"
@@ -390,28 +332,6 @@ describe("Calendar", function () {
         ReactTestUtils.Simulate.click(cells[0]);
 
         expect(callback).toBeCalled();
-    });
-
-    //TODO: remove when v1 no longer supported
-    it("is triggering onChange callback on arrow nagivation", function () {
-        var globalKeyListener = TestUtils.captureGlobalListener("keyDown", document);
-
-        var component = ReactTestUtils.renderIntoDocument(
-            <Calendar format="YYYY-MM-DD"
-                      date={selectedDate}
-                      computableFormat="x"
-                      closeOnSelect={true}
-                      onChange={callback}/>
-        );
-
-        var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
-
-        //open calendar
-        ReactTestUtils.Simulate.click(container, {});
-
-        globalKeyListener({ keyCode: 39, preventDefault: _.noop }); //arrow right
-
-        expect(callback).toBeCalledWith("1444953600000");
     });
 
     it("is triggering onValueChange callback on arrow nagivation", function () {
@@ -833,6 +753,7 @@ describe("Calendar", function () {
         expect(callback).not.toBeCalled();
     });
 
+
     it("prevView navigation does not trigger onValueChange callback when date out of range", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Calendar date={selectedDate} dateRange={dateRange} onValueChange={callback} />
@@ -851,54 +772,28 @@ describe("Calendar", function () {
         expect(callback).not.toBeCalled();
     });
 
-    //TODO: remove when v1 no longer supported
-    it("does not log warning for id, onChange or isRequired when in production", function () {
-        //Mock process.env.NODE_ENV
-        process.env.NODE_ENV = "production";
+    it("throws error when deprecated prop 'id' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
 
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <Calendar id="myCalendar" onChange={jest.genMockFunction()} isRequired={true} date={selectedDate} />
-        );
-
-        expect(console.warn).not.toBeCalled();
-        delete process.env.NODE_ENV;
+        expect(function () {
+            getComponent({ id: "foo" });
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when v1 no longer supported
-    it("logs warning for id prop", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <Calendar id="myCalendar" date={selectedDate} />
-        );
+    it("throws error when deprecated prop 'onChange' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("onChange", "onValueChange"));
 
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use data-id instead of id. " +
-            "Support for id will be removed in next version");
+        expect(function () {
+            getComponent({ onChange: jest.genMockFunction });
+        }).toThrow(expectedError);
     });
 
-    //TODO: remove when v1 no longer supported
-    it("logs warning for onChange prop", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <Calendar date={selectedDate} onChange={jest.genMockFunction()} />
-          );
+    it("throws error when deprecated prop 'isRequired' is passed in", function () {
+        var expectedError = new Error(Utils.deprecatePropError("isRequired", "required"));
 
-        expect(console.warn).toBeCalledWith(
-          "Deprecated: use onValueChange instead of onChange. " +
-          "Support for onChange will be removed in next version");
-    });
-
-    //TODO: remove when v1 no longer supported
-    it("logs warning for isRequired prop", function () {
-        console.warn = jest.genMockFunction();
-        ReactTestUtils.renderIntoDocument(
-            <Calendar date={selectedDate} isRequired={true} />
-          );
-
-        expect(console.warn).toBeCalledWith(
-            "Deprecated: use required instead of isRequired. " +
-            "Support for isRequired will be removed in next version");
+        expect(function () {
+            getComponent({ isRequired: true });
+        }).toThrow(expectedError);
     });
 
 });

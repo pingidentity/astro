@@ -6,7 +6,6 @@ var React = require("react"),
 var INHERIT_PROPS = [
     "onEdit",
     "onValueChange",
-    "onChange", // Deprecated - remove
     "onNext",
     "onDone",
     "onCancel",
@@ -50,8 +49,6 @@ var INHERIT_PROPS = [
  *
  * @param {string} [data-id="choose"]
  *              To define the base "data-id" value for the top-level HTML container.
- * @param {string} [id]
- *              Deprecated. Use data-id instead.
  * @param {string} [className]
  *              CSS classes to set on the top-level HTML container
  * @param {string} title
@@ -84,8 +81,6 @@ var INHERIT_PROPS = [
  *              Callback to be triggered when a choice is made (ie a radio button of a Choose component is clicked).
  *              If provided, will be injected its children's props, otherwise the actions of each step must be
  *              handled and the store updated.
- * @param {Wizard#Choose~onChange} [onChange]
- *              DEPRECATED. Use onValueChange instead.
  * @param {Wizard#Choose~onNext} [onNext]
  *              Callback to be triggered when the next button of any child is clicked.  If provided, will be injected
  *              its children's props, otherwise the actions of each step must be handled and the store updated
@@ -155,11 +150,7 @@ class Choose extends React.Component {
     };
 
     _getChangeHandler = (choice, total) => {
-        if (this.props.onChange) { // DEPRECATED can remove
-            return this.props.onChange.bind (null, choice, total);
-        } else {
-            return this.props.onValueChange.bind (null, { choice: choice, numSteps: total });
-        }
+        return this.props.onValueChange.bind (null, { choice: choice, numSteps: total });
     };
 
     _generateRadioOptions = () => {
@@ -188,17 +179,15 @@ class Choose extends React.Component {
     componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
-                console.warn(Utils.deprecateMessage("id", "data-id"));
+                throw(Utils.deprecatePropError("id", "data-id"));
             }
             if (this.props.onChange) {
-                console.warn(Utils.deprecateMessage("onChange", "onValueChange"));
+                throw(Utils.deprecatePropError("onChange", "onValueChange"));
             }
         }
     }
 
     render() {
-        var id = this.props.id || this.props["data-id"];
-
         var props = _.pick(this.props, INHERIT_PROPS.concat(["number", "title"]));
         props.active = this.props.activeStep === this.props.number;
         props.completed = this.props.choices && (this.props.choices.length >= this.props.number);
@@ -207,7 +196,7 @@ class Choose extends React.Component {
         props.canProceed = this._getChoice() >= 0;
 
         return (
-            <div data-id={id} className={this.props.className}>
+            <div data-id={this.props["data-id"]} className={this.props.className}>
                 { <Step {...props}>
                     {this._generateRadioOptions()}
                 </Step> }

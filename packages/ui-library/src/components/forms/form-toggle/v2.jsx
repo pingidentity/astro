@@ -25,8 +25,6 @@ var Status = {
 * @param {string} [className]
 *     CSS classes to be set on the top-level HTML container.
 *
-* @param {boolean} [controlled=false]
-*     DEPRECATED. Use "stateless" instead.
 * @param {boolean} [disabled=false]
 *     If disabled then the toggle will be styled with a "disabled" class and will not be clickable.
 * @param {boolean} [stateless]
@@ -49,24 +47,26 @@ var Status = {
 
 class Toggle extends React.Component {
     static propTypes = {
-        controlled: PropTypes.bool, //TODO: remove in new version
         stateless: PropTypes.bool
     };
 
     static defaultProps = {
-        controlled: false //TODO: change to stateless with true default in new version
+        stateless: true
     };
 
     componentWillMount() {
         if (!Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("controlled", "stateless", "false", "true"));
+            if (this.props.controlled) {
+                throw(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
+            }
+            if (this.props.id) {
+                throw(Utils.deprecatePropError("id", "data-id"));
+            }
         }
     }
 
     render() {
-        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
-
-        return stateless
+        return this.props.stateless
             ? React.createElement(ToggleStateless, //eslint-disable-line no-use-before-define
                 _.defaults({ ref: "ToggleStateless" }, this.props))
             : React.createElement(ToggleStateful, //eslint-disable-line no-use-before-define
@@ -78,7 +78,6 @@ class Toggle extends React.Component {
 class ToggleStateless extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
-        id: PropTypes.string,
         className: PropTypes.string,
         toggled: PropTypes.bool,
         onToggle: PropTypes.func,
@@ -93,12 +92,6 @@ class ToggleStateless extends React.Component {
         disabled: false
     };
 
-    componentWillMount() {
-        if (this.props.id && !Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("id", "data-id"));
-        }
-    }
-
     _handleToggle = () => {
         if (this.props.disabled) {
             return;
@@ -107,15 +100,14 @@ class ToggleStateless extends React.Component {
     };
 
     render() {
-        var id = this.props.id || this.props["data-id"],
-            status = this.props.status ? Status[this.props.status.toUpperCase()] : null,
+        var status = this.props.status ? Status[this.props.status.toUpperCase()] : null,
             className = classnames("input-toggle", this.props.className, status, {
                 selected: this.props.toggled,
                 disabled: this.props.disabled
             });
 
         return (
-            <div data-id={id} className={className} onClick={this._handleToggle}>
+            <div data-id={this.props["data-id"]} className={className} onClick={this._handleToggle}>
                 <span className="toggle">
                     <input type="hidden" />
                 </span>

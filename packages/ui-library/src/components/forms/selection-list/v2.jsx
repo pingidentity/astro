@@ -42,8 +42,6 @@ var React = require("react"),
  * @param {boolean} [stateless]
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally.
- * @param {boolean} [controlled=false]
-*     DEPRECATED. Use "stateless" instead.
  * @param {SelectionList.ListType} [type=SelectionList.ListType.SINGLE]
  *     Enum to specify the type of selection list
  * @param {SelectionListItem[]} items
@@ -67,24 +65,21 @@ var React = require("react"),
  */
 class SelectionList extends React.Component {
     static propTypes = {
-        controlled: PropTypes.bool, //TODO: remove in new version
         stateless: PropTypes.bool
     };
 
     static defaultProps = {
-        controlled: false //TODO: change to stateless prop in new version
+        stateless: false
     };
 
     componentWillMount() {
-        if (!Utils.isProduction()) {
-            console.warn(Utils.deprecateMessage("controlled", "stateless"));
+        if (!Utils.isProduction() && this.props.controlled) {
+            throw(Utils.deprecatePropError("controlled", "stateless"));
         }
     }
 
     render() {
-        var stateless = this.props.stateless !== undefined ? this.props.stateless : this.props.controlled;
-
-        return stateless
+        return this.props.stateless
             ? <Stateless {..._.defaults({ ref: "SelectionListStateless" }, this.props)} />
             : <Stateful {..._.defaults({ ref: "SelectionListStateful" }, this.props)} />;
     }
