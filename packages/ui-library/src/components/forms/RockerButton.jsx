@@ -133,8 +133,13 @@ class RockerButtonStateless extends React.Component {
                 {
                     this.props.labels.map(function (text, index) {
                         return (
-                            <RockerButtonLabel data-id={text} onClick={this._handleClick}
-                                key={text} text={text} index={index} />);
+                            <RockerButtonLabel
+                                data-id={text}
+                                onClick={this._handleClick}
+                                key={index}
+                                text={text}
+                                index={index}
+                            />);
                     }.bind(this))
                 }
             </div>
@@ -147,12 +152,11 @@ var RockerButtonLabel = function (props) {
         props.onClick(props.text, props.index, event);
     };
 
-    return <label data-id={props["data-id"]} onClick={_handleClick} key={props.key}>{props.text}</label>;
+    return <label data-id={props["data-id"]} onClick={_handleClick}>{props.text}</label>;
 };
 
 RockerButtonLabel.propTypes = {
     "data-id": PropTypes.string,
-    key: PropTypes.string,
     onClick: PropTypes.func,
     text: PropTypes.string,
     index: PropTypes.number

@@ -153,7 +153,7 @@ exports.config = {
     },
 
     screenshotOpts: {
-        useScreenshotTool: false, // turn on or off screenshot validation
+        useScreenshotTool: true, // turn on or off screenshot validation
         // Screenshot directory should end with "/" character otherwise the code will not work as expected
         tempRoot: "./build/temp-screenshot/",
         diffRoot: "./build/diff-screenshot/",

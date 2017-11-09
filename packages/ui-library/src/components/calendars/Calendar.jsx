@@ -150,7 +150,7 @@ class Calendar extends React.Component {
 
         this.state = {
             date: date,
-            inputValue: date ? date.format(props.format) : null,
+            inputValue: date ? date.format(props.format) : "",
             currentView: props.minView,
             isVisible: false
         };
@@ -183,7 +183,7 @@ class Calendar extends React.Component {
     componentWillReceiveProps(nextProps) {
         this.setState({
             date: nextProps.date ? moment(nextProps.date) : this.state.date,
-            inputValue: nextProps.date ? moment(nextProps.date).format(this.props.format) : null
+            inputValue: nextProps.date ? moment(nextProps.date).format(this.props.format) : ""
         });
     }
 

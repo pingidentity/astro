@@ -46,7 +46,8 @@ class EllipsisLoaderButton extends React.Component {
 
     static defaultProps = {
         disabled: false,
-        "data-id": "ellipsis-loader-button"
+        "data-id": "ellipsis-loader-button",
+        loading: false
     };
 
     componentWillMount() {

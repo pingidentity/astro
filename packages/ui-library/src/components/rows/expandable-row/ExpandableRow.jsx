@@ -331,7 +331,7 @@ class StatelessExpandableRow extends React.Component {
         onDeleteConfirmClick: PropTypes.func,
         status: PropTypes.oneOf([Statuses.GOOD, Statuses.ERROR, Statuses.WARNING]),
         rowAccessories: PropTypes.object,
-        rowMessage: PropTypes.oneOf([RowMessageTypes.WARNING]),
+        rowMessage: PropTypes.object,
         waiting: PropTypes.bool
     };
 

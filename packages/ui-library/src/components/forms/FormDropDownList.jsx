@@ -211,8 +211,6 @@ class OptionItem extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
-        key: PropTypes.string,
-        ref: PropTypes.string,
         onClick: PropTypes.func,
         content: PropTypes.node,
         option: PropTypes.object
@@ -243,8 +241,6 @@ class OptionItem extends React.Component {
     render() {
         return (
             <li
-                key={this.props.key} // add prop allows re-ordering, so must have unique key
-                ref={this.props.ref}
                 data-id={this.props["data-id"]}
                 className={this.props.className}
                 onClick={this._handleClick}>
@@ -720,7 +716,7 @@ class FormDropDownListStateless extends React.Component {
             }),
             selectClassName = classnames("selected-option", this.props.selectClassName),
             selectedOptionLabelClassName = classnames("selected-option-label", this.props.selectedOptionLabelClassName),
-            selectedOptionLabel = this.props.showSelectedOptionLabel ? this.props.selectedOption.label : null,
+            selectedOptionLabel = this.props.showSelectedOptionLabel ? this.props.selectedOption.label : "",
             inputValue = this._isBoxSearch() && this.didPressKey ? this.props.searchString : selectedOptionLabel;
 
         return (
@@ -752,7 +748,7 @@ class FormDropDownListStateless extends React.Component {
                                 onValueChange={this._handleInputValueChange}
                                 readOnly={this.props.disabled || this._isKeyboardSearch()}
                             />
-                            <div className={!this.props.disabled && "arrow"} />
+                            {!this.props.disabled && <div className="arrow" /> }
                         </div>
                         <ul
                             data-id="select-list"

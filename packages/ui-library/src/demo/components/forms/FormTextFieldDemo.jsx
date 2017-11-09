@@ -18,7 +18,7 @@ class FormTextFieldDemo extends React.Component {
         showUndo: false,
         onUndoValue: null,
         originalValue: "this is the original value",
-        requiredValue: null,
+        requiredValue: "",
         statelessValue: "stateless default"
     };
 

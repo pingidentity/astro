@@ -479,13 +479,6 @@ module.exports = [
                 pathToDemoSource: "demo_components_general_TabbedSectionsDemo.jsx.html"
             },
             {
-                label: "Tutorial",
-                demo: require("../components/help/intro-tutorial/IntroTutorialDemo.jsx"),
-                pathToDoc: "components/help/intro-tutorial/IntroTutorial.jsx",
-                pathToSource: "components_help_intro-tutorial_IntroTutorial.jsx.html",
-                pathToDemoSource: "demo_components_help_intro-tutorial_IntroTutorialDemo.jsx.html"
-            },
-            {
                 label: "Pagination",
                 demo: require("../components/list/PaginationDemo.jsx"),
                 pathToDoc: "components/list/Pagination.jsx",

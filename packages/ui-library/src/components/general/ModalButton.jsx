@@ -143,10 +143,6 @@ class ModalButtonStateless extends React.Component {
         type: PropTypes.string
     };
 
-    static childContextTypes = {
-        close: PropTypes.func
-    };
-
     static defaultProps = {
         "data-id": "modal-button",
         expanded: false,

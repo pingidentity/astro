@@ -150,6 +150,7 @@ class DragDropTableDemo extends React.Component {
 
     render() {
         var infiniteScrollProps = {
+            onLoadPrev: _.noop,
             onLoadNext: this._onNext,
             hasNext: this.state.hasNext,
             batches: this.state.batches

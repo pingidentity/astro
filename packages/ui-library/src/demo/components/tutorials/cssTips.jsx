@@ -95,15 +95,11 @@ class cssTips extends React.Component {
         });
     };
 
-    _renderIcon = (icon) => {
-        return (<div><span className={"inline-icon icon-" + icon}></span> icon-{icon}</div>);
-    };
-
     _renderIconColumn = (col) => {
         var iconsPerCol = Math.ceil(ICONS.length / ICON_COLUMNS);
 
-        return ICONS.slice(iconsPerCol*(col-1), iconsPerCol*col).map(function (item) {
-            return this._renderIcon(item);
+        return ICONS.slice(iconsPerCol*(col-1), iconsPerCol*col).map(function (item, i) {
+            return <div key={i}><span className={"inline-icon icon-" + item}></span> icon-{item}</div>;
         }.bind(this));
     };
 
@@ -111,7 +107,7 @@ class cssTips extends React.Component {
         var content = [];
 
         for (var i=1; i<=ICON_COLUMNS; i+=1) {
-            content.push(<Layout.Column>{this._renderIconColumn(i)}</Layout.Column>);
+            content.push(<Layout.Column key={i}>{this._renderIconColumn(i)}</Layout.Column>);
         }
 
         return content;

@@ -94,11 +94,11 @@ describe("Calendar", function () {
         // expect(help.className).toContain(customHelpClass);
     });
 
-    it("renders will null date and inputValue state it date not specified", function () {
+    it("renders will null date and inputValue state if date not specified", function () {
         var component = ReactTestUtils.renderIntoDocument(<Calendar />);
 
         expect(component.state.date).toBeNull();
-        expect(component.state.inputValue).toBeNull();
+        expect(component.state.inputValue).toBe("");
     });
 
     it("is rendering closed view", function () {

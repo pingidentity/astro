@@ -268,7 +268,7 @@ class DragDropTable extends React.Component {
             onISScroll: infiniteScrollActive ? this._handleISHorizontalScroll : null
         }, this.props);
 
-        var onScroll = (fixedHeadActive && !infiniteScrollActive) && this._handleHorizontalScroll;
+        var onScroll = (fixedHeadActive && !infiniteScrollActive) ? this._handleHorizontalScroll : null;
 
         if (this.props.infiniteScroll) {
             this.props.infiniteScroll.ref = this._infiniteScrollRef;

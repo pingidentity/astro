@@ -489,7 +489,7 @@ class Stateless extends React.Component {
                     {this.props.showReveal && (
                         <a
                             data-id="reveal"
-                            onClick={!this.props.disabled ? this.props.onToggleReveal : false}
+                            onClick={!this.props.disabled ? this.props.onToggleReveal : null}
                             className={classnames("password-show-button", {
                                 "icon-view-hidden": !this.props.reveal,
                                 "icon-view": this.props.reveal

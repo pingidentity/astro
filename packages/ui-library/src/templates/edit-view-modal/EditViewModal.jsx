@@ -4,7 +4,7 @@ var React = require("react"),
     FormRadioGroup = require("../../components/forms/FormRadioGroup.jsx"),
     FormDropDownList = require("../../components/forms/FormDropDownList.jsx"),
     Layout = require("../../components/general/ColumnLayout.jsx"),
-    ModalButton = require("../../components/general/ModalButton.jsx"),
+    Modal = require("../../components/general/Modal.jsx"),
     ButtonBar = require("../../components/forms/ButtonBar.jsx");
 
 /**
@@ -53,6 +53,10 @@ module.exports = class extends React.Component {
         this.props.onInputChange(dataId, value);
     };
 
+    _handleSelectChange = (dataId, value) => {
+        this.props.onInputChange(dataId, value);
+    };
+
     _handleRadioInputChange = (name, value) => {
         this.props.onInputChange(name, value);
     };
@@ -62,10 +66,20 @@ module.exports = class extends React.Component {
     };
 
     componentDidMount() {
+        ["addressType", "alternateAddressType"].map(function (id) {
+            this["_handleSelectChange_" + id] = this._handleSelectChange.bind(null, id);
+        }.bind(this));
+
         this._handleRadioInputChangeUserGroup = this._handleRadioInputChange.bind(this, "userGroup");
     }
 
     _renderModalContent = () => {
+        var addressOptions = [
+            { value: "home", label: "Home" },
+            { value: "work", label: "Work" },
+            { value: "other", label: "Other" }
+        ];
+
         return (
             <div>
                 <h1 className="page-title">Edit Template in a Modal</h1>
@@ -80,13 +94,13 @@ module.exports = class extends React.Component {
                                 labelText="First Name"
                                 className="input-width-small"
                                 data-id="firstName"
-                                value={this.props.inputs.firstName}
+                                value={this.props.inputs.firstName || ""}
                                 onChange={this._handleInputChange} />
                             <FormTextField
                                 labelText="Last Name"
                                 className="input-width-medium"
                                 data-id="lastName"
-                                value={this.props.inputs.lastName}
+                                value={this.props.inputs.lastName || ""}
                                 onChange={this._handleInputChange} />
                         </div>
                         <div className="input-row">
@@ -94,7 +108,7 @@ module.exports = class extends React.Component {
                                 labelText="Username"
                                 className="input-width-medium"
                                 data-id="username"
-                                value={this.props.inputs.username}
+                                value={this.props.inputs.username || ""}
                                 onChange={this._handleInputChange} />
                         </div>
                     </div>
@@ -111,14 +125,14 @@ module.exports = class extends React.Component {
                                             labelText="Address"
                                             className="input-width-medium"
                                             data-id="address1"
-                                            value={this.props.inputs.address1}
+                                            value={this.props.inputs.address1 || ""}
                                             onChange={this._handleInputChange} />
                                     </div>
                                     <div className="input-row">
                                         <FormTextField
                                             className="input-width-medium"
                                             data-id="address2"
-                                            value={this.props.inputs.address2}
+                                            value={this.props.inputs.address2 || ""}
                                             onChange={this._handleInputChange} />
                                     </div>
                                     <div className="input-row">
@@ -126,13 +140,9 @@ module.exports = class extends React.Component {
                                             label="Address Location"
                                             className="input-width-medium"
                                             data-id="addressType"
-                                            selectedOption={this.props.inputs.addressType}
-                                            onValueChange={this._handleInputChange}
-                                            options={[
-                                                { value: "home", label: "Home" },
-                                                { value: "work", label: "Work" },
-                                                { value: "other", label: "Other" }
-                                            ]} />
+                                            selectedOption={this.props.inputs.addressType || addressOptions[0]}
+                                            onValueChange={this._handleSelectChange_addressType}
+                                            options={addressOptions} />
                                     </div>
                                 </Layout.Column>
                                 <Layout.Column>
@@ -141,14 +151,14 @@ module.exports = class extends React.Component {
                                             labelText="Alternate Address"
                                             className="input-width-medium"
                                             data-id="alternateAddress1"
-                                            value={this.props.inputs.alternateAddress1}
+                                            value={this.props.inputs.alternateAddress1 || ""}
                                             onChange={this._handleInputChange} />
                                     </div>
                                     <div className="input-row">
                                         <FormTextField
                                             className="input-width-medium"
                                             data-id="alternateAddress2"
-                                            value={this.props.inputs.alternateAddress2}
+                                            value={this.props.inputs.alternateAddress2 || ""}
                                             onChange={this._handleInputChange} />
                                     </div>
                                     <div className="input-row">
@@ -156,13 +166,9 @@ module.exports = class extends React.Component {
                                             label="Alternate Address Location"
                                             className="input-width-medium"
                                             data-id="alternateAddressType"
-                                            selectedOption={this.props.inputs.alternateAddressType}
-                                            onValueChange={this._handleInputChange}
-                                            options={[
-                                                { value: "home", label: "Home" },
-                                                { value: "work", label: "Work" },
-                                                { value: "other", label: "Other" }
-                                            ]} />
+                                            selectedOption={this.props.inputs.alternateAddressType || addressOptions[1]}
+                                            onValueChange={this._handleSelectChange_alternateAddressType}
+                                            options={addressOptions} />
                                     </div>
                                 </Layout.Column>
                                 <Layout.Column>
@@ -217,17 +223,20 @@ module.exports = class extends React.Component {
 
     render() {
         return (
-            <ModalButton
-                data-id="default-example"
-                expanded={this.props.modalExpanded}
-                activatorButtonLabel="Open Default Modal"
-                modalTitle="Default Modal"
-                className="edit-form"
-                onOpen={this._handleModalToggle}
-                onClose={this._handleModalToggle}>
+            <div>
+                <button data-id="default-example-button" onClick={this._handleModalToggle}>Open Modal</button>
+                <Modal
+                    data-id="default-example-modal"
+                    expanded={this.props.modalExpanded}
+                    activatorButtonLabel="Open Default Modal"
+                    modalTitle="Default Modal"
+                    className="edit-form"
+                    onOpen={this._handleModalToggle}
+                    onClose={this._handleModalToggle}>
 
-                {this._renderModalContent()}
-            </ModalButton>
+                    {this._renderModalContent()}
+                </Modal>
+            </div>
         );
     }
 };

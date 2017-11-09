@@ -124,8 +124,7 @@ var TabbedSectionChild = function (props) {
     return (
         <li className={props.className}
                 data-id={props["data-id"]}
-                onClick={_handleClick}
-                key={props.key}>
+                onClick={_handleClick}>
             {props.content}
         </li>
     );
@@ -133,9 +132,8 @@ var TabbedSectionChild = function (props) {
 
 TabbedSectionChild.propTypes = {
     "data-id": PropTypes.string,
-    key: PropTypes.string,
     className: PropTypes.string,
-    index: PropTypes.string,
+    index: PropTypes.number,
     onClick: PropTypes.func,
     content: PropTypes.node
 };

@@ -61,6 +61,10 @@ module.exports = class extends React.Component {
         this.props.onInputChange(dataId, value);
     };
 
+    _handleSelectChange = (dataId, value) => {
+        this.props.onInputChange(dataId, value);
+    };
+
     _handleRadioInputChange = (name, value) => {
         this.props.onInputChange(name, value);
     };
@@ -70,14 +74,23 @@ module.exports = class extends React.Component {
     };
 
     componentDidMount() {
-        this._toggleSection1 = this._toggleSection.bind(null, 1);
-        this._toggleSection2 = this._toggleSection.bind(null, 2);
-        this._toggleSection3 = this._toggleSection.bind(null, 3);
+        for (var i=1; i<=3; i+=1) {
+            this["_toggleSection" + i] = this._toggleSection.bind(null, i);
+        }
+        ["addressType", "alternateAddressType"].map(function (id) {
+            this["_handleSelectChange_" + id] = this._handleSelectChange.bind(null, id);
+        }.bind(this));
 
         this._handleRadioInputChangeUserGroup = this._handleRadioInputChange.bind(this, "userGroup");
     }
 
     render() {
+        var addressOptions = [
+            { value: "home", label: "Home" },
+            { value: "work", label: "Work" },
+            { value: "other", label: "Other" }
+        ];
+
         return (
             <div>
                 <a className="page-return-link">To record list</a>
@@ -102,13 +115,13 @@ module.exports = class extends React.Component {
                                 labelText="First Name"
                                 className="input-width-small"
                                 data-id="firstName"
-                                value={this.props.inputs.firstName}
+                                value={this.props.inputs.firstName || ""}
                                 onChange={this._handleInputChange} />
                             <FormTextField
                                 labelText="Last Name"
                                 className="input-width-medium"
                                 data-id="lastName"
-                                value={this.props.inputs.lastName}
+                                value={this.props.inputs.lastName || ""}
                                 onChange={this._handleInputChange} />
                         </div>
                         <div className="input-row">
@@ -116,7 +129,7 @@ module.exports = class extends React.Component {
                                 labelText="Username"
                                 className="input-width-medium"
                                 data-id="username"
-                                value={this.props.inputs.username}
+                                value={this.props.inputs.username || ""}
                                 onChange={this._handleInputChange} />
                         </div>
                     </Section>
@@ -134,14 +147,14 @@ module.exports = class extends React.Component {
                                         labelText="Address"
                                         className="input-width-medium"
                                         data-id="address1"
-                                        value={this.props.inputs.address1}
+                                        value={this.props.inputs.address1 || ""}
                                         onChange={this._handleInputChange} />
                                 </div>
                                 <div className="input-row">
                                     <FormTextField
                                         className="input-width-medium"
                                         data-id="address2"
-                                        value={this.props.inputs.address2}
+                                        value={this.props.inputs.address2 || ""}
                                         onChange={this._handleInputChange} />
                                 </div>
                                 <div className="input-row">
@@ -149,13 +162,9 @@ module.exports = class extends React.Component {
                                         label="Address Location"
                                         className="input-width-medium"
                                         data-id="addressType"
-                                        selectedOption={this.props.inputs.addressType}
-                                        onValueChange={this._handleInputChange}
-                                        options={[
-                                            { value: "home", label: "Home" },
-                                            { value: "work", label: "Work" },
-                                            { value: "other", label: "Other" }
-                                        ]} />
+                                        selectedOption={this.props.inputs.addressType || addressOptions[0]}
+                                        onValueChange={this._handleSelectChange_addressType}
+                                        options={addressOptions} />
                                 </div>
                             </Layout.Column>
                             <Layout.Column>
@@ -164,14 +173,14 @@ module.exports = class extends React.Component {
                                         labelText="Alternate Address"
                                         className="input-width-medium"
                                         data-id="alternateAddress1"
-                                        value={this.props.inputs.alternateAddress1}
+                                        value={this.props.inputs.alternateAddress1 || ""}
                                         onChange={this._handleInputChange} />
                                 </div>
                                 <div className="input-row">
                                     <FormTextField
                                         className="input-width-medium"
                                         data-id="alternateAddress2"
-                                        value={this.props.inputs.alternateAddress2}
+                                        value={this.props.inputs.alternateAddress2 || ""}
                                         onChange={this._handleInputChange} />
                                 </div>
                                 <div className="input-row">
@@ -179,13 +188,9 @@ module.exports = class extends React.Component {
                                         label="Alternate Address Location"
                                         className="input-width-medium"
                                         data-id="alternateAddressType"
-                                        selectedOption={this.props.inputs.alternateAddressType}
-                                        onValueChange={this._handleInputChange}
-                                        options={[
-                                            { value: "home", label: "Home" },
-                                            { value: "work", label: "Work" },
-                                            { value: "other", label: "Other" }
-                                        ]} />
+                                        selectedOption={this.props.inputs.alternateAddressType || addressOptions[1]}
+                                        onValueChange={this._handleSelectChange_alternateAddressType}
+                                        options={addressOptions} />
                                 </div>
                             </Layout.Column>
                             <Layout.Column>
