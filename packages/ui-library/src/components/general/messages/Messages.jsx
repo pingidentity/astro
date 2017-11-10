@@ -86,13 +86,13 @@ module.exports = class extends React.Component {
     componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
-                throw(Utils.deprecatePropError("id", "data-id"));
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
             }
             if (this.props.removeMessage) {
-                throw(Utils.deprecatePropError("removeMessage", "onRemoveMessage"));
+                throw new Error(Utils.deprecatePropError("removeMessage", "onRemoveMessage"));
             }
             if (this.props.i18n) {
-                throw(Utils.deprecatePropError("i18n", "onI18n"));
+                throw new Error(Utils.deprecatePropError("i18n", "onI18n"));
             }
         }
     }

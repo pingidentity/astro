@@ -330,10 +330,10 @@ class LeftNavBar extends React.Component {
     componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.onItemClick) {
-                throw(Utils.deprecatePropError("onItemClick", "onItemValueChange"));
+                throw new Error(Utils.deprecatePropError("onItemClick", "onItemValueChange"));
             }
             if (this.props.onSectionClick) {
-                throw(Utils.deprecatePropError("onSectionClick", "onSectionValueChange"));
+                throw new Error(Utils.deprecatePropError("onSectionClick", "onSectionValueChange"));
             }
         }
     }

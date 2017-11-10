@@ -2,7 +2,7 @@ var Utils = require("../../../util/Utils");
 
 module.exports = function () {
     if (!Utils.isProduction()) {
-        throw(Utils.deprecatedError("ContextCloseButton", "v1", "v2"));
+        throw new Error(Utils.deprecatedError("ContextCloseButton", "v1", "v2"));
     }
     return null;
 };

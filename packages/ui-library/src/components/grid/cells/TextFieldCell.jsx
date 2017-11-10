@@ -43,7 +43,7 @@ class TextFieldCell extends React.Component {
         /* istanbul ignore if  */
         if (!Utils.isProduction() && this.props.onCallBack) {
             /* istanbul ignore next  */
-            throw(Utils.deprecatePropError("onCallBack", "onGridCellAction"));
+            throw new Error(Utils.deprecatePropError("onCallBack", "onGridCellAction"));
         }
     }
 

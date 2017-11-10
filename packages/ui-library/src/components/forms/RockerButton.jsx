@@ -67,14 +67,14 @@ module.exports = class extends React.Component {
 
     componentWillMount() {
         if (!Utils.isProduction()) {
-            if (this.props.controlled) {
-                throw(Utils.deprecatePropError("controlled", "stateless"));
+            if (this.props.controlled !== undefined) {
+                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
             }
             if (this.props.id) {
-                throw(Utils.deprecatePropError("id", "data-id"));
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
             }
             if (this.props.onChange) {
-                throw(Utils.deprecatePropError("onChange", "onValueChange"));
+                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
             }
             if (this.props.labels && (this.props.labels.length < 2 || this.props.labels.length > 4)) {
                 console.warn("RockerButton expecting two to four labels, but was given ", this.props.labels.length);

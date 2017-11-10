@@ -204,7 +204,7 @@ var Utils = {
         }
 
         var warning = [
-            "Deprecated: use ", useInstead, " instead of ", feature, ". ",
+            "Deprecated Prop: use ", useInstead, " instead of ", feature, ". ",
             defaultMsg,
             "Support for ", feature, " has been removed."
         ].join("");

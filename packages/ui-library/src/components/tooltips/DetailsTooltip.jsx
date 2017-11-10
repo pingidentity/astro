@@ -93,32 +93,32 @@ class DetailsTooltip extends React.Component {
             /* istanbul ignore if  */
             if (this.props.id) {
                 /* istanbul ignore next  */
-                throw(Utils.deprecatePropError("id", "data-id"));
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
             }
             /* istanbul ignore if  */
-            if (this.props.controlled) {
+            if (this.props.controlled !== undefined) {
                 /* istanbul ignore next  */
-                throw(Utils.deprecatePropError("controlled", "stateless", "true", "false"));
+                throw new Error(Utils.deprecatePropError("controlled", "stateless", "true", "false"));
             }
             /* istanbul ignore if  */
             if (this.props.contentClassNames) {
                 /* istanbul ignore next  */
-                throw(Utils.deprecatePropError("contentClassNames", "contentClassName"));
+                throw new Error(Utils.deprecatePropError("contentClassNames", "contentClassName"));
             }
             /* istanbul ignore if  */
             if (this.props.titleClassNames) {
                 /* istanbul ignore next  */
-                throw(Utils.deprecatePropError("titleClassNames", "titleClassName"));
+                throw new Error(Utils.deprecatePropError("titleClassNames", "titleClassName"));
             }
             /* istanbul ignore if  */
             if (this.props.labelStyle) {
                 /* istanbul ignore next  */
-                throw(Utils.deprecatePropError("labelStyle", "labelClassName"));
+                throw new Error(Utils.deprecatePropError("labelStyle", "labelClassName"));
             }
             /* istanbul ignore if  */
             if (this.props.positionStyle) {
                 /* istanbul ignore next  */
-                throw(Utils.deprecatePropError("positionStyle", "positionClassName"));
+                throw new Error(Utils.deprecatePropError("positionStyle", "positionClassName"));
             }
             if (this.props.secondaryLabels && this.props.secondaryLabels.length > 2) {
                 console.warn(

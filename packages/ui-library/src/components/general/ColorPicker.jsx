@@ -99,19 +99,19 @@ module.exports = class extends React.Component {
         /* istanbul ignore if  */
         if (!Utils.isProduction()) {
             /* istanbul ignore if  */
-            if (this.props.controlled) {
+            if (this.props.controlled !== undefined) {
                 /* istanbul ignore next  */
-                throw(Utils.deprecatePropError("controlled", "stateless"));
+                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
             }
             /* istanbul ignore if  */
             if (this.props.id) {
                 /* istanbul ignore next  */
-                throw(Utils.deprecatePropError("id", "data-id"));
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
             }
             /* istanbul ignore if  */
             if (this.props.onChange) {
                 /* istanbul ignore next  */
-                throw(Utils.deprecatePropError("onChange", "onValueChange"));
+                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
             }
         }
     }

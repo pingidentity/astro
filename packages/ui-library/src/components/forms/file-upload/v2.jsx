@@ -133,11 +133,11 @@ class FileUpload extends React.Component {
 
     componentWillMount() {
         if (!Utils.isProduction()) {
-            if (this.props.controlled) {
-                throw(Utils.deprecatePropError("controlled", "stateless"));
+            if (this.props.controlled !== undefined) {
+                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
             }
             if (this.props.title) {
-                throw(Utils.deprecatePropError("title", "labelText"));
+                throw new Error(Utils.deprecatePropError("title", "labelText"));
             }
         }
     }

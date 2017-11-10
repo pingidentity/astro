@@ -206,11 +206,11 @@ class ExpandableRow extends React.Component {
 
     componentWillMount() {
         if (!Utils.isProduction()) {
-            if (this.props.controlled) {
-                throw(Utils.deprecatePropError("controlled", "stateless"));
+            if (this.props.controlled !== undefined) {
+                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
             }
-            if (this.props.defaultToExpanded) {
-                throw(Utils.deprecatePropError("defaultToExpanded", "expanded"));
+            if (this.props.defaultToExpanded !== undefined) {
+                throw new Error(Utils.deprecatePropError("defaultToExpanded", "expanded"));
             }
         }
     }

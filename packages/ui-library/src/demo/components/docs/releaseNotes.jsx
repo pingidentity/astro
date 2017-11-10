@@ -1,18 +1,18 @@
 import React from "react";
 import Tutorial from "../tutorials/Tutorial.jsx";
 import notes from "./notes.js";
-import Markdown from "markdown-to-jsx";
+//import Markdown from "markdown-to-jsx";
+import marked from "marked";
 
 
 class releaseNotes extends React.Component {
     _getNotes = () => {
         return notes.map((note, i) => {
+            const markdown = marked(note.file);
             //we are returning an array of JSX components. No wrapping div yay!
             return ([
                 <h2 key={note.title + i + "h2"}>{note.title}</h2>,
-                <Markdown key={note.title + i}>
-                    {note.file}
-                </Markdown>
+                <div key={note.title + i} dangerouslySetInnerHTML={{ __html: markdown }} />
             ]);
         });
     }

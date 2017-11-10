@@ -104,7 +104,7 @@ module.exports = class extends React.Component {
         /* istanbul ignore if  */
         if (!Utils.isProduction() && this.props.label) {
             /* istanbul ignore next  */
-            throw(Utils.deprecatePropError("label", "siteTitle"));
+            throw new Error(Utils.deprecatePropError("label", "siteTitle"));
         }
     }
 

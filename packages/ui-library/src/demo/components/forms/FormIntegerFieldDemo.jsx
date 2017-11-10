@@ -1,5 +1,5 @@
 var React = require("react");
-var FormIntegerField = require("./../../../components/forms/form-integer-field/index.js").v2;
+var FormIntegerField = require("./../../../components/forms/form-integer-field/");
 
 /**
 * @name FormIntegerFieldDemo

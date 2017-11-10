@@ -161,13 +161,13 @@ class Calendar extends React.Component {
 
         if (!Utils.isProduction()) {
             if (this.props.id) {
-                throw(Utils.deprecatePropError("id", "data-id"));
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
             }
             if (this.props.onChange) {
-                throw(Utils.deprecatePropError("onChange", "onValueChange"));
+                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
             }
-            if (this.props.isRequired) {
-                throw(Utils.deprecatePropError("isRequired", "required"));
+            if (this.props.isRequired !== undefined) {
+                throw new Error(Utils.deprecatePropError("isRequired", "required"));
             }
         }
     }

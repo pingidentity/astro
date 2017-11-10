@@ -116,8 +116,8 @@ module.exports = class extends React.Component {
     };
 
     componentWillMount() {
-        if (!Utils.isProduction() && this.props.controlled) {
-            throw(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
+        if (!Utils.isProduction() && this.props.controlled !== undefined) {
+            throw new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
         }
     }
 

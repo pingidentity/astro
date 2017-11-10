@@ -155,11 +155,11 @@ class I18nPhoneInputStateless extends React.Component {
 
     componentWillMount() {
         if (!Utils.isProduction()) {
-            if (this.props.controlled) {
-                throw(Utils.deprecatePropError("controlled", "stateless"));
+            if (this.props.controlled !== undefined) {
+                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
             }
             if (this.props.onCountrySearch) {
-                throw(Utils.deprecatePropError("onCountrySearch", "onSearch"));
+                throw new Error(Utils.deprecatePropError("onCountrySearch", "onSearch"));
             }
         }
     }

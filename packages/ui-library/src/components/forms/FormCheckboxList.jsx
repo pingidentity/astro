@@ -207,20 +207,20 @@ class Stateless extends React.Component {
 
     componentWillMount() {
         if (!Utils.isProduction()) {
-            if (this.props.controlled) {
-                throw(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
+            if (this.props.controlled !== undefined) {
+                throw new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
             }
             if (this.props.id) {
-                throw(Utils.deprecatePropError("id", "data-id"));
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
             }
             if (this.props.onSelectionChange) {
-                throw(Utils.deprecatePropError("onSelectionChange", "onValueChange"));
+                throw new Error(Utils.deprecatePropError("onSelectionChange", "onValueChange"));
             }
             if (this.props.labelSelectAll) {
-                throw(Utils.deprecatePropError("labelSelectAll", "onGetSelectAllLabel"));
+                throw new Error(Utils.deprecatePropError("labelSelectAll", "onGetSelectAllLabel"));
             }
             if (this.props.labelDeselectAll) {
-                throw(Utils.deprecatePropError("labelDeselectAll", "onGetDeselectAllLabel"));
+                throw new Error(Utils.deprecatePropError("labelDeselectAll", "onGetDeselectAllLabel"));
             }
         }
     }

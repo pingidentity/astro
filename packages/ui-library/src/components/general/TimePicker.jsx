@@ -181,7 +181,7 @@ module.exports = class extends React.Component {
         moment.locale(Translator.currentLanguage);
 
         if (!Utils.isProduction() && this.props.id) {
-            throw(Utils.deprecatePropError("id", "data-id"));
+            throw new Error(Utils.deprecatePropError("id", "data-id"));
         }
     }
 

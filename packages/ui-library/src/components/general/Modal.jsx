@@ -167,7 +167,7 @@ class Modal extends React.Component {
         /* istanbul ignore if  */
         if (!Utils.isProduction() && this.props.id) {
             /* istanbul ignore next  */
-            throw(Utils.deprecatePropError("id", "data-id"));
+            throw new Error(Utils.deprecatePropError("id", "data-id"));
         }
     }
 

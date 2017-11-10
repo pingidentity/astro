@@ -53,13 +53,13 @@ class EllipsisLoaderButton extends React.Component {
     componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
-                throw(Utils.deprecatePropError("id", "data-id"));
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
             }
             // TODO: figure out why Jest test is not working, reenable test
             /* istanbul ignore if  */
             if (this.props.onButtonClick) {
                 /* istanbul ignore next  */
-                throw(Utils.deprecatePropError("onButtonClick", "onClick"));
+                throw new Error(Utils.deprecatePropError("onButtonClick", "onClick"));
             }
         }
     }

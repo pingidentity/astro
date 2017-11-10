@@ -127,7 +127,7 @@ class SelectText extends React.Component {
 
     componentWillMount() {
         if (!Utils.isProduction() && this.props.dataId) {
-            throw(Utils.deprecatePropError("dataId", "data-id"));
+            throw new Error(Utils.deprecatePropError("dataId", "data-id"));
         }
     }
 

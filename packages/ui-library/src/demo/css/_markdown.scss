@@ -105,5 +105,14 @@
     	padding: .1em;
     	border-radius: .3em;
     }
+    details {
+        summary {
+            cursor: pointer;
+            font-size: 16px;
+        }
+        code {
+            background-color: transparent;
+        }
+    }
 
 }

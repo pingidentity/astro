@@ -179,10 +179,10 @@ class Choose extends React.Component {
     componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
-                throw(Utils.deprecatePropError("id", "data-id"));
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
             }
             if (this.props.onChange) {
-                throw(Utils.deprecatePropError("onChange", "onValueChange"));
+                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
             }
         }
     }

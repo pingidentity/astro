@@ -238,13 +238,13 @@ class Step extends React.Component {
     componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
-                throw(Utils.deprecatePropError("id", "data-id"));
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
             }
             if (this.props.doneButtonStyle) {
-                throw(Utils.deprecatePropError("doneButtonStyle", "doneButtonClassName"));
+                throw new Error(Utils.deprecatePropError("doneButtonStyle", "doneButtonClassName"));
             }
             if (this.props.nextButtonStyle) {
-                throw(Utils.deprecatePropError("nextButtonStyle", "nextButtonClassName"));
+                throw new Error(Utils.deprecatePropError("nextButtonStyle", "nextButtonClassName"));
             }
         }
     }

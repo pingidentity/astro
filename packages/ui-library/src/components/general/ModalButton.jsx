@@ -159,29 +159,29 @@ class ModalButtonStateless extends React.Component {
 
     componentWillMount() {
         if (!Utils.isProduction()) {
-            if (this.props.controlled) {
-                throw(Utils.deprecatePropError("controlled", "stateless"));
+            if (this.props.controlled !== undefined) {
+                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
             }
             if (this.props.id) {
-                throw(Utils.deprecatePropError("id", "data-id"));
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
             }
             if (this.props.containerStyle) {
-                throw(Utils.deprecatePropError("containerStyle", "className"));
+                throw new Error(Utils.deprecatePropError("containerStyle", "className"));
             }
             if (this.props.activatorContainerStyle) {
-                throw(Utils.deprecatePropError("activatorContainerStyle", "activatorContainerClassName"));
+                throw new Error(Utils.deprecatePropError("activatorContainerStyle", "activatorContainerClassName"));
             }
             if (this.props.linkContent) {
-                throw(Utils.deprecatePropError("linkContent", "activatorContent"));
+                throw new Error(Utils.deprecatePropError("linkContent", "activatorContent"));
             }
             if (this.props.linkStyle) {
-                throw(Utils.deprecatePropError("linkStyle", "activatorContentClassName"));
+                throw new Error(Utils.deprecatePropError("linkStyle", "activatorContentClassName"));
             }
             if (this.props.value) {
-                throw(Utils.deprecatePropError("value", "activatorButtonLabel"));
+                throw new Error(Utils.deprecatePropError("value", "activatorButtonLabel"));
             }
             if (this.props.buttonStyle) {
-                throw(Utils.deprecatePropError("buttonStyle", "activatorButtonClassName"));
+                throw new Error(Utils.deprecatePropError("buttonStyle", "activatorButtonClassName"));
             }
         }
     }

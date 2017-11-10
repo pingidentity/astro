@@ -81,10 +81,10 @@ class TabbedSections extends React.Component {
     componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
-                throw(Utils.deprecatePropError("id", "data-id"));
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
             }
             if (this.props.onSectionChange) {
-                throw(Utils.deprecatePropError("onSectionChange", "onValueChange"));
+                throw new Error(Utils.deprecatePropError("onSectionChange", "onValueChange"));
             }
         }
     }

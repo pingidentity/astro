@@ -842,9 +842,9 @@ class FormDropDownList extends React.Component {
     componentWillMount() {
         // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
         /* istanbul ignore if  */
-        if (!Utils.isProduction() && this.props.controlled) {
+        if (!Utils.isProduction() && this.props.controlled !== undefined) {
             /* istanbul ignore next  */
-            throw(Utils.deprecatePropError("controlled", "stateless"));
+            throw new Error(Utils.deprecatePropError("controlled", "stateless"));
         }
     }
 

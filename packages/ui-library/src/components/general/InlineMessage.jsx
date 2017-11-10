@@ -64,7 +64,7 @@ class InlineMessage extends React.Component {
 
     componentWillMount() {
         if (!Utils.isProduction() && this.props.callback) {
-            throw(Utils.deprecatePropError("callback", "onClick"));
+            throw new Error(Utils.deprecatePropError("callback", "onClick"));
         }
     }
 

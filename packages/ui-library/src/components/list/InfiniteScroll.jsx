@@ -386,17 +386,17 @@ class InfiniteScroll extends React.Component {
             /* istanbul ignore if  */
             if (this.props.loadPrev) {
                 /* istanbul ignore next  */
-                throw(Utils.deprecatePropError("loadPrev", "onLoadPrev"));
+                throw new Error(Utils.deprecatePropError("loadPrev", "onLoadPrev"));
             }
             /* istanbul ignore if  */
             if (this.props.loadNext) {
                 /* istanbul ignore next  */
-                throw(Utils.deprecatePropError("loadNext", "onLoadNext"));
+                throw new Error(Utils.deprecatePropError("loadNext", "onLoadNext"));
             }
             /* istanbul ignore if  */
             if (this.props.headingGenerator) {
                 /* istanbul ignore next  */
-                throw(Utils.deprecatePropError("headingGenerator", "onGenerateHeading"));
+                throw new Error(Utils.deprecatePropError("headingGenerator", "onGenerateHeading"));
             }
         }
     }

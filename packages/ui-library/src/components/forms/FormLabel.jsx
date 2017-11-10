@@ -48,7 +48,7 @@ class FormLabel extends React.Component {
 
     componentWillMount() {
         if (!Utils.isProduction() && this.props.id) {
-            throw(Utils.deprecatePropError("id", "data-id"));
+            throw new Error(Utils.deprecatePropError("id", "data-id"));
         }
     }
 

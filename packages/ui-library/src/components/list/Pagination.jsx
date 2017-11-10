@@ -83,13 +83,13 @@ module.exports = class extends React.Component {
     componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
-                throw(Utils.deprecatePropError("id", "data-id"));
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
             }
-            if (this.props.controlled) {
-                throw(Utils.deprecatePropError("controlled", "stateless"));
+            if (this.props.controlled !== undefined) {
+                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
             }
             if (this.props.onChange) {
-                throw(Utils.deprecatePropError("onChange", "onValueChange"));
+                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
             }
         }
     }
