@@ -112,6 +112,7 @@ module.exports = class extends React.Component {
 };
 
 class I18nPhoneInputStateless extends React.Component {
+    
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
@@ -131,7 +132,8 @@ class I18nPhoneInputStateless extends React.Component {
         errorMessage: PropTypes.string,
         placeholder: PropTypes.string,
         autoFocus: PropTypes.bool,
-        useAutoComplete: PropTypes.bool
+        useAutoComplete: PropTypes.bool,
+        disabled: PropTypes.bool
     };
 
     static defaultProps = {
@@ -150,7 +152,8 @@ class I18nPhoneInputStateless extends React.Component {
         errorMessage: "Please enter a valid phone number.",
         placeholder: "",
         autoFocus: false,
-        useAutoComplete: false
+        useAutoComplete: false,
+        disabled: false
     };
 
     componentWillMount() {
@@ -176,22 +179,22 @@ class I18nPhoneInputStateless extends React.Component {
     *     The clicked country item.
     */
     _handleValueChange = (country) => {
-        this.props.onValueChange({
-            countryCode: country.iso2 || "",
-            dialCode: country.dialCode || "",
-            phoneNumber: this.props.phoneNumber
-        });
-        this.props.onToggle();
+        if (!this.props.disabled) {
+            this.props.onValueChange({
+                countryCode: country.iso2 || "",
+                dialCode: country.dialCode || "",
+                phoneNumber: this.props.phoneNumber
+            });
+        }
     };
 
     _handlePhoneNumberChange = (e) => {
         var val = e.target.value;
-
         this.props.onValueChange({ dialCode: this.props.dialCode, phoneNumber: val });
     };
 
     render() {
-        var classname = classnames("intl-tel-input", this.props.className);
+        var classname = classnames("intl-tel-input", this.props.className, { disabled: this.props.disabled });
 
         return (
             <div data-id={this.props["data-id"]} className={classname}>

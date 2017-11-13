@@ -67,6 +67,11 @@ $flagsImageExtension: 'png' !default;
 .intl-tel-input {
     margin: 0 20px 20px 0;
 
+    &.disabled {
+        pointer-events: none;
+        cursor: default;
+        @include opacity(0.4);
+    }
     .flag-container {
         // positioned over the top of the input
         position: absolute;

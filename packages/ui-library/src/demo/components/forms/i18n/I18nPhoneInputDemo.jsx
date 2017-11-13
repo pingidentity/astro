@@ -15,7 +15,11 @@ class I18nPhoneInputDemo extends React.Component {
         open: false,
         countryCodeStateless: "ru",
         dialCodeStateless: "7",
-        phoneNumberStateless: "098 765 4321"
+        phoneNumberStateless: "098 765 4321",
+        
+        countryCodeStateless1: "ru",
+        dialCodeStateless1: "7",
+        phoneNumberStateless1: "098 765 4321"
     };
 
     _handleValueChangeStateful = (phoneInputValues) => {
@@ -51,17 +55,20 @@ class I18nPhoneInputDemo extends React.Component {
     render() {
         return (
             <div>
+                <label className="detached">Stateful Phone Input</label>
                 <I18nPhoneInput
                     onValueChange={this._handleValueChangeStateful}
                     countryCode={this.state.countryCodeStateful}
                     dialCode={this.state.dialCodeStateful}
                     phoneNumber={this.state.phoneNumberStateful} />
-                <br/><br/>
+                <br/>
                 <div>
                     {this.state.dialCodeStateful ? "+" + this.state.dialCodeStateful : ""}
                     &nbsp;{this.state.phoneNumberStateful}
                 </div>
                 <br />
+                
+                <label className="detached">Stateless Phone Input</label>
                 <I18nPhoneInput
                     stateless={true}
                     onSearch={this._handleSearch}
@@ -74,11 +81,22 @@ class I18nPhoneInputDemo extends React.Component {
                     countryCode={this.state.countryCodeStateless}
                     dialCode={this.state.dialCodeStateless}
                     phoneNumber={this.state.phoneNumberStateless} />
-                <br/><br/>
+                <br/>
                 <div>
                     {this.state.dialCodeStateless ? "+" + this.state.dialCodeStateless : ""}
                     &nbsp;{this.state.phoneNumberStateless}
                 </div>
+                <br/>
+                
+                <label className="detached">Stateless, Disabled Phone Input</label>
+                <I18nPhoneInput
+                    stateless={true}
+                    open={false}
+                    countryCode={this.state.countryCodeStateless1}
+                    dialCode={this.state.dialCodeStateless1}
+                    phoneNumber={this.state.phoneNumberStateless1}
+                    disabled={true} />
+                <br/>
             </div>
         );
     }
