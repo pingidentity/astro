@@ -12,7 +12,7 @@ jest.dontMock("../GridActions.js");
 jest.dontMock("../GridReducer.js");
 jest.dontMock("../../general/If.jsx");
 jest.dontMock("../../forms/FormCheckbox.jsx");
-jest.dontMock("../../forms/form-text-field");
+jest.dontMock("../../forms/FormTextField.jsx");
 jest.dontMock("../../forms/FormLabel.jsx");
 jest.dontMock("../../tooltips/HelpHint.jsx");
 jest.dontMock("../../forms/form-text-field/index.js");
