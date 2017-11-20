@@ -246,6 +246,8 @@ describe("DataSourceApi", function () {
         expect(cacheClear.mock.calls.length).toEqual(1);
     });
 
+
+
     it("clears cache on response error text in body", function () {
         response.text = "ERROR";
         api.get("/testendpoint", { param: "testGET" }, callback);
@@ -284,6 +286,49 @@ describe("DataSourceApi", function () {
         expect(superagent.request.set.mock.calls.length).toEqual(1);
         expect(superagent.request.set.mock.calls[0][0]).toEqual("Accept");
         expect(superagent.request.set.mock.calls[0][1]).toEqual("application/json, text/plain, */*");
+    });
+
+    it("expect error message from error response body", function () {
+        var errorMessage = "this is an error";
+
+        superagent.request.end =jest.genMockFunction().mockImplementation(function(cb) {
+            var mockError = {
+                response: {
+                    body: {
+                        message: errorMessage
+                    }
+                }
+            };
+            cb(mockError, response);
+        });
+        api.get(null, null, callback);
+        verifyResponse(callback, response, false, errorMessage);
+    });
+    it("expect error message from error response error", function () {
+        var errorMessage = "this is an error";
+
+        superagent.request.end =jest.genMockFunction().mockImplementation(function(cb) {
+            var mockError = {
+                response: {
+                    error: {
+                        message: errorMessage
+                    }
+                }
+            };
+            cb(mockError, response);
+        });
+        api.get(null, null, callback);
+        verifyResponse(callback, response, false, errorMessage);
+    });
+    it("expect empty error message when error respnse is null", function () {
+        superagent.request.end =jest.genMockFunction().mockImplementation(function(cb) {
+            var mockError = {
+                response: null
+            };
+            cb(mockError, response);
+        });
+        api.get(null, null, callback);
+        verifyResponse(callback, response, false, "");
     });
 
 });

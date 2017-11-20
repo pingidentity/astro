@@ -267,25 +267,29 @@ parse("./coverage/lcov.info", function (err, coverage) {
         // the array of file names which failed the comparison
         var failedFilenames = _.map(
             _.filter(comparisonResults, function (comparisonResult) {
-                console.log(comparisonResult.result.result);
                 return !comparisonResult.result.result;
             }),
             function (comparisonResult) {
                 return comparisonResult.filename;
             }
         );
-        console.log(failedFilenames);
-        if (failedFilenames.length === 0) {
-            console.log(chalk.green("Coverage verification: PASS"));
-        }
-        else {
-            console.log(chalk.red(
-                "Coverage verification: FAIL\nFiles in the wrong:",
-                _.reduce(failedFilenames, function (str, filename) {
-                    return str + "\n    " + filename;
-                }, "")
-            ));
-            errorOut(3);
-        }
+
+        //using setTimeout because sometimes this error gets thrown before logCoverageVerificationResult
+        //has time to console.log the full table
+        setTimeout(function() {
+            if (failedFilenames.length === 0) {
+                console.log(chalk.green("Coverage verification: PASS"));
+            }
+            else {
+                console.log(chalk.red(
+                    "Coverage verification: FAIL\nFiles in the wrong:",
+                    _.reduce(failedFilenames, function (str, filename) {
+                        return str + "\n    " + filename;
+                    }, "")
+                ));
+                errorOut(3);
+            }
+        }, 5000);
+
     });
 });
