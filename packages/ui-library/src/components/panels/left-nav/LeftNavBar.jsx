@@ -237,30 +237,34 @@ class LeftNavBar extends React.Component {
             prevProps.selectedSection !== this.props.selectedSection ||
             !_.isEqual(prevProps.openSections, this.props.openSections)) {
 
-            var navDom = ReactDOM.findDOMNode(this.refs.container),
-                itemSelectors = navDom.getElementsByClassName("highlighted"),
+            var navNode = ReactDOM.findDOMNode(this.refs.container),
+                itemSelectors = navNode.getElementsByClassName("highlighted"),
                 style = { height: 0, top: 0 };
 
             // if a nav item is currently selected then calulate the position of the selected item within the nav
+            // the selected item contains the "highlighted" css class
             if (itemSelectors.length > 0) {
                 var selectedDims = itemSelectors[0].getBoundingClientRect(),
-                    navDims = navDom.getBoundingClientRect(),
+                    navDims = navNode.getBoundingClientRect(),
                     sectionOpen = !this.props.collapsible ||
                         (this.props.selectedSection && this.props.openSections[this.props.selectedSection]);
 
                 style = {
-                    top: parseInt(selectedDims.top - navDims.top + navDom.scrollTop),
+                    top: parseInt(selectedDims.top - navDims.top + navNode.scrollTop),
                     height: sectionOpen ? parseInt(selectedDims.height) : 0,
                     opacity: sectionOpen ? 1 : 0
                 };
             }
 
-            // if a new section is selected...
+            // if a section is selected...
             /* istanbul ignore if  */
             if (prevProps && prevProps.selectedSection && this.props.selectedSection) {
                 var oldSectionIndex = _.findIndex(this.props.tree, { id: prevProps.selectedSection }),
                     newSectionIndex = _.findIndex(this.props.tree, { id: this.props.selectedSection }),
-                    closedSection, closedSectionIndex, closedSectionDOM, oldOpenSections, newOpenSections;
+                    closedSectionId,
+                    closedSectionIndex,
+                    oldOpenSections,
+                    newOpenSections;
 
                 // if autocollapse is TRUE, then account for the closing section height only if the newly selected
                 // section is lower in the nav than the previously selected section
@@ -280,40 +284,26 @@ class LeftNavBar extends React.Component {
                         return this.props.openSections.hasOwnProperty(key) && this.props.openSections[key] === true;
                     }.bind(this));
 
-                    closedSection = _.difference(oldOpenSections, newOpenSections);
+                    closedSectionId = _.difference(oldOpenSections, newOpenSections);
 
-                    if (closedSection.length) {
-                        closedSectionIndex = _.findIndex(this.props.tree, { id: closedSection[0] });
+                    if (closedSectionId.length) {
+                        closedSectionIndex = _.findIndex(this.props.tree, { id: closedSectionId[0] });
                     }
                 }
 
                 // subtract the height of the closed section from the top of the nav highlighter
                 // ONLY if the closed section is above the current one
                 if (closedSectionIndex < newSectionIndex) {
-                    closedSectionDOM = ReactDOM.findDOMNode(this.refs.container)
-                        .getElementsByClassName("menu")[closedSectionIndex];
-                    style.top -= closedSectionDOM.getBoundingClientRect().height;
+                    const closedSectionNode = ReactDOM.findDOMNode(this.refs.container)
+                            .getElementsByClassName("menu")[closedSectionIndex];
+
+                    // check wheter the
+                    const closedNode = ReactDOM.findDOMNode(closedSectionNode)
+                        .getElementsByClassName("context-selector-menu")[0] || closedSectionNode;
+
+                    style.top -= closedNode.getBoundingClientRect().height;
                 }
 
-            }
-
-            // if the selected item is outside the visible area of the navbar, scroll it into view
-            // timeout is used to allow css animation to complete
-            /* istanbul ignore if  */
-            if (itemSelectors.length > 0) {
-                setTimeout(function () {
-                    var selectedTop = document.getElementsByClassName("highlighted")[0].getBoundingClientRect().top,
-                        headerHeight = 46;
-
-                    if ((
-                            selectedTop + selectedDims.height - headerHeight) > navDims.height ||
-                            selectedTop - headerHeight < 0
-                        ) {
-
-                        // scroll the selected item so that it is 15px from top of nav
-                        navDom.scrollTop = style.top - 15;
-                    }
-                }, 800);
             }
 
             // set whether nav is tall enough to scroll (toggles class on nav to trigger shadow on copyright)
@@ -587,7 +577,7 @@ class LeftNavContextSelector extends React.Component {
                             {this.props.icon ? (<span className={"icon-" + this.props.icon}></span>) : null}
                             {this._getSelectedChild().label}
                         </a>
-                        <ul className="context-selector-menu"data-id={this.props["data-id"] + "-menu"}>
+                        <ul className="context-selector-menu" data-id={this.props["data-id"] + "-menu"}>
                             {this._getMenuItems()}
                             {this.props.addLink &&
                                 <li>
