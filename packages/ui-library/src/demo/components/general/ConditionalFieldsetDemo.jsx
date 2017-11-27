@@ -1,7 +1,7 @@
 var React = require("react"),
     ConditionalFieldset = require("./../../../components/general/ConditionalFieldset"),
     FormRadioGroup = require("./../../../components/forms/FormRadioGroup"),
-    FormTextField = require("./../../../components/forms/FormTextField"),
+    FormTextField = require("./../../../components/forms/form-text-field"),
     Link = require("./../../../components/general/Link"),
     ValidationMessages = require("./../../../components/forms/ValidationMessages"),
     _ = require("underscore");

@@ -74,7 +74,7 @@ module.exports = [
             {
                 label: "Toggle",
                 demo: require("../components/forms/ToggleDemo.jsx"),
-                pathToDoc: "components/forms/Toggle.jsx",
+                pathToDoc: "components/forms/toggle/v2.jsx",
                 pathToSource: "components_forms_form-toggle_v2.jsx.html",
                 pathToDemoSource: "demo_components_forms_ToggleDemo.jsx.html"
             },
@@ -103,21 +103,21 @@ module.exports = [
             {
                 label: "Text Field",
                 demo: require("../components/forms/FormTextFieldDemo.jsx"),
-                pathToDoc: "components/forms/FormTextField.jsx",
+                pathToDoc: "components/forms/form-text-field/v2.jsx",
                 pathToSource: "components_forms_form-text-field_v2.jsx.html",
                 pathToDemoSource: "demo_components_forms_FormTextFieldDemo.jsx.html"
             },
             {
                 label: "Integer Field",
                 demo: require("../components/forms/FormIntegerFieldDemo.jsx"),
-                pathToDoc: "components/forms/FormIntegerField.jsx",
+                pathToDoc: "components/forms/form-integer-field/v2.jsx",
                 pathToSource: "components_forms_form-integer-field_v2.jsx.html",
                 pathToDemoSource: "demo_components_forms_FormIntegerFieldDemo.jsx.html"
             },
             {
                 label: "Text Area",
                 demo: require("../components/forms/FormTextAreaDemo.jsx"),
-                pathToDoc: "components/forms/FormTextArea.jsx",
+                pathToDoc: "components/forms/form-text-area/v2.jsx",
                 pathToSource: "components_forms_form-text-area_v2.jsx.html",
                 pathToDemoSource: "demo_components_forms_FormTextAreaDemo.jsx.html"
             },
@@ -178,7 +178,7 @@ module.exports = [
             {
                 label: "Selection List",
                 demo: require("../components/forms/SelectionListDemo.jsx"),
-                pathToDoc: "components/forms/SelectionList.jsx",
+                pathToDoc: "components/forms/selection-list/v2.jsx",
                 // SelectionList v2 is split into separate source files, so pass all as array.
                 // First item in array will be displayed in full source iframe, rest will be linked to above the iframe.
                 pathToSource: [
@@ -353,7 +353,7 @@ module.exports = [
             {
                 label: "Context Close Button",
                 demo: require("../components/general/ContextCloseButtonDemo.jsx"),
-                pathToDoc: "components/general/ContextCloseButton.jsx",
+                pathToDoc: "components/general/context-close-button/v2.jsx",
                 pathToSource: "components_general_context-close-button_v2.jsx.html",
                 pathToDemoSource: "demo_components_general_ContextCloseButtonDemo.jsx.html"
             },
