@@ -20,7 +20,7 @@ describe("Calendar Integration", function () {
      * WHEN: Takes screenshot to compare with the base image
      * THEN: The base image and the current image should be identical
      */
-    it("should have the default current date value and change other date value", CalendarPage.retriable(function () {
+    xit("should have the default current date value and change other date value", CalendarPage.retriable(function () {
         expect(CalendarPage.verifyCalendarFieldExisting()).toBeTruthy();
         var currentDate = CalendarPage.getCurrentDate();
         expect(CalendarPage.getValueOfCalendar()).toEqual(currentDate);
@@ -44,7 +44,7 @@ describe("Calendar Integration", function () {
      * WHEN: Clicks on the left and right icon
      * THEN: The current month should be returned
      */
-    it("should be clickable for the calendar field and left, right icon as well", function () {
+    xit("should be clickable for the calendar field and left, right icon as well", function () {
         CalendarPage.clickCalendarField();
         expect(CalendarPage.verifyCalendarWrapperExisting()).toBeTruthy();
         //click on left icon in date-view
