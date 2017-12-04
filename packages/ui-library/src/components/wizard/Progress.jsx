@@ -37,11 +37,13 @@ class Progress extends React.Component {
     };
 
     componentWillReceiveProps(nextProps) {
+        //making this a variable because jsdoc throws an error if it is in the if statement ¯\_(ツ)_/¯
+        var hasOf = nextProps.of < 1 || nextProps.step > 7;
         if (!Utils.isProduction()) {
             if (nextProps.step < 1 || nextProps.step > 7) {
                 console.warn("Progress expecting 'step' param between 1 and 6, but was given ", nextProps.step);
             }
-            if ((nextProps.of < 1) || (nextProps.step > 7)) {
+            if (hasOf) {
                 console.warn("Progress expecting 'of' param between 1 and 6, but was given ", nextProps.of);
             }
         }

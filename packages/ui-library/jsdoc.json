@@ -29,9 +29,9 @@
     "recurse": true
   },
   "plugins": [
+    "node_modules/jsdoc-babel",
     "./node_modules/jsdoc-jsx",
-    "plugins/markdown",
-    "node_modules/jsdoc-babel"]
+    "plugins/markdown"]
     ,
     "babel": {
         "extensions": ["js", "es6", "jsx"]
