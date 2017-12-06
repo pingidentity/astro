@@ -73,13 +73,14 @@ class ConditionalFieldsetDemo extends React.Component {
 
                 <div className="input-row">
                     <label className="detached">
-                        ConditionalFieldset with empty support, set through props
+                        ConditionalFieldset with empty support, set through props; input width set to medium
                     </label>
                     <ConditionalFieldset data-id="fieldset-1"
                                          onValueChange={this._onCondition1ValueChange}
                                          selectedIndex={this.state.selectedCondition1Index}
                                          supportEmpty={true}
                                          emptyMessage={"Do Nothing"}
+                                         listClassName="input-width-medium"
                                          stateless={true}
                                          type={this.state.selectedTypeName} >
                         <div title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
@@ -89,12 +90,13 @@ class ConditionalFieldsetDemo extends React.Component {
 
                 <div className="input-row">
                     <label className="detached">
-                        ConditionalFieldset without empty support - default behaviour, no type
+                        ConditionalFieldset without empty support - default behaviour, no type; input width set to large
                     </label>
                     <ConditionalFieldset data-id="fieldset-2"
                                          onValueChange={this._onCondition2ValueChange}
                                          selectedIndex={this.state.selectedCondition2Index}
                                          stateless={true}
+                                         listClassName="input-width-large"
                                          type={this.state.selectedTypeName} >
                         <div title="Invite By Email">
                             <span>Option with some <strong>MARKUP</strong></span>
@@ -124,12 +126,13 @@ class ConditionalFieldsetDemo extends React.Component {
 
                 <div className="input-row">
                     <label className="detached">
-                        ConditionalFieldset with empty support, set through dom
+                        ConditionalFieldset with empty support, set through dom; input width set to small
                     </label>
                     <ConditionalFieldset data-id="fieldset-3"
                                          onValueChange={this._onCondition3ValueChange}
                                          selectedIndex={this.state.selectedCondition3Index}
                                          stateless={true}
+                                         listClassName="input-width-small"
                                          type={this.state.selectedTypeName} >
                         <div title="Do nothing"></div>
                         <div title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>

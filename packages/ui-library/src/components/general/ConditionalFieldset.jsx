@@ -21,6 +21,7 @@ class ConditionalFieldsetStateless extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string.isRequired,
         className: PropTypes.string,
+        listClassName: PropTypes.string,
         type: PropTypes.string,
         supportEmpty: PropTypes.bool,
         emptyMessage: PropTypes.string,
@@ -61,7 +62,9 @@ class ConditionalFieldsetStateless extends React.Component {
                 });
             });
             return (
-                <FormDropDownList data-id={dataId}
+                <FormDropDownList
+                    data-id={dataId}
+                    className={this.props.listClassName}
                     disabled={this.props.disabled}
                     options={options}
                     onValueChange={this._handleSelectValueChange}
@@ -164,6 +167,8 @@ class ConditionalFieldsetStateful extends React.Component {
  *          required.
  * @param {string} [className]
  *          CSS class to set on the top HTML element
+ * @param {string} [listClassName]
+ *          CSS class to set on the FormDropDownList
  * @param {boolean} [stateless]
  *          To enable the component to be externally managed. True will relinquish control to the component's owner.
  *          False or not specified will cause the component to manage state internally. If True, onValueChange and

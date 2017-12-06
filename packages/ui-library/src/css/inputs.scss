@@ -854,11 +854,11 @@ input[type=file] {
 }
 
 .input-custom-select {
-    padding: $borderSize; // prevent the highlighted child from overlapping the input border
+    padding: $borderSize;   // prevent the highlighted child from overlapping the input border
     display: inline-block;
     vertical-align: top;
     text-align: left;
-    width: 190px; // default width
+    width: auto;           // set to auto, allow different input widths to be set
 
     &.open {
         z-index: 2; // make sure menu appears above other elements on the page

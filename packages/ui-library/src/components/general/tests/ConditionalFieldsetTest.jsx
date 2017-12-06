@@ -199,4 +199,19 @@ describe("ConditionalFieldset", function () {
         }).toThrow(expectedError);
     });
 
+    it("creates a conditional fieldset select with custom width", function () {
+        var component = getGenericConditionalFieldset({
+            "data-id": dataId,
+            type: "select",
+            listClassName: "input-width-medium"
+        });
+
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "fieldset-options");
+        
+        expect(select).toBeTruthy();
+        expect(TestUtils.findRenderedDOMNodeWithClass(select, "input-width-medium")).toBeTruthy();
+        
+        var classes = select.className.split(" ");
+        expect(_.contains(classes, "input-width-medium")).toEqual(true);
+    });
 });
