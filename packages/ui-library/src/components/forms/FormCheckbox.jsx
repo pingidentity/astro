@@ -2,8 +2,7 @@ var PropTypes = require("prop-types");
 var React=require("react"),
     classnames = require("classnames"),
     FormLabel = require("./FormLabel.jsx"),
-    FormError = require("./FormError.jsx"),
-    Utils = require("../../util/Utils.js");
+    FormError = require("./FormError.jsx");
 
 /**
  * @callback FormCheckbox~onChange
@@ -66,7 +65,6 @@ var React=require("react"),
 class FormCheckbox extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
-        id: PropTypes.string, //TODO: remove when v1 no longer supported
         className: PropTypes.string,
         checked: PropTypes.bool,
         onChange: PropTypes.func,
@@ -86,12 +84,6 @@ class FormCheckbox extends React.Component {
         checked: false,
         disabled: false
     };
-
-    componentWillMount() {
-        if (!Utils.isProduction() && this.props.id) {
-            throw new Error(Utils.deprecatePropError("id", "data-id"));
-        }
-    }
 
     _handleChange = (e) => {
         if (this.props.onChange) {

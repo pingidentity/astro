@@ -113,6 +113,7 @@ class FormTextFieldDemo extends React.Component {
             <div>
                 <div className="input-row">
                     <FormTextField
+                        stateless={false}
                         labelText="Basic (stateful)"
                         className="input-width-medium"
                     />
@@ -128,6 +129,7 @@ class FormTextFieldDemo extends React.Component {
                 </div>
                 <div className="input-row">
                     <FormTextField
+                        stateless={false}
                         labelText="Default value"
                         value="default"
                         className="input-width-medium"
@@ -159,6 +161,7 @@ class FormTextFieldDemo extends React.Component {
                 </div>
                 <div className="input-row">
                     <FormTextField
+                        stateless={false}
                         labelText="Reveal"
                         maskValue={true}
                         showReveal={true}
@@ -176,6 +179,7 @@ class FormTextFieldDemo extends React.Component {
                 </div>
                 <div className="input-row">
                     <FormTextField
+                        stateless={false}
                         labelText="onChange callback and maxLength (10 chars)"
                         onValueChange={this._handleValueChange}
                         maxLength={10}
@@ -185,6 +189,7 @@ class FormTextFieldDemo extends React.Component {
                 </div>
                 <div className="input-row">
                     <FormTextField
+                        stateless={false}
                         labelText="onBlur callback and placeholder"
                         onBlur={this._handleBlur}
                         placeholder="placeholder"
@@ -202,6 +207,7 @@ class FormTextFieldDemo extends React.Component {
                 </div>
                 <div className="input-row">
                     <FormTextField
+                        stateless={false}
                         labelText="With error message"
                         errorMessage="The error message appears when hovering over the error icon or when focus is
                             placed on the input."
@@ -211,6 +217,7 @@ class FormTextFieldDemo extends React.Component {
                 </div>
                 <div className="input-row">
                     <FormTextField
+                        stateless={false}
                         labelText="Required password field with error message"
                         errorMessage="The error message."
                         required={true}
@@ -221,6 +228,7 @@ class FormTextFieldDemo extends React.Component {
                 </div>
                 <div className="input-row">
                     <FormTextField
+                        stateless={false}
                         labelText="With help tooltip"
                         labelHelpText="This is my help text."
                         className="input-width-medium"
@@ -228,6 +236,7 @@ class FormTextFieldDemo extends React.Component {
                 </div>
                 <div className="input-row">
                     <FormTextField
+                        stateless={false}
                         labelText="With help and lock tooltips"
                         labelHelpText="This is my help text."
                         labelLockText="This is the reason the field is locked."
@@ -237,6 +246,7 @@ class FormTextFieldDemo extends React.Component {
                 </div>
                 <div className="input-row">
                     <FormTextField
+                        stateless={false}
                         labelText="Validate onChange"
                         labelHelpText="Valid when have 5 or more chars"
                         errorMessage={this.state.onChangeValidationErrorMessage}
@@ -247,6 +257,7 @@ class FormTextFieldDemo extends React.Component {
                 </div>
                 <div className="input-row">
                     <FormTextField
+                        stateless={false}
                         labelText="Validate onBlur"
                         labelHelpText="Valid when have 5 or more chars"
                         errorMessage={this.state.onBlurValidationErrorMessage}
@@ -265,6 +276,7 @@ class FormTextFieldDemo extends React.Component {
                 </div>
                 <div className="input-row">
                     <FormTextField
+                        stateless={false}
                         labelText="Flex Width Input"
                         labelHelpText="A flex-width input grows with the content once it gets wider than the intial
                             width"

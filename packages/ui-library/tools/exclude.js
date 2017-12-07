@@ -36,11 +36,4 @@ module.exports = [
 
     // Tyler: Coverage is included for stateless and stateful files
     "/src/components/forms/file-upload/v2.jsx",
-
-    // Tyler: These are just warnings about deprecated components
-    "/src/components/forms/file-upload/v1.jsx",
-    "/src/components/forms/form-text-field/v1.jsx",
-    "/src/components/forms/form-toggle/v1.jsx",
-    "/src/components/general/context-close-button/v1.jsx",
-    "/src/components/forms/form-integer-field/v1.jsx",
 ];

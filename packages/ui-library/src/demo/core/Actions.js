@@ -23,8 +23,24 @@ exports.receiveCode = function (id, markup) {
 };
 
 exports.fetchCode = function (id, pathToDoc) {
+
+    // remove any directory dashes and capitalize the first letter of each word so that it can generate the Demo file
+    // ButtonBar.jsx --> ButtonBarDemo.jsx
+    // form-text-field/v2.jsx --> FormTextFieldDemo.jsx
+    function parseDemoFile (ptd) {
+        var path;
+        if (ptd.indexOf("-") > -1) {
+            path = pathToDoc.split("-").map(function (word) {
+                return word.charAt(0).toUpperCase() + word.slice(1);
+            }).join("");
+        } else {
+            path = ptd;
+        }
+        return path.replace(/(\.jsx|\.js|\/v2.jsx)/, "Demo.jsx");
+    }
+
     return function (dispatch) {
-        fetch("src/demo/" + pathToDoc.replace(/(\.jsx|\.js)/, "Demo.jsx"))
+        fetch("src/demo/" + parseDemoFile(pathToDoc))
             .then(function (resp) {
                 return resp.text();
             })

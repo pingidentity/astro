@@ -72,7 +72,7 @@ var ListViewPaginatedDemoPage = Object.create(HomePage, {
      */
     verifyRowNumberExisting: {
         value: function (rowNumber) {
-            return this.isExisting(this.formatXpath("//div[@data-id='{rowNumber}']", { rowNumber: rowNumber }));
+            return this.isExisting(this.formatXpath("//div[@data-id='row-{rowNumber}']", { rowNumber: rowNumber }));
         }
     },
 
@@ -82,7 +82,7 @@ var ListViewPaginatedDemoPage = Object.create(HomePage, {
      */
     clickRowNumber: {
         value: function (rowNumber) {
-            this.click(this.formatXpath("//div[@data-id='{rowNumber}']", { rowNumber: rowNumber }));
+            this.click(this.formatXpath("//div[@data-id='row-{rowNumber}']", { rowNumber: rowNumber }));
         }
     },
 

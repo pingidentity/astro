@@ -294,10 +294,6 @@ class StatelessExpandableRow extends React.Component {
 
     static propTypes = {
         "data-id": PropTypes.string,
-        id: PropTypes.oneOfType([ //TODO: remove id when v1 no longer supported
-            PropTypes.number,
-            PropTypes.string
-        ]),
         className: PropTypes.string,
         expanded: PropTypes.bool,
         onToggle: PropTypes.func,
@@ -411,8 +407,7 @@ class StatelessExpandableRow extends React.Component {
                       onClick={this.props.onDelete} />);
         }
 
-        var id = this.props.id || this.props["data-id"],
-            titleClassName = classnames("item-title", this.props.titleClassName);
+        var titleClassName = classnames("item-title", this.props.titleClassName);
 
         if (this.props.showDelete) {
             var deleteObject = this.props.deleteButton || (
@@ -437,7 +432,7 @@ class StatelessExpandableRow extends React.Component {
         }
 
         return (
-            <div data-id={id} className={containerClassname}>
+            <div data-id={this.props["data-id"]} className={containerClassname}>
                 {this.props.rowMessage && (
                     <div data-id="item-message" className={classnames("item-message", this.props.rowMessage.type)}>
                         {this.props.rowMessage.text}

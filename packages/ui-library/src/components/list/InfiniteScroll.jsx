@@ -213,7 +213,6 @@ class InfiniteScroll extends React.Component {
         onLoadNext: PropTypes.func.isRequired,
         contentType: PropTypes.object,
         onGenerateHeading: PropTypes.func,
-        headingGenerator: PropTypes.func, //TODO: remove when v1 no longer supported
         height: PropTypes.number,
         minHeight: PropTypes.number,
         attachToWindow: PropTypes.bool,
@@ -393,11 +392,6 @@ class InfiniteScroll extends React.Component {
                 /* istanbul ignore next  */
                 throw new Error(Utils.deprecatePropError("loadNext", "onLoadNext"));
             }
-            /* istanbul ignore if  */
-            if (this.props.headingGenerator) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("headingGenerator", "onGenerateHeading"));
-            }
         }
     }
 
@@ -488,7 +482,7 @@ class InfiniteScroll extends React.Component {
                             ref={"batch" + i}
                             key={b.id}
                             id={b.id}
-                            onGenerateHeading={this.props.onGenerateHeading || this.props.headingGenerator}
+                            onGenerateHeading={this.props.onGenerateHeading}
                             contentType={this.props.contentType}
                             isVisible={this.visibilityArray[i]} />);
                     }.bind(this))

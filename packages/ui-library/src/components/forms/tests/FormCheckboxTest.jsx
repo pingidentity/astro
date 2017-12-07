@@ -10,7 +10,6 @@ describe("FormCheckbox", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         FormCheckbox= require("../FormCheckbox.jsx"),
         TestUtils = require("../../../testutil/TestUtils"),
-        Utils = require("../../../util/Utils"),
         _ = require("underscore");
 
     function getComponent (opts) {
@@ -150,14 +149,6 @@ describe("FormCheckbox", function () {
 
         var icon = TestUtils.findRenderedDOMNodeWithDataId(component, "form-checkbox-error-message-icon");
         expect(icon).toBeTruthy();
-    });
-
-    it("throws error when deprecated prop 'id' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
-
-        expect(function () {
-            getComponent({ id: "foo" });
-        }).toThrow(expectedError);
     });
 
 });
