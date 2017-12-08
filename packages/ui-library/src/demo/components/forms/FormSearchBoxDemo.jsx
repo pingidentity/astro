@@ -6,7 +6,8 @@ var ITEMS = [
     { id: 1, name: "apples" },
     { id: 2, name: "oranges" },
     { id: 3, name: "bananas" },
-    { id: 4, name: "grape" }
+    { id: 4, name: "grape" },
+    { id: 5, name: "error - shows error message" }
 ];
 
 
@@ -19,13 +20,17 @@ class FormSearchBoxDemo extends React.Component {
     state = {
         items: ITEMS,
         queryString: "",
+        errorMessage: null,
         actionMessages: ["Type into field to search items for a match"]
     };
 
     _handleValueChange = (value) => {
+        var error = value === "error" ? "This is an error message." : null;
+        
         this.setState({
             items: ITEMS.filter(FilterUtils.getFilterFunction(value)),
-            queryString: value
+            queryString: value,
+            errorMessage: error
         });
     };
 
@@ -80,6 +85,7 @@ class FormSearchBoxDemo extends React.Component {
                         queryString={this.state.queryString}
                         onValueChange={this._handleValueChange}
                         onKeyDown={this._handleKeyDown}
+                        errorMessage={this.state.errorMessage}
                         onFocus={this._handleFocus}
                         onBlur={this._handleBlur}
                         onClear={this._handleClear}

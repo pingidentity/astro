@@ -142,6 +142,12 @@ label {
                     color: $color-input-text;
                 }
             }
+            &.form-error {
+                a.clear-search {
+                    right: 32px;
+                    @include transition($default-input-transition);
+                }
+            }
             a.clear-search {
                 position: absolute;
                 font-family: $icon-font;

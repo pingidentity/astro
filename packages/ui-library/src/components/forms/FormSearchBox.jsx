@@ -82,7 +82,8 @@ class FormSearchBox extends React.Component {
         onKeyDown: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
-        onClear: PropTypes.func
+        onClear: PropTypes.func,
+        errorMessage: PropTypes.string
     };
 
     static defaultProps = {
@@ -91,6 +92,7 @@ class FormSearchBox extends React.Component {
         onFocus: _.noop,
         onBlur: _.noop,
         onClear: _.noop,
+        errorMessage: null
     };
 
     /**
@@ -139,13 +141,14 @@ class FormSearchBox extends React.Component {
 
     render() {
         var showClear = this.props.queryString && (this.props.queryString !== "");
-
+        
         return (
             <div data-id={this.props["data-id"]} className={this.props.className} >
                 <FormTextField data-id="searchBox"
                         stateless={false}
                         ref="searchBox"
                         className="search"
+                        errorMessage={this.props.errorMessage}
                         value={this.props.queryString}
                         placeholder={this.props.placeholder}
                         onValueChange={this._search}
