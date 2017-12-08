@@ -233,22 +233,14 @@
             display: none;
             height: $button-height;
 
+            //changed to <button> from <a>
+            width: $button-width;
+            padding: 0;
+            border: none;
+            border-radius: 0;
+
             &:after {
                 content: '\64';
-            }
-        }
-        .delete-confirm-dialog {
-            position: absolute;
-
-            &.left {
-                right: 23px;
-
-                &.top {
-                    bottom: $button-height;
-                }
-                &.bottom {
-                    bottom: 0;
-                }
             }
         }
         &.expanded {

@@ -3,6 +3,7 @@ var RowAccessories = require("../../../components/rows/expandable-row/Accessorie
 var HelpHint = require("../../../components/tooltips/HelpHint.jsx");
 var ExpandableRow = require("../../../components/rows/ExpandableRow.jsx");
 var Toggle = require("../../../components/forms/form-toggle");
+var DetailsTooltip = require("../../../components/tooltips/DetailsTooltip");
 
 /**
 * @name ExpandableRowDemo
@@ -14,6 +15,7 @@ class ExpandableRowDemo extends React.Component {
         super(props);
         this._onToggle1 = this._onToggle.bind(null, 1);
         this._onToggle3 = this._onToggle.bind(null, 3);
+        this._onToggle4 = this._onToggle.bind(null, 4);
 
         this.state = {
             expanded: false,
@@ -49,8 +51,44 @@ class ExpandableRowDemo extends React.Component {
         });
     };
 
-    render() {
+    _toggleCustomDelete = () => {
+        this.setState({
+            showCustomDeleteConfirm: !this.state.showCustomDeleteConfirm
+        });
+    };
 
+    _customConfirm = () => {
+        this.setState({
+            rowCustomDeleted: true
+        });
+        this._toggleCustomDelete();
+    };
+
+    render() {
+        var customDeleteButton = (
+            <DetailsTooltip
+                stateless={true}
+                label={(<button type="button" className="delete-btn" onClick={this._toggleCustomDelete}/>)}
+                positionClassName="top left"
+                title="Tooltip Title"
+                open={this.state.showCustomDeleteConfirm}
+                onToggle={this._toggleCustomDelete}>
+                <p>
+                    Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
+                    sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
+                </p>
+                <div className="button-group" data-id="delete-confirmation">
+                    <button
+                            type="button"
+                            data-id="confirm-action"
+                            onClick={this._customConfirm} >
+                        Confirm
+                    </button>
+                    <br />
+                    <a className="cancel" onClick={this._toggleCustomDelete}>Cancel</a>
+                </div>
+            </DetailsTooltip>
+        );
         return (
             <div data-id="idp-row" className="result-set">
                 <ExpandableRow
@@ -144,6 +182,16 @@ class ExpandableRowDemo extends React.Component {
                         showDeleteConfirm={this.state.showDeleteConfirm}
                         onDelete={this._handleDelete}
                         labelDeleteConfirm="Are you sure you want to delete this row?"
+                    />
+                )}
+                {!this.state.rowCustomDeleted && (
+                    <ExpandableRow
+                        title="Row with Custom Delete Tooltip Button"
+                        subtitle="stateless"
+                        stateless={true}
+                        expanded={this.state.expanded4}
+                        onToggle={this._onToggle4}
+                        deleteButton={customDeleteButton}
                     />
                 )}
             </div>

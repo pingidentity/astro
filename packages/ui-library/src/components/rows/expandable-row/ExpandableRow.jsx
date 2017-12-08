@@ -414,6 +414,28 @@ class StatelessExpandableRow extends React.Component {
         var id = this.props.id || this.props["data-id"],
             titleClassName = classnames("item-title", this.props.titleClassName);
 
+        if (this.props.showDelete) {
+            var deleteObject = this.props.deleteButton || (
+                <button data-id={this.props.confirmDelete ? "delete-btn-confirm" : "delete-btn"}
+                      className="delete-btn"
+                      onClick={this.props.onDelete} />);
+            //details tooltip should be delete button
+            if (this.props.confirmDelete || this.props.confirmDeleteContent) {
+                deleteButton = (<ConfirmDeleteDialog
+                                    trigger={deleteObject}
+                                    label={this.props.labelDeleteConfirm}
+                                    open={this.props.expanded && this.props.showDeleteConfirm}
+                                    onCancel={this.props.onDeleteCancelClick}
+                                    onDeleteConfirm={this.props.onDeleteConfirmClick}
+                                    confirmDeletePosition={this.props.confirmDeletePosition}>
+                                    {this.props.confirmDeleteContent}
+                                </ConfirmDeleteDialog>);
+            }
+            else {
+                deleteButton = deleteObject;
+            }
+        }
+
         return (
             <div data-id={id} className={containerClassname}>
                 {this.props.rowMessage && (
@@ -459,16 +481,7 @@ class StatelessExpandableRow extends React.Component {
                     )}
                     {editButton}
                     {deleteButton}
-                    {this.props.expanded && (this.props.confirmDelete || this.props.confirmDeleteContent) &&
-                        this.props.showDeleteConfirm &&
-                        <ConfirmDeleteDialog
-                            label={this.props.labelDeleteConfirm}
-                            onCancel={this.props.onDeleteCancelClick}
-                            onDeleteConfirm={this.props.onDeleteConfirmClick}
-                            confirmDeletePosition={this.props.confirmDeletePosition}>
-                            {this.props.confirmDeleteContent}
-                        </ConfirmDeleteDialog>
-                    }
+
                 </div>
             </div>
         );
@@ -503,18 +516,12 @@ class ConfirmDeleteDialog extends React.Component {
                     <div className="button-group">
                         <button
                             type="button"
-                            data-id="cancel-delete"
-                            className="secondary"
-                            onClick={this.props.onCancel}>
-                            {Translator.translate("cancel")}
-                        </button>
-                        <button
-                            type="button"
                             data-id="confirm-delete"
-                            className="primary"
                             onClick={this.props.onDeleteConfirm}>
-                            {Translator.translate("confirm")}
+                            {Translator.translate("delete")}
                         </button>
+                        <br />
+                        <a className="cancel" onClick={this.props.onCancel}>{Translator.translate("cancel")}</a>
                     </div>
                 </div>
             );
@@ -526,10 +533,10 @@ class ConfirmDeleteDialog extends React.Component {
             <DetailsTooltip
                 positionClassName={classnames("left", this.props.confirmDeletePosition)}
                 data-id="delete-confirm-dialog"
-                className="delete-confirm-dialog"
                 title={Translator.translate("confirmdelete")}
-                open={true}
-                onToggle={this.props.onCancel}>
+                label={this.props.trigger}
+                open={this.props.open}
+                onToggle={this.props.open ? this.props.onCancel : _.noop}>
                 {this._renderTooltipContent()}
             </DetailsTooltip>
         );
