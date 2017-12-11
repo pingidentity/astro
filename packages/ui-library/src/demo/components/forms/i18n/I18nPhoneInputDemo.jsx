@@ -19,26 +19,40 @@ class I18nPhoneInputDemo extends React.Component {
         
         countryCodeStateless1: "ru",
         dialCodeStateless1: "7",
-        phoneNumberStateless1: "098 765 4321"
+        phoneNumberStateless1: "098 765 4321",
+        
+        countryCodeStateless2: "dz",
+        dialCodeStateless2: "abc",
+        phoneNumberStateless2: "efg hji klm"
     };
 
     _handleValueChangeStateful = (phoneInputValues) => {
         this.setState({
-            countryCodeStateful: phoneInputValues.countryCode,
             dialCodeStateful: phoneInputValues.dialCode,
             phoneNumberStateful: phoneInputValues.phoneNumber
         });
+        // don't set countryCode to undefined
+        if (phoneInputValues.countryCode !== undefined) {
+            this.setState({
+                countryCodeStateful: phoneInputValues.countryCode
+            });
+        }
     };
 
     _handleValueChangeStateless = (phoneInputValues) => {
         this.setState({
-            countryCodeStateless: phoneInputValues.countryCode,
             dialCodeStateless: phoneInputValues.dialCode,
             phoneNumberStateless: phoneInputValues.phoneNumber
         });
+        // don't set countryCode to undefined
+        if (phoneInputValues.countryCode !== undefined) {
+            this.setState({
+                countryCodeStateless: phoneInputValues.countryCode
+            });
+        }
     };
 
-    _handleToggle = () => {
+    _handleDemoToggle = () => {
         this.setState({
             open: !this.state.open
         });
@@ -76,7 +90,7 @@ class I18nPhoneInputDemo extends React.Component {
                     searchString={this.state.searchString}
                     searchTime={this.state.searchTime}
                     open={this.state.open}
-                    onToggle={this._handleToggle}
+                    onToggle={this._handleDemoToggle}
                     onValueChange={this._handleValueChangeStateless}
                     countryCode={this.state.countryCodeStateless}
                     dialCode={this.state.dialCodeStateless}
@@ -87,7 +101,16 @@ class I18nPhoneInputDemo extends React.Component {
                     &nbsp;{this.state.phoneNumberStateless}
                 </div>
                 <br/>
-                
+
+                <label className="detached">Stateless Phone Input with Error</label>
+                <I18nPhoneInput
+                    stateless={true}
+                    open={false}
+                    countryCode={this.state.countryCodeStateless2}
+                    dialCode={this.state.dialCodeStateless1}
+                    phoneNumber={this.state.phoneNumberStateless2} />
+                <br/>
+
                 <label className="detached">Stateless, Disabled Phone Input</label>
                 <I18nPhoneInput
                     stateless={true}
@@ -96,6 +119,11 @@ class I18nPhoneInputDemo extends React.Component {
                     dialCode={this.state.dialCodeStateless1}
                     phoneNumber={this.state.phoneNumberStateless1}
                     disabled={true} />
+                <br/>
+                <div>
+                    {this.state.dialCodeStateless ? "+" + this.state.dialCodeStateless : ""}
+                    &nbsp;{this.state.phoneNumberStateless}
+                </div>
                 <br/>
             </div>
         );

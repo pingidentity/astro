@@ -21,7 +21,6 @@ $hoverColor: rgba($color-white, 0.5) !default;
 $greyText: $color-elephant !default;
 $greyBorder: $color-rabbit-fur !default;
 
-
 $flagHeight: 15px !default;
 $flagWidth: 20px !default;
 $flagPadding: 8px !default;
@@ -77,13 +76,26 @@ $flagsImageExtension: 'png' !default;
         position: absolute;
         top: 0;
         bottom: 0;
-
     }
     .input-custom-select {
         .select-list .country {
             .dial-code:before {
                 content: '+';
             }
+        }
+    }
+    .form-error {
+        &.input-text {
+            .input-container {
+                padding-right: 0;
+                display: block;
+            }
+        }
+        .form-error-icon {
+            right: -20px;
+        }
+        .form-error-message {
+            width: 100%;
         }
     }
 }
@@ -117,19 +129,9 @@ $flagsImageExtension: 'png' !default;
     // keep the input's default inline properties
     display: inline-block;
 
-    // paul irish says this is ok
-    // http://www.paulirish.com/2012/box-sizing-border-box-ftw/
-    * {
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-    }
-
-    .hide {
-        display: none;
-    }
-    // need this during init, to get the height of the dropdown
+    .hide,
     .v-hide {
-        visibility: hidden;
+        display: none;
     }
 
     .form-control {
@@ -156,16 +158,6 @@ $flagsImageExtension: 'png' !default;
 
             // any margin-left here will push the selected-flag away
             margin-left: 0;
-
-            // when user presses invalid key, we add a class which instantly adds a bg color,
-            // then when we remove that class, this does a quick fade back to no bg
-            transition: background-color 100ms ease-out;
-        }
-        // when user presses invalid key, add this class temporarily to change bg color
-        input.iti-invalid-key {
-            // override the default transition state to show the change instantly
-            transition: background-color 0;
-            background-color: #ffc7c7;
         }
 
         // disable hover state when input is disabled
@@ -182,7 +174,7 @@ $flagsImageExtension: 'png' !default;
             }
         }
 
-        // Override default input styles
+        // override default input styles
         input[type=text].selected-option-label {
             width: 20px;
             height: 15px;
@@ -193,13 +185,13 @@ $flagsImageExtension: 'png' !default;
 
     .selected-option {
         width: $selectedFlagWidth;
-        // // this must be full-height both for the hover highlight, and to push down the
-        // // dropdown so it appears below the input
+        // this must be full-height both for the hover highlight, and to push down the
+        // dropdown so it appears below the input
         height: 100%;
         padding: 0 0 0 $flagPadding;
 
         .no-selection:before {
-            content: ' ';
+            content: '';
             position: absolute;
             top: 12px;
             left: 8px;
@@ -229,13 +221,8 @@ $flagsImageExtension: 'png' !default;
             }
 
             &:after {
-                //clear default arrow
+                // clear default arrow
                 content: none !important;
-            }
-        }
-        &:hover {
-            .selected-option {
-                background-color: transparent;
             }
         }
     }
@@ -275,7 +262,6 @@ $flagsImageExtension: 'png' !default;
         z-index: 1;
         width: $selectedFlagWidth;
         height: 100%;
-        opacity: 0;
     }
 
     // if dropdownContainer option is set, increase z-index to prevent display issues
@@ -291,13 +277,10 @@ $flagsImageExtension: 'png' !default;
         }
     }
 
-    // hacks for bad dom
+    // hacks for bad dom: TODO refactor
     .input-text {
         margin: 0;
 
-        .input-container {
-            display: inline;
-        }
         .iti-flag,
         .iti-flag[readonly] {
             border-style: solid !important;
@@ -1376,11 +1359,9 @@ $flagsImageExtension: 'png' !default;
 .iti-flag {
     width: $flagWidth;
     height: $flagHeight;
-    box-shadow: 0 0 1px 0 #888;
     background-image: url('#{$img-path}#{$flagsImageName}.#{$flagsImageExtension}');
     background-repeat: no-repeat;
     // empty state
-    background-color: #dbdbdb;
     background-position: $flagWidth 0;
 
     // hack for Nepal which is the only flag that is not square/rectangle, so it has transparency, so you can see the default grey behind it
