@@ -239,10 +239,13 @@ class OptionItem extends React.Component {
     };
 
     render() {
+        var className = {
+            "help-hint-option": this.props.option.helpHintText
+        };
         return (
             <li
                 data-id={this.props["data-id"]}
-                className={this.props.className}
+                className={classnames(this.props.className, className)}
                 onClick={this._handleClick}>
                 {this._renderContent()}
             </li>

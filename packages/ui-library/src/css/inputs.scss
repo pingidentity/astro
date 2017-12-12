@@ -796,6 +796,8 @@ input[type=file] {
 }
 
 @mixin drop-down-styles {
+    $option-padding: 7px 40px 7px 15px;
+
     .select-list {
         list-style: none;
         position: relative;
@@ -809,7 +811,7 @@ input[type=file] {
         .none-option {
             // Note: decided not to use line-height here for alignment because it causes issues e.g. large font-sizes
             // will overlap, and also looks bad if one item overflows onto 2 lines
-            padding: 7px 40px 7px 15px;
+            padding: $option-padding;
             font-size: 14px;
             position: relative;
             line-height: 13px;
@@ -828,6 +830,19 @@ input[type=file] {
             &.disabled {
                 background: none;
                 color: $color-rabbit-fur;
+            }
+        }
+        .help-hint-option {
+            &.select-option {
+                padding: 0;
+
+                .help-tooltip {
+                    display: block;
+                }
+                .help-tooltip-target {
+                    display: block;
+                    padding: $option-padding;
+                }
             }
         }
         .selected {
@@ -981,7 +996,7 @@ input[type=file] {
         display: none;
         z-index: 2; // popup so render above everything else
         max-height: 200px;
-        overflow-y: scroll;
+        overflow-y: auto;
         border: 1px solid $color-rabbit-fur;
         list-style: none;
         position: relative;
@@ -990,7 +1005,6 @@ input[type=file] {
         white-space: nowrap;
 
         @include box-shadow(0 3px 4px rgba($color-black, 0.1));
-        @include border-radius(0 0 $default-input-border-radius $default-input-border-radius);
 
         // place menu above the input element
         &.dropup {
