@@ -939,10 +939,11 @@ input[type=file] {
         &.input-text {
             input[type=text] {
                 color: $color-midnight;
+                background-color: $color-input-fill;
                 cursor: pointer;
-                &:hover,
+
                 &:focus {
-                    @include transition(none);
+                    border-color: $color-active-blue;
                 }
             }
         }
@@ -994,6 +995,7 @@ input[type=file] {
         $option-padding: 7px 40px 7px 15px;
 
         display: none;
+        top: -1px;
         z-index: 2; // popup so render above everything else
         max-height: 200px;
         overflow-y: auto;
@@ -2209,11 +2211,12 @@ input[type=file] {
         input[type=password],
         textarea {
             cursor: text;
-            color: $color-input-text-readonly;
+            background: $color-white;
+            border-color: $color-timberwolf;
 
             &:hover,
             &:focus {
-                border: 1px solid $color-input-fill;
+                border-color: $color-rabbit-fur;
             }
         }
         textarea {
