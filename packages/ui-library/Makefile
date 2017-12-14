@@ -112,10 +112,11 @@ define run_coverage
 endef
 
 define package
+	$(NPM_EXEC) run package-library
 	rm -rf dist
 	mkdir -p dist/ui-library
 	mkdir -p dist/ui-library/examples
-	cp -rf src dist/ui-library
+	cp -rf lib dist/ui-library
 	cp -f package.json dist/ui-library
 	tar -czf dist/ui-library/examples/basic-app.tar.gz --directory=examples basic-app
 	tar -czf dist/ui-library-$(1).tar.gz --directory=dist ui-library
