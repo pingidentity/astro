@@ -31,6 +31,7 @@ module.exports = {
     Spinner: require("./components/general/Spinner"),
     TabbedSections: require("./components/general/TabbedSections"),
     TimePicker: require("./components/general/TimePicker"),
+    UnitInput: require("./components/general/UnitInput"),
 
     IntroTutorial: require("./components/help/intro-tutorial/IntroTutorial"),
 

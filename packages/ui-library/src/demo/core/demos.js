@@ -500,6 +500,13 @@ module.exports = [
                 pathToDemoSource: "demo_components_general_TimePickerDemo.jsx.html"
             },
             {
+                label: "Unit Input",
+                demo: require("../components/general/UnitInputDemo"),
+                pathToDoc: "components/general/UnitInput.jsx",
+                pathToSource: "components_general_UnitInput.jsx.html",
+                pathToDemoSource: "demo_components_general_UnitInputDemo.jsx.html"
+            },
+            {
                 label: "Grid",
                 demo: require("../components/grid/GridDemo"),
                 pathToDoc: "components/grid/Grid.jsx",

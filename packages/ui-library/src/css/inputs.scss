@@ -466,6 +466,7 @@ label {
     }
 
     &.detached {
+        margin-bottom: 7px;
         display: block;
     }
 
@@ -2374,6 +2375,42 @@ input[type=file] {
 .input-textselect {
     display: inline-block;
 
+    // UnitInput Component
+    &.unit-input {
+        .input-custom-select {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .input-text {
+            input[type=text] {
+                &.selected-option-label {
+                    text-align: left;
+                    border-color: transparent;
+                }
+            }
+        }
+        &.reversed {
+            .input-text {
+                input[type=text] {
+                    border-color: $color-dolphin;
+                    background-color: $color-white;
+                }
+            }
+            > .input-text {
+                input[type=text] {
+                    border-width: 1px 0 1px 1px;
+                }
+            }
+            > .input-custom-select {
+                border-color: $color-dolphin;
+
+                input[type=text] {
+                    border-width: 1px 1px 1px 0;
+                }
+            }
+        }
+    }
+
     .input-container .input-select {
         margin: 0 0 0 -2px;
         vertical-align: middle;
@@ -2384,15 +2421,20 @@ input[type=file] {
         }
     }
 
-    .input-container .input-custom-select {
-        input[type=text] {
-            width: 100%;
-            text-align: left;
-            @include border-radius(0 $default-input-border-radius $default-input-border-radius 0);
+    > .input-custom-select {
+        padding: 0;
+        border-left: 1px solid transparent;
+
+        .input-text {
+            input[type=text] {
+                width: 100%;
+                text-align: left;
+                @include border-radius(0 $default-input-border-radius $default-input-border-radius 0);
+            }
         }
     }
 
-    .input-text {
+    > .input-text {
         margin: 0 !important;
 
         input[type=text] {
