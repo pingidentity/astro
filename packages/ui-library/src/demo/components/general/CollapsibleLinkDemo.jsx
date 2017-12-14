@@ -1,6 +1,6 @@
 var React = require("react");
-var CollapsibleLink = require("../../../components/general/CollapsibleLink.jsx"),
-    If = require("../../../components/general/If.jsx");
+var CollapsibleLink = require("../../../components/general/CollapsibleLink"),
+    If = require("../../../components/general/If");
 
 /**
 * @name CollapsibleLinkDemo

@@ -1,7 +1,7 @@
 window.__DEV__ = true;
 
-jest.dontMock("../Pagination.jsx");
-jest.dontMock("../../rows/expandable-row/ExpandableRow.jsx");
+jest.dontMock("../Pagination");
+jest.dontMock("../../rows/expandable-row/ExpandableRow");
 
 describe("Pagination", function () {
 
@@ -9,8 +9,8 @@ describe("Pagination", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         Utils = require("../../../util/Utils"),
-        Pagination = require("../Pagination.jsx"),
-        ExpandableRow = require("../../rows/expandable-row/ExpandableRow.jsx"),
+        Pagination = require("../Pagination"),
+        ExpandableRow = require("../../rows/expandable-row/ExpandableRow"),
         callback,
         component,
         pageLinks,

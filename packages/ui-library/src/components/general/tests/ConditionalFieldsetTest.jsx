@@ -1,19 +1,19 @@
 window.__DEV__ = true;
 
-jest.dontMock("../ConditionalFieldset.jsx");
-jest.dontMock("../../forms/FormDropDownList.jsx");
-jest.dontMock("../../forms/FormLabel.jsx");
-jest.dontMock("../../forms/FormError.jsx");
-jest.dontMock("../../forms/FormRadioGroup.jsx");
+jest.dontMock("../ConditionalFieldset");
+jest.dontMock("../../forms/FormDropDownList");
+jest.dontMock("../../forms/FormLabel");
+jest.dontMock("../../forms/FormError");
+jest.dontMock("../../forms/FormRadioGroup");
 
 describe("ConditionalFieldset", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         Utils = require("../../../util/Utils"),
-        FormDropDownList = require("../../forms/FormDropDownList.jsx"),
-        FormRadioGroup = require("../../forms/FormRadioGroup.jsx"),
-        ConditionalFieldset = require("../ConditionalFieldset.jsx"),
+        FormDropDownList = require("../../forms/FormDropDownList"),
+        FormRadioGroup = require("../../forms/FormRadioGroup"),
+        ConditionalFieldset = require("../ConditionalFieldset"),
         _ = require("underscore"),
         callback,
         dataId = "fieldset",

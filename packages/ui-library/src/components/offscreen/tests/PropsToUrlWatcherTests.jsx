@@ -1,13 +1,13 @@
 window.__DEV__ = true;
 
-jest.dontMock("../PropsToUrlWatcher.jsx");
+jest.dontMock("../PropsToUrlWatcher");
 jest.dontMock("../../../util/ReduxTestUtils.js");
 
 describe("HistoryWriter", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         ReduxTestUtils = require("../../../util/ReduxTestUtils.js"),
-        PropsToUrlWatcher = require("../PropsToUrlWatcher.jsx"),
+        PropsToUrlWatcher = require("../PropsToUrlWatcher"),
         TestUtils = require("../../../testutil/TestUtils"),
         _ = require("underscore");
 

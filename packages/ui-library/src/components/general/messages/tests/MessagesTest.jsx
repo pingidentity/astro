@@ -1,7 +1,7 @@
 window.__DEV__ = true;
 
 jest.dontMock("../index.js");
-jest.dontMock("../Messages.jsx");
+jest.dontMock("../Messages");
 jest.dontMock("../MessagesConstants.js");
 
 describe("Messages", function () {

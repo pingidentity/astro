@@ -1,6 +1,6 @@
 window.__DEV__ = true;
 
-jest.dontMock("../TabbedSections.jsx");
+jest.dontMock("../TabbedSections");
 
 describe("If component", function () {
     var React = require("react"),
@@ -9,7 +9,7 @@ describe("If component", function () {
         Utils = require("../../../util/Utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         Wrapper = TestUtils.UpdatePropsWrapper,
-        TabbedSections = require("../TabbedSections.jsx"),
+        TabbedSections = require("../TabbedSections"),
         _ = require("underscore");
 
     function getComponent (opts) {

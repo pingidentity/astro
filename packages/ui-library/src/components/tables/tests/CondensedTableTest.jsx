@@ -1,10 +1,10 @@
-jest.dontMock("../CondensedTable.jsx");
+jest.dontMock("../CondensedTable");
 
 describe("CondensedTable", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        CondensedTable = require("../CondensedTable.jsx");
+        CondensedTable = require("../CondensedTable");
 
     var mockData = {
         head: [

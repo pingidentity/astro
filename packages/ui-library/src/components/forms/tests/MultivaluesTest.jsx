@@ -1,7 +1,7 @@
 window.__DEV__ = true;
 
-jest.dontMock("../Multivalues.jsx");
-jest.dontMock("../FormLabel.jsx");
+jest.dontMock("../Multivalues");
+jest.dontMock("../FormLabel");
 
 describe("FormTextField", function () {
 
@@ -9,7 +9,7 @@ describe("FormTextField", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         Utils = require("../../../util/Utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        Multivalues = require("../Multivalues.jsx"),
+        Multivalues = require("../Multivalues"),
         callback,
         component,
         entries,

@@ -1,13 +1,13 @@
 window.__DEV__ = true;
 
-jest.dontMock("../Spinner.jsx");
+jest.dontMock("../Spinner");
 
 describe("Spinner", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         Utils = require("../../../util/Utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        Spinner = require("../Spinner.jsx"),
+        Spinner = require("../Spinner"),
         _ = require("underscore"),
         defaultTextValue = "Loading...";
 

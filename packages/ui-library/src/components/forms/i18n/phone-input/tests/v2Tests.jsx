@@ -27,13 +27,13 @@ jest.setMock("../../countryCodes", [
     }
 ]);
 
-jest.dontMock("../v2.jsx");
-jest.dontMock("../../CountryFlagList.jsx");
-jest.dontMock("../../../FormError.jsx");
-jest.dontMock("../../../FormLabel.jsx");
-jest.dontMock("../../../FormDropDownList.jsx");
+jest.dontMock("../v2");
+jest.dontMock("../../CountryFlagList");
+jest.dontMock("../../../FormError");
+jest.dontMock("../../../FormLabel");
+jest.dontMock("../../../FormDropDownList");
 jest.dontMock("../../../form-text-field/index.js");
-jest.dontMock("../../../form-text-field/v2.jsx");
+jest.dontMock("../../../form-text-field/v2");
 jest.dontMock("../../../../../util/i18n/Translator.js");
 jest.dontMock("../../../../../util/Utils");
 
@@ -42,7 +42,7 @@ describe("I18nPhoneInput", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         Utils = require("../../../../../util/Utils"),
         TestUtils = require("../../../../../testutil/TestUtils"),
-        I18nPhoneInput = require("../v2.jsx"),
+        I18nPhoneInput = require("../v2"),
         _ = require("underscore");
 
     function getComponent (props) {

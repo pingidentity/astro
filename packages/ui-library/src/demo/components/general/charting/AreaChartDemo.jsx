@@ -1,6 +1,6 @@
 var React = require("react"),
-    FormLabel = require("../../../../components/forms/FormLabel.jsx"),
-    AreaChart = require("../../../../components/general/charting/AreaChart.jsx"),
+    FormLabel = require("../../../../components/forms/FormLabel"),
+    AreaChart = require("../../../../components/general/charting/AreaChart"),
     LegendTypes = require("../../../../constants/ChartingConstants.js").LegendTypes,
     LineTypes = require("../../../../constants/ChartingConstants.js").LineTypes,
     LegendTypes = require("../../../../constants/ChartingConstants.js").LegendTypes,

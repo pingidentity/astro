@@ -1,6 +1,6 @@
 var React = require("react");
-var Indent = require("./../../../components/general/Indent.jsx");
-var Link = require("./../../../components/general/Link.jsx");
+var Indent = require("./../../../components/general/Indent");
+var Link = require("./../../../components/general/Link");
 
 /**
 * @name IndentDemo

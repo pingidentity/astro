@@ -1,6 +1,6 @@
 var React = require("react"),
-    Pagination = require("../../../components/list/Pagination.jsx"),
-    ExpandableRow = require("../../../components/rows/ExpandableRow.jsx");
+    Pagination = require("../../../components/list/Pagination"),
+    ExpandableRow = require("../../../components/rows/ExpandableRow");
 
 /**
 * @name PaginationDemo

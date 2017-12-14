@@ -2,8 +2,8 @@ var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames"),
     _ = require("underscore"),
-    HelpHint = require("../../tooltips/HelpHint.jsx"),
-    Statuses = require("./ExpandableRow.jsx").Statuses;
+    HelpHint = require("../../tooltips/HelpHint"),
+    Statuses = require("./ExpandableRow").Statuses;
 
 /**
  * @class Status

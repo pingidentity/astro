@@ -1,15 +1,15 @@
 window.__DEV__ = true;
 
 jest.dontMock("underscore");
-jest.dontMock("../FormCheckboxList.jsx");
-jest.dontMock("../FormLabel.jsx");
-jest.dontMock("../FormError.jsx");
-jest.dontMock("../FormSearchBox.jsx");
+jest.dontMock("../FormCheckboxList");
+jest.dontMock("../FormLabel");
+jest.dontMock("../FormError");
+jest.dontMock("../FormSearchBox");
 jest.dontMock("../form-text-field/index.js");
-jest.dontMock("../form-text-field/v2.jsx");
+jest.dontMock("../form-text-field/v2");
 jest.dontMock("../form-toggle/index.js");
-jest.dontMock("../form-toggle/v2.jsx");
-jest.dontMock("../../general/If.jsx");
+jest.dontMock("../form-toggle/v2");
+jest.dontMock("../../general/If");
 jest.dontMock("../../../testutil/TestUtils");
 
 describe("FormCheckboxList", function () {
@@ -18,8 +18,8 @@ describe("FormCheckboxList", function () {
     var ReactTestUtils = require("react-dom/test-utils");
     var TestUtils = require("../../../testutil/TestUtils");
     var Utils = require("../../../util/Utils");
-    var FormCheckboxList = require("../FormCheckboxList.jsx");
-    var Toggle = require("../form-toggle/v2.jsx");
+    var FormCheckboxList = require("../FormCheckboxList");
+    var Toggle = require("../form-toggle/v2");
 
     function getComponent (props) {
         props = _.defaults(props || {}, {

@@ -2,11 +2,11 @@ var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames"),
     _ = require("underscore"),
-    If = require("../../general/If.jsx"),
-    FormRadioGroup = require("../FormRadioGroup.jsx"),
-    FormCheckbox = require("../FormCheckbox.jsx"),
-    FormSearchBox = require("../FormSearchBox.jsx"),
-    HelpHint = require("../../tooltips/HelpHint.jsx"),
+    If = require("../../general/If"),
+    FormRadioGroup = require("../FormRadioGroup"),
+    FormCheckbox = require("../FormCheckbox"),
+    FormSearchBox = require("../FormSearchBox"),
+    HelpHint = require("../../tooltips/HelpHint"),
     Constants = require("./v2-constants");
 
 /**

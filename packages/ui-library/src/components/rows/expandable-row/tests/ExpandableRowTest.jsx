@@ -1,16 +1,16 @@
 window.__DEV__ = true;
 
-jest.dontMock("../ExpandableRow.jsx");
-jest.dontMock("../../../tooltips/DetailsTooltip.jsx");
-jest.dontMock("../../../tooltips/HelpHint.jsx");
+jest.dontMock("../ExpandableRow");
+jest.dontMock("../../../tooltips/DetailsTooltip");
+jest.dontMock("../../../tooltips/HelpHint");
 
 describe("ExpandableRow", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
         Utils = require("../../../../util/Utils"),
-        ExpandableRow = require("../ExpandableRow.jsx"),
-        HelpHint = require("../../../tooltips/HelpHint.jsx"),
+        ExpandableRow = require("../ExpandableRow"),
+        HelpHint = require("../../../tooltips/HelpHint"),
         _ = require("underscore");
 
     function getComponent (opts) {

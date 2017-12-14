@@ -1,5 +1,5 @@
 
-jest.dontMock("../SelectText.jsx");
+jest.dontMock("../SelectText");
 
 
 /*
@@ -18,7 +18,7 @@ describe("SelectText", function () {
     var ReactTestUtils = require("react-dom/test-utils");
     var Utils = require("../../../util/Utils");
     var TestUtils = require("../../../testutil/TestUtils");
-    var SelectText = require("../SelectText.jsx");
+    var SelectText = require("../SelectText");
     var Wrapper = TestUtils.UpdatePropsWrapper;
 
     afterEach(function () {

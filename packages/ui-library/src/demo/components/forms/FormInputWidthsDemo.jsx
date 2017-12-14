@@ -5,8 +5,8 @@
 var React = require("react"),
     FormTextArea = require("./../../../components/forms/form-text-area"),
     FormTextField = require("./../../../components/forms/form-text-field"),
-    FormCheckbox = require("./../../../components/forms/FormCheckbox.jsx"),
-    FormDropDownList = require("./../../../components/forms/FormDropDownList.jsx");
+    FormCheckbox = require("./../../../components/forms/FormCheckbox"),
+    FormDropDownList = require("./../../../components/forms/FormDropDownList");
 
 /**
 * @name FormInputWidthsDemo

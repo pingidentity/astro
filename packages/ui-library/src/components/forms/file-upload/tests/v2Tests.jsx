@@ -1,13 +1,13 @@
 window.__DEV__ = true;
 
-jest.dontMock("./commonTests.jsx");
+jest.dontMock("./commonTests");
 jest.dontMock("../index.js");
-jest.dontMock("../v2.jsx");
-jest.dontMock("../v2-stateful.jsx");
-jest.dontMock("../v2-stateless.jsx");
+jest.dontMock("../v2");
+jest.dontMock("../v2-stateful");
+jest.dontMock("../v2-stateless");
 jest.dontMock("../v2-constants.js");
-jest.dontMock("../../FormError.jsx");
-jest.dontMock("../../FormLabel.jsx");
+jest.dontMock("../../FormError");
+jest.dontMock("../../FormLabel");
 
 //mock the exif api
 jest.setMock("exif-js", { getData: jest.genMockFunction() });
@@ -19,13 +19,13 @@ describe("FileUpload", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
         FileUpload = require("../index.js"),
-        CommonTests = require("./commonTests.jsx"),
+        CommonTests = require("./commonTests"),
         Utils = require("../../../../util/Utils"),
         _ = require("underscore");
 
     //require these files so that jest will count them in coverage
-    require("../v2-stateful.jsx");
-    require("../v2-stateless.jsx");
+    require("../v2-stateful");
+    require("../v2-stateless");
 
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {

@@ -1,5 +1,5 @@
 var React = require("react"),
-    InlineMessage = require("../../../components/general/InlineMessage.jsx");
+    InlineMessage = require("../../../components/general/InlineMessage");
 
 /**
 * @name InlineMessageDemo

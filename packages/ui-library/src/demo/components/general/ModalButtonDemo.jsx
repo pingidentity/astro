@@ -1,5 +1,5 @@
 var React = require("react");
-var ModalButton = require("./../../../components/general/ModalButton.jsx");
+var ModalButton = require("./../../../components/general/ModalButton");
 
 const NUM_STATELESS_DEMOS = 3;
 

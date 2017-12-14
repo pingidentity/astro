@@ -1,12 +1,12 @@
 
-jest.dontMock("../FormTimeZone.jsx");
-jest.dontMock("../FormError.jsx");
-jest.dontMock("../FormLabel.jsx");
-jest.dontMock("../FormSearchBox.jsx");
+jest.dontMock("../FormTimeZone");
+jest.dontMock("../FormError");
+jest.dontMock("../FormLabel");
+jest.dontMock("../FormSearchBox");
 jest.dontMock("../form-text-field/index.js");
-jest.dontMock("../form-text-field/v2.jsx");
-jest.dontMock("../../general/CollapsibleLink.jsx");
-jest.dontMock("../../tooltips/HelpHint.jsx");
+jest.dontMock("../form-text-field/v2");
+jest.dontMock("../../general/CollapsibleLink");
+jest.dontMock("../../tooltips/HelpHint");
 jest.dontMock("../../../util/KeyboardUtils.js");
 
 
@@ -16,7 +16,7 @@ describe("FormTimeZone", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         ReactDOM = require("react-dom"),
         TestUtils = require("../../../testutil/TestUtils"),
-        FormTimeZone = require("../FormTimeZone.jsx"),
+        FormTimeZone = require("../FormTimeZone"),
         KeyboardUtils = require("../../../util/KeyboardUtils.js"),
         moment = require("moment-timezone"),
         momentMetadata = require("../../../../node_modules/moment-timezone/data/meta/latest.json"),

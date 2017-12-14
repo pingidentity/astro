@@ -1,13 +1,13 @@
 window.__DEV__ = true;
 
-jest.dontMock("../EllipsisLoader.jsx");
+jest.dontMock("../EllipsisLoader");
 
 describe("Ellipsis loader", function () {
     var React = require("react");
     var ReactTestUtils = require("react-dom/test-utils");
     var Utils = require("../../../util/Utils");
     var TestUtils = require("../../../testutil/TestUtils");
-    var EllipsisLoader = require("../EllipsisLoader.jsx");
+    var EllipsisLoader = require("../EllipsisLoader");
 
     it("renders the animated ellipsis when the loading flag is set to true", function () {
         var component = ReactTestUtils.renderIntoDocument(

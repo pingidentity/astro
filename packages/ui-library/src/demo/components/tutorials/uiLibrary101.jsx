@@ -1,10 +1,10 @@
 var React = require("react"),
     Redux = require("redux"),
-    Tutorial = require("./Tutorial.jsx"),
-    Markup = require("../../core/Markup.jsx"),
-    ColorPicker = require("../../../components/general/ColorPicker.jsx"),
+    Tutorial = require("./Tutorial"),
+    Markup = require("../../core/Markup"),
+    ColorPicker = require("../../../components/general/ColorPicker"),
     ListView = require("../../../templates/list-view"),
-    FormDropDownList = require("../../../components/forms/FormDropDownList.jsx"),
+    FormDropDownList = require("../../../components/forms/FormDropDownList"),
     Translator = require("../../../util/i18n/Translator.js");
 
 var LANGUAGES = [
@@ -165,7 +165,7 @@ class UILibrary101 extends React.Component {
                      the file where we want to use it:
                 </p>
                 <Markup custom={true} language="js"
-                    content={'var ColorPicker = require("ui-library/src/components/general/ColorPicker.jsx")'} //eslint-disable-line
+                    content={'var ColorPicker = require("ui-library/src/components/general/ColorPicker")'} //eslint-disable-line
                 />
                 <p className="attention">
                     Do not use the relative path to the components to import (e.g. '../../node_modules/ui-library/src
@@ -331,7 +331,7 @@ class UILibrary101 extends React.Component {
                         [
                         /* eslint-disable */
                             '// The translator is a global module. You just set the current language once and it is used everywhere.',
-                            'var translator = require("/src/util/i18n/translator.jsx");',
+                            'var translator = require("/src/util/i18n/translator");',
                             'translator.setLanguage("vi_vn");'
                         /* eslint-enable */
                         ].join("\n")

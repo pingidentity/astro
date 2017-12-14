@@ -1,5 +1,5 @@
 var React = require("react");
-var FormCheckbox = require("./../../../components/forms/FormCheckbox.jsx");
+var FormCheckbox = require("./../../../components/forms/FormCheckbox");
 
 /**
 * @name FormCheckboxDemo

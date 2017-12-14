@@ -2,8 +2,8 @@ var PropTypes = require("prop-types");
 var React = require("react"),
     _ = require("underscore"),
     Utils = require("../../../util/Utils.js"),
-    StatelessFileUpload = require("./v2-stateless.jsx"),
-    StatefulFileUpload = require("./v2-stateful.jsx"),
+    StatelessFileUpload = require("./v2-stateless"),
+    StatefulFileUpload = require("./v2-stateful"),
     Constants = require("./v2-constants.js");
 
 /**

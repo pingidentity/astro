@@ -1,7 +1,7 @@
 var PropTypes = require("prop-types");
 var React = require("react"),
     ReactDOM = require("react-dom"),
-    Spinner = require("../general/Spinner.jsx"),
+    Spinner = require("../general/Spinner"),
     _ = require("underscore"),
     Utils = require("../../util/Utils.js");
 

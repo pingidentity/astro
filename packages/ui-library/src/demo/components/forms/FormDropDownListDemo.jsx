@@ -1,5 +1,5 @@
 var React = require("react"),
-    FormDropDownList = require("../../../components/forms/FormDropDownList.jsx");
+    FormDropDownList = require("../../../components/forms/FormDropDownList");
 
 
 var NUM_DEMOS = 10,

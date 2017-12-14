@@ -1,7 +1,7 @@
 var React = require("react");
-var TimePicker = require("./../../../components/general/TimePicker.jsx");
+var TimePicker = require("./../../../components/general/TimePicker");
 
-var Calendar = require("./../../../components/calendars/Calendar.jsx");
+var Calendar = require("./../../../components/calendars/Calendar");
 
 /**
 * @name TimePickerDemo

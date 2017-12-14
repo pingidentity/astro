@@ -1,9 +1,9 @@
 var PropTypes = require("prop-types");
 var React = require("react"),
     ReactDOM = require("react-dom"),
-    FormSearchBox = require("../../forms/FormSearchBox.jsx"),
-    FormLabel = require("../../forms/FormLabel.jsx"),
-    DDRow = require("../../rows/DragDropRow.jsx"),
+    FormSearchBox = require("../../forms/FormSearchBox"),
+    FormLabel = require("../../forms/FormLabel"),
+    DDRow = require("../../rows/DragDropRow"),
     classnames = require("classnames"),
     _ = require("underscore");
 

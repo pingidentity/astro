@@ -1,5 +1,5 @@
 var React = require("react"),
-    I18nCountrySelector = require("../../../../components/forms/i18n/I18nCountrySelector.jsx");
+    I18nCountrySelector = require("../../../../components/forms/i18n/I18nCountrySelector");
 
 /**
 * @name I18nCountrySelectorDemo

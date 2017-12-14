@@ -2,7 +2,7 @@ var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames"),
     Utils = require("../../util/Utils"),
-    FormLabel = require("./FormLabel.jsx");
+    FormLabel = require("./FormLabel");
 
 /**
  * @callback FormRadioGroup~onValueChange

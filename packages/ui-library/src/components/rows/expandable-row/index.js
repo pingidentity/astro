@@ -1,3 +1,3 @@
-var ExpandableRow = require("./ExpandableRow.jsx");
+var ExpandableRow = require("./ExpandableRow");
 
 module.exports = ExpandableRow;

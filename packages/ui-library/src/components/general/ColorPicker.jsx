@@ -9,12 +9,12 @@ var React = require("react");
 var ReactDOM = require("react-dom");
 var css = require("classnames");
 var _ = require("underscore");
-var FormLabel = require("../forms/FormLabel.jsx");
+var FormLabel = require("../forms/FormLabel");
 var FormTextField = require("../forms/form-text-field");
 var Validators = require("../../util/Validators");
 var Utils = require("../../util/Utils");
 var Validator = require("validator");
-var If = require("./If.jsx");
+var If = require("./If");
 var callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutsideOfContainer;
 
 /**

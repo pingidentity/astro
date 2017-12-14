@@ -4,8 +4,8 @@ var React = require("react"),
     // isomorphic-fetch need a Promise polyfill for older browsers.
     // Promise use inside of fetch, fetch should go with Promise to avoid page crashing in IE.
     Promise = require("es6-promise").Promise, // eslint-disable-line
-    HeaderBar = require("../src/components/panels/header-bar/HeaderBar.jsx"),
-    LeftNavBar = require("../src/components/panels/left-nav/LeftNavBar.jsx"),
+    HeaderBar = require("../src/components/panels/header-bar/HeaderBar"),
+    LeftNavBar = require("../src/components/panels/left-nav/LeftNavBar"),
     _ = require("underscore");
 
 // the CSS files will be compiled by a webpack plugin

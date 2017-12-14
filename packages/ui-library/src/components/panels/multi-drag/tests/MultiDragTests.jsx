@@ -1,6 +1,6 @@
 window.__DEV__ = true;
 
-jest.dontMock("../MultiDrag.jsx");
+jest.dontMock("../MultiDrag");
 jest.dontMock("../../../../util/EventUtils");
 jest.dontMock("../../../../util/Utils");
 
@@ -10,7 +10,7 @@ describe("MultiDrag", function () {
         TestUtils = require("../../../../testutil/TestUtils"),
         Utils = require("../../../../util/Utils"),
         ReduxTestUtils = require("../../../../util/ReduxTestUtils"),
-        MultiDrag = require("../MultiDrag.jsx"),
+        MultiDrag = require("../MultiDrag"),
         _ = require("underscore"),
         TestBackend = require("react-dnd-test-backend"),
         DragDropContext = require("react-dnd").DragDropContext;

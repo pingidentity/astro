@@ -3,7 +3,7 @@
 var PropTypes = require("prop-types");
 
 var React = require("react"),
-    Grid = require("./Grid.jsx");
+    Grid = require("./Grid");
 
 /**
  * @callback Grid#Column~onSelectAllChange

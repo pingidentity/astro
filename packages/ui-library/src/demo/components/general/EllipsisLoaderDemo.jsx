@@ -1,5 +1,5 @@
 var React = require("react");
-var EllipsisLoader = require("./../../../components/general/EllipsisLoader.jsx");
+var EllipsisLoader = require("./../../../components/general/EllipsisLoader");
 
 /**
 * @name EllipsisLoaderDemo

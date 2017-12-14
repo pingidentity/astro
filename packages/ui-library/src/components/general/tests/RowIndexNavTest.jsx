@@ -1,12 +1,12 @@
 window.__DEV__ = true;
 
-jest.dontMock("../RowIndexNav.jsx");
+jest.dontMock("../RowIndexNav");
 
 describe("Indent", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        RowIndexNav = require("../RowIndexNav.jsx"),
+        RowIndexNav = require("../RowIndexNav"),
         _ = require("underscore");
 
     var activeIndexes = "ABCDEZ".split(""),

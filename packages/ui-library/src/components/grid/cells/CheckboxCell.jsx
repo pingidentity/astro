@@ -4,7 +4,7 @@ var PropTypes = require("prop-types");
 
 var React = require("react"),
     Utils = require("../../../util/Utils"),
-    FormCheckbox = require("../../forms/FormCheckbox.jsx");
+    FormCheckbox = require("../../forms/FormCheckbox");
 
 /**
  * @class CheckboxCell

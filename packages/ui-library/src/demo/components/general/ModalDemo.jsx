@@ -1,5 +1,5 @@
 var React = require("react");
-var Modal = require("./../../../components/general/Modal.jsx");
+var Modal = require("./../../../components/general/Modal");
 
 /**
 * @name ModalDemo

@@ -1,8 +1,8 @@
 "use strict";
 
-jest.dontMock("../ModalButton.jsx");
-jest.dontMock("../Modal.jsx");
-jest.dontMock("../If.jsx");
+jest.dontMock("../ModalButton");
+jest.dontMock("../Modal");
+jest.dontMock("../If");
 jest.dontMock("../../../util/EventUtils.js");
 
 describe("ModalButtonTest", function () {
@@ -10,10 +10,10 @@ describe("ModalButtonTest", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         Utils = require("../../../util/Utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        ModalButton = require("../ModalButton.jsx"),
+        ModalButton = require("../ModalButton"),
         _ = require("underscore");
 
-    require("../Modal.jsx"); // just so Jest include the code coverage on Modal.jsx in the report
+    require("../Modal"); // just so Jest include the code coverage on Modal.jsx in the report
 
     var linkCallback = function () {
         return (<span className="someCallbackClass">Link</span>);

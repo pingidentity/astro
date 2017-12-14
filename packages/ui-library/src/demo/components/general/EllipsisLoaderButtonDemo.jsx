@@ -1,5 +1,5 @@
 var React = require("react");
-var EllipsisLoaderButton = require("./../../../components/general/EllipsisLoaderButton.jsx");
+var EllipsisLoaderButton = require("./../../../components/general/EllipsisLoaderButton");
 
 /**
 * @name EllipsisLoaderButtonDemo

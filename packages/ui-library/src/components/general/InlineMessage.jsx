@@ -4,7 +4,7 @@ var PropTypes = require("prop-types");
 
 var React = require("react"),
     classnames = require("classnames"),
-    If = require("../general/If.jsx"),
+    If = require("../general/If"),
     Utils = require("../../util/Utils"),
     MessageTypes = require("../general/messages/MessagesConstants").MessageTypes;
 

@@ -1,6 +1,6 @@
 
 var React = require("react"),
-    LinkDropDownList = require("../../../components/forms/LinkDropDownList.jsx");
+    LinkDropDownList = require("../../../components/forms/LinkDropDownList");
 
 /**
 * @name LinkDropDownListDemo

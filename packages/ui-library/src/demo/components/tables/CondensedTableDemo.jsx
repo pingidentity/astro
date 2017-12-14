@@ -1,6 +1,6 @@
 var React = require("react"),
-    FormLabel = require("../../../components/forms/FormLabel.jsx"),
-    CondensedTable = require("../../../components/tables/CondensedTable.jsx");
+    FormLabel = require("../../../components/forms/FormLabel"),
+    CondensedTable = require("../../../components/tables/CondensedTable");
 
 /**
 * @name CondensedTable Demo

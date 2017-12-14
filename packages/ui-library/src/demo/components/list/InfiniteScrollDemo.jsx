@@ -1,5 +1,5 @@
 var React = require("react"),
-    InfiniteScroll = require("../../../components/list/InfiniteScroll.jsx"),
+    InfiniteScroll = require("../../../components/list/InfiniteScroll"),
     Utils = require("../../../util/Utils");
 
 /**

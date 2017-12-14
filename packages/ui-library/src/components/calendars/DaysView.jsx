@@ -2,8 +2,8 @@ var PropTypes = require("prop-types");
 var React = require("react");
 var classnames = require("classnames");
 var moment = require("moment-range");
-var Cell = require("./Cell.jsx");
-var ViewHeader = require("./ViewHeader.jsx");
+var Cell = require("./Cell");
+var ViewHeader = require("./ViewHeader");
 var CalendarUtils = require("./Utils.js");
 
 module.exports = class extends React.Component {

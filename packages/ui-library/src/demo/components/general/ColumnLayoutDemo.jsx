@@ -1,5 +1,5 @@
 var React = require("react"),
-    Layout = require("../../../components/general/ColumnLayout.jsx");
+    Layout = require("../../../components/general/ColumnLayout");
 
 /**
 * @name ColumnLayoutDemo

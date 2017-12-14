@@ -1,7 +1,7 @@
 window.__DEV__ = true;
 
-jest.dontMock("../DragDropTable.jsx");
-jest.dontMock("../../list/InfiniteScroll.jsx");
+jest.dontMock("../DragDropTable");
+jest.dontMock("../../list/InfiniteScroll");
 
 jest.useFakeTimers();
 
@@ -11,7 +11,7 @@ describe("DragDropTable", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         _ = require("underscore"),
-        DragDropTable = require("../DragDropTable.jsx"),
+        DragDropTable = require("../DragDropTable"),
         TestBackend = require("react-dnd-test-backend"),
         DragDropContext = require("react-dnd").DragDropContext;
 

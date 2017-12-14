@@ -2,8 +2,8 @@ var React = require("react"),
     _ = require("underscore"),
     _s = require("underscore.string"),
     SelectionList = require("../../../components/forms/selection-list/index"),
-    SelectionFilterLabel = require("../../../components/forms/SelectionFilterLabel.jsx"),
-    DetailsTooltip = require("../../../components/tooltips/DetailsTooltip.jsx");
+    SelectionFilterLabel = require("../../../components/forms/SelectionFilterLabel"),
+    DetailsTooltip = require("../../../components/tooltips/DetailsTooltip");
 
 
 var testIcon = <span className="icon-cog inline-icon"></span>;

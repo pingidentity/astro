@@ -1,6 +1,6 @@
 window.__DEV__ = true;
 
-jest.dontMock("../LineChart.jsx");
+jest.dontMock("../LineChart");
 
 describe("LineChart", function () {
     var React = require("react"),
@@ -8,7 +8,7 @@ describe("LineChart", function () {
         TestUtils = require("../../../../testutil/TestUtils"),
         _ = require("underscore"),
         Line = require("recharts").Line,
-        LineChart = require("../LineChart.jsx");
+        LineChart = require("../LineChart");
 
     function getComponent (props) {
         props = _.defaults(props || {}, {

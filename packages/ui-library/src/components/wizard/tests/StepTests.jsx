@@ -1,19 +1,19 @@
 window.__DEV__ = true;
 
-jest.dontMock("../Step.jsx");
-jest.dontMock("../Progress.jsx");
+jest.dontMock("../Step");
+jest.dontMock("../Progress");
 jest.dontMock("../../../util/format.js");
-jest.dontMock("../../general/EllipsisLoaderButton.jsx");
-jest.dontMock("../../general/context-close-button/v2.jsx");
-jest.dontMock("../../tooltips/CancelTooltip.jsx");
-jest.dontMock("../../tooltips/DetailsTooltip.jsx");
+jest.dontMock("../../general/EllipsisLoaderButton");
+jest.dontMock("../../general/context-close-button/v2");
+jest.dontMock("../../tooltips/CancelTooltip");
+jest.dontMock("../../tooltips/DetailsTooltip");
 
 describe("Step", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        Step = require("../Step.jsx"),
+        Step = require("../Step"),
         assign = require("object-assign");
 
     beforeEach(function () {

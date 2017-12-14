@@ -1,6 +1,6 @@
 
 var React = require("react"),
-    ButtonBar = require("../../../components/forms/ButtonBar.jsx");
+    ButtonBar = require("../../../components/forms/ButtonBar");
 
 /**
 * @name ButtonBarDemo

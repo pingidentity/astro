@@ -27,12 +27,12 @@ jest.setMock("../i18n/countryCodes", [
     }
 ]);
 
-jest.dontMock("../i18n/I18nCountrySelector.jsx");
-jest.dontMock("../i18n/CountryFlagList.jsx");
-jest.dontMock("../FormDropDownList.jsx");
-jest.dontMock("../FormError.jsx");
+jest.dontMock("../i18n/I18nCountrySelector");
+jest.dontMock("../i18n/CountryFlagList");
+jest.dontMock("../FormDropDownList");
+jest.dontMock("../FormError");
 jest.dontMock("../form-text-field/index.js");
-jest.dontMock("../form-text-field/v2.jsx");
+jest.dontMock("../form-text-field/v2");
 jest.dontMock("../../../util/i18n/Translator.js");
 
 describe("I18nCountrySelector", function () {
@@ -40,7 +40,7 @@ describe("I18nCountrySelector", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         Utils = require("../../../util/Utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        I18nCountrySelector = require("../i18n/I18nCountrySelector.jsx"),
+        I18nCountrySelector = require("../i18n/I18nCountrySelector"),
         _ = require("underscore");
 
     function getComponent (props) {

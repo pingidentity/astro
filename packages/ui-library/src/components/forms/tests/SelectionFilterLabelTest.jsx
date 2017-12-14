@@ -1,13 +1,13 @@
 
-jest.dontMock("../SelectionFilterLabel.jsx");
-jest.dontMock("../FormLabel.jsx");
+jest.dontMock("../SelectionFilterLabel");
+jest.dontMock("../FormLabel");
 
 
 describe("SelectionFilterLabel", function () {
 
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
-        SelectionFilterLabel = require("../SelectionFilterLabel.jsx"),
+        SelectionFilterLabel = require("../SelectionFilterLabel"),
         TestUtils = require("../../../testutil/TestUtils"),
         _ = require("underscore");
 

@@ -1,6 +1,6 @@
 var React = require("react");
 var _ = require("underscore");
-var DetailsTooltip = require("../../../components/tooltips/DetailsTooltip.jsx");
+var DetailsTooltip = require("../../../components/tooltips/DetailsTooltip");
 
 /**
 * @name DetailsTooltipDemo

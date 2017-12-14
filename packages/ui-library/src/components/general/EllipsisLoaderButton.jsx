@@ -2,7 +2,7 @@ var PropTypes = require("prop-types");
 var React = require("react"),
     css = require("classnames"),
     Utils = require("../../util/Utils"),
-    EllipsisLoader = require("../general/EllipsisLoader.jsx");
+    EllipsisLoader = require("../general/EllipsisLoader");
 
 /**
  * @callback EllipsisLoaderButton~onClick

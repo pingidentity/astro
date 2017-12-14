@@ -1,6 +1,6 @@
 window.__DEV__ = true;
 
-jest.dontMock("../DropDownButton.jsx");
+jest.dontMock("../DropDownButton");
 jest.dontMock("../../../util/EventUtils.js");
 
 describe("DropDownButton", function () {
@@ -9,7 +9,7 @@ describe("DropDownButton", function () {
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        DropDownButton = require("../DropDownButton.jsx");
+        DropDownButton = require("../DropDownButton");
 
     it("renders closed in stateless mode", function () {
         var callback = jest.genMockFunction();

@@ -1,6 +1,6 @@
 var React = require("react"),
     _ = require("underscore"),
-    Stateless = require("./v2-stateless.jsx"),
+    Stateless = require("./v2-stateless"),
     filterItemsFunction = require("./v2-reducer").filterItemsFunction;
 
 /**

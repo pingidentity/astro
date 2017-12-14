@@ -1,9 +1,9 @@
 var React = require("react"),
     classnames = require("classnames"),
     marked = require("marked"),
-    Markup = require("./Markup.jsx"),
-    RockerButton = require("../../components/forms/RockerButton.jsx"),
-    If = require("../../components/general/If.jsx"),
+    Markup = require("./Markup"),
+    RockerButton = require("../../components/forms/RockerButton"),
+    If = require("../../components/general/If"),
     _ = require("underscore");
 
 class DemoItem extends React.Component {

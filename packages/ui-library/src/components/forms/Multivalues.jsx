@@ -8,7 +8,7 @@ var React = require("react"),
     _ = require("underscore"),
     Utils = require("../../util/Utils.js"),
     placeholder = document.createElement("span"),
-    FormLabel = require("./FormLabel.jsx");
+    FormLabel = require("./FormLabel");
 
 placeholder.className = "placeholder";
 

@@ -1,5 +1,5 @@
 var React = require("react"),
-    RockerButton = require("../../../components/forms/RockerButton.jsx");
+    RockerButton = require("../../../components/forms/RockerButton");
 
 /**
 * @name RockerButtonDemo

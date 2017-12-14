@@ -1,7 +1,7 @@
 "use strict";
 var PropTypes = require("prop-types");
 var React = require("react"),
-    DetailsTooltip = require("./DetailsTooltip.jsx");
+    DetailsTooltip = require("./DetailsTooltip");
 
 /**
 * @callback CancelTooltip~onCancel

@@ -1,13 +1,13 @@
 window.__DEV__ = true;
 
-jest.dontMock("../ValidationMessages.jsx");
+jest.dontMock("../ValidationMessages");
 
 describe("ValidationMessages", function () {
 
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        ValidationMessages = require("../ValidationMessages.jsx"),
+        ValidationMessages = require("../ValidationMessages"),
         _ = require("underscore"),
         messages = [
             { text: "At least 6 characters", status: ValidationMessages.Status.FAIL },

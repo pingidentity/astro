@@ -1,6 +1,6 @@
 
 var React = require("react"),
-    Draggable = require("./../../../components/rows/DragDropRow.jsx"),
+    Draggable = require("./../../../components/rows/DragDropRow"),
     _ = require("underscore");
 
 

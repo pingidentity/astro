@@ -1,11 +1,11 @@
 var React = require("react"),
-    FormCheckbox = require("../../components/forms/FormCheckbox.jsx"),
+    FormCheckbox = require("../../components/forms/FormCheckbox"),
     FormTextField = require("../../components/forms//form-text-field").v2,
-    FormRadioGroup = require("../../components/forms/FormRadioGroup.jsx"),
-    FormDropDownList = require("../../components/forms/FormDropDownList.jsx"),
-    Layout = require("../../components/general/ColumnLayout.jsx"),
+    FormRadioGroup = require("../../components/forms/FormRadioGroup"),
+    FormDropDownList = require("../../components/forms/FormDropDownList"),
+    Layout = require("../../components/general/ColumnLayout"),
     Toggle = require("../../components/forms/form-toggle").v2,
-    ButtonBar = require("../../components/forms/ButtonBar.jsx");
+    ButtonBar = require("../../components/forms/ButtonBar");
 
 /**
  * @callback EditViewSimple~onSave

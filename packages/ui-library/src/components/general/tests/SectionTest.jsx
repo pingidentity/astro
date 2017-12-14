@@ -1,13 +1,13 @@
 window.__DEV__ = true;
 
-jest.dontMock("../Section.jsx");
-jest.dontMock("../CollapsibleLink.jsx");
-jest.dontMock("../If.jsx");
+jest.dontMock("../Section");
+jest.dontMock("../CollapsibleLink");
+jest.dontMock("../If");
 
 describe("Section", function () {
     var React = require("react");
     var ReactTestUtils = require("react-dom/test-utils");
-    var Section = require("../Section.jsx");
+    var Section = require("../Section");
     var Utils = require("../../../util/Utils");
     var TestUtils = require("../../../testutil/TestUtils");
 

@@ -1,13 +1,13 @@
 window.__DEV__ = true;
 
-jest.dontMock("../InlineMessage.jsx");
-jest.dontMock("../If.jsx");
-jest.dontMock("../ColorPicker.jsx");
+jest.dontMock("../InlineMessage");
+jest.dontMock("../If");
+jest.dontMock("../ColorPicker");
 
 describe("InlineMessage", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
-        InlineMessage = require("../InlineMessage.jsx"),
+        InlineMessage = require("../InlineMessage"),
         Utils = require("../../../util/Utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         _ = require("underscore");

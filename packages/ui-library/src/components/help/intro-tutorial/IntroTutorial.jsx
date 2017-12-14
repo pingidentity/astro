@@ -1,8 +1,8 @@
 var PropTypes = require("prop-types");
 var React = require("react"),
-    Arrow = require("./Arrow.jsx"),
+    Arrow = require("./Arrow"),
     _ = require("underscore"),
-    Spotlight = require("./Spotlight.jsx");
+    Spotlight = require("./Spotlight");
 
 /**
  * @callback IntroTutorial~onDismiss

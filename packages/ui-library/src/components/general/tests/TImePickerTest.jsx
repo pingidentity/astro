@@ -1,19 +1,19 @@
 window.__DEV__ = true;
 
 jest.dontMock("moment");
-jest.dontMock("../TimePicker.jsx");
-jest.dontMock("../../forms/FormError.jsx");
-jest.dontMock("../../forms/FormDropDownList.jsx");
+jest.dontMock("../TimePicker");
+jest.dontMock("../../forms/FormError");
+jest.dontMock("../../forms/FormDropDownList");
 jest.dontMock("../../forms/form-text-field/index.js");
-jest.dontMock("../../forms/form-text-field/v2.jsx");
-jest.dontMock("../../forms/FormDropDownList.jsx");
+jest.dontMock("../../forms/form-text-field/v2");
+jest.dontMock("../../forms/FormDropDownList");
 
 describe("TimePicker", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         Utils = require("../../../util/Utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        TimePicker = require("../TimePicker.jsx"),
+        TimePicker = require("../TimePicker"),
         moment = require("moment"),
         onValueChange = jest.genMockFunction(),
         component;

@@ -1,5 +1,5 @@
 var React = require("react");
-var BackgroundLoader = require("./../../../components/general/BackgroundLoader.jsx");
+var BackgroundLoader = require("./../../../components/general/BackgroundLoader");
 
 /**
 * @name BackgroundLoaderDemo

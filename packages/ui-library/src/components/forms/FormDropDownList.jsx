@@ -1,9 +1,9 @@
 var PropTypes = require("prop-types");
 var React = require("react"),
     ReactDOM = require("react-dom"),
-    FormLabel = require("./FormLabel.jsx"),
+    FormLabel = require("./FormLabel"),
     FormTextField = require("./form-text-field").v2,
-    HelpHint = require("../tooltips/HelpHint.jsx"),
+    HelpHint = require("../tooltips/HelpHint"),
     callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutsideOfContainer,
     FilterUtils = require("../../util/FilterUtils.js"),
     KeyboardUtils = require("../../util/KeyboardUtils.js"),

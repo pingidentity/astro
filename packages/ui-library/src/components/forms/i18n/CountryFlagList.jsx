@@ -7,7 +7,7 @@ var React = require("react"),
     classnames = require("classnames"),
     Translator = require("../../../util/i18n/Translator.js"),
     countryCodes = require("./countryCodes.js"),
-    FormDropDownList = require("../FormDropDownList.jsx");
+    FormDropDownList = require("../FormDropDownList");
 
 /**
 * @enum {string}

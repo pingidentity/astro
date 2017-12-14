@@ -1,6 +1,6 @@
 window.__DEV__ = true;
 
-jest.dontMock("../InfiniteScroll.jsx");
+jest.dontMock("../InfiniteScroll");
 
 describe("Batch", function () {
     var React = require("react"),
@@ -8,7 +8,7 @@ describe("Batch", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         Wrapper = require("../../../testutil/TestUtils").UpdatePropsWrapper,
-        InfiniteScroll = require("../InfiniteScroll.jsx"),
+        InfiniteScroll = require("../InfiniteScroll"),
         assign = require("object-assign");
     var batches;
 

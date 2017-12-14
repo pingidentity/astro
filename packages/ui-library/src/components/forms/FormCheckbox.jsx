@@ -1,8 +1,8 @@
 var PropTypes = require("prop-types");
 var React=require("react"),
     classnames = require("classnames"),
-    FormLabel = require("./FormLabel.jsx"),
-    FormError = require("./FormError.jsx");
+    FormLabel = require("./FormLabel"),
+    FormError = require("./FormError");
 
 /**
  * @callback FormCheckbox~onChange

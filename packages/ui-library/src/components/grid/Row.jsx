@@ -4,7 +4,7 @@ var PropTypes = require("prop-types");
 
 var React = require("react"),
     classnames = require("classnames"),
-    ButtonCell = require("./cells/ButtonCell.jsx");
+    ButtonCell = require("./cells/ButtonCell");
 
 /**
  * @callback Grid#Row~onRowExpanded

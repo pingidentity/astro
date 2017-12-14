@@ -1,11 +1,11 @@
 window.__DEV__ = true;
-jest.dontMock("../DragDrop.jsx");
+jest.dontMock("../DragDrop");
 
 describe("DragDrop", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-dom/test-utils"),
-        DragDrop = require("../DragDrop.jsx"),
+        DragDrop = require("../DragDrop"),
         DragDropContext = require("react-dnd").DragDropContext,
         _ = require("underscore"),
         TestUtils = require("../../../testutil/TestUtils"),

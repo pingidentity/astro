@@ -1,8 +1,8 @@
 
-jest.dontMock("../ButtonBar.jsx");
-jest.dontMock("../../general/EllipsisLoaderButton.jsx");
-jest.dontMock("../../tooltips/CancelTooltip.jsx");
-jest.dontMock("../../tooltips/DetailsTooltip.jsx");
+jest.dontMock("../ButtonBar");
+jest.dontMock("../../general/EllipsisLoaderButton");
+jest.dontMock("../../tooltips/CancelTooltip");
+jest.dontMock("../../tooltips/DetailsTooltip");
 
 
 describe("ButtonBar", function () {
@@ -10,7 +10,7 @@ describe("ButtonBar", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        ButtonBar = require("../ButtonBar.jsx"),
+        ButtonBar = require("../ButtonBar"),
         _ = require("underscore");
 
     var componentId = "buttonbar",

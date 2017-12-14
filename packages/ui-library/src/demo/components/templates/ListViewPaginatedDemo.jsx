@@ -1,6 +1,6 @@
 var React = require("react"),
     Redux = require("redux"),
-    PropsToUrlWatcher = require("../../../components/offscreen/PropsToUrlWatcher.jsx"),
+    PropsToUrlWatcher = require("../../../components/offscreen/PropsToUrlWatcher"),
     ListViewPaginated = require("../../../templates/list-view-paginated/"),
     _ = require("underscore");
 

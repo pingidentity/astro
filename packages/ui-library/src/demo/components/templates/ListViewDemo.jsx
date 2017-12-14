@@ -1,7 +1,7 @@
 var React = require("react"),
     Redux = require("redux"),
     ListView = require("../../../templates/list-view"),
-    PropsToUrlWatcher = require("../../../components/offscreen/PropsToUrlWatcher.jsx"),
+    PropsToUrlWatcher = require("../../../components/offscreen/PropsToUrlWatcher"),
     _ = require("underscore");
 
 /**

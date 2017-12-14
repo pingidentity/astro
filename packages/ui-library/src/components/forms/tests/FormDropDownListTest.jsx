@@ -3,11 +3,11 @@ window.__DEV__ = true;
 jest.dontMock("../../../util/KeyboardUtils.js");
 jest.dontMock("../../../util/EventUtils.js");
 jest.dontMock("../../../util/FilterUtils.js");
-jest.dontMock("../FormDropDownList.jsx");
-jest.dontMock("../FormLabel.jsx");
-jest.dontMock("../FormError.jsx");
+jest.dontMock("../FormDropDownList");
+jest.dontMock("../FormLabel");
+jest.dontMock("../FormError");
 jest.dontMock("../form-text-field/index.js");
-jest.dontMock("../form-text-field/v2.jsx");
+jest.dontMock("../form-text-field/v2");
 
 describe("FormDropDownList", function () {
     var React = require("react"),
@@ -16,7 +16,7 @@ describe("FormDropDownList", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         KeyBoardUtils = require("../../../util/KeyboardUtils.js"),
-        FormDropDownList = require("../FormDropDownList.jsx");
+        FormDropDownList = require("../FormDropDownList");
 
     var options = [
         { label: "One", value: 1 },

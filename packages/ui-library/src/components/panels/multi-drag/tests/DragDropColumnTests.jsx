@@ -1,6 +1,6 @@
 window.__DEV__ = true;
 
-jest.dontMock("../DragDropColumn.jsx");
+jest.dontMock("../DragDropColumn");
 jest.dontMock("../../../../util/EventUtils");
 jest.dontMock("../../../../util/Utils");
 
@@ -10,7 +10,7 @@ describe("DragDropColumn", function () {
         TestUtils = require("../../../../testutil/TestUtils"),
         ReactTestUtils = require("react-dom/test-utils"),
         ReduxTestUtils = require("../../../../util/ReduxTestUtils"),
-        DragDropColumn = require("../DragDropColumn.jsx"),
+        DragDropColumn = require("../DragDropColumn"),
         _ = require("underscore"),
         TestBackend = require("react-dnd-test-backend"),
         DragDropContext = require("react-dnd").DragDropContext;

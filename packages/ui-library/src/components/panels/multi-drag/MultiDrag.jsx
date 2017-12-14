@@ -1,7 +1,7 @@
 var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames"),
-    DragDropColumn = require("./DragDropColumn.jsx"),
+    DragDropColumn = require("./DragDropColumn"),
     search = require("./MultiDragReducer.js").search,
     move = require("./MultiDragReducer.js").move,
     reapplyFilters = require("./MultiDragReducer.js").reapplyFilters,

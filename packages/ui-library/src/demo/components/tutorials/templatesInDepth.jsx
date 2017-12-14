@@ -1,6 +1,6 @@
 var React = require("react"),
-    Tutorial = require("./Tutorial.jsx"),
-    Markup = require("../../core/Markup.jsx");
+    Tutorial = require("./Tutorial"),
+    Markup = require("../../core/Markup");
 
 class templatesInDepth extends React.Component {
     render() {

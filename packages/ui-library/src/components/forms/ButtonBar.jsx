@@ -1,8 +1,8 @@
 
 var PropTypes = require("prop-types");
 var React = require("react"),
-    CancelTooltip = require("./../tooltips/CancelTooltip.jsx"),
-    EllipsisLoaderButton = require("./../general/EllipsisLoaderButton.jsx"),
+    CancelTooltip = require("./../tooltips/CancelTooltip"),
+    EllipsisLoaderButton = require("./../general/EllipsisLoaderButton"),
     Translator = require("../../util/i18n/Translator.js"),
     classnames = require("classnames");
 

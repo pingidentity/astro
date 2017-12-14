@@ -1,8 +1,8 @@
 var PropTypes = require("prop-types");
 var React = require("react"),
     classNames = require("classnames"),
-    FormDropDownList = require("../forms/FormDropDownList.jsx"),
-    FormRadioGroup = require("../forms/FormRadioGroup.jsx"),
+    FormDropDownList = require("../forms/FormDropDownList"),
+    FormRadioGroup = require("../forms/FormRadioGroup"),
     Utils = require("../../util/Utils.js"),
     _ = require("underscore");
 

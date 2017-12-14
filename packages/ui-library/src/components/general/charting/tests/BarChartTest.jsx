@@ -1,6 +1,6 @@
 window.__DEV__ = true;
 
-jest.dontMock("../BarChart.jsx");
+jest.dontMock("../BarChart");
 
 describe("BarChart", function () {
     var React = require("react"),
@@ -8,7 +8,7 @@ describe("BarChart", function () {
         TestUtils = require("../../../../testutil/TestUtils"),
         _ = require("underscore"),
         Bar = require("recharts").Bar,
-        BarChart = require("../BarChart.jsx");
+        BarChart = require("../BarChart");
 
     function getComponent (props) {
         props = _.defaults(props || {}, {

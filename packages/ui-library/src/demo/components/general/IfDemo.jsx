@@ -1,5 +1,5 @@
 var React = require("react");
-var If = require("./../../../components/general/If.jsx");
+var If = require("./../../../components/general/If");
 
 /**
 * @name IfDemo

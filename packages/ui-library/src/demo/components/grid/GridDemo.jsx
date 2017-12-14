@@ -4,10 +4,10 @@ var Redux = require("redux");
 var Grid = require("../../../components/grid");
 var data = require("./data.js");
 
-var CheckboxCell = require("../../../components/grid/cells/CheckboxCell.jsx");
-var TextFieldCell = require("../../../components/grid/cells/TextFieldCell.jsx");
+var CheckboxCell = require("../../../components/grid/cells/CheckboxCell");
+var TextFieldCell = require("../../../components/grid/cells/TextFieldCell");
 var moment = require("moment-range");
-var Calendar = require("./../../../components/calendars/Calendar.jsx");
+var Calendar = require("./../../../components/calendars/Calendar");
 
 /**
 * @name GridDemo

@@ -3,7 +3,7 @@ window.__DEV__ = true;
 jest.dontMock("../MessagesReducer.js");
 jest.dontMock("../MessagesActions.js");
 jest.dontMock("../MessagesConstants.js");
-jest.dontMock("../Messages.jsx");
+jest.dontMock("../Messages");
 
 describe("Messages", function () {
     var _ = require("underscore"),

@@ -5,7 +5,7 @@ var PropTypes = require("prop-types");
 var React = require("react"),
     _ = require("underscore"),
     Utils = require("../../util/Utils"),
-    Modal = require("./Modal.jsx");
+    Modal = require("./Modal");
 
 /**
  * @callback ModalButton~contentCallback

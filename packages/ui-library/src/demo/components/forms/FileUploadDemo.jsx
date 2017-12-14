@@ -1,6 +1,6 @@
 var React = require("react"),
     FileUpload = require("../../../components/forms/file-upload").v2,
-    DetailsTooltip = require("../../../components/tooltips/DetailsTooltip.jsx");
+    DetailsTooltip = require("../../../components/tooltips/DetailsTooltip");
 
 /**
 * @name FileUploadDemo

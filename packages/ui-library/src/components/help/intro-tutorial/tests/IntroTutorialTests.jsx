@@ -1,7 +1,7 @@
 window.__DEV__ = true;
 
 jest.dontMock("../index.js");
-jest.dontMock("../IntroTutorial.jsx");
+jest.dontMock("../IntroTutorial");
 
 describe("IntroTutorial", function () {
     var React = require("react"),
@@ -9,7 +9,7 @@ describe("IntroTutorial", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
         assign = require("object-assign"),
-        IntroTutorial = require("../IntroTutorial.jsx");
+        IntroTutorial = require("../IntroTutorial");
 
     class Doc extends React.Component {
         state = this.props;

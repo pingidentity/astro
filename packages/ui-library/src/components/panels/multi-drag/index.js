@@ -1,4 +1,4 @@
-var MultiDrag = require("./MultiDrag.jsx");
+var MultiDrag = require("./MultiDrag");
 
 MultiDrag.Reducer = require("./MultiDragReducer.js");
 MultiDrag.Actions = require("./MultiDragActions.js");

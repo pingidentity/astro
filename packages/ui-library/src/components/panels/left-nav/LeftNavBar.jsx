@@ -2,7 +2,7 @@ var PropTypes = require("prop-types");
 var React = require("react"),
     ReactDOM = require("react-dom"),
     classnames = require("classnames"),
-    Copyright = require("./Copyright.jsx"),
+    Copyright = require("./Copyright"),
     Utils = require("../../../util/Utils"),
     _ = require("underscore");
 

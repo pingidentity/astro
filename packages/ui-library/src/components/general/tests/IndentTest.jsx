@@ -1,14 +1,14 @@
 window.__DEV__ = true;
 
-jest.dontMock("../Indent.jsx");
-jest.dontMock("../Link.jsx");
+jest.dontMock("../Indent");
+jest.dontMock("../Link");
 
 describe("Indent", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        Indent = require("../Indent.jsx"),
-        Link = require("../Link.jsx");
+        Indent = require("../Indent"),
+        Link = require("../Link");
 
     it("renders the component", function () {
         var component = ReactTestUtils.renderIntoDocument(

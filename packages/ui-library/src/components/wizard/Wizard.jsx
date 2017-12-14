@@ -3,7 +3,7 @@
 var PropTypes = require("prop-types");
 
 var React = require("react"),
-    ButtonBar = require("../forms/ButtonBar.jsx"),
+    ButtonBar = require("../forms/ButtonBar"),
     Utils = require("../../util/Utils"),
     classnames = require("classnames"),
     _ = require("underscore");
@@ -230,8 +230,8 @@ class Wizard extends React.Component {
     }
 }
 
-Wizard.Step = require("./Step.jsx");
-Wizard.Choose = require("./Choose.jsx");
+Wizard.Step = require("./Step");
+Wizard.Choose = require("./Choose");
 Wizard.Reducer = require("./WizardReducer.js");
 Wizard.Actions = require("./WizardActions.js");
 

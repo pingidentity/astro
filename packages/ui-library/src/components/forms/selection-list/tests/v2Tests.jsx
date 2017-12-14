@@ -1,19 +1,19 @@
 window.__DEV__ = true;
 
-jest.dontMock("../v2.jsx");
-jest.dontMock("../../FormSearchBox.jsx");
+jest.dontMock("../v2");
+jest.dontMock("../../FormSearchBox");
 jest.dontMock("../v2-constants.js");
 jest.dontMock("../v2-reducer.js");
-jest.dontMock("../v2-stateless.jsx");
-jest.dontMock("../v2-stateful.jsx");
+jest.dontMock("../v2-stateless");
+jest.dontMock("../v2-stateful");
 jest.dontMock("../../form-text-field/index.js");
-jest.dontMock("../../form-text-field/v2.jsx");
-jest.dontMock("../../FormRadioGroup.jsx");
-jest.dontMock("../../FormCheckbox.jsx");
-jest.dontMock("../../FormError.jsx");
-jest.dontMock("../../FormLabel.jsx");
-jest.dontMock("../../../general/If.jsx");
-jest.dontMock("../../../tooltips/HelpHint.jsx");
+jest.dontMock("../../form-text-field/v2");
+jest.dontMock("../../FormRadioGroup");
+jest.dontMock("../../FormCheckbox");
+jest.dontMock("../../FormError");
+jest.dontMock("../../FormLabel");
+jest.dontMock("../../../general/If");
+jest.dontMock("../../../tooltips/HelpHint");
 jest.dontMock("../../../../util/FilterUtils.js");
 jest.dontMock("../../../../util/KeyboardUtils.js");
 
@@ -24,15 +24,15 @@ describe("SelectionList", function () {
     var _s = require("underscore.string");
     var Utils = require("../../../../util/Utils");
     var TestUtils = require("../../../../testutil/TestUtils");
-    var SelectionList = require("../v2.jsx");
-    var FormCheckbox = require("../../FormCheckbox.jsx");
-    var FormRadioGroup = require("../../FormRadioGroup.jsx");
-    var FormLabel = require("../../FormLabel.jsx");
+    var SelectionList = require("../v2");
+    var FormCheckbox = require("../../FormCheckbox");
+    var FormRadioGroup = require("../../FormRadioGroup");
+    var FormLabel = require("../../FormLabel");
     var KeyboardUtils = require("../../../../util/KeyboardUtils.js");
 
     // just so that they are included in the coverage report
-    require("../v2-stateful.jsx");
-    require("../v2-stateless.jsx");
+    require("../v2-stateful");
+    require("../v2-stateless");
 
     var listItems;
 

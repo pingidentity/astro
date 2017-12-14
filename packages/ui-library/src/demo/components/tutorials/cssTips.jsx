@@ -1,9 +1,9 @@
 var React = require("react"),
-    Tutorial = require("./Tutorial.jsx"),
-    Markup = require("../../core/Markup.jsx"),
+    Tutorial = require("./Tutorial"),
+    Markup = require("../../core/Markup"),
     classnames = require("classnames"),
     FormTextField = require("./../../../components/forms/form-text-field").v2,
-    Layout = require("../../../components/general/ColumnLayout.jsx"),
+    Layout = require("../../../components/general/ColumnLayout"),
     Toggle = require("../../../components/forms/form-toggle").v2;
 
 var ICONS = [

@@ -1,5 +1,5 @@
 var React = require("react");
-var Section = require("../../../components/general/Section.jsx");
+var Section = require("../../../components/general/Section");
 
 /**
 * @name SectionDemo

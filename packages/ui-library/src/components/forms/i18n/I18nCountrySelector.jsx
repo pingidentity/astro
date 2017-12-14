@@ -5,7 +5,7 @@ var PropTypes = require("prop-types");
 var React = require("react"),
     _ = require("underscore"),
     classnames = require("classnames"),
-    CountryFlagList = require("./CountryFlagList.jsx"),
+    CountryFlagList = require("./CountryFlagList"),
     Utils = require("../../../util/Utils.js");
 
 /**

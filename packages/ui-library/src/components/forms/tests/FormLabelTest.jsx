@@ -1,15 +1,15 @@
 window.__DEV__ = true;
 
-jest.dontMock("../FormLabel.jsx");
-jest.dontMock("../../tooltips/HelpHint.jsx");
-jest.dontMock("../../general/If.jsx");
+jest.dontMock("../FormLabel");
+jest.dontMock("../../tooltips/HelpHint");
+jest.dontMock("../../general/If");
 
 describe("FormLabel", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        FormLabel = require("../FormLabel.jsx"),
+        FormLabel = require("../FormLabel"),
         Utils = require("../../../util/Utils");
 
     it("renders if it has children", function () {

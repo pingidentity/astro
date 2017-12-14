@@ -3,8 +3,8 @@ var React = require("react"),
     ReactDOM = require("react-dom"),
     classnames = require("classnames"),
     FormFieldConstants = require("../../../constants/FormFieldConstants"),
-    FormLabel = require("../FormLabel.jsx"),
-    FormError = require("../FormError.jsx"),
+    FormLabel = require("../FormLabel"),
+    FormError = require("../FormError"),
     Utils = require("../../../util/Utils.js"),
     _ = require("underscore");
 

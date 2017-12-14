@@ -1,6 +1,6 @@
 window.__DEV__ = true;
 
-jest.dontMock("../AreaChart.jsx");
+jest.dontMock("../AreaChart");
 
 describe("AreaChart", function () {
     var React = require("react"),
@@ -8,7 +8,7 @@ describe("AreaChart", function () {
         TestUtils = require("../../../../testutil/TestUtils"),
         _ = require("underscore"),
         Area = require("recharts").Area,
-        AreaChart = require("../AreaChart.jsx");
+        AreaChart = require("../AreaChart");
 
     function getComponent (props) {
         props = _.defaults(props || {}, {

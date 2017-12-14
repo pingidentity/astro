@@ -1,13 +1,13 @@
 window.__DEV__ = true;
 
-jest.dontMock("../PieChart.jsx");
+jest.dontMock("../PieChart");
 
 describe("PieChart", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
         _ = require("underscore"),
-        PieChart = require("../PieChart.jsx");
+        PieChart = require("../PieChart");
 
     function getComponent (props) {
         props = _.defaults(props || {}, {

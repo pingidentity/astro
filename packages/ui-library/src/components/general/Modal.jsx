@@ -5,8 +5,8 @@ var PropTypes = require("prop-types");
 var React = require("react"),
     Utils = require("../../util/Utils"),
     EventUtils = require("../../util/EventUtils.js"),
-    CancelTooltip = require("./../tooltips/CancelTooltip.jsx"),
-    If = require("./If.jsx"),
+    CancelTooltip = require("./../tooltips/CancelTooltip"),
+    If = require("./If"),
     classnames = require("classnames");
 
 /**

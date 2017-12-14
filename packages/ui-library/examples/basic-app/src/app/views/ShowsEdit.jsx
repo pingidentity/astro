@@ -1,10 +1,10 @@
 var React = require("re-react"),
-    FormCheckbox = require("ui-library/src/components/forms/FormCheckbox.jsx"),
+    FormCheckbox = require("ui-library/src/components/forms/FormCheckbox"),
     FormTextField = require("ui-library/src/components/forms//form-text-field").v2,
-    FormRadioGroup = require("ui-library/src/components/forms/FormRadioGroup.jsx"),
-    FormLabel = require("ui-library/src/components/forms/FormLabel.jsx"),
+    FormRadioGroup = require("ui-library/src/components/forms/FormRadioGroup"),
+    FormLabel = require("ui-library/src/components/forms/FormLabel"),
     FormTextArea = require("ui-library/src/components/forms/form-text-area"),
-    ButtonBar = require("ui-library/src/components/forms/ButtonBar.jsx");
+    ButtonBar = require("ui-library/src/components/forms/ButtonBar");
 
 var ShowsEdit = React.createClass({
     /*

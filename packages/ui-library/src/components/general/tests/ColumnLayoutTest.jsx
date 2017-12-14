@@ -1,11 +1,11 @@
 window.__DEV__ = true;
 
-jest.dontMock("../ColumnLayout.jsx");
+jest.dontMock("../ColumnLayout");
 
 describe("Row", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
-        Layout = require("../ColumnLayout.jsx"),
+        Layout = require("../ColumnLayout"),
         Utils = require("../../../util/Utils"),
         TestUtils = require("../../../testutil/TestUtils");
 

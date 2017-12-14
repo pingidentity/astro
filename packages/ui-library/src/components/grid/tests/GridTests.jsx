@@ -1,20 +1,20 @@
 window.__DEV__ = true;
 
 jest.dontMock("../../grid");
-jest.dontMock("../Grid.jsx");
-jest.dontMock("../Column.jsx");
-jest.dontMock("../Row.jsx");
-jest.dontMock("../ColumnPagination.jsx");
-jest.dontMock("../cells/CheckboxCell.jsx");
-jest.dontMock("../cells/TextFieldCell.jsx");
-jest.dontMock("../cells/ButtonCell.jsx");
+jest.dontMock("../Grid");
+jest.dontMock("../Column");
+jest.dontMock("../Row");
+jest.dontMock("../ColumnPagination");
+jest.dontMock("../cells/CheckboxCell");
+jest.dontMock("../cells/TextFieldCell");
+jest.dontMock("../cells/ButtonCell");
 jest.dontMock("../GridActions.js");
 jest.dontMock("../GridReducer.js");
-jest.dontMock("../../general/If.jsx");
-jest.dontMock("../../forms/FormCheckbox.jsx");
+jest.dontMock("../../general/If");
+jest.dontMock("../../forms/FormCheckbox");
 jest.dontMock("../../forms/form-text-field");
-jest.dontMock("../../forms/FormLabel.jsx");
-jest.dontMock("../../tooltips/HelpHint.jsx");
+jest.dontMock("../../forms/FormLabel");
+jest.dontMock("../../tooltips/HelpHint");
 jest.dontMock("../../forms/form-text-field/index.js");
 jest.dontMock("../../forms/form-text-field");
 
@@ -25,10 +25,10 @@ describe("Grid", function () {
     var Utils = require("../../../util/Utils");
     var TestUtils = require("../../../testutil/TestUtils");
     var ShallowRenderer = require("react-test-renderer/shallow");
-    var Grid = require("../Grid.jsx");
-    var TextFieldCell = require("../cells/TextFieldCell.jsx");
-    var ButtonCell = require("../cells/ButtonCell.jsx");
-    var CheckboxCell = require("../cells/CheckboxCell.jsx");
+    var Grid = require("../Grid");
+    var TextFieldCell = require("../cells/TextFieldCell");
+    var ButtonCell = require("../cells/ButtonCell");
+    var CheckboxCell = require("../cells/CheckboxCell");
 
     var rows = [
         {

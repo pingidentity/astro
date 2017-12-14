@@ -1,13 +1,13 @@
 var PropTypes = require("prop-types");
 var React = require("react"),
-    ModalButton = require("../../components/general/ModalButton.jsx"),
-    Wizard = require("../../components/wizard/Wizard.jsx"),
-    Layout = require("../../components/general/ColumnLayout.jsx"),
+    ModalButton = require("../../components/general/ModalButton"),
+    Wizard = require("../../components/wizard/Wizard"),
+    Layout = require("../../components/general/ColumnLayout"),
     Messages = require("../../components/general/messages"),
-    FormLabel = require("../../components/forms/FormLabel.jsx"),
+    FormLabel = require("../../components/forms/FormLabel"),
     FileUpload = require("../../components/forms/file-upload").v2,
-    FormRadioGroup = require("../../components/forms/FormRadioGroup.jsx"),
-    FormCheckbox = require("../../components/forms/FormCheckbox.jsx"),
+    FormRadioGroup = require("../../components/forms/FormRadioGroup"),
+    FormCheckbox = require("../../components/forms/FormCheckbox"),
     FormTextField = require("../../components/forms/form-text-field").v2;
 
 /**

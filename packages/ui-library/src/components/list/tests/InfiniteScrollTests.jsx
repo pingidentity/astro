@@ -1,13 +1,13 @@
 window.__DEV__ = true;
 
-jest.dontMock("../InfiniteScroll.jsx");
+jest.dontMock("../InfiniteScroll");
 
 describe("Infinite Scroll", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        InfiniteScroll = require("../InfiniteScroll.jsx"),
+        InfiniteScroll = require("../InfiniteScroll"),
         assign = require("object-assign");
 
     class MyRow extends React.Component {

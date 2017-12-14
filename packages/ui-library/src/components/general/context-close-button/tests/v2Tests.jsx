@@ -1,7 +1,7 @@
 window.__DEV__ = true;
 
-jest.dontMock("./commonTests.jsx");
-jest.dontMock("../v2.jsx");
+jest.dontMock("./commonTests");
+jest.dontMock("../v2");
 
 
 describe("ContextCloseButton", function () {
@@ -9,8 +9,8 @@ describe("ContextCloseButton", function () {
     var React = require("react");
     var ReactTestUtils = require("react-dom/test-utils");
     var TestUtils = require("../../../../testutil/TestUtils");
-    var ContextCloseButton = require("../v2.jsx"),
-        CommonTests = require("./commonTests.jsx"),
+    var ContextCloseButton = require("../v2"),
+        CommonTests = require("./commonTests"),
         _ = require("underscore");
 
     function getComponent (opts) {

@@ -6,9 +6,9 @@ var React = require("react"),
     classnames = require("classnames"),
     _ = require("underscore"),
     Utils = require("../../util/Utils.js"),
-    Row = require("./Row.jsx"),
-    ColumnPagination = require("./ColumnPagination.jsx"),
-    FormCheckbox = require("../forms/FormCheckbox.jsx");
+    Row = require("./Row"),
+    ColumnPagination = require("./ColumnPagination"),
+    FormCheckbox = require("../forms/FormCheckbox");
 
 /**
  * @callback Grid~onGridCellAction
@@ -361,7 +361,7 @@ Grid.Alignments = {
     CENTER: "center"
 };
 
-Grid.Column = require("./Column.jsx");
+Grid.Column = require("./Column");
 
 Grid.Reducer = require("./GridReducer.js");
 Grid.Actions = require("./GridActions.js");

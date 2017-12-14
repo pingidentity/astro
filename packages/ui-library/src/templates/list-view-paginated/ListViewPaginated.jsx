@@ -1,10 +1,10 @@
 var PropTypes = require("prop-types");
 var React = require("react"),
-    CollapsibleLink = require("../../components/general/CollapsibleLink.jsx"),
-    ExpandableRow = require("../../components/rows/ExpandableRow.jsx"),
-    FormCheckbox = require("../../components/forms/FormCheckbox.jsx"),
-    FormSearchBox = require("../../components/forms/FormSearchBox.jsx"),
-    Pagination = require("../../components/list/Pagination.jsx"),
+    CollapsibleLink = require("../../components/general/CollapsibleLink"),
+    ExpandableRow = require("../../components/rows/ExpandableRow"),
+    FormCheckbox = require("../../components/forms/FormCheckbox"),
+    FormSearchBox = require("../../components/forms/FormSearchBox"),
+    Pagination = require("../../components/list/Pagination"),
     Toggle = require("../../components/forms/form-toggle"),
     classnames = require("classnames");
 

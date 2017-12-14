@@ -1,5 +1,5 @@
 var React = require("react");
-var Multivalues = require("../../../components/forms/Multivalues.jsx");
+var Multivalues = require("../../../components/forms/Multivalues");
 
 /**
 * @name MultivaluesDemo

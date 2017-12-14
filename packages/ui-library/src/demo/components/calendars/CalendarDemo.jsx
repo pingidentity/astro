@@ -1,6 +1,6 @@
 var React = require("react"),
     moment = require("moment-range"),
-    Calendar = require("./../../../components/calendars/Calendar.jsx");
+    Calendar = require("./../../../components/calendars/Calendar");
 
 /**
 * @name CalendarDemo

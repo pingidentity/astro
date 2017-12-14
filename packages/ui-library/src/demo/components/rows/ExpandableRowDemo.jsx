@@ -1,7 +1,7 @@
 var React = require("react");
-var RowAccessories = require("../../../components/rows/expandable-row/Accessories.jsx");
-var HelpHint = require("../../../components/tooltips/HelpHint.jsx");
-var ExpandableRow = require("../../../components/rows/ExpandableRow.jsx");
+var RowAccessories = require("../../../components/rows/expandable-row/Accessories");
+var HelpHint = require("../../../components/tooltips/HelpHint");
+var ExpandableRow = require("../../../components/rows/ExpandableRow");
 var Toggle = require("../../../components/forms/form-toggle");
 var DetailsTooltip = require("../../../components/tooltips/DetailsTooltip");
 

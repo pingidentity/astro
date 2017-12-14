@@ -1,6 +1,6 @@
 var React = require("react"),
-    FormLabel = require("../../../../components/forms/FormLabel.jsx"),
-    PieChart = require("../../../../components/general/charting/PieChart.jsx");
+    FormLabel = require("../../../../components/forms/FormLabel"),
+    PieChart = require("../../../../components/general/charting/PieChart");
 
 /**
 * @name PieChartDemo

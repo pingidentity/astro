@@ -1,6 +1,6 @@
 var React = require("react"),
     FilterUtils = require("../../../util/FilterUtils.js"),
-    FormSearchBox = require("../../../components/forms/FormSearchBox.jsx");
+    FormSearchBox = require("../../../components/forms/FormSearchBox");
 
 var ITEMS = [
     { id: 1, name: "apples" },

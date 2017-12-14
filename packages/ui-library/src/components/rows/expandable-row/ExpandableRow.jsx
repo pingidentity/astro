@@ -5,7 +5,7 @@ var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames"),
     _ = require("underscore"),
-    DetailsTooltip = require("../../tooltips/DetailsTooltip.jsx"),
+    DetailsTooltip = require("../../tooltips/DetailsTooltip"),
     Utils = require("../../../util/Utils.js"),
     Translator = require("../../../util/i18n/Translator.js");
 

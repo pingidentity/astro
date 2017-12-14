@@ -1,13 +1,13 @@
 window.__DEV__ = true;
 
-jest.dontMock("../HelpHint.jsx");
+jest.dontMock("../HelpHint");
 
 describe("HelpHint", function () {
     var React = require("react");
     var ReactTestUtils = require("react-dom/test-utils");
     var TestUtils = require("../../../testutil/TestUtils");
     var Utils = require("../../../util/Utils");
-    var HelpHint = require("../HelpHint.jsx");
+    var HelpHint = require("../HelpHint");
     var text = "test help text!";
     var classValue = "short-tooltip";
     var label = "this other text";

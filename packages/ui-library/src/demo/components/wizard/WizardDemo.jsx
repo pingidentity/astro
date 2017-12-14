@@ -1,7 +1,7 @@
 var React = require("react"),
     Redux = require("redux"),
-    Wizard = require("../../../components/wizard/Wizard.jsx"),
-    FormCheckbox = require("../../../components/forms/FormCheckbox.jsx"),
+    Wizard = require("../../../components/wizard/Wizard"),
+    FormCheckbox = require("../../../components/forms/FormCheckbox"),
     Step = Wizard.Step,
     Choose = Wizard.Choose;
 

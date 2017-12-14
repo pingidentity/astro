@@ -1,10 +1,10 @@
-jest.dontMock("../Link.jsx");
+jest.dontMock("../Link");
 
 describe("Link", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        Link = require("../Link.jsx");
+        Link = require("../Link");
 
     it("renders the component", function () {
         var component = ReactTestUtils.renderIntoDocument(

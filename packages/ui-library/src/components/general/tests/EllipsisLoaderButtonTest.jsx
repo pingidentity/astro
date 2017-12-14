@@ -1,14 +1,14 @@
 window.__DEV__ = true;
 
-jest.dontMock("../EllipsisLoader.jsx");
-jest.dontMock("../EllipsisLoaderButton.jsx");
+jest.dontMock("../EllipsisLoader");
+jest.dontMock("../EllipsisLoaderButton");
 
 describe("Ellipsis loader button", function () {
     var React = require("react");
     var ReactTestUtils = require("react-dom/test-utils");
     var TestUtils = require("../../../testutil/TestUtils");
     var Utils = require("../../../util/Utils");
-    var EllipsisLoaderButton = require("../EllipsisLoaderButton.jsx");
+    var EllipsisLoaderButton = require("../EllipsisLoaderButton");
     var callback;
     var buttonId = "test-loader";
     var buttonText = "Text Button";

@@ -78,7 +78,7 @@ module.exports = {
         ]
     },
     resolve: {
-        // I can now require("file") instead of require("file.jsx")
+        // I can now require("file") instead of require("file")
         extensions: ["", ".js", ".json", ".jsx"],
         modulesDirectories: ["node_modules"]
     },

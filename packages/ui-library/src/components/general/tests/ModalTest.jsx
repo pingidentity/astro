@@ -1,15 +1,15 @@
-jest.dontMock("../Modal.jsx");
-jest.dontMock("../If.jsx");
+jest.dontMock("../Modal");
+jest.dontMock("../If");
 jest.dontMock("../../../util/EventUtils.js");
-jest.dontMock("../../tooltips/CancelTooltip.jsx");
-jest.dontMock("../../tooltips/DetailsTooltip.jsx");
+jest.dontMock("../../tooltips/CancelTooltip");
+jest.dontMock("../../tooltips/DetailsTooltip");
 
 describe("ModalTest", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        Modal = require("../Modal.jsx"),
+        Modal = require("../Modal"),
         _ = require("underscore");
 
     window.addEventListener = jest.genMockFunction();

@@ -1,5 +1,5 @@
-jest.dontMock("./FormTextField.jsx");
+jest.dontMock("./FormTextField");
 
-var v2 = require("./FormTextField.jsx");
+var v2 = require("./FormTextField");
 
 module.exports = v2;

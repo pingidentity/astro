@@ -1,5 +1,5 @@
 var React = require("react"),
-    DragDropTable = require("./../../../components/tables/DragDropTable.jsx"),
+    DragDropTable = require("./../../../components/tables/DragDropTable"),
     mockData = require("./mockData.json"),
     _ = require("underscore");
 

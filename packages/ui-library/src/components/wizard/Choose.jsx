@@ -1,7 +1,7 @@
 var React = require("react"),
     _ = require("underscore"),
     Utils = require("../../util/Utils"),
-    Step = require("./Step.jsx");
+    Step = require("./Step");
 
 var INHERIT_PROPS = [
     "onEdit",

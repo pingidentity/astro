@@ -2,13 +2,13 @@
 
 window.__DEV__ = true;
 
-jest.dontMock("../BackgroundLoader.jsx");
+jest.dontMock("../BackgroundLoader");
 
 describe("BackgroundLoader", function () {
     var React = require("react");
     var ReactTestUtils = require("react-dom/test-utils");
     var TestUtils = require("../../../testutil/TestUtils");
-    var BackgroundLoader = require("../BackgroundLoader.jsx");
+    var BackgroundLoader = require("../BackgroundLoader");
 
     var loadingContentFunc;
     var loadContentFunc;

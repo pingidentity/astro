@@ -1,7 +1,7 @@
 
-jest.dontMock("../LinkDropDownList.jsx");
-jest.dontMock("../../general/CollapsibleLink.jsx");
-jest.dontMock("../../tooltips/DetailsTooltip.jsx");
+jest.dontMock("../LinkDropDownList");
+jest.dontMock("../../general/CollapsibleLink");
+jest.dontMock("../../tooltips/DetailsTooltip");
 
 
 describe("LinkDropDownList", function () {
@@ -9,7 +9,7 @@ describe("LinkDropDownList", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        LinkDropDownList = require("../LinkDropDownList.jsx"),
+        LinkDropDownList = require("../LinkDropDownList"),
         _ = require("underscore");
 
     var componentId = "link-dropdown-list",

@@ -1,6 +1,6 @@
 var React = require("react"),
-    Tutorial = require("./Tutorial.jsx"),
-    Markup = require("../../core/Markup.jsx");
+    Tutorial = require("./Tutorial"),
+    Markup = require("../../core/Markup");
 
 class Prototyping extends React.Component {
     render() {
@@ -143,7 +143,7 @@ class Prototyping extends React.Component {
                             '    _ = require("underscore"),',
                             '    DragDropContext = require("react-dnd").DragDropContext,',
                             '    HTML5Backend = require("react-dnd/modules/backends/HTML5"),',
-                            '    DragDropRow = require("ui-library/src/components/rows/DragDropRow.jsx"),',
+                            '    DragDropRow = require("ui-library/src/components/rows/DragDropRow"),',
                             '    ExpandableRow = require("ui-library/src/components/rows/expandable-row");',
                             ' ',
                             'var Prototype_0 = React.createClass({',
@@ -345,14 +345,14 @@ class Prototyping extends React.Component {
                             '/** Prototype_1.jsx */',
                             ' ',
                             'var React = require("react"),',
-                            '    FormCheckbox = require("ui-library/src/components/forms/FormCheckbox.jsx"),',
+                            '    FormCheckbox = require("ui-library/src/components/forms/FormCheckbox"),',
                             '    FormTextField = require("ui-library/src/components/forms/form-text-field"),',
-                            '    FormRadioGroup = require("ui-library/src/components/forms/FormRadioGroup.jsx"),',
-                            '    FormDropDownList = require("ui-library/src/components/forms/FormDropDownList.jsx"),',
-                            '    Layout = require("ui-library/src/components/general/ColumnLayout.jsx"),',
-                            '    Section = require("ui-library/src/components/general/Section.jsx"),',
+                            '    FormRadioGroup = require("ui-library/src/components/forms/FormRadioGroup"),',
+                            '    FormDropDownList = require("ui-library/src/components/forms/FormDropDownList"),',
+                            '    Layout = require("ui-library/src/components/general/ColumnLayout"),',
+                            '    Section = require("ui-library/src/components/general/Section"),',
                             '    Toggle = require("ui-library/src/components/forms/form-toggle"),',
-                            '    ButtonBar = require("ui-library/src/components/forms/ButtonBar.jsx");',
+                            '    ButtonBar = require("ui-library/src/components/forms/ButtonBar");',
                             ' ',
                             '//Same content as copied over from UI Library'
                         /* eslint-enable */
@@ -364,7 +364,7 @@ class Prototyping extends React.Component {
                         /* eslint-disable */
                             '/** index.js */',
                             ' ',
-                            'var Prototype_1 = require("./Prototype_1.jsx");',
+                            'var Prototype_1 = require("./Prototype_1");',
                             ' ',
                             'Prototype_1.Reducer = require("./Reducer");',
                             'Prototype_1.Actions = require("./Actions");',

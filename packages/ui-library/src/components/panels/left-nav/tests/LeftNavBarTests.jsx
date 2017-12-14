@@ -1,7 +1,7 @@
 window.__DEV__ = true;
 
-jest.dontMock("../LeftNavBar.jsx");
-jest.dontMock("../Copyright.jsx");
+jest.dontMock("../LeftNavBar");
+jest.dontMock("../Copyright");
 jest.dontMock("../../../../util/Utils");
 
 describe("LeftNavBar", function () {
@@ -11,7 +11,7 @@ describe("LeftNavBar", function () {
         ReduxTestUtils = require("../../../../util/ReduxTestUtils"),
         TestUtils = require("../../../../testutil/TestUtils"),
         Utils = require("../../../../util/Utils"),
-        LeftNavBar = require("../LeftNavBar.jsx"),
+        LeftNavBar = require("../LeftNavBar"),
         _ = require("underscore");
 
     var navData = [

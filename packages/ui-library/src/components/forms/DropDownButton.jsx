@@ -4,7 +4,7 @@ var React = require("react"),
     cx = require("classnames"),
     callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutsideOfContainer,
     _ = require("underscore"),
-    If = require("../general/If.jsx"),
+    If = require("../general/If"),
     Utils = require("../../util/Utils.js");
 
 /**

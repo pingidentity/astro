@@ -1,25 +1,25 @@
 window.__DEV__ = true;
 
 jest.dontMock("../../grid");
-jest.dontMock("../Row.jsx");
+jest.dontMock("../Row");
 jest.dontMock("classnames");
-jest.dontMock("../Grid.jsx");
-jest.dontMock("../Column.jsx");
-jest.dontMock("../cells/CheckboxCell.jsx");
-jest.dontMock("../cells/ButtonCell.jsx");
-jest.dontMock("../../forms/FormCheckbox.jsx");
-jest.dontMock("../../forms/FormLabel.jsx");
-jest.dontMock("../../tooltips/HelpHint.jsx");
+jest.dontMock("../Grid");
+jest.dontMock("../Column");
+jest.dontMock("../cells/CheckboxCell");
+jest.dontMock("../cells/ButtonCell");
+jest.dontMock("../../forms/FormCheckbox");
+jest.dontMock("../../forms/FormLabel");
+jest.dontMock("../../tooltips/HelpHint");
 
 
 describe("Row", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        CheckboxCell = require("../cells/CheckboxCell.jsx"),
-        ButtonCell = require("../cells/ButtonCell.jsx"),
+        CheckboxCell = require("../cells/CheckboxCell"),
+        ButtonCell = require("../cells/ButtonCell"),
         Grid = require("../../grid"),
-        Row = require("../Row.jsx");
+        Row = require("../Row");
 
     function render (props) {
         return ReactTestUtils.renderIntoDocument(

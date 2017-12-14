@@ -1,14 +1,14 @@
 var PropTypes = require("prop-types");
 var React = require("react"),
-    CollapsibleLink = require("../../components/general/CollapsibleLink.jsx"),
+    CollapsibleLink = require("../../components/general/CollapsibleLink"),
     ExpandableRow = require("../../components/rows/expandable-row"),
-    FormCheckbox = require("../../components/forms/FormCheckbox.jsx"),
-    FormSearchBox = require("../../components/forms/FormSearchBox.jsx"),
-    InfiniteScroll = require("../../components/list/InfiniteScroll.jsx"),
-    ModalButton = require("../../components/general/ModalButton.jsx"),
-    RowAccessories = require("../../components/rows/expandable-row/Accessories.jsx"),
+    FormCheckbox = require("../../components/forms/FormCheckbox"),
+    FormSearchBox = require("../../components/forms/FormSearchBox"),
+    InfiniteScroll = require("../../components/list/InfiniteScroll"),
+    ModalButton = require("../../components/general/ModalButton"),
+    RowAccessories = require("../../components/rows/expandable-row/Accessories"),
     Toggle = require("../../components/forms/form-toggle"),
-    TabbedSections = require("../../components/general/TabbedSections.jsx"),
+    TabbedSections = require("../../components/general/TabbedSections"),
     classnames = require("classnames"),
     _ = require("underscore");
 

@@ -1,10 +1,10 @@
 var React = require("re-react"),
-    ModalButton = require("ui-library/src/components/general/ModalButton.jsx"),
+    ModalButton = require("ui-library/src/components/general/ModalButton"),
     Wizard = require("ui-library/src/components/wizard"),
-    Layout = require("ui-library/src/components/general/ColumnLayout.jsx"),
-    FormLabel = require("ui-library/src/components/forms/FormLabel.jsx"),
-    FormRadioGroup = require("ui-library/src/components/forms/FormRadioGroup.jsx"),
-    FormCheckbox = require("ui-library/src/components/forms/FormCheckbox.jsx"),
+    Layout = require("ui-library/src/components/general/ColumnLayout"),
+    FormLabel = require("ui-library/src/components/forms/FormLabel"),
+    FormRadioGroup = require("ui-library/src/components/forms/FormRadioGroup"),
+    FormCheckbox = require("ui-library/src/components/forms/FormCheckbox"),
     FormTextField = require("ui-library/src/components/forms/form-text-field"),
     FormTextArea = require("ui-library/src/components/forms/form-text-area");
 

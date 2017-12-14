@@ -1,6 +1,6 @@
 
 var React = require("react"),
-    FormTimeZone = require("../../../components/forms/FormTimeZone.jsx");
+    FormTimeZone = require("../../../components/forms/FormTimeZone");
 
 /**
 * @name FormTimeZoneDemo

@@ -1,5 +1,5 @@
 var React = require("react");
-var BackgroundLoader = require("./BackgroundLoader.jsx");
+var BackgroundLoader = require("./BackgroundLoader");
 
 class BackgroundLoaderDemo extends React.Component {
     state = {

@@ -1,11 +1,11 @@
 window.__DEV__ = true;
 
 jest.dontMock("underscore");
-jest.dontMock("../FormSearchBox.jsx");
+jest.dontMock("../FormSearchBox");
 jest.dontMock("../form-text-field/index.js");
-jest.dontMock("../form-text-field/v2.jsx");
-jest.dontMock("../FormError.jsx");
-jest.dontMock("../../tooltips/HelpHint.jsx");
+jest.dontMock("../form-text-field/v2");
+jest.dontMock("../FormError");
+jest.dontMock("../../tooltips/HelpHint");
 jest.dontMock("../../../testutil/TestUtils");
 jest.dontMock("../../../util/KeyboardUtils.js");
 
@@ -14,7 +14,7 @@ describe("FormSearchBox", function () {
     var ReactTestUtils = require("react-dom/test-utils");
     var _ = require("underscore");
     var TestUtils = require("../../../testutil/TestUtils");
-    var FormSearchBox = require("../FormSearchBox.jsx");
+    var FormSearchBox = require("../FormSearchBox");
     var FormTextField = require("../form-text-field/index");
     var KeyboardUtils = require("../../../util/KeyboardUtils.js");
 

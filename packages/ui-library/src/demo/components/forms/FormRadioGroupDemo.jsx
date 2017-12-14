@@ -1,5 +1,5 @@
 var React = require("react"),
-    FormRadioGroup = require("../../../components/forms/FormRadioGroup.jsx");
+    FormRadioGroup = require("../../../components/forms/FormRadioGroup");
 
 /**
 * @name FormRadioGroupDemo

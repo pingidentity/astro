@@ -1,6 +1,6 @@
 var React = require("react"),
-    ExpandableRow = require("../../../components/rows/ExpandableRow.jsx"),
-    RowIndexNav = require("../../../components/general/RowIndexNav.jsx");
+    ExpandableRow = require("../../../components/rows/ExpandableRow"),
+    RowIndexNav = require("../../../components/general/RowIndexNav");
 
 var createReactClass = require("create-react-class");
 

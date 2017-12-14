@@ -1,13 +1,13 @@
 window.__DEV__ = true;
 
-jest.dontMock("../If.jsx");
+jest.dontMock("../If");
 
 
 describe("If component", function () {
     var React = require("react");
     var ReactTestUtils = require("react-dom/test-utils");
     var TestUtils = require("../../../testutil/TestUtils");
-    var If = require("../If.jsx");
+    var If = require("../If");
 
     it("renders children when test value is true", function () {
         var component = ReactTestUtils.renderIntoDocument(

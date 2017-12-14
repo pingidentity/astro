@@ -1,5 +1,5 @@
 var React = require("react");
-var TabbedSections = require("./../../../components/general/TabbedSections.jsx");
+var TabbedSections = require("./../../../components/general/TabbedSections");
 
 /**
 * @name TabbedSectionsDemo

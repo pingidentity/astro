@@ -1,6 +1,6 @@
 var React = require("react"),
     Constants = require("./v2-constants.js"),
-    StatelessFileUpload = require("./v2-stateless.jsx"),
+    StatelessFileUpload = require("./v2-stateless"),
     Utils = require("../../../util/Utils"),
     fixOrientation = require("fix-orientation"),
     readExif = require("exif-js"),

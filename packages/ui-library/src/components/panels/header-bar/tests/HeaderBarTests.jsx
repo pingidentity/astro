@@ -1,6 +1,6 @@
 window.__DEV__ = true;
 
-jest.dontMock("../HeaderBar.jsx");
+jest.dontMock("../HeaderBar");
 jest.dontMock("../../../../util/EventUtils");
 jest.dontMock("../../../../util/Utils");
 
@@ -9,7 +9,7 @@ describe("HeaderBar", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         ReduxTestUtils = require("../../../../util/ReduxTestUtils"),
         TestUtils = require("../../../../testutil/TestUtils"),
-        HeaderBar = require("../HeaderBar.jsx"),
+        HeaderBar = require("../HeaderBar"),
         _ = require("underscore");
 
     var dataId = "test-header";

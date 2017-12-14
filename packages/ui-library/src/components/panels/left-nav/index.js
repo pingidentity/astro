@@ -1,4 +1,4 @@
-var LeftNavBar = require("./LeftNavBar.jsx");
+var LeftNavBar = require("./LeftNavBar");
 
 LeftNavBar.Reducer = require("./Reducer.js");
 LeftNavBar.Actions = require("./Actions.js");

@@ -3,8 +3,8 @@ var React = require("react"),
     _ = require("underscore"),
     Utils = require("../../../util/Utils.js"),
     Constants = require("./v2-constants"),
-    Stateless = require("./v2-stateless.jsx"),
-    Stateful = require("./v2-stateful.jsx");
+    Stateless = require("./v2-stateless"),
+    Stateful = require("./v2-stateful");
 
 /**
  * @typedef SelectionList~SelectionListItem

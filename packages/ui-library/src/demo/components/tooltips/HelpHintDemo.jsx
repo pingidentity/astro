@@ -1,6 +1,6 @@
 var React = require("react");
-var HelpHint = require("../../../components/tooltips/HelpHint.jsx");
-var FormLabel = require("../../../components/forms/FormLabel.jsx");
+var HelpHint = require("../../../components/tooltips/HelpHint");
+var FormLabel = require("../../../components/forms/FormLabel");
 
 
 /**

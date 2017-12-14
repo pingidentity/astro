@@ -34,20 +34,20 @@ jest.setMock("../i18n/countryCodes", [
         areaCodes: null
     }
 ]);
-jest.dontMock("../i18n/CountryFlagList.jsx");
+jest.dontMock("../i18n/CountryFlagList");
 jest.dontMock("../../../util/i18n/Translator.js");
 jest.dontMock("../../../util/EventUtils.js");
-jest.dontMock("../FormDropDownList.jsx");
-jest.dontMock("../FormLabel.jsx");
-jest.dontMock("../FormError.jsx");
+jest.dontMock("../FormDropDownList");
+jest.dontMock("../FormLabel");
+jest.dontMock("../FormError");
 jest.dontMock("../form-text-field/index.js");
-jest.dontMock("../form-text-field/v2.jsx");
+jest.dontMock("../form-text-field/v2");
 
 describe("CountryFlagList", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        CountryFlagList = require("../i18n/CountryFlagList.jsx"),
+        CountryFlagList = require("../i18n/CountryFlagList"),
         Translator = require("../../../util/i18n/Translator.js"),
         _ = require("underscore");
 

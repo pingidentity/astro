@@ -1,7 +1,7 @@
 window.__DEV__ = true;
 
-jest.dontMock("../ColorPicker.jsx");
-jest.dontMock("../If.jsx");
+jest.dontMock("../ColorPicker");
+jest.dontMock("../If");
 jest.dontMock("../../../util/EventUtils.js");
 jest.dontMock("../../../util/Validators.js");
 jest.dontMock("../../../util/Utils.js");
@@ -12,8 +12,8 @@ describe("ColorPicker", function () {
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        ColorPicker = require("../ColorPicker.jsx"),
-        FormLabel = require("../../forms/FormLabel.jsx"),
+        ColorPicker = require("../ColorPicker"),
+        FormLabel = require("../../forms/FormLabel"),
         _ = require("underscore");
 
     window.addEventListener = jest.genMockFunction();

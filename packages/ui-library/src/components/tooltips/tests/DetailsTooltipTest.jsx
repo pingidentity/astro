@@ -1,6 +1,6 @@
 window.__DEV__ = true;
 
-jest.dontMock("../DetailsTooltip.jsx");
+jest.dontMock("../DetailsTooltip");
 jest.dontMock("../../../util/EventUtils.js");
 jest.dontMock("../../../util/Utils.js");
 
@@ -10,7 +10,7 @@ describe("DetailsTooltip", function () {
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        DetailsTooltip = require("../DetailsTooltip.jsx"),
+        DetailsTooltip = require("../DetailsTooltip"),
         Wrapper = TestUtils.UpdatePropsWrapper,
         _ = require("underscore");
 

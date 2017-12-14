@@ -1,4 +1,4 @@
-jest.dontMock("../v2.jsx");
+jest.dontMock("../v2");
 
 describe("Toggle", function () {
     var React = require("react"),
@@ -6,7 +6,7 @@ describe("Toggle", function () {
         _ = require("underscore"),
         TestUtils = require("../../../../testutil/TestUtils"),
         Utils = require("../../../../util/Utils"),
-        Toggle = require("../v2.jsx");
+        Toggle = require("../v2");
 
     function getComponent (props) {
         var props = _.defaults(props || {}, {

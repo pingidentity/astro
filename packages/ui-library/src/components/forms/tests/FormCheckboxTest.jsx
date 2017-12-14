@@ -1,14 +1,14 @@
 window.__DEV__ = true;
 
-jest.dontMock("../FormCheckbox.jsx");
-jest.dontMock("../../tooltips/HelpHint.jsx");
-jest.dontMock("../FormLabel.jsx");
-jest.dontMock("../FormError.jsx");
+jest.dontMock("../FormCheckbox");
+jest.dontMock("../../tooltips/HelpHint");
+jest.dontMock("../FormLabel");
+jest.dontMock("../FormError");
 
 describe("FormCheckbox", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
-        FormCheckbox= require("../FormCheckbox.jsx"),
+        FormCheckbox= require("../FormCheckbox"),
         TestUtils = require("../../../testutil/TestUtils"),
         _ = require("underscore");
 

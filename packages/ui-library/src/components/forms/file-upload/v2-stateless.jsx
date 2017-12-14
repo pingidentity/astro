@@ -2,8 +2,8 @@ var PropTypes = require("prop-types");
 var React = require("react"),
     ReactDOM = require("react-dom"),
     classnames = require("classnames"),
-    FormLabel = require("../FormLabel.jsx"),
-    FormError = require("../FormError.jsx");
+    FormLabel = require("../FormLabel"),
+    FormError = require("../FormError");
 
 /**
  * @name FileUploadStateless

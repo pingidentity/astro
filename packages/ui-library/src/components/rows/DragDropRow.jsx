@@ -1,1 +1,1 @@
-module.exports = require("./DragDrop.jsx");
+module.exports = require("./DragDrop");

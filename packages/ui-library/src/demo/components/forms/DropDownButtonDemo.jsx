@@ -1,5 +1,5 @@
 var React = require("react"),
-    DropDownButton = require("../../../components/forms/DropDownButton.jsx");
+    DropDownButton = require("../../../components/forms/DropDownButton");
 
 /**
 * @name DropDownButtonDemo

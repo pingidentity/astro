@@ -1,17 +1,17 @@
 window.__DEV__ = true;
 
-jest.dontMock("../v2.jsx");
+jest.dontMock("../v2");
 jest.dontMock("../index.js");
-jest.dontMock("../../FormLabel.jsx");
-jest.dontMock("../../FormError.jsx");
-jest.dontMock("../../../tooltips/HelpHint.jsx");
+jest.dontMock("../../FormLabel");
+jest.dontMock("../../FormError");
+jest.dontMock("../../../tooltips/HelpHint");
 
 describe("FormTextField", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
-        FormTextField = require("../v2.jsx"),
+        FormTextField = require("../v2"),
         Utils = require("../../../../util/Utils"),
         _ = require("underscore");
 

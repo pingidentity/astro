@@ -1,5 +1,5 @@
 var React = require("react"),
-    Spinner = require("../../../components/general/Spinner.jsx");
+    Spinner = require("../../../components/general/Spinner");
 
 /**
 * @name SpinnerDemo

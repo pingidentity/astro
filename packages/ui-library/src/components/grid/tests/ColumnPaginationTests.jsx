@@ -1,13 +1,13 @@
 window.__DEV__ = true;
 
-jest.dontMock("../ColumnPagination.jsx");
+jest.dontMock("../ColumnPagination");
 
 
 describe("ColumnPagination", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        ColumnPagination = require("../ColumnPagination.jsx"),
+        ColumnPagination = require("../ColumnPagination"),
         callback = jest.genMockFunction(),
         node,
         component;

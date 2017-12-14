@@ -1,4 +1,4 @@
-var Messages = require("./Messages.jsx");
+var Messages = require("./Messages");
 var Constants = require("./MessagesConstants.js");
 
 /*

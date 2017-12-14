@@ -1,7 +1,7 @@
 var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames"),
-    HelpHint = require("../tooltips/HelpHint.jsx"),
+    HelpHint = require("../tooltips/HelpHint"),
     Utils = require("../../util/Utils");
 
 /** @class FormLabel

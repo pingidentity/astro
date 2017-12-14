@@ -3,11 +3,11 @@
 var PropTypes = require("prop-types");
 
 var React = require("react"),
-    CancelTooltip = require("./../tooltips/CancelTooltip.jsx"),
+    CancelTooltip = require("./../tooltips/CancelTooltip"),
     ContextButton = require("../general/context-close-button").v2,
-    EllipsisLoaderButton = require("../general/EllipsisLoaderButton.jsx"),
-    HelpHint = require("../tooltips/HelpHint.jsx"),
-    Progress = require("./Progress.jsx"),
+    EllipsisLoaderButton = require("../general/EllipsisLoaderButton"),
+    HelpHint = require("../tooltips/HelpHint"),
+    Progress = require("./Progress"),
     classnames = require("classnames"),
     Utils = require("../../util/Utils"),
     Translator = require("../../util/i18n/Translator.js"),

@@ -1,15 +1,15 @@
 window.__DEV__ = true;
 
-jest.dontMock("../v2.jsx");
+jest.dontMock("../v2");
 jest.dontMock("../../form-text-field/index.js");
-jest.dontMock("../../form-text-field/v2.jsx");
-jest.dontMock("../../FormLabel.jsx");
-jest.dontMock("../../FormError.jsx");
+jest.dontMock("../../form-text-field/v2");
+jest.dontMock("../../FormLabel");
+jest.dontMock("../../FormError");
 
 describe("FormIntegerField", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
-        FormIntegerField= require("../v2.jsx"),
+        FormIntegerField= require("../v2"),
         TestUtils = require("../../../../testutil/TestUtils"),
         Utils = require("../../../../util/Utils"),
         callback;

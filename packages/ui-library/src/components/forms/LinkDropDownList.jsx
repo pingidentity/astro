@@ -2,8 +2,8 @@
 var PropTypes = require("prop-types");
 var React = require("react"),
 
-    CollapsibleLink = require("../general/CollapsibleLink.jsx"),
-    DetailsTooltip = require("../tooltips/DetailsTooltip.jsx"),
+    CollapsibleLink = require("../general/CollapsibleLink"),
+    DetailsTooltip = require("../tooltips/DetailsTooltip"),
 
     classnames = require("classnames"),
     _ = require("underscore");

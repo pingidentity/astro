@@ -3,7 +3,7 @@
 var PropTypes = require("prop-types");
 
 var React = require("react"),
-    FormDropDownList = require("../forms/FormDropDownList.jsx"),
+    FormDropDownList = require("../forms/FormDropDownList"),
     Utils = require("../../util/Utils"),
     moment = require("moment-range"),
     Translator = require("../../util/i18n/Translator.js"),

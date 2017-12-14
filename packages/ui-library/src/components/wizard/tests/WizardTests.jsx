@@ -1,12 +1,12 @@
 window.__DEV__ = true;
 
-jest.dontMock("../Step.jsx");
-jest.dontMock("../Wizard.jsx");
-jest.dontMock("../../general/EllipsisLoaderButton.jsx");
-jest.dontMock("../../forms/ButtonBar.jsx");
+jest.dontMock("../Step");
+jest.dontMock("../Wizard");
+jest.dontMock("../../general/EllipsisLoaderButton");
+jest.dontMock("../../forms/ButtonBar");
 jest.dontMock("../../../util/format.js");
-jest.dontMock("../../tooltips/CancelTooltip.jsx");
-jest.dontMock("../../tooltips/DetailsTooltip.jsx");
+jest.dontMock("../../tooltips/CancelTooltip");
+jest.dontMock("../../tooltips/DetailsTooltip");
 
 describe("Step", function () {
     var React = require("react"),
@@ -14,7 +14,7 @@ describe("Step", function () {
         TestUtils = require("../../../testutil/TestUtils"),
         Utils = require("../../../util/Utils"),
         ReactTestUtils = require("react-dom/test-utils"),
-        Wizard = require("../Wizard.jsx"),
+        Wizard = require("../Wizard"),
         Step = Wizard.Step,
         assign = require("object-assign");
 

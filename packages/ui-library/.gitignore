@@ -5,6 +5,7 @@ reports/
 mvn/
 build*
 dist
+lib
 **/coverage
 **/coverage-reference
 npm-debug.log

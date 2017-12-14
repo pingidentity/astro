@@ -1,6 +1,6 @@
 window.__DEV__ = true;
 
-jest.dontMock("../RockerButton.jsx");
+jest.dontMock("../RockerButton");
 
 describe("RockerButton", function () {
 
@@ -9,7 +9,7 @@ describe("RockerButton", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         Utils = require("../../../util/Utils.js"),
-        RockerButton = require("../RockerButton.jsx"),
+        RockerButton = require("../RockerButton"),
         _ = require("underscore");
 
     var labelsArray = ["A", "B", "C"];

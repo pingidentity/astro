@@ -1,5 +1,5 @@
 var React = require("react"),
-    ColorPicker = require("../../../components/general/ColorPicker.jsx");
+    ColorPicker = require("../../../components/general/ColorPicker");
 
 /**
 * @name ColorPickerDemo

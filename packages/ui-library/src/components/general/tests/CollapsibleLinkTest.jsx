@@ -1,11 +1,11 @@
 window.__DEV__ = true;
 
-jest.dontMock("../CollapsibleLink.jsx");
+jest.dontMock("../CollapsibleLink");
 
 describe("CollapsibleLink", function () {
     var React = require("react");
     var ReactTestUtils = require("react-dom/test-utils");
-    var CollapsibleLink = require("../CollapsibleLink.jsx");
+    var CollapsibleLink = require("../CollapsibleLink");
     var TestUtils = require("../../../testutil/TestUtils");
 
     it("renders collapsed state", function () {

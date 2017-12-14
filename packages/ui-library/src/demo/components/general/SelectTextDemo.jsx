@@ -1,5 +1,5 @@
 var React = require("react");
-var SelectText = require("./../../../components/general/SelectText.jsx");
+var SelectText = require("./../../../components/general/SelectText");
 var FormTextField = require("./../../../components/forms/form-text-field");
 var FormFieldConstants = require("./../../../constants/FormFieldConstants");
 

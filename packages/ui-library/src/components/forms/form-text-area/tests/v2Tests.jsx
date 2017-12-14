@@ -1,16 +1,16 @@
 
-jest.dontMock("../v2.jsx");
-jest.dontMock("../../FormLabel.jsx");
-jest.dontMock("../../FormError.jsx");
-jest.dontMock("../../../tooltips/HelpHint.jsx");
+jest.dontMock("../v2");
+jest.dontMock("../../FormLabel");
+jest.dontMock("../../FormError");
+jest.dontMock("../../../tooltips/HelpHint");
 
 describe("FormTextArea", function () {
 
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../../testutil/TestUtils"),
-        FormTextArea = require("../v2.jsx"),
-        HelpHint = require("../../../tooltips/HelpHint.jsx"),
+        FormTextArea = require("../v2"),
+        HelpHint = require("../../../tooltips/HelpHint"),
         Utils = require("../../../../util/Utils"),
         _ = require("underscore");
 

@@ -1,21 +1,21 @@
 window.__DEV__ = true;
 
-jest.dontMock("../Calendar.jsx");
-jest.dontMock("../Cell.jsx");
-jest.dontMock("../DaysView.jsx");
-jest.dontMock("../MonthsView.jsx");
-jest.dontMock("../ViewHeader.jsx");
-jest.dontMock("../YearsView.jsx");
+jest.dontMock("../Calendar");
+jest.dontMock("../Cell");
+jest.dontMock("../DaysView");
+jest.dontMock("../MonthsView");
+jest.dontMock("../ViewHeader");
+jest.dontMock("../YearsView");
 jest.dontMock("../../../util/Utils.js");
 jest.dontMock("../Constants");
-jest.dontMock("../../forms/FormLabel.jsx");
-jest.dontMock("../../tooltips/HelpHint.jsx");
+jest.dontMock("../../forms/FormLabel");
+jest.dontMock("../../tooltips/HelpHint");
 jest.dontMock("../../../util/KeyboardUtils.js");
 
 describe("Calendar", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
-        Calendar = require("../Calendar.jsx"),
+        Calendar = require("../Calendar"),
         moment = require("moment-range"),
         _ = require("underscore"),
         ReactTestUtils = require("react-dom/test-utils"),

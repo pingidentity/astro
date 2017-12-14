@@ -1,12 +1,12 @@
 window.__DEV__ = true;
 
-jest.dontMock("../Spotlight.jsx");
+jest.dontMock("../Spotlight");
 
 describe("IntroTutorial", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-dom/test-utils"),
-        Spotlight = require("../Spotlight.jsx");
+        Spotlight = require("../Spotlight");
 
     beforeEach(function () {
     });

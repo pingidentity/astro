@@ -1,12 +1,12 @@
 window.__DEV__ = true;
 
-jest.dontMock("../Arrow.jsx");
+jest.dontMock("../Arrow");
 jest.dontMock("../../../../util/format.js");
 
 describe("IntroTutorial", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
-        Arrow = require("../Arrow.jsx");
+        Arrow = require("../Arrow");
 
     beforeEach(function () {
     });
