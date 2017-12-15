@@ -101,6 +101,13 @@ module.exports = [
                 pathToDemoSource: "demo_components_forms_FormRadioGroupDemo.jsx.html"
             },
             {
+                label: "Radio Input (single)",
+                demo: require("../components/forms/FormRadioInputDemo.jsx"),
+                pathToDoc: "components/forms/FormRadioInput.jsx",
+                pathToSource: "components_forms_FormRadioInput.jsx.html",
+                pathToDemoSource: "demo_components_forms_FormRadioInputDemo.jsx.html"
+            },
+            {
                 label: "Text Field",
                 demo: require("../components/forms/FormTextFieldDemo"),
                 pathToDoc: "components/forms/form-text-field/v2.jsx",

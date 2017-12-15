@@ -2,7 +2,7 @@ var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames"),
     Utils = require("../../util/Utils"),
-    FormLabel = require("./FormLabel");
+    FormRadioInput = require("./FormRadioInput");
 
 /**
  * @callback FormRadioGroup~onValueChange
@@ -103,8 +103,8 @@ class FormRadioGroup extends React.Component {
         disabled: false
     };
 
-    _handleChange = (e) => {
-        this.props.onValueChange(e.target.value);
+    _handleChange = (value) => {
+        this.props.onValueChange(value);
     };
 
     _getRadioButtons = () => {
@@ -118,24 +118,19 @@ class FormRadioGroup extends React.Component {
             });
 
             return (
-                <FormLabel
+                <FormRadioInput
                     className={className}
                     key={item.id}
-                    data-id={this.props["data-id"] + "_label_" + item.id}
-                    value={item.name}
+                    label={item.name}
                     hint={item.helpHintText}
-                    helpTarget={item.helpTarget}>
-                    <input
-                        data-id={this.props["data-id"] + "_" + item.id}
-                        type="radio"
-                        name={this.props.groupName}
-                        value={item.id}
-                        checked={String(item.id) === String(this.props.selected)}
-                        onChange={this._handleChange}
-                        disabled={radioDisabled} />
-                    <div className="circle"></div>
-
-                </FormLabel>
+                    data-id={this.props["data-id"]}
+                    name={this.props.groupName}
+                    value={item.id}
+                    checked={String(item.id) === String(this.props.selected)}
+                    onValueChange={this._handleChange}
+                    disabled={radioDisabled}
+                    helpTarget={item.helpTarget}
+                />
             );
         }.bind(this));
     };

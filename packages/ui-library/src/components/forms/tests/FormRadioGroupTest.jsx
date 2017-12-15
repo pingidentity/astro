@@ -1,6 +1,7 @@
 window.__DEV__ = true;
 
 jest.dontMock("../FormRadioGroup");
+jest.dontMock("../FormRadioInput");
 jest.dontMock("../FormLabel");
 
 describe("FormRadioGroup", function () {

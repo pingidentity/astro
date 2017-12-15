@@ -9,6 +9,7 @@ jest.dontMock("../v2-stateful");
 jest.dontMock("../../form-text-field/index.js");
 jest.dontMock("../../form-text-field/v2");
 jest.dontMock("../../FormRadioGroup");
+jest.dontMock("../../FormRadioInput");
 jest.dontMock("../../FormCheckbox");
 jest.dontMock("../../FormError");
 jest.dontMock("../../FormLabel");
@@ -157,7 +158,7 @@ describe("SelectionList", function () {
         var radios = TestUtils.scryRenderedDOMNodesWithTag(formRadioGroup, "input");
 
         ReactTestUtils.Simulate.change(radios[0]);
-        expect(component.props.onValueChange).toBeCalledWith("1");
+        expect(component.props.onValueChange).toBeCalledWith(1);
     });
 
     it("should render with few checked checkboxes and uncheck all when selected", function () {

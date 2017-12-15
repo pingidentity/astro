@@ -5,6 +5,7 @@ jest.dontMock("../../forms/FormDropDownList");
 jest.dontMock("../../forms/FormLabel");
 jest.dontMock("../../forms/FormError");
 jest.dontMock("../../forms/FormRadioGroup");
+jest.dontMock("../../forms/FormRadioInput");
 
 describe("ConditionalFieldset", function () {
     var React = require("react"),
@@ -207,10 +208,10 @@ describe("ConditionalFieldset", function () {
         });
 
         var select = TestUtils.findRenderedDOMNodeWithDataId(component, "fieldset-options");
-        
+
         expect(select).toBeTruthy();
         expect(TestUtils.findRenderedDOMNodeWithClass(select, "input-width-medium")).toBeTruthy();
-        
+
         var classes = select.className.split(" ");
         expect(_.contains(classes, "input-width-medium")).toEqual(true);
     });
