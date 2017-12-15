@@ -1,14 +1,14 @@
 window.__DEV__ = true;
 
-jest.dontMock("../FormRadioInput.jsx");
-jest.dontMock("../FormLabel.jsx");
+jest.dontMock("../FormRadioInput");
+jest.dontMock("../FormLabel");
 
 describe("FormRadioInput", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         _ = require("underscore"),
         TestUtils = require("../../../testutil/TestUtils"),
-        FormRadioInput = require("../FormRadioInput.jsx");
+        FormRadioInput = require("../FormRadioInput");
 
     var getComponent = function (props) {
         props = _.defaults(props || {}, {

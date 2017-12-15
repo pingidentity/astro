@@ -1,6 +1,6 @@
 var React = require("react"),
     _ = require("underscore"),
-    FormRadioInput = require("../../../components/forms/FormRadioInput.jsx");
+    FormRadioInput = require("../../../components/forms/FormRadioInput");
 
 var ROWS = { one: "Row 1", two: "Row 2", three: "Row 3" };
 var VALUES = { one: "Choice 1", two: "Choice 2", three: "Choice 3" };

@@ -1,7 +1,7 @@
 var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames"),
-    FormLabel = require("./FormLabel.jsx");
+    FormLabel = require("./FormLabel");
 
 /**
  * @callback FormRadioInput~onValueChange
