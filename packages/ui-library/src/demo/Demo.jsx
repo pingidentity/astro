@@ -173,8 +173,13 @@ class DemoApp extends React.Component {
         if (this.props.location.query.openNode) {
             this.navActions.toggleSection(this.props.location.query.openNode);
         }
-        if (this.props.location.query.selectedNode) {
+        else if (this.props.location.query.selectedNode) {
             this.navActions.selectItem(this.props.location.query.selectedNode);
+        }
+        else {
+            //set initial page to docs if none selected
+            this.navActions.toggleSection("Docs");
+            this.navActions.selectItem("ReleaseNotes", "Docs");
         }
     }
 
