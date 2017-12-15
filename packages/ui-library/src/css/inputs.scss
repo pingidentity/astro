@@ -106,6 +106,7 @@ label {
     .label-text {
         color: $color-elephant;
         margin: 0 0 8px;
+        text-align: left;
 
         .help-tooltip {
             margin-left: 10px;
@@ -3049,5 +3050,19 @@ label {
     }
     .count {
         margin-left: 5px;
+    }
+}
+
+.input-message-inline {
+    display: inline-block;
+    color: $color-white;
+    font-size: 15px;
+    line-height: 1em;
+    padding: 10px;
+    margin: 7px 0 10px;
+    @include border-radius(2px);
+
+    &.required {
+        background: $color-warning-icon-yellow;
     }
 }
