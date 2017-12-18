@@ -12,8 +12,6 @@ describe("UnitInput", function () {
         ReactDOM = require("react-dom"),
         UnitInput = require("../UnitInput"),
         _ = require("underscore"),
-        onTextValueChange = jest.genMockFunction(),
-        onDropdownValueChange = jest.genMockFunction(),
         component;
         
     var options = [
@@ -25,96 +23,96 @@ describe("UnitInput", function () {
     ];
 
     function render (props) {
+        var callback = jest.genMockFunction();
+        var callback1 = jest.genMockFunction();
         return ReactTestUtils.renderIntoDocument(
-            <UnitInput onDropdownValueChange={onDropdownValueChange}
-                       onTextValueChange={onTextValueChange}
-                       {...props} />
+            <UnitInput
+                {...props}
+                labelText="Unit Input Text"
+                className="custom-container-class"
+                textFieldProps={{
+                    onValueChange: callback,
+                    value: "ABC",
+                    className: "input-width-xsmall"
+                }}
+                dropDownListProps={{
+                    options: options,
+                    onValueChange: callback1,
+                    selectedOption: options[0],
+                    className: "input-width-small"
+                }}
+            />
         );
     }
 
-    beforeEach(function () {
-        onTextValueChange.mockClear();
-        onDropdownValueChange.mockClear();
-    });
-    
-    it("renders the component", function () {
-        component = render({ labelText: "Unit Input Text",
-                             options: options,
-                             selectedOption: options[0] });
-
-        // verify that the component is rendered
+    it("verify it renders the component", function () {
+        component = render({ labelText: "Unit Input Text" });
         var input = ReactDOM.findDOMNode(component);
         expect(ReactTestUtils.isDOMComponent(input)).toBeTruthy();
     });
     
     it("verify default data-id", function () {
-        component = render({ labelText: "Unit Input Text",
-                             options: options,
-                             selectedOption: options[0] });
+        component = render({ labelText: "Unit Input Text" });
         expect(component.props["data-id"]).toBe("unit-input");
-        // expect(TestUtils.findRenderedDOMNodeWithDataId(component, "unit-input")).toBeTruthy();
     });
     
     it("accepts custom data-id", function () {
         component = render({ labelText: "Unit Input Text",
-                             options: options,
-                             "data-id": "my-custom-select",
-                             selectedOption: options[0] });
+                             "data-id": "my-custom-select" });
         expect(TestUtils.findRenderedDOMNodeWithDataId(component, "my-custom-select")).toBeTruthy();
     });
 
     it("accepts classsname", function () {
         component = render({ labelText: "Unit Input Text",
-                             options: options,
-                             className: "custom-container-class",
-                             selectedOption: options[0] });
+                            className: "custom-container-class" });
         expect(TestUtils.findRenderedDOMNodeWithClass(component, "custom-container-class")).toBeTruthy();
     });
 
     it("default not required", function () {
-        component = render({ labelText: "Unit Input Text",
-                             options: options,
-                             className: "custom-container-class",
-                             selectedOption: options[0] });
+        component = render({ labelText: "Unit Input Text" });
         var textField = TestUtils.findRenderedDOMNodeWithDataId(component, "form-text-field");
         var classes = textField.className.split(" ");
 
         expect(_.contains(classes, "required")).toEqual(false);
     });
-    
-    it("default not disabled", function () {
-        component = render({ labelText: "Unit Input Text",
-                             options: options,
-                             className: "custom-container-class",
-                             selectedOption: options[0] });
-        var unitInput = TestUtils.findRenderedDOMNodeWithDataId(component, "unit-input");
-        var classes = unitInput.className.split(" ");
-
-        expect(_.contains(classes, "disabled")).toEqual(false);
-    });
 
     it("supports disabled when set", function () {
-        component = render({ labelText: "Unit Input Text",
-                             options: options,
-                             className: "custom-container-class",
-                             selectedOption: options[0],
-                             disabled: true });
-        var formTextField = TestUtils.findRenderedDOMNodeWithDataId(component, "form-text-field");
+        var callback = jest.genMockFunction();
+        var callback1 = jest.genMockFunction();
+        var component1 = ReactTestUtils.renderIntoDocument(
+            <UnitInput
+                labelText="Unit Input Text"
+                className="custom-container-class"
+                data-id= "my-custom-select"
+                textFieldProps={{
+                    onValueChange: callback,
+                    value: "ABC",
+                    className: "input-width-xsmall",
+                    disabled: true
+                }}
+                dropDownListProps={{
+                    options: options,
+                    onValueChange: callback1,
+                    selectedOption: options[0],
+                    className: "input-width-small",
+                    disabled: true
+                }}
+            /> );
+
+        var formTextField = TestUtils.findRenderedDOMNodeWithDataId(component1, "form-text-field");
         var textClasses = formTextField.className.split(" ");
 
         expect(_.contains(textClasses, "disabled")).toEqual(true);
         
-        var formDropDown = TestUtils.findRenderedDOMNodeWithDataId(component, "form-drop-down-list");
+        var formDropDown = TestUtils.findRenderedDOMNodeWithDataId(component1, "form-drop-down-list");
         var dropDownClasses = formDropDown.className.split(" ");
 
         expect(_.contains(dropDownClasses, "disabled")).toEqual(true);
     });
     
     it("renders list of options", function () {
-        component = render({ labelText: "Unit Input Text",
-                             options: options,
-                             className: "custom-container-class",
-                             selectedOption: options[0] });
+        component = render({ labelText: "Unit Input Text" });
+
         var select = TestUtils.findRenderedDOMNodeWithDataId(component, "select-list");
 
         expect(select.children.length).toEqual(5);
@@ -125,46 +123,10 @@ describe("UnitInput", function () {
         expect(select.children[4].textContent).toEqual("Year(s)");
     });
     
-    it("list option triggers onDropdownValueChange callback on item click", function () {
-        component = render({ labelText: "Unit Input Text",
-                             options: options,
-                             className: "custom-container-class",
-                             selectedOption: options[0] });
-        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
-        
-        ReactTestUtils.Simulate.click(select);
-        
-        var option1 = TestUtils.findRenderedDOMNodeWithDataId(component, "option-1");
-
-        ReactTestUtils.Simulate.click(option1);
-
-        expect(component.props.onDropdownValueChange).toBeCalled();
-    });
-    
     it("renders value in form text field", function () {
-        component = render({ labelText: "Unit Input Text",
-                             options: options,
-                             className: "custom-container-class",
-                             selectedOption: options[0],
-                             value: "ABC" });
-
-        // verify that the component is rendered
+        component = render({ labelText: "Unit Input Text" });
         var input = TestUtils.findRenderedDOMNodeWithDataId(component, "form-text-field-input");
+        
         expect(input.value).toEqual("ABC");
-    });
-    
-    it("triggers onChange callback when input updated", function () {
-        var callback = jest.genMockFunction();
-        component = render({ labelText: "Unit Input Text",
-                             options: options,
-                             className: "custom-container-class",
-                             selectedOption: options[0],
-                             value: "ABC",
-                             onTextValueChange: callback });
-        var input = TestUtils.findRenderedDOMNodeWithDataId(component, "form-text-field-input");
-
-        ReactTestUtils.Simulate.change(input, { target: { value: "DEF" } });
-
-        expect(callback.mock.calls[0][0].target.value).toBe("DEF");
     });
 });

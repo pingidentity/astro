@@ -37,6 +37,7 @@ class MultivaluesDemo extends React.Component {
 
                 <div className="input-row">
                     <Multivalues title="Multivalues Demo"
+                        stateless={false}
                         entries={this.state.entries}
                         onValueChange={this._handleValueChange} />
                 </div>
@@ -44,6 +45,7 @@ class MultivaluesDemo extends React.Component {
                 <p>Type ahead. Press "return" to add an item, or delete an item by clicking "x".</p>
                 <div className="input-row">
                     <Multivalues title="Multivalues Demo"
+                        stateless={false}
                         entries={this.state.entries}
                         required={true}
                         onNewValue={this._onNewValue}

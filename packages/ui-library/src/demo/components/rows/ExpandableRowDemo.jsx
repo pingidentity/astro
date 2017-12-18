@@ -67,7 +67,7 @@ class ExpandableRowDemo extends React.Component {
     render() {
         var customDeleteButton = (
             <DetailsTooltip
-                stateless={true}
+                stateless={false}
                 label={(<button type="button" className="delete-btn" onClick={this._toggleCustomDelete}/>)}
                 positionClassName="top left"
                 title="Tooltip Title"
@@ -92,10 +92,12 @@ class ExpandableRowDemo extends React.Component {
         return (
             <div data-id="idp-row" className="result-set">
                 <ExpandableRow
+                    stateless={false}
                     title="Basic Row"
                     subtitle="Row Subtitle"
                 />
                 <ExpandableRow
+                    stateless={false}
                     title="Expanded Row with Row Message"
                     rowMessage={{
                         text: "The optional row message appears at the top of the expanded row only when the row is \
@@ -105,25 +107,28 @@ class ExpandableRowDemo extends React.Component {
                     expanded={true}
                 />
                 <ExpandableRow
+                    stateless={false}
                     title="Row with Status Indicator"
                     subtitle="Row Subtitle"
                     status={ExpandableRow.Statuses.ERROR}
                 />
                 <ExpandableRow
+                    stateless={false}
                     title="Row with Toggle"
                     subtitle="stateful"
                     expanded={false}
-                    rowAccessories={<Toggle />}
+                    rowAccessories={<Toggle stateless={false} />}
                 />
                 <ExpandableRow
                     title="Row with Pill Button"
                     subtitle="stateless"
-                    stateless={true}
+                    stateless={false}
                     expanded={this.state.expanded1}
                     onToggle={this._onToggle1}
                     rowAccessories={<RowAccessories.PillButton label="Pill Button" />}
                 />
                 <ExpandableRow
+                    stateless={false}
                     title="Row With a Variety of Right Content"
                     subtitle="Row Subtitle"
                     rowAccessories={(
@@ -134,27 +139,31 @@ class ExpandableRowDemo extends React.Component {
                                 <label className="row-help">PROV</label>
                             </HelpHint>
                             <button className="inline">Inline Button</button>
-                            <Toggle />
+                            <Toggle stateless={false} />
                             <span className="count">2</span>
                         </span>
                     )}
                 />
                 <ExpandableRow
+                    stateless={false}
                     title="Row With Image"
                     subtitle="Row Subtitle"
                     image="src/demo/images/example-expandable-row-image.png"
                 />
                 <ExpandableRow
+                    stateless={false}
                     title="Row With Icon"
                     subtitle="Row Subtitle"
                     icon="icon-cog"
                 />
                 <ExpandableRow
+                    stateless={false}
                     title="Row in Waiting Mode"
                     subtitle="stateful"
                     waiting={true}
                 />
                 <ExpandableRow
+                    stateless={false}
                     title="Row With Invited Styling"
                     className="invited"
                     expanded={false}
@@ -172,7 +181,7 @@ class ExpandableRowDemo extends React.Component {
                     <ExpandableRow
                         title="Row with Delete Confirmation"
                         subtitle="stateless"
-                        stateless={true}
+                        stateless={false}
                         expanded={this.state.expanded3}
                         onToggle={this._onToggle3}
                         onDeleteCancelClick={this._handleDeleteCancel}
@@ -188,7 +197,7 @@ class ExpandableRowDemo extends React.Component {
                     <ExpandableRow
                         title="Row with Custom Delete Tooltip Button"
                         subtitle="stateless"
-                        stateless={true}
+                        stateless={false}
                         expanded={this.state.expanded4}
                         onToggle={this._onToggle4}
                         deleteButton={customDeleteButton}

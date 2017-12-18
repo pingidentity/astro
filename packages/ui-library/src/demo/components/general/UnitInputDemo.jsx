@@ -29,7 +29,7 @@ class UnitInputDemo extends React.Component {
     
     _handleTextValueChange = (e) => {
         this.setState({
-            a: e.target.value
+            a: e
         });
     };
     
@@ -44,14 +44,20 @@ class UnitInputDemo extends React.Component {
             <div>
                 <div className="input-row">
                     <UnitInput
-                        onTextValueChange={this._handleTextValueChange}
-                        onDropdownValueChange={this._handleDropdownValueChange}
-                        options={OPTIONS}
                         labelText="Unit Input Text"
-                        value={this.state.a}
-                        selectedOption={this.state.selectedValue}
-                        textFieldClassName="input-width-xsmall"
-                        dropDownClassName="input-width-small"
+                        className="demo"
+                        textFieldProps={{
+                            onValueChange: this._handleTextValueChange,
+                            value: this.state.a,
+                            className: "input-width-xsmall"
+                            
+                        }}
+                        dropDownListProps={{
+                            options: OPTIONS,
+                            onValueChange: this._handleDropdownValueChange,
+                            selectedOption: this.state.selectedValue,
+                            className: "input-width-small"
+                        }}
                     />
                     <br /><br />
                     Selected Value: <strong>{this.state.a} {this.state.selectedValue.value}</strong>

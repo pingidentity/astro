@@ -90,7 +90,7 @@ module.exports = class extends React.Component {
 
                 <div className="page-controls-secondary">
                     <button type="button" className="inline">Inline Button</button>
-                    <Toggle />
+                    <Toggle stateless={false} />
                 </div>
 
                 <h1 className="page-title">Edit Template with Switcher</h1>

@@ -222,7 +222,7 @@ class Row extends React.Component {
                         showEdit={this.props.showEdit}
                         subtitle="this is a subtitle"
                         image="https://media1.giphy.com/media/EldfH1VJdbrwY/200_s.gif"
-                        rowAccessories={<Toggle toggled={true} />}
+                        rowAccessories={<Toggle toggled={true} stateless={false} />}
                         title={"Row number " + this.props["data-id"] + " (" + this.props.type + ")"} />);
             case "2 lines with icon toggle off":
                 return (
@@ -231,7 +231,7 @@ class Row extends React.Component {
                         showEdit={this.props.showEdit}
                         subtitle="this is a subtitle"
                         image="https://media1.giphy.com/media/EldfH1VJdbrwY/200_s.gif"
-                        rowAccessories={<Toggle toggled={false} />}
+                        rowAccessories={<Toggle toggled={false} stateless={false} />}
                         title={"Row number " + this.props["data-id"] + " (" + this.props.type + ")"} />);
             case "2 lines with icon, with pill button":
                 return (
@@ -246,7 +246,7 @@ class Row extends React.Component {
                 var accessories = (
                     <div>
                         <RowAccessories.PillButton label="Pill Button" />
-                        <Toggle toggled={true} />
+                        <Toggle toggled={true} stateless={false} />
                         <RowAccessories.Status status="good" />
                         <RowAccessories.Status status="error" />
                         <RowAccessories.Status status="warning" />
