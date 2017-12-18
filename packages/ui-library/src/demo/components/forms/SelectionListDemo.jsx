@@ -138,6 +138,7 @@ class SelectionListDemo extends React.Component {
                     </button>
                 </p>
                 <SelectionList
+                    data-id="radio-demo-1"
                     stateless={false}
                     type={SelectionList.ListType.SINGLE}
                     items={SINGLE_SELECT_ITEMS}
@@ -157,6 +158,7 @@ class SelectionListDemo extends React.Component {
                     Selected Radio ID = {this.state.singleSelectId3}
                 </p>
                 <SelectionList
+                    data-id="radio-demo-2"
                     stateless={false}
                     type={SelectionList.ListType.SINGLE}
                     items={SINGLE_SELECT_ITEMS}
@@ -183,6 +185,7 @@ class SelectionListDemo extends React.Component {
                     onToggle={function () {}}>
 
                     <SelectionList
+                        data-id="radio-demo-3"
                         stateless={false}
                         type={SelectionList.ListType.SINGLE}
                         items={SINGLE_SELECT_ITEMS}
