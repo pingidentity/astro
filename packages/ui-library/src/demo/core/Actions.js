@@ -28,6 +28,9 @@ exports.fetchCode = function (id, pathToDoc) {
     // ButtonBar.jsx --> ButtonBarDemo.jsx
     // form-text-field/v2.jsx --> FormTextFieldDemo.jsx
     function parseDemoFile (ptd) {
+
+        console.log("ptd", ptd);
+
         var path;
         if (ptd.indexOf("-") > -1) {
             path = pathToDoc.split("-").map(function (word) {
@@ -36,6 +39,9 @@ exports.fetchCode = function (id, pathToDoc) {
         } else {
             path = ptd;
         }
+
+        console.log("ptd", ptd);
+
         return path.replace(/(\.jsx|\.js|\/v2.jsx)/, "Demo.jsx");
     }
 
