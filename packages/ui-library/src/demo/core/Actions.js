@@ -23,21 +23,33 @@ exports.receiveCode = function (id, markup) {
 };
 
 exports.fetchCode = function (id, pathToDoc) {
-
-    // remove any directory dashes and capitalize the first letter of each word so that it can generate the Demo file
-    // ButtonBar.jsx --> ButtonBarDemo.jsx
-    // form-text-field/v2.jsx --> FormTextFieldDemo.jsx
+    /*
+    Prep demo file name
+    Examples:
+        1) ButtonBar.jsx --> ButtonBarDemo.jsx
+        2) toggle/v2.jsx --> ToggleDemo.jsx
+        3) form-text-field/v2.jsx --> FormTextFieldDemo.jsx
+    */
     function parseDemoFile (ptd) {
-        var path = ptd.split("/").map(function (word) {
-            if (word.indexOf("-") > -1) {
-                return word.split("-").map(function (wordPart) {
-                    return wordPart.charAt(0).toUpperCase() + wordPart.slice(1);
-                }).join("");
-            } else {
-                return word;
-            }
-        }).join("/");
-        return path.replace(/(\.jsx|\.js|\/v2.jsx)/, "Demo.jsx");
+        var path = ptd.replace(/(\.jsx|\.js|\/v2.jsx)/, "Demo.jsx").split("/");
+        return path
+            .map(function (dir, i) {
+                // preps example 3 (v2 file in sub directory with dashes)
+                if (dir.indexOf("-") > -1) {
+                    return dir.split("-").map(function (dirPart) {
+                        return dirPart.charAt(0).toUpperCase() + dirPart.slice(1);
+                    }).join("");
+
+                // preps example 2 (v2 file in sub directory without dashes)
+                } else if (path.length-1 === i) {
+                    return dir.charAt(0).toUpperCase() + dir.slice(1);
+
+                // example 1 (all others)
+                } else {
+                    return dir;
+                }
+            })
+            .join("/");
     }
 
     return function (dispatch) {
