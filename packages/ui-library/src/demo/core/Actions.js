@@ -28,20 +28,15 @@ exports.fetchCode = function (id, pathToDoc) {
     // ButtonBar.jsx --> ButtonBarDemo.jsx
     // form-text-field/v2.jsx --> FormTextFieldDemo.jsx
     function parseDemoFile (ptd) {
-
-        console.log("ptd", ptd);
-
-        var path;
-        if (ptd.indexOf("-") > -1) {
-            path = pathToDoc.split("-").map(function (word) {
-                return word.charAt(0).toUpperCase() + word.slice(1);
-            }).join("");
-        } else {
-            path = ptd;
-        }
-
-        console.log("ptd", ptd);
-
+        var path = ptd.split("/").map(function (word) {
+            if (word.indexOf("-") > -1) {
+                return word.split("-").map(function (wordPart) {
+                    return wordPart.charAt(0).toUpperCase() + wordPart.slice(1);
+                }).join("");
+            } else {
+                return word;
+            }
+        }).join("/");
         return path.replace(/(\.jsx|\.js|\/v2.jsx)/, "Demo.jsx");
     }
 
