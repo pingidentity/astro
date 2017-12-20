@@ -1,4 +1,3 @@
-var PropTypes = require("prop-types");
 var React = require("react"),
     ReactDOM = require("react-dom");
 
@@ -20,8 +19,14 @@ class Tutorial extends React.Component {
         var links = React.Children.toArray(this.props.children).filter(function (el) {
             return el.type === "h2";
         }).map(function (el, i) {
+            var _handleClick = function (event) {
+                this._scrollIntoView(i, event);
+            }.bind(this);
+
             return (
-                <TutorialLinkItem key={i} onClick={this._scrollIntoView} content={el.props.children} index={i} />
+                <li key={i}>
+                    <a onClick={_handleClick}>{el.props.children}</a>
+                </li>
             );
         }.bind(this));
 
@@ -41,24 +46,5 @@ class Tutorial extends React.Component {
         );
     }
 }
-
-var TutorialLinkItem = function (props) {
-    var _handleClick = function (event) {
-        props.onClick(props.index, event);
-    };
-
-    return (
-        <li key={props.key}>
-            <a onClick={_handleClick}>{props.content}</a>
-        </li>
-    );
-};
-
-TutorialLinkItem.propTypes = {
-    key: PropTypes.string,
-    onClick: PropTypes.func,
-    index: PropTypes.number,
-    content: PropTypes.node
-};
 
 module.exports = Tutorial;

@@ -25,7 +25,9 @@ class UILibrary101 extends React.Component {
 
         this.state = {
             pickerColor: "#fff",
-            currentLanguage: Translator.currentLanguage
+            currentLanguage: LANGUAGES.find(function (item) {
+                return item.value === Translator.currentLanguage;
+            })
         };
     }
 
@@ -33,10 +35,10 @@ class UILibrary101 extends React.Component {
         this.setState({ pickerColor: color });
     };
 
-    _handleLanguageChange = (index, event) => {
-        Translator.setLanguage(event.target.value);
+    _handleLanguageChange = (index, selectedOption) => {
+        Translator.setLanguage(selectedOption.value);
         this.setState({
-            currentLanguage: event.target.value
+            currentLanguage: selectedOption
         });
     };
 
@@ -53,6 +55,7 @@ class UILibrary101 extends React.Component {
     }
 
     render() {
+
         return (
             <Tutorial generateTOC={true}>
                 <p>
@@ -342,7 +345,8 @@ class UILibrary101 extends React.Component {
                     the language will be set to the default (English).
                 </p>
                 <div className= "input-row">
-                    <FormDropDownList stateless={true}
+                    <FormDropDownList
+                        stateless={false}
                         label="Language"
                         options={LANGUAGES}
                         onValueChange={this._handleLanguageChange1}
@@ -353,7 +357,7 @@ class UILibrary101 extends React.Component {
                     You can see the text below is changed when you change the language.
                 </p>
                 <p className="attention">
-                    Welcome to UI Library, your current language code is {Translator.currentLanguage}
+                    Welcome to UI Library, your current language code is <strong>{Translator.currentLanguage}</strong>
                 </p>
                 <h3>
                     Congratulations! You now know everything you need to start using the UI Library in your projects.
