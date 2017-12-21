@@ -117,11 +117,16 @@ class ToggleStateless extends React.Component {
 }
 
 class ToggleStateful extends React.Component {
+    static defaultProps = {
+        onToggle: _.noop
+    };
+
     state = {
         toggled: this.props.toggled || false
     };
 
     _handleToggle = () => {
+        this.props.onToggle(!this.state.toggled);
         this.setState({
             toggled: !this.state.toggled
         });

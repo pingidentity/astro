@@ -8,16 +8,20 @@ var Toggle = require("../../../components/forms/form-toggle");
 */
 class ToggleDemo extends React.Component {
     state = {
-        toggled: false,
-        userStatus: "USER DISABLED"
+        toggled: "OFF",
+        userStatus1: "OFF",
+        userStatus2: "LOCKED",
+        userStatus3: "OFF"
     };
 
     getInitialState() {
         return {
-            toggled1: false,
-            toggled2: false,
+            toggled1: "OFF",
+            toggled2: "OFF",
+            toggled3: "OFF",
             userStatus1: "OFF",
-            userStatus2: "LOCKED"
+            userStatus2: "OFF",
+            userStatus3: "OFF"
         };
     }
 
@@ -34,6 +38,13 @@ class ToggleDemo extends React.Component {
             userStatus2: !this.state.toggled2 ? "ON" : "LOCKED"
         });
     };
+    
+    _handleToggle3 = () => {
+        this.setState({
+            toggled3: !this.state.toggled3,
+            userStatus3: !this.state.toggled3 ? "ON" : "OFF"
+        });
+    };
 
     render() {
         return (
@@ -47,19 +58,31 @@ class ToggleDemo extends React.Component {
                         onToggle={this._handleToggle1}
                     />
                     <br/><br/>
-                    "{this.state.userStatus1}" state
+                    Value = {this.state.userStatus1}
                 </div>
-                <p>Optional locked styling:</p>
+                <div className="input-row">
+                    <p>Optional locked styling:</p>
+                    <Toggle
+                        data-id="user-toggle"
+                        className="row-status-toggle"
+                        stateless={true}
+                        status={Toggle.Status.LOCKED}
+                        toggled={this.state.toggled2}
+                        onToggle={this._handleToggle2}
+                    />
+                    <br/><br/>
+                    State = {this.state.userStatus2}
+                </div>
+                <p>Stateful toggle with onToggle callback:</p>
                 <Toggle
                     data-id="user-toggle"
                     className="row-status-toggle"
-                    stateless={true}
-                    status={Toggle.Status.LOCKED}
-                    toggled={this.state.toggled2}
-                    onToggle={this._handleToggle2}
+                    stateless={false}
+                    toggled={this.state.toggled3}
+                    onToggle={this._handleToggle3}
                 />
                 <br/><br/>
-                "{this.state.userStatus2}" state
+                State = {this.state.userStatus3}
             </div>
         );
     }
