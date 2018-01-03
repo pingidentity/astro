@@ -13,13 +13,16 @@ $sidenav-lineheight: 22px;
 
 .doc {
     width: 100%;
-    height: 20px;
     position: inherit;
 
     @include transition(all 0.3s);
 
     h2 {
         float: left;
+    }
+
+    .js-source, iframe {
+        display: none;
     }
 
     &.open {
@@ -50,6 +53,7 @@ $sidenav-lineheight: 22px;
         }
         iframe,
         .js-source {
+            display: block;
             height: calc(100% - 35px);
             &.hidden {
                 display: none;

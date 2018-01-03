@@ -96,6 +96,21 @@ class DemoApp extends React.Component {
     };
 
     /**
+    * @method
+    * @name DemoApp#_getImportPath
+    * @private
+    * @desc Compute the path the user will need to import this component in their appActions
+    * @returns {string} = The path to the component in the lib folder
+    */
+    _getImportPath = (path) => {
+        if (!path) {
+            return null;
+        }
+
+        return `lib/${path.replace(/\.jsx$/, ".js")}`;
+    }
+
+    /**
      * @method
      * @name DemoApp#componentWillMount
      * @desc Initialize the app
@@ -256,6 +271,7 @@ class DemoApp extends React.Component {
                             jsdocUrl={this._getDocumentationUrl(name)}
                             codePathUrl={this._getSourceUrl(path)}
                             demoCodePathUrl={this._getSourceUrl(demoPath)}
+                            importPath={this._getImportPath(this._demoItem.pathToDoc)}
                             code={this.props.code[id]}
                             fullscreen={this._demoItem.fullscreen} />
                     </div>

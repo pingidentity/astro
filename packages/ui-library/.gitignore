@@ -11,6 +11,7 @@ lib
 npm-debug.log
 **/examples/node_modules
 **/examples/basic-app/src/ui-lib-assets
+package-lock.json
 
 # IDEA
 *.iml

@@ -144,7 +144,10 @@ class DemoItem extends React.Component {
 
                     <div className={headerClassName}>
                         <div className="clearfix">
-                            <h1 className="page-title" data-id="component-title" >{this.props.label}</h1>
+                            <h1 className="page-title" data-id="component-title" >
+                                {this.props.label}
+                                <div className="page-subtitle">{this.props.importPath}</div>
+                            </h1>
                             {docToggle}
                             {srcToggle}
                         </div>
