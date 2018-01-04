@@ -1,6 +1,7 @@
 var Clean = require("clean-webpack-plugin");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
+var path = require("path");
 
 // var UglifyJsPlugin = require("webpack").optimize.UglifyJsPlugin;
 // var DedupePlugin = require("webpack").optimize.DedupePlugin;
@@ -104,7 +105,11 @@ module.exports = {
     resolve: {
         // I can now require("file") instead of require("file.jsx")
         extensions: ["", ".js", ".json", ".jsx"],
-        modulesDirectories: ["node_modules"]
+        modulesDirectories: ["node_modules"],
+        //we can require the components in the demos the same way devs require components, but without actually using a node module
+        alias: {
+            "ui-library/lib": path.resolve(__dirname, "src/")
+        }
     },
     plugins: [
         new Clean([buildDir]),

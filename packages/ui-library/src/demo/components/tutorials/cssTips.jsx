@@ -4,8 +4,129 @@ var React = require("react"),
     classnames = require("classnames"),
     FormTextField = require("./../../../components/forms/form-text-field").v2,
     Layout = require("../../../components/general/ColumnLayout"),
+    _ = require("underscore"),
+    Color = require("color"),
     Toggle = require("../../../components/forms/form-toggle").v2;
 
+const COLORS = [
+    {
+        name: "black",
+        value: "#000",
+    },
+    {
+        name: "white",
+        value: "#fff",
+    },
+    {
+        name: "active-blue",
+        value: "#2996cc",
+    },
+    {
+        name: "active-blue-inactive",
+        value: "#a9d5eb",
+    },
+    {
+        name: "blue-grey",
+        value: "#9bacb4",
+    },
+    {
+        name: "chilly",
+        value: "#e3eaed",
+    },
+    {
+        name: "cinder-block",
+        value: "#e4e5e5",
+    },
+    {
+        name: "critical-red",
+        value: "#ed3a03",
+    },
+    {
+        name: "dolphin",
+        value: "#d8dbdc",
+    },
+    {
+        name: "elephant",
+        value: "#929aa1",
+    },
+    {
+        name: "elderly",
+        value: "#f4f7f9",
+    },
+    {
+        name: "grass",
+        value: "#3cb66e",
+    },
+    {
+        name: "manatee",
+        value: "#b1b5b8",
+    },
+    {
+        name: "midnight",
+        value: "#4b637c",
+    },
+    {
+        name: "rabbit-fur",
+        value: "#d1d3d4",
+    },
+    {
+        name: "required-yellow",
+        value: "#f2bb1a",
+    },
+    {
+        name: "rhino",
+        value: "#9ea5a8",
+    },
+    {
+        name: "slate",
+        value: "#3d454d",
+    },
+    {
+        name: "sonic",
+        value: "#f0f6f7",
+    },
+    {
+        name: "stone",
+        value: "#c2c3c4",
+    },
+    {
+        name: "stratus",
+        value: "#bcbdbf",
+    },
+    {
+        name: "success",
+        value: "#4aba78",
+    },
+    {
+        name: "success-green-inactive",
+        value: "#b1e2c5",
+    },
+    {
+        name: "timberwolf",
+        value: "#e8ebed",
+    },
+    {
+        name: "verde",
+        value: "#76cc99",
+    },
+    {
+        name: "walrus",
+        value: "#575f67",
+    },
+    {
+        name: "warning-text",
+        value: "#96702c",
+    },
+    {
+        name: "warning-yellow",
+        value: "#ffd057",
+    },
+    {
+        name: "warning-icon-yellow",
+        value: "#eeb91c",
+    },
+];
+const deprecatedIcons = ["stone", "cinder-block", "manatee", "dolphin"];
 var ICONS = [
     "account",
     "admin-account",
@@ -301,16 +422,52 @@ class cssTips extends React.Component {
                     }
                 />
 
-                <p className="attention">
-                    As a general rule, don't hard-code CSS in a style attribute. Always use classes if at all possible.
-                    If you believe CSS classes are missing, or require new ones, let us know!
-                </p>
+                <h2>Colors</h2>
+                {
+                    _.map(_.sortBy(COLORS, color => Color(color.value).luminosity()),
+                        (sorted) => {
+                            return (
+                                <div style={{
+                                    display: "inline-block",
+                                    width: "80px",
+                                    margin: "20px",
+                                    textAlign: "center",
+                                    verticalAlign: "top",
+                                }}>
+                                    <div style={{
+                                        height: "80px",
+                                        width: "80px",
+                                        borderRadius: "50%",
+                                        backgroundColor: sorted.value,
+                                        marginBottom: "15px",
+                                    }}
+                                    />
+                                <strong style={{
+                                    textDecoration: deprecatedIcons.indexOf(sorted.name) !== -1
+                                    ? "line-through" : "none",
+                                    opacity: deprecatedIcons.indexOf(sorted.name) !== -1
+                                    ? "0.5" : "1",
+                                }}>
+                                    {sorted.name}
+                                </strong>
+                                <div style={{
+                                    textDecoration: deprecatedIcons.indexOf(sorted.name) !== -1
+                                    ? "line-through" : "none",
+                                    opacity: deprecatedIcons.indexOf(sorted.name) !== -1 ? "0.5" : "1",
+                                }}>
+                                    {sorted.value}
+                                </div>
 
-                <h3>
+                                </div>
+                            );
+                        })
+                }
+
+                <p className="attention">>
                     Finally, this page is a work-in-progress.  If you have questions about the markup or CSS
                     that go beyond what's covered in this document, feel free to ping the UX front-end
                     developers as needed.
-                </h3>
+                </p>
             </Tutorial>
         );
     }
