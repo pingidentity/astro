@@ -145,6 +145,10 @@ class LinkDropDownListStateful extends React.Component {
         options: PropTypes.arrayOf(PropTypes.object).isRequired,
         selectedOption: PropTypes.object
     };
+    
+    static defaultProps = {
+        onToggle: _.noop
+    };
 
     state = {
         open: this.props.open || false,
