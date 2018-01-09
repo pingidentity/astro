@@ -98,6 +98,28 @@ describe("ExpandableRow", function () {
         expect(ttContent.textContent).toEqual(deleteTtText);
     });
 
+    it("renders the custom delete tooltip content with custom title when provided", function () {
+        var deleteTitle = "Custom delete title";
+        var deleteTitleClass = "details-title";
+        var deleteTitleText = "My custom content";
+        var deleteTitleContent = (
+            <div>
+                {deleteTitleText}
+            </div>
+        );
+        var component = getComponent({
+            confirmDeleteContent: deleteTitleContent,
+            expanded: true,
+            showDeleteConfirm: true,
+            confirmDeleteTitle: deleteTitle
+        });
+
+        var deleteTitleTooltip = ReactTestUtils.findRenderedDOMComponentWithClass(component, deleteTitleClass);
+
+        expect(deleteTitleTooltip).toBeDefined();
+        expect(deleteTitleTooltip.textContent).toEqual(deleteTitle);
+    });
+
     it("stateless: renders component as collapsed (by default)", function () {
         var component = getComponent();
         var expandedRow = TestUtils.findRenderedDOMNodeWithDataId(component, "expanded-row");

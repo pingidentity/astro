@@ -156,6 +156,8 @@ var ConfirmDeletePositions = {
  *     Whether or not a 'delete' action should show a confirmation dialog.
  * @param {string} [confirmDeletePosition=bottom]
  *     Used to determine whether the confirm delete dialog will appear above or below the delete button.
+ * @param {string} [confirmDeleteTitle]
+ *     Title to set for Confirm Delete dialog tooltip
  * @param {object} [confirmDeleteContent]
  *     Optional custom content to replace the default delete confirmation tooltip content
  * @param {boolean} [showDeleteConfirm=false]
@@ -421,6 +423,7 @@ class StatelessExpandableRow extends React.Component {
                                     label={this.props.labelDeleteConfirm}
                                     open={this.props.expanded && this.props.showDeleteConfirm}
                                     onCancel={this.props.onDeleteCancelClick}
+                                    confirmDeleteTitle={this.props.confirmDeleteTitle}
                                     onDeleteConfirm={this.props.onDeleteConfirmClick}
                                     confirmDeletePosition={this.props.confirmDeletePosition}>
                                     {this.props.confirmDeleteContent}
@@ -476,7 +479,6 @@ class StatelessExpandableRow extends React.Component {
                     )}
                     {editButton}
                     {deleteButton}
-
                 </div>
             </div>
         );
@@ -489,6 +491,7 @@ class ConfirmDeleteDialog extends React.Component {
     static propTypes = {
         confirmDeletePosition: PropTypes.string,
         label: PropTypes.string,
+        confirmDeleteTitle: PropTypes.string,
         onCancel: PropTypes.func,
         onDeleteConfirm: PropTypes.func
     };
@@ -497,6 +500,7 @@ class ConfirmDeleteDialog extends React.Component {
         label: "",
         onCancel: _.noop,
         onDeleteConfirm: _.noop,
+        confirmDeleteTitle: Translator.translate("confirmdelete")
     };
 
     _renderTooltipContent = () => {
@@ -528,7 +532,7 @@ class ConfirmDeleteDialog extends React.Component {
             <DetailsTooltip
                 positionClassName={classnames("left", this.props.confirmDeletePosition)}
                 data-id="delete-confirm-dialog"
-                title={Translator.translate("confirmdelete")}
+                title={this.props.confirmDeleteTitle}
                 label={this.props.trigger}
                 open={this.props.open}
                 onToggle={this.props.open ? this.props.onCancel : _.noop}>

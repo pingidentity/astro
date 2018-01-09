@@ -179,7 +179,7 @@ class ExpandableRowDemo extends React.Component {
                 />
                 {!this.state.rowDeleted && (
                     <ExpandableRow
-                        title="Row with Delete Confirmation"
+                        title="Row with Delete Confirmation with Custom delete title"
                         subtitle="stateless"
                         stateless={false}
                         expanded={this.state.expanded3}
@@ -188,6 +188,7 @@ class ExpandableRowDemo extends React.Component {
                         onDeleteConfirmClick={this._handleDeleteConfirm}
                         showDelete={true}
                         confirmDelete={true}
+                        confirmDeleteTitle="Custom delete title"
                         showDeleteConfirm={this.state.showDeleteConfirm}
                         onDelete={this._handleDelete}
                         labelDeleteConfirm="Are you sure you want to delete this row?"
