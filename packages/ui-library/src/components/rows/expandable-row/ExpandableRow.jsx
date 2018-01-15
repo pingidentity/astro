@@ -441,6 +441,14 @@ class StatelessExpandableRow extends React.Component {
                         {this.props.rowMessage.text}
                     </div>
                 )}
+                { (this.props.rowAccessories || this.props.status) && (
+                    <div data-id="row-accessories" className="row-accessories">
+                        {this.props.rowAccessories}
+                        {this.props.status && (
+                            <div data-id="status" className={"status " + this.props.status}></div>
+                        )}
+                    </div>
+                )}
                 <div className="collapsed-content">
                     {this.props.image && (
                         <img src={this.props.image} className="item-image" />
@@ -452,14 +460,7 @@ class StatelessExpandableRow extends React.Component {
                     {this.props.subtitle && (
                         <div className="item-sub-title">{this.props.subtitle}</div>
                     )}
-                    { (this.props.rowAccessories || this.props.status) && (
-                        <div data-id="row-accessories" className="row-accessories">
-                            {this.props.rowAccessories}
-                            {this.props.status && (
-                                <div data-id="status" className={"status " + this.props.status}></div>
-                            )}
-                        </div>
-                    )}
+
                 </div>
                 {this.props.expanded && (
                     <div data-id="expanded-row" className="expanded-content clearfix">

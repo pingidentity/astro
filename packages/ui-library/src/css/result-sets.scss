@@ -42,6 +42,7 @@
 
         .collapsed-content {
             position: relative;
+            overflow: hidden;
             box-sizing: border-box;
             height: 60px;
             padding: 23px 0 0 34px;
@@ -55,7 +56,7 @@
         &.has-subtitle,
         &.has-image {
             .expanded-content {
-                margin-top: 7px;
+                margin-top: 20px;
             }
         }
         .expanded-content {
@@ -71,14 +72,14 @@
         }
         .item-title {
             font-size: 17px;
-            line-height: 1em;
+            line-height: 1.1em;
             font-weight: normal;
             font-family: $font-pn-regular;
             color: $color-slate;
         }
         .item-sub-title {
             font-size: 13px;
-            line-height: 1em;
+            line-height: 1.1em;
             font-weight: normal;
             font-family: $font-pn-regular;
             color: $color-elephant;
@@ -87,7 +88,6 @@
         .item-title,
         .item-sub-title {
             @include text-truncate;
-            max-width: 50%;
         }
         .item-image {
             position: absolute;
@@ -114,20 +114,27 @@
             }
         }
         .row-accessories {
-            position: absolute;
-            right: 0;
-            top: 50%;
-            bottom: 0;
-            z-index: 1;
+
+            @mixin details-tooltip-adjustment {
+                > .details-tooltip {
+                    .details-content {
+                        margin-top: -20px;
+                    }
+                }
+            }
+
+            position: relative;
+            margin: 0 46px 0 0;
             padding: 0 20px 0 0;
+            float: right;
+            line-height: 60px;
+            @include details-tooltip-adjustment;
 
             > *,
             .row-accessories-content > * {
                 display: inline-block;
                 margin: 0 0 0 20px;
-                vertical-align: top;
-
-                @include transform(translateY(-50%));
+                vertical-align: middle;
 
                 .help-tooltip {
                     vertical-align: middle;
@@ -137,16 +144,10 @@
                     height: 20px;
                     line-height: 20px;
                 }
+                @include details-tooltip-adjustment;
             }
             .row-accessories-content {
                 margin: 0;
-
-                @include transform(translateY(0));
-            }
-
-            > a,
-            .row-accessories-content > a {
-                vertical-align: text-top;
             }
 
             .button + .button,
@@ -158,9 +159,6 @@
                 & + button {
                     margin-left: 10px;
                 }
-            }
-            .details-tooltip {
-                z-index: 1;
             }
         }
 
@@ -272,6 +270,10 @@
                 margin: 1px 0 0;
             }
 
+            .collapsed-content {
+                height: auto;
+            }
+
             .item-title,
             .item-sub-title {
                 white-space: normal;
@@ -362,17 +364,7 @@
         }
         &.invited {
             .row-accessories {
-                right: 1px;
-
-                &:before {
-                    content: '';
-                    position: absolute;
-                    top: -100%;
-                    bottom: 0;
-                    background-color: $color-chilly;
-                    right: 0;
-                    left: 0;
-                }
+                background-color: $color-chilly;
 
                 button.inline {
                     border-color: $color-chilly;
@@ -389,9 +381,12 @@
                 }
             }
             .invite-info {
+                line-height: 1em;
+
                 .invite-status {
                     font-size: 14px;
                     color: $color-slate;
+                    margin-bottom: 2px;
                 }
                 .invite-date {
                     font-size: 12px;
