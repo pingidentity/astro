@@ -149,7 +149,7 @@ class Step extends React.Component {
             onClick: this.props.onCancel,
             type: "button",
             ref: "cancelButton",
-            className: "cancel-step",
+            className: "cancel cancel-step",
             value: labelCancel,
             disabled: this.props.showPulsing
         });
