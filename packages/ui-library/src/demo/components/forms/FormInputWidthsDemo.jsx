@@ -35,6 +35,7 @@ class FormInputWidthsDemo extends React.Component {
                         <li>.input-width-large</li>
                         <li>.input-width-xlarge</li>
                         <li>.input-width-full</li>
+                        <li>.input-width-max</li>
                     </ul>
                 </div>
                 <div>
@@ -57,6 +58,9 @@ class FormInputWidthsDemo extends React.Component {
                     <FormTextField labelText="Small" className="input-width-small" />
                     <FormTextField labelText="Small" className="input-width-small" />
                     <FormTextField labelText="Small" className="input-width-small" />
+                </div>
+                <div>
+                    <FormTextField labelText="Maximum/100%" className="input-width-max" />
                 </div>
                 <div>
                     <FormTextField labelText="X-Small" className="input-width-xsmall" />
@@ -112,6 +116,10 @@ class FormInputWidthsDemo extends React.Component {
                     <FormDropDownList selectedOption={{}} options={selectOptions}
                             label="X-Small" className="input-width-xsmall" />
                 </div>
+                <div>
+                    <FormDropDownList selectedOption={{}} options={selectOptions}
+                            label="Maximum/100%" className="input-width-max" />
+                </div>
 
                 <br />
 
@@ -143,6 +151,9 @@ class FormInputWidthsDemo extends React.Component {
                     <FormCheckbox label="X-Small" className="input-width-xsmall" />
                     <FormCheckbox label="X-Small" className="input-width-xsmall" />
                 </div>
+                <div>
+                    <FormCheckbox label="Maximum/100%" className="input-width-max" />
+                </div>
 
                 <br />
 
@@ -173,6 +184,9 @@ class FormInputWidthsDemo extends React.Component {
                     <FormTextArea labelText="X-Small" className="input-width-xsmall" />
                     <FormTextArea labelText="X-Small" className="input-width-xsmall" />
                     <FormTextArea labelText="X-Small" className="input-width-xsmall" />
+                </div>
+                <div>
+                    <FormTextArea labelText="Maximum/100%" className="input-width-max" />
                 </div>
             </div>
         );
