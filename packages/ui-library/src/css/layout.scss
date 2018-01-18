@@ -966,6 +966,13 @@ $layout-nav-width-offset: 15px;
     }
 }
 
+.hr {
+    border: 1px dashed $color-rabbit-fur;
+    margin: 25px 0;
+    height: 0;
+    border-width: 1px 0 0;
+}
+
 // flakey but one of only a few options : use with caution
 .valign-container {
     display: table !important;
