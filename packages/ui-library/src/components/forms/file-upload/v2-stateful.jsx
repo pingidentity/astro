@@ -27,14 +27,14 @@ module.exports = class extends React.Component {
 
     _validateFileSize = (fileSizeInBytes) => {
         if (this.props.maxFileSizeKb && fileSizeInBytes > (this.props.maxFileSizeKb * 1000)) {
-            this._reset();
+            this.resetComponent();
             throw Constants.ErrorCodes.TOO_BIG;
         }
     };
 
     _validateMimeType = (type) => {
         if (this.props.accept && !this.props.accept.match(new RegExp("\\b" + type + "\\b"))) {
-            this._reset();
+            this.resetComponent();
             throw Constants.ErrorCodes.WRONG_MIME_TYPE;
         }
     };
@@ -113,16 +113,7 @@ module.exports = class extends React.Component {
         if (this.props.onChange) {
             this.props.onChange(e);
         }
-
         this._process(e.target.files, e.target.value);
-    };
-
-    _reset = () => {
-        this.setState({
-            thumbnailSrc: "",
-            fileName: ""
-        });
-        this.refs.FileUploadStateless.resetComponent();
     };
 
     _handleRemove = () => {
@@ -137,8 +128,18 @@ module.exports = class extends React.Component {
                 errorMessage: this.props.onValidate()
             });
         }
-
-        this._reset();
+        this.resetComponent();
+    };
+    
+    /*
+     * Reset the input
+     */
+    resetComponent = () => {
+        this.setState({
+            thumbnailSrc: "",
+            fileName: ""
+        });
+        this.refs.FileUploadStateless.resetComponent();
     };
 
     render() {

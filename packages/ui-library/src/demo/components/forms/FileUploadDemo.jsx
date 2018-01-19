@@ -34,12 +34,12 @@ class FileUploadDemo extends React.Component {
 
     _onChange2 = (e) => {
         var file = this._getFile(e);
-
         this.setState({ file2: file ? (file.name + " " + "(" + file.size + " bytes)") : "none" });
     };
 
     _onRemove2 = () => {
         this.setState({ file2: "none" });
+        this.statelessFileUpload.resetComponent();
     };
 
     _onChange3 = () => {
@@ -122,6 +122,11 @@ class FileUploadDemo extends React.Component {
 
                 <div className="input-row">
                     <FileUpload
+                        ref={function (component) {
+                            if (component) {
+                                this.statelessFileUpload = component.refs.FileUploadStateful;
+                            }
+                        }.bind(this) }
                         labelText="File Input with Default on Page Load"
                         accept="image/png"
                         validator={this._fileValidator}

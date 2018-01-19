@@ -58,7 +58,6 @@ module.exports = class extends React.Component {
                 <FormLabel
                     className={classnames({ "form-error": this.props.errorMessage }) }
                     value={this.props.labelText}>
-
                     <ImagePreview
                         show={this.props.showThumbnail}
                         src={this.props.thumbnailSrc}
