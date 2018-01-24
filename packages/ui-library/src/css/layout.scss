@@ -897,12 +897,6 @@ $layout-nav-width-offset: 15px;
     }
     .details-tooltip {
         z-index: 1;
-
-        button,
-        .button,
-        input[type=button] {
-            margin: 0;
-        }
     }
 }
 
@@ -973,6 +967,10 @@ $layout-nav-width-offset: 15px;
     border-width: 1px 0 0;
 }
 
+.hr--sm {
+    margin: 10px 0;
+}
+
 // flakey but one of only a few options : use with caution
 .valign-container {
     display: table !important;
@@ -982,6 +980,10 @@ $layout-nav-width-offset: 15px;
         display: table-cell !important;
         vertical-align: middle !important;
     }
+}
+
+.align-center {
+    text-align: center;
 }
 
 

@@ -28,6 +28,12 @@
             @include opacity(0.4);
         }
     }
+    &.modal-width-small {
+        .modal-content {
+            width: 390px;
+        }
+    }
+    &.modal-width-full,
     &.full-width {
         .modal-content {
             width: 100%;
@@ -262,6 +268,11 @@
         &.hidden {
             @include transform(translateY(0));
             @include opacity(0);
+        }
+    }
+    .page-messages {
+        .message {
+            text-align: center;
         }
     }
 }

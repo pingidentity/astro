@@ -251,8 +251,9 @@ class Step extends React.Component {
 
     render() {
         var inlineStyles;
-        var className = classnames(this.props.className, {
+        var classNames = classnames(this.props.className, {
             task: true,
+            "wizard-task": true,
             clearfix: true,
             active: this.props.active
         });
@@ -264,7 +265,7 @@ class Step extends React.Component {
         }
 
         return (
-            <div className={className} data-id={this.props["data-id"]}>
+            <div className={classNames} data-id={this.props["data-id"]}>
                 <div className="task-title">
                     <Progress
                         ref="progress"

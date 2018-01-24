@@ -5,7 +5,6 @@ var PropTypes = require("prop-types");
 var React = require("react"),
     ButtonBar = require("../forms/ButtonBar"),
     Utils = require("../../util/Utils"),
-    classnames = require("classnames"),
     _ = require("underscore");
 
 var INHERIT_PROPS = [
@@ -211,8 +210,9 @@ class Wizard extends React.Component {
         }.bind(this));
 
         return (
-            <div data-id={this.props["data-id"]} className={classnames("task-wizard", this.props.className)}>
+            <div data-id={this.props["data-id"]} className={this.props.className}>
                 {stepNodes}
+
                 {this.props.activeStep === this.props.numSteps ? (
                     <ButtonBar
                         cancelText={this.props.labelCancel}

@@ -5,6 +5,7 @@
     border: 1px solid transparentize($color-timberwolf, $inactive-opacity);
     background-color: transparentize($color-white, $inactive-opacity);
     margin: 0 0 20px;
+    color: $color-slate;
 
     &.active {
         border: 1px solid $color-timberwolf;
@@ -224,18 +225,5 @@
         text-align: right;
 
         @include button-spacing();
-    }
-}
-
-//  DEPRICATED STYLES --------------------------------------------------------------------------------------------------
-.task {
-    input[type=text],
-    input[type=password],
-    textarea {
-        width: 300px;
-
-        &.extended {
-            width: 400px;
-        }
     }
 }

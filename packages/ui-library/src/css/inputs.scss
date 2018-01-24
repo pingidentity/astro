@@ -1,5 +1,6 @@
 
-// INPUT GLOBAL VARS -------------------------------------------------------------------------------
+// INPUT GLOBAL VARS ---------------------------------------------------------------------------------------------------
+
 $default-input-transition: all 0.3s;
 $default-input-height: 40px;
 $default-input-font-size: 14px;
@@ -7,7 +8,7 @@ $borderSize: 1px !default;
 $default-input-border-radius: 2px;
 
 
-// CORE INPUT STYLES -------------------------------------------------------------------------------
+// CORE INPUT STYLES ---------------------------------------------------------------------------------------------------
 
 // General browser-specific overrides (not needed specifically for each input type below - reduces bloat having it here)
 input,
@@ -418,18 +419,14 @@ label {
         &.stacked {
             display: block;
             margin-bottom: 13px;
-            .label-text {
-                text-transform: uppercase;
-            }
+
             &:last-of-type {
                 margin-bottom: 0;
             }
         }
-        &.group {
-            .label-text {
-                text-transform: none;
-                color: $color-midnight;
-            }
+        .label-text {
+            text-transform: none;
+            color: $color-midnight;
         }
         input[type=radio] {
             position: absolute;
@@ -1725,7 +1722,9 @@ input[type=file] {
     @include drop-down-styles;
 }
 
-// Input variants
+
+// INPUT VARIANTS ------------------------------------------------------------------------------------------------------
+
 .required {
     @mixin requiredCss {
         content: '';
@@ -2296,7 +2295,7 @@ input[type=file] {
 }
 
 
-// MISC SUPPORTING STYLES --------------------------------------------------------------------------
+// MISC SUPPORTING STYLES ----------------------------------------------------------------------------------------------
 
 .input-row {
     position: relative;
@@ -2512,6 +2511,18 @@ a {
     margin: 0 0 0 25px;
 }
 
+.radio-input-description {
+    color: $color-elephant;
+    margin: -12px 0 13px 35px;
+}
+.input-radio {
+    &:last-of-type {
+        ~ .radio-input-description {
+            margin-top: -7px;
+        }
+    }
+}
+
 @function calc-input-width($container-width, $divisions, $hor-margin) {
     @return (
         (($container-width - (($divisions - 1) * $hor-margin)) / $divisions)
@@ -2644,6 +2655,7 @@ label {
 
     &.input-width-max {
         width: 100%;
+        margin-right: 0;
         max-width: none;
     }
 

@@ -181,7 +181,7 @@ class Modal extends React.Component {
 
     componentDidUpdate() {
         if (this.isWizard === null && this.props.expanded) {
-            this.isWizard = !!document.getElementsByClassName("task-wizard").length;
+            this.isWizard = !!document.getElementsByClassName("wizard-task").length;
             this.forceUpdate();
         }
     }
