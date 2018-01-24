@@ -796,4 +796,11 @@ describe("Calendar", function () {
         }).toThrow(expectedError);
     });
 
+    it("should hide calendar when clicking input text to type date", () => {
+        var component = getComponent();
+
+        ReactTestUtils.Simulate.click(TestUtils.findRenderedDOMNodeWithDataId(component, "calendar"));
+        expect(TestUtils.findRenderedDOMNodeWithDataId(component, "input-calendar-wrapper")).toBeFalsy();
+    });
+
 });

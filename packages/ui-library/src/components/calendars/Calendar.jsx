@@ -12,10 +12,10 @@ var React = require("react"),
 
 var _keyDownActions = CalendarUtils.keyDownActions;
 /**
-* @enum {number}
-* @alias Calendar.Views
-* @desc An enum of calendar views.
-*/
+ * @enum {number}
+ * @alias Calendar.Views
+ * @desc An enum of calendar views.
+ */
 var Views = {
     DAYS: 0,
     MONTHS: 1,
@@ -23,22 +23,22 @@ var Views = {
 };
 
 /**
-* @typedef Calendar~dateRange
-* @desc An object describing the start and end dates (inclusive) of a selectable date range.
-*
-* @property {*} [startDate]
-*    The numeric value for the start date of the date range.
-* @property {*} [endDate]
-*    The numeric value for the end date of the date range.
-*
-*/
+ * @typedef Calendar~dateRange
+ * @desc An object describing the start and end dates (inclusive) of a selectable date range.
+ *
+ * @property {*} [startDate]
+ *    The numeric value for the start date of the date range.
+ * @property {*} [endDate]
+ *    The numeric value for the end date of the date range.
+ *
+ */
 
 /**
-* @callback Calendar~onValueChange
-*
-* @param {number} date
-*    The numeric value for the selected date.
-*/
+ * @callback Calendar~onValueChange
+ *
+ * @param {number} date
+ *    The numeric value for the selected date.
+ */
 
 /**
  * @class Calendar
@@ -355,6 +355,16 @@ class Calendar extends React.Component {
         });
     };
 
+    /**
+     * Handles input click
+     * Hide calendar when clicking input text to type date
+     * @method Calendar#inputClick
+     * @param  {Object} e The event object
+     */
+    inputClick = (e) => {
+        e.stopPropagation();
+    };
+
     render() {
 
         // its ok for this.state.date to be null, but we should never
@@ -368,23 +378,23 @@ class Calendar extends React.Component {
                     calendarDate.locale(Translator.currentLanguage);
                 }
                 view = (<DaysView date={calendarDate} onSetDate={this.setDate} onNextView={this.nextView}
-                                dateRange={this.props.dateRange} />);
+                                  dateRange={this.props.dateRange} />);
                 break;
             case Views.MONTHS:
                 view = (<MonthsView date={calendarDate} onSetDate={this.setDate} //eslint-disable-line
-                                   onNextView={this.nextView} onPrevView={this.prevView}
-                                   dateRange={this.props.dateRange} />);
+                                    onNextView={this.nextView} onPrevView={this.prevView}
+                                    dateRange={this.props.dateRange} />);
                 break;
             case Views.YEARS:
                 view = (<YearsView date={calendarDate} onSetDate={this.setDate} onPrevView={this.prevView}
-                                dateRange={this.props.dateRange} />);
+                                   dateRange={this.props.dateRange} />);
                 break;
         }
 
         var calendar = !this.state.isVisible ? "" : (
             <div className="input-calendar-wrapper active"
-                data-id="input-calendar-wrapper"
-                onClick={this.calendarClick}>
+                 data-id="input-calendar-wrapper"
+                 onClick={this.calendarClick}>
                 {view}
             </div>
         );
@@ -409,12 +419,13 @@ class Calendar extends React.Component {
                 />
                 <div className="input-container">
                     <input type="text"
-                        data-id={this.props["data-id"]}
-                        className="input-calendar-value"
-                        value={this.state.inputValue}
-                        onBlur={this.inputBlur}
-                        onChange={this.changeDate}
-                        placeholder={this.props.placeholder} />
+                           data-id={this.props["data-id"]}
+                           className="input-calendar-value"
+                           value={this.state.inputValue}
+                           onBlur={this.inputBlur}
+                           onChange={this.changeDate}
+                           onClick={this.inputClick}
+                           placeholder={this.props.placeholder} />
                 </div>
                 {calendar}
             </div>
