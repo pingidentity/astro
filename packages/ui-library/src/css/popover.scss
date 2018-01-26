@@ -1,0 +1,154 @@
+// Popup and popover frame
+$popup-border-color: $color-timberwolf;
+$popup-border-radius: 4px;
+$popup-box-shadow: 0 3px 4px 0 rgba($color-black, 0.1);
+
+.popup-frame {
+    @include box-shadow($popup-box-shadow);
+
+    display: inline-block;
+    position: relative;
+    border: 1px solid $popup-border-color;
+    border-radius: $popup-border-radius;
+    background: $color-white;
+}
+
+$arrow-offset: 15px;
+$arrow-height: 10px;
+
+@mixin popover-pointer($top, $color) {
+    content: '';
+    position: absolute;
+    top: $top;
+    right: auto;
+    bottom: auto;
+    left: 50%;
+    transform: translateX(-$arrow-height);
+
+    border-style: solid;
+    border-width: $arrow-height;
+    border-color: transparent transparent $color;
+}
+
+.popup-frame--pointer {
+    @extend .popup-frame;
+
+    margin-top: $arrow-height + 5px;
+    min-width: 2 * $arrow-offset + 2 * $arrow-height + 65px;
+
+    &:before {
+        @include popover-pointer(-($arrow-height * 2) - 1px, $popup-border-color);
+    }
+
+    &:after {
+        @include popover-pointer(-($arrow-height * 2), $color-white);
+    }
+
+}
+
+.popup-frame--top {
+    margin-top: 0;
+    margin-bottom: $arrow-height + 5px;
+
+    &:before {
+        top: auto;
+        bottom: -($arrow-height * 2) - 1px;
+        border-color: $popup-border-color transparent transparent transparent;
+    }
+
+    &:after {
+        top: auto;
+        bottom: -($arrow-height * 2);
+        border-color: $color-white transparent transparent transparent;
+    }
+}
+
+.popup-frame--left {
+    &:before {
+        right: $arrow-offset;
+        left: auto;
+        transform: none;
+    }
+
+    &:after {
+        right: $arrow-offset;
+        left: auto;
+        transform: none;
+    }
+}
+
+.popup-frame--right {
+    &:before {
+        left: $arrow-offset;
+        right: auto;
+        transform: none;
+    }
+
+    &:after {
+        left: $arrow-offset;
+        right: auto;
+        transform: none;
+    }
+}
+
+
+// Popover Component
+$max-popover-width: 360px;
+
+.popover {
+    position: relative;
+    display: inline-block;
+}
+
+.popover__container {
+    margin-right: -$max-popover-width;
+    max-width: $max-popover-width;
+    z-index: 1001;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.popover--top .popover__container {
+    bottom: 100%;
+}
+
+.popover--right .popover__container {
+    transform: translateX(-$arrow-offset - $arrow-height);
+}
+
+.popover--left .popover__container {
+    right: 50%;
+    left: auto;
+    margin-right: 0;
+    margin-left: -$max-popover-width;
+    transform: translateX($arrow-offset + $arrow-height);
+}
+
+// Styles for Popover Menu
+.button-menu__button {
+    color: $color-slate;
+    font-size: 15px;
+    display: block;
+    padding: 10px 25px;
+    text-align: center;
+    border: none;
+    height: auto;
+    line-height: 1em;
+    margin: 0;
+    border-radius: 0;
+    width: 100%;
+
+    &:hover {
+        color: $color-active-blue;
+        text-decoration: none;
+    }
+
+    &:active {
+        border: none;
+    }
+}
+
+.button-menu__button + .button-menu__button {
+    border-top: 1px solid $color-rhino;
+}

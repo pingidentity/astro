@@ -112,7 +112,6 @@
 		"semi": [2, "always"],
 
 		"jsx-quotes": [2, "prefer-double"],
-		"react/jsx-boolean-value": [2, "always"],
 		"react/jsx-no-undef": [2],
 		"react/jsx-uses-react": [2],
 		"react/jsx-uses-vars": [2],

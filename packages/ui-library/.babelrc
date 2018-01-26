@@ -4,7 +4,8 @@
         "react"
     ],
     "plugins": [
-        "transform-runtime",
-        "transform-class-properties"
+		"transform-runtime",
+		"transform-class-properties",
+		"add-module-exports"
     ]
 }

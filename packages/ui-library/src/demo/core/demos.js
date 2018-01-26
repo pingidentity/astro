@@ -330,6 +330,13 @@ module.exports = [
                 pathToDemoSource: "demo_components_tooltips_DetailsTooltipDemo.jsx.html"
             },
             {
+                label: "Popover Menu",
+                demo: require("../components/tooltips/PopoverMenuDemo.jsx"),
+                pathToDoc: "components/tooltips/PopoverMenu.jsx",
+                pathToSource: "components_tooltips_PopoverMenu.jsx.html",
+                pathToDemoSource: "demo_components_tooltips_PopoverMenuDemo.jsx.html"
+            },
+            {
                 label: "Collapsible Link",
                 demo: require("../components/general/CollapsibleLinkDemo"),
                 pathToDoc: "components/general/CollapsibleLink.jsx",

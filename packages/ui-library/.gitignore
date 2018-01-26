@@ -26,3 +26,6 @@ package-lock.json
 
 selenium-standalone.log*
 http-server.log
+
+package-lock.json
+yarn.lock
