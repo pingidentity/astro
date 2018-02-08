@@ -31,6 +31,7 @@ describe("Step", function () {
             labelCancel: "xxxcancel",
             labelEdit: "xxxedit",
             labelDone: "xxxdone",
+            title: "Test Step",
             titleSelection: "title selection",
             hintText: "hint"
         };

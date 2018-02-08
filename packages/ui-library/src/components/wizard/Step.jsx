@@ -209,7 +209,7 @@ class Step extends React.Component {
     };
 
     _getNavigation = () => {
-        if (!this.props.active || this.props.disableNavigation) {
+        if (!this.props.active || this.props.disableNavigation || this.props.total === 1) {
             return null;
         }
 
@@ -235,6 +235,24 @@ class Step extends React.Component {
         }
     };
 
+    _renderContent = () => {
+        var inlineStyles;
+        const classNames = classnames({
+            "task-content": this.props.total > 1
+        });
+
+        if (!this.props.active && this.props.renderHidden) {
+            inlineStyles = {
+                display: "none"
+            };
+        }
+
+        return this.props.active || this.props.renderHidden ? (
+            <div className={classNames} style={inlineStyles}>
+                {this.props.children}
+            </div>) : null;
+    };
+
     componentWillMount() {
         if (!Utils.isProduction()) {
             if (this.props.id) {
@@ -250,39 +268,31 @@ class Step extends React.Component {
     }
 
     render() {
-        var inlineStyles;
-        var classNames = classnames(this.props.className, {
-            task: true,
-            "wizard-task": true,
-            clearfix: true,
-            active: this.props.active
-        });
-
-        if (!this.props.active && this.props.renderHidden) {
-            inlineStyles = {
-                display: "none"
-            };
-        }
+        var classNames = {
+            active: this.props.active,
+            "single-step": this.props.total === 1
+        };
 
         return (
-            <div className={classNames} data-id={this.props["data-id"]}>
-                <div className="task-title">
-                    <Progress
-                        ref="progress"
-                        step={this.props.number}
-                        of={this.props.total}
-                        done={this.props.completed && !this.props.active} />
-
-                    <span className="task-title-text">{this.props.title}</span>
-
-                    {this._getTitle()}
-                    {this._getEditLink()}
-                    {this._getHint()}
-                </div>
-                {
-                  this.props.active || this.props.renderHidden
-                  ? <div className="task-content" style={inlineStyles}>{this.props.children}</div> : null
-                }
+            <div
+                data-id={this.props["data-id"]}
+                className={classnames(this.props.className, classNames, "task wizard-task clearfix")}>
+                {this.props.title && (
+                    <div className="task-title">
+                        {this.props.total > 1 && (
+                            <Progress
+                                ref="progress"
+                                step={this.props.number}
+                                of={this.props.total}
+                                done={this.props.completed && !this.props.active} />
+                        )}
+                        <span className="task-title-text">{this.props.title}</span>
+                        {this._getTitle()}
+                        {this._getEditLink()}
+                        {this._getHint()}
+                    </div>
+                )}
+                {this._renderContent()}
                 {this._getNavigation()}
             </div>
         );

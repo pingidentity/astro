@@ -226,4 +226,8 @@
 
         @include button-spacing();
     }
+
+    &.single-step {
+        padding: 25px;
+    }
 }

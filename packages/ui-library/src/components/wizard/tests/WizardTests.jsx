@@ -26,7 +26,7 @@ describe("Step", function () {
         labelDone: "done"
     };
 
-    function getRenderedComponent (opts) {
+    function getRenderedComponent (opts, steps) {
         var renderDefaults = {
             title: defaultText.title,
             onNext: jest.genMockFunction(),
@@ -42,10 +42,12 @@ describe("Step", function () {
 
         return ReactTestUtils.renderIntoDocument(
             <Wizard {...assign(renderDefaults, opts)}>
-                <Step title="step 1">Step 1</Step>
-                <Step title="step 2">Step 2</Step>
-                <Step title="step 3">Step 3</Step>
-                <Step title="step 4" when={false}>Step 4</Step>
+                {steps ? steps : ([
+                    <Step title="step 1">Step 1</Step>,
+                    <Step title="step 2">Step 2</Step>,
+                    <Step title="step 3">Step 3</Step>,
+                    <Step title="step 4" when={false}>Step 4</Step>
+                ])}
             </Wizard>
         );
     }
@@ -216,5 +218,16 @@ describe("Step", function () {
         expect(function () {
             getRenderedComponent({ onChange: jest.genMockFunction() });
         }).toThrow(expectedError);
+    });
+
+
+    it("for a single step wizard,the progress bar is not rendered and the css classnames are altered", function () {
+        var component = getRenderedComponent({}, (<Step title="step 1">Step 1</Step>)),
+            progress = TestUtils.findRenderedDOMNodeWithDataId(component, "progress"),
+            content = TestUtils.findRenderedDOMNodeWithDataId(component, "task-content");
+
+        expect(component).toBeTruthy();
+        expect(progress).toBeFalsy();
+        expect(content).toBeFalsy(); // testing that the task-content class is not added
     });
 });
