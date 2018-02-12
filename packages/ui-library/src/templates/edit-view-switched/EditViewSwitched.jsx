@@ -93,7 +93,9 @@ module.exports = class extends React.Component {
                     <Toggle stateless={false} />
                 </div>
 
-                <h1 className="page-title">Edit Template with Switcher</h1>
+                <h1 className="page-title underlined">
+                    Edit Template with Switcher
+                </h1>
 
                 <RockerButton
                     labels={["Identity", "Address", "Miscellaneous"]}

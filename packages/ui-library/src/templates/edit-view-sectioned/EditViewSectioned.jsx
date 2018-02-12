@@ -82,7 +82,9 @@ module.exports = class extends React.Component {
                     <Toggle stateless={false} />
                 </div>
 
-                <h1 className="page-title">Edit Template with Sections</h1>
+                <h1 className="page-title underlined">
+                    Edit Template with Sections
+                </h1>
 
                 <div className="page-section">
                     <div className="page-section-title">

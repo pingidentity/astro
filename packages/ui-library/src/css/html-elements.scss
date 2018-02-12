@@ -2,7 +2,7 @@
 body {
     font-family: $font-pn-regular;
     font-size: 14px;
-    line-height: 1.3em;
+    line-height: $line-height-default;
     color: $color-elephant;
     font-weight: 300;
 }

@@ -23,34 +23,43 @@ class InlineMessageDemo extends React.Component {
                     function is passed.
                 </p>
 
-                <InlineMessage data-id="notice-message-no-button" type={ InlineMessage.MessageTypes.NOTICE }>
-                    Message with just text and no action.
+
+                <div className="hr" />
+                <h2>Inline Message Types</h2>
+
+                <InlineMessage type={ InlineMessage.MessageTypes.WARNING }>
+                    Warning message
                 </InlineMessage>
 
-                <InlineMessage data-id="notice-message-button" type={ InlineMessage.MessageTypes.NOTICE }
-                               label="Do Something" onClick={doSomething}>
+                <InlineMessage type={ InlineMessage.MessageTypes.ERROR }>
+                    Error message
+                </InlineMessage>
+
+                <InlineMessage type={ InlineMessage.MessageTypes.SUCCESS }>
+                    Success message
+                </InlineMessage>
+
+                <InlineMessage type={ InlineMessage.MessageTypes.NOTICE }>
+                    Notice message
+                </InlineMessage>
+
+
+                <div className="hr" />
+                <h2>Other Variations</h2>
+
+                <InlineMessage
+                    type={ InlineMessage.MessageTypes.WARNING }
+                    label="Do Something"
+                    onClick={doSomething}>
                     Message with action.
                 </InlineMessage>
 
-                <InlineMessage data-id="notice-message-button-missing-action"
-                               type={ InlineMessage.MessageTypes.NOTICE } label="Bad button" >
+                <InlineMessage type={ InlineMessage.MessageTypes.WARNING } label="Bad button" >
                     Message with missing action parameter, must pass label and action.
                 </InlineMessage>
 
-                <InlineMessage data-id="notice-message-with-markup" type={ InlineMessage.MessageTypes.NOTICE }>
+                <InlineMessage type={ InlineMessage.MessageTypes.WARNING }>
                     <strong>Message with markup.</strong>
-                </InlineMessage>
-                
-                <InlineMessage data-id="notice-message-warning" type={ InlineMessage.MessageTypes.WARNING }>
-                    Warning message
-                </InlineMessage>
-                
-                <InlineMessage data-id="notice-message-error" type={ InlineMessage.MessageTypes.ERROR }>
-                    Error message
-                </InlineMessage>
-                
-                <InlineMessage data-id="notice-message-success" type={ InlineMessage.MessageTypes.SUCCESS }>
-                    Success message
                 </InlineMessage>
 
             </div>

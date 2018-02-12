@@ -803,7 +803,16 @@ $color-grey-minor-1: $color-neutral-30;
             content: '!';
             top: calc(50% - #{floor($icon-size/2)});
             font-size: $icon-size;
+        }
+    }
+    &.warning {
+        &:before {
             color: $color-warning-icon-yellow;
+        }
+    }
+    &.notice {
+        &:before {
+            color: $color-active-blue;
         }
     }
 }
@@ -903,6 +912,10 @@ $color-grey-minor-1: $color-neutral-30;
     margin: 0 0 30px;
     word-wrap: break-word;
 
+    &.underlined {
+        border-bottom: 1px solid $color-rabbit-fur;
+        padding: 0 0 15px 0;
+    }
     .page-subtitle {
         margin: 5px 0 0;
         font-size: 14px;

@@ -114,27 +114,18 @@
             }
         }
         .row-accessories {
-
-            @mixin details-tooltip-adjustment {
-                > .details-tooltip {
-                    .details-content {
-                        margin-top: -20px;
-                    }
-                }
-            }
-
             position: relative;
             margin: 0 46px 0 0;
             padding: 0 20px 0 0;
             float: right;
             line-height: 60px;
-            @include details-tooltip-adjustment;
 
             > *,
             .row-accessories-content > * {
                 display: inline-block;
                 margin: 0 0 0 20px;
                 vertical-align: middle;
+                line-height: $line-height-default;
 
                 .help-tooltip {
                     vertical-align: middle;
@@ -144,7 +135,6 @@
                     height: 20px;
                     line-height: 20px;
                 }
-                @include details-tooltip-adjustment;
             }
             .row-accessories-content {
                 margin: 0;
