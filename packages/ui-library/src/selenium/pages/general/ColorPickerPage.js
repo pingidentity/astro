@@ -1,6 +1,6 @@
 var HomePage = require("../HomePage.js");
 var ColorPickerDemoPage = Object.create(HomePage, {
-    
+
     /**
      * @desc this section is to get xpath of elements
      */
@@ -10,7 +10,7 @@ var ColorPickerDemoPage = Object.create(HomePage, {
             return this.formatXpath(xPath, { index: index });
         }
     },
-    
+
     xpathColorWrapper: {
         value: function (index) {
             return this.formatXpath("//div[@data-id='color-picker{index}']/div/span[2]", { index: index });
@@ -101,7 +101,7 @@ var ColorPickerDemoPage = Object.create(HomePage, {
     openColorPickerDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Components", "ColorPicker");
+            this.navigateToPath("Components", "Misc", "ColorPicker");
         }
     }
 });

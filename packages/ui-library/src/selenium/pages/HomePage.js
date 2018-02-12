@@ -4,12 +4,11 @@ var ScreenshotComparisonException = require("../../util/ScreenshotComparisonExce
 var wdioConfig = require("../../../wdio.conf.js").config;
 
 var HomePage = Object.create(Page, {
-
     /**
      * @desc this function is to return wait interval for waitForVisible and waitForExist function
      */
     waitInterval: {
-        get: function () {
+        get: function() {
             return 10000;
         }
     },
@@ -20,8 +19,26 @@ var HomePage = Object.create(Page, {
      * @param {string} [type="*"] - type of the element
      */
     navComponent: {
-        value: function (name, type) {
-            return this.formatXpath("//{type}[@data-id='{name}-label']", { type: type ? type : "*", name: name });
+        value: function(name, type) {
+            return this.formatXpath("//{type}[@data-id='{name}-label']", {
+                type: type ? type : "*",
+                name: name
+            });
+        }
+    },
+
+    /**
+     * @desc open the root node with the given name and wait until it's open
+     * @param {string} name - the root name (eg. Templates)
+     */
+    openNavRoot: {
+        value: function(name) {
+            var path = this.navComponent(name, "a");
+            this.click(path);
+            this.waitForExist(
+                "//div[@data-id='nav-top-content' and text()='" + name + "']",
+                2000
+            );
         }
     },
 
@@ -30,12 +47,15 @@ var HomePage = Object.create(Page, {
      * @param {string} name - the node name (eg. Templates)
      */
     openNavNode: {
-        value: function (name) {
-            var path = this.navComponent(name, "div");
+        value: function(name) {
+            var path = this.navComponent(name, "a");
             this.click(path);
             this.waitForExist(
-                path + "/parent::div[contains(concat(' ', @class, ' '), ' open ')]",
-                2000);
+                path +
+                    "/parent::div[contains(concat(' ', @class, ' '), ' open ')" +
+                    " or contains(concat(' ', @class, ' '), ' selected ')]",
+                2000
+            );
         }
     },
 
@@ -44,12 +64,14 @@ var HomePage = Object.create(Page, {
      * @param {string} name - the leaf name (eg. Edit View - Collapsible)
      */
     openNavLeaf: {
-        value: function (name) {
+        value: function(name) {
             var path = this.navComponent(name, "a");
             this.click(path);
             this.waitForExist(
-                path + "/parent::li[contains(concat(' ', @class, ' '), ' highlighted ')]",
-                2000);
+                path +
+                    "/parent::*[contains(concat(' ', @class, ' '), 'highlighted')]",
+                4000
+            );
         }
     },
 
@@ -59,8 +81,15 @@ var HomePage = Object.create(Page, {
      * @param {string} pageName - the leaf name (eg. Edit View - Collapsible)
      */
     navigateToPath: {
-        value: function (categoryName, pageName) {
-            this.openNavNode(categoryName);
+        value: function(rootName, categoryName, pageName) {
+            if (!pageName) {
+                pageName = categoryName;
+            }
+            
+            this.openNavRoot(rootName);
+            if (categoryName) {
+                this.openNavNode(categoryName);
+            }
 
             // wait for the menu item to be on the page (ie. the node has fully opened)
             this.waitForExist(this.navComponent(pageName));
@@ -74,7 +103,7 @@ var HomePage = Object.create(Page, {
      * @desc this function is to open index page
      */
     openHomePage: {
-        value: function () {
+        value: function() {
             this.open(wdioConfig.baseUrl + "/index.html");
         }
     },
@@ -87,7 +116,7 @@ var HomePage = Object.create(Page, {
      *    (the '-label' suffix will be appended automatically)
      */
     scrollMenuNavigation: {
-        value: function (labelName) {
+        value: function(labelName) {
             this.scrollToElement("a", labelName + "-label");
 
             // the isVisibleWithinViewport state verification doesn't seem to work properly;
@@ -104,10 +133,13 @@ var HomePage = Object.create(Page, {
      *    if the current screenshot does not match the baseline
      */
     takeScreenshotAndCompare: {
-        value: function (filename, tolerance) {
+        value: function(filename, tolerance) {
             this.blurElement();
             this.outHover();
-            ScreenshotUtils.takeScreenShotAndCompareWithBaseline(filename, tolerance);
+            ScreenshotUtils.takeScreenShotAndCompareWithBaseline(
+                filename,
+                tolerance
+            );
         }
     },
 
@@ -120,11 +152,14 @@ var HomePage = Object.create(Page, {
      *    if the current screenshot does not match the baseline
      */
     takeElementScreenshotAndCompare: {
-        value: function (filename, elementSelector, tolerance) {
+        value: function(filename, elementSelector, tolerance) {
             this.blurElement();
             this.outHover();
             ScreenshotUtils.takeElementScreenShotAndCompareWithBaseline(
-                filename, elementSelector, tolerance);
+                filename,
+                elementSelector,
+                tolerance
+            );
         }
     },
 
@@ -132,7 +167,7 @@ var HomePage = Object.create(Page, {
      * @desc this function is to focus out of current element
      */
     focusOutCurrentElement: {
-        value: function () {
+        value: function() {
             this.blurElement();
             this.outHover();
         }
@@ -147,10 +182,10 @@ var HomePage = Object.create(Page, {
      * @return {function} - the wrapper function which will be retried on failure
      */
     retriable: {
-        value: function (retriableFunction) {
+        value: function(retriableFunction) {
             var self = this;
 
-            return function () {
+            return function() {
                 var retryCount = 0;
                 var maxRetryCount = wdioConfig.testRetryCount;
                 var retryWaitTime = wdioConfig.testRetryWaitTime;
@@ -163,29 +198,31 @@ var HomePage = Object.create(Page, {
                     try {
                         retriableFunction();
                         error = null;
-                    }
-                    catch (err) {
+                    } catch (err) {
                         // let it bubble up if it's not a screenshot comparison exception
                         if (err instanceof ScreenshotComparisonException) {
-                            console.log("ERROR: try #" + retryCount +
-                                        "; failure: " + err.message +
-                                        ";\n    stack: " + err.stack);
-                        }
-                        else {
+                            console.log(
+                                "ERROR: try #" +
+                                    retryCount +
+                                    "; failure: " +
+                                    err.message +
+                                    ";\n    stack: " +
+                                    err.stack
+                            );
+                        } else {
                             throw err;
                         }
 
                         retryCount += 1;
                         error = err;
                     }
-                }
-                while ((retryCount <= maxRetryCount) && (error !== null));
+                } while (retryCount <= maxRetryCount && error !== null);
 
                 if (error !== null) {
                     throw new Error(error.message);
                 }
             };
         }
-    },
+    }
 });
 module.exports = HomePage;

@@ -18,7 +18,7 @@ var SelectTextDemoPage = Object.create(HomePage, {
             return this.isExisting(this.xpathTextField);
         }
     },
-    
+
     /**
      * @desc this function is to click on Text field
      */
@@ -34,7 +34,7 @@ var SelectTextDemoPage = Object.create(HomePage, {
     openSelectTextDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Components", "SelectText");
+            this.navigateToPath("Components", "Misc", "SelectText");
         }
     }
 });

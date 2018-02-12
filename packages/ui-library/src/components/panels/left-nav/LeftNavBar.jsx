@@ -4,6 +4,7 @@ var React = require("react"),
     classnames = require("classnames"),
     Copyright = require("./Copyright"),
     Utils = require("../../../util/Utils"),
+    Anchor = require("../../general/Anchor"),
     _ = require("underscore");
 
 /**
@@ -79,6 +80,8 @@ var React = require("react"),
  * @param {object} [openSections={}]
  *          A hash map of ids and their open state. This is used internally by the Reducer to maintain
  *          expand/collapse state.
+ * @param {boolean} [updated=false]
+ *          If true, will return the new left nav.
  * @param {boolean} [collapsible=false]
  *          If false, will have all sections open at once by default and disable the collapse feature.
  * @param {boolean} [autocollapse=false]
@@ -102,7 +105,7 @@ var React = require("react"),
  * var section1 = {label: "Section 1", id: "section1", children: [item1, item2]};
  * var section2 = {label: "Empty Section", id: "empty"};
  *
- * <LeftNavBar tree={[section1, section2]}
+ * <LeftNavBar updated={true} tree={[section1, section2]} />
  */
 class LeftNavBar extends React.Component {
     static propTypes = {
@@ -112,6 +115,7 @@ class LeftNavBar extends React.Component {
         selectedSection: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         openSections: PropTypes.object,
         collapsible: PropTypes.bool,
+        updated: PropTypes.bool,
         autocollapse: PropTypes.bool,
         onSectionValueChange: PropTypes.func,
         onItemValueChange: PropTypes.func,
@@ -126,7 +130,8 @@ class LeftNavBar extends React.Component {
         selectedContexts: {},
         collapsible: false,
         autocollapse: false,
-        pingoneLogo: false
+        pingoneLogo: false,
+        updated: false,
     };
 
     state = {
@@ -158,7 +163,9 @@ class LeftNavBar extends React.Component {
                 {...section}
                 key={section.id}
                 data-id={section.id}
+                icon={section.icon}
                 selectedNode={this.props.selectedNode}
+                selectedNav={this.props.selectedSection === section.id}
                 onItemValueChange={this._handleItemClick}
                 onSectionValueChange={this._handleSectionClick}
                 open={this.props.openSections[section.id]}
@@ -231,7 +238,6 @@ class LeftNavBar extends React.Component {
         // setState -> componentDidUpdate -> setState.  This is why we make sure the specific props have changed
         // before calling setState.  There's no way around this as the section has to be expanded first before it
         // can be known where to move the itemSelector.
-
         if (!prevProps ||
             prevProps.selectedNode !== this.props.selectedNode ||
             prevProps.selectedSection !== this.props.selectedSection ||
@@ -244,6 +250,7 @@ class LeftNavBar extends React.Component {
             // if a nav item is currently selected then calulate the position of the selected item within the nav
             // the selected item contains the "highlighted" css class
             if (itemSelectors.length > 0) {
+
                 var selectedDims = itemSelectors[0].getBoundingClientRect(),
                     navDims = navNode.getBoundingClientRect(),
                     sectionOpen = !this.props.collapsible ||
@@ -331,7 +338,8 @@ class LeftNavBar extends React.Component {
     render() {
         var className = classnames({
             scrollable: this.state.scrollable,
-            collapsible: this.props.collapsible
+            collapsible: this.props.collapsible,
+            updated: this.props.updated,
         });
 
         return (
@@ -352,6 +360,7 @@ class LeftNavBar extends React.Component {
                     ref="copyright"
                     pingoneLogo={this.props.pingoneLogo}
                     logoSrc={this.props.logoSrc}
+                    updated={this.props.updated}
                 />
             </div>
         );
@@ -366,8 +375,12 @@ class LeftNavBar extends React.Component {
  *          This may or may not be the same as the id.
  * @param {string} id
  *          The id of the component (this is what will be passed back to the onSectionValueChange handler)
+ * @param {string} [icon]
+ *          Optional icon to display next to the section label
  * @param {boolean} open
  *          Indicates if the section is open
+ * @param {boolean} selectedNav
+ *          Indicates if the section has a selected nav item
  * @param {function} onItemValueChange
  *          The callback for when an leaf is clicked.  Will be passed back the id of the clicked item.
  * @param {function} onSectionValueChange
@@ -378,10 +391,12 @@ class LeftNavSection extends React.Component {
         onItemValueChange: PropTypes.func,
         onSectionValueChange: PropTypes.func,
         open: PropTypes.bool,
+        selectedNav: PropTypes.bool,
         id: PropTypes.string,
         "data-id": PropTypes.string,
         selectedNode: PropTypes.string,
-        children: PropTypes.array
+        children: PropTypes.array,
+        icon: PropTypes.string
     };
 
     /*
@@ -401,7 +416,11 @@ class LeftNavSection extends React.Component {
             dataId = e.target.parentNode.getAttribute("data-id");
         }
 
-        this.props.onSectionValueChange(dataId.slice(0, -6));
+        if (this.props.children) {
+            this.props.onSectionValueChange(dataId.slice(0, -6));
+        } else {
+            this.props.onItemValueChange(dataId.slice(0, -6), dataId.slice(0, -6));
+        }
     };
 
     _getItems = () => {
@@ -409,7 +428,7 @@ class LeftNavSection extends React.Component {
             item,
             itemClassName;
 
-        for (var i=0; i<this.props.children.length; i+=1) {
+        for (var i = 0; i < this.props.children.length; i+=1) {
             item = this.props.children[i];
             itemClassName = {
                 highlighted: this.props.selectedNode === item.id,
@@ -418,51 +437,60 @@ class LeftNavSection extends React.Component {
 
             items.push(
                 <li key={i} className={classnames(itemClassName)}>
-                    <a
+                    <Anchor
                         data-id={item.id + "-label"}
                         onClick={this._handleItemClicks[i]}>
                         {item.icon ? (<span className={"icon-" + item.icon}></span>) : null}{item.label}
-                    </a>
+                    </Anchor>
                 </li>
             );
         }
-
         return items;
     };
 
     componentWillMount() {
         this._handleItemClicks = [];
 
-        // bind the click functions for each item here instead of in the render
-        this.props.children.map(function (item) {
-            this._handleItemClicks.push(
-                this._handleItemClick.bind(null, item.id, this.props.id)
-            );
-        }.bind(this));
+        if (this.props.children) {
+            // bind the click functions for each item here instead of in the render
+            this.props.children.map(function (item) {
+                this._handleItemClicks.push(
+                    this._handleItemClick.bind(null, item.id, this.props.id)
+                );
+            }.bind(this));
+        }
+
     }
 
     render() {
         var isOpen = !this.props.label || this.props.open,
             className = classnames("nav-section", {
-                open: isOpen
+                open: isOpen && this.props.children,
+                selected: this.props.selectedNav,
+                highlighted: this.props.selectedNode === this.props.id
             }),
-            titleClassName = classnames("title collapsible-link right", {
-                open: isOpen
-            });
+            titleClassName = this.props.children
+                ? classnames("title collapsible-link right", {
+                    open: isOpen
+                })
+                : "title";
 
         return (
             <div className={className} data-id={this.props["data-id"]}>
                 {this.props.label && (
-                    <div
+                    <Anchor
                         className={titleClassName}
                         data-id={this.props["data-id"] + "-label"}
                         onClick={this._handleSectionClick}>
-                        {this.props.label}
-                    </div>
+                        {this.props.icon ? (
+                            <span className={"icon-" + this.props.icon}></span>) : null}{this.props.label}
+                    </Anchor>
                 )}
-                <ul className="menu" data-id={this.props["data-id"] + "-menu"}>
-                    { this._getItems() }
-                </ul>
+                {this.props.children &&
+                    <ul className="menu" data-id={this.props["data-id"] + "-menu"}>
+                        { this._getItems() }
+                    </ul>
+                }
             </div>
         );
     }

@@ -90,7 +90,7 @@ var WizardViewPage = Object.create(HomePage, {
             this.click(this.xpathChooseWizardBox);
         }
     },
-    
+
     /**
      * @desc this function is to check if choose Wizard box existing
      */
@@ -164,7 +164,7 @@ var WizardViewPage = Object.create(HomePage, {
             this.click(prefixXpath + "//input[@data-id='form-checkbox']/following-sibling::div");
         }
     },
-    
+
     /**
      * @desc this function is to click on check box "Checkbox without a value" of the wizard2
      */
@@ -193,7 +193,7 @@ var WizardViewPage = Object.create(HomePage, {
             this.click("//input[@data-id='undefined_input']");
         }
     },
-    
+
     /**
      * @desc this function is to get Text field
      */
@@ -269,7 +269,7 @@ var WizardViewPage = Object.create(HomePage, {
             this.getThirdPartLine1.setValue(inputValue);
         }
     },
-    
+
     /**
      * @desc this function is to check if icon step 2 existing
      */

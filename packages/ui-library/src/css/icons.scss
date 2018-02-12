@@ -81,8 +81,20 @@
     content: '\6c';
 }
 
+.icon-as:before {
+    content: '\e904';
+}
+
 .icon-badge:before {
     content: '\62';
+}
+
+.icon-beaker:before {
+    content: '\e90a';
+}
+
+.icon-books:before {
+    content: '\e903';
 }
 
 .icon-cabinet:before {
@@ -101,16 +113,20 @@
     content: '\79';
 }
 
-.icon-circle-o:before {
-    content: '\4f';
-}
-
 .icon-circle:before {
     content: '\2e';
 }
 
+.icon-circle-o:before {
+    content: '\4f';
+}
+
 .icon-clear:before {
     content: '\58';
+}
+
+.icon-clipboard:before {
+    content: '\e908';
 }
 
 .icon-close:before {
@@ -137,6 +153,10 @@
     content: '\e900';
 }
 
+.icon-device:before {
+    content: '\e906';
+}
+
 .icon-directory:before {
     content: '\3d';
 }
@@ -151,6 +171,10 @@
 
 .icon-dropdown-arrow:before {
     content: '\76';
+}
+
+.icon-earth:before {
+    content: '\e905';
 }
 
 .icon-edit:before {
@@ -173,6 +197,10 @@
     content: '\66';
 }
 
+.icon-fingerprint:before {
+    content: '\e909';
+}
+
 .icon-globe:before {
     content: '\a1';
 }
@@ -191,6 +219,10 @@
 
 .icon-help-rounded:before {
     content: '\48';
+}
+
+.icon-idp:before {
+    content: '\6a';
 }
 
 .icon-image:before {
@@ -241,6 +273,10 @@
     content: '\7d';
 }
 
+.icon-notepad:before {
+    content: '\e90b';
+}
+
 .icon-overview:before {
     content: '\6f';
 }
@@ -255,14 +291,6 @@
 
 .icon-plus-rounded:before {
     content: '\2a';
-}
-
-.icon-puzzle:before {
-    content: '\7a';
-}
-
-.icon-previous:before {
-    content: '\7b';
 }
 
 .icon-progress-2-1:before {
@@ -345,6 +373,18 @@
     content: '\e3';
 }
 
+.icon-puzzle:before {
+    content: '\7a';
+}
+
+.icon-previous:before {
+    content: '\7b';
+}
+
+.icon-radar:before {
+    content: '\e907';
+}
+
 .icon-resend:before {
     content: '\72';
 }
@@ -355,6 +395,10 @@
 
 .icon-search:before {
     content: '\73';
+}
+
+.icon-server:before {
+    content: '\80';
 }
 
 .icon-settings:before {
@@ -377,8 +421,8 @@
     content: '\7c';
 }
 
-.icon-spinner:before { // should this be deleted?
-    content: '\50';
+.icon-sp:before {
+    content: '\7f';
 }
 
 .icon-spin-down:before {
@@ -387,6 +431,10 @@
 
 .icon-spin-up:before {
     content: '\31';
+}
+
+.icon-spinner:before {
+    content: '\50';
 }
 
 .icon-success:before {

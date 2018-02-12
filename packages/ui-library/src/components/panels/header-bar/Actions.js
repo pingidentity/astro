@@ -8,7 +8,10 @@ var keyMirror = require("fbjs/lib/keyMirror");
 */
 exports.Types = keyMirror({
     HEADER_TOGGLE_ITEM: null,
-    HEADER_INIT: null
+    HEADER_INIT: null,
+    HEADER_SET_ENVIRONMENT: null,
+    HEADER_SET_NAV: null,
+    HEADER_SET_MARKET: null,
 });
 
 /**
@@ -44,5 +47,59 @@ exports.toggleItem = function (id) {
     return {
         type: exports.Types.HEADER_TOGGLE_ITEM,
         id: id
+    };
+};
+
+/**
+* @alias Actions.setEnvironment
+* @memberof HeaderBar
+* @desc Set the value for the current environment
+*
+* @param {string} environment
+*    The environment value.
+*
+* @return {object}
+*    The action.
+*/
+exports.setEnvironment = function (environment) {
+    return {
+        type: exports.Types.HEADER_SET_ENVIRONMENT,
+        environment: environment
+    };
+};
+
+/**
+* @alias Actions.setNav
+* @memberof HeaderBar
+* @desc Set the value for the current nav
+*
+* @param {string} currentNav
+*    The currentNav value.
+*
+* @return {object}
+*    The action.
+*/
+exports.setNav = function (currentNav) {
+    return {
+        type: exports.Types.HEADER_SET_NAV,
+        currentNav: currentNav
+    };
+};
+
+/**
+* @alias Actions.setMarket
+* @memberof HeaderBar
+* @desc Set the value for the current market
+*
+* @param {string} market
+*    The market value.
+*
+* @return {object}
+*    The action.
+*/
+exports.setMarket = function (market) {
+    return {
+        type: exports.Types.HEADER_SET_MARKET,
+        market: market
     };
 };

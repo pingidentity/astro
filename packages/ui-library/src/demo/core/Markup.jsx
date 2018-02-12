@@ -8,8 +8,8 @@ class Markup extends React.Component {
         // if there is a match, take latest one (we can have helper react components before demo class)
         // if none, take everything
         var latestMatch = matches
-          ? matches[matches.length - 1]
-          : this.props.content;
+            ? matches[matches.length - 1]
+            : this.props.content;
 
         //remove indentation
         var indents = latestMatch.match(/^(\s*?)[^\s]/)[1].length;

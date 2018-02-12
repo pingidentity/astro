@@ -1,0 +1,304 @@
+$font-size-normal: 14px;
+$font-size-primary: 15px;
+$font-size-title: 24px;
+
+$layout-header-height: 46px;
+$header-bg: $color-neutral-10;
+
+@mixin displayFlexRow {
+    display: flex;
+    display: -ms-flexbox;
+    flex-direction: row;
+    -ms-flex-direction: row;
+    align-items: center;
+    -ms-flex-align: center;
+    -ms-flex-pack: justify;
+}
+
+.header-bar {
+    @include displayFlexRow;
+
+    background: $header-bg;
+    height: $layout-header-height;
+    padding-left: $spacing-md;
+    padding-right: $spacing-md;
+
+    a:hover {
+        text-decoration: none;
+    }
+}
+
+.header-bar__left,
+.header-bar__right {
+    @include displayFlexRow;
+
+    flex-basis: 50%;
+    white-space: nowrap;
+}
+
+.header-bar__left > * {
+    margin-right: $spacing-md;
+
+    &.last-child {
+        margin-right: 0;
+    }
+}
+
+.header-bar__right {
+    justify-content: flex-end;
+}
+
+.header-bar__center {
+    flex-grow: 1;
+}
+
+.header-bar__ping-logo {
+    $logo-width: 52px;
+    $logo-height: 52px;
+    $logo-env-pad: 5px;
+
+    height: $logo-height;
+    width: $logo-width;
+
+    background-image: url('#{$img-path}logo-pingidentity.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    transform: translateY(($logo-height - $layout-header-height)/2);
+}
+
+.header-bar__site-logo, .header-bar__pingone-logo {
+    display: inline-block;
+    height: 22px;
+    vertical-align: middle;
+    max-width: 150px;
+}
+
+.header-bar__pingone-logo {
+    fill: $color-white;
+}
+
+.header-bar__site-title,
+.header-bar__additional-content {
+    display: inline-block;
+    height: $layout-header-height;
+    line-height: $layout-header-height + 3;
+    color: $color-white;
+    vertical-align: top;
+}
+.header-bar__site-title {
+    font-family: $font-pn-regular;
+    font-size: 20px;
+}
+.header-bar__additional-content {
+    font-family: $font-pn-light;
+}
+
+.market-selector.input-custom-select {
+    $market-selector-height: 25px;
+
+    margin: 0;
+    vertical-align: middle;
+
+    .input-container {
+        height: $market-selector-height;
+
+        .input-text.readonly input.selected-option-label {
+            color: $color-white;
+            font: $font-pn-regular;
+            font-size: $font-size-normal - 1px;
+
+            @include border-radius(2px);
+
+            background: $color-strong-neutral-10;
+            border: 0;
+            height: $market-selector-height;
+            line-height: $market-selector-height;
+            padding-bottom: 0;
+            padding-left: $spacing-sm;
+            padding-top: 0;
+            white-space: nowrap;
+
+            &:after {
+                color: $color-white;
+                font-size: 10px;
+                right: $spacing-sm;
+                top: 8px;
+            }
+
+            &:hover {
+                background: shade($color-strong-neutral-10, 20%);
+            }
+        }
+
+        .wrapper:after {
+            color: $color-white;
+            font-size: 10px;
+            right: $spacing-sm;
+            top: 8px;
+        }
+    }
+}
+
+.header-nav {
+    display: flex;
+    display: -ms-flexbox;
+    flex-direction: row;
+    -ms-flex-direction: row;
+    justify-content: center;
+    -ms-flex-align: center;
+    line-height: $layout-header-height;
+    text-align: center;
+}
+
+.header-nav__item {
+    background: none;
+    border: none;
+    color: $color-white;
+    cursor: pointer;
+    display: block;
+    font-family: $font-pn-light;
+    font-size: $font-size-normal - 1px;
+    height: auto;
+    line-height: inherit;
+    margin: 0;
+    padding: 0 $spacing-lg;
+    position: relative;
+    text-transform: uppercase;
+    vertical-align: bottom;
+
+}
+
+@media (max-width: 1000px) {
+    .header-nav__item {
+        padding: 0 $spacing-md;
+    }
+}
+
+.header-nav__item-label {
+    padding-bottom: 2px;
+    position: relative;
+
+    &:after {
+        background: $color-white;
+        bottom: -2px;
+        content: '';
+        height: 1px;
+        left: 50%;
+        position: absolute;
+        right: 50%;
+        transition: 0.1s;
+    }
+}
+.header-nav__item:hover .header-nav__item-label:after {
+    right: 0;
+    left: 0;
+    transition: 0.05s;
+}
+
+.header-nav__item--selected .header-nav__item-label {
+    font-family: $font-pn-semibold;
+
+    &:after {
+        height: 2px;
+        left: 0;
+        right: 0;
+        transition: 0.05s;
+    }
+}
+
+.environment-selector {
+    .collapsible-link {
+        color: $color-neutral-90;
+        font: $font-pn-regular;
+        font-size: $font-size-normal;
+
+        &.right:after {
+            color: $color-neutral-90;
+            top: auto;
+            bottom: 0;
+        }
+
+        &:hover, &.right:hover:after {
+            color: $color-white;
+            text-decoration: none;
+        }
+    }
+
+    border: 1px solid $color-neutral-30;
+    border-style: none solid;
+    line-height: 30px;
+    padding: 0 10px;
+    vertical-align: middle;
+}
+
+.environment-selector__icon {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+$item-size: 20px;
+.product-nav {
+    @include displayFlexRow;
+}
+
+.product-nav__item {
+    font-size: $item-size;
+    height: 30px;
+    padding: 0 $spacing-md;
+    text-align: center;
+    border-left: 1px solid $color-neutral-30;
+    line-height: 30px;
+
+    &:first-child {
+        border-left: none;
+    }
+    &:last-child {
+        padding-right: 0;
+    }
+}
+
+.product-nav__link {
+    display: inline-block;
+    color: $color-elephant;
+
+    &:hover {
+        text-decoration: none;
+    }
+
+    &:hover,
+    &.active {
+        color: $color-white;
+    }
+}
+
+.product-nav__icon {
+    display: inline-block;
+    height: $item-size;
+    vertical-align: middle;
+    width: $item-size;
+}
+
+.product-nav__img {
+    height: auto;
+    width: auto;
+    max-height: $item-size;
+    max-width: $item-size;
+}
+
+
+.product-nav__menu-trigger, button.product-nav__menu-trigger {
+    background: none;
+    border: none;
+    color: $color-neutral-50;
+    cursor: pointer;
+    display: block;
+    font-size: 20px;
+    padding: 0;
+    vertical-align: middle;
+
+    &:hover,
+    &.active {
+        color: $color-white;
+    }
+}

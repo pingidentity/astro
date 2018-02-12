@@ -3,6 +3,11 @@ $popup-border-color: $color-timberwolf;
 $popup-border-radius: 4px;
 $popup-box-shadow: 0 3px 4px 0 rgba($color-black, 0.1);
 
+$arrow-offset: 15px;
+$arrow-height: 10px;
+
+$popup-min-width: 2 * $arrow-offset + 2 * $arrow-height + 65px;
+
 .popup-frame {
     @include box-shadow($popup-box-shadow);
 
@@ -12,9 +17,6 @@ $popup-box-shadow: 0 3px 4px 0 rgba($color-black, 0.1);
     border-radius: $popup-border-radius;
     background: $color-white;
 }
-
-$arrow-offset: 15px;
-$arrow-height: 10px;
 
 @mixin popover-pointer($top, $color) {
     content: '';
@@ -34,7 +36,7 @@ $arrow-height: 10px;
     @extend .popup-frame;
 
     margin-top: $arrow-height + 5px;
-    min-width: 2 * $arrow-offset + 2 * $arrow-height + 65px;
+    min-width: $popup-min-width;
 
     &:before {
         @include popover-pointer(-($arrow-height * 2) - 1px, $popup-border-color);
@@ -151,4 +153,34 @@ $max-popover-width: 360px;
 
 .button-menu__button + .button-menu__button {
     border-top: 1px solid $color-rhino;
+}
+
+// Styles for Popover Nav Menu
+.nav-menu__link {
+    color: $color-slate;
+    font-size: 14px;
+    display: block;
+    min-width: $popup-min-width;
+    padding: $spacing-md $spacing-lg;
+    position: relative;
+    text-align: left;
+
+    &:hover {
+        background: $color-strong-neutral-90;
+    }
+}
+
+.nav-menu__link--w-icon {
+    padding-left: $spacing-xl;
+}
+
+.nav-menu__link + .nav-menu__link {
+    border-top: 1px solid $color-neutral-90;
+}
+
+.nav-menu__icon {
+    font-size: 16px;
+    position: absolute;
+    top: $spacing-md + 6px;
+    left: $spacing-md;
 }

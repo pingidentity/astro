@@ -4,7 +4,7 @@ jest.dontMock("../HeaderBar");
 jest.dontMock("../../../../util/EventUtils");
 jest.dontMock("../../../../util/Utils");
 
-describe("HeaderBar", function () {
+describe("HeaderBar", function() {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         ReduxTestUtils = require("../../../../util/ReduxTestUtils"),
@@ -14,116 +14,426 @@ describe("HeaderBar", function () {
 
     var dataId = "test-header";
 
-    function getWrappedComponent (opts) {
-        opts = _.defaults(opts || {}, {
-            "data-id": dataId,
-            onItemValueChange: jest.genMockFunction(),
-            onMenuValueChange: jest.genMockFunction(),
-            tree: [
-                { id: "help", url: "http://www.yahoo.com" },
-                { id: "cog", children: [{ id: "cog-menu-item", label: "Cog Menu Item" }] },
-                { id: "account", children: [{ id: "globe", label: "Globe" }] }
-            ]
-        });
-        return ReactTestUtils.renderIntoDocument(<ReduxTestUtils.Wrapper type={HeaderBar} opts={opts} />);
+    function getWrappedComponent(opts, omit = {}) {
+        opts = _.omit(
+            _.defaults(opts || {}, {
+                "data-id": dataId,
+                onItemValueChange: jest.genMockFunction(),
+                onMenuValueChange: jest.genMockFunction(),
+                tree: [
+                    { id: "help", url: "http://www.yahoo.com" },
+                    {
+                        id: "cog",
+                        children: [
+                            { id: "cog-menu-item", label: "Cog Menu Item" }
+                        ]
+                    },
+                    {
+                        id: "account",
+                        children: [{ id: "globe", label: "Globe" }]
+                    }
+                ]
+            }),
+            omit
+        );
+        return ReactTestUtils.renderIntoDocument(
+            <ReduxTestUtils.Wrapper type={HeaderBar} opts={opts} />
+        );
     }
 
-    beforeEach(function () {
+    beforeEach(function() {
         window.addEventListener = jest.genMockFunction();
         window.removeEventListener = jest.genMockFunction();
     });
 
-    it("clicks trigger correct callback", function () {
+    it("clicks trigger correct callback", function() {
         var wrapper = getWrappedComponent({ openNode: "cog" });
         var component = wrapper.refs.target;
-        var navItem = TestUtils.findRenderedDOMNodeWithDataId(component, "cog");
-        var menuItem = TestUtils.findRenderedDOMNodeWithDataId(component, "cog-menu-item");
+        var navItem = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "cog-trigger"
+        );
+        var menuItem = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "cog-menu-item"
+        );
 
         ReactTestUtils.Simulate.click(navItem);
         expect(component.props.onItemValueChange).toBeCalledWith("cog");
         expect(component.props.onMenuValueChange).not.toBeCalled();
 
         ReactTestUtils.Simulate.click(menuItem);
-        expect(component.props.onMenuValueChange).lastCalledWith("cog-menu-item", "cog");
+        expect(component.props.onMenuValueChange).lastCalledWith(
+            "cog-menu-item",
+            "cog"
+        );
     });
 
-    it("detaches event listener on umount", function () {
-        expect(ReduxTestUtils.unmountDetachesWindowListener(getWrappedComponent, "click")).toBe(true);
-    });
-
-    it("hides menu on global click", function () {
-        var wrapper = getWrappedComponent({ openNode: "cog" });
-        var component = wrapper.refs.target;
-        var e = { target: document.body };
-
-        var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
-        handler(e);
-
-        expect(component.props.onItemValueChange).toBeCalledWith("", e);
-    });
-
-    it("does nothing on global click if no open node", function () {
-        var wrapper = getWrappedComponent();
+    it("uses preloaded logo", function() {
+        var wrapper = getWrappedComponent({
+            siteLogo: "pingone",
+            inline: true
+        });
         var component = wrapper.refs.target;
 
-        var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
-        handler({ target: document.body });
-
-        expect(component.props.onItemValueChange).not.toBeCalled();
-    });
-
-    it("provides logo url", function () {
-        var wrapper = getWrappedComponent({ siteLogo: "blah" });
-        var component = wrapper.refs.target;
-
-        var logo = TestUtils.findRenderedDOMNodeWithDataId(component, "header-site-logo");
+        var logo = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "test-header-site-logo"
+        );
         expect(logo).toBeTruthy();
 
         wrapper.sendProps({ siteLogo: null });
-        logo = TestUtils.findRenderedDOMNodeWithDataId(component, "header-site-logo");
+        logo = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "test-header-site-logo"
+        );
         expect(logo).toBeFalsy();
     });
 
-    it("renders icon with iconClassName", function () {
+    it("uses userMenu instead of tree", function() {
+        var wrapper = getWrappedComponent(
+            { userMenu: [{ label: "junk", id: "junk" }] },
+            ["tree"]
+        );
+        var component = wrapper.refs.target;
+
+        var account = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "account"
+        );
+        expect(account).toBeTruthy();
+    });
+
+    it("provides logo url", function() {
         var wrapper = getWrappedComponent({ siteLogo: "blah" });
+        var component = wrapper.refs.target;
+
+        var logo = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "test-header-site-logo"
+        );
+        expect(logo).toBeTruthy();
+
+        wrapper.sendProps({ siteLogo: null });
+        logo = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "test-header-site-logo"
+        );
+        expect(logo).toBeFalsy();
+    });
+
+    it("renders icon with iconClassName", function() {
+        var wrapper = getWrappedComponent({ siteLogo: "blah" });
+        var component = wrapper.refs.target;
+
+        var icon = TestUtils.findRenderedDOMNodeWithClass(component, "icon-globe");
+        expect(icon).toBeFalsy();
+
+        wrapper.sendProps({
+            tree: [
+                {
+                    id: "help",
+                    iconClassName: "icon-globe",
+                    url: "http://www.yahoo.com"
+                }
+            ]
+        });
+        var icon = TestUtils.findRenderedDOMNodeWithClass(component, "icon-globe");
+        expect(icon).toBeTruthy();
+    });
+
+    it("renders icon with icon", function() {
+        var wrapper = getWrappedComponent({ siteLogo: "blah" });
+        var component = wrapper.refs.target;
+
+        var icon = TestUtils.findRenderedDOMNodeWithClass(component, "icon-globe");
+        expect(icon).toBeFalsy();
+
+        wrapper.sendProps({
+            tree: [
+                {
+                    id: "help",
+                    icon: "globe",
+                    url: "http://www.yahoo.com"
+                }
+            ]
+        });
+        var icon = TestUtils.findRenderedDOMNodeWithClass(component, "icon-globe");
+        expect(icon).toBeTruthy();
+    });
+
+    it("renders icon with iconSrc", function() {
+        var wrapper = getWrappedComponent({ siteLogo: "blah", tree: {} });
         var component = wrapper.refs.target;
 
         var icon = TestUtils.findRenderedDOMNodeWithClass(component, "icon");
         expect(icon).toBeFalsy();
 
-        wrapper.sendProps({ tree: [
-                                { id: "help", iconClassName: "icon-help", url: "http://www.yahoo.com" }
-        ] });
+        wrapper.sendProps({
+            tree: [
+                {
+                    id: "help",
+                    iconSrc: "http://somesite.com/logo.png",
+                    url: "http://www.yahoo.com"
+                }
+            ]
+        });
         var icon = TestUtils.findRenderedDOMNodeWithClass(component, "icon");
         expect(icon).toBeTruthy();
     });
 
-    it("renders icon with iconSrc", function () {
-        var wrapper = getWrappedComponent({ siteLogo: "blah" });
-        var component = wrapper.refs.target;
-
-        var icon = TestUtils.findRenderedDOMNodeWithClass(component, "icon");
-        expect(icon).toBeFalsy();
-
-        wrapper.sendProps({ tree: [
-                                { id: "help", iconSrc: "http://somesite.com/logo.png", url: "http://www.yahoo.com" }
-        ] });
-        var icon = TestUtils.findRenderedDOMNodeWithClass(component, "icon");
-        expect(icon).toBeTruthy();
-    });
-
-    it("renders the siteTitle when provided", function () {
+    it("renders the siteTitle when provided", function() {
         var siteTitleText = "Site Title";
         var wrapper = getWrappedComponent({ siteTitle: siteTitleText });
         var component = wrapper.refs.target;
 
-        var siteTitle = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-site-title");
+        var siteTitle = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            dataId + "-site-title"
+        );
         expect(siteTitle).toBeTruthy();
         expect(siteTitle.textContent).toEqual(siteTitleText);
 
         wrapper.sendProps({ siteTitle: null });
-        siteTitle = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-site-title");
+        siteTitle = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            dataId + "-site-title"
+        );
         expect(siteTitle).toBeFalsy();
     });
 
+    it("renders the environment selector when provided", function() {
+        var wrapper = getWrappedComponent({
+            environmentOptions: [
+                { label: "Thing", id: "thing" },
+                { label: "Thing 2", id: "thing2", icon: "cog" }
+            ],
+            environmentSelected: "thing"
+        });
+        var component = wrapper.refs.target;
+
+        var selector = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "environment-selector"
+        );
+        expect(selector).toBeTruthy();
+
+        wrapper.sendProps({ environmentSelected: "thing2" });
+        selector = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "environment-selector"
+        );
+        expect(selector).toBeTruthy();
+
+        wrapper.sendProps({ environmentOptions: null });
+        selector = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "environment-selector"
+        );
+        expect(selector).toBeFalsy();
+    });
+
+    it("renders the market selector when provided", function() {
+        var wrapper = getWrappedComponent({
+            marketOptions: [{ label: "Thing", id: "thing" }],
+            marketSelected: "thing"
+        });
+        var component = wrapper.refs.target;
+
+        var selector = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "market-selector"
+        );
+        expect(selector).toBeTruthy();
+
+        wrapper.sendProps({ marketOptions: null });
+        selector = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "market-selector"
+        );
+        expect(selector).toBeFalsy();
+    });
+
+    it("renders the nav when provided", function() {
+        var wrapper = getWrappedComponent({
+            navOptions: [{ label: "Thing", id: "thing" }]
+        });
+        var component = wrapper.refs.target;
+
+        var selector = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "header-nav"
+        );
+        expect(selector).toBeTruthy();
+
+        wrapper.sendProps({ navOptions: null });
+        selector = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "nav-selector"
+        );
+        expect(selector).toBeFalsy();
+    });
+
+    it("renders the additional content when provided", function() {
+        var wrapper = getWrappedComponent({
+            additionalContent: "More stuff"
+        });
+        var component = wrapper.refs.target;
+
+        var content = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            dataId + "-additional-content"
+        );
+        expect(content).toBeTruthy();
+
+        wrapper.sendProps({ additionalContent: null });
+        content = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            dataId + "-additional-content"
+        );
+        expect(content).toBeFalsy();
+    });
+
+    it("opens and closes the environment selector", function() {
+        var wrapper = getWrappedComponent({
+            environmentOptions: [{ label: "Thing", id: "thing" }]
+        });
+        var component = wrapper.refs.target;
+        var selector = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "environment-selector"
+        );
+        var trigger = TestUtils.findRenderedDOMNodeWithDataId(
+            selector,
+            "action-btn"
+        );
+
+        var body = TestUtils.findRenderedDOMNodeWithDataId(
+            selector,
+            "details-body"
+        );
+        expect(body).toBeFalsy();
+
+        ReactTestUtils.Simulate.click(trigger);
+        body = TestUtils.findRenderedDOMNodeWithDataId(
+            selector,
+            "details-body"
+        );
+        expect(body).toBeTruthy();
+
+        ReactTestUtils.Simulate.click(trigger);
+        body = TestUtils.findRenderedDOMNodeWithDataId(
+            selector,
+            "details-body"
+        );
+        expect(body).toBeFalsy();
+    });
+
+    it("opens and clicks on the environment selector", function() {
+        var callback = jest.genMockFunction();
+
+        var wrapper = getWrappedComponent({
+            environmentOptions: [{ label: "Thing", id: "thing" }],
+            onEnvironmentChange: callback
+        });
+        var component = wrapper.refs.target;
+        var selector = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "environment-selector"
+        );
+        var trigger = TestUtils.findRenderedDOMNodeWithDataId(
+            selector,
+            "action-btn"
+        );
+        ReactTestUtils.Simulate.click(trigger);
+        var option = TestUtils.findRenderedDOMNodeWithClass(
+            component,
+            "select-option"
+        );
+
+        expect(callback).not.toBeCalled();
+        ReactTestUtils.Simulate.click(option);
+        expect(callback).toBeCalledWith("thing");
+    });
+
+    it("opens and closes the market selector", function() {
+        var wrapper = getWrappedComponent({
+            marketOptions: [{ label: "Thing", id: "thing" }]
+        });
+        var component = wrapper.refs.target;
+        var selector = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "market-selector"
+        );
+        var trigger = TestUtils.findRenderedDOMNodeWithDataId(
+            selector,
+            "selected-input-input"
+        );
+
+        var openSelector = TestUtils.findRenderedDOMNodeWithClass(
+            selector,
+            "market-selector open"
+        );
+        expect(openSelector).toBeFalsy();
+
+        ReactTestUtils.Simulate.click(trigger);
+
+        openSelector = TestUtils.findRenderedDOMNodeWithClass(
+            selector,
+            "market-selector open"
+        );
+        expect(openSelector).toBeTruthy();
+
+        ReactTestUtils.Simulate.click(trigger);
+        openSelector = TestUtils.findRenderedDOMNodeWithClass(
+            selector,
+            "market-selector open"
+        );
+        expect(openSelector).toBeFalsy();
+    });
+
+    it("opens and clicks on the market selector", function() {
+        var callback = jest.genMockFunction();
+
+        var wrapper = getWrappedComponent({
+            marketOptions: [{ label: "Thing", id: "thing" }],
+            onMarketChange: callback
+        });
+        var component = wrapper.refs.target;
+        var selector = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "market-selector"
+        );
+        var trigger = TestUtils.findRenderedDOMNodeWithDataId(
+            selector,
+            "selected-input-input"
+        );
+        ReactTestUtils.Simulate.click(trigger);
+        var option = TestUtils.findRenderedDOMNodeWithClass(
+            component,
+            "select-option"
+        );
+
+        expect(callback).not.toBeCalled();
+        ReactTestUtils.Simulate.click(option);
+        expect(callback).toBeCalledWith("thing");
+    });
+
+    it("clicks on the nav", function() {
+        var callback = jest.genMockFunction();
+
+        var wrapper = getWrappedComponent({
+            navOptions: [{ label: "Thing", id: "thing" }],
+            onNavChange: callback
+        });
+        var component = wrapper.refs.target;
+        var nav = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "Thing-label"
+        );
+
+        expect(callback).not.toBeCalled();
+        ReactTestUtils.Simulate.click(nav);
+        expect(callback).toBeCalledWith("thing");
+    });
 });

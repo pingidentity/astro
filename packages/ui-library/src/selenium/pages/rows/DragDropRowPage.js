@@ -18,14 +18,14 @@ var DragDropRowDemoPage = Object.create(HomePage, {
             return this.isExisting(this.xpathDragAndDropPage);
         }
     },
-    
+
     /**
      * @desc this function open the DragNDropRowD page
      */
     openDragDropRowDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Components", "DragNDropRow");
+            this.navigateToPath("Components", "Misc", "DragNDropRow");
         }
     }
 });

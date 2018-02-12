@@ -5,10 +5,12 @@ var Actions = require("./Actions.js"),
 
 var initialState = {
     tree: [],
+    root: "",
     openSections: {},
     selectedContexts: {},
     collapsible: false,
-    autocollapse: false
+    autocollapse: false,
+    updated: false
 };
 
 /**
@@ -133,19 +135,23 @@ module.exports = function (state, action) {
                 nextState = closeAllNotSelected(nextState, action.id);
             }
 
-            // Auto-select the first child node of a newly opened section
-            var sectionData = _.find(state.tree, function (item) {
-                return item.id === action.id;
-            });
-            if (sectionData.type !== "context") {
-                if (state.autocollapse || !state.autocollapse && !state.openSections[action.id]) {
-                    if (state.selectedSection !== action.id) {
-                        nextState.selectedSection = action.id;
-                        nextState.selectedNode = findFirstChildIdUnlessSelected(nextState);
+            // don't auto-select the first child node of a newly opened section if new nav
+            if (state.updated) {
+                break;
+            }
+            else {
+                var sectionData = _.find(state.tree, function (item) {
+                    return item.id === action.id;
+                });
+                if (sectionData.type !== "context") {
+                    if (state.autocollapse || !state.autocollapse && !state.openSections[action.id]) {
+                        if (state.selectedSection !== action.id) {
+                            nextState.selectedSection = action.id;
+                            nextState.selectedNode = findFirstChildIdUnlessSelected(nextState);
+                        }
                     }
                 }
             }
-
             break;
         case Actions.Types.NAV_BAR_INIT:
             nextState.tree = deepClone(action.tree);

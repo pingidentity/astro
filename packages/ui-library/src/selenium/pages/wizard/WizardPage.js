@@ -247,14 +247,14 @@ var WizardDemoPage = Object.create(HomePage, {
             this.waitForExist(this.xpathDoneButton, 10000);
         }
     },
-    
+
     /**
      * @desc this function is to open the Wizard component
      */
     openWizardDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Components", "Wizard");
+            this.navigateToPath("Components", "Misc", "Wizard");
         }
     }
 });

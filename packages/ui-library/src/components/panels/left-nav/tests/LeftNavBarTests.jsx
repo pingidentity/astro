@@ -18,12 +18,17 @@ describe("LeftNavBar", function () {
         {
             label: "Section 1",
             id: "section-1",
-            children: [{ label: "Item 1", id: "item-1" }]
+            children: [{ label: "Item 1", id: "item-1" }],
+            icon: "account"
         },
         {
             label: "Section 2",
             id: "section-2",
-            children: [{ label: "Item 2", id: "item-2" }]
+            children: [{ label: "Item 2", id: "item-2", icon: "help" }]
+        },
+        {
+            label: "Section 3",
+            id: "section-3"
         }
     ];
 
@@ -40,13 +45,21 @@ describe("LeftNavBar", function () {
         var wrapper = getWrappedComponent();
         var component = wrapper.refs.target;
         var sectionLabel = TestUtils.findRenderedDOMNodeWithDataId(component, "section-1-label");
+        var sectionIcon = TestUtils.findRenderedDOMNodeWithTag(sectionLabel, "span");
         var itemLabel = TestUtils.findRenderedDOMNodeWithDataId(component, "item-1-label");
+        var sectionLabelNoChildren = TestUtils.findRenderedDOMNodeWithDataId(component, "section-3-label");
 
         ReactTestUtils.Simulate.click(sectionLabel);
         expect(component.props.onSectionValueChange).lastCalledWith("section-1");
 
         ReactTestUtils.Simulate.click(itemLabel);
         expect(component.props.onItemValueChange).lastCalledWith("item-1", "section-1");
+
+        ReactTestUtils.Simulate.click(sectionIcon);
+        expect(component.props.onSectionValueChange).lastCalledWith("section-1");
+
+        ReactTestUtils.Simulate.click(sectionLabelNoChildren);
+        expect(component.props.onItemValueChange).lastCalledWith("section-3", "section-3");
     });
 
     it("renders the tree structure", function () {
@@ -290,6 +303,40 @@ describe("LeftNavBar", function () {
 
         ReactTestUtils.Simulate.click(menuItem2);
         expect(component.props.onItemValueChange).lastCalledWith(menuItemData[1].id, id);
+    });
+
+    it("renders without error when the selected item doesn't exist", function () {
+        var id = "my-context-selector";
+        var menuItemData = [
+            {
+                label: "Item 1",
+                id: "context-item-1"
+            },
+            {
+                label: "Item 2",
+                id: "context-item-2"
+            },
+            {
+                label: "Item 22",
+                id: "context-item-3"
+            }
+        ];
+        var contextSelectorData = [{
+            id: id,
+            type: "context",
+            label: "Environement",
+            icon: "globe",
+            addLink: {
+                text: "Environment",
+            },
+            children: menuItemData
+        }];
+        getWrappedComponent({
+            tree: contextSelectorData.concat(navData),
+            selectedContexts: {
+                "my-context-selector": "context-item-4"
+            }
+        });
     });
 
     it("throws error when deprecated prop 'onItemClick' is passed in", function () {

@@ -65,14 +65,14 @@ var SectionDemoPage = Object.create(HomePage, {
             this.waitForVisible(this.xpathTextDetails2, this.waitInterval, true);
         }
     },
-       
+
     /**
      * @desc this function open the section page
      */
     openSectionDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Components", "Section");
+            this.navigateToPath("Components", "Misc", "Section");
         }
     }
 });

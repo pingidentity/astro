@@ -11,6 +11,7 @@ var React = require("react"),
     ReactRouterRedux = require("react-router-redux"),
     Actions = require("./core/Actions.js"),
     DemoItem = require("./core/DemoItem"),
+    AppFrame = require("../components/panels/AppFrame"),
     LeftNavBar = require("../components/panels/left-nav"),
     PropsToUrlWatcher = require("../components/offscreen/PropsToUrlWatcher"),
     HeaderBar = require("../components/panels/header-bar"),
@@ -108,7 +109,7 @@ class DemoApp extends React.Component {
         }
 
         return `lib/${path.replace(/\.jsx$/, ".js")}`;
-    }
+    };
 
     /**
      * @method
@@ -116,55 +117,48 @@ class DemoApp extends React.Component {
      * @desc Initialize the app
      */
     componentWillMount() {
-        //bind action creators
+        // bind action creators
         this.appActions = Redux.bindActionCreators(Actions, this.props.dispatch);
         this.routerActions = Redux.bindActionCreators(ReactRouterRedux.routerActions, this.props.dispatch);
         this.navActions = Redux.bindActionCreators(LeftNavBar.Actions, this.props.dispatch);
         this.headerActions = Redux.bindActionCreators(HeaderBar.Actions, this.props.dispatch);
         this._demoItem = {};
 
-        //set up member variables
+        // set up member variables
         this._demoIndexById = {};
         this._handleKeydown = EventUtils.handleKeydowns({
             38: this.navActions.selectPrevItem,
             40: this.navActions.selectNextItem
         }, true);
 
-        this.navActions.setCollapsible(true);   //Enable collapsible for LeftNav
+        // Enable collapsible, updated for LeftNav
+        this.navActions.setCollapsible(true);
+        this.navActions.setUpdated(true);
 
-        //The demos list doesn't have ids, so this loop will just duplicate the label and use it as an ID.
-        //IDs are required by the LeftNavBar.
-        //While looping through the demos, register their reducers
-        this.navActions.init(require("./core/demos.js").map(function (section) {
-            section.id = section.label.replace(/\W/g, "");
+        // The demos list doesn't have ids, so this loop will just duplicate the label and use it as an ID.
+        // IDs are required by the LeftNavBar.
+        // While looping through the demos, register their reducers
+        const processItems = item => {
+            item.id = item.label.replace(/\W/g, "");
+            this._demoIndexById[item.id] = item;
 
-            section.children.forEach(function (demo) {
-                demo.id = demo.label.replace(/\W/g, "");
-                this._demoIndexById[demo.id] = demo;
-            }.bind(this));
+            if (item.children) {
+                if (!item.listOrder) {
+                    item.children = item.children.sort(function (a, b) {
+                        return a.label > b.label ? 1 : -1;
+                    });
+                }
 
-            if (!section.listOrder) {
-                section.children = section.children.sort(function (a, b) {
-                    return a.label > b.label ? 1 : -1;
-                });
+                item.children.forEach(processItems);
             }
 
-            return section;
-        }.bind(this)));
+            return item;
+        };
+        this.navActions.init(require("./core/demos.js").map(processItems));
+        this.navActions.setRoot("Documentation");
 
-        //Set up the HeaderBar
-        this.headerActions.init([
-            {
-                id: "help",
-                iconClassName: "icon-help",
-                url: this._getDocumentationUrl("index"),
-                title: "Documentation", label: "JSoc"
-            },
-            { id: "cog", iconClassName: "icon-cog", children: [{ id: "cog", label: "Cog" }] }
-        ]);
-
-        //Watch arrow keys and map them to the corresponding actions
-        window.addEventListener("keydown", this._handleKeydown , false);
+        // Watch arrow keys and map them to the corresponding actions
+        window.addEventListener("keydown", this._handleKeydown, false);
     }
 
     /**
@@ -184,15 +178,19 @@ class DemoApp extends React.Component {
      * put here.  For instance, loading the query string.
      */
     componentDidMount() {
-        //load the arguments from the query string
-        if (this.props.location.query.openNode) {
-            this.navActions.toggleSection(this.props.location.query.openNode);
-        }
-        else if (this.props.location.query.selectedNode) {
-            this.navActions.selectItem(this.props.location.query.selectedNode);
-        }
-        else {
-            //set initial page to docs if none selected
+        // load the arguments from the query string
+        if (this.props.location.query.selectedNode) {
+            if (this.props.location.query.selectedSection) {
+                this.navActions.toggleSection(this.props.location.query.selectedSection);
+            }
+            if (this.props.location.query.root) {
+                this.navActions.setRoot(this.props.location.query.root);
+            }
+            this.navActions.selectItem(
+                this.props.location.query.selectedNode,
+                this.props.location.query.selectedSection);
+        } else {
+            // set initial page to docs if none selected
             this.navActions.toggleSection("Docs");
             this.navActions.selectItem("ReleaseNotes", "Docs");
         }
@@ -207,19 +205,19 @@ class DemoApp extends React.Component {
     componentWillReceiveProps(newProps) {
         var id = newProps.nav.selectedNode;
 
-        //Make sure the demo item exists since an invalid component id could be set in the URL when the demoApp loads
+        // Make sure the demo item exists since an invalid component id could be set in the URL when the demoApp loads
         if (newProps.nav.selectedNode !== this.props.nav.selectedNode && this._demoIndexById[id]) {
             this._demoStore = null;
             this._demoItem = this._demoIndexById[id];
             this._demo = this._demoItem.demo;
 
-            //Some demo items may have no pathToDoc (e.g. tutorial items)
+            // Some demo items may have no pathToDoc (e.g. tutorial items)
             if (this._demoItem.pathToDoc) {
                 this.appActions.fetchCode(id, this._demoItem.pathToDoc);
             }
 
-            //If the demo exposes a Reducer, create an isolated store for the demo to use.  This way the demo
-            //can act like a standalone application.
+            // If the demo exposes a Reducer, create an isolated store for the demo to use.  This way the demo
+            // can act like a standalone application.
             if (this._demo.Reducer) {
                 this._demoStore = Redux.applyMiddleware(thunk)(Redux.createStore)(this._demo.Reducer);
             }
@@ -231,35 +229,39 @@ class DemoApp extends React.Component {
             name = this._getDocumentationName(),
             path = this._demoItem.pathToSource,
             demoPath = this._demoItem.pathToDemoSource,
-            watch = _.pick(this.props.nav, "selectedSection", "selectedNode");
+            watch = _.pick(this.props.nav, "selectedSection", "selectedNode", "root");
 
         return (
-            <div className="components-container">
-                {
-                  /*
-                   * Header bar doesnt do anything interesting within this app, but normally the account menu would
-                   * be housed here.
-                   */
-                }
-                <HeaderBar {...this.props.header}
-                    siteTitle="UI Library"
-                    onItemValueChange={this.headerActions.toggleItem} />
-
-                {
-                  /*
-                   * This is the nav bar containing the demos
-                   */
-                }
-                <LeftNavBar {...this.props.nav}
-                    onItemValueChange={this.navActions.selectItem}
-                    onSectionValueChange={this.navActions.toggleSection} />
-
-                {
-                  /*
-                   * When an item is selected in the nav bar, the corresponding demo is looked up and rendered
-                   * here
-                   */
-                }
+            <AppFrame
+                autoSelectItemFromRoot={true}
+                autoSelectSectionFromItem={false}
+                autoSelectItemfromSection={true}
+                className="components-container"
+                oneSectionOnly={true}
+                headerBarProps={_.extend(this.props.header, {
+                    siteLogo: "uilib",
+                    tree: [
+                        {
+                            id: "help",
+                            iconClassName: "icon-help",
+                            url: this._getDocumentationUrl("index"),
+                            title: "Documentation",
+                            label: "JSoc"
+                        },
+                        {
+                            id: "user",
+                            iconClassName: "icon-account",
+                            children: [{ id: "cog", label: "Cog" }]
+                        }
+                    ]
+                })}
+                leftNavBarProps={this.props.nav}
+                navTree={this.props.nav.tree}
+                root={this.props.nav.root}
+                onRootChange={this.navActions.setRoot}
+                onItemChange={this.navActions.selectItem}
+                onSectionChange={this.navActions.toggleSection}
+            >
                 <div id="content">
                     <div className="components" data-id="components">
                         <DemoItem label={this._demoItem.label}
@@ -286,7 +288,7 @@ class DemoApp extends React.Component {
                     location={this.props.location}
                     onReplaceUrl={this.routerActions.replace}
                     watch={watch} />
-            </div>);
+            </AppFrame>);
     }
 }
 

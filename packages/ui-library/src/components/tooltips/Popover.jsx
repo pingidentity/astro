@@ -1,10 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ReactDOM from "react-dom";
 import classnames from "classnames";
 import _ from "underscore";
-import EventUtils from "../../util/EventUtils";
-const callIfOutsideOfContainer = EventUtils.callIfOutsideOfContainer;
+
+import popsOver from "../../util/behaviors/popsOver";
 
 /**
  * @class Popover
@@ -14,6 +13,8 @@ const callIfOutsideOfContainer = EventUtils.callIfOutsideOfContainer;
  *     To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
+ * @param {string} [triggerClassName]
+ *     CSS classes to set on the link that triggers the popover.
  *
  * @param {object|string} [label]
  *     A string or JSX object that serves as the trigger label.
@@ -27,82 +28,29 @@ const callIfOutsideOfContainer = EventUtils.callIfOutsideOfContainer;
  *     Callback to be triggered when trigger is clicked.
  **/
 
-class Popover extends React.Component {
+class PopoverBase extends React.Component {
     static displayName = "Popover";
 
     static propTypes = {
         "data-id": PropTypes.string,
+        children: PropTypes.node,
         className: PropTypes.string,
         label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-        placement: PropTypes.string,
-        open: PropTypes.bool,
+        onKeyDown: PropTypes.func,
         onToggle: PropTypes.func,
-        children: PropTypes.node
+        open: PropTypes.bool,
+        placement: PropTypes.string,
+        triggerClassName: PropTypes.string,
     };
 
     static defaultProps = {
         "data-id": "popover",
-        placement: "",
+        label: "Link",
+        onKeyDown: _.noop,
         onToggle: _.noop,
-        open: false,
-        label: "Link"
+        placement: "",
+        triggerClassName: ""
     };
-
-    _handleGlobalClick = e => {
-        // handle click outside of container
-        if (this.props.open) {
-            callIfOutsideOfContainer(
-                ReactDOM.findDOMNode(this.refs.content),
-                this.props.onToggle,
-                e
-            );
-        }
-    };
-
-    _handleGlobalKeyDown = e => {
-        // handle escape key
-        if (e.keyCode === 27 && this.props.open) {
-            callIfOutsideOfContainer(
-                ReactDOM.findDOMNode(this.refs.content),
-                this.props.onToggle,
-                e
-            );
-        }
-    };
-
-    _bindWindowsEvents = () => {
-        // bind once current execution stack is cleared (e.g. current window event processed).
-        // to avoid possible false positive triggers if tooltip was open as result of click outside of it (e.g. some link outside)
-        _.defer(
-            function() {
-                window.addEventListener("click", this._handleGlobalClick);
-                window.addEventListener("keydown", this._handleGlobalKeyDown);
-            }.bind(this)
-        );
-    };
-
-    _removeWindowsEvents = () => {
-        window.removeEventListener("click", this._handleGlobalClick);
-        window.removeEventListener("keydown", this._handleGlobalKeyDown);
-    };
-
-    componentWillReceiveProps(nextProps) {
-        if (!this.props.open && nextProps.open) {
-            this._bindWindowsEvents();
-        } else if (this.props.open && !nextProps.open) {
-            this._removeWindowsEvents();
-        }
-    }
-
-    componentDidMount() {
-        if (this.props.open) {
-            this._bindWindowsEvents();
-        }
-    }
-
-    componentWillUnmount() {
-        this._removeWindowsEvents();
-    }
 
     /*
      * Check if placement contains a word (like top, right, or left)
@@ -122,6 +70,8 @@ class Popover extends React.Component {
         return modifiers;
     }
 
+    renderContent = () => this.props.children;
+
     /*
      * Return of content based on props.open.
      *
@@ -136,7 +86,7 @@ class Popover extends React.Component {
 
         return this.props.open ? (
             <div className="popover__container">
-                <div className={frameClassName}>{this.props.children}</div>
+                <div className={frameClassName}>{this.renderContent()}</div>
             </div>
         ) : null;
     };
@@ -149,11 +99,19 @@ class Popover extends React.Component {
         );
 
         return (
-            <div ref="content" date-id={this.props["data-id"]} className={containerClassName}>
+            <div className={containerClassName} data-id={this.props["data-id"]} ref="content">
                 <a
+                    className={classnames(
+                        "popover__trigger",
+                        this.props.triggerClassName,
+                        {
+                            active: this.props.open
+                        }
+                    )}
                     data-id={`${this.props["data-id"]}-trigger`}
-                    className="popover__target"
                     onClick={this.props.onToggle}
+                    onKeyDown={this.props.onKeyDown}
+                    title={this.props.title}
                 >
                     {this.props.label}
                 </a>
@@ -162,5 +120,8 @@ class Popover extends React.Component {
         );
     }
 }
+
+const Popover = popsOver(PopoverBase);
+Popover.Base = PopoverBase;
 
 module.exports = Popover;

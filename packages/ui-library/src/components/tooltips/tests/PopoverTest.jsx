@@ -1,14 +1,17 @@
+import { handleOpen } from "../../../util/behaviors/popsOver.js";
+
 window.__DEV__ = true;
 
 jest.dontMock("../Popover");
 jest.dontMock("../../../util/EventUtils.js");
 jest.dontMock("../../../util/Utils.js");
 
-describe("PopoverMenu", function() {
+describe("Popover", function() {
     var React = require("react"),
         ReactDOM = require("react-dom"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
+        KeyboardUtils = require("../../../util/KeyboardUtils"),
         Popover = require("../Popover"),
         Wrapper = TestUtils.UpdatePropsWrapper,
         _ = require("underscore");
@@ -56,7 +59,7 @@ describe("PopoverMenu", function() {
         );
         var popoverTarget = TestUtils.scryRenderedDOMNodesWithClass(
             component,
-            "popover__target"
+            "popover__trigger"
         );
 
         expect(popoverTarget.length).toBe(1);
@@ -116,7 +119,7 @@ describe("PopoverMenu", function() {
         expect(withRightClass.length).toBe(1);
     });
 
-    it("notifies toggle when clicking target", function() {
+    it("notifies toggle when clicking trigger", function() {
         var callback = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
@@ -129,7 +132,7 @@ describe("PopoverMenu", function() {
 
         var target = TestUtils.findRenderedDOMNodeWithClass(
             component,
-            "popover__target"
+            "popover__trigger"
         );
 
         expect(callback).not.toBeCalled(); //make sure callback was NOT triggered
@@ -212,7 +215,7 @@ describe("PopoverMenu", function() {
         ).toBe(true);
     });
 
-    it("unregister listener when transitioning from open to closed", function() {
+    it("unregisters listener when transitioning from open to closed", function() {
         var component = ReactTestUtils.renderIntoDocument(
             <Wrapper type={Popover} label="hello" open={true}>
                 <div className="content">Popover</div>
@@ -229,7 +232,7 @@ describe("PopoverMenu", function() {
         ).toBe(true);
     });
 
-    it("register listener when transitioning from closed to open", function() {
+    it("registers listener when transitioning from closed to open", function() {
         var component = ReactTestUtils.renderIntoDocument(
             <Wrapper type={Popover} label="hello" open={false}>
                 <div className="content">Popover</div>
@@ -243,6 +246,34 @@ describe("PopoverMenu", function() {
         ).toBe(true);
         expect(
             TestUtils.mockCallsContains(window.addEventListener, "keydown")
+        ).toBe(true);
+    });
+
+    it("registers and unregisters listener when transitioning -- stateful", function() {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Wrapper type={Popover} label="hello">
+                <div className="content">Popover</div>
+            </Wrapper>
+        );
+
+        var trigger = TestUtils.findRenderedDOMNodeWithClass(
+            component,
+            "popover__trigger"
+        );
+        ReactTestUtils.Simulate.click(trigger, {});
+        expect(
+            TestUtils.mockCallsContains(window.addEventListener, "click")
+        ).toBe(true);
+        expect(
+            TestUtils.mockCallsContains(window.addEventListener, "keydown")
+        ).toBe(true);
+
+        ReactTestUtils.Simulate.click(trigger, {});
+        expect(
+            TestUtils.mockCallsContains(window.removeEventListener, "click")
+        ).toBe(true);
+        expect(
+            TestUtils.mockCallsContains(window.removeEventListener, "keydown")
         ).toBe(true);
     });
 
@@ -294,14 +325,30 @@ describe("PopoverMenu", function() {
             target: { parentNode: document.body },
             stopPropagation: jest.genMockFunction(),
             preventDefault: jest.genMockFunction(),
-            keyCode: 27
+            keyCode: KeyboardUtils.KeyCodes.ESC
+        };
+        var eWrong = {
+            target: { parentNode: document.body },
+            stopPropagation: jest.genMockFunction(),
+            preventDefault: jest.genMockFunction(),
+            keyCode: 2
         };
 
+        expect(callback).not.toBeCalled();
+        handler(eWrong);
         expect(callback).not.toBeCalled();
 
         //click outside
         handler(e);
 
+        expect(callback).toBeCalled();
+    });
+
+    it("call handleOpen", function() {
+        var callback = jest.genMockFunction();
+
+        expect(callback).not.toBeCalled();
+        handleOpen({ onOpen: callback });
         expect(callback).toBeCalled();
     });
 });

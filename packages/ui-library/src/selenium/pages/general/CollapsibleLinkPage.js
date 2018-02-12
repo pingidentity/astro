@@ -47,7 +47,7 @@ var CollapsibleLinkDemoPage = Object.create(HomePage, {
     openCollapsibleLinkDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Components", "CollapsibleLink");
+            this.navigateToPath("Components", "Misc", "CollapsibleLink");
         }
     }
 });

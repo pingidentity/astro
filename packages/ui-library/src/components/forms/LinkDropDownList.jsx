@@ -25,7 +25,9 @@ var React = require("react"),
  *
  * @param {string} [data-id=toggle]
  *     The "data-id" value for top-level HTML container.
- * @param {string} [className]
+ * @param {object|string} [label]
+ *     A string or JSX object that serves as the trigger label.
+* @param {string} [className]
  *     CSS classes to be set on the top-level HTML container.
  *
  * @param {boolean} [stateless]
@@ -72,7 +74,9 @@ class LinkDropDownListStateless extends React.Component {
     static propTypes = {
         className: PropTypes.string,
         "data-id": PropTypes.string,
-        label: PropTypes.string,
+        label: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.object]),
         onClick: PropTypes.func,
         onToggle: PropTypes.func,
         open: PropTypes.bool,
@@ -145,7 +149,7 @@ class LinkDropDownListStateful extends React.Component {
         options: PropTypes.arrayOf(PropTypes.object).isRequired,
         selectedOption: PropTypes.object
     };
-    
+
     static defaultProps = {
         onToggle: _.noop
     };

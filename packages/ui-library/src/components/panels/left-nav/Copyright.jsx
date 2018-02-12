@@ -5,8 +5,10 @@ var React = require("react");
  * @class Copyright
  *
  * @desc Renders the copyright block
- * @param {boolean} [pingoneLogo=true]
+ * @param {boolean} [pingoneLogo=false]
  *          Determines whether to show the PingOne Logo
+ * @param {boolean} [updated=false]
+ *          Determines whether to show the default Ping Logo
  * @param {string} [logoSrc]
  *          Site or service specific logo source
  *
@@ -14,11 +16,13 @@ var React = require("react");
 class Copyright extends React.Component {
     static propTypes = {
         pingoneLogo: PropTypes.bool,
-        logoSrc: PropTypes.string
+        logoSrc: PropTypes.string,
+        updated: PropTypes.bool
     };
 
     static defaultProps = {
-        pingoneLogo: false
+        pingoneLogo: false,
+        updated: false
     };
 
     componentWillMount() {
@@ -65,6 +69,13 @@ class Copyright extends React.Component {
                 </span>);
             /*eslint-enable max-len*/
         }
+        else if (this.props.updated) {
+            return (
+                <span className="logo-container" data-id="logo-container">
+                    <div className="logo" data-id="copyright-logo" />
+                </span>
+            );
+        }
         else {
             return "";
         }
@@ -73,9 +84,7 @@ class Copyright extends React.Component {
     render() {
         return (
             <div className="copyright" data-id="copyright">
-
                 { this._getLogo() }
-
                 Copyright &copy; 2003-{this._year}
                 <br />Ping Identity Corporation
                 <br />All rights reserved

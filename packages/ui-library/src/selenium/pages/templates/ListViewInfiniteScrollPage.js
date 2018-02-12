@@ -10,7 +10,7 @@ var ListViewInfiniteScrollDemoPage = Object.create(HomePage, {
             this.click(this.formatXpath("//li[@data-id='tabbed-sections-{index}']", { index: index }));
         }
     },
-    
+
     /**
      * @desc this function is to get Search field
      * @private

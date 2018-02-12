@@ -5,7 +5,8 @@ var React = require("react"),
     ColorPicker = require("../../../components/general/ColorPicker"),
     ListView = require("../../../templates/list-view"),
     FormDropDownList = require("../../../components/forms/FormDropDownList"),
-    Translator = require("../../../util/i18n/Translator.js");
+    Translator = require("../../../util/i18n/Translator.js"),
+    _ = require("underscore");
 
 var LANGUAGES = [
     {
@@ -25,7 +26,7 @@ class UILibrary101 extends React.Component {
 
         this.state = {
             pickerColor: "#fff",
-            currentLanguage: LANGUAGES.find(function (item) {
+            currentLanguage: _.find(LANGUAGES, function (item) {
                 return item.value === Translator.currentLanguage;
             })
         };

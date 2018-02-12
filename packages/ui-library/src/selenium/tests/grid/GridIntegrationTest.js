@@ -1,7 +1,7 @@
 var GridPage = require("../../pages/grid/GridPage.js");
 
-describe("SelectText Integration", function () {
-    
+describe("Grid Page Integration", function () {
+
     beforeEach(function () {
         GridPage.openGridDemoPage();
     });
@@ -9,7 +9,7 @@ describe("SelectText Integration", function () {
     afterAll(function (done) {
         GridPage.end(done);
     });
-    
+
     /**
      * SCENARIO: Should be clickable for next, previous page, expand or collapse row
      * GIVEN: Goes to component Grid

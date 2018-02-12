@@ -83,6 +83,34 @@ exports.setCollapsible = exports.set.bind(null, "collapsible");
 exports.setAutocollapse = exports.set.bind(null, "autocollapse");
 
 /**
+* @function
+* @alias Actions.setUpdated
+* @memberof LeftNavBar
+* @desc Sets whether or not updated should be enabled for the LeftNavBar.
+*
+* @param {boolean} useUpdated
+*    Whether or not updated should be used.
+*
+* @return {object}
+*    The action.
+*/
+exports.setUpdated = exports.set.bind(null, "updated");
+
+/**
+* @function
+* @alias Actions.setRoot
+* @memberof LeftNavBar
+* @desc Sets the id of the root node of the tree
+*
+* @param {string} root
+*    Whether or not updated should be used.
+*
+* @return {object}
+*    The action.
+*/
+exports.setRoot = exports.set.bind(null, "root");
+
+/**
  * @alias Actions.toggleSection
  * @memberof LeftNavBar
  * @desc this will toggle the specified id and leave all other sections expanded state as is.

@@ -24,7 +24,8 @@ select {
         display: none;
     }
     &::-ms-value {
-        color: $color-midnight;
+        // Not sure what this rule was for. It makes problems for overriding input styles in IE. -jfal
+        // color: $color-midnight;
         background: none;
     }
 }

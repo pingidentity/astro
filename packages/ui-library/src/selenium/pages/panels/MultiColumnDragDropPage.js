@@ -288,7 +288,7 @@ var MultiColumnDragDropDemoPage = Object.create(HomePage, {
     openMultiColumnDragDropDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Panels", "MultiColumnDragDrop");
+            this.navigateToPath("Components", "Panels", "MultiColumnDragDrop");
             this.waitForExist(this.xpathMultiColumnDragDropDemoPage);
         }
     }

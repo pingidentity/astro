@@ -21,7 +21,7 @@ var React = require("react"),
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
  *
- * @param {string} [title]
+ * @param {object|string} [title]
  *     Text of link.
  * @param {string} [toggledTitle]
  *     Text of link when state change. When toggledTitle is specified, title becomes title of link if link is
@@ -50,7 +50,9 @@ class CollapsibleLink extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
-        title: PropTypes.string,
+        title: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.object]),
         toggledTitle: PropTypes.string,
         arrowPosition: PropTypes.oneOf(["left", "right"]),
         expanded: PropTypes.bool,

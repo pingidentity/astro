@@ -1,10 +1,13 @@
 var PropTypes = require("prop-types");
 var React = require("react"),
-    ReactDOM = require("react-dom"),
-    EventUtils = require("../../../util/EventUtils.js"),
-    Utils = require("../../../util/Utils.js"),
     classnames = require("classnames"),
     _ = require("underscore");
+
+var PopoverNavMenu = require("../../tooltips/PopoverNavMenu"),
+    HeaderNav = require("./HeaderNav"),
+    EnvironmentSelector = require("./EnvironmentSelector"),
+    MarketSelector = require("./MarketSelector"),
+    Logo = require("./logos/Logo");
 
 /**
  * @typedef HeaderBar~navigationLink
@@ -27,6 +30,63 @@ var React = require("react"),
  */
 
 /**
+ * @class HeaderBar
+ * @desc HeaderBar provides what you need to show a styled top bar with logos, links, and a menu.
+ *
+ * @param {string} [data-id="header-bar"]
+ *          To define the base "data-id" value for the top-level HTML container.
+ * @param {string|object} [additionalContent]
+ *          Content to display to the right of the "siteLogo" and "siteTitle"
+ * @param {array} [environmentOptions]
+ *          Choices for environment in the environment selector
+ * @param {string|number} [environmentSelected]
+ *          Current environment selected by the environment selector
+ * @param {boolean} [inline=false]
+ *          When true, the header bar is positioned inline with the content, not at the top of the page
+ * @param {array} [navOptions]
+ *          Choices in the header nav
+ * @param {string|number} [navSelected]
+ *          Active item in the header nav
+ * @param {HeaderBar~onEnvironmentChange} [onEnvironmentChange]
+ *          Callback for when the selected environment changes.
+ * @param {HeaderBar~onItemValueChange} [onItemValueChange]
+ *          Callback which will be executed when a header link is clicked.  The id
+ *          of the nav item will be passed back as the first parameter
+ * @param {HeaderBar~onMenuValueChange} [onMenuValueChange]
+ *          Callback which will be executed when a menu item is clicked.  The id
+ *          of the nav item and the id of the menu item will be passed back as parameters 1 and 2.
+ * @param {HeaderBar~onNavChange} [onNavChange]
+ *          Callback for when the selected nav item changes.
+ * @param {HeaderBar~onMarketChange} [onMarketChange]
+ *          Callback for when the selected market changes.
+ * @param {string} [openNode]
+ *          The id of the currently open node
+ * @param {array} [marketOptions]
+ *          Choices for market in the market selector
+ * @param {string|number} [marketSelected]
+ *          Current market selected by the market selector
+ * @param {string} [siteLogo]
+ *          Site or service specific logo
+ * @param {string|object} [siteTitle]
+ *          Content to display to the right of the "siteLogo" and to the left of "additionalContent"
+ * @param {HeaderBar~navigationLink[]} tree
+ *          The data structure of the menus of the headerbar
+ * @param {array} [userMenu]
+ *          Alternative to the tree prop. If you just want a single user menu, provide the options here
+ * @param {string} [userName]
+ *          Used as the label for the user menu
+ * @param {boolean} [updated]
+ *          Flag to explicitly indicate you're using the new style of the header bar. (Without the Ping logo)
+ *
+ **/
+
+/**
+ * @callback HeaderBar~onEnvironmentChange
+ * @param {string} environment
+ *          Environment id.
+ */
+
+/**
  * @callback HeaderBar~onItemValueChange
  * @desc The id of the nav item will be passed back as the first parameter
  * @param {string} id
@@ -43,109 +103,98 @@ var React = require("react"),
  */
 
 /**
- * @class HeaderBar
- * @desc HeaderBar provides what you need to show a styled top bar with logos, links, and a menu.
- *
- * @param {string} [data-id="header-bar"]
- *          To define the base "data-id" value for the top-level HTML container.
- * @param {string} [logo]
- *          Leftmost generic company logo or branded logo
- * @param {string|object} [additionalContent]
- *          Content to display to the right of the "siteLogo" and "siteTitle"
- * @param {string} [siteLogo]
- *          Site or service specific logo
- * @param {string|object} [siteTitle]
- *          Content to display to the right of the "siteLogo" and to the left of "additionalContent"
- * @param {HeaderBar~navigationLink[]} tree
- *          The data structure of the menus of the headerbar
- * @param {string} [openNode]
- *          The id of the currently open node
- * @param {HeaderBar~onItemValueChange} [onItemValueChange]
- *          Callback which will be executed when a header link is clicked.  The id
- *          of the nav item will be passed back as the first parameter
- * @param {HeaderBar~onMenuValueChange} [onMenuValueChange]
- *          Callback which will be executed when a menu item is clicked.  The id
- *          of the nav item and the id of the menu item will be passed back as parameters 1 and 2.
- *
- * @example
- * var headerTree = { id: "help", title: "Help" },
- *                  { id: "account", label: "John Doe",
- *                          children: [{ id: "globe", title: "Internet", label: "Internet", url: "http://google.com" }] }
- *
- * <HeaderBar tree={headerTree} label="Basic UI Library App" onItemValueChange={this.headerActions.toggleItem} />
-**/
-module.exports = class extends React.Component {
+ * @callback HeaderBar~onNavChange
+ * @param {string} currentNav
+ *          Nav id.
+ */
+
+/**
+ * @callback HeaderBar~onMarketChange
+ * @param {string} market
+ *          Market id.
+ */
+
+class HeaderBar extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         additionalContent: PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.object
         ]),
-        logo: PropTypes.string,
-        openNode: PropTypes.string,
-        siteLogo: PropTypes.string,
-        siteTitle: PropTypes.oneOfType([
+        environmentOptions: PropTypes.arrayOf(PropTypes.object),
+        environmentSelected: PropTypes.oneOfType([
             PropTypes.string,
-            PropTypes.object
+            PropTypes.number
         ]),
-        tree: PropTypes.arrayOf(PropTypes.object),
+        inline: PropTypes.bool,
+        navOptions: PropTypes.arrayOf(PropTypes.object),
+        navSelected: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number
+        ]),
+        onEnvironmentChange: PropTypes.func,
+        onItemValueChange: PropTypes.func,
         onMenuValueChange: PropTypes.func,
-        onItemValueChange: PropTypes.func
+        onNavChange: PropTypes.func,
+        onMarketChange: PropTypes.func,
+        openNode: PropTypes.string,
+        marketOptions: PropTypes.arrayOf(PropTypes.object),
+        marketSelected: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number
+        ]),
+        siteLogo: PropTypes.string,
+        siteTitle: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+        tree: PropTypes.arrayOf(PropTypes.object),
+        userMenu: PropTypes.arrayOf(PropTypes.object),
+        userName: PropTypes.string,
+        updated: PropTypes.bool
     };
 
     static defaultProps = {
+        inline: false,
+        onEnvironmentChange: _.noop,
         onItemValueChange: _.noop,
+        onNavChange: _.noop,
         onMenuValueChange: _.noop,
-        "data-id": "header-bar"
+        onMarketChange: _.noop,
+        "data-id": "header",
+        updated: false
     };
 
-    componentWillMount() {
-        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
-        /* istanbul ignore if  */
-        if (!Utils.isProduction() && this.props.label) {
-            /* istanbul ignore next  */
-            throw new Error(Utils.deprecatePropError("label", "siteTitle"));
-        }
-    }
-
     /**
      * @method
-     * @name HeaderBar#componentDidMount
-     * @desc Upon mounting, register a callback for global click events to be used to hide any visible menu items when
-     * the user clicks outside of it
-     */
-    componentDidMount() {
-        window.addEventListener("click", this._handleGlobalClick);
-    }
-
-    /**
-     * @method
-     * @name HeaderBar#componentWillUnmount
-     * @desc Before unmounting, unregister the global click listener
-     */
-    componentWillUnmount() {
-        window.removeEventListener("click", this._handleGlobalClick);
-    }
-
-    /**
-     * @method
-     * @name HeaderBar#_handleGlobalClick
-     * @param {event} e - Event
+     * @name HeaderBar#_getNavItem
+     * @param {object} item
      * @private
-     * @desc The function which gets called on window clicks to determine if the menu should be hidden
+     * @desc Creates the NavItem component based on the item object
      */
-    _handleGlobalClick = (e) => {
-        //if no menus are open, do nothing
-        if (!this.props.openNode) {
-            return;
+    _getNavItem = item => {
+        var props = _.defaults(
+            {
+                key: item.id,
+                id: item.id,
+                "data-id": item.id,
+                onMenuToggle: this
+                    ._handleMenuToggle,
+                onMenuValueChange: this.props
+                    .onMenuValueChange
+            },
+            item
+        );
+        if (this.props.openNode !== undefined) {
+            props.open =
+                item.id === this.props.openNode
+                    ? true
+                    : false;
         }
 
-        //if there is a menu open and we receive a click from outside of the nav container, then close it
-        EventUtils.callIfOutsideOfContainer(
-            ReactDOM.findDOMNode(this.refs.navContainer),
-            this.props.onItemValueChange.bind(null, ""),
-            e);
-    };
+        return (
+            <NavItem {...props}>
+                {item.children}
+            </NavItem>
+        ); //eslint-disable-line no-use-before-define
+    }
 
     /**
      * @method
@@ -155,52 +204,120 @@ module.exports = class extends React.Component {
      * @desc Instead of creating partials using bind, we have one function which will pass back the id of
      * the clicked on nav item.  There is a performance overhead of creating partials on every render.
      */
-    _handleNavClick = (e) => {
-        this.props.onItemValueChange(e.currentTarget.getAttribute("data-id"));
-    };
+    _handleMenuToggle = id => this.props.onItemValueChange(id);
+
+    /**
+     * @method
+     * @name HeaderBar#_isUpdated
+     * @private
+     * @desc Is this the updated version of the component or the legacy?
+     */
+    _isUpdated = () =>
+        this.props.environmentOptions ||
+        this.props.navOptions ||
+        this.props.marketOptions ||
+        this.props.updated
+            ? true
+            : false;
 
     render() {
+        var tree = this.props.tree;
+        if (this.props.tree === undefined && this.props.userMenu) {
+            tree = [
+                {
+                    id: "account",
+                    label: this.props.userName,
+                    children: this.props.userMenu
+                }
+            ];
+        }
+
         return (
-            <div id="header" data-id={this.props["data-id"]}>
-                <div className="logo" data-id="header-logo" />
+            <div
+                className="header-bar"
+                id={!this.props.inline ? "header" : ""}
+                data-id={this.props["data-id"]}
+            >
+                <div className="header-bar__left">
+                    {!this._isUpdated() && (
+                        <div
+                            className="header-bar__ping-logo"
+                            data-id="header-logo"
+                        />
+                    )}
 
-                {this.props.siteLogo &&
-                    <img className="site-logo" data-id="header-site-logo" src={this.props.siteLogo} />
-                }
-                {this.props.siteTitle &&
-                    <span className="site-title" data-id={this.props["data-id"] + "-site-title"}>
-                        {this.props.siteTitle}
-                    </span>
-                }
-                {this.props.additionalContent &&
-                    <span className="additional-content" data-id={this.props["data-id"] + "-additional-content"}>
-                        {this.props.additionalContent}
-                    </span>
-                }
-                <ul className="product-nav" ref="navContainer">
+                    {this.props.siteLogo &&
+                        (_.contains(["pingone", "uilib", "pingaccess"], this.props.siteLogo) ? (
+                            <Logo
+                                className="header-bar__site-logo"
+                                data-id={this.props["data-id"] + "-site-logo"}
+                                id={this.props.siteLogo}
+                            />
+                        ) : (
+                            <img
+                                alt="Logo"
+                                className="header-bar__site-logo"
+                                data-id={this.props["data-id"] + "-site-logo"}
+                                src={this.props.siteLogo}
+                            />
+                        ))}
+                    {this.props.siteTitle && (
+                        <span
+                            className="header-bar__site-title"
+                            data-id={this.props["data-id"] + "-site-title"}
+                        >
+                            {this.props.siteTitle}
+                        </span>
+                    )}
+                    {this.props.additionalContent && (
+                        <span
+                            className="header-bar__additional-content"
+                            data-id={
+                                this.props["data-id"] + "-additional-content"
+                            }
+                        >
+                            {this.props.additionalContent}
+                        </span>
+                    )}
+                    {this.props.marketOptions && (
+                        <MarketSelector
+                            options={this.props.marketOptions}
+                            market={this.props.marketSelected}
+                            onMarketChange={this.props.onMarketChange}
+                        />
+                    )}
+                </div>
+                <div className="header-bar__center">
+                    {this.props.navOptions && (
+                        <HeaderNav
+                            options={this.props.navOptions}
+                            currentNav={this.props.navSelected}
+                            onNavChange={this.props.onNavChange}
+                        />
+                    )}
+                </div>
+                <div className="header-bar__right">
+                    {this.props.environmentOptions && (
+                        <EnvironmentSelector
+                            options={this.props.environmentOptions}
+                            environment={this.props.environmentSelected}
+                            onEnvironmentChange={this.props.onEnvironmentChange}
+                        />
+                    )}
+
                     {
-                        this.props.tree.map(function (item) {
-                            var props = _.defaults({
-                                key: item.id,
-                                id: item.id,
-                                "data-id": item.id,
-                                onClick: this._handleNavClick,
-                                onMenuValueChange: this.props.onMenuValueChange,
-                                showMenu: item.id === this.props.openNode
-                            }, item);
-
-                            return (
-                                <NavItem {...props}>
-                                    {item.children}
-                                </NavItem>
-                            ); //eslint-disable-line no-use-before-define
-                        }.bind(this))
+                        <ul
+                            className="product-nav"
+                            data-id={this.props["data-id"] + "-product-nav"}
+                        >
+                            {_.map(tree, this._getNavItem)}
+                        </ul>
                     }
-                </ul>
+                </div>
             </div>
         );
     }
-};
+}
 
 /**
  * @class NavItem
@@ -222,70 +339,127 @@ module.exports = class extends React.Component {
  *          The className for the menu icon. Takes priority over the iconSrc prop.
  * @param {string} [iconSrc]
  *          Allows the passage of an image url (most likely an svg) for the icon.
- * @param {boolean} [showMenu=false]
- *          Menu state, while this is defined, it's managed internally to this component and doesn't require the
- *          developer to do anything when they use the headerbar.
+ * @param {boolean} [open=false]
+ *          Menu state while this is defined, if it's not defined, it's managed internally to this component and doesn't
+ *          require the developer to do anything when they use the headerbar.
  */
 class NavItem extends React.Component {
     static propTypes = {
         id: PropTypes.string.isRequired,
         "data-id": PropTypes.string,
+        label: PropTypes.string,
         title: PropTypes.string,
         target: PropTypes.string,
         url: PropTypes.string,
         iconClassName: PropTypes.string,
         iconSrc: PropTypes.string,
-        showMenu: PropTypes.bool,
-        children: PropTypes.array
+        onClick: PropTypes.func,
+        open: PropTypes.bool,
+        children: PropTypes.array,
+        onMenuToggle: PropTypes.func,
+        onMenuValueChange: PropTypes.func
     };
 
     static defaultProps = {
         target: "_blank",
-        "data-id": "nav-item"
+        "data-id": "nav-item",
+        onClick: _.noop,
+        onMenuToggle: _.noop,
+        onMenuValueChange: _.noop
     };
 
-    _handleMenuClick = (e) => {
-        this.props.onMenuValueChange(e.currentTarget.getAttribute("data-id"), this.props.id);
+    /**
+     * @method
+     * @name NavItem#_handleMenuToggle
+     * @private
+     * @desc Toggling this menu
+     */
+    _handleMenuToggle = () => {
+        this.props.onMenuToggle(this.props.id);
     };
 
-    _getIcon = (item) => {
-        if (item.iconClassName) {
+    /**
+     * @method
+     * @name NavItem#_handleMenuClick
+     * @param {string|number} value
+     * @private
+     * @desc Handle clicking on a menu item (or on the main item itself if it's not a menu)
+     */
+    _handleMenuClick = value => {
+        this.props.onMenuValueChange(
+            value,
+            this.props.id
+        );
+    };
+
+    /**
+     * @method
+     * @name NavItem#_getIcon
+     * @param {object} item
+     * @private
+     * @desc Provide the appropriate markup for an icon based on the item's props
+     */
+    _getIcon = item => {
+        if (item.iconSrc) {
+            return <img src={item.iconSrc} className="product-nav__image icon" />;
+        } else {
+            let iconClassName = item.iconClassName;
+            if (item.icon) {
+                iconClassName = "icon-" + item.icon;
+            }
             return (
-                <span className={classnames("icon", item.iconClassName)}/>
-            );
-        }
-        else if (item.iconSrc) {
-            return (
-                <img src={item.iconSrc} className="icon"/>
+                <span
+                    className={classnames(
+                        "product-nav__icon",
+                        "icon",
+                        iconClassName || "icon-"+item.id
+                    )}
+                />
             );
         }
     };
+
+    /**
+     * @method
+     * @name NavItem#_getMenuChildren
+     * @private
+     * @desc Get the options for a menu along with a callback
+     */
+    _getMenuChildren = () => this.props.children.map(child => _.defaults(child, {
+        "data-id": child.id,
+        onClick: () => this._handleMenuClick(child.id)
+    }));
 
     render() {
-
         return (
-            <li>
-                 <a onClick={this.props.onClick} href={this.props.url}
-                        data-id={this.props["data-id"] || this.props.id}
+            <li className="product-nav__item">
+                {this.props.children ? (
+                    <PopoverNavMenu
+                        data-id={this.props["data-id"]}
+                        label={this._getIcon(this.props)}
+                        title={this.props.label}
+                        placement="left"
+                        items={this._getMenuChildren()}
+                        open={this.props.open}
+                        onOpen={this._handleMenuToggle}
+                        onClose={this._handleMenuToggle}
+                        triggerClassName="product-nav__menu-trigger"
+                    />
+                ) : (
+                    <a
+                        className="product-nav__link"
+                        onClick={this.props.onClick}
+                        href={this.props.url}
+                        data-id={this.props["data-id"]}
                         title={this.props.title}
-                        target={this.props.target}>
-                     {this._getIcon(this.props)}
-                 </a>
-                 { this.props.children && this.props.showMenu &&
-                     <ul className="product-menu show">
-                     {
-                        this.props.children.map(function (item) {
-                            return (
-                                <li key={item.id} onClick={this._handleMenuClick} data-id={item.id}>
-                                    <a href={item.url}>
-                                        {this._getIcon(item)}
-                                        <span>{item.label}</span>
-                                    </a>
-                                </li>);
-                        }.bind(this))
-                     }
-                     </ul>
-                 }
-            </li>);
+                        target={this.props.target}
+                    >
+                        {this._getIcon(this.props)}
+                    </a>
+                )}
+            </li>
+        );
     }
 }
+
+module.exports = HeaderBar;

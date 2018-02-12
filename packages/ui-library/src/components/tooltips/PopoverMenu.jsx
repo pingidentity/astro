@@ -3,40 +3,49 @@ import PropTypes from "prop-types";
 import Popover from "./Popover";
 import _ from "underscore";
 
-const PopoverMenu = props => {
-    return (
-        <Popover label="Trigger" {...props}>
-            {_.map(props.buttons, (button, i) => {
-                const handleClick = () => {
-                    if (button.onClick) {
-                        button.onClick();
-                    }
-                    props.onToggle();
-                };
+import popsOver from "../../util/behaviors/popsOver";
 
-                return (
-                    <button
-                        data-id={`${props["data-id"]}-button-${i}`}
-                        key={button.label}
-                        className="button-menu__button"
-                        onClick={handleClick}
-                    >
-                        {button.label}
-                    </button>
-                );
-            })}
-        </Popover>
+const PopoverBase = Popover.Base;
+
+class PopoverMenuBase extends PopoverBase {
+
+    static propTypes = _.extend(PopoverBase.propTypes,
+        {
+            items: PropTypes.array,
+            buttons: PropTypes.array
+        });
+
+    static defaultProps = _.extend(PopoverBase.defaultProps,
+        {
+            "data-id": "popover-menu",
+            items: [],
+            buttons: []
+        });
+
+    renderItem = (item, handleClick, index) => (
+        <button
+            data-id={`${this.props["data-id"]}-button-${index}`}
+            key={item.label}
+            className="button-menu__button"
+            onClick={handleClick}
+        >
+            {item.label}
+        </button>
     );
-};
 
-PopoverMenu.propTypes = {
-    "data-id": PropTypes.string,
-    buttons: PropTypes.array,
-    onToggle: PropTypes.func
-};
+    renderContent = () => _.map(_.union(this.props.items, this.props.buttons), (item, index) => {
+        const handleClick = () => {
+            if (item.onClick) {
+                item.onClick();
+            }
+            this.props.onClose();
+        };
 
-PopoverMenu.defaultProps = {
-    "data-id": "popover-menu"
-};
+        return this.renderItem(item, handleClick, index);
+    });
+}
 
-export default PopoverMenu;
+const PopoverMenu = popsOver(PopoverMenuBase);
+PopoverMenu.Base = PopoverMenuBase;
+
+module.exports = PopoverMenu;

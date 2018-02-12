@@ -99,7 +99,7 @@ var DetailsTooltipDemoPage = Object.create(HomePage, {
             this.click("//span[@data-id='details-close']");
         }
     },
-    
+
     /**
      * @desc this function is to scroll page to top
      */
@@ -109,14 +109,14 @@ var DetailsTooltipDemoPage = Object.create(HomePage, {
             this.waitForExist(this.xpathContentPage);
         }
     },
-    
+
     /**
      * @desc this function open the details tooltip page
      */
     openDetailsTooltipDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Components", "DetailsTooltip");
+            this.navigateToPath("Components", "Misc", "DetailsTooltip");
         }
     }
 });
