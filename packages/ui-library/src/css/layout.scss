@@ -7,20 +7,23 @@ $layout-nav-width-offset: 15px;
 .logo-pingone {
     background-image: url('#{$img-path}logo-pingone.svg');
     background-repeat: no-repeat;
+    background-size: contain;
     height: 21px;
     width: 76px;
 }
 .logo-pingaccess {
     background-image: url('#{$img-path}logo-pingaccess.svg');
     background-repeat: no-repeat;
+    background-size: contain;
     height: 21px;
     width: 95px;
 }
 .logo-uilib {
     background-image: url('#{$img-path}logo-uilibrary.svg');
     background-repeat: no-repeat;
-    height: 25px;
-    width: 82px;
+    background-size: contain;
+    height: 29px;
+    width: 101px;
 }
 
 
