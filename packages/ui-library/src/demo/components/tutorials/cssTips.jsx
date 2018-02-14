@@ -27,11 +27,13 @@ const COLORS = [
     },
     {
         name: "blue-grey",
-        value: "#9bacb4",
+        value: "#9ba9b8",
+        deprecatedValue: "#9bacb4",
     },
     {
         name: "chilly",
-        value: "#e3eaed",
+        value: "#dae2e7",
+        deprecatedValue: "#e3eaed",
     },
     {
         name: "cinder-block",
@@ -47,7 +49,8 @@ const COLORS = [
     },
     {
         name: "elephant",
-        value: "#929aa1",
+        value: "#93999f",
+        deprecatedValue: "#929aa1",
     },
     {
         name: "elderly",
@@ -67,7 +70,8 @@ const COLORS = [
     },
     {
         name: "rabbit-fur",
-        value: "#d1d3d4",
+        value: "#c5cfd7",
+        deprecatedValue: "#d1d3d4",
     },
     {
         name: "required-yellow",
@@ -75,7 +79,8 @@ const COLORS = [
     },
     {
         name: "rhino",
-        value: "#9ea5a8",
+        value: "#9da2a8",
+        deprecatedValue: "#9ea5a8",
     },
     {
         name: "slate",
@@ -91,7 +96,8 @@ const COLORS = [
     },
     {
         name: "stratus",
-        value: "#bcbdbf",
+        value: "#afb4b8",
+        deprecatedValue: "#bcbdbf",
     },
     {
         name: "success",
@@ -435,6 +441,11 @@ class cssTips extends React.Component {
                 />
 
                 <h2>Colors</h2>
+                <p>
+                    Deprecated colors are crossed out. Some colors have been updated
+                    with slightly different values. Their former values are shown
+                    crossed out.
+                </p>
                 {
                     _.map(_.sortBy(COLORS, color => Color(color.value).luminosity()),
                         (sorted) => {
@@ -469,6 +480,15 @@ class cssTips extends React.Component {
                                 }}>
                                     {sorted.value}
                                 </div>
+
+                                {sorted.deprecatedValue &&
+                                    <div style={{
+                                        textDecoration: "line-through",
+                                        opacity: "0.5",
+                                    }}>
+                                        {sorted.deprecatedValue}
+                                    </div>
+                                }
 
                                 </div>
                             );
