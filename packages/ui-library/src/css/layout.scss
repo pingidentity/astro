@@ -649,13 +649,6 @@ $color-grey-minor-1: $color-neutral-30;
         right: auto;
         z-index: -1;
     }
-    .text {
-        position: relative;
-        margin-top: -100px;
-        padding: 10px 40px;
-
-        @include transition(margin-top ease-out 0.1s);
-    }
     .close {
         $size: 16px;
 

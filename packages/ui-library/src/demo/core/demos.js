@@ -389,6 +389,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_general_IfDemo.jsx.html"
                     },
                     {
+                        label: "Icon",
+                        demo: require("../components/general/IconDemo"),
+                        pathToDoc: "components/general/Icon.jsx",
+                        pathToSource: "components_general_Icon.jsx.html",
+                        pathToDemoSource: "demo_components_general_IconDemo.jsx.html"
+                    },
+                    {
                         label: "Indent",
                         demo: require("../components/general/IndentDemo"),
                         pathToDoc: "components/general/Indent.jsx",

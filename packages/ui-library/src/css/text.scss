@@ -21,7 +21,6 @@
         }
         [class^='icon-'],
         [class*=' icon-'] {
-            padding-right: 8px;
             color: $color-elephant;
             display: inline-block;
             &:hover {
@@ -31,7 +30,20 @@
     }
 }
 
-
 .content-halign-center {
     text-align: center;
+}
+
+.text {
+    color: $color-elephant;
+    font-size: 14px;
+    margin: 0 0 10px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+.text--primary {
+    color: $color-slate;
+    font-size: 15px;
 }

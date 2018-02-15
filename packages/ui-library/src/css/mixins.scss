@@ -214,6 +214,12 @@
     flex-grow: $value;
 }
 
+@mixin inline-flex {
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+}
+
 
 // COLOR ----------------------------------------------------------------------------------------
 

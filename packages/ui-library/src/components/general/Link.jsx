@@ -1,8 +1,8 @@
 "use strict";
 
-var PropTypes = require("prop-types");
-
 var React = require("react"),
+    PropTypes = require("prop-types"),
+    Icon = require("./Icon"),
     classnames = require("classnames");
 
 /**
@@ -47,23 +47,23 @@ var Link = function (props) {
             props.onClick(event);
         }
     };
-    var icon = "icon-" + props.icon,
-        linkCss = classnames(props.className, {
-            disabled: props.disabled
-        });
+    var linkCss = classnames(props.className, {
+        disabled: props.disabled
+    });
     return (
         <div data-id={props["data-id"]} className="content-link">
-            <a href={props.url}
-               className={linkCss}
-               onClick={_handleClick}
-            >
+            <a
+                href={props.url}
+                className={linkCss}
+                onClick={_handleClick}>
+
                 {props.icon && (
-                    <span className={icon} />
+                    <Icon iconName={props.icon}>{props.title}</Icon>
                 )}
-                {props.count && (
-                    <span className="count">{props.count}</span>
-                )}
-                {props.title}
+                {props.count && [
+                    <span className="count">{props.count}</span>,
+                    props.title
+                ]}
             </a>
         </div>
     );
