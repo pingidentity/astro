@@ -1,0 +1,15 @@
+.text-input {
+    font-family: $font-default;
+    font-size: $input-font-size;
+    font-weight: 550;
+    color: $input-text-color;
+    border: 1px solid $input-border-color;
+    border-radius: 2px;
+    padding: $input-padding-vertical $input-padding-horizontal;
+    box-sizing: border-box;
+    margin: 0;
+
+    &:focus {
+        border-color: $input-focus-border-color;
+    }
+}

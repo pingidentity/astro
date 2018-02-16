@@ -1,0 +1,24 @@
+.button {
+    font-family: $font-default;
+    font-size: $font-size-m;
+    color: $button-primary-text-color;
+    background: $button-primary-bg-color;
+    padding: $button-padding;
+    box-shadow: none;
+    border-radius: $button-radius;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+        background: $button-primary-hover-bg-color;
+    }
+
+    &:active {
+        background: $button-primary-bg-color;
+    }
+
+    &:disabled {
+        opacity: 0.2;
+        background: $button-primary-bg-color;
+    }
+}

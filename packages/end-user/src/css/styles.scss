@@ -1,0 +1,42 @@
+@import "./fonts.scss";
+@import "./theme.scss";
+@import "./button.scss";
+@import "./card.scss";
+@import "./checkbox.scss";
+@import "./float-label-pair.scss";
+@import "./org-logo.scss";
+@import "./page.scss";
+@import "./stacks.scss";
+@import "./text.scss";
+@import "./text-input.scss";
+@import "./feedback.scss";
+
+body {
+    margin: 0;
+}
+
+body, input {
+  font-family: sans-serif;
+}
+
+:focus {
+  @include focus;
+}
+
+a {
+  color: $color-primary;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    color: $color-primary-bright;
+  }
+}
+
+#app {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}

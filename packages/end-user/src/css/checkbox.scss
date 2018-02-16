@@ -1,0 +1,49 @@
+.checkbox {
+    cursor: pointer;
+    position: relative;
+
+    font-size: $font-size-s;
+    color: $input-text-color;
+}
+
+.checkbox > :first-child {
+    margin-right: $spacing-sm;
+}
+
+.checkbox__input {
+    width: $spacing-lg;
+    height: $spacing-lg;
+    display: inline-block;
+    margin: 0;
+    opacity: 0;
+    vertical-align: middle;
+}
+
+.checkbox__label {
+    font-family: $font-default;
+    vertical-align: middle;
+}
+
+.checkbox__input + .checkbox__standin {
+    cursor: pointer;
+    width: $spacing-lg - 6px;
+    height: $spacing-lg - 6px;
+    border: 1px solid $color-neutral-50;
+    background: url('images/checkmark.svg') center no-repeat;
+    background-color: $color-neutral-100;
+    background-size: 0%;
+    border-radius: 2px;
+    margin: 2px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: 0.1s background-size;
+}
+
+.checkbox__input:checked + .checkbox__standin {
+    background-size: 100%;
+}
+
+.checkbox__input:focus + .checkbox__standin {
+    @include focus;
+}

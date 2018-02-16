@@ -1,0 +1,46 @@
+.page {
+    background: $color-neutral-30;
+    display: flex;
+    flex-direction: column;
+
+    min-height: 100%;
+
+}
+
+.page__content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin: $spacing-lg;
+
+    &:before, &:after {
+        content: '';
+
+        display: flex;
+        flex-grow: 1;
+    }
+    &:before {
+        max-height: 225px;
+    }
+}
+
+.page__footer {
+    color: $color-neutral-50;
+    font-size: 12px;
+    text-align: center;
+    margin: $spacing-lg;
+}
+
+@media (max-width: $mobile-breakpoint) {
+    .page {
+        background: white;
+    }
+
+    .page__content {
+        margin: 0;
+
+        &:before {
+            display: none;
+        }
+    }
+}

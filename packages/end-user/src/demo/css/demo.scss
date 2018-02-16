@@ -1,0 +1,48 @@
+@import "../../css/tokens.scss";
+
+$border-color: #aaa;
+$preview-bg: #eee;
+$label-bg: #666;
+$label-font-size: 11px;
+
+.component-demo {
+    border: 1px solid $border-color;
+    border-radius: 3px;
+    margin-bottom: $spacing-md;
+}
+
+.component-demo__preview {
+    background: $preview-bg;
+    border-bottom: 1px solid $border-color;
+    padding: $spacing-lg;
+}
+
+.component-demo__markup {
+    display: flex;
+    flex-direction: row;
+    margin-top: -1px;
+
+    > * {
+        flex-grow: 1;
+    }
+}
+
+.component-demo__code {
+    padding: $spacing-sm;
+
+    & + .component-demo__code {
+        border-left: 1px solid $border-color;
+    }
+}
+
+.component-demo__preview-label {
+    font-size: $label-font-size;
+    color: white;
+    background: $label-bg;
+    padding: $spacing-xs/2 $spacing-xs;
+    border-radius: 3px;
+}
+
+.page-content {
+    margin: $spacing-md $spacing-lg;
+}

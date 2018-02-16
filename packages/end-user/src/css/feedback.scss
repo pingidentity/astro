@@ -1,0 +1,9 @@
+.feedback {
+    @extend %error-text;
+    display: flex;
+    flex-direction: row;
+}
+
+.feedback__icon {
+    margin-right: $spacing-sm;
+}

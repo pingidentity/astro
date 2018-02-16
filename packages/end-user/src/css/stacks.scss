@@ -1,0 +1,20 @@
+.stack > * {
+    display: block;
+    margin-bottom: $spacing-md;
+    width: 100%;
+}
+
+.stack--with-header > :first-child {
+    margin-bottom: $spacing-lg;
+}
+
+.stack--sm > * {
+    margin-bottom: $spacing-sm;
+}
+.stack--lg > * {
+    margin-bottom: $spacing-lg;
+}
+
+.stack > :last-child {
+    margin-bottom: 0;
+}

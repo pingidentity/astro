@@ -1,0 +1,52 @@
+.float-label {
+    > input {
+        width: 100%;
+    }
+
+    position: relative;
+    display: inline-block;
+}
+
+.float-label__label {
+    color: $float-label-color;
+
+    transition: 0.05s;
+
+    display: block;
+    position: absolute;
+    font-size: 10px;
+    font-family: $font-default;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-top: 4px;
+    margin-left: 4px;
+
+    cursor: text;
+}
+
+.float-label__input, .float-label .float-label__input {
+    padding-top: $input-float-label-padding-top;
+    padding-bottom: $input-float-label-padding-bottom;
+
+    &::placeholder {
+        color: rgba(255,255,255,0);
+    }
+}
+
+.float-label__input:focus + .float-label__label {
+    color: $input-focus-border-color;
+}
+
+.float-label__input:placeholder-shown, .float-label__input.placeholder-shown {
+    padding-top: $input-padding-vertical;
+    padding-bottom: $input-padding-vertical;
+
+    & + .float-label__label {
+        color: $float-label-color;
+        font-size: $input-font-size;
+        margin-top: $input-padding-vertical + 1px;
+        margin-left: $input-padding-horizontal + 1px;
+    }
+}
