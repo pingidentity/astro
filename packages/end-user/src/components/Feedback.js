@@ -9,7 +9,9 @@ const Message = ({children, type}) => {
     return (
         <div className={classNames}>
             {type === "error" && <img className="feedback__icon" src="../icons/error.svg" alt="Error"/>}
-            {children}
+            <div className="feedback__message">
+                {children}
+            </div>
         </div>
     )
 };

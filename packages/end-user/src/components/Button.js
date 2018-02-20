@@ -5,7 +5,8 @@ const Button = ({disabled, label, primary}) => {
     const classNames = classnames("button",
         {
             "button--primary": primary,
-            "button--disabled": disabled
+            "button--disabled": disabled,
+            "brand-primary-bg": primary,
         }
     );
     return(

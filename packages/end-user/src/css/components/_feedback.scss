@@ -8,3 +8,8 @@
 .feedback__icon {
     margin-right: $spacing-sm;
 }
+
+.feedback__message {
+    // this is here to make text wrap properly in IE10 -jfal
+    flex-shrink: 1;
+}

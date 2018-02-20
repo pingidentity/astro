@@ -8,7 +8,8 @@ module.exports = {
     entry: {
         // babel-polyfill is necessary to work on IE10
         main: ["babel-polyfill", "./src/index.js"],
-        signon: ["babel-polyfill", "./src/signon.js"]
+        signon: ["babel-polyfill", "./src/signon.js"],
+        branded: ["babel-polyfill", "./src/branded.js"]
     },
     module: {
         loaders: [
@@ -54,6 +55,13 @@ module.exports = {
             },
             {
                 test: /\.svg$/,
+                loader: "file-loader",
+                options: {
+                    name: "[name].[ext]"
+                }
+            },
+            {
+                test: /\.png$/,
                 loader: "file-loader",
                 options: {
                     name: "[name].[ext]"

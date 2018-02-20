@@ -24,6 +24,12 @@ module.exports = Object.assign(config, {
             filename: "signon.html",
             template: "./src/template.html",
             chunks: ['signon']
+        }),
+        new HtmlWebpackPlugin({
+            title: "Sign On",
+            filename: "branded.html",
+            template: "./src/template.html",
+            chunks: ['branded']
         })
     ])
 });
