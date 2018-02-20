@@ -9,7 +9,7 @@ const Button = ({disabled, label, primary}) => {
         }
     );
     return(
-        <button className={classNames}>{label}</button>
+        <button className={classNames} disabled={disabled || false}>{label}</button>
     )
 };
 

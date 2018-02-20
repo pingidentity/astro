@@ -1,4 +1,4 @@
-@import "../../css/tokens.scss";
+@import "../../css/global-vars.scss";
 
 $border-color: #aaa;
 $preview-bg: #eee;
@@ -32,6 +32,10 @@ $label-font-size: 11px;
 
     & + .component-demo__code {
         border-left: 1px solid $border-color;
+    }
+
+    pre {
+        white-space: pre-wrap;
     }
 }
 

@@ -1,0 +1,45 @@
+// BUTTONS
+$button-font-size: $font-size-m;
+$button-padding: $spacing-sm;
+$button-radius: 2px;
+// primary
+$button-primary-text-color: $color-neutral-100;
+$button-primary-bg-color: $color-primary;
+$button-primary-hover-bg-color: $color-primary-bright;
+// disabled
+$button-disabled-opacity: 0.2;
+
+// TEXT STYLES
+%button-text,
+.button-text {
+    font-family: $font-default;
+    font-size: $font-size-m;
+    color: $button-primary-text-color;
+}
+
+.button {
+    @extend %button-text;
+    background: $button-primary-bg-color;
+    padding: $button-padding;
+    box-shadow: none;
+    border-radius: $button-radius;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+        background: $button-primary-hover-bg-color;
+    }
+
+    &:active {
+        background: $button-primary-bg-color;
+    }
+}
+
+.button:disabled, .button--disabled {
+    opacity: $button-disabled-opacity;
+    cursor: default;
+
+    &:hover {
+        background: $button-primary-bg-color;
+    }
+}

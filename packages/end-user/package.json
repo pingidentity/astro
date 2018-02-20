@@ -38,6 +38,10 @@
         "webpack": "^3.11.0",
         "webpack-dev-server": "^2.11.1"
     },
+    "repository": {
+        "type": "git",
+        "url": "https://gitlab.corp.pingidentity.com/jfal/end-user"
+    },
     "scripts": {
         "static": "webpack --config webpack.config.static.js",
         "server": "webpack-dev-server --config webpack.config.server.js"

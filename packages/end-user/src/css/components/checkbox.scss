@@ -1,9 +1,12 @@
+// CHECKBOXES
+$checkbox-check-color: $color-neutral-30;
+
 .checkbox {
     cursor: pointer;
     position: relative;
 
     font-size: $font-size-s;
-    color: $input-text-color;
+    color: $checkbox-check-color;
 }
 
 .checkbox > :first-child {
@@ -29,18 +32,27 @@
     width: $spacing-lg - 6px;
     height: $spacing-lg - 6px;
     border: 1px solid $color-neutral-50;
-    background: url('images/checkmark.svg') center no-repeat;
     background-color: $color-neutral-100;
-    background-size: 0%;
     border-radius: 2px;
     margin: 2px;
     position: absolute;
     left: 0;
     top: 0;
-    transition: 0.1s background-size;
+
+    &:after {
+        content: '';
+        background: url('images/checkmark.svg') center no-repeat;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transition: 0.1s background-size;
+        background-size: 0%;
+    }
 }
 
-.checkbox__input:checked + .checkbox__standin {
+.checkbox__input:checked + .checkbox__standin:after {
     background-size: 100%;
 }
 

@@ -25,7 +25,7 @@ module.exports = {
                 test: /\.s?css$/,
                 include: __dirname + "/src/css",
                 loader: extractEndUserCSS.extract(
-                    ["css-loader", "postcss-loader", "sass-loader"]
+                    ["css-loader?sourceMap", "postcss-loader", "sass-loader"]
                 )
             },
             {

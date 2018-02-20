@@ -1,0 +1,22 @@
+// CARDS
+$card-bg: white;
+$card-width: 400px;
+$card-padding-bottom: $spacing-xx;
+$card-padding-top: $spacing-xl;
+$card-padding-horizontal: $spacing-xl;
+$card-mobile-padding: $spacing-xx;
+
+.card {
+    background: $card-bg;
+    box-sizing: border-box;
+    margin: 0 auto;
+    max-width: $card-width;
+    padding: $card-padding-top $card-padding-horizontal $card-padding-bottom $card-padding-horizontal;
+    width: 100%;
+}
+
+@media (max-width: $breakpoint-mobile) {
+    .card {
+        padding: $card-mobile-padding;
+    }
+}

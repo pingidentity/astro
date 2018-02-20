@@ -1,26 +1,34 @@
+@mixin focus {
+  outline: none;
+  box-shadow: 0 0 6px 0 $color-primary-bright;
+}
+
+@import "./global-vars.scss";
 @import "./fonts.scss";
-@import "./theme.scss";
-@import "./button.scss";
-@import "./card.scss";
-@import "./checkbox.scss";
-@import "./float-label-pair.scss";
-@import "./org-logo.scss";
-@import "./page.scss";
-@import "./stacks.scss";
 @import "./text.scss";
-@import "./text-input.scss";
-@import "./feedback.scss";
+@import "./input-vars.scss";
+
+@import "./components/button.scss";
+@import "./components/card.scss";
+@import "./components/checkbox.scss";
+@import "./components/float-label.scss";
+@import "./components/org-logo.scss";
+@import "./components/page.scss";
+@import "./components/stack.scss";
+@import "./components/text-input.scss";
+@import "./components/feedback.scss";
 
 body {
     margin: 0;
 }
 
 body, input {
-  font-family: sans-serif;
+    font-family: sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
 :focus {
-  @include focus;
+    @include focus;
 }
 
 a {

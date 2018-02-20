@@ -31,7 +31,7 @@
     margin: $spacing-lg;
 }
 
-@media (max-width: $mobile-breakpoint) {
+@media (max-width: $breakpoint-mobile) {
     .page {
         background: white;
     }

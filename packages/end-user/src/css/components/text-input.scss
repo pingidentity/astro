@@ -1,8 +1,5 @@
 .text-input {
-    font-family: $font-default;
-    font-size: $input-font-size;
-    font-weight: 550;
-    color: $input-text-color;
+    @extend %input-text;
     border: 1px solid $input-border-color;
     border-radius: 2px;
     padding: $input-padding-vertical $input-padding-horizontal;
@@ -12,4 +9,13 @@
     &:focus {
         border-color: $input-focus-border-color;
     }
+}
+
+.text-input--error, .text-input--error:focus {
+    border-color: $color-danger;
+
+    background: right $spacing-sm center no-repeat url("../icons/error.svg");
+    background-color: white;
+
+    padding-right: $spacing-xl;
 }
