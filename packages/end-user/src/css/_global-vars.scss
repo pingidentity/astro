@@ -10,10 +10,14 @@ $spacing-xx: $spacing-base * 6.5;
 // COLOR TOKENS
 $color-primary: #277BA5;
 $color-primary-bright: #3D88AE;
-$color-danger: #DE3602;
-$color-neutral-30: #4D4D4D;
-$color-neutral-40: #666666;
+$color-critical: #DE3602;
+
+$color-neutral-10: #4d4d4d;
+$color-neutral-20: #595959;
+$color-neutral-30: #666666;
+$color-neutral-40: #737373;
 $color-neutral-50: #808080;
+
 $color-neutral-100: #ffffff;
 
 // MOBILE
@@ -23,6 +27,6 @@ $breakpoint-mobile: 480px;
 $font-default: "proxima-nova", sans-serif;
 
 // FONT SIZES
-$font-size-s: 13px;
-$font-size-m: 15px;
-$font-size-l: 22px;
+$font-size-sm: 13px;
+$font-size-md: 15px;
+$font-size-lg: 22px;

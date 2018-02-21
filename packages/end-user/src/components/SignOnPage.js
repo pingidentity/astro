@@ -2,7 +2,7 @@ import React from "react";
 import Page from "./Page";
 import Branding from "./Branding";
 import Card from "./Card";
-import Stack from "./Stack";
+import Form from "./Form";
 import Logo from "./Logo";
 import FloatLabelTextInput from "./FloatLabelTextInput";
 import FloatLabelPasswordInput from "./FloatLabelPasswordInput";
@@ -13,13 +13,13 @@ const SignOnPage = ({branding}) => (
     <Page footer="© Copyright 2017 Ping Identity. All rights reserved.">
         <Branding {...branding}/>
         <Card>
-            <Stack header={true}>
-                <Logo src={branding && branding.logo}/>
+            <Logo src={branding && branding.logo}/>
+            <Form>
                 <FloatLabelTextInput label="Username" id="username"/>
                 <FloatLabelPasswordInput label="Password" id="password"/>
                 <div><Checkbox label="Remember me"/></div>
                 <Button label="Sign On" primary/>
-            </Stack>
+            </Form>
         </Card>
     </Page>
 );

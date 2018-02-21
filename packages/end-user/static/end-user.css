@@ -10,7 +10,7 @@
 
 @font-face {
   font-family: 'proxima-nova';
-  font-weight: 550;
+  font-weight: 600;
   src: url(ProximaNova-Semibold.otf); }
 
 @font-face {
@@ -37,7 +37,7 @@
 
 @font-face {
   font-family: 'proxima-nova';
-  font-weight: 550;
+  font-weight: 600;
   font-style: italic;
   src: url(ProximaNova-SemiboldItalic.otf); }
 
@@ -59,7 +59,7 @@
 
 @font-face {
   font-family: 'proxima-nova-cond';
-  font-weight: 550;
+  font-weight: 600;
   src: url(ProximaNovaCond-Semibold.otf); }
 
 @font-face {
@@ -76,7 +76,7 @@
 
 @font-face {
   font-family: 'proxima-nova-cond';
-  font-weight: 550;
+  font-weight: 600;
   font-style: italic;
   src: url(ProximaNovaCond-SemiboldIt.otf); }
 
@@ -94,8 +94,8 @@
 .input-text {
   font-family: "proxima-nova", sans-serif;
   font-size: 15px;
-  font-weight: 550;
-  color: #4D4D4D; }
+  font-weight: 600;
+  color: #666666; }
 
 .button,
 .button-text {
@@ -139,7 +139,7 @@
   cursor: pointer;
   position: relative;
   font-size: 13px;
-  color: #4D4D4D;
+  color: #595959;
   display: inline-block; }
 
 .checkbox > :first-child {
@@ -161,7 +161,7 @@
   cursor: pointer;
   width: 19px;
   height: 19px;
-  border: 1px solid #808080;
+  border: 1px solid #737373;
   background-color: #ffffff;
   border-radius: 2px;
   margin: 2px;
@@ -234,15 +234,25 @@
     margin-top: 16px;
     margin-left: 11px; }
 
+.form > * {
+  display: block;
+  margin-bottom: 15px;
+  width: 100%; }
+
+.form > :last-child {
+  margin-bottom: 0; }
+
 .org-logo {
-  text-align: center; }
+  text-align: center;
+  margin: 0 auto 25px auto;
+  max-width: 250px; }
 
 .org-logo__image {
-  max-width: 250px;
+  max-width: 100%;
   max-height: 80px; }
 
 .page {
-  background: #4D4D4D;
+  background: #666666;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -282,32 +292,17 @@
   margin: 25px; }
 
 @media (max-width: 480px) {
-  .page {
-    background: white; }
+  .page, .page.brand-background {
+    background: white !important; }
   .page__content {
     margin: 0; }
     .page__content:before {
-      display: none; } }
-
-.stack > * {
-  display: block;
-  margin-bottom: 15px;
-  width: 100%; }
-
-.stack--with-header > :first-child {
-  margin-bottom: 25px; }
-
-.stack--sm > * {
-  margin-bottom: 10px; }
-
-.stack--lg > * {
-  margin-bottom: 25px; }
-
-.stack > :last-child {
-  margin-bottom: 0; }
+      display: none; }
+  .page__footer, .page__footer.brand-footer-color {
+    color: #595959; } }
 
 .text-input {
-  border: 1px solid #808080;
+  border: 1px solid #737373;
   border-radius: 2px;
   padding: 15px 10px;
   -webkit-box-sizing: border-box;

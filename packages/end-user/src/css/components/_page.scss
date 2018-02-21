@@ -32,8 +32,8 @@
 }
 
 @media (max-width: $breakpoint-mobile) {
-    .page {
-        background: white;
+    .page, .page.brand-background {
+        background: white !important;
     }
 
     .page__content {
@@ -42,5 +42,9 @@
         &:before {
             display: none;
         }
+    }
+
+    .page__footer, .page__footer.brand-footer-color {
+        color: $color-neutral-20;
     }
 }

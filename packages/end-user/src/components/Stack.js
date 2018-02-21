@@ -1,15 +1,8 @@
 import React from "react";
-import classnames from "classnames";
 
-const Stack = ({children, header}) => {
-    const classNames = classnames("stack",
-        {
-            "stack--with-header": header
-        }
-    );
-
+const Stack = ({children}) => {
     return (
-        <div className={classNames}>
+        <div className="stack">
             {children}
         </div>
     )

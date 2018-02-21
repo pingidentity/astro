@@ -1,5 +1,5 @@
 // BUTTONS
-$button-font-size: $font-size-m;
+$button-font-size: $font-size-md;
 $button-padding: $spacing-sm;
 $button-radius: 2px;
 // primary
@@ -13,7 +13,7 @@ $button-disabled-opacity: 0.2;
 %button-text,
 .button-text {
     font-family: $font-default;
-    font-size: $font-size-m;
+    font-size: $font-size-md;
     color: $button-primary-text-color;
 }
 

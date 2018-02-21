@@ -1,12 +1,13 @@
 // CHECKBOXES
-$checkbox-check-color: $color-neutral-30;
+$checkbox-label-color: $color-neutral-20;
+$checkbox-border-color: $color-neutral-40;
 
 .checkbox {
     cursor: pointer;
     position: relative;
 
-    font-size: $font-size-s;
-    color: $checkbox-check-color;
+    font-size: $font-size-sm;
+    color: $checkbox-label-color;
     display: inline-block;
 }
 
@@ -32,7 +33,7 @@ $checkbox-check-color: $color-neutral-30;
     cursor: pointer;
     width: $spacing-lg - 6px;
     height: $spacing-lg - 6px;
-    border: 1px solid $color-neutral-50;
+    border: 1px solid $checkbox-border-color;
     background-color: $color-neutral-100;
     border-radius: 2px;
     margin: 2px;

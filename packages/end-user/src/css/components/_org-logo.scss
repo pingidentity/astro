@@ -1,8 +1,10 @@
 .org-logo {
     text-align: center;
+    margin: 0 auto $spacing-lg auto;
+    max-width: 250px;
 }
 
 .org-logo__image {
-    max-width: 250px;
+    max-width: 100%;
     max-height: 80px;
 }
