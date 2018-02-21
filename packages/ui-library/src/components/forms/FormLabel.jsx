@@ -33,7 +33,11 @@ class FormLabel extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
-        value: PropTypes.string,
+        value: PropTypes.oneOfType([
+            PropTypes.array,
+            PropTypes.object,
+            PropTypes.string
+        ]),
         hint: PropTypes.string,
         lockText: PropTypes.string,
         helpClassName: PropTypes.string,

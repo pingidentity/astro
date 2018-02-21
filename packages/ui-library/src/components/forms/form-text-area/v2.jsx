@@ -144,7 +144,11 @@ class FormTextAreaStateless extends React.Component {
         showUndo: PropTypes.bool,
         onUndo: PropTypes.func,
         onBlur: PropTypes.func,
-        labelText: PropTypes.string,
+        labelText: PropTypes.oneOfType([
+            PropTypes.array,
+            PropTypes.object,
+            PropTypes.string
+        ]),
         labelHelpText: PropTypes.string,
         helpClassName: PropTypes.string,
         inputClassName: PropTypes.string,

@@ -141,7 +141,11 @@ class Stateless extends React.Component {
         hideControls: PropTypes.bool,
 
         labelHelpText: PropTypes.string,
-        labelText: PropTypes.string,
+        labelText: PropTypes.oneOfType([
+            PropTypes.array,
+            PropTypes.object,
+            PropTypes.string
+        ]),
 
         value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 

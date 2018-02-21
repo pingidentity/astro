@@ -53,15 +53,20 @@ var React = require("react"),
 class FormRadioInput extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
+        checked: PropTypes.bool,
         className: PropTypes.string,
+        disabled: PropTypes.bool,
+        label: PropTypes.oneOfType([
+            PropTypes.array,
+            PropTypes.object,
+            PropTypes.string
+        ]),
+        onValueChange: PropTypes.func,
         name: PropTypes.string,
         value: PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.number
-        ]),
-        onValueChange: PropTypes.func,
-        checked: PropTypes.bool,
-        disabled: PropTypes.bool
+        ])
     };
 
     static defaultProps = {

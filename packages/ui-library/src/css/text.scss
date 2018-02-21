@@ -47,3 +47,15 @@
     color: $color-slate;
     font-size: 15px;
 }
+
+.pipe {
+    &:before {
+        content: "";
+        height: 1.2em;
+        width: 1px;
+        margin: 0 $spacing-sm;
+        display: inline-block;
+        vertical-align: middle;
+        background-color: $color-rabbit-fur;
+    }
+}

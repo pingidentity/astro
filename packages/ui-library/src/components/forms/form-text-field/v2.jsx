@@ -219,7 +219,11 @@ class Stateless extends React.Component {
         helpClassName: PropTypes.string,
         labelClassName: PropTypes.string,
         labelHelpText: PropTypes.string,
-        labelText: PropTypes.string,
+        labelText: PropTypes.oneOfType([
+            PropTypes.array,
+            PropTypes.object,
+            PropTypes.string
+        ]),
         labelLockText: PropTypes.string,
         maxLength: PropTypes.number,
         type: PropTypes.string,
