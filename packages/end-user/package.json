@@ -15,9 +15,11 @@
         "babel-cli": "^6.26.0",
         "babel-loader": "^7.1.2",
         "babel-plugin-transform-class-properties": "^6.24.1",
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
         "babel-polyfill": "^6.26.0",
         "babel-preset-env": "^1.6.1",
         "babel-preset-react": "^6.24.1",
+        "chroma-js": "^1.3.6",
         "classnames": "^2.2.5",
         "css-loader": "^0.28.9",
         "extract-text-webpack-plugin": "^3.0.2",
@@ -43,7 +45,7 @@
         "url": "https://gitlab.corp.pingidentity.com/jfal/end-user"
     },
     "scripts": {
-        "static": "webpack --config webpack.config.static.js",
+        "static": "rm -rf ./static && webpack --config webpack.config.static.js",
         "server": "webpack-dev-server --config webpack.config.server.js"
     }
 }

@@ -3,7 +3,9 @@ import ReactDOM from "react-dom";
 import SignOnPage from "./components/SignOnPage";
 import Catalog from "./demo/Catalog";
 import pinglogo from "./demo/assets/ping-logo.svg";
+import jjlogo from "./demo/assets/jj-logo.png";
 import htmlFromReact from "./demo/utils/htmlFromReact";
+import completeBranding from "./util/completeBranding";
 
 import "./css/styles.scss";
 import "./demo/css/demo.scss";
@@ -28,6 +30,15 @@ module.exports = data => ({
             }
         },
         content: htmlFromReact(<SignOnPage branding={{logo: pinglogo}}/>, "        "),
+        stylesheets: ["end-user.css"]
+    }),
+    "branded.html" : _.template(template)({
+        htmlWebpackPlugin: {
+            options: {
+                title: "Sign On"
+            }
+        },
+        content: htmlFromReact(<SignOnPage branding={completeBranding({logo: jjlogo, primaryColor: '#f00', backgroundColor: '#00f'})}/>, "        "),
         stylesheets: ["end-user.css"]
     })
 })

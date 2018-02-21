@@ -4,7 +4,7 @@ const Page = ({children, footer, background}) => {
     return (
         <div className="page brand-background">
             <div className="page__content">{children}</div>
-            {footer && <div className="page__footer">{footer}</div>}
+            {footer && <div className="page__footer brand-footer-color">{footer}</div>}
         </div>
     );
 };

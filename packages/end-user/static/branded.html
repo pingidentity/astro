@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <title>Sign On</title>
+    <link rel="stylesheet" href="end-user.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div id="app">
+        <div class="page brand-background">
+            <div class="page__content">
+        <style>
+            .brand-background {
+                background-color: #00f;
+            }
+
+            .brand-primary-text:hover {
+                color: #ff5a36;
+            }
+
+            .brand-primary-bg:hover {
+                background: #ff5a36;
+            }
+
+            .brand-primary-text {
+                color: #f00;
+            }
+
+            .brand-primary-bg {
+                background: #f00;
+            }
+
+            .brand-primary-bg:active {
+                background: #f00;
+            }
+
+            .brand-footer-color {
+                color: #eee;
+            }
+        </style>
+        <div class="card">
+            <div class="stack stack--with-header">
+                <div class="org-logo">
+                    <img class="org-logo__image" src="jj-logo.png"
+                        alt="Company Logo" />
+                </div>
+                <div class="float-label">
+                    <input type="text" class="text-input float-label__input"
+                        placeholder="Username" id="username" name="username"
+                    />
+                    <label class="float-label__label" for="username">Username</label>
+                </div>
+                <div class="float-label">
+                    <input type="password" class="text-input float-label__input"
+                        placeholder="Password" id="password" name="password"
+                    />
+                    <label class="float-label__label" for="password">Password</label>
+                </div>
+                <div>
+                    <label class="checkbox">
+                        <input type="checkbox" class="checkbox__input"
+                        />
+                        <span class="checkbox__standin"></span>
+                        <span class="checkbox__label">Remember me</span>
+                    </label>
+                </div>
+                <button class="button button--primary brand-primary-bg">Sign On</button>
+            </div>
+        </div>
+    </div>
+    <div class="page__footer brand-footer-color">© Copyright 2017 Ping Identity. All rights reserved.</div>
+</div>
+    </div>
+</body>
+</html>

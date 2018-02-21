@@ -17,7 +17,7 @@ const SignOnPage = ({branding}) => (
                 <Logo src={branding && branding.logo}/>
                 <FloatLabelTextInput label="Username" id="username"/>
                 <FloatLabelPasswordInput label="Password" id="password"/>
-                <Checkbox label="Remember me"/>
+                <div><Checkbox label="Remember me"/></div>
                 <Button label="Sign On" primary/>
             </Stack>
         </Card>

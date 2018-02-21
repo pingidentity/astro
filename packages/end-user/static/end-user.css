@@ -1,0 +1,368 @@
+@font-face {
+  font-family: 'proxima-nova';
+  font-weight: 200;
+  src: url(ProximaNova-Light.otf); }
+
+@font-face {
+  font-family: 'proxima-nova';
+  font-weight: 400;
+  src: url(ProximaNova-Regular.otf); }
+
+@font-face {
+  font-family: 'proxima-nova';
+  font-weight: 550;
+  src: url(ProximaNova-Semibold.otf); }
+
+@font-face {
+  font-family: 'proxima-nova';
+  font-weight: 700;
+  src: url(ProximaNova-Bold.otf); }
+
+@font-face {
+  font-family: 'proxima-nova';
+  font-weight: 900;
+  src: url(ProximaNova-Extrabold.otf); }
+
+@font-face {
+  font-family: 'proxima-nova';
+  font-weight: 200;
+  font-style: italic;
+  src: url(ProximaNova-LightItalic.otf); }
+
+@font-face {
+  font-family: 'proxima-nova';
+  font-weight: 400;
+  font-style: italic;
+  src: url(ProximaNova-RegularItalic.otf); }
+
+@font-face {
+  font-family: 'proxima-nova';
+  font-weight: 550;
+  font-style: italic;
+  src: url(ProximaNova-SemiboldItalic.otf); }
+
+@font-face {
+  font-family: 'proxima-nova';
+  font-weight: 700;
+  font-style: italic;
+  src: url(ProximaNova-BoldIt.otf); }
+
+@font-face {
+  font-family: 'proxima-nova-cond';
+  font-weight: 200;
+  src: url(ProximaNovaCond-Light.otf); }
+
+@font-face {
+  font-family: 'proxima-nova-cond';
+  font-weight: 400;
+  src: url(ProximaNovaCond-Regular.otf); }
+
+@font-face {
+  font-family: 'proxima-nova-cond';
+  font-weight: 550;
+  src: url(ProximaNovaCond-Semibold.otf); }
+
+@font-face {
+  font-family: 'proxima-nova-cond';
+  font-weight: 200;
+  font-style: italic;
+  src: url(ProximaNovaCond-LightIt.otf); }
+
+@font-face {
+  font-family: 'proxima-nova-cond';
+  font-weight: 400;
+  font-style: italic;
+  src: url(ProximaNovaCond-RegularIt.otf); }
+
+@font-face {
+  font-family: 'proxima-nova-cond';
+  font-weight: 550;
+  font-style: italic;
+  src: url(ProximaNovaCond-SemiboldIt.otf); }
+
+@font-face {
+  font-family: 'proxima-nova-black';
+  src: url(ProximaNova-Black.otf); }
+
+.feedback,
+.error-text {
+  font-family: "proxima-nova", sans-serif;
+  font-size: 15px;
+  color: #DE3602; }
+
+.text-input,
+.input-text {
+  font-family: "proxima-nova", sans-serif;
+  font-size: 15px;
+  font-weight: 550;
+  color: #4D4D4D; }
+
+.button,
+.button-text {
+  font-family: "proxima-nova", sans-serif;
+  font-size: 15px;
+  color: #ffffff; }
+
+.button {
+  background: #277BA5;
+  padding: 10px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer; }
+  .button:hover {
+    background: #3D88AE; }
+  .button:active {
+    background: #277BA5; }
+
+.button:disabled, .button--disabled {
+  opacity: 0.2;
+  cursor: default; }
+  .button:disabled:hover, .button--disabled:hover {
+    background: #277BA5; }
+
+.card {
+  background: white;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 40px 40px 65px 40px;
+  width: 100%; }
+
+@media (max-width: 480px) {
+  .card {
+    padding: 65px; } }
+
+.checkbox {
+  cursor: pointer;
+  position: relative;
+  font-size: 13px;
+  color: #4D4D4D;
+  display: inline-block; }
+
+.checkbox > :first-child {
+  margin-right: 10px; }
+
+.checkbox__input {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  margin: 0;
+  opacity: 0;
+  vertical-align: middle; }
+
+.checkbox__label {
+  font-family: "proxima-nova", sans-serif;
+  vertical-align: middle; }
+
+.checkbox__input + .checkbox__standin {
+  cursor: pointer;
+  width: 19px;
+  height: 19px;
+  border: 1px solid #808080;
+  background-color: #ffffff;
+  border-radius: 2px;
+  margin: 2px;
+  position: absolute;
+  left: 0;
+  top: 0; }
+  .checkbox__input + .checkbox__standin:after {
+    content: '';
+    background: url(checkmark.svg) center no-repeat;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    -webkit-transition: 0.1s background-size;
+    transition: 0.1s background-size;
+    background-size: 0%; }
+
+.checkbox__input:checked + .checkbox__standin:after {
+  background-size: 100%; }
+
+.checkbox__input:focus + .checkbox__standin {
+  outline: none;
+  -webkit-box-shadow: 0 0 6px 0 #3D88AE;
+          box-shadow: 0 0 6px 0 #3D88AE; }
+
+.float-label {
+  position: relative;
+  display: inline-block; }
+  .float-label > input {
+    width: 100%; }
+
+.float-label__label {
+  color: #666666;
+  -webkit-transition: 0.05s;
+  transition: 0.05s;
+  display: block;
+  position: absolute;
+  font-size: 10px;
+  font-family: "proxima-nova", sans-serif;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  margin-left: 4px;
+  cursor: text; }
+
+.float-label__input, .float-label .float-label__input {
+  padding-top: 25px;
+  padding-bottom: 5px; }
+  .float-label__input::-webkit-input-placeholder, .float-label .float-label__input::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, 0); }
+  .float-label__input:-ms-input-placeholder, .float-label .float-label__input:-ms-input-placeholder {
+    color: rgba(255, 255, 255, 0); }
+  .float-label__input::-ms-input-placeholder, .float-label .float-label__input::-ms-input-placeholder {
+    color: rgba(255, 255, 255, 0); }
+  .float-label__input::placeholder, .float-label .float-label__input::placeholder {
+    color: rgba(255, 255, 255, 0); }
+
+.float-label__input:focus + .float-label__label {
+  color: #277BA5; }
+
+.float-label__input:placeholder-shown, .float-label__input.placeholder-shown {
+  padding-top: 15px;
+  padding-bottom: 15px; }
+  .float-label__input:placeholder-shown + .float-label__label, .float-label__input.placeholder-shown + .float-label__label {
+    color: #666666;
+    font-size: 15px;
+    font-weight: 400;
+    margin-top: 16px;
+    margin-left: 11px; }
+
+.org-logo {
+  text-align: center; }
+
+.org-logo__image {
+  max-width: 250px;
+  max-height: 80px; }
+
+.page {
+  background: #4D4D4D;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 100%; }
+
+.page__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  margin: 25px; }
+  .page__content:before, .page__content:after {
+    content: '';
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1; }
+  .page__content:before {
+    max-height: 225px; }
+
+.page__footer {
+  color: #808080;
+  font-size: 12px;
+  text-align: center;
+  margin: 25px; }
+
+@media (max-width: 480px) {
+  .page {
+    background: white; }
+  .page__content {
+    margin: 0; }
+    .page__content:before {
+      display: none; } }
+
+.stack > * {
+  display: block;
+  margin-bottom: 15px;
+  width: 100%; }
+
+.stack--with-header > :first-child {
+  margin-bottom: 25px; }
+
+.stack--sm > * {
+  margin-bottom: 10px; }
+
+.stack--lg > * {
+  margin-bottom: 25px; }
+
+.stack > :last-child {
+  margin-bottom: 0; }
+
+.text-input {
+  border: 1px solid #808080;
+  border-radius: 2px;
+  padding: 15px 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0; }
+  .text-input:focus {
+    border-color: #277BA5; }
+
+.text-input--error, .text-input--error:focus {
+  border-color: #DE3602;
+  background: right 10px center no-repeat url(error.svg);
+  background-color: white;
+  padding-right: 40px; }
+
+.feedback {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
+
+.feedback__icon {
+  margin-right: 10px; }
+
+.feedback__message {
+  -ms-flex-negative: 1;
+      flex-shrink: 1; }
+
+body {
+  margin: 0; }
+
+body, input {
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased; }
+
+:focus {
+  outline: none;
+  -webkit-box-shadow: 0 0 6px 0 #3D88AE;
+          box-shadow: 0 0 6px 0 #3D88AE; }
+
+a {
+  color: #277BA5;
+  text-decoration: none; }
+  a:hover {
+    text-decoration: underline;
+    color: #3D88AE; }
+
+#app {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; }

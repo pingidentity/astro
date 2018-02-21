@@ -25,6 +25,11 @@ const Branding = props => (
                 background: ${props.primaryColor};
             }
         `}
+        ${props.footerColor && `
+            .brand-footer-color {
+                color: ${props.footerColor};
+            }
+        `}
     `}}/>
 );
 
