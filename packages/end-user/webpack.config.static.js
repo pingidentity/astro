@@ -24,6 +24,6 @@ module.exports = Object.assign(config, {
         new StaticSiteGeneratorPlugin()
     ]),
     entry: {
-        main: "./src/static.js"
+        main: "./src/demo/static.js"
     },
 });

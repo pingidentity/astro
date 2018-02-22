@@ -5,6 +5,8 @@ const config = require("./webpack.config.common.js");
 const loaders = config.module.loaders;
 const plugins = config.plugins;
 
+const routes = require("./src/demo/routes.js");
+
 module.exports = Object.assign(config, {
     target: "web",
     devServer: {
@@ -13,23 +15,12 @@ module.exports = Object.assign(config, {
         compress: true,
         disableHostCheck: true
     },
-    plugins: plugins.concat([
+    plugins: plugins.concat(routes.map(route => (
         new HtmlWebpackPlugin({
-            title: "Ping End User Components",
-            template: "./src/template.html",
-            chunks: ['main']
-        }),
-        new HtmlWebpackPlugin({
-            title: "Sign On",
-            filename: "signon.html",
-            template: "./src/template.html",
-            chunks: ['signon']
-        }),
-        new HtmlWebpackPlugin({
-            title: "Sign On",
-            filename: "branded.html",
-            template: "./src/template.html",
-            chunks: ['branded']
+            title: route.title,
+            template: "./src/demo/template.html",
+            chunks: [route.id],
+            filename: route.filename
         })
-    ])
+    )))
 });
