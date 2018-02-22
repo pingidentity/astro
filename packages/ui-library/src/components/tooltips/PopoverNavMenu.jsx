@@ -1,12 +1,11 @@
 import React from "react";
-// import PropTypes from "prop-types";
-import _ from "underscore";
-import classnames from "classnames";
-
-import popsOver from "../../util/behaviors/popsOver";
-
 import PopoverMenu from "./PopoverMenu";
 import Anchor from "../general/Anchor";
+
+import popsOver from "../../util/behaviors/popsOver";
+import _ from "underscore";
+import classnames from "classnames";
+import { getIconClassName } from "../../util/PropUtils";
 
 const PopoverMenuBase = PopoverMenu.Base;
 
@@ -18,21 +17,20 @@ class PopoverNavMenuBase extends PopoverMenuBase {
         });
 
     _getIcon = item => {
-        let iconClassName = item.iconClassName;
-        if (item.icon) {
-            iconClassName = "icon-"+item.icon;
-        }
-        if (iconClassName) {
-            return <span className={classnames("icon", "nav-menu__icon", iconClassName)} />;
-        } else if (item.iconSrc) {
+        if (item.iconSrc) {
             return <img src={item.iconSrc} className="icon nav-menu__icon" />;
+        } else {
+            const iconClassName = getIconClassName(item);
+            if (iconClassName) {
+                return <span className={classnames("icon", "nav-menu__icon", iconClassName)} />;
+            }
         }
     };
 
     _anyIcons = () => {
         return (
             this.props.items.reduce((result, item) => {
-                if (result || item.icon || item.iconClassName || item.iconSrc) {
+                if (result || getIconClassName(item)) {
                     return true;
                 } else {
                     return false;

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import LinkDropDownList from "../../forms/LinkDropDownList";
 
 import _ from "underscore";
+import { getIconClassName } from "../../../util/PropUtils";
 
 class EnvironmentSelector extends React.Component {
     state = { open: false };
@@ -40,10 +41,11 @@ class EnvironmentSelector extends React.Component {
     _getOptions = () => this.props.options.map(this._getDDLOption);
 
     _getIcon = option => {
-        if (option.icon) {
+        const iconClassName = getIconClassName(option);
+        if (iconClassName) {
             return (
                 <span
-                    className={`icon-${option.icon} environment-selector__icon`}
+                    className={`${iconClassName} environment-selector__icon`}
                 />
             );
         } else {

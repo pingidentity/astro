@@ -1,13 +1,13 @@
-var PropTypes = require("prop-types");
 var React = require("react"),
+    PropTypes = require("prop-types"),
     classnames = require("classnames"),
-    _ = require("underscore");
-
-var PopoverNavMenu = require("../../tooltips/PopoverNavMenu"),
+    _ = require("underscore"),
+    PopoverNavMenu = require("../../tooltips/PopoverNavMenu"),
     HeaderNav = require("./HeaderNav"),
     EnvironmentSelector = require("./EnvironmentSelector"),
     MarketSelector = require("./MarketSelector"),
-    Logo = require("./logos/Logo");
+    Logo = require("./logos/Logo"),
+    getIconClassName = require("../../../util/PropUtils").getIconClassName;
 
 /**
  * @typedef HeaderBar~navigationLink
@@ -403,16 +403,13 @@ class NavItem extends React.Component {
         if (item.iconSrc) {
             return <img src={item.iconSrc} className="product-nav__image icon" />;
         } else {
-            let iconClassName = item.iconClassName;
-            if (item.icon) {
-                iconClassName = "icon-" + item.icon;
-            }
+            const iconClassName = getIconClassName(item, { useId: true });
             return (
                 <span
                     className={classnames(
                         "product-nav__icon",
                         "icon",
-                        iconClassName || "icon-"+item.id
+                        iconClassName
                     )}
                 />
             );

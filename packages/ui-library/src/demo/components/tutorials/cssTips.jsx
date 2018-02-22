@@ -238,7 +238,7 @@ class cssTips extends React.Component {
         var iconsPerCol = Math.ceil(ICONS.length / ICON_COLUMNS);
 
         return ICONS.slice(iconsPerCol*(col-1), iconsPerCol*col).map(function (item, i) {
-            return <div key={i}><span className={"inline-icon icon-" + item}></span> icon-{item}</div>;
+            return <div key={i}><span className={"inline-icon icon-" + item}></span> {item}</div>;
         }.bind(this));
     };
 
@@ -373,6 +373,9 @@ class cssTips extends React.Component {
                     There are a variety of icons already in the library which may be used. They're contained in
                     an "icon font". This means that they are vector-based and may be resized and styled using
                     the same CSS rules as text.
+                </p>
+                <p>
+                    The class name to show an icon is always "icon-" + the name of the icon.
                 </p>
                 <Layout.Row className="icons">{this._renderIconColumns()}</Layout.Row>
                 <br />

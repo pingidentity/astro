@@ -2,7 +2,8 @@
 
 var React = require("react"),
     PropTypes = require("prop-types"),
-    classnames = require("classnames");
+    classnames = require("classnames"),
+    getIconClassName = require("../../util/PropUtils").getIconClassName;
 
 /**
  * @class Icon
@@ -26,7 +27,7 @@ const Icon = (props) => {
     return (
         <div className={classnames("icon", props.className)} data-id={props["data-id"]}>
             <div
-                className={classnames("icon__graphic", "icon-" + props.iconName)}
+                className={classnames("icon__graphic", getIconClassName(props))}
                 data-id={props["data-id"] + "-graphic"}
             />
             {props.children && (

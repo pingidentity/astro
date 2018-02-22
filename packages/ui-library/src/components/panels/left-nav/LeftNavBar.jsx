@@ -5,7 +5,8 @@ var React = require("react"),
     Copyright = require("./Copyright"),
     Utils = require("../../../util/Utils"),
     Anchor = require("../../general/Anchor"),
-    _ = require("underscore");
+    _ = require("underscore"),
+    getIconClassName = require("../../../util/PropUtils").getIconClassName;
 
 /**
  * @typedef {object} LeftNavBar#Node
@@ -435,12 +436,14 @@ class LeftNavSection extends React.Component {
                 "has-icon": !!item.icon
             };
 
+            const iconClassName = getIconClassName(item);
+
             items.push(
                 <li key={i} className={classnames(itemClassName)}>
                     <Anchor
                         data-id={item.id + "-label"}
                         onClick={this._handleItemClicks[i]}>
-                        {item.icon ? (<span className={"icon-" + item.icon}></span>) : null}{item.label}
+                        {iconClassName ? (<span className={iconClassName}></span>) : null}{item.label}
                     </Anchor>
                 </li>
             );
@@ -475,6 +478,8 @@ class LeftNavSection extends React.Component {
                 })
                 : "title";
 
+        const iconClassName = getIconClassName(this.props, { useId: true });
+
         return (
             <div className={className} data-id={this.props["data-id"]}>
                 {this.props.label && (
@@ -482,8 +487,8 @@ class LeftNavSection extends React.Component {
                         className={titleClassName}
                         data-id={this.props["data-id"] + "-label"}
                         onClick={this._handleSectionClick}>
-                        {this.props.icon ? (
-                            <span className={"icon-" + this.props.icon}></span>) : null}{this.props.label}
+                        {iconClassName ? (
+                            <span className={iconClassName}></span>) : null}{this.props.label}
                     </Anchor>
                 )}
                 {this.props.children &&
@@ -591,6 +596,8 @@ class LeftNavContextSelector extends React.Component {
                 "has-icon": !!this.props.icon
             };
 
+        const iconClassName = getIconClassName(this.props);
+
         return (
             <div className={classnames("nav-section context-selector", className)} data-id={this.props["data-id"]}>
                 <div className="title">
@@ -602,7 +609,7 @@ class LeftNavContextSelector extends React.Component {
                             data-id={this.props["data-id"] + "-label"}
                             className={classnames("context-selector-value collapsible-link right", linkClassName)}
                             onClick={this._handleSectionClick}>
-                            {this.props.icon ? (<span className={"icon-" + this.props.icon}></span>) : null}
+                            {iconClassName ? (<span className={iconClassName}></span>) : null}
                             {this._getSelectedChild().label}
                         </a>
                         <ul className="context-selector-menu" data-id={this.props["data-id"] + "-menu"}>
