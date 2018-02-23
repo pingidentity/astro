@@ -1,0 +1,17 @@
+%icon-pair,
+.icon-pair {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+%icon-pair__icon,
+.icon-pair__icon {
+    margin-right: $spacing-sm;
+}
+
+%icon-pair__label,
+.icon-pair__label {
+    // this is here to make text wrap properly in IE10 -jfal
+    flex-shrink: 1;
+}

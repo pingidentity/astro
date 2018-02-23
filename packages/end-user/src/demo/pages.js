@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Catalog from "./Catalog";
 import SignOnPage from "../components/SignOnPage";
+import ChangePWPage from "../components/ChangePWPage";
 import completeBranding from "../util/completeBranding";
 
 import "../css/styles.scss";
@@ -27,5 +28,6 @@ const App = () => (
 export default {
     main: <App/>,
     signon: <SignOnPage branding={pingBranding}/>,
-    branded: <SignOnPage branding={jjBranding}/>
+    branded: <SignOnPage branding={jjBranding}/>,
+    changepw: <ChangePWPage branding={pingBranding}/>,
 }

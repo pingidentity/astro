@@ -17,5 +17,11 @@ module.exports = [
         script: "branded.js",
         title: "Sign On",
         filename: "branded.html"
+    },
+    {
+        id: "changepw",
+        script: "changepw.js",
+        title: "Change Password",
+        filename: "changepw.html"
     }
 ];

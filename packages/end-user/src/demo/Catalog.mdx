@@ -4,9 +4,12 @@ import Checkbox from "../components/Checkbox";
 import Feedback from "../components/Feedback";
 import FloatLabelPasswordInput from "../components/FloatLabelPasswordInput";
 import FloatLabelTextInput from "../components/FloatLabelTextInput";
-import TextInput from "../components/TextInput";
-import Logo from "../components/Logo";
 import Form from "../components/Form";
+import Heading from "../components/Heading";
+import Logo from "../components/Logo";
+import Requirements from "../components/Requirements";
+import TextInput from "../components/TextInput";
+import Tooltip from "../components/Tooltip";
 import ComponentDemo from "./components/ComponentDemo";
 
 # Ping End-User Components
@@ -19,6 +22,12 @@ The logo that sits atop the form.
 
 <ComponentDemo>
     <Logo src="ping-logo.svg"/>
+</ComponentDemo>
+
+## Heading
+
+<ComponentDemo>
+    <Heading>This Would Be a Page Title</Heading>
 </ComponentDemo>
 
 ## Inputs
@@ -110,5 +119,34 @@ Error message
 </ComponentDemo>
 
 <ComponentDemo>
-    <Feedback type="warning">Your password has expired. Please create a new one.</Feedback>
+    <Feedback type="alert">Your password has expired. Please create a new one.</Feedback>
+</ComponentDemo>
+
+## Password Requirements
+
+<ComponentDemo>
+    <Requirements requirements={[
+        {
+            name: "6 characters",
+            status: "no"
+        },
+        {
+            name: "1 UPPERCASE letter",
+            status: "yes"
+        },
+        {
+            name: "1 lowercase letter",
+            status: "yes"
+        },
+        {
+            name: "1 number (0-9)",
+            status: "no"
+        },
+    ]} />
+</ComponentDemo>
+
+<ComponentDemo>
+    <div style={{position: 'relative', width: 50, height: 50, background: '#f00'}}>
+        <Tooltip>Some content for the tooltip</Tooltip>
+    </div>
 </ComponentDemo>

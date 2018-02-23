@@ -1,8 +1,6 @@
 @mixin stack($gap) {
     > * {
-        display: block;
         margin-bottom: $gap;
-        width: 100%;
     }
 
     > :last-child {

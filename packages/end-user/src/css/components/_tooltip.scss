@@ -1,0 +1,60 @@
+$tooltip-bg: $color-neutral-90;
+$tooltip-border: $color-neutral-60;
+
+@mixin arrowShape($color) {
+    content: '';
+    border: 10px solid $color;
+    border-color: transparent $color transparent transparent;
+    display: block;
+    left: 0;
+    bottom: $spacing-xs;
+    position: absolute;
+    transform: translateX(-100%);
+}
+
+.tooltip {
+    @extend %normal-text;
+    background: $tooltip-bg;
+    border: 1px solid $tooltip-border;
+    border-radius: 1px;
+    bottom: 0;
+    padding: $spacing-md;
+    position: absolute;
+    right: -$spacing-sm * 2;
+    transform: translateX(100%);
+    z-index: 1;
+
+    &:before {
+        @include arrowShape($tooltip-border);
+    }
+    &:after {
+        @include arrowShape($tooltip-bg);
+        left: 2px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .tooltip {
+        bottom: -$spacing-sm * 2;
+        right: 0;
+        transform: translateY(100%);
+
+        &:before, &:after {
+            border-color: transparent;
+            bottom: auto;
+            left: auto;
+            top: 0;
+            right: $spacing-xs;
+            transform: translateY(-100%);
+        }
+
+        &:before {
+            border-bottom-color: $tooltip-border;
+        }
+
+        &:after {
+            border-bottom-color: $tooltip-bg;
+            top: 2px;
+        }
+    }
+}

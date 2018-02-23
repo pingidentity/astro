@@ -1,15 +1,16 @@
 .feedback {
-    @extend %error-text;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    @extend %normal-text;
+    @extend %icon-pair;
 }
 
 .feedback__icon {
-    margin-right: $spacing-sm;
+    @extend %icon-pair__icon;
 }
 
 .feedback__message {
-    // this is here to make text wrap properly in IE10 -jfal
-    flex-shrink: 1;
+    @extend %icon-pair__label;
+}
+
+.feedback--error {
+    color: $color-critical;
 }

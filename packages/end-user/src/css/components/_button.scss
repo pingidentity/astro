@@ -20,11 +20,13 @@ $button-disabled-opacity: 0.2;
 .button {
     @extend %button-text;
     background: $button-primary-bg-color;
+    display: block;
     padding: $button-padding;
     box-shadow: none;
     border-radius: $button-radius;
     border: none;
     cursor: pointer;
+    width: 100%;
 
     &:hover {
         background: $button-primary-hover-bg-color;

@@ -11,12 +11,15 @@ $spacing-xx: $spacing-base * 6.5;
 $color-primary: #277BA5;
 $color-primary-bright: #3D88AE;
 $color-critical: #DE3602;
+$color-warning: #EEB91C;
 
 $color-neutral-10: #4d4d4d;
 $color-neutral-20: #595959;
 $color-neutral-30: #666666;
 $color-neutral-40: #737373;
 $color-neutral-50: #808080;
+$color-neutral-60: #9a9a9a;
+$color-neutral-90: #f8f8f8;
 
 $color-neutral-100: #ffffff;
 
@@ -27,6 +30,7 @@ $breakpoint-mobile: 480px;
 $font-default: "proxima-nova", sans-serif;
 
 // FONT SIZES
+$font-size-xs: 11px;
 $font-size-sm: 13px;
 $font-size-md: 15px;
 $font-size-lg: 22px;

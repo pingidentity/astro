@@ -2,9 +2,11 @@
     @extend %input-text;
     border: 1px solid $input-border-color;
     border-radius: 2px;
-    padding: $input-padding-vertical $input-padding-horizontal;
     box-sizing: border-box;
+    display: block;
+    padding: $input-padding-vertical $input-padding-horizontal;
     margin: 0;
+    width: 100%;
 
     &:focus {
         border-color: $input-focus-border-color;
