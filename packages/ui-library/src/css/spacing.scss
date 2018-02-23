@@ -6,3 +6,79 @@ $spacing-md: $base-spacing * 1.5;
 $spacing-lg: $base-spacing * 2.5;
 $spacing-xl: $base-spacing * 4;
 $spacing-xx: $base-spacing * 6.5;
+
+.space-top-xs {
+	margin-top: $spacing-xs !important;
+}
+.space-top-sm {
+	margin-top: $spacing-sm !important;
+}
+.space-top-md {
+	margin-top: $spacing-md !important;
+}
+.space-top-lg {
+	margin-top: $spacing-lg !important;
+}
+.space-top-xl {
+	margin-top: $spacing-xl !important;
+}
+.space-top-xx {
+	margin-top: $spacing-xx !important;
+}
+
+.space-bottom-xs {
+	margin-bottom: $spacing-xs !important;
+}
+.space-bottom-sm {
+	margin-bottom: $spacing-sm !important;
+}
+.space-bottom-md {
+	margin-bottom: $spacing-md !important;
+}
+.space-bottom-lg {
+	margin-bottom: $spacing-lg !important;
+}
+.space-bottom-xl {
+	margin-bottom: $spacing-xl !important;
+}
+.space-bottom-xx {
+	margin-bottom: $spacing-xx !important;
+}
+
+.space-left-xs {
+	margin-left: $spacing-xs !important;
+}
+.space-left-sm {
+	margin-left: $spacing-sm !important;
+}
+.space-left-md {
+	margin-left: $spacing-md !important;
+}
+.space-left-lg {
+	margin-left: $spacing-lg !important;
+}
+.space-left-xl {
+	margin-left: $spacing-xl !important;
+}
+.space-left-xx {
+	margin-left: $spacing-xx !important;
+}
+
+.space-right-xs {
+	margin-right: $spacing-xs !important;
+}
+.space-right-sm {
+	margin-right: $spacing-sm !important;
+}
+.space-right-md {
+	margin-right: $spacing-md !important;
+}
+.space-right-lg {
+	margin-right: $spacing-lg !important;
+}
+.space-right-xl {
+	margin-right: $spacing-xl !important;
+}
+.space-right-xx {
+	margin-right: $spacing-xx !important;
+}

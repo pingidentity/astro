@@ -1,6 +1,7 @@
 "use strict";
-var PropTypes = require("prop-types");
+
 var React = require("react"),
+    PropTypes = require("prop-types"),
     classnames = require("classnames"),
     CollapsibleLink = require("./CollapsibleLink"),
     Utils = require("../../util/Utils"),
@@ -22,6 +23,9 @@ var React = require("react"),
  *     To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
+ * @param {boolean} [condensed=false]
+ *     When true, this applies a more condensed stlying to the section. NOTE that in order to get the full effect of
+ *     this style all of the sections must be in a common parent DOM node such as a <div>.
  * @param {boolean} [disableExpand]
  *     Optional attribute to indicate that section is unopenable.
  * @param {object} [accessories]
@@ -31,6 +35,8 @@ var React = require("react"),
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally. WARNING. Default value will be
  *     set to false from next version.
+ * @param {object} [rowAccessories]
+ *     A right-aligned container where buttons and toggles may be passed in to render on the right side of the section
  * @param {string|object} [title]
  *     The text to display in the the collapsed view and along the top in the expanded view (adjacent to the arrow)
  * @param {string|object} [titleValue]
@@ -86,14 +92,16 @@ class Section extends React.Component {
 
 class SectionStateless extends React.Component {
     static propTypes = {
-        "data-id": PropTypes.string,
-        className: PropTypes.string,
-        expanded: PropTypes.bool,
-        onToggle: PropTypes.func,
         accessories: PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.object
         ]),
+        className: PropTypes.string,
+        condensed: PropTypes.bool,
+        "data-id": PropTypes.string,
+        disableExpand: PropTypes.bool,
+        expanded: PropTypes.bool,
+        onToggle: PropTypes.func,
         title: PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.object
@@ -101,15 +109,15 @@ class SectionStateless extends React.Component {
         titleValue: PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.object
-        ]),
-        disableExpand: PropTypes.bool
+        ])
     };
 
     static defaultProps = {
+        condensed: false,
         "data-id": "section",
+        disableExpand: false,
         expanded: false,
-        onToggle: _.noop,
-        disableExpand: false
+        onToggle: _.noop
     };
 
     _handleToggle = () => {
@@ -120,26 +128,29 @@ class SectionStateless extends React.Component {
     };
 
     render() {
-        var styles = {
-                "collapsible-section": true,
-                open: this.props.expanded,
-                "disable-expand": this.props.disableExpand
-            },
-            title = this.props.title;
-
-        styles[this.props.className] = !!this.props.className;
-
-        if (this.props.titleValue) {
-            styles["has-title-value"] = true;
-        }
+        const styles = {
+            condensed: this.props.condensed,
+            open: this.props.expanded,
+            "disable-expand": this.props.disableExpand,
+            "has-title-value": this.props.titleValue
+        };
 
         return (
-            <div className={classnames(styles)} data-id={this.props["data-id"]}>
+            <div
+                className={classnames("collapsible-section", this.props.className, styles)}
+                data-id={this.props["data-id"]}>
+                {this.props.accessories && (
+                    <div
+                        data-id={this.props["data-id"] + "-collapsible-section-accessories"}
+                        className="row-accessories">
+                        {this.props.accessories}
+                    </div>
+                )}
                 <CollapsibleLink
                     data-id={this.props["data-id"] + "-title"}
                     className="collapsible-section-title"
                     arrowPosition={CollapsibleLink.arrowPositions.LEFT}
-                    title={title}
+                    title={this.props.title}
                     expanded={this.props.expanded}
                     onToggle={this._handleToggle}
                 />
@@ -148,17 +159,8 @@ class SectionStateless extends React.Component {
                         {this.props.titleValue}
                     </span>
                 )}
-                {this.props.accessories && (
-                    <div
-                        data-id={this.props["data-id"] + "-collapsible-section-accessories"}
-                        className="collapsible-section-accessories">
-                        {this.props.accessories}
-                    </div>
-                )}
                 <div className="collapsible-section-content" data-id={this.props["data-id"] + "-content"}>
-                    <div className="collapsible-section-content-inner">
-                        {this.props.children}
-                    </div>
+                    {this.props.children}
                 </div>
             </div>
         );

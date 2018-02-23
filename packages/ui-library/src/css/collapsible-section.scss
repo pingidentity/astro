@@ -3,15 +3,14 @@
     $line-indent: 17px;
 
     position: relative;
-    border-top: 1px solid $color-rabbit-fur;
-    border-bottom: 1px solid $color-rabbit-fur;
-    padding: 25px 0 22px;
+    border-top: 1px dotted $color-rabbit-fur;
+    border-bottom: 1px dotted $color-rabbit-fur;
     margin: 0 0 -1px $line-indent;
 
     > .collapsible-section-title {
         position: relative;
         display: inline-block;
-        padding: 0 0 0 1px;
+        padding: 25px 0 22px;
         font-size: 15px;
         text-transform: uppercase;
         color: $color-slate;
@@ -29,37 +28,15 @@
         display: none;
         visibility: hidden;
         position: relative;
+        margin: 0 0 25px 25px;
 
         @include transition(all 0.3s);
-
-        > .collapsible-section-content-inner {
-            margin: 25px 0 0 25px;
-        }
     }
-    > .collapsible-section-accessories {
-        float: right;
+    .row-accessories {
+        height: 62px;
 
-        .button,
-        input[type=button],
-        button,
-        a,
-        .input-toggle,
-        .status {
-            display: inline-block;
-            vertical-align: top;
-            margin: 8px 0 0 20px;
-
-            @include transform(translateY(-50%));
-        }
-        .button + .button,
-        input[type=button],
-        button {
-            & + .button,
-            & + .button,
-            & + input[type=button],
-            & + button {
-                margin-left: 10px;
-            }
+        > * {
+            margin-left: 10px;
         }
     }
     &.disable-expand {
@@ -103,9 +80,24 @@
         }
     }
 
+    &.condensed {
+        border-bottom: none;
+
+        &:first-child {
+            border-top: none;
+            margin-top: -15px;
+        }
+        .collapsible-section-title {
+            padding: 15px 0 13px;
+        }
+        .row-accessories {
+            height: 43px;
+        }
+    }
+
     // Override for default collapsible-link styles
     .collapsible-link {
-        margin: 0;
+        margin: 0 0 0 17px;
 
         &:hover {
             color: $color-slate;
@@ -116,6 +108,7 @@
             }
         }
         &.left:before {
+            top: auto;
             left: -$line-indent;
             color: $color-midnight;
         }

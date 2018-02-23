@@ -114,42 +114,9 @@
             }
         }
         .row-accessories {
-            position: relative;
+            height: 60px;
             margin: 0 46px 0 0;
             padding: 0 20px 0 0;
-            float: right;
-            line-height: 60px;
-
-            > *,
-            .row-accessories-content > * {
-                display: inline-block;
-                margin: 0 0 0 20px;
-                vertical-align: middle;
-                line-height: $line-height-default;
-
-                .help-tooltip {
-                    vertical-align: middle;
-                }
-                .count {
-                    font-size: 13px;
-                    height: 20px;
-                    line-height: 20px;
-                }
-            }
-            .row-accessories-content {
-                margin: 0;
-            }
-
-            .button + .button,
-            input[type=button],
-            button {
-                & + .button,
-                & + .button,
-                & + input[type=button],
-                & + button {
-                    margin-left: 10px;
-                }
-            }
         }
 
         .row-btns {
@@ -355,17 +322,13 @@
         &.invited {
             .row-accessories {
                 background-color: $color-chilly;
+                padding-left: 20px;
 
                 button.inline {
                     border-color: $color-chilly;
                 }
             }
             &.expanded {
-                .row-accessories {
-                    &:before {
-                        content: none;
-                    }
-                }
                 .button.inline {
                     border-color: $color-rhino;
                 }
@@ -1108,5 +1071,29 @@
         .input-checkbox {
             padding-bottom: 0;
         }
+    }
+}
+
+
+.row-accessories {
+    position: relative;
+    float: right;
+    display: inline-flex;
+    align-items: center;
+
+    .help-tooltip {
+        vertical-align: middle;
+    }
+    .count {
+        font-size: 13px;
+        height: 20px;
+        line-height: 20px;
+    }
+    > *,
+    .row-accessories-content > * {
+        margin: 0 0 0 20px;
+    }
+    .row-accessories-content {
+        margin: 0;
     }
 }

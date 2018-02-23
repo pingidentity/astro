@@ -19,8 +19,8 @@ const IconDemo = () => {
                 </Icon>
             </div>
             <Icon iconName="earth">
-                <div className="text text--primary">Special Icon Styling</div>
-                <div className="text">
+                <div className="textblock textblock--primary">Special Icon Styling</div>
+                <div className="textblock">
                     Special icon title and description styling exists for targeted use.
                 </div>
             </Icon>

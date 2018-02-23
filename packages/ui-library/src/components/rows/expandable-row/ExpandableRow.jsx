@@ -1,8 +1,7 @@
 "use strict";
 
-var PropTypes = require("prop-types");
-
 var React = require("react"),
+    PropTypes = require("prop-types"),
     classnames = require("classnames"),
     _ = require("underscore"),
     DetailsTooltip = require("../../tooltips/DetailsTooltip"),
@@ -173,8 +172,8 @@ var ConfirmDeletePositions = {
  *     Displays a message along the top of the expanded row above all row content including the title and row
   *    accessories.
  * @param {object} [rowAccessories]
- *     A "span" (don't use a "div") where buttons and toggles may be passed in to render on the right side of the row
- *     just to the left of the expand button.
+ *     A right-aligned container where buttons, toggles, or anything else may be passed in to render on the right side
+ *     of the row, just to the left of the expand button.
  *
  * @param {boolan} [waiting=false]
  *     If true, disables interaction with the row and reduces opacity of the layer.

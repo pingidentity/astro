@@ -6,13 +6,13 @@ var SectionDemoPage = Object.create(HomePage, {
      */
     xpathTextDetails1: {
         get: function () {
-            return "//div[@data-id='section-content']";
+            return "//div[@data-id='demo-section-1-content']";
         }
     },
 
     xpathTextDetails2: {
         get: function () {
-            return "//div[@data-id='section-2-content']";
+            return "//div[@data-id='demo-section-2-content']";
         }
     },
 
@@ -21,7 +21,7 @@ var SectionDemoPage = Object.create(HomePage, {
      */
     clickMySectionStatelessLink: {
         value: function () {
-            this.click("//div[contains(text(),'My section Stateless')]");
+            this.click("//div[contains(text(),'Stateless section')]");
         }
     },
 
@@ -30,7 +30,7 @@ var SectionDemoPage = Object.create(HomePage, {
      */
     clickMySectionStatefulLink: {
         value: function () {
-            this.click("//div[contains(text(),'My section Stateful')]");
+            this.click("//div[contains(text(),'Stateful section')]");
         }
     },
 

@@ -131,18 +131,16 @@ class ExpandableRowDemo extends React.Component {
                     stateless={false}
                     title="Row With a Variety of Right Content"
                     subtitle="Row Subtitle"
-                    rowAccessories={(
-                        <span className="row-accessories-content">
-                            <a>Link</a>
-                            <span className="icon-cog" />
-                            <HelpHint className="width-auto bottom" hintText="Provisioning">
-                                <label className="row-help">PROV</label>
-                            </HelpHint>
-                            <button className="inline">Inline Button</button>
-                            <Toggle stateless={false} />
-                            <span className="count">2</span>
-                        </span>
-                    )}
+                    rowAccessories={[
+                        <a>Link</a>,
+                        <span className="icon-cog" />,
+                        <HelpHint className="width-auto bottom" hintText="Provisioning">
+                            <label className="row-help">PROV</label>
+                        </HelpHint>,
+                        <button className="inline">Inline Button</button>,
+                        <Toggle stateless={false} />,
+                        <span className="count">2</span>
+                    ]}
                 />
                 <ExpandableRow
                     stateless={false}
@@ -167,15 +165,13 @@ class ExpandableRowDemo extends React.Component {
                     title="Row With Invited Styling"
                     className="invited"
                     expanded={false}
-                    rowAccessories={
-                        <div className="row-accessories-content">
-                            <div className="invite-info">
-                                <div className="invite-status">Invited (Open)</div>
-                                <div className="invite-date">2017-4-10 4:35pm</div>
-                            </div>
-                            <button className="inline">Resend Invitation</button>
-                        </div>
-                    }
+                    rowAccessories={[
+                        <div className="invite-info">
+                            <div className="invite-status">Invited (Open)</div>
+                            <div className="invite-date">2017-4-10 4:35pm</div>
+                        </div>,
+                        <button className="inline">Resend Invitation</button>
+                    ]}
                 />
                 {!this.state.rowDeleted && (
                     <ExpandableRow

@@ -920,15 +920,23 @@ $color-grey-minor-1: $color-neutral-30;
     }
 }
 
+.page-section-group-title,
 .page-section-title {
-    margin: 0 0 25px;
+    margin: 0 0 $spacing-lg;
     padding: 0 0 5px;
-    border-bottom: 1px solid $color-rabbit-fur;
-    font-size: 15px;
+    border-bottom: 1px solid $color-neutral-70;
     line-height: 1em;
-    font-family: $font-pn-semibold;
-    color: $color-blue-grey;
+    font-family: $font-pn-regular;
+    color: $color-strong-neutral-10;
     text-transform: uppercase;
+}
+
+.page-section-group-title {
+    font-size: 18px;
+}
+
+.page-section-title {
+    font-size: 15px;
 }
 
 .page-section {
