@@ -1,126 +1,173 @@
 @font-face {
-  font-family: 'proxima-nova';
   font-weight: 200;
+  font-family: 'proxima-nova';
   src: url(ProximaNova-Light.otf); }
 
 @font-face {
-  font-family: 'proxima-nova';
   font-weight: 400;
+  font-family: 'proxima-nova';
   src: url(ProximaNova-Regular.otf); }
 
 @font-face {
-  font-family: 'proxima-nova';
   font-weight: 600;
+  font-family: 'proxima-nova';
   src: url(ProximaNova-Semibold.otf); }
 
 @font-face {
-  font-family: 'proxima-nova';
   font-weight: 700;
+  font-family: 'proxima-nova';
   src: url(ProximaNova-Bold.otf); }
 
 @font-face {
-  font-family: 'proxima-nova';
   font-weight: 900;
+  font-family: 'proxima-nova';
   src: url(ProximaNova-Extrabold.otf); }
 
 @font-face {
-  font-family: 'proxima-nova';
   font-weight: 200;
   font-style: italic;
+  font-family: 'proxima-nova';
   src: url(ProximaNova-LightItalic.otf); }
 
 @font-face {
-  font-family: 'proxima-nova';
   font-weight: 400;
   font-style: italic;
+  font-family: 'proxima-nova';
   src: url(ProximaNova-RegularItalic.otf); }
 
 @font-face {
-  font-family: 'proxima-nova';
   font-weight: 600;
   font-style: italic;
+  font-family: 'proxima-nova';
   src: url(ProximaNova-SemiboldItalic.otf); }
 
 @font-face {
-  font-family: 'proxima-nova';
   font-weight: 700;
   font-style: italic;
+  font-family: 'proxima-nova';
   src: url(ProximaNova-BoldIt.otf); }
 
 @font-face {
-  font-family: 'proxima-nova-cond';
   font-weight: 200;
+  font-family: 'proxima-nova-cond';
   src: url(ProximaNovaCond-Light.otf); }
 
 @font-face {
-  font-family: 'proxima-nova-cond';
   font-weight: 400;
+  font-family: 'proxima-nova-cond';
   src: url(ProximaNovaCond-Regular.otf); }
 
 @font-face {
-  font-family: 'proxima-nova-cond';
   font-weight: 600;
+  font-family: 'proxima-nova-cond';
   src: url(ProximaNovaCond-Semibold.otf); }
 
 @font-face {
-  font-family: 'proxima-nova-cond';
   font-weight: 200;
   font-style: italic;
+  font-family: 'proxima-nova-cond';
   src: url(ProximaNovaCond-LightIt.otf); }
 
 @font-face {
-  font-family: 'proxima-nova-cond';
   font-weight: 400;
   font-style: italic;
+  font-family: 'proxima-nova-cond';
   src: url(ProximaNovaCond-RegularIt.otf); }
 
 @font-face {
-  font-family: 'proxima-nova-cond';
   font-weight: 600;
   font-style: italic;
+  font-family: 'proxima-nova-cond';
   src: url(ProximaNovaCond-SemiboldIt.otf); }
 
 @font-face {
   font-family: 'proxima-nova-black';
   src: url(ProximaNova-Black.otf); }
 
-.feedback,
-.error-text {
-  font-family: "proxima-nova", sans-serif;
+.feedback, .text-block, .tooltip,
+.normal-text {
+  color: #595959;
   font-size: 15px;
-  color: #DE3602; }
+  font-family: "proxima-nova", sans-serif; }
+
+.heading,
+.heading-text {
+  color: #595959;
+  font-weight: 400;
+  font-size: 22px;
+  font-family: "proxima-nova", sans-serif; }
+
+.heading {
+  margin-top: 0;
+  margin-bottom: 25px;
+  text-align: center; }
+
+.heading--4 {
+  margin-bottom: 15px;
+  font-size: 15px; }
+
+.requirement,
+.tiny-text {
+  color: #595959;
+  font-weight: 200;
+  font-size: 11px;
+  font-family: "proxima-nova", sans-serif; }
 
 .text-input,
 .input-text {
   font-family: "proxima-nova", sans-serif;
   font-size: 15px;
   font-weight: 600;
-  color: #666666; }
+  color: #666; }
+
+.feedback, .requirement,
+.icon-pair {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start; }
+
+.feedback__icon, .requirement__icon,
+.icon-pair__icon {
+  margin-right: 10px; }
+
+.feedback__message, .requirement__name,
+.icon-pair__label {
+  -ms-flex-negative: 1;
+      flex-shrink: 1; }
 
 .button,
 .button-text {
   font-family: "proxima-nova", sans-serif;
   font-size: 15px;
-  color: #ffffff; }
+  color: #fff; }
 
 .button {
-  background: #277BA5;
+  background: #277ba5;
+  display: block;
   padding: 10px;
   -webkit-box-shadow: none;
           box-shadow: none;
   border-radius: 2px;
   border: none;
-  cursor: pointer; }
+  cursor: pointer;
+  width: 100%; }
   .button:hover {
-    background: #3D88AE; }
+    background: #3d88ae; }
   .button:active {
-    background: #277BA5; }
+    background: #277ba5; }
 
 .button:disabled, .button--disabled {
   opacity: 0.2;
   cursor: default; }
   .button:disabled:hover, .button--disabled:hover {
-    background: #277BA5; }
+    background: #277ba5; }
 
 .card {
   background: white;
@@ -128,6 +175,7 @@
           box-sizing: border-box;
   margin: 0 auto;
   max-width: 400px;
+  min-height: 440px;
   padding: 40px 40px 65px 40px;
   width: 100%; }
 
@@ -162,7 +210,7 @@
   width: 19px;
   height: 19px;
   border: 1px solid #737373;
-  background-color: #ffffff;
+  background-color: #fff;
   border-radius: 2px;
   margin: 2px;
   position: absolute;
@@ -185,17 +233,20 @@
 
 .checkbox__input:focus + .checkbox__standin {
   outline: none;
-  -webkit-box-shadow: 0 0 6px 0 #3D88AE;
-          box-shadow: 0 0 6px 0 #3D88AE; }
+  -webkit-box-shadow: 0 0 6px 0 #3d88ae;
+          box-shadow: 0 0 6px 0 #3d88ae; }
+
+.feedback--error {
+  color: #de3602; }
 
 .float-label {
   position: relative;
-  display: inline-block; }
+  display: block; }
   .float-label > input {
     width: 100%; }
 
 .float-label__label {
-  color: #666666;
+  color: #666;
   -webkit-transition: 0.05s;
   transition: 0.05s;
   display: block;
@@ -222,25 +273,26 @@
     color: rgba(255, 255, 255, 0); }
 
 .float-label__input:focus + .float-label__label {
-  color: #277BA5; }
+  color: #277ba5; }
 
 .float-label__input:placeholder-shown, .float-label__input.placeholder-shown {
   padding-top: 15px;
   padding-bottom: 15px; }
   .float-label__input:placeholder-shown + .float-label__label, .float-label__input.placeholder-shown + .float-label__label {
-    color: #666666;
+    color: #666;
     font-size: 15px;
     font-weight: 400;
     margin-top: 16px;
     margin-left: 11px; }
 
-.form > * {
-  display: block;
-  margin-bottom: 15px;
-  width: 100%; }
-
-.form > :last-child {
-  margin-bottom: 0; }
+.form {
+  margin: 0 0 40px 0; }
+  .form > * {
+    margin-bottom: 15px; }
+  .form > :last-child {
+    margin-bottom: 0; }
+  .form:last-child {
+    margin-bottom: 0; }
 
 .org-logo {
   text-align: center;
@@ -252,7 +304,7 @@
   max-height: 80px; }
 
 .page {
-  background: #666666;
+  background: #666;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -301,61 +353,144 @@
   .page__footer, .page__footer.brand-footer-color {
     color: #595959; } }
 
+.requirements > * {
+  margin-bottom: 10px; }
+
+.requirements > :last-child {
+  margin-bottom: 0; }
+
+.requirement__icon {
+  max-height: 14px; }
+
+.spinner {
+  -webkit-animation: spin 1.5s linear infinite;
+          animation: spin 1.5s linear infinite;
+  display: block;
+  height: 50px;
+  margin: 65px auto;
+  width: 50px; }
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+.text-block {
+  margin: 0 0 25px 0;
+  text-align: center; }
+  .text-block:last-child {
+    margin-bottom: 0; }
+
+.text-block__text {
+  display: inline-block;
+  text-align: left; }
+
+.text-block--small {
+  font-size: 13px; }
+
 .text-input {
   border: 1px solid #737373;
   border-radius: 2px;
-  padding: 15px 10px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  margin: 0; }
+  display: block;
+  padding: 15px 10px;
+  margin: 0;
+  width: 100%; }
   .text-input:focus {
-    border-color: #277BA5; }
+    border-color: #277ba5; }
 
 .text-input--error, .text-input--error:focus {
-  border-color: #DE3602;
+  border-color: #de3602;
   background: right 10px center no-repeat url(error.svg);
   background-color: white;
   padding-right: 40px; }
 
-.feedback {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center; }
+.tooltip {
+  background: #f8f8f8;
+  border: 1px solid #9a9a9a;
+  border-radius: 1px;
+  bottom: 0;
+  padding: 15px;
+  position: absolute;
+  right: -20px;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  z-index: 1; }
+  .tooltip:before {
+    content: '';
+    border: 10px solid #9a9a9a;
+    border-color: transparent #9a9a9a transparent transparent;
+    display: block;
+    left: 0;
+    bottom: 5px;
+    position: absolute;
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%); }
+  .tooltip:after {
+    content: '';
+    border: 10px solid #f8f8f8;
+    border-color: transparent #f8f8f8 transparent transparent;
+    display: block;
+    left: 0;
+    bottom: 5px;
+    position: absolute;
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+    left: 2px; }
 
-.feedback__icon {
-  margin-right: 10px; }
-
-.feedback__message {
-  -ms-flex-negative: 1;
-      flex-shrink: 1; }
+@media (max-width: 1000px) {
+  .tooltip {
+    bottom: -20px;
+    right: 0;
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%); }
+    .tooltip:before, .tooltip:after {
+      border-color: transparent;
+      bottom: auto;
+      left: auto;
+      top: 0;
+      right: 5px;
+      -webkit-transform: translateY(-100%);
+              transform: translateY(-100%); }
+    .tooltip:before {
+      border-bottom-color: #9a9a9a; }
+    .tooltip:after {
+      border-bottom-color: #f8f8f8;
+      top: 2px; } }
 
 body {
   margin: 0; }
 
-body, input {
+body,
+input {
   font-family: sans-serif;
   -webkit-font-smoothing: antialiased; }
 
 :focus {
   outline: none;
-  -webkit-box-shadow: 0 0 6px 0 #3D88AE;
-          box-shadow: 0 0 6px 0 #3D88AE; }
+  -webkit-box-shadow: 0 0 6px 0 #3d88ae;
+          box-shadow: 0 0 6px 0 #3d88ae; }
 
 a {
-  color: #277BA5;
+  color: #277ba5;
   text-decoration: none; }
   a:hover {
-    text-decoration: underline;
-    color: #3D88AE; }
+    color: #3d88ae;
+    text-decoration: underline; }
 
-#app {
+.app-container {
   position: absolute;
   top: 0;
   right: 0;

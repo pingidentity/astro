@@ -1,6 +1,6 @@
 @mixin focus {
     outline: none;
-    box-shadow: 0 0 6px 0 $color-primary-bright;
+    box-shadow: 0 0 6px 0 $color-active-blue-highlighted;
 }
 
 @import './global-vars';
@@ -40,11 +40,11 @@ input {
 }
 
 a {
-    color: $color-primary;
+    color: $color-active-blue;
     text-decoration: none;
 
     &:hover {
-        color: $color-primary-bright;
+        color: $color-active-blue-highlighted;
         text-decoration: underline;
     }
 }

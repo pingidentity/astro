@@ -14,7 +14,7 @@
 }
 
 .text-input--error, .text-input--error:focus {
-    border-color: $color-critical;
+    border-color: $color-critical-red;
 
     background: right $spacing-sm center no-repeat url("../icons/error.svg");
     background-color: white;
