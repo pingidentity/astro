@@ -20,22 +20,22 @@
                     alt="Company Logo" />
             </div>
             <h1 class="heading">Change Password</h1>
+            <div class="feedback feedback--alert">
+                <img class="feedback__icon" src="alert.svg" alt="Alert"
+                />
+                <div class="feedback__message">Your password has expired. Please create a new
+                    one.</div>
+            </div>
             <form class="form">
-                <div class="feedback feedback--alert">
-                    <img class="feedback__icon" src="alert.svg" alt="Alert"
-                    />
-                    <div class="feedback__message">Your password has expired. Please create
-                        a new one.</div>
-                </div>
                 <div class="float-label">
                     <input type="password" class="text-input float-label__input"
-                        placeholder="Current Password" id="password"
-                        name="password" />
+                        id="password" name="password" placeholder="Current Password"
+                    />
                     <label class="float-label__label" for="password">Current Password</label>
                 </div>
                 <div class="float-label">
                     <input type="password" class="text-input float-label__input"
-                        placeholder="New Password" id="new" name="new"
+                        id="new" name="new" placeholder="New Password"
                     />
                     <label class="float-label__label" for="new">New Password</label>
                     <div class="tooltip">
@@ -67,7 +67,7 @@
         </div>
         <div class="float-label">
             <input type="password" class="text-input float-label__input"
-                placeholder="Verify New Password" id="verify" name="verify"
+                id="verify" name="verify" placeholder="Verify New Password"
             />
             <label class="float-label__label" for="verify">Verify New Password</label>
         </div>

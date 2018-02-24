@@ -18,10 +18,8 @@ const ChangePWPage = ({ branding }) => (
         <Card>
             <Logo src={branding && branding.logo} />
             <Heading>Change Password</Heading>
+            <Feedback type="alert">Your password has expired. Please create a new one.</Feedback>
             <Form>
-                <Feedback type="alert">
-                    Your password has expired. Please create a new one.
-                </Feedback>
                 <FloatLabelPasswordInput label="Current Password" id="password" />
                 <FloatLabelPasswordInput label="New Password" id="new">
                     <Tooltip>

@@ -1,6 +1,7 @@
 .feedback {
     @extend %normal-text;
     @extend %icon-pair;
+    @include stacked-item($spacing-lg);
 }
 
 .feedback__icon {

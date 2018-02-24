@@ -236,6 +236,11 @@
   -webkit-box-shadow: 0 0 6px 0 #3d88ae;
           box-shadow: 0 0 6px 0 #3d88ae; }
 
+.feedback {
+  margin: 0 0 25px 0; }
+  .feedback:last-child {
+    margin-bottom: 0; }
+
 .feedback--error {
   color: #de3602; }
 
@@ -417,14 +422,21 @@
   background-color: white;
   padding-right: 40px; }
 
+.text-input--success {
+  background: right 10px center no-repeat url(success.svg);
+  background-color: white;
+  padding-right: 40px; }
+
 .tooltip {
   background: #f8f8f8;
   border: 1px solid #9a9a9a;
   border-radius: 1px;
   bottom: 0;
+  -webkit-box-shadow: 1px 1px 5px #4d4d4d;
+          box-shadow: 1px 1px 5px #4d4d4d;
   padding: 15px;
   position: absolute;
-  right: -20px;
+  right: -15px;
   -webkit-transform: translateX(100%);
           transform: translateX(100%);
   z-index: 1; }
@@ -452,7 +464,7 @@
 
 @media (max-width: 1000px) {
   .tooltip {
-    bottom: -20px;
+    bottom: -15px;
     right: 0;
     -webkit-transform: translateY(100%);
             transform: translateY(100%); }

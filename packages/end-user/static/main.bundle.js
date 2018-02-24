@@ -5115,10 +5115,12 @@ var TextInput = function TextInput(_ref) {
     var placeholder = _ref.placeholder,
         id = _ref.id,
         className = _ref.className,
-        error = _ref.error;
+        error = _ref.error,
+        success = _ref.success;
 
     var classNames = (0, _classnames2.default)('text-input', className, {
-        'text-input--error': error
+        'text-input--error': error,
+        'text-input--success': success
     });
 
     return _react2.default.createElement('input', { className: classNames, id: id, name: id, placeholder: placeholder, type: 'text' });
@@ -5127,7 +5129,8 @@ var TextInput = function TextInput(_ref) {
 TextInput.propTypes = {
     placeholder: _propTypes2.default.string,
     id: _propTypes2.default.string,
-    error: _propTypes2.default.string
+    error: _propTypes2.default.bool,
+    success: _propTypes2.default.bool
 };
 
 exports.default = TextInput;
@@ -28263,7 +28266,7 @@ exports.default = function (_ref) {
         p = _factories$p === undefined ? (0, _react.createFactory)('p') : _factories$p;
 
 
-    return wrapper({}, h1({ "id": "Ping-End-User-Components" }, "Ping End-User Components"), p({}, "This is a catalog of components."), h2({ "id": "Logo" }, "Logo"), p({}, "The logo that sits atop the form."), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" })), h2({ "id": "Heading" }, "Heading"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Heading2.default, null, "This Would Be a Page Title")), h2({ "id": "Inputs" }, "Inputs"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_TextInput2.default, { id: "username" })), h3({ "id": "Error-state" }, "Error state"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_TextInput2.default, { id: "username", error: true })), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_FloatLabelTextInput2.default, { label: "Username", id: "username" })), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Password", id: "password" })), h2({ "id": "Button" }, "Button"), h3({ "id": "The-submit-button-for-the-form." }, "The submit button for the form."), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Button2.default, { label: "push it", primary: true })), h3({ "id": "Disabled-primary-button" }, "Disabled primary button"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Button2.default, { label: "push it", primary: true, disabled: true })), h2({ "id": "Card" }, "Card"), p({}, "Cards sit above the customized background and contain all our UI elements."), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, "The content inside a card")), h2({ "id": "The-Sign-On-Form" }, "The Sign-On Form"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelTextInput2.default, { label: "Username", id: "username" }), (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Password", id: "password" }), (0, _react.createElement)("div", null, (0, _react.createElement)(_Checkbox2.default, { label: "Remember me" })), (0, _react.createElement)(_Button2.default, { label: "Sign On", primary: true })))), h3({ "id": "With-an-error" }, "With an error"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_Feedback2.default, { type: "error" }, "Cannot sign on. There is a problem with either your username or password."), (0, _react.createElement)(_FloatLabelTextInput2.default, { label: "Username", id: "username" }), (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Password", id: "password" }), (0, _react.createElement)("div", null, (0, _react.createElement)(_Checkbox2.default, { label: "Remember me" })), (0, _react.createElement)(_Button2.default, { label: "Sign On", primary: true })))), h3({ "id": "Another-logo" }, "Another logo"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "jj-logo.png" }), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelTextInput2.default, { label: "Username", id: "username" }), (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Password", id: "password" }), (0, _react.createElement)("div", null, (0, _react.createElement)(_Checkbox2.default, { label: "Remember me" })), (0, _react.createElement)(_Button2.default, { label: "Sign On", primary: true })))), h3({ "id": "Just-the-password" }, "Just the password"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Heading2.default, null, "Hello Cindy Lou Who,"), (0, _react.createElement)(_TextBlock2.default, null, "Please enter your password below:"), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Password", id: "password" }), (0, _react.createElement)(_Button2.default, { label: "Sign On", primary: true, disabled: true })), (0, _react.createElement)(_TextBlock2.default, { size: "small" }, "Not Cindy Lou? ", (0, _react.createElement)("a", { href: "#" }, "Switch Accounts")))), h2({ "id": "Feedback-Messages" }, "Feedback Messages"), p({}, "Error message"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Feedback2.default, { type: "error" }, "Cannot sign on. There is a problem with either your username or password.")), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Feedback2.default, { type: "alert" }, "Your password has expired. Please create a new one.")), h2({ "id": "Password-Requirements" }, "Password Requirements"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Requirements2.default, { requirements: [{
+    return wrapper({}, h1({ "id": "Ping-End-User-Components" }, "Ping End-User Components"), p({}, "This is a catalog of components."), h2({ "id": "Logo" }, "Logo"), p({}, "The logo that sits atop the form."), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" })), h2({ "id": "Heading" }, "Heading"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Heading2.default, null, "This Would Be a Page Title")), h2({ "id": "Inputs" }, "Inputs"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_TextInput2.default, { id: "username" })), h3({ "id": "Error-state" }, "Error state"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_TextInput2.default, { id: "username", error: true })), h3({ "id": "Success-state" }, "Success state"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_TextInput2.default, { id: "username", success: true })), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_FloatLabelTextInput2.default, { label: "Username", id: "username" })), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Password", id: "password" })), h2({ "id": "Button" }, "Button"), h3({ "id": "The-submit-button-for-the-form." }, "The submit button for the form."), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Button2.default, { label: "push it", primary: true })), h3({ "id": "Disabled-primary-button" }, "Disabled primary button"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Button2.default, { label: "push it", primary: true, disabled: true })), h2({ "id": "Card" }, "Card"), p({}, "Cards sit above the customized background and contain all our UI elements."), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, "The content inside a card")), h2({ "id": "The-Sign-On-Form" }, "The Sign-On Form"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelTextInput2.default, { label: "Username", id: "username" }), (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Password", id: "password" }), (0, _react.createElement)("div", null, (0, _react.createElement)(_Checkbox2.default, { label: "Remember me" })), (0, _react.createElement)(_Button2.default, { label: "Sign On", primary: true })))), h3({ "id": "With-an-error" }, "With an error"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Feedback2.default, { type: "error" }, "Cannot sign on. There is a problem with either your username or password."), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelTextInput2.default, { label: "Username", id: "username" }), (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Password", id: "password" }), (0, _react.createElement)("div", null, (0, _react.createElement)(_Checkbox2.default, { label: "Remember me" })), (0, _react.createElement)(_Button2.default, { label: "Sign On", primary: true })))), h3({ "id": "Another-logo" }, "Another logo"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "jj-logo.png" }), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelTextInput2.default, { label: "Username", id: "username" }), (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Password", id: "password" }), (0, _react.createElement)("div", null, (0, _react.createElement)(_Checkbox2.default, { label: "Remember me" })), (0, _react.createElement)(_Button2.default, { label: "Sign On", primary: true })))), h3({ "id": "Just-the-password" }, "Just the password"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Heading2.default, null, "Hello Cindy Lou Who,"), (0, _react.createElement)(_TextBlock2.default, null, "Please enter your password below:"), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Password", id: "password" }), (0, _react.createElement)(_Button2.default, { label: "Sign On", primary: true, disabled: true })), (0, _react.createElement)(_TextBlock2.default, { size: "small" }, "Not Cindy Lou? ", (0, _react.createElement)("a", { href: "#" }, "Switch Accounts")))), h3({ "id": "Reset-password" }, "Reset password"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Feedback2.default, { type: "error" }, "Too many unsuccessful sign-on attempts. Please reset your password."), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_Button2.default, { label: "Reset Password", primary: true })), (0, _react.createElement)(_TextBlock2.default, { size: "small" }, "No account? ", (0, _react.createElement)("a", { href: "#" }, "Register Now")))), h2({ "id": "Feedback-Messages" }, "Feedback Messages"), p({}, "Error message"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Feedback2.default, { type: "error" }, "Cannot sign on. There is a problem with either your username or password.")), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Feedback2.default, { type: "alert" }, "Your password has expired. Please create a new one.")), h2({ "id": "Password-Requirements" }, "Password Requirements"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Requirements2.default, { requirements: [{
             name: "6 characters",
             status: "no"
         }, {
@@ -28994,20 +28997,23 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var PasswordInput = function PasswordInput(_ref) {
     var placeholder = _ref.placeholder,
         id = _ref.id,
-        className = _ref.className;
-    return _react2.default.createElement('input', {
-        type: 'password',
-        className: (0, _classnames2.default)('text-input', className),
-        placeholder: placeholder,
-        id: id,
-        name: id
+        className = _ref.className,
+        error = _ref.error,
+        success = _ref.success;
+
+    var classNames = (0, _classnames2.default)('text-input', className, {
+        'text-input--error': error,
+        'text-input--success': success
     });
+
+    return _react2.default.createElement('input', { className: classNames, id: id, name: id, placeholder: placeholder, type: 'password' });
 };
 
 PasswordInput.propTypes = {
     placeholder: _propTypes2.default.string,
     id: _propTypes2.default.string,
-    className: _propTypes2.default.string
+    error: _propTypes2.default.bool,
+    success: _propTypes2.default.bool
 };
 
 exports.default = PasswordInput;
@@ -46970,13 +46976,13 @@ var ChangePWPage = function ChangePWPage(_ref) {
                 'Change Password'
             ),
             _react2.default.createElement(
+                _Feedback2.default,
+                { type: 'alert' },
+                'Your password has expired. Please create a new one.'
+            ),
+            _react2.default.createElement(
                 _Form2.default,
                 null,
-                _react2.default.createElement(
-                    _Feedback2.default,
-                    { type: 'alert' },
-                    'Your password has expired. Please create a new one.'
-                ),
                 _react2.default.createElement(_FloatLabelPasswordInput2.default, { label: 'Current Password', id: 'password' }),
                 _react2.default.createElement(
                     _FloatLabelPasswordInput2.default,

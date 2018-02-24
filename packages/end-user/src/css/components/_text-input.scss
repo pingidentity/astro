@@ -21,3 +21,10 @@
 
     padding-right: $spacing-xl;
 }
+
+.text-input--success {
+    background: right $spacing-sm center no-repeat url("../icons/success.svg");
+    background-color: white;
+
+    padding-right: $spacing-xl;
+}
