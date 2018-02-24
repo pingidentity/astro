@@ -1,0 +1,12 @@
+.spinner {
+    animation: spin 1.5s linear infinite;
+    display: block;
+    height: 50px;
+    margin: $spacing-xx auto;
+    width: 50px;
+}
+
+@keyframes spin {
+    0%   {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}

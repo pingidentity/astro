@@ -1,9 +1,5 @@
-import React from "react";
+import React from 'react';
 
-const Tooltip = ({children}) => (
-    <div className="tooltip">
-        {children}
-    </div>
-);
+const Tooltip = ({ children }) => <div className="tooltip">{children}</div>;
 
 export default Tooltip;

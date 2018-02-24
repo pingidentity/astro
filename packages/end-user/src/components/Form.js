@@ -1,11 +1,5 @@
-import React from "react";
+import React from 'react';
 
-const Form = ({children}) => {
-    return (
-        <form className="form">
-            {children}
-        </form>
-    )
-};
+const Form = ({ children }) => <form className="form">{children}</form>;
 
 export default Form;

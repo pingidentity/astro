@@ -1,34 +1,34 @@
 %normal-text,
 .normal-text {
-    font-family: $font-default;
-    font-size: $font-size-md;
     color: $color-neutral-20;
+    font-size: $font-size-md;
+    font-family: $font-default;
 }
 
 %heading-text,
 .heading-text {
-    font-family: $font-default;
-    font-size: $font-size-lg;
-    font-weight: 400;
     color: $color-neutral-20;
+    font-weight: 400;
+    font-size: $font-size-lg;
+    font-family: $font-default;
 }
 
 .heading {
     @extend %heading-text;
-    text-align: center;
     margin-top: 0;
     margin-bottom: $spacing-lg;
+    text-align: center;
 }
 
 .heading--4 {
-    font-size: $font-size-md;
     margin-bottom: $spacing-md;
+    font-size: $font-size-md;
 }
 
 %tiny-text,
 .tiny-text {
-    font-family: $font-default;
-    font-size: $font-size-xs;
-    font-weight: 200;
     color: $color-neutral-20;
+    font-weight: 200;
+    font-size: $font-size-xs;
+    font-family: $font-default;
 }

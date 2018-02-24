@@ -1,17 +1,24 @@
-import React from "react";
-import classnames from "classnames";
+import React from 'react';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
-const Button = ({disabled, label, primary}) => {
-    const classNames = classnames("button",
-        {
-            "button--primary": primary,
-            "button--disabled": disabled,
-            "brand-primary-bg": primary,
-        }
+const Button = ({ disabled, label, primary }) => {
+    const classNames = classnames('button', {
+        'button--primary': primary,
+        'button--disabled': disabled,
+        'brand-primary-bg': primary,
+    });
+    return (
+        <button className={classNames} disabled={disabled || false}>
+            {label}
+        </button>
     );
-    return(
-        <button className={classNames} disabled={disabled || false}>{label}</button>
-    )
+};
+
+Button.propTypes = {
+    disabled: PropTypes.bool,
+    label: PropTypes.string,
+    primary: PropTypes.bool,
 };
 
 export default Button;

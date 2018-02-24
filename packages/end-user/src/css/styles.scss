@@ -1,33 +1,36 @@
 @mixin focus {
-  outline: none;
-  box-shadow: 0 0 6px 0 $color-primary-bright;
+    outline: none;
+    box-shadow: 0 0 6px 0 $color-primary-bright;
 }
 
-@import "./_global-vars.scss";
-@import "./_fonts.scss";
-@import "./_text.scss";
-@import "./_spacing.scss";
+@import './global-vars';
+@import './fonts';
+@import './text';
+@import './spacing';
 
-@import "./common/_inputs.scss";
-@import "./common/_icon-pairs.scss";
+@import './common/inputs';
+@import './common/icon-pairs';
 
-@import "./components/_button.scss";
-@import "./components/_card.scss";
-@import "./components/_checkbox.scss";
-@import "./components/_feedback.scss";
-@import "./components/_float-label.scss";
-@import "./components/_form.scss";
-@import "./components/_org-logo.scss";
-@import "./components/_page.scss";
-@import "./components/_requirements.scss";
-@import "./components/_text-input.scss";
-@import "./components/_tooltip.scss";
+@import './components/button';
+@import './components/card';
+@import './components/checkbox';
+@import './components/feedback';
+@import './components/float-label';
+@import './components/form';
+@import './components/org-logo';
+@import './components/page';
+@import './components/requirements';
+@import './components/spinner';
+@import './components/text-block';
+@import './components/text-input';
+@import './components/tooltip';
 
 body {
     margin: 0;
 }
 
-body, input {
+body,
+input {
     font-family: sans-serif;
     -webkit-font-smoothing: antialiased;
 }
@@ -37,16 +40,16 @@ body, input {
 }
 
 a {
-  color: $color-primary;
-  text-decoration: none;
+    color: $color-primary;
+    text-decoration: none;
 
-  &:hover {
-    text-decoration: underline;
-    color: $color-primary-bright;
-  }
+    &:hover {
+        color: $color-primary-bright;
+        text-decoration: underline;
+    }
 }
 
-#app {
+.app-container {
     position: absolute;
     top: 0;
     right: 0;

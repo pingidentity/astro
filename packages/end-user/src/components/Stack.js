@@ -1,11 +1,5 @@
-import React from "react";
+import React from 'react';
 
-const Stack = ({children}) => {
-    return (
-        <div className="stack">
-            {children}
-        </div>
-    )
-};
+const Stack = ({ children }) => <div className="stack">{children}</div>;
 
 export default Stack;

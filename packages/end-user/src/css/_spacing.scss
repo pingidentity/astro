@@ -7,3 +7,11 @@
         margin-bottom: 0;
     }
 }
+
+@mixin stacked-item($gap) {
+    margin: 0 0 $gap 0;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}

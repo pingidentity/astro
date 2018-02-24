@@ -8,6 +8,8 @@ import Form from "../components/Form";
 import Heading from "../components/Heading";
 import Logo from "../components/Logo";
 import Requirements from "../components/Requirements";
+import Spinner from "../components/Spinner";
+import TextBlock from "../components/TextBlock";
 import TextInput from "../components/TextInput";
 import Tooltip from "../components/Tooltip";
 import ComponentDemo from "./components/ComponentDemo";
@@ -110,6 +112,20 @@ Cards sit above the customized background and contain all our UI elements.
     </Card>
 </ComponentDemo>
 
+### Just the password
+<ComponentDemo>
+    <Card>
+        <Logo src="ping-logo.svg"/>
+        <Heading>Hello Cindy Lou Who,</Heading>
+        <TextBlock>Please enter your password below:</TextBlock>
+        <Form>
+            <FloatLabelPasswordInput label="Password" id="password"/>
+            <Button label="Sign On" primary disabled/>
+        </Form>
+        <TextBlock size="small">Not Cindy Lou? <a href="#">Switch Accounts</a></TextBlock>
+    </Card>
+</ComponentDemo>
+
 ## Feedback Messages
 
 Error message
@@ -149,4 +165,8 @@ Error message
     <div style={{position: 'relative', width: 50, height: 50, background: '#f00'}}>
         <Tooltip>Some content for the tooltip</Tooltip>
     </div>
+</ComponentDemo>
+
+<ComponentDemo>
+    <Spinner/>
 </ComponentDemo>

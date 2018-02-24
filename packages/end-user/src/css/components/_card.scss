@@ -11,6 +11,7 @@ $card-mobile-padding: $spacing-xx;
     box-sizing: border-box;
     margin: 0 auto;
     max-width: $card-width;
+    min-height: 440px;
     padding: $card-padding-top $card-padding-horizontal $card-padding-bottom $card-padding-horizontal;
     width: 100%;
 }

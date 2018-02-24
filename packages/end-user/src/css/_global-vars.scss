@@ -1,33 +1,33 @@
 // SPACING SCALE
 $spacing-base: 10px;
 $spacing-xs: $spacing-base * 0.5;
-$spacing-sm: $spacing-base * 1.0;
+$spacing-sm: $spacing-base * 1;
 $spacing-md: $spacing-base * 1.5;
 $spacing-lg: $spacing-base * 2.5;
-$spacing-xl: $spacing-base * 4.0;
+$spacing-xl: $spacing-base * 4;
 $spacing-xx: $spacing-base * 6.5;
 
 // COLOR TOKENS
-$color-primary: #277BA5;
-$color-primary-bright: #3D88AE;
-$color-critical: #DE3602;
-$color-warning: #EEB91C;
+$color-primary: #277ba5;
+$color-primary-bright: #3d88ae;
+$color-critical: #de3602;
+$color-warning: #eeb91c;
 
 $color-neutral-10: #4d4d4d;
 $color-neutral-20: #595959;
-$color-neutral-30: #666666;
+$color-neutral-30: #666;
 $color-neutral-40: #737373;
 $color-neutral-50: #808080;
 $color-neutral-60: #9a9a9a;
 $color-neutral-90: #f8f8f8;
 
-$color-neutral-100: #ffffff;
+$color-neutral-100: #fff;
 
 // MOBILE
 $breakpoint-mobile: 480px;
 
 // FONTS
-$font-default: "proxima-nova", sans-serif;
+$font-default: 'proxima-nova', sans-serif;
 
 // FONT SIZES
 $font-size-xs: 11px;

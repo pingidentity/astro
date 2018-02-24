@@ -1,15 +1,14 @@
-import chroma from "chroma-js";
+import chroma from 'chroma-js';
 
-const completeBranding = branding => {
-    let calculated = {};
+const completeBranding = (branding) => {
+    const calculated = {};
     if (branding.primaryColor) {
         calculated.primaryColorHighlight = chroma(branding.primaryColor).brighten();
     }
     if (branding.backgroundColor) {
-        branding.footerColor = chroma(branding.backgroundColor).luminance() > 0.5
-            ? '#111' : '#eee';
+        calculated.footerColor = chroma(branding.backgroundColor).luminance() > 0.5 ? '#111' : '#eee';
     }
-    return {...branding, ...calculated};
-}
+    return { ...branding, ...calculated };
+};
 
 export default completeBranding;

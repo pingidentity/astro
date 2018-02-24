@@ -6,7 +6,7 @@ const extractEndUserCSS = new ExtractTextPlugin("end-user.css");
 
 const routes = require("./src/demo/routes.js");
 let entries = {};
-for (var i = 0; i < routes.length; i++) {
+for (let i = 0; i < routes.length; i++) {
     entries[routes[i].id] = ["babel-polyfill", "./src/demo/entries/"+routes[i].script];
 }
 // babel-polyfill is necessary to work on IE10

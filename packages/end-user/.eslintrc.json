@@ -1,0 +1,32 @@
+{
+    "env": {
+        "browser": true
+    },
+    "parser": "babel-eslint",
+    "extends": "airbnb",
+    "rules": {
+        "import/extensions": 0,
+        "indent": ["error", 4, { "SwitchCase": 1 }],
+        "jsx-a11y/label-has-for": [ 2, {
+            "components": [ "label" ],
+            "required": {
+                "some": [ "nesting", "id" ]
+            },
+            "allowChildren": false
+        }],
+        "no-underscore-dangle": 0,
+        "prefer-destructuring": 0,
+        "react/jsx-filename-extension": 0,
+        "react/jsx-indent": ["error", 4, { "SwitchCase": 1 }],
+        "react/jsx-indent-props": ["error", 4, { "SwitchCase": 1 }],
+        "react/prop-types": ["error", { "ignore": ["children", "className"]}],
+        "react/require-default-props": 0
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".mdx"]
+            }
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import ReactDOM from "react-dom";
-import pages from "../pages";
+import ReactDOM from 'react-dom';
+import pages from '../pages';
 
-ReactDOM.render(pages.branded, document.getElementById("app"));
+ReactDOM.render(pages.branded, document.getElementById('app'));
