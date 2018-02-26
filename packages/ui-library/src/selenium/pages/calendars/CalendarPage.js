@@ -178,7 +178,7 @@ var CalendarDemoPage = Object.create(HomePage, {
     openCalendarDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Components", "Misc", "Calendar");
+            this.navigateToPath("Components", "General", "Calendar");
         }
     }
 });

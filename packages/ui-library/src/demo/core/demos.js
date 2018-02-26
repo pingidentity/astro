@@ -215,7 +215,14 @@ module.exports = [
                         pathToDoc: "components/forms/LinkDropDownList.jsx",
                         pathToSource: "components_forms_LinkDropDownList.jsx.html",
                         pathToDemoSource: "demo_components_forms_LinkDropDownListDemo.jsx.html"
-                    }
+                    },
+                    {
+                        label: "Multivalues",
+                        demo: require("../components/forms/MultivaluesDemo"),
+                        pathToDoc: "components/forms/Multivalues.jsx",
+                        pathToSource: "components_forms_Multivalues.jsx.html",
+                        pathToDemoSource: "demo_components_forms_MultivaluesDemo.jsx.html"
+                    },
                 ]
             },
             {
@@ -294,23 +301,9 @@ module.exports = [
                 ]
             },
             {
-                label: "Misc",
+                label: "Wizard",
                 icon: "wand",
                 children: [
-                    {
-                        label: "Color Picker",
-                        demo: require("../components/general/ColorPickerDemo"),
-                        pathToDoc: "components/general/ColorPicker.jsx",
-                        pathToSource: "components_general_ColorPicker.jsx.html",
-                        pathToDemoSource: "demo_components_general_ColorPickerDemo.jsx.html"
-                    },
-                    {
-                        label: "Infinite Scroller",
-                        demo: require("../components/list/InfiniteScrollDemo"),
-                        pathToDoc: "components/list/InfiniteScroll.jsx",
-                        pathToSource: "components_list_InfiniteScroll.jsx.html",
-                        pathToDemoSource: "demo_components_list_InfiniteScrollDemo.jsx.html"
-                    },
                     {
                         label: "Wizard",
                         demo: require("../components/wizard/WizardDemo"),
@@ -318,6 +311,12 @@ module.exports = [
                         pathToSource: "components_wizard_Wizard.jsx.html",
                         pathToDemoSource: "demo_components_wizard_WizardDemo.jsx.html"
                     },
+                ]
+            },
+            {
+                label: "Popovers & Tooltips",
+                icon: "alert",
+                children: [
                     {
                         label: "Details Tooltip",
                         demo: require("../components/tooltips/DetailsTooltipDemo"),
@@ -332,6 +331,81 @@ module.exports = [
                         pathToSource: "components_tooltips_PopoverMenu.jsx.html",
                         pathToDemoSource: "demo_components_tooltips_PopoverMenuDemo.jsx.html"
                     },
+                ]
+            },
+            {
+                label: "Lists & Tables",
+                icon: "directory-hollow",
+                children: [
+                    {
+                        label: "Infinite Scroller",
+                        demo: require("../components/list/InfiniteScrollDemo"),
+                        pathToDoc: "components/list/InfiniteScroll.jsx",
+                        pathToSource: "components_list_InfiniteScroll.jsx.html",
+                        pathToDemoSource: "demo_components_list_InfiniteScrollDemo.jsx.html"
+                    },
+                    {
+                        label: "Condensed Table",
+                        demo: require("../components/tables/CondensedTableDemo"),
+                        pathToDoc: "components/tables/CondensedTable.jsx",
+                        pathToSource: "components_table_CondensedTable.jsx.html",
+                        pathToDemoSource: "demo_components_table_CondensedTable.jsx.html"
+                    },
+                    {
+                        label: "Expandable Row",
+                        demo: require("../components/rows/ExpandableRowDemo"),
+                        pathToDoc: "components/rows/ExpandableRow.jsx",
+                        pathToSource: "components_rows_expandable-row_ExpandableRow.jsx.html",
+                        pathToDemoSource: "demo_components_rows_ExpandableRowDemo.jsx.html"
+                    },
+                    {
+                        label: "Drag-N-Drop Row",
+                        demo: require("../components/rows/DragDropRowDemo"),
+                        pathToDoc: "components/rows/DragDropRow.jsx",
+                        pathToSource: "components_rows_DragDropRow.jsx.html",
+                        pathToDemoSource: "demo_components_rows_DragDropRowDemo.jsx.html"
+                    },
+                    {
+                        label: "Drag-N-Drop Table",
+                        demo: require("../components/tables/DragDropTableDemo"),
+                        pathToDoc: "components/tables/DragDropTable.jsx",
+                        pathToSource: "components_tables_DragDropTable.jsx.html",
+                        pathToDemoSource: "demo_components_tables_DragDropTableDemo.jsx.html"
+                    },
+                    {
+                        label: "Pagination",
+                        demo: require("../components/list/PaginationDemo"),
+                        pathToDoc: "components/list/Pagination.jsx",
+                        pathToSource: "components_list_Pagination.jsx.html",
+                        pathToDemoSource: "demo_components_list_PaginationDemo.jsx.html"
+                    },
+                    {
+                        label: "Grid",
+                        demo: require("../components/grid/GridDemo"),
+                        pathToDoc: "components/grid/Grid.jsx",
+                        pathToSource: "components_grid_Grid.jsx.html",
+                        pathToDemoSource: "demo_components_grid_GridDemo.jsx.html"
+                    },
+                    {
+                        label: "Row Index Navigation",
+                        demo: require("../components/general/RowIndexNavDemo"),
+                        pathToDoc: "components/general/RowIndexNav.jsx",
+                        pathToSource: "components_general_RowIndexNav.jsx.html",
+                        pathToDemoSource: "demo_components_general_RowIndexNavDemo.jsx.html"
+                    },
+                ]
+            },
+            {
+                label: "General",
+                icon: "globe",
+                children: [
+                    {
+                        label: "Color Picker",
+                        demo: require("../components/general/ColorPickerDemo"),
+                        pathToDoc: "components/general/ColorPicker.jsx",
+                        pathToSource: "components_general_ColorPicker.jsx.html",
+                        pathToDemoSource: "demo_components_general_ColorPickerDemo.jsx.html"
+                    },
                     {
                         label: "Collapsible Link",
                         demo: require("../components/general/CollapsibleLinkDemo"),
@@ -345,13 +419,6 @@ module.exports = [
                         pathToDoc: "components/general/Section.jsx",
                         pathToSource: "components_general_Section.jsx.html",
                         pathToDemoSource: "demo_components_general_SectionDemo.jsx.html"
-                    },
-                    {
-                        label: "Condensed Table",
-                        demo: require("../components/tables/CondensedTableDemo"),
-                        pathToDoc: "components/tables/CondensedTable.jsx",
-                        pathToSource: "components_table_CondensedTable.jsx.html",
-                        pathToDemoSource: "demo_components_table_CondensedTable.jsx.html"
                     },
                     {
                         label: "Conditional Fieldset",
@@ -431,13 +498,6 @@ module.exports = [
                         pathToDemoSource: "demo_components_general_SelectTextDemo.jsx.html"
                     },
                     {
-                        label: "Expandable Row",
-                        demo: require("../components/rows/ExpandableRowDemo"),
-                        pathToDoc: "components/rows/ExpandableRow.jsx",
-                        pathToSource: "components_rows_expandable-row_ExpandableRow.jsx.html",
-                        pathToDemoSource: "demo_components_rows_ExpandableRowDemo.jsx.html"
-                    },
-                    {
                         label: "Messages",
                         demo: require("../components/general/MessagesDemo"),
                         pathToDoc: "components/general/Messages.jsx",
@@ -452,32 +512,11 @@ module.exports = [
                         pathToDemoSource: "demo_components_general_InlineMessageDemo.jsx.html"
                     },
                     {
-                        label: "Drag-N-Drop Row",
-                        demo: require("../components/rows/DragDropRowDemo"),
-                        pathToDoc: "components/rows/DragDropRow.jsx",
-                        pathToSource: "components_rows_DragDropRow.jsx.html",
-                        pathToDemoSource: "demo_components_rows_DragDropRowDemo.jsx.html"
-                    },
-                    {
-                        label: "Drag-N-Drop Table",
-                        demo: require("../components/tables/DragDropTableDemo"),
-                        pathToDoc: "components/tables/DragDropTable.jsx",
-                        pathToSource: "components_tables_DragDropTable.jsx.html",
-                        pathToDemoSource: "demo_components_tables_DragDropTableDemo.jsx.html"
-                    },
-                    {
                         label: "Calendar",
                         demo: require("../components/calendars/CalendarDemo"),
                         pathToDoc: "components/calendars/Calendar.jsx",
                         pathToSource: "components_calendars_Calendar.jsx.html",
                         pathToDemoSource: "demo_components_calendars_CalendarDemo.jsx.html"
-                    },
-                    {
-                        label: "Multivalues",
-                        demo: require("../components/forms/MultivaluesDemo"),
-                        pathToDoc: "components/forms/Multivalues.jsx",
-                        pathToSource: "components_forms_Multivalues.jsx.html",
-                        pathToDemoSource: "demo_components_forms_MultivaluesDemo.jsx.html"
                     },
                     {
                         label: "Cache",
@@ -496,13 +535,6 @@ module.exports = [
                         pathToDemoSource: "demo_components_general_TabbedSectionsDemo.jsx.html"
                     },
                     {
-                        label: "Pagination",
-                        demo: require("../components/list/PaginationDemo"),
-                        pathToDoc: "components/list/Pagination.jsx",
-                        pathToSource: "components_list_Pagination.jsx.html",
-                        pathToDemoSource: "demo_components_list_PaginationDemo.jsx.html"
-                    },
-                    {
                         label: "Time Picker",
                         demo: require("../components/general/TimePickerDemo"),
                         pathToDoc: "components/general/TimePicker.jsx",
@@ -515,20 +547,6 @@ module.exports = [
                         pathToDoc: "components/general/UnitInput.jsx",
                         pathToSource: "components_general_UnitInput.jsx.html",
                         pathToDemoSource: "demo_components_general_UnitInputDemo.jsx.html"
-                    },
-                    {
-                        label: "Grid",
-                        demo: require("../components/grid/GridDemo"),
-                        pathToDoc: "components/grid/Grid.jsx",
-                        pathToSource: "components_grid_Grid.jsx.html",
-                        pathToDemoSource: "demo_components_grid_GridDemo.jsx.html"
-                    },
-                    {
-                        label: "Row Index Navigation",
-                        demo: require("../components/general/RowIndexNavDemo"),
-                        pathToDoc: "components/general/RowIndexNav.jsx",
-                        pathToSource: "components_general_RowIndexNav.jsx.html",
-                        pathToDemoSource: "demo_components_general_RowIndexNavDemo.jsx.html"
                     },
                 ]
             },

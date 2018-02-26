@@ -34,7 +34,7 @@ var SelectTextDemoPage = Object.create(HomePage, {
     openSelectTextDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Components", "Misc", "SelectText");
+            this.navigateToPath("Components", "General", "SelectText");
         }
     }
 });

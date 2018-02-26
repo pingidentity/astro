@@ -113,7 +113,7 @@ var GridDemoPage = Object.create(HomePage, {
     openGridDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Components", "Misc", "Grid");
+            this.navigateToPath("Components", "ListsTables", "Grid");
         }
     }
 });

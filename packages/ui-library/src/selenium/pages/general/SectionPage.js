@@ -72,7 +72,7 @@ var SectionDemoPage = Object.create(HomePage, {
     openSectionDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Components", "Misc", "Section");
+            this.navigateToPath("Components", "General", "Section");
         }
     }
 });
