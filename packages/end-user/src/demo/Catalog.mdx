@@ -35,25 +35,35 @@ The logo that sits atop the form.
 ## Inputs
 
 <ComponentDemo>
-    <TextInput id="username"/>
+    <TextInput id="username1"/>
 </ComponentDemo>
 
 ### Error state
+
 <ComponentDemo>
-    <TextInput id="username" error/>
+    <TextInput id="username2" error/>
 </ComponentDemo>
 
 ### Success state
+
 <ComponentDemo>
-    <TextInput id="username" success/>
+    <TextInput id="username3" success/>
+</ComponentDemo>
+
+### Float Label Inputs
+
+<ComponentDemo>
+    <FloatLabelTextInput label="Username" id="username4"/>
 </ComponentDemo>
 
 <ComponentDemo>
-    <FloatLabelTextInput label="Username" id="username"/>
+    <FloatLabelPasswordInput label="Password" id="password1"/>
 </ComponentDemo>
 
+IE & Edge don't support the CSS-only solution for float labels, but we can simulate the "placeholder-shown" pseudo-selector with a "placeholder-shown" class. (View in IE or Edge to see the difference.)
+
 <ComponentDemo>
-    <FloatLabelPasswordInput label="Password" id="password"/>
+    <FloatLabelTextInput inputClassName="placeholder-shown" label="Username" id="username5"/>
 </ComponentDemo>
 
 ## Button

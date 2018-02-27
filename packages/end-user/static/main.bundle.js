@@ -167,6 +167,61 @@ module.exports = emptyFunction;
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+  Copyright (c) 2016 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+
+	function classNames () {
+		var classes = [];
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes.push(arg);
+			} else if (Array.isArray(arg)) {
+				classes.push(classNames.apply(null, arg));
+			} else if (argType === 'object') {
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes.push(key);
+					}
+				}
+			}
+		}
+
+		return classes.join(' ');
+	}
+
+	if (typeof module !== 'undefined' && module.exports) {
+		module.exports = classNames;
+	} else if (true) {
+		// register as 'classnames', consistent with npm package name
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+			return classNames;
+		}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {
+		window.classNames = classNames;
+	}
+}());
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /*
 object-assign
@@ -261,7 +316,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -318,61 +373,6 @@ function invariant(condition, format, a, b, c, d, e, f) {
 }
 
 module.exports = invariant;
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-  Copyright (c) 2016 Jed Watson.
-  Licensed under the MIT License (MIT), see
-  http://jedwatson.github.io/classnames
-*/
-/* global define */
-
-(function () {
-	'use strict';
-
-	var hasOwn = {}.hasOwnProperty;
-
-	function classNames () {
-		var classes = [];
-
-		for (var i = 0; i < arguments.length; i++) {
-			var arg = arguments[i];
-			if (!arg) continue;
-
-			var argType = typeof arg;
-
-			if (argType === 'string' || argType === 'number') {
-				classes.push(arg);
-			} else if (Array.isArray(arg)) {
-				classes.push(classNames.apply(null, arg));
-			} else if (argType === 'object') {
-				for (var key in arg) {
-					if (hasOwn.call(arg, key) && arg[key]) {
-						classes.push(key);
-					}
-				}
-			}
-		}
-
-		return classes.join(' ');
-	}
-
-	if (typeof module !== 'undefined' && module.exports) {
-		module.exports = classNames;
-	} else if (true) {
-		// register as 'classnames', consistent with npm package name
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
-			return classNames;
-		}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else {
-		window.classNames = classNames;
-	}
-}());
-
 
 /***/ }),
 /* 6 */
@@ -544,7 +544,7 @@ exports.default = Logo;
 
 
 if (process.env.NODE_ENV !== 'production') {
-  var invariant = __webpack_require__(4);
+  var invariant = __webpack_require__(5);
   var warning = __webpack_require__(7);
   var ReactPropTypesSecret = __webpack_require__(11);
   var loggedTypeFailures = {};
@@ -4522,7 +4522,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _classnames = __webpack_require__(5);
+var _classnames = __webpack_require__(3);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -4958,7 +4958,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _classnames = __webpack_require__(5);
+var _classnames = __webpack_require__(3);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -5025,17 +5025,25 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+var _classnames = __webpack_require__(3);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var FloatLabel = function FloatLabel(_ref) {
     var label = _ref.label,
         id = _ref.id,
         InputType = _ref.InputType,
+        inputClassName = _ref.inputClassName,
         children = _ref.children;
+
+    var inputClassNames = (0, _classnames2.default)("float-label__input", inputClassName);
+
     return _react2.default.createElement(
         'div',
         { className: 'float-label' },
-        _react2.default.createElement(InputType, { className: 'float-label__input', placeholder: label, id: id }),
+        _react2.default.createElement(InputType, { className: inputClassNames, placeholder: label, id: id }),
         _react2.default.createElement(
             'label',
             { className: 'float-label__label', htmlFor: id },
@@ -5048,7 +5056,8 @@ var FloatLabel = function FloatLabel(_ref) {
 FloatLabel.propTypes = {
     label: _propTypes2.default.string,
     id: _propTypes2.default.string,
-    InputType: _propTypes2.default.node
+    InputType: _propTypes2.default.func,
+    inputClassName: _propTypes2.default.string
 };
 
 exports.default = FloatLabel;
@@ -5105,7 +5114,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _classnames = __webpack_require__(5);
+var _classnames = __webpack_require__(3);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -5255,7 +5264,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _classnames = __webpack_require__(5);
+var _classnames = __webpack_require__(3);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -22502,7 +22511,7 @@ if (process.env.NODE_ENV === 'production') {
  * LICENSE file in the root directory of this source tree.
  */
 
-var k=__webpack_require__(3),r=__webpack_require__(0),aa=__webpack_require__(2),t=__webpack_require__(6),ba=__webpack_require__(22),ca=__webpack_require__(23),da=__webpack_require__(24);
+var k=__webpack_require__(4),r=__webpack_require__(0),aa=__webpack_require__(2),t=__webpack_require__(6),ba=__webpack_require__(22),ca=__webpack_require__(23),da=__webpack_require__(24);
 function w(a){for(var b=arguments.length-1,g="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,c=0;c<b;c++)g+="\x26args[]\x3d"+encodeURIComponent(arguments[c+1]);b=Error(g+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}
 var x={children:!0,dangerouslySetInnerHTML:!0,defaultValue:!0,defaultChecked:!0,innerHTML:!0,suppressContentEditableWarning:!0,suppressHydrationWarning:!0,style:!0};function z(a,b){return(a&b)===b}
 var B={MUST_USE_PROPERTY:1,HAS_BOOLEAN_VALUE:4,HAS_NUMERIC_VALUE:8,HAS_POSITIVE_NUMERIC_VALUE:24,HAS_OVERLOADED_BOOLEAN_VALUE:32,HAS_STRING_BOOLEAN_VALUE:64,injectDOMPropertyConfig:function(a){var b=B,g=a.Properties||{},c=a.DOMAttributeNamespaces||{},h=a.DOMAttributeNames||{};a=a.DOMMutationMethods||{};for(var f in g){C.hasOwnProperty(f)?w("48",f):void 0;var e=f.toLowerCase(),d=g[f];e={attributeName:e,attributeNamespace:null,propertyName:f,mutationMethod:null,mustUseProperty:z(d,b.MUST_USE_PROPERTY),
@@ -22553,7 +22562,7 @@ var Ba=function(a){function b(g,c){if(!(this instanceof b))throw new TypeError("
  * LICENSE file in the root directory of this source tree.
  */
 
-var m=__webpack_require__(3),n=__webpack_require__(6),p=__webpack_require__(2),q="function"===typeof Symbol&&Symbol["for"],r=q?Symbol["for"]("react.element"):60103,t=q?Symbol["for"]("react.call"):60104,u=q?Symbol["for"]("react.return"):60105,v=q?Symbol["for"]("react.portal"):60106,w=q?Symbol["for"]("react.fragment"):60107,x="function"===typeof Symbol&&Symbol.iterator;
+var m=__webpack_require__(4),n=__webpack_require__(6),p=__webpack_require__(2),q="function"===typeof Symbol&&Symbol["for"],r=q?Symbol["for"]("react.element"):60103,t=q?Symbol["for"]("react.call"):60104,u=q?Symbol["for"]("react.return"):60105,v=q?Symbol["for"]("react.portal"):60106,w=q?Symbol["for"]("react.fragment"):60107,x="function"===typeof Symbol&&Symbol.iterator;
 function y(a){for(var b=arguments.length-1,e="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,c=0;c<b;c++)e+="\x26args[]\x3d"+encodeURIComponent(arguments[c+1]);b=Error(e+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}
 var z={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}};function A(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||z}A.prototype.isReactComponent={};A.prototype.setState=function(a,b){"object"!==typeof a&&"function"!==typeof a&&null!=a?y("85"):void 0;this.updater.enqueueSetState(this,a,b,"setState")};A.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate")};
 function B(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||z}function C(){}C.prototype=A.prototype;var D=B.prototype=new C;D.constructor=B;m(D,A.prototype);D.isPureReactComponent=!0;function E(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||z}var F=E.prototype=new C;F.constructor=E;m(F,A.prototype);F.unstable_isAsyncReactComponent=!0;F.render=function(){return this.props.children};var G={current:null},H=Object.prototype.hasOwnProperty,I={key:!0,ref:!0,__self:!0,__source:!0};
@@ -22589,9 +22598,9 @@ if (process.env.NODE_ENV !== "production") {
   (function() {
 'use strict';
 
-var _assign = __webpack_require__(3);
+var _assign = __webpack_require__(4);
 var emptyObject = __webpack_require__(6);
-var invariant = __webpack_require__(4);
+var invariant = __webpack_require__(5);
 var warning = __webpack_require__(7);
 var emptyFunction = __webpack_require__(2);
 var checkPropTypes = __webpack_require__(10);
@@ -23989,8 +23998,8 @@ if (process.env.NODE_ENV !== "production") {
   (function() {
 'use strict';
 
-var invariant = __webpack_require__(4);
-var _assign = __webpack_require__(3);
+var invariant = __webpack_require__(5);
+var _assign = __webpack_require__(4);
 var React = __webpack_require__(0);
 var emptyFunction = __webpack_require__(2);
 var emptyObject = __webpack_require__(6);
@@ -28254,19 +28263,19 @@ exports.meta = undefined;
 exports.default = function (_ref) {
     var _ref$factories = _ref.factories,
         factories = _ref$factories === undefined ? {} : _ref$factories;
-    var _factories$wrapper = factories.wrapper,
-        wrapper = _factories$wrapper === undefined ? (0, _react.createFactory)('div') : _factories$wrapper,
-        _factories$h = factories.h1,
+    var _factories$h = factories.h1,
         h1 = _factories$h === undefined ? (0, _react.createFactory)('h1') : _factories$h,
         _factories$h2 = factories.h2,
         h2 = _factories$h2 === undefined ? (0, _react.createFactory)('h2') : _factories$h2,
         _factories$h3 = factories.h3,
         h3 = _factories$h3 === undefined ? (0, _react.createFactory)('h3') : _factories$h3,
         _factories$p = factories.p,
-        p = _factories$p === undefined ? (0, _react.createFactory)('p') : _factories$p;
+        p = _factories$p === undefined ? (0, _react.createFactory)('p') : _factories$p,
+        _factories$wrapper = factories.wrapper,
+        wrapper = _factories$wrapper === undefined ? (0, _react.createFactory)('div') : _factories$wrapper;
 
 
-    return wrapper({}, h1({ "id": "Ping-End-User-Components" }, "Ping End-User Components"), p({}, "This is a catalog of components."), h2({ "id": "Logo" }, "Logo"), p({}, "The logo that sits atop the form."), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" })), h2({ "id": "Heading" }, "Heading"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Heading2.default, null, "This Would Be a Page Title")), h2({ "id": "Inputs" }, "Inputs"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_TextInput2.default, { id: "username" })), h3({ "id": "Error-state" }, "Error state"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_TextInput2.default, { id: "username", error: true })), h3({ "id": "Success-state" }, "Success state"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_TextInput2.default, { id: "username", success: true })), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_FloatLabelTextInput2.default, { label: "Username", id: "username" })), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Password", id: "password" })), h2({ "id": "Button" }, "Button"), h3({ "id": "The-submit-button-for-the-form." }, "The submit button for the form."), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Button2.default, { label: "push it", primary: true })), h3({ "id": "Disabled-primary-button" }, "Disabled primary button"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Button2.default, { label: "push it", primary: true, disabled: true })), h2({ "id": "Card" }, "Card"), p({}, "Cards sit above the customized background and contain all our UI elements."), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, "The content inside a card")), h2({ "id": "The-Sign-On-Form" }, "The Sign-On Form"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelTextInput2.default, { label: "Username", id: "username" }), (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Password", id: "password" }), (0, _react.createElement)("div", null, (0, _react.createElement)(_Checkbox2.default, { label: "Remember me" })), (0, _react.createElement)(_Button2.default, { label: "Sign On", primary: true })))), h3({ "id": "With-an-error" }, "With an error"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Feedback2.default, { type: "error" }, "Cannot sign on. There is a problem with either your username or password."), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelTextInput2.default, { label: "Username", id: "username" }), (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Password", id: "password" }), (0, _react.createElement)("div", null, (0, _react.createElement)(_Checkbox2.default, { label: "Remember me" })), (0, _react.createElement)(_Button2.default, { label: "Sign On", primary: true })))), h3({ "id": "Another-logo" }, "Another logo"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "jj-logo.png" }), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelTextInput2.default, { label: "Username", id: "username" }), (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Password", id: "password" }), (0, _react.createElement)("div", null, (0, _react.createElement)(_Checkbox2.default, { label: "Remember me" })), (0, _react.createElement)(_Button2.default, { label: "Sign On", primary: true })))), h3({ "id": "Just-the-password" }, "Just the password"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Heading2.default, null, "Hello Cindy Lou Who,"), (0, _react.createElement)(_TextBlock2.default, null, "Please enter your password below:"), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Password", id: "password" }), (0, _react.createElement)(_Button2.default, { label: "Sign On", primary: true, disabled: true })), (0, _react.createElement)(_TextBlock2.default, { size: "small" }, "Not Cindy Lou? ", (0, _react.createElement)("a", { href: "#" }, "Switch Accounts")))), h3({ "id": "Reset-password" }, "Reset password"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Feedback2.default, { type: "error" }, "Too many unsuccessful sign-on attempts. Please reset your password."), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_Button2.default, { label: "Reset Password", primary: true })), (0, _react.createElement)(_TextBlock2.default, { size: "small" }, "No account? ", (0, _react.createElement)("a", { href: "#" }, "Register Now")))), h2({ "id": "Feedback-Messages" }, "Feedback Messages"), p({}, "Error message"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Feedback2.default, { type: "error" }, "Cannot sign on. There is a problem with either your username or password.")), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Feedback2.default, { type: "alert" }, "Your password has expired. Please create a new one.")), h2({ "id": "Password-Requirements" }, "Password Requirements"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Requirements2.default, { requirements: [{
+    return wrapper({}, h1({ "id": "Ping-End-User-Components" }, "Ping End-User Components"), p({}, "This is a catalog of components."), h2({ "id": "Logo" }, "Logo"), p({}, "The logo that sits atop the form."), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" })), h2({ "id": "Heading" }, "Heading"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Heading2.default, null, "This Would Be a Page Title")), h2({ "id": "Inputs" }, "Inputs"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_TextInput2.default, { id: "username1" })), h3({ "id": "Error-state" }, "Error state"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_TextInput2.default, { id: "username2", error: true })), h3({ "id": "Success-state" }, "Success state"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_TextInput2.default, { id: "username3", success: true })), h3({ "id": "Float-Label-Inputs" }, "Float Label Inputs"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_FloatLabelTextInput2.default, { label: "Username", id: "username4" })), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Password", id: "password1" })), p({}, "IE & Edge don’t support the CSS-only solution for float labels, but we can simulate the “placeholder-shown” pseudo-selector with a “placeholder-shown” class. (View in IE or Edge to see the difference.)"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_FloatLabelTextInput2.default, { inputClassName: "placeholder-shown", label: "Username", id: "username5" })), h2({ "id": "Button" }, "Button"), h3({ "id": "The-submit-button-for-the-form." }, "The submit button for the form."), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Button2.default, { label: "push it", primary: true })), h3({ "id": "Disabled-primary-button" }, "Disabled primary button"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Button2.default, { label: "push it", primary: true, disabled: true })), h2({ "id": "Card" }, "Card"), p({}, "Cards sit above the customized background and contain all our UI elements."), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, "The content inside a card")), h2({ "id": "The-Sign-On-Form" }, "The Sign-On Form"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelTextInput2.default, { label: "Username", id: "username" }), (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Password", id: "password" }), (0, _react.createElement)("div", null, (0, _react.createElement)(_Checkbox2.default, { label: "Remember me" })), (0, _react.createElement)(_Button2.default, { label: "Sign On", primary: true })))), h3({ "id": "With-an-error" }, "With an error"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Feedback2.default, { type: "error" }, "Cannot sign on. There is a problem with either your username or password."), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelTextInput2.default, { label: "Username", id: "username" }), (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Password", id: "password" }), (0, _react.createElement)("div", null, (0, _react.createElement)(_Checkbox2.default, { label: "Remember me" })), (0, _react.createElement)(_Button2.default, { label: "Sign On", primary: true })))), h3({ "id": "Another-logo" }, "Another logo"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "jj-logo.png" }), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelTextInput2.default, { label: "Username", id: "username" }), (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Password", id: "password" }), (0, _react.createElement)("div", null, (0, _react.createElement)(_Checkbox2.default, { label: "Remember me" })), (0, _react.createElement)(_Button2.default, { label: "Sign On", primary: true })))), h3({ "id": "Just-the-password" }, "Just the password"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Heading2.default, null, "Hello Cindy Lou Who,"), (0, _react.createElement)(_TextBlock2.default, null, "Please enter your password below:"), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Password", id: "password" }), (0, _react.createElement)(_Button2.default, { label: "Sign On", primary: true, disabled: true })), (0, _react.createElement)(_TextBlock2.default, { size: "small" }, "Not Cindy Lou? ", (0, _react.createElement)("a", { href: "#" }, "Switch Accounts")))), h3({ "id": "Reset-password" }, "Reset password"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Feedback2.default, { type: "error" }, "Too many unsuccessful sign-on attempts. Please reset your password."), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_Button2.default, { label: "Reset Password", primary: true })), (0, _react.createElement)(_TextBlock2.default, { size: "small" }, "No account? ", (0, _react.createElement)("a", { href: "#" }, "Register Now")))), h2({ "id": "Feedback-Messages" }, "Feedback Messages"), p({}, "Error message"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Feedback2.default, { type: "error" }, "Cannot sign on. There is a problem with either your username or password.")), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Feedback2.default, { type: "alert" }, "Your password has expired. Please create a new one.")), h2({ "id": "Password-Requirements" }, "Password Requirements"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Requirements2.default, { requirements: [{
             name: "6 characters",
             status: "no"
         }, {
@@ -28364,9 +28373,9 @@ var meta = exports.meta = {};
 
 
 var emptyFunction = __webpack_require__(2);
-var invariant = __webpack_require__(4);
+var invariant = __webpack_require__(5);
 var warning = __webpack_require__(7);
-var assign = __webpack_require__(3);
+var assign = __webpack_require__(4);
 
 var ReactPropTypesSecret = __webpack_require__(11);
 var checkPropTypes = __webpack_require__(10);
@@ -28913,7 +28922,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 
 var emptyFunction = __webpack_require__(2);
-var invariant = __webpack_require__(4);
+var invariant = __webpack_require__(5);
 var ReactPropTypesSecret = __webpack_require__(11);
 
 module.exports = function() {
@@ -28988,7 +28997,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _classnames = __webpack_require__(5);
+var _classnames = __webpack_require__(3);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
