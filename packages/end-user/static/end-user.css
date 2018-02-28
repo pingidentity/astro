@@ -281,11 +281,23 @@
 .float-label__input:focus + .float-label__label {
   color: #277ba5; }
 
-.float-label__input:placeholder-shown, .float-label__input.placeholder-shown {
+/* doing this as a mixin because IE has an issue with the placeholder-shown selector */
+.float-label__input:placeholder-shown {
   padding-top: 15px;
   padding-bottom: 15px;
   padding-left: 10px; }
-  .float-label__input:placeholder-shown + .float-label__label, .float-label__input.placeholder-shown + .float-label__label {
+  .float-label__input:placeholder-shown + .float-label__label {
+    color: #666;
+    font-size: 15px;
+    font-weight: 400;
+    margin-top: 16px;
+    margin-left: 11px; }
+
+.float-label__input.placeholder-shown {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 10px; }
+  .float-label__input.placeholder-shown + .float-label__label {
     color: #666;
     font-size: 15px;
     font-weight: 400;
