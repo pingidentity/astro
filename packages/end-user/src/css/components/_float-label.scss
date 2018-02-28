@@ -45,7 +45,8 @@ $float-label-color: $color-neutral-30;
     color: $input-focus-border-color;
 }
 
-.float-label__input:placeholder-shown, .float-label__input.placeholder-shown {
+/* doing this as a mixin because IE has an issue with the placeholder-shown selector */
+@mixin placeholderShown {
     padding-top: $input-padding-vertical;
     padding-bottom: $input-padding-vertical;
     padding-left: $spacing-sm;
@@ -57,4 +58,12 @@ $float-label-color: $color-neutral-30;
         margin-top: $input-padding-vertical + 1px;
         margin-left: $input-padding-horizontal + 1px;
     }
+}
+
+.float-label__input:placeholder-shown {
+    @include placeholderShown;
+}
+
+.float-label__input.placeholder-shown {
+    @include placeholderShown;
 }
