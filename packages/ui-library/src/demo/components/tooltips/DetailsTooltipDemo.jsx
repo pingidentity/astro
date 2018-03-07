@@ -196,7 +196,9 @@ class DetailsTooltipDemo extends React.Component {
                     title="Title won't display"
                     open={this.state.open5}
                     onToggle={this._handleToggle5}>
-
+                    <div className="title">
+                        Alert Title
+                    </div>
                     <p>
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.

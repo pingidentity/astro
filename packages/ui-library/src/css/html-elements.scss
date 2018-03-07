@@ -62,15 +62,21 @@ i {
     font-style: italic;
 }
 
-ul.ul {
+ul.ul,
+ol.ol {
     margin: 5px 0 15px 20px;
+
+    li {
+        margin: 0 0 15px;
+    }
+}
+ul.ul {
     li {
         list-style: disc;
     }
 }
 
 ol.ol {
-    margin: 5px 0 15px 20px;
     li {
         list-style: decimal;
     }
