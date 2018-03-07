@@ -1,0 +1,63 @@
+window.__DEV__ = true;
+
+jest.dontMock("../TileSelector");
+jest.dontMock("../TileButton");
+
+describe("TileSelector", function() {
+    var React = require("react"),
+        ReactTestUtils = require("react-dom/test-utils"),
+        TestUtils = require("../../../testutil/TestUtils"),
+        TileSelector = require("../TileSelector"),
+        _ = require("underscore");
+
+    function getComponent(opts) {
+        opts = _.defaults(opts || {}, {
+            selected: "webapp",
+            options: [
+                {
+                    id: "webapp",
+                    title: "Web App",
+                    iconName: "network",
+                    description: "Cloud-based apps that are accessed within a browser."
+                },
+                {
+                    id: "native",
+                    title: "Native App",
+                    iconName: "device",
+                    description: "Applications that are stored and run from a device or desktop."
+                },
+                {
+                    id: "spa",
+                    title: "Single Page App",
+                    iconName: "apps",
+                    description: "Just a bit of text."
+                },
+                {
+                    id: "noninteractive",
+                    title: "Non-Interactive",
+                    iconName: "server",
+                    description: "Cloud-based apps that are accessed within a browser."
+                },
+            ]
+        });
+
+        return ReactTestUtils.renderIntoDocument(<div><TileSelector {...opts} /></div>);
+    }
+
+    it("clicks trigger correct callback", function() {
+        const callback = jest.genMockFunction();
+        const onValueChange = value => callback(value);
+        const component = getComponent({
+            onValueChange
+        });
+
+        var newOption = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "tile-selector-button-spa"
+        );
+
+        ReactTestUtils.Simulate.click(newOption);
+        expect(callback).lastCalledWith("spa");
+    });
+
+});

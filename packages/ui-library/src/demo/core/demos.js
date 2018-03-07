@@ -226,6 +226,19 @@ module.exports = [
                 ]
             },
             {
+                label: "Buttons",
+                icon: "settings",
+                children: [
+                    {
+                        label: "Tile Selector",
+                        demo: require("../components/buttons/TileSelectorDemo"),
+                        pathToDoc: "components/buttons/TileSelector.jsx",
+                        pathToSource: "components_general_charting_TileSelector.jsx.html",
+                        pathToDemoSource: "demo_components_general_charting_TileSelectorDemo.jsx.html"
+                    }
+                ]
+            },
+            {
                 label: "Charting",
                 icon: "image",
                 children: [
