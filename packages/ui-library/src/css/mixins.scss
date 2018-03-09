@@ -227,6 +227,11 @@
     display: inline-flex;
 }
 
+@mixin flexbox-direction($value) {
+    flex-direction: $value;
+    -ms-flex-direction: $value;
+}
+
 
 // COLOR ----------------------------------------------------------------------------------------
 

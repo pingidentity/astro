@@ -498,9 +498,10 @@ button.ellipsis-loader-button {
     height: auto;
     white-space: normal;
     @include flexbox;
-    flex-direction: column;
+    @include flexbox-direction(column);
     align-items: center;
     justify-content: space-between;
+    -ms-flex: 1 1 100%;
 
     &:hover, &:active, &.tile-button--selected {
         border-color: $color-active-blue;
