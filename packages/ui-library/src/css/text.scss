@@ -14,18 +14,26 @@
             }
         }
         .count {
-            color: $color-elephant;
+            color: $color-blue-grey;
             &:hover {
                 text-decoration: none;
             }
         }
         [class^='icon-'],
         [class*=' icon-'] {
-            color: $color-elephant;
+            color: $color-blue-grey;
             display: inline-block;
             &:hover {
                 text-decoration: none;
             }
+            &:before {
+                display: inline-block;
+            }
+        }
+
+        &.disabled {
+            pointer-events: none;
+            opacity: 0.4;
         }
     }
 }
