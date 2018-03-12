@@ -301,7 +301,7 @@ class LeftNavBar extends React.Component {
 
                 // subtract the height of the closed section from the top of the nav highlighter
                 // ONLY if the closed section is above the current one
-                if (closedSectionIndex < newSectionIndex) {
+                if (closedSectionIndex > -1 && closedSectionIndex < newSectionIndex) {
                     const closedSectionNode = ReactDOM.findDOMNode(this.refs.container)
                             .getElementsByClassName("menu")[closedSectionIndex];
 
