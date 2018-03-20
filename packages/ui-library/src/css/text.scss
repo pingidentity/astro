@@ -71,3 +71,28 @@
         background-color: $color-rabbit-fur;
     }
 }
+
+.masked-value {
+    color: $color-midnight;
+    font-size: 14px;
+
+    &--masked {
+        letter-spacing: 2px;
+    }
+
+    &__icon {
+        color: $color-midnight;
+        font-size: 11px;
+        margin-left: $spacing-sm;
+        vertical-align: middle;
+        line-height: 11px;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    &--masked &__icon {
+        font-size: 20px;
+    }
+}
