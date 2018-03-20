@@ -1811,13 +1811,15 @@ input[type=file] {
         }
     }
     &.input-multivalues {
-        @include requiredPadding;
-        width: 315px;
-        &:before {
-            @include requiredCss;
-            top: 7px;
-            bottom: 8px;
-            left: 0;
+        .entries  {
+            @include requiredPadding;
+
+            &:before {
+                @include requiredCss;
+                top: 5px;
+                bottom: 5px;
+                left: 5px;
+            }
         }
     }
     &.input-select {
@@ -1871,11 +1873,6 @@ input[type=file] {
                 padding-left: 30px;
             }
         }
-        &.input-multivalues {
-            &:before {
-                width: 0;
-            }
-        }
         &.input-text {
             input {
                 @include requiredPaddingEntered;
@@ -1885,9 +1882,6 @@ input[type=file] {
             textarea {
                 @include requiredPaddingEntered;
             }
-        }
-        &.input-multivalues {
-            @include requiredPaddingEntered;
         }
         &.input-select {
             select {

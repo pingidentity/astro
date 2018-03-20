@@ -13,12 +13,22 @@ class MultivaluesDemo extends React.Component {
             "Second Entry",
             "Another Entry",
             "Last Entry"
+        ],
+        urlEntries: [
+            "http://www.someurl.com/foo/bar/",
+            "http://www.someurl.com/foo/bar/longlonglongurl",
         ]
     };
 
     _handleValueChange = (entries) => {
         this.setState({
             entries: entries
+        });
+    };
+
+    _handleUrlChange = (entries) => {
+        this.setState({
+            urlEntries: entries
         });
     };
 
@@ -32,26 +42,31 @@ class MultivaluesDemo extends React.Component {
     render() {
         return (
             <div>
-                <p>Type ahead. Press "return" or "," or "tab" or "space" to add an item,
-                    or delete an item by clicking "x".</p>
+                <p>
+                    Type ahead. Press "return" or "," or "tab" or "space" to add an item, or delete an item by
+                    clicking "x".
+                </p>
 
                 <div className="input-row">
-                    <Multivalues title="Multivalues Demo"
+                    <Multivalues
+                        labelText="Default multi-values input"
                         stateless={false}
                         entries={this.state.entries}
-                        onValueChange={this._handleValueChange} />
+                        onValueChange={this._handleValueChange}
+                    />
                 </div>
 
-                <p>Type ahead. Press "return" to add an item, or delete an item by clicking "x".</p>
                 <div className="input-row">
-                    <Multivalues title="Multivalues Demo"
+                    <Multivalues
+                        labelText="Alternate stacked formatting"
                         stateless={false}
-                        entries={this.state.entries}
-                        required={true}
+                        entries={this.state.urlEntries}
                         onNewValue={this._onNewValue}
-                        onValueChange={this._handleValueChange} />
+                        onValueChange={this._handleUrlChange}
+                        stacked={true}
+                    />
                 </div>
-                
+
             </div>
         );
     }

@@ -21,8 +21,7 @@ placeholder.className = "placeholder";
 class MultivaluesOption extends React.Component {
     static propTypes = {
         label: PropTypes.string.isRequired,
-        onChange: PropTypes.func.isRequired
-
+        onChange: PropTypes.func.isRequired,
     };
 
     /**
@@ -41,12 +40,13 @@ class MultivaluesOption extends React.Component {
     render() {
 
         return (
-            <label data-id={this.props.id} className="entry">
+            <label data-id={this.props.id} className="entry" title={this.props.label}>
                 {this.props.label}
                 <a className="delete"
                     data-id="delete"
                     id = {this.props.id}
-                    onClick={this._delete}></a>
+                    onClick={this._delete}
+                />
             </label>
         );
     }
@@ -78,29 +78,31 @@ class MultivaluesOption extends React.Component {
  *     To define the base "data-id" value for the top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
- *
  * @param {array<string>} [entries=[]]
  *     Array of strings used to display initial entry boxes.
  * @param {Multivalues~onValueChange} [onValueChange]
  *     Callback triggered when a new entry is added or removed.
- *
  * @param {Multivalues~onNewValue} [onNewValue]
  *     Callback triggered and return a boolean when a new value is completed typing.
  *     Default keyCode to detect completed typing are 13, 188, 9 and 32
- *
+ * @param {boolean} [stacked=false]
+ *     If true, each value occupies it's own line.
  * @param {boolean} [required=false]
  *     If true, the user must enter an entry to the field.
  *
+
+ *
  * @example
  *
- *    <Multivalues title="Multi-value Entry"
- *                         entries={[
- *                                "Entry 1",
- *                                "Entry 2",
- *                                "Entry 3"
- *                          ]}
- *                          required={element.required}
- *                          onValueChange={this._addEntries} />
+ *    <Multivalues labelText="Multi-value Entry"
+ *        entries={[
+ *            "Entry 1",
+ *            "Entry 2",
+ *            "Entry 3"
+ *        ]}
+ *        required={element.required}
+ *        onValueChange={this._addEntries}
+ *    />
  *
  **/
 
@@ -113,12 +115,14 @@ class Multivalues extends React.Component {
         entries: PropTypes.arrayOf(PropTypes.string),
         onValueChange: PropTypes.func.isRequired,
         onNewValue: PropTypes.func,
-        required: PropTypes.bool
+        required: PropTypes.bool,
+        stacked: PropTypes.bool,
     };
 
     static defaultProps = {
         "data-id": "multivalues",
         entries: [],
+        stacked: false,
         required: false,
         onNewValue: function (keyCode) {
             if (keyCode === 13 || keyCode === 188 || keyCode === 9 || keyCode === 32) {
@@ -243,7 +247,8 @@ class Multivalues extends React.Component {
         var className = classnames(this.props.className, {
             "input-multivalues": true,
             required: this.props.required,
-            "value-entered": (this.props.entries.length !== 0)
+            "value-entered": (this.props.entries.length !== 0),
+            stacked: this.props.stacked
         });
 
         //this style is for the hidden div that allows us to get an accurate
@@ -255,7 +260,8 @@ class Multivalues extends React.Component {
             position: "absolute",
             zIndex: "-1",
             bottom: "0",
-            left: "0" };
+            left: "0"
+        };
 
         var inputStyle = {
             width: [this.state.inputWidth]
@@ -269,12 +275,12 @@ class Multivalues extends React.Component {
                     onChange={this.props.onValueChange}
                     onDelete = {this._handleDelete}
                     key={index}
-                    />
+                />
             );
         }.bind(this));
 
         return (
-            <FormLabel className={className} data-id={this.props["data-id"]} >
+            <FormLabel value={this.props.labelText} className={className} data-id={this.props["data-id"]}>
                 <div className="entries" data-id="entries">
                     {entryNodes}
                     <div className="value-input">
@@ -287,7 +293,8 @@ class Multivalues extends React.Component {
                             name="value-entry"
                             onBlur={this._handleBlur}
                             onChange={this._handleChange}
-                            onKeyDown={this._handleKeyDown} />
+                            onKeyDown={this._handleKeyDown}
+                        />
                     </div>
                     <div ref = "hidden-div" style = {hiddenStyle} />
                 </div>
