@@ -4,7 +4,7 @@ import { getIconClassName } from "../../util/PropUtils";
 import classnames from "classnames";
 
 /**
- * @class TileSelector
+ * @class TileButton
  * @desc A single-selection component with big icons and titles.
  *
  * @param {string} [className]

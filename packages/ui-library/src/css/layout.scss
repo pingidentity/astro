@@ -422,7 +422,6 @@ $color-grey-minor-1: $color-neutral-30;
                     }
                     &:hover {
                         background-color: $color-grey-main;
-                        @include transition(background-color 0.2s);
                     }
                 }
             }

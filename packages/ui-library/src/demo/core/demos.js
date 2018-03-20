@@ -324,6 +324,13 @@ module.exports = [
                         pathToSource: "components_wizard_Wizard.jsx.html",
                         pathToDemoSource: "demo_components_wizard_WizardDemo.jsx.html"
                     },
+                    {
+                        label: "Wizard - v2",
+                        demo: require("../components/wizardv2/WizardDemo"),
+                        pathToDoc: "components/wizard-v2/Wizard.jsx",
+                        pathToSource: "components_wizard-v2_Wizard.jsx.html",
+                        pathToDemoSource: "demo_components_wizardv2_WizardDemo.jsx.html"
+                    },
                 ]
             },
             {

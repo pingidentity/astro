@@ -8,7 +8,7 @@ jest.dontMock("../../../util/format.js");
 jest.dontMock("../../tooltips/CancelTooltip");
 jest.dontMock("../../tooltips/DetailsTooltip");
 
-describe("Step", function () {
+describe("Wizard", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
         TestUtils = require("../../../testutil/TestUtils"),

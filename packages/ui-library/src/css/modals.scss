@@ -279,3 +279,283 @@
         }
     }
 }
+
+$wizard-progress-icon-size: 23px;
+$wizard-progress-menu-padding: 20px;
+$wizard-v-spacing: 25px;
+$wizard-h-spacing: 40px;
+$wizard-padding: $wizard-v-spacing $wizard-h-spacing;
+$wizard-progress-menu-width: 280px;
+$wizard-progress-menu-bgcolor: $color-neutral-30;
+$wizard-progress-menu-selected-bgcolor: $color-strong-neutral-10;
+$wizard-progress-title-size: 18px;
+$wizard-progress-icon-border-size: 1px;
+$wizard-progress-title-height: $wizard-progress-icon-size + $wizard-progress-icon-border-size * 2; //icon height plus border
+$wizard-progress-disabled-opacity: 0.6;
+$wizard-text-spacing: 15px;
+$wizard-header-border-color: $color-neutral-70;
+$wizard-title-font-size: 28px;
+$wizard-selected-arrow-width: 15px;
+$wizard-content-bg-color: $color-strong-neutral-90;
+
+.wizard-2 {
+    * {
+        box-sizing: border-box;
+    }
+    position: fixed;
+    top: $layout-header-height; //offset for header from layout.scss
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: $wizard-content-bg-color;
+    color: $color-midnight;
+    z-index: 1;
+
+    textarea,
+    input[type] {
+        background-color: $color-white;
+    }
+
+    // I know we are trying to only do one level of specificity for BEM and such, but I need to override the button bar defaults
+    .wizard__button-bar {
+        position: fixed;
+        left: $wizard-h-spacing;
+        right: $wizard-progress-menu-width + $wizard-h-spacing;
+        bottom: 0;
+        background-color: inherit;
+        padding: $wizard-v-spacing 0;
+    }
+}
+
+$wizard-header-height: 77px;
+$wizard-header-animation: 0.1s ease-out;
+$wizard-close-button-color: $color-strong-neutral-40;
+
+@include keyframes('slide-menu-down') {
+    0% {
+        margin-top: -#{$wizard-header-height};
+    }
+    100% {
+        margin-top: 0;
+    }
+}
+
+@include keyframes('close-button-color') {
+    0% {
+        color: $color-white;
+    }
+    100% {
+        color: $wizard-close-button-color;
+    }
+}
+
+// Not BEM but the menu height needs to be altered when the header is showing
+.wizard-2--header-shown {
+    .wizard-progress-menu-scroller {
+        top: 77px;
+    }
+    .wizard-progress-menu {
+        animation: $wizard-header-animation slide-menu-down;
+    }
+}
+
+.wizard-close-btn {
+    z-index: 1;
+    float: right;
+    margin: 20px 15px 0 0;
+    padding: 0;
+    border: none;
+    background: none;
+    font-size: 24px;
+    line-height: 1em;
+    opacity: 0.5;
+    color: $color-white;
+
+    &:before {
+        content: "x";
+        font-family: $icon-font;
+        display: block;
+    }
+    &:hover {
+        color: $color-white;
+        opacity: 1;
+    }
+}
+.wizard__header {
+    width: 100%;
+    display: flex;
+    background-color: white;
+    font-size: $wizard-title-font-size;
+    font-family: $font-pn-light;
+    border-bottom: 1px solid $wizard-header-border-color;
+    animation: $wizard-header-animation slide-down;
+}
+.wizard__header-details {
+    padding: $spacing-md $spacing-lg;
+    flex: 1;
+    border-right: 1px solid $wizard-header-border-color;
+    font-size: 23px;
+
+    &:last-child {
+        border-right: none;
+    }
+}
+.wizard__header-title {
+    font-family: $font-pn-regular;
+    font-size: 12px;
+    color: $color-blue-grey;
+    margin-bottom: $spacing-sm;
+    text-transform: uppercase;
+}
+.wizard__content {
+    position: absolute;
+    width: calc(100% - #{$wizard-progress-menu-width});
+    padding: $wizard-padding;
+}
+.wizard-step__title {
+    font-size: $wizard-title-font-size;
+    font-family: $font-pn-light;
+    line-height: 1em;
+    margin-bottom: $wizard-text-spacing;
+}
+.wizard-step__description {
+    margin-bottom: $wizard-v-spacing;
+}
+.wizard-step__content {
+    margin-left: $wizard-h-spacing;
+}
+.wizard-progress-menu-scroller {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow-y: auto;
+    width: $wizard-progress-menu-width + $wizard-selected-arrow-width;
+}
+.wizard-progress-menu {
+    min-height: 100%;
+    margin-left: $wizard-selected-arrow-width;
+    background-color: $wizard-progress-menu-bgcolor;
+    color: $color-white;
+}
+.wizard-progress-menu__title {
+    position: relative;
+    text-transform: uppercase;
+    font-size: 18px;
+    padding: 30px 25px 25px 20px;
+}
+.wizard-progress-menu__step {
+    position: relative;
+    padding: $wizard-progress-menu-padding;
+    cursor: pointer;
+
+    &:after {
+        @include inactive-link-styles;
+    }
+}
+.wizard-progress-menu__step--click-disabled {
+    @extend [disabled];
+
+    cursor: default;
+}
+.wizard-progress-menu__step--active {
+    background-color: $wizard-progress-menu-selected-bgcolor;
+
+    &:before {
+        content: "";
+        border-style: solid;
+        border-width: 15px;
+        border-color: transparent $wizard-progress-menu-selected-bgcolor transparent transparent;
+        height: 0;
+        width: 0;
+        position: absolute;
+        top: 17px;
+        left: -#{$wizard-selected-arrow-width * 2};
+    }
+    &:after {
+        @include active-link-styles;
+    }
+}
+.wizard-progress-menu__divider-container {
+    overflow: hidden;
+    padding: $wizard-progress-menu-padding 10px;
+    text-align: center;
+    border-style: solid;
+    border-color: transparent $wizard-progress-menu-bgcolor;
+    border-width: 0 $wizard-progress-menu-padding;
+}
+.wizard-progress-menu__divider {
+    position: relative;
+    font-family: $font-pn-light;
+    font-size: 12px;
+    text-align: center;
+    text-transform: uppercase;
+    display: inline-block;
+    vertical-align: middle;
+
+    &:before, &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: calc(50% - 2px); //subtract 2px because of offset given for hanging characters
+        height: 0px;
+        width: 400px;
+        border-bottom: 1px solid $color-white;
+    }
+    &:before {
+        right: 100%;
+        margin-right: 10px;
+    }
+    &:after {
+        left: 100%;
+        margin-left: 10px;
+    }
+
+}
+.wizard-progress-menu__item-title {
+    margin-left: $wizard-progress-menu-padding + $wizard-progress-icon-size;
+    margin-bottom: $spacing-sm;
+    font-size: $wizard-progress-title-size;
+    line-height: $wizard-progress-title-height;
+}
+.wizard-progress-menu__item-description {
+    margin-left: $wizard-progress-menu-padding + $wizard-progress-icon-size;
+    font-family: $font-pn-light;
+    font-size: 14px;
+}
+.wizard-progress-menu__step-icon {
+    position: absolute;
+    height: $wizard-progress-icon-size;
+    width: $wizard-progress-icon-size;
+    line-height: $wizard-progress-icon-size;
+    border-radius: 50%;
+    border: $wizard-progress-icon-border-size solid $color-white;
+    color: $color-white;
+    text-align: center;
+}
+.wizard-progress-menu__step-icon--required-active {
+    background-color: $color-white;
+    color: $wizard-progress-menu-selected-bgcolor;
+}
+.wizard-progress-menu__step-icon--optional-active {
+    @extend .wizard-progress-menu__step-icon--required-active;
+    font-family: $font-pn-bold;
+    font-size: 24px;
+
+    &:before {
+        display: block;
+        content: "...";
+        line-height: 0.5;
+    }
+}
+.wizard-progress-menu__step-icon--completed {
+    font-family: 'iconfont';
+    @extend .icon-check;
+    background-color: $color-success;
+    border-color: $color-success;
+    font-size: 10px;
+    &:before {
+        display: block;
+        color: white;
+    }
+}
