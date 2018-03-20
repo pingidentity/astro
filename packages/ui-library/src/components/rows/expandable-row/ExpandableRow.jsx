@@ -5,8 +5,11 @@ var React = require("react"),
     classnames = require("classnames"),
     _ = require("underscore"),
     DetailsTooltip = require("../../tooltips/DetailsTooltip"),
-    Utils = require("../../../util/Utils.js"),
-    Translator = require("../../../util/i18n/Translator.js");
+    Utils = require("../../../util/Utils"),
+    Translator = require("../../../util/i18n/Translator"),
+    KeyboardUtils = require("../../../util/KeyboardUtils"),
+    DragDrop = require("../DragDropRow"),
+    dragScroll = require("../../../util/dragScroll");
 
 /**
 * @enum {string}
@@ -175,8 +178,11 @@ var ConfirmDeletePositions = {
  *     A right-aligned container where buttons, toggles, or anything else may be passed in to render on the right side
  *     of the row, just to the left of the expand button.
  *
- * @param {boolan} [waiting=false]
+ * @param {boolean} [waiting=false]
  *     If true, disables interaction with the row and reduces opacity of the layer.
+ * @param {object} [ordering]
+ *     If exists, disables normal interaction with the row and adds ordering controls.
+ *     Its properties are position, total, onReorder, and onPositionValueChange.
  *
  * @example
  *         <h1>My Row Results</h1>
@@ -275,15 +281,40 @@ class StatefulExpandableRow extends React.Component {
         }
     };
 
+    _handleReorder = (from = this.props.ordering.position, to) => {
+        this.setState({
+            positionValue: undefined,
+        });
+        if (this.props.ordering && this.props.ordering.onReorder) {
+            this.props.ordering.onReorder(from, to);
+        }
+    };
+
+    _handlePositionValueChange = (value) => {
+        this.setState({
+            positionValue: value
+        });
+    };
+
     render() {
-        var props = _.defaults({
+        const ordering = this.props.ordering
+            ? _.defaults({
+                position: this.state.positionValue !== undefined
+                    ? this.state.positionValue
+                    : this.props.ordering.position,
+                onReorder: this._handleReorder,
+                onPositionValueChange: this._handlePositionValueChange,
+            }, this.props.ordering)
+            : undefined;
+        const props = _.defaults({
             ref: "StatelessExpandableRow",
             expanded: this.state.expanded,
             onToggle: this._handleToggle,
             showDeleteConfirm: this.state.showDeleteConfirm,
             onDelete: this._handleDelete,
             onDeleteCancelClick: this._hideDeleteConfirm,
-            onDeleteConfirmClick: this._handleDeleteConfirm
+            onDeleteConfirmClick: this._handleDeleteConfirm,
+            ordering
         }, this.props);
 
         return React.createElement(StatelessExpandableRow, props, this.props.children); //eslint-disable-line no-use-before-define
@@ -329,7 +360,13 @@ class StatelessExpandableRow extends React.Component {
         status: PropTypes.oneOf([Statuses.GOOD, Statuses.ERROR, Statuses.WARNING]),
         rowAccessories: PropTypes.object,
         rowMessage: PropTypes.object,
-        waiting: PropTypes.bool
+        waiting: PropTypes.bool,
+        ordering: PropTypes.shape({
+            position: PropTypes.number,
+            total: PropTypes.number,
+            onReorder: PropTypes.func,
+            onPositionValueChange: PropTypes.func,
+        }),
     };
 
     static defaultProps = {
@@ -360,6 +397,66 @@ class StatelessExpandableRow extends React.Component {
         }
     };
 
+    _handlePositionChange = (e) => {
+        let position = parseInt(e.target.value.replace(/[^0-9]/, "")) || 0;
+        position -= 1;
+
+        if (this.props.ordering && this.props.ordering.onPositionValueChange) {
+            this.props.ordering.onPositionValueChange(position);
+        }
+    };
+
+    _positionInRange = number => {
+        if (number < 0) {
+            return 0;
+        } else if (number > this.props.ordering.total) {
+            return this.props.ordering.total;
+        } else {
+            return number;
+        }
+    }
+
+    _handlePositionKey = (e) => {
+        if (this.props.ordering && this.props.ordering.onReorder) {
+            const position = this.props.ordering.position;
+
+            if (e.keyCode === KeyboardUtils.KeyCodes.ARROW_UP) {
+                // this is +2 rather than +1 because it's the index we're inserting this record before
+                this.props.ordering.onReorder(undefined, this._positionInRange(position + 2));
+            } else if (e.keyCode === KeyboardUtils.KeyCodes.ARROW_DOWN) {
+                this.props.ordering.onReorder(undefined, this._positionInRange(position - 1));
+            } else if (e.keyCode === KeyboardUtils.KeyCodes.ENTER) {
+                this.props.ordering.onReorder(undefined, this._positionInRange(position));
+            } else {
+                return;
+            }
+            e.preventDefault();
+            e.stopPropagation();
+        }
+    };
+
+    _handlePositionBlur = () => this.props.ordering.onReorder(
+        undefined,
+        this._positionInRange(this.props.ordering.position)
+    );
+
+    _handlePositionClick = e => e.target.select();
+
+    _handlePositionDrag = e => {
+        e.preventDefault();
+        e.stopPropagation();
+    };
+
+    _handleDrop = (targetId, beingDraggedId) => {
+        if (targetId === beingDraggedId) {
+            return;
+        }
+
+        if (this.props.ordering && this.props.ordering.onReorder) {
+            this.props.ordering.onReorder(beingDraggedId, targetId);
+        }
+    };
+
     /*
      * PingAccess guys need the ability to specify a non-hash route to edit rows.  In order to maintain
      * backwards compatibility, the component will only skip adding a hash to the edit url if the editViewRoute
@@ -381,6 +478,7 @@ class StatelessExpandableRow extends React.Component {
             containerClassname = classnames("item", this.props.className, {
                 expanded: this.props.expanded,
                 waiting: this.props.waiting,
+                "item--ordering": this.props.ordering,
                 "has-image": !!this.props.image,
                 "has-icon": !!this.props.icon,
                 "no-delete": !this.props.showDelete,
@@ -433,7 +531,7 @@ class StatelessExpandableRow extends React.Component {
             }
         }
 
-        return (
+        const rendered = (
             <div data-id={this.props["data-id"]} className={containerClassname}>
                 {this.props.rowMessage && (
                     <div data-id="item-message" className={classnames("item-message", this.props.rowMessage.type)}>
@@ -446,6 +544,24 @@ class StatelessExpandableRow extends React.Component {
                         {this.props.status && (
                             <div data-id="status" className={"status " + this.props.status}></div>
                         )}
+                    </div>
+                )}
+                { (this.props.ordering) && (
+                    <div data-id="ordering-controls" className="ordering-controls">
+                        <span className="icon-grip ordering-controls__grip"/>
+                        <input
+                            className="ordering-controls__input"
+                            data-id="ordering-input"
+                            draggable={true} // has to be draggable to override dragging
+                            onBlur={this._handlePositionBlur}
+                            onChange={this._handlePositionChange}
+                            onClick={this._handlePositionClick}
+                            onDragStart={this._handlePositionDrag}
+                            onKeyDown={this._handlePositionKey}
+                            type="text"
+                            value={this.props.ordering.position + 1}
+                        />
+                        / {this.props.ordering.total}
                     </div>
                 )}
                 <div className="collapsed-content">
@@ -482,6 +598,20 @@ class StatelessExpandableRow extends React.Component {
                 </div>
             </div>
         );
+        if (this.props.ordering) {
+            return (
+                <DragDrop
+                    className="draggable-item"
+                    id={this.props.ordering.position}
+                    index={this.props.ordering.position}
+                    onDrop={this._handleDrop}
+                    onDragStart={dragScroll.start}
+                    onDragEnd={dragScroll.end}
+                >{rendered}</DragDrop>
+            );
+        } else {
+            return rendered;
+        }
     }
 }
 

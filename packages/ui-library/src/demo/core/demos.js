@@ -603,6 +603,15 @@ module.exports = [
                 icon: "details"
             },
             {
+                label: "List View - Ordering",
+                demo: require("../components/templates/ListViewOrderingDemo"),
+                pathToDoc: "components/templates/ListViewOrdering.jsx",
+                pathToSource: "templates_list-view-paginated_ListViewOrdering.jsx.html",
+                pathToDemoSource: "demo_components_templates_ListViewOrderingDemo.jsx.html",
+                fullscreen: true,
+                icon: "details"
+            },
+            {
                 label: "Edit View - Simple",
                 demo: require("../components/templates/EditViewSimpleDemo"),
                 pathToDoc: "components/templates/EditViewSimple.jsx",

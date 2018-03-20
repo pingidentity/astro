@@ -20,9 +20,11 @@
 
 
 // V2 ------------------------------------------------------------------------------------------------------------------
+$expandable-row-height: 60px;
+$expandable-row-gap: 12px;
+
 .result-set {
-    $item-height: 60px;
-    $button-height: $item-height;
+    $button-height: $expandable-row-height;
     $button-width: 45px;
     $button-top: 22px;
     $button-bottom: 6px;
@@ -34,8 +36,8 @@
         position: relative;
         background-color: $color-elderly;
         border: 1px solid $color-elderly;
-        margin: 0 0 12px;
-        max-height: $item-height;
+        margin: 0 0 $expandable-row-gap;
+        max-height: $expandable-row-height;
 
         @include border-radius(2px);
         @include transition(all 0.1s);
@@ -44,8 +46,8 @@
             position: relative;
             overflow: hidden;
             box-sizing: border-box;
-            height: 60px;
-            padding: 23px 0 0 34px;
+            height: $expandable-row-height;
+            padding: 23px 0 0 $spacing-lg;
             margin: 0 45px 0 0;
         }
         &.has-subtitle {
@@ -207,7 +209,7 @@
 
             .expand-btn {
                 position: relative;
-                height: $item-height;
+                height: $expandable-row-height;
                 top: auto;
                 bottom: auto;
                 margin: 0 0 1px;
@@ -397,6 +399,92 @@
     @include border-radius(3px);
 }
 
+.item--ordering {
+    @include grab-cursor;
+    position: relative;
+
+    .row-accessories, .row-btns {
+        opacity: 0.4;
+        pointer-events: none;
+    }
+
+    &:before {
+        content: '';
+        right: 0;
+        top: -1 * $expandable-row-gap - 1px;
+        left: 0;
+        height: $expandable-row-gap + 1px;
+        position: absolute;
+    }
+}
+
+.draggable-item--drop-target {
+    margin-top: $spacing-xl;
+
+    .item--ordering {
+        border-top: 2px solid $color-active-blue;
+
+            &:before {
+                content: '';
+                top: -1 * $spacing-xl;
+                bottom: -1 * $spacing-xl;
+                height: auto;
+            }
+
+    }
+}
+
+.draggable-item {
+    transition: 0.25s margin;
+}
+
+.draggable-item--drop-target.draggable-item--drop-target-after {
+    margin-top: 0;
+    margin-bottom: $spacing-xl;
+
+    .item--ordering {
+        border-top: none;
+        border-bottom: 2px solid $color-active-blue;
+    }
+}
+
+.draggable-item--is-dragging .item--ordering {
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: $color-white;
+
+        @include opacity(0.6);
+    }
+}
+
+.ordering-controls {
+    @extend %value-text;
+    background: $color-accent-neutral-80;
+    float: left;
+    line-height: $expandable-row-height;
+    padding-right: $spacing-sm * 2;
+}
+
+.ordering-controls__input, input.ordering-controls__input {
+    display: inline-block;
+    background: $color-white;
+    text-align: right;
+    width: $spacing-xl;
+    padding: 0 $spacing-xs;
+    margin-right: $spacing-xs;
+}
+
+.ordering-controls__grip {
+    font-size: 20px;
+    margin-left: $spacing-sm * 2;
+    margin-right: $spacing-md;
+    vertical-align: middle;
+}
 
 // V1 - TO BE REMOVED OR MOVED - DEPRECATED OR SITE SPECIFIC -----------------------------------------------------------
 .result-set {

@@ -23,20 +23,20 @@ var dragSpec = {
     endDrag: function (props, monitor, component) {//eslint-disable-line
         props.onDragEnd && props.onDragEnd();//eslint-disable-line
         // pass the value that indicates if item was dropped outside of container
-        if (props.id === monitor.getItem().id) {
+        if (props.id === monitor.getItem().id && props.onCancel) {
             props.onCancel(monitor.didDrop());
         }
     },
 
     canDrag: function (props) {
         return !props.disabled;
-    }
+    },
 };
 
 var dragCollect = function (connect, monitor) {
     return {
         connectDragSource: connect.dragSource(),
-        isDragging: monitor.isDragging()
+        isDragging: monitor.isDragging(),
     };
 };
 
@@ -61,7 +61,15 @@ function handleDragEvent (callback, props, monitor, component) {
     var itemBeingDragged = monitor.getItem();
     var locationType = props.type === "column" ? isInLeftHalf : isInTopHalf;
     var offset = locationType(monitor, renderedNode, props.dragToEdge) ? 0 : 1;
-    props[callback](props.index + offset, itemBeingDragged.index, props.column, itemBeingDragged.column);
+    if (props[callback]) {
+        props[callback](props.index + offset, itemBeingDragged.index, props.column, itemBeingDragged.column);
+    }
+
+    if (component.state && component.state.dropAfter !== offset) {
+        // setting a state property on the DragDropContainer
+        // provides it as a prop in the DragDrop component
+        component.setState({ dropAfter: offset });
+    }
 }
 
 var dropSpec = {
@@ -77,9 +85,10 @@ var dropSpec = {
     drop: handleDragEvent.bind(null, "onDrop")
 };
 
-var dropCollect = function (connect) {
+var dropCollect = function (connect, monitor) {
     return {
-        connectDropTarget: connect.dropTarget()
+        connectDropTarget: connect.dropTarget(),
+        dropTarget: monitor.isOver(),
     };
 };
 
@@ -151,12 +160,13 @@ class DragDrop extends React.Component {
         connectDragSource: PropTypes.func.isRequired,
         connectDropTarget: PropTypes.func.isRequired,
         isDragging: PropTypes.bool.isRequired,
+        dropTarget: PropTypes.bool.isRequired,
 
         id: PropTypes.any.isRequired,
         index: PropTypes.number.isRequired,
-        onDrag: PropTypes.func.isRequired,
+        onDrag: PropTypes.func,
         onDrop: PropTypes.func.isRequired,
-        onCancel: PropTypes.func.isRequired,
+        onCancel: PropTypes.func,
 
         onDragStart: PropTypes.func,
         onDragEnd: PropTypes.func,
@@ -174,17 +184,29 @@ class DragDrop extends React.Component {
         disabled: false,
         tagName: "div",
         onDragStart: _.noop,
+        onDrag: _.noop,
+        onCancel: _.noop,
         onDragEnd: _.noop,
         dragToEdge: false
     };
+
+    state = {}
 
     render() {
         var connectDragSource = this.props.connectDragSource;
         var connectDropTarget = this.props.connectDropTarget;
         var opacity = this.props.isDragging ? 0.2 : 1;
 
+        const draggingClass = this.props.className ? this.props.className + "--is-dragging" : "";
+        const dropTargetClass = this.props.className ? this.props.className + "--drop-target" : "";
+        const dropTargetAfterClass = this.props.className ? this.props.className + "--drop-target-after" : "";
+
         var rowProps = {
-            className: classnames("drag-drop-item", this.props.className),
+            className: classnames("drag-drop-item", this.props.className, {
+                [draggingClass]: this.props.isDragging,
+                [dropTargetClass]: this.props.dropTarget && !this.props.isDragging,
+                [dropTargetAfterClass]: this.props.dropTarget && !this.props.isDragging && this.props.dropAfter,
+            }),
             "data-id": "drag-drop-item",
             style: _.clone(_.extend(this.props.style, { opacity: opacity }))
         };

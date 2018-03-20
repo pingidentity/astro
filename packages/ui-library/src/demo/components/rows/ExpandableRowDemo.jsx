@@ -162,6 +162,28 @@ class ExpandableRowDemo extends React.Component {
                 />
                 <ExpandableRow
                     stateless={false}
+                    title="Row in Ordering Mode"
+                    subtitle="stateful"
+                    ordering={{
+                        position: 40,
+                        total: 50,
+                        onReorder: index => console.log("New position:", index)
+                    }}
+                    rowAccessories={(
+                        <span className="row-accessories-content">
+                            <a>Link</a>
+                            <span className="icon-cog" />
+                            <HelpHint className="width-auto bottom" hintText="Provisioning">
+                                <label className="row-help">PROV</label>
+                            </HelpHint>
+                            <button className="inline">Inline Button</button>
+                            <Toggle stateless={false} />
+                            <span className="count">2</span>
+                        </span>
+                    )}
+                />
+                <ExpandableRow
+                    stateless={false}
                     title="Row With Invited Styling"
                     className="invited"
                     expanded={false}

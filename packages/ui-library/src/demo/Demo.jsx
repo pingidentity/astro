@@ -156,19 +156,6 @@ class DemoApp extends React.Component {
         };
         this.navActions.init(require("./core/demos.js").map(processItems));
         this.navActions.setRoot("Documentation");
-
-        // Watch arrow keys and map them to the corresponding actions
-        window.addEventListener("keydown", this._handleKeydown, false);
-    }
-
-    /**
-     * @method
-     * @name DemoApp#componentWillUnmount
-     * @desc Remove event listeners, references to DOM nodes and cleanup.
-     *
-     */
-    componentWillUnmount() {
-        window.removeEventListener("keydown", this._handleKeydown);
     }
 
     /**
