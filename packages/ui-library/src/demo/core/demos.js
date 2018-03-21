@@ -196,6 +196,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_forms_TimeZoneDemo.jsx.html"
                     },
                     {
+                        label: "Search Bar",
+                        demo: require("../components/forms/FormSearchBarDemo"),
+                        pathToDoc: "components/forms/FormSearchBar.jsx",
+                        pathToSource: "components_forms_FormSearchBar.jsx.html",
+                        pathToDemoSource: "demo_components_forms_FormSearchBarDemo.jsx.html"
+                    },
+                    {
                         label: "Search Box",
                         demo: require("../components/forms/FormSearchBoxDemo"),
                         pathToDoc: "components/forms/FormSearchBox.jsx",
