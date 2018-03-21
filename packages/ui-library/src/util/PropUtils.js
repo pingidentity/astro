@@ -4,18 +4,6 @@
  */
 
 /**
- * @alias module:util/ReduxUtils.resolveAndClone
- * @desc This function will go to the specified path in the passed in object, cloning all parts along the path.
- *
- * @param {object} state
- *     The state to traverse
- * @param {string[]} parts
- *     An array of keys to traverse
- * @returns {object}
- *     The object found at the given path
- */
-
-/**
  * @alias module:util/PropUtils.getIconClassName
  *
  * @desc Given an object of props that may contain 'iconClassName', 'iconName', or

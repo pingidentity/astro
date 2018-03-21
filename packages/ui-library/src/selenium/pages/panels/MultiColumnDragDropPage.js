@@ -48,13 +48,13 @@ var MultiColumnDragDropDemoPage = Object.create(HomePage, {
 
     xpathLeftSearchField: {
         get: function () {
-            return "//div[@data-id='DragDropColumn-0']//input[@data-id='searchBox-input']";
+            return "//div[@data-id='search-0']//input[@data-id='searchBox-input']";
         }
     },
 
     xpathRightSearchField: {
         get: function () {
-            return "//div[@data-id='DragDropColumn-1']//input[@data-id='searchBox-input']";
+            return "//div[@data-id='search-1']//input[@data-id='searchBox-input']";
         }
     },
 

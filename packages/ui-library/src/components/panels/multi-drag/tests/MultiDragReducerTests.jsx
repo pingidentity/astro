@@ -103,4 +103,15 @@ describe("MultiDrag-Reducer", function () {
 
         expect(next.columns[0].rows).toEqual(getInitialState().columns[0].rows.concat(newRows));
     });
+
+    it("performs category actions", function () {
+        var next = Reducer(getInitialState(), Actions.showCategoryList(0));
+        expect(next.columns[0].showCategoryList).toEqual(true);
+
+        next = Reducer(getInitialState(), Actions.hideCategoryList(0));
+        expect(next.columns[0].showCategoryList).toEqual(false);
+
+        next = Reducer(getInitialState(), Actions.setCategory(0, "something"));
+        expect(next.columns[0].category).toEqual("something");
+    });
 });

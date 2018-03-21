@@ -234,13 +234,14 @@ button,
             height: $size;
             width: $size;
             text-align: center;
+            line-height: $size;
 
             @include border-radius(ceil($size/2));
 
             &:before {
-                line-height: 1em;
                 position: absolute;
                 left: 0;
+                top: 0;
                 width: 100%;
                 font-family: $icon-font;
                 text-transform: none;
@@ -260,43 +261,37 @@ button,
 
         &.plus {
             &:before {
-                top: 7px;
                 content: '*';
-                font-size: 15px;
+                font-size: 12px;
             }
         }
         &.remove,
         &.minus {
             &:before {
-                top: 7px;
                 content: '-';
-                font-size: 14px;
+                font-size: 9px;
             }
         }
         &.delete {
             &:before {
-                top: 6px;
                 content: 'd';
                 font-size: 15px;
             }
         }
         &.edit {
             &:before {
-                top: 6px;
                 content: 'e';
                 font-size: 15px;
             }
         }
         &.prev {
             &:before {
-                top: 9px;
                 content: '<';
                 font-size: 11px;
             }
         }
         &.next {
             &:before {
-                top: 9px;
                 content: '>';
                 font-size: 11px;
             }

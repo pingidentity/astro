@@ -30,6 +30,26 @@ select {
     }
 }
 
+@mixin input-style {
+    color: $color-input-text;
+    background-color: $color-input-fill;
+    border: 1px solid $color-input-fill;
+    font-size: 14px;
+
+    .modifier_light-inputs & {
+        background-color: $color-white;
+        border: 1px solid $color-strong-neutral-70;
+    }
+}
+
+@mixin input-background {
+    background-color: $color-input-fill;
+
+    .modifier_light-inputs & {
+        background-color: $color-white;
+    }
+}
+
 // Tag styling
 input[type=text],
 input[type=password],
@@ -47,11 +67,9 @@ input[type=time],
 input[type=url],
 input[type=week],
 textarea {
+    @include input-style;
+
     display: block;
-    color: $color-input-text;
-    background-color: $color-input-fill;
-    border: 1px solid $color-input-fill;
-    font-size: 14px;
     height: $default-input-height;
     box-sizing: border-box;
     outline: none;
@@ -162,6 +180,11 @@ label {
 
                 &:before {
                     content: 'X';
+                }
+
+                &:hover {
+                    text-decoration: none;
+                    color: $color-active-blue;
                 }
             }
             a.undo {
@@ -285,11 +308,12 @@ label {
             display: inline-block;
 
             &:before {
+                @include input-background;
+                
                 content: '';
                 display: block;
                 box-sizing: border-box;
                 border: 3px solid $color-timberwolf;
-                background-color: $color-elderly;
                 height: $checkbox-size;
                 width: $checkbox-size;
                 line-height: $checkbox-size;
@@ -388,6 +412,8 @@ label {
         cursor: pointer;
 
         .circle {
+            @include input-background;
+
             position: absolute;
             left: 0;
             top: -1px;
@@ -396,7 +422,6 @@ label {
             height: $radio-height;
             cursor: pointer;
             border: $border-width solid $color-timberwolf;
-            background: $color-elderly;
 
             @include border-radius(ceil($radio-height/2) + $border-width);
 

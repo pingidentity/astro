@@ -323,10 +323,10 @@
 
 @mixin grab-cursor {
 	/* stylelint-disable */
+    cursor: move;
+    cursor: grab;
     cursor: -moz-grab;
     cursor: -webkit-grab;
-    cursor: grab;
-    cursor: move;
 	/* stylelint-enable */
 }
 

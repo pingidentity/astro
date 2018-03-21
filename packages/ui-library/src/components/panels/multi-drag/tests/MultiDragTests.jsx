@@ -1,6 +1,7 @@
 window.__DEV__ = true;
 
 jest.dontMock("../MultiDrag");
+jest.dontMock("../DragDropColumn");
 jest.dontMock("../../../../util/EventUtils");
 jest.dontMock("../../../../util/Utils");
 
@@ -35,9 +36,10 @@ describe("MultiDrag", function () {
             onDrag: jest.genMockFunction(),
             onDrop: jest.genMockFunction(),
             onCancel: jest.genMockFunction(),
-            contentType: <div />,
+            categoryList: ["One", "Two"],
             columns: [
-                { name: "Available Rows", id: 1, rows: availableRows, filteredRows: availableRows },
+                { name: "Available Rows", id: 1, rows: availableRows, filteredRows: availableRows,
+                    showCategoryList: true },
                 { name: "Added Rows", id: 2, rows: addedRows, filteredRows: addedRows }
             ]
         });
@@ -67,7 +69,13 @@ describe("MultiDrag", function () {
     });
 
     it("renders with given data-id", function () {
-        getWrappedComponent({ "data-id": "myMultiDrag" });
+        getWrappedComponent({
+            "data-id": "myMultiDrag",
+            strings: {
+                defaultCategoryOption: "Everything",
+                filteredByLabel: "but only this"
+            }
+        });
         var component = thisComponent;
 
         var multiDrag = TestUtils.findRenderedDOMNodeWithDataId(component, "myMultiDrag");
@@ -202,7 +210,7 @@ describe("MultiDrag", function () {
     });
 
     it("stateful: _handleDrag callback triggers onDrag callback and sets placeholder at destination", function () {
-        getWrappedComponent({ stateless: false });
+        getWrappedComponent({ stateless: false, showSearch: true });
         var component = thisComponent;
         var componentRef = component.refs.MultiDragStateful;
 
@@ -281,5 +289,41 @@ describe("MultiDrag", function () {
         expect(function () {
             getWrappedComponent({ controlled: true });
         }).toThrow(expectedError);
+    });
+
+    it("doesn't trigger category toggle event for stateful component", function () {
+        const callback = jest.genMockFunction();
+
+        const component = getWrappedComponent({
+            stateless: false,
+            categoryList: ["One", "Two"],
+            onCategoryToggle: callback,
+        });
+
+        const categoryToggle = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "link-dropdown-list-label"
+        );
+        const categoryOption = TestUtils.scryRenderedDOMNodesWithClass(component, "select-option")[0];
+
+        ReactTestUtils.Simulate.click(categoryToggle);
+        expect(callback).not.toBeCalled();
+
+        ReactTestUtils.Simulate.click(categoryOption);
+    });
+
+    it("triggers category click event", function () {
+        const callback = jest.genMockFunction();
+
+        const component = getWrappedComponent({
+            stateless: false,
+            categoryList: ["One", "Two"],
+            onCategoryClick: callback,
+        });
+
+        const categoryOption = TestUtils.scryRenderedDOMNodesWithClass(component, "select-option")[0];
+
+        ReactTestUtils.Simulate.click(categoryOption);
+        expect(callback).toBeCalled();
     });
 });

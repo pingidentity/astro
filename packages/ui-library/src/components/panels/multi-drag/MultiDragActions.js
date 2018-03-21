@@ -178,3 +178,33 @@ exports.placeholder = exports.set.bind(null, ["placeholder"]);
 *    The action.
 */
 exports.clearPlaceholder = exports.set.bind(null, ["placeholder"], null);
+
+/**
+* @alias Actions.showCategoryList
+* @memberof MultiDrag
+* @desc Shows category list
+*
+* @return {object}
+*    The action.
+*/
+exports.showCategoryList = (column) => exports.set(["columns", column, "showCategoryList"], true);
+
+/**
+* @alias Actions.hideCategoryList
+* @memberof MultiDrag
+* @desc Hides category list
+*
+* @return {object}
+*    The action.
+*/
+exports.hideCategoryList = (column) => exports.set(["columns", column, "showCategoryList"], false);
+
+/**
+* @alias Actions.hideCategoryList
+* @memberof MultiDrag
+* @desc Hides category list
+*
+* @return {object}
+*    The action.
+*/
+exports.setCategory = (column, category) => exports.set(["columns", column, "category"], category);

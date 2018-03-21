@@ -26,6 +26,9 @@ exports.filterFieldStartsWith = function (field, filter, item) {
     filter = filter.trim().toLowerCase();
 
     if (field) {
+        if (!item[field]) {
+            return false;
+        }
         return item[field].toLowerCase().startsWith(filter);
     } else {
         for (var key in item) {
@@ -57,12 +60,16 @@ exports.filterFieldContains = function (field, filter, item) {
 
     if (field) {
         // .includes not supported by IE
+        if (!item[field]) {
+            return false;
+        }
         return item[field].toLowerCase().indexOf(filter) !== -1;
-        
+
     } else {
         for (var key in item) {
             // .includes not supported by IE
-            if (item[key].toString && item[key].toString().toLowerCase().indexOf(filter) !== -1) {
+            if (item[key] !== undefined && item[key].toString &&
+                item[key].toString().toLowerCase().indexOf(filter) !== -1) {
                 return true;
             }
         }

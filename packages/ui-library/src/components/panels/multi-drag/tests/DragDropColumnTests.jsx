@@ -11,6 +11,7 @@ describe("DragDropColumn", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         ReduxTestUtils = require("../../../../util/ReduxTestUtils"),
         DragDropColumn = require("../DragDropColumn"),
+        DragDrop = require("../../../rows/DragDrop"),
         _ = require("underscore"),
         TestBackend = require("react-dnd-test-backend"),
         DragDropContext = require("react-dnd").DragDropContext;
@@ -26,8 +27,8 @@ describe("DragDropColumn", function () {
         });
     }
 
-    function getWrappedComponent (opts) {
-        opts = _.defaults(opts || {}, {
+    function getOpts (opts) {
+        return _.defaults(opts || {}, {
             onDrag: jest.genMockFunction(),
             onDrop: jest.genMockFunction(),
             onCancel: jest.genMockFunction(),
@@ -40,6 +41,17 @@ describe("DragDropColumn", function () {
             index: 0,
             rows: [{ id: 1, n: 1 }, { id: 2, n: 2 }],
         });
+    }
+
+    function getComponent (opts) {
+        opts = getOpts(opts);
+
+        var WrappedComponent = wrapInTestContext(DragDropColumn);
+        return ReactTestUtils.renderIntoDocument(<WrappedComponent {...opts} >Content</WrappedComponent>);
+    }
+
+    function getWrappedComponent (opts) {
+        opts = getOpts(opts);
 
         var WrappedComponent = wrapInTestContext(DragDropColumn);
         return ReactTestUtils.renderIntoDocument(<ReduxTestUtils.Wrapper type={WrappedComponent} opts={opts} />);
@@ -76,15 +88,6 @@ describe("DragDropColumn", function () {
         expect(dragDropColumn).toBeDefined();
     });
 
-    it("Renders search when showSearch=true", function () {
-        var wrapper = getWrappedComponent({ showSearch: true });
-        var component = thisComponent;
-        expect(TestUtils.findRenderedDOMNodeWithDataId(component, "search")).toBeTruthy();
-
-        wrapper.sendProps({ showSearch: false });
-        expect(TestUtils.findRenderedDOMNodeWithDataId(component, "search")).toBeFalsy();
-    });
-
     it("Renders drop target when no rows", function () {
         getWrappedComponent({ rows: [] });
         var component = thisComponent;
@@ -93,14 +96,6 @@ describe("DragDropColumn", function () {
     });
 
 
-
-    it("Executes search callback", function () {
-        getWrappedComponent({ showSearch: true });
-        var component = thisComponent;
-
-        component._handleSearch("superman");
-        expect(component.props.onSearch).toBeCalledWith(0, "superman");
-    });
 
     it("renders ghost row", function () {
         getWrappedComponent({ ghostRowAt: 1 });
@@ -113,6 +108,72 @@ describe("DragDropColumn", function () {
 
         //TODO: reactid is deprecated
         //expect(rows[1].getAttribute("data-reactid")).toContain("preview");
+    });
+
+
+    it("triggers correct category list events", function() {
+        const toggleCallback = jest.genMockFunction();
+        const clickCallback = jest.genMockFunction();
+
+        const component = getWrappedComponent({
+            categoryList: ["One", "Two"],
+            showCategoryList: true,
+            onCategoryToggle: toggleCallback,
+            onCategoryClick: clickCallback,
+        });
+
+        const categoryToggle = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "link-dropdown-list-label"
+        );
+        const categoryOption = TestUtils.scryRenderedDOMNodesWithClass(component, "select-option")[0];
+
+        expect(toggleCallback).not.toBeCalled();
+        ReactTestUtils.Simulate.click(categoryToggle);
+        expect(toggleCallback).toBeCalled();
+
+        expect(clickCallback).not.toBeCalled();
+        ReactTestUtils.Simulate.click(categoryOption);
+        expect(clickCallback).toBeCalled();
+    });
+
+    it("triggers onDrag callback", function() {
+        const callback = jest.genMockFunction();
+        const mockOffset = {
+            clientOffset: { x: 0, y: 0 },
+            getSourceClientOffset: function () { return { x: 0, y: 0 }; }
+        };
+
+        var root = getComponent({ onDrag: callback });
+
+        var backend = root.getManager().getBackend();
+        var dropzone = ReactTestUtils.scryRenderedComponentsWithType(root, DragDrop)[0];
+        var draggable = dropzone.decoratedComponentInstance;
+
+        expect(callback).not.toBeCalled();
+        backend.simulateBeginDrag([draggable.getHandlerId()], mockOffset);
+        backend.simulateHover([dropzone.getHandlerId()], mockOffset);
+        backend.simulateDrop();
+        expect(callback).toBeCalled();
+    });
+
+    it("doesn't trigger onDrag callback because sort is disabled", function() {
+        const callback = jest.genMockFunction();
+        const mockOffset = {
+            clientOffset: { x: 0, y: 0 },
+            getSourceClientOffset: function () { return { x: 0, y: 0 }; }
+        };
+
+        var root = getComponent({ onDrag: callback, disableSort: true });
+
+        var backend = root.getManager().getBackend();
+        var dropzone = ReactTestUtils.scryRenderedComponentsWithType(root, DragDrop)[0];
+        var draggable = dropzone.decoratedComponentInstance;
+
+        backend.simulateBeginDrag([draggable.getHandlerId()], mockOffset);
+        backend.simulateHover([dropzone.getHandlerId()], mockOffset);
+        backend.simulateDrop();
+        expect(callback).not.toBeCalled();
     });
 
     it("Executes scroll callbacks", function () {

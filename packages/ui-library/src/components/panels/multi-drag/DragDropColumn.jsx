@@ -1,9 +1,8 @@
 var PropTypes = require("prop-types");
 var React = require("react"),
     ReactDOM = require("react-dom"),
-    FormSearchBox = require("../../forms/FormSearchBox"),
-    FormLabel = require("../../forms/FormLabel"),
-    DDRow = require("../../rows/DragDropRow"),
+    DragDropRow = require("../../rows/DragDropRow"),
+    LinkDropDownList = require("../../forms/LinkDropDownList"),
     classnames = require("classnames"),
     _ = require("underscore");
 
@@ -23,14 +22,10 @@ var React = require("react"),
  *    The name of the column.
  * @param {number} index
  *    The index of the column. Used when executing callbacks.
- * @param {string} filter
- *    The filter to display in the search field.
  * @param {object} contentType
  *    A react component to be used as a template for rendering rows.
  * @param {string} [labelEmpty]
  *    The placeholder string for when a column is empty.
- * @param {boolean} [showSearch=false]
- *    Determines if the searchbox should be shown.
  * @param {string} [className]
  *    CSS classes to set on the top-level HTML container.
  * @param {number} [ghostRowAt]
@@ -41,8 +36,6 @@ var React = require("react"),
  *    If true, the drag index will only increment when the drag location has passed the edge of the row instead
  *    of being incremented after the halfway mark which is the default behaviour.
  *
- * @param {MultiDrag~onSearch} onSearch
- *    Callback to be triggered when a column is searched.
  * @param {MultiDrag~onDragDrop} onDrag
  *    Callback to be triggered when a row is dragged.
  * @param {MultiDrag~onDragDrop} onDrop
@@ -68,17 +61,17 @@ module.exports = class extends React.Component {
         ).isRequired,
         name: PropTypes.string.isRequired,
         index: PropTypes.number.isRequired,
-        filter: PropTypes.string,
+        filterCategory: PropTypes.string,
+        categoryList: PropTypes.arrayOf(PropTypes.string),
         contentType: PropTypes.element.isRequired,
         labelEmpty: PropTypes.string,
         // optional
-        showSearch: PropTypes.bool,
         ghostRowAt: PropTypes.number,
         className: PropTypes.string,
         disableSort: PropTypes.bool,
         dragToEdge: PropTypes.bool,
+        strings: PropTypes.objectOf(PropTypes.string),
         // callbacks
-        onSearch: PropTypes.func.isRequired,
         onDrag: PropTypes.func.isRequired,
         onDrop: PropTypes.func.isRequired,
         onCancel: PropTypes.func.isRequired,
@@ -90,21 +83,13 @@ module.exports = class extends React.Component {
 
     static defaultProps = {
         "data-id": "drag-drop-column",
-        showSearch: false,
         onScrolledToBottom: _.noop,
         onScrolledToTop: _.noop,
         labelEmpty: "No Items Added",
         onDragStart: _.noop,
         onDragEnd: _.noop,
-        dragToEdge: false
-    };
-
-    /*
-     * Since the multi-Drag component supports search in all columns, each column needs to report which
-     * column a search affects.
-     */
-    _handleSearch = (value) => {
-        this.props.onSearch(this.props.index, value);
+        dragToEdge: false,
+        strings: {}
     };
 
     /*
@@ -122,23 +107,6 @@ module.exports = class extends React.Component {
     };
 
     /*
-     * Renders the searchbar if the prop is set
-     */
-    _renderSearch = () => {
-        if (!this.props.showSearch) {
-            return null;
-        }
-
-        return (
-            <div className="input-row" data-id="search">
-                <FormSearchBox
-                    onValueChange={this._handleSearch}
-                    queryString={this.props.filter}
-                    className="input-search"/>
-            </div>);
-    };
-
-    /*
      * Renders a drag/drop from give a data object
      */
     _renderRow = (row, index, opts) => {
@@ -150,19 +118,18 @@ module.exports = class extends React.Component {
         }
 
         return (
-            <DDRow id={row.id} key={row.id} index={index}
-                   disabled={opts && opts.disabled}
-                   column={this.props.index}
-                   onDrag={this.props.onDrag}
-                   onDrop={this.props.onDrop}
-                   onDragStart={this.props.onDragStart}
-                   onDragEnd={this.props.onDragEnd}
-                   onCancel={this.props.onCancel}
-                   dragToEdge={this.props.dragToEdge}>
-            {
-                inner
-            }
-            </DDRow>);
+            <DragDropRow id={row.id} key={row.id} index={index}
+                disabled={opts && opts.disabled}
+                column={this.props.index}
+                onDrag={this._handleDrag}
+                onDrop={this.props.onDrop}
+                onDragStart={this.props.onDragStart}
+                onDragEnd={this.props.onDragEnd}
+                onCancel={this.props.onCancel}
+                dragToEdge={this.props.dragToEdge}
+            >
+                {inner}
+            </DragDropRow>);
     };
 
     _renderRows = () => {
@@ -192,19 +159,72 @@ module.exports = class extends React.Component {
         return rows;
     };
 
+    _getCategoryOptions = () => {
+        if (this.props.categoryList) {
+            return [{
+                id: "",
+                label: this.props.strings.defaultCategoryOption || "All"
+            }].concat(
+                this.props.categoryList.map(item => ({
+                    id: item,
+                    label: item
+                }))
+            );
+        } else {
+            return [];
+        }
+    };
+
+    _handleCategoryToggle = () => {
+        this.props.onCategoryToggle(this.props.index);
+    };
+
+    _handleCategoryClick = value => {
+        this.props.onCategoryClick(this.props.index, value.id);
+    };
+
+    _handleDrag = (targetIndex, beingDraggedIndex, targetColumn, beingDraggedColumn) => {
+        if (targetColumn === beingDraggedColumn && this.props.disableSort) {
+            return;
+        }
+
+        this.props.onDrag(targetIndex, beingDraggedIndex, targetColumn, beingDraggedColumn);
+    };
+
     render() {
 
-        var className = classnames(
+        const className = classnames(
             this.props.className, {
                 "disable-sort": this.props.disableSort
             }
         );
 
+        const categoryOptions = this._getCategoryOptions();
+        const selectedCategory = _.find(categoryOptions, option => option.id === (this.props.category || ""));
+        const title = this.props.categoryList
+            ? `${this.props.name} ${this.props.strings.filteredByLabel || "filtered by"}:`
+            : this.props.name;
+
         return (
             <div data-id={this.props["data-id"]} className={className}>
-                <FormLabel value={this.props.name} />
 
-                { this._renderSearch() }
+                <div className="row-selector__column-header">
+                    <span className="row-selector__column-title">{title}</span>
+                    {this.props.categoryList &&
+                        <LinkDropDownList
+                            className="row-selector__category-selector"
+                            open={this.props.showCategoryList}
+                            label={selectedCategory.label}
+                            stateless={true}
+                            onClick={this._handleCategoryClick}
+                            onToggle={this._handleCategoryToggle}
+                            options={categoryOptions}
+                        />
+                    }
+                    {this.props.showCount &&
+                        <span className="row-selector__column-count">{this.props.rows.length}</span>
+                    }
+                </div>
 
                 <div className="items" onScroll={this._handleScroll} ref="items">
                     { this._renderRows() }

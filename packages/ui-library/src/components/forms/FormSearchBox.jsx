@@ -48,6 +48,8 @@ var React = require("react"),
 *
 * @param {string} [queryString]
 *     Query string to be used as value in the search field
+* @param {string} [value]
+*     Alias for queryString
 * @param {string} [placeholder]
 *     Hint text inside searchBox
 * @param {FormSearchBox~onValueChange} onValueChange
@@ -140,8 +142,9 @@ class FormSearchBox extends React.Component {
     };
 
     render() {
-        var showClear = this.props.queryString && (this.props.queryString !== "");
-        
+        const value = this.props.queryString || this.props.value || "";
+        var showClear = value !== "";
+
         return (
             <div data-id={this.props["data-id"]} className={this.props.className} >
                 <FormTextField data-id="searchBox"
@@ -149,7 +152,7 @@ class FormSearchBox extends React.Component {
                         ref="searchBox"
                         className="search"
                         errorMessage={this.props.errorMessage}
-                        value={this.props.queryString}
+                        value={value}
                         placeholder={this.props.placeholder}
                         onValueChange={this._search}
                         onKeyDown={this._handleSearchBoxKeyDown}

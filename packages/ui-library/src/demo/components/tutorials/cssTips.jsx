@@ -3,6 +3,9 @@ var React = require("react"),
     Markup = require("../../core/Markup"),
     classnames = require("classnames"),
     FormTextField = require("./../../../components/forms/form-text-field").v2,
+    FormRadioInput = require("ui-library/lib/components/forms/FormRadioInput"),
+    FormCheckbox = require("ui-library/lib/components/forms/FormCheckbox"),
+    FormLabel = require("ui-library/lib/components/forms/FormLabel"),
     Layout = require("../../../components/general/ColumnLayout"),
     _ = require("underscore"),
     Color = require("color"),
@@ -497,6 +500,58 @@ class cssTips extends React.Component {
                             );
                         })
                 }
+
+                <h2>Input Variations</h2>
+                <p>
+                    Our inputs are usually a light blue-gray color, but in some
+                    contexts are better displayed with a white variant. This can
+                    be triggered by surrounding the inputs in the 'modifier_light-inputs'
+                    class.
+                </p>
+
+                <div>
+                    <FormTextField labelText="Normal Text Input" value="Content of normal input" />
+                    <div>
+                        <FormLabel>Normal Radio Button and Checkbox</FormLabel><br />
+                        <FormRadioInput name="nothing" value="nothing" checked={true} />
+                        <FormCheckbox name="nothing" value="nothing" checked={true} />
+                    </div>
+                </div>
+                <hr className="hr" />
+                <div className="modifier_light-inputs" style={{ background: "#f8f8f8", padding: 15 }}>
+                    <FormTextField labelText="White BG Text Input" value="Content of white input" />
+                    <div>
+                        <FormLabel>White BG Radio Button and Checkbox</FormLabel><br />
+                        <FormRadioInput name="nothing" value="nothing" checked={true} />
+                        <FormCheckbox name="nothing" value="nothing" checked={true} />
+                    </div>
+                </div>
+
+                <Markup custom={true} language="html"
+                    content={
+                        [
+                            /* eslint-disable */
+                            '<div>',
+                            '    <FormTextField labelText="Normal Text Input" value="Content of normal input" />',
+                            '    <div>',
+                            '        <FormLabel>Normal Radio Button and Checkbox</FormLabel><br />',
+                            '        <FormRadioInput name="nothing" value="nothing" checked={true} />',
+                            '        <FormCheckbox name="nothing" value="nothing" checked={true} />',
+                            '    </div>',
+                            '</div>',
+                            '<hr className="hr" />',
+                            '<div className="modifier_light-inputs" style={{background: "#f8f8f8", padding: 15}}>',
+                            '    <FormTextField labelText="White BG Text Input" value="Content of white input" />',
+                            '    <div>',
+                            '        <FormLabel>White BG Radio Button and Checkbox</FormLabel><br />',
+                            '        <FormRadioInput name="nothing" value="nothing" checked={true} />',
+                            '        <FormCheckbox name="nothing" value="nothing" checked={true} />',
+                            '    </div>',
+                            '</div>',
+                            /* eslint-enable */
+                        ].join("\n")
+                    }
+                />
 
                 <p className="attention">>
                     Finally, this page is a work-in-progress.  If you have questions about the markup or CSS

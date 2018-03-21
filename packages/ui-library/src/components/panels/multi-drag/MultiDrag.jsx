@@ -2,10 +2,13 @@ var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames"),
     DragDropColumn = require("./DragDropColumn"),
+    MultiDragRow = require("./MultiDragRow"),
     search = require("./MultiDragReducer.js").search,
     move = require("./MultiDragReducer.js").move,
+    update = require("re-mutable"),
     reapplyFilters = require("./MultiDragReducer.js").reapplyFilters,
     Utils = require("../../../util/Utils.js"),
+    FormSearchBox = require("../../forms/FormSearchBox"),
     _ = require("underscore");
 
 /**
@@ -144,11 +147,15 @@ function convertFilteredIndexes (columns, desc) {
  *    This is used to give feedback when a user drags a row to a new location but has not released the mouse.
  * @param {string[]} [classNames]
  *    The classnames to assign to each column.
- *    By default the first column will have rows-available applied and the second rows-added.
+ *    By default the first column will have row-selector__available applied and the second row-selector__added.
  * @param {boolean} [showSearchOnAllColumns=false]
  *    Display searchbar on all columns.
  * @param {boolean} [showSearch=false]
- *    Dispaly searchbar on the first column.
+ *    Display searchbar on the first column.
+ * @param {boolean} [showCategoryFilterOnAllColumns=false]
+ *    Display category list on all columns.
+ * @param {boolean} [showCategoryFilter=false]
+ *    Display category list on the first column.
  * @param {string[]} [filterFieldNames=[]]
  *    An array of field names of the row properties to use in a search where array index corresponds to each column index.
  *    If unset for any column index, search will use all row properties that have a string representation for that column.
@@ -157,6 +164,8 @@ function convertFilteredIndexes (columns, desc) {
  *    Disables the MultiDrag component
  * @param {string} [labelEmpty]
  *    Sets the text for the right column when no items are added
+ * @param {array} [categoryList]
+ *    The list of categories that you can filter rows by
  *
  * @param {MultiDrag~onSearch} onSearch
  *    Callback to be triggered when a column is searched. When stateless=false, will be executed after search has
@@ -211,10 +220,13 @@ class MultiDragStateless extends React.Component {
         ).isRequired,
         showSearchOnAllColumns: PropTypes.bool,
         showSearch: PropTypes.bool,
+        showCategoryFilterOnAllColumns: PropTypes.bool,
+        showCategoryFilter: PropTypes.bool,
         // react doesn't wrap the PropTypes.shape validator with,
         // so can't specify shape of object for previewMove otherwise it won't re-render
         previewMove: PropTypes.object,
-        contentType: PropTypes.element.isRequired,
+        categoryList: PropTypes.arrayOf(PropTypes.string),
+        contentType: PropTypes.element,
         classNames: PropTypes.arrayOf(
             PropTypes.string
         ),
@@ -229,27 +241,20 @@ class MultiDragStateless extends React.Component {
         labelEmpty: PropTypes.string,
         disabled: PropTypes.bool,
         onDragStart: PropTypes.func,
-        onDragEnd: PropTypes.func
+        onDragEnd: PropTypes.func,
+        strings: PropTypes.objectOf(PropTypes.string)
     };
 
     static defaultProps = {
         "data-id": "multi-drag",
-        classNames: ["rows-available", "rows-added"],
+        classNames: ["row-selector__available", "row-selector__added"],
         showSearchOnAllColumns: false,
         showSearch: false,
-        disabled: false
+        disabled: false,
+        showCategoryFilter: true,
+        showCategoryFilterOnAllColumns: false,
+        strings: {}
     };
-
-    /*
-     * This function will iterate through the columns and build an
-     * array indicating whether the items are sortable within each column
-     */
-    componentDidMount() {
-        this.colSortDisabledArr = [];
-        this.props.columns.map(function (column) {
-            this.colSortDisabledArr.push(column.disableSort);
-        }.bind(this));
-    }
 
     /*
      * This function will compare the current move to the last reported drag and if there is no change
@@ -310,11 +315,6 @@ class MultiDragStateless extends React.Component {
             return;
         }
 
-        // don't allow sorting of column if disableSort is enabled
-        if ((targetColumn === beingDraggedColumn) && this.colSortDisabledArr[beingDraggedColumn]) {
-            return;
-        }
-
         this._lastDrag = desc;
 
         if (this._isValidDrag()) {
@@ -331,57 +331,92 @@ class MultiDragStateless extends React.Component {
     _onDrop = () => {
     };
 
+    _renderSearch = (column, index) => {
+        const handleSearch = (value) => this.props.onSearch(index, value);
+
+        return (
+            <FormSearchBox
+                data-id={`search-${index}`}
+                key={`search-${index}`}
+                onValueChange={handleSearch}
+                className="input-search row-selector__search"
+                placeholder={`Search ${column.searchName || column.name}`}
+                showClear={true}
+                value={column.search}
+            />
+        );
+    };
+
     render() {
 
         var preview = this.props.previewMove;
         var className = classnames(
             "input-row row-selector",
             this.props.className, {
-                disabled: this.props.disabled
+                "row-selector--disabled": this.props.disabled
             }
         );
+        const contentType = this.props.contentType ||
+            <MultiDragRow onRemove={this.props.onRemove} onAdd={this.props.onAdd} />;
 
         return (
             <div data-id={this.props["data-id"]} className={className}>
-            {
-                this.props.columns.map(function (column, index) {
+                <div key="search-row" className="row-selector__search-row">
+                    {this.props.columns.map((column, index) => (
+                        (this.props.showSearch && index === 0) || this.props.showSearchOnAllColumns
+                        ? this._renderSearch(column, index)
+                        : <div key={"search"+column.name} className="row-selector__search"/>
+                    ))}
+                </div>
+                <div key="columns" className="row-selector__columns">
+                {
+                    this.props.columns.map(function (column, index) {
 
-                    var ghostRowAt = preview && preview.column === index ? preview.index : null;
+                        var ghostRowAt = preview && preview.column === index ? preview.index : null;
 
-                    // don't increment if ghostRowAt is null, otherwise a preview row
-                    // gets created in each column.
-                    // not applicable if from or to index is for a different column.
-                    if ((this._lastDrag && this._lastDrag.from.index < this._lastDrag.to.index) &&
-                        (this._lastDrag.from.column === this._lastDrag.to.column) &&
-                        ghostRowAt !== null) {
-                        ghostRowAt += 1;
-                    }
+                        // don't increment if ghostRowAt is null, otherwise a preview row
+                        // gets created in each column.
+                        // not applicable if from or to index is for a different column.
+                        if ((this._lastDrag && this._lastDrag.from.index < this._lastDrag.to.index) &&
+                            (this._lastDrag.from.column === this._lastDrag.to.column) &&
+                            ghostRowAt !== null) {
+                            ghostRowAt += 1;
+                        }
 
-                    return (
-                        <DragDropColumn
-                            {...column}
-                            key={index}
-                            index={index}
-                            rows={column.filteredRows || column.rows}
-                            showSearch={(this.props.showSearch && index === 0) || this.props.showSearchOnAllColumns}
-                            onSearch={this.props.onSearch}
-                            onScrolledToBottom={this.props.onScrolledToBottom}
-                            onScrolledToTop={this.props.onScrolledToTop}
-                            onDrag={this._onDrag}
-                            onDrop={this._onDrop}
-                            onDragStart={this.props.onDragStart}
-                            onDragEnd={this.props.onDragEnd}
-                            onCancel={this._onCancel}
-                            ghostRowAt={ghostRowAt}
-                            dragToEdge={true}
-                            className={this.props.classNames[index]}
-                            contentType={this.props.contentType}
-                            data-id={"DragDropColumn-" + index}
-                            labelEmpty={this.props.labelEmpty}
-                        />
-                    );
-                }.bind(this))
-            }
+                        const showCategoryFilter = (this.props.showCategoryFilter && index === 0) ||
+                            this.props.showCategoryFilterOnAllColumns;
+                        const categoryList = showCategoryFilter ? this.props.categoryList : null;
+
+                        return (
+                            <DragDropColumn
+                                {...column}
+                                categoryList={categoryList}
+                                key={index}
+                                index={index}
+                                disableSort={index === 0}
+                                rows={column.filteredRows}
+                                onScrolledToBottom={this.props.onScrolledToBottom}
+                                onScrolledToTop={this.props.onScrolledToTop}
+                                onDrag={this._onDrag}
+                                onDrop={this._onDrop}
+                                onDragStart={this.props.onDragStart}
+                                onDragEnd={this.props.onDragEnd}
+                                onCancel={this._onCancel}
+                                onCategoryClick={this.props.onCategoryClick}
+                                onCategoryToggle={this.props.onCategoryToggle}
+                                ghostRowAt={ghostRowAt}
+                                dragToEdge={true}
+                                className={this.props.classNames[index]}
+                                contentType={contentType}
+                                data-id={"DragDropColumn-" + index}
+                                labelEmpty={this.props.labelEmpty}
+                                showCount={index > 0}
+                                strings={this.props.strings}
+                            />
+                        );
+                    }.bind(this))
+                }
+                </div>
             </div>
         );
     }
@@ -395,12 +430,13 @@ class MultiDragStateful extends React.Component {
     };
 
     static defaultProps = {
-        filterFieldNames: []
+        filterFieldNames: [],
     };
 
     state = {
         columns: this.props.columns,
-        placeholder: null
+        placeholder: null,
+        showCategoryList: false,
     };
 
     _handleSearch = (index, value) => {
@@ -408,12 +444,41 @@ class MultiDragStateful extends React.Component {
             search(this.state, {
                 column: index,
                 filter: value,
-                fieldName: this.props.filterFieldNames[index]
+                fieldName: this.props.filterFieldNames[index] || "name"
             }),
             function () {
                 if (this.props.onSearch) {
                     this.props.onSearch(index, value);
                 }
+            }
+        );
+    };
+
+    _handleCategoryToggle = (index) => {
+        const showing = this.state.columns[index].showCategoryList || false;
+
+        this.setState(
+            update(this.state).set(
+                ["columns", index, "showCategoryList"],
+                !showing
+            ).end()
+        );
+    };
+
+    _handleCategoryClick = (index, value) => {
+        // use remutable to set state.colums[index].category to the new value
+        let next = update(this.state).set(["columns", index, "category"], value).end();
+
+        // update the filteredRows
+        next = reapplyFilters(next);
+
+        this.setState(
+            next,
+            function() {
+                if (this.props.onCategoryClick) {
+                    this.props.onCategoryClick(index, value);
+                }
+                this._handleCategoryToggle(index);
             }
         );
     };
@@ -475,6 +540,8 @@ class MultiDragStateful extends React.Component {
         var props = _.defaults({
             ref: "MultiDragStateless",
             onSearch: this._handleSearch,
+            onCategoryClick: this._handleCategoryClick,
+            onCategoryToggle: this._handleCategoryToggle,
             columns: this.state.columns,
             previewMove: this.state.placeholder,
             onCancel: this._handleCancel,

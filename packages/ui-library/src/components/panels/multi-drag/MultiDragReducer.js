@@ -19,6 +19,67 @@ var initialState = {
  */
 
 /**
+ * @function MultiDrag~setSearch
+ *
+ * @desc Sets search filter for column rows
+ *
+ * @param {object} state
+ *    The state to apply the search to. Can be a clone of the current state
+ *    or some next state that is the result of other actions that already changed the current state.
+ * @param {MultiDrag~searchAction} action
+ *    The search action object to use in the search.
+ *
+ * @return {object}
+ *    The next state
+ */
+function setSearch (state, action) {
+    var searchStr = action.filter || "";
+
+    var next = update(state)
+        .set(["columns", action.column, "search"], searchStr)
+        .set(["columns", action.column, "searchFieldName"], action.fieldName)
+        .end();
+
+    return next;
+}
+
+/**
+ * @function MultiDrag~applyFilters
+ *
+ * @desc Apply all the current filters in the state
+ *
+ * @param {object} state
+ *    The state to reapply all current state's filters to. Can be a clone of the current state
+ *    or some next state that is the result of other actions that already changed the current state.
+ *
+ * @return {object}
+ *    The next state will all the current state's filters applied.
+ */
+function applyFilters (state) {
+    var next = state;
+
+    next.columns.forEach(function (column, index) {
+        const searchStr = column.search || "";
+        const searchFn = FilterUtils.getFilterFunction(searchStr, column.searchFieldName);
+
+        const categoryStr = column.category || "";
+        const categoryFn = item => categoryStr === "" || (item.categoryId || item.category) === categoryStr;
+
+        const filterFn = item => searchFn(item) && categoryFn(item);
+
+        if ((searchStr + categoryStr).length > 0) {
+            next = update.set(next, ["columns", index, "filteredRows"],
+                column.rows.filter(filterFn));
+        } else {
+            next = update.set(next, ["columns", index, "filteredRows"],
+                column.rows);
+        }
+    });
+
+    return next;
+}
+
+/**
  * @function MultiDrag~search
  *
  * @desc Applies filters to the rows in the specified column's state
@@ -34,23 +95,7 @@ var initialState = {
  *    The next state with the filters applied.
  */
 function search (state, action) {
-    var filterStr = action.filter || "";
-    var filterFn = FilterUtils.getFilterFunction(filterStr, action.fieldName);
-
-    var next = update(state)
-        .set(["columns", action.column, "filter"], filterStr)
-        .set(["columns", action.column, "filterFieldName"], action.fieldName)
-        .end();
-
-    if (filterStr.length > 0) {
-        next = update.set(next, ["columns", action.column, "filteredRows"],
-            state.columns[action.column].rows.filter(filterFn));
-    } else {
-        next = update.set(next, ["columns", action.column, "filteredRows"],
-            state.columns[action.column].rows);
-    }
-
-    return next;
+    return applyFilters(setSearch(state, action));
 }
 
 /**
@@ -114,30 +159,6 @@ function init (state, action) {
     return update.set(state, ["columns"], deepClone(action.data));
 }
 
-/**
- * @function MultiDrag~reapplyFilters
- *
- * @desc Reapply all current state's filters to the specified state.
- *
- * @param {object} state
- *    The state to reapply all current state's filters to. Can be a clone of the current state
- *    or some next state that is the result of other actions that already changed the current state.
- *
- * @return {object}
- *    The next state will all the current state's filters applied.
- */
-function reapplyFilters (state) {
-    state.columns.forEach(function (column, index) {
-        state = search(state, {
-            column: index,
-            filter: column.filter,
-            fieldName: column.filterFieldName
-        });
-    });
-
-    return state;
-}
-
 module.exports = function (state, action) {
     var next;
 
@@ -149,7 +170,7 @@ module.exports = function (state, action) {
             next = move(state, action);
             break;
         case Actions.Types.MULTIDRAG_FILTER:
-            next = search(state, action);
+            next = setSearch(state, action);
             break;
         case Actions.Types.MULTIDRAG_INIT:
             next = init(state, action);
@@ -166,11 +187,11 @@ module.exports = function (state, action) {
 
     //since we render based on the filteredRows property, update them after a move.  If there is
     //no filter search() will return a reference to rows
-    next = reapplyFilters(next);
+    next = applyFilters(next);
 
     return next;
 };
 
 module.exports.search = search;
 module.exports.move = move;
-module.exports.reapplyFilters = reapplyFilters;
+module.exports.reapplyFilters = applyFilters;

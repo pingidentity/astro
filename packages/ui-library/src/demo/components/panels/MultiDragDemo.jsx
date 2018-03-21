@@ -11,7 +11,8 @@ var React = require("react"),
     update = require("re-mutable"),
     keyMirror = require("fbjs/lib/keyMirror"),
     data = require("./MultiDragData.js"),
-    dragScroll = require("../../../util/dragScroll");
+    dragScroll = require("../../../util/dragScroll"),
+    _ = require("underscore");
 
 /**
 * @name MultiDragDemo
@@ -42,7 +43,7 @@ function DemoReducer (state, action) {
         case Types.GRID_DEMO_SET:
             return update.set(state, action.path, action.value);
         default:
-            return state || { search: "all", style: "none" };
+            return state || { search: "first", style: "none" };
     }
 }
 
@@ -73,7 +74,7 @@ class Row extends React.Component {
     };
 
     render() {
-        var hasImage = this.props.style === "image";
+        var hasImage = this.props.style === "iconSrc";
         var hasIcon = this.props.style === "icon";
         var hasCount = this.props.style === "count";
 
@@ -86,7 +87,7 @@ class Row extends React.Component {
                 <span className="icon-grip"></span>
                 { hasImage &&
                     <div className="item-image" data-id="row-image"
-                        style={{ backgroundImage: "url(" + this.props.icon + ")" }} />
+                        style={{ backgroundImage: "url(" + this.props.iconSrc + ")" }} />
                 }
                 { hasIcon &&
                     <span className="item-icon icon-cog" data-id="row-icon" />
@@ -150,7 +151,7 @@ class MultiDragDemo extends React.Component {
 
     _getStatefulRef = () => {
         //MultiDragStateful ref is nested under the dragDropContext child ref
-        return this.refs["multi-drag-demo-stateful"].refs.child.refs.MultiDragStateful;
+        return this.refs["multi-drag-demo-stateful"].refs.MultiDragStateful;
     };
 
     _handleAddStateful = (from) => {
@@ -217,6 +218,24 @@ class MultiDragDemo extends React.Component {
         }
     };
 
+    _handleCategoryClickStateful = (column, value) => {
+        if (value !== "") {
+            console.log("Filter column " + column + " for category " + value);
+        }
+    };
+
+    _handleCategoryToggle = (column) => {
+        if (this.props.drag.columns[column].showCategoryList) {
+            this.actions.hideCategoryList(column);
+        } else {
+            this.actions.showCategoryList(column);
+        }
+    }
+
+    _handleCategoryClick = (column, value) => {
+        this.actions.setCategory(column, value);
+    }
+
     _handleScrolledToBottomStateless = (column) => {
         if (column === 0 && this.rowsAvailableStateless) {
             this.rowsAvailableStateless = false;
@@ -246,14 +265,27 @@ class MultiDragDemo extends React.Component {
         this.messageActions.addMessage(msg);
     };
 
+    _getCategoryOptions = () => {
+        let options = [];
+
+        const checkCategory = category => item => item === category;
+
+        for (let i = 0; i < this.props.drag.columns.length; i += 1) {
+            const column = this.props.drag.columns[i];
+
+            // const isCategory = item => item === column.rows[j].category;
+            for (let j = 0; j < column.rows.length; j += 1) {
+                const category = column.rows[j].categoryId || column.rows[j].category;
+                if (!_.find(options, checkCategory(category))) {
+                    options.push(category);
+                }
+            }
+        }
+
+        return options;
+    };
+
     render() {
-        var contentTypeStateless = (
-            <Row
-                onRemove={this._handleRemoveStateless}
-                onAdd={this._handleAddStateless}
-                style={this.props.demo.style}
-            />
-        );
         var contentTypeStateful = (
             <Row
                 onRemove={this._handleRemoveStateful}
@@ -261,6 +293,21 @@ class MultiDragDemo extends React.Component {
                 style={this.props.demo.style}
             />
         );
+
+        // depending on what the user has chosen to show on the rows,
+        // we filter all the props out except that one from the row data
+        const filterRowProps = row => _.defaults(
+            { [this.props.demo.style]: row[this.props.demo.style] },
+            _.omit(row, ["icon", "iconSrc", "count"])
+        );
+
+        const filterProps = column => _.defaults({
+            rows: column.rows.map(filterRowProps),
+            filteredRows: column.filteredRows ? column.filteredRows.map(filterRowProps) : [],
+        }, column);
+
+        const columnsStateless = this.props.drag.columns.map(filterProps);
+        const columnsStateful = this.state.columns.map(filterProps);
 
         return (
             <div className="multidrag-demo" data-id="multidragDemoDiv">
@@ -316,7 +363,7 @@ class MultiDragDemo extends React.Component {
                             stacked={false}
                             items={[
                                 { id: "none", name: "none" },
-                                { id: "image", name: "with image" },
+                                { id: "iconSrc", name: "with image" },
                                 { id: "icon", name: "with icon" },
                                 { id: "count", name: "with count" }
                             ]}
@@ -335,16 +382,20 @@ class MultiDragDemo extends React.Component {
                             showSearchOnAllColumns={this.props.demo.search === "all"}
                             showSearch={this.props.demo.search === "first"}
                             onSearch={this._handleSearchStateless}
-                            columns={this.props.drag.columns}
+                            categoryList={this._getCategoryOptions()}
+                            columns={columnsStateless}
                             previewMove={this.props.drag.placeholder}
                             onScrolledToTop={this._handleScrolledToTop}
                             onScrolledToBottom={this._handleScrolledToBottomStateless}
                             onCancel={this._handleCancelStateless}
+                            onCategoryClick={this._handleCategoryClick}
+                            onCategoryToggle={this._handleCategoryToggle}
                             onDrop={this._handleDropStateless}
                             onDrag={this._handleDragStateless}
                             onDragStart={dragScroll.start}
                             onDragEnd={dragScroll.end}
-                            contentType={contentTypeStateless}
+                            onAdd={this._handleAddStateless}
+                            onRemove={this._handleRemoveStateless}
                             labelEmpty="No Items Available"
                             disabled={this.state.disabled}
                         />
@@ -363,7 +414,9 @@ class MultiDragDemo extends React.Component {
                             showSearchOnAllColumns={this.props.demo.search === "all"}
                             showSearch={this.props.demo.search === "first"}
                             onSearch={this._handleSearchStateful}
-                            columns={this.state.columns}
+                            onCategoryClick={this._handleCategoryClickStateful}
+                            categoryList={this._getCategoryOptions()}
+                            columns={columnsStateful}
                             onScrolledToTop={this._handleScrolledToTop}
                             onScrolledToBottom={this._handleScrollToBottomStateful}
                             onCancel={this._handleCancelStateful}
@@ -371,12 +424,36 @@ class MultiDragDemo extends React.Component {
                             onDrag={this._handleDragStateful}
                             onDragStart={dragScroll.start}
                             onDragEnd={dragScroll.end}
-                            contentType={contentTypeStateful}
+                            onAdd={this._handleAddStateful}
+                            onRemove={this._handleRemoveStateful}
                             labelEmpty="No Items Available"
                             disabled={this.state.disabled}
+                            strings={{
+                                defaultCategoryOption: "Everything",
+                                filteredByLabel: "but only"
+                            }}
                         />
                     </div>
                 }
+                <hr className="hr"/>
+                <div>
+                    <h2>Classic Style</h2>
+                    <MultiDrag
+                        showSearchOnAllColumns={false}
+                        showSearch={true}
+                        onSearch={_.noop}
+                        onCategoryClick={_.noop}
+                        columns={this.state.columns}
+                        onCancel={_.noop}
+                        onDrop={_.noop}
+                        onDrag={_.noop}
+                        onDragStart={_.noop}
+                        onDragEnd={_.noop}
+                        contentType={contentTypeStateful}
+                        labelEmpty="No Items Available"
+                        disabled={false}
+                    />
+                </div>
           </div>);
     }
 }
