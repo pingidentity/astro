@@ -217,7 +217,7 @@ class AppFrame extends React.Component {
         }
         if (rootBranch !== this.props.navTree) {
             navOptions = _.map(this.props.navTree, section => ({
-                value: section.id,
+                id: section.id,
                 label: section.label
             }));
         }

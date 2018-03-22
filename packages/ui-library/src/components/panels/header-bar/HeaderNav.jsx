@@ -19,7 +19,7 @@ const HeaderNav = props => (
                             option.id === props.currentNav || option.label === props.currentNav
                     })}
                     data-id={option.label.replace(/\W/g, "") + "-label"}
-                    key={option.title + "-" + i}
+                    key={option.label + "-" + i}
                     onClick={handleClick}
                 >
                     <span className="header-nav__item-label">
