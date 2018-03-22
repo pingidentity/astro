@@ -27,7 +27,7 @@ describe("WizardV2", function () {
             { title: "title 3", value: "value 3" },
         ],
         onCancel: jest.genMockFunction(),
-        onClick: jest.genMockFunction(),
+        onMenuClick: jest.genMockFunction(),
         onNext: jest.genMockFunction(),
     };
 
@@ -37,6 +37,7 @@ describe("WizardV2", function () {
             description: "step 1 description",
             menuDescription: "step 1 menu description",
             title: "step 1 title",
+            menuTitle: "step 1 menu title",
             onSave: jest.genMockFunction(),
             required: true,
         },
@@ -45,12 +46,14 @@ describe("WizardV2", function () {
             description: "step 2 description",
             menuDescription: "step 2 menu description",
             title: "step 2 title",
+            menuTitle: "step 2 menu title",
         },
         {
             children: "step 3 content",
             description: "step 3 description",
             menuDescription: "step 3 menu description",
             title: "step 3 title",
+            menuTitle: "step 3 menu title",
             onSave: jest.genMockFunction(),
         }
     ];
@@ -88,7 +91,22 @@ describe("WizardV2", function () {
         });
     });
 
-    it("renders the step menDescription in the wizard if not step description is provided", function () {
+    it("renders the step menuTitle in the wizard if not step title is provided", function () {
+        let stepData = defaultStepData.map(function (step) {
+            const alteredStep = _.clone(step);
+            alteredStep.title = null;
+            return alteredStep;
+        });
+
+        stepData.map(function (dataItem, index) {
+            const component = getComponent({ activeStep: index }, stepData);
+            const wizardTitle = getElementByDid(component, "-step-title");
+
+            expect(wizardTitle.textContent).toBe(dataItem.menuTitle);
+        });
+    });
+
+    it("renders the step menuDescription in the wizard if not step description is provided", function () {
         let stepData = defaultStepData.map(function (step) {
             const alteredStep = _.clone(step);
             alteredStep.description = null;
@@ -151,7 +169,7 @@ describe("WizardV2", function () {
         ReactTestUtils.Simulate.click(primaryButton);
         expect(component.props.onNext).toBeCalled();
 
-        expect(secondaryButton).toBeFalsy();
+        expect(secondaryButton.textContent).toBe("Cancel");
     });
 
     it("renders the button bar and the proper callbacks are called on the FINAL step", function () {
@@ -183,7 +201,7 @@ describe("WizardV2", function () {
         ReactTestUtils.Simulate.click(primaryButton);
         expect(component.props.onNext).toBeCalled();
 
-        expect(secondaryButton).toBeFalsy();
+        expect(secondaryButton.textContent).toBe("Cancel");
     });
 
     it("buttonBarProps overrides button bar display and callbacks when provided", function () {
@@ -269,7 +287,7 @@ describe("WizardV2", function () {
             expect(itemIcon.className).toContain("wizard-progress-menu__step-icon");
 
             expect(itemTitle.className).toContain("wizard-progress-menu__item-title");
-            expect(itemTitle.textContent).toBe(stepData[itemIndex].title);
+            expect(itemTitle.textContent).toBe(stepData[itemIndex].menuTitle);
 
             expect(itemDescription.className).toContain("wizard-progress-menu__item-description");
             expect(itemDescription.textContent).toBe(stepData[itemIndex].menuDescription);
@@ -336,10 +354,10 @@ describe("WizardV2", function () {
         );
 
         ReactTestUtils.Simulate.click(renderedMenuItems[2]);
-        expect(component.props.onClick).not.toBeCalled();
+        expect(component.props.onMenuClick).not.toBeCalled();
 
         ReactTestUtils.Simulate.click(renderedMenuItems[0]);
-        expect(component.props.onClick).toBeCalled();
+        expect(component.props.onMenuClick).toBeCalled();
     });
 
     it("clicking menu items changes selected menu item / visited optional steps become clickable", function () {

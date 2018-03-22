@@ -20,7 +20,7 @@ import classnames from "classnames";
  *     in the buttonBar will override the default behavior as well as the step-level onSave.  Any unassigned properties
  *     will take the wizard defaults. See the ButtonBar component for full documentation of these props.
  * @param {Object.Wizard} [strings]
- *     An object containing key/text pairs of the text (menuTitle and/or dividerTitle) in the wizard menu.
+ *     An object containing key/text pairs of the text (menuTitle, dividerTitle) in the wizard menu.
  * @param {Array.Wizard} [headerItems]
  *     An array of objects containing the information to display horizontally along the top of the wizard. This data
  *     usually relates to information saved in a previous step.
@@ -57,6 +57,8 @@ import classnames from "classnames";
   *     Value of the "data-id" assigned to the top-level HTML container of the step.
   * @param {boolean} [completed=false]
   *     Determines whether to render the step as completed in the menu.
+  * @param {boolean} [continueDisabled=false]
+  *     Determines whether to render the next or save button as disabled.
   * @param {string} [description]
   *     The text displayed below the title in the wizard body when the step is active.
   * @param {string} [menuDescription]
@@ -67,6 +69,8 @@ import classnames from "classnames";
   *     Determines whether step an optional step is displayed with a skip or next button.
   * @param {string} [title]
   *     The text displayed at the top of the wizard body when the step is active.
+  * @param {string} [menuTitle]
+  *     The text displayed below the menu title in the menu for this step.
   * @param {Step~onSave} [onSave]
   *     Handler function triggered when the save button is clicked. When specified a save button is rendered in place of
   *     the next button.
@@ -152,7 +156,7 @@ class Wizard extends React.Component {
                         "activeStep",
                         "data-id",
                         "strings",
-                        "onClick",
+                        "onMenuClick",
                         "onClose",
                     ])}
                 />
@@ -167,11 +171,11 @@ function ActiveStep(props) {
     const lastStep = props.stepIndex === props.stepTotal - 1;
     const stepSaveCallback = props.step.props.onSave;
     const stepNotCompleted = !props.step.props.completed;
+    const stepContinueDisabled = props.step.props.continueDisabled;
 
 
     // Save button styling and text
     if (stepSaveCallback && stepNotCompleted) {
-
         if (lastStep) {
             buttonBarDefaults.saveText = DEFAULT_TEXT.SAVE_AND_CLOSE;
         } else {
@@ -179,13 +183,15 @@ function ActiveStep(props) {
         }
         buttonBarDefaults.saveClassName = "success";
 
-    } else if (props.step.props.dirty || stepSaveCallback) {
+    } else if (props.step.props.dirty || stepSaveCallback || props.step.props.required) {
         buttonBarDefaults.saveText = DEFAULT_TEXT.NEXT;
         buttonBarDefaults.saveClassName = "primary";
     } else {
         buttonBarDefaults.saveText = DEFAULT_TEXT.SKIP;
         buttonBarDefaults.saveClassName = "secondary";
     }
+
+    buttonBarDefaults.saveDisabled = stepContinueDisabled ? true : false;
 
     // Save button callback
     if (stepSaveCallback && stepNotCompleted) {
@@ -197,15 +203,9 @@ function ActiveStep(props) {
     }
 
     // Cancel button styling, text, and callback
-    if (stepSaveCallback) {
-        buttonBarDefaults.cancelText = DEFAULT_TEXT.CANCEL;
-        buttonBarDefaults.onCancel = props.onCancel;
-        buttonBarDefaults.cancelClassName = "cancel";
-    } else {
-        buttonBarDefaults.cancelText = null;
-        buttonBarDefaults.onCancel = null;
-        buttonBarDefaults.cancelClassName = null;
-    }
+    buttonBarDefaults.cancelText = DEFAULT_TEXT.CANCEL;
+    buttonBarDefaults.onCancel = props.onCancel;
+    buttonBarDefaults.cancelClassName = "cancel";
 
     const buttonBarProps = _.defaults({}, props.buttonBarProps, buttonBarDefaults);
 

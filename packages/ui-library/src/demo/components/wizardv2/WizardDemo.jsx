@@ -1,4 +1,4 @@
-import Wizard, { Step } from "ui-library/lib/components/wizard-v2/Wizard";
+import Wizard, { Step } from "ui-library/lib/components/wizard-v2/";
 import TextField from "ui-library/lib/components/forms/form-text-field/";
 import React from "react";
 
@@ -11,7 +11,7 @@ class WizardDemo extends React.Component {
         visited: [],
     };
 
-    onNext = () => {
+    _handleNext = () => {
 
         if (this.state.visited.indexOf(this.state.activeStep) === -1) {
             this.setState({
@@ -27,11 +27,11 @@ class WizardDemo extends React.Component {
         this.setState({ activeStep: this.state.activeStep + 1 });
     }
 
-    onClick = (stepIndex) => {
+    _handleMenuClick = (stepIndex) => {
         this.setState({ activeStep: stepIndex });
     };
 
-    closeWizard = () => {
+    _handleClose = () => {
         this.toggleWizard();
         this.resetDemo();
     };
@@ -71,20 +71,21 @@ class WizardDemo extends React.Component {
                     ref={component => this.wizard = component}
                     headerItems={headerItems}
                     activeStep={this.state.activeStep}
-                    onNext={this.onNext}
-                    onCancel={this.closeWizard}
-                    onClick={this.onClick}
+                    onNext={this._handleNext}
+                    onCancel={this._handleClose}
+                    onMenuClick={this._handleMenuClick}
                     onClose={this.toggleWizard}>
 
                     <Step
-                        title="Create User Profile"
+                        title="Create a New User Profile"
+                        menuTitle="Create User Profile"
                         menuDescription="Let's add someone to your directory."
                         description="Adding a user to the PingOne directory will create an identity within a selected
                             environment. Additionally you can add Roles, Groups and account access parameters to
                             complete the profile. Things such as password policies for this user are inherited from the
                             environment settings."
                         completed={this.stepVisited(0)}
-                        onSave={this.onNext}
+                        onSaveasdf={this.onNext}
                         required>
                         {Step1Content}
                     </Step>

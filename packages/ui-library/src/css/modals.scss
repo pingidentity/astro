@@ -284,7 +284,7 @@ $wizard-progress-icon-size: 23px;
 $wizard-progress-menu-padding: 20px;
 $wizard-v-spacing: 25px;
 $wizard-h-spacing: 40px;
-$wizard-padding: $wizard-v-spacing $wizard-h-spacing;
+$wizard-padding: $wizard-v-spacing $wizard-h-spacing $wizard-v-spacing+87px $wizard-h-spacing; // 87px == height of button bar
 $wizard-progress-menu-width: 280px;
 $wizard-progress-menu-bgcolor: $color-neutral-30;
 $wizard-progress-menu-selected-bgcolor: $color-strong-neutral-10;
@@ -322,8 +322,18 @@ $wizard-content-bg-color: $color-strong-neutral-90;
         left: $wizard-h-spacing;
         right: $wizard-progress-menu-width + $wizard-h-spacing;
         bottom: 0;
-        background-color: inherit;
+        background-color: $wizard-content-bg-color;
         padding: $wizard-v-spacing 0;
+    }
+
+    &:before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 120px;
+        right: 0;
+        height: 46px;
+        background-color: rgba($color-neutral-10, 0.7);
     }
 }
 
@@ -352,10 +362,13 @@ $wizard-close-button-color: $color-strong-neutral-40;
 // Not BEM but the menu height needs to be altered when the header is showing
 .wizard-2--header-shown {
     .wizard-progress-menu-scroller {
-        top: 77px;
+        top: $wizard-header-height;
     }
     .wizard-progress-menu {
         animation: $wizard-header-animation slide-menu-down;
+    }
+    .wizard__content {
+        top: $wizard-header-height;
     }
 }
 
@@ -411,6 +424,9 @@ $wizard-close-button-color: $color-strong-neutral-40;
     position: absolute;
     width: calc(100% - #{$wizard-progress-menu-width});
     padding: $wizard-padding;
+    bottom: 0;
+    top: 0;
+    overflow-y: auto;
 }
 .wizard-step__title {
     font-size: $wizard-title-font-size;
@@ -454,9 +470,14 @@ $wizard-close-button-color: $color-strong-neutral-40;
     }
 }
 .wizard-progress-menu__step--click-disabled {
-    @extend [disabled];
-
     cursor: default;
+
+    .wizard-progress-menu__step-icon,
+    .wizard-progress-menu__item-title,
+    .wizard-progress-menu__item-description,
+     {
+        opacity: 0.6;
+    }
 }
 .wizard-progress-menu__step--active {
     background-color: $wizard-progress-menu-selected-bgcolor;

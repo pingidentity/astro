@@ -6,7 +6,7 @@ function Step(props) {
 
     return (
         <div data-id={stepDataId}>
-            <div className="wizard-step__title" data-id={`${stepDataId}-title`}>{props.title}</div>
+            <div className="wizard-step__title" data-id={`${stepDataId}-title`}>{props.title || props.menuTitle}</div>
             <div className="wizard-step__description" data-id={`${stepDataId}-description`}>
                 {props.description || props.menuDescription}
             </div>

@@ -41,7 +41,7 @@ class Menu extends React.Component {
     _buildItems(steps, type) {
         return _.map(steps, (step, index) => {
             const clickDisabled = type === TYPES.required
-                ? !step.completed
+                ? !step.completed && index > 0
                 : this.state.optionalStepsVisited.indexOf(index) === -1;
 
             return (
@@ -50,7 +50,7 @@ class Menu extends React.Component {
                     data-id={`${this.props["data-id"]}-menu-item-${type}-${index}`}
                     index={step.index}
                     clickDisabled={clickDisabled}
-                    onClick={this.props.onClick}
+                    onClick={this.props.onMenuClick}
                     type={type}
                     number={index + 1}
                     {..._.pick(step, [
@@ -61,6 +61,7 @@ class Menu extends React.Component {
                         "menuDescription",
                         "number",
                         "title",
+                        "menuTitle",
                         "type",
                     ])}
                 />
@@ -69,9 +70,6 @@ class Menu extends React.Component {
     }
 
     render() {
-
-        console.log("this.props.strings.menuTitle", this.props.strings.menuTitle);
-
         return (
             <div className="wizard-progress-menu-scroller" data-id={`${this.props["data-id"]}-menu`}>
                 <nav className="wizard-progress-menu">
@@ -132,7 +130,7 @@ function Item(props) {
     return (
         <div className={stepClassNames} onClick={handleClick} data-id={props["data-id"]}>
             <div className={iconClassName}>{content}</div>
-            <div className="wizard-progress-menu__item-title">{props.title}</div>
+            <div className="wizard-progress-menu__item-title">{props.menuTitle || props.title}</div>
             <div className="wizard-progress-menu__item-description">{props.menuDescription || props.description}</div>
         </div>
     );
