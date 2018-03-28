@@ -85,6 +85,8 @@ var React = require("react"),
  *    When defined this value is displayed as an error message.
  * @param {string} [fileName]
  *    The current/default value or name of the file upload input.
+ * @param {string} [name]
+ *    If provided, this will be the name attribute for the input.
  * @param {string} accept
  *    Comma-separated string of MIME types that are fed to the 'accept' attribute of the &lt;input&gt;
  *    element and used in the file type validation. Pass an empty string to the property to disable validation.

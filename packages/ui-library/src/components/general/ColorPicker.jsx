@@ -45,6 +45,8 @@ var callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutside
  * @param {boolean} [stateless]
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally.
+ * @param {string} [name]
+ *    Name attribute for the input.
  *
  * @param {string} [labelText]
  *     A label to render at the top of the color picker
@@ -131,6 +133,7 @@ class Stateless extends React.Component {
         "data-id": PropTypes.string,
         id: PropTypes.string,
         className: PropTypes.string,
+        name: PropTypes.string,
         hintText: PropTypes.string,
         labelText: PropTypes.string,
         color: PropTypes.string.isRequired,
@@ -305,6 +308,7 @@ class Stateless extends React.Component {
                                 inputClassName="colors-input btn-fg-color"
                                 value={this.props.color}
                                 maxLength={7}
+                                name={this.props.name}
                                 disabled={this.props.disabled}
                                 errorMessage={this.props.errorMessage}
                                 onValueChange={this._handleColorInputChange}

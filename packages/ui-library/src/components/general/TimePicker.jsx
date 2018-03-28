@@ -23,6 +23,8 @@ var React = require("react"),
  *              To define the base "data-id" value for the top-level HTML container.
  * @param {string}   [className]
  *              CSS classes to set on the top-level HTML container
+ * @param {string} [name]
+ *              Name attribute for the input.
  * @param {number}   [increments]
  *              The increments (in minutes) to populate the list. Default is 15
  * @param {string}   [format]
@@ -38,6 +40,7 @@ module.exports = class extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
+        name: PropTypes.string,
         increments: PropTypes.number,
         format: PropTypes.string,
         labelText: PropTypes.string,
@@ -214,6 +217,7 @@ module.exports = class extends React.Component {
             <FormDropDownList data-id={this.props["data-id"]}
                     label={this.props.labelText}
                     className={containerClassName}
+                    name={this.props.name}
                     options={times}
                     onValueChange={this._handleValueChange}
                     selectedOption={selectedTime || noTime}

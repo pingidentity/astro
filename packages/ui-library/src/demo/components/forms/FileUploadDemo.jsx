@@ -99,6 +99,7 @@ class FileUploadDemo extends React.Component {
                         accept=""
                         labelSelect="Choose a File"
                         labelRemove="Remove"
+                        fileName="first-one"
                     />
                 </div>
 
@@ -115,6 +116,7 @@ class FileUploadDemo extends React.Component {
                         accept="image/jpeg, image/jpg, image/png"
                         labelSelect="Choose a File"
                         labelRemove="Remove"
+                        name="second-one"
                     />
                     <br /><br />
                     Selected file = {this.state.file1}

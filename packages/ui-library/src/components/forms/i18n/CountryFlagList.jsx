@@ -60,6 +60,8 @@ var Types = {
 *    To define the base "data-id" value for the top-level HTML container.
 * @param {string} [className]
 *    CSS classes to set on the top-level HTML container.
+* @param {string} [name]
+*    Name attribute for the input.
 *
 * @param {string|number} [selectedCountryCode]
 *    The selected country's iso2 or isoNum code.
@@ -99,6 +101,7 @@ class CountryFlagList extends React.Component {
         countryCodeClassName: PropTypes.string,
         onValueChange: PropTypes.func,
         labelNoCountry: PropTypes.string,
+        name: PropTypes.string,
         open: PropTypes.bool,
         onToggle: PropTypes.func,
         searchString: PropTypes.string,
@@ -190,6 +193,7 @@ class CountryFlagList extends React.Component {
                     selectedOption={selectedCountry}
                     selectedOptionLabelClassName={selectorFlagClassName}
                     showSelectedOptionLabel={false}
+                    name={this.props.name}
                     noneOption={{ label: this.props.labelNoCountry }}
                     noneOptionLabelClassName="country-name" />
         );

@@ -76,6 +76,7 @@ class ConditionalFieldsetDemo extends React.Component {
                         ConditionalFieldset with empty support, set through props; input width set to medium
                     </label>
                     <ConditionalFieldset data-id="fieldset-1"
+                                         name="fieldset-demo"
                                          onValueChange={this._onCondition1ValueChange}
                                          selectedIndex={this.state.selectedCondition1Index}
                                          supportEmpty={true}

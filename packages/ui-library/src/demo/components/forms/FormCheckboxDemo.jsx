@@ -44,6 +44,7 @@ class FormCheckboxDemo extends React.Component {
                         value = ""
                         onChange = {this._onChange2}
                         checked = {this.state.checkboxChecked2}
+                        name = "default-checked"
                     />
                 </div>
                 <div className="input-row">

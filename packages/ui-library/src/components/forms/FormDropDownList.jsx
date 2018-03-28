@@ -105,6 +105,8 @@ var SearchTypes = {
 *    To define the base "data-id" value for the top-level HTML container.
 * @param {string} [className]
 *    CSS classes to set on the top-level HTML container.
+* @param {string} [name]
+*     The name attribute for the input.
 * @param {boolean} [stateless=false]
 *     To enable the component to be externally managed. True will relinquish control to the component's owner.
 *     False or not specified will cause the component to manage state internally.
@@ -259,6 +261,7 @@ class FormDropDownListStateless extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
+        name: PropTypes.string,
         options: PropTypes.arrayOf(PropTypes.object).isRequired,
         selectedOption: PropTypes.object.isRequired,
         onValueChange: PropTypes.func,
@@ -748,6 +751,7 @@ class FormDropDownListStateless extends React.Component {
                                 selectOnFocus={this._isBoxSearch()}
                                 stateless={true}
                                 value={inputValue}
+                                name={this.props.name}
                                 onValueChange={this._handleInputValueChange}
                                 readOnly={this.props.disabled || this._isKeyboardSearch()}
                             />

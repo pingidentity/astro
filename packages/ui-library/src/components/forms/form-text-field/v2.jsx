@@ -118,6 +118,8 @@ var React = require("react"),
 *     CSS classes to set on the input element.
 * @param {number} [maxLength]
 *     Maximum length supported by the text field.
+* @param {string} [name]
+*     Name attribute on input
 * @param {number} [type]
 *     An input type to be applied to the input. The input type often adds easily accessable and type-specific input
 *     controls that often makes it easier to enter the field data.
@@ -226,6 +228,7 @@ class Stateless extends React.Component {
         ]),
         labelLockText: PropTypes.string,
         maxLength: PropTypes.number,
+        name: PropTypes.string,
         type: PropTypes.string,
         placeholder: PropTypes.string,
 
@@ -470,6 +473,7 @@ class Stateless extends React.Component {
                         data-id={id + "-input"}
                         type={inputType}
                         maxLength={this.props.maxLength}
+                        name={this.props.name}
                         value={this.props.value}
                         autoComplete={this.props.autoComplete ? "on" : "off"}
                         disabled={this.props.disabled}

@@ -125,6 +125,7 @@ class FormTextFieldDemo extends React.Component {
                         value={this.state.statelessValue}
                         onValueChange={this._handleStatelessValueChange}
                         className="input-width-medium"
+                        name="basic-stateless"
                     />
                 </div>
                 <div className="input-row">

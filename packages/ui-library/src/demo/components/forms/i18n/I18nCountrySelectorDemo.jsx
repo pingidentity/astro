@@ -23,6 +23,7 @@ class I18nCountrySelectorDemo extends React.Component {
                 <I18nCountrySelector
                     countryCode={this.state.countryCode}
                     onValueChange={this._handleValueChange}
+                    name="country-selector"
                 />
                 <br/><br/>
                 <div>Country code: {this.state.countryCode}</div>

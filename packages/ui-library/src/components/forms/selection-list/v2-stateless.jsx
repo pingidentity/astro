@@ -39,6 +39,7 @@ module.exports = class extends React.Component {
             PropTypes.string,
             PropTypes.number
         ]),
+        name: PropTypes.string,
         onValueChange: PropTypes.func.isRequired,
         onSelectAll: PropTypes.func,
         showSearchBox: PropTypes.bool,
@@ -158,6 +159,7 @@ module.exports = class extends React.Component {
                     selectedItemIds={this.props.selectedItemIds}
                     items={visibleItems}
                     onValueChange={this.props.onValueChange}
+                    name={this.props.name}
                 />
                 <If test={this.props.showSelectionOptions}>
                     {this._getSelectionOptions(visibleItems)}
@@ -230,7 +232,7 @@ class ListOptions extends React.Component {
         return (
             <FormRadioGroup
                 data-id={this.props["data-id"] + "-single-selection"}
-                groupName={"input-selection-list-items-" + this.props["data-id"]}
+                groupName={this.props.name || ("input-selection-list-items-" + this.props["data-id"])}
                 items={this.props.items}
                 stacked={true}
                 selected={this.props.selectedItemIds}
@@ -272,6 +274,7 @@ class ListOptions extends React.Component {
                     onValueChange={onValueChangeFunc}
                     labelHelpText={item.helpHintText}
                     helpTarget={item.helpTarget}
+                    name={this.props.name}
                 />
             );
         }.bind(this));

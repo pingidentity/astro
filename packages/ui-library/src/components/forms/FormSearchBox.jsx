@@ -52,6 +52,8 @@ var React = require("react"),
 *     Alias for queryString
 * @param {string} [placeholder]
 *     Hint text inside searchBox
+* @param {string} [name]
+*    Name attribute for the input.
 * @param {FormSearchBox~onValueChange} onValueChange
 *     Callback to be triggered when the searchbox value changes
 *
@@ -80,6 +82,7 @@ class FormSearchBox extends React.Component {
         queryString: PropTypes.string,
         placeholder: PropTypes.string,
         inputFieldClassName: PropTypes.string,
+        name: PropTypes.string,
         onValueChange: PropTypes.func.isRequired,
         onKeyDown: PropTypes.func,
         onFocus: PropTypes.func,
@@ -154,6 +157,7 @@ class FormSearchBox extends React.Component {
                         errorMessage={this.props.errorMessage}
                         value={value}
                         placeholder={this.props.placeholder}
+                        name={this.props.name}
                         onValueChange={this._search}
                         onKeyDown={this._handleSearchBoxKeyDown}
                         onFocus={this.props.onFocus}

@@ -46,6 +46,7 @@ class TimePickerDemo extends React.Component {
                         increments={30}
                         labelText="12 Hour Format"
                         value={this.state.a}
+                        name="timepicker-demo"
                     />
                     <br /><br />
                     12hr (w/30m): <strong>{this.state.a}</strong>

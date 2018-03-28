@@ -123,6 +123,7 @@ class FormDropDownListDemo extends React.Component {
                         selectedOption={this.state.selectedValue2}
                         onValueChange={this._handleValueChange2}
                         className="input-width-small"
+                        name="custom-content-type"
                     />
                 </div>
                 <div>Selected value: {this.state.selectedValue2.value}</div>

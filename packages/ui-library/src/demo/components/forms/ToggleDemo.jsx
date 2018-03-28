@@ -38,7 +38,7 @@ class ToggleDemo extends React.Component {
             userStatus2: !this.state.toggled2 ? "ON" : "LOCKED"
         });
     };
-    
+
     _handleToggle3 = () => {
         this.setState({
             toggled3: !this.state.toggled3,
@@ -56,6 +56,7 @@ class ToggleDemo extends React.Component {
                         stateless={true}
                         toggled={this.state.toggled1}
                         onToggle={this._handleToggle1}
+                        name="the-toggle"
                     />
                     <br/><br/>
                     Value = {this.state.userStatus1}

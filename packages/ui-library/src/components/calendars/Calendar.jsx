@@ -72,6 +72,8 @@ var Views = {
  *     The text to display for the help tooltip.
  * @param {string} [labelText]
  *     The text to show as the field's label.
+ * @param {string} [name]
+ *     Name attribute for the input.
  *
  * @param {Calendar.Views} [minView=Calendar.Views.DAYS]
  *    Set the minimal view.
@@ -129,6 +131,7 @@ class Calendar extends React.Component {
         labelText: PropTypes.string,
         labelHelpText: PropTypes.string,
         minView: PropTypes.oneOf([Views.DAYS, Views.MONTHS, Views.YEARS]),
+        name: PropTypes.string,
         placeholder: PropTypes.string,
         required: PropTypes.bool,
 
@@ -421,6 +424,7 @@ class Calendar extends React.Component {
                     <input type="text"
                            data-id={this.props["data-id"]}
                            className="input-calendar-value"
+                           name={this.props.name}
                            value={this.state.inputValue}
                            onBlur={this.inputBlur}
                            onChange={this.changeDate}

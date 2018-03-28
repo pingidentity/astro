@@ -51,6 +51,7 @@ class FormTextAreaDemo extends React.Component {
                         onValueChange={this._handleValueChange}
                         placeholder="placeholder"
                         required={true}
+                        name="reqd-textarea"
                         className="input-width-medium">
                         {this.state.onValueChangeFieldValue}
                     </FormTextArea>

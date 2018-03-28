@@ -53,6 +53,8 @@ var isValid = function (value, enforceRange, min, max) {
  *     The text to display for the help tooltip.
  * @param {string} [labelText]
  *     The text to show as the field's label.
+ * @param {string} [name]
+ *     The name attribute for the input.
  *
  * @param {string|number} [value=""]
  *     Current text field value used when stateless=true.
@@ -139,6 +141,7 @@ class Stateless extends React.Component {
         disabled: PropTypes.bool,
         readOnly: PropTypes.bool,
         hideControls: PropTypes.bool,
+        name: PropTypes.string,
 
         labelHelpText: PropTypes.string,
         labelText: PropTypes.oneOfType([
@@ -342,6 +345,7 @@ class Stateless extends React.Component {
                 <FormTextField {...this.props}
                         ref="formTextField"
                         data-id={this.props["data-id"] + "-text-field"}
+                        name={this.props.name}
                         stateless={true}
                         className={this.props.className}
                         labelClassName={classnames(this.props.labelClassName)}

@@ -80,6 +80,8 @@ class MultivaluesOption extends React.Component {
  *     CSS classes to set on the top-level HTML container.
  * @param {array<string>} [entries=[]]
  *     Array of strings used to display initial entry boxes.
+ * @param {string} [name]
+ *     Name attribute for the input.
  * @param {Multivalues~onValueChange} [onValueChange]
  *     Callback triggered when a new entry is added or removed.
  * @param {Multivalues~onNewValue} [onNewValue]
@@ -113,6 +115,7 @@ class Multivalues extends React.Component {
         "data-id": PropTypes.string,
         className: PropTypes.string,
         entries: PropTypes.arrayOf(PropTypes.string),
+        name: PropTypes.string,
         onValueChange: PropTypes.func.isRequired,
         onNewValue: PropTypes.func,
         required: PropTypes.bool,
@@ -122,6 +125,7 @@ class Multivalues extends React.Component {
     static defaultProps = {
         "data-id": "multivalues",
         entries: [],
+        name: "value-entry",
         stacked: false,
         required: false,
         onNewValue: function (keyCode) {
@@ -290,7 +294,7 @@ class Multivalues extends React.Component {
                             type = "text"
                             ref="value-entry"
                             tabIndex="0"
-                            name="value-entry"
+                            name={this.props.name}
                             onBlur={this._handleBlur}
                             onChange={this._handleChange}
                             onKeyDown={this._handleKeyDown}

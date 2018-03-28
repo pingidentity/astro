@@ -32,6 +32,7 @@ module.exports = class extends React.Component {
         errorMessage: PropTypes.string,
         filesAcceptedMessage: PropTypes.string,
         fileName: PropTypes.string,
+        name: PropTypes.string,
         accept: PropTypes.string,
         "data-id": PropTypes.string,
         thumbnailSrc: PropTypes.string
@@ -66,7 +67,7 @@ module.exports = class extends React.Component {
                         disabled={this.props.disabled}
                         type="file"
                         ref="fileInput"
-                        name={this.props.fileName}
+                        name={this.props.name || this.props.fileName}
                         accept={this.props.accept}
                         onChange={this.props.onChange}
                         data-id={this.props["data-id"] + "-input"}

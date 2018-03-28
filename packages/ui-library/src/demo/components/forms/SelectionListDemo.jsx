@@ -166,6 +166,7 @@ class SelectionListDemo extends React.Component {
                     showSearchBox={false}
                     searchPlaceholder="Search..."
                     onValueChange={this._onSingleSelectChange3}
+                    name="second-demo"
                 />
 
                 <hr />
@@ -300,6 +301,7 @@ class SelectionListDemo extends React.Component {
                         onValueChange={this._onMultiSelectChange4}
                         onSelectAll={this._onMultiSelectAll4}
                         {...LABELS}
+                        name="multi-select"
                     />
                 </DetailsTooltip>
 

@@ -33,6 +33,8 @@ var Status = {
 *     False or not specified will cause the component to manage state internally.
 * @param {boolean} [toggled=false]
 *     Toggle state; either true for "on" or false for "off".
+* @param {string} [name]
+*     Name attribute for the input.
 *
 * @param {Toggle.Status} [status]
 *     The status determines aspects of the visual presentation of the toggle. Ex: if status=locked then the off state
@@ -81,7 +83,8 @@ class ToggleStateless extends React.Component {
         className: PropTypes.string,
         toggled: PropTypes.bool,
         onToggle: PropTypes.func,
-        disabled: PropTypes.bool
+        disabled: PropTypes.bool,
+        name: PropTypes.string
     };
 
     static defaultProps = {
@@ -109,7 +112,7 @@ class ToggleStateless extends React.Component {
         return (
             <div data-id={this.props["data-id"]} className={className} onClick={this._handleToggle}>
                 <span className="toggle">
-                    <input type="hidden" />
+                    <input type="hidden" name={this.props.name} />
                 </span>
             </div>
         );

@@ -45,6 +45,7 @@ class SearchBarDemo extends React.Component {
             placeholder: "Search something",
             showClear: true,
             value: this.state.value,
+            name: "demo-search"
         };
 
         return (

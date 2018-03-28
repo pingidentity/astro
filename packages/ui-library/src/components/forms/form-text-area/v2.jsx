@@ -71,6 +71,8 @@ var React = require("react"),
 *     The text to display for the help tooltip.
 * @param {string} [helpClassName]
 *     CSS classes to set on the HelpHint component.
+* @param {string} [name]
+*     The name attribute for the input.
 *
 * @param {string} [inputClassName]
 *     CSS classes to set on the input element.
@@ -154,6 +156,7 @@ class FormTextAreaStateless extends React.Component {
         inputClassName: PropTypes.string,
         mode: PropTypes.string,
         maxLength: PropTypes.number,
+        name: PropTypes.string,
         cols: PropTypes.number,
         rows: PropTypes.number,
         errorMessage: PropTypes.string,
@@ -210,7 +213,7 @@ class FormTextAreaStateless extends React.Component {
                     <textarea
                         data-id={this.props["data-id"] + "-textarea"}
                         ref={this.props["data-id"] + "-textarea"}
-                        name={this.props["data-id"] + "-textarea"}
+                        name={this.props.name || (this.props["data-id"] + "-textarea")}
                         className={this.props.inputClassName}
                         disabled={this.props.disabled}
                         placeholder={this.props.placeholder}

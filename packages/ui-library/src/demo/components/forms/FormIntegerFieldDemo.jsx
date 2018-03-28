@@ -110,6 +110,7 @@ class FormIntegerFieldDemo extends React.Component {
                             initialValue = ""
                             stateless={false}
                             className="input-width-medium"
+                            name="demo"
                     />
                 </div>
                 <div className="input-row">

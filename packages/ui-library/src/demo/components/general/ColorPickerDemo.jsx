@@ -42,6 +42,7 @@ class ColorPickerDemo extends React.Component {
                         color={this.state.picker1color}
                         onValueChange={this._handleChange1}
                         labelText="Background color"
+                        name="stateful-demo"
                         hintText="Pick a color or type in the hex code" />
                 </div>
                 <div className="input-row">

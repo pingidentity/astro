@@ -16,11 +16,11 @@ class I18nPhoneInputDemo extends React.Component {
         countryCodeStateless: "ru",
         dialCodeStateless: "7",
         phoneNumberStateless: "098 765 4321",
-        
+
         countryCodeStateless1: "ru",
         dialCodeStateless1: "7",
         phoneNumberStateless1: "098 765 4321",
-        
+
         countryCodeStateless2: "dz",
         dialCodeStateless2: "abc",
         phoneNumberStateless2: "efg hji klm"
@@ -81,10 +81,11 @@ class I18nPhoneInputDemo extends React.Component {
                     &nbsp;{this.state.phoneNumberStateful}
                 </div>
                 <br />
-                
+
                 <label className="detached">Stateless Phone Input</label>
                 <I18nPhoneInput
                     stateless={true}
+                    name="second-item"
                     onSearch={this._handleSearch}
                     searchIndex={this.state.searchIndex}
                     searchString={this.state.searchString}

@@ -52,6 +52,8 @@ var React = require("react"),
 * @param {boolean} [stateless]
 *    To enable the component to be externally managed. True will relinquish control to the component's owner.
 *    False or not specified will cause the component to manage state internally.
+* @param {string} [name]
+*    Name attribute for the input.
 *
 * @param {string} [countryCode="us" = USA]
 *     The country code corresponding to the dial code for the country to be selected by default.
@@ -112,7 +114,7 @@ module.exports = class extends React.Component {
 };
 
 class I18nPhoneInputStateless extends React.Component {
-    
+
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
@@ -122,6 +124,7 @@ class I18nPhoneInputStateless extends React.Component {
             PropTypes.number
         ]),
         phoneNumber: PropTypes.string,
+        name: PropTypes.string,
         onValueChange: PropTypes.func,
         open: PropTypes.bool,
         onToggle: PropTypes.func,
@@ -209,12 +212,14 @@ class I18nPhoneInputStateless extends React.Component {
                         searchIndex={this.props.searchIndex}
                         searchString={this.props.searchString}
                         searchTime={this.props.searchTime}
+                        name={this.props.name ? this.props.name+"-country" : null}
                         onSearch={this.props.onSearch} />
                 <FormTextField
                         data-id={this.props["data-id"] + "-phoneNumber"}
                         className="form-control"
                         placeholder={this.props.placeholder}
                         value={this.props.phoneNumber}
+                        name={this.props.name}
                         onChange={this._handlePhoneNumberChange}
                         errorMessage={
                             Validators.isValidPhoneNumber(this.props.phoneNumber)

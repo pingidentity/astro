@@ -26,13 +26,13 @@ class UnitInputDemo extends React.Component {
         };
         this.state = initialState;
     }
-    
+
     _handleTextValueChange = (e) => {
         this.setState({
             a: e
         });
     };
-    
+
     _handleDropdownValueChange = (value) => {
         var newState = {};
         newState["selectedValue"] = value;
@@ -49,14 +49,15 @@ class UnitInputDemo extends React.Component {
                         textFieldProps={{
                             onValueChange: this._handleTextValueChange,
                             value: this.state.a,
-                            className: "input-width-xsmall"
-                            
+                            className: "input-width-xsmall",
+                            name: "text-field"
                         }}
                         dropDownListProps={{
                             options: OPTIONS,
                             onValueChange: this._handleDropdownValueChange,
                             selectedOption: this.state.selectedValue,
-                            className: "input-width-small"
+                            className: "input-width-small",
+                            name: "dropdown"
                         }}
                     />
                     <br /><br />

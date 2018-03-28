@@ -26,7 +26,7 @@ class FormSearchBoxDemo extends React.Component {
 
     _handleValueChange = (value) => {
         var error = value === "error" ? "This is an error message." : null;
-        
+
         this.setState({
             items: ITEMS.filter(FilterUtils.getFilterFunction(value)),
             queryString: value,
@@ -90,6 +90,7 @@ class FormSearchBoxDemo extends React.Component {
                         onBlur={this._handleBlur}
                         onClear={this._handleClear}
                         className="input-width-medium"
+                        name="search-box"
                     />
                 </div>
                 {this._renderMessages()}

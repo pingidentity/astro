@@ -37,6 +37,8 @@ var React = require("react"),
  *     To define the base "data-id" value for top-level HTML container
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container
+ * @param {string} [name]
+ *    Name attribute for the input.
  * @param {string} [requiredText]
  *     Text to display in required message. When defined, the message is displayed.
  * @param {boolean} [stateless]

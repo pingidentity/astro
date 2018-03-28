@@ -46,6 +46,8 @@ var React = require("react"),
 *     The country code to be selected by default.
 * @param {I18nCountrySelector~onValueChange}
 *     Callback to be triggered when country code changes.
+* @param {string} [name]
+*    Name attribute for the input.
 * @param {boolean} [open=false]
 *     State of the open/closed dropdown menu.
 * @param {I18nCountrySelector~onToggle} [onToggle]
@@ -97,6 +99,7 @@ class I18nCountrySelectorStateless extends React.Component {
             PropTypes.string,
             PropTypes.number
         ]),
+        name: PropTypes.string,
         onValueChange: PropTypes.func,
         open: PropTypes.bool,
         onToggle: PropTypes.func,
@@ -142,6 +145,7 @@ class I18nCountrySelectorStateless extends React.Component {
                 <CountryFlagList
                     countryCodeClassName="isoNum-code"
                     countryCodeDisplayType={CountryFlagList.CountryCodeTypes.ISO_NUM}
+                    name={this.props.name}
                     selectedCountryCode={this.props.countryCode}
                     open={this.props.open}
                     onValueChange={this._handleValueChange}
