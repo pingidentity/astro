@@ -6,8 +6,10 @@ $layout-header-height: 46px;
 $header-bg: $color-neutral-10;
 
 @mixin displayFlexRow {
+    /* stylelint-disable declaration-block-no-duplicate-properties */
     display: flex;
     display: -ms-flexbox;
+    /* stylelint-enable declaration-block-no-duplicate-properties */
     flex-direction: row;
     -ms-flex-direction: row;
     align-items: center;
@@ -64,10 +66,11 @@ $header-bg: $color-neutral-10;
     background-size: contain;
     background-repeat: no-repeat;
     background-color: transparent;
-    transform: translateY(($logo-height - $layout-header-height)/2);
+    transform: translateY(($logo-height - $layout-header-height) / 2);
 }
 
-.header-bar__site-logo, .header-bar__pingone-logo {
+.header-bar__site-logo,
+.header-bar__pingone-logo {
     display: inline-block;
     height: 22px;
     vertical-align: middle;
@@ -86,10 +89,12 @@ $header-bg: $color-neutral-10;
     color: $color-white;
     vertical-align: top;
 }
+
 .header-bar__site-title {
     font-family: $font-pn-regular;
     font-size: 20px;
 }
+
 .header-bar__additional-content {
     font-family: $font-pn-light;
 }
@@ -141,8 +146,7 @@ $header-bg: $color-neutral-10;
 }
 
 .header-nav {
-    display: flex;
-    display: -ms-flexbox;
+    @include flexbox;
     flex-direction: row;
     -ms-flex-direction: row;
     justify-content: center;
@@ -165,8 +169,6 @@ $header-bg: $color-neutral-10;
     padding: 0 $spacing-lg;
     position: relative;
     text-transform: uppercase;
-    vertical-align: bottom;
-
 }
 
 @media (max-width: 1000px) {
@@ -190,6 +192,7 @@ $header-bg: $color-neutral-10;
         transition: 0.1s;
     }
 }
+
 .header-nav__item:hover .header-nav__item-label:after {
     right: 0;
     left: 0;
@@ -219,7 +222,8 @@ $header-bg: $color-neutral-10;
             bottom: 0;
         }
 
-        &:hover, &.right:hover:after {
+        &:hover,
+        &.right:hover:after {
             color: $color-white;
             text-decoration: none;
         }
@@ -238,6 +242,7 @@ $header-bg: $color-neutral-10;
 }
 
 $item-size: 20px;
+
 .product-nav {
     @include displayFlexRow;
 }
@@ -286,8 +291,8 @@ $item-size: 20px;
     max-width: $item-size;
 }
 
-
-.product-nav__menu-trigger, button.product-nav__menu-trigger {
+.product-nav__menu-trigger,
+button.product-nav__menu-trigger {
     background: none;
     border: none;
     color: $color-neutral-50;
@@ -295,7 +300,6 @@ $item-size: 20px;
     display: block;
     font-size: 20px;
     padding: 0;
-    vertical-align: middle;
 
     &:hover,
     &.active {

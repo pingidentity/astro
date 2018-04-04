@@ -51,10 +51,12 @@
         margin-bottom: 0;
     }
 }
+
 .textblock--primary {
     color: $color-slate;
     font-size: 15px;
 }
+
 .textblock--value {
     color: $color-midnight;
     font-size: 15px;
@@ -62,7 +64,7 @@
 
 .pipe {
     &:before {
-        content: "";
+        content: '';
         height: 1.2em;
         width: 1px;
         margin: 0 $spacing-sm;

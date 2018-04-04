@@ -16,9 +16,10 @@ $searchbar-input-height: 38px;
         margin: 0;
     }
 }
+
 .searchbar__input--open {
     &:after {
-        content: "";
+        content: '';
         position: absolute;
         height: 10px;
         width: $searchbar-width;
@@ -28,6 +29,7 @@ $searchbar-input-height: 38px;
         @include gradient-vertical(rgba($color-accent-neutral-80, 0.55), transparent);
     }
 }
+
 .searchbar__filter-link {
     box-sizing: border-box;
     line-height: $searchbar-input-height;
@@ -50,10 +52,12 @@ $searchbar-input-height: 38px;
         color: $searchbar-link-text-color;
     }
 }
+
 .searchbar__filter-link--open,
 .searchbar__filter-link--open:hover {
     background-color: $searchbar-link-bg-color;
 }
+
 .searchbar__filters {
     box-sizing: border-box;
     padding: $spacing-lg;

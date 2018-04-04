@@ -43,11 +43,13 @@
 }
 
 @mixin flexbox {
+	/* stylelint-disable */
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-flex;
     display: -ms-flexbox;
     display: flex;
+	/* stylelint-enable */
 }
 
 @mixin flexbox-grow($value) {
@@ -61,6 +63,7 @@
 // STYLING ----------------------------------------------------------------------------------------
 
 @mixin inactive-link-styles {
+    @include transition(transform 0.2s ease-out);
     content: '';
     position: absolute;
     bottom: 0;
@@ -68,7 +71,6 @@
     width: 100%;
     height: 2px;
     background-color: $color-active;
-    @include transition(transform 0.2s ease-out);
     transform: scaleX(0);
     visibility: hidden;
 }
@@ -78,8 +80,6 @@
     transform: scaleX(1);
     visibility: visible;
 }
-
-
 
 
 // TEXT -------------------------------------------------------------------------------------------
@@ -195,6 +195,7 @@
         }
     }
 }
+
 @include fadein-keyframes; // animation keyframes only need to be declared once and then can be used globally
 
 @mixin slidedown-keyframes {
@@ -207,6 +208,7 @@
         }
     }
 }
+
 @include slidedown-keyframes;
 
 
@@ -247,11 +249,13 @@
 // FLEXBOX ----------------------------------------------------------------------------------------
 
 @mixin flexbox {
+    /* stylelint-disable declaration-block-no-duplicate-properties */
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-flex;
     display: -ms-flexbox;
     display: flex;
+    /* stylelint-enable declaration-block-no-duplicate-properties */
 }
 
 @mixin flexbox-grow($value) {
@@ -270,9 +274,11 @@
 }
 
 @mixin inline-flex {
+    /* stylelint-disable declaration-block-no-duplicate-properties */
     display: -webkit-inline-flex;
     display: -ms-inline-flexbox;
     display: inline-flex;
+    /* stylelint-enable declaration-block-no-duplicate-properties */
 }
 
 @mixin flexbox-direction($value) {
@@ -323,10 +329,15 @@
 
 @mixin grab-cursor {
 	/* stylelint-disable */
-    cursor: move;
+    cursor: move; /* fallback if grab cursor is unsupported */
     cursor: grab;
     cursor: -moz-grab;
     cursor: -webkit-grab;
+    &:active {
+        cursor: grabbing;
+        cursor: -moz-grabbing;
+        cursor: -webkit-grabbing;
+    }
 	/* stylelint-enable */
 }
 

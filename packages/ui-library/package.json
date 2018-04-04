@@ -162,7 +162,7 @@
     "jest": "jest && node ./clean-after.js",
     "coverage": "jest --coverage && node ./clean-after.js",
     "test": "jest",
-    "verify": "npm run jslint && npm run test",
+    "verify": "npm run jslint && npm run stylelint && npm run test",
     "preintegration": "npm run clean-selenium-log & selenium-standalone install && selenium-standalone start -- -log ./selenium-standalone.log & http-server ./build > ./http-server.log 2>&1 & npm run pack",
     "integration": "wdio wdio.conf.js",
     "postintegration": "npm run clean-processes",

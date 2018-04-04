@@ -24,7 +24,8 @@
         margin: 0 15px 20px 0;
     }
     .input-textselect {
-        .input-select, .input-text {
+        .input-select,
+        .input-text {
             margin: 0;
         }
     }
@@ -149,7 +150,8 @@
     .tr {
         display: table-row;
     }
-    .th, .td {
+    .th,
+    .td {
         display: table-cell;
         -moz-background-clip: padding;     /* Firefox 3.6 */
         -webkit-background-clip: padding;  /* Safari 4? Chrome 6? */
@@ -157,30 +159,22 @@
     }
 
     .dd-table-container {
-        text-align: left;
         @include vertical-scroll;
+        text-align: left;
         display: inline-block;
         .table {
             border-collapse: collapse;
             overflow: hidden;
             .th {
-                position:relative;
-                background-color: white;
+                position: relative;
+                background-color: $color-white;
                 padding: 20px 30px 10px;
                 border: 1px solid $color-stone;
                 //fix issues with border-collapse in Firefox.
                 background-clip: padding-box;
                 text-align: left;
                 &[draggable] {
-                    cursor: move; /* fallback if grab cursor is unsupported */
-                    cursor: grab;
-                    cursor: -moz-grab;
-                    cursor: -webkit-grab;
-                    &:active {
-                        cursor: grabbing;
-                        cursor: -moz-grabbing;
-                        cursor: -webkit-grabbing;
-                    }
+                    @include grab-cursor;
                     &:before {
                         color: default;
                         font-family: $icon-font;
@@ -190,8 +184,9 @@
                     }
                 }
                 a {
-                    position:relative;
-                    &.ascending, &.descending {
+                    position: relative;
+                    &.ascending,
+                    &.descending {
                         &:after {
                             @include animation(all 0.2s);
                             font-size: 11px;
@@ -238,7 +233,7 @@
         }
     }
     &.fixed-head {
-        overflow:hidden;
+        overflow: hidden;
         .dd-table-container {
             margin-top: 52px;
             max-height: 600px;
@@ -250,7 +245,7 @@
                 .tr {
                     white-space: nowrap;
                     .th {
-                        box-sizing:border-box;
+                        box-sizing: border-box;
                     }
                 }
             }
@@ -298,19 +293,19 @@
     &.has-next {
         .batch:last-of-type {
             > div:last-of-type .td {
-                position:relative;
+                position: relative;
                 overflow: visible;
-                    &:before {
-                        content: ('');
-                        position: absolute;
-                        display: block;
-                        top: 0;
-                        right: -1px;
-                        bottom: 0;
-                        left: 0;
-                        background-color: $color-white;
-                        opacity: 0.5;
-                        border-right: 1px solid $color-stone;
+                &:before {
+                    content: ('');
+                    position: absolute;
+                    display: block;
+                    top: 0;
+                    right: -1px;
+                    bottom: 0;
+                    left: 0;
+                    background-color: $color-white;
+                    opacity: 0.5;
+                    border-right: 1px solid $color-stone;
                 }
             }
         }

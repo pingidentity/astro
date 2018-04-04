@@ -1,6 +1,6 @@
 {
     "ignoreFiles":"./src/css/reset.scss",
-    "defaultSeverity": "warning",
+    "defaultSeverity": "error",
     "extends": "stylelint-config-standard",
     "rules": {
 

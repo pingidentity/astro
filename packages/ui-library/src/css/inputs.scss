@@ -165,8 +165,8 @@ label {
             }
             &.form-error {
                 a.clear-search {
-                    right: 32px;
                     @include transition($default-input-transition);
+                    right: 32px;
                 }
             }
             a.clear-search {
@@ -309,7 +309,7 @@ label {
 
             &:before {
                 @include input-background;
-                
+
                 content: '';
                 display: block;
                 box-sizing: border-box;
@@ -1742,10 +1742,10 @@ input[type=file] {
 }
 
 .link-dropdown-list {
+    @include drop-down-styles;
     .collapsible-link {
         padding: 0;
     }
-    @include drop-down-styles;
 }
 
 
@@ -1811,7 +1811,7 @@ input[type=file] {
         }
     }
     &.input-multivalues {
-        .entries  {
+        .entries {
             @include requiredPadding;
 
             &:before {
@@ -2289,6 +2289,7 @@ input[type=file] {
     }
     .icon-fail,
     .icon-success {
+        @include border-radius(6px);
         margin-right: 5px;
         padding: 3px;
         display: inline-block;
@@ -2298,14 +2299,13 @@ input[type=file] {
         line-height: 1em;
         text-align: center;
         vertical-align: text-top;
-        @include border-radius(6px);
     }
     .icon-fail {
         color: $color-white;
         background-color: $color-critical-red;
         font-weight: 600;
         &:before {
-            content: "X";
+            content: 'X';
         }
     }
     .icon-success {
@@ -2447,9 +2447,9 @@ input[type=file] {
 
         .input-text {
             input[type=text] {
+                @include border-radius(0 $default-input-border-radius $default-input-border-radius 0);
                 width: 100%;
                 text-align: left;
-                @include border-radius(0 $default-input-border-radius $default-input-border-radius 0);
             }
         }
     }
@@ -2470,7 +2470,7 @@ input[type=file] {
                 @include border-radius($default-input-border-radius 0 0 $default-input-border-radius);
             }
             .input-container {
-            	padding-right: 0;
+                padding-right: 0;
             }
         }
 
@@ -2535,6 +2535,7 @@ a {
     color: $color-elephant;
     margin: -12px 0 13px 35px;
 }
+
 .input-radio {
     &:last-of-type {
         ~ .radio-input-description {
@@ -3091,13 +3092,13 @@ label {
 }
 
 .input-message-inline {
+    @include border-radius(2px);
     display: inline-block;
     color: $color-white;
     font-size: 15px;
     line-height: 1em;
     padding: 10px;
     margin: 7px 0 10px;
-    @include border-radius(2px);
 
     &.required {
         background: $color-warning-icon-yellow;

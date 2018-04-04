@@ -11,6 +11,7 @@ $layout-nav-width-offset: 15px;
     height: 21px;
     width: 76px;
 }
+
 .logo-pingaccess {
     background-image: url('#{$img-path}logo-pingaccess.svg');
     background-repeat: no-repeat;
@@ -18,6 +19,7 @@ $layout-nav-width-offset: 15px;
     height: 21px;
     width: 95px;
 }
+
 .logo-uilib {
     background-image: url('#{$img-path}logo-uilibrary.svg');
     background-repeat: no-repeat;
@@ -43,6 +45,7 @@ $color-grey-main-2: $color-strong-neutral-30;
 $color-grey-minor-1: $color-neutral-30;
 
 @mixin inactive-link-styles {
+    @include transition(transform 0.2s ease-out);
     content: '';
     position: absolute;
     bottom: 0;
@@ -50,7 +53,6 @@ $color-grey-minor-1: $color-neutral-30;
     width: 100%;
     height: 2px;
     background-color: $color-active;
-    @include transition(transform 0.2s ease-out);
     transform: scaleX(0);
     visibility: hidden;
 }
@@ -120,6 +122,7 @@ $color-grey-minor-1: $color-neutral-30;
         }
     }
     .selected-item {
+        @include transition(all 0.3s);
         position: absolute;
         left: 0;
         top: -1px;
@@ -134,8 +137,6 @@ $color-grey-minor-1: $color-neutral-30;
         height: $layout-nav-link-height;
         overflow: hidden;
 
-        @include transition(all 0.3s);
-
         &:before {
             content: '';
             position: absolute;
@@ -147,11 +148,11 @@ $color-grey-minor-1: $color-neutral-30;
         }
     }
     .selected-item-arrow {
+        @include transition(all 0.3s);
         position: absolute;
         left: $layout-nav-width;
         z-index: -1;
         opacity: 0;
-        @include transition(all 0.3s);
 
         .arrow {
             stroke: $color-rabbit-fur;
@@ -171,17 +172,15 @@ $color-grey-minor-1: $color-neutral-30;
         box-sizing: border-box;
     }
     ul.menu {
+        @include transition(max-height ease-out 0.3s);
         font-size: 16px;
         width: $layout-nav-width;
         max-height: 0;
         overflow: hidden;
 
-        @include transition(max-height ease-out 0.3s);
-
         > li {
-            position: relative;
-
             @include transition(all 0.3s);
+            position: relative;
 
             a {
                 position: relative;
@@ -414,9 +413,9 @@ $color-grey-minor-1: $color-neutral-30;
             }
             &.selected {
                 .title {
+                    @include transition(background-color 0.2s);
                     font-family: $font-pn-semibold;
                     background-color: $color-grey-main-2;
-                    @include transition(background-color 0.2s);
                     &:before {
                         @include active-link-styles;
                     }
@@ -426,11 +425,11 @@ $color-grey-minor-1: $color-neutral-30;
                 }
             }
             &.highlighted .title {
+                @include transition(padding 0);
+                @include transition(background-color 0.2s);
                 font-family: $font-pn-semibold;
                 padding-right: 15px;
                 background-color: $color-grey-main;
-                @include transition(padding 0);
-                @include transition(background-color 0.2s);
                 &:before {
                     @include active-link-styles;
                 }
@@ -440,16 +439,16 @@ $color-grey-minor-1: $color-neutral-30;
                 background-color: $color-grey-minor-1;
                 &.selected {
                     .title {
+                        @include transition(background-color 0.2s);
                         font-family: $font-pn-light;
                         background-color: $color-grey-main-2;
-                        @include transition(background-color 0.2s);
                         &:before {
                             height: 0;
                             background-color: $color-grey-main-2;
                         }
                         &:hover {
-                            background: $color-grey-main;
                             @include transition(background-color 0.2s);
+                            background: $color-grey-main;
                         }
                     }
                 }
@@ -465,15 +464,16 @@ $color-grey-minor-1: $color-neutral-30;
             font-family: $font-pn-light;
             text-transform: none;
             font-size: 14px;
-            [class^='icon-'], [class*=' icon-'] {
+            [class^='icon-'],
+            [class*=' icon-'] {
                 position: absolute;
                 top: 13px;
                 left: 15px;
                 font-size: 18px;
             }
             &.open {
-                background-color: $color-grey-main-2;
                 @include transition(background-color 0.2s);
+                background-color: $color-grey-main-2;
             }
             &.collapsible-link {
                 margin-right: 0;
@@ -483,9 +483,9 @@ $color-grey-minor-1: $color-neutral-30;
                 }
             }
             &:hover {
+                @include transition(background-color 0.2s);
                 text-decoration: none;
                 background-color: $color-grey-main;
-                @include transition(background-color 0.2s);
             }
             &:before {
                 @include inactive-link-styles;
@@ -507,19 +507,19 @@ $color-grey-minor-1: $color-neutral-30;
                     padding: 13px 20px 13px 45px;
                     color: $color-white;
                     &:hover {
-                        background-color: $color-grey-main;
                         @include transition(background-color 0.2s);
+                        background-color: $color-grey-main;
                     }
                     &:after {
                         @include inactive-link-styles;
                     }
                 }
                 &.highlighted {
+                    @include transition(background-color 0.2s);
                     width: $layout-nav-width + $layout-nav-width-offset;
                     box-sizing: border-box;
                     background-color: $color-grey-main;
                     overflow: hidden;
-                    @include transition(background-color 0.2s);
 
                     &:after {
                         @include active-link-styles;
@@ -684,7 +684,8 @@ $color-grey-minor-1: $color-neutral-30;
             margin: 0 0 0 17px;
             border: none;
         }
-        &.warning, &.error {
+        &.warning,
+        &.error {
             background-color: $color-critical-red;
 
             input[type=button] {
@@ -909,7 +910,7 @@ $color-grey-minor-1: $color-neutral-30;
 
     &.underlined {
         border-bottom: 1px solid $color-rabbit-fur;
-        padding: 0 0 15px 0;
+        padding: 0 0 15px;
     }
     .page-subtitle {
         margin: 5px 0 0;

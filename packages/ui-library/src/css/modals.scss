@@ -327,7 +327,7 @@ $wizard-content-bg-color: $color-strong-neutral-90;
     }
 
     &:before {
-        content: "";
+        content: '';
         position: fixed;
         top: 0;
         left: 120px;
@@ -338,7 +338,6 @@ $wizard-content-bg-color: $color-strong-neutral-90;
 }
 
 $wizard-header-height: 77px;
-$wizard-header-animation: 0.1s ease-out;
 $wizard-close-button-color: $color-strong-neutral-40;
 
 @include keyframes('slide-menu-down') {
@@ -364,9 +363,6 @@ $wizard-close-button-color: $color-strong-neutral-40;
     .wizard-progress-menu-scroller {
         top: $wizard-header-height;
     }
-    .wizard-progress-menu {
-        animation: $wizard-header-animation slide-menu-down;
-    }
     .wizard__content {
         top: $wizard-header-height;
     }
@@ -385,7 +381,7 @@ $wizard-close-button-color: $color-strong-neutral-40;
     color: $color-white;
 
     &:before {
-        content: "x";
+        content: 'x';
         font-family: $icon-font;
         display: block;
     }
@@ -394,15 +390,16 @@ $wizard-close-button-color: $color-strong-neutral-40;
         opacity: 1;
     }
 }
+
 .wizard__header {
     width: 100%;
     display: flex;
-    background-color: white;
+    background-color: $color-white;
     font-size: $wizard-title-font-size;
     font-family: $font-pn-light;
     border-bottom: 1px solid $wizard-header-border-color;
-    animation: $wizard-header-animation slide-down;
 }
+
 .wizard__header-details {
     padding: $spacing-md $spacing-lg;
     flex: 1;
@@ -413,6 +410,7 @@ $wizard-close-button-color: $color-strong-neutral-40;
         border-right: none;
     }
 }
+
 .wizard__header-title {
     font-family: $font-pn-regular;
     font-size: 12px;
@@ -420,6 +418,7 @@ $wizard-close-button-color: $color-strong-neutral-40;
     margin-bottom: $spacing-sm;
     text-transform: uppercase;
 }
+
 .wizard__content {
     position: absolute;
     width: calc(100% - #{$wizard-progress-menu-width});
@@ -428,18 +427,22 @@ $wizard-close-button-color: $color-strong-neutral-40;
     top: 0;
     overflow-y: auto;
 }
+
 .wizard-step__title {
     font-size: $wizard-title-font-size;
     font-family: $font-pn-light;
     line-height: 1em;
     margin-bottom: $wizard-text-spacing;
 }
+
 .wizard-step__description {
     margin-bottom: $wizard-v-spacing;
 }
+
 .wizard-step__content {
     margin-left: $wizard-h-spacing;
 }
+
 .wizard-progress-menu-scroller {
     position: absolute;
     right: 0;
@@ -448,18 +451,21 @@ $wizard-close-button-color: $color-strong-neutral-40;
     overflow-y: auto;
     width: $wizard-progress-menu-width + $wizard-selected-arrow-width;
 }
+
 .wizard-progress-menu {
     min-height: 100%;
     margin-left: $wizard-selected-arrow-width;
     background-color: $wizard-progress-menu-bgcolor;
     color: $color-white;
 }
+
 .wizard-progress-menu__title {
     position: relative;
     text-transform: uppercase;
     font-size: 18px;
     padding: 30px 25px 25px 20px;
 }
+
 .wizard-progress-menu__step {
     position: relative;
     padding: $wizard-progress-menu-padding;
@@ -469,21 +475,22 @@ $wizard-close-button-color: $color-strong-neutral-40;
         @include inactive-link-styles;
     }
 }
+
 .wizard-progress-menu__step--click-disabled {
     cursor: default;
 
     .wizard-progress-menu__step-icon,
     .wizard-progress-menu__item-title,
-    .wizard-progress-menu__item-description,
-     {
+    .wizard-progress-menu__item-description {
         opacity: 0.6;
     }
 }
+
 .wizard-progress-menu__step--active {
     background-color: $wizard-progress-menu-selected-bgcolor;
 
     &:before {
-        content: "";
+        content: '';
         border-style: solid;
         border-width: 15px;
         border-color: transparent $wizard-progress-menu-selected-bgcolor transparent transparent;
@@ -497,6 +504,7 @@ $wizard-close-button-color: $color-strong-neutral-40;
         @include active-link-styles;
     }
 }
+
 .wizard-progress-menu__divider-container {
     overflow: hidden;
     padding: $wizard-progress-menu-padding 10px;
@@ -505,6 +513,7 @@ $wizard-close-button-color: $color-strong-neutral-40;
     border-color: transparent $wizard-progress-menu-bgcolor;
     border-width: 0 $wizard-progress-menu-padding;
 }
+
 .wizard-progress-menu__divider {
     position: relative;
     font-family: $font-pn-light;
@@ -514,12 +523,13 @@ $wizard-close-button-color: $color-strong-neutral-40;
     display: inline-block;
     vertical-align: middle;
 
-    &:before, &:after {
+    &:before,
+    &:after {
         content: '';
         display: block;
         position: absolute;
         top: calc(50% - 2px); //subtract 2px because of offset given for hanging characters
-        height: 0px;
+        height: 0;
         width: 400px;
         border-bottom: 1px solid $color-white;
     }
@@ -533,17 +543,20 @@ $wizard-close-button-color: $color-strong-neutral-40;
     }
 
 }
+
 .wizard-progress-menu__item-title {
     margin-left: $wizard-progress-menu-padding + $wizard-progress-icon-size;
     margin-bottom: $spacing-sm;
     font-size: $wizard-progress-title-size;
     line-height: $wizard-progress-title-height;
 }
+
 .wizard-progress-menu__item-description {
     margin-left: $wizard-progress-menu-padding + $wizard-progress-icon-size;
     font-family: $font-pn-light;
     font-size: 14px;
 }
+
 .wizard-progress-menu__step-icon {
     position: absolute;
     height: $wizard-progress-icon-size;
@@ -554,10 +567,12 @@ $wizard-close-button-color: $color-strong-neutral-40;
     color: $color-white;
     text-align: center;
 }
+
 .wizard-progress-menu__step-icon--required-active {
     background-color: $color-white;
     color: $wizard-progress-menu-selected-bgcolor;
 }
+
 .wizard-progress-menu__step-icon--optional-active {
     @extend .wizard-progress-menu__step-icon--required-active;
     font-family: $font-pn-bold;
@@ -565,18 +580,19 @@ $wizard-close-button-color: $color-strong-neutral-40;
 
     &:before {
         display: block;
-        content: "...";
+        content: '...';
         line-height: 0.5;
     }
 }
+
 .wizard-progress-menu__step-icon--completed {
-    font-family: 'iconfont';
     @extend .icon-check;
+    font-family: 'iconfont';
     background-color: $color-success;
     border-color: $color-success;
     font-size: 10px;
     &:before {
         display: block;
-        color: white;
+        color: $color-white;
     }
 }

@@ -483,7 +483,8 @@ button.ellipsis-loader-button {
     }
 }
 
-.tile-button, button.tile-button {
+.tile-button,
+button.tile-button {
     border-color: $color-accent-neutral-70;
     color: $color-slate;
     font-size: 15px;
@@ -491,13 +492,17 @@ button.ellipsis-loader-button {
     line-height: normal;
     height: auto;
     white-space: normal;
+
     @include flexbox;
     @include flexbox-direction(column);
+
     align-items: center;
     justify-content: space-between;
     -ms-flex: 1 1 100%;
 
-    &:hover, &:active, &.tile-button--selected {
+    &:hover,
+    &:active,
+    &.tile-button--selected {
         border-color: $color-active-blue;
 
         .tile-button__icon {
@@ -526,9 +531,9 @@ button.ellipsis-loader-button {
     @include flexbox;
 
     > * {
-        margin-right: $spacing-md;
         @include flexbox-grow(1);
         @include flexbox-shrink(1);
+        margin-right: $spacing-md;
         flex-basis: 0;
 
         &:last-child {

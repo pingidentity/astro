@@ -1,5 +1,5 @@
 .no-results {
-    margin: 45px 0 25px 0;
+    margin: 45px 0 25px;
     font-size: 14px;
     line-height: 1.3;
     color: $color-manatee;
@@ -152,8 +152,8 @@ $expandable-row-gap: 12px;
             }
             &:hover {
                 &:after {
-                    text-decoration: none;
                     @include opacity(0.65);
+                    text-decoration: none;
                 }
             }
         }
@@ -403,7 +403,8 @@ $expandable-row-gap: 12px;
     @include grab-cursor;
     position: relative;
 
-    .row-accessories, .row-btns {
+    .row-accessories,
+    .row-btns {
         opacity: 0.4;
         pointer-events: none;
     }
@@ -424,12 +425,12 @@ $expandable-row-gap: 12px;
     .item--ordering {
         border-top: 2px solid $color-active-blue;
 
-            &:before {
-                content: '';
-                top: -1 * $spacing-xl;
-                bottom: -1 * $spacing-xl;
-                height: auto;
-            }
+        &:before {
+            content: '';
+            top: -1 * $spacing-xl;
+            bottom: -1 * $spacing-xl;
+            height: auto;
+        }
 
     }
 }
@@ -470,7 +471,8 @@ $expandable-row-gap: 12px;
     padding-right: $spacing-sm * 2;
 }
 
-.ordering-controls__input, input.ordering-controls__input {
+.ordering-controls__input,
+input.ordering-controls__input {
     display: inline-block;
     background: $color-white;
     text-align: right;

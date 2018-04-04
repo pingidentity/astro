@@ -129,7 +129,7 @@
         color: $color-blue-grey;
         text-transform: uppercase;
         font-family: $font-pn-semibold;
-        padding: 25px 0 15px 0;
+        padding: 25px 0 15px;
         font-size: 15px;
         line-height: 1em;
 
@@ -307,8 +307,9 @@
         }
     }
 }
+
 .data-hr {
-    margin: 15px 0 30px 0;
+    margin: 15px 0 30px;
     height: 0;
     border-style: dashed;
     border-width: 1px 0 0;

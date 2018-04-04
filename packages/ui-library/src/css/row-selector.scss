@@ -1,12 +1,13 @@
 .row-selector {
 
-    &__columns, &__search-row {
+    &__columns,
+    &__search-row {
         @include flexbox;
     }
 
     &__search {
-        margin-bottom: $spacing-lg;
         @include flexbox-grow(1);
+        margin-bottom: $spacing-lg;
         flex-basis: 50%;
         margin-right: $spacing-lg;
 
@@ -64,8 +65,8 @@
     }
     &__available,
     &__added {
-        box-sizing: border-box;
         @include flexbox-grow(1);
+        box-sizing: border-box;
         flex-basis: 50%;
         margin: 0 $spacing-lg 0 0;
         .items {
@@ -233,7 +234,10 @@
         margin-top: -1px;
     }
 
-    &__grip, &__icon, &__image, &__count {
+    &__grip,
+    &__icon,
+    &__image,
+    &__count {
         margin-right: $spacing-md;
     }
 
@@ -255,13 +259,13 @@
     }
 
     &__count {
+        @include border-radius(12px);
         color: $color-midnight;
         border: 1px solid $color-midnight;
         min-width: 23px;
         height: 23px;
         line-height: 25px;
         text-align: center;
-        @include border-radius(12px);
     }
 
     &__labels {
@@ -284,7 +288,10 @@
         background-color: $color-midnight;
         border-color: $color-midnight;
 
-        &__icon, &__grip, &__name, &__count {
+        &__icon,
+        &__grip,
+        &__name,
+        &__count {
             color: $color-white;
             border-color: $color-white;
         }
@@ -295,7 +302,9 @@
     }
 }
 
-.selector-row--preview, .row-selector__added .selector-row--preview {
+.selector-row--preview,
+.row-selector__added
+.selector-row--preview {
     border: 1px solid $color-active-blue;
     background-color: rgba($color-active-blue, 0.25);
 }

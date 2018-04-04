@@ -82,7 +82,7 @@
         $arrow-width-offset: 6px;
         $border-radius: 4px;
         $box-shadow: 0 5px 15px 0 rgba($color-black, 0.2);
-        $text-shadow: 0px -3px 7px rgba(128, 128, 128, 0.1);;
+        $text-shadow: 0 -3px 7px rgba(128, 128, 128, 0.1);
 
         $border: 1px solid $color-timberwolf;
 
@@ -118,6 +118,7 @@
             font-size: 20px;
             line-height: 1em;
             color: $color-white;
+
             @include transform(scale(1.9,1));
         }
     }

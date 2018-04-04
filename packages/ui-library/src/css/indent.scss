@@ -3,7 +3,7 @@
     position: relative;
     display: block;
     overflow: hidden;
-    line-height: 1.0em;
+    line-height: 1em;
 
     &.grouped {
         margin-bottom: 10px;
@@ -24,6 +24,7 @@
         left: 4px;
 
         .title {
+            @include transform(rotate(180deg) translateY(50%));
             color: $color-elephant;
             background-color: $color-white;
             display: inline-block;
@@ -32,7 +33,6 @@
             padding: 4px 0;
             writing-mode: tb;
             -ms-writing-mode: tb-rl;
-            @include transform(rotate(180deg) translateY(50%));
         }
     }
     .indent-content {
