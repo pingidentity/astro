@@ -10,6 +10,7 @@ describe("ModalTest", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         Modal = require("../Modal"),
+        Wrapper = TestUtils.UpdatePropsWrapper,
         _ = require("underscore");
 
     window.addEventListener = jest.genMockFunction();
@@ -23,12 +24,12 @@ describe("ModalTest", function () {
     });
 
     function getComponent (opts) {
-        opts = _.defaults(opts || {}, {
+        const modalDefaults = _.defaults(opts || {}, {
             onOpen: jest.genMockFunction(),
             onClose: jest.genMockFunction().mockReturnValue(true)
         });
 
-        return ReactTestUtils.renderIntoDocument(<Modal {...opts} />);
+        return ReactTestUtils.renderIntoDocument(<Modal {...modalDefaults} />);
     }
 
     it("detaches event listeners on unmount", function () {
@@ -68,6 +69,30 @@ describe("ModalTest", function () {
         //expect that the collapsed modal does not process keypress events
         handler(e);
         expect(e.stopPropagation).toBeCalled();
+    });
+
+    it("emits open and close events", function () {
+        const
+            openListenerCallback = jest.genMockFunction(),
+            closeListenerCallback = jest.genMockFunction(),
+            component = ReactTestUtils.renderIntoDocument(
+                <Wrapper
+                    type={Modal}
+                    expanded={false}
+                    onOpen={jest.genMockFunction()}
+                    onClose={jest.genMockFunction()}
+                />
+            );
+
+        document.body.addEventListener("uilibrary-modal-open", openListenerCallback);
+        document.body.addEventListener("uilibrary-modal-close", closeListenerCallback);
+
+        component._setProps({ expanded: true });
+        expect(openListenerCallback).toBeCalled();
+        expect(closeListenerCallback).not.toBeCalled();
+
+        component._setProps({ expanded: false });
+        expect(closeListenerCallback).toBeCalled();
     });
 
     it("Doesn't render body until expanded", function () {

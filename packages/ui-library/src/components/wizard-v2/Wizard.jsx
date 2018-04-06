@@ -99,6 +99,19 @@ class Wizard extends React.Component {
         required: false,
     };
 
+    _triggerEvent(open) {
+        const eventName = open ? "uilibrary-wizard-open" : "uilibrary-wizard-close";
+        document.body.dispatchEvent(new CustomEvent(eventName, { bubbles: true }));
+    }
+
+    componentWillMount() {
+        this._triggerEvent(true);
+    }
+
+    componentWillUnmount() {
+        this._triggerEvent(false);
+    }
+
     render() {
         let activeStep;
         let requiredSteps = [];

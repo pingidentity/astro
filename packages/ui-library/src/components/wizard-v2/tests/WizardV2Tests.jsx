@@ -13,6 +13,7 @@ describe("WizardV2", function () {
     const React = require("react"),
         TestUtils = require("../../../testutil/TestUtils"),
         ReactTestUtils = require("react-dom/test-utils"),
+        ReactDOM = require("react-dom"),
         Wizard = require("../Wizard"),
         Wrapper = TestUtils.UpdatePropsWrapper,
         Step = Wizard.Step,
@@ -401,8 +402,21 @@ describe("WizardV2", function () {
                 expect(renderedMenuItems[itemIndex].className).not.toContain("wizard-progress-menu__step--active");
             }
         });
-
-
     });
 
+    it("emits open and close events", function () {
+        const openListenerCallback = jest.genMockFunction();
+        const closeListenerCallback = jest.genMockFunction();
+
+        document.body.addEventListener("uilibrary-wizard-open", openListenerCallback);
+        document.body.addEventListener("uilibrary-wizard-close", closeListenerCallback);
+
+        let component = getComponent();
+
+        expect(openListenerCallback).toBeCalled();
+        expect(closeListenerCallback).not.toBeCalled();
+
+        ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
+        expect(closeListenerCallback).toBeCalled();
+    });
 });

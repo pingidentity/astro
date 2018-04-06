@@ -162,6 +162,11 @@ class Modal extends React.Component {
         return this.showIeScrollHack ? { height: "auto" } : null;
     };
 
+    _triggerEvent(open) {
+        const eventName = open ? "uilibrary-modal-open" : "uilibrary-modal-close";
+        document.body.dispatchEvent(new CustomEvent(eventName, { bubbles: true }));
+    }
+
     componentWillMount() {
         // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
         /* istanbul ignore if  */
@@ -177,12 +182,19 @@ class Modal extends React.Component {
         this.isIeBrowser = Utils.isIE();
         this.showIeScrollHack = false;
         this.isWizard = null;
+
+        if (this.props.expanded) {
+            this._triggerEvent(true);
+        }
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
         if (this.isWizard === null && this.props.expanded) {
             this.isWizard = !!document.getElementsByClassName("wizard-task").length;
             this.forceUpdate();
+        }
+        if (prevProps.expanded !== this.props.expanded) {
+            this._triggerEvent(this.props.expanded);
         }
     }
 
