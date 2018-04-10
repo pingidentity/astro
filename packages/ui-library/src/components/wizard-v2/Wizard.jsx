@@ -121,7 +121,7 @@ class Wizard extends React.Component {
         React.Children.forEach(this.props.children, (child, index) => {
             const childProps = _.defaults(
                 {
-                    "data-id": this.props["data-id"],
+                    "data-id": child.props["data-id"] || `${this.props["data-id"]}-step`,
                     active: index === this.props.activeStep,
                     index: index,
                     key: index,

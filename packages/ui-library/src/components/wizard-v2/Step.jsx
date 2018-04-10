@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function Step(props) {
-    const stepDataId = `${props["data-id"]}-step`;
+    const stepDataId = `${props["data-id"]}`;
 
     return (
         <div data-id={stepDataId}>
