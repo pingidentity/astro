@@ -28,6 +28,14 @@ class MessagesDemo extends React.Component {
                                 Messages.MessageTypes.FEATURE);
     };
 
+    _addHtmlMessage = () => {
+        this.actions.addMessage({
+            message: "New <strong>bolded</strong> Message Added at " + (new Date()).toString(),
+            status: Messages.MessageTypes.FEATURE,
+            isHtml: true
+        });
+    };
+
     componentWillMount() {
         this.actions = Redux.bindActionCreators(Messages.Actions, this.props.store.dispatch);
     }
@@ -47,6 +55,7 @@ class MessagesDemo extends React.Component {
                 <button onClick={this._addErrorMessage} >Add error message</button>
                 <button onClick={this._addWarningMessage} >Add warning message</button>
                 <button onClick={this._addInfoMessage} >Add info message</button>
+                <button onClick={this._addHtmlMessage} >Add HTML message</button>
             </div>
         );
     }

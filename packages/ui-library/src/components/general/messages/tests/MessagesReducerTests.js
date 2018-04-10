@@ -112,6 +112,24 @@ describe("Messages", function () {
         }]);
     });
 
+    it("adds message using single-object form", function () {
+        var store = getStore();
+        store.dispatch(Actions.addMessage({
+            containerId: "mycontainer",
+            message: "hello world",
+            status: "warning"
+        }));
+
+        expect(store.getState().mycontainer).toEqual([{
+            containerId: "mycontainer",
+            status: "warning",
+            type: "warning",
+            text: "hello world",
+            index: 1,
+            timer: 5000
+        }]);
+    });
+
     it("Add message schedules removal", function () {
         var store = getStore();
 

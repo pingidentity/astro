@@ -36,14 +36,15 @@ exports.shiftMessage = function (containerId) {
     };
 };
 
-exports.pushMessage = function (containerId, text, status, timer, index) {
+exports.pushMessage = function (containerId, text, status, timer, index, isHtml) {
     return {
         type: exports.Types.ADD_MESSAGE,
         text: text,
         status: status || Constants.MessageTypes.SUCCESS,
         timer: timer,
         containerId: containerId,
-        index: index
+        index: index,
+        isHtml
     };
 };
 
@@ -63,11 +64,17 @@ exports.pushMessage = function (containerId, text, status, timer, index) {
  *     The type of message
  * @param {number} [removeAfterMs]
  *     The timeout before the message will be auto removed
+ * @param {object} [options]
+ *     If you pass an object as the only argument, you can set the other arguments
+ *     as named properties. You can also use this to set the isHtml flag to true
+ *     so you can use HTML in your message.
  * @returns {function}
  *     The action
  */
 exports.addMessage = function (containerId, message, status, removeAfterMs) {
-    if ((arguments.length === 1) ||
+    let isHtml;
+
+    if ((arguments.length === 1 && typeof(containerId) !== "object") ||
         (arguments.length === 2 && Constants.MessageTypeValues.indexOf(message) > -1) ||
         (arguments.length === 3 && typeof(status) === "number"))
     {
@@ -75,6 +82,12 @@ exports.addMessage = function (containerId, message, status, removeAfterMs) {
         status = arguments[1];
         message = arguments[0];
         containerId = "messages";
+    } else if (arguments.length === 1) {
+        containerId = arguments[0].containerId || "messages";
+        message = arguments[0].message;
+        status = arguments[0].status;
+        removeAfterMs = arguments[0].removeAfterMs;
+        isHtml = arguments[0].isHtml;
     }
 
     removeAfterMs = typeof(removeAfterMs) === "undefined" ? 5000 : removeAfterMs;
@@ -89,7 +102,7 @@ exports.addMessage = function (containerId, message, status, removeAfterMs) {
             }.bind(null, containerId, messageId), removeAfterMs);
         }
 
-        dispatch(exports.pushMessage(containerId, message, status, timer, messageId));
+        dispatch(exports.pushMessage(containerId, message, status, timer, messageId, isHtml));
     };
 };
 

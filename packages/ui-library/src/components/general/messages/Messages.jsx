@@ -34,6 +34,8 @@ var React = require("react"),
  *     Number of milli seconds after which message should be removed
  * @property {number} index
  *     Message index.
+ * @property {boolean} isHtml
+ *     When true, renders HTML without escaping.
  */
 
 /**
