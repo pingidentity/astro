@@ -31,6 +31,7 @@ class TileSelectorDemo extends React.Component {
                 </TileSelector>
                 <hr className="hr" />
                 <TileSelector
+                    data-id="second-one"
                     onValueChange={onValueChange}
                     selected={this.state.selected}
                     options={[

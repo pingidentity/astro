@@ -52,7 +52,7 @@ import TileButton from "./TileButton";
  */
 
 const TileSelector = props => (
-    <div className={classnames("tile-selector", props.className)}>
+    <div className={classnames("tile-selector", props.className)} data-id={props["data-id"]}>
         {props.children}
         {props.options &&
             _.map(props.options, option => {
