@@ -2,6 +2,11 @@ import Wizard, { Step } from "ui-library/lib/components/wizard-v2/";
 import TextField from "ui-library/lib/components/forms/form-text-field/";
 import React from "react";
 
+/**
+* @name WizardDemo2
+* @memberof Wizard
+* @desc A demo for Wizard v2
+*/
 
 class WizardDemo extends React.Component {
     state = {

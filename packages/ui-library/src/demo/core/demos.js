@@ -240,8 +240,8 @@ module.exports = [
                         label: "Tile Selector",
                         demo: require("../components/buttons/TileSelectorDemo"),
                         pathToDoc: "components/buttons/TileSelector.jsx",
-                        pathToSource: "components_general_charting_TileSelector.jsx.html",
-                        pathToDemoSource: "demo_components_general_charting_TileSelectorDemo.jsx.html"
+                        pathToSource: "components_buttons_TileSelector.jsx.html",
+                        pathToDemoSource: "demo_components_buttons_TileSelectorDemo.jsx.html"
                     }
                 ]
             },
