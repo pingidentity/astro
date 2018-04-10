@@ -966,6 +966,7 @@ input[type=file] {
             input[type=text] {
                 color: $color-midnight;
                 background-color: $color-input-fill;
+                border-color: $color-input-fill;
                 cursor: pointer;
 
                 &:focus {
@@ -2233,8 +2234,8 @@ input[type=file] {
         input[type=password],
         textarea {
             cursor: text;
-            background-color: $color-white;
-            border-color: $color-timberwolf;
+            background-color: rgba($color-input-fill, 0.25);
+            border-color: $color-rabbit-fur;
 
             &:hover,
             &:focus {
