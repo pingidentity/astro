@@ -333,10 +333,10 @@ module.exports = [
                     },
                     {
                         label: "Wizard - v2",
-                        demo: require("../components/wizardv2/WizardDemo"),
+                        demo: require("../components/wizard-v2/WizardDemo"),
                         pathToDoc: "components/wizard-v2/Wizard.jsx",
                         pathToSource: "components_wizard-v2_Wizard.jsx.html",
-                        pathToDemoSource: "demo_components_wizardv2_WizardDemo.jsx.html"
+                        pathToDemoSource: "demo_components_wizard-v2_WizardDemo.jsx.html"
                     },
                 ]
             },

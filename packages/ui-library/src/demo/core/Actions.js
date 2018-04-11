@@ -35,7 +35,7 @@ exports.fetchCode = function (id, pathToDoc) {
         return path
             .map(function (dir, i) {
                 // preps example 3 (v2 file in sub directory with dashes)
-                if (dir.indexOf("-") > -1) {
+                if ((dir.indexOf("-") > -1) && (i === path.length - 1)) {
                     return dir.split("-").map(function (dirPart) {
                         return dirPart.charAt(0).toUpperCase() + dirPart.slice(1);
                     }).join("");
