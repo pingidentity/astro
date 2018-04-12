@@ -15,3 +15,15 @@
         margin-bottom: 0;
     }
 }
+
+@mixin set-off($gap) {
+    margin: $gap 0;
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}

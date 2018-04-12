@@ -8,6 +8,7 @@
 @import './text';
 @import './spacing';
 
+@import './common/buttons';
 @import './common/inputs';
 @import './common/icon-pairs';
 
@@ -17,6 +18,8 @@
 @import './components/feedback';
 @import './components/float-label';
 @import './components/form';
+@import './components/icon-feedback';
+@import './components/modal-menu';
 @import './components/org-logo';
 @import './components/page';
 @import './components/requirements';
@@ -24,6 +27,10 @@
 @import './components/text-block';
 @import './components/text-input';
 @import './components/tooltip';
+
+// spacing components are after so they take precedence
+@import './components/form-aside';
+@import './components/stack';
 
 body {
     margin: 0;

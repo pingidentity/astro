@@ -1,5 +1,6 @@
 import React from 'react';
 import Catalog from './Catalog';
+import MFA from './MFA';
 import SignOnPage from '../components/SignOnPage';
 import ChangePWPage from '../components/ChangePWPage';
 import SigningYouOnPage from '../components/SigningYouOnPage';
@@ -28,6 +29,7 @@ const App = () => (
 
 export default {
     main: <App />,
+    mfa: <div className="page-content"><MFA/></div>,
     signon: <SignOnPage branding={pingBranding} />,
     branded: <SignOnPage branding={jjBranding} />,
     changepw: <ChangePWPage branding={pingBranding} />,

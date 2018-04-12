@@ -1,0 +1,79 @@
+$modal-menu-button-radius: 4px;
+
+.modal-overlay {
+    background: rgba(255, 255, 255, 0.9);
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    &__content {
+        position: absolute;
+        left: $spacing-xl;
+        right: $spacing-xl;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+.modal-menu {
+    &__button {
+        @include button;
+
+        align-items: center;
+        background: $color-neutral-90;
+        border-radius: 0;
+        box-shadow: $shadow-overlay;
+        display: flex;
+        margin-top: -1px;
+        padding-left: $spacing-md;
+        position: relative;
+        z-index: 0;
+
+        &:hover {
+            z-index: 1;
+        }
+
+        &:focus {
+            z-index: 2;
+        }
+
+        &:first-child {
+            border-radius: $modal-menu-button-radius $modal-menu-button-radius 0 0;
+            margin-top: 0;
+        }
+
+        &:last-child {
+            border-radius: 0 0 $modal-menu-button-radius $modal-menu-button-radius;
+        }
+
+        &--cancel {
+            background-color: white;
+            display: block;
+            font-size: $button-tertiary-font-size;
+            padding-left: $button-padding;
+        }
+
+        &--selected {
+            background-image: url("../icons/success.svg");
+            background-position: right $spacing-sm center;
+            background-repeat: no-repeat;
+        }
+    }
+
+    &__icon {
+        float: left;
+        margin-right: $spacing-md;
+    }
+
+    &__label, &__sublabel {
+        display: block;
+        text-align: left;
+    }
+
+    &__sublabel {
+        font-size: $font-size-sm;
+        margin-top: $spacing-xs;
+    }
+}

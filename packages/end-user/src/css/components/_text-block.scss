@@ -2,13 +2,17 @@
     @extend %normal-text;
     @include stacked-item($spacing-lg);
     text-align: center;
-}
 
-.text-block__text {
-    display: inline-block;
-    text-align: left;
-}
+    &__text {
+        display: inline-block;
+        text-align: left;
+    }
 
-.text-block--small {
-    font-size: $font-size-sm;
+    &--small {
+        font-size: $font-size-sm;
+    }
+
+    &--large {
+        font-size: $font-size-lg;
+    }
 }

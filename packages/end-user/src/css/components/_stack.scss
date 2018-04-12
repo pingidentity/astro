@@ -1,0 +1,11 @@
+.stack {
+    @include stack($spacing-md);
+
+    &--small > * {
+        margin-bottom: $spacing-sm;
+    }
+
+    &--xsmall > * {
+        margin-bottom: $spacing-xs;
+    }
+}

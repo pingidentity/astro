@@ -12,6 +12,7 @@ $color-active-blue: #277ba5;
 $color-active-blue-highlighted: #3d88ae;
 $color-critical-red: #de3602;
 $color-warning-yellow: #eeb91c;
+$color-success-green: #21934c;
 
 $color-neutral-10: #4d4d4d;
 $color-neutral-20: #595959;
@@ -34,3 +35,8 @@ $font-size-xs: 11px;
 $font-size-sm: 13px;
 $font-size-md: 15px;
 $font-size-lg: 22px;
+$font-size-xl: 28px;
+$font-size-xx: 36px;
+
+// SHADOW
+$shadow-overlay: 1px 1px 4px rgba($color-neutral-10, 0.25);

@@ -1,30 +1,37 @@
 .text-input {
     @extend %input-text;
+
     border: 1px solid $input-border-color;
     border-radius: 2px;
     box-sizing: border-box;
     display: block;
     padding: $input-padding-vertical $input-padding-horizontal;
-    margin: 0;
     width: 100%;
 
     &:focus {
         border-color: $input-focus-border-color;
     }
-}
 
-.text-input--error, .text-input--error:focus {
-    border-color: $color-critical-red;
+    &--error, &--error:focus {
+        border-color: $color-critical-red;
 
-    background: right $spacing-sm center no-repeat url("../icons/error.svg");
-    background-color: white;
+        background: right $spacing-sm center no-repeat url("../icons/error.svg");
+        background-color: white;
 
-    padding-right: $spacing-xl;
-}
+        padding-right: $spacing-xl;
+    }
 
-.text-input--success {
-    background: right $spacing-sm center no-repeat url("../icons/success.svg");
-    background-color: white;
+    &--success {
+        background: right $spacing-sm center no-repeat url("../icons/success.svg");
+        background-color: white;
 
-    padding-right: $spacing-xl;
+        padding-right: $spacing-xl;
+    }
+
+    &--primary {
+        @extend %primary-input-text;
+
+        padding: $spacing-xs + 1px $spacing-sm $spacing-xs - 2px $spacing-sm;
+        text-align: center;
+    }
 }

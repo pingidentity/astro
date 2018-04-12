@@ -15,3 +15,11 @@ $input-focus-border-color: $color-active-blue;
     font-weight: $input-font-weight;
     color: $input-text-color;
 }
+
+%primary-input-text,
+.primary-input-text {
+    font-family: $font-default;
+    font-size: $font-size-xx;
+    font-weight: 200;
+    color: $input-text-color;
+}

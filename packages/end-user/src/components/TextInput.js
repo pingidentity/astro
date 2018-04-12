@@ -3,14 +3,25 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 const TextInput = ({
-    placeholder, id, className, error, success,
+    className, defaultValue, error, id, placeholder, primary, success, value
 }) => {
     const classNames = classnames('text-input', className, {
         'text-input--error': error,
         'text-input--success': success,
+        'text-input--primary': primary,
     });
 
-    return <input className={classNames} id={id} name={id} placeholder={placeholder} type="text" />;
+    return (
+        <input
+            className={classNames}
+            defaultValue={defaultValue}
+            id={id}
+            name={id}
+            placeholder={placeholder}
+            type="text"
+            value={value}
+        />
+    );
 };
 
 TextInput.propTypes = {
@@ -18,6 +29,7 @@ TextInput.propTypes = {
     id: PropTypes.string,
     error: PropTypes.bool,
     success: PropTypes.bool,
+    primary: PropTypes.bool,
 };
 
 export default TextInput;

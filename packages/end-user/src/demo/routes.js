@@ -7,6 +7,13 @@ module.exports = [
         demoCSS: true,
     },
     {
+        id: 'mfa',
+        script: 'mfa.js',
+        title: 'Ping End User MFA',
+        filename: 'mfa.html',
+        demoCSS: true,
+    },
+    {
         id: 'signon',
         script: 'signon.js',
         title: 'Sign On',

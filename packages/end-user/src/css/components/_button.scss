@@ -1,47 +1,40 @@
-// BUTTONS
-$button-font-size: $font-size-md;
-$button-padding: $spacing-sm;
-$button-radius: 2px;
-// primary
-$button-primary-text-color: $color-neutral-100;
-$button-primary-bg-color: $color-active-blue;
-$button-primary-hover-bg-color: $color-active-blue-highlighted;
-// disabled
-$button-disabled-opacity: 0.2;
-
-// TEXT STYLES
-%button-text,
-.button-text {
-    font-family: $font-default;
-    font-size: $font-size-md;
-    color: $button-primary-text-color;
-}
-
 .button {
-    @extend %button-text;
-    background: $button-primary-bg-color;
-    display: block;
-    padding: $button-padding;
-    box-shadow: none;
+    @include button;
+
     border-radius: $button-radius;
-    border: none;
-    cursor: pointer;
-    width: 100%;
 
-    &:hover {
-        background: $button-primary-hover-bg-color;
+    &--primary {
+        color: $button-primary-text-color;
+        background: $button-primary-bg-color;
+        border-color: $button-primary-bg-color;
+
+        &:hover {
+            color: $button-primary-text-color;
+            background: $button-primary-hover-bg-color;
+            border-color: $button-primary-hover-bg-color;
+        }
+
+        &:active {
+            color: $button-primary-text-color;
+            background: $button-primary-bg-color;
+            border-color: $button-primary-bg-color;
+        }
     }
 
-    &:active {
-        background: $button-primary-bg-color;
+    &--tertiary {
+        font-size: $button-tertiary-font-size;
+        padding: $spacing-xs $spacing-md;
+        width: auto;
+        margin-left: auto;
+        margin-right: auto;
     }
-}
 
-.button:disabled, .button--disabled {
-    opacity: $button-disabled-opacity;
-    cursor: default;
+    &:disabled, &--disabled {
+        opacity: $button-disabled-opacity;
+        cursor: default;
 
-    &:hover {
-        background: $button-primary-bg-color;
+        &:hover {
+            background: $button-primary-bg-color;
+        }
     }
 }

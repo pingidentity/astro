@@ -1,0 +1,27 @@
+.icon-feedback {
+    color: $color-active-blue;
+    font-size: $font-size-xl;
+    font-weight: 200;
+    margin: $spacing-xl 0;
+    text-align: center;
+
+    &--success {
+        color: $color-success-green;
+    }
+
+    &--timeout {
+        color: $color-warning-yellow;
+    }
+
+    &--error, &--stopped, &--disabled {
+        color: $color-critical-red;
+    }
+
+    &__icon {
+        margin-bottom: $spacing-md;
+    }
+
+    &__label {
+        margin: 0;
+    }
+}

@@ -1,0 +1,47 @@
+// BUTTONS
+$button-font-size: $font-size-md;
+$button-padding: $spacing-sm;
+$button-radius: 2px;
+$button-text-color: $color-neutral-20;
+$button-bg-color: $color-neutral-100;
+$button-border-color: $color-neutral-60;
+$button-hover-color: $color-active-blue;
+$button-border-style: 1px solid $button-border-color;
+// primary
+$button-primary-text-color: $color-neutral-100;
+$button-primary-bg-color: $color-active-blue;
+$button-primary-hover-bg-color: $color-active-blue-highlighted;
+// tertiary
+$button-tertiary-font-size: $font-size-sm;
+// disabled
+$button-disabled-opacity: 0.2;
+
+// TEXT STYLES
+%button-text,
+.button-text {
+    font-family: $font-default;
+    font-size: $font-size-md;
+    color: $button-text-color;
+}
+
+@mixin button {
+    @extend %button-text;
+
+    background: $button-bg-color;
+    border: $button-border-style;
+    display: block;
+    padding: $button-padding - 1px;
+    box-shadow: none;
+    cursor: pointer;
+    width: 100%;
+
+    &:hover {
+        color: $button-hover-color;
+        border-color: $button-hover-color;
+    }
+
+    &:active {
+        color: $button-text-color;
+        border-color: $button-border-color;
+    }
+}
