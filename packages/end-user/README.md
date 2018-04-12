@@ -18,6 +18,7 @@ npm run server
 Then you can see demos at these urls:
 ```
 localhost:4040
+localhost:4040/mfa.html
 localhost:4040/signon.html
 localhost:4040/branded.html
 localhost:4040/changepw.html
