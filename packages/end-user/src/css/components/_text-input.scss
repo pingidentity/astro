@@ -33,5 +33,10 @@
 
         padding: $spacing-xs + 1px $spacing-sm $spacing-xs - 2px $spacing-sm;
         text-align: center;
+
+        &.text-input--error {
+            padding-right: $spacing-sm;
+            background-image: none;
+        }
     }
 }

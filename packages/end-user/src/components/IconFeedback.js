@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import successIcon from '../icons/ghost-success.svg';
@@ -13,16 +14,20 @@ const typeIcons = {
     timeout: timedOutIcon,
     stopped: stoppedIcon,
     disabled: disabledIcon,
-}
+};
 
-const IconFeedback = ({type, children}) => {
-    const classNames = classnames("icon-feedback", `icon-feedback--${type}`);
+const IconFeedback = ({ type, children }) => {
+    const classNames = classnames('icon-feedback', `icon-feedback--${type}`);
     return (
         <div className={classNames}>
-            <img src={typeIcons[type]} className="icon-feedback__icon"/>
+            <img src={typeIcons[type]} className="icon-feedback__icon" alt="" />
             <p className="icon-feedback__label">{children}</p>
         </div>
     );
+};
+
+IconFeedback.propTypes = {
+    type: PropTypes.string,
 };
 
 export default IconFeedback;

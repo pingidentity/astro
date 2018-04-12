@@ -6,8 +6,8 @@ import smsIcon from '../icons/sms.svg';
 import emailIcon from '../icons/email.svg';
 
 const icons = {
-    "sms": smsIcon,
-    "email": emailIcon
+    sms: smsIcon,
+    email: emailIcon,
 };
 
 const ModalMenu = ({ options }) => (
@@ -17,11 +17,11 @@ const ModalMenu = ({ options }) => (
                 {options.map(option => (
                     <button
                         key={option.label}
-                        className={classnames("modal-menu__button", {
-                            "modal-menu__button--selected": option.selected
+                        className={classnames('modal-menu__button', {
+                            'modal-menu__button--selected': option.selected,
                         })}
                     >
-                        <img className="modal-menu__icon" src={icons[option.icon]}/>
+                        <img className="modal-menu__icon" src={icons[option.icon]} alt="" />
                         <span>
                             <span className="modal-menu__label">{option.label}</span>
                             <span className="modal-menu__sublabel">{option.sublabel}</span>
@@ -35,6 +35,12 @@ const ModalMenu = ({ options }) => (
 );
 
 ModalMenu.propTypes = {
+    options: PropTypes.arrayOf(PropTypes.shape({
+        label: PropTypes.string,
+        sublabel: PropTypes.string,
+        icon: PropTypes.string,
+        selected: PropTypes.bool,
+    })),
 };
 
 export default ModalMenu;

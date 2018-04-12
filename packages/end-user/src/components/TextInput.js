@@ -3,7 +3,14 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 const TextInput = ({
-    className, defaultValue, error, id, placeholder, primary, success, value
+    className,
+    defaultValue,
+    error,
+    id,
+    placeholder,
+    primary,
+    success,
+    value,
 }) => {
     const classNames = classnames('text-input', className, {
         'text-input--error': error,
@@ -27,9 +34,11 @@ const TextInput = ({
 TextInput.propTypes = {
     placeholder: PropTypes.string,
     id: PropTypes.string,
+    defaultValue: PropTypes.string,
     error: PropTypes.bool,
     success: PropTypes.bool,
     primary: PropTypes.bool,
+    value: PropTypes.string,
 };
 
 export default TextInput;

@@ -5,7 +5,7 @@ import classnames from 'classnames';
 const FloatLabel = ({
     label, id, InputType, inputClassName, children,
 }) => {
-    const inputClassNames = classnames("float-label__input", inputClassName);
+    const inputClassNames = classnames('float-label__input', inputClassName);
 
     return (
         <div className="float-label">
@@ -16,7 +16,7 @@ const FloatLabel = ({
             {children}
         </div>
     );
-}
+};
 
 FloatLabel.propTypes = {
     label: PropTypes.string,

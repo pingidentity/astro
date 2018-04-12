@@ -29,7 +29,11 @@ const App = () => (
 
 export default {
     main: <App />,
-    mfa: <div className="page-content"><MFA/></div>,
+    mfa: (
+        <div className="page-content">
+            <MFA />
+        </div>
+    ),
     signon: <SignOnPage branding={pingBranding} />,
     branded: <SignOnPage branding={jjBranding} />,
     changepw: <ChangePWPage branding={pingBranding} />,
