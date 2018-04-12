@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.2 (51160) - http://www.bohemiancoding.com/sketch -->
+    <title>ghost-success</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="ghost-success" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g>
+            <rect id="Rectangle-6" x="0" y="0" width="100" height="100"></rect>
+            <g id="Checkmark" transform="translate(49.971952, 57.777347) rotate(-7.000000) translate(-49.971952, -57.777347) translate(13.971952, 31.189112)" fill="#21934C">
+                <polygon id="Page-1" points="69.7553684 0 20.5364211 48.3417764 2.24463158 29.8979245 0 32.1690992 20.5073684 52.8526516 20.5364211 52.8224364 20.568 52.8526516 72 2.27243363"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

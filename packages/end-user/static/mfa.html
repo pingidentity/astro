@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <title>Ping End User MFA</title>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="stylesheet" href="end-user.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div id="app" class="app-container">
+        <div class="page-content">
+            <div>
+        <h1 id="Ping-End-User-MFA">Ping End-User MFA</h1>
+        <div class="component-demo">
+            <div class="component-demo__preview">
+                <div class="card">
+                    <div class="org-logo">
+                        <img class="org-logo__image" src="ping-logo.svg"
+                            alt="Company Logo" />
+                    </div>
+                    <p class="text-block">
+                        <span class="text-block__text">Enter the passcode you received to complete
+                            authentication.</span>
+                    </p>
+                    <form class="form">
+                        <input type="text" class="text-input text-input--primary"
+                            value="012345" />
+                        <div class="form-aside">
+                            <p class="text-block">
+                                <span class="text-block__text">SMS sent to:</span>
+                            </p>
+                            <p class="text-block text-block--large">
+                                <span class="text-block__text">+1 415-xxx-xx35</span>
+                            </p>
+                            <button class="button button--tertiary">Change</button>
+                        </div>
+                        <button class="button button--primary brand-primary-bg">Sign On</button>
+                        <button class="button">Resend</button>
+                    </form>
+                </div>
+            </div>
+            <div class="component-demo__markup">
+                <div class="component-demo__code">
+                    <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Logo</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">TextBlock</span>&gt;</span>
+    Enter the passcode you received to complete authentication.
+  <span class="hljs-tag">&lt;/<span class="hljs-name">TextBlock</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Form</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">TextInput</span>
+      <span class="hljs-attr">defaultValue</span>=<span class="hljs-string">"012345"</span>
+      <span class="hljs-attr">primary</span>
+     /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">FormAside</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">TextBlock</span>&gt;</span>
+        SMS sent to:
+      <span class="hljs-tag">&lt;/<span class="hljs-name">TextBlock</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">TextBlock</span> <span class="hljs-attr">size</span>=<span class="hljs-string">"large"</span>&gt;</span>
+        +1 415-xxx-xx35
+      <span class="hljs-tag">&lt;/<span class="hljs-name">TextBlock</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+        <span class="hljs-attr">label</span>=<span class="hljs-string">"Change"</span>
+        <span class="hljs-attr">tertiary</span>
+       /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">FormAside</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Sign On"</span>
+      <span class="hljs-attr">primary</span>
+     /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Resend"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span></pre></div>
+                <div
+                    class="component-demo__code">
+                    <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo__image"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Company Logo"</span>
+        /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span>Enter the passcode you received to complete authentication.<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input text-input--primary"</span>
+            <span class="hljs-attr">value</span>=<span class="hljs-string">"012345"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form-aside"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span>SMS sent to:<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block text-block--large"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span>+1 415-xxx-xx35<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--tertiary"</span>&gt;</span>Change<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--primary brand-primary-bg"</span>&gt;</span>Sign On<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span>&gt;</span>Resend<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
+        </div>
+    </div>
+    <div class="component-demo">
+        <div class="component-demo__preview">
+            <div class="card">
+                <div class="org-logo">
+                    <img class="org-logo__image" src="ping-logo.svg"
+                        alt="Company Logo" />
+                </div>
+                <div class="feedback feedback--error">
+                    <img class="feedback__icon" src="error.svg" alt="Error"
+                    />
+                    <div class="feedback__message">Invalid passcode</div>
+                </div>
+                <p class="text-block">
+                    <span class="text-block__text">Enter the passcode you received to complete
+                        authentication.</span>
+                </p>
+                <form class="form">
+                    <input type="text" class="text-input text-input--error text-input--primary"
+                        value="012345" />
+                    <div class="form-aside">
+                        <p class="text-block">
+                            <span class="text-block__text">SMS sent to:</span>
+                        </p>
+                        <p class="text-block text-block--large">
+                            <span class="text-block__text">+1 415-xxx-xx35</span>
+                        </p>
+                        <button class="button button--tertiary">Change</button>
+                    </div>
+                    <button class="button button--primary brand-primary-bg">Sign On</button>
+                    <button class="button">Resend</button>
+                </form>
+            </div>
+        </div>
+        <div class="component-demo__markup">
+            <div class="component-demo__code">
+                <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Logo</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Message</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"error"</span>&gt;</span>
+    Invalid passcode
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Message</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">TextBlock</span>&gt;</span>
+    Enter the passcode you received to complete authentication.
+  <span class="hljs-tag">&lt;/<span class="hljs-name">TextBlock</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Form</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">TextInput</span>
+      <span class="hljs-attr">defaultValue</span>=<span class="hljs-string">"012345"</span>
+      <span class="hljs-attr">error</span>
+      <span class="hljs-attr">primary</span>
+     /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">FormAside</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">TextBlock</span>&gt;</span>
+        SMS sent to:
+      <span class="hljs-tag">&lt;/<span class="hljs-name">TextBlock</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">TextBlock</span> <span class="hljs-attr">size</span>=<span class="hljs-string">"large"</span>&gt;</span>
+        +1 415-xxx-xx35
+      <span class="hljs-tag">&lt;/<span class="hljs-name">TextBlock</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+        <span class="hljs-attr">label</span>=<span class="hljs-string">"Change"</span>
+        <span class="hljs-attr">tertiary</span>
+       /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">FormAside</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Sign On"</span>
+      <span class="hljs-attr">primary</span>
+     /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Resend"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span></pre></div>
+            <div
+                class="component-demo__code">
+                <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo__image"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Company Logo"</span>
+        /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"feedback feedback--error"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"feedback__icon"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"error.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Error"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"feedback__message"</span>&gt;</span>Invalid passcode<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span>Enter the passcode you received to complete authentication.<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input text-input--error text-input--primary"</span>
+            <span class="hljs-attr">value</span>=<span class="hljs-string">"012345"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form-aside"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span>SMS sent to:<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block text-block--large"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span>+1 415-xxx-xx35<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--tertiary"</span>&gt;</span>Change<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--primary brand-primary-bg"</span>&gt;</span>Sign On<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span>&gt;</span>Resend<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
+    </div>
+</div>
+<div class="component-demo">
+    <div class="component-demo__preview">
+        <div class="card">
+            <div class="org-logo">
+                <img class="org-logo__image" src="ping-logo.svg"
+                    alt="Company Logo" />
+            </div>
+            <div class="icon-feedback icon-feedback--success">
+                <img src="ghost-success.svg" class="icon-feedback__icon"
+                />
+                <p class="icon-feedback__label">Authenticated</p>
+            </div>
+        </div>
+    </div>
+    <div class="component-demo__markup">
+        <div class="component-demo__code">
+            <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Logo</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">IconFeedback</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"success"</span>&gt;</span>
+    Authenticated
+  <span class="hljs-tag">&lt;/<span class="hljs-name">IconFeedback</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span></pre></div>
+        <div
+            class="component-demo__code">
+            <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo__image"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Company Logo"</span>
+        /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback icon-feedback--success"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ghost-success.svg"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback__icon"</span>
+        /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback__label"</span>&gt;</span>Authenticated<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
+</div>
+</div>
+<div class="component-demo">
+    <div class="component-demo__preview">
+        <div class="card">
+            <div class="org-logo">
+                <img class="org-logo__image" src="ping-logo.svg"
+                    alt="Company Logo" />
+            </div>
+            <div class="icon-feedback icon-feedback--timeout">
+                <img src="ghost-timed-out.svg" class="icon-feedback__icon"
+                />
+                <p class="icon-feedback__label">Timed Out</p>
+            </div>
+            <button class="button">Back</button>
+        </div>
+    </div>
+    <div class="component-demo__markup">
+        <div class="component-demo__code">
+            <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Logo</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">IconFeedback</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"timeout"</span>&gt;</span>
+    Timed Out
+  <span class="hljs-tag">&lt;/<span class="hljs-name">IconFeedback</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Back"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span></pre></div>
+        <div
+            class="component-demo__code">
+            <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo__image"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Company Logo"</span>
+        /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback icon-feedback--timeout"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ghost-timed-out.svg"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback__icon"</span>
+        /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback__label"</span>&gt;</span>Timed Out<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span>&gt;</span>Back<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
+</div>
+</div>
+<div class="component-demo">
+    <div class="component-demo__preview">
+        <div class="card">
+            <div class="org-logo">
+                <img class="org-logo__image" src="ping-logo.svg"
+                    alt="Company Logo" />
+            </div>
+            <div class="icon-feedback icon-feedback--error">
+                <img src="ghost-error.svg" class="icon-feedback__icon"
+                />
+                <p class="icon-feedback__label">Error</p>
+            </div>
+            <p class="text-block text-block--small">
+                <span class="text-block__text">Error message content will appear here when required
+                    to further explain the type of error and
+                    what can be done to resolve it, if there
+                    is a solution.</span>
+            </p>
+            <button class="button">Back</button>
+        </div>
+    </div>
+    <div class="component-demo__markup">
+        <div class="component-demo__code">
+            <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Logo</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">IconFeedback</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"error"</span>&gt;</span>
+    Error
+  <span class="hljs-tag">&lt;/<span class="hljs-name">IconFeedback</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">TextBlock</span> <span class="hljs-attr">size</span>=<span class="hljs-string">"small"</span>&gt;</span>
+    Error message content will appear here when required to further explain the type of error and what can be done to resolve it, if there is a solution.
+  <span class="hljs-tag">&lt;/<span class="hljs-name">TextBlock</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Back"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span></pre></div>
+        <div
+            class="component-demo__code">
+            <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo__image"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Company Logo"</span>
+        /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback icon-feedback--error"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ghost-error.svg"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback__icon"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback__label"</span>&gt;</span>Error<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block text-block--small"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span>Error message content will appear here when required
+            to further explain the type of error and what can
+            be done to resolve it, if there is a solution.<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span>&gt;</span>Back<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
+</div>
+</div>
+<div class="component-demo">
+    <div class="component-demo__preview">
+        <div class="card">
+            <div class="org-logo">
+                <img class="org-logo__image" src="ping-logo.svg"
+                    alt="Company Logo" />
+            </div>
+            <div class="icon-feedback icon-feedback--stopped">
+                <img src="ghost-stopped.svg" class="icon-feedback__icon"
+                />
+                <p class="icon-feedback__label">Blocked</p>
+            </div>
+            <p class="text-block text-block--small">
+                <span class="text-block__text">Blocked is a policy enforcement situation where
+                    the user isn’t meeting policy or has violated
+                    policy through repeated attempts at authentication
+                    and failing.</span>
+            </p>
+        </div>
+    </div>
+    <div class="component-demo__markup">
+        <div class="component-demo__code">
+            <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Logo</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">IconFeedback</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"stopped"</span>&gt;</span>
+    Blocked
+  <span class="hljs-tag">&lt;/<span class="hljs-name">IconFeedback</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">TextBlock</span> <span class="hljs-attr">size</span>=<span class="hljs-string">"small"</span>&gt;</span>
+    Blocked is a policy enforcement situation where the user isn’t meeting policy or has violated policy through repeated attempts at authentication and failing.
+  <span class="hljs-tag">&lt;/<span class="hljs-name">TextBlock</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span></pre></div>
+        <div
+            class="component-demo__code">
+            <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo__image"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Company Logo"</span>
+        /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback icon-feedback--stopped"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ghost-stopped.svg"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback__icon"</span>
+        /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback__label"</span>&gt;</span>Blocked<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block text-block--small"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span>Blocked is a policy enforcement situation where the user
+            isn’t meeting policy or has violated policy through
+            repeated attempts at authentication and failing.<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
+</div>
+</div>
+<div class="component-demo">
+    <div class="component-demo__preview">
+        <div class="card">
+            <div class="org-logo">
+                <img class="org-logo__image" src="ping-logo.svg"
+                    alt="Company Logo" />
+            </div>
+            <div class="icon-feedback icon-feedback--stopped">
+                <img src="ghost-stopped.svg" class="icon-feedback__icon"
+                />
+                <p class="icon-feedback__label">Canceled</p>
+            </div>
+            <button class="button">Back</button>
+        </div>
+    </div>
+    <div class="component-demo__markup">
+        <div class="component-demo__code">
+            <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Logo</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">IconFeedback</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"stopped"</span>&gt;</span>
+    Canceled
+  <span class="hljs-tag">&lt;/<span class="hljs-name">IconFeedback</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Back"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span></pre></div>
+        <div
+            class="component-demo__code">
+            <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo__image"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Company Logo"</span>
+        /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback icon-feedback--stopped"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ghost-stopped.svg"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback__icon"</span>
+        /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback__label"</span>&gt;</span>Canceled<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span>&gt;</span>Back<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
+</div>
+</div>
+<div class="component-demo">
+    <div class="component-demo__preview">
+        <div class="card">
+            <div class="org-logo">
+                <img class="org-logo__image" src="ping-logo.svg"
+                    alt="Company Logo" />
+            </div>
+            <div class="icon-feedback icon-feedback--disabled">
+                <img src="ghost-disabled.svg" class="icon-feedback__icon"
+                />
+                <p class="icon-feedback__label">Disabled</p>
+            </div>
+        </div>
+    </div>
+    <div class="component-demo__markup">
+        <div class="component-demo__code">
+            <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Logo</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">IconFeedback</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"disabled"</span>&gt;</span>
+    Disabled
+  <span class="hljs-tag">&lt;/<span class="hljs-name">IconFeedback</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span></pre></div>
+        <div
+            class="component-demo__code">
+            <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo__image"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Company Logo"</span>
+        /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback icon-feedback--disabled"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ghost-disabled.svg"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback__icon"</span>
+        /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback__label"</span>&gt;</span>Disabled<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
+</div>
+</div>
+<div class="component-demo">
+    <div class="component-demo__preview">
+        <div class="card">
+            <div class="org-logo">
+                <img class="org-logo__image" src="ping-logo.svg"
+                    alt="Company Logo" />
+            </div>
+            <p class="text-block">
+                <span class="text-block__text">Enter the passcode you received to complete authentication.</span>
+            </p>
+            <form class="form">
+                <input type="text" class="text-input text-input--primary"
+                    value="012345" />
+                <div class="form-aside">
+                    <p class="text-block">
+                        <span class="text-block__text">SMS sent to:</span>
+                    </p>
+                    <p class="text-block text-block--large">
+                        <span class="text-block__text">+1 415-xxx-xx35</span>
+                    </p>
+                    <button class="button button--tertiary">Change</button>
+                </div>
+                <button class="button button--primary brand-primary-bg">Sign On</button>
+                <button class="button">Resend</button>
+            </form>
+            <div class="modal-overlay">
+                <div class="modal-overlay__content">
+                    <div class="modal-menu">
+                        <button class="modal-menu__button modal-menu__button--selected">
+                            <img class="modal-menu__icon" src="sms.svg"
+                            />
+                            <span>
+                                <span class="modal-menu__label">SMS</span>
+                                <span class="modal-menu__sublabel">+972 3xx-xxx-x03</span>
+                            </span>
+                        </button>
+                        <button class="modal-menu__button">
+                            <img class="modal-menu__icon" src="email.svg"
+                            />
+                            <span>
+                                <span class="modal-menu__label">Email</span>
+                                <span class="modal-menu__sublabel">adxxxx@pingidentity.com</span>
+                            </span>
+                        </button>
+                        <button class="modal-menu__button modal-menu__button--cancel">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="component-demo__markup">
+        <div class="component-demo__code">
+            <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Logo</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">TextBlock</span>&gt;</span>
+    Enter the passcode you received to complete authentication.
+  <span class="hljs-tag">&lt;/<span class="hljs-name">TextBlock</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Form</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">TextInput</span>
+      <span class="hljs-attr">defaultValue</span>=<span class="hljs-string">"012345"</span>
+      <span class="hljs-attr">primary</span>
+     /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">FormAside</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">TextBlock</span>&gt;</span>
+        SMS sent to:
+      <span class="hljs-tag">&lt;/<span class="hljs-name">TextBlock</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">TextBlock</span> <span class="hljs-attr">size</span>=<span class="hljs-string">"large"</span>&gt;</span>
+        +1 415-xxx-xx35
+      <span class="hljs-tag">&lt;/<span class="hljs-name">TextBlock</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+        <span class="hljs-attr">label</span>=<span class="hljs-string">"Change"</span>
+        <span class="hljs-attr">tertiary</span>
+       /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">FormAside</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Sign On"</span>
+      <span class="hljs-attr">primary</span>
+     /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Resend"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Form</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ModalMenu</span> <span class="hljs-attr">options</span>=<span class="hljs-string">{[{</span>"<span class="hljs-attr">id</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">sms</span>","<span class="hljs-attr">label</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">SMS</span>","<span class="hljs-attr">sublabel</span>"<span class="hljs-attr">:</span>"+<span class="hljs-attr">972</span> <span class="hljs-attr">3xx-xxx-x03</span>","<span class="hljs-attr">icon</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">sms</span>","<span class="hljs-attr">selected</span>"<span class="hljs-attr">:true</span>},{"<span class="hljs-attr">id</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">email</span>","<span class="hljs-attr">label</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">Email</span>","<span class="hljs-attr">sublabel</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">adxxxx</span>@<span class="hljs-attr">pingidentity.com</span>","<span class="hljs-attr">icon</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">email</span>"}]} /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span></pre></div>
+        <div
+            class="component-demo__code">
+            <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo__image"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Company Logo"</span>
+        /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span>Enter the passcode you received to complete authentication.<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input text-input--primary"</span>
+            <span class="hljs-attr">value</span>=<span class="hljs-string">"012345"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form-aside"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span>SMS sent to:<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block text-block--large"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span>+1 415-xxx-xx35<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--tertiary"</span>&gt;</span>Change<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--primary brand-primary-bg"</span>&gt;</span>Sign On<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span>&gt;</span>Resend<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"modal-overlay"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"modal-overlay__content"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"modal-menu"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"modal-menu__button modal-menu__button--selected"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"modal-menu__icon"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"sms.svg"</span> /&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"modal-menu__label"</span>&gt;</span>SMS<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"modal-menu__sublabel"</span>&gt;</span>+972 3xx-xxx-x03<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"modal-menu__button"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"modal-menu__icon"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"email.svg"</span>
+                    /&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"modal-menu__label"</span>&gt;</span>Email<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"modal-menu__sublabel"</span>&gt;</span>adxxxx@pingidentity.com<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"modal-menu__button modal-menu__button--cancel"</span>&gt;</span>Cancel<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
+</div>
+</div>
+</div>
+</div>
+    </div>
+</body>
+</html>
