@@ -576,7 +576,8 @@ var Button = function Button(_ref) {
 Button.propTypes = {
     disabled: _propTypes2.default.bool,
     label: _propTypes2.default.string,
-    primary: _propTypes2.default.bool
+    primary: _propTypes2.default.bool,
+    tertiary: _propTypes2.default.bool
 };
 
 exports.default = Button;
@@ -4854,9 +4855,11 @@ var TextInput = function TextInput(_ref) {
 TextInput.propTypes = {
     placeholder: _propTypes2.default.string,
     id: _propTypes2.default.string,
+    defaultValue: _propTypes2.default.string,
     error: _propTypes2.default.bool,
     success: _propTypes2.default.bool,
-    primary: _propTypes2.default.bool
+    primary: _propTypes2.default.bool,
+    value: _propTypes2.default.string
 };
 
 exports.default = TextInput;
@@ -5314,7 +5317,7 @@ var FloatLabel = function FloatLabel(_ref) {
         inputClassName = _ref.inputClassName,
         children = _ref.children;
 
-    var inputClassNames = (0, _classnames2.default)("float-label__input", inputClassName);
+    var inputClassNames = (0, _classnames2.default)('float-label__input', inputClassName);
 
     return _react2.default.createElement(
         'div',
@@ -5381,6 +5384,10 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _classnames = __webpack_require__(2);
 
 var _classnames2 = _interopRequireDefault(_classnames);
@@ -5419,17 +5426,21 @@ var IconFeedback = function IconFeedback(_ref) {
     var type = _ref.type,
         children = _ref.children;
 
-    var classNames = (0, _classnames2.default)("icon-feedback", 'icon-feedback--' + type);
+    var classNames = (0, _classnames2.default)('icon-feedback', 'icon-feedback--' + type);
     return _react2.default.createElement(
         'div',
         { className: classNames },
-        _react2.default.createElement('img', { src: typeIcons[type], className: 'icon-feedback__icon' }),
+        _react2.default.createElement('img', { src: typeIcons[type], className: 'icon-feedback__icon', alt: '' }),
         _react2.default.createElement(
             'p',
             { className: 'icon-feedback__label' },
             children
         )
     );
+};
+
+IconFeedback.propTypes = {
+    type: _propTypes2.default.string
 };
 
 exports.default = IconFeedback;
@@ -5468,8 +5479,8 @@ var _email2 = _interopRequireDefault(_email);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var icons = {
-    "sms": _sms2.default,
-    "email": _email2.default
+    sms: _sms2.default,
+    email: _email2.default
 };
 
 var ModalMenu = function ModalMenu(_ref) {
@@ -5488,11 +5499,11 @@ var ModalMenu = function ModalMenu(_ref) {
                         'button',
                         {
                             key: option.label,
-                            className: (0, _classnames2.default)("modal-menu__button", {
-                                "modal-menu__button--selected": option.selected
+                            className: (0, _classnames2.default)('modal-menu__button', {
+                                'modal-menu__button--selected': option.selected
                             })
                         },
-                        _react2.default.createElement('img', { className: 'modal-menu__icon', src: icons[option.icon] }),
+                        _react2.default.createElement('img', { className: 'modal-menu__icon', src: icons[option.icon], alt: '' }),
                         _react2.default.createElement(
                             'span',
                             null,
@@ -5519,7 +5530,14 @@ var ModalMenu = function ModalMenu(_ref) {
     );
 };
 
-ModalMenu.propTypes = {};
+ModalMenu.propTypes = {
+    options: _propTypes2.default.arrayOf(_propTypes2.default.shape({
+        label: _propTypes2.default.string,
+        sublabel: _propTypes2.default.string,
+        icon: _propTypes2.default.string,
+        selected: _propTypes2.default.bool
+    }))
+};
 
 exports.default = ModalMenu;
 
@@ -5538,6 +5556,10 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _classnames = __webpack_require__(2);
 
 var _classnames2 = _interopRequireDefault(_classnames);
@@ -5548,9 +5570,9 @@ var Stack = function Stack(_ref) {
     var children = _ref.children,
         size = _ref.size;
 
-    var classNames = (0, _classnames2.default)("stack", {
-        "stack--small": size === "small",
-        "stack--xsmall": size === "xsmall"
+    var classNames = (0, _classnames2.default)('stack', {
+        'stack--small': size === 'small',
+        'stack--xsmall': size === 'xsmall'
     });
 
     return _react2.default.createElement(
@@ -5558,6 +5580,10 @@ var Stack = function Stack(_ref) {
         { className: classNames },
         children
     );
+};
+
+Stack.propTypes = {
+    size: _propTypes2.default.string
 };
 
 exports.default = Stack;

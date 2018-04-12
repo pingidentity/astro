@@ -559,6 +559,9 @@
   .text-input--primary {
     padding: 6px 10px 3px 10px;
     text-align: center; }
+    .text-input--primary.text-input--error {
+      padding-right: 10px;
+      background-image: none; }
 
 .tooltip {
   background: #f8f8f8;
