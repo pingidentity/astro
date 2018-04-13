@@ -848,6 +848,8 @@ input[type=file] {
             &.highlighted {
                 background-color: $color-active-blue;
                 color: $color-white;
+                display: inline-block;
+                min-width: 100%;
 
                 &:before {
                     background-color: $color-white;
@@ -908,6 +910,7 @@ input[type=file] {
             display: block;
 
             @include animation(fade-in 0.2s);
+
         }
         .input-container {
             &:last-of-type {
