@@ -289,7 +289,8 @@ class Stateless extends React.Component {
     render() {
         var containerCss = {
             "input-color-picker": true,
-            open: this.props.open
+            open: this.props.open,
+            "color-picker-error": this.props.errorMessage
         };
         containerCss[this.props.className] = !!this.props.className;
 
