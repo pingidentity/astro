@@ -500,13 +500,15 @@ describe("ExpandableRow", function() {
     });
 
     it("stateful: should trigger onDelete callback on click confirm-delete", function() {
+        let onDelete = jest.genMockFunction();
+        
         var component = getComponent({
             stateless: false,
             expanded: true,
             showDelete: true,
             confirmDelete: true,
             showDeleteConfirm: true,
-            onDelete: jest.genMockFunction()
+            onDelete: onDelete
         });
 
         var deleteConfirmDialog = TestUtils.findRenderedDOMNodeWithDataId(component, "details-content");
@@ -744,4 +746,5 @@ describe("ExpandableRow", function() {
 
         expect(callback).toBeCalled();
     });
+
 });
