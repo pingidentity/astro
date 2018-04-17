@@ -503,7 +503,7 @@ class StatelessExpandableRow extends React.Component {
             deleteButton = this.props.deleteButton || (
                 <a data-id={this.props.confirmDelete ? "delete-btn-confirm" : "delete-btn"}
                       className="delete-btn"
-                      onClick={this.props.onDelete} />);
+                      onClick={this.props.onDelete}/>);
         }
 
         var titleClassName = classnames("item-title", this.props.titleClassName);
