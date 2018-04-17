@@ -2,8 +2,8 @@ $font-size-normal: 14px;
 $font-size-primary: 15px;
 $font-size-title: 24px;
 
-$layout-header-height: 46px;
-$header-bg: $color-neutral-10;
+$topnav-height: 46px;
+$topnav-bg: $color-neutral-10;
 
 @mixin displayFlexRow {
     /* stylelint-disable declaration-block-no-duplicate-properties */
@@ -20,8 +20,8 @@ $header-bg: $color-neutral-10;
 .header-bar {
     @include displayFlexRow;
 
-    background: $header-bg;
-    height: $layout-header-height;
+    background: $topnav-bg;
+    height: $topnav-height;
     padding-left: $spacing-md;
     padding-right: $spacing-md;
 
@@ -66,7 +66,7 @@ $header-bg: $color-neutral-10;
     background-size: contain;
     background-repeat: no-repeat;
     background-color: transparent;
-    transform: translateY(($logo-height - $layout-header-height) / 2);
+    transform: translateY(($logo-height - $topnav-height) / 2);
 }
 
 .header-bar__site-logo,
@@ -84,8 +84,8 @@ $header-bg: $color-neutral-10;
 .header-bar__site-title,
 .header-bar__additional-content {
     display: inline-block;
-    height: $layout-header-height;
-    line-height: $layout-header-height + 3;
+    height: $topnav-height;
+    line-height: $topnav-height + 3;
     color: $color-white;
     vertical-align: top;
 }
@@ -151,7 +151,7 @@ $header-bg: $color-neutral-10;
     -ms-flex-direction: row;
     justify-content: center;
     -ms-flex-align: center;
-    line-height: $layout-header-height;
+    line-height: $topnav-height;
     text-align: center;
 }
 

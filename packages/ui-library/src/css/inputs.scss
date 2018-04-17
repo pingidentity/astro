@@ -30,26 +30,6 @@ select {
     }
 }
 
-@mixin input-style {
-    color: $color-input-text;
-    background-color: $color-input-fill;
-    border: 1px solid $color-input-fill;
-    font-size: 14px;
-
-    .modifier_light-inputs & {
-        background-color: $color-white;
-        border: 1px solid $color-strong-neutral-70;
-    }
-}
-
-@mixin input-background {
-    background-color: $color-input-fill;
-
-    .modifier_light-inputs & {
-        background-color: $color-white;
-    }
-}
-
 // Tag styling
 input[type=text],
 input[type=password],

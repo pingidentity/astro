@@ -119,23 +119,26 @@ class Wizard extends React.Component {
         let hasHeaderItems = this.props.headerItems && this.props.headerItems.length > 0;
 
         React.Children.forEach(this.props.children, (child, index) => {
-            const childProps = _.defaults(
-                {
-                    "data-id": child.props["data-id"] || `${this.props["data-id"]}-step`,
-                    active: index === this.props.activeStep,
-                    index: index,
-                    key: index,
-                },
-                child.props
-            );
-            if (index === this.props.activeStep) {
-                activeStep = React.cloneElement(child, childProps);
-            }
+            if (child && typeof(child) === "object" && child.hasOwnProperty("props")) {
 
-            if (child.props.required) {
-                requiredSteps.push(childProps);
-            } else {
-                optionalSteps.push(childProps);
+                const childProps = _.defaults(
+                    {
+                        "data-id": child.props["data-id"] || `${this.props["data-id"]}-step`,
+                        active: index === this.props.activeStep,
+                        index: index,
+                        key: index,
+                    },
+                    child.props
+                );
+                if (index === this.props.activeStep) {
+                    activeStep = React.cloneElement(child, childProps);
+                }
+
+                if (child.props.required) {
+                    requiredSteps.push(childProps);
+                } else {
+                    optionalSteps.push(childProps);
+                }
             }
         });
 
@@ -241,8 +244,9 @@ function Header(props) {
                     return (
                         <div
                             className="wizard__header-details"
-                            key={section.value}
-                            data-id={`${props["data-id"]}-headeritem-${index}`}>
+                            key={index}
+                            data-id={`${props["data-id"]}-headeritem-${index}`}
+                            title={section.value}>
                             <div
                                 className="wizard__header-title"
                                 data-id={`${props["data-id"]}-headeritem-title-${index}`}>

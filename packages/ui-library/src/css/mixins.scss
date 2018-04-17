@@ -81,6 +81,43 @@
     visibility: visible;
 }
 
+@mixin input-style-light {
+    background-color: $color-white;
+    border: 1px solid $color-strong-neutral-70;
+}
+
+@mixin input-background-light {
+    background-color: $color-white;
+}
+
+@mixin input-style {
+    color: $color-input-text;
+    background-color: $color-input-fill;
+    border: 1px solid $color-input-fill;
+    font-size: 14px;
+
+    .modifier_light-inputs & {
+        @include input-style-light;
+    }
+}
+
+@mixin input-background {
+    background-color: $color-input-fill;
+
+    .modifier_light-inputs & {
+        @include input-background-light;
+    }
+}
+
+@mixin style-inputs-light {
+    .input-textfield input,
+    .input-textarea textarea,
+    .input-multivalues .entries {
+        @include input-background-light;
+        @include input-style-light;
+    }
+}
+
 
 // TEXT -------------------------------------------------------------------------------------------
 
