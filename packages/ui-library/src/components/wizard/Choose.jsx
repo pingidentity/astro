@@ -101,7 +101,8 @@ class Choose extends React.Component {
     static defaultProps = {
         "data-id": "choose",
         number: 1,
-        showPulsing: false
+        showPulsing: false,
+        onValueChange: _.noop
     };
 
     _getChoice = () => {
