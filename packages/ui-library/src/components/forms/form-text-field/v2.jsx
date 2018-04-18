@@ -474,7 +474,7 @@ class Stateless extends React.Component {
                         type={inputType}
                         maxLength={this.props.maxLength}
                         name={this.props.name}
-                        value={this.props.value}
+                        value={this.props.value || ""}
                         autoComplete={this.props.autoComplete ? "on" : "off"}
                         disabled={this.props.disabled}
                         autoFocus={this.props.autoFocus}
