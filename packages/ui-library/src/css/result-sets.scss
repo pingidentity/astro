@@ -55,15 +55,10 @@ $expandable-row-gap: 12px;
                 padding-top: 15px;
             }
         }
-        &.has-subtitle,
-        &.has-image {
-            .expanded-content {
-                margin-top: 20px;
-            }
-        }
         .expanded-content {
             position: relative;
             padding: 0 75px 30px 34px;
+            margin-top: 20px;
             min-height: 3 * $button-height - 4px;
         }
         &.expanded-content-scroll {
