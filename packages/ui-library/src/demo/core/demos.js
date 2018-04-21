@@ -169,6 +169,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_forms_FileUploadDemo.jsx.html"
                     },
                     {
+                        label: "File Drop",
+                        demo: require("../components/forms/FileDropDemo"),
+                        pathToDoc: "components/forms/FileDrop.jsx",
+                        pathToSource: "components_forms_FileDrop.jsx.html",
+                        pathToDemoSource: "demo_components_forms_FileUploadDemo.jsx.html"
+                    },
+                    {
                         label: "Selection List",
                         demo: require("../components/forms/SelectionListDemo"),
                         pathToDoc: "components/forms/selection-list/v2.jsx",

@@ -489,3 +489,27 @@
 .icon__graphic {
     padding: 0 8px 0 0;
 }
+
+.icon__rounded {
+    $size: 23px;
+
+    display: inline-block;
+    border-radius: ceil($size / 2);
+    background: $color-elephant;
+    color: $color-white;
+    height: $size;
+    width: $size;
+    text-align: center;
+    vertical-align: middle;
+
+    &:before {
+        transform: translateY(-50%);
+        margin-top: 50%;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    &.icon-check {
+        font-size: 10px;
+    }
+}

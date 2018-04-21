@@ -1263,6 +1263,88 @@ input[type=file] {
     }
 }
 
+.input-filedrop {
+    box-sizing: border-box;
+    position: relative;
+    border: 1px dashed $color-strong-neutral-30;
+    padding: $spacing-lg;
+    text-align: center;
+    height: 95px;
+    background-color: $color-white;
+    color: $color-strong-neutral-20;
+    font-family: $font-pn-light;
+    border-radius: 2px;
+    line-height: 1em;
+
+    label {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0;
+        vertical-align: middle;
+        text-transform: none;
+        font-size: 15px;
+        cursor: pointer;
+        font-family: $font-pn-light;
+    }
+    input[type=file] {
+        opacity: 0;
+        position: absolute;
+        z-index: -1;
+    }
+}
+.input-filedrop--hover,
+.input-filedrop--hover.input-filedrop--selected {
+    background: #e4ecf2;
+}
+.input-filedrop--selected {
+    background: lighten($color-success-green, 40%);
+
+    label {
+        position: relative;
+        display: inline-block;
+        top: auto;
+        bottom: auto;
+        left: auto;
+        right: auto;
+    }
+}
+.input-filedrop__upload-text,
+.input-filedrop__selected-content {
+    @include vertical-align;
+}
+.input-filedrop__upload-text {
+    font-size: 14px;
+    line-height: 1.3em;
+}
+.input-filedrop__selected-content {
+    font-size: 15px;
+}
+.input-filedrop__selected-text {
+    display: inline-block;
+    max-width: 50%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+}
+.input-filedrop__link {
+    color: $color-active-blue;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.input-filedrop__divider {
+    margin: 0 0 0 15px;
+    padding: 0 0 0 15px;
+    border-left: 1px solid $color-strong-neutral-30;
+}
+.input-filedrop__icon {
+    background-color: $color-success;
+    margin: 0 $spacing-md 0 0;
+}
+
 .input-toggle {
     $toggle-height: 24px;
     $toggle-width: 40px;
