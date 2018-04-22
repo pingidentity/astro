@@ -421,41 +421,13 @@ button.ellipsis-loader-button {
             pointer-events: none;
         }
     }
-    &.sel-0 {
-        label {
-            &:nth-of-type(1) {
-                background: $color-timberwolf;
-
-                @include transition($transition);
-            }
-        }
-    }
-    &.sel-1 {
-        label {
-            &:nth-of-type(2) {
-                background: $color-timberwolf;
-
-                @include transition($transition);
-            }
-        }
-    }
-    &.sel-2 {
-        label {
-            &:nth-of-type(3) {
-                background: $color-timberwolf;
-
-                @include transition($transition);
-            }
-        }
-    }
-    &.sel-3 {
-        label {
-            &:nth-of-type(4) {
-                background: $color-timberwolf;
-
-                @include transition($transition);
-            }
-        }
+    &.sel-0 label:nth-of-type(1),
+    &.sel-1 label:nth-of-type(2),
+    &.sel-2 label:nth-of-type(3),
+    &.sel-3 label:nth-of-type(4),
+    &.sel-4 label:nth-of-type(5) {
+        @include transition($transition);
+        background: $color-timberwolf;
     }
 }
 

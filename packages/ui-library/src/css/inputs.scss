@@ -2685,7 +2685,7 @@ $input-width-settings: (
     'width-max': 590px,
     'num-increments': 6,
     'hor-margin': 10px,
-    'vert-margin': 20px
+    'vert-margin': 25px
 );
 $input-width-settings-smallest-default: calc-input-width(
     map-get($input-width-settings, 'width-max'),
