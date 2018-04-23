@@ -128,6 +128,46 @@ describe("Messages", function () {
         expect(messages[0].textContent).toEqual("Test message text html");
     });
 
+    it("Renders progress bar", function () {
+        const component = getComponent({
+            messages: [{ text: "Test message text", progress: { text: "uploading" } }]
+        });
+
+        const messages = TestUtils.findRenderedDOMNodeWithDataId(component, "messages");
+        const progress = TestUtils.findRenderedDOMNodeWithDataId(messages, "messages-message-0-progress");
+
+        expect(progress).toBeDefined();
+        expect(progress).not.toBe(null);
+    });
+
+    it("Renders 100% progress bar", function () {
+        const component = getComponent({
+            messages: [{ text: "Test message text", progress: { percent: 100 } }]
+        });
+
+        const messages = TestUtils.findRenderedDOMNodeWithDataId(component, "messages");
+        const progress = TestUtils.findRenderedDOMNodeWithDataId(messages, "messages-message-0-progress");
+
+        expect(progress).toBeDefined();
+        expect(progress).not.toBe(null);
+    });
+
+    it("Renders progress bar with text template", function () {
+        const component = getComponent({
+            messages: [{
+                text: "Test message text",
+                progress: {
+                    percent: 37,
+                    textTemplate: percent => percent + " per cent"
+                }
+            }]
+        });
+
+        const progressText = TestUtils.findRenderedDOMNodeWithDataId(component, "messages-message-0-progress-text");
+
+        expect(progressText.textContent).toBe("37 per cent");
+    });
+
     it("Component has the class page-messages", function () {
         var component = getComponent();
         var node = ReactDOM.findDOMNode(component);

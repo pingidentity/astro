@@ -651,28 +651,32 @@ $color-grey-minor-1: $color-neutral-30;
     .close {
         $size: 16px;
 
-        position: absolute;
-        top: 13px;
-        right: 10px;
         color: rgba($color-white, 0.7);
         line-height: 1em;
+        margin-left: $spacing-lg;
 
         &:after {
-            font-size: 20px;
             content: '\78';
+            font-size: 20px;
             font-family: 'iconfont';
+            vertical-align: middle;
         }
         &:hover {
             text-decoration: none;
         }
     }
     .message {
+        align-items: center;
+        clear: both;
+        display: flex;
         position: relative;
         overflow: hidden;
-        padding: 12px 50px 9px 40px;
+        padding: $spacing-sm $spacing-sm $spacing-sm $spacing-xl;
         border-bottom: 1px solid rgba($color-black, 0.1);
         font-size: 14px;
         line-height: 1.3;
+        margin: 0 auto;
+        min-width: 75%;
 
         @include animation(fade-in 0.7s);
 
@@ -718,13 +722,62 @@ $color-grey-minor-1: $color-neutral-30;
                 color: $color-active-blue;
             }
         }
+
+        &__text {
+            @include flexbox-grow(1);
+        }
+
+        &__progress {
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+
+            &-icon {
+                font-size: 10px;
+                line-height: 19px;
+                margin-right: $spacing-xs;
+            }
+
+            &-text {
+                font-family: $font-pn-light;
+                font-size: 13px;
+                line-height: 19px;
+                vertical-align: middle;
+            }
+
+            &-border {
+                @include border-radius(2px);
+
+                border: 1px solid $color-white;
+                height: 19px;
+                margin-left: $spacing-md;
+                position: relative;
+                width: 90px;
+            }
+
+            &-bar {
+                background: $color-white;
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 0;
+            }
+        }
+
+        &--minimized {
+            float: right;
+            min-width: 0;
+            transition: min-width 0.2s;
+            justify-content: flex-end;
+        }
     }
     .show {
         .text {
             margin-top: 0;
             border-bottom: 1px solid rgba($color-black, 0.1);
 
-            @include transition(margin-top 0.2s);
+            @include transition(margin-top 0.1s);
         }
     }
 }

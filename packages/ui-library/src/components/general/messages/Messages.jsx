@@ -10,7 +10,7 @@ var React = require("react"),
  * @callback Messages~onRemoveMessage
  * @param {string} [containerId]
  *     The container id
- * @param {number} messageIndex
+ * @param {number|string} messageIndex
  *     Message index to remove
  */
 
@@ -32,11 +32,27 @@ var React = require("react"),
  *     Message type
  * @property {number} timer
  *     Number of milli seconds after which message should be removed
- * @property {number} index
+ * @property {number|string} index
  *     Message index.
  * @property {boolean} isHtml
  *     When true, renders HTML without escaping.
+ * @property {Messages~ProgressSpec}
+ *     Object containing data to show a progress bar in the message.
+ * @property {boolean} minimized
+ *     When true, the message is shown in a minimized form, which hides
+ *     everything but the progress.
  */
+
+/**
+ * @typedef Messages~ProgressSpec
+ * @property {string} text
+ *      If set, provides the text for the message next to the progress bar.
+ * @property {function} textTemplate
+ *      If text isn't set and this is, this function accepts a single argument
+ *      of the current progress percentage and returns the text that should be
+ *      shown next to the progress bar.
+ * @property {number} percent
+ *      The current value 0-100 of the progress bar.
 
 /**
  * @class Messages
@@ -110,7 +126,9 @@ module.exports = class extends React.Component {
                         <Message key={i} index={i} message={item}
                             onI18n={this.props.onI18n}
                             onRemoveMessage={this.props.onRemoveMessage}
-                            defaultTimeout={this.props.defaultMessageTimeout} />);
+                            defaultTimeout={this.props.defaultMessageTimeout}
+                            data-id={this.props["data-id"]+"-message-"+i}
+                            />);
                 }.bind(this))
             }
             </div>
@@ -150,20 +168,52 @@ class Message extends React.Component {
         }
     }
 
+    _renderProgress = () => {
+        let progress = this.props.message.progress;
+        let percent = progress.percent || 50;
+
+        let text = progress.text ||
+            (progress.textTemplate && progress.textTemplate(percent)) ||
+                `${progress.percent}%`;
+
+        return (
+            <div className="message__progress" data-id={this.props["data-id"]+"-progress"}>
+                {percent >= 100 && <div className="message__progress-icon icon-check" />}
+                <div className="message__progress-text" data-id={this.props["data-id"]+"-progress-text"}>{text}</div>
+                {percent < 100 &&
+                    <div className="message__progress-border">
+                        <div
+                            className="message__progress-bar"
+                            style={{
+                                width: `${percent}%`
+                            }}
+                        />
+                    </div>
+                }
+            </div>
+        );
+    }
+
     render() {
         var text = this.props.message.text || this.props.onI18n(this.props.message.key, this.props.message.params);
-        var classes = classnames("message show", this.props.message.type);
+        var classes = classnames("message show", this.props.message.type, {
+            "message--minimized": this.props.message.minimized
+        });
 
         // Allow html messages to be rendered, this is dangerous
         // as it could allow XSS, so messages have to be explicitly
         // flagged as being html.
         if (this.props.message.isHtml) {
-            text = <span dangerouslySetInnerHTML={{ __html: text }} /> ;
+            text = <span className="message__text" dangerouslySetInnerHTML={{ __html: text }} /> ;
+        } else {
+            text = <span className="message__text">{text}</span>;
         }
 
         return (
-            <div className={classes}>
-                {text}<a className="close" onClick={this._handleRemove}></a>
+            <div className={classes} data-id={this.props["data-id"]}>
+                {!this.props.message.minimized && text}
+                {this.props.message.progress && this._renderProgress()}
+                <a className="close" onClick={this._handleRemove}></a>
             </div>
         );
     }

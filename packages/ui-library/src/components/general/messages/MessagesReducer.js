@@ -9,6 +9,10 @@ function deleteMessageAt (state, containerId, index) {
     return update.unset(state, [containerId, index]);
 }
 
+function updateProgressAt (state, containerId, index, percent) {
+    return update.set(state, [containerId, index, "progress", "percent"], percent);
+}
+
 module.exports = function (state, action) {
     //each action is responsible for cloning the state before modifying
     var nextState = state;
@@ -35,6 +39,20 @@ module.exports = function (state, action) {
         case Actions.Types.SHIFT_MESSAGE:
             if (nextState.messages.length > 0) {
                 nextState = deleteMessageAt(nextState, action.containerId, 0);
+            }
+            break;
+        case Actions.Types.UPDATE_PROGRESS:
+            var index = _.findIndex(nextState[action.containerId], { index: action.messageId });
+
+            if (index > -1) {
+                nextState = updateProgressAt(nextState, action.containerId, index, action.percent);
+            }
+            break;
+        case Actions.Types.UPDATE_MINIMIZED:
+            var index = _.findIndex(nextState[action.containerId], { index: action.messageId });
+
+            if (index > -1) {
+                nextState = update.set(nextState, [action.containerId, index, "minimized"], action.minimized);
             }
             break;
         default:

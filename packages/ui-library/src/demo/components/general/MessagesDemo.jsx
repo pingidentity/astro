@@ -1,39 +1,97 @@
 var React = require("react"),
     Redux = require("redux"),
-    Messages = require("./../../../components/general/messages/");
+    Messages = require("./../../../components/general/messages/"),
+    uuid = require("uuid");
 
 /**
-* @name MessagesDemo
-* @memberof Messages
-* @desc A demo for Messages
-*/
+ * @name MessagesDemo
+ * @memberof Messages
+ * @desc A demo for Messages
+ */
 class MessagesDemo extends React.Component {
     _addSuccessMessage = () => {
-        this.actions.addMessage("New Success Message Added at " + (new Date()).toString(),
-                                Messages.MessageTypes.SUCCESS);
+        this.actions.addMessage("New Success Message Added at " + new Date().toString(), Messages.MessageTypes.SUCCESS);
     };
 
     _addErrorMessage = () => {
-        this.actions.addMessage("New Error Message Added at " + (new Date()).toString(),
-                                Messages.MessageTypes.WARNING);
+        this.actions.addMessage("New Error Message Added at " + new Date().toString(), Messages.MessageTypes.WARNING);
     };
 
     _addWarningMessage = () => {
-        this.actions.addMessage("New Warning Message Added at " + (new Date()).toString(),
-                                Messages.MessageTypes.NOTICE);
+        this.actions.addMessage("New Warning Message Added at " + new Date().toString(), Messages.MessageTypes.NOTICE);
     };
 
     _addInfoMessage = () => {
-        this.actions.addMessage("New Info Message Added at " + (new Date()).toString(),
-                                Messages.MessageTypes.FEATURE);
+        this.actions.addMessage("New Info Message Added at " + new Date().toString(), Messages.MessageTypes.FEATURE);
     };
 
     _addHtmlMessage = () => {
         this.actions.addMessage({
-            message: "New <strong>bolded</strong> Message Added at " + (new Date()).toString(),
+            message: "New <strong>bolded</strong> Message Added at " + new Date().toString(),
             status: Messages.MessageTypes.FEATURE,
             isHtml: true
         });
+    };
+
+    _progressText = percent => (
+        percent >= 100
+            ? `Upload Complete!`
+            : `Upload ${percent}% Complete`
+    );
+
+    _addProgressMessage = () => {
+        let mId = uuid.v4();
+
+        this.actions.addMessage({
+            message: "New Progress Message Added at " + new Date().toString(),
+            status: Messages.MessageTypes.SUCCESS,
+            removeAfterMs: 0,
+            progress: {
+                textTemplate: this._progressText,
+                percent: 25
+            },
+            messageId: mId
+        });
+        setTimeout(
+            () => this.actions.updateProgress(mId, 45),
+            1000
+        );
+        setTimeout(
+            () => this.actions.updateProgress(mId, 75),
+            2000
+        );
+        setTimeout(
+            () => this.actions.updateProgress(mId, 100),
+            4000
+        );
+    };
+
+    _addMinimizedProgressMessage = () => {
+        let mId = uuid.v4();
+
+        this.actions.addMessage({
+            message: "New Progress Message Added at " + new Date().toString(),
+            status: Messages.MessageTypes.SUCCESS,
+            removeAfterMs: 0,
+            progress: {
+                textTemplate: this._progressText,
+                percent: 25
+            },
+            messageId: mId,
+            minimizeAfterMS: 1500
+        });
+        setTimeout(
+            () => this.actions.updateProgress(mId, 45),
+            1000
+        );
+        setTimeout(
+            () => this.actions.updateProgress(mId, 75),
+            2000
+        );
+        setTimeout(
+            () => this.actions.updateProgress(mId, 100),
+            4000
+        );
     };
 
     componentWillMount() {
@@ -43,19 +101,23 @@ class MessagesDemo extends React.Component {
     render() {
         return (
             <div>
-                <p>For messages that will appear in full width pages like Login or Change Password pages, add
-                'containerType=&#123;Messages.ContainerTypes.FULL&#125;'. For messages that will appear
-                in Modals or Wizards, add 'className=&#123;Messages.ContainerTypes.MODAL&#125;'.For messages that will
-                appear in pages with a left-nav, do not set the containerType prop.</p>
+                <p>
+                    For messages that will appear in full width pages like Login or Change Password pages, add
+                    'containerType=&#123;Messages.ContainerTypes.FULL&#125;'. For messages that will appear in Modals or
+                    Wizards, add 'className=&#123;Messages.ContainerTypes.MODAL&#125;'.For messages that will appear in
+                    pages with a left-nav, do not set the containerType prop.
+                </p>
 
-                <Messages messages={this.props.messages}
-                    onRemoveMessage={this.actions.removeAt} />
+                <Messages messages={this.props.messages} onRemoveMessage={this.actions.removeAt} />
                 <br />
-                <button onClick={this._addSuccessMessage} >Add success message</button>
-                <button onClick={this._addErrorMessage} >Add error message</button>
-                <button onClick={this._addWarningMessage} >Add warning message</button>
-                <button onClick={this._addInfoMessage} >Add info message</button>
-                <button onClick={this._addHtmlMessage} >Add HTML message</button>
+                <button onClick={this._addSuccessMessage}>Add success message</button>
+                <button onClick={this._addErrorMessage}>Add error message</button>
+                <button onClick={this._addWarningMessage}>Add warning message</button>
+                <button onClick={this._addInfoMessage}>Add info message</button>
+                <hr className="hr" />
+                <button onClick={this._addHtmlMessage}>Add HTML message</button>
+                <button onClick={this._addProgressMessage}>Add progress message</button>
+                <button onClick={this._addMinimizedProgressMessage}>Add minimized message</button>
             </div>
         );
     }

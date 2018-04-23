@@ -17,7 +17,9 @@ exports.Types = keyMirror({
     ADD_MESSAGE: null,
     REMOVE_MESSAGE: null,
     REMOVE_AT: null,
-    SHIFT_MESSAGE: null
+    SHIFT_MESSAGE: null,
+    UPDATE_PROGRESS: null,
+    UPDATE_MINIMIZED: null
 });
 
 /**
@@ -67,12 +69,13 @@ exports.pushMessage = function (containerId, text, status, timer, index, isHtml)
  * @param {object} [options]
  *     If you pass an object as the only argument, you can set the other arguments
  *     as named properties. You can also use this to set the isHtml flag to true
- *     so you can use HTML in your message.
+ *     so you can use HTML in your message. Other properties you can set with this:
+ *     progress, minimized, and minimizeAfterMS.
  * @returns {function}
  *     The action
  */
 exports.addMessage = function (containerId, message, status, removeAfterMs) {
-    let isHtml;
+    let isHtml, progress, messageId, minimized, minimizeAfterMS = 0;
 
     if ((arguments.length === 1 && typeof(containerId) !== "object") ||
         (arguments.length === 2 && Constants.MessageTypeValues.indexOf(message) > -1) ||
@@ -88,13 +91,19 @@ exports.addMessage = function (containerId, message, status, removeAfterMs) {
         status = arguments[0].status;
         removeAfterMs = arguments[0].removeAfterMs;
         isHtml = arguments[0].isHtml;
+        progress = arguments[0].progress;
+        messageId = arguments[0].messageId;
+        minimized = arguments[0].minimized;
+        minimizeAfterMS = arguments[0].minimizeAfterMS;
     }
 
     removeAfterMs = typeof(removeAfterMs) === "undefined" ? 5000 : removeAfterMs;
 
     return function (dispatch) {
-        var timer;
-        var messageId = exports.lastId += 1;
+        var timer = removeAfterMs;
+        if (messageId === undefined) {
+            messageId = exports.lastId += 1;
+        }
 
         if (removeAfterMs > 0) {
             timer = window.setTimeout(function (cid, mid) {
@@ -102,7 +111,23 @@ exports.addMessage = function (containerId, message, status, removeAfterMs) {
             }.bind(null, containerId, messageId), removeAfterMs);
         }
 
-        dispatch(exports.pushMessage(containerId, message, status, timer, messageId, isHtml));
+        if (minimizeAfterMS > 0) {
+            window.setTimeout(function (cid, mid) {
+                dispatch(exports.minimizeMessage(cid, mid));
+            }.bind(null, containerId, messageId), minimizeAfterMS);
+        }
+
+        dispatch({
+            containerId,
+            type: exports.Types.ADD_MESSAGE,
+            status: status || Constants.MessageTypes.SUCCESS,
+            text: message,
+            timer,
+            index: messageId,
+            isHtml,
+            progress,
+            minimized
+        });
     };
 };
 
@@ -155,5 +180,51 @@ exports.removeMessage = function (containerId, messageId) {
         type: exports.Types.REMOVE_MESSAGE,
         containerId: containerId,
         messageId: messageId
+    };
+};
+
+/**
+ * @alias Actions.updateProgress
+ * @memberof Messages
+ * @desc update the percentage for the progress meter
+ * @param {string} [containerId="messages"]
+ *     The grouping of the message
+ * @param {number} messageId
+ *     The id of the message to update
+ * @returns {percent}
+ *     The action
+ */
+exports.updateProgress = function (containerId, messageId, percent) {
+    if (arguments.length === 2) {
+        percent = messageId;
+        messageId = containerId;
+        containerId = "messages";
+    }
+
+    return {
+        type: exports.Types.UPDATE_PROGRESS,
+        containerId, messageId, percent
+    };
+};
+
+/**
+ * @alias Actions.minimizeMessage
+ * @memberof Messages
+ * @desc updates an existing message to be minimized
+ * @param {string} [containerId="messages"]
+ *     The grouping of the message
+ * @param {number} messageId
+ *     The id of the message to update
+ */
+exports.minimizeMessage = function (containerId, messageId) {
+    if (arguments.length === 1) {
+        messageId = containerId;
+        containerId = "messages";
+    }
+
+    return {
+        type: exports.Types.UPDATE_MINIMIZED,
+        minimized: true,
+        containerId, messageId
     };
 };

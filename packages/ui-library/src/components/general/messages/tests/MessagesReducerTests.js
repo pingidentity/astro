@@ -70,6 +70,43 @@ describe("Messages", function () {
         }]);
     });
 
+    it("pushes messages", function () {
+        var store = getStore();
+        store.dispatch(Actions.pushMessage(
+            "messages",
+            "hello world",
+            "success",
+            5000,
+            0
+        ));
+        store.dispatch(Actions.pushMessage(
+            "messages",
+            "hello world",
+            undefined,
+            5000,
+            1
+        ));
+
+        expect(store.getState().messages).toEqual([
+            {
+                containerId: "messages",
+                status: "success",
+                type: "success",
+                text: "hello world",
+                index: 0,
+                timer: 5000
+            },
+            {
+                containerId: "messages",
+                status: "success",
+                type: "success",
+                text: "hello world",
+                index: 1,
+                timer: 5000
+            }
+        ]);
+    });
+
     it("adds message with comp id", function () {
         var store = getStore();
         store.dispatch(Actions.addMessage("mycontainer", "hello world"));
@@ -150,7 +187,7 @@ describe("Messages", function () {
         store.dispatch(Actions.addMessage("message 2"));
         store.dispatch(Actions.addMessage("message 3"));
 
-        store.dispatch(Actions.removeAt(1));
+        store.dispatch(Actions.removeAt("messages", 1));
 
         expect(_.pluck(store.getState().messages, "text")).toEqual(["message 1", "message 3"]);
     });
@@ -168,6 +205,10 @@ describe("Messages", function () {
 
         expect(_.pluck(store.getState().messages, "text")).toEqual(["message 1"]);
         expect(_.pluck(store.getState().container1, "text")).toEqual([]);
+
+        store.dispatch(Actions.removeMessage(1));
+
+        expect(_.pluck(store.getState().messages, "text")).toEqual([]);
     });
 
     it("Shifts first message out of array", function () {
@@ -188,5 +229,111 @@ describe("Messages", function () {
         store.dispatch(Actions.removeAt(1));
 
         expect(store.getState().messages.length).toBe(1);
+    });
+
+    it("Adds a message with a progress bar that is minimized", function () {
+        const store = getStore();
+
+        const progress = {
+            percent: 30,
+            text: "You've got 30 left"
+        };
+
+        store.dispatch(Actions.addMessage({
+            containerId: "mycontainer",
+            message: "progress...",
+            status: "info",
+            minimized: true,
+            removeAfterMs: 0,
+            progress
+        }));
+
+        expect(store.getState().mycontainer).toEqual([{
+            containerId: "mycontainer",
+            status: "info",
+            type: "info",
+            minimized: true,
+            text: "progress...",
+            timer: 0,
+            index: 1,
+            progress
+        }]);
+    });
+
+    it("Adds a message with a progress bar that we update", function () {
+        const store = getStore();
+
+        const progress = {
+            percent: 30,
+            text: "You've got 30 left"
+        };
+
+        store.dispatch(Actions.addMessage({
+            message: "progress...",
+            messageId: "new-message",
+            status: "info",
+            removeAfterMs: 0,
+            minimizeAfterMS: 500,
+            progress
+        }));
+
+        expect(store.getState().messages).toEqual([{
+            containerId: "messages",
+            status: "info",
+            type: "info",
+            text: "progress...",
+            timer: 0,
+            index: "new-message",
+            progress
+        }]);
+
+        store.dispatch(Actions.updateProgress("new-message", 99));
+
+        expect(store.getState().messages[0].progress).toEqual(
+            {
+                percent: 99,
+                text: "You've got 30 left"
+            }
+        );
+
+        store.dispatch(Actions.minimizeMessage("new-message"));
+
+        expect(store.getState().messages[0].minimized).toEqual(true);
+
+        expect(window.setTimeout.mock.calls[0][1]).toBe(500);
+
+        //trigger the cleanup function
+        window.setTimeout.mock.calls[0][0]();
+    });
+
+    it("Updates a progress bar and minimizes the message", function () {
+        const store = getStore();
+
+        const progress = {
+            percent: 30,
+            text: "You've got 30 left"
+        };
+
+        store.dispatch(Actions.addMessage({
+            containerId: "container",
+            message: "progress...",
+            messageId: "new-message",
+            status: "info",
+            removeAfterMs: 0,
+            progress
+        }));
+
+        store.dispatch(Actions.updateProgress("container", "new-message", 99));
+
+        expect(store.getState().container[0].progress).toEqual(
+            {
+                percent: 99,
+                text: "You've got 30 left"
+            }
+        );
+
+        store.dispatch(Actions.minimizeMessage("container", "new-message"));
+
+        expect(store.getState().container[0].minimized).toEqual(true);
     });
 });
