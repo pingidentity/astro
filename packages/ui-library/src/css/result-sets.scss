@@ -30,7 +30,7 @@ $expandable-row-gap: 12px;
     $button-bottom: 6px;
 
     position: relative;
-    margin: 20px 0 0;
+    margin: 20px 0 0 0;
 
     .item {
         position: relative;
@@ -46,7 +46,7 @@ $expandable-row-gap: 12px;
             position: relative;
             overflow: hidden;
             box-sizing: border-box;
-            height: $expandable-row-height;
+            min-height: $expandable-row-height;
             padding: 23px 0 0 $spacing-lg;
             margin: 0 45px 0 0;
         }
@@ -57,8 +57,7 @@ $expandable-row-gap: 12px;
         }
         .expanded-content {
             position: relative;
-            padding: 0 75px 30px 34px;
-            margin-top: 20px;
+            padding: $spacing-md 75px $spacing-xl $spacing-lg;
             min-height: 3 * $button-height - 4px;
         }
         &.expanded-content-scroll {

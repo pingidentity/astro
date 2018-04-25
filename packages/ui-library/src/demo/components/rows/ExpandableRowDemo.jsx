@@ -94,8 +94,12 @@ class ExpandableRowDemo extends React.Component {
                 <ExpandableRow
                     stateless={false}
                     title="Basic Row"
-                    subtitle="Row Subtitle"
-                />
+                    subtitle="Row Subtitle">
+                    <p>
+                    Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
+                    sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
+                    </p>
+                </ExpandableRow>
                 <ExpandableRow
                     stateless={false}
                     title="Expanded Row with Row Message"
