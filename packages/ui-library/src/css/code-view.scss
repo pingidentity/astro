@@ -1,0 +1,16 @@
+.code-view {
+    max-height: 400px;
+    overflow: scroll;
+    color: $color-midnight;
+    background-color: $color-input-fill;
+    border-color: $color-input-fill;
+}
+
+.code-view__font {
+    font-family: 'Consolas, Monaco', 'Andale Mono', monospace;
+    font-size: 14px;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    line-height: 1.5;
+}

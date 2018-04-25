@@ -1,5 +1,6 @@
 var React = require("react");
 
+
 class Markup extends React.Component {
     _extractRenderCode = () => {
         //get all matches for 'render: function() {...}'
@@ -30,7 +31,6 @@ class Markup extends React.Component {
         if (!this.props.content) {
             return null;
         }
-
         return (
             <div className="markup-wrapper">
                 <pre className="language-markup">

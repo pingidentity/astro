@@ -467,6 +467,13 @@ module.exports = [
                 icon: "globe",
                 children: [
                     {
+                        label: "Code View",
+                        demo: require("../components/general/CodeViewDemo.jsx"),
+                        pathToDoc: "components/general/CodeView.jsx",
+                        pathToSource: "components_general_CodeView.jsx.html",
+                        pathToDemoSource: "demo_components_general_CodeViewDemo.jsx.html"
+                    },
+                    {
                         label: "Color Picker",
                         demo: require("../components/general/ColorPickerDemo"),
                         pathToDoc: "components/general/ColorPicker.jsx",
