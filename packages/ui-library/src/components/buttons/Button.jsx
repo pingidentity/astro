@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
+import EllipsisLoader from "../general/EllipsisLoader";
 
 /**
  * @class Button
- * @desc button componen
+ * @desc button component
  *
  * @param {string} [className]
  *     Extra CSS class(s) applied to the top-level HTML container.
@@ -19,6 +20,8 @@ import classnames from "classnames";
  * @param {boolean} [disabled=false]
  *     Button will not function when true
  * @param {string} [inline]
+ *  @param {boolean} loading
+ *       While true, loading animation will be shown
  * @example
  *  <Button
  *      label="Button"
@@ -37,18 +40,22 @@ class Button extends Component {
         className: PropTypes.string,
         label: PropTypes.string,
         iconName: PropTypes.string,
-        inline: PropTypes.bool
+        inline: PropTypes.bool,
+        loading: PropTypes.bool
     };
 
     static defaultProps = {
         "data-id": "button",
         disabled: false,
+        loading: false
     };
 
 
     render() {
-        const classes = classnames(this.props.className, this.props.iconName, {
-            inline: this.props.inline
+        const classes = classnames(this.props.className, this.props.iconName, "ellipsis-loader-button",{
+            inline: this.props.inline,
+            loading: this.props.loading,
+            disabled: this.props.disabled
         });
 
         return(
@@ -60,6 +67,7 @@ class Button extends Component {
                 >
                 {this.props.label}
                 {this.props.children}
+                <EllipsisLoader loading={this.props.loading}/>
             </button>
         );
     }

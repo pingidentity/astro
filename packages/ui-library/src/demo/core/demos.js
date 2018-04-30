@@ -249,7 +249,6 @@ module.exports = [
                         pathToDoc: "components/buttons/Button.jsx",
                         pathToSource: "components_buttons_Button.jsx.html",
                         pathToDemoSource: "demo_components_buttons_ButtonDemo.jsx.html"
-
                     },
                     {
                         label: "Tile Selector",

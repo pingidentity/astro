@@ -1,7 +1,37 @@
 import React, { Component } from "react";
 import Button from "../../../components/buttons/Button";
 
+/**
+ * @name ButtonDemo
+ * @memberof Button
+ * @desc A demo for Button
+ */
+
 class ButtonsDemo extends Component {
+
+    state = {
+        loading1: false,
+        loading2: false
+    };
+
+    numDemos = 3;
+
+    componentWillMount() {
+        var i;
+
+        for (i=1; i<=this.numDemos; i+=1) {
+            this["_toggleLoadingButton" + i] = this._toggleLoadingButton.bind(null, i);
+        }
+    }
+
+    _toggleLoadingButton = (i) => {
+        var newState = {};
+
+        newState["loading" + i] = !this.state["loading" + i];
+
+        this.setState(newState);
+    };
+
     render() {
         return (
             <div>
@@ -10,22 +40,22 @@ class ButtonsDemo extends Component {
                 />
                 <Button
                     label="Primary"
-                    iconName="primary"
+                    className="primary"
                 />
                 <Button
                     label="Secondary"
                 />
                 <Button
                     label="Success"
-                    iconName="success"
+                    className="success"
                 />
                 <Button
                     label="Cancel"
-                    iconName="cancel"
+                    className="cancel"
                 />
                 <Button
                     label="Danger"
-                    iconName="danger"
+                    className="danger"
                 />
                 <Button
                     label="Inline"
@@ -64,6 +94,26 @@ class ButtonsDemo extends Component {
                 <Button
                     iconName="next"
                     inline
+                />
+                <br /> <br />
+                <Button
+                    label="Ellipsis Loader Primary Button"
+                    className="primary"
+                    loading={this.state.loading1}
+                    onClick={this._toggleLoadingButton1}
+                />
+                <Button
+                    label="Ellipsis Loader Secondary Button"
+                    className="secondary"
+                    loading={this.state.loading2}
+                    onClick={this._toggleLoadingButton2}
+                />
+                <Button
+                    label="Inline Ellipsis Button"
+                    className="secondary"
+                    inline
+                    loading={this.state.loading3}
+                    onClick={this._toggleLoadingButton3}
                 />
             </div>
         );
