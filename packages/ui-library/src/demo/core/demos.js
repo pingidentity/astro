@@ -244,6 +244,14 @@ module.exports = [
                 icon: "settings",
                 children: [
                     {
+                        label: "Button",
+                        demo: require("../components/buttons/ButtonDemo"),
+                        pathToDoc: "components/buttons/Button.jsx",
+                        pathToSource: "components_buttons_Button.jsx.html",
+                        pathToDemoSource: "demo_components_buttons_ButtonDemo.jsx.html"
+
+                    },
+                    {
                         label: "Tile Selector",
                         demo: require("../components/buttons/TileSelectorDemo"),
                         pathToDoc: "components/buttons/TileSelector.jsx",
