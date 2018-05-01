@@ -72,7 +72,7 @@ module.exports = [
                     {
                         label: "Toggle",
                         demo: require("../components/forms/ToggleDemo"),
-                        pathToDoc: "components/forms/toggle/v2.jsx",
+                        pathToDoc: "components/forms/Toggle.jsx",
                         pathToSource: "components_forms_form-toggle_v2.jsx.html",
                         pathToDemoSource: "demo_components_forms_ToggleDemo.jsx.html"
                     },
@@ -108,21 +108,21 @@ module.exports = [
                     {
                         label: "Text Field",
                         demo: require("../components/forms/FormTextFieldDemo"),
-                        pathToDoc: "components/forms/form-text-field/v2.jsx",
+                        pathToDoc: "components/forms/FormTextField.jsx",
                         pathToSource: "components_forms_form-text-field_v2.jsx.html",
                         pathToDemoSource: "demo_components_forms_FormTextFieldDemo.jsx.html"
                     },
                     {
                         label: "Integer Field",
                         demo: require("../components/forms/FormIntegerFieldDemo"),
-                        pathToDoc: "components/forms/form-integer-field/v2.jsx",
+                        pathToDoc: "components/forms/FormIntegerField.jsx",
                         pathToSource: "components_forms_form-integer-field_v2.jsx.html",
                         pathToDemoSource: "demo_components_forms_FormIntegerFieldDemo.jsx.html"
                     },
                     {
                         label: "Text Area",
                         demo: require("../components/forms/FormTextAreaDemo"),
-                        pathToDoc: "components/forms/form-text-area/v2.jsx",
+                        pathToDoc: "components/forms/FormTextArea.jsx",
                         pathToSource: "components_forms_form-text-area_v2.jsx.html",
                         pathToDemoSource: "demo_components_forms_FormTextAreaDemo.jsx.html"
                     },
@@ -190,7 +190,7 @@ module.exports = [
                     {
                         label: "Selection List",
                         demo: require("../components/forms/SelectionListDemo"),
-                        pathToDoc: "components/forms/selection-list/v2.jsx",
+                        pathToDoc: "components/forms/SelectionList.jsx",
                         // SelectionList v2 is split into separate source files, so pass all as array.
                         // First item in array will be displayed in full source iframe, rest will be linked to above the iframe.
                         pathToSource: [
@@ -210,14 +210,14 @@ module.exports = [
                     {
                         label: "Time Zone",
                         demo: require("../components/forms/TimeZoneDemo"),
-                        pathToDoc: "components/forms/TimeZone.jsx",
-                        pathToSource: "components_forms_TimeZone.jsx.html",
+                        pathToDoc: "components/forms/FormTimeZone.jsx",
+                        pathToSource: "components_forms_FormTimeZone.jsx.html",
                         pathToDemoSource: "demo_components_forms_TimeZoneDemo.jsx.html"
                     },
                     {
                         label: "Search Bar",
                         demo: require("../components/forms/FormSearchBarDemo"),
-                        pathToDoc: "components/forms/FormSearchBar.jsx",
+                        pathToDoc: "components/forms/SearchBar.jsx",
                         pathToSource: "components_forms_FormSearchBar.jsx.html",
                         pathToDemoSource: "demo_components_forms_FormSearchBarDemo.jsx.html"
                     },
@@ -414,7 +414,7 @@ module.exports = [
                     {
                         label: "Drag-N-Drop Row",
                         demo: require("../components/rows/DragDropRowDemo"),
-                        pathToDoc: "components/rows/DragDropRow.jsx",
+                        pathToDoc: "components/rows/DragDrop.jsx",
                         pathToSource: "components_rows_DragDropRow.jsx.html",
                         pathToDemoSource: "demo_components_rows_DragDropRowDemo.jsx.html"
                     },
@@ -483,7 +483,7 @@ module.exports = [
                     {
                         label: "Context Close Button",
                         demo: require("../components/general/ContextCloseButtonDemo"),
-                        pathToDoc: "components/general/context-close-button/v2.jsx",
+                        pathToDoc: "components/general/ContextCloseButton.jsx",
                         pathToSource: "components_general_context-close-button_v2.jsx.html",
                         pathToDemoSource: "demo_components_general_ContextCloseButtonDemo.jsx.html"
                     },

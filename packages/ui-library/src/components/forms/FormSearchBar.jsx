@@ -4,6 +4,24 @@ import classnames from "classnames";
 import FormSearchBox from "./FormSearchBox";
 import CollapsibleLink from "../general/CollapsibleLink";
 
+/**
+ * @class SearchBar
+ * @desc A search bar with an expandable container for filters
+ *
+ * @param {string} [data-id="searchbar"]
+ *     To define the base "data-id" value for top-level HTML container.
+ * @param {object} [formSearchBoxProps]
+ *     Object of props that are passed on the child SearchBox component
+ *
+ * @param {object} [strings]
+ *     Strings to override content.
+ *
+ * @param {boolean} [open=false]
+ *     If true, filter container is open.
+ * @param {function} [onToggle]
+ *     Callback to be triggered when trigger is clicked.
+ **/
+
 class SearchBar extends React.Component {
 
     constructor(props) {
