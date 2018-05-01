@@ -1283,7 +1283,6 @@ input[type=file] {
         left: 0;
         right: 0;
         margin: 0;
-        vertical-align: middle;
         text-transform: none;
         font-size: 15px;
         cursor: pointer;
@@ -1295,10 +1294,12 @@ input[type=file] {
         z-index: -1;
     }
 }
+
 .input-filedrop--hover,
 .input-filedrop--hover.input-filedrop--selected {
     background: #e4ecf2;
 }
+
 .input-filedrop--selected {
     background: lighten($color-success-green, 40%);
 
@@ -1311,17 +1312,21 @@ input[type=file] {
         right: auto;
     }
 }
+
 .input-filedrop__upload-text,
 .input-filedrop__selected-content {
     @include vertical-align;
 }
+
 .input-filedrop__upload-text {
     font-size: 14px;
     line-height: 1.3em;
 }
+
 .input-filedrop__selected-content {
     font-size: 15px;
 }
+
 .input-filedrop__selected-text {
     display: inline-block;
     max-width: 50%;
@@ -1330,16 +1335,19 @@ input[type=file] {
     text-overflow: ellipsis;
     vertical-align: middle;
 }
+
 .input-filedrop__link {
     color: $color-active-blue;
     vertical-align: middle;
     cursor: pointer;
 }
+
 .input-filedrop__divider {
     margin: 0 0 0 15px;
     padding: 0 0 0 15px;
     border-left: 1px solid $color-strong-neutral-30;
 }
+
 .input-filedrop__icon {
     background-color: $color-success;
     margin: 0 $spacing-md 0 0;

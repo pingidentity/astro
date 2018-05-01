@@ -42,8 +42,20 @@ module.exports = [
                 icon: "details"
             },
             {
-                label: "CSS Tips & Tricks",
-                demo: require("../components/tutorials/cssTips"),
+                label: "Icons",
+                demo: require("../components/tutorials/Icons"),
+                fullscreen: true,
+                icon: "details"
+            },
+            {
+                label: "Colors",
+                demo: require("../components/tutorials/Colors"),
+                fullscreen: true,
+                icon: "details"
+            },
+            {
+                label: "Inputs",
+                demo: require("../components/tutorials/Inputs"),
                 fullscreen: true,
                 icon: "details"
             }
