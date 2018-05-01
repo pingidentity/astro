@@ -1,6 +1,7 @@
 var PropTypes = require("prop-types");
 var React = require("react");
 var Utils = require("../../util/Utils");
+var Link = require("../general/Link");
 var ReactTooltip = require("react-tooltip");
 var classnames = require("classnames");
 var _ = require("underscore");
@@ -42,6 +43,9 @@ var Placements = {
  * @param {any} hintText
  *     Provides the text that will appear in the hint.
  *
+ * @param {string} link
+ *     Provides a URL for a "More on this topic" link at the bottom of the tooltip.
+ *
  *  @example
  *     <HelpHint className="short-tooltip right" hintText="My first HelpHint!">SomeTextWithHelp</HelpHint>
  */
@@ -57,7 +61,8 @@ class HelpHint extends React.Component {
             Placements.LEFT,
             Placements.RIGHT
         ]),
-        hintText: PropTypes.any.isRequired
+        hintText: PropTypes.any.isRequired,
+        link: PropTypes.string
     };
 
     static defaultProps = {
@@ -72,12 +77,12 @@ class HelpHint extends React.Component {
     };
 
     _getPlacement = () => {
-        var classNames = this.props.className,
-            placement = "right";
+        const { classNames, placement: propsPlacement } = this.props;
+        let placement = "right";
 
         // use newer placement prop if present
-        if (this.props.placement) {
-            placement = this.props.placement;
+        if (propsPlacement) {
+            placement = propsPlacement;
 
         // otherwise try parsing it from the className prop
         // since react tooltip only has 4 postions, precedence is given to top/bottom over left/right
@@ -106,39 +111,49 @@ class HelpHint extends React.Component {
         }
     }
 
+    maybeRenderLink() {
+        const { link } = this.props;
+        return link && <Link title="More on this topic" url={link} icon="info"/>;
+    }
+
     show = () => {
         ReactTooltip.show(this.target);
     };
 
-    render() {
-        var iconName = this.props.lock ? "icon-lock" : "icon-help",
-            uid = _.uniqueId("rtt_"),
-            display;
+    targetClassName = classnames(this.props.className, "help-tooltip-target");
+    tooltipClassName = this.props.link ? classnames("tooltip-text", "tooltip-text-link") : "tooltip-text";
 
-        if (this.props.children) {
-            display = this.props.children;
-        } else {
-            display = (<span className={iconName} data-id={this.props["data-id"] + "-icon"} />);
-        }
+    render() {
+        const {
+            ["data-id"]: dataId,
+            children
+        } = this.props;
+
+        const iconName = this.props.lock ? "icon-lock" : "icon-help",
+            uid = _.uniqueId("rtt_"),
+            display = children
+                ? children
+                : <span className={iconName} data-id={dataId + "-icon"} />;
 
         return (
-            <div className="help-tooltip" data-id={this.props["data-id"]}>
+            <div className="help-tooltip" data-id={dataId}>
                 <div
-                    data-id={this.props["data-id"] + "-target"}
+                    data-id={dataId + "-target"}
                     className={classnames(this.props.className, "help-tooltip-target")}
                     onClick={this._handleClick}
                     data-tip={true}
                     data-for={uid}
-                    ref={function (target) { this.target = target; }.bind(this)}>
+                    ref={((target) => { this.target = target; }).bind(this)}>
                     {display}
                 </div>
                 <ReactTooltip
                     id={uid}
                     place={this._getPlacement()}
-                    className="tooltip-text"
+                    className={this.tooltipClassName}
                     effect="solid"
                     delayHide={this.props.delayHide}>
                     {this.props.hintText}
+                    {this.maybeRenderLink()}
                 </ReactTooltip>
             </div>
         );

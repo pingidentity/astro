@@ -67,6 +67,16 @@ class HelpHintDemo extends React.Component {
                     placement="right"
                     hintText="Right placement"
                 />
+
+                <br /><br /><br />
+                <FormLabel value="Help Hint with Link" className="detached" />
+                <HelpHint
+                    data-id="helphint-more"
+                    hintText="Help hint text"
+                    placement="bottom"
+                    link="#"
+                />
+
             </div>
         );
     }

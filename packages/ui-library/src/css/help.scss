@@ -49,6 +49,33 @@
         &.type-dark {
             @include bg-styles($color-midnight);
         }
+        &.tooltip-text-link {
+            &:hover {
+                visibility: visible;
+                @include opacity(1);
+            }
+            a {
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+        }
+        .content-link {
+            font-weight: bold;
+            &::before {
+                content: "";
+                height: 1px;
+                background-color: $color-white;
+                display: inline-block;
+                margin: 10px 0 8px;
+                position: relative;
+                width: 100%;
+            }
+            .icon-info {
+                color: $color-white;
+            }
+        }
         a {
             color: $color-white;
             text-decoration: underline;

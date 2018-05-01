@@ -14,7 +14,9 @@ var React = require("react"),
  * @param {string} [title]
  *          title for Link
  * @param {string} [url]
- *          CSS class name for Link
+ *          URL for Link
+ * @param {string} [target]
+ *          Target for Link
  * @param {string} [icon]
  *          Icon name for Link
  * @param {string} [count]
@@ -54,6 +56,7 @@ var Link = function (props) {
         <div data-id={props["data-id"]} className="content-link">
             <a
                 href={props.url}
+                target={props.target}
                 className={linkCss}
                 onClick={_handleClick}>
 
@@ -74,6 +77,7 @@ Link.propTypes = {
     icon: PropTypes.string,
     count: PropTypes.string,
     url: PropTypes.string,
+    target: PropTypes.string,
     title: PropTypes.string,
     disabled: PropTypes.bool,
     onClick: PropTypes.func,
@@ -83,7 +87,8 @@ Link.propTypes = {
 Link.defaultProps = {
     "data-id": "content-link",
     disabled: false,
-    className: ""
+    className: "",
+    target: "_self"
 };
 
 module.exports = Link;

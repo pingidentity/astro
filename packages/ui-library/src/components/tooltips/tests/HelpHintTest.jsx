@@ -11,6 +11,7 @@ describe("HelpHint", function () {
     var text = "test help text!";
     var classValue = "short-tooltip";
     var label = "this other text";
+    var link = "#";
     var component;
     var div;
     // var tooltipDiv;
@@ -129,4 +130,13 @@ describe("HelpHint", function () {
         }).toThrow(expectedError);
     });
 
+    it("renders a link when prop 'link' is pass in", function () {
+        component = ReactTestUtils.renderIntoDocument(
+            <HelpHint hintText={text} className={classValue} link={link} />
+        );
+
+        var element = TestUtils.findRenderedDOMNodeWithClass(component, "content-link");
+
+        expect(element).toBeDefined();
+    });
 });
