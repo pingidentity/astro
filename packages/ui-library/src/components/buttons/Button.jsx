@@ -2,11 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import EllipsisLoader from "../general/EllipsisLoader";
+import _ from "underscore";
 
 /**
  * @class Button
  * @desc button component
  *
+ * @param {string} [type]
+ *      css class applied to html
  * @param {string} [className]
  *     Extra CSS class(s) applied to the top-level HTML container.
  * @param {string} [data-id="button"]
@@ -25,7 +28,7 @@ import EllipsisLoader from "../general/EllipsisLoader";
  * @example
  *  <Button
  *      label="Button"
- *      iconName="Danger">
+ *      type="Danger">
  *  </Button>
  *
  */
@@ -41,34 +44,46 @@ class Button extends Component {
         label: PropTypes.string,
         iconName: PropTypes.string,
         inline: PropTypes.bool,
-        loading: PropTypes.bool
+        loading: PropTypes.bool,
+        type: PropTypes.string,
+        submit: PropTypes.bool,
+        href: PropTypes.string,
+        target: PropTypes.string,
     };
 
     static defaultProps = {
         "data-id": "button",
         disabled: false,
-        loading: false
+        loading: false,
+        submit: false,
     };
 
 
     render() {
-        const classes = classnames(this.props.className, this.props.iconName, "ellipsis-loader-button",{
+        const classes = classnames("button", this.props.className, this.props.iconName,{
             inline: this.props.inline,
             loading: this.props.loading,
-            disabled: this.props.disabled
+            disabled: this.props.disabled,
+            "ellipsis-loader-button": this.props.loading,
+            [this.props.type]: _.indexOf(["primary", "success", "cancel", "danger"], this.props.type) !== -1
         });
 
+        const TagName = this.props.href ? "a" : "button";
+
         return(
-            <button
+            <TagName
                 className = {classes}
                 data-id={this.props["data-id"]}
                 onClick={this.props.onClick}
                 disabled={this.props.disabled}
+                type={this.props.submit ? "submit" : "button"}
+                href={this.props.href}
+                target={this.props.target}
                 >
                 {this.props.label}
                 {this.props.children}
                 <EllipsisLoader loading={this.props.loading}/>
-            </button>
+            </TagName>
         );
     }
 }

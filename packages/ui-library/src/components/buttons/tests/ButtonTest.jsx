@@ -22,11 +22,23 @@ describe("Button", function () {
     }
 
     it("rendered component with data-id=button", function () {
-        let component = getComponent();
+        let component = getComponent({
+            submit: true
+        });
 
         let element = TestUtils.findRenderedDOMNodeWithDataId(component, componentId);
 
-        expect(ReactTestUtils.isDOMComponent(element)).toBeDefined();
+        expect(ReactTestUtils.isDOMComponent(element)).toBeTruthy();
+    });
+
+    it("renders href tag with 'a' ", function () {
+        let component = getComponent({
+            href: "cnn.com"
+        });
+
+        let element = TestUtils.findRenderedDOMNodeWithTag(component, "a");
+
+        expect(ReactTestUtils.isDOMComponent(element)).toBeTruthy();
     });
 
 
@@ -41,5 +53,6 @@ describe("Button", function () {
         ReactTestUtils.Simulate.click(button);
         expect(onClick).toBeCalled();
     });
+
 
 });

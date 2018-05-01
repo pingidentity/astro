@@ -37,25 +37,23 @@ class ButtonsDemo extends Component {
             <div>
                 <Button
                     label="Button"
+                    submit
                 />
                 <Button
                     label="Primary"
-                    className="primary"
-                />
-                <Button
-                    label="Secondary"
+                    type="primary"
                 />
                 <Button
                     label="Success"
-                    className="success"
+                    type="success"
                 />
                 <Button
                     label="Cancel"
-                    className="cancel"
+                    type="cancel"
                 />
                 <Button
                     label="Danger"
-                    className="danger"
+                    type="danger"
                 />
                 <Button
                     label="Inline"
@@ -98,22 +96,27 @@ class ButtonsDemo extends Component {
                 <br /> <br />
                 <Button
                     label="Ellipsis Loader Primary Button"
-                    className="primary"
+                    type="primary"
                     loading={this.state.loading1}
                     onClick={this._toggleLoadingButton1}
                 />
                 <Button
                     label="Ellipsis Loader Secondary Button"
-                    className="secondary"
+                    type="secondary"
                     loading={this.state.loading2}
                     onClick={this._toggleLoadingButton2}
                 />
                 <Button
                     label="Inline Ellipsis Button"
-                    className="secondary"
+                    type="secondary"
                     inline
                     loading={this.state.loading3}
                     onClick={this._toggleLoadingButton3}
+                />
+                <Button
+                    label="Documentation"
+                    href="/build-doc/ui-library/3.5.0-SNAPSHOT/index.html"
+                    target="_blank"
                 />
             </div>
         );
