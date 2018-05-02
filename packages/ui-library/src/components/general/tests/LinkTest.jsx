@@ -15,13 +15,13 @@ describe("Link", function () {
 
     it("renders title when title is passed", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            <Link title="Link Name" url="#" icon="cog" />
+            <Link title="Link Name" url="#" />
         );
 
         var element = TestUtils.findRenderedDOMNodeWithDataId(component, "title");
         expect(element).toBeDefined();
     });
-    
+
     it("render component with classname passed", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Link title="Link Name" url="#" icon="cog" className="test-link" />
@@ -35,7 +35,7 @@ describe("Link", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Link title="Link Name" url="#" count="2" data-id="test-link" />
         );
-        
+
         var element = TestUtils.findRenderedDOMNodeWithDataId(component, "test-link");
         expect(element).toBeDefined();
     });
@@ -48,7 +48,7 @@ describe("Link", function () {
         var element = TestUtils.findRenderedDOMNodeWithDataId(component, "content-link");
         expect(element).toBeDefined();
     });
-        
+
     it("disabled will not do anything for clicks", function () {
         var callback = jest.genMockFunction(),
             component = ReactTestUtils.renderIntoDocument(
@@ -60,7 +60,7 @@ describe("Link", function () {
         ReactTestUtils.Simulate.click(element);
         expect(callback).not.toBeCalled();
     });
-    
+
     it("render component with icon name passed", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Link title="Link Name" url="#" icon="cog" className="test-link" />
@@ -69,7 +69,7 @@ describe("Link", function () {
         var element = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "icon-cog");
         expect(element).toBeDefined();
     });
-    
+
     it("render component with count passed", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Link title="Link Name" url="#" count="2" />
@@ -78,7 +78,7 @@ describe("Link", function () {
         var element = ReactTestUtils.scryRenderedDOMComponentsWithClass(component, "count");
         expect(element).toBeDefined();
     });
-    
+
     it("render component for click event", function () {
         var callback = jest.genMockFunction();
         var component = ReactTestUtils.renderIntoDocument(

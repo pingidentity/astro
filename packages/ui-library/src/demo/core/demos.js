@@ -523,6 +523,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_general_IndentDemo.jsx.html"
                     },
                     {
+                        label: "Link",
+                        demo: require("../components/general/LinkDemo"),
+                        pathToDoc: "components/general/Link.jsx",
+                        pathToSource: "components_general_Link.jsx.html",
+                        pathToDemoSource: "demo_components_general_LinkDemo.jsx.html"
+                    },
+                    {
                         label: "Masked Value",
                         demo: require("../components/general/MaskedValueDemo"),
                         pathToDoc: "components/general/MaskedValue.jsx",

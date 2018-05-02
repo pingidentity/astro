@@ -40,18 +40,39 @@ var React = require("react"),
  *
  */
 
-var Link = function (props) {
-    var _handleClick = function (event) {
-        if (props.disabled) {
-            return;
-        }
-        if (props.onClick) {
-            props.onClick(event);
+const Link = (props) => {
+    const {
+            count,
+            disabled,
+            icon,
+            onClick,
+            title
+          } = props;
+
+    const _handleClick = (event) => {
+        if (!disabled && onClick) {
+            onClick(event);
         }
     };
-    var linkCss = classnames(props.className, {
-        disabled: props.disabled
+
+    const linkCss = classnames(props.className, {
+        disabled
     });
+
+    const _renderTitle = () => {
+        if (icon) {
+            return <Icon iconName={icon}>{title}</Icon>;
+        }
+        else if (count) {
+            return [
+                <span className="count">{count}</span>,
+                title
+            ];
+        } else {
+            return title;
+        }
+    };
+
     return (
         <div data-id={props["data-id"]} className="content-link">
             <a
@@ -59,14 +80,7 @@ var Link = function (props) {
                 target={props.target}
                 className={linkCss}
                 onClick={_handleClick}>
-
-                {props.icon && (
-                    <Icon iconName={props.icon}>{props.title}</Icon>
-                )}
-                {props.count && [
-                    <span className="count">{props.count}</span>,
-                    props.title
-                ]}
+                { _renderTitle() }
             </a>
         </div>
     );
