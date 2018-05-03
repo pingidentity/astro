@@ -1,6 +1,8 @@
 var React = require("react"),
     Section = require("../../../components/general/Section");
 
+import Button from "../../../components/buttons/Button";
+
 /**
 * @name SectionDemo
 * @memberof Section
@@ -55,8 +57,8 @@ class SectionDemo extends React.Component {
                     title="Section with accessories"
                     stateless={false}
                     accessories={[
-                        <button className="inline edit"/>,
-                        <button className="inline delete"/>
+                        <Button inline iconName="edit"/>,
+                        <Button inline iconName="delete"/>
                     ]}>
                     {this._getContent()}
                 </Section>
@@ -89,8 +91,8 @@ class SectionDemo extends React.Component {
                         condensed={true}
                         title="Section with accessories"
                         accessories={[
-                            <button className="inline edit"/>,
-                            <button className="inline delete"/>
+                            <Button inline iconName="edit"/>,
+                            <Button inline iconName="delete"/>
                         ]}>
                         {this._getContent()}
                     </Section>

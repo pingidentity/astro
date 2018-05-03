@@ -7,6 +7,7 @@ var React = require("react"),
     callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutsideOfContainer,
     Utils = require("../../util/Utils");
 
+import Button from "../buttons/Button";
 /**
  * @callback DetailsTooltip~onToggle
  **/
@@ -195,14 +196,13 @@ class DetailsTooltipStateless extends React.Component {
         }
 
         return (
-            <button
-                type="button"
+            <Button
                 data-id={dataId}
-                className="cancel"
+                type="cancel"
                 onClick={value}
                 key={label}>
                 {label}
-            </button>
+            </Button>
         );
     };
 
@@ -217,14 +217,13 @@ class DetailsTooltipStateless extends React.Component {
         }
 
         return (
-            <button
-                type="button"
+            <Button
                 data-id={dataId}
-                className="primary"
+                type="primary"
                 onClick={value}
                 key={label}>
                 {label}
-            </button>
+            </Button>
         );
     };
 

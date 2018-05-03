@@ -1,6 +1,7 @@
 var React = require("react"),
     FileUpload = require("../../../components/forms/file-upload").v2,
-    DetailsTooltip = require("../../../components/tooltips/DetailsTooltip");
+    DetailsTooltip = require("../../../components/tooltips/DetailsTooltip"),
+    Button = require("../../../components/buttons/Button");
 
 /**
 * @name FileUploadDemo
@@ -169,13 +170,13 @@ class FileUploadDemo extends React.Component {
                             />
                         </div>
                         <div className="button-group" data-id="delete-confirmation">
-                            <button
-                                type="button"
+                            <Button
+                                label="Button"
                                 data-id="confirm-action"
-                                className="primary"
+                                inline
                                 onClick={this._toggleTooltip} >
                                 Confirm
-                            </button>
+                            </Button>
                             <br />
                             <a className="cancel" onClick={this._toggleTooltip}>Cancel</a>
                         </div>

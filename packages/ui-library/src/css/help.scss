@@ -52,6 +52,7 @@
         &.tooltip-text-link {
             &:hover {
                 visibility: visible;
+
                 @include opacity(1);
             }
             a {
@@ -63,8 +64,8 @@
         }
         .content-link {
             font-weight: bold;
-            &::before {
-                content: "";
+            &:before {
+                content: '';
                 height: 1px;
                 background-color: $color-white;
                 display: inline-block;

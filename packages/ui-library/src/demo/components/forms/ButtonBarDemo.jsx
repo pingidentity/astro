@@ -2,6 +2,8 @@
 var React = require("react"),
     ButtonBar = require("../../../components/forms/ButtonBar");
 
+import Button from "../../../components/buttons/Button";
+
 /**
 * @name ButtonBarDemo
 * @memberof ButtonBar
@@ -70,11 +72,11 @@ class ButtonBarDemo extends React.Component {
 
         return (
             <div>
-                <button onClick={this._toggleBar}>Set "visible" prop to {toggleButtonText}</button>
+                <Button onClick={this._toggleBar}>Set "visible" prop to {toggleButtonText}</Button>
                 <br /><br />
-                <button onClick={this._toggleSaving}>Set "saving" prop to {saveButtonSaving}</button>
+                <Button onClick={this._toggleSaving}>Set "saving" prop to {saveButtonSaving}</Button>
                 <br /><br />
-                <button onClick={this._toggleDisabled}>Set "saveDisabled" prop to {saveButtonStatus}</button>
+                <Button onClick={this._toggleDisabled}>Set "saveDisabled" prop to {saveButtonStatus}</Button>
                 <br /><br />
                 Demo status: &nbsp; <i>{this.state.statusText}</i>
 

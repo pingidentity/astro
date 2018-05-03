@@ -5,6 +5,7 @@ var React = require("react"),
     HelpHint = require("../../tooltips/HelpHint"),
     Statuses = require("./ExpandableRow").Statuses;
 
+
 /**
  * @class Status
  * @memberof ExpandableRow

@@ -4,7 +4,8 @@ var React = require("react"),
     CancelTooltip = require("./../tooltips/CancelTooltip"),
     EllipsisLoaderButton = require("./../general/EllipsisLoaderButton"),
     Translator = require("../../util/i18n/Translator.js"),
-    classnames = require("classnames");
+    classnames = require("classnames"),
+    Button = require("../buttons/Button");
 
 /**
 * @callback ButtonBar~onCancel
@@ -118,14 +119,14 @@ class ButtonBar extends React.Component {
         );
 
         return (
-            <button
+            <Button
                 data-id={this.props["data-id"] + "-cancel"}
                 className={cancelClassName}
                 onClick={this.props.onCancel}
                 disabled={this.props.enableSavingAnimation}
-                type="button">
+                >
                 {this.props.cancelText || Translator.translate("cancel")}
-            </button>
+            </Button>
         );
     };
 
@@ -176,14 +177,14 @@ class ButtonBar extends React.Component {
                 className={classnames(this.props.className, containerClassName)}>
                 {this.props.children}
                 {this.props.discardText && this.props.onDiscard && (
-                    <button
+                    <Button
                         data-id={this.props["data-id"] + "-discard"}
                         className={discardClassName}
                         onClick={this.props.onDiscard}
                         disabled={this.props.enableSavingAnimation}
-                        type="button">
+                        >
                         {discardText}
-                    </button>
+                    </Button>
                 )}
                 {this.props.cancelText && this.props.onCancel && this._renderCancelButton()}
                 <EllipsisLoaderButton

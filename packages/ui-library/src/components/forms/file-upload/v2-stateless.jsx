@@ -3,7 +3,8 @@ var React = require("react"),
     ReactDOM = require("react-dom"),
     classnames = require("classnames"),
     FormLabel = require("../FormLabel"),
-    FormError = require("../FormError");
+    FormError = require("../FormError"),
+    Button = require("../../buttons/Button");
 
 /**
  * @name FileUploadStateless
@@ -78,9 +79,9 @@ module.exports = class extends React.Component {
                         labelMaxFileSize={this.props.labelMaxFileSize}
                         labelAcceptedFileTypes={this.props.labelAcceptedFileTypes}
                     />
-                    <button className="inline choose">
+                    <Button inline className="choose">
                         {(fileSelected && this.props.labelSelectOther) || this.props.labelSelect}
-                    </button>
+                    </Button>
                     {this.props.errorMessage && (
                         <FormError.Icon data-id={this.props["data-id"] + "-errormessage-icon"} />
                     )}

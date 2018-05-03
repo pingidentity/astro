@@ -5,6 +5,7 @@ var PropTypes = require("prop-types");
 var React = require("react"),
     _ = require("underscore"),
     Utils = require("../../util/Utils"),
+    Button = require("../buttons/Button"),
     Modal = require("./Modal");
 
 /**
@@ -461,14 +462,14 @@ class ModalActivator extends React.Component {
             );
         } else if (this.props.buttonLabel) {
             activator = (
-                <button data-id={this.props["data-id"]}
+                <Button data-id={this.props["data-id"]}
                         className={this.props.buttonLabelClassName}
                         onClick={this.props.onOpen}
                         title={this.props.buttonLabel}
                         disabled={this.props.disabled}
-                        type="button">
+                    >
                     {this.props.buttonLabel}
-                </button>
+                </Button>
             );
         }
 

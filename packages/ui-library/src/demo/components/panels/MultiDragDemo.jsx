@@ -14,6 +14,7 @@ var React = require("react"),
     dragScroll = require("../../../util/dragScroll"),
     _ = require("underscore");
 
+import Button from "../../../components/buttons/Button";
 /**
 * @name MultiDragDemo
 * @memberof MultiDrag
@@ -63,10 +64,10 @@ class Row extends React.Component {
 
     _getButton = () => {
         if (this.props.column === 0) {
-            return <button className="inline plus" data-id="row-button-add" onClick={this._handleAdd} type="button" />;
+            return <Button inline iconName="plus" data-id="row-button-add" onClick={this._handleAdd} />;
         }
 
-        return (<button className="inline remove"
+        return (<Button inline iconName="remove"
                     data-id="row-button-remove"
                     onClick={this._handleRemove}
                     type="button" />

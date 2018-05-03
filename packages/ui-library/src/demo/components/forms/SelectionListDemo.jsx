@@ -5,6 +5,7 @@ var React = require("react"),
     SelectionFilterLabel = require("../../../components/forms/SelectionFilterLabel"),
     DetailsTooltip = require("../../../components/tooltips/DetailsTooltip");
 
+import Button from "../../../components/buttons/Button";
 
 var testIcon = <span className="icon-cog inline-icon"></span>;
 var testImage = <img src="./favicon.png" />;
@@ -133,9 +134,9 @@ class SelectionListDemo extends React.Component {
                     Selected Radio ID = {this.state.singleSelectId2}
                 </p>
                 <p>
-                    <button onClick={this._toggleRequired} className="inline">
+                    <Button onClick={this._toggleRequired} inline>
                         Toggle Required Text
-                    </button>
+                    </Button>
                 </p>
                 <SelectionList
                     data-id="radio-demo-1"

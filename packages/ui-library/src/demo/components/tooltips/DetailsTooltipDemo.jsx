@@ -1,7 +1,7 @@
 var React = require("react");
 var _ = require("underscore");
 var DetailsTooltip = require("../../../components/tooltips/DetailsTooltip");
-
+import Button from "../../../components/buttons/Button";
 /**
 * @name DetailsTooltipDemo
 * @memberof DetailsTooltip
@@ -93,13 +93,12 @@ class DetailsTooltipDemo extends React.Component {
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
                     <div className="button-group" data-id="delete-confirmation">
-                        <button
-                                type="button"
+                        <Button
                                 data-id="confirm-action"
-                                className="primary"
+                                type="primary"
                                 onClick={this._handleConfirm1} >
                             Confirm
-                        </button>
+                        </Button>
                         <br />
                         <a className="cancel" onClick={this._handleCancel1}>Cancel</a>
                     </div>
@@ -120,13 +119,12 @@ class DetailsTooltipDemo extends React.Component {
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
                     <div className="button-group" data-id="delete-confirmation">
-                        <button
-                                type="button"
+                        <Button
                                 data-id="confirm-action"
-                                className="primary"
+                                type="primary"
                                 onClick={this._handleConfirm2} >
                             Confirm
-                        </button>
+                        </Button>
                         <br />
                         <a className="cancel" onClick={this._handleCancel2}>Cancel</a>
                     </div>
@@ -148,13 +146,12 @@ class DetailsTooltipDemo extends React.Component {
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
                     <div className="button-group" data-id="delete-confirmation">
-                        <button
-                                type="button"
+                        <Button
                                 data-id="confirm-action"
-                                className="primary"
+                                type="primary"
                                 onClick={this._handleConfirm3} >
                             Confirm
-                        </button>
+                        </Button>
                         <br />
                         <a className="cancel" onClick={this._handleCancel3}>Cancel</a>
                     </div>
@@ -175,13 +172,12 @@ class DetailsTooltipDemo extends React.Component {
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
                     <div className="button-group" data-id="delete-confirmation">
-                        <button
-                                type="button"
+                        <Button
                                 data-id="confirm-action"
-                                className="primary"
+                                type="primary"
                                 onClick={this._handleConfirm4} >
                             Confirm
-                        </button>
+                        </Button>
                         <br />
                         <a className="cancel" onClick={this._handleCancel4}>Cancel</a>
                     </div>
@@ -204,12 +200,12 @@ class DetailsTooltipDemo extends React.Component {
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
                     <div className="button-group" data-id="delete-confirmation">
-                        <button
+                        <Button
                             data-id="confirm-action"
-                            className="primary"
+                            type="primary"
                             onClick={this._handleConfirm5} >
                             Confirm
-                        </button>
+                        </Button>
                         <br />
                         <a className="cancel" onClick={this._handleCancel5}>Cancel</a>
                     </div>
@@ -230,18 +226,18 @@ class DetailsTooltipDemo extends React.Component {
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
                     <div className="button-group" data-id="delete-confirmation">
-                        <button
+                        <Button
                             data-id="confirm-action"
-                            className="cancel"
+                            type="cancel"
                             onClick={this._handleDiscard6} >
                             Discard Changes
-                        </button>
-                        <button
+                        </Button>
+                        <Button
                             data-id="confirm-action"
-                            className="primary"
+                            type="primary"
                             onClick={this._handleConfirm6} >
                             Confirm
-                        </button>
+                        </Button>
                         <br />
                         <a className="cancel" onClick={this._handleCancel6}>Cancel</a>
                     </div>
@@ -262,18 +258,18 @@ class DetailsTooltipDemo extends React.Component {
                         sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
                     </p>
                     <div className="button-group" data-id="delete-confirmation">
-                        <button
+                        <Button
                             data-id="confirm-action"
-                            className="cancel"
+                            type="cancel"
                             onClick={this._handleDiscard7} >
                             Discard Changes
-                        </button>
-                        <button
+                        </Button>
+                        <Button
                             data-id="confirm-action"
-                            className="primary"
+                            type="primary"
                             onClick={this._handleConfirm7} >
                             Confirm
-                        </button>
+                        </Button>
                         <br />
                         <a className="cancel" onClick={this._handleCancel7}>Cancel</a>
                     </div>

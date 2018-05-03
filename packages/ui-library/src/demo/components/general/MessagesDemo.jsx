@@ -3,6 +3,8 @@ var React = require("react"),
     Messages = require("./../../../components/general/messages/"),
     uuid = require("uuid");
 
+import Button from "../../../components/buttons/Button";
+
 /**
  * @name MessagesDemo
  * @memberof Messages
@@ -110,14 +112,14 @@ class MessagesDemo extends React.Component {
 
                 <Messages messages={this.props.messages} onRemoveMessage={this.actions.removeAt} />
                 <br />
-                <button onClick={this._addSuccessMessage}>Add success message</button>
-                <button onClick={this._addErrorMessage}>Add error message</button>
-                <button onClick={this._addWarningMessage}>Add warning message</button>
-                <button onClick={this._addInfoMessage}>Add info message</button>
+                <Button onClick={this._addSuccessMessage}>Add success message</Button>
+                <Button onClick={this._addErrorMessage}>Add error message</Button>
+                <Button onClick={this._addWarningMessage}>Add warning message</Button>
+                <Button onClick={this._addInfoMessage}>Add info message</Button>
                 <hr className="hr" />
-                <button onClick={this._addHtmlMessage}>Add HTML message</button>
-                <button onClick={this._addProgressMessage}>Add progress message</button>
-                <button onClick={this._addMinimizedProgressMessage}>Add minimized message</button>
+                <Button onClick={this._addHtmlMessage}>Add HTML message</Button>
+                <Button onClick={this._addProgressMessage}>Add progress message</Button>
+                <Button onClick={this._addMinimizedProgressMessage}>Add minimized message</Button>
             </div>
         );
     }

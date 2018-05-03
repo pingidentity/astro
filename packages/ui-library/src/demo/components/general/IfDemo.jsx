@@ -1,5 +1,6 @@
 var React = require("react");
 var If = require("./../../../components/general/If");
+import Button from "../../../components/buttons/Button";
 
 /**
 * @name IfDemo
@@ -22,7 +23,7 @@ class IfDemo extends React.Component {
                     Toggle set to: { (this.state.toggle) ? "true" : "false" }
                 </p>
                 <p>
-                    <button onClick={this._toggle}>Toggle if condition</button>
+                    <Button onClick={this._toggle}>Toggle if condition</Button>
                 </p>
                 <If test={this.state.toggle}>
                     <div>

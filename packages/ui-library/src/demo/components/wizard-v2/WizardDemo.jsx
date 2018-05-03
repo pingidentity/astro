@@ -5,6 +5,7 @@ import FormTextField from "../../../components/forms/form-text-field";
 import FormTextArea from "../../../components/forms/form-text-area";
 import FileUpload from "../../../components/forms/file-upload";
 import Multivalues from "../../../components/forms/Multivalues";
+import Button from "../../../components/buttons/Button";
 import _ from "underscore";
 
 import DataTableScreen from "./screens/DataTableScreen";
@@ -191,7 +192,7 @@ class WizardDemo extends React.Component {
         ];
 
         return ([
-            <button key="wizard-button" onClick={this._onOpen}>Show Wizard Example</button>,
+            <Button key="wizard-button" onClick={this._onOpen}>Show Wizard Example</Button>,
             (this.state.open &&
                 <Wizard
                     key="wizard"

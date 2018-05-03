@@ -6,6 +6,7 @@ var React = require("react"),
     classnames = require("classnames"),
     If = require("../general/If"),
     Utils = require("../../util/Utils"),
+    Button = require("../buttons/Button"),
     MessageTypes = require("../general/messages/MessagesConstants").MessageTypes;
 
 /**
@@ -78,7 +79,7 @@ class InlineMessage extends React.Component {
                 </div>
                 <If test={ this._showAction() } >
                     <div data-id="inline-message-btn" className="inline-message-btn">
-                        <button type="button" className="inline" onClick={this._onClick }>{this.props.label}</button>
+                        <Button inline onClick={this._onClick }>{this.props.label}</Button>
                     </div>
                 </If>
             </div>

@@ -1,6 +1,7 @@
 var PropTypes = require("prop-types");
 var React = require("react");
 var css = require("classnames");
+var Button = require("../../buttons/Button");
 
 /**
  * @callback ContextCloseButton~onClick
@@ -73,13 +74,12 @@ class ContextCloseButton extends React.Component {
 
         return (
             this.props.show ? (
-                <button data-id={this.props["data-id"]}
-                        type="button"
+                <Button data-id={this.props["data-id"]}
                         className={css(styles)}
                         onClick={this._handleClick}
                         disabled={this.props.disabled} >
                     {this.props.value}
-                </button>
+                </Button>
             ) : null
         );
     }

@@ -1,6 +1,8 @@
 var React = require("react");
 var Modal = require("./../../../components/general/Modal");
 
+import Button from "../../../components/buttons/Button";
+
 /**
 * @name ModalDemo
 * @memberof Modal
@@ -127,7 +129,7 @@ class ModalDemo extends React.Component {
                              This also removes the close button at the top of the modal, and centers the header.
                         </div>
                         <div className="button-group">
-                            <button className="primary" onClick={this._toggle7}>Save</button><br/>
+                            <Button type="primary" onClick={this._toggle7}>Save</Button><br/>
                             <a className="cancel" onClick={this._toggle7}>Cancel</a>
                         </div>
                     </Modal>
@@ -151,8 +153,8 @@ class ModalDemo extends React.Component {
                                 euismod. Etiam molestie quis nunc eu ultrices.
                             </p>
                             <div className="buttons">
-                                <button type="button" onClick={this._toggle4}>Nope</button>
-                                <button type="button" className="primary" onClick={this._toggle4}>Yup</button>
+                                <Button onClick={this._toggle4}>Nope</Button>
+                                <Button type="primary" onClick={this._toggle4}>Yup</Button>
                             </div>
                         </div>
                     </Modal>
@@ -173,8 +175,8 @@ class ModalDemo extends React.Component {
                             This modal copies the look of details tooltip with alert class.
                         </div>
                         <div className="buttons">
-                            <button type="button" className="cancel" onClick={this._toggle5}>Disgard Changes</button>
-                            <button type="button" className="primary" onClick={this._toggle5}>Save</button>
+                            <Button type="cancel" onClick={this._toggle5}>Disgard Changes</Button>
+                            <Button type="primary" onClick={this._toggle5}>Save</Button>
                             <br />
                             <a className="cancel" onClick={this._toggle5}>Cancel</a>
                         </div>

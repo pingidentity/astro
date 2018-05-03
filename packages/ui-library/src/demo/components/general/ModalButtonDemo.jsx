@@ -1,5 +1,6 @@
 var React = require("react");
 var ModalButton = require("./../../../components/general/ModalButton");
+var Button = require("../../../components/buttons/Button");
 
 const NUM_STATELESS_DEMOS = 3;
 
@@ -122,11 +123,11 @@ class ModalButtonDemo extends React.Component {
                                 euismod. Etiam molestie quis nunc eu ultrices.
                             </p>
                             <div className="button-group">
-                                <button type="button" data-id="nopeButton" onClick={this._handleClose2}>Nope</button>
-                                <button type="button" data-id="yupButton" className="primary"
+                                <Button data-id="nopeButton" onClick={this._handleClose2}>Nope</Button>
+                                <Button type="primary" data-id="yupButton"
                                         onClick={this._handleClose2} >
                                     Yup
-                                </button>
+                                </Button>
                             </div>
                         </div>
                     </ModalButton>
@@ -148,14 +149,14 @@ class ModalButtonDemo extends React.Component {
                             This modal copies the look of details tooltip with alert class.
                         </div>
                         <div className="button-group">
-                            <button type="button" className="cancel"
+                            <Button type="cancel"
                                     onClick={this._handleClose3} data-id="disgardChangesButton" >
                                 Disgard Changes
-                            </button>
-                            <button type="button" className="primary"
+                            </Button>
+                            <Button type="primary"
                                     onClick={this._handleClose3} data-id="saveButton">
                                 Save
-                            </button>
+                            </Button>
                             <br />
                             <a className="cancel" data-id="cancelLink" onClick={this._handleClose3}>Cancel</a>
                         </div>

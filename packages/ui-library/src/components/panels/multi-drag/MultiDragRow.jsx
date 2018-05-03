@@ -1,6 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 import { getIconClassName } from "../../../util/PropUtils";
+import Button from "../../buttons/Button";
 
 class MultiDragRow extends React.Component {
     _handleRemove = () => {
@@ -14,22 +15,22 @@ class MultiDragRow extends React.Component {
     _getButton = () => {
         if (this.props.column === 0) {
             return (
-                <button
+                <Button
                     key="button"
-                    className="inline plus"
+                    inline
+                    iconName="plus"
                     data-id="row-button-add"
                     onClick={this._handleAdd}
-                    type="button"
                 />
             );
         } else {
             return (
-                <button
+                <Button
                     key="button"
-                    className="inline remove"
+                    inline
+                    iconName="remove"
                     data-id="row-button-remove"
                     onClick={this._handleRemove}
-                    type="button"
                 />
             );
         }

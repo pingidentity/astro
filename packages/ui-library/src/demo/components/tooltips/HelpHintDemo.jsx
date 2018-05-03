@@ -2,6 +2,7 @@ var React = require("react");
 var HelpHint = require("../../../components/tooltips/HelpHint");
 var FormLabel = require("../../../components/forms/FormLabel");
 
+import Button from "../../../components/buttons/Button";
 
 /**
 * @name HelpHintDemo
@@ -26,7 +27,7 @@ class HelpHintDemo extends React.Component {
                 <HelpHint
                     data-id="helphint-button"
                     hintText="Help hint text">
-                    <button onClick={this._onClick}>Button with help hint</button>
+                    <Button onClick={this._onClick}>Button with help hint</Button>
                 </HelpHint>
                 &nbsp; &nbsp;
                 <HelpHint
@@ -38,7 +39,7 @@ class HelpHintDemo extends React.Component {
                 <HelpHint
                     data-id="helphint-inlinebutton"
                     hintText="Help hint text">
-                    <button onClick={this._onClick} className="inline">Inline button with help hint</button>
+                    <Button onClick={this._onClick} inline>Inline button with help hint</Button>
                 </HelpHint>
 
                 <br /><br /><br />

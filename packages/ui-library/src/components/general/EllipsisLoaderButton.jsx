@@ -4,6 +4,7 @@ var React = require("react"),
     Utils = require("../../util/Utils"),
     EllipsisLoader = require("../general/EllipsisLoader");
 
+
 /**
  * @callback EllipsisLoaderButton~onClick
  * @param {object} e

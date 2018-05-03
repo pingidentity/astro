@@ -3,6 +3,7 @@ var PropTypes = require("prop-types");
 var React = require("react"),
     DetailsTooltip = require("./DetailsTooltip");
 
+import Button from "../buttons/Button";
 /**
 * @callback CancelTooltip~onCancel
 */
@@ -76,12 +77,12 @@ class CancelTooltip extends React.Component {
                     {this.props.messageText}
                 </p>
                 <div className="button-group">
-                    <button
-                        className="cancel"
+                    <Button
+                        type="cancel"
                         data-id={this.props["data-id"] + "-cancel-confirm-btn"}
                         onClick={this.props.onConfirm}>
                         {this.props.confirmButtonText}
-                    </button>
+                    </Button>
                     <div>
                         <a
                             className="cancel"

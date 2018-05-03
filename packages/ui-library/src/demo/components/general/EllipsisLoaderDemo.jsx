@@ -1,5 +1,6 @@
 var React = require("react");
 var EllipsisLoader = require("./../../../components/general/EllipsisLoader");
+import Button from "../../../components/buttons/Button";
 
 /**
 * @name EllipsisLoaderDemo
@@ -37,7 +38,7 @@ class EllipsisLoaderDemo extends React.Component {
     render() {
         return (
             <div>
-                <button type="button" onClick={this._load} >Load</button>
+                <Button onClick={this._load} >Load</Button>
                 <EllipsisLoader data-id="demo-ellipsis-loader" loading={this.state.loading} />
             </div>
         );
