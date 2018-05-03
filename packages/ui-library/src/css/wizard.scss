@@ -2,7 +2,7 @@ $wizard-progress-icon-size: 23px;
 $wizard-progress-menu-padding: 20px;
 $wizard-v-spacing: 25px;
 $wizard-h-spacing: 40px;
-$wizard-padding: $wizard-v-spacing $wizard-h-spacing $wizard-v-spacing+87px $wizard-h-spacing; // 87px == height of button bar
+$wizard-padding: $wizard-v-spacing $wizard-h-spacing 0 $wizard-h-spacing;
 $wizard-progress-menu-width: 280px;
 $wizard-progress-menu-bgcolor: $color-neutral-30;
 $wizard-progress-menu-selected-bgcolor: $color-strong-neutral-10;
@@ -144,9 +144,12 @@ $wizard-close-button-color: $color-strong-neutral-40;
 }
 
 .wizard__content {
+    $buttonbar-height: 87px;
+
     position: absolute;
     width: calc(100% - #{$wizard-progress-menu-width});
     padding: $wizard-padding;
+    margin: 0 0 #{$wizard-v-spacing + $buttonbar-height} 0;
     bottom: 0;
     top: 0;
     overflow-y: auto;
