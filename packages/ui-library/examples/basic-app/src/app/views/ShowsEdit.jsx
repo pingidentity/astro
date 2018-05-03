@@ -4,7 +4,8 @@ var React = require("re-react"),
     FormRadioGroup = require("ui-library/src/components/forms/FormRadioGroup"),
     FormLabel = require("ui-library/src/components/forms/FormLabel"),
     FormTextArea = require("ui-library/src/components/forms/form-text-area"),
-    ButtonBar = require("ui-library/src/components/forms/ButtonBar");
+    ButtonBar = require("ui-library/src/components/forms/ButtonBar"),
+    PageHeader = require("ui-library/src/components/general/PageHeader");
 
 var ShowsEdit = React.createClass({
     /*
@@ -82,7 +83,7 @@ var ShowsEdit = React.createClass({
             <div className="shows-edit">
                 <a className="page-return-link" onClick={this._handleCancel}>To shows list</a>
 
-                <h1 className="page-title">{this._pageTitle}</h1>
+                <PageHeader title={this._pageTitle}/>
 
                 <div className="page-section">
                     <div className="input-row">

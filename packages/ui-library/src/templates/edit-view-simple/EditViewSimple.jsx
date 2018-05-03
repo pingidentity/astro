@@ -3,6 +3,7 @@ var React = require("react"),
     FormTextField = require("../../components/forms//form-text-field").v2,
     FormRadioGroup = require("../../components/forms/FormRadioGroup"),
     FormDropDownList = require("../../components/forms/FormDropDownList"),
+    PageHeader = require("../../components/general/PageHeader"),
     Layout = require("../../components/general/ColumnLayout"),
     Toggle = require("../../components/forms/form-toggle").v2,
     ButtonBar = require("../../components/forms/ButtonBar");
@@ -77,14 +78,12 @@ module.exports = class extends React.Component {
             <div>
                 <a className="page-return-link">To record list</a>
 
-                <div className="page-controls-secondary">
-                    <button type="button" className="inline">Inline Button</button>
-                    <Toggle stateless={false} />
-                </div>
-
-                <h1 className="page-title underlined">
-                    Simple Edit Template
-                </h1>
+                <PageHeader title="Simple Edit Template"
+                        underlined={true}
+                        accessories={[
+                            <button type="button" className="inline">Inline Button</button>,
+                            <Toggle stateless={false} />
+                        ]} />
 
                 <div className="page-section">
                     <div className="input-row">

@@ -1,0 +1,35 @@
+.page-header {
+    margin: 0 0 30px;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.page-header--underlined {
+    border-bottom: 1px solid $color-rabbit-fur;
+    padding: 0 0 15px;
+}
+
+.page-header__title {
+    font-size: 24px;
+    font-family: $font-pn-regular;
+    color: $color-slate;
+    word-wrap: break-word;
+    display: inline-block;
+}
+
+
+.page-header__subtitle {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: $color-elephant;
+}
+
+.page-header__accessories {
+    float: right;
+    display: inline-flex;
+    align-items: center;
+
+    > * {
+        margin: 0 0 0 20px;
+    }
+}

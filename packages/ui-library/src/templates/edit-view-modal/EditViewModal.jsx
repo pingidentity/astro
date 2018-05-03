@@ -3,6 +3,7 @@ var React = require("react"),
     FormTextField = require("../../components/forms//form-text-field").v2,
     FormRadioGroup = require("../../components/forms/FormRadioGroup"),
     FormDropDownList = require("../../components/forms/FormDropDownList"),
+    PageHeader = require("../../components/general/PageHeader"),
     Layout = require("../../components/general/ColumnLayout"),
     Modal = require("../../components/general/Modal"),
     ButtonBar = require("../../components/forms/ButtonBar");
@@ -82,7 +83,7 @@ module.exports = class extends React.Component {
 
         return (
             <div>
-                <h1 className="page-title">Edit Template in a Modal</h1>
+                <PageHeader title="Edit Template in a Modal" />
 
                 <div className="page-section">
                     <div className="page-section-title">

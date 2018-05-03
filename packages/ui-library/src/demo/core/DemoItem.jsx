@@ -3,6 +3,7 @@ var React = require("react"),
     marked = require("marked"),
     Markup = require("./Markup"),
     RockerButton = require("../../components/forms/RockerButton"),
+    PageHeader = require("../../components/general/PageHeader"),
     If = require("../../components/general/If"),
     _ = require("underscore");
 
@@ -144,10 +145,9 @@ class DemoItem extends React.Component {
 
                     <div className={headerClassName}>
                         <div className="clearfix">
-                            <h1 className="page-title" data-id="component-title" >
-                                {this.props.label}
-                                <div className="page-subtitle">{this.props.importPath}</div>
-                            </h1>
+                            <PageHeader data-id="component-title"
+                                    title={this.props.label}
+                                    subtitle={this.props.importPath} />
                             {docToggle}
                             {srcToggle}
                         </div>

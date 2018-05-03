@@ -509,6 +509,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_general_EllipsisLoaderButtonDemo.jsx.html"
                     },
                     {
+                        label: "Page Header",
+                        demo: require("../components/general/PageHeaderDemo"),
+                        pathToDoc: "components/general/PageHeader.jsx",
+                        pathToSource: "components_general_PageHeader.jsx.html",
+                        pathToDemoSource: "demo_components_general_PageHeaderDemo.jsx.html"
+                    },
+                    {
                         label: "If",
                         demo: require("../components/general/IfDemo"),
                         pathToDoc: "components/general/If.jsx",
