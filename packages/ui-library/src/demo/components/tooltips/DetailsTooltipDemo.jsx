@@ -314,6 +314,34 @@ class DetailsTooltipDemo extends React.Component {
                     </p>
                 </DetailsTooltip>
 
+                <hr className="hr" />
+
+                <DetailsTooltip
+                    positionClassName="bottom left"
+                    labelClassName="my-css-class"
+                    label="Hang on the left"
+                    title="Tooltip Title"
+                    stateless={false}>
+
+                    <p>
+                        Nothing fancy here.
+                    </p>
+                </DetailsTooltip>
+
+                <br />
+
+                <DetailsTooltip
+                    positionClassName="bottom center"
+                    labelClassName="my-css-class"
+                    label="Hang center"
+                    title="Tooltip Title"
+                    stateless={false}>
+
+                    <p>
+                        Nothing fancy here.
+                    </p>
+                </DetailsTooltip>
+
             </div>
         );
     }

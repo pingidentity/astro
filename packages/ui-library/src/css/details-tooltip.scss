@@ -22,7 +22,7 @@
     &.show {
         .details-content,
         &.details-content {
-            display: block;
+            display: inline-block;
         }
         .selection-filter-label {
             &:after {
@@ -96,16 +96,15 @@
         left: 50%;
         right: auto;
 
-        width: 0;
         padding: 0;
-        margin: 0;
+        margin: 0 (-$width) 0 0;
+        max-width: $width;
         word-break: break-word;
 
         > .details-content-inner {
             position: relative;
             box-sizing: border-box;
 
-            width: $width;
             min-height: 80px;
             background-color: $color-white;
             font-size: 14px;
@@ -223,20 +222,28 @@
     }
     &.center {
         > .details-content {
+            transform: translateX(-50%);
+
             > .details-content-inner {
-                margin-left: -(round($width/2));
+                margin-left: 0;
 
                 &:before {
-                    left: (round($width/2) - 7);
+                    left: 50%;
                     right: auto;
+                    margin-left: (-$arrow-width-offset/2);
                 }
             }
         }
     }
     &.left {
         > .details-content {
+            left: auto;
+            margin: 0 0 0 (-$width);
+            right: 50%;
+
             > .details-content-inner {
-                margin-left: -($width - $arrow-offset - $arrow-width-offset);
+                margin-right: (-$arrow-offset - $arrow-width-offset);
+                margin-left: 0;
 
                 &:before {
                     right: $arrow-offset;
@@ -258,6 +265,7 @@
         .details-content {
             .details-content-inner {
                 border-color: $color-timberwolf;
+                display: inline-block;
 
                 .details-body {
                     padding: 0;
@@ -286,13 +294,6 @@
                 .details-content-inner {
                     width: 220px;
                 }
-            }
-        }
-    }
-    &.link-dropdown-list {
-        .details-content {
-            .details-content-inner {
-                width: 200px;
             }
         }
     }

@@ -74,7 +74,7 @@ class EnvironmentSelector extends React.Component {
                 open={this.state.open}
                 options={this._getOptions()}
                 selectedOption={selectedOption}
-                className="environment-selector center"
+                className="environment-selector left"
             />
         );
     };

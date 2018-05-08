@@ -61,6 +61,15 @@ class LinkDropDownListDemo extends React.Component {
                     options={_options}
                     selectedOption={_options[0]}
                 />
+                <hr className="hr" />
+                <LinkDropDownList
+                    stateless={false}
+                    closeOnClick={true}
+                    label="Right-aligned"
+                    options={_options}
+                    selectedOption={_options[0]}
+                    className="left"
+                />
             </div>
         );
     }
