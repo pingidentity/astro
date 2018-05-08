@@ -378,6 +378,13 @@ module.exports = [
                 icon: "alert",
                 children: [
                     {
+                        label: "Confirmation Tooltip",
+                        demo: require("../components/tooltips/ConfirmTooltipDemo"),
+                        pathToDoc: "components/tooltips/ConfirmTooltip.jsx",
+                        pathToSource: "components_tooltips_ConfirmTooltip.jsx.html",
+                        pathToDemoSource: "demo_components_tooltips_ConfirmTooltipDemo.jsx.html"
+                    },
+                    {
                         label: "Details Tooltip",
                         demo: require("../components/tooltips/DetailsTooltipDemo"),
                         pathToDoc: "components/tooltips/DetailsTooltip.jsx",
