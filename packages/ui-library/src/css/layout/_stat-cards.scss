@@ -1,0 +1,234 @@
+$condensedBreakpoint: 1200px;
+$fullwidthBreakpoint: 950px;
+
+@mixin standoutText {
+    color: $color-white;
+    background: $color-charting-indigo;
+
+    .stat-card--magenta & {
+        background: $color-charting-magenta;
+    }
+
+    .stat-card--blue & {
+        background: $color-charting-blue;
+    }
+
+    .stat-card--cyan & {
+        background: $color-charting-cyan;
+    }
+}
+
+@mixin flippedTo {
+    @include transform(rotateY(0deg));
+}
+
+@mixin flippedAway {
+    @include transform(rotateY(180deg));
+}
+
+@mixin flipper {
+    @include transition(all 0.2s ease-in-out);
+
+    backface-visibility: hidden;
+}
+
+@mixin cardFrame {
+    @include border-radius(2px);
+    @include box-shadow(0 2px 4px rgba(0, 0, 0, 0.05));
+
+    background: $color-white;
+    border: 1px solid $color-neutral-70;
+}
+
+.stat-card {
+    @include flexbox;
+
+    position: relative;
+
+    > * {
+        @include flexbox-grow(1);
+    }
+
+    &__control {
+        position: absolute;
+        right: $spacing-sm;
+        top: $spacing-sm;
+    }
+
+    &__front {
+        @include cardFrame;
+        @include flipper;
+        @include flippedTo;
+        @include flexbox;
+        @include flexbox-direction(column);
+
+        padding: $spacing-xl;
+
+        @media (max-width: $condensedBreakpoint) {
+            padding: $spacing-xl $spacing-md;
+        }
+    }
+
+    &--flipped &__front {
+        @include flippedAway;
+    }
+
+    &__back {
+        @include cardFrame;
+        @include flipper;
+        @include flippedAway;
+
+        padding: $spacing-md;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+
+        @media (max-width: $condensedBreakpoint) and (min-width: $fullwidthBreakpoint) {
+            padding-top: $spacing-xl;
+        }
+    }
+
+    &--flipped &__back {
+        @include flippedTo;
+    }
+
+    &__front-title {
+        @include flexbox;
+        @include flexbox-grow(1);
+
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__title-icon {
+        margin-right: $spacing-sm;
+        line-height: 25px;
+        display: inline-block;
+        vertical-align: middle;
+
+        font-size: 30px;
+
+        color: $color-charting-indigo;
+
+        @media (max-width: $condensedBreakpoint) and (min-width: $fullwidthBreakpoint) {
+            display: none;
+        }
+    }
+
+    &__title-text {
+        text-transform: uppercase;
+        font-size: 18px;
+        color: $color-strong-neutral-10;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    &__primary-number {
+        @include standoutText;
+
+        font-size: 40px;
+        text-align: center;
+        margin: $spacing-md 0 $spacing-lg;
+        padding: $spacing-sm 0 $spacing-xs;
+        line-height: 1em;
+    }
+
+    &__description {
+        font-size: 12px;
+        text-align: center;
+        color: $color-strong-neutral-10;
+    }
+
+    &__stat-list {
+        padding: 0 $spacing-md;
+    }
+
+    &__stat-row {
+        @include flexbox();
+        @include flexbox-direction(row);
+
+        > * {
+            @include flexbox-grow(1);
+        }
+    }
+
+    &__back-title {
+        @include standoutText;
+
+        display: inline-block;
+        font-family: $font-pn-light;
+        font-size: 16px;
+        margin-bottom: $spacing-md;
+        padding: $spacing-xs $spacing-sm;
+        text-transform: uppercase;
+    }
+
+    &__stat-row-label {
+        font-size: 14px;
+        color: $color-strong-neutral-30;
+        margin-bottom: $spacing-sm;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__stat-row-number {
+        text-align: right;
+        font-size: 16px;
+        color: $color-charting-indigo;
+    }
+
+    &--magenta {
+        .stat-card__title-icon,
+        .stat-card__stat-row-number {
+            color: $color-charting-magenta;
+        }
+    }
+
+    &--blue {
+        .stat-card__title-icon,
+        .stat-card__stat-row-number {
+            color: $color-charting-blue;
+        }
+    }
+
+    &--cyan {
+        .stat-card__title-icon,
+        .stat-card__stat-row-number {
+            color: $color-charting-cyan;
+        }
+    }
+
+}
+
+.stat-card-row {
+    > * {
+        margin-bottom: $spacing-md;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    @media (min-width: $fullwidthBreakpoint) {
+        @include flexbox;
+        @include flexbox-direction(row);
+
+        align-items: stretch;
+
+        > * {
+            @include flexbox-grow(1);
+
+            flex-basis: 0;
+            margin-bottom: 0;
+            margin-right: $spacing-md;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}

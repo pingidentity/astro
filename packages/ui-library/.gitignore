@@ -13,6 +13,7 @@ npm-debug.log
 **/examples/basic-app/src/ui-lib-assets
 package-lock.json
 yarn.lock
+yarn-error.log
 
 # IDEA
 *.iml
@@ -27,6 +28,3 @@ yarn.lock
 
 selenium-standalone.log*
 http-server.log
-
-package-lock.json
-yarn.lock

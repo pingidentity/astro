@@ -302,6 +302,13 @@ module.exports = [
                         pathToDoc: "components/general/charting/AreaChart.jsx",
                         pathToSource: "components_general_charting_AreaChart.jsx.html",
                         pathToDemoSource: "demo_components_general_charting_AreaChartDemo.jsx.html"
+                    },
+                    {
+                        label: "Stat Cards",
+                        demo: require("../components/general/charting/StatCardRowDemo"),
+                        pathToDoc: "components/general/charting/StatCard.jsx",
+                        pathToSource: "components_general_charting_StatCard.jsx.html",
+                        pathToDemoSource: "demo_components_general_charting_StatCardDemo.jsx.html"
                     }
                 ]
             },

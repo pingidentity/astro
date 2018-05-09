@@ -1,0 +1,74 @@
+.view-toggle {
+    @include border-radius(10px);
+    @include transition(background 0.1s);
+
+    background: $color-neutral-95;
+    border: none;
+    height: 20px;
+    line-height: 1em;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 60px;
+
+    &:focus {
+        background: $color-strong-neutral-80;
+
+        path {
+            fill: $color-strong-neutral-50;
+        }
+    }
+
+    &:hover {
+        background: $color-strong-neutral-60;
+
+        path {
+            fill: $color-strong-neutral-10;
+        }
+    }
+
+    &:active {
+        background: $color-strong-neutral-40;
+
+        path {
+            fill: $color-strong-neutral-10;
+        }
+    }
+
+    &:active,
+    &:focus {
+        border: none;
+    }
+
+    &:before {
+        @include border-radius(10px);
+        @include transition(0.1s left);
+
+        background: $color-white;
+        content: '';
+        height: 18px;
+        left: 1px;
+        position: absolute;
+        top: 1px;
+        width: 29px;
+    }
+
+    &--toggled:before {
+        left: 30px;
+    }
+}
+
+.view-toggle__icon {
+    position: relative;
+    display: inline-block;
+
+    svg {
+        display: block;
+    }
+
+    path {
+        @include transition(fill 0.1s);
+
+        fill: $color-neutral-70;
+    }
+}

@@ -6,9 +6,9 @@
 
     font-family: 'iconfont';
     src:
-        url('#{$font-path}iconfont.ttf?pxqbpj') format('truetype'),
-        url('#{$font-path}iconfont.woff?pxqbpj') format('woff'),
-        url('#{$font-path}iconfont.svg?pxqbpj#iconfont') format('svg');
+        url('#{$font-path}iconfont.ttf?8sldf1') format('truetype'),
+        url('#{$font-path}iconfont.woff?8sldf1') format('woff'),
+        url('#{$font-path}iconfont.svg?8sldf1#iconfont') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -89,12 +89,24 @@
     content: '\62';
 }
 
+.icon-bar-chart:before {
+    content: '\e90f';
+}
+
+.icon-bar-line-chart:before {
+    content: '\e913';
+}
+
 .icon-beaker:before {
     content: '\e90a';
 }
 
 .icon-books:before {
     content: '\e903';
+}
+
+.icon-browser:before {
+    content: '\e917';
 }
 
 .icon-cabinet:before {
@@ -111,6 +123,10 @@
 
 .icon-check:before {
     content: '\79';
+}
+
+.icon-chat:before {
+    content: '\e90e';
 }
 
 .icon-circle:before {
@@ -149,6 +165,10 @@
     content: '\64';
 }
 
+.icon-desktop:before {
+    content: '\e916';
+}
+
 .icon-details:before {
     content: '\e900';
 }
@@ -179,6 +199,10 @@
 
 .icon-edit:before {
     content: '\65';
+}
+
+.icon-error-triangle:before {
+    content: '\e914';
 }
 
 .icon-expand:before {
@@ -253,6 +277,10 @@
     content: '\4c';
 }
 
+.icon-lockout:before {
+    content: '\e912';
+}
+
 .icon-menu:before {
     content: '\6d';
 }
@@ -273,8 +301,20 @@
     content: '\7d';
 }
 
+.icon-nodes:before {
+    content: '\e911';
+}
+
 .icon-notepad:before {
     content: '\e90b';
+}
+
+.icon-on-off:before {
+    content: '\e910';
+}
+
+.icon-org-chart:before {
+    content: '\e915';
 }
 
 .icon-overview:before {
@@ -291,6 +331,10 @@
 
 .icon-plus-rounded:before {
     content: '\2a';
+}
+
+.icon-previous:before {
+    content: '\7b';
 }
 
 .icon-progress-2-1:before {
@@ -377,10 +421,6 @@
     content: '\7a';
 }
 
-.icon-previous:before {
-    content: '\7b';
-}
-
 .icon-radar:before {
     content: '\e907';
 }
@@ -403,6 +443,10 @@
 
 .icon-settings:before {
     content: '\53';
+}
+
+.icon-shield:before {
+    content: '\e90d';
 }
 
 .icon-slider:before {
@@ -443,6 +487,10 @@
 
 .icon-support:before {
     content: '\71';
+}
+
+.icon-terminal:before {
+    content: '\e90c';
 }
 
 .icon-thumb:before {

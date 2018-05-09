@@ -11,6 +11,7 @@ $color-neutral-60: #afb4b8;
 $color-neutral-70: #c2c6ca;
 $color-neutral-80: #d5d8db;
 $color-neutral-90: #e8ebed;
+$color-neutral-95: #f2f2f2;
 
 $color-strong-neutral-10: #3d454d;
 $color-strong-neutral-20: #515960;
@@ -40,6 +41,12 @@ $color-critical-red-highlighted: tint($color-critical-red, 10%);
 $color-success-green: #4aba78;
 $color-success-green-highlighted: tint($color-success-green, 10%);
 $color-warning-yellow: #eeb91c;
+
+// CHARTING COLORS
+$color-charting-indigo: #193967;
+$color-charting-blue: #4c8dca;
+$color-charting-cyan: #77e6eb;
+$color-charting-magenta: #e12f51;
 
 // LEGACY COLOR NAMES
 $color-active: $color-active-blue;

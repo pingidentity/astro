@@ -16,6 +16,9 @@
         }],
         "at-rule-name-case": "lower",
         "at-rule-name-space-after": "always",
+        "at-rule-no-unknown": [ true, {
+            "ignoreAtRules": [ "each", "if", "include", "extend", "mixin", "warn", "function", "return", "content" ]
+        }],
         "at-rule-semicolon-newline-after": "always",
 
         "block-closing-brace-newline-before": "always",
