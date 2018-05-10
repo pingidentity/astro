@@ -1,4 +1,5 @@
 @import 'layout/stat-cards';
+@import 'layout/charts';
 
 $layout-header-height: 46px;
 $layout-nav-width: 190px;
@@ -374,11 +375,11 @@ $color-grey-minor-1: $color-neutral-30;
 
     // updated left nav
     &.updated {
-        $layout-nav-width-offset: 10px;
+        $layout-nav-width: 205px;
         background-color: $color-grey-minor-1;
         color: $color-white;
         border-right: none;
-        width: $layout-nav-width + $layout-nav-width-offset;
+        width: $layout-nav-width;
 
         .top-content {
             padding: 15px 10px 13px 15px;
@@ -394,7 +395,7 @@ $color-grey-minor-1: $color-neutral-30;
         &.scrollable {
             .copyright {
                 border-top: none;
-                width: $layout-nav-width + $layout-nav-width-offset;
+                width: $layout-nav-width;
                 &:before,
                 &:after {
                     background: none;
@@ -499,10 +500,10 @@ $color-grey-minor-1: $color-neutral-30;
         }
         .nav-menus {
             padding: 0;
-            width: $layout-nav-width + $layout-nav-width-offset;
+            width: $layout-nav-width;
         }
         ul.menu {
-            width: $layout-nav-width + $layout-nav-width-offset;
+            width: $layout-nav-width;
             > li {
                 a {
                     font-family: $font-pn-light;
@@ -518,7 +519,7 @@ $color-grey-minor-1: $color-neutral-30;
                 }
                 &.highlighted {
                     @include transition(background-color 0.2s);
-                    width: $layout-nav-width + $layout-nav-width-offset;
+                    width: $layout-nav-width;
                     box-sizing: border-box;
                     background-color: $color-grey-main;
                     overflow: hidden;
@@ -549,7 +550,7 @@ $color-grey-minor-1: $color-neutral-30;
             padding: 20px 10px 25px 15px;
             color: $color-white;
             border-top: none;
-            width: $layout-nav-width + $layout-nav-width-offset;
+            width: $layout-nav-width;
             &:before,
             &:after {
                 background: none;

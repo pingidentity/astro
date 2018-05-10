@@ -186,7 +186,7 @@ class RockerButtonStateful extends React.Component {
         var props = _.defaults({
             ref: "RockerButtonStateless",
             selectedIndex: this.state.selectedIndex,
-            onValueChange: this.props.onValueChange ? this._handleOnValueChange : null
+            onValueChange: this._handleOnValueChange
         }, this.props);
 
         return <RockerButtonStateless {...props} />;
