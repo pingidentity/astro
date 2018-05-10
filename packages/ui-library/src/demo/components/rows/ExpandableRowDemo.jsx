@@ -4,6 +4,7 @@ var HelpHint = require("../../../components/tooltips/HelpHint");
 var ExpandableRow = require("../../../components/rows/ExpandableRow");
 var Toggle = require("../../../components/forms/form-toggle");
 var DetailsTooltip = require("../../../components/tooltips/DetailsTooltip");
+import LabelValuePairs from "../../../components/layout/LabelValuePairs";
 
 /**
 * @name ExpandableRowDemo
@@ -65,6 +66,36 @@ class ExpandableRowDemo extends React.Component {
     };
 
     render() {
+        const mockData = [
+            {
+                label: "Attribute Type",
+                value: "String"
+            },
+            {
+                label: "Category",
+                value: "Profile"
+            },
+            {
+                label: "name",
+                value: "Tony Stark"
+            },
+            {
+                label: "Display Name",
+                value: "Iron Man"
+            },
+            {
+                label: "Description",
+                value: "Tony Stark is a playboy billionare who is a super hero with an iron suit"
+            },
+            {
+                label: "Required",
+                value: "NO"
+            },
+            {
+                label: "Resgistration",
+                value: "NO"
+            },
+        ];
         var customDeleteButton = (
             <DetailsTooltip
                 stateless={false}
@@ -95,10 +126,7 @@ class ExpandableRowDemo extends React.Component {
                     stateless={false}
                     title="Basic Row"
                     subtitle="Row Subtitle">
-                    <p>
-                    Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra
-                    sodales, nisl fringilla eu placerat, tellus nisl tempor, mi tellus quam urna fringilla.
-                    </p>
+                    <LabelValuePairs dataPairs={mockData} />
                 </ExpandableRow>
                 <ExpandableRow
                     stateless={false}

@@ -1,0 +1,16 @@
+.label-value-pairs {
+    display: inline-grid;
+    grid-row-gap: $spacing-sm;
+    grid-column-gap: $spacing-md;
+    list-style: none;
+}
+
+.label-value-pairs__label {
+    grid-column: 1;
+    text-transform: uppercase;
+}
+
+.label-value-pairs__value {
+    grid-column: 2;
+    color: $color-accent-neutral-10;
+}

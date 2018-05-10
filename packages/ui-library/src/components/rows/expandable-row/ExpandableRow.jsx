@@ -579,7 +579,7 @@ class StatelessExpandableRow extends React.Component {
 
                 </div>
                 {this.props.expanded && (
-                    <div data-id="expanded-row" className="expanded-content clearfix">
+                    <div data-id="expanded-row" className="expanded-content indent-content clearfix">
                         <div className="expanded-content-scroller">
                             {this.props.children || this.props.content}
                         </div>

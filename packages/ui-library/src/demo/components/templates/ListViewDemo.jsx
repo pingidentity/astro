@@ -31,8 +31,7 @@ class ListViewDemo extends React.Component {
                         onSearchAdvancedToggle={this._handleToggleSearchBar}
                         onSearchFilterChange={this._handleSearchFilterChange}
                         onScrollPositionChange={this.actions.setPosition}
-                        onActiveTabChange={this.actions.setActiveTab} />
-
+                        onActiveTabChange={this.actions.setActiveTab}/>
                 {
                   /* Because the DemoApp also writes the url, the open/selected nodes need to be passed in */
                 }

@@ -671,6 +671,13 @@ module.exports = [
                         pathToSource: "components_layout_PageSection.jsx.html",
                         pathToDemoSource: "demo_components_layout_PageSectionDemo.jsx.html"
                     },
+                    {
+                        label: "Label Value Pairs",
+                        demo: require("../components/layout/LabelValuePairsDemo"),
+                        pathToDoc: "components/layout/LabelValuePairs.jsx",
+                        pathToSource: "components_layout_LabelValuePairs.jsx.html",
+                        pathToDemoSource: "demo_components_layout_LabelValuePairsDemo.jsx.html"
+                    },
                 ]
             }
         ]
