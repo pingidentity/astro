@@ -1143,7 +1143,11 @@ $color-grey-minor-1: $color-neutral-30;
 }
 
 .hr--sm {
-    margin: 10px 0;
+    margin: $spacing-sm 0;
+}
+
+.hr--md {
+    margin: $spacing-md 0;
 }
 
 // flakey but one of only a few options : use with caution

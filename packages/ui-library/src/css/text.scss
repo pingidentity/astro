@@ -63,9 +63,27 @@
     }
 }
 
+.textblock--white {
+    color: $color-white;
+}
+
 .textblock--primary {
     color: $color-slate;
     font-size: 15px;
+}
+
+.textblock--primary-light {
+    color: $color-midnight;
+    font-size: 15px;
+}
+
+.textblock--primary-white {
+    color: $color-white;
+    font-size: 15px;
+}
+
+.textblock--semibold {
+    font-family: $font-pn-semibold;
 }
 
 .textblock--value {
