@@ -56,11 +56,12 @@
         position: relative;
     }
 
+    $height: 19px;
+    $offset: 2px;
+
     &__icon,
     &__number,
     &__character {
-        $height: 19px;
-        $offset: 2px;
 
         @include border-radius(20px);
 
@@ -69,10 +70,10 @@
         font-family: $font-pn-regular;
         font-size: 15px;
         display: inline-block;
-        height: $height - $offset;
-        line-height: $height - $offset;
+        height: $height;
+        line-height: $height;
         margin: 0 1px + $spacing-xs 0 0;
-        padding-top: $offset;
+        position: relative;
         text-align: center;
         transform: translateY(-1px);
         vertical-align: middle;
@@ -80,10 +81,14 @@
 
         &:before {
             font-family: $icon-font;
-            font-size: 11px;
-            height: $height - $offset;
-            line-height: $height - $offset;
-            vertical-align: top;
+            font-size: 12px;
+            line-height: 12px;
+            position: absolute;
+            bottom: 50%;
+            transform: translateY(50%);
+            left: 0;
+            right: 0;
+            text-align: center;
         }
 
         &.icon-check {
@@ -93,6 +98,12 @@
                 font-size: 8px;
             }
         }
+    }
+
+    &__character, &__number {
+        height: $height - $offset;
+        line-height: $height - $offset;
+        padding-top: $offset;
     }
 
     &__character {

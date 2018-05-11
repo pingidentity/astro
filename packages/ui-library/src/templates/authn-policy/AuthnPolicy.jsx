@@ -144,7 +144,7 @@ const ConditionsList = ({ conditions }) => {
 };
 
 const SettingsForm = ({ settings, onFormChange }) => (
-    <PolicyNode label="Settings" iconName="cog">
+    <PolicyNode label="Settings" iconName="cog-filled">
         <CheckboxGroup
             options={_.map(settingsOptions, option => ({ value: option, label: option }))}
             values={settings}
