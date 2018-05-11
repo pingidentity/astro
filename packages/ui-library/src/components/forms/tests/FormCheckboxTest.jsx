@@ -89,8 +89,9 @@ describe("FormCheckbox", function () {
     });
 
     it("simulate change event", function () {
+        const callback = jest.genMockFunction();
         var component = getComponent({
-            onValueChange: jest.genMockFunction()
+            onValueChange: value => callback(value)
         });
         var checkbox = TestUtils.findRenderedDOMNodeWithDataId(component, "form-checkbox");
 
@@ -101,7 +102,7 @@ describe("FormCheckbox", function () {
 
         //expect callback
         expect(component.props.onChange).toBeCalled();
-        expect(component.props.onValueChange).toBeCalledWith(true);
+        expect(callback).toBeCalledWith(true);
     });
 
     /*

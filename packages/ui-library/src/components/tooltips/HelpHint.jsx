@@ -125,7 +125,7 @@ class HelpHint extends React.Component {
 
     render() {
         const {
-            ["data-id"]: dataId,
+            "data-id": dataId,
             children
         } = this.props;
 

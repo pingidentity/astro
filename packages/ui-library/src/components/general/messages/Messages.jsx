@@ -53,6 +53,7 @@ var React = require("react"),
  *      shown next to the progress bar.
  * @property {number} percent
  *      The current value 0-100 of the progress bar.
+ */
 
 /**
  * @class Messages
@@ -86,7 +87,7 @@ var React = require("react"),
 module.exports = class extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
-        containerType: PropTypes.oneOf(["full"]),
+        containerType: PropTypes.oneOf(["full", "page-messages--sidebar-fix"]),
         messages: PropTypes.array,
         onRemoveMessage: PropTypes.func,
         removeMessage: PropTypes.func,

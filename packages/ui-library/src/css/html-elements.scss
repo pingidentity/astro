@@ -14,6 +14,7 @@ a {
 
     &:hover {
         text-decoration: underline;
+        color: $color-active-blue-highlighted;
     }
     &.link {
         border-bottom: 1px solid  $color-active;

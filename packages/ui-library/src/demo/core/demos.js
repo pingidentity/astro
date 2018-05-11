@@ -92,6 +92,14 @@ module.exports = [
 
                     },
                     {
+                        label: "Checkbox Group",
+                        demo: require("../components/forms/CheckboxGroupDemo"),
+                        pathToDoc: "components/forms/CheckboxGroup.jsx",
+                        pathToSource: "components_forms_CheckboxGroup.jsx.html",
+                        pathToDemoSource: "demo_components_forms_CheckboxGroupDemo.jsx.html"
+
+                    },
+                    {
                         label: "Radio Group",
                         demo: require("../components/forms/FormRadioGroupDemo"),
                         pathToDoc: "components/forms/FormRadioGroup.jsx",
@@ -652,11 +660,33 @@ module.exports = [
                     },
                 ]
             },
+            {
+                label: "Layout",
+                icon: "puzzle",
+                children: [
+                    {
+                        label: "Page Section",
+                        demo: require("../components/layout/PageSectionDemo"),
+                        pathToDoc: "components/layout/PageSection.jsx",
+                        pathToSource: "components_layout_PageSection.jsx.html",
+                        pathToDemoSource: "demo_components_layout_PageSectionDemo.jsx.html"
+                    },
+                ]
+            }
         ]
     },
     {
         label: "Templates",
         children: [
+            {
+                label: "Authentication Policy",
+                demo: require("../components/templates/AuthnPolicyDemo"),
+                pathToDoc: "components/templates/AuthnPolicy.jsx",
+                pathToSource: "templates_authn-policy_AuthnPolicy.jsx.html",
+                pathToDemoSource: "demo_components_templates_AuthnPolicyDemo.jsx.html",
+                fullscreen: true,
+                icon: "details"
+            },
             {
                 label: "Wizard View",
                 demo: require("../components/templates/WizardViewDemo"),

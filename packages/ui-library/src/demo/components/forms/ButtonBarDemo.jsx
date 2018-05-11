@@ -65,6 +65,10 @@ class ButtonBarDemo extends React.Component {
         this.setState({ showCancelTooltip: false });
     };
 
+    _toggleUnfix = () => {
+        this.setState({ unfixed: !this.state.unfixed });
+    }
+
     render() {
         var toggleButtonText = this.state.showBar ? "FALSE" : "TRUE",
             saveButtonSaving = this.state.saving ? "FALSE" : "TRUE",
@@ -77,6 +81,8 @@ class ButtonBarDemo extends React.Component {
                 <Button onClick={this._toggleSaving}>Set "saving" prop to {saveButtonSaving}</Button>
                 <br /><br />
                 <Button onClick={this._toggleDisabled}>Set "saveDisabled" prop to {saveButtonStatus}</Button>
+                <br /><br />
+                <button onClick={this._toggleUnfix}>Unfix button bar</button>
                 <br /><br />
                 Demo status: &nbsp; <i>{this.state.statusText}</i>
 
@@ -94,6 +100,7 @@ class ButtonBarDemo extends React.Component {
                     enableSavingAnimation={this.state.saving}
                     visible={this.state.showBar}
                     saveDisabled={this.state.saveDisabled}
+                    unfixed={this.state.unfixed}
 
                     cancelTooltip={{
                         title: "Cancel Confirmation",

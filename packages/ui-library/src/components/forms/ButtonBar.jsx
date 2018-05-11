@@ -47,6 +47,8 @@ var React = require("react"),
 *     Disabled the save button when true
 * @param {boolean} [enableSavingAnimation=false]
 *     Enables the ellipsis loading animation on the save button. This also disables the "discard" and "cancel" buttons.
+* @param {boolean} [unfixed=false]
+*     When set, the bar appears within the flow of the page content rather than fixed to the bottom of the window.
 * @param {boolean} [visible=true]
 *     Shows/hides the button bar. This is often set to true when a form data is "dirty"/has been edited
 *
@@ -96,13 +98,17 @@ class ButtonBar extends React.Component {
         saveDisabled: PropTypes.bool,
         saveText: PropTypes.string.isRequired,
         enableSavingAnimation: PropTypes.bool,
+        unfixed: PropTypes.bool,
         visible: PropTypes.bool
     };
 
     static defaultProps = {
+        cancelText: "Cancel",
         "data-id": "button-bar",
         saveDisabled: false,
+        saveText: "Save",
         enableSavingAnimation: false,
+        unfixed: false,
         visible: true
     };
 
@@ -169,12 +175,13 @@ class ButtonBar extends React.Component {
             discardClassName = classnames(
                 this.props.discardClassName || null,
                 { disabled: this.props.enableSavingAnimation }
-            );
+            ),
+            unfixedClassName = { "page-controls-primary--unfixed": this.props.unfixed };
 
         return (
             <div
                 data-id={this.props["data-id"]}
-                className={classnames(this.props.className, containerClassName)}>
+                className={classnames(this.props.className, containerClassName, unfixedClassName)}>
                 {this.props.children}
                 {this.props.discardText && this.props.onDiscard && (
                     <Button

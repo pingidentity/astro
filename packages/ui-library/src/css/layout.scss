@@ -1,5 +1,8 @@
 @import 'layout/stat-cards';
 @import 'layout/charts';
+@import 'layout/edit-section';
+@import 'layout/policy-node';
+@import 'layout/stack';
 
 $layout-header-height: 46px;
 $layout-nav-width: 190px;
@@ -637,6 +640,12 @@ $color-grey-minor-1: $color-neutral-30;
     color: $color-white;
     padding: 0;
 
+    &--sidebar-fix {
+        // temporary class to fix Messages for the new sidebar
+        // this will be the default in our next major version
+        left: 205px;
+    }
+
     &.full {
         left: 0;
         .message {
@@ -1095,6 +1104,14 @@ $color-grey-minor-1: $color-neutral-30;
     }
 
     @include button-spacing();
+
+    &--unfixed {
+        position: relative;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        margin-top: $spacing-md;
+    }
 }
 
 .content-columns {
@@ -1358,4 +1375,8 @@ a {
             @include animation(fade-in $animation-timing);
         }
     }
+}
+
+.checkbox-description {
+    padding-left: 36px;
 }

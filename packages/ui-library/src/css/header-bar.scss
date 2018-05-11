@@ -169,6 +169,10 @@ $topnav-bg: $color-neutral-10;
     padding: 0 $spacing-lg;
     position: relative;
     text-transform: uppercase;
+
+    &:hover {
+        color: $color-white;
+    }
 }
 
 @media (max-width: 1000px) {

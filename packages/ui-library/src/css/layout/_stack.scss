@@ -1,0 +1,9 @@
+.stack-sm {
+    > * {
+        margin-bottom: $spacing-sm;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}

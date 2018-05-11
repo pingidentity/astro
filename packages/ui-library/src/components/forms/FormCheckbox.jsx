@@ -90,7 +90,7 @@ class FormCheckbox extends React.Component {
             this.props.onChange(e);
         }
         if (this.props.onValueChange) {
-            this.props.onValueChange(!!e.target.checked);
+            this.props.onValueChange(!!e.target.checked, e);
         }
     };
 

@@ -25,6 +25,7 @@ var ICONS = [
     "close",
     "close-arrow",
     "cog",
+    "cog-filled",
     "collapse",
     "delete",
     "details",

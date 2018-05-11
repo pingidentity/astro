@@ -91,7 +91,7 @@ describe("ButtonBar", function () {
                 onCancel: jest.genMockFunction(),
                 onDiscard: jest.genMockFunction(),
                 cancelText: null,
-                discardText: null
+                discardText: null,
             }),
             saveBtn = getSaveButton(component),
             cancelBtn = getCancelButton(component),
@@ -100,6 +100,19 @@ describe("ButtonBar", function () {
         expect(saveBtn).toBeTruthy();
         expect(cancelBtn).toBeFalsy();
         expect(discardBtn).toBeFalsy();
+    });
+
+    it("Renders unfixed button bar", function () {
+        const component = getComponent({
+            onCancel: jest.genMockFunction(),
+            onDiscard: jest.genMockFunction(),
+            cancelText: null,
+            discardText: null,
+            unfixed: true,
+        });
+        
+        const unfixed = TestUtils.findRenderedDOMNodeWithClass(component, "page-controls-primary--unfixed");
+        expect(unfixed).toBeTruthy();
     });
 
     it("Triggers callbacks when the buttons are clicked", function () {

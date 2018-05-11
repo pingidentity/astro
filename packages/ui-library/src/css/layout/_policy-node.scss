@@ -1,0 +1,123 @@
+// these mixins should be replaced by centralized text styles
+@mixin text-label {
+    color: $color-elephant;
+    font-family: $font-pn-semibold;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+@mixin text-parent-label {
+    color: $color-elephant;
+    font-family: $font-pn-semibold;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+@mixin text-value {
+    color: $color-midnight;
+    font-size: 14px;
+}
+
+.text-value {
+    @include text-value;
+}
+
+.policy-node {
+    margin-bottom: $spacing-sm;
+    position: relative;
+
+    &--parent {
+        margin-bottom: $spacing-md;
+    }
+
+    &:last-child,
+    &--parent:last-child {
+        margin-bottom: 0;
+    }
+
+    &__head {
+        margin-bottom: $spacing-sm;
+    }
+
+    &--parent > * > &__label {
+        @include text-parent-label;
+    }
+
+    &__label {
+        @include text-label;
+    }
+
+    &__edit {
+        margin-left: $spacing-sm;
+    }
+
+    &__content {
+        padding-left: $spacing-lg;
+        position: relative;
+    }
+
+    &__icon,
+    &__number,
+    &__character {
+        $height: 19px;
+        $offset: 2px;
+
+        @include border-radius(20px);
+
+        background: $color-blue-grey;
+        color: $color-white;
+        font-family: $font-pn-regular;
+        font-size: 15px;
+        display: inline-block;
+        height: $height - $offset;
+        line-height: $height - $offset;
+        margin: 0 1px + $spacing-xs 0 0;
+        padding-top: $offset;
+        text-align: center;
+        transform: translateY(-1px);
+        vertical-align: middle;
+        width: $height;
+
+        &:before {
+            font-family: $icon-font;
+            font-size: 11px;
+            height: $height - $offset;
+            line-height: $height - $offset;
+            vertical-align: top;
+        }
+
+        &.icon-check {
+            background: $color-success;
+
+            &:before {
+                font-size: 8px;
+            }
+        }
+    }
+
+    &__character {
+        background: $color-warning-icon-yellow;
+    }
+
+    &__number {
+        background: $color-midnight;
+    }
+
+    &__gutter-arrow {
+        position: absolute;
+        top: 0;
+        left: 9px;
+        bottom: 0;
+        width: 19px;
+        border-left: 1px solid $color-rabbit-fur;
+
+        &:after {
+            content: '';
+            position: absolute;
+            border: 5px solid transparent;
+            border-top-color: $color-rabbit-fur;
+            bottom: -5px;
+            left: -5px;
+        }
+    }
+}

@@ -6,9 +6,9 @@
 
     font-family: 'iconfont';
     src:
-        url('#{$font-path}iconfont.ttf?8sldf1') format('truetype'),
-        url('#{$font-path}iconfont.woff?8sldf1') format('woff'),
-        url('#{$font-path}iconfont.svg?8sldf1#iconfont') format('svg');
+        url('#{$font-path}iconfont.ttf?mg4u1g') format('truetype'),
+        url('#{$font-path}iconfont.woff?mg4u1g') format('woff'),
+        url('#{$font-path}iconfont.svg?mg4u1g#iconfont') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -27,6 +27,11 @@
     /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+a[class^='icon-'],
+a[class*=' icon-'] {
+    text-decoration: none;
 }
 
 .inline-icon {
@@ -155,6 +160,10 @@
 
 .icon-cog:before {
     content: '\67';
+}
+
+.icon-cog-filled:before {
+    content: '\e919';
 }
 
 .icon-collapse:before {
