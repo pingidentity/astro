@@ -1,0 +1,20 @@
+.keyword-search__box > * {
+    margin: 0;
+    width: 100%;
+}
+
+.keyword-search__results > :hover {
+    text-decoration: underline;
+}
+
+.keyword-search__results {
+    line-height: 49px;
+}
+
+.keyword-search__results > :not(:last-child) {
+    border-bottom: 1px solid #c2c6ca;
+}
+
+.keyword-search__result {
+    display: block;
+}

@@ -3,24 +3,28 @@ window.__DEV__ = true;
 jest.dontMock("../AppFrame");
 jest.dontMock("../header-bar/HeaderBar");
 jest.dontMock("../left-nav/LeftNavBar");
+jest.dontMock("../../forms/KeywordSearch.jsx");
 
 describe("AppFrame", function() {
-    var React = require("react"),
+    const React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         ReduxTestUtils = require("../../../util/ReduxTestUtils"),
+        { buildSearchProps } = require("../../../util/SearchUtils"),
         TestUtils = require("../../../testutil/TestUtils"),
         AppFrame = require("../AppFrame"),
         _ = require("underscore");
 
-    var navData = [
+    const navData = [
         {
+            id: "columna",
             label: "ColumnA",
             children: [
                 {
                     label: "Section 1",
                     id: "section-1",
                     children: [{ label: "Item 1", id: "item-1" }],
-                    icon: "account"
+                    icon: "account",
+                    root: "columna"
                 },
                 {
                     label: "Section 2",
@@ -80,6 +84,16 @@ describe("AppFrame", function() {
             <ReduxTestUtils.Wrapper type={AppFrame} opts={opts} />
         );
     }
+
+    const getSearchableNode = ({ props: { navTree } }, id) => {
+        const {
+            possibleResults: {
+                [id]: node
+            }
+        } = buildSearchProps(navTree);
+
+        return node;
+    };
 
     it("clicks trigger correct callback for items", function() {
         var wrapper = getWrappedComponent();
@@ -286,5 +300,127 @@ describe("AppFrame", function() {
 
         ReactTestUtils.Simulate.click(rootNavItemNotSection);
         expect(component.props.onRootChange).lastCalledWith("ColumnC");
+    });
+
+    it("renders a search icon in the header bar when searchable prop is true", () => {
+        const wrapper = getWrappedComponent({ searchable: true });
+        const component = wrapper.refs.target;
+
+        const keywordSearch = TestUtils.findRenderedDOMNodeWithClass(
+            component,
+            "icon-search"
+        );
+
+        expect(keywordSearch).toBeTruthy();
+    });
+
+    it("renders a KeywordSearch component when searchable prop is true and search button has been clicked", () => {
+        const wrapper = getWrappedComponent({ searchable: true });
+        const component = wrapper.refs.target;
+
+        const searchButton = TestUtils.findRenderedDOMNodeWithClass(
+            component,
+            "icon-search"
+        );
+
+        ReactTestUtils.Simulate.click(searchButton);
+
+        const keywordSearch = TestUtils.findRenderedDOMNodeWithClass(
+            component,
+            "keyword-search"
+        );
+
+        expect(keywordSearch).toBeTruthy();
+    });
+
+    it("does not render a KeywordSearch if search has not been clicked", () => {
+        const wrapper = getWrappedComponent({ searchable: true });
+        const {
+            refs: {
+                target: component
+            }
+        } = wrapper;
+
+        const keywordSearch = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "app-frame-search"
+        );
+
+        expect(keywordSearch).toBeFalsy();
+    });
+
+    it("calls onRootChange and onSectionChange props when search result is clicked for a section node", () => {
+        const wrapper = getWrappedComponent({ searchable: true });
+        const {
+            refs: {
+                target: component
+            }
+        } = wrapper;
+
+        const [{
+            id: rootId,
+            children: [{
+                id: sectionId
+            }]
+        }] = navData;
+
+        const node = getSearchableNode(component, sectionId);
+
+        component._onSearchClick(node);
+
+        expect(component.props.onSectionChange).lastCalledWith(sectionId);
+        expect(component.props.onRootChange).lastCalledWith(rootId);
+        expect(component.state.searchOpen).toEqual(false);
+    });
+
+    it("calls onRootChange, onSectionChange and onItemChange props when search result is clicked for an item", () => {
+        const wrapper = getWrappedComponent({ searchable: true });
+        const {
+            refs: {
+                target: component
+            }
+        } = wrapper;
+
+        const [{
+            id: rootId,
+            children: [{
+                id: sectionId,
+                children: [{
+                    id: itemId
+                }]
+            }]
+        }] = navData;
+
+        const node = getSearchableNode(component, itemId);
+
+        component._onSearchClick(node);
+
+        expect(component.props.onItemChange).lastCalledWith(itemId);
+        expect(component.props.onSectionChange).lastCalledWith(sectionId);
+        expect(component.props.onRootChange).lastCalledWith(rootId);
+        expect(component.state.searchOpen).toEqual(false);
+    });
+
+    it("calls onRootChange and onItemChange props when search result is clicked for an item not in a section", () => {
+        const wrapper = getWrappedComponent({ searchable: true });
+        const {
+            refs: {
+                target: component
+            }
+        } = wrapper;
+
+        const {
+            id: rootId,
+            children
+         } = navData[0];
+
+        const node = getSearchableNode(component, children[2].id);
+
+        component._onSearchClick(node);
+
+        expect(component.props.onItemChange).lastCalledWith(children[2].id);
+        expect(component.props.onSectionChange).not.toHaveBeenCalled();
+        expect(component.props.onRootChange).lastCalledWith(rootId);
+        expect(component.state.searchOpen).toEqual(false);
     });
 });

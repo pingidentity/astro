@@ -2,6 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import HeaderBar from "./header-bar";
 import LeftNav from "./left-nav";
+import KeywordSearch from "../forms/KeywordSearch";
+import Modal from "../general/Modal";
+import {
+    buildSearchProps
+} from "../../util/SearchUtils";
 
 import _ from "underscore";
 
@@ -31,7 +36,8 @@ import _ from "underscore";
  *          Handler for when the root changes. Accepts the id for the root branch.
  * @param {AppFrame~onSectionChange} [onSectionChange]
  *          Handler for when a section is toggled. Accepts the id of the section.
- *
+ * @param {bool} [searchable]
+ *          This is an experimental prop that is not ready for production.
  */
 
 /**
@@ -68,7 +74,8 @@ class AppFrame extends React.Component {
         onRootChange: PropTypes.func,
         onSectionChange: PropTypes.func,
         navTree: PropTypes.array.isRequired,
-        root: PropTypes.string
+        root: PropTypes.string,
+        searchable: PropTypes.bool
     };
 
     static defaultProps = {
@@ -81,7 +88,16 @@ class AppFrame extends React.Component {
         onRootChange: _.noop,
         onSectionChange: _.noop,
         openSections: {},
+        searchable: false
     };
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            searchOpen: false
+        };
+    }
 
     /**
      * @method
@@ -122,6 +138,16 @@ class AppFrame extends React.Component {
      */
     _getNode = id => this._getNodeIn(id, this.props.navTree);
 
+        /**
+     * @method
+     * @name AppFrame#_isNodeIn
+     * @param {string} id
+     * @param {array} tree
+     * @private
+     * @desc Is the node with this id in this tree?
+     */
+    _isNodeIn = (id, tree) => (this._getNodeIn(id, tree) ? true : false);
+
     /**
      * @method
      * @name AppFrame#_handleItemChange
@@ -147,7 +173,7 @@ class AppFrame extends React.Component {
      * @private
      * @desc Handle when a section is toggled. Might select an item based on behavior props.
      */
-    _handleSectionChange = id => {
+    _handleSectionChange = (id) => {
         if (this.props.oneSectionOnly) {
             _.each(this.props.leftNavBarProps.openSections, (value, section) => {
                 if (this.props.leftNavBarProps.openSections[section] && section !== id) {
@@ -156,15 +182,15 @@ class AppFrame extends React.Component {
             });
         }
 
-        var opening = !(this.props.leftNavBarProps.openSections[id] || false);
+        const opening = !(this.props.leftNavBarProps.openSections[id] || false);
 
         this.props.onSectionChange(id);
 
         if (this.props.autoSelectItemfromSection && opening) {
-            const section = this._getNode(id);
+            const { children } = this._getNode(id);
 
-            if (!this._isNodeIn(this.props.selectedNode, section.children)) {
-                this.props.onItemChange(section.children[0].id, id);
+            if (!this._isNodeIn(this.props.selectedNode, children)) {
+                this.props.onItemChange(children[0].id, id);
             }
         }
     };
@@ -192,55 +218,149 @@ class AppFrame extends React.Component {
         }
     };
 
-    /**
-     * @method
-     * @name AppFrame#_isNodeIn
-     * @param {string} id
-     * @param {array} tree
-     * @private
-     * @desc Is the node with this id in this tree?
-     */
-    _isNodeIn = (id, tree) => (this._getNodeIn(id, tree) ? true : false);
+    _onSearchClick = ({
+        id,
+        root,
+        section,
+        hasChildren
+    }) => {
+        const {
+            leftNavBarProps: {
+                openSections
+            },
+            onItemChange,
+            onRootChange,
+            onSectionChange
+        } = this.props;
+        const openSection = (sec) => {
+            // Close all other open sections except for the selected one
+            Object.keys(openSections).forEach(key => {
+                const { [key]: sectionOpen } = openSections;
+                if (sectionOpen && key !== sec) {
+                    onSectionChange(key);
+                }
+            });
+            const { [sec]: isOpen } = openSections;
+            if (!isOpen) {
+                onSectionChange(sec);
+            }
+        };
+
+        onRootChange(root || id);
+
+        if (section) {
+            openSection(section);
+            onItemChange(id);
+        } else if (root && hasChildren) {
+            const { children } = this._getNode(id);
+            openSection(id);
+            onItemChange(children[0].id);
+        } else if (root) {
+            onItemChange(id);
+        }
+        this.setState({
+            searchOpen: false
+        });
+    };
+
+    _renderSearchModal = () => {
+        if (this.props.searchable && this.state.searchOpen) {
+            const closeModal = () => this.setState({ searchOpen: false });
+            const searchProps = buildSearchProps(this.props.navTree);
+            return (
+                <Modal
+                    closeOnBgClick={true}
+                    expanded={true}
+                    modalTitle="Search"
+                    type="dialog"
+                    onClose={closeModal}
+                >
+                    <KeywordSearch
+                        data-id="app-frame-search"
+                        onResultClick={this._onSearchClick}
+                        {...searchProps}
+                    />
+                </Modal>
+            );
+        } else {
+            return null;
+        }
+    }
+
+    _buildHeaderProps = () => {
+        const {
+            headerBarProps = {},
+            searchable
+        } = this.props;
+
+        if (searchable) {
+            const { tree = {} } = headerBarProps;
+            const searchNode = {
+                id: "search",
+                iconClassName: "icon-search",
+                onClick: () => this.setState({
+                    searchOpen: true
+                })
+            };
+            return {
+                ..._.omit(headerBarProps, "openNode"),
+                tree: [
+                    searchNode,
+                    ...tree
+                ]
+            };
+        } else {
+            return _.omit(this.props.headerBarProps, "openNode");
+        }
+    }
 
     render() {
-        var navOptions = null,
-            tree = this.props.navTree,
-            rootBranch = this.props.root
-                ? tree.filter(
-                      branch =>
-                          branch.id === this.props.root ||
-                          branch.label === this.props.root
-                  )[0]
-                : tree;
-        if (rootBranch.children) {
-            tree = rootBranch.children;
-        }
-        if (rootBranch !== this.props.navTree) {
-            navOptions = _.map(this.props.navTree, section => ({
-                id: section.id,
-                label: section.label
-            }));
-        }
+        const {
+            leftNavBarProps,
+            navTree,
+            root
+        } = this.props;
+
+        const
+            rootBranch =
+                root
+                ? navTree.filter(
+                    ({ id, label }) =>
+                        id === root ||
+                        label === root
+                    )[0]
+                : navTree,
+            tree = rootBranch.children || navTree,
+            navOptions =
+                rootBranch !== navTree
+                ? _.map(
+                    navTree, ({ id, label }) => ({
+                        id,
+                        label
+                    }))
+                : null;
+
         return (
             <div
                 className={this.props.className}
                 data-id={this.props["data-id"]}
             >
                 <HeaderBar
-                    {..._.omit(this.props.headerBarProps, "openNode")}
+                    {...this._buildHeaderProps()}
                     navOptions={navOptions}
                     navSelected={this.props.root}
                     onNavChange={this._handleRootChange}
                 />
                 <LeftNav
                     topContent={rootBranch.label}
-                    {...this.props.leftNavBarProps}
+                    {...leftNavBarProps}
                     onSectionValueChange={this._handleSectionChange}
                     onItemValueChange={this._handleItemChange}
                     tree={tree}
                     updated={true}
                 />
                 {this.props.children}
+                {this._renderSearchModal()}
             </div>
         );
     }

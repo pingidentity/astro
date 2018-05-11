@@ -2,7 +2,7 @@ import HTML5Backend from "react-dnd-html5-backend";
 import { DragDropContext } from "react-dnd";
 import "../util/polyfills.js";
 
-var React = require("react"),
+const React = require("react"),
     thunk = require("redux-thunk"),
     Redux = require("redux"),
     ReactDOM = require("react-dom"),
@@ -36,6 +36,7 @@ class DemoApp extends React.Component {
      * @desc Compute the path to the demo item's jsdoc
      * @returns {string} - The jsdoc url
      */
+
     _getDocumentationUrl = (name) => {
         if (!name) {
             return null;
@@ -86,13 +87,18 @@ class DemoApp extends React.Component {
     * @returns {string} = the jsdoc name
     */
     _getDocumentationName = () => {
-        if (this._demoItem) {
-            if (this._demoItem.module) {
-                return this._demoItem.pathToDoc && "module-" + this._demoItem.pathToDoc.match(/(\w*)\//)[1] + "_" +
-                  this._demoItem.pathToDoc.match(/(\w*).js/)[1];
-            } else {
-                return this._demoItem.pathToDoc && this._demoItem.pathToDoc.match(/(\w*).jsx/)[1];
+        const {
+            _demoItem: {
+                module,
+                pathToDoc
             }
+        } = this;
+
+        if (module && pathToDoc) {
+            return "module-" + pathToDoc.match(/(\w*)\//)[1] + "_" +
+                pathToDoc.match(/(\w*).js/)[1];
+        } else if (pathToDoc) {
+            return pathToDoc.match(/(\w*).jsx/)[1];
         }
     };
 
@@ -103,12 +109,50 @@ class DemoApp extends React.Component {
     * @desc Compute the path the user will need to import this component in their appActions
     * @returns {string} = The path to the component in the lib folder
     */
-    _getImportPath = (path) => {
-        if (!path) {
-            return null;
-        }
+    _getImportPath = path => path ? `lib/${path.replace(/\.jsx$/, ".js")}` : null;
 
-        return `lib/${path.replace(/\.jsx$/, ".js")}`;
+    /**
+    * @method
+    * @name DemoApp#_sortChildren
+    * @private
+    * @desc Sort the child items of a demo item unless an order is specified by parent
+    * @returns {array} = sorted array of demo item children
+    */
+    _sortChildren = ({ listOrder, ...props }, children = []) => {
+        return children.length > 0
+            ? {
+                children: listOrder
+                    ? children
+                    : children.sort(({ label: a }, { label: b }) => a > b ? 1 : -1),
+                ...props
+            }
+            : { ...props };
+    };
+
+    /**
+    * @method
+    * @name DemoApp#_processDemoItems
+    * @private
+    * @desc Recursively processes demo items; adds id for LeftNavBaralong with category and root for search
+    * @returns {string} = the jsdoc name
+    */
+    _processItems = ({ children = [], label, ...props }) => {
+        const id = label.replace(/\W/g, "");
+
+        const modifiedChildren = children.map(child => this._processItems(child));
+
+        const item = this._sortChildren({
+            id,
+            label,
+            ...props
+        }, modifiedChildren);
+
+        this._demoIndexById = {
+            [id]: item,
+            ...this._demoIndexById
+        };
+
+        return item;
     };
 
     /**
@@ -135,26 +179,7 @@ class DemoApp extends React.Component {
         this.navActions.setCollapsible(true);
         this.navActions.setUpdated(true);
 
-        // The demos list doesn't have ids, so this loop will just duplicate the label and use it as an ID.
-        // IDs are required by the LeftNavBar.
-        // While looping through the demos, register their reducers
-        const processItems = item => {
-            item.id = item.label.replace(/\W/g, "");
-            this._demoIndexById[item.id] = item;
-
-            if (item.children) {
-                if (!item.listOrder) {
-                    item.children = item.children.sort(function (a, b) {
-                        return a.label > b.label ? 1 : -1;
-                    });
-                }
-
-                item.children.forEach(processItems);
-            }
-
-            return item;
-        };
-        this.navActions.init(require("./core/demos.js").map(processItems));
+        this.navActions.init(require("./core/demos.js").map(this._processItems));
         this.navActions.setRoot("Documentation");
     }
 
@@ -165,17 +190,24 @@ class DemoApp extends React.Component {
      * put here.  For instance, loading the query string.
      */
     componentDidMount() {
-        // load the arguments from the query string
-        if (this.props.location.query.selectedNode) {
-            if (this.props.location.query.selectedSection) {
-                this.navActions.toggleSection(this.props.location.query.selectedSection);
+        const {
+            query: {
+                root,
+                selectedNode,
+                selectedSection
             }
-            if (this.props.location.query.root) {
-                this.navActions.setRoot(this.props.location.query.root);
+        } = this.props.location;
+        // load the arguments from the query string
+        if (selectedNode) {
+            if (selectedSection) {
+                this.navActions.toggleSection(selectedSection);
+            }
+            if (root) {
+                this.navActions.setRoot(root);
             }
             this.navActions.selectItem(
-                this.props.location.query.selectedNode,
-                this.props.location.query.selectedSection);
+                selectedNode,
+                selectedSection);
         } else {
             // set initial page to docs if none selected
             this.navActions.toggleSection("Docs");
@@ -189,13 +221,12 @@ class DemoApp extends React.Component {
      * @param {object} newProps - Next props
      * @desc If the app receives a new selectedNode then fetch the markup for the displayed demo
      */
-    componentWillReceiveProps(newProps) {
-        var id = newProps.nav.selectedNode;
-
+    componentWillReceiveProps({ nav: { selectedNode: id } }) {
+        const { [id]: demoItem } = this._demoIndexById;
         // Make sure the demo item exists since an invalid component id could be set in the URL when the demoApp loads
-        if (newProps.nav.selectedNode !== this.props.nav.selectedNode && this._demoIndexById[id]) {
+        if (id !== this.props.nav.selectedNode && demoItem) {
             this._demoStore = null;
-            this._demoItem = this._demoIndexById[id];
+            this._demoItem = demoItem;
             this._demo = this._demoItem.demo;
 
             // Some demo items may have no pathToDoc (e.g. tutorial items)
@@ -212,7 +243,7 @@ class DemoApp extends React.Component {
     }
 
     render() {
-        var id = this.props.nav.selectedNode,
+        const id = this.props.nav.selectedNode,
             name = this._getDocumentationName(),
             path = this._demoItem.pathToSource,
             demoPath = this._demoItem.pathToDemoSource,
@@ -243,6 +274,7 @@ class DemoApp extends React.Component {
                     ]
                 })}
                 leftNavBarProps={this.props.nav}
+                searchable={true}
                 navTree={this.props.nav.tree}
                 root={this.props.nav.root}
                 onRootChange={this.navActions.setRoot}
@@ -280,7 +312,7 @@ class DemoApp extends React.Component {
 }
 
 /** Connect the app to the redux store */
-DemoApp = ReactRedux.connect(function (state) {
+DemoApp = ReactRedux.connect((state) => {
     return {
         code: state.app.code,
         nav: state.nav,
