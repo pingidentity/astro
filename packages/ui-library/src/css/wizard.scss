@@ -153,7 +153,15 @@ $wizard-close-button-color: $color-strong-neutral-40;
     bottom: 0;
     top: 0;
     overflow-y: auto;
+
+    .page-messages {
+        position: relative;
+        top: -$wizard-v-spacing;
+        left: -$wizard-h-spacing;
+        width: calc(100% + (#{$wizard-h-spacing} * 2));
+    }
 }
+
 
 .wizard-step__title {
     font-size: $wizard-title-font-size;

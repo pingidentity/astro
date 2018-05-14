@@ -5,6 +5,7 @@ import ButtonBar from "../forms/ButtonBar";
 import PropTypes from "prop-types";
 import _ from "underscore";
 import classnames from "classnames";
+import Messages from "../general/messages";
 
 
 /**
@@ -15,6 +16,10 @@ import classnames from "classnames";
  *     Value of the "data-id" assigned to the top-level HTML container.
  * @param {number} [activeStep=0]
  *     The zero-based index of the step to display.
+ * @param {Object.Wizard~Messages} [messageProps]
+ *     An object containing the props for the Messages displayed in the active step. Any props specified
+ *     in the Messages will override the default behavior.  Any unassigned properties
+ *     will take the wizard defaults. See the Message component for full documentation of these props.
  * @param {Object.Wizard~ButtonBar} [buttonBarProps]
  *     An object containing the props for the buttonBar displayed in the active step. Any props specified
  *     in the buttonBar will override the default behavior as well as the step-level onSave.  Any unassigned properties
@@ -92,6 +97,7 @@ class Wizard extends React.Component {
     static defaultProps = {
         activeStep: 1,
         buttonBarProps: {},
+        messageProps: null,
         "data-id": "wizard",
         headerItems: [],
         onCancel: _.noop,
@@ -148,6 +154,7 @@ class Wizard extends React.Component {
                 className={classnames("wizard-2", hasHeaderItems ? "wizard-2--header-shown" : null)}>
                 { hasHeaderItems && <Header data-id={this.props["data-id"]} sections={this.props.headerItems}/> }
                 <div className="wizard__content">
+                    {this.props.messageProps && <Messages {...this.props.messageProps} />}
                     <ActiveStep
                         data-id={this.props["data-id"]}
                         step={activeStep}
@@ -264,6 +271,7 @@ function Header(props) {
 Wizard.propTypes = {
     activeStep: PropTypes.number,
     buttonBarProps: PropTypes.object,
+    messageProps: PropTypes.object,
     "data-id": PropTypes.string,
     headerItems: PropTypes.arrayOf(
         PropTypes.shape({

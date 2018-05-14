@@ -30,6 +30,7 @@ class WizardDemo extends React.Component {
         applications: [],
         headerColumns: null,
         show: null,
+        messageProps: null
     };
 
     _updateCurrentApp = (property, value) => {
@@ -108,8 +109,26 @@ class WizardDemo extends React.Component {
         this.setState({ currentApp: app });
     }
 
-    onNext = () => {
+    clearMessages = () => {
         this.setState({
+            messageProps: null
+        });
+    }
+
+    onNext = () => {
+        if (this.state.activeStep === 1) {
+            var messageProps = { messages: [
+                {
+                    text: "New Message added",
+                    type: "notice",
+                }
+            ] };
+            setTimeout (this.clearMessages, 3000);
+        }
+
+        this.setState({
+            messageProps: messageProps,
+
             activeStep: this.state.activeStep < this.state.numSteps - 1
                 ? this.state.activeStep + 1
                 : this.state.numSteps - 1
@@ -201,6 +220,7 @@ class WizardDemo extends React.Component {
                     onClose={this._onClose}
                     activeStep={this.state.activeStep}
                     onMenuClick={this._onMenuClick}
+                    messageProps={this.state.messageProps}
                     headerItems={headerItems}>
 
                     <Step

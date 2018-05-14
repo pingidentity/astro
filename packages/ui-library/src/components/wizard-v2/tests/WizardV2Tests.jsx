@@ -3,6 +3,7 @@ window.__DEV__ = true;
 jest.dontMock("../Step");
 jest.dontMock("../Wizard");
 jest.dontMock("../Menu");
+jest.dontMock("../../general/messages");
 jest.dontMock("../../forms/ButtonBar");
 jest.dontMock("../../general/EllipsisLoaderButton");
 
