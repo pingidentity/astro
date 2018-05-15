@@ -264,14 +264,15 @@ class StatefulExpandableRow extends React.Component {
         });
     };
 
-    _handleDeleteConfirm = () => {
+    _handleDeleteConfirm = (e) => {
         this._hideDeleteConfirm();
         if (this.props.onDelete) {
-            this.props.onDelete();
+            this.props.onDelete(e);
         }
     };
 
     _handleDelete = (e) => {
+        e.preventDefault();
         if (!this.props.confirmDelete && this.props.onDelete) {
             this.props.onDelete(e);
         } else {
