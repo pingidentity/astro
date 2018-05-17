@@ -10,6 +10,7 @@ var React = require("react"),
     KeyboardUtils = require("../../../util/KeyboardUtils"),
     DragDrop = require("../DragDropRow"),
     dragScroll = require("../../../util/dragScroll");
+import Button from "../../buttons/Button";
 
 /**
 * @enum {string}
@@ -644,12 +645,12 @@ class ConfirmDeleteDialog extends React.Component {
                         {this.props.label}
                     </p>
                     <div className="button-group">
-                        <button
-                            type="button"
+                        <Button
+                            type="primary"
                             data-id="confirm-delete"
                             onClick={this.props.onDeleteConfirm}>
                             {Translator.translate("delete")}
-                        </button>
+                        </Button>
                         <br />
                         <a className="cancel" onClick={this.props.onCancel}>{Translator.translate("cancel")}</a>
                     </div>
