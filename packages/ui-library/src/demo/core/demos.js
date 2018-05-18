@@ -784,7 +784,7 @@ module.exports = [
                 pathToDemoSource: "demo_components_templates_WizardViewDemo.jsx.html",
                 fullscreen: true,
                 icon: "details"
-            },
+            }
         ]
     }
 ];

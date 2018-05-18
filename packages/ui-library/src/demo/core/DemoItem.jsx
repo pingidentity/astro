@@ -50,7 +50,7 @@ class DemoItem extends React.Component {
     };
 
     _getComponentSourceFrame = () => {
-        var sourceClassName = classnames("js-source", { hidden: !this.state.source }),
+        let sourceClassName = classnames("js-source", { hidden: !this.state.source }),
             sourceLabels = [],
             sourceFrames = [],
             frameIndex = 0;
@@ -95,16 +95,16 @@ class DemoItem extends React.Component {
      * Also, ReactRedux.connect does not work reliably here (probably because of the multiple stores), so
      * instead we just subscribe directly to the store and use the updates to re-render
      */
-    componentWillReceiveProps(newProps) {
-        if (this.props.type !== newProps.type) {
+    componentWillReceiveProps({ type, store }) {
+        if (this.props.type !== type) {
             if (this.unsubscribe) {
                 this.unsubscribe();
                 this.unsubscribe = null;
             }
 
-            if (newProps.type.Reducer) {
-                this.unsubscribe = newProps.store.subscribe(this._handleChange);
-                this.setState({ store: newProps.store.getState() });
+            if (type.Reducer) {
+                this.unsubscribe = store.subscribe(this._handleChange);
+                this.setState({ store: store.getState() });
             }
 
             this.setState({ selectedSource: 0 }); // Reset default source to demo for each new demo change
@@ -112,29 +112,34 @@ class DemoItem extends React.Component {
     }
 
     render() {
+        const {
+            demoCodePathUrl,
+            description,
+            fullscreen,
+            jsdocUrl,
+            type
+        } = this.props;
+
         // This is very important because Redux updates are not instant.  When replacing the demoItemReducer,
         // The new state will take some type to propagate.  We dont want to try and render without an initial
         // state being injected into the store.  Demo actions are computed inside the Demo.jsx so they are
         // available instantly after switching to a new demo.
-        if (!this.props.type || (this.props.demoActions && !this.props.demoProps)) {
+        if (!type || (this.props.demoActions && !this.props.demoProps)) {
             return null;
         }
 
         // Some demo items do not have documentation (e.g. Tutorial items)
-        var docToggle,
-            srcToggle;
-        if (this.props.jsdocUrl) {
-            docToggle = <span className="toggle" onClick={this._toggle} />;
-        }
-        if (this.props.codePathUrl || this.props.demoCodePathUrl) {
-            srcToggle = <span className="toggle-source" onClick={this._toggleSource} />;
-        }
+        const docToggle = jsdocUrl &&
+            <span className="toggle" onClick={this._toggle} />;
 
-        var markdown = this.props.description && marked(this.props.description),
+        const srcToggle = (this.props.codePathUrl || demoCodePathUrl) &&
+            <span className="toggle-source" onClick={this._toggleSource} />;
+
+        const markdown = description && marked(description),
             props = _.extend({}, this.props, this.state.store),
-            containerClassName = classnames("section", { fullscreen: this.props.fullscreen }),
+            containerClassName = classnames("section", { fullscreen }),
             headerClassName = classnames("doc", {
-                open: this.state.open && (this.props.demoCodePathUrl || this.state.codePathUrl),
+                open: this.state.open && (demoCodePathUrl || this.state.codePathUrl),
                 source: this.state.source
             }),
             docsClassName = classnames("js-doc", { hidden: this.state.source });
@@ -161,10 +166,10 @@ class DemoItem extends React.Component {
                          dangerouslySetInnerHTML={{ __html: markdown }}></div>
 
                     <div className="output clearfix">
-                        {React.createElement(this.props.type, props)}
+                        {React.createElement(type, props)}
                     </div>
 
-                    {!this.props.fullscreen && <Markup content={this.props.code} />}
+                    {!fullscreen && <Markup content={this.props.code} />}
                 </div>
             </div>
         );

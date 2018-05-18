@@ -42,6 +42,7 @@ class SectionDemo extends React.Component {
                     data-id="demo-section-1"
                     stateless={true}
                     title="Stateless section"
+                    collapsedText="Test"
                     onToggle={this._toggleFirst}
                     expanded={this.state.firstSectionOpen}>
                     {this._getContent()}
@@ -60,6 +61,15 @@ class SectionDemo extends React.Component {
                         <Button inline iconName="edit"/>,
                         <Button inline iconName="delete"/>
                     ]}>
+                    {this._getContent()}
+                </Section>
+                <Section
+                    title="Section with details text"
+                    stateless={false}
+                    detailsText={{
+                        expanded: "Expanded",
+                        collapsed: "Collapsed"
+                    }}>
                     {this._getContent()}
                 </Section>
                 <Section
@@ -94,6 +104,16 @@ class SectionDemo extends React.Component {
                             <Button inline iconName="edit"/>,
                             <Button inline iconName="delete"/>
                         ]}>
+                        {this._getContent()}
+                    </Section>
+                    <Section
+                        stateless={false}
+                        condensed={true}
+                        title="Section with details text"
+                        detailsText={{
+                            expanded: "Expanded",
+                            collapsed: "Collapsed"
+                        }}>
                         {this._getContent()}
                     </Section>
                     <Section

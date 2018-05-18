@@ -41,7 +41,8 @@ var React = require("react"),
  *     The text to display in the the collapsed view and along the top in the expanded view (adjacent to the arrow)
  * @param {string|object} [titleValue]
  *     The text to display just to the right of the title (separated by a colon)
- *
+ * @param {object} [detailsText]
+ *     Text to be displayed in the center of the component; switches between collapsed and expanded versions.
  * @param {boolean} [expanded=false]
  *     Whether or not section is expanded and showing body content.
  *
@@ -109,7 +110,11 @@ class SectionStateless extends React.Component {
         titleValue: PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.object
-        ])
+        ]),
+        detailsText: PropTypes.shape({
+            collapsed: PropTypes.string,
+            expanded: PropTypes.string
+        })
     };
 
     static defaultProps = {
@@ -127,6 +132,37 @@ class SectionStateless extends React.Component {
         this.props.onToggle(this.props.expanded);
     };
 
+    _maybeRenderRightContent = () => {
+        const {
+            accessories,
+            detailsText,
+            expanded
+        } = this.props;
+
+        if (accessories || detailsText) {
+            const acc = accessories &&
+                <div
+                    data-id={this.props["data-id"] + "-collapsible-section-accessories"}
+                    className="row-accessories">
+                    {this.props.accessories}
+                </div>;
+
+            const collapsed = detailsText
+                ? <div className="collapsible-section__details-text">
+                        {expanded ? detailsText.expanded : detailsText.collapsed}
+                </div>
+                : <div></div>;
+
+            return (
+                <div className="collapsible-section__right-content">
+                    {[ collapsed, acc ]}
+                </div>
+            );
+        } else {
+            return null;
+        }
+    }
+
     render() {
         const styles = {
             condensed: this.props.condensed,
@@ -139,13 +175,6 @@ class SectionStateless extends React.Component {
             <div
                 className={classnames("collapsible-section", this.props.className, styles)}
                 data-id={this.props["data-id"]}>
-                {this.props.accessories && (
-                    <div
-                        data-id={this.props["data-id"] + "-collapsible-section-accessories"}
-                        className="row-accessories">
-                        {this.props.accessories}
-                    </div>
-                )}
                 <CollapsibleLink
                     data-id={this.props["data-id"] + "-title"}
                     className="collapsible-section-title"
@@ -154,6 +183,7 @@ class SectionStateless extends React.Component {
                     expanded={this.props.expanded}
                     onToggle={this._handleToggle}
                 />
+                {this._maybeRenderRightContent()}
                 {this.props.titleValue && (
                     <span className="collapsible-section-title-value" data-id={this.props["data-id"] + "-title-value"}>
                         {this.props.titleValue}

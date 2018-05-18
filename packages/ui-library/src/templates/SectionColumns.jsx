@@ -1,0 +1,189 @@
+import React from "react";
+import Button from "../components/buttons/Button";
+import { Column, Row } from "../components/general/ColumnLayout";
+import ExpandableRow from "../components/rows/ExpandableRow";
+import Icon from "../components/general/Icon";
+import Link from "../components/general/Link";
+import RockerButton from "../components/forms/RockerButton";
+import Section from "../components/general/Section";
+import Toggle from "../components/forms/form-toggle";
+
+/**
+ * @class Section with Columns
+ * @desc This is a template to demonstrate how to build a collapsible section with columns. Use
+ *     it as a starting poing for an edit page of this type.
+ */
+const SectionColumns = () => {
+    const rowAccessories = [
+        <Button label="Button" inline />,
+        <Toggle stateless={false} toggled />
+    ];
+
+    const rockerLabels = [
+        "Option 1",
+        "Option 2",
+        "Option 3"
+    ];
+
+    return (
+        <div className="section-columns result-set">
+            <ExpandableRow
+                title="Addleman, Katie"
+                subtitle="kaddleman"
+                stateless={false}
+                rowAccessories={rowAccessories}
+            >
+                <RockerButton stateless={false} labels={rockerLabels} />
+                <Row className="columns-margin-none section-columns__columns">
+                    <Column className="textblock textblock--primary">
+                        Role
+                    </Column>
+                    <Column className="textblock textblock--primary">
+                        Jurisdiction
+                    </Column>
+                </Row>
+                <Section
+                    data-id="demo-section-1"
+                    title="System administrator"
+                    detailsText={{
+                        collapsed: "Collapsed test",
+                        expanded: "Expanded test"
+                    }}
+                    stateless={false}
+                >
+                    <Row className="columns-margin-none">
+                        <Column>
+                            <Link title="Permissions" url="#"/>
+                        </Column>
+                        <Column>
+                            <div className="input-row">
+                                <Icon iconName="earth">
+                                    <div className="textblock textblock--primary">
+                                        GM Corporate
+                                    </div>
+                                    <div className="textblock">
+                                        CA Employees, Contractors, EU Employees, US Employees
+                                    </div>
+                                </ Icon>
+                            </div>
+                            <div className="input-row">
+                                <Icon iconName="earth">
+                                    <div className="textblock textblock--primary">
+                                        GM sandbox
+                                    </div>
+                                    <div className="textblock">
+                                        CA Employees, Contractors, EU Employees, US Employees, China Region
+                                    </div>
+                                </ Icon>
+                            </div>
+                        </Column>
+                    </Row>
+                </Section>
+            </ExpandableRow>
+            <ExpandableRow
+                title="Lewis, Francisco"
+                subtitle="flewis"
+                stateless={false}
+                rowAccessories={rowAccessories}
+                expanded
+            >
+                <RockerButton stateless={false} labels={rockerLabels} />
+                <Row className="columns-margin-none section-columns__columns textblock--primary">
+                    <Column>
+                        Role
+                    </Column>
+                    <Column>
+                        Jurisdiction
+                    </Column>
+                </Row>
+                <Section
+                    data-id="demo-section-1"
+                    title="Client applications developer"
+                    detailsText={{
+                        collapsed: "2 environments",
+                        expanded: "Environment"
+                    }}
+                    accessories={[
+                        <Button inline iconName="edit"/>,
+                        <Button inline iconName="delete"/>
+                    ]}
+                    stateless={false}
+                >
+                    <Row className="columns-margin-none">
+                        <Column>
+                            <Link title="Permissions" url="#"/>
+                        </Column>
+                        <Column>
+                            <div className="input-row">
+                                <Icon iconName="earth">
+                                    <div className="textblock textblock--primary">
+                                        GM Corporate
+                                    </div>
+                                    <div className="textblock">
+                                        CA Employees, Contractors, EU Employees, US Employees
+                                    </div>
+                                </ Icon>
+                            </div>
+                            <div className="input-row">
+                                <Icon iconName="earth">
+                                    <div className="textblock textblock--primary">
+                                        GM sandbox
+                                    </div>
+                                    <div className="textblock">
+                                        CA Employees, Contractors, EU Employees, US Employees, China Region
+                                    </div>
+                                </ Icon>
+                            </div>
+                        </Column>
+                    </Row>
+                </Section>
+            </ExpandableRow>
+            <ExpandableRow
+                title="Schneider, Maria"
+                subtitle="mschneider"
+                stateless={false}
+                rowAccessories={rowAccessories}
+            >
+                <RockerButton stateless={false} labels={rockerLabels} />
+                <Row className="columns-margin-none section-columns__columns textblock--primary">
+                    <Column>
+                        Role
+                    </Column>
+                    <Column>
+                        Jurisdiction
+                    </Column>
+                </Row>
+                <Section
+                    data-id="demo-section-1"
+                    title="Office breakdancer"
+                    detailsText={{
+                        collapsed: "Who doesn't love breakdancing?",
+                        expanded: "Nobody, that's who"
+                    }}
+                    stateless={false}
+                >
+                    <Row className="columns-margin-none">
+                        <Column>
+                            <Link title="Qualifications" url="#"/>
+                        </Column>
+                        <Column>
+                            <div className="input-row">
+                                <Icon iconName="earth">
+                                    <div className="textblock textblock--primary">
+                                        World-class moves
+                                    </div>
+                                </ Icon>
+                            </div>
+                        </Column>
+                    </Row>
+                </Section>
+            </ExpandableRow>
+        </div>
+    );
+};
+
+SectionColumns.defaultProps = {
+    columns: []
+};
+
+export default SectionColumns;

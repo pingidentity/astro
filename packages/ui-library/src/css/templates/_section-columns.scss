@@ -1,0 +1,12 @@
+.section-columns > * {
+    width: 100%;
+}
+
+.section-columns__columns {
+    width: 100%;
+    margin: 0 0 5px 17px;
+}
+
+.section-columns__columns > :last-child {
+    padding-left: 0.9%;
+}

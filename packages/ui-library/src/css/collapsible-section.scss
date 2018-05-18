@@ -33,7 +33,7 @@
         @include transition(all 0.3s);
     }
     .row-accessories {
-        height: 62px;
+        float: unset;
 
         > * {
             margin-left: 10px;
@@ -90,7 +90,8 @@
         .collapsible-section-title {
             padding: 15px 0 13px;
         }
-        .row-accessories {
+
+        .collapsible-section__right-content {
             height: 43px;
         }
     }
@@ -122,4 +123,20 @@
             font-size: 13px;
         }
     }
+}
+
+.collapsible-section__right-content {
+    float: right;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 62px;
+    width: 50%;
+}
+
+.collapsible-section__details-text {
+    padding-left: 12px;
+    color: $color-strong-neutral-50;
+
+    @include transition(all 0.3s);
 }

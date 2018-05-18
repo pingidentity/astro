@@ -5,14 +5,14 @@ jest.dontMock("../CollapsibleLink");
 jest.dontMock("../If");
 
 describe("Section", function () {
-    var React = require("react"),
+    const React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         Section = require("../Section"),
         Utils = require("../../../util/Utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         _ = require("underscore");
 
-    var defaults = {
+    const defaults = {
         children: "content",
         "data-id": "my-section",
         title: "My Section"
@@ -29,7 +29,7 @@ describe("Section", function () {
     };
 
     it("Stateless: renders collapsed state", function () {
-        var view = getComponent({
+        const view = getComponent({
                 children: <div data-id="iShouldBeHidden">My Content</div>
             }),
             container = TestUtils.findRenderedDOMNodeWithDataId(view, defaults["data-id"]),
@@ -44,7 +44,7 @@ describe("Section", function () {
     });
 
     it("Stateful: renders collapsed state", function () {
-        var view = getComponent({
+        const view = getComponent({
                 children: <div data-id="iShouldBeHidden">My Content</div>,
                 stateless: false
             }),
@@ -60,7 +60,7 @@ describe("Section", function () {
     });
 
     it("Stateless: renders expanded state", function () {
-        var view = getComponent({
+        const view = getComponent({
                 children: <div data-id="iShouldBeVisible">My Content</div>,
                 expanded: true
             }),
@@ -76,7 +76,7 @@ describe("Section", function () {
     });
 
     it("Stateful: renders expanded state", function () {
-        var view = getComponent({
+        const view = getComponent({
                 children: <div data-id="iShouldBeVisible">My Content</div>,
                 expanded: true,
                 stateless: false,
@@ -96,7 +96,7 @@ describe("Section", function () {
     });
 
     it("Stateless: renders custom classname and data-id", function () {
-        var view = getComponent({
+        const view = getComponent({
                 children: <div data-id="iShouldBeVisible">My Content</div>,
                 className: "extra",
                 expanded: true,
@@ -111,7 +111,7 @@ describe("Section", function () {
     });
 
     it("Stateless: renders unopenable", function () {
-        var view = getComponent({
+        const view = getComponent({
                 disableExpand: true
             }),
             root = TestUtils.findRenderedDOMNodeWithDataId(view, defaults["data-id"]),
@@ -126,18 +126,18 @@ describe("Section", function () {
     });
 
     it("Stateful: renders custom classname and data-id", function () {
-        var view = getComponent({
+        const view = getComponent({
             className: "extra",
             expanded: true,
             stateless: false
         });
-        var root = TestUtils.findRenderedDOMNodeWithDataId(view, defaults["data-id"]);
+        const root = TestUtils.findRenderedDOMNodeWithDataId(view, defaults["data-id"]);
 
         expect(root.className).toContain("extra");
     });
 
     it("Stateless: triggers callback on click", function () {
-        var callback = jest.genMockFunction(),
+        const callback = jest.genMockFunction(),
             view = getComponent({
                 onToggle: callback
             }),
@@ -149,7 +149,7 @@ describe("Section", function () {
     });
 
     it("Stateful: callback toggles expanded", function () {
-        var view = getComponent({
+        const view = getComponent({
                 stateless: false
             }),
             stateful = view.refs.SectionStateful;
@@ -162,7 +162,7 @@ describe("Section", function () {
     });
 
     it("Stateful: renders the right-side/row-accessories text content", function () {
-        var accessoriesContent = "Some text",
+        const accessoriesContent = "Some text",
             view = getComponent({
                 stateless: false,
                 accessories: accessoriesContent
@@ -177,7 +177,7 @@ describe("Section", function () {
     });
 
     it("Stateful: renders the right-side/row-accessories html content", function () {
-        var accessoriesText = "Some Content",
+        const accessoriesText = "Some Content",
             accessoriesContent = (<span>{accessoriesText}</span>),
             view = getComponent({
                 stateless: false,
@@ -193,7 +193,7 @@ describe("Section", function () {
     });
 
     it("does not render the title colon when the title-value is not defined", function () {
-        var view = getComponent({
+        const view = getComponent({
                 stateless: false
             }),
             title = TestUtils.findRenderedDOMNodeWithDataId(view, defaults["data-id"] + "-title"),
@@ -204,7 +204,7 @@ describe("Section", function () {
     });
 
     it("renders as condensed", function () {
-        var view = getComponent({
+        const view = getComponent({
                 condensed: true
             }),
             root = TestUtils.findRenderedDOMNodeWithDataId(view, defaults["data-id"]);
@@ -213,7 +213,7 @@ describe("Section", function () {
     });
 
     it("throws error when deprecated prop 'id' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
+        const expectedError = new Error(Utils.deprecatePropError("id", "data-id"));
 
         expect(
             function () {
@@ -223,7 +223,7 @@ describe("Section", function () {
     });
 
     it("throws error when deprecated prop 'controlled' is passed in", function () {
-        var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless", "true", "false"));
+        const expectedError = new Error(Utils.deprecatePropError("controlled", "stateless", "true", "false"));
 
         expect(
             function () {
@@ -232,4 +232,37 @@ describe("Section", function () {
         ).toThrow(expectedError);
     });
 
+    it("renders collapsed detail text when collapsed and detailsText is passed in", () => {
+        const component = getComponent({
+                detailsText: {
+                    condensed: "Condensed"
+                }
+            }),
+            detailsText = TestUtils.findRenderedDOMNodeWithClass(component, "collapsible-section__details-text");
+
+        expect(detailsText).toBeTruthy();
+    });
+
+    it("renders expanded detail text when expanded and detailsText is passed in", () => {
+        const component = getComponent({
+                detailsText: {
+                    collapsed: "Collapsed"
+                }
+            }),
+            detailsText = TestUtils.findRenderedDOMNodeWithClass(component, "collapsible-section__details-text");
+
+        expect(detailsText.textContent).toEqual("Collapsed");
+    });
+
+    it("renders expanded detail text when expanded and detailsText is passed in", () => {
+        const component = getComponent({
+                detailsText: {
+                    expanded: "Expanded"
+                },
+                expanded: true
+            }),
+            detailsText = TestUtils.findRenderedDOMNodeWithClass(component, "collapsible-section__details-text");
+
+        expect(detailsText.textContent).toEqual("Expanded");
+    });
 });
