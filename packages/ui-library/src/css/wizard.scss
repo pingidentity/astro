@@ -8,8 +8,6 @@ $wizard-progress-menu-bgcolor: $color-neutral-30;
 $wizard-progress-menu-selected-bgcolor: $color-strong-neutral-10;
 $wizard-progress-title-size: 18px;
 $wizard-progress-icon-border-size: 1px;
-$wizard-progress-title-height: $wizard-progress-icon-size + $wizard-progress-icon-border-size * 2; //icon height plus border
-$wizard-progress-disabled-opacity: 0.6;
 $wizard-text-spacing: 15px;
 $wizard-header-border-color: $color-neutral-70;
 $wizard-title-font-size: 28px;
@@ -26,7 +24,7 @@ $wizard-content-bg-color: $color-strong-neutral-90;
     bottom: 0;
     left: 0;
     background-color: $wizard-content-bg-color;
-    color: $color-midnight;
+    color: $color-strong-neutral-10;
     z-index: 1;
 
     textarea,
@@ -49,7 +47,7 @@ $wizard-content-bg-color: $color-strong-neutral-90;
         content: '';
         position: fixed;
         top: 0;
-        left: 120px;
+        left: 0;
         right: 0;
         height: 46px;
         background-color: rgba($color-neutral-10, 0.7);
@@ -126,6 +124,7 @@ $wizard-close-button-color: $color-strong-neutral-40;
     flex: 1;
     border-right: 1px solid $wizard-header-border-color;
     font-size: 23px;
+    color: $color-accent-neutral-10;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -149,7 +148,7 @@ $wizard-close-button-color: $color-strong-neutral-40;
     position: absolute;
     width: calc(100% - #{$wizard-progress-menu-width});
     padding: $wizard-padding;
-    margin: 0 0 #{$wizard-v-spacing + $buttonbar-height} 0;
+    margin: 0 0 $buttonbar-height 0;
     bottom: 0;
     top: 0;
     overflow-y: auto;
@@ -159,6 +158,13 @@ $wizard-close-button-color: $color-strong-neutral-40;
         top: -$wizard-v-spacing;
         left: -$wizard-h-spacing;
         width: calc(100% + (#{$wizard-h-spacing} * 2));
+    }
+
+    // add spacing at the end of the scrolling content container
+    &:after {
+        content: "";
+        display: block;
+        height: $wizard-v-spacing;
     }
 }
 
@@ -283,7 +289,7 @@ $wizard-close-button-color: $color-strong-neutral-40;
     margin-left: $wizard-progress-menu-padding + $wizard-progress-icon-size;
     margin-bottom: $spacing-sm;
     font-size: $wizard-progress-title-size;
-    line-height: $wizard-progress-title-height;
+    line-height: 1em;
 }
 
 .wizard-progress-menu__item-description {

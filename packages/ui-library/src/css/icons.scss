@@ -314,6 +314,10 @@ a[class*=' icon-'] {
     content: '\e911';
 }
 
+.icon-non-interactive:before {
+  content: '\e91a';
+}
+
 .icon-notepad:before {
     content: '\e90b';
 }

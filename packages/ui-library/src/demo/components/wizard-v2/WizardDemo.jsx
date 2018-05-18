@@ -205,7 +205,7 @@ class WizardDemo extends React.Component {
             {
                 id: "Non-Interactive",
                 title: "Non-Interactive",
-                iconName: "server",
+                iconName: "non-interactive",
                 description: "Cloud-based apps that are accessed within a browser."
             }
         ];
