@@ -54,4 +54,17 @@ describe("PageHeader", () => {
         const element = TestUtils.findRenderedDOMNodeWithClass(component, "page-header__accessories");
         expect(element).toBeTruthy();
     });
+
+    it("renders the component with an image", () => {
+        const imagePath = "http://www.foo.com/bar.jpg";
+        const opts = {
+            image: imagePath
+        };
+
+        const component = getComponent(opts);
+
+        const element = TestUtils.findRenderedDOMNodeWithClass(component, "page-header__image");
+        expect(element).toBeTruthy();
+        expect(element.children[0].src).toBe(imagePath);
+    });
 });

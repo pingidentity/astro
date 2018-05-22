@@ -11,13 +11,18 @@ const Link = require("./../../../components/general/Link");
 const PageHeaderDemo = () => {
     return (
         <div>
-            &nbsp;
             <PageHeader title="A Page Header" />
-            &nbsp;
+            <br/>
             <PageHeader title="A Page Header with underline" underlined={true}/>
-            &nbsp;
+            <br/>
             <PageHeader title="A Page Header with a subtitle" subtitle="Subtitle"/>
-            &nbsp;
+            <br/>
+            <PageHeader
+                title="A Page Header with a subtitle and image"
+                subtitle="Subtitle"
+                image="http://doge2048.com/meta/doge-600.png"
+            />
+            <br/>
             <PageHeader
                 title="A Page Header with accessories"
                 accessories={[
@@ -29,7 +34,7 @@ const PageHeaderDemo = () => {
                     <button className="inline">Inline Button</button>,
                     <span className="count">2</span>
                 ]}
-                />
+            />
         </div>
     );
 };

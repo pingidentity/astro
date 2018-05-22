@@ -2,6 +2,9 @@
     margin: 0 0 30px;
     justify-content: space-between;
     width: 100%;
+
+    display: flex;
+    flex-wrap: nowrap;
 }
 
 .page-header--underlined {
@@ -9,12 +12,15 @@
     padding: 0 0 15px;
 }
 
+.page-header__text {
+    flex: 1;
+}
+
 .page-header__title {
     font-size: 24px;
     font-family: $font-pn-regular;
     color: $color-slate;
     word-wrap: break-word;
-    display: inline-block;
 }
 
 
@@ -31,5 +37,21 @@
 
     > * {
         margin: 0 0 0 20px;
+    }
+}
+
+.page-header__image {
+    $size: 40px;
+
+    height: $size;
+    flex-basis: $size;
+    margin: 0 $spacing-md 0 0;
+    background-color: $color-strong-neutral-40;
+
+    img {
+        margin: 50% 0 0;
+        transform: translateY(-50%);
+        max-height: $size;
+        max-width: $size;
     }
 }

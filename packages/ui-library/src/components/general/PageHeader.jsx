@@ -21,36 +21,48 @@ var React = require("react"),
  * @param {object} [accessories]
  *  A right-aligned container where buttons, toggles, or anything else may be passed in to render on the right side
  *  of the header.
+ * @param {string} [image]
+ *     URL for an image that, when provided, appears to the left of the page title
  *
  * @example
  * <Header title="Header title" />
  *
  */
 
-const PageHeader = ({ ["data-id"]: dataId,
-                  title,
-                  className,
-                  underlined,
-                  accessories,
-                  subtitle }) => {
+const PageHeader = ({
+    ["data-id"]: dataId,
+    accessories,
+    className,
+    image,
+    subtitle,
+    title,
+    underlined,
+}) => {
 
     const pageHeaderClass = classnames("page-header", className, { "page-header--underlined": underlined });
 
-    const maybeRenderAccessories = () => {
+    const renderImage = () => {
+        return image && <div className="page-header__image"><img src={image} /></div>;
+    };
+
+    const renderAccessories = () => {
         return accessories && <div className="page-header__accessories">{accessories}</div>;
     };
 
-    const maybeRenderSubtitle = () => {
+    const renderSubtitle = () => {
         return subtitle && <div className="page-header__subtitle">{subtitle}</div>;
     };
 
     return (
         <div className={pageHeaderClass} data-id={dataId}>
-            <div className="page-header__title">
-                { title }
+            {renderImage()}
+            <div className="page-header__text">
+                <div className="page-header__title">
+                    {title}
+                </div>
+                {renderSubtitle()}
             </div>
-            {maybeRenderAccessories()}
-            {maybeRenderSubtitle()}
+            {renderAccessories()}
         </div>
     );
 };
@@ -61,7 +73,8 @@ PageHeader.propTypes = {
     title: PropTypes.string.isRequired,
     subtitle: PropTypes.string,
     underlined: PropTypes.bool,
-    accessories: PropTypes.object
+    accessories: PropTypes.object,
+    image: PropTypes.string,
 };
 
 PageHeader.defaultProps = {
