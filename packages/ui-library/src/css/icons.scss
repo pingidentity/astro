@@ -502,6 +502,10 @@ a[class*=' icon-'] {
     content: '\71';
 }
 
+.icon-tag:before {
+    content: '\e91b';
+}
+
 .icon-terminal:before {
     content: '\e90c';
 }

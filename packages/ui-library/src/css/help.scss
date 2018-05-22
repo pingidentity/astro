@@ -28,6 +28,8 @@
         display: inline-block;
     }
 
+    color: $color-blue-grey;
+
     display: inline-block;
     background: transparent;
     line-height: 14px;
@@ -89,8 +91,10 @@
                 color: $color-midnight;
             }
         }
-        .icon-help {
+        [class^="icon"] {
             @include default-icon-styles;
+        }
+        .icon-help {
             width: $inline-icon-height - 1px;
 
             &:before {
@@ -98,7 +102,6 @@
             }
         }
         .icon-lock {
-            @include default-icon-styles;
             padding-left: 2px;
         }
         img {

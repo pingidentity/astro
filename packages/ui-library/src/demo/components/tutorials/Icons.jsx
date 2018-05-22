@@ -114,6 +114,7 @@ var ICONS = [
     "spinner",
     "success",
     "support",
+    "tag",
     "terminal",
     "thumb",
     "undo",

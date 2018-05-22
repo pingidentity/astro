@@ -55,6 +55,7 @@ class HelpHint extends React.Component {
         "data-id": PropTypes.string,
         className: PropTypes.string,
         delayHide: PropTypes.number,
+        iconName: PropTypes.string,
         placement: PropTypes.oneOf([
             Placements.TOP,
             Placements.BOTTOM,
@@ -111,6 +112,21 @@ class HelpHint extends React.Component {
         }
     }
 
+    getIconName() {
+        const {
+            iconName,
+            lock
+        } = this.props;
+
+        if (iconName) {
+            return `icon-${iconName}`;
+        } else {
+            return lock
+            ? "icon-lock"
+            : "icon-help";
+        }
+    }
+
     maybeRenderLink() {
         const { link } = this.props;
         return link && <Link title="More on this topic" url={link} icon="info"/>;
@@ -129,7 +145,7 @@ class HelpHint extends React.Component {
             children
         } = this.props;
 
-        const iconName = this.props.lock ? "icon-lock" : "icon-help",
+        const iconName = this.getIconName(),
             uid = _.uniqueId("rtt_"),
             display = children
                 ? children
