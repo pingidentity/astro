@@ -75,6 +75,7 @@
     "markdown-loader": "~2.0.1",
     "markdown-to-jsx": "~5.4.2",
     "marked": "0.3.5",
+    "node-fetch": "~2.1.2",
     "node-sass": "4.3.0",
     "object-assign": "4.0.1",
     "process": "0.11.2",
@@ -166,6 +167,7 @@
     "clean-screenshots": "node ./clean-screenshot.js",
     "clean-selenium-log": "node ./clean-selenium-log.js",
     "clean-processes": "kill $(ps -ef | grep -E 'selenium|http-server' | awk '{print $2}')",
-    "compile-sass": "node ./compile-sass.js"
+    "compile-sass": "node ./compile-sass.js",
+    "generate-release-notes": "node ./generateReleaseNotes.js"
   }
 }
