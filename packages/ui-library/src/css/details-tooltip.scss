@@ -133,7 +133,7 @@
             > .details-title {
                 min-height: $title-height;
                 box-sizing: border-box;
-                padding: 18px 10px 10px;
+                padding: 18px 45px 10px;
 
                 background-color: $color-walrus;
                 color: $color-white;
@@ -170,6 +170,19 @@
                 border-width: 0 1px 1px;
                 border-color: $color-timberwolf;
                 border-radius: 0 0 $border-radius $border-radius;
+
+                .input-file-upload {
+                    text-align: center;
+                    label {
+                        margin: 0;
+                        .label-text {
+                            margin: 0 0 15px 22px;
+                        }
+                    }
+                    button {
+                        margin: 0;
+                    }
+                }
             }
             > .details-close {
                 position: absolute;

@@ -171,12 +171,11 @@ class FileUploadDemo extends React.Component {
                         </div>
                         <div className="button-group" data-id="delete-confirmation">
                             <Button
-                                label="Button"
+                                label="Confirm"
                                 data-id="confirm-action"
-                                inline
-                                onClick={this._toggleTooltip} >
-                                Confirm
-                            </Button>
+                                type="primary"
+                                onClick={this._toggleTooltip}
+                            />
                             <br />
                             <a className="cancel" onClick={this._toggleTooltip}>Cancel</a>
                         </div>
