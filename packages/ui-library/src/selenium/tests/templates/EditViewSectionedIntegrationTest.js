@@ -1,7 +1,7 @@
 var EditViewSectionedPage = require("../../pages/templates/EditViewSectionedPage.js");
 
 describe("Edit View Sectioned Integration", function () {
-    
+
     beforeEach(function () {
         EditViewSectionedPage.EditViewSectionedDemoPage();
     });

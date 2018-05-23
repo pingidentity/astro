@@ -103,7 +103,7 @@ var ListViewPaginatedDemoPage = Object.create(HomePage, {
     openListViewPaginatedDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Templates", "ListViewPaginated");
+            this.navigateToPath("Templates", "ListView", "ListViewPaginated");
         }
     }
 });

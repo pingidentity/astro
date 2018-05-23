@@ -1,7 +1,7 @@
 var EditViewSimplePage = require("../../pages/templates/EditViewSimplePage.js");
 
 describe("Edit View Simple Integration", function () {
-    
+
     beforeEach(function () {
         EditViewSimplePage.openEditViewSimpleDemoPage();
     });

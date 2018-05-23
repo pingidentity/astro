@@ -692,6 +692,82 @@ module.exports = [
         label: "Templates",
         children: [
             {
+                label: "Edit View",
+                icon: "edit",
+                children: [
+                    {
+                        label: "Edit View - Simple",
+                        demo: require("../components/templates/EditViewSimpleDemo"),
+                        pathToDoc: "components/templates/EditViewSimple.jsx",
+                        pathToSource: "templates_edit-view-simple_EditViewSimple.jsx.html",
+                        pathToDemoSource: "demo_components_templates_EditViewSimpleDemo.jsx.html",
+                        fullscreen: true
+                    },
+                    {
+                        label: "Edit View - Sectioned",
+                        demo: require("../components/templates/EditViewSectionedDemo"),
+                        pathToDoc: "components/templates/EditViewSectioned.jsx",
+                        pathToSource: "templates_edit-view-sectioned_EditViewSectioned.jsx.html",
+                        pathToDemoSource: "demo_components_templates_EditViewSectionedDemo.jsx.html",
+                        fullscreen: true
+                    },
+                    {
+                        label: "Edit View - Switched",
+                        demo: require("../components/templates/EditViewSwitchedDemo"),
+                        pathToDoc: "components/templates/EditViewSwitched.jsx",
+                        pathToSource: "templates_edit-view-switched_EditViewSwitched.jsx.html",
+                        pathToDemoSource: "demo_components_templates_EditViewSwitchedDemo.jsx.html",
+                        fullscreen: true
+                    },
+                    {
+                        label: "Edit View - Collapsible",
+                        demo: require("../components/templates/EditViewCollapsibleDemo"),
+                        pathToDoc: "components/templates/EditViewCollapsible.jsx",
+                        pathToSource: "templates_edit-view-collapsible_EditViewCollapsible.jsx.html",
+                        pathToDemoSource: "demo_components_templates_EditViewCollapsibleDemo.jsx.html",
+                        fullscreen: true
+                    },
+                    {
+                        label: "Edit View - Modal",
+                        demo: require("../components/templates/EditViewModalDemo"),
+                        pathToDoc: "components/templates/EditViewModal.jsx",
+                        pathToSource: "templates_edit-view-modal_EditViewModal.jsx.html",
+                        pathToDemoSource: "demo_components_templates_EditViewModalDemo.jsx.html",
+                        fullscreen: true
+                    }
+                ]
+            },
+            {
+                label: "List View",
+                icon: "directory-hollow",
+                children: [
+                    {
+                        label: "List View - Infinite Scroll",
+                        demo: require("../components/templates/ListViewDemo"),
+                        pathToDoc: "components/templates/ListView.jsx",
+                        pathToSource: "templates_list-view_ListView.jsx.html",
+                        pathToDemoSource: "demo_components_templates_ListViewDemo.jsx.html",
+                        fullscreen: true
+                    },
+                    {
+                        label: "List View - Paginated",
+                        demo: require("../components/templates/ListViewPaginatedDemo"),
+                        pathToDoc: "components/templates/ListViewPaginated.jsx",
+                        pathToSource: "templates_list-view-paginated_ListViewPaginated.jsx.html",
+                        pathToDemoSource: "demo_components_templates_ListViewPaginatedDemo.jsx.html",
+                        fullscreen: true
+                    },
+                    {
+                        label: "List View - Ordering",
+                        demo: require("../components/templates/ListViewOrderingDemo"),
+                        pathToDoc: "components/templates/ListViewOrdering.jsx",
+                        pathToSource: "templates_list-view-paginated_ListViewOrdering.jsx.html",
+                        pathToDemoSource: "demo_components_templates_ListViewOrderingDemo.jsx.html",
+                        fullscreen: true
+                    }
+                ]
+            },
+            {
                 label: "Authentication Policy",
                 demo: require("../components/templates/AuthnPolicyDemo"),
                 pathToDoc: "components/templates/AuthnPolicy.jsx",
@@ -709,78 +785,6 @@ module.exports = [
                 fullscreen: true,
                 icon: "details"
             },
-            {
-                label: "List View - Infinite Scroll",
-                demo: require("../components/templates/ListViewDemo"),
-                pathToDoc: "components/templates/ListView.jsx",
-                pathToSource: "templates_list-view_ListView.jsx.html",
-                pathToDemoSource: "demo_components_templates_ListViewDemo.jsx.html",
-                fullscreen: true,
-                icon: "details"
-            },
-            {
-                label: "List View - Paginated",
-                demo: require("../components/templates/ListViewPaginatedDemo"),
-                pathToDoc: "components/templates/ListViewPaginated.jsx",
-                pathToSource: "templates_list-view-paginated_ListViewPaginated.jsx.html",
-                pathToDemoSource: "demo_components_templates_ListViewPaginatedDemo.jsx.html",
-                fullscreen: true,
-                icon: "details"
-            },
-            {
-                label: "List View - Ordering",
-                demo: require("../components/templates/ListViewOrderingDemo"),
-                pathToDoc: "components/templates/ListViewOrdering.jsx",
-                pathToSource: "templates_list-view-paginated_ListViewOrdering.jsx.html",
-                pathToDemoSource: "demo_components_templates_ListViewOrderingDemo.jsx.html",
-                fullscreen: true,
-                icon: "details"
-            },
-            {
-                label: "Edit View - Simple",
-                demo: require("../components/templates/EditViewSimpleDemo"),
-                pathToDoc: "components/templates/EditViewSimple.jsx",
-                pathToSource: "templates_edit-view-simple_EditViewSimple.jsx.html",
-                pathToDemoSource: "demo_components_templates_EditViewSimpleDemo.jsx.html",
-                fullscreen: true,
-                icon: "details"
-            },
-            {
-                label: "Edit View - Sectioned",
-                demo: require("../components/templates/EditViewSectionedDemo"),
-                pathToDoc: "components/templates/EditViewSectioned.jsx",
-                pathToSource: "templates_edit-view-sectioned_EditViewSectioned.jsx.html",
-                pathToDemoSource: "demo_components_templates_EditViewSectionedDemo.jsx.html",
-                fullscreen: true,
-                icon: "details"
-            },
-            {
-                label: "Edit View - Switched",
-                demo: require("../components/templates/EditViewSwitchedDemo"),
-                pathToDoc: "components/templates/EditViewSwitched.jsx",
-                pathToSource: "templates_edit-view-switched_EditViewSwitched.jsx.html",
-                pathToDemoSource: "demo_components_templates_EditViewSwitchedDemo.jsx.html",
-                fullscreen: true,
-                icon: "details"
-            },
-            {
-                label: "Edit View - Collapsible",
-                demo: require("../components/templates/EditViewCollapsibleDemo"),
-                pathToDoc: "components/templates/EditViewCollapsible.jsx",
-                pathToSource: "templates_edit-view-collapsible_EditViewCollapsible.jsx.html",
-                pathToDemoSource: "demo_components_templates_EditViewCollapsibleDemo.jsx.html",
-                fullscreen: true,
-                icon: "details"
-            },
-            {
-                label: "Edit View - Modal",
-                demo: require("../components/templates/EditViewModalDemo"),
-                pathToDoc: "components/templates/EditViewModal.jsx",
-                pathToSource: "templates_edit-view-modal_EditViewModal.jsx.html",
-                pathToDemoSource: "demo_components_templates_EditViewModalDemo.jsx.html",
-                fullscreen: true,
-                icon: "details"
-            }
         ]
     }
 ];

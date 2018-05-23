@@ -183,7 +183,7 @@ var EditViewSimpleDemoPage = Object.create(HomePage, {
     openEditViewSimpleDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Templates", "EditViewSimple");
+            this.navigateToPath("Templates", "EditView", "EditViewSimple");
         }
     }
 });

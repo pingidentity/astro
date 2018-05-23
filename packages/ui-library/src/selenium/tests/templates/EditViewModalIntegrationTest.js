@@ -1,7 +1,7 @@
 var EditViewModalPage = require("../../pages/templates/EditViewModalPage.js");
 
 describe("Edit View Modal Integration", function () {
-    
+
     beforeEach(function () {
         EditViewModalPage.openEditViewModalDemoPage();
     });

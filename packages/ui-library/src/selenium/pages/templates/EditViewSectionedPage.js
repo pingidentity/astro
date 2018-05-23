@@ -185,7 +185,7 @@ var EditViewSectionedDemoPage = Object.create(HomePage, {
     EditViewSectionedDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Templates", "EditViewSectioned");
+            this.navigateToPath("Templates", "EditView", "EditViewSectioned");
         }
     }
 });

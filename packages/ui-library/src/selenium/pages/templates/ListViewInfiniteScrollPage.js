@@ -120,7 +120,7 @@ var ListViewInfiniteScrollDemoPage = Object.create(HomePage, {
     openListViewInfiniteScrollDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Templates", "ListViewInfiniteScroll");
+            this.navigateToPath("Templates", "ListView", "ListViewInfiniteScroll");
         }
     }
 });

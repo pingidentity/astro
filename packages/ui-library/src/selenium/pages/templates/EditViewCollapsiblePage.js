@@ -353,7 +353,7 @@ var EditViewCollapsibleDemoPage = Object.create(HomePage, {
     openEditViewCollapsibleDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Templates", "EditViewCollapsible");
+            this.navigateToPath("Templates", "EditView", "EditViewCollapsible");
         }
     }
 });

@@ -202,7 +202,7 @@ var EditViewSwitchedDemoPage = Object.create(HomePage, {
     openEditViewSwitchedDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Templates", "EditViewSwitched");
+            this.navigateToPath("Templates", "EditView", "EditViewSwitched");
         }
     }
 });

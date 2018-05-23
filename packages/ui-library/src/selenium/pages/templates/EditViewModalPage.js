@@ -245,7 +245,7 @@ var EditViewModalDemoPage = Object.create(HomePage, {
     openEditViewModalDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Templates", "EditViewModal");
+            this.navigateToPath("Templates", "EditView", "EditViewModal");
         }
     }
 });
