@@ -878,6 +878,21 @@ $color-grey-minor-1: $color-neutral-30;
             color: $color-active-blue;
         }
     }
+
+    &--borderless {
+        &,
+        &.warning,
+        &.notice,
+        &.error,
+        &.success {
+            border: none;
+            padding: 0 0 0 40px;
+    
+            &:before {
+                left: 0;
+            }
+        }
+    }
 }
 
 

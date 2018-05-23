@@ -26,6 +26,8 @@ var React = require("react"),
  * @param {string} [label]
  *                  Pass in a string label for the button label if you want an action option. If you pass this you must
  *                  also pass the callback function.
+ * @param {boolean} [bordered=true]
+ *                  Whether or not to surround the inline message with a border.
  * @param {InlineMessage~onClick} [onClick]
  *                  Callback to be triggered when the button is clicked.
  *
@@ -47,11 +49,13 @@ class InlineMessage extends React.Component {
             MessageTypes.NOTICE, MessageTypes.ERROR, MessageTypes.WARNING, MessageTypes.SUCCESS
         ]),
         label: PropTypes.string,
+        bordered: PropTypes.bool,
         onClick: PropTypes.func
     };
 
     static defaultProps = {
         "data-id": "inline-message",
+        bordered: true,
         type: MessageTypes.NOTICE
     };
 
@@ -70,7 +74,9 @@ class InlineMessage extends React.Component {
     }
 
     render() {
-        var className = classnames("inline-message", this.props.type);
+        var className = classnames("inline-message", this.props.type, {
+            "inline-message--borderless": !this.props.bordered,
+        });
 
         return (
             <div data-id={this.props["data-id"]} className={ className }>

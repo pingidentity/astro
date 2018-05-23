@@ -117,6 +117,15 @@ describe("InlineMessage", function () {
         expect(message.textContent).toEqual(text);
     });
 
+    it("displays a borderless message", function () {
+        const text = "Message text";
+        const view = getComponent({ "data-id": "message-no-border", bordered: false }, text);
+
+        const component = TestUtils.findRenderedDOMNodeWithClass(view, "inline-message--borderless");
+
+        expect(component).toBeTruthy();
+    });
+
     it("throws error when deprecated prop 'callback' is passed in", function () {
         var expectedError = new Error(Utils.deprecatePropError("callback", "onClick"));
 

@@ -62,6 +62,10 @@ class InlineMessageDemo extends React.Component {
                     <strong>Message with markup.</strong>
                 </InlineMessage>
 
+                <InlineMessage bordered={false}>
+                    Message with no border.
+                </InlineMessage>
+
             </div>
         );
     }
