@@ -92,6 +92,13 @@
         text-transform: uppercase;
         margin-right: $spacing-sm;
     }
+    &--resizable {
+        .items {
+            max-height: none !important;
+            height: 400px;
+            resize: vertical;
+        }
+    }
     .items {
         max-height: 400px;
         overflow: auto;
