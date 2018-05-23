@@ -1,8 +1,9 @@
 
 @mixin base-button-styles {
+    @include text-style($color-slate, $font-size-primary);
+
     position: relative;
     display: inline-block;
-    font-family: $font-pn-regular;
     background-color: $color-white;
     text-align: center;
     vertical-align: middle;
@@ -16,7 +17,6 @@
 }
 
 @mixin default-button-styles {
-    color: $color-slate;
     background: $color-white;
 
     &:hover {
@@ -32,7 +32,6 @@ button,
 
     padding: 0 25px;
     margin-right: 10px;
-    font-size: 15px;
     height: $height;
     line-height: $height;
     border: 1px solid $color-rhino;
@@ -110,8 +109,7 @@ button,
 
         height: $height;
         line-height: $height;
-        font-weight: 300;
-        font-size: 14px;
+        font-size: $font-size-normal;
 
         @include border-radius(ceil($height/2));
 
@@ -335,7 +333,7 @@ button,
         $height: 52px;
         height: $height;
         line-height: $height;
-        font-size: 15px;
+        font-size: $font-size-primary;
     }
     &.row-button {
         vertical-align: bottom;
@@ -388,16 +386,16 @@ button.ellipsis-loader-button {
     @include base-button-styles;
 
     label {
+        @include text-style();
+
         position: relative;
         float: left;
         padding: 0 30px;
 
         width: auto;
         line-height: $height - 2px;
-        font-size: 14px;
 
         text-transform: none;
-        color: $color-slate;
         margin: 0;
 
         border-style: solid;

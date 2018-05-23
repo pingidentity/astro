@@ -458,7 +458,8 @@ $expandable-row-gap: 12px;
 }
 
 .ordering-controls {
-    @extend %value-text;
+    @include text-value;
+
     background: $color-accent-neutral-80;
     float: left;
     line-height: $expandable-row-height;

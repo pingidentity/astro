@@ -58,6 +58,12 @@ module.exports = [
                 demo: require("../components/tutorials/Inputs"),
                 fullscreen: true,
                 icon: "details"
+            },
+            {
+                label: "Text Styles",
+                demo: require("../components/docs/TextStyles"),
+                fullscreen: true,
+                icon: "details"
             }
         ]
     },

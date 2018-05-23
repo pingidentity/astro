@@ -985,9 +985,8 @@ $color-grey-minor-1: $color-neutral-30;
 }
 
 .page-title {
-    font-size: 24px;
-    font-family: $font-pn-regular;
-    color: $color-slate;
+    @include text-page-title;
+
     margin: 0 0 30px;
     word-wrap: break-word;
 
