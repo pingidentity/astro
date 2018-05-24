@@ -48,7 +48,7 @@ module.exports = class extends React.Component {
         if (contentUrl && file.type.match(/^image\/jpe?g$/i)) {
             //try to read exif data the base64 data was passed
             readExif.getData(file, function () {
-                if (this.exifdata.Orientation) {
+                if (this.exifdata && this.exifdata.Orientation) {
                     //correct and display the image according to the exif orientation
                     fixOrientation(contentUrl, { image: true }, function (fixedImgContentUrl) {
                         self.setState({ thumbnailSrc: fixedImgContentUrl });
