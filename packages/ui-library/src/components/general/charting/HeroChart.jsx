@@ -41,6 +41,8 @@ import _ from "underscore";
 *     The object key of the x-axis data contained in the "data" prop
 */
 
+const xAxisHeight = 30;
+
 const _renderBars = (key, color) => {
     return (
         <Bar
@@ -63,7 +65,7 @@ const _renderXAxis = (xAxisKey) => {
             stroke={"rgba(255, 255, 255, 0.9)"}
             tick={{ fontSize: 15 }}
             tickLine={false}
-            height={30}
+            height={xAxisHeight}
         />
     );
 };
@@ -98,15 +100,16 @@ const HeroChart = ({
         onValueChange: onValueChange,
     };
 
-    const xAxisHeight = 30;
-    const topSeriesMax = _getSeriesMax(data, topSeriesKey) - xAxisHeight; // x-axis is part-of/included-in the top chart
+    const topSeriesMax = _getSeriesMax(data, topSeriesKey);
     const botSeriesMax = _getSeriesMax(data, bottomSeriesKey);
 
     const topChartPercent = topSeriesMax / (topSeriesMax + botSeriesMax);
     const botChartPercent = 1 - topChartPercent;
 
-    const topChartHeight = Math.round(topChartPercent * chartHeight);
-    const botChartHeight = Math.round(botChartPercent * chartHeight);
+    const hMinusX = chartHeight - xAxisHeight;
+    const topChartHeight = Math.round(topChartPercent * hMinusX) + xAxisHeight;
+    const botChartHeight = Math.round(botChartPercent * hMinusX);
+
     const chartProps = {
         barCategoryGap: 7,
         data: data,
