@@ -646,7 +646,6 @@ class ConfirmDeleteDialog extends React.Component {
                     </p>
                     <div className="button-group">
                         <Button
-                            type="primary"
                             data-id="confirm-delete"
                             onClick={this.props.onDeleteConfirm}>
                             {Translator.translate("delete")}
