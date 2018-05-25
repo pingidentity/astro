@@ -1,29 +1,29 @@
 .hero-chart {
-	position: relative;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	padding: 25px 25px 110px;
-	background-color: $color-strong-neutral-10;
-	text-align: center;
-	margin: -25px -40px 0 -40px; // negative margins used to make the graphic full-width by negating the padding
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 25px 25px 110px;
+    background-color: $color-strong-neutral-10;
+    text-align: center;
+    margin: -25px -40px 0 -40px; // negative margins used to make the graphic full-width by negating the padding
 
-	.recharts-wrapper {
-		margin: 0 0 0 50%;
-		transform: translateX(-50%);
-		z-index: 10;
-	}
-	.recharts-tooltip-wrapper {
-		border-radius: 5px !important;
-		box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
-	}
+    .recharts-wrapper {
+        margin: 0 0 0 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+    }
+    .recharts-tooltip-wrapper {
+        border-radius: 5px !important;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+    }
 }
 
 .hero-chart__greeting {
-	color: $color-white;
-	position: absolute;
-	top: 25px;
-	left: 25px;
+    color: $color-white;
+    position: absolute;
+    top: 25px;
+    left: 25px;
     text-transform: uppercase;
     font-size: 18px;
 }
@@ -35,121 +35,125 @@
 }
 
 .hero-chart__title {
-	text-transform: uppercase;
-	font-size: 18px;
-	line-height: 1em;
+    text-transform: uppercase;
+    font-size: 18px;
+    line-height: 1em;
 }
 
 .hero-chart__total {
-	font-size: 55px;
-	line-height: 1em;
-	margin: 5px 0;
-	font-family: $font-pn-semibold;
+    font-size: 55px;
+    line-height: 1em;
+    margin: 5px 0;
+    font-family: $font-pn-semibold;
 }
 
 .hero-chart__subtitle {
-	font-size: 16px;
-	line-height: 1em;
+    font-size: 16px;
+    line-height: 1em;
 }
 
 .hero-chart__top-chart,
 .hero-chart__bottom-chart {
-	path.recharts-rectangle {
-		fill-opacity: 0.6 !important;
-		&:hover {
-			fill-opacity: 1 !important;
-		}
-	}
+    path.recharts-rectangle {
+        fill-opacity: 0.6 !important;
+        &:hover {
+            fill-opacity: 1 !important;
+        }
+    }
 }
+
 .hero-chart__bottom-chart {
-	.recharts-surface {
-		@include transform(scaleY(-1));
-	}
+    .recharts-surface {
+        @include transform(scaleY(-1));
+    }
 }
 
 .hero-tooltip {
-	font-size: 14px;
-	text-transform: uppercase;
-	color: $color-accent-neutral-10;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: $color-accent-neutral-10;
 }
+
 .hero-tooltip__bottom-value {
-	color: #ffa500;
+    color: #ffa500;
 }
 
 .hero-chart__rocker {
-	margin: 25px 0 0;
+    margin: 25px 0 0;
 }
 
 .rocker-button--chart-rocker {
-	$button-height: 28px;
-	$button-width: 80px;
-	$bg-color: $color-white;
-	$border-radius: $button-height / 2;
-	$selected-color: #193967;
-	$transition-timing: 0.2s;
+    $button-height: 28px;
+    $button-width: 80px;
+    $bg-color: $color-white;
+    $border-radius: $button-height / 2;
+    $selected-color: #193967;
+    $transition-timing: 0.2s;
 
-	background-color: transparent;
+    background-color: transparent;
 
-	height: $button-height;
-	border: none;
-	border-radius: $border-radius;
-	padding: 1px;
+    height: $button-height;
+    border: none;
+    border-radius: $border-radius;
+    padding: 1px;
 
-	label {
-		z-index: 1;
-		border: none;
-		height: 100%;
-		line-height: $button-height + 2;
-		padding: 0;
-		width: $button-width;
-		color: $selected-color;
-		font-size: 14px;
-	}
+    label {
+        z-index: 1;
+        border: none;
+        height: 100%;
+        line-height: $button-height + 2;
+        padding: 0;
+        width: $button-width;
+        color: $selected-color;
+        font-size: 14px;
+    }
 
-	&:before {
-		content: "";
-		position: absolute;
-		left: 0;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		background-color: $bg-color;
-		border-radius: $border-radius;
-	}
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: $bg-color;
+        border-radius: $border-radius;
+    }
 
-	&.sel-0 label:nth-of-type(1),
-	&.sel-1 label:nth-of-type(2),
-	&.sel-2 label:nth-of-type(3),
-	&.sel-3 label:nth-of-type(4) {
-		background-color: transparent;
-		color: $color-white;
-		@include transition($transition-timing color ease-out);
-	}
+    &.sel-0 label:nth-of-type(1),
+    &.sel-1 label:nth-of-type(2),
+    &.sel-2 label:nth-of-type(3),
+    &.sel-3 label:nth-of-type(4) {
+        @include transition($transition-timing color ease-out);
 
-	&.sel-0,
-	&.sel-1,
-	&.sel-2,
-	&.sel-3 {
-		&:after {
-			content: "";
-			position: absolute;
-			height: $button-height;
-			width: $button-width;
-			background-color: $selected-color;
-			border-radius: $border-radius;
-			@include transition($transition-timing left ease-out);
-		}
-	}
+        background-color: transparent;
+        color: $color-white;
+    }
 
-	@for $i from 0 through 3 {
-		&.sel-#{$i} {
-			&:after {
-				left: 1px + $i*$button-width;
-			}
-		}
-	}
+    &.sel-0,
+    &.sel-1,
+    &.sel-2,
+    &.sel-3 {
+        &:after {
+            @include transition($transition-timing left ease-out);
+
+            content: '';
+            position: absolute;
+            height: $button-height;
+            width: $button-width;
+            background-color: $selected-color;
+            border-radius: $border-radius;
+        }
+    }
+
+    @for $i from 0 through 3 {
+        &.sel-#{$i} {
+            &:after {
+                left: 1px + $i*$button-width;
+            }
+        }
+    }
 }
 
 .hero-chart__stat-cards {
-	margin: -70px 0 0;
+    margin: -70px 0 0;
 }

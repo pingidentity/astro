@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import Button from "../buttons/Button";
 import DetailsTooltip from "../tooltips/DetailsTooltip";
 
+import popsOver from "../../util/behaviors/popsOver";
+
 /**
  * @class ConfirmTooltip
  * @desc ConfirmTooltip implements tooltip used to confirm or deny the canceling of an action.
@@ -51,7 +53,7 @@ import DetailsTooltip from "../tooltips/DetailsTooltip";
  **/
 
 
-class ConfirmTooltip extends Component {
+class ConfirmTooltipBase extends Component {
     static PropTypes = {
         "data-id": PropTypes.string,
         onConfirm: PropTypes.func,
@@ -74,6 +76,7 @@ class ConfirmTooltip extends Component {
             <div data-id={this.props["data-id"]}>
                 <DetailsTooltip
                     {...this.props}
+                    stateless={true}
                     data-id={`${this.props["data-id"]}-details`}
                 >
                     {this.props.children}
@@ -87,7 +90,7 @@ class ConfirmTooltip extends Component {
                         <br /> <br />
                         <a
                             label="Cancel" data-id={`${this.props["data-id"]}-cancel`}
-                            onClick={this.props.onCancel}
+                            onClick={this.props.onCancel || this.props.onClose}
                         >
                             {this.props.cancelText || "Cancel"}
                         </a>
@@ -98,4 +101,5 @@ class ConfirmTooltip extends Component {
     }
 }
 
+const ConfirmTooltip = popsOver(ConfirmTooltipBase);
 module.exports = ConfirmTooltip;

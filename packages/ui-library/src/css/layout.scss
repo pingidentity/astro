@@ -986,6 +986,23 @@ $color-grey-minor-1: $color-neutral-30;
     }
 }
 
+.forward-link {
+    position: relative;
+    display: inline-block;
+    font-size: 14px;
+
+    &:after {
+        content: 'Y';
+        position: absolute;
+        top: -1px;
+        right: -14px;
+        font-size: 6px;
+        font-family: $icon-font;
+
+        @include rotate(-90deg);
+    }
+}
+
 .page-title {
     @include text-page-title;
 
@@ -1398,4 +1415,17 @@ a {
 
 .checkbox-description {
     padding-left: 36px;
+}
+
+.value-item {
+    @include flexbox;
+    @include flexbox-direction(row);
+    align-items: center;
+
+    font-size: 14px;
+    color: $color-midnight;
+
+    &__icon {
+        margin-right: $spacing-sm;
+    }
 }

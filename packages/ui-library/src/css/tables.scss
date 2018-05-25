@@ -138,7 +138,7 @@ table {
             line-height: 1.1em;
             vertical-align: baseline;
 
-            &:last-of-type {
+            &:last-child {
                 padding-right: 0;
             }
             &.center {
@@ -170,6 +170,19 @@ table {
                 width: 490px;
             }
         }
+        &--no-lines tbody {
+            td,
+            th {
+                border-bottom: none;
+                padding-bottom: $spacing-sm / 2;
+            }
+            tr + tr {
+                td,
+                th {
+                    padding-top: $spacing-sm / 2;
+                }
+            }
+        }
         tr {
             &.expanded {
                 td,
@@ -188,7 +201,20 @@ table {
         thead {
             th {
                 border-bottom: 1px solid $color-rabbit-fur;
-                padding: 0 20px 10px 0;
+                padding: 0 20px $spacing-xs 0;
+            }
+        }
+        tbody:first-child tr:first-child { // if there's no heading row, remove top padding from top row
+            td,
+            th {
+                padding-top: 0;
+            }
+        }
+        tbody tr:last-child {
+            td,
+            th {
+                padding-bottom: 0;
+                border-bottom: none;
             }
         }
     }

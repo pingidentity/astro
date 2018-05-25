@@ -93,6 +93,10 @@ $popup-min-width: 2 * $arrow-offset + 2 * $arrow-height + 65px;
     }
 }
 
+.popup-frame--padded {
+    padding: $spacing-md;
+}
+
 
 // Popover Component
 $max-popover-width: 360px;

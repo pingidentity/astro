@@ -1,7 +1,7 @@
 import Actions from "./Actions.js";
 import _ from "underscore";
 import update from "re-mutable";
-import Messages from "ui-library/lib/components/general/Messages";
+import Messages from "ui-library/lib/components/general/messages";
 import { combineReducers } from "redux";
 
 var initialState = {

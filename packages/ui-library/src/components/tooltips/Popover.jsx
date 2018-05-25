@@ -22,6 +22,9 @@ import popsOver from "../../util/behaviors/popsOver";
  * @param {string} [placement]
  *     Placement using keywords top, left, right. (Default is bottom center)
  *
+ * @param {boolean} [padded=false]
+ *     If true, the content will be padded from the frame.
+ *
  * @param {boolean} [open=false]
  *     If true, tooltip is open or else closed.
  * @param {function} [onToggle]
@@ -38,6 +41,7 @@ class PopoverBase extends React.Component {
         label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
         onKeyDown: PropTypes.func,
         onToggle: PropTypes.func,
+        padded: PropTypes.bool,
         open: PropTypes.bool,
         placement: PropTypes.string,
         triggerClassName: PropTypes.string,
@@ -49,7 +53,8 @@ class PopoverBase extends React.Component {
         onKeyDown: _.noop,
         onToggle: _.noop,
         placement: "",
-        triggerClassName: ""
+        triggerClassName: "",
+        padded: false,
     };
 
     /*
@@ -81,7 +86,9 @@ class PopoverBase extends React.Component {
         var frameClassName = classnames(
             "popup-frame popup-frame--pointer",
             this.props.className,
-            this._getModifiers("popup-frame")
+            this._getModifiers("popup-frame"), {
+                "popup-frame--padded": this.props.padded,
+            }
         );
 
         return this.props.open ? (

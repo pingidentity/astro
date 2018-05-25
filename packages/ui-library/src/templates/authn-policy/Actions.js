@@ -1,5 +1,5 @@
 var keyMirror = require("fbjs/lib/keyMirror");
-import Messages from "ui-library/lib/components/general/Messages";
+import Messages from "ui-library/lib/components/general/messages";
 
 exports.Types = keyMirror({
     EDIT_STEP: null,

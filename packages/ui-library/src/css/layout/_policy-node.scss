@@ -62,7 +62,6 @@
     &__icon,
     &__number,
     &__character {
-
         @include border-radius(20px);
 
         background: $color-blue-grey;
@@ -100,7 +99,8 @@
         }
     }
 
-    &__character, &__number {
+    &__character,
+    &__number {
         height: $height - $offset;
         line-height: $height - $offset;
         padding-top: $offset;

@@ -399,7 +399,7 @@ module.exports = [
                 icon: "alert",
                 children: [
                     {
-                        label: "Confirmation Tooltip",
+                        label: "Confirm Tooltip",
                         demo: require("../components/tooltips/ConfirmTooltipDemo"),
                         pathToDoc: "components/tooltips/ConfirmTooltip.jsx",
                         pathToSource: "components_tooltips_ConfirmTooltip.jsx.html",
@@ -438,6 +438,13 @@ module.exports = [
                         pathToDoc: "components/tables/CondensedTable.jsx",
                         pathToSource: "components_table_CondensedTable.jsx.html",
                         pathToDemoSource: "demo_components_table_CondensedTable.jsx.html"
+                    },
+                    {
+                        label: "Table",
+                        demo: require("../components/tables/TableDemo"),
+                        pathToDoc: "components/tables/Table.jsx",
+                        pathToSource: "components_table_Table.jsx.html",
+                        pathToDemoSource: "demo_components_table_Table.jsx.html"
                     },
                     {
                         label: "Expandable Row",
@@ -678,6 +685,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_layout_PageSectionDemo.jsx.html"
                     },
                     {
+                        label: "Value Item",
+                        demo: require("../components/layout/ValueItemDemo"),
+                        pathToDoc: "components/layout/ValueItem.jsx",
+                        pathToSource: "components_layout_ValueItem.jsx.html",
+                        pathToDemoSource: "demo_components_layout_ValueItemDemo.jsx.html"
+                    },
+                    {
                         label: "Label Value Pairs",
                         demo: require("../components/layout/LabelValuePairsDemo"),
                         pathToDoc: "components/layout/LabelValuePairs.jsx",
@@ -782,6 +796,15 @@ module.exports = [
                 pathToDoc: "components/templates/WizardView.jsx",
                 pathToSource: "templates_wizard-view_WizardView.jsx.html",
                 pathToDemoSource: "demo_components_templates_WizardViewDemo.jsx.html",
+                fullscreen: true,
+                icon: "details"
+            },
+            {
+                label: "User MFA",
+                demo: require("../components/templates/UserMFADemo"),
+                pathToDoc: "components/templates/UserMFA.jsx",
+                pathToSource: "templates_user-mfa_UserMFA.jsx.html",
+                pathToDemoSource: "demo_components_templates_UserMFADemo.jsx.html",
                 fullscreen: true,
                 icon: "details"
             }
