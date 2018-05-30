@@ -95,7 +95,8 @@ class SectionStateless extends React.Component {
     static propTypes = {
         accessories: PropTypes.oneOfType([
             PropTypes.string,
-            PropTypes.object
+            PropTypes.object,
+            PropTypes.array
         ]),
         className: PropTypes.string,
         condensed: PropTypes.bool,
@@ -142,16 +143,17 @@ class SectionStateless extends React.Component {
         if (accessories || detailsText) {
             const acc = accessories &&
                 <div
+                    key="accessories"
                     data-id={this.props["data-id"] + "-collapsible-section-accessories"}
                     className="row-accessories">
                     {this.props.accessories}
                 </div>;
 
             const collapsed = detailsText
-                ? <div className="collapsible-section__details-text">
+                ? <div key="collapsed" className="collapsible-section__details-text">
                         {expanded ? detailsText.expanded : detailsText.collapsed}
                 </div>
-                : <div></div>;
+                : <div key="collapsed"></div>;
 
             return (
                 <div className="collapsible-section__right-content">

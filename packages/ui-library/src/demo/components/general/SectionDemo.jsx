@@ -58,8 +58,8 @@ class SectionDemo extends React.Component {
                     title="Section with accessories"
                     stateless={false}
                     accessories={[
-                        <Button inline iconName="edit"/>,
-                        <Button inline iconName="delete"/>
+                        <Button key="1" inline iconName="edit"/>,
+                        <Button key="2" inline iconName="delete"/>
                     ]}>
                     {this._getContent()}
                 </Section>
@@ -101,8 +101,8 @@ class SectionDemo extends React.Component {
                         condensed={true}
                         title="Section with accessories"
                         accessories={[
-                            <Button inline iconName="edit"/>,
-                            <Button inline iconName="delete"/>
+                            <Button key="1" inline iconName="edit"/>,
+                            <Button key="2" inline iconName="delete"/>
                         ]}>
                         {this._getContent()}
                     </Section>
