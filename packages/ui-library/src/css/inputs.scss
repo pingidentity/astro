@@ -478,10 +478,11 @@ label {
     }
 
     &.parent {
-        font-family: $font-pn-bold;
+        color: $color-elephant;
+        font-family: $font-pn-semibold;
         display: block;
-        font-size: 14px;
-        margin: 0 0 10px;
+        font-size: 15px;
+        margin: 0 0 $spacing-sm;
     }
 
     &.inline-save {

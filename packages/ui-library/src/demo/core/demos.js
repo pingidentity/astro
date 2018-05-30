@@ -678,6 +678,13 @@ module.exports = [
                 icon: "puzzle",
                 children: [
                     {
+                        label: "Page Group",
+                        demo: require("../components/layout/PageGroupDemo"),
+                        pathToDoc: "components/layout/PageGroup.jsx",
+                        pathToSource: "components_layout_PageGroup.jsx.html",
+                        pathToDemoSource: "demo_components_layout_PageGroupDemo.jsx.html"
+                    },
+                    {
                         label: "Page Section",
                         demo: require("../components/layout/PageSectionDemo"),
                         pathToDoc: "components/layout/PageSection.jsx",
