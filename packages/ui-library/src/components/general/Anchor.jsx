@@ -29,7 +29,7 @@ class Anchor extends React.Component {
     _dontFocus = e => e.preventDefault();
 
     _handleKeyPress = e => {
-        if (e.charCode === KeyboardUtils.KeyCodes.ENTER) {
+        if (e.charCode === KeyboardUtils.KeyCodes.ENTER || e.charCode === KeyboardUtils.KeyCodes.SPACE) {
             this.props.onClick(e);
         }
     }

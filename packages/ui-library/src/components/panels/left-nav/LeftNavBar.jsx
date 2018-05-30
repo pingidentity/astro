@@ -437,12 +437,15 @@ class LeftNavSection extends React.Component {
             };
 
             const iconClassName = getIconClassName(item);
+            const tabIndex = this._isOpen() ? "0" : "-1"; // remove nav items from tab order when not visible
 
             items.push(
                 <li key={i} className={classnames(itemClassName)}>
                     <Anchor
                         data-id={item.id + "-label"}
-                        onClick={this._handleItemClicks[i]}>
+                        onClick={this._handleItemClicks[i]}
+                        tabIndex={tabIndex}
+                    >
                         {iconClassName ? (<span className={iconClassName}></span>) : null}{item.label}
                     </Anchor>
                 </li>
@@ -465,8 +468,12 @@ class LeftNavSection extends React.Component {
 
     }
 
+    _isOpen() {
+        return !this.props.label || this.props.open;
+    }
+
     render() {
-        var isOpen = !this.props.label || this.props.open,
+        var isOpen = this._isOpen(),
             className = classnames("nav-section", {
                 open: isOpen && this.props.children,
                 selected: this.props.selectedNav,

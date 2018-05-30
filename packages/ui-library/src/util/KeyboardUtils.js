@@ -24,7 +24,8 @@ exports.KeyCodes = {
     ARROW_DOWN: 40,
     LEFT_CMD: 91,
     RIGHT_CMD: 92,
-    RIGHT_ALT: 93
+    RIGHT_ALT: 93,
+    SPACE: 32,
 };
 
 /**
