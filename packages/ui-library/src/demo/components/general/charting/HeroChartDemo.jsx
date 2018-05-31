@@ -32,7 +32,7 @@ const HeroChartDemo = () => {
         { id: "1/16", successes: 3000, failures: 198 },
     ];
 
-    const bgImage = `src/demo/images/hero-bg${Math.floor(Math.random() * 3) + 1}.png`;
+    const bgImage = `src/images/herochart-bg${Math.floor(Math.random() * 3) + 1}.png`;
 
     return (
         <div>
