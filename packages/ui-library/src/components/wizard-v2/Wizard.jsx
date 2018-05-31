@@ -5,7 +5,7 @@ import ButtonBar from "../forms/ButtonBar";
 import PropTypes from "prop-types";
 import _ from "underscore";
 import classnames from "classnames";
-import Messages from "../general/messages";
+import Messages from "../general/messages/";
 
 
 /**

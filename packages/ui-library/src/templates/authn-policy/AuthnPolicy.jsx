@@ -5,7 +5,7 @@ import CheckboxGroup from "ui-library/lib/components/forms/CheckboxGroup";
 import FormTextField from "ui-library/lib/components/forms//form-text-field";
 import FormDropDownList from "ui-library/lib/components/forms/FormDropDownList";
 import Layout from "ui-library/lib/components/general/ColumnLayout";
-import Messages from "ui-library/lib/components/general/messages";
+import Messages from "ui-library/lib/components/general/messages/";
 import PageSection from "ui-library/lib/components/layout/PageSection";
 import PolicyNode from "ui-library/lib/components/layout/PolicyNode";
 import EditablePolicyNode from "ui-library/lib/components/layout/EditablePolicyNode";
