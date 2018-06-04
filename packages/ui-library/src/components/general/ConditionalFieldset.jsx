@@ -6,6 +6,8 @@ var React = require("react"),
     Utils = require("../../util/Utils.js"),
     _ = require("underscore");
 
+import FormLabel from "../forms/FormLabel";
+
 /**
  * @enum {string}
  * @alias ConditionalFieldset.Type
@@ -29,7 +31,8 @@ class ConditionalFieldsetStateless extends React.Component {
         selectedIndex: PropTypes.number,
         disabled: PropTypes.bool,
         children: PropTypes.node,
-        name: PropTypes.string
+        name: PropTypes.string,
+        label: PropTypes.string
     };
 
     static defaultProps = {
@@ -119,12 +122,17 @@ class ConditionalFieldsetStateless extends React.Component {
         var className = classNames({ focused: showFieldset, unfocused: !showFieldset }, "conditional-fieldset");
 
         return (
-            <fieldset data-id={this.props["data-id"]} className={className}>
-                <legend>
-                    {options}
-                </legend>
-                {showFieldset ? this.props.children[childIndex] : null}
-            </fieldset>
+            <div>
+                <FormLabel data-id={`${this.props["data-id"]}-label`} className="detached">
+                    {this.props.label}
+                </FormLabel>
+                <fieldset data-id={this.props["data-id"]} className={className}>
+                    <legend>
+                        {options}
+                    </legend>
+                    {showFieldset ? this.props.children[childIndex] : null}
+                </fieldset>
+            </div>
         );
     }
 }
