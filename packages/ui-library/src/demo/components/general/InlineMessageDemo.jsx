@@ -31,7 +31,15 @@ class InlineMessageDemo extends React.Component {
                     Warning message
                 </InlineMessage>
 
+                <InlineMessage type={ InlineMessage.MessageTypes.WARNING} alternate={true}>
+                    Warning message
+                </InlineMessage>
+
                 <InlineMessage type={ InlineMessage.MessageTypes.ERROR }>
+                    Error message
+                </InlineMessage>
+
+                 <InlineMessage type={ InlineMessage.MessageTypes.ERROR} alternate={true}>
                     Error message
                 </InlineMessage>
 
@@ -39,7 +47,15 @@ class InlineMessageDemo extends React.Component {
                     Success message
                 </InlineMessage>
 
+                <InlineMessage type={ InlineMessage.MessageTypes.SUCCESS} alternate={true}>
+                    Success message
+                </InlineMessage>
+
                 <InlineMessage type={ InlineMessage.MessageTypes.NOTICE }>
+                    Notice message
+                </InlineMessage>
+
+                <InlineMessage type={ InlineMessage.MessageTypes.NOTICE} alternate={true}>
                     Notice message
                 </InlineMessage>
 
@@ -54,7 +70,19 @@ class InlineMessageDemo extends React.Component {
                     Message with action.
                 </InlineMessage>
 
+                <InlineMessage
+                    type={ InlineMessage.MessageTypes.WARNING }
+                    label="Do Something"
+                    onClick={doSomething}
+                    alternate={true}>
+                    Message with action.
+                </InlineMessage>
+
                 <InlineMessage type={ InlineMessage.MessageTypes.WARNING } label="Bad button" >
+                    Message with missing action parameter, must pass label and action.
+                </InlineMessage>
+
+                <InlineMessage type={ InlineMessage.MessageTypes.WARNING } label="Bad button" alternate={true} >
                     Message with missing action parameter, must pass label and action.
                 </InlineMessage>
 
@@ -62,10 +90,13 @@ class InlineMessageDemo extends React.Component {
                     <strong>Message with markup.</strong>
                 </InlineMessage>
 
+                <InlineMessage type={ InlineMessage.MessageTypes.WARNING } alternate={true}>
+                    <strong>Message with markup.</strong>
+                </InlineMessage>
+
                 <InlineMessage bordered={false}>
                     Message with no border.
                 </InlineMessage>
-
             </div>
         );
     }
