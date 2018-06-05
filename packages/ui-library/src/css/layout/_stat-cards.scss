@@ -28,8 +28,7 @@ $fullwidthBreakpoint: 950px;
 
 @mixin flipper {
     @include transition(all 0.2s ease-in-out);
-
-    backface-visibility: hidden;
+    @include backface-visibility();
 }
 
 @mixin cardFrame {
@@ -179,6 +178,26 @@ $fullwidthBreakpoint: 950px;
         text-align: right;
         font-size: 16px;
         color: $color-charting-indigo;
+    }
+
+    &__error {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        text-align: center;
+        color: $color-strong-neutral-10;
+    }
+
+    &__error-text {
+        font-size: 14px;
+        line-height: 1.3em;
+        max-width: 200px;
+    }
+
+    &__error-icon {
+        font-size: 60px;
+        margin: 0 0 $spacing-md;
     }
 
     &--magenta {

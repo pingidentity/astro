@@ -411,6 +411,11 @@
     }
 }
 
+@mixin backface-visibility {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
 
 // DEPRECATED OR SITE-SPECIFIC --------------------------------------------------------------------
 

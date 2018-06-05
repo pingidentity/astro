@@ -62,4 +62,32 @@ describe("StatCard", function () {
 
         expect(component).toBeDefined();
     });
+
+    it("does not render the error by default", function () {
+        const component = getComponent();
+
+        const errorMessage = TestUtils.findRenderedDOMNodeWithClass(component, "stat-card__error");
+        expect(errorMessage).toBeFalsy();
+    });
+
+    it("renders the error when provided", function () {
+        const errorMessageText = "Uh oh.";
+        const component = getComponent({ errorMessage: errorMessageText });
+
+        const errorMessage = TestUtils.findRenderedDOMNodeWithClass(component, "stat-card__error");
+        expect(errorMessage).toBeTruthy();
+        expect(errorMessage.textContent).toBe(errorMessageText);
+
+        const topChart = TestUtils.findRenderedDOMNodeWithClass(component, "stat-card__front");
+        expect(topChart).toBeTruthy();
+
+        const back = TestUtils.findRenderedDOMNodeWithClass(component, "stat-card__back");
+        expect(back).toBeFalsy();
+
+        const title = TestUtils.findRenderedDOMNodeWithClass(component, "stat-card__front-title");
+        expect(title).toBeFalsy();
+
+        const control = TestUtils.findRenderedDOMNodeWithClass(component, "stat-card__control");
+        expect(control).toBeFalsy();
+    });
 });

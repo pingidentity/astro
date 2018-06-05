@@ -126,4 +126,63 @@ describe("HeroChart", function () {
             expect(textContainer.textContent).toBe(chartData[index][defaultProps.xAxisKey]);
         });
     });
+
+    it("does not render the error by default", function () {
+        const component = getComponent();
+
+        const errorMessage = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__error");
+        expect(errorMessage).toBeFalsy();
+    });
+
+    it("renders the error when provided", function () {
+        const errorMessageText = "Uh oh.";
+        const component = getComponent({ errorMessage: errorMessageText });
+
+        const errorMessage = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__error");
+        expect(errorMessage).toBeTruthy();
+        expect(errorMessage.textContent).toBe(errorMessageText);
+
+        const topChart = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__top-chart");
+        expect(topChart).toBeFalsy();
+
+        const botChart = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__bottom-chart");
+        expect(botChart).toBeFalsy();
+
+        const greeting = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__greeting");
+        expect(greeting).toBeTruthy();
+
+        const title = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__title");
+        expect(title).toBeFalsy();
+
+        const value = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__total");
+        expect(value).toBeFalsy();
+
+        const subtitle = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__subtitle");
+        expect(subtitle).toBeFalsy();
+    });
+
+    it("renders the x-axis in the various font sizes", function () {
+        const fontSizeData = [
+            { size: "15", threshold: 1 },
+            { size: "14", threshold: 19 },
+            { size: "13", threshold: 22 },
+            { size: "12", threshold: 24 },
+            { size: "11", threshold: 26 },
+        ];
+
+        fontSizeData.forEach((item) => {
+            let customChartData = [];
+
+            for (let i = 0; i < item.threshold; i += 1) {
+                customChartData.push({ xaxis: i, yups: 1, nopes: 1 });
+            }
+
+            const component = getComponent({ data: customChartData });
+            const xAxisTick = TestUtils.findRenderedDOMNodeWithClass(component, "recharts-cartesian-axis-ticks")
+                .childNodes[0];
+            const textTag = TestUtils.findRenderedDOMNodeWithTag(xAxisTick, "text");
+            expect(textTag.getAttribute("font-size")).toEqual(item.size);
+        });
+
+    });
 });

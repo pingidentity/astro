@@ -21,18 +21,26 @@ import _ from "underscore";
 *     The height of the area containing the bar graph including both series of data and the x-axis labels
 * @param {array} data
 *     An array of objects containing the data for both the top and bottom series of data.
-* @param {object} rockerButtonProps
-*     An object containing the props passed to the range-selector RockerButton component
-
+* @param {string} [errorMessage]
+*     When provided, the error message and icon will display in place of the chart and center text.
 * @param {string} greetingText
 *    The text renderered in the upper-left of the component
-* @param {string} titleText
-*    The text renderered on the top of the text block above the bar chart
+* @param {object} onValueChange
+*     The function called whenever the date range changes
+* @param {object} rockerButtonProps
+*     An object containing the props passed to the range-selector RockerButton component
+* @param {string} selected
+*     A string containing the id of the currently selected date range
 * @param {string} subtitleText
 *    The smaller text renderered in the bottom of the text block above the bar chart
+* @param {string} titleText
+*    The text renderered on the top of the text block above the bar chart
+* @param {string} tooltipBottomLabel
+*    The text renderered in each tooltip next to the bottom series data value
+* @param {string} tooltipTopLabel
+*    The text renderered in each tooltip next to the top series data value
 * @param {string} totalValue
 *    The large text renderered in the middle of the text block above the bar chart
-
 * @param {string} topSeriesKey
 *     An object containing the object key and color of the top series data contained in the "data" prop.
 * @param {string} bottomSeriesKey
@@ -55,7 +63,21 @@ const _renderBars = (key, color) => {
     );
 };
 
-const _renderXAxis = (xAxisKey) => {
+const _renderXAxis = (xAxisKey, numDataPoints) => {
+
+    // resize the font based on the number of datapoints (until we can find a more elegant fix)
+    let fontSize = 15;
+
+    if (numDataPoints > 25) {
+        fontSize = 11;
+    } else if (numDataPoints > 23) {
+        fontSize = 12;
+    } else if (numDataPoints > 21) {
+        fontSize = 13;
+    } else if (numDataPoints > 18) {
+        fontSize = 14;
+    }
+
     return (
         <XAxis
             axisLine={false}
@@ -63,9 +85,10 @@ const _renderXAxis = (xAxisKey) => {
             domain={["dataMin", "dataMax"]}
             dy={4}
             stroke={"rgba(255, 255, 255, 0.9)"}
-            tick={{ fontSize: 15 }}
+            tick={{ fontSize: fontSize }}
             tickLine={false}
             height={xAxisHeight}
+            interval={0}
         />
     );
 };
@@ -80,9 +103,11 @@ const HeroChart = ({
         data,
         chartHeight,
         chartWidth,
+        errorMessage,
         greetingText,
         onValueChange,
         rockerButtonProps,
+        selected,
         subtitleText,
         titleText,
         tooltipBottomLabel,
@@ -97,6 +122,7 @@ const HeroChart = ({
         className: "rocker-button--chart-rocker hero-chart__rocker",
         stateless: false,
         labels: ["1D", "1W", "1M", "3M"],
+        selected: selected,
         onValueChange: onValueChange,
     };
 
@@ -144,31 +170,41 @@ const HeroChart = ({
     return (
         <div data-id={dataId} className="hero-chart" style={heroStyles}>
             <div className="hero-chart__greeting">{greetingText}</div>
-            <div className="hero-chart__center-text">
-                <div className="hero-chart__title">{titleText}</div>
-                <div className="hero-chart__total">{totalValue}</div>
-                <div className="hero-chart__subtitle">{subtitleText}</div>
-            </div>
-            <div className="hero-chart__top-chart">
-                <BarChart
-                    {...chartProps}
-                    data-id={`${dataId}-top-chart`}
-                    height={topChartHeight}>
-                    {_renderXAxis(xAxisKey)}
-                    <Tooltip {...tooltipProps} />
-                    {_renderBars(topSeriesKey, "#fff")}
-                </BarChart>
-            </div>
-            <div className="hero-chart__bottom-chart">
-                <BarChart
-                    {...chartProps}
-                    data-id={`${dataId}-bottom-chart`}
-                    height={botChartHeight}>
-                    <Tooltip {...tooltipProps} position={{ y: botChartHeight }} />
-                    {_renderBars(bottomSeriesKey, "#ffa500")}
-                </BarChart>
-            </div>
-            <RockerButton {...rockerButtonDefaults} {...rockerButtonProps} />
+            {!errorMessage && [
+                <div key="center-text" className="hero-chart__center-text">
+                    <div className="hero-chart__title">{titleText}</div>
+                    <div className="hero-chart__total">{totalValue}</div>
+                    <div className="hero-chart__subtitle">{subtitleText}</div>
+                </div>,
+                <div key="top-chart" className="hero-chart__top-chart">
+                    <BarChart
+                        {...chartProps}
+                        data-id={`${dataId}-top-chart`}
+                        height={topChartHeight}>
+                        {_renderXAxis(xAxisKey, data.length)}
+                        <Tooltip {...tooltipProps} />
+                        {_renderBars(topSeriesKey, "#fff")}
+                    </BarChart>
+                </div>,
+                <div key="bottom-chart" className="hero-chart__bottom-chart">
+                    <BarChart
+                        {...chartProps}
+                        data-id={`${dataId}-bottom-chart`}
+                        height={botChartHeight}>
+                        <Tooltip {...tooltipProps} position={{ y: botChartHeight }} />
+                        {_renderBars(bottomSeriesKey, "#ffa500")}
+                    </BarChart>
+                </div>,
+                <RockerButton {...rockerButtonDefaults} {...rockerButtonProps} />
+            ]}
+            {errorMessage &&
+                <div className="hero-chart__error">
+                <div className="icon-cogs hero-chart__error-icon" />
+                    <div className="hero-chart__error-text">
+                        {errorMessage}
+                    </div>
+                </div>
+            }
         </div>
     );
 };
@@ -204,7 +240,9 @@ HeroChart.propTypes = {
         PropTypes.number
     ]),
     data: PropTypes.array,
+    errorMessage: PropTypes.string,
     rockerButtonProps: PropTypes.object,
+    selected: PropTypes.string,
     strings: PropTypes.object,
     topSeriesKey: PropTypes.string,
     xAxisKey: PropTypes.string,

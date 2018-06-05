@@ -162,6 +162,10 @@ a[class*=' icon-'] {
     content: '\67';
 }
 
+.icon-cogs:before {
+  content: "\e91c";
+}
+
 .icon-cog-filled:before {
     content: '\e919';
 }
