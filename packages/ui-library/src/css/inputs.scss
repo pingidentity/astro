@@ -833,7 +833,7 @@ input[type=file] {
             &.highlighted {
                 background-color: $color-active-blue;
                 color: $color-white;
-                display: inline-block;
+                display: block;
                 min-width: 100%;
 
                 &:before {
