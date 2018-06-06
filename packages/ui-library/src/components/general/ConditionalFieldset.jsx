@@ -99,6 +99,12 @@ class ConditionalFieldsetStateless extends React.Component {
         }
     };
 
+    _getChild = index => {
+        const { type, props } = this.props.children[index];
+
+        return React.createElement(type, _.omit(props, ["title"]));
+    }
+
     render() {
         var type = this.props.type || ((this.props.children.length > 2) ? Types.SELECT : Types.RADIO);
         var options = this._getOptions(type);
@@ -130,7 +136,7 @@ class ConditionalFieldsetStateless extends React.Component {
                     <legend>
                         {options}
                     </legend>
-                    {showFieldset ? this.props.children[childIndex] : null}
+                    {showFieldset ? this._getChild(childIndex) : null}
                 </fieldset>
             </div>
         );
