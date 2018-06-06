@@ -723,7 +723,8 @@ class FormDropDownListStateless extends React.Component {
             selectClassName = classnames("selected-option", this.props.selectClassName),
             selectedOptionLabelClassName = classnames("selected-option-label", this.props.selectedOptionLabelClassName),
             selectedOptionLabel = this.props.showSelectedOptionLabel ? this.props.selectedOption.label : "",
-            inputValue = this._isBoxSearch() && this.didPressKey ? this.props.searchString : selectedOptionLabel;
+            inputValue = this._isBoxSearch() &&
+                this.didPressKey && this.props.open ? this.props.searchString : selectedOptionLabel;
 
         return (
             <FormLabel
