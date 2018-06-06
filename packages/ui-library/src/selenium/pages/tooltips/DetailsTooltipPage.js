@@ -116,7 +116,7 @@ var DetailsTooltipDemoPage = Object.create(HomePage, {
     openDetailsTooltipDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Components", "PopoversTooltips", "DetailsTooltip");
+            this.navigateToPath("Components", "ModalsTooltips", "DetailsTooltip");
         }
     }
 });

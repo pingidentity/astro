@@ -254,7 +254,7 @@ var WizardDemoPage = Object.create(HomePage, {
     openWizardDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Components", "Wizard", "Wizard");
+            this.navigateToPath("Components", "ModalsTooltips", "Wizard");
         }
     }
 });

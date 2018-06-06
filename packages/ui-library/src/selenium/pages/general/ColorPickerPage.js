@@ -101,7 +101,7 @@ var ColorPickerDemoPage = Object.create(HomePage, {
     openColorPickerDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Components", "General", "ColorPicker");
+            this.navigateToPath("Components", "ComplexInputs", "Color");
         }
     }
 });

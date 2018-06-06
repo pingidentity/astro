@@ -25,7 +25,7 @@ var DragDropRowDemoPage = Object.create(HomePage, {
     openDragDropRowDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Components", "ListsTables", "DragNDropRow");
+            this.navigateToPath("Components", "Utils", "DragNDropRow");
         }
     }
 });
