@@ -60,7 +60,7 @@ textarea {
     font-family: $font-pn-regular;
 
     @include border-radius($default-input-border-radius);
-    @include transition(border-color .3s);
+    @include transition(border-color 0.3s);
 
     &:visited {
         border: 1px solid $color-input-fill;

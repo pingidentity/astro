@@ -896,19 +896,17 @@ $color-grey-minor-1: $color-neutral-30;
         &.warning {
             background-color: $color-warning-icon-yellow;
         }
-        
+
         &.error {
             background-color: $color-critical-red;
-            
-            }
+        }
         &.success {
             background-color: $color-success;
-        
-            }
+        }
         &.notice {
             background-color: $color-active-blue;
+        }
     }
-}
 
     &--borderless {
         &,
@@ -918,7 +916,7 @@ $color-grey-minor-1: $color-neutral-30;
         &.success {
             border: none;
             padding: 0 0 0 40px;
-    
+
             &:before {
                 left: 0;
             }

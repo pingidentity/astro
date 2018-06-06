@@ -162,7 +162,7 @@ $wizard-close-button-color: $color-strong-neutral-40;
 
     // add spacing at the end of the scrolling content container
     &:after {
-        content: "";
+        content: '';
         display: block;
         height: $wizard-v-spacing;
     }

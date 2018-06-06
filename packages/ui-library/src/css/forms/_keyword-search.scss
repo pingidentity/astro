@@ -24,7 +24,8 @@
         display: block;
         padding: 0 $spacing-sm;
 
-        &--selected, &:hover {
+        &--selected,
+        &:hover {
             background-color: $color-strong-neutral-90;
             color: $color-slate;
             text-decoration: none;

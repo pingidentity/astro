@@ -91,7 +91,7 @@
                 color: $color-midnight;
             }
         }
-        [class^="icon"] {
+        [class^='icon'] {
             @include default-icon-styles;
         }
         .icon-help {

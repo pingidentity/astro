@@ -31,7 +31,7 @@
     &__center-text {
         color: $color-white;
         font-family: $font-pn-light;
-        margin: 0 0 15px 0;
+        margin: 0 0 15px;
     }
 
     &__title {
@@ -89,8 +89,8 @@
     }
 
     &__rocker {
-    margin: 25px 0 0;
-}
+        margin: 25px 0 0;
+    }
 
     &__stat-cards {
         margin: -70px 0 0;
