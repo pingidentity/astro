@@ -30,6 +30,7 @@ class Spinner extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         defaultText: PropTypes.string,
+        className: PropTypes.string,
         show: PropTypes.bool.isRequired
     };
 
@@ -45,7 +46,7 @@ class Spinner extends React.Component {
     }
 
     render() {
-        var className = classnames("spinner", { ie9: Utils.isIE9() });
+        var className = classnames("spinner", { ie9: Utils.isIE9() }, this.props.className);
         if (this.props.show) {
             return <span data-id={this.props["data-id"]} className={className}>{this.props.defaultText}</span>;
         } else {

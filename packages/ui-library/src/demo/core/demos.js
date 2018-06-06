@@ -607,6 +607,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_general_ModalButtonDemo.jsx.html"
                     },
                     {
+                        label: "Page Spinner",
+                        demo: require("../components/general/PageSpinnerDemo"),
+                        pathToDoc: "components/general/PageSpinner.jsx",
+                        pathToSource: "components_general_PageSpinner.jsx.html",
+                        pathToDemoSource: "demo_components_general_PageSpinnerDemo.jsx.html"
+                    },
+                    {
                         label: "Spinner",
                         demo: require("../components/general/SpinnerDemo"),
                         pathToDoc: "components/general/Spinner.jsx",
