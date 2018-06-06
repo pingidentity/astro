@@ -1,6 +1,12 @@
-const React = require("react"),
-    PropTypes = require("prop-types"),
-    KeywordSearchView = require("./KeywordSearchView");
+import React from "react";
+import PropTypes from "prop-types";
+import KeywordSearchView from "./KeywordSearchView";
+import {
+    isArrowDown,
+    isArrowUp,
+    isEnter
+} from "../../util/KeyboardUtils";
+import { createSearch } from "../../util/SearchUtils";
 
 /**
  * @class Keyword Search
@@ -13,30 +19,24 @@ const React = require("react"),
  * @param {number} [searchBuffer=1]
  *     Sets the minimum number of characters that must be typed to trigger search
  *
- * @param {Object} [searchTerms]
- *     An object with properties representing each keyword; their values are the result ids they match
- *
- * @param {Object} [possibleResults]
- *     A key-value list of demo IDs and their associated labels and categories
+ * @param {Object} [tree]
+ *     An array of objects to be searched through
  *
  * @param {Search~onResultClick}
  *     Callback to be triggered when a result is clicked; passes back result properties from possibleResults
  *
  */
 
-class KeywordSearch extends React.Component {
+export default class KeywordSearch extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         classname: PropTypes.string,
         searchBuffer: PropTypes.number,
-        searchTerms: PropTypes.objectOf(
-            PropTypes.arrayOf(
-                PropTypes.string
-            )
-        ).isRequired,
-        possibleResults: PropTypes.objectOf(
+        tree: PropTypes.arrayOf(
             PropTypes.shape({
-                label: PropTypes.string.isRequired
+                children: PropTypes.array,
+                id: PropTypes.string.isRequired,
+                label: PropTypes.string.isRequired,
             })
         ).isRequired,
         onResultClick: PropTypes.func
@@ -47,67 +47,45 @@ class KeywordSearch extends React.Component {
         searchBuffer: 1
     }
 
+    checkForMatch = createSearch(this.props.tree)
+
     state = {
         query: "",
-        results: []
+        results: [],
+        selectedIndex: 0
     }
 
-    _getResults = (ids) => {
-        return ids.map(id => this.props.possibleResults[id]);
-    }
+    _onKeyDown = ({ keyCode }) => {
+        if (isArrowUp(keyCode)) {
+            this.setState(({ selectedIndex, ...previous }) => ({
+                ...previous,
+                selectedIndex: selectedIndex === 0 ? 0 : selectedIndex - 1
+            }));
+        } else if (isArrowDown(keyCode)) {
+            /* istanbul ignore next */
+            this.setState(({ results, selectedIndex, ...previous }) => ({
+                ...previous,
+                selectedIndex: selectedIndex === results.length - 1 ? results.length - 1 : selectedIndex + 1
+            }));
+        } else /* istanbul ignore next */ if (isEnter(keyCode)) {
+            const {
+                results,
+                selectedIndex
+            } = this.state;
 
-    _sort = ({ id: a }, { id: b }) => a > b ? 1 : -1
-
-    _checkForMatch = (query, searchTerms) => {
-        const {
-            startsWith,
-            contains
-        } = Object.keys(searchTerms).reduce(({ startsWith: startsAcc, contains: containsAcc }, key) => {
-            const keyIndex = key.indexOf(query.toLowerCase());
-            if (keyIndex === 0) {
-                const { [key]: idResults } = searchTerms;
-                return {
-                    startsWith: [
-                        ...startsAcc,
-                        ...this._getResults(idResults)
-                    ],
-                    contains: containsAcc
-                };
-            } else if (keyIndex > 0) {
-                const { [key]: idResults } = searchTerms;
-                return {
-                    startsWith: startsAcc,
-                    contains: [
-                        ...containsAcc,
-                        ...this._getResults(idResults)
-                    ]
-                };
-            } else {
-                return {
-                    startsWith: startsAcc,
-                    contains: containsAcc
-                };
-            }
-        }, { startsWith: [], contains: [] });
-
-        return [
-            ...startsWith.sort(this._sort),
-            ...contains.sort(this._sort)
-        ];
+            this._resultClicked(results[selectedIndex]);
+        }
     }
 
     _onValueChange = (query) => {
-        const {
-            searchBuffer,
-            searchTerms
-        } = this.props;
-
-        const resultsFromStore = query.length >= searchBuffer
-            ? this._checkForMatch(query, searchTerms)
+        const resultsFromStore =
+            query.length >= this.props.searchBuffer
+            ? this.checkForMatch(query)
             : [];
 
         this.setState(() => ({
             results: resultsFromStore,
+            selectedIndex: 0,
             query
         }));
     };
@@ -118,6 +96,8 @@ class KeywordSearch extends React.Component {
             query: "",
             results: []
         }));
+
+         /* istanbul ignore next */
         if (onResultClick) {
             onResultClick(result);
         }
@@ -128,13 +108,14 @@ class KeywordSearch extends React.Component {
             <KeywordSearchView
                 className={this.props.className}
                 data-id={this.props["data-id"]}
+                onKeyDown={this._onKeyDown}
                 onResultClick={this._resultClicked}
+                onResultRender={this._onResultRender}
                 onValueChange={this._onValueChange}
-                results={this.state.results}
                 queryString={this.state.query}
+                results={this.state.results}
+                selectedIndex={this.state.selectedIndex}
             />
         );
     }
 }
-
-module.exports = KeywordSearch;

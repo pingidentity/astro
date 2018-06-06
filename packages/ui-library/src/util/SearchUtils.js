@@ -1,15 +1,16 @@
 /**
  * @method
- * @name AppFrame#_addToSearchTerms
+ * @name _addToSearchTerms
  * @param {object} node
  * @private
  * @desc Adds item label and keywords to search terms
  */
-const _addToSearchTerms = ({ id, label, keywords = [] }, searchTerms = {}) => {
-    return [
-        label,
-        ...keywords
-    ]
+const _addToSearchTerms = ({
+    id,
+    label,
+    keywords = []
+}, searchTerms = {}) =>
+    [label, ...keywords]
         .filter(key => key.length > 1)
         .reduce((acc, keyword) => {
             const lowerKey = keyword.toLowerCase();
@@ -26,14 +27,13 @@ const _addToSearchTerms = ({ id, label, keywords = [] }, searchTerms = {}) => {
                 ]
             };
         }, searchTerms);
-};
 
 /**
  * @method
- * @name AppFrame#_addSearchProps
+ * @name _addSearchProps
  * @param {object} node
- * @param {object} searchTerms
  * @param {object} possibleResults
+ * @param {object} searchTerms
  * @private
  * @desc Return search terms and results for a tree node recursively
  */
@@ -82,14 +82,24 @@ const _getSearchProps = ({
     };
 };
 
+const _getResults = (possibleResults, ids, currentResults = []) => {
+    return ids.reduce((acc, id) => {
+        return currentResults.some(current => id === current.id)
+        ? acc
+        : [possibleResults[id], ...acc];
+    }, []);
+};
+
+const _sort = ({ id: a }, { id: b }) => a > b ? 1 : -1;
+
 /**
  * @method
- * @name AppFrame#_buildSearchProps
+ * @name _buildSearchProps
  * @param {array} tree
  * @private
  * @desc Return the results lookup and the keyword lookup for search
  */
-const buildSearchProps = (tree) => {
+const _buildSearchProps = (tree) => {
     return tree.reduce(({ possibleResults, searchTerms }, { id, children }) => {
         return children.reduce(({ possibleResults: accResults, searchTerms: accSearch }, child) => {
             return _getSearchProps({ ...child, root: id }, accResults, accSearch);
@@ -97,8 +107,73 @@ const buildSearchProps = (tree) => {
     }, { possibleResults: {}, searchTerms: {} });
 };
 
-module.exports = {
+
+/**
+ * @method
+ * @name _checkForMatch
+ * @param {object} searchTerms
+ * @param {object} possibleResults
+ * @param {string} query
+ * @private
+ * @desc Checks for a match against provided search terms and possible results; curried so that factory can use it.
+ */
+const _checkForMatch = searchTerms => possibleResults => query => {
+    const {
+        startsWith,
+        contains
+    } = Object.keys(searchTerms).reduce(({ startsWith: startsAcc, contains: containsAcc }, key) => {
+        const keyIndex = key.indexOf(query.toLowerCase());
+        if (keyIndex === 0) {
+            const { [key]: idResults } = searchTerms;
+            return {
+                startsWith: [
+                    ...startsAcc,
+                    ..._getResults(possibleResults, idResults, [...startsAcc, ...containsAcc])
+                ],
+                contains: containsAcc
+            };
+        } else if (keyIndex > 0) {
+            const { [key]: idResults } = searchTerms;
+            return {
+                startsWith: startsAcc,
+                contains: [
+                    ...containsAcc,
+                    ..._getResults(possibleResults, idResults, [...startsAcc, ...containsAcc])
+                ]
+            };
+        } else {
+            return {
+                startsWith: startsAcc,
+                contains: containsAcc
+            };
+        }
+    }, { startsWith: [], contains: [] });
+
+    return [
+        ...startsWith.sort(_sort),
+        ...contains.sort(_sort)
+    ];
+};
+
+/**
+ * @method
+ * @name createSearch
+ * @param {array} tree
+ * @public
+ * @desc Returns a function that searches the nodes of a given tree based on the provided string query.
+ */
+const createSearch = (tree = []) => {
+    const {
+        possibleResults,
+        searchTerms
+    } = _buildSearchProps(tree);
+
+    return _checkForMatch(searchTerms)(possibleResults);
+};
+
+export default {
     _addToSearchTerms,
-    _getSearchProps,
-    buildSearchProps
+    _buildSearchProps,
+    _sort,
+    createSearch
 };

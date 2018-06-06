@@ -93,27 +93,7 @@ describe("KeywordSearchView", () => {
         expect(onValueChange).toBeCalled();
     });
 
-    it("should render a section icon for sections", () => {
-        const component = getComponent({
-            results: [
-                {
-                    id: "dirTest",
-                    label: "dirTest",
-                    root: "root",
-                    hasChildren: true
-                }
-            ]
-        });
-
-        const icon = TestUtils.findRenderedDOMNodeWithClass(
-            component,
-            "icon-directory"
-        );
-
-        expect(icon).toBeTruthy();
-    });
-
-    it("should render an item icon for items", () => {
+    it("should render nav tree above result name", () => {
         const component = getComponent({
             results: [
                 {
@@ -125,7 +105,7 @@ describe("KeywordSearchView", () => {
 
         const icon = TestUtils.findRenderedDOMNodeWithClass(
             component,
-            "icon-file"
+            "keyword-search__result__nav"
         );
 
         expect(icon).toBeTruthy();

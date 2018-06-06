@@ -1,59 +1,109 @@
-const React = require("react"),
-    PropTypes = require("prop-types"),
-    Link = require("../general/Link"),
-    FormSearchBox = require("./FormSearchBox"),
-    classNames = require("classnames");
+import React from "react";
+import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
+import Link from "../general/Link";
+import FormSearchBox from "./FormSearchBox";
+import classNames from "classnames";
 
-const SearchView = ({
+const KeywordSearchView = ({
     className,
     ["data-id"]: dataId,
+    onKeyDown,
     onResultClick,
     onValueChange,
-    results = [],
-    queryString = ""
+    queryString,
+    results,
+    selectedIndex
 }) => {
-    const getIconClass = ({
-        hasChildren,
-        root
-    }) => {
-        if (root && hasChildren) {
-            return "directory";
-        } else {
-            return "file";
-        }
+    let _selected = null;
+    let _container = null;
+
+    const _getNav = (root, section) => {
+        const nav =
+            [root, section]
+            .filter(node => node)
+            .join(" > ");
+
+        return (
+            <div className="keyword-search__result__nav">
+                {nav}
+            </div>
+        );
     };
 
     const _renderSearchResult = (result, idx) => {
-        const { label } = result;
+        const {
+            label,
+            root,
+            section
+        } = result;
+
         const resultClicked = () => onResultClick(result);
-        const icon = getIconClass(result);
+        const nav = _getNav(root, section);
+        const isSelected = idx === selectedIndex;
+        const resultClass = `keyword-search__result ${isSelected ? "keyword-search__result--selected" : ""}`;
+
+        const title = (
+            <div ref={ref => _selected = isSelected ? ref : _selected } >
+                {nav}
+                {label}
+            </div>
+        );
+
         return (
-            <Link
-                key={`Result-${idx}`}
-                className="keyword-search__result"
-                title={label}
-                onClick={resultClicked}
-                icon={icon}/>
+            <li key={idx}>
+                <Link
+                    className={resultClass}
+                    focusable
+                    key={`Result ${idx}`}
+                    title={title}
+                    onClick={resultClicked}
+                />
+            </li>
         );
     };
 
     const containerClassName = classNames("keyword-search", className);
+
+    /* istanbul ignore next */
+    const scrollResultIntoView = () => {
+        if (_selected) {
+            const {
+                offsetHeight: containerHeight,
+                scrollTop: containerScroll
+            } = ReactDOM.findDOMNode(_container);
+
+            const selected = ReactDOM.findDOMNode(_selected);
+
+            const scrollDifference = selected.offsetTop - containerScroll;
+
+            if (scrollDifference < 0) {
+                selected.scrollIntoView();
+            } else if (scrollDifference > containerHeight - selected.offsetHeight) {
+                selected.scrollIntoView(false);
+            }
+        }
+    };
+
+    window.requestAnimationFrame(scrollResultIntoView);
 
     return (
         <div className={containerClassName} data-id={dataId}>
             <FormSearchBox
                 className="keyword-search__box"
                 queryString={queryString}
+                onKeyDown={onKeyDown}
                 onValueChange={onValueChange}
+                ref={search => search && search.searchBoxFocus()}
             />
-            <div className="keyword-search__results">
+            <ul className="keyword-search__results" ref={ref => _container = ref }>
                 {results.map(_renderSearchResult)}
-            </div>
+            </ul>
         </div>
     );
 };
 
-SearchView.propTypes = {
+KeywordSearchView.propTypes = {
     "data-id": PropTypes.string,
     className: PropTypes.string,
     onResultClick: PropTypes.func,
@@ -62,9 +112,11 @@ SearchView.propTypes = {
     queryString: PropTypes.string
 };
 
-SearchView.defaultProps = {
+KeywordSearchView.defaultProps = {
     ["data-id"]: "search-view",
-    onResultClick: () => {}
+    onResultClick: () => {},
+    results: [],
+    queryString: ""
 };
 
-module.exports = SearchView;
+export default KeywordSearchView;

@@ -92,7 +92,10 @@ Link.propTypes = {
     count: PropTypes.string,
     url: PropTypes.string,
     target: PropTypes.string,
-    title: PropTypes.string,
+    title: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.element
+    ]),
     disabled: PropTypes.bool,
     onClick: PropTypes.func,
     className: PropTypes.string

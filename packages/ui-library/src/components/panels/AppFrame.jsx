@@ -4,9 +4,6 @@ import HeaderBar from "./header-bar";
 import LeftNav from "./left-nav";
 import KeywordSearch from "../forms/KeywordSearch";
 import Modal from "../general/Modal";
-import {
-    buildSearchProps
-} from "../../util/SearchUtils";
 
 import _ from "underscore";
 
@@ -266,7 +263,6 @@ class AppFrame extends React.Component {
     _renderSearchModal = () => {
         if (this.props.searchable && this.state.searchOpen) {
             const closeModal = () => this.setState({ searchOpen: false });
-            const searchProps = buildSearchProps(this.props.navTree);
             return (
                 <Modal
                     closeOnBgClick={true}
@@ -278,7 +274,7 @@ class AppFrame extends React.Component {
                     <KeywordSearch
                         data-id="app-frame-search"
                         onResultClick={this._onSearchClick}
-                        {...searchProps}
+                        tree={this.props.navTree}
                     />
                 </Modal>
             );

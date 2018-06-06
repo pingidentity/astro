@@ -4,7 +4,8 @@ jest.dontMock("../SearchUtils");
 
 import {
     _addToSearchTerms,
-    buildSearchProps
+    _sort,
+    createSearch
 } from "../SearchUtils";
 
 describe("SearchUtils", () => {
@@ -17,52 +18,76 @@ describe("SearchUtils", () => {
                     label: "Section",
                     id: "section",
                     children: [{ label: "Item", id: "item" }]
-                }
+                },
+                {
+                    label: "Other Section",
+                    id: "othersection",
+                    children: [{ label: "Other Item", id: "otheritem" }]
+                },
             ],
             keywords: ["test"]
         }
     ];
 
-    it("adds keyword and label of a node to search terms", () => {
-        const searchTerms = _addToSearchTerms(tree[0]);
+    it("creates a usable search function with createSearch that retrieves the correct item", () => {
+        const search = createSearch(tree);
+
+        const results = search("item");
 
         const expected = {
-            column: ["column"],
-            test: ["column"]
+            id: "item",
+            label: "Item",
+            hasChildren: false,
+            section: "section",
+            root: "column"
         };
 
-        expect(searchTerms).toEqual(expected);
+        expect(results[0]).toEqual(expected);
     });
 
-    it("gets possible results and search terms for a given node and its children", () => {
-        const {
-            searchTerms,
-            possibleResults
-        } = buildSearchProps(tree);
+    it("returns no results if no match is found", () => {
+        const search = createSearch(tree);
 
+        const results = search("quack");
 
-        const expectedTerms = {
-            section: ["section"],
-            item: ["item"]
+        expect(results).toEqual([]);
+    });
+
+    it("it sorts matches starting with query before matches containing query", () => {
+        const search = createSearch(tree);
+
+        const results = search("item");
+
+        const expected = {
+            id: "item",
+            label: "Item",
+            hasChildren: false,
+            section: "section",
+            root: "column"
         };
 
-        const expectedResults = {
-            section: {
-                id: "section",
-                label: "Section",
-                hasChildren: true,
-                root: "column"
-            },
-            item: {
-                id: "item",
-                label: "Item",
-                hasChildren: false,
-                section: "section",
-                root: "column"
-            }
-        };
+        expect(results[0]).toEqual(expected);
+    });
 
-        expect(searchTerms).toEqual(expectedTerms);
-        expect(possibleResults).toEqual(expectedResults);
+    it("it handles an undefined tree", () => {
+        const search = createSearch(undefined);
+
+        const results = search("item");
+
+        expect(results).toEqual([]);
+    });
+
+    it("_addToSearchTerms adds to search terms", () => {
+        const terms = _addToSearchTerms(tree[0].children[0]);
+
+        expect(terms["section"]).toBeTruthy();
+    });
+
+    it("_sort sorts alphabetically based on id", () => {
+        const initial = [{ id: "b" }, { id: "a" }, { id: "c" }];
+        const sorted = initial.sort(_sort);
+        const expected = [{ id: "a" }, { id: "b" }, { id: "c" }];
+
+        expect(sorted).toEqual(expected);
     });
 });

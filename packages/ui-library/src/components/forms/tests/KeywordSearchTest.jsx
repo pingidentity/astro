@@ -11,14 +11,20 @@ import KeywordSearch from "../KeywordSearch";
 describe("KeywordSearch", () => {
     const searchDefaults = {
         onResultClick: jest.genMockFunction(),
-        searchTerms: {
-            "test keyword": ["testResult"]
-        },
-        possibleResults: {
-            testResult: {
-                label: "Result"
+        tree: [
+            {
+                id: "column",
+                label: "Column",
+                children: [
+                    {
+                        label: "Section",
+                        id: "section",
+                        children: [{ label: "Item", id: "item" }]
+                    }
+                ],
+                keywords: ["test"]
             }
-        }
+        ]
     };
 
     const getComponent = (props) => {
@@ -77,7 +83,7 @@ describe("KeywordSearch", () => {
 
     it("should have results if a query matches one of its search terms", () => {
         const component = getComponent();
-        component._onValueChange("test");
+        component._onValueChange("item");
 
         expect(component.state.results.length).toEqual(1);
     });
@@ -89,46 +95,77 @@ describe("KeywordSearch", () => {
         expect(component.state.results.length).toEqual(0);
     });
 
-    it("should sort results starting with the query before results containung the query", () => {
-        const component = getComponent({
-            searchTerms: {
-                test: ["testResult"],
-                different: ["differentResult"]
-            },
-            possibleResults: {
-                testResult: {
-                    id: "result",
-                    label: "result"
-                },
-                differentResult: {
-                    id: "different",
-                    label: "different"
-                }
-            }
-        });
+    it("calls onResultClick when enter key is pressed", () => {
+        const onResultClick = jest.genMockFunction();
+        const component = getComponent({ onResultClick });
+        component._onKeyDown({ keyCode: 13 });
 
-        component._onValueChange("t");
-        expect(component.state.results[0].label).toEqual("result");
-        expect(component.state.results[1].label).toEqual("different");
+        expect(onResultClick).toHaveBeenCalled();
     });
 
-    it("should sort results alphabetically", () => {
-        const component = getComponent();
+    it("selects next result when down arrow key is pressed", () => {
+        const component = getComponent({
+            results: [
+                { label: "test" },
+                { label: "test2" }
+            ]
+        });
 
-        const results = [
-            { id: "b" },
-            { id: "a" },
-            { id: "c" }
-        ];
+        component._onKeyDown({ keyCode: 40 });
 
-        const sortedResults = results.sort(component._sort);
+        expect(component.state.selectedIndex).toEqual(1);
+    });
 
-        const expected = [
-            { id: "a" },
-            { id: "b" },
-            { id: "c" }
-        ];
+    it("selects previous result when up arrow key is pressed", () => {
+        const component = getComponent({
+            results: [
+                { label: "test" },
+                { label: "test2" }
+            ]
+        });
+        component.setState(prev => ({
+            ...prev,
+            selectedIndex: 1
+        }));
 
-        expect(sortedResults).toEqual(expected);
+        component._onKeyDown({ keyCode: 38 });
+
+        expect(component.state.selectedIndex).toEqual(0);
+    });
+
+    it("selects same result if up arrow key is pressed and first result is already selected", () => {
+        const component = getComponent({
+            results: [
+                { label: "test" },
+                { label: "test2" }
+            ]
+        });
+        component.setState(prev => ({
+            ...prev,
+            selectedIndex: 0
+        }));
+
+        component._onKeyDown({ keyCode: 38 });
+
+        expect(component.state.selectedIndex).toEqual(0);
+    });
+
+    it("calls onResultClick when enter key is pressed", () => {
+        const onResultClick = jest.genMockFunction();
+        const component = getComponent({
+            onResultClick,
+            results: [
+                { label: "test" },
+                { label: "test2" }
+            ]
+        });
+        component.setState(prev => ({
+            ...prev,
+            selectedIndex: 0
+        }));
+
+        component._onKeyDown({ keyCode: 38 });
+
+        expect(component.state.selectedIndex).toEqual(0);
     });
 });

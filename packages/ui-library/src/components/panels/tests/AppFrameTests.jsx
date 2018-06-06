@@ -5,11 +5,11 @@ jest.dontMock("../header-bar/HeaderBar");
 jest.dontMock("../left-nav/LeftNavBar");
 jest.dontMock("../../forms/KeywordSearch.jsx");
 
-describe("AppFrame", function() {
+describe("AppFrame", () => {
     const React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         ReduxTestUtils = require("../../../util/ReduxTestUtils"),
-        { buildSearchProps } = require("../../../util/SearchUtils"),
+        SearchUtils = require("../../../util/SearchUtils"),
         TestUtils = require("../../../testutil/TestUtils"),
         AppFrame = require("../AppFrame"),
         _ = require("underscore");
@@ -90,7 +90,7 @@ describe("AppFrame", function() {
             possibleResults: {
                 [id]: node
             }
-        } = buildSearchProps(navTree);
+        } = SearchUtils._buildSearchProps(navTree);
 
         return node;
     };
