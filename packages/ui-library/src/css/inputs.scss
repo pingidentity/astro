@@ -855,6 +855,16 @@ input[type=file] {
                 .help-tooltip-target {
                     display: block;
                     padding: $option-padding;
+                    color: $color-midnight;
+                    &:hover,
+                    &.highlighted {
+                        background-color: $color-active-blue;
+                        color: $color-white;
+
+                        &:before {
+                            background-color: $color-white;
+                        }
+                    }
                 }
             }
         }
