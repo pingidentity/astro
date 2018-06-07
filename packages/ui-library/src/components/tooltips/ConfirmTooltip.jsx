@@ -28,6 +28,8 @@ import popsOver from "../../util/behaviors/popsOver";
  *      text for the button label
  * @param {string} buttonType
  *      css class to set the type of button(primary, secondary, danger)
+ * @param {bool} disabledSave
+ *      boolean to turn enable or disable the button.
  * @param {ConfirmTooltip~onCancel} onCancel
  *     The callback triggered when the cancel button is pressed.
  * @param {ConfirmTooltip~onConfirm} onDelete
@@ -65,6 +67,7 @@ class ConfirmTooltipBase extends Component {
         cancelText: PropTypes.string,
         buttonLabel: PropTypes.string,
         buttonType: PropTypes.string,
+        disableSave: PropTypes.bool,
     }
 
     static defaultProps = {
@@ -86,6 +89,7 @@ class ConfirmTooltipBase extends Component {
                             label={this.props.buttonLabel || "Confirm"}
                             type={this.props.buttonType}
                             onClick={this.props.onConfirm}
+                            disabled={this.props.disableSave}
                         />
                         <br /> <br />
                         <a

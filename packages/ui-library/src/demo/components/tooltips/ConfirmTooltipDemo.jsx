@@ -31,19 +31,22 @@ class ConfirmTooltipDemo extends Component {
         var markup =
             `Are you absolutely sure you want to delete?`;
         return (
-            <ConfirmTooltip
-                positionClassName="bottom"
-                label="Confirm Cancel"
-                title="Confirm Cancel"
-                onToggle={this._handleToggle}
-                open={this.state.open}
-                onConfirm={this._handleConfirm}
-                onCancel={this._handleCancel}
-                buttonLabel="Confirm"
-                cancelText="Cancel"
-            >
-            {markup}
-            </ConfirmTooltip>
+            <div>
+                <ConfirmTooltip
+                    positionClassName="bottom"
+                    label="Confirm Cancel"
+                    title="Confirm Cancel"
+                    onToggle={this._handleToggle}
+                    open={this.state.open}
+                    onConfirm={this._handleConfirm}
+                    onCancel={this._handleCancel}
+                    buttonLabel="Confirm"
+                    cancelText="Cancel"
+                    disableSave={false}
+                >
+                {markup}
+                </ConfirmTooltip>
+            </div>
         );
     }
 }
