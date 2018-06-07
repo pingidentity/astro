@@ -4,11 +4,10 @@ import HelpHint from "../components/tooltips/HelpHint";
 import Toggle from "../components/forms/form-toggle";
 
 /**
- * @class Section with Columns
- * @desc This is a template to demonstrate how to build a collapsible section with columns. Use
- *     it as a starting poing for an edit page of this type.
+ * @class Platform Provided
+ * @desc This is a template to demonstrate how to build a "Platform Provided" interface.
  */
-const SectionColumns = () => {
+const PlatformProvided = () => {
     const rowAccessories = [
         <Toggle stateless={false} toggled />
     ];
@@ -60,8 +59,8 @@ const SectionColumns = () => {
     );
 };
 
-SectionColumns.defaultProps = {
+PlatformProvided.defaultProps = {
     columns: []
 };
 
-export default SectionColumns;
+export default PlatformProvided;

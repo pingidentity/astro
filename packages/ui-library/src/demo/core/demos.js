@@ -847,7 +847,25 @@ module.exports = [
                 pathToDemoSource: "demo_components_templates_UserMFADemo.jsx.html",
                 fullscreen: true,
                 icon: "details"
-            }
+            },
+            {
+                label: "Platform Provided",
+                demo: require("../components/templates/PlatformProvidedDemo"),
+                pathToDoc: "components/templates/PlatformProvided.jsx",
+                pathToSource: "templates_user-mfa_PlatformProvided.jsx.html",
+                pathToDemoSource: "demo_components_templates_PlatformProvidedDemo.jsx.html",
+                fullscreen: true,
+                icon: "details"
+            },
+            {
+                label: "User Edit",
+                demo: require("../components/templates/UserEditDemo"),
+                pathToDoc: "components/templates/UserEdit.jsx",
+                pathToSource: "templates_user-mfa_UserEdit.jsx.html",
+                pathToDemoSource: "demo_components_templates_UserEditDemo.jsx.html",
+                fullscreen: true,
+                icon: "details"
+            },
         ]
     }
 ];

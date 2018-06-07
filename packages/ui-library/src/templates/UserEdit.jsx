@@ -9,14 +9,13 @@ import Section from "../components/general/Section";
 import Toggle from "../components/forms/form-toggle";
 
 /**
- * @class Section with Columns
- * @desc This is a template to demonstrate how to build a collapsible section with columns. Use
- *     it as a starting poing for an edit page of this type.
+ * @class User Edit
+ * @desc This is a template to demonstrate how to build a user edit screen.
  */
-const SectionColumns = () => {
+const UserEdit = () => {
     const rowAccessories = [
-        <Button label="Button" inline />,
-        <Toggle stateless={false} toggled />
+        <Button key="button" label="Button" inline />,
+        <Toggle key="label" stateless={false} toggled />
     ];
 
     const rockerLabels = [
@@ -182,8 +181,8 @@ const SectionColumns = () => {
     );
 };
 
-SectionColumns.defaultProps = {
+UserEdit.defaultProps = {
     columns: []
 };
 
-export default SectionColumns;
+export default UserEdit;
