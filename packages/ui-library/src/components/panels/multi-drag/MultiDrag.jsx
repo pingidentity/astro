@@ -68,6 +68,9 @@ function convertFilteredIndexes (columns, desc) {
  *    The dragged/target column index.
  * @property {number} index
  *    The index dragged from/to.
+ * @property {number} [convertedIndex]
+ *    The index dragged from/to, converted from filtered to unfiltered index if filtering is applied;
+ *    only supplied by stateful implemenation.
  */
 
 /**
@@ -495,6 +498,9 @@ class MultiDragStateful extends React.Component {
 
     _handleDrop = (desc) => {
         var convertedDesc = convertFilteredIndexes(this.state.columns, desc);
+        var extendedDesc = _.clone(desc);
+        extendedDesc.from.convertedIndex = convertedDesc.from;
+        extendedDesc.to.convertedIndex = convertedDesc.to;
         var next = move(this.state, {
             from: { column: desc.from.column, index: convertedDesc.from },
             to: { column: desc.to.column, index: convertedDesc.to }
@@ -504,7 +510,7 @@ class MultiDragStateful extends React.Component {
         next = reapplyFilters(next);
         this.setState(next, function () {
             if (this.props.onDrop) {
-                this.props.onDrop(desc);
+                this.props.onDrop(extendedDesc);
             }
         });
     };
