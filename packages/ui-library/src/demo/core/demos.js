@@ -366,6 +366,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_layout_PageSectionDemo.jsx.html"
                     },
                     {
+                        label: "Tab Set",
+                        demo: require("../components/layout/TabSetDemo"),
+                        pathToDoc: "components/layout/TabSet.jsx",
+                        pathToSource: "components_layout_TabSet.jsx.html",
+                        pathToDemoSource: "demo_components_layout_TabSetDemo.jsx.html"
+                    },
+                    {
                         label: "Section",
                         demo: require("../components/general/SectionDemo"),
                         pathToDoc: "components/general/Section.jsx",

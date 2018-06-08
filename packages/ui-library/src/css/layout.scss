@@ -1219,6 +1219,10 @@ $color-grey-minor-1: $color-neutral-30;
     }
 }
 
+.tab-set-children {
+    padding-left: $spacing-lg;
+}
+
 .content-columns {
     @include flexbox;
 
