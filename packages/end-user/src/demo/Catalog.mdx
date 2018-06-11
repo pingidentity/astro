@@ -1,22 +1,23 @@
-import Button from "../components/Button";
-import Card from "../components/Card";
-import Checkbox from "../components/Checkbox";
-import Feedback from "../components/Feedback";
-import FloatLabelPasswordInput from "../components/FloatLabelPasswordInput";
-import FloatLabelTextInput from "../components/FloatLabelTextInput";
-import Form from "../components/Form";
-import FormAside from "../components/FormAside";
-import Heading from "../components/Heading";
-import IconFeedback from "../components/IconFeedback";
-import Logo from "../components/Logo";
-import ModalMenu from "../components/ModalMenu";
-import Requirements from "../components/Requirements";
-import Spinner from "../components/Spinner";
-import Stack from "../components/Stack";
-import TextBlock from "../components/TextBlock";
-import TextInput from "../components/TextInput";
-import Tooltip from "../components/Tooltip";
-import ComponentDemo from "./components/ComponentDemo";
+import Button from '../components/Button';
+import Card from '../components/Card';
+import Checkbox from '../components/Checkbox';
+import Feedback from '../components/Feedback';
+import FloatLabelPasswordInput from '../components/FloatLabelPasswordInput';
+import FloatLabelTextInput from '../components/FloatLabelTextInput';
+import Form from '../components/Form';
+import FormAside from '../components/FormAside';
+import Heading from '../components/Heading';
+import IconFeedback from '../components/IconFeedback';
+import Logo from '../components/Logo';
+import ModalMenu from '../components/ModalMenu';
+import Requirements from '../components/Requirements';
+import Spinner from '../components/Spinner';
+import Stack from '../components/Stack';
+import TextBlock from '../components/TextBlock';
+import TextInput from '../components/TextInput';
+import TextStyle from '../components/TextStyle';
+import Tooltip from '../components/Tooltip';
+import ComponentDemo from './components/ComponentDemo';
 
 # Ping End-User Components
 
@@ -248,4 +249,18 @@ Error message
             }
         ]} />
     </div>
+</ComponentDemo>
+
+<ComponentDemo>
+    <Card>
+        <Logo src="ping-logo.svg"/>
+        <IconFeedback type="error">Error</IconFeedback>
+        <TextBlock size="small">
+            <p>The actor attempting to perform the request is not authorized.</p>
+            <p><TextStyle muted>
+                id: 2e0b1d51-3409-46dd-ac5e-d49cf5213de4<br />
+                code: ACCESS_FAILED
+            </TextStyle></p>
+        </TextBlock>
+    </Card>
 </ComponentDemo>

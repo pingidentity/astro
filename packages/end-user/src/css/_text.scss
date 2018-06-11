@@ -32,3 +32,8 @@
     font-size: $font-size-xs;
     font-family: $font-default;
 }
+
+%muted-text,
+.muted-text {
+    color: $color-neutral-70;
+}

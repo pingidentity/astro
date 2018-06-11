@@ -113,6 +113,10 @@
   font-size: 11px;
   font-family: "proxima-nova", sans-serif; }
 
+
+.muted-text {
+  color: #b4b4b4; }
+
 .button, .modal-menu__button,
 .button-text {
   font-family: "proxima-nova", sans-serif;
