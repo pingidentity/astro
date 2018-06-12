@@ -14,9 +14,6 @@ import classnames from "classnames";
  *
  * @param {string} [defaultText]
  *     Text that shows if CSS rotations are not supported
- *
- *
- * @example
  **/
 
 
