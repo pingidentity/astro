@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import RockerButton from "../../../components/forms/RockerButton";
+import RockerButton from "../../forms/RockerButton";
+import PageSpinner from "../../general/PageSpinner";
 import { BarChart, XAxis, Tooltip, Bar } from "recharts";
 import _ from "underscore";
 
@@ -24,7 +25,11 @@ import _ from "underscore";
 * @param {string} [errorMessage]
 *     When provided, the error message and icon will display in place of the chart and center text.
 * @param {string} greetingText
-*    The text renderered in the upper-left of the component
+*     The text renderered in the upper-left of the component
+* @param {boolean} [loading=false]
+*     When true the splinner animation shows in place of the charts
+* @param {string} [loadingMessage]
+*     The optional text to display below the loading spinner
 * @param {object} onValueChange
 *     The function called whenever the date range changes
 * @param {object} rockerButtonProps
@@ -105,6 +110,8 @@ const HeroChart = ({
         chartWidth,
         errorMessage,
         greetingText,
+        loading,
+        loadingMessage,
         onValueChange,
         rockerButtonProps,
         selected,
@@ -169,13 +176,15 @@ const HeroChart = ({
 
     return (
         <div data-id={dataId} className="hero-chart" style={heroStyles}>
-            <div className="hero-chart__greeting">{greetingText}</div>
-            {!errorMessage && [
+            {greetingText && <div className="hero-chart__greeting">{greetingText}</div>}
+            {!errorMessage &&
                 <div key="center-text" className="hero-chart__center-text">
                     <div className="hero-chart__title">{titleText}</div>
                     <div className="hero-chart__total">{totalValue}</div>
                     <div className="hero-chart__subtitle">{subtitleText}</div>
-                </div>,
+                </div>
+            }
+            {!errorMessage && !loading && [
                 <div key="top-chart" className="hero-chart__top-chart">
                     <BarChart
                         {...chartProps}
@@ -195,8 +204,11 @@ const HeroChart = ({
                         {_renderBars(bottomSeriesKey, "#ffa500")}
                     </BarChart>
                 </div>,
-                <RockerButton {...rockerButtonDefaults} {...rockerButtonProps} />
+                <RockerButton key="range-selector" {...rockerButtonDefaults} {...rockerButtonProps} />
             ]}
+            {!errorMessage && loading &&
+                <PageSpinner show={true} className="hero-chart__spinner">{loadingMessage}</PageSpinner>
+            }
             {errorMessage &&
                 <div className="hero-chart__error">
                 <div className="icon-cogs hero-chart__error-icon" />
@@ -241,6 +253,8 @@ HeroChart.propTypes = {
     ]),
     data: PropTypes.array,
     errorMessage: PropTypes.string,
+    loading: PropTypes.bool,
+    loadingMessage: PropTypes.string,
     rockerButtonProps: PropTypes.object,
     selected: PropTypes.string,
     strings: PropTypes.object,
@@ -253,6 +267,7 @@ HeroChart.defaultProps = {
     bgImage: "",
     chartWidth: 800,
     chartHeight: 200,
+    loading: false,
     onValueChange: _.noop,
     rockerButtonProps: {},
     xAxisKey: "id",

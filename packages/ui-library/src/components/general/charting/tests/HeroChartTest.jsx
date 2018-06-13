@@ -127,11 +127,14 @@ describe("HeroChart", function () {
         });
     });
 
-    it("does not render the error by default", function () {
+    it("does not render the error or spinner by default", function () {
         const component = getComponent();
 
         const errorMessage = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__error");
         expect(errorMessage).toBeFalsy();
+
+        const spinner = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__spinner");
+        expect(spinner).toBeFalsy();
     });
 
     it("renders the error when provided", function () {
@@ -159,6 +162,41 @@ describe("HeroChart", function () {
 
         const subtitle = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__subtitle");
         expect(subtitle).toBeFalsy();
+    });
+
+    it("renders the spinner when provided", function () {
+        const loaderMessageText = "Wait!";
+        const component = getComponent({
+            loading: true,
+            loadingMessage: loaderMessageText,
+        });
+
+        const spinnerContainer = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__spinner");
+        expect(spinnerContainer).toBeTruthy();
+
+        const pageSpinner = TestUtils.findRenderedDOMNodeWithClass(spinnerContainer, "spinner__page");
+        expect(pageSpinner).toBeTruthy();
+
+        const spinnerText = TestUtils.findRenderedDOMNodeWithClass(spinnerContainer, "spinner__text");
+        expect(spinnerText.textContent).toBe(loaderMessageText);
+
+        const topChart = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__top-chart");
+        expect(topChart).toBeFalsy();
+
+        const botChart = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__bottom-chart");
+        expect(botChart).toBeFalsy();
+
+        const greeting = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__greeting");
+        expect(greeting).toBeTruthy();
+
+        const title = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__title");
+        expect(title).toBeTruthy();
+
+        const value = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__total");
+        expect(value).toBeTruthy();
+
+        const subtitle = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__subtitle");
+        expect(subtitle).toBeTruthy();
     });
 
     it("renders the x-axis in the various font sizes", function () {

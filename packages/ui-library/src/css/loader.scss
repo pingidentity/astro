@@ -1,7 +1,7 @@
 
 @-webkit-keyframes rotation {
     0% {
-        @include transform(rotate(720deg));
+        @include transform(rotate(360deg));
     }
     100% {
         @include transform(rotate(0deg));
@@ -10,7 +10,7 @@
 
 @-moz-keyframes rotation {
     0% {
-        @include transform(rotate(720deg));
+        @include transform(rotate(360deg));
     }
     100% {
         @include transform(rotate(0deg));
@@ -19,7 +19,7 @@
 
 @-o-keyframes rotation {
     0% {
-        @include transform(rotate(720deg));
+        @include transform(rotate(360deg));
     }
     100% {
         @include transform(rotate(0deg));
@@ -28,125 +28,137 @@
 
 @keyframes rotation {
     0% {
-        @include transform(rotate(720deg));
+        @include transform(rotate(360deg));
     }
     100% {
         @include transform(rotate(0deg));
     }
 }
 
-@mixin loaderCss($loader-size, $border-width:3px) {
-    width: $loader-size;
-    height: $loader-size;
+@mixin spinnerOuterCss($size) {
+    box-sizing: border-box;
+
     display: inline-block;
-    border-width: $border-width;
-    border-style: solid;
-
-    @include border-radius($loader-size);
-    @include animation (rotation 1.1s infinite linear);
-}
-
-.spinner {
-    $loader-size: 15px;
-
     position: relative;
     color: transparent;
     font-size: 1px;
-    border-color: $color-rhino rgba($color-rhino, 0.4) rgba($color-rhino, 0.4) rgba($color-rhino, 0.4);
     vertical-align: bottom;
 
-    @include loaderCss($loader-size);
+    width: $size;
+    height: $size;
 
-    &.large {
-        $loader-size: 30px;
+    border-style: solid;
+    border-radius: $size;
+    border-color: $color-neutral-90;
+}
 
-        border-width: 4px;
-        width: $loader-size;
-        height: $loader-size;
+@mixin spinnerInnerCss($size) {
+    position: absolute;
+    box-sizing: border-box;
 
-        @include border-radius($loader-size);
+    width: $size - 2;
+    height: $size - 2;
+
+    border-right-color: transparent;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+
+    border-style: solid;
+    border-radius: $size;
+
+    @include animation (rotation 0.8s infinite linear);
+}
+
+.spinner {
+    $size: 25px;
+    $border-width: 5px;
+
+    @include spinnerOuterCss($size);
+
+    border-width: $border-width;
+
+    &__inner {
+        top: -#{$border-width - 1};
+        left: -#{$border-width - 1};
+        border-width: $border-width - 2;
+        border-top-color: $color-neutral-50;
+
+        @include spinnerInnerCss($size);
     }
-    &.ie9 {
-        border: none;
-        background-image: url('#{$img-path}spinner.gif');
-        background-repeat: no-repeat;
-        background-position: 50%;
-        background-size: 21px;
-        height: 21px;
-        width: 21px;
 
-        &.large {
-            background-size: 38px;
-            height: 38px;
-            width: 38px;
+    &__box {
+        text-align: center;
+        transform: translateX(-50%);
+        margin-left: 50%;
+        max-width: 310px;
+    }
+
+    &__page {
+        $size: 75px;
+        $border-width: 9px;
+
+        @include spinnerOuterCss($size);
+
+        border-width: $border-width;
+
+        .spinner__inner {
+            position: relative;
+
+            top: -#{$border-width - 1};
+            left: -#{$border-width - 1};
+            border-width: $border-width - 2;
+            border-top-color: $color-active-blue;
+
+            @include spinnerInnerCss($size);
+
+            &:before,
+            &:after {
+                content: '';
+                top: 2px;
+                height: $border-width - 2;
+                width: $border-width - 2;
+                border-radius: $border-width - 2;
+                position: absolute;
+                background-color: $color-active-blue;
+            }
+            &:before {
+                left: 3px;
+                background-color: $color-active-blue;
+            }
+            &:after {
+                left: 49px;
+                background-color: $color-active-blue;
+            }
         }
     }
-}
 
-.spinner__box {
-    text-align: center;
-    transform: translateX(-50%);
-    margin-left: 50%;
-    max-width: 310px;
-}
-
-.spinner__page {
-    $loader-size: 75px;
-    color: transparent;
-    border-color: $color-active-blue rgba($color-neutral-90, 0.4) rgba($color-neutral-90, 0.4) rgba($color-neutral-90, 0.4);
-    position: relative;
-    &:before,
-    &:after {
-        content: '';
-        height: 10px;
-        width: 10px;
-        border-radius: 5px;
-        position: absolute;
-        background-color: $color-active-blue;
-    }
-    &:before {
-        top: 1px;
-        left: 3px;
-        background-color: $color-active-blue;
-    }
-    &:after {
-        top: 1px;
-        left: 61px;
-        background-color: $color-active-blue;
+    &__text {
+        display: inline-block;
+        margin-top: 15px;
+        padding: $spacing-sm $spacing-lg;
+        border-radius: 40px;
+        line-height: 1.2em;
+        font-size: 20px;
+        text-align: center;
+        color: $color-strong-neutral-10;
+        background-color: rgba($color-white, 0.6);
     }
 
-    @include loaderCss($loader-size, 10px);
-}
+    &.large {
+        $size: 40px;
+        $border-width: 7px;
 
-.spinner__text {
-    margin-top: 15px;
-    padding: $spacing-sm $spacing-lg;
-    border-radius: 40px;
-    line-height: 1.2em;
-    font-size: 20px;
-    text-align: center;
-    color: $color-strong-neutral-10;
-    background-color: rgba($color-white, 0.6);
-}
+        @include spinnerOuterCss($size);
 
+        border-width: $border-width;
 
+        .spinner__inner {
+            top: -#{$border-width - 1};
+            left: -#{$border-width - 1};
+            border-width: $border-width - 2;
+            border-top-color: $color-neutral-50;
 
-button.spinner {
-    $loader-size: 9px;
-
-    &:before {
-        content: '';
-        top: 12px;
-        left: 12px;
-        position: absolute;
-        border-color: rgba($color-white, 0.9) rgba($color-white, 0.6) rgba($color-white, 0.7) rgba($color-white, 0.8);
-
-        @include loaderCss($loader-size);
-    }
-
-    &.download {
-        &:before {
-            left: 15px;
+            @include spinnerInnerCss($size);
         }
     }
 }

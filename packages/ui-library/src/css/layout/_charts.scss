@@ -1,6 +1,6 @@
 .hero-chart {
     position: relative;
-    min-height: 504px;
+    min-height: 370px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -43,6 +43,7 @@
     &__total {
         font-size: 55px;
         line-height: 1em;
+        min-height: 1em;
         margin: 5px 0;
         font-family: $font-pn-semibold;
     }
@@ -59,6 +60,14 @@
         transform: translateX(-50%) translateY(-70%);
         text-align: center;
         color: $color-white;
+    }
+
+    .spinner__box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-70%);
+        margin: 0;
     }
 
     &__error-text {

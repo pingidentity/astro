@@ -24,8 +24,8 @@ const PageSpinner = ({
     show
  }) => (
     <div data-id={dataId} className={classnames("spinner__box", className)}>
-        <Spinner className="spinner__page" show={show}/>
-        <div className="spinner__text">{children}</div>
+        <div><Spinner className="spinner__page" show={show}/></div>
+        { children && <div className="spinner__text">{children}</div> }
     </div>
  );
 

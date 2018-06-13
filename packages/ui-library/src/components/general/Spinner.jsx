@@ -46,9 +46,12 @@ class Spinner extends React.Component {
     }
 
     render() {
-        var className = classnames("spinner", { ie9: Utils.isIE9() }, this.props.className);
         if (this.props.show) {
-            return <span data-id={this.props["data-id"]} className={className}>{this.props.defaultText}</span>;
+            return (
+                <span data-id={this.props["data-id"]} className={classnames("spinner", this.props.className)}>
+                    <span className="spinner__inner">{this.props.defaultText}</span>
+                </span>
+            );
         } else {
             return this.props.children;
         }
