@@ -61,7 +61,9 @@ $fullwidthBreakpoint: 950px;
         @include flexbox;
         @include flexbox-direction(column);
 
+        box-sizing: border-box;
         padding: $spacing-xl;
+        min-height: 220px;
 
         @media (max-width: $condensedBreakpoint) {
             padding: $spacing-xl $spacing-md;
