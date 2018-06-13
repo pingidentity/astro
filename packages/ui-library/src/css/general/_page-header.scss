@@ -43,14 +43,15 @@
 .page-header__image {
     $size: 40px;
 
+    box-sizing: border-box;
     height: $size;
+    width: 40px;
     flex-basis: $size;
     margin: 0 $spacing-md 0 0;
-    background-color: $color-strong-neutral-40;
 
     img {
-        margin: 50% 0 0;
-        transform: translateY(-50%);
+        margin: 50% 0 0 50%;
+        transform: translateY(-50%) translateX(-50%);
         max-height: $size;
         max-width: $size;
     }
