@@ -62,14 +62,6 @@
         color: $color-white;
     }
 
-    .spinner__box {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translateX(-50%) translateY(-70%);
-        margin: 0;
-    }
-
     &__error-text {
         font-size: 14px;
         line-height: 1.3em;
@@ -103,6 +95,14 @@
 
     &__stat-cards {
         margin: -70px 0 0;
+    }
+
+    .page-loader__box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-70%);
+        margin: 0;
     }
 }
 

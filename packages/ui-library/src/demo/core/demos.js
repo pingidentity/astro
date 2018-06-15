@@ -679,7 +679,7 @@ module.exports = [
                         demo: require("../components/general/charting/StatCardRowDemo"),
                         pathToDoc: "components/general/charting/StatCard.jsx",
                         pathToSource: "components_general_charting_StatCard.jsx.html",
-                        pathToDemoSource: "demo_components_general_charting_StatCardDemo.jsx.html"
+                        pathToDemoSource: "demo_components_general_charting_StatCardRowDemo.jsx.html"
                     },
                     {
                         label: "Hero Chart",

@@ -21,11 +21,13 @@ const PageSpinner = ({
     "data-id": dataId,
     className,
     children,
-    show
+    small,
  }) => (
-    <div data-id={dataId} className={classnames("spinner__box", className)}>
-        <div><Spinner className="spinner__page" show={show}/></div>
-        { children && <div className="spinner__text">{children}</div> }
+    <div data-id={dataId} className={classnames("page-loader__box", className)}>
+        <div>
+            <Spinner className={classnames("page-loader", small ? "page-loader--small" : null)} show={true}/>
+        </div>
+        {children && <div className="page-loader__text">{children}</div> }
     </div>
  );
 
@@ -37,6 +39,7 @@ PageSpinner.PropTypes = {
 
 PageSpinner.defaultProps = {
     "data-id": "page-spinner",
+    small: false,
 };
 
 export default PageSpinner;

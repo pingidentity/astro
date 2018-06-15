@@ -48,8 +48,8 @@ class Spinner extends React.Component {
     render() {
         if (this.props.show) {
             return (
-                <span data-id={this.props["data-id"]} className={classnames("spinner", this.props.className)}>
-                    <span className="spinner__inner">{this.props.defaultText}</span>
+                <span data-id={this.props["data-id"]} className={classnames("loader", this.props.className)}>
+                    <span className="loader__rotator">{this.props.defaultText}</span>
                 </span>
             );
         } else {

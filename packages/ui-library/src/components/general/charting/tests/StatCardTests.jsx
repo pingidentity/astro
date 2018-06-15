@@ -63,11 +63,14 @@ describe("StatCard", function () {
         expect(component).toBeDefined();
     });
 
-    it("does not render the error by default", function () {
+    it("does not render the error or spinner by default", function () {
         const component = getComponent();
 
         const errorMessage = TestUtils.findRenderedDOMNodeWithClass(component, "stat-card__error");
         expect(errorMessage).toBeFalsy();
+
+        const spinner = TestUtils.findRenderedDOMNodeWithClass(component, "stat-card__spinner");
+        expect(spinner).toBeFalsy();
     });
 
     it("renders the error when provided", function () {
@@ -88,6 +91,21 @@ describe("StatCard", function () {
         expect(title).toBeFalsy();
 
         const control = TestUtils.findRenderedDOMNodeWithClass(component, "stat-card__control");
+        expect(control).toBeFalsy();
+    });
+
+    it("renders the spinner when provided", function () {
+        const component = getComponent({
+            loading: true
+        });
+
+        const spinnerContainer = TestUtils.findRenderedDOMNodeWithClass(component, "stat-card__loader");
+        expect(spinnerContainer).toBeTruthy();
+
+        const pageSpinner = TestUtils.findRenderedDOMNodeWithClass(spinnerContainer, "page-loader");
+        expect(pageSpinner).toBeTruthy();
+
+        const control = TestUtils.findRenderedDOMNodeWithClass(component, "view-toggle");
         expect(control).toBeFalsy();
     });
 });

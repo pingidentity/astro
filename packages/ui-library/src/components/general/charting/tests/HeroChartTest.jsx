@@ -133,7 +133,7 @@ describe("HeroChart", function () {
         const errorMessage = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__error");
         expect(errorMessage).toBeFalsy();
 
-        const spinner = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__spinner");
+        const spinner = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__loader");
         expect(spinner).toBeFalsy();
     });
 
@@ -171,13 +171,13 @@ describe("HeroChart", function () {
             loadingMessage: loaderMessageText,
         });
 
-        const spinnerContainer = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__spinner");
+        const spinnerContainer = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__loader");
         expect(spinnerContainer).toBeTruthy();
 
-        const pageSpinner = TestUtils.findRenderedDOMNodeWithClass(spinnerContainer, "spinner__page");
+        const pageSpinner = TestUtils.findRenderedDOMNodeWithClass(spinnerContainer, "page-loader");
         expect(pageSpinner).toBeTruthy();
 
-        const spinnerText = TestUtils.findRenderedDOMNodeWithClass(spinnerContainer, "spinner__text");
+        const spinnerText = TestUtils.findRenderedDOMNodeWithClass(spinnerContainer, "page-loader__text");
         expect(spinnerText.textContent).toBe(loaderMessageText);
 
         const topChart = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__top-chart");

@@ -207,7 +207,7 @@ const HeroChart = ({
                 <RockerButton key="range-selector" {...rockerButtonDefaults} {...rockerButtonProps} />
             ]}
             {!errorMessage && loading &&
-                <PageSpinner show={true} className="hero-chart__spinner">{loadingMessage}</PageSpinner>
+                <PageSpinner show={true} className="hero-chart__loader">{loadingMessage}</PageSpinner>
             }
             {errorMessage &&
                 <div className="hero-chart__error">

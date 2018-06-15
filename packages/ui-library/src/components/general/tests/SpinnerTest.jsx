@@ -19,7 +19,7 @@ describe("Spinner", function () {
 
         return ReactTestUtils.renderIntoDocument(
             <Spinner {...attrs}>
-                <div className="spinner-content">whatever</div>
+                <div className="loader-content">whatever</div>
             </Spinner>
         );
     }
@@ -27,10 +27,10 @@ describe("Spinner", function () {
     it("is rendering spinning animation", function () {
         var component = getComponent();
 
-        var content = TestUtils.scryRenderedDOMNodesWithClass(component, "spinner-content");
+        var content = TestUtils.scryRenderedDOMNodesWithClass(component, "loader-content");
         expect(content.length).toBe(0);
 
-        var spinner = TestUtils.findRenderedDOMNodeWithClass(component, "spinner");
+        var spinner = TestUtils.findRenderedDOMNodeWithClass(component, "loader");
         expect(spinner.textContent).toBe(defaultTextValue);
     });
 
@@ -39,10 +39,10 @@ describe("Spinner", function () {
             { show: false }
         );
 
-        var content = TestUtils.findRenderedDOMNodeWithClass(component, "spinner-content");
+        var content = TestUtils.findRenderedDOMNodeWithClass(component, "loader-content");
         expect(content.textContent).toBe("whatever");
 
-        var spinner = TestUtils.scryRenderedDOMNodesWithClass(component, "spinner");
+        var spinner = TestUtils.scryRenderedDOMNodesWithClass(component, "loader");
         expect(spinner.length).toBe(0);
     });
 
@@ -59,7 +59,7 @@ describe("Spinner", function () {
     it("render component with default data-id", function () {
         var component = getComponent();
 
-        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "spinner");
+        var element = TestUtils.findRenderedDOMNodeWithDataId(component, "loader");
 
         expect(element).toBeDefined();
     });

@@ -1,5 +1,5 @@
 
-@-webkit-keyframes rotation {
+@-webkit-keyframes spinner-rotation {
     0% {
         @include transform(rotate(360deg));
     }
@@ -8,7 +8,7 @@
     }
 }
 
-@-moz-keyframes rotation {
+@-moz-keyframes spinner-rotation {
     0% {
         @include transform(rotate(360deg));
     }
@@ -17,7 +17,7 @@
     }
 }
 
-@-o-keyframes rotation {
+@-o-keyframes spinner-rotation {
     0% {
         @include transform(rotate(360deg));
     }
@@ -26,7 +26,7 @@
     }
 }
 
-@keyframes rotation {
+@keyframes spinner-rotation {
     0% {
         @include transform(rotate(360deg));
     }
@@ -35,55 +35,95 @@
     }
 }
 
-@mixin spinnerOuterCss($size) {
-    box-sizing: border-box;
+@mixin spinnerOuterSize($size, $border-width) {
+    width: $size;
+    height: $size;
+    border-width: $border-width;
+    border-radius: $size;
+}
 
-    display: inline-block;
+@mixin spinnerRotatorSize($size, $border-width, $color) {
+    top: -#{$border-width - 1};
+    left: -#{$border-width - 1};
+    width: $size - 2;
+    height: $size - 2;
+    border-width: $border-width - 2;
+    border-radius: $size;
+    border-top-color: $color;
+}
+
+@mixin spinnerPageSize($border-width, $color) {
+    &:before,
+    &:after {
+        position: absolute;
+        height: $border-width - 2;
+        width: $border-width - 2;
+        border-radius: $border-width - 2;
+        background-color: $color;
+    }
+}
+
+.loader {
+    $size: 25px;
+    $border-width: 4px;
+    $color: $color-neutral-50;
+
     position: relative;
+    display: inline-block;
+    box-sizing: border-box;
     color: transparent;
     font-size: 1px;
     vertical-align: bottom;
-
-    width: $size;
-    height: $size;
-
     border-style: solid;
-    border-radius: $size;
     border-color: $color-neutral-90;
+
+    @include spinnerOuterSize($size, $border-width);
+
+    &__rotator {
+        position: absolute;
+        box-sizing: border-box;
+        border-style: solid;
+
+        @include animation (spinner-rotation 0.8s infinite linear);
+        @include spinnerRotatorSize($size, $border-width, $color);
+    }
+
+    &.large {
+        $size: 40px;
+        $border-width: 6px;
+        $color: $color-neutral-50;
+
+        @include spinnerOuterSize($size, $border-width);
+
+        .loader__rotator {
+            @include spinnerRotatorSize($size, $border-width, $color);
+        }
+    }
 }
 
-@mixin spinnerInnerCss($size) {
-    position: absolute;
-    box-sizing: border-box;
+.page-loader {
+    $size: 75px;
+    $border-width: 9px;
+    $color: $color-active-blue;
 
-    width: $size - 2;
-    height: $size - 2;
+    @include spinnerOuterSize($size, $border-width);
 
-    border-right-color: transparent;
-    border-left-color: transparent;
-    border-bottom-color: transparent;
+    .loader__rotator {
+        @include spinnerRotatorSize($size, $border-width, $color);
+        @include spinnerPageSize($border-width, $color);
 
-    border-style: solid;
-    border-radius: $size;
-
-    @include animation (rotation 0.8s infinite linear);
-}
-
-.spinner {
-    $size: 25px;
-    $border-width: 5px;
-
-    @include spinnerOuterCss($size);
-
-    border-width: $border-width;
-
-    &__inner {
-        top: -#{$border-width - 1};
-        left: -#{$border-width - 1};
-        border-width: $border-width - 2;
-        border-top-color: $color-neutral-50;
-
-        @include spinnerInnerCss($size);
+        &:before,
+        &:after {
+            content: '';
+            position: absolute;
+            top: 2px;
+        }
+        &:before {
+            left: 3px;
+        }
+        &:after {
+            left: 49px;
+        }
     }
 
     &__box {
@@ -91,45 +131,6 @@
         transform: translateX(-50%);
         margin-left: 50%;
         max-width: 310px;
-    }
-
-    &__page {
-        $size: 75px;
-        $border-width: 9px;
-
-        @include spinnerOuterCss($size);
-
-        border-width: $border-width;
-
-        .spinner__inner {
-            position: relative;
-
-            top: -#{$border-width - 1};
-            left: -#{$border-width - 1};
-            border-width: $border-width - 2;
-            border-top-color: $color-active-blue;
-
-            @include spinnerInnerCss($size);
-
-            &:before,
-            &:after {
-                content: '';
-                top: 2px;
-                height: $border-width - 2;
-                width: $border-width - 2;
-                border-radius: $border-width - 2;
-                position: absolute;
-                background-color: $color-active-blue;
-            }
-            &:before {
-                left: 3px;
-                background-color: $color-active-blue;
-            }
-            &:after {
-                left: 49px;
-                background-color: $color-active-blue;
-            }
-        }
     }
 
     &__text {
@@ -144,21 +145,26 @@
         background-color: rgba($color-white, 0.6);
     }
 
-    &.large {
-        $size: 40px;
+    &--small {
+        $size: 50px;
         $border-width: 7px;
 
-        @include spinnerOuterCss($size);
+        @include spinnerOuterSize($size, $border-width);
 
-        border-width: $border-width;
+        .loader__rotator {
+            @include spinnerRotatorSize($size, $border-width, $color);
+            @include spinnerPageSize($border-width, $color);
 
-        .spinner__inner {
-            top: -#{$border-width - 1};
-            left: -#{$border-width - 1};
-            border-width: $border-width - 2;
-            border-top-color: $color-neutral-50;
-
-            @include spinnerInnerCss($size);
+            &:before,
+            &:after {
+                top: 1px;
+            }
+            &:before {
+                left: 2px;
+            }
+            &:after {
+                left: 31px;
+            }
         }
     }
 }
@@ -256,5 +262,36 @@
                 opacity: 0.6;
             }
         }
+    }
+}
+
+// for hardcoded instances of the previous spinner markup
+.spinner {
+    $size: 25px;
+
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    width: $size;
+    height: $size;
+
+    border-color: $color-neutral-50 $color-neutral-90 $color-neutral-90;
+    border-width: 4px;
+    border-style: solid;
+    border-radius: $size;
+
+    color: transparent;
+    font-size: 1px;
+    vertical-align: bottom;
+
+    @include animation (spinner-rotation 0.8s infinite linear);
+
+    &.large {
+        $size: 40px;
+
+        width: $size;
+        height: $size;
+        border-radius: $size;
+        border-width: 6px;
     }
 }

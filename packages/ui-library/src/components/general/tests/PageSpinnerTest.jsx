@@ -10,6 +10,8 @@ describe("PageSpinner", function () {
         PageSpinner = require("../PageSpinner"),
         _ = require("underscore");
 
+    const dataId = "my-page-spinner";
+
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
             show: true,
@@ -27,25 +29,19 @@ describe("PageSpinner", function () {
 
     it("render component with data-id", function () {
         const component = getComponent(
-            { "data-id": "page-spinner" }
+            { "data-id": dataId }
         );
 
-        const element = TestUtils.findRenderedDOMNodeWithDataId(component, "spinner__text");
-
-        expect(element).toBeDefined();
+        expect(component).toBeDefined();
     });
 
     it("renders text", function () {
-        const myContent = "whatever";
-
+        const message = "whatever";
         const component = getComponent({
-            children: myContent
+            children: message
         });
 
-        const element = TestUtils.findRenderedDOMNodeWithClass(component, "spinner__text");
-        console.log(element);
-
-        expect(element.textContent).toBe(myContent);
-
+        const spinnerText = TestUtils.findRenderedDOMNodeWithClass(component, "page-loader__text");
+        expect(spinnerText.textContent).toBe(message);
     });
 });

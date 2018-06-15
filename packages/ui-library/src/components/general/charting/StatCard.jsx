@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import PageSpinner from "../../general/PageSpinner";
 import ViewToggle from "./ViewToggle";
 import _ from "underscore";
 import classnames from "classnames";
@@ -27,6 +28,8 @@ const accentClass = key => accentClasses[key] || key;
  *     If provided, whether or not the card is flipped. If not provided, the component maintains its own state
  * @param {string} [iconName]
  *     Name of the icon that sits next to the title.
+ * @param {boolean} [loading=false]
+ *     When true the splinner animation shows in place of the stats
  * @param {function} [onFlip]
  *     Called when a flip is triggered
  * @param {string} [title]
@@ -70,6 +73,7 @@ class StatCard extends React.Component {
         errorMessage: PropTypes.string,
         flipped: PropTypes.bool,
         iconName: PropTypes.string,
+        loading: PropTypes.bool,
         onFlip: PropTypes.func,
         title: PropTypes.string,
         value: valuePropType,
@@ -78,7 +82,8 @@ class StatCard extends React.Component {
     static defaultProps = {
         "data-id": "stat-card",
         accent: 0,
-        iconName: "bar-line-chart"
+        iconName: "bar-line-chart",
+        loading: false,
     }
 
     state = { flipped: false }
@@ -126,13 +131,20 @@ class StatCard extends React.Component {
                             </div>
                             <div className="stat-card__title-text">{this.props.title}</div>
                         </div>
-                        <div className="stat-card__primary-number" accent={this.props.accent}>
-                            {this.props.value}
-                        </div>
+                        {!this.props.loading &&
+                            <div className="stat-card__primary-number" accent={this.props.accent}>
+                                {this.props.value}
+                            </div>
+                        }
+                        {this.props.loading &&
+                            <PageSpinner className="stat-card__loader" small />
+                        }
                         <div className="stat-card__description">{this.props.description}</div>
                     </div>,
                     <div key="control" className="stat-card__control">
-                        <ViewToggle onToggle={this._handleFlip} toggled={this.state.flipped} />
+                        {!this.props.loading &&
+                            <ViewToggle onToggle={this._handleFlip} toggled={this.state.flipped} />
+                        }
                     </div>
                 ]}
                 {this.props.errorMessage &&
