@@ -122,6 +122,9 @@
         vertical-align: baseline;
         cursor: pointer;
     }
+    &:hover [class^='icon-'] {
+        color: $color-accent-neutral-10;
+    }
     &.warning {
         .tooltip-text {
             @include bg-styles($color-critical-red);
