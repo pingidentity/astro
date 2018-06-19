@@ -42,7 +42,8 @@ describe("SelectText", function () {
         global.getSelection = jest.genMockFn();
         global.getSelection.mockReturnValue({
             removeAllRanges: removeAllRanges,
-            addRange: addRange
+            addRange: addRange,
+            toString: () => "",
         });
 
         global.document.createRange = function () {
@@ -81,6 +82,11 @@ describe("SelectText", function () {
 
         var moveToElement = jest.genMockFunction();
         var select = jest.genMockFunction();
+
+        global.getSelection = jest.genMockFn();
+        global.getSelection.mockReturnValue({
+            toString: () => "",
+        });
 
         global.document.body.createTextRange = function () {
             return {
@@ -140,7 +146,8 @@ describe("SelectText", function () {
         global.getSelection = jest.genMockFn();
         global.getSelection.mockReturnValue({
             removeAllRanges: removeAllRanges,
-            addRange: addRange
+            addRange: addRange,
+            toString: () => "",
         });
 
         global.document.createRange = function () {
@@ -171,6 +178,13 @@ describe("SelectText", function () {
 
     it("is delegates selection to form text field targets", function () {
 
+        global.getSelection = jest.genMockFn();
+        global.getSelection.mockReturnValue({
+            removeAllRanges: jest.genMockFn(),
+            addRange: jest.genMockFn(),
+            toString: () => "",
+        });
+
         var callback = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
@@ -192,6 +206,13 @@ describe("SelectText", function () {
     });
 
     it("triggers onClick callback", function () {
+        global.getSelection = jest.genMockFn();
+        global.getSelection.mockReturnValue({
+            removeAllRanges: jest.genMockFn(),
+            addRange: jest.genMockFn(),
+            toString: () => "",
+        });
+
 
         var callback = jest.genMockFunction();
 
@@ -210,6 +231,13 @@ describe("SelectText", function () {
     });
 
     it("render component with data-id", function () {
+        global.getSelection = jest.genMockFn();
+        global.getSelection.mockReturnValue({
+            removeAllRanges: jest.genMockFn(),
+            addRange: jest.genMockFn(),
+            toString: () => "",
+        });
+
         var component = ReactTestUtils.renderIntoDocument(
             <SelectText data-id="selectTextWithNewDataId" className="testClass" select={true}>
                 Just some test text
@@ -222,6 +250,13 @@ describe("SelectText", function () {
     });
 
     it("render component with default data-id", function () {
+        global.getSelection = jest.genMockFn();
+        global.getSelection.mockReturnValue({
+            removeAllRanges: jest.genMockFn(),
+            addRange: jest.genMockFn(),
+            toString: () => "",
+        });
+
         var component = ReactTestUtils.renderIntoDocument(
             <SelectText className="testClass" select={true}>
                 Just some test text

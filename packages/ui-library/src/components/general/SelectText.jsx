@@ -100,23 +100,26 @@ class SelectText extends React.Component {
         // that if an input field exists within a
         // SelectText element that clicking the input
         // should only select the text within the input.
-        if (event && event.target.select) {
-            event.target.select();
-        } else {
 
-            var text = ReactDOM.findDOMNode(this);
-            var range;
+        const selection = global.getSelection();
 
-            if (global.document.body.createTextRange) {
-                range = global.document.body.createTextRange();
-                range.moveToElementText(text);
-                range.select();
-            } else if (global.getSelection) {
-                var selection = global.getSelection();
-                range = global.document.createRange();
-                range.selectNodeContents(text);
-                selection.removeAllRanges();
-                selection.addRange(range);
+        if (selection.toString() === "") {
+            if (event && event.target.select) {
+                event.target.select();
+            } else {
+                var text = ReactDOM.findDOMNode(this);
+                var range;
+    
+                if (global.document.body.createTextRange) {
+                    range = global.document.body.createTextRange();
+                    range.moveToElementText(text);
+                    range.select();
+                } else if (global.getSelection) {
+                    range = global.document.createRange();
+                    range.selectNodeContents(text);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                }
             }
         }
 
