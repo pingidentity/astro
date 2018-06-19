@@ -64,6 +64,7 @@ const _renderBars = (key, color) => {
             name={key}
             fill={color}
             isAnimationActive={false}
+            minPointSize={1}
         />
     );
 };

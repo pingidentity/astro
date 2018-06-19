@@ -41,7 +41,7 @@ class HeroChartDemo extends React.Component {
         const data = [
             { id: "Sat 12/8", successes: 4000, failures: 200 },
             { id: "Sun 12/9", successes: 3000, failures: 198 },
-            { id: "Mon 12/10", successes: 2000, failures: 900 },
+            { id: "Mon 12/10", successes: 0, failures: 0 },
             { id: "Tue 12/11", successes: 3908, failures: 200 },
             { id: "Wed 12/12", successes: 4800, failures: 281 },
             { id: "Thu 12/13", successes: 3908, failures: 200 },
