@@ -1,9 +1,10 @@
 .code-view {
+    padding: $spacing-md;
     max-height: 400px;
     overflow: scroll;
     color: $color-midnight;
-    background-color: $color-input-fill;
-    border-color: $color-input-fill;
+    background-color: rgba($color-input-fill, 0.25);
+    border: 1px solid $color-neutral-70;
 }
 
 .code-view__font {
