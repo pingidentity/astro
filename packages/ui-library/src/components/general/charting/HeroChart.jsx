@@ -203,9 +203,9 @@ const HeroChart = ({
                         <Tooltip {...tooltipProps} position={{ y: botChartHeight }} />
                         {_renderBars(bottomSeriesKey, "#ffa500")}
                     </BarChart>
-                </div>,
-                <RockerButton key="range-selector" {...rockerButtonDefaults} {...rockerButtonProps} />
+                </div>
             ]}
+            <RockerButton key="range-selector" {...rockerButtonDefaults} {...rockerButtonProps} />
             {!errorMessage && loading &&
                 <PageSpinner show={true} className="hero-chart__loader">{loadingMessage}</PageSpinner>
             }

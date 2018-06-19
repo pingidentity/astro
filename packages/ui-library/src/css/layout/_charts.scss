@@ -1,6 +1,6 @@
 .hero-chart {
     position: relative;
-    min-height: 370px;
+    min-height: 375px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -90,11 +90,14 @@
     }
 
     &__rocker {
-        margin: 25px 0 0;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 366px;
     }
 
     &__stat-cards {
-        margin: -70px 0 0;
+        margin: -73px 0 0;
     }
 
     .page-loader__box {
