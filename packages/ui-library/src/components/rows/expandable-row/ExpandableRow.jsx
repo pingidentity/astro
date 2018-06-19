@@ -1,15 +1,16 @@
 "use strict";
 
-var React = require("react"),
-    PropTypes = require("prop-types"),
-    classnames = require("classnames"),
-    _ = require("underscore"),
-    DetailsTooltip = require("../../tooltips/DetailsTooltip"),
-    Utils = require("../../../util/Utils"),
-    Translator = require("../../../util/i18n/Translator"),
-    KeyboardUtils = require("../../../util/KeyboardUtils"),
-    DragDrop = require("../DragDropRow"),
-    dragScroll = require("../../../util/dragScroll");
+import React from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import _ from "underscore";
+import DetailsTooltip from "../../tooltips/DetailsTooltip";
+import Utils from "../../../util/Utils";
+import Translator from "../../../util/i18n/Translator";
+import KeyboardUtils from "../../../util/KeyboardUtils";
+import DragDrop from "../DragDropRow";
+import dragScroll from "../../../util/dragScroll";
+import InlineMessage from "../../general/InlineMessage";
 import Button from "../../buttons/Button";
 
 /**
@@ -535,11 +536,6 @@ class StatelessExpandableRow extends React.Component {
 
         const rendered = (
             <div data-id={this.props["data-id"]} className={containerClassname}>
-                {this.props.rowMessage && (
-                    <div data-id="item-message" className={classnames("item-message", this.props.rowMessage.type)}>
-                        {this.props.rowMessage.text}
-                    </div>
-                )}
                 { (this.props.rowAccessories || this.props.status) && (
                     <div data-id="row-accessories" className="row-accessories">
                         {this.props.rowAccessories}
@@ -581,6 +577,15 @@ class StatelessExpandableRow extends React.Component {
                 </div>
                 {this.props.expanded && (
                     <div data-id="expanded-row" className="expanded-content indent-content clearfix">
+                        {this.props.rowMessage && (
+                            <InlineMessage
+                                data-id="item-message"
+                                className={"item-message"}
+                                type={this.props.rowMessage.type}
+                                alternate={true}>
+                                {this.props.rowMessage.text}
+                            </InlineMessage>
+                        )}
                         <div className="expanded-content-scroller">
                             {this.props.children || this.props.content}
                         </div>

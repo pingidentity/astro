@@ -1,9 +1,10 @@
-var React = require("react");
-var RowAccessories = require("../../../components/rows/expandable-row/Accessories");
-var HelpHint = require("../../../components/tooltips/HelpHint");
-var ExpandableRow = require("../../../components/rows/ExpandableRow");
-var Toggle = require("../../../components/forms/form-toggle");
-var DetailsTooltip = require("../../../components/tooltips/DetailsTooltip");
+import React from "react";
+import RowAccessories from "../../../components/rows/expandable-row/Accessories";
+import HelpHint from "../../../components/tooltips/HelpHint";
+import ExpandableRow from "../../../components/rows/ExpandableRow";
+import Toggle from "../../../components/forms/form-toggle";
+import DetailsTooltip from "../../../components/tooltips/DetailsTooltip";
+import Button from "../../../components/buttons/Button";
 import LabelValuePairs from "../../../components/layout/LabelValuePairs";
 
 /**
@@ -132,8 +133,14 @@ class ExpandableRowDemo extends React.Component {
                     stateless={false}
                     title="Expanded Row with Row Message"
                     rowMessage={{
-                        text: "The optional row message appears at the top of the expanded row only when the row is \
+                        text: ([
+                            "The optional row message appears at the top of the expanded row only when the row is \
                             expanded.",
+                            <span className="item-message__buttons">
+                                <Button inline>Foo</Button>
+                                <Button inline>Bar</Button>
+                            </span>
+                        ]),
                         type: ExpandableRow.RowMessageTypes.WARNING
                     }}
                     expanded={true}
