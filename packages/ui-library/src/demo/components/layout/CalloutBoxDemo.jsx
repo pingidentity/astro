@@ -1,13 +1,14 @@
 import React from "react";
-import LabelValuePairs from "../../../components/layout/LabelValuePairs";
+import CalloutBox from "ui-library/lib/components/layout/CalloutBox";
+import LabelValuePairs from "ui-library/lib/components/layout/LabelValuePairs";
 
 /**
-* @name LabelValuePairsDemo
-* @memberof LabelValuePairs
-* @desc A demo for LabelValuePairs
+* @name CalloutBoxDemo
+* @memberof CalloutBox
+* @desc A demo for CalloutBox
 */
 
-const LabelValuePairsDemo = () => {
+const CalloutBoxDemo = () => {
     const mockData = [
         {
             label: "Attribute Type",
@@ -34,17 +35,19 @@ const LabelValuePairsDemo = () => {
         },
         {
             label: "Required",
-            value: "No"
+            value: "NO"
         },
         {
             label: "Registration",
-            value: "No"
+            value: "NO"
         },
     ];
 
     return (
-        <LabelValuePairs dataPairs={mockData}/>
+        <CalloutBox>
+            <LabelValuePairs dataPairs={mockData}/>
+        </CalloutBox>
     );
 };
 
-module.exports = LabelValuePairsDemo;
+module.exports = CalloutBoxDemo;

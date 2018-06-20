@@ -31,6 +31,9 @@ describe("LabelValuePairs", function () {
             value: "Tony Stark is a playboy billionare who is a super hero with an iron suit"
         },
         {
+            divider: true,
+        },
+        {
             label: "Required",
             value: "NO"
         },
@@ -46,7 +49,7 @@ describe("LabelValuePairs", function () {
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
             "data-id": componentId,
-            dataPairs: [mockData]
+            dataPairs: mockData
         });
 
         return ReactTestUtils.renderIntoDocument(<div><LabelValuePairs {...opts} /></div>);
@@ -65,6 +68,14 @@ describe("LabelValuePairs", function () {
         let component = getComponent({});
 
         let element = TestUtils.scryRenderedDOMNodesWithTag(component, "div");
+
+        expect(element.length).toEqual(1);
+    });
+
+    it("renders hr tag", function () {
+        let component = getComponent({});
+
+        let element = TestUtils.scryRenderedDOMNodesWithTag(component, "hr");
 
         expect(element.length).toEqual(1);
     });

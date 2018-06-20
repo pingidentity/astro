@@ -21,17 +21,18 @@ const LabelValuePairs = ({
     const renderLabel = ({
         label,
         value,
+        divider,
     },
         indexLabel,
         indexValue
 
     ) => {
-        return (
-            [
+        return divider
+            ? <hr className="label-value-pairs__divider" />
+            : [
                 <div key={indexLabel} className="label-value-pairs__label">{label + ":"}</div>,
                 <div key={indexValue} className="label-value-pairs__value">{value}</div>
-            ]
-        );
+            ];
     };
 
     return (
@@ -48,10 +49,15 @@ LabelValuePairs.defaultProps = {
 LabelValuePairs.PropTypes = {
     "data-id": PropTypes.string,
     dataPairs: PropTypes.arrayOf(
-        PropTypes.shape({
-            label: PropTypes.string.isRequired,
-            value: PropTypes.string.isRequired,
-        })
+        PropTypes.oneOfType([
+            PropTypes.shape({
+                label: PropTypes.string.isRequired,
+                value: PropTypes.string.isRequired,
+            }),
+            PropTypes.shape({
+                divider: PropTypes.bool,
+            })
+        ])
     ).isRequired
 };
 

@@ -6,11 +6,22 @@
 }
 
 .label-value-pairs__label {
+    @include text-label;
+
     grid-column: 1;
-    text-transform: uppercase;
 }
 
 .label-value-pairs__value {
+    @include text-value;
+
     grid-column: 2;
-    color: $color-accent-neutral-10;
+}
+
+.label-value-pairs__divider {
+    @extend .hr;
+    @extend .hr--xs;
+    @extend .hr--solid;
+
+    grid-column-start: 1;
+    grid-column-end: span 2;
 }

@@ -1,0 +1,7 @@
+.callout-box {
+    &__content {
+        border: 1px dotted $color-rabbit-fur;
+        display: inline-block;
+        padding: $spacing-sm;
+    }
+}

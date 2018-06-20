@@ -32,7 +32,7 @@ $font-size-reduced: 13px;
 
 // LABEL
 @mixin text-label {
-    @include text-style($color-elephant, $font-size-reduced, $font-pn-semibold);
+    @include text-style($color-elephant, $font-size-reduced);
 
     text-transform: uppercase;
 }

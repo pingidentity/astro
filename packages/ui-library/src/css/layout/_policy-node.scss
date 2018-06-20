@@ -1,21 +1,9 @@
 // these mixins should be replaced by centralized text styles
-@mixin text-label {
-    color: $color-elephant;
-    font-family: $font-pn-semibold;
-    font-size: 13px;
-    text-transform: uppercase;
-}
-
 @mixin text-parent-label {
     color: $color-elephant;
     font-family: $font-pn-semibold;
     font-size: 14px;
     text-transform: uppercase;
-}
-
-@mixin text-value {
-    color: $color-midnight;
-    font-size: 14px;
 }
 
 .text-value {

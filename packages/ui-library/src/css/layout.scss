@@ -8,6 +8,7 @@
 @import 'layout/label-value-pairs';
 @import 'templates/_expandable-row-tooltip.scss';
 @import 'templates/_section-columns';
+@import 'layout/callout-box';
 
 $layout-header-height: 46px;
 $layout-nav-width: 190px;
@@ -1222,16 +1223,28 @@ $color-grey-minor-1: $color-neutral-30;
 .hr {
     border: 1px dashed $color-rabbit-fur;
     margin: 25px 0;
-    height: 0;
+    height: 1px;
     border-width: 1px 0 0;
-}
 
-.hr--sm {
-    margin: $spacing-sm 0;
-}
+    &--zero {
+        margin: 0;
+    }
 
-.hr--md {
-    margin: $spacing-md 0;
+    &--xs {
+        margin: $spacing-xs 0;
+    }
+
+    &--sm {
+        margin: $spacing-sm 0;
+    }
+
+    &--md {
+        margin: $spacing-md 0;
+    }
+
+    &--solid {
+        border-style: solid;
+    }
 }
 
 // flakey but one of only a few options : use with caution

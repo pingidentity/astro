@@ -324,6 +324,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_layout_LabelValuePairsDemo.jsx.html"
                     },
                     {
+                        label: "Callout Box",
+                        demo: require("../components/layout/CalloutBoxDemo"),
+                        pathToDoc: "components/layout/CalloutBox.jsx",
+                        pathToSource: "components_layout_CalloutBox.jsx.html",
+                        pathToDemoSource: "demo_components_layout_CalloutBoxDemo.jsx.html"
+                    },
+                    {
                         label: "Page Group",
                         demo: require("../components/layout/PageGroupDemo"),
                         pathToDoc: "components/layout/PageGroup.jsx",
