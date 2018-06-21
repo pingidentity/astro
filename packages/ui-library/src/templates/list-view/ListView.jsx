@@ -5,7 +5,8 @@ var React = require("react"),
     FormCheckbox = require("../../components/forms/FormCheckbox"),
     FormSearchBox = require("../../components/forms/FormSearchBox"),
     InfiniteScroll = require("../../components/list/InfiniteScroll"),
-    ModalButton = require("../../components/general/ModalButton"),
+    Button = require("../../components/buttons/Button"),
+    Modal = require("../../components/general/Modal"),
     RowAccessories = require("../../components/rows/expandable-row/Accessories"),
     Toggle = require("../../components/forms/form-toggle"),
     TabbedSections = require("../../components/general/TabbedSections"),
@@ -68,6 +69,19 @@ module.exports = class extends React.Component {
         hasPrev: PropTypes.bool
     };
 
+    state = {
+        showCloseTooltip: false
+    };
+
+    _toggleModal = () => {
+        this.setState({ expanded: !this.state.expanded });
+    };
+
+    _resetModal = () => {
+        this._toggle();
+    };
+
+
     /*
      * When the component mounts, do a bunch of initialization
      */
@@ -99,10 +113,22 @@ module.exports = class extends React.Component {
         }
     };
 
+
     render() {
         return (
             <TabbedSections selectedIndex={this.props.activeTab} onValueChange={this.props.onActiveTabChange}>
                 <div title="First Page">
+                <Modal
+                    data-id="add-modal"
+                    modalTitle="Add Modal"
+                    expanded={this.state.expanded}
+                    onOpen={this._toggleModal}
+                    onClose={this._toggleModal}
+                    >
+                    <p>
+                        Add Modal content
+                    </p>
+                </Modal>
                     <div className={classnames("search-bar", { expanded: this.props.advancedSearch })}>
                         <div>
                             <FormSearchBox
@@ -115,15 +141,11 @@ module.exports = class extends React.Component {
                                 arrowPosition={CollapsibleLink.arrowPositions.RIGHT}
                                 expanded={this.props.advancedSearch}
                                 className="filter-by" />
-                            <ModalButton ref="modal"
-                                    activatorButtonLabel="Add Modal Button"
-                                    modalTitle="Add Modal"
-                                    className="add-modal"
-                                    activatorButtonClassName="add" >
-                                <div>
-                                    Add Modal content
-                                </div>
-                            </ModalButton>
+                            <Button
+                                className="button-add-modal"
+                                label="Add Modal Button"
+                                iconName="add"
+                                onClick={this._toggleModal}/>
                         </div>
                         <div className="filters">
                             <FormCheckbox label="filter odd rows"
