@@ -79,7 +79,7 @@ class ColumnLayoutDemo extends React.Component {
                 <h2>
                     Full Width - without margins
                 </h2>
-                <Layout.Row data-id="columns-2-margin-none" className="columns-margin-none">
+                <Layout.Row data-id="columns-2-margin-none" noMargin>
                     <Layout.Column>
                         <div style={style1}>column content</div>
                     </Layout.Column>
@@ -87,7 +87,7 @@ class ColumnLayoutDemo extends React.Component {
                         <div style={style2}>column content</div>
                     </Layout.Column>
                 </Layout.Row>
-                <Layout.Row data-id="columns-3-margin-none" className="columns-margin-none">
+                <Layout.Row data-id="columns-3-margin-none" noMargin>
                     <Layout.Column>
                         <div style={style1}>column content</div>
                     </Layout.Column>
@@ -98,7 +98,7 @@ class ColumnLayoutDemo extends React.Component {
                         <div style={style1}>column content</div>
                     </Layout.Column>
                 </Layout.Row>
-                <Layout.Row data-id="columns-4-margin-none" className="columns-margin-none">
+                <Layout.Row data-id="columns-4-margin-none" noMargin>
                     <Layout.Column>
                         <div style={style1}>column content</div>
                     </Layout.Column>
@@ -112,7 +112,7 @@ class ColumnLayoutDemo extends React.Component {
                         <div style={style2}>column content</div>
                     </Layout.Column>
                 </Layout.Row>
-                <Layout.Row data-id="columns-5-margin-none" className="columns-margin-none">
+                <Layout.Row data-id="columns-5-margin-none" noMargin>
                     <Layout.Column>
                         <div style={style1}>column content</div>
                     </Layout.Column>
@@ -134,7 +134,7 @@ class ColumnLayoutDemo extends React.Component {
                 <h2>
                     Auto Width - with margins
                 </h2>
-                <Layout.Row data-id="columns-6-auto" className="columns-width-auto">
+                <Layout.Row data-id="columns-6-auto" autoWidth>
                     <Layout.Column>
                         <div style={style1}>an auto-width column sizes to the width of its content</div>
                     </Layout.Column>
@@ -150,7 +150,7 @@ class ColumnLayoutDemo extends React.Component {
                 <h2>
                     Auto Width - without margins
                 </h2>
-                <Layout.Row data-id="columns-6-auto" className="columns-width-auto columns-margin-none">
+                <Layout.Row data-id="columns-6-auto" autoWidth noMargin>
                     <Layout.Column>
                         <div style={style1}>an auto-width column sizes to the width of its content</div>
                     </Layout.Column>
@@ -159,6 +159,21 @@ class ColumnLayoutDemo extends React.Component {
                     </Layout.Column>
                     <Layout.Column>
                         <div style={style1}>and like this</div>
+                    </Layout.Column>
+                </Layout.Row>
+                <br/>
+                <h2>
+                    With dividers
+                </h2>
+                <Layout.Row data-id="columns-6-auto" divided>
+                    <Layout.Column>
+                        <div style={style1}>You can divide</div>
+                    </Layout.Column>
+                    <Layout.Column>
+                        <div style={style2}>columns</div>
+                    </Layout.Column>
+                    <Layout.Column>
+                        <div style={style1}>with lines</div>
                     </Layout.Column>
                 </Layout.Row>
             </div>

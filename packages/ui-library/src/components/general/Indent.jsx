@@ -35,10 +35,12 @@ var Indent = function (props) {
     return (
         <div className={classnames("indent", props.className)} data-id={props["data-id"]}>
             <div className="indent-title-container">
-                {props.title && (
-                    <div className="title" data-id="title">
+                {props.border && (
+                    props.title
+                    ? <div className="title" data-id="title">
                         {props.title}
                     </div>
+                    : <div className="border" data-id="border"/>
                 )}
             </div>
             <div className={contentClass}>

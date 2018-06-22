@@ -21,6 +21,16 @@ a {
         padding-bottom: 0;
         text-transform: uppercase;
     }
+
+    &.disabled {
+        opacity: 0.4;
+
+        &:hover {
+            text-decoration: none;
+            color: $color-link-text;
+            cursor: default;
+        }
+    }
 }
 
 h1,

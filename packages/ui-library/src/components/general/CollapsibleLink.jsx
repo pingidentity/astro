@@ -33,6 +33,9 @@ var React = require("react"),
  * @param {boolean} [expanded=false]
  *     Indicate whether link is in expanded state or collapsed state. Default is in collapsed state.
  *
+ * @param {boolean} [disabled=false]
+ *     Grays out link and doesn't accept clicks
+ *
  * @param {CollapsibleLink~onToggle} [onToggle]
  *     Callback to be executed when toggle state of link is changed.
  *
@@ -56,6 +59,7 @@ class CollapsibleLink extends React.Component {
         toggledTitle: PropTypes.string,
         arrowPosition: PropTypes.oneOf(["left", "right"]),
         expanded: PropTypes.bool,
+        disabled: PropTypes.bool,
         onToggle: PropTypes.func
 
     };
@@ -63,7 +67,8 @@ class CollapsibleLink extends React.Component {
     static defaultProps = {
         "data-id": "collapsible-link",
         arrowPosition: "right",
-        expanded: false
+        expanded: false,
+        disabled: false,
     };
 
     _handleToggle = () => {
@@ -74,9 +79,9 @@ class CollapsibleLink extends React.Component {
     };
 
     render() {
-        var className= classnames(this.props.className, {
+        var className= classnames("collapsible-link", this.props.className, {
             open: this.props.expanded,
-            "collapsible-link": true
+            "collapsible-link--disabled": this.props.disabled,
         });
         className = classnames(className, this.props.arrowPosition);
         var title = this.props.title;

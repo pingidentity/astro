@@ -140,6 +140,8 @@ var SearchTypes = {
 * @param {FormDropDownList.onAdd} [onAdd]
 *    Callback to be triggered when a new option is to be added to the list.
 *
+* @param {string} [placeholder]
+*    Placeholder string for the input
 * @param {string} [searchString=""]
 *    Value to help with finding an option on keydown.
 * @param {string} [searchField="label"]
@@ -263,7 +265,7 @@ class FormDropDownListStateless extends React.Component {
         className: PropTypes.string,
         name: PropTypes.string,
         options: PropTypes.arrayOf(PropTypes.object).isRequired,
-        selectedOption: PropTypes.object.isRequired,
+        selectedOption: PropTypes.object,
         onValueChange: PropTypes.func,
         contentType: PropTypes.element,
         groups: PropTypes.arrayOf(
@@ -277,6 +279,7 @@ class FormDropDownListStateless extends React.Component {
         labelPrompt: PropTypes.string,
         labelAdd: PropTypes.string,
         canAdd: PropTypes.bool,
+        placeholder: PropTypes.string,
         searchString: PropTypes.string,
         searchField: PropTypes.string,
         validSearchCharsRegex: PropTypes.string,
@@ -311,6 +314,7 @@ class FormDropDownListStateless extends React.Component {
         searchIndex: -1,
         searchTime: 0,
         searchType: SearchTypes.KEYBOARD,
+        selectedOption: {},
         onSearch: _.noop,
         title: "",
         showSelectedOptionLabel: true,
@@ -752,6 +756,7 @@ class FormDropDownListStateless extends React.Component {
                                 selectOnFocus={this._isBoxSearch()}
                                 stateless={true}
                                 value={inputValue}
+                                placeholder={this.props.placeholder}
                                 name={this.props.name}
                                 onValueChange={this._handleInputValueChange}
                                 readOnly={this.props.disabled || this._isKeyboardSearch()}

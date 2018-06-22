@@ -9,6 +9,8 @@
 @import 'templates/_expandable-row-tooltip.scss';
 @import 'templates/_section-columns';
 @import 'layout/callout-box';
+@import 'layout/aside-container';
+@import 'layout/stretch-content';
 
 $layout-header-height: 46px;
 $layout-nav-width: 190px;
@@ -606,6 +608,8 @@ $color-grey-minor-1: $color-neutral-30;
 }
 
 #content {
+    @extend .stretch-content;
+
     position: absolute;
     overflow-x: hidden;
     overflow-y: auto;
@@ -631,6 +635,8 @@ $color-grey-minor-1: $color-neutral-30;
 
     // workaround for bottom padding - bottom padding is ignored in scrolling elements in FF and IE
     &:after {
+        @include flexbox-shrink(0);
+
         content: '';
         display: block;
         height: 78px;
@@ -992,6 +998,11 @@ $color-grey-minor-1: $color-neutral-30;
             @include transition((all 0.2s linear));
         }
     }
+
+    &--disabled {
+        opacity: 0.4;
+        pointer-events: none;
+    }
 }
 
 .page-return-link {
@@ -1027,6 +1038,34 @@ $color-grey-minor-1: $color-neutral-30;
         font-family: $icon-font;
 
         @include rotate(-90deg);
+    }
+}
+
+.collapsible-divider {
+    overflow: hidden;
+
+    & > *:before {
+        content: '';
+        position: absolute;
+        height: 1px;
+        border-top: 1px solid $color-slate;
+        top: 50%;
+        left: 100%;
+        width: 5000px;
+        margin-left: $spacing-lg;
+    }
+
+    &__toggle {
+        text-transform: uppercase;
+        color: $color-slate;
+        font-size: 15px;
+        margin: $spacing-md 0;
+        padding: 0;
+
+        &.right:after,
+        &:hover {
+            color: $color-slate;
+        }
     }
 }
 
@@ -1216,6 +1255,19 @@ $color-grey-minor-1: $color-neutral-30;
             flex: none;
 
             @include flexbox-grow(0);
+        }
+    }
+    &--divided {
+        .content-column {
+            margin-right: $spacing-lg;
+            padding-right: $spacing-lg;
+            border-right: 1px solid $color-rabbit-fur;
+
+            &:last-child {
+                margin-right: 0;
+                border-right: none;
+                padding-right: 0;
+            }
         }
     }
 }

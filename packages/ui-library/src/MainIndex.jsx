@@ -25,7 +25,7 @@ module.exports = {
     EllipsisLoaderButton: require("./components/general/EllipsisLoaderButton"),
     If: require("./components/general/If"),
     Indent: require("./components/general/Indent"),
-    Messages: require("./components/general/Messages"),
+    Messages: require("./components/general/messages/"),
     ModalButton: require("./components/general/ModalButton"),
     SelectText: require("./components/general/SelectText"),
     Spinner: require("./components/general/Spinner"),

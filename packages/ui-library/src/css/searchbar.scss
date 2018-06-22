@@ -1,65 +1,124 @@
 
-$searchbar-width: 585px;
+$searchbar-width: 800px;
 $searchbar-link-width: 86px;
-$searchbar-link-bg-color: rgba($color-accent-neutral-80, 0.5);
+$searchbar-link-bg-color: lighten($color-accent-neutral-80, 5%);
 $searchbar-link-text-color: $color-strong-neutral-10;
 $searchbar-link-text-color-hover: $searchbar-link-bg-color;
 $searchbar-input-height: 38px;
 
-.searchbar__input {
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
+.searchbar {
+    &__bar {
+        @include flexbox();
+        @include flexbox-direction(row);
 
-    label {
-        width: $searchbar-width;
-        margin: 0;
+        max-width: $searchbar-width;
     }
-}
 
-.searchbar__input--open {
-    &:after {
-        content: '';
-        position: absolute;
-        height: 10px;
-        width: $searchbar-width;
-        left: 0;
-        top: $searchbar-input-height;
+    &__input {
+        @include flexbox-grow(1);
 
-        @include gradient-vertical(rgba($color-accent-neutral-80, 0.55), transparent);
-    }
-}
-
-.searchbar__filter-link {
-    box-sizing: border-box;
-    line-height: $searchbar-input-height;
-    padding: 0 $spacing-md;
-    margin: 0;
-    vertical-align: middle;
-    background-color: $searchbar-link-bg-color;
-    color: $searchbar-link-text-color;
-    text-align: center;
-
-    &.collapsible-link:after { // added specificity here to override defaults
-        color: $searchbar-link-text-color;
-        display: inline-block;
         position: relative;
-        right: auto;
-        margin: 0 0 0 $spacing-xs;
+        display: inline-block;
+        vertical-align: middle;
+
+        label {
+            margin: 0;
+            display: block;
+        }
     }
-    &:hover {
-        background-color: $searchbar-link-text-color-hover;
+
+    &__top-line {
+        @include flexbox();
+        @include flexbox-direction(row);
+        justify-content: space-between;
+    }
+
+    &__left-control {
+        @include flexbox-grow(1);
+
+        max-width: $searchbar-width;
+    }
+
+    &__right-control {
+        margin-left: $spacing-md;
+        text-align: right;
+
+        :last-child {
+            margin-right: 0;
+        }
+    }
+
+    &--open &__input {
+        @include box-shadow(0 2px 3px rgba(0,0,0,0.1));
+    }
+
+    &__filter-link {
+        box-sizing: border-box;
+        line-height: $searchbar-input-height;
+        padding: 0 $spacing-md;
+        margin: 0;
+        vertical-align: middle;
+        background-color: $searchbar-link-bg-color;
         color: $searchbar-link-text-color;
+        text-align: center;
+
+        &.collapsible-link:after { // added specificity here to override defaults
+            color: $searchbar-link-text-color;
+            display: inline-block;
+            position: relative;
+            right: auto;
+            margin: 0 0 0 $spacing-xs;
+        }
+        &:hover {
+            background-color: $searchbar-link-text-color-hover;
+            color: $searchbar-link-text-color;
+        }
     }
-}
 
-.searchbar__filter-link--open,
-.searchbar__filter-link--open:hover {
-    background-color: $searchbar-link-bg-color;
-}
+    &--open &__filter-link--open,
+    &__filter-link--open:hover {
+        background-color: $searchbar-link-bg-color;
+    }
 
-.searchbar__filters {
-    box-sizing: border-box;
-    padding: $spacing-lg;
-    background: $searchbar-link-bg-color;
+    &__filters {
+        box-sizing: border-box;
+        padding: $spacing-lg;
+        background: $searchbar-link-bg-color;
+
+        > * {
+            margin-bottom: $spacing-lg;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &__filter-actions {
+        @include flexbox-grow(1);
+
+        text-align: right;
+    }
+
+    &__remove-icon {
+        margin-bottom: 13px;
+    }
+
+    &__advanced-time-zone {
+        margin-bottom: 13px;
+    }
+
+    &__apply-button {
+        margin-top: $spacing-sm;
+        text-align: right;
+
+        > *:last-child {
+            margin-right: 0;
+        }
+    }
+
+    &__doc-link {
+        margin-top: $spacing-sm;
+        text-align: right;
+    }
 }

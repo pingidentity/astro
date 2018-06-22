@@ -28,6 +28,7 @@ var ICONS = [
     "clipboard",
     "close",
     "close-arrow",
+    "code",
     "cog",
     "cog-filled",
     "collapse",

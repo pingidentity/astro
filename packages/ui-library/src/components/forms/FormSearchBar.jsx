@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import FormSearchBox from "./FormSearchBox";
 import CollapsibleLink from "../general/CollapsibleLink";
+import Anchor from "../general/Anchor";
+import _ from "underscore";
 
 /**
  * @class SearchBar
@@ -18,8 +20,14 @@ import CollapsibleLink from "../general/CollapsibleLink";
  *
  * @param {boolean} [open=false]
  *     If true, filter container is open.
+ * @param {boolean} [disableFilters=false]
+ *     Disables toggle control
  * @param {function} [onToggle]
  *     Callback to be triggered when trigger is clicked.
+ * @param {boolean} [queryMode]
+ *     When enabled, change the style of the search field to indicate you're typing a structured query
+ * @param {node} [rightControl]
+ *     A content area that appears to the right of the search field, above the expanded filter area
  **/
 
 class SearchBar extends React.Component {
@@ -34,15 +42,21 @@ class SearchBar extends React.Component {
 
     static propTypes = {
         "data-id": PropTypes.string,
+        disableFilters: PropTypes.bool,
+        rightControl: PropTypes.node,
     };
 
     static defaultProps = {
         "data-id": "searchbar",
         formSearchBoxProps: {},
         strings: {},
+        onToggle: _.noop,
+        disableFilters: false,
     };
 
     _handleToggle = () => {
+        this.props.onToggle();
+
         const nextState = {
             open: !this.state.open
         };
@@ -52,27 +66,50 @@ class SearchBar extends React.Component {
     render() {
         const filtersOpen = this.props.open === undefined || this.props.open === null
             ? this.state.open : this.props.open;
-        const inputClassNames = {
-            "searchbar__input--open": filtersOpen,
-        };
-        const linkClassNames = {
-            "searchbar__filter-link--open": filtersOpen,
-        };
+        const { documentationLink, rightControl } = this.props;
+        const classes = classnames("searchbar", {
+            "searchbar--open": filtersOpen,
+        });
 
-        return (
-            <div key="searchbar" className="searchbar" data-id={this.props["data-id"]}>
+        const renderSearchBar = (
+            <div className="searchbar__bar">
                 <FormSearchBox
                     data-id={`${this.props["data-id"]}-input`}
-                    className={classnames("searchbar__input", inputClassNames)}
+                    className="searchbar__input"
                     {...this.props.formSearchBoxProps}
                 />
                 <CollapsibleLink
                     data-id={`${this.props["data-id"]}-filter-link`}
                     title={this.props.strings.linkText || "Filters"}
-                    className={classnames("searchbar__filter-link", linkClassNames)}
+                    className="searchbar__filter-link"
                     expanded={filtersOpen}
-                    onToggle={this.props.onToggle || this._handleToggle}
+                    onToggle={this._handleToggle}
+                    disabled={this.props.disableFilters}
                 />
+            </div>
+        );
+
+        const renderDocLink = documentationLink && !filtersOpen ? (
+            <div className="searchbar__doc-link">
+                <Anchor href={documentationLink.href} target="_blank" data-id="doc-link">
+                    {documentationLink.label}
+                </Anchor>
+            </div>
+        ) : null;
+
+        return (
+            <div key="searchbar" className={classes} data-id={this.props["data-id"]}>
+                {
+                    rightControl
+                    ? <div className="searchbar__top-line">
+                        <div className="searchbar__left-control">
+                            {renderSearchBar}
+                            {renderDocLink}
+                        </div>
+                        <div className="searchbar__right-control">{rightControl}</div>
+                    </div>
+                    : [renderSearchBar, renderDocLink]
+                }
                 {filtersOpen &&
                     <div
                         data-id={`${this.props["data-id"]}-filters`}

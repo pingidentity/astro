@@ -11,11 +11,13 @@ describe("If component", function () {
 
     it("renders children when test value is true", function () {
         var component = ReactTestUtils.renderIntoDocument(
-            <If test={true}>
-                <div data-id="conditionalContent">
-                    <p>Some content</p>
-                </div>
-            </If>
+            <div>
+                <If test={true}>
+                    <div data-id="conditionalContent">
+                        <p>Some content</p>
+                    </div>
+                </If>
+            </div>
         );
 
         var content = TestUtils.findRenderedDOMNodeWithDataId(component, "conditionalContent");

@@ -95,6 +95,12 @@ label {
     font-family: $font-pn-regular;
     cursor: default;
 
+    .modifier_strip-input-margins & {
+        // this is for layouts that don't play well with the built-in margins inputs have
+        // for instance, when an input goes in a column, which has its own padding and margin
+        margin-right: 0;
+    }
+
     .label-text,
     .input-container {
         display: block;
@@ -134,18 +140,6 @@ label {
                     padding-left: 35px;
                     padding-right: 30px;
                 }
-                &:before {
-                    font-family: $icon-font;
-                    content: '\73';
-                    text-transform: none;
-                    position: absolute;
-                    bottom: 12px;
-                    left: 10px;
-                    font-size: 16px;
-                    font-weight: bold;
-                    line-height: 1em;
-                    color: $color-input-text;
-                }
             }
             &.form-error {
                 a.clear-search {
@@ -183,6 +177,9 @@ label {
                     line-height: 1em;
                 }
             }
+            &--query .input-container:before {
+                content: 'd';
+            }
         }
         &.no-label {
             input {
@@ -216,6 +213,9 @@ label {
             input {
                 width: 492px;
             }
+        }
+        &--mono input {
+            font-family: 'Consolas', 'Monaco', 'Andale Mono', monospace;
         }
     }
 
@@ -962,9 +962,7 @@ input[type=file] {
     .readonly {
         &.input-text {
             input[type=text] {
-                color: $color-midnight;
-                background-color: $color-input-fill;
-                border-color: $color-input-fill;
+                @include input-style;
                 cursor: pointer;
 
                 &:focus {
@@ -1639,6 +1637,12 @@ input[type=file] {
             }
         }
     }
+
+    &--width-tight {
+        input[type=text].input-calendar-value {
+            width: 150px;
+        }
+    }
 }
 
 .input-integer {
@@ -1711,6 +1715,10 @@ input[type=file] {
     overflow: hidden;
 
     @include border-radius(3px);
+
+    &--no-border {
+        border: none;
+    }
 
     .selection-list-search {
         position: relative;
@@ -2408,6 +2416,13 @@ input[type=file] {
 // MISC SUPPORTING STYLES ----------------------------------------------------------------------------------------------
 
 .input-row {
+
+    &--strict {
+        @include flexbox();
+        @include flexbox-direction(row);
+        align-items: flex-end;
+    }
+
     position: relative;
     margin: 0 0 25px;
 
@@ -2418,7 +2433,8 @@ input[type=file] {
     .input-integer,
     .input-radio,
     .input-checkbox,
-    .input-color-picker {
+    .input-color-picker,
+    .input-calendar {
         margin-bottom: 0;
     }
 
@@ -3155,8 +3171,9 @@ label {
     display: inline-block;
     font-family: $font-pn-regular;
     background-color: $color-white;
+    min-width: 170px;
     text-align: left;
-    text-transform: uppercase;
+    text-transform: none;
     vertical-align: middle;
     cursor: pointer;
     outline: none;
@@ -3180,6 +3197,16 @@ label {
     .count {
         margin-left: 5px;
     }
+
+    &__placeholder {
+        opacity: 0.4;
+        font-style: italic;
+    }
+
+    &--open:after {
+        @include rotate(-180deg);
+        @include transition((all 0.2s linear));
+    }
 }
 
 .input-message-inline {
@@ -3194,4 +3221,14 @@ label {
     &.required {
         background: $color-warning-icon-yellow;
     }
+}
+
+.input-icon {
+    color: $color-midnight;
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    left: $spacing-sm;
+    top: 50%;
+    transform: translateY(-50%);
 }

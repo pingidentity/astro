@@ -32,6 +32,13 @@ $expandable-row-gap: 12px;
     position: relative;
     margin: 20px 0 0;
 
+    &__title {
+        color: $color-slate;
+        font-size: 16px;
+        margin-bottom: $spacing-sm;
+        margin-top: $spacing-md;
+    }
+
     .item {
         position: relative;
         background-color: $color-elderly;

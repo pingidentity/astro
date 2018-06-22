@@ -41,7 +41,7 @@ describe("FormSearchBar", function () {
     }
 
 
-    xit("should render the component", function () {
+    it("should render the component", function () {
         const component = getComponent();
         const link = getElementByDid(component, "-filter-link");
         const input = getElementByDid(component, "-input");
@@ -52,17 +52,24 @@ describe("FormSearchBar", function () {
         expect(filters).toBeFalsy();
     });
 
-    xit("should render the filters when open", function () {
-        const filterContent = "my filter content here";
+    it("should render the filters when open", function () {
+        const filterContent = <div data-id="uno"><div data-id="dos"/></div>;
         const component = getComponent({
             children: filterContent,
             open: true,
         });
-        const filters = getElementByDid(component, "-filters");
-        const link = getElementByDid(component, "-filter-link");
 
-        expect(link.className).toContain("searchbar__filter-link--open");
-        expect(filters.textContent).toBe(filterContent);
+        expect(TestUtils.checkForDataIds(component, ["uno", "dos"])).toEqual(true);
+    });
+
+    it("should not render the filters when closed", function () {
+        const filterContent = <div data-id="uno"><div data-id="dos"/></div>;
+        const component = getComponent({
+            children: filterContent,
+            open: false,
+        });
+
+        expect(TestUtils.checkForDataIds(component, ["uno", "dos"])).toEqual(false);
     });
 
     it("opens when clicked if open prop is not provided (via state)", function () {
@@ -85,4 +92,29 @@ describe("FormSearchBar", function () {
         expect(filters).toBeTruthy();
         expect(filters.textContent).toBe(filterContent);
     });
+
+    it("should render the documentation link", function () {
+        const filterContent = "my filter content here";
+        const label = "test label";
+        const component = getComponent({
+            children: filterContent,
+            documentationLink: { label },
+        });
+        const link = TestUtils.findRenderedDOMNodeWithDataId(component, "doc-link");
+
+        expect(link.textContent).toBe(label);
+    });
+
+    it("should render the right control", function () {
+        const filterContent = "my filter content here";
+        const content = "hello";
+        const component = getComponent({
+            children: filterContent,
+            rightControl: <div data-id="right-control">{content}</div>
+        });
+        const control = TestUtils.findRenderedDOMNodeWithDataId(component, "right-control");
+
+        expect(control.textContent).toBe(content);
+    });
+
 });

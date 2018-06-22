@@ -53,7 +53,8 @@ module.exports = class extends React.Component {
         labelUnselectAll: PropTypes.string,
         labelOnlySelected: PropTypes.string,
         labelShowAll: PropTypes.string,
-        requiredText: PropTypes.string
+        requiredText: PropTypes.string,
+        "no-border": PropTypes.bool
     };
 
     static defaultProps = {
@@ -62,7 +63,8 @@ module.exports = class extends React.Component {
         type: Constants.ListType.SINGLE,
         showSelectionOptions: false,
         showOnlySelected: false,
-        items: []
+        items: [],
+        "no-border": false
     };
 
     /**
@@ -133,10 +135,11 @@ module.exports = class extends React.Component {
         var className = classnames(this.props.className, {
                 "input-selection-list": true,
                 searchable: this.props.showSearchBox,
-                "show-selection-options": this.props.showSelectionOptions
+                "show-selection-options": this.props.showSelectionOptions,
+                "input-selection-list--no-border": this.props["no-border"]
             }),
             visibleItems = this.props.showOnlySelected ? this._filterVisible() : this.props.items;
-
+        
         return (
             <div data-id={this.props["data-id"]} className={className}>
                 {this.props.requiredText && (
@@ -150,6 +153,7 @@ module.exports = class extends React.Component {
                             queryString={this.props.queryString}
                             placeholder={this.props.searchPlaceholder}
                             onValueChange={this.props.onSearch}
+                            {...this.props.searchBoxProps} // band-aid fix to allow overriding the stateful text field
                         />
                     </div>
                 )}

@@ -441,4 +441,18 @@ TestUtils.UpdatePropsWrapper = class extends React.Component {
     }
 };
 
+TestUtils.checkForDataIds = function (component, ids) {
+    return _.reduce(ids, (result, id) => {
+        if (!result) {
+            return false;
+        }
+
+        const subcomponent = TestUtils.findRenderedDOMNodeWithDataId(component, id);
+
+        return subcomponent ? true : false;
+    }, true);
+};
+
+
+
 module.exports = TestUtils;

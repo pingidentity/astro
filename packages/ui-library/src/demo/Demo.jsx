@@ -248,7 +248,7 @@ class DemoApp extends React.Component {
             path = this._demoItem.pathToSource,
             demoPath = this._demoItem.pathToDemoSource,
             watch = _.pick(this.props.nav, "selectedSection", "selectedNode", "root");
-
+        
         return (
             <AppFrame
                 autoSelectItemFromRoot={true}
@@ -281,21 +281,19 @@ class DemoApp extends React.Component {
                 onItemChange={this.navActions.selectItem}
                 onSectionChange={this.navActions.toggleSection}
             >
-                <div id="content">
-                    <div className="components" data-id="components">
-                        <DemoItem label={this._demoItem.label}
-                            watch={watch}
-                            replace={this.routerActions.replace}
-                            location={this.props.location}
-                            store={this._demoStore}
-                            type={this._demo}
-                            jsdocUrl={this._getDocumentationUrl(name)}
-                            codePathUrl={this._getSourceUrl(path)}
-                            demoCodePathUrl={this._getSourceUrl(demoPath)}
-                            importPath={this._getImportPath(this._demoItem.pathToDoc)}
-                            code={this.props.code[id]}
-                            fullscreen={this._demoItem.fullscreen} />
-                    </div>
+                <div id="content" data-id="components">
+                    <DemoItem label={this._demoItem.label}
+                        watch={watch}
+                        replace={this.routerActions.replace}
+                        location={this.props.location}
+                        store={this._demoStore}
+                        type={this._demo}
+                        jsdocUrl={this._getDocumentationUrl(name)}
+                        codePathUrl={this._getSourceUrl(path)}
+                        demoCodePathUrl={this._getSourceUrl(demoPath)}
+                        importPath={this._getImportPath(this._demoItem.pathToDoc)}
+                        code={this.props.code[id]}
+                        fullscreen={this._demoItem.fullscreen} />
                 </div>
 
                 {

@@ -1,8 +1,9 @@
-var PropTypes = require("prop-types");
-var React = require("react"),
-    _ = require("underscore"),
-    FormTextField = require("./form-text-field/index"),
-    KeyboardUtils = require("../../util/KeyboardUtils.js");
+import PropTypes from "prop-types";
+import React from "react";
+import _ from "underscore";
+import FormTextField from "./form-text-field/index";
+import KeyboardUtils from "../../util/KeyboardUtils.js";
+import classnames from "classnames";
 
 /**
 * @callback FormSearchBox~onValueChange
@@ -81,6 +82,7 @@ class FormSearchBox extends React.Component {
         className: PropTypes.string,
         queryString: PropTypes.string,
         placeholder: PropTypes.string,
+        iconName: PropTypes.string,
         inputFieldClassName: PropTypes.string,
         name: PropTypes.string,
         onValueChange: PropTypes.func.isRequired,
@@ -93,6 +95,7 @@ class FormSearchBox extends React.Component {
 
     static defaultProps = {
         "data-id": "FormSearchBox",
+        iconName: "search",
         onKeyDown: _.noop,
         onFocus: _.noop,
         onBlur: _.noop,
@@ -146,14 +149,18 @@ class FormSearchBox extends React.Component {
 
     render() {
         const value = this.props.queryString || this.props.value || "";
-        var showClear = value !== "";
+        const showClear = value !== "";
+        const iconClasses = classnames("input-icon", "icon-" + this.props.iconName);
+        const inputClasses = classnames("search", {
+            "input-text--mono": this.props.monospaced,
+        });
 
         return (
             <div data-id={this.props["data-id"]} className={this.props.className} >
                 <FormTextField data-id="searchBox"
                         stateless={false}
                         ref="searchBox"
-                        className="search"
+                        className={inputClasses}
                         errorMessage={this.props.errorMessage}
                         value={value}
                         placeholder={this.props.placeholder}
@@ -162,11 +169,11 @@ class FormSearchBox extends React.Component {
                         onKeyDown={this._handleSearchBoxKeyDown}
                         onFocus={this.props.onFocus}
                         onBlur={this.props.onBlur}
-                        clear={true}>
-                    { showClear &&
-                        <a data-id="clear" className="clear-search" onClick={this._clear} />
-                    }
-                </FormTextField>
+                        controls={showClear
+                            ? <a data-id="clear" className="clear-search" onClick={this._clear} />
+                            : null
+                        }
+                ><span className={iconClasses}/></FormTextField>
             </div>
         );
     }

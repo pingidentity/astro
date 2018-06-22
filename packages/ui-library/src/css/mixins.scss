@@ -90,14 +90,32 @@
     background-color: $color-white;
 }
 
-@mixin input-style {
-    color: $color-input-text;
+@mixin input-background-dark {
     background-color: $color-input-fill;
+}
+
+@mixin input-style-base {
+    @include input-background-dark;
+
+    color: $color-input-text;
     border: 1px solid $color-input-fill;
     font-size: 14px;
 
+    &::placeholder {
+        font-style: italic;
+        opacity: 0.4;
+    }
+}
+
+@mixin input-style {
+    @include input-style-base;
+
     .modifier_light-inputs & {
         @include input-style-light;
+    }
+
+    .modifier_light-inputs .modifier_dark-inputs & {
+        @include input-style-base;
     }
 }
 
@@ -105,7 +123,17 @@
     background-color: $color-input-fill;
 
     .modifier_light-inputs & {
-        @include input-background-light;
+        &,
+        &:after {
+            @include input-background-light;
+        }
+    }
+
+    .modifier_light-inputs .modifier_dark-inputs & {
+        &,
+        &:after {
+            @include input-background-dark;
+        }
     }
 }
 

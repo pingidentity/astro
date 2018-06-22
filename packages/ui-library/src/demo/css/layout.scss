@@ -67,7 +67,7 @@ $sidenav-lineheight: 22px;
     .toggle,
     .toggle-source {
         position: absolute;
-        right: 30px;
+        right: 0;
         cursor: pointer;
 
         &:before {
@@ -75,14 +75,14 @@ $sidenav-lineheight: 22px;
         }
     }
     .toggle {
-        top: 30px;
+        top: 5px;
 
         &:before {
             content: 'expand documentation +';
         }
     }
     .toggle-source {
-        top: 50px;
+        top: 25px;
 
         &:before {
             content: 'view source +';

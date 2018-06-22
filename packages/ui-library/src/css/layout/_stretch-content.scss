@@ -1,0 +1,23 @@
+.stretch-content {
+    @include flexbox;
+    @include flexbox-direction(column);
+    @include flexbox-grow(1);
+
+    min-height: 400px;
+    position: relative;
+
+    > * {
+        @include flexbox-shrink(0);
+    }
+
+    &--scrollable {
+        > *,
+        > div {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+    }
+}

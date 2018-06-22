@@ -33,12 +33,19 @@ var React = require("react"),
 *     To define the base "data-id" value for the top-level HTML container.
 * @param {string} [className]
 *     CSS classes to set on the top-level HTML container.
+* @param {boolean} [divided]
+*     When true, put dividers in gaps between columns
+* @param {boolean} [noMargin]
+*     When true, don't add margin between columns
+* @param {boolean} [autoWidth]
+*     When true, columns don't take up whole width
 */
 
 class Row extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
-        className: PropTypes.string
+        className: PropTypes.string,
+        divided: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -52,8 +59,17 @@ class Row extends React.Component {
     }
 
     render() {
-        var className = classnames("content-columns", this.props.className,
-                "columns-" + (React.Children.count(this.props.children) || 1));
+        var className = classnames(
+            "content-columns", this.props.className,
+            "columns-" + (React.Children.count(this.props.children) || 1),
+            {
+                "content-columns--divided": this.props.divided,
+                "columns-margin-none": this.props.noMargin,
+                "columns-width-auto": this.props.autoWidth,
+            }
+        );
+        // Note: the columns-[number] class seems to be unecessary now that the component
+        // uses flexbox. Let's remove this in V4.
 
         return (
             <div data-id={this.props["data-id"]} className={classnames(className)}>

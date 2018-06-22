@@ -1,7 +1,10 @@
 // INDENT
 .indent {
+    @include flexbox();
+    @include flexbox-direction(row);
+    justify-content: left;
+
     position: relative;
-    display: block;
     overflow: hidden;
     line-height: 1em;
 
@@ -18,35 +21,69 @@
         padding: 0 3px;
     }
     .indent-title-container {
-        position: absolute;
-        display: block;
-        top: 50%;
-        left: 4px;
+        @include flexbox-shrink(0);
+
+        position: relative;
+        width: 20px;
 
         .title {
-            @include transform(rotate(180deg) translateY(50%));
+            @include flexbox;
+            @include transform(rotate(180deg));
+
+            -ms-flex-direction: column;
+
+            top: 0;
+            right: 0;
+            left: 3px;
+            bottom: 0;
+
             color: $color-elephant;
-            background-color: $color-white;
-            display: inline-block;
+            text-align: center;
             text-transform: uppercase;
             font-size: 12px;
-            padding: 4px 0;
-            writing-mode: tb;
-            -ms-writing-mode: tb-rl;
+            overflow: hidden;
+            position: absolute;
+            writing-mode: vertical-rl;
+            -ms-writing-mode: tb-lr;
+
+            &:before,
+            &:after {
+                border-left: 1px solid $color-neutral-80;
+                content: '';
+                display: inline-block; // for IE10
+                height: 5000px;
+
+                @include transform(translateX(10px));
+            }
+
+            &:before {
+                margin-bottom: $spacing-xs;
+            }
+            &:after {
+                margin-top: $spacing-xs;
+            }
+        }
+
+        .border {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 9px;
+            bottom: 0;
+            border-left: 1px solid $color-neutral-80;
         }
     }
     .indent-content {
-        margin-left: 10px;
-        padding-left: 20px;
+        margin-left: 5px;
         display: block;
-        border-left: 1px solid $color-neutral-80;
+        align-self: center;
 
         &.no-border {
             border-left: none;
         }
         .content-link {
             padding: 7px 3px 5px;
-            margin-left: -8px;
+
             &:first-of-type {
                 padding-top: 0;
             }
@@ -57,7 +94,6 @@
     }
     // nested
     .indent {
-        margin-left: -9px;
         padding: 3px 0 0;
         margin-bottom: 10px;
         &:last-of-type {

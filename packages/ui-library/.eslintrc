@@ -3,10 +3,6 @@
 	"rules": {
 		"no-unused-expressions": [2],
 		"no-underscore-dangle": [0],
-		"quote-props": [
-			2,
-			"as-needed"
-		],
 		"no-multi-spaces": [
 			2,
 			{
@@ -52,12 +48,6 @@
 		"no-invalid-regexp": [2],
 		"no-irregular-whitespace": [2],
 		"no-unreachable": [2],
-		# "valid-jsdoc": [
-		# 	2,
-		# 	{
-		# 		"requireReturn": false
-		# 	}
-		# ],
 		"valid-typeof": [2],
 		"no-unexpected-multiline": [2],
 		"max-depth": [2, 5],
@@ -128,7 +118,7 @@
 		"react"
 	],
 	"settings": {
-		"ecmascript": 5,
+		"ecmascript": 6,
 		"jsx": true
 	},
 	"env": {

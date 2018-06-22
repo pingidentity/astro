@@ -7,6 +7,8 @@ var React = require("react"),
     If = require("../../components/general/If"),
     _ = require("underscore");
 
+import StretchContent from "ui-library/lib/components/layout/StretchContent";
+
 class DemoItem extends React.Component {
     static propTypes = {
     };
@@ -143,9 +145,11 @@ class DemoItem extends React.Component {
                 source: this.state.source
             }),
             docsClassName = classnames("js-doc", { hidden: this.state.source });
-
+        
+        const OutputComponent = fullscreen ? StretchContent : "div";
+        
         return (
-            <div className={containerClassName}>
+            <StretchContent className={containerClassName}>
                 <div className="documentation">
 
                     <div className={headerClassName}>
@@ -161,17 +165,17 @@ class DemoItem extends React.Component {
                     </div>
 
                 </div>
-                <div className="section-content">
+                <StretchContent className="section-content">
                     <div className="demo-description"
                          dangerouslySetInnerHTML={{ __html: markdown }}></div>
 
-                    <div className="output clearfix">
+                    <OutputComponent className="output clearfix">
                         {React.createElement(type, props)}
-                    </div>
+                    </OutputComponent>
 
                     {!fullscreen && <Markup content={this.props.code} />}
-                </div>
-            </div>
+                </StretchContent>
+            </StretchContent>
         );
     }
 }

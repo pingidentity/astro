@@ -17,6 +17,10 @@ var React = require("react"),
 *     The text to display inside of the SelectionFilterLabel
 * @param {string} labelText
 *     The text to display as an input label above the SelectionFilterLabel
+* @param {boolean} open
+*     Is this view opened?
+* @param {string} placeholder
+*     Text that displays as a placeholder if filterLabel is empty
 * @param {bool} [required=false]
 *     When true the required styling is applied to the component
 * @param {object} [style]
@@ -41,24 +45,30 @@ class SelectionFilterLabel extends React.Component {
         count: PropTypes.number,
         filterLabel: PropTypes.string.isRequired,
         labelText: PropTypes.string,
+        open: PropTypes.bool,
         required: PropTypes.bool,
         style: PropTypes.object
     };
 
     static defaultProps = {
-        "data-id": "selection-filter"
+        "data-id": "selection-filter",
+        open: false
     };
 
     _renderSelectionFilter = () => {
         var classNames = {
-            required: this.props.required
+            required: this.props.required,
+            "selection-filter-label--open": this.props.open
         };
         return (
             <div
                 data-id={this.props["data-id"]}
                 className={classnames("selection-filter-label", this.props.className, classNames)}
                 style={this.props.style}>
-                {this.props.filterLabel}
+                {this.props.filterLabel !== ""
+                    ? this.props.filterLabel
+                    : <span className="selection-filter-label__placeholder">{this.props.placeholder}</span>
+                }
                 {this.props.count >= 0 && (
                     <span data-id={this.props["data-id"] + "-count"} className="count">
                         {this.props.count}

@@ -141,6 +141,7 @@ module.exports = class extends React.Component {
                                             label="Address Location"
                                             className="input-width-medium"
                                             data-id="addressType"
+                                            searchType="box"
                                             selectedOption={this.props.inputs.addressType || addressOptions[0]}
                                             onValueChange={this._handleSelectChange_addressType}
                                             options={addressOptions} />

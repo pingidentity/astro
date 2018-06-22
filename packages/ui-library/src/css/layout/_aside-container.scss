@@ -1,0 +1,16 @@
+.aside-container {
+    @include flexbox();
+    @include flexbox-direction(row);
+
+    &--full-height {
+        > :last-child {
+            align-self: stretch;
+        }
+    }
+
+    > :last-child {
+        @include flexbox-grow(1);
+
+        margin-left: $spacing-lg;
+    }
+}

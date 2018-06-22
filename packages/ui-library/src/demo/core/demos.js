@@ -303,11 +303,25 @@ module.exports = [
                 icon: "puzzle",
                 children: [
                     {
+                        label: "Aside",
+                        demo: require("../components/layout/AsideDemo"),
+                        pathToDoc: "components/layout/Aside.jsx",
+                        pathToSource: "components_layout_Aside.jsx.html",
+                        pathToDemoSource: "demo_components_layout_AsideDemo.jsx.html"
+                    },
+                    {
                         label: "Collapsible Link",
                         demo: require("../components/general/CollapsibleLinkDemo"),
                         pathToDoc: "components/general/CollapsibleLink.jsx",
                         pathToSource: "components_general_CollapsibleLink.jsx.html",
                         pathToDemoSource: "demo_components_general_CollapsibleLinkDemo.jsx.html"
+                    },
+                    {
+                        label: "Collapsible Divider",
+                        demo: require("../components/layout/CollapsibleDividerDemo"),
+                        pathToDoc: "components/layout/CollapsibleDivider.jsx",
+                        pathToSource: "components_layout_CollapsibleDivider.jsx.html",
+                        pathToDemoSource: "demo_components_layout_CollapsibleDividerDemo.jsx.html"
                     },
                     {
                         label: "Columns",
@@ -537,6 +551,39 @@ module.exports = [
                         pathToSource: "components_general_RowIndexNav.jsx.html",
                         pathToDemoSource: "demo_components_general_RowIndexNavDemo.jsx.html"
                     },
+                ]
+            },
+            {
+                label: "Search & Filter",
+                icon: "search",
+                children: [
+                    {
+                        label: "Search Bar",
+                        demo: require("../components/forms/FormSearchBarDemo"),
+                        pathToDoc: "components/forms/FormSearchBar.jsx",
+                        pathToSource: "components_forms_FormSearchBar.jsx.html",
+                        pathToDemoSource: "demo_components_forms_FormSearchBarDemo.jsx.html"
+                    },
+                    {
+                        label: "Search Box",
+                        demo: require("../components/forms/FormSearchBoxDemo"),
+                        pathToDoc: "components/forms/FormSearchBox.jsx",
+                        pathToSource: "components_forms_FormSearchBox.jsx.html",
+                        pathToDemoSource: "demo_components_forms_FormSearchBoxDemo.jsx.html"
+                    },
+                    {
+                        label: "Filter Selector",
+                        demo: require("../components/filters/FilterSelectorDemo"),
+                        pathToDoc: "components/filters/FilterSelector.jsx",
+                        pathToSource: "components_filters_FilterSelector.jsx.html",
+                        pathToDemoSource: "demo_components_filters_FilterSelectorDemo.jsx.html"
+                    },
+                ]
+            },
+            {
+                label: "General",
+                icon: "globe",
+                children: [
                     {
                         label: "Search Bar",
                         demo: require("../components/forms/FormSearchBarDemo"),
@@ -873,6 +920,15 @@ module.exports = [
                 fullscreen: true,
                 icon: "details"
             },
+            {
+                label: "Query Builder",
+                demo: require("../components/templates/QueryBuilderDemo"),
+                pathToDoc: "components/templates/QueryBuilder.jsx",
+                pathToSource: "templates_edit-view-modal_QueryBuilder.jsx.html",
+                pathToDemoSource: "demo_components_templates_QueryBuilderDemo.jsx.html",
+                fullscreen: true,
+                icon: "details"
+            }
         ]
     }
 ];
