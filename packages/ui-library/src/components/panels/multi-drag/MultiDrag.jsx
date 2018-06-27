@@ -311,7 +311,7 @@ class MultiDragStateless extends React.Component {
      * component's onDrag callback.
      */
     _onDrag = (targetIndex, beingDraggedIndex, targetColumn, beingDraggedColumn) => { //eslint-disable-line
-        var desc = this._changedSinceLastDrag(targetIndex, beingDraggedIndex, targetColumn, beingDraggedColumn);
+        const desc = this._changedSinceLastDrag(targetIndex, beingDraggedIndex, targetColumn, beingDraggedColumn);
 
         // if nothing has changed, dont execute the callback
         if (!desc || typeof(targetIndex) === "undefined") {
@@ -334,6 +334,58 @@ class MultiDragStateless extends React.Component {
     _onDrop = () => {
     };
 
+    _renderColumn = (column, index) => {
+        const {
+            column: prevColumn,
+            index: prevIndex
+        } = this.props.previewMove || {};
+
+        let ghostRowAt = prevColumn === index ? prevIndex : null;
+
+        // don't increment if ghostRowAt is null, otherwise a preview row
+        // gets created in each column.
+        // not applicable if from or to index is for a different column.
+        if ((this._lastDrag && this._lastDrag.from.index < this._lastDrag.to.index) &&
+            (this._lastDrag.from.column === this._lastDrag.to.column) &&
+            ghostRowAt !== null) {
+            ghostRowAt += 1;
+        }
+
+        const showCategoryFilter = (this.props.showCategoryFilter && index === 0) ||
+            this.props.showCategoryFilterOnAllColumns;
+        const categoryList = showCategoryFilter ? this.props.categoryList : null;
+        const contentType = this.props.contentType ||
+            <MultiDragRow onRemove={this.props.onRemove} onAdd={this.props.onAdd} />;
+
+        return (
+            <DragDropColumn
+                {...column}
+                categoryList={categoryList}
+                key={index}
+                index={index}
+                disableSort={index === 0}
+                rows={column.filteredRows}
+                onScrolledToBottom={this.props.onScrolledToBottom}
+                onScrolledToTop={this.props.onScrolledToTop}
+                onDrag={this._onDrag}
+                onDrop={this._onDrop}
+                onDragStart={this.props.onDragStart}
+                onDragEnd={this.props.onDragEnd}
+                onCancel={this._onCancel}
+                onCategoryClick={this.props.onCategoryClick}
+                onCategoryToggle={this.props.onCategoryToggle}
+                ghostRowAt={ghostRowAt}
+                dragToEdge={true}
+                className={this.props.classNames[index]}
+                contentType={contentType}
+                data-id={"DragDropColumn-" + index}
+                labelEmpty={this.props.labelEmpty}
+                showCount={index > 0}
+                strings={this.props.strings}
+            />
+        );
+    }
+
     _renderSearch = (column, index) => {
         const handleSearch = (value) => this.props.onSearch(index, value);
 
@@ -351,16 +403,12 @@ class MultiDragStateless extends React.Component {
     };
 
     render() {
-
-        var preview = this.props.previewMove;
-        var className = classnames(
+        const className = classnames(
             "input-row row-selector",
             this.props.className, {
                 "row-selector--disabled": this.props.disabled
             }
         );
-        const contentType = this.props.contentType ||
-            <MultiDragRow onRemove={this.props.onRemove} onAdd={this.props.onAdd} />;
 
         return (
             <div data-id={this.props["data-id"]} className={className}>
@@ -373,51 +421,7 @@ class MultiDragStateless extends React.Component {
                 </div>
                 <div key="columns" className="row-selector__columns">
                 {
-                    this.props.columns.map(function (column, index) {
-
-                        var ghostRowAt = preview && preview.column === index ? preview.index : null;
-
-                        // don't increment if ghostRowAt is null, otherwise a preview row
-                        // gets created in each column.
-                        // not applicable if from or to index is for a different column.
-                        if ((this._lastDrag && this._lastDrag.from.index < this._lastDrag.to.index) &&
-                            (this._lastDrag.from.column === this._lastDrag.to.column) &&
-                            ghostRowAt !== null) {
-                            ghostRowAt += 1;
-                        }
-
-                        const showCategoryFilter = (this.props.showCategoryFilter && index === 0) ||
-                            this.props.showCategoryFilterOnAllColumns;
-                        const categoryList = showCategoryFilter ? this.props.categoryList : null;
-
-                        return (
-                            <DragDropColumn
-                                {...column}
-                                categoryList={categoryList}
-                                key={index}
-                                index={index}
-                                disableSort={index === 0}
-                                rows={column.filteredRows}
-                                onScrolledToBottom={this.props.onScrolledToBottom}
-                                onScrolledToTop={this.props.onScrolledToTop}
-                                onDrag={this._onDrag}
-                                onDrop={this._onDrop}
-                                onDragStart={this.props.onDragStart}
-                                onDragEnd={this.props.onDragEnd}
-                                onCancel={this._onCancel}
-                                onCategoryClick={this.props.onCategoryClick}
-                                onCategoryToggle={this.props.onCategoryToggle}
-                                ghostRowAt={ghostRowAt}
-                                dragToEdge={true}
-                                className={this.props.classNames[index]}
-                                contentType={contentType}
-                                data-id={"DragDropColumn-" + index}
-                                labelEmpty={this.props.labelEmpty}
-                                showCount={index > 0}
-                                strings={this.props.strings}
-                            />
-                        );
-                    }.bind(this))
+                    this.props.columns.map(this._renderColumn)
                 }
                 </div>
             </div>
@@ -510,7 +514,7 @@ class MultiDragStateful extends React.Component {
         next = reapplyFilters(next);
         this.setState(next, function () {
             if (this.props.onDrop) {
-                this.props.onDrop(extendedDesc);
+                this.props.onDrop(extendedDesc, next.columns);
             }
         });
     };
@@ -518,9 +522,9 @@ class MultiDragStateful extends React.Component {
     _handleDrag = (desc) => {
         this.setState({
             placeholder: desc.to
-        }, function () {
+        }, () => {
             if (this.props.onDrag) {
-                this.props.onDrag(desc);
+                this.props.onDrag(desc, this.props.columns);
             }
         });
     };
@@ -543,7 +547,7 @@ class MultiDragStateful extends React.Component {
     }
 
     render() {
-        var props = _.defaults({
+        const props = _.defaults({
             ref: "MultiDragStateless",
             onSearch: this._handleSearch,
             onCategoryClick: this._handleCategoryClick,

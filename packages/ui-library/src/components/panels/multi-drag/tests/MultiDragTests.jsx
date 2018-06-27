@@ -198,26 +198,28 @@ describe("MultiDrag", function () {
         expect(componentRef.state.placeholder).toBeNull();
     });
 
-    it("stateful: _handleDrop callback triggers onDrop callback", function () {
+    it("stateful: _handleDrop callback triggers onDrop callback", () => {
         getWrappedComponent({ stateless: false });
-        var component = thisComponent;
-        var componentRef = component.refs.MultiDragStateful;
+        const component = thisComponent;
+        const componentRef = component.refs.MultiDragStateful;
 
-        var desc = { from: { column: 0, index: 0 }, to: { column: 0, index: 0 } };
+        const { columns } = componentRef.state;
+        const desc = { from: { column: 0, index: 0 }, to: { column: 0, index: 0 } };
         componentRef._handleDrop(desc);
 
-        expect(component.props.onDrop).toBeCalledWith(desc);
+        expect(component.props.onDrop).toBeCalledWith(desc, columns);
     });
 
-    it("stateful: _handleDrag callback triggers onDrag callback and sets placeholder at destination", function () {
+    it("stateful: _handleDrag callback triggers onDrag callback and sets placeholder at destination", () => {
         getWrappedComponent({ stateless: false, showSearch: true });
-        var component = thisComponent;
-        var componentRef = component.refs.MultiDragStateful;
+        const component = thisComponent;
+        const componentRef = component.refs.MultiDragStateful;
 
-        var desc = { from: { column: 0, index: 0 }, to: { column: 0, index: 0 } };
+        const { columns } = componentRef.state;
+        const desc = { from: { column: 0, index: 0 }, to: { column: 0, index: 0 } };
         componentRef._handleDrag(desc);
 
-        expect(component.props.onDrag).toBeCalledWith(desc);
+        expect(component.props.onDrag).toBeCalledWith(desc, columns);
         expect(componentRef.state.placeholder).toBe(desc.to);
     });
 
