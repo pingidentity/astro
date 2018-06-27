@@ -164,7 +164,15 @@ class Modal extends React.Component {
 
     _triggerEvent(open) {
         const eventName = open ? "uilibrary-modal-open" : "uilibrary-modal-close";
-        document.body.dispatchEvent(new CustomEvent(eventName, { bubbles: true }));
+        let event;
+
+        if (Utils.isIE()) {
+            event = document.createEvent("CustomEvent");
+            event.initCustomEvent(eventName, true, false, undefined);
+        } else {
+            event = new CustomEvent(eventName, { bubbles: true });
+        }
+        document.body.dispatchEvent(event);
     }
 
     componentWillMount() {

@@ -116,8 +116,10 @@ class WizardDemo extends React.Component {
     }
 
     onNext = () => {
+        let messageProps;
+
         if (this.state.activeStep === 1) {
-            var messageProps = { messages: [
+            messageProps = { messages: [
                 {
                     text: "New Message added",
                     type: "notice",

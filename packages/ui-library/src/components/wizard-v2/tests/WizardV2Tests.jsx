@@ -405,6 +405,27 @@ describe("WizardV2", function () {
         });
     });
 
+    it("displays a message when provided", function () {
+        const messageProps = {
+            "data-id": `${wizardDefaultProps["data-id"]}-messages`,
+            messages: [
+                {
+                    text: "New Message added",
+                    type: "notice",
+                }
+            ]
+        };
+        const component = getComponent({
+            activeStep: 0,
+            messageProps: messageProps,
+        });
+
+        const wizardMessage = getElementByDid(component, "-messages");
+
+        expect(wizardMessage.textContent).toContain(messageProps.messages[0].text);
+
+    });
+
     it("emits open and close events", function () {
         const openListenerCallback = jest.genMockFunction();
         const closeListenerCallback = jest.genMockFunction();
@@ -420,4 +441,25 @@ describe("WizardV2", function () {
         ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
         expect(closeListenerCallback).toBeCalled();
     });
+
+    it("emits open and close events in IE", function () {
+        const UtilsMock = require("../../../util/Utils");
+        UtilsMock.isIE = () => { return true; };
+
+        const openListenerCallback = jest.genMockFunction();
+        const closeListenerCallback = jest.genMockFunction();
+
+        document.body.addEventListener("uilibrary-wizard-open", openListenerCallback);
+        document.body.addEventListener("uilibrary-wizard-close", closeListenerCallback);
+
+        let component = getComponent();
+
+        expect(openListenerCallback).toBeCalled();
+        expect(closeListenerCallback).not.toBeCalled();
+
+        ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
+        expect(closeListenerCallback).toBeCalled();
+    });
+
+
 });

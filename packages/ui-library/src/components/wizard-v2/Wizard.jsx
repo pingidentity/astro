@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import _ from "underscore";
 import classnames from "classnames";
 import Messages from "../general/messages/index";
+import Utils from "../../util/Utils";
 
 
 /**
@@ -107,7 +108,15 @@ class Wizard extends React.Component {
 
     _triggerEvent(open) {
         const eventName = open ? "uilibrary-wizard-open" : "uilibrary-wizard-close";
-        document.body.dispatchEvent(new CustomEvent(eventName, { bubbles: true }));
+        let event;
+
+        if (Utils.isIE()) {
+            event = document.createEvent("CustomEvent");
+            event.initCustomEvent(eventName, true, false, undefined);
+        } else {
+            event = new CustomEvent(eventName, { bubbles: true });
+        }
+        document.body.dispatchEvent(event);
     }
 
     componentWillMount() {

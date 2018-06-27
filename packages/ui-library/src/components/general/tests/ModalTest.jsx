@@ -3,6 +3,7 @@ jest.dontMock("../If");
 jest.dontMock("../../../util/EventUtils.js");
 jest.dontMock("../../tooltips/CancelTooltip");
 jest.dontMock("../../tooltips/DetailsTooltip");
+jest.dontMock("../../../util/Utils");
 
 describe("ModalTest", function () {
     var React = require("react"),
@@ -72,6 +73,33 @@ describe("ModalTest", function () {
     });
 
     it("emits open and close events", function () {
+        const
+            openListenerCallback = jest.genMockFunction(),
+            closeListenerCallback = jest.genMockFunction(),
+            component = ReactTestUtils.renderIntoDocument(
+                <Wrapper
+                    type={Modal}
+                    expanded={false}
+                    onOpen={jest.genMockFunction()}
+                    onClose={jest.genMockFunction()}
+                />
+            );
+
+        document.body.addEventListener("uilibrary-modal-open", openListenerCallback);
+        document.body.addEventListener("uilibrary-modal-close", closeListenerCallback);
+
+        component._setProps({ expanded: true });
+        expect(openListenerCallback).toBeCalled();
+        expect(closeListenerCallback).not.toBeCalled();
+
+        component._setProps({ expanded: false });
+        expect(closeListenerCallback).toBeCalled();
+    });
+
+    it("emits open and close events in IE", function () {
+        const UtilsMock = require("../../../util/Utils");
+        UtilsMock.isIE = () => { return true; };
+
         const
             openListenerCallback = jest.genMockFunction(),
             closeListenerCallback = jest.genMockFunction(),
