@@ -58,4 +58,23 @@ describe("ConfirmTooltip", function () {
         expect(onCancel).toBeCalled();
     });
 
+    it("fires onConfirm and onToggle when closeOnConfirm is true", function () {
+        const confirmCallback = jest.genMockFunction();
+        const toggleCallback = jest.genMockFunction();
+        const component = getComponent({
+            onConfirm: confirmCallback,
+            onToggle: toggleCallback,
+            closeOnConfirm: true,
+            open: true
+        });
+
+        const button = TestUtils.findRenderedDOMNodeWithDataId(component, "confirm-tooltip-button");
+
+        expect(confirmCallback).not.toBeCalled();
+        expect(toggleCallback).not.toBeCalled();
+        ReactTestUtils.Simulate.click(button);
+        expect(confirmCallback).toBeCalled();
+        expect(toggleCallback).toBeCalled();
+    });
+
 });

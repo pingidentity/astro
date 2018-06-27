@@ -30,6 +30,8 @@ import popsOver from "../../util/behaviors/popsOver";
  *      css class to set the type of button(primary, secondary, danger)
  * @param {bool} disabledSave
  *      boolean to turn enable or disable the button.
+ * @param {bool} [closeOnConfirm=false]
+ *      when true, triggers onToggle when onConfirm is triggered.
  * @param {ConfirmTooltip~onCancel} onCancel
  *     The callback triggered when the cancel button is pressed.
  * @param {ConfirmTooltip~onConfirm} onDelete
@@ -76,11 +78,23 @@ class ConfirmTooltipBase extends Component {
         buttonLabel: PropTypes.string,
         buttonType: PropTypes.string,
         disableSave: PropTypes.bool,
+        closeOnConfirm: PropTypes.bool,
     }
 
     static defaultProps = {
         "data-id": "confirm-tooltip",
+        closeOnConfirm: false,
     };
+
+    _handleConfirm = e => {
+        if (this.props.onConfirm) {
+            this.props.onConfirm(e);
+        }
+
+        if (this.props.closeOnConfirm) {
+            this.props.onToggle(e);
+        }
+    }
 
     render() {
         return (
@@ -95,7 +109,7 @@ class ConfirmTooltipBase extends Component {
                         data-id={`${this.props["data-id"]}-button`}
                         label={this.props.buttonLabel || "Confirm"}
                         type={this.props.buttonType}
-                        onClick={this.props.onConfirm}
+                        onClick={this._handleConfirm}
                         disabled={this.props.disableSave}
                     />
                     <br /> <br />
@@ -112,4 +126,4 @@ class ConfirmTooltipBase extends Component {
 }
 
 const ConfirmTooltip = popsOver(ConfirmTooltipBase);
-module.exports = ConfirmTooltip;
+export default ConfirmTooltip;

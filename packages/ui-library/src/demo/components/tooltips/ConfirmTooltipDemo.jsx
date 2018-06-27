@@ -46,6 +46,18 @@ class ConfirmTooltipDemo extends Component {
                 >
                 {markup}
                 </ConfirmTooltip>
+                <hr className="hr"/>
+                <ConfirmTooltip
+                    positionClassName="bottom"
+                    label="Stateful Version"
+                    title="Stateful Version"
+                    buttonLabel="Confirm"
+                    cancelText="Cancel"
+                    disableSave={false}
+                    closeOnConfirm={true}
+                >
+                {markup}
+                </ConfirmTooltip>
             </div>
         );
     }
