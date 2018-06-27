@@ -9,6 +9,10 @@ function deleteMessageAt (state, containerId, index) {
     return update.unset(state, [containerId, index]);
 }
 
+function emptyContainer (state, containerId) {
+    return update.set(state, [containerId], []);
+}
+
 function updateProgressAt (state, containerId, index, percent) {
     return update.set(state, [containerId, index, "progress", "percent"], percent);
 }
@@ -20,7 +24,7 @@ module.exports = function (state, action) {
     switch (action.type) {
         case Actions.Types.ADD_MESSAGE:
             if (typeof(nextState[action.containerId]) === "undefined") {
-                nextState = update.set(nextState, [action.containerId], []);
+                nextState = emptyContainer(nextState, action.containerId);
             }
             nextState = update.push(nextState, [action.containerId], _.defaults({ type: action.status }, action));
             break;
@@ -35,6 +39,9 @@ module.exports = function (state, action) {
             if (nextState[action.containerId].length > action.index) {
                 nextState = deleteMessageAt(nextState, action.containerId, action.index);
             }
+            break;
+        case Actions.Types.REMOVE_ALL_MESSAGES:
+            nextState = emptyContainer(nextState, action.containerId);
             break;
         case Actions.Types.SHIFT_MESSAGE:
             if (nextState.messages.length > 0) {

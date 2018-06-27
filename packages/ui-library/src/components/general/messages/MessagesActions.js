@@ -17,6 +17,7 @@ exports.Types = keyMirror({
     ADD_MESSAGE: null,
     REMOVE_MESSAGE: null,
     REMOVE_AT: null,
+    REMOVE_ALL_MESSAGES: null,
     SHIFT_MESSAGE: null,
     UPDATE_PROGRESS: null,
     UPDATE_MINIMIZED: null
@@ -180,6 +181,22 @@ exports.removeMessage = function (containerId, messageId) {
         type: exports.Types.REMOVE_MESSAGE,
         containerId: containerId,
         messageId: messageId
+    };
+};
+
+/**
+ * @alias Actions.removeAllMessages
+ * @memberof Messages
+ * @desc remove all the messages from a container.
+ * @param {string} [containerId="messages"]
+ *     The grouping of the message
+ * @returns {object}
+ *     The action
+ */
+exports.removeAllMessages = function (containerId = "messages") {
+    return {
+        type: exports.Types.REMOVE_ALL_MESSAGES,
+        containerId: containerId,
     };
 };
 

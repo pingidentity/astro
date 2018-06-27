@@ -336,4 +336,37 @@ describe("Messages", function () {
 
         expect(store.getState().container[0].minimized).toEqual(true);
     });
+
+    it("removes all messages in a container", function () {
+        const store = getStore();
+
+        store.dispatch(Actions.addMessage("uno"));
+        store.dispatch(Actions.addMessage("dos"));
+        store.dispatch(Actions.addMessage("tres"));
+
+        expect(_.pluck(store.getState().messages, "text")).toEqual(["uno", "dos","tres"]);
+
+        store.dispatch(Actions.removeAllMessages());
+
+        expect(_.pluck(store.getState().messages, "text")).toEqual([]);
+    });
+
+    it("removes all messages in a container and not another", function () {
+        const store = getStore();
+
+        store.dispatch(Actions.addMessage("uno"));
+        store.dispatch(Actions.addMessage("dos"));
+        store.dispatch(Actions.addMessage("tres"));
+
+        store.dispatch(Actions.addMessage("another", "uno"));
+        store.dispatch(Actions.addMessage("another", "dos"));
+        store.dispatch(Actions.addMessage("another", "tres"));
+
+        expect(_.pluck(store.getState().another, "text")).toEqual(["uno", "dos","tres"]);
+
+        store.dispatch(Actions.removeAllMessages("another"));
+
+        expect(_.pluck(store.getState().messages, "text")).toEqual(["uno", "dos","tres"]);
+        expect(_.pluck(store.getState().another, "text")).toEqual([]);
+    });
 });
