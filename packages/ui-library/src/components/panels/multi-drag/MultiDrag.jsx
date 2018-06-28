@@ -461,6 +461,14 @@ class MultiDragStateful extends React.Component {
         );
     };
 
+    _handleAdd = (from) => {
+        if (this.props.onAdd) {
+            this.props.onAdd(from);
+        } else {
+            this._handleDrop({ from: from, to: { column: 1, index: 0 } });
+        }
+    }
+
     _handleCategoryToggle = (index) => {
         const showing = this.state.columns[index].showCategoryList || false;
 
@@ -474,13 +482,11 @@ class MultiDragStateful extends React.Component {
 
     _handleCategoryClick = (index, value) => {
         // use remutable to set state.colums[index].category to the new value
-        let next = update(this.state).set(["columns", index, "category"], value).end();
-
-        // update the filteredRows
-        next = reapplyFilters(next);
+        const next = update(this.state).set(["columns", index, "category"], value).end();
 
         this.setState(
-            next,
+            // update the filteredRows
+            reapplyFilters(next),
             function() {
                 if (this.props.onCategoryClick) {
                     this.props.onCategoryClick(index, value);
@@ -493,7 +499,7 @@ class MultiDragStateful extends React.Component {
     _handleCancel = () => {
         this.setState({
             placeholder: null
-        }, function () {
+        }, () => {
             if (this.props.onCancel) {
                 this.props.onCancel();
             }
@@ -501,20 +507,30 @@ class MultiDragStateful extends React.Component {
     };
 
     _handleDrop = (desc) => {
-        var convertedDesc = convertFilteredIndexes(this.state.columns, desc);
-        var extendedDesc = _.clone(desc);
-        extendedDesc.from.convertedIndex = convertedDesc.from;
-        extendedDesc.to.convertedIndex = convertedDesc.to;
-        var next = move(this.state, {
-            from: { column: desc.from.column, index: convertedDesc.from },
-            to: { column: desc.to.column, index: convertedDesc.to }
+        const {
+            from: fromIndex,
+            to: toIndex
+        } = convertFilteredIndexes(this.state.columns, desc);
+
+        const {
+            from: {
+                column: fromCol
+            },
+            to: {
+                column: toCol
+            },
+        } = desc;
+
+        let next = move(this.state, {
+            from: { column: fromCol, index: fromIndex },
+            to: { column: toCol, index: toIndex }
         });
 
         // reapply filters after a move so moved rows filtered as well
         next = reapplyFilters(next);
-        this.setState(next, function () {
+        this.setState(next, () => {
             if (this.props.onDrop) {
-                this.props.onDrop(extendedDesc, next.columns);
+                this.props.onDrop({ ...desc }, next.columns);
             }
         });
     };
@@ -529,19 +545,28 @@ class MultiDragStateful extends React.Component {
         });
     };
 
-    componentWillMount() {
-        // apply any initial filters
-        var next = _.clone(this.state);
-        next = reapplyFilters(next);
-        this.setState(next);
+    _handleRemove = (from) => {
+        if (this.props.onRemove) {
+            this.props.onRemove(from);
+        } else {
+            this._handleDrop({ from: from, to: { column: 0, index: 0 } });
+        }
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (!_.isEqual(nextProps.columns, this.props.columns)) {
+    componentWillMount() {
+        // apply any initial filters
+        this.setState({
+            ...reapplyFilters(this.state)
+        });
+    }
+
+    componentWillReceiveProps({ columns: nextCols }) {
+        if (!_.isEqual(nextCols, this.props.columns)) {
             // update columns and reapply filters
-            var next = _.clone(this.state);
-            next.columns = nextProps.columns;
-            next = reapplyFilters(next);
+            const next = reapplyFilters({
+                ...this.state,
+                columns: nextCols
+            });
             this.setState(next);
         }
     }
@@ -554,9 +579,11 @@ class MultiDragStateful extends React.Component {
             onCategoryToggle: this._handleCategoryToggle,
             columns: this.state.columns,
             previewMove: this.state.placeholder,
+            onAdd: this._handleAdd,
             onCancel: this._handleCancel,
             onDrop: this._handleDrop,
-            onDrag: this._handleDrag
+            onDrag: this._handleDrag,
+            onRemove: this._handleRemove
         }, this.props);
 
         return React.createElement(MultiDragStateless, props);
@@ -582,8 +609,8 @@ class MultiDrag extends React.Component {
 
     render() {
         return this.props.stateless
-            ? React.createElement(MultiDragStateless, _.defaults({ ref: "MultiDragStateless" }, this.props))
-            : React.createElement(MultiDragStateful, _.defaults({ ref: "MultiDragStateful" }, this.props));
+            ? <MultiDragStateless {...this.props} ref="MultiDragStateless" />
+            : <MultiDragStateful {...this.props} ref="MultiDragStateful" />;
     }
 }
 

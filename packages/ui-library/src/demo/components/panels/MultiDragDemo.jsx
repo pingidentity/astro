@@ -55,11 +55,17 @@ function DemoReducer (state, action) {
  */
 class Row extends React.Component {
     _handleRemove = () => {
-        this.props.onRemove({ column: this.props.column, index: this.props.index });
+        const { onRemove } = this.props;
+        if (onRemove) {
+            onRemove({ column: this.props.column, index: this.props.index });
+        }
     };
 
     _handleAdd = () => {
-        this.props.onAdd({ column: this.props.column, index: this.props.index });
+        const { onAdd } = this.props;
+        if (onAdd) {
+            onAdd({ column: this.props.column, index: this.props.index });
+        }
     };
 
     _getButton = () => {
@@ -115,10 +121,11 @@ class MultiDragDemo extends React.Component {
         disabled: false
     };
 
-    componentWillMount() {
-        this.actions = Redux.bindActionCreators(MultiDrag.Actions, this.props.store.dispatch);
-        this.messageActions = Redux.bindActionCreators(Messages.Actions, this.props.store.dispatch);
-        this.demoActions = Redux.bindActionCreators(Actions, this.props.store.dispatch);
+    constructor(props) {
+        super(props);
+        this.actions = Redux.bindActionCreators(MultiDrag.Actions, props.store.dispatch);
+        this.messageActions = Redux.bindActionCreators(Messages.Actions, props.store.dispatch);
+        this.demoActions = Redux.bindActionCreators(Actions, props.store.dispatch);
 
         // initialize the multi drag data
         this.actions.init(data.columns);
@@ -153,14 +160,6 @@ class MultiDragDemo extends React.Component {
     _getStatefulRef = () => {
         //MultiDragStateful ref is nested under the dragDropContext child ref
         return this.refs["multi-drag-demo-stateful"].refs.MultiDragStateful;
-    };
-
-    _handleAddStateful = (from) => {
-        this._getStatefulRef()._handleDrop({ from: from, to: { column: 1, index: 0 } });
-    };
-
-    _handleRemoveStateful = (from) => {
-        this._getStatefulRef()._handleDrop({ from: from, to: { column: 0, index: 0 } });
     };
 
     /*
@@ -287,10 +286,8 @@ class MultiDragDemo extends React.Component {
     };
 
     render() {
-        var contentTypeStateful = (
+        const contentTypeStateful = (
             <Row
-                onRemove={this._handleRemoveStateful}
-                onAdd={this._handleAddStateful}
                 style={this.props.demo.style}
             />
         );
@@ -425,8 +422,6 @@ class MultiDragDemo extends React.Component {
                             onDrag={this._handleDragStateful}
                             onDragStart={dragScroll.start}
                             onDragEnd={dragScroll.end}
-                            onAdd={this._handleAddStateful}
-                            onRemove={this._handleRemoveStateful}
                             labelEmpty="No Items Available"
                             disabled={this.state.disabled}
                             strings={{

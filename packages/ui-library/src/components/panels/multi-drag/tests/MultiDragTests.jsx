@@ -223,6 +223,60 @@ describe("MultiDrag", function () {
         expect(componentRef.state.placeholder).toBe(desc.to);
     });
 
+    it("stateful: _handleAdd triggers onAdd callback if passed in", () => {
+        const onAdd = jest.fn();
+        getWrappedComponent({ stateless: false, onAdd });
+        const component = thisComponent;
+        const componentRef = component.refs.MultiDragStateful;
+
+        const from = { column: 0, index: 0 };
+        componentRef._handleAdd(from);
+
+        expect(onAdd).toBeCalledWith(from);
+    });
+
+    it("stateful: _handleAdd adds row", () => {
+        getWrappedComponent({ stateless: false });
+        const component = thisComponent;
+        const componentRef = component.refs.MultiDragStateful;
+
+        const from = { column: 0, index: 0 };
+        componentRef._handleAdd(from);
+
+        const [, {
+            rows
+        }] = componentRef.state.columns;
+
+        expect(rows.length).toEqual(3);
+    });
+
+    it("stateful: _handleRemove triggers onRemove callback if passed in", () => {
+        const onRemove = jest.fn();
+        getWrappedComponent({ stateless: false, onRemove });
+        const component = thisComponent;
+        const componentRef = component.refs.MultiDragStateful;
+
+        const from = { column: 0, index: 0 };
+        componentRef._handleRemove(from);
+
+        expect(onRemove).toBeCalledWith(from);
+    });
+
+    it("stateful: _handleRemove removes row", () => {
+        getWrappedComponent({ stateless: false });
+        const component = thisComponent;
+        const componentRef = component.refs.MultiDragStateful;
+
+        const from = { column: 1, index: 0 };
+        componentRef._handleRemove(from);
+
+        const [{
+            rows
+        }] = componentRef.state.columns;
+
+        expect(rows.length).toEqual(3);
+    });
+
     describe("convertFilteredIndexes", function () {
         var rows1 = [{ id: 1, n: 1 }, { id: 2, n: 2 }];
         var rows2 = [{ id: 3, n: 3 }, { id: 4, n: 4 }];
