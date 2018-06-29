@@ -39,6 +39,8 @@ var Placements = {
  *     CSS classes to set on the top-level HTML container.
  * @param {number} [delayHide=400]
  *     Sets the number of milliseconds to wait before hiding the tooltip.
+ * @param {number} [delayShow=0]
+ *     Sets the number of milliseconds to wait before showing the tooltip.
  *
  * @param {any} hintText
  *     Provides the text that will appear in the hint.
@@ -55,6 +57,7 @@ class HelpHint extends React.Component {
         "data-id": PropTypes.string,
         className: PropTypes.string,
         delayHide: PropTypes.number,
+        delayShow: PropTypes.number,
         iconName: PropTypes.string,
         placement: PropTypes.oneOf([
             Placements.TOP,
@@ -63,13 +66,15 @@ class HelpHint extends React.Component {
             Placements.RIGHT
         ]),
         hintText: PropTypes.any.isRequired,
-        link: PropTypes.string
+        link: PropTypes.string,
+        tooltipProps: PropTypes.object,
     };
 
     static defaultProps = {
         "data-id": "helpHint",
         delayHide: 400,
-        className: ""
+        delayShow: 0,
+        className: "",
     };
 
     _handleClick = (e) => {
@@ -167,7 +172,9 @@ class HelpHint extends React.Component {
                     place={this._getPlacement()}
                     className={this.tooltipClassName}
                     effect="solid"
-                    delayHide={this.props.delayHide}>
+                    delayShow={this.props.delayShow}
+                    delayHide={this.props.delayHide}
+                    {...this.props.tooltipProps}>
                     {this.props.hintText}
                     {this.maybeRenderLink()}
                 </ReactTooltip>

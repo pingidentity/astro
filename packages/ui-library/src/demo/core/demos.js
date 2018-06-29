@@ -793,6 +793,27 @@ module.exports = [
                         pathToDemoSource: "demo_components_general_SelectTextDemo.jsx.html"
                     },
                     {
+                        label: "Copy Button",
+                        demo: require("../components/utils/CopyButtonDemo"),
+                        pathToDoc: "components/utils/CopyButton.jsx",
+                        pathToSource: "components_utils_CopyButton.jsx.html",
+                        pathToDemoSource: "demo_components_utils_CopyButtonDemo.jsx.html"
+                    },
+                    {
+                        label: "Copy Field",
+                        demo: require("../components/utils/CopyFieldDemo"),
+                        pathToDoc: "components/utils/CopyField.jsx",
+                        pathToSource: "components_utils_CopyField.jsx.html",
+                        pathToDemoSource: "demo_components_utils_CopyFieldDemo.jsx.html"
+                    },
+                    {
+                        label: "Copy Icon",
+                        demo: require("../components/utils/CopyIconDemo"),
+                        pathToDoc: "components/utils/CopyIcon.jsx",
+                        pathToSource: "components_utils_CopyIcon.jsx.html",
+                        pathToDemoSource: "demo_components_utils_CopyIconDemo.jsx.html"
+                    },
+                    {
                         label: "Unit Input",
                         demo: require("../components/general/UnitInputDemo"),
                         pathToDoc: "components/general/UnitInput.jsx",

@@ -3226,9 +3226,23 @@ label {
 .input-icon {
     color: $color-midnight;
     font-size: 16px;
-    font-weight: bold;
     position: absolute;
     left: $spacing-sm;
     top: 50%;
     transform: translateY(-50%);
+
+    &.icon-search {
+        font-weight: bold;
+    }
+
+    &--right {
+        right: $spacing-sm;
+        left: auto;
+    }
+}
+
+label.input-text--right-icon {
+    input {
+        padding-right: $spacing-xl;
+    }
 }

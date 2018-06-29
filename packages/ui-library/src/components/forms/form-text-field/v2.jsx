@@ -207,6 +207,7 @@ class Stateless extends React.Component {
         onChange: PropTypes.func,
         onValueChange: PropTypes.func,
         onBlur: PropTypes.func,
+        onClick: PropTypes.func,
         onFocus: PropTypes.func,
         onKeyDown: PropTypes.func,
         onKeyPress: PropTypes.func,
@@ -243,6 +244,7 @@ class Stateless extends React.Component {
         showReveal: PropTypes.bool,
         showSave: PropTypes.bool,
         showUndo: PropTypes.bool,
+        iconName: PropTypes.string,
 
         children: PropTypes.node
     };
@@ -252,6 +254,7 @@ class Stateless extends React.Component {
         errorClassName: "",
         value: "",
         onBlur: _.noop,
+        onClick: _.noop,
         onChange: _.noop,
         onFocus: _.noop,
         onKeyDown: _.noop,
@@ -440,7 +443,8 @@ class Stateless extends React.Component {
                 "masking-controls": this.props.showReveal,
                 readonly: this.props.readOnly,
                 required: this.props.required,
-                "value-entered": this.props.value || this.props.value !== ""
+                "value-entered": this.props.value || this.props.value !== "",
+                "input-text--right-icon": this.props.iconName,
             }),
             undo = Translator.translate("undo"),
             save = Translator.translate("save"),
@@ -457,7 +461,7 @@ class Stateless extends React.Component {
                 helpClassName={this.props.helpClassName}
                 style={this.state.labelWidth ? { width: this.state.labelWidth } : null}>
 
-                <span className="input-container" ref="input-container">
+                <span className="input-container" ref="input-container" onClick={this.props.onClick}>
                     <input
                         className={this.props.inputClassName}
                         onFocus={this._handleFocus}
@@ -522,6 +526,9 @@ class Stateless extends React.Component {
                         </a>
                     )}
                     {this.props.controls}
+                    {this.props.iconName &&
+                        <span className={`input-icon input-icon--right icon-${this.props.iconName}`}/>
+                    }
                     {this.props.errorMessage && (
                         <FormError.Icon data-id={this.props["data-id"] + "-error-message-icon"} />
                     )}
