@@ -1,8 +1,9 @@
-var PropTypes = require("prop-types");
-var React = require("react"),
-    classnames = require("classnames"),
-    Utils = require("../../util/Utils"),
-    FormRadioInput = require("./FormRadioInput");
+import PropTypes from "prop-types";
+import React from "react";
+import classnames from "classnames";
+import Utils from "../../util/Utils";
+import FormRadioInput from "./FormRadioInput";
+import FormLabel from "./FormLabel";
 
 /**
  * @callback FormRadioGroup~onValueChange
@@ -94,7 +95,9 @@ class FormRadioGroup extends React.Component {
         selected: PropTypes.any,
         onValueChange: PropTypes.func,
         disabled: PropTypes.bool,
-        stacked: PropTypes.bool
+        stacked: PropTypes.bool,
+        label: PropTypes.string,
+        labelHelpText: PropTypes.string,
     };
 
     static defaultProps = {
@@ -108,7 +111,7 @@ class FormRadioGroup extends React.Component {
     };
 
     _getRadioButtons = () => {
-        return this.props.items.map(function (item) {
+        return this.props.items.map((item) => {
             var radioDisabled = this.props.disabled || item.disabled;
 
             var className = classnames("input-radio", "group", this.props.className, {
@@ -132,7 +135,7 @@ class FormRadioGroup extends React.Component {
                     helpTarget={item.helpTarget}
                 />
             );
-        }.bind(this));
+        });
     };
 
     componentWillMount() {
@@ -147,8 +150,20 @@ class FormRadioGroup extends React.Component {
     }
 
     render() {
-        return <div data-id={this.props["data-id"]} className="list">{this._getRadioButtons()}</div>;
+        return (
+            this.props.label ? (
+                <FormLabel data-id={this.props["data-id"]}
+                disabled={this.props.disabled}
+                value={this.props.label}
+                hint={this.props.labelHelpText}
+                className="list">{this._getRadioButtons()}</FormLabel>
+            ): <div data-id={this.props["data-id"]}
+                    className="list">
+                    {this._getRadioButtons()}
+                </div>
+        );
     }
 }
 
-module.exports = FormRadioGroup;
+export default FormRadioGroup;
+

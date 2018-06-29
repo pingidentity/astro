@@ -173,9 +173,6 @@ module.exports = class extends React.Component {
                     </div>
 
                     <div className="input-row">
-                        <label>
-                            User Group
-                        </label>
                         <FormRadioGroup
                             label="User Group"
                             groupName="user-group"

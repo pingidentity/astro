@@ -210,9 +210,6 @@ module.exports = class extends React.Component {
                         data-id="miscellaneous-section">
 
                         <div className="input-row">
-                            <label>
-                                User Group
-                            </label>
                             <FormRadioGroup
                                 label="User Group"
                                 groupName="user-group"

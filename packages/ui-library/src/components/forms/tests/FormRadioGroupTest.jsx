@@ -1,16 +1,18 @@
 window.__DEV__ = true;
 
+import React from "react";
+import ReactTestUtils from "react-dom/test-utils";
+import TestUtils from "../../../testutil/TestUtils";
+import Utils from "../../../util/Utils";
+import FormRadioGroup from "../FormRadioGroup";
+
 jest.dontMock("../FormRadioGroup");
 jest.dontMock("../FormRadioInput");
 jest.dontMock("../FormLabel");
 
 describe("FormRadioGroup", function () {
-    var React = require("react"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        TestUtils = require("../../../testutil/TestUtils"),
-        Utils = require("../../../util/Utils"),
-        FormRadioGroup = require("../FormRadioGroup"),
-        callback = jest.genMockFunction(),
+
+    const callback = jest.genMockFunction(),
         items = [
             { id: "1", name: "name 1" },
             { id: "2", name: "name 2" }
@@ -231,4 +233,35 @@ describe("FormRadioGroup", function () {
         }).toThrow(expectedError);
     });
 
+    it("renders a label", function () {
+        const component = ReactTestUtils.renderIntoDocument(
+            <FormRadioGroup
+                data-id="test-radio-group"
+                groupName="test_radio_group"
+                onValueChange={callback}
+                items={items}
+                label="foo"/>
+        );
+
+        const element = TestUtils.findRenderedDOMNodeWithDataId(component, "test-radio-group");
+
+        expect(element).toBeTruthy();
+    });
+
+    it("doesn't render label if no label prop is passed", function () {
+        const component = ReactTestUtils.renderIntoDocument(
+                <FormRadioGroup
+                    data-id="test-radio-group"
+                    groupName="test_radio_group"
+                    onValueChange={callback}
+                    items={items}
+                    />
+            );
+
+        const element = TestUtils.findRenderedDOMNodeWithDataId(component, "test-radio-group-container");
+
+        expect(element).toEqual(null);
+    });
+
 });
+
