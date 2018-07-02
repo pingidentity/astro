@@ -113,8 +113,8 @@ class SectionStateless extends React.Component {
             PropTypes.object
         ]),
         detailsText: PropTypes.shape({
-            collapsed: PropTypes.string,
-            expanded: PropTypes.string
+            collapsed: PropTypes.oneOfType([ PropTypes.node, PropTypes.string ]),
+            expanded: PropTypes.oneOfType([ PropTypes.node, PropTypes.string ])
         })
     };
 
