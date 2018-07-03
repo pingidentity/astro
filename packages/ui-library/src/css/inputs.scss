@@ -83,17 +83,21 @@ textarea {
     }
 }
 
+.label-text {
+    @include text-label;
+}
+
 label {
     position: relative;
     display: inline-block;
     box-sizing: border-box;
     margin: 0 20px 0 0;
-    font-size: 13px;
     text-transform: uppercase;
     vertical-align: top;
     line-height: 1em;
-    font-family: $font-pn-regular;
     cursor: default;
+
+    @include text-label;
 
     .modifier_strip-input-margins & {
         // this is for layouts that don't play well with the built-in margins inputs have
@@ -114,7 +118,6 @@ label {
     }
 
     .label-text {
-        color: $color-elephant;
         margin: 0 0 8px;
         text-align: left;
 
@@ -435,7 +438,8 @@ label {
         }
         .label-text {
             text-transform: none;
-            color: $color-midnight;
+
+            @include text-value;
         }
         input[type=radio] {
             position: absolute;
@@ -3066,72 +3070,33 @@ label {
     display: inline-block;
     vertical-align: bottom;
 
-    @include tooltip-menu;
-
     .collapsible-link {
         text-transform: none;
         padding: 0;
     }
-    .tooltip-menu {
-        top: calc(100% + 10px);
-        font-size: 14px;
-
-        .tooltip-menu-search {
-            input {
-                width: 330px;
-            }
-        }
-        .tooltip-menu-options {
-            width: 350px;
-        }
-        .tooltip-menu-option,
-        .tooltip-menu-option-title {
-            padding: 11px 5px 9px;
-            margin: 0 10px;
-            border-bottom: 1px solid $color-cinder-block;
-        }
-        .tooltip-menu-option {
-            color: $color-midnight;
-
-            &:last-child {
-                border-bottom: none;
-            }
-        }
-        .tooltip-menu-option-title {
-            color: $color-walrus;
-            background-color: $color-white;
-
-            .icon-clear {
-                &:before {
-                    font-size: 11px;
-                    margin: 0 0 0 7px;
-                }
-            }
-            .country-label {
-                color: $color-elephant;
-            }
-        }
-        .timezone-offset {
-            float: right;
-        }
+    .popup-frame {
+        width: 330px;
     }
-    &.countries {
-        .tooltip-menu-search {
+
+    &__clear-country {
+        font-size: 10px !important;
+        vertical-align: baseline;
+        margin: 0 0 0 5px;
+    }
+    &__selected-country {
+        margin: 0 0 0 10px;
+        color: $color-midnight;
+        text-transform: none;
+        font-size: 14px;
+    }
+    &__offset {
+        float: right;
+    }
+    &.input-timezone--country-selected {
+        .popover-search {
             height: 0;
             overflow: hidden;
-            margin: 0;
-
-            @include opacity(0);
-        }
-    }
-    &.align-inputs {
-        vertical-align: bottom;
-
-        .label-text {
-            margin-bottom: 20px;
-        }
-        .collapsible-link {
-            height: 28px;
+            opacity: 0;
         }
     }
 }

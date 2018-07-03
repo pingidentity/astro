@@ -13,6 +13,10 @@ var React = require("react"),
     Utils = require("../../util/Utils.js"),
     _ = require("underscore");
 
+import Popover from "../tooltips/Popover";
+
+const PopoverBase = Popover.Base;
+
 
 /**
 * @function FormTimeZone~getZoneNameDisplayValue
@@ -110,6 +114,7 @@ var getZoneNameDisplayValue = function (zoneName) {
 *
 **/
 
+
 class FormTimeZone extends React.Component {
     static propTypes = {
         stateless: PropTypes.bool
@@ -142,10 +147,10 @@ class FormTimeZone extends React.Component {
     }
 }
 
-
 var LABEL_DEFAULTS = {
     COUNTRY: "Country",
-    "SELECT-COUNTRY": "Select a Country"
+    "SELECT-COUNTRY": "Select a Country",
+    CLEAR: "Clear timezone",
 };
 
 class TimeZoneStateless extends React.Component {
@@ -168,22 +173,18 @@ class TimeZoneStateless extends React.Component {
         selectedIndex: PropTypes.number,
         value: PropTypes.string,
     };
-
-    static defaultProps = function () {
-
-        return {
-            countryLabel: LABEL_DEFAULTS.COUNTRY,
-            filterByCountry: undefined,
-            onValueChange: _.noop,
-            onSearch: _.noop,
-            onToggle: _.noop,
-            open: false,
-            selectCountryLabel: LABEL_DEFAULTS["SELECT-COUNTRY"],
-            selectedIndex: 0,
-            value: moment.tz.guess()
-        };
-    }();
-
+    static defaultProps = {
+        clearLabel: LABEL_DEFAULTS.CLEAR,
+        countryLabel: LABEL_DEFAULTS.COUNTRY,
+        filterByCountry: undefined,
+        onValueChange: _.noop,
+        onSearch: _.noop,
+        onToggle: _.noop,
+        open: false,
+        selectCountryLabel: LABEL_DEFAULTS["SELECT-COUNTRY"],
+        selectedIndex: 0,
+        value: moment.tz.guess()
+    };
     state = {
         countryData: null,
         renderedCountries: [],
@@ -197,11 +198,13 @@ class TimeZoneStateless extends React.Component {
 
     _onCountryChange = (e) => {
         this._onValueChange("country", e.target.getAttribute("data-value"));
+        this._killEvent(e);
     };
 
     _onZoneChange = (e) => {
         var index = e.target.getAttribute("data-index") || e.target.parentElement.getAttribute("data-index");
         this._onValueChange("zone", this.state.renderedZones[index]);
+        this._killEvent(e);
     };
 
     _onValueChange = (type, value) => {
@@ -213,48 +216,47 @@ class TimeZoneStateless extends React.Component {
         if (!this.props.open) {
             return;
         }
-
-        var timezoneInput = ReactDOM.findDOMNode(this.refs["input-timezone"]);
-        EventUtils.callIfOutsideOfContainer(timezoneInput, this.props.onToggle, e);
-        this.props.onSearch(this.props.searchString, 0);
+        EventUtils.callIfOutsideOfContainer(
+            ReactDOM.findDOMNode(this.refs["input-timezone"]),
+            this.props.onToggle,
+            e
+        );
     };
 
     _onKeyDown = (e) => {
-        var newIndex,
-            renderedItems;
+        const selectedIndex = this.props.selectedIndex;
+        let newIndex;
 
         if (e.keyCode === KeyCodes.ENTER) {
 
-            if (this.props.filterByCountry && this.state.renderedZones[this.props.selectedIndex]) {
+            if (this.props.filterByCountry && this.state.renderedZones[selectedIndex]) {
                 this._onValueChange("zone", {
-                    name: this.state.renderedZones[this.props.selectedIndex].name,
-                    offset: this.state.renderedZones[this.props.selectedIndex].offset
+                    name: this.state.renderedZones[selectedIndex].name,
+                    offset: this.state.renderedZones[selectedIndex].offset
                 });
 
-            } else if (this.state.renderedCountries[this.props.selectedIndex]) {
-                this._onValueChange("country", this.state.renderedCountries[this.props.selectedIndex].abbr);
+            } else if (this.state.renderedCountries[selectedIndex]) {
+                this._onValueChange("country", this.state.renderedCountries[selectedIndex].abbr);
             }
 
         } else if (e.keyCode === KeyCodes.ARROW_UP) {
-            newIndex = this.props.selectedIndex - 1;
+            newIndex = selectedIndex - 1;
             newIndex = newIndex < 0 ? 0 : newIndex;
 
-            if (newIndex !== this.props.selectedIndex) {
+            if (newIndex !== selectedIndex) {
                 this.props.onSearch(this.props.searchString, newIndex);
             }
-            this._killEvent(e);
 
         } else if (e.keyCode === KeyCodes.ARROW_DOWN) {
-            renderedItems = this.props.filterByCountry ? "renderedZones" : "renderedCountries";
+            const renderedItems = this.props.filterByCountry ? "renderedZones" : "renderedCountries";
 
-            newIndex = this.props.selectedIndex + 1;
+            newIndex = selectedIndex + 1;
             newIndex = newIndex > this.state[renderedItems].length - 1
                 ? this.state[renderedItems].length - 1 : newIndex;
 
-            if (newIndex !== this.props.selectedIndex) {
+            if (newIndex !== selectedIndex) {
                 this.props.onSearch(this.props.searchString, newIndex);
             }
-            this._killEvent(e);
         }
     };
 
@@ -268,107 +270,127 @@ class TimeZoneStateless extends React.Component {
     };
 
     _renderCountries = () => {
-        var rowCss,
-            self = this;
-
-        return (
-            <div>
-                <div className="tooltip-menu-option-title">
-                    {this.props.selectCountryLabel}
-                </div>
-                <div
-                    className="tooltip-menu-options"
-                    ref="country-menu"
-                    data-id={this.props["data-id"] + "-tooltip-menu-options"}>
-                    {this.state.renderedCountries.map(function (country, i) {
-                        rowCss = i === self.props.selectedIndex ? "selected" : null;
-                        return (
-                            <div
-                                data-value={country.abbr}
-                                onClick={self._onCountryChange}
-                                ref={"country-option-" + i}
-                                key={country.abbr}
-                                className={classnames("tooltip-menu-option", rowCss)}>
-                                {country.name}
-                            </div>
-                        );
-                    })}
-                </div>
+        return ([
+            <div className="label-text underlined" key="country-label">
+                {this.props.selectCountryLabel}
+            </div>,
+            <div
+                key="country-menu"
+                ref="country-menu"
+                className="tooltip-menu-options button-menu__scroller"
+                data-id={`${this.props["data-id"]}-tooltip-menu-options`}>
+                {this.state.renderedCountries.map((country, i) => {
+                    const rowCss = i === this.props.selectedIndex ? "button-menu__button--selected" : null;
+                    return (
+                        <button
+                            data-value={country.abbr}
+                            onClick={this._onCountryChange}
+                            ref={"country-option-" + i}
+                            key={"country-option-" + i}
+                            className={classnames(
+                                "tooltip-menu-option",
+                                "button-menu__button button-menu__button button-menu__button--nopad",
+                                rowCss
+                            )}>
+                            {country.name}
+                        </button>
+                    );
+                })}
             </div>
-        );
+        ]);
     };
 
     _renderZones = () => {
-        var rowCss,
-            self = this;
-
         return (
             <div>
                 {zonesMetadata.countries[this.props.filterByCountry] && (
-                    <div className="tooltip-menu-option-title" data-id="selected-country">
-                        <div className="country-label">{this.props.countryLabel}</div>
-                        {zonesMetadata.countries[this.props.filterByCountry].name}
-                        <a
-                            data-id={this.props["data-id"] + "-clear-country"}
-                            data-value=""
-                            className="icon-clear"
-                            onClick={this._onCountryChange}>
-                        </a>
+                    <div data-id="selected-country">
+                        <div className="label-text underlined">
+                            {this.props.countryLabel}:
+                            <span className="input-timezone__selected-country">
+                                {zonesMetadata.countries[this.props.filterByCountry].name}
+                            </span>
+                            <a
+                                data-id={`${this.props["data-id"]}-clear-country`}
+                                data-value=""
+                                className="input-timezone__clear-country icon-clear"
+                                onClick={this._onCountryChange}
+                            />
+                        </div>
                     </div>
                 )}
                 <div
-                    className="tooltip-menu-options"
+                    className="tooltip-menu-options button-menu__scroller"
                     ref="zone-menu"
-                    data-id={this.props["data-id"] + "-tooltip-menu-options"}>
+                    data-id={`${this.props["data-id"]}-tooltip-menu-options`}>
                     {this.state.renderedZones.map(function (tz, i) {
-                        rowCss = i === self.props.selectedIndex ? "selected" : null;
+                        const rowCss = i === this.props.selectedIndex ? "button-menu__button--selected" : null;
                         return (
-                            <div
+                            <button
                                 data-index={i}
-                                onClick={self._onZoneChange}
+                                onClick={this._onZoneChange}
                                 ref={"zone-option-" + i}
-                                key={tz.name}
-                                className={classnames("tooltip-menu-option", rowCss)}>
+                                key={"zone-option-" + i}
+                                className={classnames(
+                                    "tooltip-menu-option",
+                                    "button-menu__button button-menu__button button-menu__button--nopad",
+                                    rowCss
+                                )}>
                                 <span className="timezone-abbr">{tz.abbr}</span>
                                 &nbsp;-&nbsp;
                                 <span className="timezone-name">{getZoneNameDisplayValue(tz.name)}</span>
-                                <span className="timezone-offset">{tz.time}</span>
-                            </div>
+                                <span className="timezone-offset input-timezone__offset">{tz.time}</span>
+                            </button>
                         );
-                    })}
+                    }.bind(this))}
                 </div>
             </div>
         );
     };
 
+    _renderLabel = () => {
+        return (
+            <CollapsibleLink
+                data-id={`${this.props["data-id"]}-collapsible-link`}
+                title={this.props.displayValue || this.props.value}
+                expanded={this.props.open}
+                onToggle={this.props.onToggle}
+            />
+        );
+    }
+
     _refreshData = (nextProps) => {
-        var countryZones,
-            countryZoneNames,
-            filteredCountries,
-            newState = {},
-            searchString = nextProps.searchString ? nextProps.searchString.toLowerCase() : "";
+        let newState = {};
+        const searchString = nextProps.searchString ? nextProps.searchString.toLowerCase() : "";
+        const currentUtcTime = moment().utc();
 
-        // if a country is passed/selected, get the zones for that country
-        if (nextProps.filterByCountry) {
+        // refresh the time for each of the zones
+        newState.zoneData = this.state.zoneData.map(function (tz) {
+            return {
+                abbr: tz.abbr,
+                name: tz.name,
+                time: moment.tz(currentUtcTime, tz.name).format("h:mm A"),
+                offset: tz.offset
+            };
+        });
 
-            if (zonesMetadata.countries[nextProps.filterByCountry]) {
-                countryZoneNames = zonesMetadata.countries[nextProps.filterByCountry].zones;
+        // if a country is passed-in/selected, get the zones for that country ordered by the time offset
+        if (nextProps.filterByCountry && zonesMetadata.countries[nextProps.filterByCountry]) {
+            const countryZoneNames = zonesMetadata.countries[nextProps.filterByCountry].zones.reverse();
 
-                countryZones = this.state.zoneData.filter(function (zone) {
-                    return countryZoneNames.indexOf(zone.name) > -1;
-                });
-                countryZones = _.sortBy(countryZones, function (country) {
-                    return country.offset;
-                });
-                countryZones.reverse();
+            let countryZones = this.state.zoneData.filter(function (zone) {
+                return countryZoneNames.indexOf(zone.name) > -1;
+            });
+            countryZones = _.sortBy(countryZones, function (country) {
+                return country.offset;
+            });
 
-            } else {
-                countryZones = this.state.zoneData;
-            }
             newState.renderedZones = countryZones;
 
         // if a country is not yet selected, filter the all countries by the search text has been entered
         } else {
+            let filteredCountries;
+
             if (searchString) {
                 filteredCountries = this.state.countryData.filter(function (country) {
                     return country.name.toLowerCase().indexOf(searchString) > -1;
@@ -387,12 +409,13 @@ class TimeZoneStateless extends React.Component {
         if (!this.props.open) {
             return;
         }
-        var updatedItem = this.props.filterByCountry ? "zone" : "country",
-            menu = ReactDOM.findDOMNode(this.refs[updatedItem + "-menu"]),
-            menuItem = ReactDOM.findDOMNode(this.refs[updatedItem + "-option-" + this.props.selectedIndex]);
+
+        const updatedItem = this.props.filterByCountry ? "zone" : "country";
+        const menuItem = ReactDOM.findDOMNode(this.refs[updatedItem + "-option-" + this.props.selectedIndex]);
 
         if (menuItem && menuItem.offsetTop) {
-            menu.scrollTop = menuItem.offsetTop;
+            const menu = ReactDOM.findDOMNode(this.refs[updatedItem + "-menu"]);
+            menu.scrollTop = menuItem.offsetTop + 1; // add 1 for the border on each option
         }
     };
 
@@ -404,8 +427,8 @@ class TimeZoneStateless extends React.Component {
     };
 
     _getCountryData = () => {
-        var countryCode,
-            countryData = [];
+        let countryCode;
+        let countryData = [];
 
         for (countryCode in zonesMetadata.countries) {
             countryData.push(zonesMetadata.countries[countryCode]);
@@ -417,8 +440,8 @@ class TimeZoneStateless extends React.Component {
     };
 
     _getZoneData = () => {
-        var currentUtcTime = moment().utc(),
-            zoneNames = moment.tz.names();
+        const currentUtcTime = moment().utc();
+        const zoneNames = moment.tz.names();
 
         return zoneNames.map(function (tz) {
             return {
@@ -448,21 +471,6 @@ class TimeZoneStateless extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-
-        // refresh the time for each of the zones
-        var currentUtcTime = moment().utc();
-        this.setState({
-            zoneData: this.state.zoneData.map(function (tz) {
-                return {
-                    abbr: tz.abbr,
-                    name: tz.name,
-                    time: moment.tz(currentUtcTime, tz.name).format("h:mm A"),
-                    offset: tz.offset
-                };
-            })
-
-        });
-
         this._refreshData(nextProps);
     }
 
@@ -474,9 +482,9 @@ class TimeZoneStateless extends React.Component {
     }
 
     render() {
-        var classNames = {
+        const classNames = {
             "form-error": !!this.props.errorMessage,
-            countries: !!this.props.filterByCountry
+            "input-timezone--country-selected": !!this.props.filterByCountry
         };
 
         return (
@@ -486,34 +494,41 @@ class TimeZoneStateless extends React.Component {
                 className={classnames("input-timezone", classNames, this.props.className)}
                 hint={this.props.labelHelpText}
                 helpClassName={this.props.helpClassName}
-                ref="input-timezone" >
-                <CollapsibleLink
-                    data-id={this.props["data-id"] + "-collapsible-link"}
-                    title={this.props.displayValue || this.props.value}
-                    expanded={this.props.open}
-                    onToggle={this.props.onToggle}
-                />
-                {this.props.open && (
-                    <div className="tooltip-menu" data-id="tooltip-menu">
-                        <div className="tooltip-menu-search">
-                            <FormSearchBox data-id={this.props["data-id"] + "-search-input"}
-                                queryString={this.props.searchString}
-                                onValueChange={this._onSearch}
-                                onKeyDown={this._onKeyDown}
-                                onClear={this._clearSearchString}
-                                ref="searchString"
-                            />
-                        </div>
-                        {this.props.filterByCountry ? this._renderZones() : this._renderCountries()}
+                ref="input-timezone">
+
+                <PopoverBase
+                    data-id="tooltip-menu"
+                    label={this._renderLabel()}
+                    open={this.props.open}
+                    placement="right"
+                    padded>
+                    <div className="popover-search">
+                        <FormSearchBox
+                            data-id={`${this.props["data-id"]}-search-input`}
+                            queryString={this.props.searchString}
+                            onValueChange={this._onSearch}
+                            onKeyDown={this._onKeyDown}
+                            onClear={this._clearSearchString}
+                            ref="searchString"
+                        />
                     </div>
-                )}
+                    {this.props.filterByCountry && this._renderZones()}
+                    {!this.props.filterByCountry && this._renderCountries()}
+                    {this.props.onClear && this.props.value && (
+                        <div className="button-menu__options">
+                            <a className="button-menu__option-link" onClick={this.props.onClear}>
+                                {this.props.clearLabel}
+                            </a>
+                        </div>
+                    )}
+                </PopoverBase>
                 {this.props.errorMessage && (
-                    <FormError.Icon data-id={this.props["data-id"] + "-error-message-icon"} />
+                    <FormError.Icon data-id={`${this.props["data-id"]}-error-message-icon`} />
                 )}
                 {this.props.errorMessage && (
                     <FormError.Message
                         value={this.props.errorMessage}
-                        data-id={this.props["data-id"] + "-error-message"}
+                        data-id={`${this.props["data-id"]}-error-message`}
                     />
                 )}
             </FormLabel>
@@ -544,7 +559,7 @@ class TimeZoneStateful extends React.Component {
     };
 
     _onValueChange = (type, value) => {
-        var newState = {};
+        let newState = {};
 
         if (type === "country") {
             newState.filterByCountry = value;
@@ -554,7 +569,7 @@ class TimeZoneStateful extends React.Component {
             newState.value = value.name;
             newState.offset = value.offset;
             newState.filterByCountry = undefined;
-            this._toggleMenu();
+            newState.open = false;
         }
 
         this.setState(newState);

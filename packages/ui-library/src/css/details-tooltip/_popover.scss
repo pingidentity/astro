@@ -136,8 +136,9 @@ $max-popover-width: 360px;
     color: $color-slate;
     font-size: 15px;
     display: block;
+    box-sizing: border-box;
     padding: 10px 25px;
-    text-align: center;
+    text-align: left;
     border: none;
     height: auto;
     line-height: 1em;
@@ -154,10 +155,34 @@ $max-popover-width: 360px;
     &:active {
         border: none;
     }
+
+    &--nopad {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
 }
 
 .button-menu__button + .button-menu__button {
-    border-top: 1px solid $color-rhino;
+    border-top: 1px solid $color-neutral-80;
+}
+
+.button-menu__button--selected {
+    color: $color-active-blue;
+}
+
+.button-menu__scroller {
+    border-top: 1px solid $color-neutral-80;
+    position: relative;
+    max-height: 305px;
+    overflow: auto;
+}
+
+.button-menu__options {
+    text-transform: none;
+    text-align: center;
+    padding: 15px 0 0;
+    border-top: 1px solid $color-neutral-90;
+    font-size: 14px;
 }
 
 // Styles for Popover Nav Menu
@@ -188,4 +213,30 @@ $max-popover-width: 360px;
     position: absolute;
     top: $spacing-md + 6px;
     left: $spacing-md;
+}
+
+
+
+.popover-search {
+    position: relative;
+    margin: 0 0 15px;
+
+    label {
+        width: 100%;
+    }
+    input {
+        padding-left: 35px;
+    }
+}
+
+.popover-search-clear {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-size: 12px;
+
+    &:before {
+        content: 'X';
+        font-family: $icon-font;
+    }
 }

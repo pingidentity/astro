@@ -54,13 +54,13 @@ describe("FormTimeZone", function () {
     var zoneMetadata = prepZoneMetaData();
 
     function getComponent (opts) {
-        opts = _.defaults(opts || {}, {
+        const options = _.defaults(opts || {}, {
             stateless: false,
             countryLabel: countryLabel,
             "data-id": componentId,
             value: initialValue
         });
-        return ReactTestUtils.renderIntoDocument(<FormTimeZone {...opts} />);
+        return ReactTestUtils.renderIntoDocument(<FormTimeZone {...options} />);
     }
 
     function getValueLink (component) {
@@ -80,15 +80,15 @@ describe("FormTimeZone", function () {
     }
 
     function getCountryZones (countryAbbr) {
-        var countryZoneNames = momentMetadata.countries[countryAbbr].zones,
-            countryZones = zoneMetadata.filter(function (zone) {
-                return countryZoneNames.indexOf(zone.name) > -1;
-            });
+        const countryZoneNames = momentMetadata.countries[countryAbbr].zones;
+        let countryZones;
 
+        countryZones = zoneMetadata.filter(function (zone) {
+            return countryZoneNames.indexOf(zone.name) > -1;
+        });
         countryZones = _.sortBy(countryZones, function (country) {
             return country.offset;
         });
-        countryZones.reverse();
 
         return countryZones;
     }
@@ -102,33 +102,33 @@ describe("FormTimeZone", function () {
     });
 
     it("renders the value link", function () {
-        var component = getComponent(),
-            valueLink = getValueLink(component);
+        const component = getComponent();
+        const valueLink = getValueLink(component);
 
         expect(valueLink).toBeTruthy();
         expect(valueLink.textContent).toEqual(initialValue);
     });
 
     it("stateful: renders the value link without underscores", function () {
-        var component = getComponent({ value: "America/Los_Angeles" }),
-            valueLink = getValueLink(component);
+        const component = getComponent({ value: "America/Los_Angeles" });
+        const valueLink = getValueLink(component);
 
         expect(valueLink).toBeTruthy();
         expect(valueLink.textContent).toEqual("America/Los Angeles");
     });
 
     it("stateless: using getZoneNameDisplayValue renders value link without underscores", function () {
-        var component = getComponent({ value: FormTimeZone.getZoneNameDisplayValue("America/Fort_Nelson") }),
-            valueLink = getValueLink(component);
+        const component = getComponent({ value: FormTimeZone.getZoneNameDisplayValue("America/Fort_Nelson") });
+        const valueLink = getValueLink(component);
 
         expect(valueLink).toBeTruthy();
         expect(valueLink.textContent).toEqual("America/Fort Nelson");
     });
 
     it("renders the menu when the link is clicked", function () {
-        var component = getComponent(),
-            valueLink = getValueLink(component),
-            menu;
+        const component = getComponent();
+        const valueLink = getValueLink(component);
+        let menu;
 
         menu = getMenu(component);
         expect(menu).toBeFalsy();
@@ -140,8 +140,8 @@ describe("FormTimeZone", function () {
     });
 
     it("renders the countries with the proper text", function () {
-        var component = getComponent({ open: true }),
-            countryRows = getRows(component);
+        const component = getComponent({ open: true });
+        const countryRows = getRows(component);
 
         expect(countryRows.length).toEqual(countryMetadata.length);
         expect(countryRows[0].textContent).toEqual(countryMetadata[0].name);
@@ -150,13 +150,13 @@ describe("FormTimeZone", function () {
     });
 
     it("filters the country list when search text is entered", function () {
-        var searchString = "United",
-            component = getComponent({
-                open: true,
-                searchString: searchString
-            }),
-            searchInput = getSearchInput(component),
-            countryRows = getRows(component);
+        const searchString = "United";
+        const component = getComponent({
+            open: true,
+            searchString: searchString
+        });
+        const searchInput = getSearchInput(component);
+        const countryRows = getRows(component);
 
         expect(searchInput.value).toEqual(searchString);
         expect(countryRows.length).toEqual(2); // United Arab Emirates & US
@@ -165,13 +165,13 @@ describe("FormTimeZone", function () {
     });
 
     it("clears the search text when the clear search-text link is clicked", function () {
-        var searchString = "United",
-            component = getComponent({
-                open: true,
-                searchString: searchString
-            }),
-            searchInput = getSearchInput(component),
-            clearSearch = TestUtils.findRenderedDOMNodeWithClass(component, "clear-search");
+        const searchString = "United";
+        const component = getComponent({
+            open: true,
+            searchString: searchString
+        });
+        const searchInput = getSearchInput(component);
+        const clearSearch = TestUtils.findRenderedDOMNodeWithClass(component, "clear-search");
 
         expect(searchInput.value).toEqual(searchString);
         ReactTestUtils.Simulate.click(clearSearch);
@@ -179,9 +179,9 @@ describe("FormTimeZone", function () {
     });
 
     it("selects the country when the country is clicked", function () {
-        var component = getComponent({ open: true }),
-            countryRows = getRows(component),
-            selectedCountry;
+        const component = getComponent({ open: true });
+        const countryRows = getRows(component);
+        let selectedCountry;
 
         ReactTestUtils.Simulate.click(countryRows[3]);
         selectedCountry = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-country");
@@ -189,10 +189,10 @@ describe("FormTimeZone", function () {
     });
 
     it("selects the top country when the ENTER key is pressed while searching", function () {
-        var component = getComponent({ open: true }),
-            countryRows = getRows(component),
-            searchInput = getSearchInput(component),
-            selectedCountry;
+        const component = getComponent({ open: true });
+        const countryRows = getRows(component);
+        const searchInput = getSearchInput(component);
+        let selectedCountry;
 
         ReactTestUtils.Simulate.keyDown(searchInput, { keyCode: KeyboardUtils.KeyCodes.ENTER });
         selectedCountry = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-country");
@@ -201,10 +201,10 @@ describe("FormTimeZone", function () {
     });
 
     it("selects the second country when the UP/DOWN-ARROW keys are pressed then ENTER key is pressed", function () {
-        var component = getComponent({ open: true }),
-            countryRows = getRows(component),
-            searchInput = getSearchInput(component),
-            selectedCountry;
+        const component = getComponent({ open: true });
+        const countryRows = getRows(component);
+        const searchInput = getSearchInput(component);
+        let selectedCountry;
 
         ReactTestUtils.Simulate.keyDown(searchInput, { keyCode: KeyboardUtils.KeyCodes.ARROW_DOWN });
         ReactTestUtils.Simulate.keyDown(searchInput, { keyCode: KeyboardUtils.KeyCodes.ARROW_DOWN });
@@ -216,14 +216,14 @@ describe("FormTimeZone", function () {
     });
 
     it("renders the zones with the proper text", function () {
-        var countryAbbr = "US",
-            component = getComponent({
-                open: true,
-                filterByCountry: countryAbbr
-            }),
-            zoneRows = getRows(component),
-            dataZones = getCountryZones(countryAbbr),
-            zoneName;
+        const countryAbbr = "US";
+        const component = getComponent({
+            open: true,
+            filterByCountry: countryAbbr
+        });
+        const zoneRows = getRows(component);
+        const dataZones = getCountryZones(countryAbbr);
+        let zoneName;
 
         expect(zoneRows.length).toEqual(dataZones.length);
 
@@ -235,28 +235,27 @@ describe("FormTimeZone", function () {
         }
     });
 
-    it("renders all zones if a bad country code is passed in", function () {
-        var countryAbbr = "ALL",
-            component = getComponent({
-                open: true,
-                filterByCountry: countryAbbr
-            }),
-            zoneRows = getRows(component);
+    it("renders no zones if a bad country code is passed in", function () {
+        const countryAbbr = "ALL";
+        const component = getComponent({
+            open: true,
+            filterByCountry: countryAbbr
+        });
+        const zoneRows = getRows(component);
 
-        expect(zoneRows.length).toEqual(zoneMetadata.length);
+        expect(zoneRows.length).toEqual(0);
     });
 
     it("selects the zone when the zone is clicked", function () {
-        var countryAbbr = "US",
-            component = getComponent({
-                open: true,
-                filterByCountry: countryAbbr
-            }),
-            testIndex = 4,
-            valueLink,
-            zoneRows = getRows(component),
-            zoneRowName = TestUtils.findRenderedDOMNodeWithClass(zoneRows[testIndex], "timezone-name").textContent;
-
+        const countryAbbr = "US";
+        const component = getComponent({
+            open: true,
+            filterByCountry: countryAbbr
+        });
+        const testIndex = 4;
+        const zoneRows = getRows(component);
+        const zoneRowName = TestUtils.findRenderedDOMNodeWithClass(zoneRows[testIndex], "timezone-name").textContent;
+        let valueLink;
 
         ReactTestUtils.Simulate.click(zoneRows[testIndex]);
         valueLink = getValueLink(component);
@@ -264,16 +263,16 @@ describe("FormTimeZone", function () {
     });
 
     it("selects the top zone when the ENTER key is pressed while searching", function () {
-        var countryAbbr = "US",
-            component = getComponent({
-                open: true,
-                filterByCountry: countryAbbr
-            }),
-            searchInput = getSearchInput(component),
-            testIndex = 0,
-            valueLink,
-            zoneRows = getRows(component),
-            zoneRowName = TestUtils.findRenderedDOMNodeWithClass(zoneRows[testIndex], "timezone-name").textContent;
+        const countryAbbr = "US";
+        const component = getComponent({
+            open: true,
+            filterByCountry: countryAbbr
+        });
+        const searchInput = getSearchInput(component);
+        const testIndex = 0;
+        const zoneRows = getRows(component);
+        const zoneRowName = TestUtils.findRenderedDOMNodeWithClass(zoneRows[testIndex], "timezone-name").textContent;
+        let valueLink;
 
         ReactTestUtils.Simulate.keyDown(searchInput, { keyCode: KeyboardUtils.KeyCodes.ENTER });
         valueLink = getValueLink(component);
@@ -282,15 +281,15 @@ describe("FormTimeZone", function () {
     });
 
     it("selects the second zone when the DOWN-ARROW key is pressed then ENTER key is pressed", function () {
-        var countryAbbr = "US",
-            component = getComponent({
-                open: true,
-                filterByCountry: countryAbbr
-            }),
-            searchInput = getSearchInput(component),
-            valueLink,
-            zoneRows = getRows(component),
-            zoneRowName = TestUtils.findRenderedDOMNodeWithClass(zoneRows[1], "timezone-name").textContent;
+        const countryAbbr = "US";
+        const component = getComponent({
+            open: true,
+            filterByCountry: countryAbbr
+        });
+        const searchInput = getSearchInput(component);
+        const zoneRows = getRows(component);
+        const zoneRowName = TestUtils.findRenderedDOMNodeWithClass(zoneRows[1], "timezone-name").textContent;
+        let valueLink;
 
         ReactTestUtils.Simulate.keyDown(searchInput, { keyCode: KeyboardUtils.KeyCodes.ARROW_DOWN });
         ReactTestUtils.Simulate.keyDown(searchInput, { keyCode: KeyboardUtils.KeyCodes.ENTER });
@@ -300,14 +299,14 @@ describe("FormTimeZone", function () {
     });
 
     it("calls global click handler when a click occurs outside of component", function () {
-        var component = getComponent({
-                stateless: true,
-                open: true,
-                onSearch: jest.genMockFunction(),
-                onToggle: jest.genMockFunction(),
-                onValueChange: jest.genMockFunction()
-            }),
-            handler = component.refs.TimeZoneStateless._onGlobalClick;
+        const component = getComponent({
+            stateless: true,
+            open: true,
+            onSearch: jest.genMockFunction(),
+            onToggle: jest.genMockFunction(),
+            onValueChange: jest.genMockFunction()
+        });
+        const handler = component.refs.TimeZoneStateless._onGlobalClick;
 
         expect(component.props.onToggle).not.toBeCalled();
 
@@ -322,13 +321,13 @@ describe("FormTimeZone", function () {
     });
 
     it("skips the global click handler if not open and click on component", function () {
-        var component = getComponent({
-                stateless: true,
-                onToggle: jest.genMockFunction(),
-                onSearch: jest.genMockFunction(),
-                onValueChange: jest.genMockFunction()
-            }),
-            handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
+        const component = getComponent({
+            stateless: true,
+            onToggle: jest.genMockFunction(),
+            onSearch: jest.genMockFunction(),
+            onValueChange: jest.genMockFunction()
+        });
+        const handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
 
         // click on component
         handler({ target: { dataset: component } });
@@ -337,13 +336,13 @@ describe("FormTimeZone", function () {
     });
 
     it("detaches global listeners on unmount", function () {
-        var component = getComponent({
-                stateless: true,
-                onToggle: jest.genMockFunction(),
-                onSearch: jest.genMockFunction(),
-                onValueChange: jest.genMockFunction()
-            }),
-            componentRef = component.refs.TimeZoneStateless;
+        const component = getComponent({
+            stateless: true,
+            onToggle: jest.genMockFunction(),
+            onSearch: jest.genMockFunction(),
+            onValueChange: jest.genMockFunction()
+        });
+        const componentRef = component.refs.TimeZoneStateless;
 
         expect(window.addEventListener).toBeCalledWith("click", componentRef._onGlobalClick);
 
@@ -352,11 +351,11 @@ describe("FormTimeZone", function () {
     });
 
     it("calls function for list placement on componentDidUpdate", function () {
-        var component = getComponent({
+        const component = getComponent({
             open: true,
             stateless: true
         });
-        var componentRef = component.refs.TimeZoneStateless;
+        const componentRef = component.refs.TimeZoneStateless;
 
         componentRef._setListPosition = jest.genMockFunction();
         componentRef.componentDidUpdate();
@@ -364,31 +363,31 @@ describe("FormTimeZone", function () {
     });
 
     it("does not render the error when not provided", function () {
-        var component = getComponent(),
-            errorIcon = TestUtils.findRenderedDOMNodeWithDataId(component, componentId + "-error-message-icon"),
-            errorMessage = TestUtils.findRenderedDOMNodeWithDataId(component, componentId + "-error-message");
+        const component = getComponent();
+        const errorIcon = TestUtils.findRenderedDOMNodeWithDataId(component, componentId + "-error-message-icon");
+        const errorMessage = TestUtils.findRenderedDOMNodeWithDataId(component, componentId + "-error-message");
 
         expect(errorIcon).toBeFalsy();
         expect(errorMessage).toBeFalsy();
     });
 
     it("renders the error message when provided", function () {
-        var errorMessage = "warning!",
-            component = getComponent({
-                errorMessage: errorMessage
-            }),
-            errorIcon = TestUtils.findRenderedDOMNodeWithDataId(component, "timezone-error-message-icon"),
-            errorMessage = TestUtils.findRenderedDOMNodeWithDataId(component, "timezone-error-message");
+        const errorMessageText = "warning!";
+        const component = getComponent({
+            errorMessage: errorMessageText
+        });
+        const errorIcon = TestUtils.findRenderedDOMNodeWithDataId(component, "timezone-error-message-icon");
+        const errorMessage = TestUtils.findRenderedDOMNodeWithDataId(component, "timezone-error-message");
 
         expect(errorIcon).toBeTruthy();
         expect(errorMessage).toBeTruthy();
-        expect(errorMessage).toEqual(errorMessage);
+        expect(errorMessage.textContent).toEqual(errorMessageText);
     });
 
     it("public function isValidTimeZone works properly", function () {
-        var component = getComponent(),
-            checkZone = component.refs.TimeZoneStateful.isValidTimeZone("badZoneName"),
-            realZoneName = zoneMetadata[10].name;
+        const component = getComponent();
+        const realZoneName = zoneMetadata[10].name;
+        let checkZone = component.refs.TimeZoneStateful.isValidTimeZone("badZoneName");
 
         expect(checkZone).toEqual(false);
 
@@ -398,20 +397,20 @@ describe("FormTimeZone", function () {
     });
 
     it("renders the displayValue when provided", function () {
-        var displayValue = "MDT",
-            component = getComponent({
-                open: true,
-                value: "America/Denver",
-                displayValue: displayValue
-            }),
-            linkValue = getValueLink(component);
+        const displayValue = "MDT";
+        const component = getComponent({
+            open: true,
+            value: "America/Denver",
+            displayValue: displayValue
+        });
+        const linkValue = getValueLink(component);
 
         expect(linkValue.textContent).toEqual(displayValue);
     });
 
     it("does not render the label text when not specified", function () {
-        var component = getComponent(),
-            renderedLabelText = TestUtils.findRenderedDOMNodeWithDataId(component, "label");
+        const component = getComponent();
+        const renderedLabelText = TestUtils.findRenderedDOMNodeWithDataId(component, "label");
 
         expect(renderedLabelText).toBeFalsy();
     });
@@ -422,15 +421,15 @@ describe("FormTimeZone", function () {
     does not populate its content until it is displayed, the content of the tooltip cannot yet be tested.
     */
     it("renders the label text and help text when specified", function () {
-        var labelText = "My TZ Picker",
-            labelHelpText = "Help text here!",
-            component = getComponent({
-                labelText: labelText,
-                labelHelpText: labelHelpText
-            }),
-            renderedHelpIcon = TestUtils.findRenderedDOMNodeWithClass(component, "icon-help"),
-            // renderedHelpText = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text"),
-            renderedLabelText = TestUtils.findRenderedDOMNodeWithDataId(component, "label");
+        const labelText = "My TZ Picker";
+        const labelHelpText = "Help text here!";
+        const component = getComponent({
+            labelText: labelText,
+            labelHelpText: labelHelpText
+        });
+        const renderedHelpIcon = TestUtils.findRenderedDOMNodeWithClass(component, "icon-help");
+        // const renderedHelpText = TestUtils.findRenderedDOMNodeWithClass(component, "tooltip-text");
+        const renderedLabelText = TestUtils.findRenderedDOMNodeWithDataId(component, "label");
 
         expect(renderedLabelText.textContent).toContain(labelText);
         expect(renderedHelpIcon).toBeTruthy();

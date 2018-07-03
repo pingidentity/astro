@@ -10,13 +10,15 @@ var React = require("react"),
 class FormTimeZoneDemo extends React.Component {
     constructor(props) {
         super(props);
-        var state = {};
+        let state = {};
+
         for (var i = 0; i < this._numDemos; i += 1) {
             state["open" + i] = false;
             state["searchString" + i] = "";
         }
+
         state.value0 = {
-            name: "America/Fort_Nelson",
+            name: "America/Fort Nelson",
             abbr: "MST"
         };
         state.value1 = {
@@ -27,45 +29,61 @@ class FormTimeZoneDemo extends React.Component {
     }
 
     _numDemos = 2;
+    _selectText = "Select a timezone";
 
     _handleSearch = (demoIndex, value, index) => {
-        var newState = {};
-        newState["searchString" + demoIndex] = value;
-        newState["selectedIndex" + demoIndex] = index;
-        this.setState(newState);
+        this.setState({
+            ["searchString" + demoIndex]: value,
+            ["selectedIndex" + demoIndex]: index,
+        });
     };
 
     _handleChange = (demoIndex, type, value) => {
-        var newState = {};
+        let newState = {};
 
         if (type === "country") {
-            newState["filterByCountry" + demoIndex] = value;
-            newState["searchString" + demoIndex] = "";
+            newState[`filterByCountry${demoIndex}`] = value;
 
         } else if (type === "zone") {
-            newState["value" + demoIndex] = value;
-            newState["filterByCountry" + demoIndex] = undefined;
-            newState["open" + demoIndex] = false;
+            newState[`displayValue${demoIndex}`] = demoIndex === 1
+                ? value.abbr
+                : FormTimeZone.getZoneNameDisplayValue(value.name);
+            newState[`filterByCountry${demoIndex}`] = undefined;
+            newState[`open${demoIndex}`] = false;
+            newState[`searchString${demoIndex}`] = "";
+            newState[`value${demoIndex}`] = value;
         }
 
         this.setState(newState);
     };
 
     _handleToggle = (demoIndex) => {
-        var newState = {};
-        newState["open" + demoIndex] = !this.state["open" + demoIndex];
-        this.setState(newState);
+        this.setState({ [`open${demoIndex}`]: !this.state[`open${demoIndex}`] });
     };
+
+    _handleClear = (demoIndex) => {
+        this.setState({
+            [`open${demoIndex}`]: false,
+            [`displayValue${demoIndex}`]: this._selectText,
+            [`filterByCountry${demoIndex}`]: "",
+            [`searchString${demoIndex}`]: "",
+        });
+    }
 
     componentDidMount() {
         for (var i = 0; i < this._numDemos; i += 1) {
             this["_handleSearch" + i] = this._handleSearch.bind(null, i);
             this["_handleChange" + i] = this._handleChange.bind(null, i);
+            this["_handleClear" + i] = this._handleClear.bind(null, i);
             this["_handleToggle" + i] = this._handleToggle.bind(null, i);
         }
     }
 
     render() {
+
+        console.log("this.state.displayValue0", this.state.displayValue0);
+
+
         return (
             <div>
                 <div className="input-row">
@@ -73,15 +91,16 @@ class FormTimeZoneDemo extends React.Component {
                         data-id="timezone-stateless"
                         stateless={true}
                         filterByCountry={this.state.filterByCountry0}
-                        labelText="Stateless Version"
+                        labelText="Stateless Version with clear"
                         onValueChange={this._handleChange0}
                         onSearch={this._handleSearch0}
                         onToggle={this._handleToggle0}
+                        onClear={this.state.displayValue0 !== this._selectText && this._handleClear0}
                         open={this.state.open0}
                         searchString={this.state.searchString0}
                         selectedIndex={this.state.selectedIndex0}
                         value={this.state.value0.name}
-                        displayValue={FormTimeZone.getZoneNameDisplayValue(this.state.value0.name)}
+                        displayValue={this.state.displayValue0}
                         ref="tzStateless"
                     />
                 </div>
