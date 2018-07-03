@@ -1866,11 +1866,11 @@ input[type=file] {
 
     @mixin requiredPadding {
         font-family: $font-stack;
-        padding-left: 15px;
+        padding-left: $spacing-md;
     }
 
     @mixin requiredPaddingEntered {
-        padding-left: 10px;
+        padding-left: $spacing-md;
     }
 
     &.input-text,
@@ -1983,7 +1983,7 @@ input[type=file] {
         }
         &.input-select {
             select {
-                padding-left: 10px;
+                @include requiredPaddingEntered;
             }
         }
     }
