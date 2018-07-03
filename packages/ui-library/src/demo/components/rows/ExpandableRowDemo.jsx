@@ -6,6 +6,7 @@ import Toggle from "../../../components/forms/form-toggle";
 import DetailsTooltip from "../../../components/tooltips/DetailsTooltip";
 import Button from "../../../components/buttons/Button";
 import LabelValuePairs from "../../../components/layout/LabelValuePairs";
+import ConfirmTooltip from "../../../components/tooltips/ConfirmTooltip";
 
 /**
 * @name ExpandableRowDemo
@@ -233,6 +234,17 @@ class ExpandableRowDemo extends React.Component {
                         </div>,
                         <button className="inline">Resend Invitation</button>
                     ]}
+                />
+                <ExpandableRow
+                    editButton={
+                        <ConfirmTooltip
+                            label=" "
+                            className="edit-btn left"
+                        >Confirm?</ConfirmTooltip>
+                    }
+                    stateless={false}
+                    title="Row With Custom Edit Button"
+                    expanded={false}
                 />
                 {!this.state.rowDeleted && (
                     <ExpandableRow

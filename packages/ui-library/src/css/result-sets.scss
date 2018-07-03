@@ -387,6 +387,25 @@ $expandable-row-gap: 12px;
     }
 }
 
+.edit-btn {
+    // these rules handle the case when a DetailsTooltip is used for the edit button
+    > * {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    &:after {
+        z-index: 1;
+    }
+
+    a {
+        z-index: 2;
+    }
+}
+
 .row-help {
     display: inline-block;
     margin: 0;

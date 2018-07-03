@@ -84,31 +84,29 @@ class ConfirmTooltipBase extends Component {
 
     render() {
         return (
-            <div data-id={this.props["data-id"]}>
-                <DetailsTooltip
-                    {...this.props}
-                    stateless={true}
-                    data-id={`${this.props["data-id"]}-details`}
-                >
-                    {this.props.children}
-                    <div className="button-group">
-                        <Button
-                            data-id={`${this.props["data-id"]}-button`}
-                            label={this.props.buttonLabel || "Confirm"}
-                            type={this.props.buttonType}
-                            onClick={this.props.onConfirm}
-                            disabled={this.props.disableSave}
-                        />
-                        <br /> <br />
-                        <a
-                            label="Cancel" data-id={`${this.props["data-id"]}-cancel`}
-                            onClick={this.props.onCancel || this.props.onClose}
-                        >
-                            {this.props.cancelText || "Cancel"}
-                        </a>
-                    </div>
-                </DetailsTooltip>
-            </div>
+            <DetailsTooltip
+                {...this.props}
+                stateless={true}
+                data-id={this.props["data-id"]}
+            >
+                {this.props.children}
+                <div className="button-group">
+                    <Button
+                        data-id={`${this.props["data-id"]}-button`}
+                        label={this.props.buttonLabel || "Confirm"}
+                        type={this.props.buttonType}
+                        onClick={this.props.onConfirm}
+                        disabled={this.props.disableSave}
+                    />
+                    <br /> <br />
+                    <a
+                        label="Cancel" data-id={`${this.props["data-id"]}-cancel`}
+                        onClick={this.props.onCancel || this.props.onClose}
+                    >
+                        {this.props.cancelText || "Cancel"}
+                    </a>
+                </div>
+            </DetailsTooltip>
         );
     }
 }
