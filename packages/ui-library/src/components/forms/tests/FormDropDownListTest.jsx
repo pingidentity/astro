@@ -134,6 +134,28 @@ describe("FormDropDownList", function () {
         expect(component.props.onToggle).toBeCalled();
     });
 
+    it("opens list on space when focused", () => {
+        const component = getComponent({ autofocus: true });
+        const select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-input-input");
+
+        expect(document.activeElement).toEqual(select);
+
+        ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.SPACE });
+
+        expect(component.props.onToggle).toBeCalled();
+    });
+
+    it("opens list on enter when focused", () => {
+        const component = getComponent({ autofocus: true });
+        const select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-input-input");
+
+        expect(document.activeElement).toEqual(select);
+
+        ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ENTER });
+
+        expect(component.props.onToggle).toBeCalled();
+    });
+
     it("closes open list on tab when focused", function () {
         var component = getComponent({ open: true, autofocus: true });
         var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-input-input");
@@ -430,16 +452,28 @@ describe("FormDropDownList", function () {
         expect(componentRef._setSearchListPosition).toBeCalled();
     });
 
-    it("sets up groups and options on componentWillMount", function () {
-        var component = getComponent({
+    it("sets up groups and options in constructor", function () {
+        const component = getComponent({
             open: true,
             groups: groups
         });
-        var componentRef = component.refs.FormDropDownListStateless;
+        const componentRef = component.refs.FormDropDownListStateless;
+        const groupById = {
+            1: { label: "Group A", id: 1 },
+            2: { label: "Group B", id: 2 },
+            3: { label: "Group C", id: 3 }
+        };
 
-        componentRef._setupGroups = jest.genMockFunction();
-        componentRef.componentWillMount();
-        expect(componentRef._setupGroups).toBeCalled();
+        const orderedOptions = [
+            { label: "One", value: 1 },
+            { label: "Five", value: 5 },
+            { label: "Four", value: 4, group: 1 },
+            { label: "Three", value: 3, group: 2 },
+            { label: "Two", value: 2, group: 3 }
+        ];
+
+        expect(componentRef._groupById).toEqual(groupById);
+        expect(componentRef._orderedOptions).toEqual(orderedOptions);
     });
 
     it("sets up groups and options on componentWillReceiveProps when options are different", function () {
@@ -542,6 +576,21 @@ describe("FormDropDownList", function () {
         expect(component.props.onToggle).toBeCalled();
     });
 
+    it("calls onValueChange with none option props when enter is pressed and none option is selected", () => {
+        const noneOption = { label: "none" };
+        const component = getComponent({
+            open: true,
+            searchIndex: -1,
+            searchString: "t",
+            searchTime: 0,
+            noneOption
+        });
+
+        const select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
+        ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ENTER });
+        expect(component.props.onValueChange).toBeCalledWith(noneOption);
+    });
+
     it("find and select with enter on grouped options", function () {
         var component = getComponent({
             open: true,
@@ -610,6 +659,7 @@ describe("FormDropDownList", function () {
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ESC });
         expect(component.props.onSearch).toBeCalled();
         expect(component.props.onSearch.mock.calls[0][0]).toBe("");
+        expect(component.props.onToggle).toHaveBeenCalled();
     });
 
     it("find by typing - BOX search clear with esc", function () {
@@ -624,6 +674,7 @@ describe("FormDropDownList", function () {
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ESC });
         expect(component.props.onSearch).toBeCalled();
         expect(component.props.onSearch.mock.calls[0][0]).toBe("");
+        expect(component.props.onToggle).toHaveBeenCalled();
     });
 
     it("find by typing - clear with delay", function () {
@@ -657,8 +708,8 @@ describe("FormDropDownList", function () {
         expect(component.props.onSearch.mock.calls[1][2]).toBe(0); //subtract 1 from searchIndex
     });
 
-    it("up/down arorws do not call onToggle when list is disabled", function () {
-        var component = getComponent({
+    it("up/down arrows do not call onToggle when list is disabled", function () {
+        const component = getComponent({
             open: false,
             disabled: true,
             searchIndex: 1,

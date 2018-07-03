@@ -1,15 +1,22 @@
-var PropTypes = require("prop-types");
-var React = require("react"),
-    ReactDOM = require("react-dom"),
-    FormLabel = require("./FormLabel"),
-    FormTextField = require("./form-text-field").v2,
-    HelpHint = require("../tooltips/HelpHint"),
-    callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutsideOfContainer,
-    FilterUtils = require("../../util/FilterUtils.js"),
-    KeyboardUtils = require("../../util/KeyboardUtils.js"),
-    Utils = require("../../util/Utils.js"),
-    classnames = require("classnames"),
-    _ = require("underscore");
+import PropTypes from "prop-types";
+import React from "react";
+import ReactDOM from "react-dom";
+import classnames from "classnames";
+import _ from "underscore";
+import FormLabel from "./FormLabel";
+import { v2 as FormTextField } from "./form-text-field";
+import HelpHint from "../tooltips/HelpHint";
+import { callIfOutsideOfContainer } from "../../util/EventUtils.js";
+import { filterFieldContains } from "../../util/FilterUtils.js";
+import {
+    isArrowDown,
+    isArrowUp,
+    isEnter,
+    isEsc,
+    isSpace,
+    isTab
+} from "../../util/KeyboardUtils.js";
+import Utils from "../../util/Utils.js";
 
 /**
 * @function FormDropDownList~filterOptions
@@ -23,15 +30,13 @@ var React = require("react"),
 * @return {array<FormDropDownList~option>}
 *    Returns the list of filtered options
 */
-function filterOptions (options, filterString) {
-    return options.filter(FilterUtils.filterFieldContains.bind(null, "label", filterString));
-}
+const filterOptions = (options, filterString) => options.filter(filterFieldContains.bind(null, "label", filterString));
 
 /**
  * @enum {string}
  * @alias FormDropDownList.SearchTypes
  */
-var SearchTypes = {
+const SearchTypes = {
     KEYBOARD: "keyboard",
     BOX: "box"
 };
@@ -243,7 +248,7 @@ class OptionItem extends React.Component {
     };
 
     render() {
-        var className = {
+        const className = {
             "help-hint-option": this.props.option.helpHintText
         };
         return (
@@ -323,15 +328,17 @@ class FormDropDownListStateless extends React.Component {
         autofocus: false,
     };
 
-    componentWillMount() {
-        this.didPressKey = false;
-        this.inlineMenuStyle = Utils.isIE() ? { border: "none" } : {};
-        this._setupGroups(this.props.options, this.props.groups);
+    didPressKey = false;
+    inlineMenuStyle = Utils.isIE() ? { border: "none" } : {};
+
+    constructor(props) {
+        super(props);
+        this._setupGroups(props);
     }
 
     componentWillReceiveProps(nextProps) {
         if (!_.isEqual(this.props.options, nextProps.options) || !_.isEqual(this.props.groups, nextProps.groups)) {
-            this._setupGroups(nextProps.options, nextProps.groups);
+            this._setupGroups(nextProps);
         }
         if (this.props.open && !nextProps.open) {
             this.didPressKey = false;
@@ -350,13 +357,13 @@ class FormDropDownListStateless extends React.Component {
         window.removeEventListener("click", this._handleGlobalClick);
     }
 
-    _setupGroups = (options, groups) => {
+    _setupGroups = ({ groups, options }) => {
         if (groups) {
             // Groups by id
             this._groupById = {};
-            groups.forEach(function (group) {
+            groups.forEach((group) => {
                 this._groupById[group.id] = group;
-            }.bind(this));
+            });
 
             // Sort all options into groups
             var groupedOptions = {};
@@ -374,11 +381,11 @@ class FormDropDownListStateless extends React.Component {
             if (groupedOptions["undefined"]) {
                 this._orderedOptions = this._orderedOptions.concat(groupedOptions["undefined"]);
             }
-            groups.forEach(function (groupItem) {
+            groups.forEach((groupItem) => {
                 if (groupedOptions[groupItem.id]) {
                     this._orderedOptions = this._orderedOptions.concat(groupedOptions[groupItem.id]);
                 }
-            }.bind(this));
+            });
         }
     };
 
@@ -395,7 +402,7 @@ class FormDropDownListStateless extends React.Component {
     _handleGlobalClick = (e) => {
         // if the click event isn't the click that opened the list
         if (this.props.open && this._clickEvent !== e) {
-            var picker = ReactDOM.findDOMNode(this.refs["input-container"]);
+            const picker = ReactDOM.findDOMNode(this.refs["input-container"]);
 
             //dont close the list if the click is on the select
             callIfOutsideOfContainer(picker, this._closeList, e);
@@ -407,49 +414,35 @@ class FormDropDownListStateless extends React.Component {
         this.props.onSearch("",0,0);
     };
 
-    _getOrderedOptionsIndex = (option) => {
-        var index = -1;
+    _getOrderedOptionsIndex = option => (
+        this.props.groups && option
+        ? this._orderedOptions.findIndex(({ value }) => value === option.value)
+        : -1
+    );
 
-        if (this.props.groups && option) {
-            this._orderedOptions.forEach(function (opt, i) {
-                if (opt.value === option.value) {
-                    index = i;
-                }
-            });
-        }
-        return index;
-    };
+    _isBoxSearch = () => this.props.canAdd || this.props.searchType === SearchTypes.BOX;
 
-    _isBoxSearch = () => {
-        return this.props.canAdd || this.props.searchType === SearchTypes.BOX;
-    };
-
-    _isKeyboardSearch = () => {
-        return !this.props.canAdd && this.props.searchType === SearchTypes.KEYBOARD;
-    };
+    _isKeyboardSearch = () => !this.props.canAdd && this.props.searchType === SearchTypes.KEYBOARD;
 
     _getPrompt = () => {
         if (this._isBoxSearch()) {
-            var className = "select-prompt",
+            const className = "select-prompt",
                 searchClassName = classnames(className, "select-search-prompt"),
                 addClassName = classnames(className, "select-add", { highlighted: this.props.options.length === 0 });
 
             if (this.props.searchString === "") {
                 return <li data-id="search-prompt" className={searchClassName}>{this.props.labelPrompt}</li>;
             } else if (this.props.canAdd) {
+                const cleanSearch = this.props.searchString.toLowerCase().trim();
                 // Cannot add if duplicate
-                for (var i=0; i<this.props.options.length; i+=1) {
-                    if (this.props.options[i].label.toLowerCase().trim() ===
-                            this.props.searchString.toLowerCase().trim()) {
-                        return;
-                    }
-                }
-                return (
-                    <li data-id="add-prompt" className={addClassName} onClick={this._handleAdd}>
+                return this.props.options.some(({ label }) => label.toLowerCase().trim() === cleanSearch)
+                    ? undefined
+                    : (
+                        <li data-id="add-prompt" className={addClassName} onClick={this._handleAdd}>
                         <span className="label">{this.props.labelAdd}</span>
                         <span>{this.props.searchString}</span>
                     </li>
-                );
+                    );
             }
         }
     };
@@ -485,69 +478,81 @@ class FormDropDownListStateless extends React.Component {
      */
     _handleKeyDown = (e) => {
         this.didPressKey = true;
-        if (this.props.open) { // only do search when select list expanded
-            var search,
-                time = Date.now();
+        const { keyCode } = e;
+        const {
+            canAdd,
+            groups,
+            noneOption,
+            onSearch,
+            onToggle,
+            onValueChange,
+            open,
+            options,
+            searchField,
+            searchIndex,
+            searchString,
+            searchTime,
+            validSearchCharsRegex
+        } = this.props;
 
-            if (e.keyCode === KeyboardUtils.KeyCodes.ENTER) { //enter, so pull previously entered search string
-                if (this.props.canAdd && this.props.options.length === 0) {
-                    if (this.props.searchString !== "" || this.props.noneOption) {
-                        this._handleAdd();
-                    }
-                } else if (this.props.searchIndex > -1) {
-                    if (this.props.groups) {
-                        var option = this._orderedOptions[this.props.searchIndex];
-                        if (!option.group ||
-                            (this._groupById[option.group] && !this._groupById[option.group].disabled)) {
-                            this.props.onValueChange(option);
-                        }
-                    } else {
-                        this.props.onValueChange(this.props.options[this.props.searchIndex]);
-                    }
-                } else if (this.props.searchIndex === -1 && this.props.noneOption) {
-                    this.props.onValueChange(this.props.noneOption);
-                }
-                this.props.onSearch("", 0, this.props.noneOption ? -1 : 0);
-                this.props.onToggle();
-            } else if (e.keyCode === KeyboardUtils.KeyCodes.ESC) { // esc, so clear
-                search = "";
-                if (this._isBoxSearch()) {
-                    this.props.onSearch("", 0, this.props.noneOption ? -1 : 0);
-                }
-            } else if (e.keyCode === KeyboardUtils.KeyCodes.ARROW_UP ||
-                e.keyCode === KeyboardUtils.KeyCodes.ARROW_DOWN) {
-                this._handleUpDownKeys(e);
-            } else if (e.keyCode === KeyboardUtils.KeyCodes.TAB) {
-                this.props.onToggle();
-            } else if (this._isKeyboardSearch() &&
-                    String.fromCharCode(e.keyCode).search(this.props.validSearchCharsRegex) === -1) { // regex specifies valid characters, not i18n friendly right now
-                search = String.fromCharCode(e.keyCode).toLowerCase();
-                 // again, not i18n friendly
-                if (this.props.searchTime !== 0 && (time - this.props.searchTime) < 1000) { // more than a second and reset search
-                    search = this.props.searchString + search;
-                }
+        if (isArrowUp(keyCode) || isArrowDown(keyCode)) {
+            this._handleUpDownKeys(e);
+            return;
+        }
+
+        if (!open) {
+            if (isEnter(keyCode) || isSpace(keyCode)) {
+                e.preventDefault();
+                onToggle();
             }
-            if (this._isKeyboardSearch() && search !== undefined) { // invalid character entered
-                if (search !== "") { // don't bother searching if empty
-                    var option = _.find(this.props.options,
-                        function (o) {
-                            if (o[this.props.searchField].toLowerCase().indexOf(search) === 0) { //starts with
-                                return o;
-                            }
-                        }.bind(this));
-                    var index = this.props.groups
-                        ? this._getOrderedOptionsIndex(option)
-                        : this.props.options.indexOf(option);
-                    if (!option) {
-                        search = ""; //nonsense entered, not in options list
-                    }
+            return;
+        }
+
+        if (isEnter(keyCode)) { //enter, so pull previously entered search string
+            if (canAdd && options.length === 0) {
+                if (searchString !== "" || noneOption) {
+                    this._handleAdd();
                 }
-                this.props.onSearch(search, time, index);
+            } else if (searchIndex > -1) {
+                if (groups) {
+                    const option = this._orderedOptions[searchIndex];
+                    if (!option.group ||
+                        (this._groupById[option.group] && !this._groupById[option.group].disabled)) {
+                        onValueChange(option);
+                    }
+                } else {
+                    onValueChange(options[searchIndex]);
+                }
+            } else if (searchIndex === -1 && noneOption) {
+                onValueChange(noneOption);
             }
-        } else {
-            if (e.keyCode === KeyboardUtils.KeyCodes.ARROW_UP ||
-                e.keyCode === KeyboardUtils.KeyCodes.ARROW_DOWN) {
-                this._handleUpDownKeys(e);
+            onSearch("", 0, noneOption ? -1 : 0);
+            onToggle();
+        } else if (isTab(keyCode)) {
+            onToggle();
+        } else if (isEsc(keyCode)) { // esc, so clear
+            onSearch("", 0, noneOption ? -1 : 0);
+            onToggle();
+        } else if (this._isKeyboardSearch()) { // regex specifies valid characters, not i18n friendly right now
+            e.preventDefault();
+            e.stopPropagation();
+            if (String.fromCharCode(keyCode).toLowerCase().search(validSearchCharsRegex) < 0) {
+                const char = String.fromCharCode(keyCode).toLowerCase();
+                const time = Date.now();
+
+                const search = searchTime > 0 && (time - searchTime) < 1000
+                    ? searchString + char
+                    : char;
+
+                const option =
+                    options.find(o => o[searchField].toLowerCase().indexOf(search) === 0);
+                const index = groups
+                    ? this._getOrderedOptionsIndex(option)
+                    : options.indexOf(option);
+                    // again, not i18n friendly
+                onSearch(option ? search : "", Date.now(), index);
+            } else if (searchString) { // invalid character entered
+                onSearch("", Date.now(), noneOption ? -1 : 0);
             }
         }
     };
@@ -563,28 +568,32 @@ class FormDropDownListStateless extends React.Component {
      * @ignore
      */
     _handleUpDownKeys = (e) => {
-        if (this.props.open) {
-            var index = this.props.searchIndex;
-            if (e.keyCode === KeyboardUtils.KeyCodes.ARROW_UP) {
-                index = index - 1;
-            }
-            else if (e.keyCode === KeyboardUtils.KeyCodes.ARROW_DOWN) {
-                index = index + 1;
-            }
-            //Dont allow index to go below the lowest or higher than the length of options
-            var lowest = this.props.noneOption ? -1 : 0;
-            if (index < lowest) {
-                index = lowest;
-            }
-            else if (index >= this.props.options.length) {
-                index = this.props.options.length -1;
-            }
-            this.props.onSearch(this.props.searchString, 0, index);
-        } else if (!this.props.open && !this.props.disabled) {
-            this.props.onToggle();
-        }
         e.preventDefault();
         e.stopPropagation();
+        const { keyCode } = e;
+
+        if (this.props.open) {
+            const {
+                noneOption,
+                onSearch,
+                options,
+                searchIndex,
+                searchString
+            } = this.props;
+
+            if (isArrowUp(keyCode)) {
+                const lowest = noneOption ? -1 : 0;
+                const index = (searchIndex - 1 >= -1) && (searchIndex > lowest) ? searchIndex - 1 : lowest;
+                onSearch(searchString, 0, index);
+            }
+            else { // down arrow
+                const lastIndex = options.length - 1;
+                const index = searchIndex + 1 <= lastIndex ? searchIndex + 1 : lastIndex;
+                onSearch(searchString, 0, index);
+            }
+        } else if (!this.props.disabled) {
+            this.props.onToggle();
+        }
     };
 
     /**
@@ -597,8 +606,8 @@ class FormDropDownListStateless extends React.Component {
         if (!this.props.open) {
             return;
         }
-        var index = this.props.searchIndex,
-            option = this.props.options[index],
+        const { searchIndex: index, options } = this.props,
+            option = options[index],
             selectList = ReactDOM.findDOMNode(this.refs["selectList"]),
             selectListTarget= option ? "option-" + index : (this.props.noneOption
                 ? "none-option" : "option-0"),
@@ -623,31 +632,27 @@ class FormDropDownListStateless extends React.Component {
         this.props.onToggle();
     };
 
-    _getGroupSeparator = (index) => {
-        return <div key={"group-separator" + index} className="group-separator" />;
-    };
+    _getGroupSeparator = (index) => <div key={"group-separator" + index} className="group-separator" />;
 
-    _getSingleGroupHeader = (group) => {
-        var className = classnames("select-group", { disabled: group.disabled });
-        return (
+    _getSingleGroupHeader = ({ disabled, id, label }) => (
             <li
-                key={"select-group-" + group.id}
-                ref={"select-group-" + group.id}
-                data-id={"select-group-" + group.id}
-                className={className}>
-                {group.label}
+                key={"select-group-" + id}
+                ref={"select-group-" + id}
+                data-id={"select-group-" + id}
+                className={classnames("select-group", { disabled })}>
+                {label}
             </li>
         );
-    };
 
     _getSingleOption = (option, index) => {
-        var group = this.props.groups && this._groupById[option.group],
+        const group = this.props.groups && this._groupById[option.group],
             disabled = group && group.disabled,
             className = classnames("select-option", {
                 highlighted: !disabled && index === this.props.searchIndex,
                 selected: option.value === this.props.selectedOption.value,
                 disabled: disabled
             });
+
         return (
             <OptionItem
                 key={"option-" + option.label} // add prop allows re-ordering, so must have unique key
@@ -662,7 +667,7 @@ class FormDropDownListStateless extends React.Component {
     };
 
     _getNoneOption = () => {
-        var noneOptionContainerClassName = classnames("none-option", { highlighted: this.props.searchIndex === -1 }),
+        const noneOptionContainerClassName = classnames("none-option", { highlighted: this.props.searchIndex === -1 }),
             content = (
                 <span className={this.props.noneOptionLabelClassName}>
                     {this.props.noneOption.label}
@@ -682,41 +687,27 @@ class FormDropDownListStateless extends React.Component {
         );
     };
 
-    _getGroupedOptions = () => {
-        var options = [],
-            lastGroup;
+    _getGroupedOptions = () =>
+        this._orderedOptions.reduce(({ lastGroup, opts }, { group, ...opt }, index) => ({
+            lastGroup: group,
+            opts: [
+                ...opts,
+                ...(group && group !== lastGroup)
+                    ? [this._getGroupSeparator(index), this._getSingleGroupHeader(this._groupById[group])]
+                    : [],
+                this._getSingleOption({ group, ...opt }, index)
+            ]
+        }), { lastGroup: null, opts: [] }).opts;
 
-        this._orderedOptions.forEach(function (option, index) {
-            if (lastGroup !== option.group) {
-                lastGroup = option.group;
-                options.push(this._getGroupSeparator(index));
-                options.push(this._getSingleGroupHeader(this._groupById[option.group]));
-            }
-            return options.push(this._getSingleOption(option, index));
-        }.bind(this));
-
-        return options;
-    };
-
-    _generateOptions = () => {
-        var options = [];
-
-        // If noneOption exits, always at the top of the list
-        if (this.props.noneOption && (!this.props.searchString || this.props.searchString === "" )) {
-            options.push(this._getNoneOption());
-        }
-        // If groups, sort options by groups
-        if (this.props.groups) {
-            options = options.concat(this._getGroupedOptions());
-        } else {
-            // No groups, so just get list of options
-            options = options.concat(this.props.options.map(this._getSingleOption));
-        }
-        return options;
-    };
+    _generateOptions = () => (
+        [
+            ...this.props.noneOption && !this.props.searchString ? [this._getNoneOption()] : [],
+            ...this.props.groups ? this._getGroupedOptions() : this.props.options.map(this._getSingleOption)
+        ]
+    )
 
     render() {
-        var containerClassName = classnames("input-custom-select", "input-select", this.props.className, {
+        const containerClassName = classnames("input-custom-select", "input-select", this.props.className, {
                 open: this.props.open,
                 "form-error": this.props.errorMessage,
                 "value-entered": this.props.selectedOption &&
@@ -741,7 +732,7 @@ class FormDropDownListStateless extends React.Component {
                     <div className="wrapper">
                         <div
                             data-id="selected-option"
-                            tabIndex="0" ref="selected-option"
+                            ref="selected-option"
                             onClick={this._handleToggle}
                             onKeyDown={this._handleKeyDown}
                             className={selectClassName}
@@ -749,6 +740,7 @@ class FormDropDownListStateless extends React.Component {
 
                             <FormTextField
                                 data-id="selected-input"
+                                disabled={this.props.disabled}
                                 inputClassName={selectedOptionLabelClassName}
                                 helpClassName={this.props.helpClassName}
                                 errorMessage={this.props.errorMessage}
@@ -801,32 +793,26 @@ class FormDropDownListStateful extends React.Component {
         this.setState({
             open: !this.state.open,
             searchIndex: -1,
-            searchString: "",
             searchTime: 0
         });
     };
 
     _handleSearch = (search, time, index) => {
-        var matchedOptions = this.state.matchedOptions;
-
-        if (this.props.canAdd || this.props.searchType === SearchTypes.BOX) {
-            if (search === "") {
-                matchedOptions = this.props.options;
-            } else {
-                matchedOptions = filterOptions(this.props.options, search);
-            }
-        }
+        const matchedOptions =
+            this.props.canAdd || this.props.searchType === SearchTypes.BOX
+            ? (search === "" ? this.props.options : filterOptions(this.props.options, search))
+            : this.state.matchedOptions;
 
         this.setState({
             searchString: search,
             searchTime: time,
             searchIndex: index,
-            matchedOptions: matchedOptions
+            matchedOptions
         });
     };
 
     render() {
-        var props = _.defaults({
+        const props = _.defaults({
             ref: "FormDropDownListStateless",
             options: this.state.matchedOptions,
             open: this.state.open,
@@ -837,7 +823,7 @@ class FormDropDownListStateful extends React.Component {
             searchTime: this.state.searchTime
         }, this.props);
 
-        return React.createElement(FormDropDownListStateless, props);
+        return <FormDropDownListStateless {...props} />;
     }
 }
 
@@ -864,10 +850,8 @@ class FormDropDownList extends React.Component {
     render() {
         return (
             this.props.stateless
-                ? React.createElement(FormDropDownListStateless,
-                    _.defaults({ ref: "FormDropDownListStateless" }, this.props))
-                : React.createElement(FormDropDownListStateful,
-                    _.defaults({ ref: "FormDropDownListStateful" }, this.props))
+                ? <FormDropDownListStateless ref="FormDropDownListStateless" {...this.props} />
+                : <FormDropDownListStateful ref="FormDropDownListStateful" {...this.props} />
         );
     }
 }
@@ -875,4 +859,4 @@ class FormDropDownList extends React.Component {
 FormDropDownList.SearchTypes = SearchTypes;
 FormDropDownList.filterOptions = filterOptions;
 
-module.exports = FormDropDownList;
+export default FormDropDownList;
