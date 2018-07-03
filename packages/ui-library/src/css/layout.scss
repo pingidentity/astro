@@ -186,7 +186,6 @@ $color-grey-minor-1: $color-neutral-30;
         box-sizing: border-box;
     }
     ul.menu {
-        @include transition(max-height ease-out 0.3s);
         font-size: 16px;
         width: $layout-nav-width;
         max-height: 0;
