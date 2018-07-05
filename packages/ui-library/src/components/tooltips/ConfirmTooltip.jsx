@@ -14,8 +14,8 @@ import popsOver from "../../util/behaviors/popsOver";
  * @param {string} label
  *     The text of the link.
  * @param {string} [positionClassName]
- *     CSS classes to set on the top-level HTML container. Used to manage tooltip callout positioning with the
- *     CancelTooltip.positionStyles enum and/or any extra css styling if needed.
+ *     CSS classes to set on the top-level HTML container. Used to manage tooltip callout positioning.
+ *      When using multiple positions like "top left" or "bottom right" do not use dashes as it will not work.
  * @param {string} title
  *     The title of the ConfirmTooltip tooltip.
  * @param {string} type
@@ -37,9 +37,17 @@ import popsOver from "../../util/behaviors/popsOver";
  * @param {ConfirmTooltip~onToggle}
  *      the callback to open and close the modal.
  *
+ * @example positionClassName does not use dashes for positioning.
+ * "bottom"
+ * "top"
+ * "top right"
+ * "top left"
+ * "bottom right"
+ * "bottom left"
+ *
  * @example
  *     <ConfirmTooltip
- *          positionClassName="bottom"
+ *          positionClassName="bottom right"
  *          label="Confirm Delete Cancel"
  *          title="Confirm Delete Cancel"
  *          onToggle={this._handleToggle}
