@@ -26,13 +26,13 @@ const PageHeaderDemo = () => {
             <PageHeader
                 title="A Page Header with accessories"
                 accessories={[
-                    <Link title="Link" />,
-                    <span className="icon-cog" />,
-                    <HelpHint className="width-auto bottom" hintText="Provisioning">
+                    <Link title="Link" key="link" />,
+                    <span className="icon-cog" key="icon" />,
+                    <HelpHint className="width-auto bottom" hintText="Provisioning" key="hint">
                         <label className="row-help">PROV</label>
                     </HelpHint>,
-                    <button className="inline">Inline Button</button>,
-                    <span className="count">2</span>
+                    <button className="inline" key="button">Inline Button</button>,
+                    <span className="count" key="count">2</span>
                 ]}
             />
         </div>

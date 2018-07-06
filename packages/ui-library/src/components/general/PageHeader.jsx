@@ -18,7 +18,7 @@ var React = require("react"),
  *     Extra CSS class(s) applied to the top-level HTML container.
  * @param {bool} [underlined]
  *     Adds underline below header if set to true.
- * @param {object} [accessories]
+ * @param {node} [accessories]
  *  A right-aligned container where buttons, toggles, or anything else may be passed in to render on the right side
  *  of the header.
  * @param {string} [image]
@@ -73,7 +73,7 @@ PageHeader.propTypes = {
     title: PropTypes.string.isRequired,
     subtitle: PropTypes.string,
     underlined: PropTypes.bool,
-    accessories: PropTypes.object,
+    accessories: PropTypes.node,
     image: PropTypes.string,
 };
 
