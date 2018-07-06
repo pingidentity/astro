@@ -45,6 +45,7 @@ $flagsImageExtension: 'png' !default;
     &.input-custom-select {
         .select-list {
             position: absolute;
+            top: 100%;
         }
         .input-container {
             .wrapper {

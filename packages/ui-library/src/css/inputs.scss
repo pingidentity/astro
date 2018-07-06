@@ -821,6 +821,7 @@ input[type=file] {
         .none-option {
             // Note: decided not to use line-height here for alignment because it causes issues e.g. large font-sizes
             // will overlap, and also looks bad if one item overflows onto 2 lines
+            box-sizing: border-box;
             padding: $option-padding;
             font-size: 14px;
             position: relative;
@@ -828,6 +829,10 @@ input[type=file] {
             color: $color-midnight;
             cursor: pointer;
             white-space: normal;
+
+            .country-name {
+                white-space: nowrap;
+            }
 
             &:hover,
             &.highlighted {
