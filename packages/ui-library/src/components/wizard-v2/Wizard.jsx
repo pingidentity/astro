@@ -241,15 +241,17 @@ function ActiveStep(props) {
 
     const buttonBarProps = _.defaults({}, props.buttonBarProps, buttonBarDefaults);
 
-    return ([
-        props.step,
-        <ButtonBar
-            key="button-bar"
-            data-id={`${props["data-id"]}-buttonbar`}
-            className="wizard__button-bar"
-            {...buttonBarProps}
-        />
-    ]);
+    return (
+        <div>
+            {props.step}
+            <ButtonBar
+                key="button-bar"
+                data-id={`${props["data-id"]}-buttonbar`}
+                className="wizard__button-bar"
+                {...buttonBarProps}
+            />
+        </div>
+    );
 }
 
 function Header(props) {
