@@ -3,7 +3,7 @@ var React = require("react"),
     Table = require("../../../components/tables/Table");
 
 /**
-* @name Table Demo
+* @name TableDemo
 * @memberof Table
 * @desc A demo for Table
 */

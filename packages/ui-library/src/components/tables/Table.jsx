@@ -18,11 +18,6 @@ import classnames from "classnames";
  *          An array of arrays for the body that are ordered in the same was as the headData
  * @param {string} [className]
  *          CSS class name for Table
- *
- * <Table
- *      headData={this.state.headings}
- *      bodyData={this.state.rows} />
- *
  */
 
 

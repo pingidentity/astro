@@ -7,7 +7,7 @@ import Anchor from "../general/Anchor";
 import _ from "underscore";
 
 /**
- * @class SearchBar
+ * @class FormSearchBar
  * @desc A search bar with an expandable container for filters
  *
  * @param {string} [data-id="searchbar"]

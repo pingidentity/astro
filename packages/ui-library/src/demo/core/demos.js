@@ -609,8 +609,8 @@ module.exports = [
                         label: "Table",
                         demo: require("../components/tables/TableDemo"),
                         pathToDoc: "components/tables/Table.jsx",
-                        pathToSource: "components_table_Table.jsx.html",
-                        pathToDemoSource: "demo_components_table_Table.jsx.html"
+                        pathToSource: "components_tables_Table.jsx.html",
+                        pathToDemoSource: "demo_components_tables_TableDemo.jsx.html"
                     },
                 ]
             },
