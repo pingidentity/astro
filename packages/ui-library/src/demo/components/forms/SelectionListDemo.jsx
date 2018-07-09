@@ -328,7 +328,7 @@ class SelectionListDemo extends React.Component {
                 <SelectionList
                     stateless={false}
                     type={SelectionList.ListType.SINGLE}
-                    items={this._singleSelectItems}
+                    items={SINGLE_SELECT_ITEMS}
                     selectedItemIds={this.state.singleSelectId2}
                     showSearchBox={true}
                     searchPlaceholder="Search..."
