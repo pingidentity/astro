@@ -157,7 +157,8 @@ class Wizard extends React.Component {
         "data-id": "wizard",
         number: 1,
         activeStep: 1,
-        showPulsing: false
+        showPulsing: false,
+        onValueChange: _.noop,
     };
 
     _filter = (children) => {

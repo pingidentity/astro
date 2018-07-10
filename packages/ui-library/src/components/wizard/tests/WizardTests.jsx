@@ -26,6 +26,19 @@ describe("Wizard", function () {
         labelDone: "done"
     };
 
+    function getRenderedComponentWithProps (props, steps) {
+        return ReactTestUtils.renderIntoDocument(
+            <Wizard {...props}>
+                {steps ? steps : ([
+                    <Step title="step 1">Step 1</Step>,
+                    <Step title="step 2">Step 2</Step>,
+                    <Step title="step 3">Step 3</Step>,
+                    <Step title="step 4" when={false}>Step 4</Step>
+                ])}
+            </Wizard>
+        );
+    }
+
     function getRenderedComponent (opts, steps) {
         var renderDefaults = {
             title: defaultText.title,
@@ -40,16 +53,7 @@ describe("Wizard", function () {
             labelDone: defaultText.labelDone
         };
 
-        return ReactTestUtils.renderIntoDocument(
-            <Wizard {...assign(renderDefaults, opts)}>
-                {steps ? steps : ([
-                    <Step title="step 1">Step 1</Step>,
-                    <Step title="step 2">Step 2</Step>,
-                    <Step title="step 3">Step 3</Step>,
-                    <Step title="step 4" when={false}>Step 4</Step>
-                ])}
-            </Wizard>
-        );
+        return getRenderedComponentWithProps(assign(renderDefaults, opts), steps);
     }
 
     function getCancelButton (component) {
@@ -66,6 +70,23 @@ describe("Wizard", function () {
 
         //when the root wizard mounts, it should broadcast how many steps it contains to the reducer
         expect(args).toEqual([{ choice: 0, numSteps: 3 }]);
+    });
+
+    it("doesn't throw an error when no onValueChange is supplied", function () {
+        const component = getRenderedComponentWithProps({
+            title: defaultText.title,
+            onNext: jest.genMockFunction(),
+            onEdit: jest.genMockFunction(),
+            onCancel: jest.genMockFunction(),
+            onDone: jest.genMockFunction(),
+            labelNext: defaultText.labelNext,
+            labelCancel: defaultText.labelCancel,
+            labelEdit: defaultText.labelEdit,
+            labelDone: defaultText.labelDone
+        });
+
+        //when the root wizard mounts, it should broadcast how many steps it contains to the reducer
+        expect(component).toBeTruthy();
     });
 
     it("Calls onNext when next is clicked", function () {
