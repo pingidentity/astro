@@ -157,6 +157,16 @@ class MultiDragDemo extends React.Component {
         this._handleDropStateless({ from: from, to: { column: 0, index: 0 } });
     };
 
+    _handleAddStateful = (from) => {
+        this._getClassicRef()._handleDrop({ from: from, to: { column: 1, index: 0 } });
+    };
+
+    _handleRemoveStateful = (from) => {
+        this._getClassicRef()._handleDrop({ from: from, to: { column: 0, index: 0 } });
+    };
+
+    _getClassicRef = () => this.refs["multi-drag-demo-classic"].refs.MultiDragStateful
+
     _getStatefulRef = () => {
         //MultiDragStateful ref is nested under the dragDropContext child ref
         return this.refs["multi-drag-demo-stateful"].refs.MultiDragStateful;
@@ -288,6 +298,8 @@ class MultiDragDemo extends React.Component {
     render() {
         const contentTypeStateful = (
             <Row
+                onAdd={this._handleAddStateful}
+                onRemove={this._handleRemoveStateful}
                 style={this.props.demo.style}
             />
         );
@@ -435,6 +447,7 @@ class MultiDragDemo extends React.Component {
                 <div>
                     <h2>Classic Style</h2>
                     <MultiDrag
+                        ref="multi-drag-demo-classic"
                         showSearchOnAllColumns={false}
                         showSearch={true}
                         onSearch={_.noop}
