@@ -1,7 +1,5 @@
 window.__DEV__ = true;
 
-jest.dontMock("../StatCard");
-
 describe("StatCard", function () {
     const React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
@@ -28,33 +26,8 @@ describe("StatCard", function () {
 
     it("renders with default data-id", function () {
         const component = getComponent();
-        const chart = TestUtils.findRenderedDOMNodeWithDataId(component, "stat-card");
+        const chart = TestUtils.findRenderedDOMNodeWithDataId(component, "dashboard-card");
         expect(chart).toBeTruthy();
-    });
-
-    it("responds to flip", function () {
-        const callback = jest.genMockFunction();
-        const component = getComponent({
-            flipped: true,
-            onFlip: callback,
-            accent: "none"
-        });
-        const toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "view-toggle");
-
-        expect(callback).not.toBeCalled();
-        ReactTestUtils.Simulate.click(toggle);
-        expect(callback).toBeCalled();
-    });
-
-    it("responds to flip without a callback", function () {
-        const component = getComponent({
-            accent: "magenta"
-        });
-        const toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "view-toggle");
-
-        expect(component.state.flipped).not.toBeTruthy();
-        ReactTestUtils.Simulate.click(toggle);
-        expect(component.state.flipped).toBeTruthy();
     });
 
     it("renders a StatCardRow", function() {
@@ -73,27 +46,6 @@ describe("StatCard", function () {
         expect(spinner).toBeFalsy();
     });
 
-    it("renders the error when provided", function () {
-        const errorMessageText = "Uh oh.";
-        const component = getComponent({ errorMessage: errorMessageText });
-
-        const errorMessage = TestUtils.findRenderedDOMNodeWithClass(component, "stat-card__error");
-        expect(errorMessage).toBeTruthy();
-        expect(errorMessage.textContent).toBe(errorMessageText);
-
-        const topChart = TestUtils.findRenderedDOMNodeWithClass(component, "stat-card__front");
-        expect(topChart).toBeTruthy();
-
-        const back = TestUtils.findRenderedDOMNodeWithClass(component, "stat-card__back");
-        expect(back).toBeFalsy();
-
-        const title = TestUtils.findRenderedDOMNodeWithClass(component, "stat-card__front-title");
-        expect(title).toBeFalsy();
-
-        const control = TestUtils.findRenderedDOMNodeWithClass(component, "stat-card__control");
-        expect(control).toBeFalsy();
-    });
-
     it("renders the spinner when provided", function () {
         const component = getComponent({
             loading: true
@@ -105,7 +57,5 @@ describe("StatCard", function () {
         const pageSpinner = TestUtils.findRenderedDOMNodeWithClass(spinnerContainer, "page-loader");
         expect(pageSpinner).toBeTruthy();
 
-        const control = TestUtils.findRenderedDOMNodeWithClass(component, "view-toggle");
-        expect(control).toBeFalsy();
     });
 });

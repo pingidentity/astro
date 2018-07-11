@@ -130,7 +130,7 @@ module.exports = class extends React.Component {
         }
         this.resetComponent();
     };
-    
+
     /*
      * Reset the input
      */

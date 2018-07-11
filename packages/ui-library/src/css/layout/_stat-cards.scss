@@ -39,7 +39,7 @@ $fullwidthBreakpoint: 950px;
     border: 1px solid $color-neutral-70;
 }
 
-.stat-card {
+.dashboard-card {
     @include flexbox;
 
     position: relative;
@@ -89,11 +89,26 @@ $fullwidthBreakpoint: 950px;
         @media (max-width: $condensedBreakpoint) and (min-width: $fullwidthBreakpoint) {
             padding-top: $spacing-xl;
         }
+
+        .input-checkbox {
+            position: absolute;
+            top: 153px;
+            left: 21px;
+            .label-text {
+                top: 24px;
+                left: 35px;
+                text-transform: none;
+            }
+        }
     }
 
     &--flipped &__back {
         @include flippedTo;
     }
+
+}
+
+.stat-card {
 
     &__front-title {
         @include flexbox;
@@ -246,6 +261,11 @@ $fullwidthBreakpoint: 950px;
 
         > * {
             @include flexbox-grow(1);
+
+            &.dashboard-card--double {
+                @include flexbox-grow(2);
+                flex-basis: 1em;
+            }
 
             flex-basis: 0;
             margin-bottom: 0;

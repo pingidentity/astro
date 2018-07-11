@@ -1,14 +1,13 @@
 import React from "react";
-import StatCard from "ui-library/lib/components/general/charting/StatCard";
-import StatCardRow from "ui-library/lib/components/general/charting/StatCardRow";
-import Checkbox from "ui-library/lib/components/forms/FormCheckbox";
+import { StatCard, CardRow } from "../../../../components/general/charting/Cards";
+import Checkbox from "../../../../components/forms/FormCheckbox";
 
 /**
-* @name StatCardRowDemo
-* @memberof StatCardRow
-* @desc A demo for StatCardRow
+* @name StatCardemo
+* @memberof StatCard
+* @desc A demo for StatCard
 */
-class StatCardRowDemo extends React.Component {
+class StatCardDemo extends React.Component {
 
     state = {
         loading: false
@@ -30,7 +29,7 @@ class StatCardRowDemo extends React.Component {
                         onChange={this._toggleLoading}
                     />
                 </div>
-                <StatCardRow>
+                <CardRow>
                     <StatCard title="Failed Attempts" description="February 2016" loading={this.state.loading}
                         value="1,056"
                         data={[
@@ -64,10 +63,38 @@ class StatCardRowDemo extends React.Component {
                         ]}
                         iconName="nodes"
                     />
-                </StatCardRow>
+                </CardRow>
+                <br /> <br />
+                <CardRow>
+                    <StatCard title="Failed Attempts" description="February 2016" loading={this.state.loading}
+                        value="1,056"
+                        data={[
+                            { label: "Last 30 days", value: "29" },
+                            { label: "Last 60 days", value: "124" },
+                            { label: "Last 90 days", value: "167" },
+                            { label: "Last 120 days", value: "195" },
+                            { label: "Last 150 days", value: "201" },
+                        ]}
+                        iconName="lockout"
+                    />
+                    <StatCard
+                        size={2}
+                        title="Peaks per Day"
+                        description="February 2016"
+                        loading={this.state.loading} accent={1}
+                        value="261"
+                        data={[
+                            { label: "Last 30 days", value: "29" },
+                            { label: "Last 60 days", value: "124" },
+                            { label: "Last 90 days", value: "167" },
+                            { label: "Last 120 days", value: "195" },
+                            { label: "Last 150 days", value: "201" },
+                        ]}
+                    />
+                </CardRow>
             </div>
         );
     }
 }
 
-export default StatCardRowDemo;
+export default StatCardDemo;

@@ -2,8 +2,8 @@ import React from "react";
 import HeroChart from "ui-library/lib/components/general/charting/HeroChart";
 import Checkbox from "ui-library/lib/components/forms/FormCheckbox";
 import Layout from "ui-library/lib/components/general/ColumnLayout";
-import StatCard from "ui-library/lib/components/general/charting/StatCard";
-import StatCardRow from "ui-library/lib/components/general/charting/StatCardRow";
+import { StatCard, CardRow } from "ui-library/lib/components/general/charting/Cards";
+
 
 
 /**
@@ -88,7 +88,7 @@ class HeroChartDemo extends React.Component {
                     totalValue={this.state.totalValue}
                 />
                 <div className="hero-chart__stat-cards">
-                    <StatCardRow>
+                    <CardRow>
                         <StatCard title="Failed Attempts" description="February 2016" loading={this.state.loading}
                             value="1,056"
                             data={[
@@ -123,7 +123,7 @@ class HeroChartDemo extends React.Component {
                             ]}
                             iconName="nodes"
                         />
-                    </StatCardRow>
+                    </CardRow>
                 </div>
             </div>
         );

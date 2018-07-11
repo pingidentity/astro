@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import PageSpinner from "../../general/PageSpinner";
-import ViewToggle from "./ViewToggle";
 import _ from "underscore";
 import classnames from "classnames";
+import DashboardCard from "./Cards/DashboardCard";
 
 const accentClasses = ["indigo", "magenta", "blue", "cyan"];
 
@@ -32,10 +32,14 @@ const accentClass = key => accentClasses[key] || key;
  *     When true the splinner animation shows in place of the stats
  * @param {function} [onFlip]
  *     Called when a flip is triggered
+ * @param {number} [size]
+ *     controls the CSS "flex-grow" of the card. When a single-sized card  appears next to a double-sized card, the
+ *     double will occupy 2/3 of the width of the parent.
  * @param {string} [title]
  *     Tile of the card. Displayed at top of front and back
  * @param {string} [value]
  *     The single value shown on the front of the card
+ * @see StatCardRow
  *
  * @example
  * <StatCard title="Failed Attempts" description="February 2016"
@@ -75,6 +79,7 @@ class StatCard extends React.Component {
         iconName: PropTypes.string,
         loading: PropTypes.bool,
         onFlip: PropTypes.func,
+        size: PropTypes.number,
         title: PropTypes.string,
         value: valuePropType,
     }
@@ -85,47 +90,32 @@ class StatCard extends React.Component {
         iconName: "bar-line-chart",
         loading: false,
     }
-
-    state = { flipped: false }
-
-    _handleFlip = () => {
-        if (this.props.onFlip) {
-            this.props.onFlip();
-        }
-
-        this.setState({ flipped: !this.state.flipped });
-    }
-
-    _isFlipped = () => this.props.flipped === undefined ? this.state.flipped : this.props.flipped
-
     render = () => {
         const classes = classnames(
             "stat-card",
             "stat-card--" + accentClass(this.props.accent),
             this.props.className,
-            {
-                "stat-card--flipped": this._isFlipped()
-            }
         );
 
         return (
-            <div className={classes} data-id={this.props["data-id"]}>
-                {!this.props.errorMessage && [
-                    <div key="back" className="stat-card__back">
-                        <div className="stat-card__back-title" accent={this.props.accent}>{this.props.title}</div>
-                        <div className="stat-card__stat-list">
-                            {_.map(this.props.data, row => (
-                                <div className="stat-card__stat-row" key={row.label}>
-                                    <div className="stat-card__stat-row-label">{row.label}</div>
-                                    <div className="stat-card__stat-row-number" accent={this.props.accent}>
-                                        {row.value}
-                                    </div>
+            <DashboardCard className={classes} size={this.props.size} back={
+                <div>
+                    <div className="stat-card__back-title" accent={this.props.accent}>{this.props.title}</div>,
+                    <div className="stat-card__stat-list">
+                        {_.map(this.props.data, row => (
+                            <div className="stat-card__stat-row" key={row.label}>
+                                <div className="stat-card__stat-row-label">{row.label}</div>
+                                <div className="stat-card__stat-row-number" accent={this.props.accent}>
+                                    {row.value}
                                 </div>
-                            ))}
-                        </div>
-                    </div>,
-                    <div key="front" className="stat-card__front">
-                        <div className="stat-card__front-title">
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            }
+            front={
+                <div>
+                    <div className="stat-card__front-title">
                             <div className="stat-card__title-icon" accent={this.props.accent}>
                                 <span className={classnames("icon", "icon-" + this.props.iconName)}/>
                             </div>
@@ -140,24 +130,9 @@ class StatCard extends React.Component {
                             <PageSpinner className="stat-card__loader" small />
                         }
                         <div className="stat-card__description">{this.props.description}</div>
-                    </div>,
-                    <div key="control" className="stat-card__control">
-                        {!this.props.loading &&
-                            <ViewToggle onToggle={this._handleFlip} toggled={this.state.flipped} />
-                        }
-                    </div>
-                ]}
-                {this.props.errorMessage &&
-                    <div className="stat-card__front">
-                        <div className="stat-card__error">
-                            <div className="icon-cogs stat-card__error-icon" />
-                            <div className="stat-card__error-text">
-                                {this.props.errorMessage}
-                            </div>
-                        </div>
-                    </div>
+                </div>
                 }
-            </div>
+            />
         );
     }
 }
