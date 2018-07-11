@@ -35,9 +35,10 @@ describe("Edit View Simple Integration", function () {
         EditViewSimplePage.setAddressValue(2, "Address2");
         EditViewSimplePage.setAlternateAddressValue(1, "AlternateAddress1");
         EditViewSimplePage.setAlternateAddressValue(2, "AlternateAddress2");
-        EditViewSimplePage.scrollDownPage(800);
+        EditViewSimplePage.scrollDownPage(200);
         EditViewSimplePage.selectAddressLocation("work");
         EditViewSimplePage.selectAlternateAddressLocation("home");
+        EditViewSimplePage.scrollDownPage(800);
         EditViewSimplePage.clickUserGroup(2);
         EditViewSimplePage.clickCheckboxActiveUser();
         //take screenshot and compare

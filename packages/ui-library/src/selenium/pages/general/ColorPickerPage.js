@@ -63,6 +63,7 @@ var ColorPickerDemoPage = Object.create(HomePage, {
     setColorPickerValue: {
         value: function (index, color) {
             this.getColorPicker(index).setValue(color);
+            this.blurElement();
         }
     },
 
@@ -92,6 +93,7 @@ var ColorPickerDemoPage = Object.create(HomePage, {
     waitForColorWrapperInvisible: {
         value: function (index) {
             this.waitForVisible(this.xpathColorWrapper(index), this.waitInterval, true);
+            this.blurElement();
         }
     },
 

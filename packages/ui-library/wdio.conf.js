@@ -19,9 +19,22 @@ switch (argv7) {
         baseLineRoot += "safari/";
         browserName = "safari";
         break;
+    case "--edge":
+        baseLineRoot += "edge/";
+        browserName = "edge";
+        break;
+    case "--android":
+        baseLineRoot += "android/";
+        browserName = "android";
+        break;
+    case "--ios":
+        baseLineRoot += "ios/";
+        browserName = "ios";
+        break;
     default:
         baseLineRoot += "firefox/";
         browserName = "firefox";
+        break;
 }
 
 exports.config = {
@@ -143,7 +156,7 @@ exports.config = {
     jasmineNodeOpts: {
         //
         // Jasmine default timeout
-        defaultTimeoutInterval: 60000,
+        defaultTimeoutInterval: 300000,
         //
         // The Jasmine framework allows interception of each assertion in order to log the state of the application
         // or website depending on the result. For example, it is pretty handy to take a screenshot every time
@@ -151,6 +164,8 @@ exports.config = {
         // expectationResultHandler: function (passed, assertion) {
         // }
     },
+
+    browserName: browserName,
 
     screenshotOpts: {
         useScreenshotTool: true, // turn on or off screenshot validation
@@ -198,7 +213,7 @@ exports.config = {
             case "chrome":
                 capabilities[0].browserName = "chrome";
                 capabilities[0].platform = "OS X 10.11";
-                capabilities[0].version = "54";
+                capabilities[0].version = "latest";
                 capabilities[0].screenResolution = "1376x1032";
                 capabilities[0].maxInstances = 1;
                 capabilities[0].tunnelIdentifier = "uilibrary";
@@ -208,6 +223,14 @@ exports.config = {
                 capabilities[0].platform = "OS X 10.11";
                 capabilities[0].version = "10";
                 capabilities[0].screenResolution = "1376x1032";
+                capabilities[0].maxInstances = 1;
+                capabilities[0].tunnelIdentifier = "uilibrary";
+                break;
+            case "edge":
+                capabilities[0].browserName = "MicrosoftEdge";
+                capabilities[0].platform = "Windows 10";
+                capabilities[0].version = "16";
+                capabilities[0].screenResolution = "1400x1050";
                 capabilities[0].maxInstances = 1;
                 capabilities[0].tunnelIdentifier = "uilibrary";
                 break;
@@ -227,6 +250,26 @@ exports.config = {
                 capabilities[0].maxInstances = 1;
                 capabilities[0].tunnelIdentifier = "uilibrary";
                 break;
+            case "android":
+                capabilities[0].appiumVersion = "1.7.1";
+                capabilities[0].deviceName = "Samsung Galaxy Tab A 10 GoogleAPI Emulator";
+                capabilities[0].deviceOrientation = "portrait";
+                capabilities[0].browserName = "Chrome";
+                capabilities[0].platformName = "Android";
+                capabilities[0].platformVersion = "7.1";
+                capabilities[0].maxInstances = 1;
+                capabilities[0].tunnelIdentifier = "uilibrary";
+                break;
+            case "ios":
+                capabilities[0].appiumVersion = "1.7.1";
+                capabilities[0].deviceName = "iPad Pro (10.5 inch) Simulator";
+                capabilities[0].deviceOrientation = "portrait";
+                capabilities[0].browserName = "Safari";
+                capabilities[0].platformName = "iOS";
+                capabilities[0].platformVersion = "11.2";
+                capabilities[0].maxInstances = 1;
+                capabilities[0].tunnelIdentifier = "uilibrary";
+                break;
             default:
                 break;
         }
@@ -235,7 +278,8 @@ exports.config = {
         if (browserName === "chrome" ||
             browserName === "safari" ||
             browserName === "ie11" ||
-            browserName === "ie10") {
+            browserName === "ie10" ||
+            browserName === "edge") {
             var folders = config.specs[0].split("/");
             var testFile = folders[folders.length - 1];
             capabilities.forEach(function (capability) {
