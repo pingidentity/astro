@@ -124,7 +124,7 @@
 .rocker-button--chart-rocker {
     $button-height: 28px;
     $button-width: 80px;
-    $bg-color: $color-white;
+    $bg-color: $color-strong-neutral-90;
     $border-radius: $button-height / 2;
     $selected-color: #193967;
     $transition-timing: 0.2s;
@@ -181,6 +181,45 @@
             width: $button-width;
             background-color: $selected-color;
             border-radius: $border-radius;
+        }
+    }
+
+    @for $i from 0 through 3 {
+        &.sel-#{$i} {
+            &:after {
+                left: 1px + $i*$button-width;
+            }
+        }
+    }
+}
+
+.hero-chart__rocker {
+    &:before {
+        background-color: $color-white;
+    }
+}
+
+.rocker-button--chart-rocker-small {
+    $button-width: 64px;
+    $button-height: 22px;
+
+    font-family: 'ProximaNova-Medium';
+    font-size: 10px;
+    height: $button-height;
+    label {
+        line-height: 25px;
+        width: $button-width;
+    }
+    &.sel-0,
+    &.sel-1,
+    &.sel-2,
+    &.sel-3 {
+        &:after {
+
+            content: '';
+            position: absolute;
+            height: $button-height;
+            width: $button-width;
         }
     }
 
