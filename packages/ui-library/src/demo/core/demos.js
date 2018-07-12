@@ -87,8 +87,8 @@ module.exports = [
                         demo: require("../components/forms/FormCheckboxDemo"),
                         pathToDoc: "components/forms/FormCheckbox.jsx",
                         pathToSource: "components_forms_FormCheckbox.jsx.html",
-                        pathToDemoSource: "demo_components_forms_FormCheckboxDemo.jsx.html"
-
+                        pathToDemoSource: "demo_components_forms_FormCheckboxDemo.jsx.html",
+                        keywords: ["FormCheckbox"]
                     },
                     {
                         label: "Checkbox Group",
@@ -123,28 +123,32 @@ module.exports = [
                         demo: require("../components/forms/FormRadioGroupDemo"),
                         pathToDoc: "components/forms/FormRadioGroup.jsx",
                         pathToSource: "components_forms_FormRadioGroup.jsx.html",
-                        pathToDemoSource: "demo_components_forms_FormRadioGroupDemo.jsx.html"
+                        pathToDemoSource: "demo_components_forms_FormRadioGroupDemo.jsx.html",
+                        keywords: ["FormRadioGroup"]
                     },
                     {
                         label: "Radio Input (single)",
                         demo: require("../components/forms/FormRadioInputDemo.jsx"),
                         pathToDoc: "components/forms/FormRadioInput.jsx",
                         pathToSource: "components_forms_FormRadioInput.jsx.html",
-                        pathToDemoSource: "demo_components_forms_FormRadioInputDemo.jsx.html"
+                        pathToDemoSource: "demo_components_forms_FormRadioInputDemo.jsx.html",
+                        keywords: ["FormRadioInput"]
                     },
                     {
                         label: "Text Area",
                         demo: require("../components/forms/FormTextAreaDemo"),
                         pathToDoc: "components/forms/FormTextArea.jsx",
                         pathToSource: "components_forms_form-text-area_v2.jsx.html",
-                        pathToDemoSource: "demo_components_forms_FormTextAreaDemo.jsx.html"
+                        pathToDemoSource: "demo_components_forms_FormTextAreaDemo.jsx.html",
+                        keywords: ["FormTextArea"]
                     },
                     {
                         label: "Text Field",
                         demo: require("../components/forms/FormTextFieldDemo"),
                         pathToDoc: "components/forms/FormTextField.jsx",
                         pathToSource: "components_forms_form-text-field_v2.jsx.html",
-                        pathToDemoSource: "demo_components_forms_FormTextFieldDemo.jsx.html"
+                        pathToDemoSource: "demo_components_forms_FormTextFieldDemo.jsx.html",
+                        keywords: ["FormTextField"]
                     },
                 ]
             },
@@ -178,14 +182,16 @@ module.exports = [
                         demo: require("../components/forms/i18n/I18nCountrySelectorDemo"),
                         pathToDoc: "components/forms/i18n/I18nCountrySelector.jsx",
                         pathToSource: "components_forms_i18n_I18nCountrySelector.jsx.html",
-                        pathToDemoSource: "demo_components_forms_i18n_I18nCountrySelectorDemo.jsx.html"
+                        pathToDemoSource: "demo_components_forms_i18n_I18nCountrySelectorDemo.jsx.html",
+                        keywords: ["I18nCountrySelector"]
                     },
                     {
                         label: "Integer Field",
                         demo: require("../components/forms/FormIntegerFieldDemo"),
                         pathToDoc: "components/forms/FormIntegerField.jsx",
                         pathToSource: "components_forms_form-integer-field_v2.jsx.html",
-                        pathToDemoSource: "demo_components_forms_FormIntegerFieldDemo.jsx.html"
+                        pathToDemoSource: "demo_components_forms_FormIntegerFieldDemo.jsx.html",
+                        keywords: ["FormIntegerField"]
                     },
                     {
                         label: "Multivalues",
@@ -206,14 +212,16 @@ module.exports = [
                         demo: require("../components/general/TimePickerDemo"),
                         pathToDoc: "components/general/TimePicker.jsx",
                         pathToSource: "components_general_TimePicker.jsx.html",
-                        pathToDemoSource: "demo_components_general_TimePickerDemo.jsx.html"
+                        pathToDemoSource: "demo_components_general_TimePickerDemo.jsx.html",
+                        keywords: ["TimePicker"]
                     },
                     {
                         label: "Time Zone",
                         demo: require("../components/forms/TimeZoneDemo"),
                         pathToDoc: "components/forms/FormTimeZone.jsx",
                         pathToSource: "components_forms_FormTimeZone.jsx.html",
-                        pathToDemoSource: "demo_components_forms_TimeZoneDemo.jsx.html"
+                        pathToDemoSource: "demo_components_forms_TimeZoneDemo.jsx.html",
+                        keywords: ["FormTimeZone"]
                     },
                     {
                         label: "Unit Input",
@@ -233,7 +241,8 @@ module.exports = [
                         demo: require("../components/forms/FormDropDownListDemo"),
                         pathToDoc: "components/forms/FormDropDownList.jsx",
                         pathToSource: "components_forms_FormDropDownList.jsx.html",
-                        pathToDemoSource: "demo_components_forms_FormDropDownListDemo.jsx.html"
+                        pathToDemoSource: "demo_components_forms_FormDropDownListDemo.jsx.html",
+                        keywords: ["FormDropDownList"]
                     },
                     {
                         label: "Link Drop Down List",
@@ -247,7 +256,8 @@ module.exports = [
                         demo: require("../components/panels/MultiDragDemo"),
                         pathToDoc: "components/panels/MultiDrag.jsx",
                         pathToSource: "components_panels_multi-drag_MultiDrag.jsx.html",
-                        pathToDemoSource: "demo_components_panels_MultiDragDemo.jsx.html"
+                        pathToDemoSource: "demo_components_panels_MultiDragDemo.jsx.html",
+                        keywords: ["MultiDrag"]
                     },
                     {
                         label: "Selection List",
@@ -328,7 +338,8 @@ module.exports = [
                         demo: require("../components/general/ColumnLayoutDemo"),
                         pathToDoc: "components/general/ColumnLayout.jsx",
                         pathToSource: "components_general_ColumnLayout.jsx.html",
-                        pathToDemoSource: "demo_components_general_ColumnLayoutDemo.jsx.html"
+                        pathToDemoSource: "demo_components_general_ColumnLayoutDemo.jsx.html",
+                        keywords: ["ColumnLayout"]
                     },
                     {
                         label: "Label Value Pairs",
@@ -528,7 +539,8 @@ module.exports = [
                         demo: require("../components/tables/DragDropTableDemo"),
                         pathToDoc: "components/tables/DragDropTable.jsx",
                         pathToSource: "components_tables_DragDropTable.jsx.html",
-                        pathToDemoSource: "demo_components_tables_DragDropTableDemo.jsx.html"
+                        pathToDemoSource: "demo_components_tables_DragDropTableDemo.jsx.html",
+                        keywords: ["DragDropTable"]
                     },
                     {
                         label: "Grid",
@@ -542,7 +554,8 @@ module.exports = [
                         demo: require("../components/rows/ExpandableRowDemo"),
                         pathToDoc: "components/rows/ExpandableRow.jsx",
                         pathToSource: "components_rows_expandable-row_ExpandableRow.jsx.html",
-                        pathToDemoSource: "demo_components_rows_ExpandableRowDemo.jsx.html"
+                        pathToDemoSource: "demo_components_rows_ExpandableRowDemo.jsx.html",
+                        keywords: ["rows"]
                     },
                     {
                         label: "Infinite Scroller",
@@ -563,7 +576,8 @@ module.exports = [
                         demo: require("../components/general/RowIndexNavDemo"),
                         pathToDoc: "components/general/RowIndexNav.jsx",
                         pathToSource: "components_general_RowIndexNav.jsx.html",
-                        pathToDemoSource: "demo_components_general_RowIndexNavDemo.jsx.html"
+                        pathToDemoSource: "demo_components_general_RowIndexNavDemo.jsx.html",
+                        keywords: ["RowIndexNav", "rows"]
                     },
                 ]
             },
@@ -576,14 +590,16 @@ module.exports = [
                         demo: require("../components/forms/FormSearchBarDemo"),
                         pathToDoc: "components/forms/FormSearchBar.jsx",
                         pathToSource: "components_forms_FormSearchBar.jsx.html",
-                        pathToDemoSource: "demo_components_forms_FormSearchBarDemo.jsx.html"
+                        pathToDemoSource: "demo_components_forms_FormSearchBarDemo.jsx.html",
+                        keywords: ["FormSearchBar"]
                     },
                     {
                         label: "Search Box",
                         demo: require("../components/forms/FormSearchBoxDemo"),
                         pathToDoc: "components/forms/FormSearchBox.jsx",
                         pathToSource: "components_forms_FormSearchBox.jsx.html",
-                        pathToDemoSource: "demo_components_forms_FormSearchBoxDemo.jsx.html"
+                        pathToDemoSource: "demo_components_forms_FormSearchBoxDemo.jsx.html",
+                        keywords: ["FormSearchBox"]
                     },
                     {
                         label: "Filter Selector",
@@ -603,14 +619,16 @@ module.exports = [
                         demo: require("../components/forms/FormSearchBarDemo"),
                         pathToDoc: "components/forms/SearchBar.jsx",
                         pathToSource: "components_forms_FormSearchBar.jsx.html",
-                        pathToDemoSource: "demo_components_forms_FormSearchBarDemo.jsx.html"
+                        pathToDemoSource: "demo_components_forms_FormSearchBarDemo.jsx.html",
+                        keywords: ["FormSearchBar"]
                     },
                     {
                         label: "Search Box",
                         demo: require("../components/forms/FormSearchBoxDemo"),
                         pathToDoc: "components/forms/FormSearchBox.jsx",
                         pathToSource: "components_forms_FormSearchBox.jsx.html",
-                        pathToDemoSource: "demo_components_forms_FormSearchBoxDemo.jsx.html"
+                        pathToDemoSource: "demo_components_forms_FormSearchBoxDemo.jsx.html",
+                        keywords: ["FormSearchBox"]
                     },
                     {
                         label: "Table",
@@ -692,7 +710,8 @@ module.exports = [
                         demo: require("../components/panels/LeftNavBarDemo"),
                         pathToDoc: "components/panels/LeftNavBar.jsx",
                         pathToSource: "components_panels_left-nav_LeftNavBar.jsx.html",
-                        pathToDemoSource: "demo_components_panels_LeftNavBarDemo.jsx.html"
+                        pathToDemoSource: "demo_components_panels_LeftNavBarDemo.jsx.html",
+                        keywords: ["LeftNavBar"]
                     },
                     {
                         label: "Rocker Button",
@@ -733,7 +752,8 @@ module.exports = [
                         demo: require("../components/general/charting/PieChartDemo"),
                         pathToDoc: "components/general/charting/PieChart.jsx",
                         pathToSource: "components_general_charting_PieChart.jsx.html",
-                        pathToDemoSource: "demo_components_general_charting_PieChartDemo.jsx.html"
+                        pathToDemoSource: "demo_components_general_charting_PieChartDemo.jsx.html",
+                        keywords: ["PieChart"]
                     },
                     {
                         label: "Area Chart",
@@ -783,7 +803,8 @@ module.exports = [
                         demo: require("../components/rows/DragDropRowDemo"),
                         pathToDoc: "components/rows/DragDrop.jsx",
                         pathToSource: "components_rows_DragDropRow.jsx.html",
-                        pathToDemoSource: "demo_components_rows_DragDropRowDemo.jsx.html"
+                        pathToDemoSource: "demo_components_rows_DragDropRowDemo.jsx.html",
+                        keywords: ["DragDropRow", "rows"]
                     },
                     {
                         label: "If",
