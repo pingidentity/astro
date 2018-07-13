@@ -17,6 +17,21 @@ class MultivaluesDemo extends React.Component {
         urlEntries: [
             "http://www.someurl.com/foo/bar/",
             "http://www.someurl.com/foo/bar/longlonglongurl",
+        ],
+        iconEntries: [
+            "First",
+            {
+                label: "Second",
+                icon: "desktop"
+            },
+            {
+                label: "Third",
+                icon: "browser"
+            },
+            {
+                label: "Four",
+                icon: "clipboard"
+            }
         ]
     };
 
@@ -53,6 +68,16 @@ class MultivaluesDemo extends React.Component {
                         stateless={false}
                         entries={this.state.entries}
                         onValueChange={this._handleValueChange}
+                    />
+                </div>
+
+                <div className="input-row">
+                    <Multivalues
+                        labelText="Default multi-values input with icons"
+                        stateless={false}
+                        entries={this.state.iconEntries}
+                        onValueChange={this._handleValueChange}
+
                     />
                 </div>
 

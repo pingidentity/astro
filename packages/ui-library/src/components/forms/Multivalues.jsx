@@ -12,6 +12,8 @@ var React = require("react"),
 
 placeholder.className = "placeholder";
 
+import Icon from "../general/Icon";
+
 
 /**
  * @class MultivaluesOption
@@ -42,6 +44,7 @@ class MultivaluesOption extends React.Component {
         return (
             <label data-id={this.props.id} className="entry" title={this.props.label}>
                 {this.props.label}
+                {this.props.iconName && <Icon iconName={this.props.iconName}/>}
                 <a className="delete"
                     data-id="delete"
                     id = {this.props.id}
@@ -114,12 +117,19 @@ class Multivalues extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
-        entries: PropTypes.arrayOf(PropTypes.string),
+        entries: PropTypes.arrayOf(PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.shape({
+                label: PropTypes.string.isRequired,
+                icon: PropTypes.string.isRequired
+            })
+        ])),
         name: PropTypes.string,
         onValueChange: PropTypes.func.isRequired,
         onNewValue: PropTypes.func,
         required: PropTypes.bool,
         stacked: PropTypes.bool,
+        iconName: PropTypes.string,
     };
 
     static defaultProps = {
@@ -271,17 +281,28 @@ class Multivalues extends React.Component {
             width: [this.state.inputWidth]
         };
 
-        var entryNodes = _.map(this.props.entries, function (label, index) {
-            return (
-                <MultivaluesOption
-                    id={index}
-                    label={label}
-                    onChange={this.props.onValueChange}
-                    onDelete = {this._handleDelete}
-                    key={index}
-                />
-            );
-        }.bind(this));
+        var entryNodes = _.map(this.props.entries, (entry, index) =>
+           typeof entry === "string"
+           ? (
+            <MultivaluesOption
+            id={index}
+            label={entry}
+            onChange={this.props.onValueChange}
+            onDelete = {this._handleDelete}
+            key={index}
+        />
+        )
+        : (
+            <MultivaluesOption
+            id={index}
+            label={entry.label}
+            onChange={this.props.onValueChange}
+            onDelete = {this._handleDelete}
+            key={index}
+            iconName={entry.icon}
+        />
+        ));
+
 
         return (
             <FormLabel value={this.props.labelText} className={className} data-id={this.props["data-id"]}>
