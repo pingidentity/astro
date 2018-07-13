@@ -133,7 +133,7 @@ var React = require("react"),
 * @param {boolean} [required=false]
 *     If true, the user must select a value for this field.
 *
-* @param {boolean} [autoComplete=false]
+* @param {boolean|string} [autoComplete="nope"]
 *     Whether or not the field will support autocomplete.
 * @param {boolean} [autoFocus=false]
 *     Whether or not to auto-focus the element.
@@ -232,8 +232,10 @@ class Stateless extends React.Component {
         name: PropTypes.string,
         type: PropTypes.string,
         placeholder: PropTypes.string,
-
-        autoComplete: PropTypes.bool,
+        autoComplete: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.bool
+        ]),
         autoFocus: PropTypes.bool,
         disabled: PropTypes.bool,
         flexWidth: PropTypes.bool,
@@ -264,7 +266,7 @@ class Stateless extends React.Component {
         onToggleReveal: _.noop,
         onUndo: _.noop,
         onValueChange: _.noop,
-        autoComplete: false,
+        autoComplete: "nope",
         autoFocus: false,
         disabled: false,
         flexWidth: false,
@@ -432,6 +434,16 @@ class Stateless extends React.Component {
         }
     }
 
+    _getAutoComplete = () => {
+        if (typeof this.props.autoComplete === "string") {
+            return this.props.autoComplete;
+        } else if (this.props.autoComplete) {
+            return "on";
+        } else {
+            return "nope";
+        }
+    }
+
     render() {
         var id = this.props["data-id"],
             className = classnames(this.props.className, "input-text", {
@@ -479,7 +491,7 @@ class Stateless extends React.Component {
                         maxLength={this.props.maxLength}
                         name={this.props.name}
                         value={this.props.value || ""}
-                        autoComplete={this.props.autoComplete ? "on" : "off"}
+                        autoComplete={this._getAutoComplete()}
                         disabled={this.props.disabled}
                         autoFocus={this.props.autoFocus}
                     />

@@ -145,6 +145,26 @@ describe("FormTextField", function () {
         expect(input.getAttribute("autoComplete")).toBe("on");
     });
 
+    it("disables autocomplete", function () {
+        var component = getComponent({
+            autoComplete: false,
+            useAutocomplete: true
+        });
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+
+        expect(input.getAttribute("autoComplete")).toBe("nope");
+    });
+
+    it("accepts arbitary string for autocomplete", function () {
+        var component = getComponent({
+            autoComplete: "name",
+            useAutocomplete: true
+        });
+        var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
+
+        expect(input.getAttribute("autoComplete")).toBe("name");
+    });
+
     it("masks field if property set", function () {
         var component = getComponent({
             maskValue: true
