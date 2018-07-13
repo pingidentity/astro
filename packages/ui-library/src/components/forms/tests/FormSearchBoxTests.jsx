@@ -40,6 +40,16 @@ describe("FormSearchBox", function () {
         expect(ReactTestUtils.isDOMComponent(searchBox)).toBeTruthy();
     });
 
+    it("should render the component with maxLength prop", function () {
+        const component = getComponent({
+            "data-id": "mySearchBox",
+            maxLength: 10
+        });
+
+        const formTextField = TestUtils.findRenderedComponentWithType(component, FormTextField);
+        expect(formTextField.props.maxLength).toEqual(10);
+    });
+
     it("should render component with className", function () {
         var className = "someClasses",
             component = getComponent({ className: className });

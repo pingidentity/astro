@@ -67,6 +67,8 @@ import classnames from "classnames";
 *     Callback to be triggered when the search box blurs (loses focus).
 * @param {FormSearchBox~onClear} [onClear]
 *     Callback to be triggered when the search field is cleared.
+* @param {number} [maxLength]
+*     Maximum length supported by the text field.
 *
 * @example
 *     <FormSearchBox data-id="mySearchBox"
@@ -90,7 +92,8 @@ class FormSearchBox extends React.Component {
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
         onClear: PropTypes.func,
-        errorMessage: PropTypes.string
+        errorMessage: PropTypes.string,
+        maxLength: PropTypes.number
     };
 
     static defaultProps = {
@@ -169,6 +172,7 @@ class FormSearchBox extends React.Component {
                         onKeyDown={this._handleSearchBoxKeyDown}
                         onFocus={this.props.onFocus}
                         onBlur={this.props.onBlur}
+                    maxLength={this.props.maxLength}
                         controls={showClear
                             ? <a data-id="clear" className="clear-search" onClick={this._clear} />
                             : null
