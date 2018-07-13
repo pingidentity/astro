@@ -35,7 +35,10 @@ var HomePage = Object.create(Page, {
         value: function(name) {
             var path = this.navComponent(name, "a");
             this.click(path);
-            this.waitForExist("//div[@data-id='nav-top-content' and text()='" + name + "']");
+            this.waitForExist(
+                "//div[@data-id='nav-top-content' and text()='" + name + "']",
+                2000
+            );
         }
     },
 
@@ -47,9 +50,11 @@ var HomePage = Object.create(Page, {
         value: function(name) {
             var path = this.navComponent(name, "a");
             this.click(path);
-            this.waitForExist(path +
-                "/parent::div[contains(concat(' ', @class, ' '), ' open ')" +
-                " or contains(concat(' ', @class, ' '), ' selected ')]"
+            this.waitForExist(
+                path +
+                    "/parent::div[contains(concat(' ', @class, ' '), ' open ')" +
+                    " or contains(concat(' ', @class, ' '), ' selected ')]",
+                2000
             );
         }
     },
@@ -62,7 +67,11 @@ var HomePage = Object.create(Page, {
         value: function(name) {
             var path = this.navComponent(name, "a");
             this.click(path);
-            this.waitForExist(path + "/parent::*[contains(concat(' ', @class, ' '), 'highlighted')]");
+            this.waitForExist(
+                path +
+                    "/parent::*[contains(concat(' ', @class, ' '), 'highlighted')]",
+                4000
+            );
         }
     },
 
@@ -76,7 +85,7 @@ var HomePage = Object.create(Page, {
             if (!pageName) {
                 pageName = categoryName;
             }
-
+            
             this.openNavRoot(rootName);
             if (categoryName) {
                 this.openNavNode(categoryName);
@@ -96,7 +105,6 @@ var HomePage = Object.create(Page, {
     openHomePage: {
         value: function() {
             this.open(wdioConfig.baseUrl + "/index.html");
-            this.waitForExist("//a[@data-id='Components-label']");
         }
     },
 

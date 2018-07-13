@@ -172,8 +172,8 @@ var EditViewSimpleDemoPage = Object.create(HomePage, {
      * @desc this function is to scroll down the page
      */
     scrollDownPage: {
-        value: function (pixel) {
-            this.scrollElementToTop("//div[@id='content']", pixel);
+        value: function () {
+            this.scrollElementToTop("//div[@id='content']", 800);
         }
     },
 

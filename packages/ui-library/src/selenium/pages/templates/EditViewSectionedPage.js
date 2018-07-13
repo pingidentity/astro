@@ -174,8 +174,8 @@ var EditViewSectionedDemoPage = Object.create(HomePage, {
      * @param {string} y - the offset to scroll
      */
     scrollDownPage: {
-        value: function (pixel) {
-            this.scrollElementToTop("//div[@id='content']", pixel);
+        value: function (y) {
+            this.scrollElementToTop("//div[@id='content']", y);
         }
     },
 

@@ -12,7 +12,6 @@ var globalTolerance = wdioConfig.screenshotOpts.tolerance || 0;
 var unstableScreenshots = wdioConfig.screenshotOpts.unstableScreenshots || [];
 var comparisonWaitTime = wdioConfig.screenshotOpts.comparisonWaitTime;
 var isScreenshotActive = wdioConfig.screenshotOpts.useScreenshotTool;
-var browserName = wdioConfig.browserName;
 
 var ScreenshotUtils = {
     /**
@@ -72,20 +71,13 @@ var ScreenshotUtils = {
 
     takeElementScreenshotAndSave: function (path, elementSelector) {
         this.takeScreenshotAndSave(path);
-        if (browserName !== "android") {
-            if (browserName === "ios") {
-                // remove device header (above url bar), which contains a dynamic value (hour:minute)
-                return this.cropImage(path, 9999, 9999, 0, 50);
-            }
-
-            var size = browser.getElementSize(elementSelector);
-            var location = browser.getLocationInView(elementSelector);
-            if (!size || !location) {
-                console.log("Error: unable to crop screenshot due to offset or location is undefined: " + path);
-            }
-
-            return this.cropImage(path, size.width, size.height, location.x, location.y);
+        var size = browser.selectorExecute(elementSelector,
+            "return { width: arguments[0][0].offsetWidth, height: arguments[0][0].offsetHeight};");
+        var location = browser.getLocationInView(elementSelector);
+        if (!size || !location) {
+            console.log("Error: unable to crop screenshot due to offset or location is undefined: " + path);
         }
+        return this.cropImage(path, size.width, size.height, location.x, location.y);
     },
 
     takeScreenshotThenSaveToCurrentDiff: function (fileName, elementSelector) {
@@ -132,9 +124,7 @@ var ScreenshotUtils = {
 
     cropImage: function (path, width, height, x, y) {
         var crop = im.crop(path, path, width, height, x, y);
-
         var result = false;
-        var promiseFinished = false;
         // execute IM command line
         crop.then(function (data) {
             if (!data.error) {
@@ -143,12 +133,10 @@ var ScreenshotUtils = {
                 console.log("Error: "+ data.stderr);
                 result = false;
             }
-
-            promiseFinished = true;
         });
 
         // wait for IM finishes its job
-        browser.waitUntil(function() { return promiseFinished; }, comparisonWaitTime, 100);
+        browser.waitUntil(crop, comparisonWaitTime, 100);
         return result;
     },
 
@@ -180,7 +168,6 @@ var ScreenshotUtils = {
                 var currentPath = this.getCurrentScreenshotPath(fileName);
                 var diffPath = this.getDiffScreenshotPath(fileName);
                 var comp = im.compare(baselinePath, currentPath, diffPath);
-                var promiseFinished = false;
 
                 // execute IM command line
                 comp.then(function (data) {
@@ -206,12 +193,10 @@ var ScreenshotUtils = {
                     else {
                         result = ComparisonExitCode.UNKNOWN_ERROR;
                     }
-
-                    promiseFinished = true;
                 });
 
                 // wait for IM finishes its job
-                browser.waitUntil(function () { return promiseFinished; }, comparisonWaitTime, 100);
+                browser.waitUntil(comp, comparisonWaitTime, 100);
             } else {
                 result = ComparisonExitCode.NO_BASELINE;
                 this.takeScreenshotThenSaveToCurrentDiff(fileName, elementSelector);
@@ -233,7 +218,7 @@ var ScreenshotUtils = {
     takeScreenShotAndCompareWithBaseline: function (fileName, tolerance) {
         this.takeElementScreenShotAndCompareWithBaseline(
                 fileName,
-                "//div[@id='content']",
+                "//div[@data-id='components']",
                 tolerance);
     },
 
@@ -313,7 +298,6 @@ var ScreenshotUtils = {
         }
 
         var result = 0;
-        var promiseFinished = false;
         var getSize = im.getSize(imagepath);
 
         // execute IM command line
@@ -321,11 +305,10 @@ var ScreenshotUtils = {
             if (data.width !== 0 && data.height !== 0) {
                 result = Math.round(data.width * data.height * _tolerance / 100);
             }
-            promiseFinished = true;
         });
 
         // wait for IM finishes its job
-        browser.waitUntil(function () { return promiseFinished; }, comparisonWaitTime, 100);
+        browser.waitUntil(getSize, comparisonWaitTime, 100);
 
         console.log("Allowing " + result + " disimilar pixels for image '" + imagepath + "'");
 

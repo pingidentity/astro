@@ -1,6 +1,5 @@
 /*global browser:true */
-var wdioConfig = require("../../../wdio.conf.js").config;
-var browserName = wdioConfig.browserName;
+
 /**
  * @desc this is very basic common functions for integration component tests
  *       this is also a wrapper of wdio to fix some specific browser issue.
@@ -43,10 +42,7 @@ Page.prototype.formatXpath = function (unformattedXPath, keys) {
  */
 Page.prototype.open = function (path) {
     // set default size for browsers
-    if (browserName === "firefox") {
-        browser.windowHandleSize({ width: 1400, height: 800 });
-    }
-
+    browser.windowHandleSize({ width: 1400, height: 800 });
     browser.url(path);
 };
 
@@ -232,9 +228,8 @@ Page.prototype.scrollElementToTopSync = function (elementPath, offset) {
     this.assertExistingElement(elementPath);
 
     var newOffset = browser.selectorExecute(elementPath, "return arguments[0][0].scrollTop = "+ offset);
-    return browser.waitUntil(function () {
-        return browser.selectorExecute(elementPath, "return arguments[0][0].scrollTop") === newOffset;
-    }, 5000, "Error: Cannot wait for scrolling", 100);
+    return browser.waitUntil(browser.selectorExecute(elementPath,
+        "return arguments[0][0].scrollTop") === newOffset , 5000, "Error: Cannot wait for scrolling", 100);
 };
 
 /**
@@ -256,20 +251,16 @@ Page.prototype.scrollToElement = function (tagName, dataId) {
  */
 Page.prototype.blurElement = function () {
     browser.execute("return document.activeElement.blur();");
+    return browser.waitUntil(browser.execute("return !document.hasFocus();")
+        , 5000, "Error: fail when waiting to lose focus", 100);
 
-    return browser.waitUntil(function () {
-        return browser.execute("return !document.hasFocus();");
-    }, 5000, "Error: fail when waiting to lose focus", 100);
 };
 
 /**
  * @desc move mouse to root of page to remove hover
- * - Ignore if the test is for tablet
  */
 Page.prototype.outHover = function () {
-    if (browserName !== "android" && browserName !== "ios") {
-        browser.moveToObject("//div[@data-id='header-site-logo']", 0, 0);
-    }
+    browser.moveToObject("/*", 0, 0);
 };
 
 /**
