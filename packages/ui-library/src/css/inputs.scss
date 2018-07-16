@@ -2032,6 +2032,7 @@ input[type=file] {
         input[type=password] {
             border-color: $color-input-error;
 
+            &:hover,
             &:focus {
                 @include errorDisplayCss;
             }
@@ -2050,6 +2051,7 @@ input[type=file] {
         textarea {
             border-color: $color-input-error;
 
+            &:hover,
             &:focus {
                 @include errorDisplayCss;
             }
@@ -2188,7 +2190,6 @@ input[type=file] {
         right: 0;
         height: $icon-size;
         width: $icon-size;
-        cursor: pointer;
 
         &:before {
             position: absolute;
