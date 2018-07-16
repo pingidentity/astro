@@ -2776,7 +2776,8 @@ label {
     &.input-width-medium,
     &.input-width-large,
     &.input-width-xlarge,
-    &.input-width-full {
+    &.input-width-full
+    &.input-width-auto {
         margin-bottom: map-get($input-width-settings, 'vert-margin');
 
         input[type=text],
@@ -2817,6 +2818,21 @@ label {
     }
 }
 
+
+&.input-custom-select {
+    &.open {
+        .select-list {
+            visibility: visible;
+        }
+    }
+    .select-list {
+        visibility: hidden;
+        display: initial;
+    }
+    &.input-width-auto {
+        width: auto;
+    }
+}
 
 // DEPRECATED OR SITE-SPECIFIC STYLES --------------------------------------------------------------
 // TODO : move WP styles to WP
