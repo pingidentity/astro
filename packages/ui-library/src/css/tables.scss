@@ -4,6 +4,13 @@ table {
         display: inline-block;
         border-collapse: separate;
 
+        .grid {
+            // not sure why grids display inline-block, but grids
+            // within grids should display block, so they don't
+            // align to the bottom
+            display: block;
+        }
+
         &.width-full {
             display: table;
             width: 100%;
