@@ -1,13 +1,35 @@
 
-// To user the embedded font, each property using the ui-library must make the following declarations in your own code.
-// The font definition files must be copied to a public folder within your project and the following @font-face
-// declarations must be made with the proper source urls
-// ---------------------------------------------------------------------------------------------------------------------
-// @font-face { font-family: 'ProximaNovaRegular'; font-weight: normal; src: url('<path to source file>ProximaNova-Regular.otf'); }
-// @font-face { font-family: 'ProximaNovaBold'; font-weight: bold; src: url('<path to source file>ProximaNova-Bold.otf'); }
-// @font-face { font-family: 'ProximaNovaLight'; font-weight: normal; src: url('<path to source file>ProximaNova-Light.otf'); }
-// @font-face { font-family: 'ProximaNovaSemibold'; font-weight: normal; src: url('<path to source file>ProximaNova-Semibold.otf'); }
-// @font-face { font-family: 'ProximaNovaCondRegular'; font-weight: normal; src: url('<path to source file>ProximaNovaCond-Regular.otf'); }
+$pn-font-path: '../fonts/proxima-nova/';
+
+@font-face {
+    font-family: 'ProximaNovaRegular';
+    font-weight: normal;
+    src: url('#{$pn-font-path}ProximaNova-Regular.otf');
+}
+
+@font-face {
+    font-family: 'ProximaNovaBold';
+    font-weight: bold;
+    src: url('#{$pn-font-path}ProximaNova-Bold.otf');
+}
+
+@font-face {
+    font-family: 'ProximaNovaLight';
+    font-weight: normal;
+    src: url('#{$pn-font-path}ProximaNova-Light.otf');
+}
+
+@font-face {
+    font-family: 'ProximaNovaSemibold';
+    font-weight: normal;
+    src: url('#{$pn-font-path}ProximaNova-Semibold.otf');
+}
+
+@font-face {
+    font-family: 'ProximaNovaCondRegular';
+    font-weight: normal;
+    src: url('#{$pn-font-path}ProximaNovaCond-Regular.otf');
+}
 
 $img-path: '../images/';
 
