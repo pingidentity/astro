@@ -103,7 +103,7 @@ module.exports = [
                         demo: require("../components/forms/FileDropDemo"),
                         pathToDoc: "components/forms/FileDrop.jsx",
                         pathToSource: "components_forms_FileDrop.jsx.html",
-                        pathToDemoSource: "demo_components_forms_FileUploadDemo.jsx.html"
+                        pathToDemoSource: "demo_components_forms_FileDropDemo.jsx.html"
                     },
                     {
                         label: "File Upload",
