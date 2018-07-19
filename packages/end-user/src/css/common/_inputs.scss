@@ -6,6 +6,7 @@ $input-border-color: $color-neutral-40;
 $input-padding-vertical: $spacing-md;
 $input-padding-horizontal: $spacing-sm;
 $input-focus-border-color: $color-active-blue;
+$input-placeholder-color: $color-neutral-30;
 
 // TEXT STYLES
 %input-text,
@@ -16,10 +17,46 @@ $input-focus-border-color: $color-active-blue;
     color: $input-text-color;
 }
 
+%option-text,
+.option-text {
+    font-family: $font-default;
+    font-size: $input-font-size;
+    color: $input-text-color;
+    font-weight: 400;
+}
+
 %primary-input-text,
 .primary-input-text {
     font-family: $font-default;
     font-size: $font-size-xx;
     font-weight: 200;
     color: $input-text-color;
+}
+
+%input-border,
+.input-border {
+    background: $color-neutral-100;
+    border: 1px solid $input-border-color;
+    border-radius: 2px;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+}
+
+%input-padding,
+.input-padding {
+    padding: $input-padding-vertical $input-padding-horizontal;
+}
+
+%input-box,
+.input-box {
+    @extend %input-border;
+    @extend %input-padding;
+}
+
+%placeholder-text,
+.placeholder-text {
+    color: $input-placeholder-color;
+    font-size: $input-font-size;
+    font-weight: 400;
 }

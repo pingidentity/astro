@@ -1,7 +1,6 @@
 // FLOAT LABELS
 $float-label-input-padding-top: $input-padding-vertical + $spacing-xs;
 $float-label-input-padding-bottom: $input-padding-vertical - $spacing-xs;
-$float-label-color: $color-neutral-30;
 
 .float-label {
     > input {
@@ -13,7 +12,7 @@ $float-label-color: $color-neutral-30;
 }
 
 .float-label__label {
-    color: $float-label-color;
+    color: $input-placeholder-color;
 
     transition: 0.05s;
 
@@ -27,6 +26,9 @@ $float-label-color: $color-neutral-30;
     right: 0;
     margin-top: $spacing-xs + 1px;
     margin-left: $spacing-sm;
+
+    pointer-events: none;
+    z-index: 0;
 
     cursor: text;
 }
@@ -52,9 +54,8 @@ $float-label-color: $color-neutral-30;
     padding-left: $spacing-sm;
 
     & + .float-label__label {
-        color: $float-label-color;
-        font-size: $input-font-size;
-        font-weight: 400;
+        @extend %placeholder-text;
+
         margin-top: $input-padding-vertical + 1px;
         margin-left: $input-padding-horizontal + 1px;
     }

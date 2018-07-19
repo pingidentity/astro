@@ -1,0 +1,113 @@
+import Button from '../components/Button';
+import Card from '../components/Card';
+import Checkbox from '../components/Checkbox';
+import Dropdown from '../components/Dropdown';
+import Feedback from '../components/Feedback';
+import FloatLabelDropdown from '../components/FloatLabelDropdown';
+import FloatLabelPasswordInput from '../components/FloatLabelPasswordInput';
+import FloatLabelTextInput from '../components/FloatLabelTextInput';
+import Form from '../components/Form';
+import FormAside from '../components/FormAside';
+import Heading from '../components/Heading';
+import IconFeedback from '../components/IconFeedback';
+import Logo from '../components/Logo';
+import ModalMenu from '../components/ModalMenu';
+import Requirements from '../components/Requirements';
+import Spinner from '../components/Spinner';
+import Stack from '../components/Stack';
+import TextBlock from '../components/TextBlock';
+import TextInput from '../components/TextInput';
+import TextStyle from '../components/TextStyle';
+import Tooltip from '../components/Tooltip';
+import ComponentDemo from './components/ComponentDemo';
+
+# Layouts
+
+## The Sign-On Form
+
+<ComponentDemo>
+    <Card>
+            <Logo src="ping-logo.svg"/>
+        <Form>
+            <FloatLabelTextInput label="Username" id="username6"/>
+            <FloatLabelPasswordInput label="Password" id="password2"/>
+            <div><Checkbox label="Remember me"/></div>
+            <Button label="Sign On" primary/>
+        </Form>
+    </Card>
+</ComponentDemo>
+
+### With an error
+<ComponentDemo>
+    <Card>
+        <Logo src="ping-logo.svg"/>
+        <Feedback type="error">Cannot sign on. There is a problem with either your username or password.</Feedback>
+        <Form>
+            <FloatLabelTextInput label="Username" id="username7"/>
+            <FloatLabelPasswordInput label="Password" id="password3"/>
+            <div><Checkbox label="Remember me"/></div>
+            <Button label="Sign On" primary/>
+        </Form>
+    </Card>
+</ComponentDemo>
+
+### Another logo
+<ComponentDemo>
+    <Card>
+        <Logo src="jj-logo.png"/>
+        <Form>
+            <FloatLabelTextInput label="Username" id="username8"/>
+            <FloatLabelPasswordInput label="Password" id="password4"/>
+            <div><Checkbox label="Remember me"/></div>
+            <Button label="Sign On" primary/>
+        </Form>
+    </Card>
+</ComponentDemo>
+
+### Just the password
+<ComponentDemo>
+    <Card>
+        <Logo src="ping-logo.svg"/>
+        <Heading>Hello Cindy Lou Who,</Heading>
+        <TextBlock>Please enter your password below:</TextBlock>
+        <Form>
+            <FloatLabelPasswordInput label="Password" id="password5"/>
+            <Button label="Sign On" primary disabled/>
+        </Form>
+        <TextBlock size="small">Not Cindy Lou? <a href="#">Switch Accounts</a></TextBlock>
+    </Card>
+</ComponentDemo>
+
+### Reset password
+<ComponentDemo>
+    <Card>
+        <Logo src="ping-logo.svg"/>
+        <Feedback type="error">Too many unsuccessful sign-on attempts. Please reset your password.</Feedback>
+        <Form>
+            <Button label="Reset Password" primary/>
+        </Form>
+        <TextBlock size="small">No account? <a href="#">Register Now</a></TextBlock>
+    </Card>
+</ComponentDemo>
+
+<ComponentDemo>
+    <Card>
+        <Logo src="ping-logo.svg"/>
+        <IconFeedback type="error">Error</IconFeedback>
+        <TextBlock size="small">
+            <p>The actor attempting to perform the request is not authorized.</p>
+            <p><TextStyle muted>
+                id: 2e0b1d51-3409-46dd-ac5e-d49cf5213de4<br />
+                code: ACCESS_FAILED
+            </TextStyle></p>
+        </TextBlock>
+    </Card>
+</ComponentDemo>
+
+<ComponentDemo>
+    <Card>
+        <Logo src="ping-logo.svg"/>
+        <IconFeedback type="success">Signed Off</IconFeedback>
+        <Button label="Sign On"/>
+    </Card>
+</ComponentDemo>

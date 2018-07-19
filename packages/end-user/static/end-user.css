@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-weight: 200;
   font-family: 'proxima-nova';
@@ -123,12 +124,19 @@
   font-size: 15px;
   color: #595959; }
 
-.text-input,
+.dropdown__select, .dropdown__input, .dropdown__select option, .text-input,
 .input-text {
   font-family: "proxima-nova", sans-serif;
   font-size: 15px;
   font-weight: 600;
   color: #666; }
+
+.dropdown__option,
+.option-text {
+  font-family: "proxima-nova", sans-serif;
+  font-size: 15px;
+  color: #666;
+  font-weight: 400; }
 
 .text-input--primary,
 .primary-input-text {
@@ -136,6 +144,46 @@
   font-size: 36px;
   font-weight: 200;
   color: #666; }
+
+.dropdown__select, .dropdown__input, .text-input,
+.input-box, .dropdown__list,
+.input-border {
+  background: #fff;
+  border: 1px solid #737373;
+  border-radius: 2px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: block;
+  width: 100%; }
+
+.dropdown__select, .dropdown__input, .text-input,
+.input-box,
+.input-padding {
+  padding: 15px 10px; }
+
+.dropdown__select::-webkit-input-placeholder, .dropdown__input::-webkit-input-placeholder, .float-label__input:placeholder-shown + .float-label__label, .float-label__input.placeholder-shown + .float-label__label, .text-input::-webkit-input-placeholder,
+.placeholder-text {
+  color: #666;
+  font-size: 15px;
+  font-weight: 400; }
+
+.dropdown__select:-ms-input-placeholder, .dropdown__input:-ms-input-placeholder, .float-label__input:placeholder-shown + .float-label__label, .float-label__input.placeholder-shown + .float-label__label, .text-input:-ms-input-placeholder,
+.placeholder-text {
+  color: #666;
+  font-size: 15px;
+  font-weight: 400; }
+
+.dropdown__select::-ms-input-placeholder, .dropdown__input::-ms-input-placeholder, .float-label__input:placeholder-shown + .float-label__label, .float-label__input.placeholder-shown + .float-label__label, .text-input::-ms-input-placeholder,
+.placeholder-text {
+  color: #666;
+  font-size: 15px;
+  font-weight: 400; }
+
+.dropdown__select::placeholder, .dropdown__input::placeholder, .float-label__input:placeholder-shown + .float-label__label, .float-label__input.placeholder-shown + .float-label__label, .text-input::placeholder,
+.placeholder-text {
+  color: #666;
+  font-size: 15px;
+  font-weight: 400; }
 
 .feedback, .requirement,
 .icon-pair {
@@ -267,6 +315,67 @@
   -webkit-box-shadow: 0 0 6px 0 #3d88ae;
           box-shadow: 0 0 6px 0 #3d88ae; }
 
+.dropdown {
+  background: #fff;
+  position: relative; }
+  .dropdown:focus {
+    border-color: #277ba5; }
+  .dropdown:after {
+    content: '';
+    background: url(caret.svg) center no-repeat;
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    right: 10px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%); }
+  .dropdown--open:after {
+    -webkit-transform: translateY(-50%) rotate(180deg);
+            transform: translateY(-50%) rotate(180deg); }
+  .dropdown__select, .dropdown__input {
+    cursor: pointer;
+    padding-right: 36px; }
+  .dropdown__select {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    background-color: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none; }
+    .dropdown__select.placeholder-shown {
+      color: rgba(255, 255, 255, 0); }
+  .dropdown__list {
+    -webkit-box-shadow: 1px 1px 4px rgba(77, 77, 77, 0.25);
+            box-shadow: 1px 1px 4px rgba(77, 77, 77, 0.25);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    margin: -1px 0 0;
+    padding: 0;
+    list-style: none; }
+  .dropdown__option {
+    cursor: pointer;
+    padding: 5px 10px 5px 20px;
+    position: relative; }
+    .dropdown__option:hover {
+      color: #fff;
+      background: #277ba5; }
+    .dropdown__option--selected {
+      font-weight: 600; }
+      .dropdown__option--selected:before {
+        content: '\2022';
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+        vertical-align: middle; }
+
 .feedback {
   margin: 0 0 25px 0; }
   .feedback:last-child {
@@ -294,6 +403,8 @@
   right: 0;
   margin-top: 6px;
   margin-left: 10px;
+  pointer-events: none;
+  z-index: 0;
   cursor: text; }
 
 .float-label__input, .float-label .float-label__input {
@@ -318,9 +429,6 @@
   padding-bottom: 15px;
   padding-left: 10px; }
   .float-label__input:placeholder-shown + .float-label__label {
-    color: #666;
-    font-size: 15px;
-    font-weight: 400;
     margin-top: 16px;
     margin-left: 11px; }
 
@@ -329,9 +437,6 @@
   padding-bottom: 15px;
   padding-left: 10px; }
   .float-label__input.placeholder-shown + .float-label__label {
-    color: #666;
-    font-size: 15px;
-    font-weight: 400;
     margin-top: 16px;
     margin-left: 11px; }
 
@@ -541,31 +646,26 @@
   .text-block--large {
     font-size: 22px; }
 
-.text-input {
-  border: 1px solid #737373;
-  border-radius: 2px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  display: block;
-  padding: 15px 10px;
-  width: 100%; }
-  .text-input:focus {
-    border-color: #277ba5; }
-  .text-input--error, .text-input--error:focus {
-    border-color: #de3602;
-    background: right 10px center no-repeat url(error.svg);
-    background-color: white;
-    padding-right: 40px; }
-  .text-input--success {
-    background: right 10px center no-repeat url(success.svg);
-    background-color: white;
-    padding-right: 40px; }
-  .text-input--primary {
-    padding: 6px 10px 3px 10px;
-    text-align: center; }
-    .text-input--primary.text-input--error {
-      padding-right: 10px;
-      background-image: none; }
+.text-input:focus {
+  border-color: #277ba5; }
+
+.text-input--error, .text-input--error:focus {
+  border-color: #de3602;
+  background: right 10px center no-repeat url(error.svg);
+  background-color: white;
+  padding-right: 40px; }
+
+.text-input--success {
+  background: right 10px center no-repeat url(success.svg);
+  background-color: white;
+  padding-right: 40px; }
+
+.text-input--primary {
+  padding: 6px 10px 3px 10px;
+  text-align: center; }
+  .text-input--primary.text-input--error {
+    padding-right: 10px;
+    background-image: none; }
 
 .tooltip {
   background: #f8f8f8;

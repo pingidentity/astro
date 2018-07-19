@@ -19,7 +19,7 @@ const TextBlock = ({ children, size }) => {
 };
 
 TextBlock.propTypes = {
-    size: PropTypes.oneOf('small', 'large'),
+    size: PropTypes.oneOf(['small', 'large']),
 };
 
 export default TextBlock;

@@ -5,6 +5,19 @@ $preview-bg: #eee;
 $label-bg: #666;
 $label-font-size: 11px;
 
+.demo-nav {
+    border-bottom: 1px solid $border-color;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    padding: 0 0 $spacing-xs;
+    margin: 0;
+
+    li {
+        margin-right: $spacing-md;
+    }
+}
+
 .component-demo {
     border: 1px solid $border-color;
     border-radius: 3px;

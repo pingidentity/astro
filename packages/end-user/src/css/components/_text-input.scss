@@ -1,15 +1,13 @@
 .text-input {
     @extend %input-text;
-
-    border: 1px solid $input-border-color;
-    border-radius: 2px;
-    box-sizing: border-box;
-    display: block;
-    padding: $input-padding-vertical $input-padding-horizontal;
-    width: 100%;
+    @extend %input-box;
 
     &:focus {
         border-color: $input-focus-border-color;
+    }
+
+    &::placeholder {
+        @extend %placeholder-text;
     }
 
     &--error, &--error:focus {

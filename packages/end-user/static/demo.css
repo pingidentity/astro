@@ -81,6 +81,21 @@ hue-6-2: #c18401
 
 .hljs-link {
   text-decoration: underline; }
+.demo-nav {
+  border-bottom: 1px solid #aaa;
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding: 0 0 5px;
+  margin: 0; }
+  .demo-nav li {
+    margin-right: 15px; }
+
 .component-demo {
   border: 1px solid #aaa;
   border-radius: 3px;

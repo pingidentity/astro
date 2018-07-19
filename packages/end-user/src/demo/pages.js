@@ -1,5 +1,7 @@
 import React from 'react';
 import Catalog from './Catalog';
+import Inputs from './Inputs';
+import Layouts from './Layouts';
 import MFA from './MFA';
 import SignOnPage from '../components/SignOnPage';
 import ChangePWPage from '../components/ChangePWPage';
@@ -21,19 +23,23 @@ const jjBranding = completeBranding({
     primaryColor: '#ff0000',
 });
 
-const App = () => (
+const App = PageComponent => (
     <div className="page-content">
-        <Catalog />
+        <ul className="demo-nav">
+            <li><a href="./">Main</a></li>
+            <li><a href="inputs.html">Inputs</a></li>
+            <li><a href="layouts.html">Layouts</a></li>
+            <li><a href="mfa.html">MFA</a></li>
+        </ul>
+        <PageComponent />
     </div>
 );
 
 export default {
-    main: <App />,
-    mfa: (
-        <div className="page-content">
-            <MFA />
-        </div>
-    ),
+    main: App(Catalog),
+    inputs: App(Inputs),
+    layouts: App(Layouts),
+    mfa: App(MFA),
     signon: <SignOnPage branding={pingBranding} />,
     branded: <SignOnPage branding={jjBranding} />,
     changepw: <ChangePWPage branding={pingBranding} />,

@@ -1,0 +1,165 @@
+import Checkbox from '../components/Checkbox';
+import Dropdown from '../components/Dropdown';
+import DropdownCustom from '../components/DropdownCustom';
+import Feedback from '../components/Feedback';
+import FloatLabelDropdown from '../components/FloatLabelDropdown';
+import FloatLabelDropdownCustom from '../components/FloatLabelDropdownCustom';
+import FloatLabelDropdownDemo from '../components/stateful/FloatLabelDropdownDemo';
+import FloatLabelPasswordInput from '../components/FloatLabelPasswordInput';
+import FloatLabelTextInput from '../components/FloatLabelTextInput';
+import Form from '../components/Form';
+import FormAside from '../components/FormAside';
+import Heading from '../components/Heading';
+import IconFeedback from '../components/IconFeedback';
+import Logo from '../components/Logo';
+import ModalMenu from '../components/ModalMenu';
+import Requirements from '../components/Requirements';
+import Spinner from '../components/Spinner';
+import Stack from '../components/Stack';
+import TextBlock from '../components/TextBlock';
+import TextInput from '../components/TextInput';
+import TextStyle from '../components/TextStyle';
+import Tooltip from '../components/Tooltip';
+import ComponentDemo from './components/ComponentDemo';
+
+# Inputs
+
+## Text Input
+
+<ComponentDemo>
+    <TextInput id="username1" placeholder="Enter text..."/>
+</ComponentDemo>
+
+### Error state
+
+<ComponentDemo>
+    <TextInput id="username2" error/>
+</ComponentDemo>
+
+### Success state
+
+<ComponentDemo>
+    <TextInput id="username3" success/>
+</ComponentDemo>
+
+### Primary input
+
+<ComponentDemo>
+    <TextInput id="primary" defaultValue="495837" primary/>
+</ComponentDemo>
+
+### Float Label Inputs
+
+<ComponentDemo>
+    <FloatLabelTextInput label="Username" id="username4"/>
+</ComponentDemo>
+
+<ComponentDemo>
+    <FloatLabelPasswordInput label="Password" id="password1"/>
+</ComponentDemo>
+
+IE & Edge don't support the CSS-only solution for float labels, but we can simulate the "placeholder-shown" pseudo-selector with a "placeholder-shown" class. (View in IE or Edge to see the difference.)
+
+<ComponentDemo>
+    <FloatLabelTextInput inputClassName="placeholder-shown" label="Username" id="username5"/>
+</ComponentDemo>
+
+## Dropdown
+
+<ComponentDemo>
+    <Dropdown
+        placeholder="Select one"
+        options={[ "First Value", "Second Value", "Third Value", "Fourth Value" ]}
+    />
+</ComponentDemo>
+
+### Float Label States
+
+When something is selected:
+
+<ComponentDemo>
+    <FloatLabelDropdown
+        label="Select one"
+        id="float-label-dropdown"
+        options={[ "First Value", "Second Value", "Third Value", "Fourth Value" ]}
+    />
+</ComponentDemo>
+
+When nothing is selected:
+
+<ComponentDemo>
+    <FloatLabelDropdown
+        inputClassName="placeholder-shown"
+        label="Select one"
+        options={[ "First Value", "Second Value", "Third Value", "Fourth Value" ]}
+    />
+</ComponentDemo>
+
+### Stateful demo
+
+This component toggles the "placeholder-shown" class depending on whether there's a value.
+
+<ComponentDemo>
+    <FloatLabelDropdownDemo
+        label="Select one"
+        options={[ "First Value", "Second Value", "Third Value", "Fourth Value" ]}
+    />
+</ComponentDemo>
+
+### Custom-styled Dropdown
+
+Closed state:
+
+<ComponentDemo>
+    <DropdownCustom
+        placeholder="Select one"
+        options={[ "First Value", "Second Value", "Third Value", "Fourth Value" ]}
+    />
+</ComponentDemo>
+
+Open state:
+
+<ComponentDemo>
+    <DropdownCustom
+        placeholder="Select one"
+        open
+        options={[ "First Value", "Second Value", "Third Value", "Fourth Value" ]}
+    />
+</ComponentDemo>
+
+Open state with a selected value:
+
+<ComponentDemo>
+    <DropdownCustom
+        placeholder="Select one"
+        open
+        options={[ "First Value", "Second Value", "Third Value", "Fourth Value" ]}
+        value="Third Value"
+    />
+</ComponentDemo>
+
+With a float label:
+
+<ComponentDemo>
+    <FloatLabelDropdownCustom
+        label="Select one"
+        options={[ "First Value", "Second Value", "Third Value", "Fourth Value" ]}
+    />
+</ComponentDemo>
+
+<ComponentDemo>
+    <FloatLabelDropdownCustom
+        label="Select one"
+        options={[ "First Value", "Second Value", "Third Value", "Fourth Value" ]}
+        value="Third Value"
+    />
+</ComponentDemo>
+
+<ComponentDemo>
+    <FloatLabelDropdownCustom
+        label="Select one"
+        open
+        options={[ "First Value", "Second Value", "Third Value", "Fourth Value" ]}
+        value="Third Value"
+    />
+</ComponentDemo>

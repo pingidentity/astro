@@ -7,6 +7,20 @@ module.exports = [
         demoCSS: true,
     },
     {
+        id: 'inputs',
+        script: 'inputs.js',
+        title: 'Ping End User Components - Inputs',
+        filename: 'inputs.html',
+        demoCSS: true,
+    },
+    {
+        id: 'layouts',
+        script: 'layouts.js',
+        title: 'Ping End User Components - Layouts',
+        filename: 'layouts.html',
+        demoCSS: true,
+    },
+    {
         id: 'mfa',
         script: 'mfa.js',
         title: 'Ping End User MFA',

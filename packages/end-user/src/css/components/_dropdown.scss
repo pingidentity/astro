@@ -1,0 +1,101 @@
+$caret-height: 16px;
+
+.dropdown {
+    background: $color-neutral-100;
+
+    &:focus {
+        border-color: $input-focus-border-color;
+    }
+
+    position: relative;
+
+    &:after {
+        content: '';
+        background: url('images/caret.svg') center no-repeat;
+        position: absolute;
+        height: $caret-height;
+        width: $caret-height;
+        right: $spacing-sm;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    &--open:after {
+        transform: translateY(-50%) rotate(180deg);
+    }
+
+    &__select,
+    &__input {
+        @extend %input-box;
+        @extend %input-text;
+
+        &::placeholder {
+            @extend %placeholder-text;
+        }
+
+        cursor: pointer;
+        padding-right: $caret-height + $spacing-sm + $spacing-sm;
+    }
+
+    &__select {
+
+        option {
+            @extend %input-text;
+        }
+
+        position: relative;
+        z-index: 1; // this ensures the dropdown is in front of the float label if there is one
+
+        width: 100%;
+        background-color: transparent;
+        background-image: none;
+        -webkit-appearance: none;
+           -moz-appearance: none;
+                appearance: none;
+
+        &.placeholder-shown {
+            color: rgba(255,255,255,0);
+        }
+    }
+
+    &__list {
+        @extend %input-border;
+
+        box-shadow: $shadow-overlay;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: $color-neutral-100;
+        margin: -1px 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    &__option {
+        @extend %option-text;
+
+        cursor: pointer;
+        padding: $spacing-xs $spacing-sm $spacing-xs ($spacing-sm + $spacing-sm);
+        position: relative;
+
+        &:hover {
+            color: $color-neutral-100;
+            background: $color-active-blue;
+        }
+
+        &--selected {
+            font-weight: $input-font-weight;
+
+            &:before {
+                content: '•';
+                position: absolute;
+                left: $spacing-sm;
+                top: 50%;
+                transform: translateY(-50%);
+                vertical-align: middle;
+            }
+        }
+    }
+
+}
