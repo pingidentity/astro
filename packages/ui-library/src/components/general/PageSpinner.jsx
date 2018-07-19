@@ -31,7 +31,7 @@ const PageSpinner = ({
     </div>
  );
 
-PageSpinner.PropTypes = {
+PageSpinner.propTypes = {
     "data-id": PropTypes.string,
     show: PropTypes.bool.isRequired,
     className: PropTypes.string,
