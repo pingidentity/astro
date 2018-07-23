@@ -46,7 +46,7 @@ LabelValuePairs.defaultProps = {
     "data-id": "label-value-pairs"
 };
 
-LabelValuePairs.PropTypes = {
+LabelValuePairs.propTypes = {
     "data-id": PropTypes.string,
     dataPairs: PropTypes.arrayOf(
         PropTypes.oneOfType([
