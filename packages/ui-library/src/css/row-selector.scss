@@ -32,7 +32,7 @@
     }
 
     &__column-count {
-        color: $color-midnight;
+        color: $color-neutral-20;
         display: inline-block;
         font-size: 15px;
         min-width: 25px - (2 * $spacing-xs);
@@ -46,12 +46,13 @@
             left: 0;
             right: 0;
             top: -4px;
-            height: 25px - 2px;
+            height: 24px - 2px;
             position: absolute;
-            border-radius: 13px;
-            border: 1px solid $color-rabbit-fur;
+            border: 1px solid $color-neutral-60;
             background: $color-white;
             z-index: -1;
+
+            @include border-radius(7px);
         }
     }
 

@@ -933,8 +933,8 @@ $color-grey-minor-1: $color-neutral-30;
 
 // REUSABLE PAGE STYLES ----------------------------------------------------------------------------
 .count {
-    color: inherit;
-    border: 1px solid $color-midnight;
+    color: $color-neutral-20;
+    border: 1px solid $color-neutral-60;
     padding: 0 5px;
     display: inline-block;
     min-width: 19px;
@@ -943,7 +943,7 @@ $color-grey-minor-1: $color-neutral-30;
     text-align: center;
 
     @include box-sizing(border-box);
-    @include border-radius(10px);
+    @include border-radius(7px);
 }
 
 .collapsible-link {

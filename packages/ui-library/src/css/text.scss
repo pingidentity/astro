@@ -17,13 +17,16 @@
             }
         }
         .count {
-            color: $color-blue-grey;
+            color: $color-neutral-20;
             margin-right: $spacing-xs;
             min-width: 14px;
             height: 14px;
-            line-height: 1;
-            font-size: 14px;
-            padding: 0;
+            line-height: 13px;
+            font-size: 10px;
+            padding: 0 4px;
+            vertical-align: text-top;
+
+            @include border-radius(5px);
             &:hover {
                 text-decoration: none;
             }
