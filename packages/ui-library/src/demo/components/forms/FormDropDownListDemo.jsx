@@ -20,6 +20,20 @@ var NUM_DEMOS = 10,
         { label: "Section B", id: 2 },
         { label: "Section A", id: 1 },
         { label: "Disabled", id: 4, disabled: true }
+    ],
+    LONGLABELS = [
+        { label: "OneOneOneOneOneOneOneOneOneOneOne", value: "1",
+            helpHintText: "Help text may be added to any drop-down option."
+        },
+        { label: "TwoTwoTwoTwoTwo", value: "2", group: 4 },
+        { label: "ThreeThreeThreeThreeThree", value: "3", group: 1 },
+        { label: "FourFourFourFourFour", value: "4", group: 2 },
+        { label: "FiveFiveFiveFiveFive", value: "5", group: 3 },
+        { label: "SixSixSixSixSixSixSix", value: "6", group: 2 },
+        { label: "SevenSevenSevenSevenSevenSeven", value: "7", group: 1 },
+        { label: "EightEightEightEightEight", value: "8", group: 3 },
+        { label: "NineNineNineNineNine", value: "9" },
+        { label: "TenTenTenTenTenTen", value: "10", group: 4 }
     ];
 
 /**
@@ -108,6 +122,20 @@ class FormDropDownListDemo extends React.Component {
                         selectedOption={this.state.selectedValue1}
                         onValueChange={this._handleValueChange1}
                         className="input-width-small"
+                    />
+
+                </div>
+                <div>Selected value: {this.state.selectedValue1.label}</div>
+                <br/>
+
+                <div className="input-row">
+                    <FormDropDownList
+                        options={LONGLABELS}
+                        autofocus={true}
+                        label="Basic with autofocus width auto and long labels"
+                        selectedOption={this.state.selectedValue10}
+                        onValueChange={this._handleValueChange10}
+                        className="input-width-auto"
                     />
 
                 </div>
