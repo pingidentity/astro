@@ -905,16 +905,43 @@ $color-grey-minor-1: $color-neutral-30;
         }
         &.warning {
             background-color: $color-warning-icon-yellow;
+            .button.inline {
+                border: 1px solid $color-warning-icon-yellow;
+                color: $color-warning-icon-yellow;
+            }
         }
 
         &.error {
             background-color: $color-critical-red;
+            .button.inline {
+                color: $color-critical-red;
+                border: 1px solid $color-critical-red;
+            }
         }
         &.success {
             background-color: $color-success;
+            .button.inline {
+                color: $color-success;
+                border: 1px solid $color-success;
+            }
         }
         &.notice {
             background-color: $color-active-blue;
+            .button.inline {
+                color: $color-active-blue;
+                border: 1px solid $color-active-blue;
+            }
+        }
+
+        &.error,
+        &.warning,
+        &.notice,
+        &.success {
+            .button.secondary {
+                background: transparent;
+                border: 1px solid $color-white;
+                color: $color-white;
+            }
         }
     }
 
@@ -932,7 +959,17 @@ $color-grey-minor-1: $color-neutral-30;
             }
         }
     }
+
+    .button.inline,
+    .primary {
+        margin-left: 15px;
+        margin-right: 0;
+        background: $color-white;
+        border: 1px solid $color-rhino;
+        color: $color-walrus;
+    }
 }
+
 
 
 // REUSABLE PAGE STYLES ----------------------------------------------------------------------------

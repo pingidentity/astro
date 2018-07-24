@@ -4,7 +4,6 @@ var PropTypes = require("prop-types");
 
 var React = require("react"),
     classnames = require("classnames"),
-    If = require("../general/If"),
     Utils = require("../../util/Utils"),
     Button = require("../buttons/Button"),
     MessageTypes = require("../general/messages/MessagesConstants").MessageTypes;
@@ -16,6 +15,15 @@ var React = require("react"),
  **/
 
 /**
+ * @typedef {Object} InlineMessage~secondaryButtons
+ * @param {string} label
+ *     Pass in a string label for the button label if you want an action option. If you pass this you must
+ *     also pass the callback function.
+ * @param {InlineMessage~onClick} onClick
+ *     Callback to be triggered when the button is clicked.
+ * @param {string} [className]
+ *     CSS classes to add on the top-level HTML container.
+ *
  * @class InlineMessage
  * @desc Sometimes we need a message block to show embedded in a form or somewhere on a page.
  *
@@ -34,6 +42,9 @@ var React = require("react"),
  *     Warning message with full background color and no icon.
  * @param {InlineMessage~onClick} [onClick]
  *     Callback to be triggered when the button is clicked.
+ *  @param {Array.InlineMessage~secondaryButtons} [secondaryButtons]
+ *     List of secondary buttons
+ *
  *
  * @example
  *     No action button button:
@@ -57,20 +68,27 @@ class InlineMessage extends React.Component {
         type: PropTypes.oneOf([
             MessageTypes.NOTICE, MessageTypes.ERROR, MessageTypes.WARNING, MessageTypes.SUCCESS
         ]),
+        secondaryButtons: PropTypes.arrayOf(PropTypes.shape({
+            className: PropTypes.string,
+            onClick: PropTypes.func.isRequired,
+            label: PropTypes.string.isRequired,
+        })),
     };
 
     static defaultProps = {
         "data-id": "inline-message",
         bordered: true,
-        type: MessageTypes.NOTICE
+        type: MessageTypes.NOTICE,
+        secondaryButtons: []
     };
 
     _showAction = () => {
         return (this.props.label !== undefined && this.props.onClick !== undefined);
     };
 
-    _onClick = (e) => {
-        this.props.onClick(e);
+
+    _onClick = onClick => (e) => {
+        onClick(e);
     };
 
     componentWillMount() {
@@ -90,11 +108,31 @@ class InlineMessage extends React.Component {
                 <div data-id="inline-message-text" className="inline-message-text">
                     {this.props.children}
                 </div>
-                <If test={ this._showAction() } >
-                    <div data-id="inline-message-btn" className="inline-message-btn">
-                        <Button inline onClick={this._onClick }>{this.props.label}</Button>
-                    </div>
-                </If>
+                    {
+                        this._showAction() &&
+                        [{
+                            type: this.props.type,
+                            label: this.props.label,
+                            onClick: this.props.onClick,
+                            className: "primary"
+                        }, ...this.props.secondaryButtons].map(({
+                            onClick,
+                            label,
+                            type,
+                            className: buttonClass,
+                        }, index) => {
+                            return (
+                                    <div key={`${label}-${index}`}
+                                        data-id="inline-message-btn"
+                                        className="inline-message-btn"
+                                    >
+                                        <Button key="main" inline type={type} label={label}
+                                            onClick={this._onClick(onClick)} className={buttonClass}
+                                        />
+                                    </div>
+                            );
+                        })
+                    }
             </div>
         );
     }

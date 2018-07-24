@@ -74,8 +74,40 @@ class InlineMessageDemo extends React.Component {
                     type={ InlineMessage.MessageTypes.WARNING }
                     label="Do Something"
                     onClick={doSomething}
+                    secondaryButtons={[
+                        {
+                            onClick: doSomething,
+                            label: "Do Something",
+                            className: "secondary"
+
+                        },
+                    ]}
+                    >
+                    Message with two actions
+                </InlineMessage>
+
+                <InlineMessage
+                    type={ InlineMessage.MessageTypes.WARNING }
+                    label="Do Something"
+                    onClick={doSomething}
                     alternate={true}>
-                    Message with action.
+                    Alternate Message with action.
+                </InlineMessage>
+
+                <InlineMessage
+                    type={ InlineMessage.MessageTypes.ERROR }
+                    label="Do Something"
+                    onClick={doSomething}
+                    secondaryButtons={[
+                        {
+                            onClick: doSomething,
+                            label: "Do Something",
+                            className: "secondary"
+
+                        },
+                    ]}
+                    alternate={true}>
+                    Alternate Message with two actions.
                 </InlineMessage>
 
                 <InlineMessage type={ InlineMessage.MessageTypes.WARNING } label="Bad button" >
