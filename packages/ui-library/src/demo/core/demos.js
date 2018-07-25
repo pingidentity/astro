@@ -991,6 +991,15 @@ module.exports = [
                 pathToDemoSource: "demo_components_templates_QueryBuilderDemo.jsx.html",
                 fullscreen: true,
                 icon: "details"
+            },
+            {
+                label: "Home App",
+                demo: require("../components/templates/HomeAppDemo"),
+                pathToDoc: "components/templates/HomeApp.jsx",
+                pathToSource: "templates_HomeApp.jsx.html",
+                pathToDemoSource: "demo_components_templates_HomeAppDemo.jsx.html",
+                fullscreen: true,
+                icon: "details"
             }
         ]
     }
