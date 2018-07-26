@@ -2120,12 +2120,15 @@ input[type=file] {
         }
         &.inline {
             .label-text {
-                padding-right: 20px;
+                padding-right: 7px;
             }
             .form-error-icon {
                 top: 5px;
                 left: 100%;
                 margin: 0;
+            }
+            &.form-error {
+                margin-right: 40px;
             }
         }
     }
