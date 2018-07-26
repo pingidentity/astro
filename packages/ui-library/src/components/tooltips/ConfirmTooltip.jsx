@@ -28,7 +28,7 @@ import popsOver from "../../util/behaviors/popsOver";
  *      text for the button label
  * @param {string} buttonType
  *      css class to set the type of button(primary, secondary, danger)
- * @param {bool} disabledSave
+ * @param {bool} disableSave
  *      boolean to turn enable or disable the button.
  * @param {bool} [closeOnConfirm=false]
  *      when true, triggers onToggle when onConfirm is triggered.
