@@ -1193,7 +1193,7 @@ $color-grey-minor-1: $color-neutral-30;
 .page-controls-primary {
     box-sizing: border-box;
     position: fixed;
-    z-index: 1;
+    z-index: 999;
     left: $layout-nav-width + 40px;
     right: 40px;
     bottom: 0;
