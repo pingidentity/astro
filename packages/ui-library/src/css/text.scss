@@ -45,6 +45,13 @@
             }
         }
 
+        &.more-on-topic {
+            [class^='icon-'],
+            [class*=' icon-'] {
+                color: #2996cc;
+            }
+        }
+
         &.disabled {
             pointer-events: none;
             opacity: 0.4;
