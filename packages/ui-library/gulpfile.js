@@ -4,6 +4,7 @@ var babel = require("gulp-babel");
 var debug = require("gulp-debug");
 //var rp = require("gulp-revert-path");
 var runSequence = require("run-sequence");
+var sass = require("gulp-sass");
 
 gulp.task("transpile-lib", () =>
     gulp.src([
@@ -38,10 +39,17 @@ gulp.task("move-files", () =>
     .pipe(gulp.dest("lib"))
 );
 
+gulp.task("build-css", () =>
+    gulp.src("./src/css/ui-library.scss")
+    .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
+    .pipe(gulp.dest("lib/css"))
+);
+
 
 gulp.task("package-lib", () => {
     runSequence(
         ["transpile-lib"],
-        ["move-files"]
+        ["move-files"],
+        ["build-css"]
     );
 });

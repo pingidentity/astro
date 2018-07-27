@@ -63,6 +63,7 @@
     "gulp-debug": "~3.1.0",
     "gulp-flatten": "~0.3.1",
     "gulp-revert-path": "~1.2.1",
+    "gulp-sass": "^4.0.1",
     "history": "~4.7.2",
     "html-loader": "~0.5.1",
     "html-webpack-plugin": "2.9.0",
