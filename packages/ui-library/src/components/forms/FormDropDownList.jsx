@@ -666,8 +666,10 @@ class FormDropDownListStateless extends React.Component {
         );
     };
 
-    _getNoneOption = () => {
-        const noneOptionContainerClassName = classnames("none-option", { highlighted: this.props.searchIndex === -1 }),
+    _getNoneOption = ({ value: selectedIndex } = {}) => {
+        const noneOptionContainerClassName = classnames("none-option", {
+                highlighted: this.props.searchIndex === -1,
+                selected: !selectedIndex }),
             content = (
                 <span className={this.props.noneOptionLabelClassName}>
                     {this.props.noneOption.label}
@@ -701,7 +703,8 @@ class FormDropDownListStateless extends React.Component {
 
     _generateOptions = () => (
         [
-            ...this.props.noneOption && !this.props.searchString ? [this._getNoneOption()] : [],
+            ...this.props.noneOption && !this.props.searchString
+                ? [this._getNoneOption(this.props.selectedOption)] : [],
             ...this.props.groups ? this._getGroupedOptions() : this.props.options.map(this._getSingleOption)
         ]
     )
