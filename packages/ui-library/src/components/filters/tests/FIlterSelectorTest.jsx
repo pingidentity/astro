@@ -5,7 +5,7 @@ describe("FilterSelector", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         FilterSelector = require("../FilterSelector");
-    
+
     const options = [
         {
             id: "one",
@@ -49,6 +49,13 @@ describe("FilterSelector", function () {
     it("renders supplied labelText", function() {
         const labelText = "some label";
         const component = getComponent({ options, labelText, selected: ["one", "two"] });
+        const label = TestUtils.findRenderedDOMNodeWithDataId(component, "label");
+        expect(label.textContent).toEqual(labelText);
+    });
+
+    it("renders supplied label", function() {
+        const labelText = "some label";
+        const component = getComponent({ options, label: labelText, selected: ["one", "two"] });
         const label = TestUtils.findRenderedDOMNodeWithDataId(component, "label");
         expect(label.textContent).toEqual(labelText);
     });

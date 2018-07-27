@@ -31,6 +31,8 @@ var React = require("react"),
  *              The time format. Either "12" or "24". Default is "12"
  * @param {string}   [labelText]
  *              The text to display as the field's label
+ * @param {string} [label]
+ *              Alias for labelText
  * @param {string|object} [value]
  *              The value to be set, eg: "3:00pm" or a `moment` object
  * @param {TimePicker~onValueChange} onValueChange
@@ -44,6 +46,7 @@ module.exports = class extends React.Component {
         increments: PropTypes.number,
         format: PropTypes.string,
         labelText: PropTypes.string,
+        label: PropTypes.string,
         value: PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.object
@@ -215,7 +218,7 @@ module.exports = class extends React.Component {
 
         return (
             <FormDropDownList data-id={this.props["data-id"]}
-                    label={this.props.labelText}
+                    label={this.props.labelText || this.props.label}
                     className={containerClassName}
                     name={this.props.name}
                     options={times}

@@ -101,6 +101,8 @@ var Types = {
 *     The text to display for the help tooltip.
 * @param {string} [labelText]
 *     The text to show as the field's label.
+* @param {string} [label]
+*     Alias for labelText
 */
 class FormTimeField extends React.Component {
     static propTypes = {

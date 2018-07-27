@@ -50,6 +50,8 @@ var callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutside
  *
  * @param {string} [labelText]
  *     A label to render at the top of the color picker
+ * @param {string} [label]
+ *     Alias for labelText
  * @param {string} [hintText]
  *     If a label is provided, a hint text may also be optionally provided
  * @param {string} color
@@ -136,6 +138,7 @@ class Stateless extends React.Component {
         name: PropTypes.string,
         hintText: PropTypes.string,
         labelText: PropTypes.string,
+        label: PropTypes.string,
         color: PropTypes.string.isRequired,
         disabled: PropTypes.bool,
         onValueChange: PropTypes.func.isRequired,
@@ -297,7 +300,7 @@ class Stateless extends React.Component {
         return (
             /* eslint-disable max-len */
             <div data-id={this.props["data-id"]} className={css(containerCss)}>
-                <FormLabel data-id="colorLabel" value={this.props.labelText} hint={this.props.hintText}/>
+                <FormLabel data-id="colorLabel" value={this.props.labelText || this.props.label} hint={this.props.hintText}/>
                 <div className="color-picker" ref="swatch">
                     <span className="colors colors-theme-default colors-swatch-position-left colors-swatch-left colors-position-default"
                           ref="innerSwatch"

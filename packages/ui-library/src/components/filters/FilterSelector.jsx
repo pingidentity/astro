@@ -28,6 +28,8 @@ const optionsSelector = createSelector(
 *     Class name(s) to add to the top-level container/div
 * @param {string} [labelText]
 *     Label of the field
+* @param {string} [label]
+*     Alias for labelText.
 * @param {function} [onValueChange]
 *     Callback for when the value is changed
 * @param {function} [onSearch]
@@ -52,6 +54,7 @@ class FilterSelector extends React.Component {
         "data-id": PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         className: PropTypes.string,
         labelText: PropTypes.string,
+        label: PropTypes.string,
         onValueChange: PropTypes.func,
         onToggle: PropTypes.func,
         open: PropTypes.bool,
@@ -91,12 +94,13 @@ class FilterSelector extends React.Component {
     };
 
     _getSearch = () => this.props.search !== undefined ? this.props.search : this.state.search;
-    
+
     render = () => {
         const {
             "data-id": dataId,
             className,
             labelText,
+            label,
             selected,
             onToggle,
             onValueChange,
@@ -111,6 +115,7 @@ class FilterSelector extends React.Component {
                             open={open}
                             filterLabel={this._getFilterLabel() || ""}
                             labelText={labelText}
+                            label={label}
                             placeholder="Select One"
                             count={selected.length > 0 ? selected.length : -1}
                         />

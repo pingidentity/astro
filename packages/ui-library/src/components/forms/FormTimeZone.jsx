@@ -83,6 +83,8 @@ var getZoneNameDisplayValue = function (zoneName) {
 *     The text to display for the help tooltip.
 * @param {string} [labelText]
 *     The text to show as the field's label.
+* @param {string} [label]
+*     Alias for labelText
 * @param {boolean} [open=false]
 *     Shows/opens the time zone menu when true
 * @param {string} [searchString]
@@ -164,6 +166,7 @@ class TimeZoneStateless extends React.Component {
         helpClassName: PropTypes.string,
         labelHelpText: PropTypes.string,
         labelText: PropTypes.string,
+        label: PropTypes.string,
         onValueChange: PropTypes.func,
         onSearch: PropTypes.func,
         onToggle: PropTypes.func,
@@ -489,7 +492,7 @@ class TimeZoneStateless extends React.Component {
 
         return (
             <FormLabel
-                value={this.props.labelText}
+                value={this.props.labelText || this.props.label}
                 data-id={this.props["data-id"]}
                 className={classnames("input-timezone", classNames, this.props.className)}
                 hint={this.props.labelHelpText}

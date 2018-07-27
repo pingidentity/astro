@@ -53,6 +53,8 @@ var isValid = function (value, enforceRange, min, max) {
  *     The text to display for the help tooltip.
  * @param {string} [labelText]
  *     The text to show as the field's label.
+ * @param {string} [label]
+ *     Alias for labelText
  * @param {string} [name]
  *     The name attribute for the input.
  *
@@ -145,6 +147,11 @@ class Stateless extends React.Component {
 
         labelHelpText: PropTypes.string,
         labelText: PropTypes.oneOfType([
+            PropTypes.array,
+            PropTypes.object,
+            PropTypes.string
+        ]),
+        label: PropTypes.oneOfType([
             PropTypes.array,
             PropTypes.object,
             PropTypes.string

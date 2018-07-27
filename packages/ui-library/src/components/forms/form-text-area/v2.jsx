@@ -67,6 +67,8 @@ var React = require("react"),
 *
 * @param {string} [labelText]
 *     The text to show as the field's label.
+* @param {string} [label]
+*     Alias for labelText
 * @param {string} [labelHelpText]
 *     The text to display for the help tooltip.
 * @param {string} [helpClassName]
@@ -151,6 +153,11 @@ class FormTextAreaStateless extends React.Component {
             PropTypes.object,
             PropTypes.string
         ]),
+        label: PropTypes.oneOfType([
+            PropTypes.array,
+            PropTypes.object,
+            PropTypes.string
+        ]),
         labelHelpText: PropTypes.string,
         helpClassName: PropTypes.string,
         inputClassName: PropTypes.string,
@@ -171,7 +178,6 @@ class FormTextAreaStateless extends React.Component {
     static defaultProps = {
         "data-id": "form-text-area",
         mode: FormFieldConstants.FormFieldMode.EDIT,
-        labelText: "",
         edited: false,
         showUndo: false,
         disabled: false,
@@ -206,7 +212,7 @@ class FormTextAreaStateless extends React.Component {
             <FormLabel
                 data-id={this.props["data-id"]}
                 className={className}
-                value={this.props.labelText}
+                value={this.props.labelText || this.props.label}
                 hint={this.props.labelHelpText}
                 helpClassName={this.props.helpClassName}>
                 <span className="input-container">

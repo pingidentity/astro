@@ -97,6 +97,7 @@ class FormRadioGroup extends React.Component {
         disabled: PropTypes.bool,
         stacked: PropTypes.bool,
         label: PropTypes.string,
+        labelText: PropTypes.string,
         labelHelpText: PropTypes.string,
     };
 
@@ -154,7 +155,7 @@ class FormRadioGroup extends React.Component {
             this.props.label ? (
                 <FormLabel data-id={this.props["data-id"]}
                 disabled={this.props.disabled}
-                value={this.props.label}
+                value={this.props.label || this.props.labelText}
                 hint={this.props.labelHelpText}
                 className="list">{this._getRadioButtons()}</FormLabel>
             ): <div data-id={this.props["data-id"]}

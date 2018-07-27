@@ -17,6 +17,8 @@ var React = require("react"),
  *     CSS class names to assign to the top-level of the component
  * @param {string}   [labelText]
  *     The label text for the compound input
+ * @param {string} [label]
+ *     Alias for labelText
  * @param {object} [textFieldProps]
  *              The value to the properties for the FormTextField
  * @param {object} [dropDownListProps]
@@ -27,6 +29,7 @@ module.exports = class extends React.Component {
         "data-id": PropTypes.string,
         className: PropTypes.string,
         labelText: PropTypes.string,
+        label: PropTypes.string,
         labelHelpText: PropTypes.string,
         textFieldProps: PropTypes.object,
         dropDownListProps: PropTypes.object
@@ -45,8 +48,8 @@ module.exports = class extends React.Component {
 
         return (
             <div className={containerClassName} data-id={this.props["data-id"]}>
-                <label className="detached">
-                    {this.props.labelText}
+                <label className="detached" data-id={this.props["data-id"]+"-label"}>
+                    {this.props.labelText || this.props.label}
                 </label>
                 <FormTextField
                     {...this.props.textFieldProps}

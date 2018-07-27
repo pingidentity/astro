@@ -94,6 +94,22 @@ describe("Calendar", function () {
         // expect(help.className).toContain(customHelpClass);
     });
 
+    it("renders the label with the label prop", function () {
+        const dataId = "my-label",
+            customLabelText = "My Label",
+            component = ReactTestUtils.renderIntoDocument(
+                <Calendar
+                    data-id={dataId}
+                    date={selectedDate}
+                    label={customLabelText}
+                />
+            ),
+            labelText = TestUtils.findRenderedDOMNodeWithDataId(component, "label");
+
+        expect(labelText).toBeTruthy();
+        expect(labelText.textContent).toContain(customLabelText);
+    });
+
     it("renders will null date and inputValue state if date not specified", function () {
         var component = ReactTestUtils.renderIntoDocument(<Calendar />);
 

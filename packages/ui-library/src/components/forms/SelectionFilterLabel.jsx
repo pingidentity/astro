@@ -17,6 +17,8 @@ var React = require("react"),
 *     The text to display inside of the SelectionFilterLabel
 * @param {string} labelText
 *     The text to display as an input label above the SelectionFilterLabel
+* @param {string} [label]
+*     Alias for labelText
 * @param {boolean} open
 *     Is this view opened?
 * @param {string} placeholder
@@ -45,6 +47,7 @@ class SelectionFilterLabel extends React.Component {
         count: PropTypes.number,
         filterLabel: PropTypes.string.isRequired,
         labelText: PropTypes.string,
+        label: PropTypes.string,
         open: PropTypes.bool,
         required: PropTypes.bool,
         style: PropTypes.object
@@ -79,8 +82,9 @@ class SelectionFilterLabel extends React.Component {
     };
 
     render() {
-        return this.props.labelText ? (
-                <FormLabel data-id={this.props["data-id"] + "-label"} value={this.props.labelText}>
+        const labelText = this.props.labelText || this.props.label;
+        return labelText ? (
+                <FormLabel data-id={this.props["data-id"] + "-label"} value={labelText}>
                     {this._renderSelectionFilter()}
                 </FormLabel>
             ) : this._renderSelectionFilter();

@@ -96,6 +96,8 @@ var React = require("react"),
  *    The url for the default image to use.
  * @param {string} [labelText]
  *     The text to show as the input's label.
+ * @param {string} [label]
+ *     Alias for labelText
  * @param {number} maxFileSizeKb
  *    The maximum size (in KB) of the uploaded file (default 5MB).
  * @param {string} [thumbnailSrc]

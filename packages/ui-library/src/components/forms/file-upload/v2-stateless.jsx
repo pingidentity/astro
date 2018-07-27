@@ -17,6 +17,7 @@ module.exports = class extends React.Component {
     static propTypes = {
         //labels
         labelText: PropTypes.string,
+        label: PropTypes.string,
         labelSelect: PropTypes.string.isRequired,
         labelSelectOther: PropTypes.string,
         labelRemove: PropTypes.string.isRequired,
@@ -59,7 +60,7 @@ module.exports = class extends React.Component {
             <div className={containerClass} data-id={this.props["data-id"]}>
                 <FormLabel
                     className={classnames({ "form-error": this.props.errorMessage }) }
-                    value={this.props.labelText}>
+                    value={this.props.labelText || this.props.label}>
                     <ImagePreview
                         show={this.props.showThumbnail}
                         src={this.props.thumbnailSrc}

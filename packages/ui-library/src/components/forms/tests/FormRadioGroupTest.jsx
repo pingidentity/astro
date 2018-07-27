@@ -248,6 +248,21 @@ describe("FormRadioGroup", function () {
         expect(element).toBeTruthy();
     });
 
+    it("renders a label with labelText", function () {
+        const component = ReactTestUtils.renderIntoDocument(
+            <FormRadioGroup
+                data-id="test-radio-group"
+                groupName="test_radio_group"
+                onValueChange={callback}
+                items={items}
+                labelText="foo"/>
+        );
+
+        const element = TestUtils.findRenderedDOMNodeWithDataId(component, "test-radio-group");
+
+        expect(element).toBeTruthy();
+    });
+
     it("doesn't render label if no label prop is passed", function () {
         const component = ReactTestUtils.renderIntoDocument(
                 <FormRadioGroup

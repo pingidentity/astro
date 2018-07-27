@@ -111,6 +111,8 @@ var React = require("react"),
 *     The text to display for the lock help tooltip.
 * @param {string} [labelText]
 *     The text to show as the field's label.
+* @param {string} [label]
+*     Alias for labelText
 *
 * @param {string} [placeholder]
 *     Placeholder text for the input field.
@@ -223,6 +225,11 @@ class Stateless extends React.Component {
         labelClassName: PropTypes.string,
         labelHelpText: PropTypes.string,
         labelText: PropTypes.oneOfType([
+            PropTypes.array,
+            PropTypes.object,
+            PropTypes.string
+        ]),
+        label: PropTypes.oneOfType([
             PropTypes.array,
             PropTypes.object,
             PropTypes.string
@@ -467,7 +474,7 @@ class Stateless extends React.Component {
                 className={className}
                 ref="container"
                 data-id={id}
-                value={this.props.labelText}
+                value={this.props.labelText || this.props.label}
                 hint={this.props.labelHelpText}
                 lockText={this.props.labelLockText}
                 helpClassName={this.props.helpClassName}

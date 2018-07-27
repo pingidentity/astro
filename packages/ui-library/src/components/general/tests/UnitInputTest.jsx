@@ -129,4 +129,18 @@ describe("UnitInput", function () {
         
         expect(input.value).toEqual("ABC");
     });
+
+    it("renders label as well as labelText", function() {
+        component = ReactTestUtils.renderIntoDocument(
+            <UnitInput
+                label="Unit Input Text"
+                dropDownListProps={{
+                    options: options,
+                }}
+            />
+        );
+
+        const label = TestUtils.findRenderedDOMNodeWithDataId(component, "unit-input-label");
+        expect(label.textContent).toEqual("Unit Input Text");
+    });
 });

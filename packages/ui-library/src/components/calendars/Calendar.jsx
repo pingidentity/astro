@@ -72,6 +72,8 @@ var Views = {
  *     The text to display for the help tooltip.
  * @param {string} [labelText]
  *     The text to show as the field's label.
+ * @param {string} [label]
+ *     Alias for labelText.
  * @param {string} [name]
  *     Name attribute for the input.
  *
@@ -128,6 +130,7 @@ class Calendar extends React.Component {
         format: PropTypes.string,
         helpClassName: PropTypes.string,
         labelClassName: PropTypes.string,
+        label: PropTypes.string,
         labelText: PropTypes.string,
         labelHelpText: PropTypes.string,
         minView: PropTypes.oneOf([Views.DAYS, Views.MONTHS, Views.YEARS]),
@@ -417,7 +420,7 @@ class Calendar extends React.Component {
                     className={classnames(this.props.labelClassName)}
                     helpClassName={classnames(this.props.helpClassName)}
                     data-id={this.props["data-id"] + "-label"}
-                    value={this.props.labelText}
+                    value={this.props.labelText || this.props.label}
                     hint={this.props.labelHelpText}
                 />
                 <div className="input-container">

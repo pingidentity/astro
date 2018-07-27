@@ -305,7 +305,11 @@ class Multivalues extends React.Component {
 
 
         return (
-            <FormLabel value={this.props.labelText} className={className} data-id={this.props["data-id"]}>
+            <FormLabel
+                value={this.props.labelText || this.props.label}
+                className={className}
+                data-id={this.props["data-id"]}
+            >
                 <div className="entries" data-id="entries">
                     {entryNodes}
                     <div className="value-input">
