@@ -28,4 +28,13 @@ describe("PageSection", function () {
         const section = TestUtils.findRenderedDOMNodeWithDataId(component, "test-page-section");
         expect(section).toBeTruthy();
     });
+
+    it("renders without .page-section-content class", function() {
+        const component = ReactTestUtils.renderIntoDocument(
+            <div><PageSection>some content</PageSection></div>
+        );
+
+        const content = TestUtils.findRenderedDOMNodeWithClass(component, "page-section-content");
+        expect(content).not.toBeTruthy();
+    });
 });

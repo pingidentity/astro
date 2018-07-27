@@ -21,15 +21,22 @@ const PageSection = ({
     "data-id": dataId,
     description,
     title,
-}) => (
-    <div className={classnames("page-section", className)} data-id={dataId}>
-        <div className="page-section-title">{title}</div>
-        {description && <p>{description}</p>}
-        <div className="page-section-content">
-            {children}
+}) => {
+    const props = { className: classnames("page-section", className), "data-id": dataId };
+
+    return title
+        ? <div {...props}>
+                <div className="page-section-title">{title}</div>
+                {description && <p>{description}</p>}
+                <div className="page-section-content">
+                    {children}
+                </div>
         </div>
-    </div>
-);
+        : <div {...props}>
+            {description && <p>{description}</p>}
+            {children}
+        </div>;
+};
 
 PageSection.propTypes = {
     className: PropTypes.string,
