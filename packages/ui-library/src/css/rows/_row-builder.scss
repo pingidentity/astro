@@ -1,0 +1,23 @@
+.row-builder {
+    &__row {
+        align-items: center;
+        display: inline-flex;
+        margin-top: $spacing-md;
+        padding-bottom: $spacing-md;
+        width: 100%;
+    }
+
+    &__remove {
+        &__label {
+            @include text-label;
+            line-height: $font-size-reduced;
+            min-height: $font-size-reduced;
+            margin-bottom: 13px;
+        }
+
+        &__button {
+            display: block;
+            margin-left: 20%;
+        }
+    }
+}

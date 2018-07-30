@@ -579,6 +579,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_list_PaginationDemo.jsx.html"
                     },
                     {
+                        label: "Row Builder",
+                        demo: require("../components/rows/RowBuilderDemo"),
+                        pathToDoc: "components/rows/RowBuilder.jsx",
+                        pathToSource: "components_rows_RowBuilder.jsx.html",
+                        pathToDemoSource: "demo_components_rows_RowBuilderDemo.jsx.html"
+                    },
+                    {
                         label: "Row Index Navigation",
                         demo: require("../components/general/RowIndexNavDemo"),
                         pathToDoc: "components/general/RowIndexNav.jsx",
