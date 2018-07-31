@@ -182,6 +182,14 @@ $wizard-close-button-color: $color-strong-neutral-40;
 
 .wizard-step__content {
     margin-left: $wizard-h-spacing;
+
+    &:before {
+        content: '';
+        border-top: 1px solid $color-rabbit-fur;
+        display: block;
+        margin-bottom: $spacing-xl;
+        margin-left: -$wizard-h-spacing;
+    }
 }
 
 .wizard-progress-menu-scroller {
@@ -215,20 +223,29 @@ $wizard-close-button-color: $color-strong-neutral-40;
     &:after {
         @include inactive-link-styles;
     }
+
+    .wizard-progress-menu__item-description {
+        opacity: 0.8;
+    }
+
+    &--completed {
+        .wizard-progress-menu__item-title,
+        .wizard-progress-menu__item-description {
+            opacity: 0.6;
+        }
+    }
 }
 
 .wizard-progress-menu__step--click-disabled {
     cursor: default;
-
-    .wizard-progress-menu__step-icon,
-    .wizard-progress-menu__item-title,
-    .wizard-progress-menu__item-description {
-        opacity: 0.6;
-    }
 }
 
 .wizard-progress-menu__step--active {
     background-color: $wizard-progress-menu-selected-bgcolor;
+
+    .wizard-progress-menu__item-description {
+        opacity: 1;
+    }
 
     &:before {
         content: '';

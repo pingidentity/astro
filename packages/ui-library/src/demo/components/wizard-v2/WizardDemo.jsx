@@ -236,7 +236,7 @@ class WizardDemo extends React.Component {
                         required>
 
 
-                        <div className="page-section-title">Select an application type</div>
+                        <div className="text-section-title space-bottom-md">Select an application type</div>
                         <TileSelector
                             onValueChange={this._onTileSelect}
                             selected={this.state.currentApp.selectedTile}

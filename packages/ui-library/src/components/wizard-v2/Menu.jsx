@@ -50,6 +50,7 @@ class Menu extends React.Component {
                     data-id={`${this.props["data-id"]}-menu-item-${type}-${index}`}
                     index={step.index}
                     clickDisabled={clickDisabled}
+                    completed={step.completed}
                     onClick={this.props.onMenuClick}
                     type={type}
                     number={index + 1}
@@ -114,7 +115,8 @@ function Item(props) {
     const stepClassNames = classnames(
         "wizard-progress-menu__step",
         { "wizard-progress-menu__step--active": props.active },
-        { "wizard-progress-menu__step--click-disabled": props.clickDisabled }
+        { "wizard-progress-menu__step--click-disabled": props.clickDisabled },
+        { "wizard-progress-menu__step--completed": props.completed },
     );
 
     const content = required && !props.completed ? props.number : null;
