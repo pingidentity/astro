@@ -508,29 +508,28 @@ class MultiDragStateful extends React.Component {
 
     _handleDrop = (desc) => {
         const {
-            from: fromIndex,
-            to: toIndex
+            from: convertedFrom,
+            to: convertedTo
         } = convertFilteredIndexes(this.state.columns, desc);
 
-        const {
-            from: {
-                column: fromCol
-            },
-            to: {
-                column: toCol
-            },
-        } = desc;
+        const { from, to } = desc;
 
-        let next = move(this.state, {
-            from: { column: fromCol, index: fromIndex },
-            to: { column: toCol, index: toIndex }
-        });
+        let next = move(this.state, { from, to });
 
         // reapply filters after a move so moved rows filtered as well
         next = reapplyFilters(next);
         this.setState(next, () => {
             if (this.props.onDrop) {
-                this.props.onDrop({ ...desc }, next.columns);
+                this.props.onDrop({
+                    from: {
+                        convertedIndex: convertedFrom,
+                        ...from
+                    },
+                    to: {
+                        convertedIndex: convertedTo,
+                        ...to
+                    }
+                }, next.columns);
             }
         });
     };

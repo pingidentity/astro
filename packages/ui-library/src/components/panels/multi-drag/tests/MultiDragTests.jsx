@@ -204,7 +204,8 @@ describe("MultiDrag", function () {
         const componentRef = component.refs.MultiDragStateful;
 
         const { columns } = componentRef.state;
-        const desc = { from: { column: 0, index: 0 }, to: { column: 0, index: 0 } };
+        const callback = { column: 0, index: 0, convertedIndex: 0 };
+        const desc = { from: callback, to: callback };
         componentRef._handleDrop(desc);
 
         expect(component.props.onDrop).toBeCalledWith(desc, columns);
