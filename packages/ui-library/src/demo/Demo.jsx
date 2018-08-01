@@ -109,7 +109,9 @@ class DemoApp extends React.Component {
     * @desc Compute the path the user will need to import this component in their appActions
     * @returns {string} = The path to the component in the lib folder
     */
-    _getImportPath = path => path ? `lib/${path.replace(/\.jsx$/, ".js")}` : null;
+    _getImportPath = path => path
+        ? `ui-library/lib/${path.replace(/_/g, "/").replace(/\.jsx\.html$/, "").replace(/\/v2$/, "")}`
+        : null;
 
     /**
     * @method
@@ -291,7 +293,7 @@ class DemoApp extends React.Component {
                         jsdocUrl={this._getDocumentationUrl(name)}
                         codePathUrl={this._getSourceUrl(path)}
                         demoCodePathUrl={this._getSourceUrl(demoPath)}
-                        importPath={this._getImportPath(this._demoItem.pathToDoc)}
+                        importPath={this._getImportPath(this._demoItem.pathToSource)}
                         code={this.props.code[id]}
                         fullscreen={this._demoItem.fullscreen} />
                 </div>
