@@ -12,7 +12,7 @@
   "dependencies": {
     "babel-runtime": "6.26.0",
     "classnames": "1.2.1",
-    "clipboard-polyfill": "^2.4.7",
+    "clipboard-polyfill": "2.4.7",
     "clone": "1.0.2",
     "core-js": "2.5.1",
     "exif-js": "2.1.1",
