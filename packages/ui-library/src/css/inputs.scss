@@ -820,32 +820,9 @@ input[type=file] {
         max-height: 200px;
         overflow-y: scroll;
 
-
-        .none-option {
-            // Note: decided not to use line-height here for alignment because it causes issues e.g. large font-sizes
-            // will overlap, and also looks bad if one item overflows onto 2 lines
-            box-sizing: border-box;
-            padding: $option-padding;
-            font-size: 14px;
-            position: relative;
-            line-height: 13px;
-            color: $color-midnight;
-            cursor: pointer;
-            white-space: normal;
-
-            &:hover {
-                background-color: $color-active-blue;
-                color: $color-white;
-                display: block;
-                min-width: 100%;
-
-                &:before {
-                    background-color: $color-white;
-                }
-            }
-        }
         // each item in dropdown
-        .select-option {
+        .select-option,
+        .none-option {
             // Note: decided not to use line-height here for alignment because it causes issues e.g. large font-sizes
             // will overlap, and also looks bad if one item overflows onto 2 lines
             box-sizing: border-box;
