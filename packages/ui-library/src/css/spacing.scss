@@ -1,11 +1,11 @@
 $base-spacing: 10px;
 
-$spacing-xs: $base-spacing * 0.5;
-$spacing-sm: $base-spacing * 1;
-$spacing-md: $base-spacing * 1.5;
-$spacing-lg: $base-spacing * 2.5;
-$spacing-xl: $base-spacing * 4;
-$spacing-xx: $base-spacing * 6.5;
+$spacing-xs: $base-spacing * 0.5; //5px
+$spacing-sm: $base-spacing * 1; //10px
+$spacing-md: $base-spacing * 1.5; //15px
+$spacing-lg: $base-spacing * 2.5; //25px
+$spacing-xl: $base-spacing * 4; //40px
+$spacing-xx: $base-spacing * 6.5; //65px
 
 /* TOP */
 .space-top-xs {

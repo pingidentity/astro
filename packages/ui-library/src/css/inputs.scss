@@ -2,6 +2,7 @@
 
 @import 'code-view';
 @import 'forms/_keyword-search';
+@import 'forms/_translation-picker';
 
 // INPUT GLOBAL VARS ---------------------------------------------------------------------------------------------------
 
@@ -1767,34 +1768,6 @@ input[type=file] {
             }
         }
     }
-    .selection-options {
-        border-top: 1px solid $color-input-fill;
-        padding: 5px 0 0;
-
-        .option {
-            font-size: 13px;
-            font-family: $font-pn-regular;
-            color: $color-active-blue;
-            display: inline-block;
-            padding: 0;
-            cursor: pointer;
-
-            &:after {
-                content: '|';
-                padding: 0 5px;
-
-                &:hover {
-                    text-decoration: none !important;
-                }
-            }
-            &:last-of-type {
-                &:after {
-                    content: '';
-                    padding: 0;
-                }
-            }
-        }
-    }
     .required-message {
         background-color: $color-warning-icon-yellow;
         color: $color-white;
@@ -1848,10 +1821,45 @@ input[type=file] {
     }
 }
 
+//pulled this out of the above and made it more generic for multiple list components to use
+.list-input__bottom-links {
+    border-top: 1px solid $color-input-fill;
+    padding: 5px 0 0;
+
+    .option,
+    a {
+        font-size: 13px;
+        font-family: $font-pn-regular;
+        color: $color-active-blue;
+        display: inline-block;
+        padding: 0;
+        cursor: pointer;
+
+        &:after {
+            content: '|';
+            padding: 0 5px;
+
+            &:hover {
+                text-decoration: none !important;
+            }
+        }
+        &:last-of-type {
+            &:after {
+                content: '';
+                padding: 0;
+            }
+        }
+    }
+}
+
 .link-dropdown-list {
     @include drop-down-styles;
     .collapsible-link {
         padding: 0;
+    }
+    //temporary. remove when lists are aligned
+    .list-input__bottom-links {
+        margin: 0 $spacing-sm $spacing-xs;
     }
 }
 

@@ -51,6 +51,7 @@ class LinkDropDownListDemo extends React.Component {
                         open={this.state.open}
                         options={_options}
                         selectedOption={this.state.selectedOption}
+                        bottomLinks={<a href="#">Link</a>}
                     />
                 </div>
                 <LinkDropDownList

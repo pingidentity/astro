@@ -1,0 +1,27 @@
+.translation-picker {
+    .collapsible-link,
+    .collapsible-link:hover {
+        @include text-value;
+        text-decoration: none;
+    }
+    .collapsible-link:after {
+        color: $color-value-text !important;
+    }
+}
+
+.translation-picker__label {
+    $width: 21px;
+    font-size: 13px;
+    text-align: center;
+    width: $width;
+    height: 1em;
+    overflow: hidden;
+    &:before {
+        font-family: $icon-font;
+        content: $icon-chat-square;
+        font-size: $width;
+        position: absolute;
+        left: 0;
+        margin-top: 1px; //center the text better in the bubble
+    }
+}

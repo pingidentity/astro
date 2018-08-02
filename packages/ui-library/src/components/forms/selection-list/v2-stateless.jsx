@@ -112,7 +112,7 @@ module.exports = class extends React.Component {
             ? this.props.selectedItemIds.length : !!this.props.selectedItemIds;
 
         return (
-            <div data-id={this.props["data-id"]} className="selection-options">
+            <div data-id={this.props["data-id"]} className="list-input__bottom-links">
                 <a
                     data-id="show-only-or-all"
                     className="option"
@@ -139,7 +139,7 @@ module.exports = class extends React.Component {
                 "input-selection-list--no-border": this.props["no-border"]
             }),
             visibleItems = this.props.showOnlySelected ? this._filterVisible() : this.props.items;
-        
+
         return (
             <div data-id={this.props["data-id"]} className={className}>
                 {this.props.requiredText && (

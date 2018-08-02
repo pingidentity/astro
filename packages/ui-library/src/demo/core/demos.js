@@ -272,6 +272,13 @@ module.exports = [
                         ],
                         pathToDemoSource: "demo_components_forms_SelectionListDemo.jsx.html"
                     },
+                    {
+                        label: "Translation Picker",
+                        demo: require("../components/forms/TranslationPickerDemo"),
+                        pathToDoc: "components/forms/TranslationPicker.jsx",
+                        pathToSource: "components_forms_TranslationPicker.jsx.html",
+                        pathToDemoSource: "demo_components_forms_TranslationPickerDemo.jsx.html"
+                    },
                 ]
             },
             {

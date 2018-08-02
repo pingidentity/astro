@@ -30,6 +30,9 @@ var React = require("react"),
 * @param {string} [className]
  *     CSS classes to be set on the top-level HTML container.
  *
+ * @param {object} [bottomLinks]
+ *     Link actions for the bottom of the list
+ *
  * @param {boolean} [stateless]
  *     Enables whether the open state of teh component to be externally managed. True will relinquish control to the
  *     component's parent component. False or not specified will cause the component to manage state internally.
@@ -133,6 +136,11 @@ class LinkDropDownListStateless extends React.Component {
                 <ul className="select-list" data-id={this.props["data-id"] + "-menu"}>
                     {this._renderOptions()}
                 </ul>
+                {this.props.bottomLinks &&
+                    <div data-id={this.props["data-id"] + "-bottom-links"} className="list-input__bottom-links">
+                        {this.props.bottomLinks}
+                    </div>
+                }
             </DetailsTooltip>
         );
     }
@@ -140,14 +148,17 @@ class LinkDropDownListStateless extends React.Component {
 
 class LinkDropDownListStateful extends React.Component {
     static propTypes = {
+        bottomLinks: PropTypes.object,
         className: PropTypes.string,
         "data-id": PropTypes.string,
-        label: PropTypes.string,
+        label: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.object]),
         onClick: PropTypes.func,
         onToggle: PropTypes.func,
         open: PropTypes.bool,
         options: PropTypes.arrayOf(PropTypes.object).isRequired,
-        selectedOption: PropTypes.object
+        selectedOption: PropTypes.object,
     };
 
     static defaultProps = {

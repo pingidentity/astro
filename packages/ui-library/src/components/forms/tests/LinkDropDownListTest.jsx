@@ -147,7 +147,7 @@ describe("LinkDropDownList", function () {
         menu = getMenu(component);
         expect(menu).toBeFalsy();
     });
-    
+
     it("No onToggle callback exists when onToggle not provided", function () {
         var component = ReactTestUtils.renderIntoDocument(
                             <LinkDropDownList
@@ -177,10 +177,24 @@ describe("LinkDropDownList", function () {
                             />);
 
         expect(component.props.onToggle).toBeTruthy();
-        
+
         var label = TestUtils.findRenderedDOMNodeWithDataId(component, componentId + "-label");
 
         ReactTestUtils.Simulate.click(label);
         expect(component.props.onToggle).toBeCalled();
+    });
+
+    it("renders bottom links", () => {
+        var component = ReactTestUtils.renderIntoDocument(
+            <LinkDropDownList
+                data-id={componentId}
+                stateless
+                open
+                options={options}
+                bottomLinks={<a href="#">Link</a>}
+            />);
+
+        var label = TestUtils.findRenderedDOMNodeWithDataId(component, componentId + "-bottom-links");
+        expect(label).toBeTruthy();
     });
 });

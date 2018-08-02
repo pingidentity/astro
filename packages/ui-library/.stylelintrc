@@ -1,5 +1,5 @@
 {
-    "ignoreFiles":"./src/css/reset.scss",
+    "ignoreFiles":["./src/css/reset.scss", "./src/css/icons/*.scss"],
     "defaultSeverity": "error",
     "extends": "stylelint-config-standard",
     "rules": {
