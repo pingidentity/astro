@@ -109,9 +109,18 @@ class DemoApp extends React.Component {
     * @desc Compute the path the user will need to import this component in their appActions
     * @returns {string} = The path to the component in the lib folder
     */
-    _getImportPath = path => path
-        ? `ui-library/lib/${path.replace(/_/g, "/").replace(/\.jsx\.html$/, "").replace(/\/v2$/, "")}`
-        : null;
+    _getImportPath = path => {
+        if (path) {
+            const pathString = (typeof path === "string") ? path : path[0];
+            if (pathString && pathString.replace) {
+                return `ui-library/lib/${pathString
+                    .replace(/_/g, "/")
+                    .replace(/\.jsx\.html$/, "")
+                    .replace(/\/v2$/, "")}`;
+            }
+        }
+        return null;
+    }
 
     /**
     * @method
