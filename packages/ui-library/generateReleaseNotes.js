@@ -21,7 +21,9 @@ if (user === undefined || pass === undefined) {
     console.log("Please supply a username and password");
 }
 
-const requestUri = `https://jira.pingidentity.com/rest/api/2/search?jql=sprint%20%3D%20%22UIP-${version}%22%20AND%20status%20%3D%20Closed%20`;
+const params = `sprint = "UIP-${version}" AND fixversion =  ${version} AND status = Closed `;
+const requestUri = `https://jira.pingidentity.com/rest/api/2/search?jql=${encodeURIComponent(params)}`;
+
 
 fetch(requestUri, {
     method: "GET",
