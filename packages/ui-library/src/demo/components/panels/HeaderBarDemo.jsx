@@ -82,7 +82,8 @@ class HeaderBarDemo extends React.Component {
                         label: "Internet" }
                     ]
                 }
-            ]
+            ],
+            newEnvironment: false,
         };
 
     }
@@ -103,6 +104,10 @@ class HeaderBarDemo extends React.Component {
         this.setState(HeaderBar.Reducer(this.state, HeaderBar.Actions.setMarket(market)));
     }
 
+    _handleNewEnvironment = () => {
+        this.setState({ newEnvironment: true });
+    }
+
     render() {
         return (
             <div>
@@ -114,16 +119,20 @@ class HeaderBarDemo extends React.Component {
                     environmentOptions={environments}
                     navOptions={navItems}
                     onEnvironmentChange={this._handleEnvironment}
+                    onNewEnvironment={this._handleNewEnvironment}
                     onNavChange={this._handleNav}
                     onMarketChange={this._handleMarket}
                     marketOptions={markets}
                 />
+                {this.state.newEnvironment && <p>Clicked +New Environment</p>}
                 <hr className="hr" />
                 <HeaderBar
                     inline={true}
                     siteLogo="pingone"
                     environmentOptions={environments}
                     environmentSelected="production"
+                    onNewEnvironment={this._handleNewEnvironment}
+                    newEnvironmentLabel="Custom label"
                     navOptions={navItems}
                     navSelected="connections"
                     marketOptions={markets}

@@ -49,6 +49,10 @@ var React = require("react"),
  *          Active item in the header nav
  * @param {HeaderBar~onEnvironmentChange} [onEnvironmentChange]
  *          Callback for when the selected environment changes.
+ * @param {HeaderBar~onNewEnvironment} [onNewEnvironment]
+ *          Callback for when the user clicks the "+New Environment" link.
+ * @param {string} [newEnvironmentLabel = "+ New environment"]
+ *          Label for the "+ New environment" link
  * @param {HeaderBar~onItemValueChange} [onItemValueChange]
  *          Callback which will be executed when a header link is clicked.  The id
  *          of the nav item will be passed back as the first parameter
@@ -84,6 +88,10 @@ var React = require("react"),
  * @callback HeaderBar~onEnvironmentChange
  * @param {string} environment
  *          Environment id.
+ */
+
+/**
+ * @callback HeaderBar~onNewEnvironment
  */
 
 /**
@@ -132,7 +140,9 @@ class HeaderBar extends React.Component {
             PropTypes.string,
             PropTypes.number
         ]),
+        newEnvironmentLabel: PropTypes.string,
         onEnvironmentChange: PropTypes.func,
+        onNewEnvironment: PropTypes.func,
         onItemValueChange: PropTypes.func,
         onMenuValueChange: PropTypes.func,
         onNavChange: PropTypes.func,
@@ -302,6 +312,8 @@ class HeaderBar extends React.Component {
                             options={this.props.environmentOptions}
                             environment={this.props.environmentSelected}
                             onEnvironmentChange={this.props.onEnvironmentChange}
+                            onNewEnvironment={this.props.onNewEnvironment}
+                            newEnvironmentLabel={this.props.newEnvironmentLabel}
                         />
                     )}
 

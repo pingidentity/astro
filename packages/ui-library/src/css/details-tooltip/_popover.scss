@@ -198,6 +198,11 @@ $max-popover-width: 360px;
     &:hover {
         background: $color-strong-neutral-90;
     }
+    &:hover,
+    &:active {
+        color: $color-slate;
+        text-decoration: none;
+    }
 }
 
 .nav-menu__link--w-icon {

@@ -436,4 +436,31 @@ describe("HeaderBar", function() {
         ReactTestUtils.Simulate.click(nav);
         expect(callback).toBeCalledWith("thing");
     });
+
+    it("calls the new environment callback", function() {
+        var callback = jest.genMockFunction();
+
+        var wrapper = getWrappedComponent({
+            environmentOptions: [{ label: "Thing", id: "thing" }],
+            onNewEnvironment: callback
+        });
+        var component = wrapper.refs.target;
+        var selector = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "environment-selector"
+        );
+        var trigger = TestUtils.findRenderedDOMNodeWithDataId(
+            selector,
+            "action-btn"
+        );
+        ReactTestUtils.Simulate.click(trigger);
+        var newLink = TestUtils.findRenderedDOMNodeWithDataId(
+            component,
+            "new-environment"
+        );
+
+        expect(callback).not.toBeCalled();
+        ReactTestUtils.Simulate.click(newLink);
+        expect(callback).toBeCalled();
+    });
 });

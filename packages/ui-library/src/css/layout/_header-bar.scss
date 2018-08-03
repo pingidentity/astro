@@ -24,10 +24,6 @@ $topnav-bg: $color-neutral-10;
     height: $topnav-height;
     padding-left: $spacing-md;
     padding-right: $spacing-md;
-
-    a:hover {
-        text-decoration: none;
-    }
 }
 
 .header-bar__left,
@@ -172,6 +168,7 @@ $topnav-bg: $color-neutral-10;
 
     &:hover {
         color: $color-white;
+        text-decoration: none;
     }
 }
 

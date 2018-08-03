@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import LinkDropDownList from "../../forms/LinkDropDownList";
+import Anchor from "../../general/Anchor";
 
 import _ from "underscore";
 import { getIconClassName } from "../../../util/PropUtils";
@@ -11,15 +12,18 @@ class EnvironmentSelector extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         onEnvironmentChange: PropTypes.func,
+        onNewEnvironment: PropTypes.func,
         options: PropTypes.array,
-        environment: PropTypes.string
+        environment: PropTypes.string,
+        newEnvironmentLabel: PropTypes.string,
     };
 
     static defaultProps = {
         "data-id": "environment-selector",
         onEnvironmentChange: _.noop,
         options: [],
-        environment: ""
+        environment: "",
+        newEnvironmentLabel: "+ New environment",
     };
 
     _handleToggle = () => this.setState({ open: !this.state.open });
@@ -57,6 +61,12 @@ class EnvironmentSelector extends React.Component {
 
     render = () => {
         const selectedOption = this._getSelectedOption();
+        const bottomLinks = this.props.onNewEnvironment
+            ? <Anchor
+                onClick={this.props.onNewEnvironment}
+                data-id="new-environment"
+            >{this.props.newEnvironmentLabel}</Anchor>
+            : null;
 
         return (
             <LinkDropDownList
@@ -75,6 +85,7 @@ class EnvironmentSelector extends React.Component {
                 options={this._getOptions()}
                 selectedOption={selectedOption}
                 className="environment-selector left"
+                bottomLinks={bottomLinks}
             />
         );
     };
