@@ -213,14 +213,14 @@ describe("FormDropDownList", function () {
         var componentRef = component.refs.FormDropDownListStateful;
 
         expect(componentRef.state.open).toBe(false);
-        expect(componentRef.state.searchIndex).toBe(-1);
+        expect(componentRef.state.searchIndex).toBe(null);
         expect(componentRef.state.searchString).toBe("");
         expect(componentRef.state.searchTime).toBe(0);
 
         componentRef._handleToggle();
 
         expect(componentRef.state.open).toBe(true);
-        expect(componentRef.state.searchIndex).toBe(-1);
+        expect(componentRef.state.searchIndex).toBe(null);
         expect(componentRef.state.searchString).toBe("");
         expect(componentRef.state.searchTime).toBe(0);
     });
@@ -230,7 +230,7 @@ describe("FormDropDownList", function () {
         var componentRef = component.refs.FormDropDownListStateful;
 
         expect(componentRef.state.open).toBe(false);
-        expect(componentRef.state.searchIndex).toBe(-1);
+        expect(componentRef.state.searchIndex).toBe(null);
         expect(componentRef.state.searchString).toBe("");
         expect(componentRef.state.searchTime).toBe(0);
 
@@ -721,5 +721,22 @@ describe("FormDropDownList", function () {
         ReactTestUtils.Simulate.keyDown(select, { keyCode: KeyBoardUtils.KeyCodes.ARROW_DOWN });
         expect(component.props.onSearch).not.toBeCalled();
         expect(component.props.onToggle).not.toBeCalled();
+    });
+
+    it("shows none option as selected when selected", function () {
+        const noneOption = { label: "none" };
+        const component = getComponent({
+            open: true,
+            searchIndex: -1,
+            searchString: "t",
+            searchTime: 0,
+            noneOption,
+            selectedOption: noneOption
+        });
+
+        const selected = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-input-input");
+
+        expect(selected.value).toEqual("none");
+
     });
 });

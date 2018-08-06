@@ -667,7 +667,10 @@ class FormDropDownListStateless extends React.Component {
     };
 
     _getNoneOption = () => {
-        const noneOptionContainerClassName = classnames("none-option", { highlighted: this.props.searchIndex === -1 }),
+        const noneOptionContainerClassName = classnames("none-option", {
+                highlighted: this.props.searchIndex === -1,
+                selected: this.props.selectedOption.label === this.props.noneOption.label
+            }),
             content = (
                 <span className={this.props.noneOptionLabelClassName}>
                     {this.props.noneOption.label}
@@ -775,7 +778,7 @@ class FormDropDownListStateful extends React.Component {
 
     state = {
         open: this.props.open || false,
-        searchIndex: -1,
+        searchIndex: null,
         searchString: "",
         searchTime: 0,
         matchedOptions: this.props.options
@@ -792,7 +795,7 @@ class FormDropDownListStateful extends React.Component {
     _handleToggle = () => {
         this.setState({
             open: !this.state.open,
-            searchIndex: -1,
+            searchIndex: null,
             searchTime: 0
         });
     };
