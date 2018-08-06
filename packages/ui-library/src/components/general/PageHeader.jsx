@@ -4,6 +4,7 @@ var React = require("react"),
     PropTypes = require("prop-types"),
     classnames = require("classnames");
 
+import Icon from "../general/Icon";
 /**
  * @class Page Header
  * @desc A component for displaying a header.
@@ -23,6 +24,8 @@ var React = require("react"),
  *  of the header.
  * @param {string} [image]
  *     URL for an image that, when provided, appears to the left of the page title
+ * @param {string} [icon]
+ *     HTTP path to an icon. When specified, the icon displays to the left of the title and subtitle.
  *
  * @example
  * <Header title="Header title" />
@@ -37,6 +40,7 @@ const PageHeader = ({
     subtitle,
     title,
     underlined,
+    iconName
 }) => {
 
     const pageHeaderClass = classnames("page-header", className, { "page-header--underlined": underlined });
@@ -53,9 +57,14 @@ const PageHeader = ({
         return subtitle && <div className="page-header__subtitle">{subtitle}</div>;
     };
 
+    const renderIcon = () => {
+        return iconName && <Icon className="page-header__icon" iconName={iconName}/>;
+    };
+
     return (
         <div className={pageHeaderClass} data-id={dataId}>
             {renderImage()}
+            {renderIcon()}
             <div className="page-header__text">
                 <div className="page-header__title">
                     {title}
@@ -75,10 +84,11 @@ PageHeader.propTypes = {
     underlined: PropTypes.bool,
     accessories: PropTypes.node,
     image: PropTypes.string,
+    iconName: PropTypes.string,
 };
 
 PageHeader.defaultProps = {
-    "data-id": "page-header-title",
+    "data-id": "page-header",
     underlined: false
 };
 
