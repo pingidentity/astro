@@ -23,6 +23,8 @@ var React = require("react"),
  *  of the header.
  * @param {string} [image]
  *     URL for an image that, when provided, appears to the left of the page title
+ * @param {string} [icon]
+ *     HTTP path to an icon. When specified, the icon displays to the left of the title and subtitle.
  *
  * @example
  * <Header title="Header title" />
@@ -37,6 +39,7 @@ const PageHeader = ({
     subtitle,
     title,
     underlined,
+    icon
 }) => {
 
     const pageHeaderClass = classnames("page-header", className, { "page-header--underlined": underlined });
@@ -53,9 +56,14 @@ const PageHeader = ({
         return subtitle && <div className="page-header__subtitle">{subtitle}</div>;
     };
 
+    const renderIcon = () => {
+        return icon && <span className={"item-icon " + icon}/>;
+    };
+
     return (
         <div className={pageHeaderClass} data-id={dataId}>
             {renderImage()}
+            {renderIcon()}
             <div className="page-header__text">
                 <div className="page-header__title">
                     {title}
@@ -75,6 +83,7 @@ PageHeader.propTypes = {
     underlined: PropTypes.bool,
     accessories: PropTypes.node,
     image: PropTypes.string,
+    icon: PropTypes.string,
 };
 
 PageHeader.defaultProps = {

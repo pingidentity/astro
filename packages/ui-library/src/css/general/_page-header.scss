@@ -5,6 +5,12 @@
 
     display: flex;
     flex-wrap: nowrap;
+
+    .item-icon {
+        font-size: 24px;
+        flex-basis: 40px;
+        line-height: inherit;
+    }
 }
 
 .page-header--underlined {
@@ -56,3 +62,4 @@
         max-width: $size;
     }
 }
+
