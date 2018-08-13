@@ -100,6 +100,16 @@ describe("LinkDropDownList", function () {
         expect(component.props.onToggle).not.toBeCalled();
     });
 
+    it("Does not trigger onClick callback if not passed in - stateful", function () {
+        const onClick = jest.fn();
+        const clickIndex = 1,
+            component = getComponent({ open: true, onClick: undefined }),
+            menuItems = getMenu(component).children;
+
+        ReactTestUtils.Simulate.click(menuItems[clickIndex]);
+        expect(onClick).not.toBeCalled();
+    });
+
     it("Triggers onToggle callback when menu item is clicked and closeOnSelection is true", function () {
         var clickIndex = 1,
             component = getComponent({
@@ -191,7 +201,7 @@ describe("LinkDropDownList", function () {
                 stateless
                 open
                 options={options}
-                bottomLinks={<a href="#">Link</a>}
+                bottomPanel={<a href="#">Link</a>}
             />);
 
         var label = TestUtils.findRenderedDOMNodeWithDataId(component, componentId + "-bottom-links");

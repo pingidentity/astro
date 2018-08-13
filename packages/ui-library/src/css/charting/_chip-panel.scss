@@ -1,0 +1,36 @@
+.chip-panel {
+    &__chip {
+        @include border-radius(2px);
+
+        align-items: center;
+        color: $color-white;
+        cursor: pointer;
+        display: inline-flex;
+        margin: 3px;
+        padding: 5px 0 3px 5px;
+        white-space: nowrap;
+
+        &--first {
+            background-color: $color-accent-neutral-10;
+            border: 0.5px solid $color-accent-neutral-10;
+        }
+
+        //TODO: Font color has low contrast with background;
+        //needs to be corrected for accessibility
+        &--second {
+            background-color: $color-accent-neutral-60;
+            border: 0.5px solid $color-accent-neutral-60;
+        }
+
+        &--third {
+            background-color: $color-accent-neutral-30;
+            border: 0.5px solid $color-accent-neutral-30;
+        }
+
+        &__icon {
+            font-size: 8px;
+            margin-left: $spacing-sm;
+            vertical-align: middle;
+        }
+    }
+}

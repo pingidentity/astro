@@ -52,6 +52,7 @@ class FilterSelector extends React.Component {
 
     static propTypes = {
         "data-id": PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        bottomPane: PropTypes.node,
         className: PropTypes.string,
         labelText: PropTypes.string,
         label: PropTypes.string,
@@ -62,7 +63,13 @@ class FilterSelector extends React.Component {
             id: PropTypes.string,
             name: PropTypes.string,
         })),
+        optionsNote: PropTypes.node,
+        requiredText: PropTypes.string,
         selected: PropTypes.arrayOf(PropTypes.string),
+        type: PropTypes.oneOf([
+            SelectionList.ListType.ADD,
+            SelectionList.ListType.MULTI
+        ])
     };
 
     static defaultProps = {
@@ -71,6 +78,7 @@ class FilterSelector extends React.Component {
         onSearch: _.noop,
         onValueChange: _.noop,
         selected: [],
+        type: SelectionList.ListType.MULTI
     };
 
     _handleSearch = value => {
@@ -101,6 +109,7 @@ class FilterSelector extends React.Component {
     render = () => {
         const {
             "data-id": dataId,
+            bottomPanel,
             className,
             labelText,
             label,
@@ -108,6 +117,9 @@ class FilterSelector extends React.Component {
             onToggle,
             onValueChange,
             open,
+            optionsNote,
+            requiredText,
+            type
         } = this.props;
 
         return (
@@ -129,14 +141,17 @@ class FilterSelector extends React.Component {
                     <SelectionList
                         className="modifier_dark-inputs"
                         stateless={true}
-                        type={SelectionList.ListType.MULTI}
+                        type={type}
+                        bottomPanel={bottomPanel}
                         items={this._getOptions()}
+                        optionsNote={optionsNote}
                         showSearchBox={true}
                         searchPlaceholder="Search..."
                         onSearch={this._handleSearch}
                         onValueChange={onValueChange}
                         no-border
                         queryString={this._getSearch()}
+                        requiredText={requiredText}
                         selectedItemIds={selected}
                         searchBoxProps={{ textFieldProps: { stateless: true } }}
                     />

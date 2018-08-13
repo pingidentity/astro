@@ -30,7 +30,7 @@ var React = require("react"),
 * @param {string} [className]
  *     CSS classes to be set on the top-level HTML container.
  *
- * @param {object} [bottomLinks]
+ * @param {object} [bottomPanel]
  *     Link actions for the bottom of the list
  *
  * @param {boolean} [stateless]
@@ -97,7 +97,9 @@ class LinkDropDownListStateless extends React.Component {
             this.props.onToggle();
         }
 
-        this.props.onClick(selectedOption);
+        if (this.props.onClick) {
+            this.props.onClick(selectedOption);
+        }
     };
 
     _renderLabel = () => {
@@ -136,9 +138,9 @@ class LinkDropDownListStateless extends React.Component {
                 <ul className="select-list" data-id={this.props["data-id"] + "-menu"}>
                     {this._renderOptions()}
                 </ul>
-                {this.props.bottomLinks &&
+                {this.props.bottomPanel &&
                     <div data-id={this.props["data-id"] + "-bottom-links"} className="list-input__bottom-links">
-                        {this.props.bottomLinks}
+                        {this.props.bottomPanel}
                     </div>
                 }
             </DetailsTooltip>
@@ -148,7 +150,7 @@ class LinkDropDownListStateless extends React.Component {
 
 class LinkDropDownListStateful extends React.Component {
     static propTypes = {
-        bottomLinks: PropTypes.object,
+        bottomPanel: PropTypes.object,
         className: PropTypes.string,
         "data-id": PropTypes.string,
         label: PropTypes.oneOfType([
@@ -174,7 +176,9 @@ class LinkDropDownListStateful extends React.Component {
         this.setState({
             selectedOption: selectedOption
         });
-        this.props.onClick(selectedOption);
+        if (this.props.onClick) {
+            this.props.onClick(selectedOption);
+        }
     };
 
     _handleToggle = () => {

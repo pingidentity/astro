@@ -762,6 +762,13 @@ module.exports = [
                 icon: "bar-chart",
                 children: [
                     {
+                        label: "Drop Down Selector (for debug only)",
+                        demo: require("../components/general/charting/DropDownSelectorDemo"),
+                        pathToDoc: "components/general/charting/DropDownSelector.jsx",
+                        pathToSource: "components_general_charting_DropDownSelector.jsx.html",
+                        pathToDemoSource: "demo_components_general_charting_DropDownSelectorDemo.jsx.html"
+                    },
+                    {
                         label: "Stat Cards",
                         demo: require("../components/general/charting/StatCardDemo"),
                         pathToDoc: "components/general/charting/StatCard.jsx",

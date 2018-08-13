@@ -1737,6 +1737,16 @@ input[type=file] {
         border: none;
     }
 
+    &__note {
+        color: $color-strong-neutral-50;
+        font-size: $font-size-reduced;
+        font-style: italic;
+
+        &--error {
+            color: $color-critical-red;
+        }
+    }
+
     .selection-list-search {
         position: relative;
 
@@ -1825,6 +1835,15 @@ input[type=file] {
     &.fluid-width {
         max-width: 400px;
         width: auto;
+    }
+
+    &__add-option {
+        align-items: center;
+        color: $color-accent-neutral-10;
+        display: inline-flex;
+        line-height: 1em;
+        margin: 0 $spacing-md $spacing-sm 0;
+        text-transform: none;
     }
 }
 

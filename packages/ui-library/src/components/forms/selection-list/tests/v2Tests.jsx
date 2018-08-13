@@ -571,4 +571,41 @@ describe("SelectionList", function () {
         }).toThrow(expectedError);
     });
 
+    it("renders note when optionsNote prop is passed in", () => {
+        const component = getComponent({
+            optionsNote: "note"
+        });
+
+        const note = TestUtils.findRenderedDOMNodeWithClass(component, "input-selection-list__note");
+
+        expect(ReactTestUtils.isDOMComponent(note)).toEqual(true);
+    });
+
+    it("renders add mode", () => {
+        const component = getComponent({
+            type: SelectionList.ListType.ADD
+        });
+
+        const addItems = TestUtils.scryRenderedDOMNodesWithClass(component, "input-selection-list__add-option");
+
+        expect(addItems.length).toBe(9);
+
+        listItems.map(function (listItem, index) {
+            expect(addItems[index].textContent).toEqual(listItem.name);
+        });
+    });
+
+    it("calls onValueChange in add mode", () => {
+        const onValueChange = jest.fn();
+        const component = getComponent({
+            onValueChange,
+            type: SelectionList.ListType.ADD
+        });
+
+        const [firstItem] = TestUtils.scryRenderedDOMNodesWithClass(component, "input-selection-list__add-option");
+
+        ReactTestUtils.Simulate.click(firstItem);
+
+        expect(onValueChange).toHaveBeenCalled();
+    });
 });

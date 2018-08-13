@@ -1,3 +1,6 @@
+import { v4 as uuidV4 } from "uuid";
+import Button from "../../buttons/Button";
+
 var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames"),
@@ -21,6 +24,7 @@ module.exports = class extends React.Component {
         "data-id": PropTypes.string,
         className: PropTypes.string,
         type: PropTypes.oneOf([
+            Constants.ListType.ADD,
             Constants.ListType.SINGLE,
             Constants.ListType.MULTI,
             Constants.ListType.VIEWONLY
@@ -53,8 +57,10 @@ module.exports = class extends React.Component {
         labelUnselectAll: PropTypes.string,
         labelOnlySelected: PropTypes.string,
         labelShowAll: PropTypes.string,
+        optionsNote: PropTypes.node,
         requiredText: PropTypes.string,
-        "no-border": PropTypes.bool
+        "no-border": PropTypes.bool,
+        bottomPanel: PropTypes.node
     };
 
     static defaultProps = {
@@ -102,9 +108,9 @@ module.exports = class extends React.Component {
      * @private
      */
     _filterVisible = () => {
-        return _.filter(this.props.items, function (item) {
+        return _.filter(this.props.items, (item) => {
             return this.props.selectedItemIds.indexOf(item.id) > -1;
-        }.bind(this));
+        });
     };
 
     _getSelectionOptions = () => {
@@ -157,6 +163,7 @@ module.exports = class extends React.Component {
                         />
                     </div>
                 )}
+                {this.props.optionsNote && <div className="input-selection-list__note">{this.props.optionsNote}</div>}
                 <ListOptions
                     data-id={this.props["data-id"] + "-options"}
                     type={this.props.type}
@@ -168,6 +175,7 @@ module.exports = class extends React.Component {
                 <If test={this.props.showSelectionOptions}>
                     {this._getSelectionOptions(visibleItems)}
                 </If>
+                {this.props.bottomPanel && this.props.bottomPanel}
             </div>
         );
     }
@@ -198,6 +206,7 @@ class ListOptions extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         type: PropTypes.oneOf([
+            Constants.ListType.ADD,
             Constants.ListType.SINGLE,
             Constants.ListType.MULTI,
             Constants.ListType.VIEWONLY
@@ -224,6 +233,28 @@ class ListOptions extends React.Component {
         type: Constants.ListType.SINGLE,
         onValueChange: _.noop
     };
+
+        /**
+    * @desc Generate list options as radio buttons
+    * @return {object}
+    *     The set of list options as radio buttons
+    * @private
+    * @ignore
+    */
+    _genAddOptions = () => {
+        const valueChange = item => e => this.props.onValueChange(item, e);
+        return this.props.items.map(item => (
+            <div className="input-selection-list__add-option" key={uuidV4()} onClick={valueChange(item)}>
+                <Button
+                    inline
+                    iconName="plus"
+                    data-id="row-button-add"
+                    onClick={valueChange(item)}
+                />
+                {item.name}
+            </div>
+        ));
+    }
 
     /**
     * @desc Generate list options as radio buttons
@@ -258,13 +289,13 @@ class ListOptions extends React.Component {
         }.bind(this);
 
         // add to the array of selected items (if it does not exist) or remove it (if it exists)
-        var onSelectionValueChange = function (item, checked) {
+        var onSelectionValueChange = (item, checked) => {
             var updateFunction = checked ? _.union : _.difference;
             var updatedSelection = updateFunction(this.props.selectedItemIds, [item.id]);
             this.props.onValueChange(updatedSelection);
-        }.bind(this);
+        };
 
-        return this.props.items.map(function (item, index) {
+        return this.props.items.map((item, index) => {
             var checked = isSelected(item);
             var onValueChangeFunc = onSelectionValueChange.bind(this, item, !checked);
 
@@ -281,7 +312,7 @@ class ListOptions extends React.Component {
                     name={this.props.name}
                 />
             );
-        }.bind(this));
+        });
     };
 
     /**
@@ -311,13 +342,13 @@ class ListOptions extends React.Component {
     * @ignore
     */
     _genViewonlyOptions = () => {
-        return this.props.items.map(function (item, i) {
+        return this.props.items.map((item, i) => {
             return (
                 <div className="view-item" key={i}>
                     {item.name}{this._genTooltip(item)}
                 </div>
             );
-        }.bind(this));
+        });
     };
 
     /**
@@ -328,12 +359,15 @@ class ListOptions extends React.Component {
     * @ignore
     */
     _genListOptions = () => {
-        if (this.props.type === Constants.ListType.SINGLE) {
-            return this._genRadioOptions();
-        } else if (this.props.type === Constants.ListType.MULTI) {
-            return this._genCheckboxOptions();
-        } else if (this.props.type === Constants.ListType.VIEWONLY) {
-            return this._genViewonlyOptions();
+        switch (this.props.type) {
+            case Constants.ListType.ADD:
+                return this._genAddOptions();
+            case Constants.ListType.SINGLE:
+                return this._genRadioOptions();
+            case Constants.ListType.MULTI:
+                return this._genCheckboxOptions();
+            case Constants.ListType.VIEWONLY:
+                return this._genViewonlyOptions();
         }
     };
 

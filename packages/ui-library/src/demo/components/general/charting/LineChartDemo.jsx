@@ -7,6 +7,8 @@ var React = require("react"),
     AxisTypes = require("../../../../constants/ChartingConstants.js").AxisTypes,
     AxisOrientations = require("../../../../constants/ChartingConstants.js").AxisOrientations;
 
+import DropDownSelectorDemo from "./DropDownSelectorDemo";
+
 /**
 * @name LineChartDemo
 * @memberof LineChart
@@ -90,6 +92,9 @@ class LineChartDemo extends React.Component {
                     xOrientation={AxisOrientations.TOP}
                     yOrientation={AxisOrientations.RIGHT}
                 />
+
+                <FormLabel value="Temporary home for the drop down selector" />
+                <DropDownSelectorDemo />
             </div>
         );
     }

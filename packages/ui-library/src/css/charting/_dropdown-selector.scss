@@ -1,0 +1,15 @@
+.dropdown-selector {
+    width: 200px;
+
+    &__list__panel {
+        border-top: 1px solid $color-accent-neutral-70;
+        font-size: 11px;
+        padding-top: $spacing-xs;
+    }
+
+    &__bottom-panel {
+        font-size: 14px;
+        margin-left: $spacing-md;
+        padding: $spacing-xs 0 0;
+    }
+}

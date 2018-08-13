@@ -66,7 +66,7 @@ class EnvironmentSelector extends React.Component {
 
     render = () => {
         const selectedOption = this._getSelectedOption();
-        const bottomLinks = this.props.onNewEnvironment
+        const bottomPanel = this.props.onNewEnvironment
             ? <Anchor
                 onClick={this._handleNewEnvironment}
                 data-id="new-environment"
@@ -90,7 +90,7 @@ class EnvironmentSelector extends React.Component {
                 options={this._getOptions()}
                 selectedOption={selectedOption}
                 className="environment-selector left"
-                bottomLinks={bottomLinks}
+                bottomPanel={bottomPanel}
             />
         );
     };

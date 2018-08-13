@@ -48,7 +48,7 @@ class TranslationPickerDemo extends React.Component {
                     options={OPTIONS}
                     label={this.state.text.value}
                     onClick={this._handleClick}
-                    bottomLinks={<Link title="Upload Translation File" />}
+                    bottomPanel={<Link title="Upload Translation File" />}
                 />
             </div>
         );

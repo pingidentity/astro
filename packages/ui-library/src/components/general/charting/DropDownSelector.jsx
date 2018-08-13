@@ -1,0 +1,140 @@
+import React, { Component } from "react";
+import classnames from "classnames";
+import PropTypes from "prop-types";
+import { contains } from "underscore";
+import ChipPanel from "./ChipPanel";
+import FilterSelector from "../../filters/FilterSelector";
+import { filterItemsFunction } from "../../forms/selection-list/v2-reducer";
+import { ListType } from "../../forms/selection-list";
+
+export const filterItems = filterItemsFunction;
+
+/**
+* @class DropDownSelector
+* @desc A dropdown for charting that also shows chips for selected items.
+*
+* @param {string} [data-id="dropdown-selector"]
+*     The data-id assigned to the top-most container of the component.
+* @param {string} [className]
+*     A url to an image to display in the background of the component.
+* @param {string} [label]
+*     The label of the dropdown.
+* @param {bool} [open]
+*     Whether or not the selector is open.
+* @param {DropDownSelector~onDeselectOption} [onDeselectOption]
+*     Fires when an option is deselected; sends back the ID of the option and the event.
+* @param {DropDownSelector~onSelectOption} [onSelectOption]
+*     Fires when an option is selected; sends back the ID of the option and the event.
+* @param {DropDownSelector~onSearch} [onSearch]
+*     Fires when the content of the search box changes; sends back the search term and the event.
+* @param {DropDownSelector~onToggle} [onToggle]
+*     Fires when selector opens or closes.
+* @param {array} [options=[]]
+*     The options for the dropdown selector. Takes an array of objects, each with an id and a name.
+* @param {string} [optionsNote]
+*     A note that displays just below the search box.
+* @param {string} [requiredText]
+*     Text that will show as required when the selector is opened.
+* @param {array} [selectedOptionIds=[]]
+*     An array of strings or numbers that match with the options parameter to show which are selected.
+*/
+export default class DropDownSelector extends Component {
+    constructor(props) {
+        super(props);
+        const { open = false } = props;
+        this.state = { open };
+    }
+
+    static propTypes = {
+        "data-id": PropTypes.string,
+        className: PropTypes.string,
+        label: PropTypes.string.isRequired,
+        open: PropTypes.bool,
+        onDeselectOption: PropTypes.func,
+        onSelectOption: PropTypes.func,
+        onSearch: PropTypes.func.isRequired,
+        onToggle: PropTypes.func,
+        options: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.oneOfType([
+                    PropTypes.number,
+                    PropTypes.string
+                ]).isRequired,
+                name: PropTypes.string.isRequired
+            })
+        ),
+        optionsNote: PropTypes.node,
+        requiredText: PropTypes.string,
+        selectedOptionIds: PropTypes.arrayOf(
+            PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.number
+            ])
+        ),
+    }
+
+    static defaultProps = {
+        "data-id": "dropdown-selector",
+        options: [],
+        selectedOptionIds: []
+    }
+
+    // Have to use underscore's contains here because version of node in Jenkins
+    // doesn't support array.includes
+    _getChips = (selected, options) => options.filter(({ id }) => contains(selected, id));
+
+    _filterOptions = () => this.props.options.filter(({ id }) =>
+        !contains(this.props.selectedOptionIds, id)
+    );
+
+    _search = term => {
+        // The else case is being handled in tests but coverage isn't catching it
+        /* istanbul ignore next*/
+        if (this.props.onSearch) {
+            this.props.onSearch(term, this.props.options);
+        }
+    };
+
+    _toggle = val => {
+        if (this.props.open === undefined) {
+            this.setState(({ open }) => ({ open: !open }));
+        }
+
+        // The else case is being handled in tests but coverage isn't catching it
+        /* istanbul ignore next*/
+        if (this.props.onToggle) {
+            this.props.onToggle(val);
+        }
+    }
+
+    render() {
+        return (
+            <div className={classnames(this.props.className, "dropdown-selector")}>
+                <FilterSelector
+                    data-id={this.props["data-id"]}
+                    label={this.props.label}
+                    bottomPanel={
+                        <ChipPanel
+                            chips={this._getChips(this.props.selectedOptionIds, this.props.options)}
+                            className="dropdown-selector__list__panel"
+                            onClick={this.props.onDeselectOption}
+                        />
+                    }
+                    onToggle={this._toggle}
+                    onValueChange={this.props.onSelectOption}
+                    open={this.state.open}
+                    options={this._filterOptions()}
+                    optionsNote={this.props.optionsNote}
+                    requiredText={this.props.requiredText}
+                    selected={this.props.selectedOptionIds}
+                    type={ListType.ADD}
+                />
+                <ChipPanel
+                    className="dropdown-selector__bottom-panel"
+                    chips={this._getChips(this.props.selectedOptionIds, this.props.options)}
+                    onClick={this.props.onDeselectOption}
+                />
+            </div>
+        );
+    }
+}
