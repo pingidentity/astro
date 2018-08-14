@@ -20,4 +20,26 @@
             margin-left: 20%;
         }
     }
+
+    &--form {
+        &__row {
+            align-items: center;
+            display: inline-flex;
+            justify-content: space-between;
+        }
+
+        &__icon {
+            font-size: 20px;
+
+            &--required {
+                color: $color-dolphin;
+            }
+        }
+
+        &__input {
+            &__option {
+                color: $color-dolphin !important;
+            }
+        }
+    }
 }

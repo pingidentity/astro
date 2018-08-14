@@ -1014,6 +1014,15 @@ module.exports = [
                 pathToDemoSource: "demo_components_templates_HomeAppDemo.jsx.html",
                 fullscreen: true,
                 icon: "details"
+            },
+            {
+                label: "SSO Attributes",
+                demo: require("../components/templates/SSOAttributesDemo"),
+                pathToDoc: "components/templates/SSOAttributes.jsx",
+                pathToSource: "templates_SSOAttributes.jsx.html",
+                pathToDemoSource: "demo_components_templates_SSOAttributesDemo.jsx.html",
+                fullscreen: true,
+                icon: "details"
             }
         ]
     }
