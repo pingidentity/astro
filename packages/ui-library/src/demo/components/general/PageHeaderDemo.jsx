@@ -13,9 +13,6 @@ const PageHeaderDemo = () => {
         <div>
             <PageHeader title="A Page Header" />
             <br/>
-            <PageHeader title="A Page Header with Icon" icon="icon-cog"
-            />
-            <br/>
             <PageHeader title="A Page Header with underline" underlined={true}/>
             <br/>
             <PageHeader title="A Page Header with a subtitle" subtitle="Subtitle"/>
