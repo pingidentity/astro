@@ -59,11 +59,16 @@ class EnvironmentSelector extends React.Component {
 
     _handleClick = selected => this.props.onEnvironmentChange(selected.value);
 
+    _handleNewEnvironment = () => {
+        this.props.onNewEnvironment();
+        this._handleToggle();
+    };
+
     render = () => {
         const selectedOption = this._getSelectedOption();
         const bottomLinks = this.props.onNewEnvironment
             ? <Anchor
-                onClick={this.props.onNewEnvironment}
+                onClick={this._handleNewEnvironment}
                 data-id="new-environment"
             >{this.props.newEnvironmentLabel}</Anchor>
             : null;
