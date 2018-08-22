@@ -498,22 +498,32 @@ button.tile-button {
             color: $color-active-blue;
         }
     }
-}
 
-.tile-button__icon {
-    font-size: 80px;
-    color: $color-midnight;
-    margin-bottom: $spacing-lg;
-}
+    &__icon {
+        font-size: 80px;
+        color: $color-midnight;
+        margin-bottom: $spacing-lg;
+    }
 
-.tile-button__content {
-    @include flexbox-grow(1);
-}
+    &__content {
+        @include flexbox-grow(1);
+    }
 
-.tile-button__title {
-    color: $color-active-blue;
-    font-size: 17px;
-    margin-top: $spacing-lg;
+    &__title {
+        color: $color-active-blue;
+        font-size: 17px;
+        margin-top: $spacing-lg;
+    }
+
+    &--panel {
+        @include arrow(20px);
+
+        &:after {
+            top: 90%;
+            transform: rotate(180deg);
+            transform-origin: 25%;
+        }
+    }
 }
 
 .tile-selector {
@@ -527,6 +537,56 @@ button.tile-button {
 
         &:last-child {
             margin-right: 0;
+        }
+    }
+}
+
+.tile-panel {
+    @include box-shadow(0 3px 4px 0 rgba($color-black, 0.1));
+
+    background-color: $color-active-blue;
+    box-sizing: border-box;
+    color: $color-white;
+    margin-right: auto;
+    margin-top: $spacing-xs;
+    padding: $spacing-lg;
+    width: 66%;
+
+    &--right {
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    &__label {
+        border-bottom: 0.25px solid $color-neutral-80;
+        padding-bottom: $spacing-sm;
+        text-transform: uppercase;
+    }
+
+    &__option {
+        display: flex;
+        justify-content: space-between;
+        margin-left: $spacing-md;
+        padding: $spacing-lg $spacing-sm $spacing-md;
+
+        &:not(:last-child) {
+            border-bottom: 0.25px solid $color-neutral-80;
+        }
+
+        &__label {
+            font-family: $font-pn-semibold;
+            font-size: 17px;
+            margin-bottom: $spacing-xs;
+        }
+
+        &__button {
+            border-color: $color-white;
+            border-radius: 3px;
+            color: $color-active-blue;
+
+            &:hover {
+                border-color: $color-white;
+            }
         }
     }
 }

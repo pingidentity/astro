@@ -1,8 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import _ from "underscore";
 import classnames from "classnames";
 import TileButton from "./TileButton";
+import TilePanel from "./TilePanel";
+
+const getPanelPosition = (options, selected) => {
+    const selectedPosition = options.findIndex(({ id }) => id === selected);
+    return (selectedPosition + 1) <= Math.ceil(options.length / 2)
+        ? "left"
+        : "right";
+};
 
 /**
  * @typedef {Object} TileSelector~ButtonData
@@ -51,28 +58,63 @@ import TileButton from "./TileButton";
  *
  */
 
-const TileSelector = props => (
-    <div className={classnames("tile-selector", props.className)} data-id={props["data-id"]}>
-        {props.children}
-        {props.options &&
-            _.map(props.options, option => {
-                const handleChange = e => props.onValueChange(option.id, e);
+const TileSelector = ({
+    "data-id": dataId,
+    className,
+    children,
+    onValueChange,
+    options,
+    selected
+}) => {
+    const [buttons, panel] = options.reduce((
+        [buttonsAcc, activePanel],
+        {
+            description,
+            iconName,
+            id,
+            title,
+            panel: optionPanel
+        }
+    ) => {
+        const handleChange = e => onValueChange(id, e);
+        const isSelected = selected === id;
 
-                return (
-                    <TileButton
-                        key={option.id}
-                        data-id={`${props["data-id"]}-button-${option.id}`}
-                        title={option.title}
-                        iconName={option.iconName}
-                        selected={props.selected === option.id}
-                        onClick={handleChange}
-                    >
-                        {option.description}
-                    </TileButton>
-                );
-            })}
-    </div>
-);
+        return [
+            [
+                ...buttonsAcc,
+                (
+                <TileButton
+                    key={id}
+                    data-id={`${dataId}-button-${id}`}
+                    title={title}
+                    iconName={iconName}
+                    selected={isSelected}
+                    onClick={handleChange}
+                    panel={optionPanel ? true : false}
+                >
+                    {description}
+                </TileButton>
+                )
+            ],
+            (optionPanel && isSelected)
+                ? <TilePanel
+                    {...optionPanel}
+                    position={getPanelPosition(options, selected)}
+                />
+                : activePanel
+        ];
+    }, [[], null]);
+
+    return (
+        <div data-id={dataId}>
+            <div className={classnames("tile-selector", className)}>
+                {children}
+                {buttons}
+            </div>
+            {panel}
+        </div>
+    );
+};
 
 TileSelector.propTypes = {
     className: PropTypes.string,
@@ -83,6 +125,20 @@ TileSelector.propTypes = {
             description: PropTypes.string,
             iconName: PropTypes.string,
             id: PropTypes.string,
+            panel: PropTypes.shape({
+                className: PropTypes.string,
+                label: PropTypes.string,
+                options: PropTypes.oneOfType([
+                    PropTypes.arrayOf(
+                        PropTypes.shape({
+                            buttonLabel: PropTypes.string.isRequired,
+                            content: PropTypes.node.isRequired,
+                            label: PropTypes.string.isRequired,
+                        })
+                    ),
+                    PropTypes.node
+                ])
+            }),
             title: PropTypes.string
         })
     ),
@@ -90,7 +146,8 @@ TileSelector.propTypes = {
 };
 
 TileSelector.defaultProps = {
-    "data-id": "tile-selector"
+    "data-id": "tile-selector",
+    options: []
 };
 
 export default TileSelector;

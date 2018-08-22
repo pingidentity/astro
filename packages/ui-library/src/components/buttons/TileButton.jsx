@@ -18,6 +18,8 @@ import classnames from "classnames";
  *     The name of the icon
  * @param {function} [onClick]
  *     Click handler
+ * @param {bool} [panel]
+ *     A boolean that indicates whether to show an arrow for the TilePanel
  * @param {string} [title]
  *     Title of the button
  *
@@ -28,10 +30,17 @@ import classnames from "classnames";
  *
  */
 const TileButton = (props) => {
+    const {
+        panel,
+        selected,
+        title
+    } = props;
     const iconClassName = getIconClassName(props);
     const classNames = classnames("tile-button", props.className, {
-        "tile-button--selected": props.selected
-    });
+        "tile-button--selected": selected
+    },
+    (panel && selected) ? "tile-button--panel" : ""
+    );
 
     return (
         <button className={classNames} data-id={props["data-id"]} onClick={props.onClick}>
@@ -41,7 +50,11 @@ const TileButton = (props) => {
             <div className="tile-button__content">
                 {props.children}
             </div>
-            {props.title && <div className="tile-button__title">{props.title}</div>}
+            {title &&
+                <div className="tile-button__title">
+                    {title}
+                </div>
+            }
         </button>
     );
 };
@@ -52,7 +65,8 @@ TileButton.propTypes = {
     description: PropTypes.string,
     iconName: PropTypes.string,
     onClick: PropTypes.func,
-    title: PropTypes.string,
+    panel: PropTypes.bool,
+    title: PropTypes.string
 };
 
 TileButton.defaultProps = {

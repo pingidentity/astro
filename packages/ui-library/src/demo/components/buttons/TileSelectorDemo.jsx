@@ -39,25 +39,89 @@ class TileSelectorDemo extends React.Component {
                             id: "webapp",
                             title: "Web App",
                             iconName: "network",
-                            description: "Cloud-based apps that are accessed within a browser."
+                            description: "Cloud-based apps that are accessed within a browser.",
+                            panel: {
+                                label: "CHOOSE CONNECTION TYPE",
+                                options: [
+                                    {
+                                        buttonLabel: "Configure",
+                                        content: "Apps that utilize whatever",
+                                        label: "SAML"
+                                    },
+                                    {
+                                        buttonLabel: "Configure",
+                                        content: "Employs Universal Login and whatnot",
+                                        label: "OIDC",
+                                    }
+                                ],
+                                position: "BOTTOM"
+                            }
                         },
                         {
                             id: "native",
                             title: "Native App",
                             iconName: "device",
-                            description: "Applications that are stored and run from a device or desktop."
+                            description: "Applications that are stored and run from a device or desktop.",
+                            panel: {
+                                label: "CHOOSE CONNECTION TYPE",
+                                options: [
+                                    {
+                                        buttonLabel: "Configure",
+                                        content: "Apps that utilize whatever",
+                                        label: "SAML"
+                                    },
+                                    {
+                                        buttonLabel: "Configure",
+                                        content: "Employs Universal Login and whatnot",
+                                        label: "OIDC",
+                                    }
+                                ],
+                                position: "BOTTOM"
+                            }
                         },
                         {
                             id: "spa",
                             title: "Single Page App",
                             iconName: "apps",
-                            description: "Just a bit of text."
+                            description: "Just a bit of text.",
+                            panel: {
+                                label: "CHOOSE CONNECTION TYPE",
+                                options: [
+                                    {
+                                        buttonLabel: "Configure",
+                                        content: "Apps that utilize whatever",
+                                        label: "SAML"
+                                    },
+                                    {
+                                        buttonLabel: "Configure",
+                                        content: "Employs Universal Login and whatnot",
+                                        label: "OIDC",
+                                    }
+                                ],
+                                position: "BOTTOM"
+                            }
                         },
                         {
                             id: "noninteractive",
                             title: "Non-Interactive",
                             iconName: "server",
-                            description: "Cloud-based apps that are accessed within a browser."
+                            description: "Cloud-based apps that are accessed within a browser.",
+                            panel: {
+                                label: "CHOOSE CONNECTION TYPE",
+                                options: [
+                                    {
+                                        buttonLabel: "Configure",
+                                        content: "Apps that utilize whatever",
+                                        label: "SAML"
+                                    },
+                                    {
+                                        buttonLabel: "Configure",
+                                        content: "Employs Universal Login and whatnot",
+                                        label: "OIDC",
+                                    }
+                                ],
+                                position: "BOTTOM"
+                            }
                         }
                     ]}
                 />

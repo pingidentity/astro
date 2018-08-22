@@ -444,6 +444,20 @@
     -webkit-backface-visibility: hidden;
 }
 
+@mixin arrow($arrow-size) {
+    &:after {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: $arrow-size;
+        border-style: solid;
+        border-color: inherit;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        content: '';
+    }
+}
 
 // DEPRECATED OR SITE-SPECIFIC --------------------------------------------------------------------
 
