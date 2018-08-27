@@ -871,10 +871,12 @@ input[type=file] {
                     &.highlighted {
                         background-color: $color-active-blue;
                         color: $color-white;
-
-                        &:before {
-                            background-color: $color-white;
-                        }
+                    }
+                }
+                &:hover,
+                &.highlighted {
+                    .help-tooltip-target {
+                        color: $color-white;
                     }
                 }
             }
