@@ -2845,6 +2845,7 @@ label {
     .select-list {
         visibility: hidden;
         display: initial;
+        z-index: 21;
     }
     &.input-width-auto {
         width: auto;
