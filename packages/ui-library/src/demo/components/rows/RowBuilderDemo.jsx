@@ -3,6 +3,7 @@ import { v4 as uuidV4 } from "uuid";
 import FormDropDownList from "../../../components/forms/FormDropDownList";
 import FormTextField from "../../../components/forms/form-text-field";
 import RowBuilder from "../../../components/rows/RowBuilder";
+import { omit } from "underscore";
 
 export default class RowBuilderDemo extends Component {
     state = {
@@ -20,7 +21,14 @@ export default class RowBuilderDemo extends Component {
     addFirst = () => this.addRow(true)
     addSecond = () => this.addRow(false)
 
-    createRows = (template, count) => count > 0 ? new Array(count).fill(template) : []
+    createRows = ({ id, content }, count) => {
+        const noLabels = content.map(({ props, ...template }) => ({
+            props: omit(props, ["label", "labelText"]),
+            ...template
+        }));
+
+        return count > 0 ? [{ id, content }, ...(new Array(count).fill({ id, content: noLabels }))] : [];
+    }
 
     removeRow = (isFirstRow) => () => {
         this.setState(({ firstRowCount, secondRowCount }) => ({

@@ -1,23 +1,31 @@
 .row-builder {
     &__row {
+        @extend .input-row;
+
         align-items: center;
         display: inline-flex;
-        margin-top: $spacing-md;
-        padding-bottom: $spacing-md;
+        margin: $spacing-md 0;
         width: 100%;
     }
 
     &__remove {
+        align-self: flex-start;
+
+        &--no-label {
+            align-self: center;
+        }
+
         &__label {
             @include text-label;
             line-height: $font-size-reduced;
             min-height: $font-size-reduced;
             margin-bottom: 13px;
+            text-transform: uppercase;
         }
 
         &__button {
             display: block;
-            margin-left: 20%;
+            margin-left: $spacing-sm;
         }
     }
 
@@ -31,6 +39,10 @@
         &__icon {
             font-size: 20px;
 
+            &--first {
+                margin-top: 20px;
+            }
+
             &--required {
                 color: $color-dolphin;
             }
@@ -40,6 +52,14 @@
             &__option {
                 color: $color-dolphin !important;
             }
+        }
+
+        & .row-builder__remove {
+            justify-self: flex-end;
+        }
+
+        &__no-label-above {
+            margin-top: 25px !important;
         }
     }
 }

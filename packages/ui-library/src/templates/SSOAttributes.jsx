@@ -20,7 +20,7 @@ const SSOAttributes = () => {
                 autofocus={true}
                 label="Pingone User Attribute"
             />
-            <Icon className="row-builder--form__icon" iconName="link"/>
+            <Icon className="row-builder--form__icon row-builder--form__icon--first" iconName="link"/>
             <FormTextField
                 className="row-builder--form__input input-width-medium"
                 labelText="Application Attribute"
@@ -28,7 +28,7 @@ const SSOAttributes = () => {
             />
             <FormCheckbox
                 label="Required"
-                className="inline"
+                className="inline row-builder--form__no-label-above"
             />
         </div>]
     );
@@ -37,23 +37,19 @@ const SSOAttributes = () => {
         [<div className="row-builder--form__row" key="second">
             <FormDropDownList
                 className="row-builder--form__input input-width-medium"
-                label="Pingone User Attribute"
-                noneOption={{ label: "Select a PingOne attribute" }}
                 options={[{ label: "Name" }]}
+                placeholder="Select a PingOne attribute"
                 required
-                selectedOption={{ label: "Select a PingOne attribute" }}
-                selectedOptionLabelClassName="row-builder--form__input__option"
             />
             <Icon className="row-builder--form__icon row-builder--form__icon--required" iconName="link"/>
             <FormTextField
                 className="row-builder--form__input input-width-medium"
-                labelText="Application Attribute"
                 placeholder="Enter mapped attribute"
                 required
             />
             <FormCheckbox
-                className="inline"
                 label="Required"
+                className="inline"
             />
         </div>]
     );

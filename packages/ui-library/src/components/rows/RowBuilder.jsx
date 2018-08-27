@@ -5,10 +5,6 @@ import Button from "../buttons/Button";
 import Link from "../general/Link";
 import { v4 } from "uuid";
 
-function renderRemove(id) {
-    return <div className="row-builder__remove__label">{ id === 0 && "REMOVE" }</div>;
-}
-
 /**
  * @class Row Builder
  * @desc A component for building rows
@@ -51,17 +47,24 @@ function RowBuilder({
         }
     };
 
-    const renderRow = ({ id, content }, idx) => (
-        <div className="row-builder__row" key={v4()}>
-            {content}
-            <div className="row-builder__remove" onClick={remove(id)} >
-                {
-                    showRemoveLabel && renderRemove(idx)
-                }
-                <Button className="row-builder__remove__button" iconName="minus" inline />
+    const renderRow = ({ id, content }, idx) => {
+        const hasRemoveLabel = showRemoveLabel && idx === 0;
+
+        return (
+            <div className="row-builder__row" key={v4()}>
+                {content}
+                <div
+                    className={`row-builder__remove ${hasRemoveLabel ? "" : "row-builder__remove--no-label"}`}
+                    onClick={remove(id)}
+                >
+                    {
+                        showRemoveLabel && idx === 0 && <div className="row-builder__remove__label"> Remove </div>
+                    }
+                    <Button className="row-builder__remove__button" iconName="minus" inline />
+                </div>
             </div>
-        </div>
-    );
+        );
+    };
 
     return (
         <div className={classnames("row-builder", className)} data-id={dataId} >

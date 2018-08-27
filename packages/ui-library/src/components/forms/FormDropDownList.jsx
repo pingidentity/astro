@@ -319,7 +319,6 @@ class FormDropDownListStateless extends React.Component {
         searchIndex: -1,
         searchTime: 0,
         searchType: SearchTypes.KEYBOARD,
-        selectedOption: {},
         onSearch: _.noop,
         title: "",
         showSelectedOptionLabel: true,
@@ -649,7 +648,7 @@ class FormDropDownListStateless extends React.Component {
             disabled = group && group.disabled,
             className = classnames("select-option", {
                 highlighted: !disabled && index === this.props.searchIndex,
-                selected: option.value === this.props.selectedOption.value,
+                selected: option.value === (this.props.selectedOption && this.props.selectedOption.value),
                 disabled: disabled
             });
 
@@ -720,7 +719,8 @@ class FormDropDownListStateless extends React.Component {
             }),
             selectClassName = classnames("selected-option", this.props.selectClassName),
             selectedOptionLabelClassName = classnames("selected-option-label", this.props.selectedOptionLabelClassName),
-            selectedOptionLabel = this.props.showSelectedOptionLabel ? this.props.selectedOption.label : "",
+            selectedOptionLabel = this.props.showSelectedOptionLabel && this.props.selectedOption
+                ? this.props.selectedOption.label : "",
             inputValue = this._isBoxSearch() &&
                 this.didPressKey && this.props.open ? this.props.searchString : selectedOptionLabel;
 
