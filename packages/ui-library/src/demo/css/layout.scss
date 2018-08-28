@@ -21,79 +21,25 @@ $sidenav-lineheight: 22px;
         float: left;
     }
 
-    .js-source, iframe {
-        display: none;
-    }
+    .doc-links {
+        position: absolute;
+        top: 5px;
+        right: 0;
+        text-align: right;
 
-    &.open {
-        height: 1000px;
-        overflow: hidden;
+        a + a {
+            margin-left: $spacing-sm;
+            position: relative;
 
-        .toggle {
-            &:before {
-                content: 'close documentation -';
-            }
-        }
-        .toggle-source {
             &:before {
                 content: '';
+                border-left: 1px solid $color-rabbit-fur;
+                position: absolute;
+                left: -0.5 * $spacing-sm;
+                top: 0;
+                bottom: 0;
             }
         }
-        &.source {
-            .toggle {
-                &:before {
-                    content: '';
-                }
-            }
-            .toggle-source {
-                &:before {
-                    content: 'close source -';
-                }
-            }
-        }
-        iframe,
-        .js-source {
-            display: block;
-            height: calc(100% - 35px);
-            &.hidden {
-                display: none;
-            }
-        }
-        .js-source .source-select {
-            display: block;
-        }
-    }
-
-    .toggle,
-    .toggle-source {
-        position: absolute;
-        right: 0;
-        cursor: pointer;
-
-        &:before {
-            color: $color-active;
-        }
-    }
-    .toggle {
-        top: 5px;
-
-        &:before {
-            content: 'expand documentation +';
-        }
-    }
-    .toggle-source {
-        top: 25px;
-
-        &:before {
-            content: 'view source +';
-        }
-    }
-    iframe {
-        width: 100%;
-        height: 0;
-    }
-    .js-source .source-select {
-        display: none;
     }
 }
 
