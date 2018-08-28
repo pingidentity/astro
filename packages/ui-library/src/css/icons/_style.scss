@@ -3,9 +3,9 @@
 @font-face {
   font-family: 'iconfont';
   src:
-    url('#{$icomoon-font-path}/iconfont.ttf?7i4r2s') format('truetype'),
-    url('#{$icomoon-font-path}/iconfont.woff?7i4r2s') format('woff'),
-    url('#{$icomoon-font-path}/iconfont.svg?7i4r2s#iconfont') format('svg');
+    url('#{$icomoon-font-path}/iconfont.ttf?4smsw9') format('truetype'),
+    url('#{$icomoon-font-path}/iconfont.woff?4smsw9') format('woff'),
+    url('#{$icomoon-font-path}/iconfont.svg?4smsw9#iconfont') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -25,11 +25,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-chat-square {
-  &:before {
-    content: $icon-chat-square;
-  }
-}
 .icon-account {
   &:before {
     content: $icon-account;
@@ -110,6 +105,11 @@
     content: $icon-chat;
   }
 }
+.icon-chat-square {
+  &:before {
+    content: $icon-chat-square;
+  }
+}
 .icon-circle {
   &:before {
     content: $icon-circle;
@@ -143,7 +143,6 @@
 .icon-code {
   &:before {
     content: $icon-code;
-    color: #4b637c;
   }
 }
 .icon-cog {
@@ -339,6 +338,11 @@
 .icon-network {
   &:before {
     content: $icon-network;
+  }
+}
+.icon-new-window {
+  &:before {
+    content: $icon-new-window;
   }
 }
 .icon-next {
