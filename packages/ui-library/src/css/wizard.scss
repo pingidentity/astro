@@ -229,7 +229,7 @@ $wizard-close-button-color: $color-strong-neutral-40;
     }
 
     &--completed {
-        .wizard-progress-menu__item-title,
+        .wizard-progress-menu__item-title .wizard-progress-menu__item-title-text,
         .wizard-progress-menu__item-description {
             opacity: 0.6;
         }
@@ -302,11 +302,26 @@ $wizard-close-button-color: $color-strong-neutral-40;
 
 }
 
-.wizard-progress-menu__item-title {
+.wizard-progress-menu__item-title-text {
+    display: inline-block;
     margin-left: $wizard-progress-menu-padding + $wizard-progress-icon-size;
     margin-bottom: $spacing-sm;
     font-size: $wizard-progress-title-size;
     line-height: 1em;
+    vertical-align: top;
+}
+
+.wizard-progress-menu__item-title-icon {
+    display: inline-block;
+    font-size: $wizard-progress-title-size - 2;
+    line-height: 1em;
+    margin-left: $spacing-md;
+}
+
+.wizard-progress-menu__editable {
+    .wizard-progress-menu__item-title-text {
+        max-width: 165px;
+    }
 }
 
 .wizard-progress-menu__item-description {

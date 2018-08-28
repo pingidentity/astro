@@ -105,7 +105,7 @@ class Menu extends React.Component {
 
 function Item(props) {
     const required = props.type === TYPES.required;
-    const iconClassName = classnames(
+    const iconClassNames = classnames(
         "wizard-progress-menu__step-icon",
         { "wizard-progress-menu__step-icon--required": required },
         { "wizard-progress-menu__step-icon--optional": !required },
@@ -117,6 +117,7 @@ function Item(props) {
         { "wizard-progress-menu__step--active": props.active },
         { "wizard-progress-menu__step--click-disabled": props.clickDisabled },
         { "wizard-progress-menu__step--completed": props.completed },
+        { "wizard-progress-menu__editable": props.completed && !props.clickDisabled }
     );
 
     const content = required && !props.completed ? props.number : null;
@@ -131,8 +132,13 @@ function Item(props) {
 
     return (
         <div className={stepClassNames} onClick={handleClick} data-id={props["data-id"]}>
-            <div className={iconClassName}>{content}</div>
-            <div className="wizard-progress-menu__item-title">{props.menuTitle || props.title}</div>
+            <div className={iconClassNames}>{content}</div>
+            <div className="wizard-progress-menu__item-title">
+                <div className="wizard-progress-menu__item-title-text">{props.menuTitle || props.title}</div>
+                {props.completed && !props.clickDisabled && (
+                    <div className="wizard-progress-menu__item-title-icon icon-edit" />
+                )}
+            </div>
             <div className="wizard-progress-menu__item-description">{props.menuDescription || props.description}</div>
         </div>
     );
