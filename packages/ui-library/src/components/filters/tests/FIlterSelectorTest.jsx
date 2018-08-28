@@ -60,4 +60,12 @@ describe("FilterSelector", function () {
         expect(label.textContent).toEqual(labelText);
     });
 
+    it("finds the name in the selected list", function() {
+        const labelText = "One1";
+        const component = getComponent({ options, selected: ["one"] });
+        const element = TestUtils.findRenderedDOMNodeWithDataId(component, "filter-selector");
+        expect(element).toBeTruthy();
+        expect(element.textContent).toEqual(labelText);
+    });
+
 });

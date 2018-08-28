@@ -9,7 +9,7 @@ import FilterSelector from "ui-library/lib/components/filters/FilterSelector";
 class FilterSelectorDemo extends React.Component {
     state = {
         values1: [
-            "UK Employees"
+            "8675309"
         ]
     };
 
@@ -22,31 +22,31 @@ class FilterSelectorDemo extends React.Component {
                     labelText="A Filter"
                     options={[
                         {
-                            id: "US Employees",
+                            id: "43434",
                             name: "US Employees",
                         },
                         {
-                            id: "UK Employees",
+                            id: "8675309",
                             name: "UK Employees",
                         },
                         {
-                            id: "Canada Employees",
+                            id: "35346534",
                             name: "Canada Employees",
                         },
                         {
-                            id: "Germany Employees",
+                            id: "6898900",
                             name: "Germany Employees",
                         },
                         {
-                            id: "India Employees",
+                            id: "864564",
                             name: "India Employees",
                         },
                         {
-                            id: "Israel Employees",
+                            id: "21210",
                             name: "Israel Employees",
                         },
                         {
-                            id: "Japan Employees",
+                            id: "907545",
                             name: "Japan Employees"
                         },
                     ]}
