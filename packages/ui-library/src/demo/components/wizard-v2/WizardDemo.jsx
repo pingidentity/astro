@@ -109,32 +109,53 @@ class WizardDemo extends React.Component {
         this.setState({ currentApp: app });
     }
 
-    clearMessages = () => {
+    hideLoader = () => {
         this.setState({
-            messageProps: null
+            loading: false,
+        });
+    }
+
+    hideMessage = () => {
+        this.setState({
+            messageProps: null,
+        });
+    }
+
+    showMessage = () => {
+        this.setState({
+            messageProps: {
+                messages: [
+                    {
+                        text: "New Message added",
+                        type: "notice",
+                    }
+                ]
+            },
         });
     }
 
     onNext = () => {
-        let messageProps;
-
-        if (this.state.activeStep === 1) {
-            messageProps = { messages: [
-                {
-                    text: "New Message added",
-                    type: "notice",
-                }
-            ] };
-            setTimeout (this.clearMessages, 3000);
-        }
-
-        this.setState({
-            messageProps: messageProps,
-
+        let nextState = {
             activeStep: this.state.activeStep < this.state.numSteps - 1
                 ? this.state.activeStep + 1
                 : this.state.numSteps - 1
-        });
+        };
+
+        if (this.state.activeStep === 1) {
+            nextState.loading = true;
+
+            setTimeout(() => {
+                this.hideLoader();
+                this.showMessage();
+                setTimeout(this.hideMessage, 3000);
+            }, 500);
+
+        } else {
+            nextState.loading = true;
+            setTimeout(this.hideLoader, 500);
+        }
+
+        this.setState(nextState);
     }
 
     _onOpen = () => {
@@ -233,6 +254,7 @@ class WizardDemo extends React.Component {
                             access to it. Their are several dierent application technologies to choose from that
                             accommodate the majority of applications."
                         continueDisabled={!this.state.currentApp.selectedTile}
+                        loading={this.state.loading}
                         required>
 
 
@@ -252,6 +274,7 @@ class WizardDemo extends React.Component {
                             help your customers identify the purpose of the application andprovide important
                             information to misguided connections."
                         onSave={this.onNext}
+                        loading={this.state.loading}
                         required>
                         <div className="input-row">
                             <FormTextField
@@ -288,6 +311,7 @@ class WizardDemo extends React.Component {
                         completed={this.state.activeStep > 2}
                         title="Configure"
                         description="Add a Redirect URL (optional)"
+                        loading={this.state.loading}
                         required>
                         <Multivalues
                             labelText="Re-Direct URLs"
@@ -304,6 +328,7 @@ class WizardDemo extends React.Component {
                             left is a list of OAuth scopes by resource type that can be added to the "Access Grants"
                             column on the right. After moving the desired scopes the Access Grants column you can
                             save your selections.'
+                        loading={this.state.loading}
                         required>
                         <DragScreen onChange={this._onAccessChange}/>
                     </Step>
@@ -312,6 +337,7 @@ class WizardDemo extends React.Component {
                         title="Confirm and Save"
                         description="Check all app details before publishing to your app directory."
                         onSave={this._onSave}
+                        loading={this.state.loading}
                         required>
                         <DataTableScreen {...this.state.currentApp} />
                     </Step>

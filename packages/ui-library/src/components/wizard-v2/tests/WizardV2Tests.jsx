@@ -426,6 +426,29 @@ describe("WizardV2", function () {
 
     });
 
+    it("does not display the loader by default", function () {
+        const component = getComponent({
+            activeStep: 0,
+        });
+
+        const loader = getElementByDid(component, "-loader");
+        expect(loader).toBeFalsy();
+    });
+
+    it("displays the loader when shown", function () {
+        const activeStep = 0;
+        let stepData = _.clone(defaultStepData);
+
+        stepData[activeStep].loading = true;
+
+        const component = getComponent({
+            activeStep: activeStep,
+        });
+
+        const loader = getElementByDid(component, "-loader");
+        expect(loader).toBeTruthy();
+    });
+
     it("emits open and close events", function () {
         const openListenerCallback = jest.genMockFunction();
         const closeListenerCallback = jest.genMockFunction();

@@ -1,11 +1,13 @@
 import React from "react";
-import Menu from "./Menu";
-import Step from "./Step";
 import ButtonBar from "../forms/ButtonBar";
+import Menu from "./Menu";
+import Messages from "../general/messages/index";
+import PageSpinner from "../general/PageSpinner";
 import PropTypes from "prop-types";
+import Step from "./Step";
+
 import _ from "underscore";
 import classnames from "classnames";
-import Messages from "../general/messages/index";
 import Utils from "../../util/Utils";
 
 
@@ -101,6 +103,7 @@ class Wizard extends React.Component {
         messageProps: null,
         "data-id": "wizard",
         headerItems: [],
+        loading: false,
         onCancel: _.noop,
         onNext: _.noop,
         required: false,
@@ -175,6 +178,7 @@ class Wizard extends React.Component {
                         hasOptional={optionalSteps.length > 0}
                         {..._.pick(this.props, [
                             "buttonBarProps",
+                            "loading",
                             "onCancel",
                             "onNext",
                             "onSave",
@@ -243,6 +247,14 @@ function ActiveStep(props) {
 
     return (
         <div>
+            {props.step.props.loading && (
+                <PageSpinner
+                    data-id={`${props["data-id"]}-loader`}
+                    className="page-loader__wizard"
+                    show
+                    modal
+                />
+            )}
             {props.step}
             <ButtonBar
                 key="button-bar"

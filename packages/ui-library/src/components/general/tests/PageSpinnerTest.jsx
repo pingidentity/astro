@@ -27,12 +27,15 @@ describe("PageSpinner", function () {
     }
 
 
-    it("render component with data-id", function () {
+    it("render component as normal-sized by default", function () {
         const component = getComponent(
             { "data-id": dataId }
         );
 
         expect(component).toBeDefined();
+
+        const smallSpinnerContainer = TestUtils.findRenderedDOMNodeWithClass(component, "page-loader--small");
+        expect(smallSpinnerContainer).toBeFalsy();
     });
 
     it("renders text", function () {
@@ -43,5 +46,23 @@ describe("PageSpinner", function () {
 
         const spinnerText = TestUtils.findRenderedDOMNodeWithClass(component, "page-loader__text");
         expect(spinnerText.textContent).toBe(message);
+    });
+
+    it("displays small", function () {
+        const component = getComponent({
+            small: true
+        });
+
+        const smallSpinnerContainer = TestUtils.findRenderedDOMNodeWithClass(component, "page-loader--small");
+        expect(smallSpinnerContainer).toBeTruthy();
+    });
+
+    it("displays as modal", function () {
+        const component = getComponent({
+            modal: true
+        });
+
+        const modalSpinnerContainer = TestUtils.findRenderedDOMNodeWithClass(component, "modal");
+        expect(modalSpinnerContainer).toBeTruthy();
     });
 });
