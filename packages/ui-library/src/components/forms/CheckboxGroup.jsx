@@ -90,7 +90,7 @@ const CheckboxGroup = ({
                 return (
                     <div className={classnames("input-row", className)} key={option.value}>
                         <FormCheckbox
-                            className="stacked"
+                            stacked
                             data-id={dataId + "-" + index}
                             label={option.label}
                             value={option.value}

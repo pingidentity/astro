@@ -152,4 +152,20 @@ describe("FormCheckbox", function () {
         expect(icon).toBeTruthy();
     });
 
+    it("passes stacked and inline props to className", () => {
+        const component = getComponent({ stacked: true, inline: true });
+
+        const container = TestUtils.findRenderedDOMNodeWithDataId(component, "form-checkbox-container");
+        const inline = TestUtils.scryRenderedDOMNodesWithClass(component, "inline");
+        const stacked = TestUtils.scryRenderedDOMNodesWithClass(component, "stacked");
+
+        // make sure only one exists of each
+        expect(inline.length).toEqual(1);
+        expect(stacked.length).toEqual(1);
+
+        //make sure className is on the container
+        expect(container).toEqual(inline[0]);
+        expect(container).toEqual(stacked[0]);
+    });
+
 });

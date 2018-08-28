@@ -321,7 +321,7 @@ class Stateless extends React.Component {
                                     {groupName}
                                 </div>
                             </If>
-                            <FormLabel className="input-checkbox inline" value={item.name}>
+                            <FormLabel className="input-checkbox" inline value={item.name}>
                                 <input data-id="checkbox" type="checkbox" name={groupName}
                                        value={item.id} onChange={onChange} checked={checked}/>
                                 <div className="icon"></div>

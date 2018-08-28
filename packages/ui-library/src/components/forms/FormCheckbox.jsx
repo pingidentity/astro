@@ -52,6 +52,12 @@ var React=require("react"),
  *
  * @param {boolean} [disabled=false]
  *    If true, disables current checkbox and styles opacity.
+ * @param {boolean} [stacked=false]
+ *    If true, adds "stacked" className for label on right side
+ *
+ * @param {boolean} [inline=false]
+ *    If true, adds "inline" className for inline boxes
+ *
  * @param {string} [errorMessage]
  *    The message to display if defined when external validation failed.
  *
@@ -72,8 +78,10 @@ class FormCheckbox extends React.Component {
         label: PropTypes.string,
         labelHelpText: PropTypes.string,
         helpClassName: PropTypes.string,
-        helpTarget: PropTypes.object,
+        helpTarget: PropTypes.bool,
+        inline: PropTypes.bool,
         name: PropTypes.string,
+        stacked: PropTypes.bool,
         value: PropTypes.string,
         disabled: PropTypes.bool,
         errorMessage: PropTypes.string
@@ -82,7 +90,9 @@ class FormCheckbox extends React.Component {
     static defaultProps = {
         "data-id": "form-checkbox",
         checked: false,
-        disabled: false
+        disabled: false,
+        inline: false,
+        stacked: false,
     };
 
     _handleChange = (e) => {
@@ -98,6 +108,8 @@ class FormCheckbox extends React.Component {
         var labelClassName = classnames("input-checkbox", this.props.className, {
             disabled: this.props.disabled,
             "form-error": this.props.errorMessage,
+            stacked: this.props.stacked,
+            inline: this.props.inline,
         });
 
         return (

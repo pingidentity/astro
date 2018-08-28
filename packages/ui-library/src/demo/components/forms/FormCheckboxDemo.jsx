@@ -74,19 +74,19 @@ class FormCheckboxDemo extends React.Component {
                         label="Stacked Checkbox"
                         onChange={this._onChange5}
                         checked={this.state.checkboxChecked5}
-                        className="stacked"
+                        stacked
                     />
                     <FormCheckbox
                         label="Stacked Checkbox"
                         onChange={this._onChange6}
                         checked={this.state.checkboxChecked6}
-                        className="stacked"
+                        stacked
                     />
                     <FormCheckbox
                         label="Stacked Checkbox"
                         onChange={this._onChange7}
                         checked={this.state.checkboxChecked7}
-                        className="stacked"
+                        stacked
                     />
                 </div>
                 <div className="input-row">
@@ -97,19 +97,19 @@ class FormCheckboxDemo extends React.Component {
                         label="Inline Checkbox"
                         onChange={this._onChange8}
                         checked={this.state.checkboxChecked8}
-                        className="inline"
+                        inline
                     />
                     <FormCheckbox
                         label="Inline Checkbox"
                         onChange={this._onChange9}
                         checked={this.state.checkboxChecked9}
-                        className="inline"
+                        inline
                     />
                     <FormCheckbox
                         label="Inline Checkbox"
                         onChange={this._onChange10}
                         checked={this.state.checkboxChecked10}
-                        className="inline"
+                        inline
                     />
                 </div>
                 <div className="input-row">
@@ -117,7 +117,7 @@ class FormCheckboxDemo extends React.Component {
                         label="Single Inline Checkbox"
                         onChange={this._onChange11}
                         checked={this.state.checkboxChecked11}
-                        className="inline"
+                        inline
                     />
                 </div>
                 <div className="input-row">
