@@ -116,6 +116,14 @@
     }
 }
 
+// when present in a title, not stand alone
+.collapsible-link {
+    &.inline {
+        padding-bottom: 10px;
+        padding-left: 10px;
+    }
+}
+
 .collapsible-form {
     .collapsible-section {
         .collapsible-section-title {

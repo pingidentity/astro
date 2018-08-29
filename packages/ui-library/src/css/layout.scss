@@ -1155,6 +1155,9 @@ $color-grey-minor-1: $color-neutral-30;
             text-transform: uppercase;
             padding-right: 20px;
             color: $color-elephant;
+            // when icons, images are present as values
+            // keeps labels better aligned
+            vertical-align: top;
 
             &:after {
                 content: ':';
