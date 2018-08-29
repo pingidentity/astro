@@ -28,7 +28,7 @@ const PageGroup = ({
     </div>
 );
 
-PageGroup.PropTypes = {
+PageGroup.propTypes = {
     className: PropTypes.string,
     "data-id": PropTypes.string,
     title: PropTypes.string
