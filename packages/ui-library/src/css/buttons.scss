@@ -585,7 +585,9 @@ button.tile-button {
             color: $color-active-blue;
 
             &:hover {
+                font-weight: 800;
                 border-color: $color-white;
+                box-shadow: 0 0 3px #0e4054;
             }
         }
     }
