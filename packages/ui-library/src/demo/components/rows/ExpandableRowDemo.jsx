@@ -196,6 +196,20 @@ class ExpandableRowDemo extends React.Component {
                 />
                 <ExpandableRow
                     stateless={false}
+                    title={
+                        <div className="hover-tooltip">
+                            Row With Tab
+                            <HelpHint
+                                placement="top"
+                                hintText="Platform Provided"
+                                iconName="tag"
+                            />
+                        </div>
+                    }
+                    expanded={false}
+                />
+                <ExpandableRow
+                    stateless={false}
                     title="Row in Waiting Mode"
                     subtitle="stateful"
                     waiting={true}
