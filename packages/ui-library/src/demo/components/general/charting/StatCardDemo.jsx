@@ -1,6 +1,8 @@
 import React from "react";
 import { StatCard, CardRow } from "../../../../components/general/charting/Cards";
 import Checkbox from "../../../../components/forms/FormCheckbox";
+import Layout from "ui-library/lib/components/general/ColumnLayout";
+import demoChartData from "./demoChartData";
 
 /**
 * @name StatCardemo
@@ -19,77 +21,80 @@ class StatCardDemo extends React.Component {
         });
     }
 
+    _toggleError = () => {
+        this.setState({
+            errorMessage: this.state.errorMessage ? null : "Lorem ipsum dolor"
+        });
+    };
+
     render () {
         return (
             <div>
-                <div className="input-row">
-                    <Checkbox
-                        label="Show loading state"
-                        checked={this.state.loading}
-                        onChange={this._toggleLoading}
-                    />
-                </div>
+                <Layout.Row className="columns-width-auto">
+                    <Layout.Column>
+                        <Checkbox
+                            label="Show error message"
+                            checked={!!this.state.errorMessage}
+                            onChange={this._toggleError}
+                        />
+                    </Layout.Column>
+                    <Layout.Column>
+                        <Checkbox
+                            label="Show loading indicators"
+                            checked={this.state.loading}
+                            onChange={this._toggleLoading}
+                        />
+                    </Layout.Column>
+                </Layout.Row>
                 <CardRow>
-                    <StatCard title="Failed Attempts" description="February 2016" loading={this.state.loading}
-                        value="1,056"
-                        data={[
-                            { label: "Last 30 days", value: "29" },
-                            { label: "Last 60 days", value: "124" },
-                            { label: "Last 90 days", value: "167" },
-                            { label: "Last 120 days", value: "195" },
-                            { label: "Last 150 days", value: "201" },
-                        ]}
+                    <StatCard
+                        data={demoChartData.listData}
+                        description="February 2016"
+                        errorMessage={this.state.errorMessage}
                         iconName="lockout"
-                    />
-                    <StatCard title="Peaks per Day" description="February 2016" loading={this.state.loading} accent={1}
-                        value="261"
-                        data={[
-                            { label: "Last 30 days", value: "29" },
-                            { label: "Last 60 days", value: "124" },
-                            { label: "Last 90 days", value: "167" },
-                            { label: "Last 120 days", value: "195" },
-                            { label: "Last 150 days", value: "201" },
-                        ]}
-                    />
-                    <StatCard title="Password Resets" description="February 2016" loading={this.state.loading}
-                        faccent="blue"
-                        value="53"
-                        data={[
-                            { label: "Last 30 days", value: "29" },
-                            { label: "Last 60 days", value: "124" },
-                            { label: "Last 90 days", value: "167" },
-                            { label: "Last 120 days", value: "195" },
-                            { label: "Last 150 days", value: "201" },
-                        ]}
-                        iconName="nodes"
-                    />
-                </CardRow>
-                <br /> <br />
-                <CardRow>
-                    <StatCard title="Failed Attempts" description="February 2016" loading={this.state.loading}
+                        loading={this.state.loading}
+                        title="Failed Attempts"
                         value="1,056"
-                        data={[
-                            { label: "Last 30 days", value: "29" },
-                            { label: "Last 60 days", value: "124" },
-                            { label: "Last 90 days", value: "167" },
-                            { label: "Last 120 days", value: "195" },
-                            { label: "Last 150 days", value: "201" },
-                        ]}
-                        iconName="lockout"
                     />
                     <StatCard
+                        accent={1}
+                        data={demoChartData.listData}
+                        description="February 2016"
+                        errorMessage={this.state.errorMessage}
+                        loading={this.state.loading}
+                        title="Peaks per Day"
+                        value="261"
+                    />
+                    <StatCard
+                        accent="blue"
+                        data={demoChartData.listData}
+                        description="February 2016"
+                        errorMessage={this.state.errorMessage}
+                        iconName="nodes"
+                        loading={this.state.loading}
+                        title="Password Resets"
+                        value="53"
+                    />
+                </CardRow>
+                <CardRow>
+                    <StatCard
+                        data={demoChartData.listData}
+                        description="February 2016"
+                        errorMessage={this.state.errorMessage}
+                        iconName="lockout"
+                        loading={this.state.loading}
+                        title="Failed Attempts"
+                        value="1,056"
+                    />
+                    <StatCard
+                        accent={1}
+                        data={demoChartData.listData}
+                        description="February 2016"
+                        errorMessage={this.state.errorMessage}
+                        loading={this.state.loading}
                         size={2}
                         title="Peaks per Day"
-                        description="February 2016"
-                        loading={this.state.loading} accent={1}
                         value="261"
-                        data={[
-                            { label: "Last 30 days", value: "29" },
-                            { label: "Last 60 days", value: "124" },
-                            { label: "Last 90 days", value: "167" },
-                            { label: "Last 120 days", value: "195" },
-                            { label: "Last 150 days", value: "201" },
-                        ]}
                     />
                 </CardRow>
             </div>

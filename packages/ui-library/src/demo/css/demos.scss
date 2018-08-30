@@ -17,18 +17,6 @@
     }
 }
 
-.hero-chart {
-    margin: 0;
-}
-.hero-chart__stat-cards .stat-card-row {
-     > :nth-child(1) {
-        margin-left: 15px;
-    }
-     > :nth-child(3) {
-        margin-right: 15px;
-    }
-}
-
 .instructions {
     font-style: italic;
     margin-bottom: 20px;

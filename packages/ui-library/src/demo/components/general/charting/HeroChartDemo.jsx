@@ -2,8 +2,6 @@ import React from "react";
 import HeroChart from "ui-library/lib/components/general/charting/HeroChart";
 import Checkbox from "ui-library/lib/components/forms/FormCheckbox";
 import Layout from "ui-library/lib/components/general/ColumnLayout";
-import { StatCard, CardRow } from "ui-library/lib/components/general/charting/Cards";
-
 
 
 /**
@@ -25,7 +23,7 @@ class HeroChartDemo extends React.Component {
 
     _toggleError = () => {
         this.setState({
-            errorMessage: this.state.errorMessage ? null : "Error message text is optional"
+            errorMessage: this.state.errorMessage ? null : "Example error message"
         });
     };
 
@@ -80,51 +78,13 @@ class HeroChartDemo extends React.Component {
                     topSeriesKey="successes"
                     xAxisKey="id"
 
-                    greetingText="Good morning, Eric."
-                    titleText="User Logins"
-                    subtitleText="so far today"
+                    greeting="Good morning, Eric."
+                    title="User Logins"
+                    subtitle="so far today"
                     tooltipTopLabel="Logins"
                     tooltipBottomLabel="Failures"
-                    totalValue={this.state.totalValue}
+                    value={this.state.totalValue}
                 />
-                <div className="hero-chart__stat-cards">
-                    <CardRow>
-                        <StatCard title="Failed Attempts" description="February 2016" loading={this.state.loading}
-                            value="1,056"
-                            data={[
-                                { label: "Last 30 days", value: "29" },
-                                { label: "Last 60 days", value: "124" },
-                                { label: "Last 90 days", value: "167" },
-                                { label: "Last 120 days", value: "195" },
-                                { label: "Last 150 days", value: "201" },
-                            ]}
-                            iconName="lockout"
-                        />
-                        <StatCard title="Peaks per Day" description="February 2016" loading={this.state.loading}
-                            accent={1}
-                            value="261"
-                            data={[
-                                { label: "Last 30 days", value: "29" },
-                                { label: "Last 60 days", value: "124" },
-                                { label: "Last 90 days", value: "167" },
-                                { label: "Last 120 days", value: "195" },
-                                { label: "Last 150 days", value: "201" },
-                            ]}
-                        />
-                        <StatCard title="Password Resets" description="February 2016" loading={this.state.loading}
-                            faccent="blue"
-                            value="53"
-                            data={[
-                                { label: "Last 30 days", value: "29" },
-                                { label: "Last 60 days", value: "124" },
-                                { label: "Last 90 days", value: "167" },
-                                { label: "Last 120 days", value: "195" },
-                                { label: "Last 150 days", value: "201" },
-                            ]}
-                            iconName="nodes"
-                        />
-                    </CardRow>
-                </div>
             </div>
         );
     }

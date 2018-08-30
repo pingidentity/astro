@@ -1,13 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import PageSpinner from "../../general/PageSpinner";
-import _ from "underscore";
 import classnames from "classnames";
 import DashboardCard from "./Cards/DashboardCard";
-
-const accentClasses = ["indigo", "magenta", "blue", "cyan"];
-
-const accentClass = key => accentClasses[key] || key;
+import DashboardCardList from "./Cards/DashboardCardList";
 
 /**
  * @class StatCard
@@ -18,7 +13,7 @@ const accentClass = key => accentClasses[key] || key;
  * @param {string} [className]
  *     Custom class names
  * @param {array} [data]
- *     The list of values to show on the back of the card
+ *     A list of objects that renders as a list of labels and values on the back of the card
  * @param {array} [data-id="stat-card"]
  * @param {string} [description]
  *     Small bit of text at the bottom of the card
@@ -93,44 +88,40 @@ class StatCard extends React.Component {
     render = () => {
         const classes = classnames(
             "stat-card",
-            "stat-card--" + accentClass(this.props.accent),
             this.props.className,
         );
 
         return (
-            <DashboardCard className={classes} size={this.props.size} back={
-                <div>
-                    <div className="stat-card__back-title" accent={this.props.accent}>{this.props.title}</div>,
-                    <div className="stat-card__stat-list">
-                        {_.map(this.props.data, row => (
-                            <div className="stat-card__stat-row" key={row.label}>
-                                <div className="stat-card__stat-row-label">{row.label}</div>
-                                <div className="stat-card__stat-row-number" accent={this.props.accent}>
-                                    {row.value}
-                                </div>
-                            </div>
-                        ))}
+            <DashboardCard
+                {...this.props}
+                data-id={this.props["data-id"]}
+                className={classes}
+                size={this.props.size}
+                back={
+                    <div>
+                        <div className="dashboard-card__back-title" accent={this.props.accent}>{this.props.title}</div>
+                        {!this.props.loading && (
+                            <DashboardCardList data={this.props.data} data-id={`${this.props["data-id"]}-list`} />
+                        )}
                     </div>
-                </div>
-            }
-            front={
-                <div>
-                    <div className="stat-card__front-title">
-                            <div className="stat-card__title-icon" accent={this.props.accent}>
+                }
+                front={
+                    <div>
+                        <div className="dashboard-card__front-title">
+                            <div className="dashboard-card__title-icon" accent={this.props.accent}>
                                 <span className={classnames("icon", "icon-" + this.props.iconName)}/>
                             </div>
-                            <div className="stat-card__title-text">{this.props.title}</div>
+                            <div className="dashboard-card__title-text">{this.props.title}</div>
                         </div>
                         {!this.props.loading &&
                             <div className="stat-card__primary-number" accent={this.props.accent}>
                                 {this.props.value}
                             </div>
                         }
-                        {this.props.loading &&
-                            <PageSpinner className="stat-card__loader" small />
-                        }
-                        <div className="stat-card__description">{this.props.description}</div>
-                </div>
+                        <div className="dashboard-card__description stat-card__description">
+                            {this.props.description}
+                        </div>
+                    </div>
                 }
             />
         );

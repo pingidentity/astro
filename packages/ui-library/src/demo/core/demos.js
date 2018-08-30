@@ -744,38 +744,9 @@ module.exports = [
                 ]
             },
             {
-                label: "Charting",
-                icon: "image",
+                label: "Dashboard",
+                icon: "bar-chart",
                 children: [
-                    {
-                        label: "Line Chart",
-                        demo: require("../components/general/charting/LineChartDemo"),
-                        pathToDoc: "components/general/charting/LineChart.jsx",
-                        pathToSource: "components_general_charting_LineChart.jsx.html",
-                        pathToDemoSource: "demo_components_general_charting_LineChartDemo.jsx.html"
-                    },
-                    {
-                        label: "Bar Chart",
-                        demo: require("../components/general/charting/BarChartDemo"),
-                        pathToDoc: "components/general/charting/BarChart.jsx",
-                        pathToSource: "components_general_charting_BarChart.jsx.html",
-                        pathToDemoSource: "demo_components_general_charting_BarChartDemo.jsx.html"
-                    },
-                    {
-                        label: "Pie & Donut Chart",
-                        demo: require("../components/general/charting/PieChartDemo"),
-                        pathToDoc: "components/general/charting/PieChart.jsx",
-                        pathToSource: "components_general_charting_PieChart.jsx.html",
-                        pathToDemoSource: "demo_components_general_charting_PieChartDemo.jsx.html",
-                        keywords: ["PieChart"]
-                    },
-                    {
-                        label: "Area Chart",
-                        demo: require("../components/general/charting/AreaChartDemo"),
-                        pathToDoc: "components/general/charting/AreaChart.jsx",
-                        pathToSource: "components_general_charting_AreaChart.jsx.html",
-                        pathToDemoSource: "demo_components_general_charting_AreaChartDemo.jsx.html"
-                    },
                     {
                         label: "Stat Cards",
                         demo: require("../components/general/charting/StatCardDemo"),
@@ -791,11 +762,25 @@ module.exports = [
                         pathToDemoSource: "demo_components_general_charting_HeroChartDemo.jsx.html"
                     },
                     {
-                        label: "Dashboard Cards",
-                        demo: require("../components/general/charting/DashboardCardDemo"),
-                        pathToDoc: "components/general/charting/DashboardCard.jsx",
-                        pathToSource: "components_general_charting_Cards_DashboardCard.jsx.html",
-                        pathToDemoSource: "demo_components_general_charting_DashboardCardDemo.jsx.html"
+                        label: "Stat Area Card",
+                        demo: require("../components/general/charting/StatAreaCardDemo"),
+                        pathToDoc: "components/general/charting/StatAreaCard.jsx",
+                        pathToSource: "components_general_charting_StatAreaCard.jsx.html",
+                        pathToDemoSource: "demo_components_general_charting_StatAreaCardDemo.jsx.html"
+                    },
+                    {
+                        label: "PlaceHolder Cards",
+                        demo: require("../components/general/charting/PlaceHolderCardDemo"),
+                        pathToDoc: "components/general/charting/PlaceHolderCard.jsx",
+                        pathToSource: "components_general_charting_Cards_PlaceHolderCard.jsx.html",
+                        pathToDemoSource: "demo_components_general_charting_PlaceHolderCardDemo.jsx.html"
+                    },
+                    {
+                        label: "Donut Card",
+                        demo: require("../components/general/charting/DonutCardDemo"),
+                        pathToDoc: "components/general/charting/DonutCard.jsx",
+                        pathToSource: "components_general_charting_DonutCard.jsx.html",
+                        pathToDemoSource: "demo_components_general_charting_DonutCardDemo.jsx.html"
                     },
                 ]
             },
@@ -1021,6 +1006,15 @@ module.exports = [
                 pathToDoc: "components/templates/SSOAttributes.jsx",
                 pathToSource: "templates_SSOAttributes.jsx.html",
                 pathToDemoSource: "demo_components_templates_SSOAttributesDemo.jsx.html",
+                fullscreen: true,
+                icon: "details"
+            },
+            {
+                label: "Dashboard Layout",
+                demo: require("../components/templates/DashboardDemo"),
+                pathToDoc: "components/templates/Dashboard.jsx",
+                pathToSource: "templates_Dashboard.jsx.html",
+                pathToDemoSource: "demo_components_templates_DashboardDemo.jsx.html",
                 fullscreen: true,
                 icon: "details"
             }

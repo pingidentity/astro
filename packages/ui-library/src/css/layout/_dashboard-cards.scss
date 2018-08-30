@@ -62,8 +62,8 @@ $fullwidthBreakpoint: 950px;
         @include flexbox-direction(column);
 
         box-sizing: border-box;
-        padding: $spacing-xl;
-        min-height: 220px;
+        padding: $spacing-xl $spacing-lg;
+        min-height: 227px;
 
         @media (max-width: $condensedBreakpoint) {
             padding: $spacing-xl $spacing-md;
@@ -89,26 +89,22 @@ $fullwidthBreakpoint: 950px;
         @media (max-width: $condensedBreakpoint) and (min-width: $fullwidthBreakpoint) {
             padding-top: $spacing-xl;
         }
+    }
 
-        .input-checkbox {
-            position: absolute;
-            top: 153px;
-            left: 21px;
-            .label-text {
-                top: 24px;
-                left: 35px;
-                text-transform: none;
-            }
+    label.dashboard-card__make-default {
+        position: absolute;
+        bottom: 21px;
+        left: 21px;
+        margin: 0;
+
+        .label-text {
+            color: $color-elephant;
         }
     }
 
     &--flipped &__back {
         @include flippedTo;
     }
-
-}
-
-.stat-card {
 
     &__front-title {
         @include flexbox;
@@ -136,25 +132,41 @@ $fullwidthBreakpoint: 950px;
     &__title-text {
         text-transform: uppercase;
         font-size: 18px;
-        color: $color-strong-neutral-10;
+        color: $color-neutral-10;
         display: inline-block;
         vertical-align: middle;
     }
 
-    &__primary-number {
-        @include standoutText;
-
-        font-size: 40px;
+    &__value {
+        color: $color-neutral-10;
         text-align: center;
-        margin: $spacing-md 0 $spacing-lg;
-        padding: $spacing-sm 0 $spacing-xs;
+        font-size: 55px;
         line-height: 1em;
+        min-height: 1em;
+        font-family: $font-pn-semibold;
+        margin: $spacing-md 0 0;
     }
 
-    &__description {
+    &__description,
+    &__subtitle {
         font-size: 12px;
         text-align: center;
-        color: $color-strong-neutral-10;
+        color: $color-neutral-10;
+    }
+
+    &__chart {
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+
+    &__range-selector {
+        transform: translateX(-50%);
+        margin: 0 0 0 50%;
+        white-space: nowrap;
+
+        label {
+            float: none;
+        }
     }
 
     &__stat-list {
@@ -203,7 +215,15 @@ $fullwidthBreakpoint: 950px;
         top: 50%;
         transform: translateX(-50%) translateY(-50%);
         text-align: center;
-        color: $color-strong-neutral-10;
+        color: $color-neutral-10;
+    }
+
+    &__loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%) !important;
+        margin: 0 !important;
     }
 
     &__error-text {
@@ -218,33 +238,43 @@ $fullwidthBreakpoint: 950px;
     }
 
     &--magenta {
-        .stat-card__title-icon,
-        .stat-card__stat-row-number {
+        .dashboard-card__title-icon,
+        .dashboard-card__stat-row-number {
             color: $color-charting-magenta;
+        }
+        .dashboard-card__back-title,
+        .stat-card__primary-number {
+            background-color: $color-charting-magenta;
         }
     }
 
     &--blue {
-        .stat-card__title-icon,
-        .stat-card__stat-row-number {
+        .dashboard-card__title-icon,
+        .dashboard-card__stat-row-number {
             color: $color-charting-blue;
+        }
+        .dashboard-card__back-title,
+        .stat-card__primary-number {
+            background-color: $color-charting-blue;
         }
     }
 
     &--cyan {
-        .stat-card__title-icon,
-        .stat-card__stat-row-number {
+        .dashboard-card__title-icon,
+        .dashboard-card__stat-row-number {
             color: $color-charting-cyan;
+        }
+        .dashboard-card__back-title,
+        .stat-card__primary-number {
+            background-color: $color-charting-cyan;
         }
     }
 
-    &__loader {
-        margin-top: 20px;
-        margin-bottom: 25px;
-    }
 }
 
-.stat-card-row {
+.dashboard-card-row {
+    margin-bottom: $spacing-md;
+
     > * {
         margin-bottom: $spacing-md;
 
@@ -275,5 +305,138 @@ $fullwidthBreakpoint: 950px;
                 margin-right: 0;
             }
         }
+    }
+}
+
+.stat-card {
+    &__primary-number {
+        @include standoutText;
+
+        font-size: 40px;
+        text-align: center;
+        margin: $spacing-md 0 $spacing-lg 50%;
+        padding: $spacing-sm 0 $spacing-xs;
+        line-height: 1em;
+        min-width: 200px;
+        transform: translateX(-50%);
+    }
+    &__description {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 40px;
+    }
+}
+
+.stat-area-card {
+    min-height: 307px;
+
+    &__chart {
+        margin: $spacing-md 0 0;
+    }
+    &__range-selector {
+        position: absolute;
+        left: 50%;
+        bottom: $spacing-lg;
+        transform: translateX(-50%);
+        margin: 0;
+    }
+}
+
+.dashboard-card--ghost {
+    .dashboard-card__front {
+        border-color: $color-neutral-90;
+    }
+}
+
+.placeholder-card {
+    min-height: 307px;
+
+    &__content {
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        text-align: center;
+        max-width: 200px;
+
+        svg {
+            width: 50px;
+        }
+        path {
+            fill: $color-text;
+        }
+    }
+    &__message {
+        margin-top: $spacing-lg;
+        color: $color-text;
+        text-indent: 5px;
+    }
+}
+
+.donut-card {
+    .dashboard-card__front {
+        align-items: center;
+    }
+
+
+    &__title {
+        position: absolute;
+        font-size: 18px;
+        top: 19px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-transform: uppercase;
+        color: $color-neutral-10;
+    }
+
+    &__center-info {
+        position: absolute;
+        top: 120px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        color: $color-neutral-10;
+        hr {
+            border-width: 2px 0 0;
+            border-color: $color-neutral-10;
+        }
+    }
+
+    &__center-number {
+        position: relative;
+        font-size: 37px;
+        top: 20px;
+    }
+
+    &__center-label {
+        position: relative;
+        font-size: 16px;
+        bottom: 28px;
+    }
+
+    &__back-info {
+        display: flex;
+        justify-content: space-between;
+        height: 30px;
+    }
+
+    &__drop-down {
+        display: flex;
+        justify-content: center;
+        top: -22px;
+        margin: inherit;
+        padding-left: 10px;
+        .input-container {
+            width: 135px;
+        }
+    }
+
+    &__back-line {
+        margin: 20px 0 0;
+    }
+
+    &__donut-chart {
+        top: 10px;
     }
 }

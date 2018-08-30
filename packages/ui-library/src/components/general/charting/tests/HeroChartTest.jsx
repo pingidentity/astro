@@ -27,12 +27,12 @@ describe("HeroChart", function () {
         bgImage: "http://server.com/my/image/img.jpg",
         bottomSeriesKey: "nopes",
         data: chartData,
-        greetingText: "Hi",
+        greeting: "Hi",
         onValueChange: jest.genMockFunction(),
         rockerButtonProps: rockerButtonProps,
-        subtitleText: "so far",
-        totalValue: "1,000",
-        titleText: "Wins",
+        subtitle: "so far",
+        value: "1,000",
+        title: "Wins",
         tooltipBottomLabel: "Loses",
         tooltipTopLabel: "Wins",
         topSeriesKey: "yups",
@@ -56,16 +56,16 @@ describe("HeroChart", function () {
         const component = getComponent();
 
         const greeting = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__greeting");
-        expect(greeting.textContent).toBe(defaultProps.greetingText);
+        expect(greeting.textContent).toBe(defaultProps.greeting);
 
         const title = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__title");
-        expect(title.textContent).toBe(defaultProps.titleText);
+        expect(title.textContent).toBe(defaultProps.title);
 
-        const value = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__total");
-        expect(value.textContent).toBe(defaultProps.totalValue);
+        const value = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__value");
+        expect(value.textContent).toBe(defaultProps.value);
 
         const subtitle = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__subtitle");
-        expect(subtitle.textContent).toBe(defaultProps.subtitleText);
+        expect(subtitle.textContent).toBe(defaultProps.subtitle);
     });
 
     it("renders the rocker button labels", function () {
@@ -164,7 +164,7 @@ describe("HeroChart", function () {
         expect(subtitle).toBeFalsy();
     });
 
-    it("renders the spinner when provided", function () {
+    it("renders only the spinner when loading", function () {
         const loaderMessageText = "Wait!";
         const component = getComponent({
             loading: true,
@@ -192,7 +192,7 @@ describe("HeroChart", function () {
         const title = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__title");
         expect(title).toBeTruthy();
 
-        const value = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__total");
+        const value = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__value");
         expect(value).toBeTruthy();
 
         const subtitle = TestUtils.findRenderedDOMNodeWithClass(component, "hero-chart__subtitle");

@@ -8,25 +8,29 @@ describe("StatCard", function () {
         StatCard = require("../StatCard"),
         StatCardRow = require("../StatCardRow");
 
+    const listData = [
+        { label: "Last 30 days", value: "29" },
+        { label: "Last 60 days", value: "124" },
+        { label: "Last 90 days", value: "167" },
+        { label: "Last 120 days", value: "195" },
+        { label: "Last 150 days", value: "201" },
+    ];
+
     function getComponent (props) {
         props = _.defaults(props || {}, {
             title: "Failed Attempts",
             description: "February 2016",
             value: "1,056",
-            data: [
-                { label: "Last 30 days", value: "29" },
-                { label: "Last 60 days", value: "124" },
-                { label: "Last 90 days", value: "167" },
-                { label: "Last 120 days", value: "195" },
-                { label: "Last 150 days", value: "201" },
-            ]
+            data: listData,
+            accent: 1,
         });
+
         return ReactTestUtils.renderIntoDocument(<StatCard {...props} />);
     }
 
     it("renders with default data-id", function () {
         const component = getComponent();
-        const chart = TestUtils.findRenderedDOMNodeWithDataId(component, "dashboard-card");
+        const chart = TestUtils.findRenderedDOMNodeWithDataId(component, "stat-card");
         expect(chart).toBeTruthy();
     });
 
@@ -46,16 +50,10 @@ describe("StatCard", function () {
         expect(spinner).toBeFalsy();
     });
 
-    it("renders the spinner when provided", function () {
-        const component = getComponent({
-            loading: true
-        });
+    it("renders the list on back", function () {
+        const component = ReactTestUtils.renderIntoDocument(<StatCardRow flipped={true}>content</StatCardRow>);
+        const listMarkup = TestUtils.findRenderedDOMNodeWithClass(component, "dashboard-card__stat-list");
 
-        const spinnerContainer = TestUtils.findRenderedDOMNodeWithClass(component, "stat-card__loader");
-        expect(spinnerContainer).toBeTruthy();
-
-        const pageSpinner = TestUtils.findRenderedDOMNodeWithClass(spinnerContainer, "page-loader");
-        expect(pageSpinner).toBeTruthy();
-
+        expect(listMarkup).toBeDefined();
     });
 });

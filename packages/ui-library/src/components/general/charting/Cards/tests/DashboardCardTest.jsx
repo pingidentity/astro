@@ -28,7 +28,7 @@ describe("DashboardCard", function () {
             onFlip: callback,
             back: <div/>
         });
-        const toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "view-toggle");
+        const toggle = TestUtils.findRenderedDOMNodeWithDataId(component, `${componentId}-view-toggle`);
 
         expect(callback).not.toBeCalled();
         ReactTestUtils.Simulate.click(toggle);
@@ -39,7 +39,7 @@ describe("DashboardCard", function () {
         const component = getComponent({
             back: <div/>
         });
-        const toggle = TestUtils.findRenderedDOMNodeWithDataId(component, "view-toggle");
+        const toggle = TestUtils.findRenderedDOMNodeWithDataId(component, `${componentId}-view-toggle`);
 
         expect(component.state.flipped).not.toBeTruthy();
         ReactTestUtils.Simulate.click(toggle);
@@ -53,7 +53,7 @@ describe("DashboardCard", function () {
             defaultChecked: false,
             onMakeDefault: callback
         });
-        const checked = TestUtils.findRenderedDOMNodeWithDataId(component, "form-checkbox");
+        const checked = TestUtils.findRenderedDOMNodeWithDataId(component, `${componentId}-make-default`);
 
         expect(callback).not.toBeCalled();
         ReactTestUtils.Simulate.change(checked, { target: { checked: true } });
@@ -68,7 +68,7 @@ describe("DashboardCard", function () {
             defaultChecked: true,
             onMakeDefault: callback
         });
-        const checked = TestUtils.findRenderedDOMNodeWithDataId(component, "form-checkbox");
+        const checked = TestUtils.findRenderedDOMNodeWithDataId(component, `${componentId}-make-default`);
 
         expect(component.state.defaultChecked).not.toBeTruthy();
         ReactTestUtils.Simulate.change(checked, { target: { checked: true } });
@@ -95,5 +95,17 @@ describe("DashboardCard", function () {
 
         const control = TestUtils.findRenderedDOMNodeWithClass(component, "dashboard-card__control");
         expect(control).toBeFalsy();
+    });
+
+    it("renders the spinner when provided", function () {
+        const component = getComponent({
+            loading: true
+        });
+
+        const spinnerContainer = TestUtils.findRenderedDOMNodeWithClass(component, "dashboard-card__loader");
+        expect(spinnerContainer).toBeTruthy();
+
+        const pageSpinner = TestUtils.findRenderedDOMNodeWithClass(spinnerContainer, "page-loader");
+        expect(pageSpinner).toBeTruthy();
     });
 });

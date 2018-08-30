@@ -9,7 +9,7 @@ import classnames from "classnames";
 **/
 
 const StatCardRow = props => (
-    <div className={classnames("stat-card-row", props.className)} data-id={props["data-id"]}>
+    <div className={classnames("dashboard-card-row", props.className)} data-id={props["data-id"]}>
         {props.children}
     </div>
 );

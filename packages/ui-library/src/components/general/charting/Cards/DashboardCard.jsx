@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import DashboardColors from "./dashboardColors";
+import PageSpinner from "../../../general/PageSpinner";
 import ViewToggle from "../ViewToggle";
 import classnames from "classnames";
 import Checkbox from "../../../forms/FormCheckbox";
@@ -94,11 +96,13 @@ class DashboardCard extends React.Component {
     _isFlipped = () => this.props.flipped === undefined ? this.state.flipped : this.props.flipped
 
     render = () => {
+        const accent = this.props.accent ? "dashboard-card--" + DashboardColors.getKey(this.props.accent) : null;
         const classes = classnames(
             "dashboard-card",
             this.props.className,
+            accent,
             {
-                "dashboard-card--flipped": this._isFlipped(),
+                "dashboard-card--flipped": this._isFlipped() && !this.props.errorMessage,
                 "dashboard-card--double": this.props.size === 2,
             }
         );
@@ -106,29 +110,46 @@ class DashboardCard extends React.Component {
         return (
             <div className={classes} data-id={this.props["data-id"]}>
                 {!this.props.errorMessage && [
-                    <div key="back" className="dashboard-card__back">
+                    <div key="back" className="dashboard-card__back modifier_light-inputs">
                         {this.props.back}
                         {this.props.onMakeDefault &&
-                            <Checkbox label={this.props.makeDefaultLabel}
-                            onValueChange={this._handleChecked}
-                            checked={this.state.defaultChecked}/>}
+                            <Checkbox
+                                data-id={`${this.props["data-id"]}-make-default`}
+                                className="dashboard-card__make-default stacked"
+                                label={this.props.makeDefaultLabel}
+                                onValueChange={this._handleChecked}
+                                checked={this.state.defaultChecked}
+                            />
+                        }
                     </div>,
                     <div key="front" className="dashboard-card__front">{this.props.front}</div>,
                     <div key="control" className="dashboard-card__control">
                         {!this.props.loading && this.props.back &&
-                            <ViewToggle onToggle={this._handleFlip} toggled={this.state.flipped} />
+                            <ViewToggle
+                                data-id={`${this.props["data-id"]}-view-toggle`}
+                                onToggle={this._handleFlip}
+                                toggled={this.state.flipped}
+                            />
                         }
                     </div>
                 ]}
                  {this.props.errorMessage &&
                     <div className="dashboard-card__front">
-                        <div className="dashboard-card__error">
+                        <div className="dashboard-card__error" data-id={`${this.props["data-id"]}-error-message`}>
                             <div className="icon-cogs dashboard-card__error-icon" />
                             <div className="dashboard-card__error-text">
                                 {this.props.errorMessage}
                             </div>
                         </div>
                     </div>
+                }
+                {this.props.loading &&
+                    <PageSpinner
+                        data-id={`${this.props["data-id"]}-spinner`}
+                        className="dashboard-card__loader"
+                        show
+                        small
+                    />
                 }
             </div>
         );

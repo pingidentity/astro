@@ -24,8 +24,10 @@ import _ from "underscore";
 *     An array of objects containing the data for both the top and bottom series of data.
 * @param {string} [errorMessage]
 *     When provided, the error message and icon will display in place of the chart and center text.
-* @param {string} greetingText
+* @param {string} greeting
 *     The text renderered in the upper-left of the component
+* @param {string} greetingText
+*     DEPRECATED. Use "greeting" instead.
 * @param {boolean} [loading=false]
 *     When true the splinner animation shows in place of the charts
 * @param {string} [loadingMessage]
@@ -36,22 +38,28 @@ import _ from "underscore";
 *     An object containing the props passed to the range-selector RockerButton component
 * @param {string} selected
 *     A string containing the id of the currently selected date range
-* @param {string} subtitleText
+* @param {string} subtitle
 *    The smaller text renderered in the bottom of the text block above the bar chart
-* @param {string} titleText
+* @param {string} subtitleText
+*    DEPRECATED. Use "subtitle" instead.
+* @param {string} title
 *    The text renderered on the top of the text block above the bar chart
+* @param {string} titleText
+*    DEPRECATED. Use "title" instead.
 * @param {string} tooltipBottomLabel
 *    The text renderered in each tooltip next to the bottom series data value
 * @param {string} tooltipTopLabel
 *    The text renderered in each tooltip next to the top series data value
-* @param {string} totalValue
+* @param {string} value
 *    The large text renderered in the middle of the text block above the bar chart
+* @param {string} totalValue
+*    DEPRECATED. Use "value" instead.
 * @param {string} topSeriesKey
-*     An object containing the object key and color of the top series data contained in the "data" prop.
+*    An object containing the object key and color of the top series data contained in the "data" prop.
 * @param {string} bottomSeriesKey
-*     An object containing the object key and color of the bottom series data contained in the "data" prop.
+*    An object containing the object key and color of the bottom series data contained in the "data" prop.
 * @param {string} xAxisKey
-*     The object key of the x-axis data contained in the "data" prop
+*    The object property that contains the x-axis data in the "data" prop
 */
 
 const xAxisHeight = 30;
@@ -110,18 +118,22 @@ const HeroChart = ({
         chartHeight,
         chartWidth,
         errorMessage,
+        greeting,
         greetingText,
         loading,
         loadingMessage,
         onValueChange,
         rockerButtonProps,
         selected,
+        subtitle,
         subtitleText,
+        title,
         titleText,
         tooltipBottomLabel,
         tooltipTopLabel,
         topSeriesKey,
         totalValue,
+        value,
         xAxisKey,
     }) => {
 
@@ -177,12 +189,12 @@ const HeroChart = ({
 
     return (
         <div data-id={dataId} className="hero-chart" style={heroStyles}>
-            {greetingText && <div className="hero-chart__greeting">{greetingText}</div>}
+            {(greeting || greetingText) && <div className="hero-chart__greeting">{greeting || greetingText}</div>}
             {!errorMessage &&
                 <div key="center-text" className="hero-chart__center-text">
-                    <div className="hero-chart__title">{titleText}</div>
-                    <div className="hero-chart__total">{totalValue}</div>
-                    <div className="hero-chart__subtitle">{subtitleText}</div>
+                    <div className="hero-chart__title">{title || titleText}</div>
+                    <div className="hero-chart__value">{value || totalValue}</div>
+                    <div className="hero-chart__subtitle">{subtitle || subtitleText}</div>
                 </div>
             }
             {!errorMessage && !loading && [
@@ -208,7 +220,7 @@ const HeroChart = ({
             ]}
             <RockerButton key="range-selector" {...rockerButtonDefaults} {...rockerButtonProps} />
             {!errorMessage && loading &&
-                <PageSpinner show={true} className="hero-chart__loader">{loadingMessage}</PageSpinner>
+                <PageSpinner className="hero-chart__loader" show>{loadingMessage}</PageSpinner>
             }
             {errorMessage &&
                 <div className="hero-chart__error">
