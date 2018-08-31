@@ -123,17 +123,11 @@
     background-color: $color-input-fill;
 
     .modifier_light-inputs & {
-        &,
-        &:after {
-            @include input-background-light;
-        }
+        @include input-background-light;
     }
 
     .modifier_light-inputs .modifier_dark-inputs & {
-        &,
-        &:after {
-            @include input-background-dark;
-        }
+        @include input-background-dark;
     }
 }
 

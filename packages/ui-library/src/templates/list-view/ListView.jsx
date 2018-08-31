@@ -1,17 +1,14 @@
-var PropTypes = require("prop-types");
-var React = require("react"),
-    CollapsibleLink = require("../../components/general/CollapsibleLink"),
-    ExpandableRow = require("../../components/rows/expandable-row"),
-    FormCheckbox = require("../../components/forms/FormCheckbox"),
-    FormSearchBox = require("../../components/forms/FormSearchBox"),
-    InfiniteScroll = require("../../components/list/InfiniteScroll"),
-    Button = require("../../components/buttons/Button"),
-    Modal = require("../../components/general/Modal"),
-    RowAccessories = require("../../components/rows/expandable-row/Accessories"),
-    Toggle = require("../../components/forms/form-toggle"),
-    TabbedSections = require("../../components/general/TabbedSections"),
-    classnames = require("classnames"),
-    _ = require("underscore");
+import PropTypes from "prop-types";
+import React from "react";
+import ExpandableRow from "../../components/rows/expandable-row";
+import FormCheckbox from "../../components/forms/FormCheckbox";
+import FormSearchBar from "../../components/forms/FormSearchBar";
+import InfiniteScroll from "../../components/list/InfiniteScroll";
+import Button from "../../components/buttons/Button";
+import Modal from "../../components/general/Modal";
+import RowAccessories from "../../components/rows/expandable-row/Accessories";
+import Toggle from "../../components/forms/form-toggle";
+import _ from "underscore";
 import LabelValuePairs from "../../components/layout/LabelValuePairs";
 import ColumnLayout from "../../components/general/ColumnLayout";
 
@@ -30,18 +27,10 @@ import ColumnLayout from "../../components/general/ColumnLayout";
  */
 
 /**
- * @callback ListView~onActiveTabChange
- * @param {number} index
- *          New index
- */
-
-/**
  * @class ListView
  * @desc This is a template to demonstrate how to build an InfiniteScrolling list view, with search and filters.  Use
  * it as a starting poing for a page.
  *
- * @param {number} activeTab
- *          The tab to show
  * @param {bool} advancedSearch
  *          Whether to show the narrow by section
  * @param {object} position
@@ -52,8 +41,6 @@ import ColumnLayout from "../../components/general/ColumnLayout";
  * @param {ListView~onSearchFilterChange} onSearchFilterChange
  *          Callback to be triggered when the filter criteria is changed.
  *          The signature is function (filterName, filterValue)
- * @param {ListView~onActiveTabChange} onActiveTabChange
- *          Callback to be triggered when the active tab is changed.
  */
 module.exports = class extends React.Component {
     /*
@@ -61,7 +48,6 @@ module.exports = class extends React.Component {
      * utility.
      */
     static propTypes = {
-        activeTab: PropTypes.number.isRequired,
         advancedSearch: PropTypes.bool,
         filters: PropTypes.object,
         batches: PropTypes.array,
@@ -116,8 +102,7 @@ module.exports = class extends React.Component {
 
     render() {
         return (
-            <TabbedSections selectedIndex={this.props.activeTab} onValueChange={this.props.onActiveTabChange}>
-                <div title="First Page">
+            <div>
                 <Modal
                     data-id="add-modal"
                     modalTitle="Add Modal"
@@ -129,60 +114,48 @@ module.exports = class extends React.Component {
                         Add Modal content
                     </p>
                 </Modal>
-                    <div className={classnames("search-bar", { expanded: this.props.advancedSearch })}>
-                        <div>
-                            <FormSearchBox
-                                className="search-box"
-                                onValueChange={this._handleTextChange}
-                                queryString={this.props.filters.text} />
-                            <CollapsibleLink data-id="narrow-by"
-                                title="Narrow by"
-                                onToggle={this.props.onSearchAdvancedToggle}
-                                arrowPosition={CollapsibleLink.arrowPositions.RIGHT}
-                                expanded={this.props.advancedSearch}
-                                className="filter-by" />
-                            <Button
-                                className="button-add-modal"
-                                label="Add Modal Button"
-                                iconName="add"
-                                onClick={this._toggleModal}/>
-                        </div>
-                        <div className="filters">
-                            <FormCheckbox label="filter odd rows"
-                                onValueChange={this._handleOddFilterToggle}
-                                checked={this.props.filters.odd}
-                                className="inline" />
-                            <FormCheckbox label="filter even rows"
-                                onValueChange={this._handleEvenFilterToggle}
-                                checked={this.props.filters.even}
-                                className="inline" />
-                        </div>
-                    </div>
-                    {
-                      /*
-                       * Hardcoded height just to demonstrate the infinite scroll
-                       */
+                <FormSearchBar
+                    formSearchBoxProps={{
+                        onValueChange: this._handleTextChange,
+                        queryString: this.props.filters.text,
+                    }}
+                    rightControl={
+                        <Button
+                            className="button-add-modal"
+                            label="Add Modal Button"
+                            iconName="add"
+                            onClick={this._toggleModal}
+                        />
                     }
-                    <div className="result-set" data-id="result-set" style={{ height: 500 }}>
-                        <InfiniteScroll contentType={this._contentType}
-                                initialItem={this.props.position}
-                                onScroll={this._handleScroll}
-                                batches={this.props.batches}
-                                hasNext={this.props.hasNext}
-                                hasPrev={this.props.hasPrev}
-                                onLoadNext={_.noop}
-                                onLoadPrev={_.noop} >
-                            <div>Hello</div>
-                        </InfiniteScroll>
-                    </div>
+                >
+                    <FormCheckbox label="filter odd rows"
+                        onValueChange={this._handleOddFilterToggle}
+                        checked={this.props.filters.odd}
+                        className="inline" />
+                    <FormCheckbox label="filter even rows"
+                        onValueChange={this._handleEvenFilterToggle}
+                        checked={this.props.filters.even}
+                        className="inline" />
+                </FormSearchBar>
+                {
+                    /*
+                    * Hardcoded height just to demonstrate the infinite scroll
+                    */
+                }
+                <div className="result-set" data-id="result-set" style={{ height: 500 }}>
+                    <InfiniteScroll contentType={this._contentType}
+                            initialItem={this.props.position}
+                            onScroll={this._handleScroll}
+                            batches={this.props.batches}
+                            hasNext={this.props.hasNext}
+                            hasPrev={this.props.hasPrev}
+                            onLoadNext={_.noop}
+                            onLoadPrev={_.noop} >
+                        <div>Hello</div>
+                    </InfiniteScroll>
                 </div>
-                <div title="Second Page">
-                    I'm a second page...
-                </div>
-                <div title="Third Page">
-                    I'm a third page...
-                </div>
-            </TabbedSections>);
+            </div>
+        );
     }
 };
 
@@ -218,7 +191,7 @@ class Row extends React.Component {
                 value: "NO"
             },
             {
-                label: "Resgistration",
+                label: "Registration",
                 value: "NO"
             },
         ];

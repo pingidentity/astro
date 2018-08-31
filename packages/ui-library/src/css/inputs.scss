@@ -443,7 +443,7 @@ label {
                 top: 4px;
                 width: 10px;
                 height: 10px;
-                background-color: $color-elderly;
+                background-color: transparent;
 
                 @include border-radius(ceil($radio-height/2) + 1);
                 @include transition($default-input-transition);

@@ -241,7 +241,7 @@ const FilterControls = connect(
                     monospaced: isSCIM,
                 }}
                 documentationLink={{
-                    label: "Example SCIM Queries",
+                    label: "Example SCIM queries",
                     href: "http://uilibrary.ping-eng.com/3.8.0-SNAPSHOT/build-doc/ui-library/3.8.0-SNAPSHOT/index.html",
                     showWithFilters: false,
                 }}

@@ -22,11 +22,11 @@ var ListViewPaginatedDemoPage = Object.create(HomePage, {
     },
 
     /**
-     * @desc this function is to click on link Narrow By
+     * @desc this function is to click on link Filters to open filters
      */
-    clickLinkNarrowBy: {
+    clickOpenFilters: {
         value: function () {
-            this.click("//span[@data-id='narrow-by']");
+            this.click("//span[@data-id='searchbar-filter-link']");
         }
     },
 

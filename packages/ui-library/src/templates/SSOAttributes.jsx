@@ -56,10 +56,10 @@ const SSOAttributes = () => {
 
     return (
         <div>
-            <PageHeader title="SSO ATTRIBUTES" underlined />
+            <PageHeader title="SSO Attributes" />
             <Indent border={false} >
                 <RowBuilder
-                    addLabel="+ ADD ATTRIBUTE"
+                    addLabel="+ Add attribute"
                     rows={[
                         {
                             id: "first",

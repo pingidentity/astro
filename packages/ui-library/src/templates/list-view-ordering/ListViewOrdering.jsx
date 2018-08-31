@@ -1,12 +1,10 @@
-var PropTypes = require("prop-types");
-var React = require("react"),
-    CollapsibleLink = require("../../components/general/CollapsibleLink"),
-    ExpandableRow = require("../../components/rows/ExpandableRow"),
-    FormCheckbox = require("../../components/forms/FormCheckbox"),
-    FormSearchBox = require("../../components/forms/FormSearchBox"),
-    Pagination = require("../../components/list/Pagination"),
-    Toggle = require("../../components/forms/form-toggle"),
-    classnames = require("classnames");
+import PropTypes from "prop-types";
+import React from "react";
+import ExpandableRow from "../../components/rows/ExpandableRow";
+import FormCheckbox from "../../components/forms/FormCheckbox";
+import FormSearchBar from "../../components/forms/FormSearchBar";
+import Pagination from "../../components/list/Pagination";
+import Toggle from "../../components/forms/form-toggle";
 
 /**
  * @callback ListView~onSearchAdvancedToggle
@@ -118,33 +116,21 @@ module.exports = class extends React.Component {
     render() {
         return (
             <div>
-                <div className={classnames("search-bar", { expanded: this.props.advancedSearch })}>
-                    <div>
-                        <FormSearchBox
-                            className="search-box"
-                            onValueChange={this._handleTextChange}
-                            queryString={this.props.filters.text} />
-
-
-                        <CollapsibleLink data-id="narrow-by"
-                            title="Narrow by"
-                            onToggle={this.props.onSearchAdvancedToggle}
-                            arrowPosition={CollapsibleLink.arrowPositions.RIGHT}
-                            expanded={this.props.advancedSearch}
-                            className="filter-by" />
-                    </div>
-                    <div className="filters">
-                        <FormCheckbox label="filter odd rows"
-                            onValueChange={this._handleOddFilterToggle}
-                            checked={this.props.filters.odd}
-                            className="inline" />
-                        <FormCheckbox label="filter even rows"
-                            onValueChange={this._handleEvenFilterToggle}
-                            checked={this.props.filters.even}
-                            className="inline" />
-                    </div>
-
-                </div>
+                <FormSearchBar
+                    formSearchBoxProps={{
+                        onValueChange: this._handleTextChange,
+                        queryString: this.props.filters.text
+                    }}
+                >
+                    <FormCheckbox label="filter odd rows"
+                        onValueChange={this._handleOddFilterToggle}
+                        checked={this.props.filters.odd}
+                        className="inline" />
+                    <FormCheckbox label="filter even rows"
+                        onValueChange={this._handleEvenFilterToggle}
+                        checked={this.props.filters.even}
+                        className="inline" />
+                </FormSearchBar>
                 {this.props.rows.filtered.length && (
                     <Pagination stateless={true}
                         className = "result-set"

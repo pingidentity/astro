@@ -11,35 +11,6 @@ describe("List View Infinite Scroll Integration", function () {
     });
 
     /**
-     * SCENARIO: should open the page after selecting page
-     * GIVEN: Goes to template List View Infinite Scroll
-     * WHEN: Clicks on each page
-     * THEN: The page should be displayed and active
-     * WHEN: Takes screenshot
-     * AND: Compares it with the base image
-     * THEN: The base image and the current image should be identical
-     */
-    it("should open the page after selecting page", ListViewInfiniteScrollPage.retriable(function () {
-        ListViewInfiniteScrollPage.openListViewInfiniteScrollDemoPage();
-
-        //click on the first page
-        ListViewInfiniteScrollPage.clickOnTab(0);
-        expect(ListViewInfiniteScrollPage.verifyDisplayedPageExisting("0")).toBeTruthy();
-        //click on the second page
-        ListViewInfiniteScrollPage.clickOnTab(1);
-        expect(ListViewInfiniteScrollPage.verifyDisplayedPageExisting("1")).toBeTruthy();
-        //take screenshot and compare
-        var secondPageFileName = "TemplateListViewInfiniteScroll_SecondPage";
-        ListViewInfiniteScrollPage.takeScreenshotAndCompare(secondPageFileName);
-        //click on the third page
-        ListViewInfiniteScrollPage.clickOnTab(2);
-        expect(ListViewInfiniteScrollPage.verifyDisplayedPageExisting("2")).toBeTruthy();
-        //take screenshot and compare
-        var thirdPageFileName = "TemplateListViewInfiniteScroll_ThirdPage";
-        ListViewInfiniteScrollPage.takeScreenshotAndCompare(thirdPageFileName);
-    }));
-
-    /**
      * SCENARIO: Should filter odd rows and even rows
      * GIVEN: Goes to template List View Infinite Scroll
      * WHEN: Selects the first page
@@ -49,10 +20,8 @@ describe("List View Infinite Scroll Integration", function () {
      * THEN: There should be only even rows displayed in the list
      */
     it("should filter odd rows and even rows", function () {
-        //click on the first page
-        ListViewInfiniteScrollPage.clickOnTab(0);
         //click on Narrow By link
-        ListViewInfiniteScrollPage.clickLinkNarrowBy();
+        ListViewInfiniteScrollPage.clickOpenFilters();
         //filter odd rows
         ListViewInfiniteScrollPage.clickCheckboxFilterOddRows();
         expect(ListViewInfiniteScrollPage.verifyOddRows).toBeTruthy();
@@ -70,8 +39,6 @@ describe("List View Infinite Scroll Integration", function () {
      * THEN: The row 15 should display in the list
      */
     it("should search rows normally", function () {
-        //click on the first page
-        ListViewInfiniteScrollPage.clickOnTab(0);
         //search with item "15"
         ListViewInfiniteScrollPage.setSearchValue("15");
         //verify result
