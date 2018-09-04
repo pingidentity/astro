@@ -274,7 +274,7 @@ class WizardDemo extends React.Component {
                             help your customers identify the purpose of the application andprovide important
                             information to misguided connections."
                         onSave={this.onNext}
-                        loading={this.state.loading}
+                        loading={this.state.loading && "loading step 1"}
                         required>
                         <div className="input-row">
                             <FormTextField
@@ -328,7 +328,7 @@ class WizardDemo extends React.Component {
                             left is a list of OAuth scopes by resource type that can be added to the "Access Grants"
                             column on the right. After moving the desired scopes the Access Grants column you can
                             save your selections.'
-                        loading={this.state.loading}
+                        loading={this.state.loading && "loading step 3"}
                         required>
                         <DragScreen onChange={this._onAccessChange}/>
                     </Step>

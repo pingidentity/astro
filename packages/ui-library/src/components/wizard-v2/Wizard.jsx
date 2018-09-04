@@ -65,6 +65,8 @@ import Utils from "../../util/Utils";
   *     Value of the "data-id" assigned to the top-level HTML container of the step.
   * @param {boolean} [completed=false]
   *     Determines whether to render the step as completed in the menu.
+  * @param {boolean|string} [loading]
+  *     loading is set to true and if text is provided then the spinner will render the text.
   * @param {boolean} [continueDisabled=false]
   *     Determines whether to render the next or save button as disabled.
   * @param {string} [description]
@@ -253,7 +255,9 @@ function ActiveStep(props) {
                     className="page-loader__wizard"
                     show
                     modal
-                />
+                >
+                {props.step.props.loading !== true && props.step.props.loading}
+                </PageSpinner>
             )}
             {props.step}
             <ButtonBar
@@ -313,6 +317,10 @@ Wizard.propTypes = {
     onNext: PropTypes.func,
     onSave: PropTypes.func,
     stepTotal: PropTypes.number,
+    loading: PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.string
+    ])
 };
 
 Wizard.Step = Step;
