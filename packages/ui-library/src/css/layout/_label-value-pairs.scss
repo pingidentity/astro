@@ -9,12 +9,23 @@
     @include text-label;
 
     grid-column: 1;
+
+    &:after {
+        content: ':';
+
+        padding-left: 2px;
+    }
 }
 
 .label-value-pairs__value {
     @include text-value;
 
     grid-column: 2;
+
+    & .help-tooltip {
+        padding-left: $spacing-sm;
+        vertical-align: middle;
+    }
 }
 
 .label-value-pairs__divider {

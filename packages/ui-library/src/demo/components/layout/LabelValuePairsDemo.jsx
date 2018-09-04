@@ -26,8 +26,11 @@ const LabelValuePairsDemo = () => {
             value: "Iron Man"
         },
         {
-            label: "Description",
-            value: "Tony Stark is a playboy billionare who is a super hero with an iron suit"
+            label: "Description with helphint",
+            value: "Tony Stark is a playboy billionare who is a super hero with an iron suit",
+            hintText: "this is the help text",
+            hintPlacement: "left",
+            hintLink: "#"
         },
         {
             divider: true,

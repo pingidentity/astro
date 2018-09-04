@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import HelpHint from "../tooltips/HelpHint";
 
 /**
  * @class LabelValuePairs
@@ -21,17 +22,25 @@ const LabelValuePairs = ({
     const renderLabel = ({
         label,
         value,
+        hintText,
+        hintPlacement,
+        hintLink,
         divider,
-    },
-        indexLabel,
-        indexValue
-
-    ) => {
+    }, dividerIndex) => {
         return divider
-            ? <hr className="label-value-pairs__divider" />
+            ? <hr key={dividerIndex} className="label-value-pairs__divider" />
             : [
-                <div key={indexLabel} className="label-value-pairs__label">{label + ":"}</div>,
-                <div key={indexValue} className="label-value-pairs__value">{value}</div>
+                <div key={label} className="label-value-pairs__label">{label}</div>,
+                (hintText) ? <div key={value} className="label-value-pairs__value">
+                    {value}
+                    <HelpHint
+                        className="inline"
+                        hintText={hintText}
+                        hintPlacement={hintPlacement}
+                        hintLink={hintLink}
+                    />
+                </div>
+                : <div key={value} className="label-value-pairs__value">{value}</div>
             ];
     };
 
@@ -53,6 +62,9 @@ LabelValuePairs.propTypes = {
             PropTypes.shape({
                 label: PropTypes.string.isRequired,
                 value: PropTypes.string.isRequired,
+                hintText: PropTypes.string,
+                hintPlacement: PropTypes.string,
+                hintLink: PropTypes.string,
             }),
             PropTypes.shape({
                 divider: PropTypes.bool,

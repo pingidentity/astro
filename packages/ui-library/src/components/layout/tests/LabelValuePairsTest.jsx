@@ -27,8 +27,11 @@ describe("LabelValuePairs", function () {
             value: "Iron Man"
         },
         {
-            label: "Description",
-            value: "Tony Stark is a playboy billionare who is a super hero with an iron suit"
+            label: "Description with helphint",
+            value: "Tony Stark is a playboy billionare who is a super hero with an iron suit",
+            hintText: "this is the help text",
+            hintPlacement: "left",
+            hintLink: "#"
         },
         {
             divider: true,
@@ -70,6 +73,16 @@ describe("LabelValuePairs", function () {
         let element = TestUtils.scryRenderedDOMNodesWithTag(component, "div");
 
         expect(element.length).toEqual(1);
+    });
+
+    it("renders a helphint", function () {
+        let component = getComponent({
+            hintText: "this is the help text",
+        });
+
+        let element = TestUtils.findRenderedDOMNodeWithClass(component, "__react_component_tooltip");
+
+        expect(ReactTestUtils.isDOMComponent(element)).toBeTruthy();
     });
 
     it("renders hr tag", function () {
