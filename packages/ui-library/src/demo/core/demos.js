@@ -48,6 +48,12 @@ module.exports = [
                 icon: "clipboard"
             },
             {
+                label: "Content",
+                demo: require("../components/docs/Content"),
+                fullscreen: true,
+                icon: "clipboard"
+            },
+            {
                 label: "Colors",
                 demo: require("../components/tutorials/Colors"),
                 fullscreen: true,
