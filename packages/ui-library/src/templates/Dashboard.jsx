@@ -176,7 +176,7 @@ class Dashboard extends React.Component {
                         data={demoChartData.listData}
                         description="February 2016"
                         errorMessage={null}
-                        iconName="badge"
+                        iconName="users"
                         loading={false}
                         title="Identities"
                         value="1,056"

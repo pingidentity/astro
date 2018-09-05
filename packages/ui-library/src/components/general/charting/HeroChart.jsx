@@ -204,7 +204,7 @@ const HeroChart = ({
                         data-id={`${dataId}-top-chart`}
                         height={topChartHeight}>
                         {_renderXAxis(xAxisKey, data.length)}
-                        <Tooltip {...tooltipProps} />
+                        <Tooltip {...tooltipProps} position={{ y: -25 }}/>
                         {_renderBars(topSeriesKey, "#fff")}
                     </BarChart>
                 </div>,

@@ -52,7 +52,10 @@ import classnames from "classnames";
 class DonutCard extends Component {
 
     state = {
-        statColor: null
+        statColor: null,
+        strokeColor: null,
+        strokeWidth: 1,
+        hoveredSection: null,
     }
 
 
@@ -63,9 +66,13 @@ class DonutCard extends Component {
         }
 
         const dataItem = this.props.data[index];
+        const color = dataItem.hasOwnProperty("color") ? dataItem.color : null;
 
         this.setState({
-            statColor: dataItem.hasOwnProperty("color") ? dataItem.color : null
+            hoveredSection: value.id,
+            statColor: color,
+            strokeColor: color,
+            strokeWidth: 2,
         });
     };
 
@@ -75,13 +82,23 @@ class DonutCard extends Component {
         }
 
         this.setState({
-            statColor: null
+            hoveredSection: null,
+            statColor: null,
+            strokeWidth: 1,
         });
     };
 
     _renderCells = (data) => {
-        return data.map((item) => {
-            return <Cell key={item.id} fill={item.color} />;
+        return data.map(({ id, color }) => {
+            return this.state.hoveredSection === id ? (
+                <Cell
+                    className="donut-card__hovered" key={id}
+                    fill={color}
+                    style={{
+                        stroke: this.state.strokeColor,
+                        strokeWidth: this.state.strokeWidth,
+                    }}
+                />) : (<Cell key={id} fill={color}/>);
         });
     };
 
@@ -131,10 +148,11 @@ class DonutCard extends Component {
                                 width={225}
                                 data-id={`${this.props["data-id"]}-chart`}
                                 className="donut-card__donut-chart"
-                                >
+                            >
                                 <Pie
                                     innerRadius={70}
-                                    outerRadius={113}
+                                    outerRadius={110}
+                                    paddingAngle={1}
                                     key="pieKey"
                                     data={this.props.data}
                                     dataKey="value"

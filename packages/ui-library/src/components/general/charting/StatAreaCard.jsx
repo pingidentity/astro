@@ -96,7 +96,7 @@ class StatAreaCard extends React.Component {
                 className={classes}
                 back={
                     <div>
-                        <div className="dashboard-card__back-title" accent={this.props.accent}>
+                        <div className="dashboard-card__back-title">
                             {this.props.title}
                         </div>
                         {!this.props.loading && (
@@ -114,7 +114,7 @@ class StatAreaCard extends React.Component {
                             </div>
                         </div>
                         {!this.props.loading && ([
-                            <div key="value" className="dashboard-card__value">
+                            <div key="value" className="dashboard-card__value stat-area-card__value">
                                 {this.props.value}
                             </div>,
                             <div key="subtitle" className="dashboard-card__subtitle">

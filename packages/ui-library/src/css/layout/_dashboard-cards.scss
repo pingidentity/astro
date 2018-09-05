@@ -239,7 +239,8 @@ $fullwidthBreakpoint: 950px;
 
     &--magenta {
         .dashboard-card__title-icon,
-        .dashboard-card__stat-row-number {
+        .dashboard-card__stat-row-number,
+        .stat-area-card__value {
             color: $color-charting-magenta;
         }
         .dashboard-card__back-title,
@@ -250,7 +251,8 @@ $fullwidthBreakpoint: 950px;
 
     &--blue {
         .dashboard-card__title-icon,
-        .dashboard-card__stat-row-number {
+        .dashboard-card__stat-row-number,
+        .stat-area-card__value {
             color: $color-charting-blue;
         }
         .dashboard-card__back-title,
@@ -261,7 +263,8 @@ $fullwidthBreakpoint: 950px;
 
     &--cyan {
         .dashboard-card__title-icon,
-        .dashboard-card__stat-row-number {
+        .dashboard-card__stat-row-number,
+        .stat-area-card__value {
             color: $color-charting-cyan;
         }
         .dashboard-card__back-title,

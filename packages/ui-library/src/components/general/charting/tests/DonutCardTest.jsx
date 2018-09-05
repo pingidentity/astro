@@ -37,15 +37,6 @@ describe("DonutCard", function () {
         expect(ReactTestUtils.isDOMComponent(element)).toBeTruthy();
     });
 
-    it("renders a title", function () {
-        const component = getComponent({
-            title: "title"
-        });
-
-        const element = TestUtils.findRenderedDOMNodeWithDataId(component, componentId);
-
-        expect(element).toBeTruthy();
-    });
 
     it("renders a label and number", function () {
         const component = getComponent({
@@ -53,9 +44,9 @@ describe("DonutCard", function () {
             value: 3
         });
 
-        const element = TestUtils.findRenderedDOMNodeWithDataId(component, componentId);
+        const element = TestUtils.findRenderedDOMNodeWithClass(component, "donut-card__center-number");
 
-        expect(element).toBeTruthy();
+        expect(element.textContent).toEqual("3");
     });
 
     it("renders a number greater than 1000", function () {
@@ -63,61 +54,18 @@ describe("DonutCard", function () {
             value: 10000
         });
 
-        const element = TestUtils.findRenderedDOMNodeWithDataId(component, componentId);
+        const element = TestUtils.findRenderedDOMNodeWithClass(component, "donut-card__center-number");
 
-        expect(element).toBeTruthy();
+        expect(element.textContent).toEqual("10k");
     });
 
-    it("renders a dropdown", function() {
+    it("renders a path", function() {
         const component = getComponent({});
-        const dropDown = TestUtils.findRenderedDOMNodeWithDataId(component, "donut-card-drop-down");
+        component.setState({ hoveredSection: "Enabled Users" });
 
-        expect(dropDown).toBeDefined();
-    });
+        const element = TestUtils.findRenderedDOMNodeWithClass(component, "donut-card__hovered");
 
-    it("renders a Pie Chart", function() {
-        const component = getComponent({});
-        const pieChart = TestUtils.findRenderedDOMNodeWithDataId(component, "donut-card-chart");
-
-        expect(pieChart).toBeDefined();
-    });
-
-    it("renders a back title", function() {
-        const component = getComponent({});
-        const title = TestUtils.findRenderedDOMNodeWithDataId(component, "donut-card-back-title");
-
-        expect(title).toBeDefined();
-    });
-
-
-    it("renders hr tag", function() {
-        const component = getComponent({});
-
-        const element = TestUtils.scryRenderedDOMNodesWithTag(component, "hr");
-
-        expect(element.length).toEqual(2);
-    });
-
-    it("renders an svg", function() {
-        const component = getComponent({});
-
-        const element = TestUtils.scryRenderedDOMNodesWithTag(component, "svg");
-
-        expect(element.length).toEqual(3);
-    });
-
-    it("should render the state color", function() {
-        const component = getComponent({});
-        component.setState({ statColor: "red" });
-
-        expect(component).toBeTruthy();
-    });
-
-    it("should render the state color to null", function() {
-        const component = getComponent({});
-        component.setState({ statColor: null });
-
-        expect(component).toBeTruthy();
+        expect(element).toBeDefined();
     });
 
 });
