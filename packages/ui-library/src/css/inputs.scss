@@ -236,6 +236,34 @@ label {
                 margin-top: 0;
             }
         }
+        &.textarea-height--short {
+            textarea {
+                height: 100px;
+            }
+        }
+
+        &.textarea-height--medium {
+            textarea {
+                height: 250px;
+            }
+        }
+
+        &.textarea-height--large {
+            textarea {
+                height: 400px;
+            }
+        }
+
+        &.readonly {
+            &.textarea-height--short,
+            &.textarea-height--medium,
+            &.textarea-height--large {
+                textarea[readonly],
+                textarea {
+                    resize: both !important;
+                }
+            }
+        }
     }
 
     &.input-text,
