@@ -178,8 +178,14 @@ class DragDropTable extends React.Component {
         onDrag: PropTypes.func.isRequired,
         onDrop: PropTypes.func.isRequired,
         onCancel: PropTypes.func.isRequired,
-        headData: PropTypes.array.isRequired,
-        bodyData: PropTypes.array,
+        headData: PropTypes.arrayOf(
+            PropTypes.string
+        ).isRequired,
+        bodyData: PropTypes.arrayOf(
+            PropTypes.arrayOf(
+                PropTypes.node
+            )
+        ),
         columnOrder: PropTypes.array,
         headContentType: PropTypes.object,
         className: PropTypes.string,
