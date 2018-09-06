@@ -13,7 +13,8 @@ import _ from "underscore";
  * @param {string} [data-id="searchbar"]
  *     To define the base "data-id" value for top-level HTML container.
  * @param {object} [formSearchBoxProps]
- *     Object of props that are passed on the child SearchBox component
+ *     Object of props that are passed on the child SearchBox component.
+ *     You can also pass these directly as props of their own, but this lets you be explicit.
  *
  * @param {object} [strings]
  *     Strings to override content.
@@ -28,6 +29,8 @@ import _ from "underscore";
  *     When enabled, change the style of the search field to indicate you're typing a structured query
  * @param {node} [rightControl]
  *     A content area that appears to the right of the search field, above the expanded filter area
+ * @param {node} [centerControl]
+ *     A content area that appears immediately to the right of the search field
  **/
 
 class SearchBar extends React.Component {
@@ -64,33 +67,48 @@ class SearchBar extends React.Component {
     };
 
     render() {
-        const filtersOpen = this.props.open === undefined || this.props.open === null
-            ? this.state.open : this.props.open;
-        const { documentationLink, rightControl } = this.props;
+        const {
+            children,
+            "data-id": dataId,
+            documentationLink,
+            formSearchBoxProps,
+            open,
+            rightControl,
+            centerControl,
+            ...props
+        } = this.props;
+        const filtersOpen = open === undefined || open === null
+            ? this.state.open : open;
         const classes = classnames("searchbar", {
             "searchbar--open": filtersOpen,
         });
 
+        const searchBox = (
+            <FormSearchBox
+                data-id={`${dataId}-input`}
+                className="searchbar__input"
+                {...props}
+                {...formSearchBoxProps}
+            />
+        );
+
         const renderSearchBar = (
-            <div className="searchbar__bar">
-                <FormSearchBox
-                    data-id={`${this.props["data-id"]}-input`}
-                    className="searchbar__input"
-                    {...this.props.formSearchBoxProps}
-                />
-                <CollapsibleLink
+            <div className="searchbar__bar" key="bar">
+                {searchBox}
+                {children && <CollapsibleLink
                     data-id={`${this.props["data-id"]}-filter-link`}
                     title={this.props.strings.linkText || "Filters"}
                     className="searchbar__filter-link"
                     expanded={filtersOpen}
                     onToggle={this._handleToggle}
                     disabled={this.props.disableFilters}
-                />
+                />}
+                {centerControl && <div className="searchbar__center-control">{centerControl}</div>}
             </div>
         );
 
         const renderDocLink = documentationLink && !filtersOpen ? (
-            <div className="searchbar__doc-link">
+            <div className="searchbar__doc-link" key="doc-link">
                 <Anchor href={documentationLink.href} target="_blank" data-id="doc-link">
                     {documentationLink.label}
                 </Anchor>
@@ -108,14 +126,15 @@ class SearchBar extends React.Component {
                         </div>
                         <div className="searchbar__right-control">{rightControl}</div>
                     </div>
-                    : [renderSearchBar, renderDocLink]
+                    : [ renderSearchBar, renderDocLink ]
                 }
                 {filtersOpen &&
                     <div
-                        data-id={`${this.props["data-id"]}-filters`}
+                        data-id={`${dataId}-filters`}
                         className="searchbar__filters modifier_light-inputs"
-                        key="searchbar-filters">
-                        {this.props.children}
+                        key="searchbar-filters"
+                    >
+                        {children}
                     </div>
                 }
             </div>

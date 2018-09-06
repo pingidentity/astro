@@ -39,6 +39,11 @@ $searchbar-input-height: 38px;
         max-width: $searchbar-width;
     }
 
+    &__center-control {
+        align-self: center;
+        margin-left: $spacing-md;
+    }
+
     &__right-control {
         margin-left: $spacing-md;
         text-align: right;

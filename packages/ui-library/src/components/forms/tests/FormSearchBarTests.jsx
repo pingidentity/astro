@@ -42,7 +42,7 @@ describe("FormSearchBar", function () {
 
 
     it("should render the component", function () {
-        const component = getComponent();
+        const component = getComponent({ children: <p>hello</p> });
         const link = getElementByDid(component, "-filter-link");
         const input = getElementByDid(component, "-input");
         const filters = getElementByDid(component, "-filters");
@@ -113,6 +113,18 @@ describe("FormSearchBar", function () {
             rightControl: <div data-id="right-control">{content}</div>
         });
         const control = TestUtils.findRenderedDOMNodeWithDataId(component, "right-control");
+
+        expect(control.textContent).toBe(content);
+    });
+
+    it("should render the center control", function () {
+        const filterContent = "my filter content here";
+        const content = "hello";
+        const component = getComponent({
+            children: filterContent,
+            centerControl: <div data-id="center-control">{content}</div>
+        });
+        const control = TestUtils.findRenderedDOMNodeWithDataId(component, "center-control");
 
         expect(control.textContent).toBe(content);
     });

@@ -1,6 +1,7 @@
 import React from "react";
-import SearchBar from "../../../components/forms/FormSearchBar";
-import FormCheckbox from "../../../components/forms/FormCheckbox";
+import SearchBar from "ui-library/lib/components/forms/FormSearchBar";
+import FormCheckbox from "ui-library/lib/components/forms/FormCheckbox";
+import Button from "ui-library/lib/components/buttons/Button";
 
 /**
 * @name SearchBarDemo
@@ -12,27 +13,26 @@ class SearchBarDemo extends React.Component {
 
     state = {
         value: "",
+        lastEvent: "",
     };
 
     _handleValueChange = (inputValue) => {
-        console.log("value change");
         this.setState({ value: inputValue });
     };
 
     _handleKeyDown = () => {
-        console.log("key down");
+        this.setState({ lastEvent: "key down" });
     };
 
     _handleFocus = () => {
-        console.log("focus");
+        this.setState({ lastEvent: "focus" });
     };
 
     _handleBlur = () => {
-        console.log("blur");
+        this.setState({ lastEvent: "blur" });
     };
 
     _handleClear = () => {
-        console.log("clear");
         this.setState({ value: "" });
     };
 
@@ -49,12 +49,51 @@ class SearchBarDemo extends React.Component {
         };
 
         return (
-            <SearchBar
-                formSearchBoxProps={formSearchBoxProps} >
-                <FormCheckbox label="Filter 1" className="inline" />
-                <FormCheckbox label="Filter 2" className="inline" />
-                <FormCheckbox label="Filter 3" className="inline" />
-            </SearchBar>
+            <div>
+                <p>Last event: {this.state.lastEvent}</p>
+                <SearchBar
+                    formSearchBoxProps={formSearchBoxProps}
+                    key="props"
+                >
+                    <FormCheckbox label="Filter 1" className="inline" key="uno" />
+                    <FormCheckbox label="Filter 2" className="inline" key="dos" />
+                    <FormCheckbox label="Filter 3" className="inline" key="tres" />
+                </SearchBar>
+                <hr className="hr" />
+                <p>Passing the search box props directly:</p>
+                <SearchBar
+                    onValueChange={this._handleValueChange}
+                    placeholder="Search something"
+                    showClear={true}
+                    value={this.state.value}
+                    name="demo-search"
+                    key="direct"
+                >
+                    <FormCheckbox label="Filter 1" className="inline" key="uno" />
+                    <FormCheckbox label="Filter 2" className="inline" key="dos" />
+                    <FormCheckbox label="Filter 3" className="inline" key="tres" />
+                </SearchBar>
+                <hr className="hr" />
+                <p>No filters</p>
+                <SearchBar
+                    onValueChange={this._handleValueChange}
+                    placeholder="Search something"
+                    showClear={true}
+                    value={this.state.value}
+                    name="demo-search"
+                />
+                <hr className="hr" />
+                <p>With a button on the right</p>
+                <SearchBar
+                    onValueChange={this._handleValueChange}
+                    placeholder="Search something"
+                    showClear={true}
+                    value={this.state.value}
+                    name="demo-search"
+                    centerControl={<FormCheckbox className="inline" label="Hide disabled"/>}
+                    rightControl={<Button label="Add" iconName="add"/>}
+                />
+            </div>
         );
     }
 }
