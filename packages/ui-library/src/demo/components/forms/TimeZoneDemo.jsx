@@ -81,9 +81,6 @@ class FormTimeZoneDemo extends React.Component {
 
     render() {
 
-        console.log("this.state.displayValue0", this.state.displayValue0);
-
-
         return (
             <div>
                 <div className="input-row">
