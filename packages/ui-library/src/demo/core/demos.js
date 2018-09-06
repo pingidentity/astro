@@ -762,13 +762,6 @@ module.exports = [
                 icon: "bar-chart",
                 children: [
                     {
-                        label: "Drop Down Selector (for debug only)",
-                        demo: require("../components/general/charting/DropDownSelectorDemo"),
-                        pathToDoc: "components/general/charting/DropDownSelector.jsx",
-                        pathToSource: "components_general_charting_DropDownSelector.jsx.html",
-                        pathToDemoSource: "demo_components_general_charting_DropDownSelectorDemo.jsx.html"
-                    },
-                    {
                         label: "Stat Cards",
                         demo: require("../components/general/charting/StatCardDemo"),
                         pathToDoc: "components/general/charting/StatCard.jsx",
@@ -816,6 +809,13 @@ module.exports = [
                         pathToDoc: "components/general/charting/HorizontalBarCard.jsx",
                         pathToSource: "components_general_charting_HorizontalBarCard.jsx.html",
                         pathToDemoSource: "demo_components_general_charting_HorizontalBarCardDemo.jsx.html"
+                    },
+                    {
+                        label: "Multiseries Chart Card",
+                        demo: require("../components/general/charting/MultiseriesChartCardDemo"),
+                        pathToDoc: "components/general/charting/MultiseriesChartCard.jsx",
+                        pathToSource: "components_general_charting_MultiseriesChartCard.jsx.html",
+                        pathToDemoSource: "demo_components_general_charting_MultiseriesChartCardDemo.jsx.html"
                     },
                 ]
             },

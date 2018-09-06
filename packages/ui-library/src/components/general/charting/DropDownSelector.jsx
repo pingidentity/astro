@@ -2,12 +2,10 @@ import React, { Component } from "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 import { contains } from "underscore";
+import { chartingColors } from "../../../constants/DashboardConstants";
 import ChipPanel from "./ChipPanel";
 import FilterSelector from "../../filters/FilterSelector";
-import { filterItemsFunction } from "../../forms/selection-list/v2-reducer";
 import { ListType } from "../../forms/selection-list";
-
-export const filterItems = filterItemsFunction;
 
 /**
 * @class DropDownSelector
@@ -25,8 +23,6 @@ export const filterItems = filterItemsFunction;
 *     Fires when an option is deselected; sends back the ID of the option and the event.
 * @param {DropDownSelector~onSelectOption} [onSelectOption]
 *     Fires when an option is selected; sends back the ID of the option and the event.
-* @param {DropDownSelector~onSearch} [onSearch]
-*     Fires when the content of the search box changes; sends back the search term and the event.
 * @param {DropDownSelector~onToggle} [onToggle]
 *     Fires when selector opens or closes.
 * @param {array} [options=[]]
@@ -48,14 +44,14 @@ export default class DropDownSelector extends Component {
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
-        label: PropTypes.string.isRequired,
+        label: PropTypes.string,
         open: PropTypes.bool,
         onDeselectOption: PropTypes.func,
         onSelectOption: PropTypes.func,
-        onSearch: PropTypes.func.isRequired,
         onToggle: PropTypes.func,
         options: PropTypes.arrayOf(
             PropTypes.shape({
+                color: PropTypes.string,
                 id: PropTypes.oneOfType([
                     PropTypes.number,
                     PropTypes.string
@@ -81,19 +77,14 @@ export default class DropDownSelector extends Component {
 
     // Have to use underscore's contains here because version of node in Jenkins
     // doesn't support array.includes
-    _getChips = (selected, options) => options.filter(({ id }) => contains(selected, id));
+    _getChips = (selected, options) =>
+        options
+            .filter(({ id }) => contains(selected, id))
+            .map((opt, index) => ({ color: chartingColors[index], ...opt }));
 
     _filterOptions = () => this.props.options.filter(({ id }) =>
         !contains(this.props.selectedOptionIds, id)
     );
-
-    _search = term => {
-        // The else case is being handled in tests but coverage isn't catching it
-        /* istanbul ignore next*/
-        if (this.props.onSearch) {
-            this.props.onSearch(term, this.props.options);
-        }
-    };
 
     _toggle = val => {
         if (this.props.open === undefined) {

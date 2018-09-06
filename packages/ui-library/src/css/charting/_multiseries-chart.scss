@@ -1,0 +1,46 @@
+.multiseries-chart {
+    &__content {
+        display: inline-flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    &__chart {
+        // Recharts axisLine prop should avoid this, but it doesn't appear to work
+        .recharts-cartesian-axis-line {
+            margin-top: $spacing-sm;
+            stroke-width: 3;
+        }
+    }
+
+    &__chart-axis-label {
+        fill: $color-strong-neutral-40;
+        font-size: 16px;
+        transform-origin: left;
+        transform: rotate(-90deg) translateY(22px);
+    }
+
+    &__bottom-panel {
+        margin-left: 20px; // Compensates for the left margin that Recharts adds.
+        text-align: center;
+
+        &--line {
+            margin-top: $spacing-xs;
+        }
+    }
+
+    &__selector {
+        margin-top: $spacing-xl;
+    }
+
+    &__title {
+        color: $color-strong-neutral-10;
+        text-align: center;
+    }
+
+    &--line {
+        .recharts-cartesian-axis {
+            transform: translateY($spacing-xs);
+        }
+    }
+}

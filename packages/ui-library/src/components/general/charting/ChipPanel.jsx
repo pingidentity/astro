@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import Icon from "../Icon";
+import { chartingColors } from "../../../constants/DashboardConstants";
 
 const click = onClick => id => e => {
     if (onClick) {
@@ -9,8 +10,15 @@ const click = onClick => id => e => {
     }
 };
 
-const renderChips = (chips, onClick) => chips.map(({ className = "", id, name }, idx) => (
-    <div className={classnames(className, "chip-panel__chip")} key={`${name}-${idx}`} onClick={onClick(id)} >
+const renderChips = (chips, onClick) => chips.map(({ className = "", color = chartingColors[0], id, name }, idx) => (
+    <div
+        className={classnames(className, "chip-panel__chip")}
+        key={`${name}-${idx}`}
+        onClick={onClick(id)}
+        style={{
+            backgroundColor: color
+        }}
+    >
         <span>{ name }</span>
         <Icon className="chip-panel__chip__icon" iconName="clear" />
     </div>

@@ -46,24 +46,6 @@ describe("DropDownSelector", () => {
         expect(container).toBeTruthy();
     });
 
-    it("calls onSearch prop when text is entered in search box", () => {
-        const onSearch = jest.fn();
-        const component = getComponent({ onSearch });
-
-        component._search("test term");
-
-        expect(onSearch).toHaveBeenCalledWith("test term", defaultOptions);
-    });
-
-    it("does not call onSearch prop if not passed in", () => {
-        const onSearch = jest.fn();
-        const component = getComponent();
-
-        component._search("test term");
-
-        expect(onSearch).not.toHaveBeenCalled();
-    });
-
     it("sets open state to true when _toggle is called", () => {
         const component = getComponent();
 

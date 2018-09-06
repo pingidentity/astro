@@ -98,9 +98,10 @@ class FilterSelector extends React.Component {
         if (selected.length > 1) {
             return labelText ? labelText : "Selected";
         } else if (selected.length === 1) {
-            return _.find(options, (option) => {
+            const result = _.find(options, (option) => {
                 return option.id === selected[0];
-            }).name;
+            });
+            return result ? result.name : null;
         }
     };
 
