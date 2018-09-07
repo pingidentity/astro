@@ -1,11 +1,12 @@
 
-var PropTypes = require("prop-types");
-var React = require("react"),
-    CancelTooltip = require("./../tooltips/CancelTooltip"),
-    EllipsisLoaderButton = require("./../general/EllipsisLoaderButton"),
-    Translator = require("../../util/i18n/Translator.js"),
-    classnames = require("classnames"),
-    Button = require("../buttons/Button");
+import PropTypes from "prop-types";
+import React from "react";
+import classnames from "classnames";
+import Button from "../buttons/Button";
+import CancelTooltip from "./../tooltips/CancelTooltip";
+import ConfirmTooltip from "../tooltips/ConfirmTooltip";
+import EllipsisLoaderButton from "./../general/EllipsisLoaderButton";
+import Translator from "../../util/i18n/Translator.js";
 
 /**
 * @callback ButtonBar~onCancel
@@ -55,6 +56,9 @@ var React = require("react"),
 * @param {object} [cancelTooltip]
 *     An object of the props required to generate a details tooltip that to confirm the closing of a modal.
 *
+* @param {object} [saveTooltip]
+*     An object of the props required to generate a details tooltip to confirm saving.
+*
 * @param {ButtonBar~onCancel} [onCancel]
 *     Callback that will be triggered when the "cancel" button is clicked. Note that the onCancel callback and
 *     cancelText props are required to display the cancel button. If either is not provided, the button will not
@@ -87,6 +91,16 @@ class ButtonBar extends React.Component {
     static propTypes = {
         cancelClassName: PropTypes.string,
         cancelText: PropTypes.string,
+        cancelTooltip: PropTypes.shape({
+            confirmButtonTex: PropTypes.string,
+            cancelButtonText: PropTypes.string,
+            label: PropTypes.node,
+            messageText: PropTypes.node,
+            onConfirm: PropTypes.func,
+            onCancel: PropTypes.func,
+            open: PropTypes.bool,
+            title: PropTypes.string
+        }),
         className: PropTypes.string,
         discardClassName: PropTypes.string,
         discardText: PropTypes.string,
@@ -97,6 +111,16 @@ class ButtonBar extends React.Component {
         saveClassName: PropTypes.string,
         saveDisabled: PropTypes.bool,
         saveText: PropTypes.string.isRequired,
+        saveTooltip: PropTypes.shape({
+            confirmButtonText: PropTypes.string,
+            cancelButtonText: PropTypes.string,
+            label: PropTypes.node,
+            messageText: PropTypes.node,
+            onConfirm: PropTypes.func,
+            onCancel: PropTypes.func,
+            open: PropTypes.bool,
+            title: PropTypes.string
+        }),
         enableSavingAnimation: PropTypes.bool,
         unfixed: PropTypes.bool,
         visible: PropTypes.bool
@@ -136,42 +160,60 @@ class ButtonBar extends React.Component {
         );
     };
 
-    _renderCancelButton = () => {
-        var cancelButton;
+    _getSaveButtonMarkup = () => (
+        <EllipsisLoaderButton
+            data-id={this.props["data-id"] + "-save"}
+            className={classnames(
+                this.props.saveClassName || "primary",
+                { disabled: this.props.saveDisabled }
+            )}
+            disabled={this.props.saveDisabled}
+            loading={this.props.enableSavingAnimation}
+            onClick={this._handleSave}
+            text={this.props.saveText || Translator.translate("save")}
+        />
+    );
 
-        if (this.props.cancelTooltip) {
-            cancelButton = (
-                <CancelTooltip
+    _renderCancelButton = () => (
+        this.props.cancelTooltip
+            ? <CancelTooltip
                     data-id={this.props["data-id"]}
-                    confirmButtonText={this.props.cancelTooltip.confirmButtonText}
-                    cancelButtonText={this.props.cancelTooltip.cancelButtonText}
                     label={this._getCancelButtonMarkup()}
-                    messageText={this.props.cancelTooltip.messageText}
-                    onConfirm={this.props.cancelTooltip.onConfirm}
-                    onCancel={this.props.cancelTooltip.onCancel}
-                    open={this.props.cancelTooltip.open}
                     positionClassName="top left"
-                    title={this.props.cancelTooltip.title}
+                    {...this.props.cancelTooltip}
                 />
-            );
-        } else {
-            cancelButton = this._getCancelButtonMarkup();
-        }
+            : this._getCancelButtonMarkup()
+    )
 
-        return cancelButton;
-    };
+    _renderSaveButton = () => {
+        const {
+            cancelButtonText,
+            confirmButtonText,
+            messageText,
+            ...props
+        } = this.props.saveTooltip || {};
+
+        return this.props.saveTooltip
+            ? (<ConfirmTooltip
+                    buttonLabel={confirmButtonText}
+                    cancelText={cancelButtonText}
+                    data-id={this.props["data-id"] + "-save-tooltip"}
+                    label={this._getSaveButtonMarkup()}
+                    onConfirm={this._handleSave}
+                    positionClassName="top left"
+                    {...props}
+                >
+                    {messageText}
+                </ ConfirmTooltip >)
+            : this._getSaveButtonMarkup();
+    }
 
     render() {
-        var discardText = this.props.discardText || Translator.translate("discard"),
-            saveText = this.props.saveText || Translator.translate("save"),
+        const discardText = this.props.discardText || Translator.translate("discard"),
             containerClassName = {
                 "page-controls-primary": true,
                 hidden: !this.props.visible
             },
-            saveClassName = classnames(
-                this.props.saveClassName || "primary",
-                { disabled: this.props.saveDisabled }
-            ),
             discardClassName = classnames(
                 this.props.discardClassName || null,
                 { disabled: this.props.enableSavingAnimation }
@@ -194,14 +236,7 @@ class ButtonBar extends React.Component {
                     </Button>
                 )}
                 {this.props.cancelText && this.props.onCancel && this._renderCancelButton()}
-                <EllipsisLoaderButton
-                    data-id={this.props["data-id"] + "-save"}
-                    className={saveClassName}
-                    disabled={this.props.saveDisabled}
-                    loading={this.props.enableSavingAnimation}
-                    onClick={this._handleSave}
-                    text={saveText}
-                />
+                {this._renderSaveButton()}
             </div>
         );
     }

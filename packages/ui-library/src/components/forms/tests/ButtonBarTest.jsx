@@ -110,7 +110,7 @@ describe("ButtonBar", function () {
             discardText: null,
             unfixed: true,
         });
-        
+
         const unfixed = TestUtils.findRenderedDOMNodeWithClass(component, "page-controls-primary--unfixed");
         expect(unfixed).toBeTruthy();
     });
@@ -252,5 +252,55 @@ describe("ButtonBar", function () {
         expect(tooltipDenyBtn.textContent).toBe(buttonBarParams.cancelTooltip.cancelButtonText);
         expect(tooltipTitle.textContent).toBe(buttonBarParams.cancelTooltip.title);
         expect(tooltipText.textContent).toBe(buttonBarParams.cancelTooltip.messageText);
+    });
+
+    it("Save tooltip renders and triggers callbacks.", function () {
+        const saveConfirm = jest.genMockFunction(),
+            saveDeny = jest.genMockFunction(),
+            buttonBarParams = {
+                saveTooltip: {
+                    title: "Save Confirmation",
+                    open: false,
+                    onConfirm: saveConfirm,
+                    onCancel: saveDeny,
+                    messageText: "Are you sure?",
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "No"
+                },
+                onCancel: jest.genMockFunction(),
+                visible: true
+            },
+            closed = getComponent(buttonBarParams),
+            closedSave = TestUtils.findRenderedDOMNodeWithDataId(closed, "buttonbar-save"),
+            closedSaveContent = TestUtils.findRenderedDOMNodeWithDataId(closedSave, "details-content");
+
+        expect(closedSaveContent).toBeFalsy();
+
+        const open = getComponent({
+            ...buttonBarParams,
+            saveTooltip: {
+                ...buttonBarParams.saveTooltip,
+                open: true
+            }
+        });
+        const saveTooltip = TestUtils.findRenderedDOMNodeWithDataId(open, "buttonbar-save");
+        expect(saveTooltip).toBeTruthy();
+
+        const tooltipConfirmBtn = TestUtils.findRenderedDOMNodeWithDataId(open, "buttonbar-save-tooltip-button"),
+            tooltipDenyBtn = TestUtils.findRenderedDOMNodeWithDataId(open, "buttonbar-save-tooltip-cancel"),
+            tooltipTitle = TestUtils.findRenderedDOMNodeWithDataId(open, "details-title"),
+            tooltipText = TestUtils.findRenderedDOMNodeWithDataId(open, "details-body");
+
+        ReactTestUtils.Simulate.click(tooltipConfirmBtn);
+        expect(saveConfirm).toBeCalled();
+        expect(saveDeny).not.toBeCalled();
+
+        ReactTestUtils.Simulate.click(tooltipDenyBtn);
+        expect(saveDeny).toBeCalled();
+
+        expect(tooltipConfirmBtn.textContent).toBe(buttonBarParams.saveTooltip.confirmButtonText);
+        expect(tooltipDenyBtn.textContent).toBe(buttonBarParams.saveTooltip.cancelButtonText);
+        expect(tooltipTitle.textContent).toBe(buttonBarParams.saveTooltip.title);
+        expect(tooltipText.textContent).toContain(buttonBarParams.saveTooltip.messageText);
     });
 });

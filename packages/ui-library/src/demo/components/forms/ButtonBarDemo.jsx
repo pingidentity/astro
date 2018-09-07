@@ -14,14 +14,15 @@ class ButtonBarDemo extends React.Component {
         saving: false,
         showBar: true,
         statusText: "-",
-        showCancelTooltip: false
+        showCancelTooltip: false,
+        showSaveTooltip: false,
     };
 
     _handleCancel = () => {
         this.setState({
             statusText: "Cancel button pressed"
         });
-        this._closeTooltip();
+        this._closeCancelTooltip();
     };
 
     _handleDiscard = () => {
@@ -31,9 +32,10 @@ class ButtonBarDemo extends React.Component {
     };
 
     _handleSave = () => {
-        this.setState({
-            statusText: "Save button pressed"
-        });
+        this.setState(({ showSaveTooltip }) => ({
+            statusText: "Save button pressed",
+            showSaveTooltip: !showSaveTooltip
+        }));
     };
 
     _toggleBar = () => {
@@ -57,13 +59,21 @@ class ButtonBarDemo extends React.Component {
         });
     };
 
-    _openTooltip = () => {
+    _openCancelTooltip = () => {
         this.setState({ showCancelTooltip: true });
     };
 
-    _closeTooltip = () => {
+    _openSaveTooltip = () => this.setState({
+        showSaveTooltip: true
+    })
+
+    _closeCancelTooltip = () => {
         this.setState({ showCancelTooltip: false });
     };
+
+    _closeSaveTooltip = () => this.setState({
+        showSaveTooltip: false
+    })
 
     _toggleUnfix = () => {
         this.setState({ unfixed: !this.state.unfixed });
@@ -93,9 +103,9 @@ class ButtonBarDemo extends React.Component {
                     discardText="Discard"
                     saveText="Save"
 
-                    onCancel={this._openTooltip}
+                    onCancel={this._openCancelTooltip}
                     onDiscard={this._handleDiscard}
-                    onSave={this._handleSave}
+                    onSave={this._openSaveTooltip}
 
                     enableSavingAnimation={this.state.saving}
                     visible={this.state.showBar}
@@ -106,8 +116,18 @@ class ButtonBarDemo extends React.Component {
                         title: "Cancel Confirmation",
                         open: this.state.showCancelTooltip,
                         onConfirm: this._handleCancel,
-                        onCancel: this._closeTooltip,
+                        onCancel: this._closeCancelTooltip,
                         messageText: "Are you sure you want to cancel these changes?",
+                        confirmButtonText: "Yes",
+                        cancelButtonText: "No"
+                    }}
+
+                    saveTooltip={{
+                        title: "Save Confirmation",
+                        open: this.state.showSaveTooltip,
+                        onConfirm: this._handleSave,
+                        onCancel: this._closeSaveTooltip,
+                        messageText: "Are you sure you want to save these changes?",
                         confirmButtonText: "Yes",
                         cancelButtonText: "No"
                     }}>
