@@ -1301,6 +1301,7 @@ input[type=file] {
     font-family: $font-pn-light;
     border-radius: 2px;
     line-height: 1em;
+    margin-bottom: $spacing-lg;
 
     label {
         position: absolute;
@@ -2464,6 +2465,10 @@ input[type=file] {
 
     .row-selector {
         margin-bottom: 50px;
+    }
+
+    .input-filedrop {
+        margin-bottom: initial;
     }
 
 }
