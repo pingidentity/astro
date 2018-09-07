@@ -42,6 +42,34 @@ $flagsImageName: 'flags' !default;
 $flagsImageExtension: 'png' !default;
 
 .flag-container {
+    &--none-selected .readonly.input-text {
+        position: relative;
+
+        .input-container .selected-option-label {
+            min-height: 38px; // not 40px to avoid overlapping input border
+            min-width: 40px;
+
+            &:hover,
+            &:focus {
+                border-color: $color-accent-neutral-90;
+            }
+        }
+
+        &:before {
+            background-color: $color-white;
+            border: 0.5px solid $color-accent-neutral-80;
+            content: '';
+            display: inline-block;
+            height: 40%;
+            width: 50%;
+            pointer-events: none;
+            position: absolute;
+            top: 30%;
+            left: 20%;
+            z-index: 1;
+        }
+    }
+
     &.input-custom-select {
         .select-list {
             position: absolute;

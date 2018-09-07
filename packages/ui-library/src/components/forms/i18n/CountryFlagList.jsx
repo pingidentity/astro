@@ -149,28 +149,36 @@ class CountryFlagList extends React.Component {
     }
 
     render() {
-        var containerClassName = classnames("flag-container", this.props.className);
-        var selectedCountry = this.props.selectedCountryCode
-            ? this._findByCountryCode(this.props.selectedCountryCode)
+        const {
+            countryCodeDisplayType,
+            selectedCountryCode
+        } = this.props;
+        var containerClassName = classnames(
+            "flag-container",
+            selectedCountryCode === "" ? "flag-container--none-selected" : "",
+            this.props.className
+        );
+        var selectedCountry = selectedCountryCode
+            ? this._findByCountryCode(selectedCountryCode)
             : {};
         var selectorFlagClassName = !_.isEmpty(selectedCountry)
             ? classnames("iti-flag", selectedCountry.iso2)
             : "no-selection";
-        var separator = this.props.countryCodeDisplayType === "dialCode" ? " +" : " | ";
+        var separator = countryCodeDisplayType === "dialCode" ? " +" : " | ";
         var title = !_.isEmpty(selectedCountry)
-            ? selectedCountry.name + separator + selectedCountry[this.props.countryCodeDisplayType]
+            ? selectedCountry.name + separator + selectedCountry[countryCodeDisplayType]
             : "No country selected";
         var type = <Flag countryCodeClassName={this.props.countryCodeClassName} />;
 
         // Set up item props to pass to the contentType
-        countryCodes = countryCodes.map(function (item) {
+        countryCodes = countryCodes.map(item => {
             return _.defaults({
                 "data-id": "country-" + item.iso2,
-                code: item[this.props.countryCodeDisplayType],
-                value: item[this.props.countryCodeDisplayType],
+                code: item[countryCodeDisplayType],
+                value: item[countryCodeDisplayType],
                 label: item.name
             }, item);
-        }.bind(this));
+        });
 
         return (
             <FormDropDownList
