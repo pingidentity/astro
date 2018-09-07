@@ -1,15 +1,16 @@
 "use strict";
 
-var PropTypes = require("prop-types");
+import React from "react";
+import PropTypes from "prop-types";
+import ReactDOM from "react-dom";
+import classnames from "classnames";
 
-var React = require("react"),
-    ReactDOM = require("react-dom"),
-    classnames = require("classnames"),
-    FormLabel = require("../FormLabel"),
-    FormError = require("../FormError"),
-    Translator = require("../../../util/i18n/Translator.js"),
-    _ = require("underscore"),
-    Utils = require("../../../util/Utils.js");
+import FormLabel from "../FormLabel";
+import FormMessage from "../FormMessage";
+import Translator from "../../../util/i18n/Translator.js";
+
+import _ from "underscore";
+import Utils from "../../../util/Utils.js";
 
 /**
 /**
@@ -126,12 +127,16 @@ var React = require("react"),
 *     An input type to be applied to the input. The input type often adds easily accessable and type-specific input
 *     controls that often makes it easier to enter the field data.
 *
+* @param {boolean} [disabled=false]
+*     If true, the text field will be disabled.
 * @param {string} [errorMessage]
 *     The message to display if defined when external validation failed.
 * @param {string} [errorClassName]
 *     CSS classes to set on the FormTextFieldError component.
-* @param {boolean} [disabled=false]
-*     If true, the text field will be disabled.
+* @param {string} [message]
+*    The message text to display.
+* @param {string} [messageType=error]
+*    The type of message (error = red, info = blue, success = green, warning = yellow).
 * @param {boolean} [required=false]
 *     If true, the user must select a value for this field.
 *
@@ -174,7 +179,9 @@ var React = require("react"),
 *              onValueChange={myFunction} />
 */
 
-module.exports = class extends React.Component {
+export default class extends React.Component {
+    static messageTypes = FormMessage.messageTypes;
+
     static propTypes = {
         stateless: PropTypes.bool
     };
@@ -194,18 +201,48 @@ module.exports = class extends React.Component {
             ? React.createElement(Stateless, _.defaults({ ref: "stateless" }, this.props)) //eslint-disable-line no-use-before-define
             : React.createElement(Stateful, _.defaults({ ref: "stateful" }, this.props))); //eslint-disable-line no-use-before-define
     }
-};
+}
+
 
 
 class Stateless extends React.Component {
     static displayName = "FormTextFieldStateless";
 
     static propTypes = {
-        "data-id": PropTypes.string,
+        autoComplete: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.bool
+        ]),
+        autoFocus: PropTypes.bool,
+        children: PropTypes.node,
         className: PropTypes.string,
-
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         controls: PropTypes.object,
+        "data-id": PropTypes.string,
+        disabled: PropTypes.bool,
+        errorMessage: PropTypes.string,
+        errorClassName: PropTypes.string,
+        flexWidth: PropTypes.bool,
+        helpClassName: PropTypes.string,
+        iconName: PropTypes.string,
+        inputClassName: PropTypes.string,
+        label: PropTypes.oneOfType([
+            PropTypes.array,
+            PropTypes.object,
+            PropTypes.string
+        ]),
+        labelClassName: PropTypes.string,
+        labelHelpText: PropTypes.string,
+        labelLockText: PropTypes.string,
+        labelText: PropTypes.oneOfType([
+            PropTypes.array,
+            PropTypes.object,
+            PropTypes.string
+        ]),
+        maskValue: PropTypes.bool,
+        maxLength: PropTypes.number,
+        message: PropTypes.string,
+        messageType: PropTypes.string,
+        name: PropTypes.string,
         onChange: PropTypes.func,
         onValueChange: PropTypes.func,
         onBlur: PropTypes.func,
@@ -217,51 +254,27 @@ class Stateless extends React.Component {
         onSave: PropTypes.func,
         onToggleReveal: PropTypes.func,
         onUndo: PropTypes.func,
-
-        errorMessage: PropTypes.string,
-        errorClassName: PropTypes.string,
-        inputClassName: PropTypes.string,
-        helpClassName: PropTypes.string,
-        labelClassName: PropTypes.string,
-        labelHelpText: PropTypes.string,
-        labelText: PropTypes.oneOfType([
-            PropTypes.array,
-            PropTypes.object,
-            PropTypes.string
-        ]),
-        label: PropTypes.oneOfType([
-            PropTypes.array,
-            PropTypes.object,
-            PropTypes.string
-        ]),
-        labelLockText: PropTypes.string,
-        maxLength: PropTypes.number,
-        name: PropTypes.string,
-        type: PropTypes.string,
         placeholder: PropTypes.string,
-        autoComplete: PropTypes.oneOfType([
+        type: PropTypes.string, value: PropTypes.oneOfType([
             PropTypes.string,
-            PropTypes.bool
+            PropTypes.number
         ]),
-        autoFocus: PropTypes.bool,
-        disabled: PropTypes.bool,
-        flexWidth: PropTypes.bool,
-        maskValue: PropTypes.bool,
         readOnly: PropTypes.bool,
         required: PropTypes.bool,
         reveal: PropTypes.bool,
         showReveal: PropTypes.bool,
         showSave: PropTypes.bool,
         showUndo: PropTypes.bool,
-        iconName: PropTypes.string,
-
-        children: PropTypes.node
     };
 
     static defaultProps = {
+        autoComplete: "nope",
+        autoFocus: false,
         "data-id": "form-text-field",
+        disabled: false,
         errorClassName: "",
-        value: "",
+        flexWidth: false,
+        maskValue: false,
         onBlur: _.noop,
         onClick: _.noop,
         onChange: _.noop,
@@ -273,18 +286,14 @@ class Stateless extends React.Component {
         onToggleReveal: _.noop,
         onUndo: _.noop,
         onValueChange: _.noop,
-        autoComplete: "nope",
-        autoFocus: false,
-        disabled: false,
-        flexWidth: false,
-        maskValue: false,
         readOnly: false,
         required: false,
         reveal: false,
         selectOnFocus: false,
         showReveal: false,
         showSave: false,
-        showUndo: false
+        showUndo: false,
+        value: "",
     };
 
     state = {
@@ -452,28 +461,32 @@ class Stateless extends React.Component {
     }
 
     render() {
-        var id = this.props["data-id"],
-            className = classnames(this.props.className, "input-text", {
-                disabled: this.props.disabled,
-                edited: this.props.isEdited,
-                "flex-width": this.props.flexWidth,
-                "form-error": this.props.errorMessage,
-                "inline-save": this.props.showSave,
-                "masking-controls": this.props.showReveal,
-                readonly: this.props.readOnly,
-                required: this.props.required,
-                "value-entered": this.props.value || this.props.value !== "",
-                "input-text--right-icon": this.props.iconName,
-            }),
-            undo = Translator.translate("undo"),
-            save = Translator.translate("save"),
-            inputType = this._getInputType();
+        const dataId = this.props["data-id"];
+        const inputType = this._getInputType();
+        const message = this.props.errorMessage || this.props.message;
+        const undo = Translator.translate("undo");
+        const save = Translator.translate("save");
+
+        const className = classnames(this.props.className, "input-text", {
+            disabled: this.props.disabled,
+            edited: this.props.isEdited,
+            "flex-width": this.props.flexWidth,
+            "input-message": message,
+            [`input-message--${this.props.messageType}`]: this.props.messageType,
+            "inline-save": this.props.showSave,
+            "masking-controls": this.props.showReveal,
+            readonly: this.props.readOnly,
+            required: this.props.required,
+            "value-entered": this.props.value || this.props.value !== "",
+            "input-text--right-icon": this.props.iconName,
+        });
+
 
         return (
             <FormLabel
                 className={className}
                 ref="container"
-                data-id={id}
+                data-id={dataId}
                 value={this.props.labelText || this.props.label}
                 hint={this.props.labelHelpText}
                 lockText={this.props.labelLockText}
@@ -491,9 +504,9 @@ class Stateless extends React.Component {
                         onChange={this._handleFieldChange}
                         onPaste={this._handleFieldChange}
                         placeholder={this.props.placeholder}
-                        ref={id + "-input"}
+                        ref={dataId + "-input"}
                         readOnly={this.props.readOnly}
-                        data-id={id + "-input"}
+                        data-id={dataId + "-input"}
                         type={inputType}
                         maxLength={this.props.maxLength}
                         name={this.props.name}
@@ -504,7 +517,7 @@ class Stateless extends React.Component {
                     />
                     {this.props.flexWidth && (
                         <div
-                            data-id={id + "-content-measurer"}
+                            data-id={dataId + "-content-measurer"}
                             className="content-measurer"
                             ref={function (node) { this.contentMeasurerLabel = node; }.bind(this)}>
                             <div
@@ -548,13 +561,11 @@ class Stateless extends React.Component {
                     {this.props.iconName &&
                         <span className={`input-icon input-icon--right icon-${this.props.iconName}`}/>
                     }
-                    {this.props.errorMessage && (
-                        <FormError.Icon data-id={this.props["data-id"] + "-error-message-icon"} />
-                    )}
-                    {this.props.errorMessage && (
-                        <FormError.Message
-                            value={this.props.errorMessage}
-                            data-id={this.props["data-id"] + "-error-message"}
+                    {message && (
+                        <FormMessage
+                            data-id={dataId}
+                            message={message}
+                            type={this.props.messageType}
                         />
                     )}
                 </span>

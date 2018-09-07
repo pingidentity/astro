@@ -106,15 +106,36 @@ describe("FormTextField", function () {
     });
 
     it("shows the error message when it is specified", function () {
-        var errorMessage = "help!";
-        var component = getComponent({
+        const errorMessage = "help!";
+        const component = getComponent({
             errorMessage: errorMessage
         });
 
-        var errorDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "form-text-field-error-message") ||
-                       TestUtils.findRenderedDOMNodeWithDataId(component, "formTextField_errormessage");
-
+        const errorDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "form-text-field-error-message");
         expect(errorDiv.textContent).toBe(errorMessage);
+    });
+
+    it("shows the error message when it is specified with the new syntax - default type is error", function () {
+        const message = "help!";
+        const component = getComponent({
+            message: message
+        });
+
+        const errorDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "form-text-field-error-message");
+        expect(errorDiv.textContent).toBe(message);
+    });
+
+    it("shows an info message when specified", function () {
+        const message = "help!";
+        const messageType = FormTextField.messageTypes.INFO;
+
+        const component = getComponent({
+            message: message,
+            messageType: messageType,
+        });
+
+        const infoLabel = TestUtils.scryRenderedDOMNodesWithClass(component, "input-message--info");
+        expect(infoLabel).toBeTruthy();
     });
 
     it("triggers onChange callback when input updated", function () {

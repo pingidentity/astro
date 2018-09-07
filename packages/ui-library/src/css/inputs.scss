@@ -4,6 +4,7 @@
 @import 'forms/_keyword-search';
 @import 'forms/_translation-picker';
 @import 'rows/_row-builder';
+@import 'icons/_variables';
 
 // INPUT GLOBAL VARS ---------------------------------------------------------------------------------------------------
 
@@ -144,12 +145,6 @@ label {
                 input {
                     padding-left: 35px;
                     padding-right: 30px;
-                }
-            }
-            &.form-error {
-                a.clear-search {
-                    @include transition($default-input-transition);
-                    right: 32px;
                 }
             }
             a.clear-search {
@@ -983,33 +978,11 @@ input[type=file] {
                 }
             }
         }
-        &.form-error {
-            &.input-text {
-                input[type=text] {
-                    &:hover {
-                        border: 1px solid $color-critical-red;
-                    }
-                }
-            }
-        }
     }
     .selected-option {
         @include transition(none);
         &:hover {
             @include transition(none);
-        }
-    }
-    // override input defaults
-    &.form-error {
-        &.input-text {
-            input[type=text] {
-                &:hover {
-                    border: 1px solid $color-critical-red;
-                }
-            }
-        }
-        .wrapper:after {
-            right: 28px;
         }
     }
     input[type=text] {
@@ -2021,12 +1994,15 @@ input[type=file] {
     }
 }
 
-.form-error {
-    $icon-size: 16px;
-    $icon-margin: 5px;
-    $icon-spacing: $icon-size + $icon-margin;
+.form-error,
+.input-message {
+    $message-icon-size: 16px;
+    $message-icon-margin: 5px;
+    $message-input-offset: $message-icon-size + $message-icon-margin;
+    $icon-spacing: $message-icon-size + $message-icon-margin;
 
-    @mixin errorDisplayCss {
+    @mixin inputMessageDisplay {
+        ~ .input-message .input-message__text,
         ~ .form-error-message {
             display: block;
         }
@@ -2050,7 +2026,7 @@ input[type=file] {
 
             &:hover,
             &:focus {
-                @include errorDisplayCss;
+                @include inputMessageDisplay;
             }
         }
         .input-container {
@@ -2062,6 +2038,12 @@ input[type=file] {
         a.password-show-button {
             right: 35px;
         }
+        &.search {
+            a.clear-search {
+                @include transition($default-input-transition);
+                right: 32px;
+            }
+        }
     }
     &.input-textarea {
         textarea {
@@ -2069,14 +2051,15 @@ input[type=file] {
 
             &:hover,
             &:focus {
-                @include errorDisplayCss;
+                @include inputMessageDisplay;
             }
         }
         .input-container {
             padding-right: $icon-spacing;
         }
+        .input-message__icon,
         .form-error-icon {
-            top: $icon-margin;
+            top: $message-icon-margin;
         }
     }
     &.input-select {
@@ -2084,21 +2067,22 @@ input[type=file] {
             border-color: $color-input-error;
 
             &:hover {
-                @include errorDisplayCss;
+                @include inputMessageDisplay;
             }
         }
         select {
             &:focus {
-                @include errorDisplayCss;
+                @include inputMessageDisplay;
             }
         }
     }
     &.input-select:not(.input-custom-select) {
+        .input-message__icon,
         .form-error-icon {
-            right: -21px;
+            right: -($message-input-offset);
         }
         .input-container {
-            width: calc(100% - 21px);
+            width: calc(100% - $message-input-offset);
         }
     }
     &.input-toggle {
@@ -2116,6 +2100,7 @@ input[type=file] {
                 border-color: $color-input-error;
             }
         }
+        .input-message__icon,
         .form-error-icon {
             top: auto;
             left: 31px;
@@ -2126,6 +2111,7 @@ input[type=file] {
             .label-text {
                 padding-right: 7px;
             }
+            .input-message__icon,
             .form-error-icon {
                 top: 5px;
                 left: 100%;
@@ -2146,16 +2132,18 @@ input[type=file] {
             border-color: $color-input-error;
 
             &:focus {
-                @include errorDisplayCss;
+                @include inputMessageDisplay;
             }
         }
     }
     &.input-file-upload {
+        .input-message__icon,
         .form-error-icon {
             top: auto;
             bottom: 5px;
             right: -16px;
         }
+        .input-message__text,
         .form-error-message {
             top: calc(100% + 5px);
 
@@ -2163,9 +2151,11 @@ input[type=file] {
         }
 
         &.image-upload {
+            .input-message__icon,
             .form-error-icon {
                 right: -35px;
             }
+            .input-message__text,
             .form-error-message {
                 top: 100%;
 
@@ -2174,7 +2164,7 @@ input[type=file] {
         }
         input {
             &:focus {
-                @include errorDisplayCss;
+                @include inputMessageDisplay;
             }
         }
     }
@@ -2186,73 +2176,126 @@ input[type=file] {
             right: 61px;
         }
         &:focus {
-            @include errorDisplayCss;
+            @include inputMessageDisplay;
         }
     }
     &.input-timezone {
         padding-right: 26px;
 
+        .input-message__icon,
         .form-error-icon {
             top: 0;
             right: 0;
         }
+        .input-message__text,
         .form-error-message {
             top: calc(100% - 20px);
 
             @include border-radius($default-input-border-radius);
         }
     }
+    &.input-textselect {
+        > .input-text {
+            .input-message__icon,
+            .form-error-icon {
+                right: -($message-input-offset)x;
+            }
+            .input-message__text,
+            .form-error-message {
+                right: 1px;
+            }
+        }
+    }
+    &.input-custom-select {
+        &.input-text {
+            input[type=text] {
+                &:hover {
+                    border: 1px solid $color-critical-red;
+                }
+            }
+        }
+        .wrapper:after {
+            right: 28px;
+        }
+    }
 
+    .input-message__icon,
     .form-error-icon {
+        color: $color-critical-red;
         position: absolute;
-        top: round(($default-input-height - $icon-size) / 2);
+        top: round(($default-input-height - $message-icon-size) / 2);
         right: 0;
-        height: $icon-size;
-        width: $icon-size;
+        height: $message-icon-size;
+        width: $message-icon-size;
 
         &:before {
             position: absolute;
             right: 0;
-            content: '!';
+            content: $icon-alert;
             font-family: $icon-font;
-            color: $color-critical-red;
-            height: $icon-size;
-            width: $icon-size;
-            font-size: $icon-size;
+            height: $message-icon-size;
+            width: $message-icon-size;
+            font-size: $message-icon-size;
             line-height: 1em;
+            text-transform: none;
         }
+
         &:hover {
-            @include errorDisplayCss;
+            @include inputMessageDisplay;
         }
     }
 
+    .input-message__text,
     .form-error-message {
+        color: $color-white;
+        background-color: $color-critical-red;
         position: absolute;
         top: calc(100% - 1px);
         left: 0;
-        right: 21px;
+        right: $message-input-offset;
         display: none;
         z-index: 20;
         padding: 15px;
         box-sizing: border-box;
         min-width: 169px;
-        background-color: $color-critical-red;
-        color: $color-white;
         text-transform: none;
         -webkit-backface-visibility: hidden; // keeps animation from flickering in Chrome
 
         @include border-radius(0 0 $default-input-border-radius $default-input-border-radius);
         @include animation(fade-down-in 0.2s);
+
+        &--error {
+            background-color: $color-critical-red;
+        }
     }
 
-    &.required {
-        .input-container,
-        .wrapper,
-        .selected-option {
+    @mixin messageTypeCss ($color, $icon) {
+        .input-message__icon {
+            color: $color;
+
             &:before {
-                background-color: $color-critical-red;
+                content: $icon;
             }
         }
+        .input-message__text {
+            background-color: $color;
+        }
+        &.input-text {
+            input[type=text],
+            input[type=password] {
+                border-color: $color;
+            }
+        }
+    }
+
+    &.input-message--success {
+        @include messageTypeCss ($color-success-green, $icon-success);
+    }
+    &.input-message--warning {
+        @include messageTypeCss ($color-warning-yellow, $icon-alert);
+    }
+    &.input-message--info {
+        @include messageTypeCss ($color-active-blue, $icon-info);
     }
 }
 
@@ -2609,13 +2652,6 @@ input[type=file] {
                 padding-right: 0;
             }
         }
-
-        .form-error-icon {
-            right: -21px;
-        }
-        .form-error-message {
-            right: 1px;
-        }
     }
 }
 
@@ -2711,7 +2747,8 @@ a {
     }
     &.input-text,
     &.input-textselect,
-    &.input-textselect .input-text.form-error {
+    &.input-textselect .input-text.form-error,
+    &.input-textselect .input-text.input-message {
         width: map-get($input-width-settings-map-text, $size);
     }
     &.input-textarea {

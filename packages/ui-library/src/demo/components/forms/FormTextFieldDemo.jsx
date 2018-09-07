@@ -19,7 +19,7 @@ class FormTextFieldDemo extends React.Component {
         onUndoValue: null,
         originalValue: "this is the original value",
         requiredValue: "",
-        statelessValue: "stateless default"
+        statelessValue: ""
     };
 
     _handleStatelessValueChange = (value) => {
@@ -70,18 +70,6 @@ class FormTextFieldDemo extends React.Component {
         window.setTimeout(this.setState.bind(this, { saved: false }), 5000);
     };
 
-    _handleTimeValueChange = (value) => {
-        this.setState({
-            timeFieldValue: value
-        });
-    };
-
-    _handleDateTimeValueChange = (value) => {
-        this.setState({
-            dateTimeFieldValue: value
-        });
-    };
-
     _handleChangeErrorValidation = (e) => {
         this.setState({
             onChangeValidationErrorMessage: this._validateInput(e.target.value)
@@ -108,7 +96,6 @@ class FormTextFieldDemo extends React.Component {
     };
 
     render() {
-
         return (
             <div>
                 <div className="input-row">
@@ -138,7 +125,7 @@ class FormTextFieldDemo extends React.Component {
                 </div>
                 <div className="input-row">
                     <FormTextField
-                        labelText="Default value and undo"
+                        labelText="Undo"
                         showUndo={this.state.showUndo}
                         onUndo={this._handleUndo}
                         value={this.state.onUndoValue || this.state.originalValue}
@@ -150,8 +137,16 @@ class FormTextFieldDemo extends React.Component {
                 </div>
                 <div className="input-row">
                     <FormTextField
-                        labelText="Required and save"
+                        labelText="Required indicator"
                         required={true}
+                        onValueChange={this._handleRequiredValueChange}
+                        value={this.state.requiredValue}
+                        className="input-width-medium"
+                    />
+                </div>
+                <div className="input-row">
+                    <FormTextField
+                        labelText="Inline save"
                         showSave={true}
                         onSave={this._handleSave}
                         onValueChange={this._handleRequiredValueChange}
@@ -166,14 +161,13 @@ class FormTextFieldDemo extends React.Component {
                         labelText="Reveal"
                         maskValue={true}
                         showReveal={true}
+                        value="hidden text"
                         className="input-width-medium"
                     />
                 </div>
                 <div className="input-row">
                     <FormTextField
-                        labelText="Reveal and disabled"
-                        maskValue={true}
-                        showReveal={true}
+                        labelText="Disabled"
                         disabled={true}
                         className="input-width-medium"
                     />
@@ -181,9 +175,8 @@ class FormTextFieldDemo extends React.Component {
                 <div className="input-row">
                     <FormTextField
                         stateless={false}
-                        labelText="onChange callback and maxLength (10 chars)"
+                        labelText="onChange callback"
                         onValueChange={this._handleValueChange}
-                        maxLength={10}
                         className="input-width-medium"
                     />
                     <span>{this.state.onValueChangeFieldValue}</span>
@@ -191,9 +184,24 @@ class FormTextFieldDemo extends React.Component {
                 <div className="input-row">
                     <FormTextField
                         stateless={false}
-                        labelText="onBlur callback and placeholder"
+                        labelText="MaxLength (10 chars)"
+                        maxLength={10}
+                        className="input-width-medium"
+                    />
+                </div>
+                <div className="input-row">
+                    <FormTextField
+                        stateless={false}
+                        labelText="Placeholder text"
+                        placeholder="placeholder text"
+                        className="input-width-medium"
+                    />
+                </div>
+                <div className="input-row">
+                    <FormTextField
+                        stateless={false}
+                        labelText="onBlur callback"
                         onBlur={this._handleBlur}
-                        placeholder="placeholder"
                         className="input-width-medium"
                     />
                     <span>{this.state.onBlurFieldValue}</span>
@@ -209,28 +217,16 @@ class FormTextFieldDemo extends React.Component {
                 <div className="input-row">
                     <FormTextField
                         stateless={false}
-                        labelText="With error message"
-                        errorMessage="The error message appears when hovering over the error icon or when focus is
+                        labelText="Error message"
+                        errorMessage="The error message appears when hovering over the input/icon or when focus is
                             placed on the input."
                         className="input-width-medium"
-                        required={true}
                     />
                 </div>
                 <div className="input-row">
                     <FormTextField
                         stateless={false}
-                        labelText="Required password field with error message"
-                        errorMessage="The error message."
-                        required={true}
-                        maskValue={true}
-                        showReveal={true}
-                        className="input-width-medium"
-                    />
-                </div>
-                <div className="input-row">
-                    <FormTextField
-                        stateless={false}
-                        labelText="With help tooltip"
+                        labelText="Help tooltip"
                         labelHelpText="This is my help text."
                         className="input-width-medium"
                     />
@@ -238,7 +234,7 @@ class FormTextFieldDemo extends React.Component {
                 <div className="input-row">
                     <FormTextField
                         stateless={false}
-                        labelText="With help and lock tooltips"
+                        labelText="Help and lock tooltips"
                         labelHelpText="This is my help text."
                         labelLockText="This is the reason the field is locked."
                         className="input-width-medium"
@@ -249,7 +245,7 @@ class FormTextFieldDemo extends React.Component {
                     <FormTextField
                         stateless={false}
                         labelText="Validate onChange"
-                        labelHelpText="Valid when have 5 or more chars"
+                        labelHelpText="Valid when 5 or more characters present"
                         errorMessage={this.state.onChangeValidationErrorMessage}
                         onChange={this._handleChangeErrorValidation}
                         className="input-width-medium"
@@ -260,18 +256,9 @@ class FormTextFieldDemo extends React.Component {
                     <FormTextField
                         stateless={false}
                         labelText="Validate onBlur"
-                        labelHelpText="Valid when have 5 or more chars"
+                        labelHelpText="Valid when 5 or more characters present"
                         errorMessage={this.state.onBlurValidationErrorMessage}
                         onBlur={this._handleBlurErrorValidation}
-                        className="input-width-medium"
-                    />
-                </div>
-                <div className="input-row">
-                    <FormTextField
-                        labelText="Disabled field with help"
-                        labelHelpText="Disabled field with help"
-                        value="text content cannot be edited"
-                        disabled={true}
                         className="input-width-medium"
                     />
                 </div>
@@ -284,6 +271,15 @@ class FormTextFieldDemo extends React.Component {
                         className="input-width-medium"
                         flexWidth={true}
                         placeholder="try entering text longer than this field"
+                    />
+                </div>
+                <div className="input-row">
+                    <FormTextField
+                        stateless={false}
+                        labelText="Info message variant"
+                        message="Info formatted messages are now supported within this component"
+                        messageType={FormTextField.messageTypes.INFO}
+                        className="input-width-medium"
                     />
                 </div>
             </div>

@@ -51,6 +51,10 @@ import classnames from "classnames";
 *     Query string to be used as value in the search field
 * @param {string} [value]
 *     Alias for queryString
+* @param {string} [message]
+*    The message text to display.
+* @param {string} [messageType=error]
+*    The type of message (error = red, info = blue, success = green, warning = yellow).
 * @param {string} [placeholder]
 *     Hint text inside searchBox
 * @param {string} [name]
@@ -79,21 +83,25 @@ import classnames from "classnames";
 class FormSearchBox extends React.Component {
     static displayName = "FormSearchBox";
 
+    static messageTypes = FormTextField.messageTypes;
+
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
-        queryString: PropTypes.string,
-        placeholder: PropTypes.string,
+        errorMessage: PropTypes.string,
         iconName: PropTypes.string,
         inputFieldClassName: PropTypes.string,
+        maxLength: PropTypes.number,
+        message: PropTypes.string,
+        messageType: PropTypes.string,
         name: PropTypes.string,
         onValueChange: PropTypes.func.isRequired,
         onKeyDown: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
         onClear: PropTypes.func,
-        errorMessage: PropTypes.string,
-        maxLength: PropTypes.number
+        placeholder: PropTypes.string,
+        queryString: PropTypes.string,
     };
 
     static defaultProps = {
@@ -160,27 +168,29 @@ class FormSearchBox extends React.Component {
 
         return (
             <div data-id={this.props["data-id"]} className={this.props.className} >
-                <FormTextField data-id="searchBox"
-                        stateless={false}
-                        ref="searchBox"
-                        className={inputClasses}
-                        errorMessage={this.props.errorMessage}
-                        value={value}
-                        placeholder={this.props.placeholder}
-                        name={this.props.name}
-                        onValueChange={this._search}
-                        onKeyDown={this._handleSearchBoxKeyDown}
-                        onFocus={this.props.onFocus}
-                        onBlur={this.props.onBlur}
+                <FormTextField
+                    data-id="searchBox"
+                    stateless={false}
+                    ref="searchBox"
+                    className={inputClasses}
+                    message={this.props.errorMessage || this.props.message}
+                    messageType={this.props.messageType}
+                    value={value}
+                    placeholder={this.props.placeholder}
+                    name={this.props.name}
+                    onValueChange={this._search}
+                    onKeyDown={this._handleSearchBoxKeyDown}
+                    onFocus={this.props.onFocus}
+                    onBlur={this.props.onBlur}
                     maxLength={this.props.maxLength}
-                        controls={showClear
-                            ? <a data-id="clear" className="clear-search" onClick={this._clear} />
-                            : null
-                        }
+                    controls={showClear
+                        ? <a data-id="clear" className="clear-search" onClick={this._clear} />
+                        : null
+                    }
                 ><span className={iconClasses}/></FormTextField>
             </div>
         );
     }
 }
 
-module.exports = FormSearchBox;
+export default FormSearchBox;
