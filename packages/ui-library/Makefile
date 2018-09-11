@@ -1,6 +1,7 @@
 NODE_VERSION=6.9.5
 NPM_VERSION=3.7.1
 
+COVERAGE_ADDRESS=http://art01.corp.pingidentity.com:8080/artifactory/inhouse/com/pingone/ui-library/ui-library-coverage
 HOSTING_SERVER_ADDRESS=uilibrary.ping-eng.com
 HOSTING_SERVER_USERNAME=ubuntu
 
@@ -88,10 +89,10 @@ endif
 # if not available, get the latest from master (with no suffix);
 # if no coverage is found, fail the build
 COVERAGE_VERSION=$(GIT_VERSION)-$(GIT_BRANCH)
-COVERAGE_STATUS_CODE=$(shell curl -s -I http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library-coverage/$(COVERAGE_VERSION)/ui-library-coverage-$(COVERAGE_VERSION).tar.gz | grep "HTTP/1.1" | awk {'print $$2'})
+COVERAGE_STATUS_CODE=$(shell curl -s -I $(COVERAGE_ADDRESS)/$(COVERAGE_VERSION)/ui-library-coverage-$(COVERAGE_VERSION).tar.gz | grep "HTTP/1.1" | awk {'print $$2'})
 ifneq ($(COVERAGE_STATUS_CODE),200)
 	COVERAGE_VERSION=$(GIT_VERSION)
-	COVERAGE_STATUS_CODE=$(shell curl -s -I http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library-coverage/$(COVERAGE_VERSION)/ui-library-coverage-$(COVERAGE_VERSION).tar.gz | grep "HTTP/1.1" | awk {'print $$2'})
+	COVERAGE_STATUS_CODE=$(shell curl -s -I $(COVERAGE_ADDRESS)/$(COVERAGE_VERSION)/ui-library-coverage-$(COVERAGE_VERSION).tar.gz | grep "HTTP/1.1" | awk {'print $$2'})
 endif
 
 
@@ -171,7 +172,7 @@ endef
 define install_reference_coverage_report
 	rm -f ui-library-coverage-*.tar.gz
 	rm -rf coverage-reference
-	wget http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library-coverage/$(1)/ui-library-coverage-$(1).tar.gz
+	wget $(COVERAGE_ADDRESS)/$(1)/ui-library-coverage-$(1).tar.gz
 	mkdir coverage-reference
 	tar -xzf ui-library-coverage-$(1).tar.gz --strip 1 -C coverage-reference
 endef
@@ -223,7 +224,7 @@ verify: install-node-npm
 	# convert the lcov report to cobertura format to be published by Jenkins
 	python tools/lcov_cobertura.py coverage/lcov.info --base-dir . --output coverage/cobertura.xml
 
-	if [ "$(COVERAGE_STATUS_CODE)" -ne "200" ]; then\
+	if [ "$(COVERAGE_STATUS_CODE)" -lt "200" ] || [ "$(COVERAGE_STATUS_CODE)" -ge "400" ]; then\
 		echo "Cannot find the coverage report to download";\
 		exit 1;\
 	fi
