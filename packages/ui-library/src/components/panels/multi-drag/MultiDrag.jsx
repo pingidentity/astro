@@ -512,9 +512,21 @@ class MultiDragStateful extends React.Component {
             to: convertedTo
         } = convertFilteredIndexes(this.state.columns, desc);
 
-        const { from, to } = desc;
+        const {
+            from,
+            to
+        } = desc;
 
-        let next = move(this.state, { from, to });
+        let next = move(this.state, {
+            from: {
+                column: from.column,
+                index: convertedFrom
+            },
+            to: {
+                column: to.column,
+                index: convertedTo
+            }
+        });
 
         // reapply filters after a move so moved rows filtered as well
         next = reapplyFilters(next);
