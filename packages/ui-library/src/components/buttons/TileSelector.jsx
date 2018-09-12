@@ -150,4 +150,6 @@ TileSelector.defaultProps = {
     options: []
 };
 
+TileSelector.TileButton = TileButton;
+
 export default TileSelector;

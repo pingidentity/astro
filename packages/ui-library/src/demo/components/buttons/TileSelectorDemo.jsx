@@ -1,11 +1,10 @@
 import React from "react";
-import TileButton from "../../../components/buttons/TileButton";
 import TileSelector from "../../../components/buttons/TileSelector";
 
 /**
- * @name TileButtonDemo
- * @memberof TileButton
- * @desc A demo for TileButton
+ * @name TileSelectorDemo
+ * @memberof TileSelector
+ * @desc A demo for TileSelector
  */
 class TileSelectorDemo extends React.Component {
     state = { selected: "webapp" };
@@ -16,18 +15,18 @@ class TileSelectorDemo extends React.Component {
         return (
             <div>
                 <TileSelector>
-                    <TileButton title="Web App" iconName="network">
+                    <TileSelector.TileButton title="Web App" iconName="network">
                         Cloud-based apps that are accessed within a browser.
-                    </TileButton>
-                    <TileButton title="Native App" iconName="device" selected>
+                    </TileSelector.TileButton>
+                    <TileSelector.TileButton title="Native App" iconName="device" selected>
                         Applications that are stored and run from a device or desktop.
-                    </TileButton>
-                    <TileButton title="Single Page App" iconName="apps">
+                    </TileSelector.TileButton>
+                    <TileSelector.TileButton title="Single Page App" iconName="apps">
                         Just a bit of text.
-                    </TileButton>
-                    <TileButton title="Non-Interactive" iconName="server">
+                    </TileSelector.TileButton>
+                    <TileSelector.TileButton title="Non-Interactive" iconName="server">
                         Cloud-based apps that are accessed within a browser.
-                    </TileButton>
+                    </TileSelector.TileButton>
                 </TileSelector>
                 <hr className="hr" />
                 <TileSelector
