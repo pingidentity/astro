@@ -3,9 +3,10 @@
 @font-face {
   font-family: 'iconfont';
   src:
-    url('#{$icomoon-font-path}/iconfont.ttf?4smsw9') format('truetype'),
-    url('#{$icomoon-font-path}/iconfont.woff?4smsw9') format('woff'),
-    url('#{$icomoon-font-path}/iconfont.svg?4smsw9#iconfont') format('svg');
+    url('#{$icomoon-font-path}/iconfont.woff2?n3zv74') format('woff2'),
+    url('#{$icomoon-font-path}/iconfont.ttf?n3zv74') format('truetype'),
+    url('#{$icomoon-font-path}/iconfont.woff?n3zv74') format('woff'),
+    url('#{$icomoon-font-path}/iconfont.svg?n3zv74#iconfont') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -83,6 +84,11 @@
 .icon-browser {
   &:before {
     content: $icon-browser;
+  }
+}
+.icon-bullet-list {
+  &:before {
+    content: $icon-bullet-list;
   }
 }
 .icon-cabinet {
@@ -163,6 +169,11 @@
 .icon-collapse {
   &:before {
     content: $icon-collapse;
+  }
+}
+.icon-curly-braces {
+  &:before {
+    content: $icon-curly-braces;
   }
 }
 .icon-delete {
