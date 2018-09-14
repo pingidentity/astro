@@ -1,5 +1,5 @@
 import React from "react";
-import { isDOMComponent, renderIntoDocument } from "react-dom/test-utils";
+import { isDOMComponent, renderIntoDocument, Simulate } from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
 import TilePanel from "../TilePanel";
 
@@ -52,5 +52,37 @@ describe("Tile Panel", () => {
         const options = TestUtils.scryRenderedDOMNodesWithClass(component, "tile-panel__option");
 
         expect(options.length).toEqual(2);
+    });
+
+    it("fires the onButtonClick event with correct arguments", () => {
+        const onButtonClick = jest.fn();
+        const component = getComponent({
+            tileId: "tile",
+            options: [
+                {
+                    buttonLabel: "Configure",
+                    content: "Apps that utilize whatever",
+                    id: "first",
+                    label: "SAML",
+                    onButtonClick: onButtonClick
+                },
+                {
+                    buttonLabel: "Configure",
+                    content: "Employs Universal Login and whatnot",
+                    label: "OIDC",
+                }
+            ]
+        });
+
+        const [firstButton, secondButton] =
+            TestUtils.scryRenderedDOMNodesWithClass(component, "tile-panel__option__button");
+        Simulate.click(firstButton);
+        Simulate.click(secondButton);
+
+        const [[firstArg, secondArg], ] = onButtonClick.mock.calls;
+
+        expect(onButtonClick).toHaveBeenCalledTimes(1);
+        expect(firstArg).toEqual("first");
+        expect(secondArg).toEqual("tile");
     });
 });

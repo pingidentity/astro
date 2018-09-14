@@ -99,6 +99,7 @@ const TileSelector = ({
             (optionPanel && isSelected)
                 ? <TilePanel
                     {...optionPanel}
+                    tileId={id}
                     position={getPanelPosition(options, selected)}
                 />
                 : activePanel
@@ -124,16 +125,24 @@ TileSelector.propTypes = {
         PropTypes.shape({
             description: PropTypes.string,
             iconName: PropTypes.string,
-            id: PropTypes.string,
             panel: PropTypes.shape({
                 className: PropTypes.string,
+                id: PropTypes.oneOfType([
+                    PropTypes.number,
+                    PropTypes.string,
+                ]),
                 label: PropTypes.string,
                 options: PropTypes.oneOfType([
                     PropTypes.arrayOf(
                         PropTypes.shape({
                             buttonLabel: PropTypes.string.isRequired,
                             content: PropTypes.node.isRequired,
+                            id: PropTypes.oneOfType([
+                                PropTypes.number,
+                                PropTypes.string,
+                            ]),
                             label: PropTypes.string.isRequired,
+                            onButtonClick: PropTypes.func
                         })
                     ),
                     PropTypes.node

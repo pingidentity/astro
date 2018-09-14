@@ -9,6 +9,12 @@ import TileSelector from "../../../components/buttons/TileSelector";
 class TileSelectorDemo extends React.Component {
     state = { selected: "webapp" };
 
+    logArguments = (buttonId, panelId, e) => {
+        console.log("Button id: ", buttonId);
+        console.log("Panel id: ", panelId);
+        console.log("Event: ", e);
+    }
+
     render() {
         const onValueChange = value => this.setState({ selected: value });
 
@@ -45,15 +51,18 @@ class TileSelectorDemo extends React.Component {
                                     {
                                         buttonLabel: "Configure",
                                         content: "Apps that utilize whatever",
-                                        label: "SAML"
+                                        id: "SAML",
+                                        label: "SAML",
+                                        onButtonClick: this.logArguments
                                     },
                                     {
                                         buttonLabel: "Configure",
                                         content: "Employs Universal Login and whatnot",
+                                        id: "OIDC",
                                         label: "OIDC",
+                                        onButtonClick: this.logArguments
                                     }
-                                ],
-                                position: "BOTTOM"
+                                ]
                             }
                         },
                         {
@@ -67,15 +76,18 @@ class TileSelectorDemo extends React.Component {
                                     {
                                         buttonLabel: "Configure",
                                         content: "Apps that utilize whatever",
-                                        label: "SAML"
+                                        id: "SAML",
+                                        label: "SAML",
+                                        onButtonClick: this.logArguments
                                     },
                                     {
                                         buttonLabel: "Configure",
                                         content: "Employs Universal Login and whatnot",
+                                        id: "OIDC",
                                         label: "OIDC",
+                                        onButtonClick: this.logArguments
                                     }
-                                ],
-                                position: "BOTTOM"
+                                ]
                             }
                         },
                         {
@@ -89,15 +101,18 @@ class TileSelectorDemo extends React.Component {
                                     {
                                         buttonLabel: "Configure",
                                         content: "Apps that utilize whatever",
-                                        label: "SAML"
+                                        id: "SAML",
+                                        label: "SAML",
+                                        onButtonClick: this.logArguments
                                     },
                                     {
                                         buttonLabel: "Configure",
                                         content: "Employs Universal Login and whatnot",
+                                        id: "OIDC",
                                         label: "OIDC",
+                                        onButtonClick: this.logArguments
                                     }
-                                ],
-                                position: "BOTTOM"
+                                ]
                             }
                         },
                         {
@@ -111,15 +126,18 @@ class TileSelectorDemo extends React.Component {
                                     {
                                         buttonLabel: "Configure",
                                         content: "Apps that utilize whatever",
-                                        label: "SAML"
+                                        id: "SAML",
+                                        label: "SAML",
+                                        onButtonClick: this.logArguments
                                     },
                                     {
                                         buttonLabel: "Configure",
                                         content: "Employs Universal Login and whatnot",
+                                        id: "OIDC",
                                         label: "OIDC",
+                                        onButtonClick: this.logArguments
                                     }
-                                ],
-                                position: "BOTTOM"
+                                ]
                             }
                         }
                     ]}

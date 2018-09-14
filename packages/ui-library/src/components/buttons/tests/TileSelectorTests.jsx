@@ -81,8 +81,7 @@ describe("TileSelector", function() {
                                 content: "Employs Universal Login and whatnot",
                                 label: "OIDC",
                             }
-                        ],
-                        position: "BOTTOM"
+                        ]
                     }
                 },
                 {
@@ -143,8 +142,7 @@ describe("TileSelector", function() {
                                 content: "Employs Universal Login and whatnot",
                                 label: "OIDC",
                             }
-                        ],
-                        position: "BOTTOM"
+                        ]
                     }
                 },
             ],

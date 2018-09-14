@@ -3,19 +3,24 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import Button from "./Button";
 
-const renderOptions = options => options.map(({
+const renderOptions = (tileId, options) => options.map(({
     buttonLabel,
     content,
-    label
-}, idx) => (
-    <div className="tile-panel__option" key={`${label}-${idx}`}>
-        <div>
-            <div className="tile-panel__option__label">{label}</div>
-            <div className="tile-panel__option__content">{content}</div>
+    label,
+    id = label,
+    onButtonClick = () => {}
+}, idx) => {
+    const buttonClick = e => onButtonClick(id, tileId, e);
+    return (
+        <div className="tile-panel__option" key={`${label}-${idx}`}>
+            <div>
+                <div className="tile-panel__option__label">{label}</div>
+                <div className="tile-panel__option__content">{content}</div>
+            </div>
+            <Button className="tile-panel__option__button" label={buttonLabel} onClick={buttonClick} />
         </div>
-        <Button className="tile-panel__option__button" label={buttonLabel} />
-    </div>
-));
+    );
+});
 
 /**
  * @class TilePanel
@@ -28,9 +33,11 @@ const renderOptions = options => options.map(({
  * @param {string} [label]
  *    The text at the top of the panel.
  * @param {object} [options]
- *    An array of objects to display on the panel, each with a label, content and a button label
+ *    An array of objects to display on the panel, each with a label, content, an onClick event and a button label
  * @param {string} [position]
  *     The position of the panel. Can be either "left" or "right".
+ * @param {string} [tileId]
+ *     The id of the tile associated with the panel.
  *
  * @example
  * <TileButton title="Non-Interactive" iconName="server">
@@ -43,7 +50,8 @@ const TilePanel = ({
     className,
     label,
     options,
-    position
+    position,
+    tileId
 }) => {
     return (
         <div
@@ -52,7 +60,7 @@ const TilePanel = ({
         >
             {label && <div className="tile-panel__label">{label}</div>}
             {Array.isArray(options) && options.some(({ content }) => content !== undefined)
-                ? renderOptions(options)
+                ? renderOptions(tileId, options)
                 : options}
         </div>
     );
@@ -67,7 +75,12 @@ TilePanel.propTypes = {
             PropTypes.shape({
                 buttonLabel: PropTypes.string.isRequired,
                 content: PropTypes.node.isRequired,
+                id: PropTypes.oneOfType([
+                    PropTypes.number,
+                    PropTypes.string,
+                ]),
                 label: PropTypes.string.isRequired,
+                onButtonClick: PropTypes.func
             })
         ),
         PropTypes.node
@@ -75,7 +88,8 @@ TilePanel.propTypes = {
     position: PropTypes.oneOf([
         "left",
         "right"
-    ])
+    ]),
+    tileId: PropTypes.string
 };
 
 TilePanel.defaultProps = {
