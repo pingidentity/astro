@@ -28,7 +28,9 @@ $wizard-content-bg-color: $color-strong-neutral-90;
     z-index: 1;
 
     textarea,
-    input[type] {
+    input[type],
+    .input-checkbox .icon:before,
+    .input-radio .circle {
         background-color: $color-white;
     }
 
