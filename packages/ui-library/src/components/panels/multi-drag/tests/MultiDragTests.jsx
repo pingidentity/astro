@@ -383,4 +383,33 @@ describe("MultiDrag", function () {
         ReactTestUtils.Simulate.click(categoryOption);
         expect(callback).toBeCalled();
     });
+
+    it("sorts rows using customSort", () => {
+        const sort = row => row.sort(({ name: nameA }, { name: nameB }) => nameA > nameB);
+
+        const rows = [
+            {
+                id: "b",
+                name: "b"
+            },
+            {
+                id: "a",
+                name: "a"
+            }
+        ];
+
+        const component = getWrappedComponent({
+            columns: [
+                { name: "Available Rows", id: 1, filteredRows: rows, rows },
+                { name: "Added Rows", id: 2, filteredRows: rows, rows }
+            ],
+            customSort: sort,
+            stateless: false,
+        });
+
+        const rowNodes = TestUtils.scryRenderedDOMNodesWithClass(component, "selector-row");
+        const firstLabel = TestUtils.findRenderedDOMNodeWithDataId(rowNodes[0], "row-name");
+
+        expect(firstLabel.textContent).toEqual("a");
+    });
 });

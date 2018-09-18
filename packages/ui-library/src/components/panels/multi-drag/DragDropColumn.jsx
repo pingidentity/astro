@@ -31,7 +31,7 @@ var React = require("react"),
  * @param {number} [ghostRowAt]
  *    Display a ghost row to preview where a row would be inserted
  * @param {boolean} [disableSort=false]
- *    Determines whether the column in internally sortable
+ *    Determines whether the column is internally sortable
  * @param {number} [dragToEdge=false]
  *    If true, the drag index will only increment when the drag location has passed the edge of the row instead
  *    of being incremented after the halfway mark which is the default behaviour.

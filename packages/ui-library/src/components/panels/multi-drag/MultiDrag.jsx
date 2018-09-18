@@ -1,15 +1,15 @@
-var PropTypes = require("prop-types");
-var React = require("react"),
-    classnames = require("classnames"),
-    DragDropColumn = require("./DragDropColumn"),
-    MultiDragRow = require("./MultiDragRow"),
-    search = require("./MultiDragReducer.js").search,
-    move = require("./MultiDragReducer.js").move,
-    update = require("re-mutable"),
-    reapplyFilters = require("./MultiDragReducer.js").reapplyFilters,
-    Utils = require("../../../util/Utils.js"),
-    FormSearchBox = require("../../forms/FormSearchBox"),
-    _ = require("underscore");
+import PropTypes from "prop-types";
+import React from "react";
+import classnames from "classnames";
+import DragDropColumn from "./DragDropColumn";
+import MultiDragRow from "./MultiDragRow";
+import { search } from "./MultiDragReducer.js";
+import { move } from "./MultiDragReducer.js";
+import update from "re-mutable";
+import { reapplyFilters } from "./MultiDragReducer.js";
+import Utils from "../../../util/Utils.js";
+import FormSearchBox from "../../forms/FormSearchBox";
+import _ from "underscore";
 
 /**
  * @typedef {object} MultiDrag~IndexesDescriptor
@@ -191,6 +191,8 @@ function convertFilteredIndexes (columns, desc) {
  *    Callback to be triggered when a drag event starts.
  * @param {MultiDrag~onDragEnd} [onDragEnd]
  *    Callback to be triggered when a drag even ends.
+ * @param {MultiDrag~customSort} [customSort]
+ *    Callback to sort rows according to custom criteria. Expects to receive rows as a return value.
  *
  * @example
  *    <MultiDrag
@@ -242,6 +244,7 @@ class MultiDragStateless extends React.Component {
         onScrolledToTop: PropTypes.func,
         // optional items
         labelEmpty: PropTypes.string,
+        customSort: PropTypes.func,
         disabled: PropTypes.bool,
         onDragStart: PropTypes.func,
         onDragEnd: PropTypes.func,
@@ -410,18 +413,25 @@ class MultiDragStateless extends React.Component {
             }
         );
 
+        const {
+            columns,
+            "data-id": dataId,
+            showSearch,
+            showSearchOnAllColumns
+        } = this.props;
+
         return (
-            <div data-id={this.props["data-id"]} className={className}>
+            <div data-id={dataId} className={className}>
                 <div key="search-row" className="row-selector__search-row">
-                    {this.props.columns.map((column, index) => (
-                        (this.props.showSearch && index === 0) || this.props.showSearchOnAllColumns
+                    {columns.map((column, index) => (
+                        (showSearch && index === 0) || showSearchOnAllColumns
                         ? this._renderSearch(column, index)
                         : <div key={"search"+column.name} className="row-selector__search"/>
                     ))}
                 </div>
                 <div key="columns" className="row-selector__columns">
                 {
-                    this.props.columns.map(this._renderColumn)
+                    columns.map(this._renderColumn)
                 }
                 </div>
             </div>
@@ -546,7 +556,7 @@ class MultiDragStateful extends React.Component {
         });
     };
 
-    _handleDrag = (desc) => {
+    _handleDrag = (desc) =>
         this.setState({
             placeholder: desc.to
         }, () => {
@@ -554,7 +564,6 @@ class MultiDragStateful extends React.Component {
                 this.props.onDrag(desc, this.props.columns);
             }
         });
-    };
 
     _handleRemove = (from) => {
         if (this.props.onRemove) {
@@ -563,6 +572,17 @@ class MultiDragStateful extends React.Component {
             this._handleDrop({ from: from, to: { column: 0, index: 0 } });
         }
     }
+
+    _sortCols = columns => columns.map(({ filteredRows, rows, ...col }) => {
+        const { customSort } = this.props;
+        return {
+            ...col,
+            rows: customSort ? customSort(rows) : rows,
+            ...(filteredRows && {
+                filteredRows: customSort ? customSort(filteredRows) : filteredRows
+            })
+        };
+    });
 
     componentWillMount() {
         // apply any initial filters
@@ -573,31 +593,28 @@ class MultiDragStateful extends React.Component {
 
     componentWillReceiveProps({ columns: nextCols }) {
         if (!_.isEqual(nextCols, this.props.columns)) {
-            // update columns and reapply filters
-            const next = reapplyFilters({
-                ...this.state,
+            this.setState(prevState => reapplyFilters({
+                ...prevState,
                 columns: nextCols
-            });
-            this.setState(next);
+            }));
         }
     }
 
     render() {
-        const props = _.defaults({
+        return (<MultiDragStateless {...{
+            ...this.props,
             ref: "MultiDragStateless",
             onSearch: this._handleSearch,
             onCategoryClick: this._handleCategoryClick,
             onCategoryToggle: this._handleCategoryToggle,
-            columns: this.state.columns,
+            columns: this._sortCols(this.state.columns),
             previewMove: this.state.placeholder,
             onAdd: this._handleAdd,
             onCancel: this._handleCancel,
             onDrop: this._handleDrop,
             onDrag: this._handleDrag,
             onRemove: this._handleRemove
-        }, this.props);
-
-        return React.createElement(MultiDragStateless, props);
+        }} />);
     }
 }
 

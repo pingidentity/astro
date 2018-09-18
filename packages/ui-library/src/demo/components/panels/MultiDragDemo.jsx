@@ -21,6 +21,11 @@ import Button from "../../../components/buttons/Button";
 * @desc A demo for MultiDrag
 */
 
+const CUSTOMSORTVALS = {
+    SORTED: "sorted",
+    UNSORTED: "unsorted"
+};
+
 var Types = keyMirror({
     GRID_DEMO_SET: null,
     GRID_DEMO_TOGGLE_ICON: null
@@ -118,7 +123,8 @@ class MultiDragDemo extends React.Component {
     state = {
         demoType: "STATELESS",
         columns: data.columns, // used for stateful (stateless=false) demo
-        disabled: false
+        disabled: false,
+        sorted: false
     };
 
     constructor(props) {
@@ -295,6 +301,13 @@ class MultiDragDemo extends React.Component {
         return options;
     };
 
+    _sortRow = row => row.sort(({ name: nameA }, { name: nameB }) => nameA > nameB);
+
+    _toggleSort = id =>
+        this.setState(() => ({
+            sorted: id === CUSTOMSORTVALS.SORTED
+        }));
+
     render() {
         const contentTypeStateful = (
             <Row
@@ -380,6 +393,21 @@ class MultiDragDemo extends React.Component {
                         />
                     </Layout.Column>
                 </Layout.Row>
+                <Layout.Row className="columns-nopad">
+                    <Layout.Column>
+                        <FormLabel>Toggle custom sort (stateful only)</FormLabel>
+                        <FormRadioGroup
+                            stacked={false}
+                            groupName="sorted"
+                            selected={this.state.sorted ? CUSTOMSORTVALS.SORTED : CUSTOMSORTVALS.UNSORTED }
+                            onValueChange={this._toggleSort}
+                            items={[
+                                { id: CUSTOMSORTVALS.UNSORTED, name: "Unsorted" },
+                                { id: CUSTOMSORTVALS.SORTED, name: "Custom sort" }
+                            ]}
+                        />
+                    </Layout.Column>
+                </Layout.Row>
 
                 {this.state.demoType === "STATELESS" &&
                     <div>
@@ -440,6 +468,7 @@ class MultiDragDemo extends React.Component {
                                 defaultCategoryOption: "Everything",
                                 filteredByLabel: "but only"
                             }}
+                            {...this.state.sorted && { customSort: this._sortRow }}
                         />
                     </div>
                 }
