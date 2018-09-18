@@ -468,6 +468,8 @@ $color-grey-minor-1: $color-neutral-30;
                 }
                 .menu {
                     background-color: $color-grey-main-1;
+                    border-top: 1px solid shade($color-strong-neutral-10, 20%);
+                    border-bottom: 1px solid $color-neutral-50;
                 }
             }
 
