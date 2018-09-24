@@ -261,7 +261,7 @@ class FormDropDownListDemo extends React.Component {
                     <FormDropDownList
                         options={OPTIONS}
                         label="Required with none option"
-                        required={this.state["selectedValue" + NUM_DEMOS].label === "--"}
+                        required
                         selectedOption={this.state["selectedValue" + NUM_DEMOS]}
                         noneOption={{ label: "--" }}
                         onValueChange={this["_handleValueChange" + NUM_DEMOS]}

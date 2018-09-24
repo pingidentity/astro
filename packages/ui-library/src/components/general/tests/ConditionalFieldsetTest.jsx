@@ -24,13 +24,13 @@ describe("ConditionalFieldset", function () {
         callback = jest.genMockFunction();
     });
 
-    function getGenericConditionalFieldset (props) {
-        props = _.defaults(props || {}, {
+    function getComponent (props) {
+        const defaultProps = {
             "data-id": dataId
-        });
+        };
 
         return ReactTestUtils.renderIntoDocument(
-            <ConditionalFieldset {...props}>
+            <ConditionalFieldset {...defaultProps} {...props}>
                  <div data-id="option1" title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
                  <div data-id="option2" title="Option 2">Option 2</div>
              </ConditionalFieldset>
@@ -38,7 +38,7 @@ describe("ConditionalFieldset", function () {
     }
 
     it("renders default configuration with select", function () {
-        var component = getGenericConditionalFieldset({ "data-id": dataId, type: "select" });
+        var component = getComponent({ "data-id": dataId, type: ConditionalFieldset.Types.SELECT });
 
         var form1 = TestUtils.findRenderedDOMNodeWithDataId(component, "option1");
         expect(form1).toBeTruthy();
@@ -58,7 +58,7 @@ describe("ConditionalFieldset", function () {
     });
 
     it("renders default configuration with all defaults", function () {
-        var component = getGenericConditionalFieldset({ "data-id": dataId });
+        var component = getComponent({ "data-id": dataId });
 
         var form1 = TestUtils.findRenderedDOMNodeWithDataId(component, "option1");
         expect(form1).toBeTruthy();
@@ -84,7 +84,7 @@ describe("ConditionalFieldset", function () {
     });
 
     it("change option with select", function () {
-        var component = getGenericConditionalFieldset({ "data-id": dataId, type: "select" });
+        var component = getComponent({ "data-id": dataId, type: ConditionalFieldset.Types.SELECT });
         var componentRef = component.refs.ConditionalFieldsetStateful;
         expect(componentRef.state.selectedIndex).toBe(0);
 
@@ -105,7 +105,7 @@ describe("ConditionalFieldset", function () {
     });
 
     it("change option with radio", function () {
-        var component = getGenericConditionalFieldset({ "data-id": dataId });
+        var component = getComponent({ "data-id": dataId });
         var componentRef = component.refs.ConditionalFieldsetStateful;
         expect(componentRef.state.selectedIndex).toBe(0);
 
@@ -147,12 +147,12 @@ describe("ConditionalFieldset", function () {
     });
 
     it("stateless change option", function () {
-        var component = getGenericConditionalFieldset({
+        var component = getComponent({
             "data-id": dataId,
             stateless: true,
             onValueChange: callback,
             selectedIndex: selectedIndex,
-            type: "select"
+            type: ConditionalFieldset.Types.SELECT
         });
 
         var select = TestUtils.findRenderedDOMNodeWithDataId(component, "select-list");
@@ -162,11 +162,10 @@ describe("ConditionalFieldset", function () {
     });
 
     it("change option with select", function () {
-        var component = getGenericConditionalFieldset({
-            "data-id": dataId,
+        var component = getComponent({
             supportEmpty: true,
             emptyMessage: "DO NOTHING",
-            type: "select"
+            type: ConditionalFieldset.Types.SELECT
         });
         var componentRef = component.refs.ConditionalFieldsetStateful;
         expect(componentRef.state.selectedIndex).toBe(0);
@@ -196,23 +195,34 @@ describe("ConditionalFieldset", function () {
         var expectedError = new Error(Utils.deprecatePropError("controlled", "stateless"));
 
         expect(function () {
-            getGenericConditionalFieldset({ controlled: true });
+            getComponent({ controlled: true });
         }).toThrow(expectedError);
     });
 
     it("creates a conditional fieldset select with custom width", function () {
-        var component = getGenericConditionalFieldset({
+        var component = getComponent({
             "data-id": dataId,
-            type: "select",
+            type: ConditionalFieldset.Types.SELECT,
             listClassName: "input-width-medium"
         });
 
-        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "fieldset-options");
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-options");
 
         expect(select).toBeTruthy();
         expect(TestUtils.findRenderedDOMNodeWithClass(select, "input-width-medium")).toBeTruthy();
 
         var classes = select.className.split(" ");
         expect(_.contains(classes, "input-width-medium")).toEqual(true);
+    });
+
+    it("renders as required", function () {
+        const component = getComponent({
+            emptyMessage: "DO NOTHING",
+            required: true,
+            supportEmpty: true,
+        });
+
+        const label = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-options");
+        expect(label.className).toContain("required");
     });
 });
