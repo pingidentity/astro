@@ -27,7 +27,9 @@ export default class RowBuilderDemo extends Component {
             ...template
         }));
 
-        return count > 0 ? [{ id, content }, ...(new Array(count).fill({ id, content: noLabels }))] : [];
+        const noLabelCount = count < 1 ? 0 : count - 1;
+
+        return count > 0 ? [{ id, content }, ...(new Array(noLabelCount).fill({ id, content: noLabels }))] : [];
     }
 
     removeRow = (isFirstRow) => () => {
