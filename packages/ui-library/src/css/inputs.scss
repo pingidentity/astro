@@ -502,6 +502,7 @@ label {
     }
 
     &.detached {
+        margin-right: 0;
         margin-bottom: 7px;
         display: block;
     }
@@ -616,6 +617,7 @@ label {
 
 fieldset {
     margin: 0 0 25px;
+    clear: both;
 
     .input-select {
         margin-right: 0;
