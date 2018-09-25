@@ -524,7 +524,7 @@ module.exports = [
                     {
                         label: "Wizard - v2",
                         demo: require("../components/wizard-v2/WizardDemo"),
-                        pathToDoc: "components/wizard-v2/Wizard.jsx",
+                        pathToDoc: "components/wizard-v2/Wizard_v2.jsx",
                         pathToSource: "components_wizard-v2_Wizard.jsx.html",
                         pathToDemoSource: "demo_components_wizard-v2_WizardDemo.jsx.html"
                     },

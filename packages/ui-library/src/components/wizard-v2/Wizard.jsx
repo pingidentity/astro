@@ -12,36 +12,36 @@ import Utils from "../../util/Utils";
 
 
 /**
- * @class Wizard
+ * @class Wizard_v2
  * @desc Displays a modal-like page that leads the user through sequential required and non-requied steps.
  *
  * @param {string} [data-id="wizard"]
  *     Value of the "data-id" assigned to the top-level HTML container.
  * @param {number} [activeStep=0]
  *     The zero-based index of the step to display.
- * @param {Object.Wizard~Messages} [messageProps]
+ * @param {Object.Wizard_v2~Messages} [messageProps]
  *     An object containing the props for the Messages displayed in the active step. Any props specified
  *     in the Messages will override the default behavior.  Any unassigned properties
  *     will take the wizard defaults. See the Message component for full documentation of these props.
- * @param {Object.Wizard~ButtonBar} [buttonBarProps]
+ * @param {Object.Wizard_v2~ButtonBar} [buttonBarProps]
  *     An object containing the props for the buttonBar displayed in the active step. Any props specified
  *     in the buttonBar will override the default behavior as well as the step-level onSave.  Any unassigned properties
  *     will take the wizard defaults. See the ButtonBar component for full documentation of these props.
- * @param {Object.Wizard} [strings]
+ * @param {Object.Wizard_v2} [strings]
  *     An object containing key/text pairs of the text (menuTitle, dividerTitle) in the wizard menu.
  * @param {Array.Wizard} [headerItems]
  *     An array of objects containing the information to display horizontally along the top of the wizard. This data
  *     usually relates to information saved in a previous step.
- * @param {Wizard~onCancel} [onCancel]
+ * @param {Wizard_v2~onCancel} [onCancel]
  *     Handler function triggered when the cancel button is clicked. Note that this function is not triggered when a
  *     skip button is clicked.
- * @param {Wizard~onNext} [onNext]
+ * @param {Wizard_v2~onNext} [onNext]
  *     Handler function triggered when the next button is clicked. Note that this funtion is not triggered when a save
  *     button is clicked.
  */
 
  /**
- * @typedef {Array} Wizard~headerItems
+ * @typedef {Array} Wizard_v2~headerItems
  *
  * @param {string} [title]
  *     The title or label displayed above the value.
@@ -50,7 +50,7 @@ import Utils from "../../util/Utils";
  */
 
  /**
- * @typedef {Object} Wizard~strings
+ * @typedef {Object} Wizard_v2~strings
  *
  * @param {string} [key]
  *     The key used to display a specific bit of text.
