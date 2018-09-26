@@ -5,6 +5,9 @@
     color: $color-midnight;
     background-color: rgba($color-input-fill, 0.25);
     border: 1px solid $color-neutral-70;
+    pre {
+        background-color: rgba($color-input-fill, 0.25);
+    }
 }
 
 .code-view__font {
