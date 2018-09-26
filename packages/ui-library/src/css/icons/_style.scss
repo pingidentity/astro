@@ -3,10 +3,10 @@
 @font-face {
   font-family: 'iconfont';
   src:
-    url('#{$icomoon-font-path}/iconfont.woff2?n3zv74') format('woff2'),
-    url('#{$icomoon-font-path}/iconfont.ttf?n3zv74') format('truetype'),
-    url('#{$icomoon-font-path}/iconfont.woff?n3zv74') format('woff'),
-    url('#{$icomoon-font-path}/iconfont.svg?n3zv74#iconfont') format('svg');
+    url('#{$icomoon-font-path}/iconfont.woff2?imoegb') format('woff2'),
+    url('#{$icomoon-font-path}/iconfont.ttf?imoegb') format('truetype'),
+    url('#{$icomoon-font-path}/iconfont.woff?imoegb') format('woff'),
+    url('#{$icomoon-font-path}/iconfont.svg?imoegb#iconfont') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -406,6 +406,11 @@
     content: $icon-plus-rounded;
   }
 }
+.icon-population {
+  &:before {
+    content: $icon-population;
+  }
+}
 .icon-previous {
   &:before {
     content: $icon-previous;
@@ -526,6 +531,11 @@
     content: $icon-resend;
   }
 }
+.icon-resource {
+  &:before {
+    content: $icon-resource;
+  }
+}
 .icon-right {
   &:before {
     content: $icon-right;
@@ -624,6 +634,11 @@
 .icon-user {
   &:before {
     content: $icon-user;
+  }
+}
+.icon-user_directory {
+  &:before {
+    content: $icon-user_directory;
   }
 }
 .icon-users {
