@@ -14,7 +14,7 @@
 @import 'templates/section-columns';
 
 $layout-header-height: 46px;
-$layout-nav-width: 190px;
+$layout-nav-width: 205px;
 $layout-nav-link-height: 47px; // works better as odd number
 $layout-nav-width-offset: 15px;
 
@@ -620,8 +620,7 @@ $color-grey-minor-1: $color-neutral-30;
     top: $layout-header-height;
     right: 0;
     bottom: 0;
-    left: $layout-nav-width + $layout-nav-width-offset;
-    background-color: $color-white;
+    left: $layout-nav-width;
     padding: 25px 40px 40px;
 
     .detail-primary-buttons {
