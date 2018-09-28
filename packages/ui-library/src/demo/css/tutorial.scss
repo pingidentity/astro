@@ -23,7 +23,7 @@
     }
 
     .table-of-contents {
-        margin: 25px 0 30px 5px;
+        margin: 0 0 $spacing-xl 5px;
         font-family: $font-pn-regular;
 
         &:before {
@@ -34,6 +34,8 @@
 
         ul {
             li {
+                margin: 0;
+
                 a {
                     font-size: 14px;
                 }
