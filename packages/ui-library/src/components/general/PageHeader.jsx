@@ -79,8 +79,8 @@ const PageHeader = ({
 PageHeader.propTypes = {
     "data-id": PropTypes.string,
     className: PropTypes.string,
-    title: PropTypes.string.isRequired,
-    subtitle: PropTypes.string,
+    title: PropTypes.node.isRequired,
+    subtitle: PropTypes.node,
     underlined: PropTypes.bool,
     accessories: PropTypes.node,
     image: PropTypes.string,
