@@ -240,7 +240,7 @@ $fullwidthBreakpoint: 950px;
     &--magenta {
         .dashboard-card__title-icon,
         .dashboard-card__stat-row-number,
-        .stat-area-card__value {
+        .stat-area-card__value, {
             color: $color-charting-magenta;
         }
         .dashboard-card__back-title,
@@ -505,3 +505,71 @@ $fullwidthBreakpoint: 950px;
         min-height: 295px;
     }
 }
+
+
+.horizontalBar-card {
+    &__title {
+        position: absolute;
+        font-size: 18px;
+        top: 19px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-transform: uppercase;
+        color: $color-neutral-10;
+    }
+
+    &__number-container {
+        display: block;
+        position: absolute;
+        top: 110px;
+        right: 10px;
+        hr {
+            border-width: 2px 0 0;
+        }
+    }
+
+    &__total-number {
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 54px;
+        color: $color-neutral-10;
+    }
+
+    &__label {
+        font-size: 18px;
+        text-align: center;
+        margin-bottom: 35px;
+        text-transform: uppercase;
+        color: $color-neutral-10;
+    }
+
+    &__drop-down {
+        display: flex;
+        justify-content: center;
+        top: -22px;
+        margin: inherit;
+    }
+
+    &__back-line {
+        margin: 20px 0 0;
+    }
+
+    .recharts-label {
+        fill: $color-neutral-10;
+    }
+
+    .recharts-surface {
+        padding-right: 100px;
+    }
+
+    .dashboard-card__front {
+        min-height: 307px;
+        padding-right: 230px;
+    }
+
+    .recharts-cartesian-axis-line {
+        stroke-width: 3px;
+    }
+
+}
+

@@ -1,61 +1,59 @@
-import React from "react";
-import { DonutCard, CardRow, DashboardCard } from "../../../../components/general/charting/Cards";
-import Checkbox from "../../../../components/forms/FormCheckbox";
+import React, { Component } from "react";
 import Layout from "ui-library/lib/components/general/ColumnLayout";
+import Checkbox from "../../../../components/forms/FormCheckbox";
+import { HorizontalBarCard, CardRow, DashboardCard } from "../../../../components/general/charting/Cards";
 
 /**
-* @name DonutCardDemo
-* @memberof DonutCard
-* @desc A demo for DonutCard
+* @name HorizontalBarCardDemo
+* @memberof HorizontalBarCard
+* @desc A demo for HorizontalBarCard
 */
 
-class DonutCardDemo extends React.Component {
+export default class HorizontalBarCardDemo extends Component {
 
-    options = [
-        { label: "Current", value: "1" },
-        { label: "30 DAYS", value: "2" },
-        { label: "60 DAYS", value: "3" },
-        { label: "90 DAYS", value: "4" },
-    ]
-
-    data = [
-        { id: "Enabled Users", value: 120543 , color: "#E12F51" },
-        { id: "Inactive Users", value: 51233, color: "#193967" },
-        { id: "Disabled Users", value: 20000, color: "#4C8DCA" },
+    mockData = [
+        { id: "Error 401", label: "401 Unauthorized", value: 2600 },
+        { id: "Error 402", label: "402 Payment Required", value: 1890 },
+        { id: "Error 403", label: "403 Forbidden", value: 3000 },
+        { id: "Error 404", label: "404 Not Found", value: 2000 },
+        { id: "Error 408", label: "405 Request Timeout", value: 3500 },
     ];
 
+    options = [
+        { label: "This Month", value: "1" },
+        { label: "This Hour", value: "2" },
+        { label: "Today", value: "3" },
+        { label: "This Week", value: "4" },
+    ]
+
     _sumTotal = () => {
-        return this.data.reduce((acc, { value }) => {
+        return this.mockData.reduce((acc, { value }) => {
             return acc + value;
         }, 0);
     }
 
     state = {
-        label: "Total Users",
+        label: "Api Errors",
         value: this._sumTotal(),
         selectedValue: this.options[0],
         loading: false
     }
 
     _onHover = (e, { id }) => {
-        const matchingData = this.data.find(data => {
+        const matchingData = this.mockData.find(data => {
             return id === data.id;
         });
         this.setState({
-            label: matchingData.id,
+            label: matchingData.label,
             value: matchingData.value,
         });
     }
 
     _onMouseOut = () => {
         this.setState({
-            label: "Total Users",
+            label: "Api Errors",
             value: this._sumTotal()
         });
-    }
-
-    _onMakeDefault = (val) => {
-        console.log(val);
     }
 
     _onSelect = (option) => {
@@ -76,8 +74,8 @@ class DonutCardDemo extends React.Component {
         });
     };
 
-    render () {
 
+    render () {
         return (
             <div>
                 <Layout.Row className="columns-width-auto">
@@ -97,28 +95,22 @@ class DonutCardDemo extends React.Component {
                     </Layout.Column>
                 </Layout.Row>
                 <CardRow>
-                    <DonutCard
-                        title={"User States"}
+                    <HorizontalBarCard
+                        data={this.mockData}
+                        title={"Api Error Rate"}
                         loading={this.state.loading}
                         errorMessage={this.state.errorMessage}
-                        data={this.data}
-                        sectorKey="id"
-                        sectorDataKey="value"
                         onMouseOver={this._onHover}
                         onMouseOut={this._onMouseOut}
-                        label={this.state.label}
-                        value={this.state.value}
-                        onMakeDefault={this._onMakeDefault}
-                        makeDefaultLabel={"Make Default View"}
                         options={this.options}
+                        value={this.state.value}
+                        label={this.state.label}
                         selectOption={this.state.selectedValue}
                         onSelect={this._onSelect}
                     />
-                    <DashboardCard size={2} />
-            </CardRow>
-        </div>
+                    <DashboardCard />
+                </CardRow>
+            </div>
         );
     }
 }
-
-export default DonutCardDemo;

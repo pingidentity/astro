@@ -808,7 +808,14 @@ module.exports = [
                         pathToDoc: "components/general/charting/HeatmapCard.jsx",
                         pathToSource: "components_general_charting_HeatmapCard.jsx.html",
                         pathToDemoSource: "demo_components_general_charting_HeatmapCardDemo.jsx.html"
-                    }
+                    },
+                    {
+                        label: "Horizontal Bar Card",
+                        demo: require("../components/general/charting/HorizontalBarCardDemo"),
+                        pathToDoc: "components/general/charting/HorizontalBarCard.jsx",
+                        pathToSource: "components_general_charting_HorizontalBarCard.jsx.html",
+                        pathToDemoSource: "demo_components_general_charting_HorizontalBarCardDemo.jsx.html"
+                    },
                 ]
             },
             {

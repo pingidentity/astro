@@ -122,7 +122,7 @@ class DashboardCard extends React.Component {
                             />
                         }
                     </div>,
-                    <div key="front" className="dashboard-card__front">{this.props.front}</div>,
+                    <div key="front" className="dashboard-card__front modifier_light-inputs">{this.props.front}</div>,
                     <div key="control" className="dashboard-card__control">
                         {!this.props.loading && this.props.back &&
                             <ViewToggle
