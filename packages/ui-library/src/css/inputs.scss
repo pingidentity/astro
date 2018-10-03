@@ -2112,7 +2112,7 @@ input[type=file] {
             right: -($message-input-offset);
         }
         .input-container {
-            width: calc(100% - $message-input-offset);
+            width: calc(100% - #{$message-input-offset});
         }
     }
     &.input-toggle {
