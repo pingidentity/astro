@@ -135,6 +135,11 @@ $color-grey-minor-1: $color-neutral-30;
         &.narrow {
             margin-top: 5px;
         }
+
+        [class^='icon-'],
+        [class*=' icon-'] {
+            display: none; // eliminate all icons for section titles in the old nav
+        }
     }
     .selected-item {
         @include transition(all 0.3s);
@@ -469,6 +474,11 @@ $color-grey-minor-1: $color-neutral-30;
                     background-color: $color-grey-main-1;
                     border-top: 1px solid shade($color-strong-neutral-10, 20%);
                     border-bottom: 1px solid $color-neutral-50;
+
+                    [class^='icon-'],
+                    [class*=' icon-'] {
+                        display: none;
+                    }
                 }
             }
 
@@ -488,6 +498,7 @@ $color-grey-minor-1: $color-neutral-30;
                 width: 30px;
                 margin: 0 -5px;
                 text-align: center;
+                display: block; // restore icons for section titles in new nav
             }
             &.open {
                 @include transition(background-color 0.2s);
