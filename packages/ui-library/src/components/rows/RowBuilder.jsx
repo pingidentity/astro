@@ -3,7 +3,6 @@ import propTypes from "prop-types";
 import classnames from "classnames";
 import Button from "../buttons/Button";
 import Link from "../general/Link";
-import { v4 } from "uuid";
 
 /**
  * @class Row Builder
@@ -26,6 +25,7 @@ import { v4 } from "uuid";
  *     Callback triggered when remove button is clicked. Passes back event and row ID.
  *
  */
+
 function RowBuilder({
     addLabel,
     className,
@@ -51,7 +51,7 @@ function RowBuilder({
         const hasRemoveLabel = showRemoveLabel && idx === 0;
 
         return (
-            <div className="row-builder__row" key={v4()}>
+            <div className="row-builder__row" key={id}>
                 {content}
                 <div
                     className={`row-builder__remove ${hasRemoveLabel ? "" : "row-builder__remove--no-label"}`}
