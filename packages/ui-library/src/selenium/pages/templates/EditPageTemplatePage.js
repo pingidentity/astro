@@ -1,57 +1,6 @@
 var HomePage = require("../HomePage.js");
-var EditViewModalDemoPage = Object.create(HomePage, {
+var EditPageDemoPage = Object.create(HomePage, {
 
-    /**
-     * @desc this section is to get xpath of elements
-     */
-    xpathButtonOpenDefaultModal: {
-        get: function () {
-            return "//button[@data-id='default-example-button']";
-        }
-    },
-
-    xpathDialogDefaultModal: {
-        get: function () {
-            return "//div[@data-id='default-example-modal']";
-        }
-    },
-
-    /**
-     * @desc this function is to check if button Open Default Modal existing
-     */
-    verifyButtonOpenDefaultModalExisting: {
-        value: function () {
-            return this.isExisting(this.xpathButtonOpenDefaultModal);
-        }
-    },
-
-    /**
-     * @desc this function is to click on button Open Default Modal
-     */
-    clickButtonOpenDefaultModal: {
-
-        value: function () {
-            this.click(this.xpathButtonOpenDefaultModal);
-        }
-    },
-
-    /**
-     * @desc this function is to wait for Dialog Default Modal exist
-     */
-    waitForDialogDefaultModalExist: {
-        value: function () {
-            this.waitForExist("//div[@data-id='default-example-modal']");
-        }
-    },
-
-    /**
-     * @desc this function is to check if Dialog Default Modal existing
-     */
-    verifyDialogDefaultModalExisting: {
-        value: function () {
-            return this.isExisting(this.xpathDialogDefaultModal);
-        }
-    },
 
     /**
      * @desc this function is to get First Name
@@ -62,10 +11,10 @@ var EditViewModalDemoPage = Object.create(HomePage, {
         }
     },
 
-    /*
-    * @desc this function is to set FirstName Value
-    * @param {string} inputValue - the firstname to set
-    */
+    /**
+     * @desc this function is to set FirstName Value
+     * @param {string} inputValue - the firstname to set
+     */
     setFirstNameValue: {
         value: function (inputValue) {
             this.getFirstName.setValue(inputValue);
@@ -160,7 +109,7 @@ var EditViewModalDemoPage = Object.create(HomePage, {
 
     /**
      * @desc this function is to select Address Location
-     * @param {string} inputValue - the address to set
+     * @param {string} valueOption - value for select box
      */
     selectAddressLocation: {
         value: function (valueOption) { //eslint-disable-line no-unused-vars
@@ -172,7 +121,7 @@ var EditViewModalDemoPage = Object.create(HomePage, {
 
     /**
      * @desc this function is to select Alternate Address Location
-     * @param {string} inputValue - the address to set
+     * @param {string} valueOption - value for select box
      */
     selectAlternateAddressLocation: {
         value: function (valueOption) { //eslint-disable-line no-unused-vars
@@ -194,39 +143,11 @@ var EditViewModalDemoPage = Object.create(HomePage, {
     },
 
     /**
-     * @desc this function is to click on Checkbox Active User
-     */
-    clickCheckboxActiveUser: {
-        value: function () {
-            this.click("//input[@data-id='userActive']/following-sibling::div");
-        }
-    },
-
-    /**
-     * @desc this function is to click on icon close of dialog
-     */
-    clickIconCloseDialog: {
-        value: function () {
-            this.click("//span[@data-id='close-button']");
-        }
-    },
-
-    /**
-     * @desc this function is to scroll down the dialog
-     * @param {number} number - offset to scroll (pixel)
-     */
-    scrollDownDialog: {
-        value: function (number) {
-            this.scrollElementToTop(this.xpathDialogDefaultModal, number);
-        }
-    },
-
-    /**
      * @desc this function is to click on Cancel button
      */
     clickButtonCancel: {
         value: function () {
-            this.click("//button[@data-id='button-bar-cancel']");
+            this.click("//input[@value='Discard Changes']");
         }
     },
 
@@ -235,19 +156,29 @@ var EditViewModalDemoPage = Object.create(HomePage, {
      */
     clickButtonSave: {
         value: function () {
-            this.click("//button[@data-id='button-bar-save']");
+            this.click("//input[@value='Save']");
         }
     },
 
     /**
-     * @desc this function is to open template Edit View Collapsible
+     * @desc this function is to scroll down the page
+     * @param {string} y - the offset to scroll
      */
-    openEditViewModalDemoPage: {
+    scrollDownPage: {
+        value: function (y) {
+            this.scrollElementToTop("//div[@id='content']", y);
+        }
+    },
+
+    /**
+     * @desc this function is to open template Edit View Sectioned
+     */
+    EditPageDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Templates", "EditView", "EditViewModal");
+            this.navigateToPath("Templates", "EditPage", "EditPage");
         }
     }
 });
 
-module.exports = EditViewModalDemoPage;
+module.exports = EditPageDemoPage;
