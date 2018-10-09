@@ -788,6 +788,13 @@ module.exports = [
                         pathToSource: "components_general_charting_DonutCard.jsx.html",
                         pathToDemoSource: "demo_components_general_charting_DonutCardDemo.jsx.html"
                     },
+                    {
+                        label: "Heatmap Card",
+                        demo: require("../components/general/charting/HeatmapCardDemo"),
+                        pathToDoc: "components/general/charting/HeatmapCard.jsx",
+                        pathToSource: "components_general_charting_HeatmapCard.jsx.html",
+                        pathToDemoSource: "demo_components_general_charting_HeatmapCardDemo.jsx.html"
+                    }
                 ]
             },
             {

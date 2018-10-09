@@ -387,6 +387,23 @@ var Utils = {
     isHandheldDevice: function () {
         var uas = navigator.userAgent;
         return /Mobi/.test(uas) || /Android/.test(uas);
+    },
+
+    /**
+     * @alias module:util/Utils.isHandheldDevice
+     * @desc Converts hex colors to rgb
+     *
+     * @return {boolean}
+     *    Return true if a phone or tablet device
+     *    Ref: https://webmasters.googleblog.com/2011/03/mo-better-to-also-detect-mobile-user.html
+     */
+    HexToRgba: function (hex, alpha) {
+        const hexr = hex.replace("#", "");
+        const r = parseInt(hexr.substring(0, 2), 16);
+        const g = parseInt(hexr.substring(2, 4), 16);
+        const b = parseInt(hexr.substring(4, 6), 16);
+
+        return `rgba(${r}, ${g}, ${b}, ${alpha >= 0 ? alpha : 1})`;
     }
 };
 module.exports = Utils;

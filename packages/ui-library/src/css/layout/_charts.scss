@@ -109,3 +109,77 @@
         }
     }
 }
+
+.heatmap {
+    $cell-size: 20px;
+
+    display: inline-block;
+    text-align: center;
+
+    &__row {
+        display: table-row;
+    }
+
+    .help-tooltip,
+    &__xlabel,
+    &__ylabel,
+    &__spacer {
+        display: table-cell;
+        border-style: solid;
+        border-width: 0 1px 1px 0;
+    }
+
+    .help-tooltip {
+        position: relative;
+        height: $cell-size;
+        width: $cell-size;
+        border-color: $color-white;
+    }
+
+    &__xlabel,
+    &__ylabel,
+    &__spacer {
+        font-size: 12px;
+        text-align: center;
+        line-height: 1em;
+        border-color: $color-white;
+        background-color: $color-white;
+    }
+
+    &__xlabel {
+        padding: 0 0 5px;
+    }
+
+    &__ylabel {
+        padding: 0 15px 0 0;
+        line-height: $cell-size;
+    }
+
+    &__cell-color,
+    .help-tooltip-target {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    &__tooltip {
+        text-align: center;
+
+        &-label {
+            font-size: 11px;
+            line-height: 1em;
+        }
+        &-value {
+            font-size: 23px;
+            line-height: 1em;
+            font-family: $font-pn-semibold;
+            margin: 3px 0 0;
+        }
+        &-subtitle {
+            font-size: 11px;
+            line-height: 1em;
+        }
+    }
+}

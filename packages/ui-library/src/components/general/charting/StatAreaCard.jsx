@@ -40,8 +40,9 @@ import _ from "underscore";
  * @param {function} [onMakeDefault]
  *    Callback triggered when the make-default checkbox is changed.  When provided a checkbox will render on the back
  *    of the card.
- * @param {object} rockerButtonProps
- *    An object containing the props passed to the range-selector RockerButton component
+ * @param {object} [rockerButtonProps]
+ *     An optional object containing the props passed to the range-selector RockerButton component. This may be used
+ *     to have greater control over the chart range selector.
  * @param {string} [subTitle]
  *    Subtitle of the card. Displayed on the front of the card below the title and value.
  * @param {string} [title]

@@ -18,6 +18,18 @@ var Placements = {
     RIGHT: "right"
 };
 
+/**
+ * @enum {string}
+ * @alias HelpHint.Types
+ */
+var Types = {
+    DEFAULT: "",
+    ERROR: "error",
+    LIGHT: "light",
+    SUCCESS: "success",
+    WARNING: "warning",
+};
+
 
 /**
  * @class HelpHint
@@ -27,7 +39,7 @@ var Placements = {
  *         'right': tooltip displays to the left of the icon instead of the right
  *         'bottom': tooltip displays under the help icon instead of above
  *         'show': keeps tooltip visible regardless of hover
- *     The following css classes maybe added to change the appearace of the tooltip:
+ *     The following css classes maybe added to change the appearance of the tooltip:
  *         'error'/'warning': tooltip shows in red
  *         'success': tooltip shows in green
  *     Multiple rows of text are supported.
@@ -105,6 +117,10 @@ class HelpHint extends React.Component {
         return placement;
     };
 
+    _getTypeClass = () => {
+        return this.props.type ? `help-tooltip--${this.props.type}` : null;
+    }
+
     componentWillMount() {
         if (!Utils.isProduction() && this.props.id) {
             throw new Error(Utils.deprecatePropError("id", "data-id"));
@@ -141,7 +157,6 @@ class HelpHint extends React.Component {
         ReactTooltip.show(this.target);
     };
 
-    targetClassName = classnames(this.props.className, "help-tooltip-target");
     tooltipClassName = this.props.link ? classnames("tooltip-text", "tooltip-text-link") : "tooltip-text";
 
     render() {
@@ -156,8 +171,10 @@ class HelpHint extends React.Component {
                 ? children
                 : <span className={iconName} data-id={dataId + "-icon"} />;
 
+        const containerClassNames = classnames("help-tooltip", this._getTypeClass());
+
         return (
-            <div className="help-tooltip" data-id={dataId}>
+            <div className={containerClassNames} data-id={dataId}>
                 <div
                     data-id={dataId + "-target"}
                     className={classnames(this.props.className, "help-tooltip-target")}
@@ -185,3 +202,4 @@ class HelpHint extends React.Component {
 
 module.exports = HelpHint;
 module.exports.Placements = Placements;
+module.exports.Types = Types;

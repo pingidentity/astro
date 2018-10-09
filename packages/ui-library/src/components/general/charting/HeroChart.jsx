@@ -34,8 +34,9 @@ import _ from "underscore";
 *     The optional text to display below the loading spinner
 * @param {object} onValueChange
 *     The function called whenever the date range changes
-* @param {object} rockerButtonProps
-*     An object containing the props passed to the range-selector RockerButton component
+* @param {object} [rockerButtonProps]
+*     An optional object containing the props passed to the range-selector RockerButton component. This may be used
+*     to have greater control over the chart range selector.
 * @param {string} selected
 *     A string containing the id of the currently selected date range
 * @param {string} subtitle
@@ -224,7 +225,7 @@ const HeroChart = ({
             }
             {errorMessage &&
                 <div className="hero-chart__error">
-                <div className="icon-cogs hero-chart__error-icon" />
+                    <div className="icon-cogs hero-chart__error-icon" />
                     <div className="hero-chart__error-text">
                         {errorMessage}
                     </div>

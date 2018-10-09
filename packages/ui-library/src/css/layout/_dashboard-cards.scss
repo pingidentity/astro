@@ -443,3 +443,64 @@ $fullwidthBreakpoint: 950px;
         top: 10px;
     }
 }
+
+.heatmap-card {
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+
+    &__chart,
+    &__data {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    &__data {
+        margin: 0 0 15px $spacing-xl;
+        color: $color-neutral-10;
+        white-space: initial;
+    }
+
+    &__chart-title {
+        margin: 0 0 $spacing-sm;
+        color: $color-neutral-10;
+        font-size: 18px;
+        text-transform: uppercase;
+    }
+
+    &__title {
+        font-size: 18px;
+        line-height: 18px;
+        border-bottom: 2px solid $color-neutral-10;
+        margin: 0 0 $spacing-sm;
+        padding: 0 0 $spacing-sm;
+        width: 100%;
+    }
+    &__value,
+    &__subtitle {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    &__value {
+        font-size: 54px;
+        line-height: 54px;
+        font-family: $font-pn-semibold;
+        text-align: right;
+    }
+    &__subtitle {
+        font-size: 18px;
+        line-height: 1.3em;
+        text-transform: uppercase;
+        text-align: left;
+        padding: 0 0 0 $spacing-sm;
+    }
+
+    &__range-selector {
+        margin: $spacing-lg 0 0;
+    }
+
+    .dashboard-card__front {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}

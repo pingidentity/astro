@@ -175,7 +175,6 @@ describe("Utils", function () {
         });
     });
 
-
     describe("browserTest", function () {
         //user agents from http://useragentstring.com/pages/useragentstring.php
         var browsers = [
@@ -315,10 +314,28 @@ describe("Utils", function () {
                     Version/6.0 Mobile/10A5376e Safari/8536.25";
             });
             expect(Utils.isHandheldDevice()).toBe(true);
+        });
 
+        it("converts hex colors to rgb colors", function () {
+            [
+                { hex: "#000000", r: 0, g: 0, b: 0 },
+                { hex: "#FFFFFF", r: 255, g: 255, b: 255 },
+                { hex: "#FF0000", r: 255, g: 0, b: 0 },
+                { hex: "#00FF00", r: 0, g: 255, b: 0 },
+                { hex: "#0000FF", r: 0, g: 0, b: 255 },
+                { hex: "#990000", r: 153, g: 0, b: 0 },
+                { hex: "#009900", r: 0, g: 153, b: 0 },
+                { hex: "#000099", r: 0, g: 0, b: 153 },
 
+            ].map(color => {
+                let alpha;
 
+                alpha = 1;
+                expect(Utils.HexToRgba(color.hex, alpha)).toBe(`rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`);
 
+                alpha = 0.5;
+                expect(Utils.HexToRgba(color.hex, alpha)).toBe(`rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`);
+            });
         });
     });
 });

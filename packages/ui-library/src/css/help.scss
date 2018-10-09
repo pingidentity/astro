@@ -45,11 +45,10 @@
         max-width: 400px;
         pointer-events: auto !important;
 
+        @include bg-styles($color-midnight);
+
         &.show {
             @include opacity(1);
-        }
-        &.type-dark {
-            @include bg-styles($color-midnight);
         }
         &.tooltip-text-link {
             &:hover {
@@ -125,9 +124,19 @@
     &:hover [class^='icon-'] {
         color: $color-accent-neutral-10;
     }
-    &.warning {
+
+    &--warning {
         .tooltip-text {
             @include bg-styles($color-critical-red);
+        }
+    }
+
+    &--light {
+        .tooltip-text {
+            color: $color-accent-neutral-10;
+
+            @include bg-styles($color-white);
+            @include box-shadow(0 3px 4px 0 rgba($color-black, 0.1));
         }
     }
 }
