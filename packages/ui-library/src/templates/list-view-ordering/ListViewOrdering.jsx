@@ -144,7 +144,7 @@ module.exports = class extends React.Component {
                         </div>
                     </Pagination>
                 ) || (
-                    <div>No rows returned</div>
+                    <div className="result-set">No rows returned</div>
                 )}
 
             </div>

@@ -1,5 +1,5 @@
 var HomePage = require("../HomePage.js");
-var ListViewPaginatedDemoPage = Object.create(HomePage, {
+var PaginatedListDemoPage = Object.create(HomePage, {
 
 
     /**
@@ -27,24 +27,6 @@ var ListViewPaginatedDemoPage = Object.create(HomePage, {
     clickOpenFilters: {
         value: function () {
             this.click("//span[@data-id='searchbar-filter-link']");
-        }
-    },
-
-    /**
-     * @desc this function is to click on check box Filter Odd Rows
-     */
-    clickCheckboxFilterOddRows: {
-        value: function () {
-            this.click("//label[1]/input[@data-id='form-checkbox']/following-sibling::div");
-        }
-    },
-
-    /**
-     * @desc this function is to click on check box Filter Even Rows
-     */
-    clickCheckboxFilterEvenRows: {
-        value: function () {
-            this.click("//label[2]/input[@data-id='form-checkbox']/following-sibling::div");
         }
     },
 
@@ -98,14 +80,14 @@ var ListViewPaginatedDemoPage = Object.create(HomePage, {
     },
 
     /**
-     * @desc this function open the List View Paginated template
+     * @desc this function open the Paginated List template
      */
-    openListViewPaginatedDemoPage: {
+    openPaginatedListDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Templates", "ListView", "ListViewPaginated");
+            this.navigateToPath("Templates", "ListView", "PaginatedList");
         }
     }
 });
 
-module.exports = ListViewPaginatedDemoPage;
+module.exports = PaginatedListDemoPage;

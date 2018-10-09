@@ -151,7 +151,7 @@ module.exports = class extends React.Component {
                             hasPrev={this.props.hasPrev}
                             onLoadNext={_.noop}
                             onLoadPrev={_.noop} >
-                        <div>Hello</div>
+                        <div className="result-set">No rows returned</div>
                     </InfiniteScroll>
                 </div>
             </div>

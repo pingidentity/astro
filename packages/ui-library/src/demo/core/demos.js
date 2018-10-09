@@ -960,21 +960,22 @@ module.exports = [
                         fullscreen: true
                     },
                     {
-                        label: "List View - Paginated",
-                        demo: require("../components/templates/ListViewPaginatedDemo"),
-                        pathToDoc: "components/templates/ListViewPaginated.jsx",
-                        pathToSource: "templates_list-view-paginated_ListViewPaginated.jsx.html",
-                        pathToDemoSource: "demo_components_templates_ListViewPaginatedDemo.jsx.html",
-                        fullscreen: true
-                    },
-                    {
                         label: "List View - Ordering",
                         demo: require("../components/templates/ListViewOrderingDemo"),
                         pathToDoc: "components/templates/ListViewOrdering.jsx",
                         pathToSource: "templates_list-view-paginated_ListViewOrdering.jsx.html",
                         pathToDemoSource: "demo_components_templates_ListViewOrderingDemo.jsx.html",
                         fullscreen: true
-                    }
+                    },
+                    {
+                        label: "Paginated List",
+                        demo: require("../components/templates/PaginatedListDemo"),
+                        pathToDoc: "components/templates/PaginatedList.jsx",
+                        pathToSource: "templates_paginated-list_PaginatedList.jsx.html",
+                        pathToDemoSource: "demo_components_templates_PaginatedListDemo.jsx.html",
+                        fullscreen: true,
+                        icon: "directory-hollow",
+                    },
                 ]
             },
             {
