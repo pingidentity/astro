@@ -1,104 +1,78 @@
-var React = require("react"),
-    FormTextField = require("../../../components/forms/form-text-field"),
-    ValidationMessages = require("./../../../components/forms/ValidationMessages");
+import React from "react";
+import FormTextField from "../../../components/forms/form-text-field";
+import ValidationMessages from "./../../../components/forms/ValidationMessages";
+
+
+const _testLength = (value) => {
+    return value && value.length > 5 ? ValidationMessages.Status.PASS : ValidationMessages.Status.FAIL;
+};
+
+const _testNumbers = (value) => {
+    return /[0-9]/.test(value) ? ValidationMessages.Status.PASS : ValidationMessages.Status.FAIL;
+};
+
+const _testUppercase = (value) => {
+    return /[A-Z]/.test(value) ? ValidationMessages.Status.PASS : ValidationMessages.Status.FAIL;
+};
+
+const _getMessages = (value) => {
+    return [
+        { text: "At least 6 characters", status: _testLength(value) },
+        { text: "1 number", status: _testNumbers(value) },
+        { text: "1 UPPERCASE letter", status: _testUppercase(value) },
+    ];
+};
 
 class ValidationMessagesDemo extends React.Component {
     state = {
-        statelessValue1: "",
-        statelessValue2: "",
-        messages1: [
-                { text: "At least 6 characters", status: ValidationMessages.Status.FAIL },
-                { text: "1 number", status: ValidationMessages.Status.FAIL },
-                { text: "1 UPPERCASE letter", status: ValidationMessages.Status.FAIL }
-        ],
+        messages1: _getMessages(),
         messages2: [],
-        showValidateMessages: ""
+        showValidateMessages: "",
     };
 
-    _getLength = (value) => {
-        var status;
-        if (value.length > 5) {
-            status = ValidationMessages.Status.PASS;
-        }
-        else {
-            status = ValidationMessages.Status.FAIL;
-        }
-        return status;
-    };
-
-    _getNumbers = (value) => {
-        var status;
-        if (/[0-9]/.test(value)) {
-            status = ValidationMessages.Status.PASS;
-        }
-        else {
-            status = ValidationMessages.Status.FAIL;
-        }
-        return status;
-    };
-
-    _getUppercase = (value) => {
-        var status;
-        if (/[A-Z]/.test(value)) {
-            status = ValidationMessages.Status.PASS;
-        }
-        else {
-            status = ValidationMessages.Status.FAIL;
-        }
-        return status;
-    };
-
-    _getMessages = (value) => {
-        var messages = [
-                { text: "At least 6 characters", status: this._getLength(value) },
-                { text: "1 number", status: this._getNumbers(value) },
-                { text: "1 UPPERCASE letter", status: this._getUppercase(value) }
-        ];
-        return messages;
-    };
-
-    _handleStatelessValueChange1 = (value) => {
-        var messages = this._getMessages(value);
+    _handleValueChange1 = (value) => {
         this.setState({
-            messages1: messages
+            messages1: _getMessages(value)
         });
     };
 
-    _handleStatelessValueChange2 = (value) => {
-        var messages = this._getMessages(value);
+    _handleValueChange2 = (value) => {
         this.setState({
-            messages2: messages,
+            messages2: _getMessages(value),
             showValidateMessages: "show"
         });
     };
 
     render() {
-
         return (
             <div>
                 <div className="input-row">
                     <FormTextField
-                        labelText="Password field with validation messages showing at the beginning."
                         className="input-width-medium"
+                        labelText="Validation always visible"
+                        onValueChange={this._handleValueChange1}
                         maskValue={true}
                         showReveal={true}
-                        onValueChange={this._handleStatelessValueChange1}
-                        className="input-width-medium"
+                        stateless={false}
                     />
-                    <ValidationMessages className="show"
-                                        messages={this.state.messages1} />
+                    <ValidationMessages
+                        className="show"
+                        messages={this.state.messages1}
+                    />
                 </div>
                 <div className="input-row">
                     <FormTextField
-                        labelText="Password field with validation messages that shows after first letter is typed."
                         className="input-width-medium"
+                        labelText="Validation only visibile when required"
                         maskValue={true}
+                        onValueChange={this._handleValueChange2}
                         showReveal={true}
-                        onValueChange={this._handleStatelessValueChange2}
-                        className="input-width-medium"
+                        stateless={false}
                     />
-                    <ValidationMessages className={this.state.showValidateMessages}
-                                        messages={this.state.messages2} />
+                    <ValidationMessages
+                        className={this.state.showValidateMessages}
+                        messages={this.state.messages2}
+                    />
                 </div>
             </div>
         );
