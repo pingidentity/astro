@@ -1,0 +1,214 @@
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import { isFunction, isString, noop } from "underscore";
+import Button from "../../buttons/Button";
+import Icon from "../../general/Icon";
+
+export const buttonTypes = {
+    ADD: "add",
+    REMOVE: "remove"
+};
+
+const baseClassName = "column-selector__row";
+
+export const RowButton = ({
+    buttonType,
+    dataId = `${baseClassName}-button`,
+    expandable,
+    onClick
+}) => (
+    <Button
+        className={classnames(
+            `${baseClassName}-button`,
+            `${baseClassName}-button${expandable ? "--expandable" : ""}`
+        )}
+        data-id={`${dataId}-button`}
+        iconName={buttonType === buttonTypes.ADD ? "plus" : "minus"}
+        inline
+        onClick={onClick}
+    />
+);
+
+export const RowTitle = ({
+    children
+}) => (
+    <div className={`${baseClassName}-title`}>
+        {children}
+    </div>
+);
+
+RowButton.propTypes = {
+    buttonType: PropTypes.oneOf([
+        buttonTypes.ADD,
+        buttonTypes.REMOVE
+    ]),
+    "data-id": PropTypes.string,
+    expandable: PropTypes.bool,
+    onClick: PropTypes.func
+};
+
+RowButton.defaultProps = {
+    "data-id": `column-selector-row-button`
+};
+
+export default class ColumnSelectorRow extends Component {
+    static propTypes = {
+        buttonType: PropTypes.oneOf([
+            buttonTypes.ADD,
+            buttonTypes.REMOVE
+        ]),
+        className: PropTypes.string,
+        customButton: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+        "data-id": PropTypes.string,
+        expandable: PropTypes.bool,
+        id: PropTypes.string,
+        onButtonClick: PropTypes.func,
+        onToggle: PropTypes.func,
+        open: PropTypes.oneOf([
+            true,
+            false,
+            "initial"
+        ]),
+        subtitle: PropTypes.string,
+        title: PropTypes.node
+    }
+
+    static defaultProps = {
+        children: noop,
+        className: "",
+        "data-id": "column-selector-row",
+        expandable: false,
+        onButtonClick: noop,
+        onToggle: noop
+    }
+
+    state = {
+        open: (this.props.open === true || this.props.open === "initial") || false
+    }
+
+    _handleButtonClick = e => {
+        // Stop propagation to avoid triggering click on parent components. May be null based
+        // on custom button implementation
+        if (e) {
+            e.stopPropagation();
+            e.persist();
+        }
+
+        this.props.onButtonClick({
+            id: this.props.id,
+            event: e
+        });
+    }
+
+    _handleToggleOpen = e => {
+        e.persist();
+
+        const {
+            id,
+            onToggle
+        } = this.props;
+
+        const payload = {
+            event: e,
+            id,
+            open: this.state.open
+        };
+
+        if (this.props.open === undefined || this.props.open === "initial") {
+            this.setState(({ open }) => ({ open: !open }), () => onToggle(payload));
+        } else {
+            onToggle(payload);
+        }
+    }
+
+    _renderCustomButton = button =>
+        isFunction(button)
+            ? button({ handleOnButtonClick: this._handleButtonClick })
+            : button
+
+    render() {
+        const {
+            buttonType,
+            children,
+            className,
+            customButton,
+            "data-id": dataId,
+            draggable,
+            expandable,
+            subtitle,
+            title,
+            titleIcon
+        } = this.props;
+
+        const renderedChildren = children(this.state);
+
+        const expandableOpen = expandable && this.state.open;
+
+        return (
+            <div
+                className={
+                    classnames(
+                        baseClassName,
+                        className,
+                        {
+                            [`${baseClassName}--open`]: expandableOpen,
+                            [`${baseClassName}--closed`]: expandable && !this.state.open
+                        }
+                    )}
+                data-id={dataId}
+            >
+                <div
+                    className={
+                        classnames(
+                            `${baseClassName}-content`,
+                            {
+                                [`${baseClassName}-content--open`]: expandableOpen
+                            }
+                        )
+                    }
+                    onClick={this._handleToggleOpen}
+                >
+                    {expandable &&
+                        <Icon
+                            className={`${baseClassName}-toggle`}
+                            data-id={`${dataId}-toggle`}
+                            iconName={this.state.open ? "close-arrow" : "dropdown-arrow"}
+                        />
+                    }
+                    {!expandable &&
+                        <div className={`${baseClassName}-title-icon`}>
+                            {titleIcon &&
+                                <Icon
+                                    iconName={titleIcon}
+                                />
+                            }
+                        </div>
+                    }
+                    <div className={`${baseClassName}-titles`}>
+                        {isString(title) ? <RowTitle>{title}</RowTitle> : title}
+                        {subtitle &&
+                            <div className={`${baseClassName}-subtitle`}>
+                                {subtitle}
+                            </div>
+                        }
+                    </div>
+                    {
+                        !draggable && (this._renderCustomButton(customButton) ||
+                            <RowButton
+                                buttonType={buttonType}
+                                expandable={expandable}
+                                onClick={this._handleButtonClick}
+                            />
+                        )
+                    }
+                </div>
+                {renderedChildren &&
+                    <div className={`${baseClassName}-options`}>
+                        {renderedChildren}
+                    </div>
+                }
+            </div>
+        );
+    }
+}

@@ -1,16 +1,15 @@
 "use strict";
 
-var PropTypes = require("prop-types");
-var React = require("react");
-var ReactDOM = require("react-dom");
-var dnd = require("react-dnd");
-var classnames = require("classnames");
-var dragSource = dnd.DragSource;
-var dropTarget = dnd.DropTarget;
-var TYPE = "DragDrop";
-var _= require("underscore");
+import PropTypes from "prop-types";
+import React from "react";
+import ReactDOM from "react-dom";
+import { DragSource, DropTarget } from "react-dnd";
+import classnames from "classnames";
+import _ from "underscore";
 
-var dragSpec = {
+const TYPE = "DragDrop";
+
+const dragSpec = {
     beginDrag: function (props, monitor, component) {//eslint-disable-line
         props.onDragStart && props.onDragStart();//eslint-disable-line
         return {
@@ -33,34 +32,36 @@ var dragSpec = {
     },
 };
 
-var dragCollect = function (connect, monitor) {
+const dragCollect = function (connect, monitor) {
     return {
         connectDragSource: connect.dragSource(),
         isDragging: monitor.isDragging(),
     };
 };
 
-var isInTopHalf = function (monitor, node, dragToEdge) {
-    var boundingRect = node.getBoundingClientRect();
-    var clientOffset = monitor.getClientOffset();
-    var ownMiddleY = (boundingRect.bottom - boundingRect.top) / 2;
+const isInTopHalf = function (monitor, node, dragToEdge) {
+    const boundingRect = node.getBoundingClientRect();
+    const {
+        y = 0
+    } = monitor.getClientOffset() || {};
+    const ownMiddleY = (boundingRect.bottom - boundingRect.top) / 2;
 
-    return (clientOffset.y - boundingRect.top) <= (ownMiddleY * (dragToEdge ? 2 : 1));
+    return (y - boundingRect.top) <= (ownMiddleY * (dragToEdge ? 2 : 1));
 };
-var isInLeftHalf = function (monitor, node, dragToEdge) {
-    var boundingRect = node.getBoundingClientRect();
-    var clientOffset = monitor.getClientOffset();
-    var ownMiddleX = (boundingRect.right - boundingRect.left) / 2;
+const isInLeftHalf = function (monitor, node, dragToEdge) {
+    const boundingRect = node.getBoundingClientRect();
+    const clientOffset = monitor.getClientOffset();
+    const ownMiddleX = (boundingRect.right - boundingRect.left) / 2;
 
     return (clientOffset.x - boundingRect.left) <= (ownMiddleX * (dragToEdge ? 2 : 1));
 };
 
 
 function handleDragEvent (callback, props, monitor, component) {
-    var renderedNode = ReactDOM.findDOMNode(component);
-    var itemBeingDragged = monitor.getItem();
-    var locationType = props.type === "column" ? isInLeftHalf : isInTopHalf;
-    var offset = locationType(monitor, renderedNode, props.dragToEdge) ? 0 : 1;
+    const renderedNode = ReactDOM.findDOMNode(component);
+    const itemBeingDragged = monitor.getItem();
+    const locationType = props.type === "column" ? isInLeftHalf : isInTopHalf;
+    const offset = locationType(monitor, renderedNode, props.dragToEdge) ? 0 : 1;
     if (props[callback]) {
         props[callback](props.index + offset, itemBeingDragged.index, props.column, itemBeingDragged.column);
     }
@@ -72,7 +73,7 @@ function handleDragEvent (callback, props, monitor, component) {
     }
 }
 
-var dropSpec = {
+const dropSpec = {
     /*
      * @param {object} props - the properties of the target row
      * @param {object} monitor - the monitor object:
@@ -85,7 +86,7 @@ var dropSpec = {
     drop: handleDragEvent.bind(null, "onDrop")
 };
 
-var dropCollect = function (connect, monitor) {
+const dropCollect = function (connect, monitor) {
     return {
         connectDropTarget: connect.dropTarget(),
         dropTarget: monitor.isOver(),
@@ -155,7 +156,7 @@ var dropCollect = function (connect, monitor) {
  *  </Draggable>
  *
  */
-class DragDrop extends React.Component {
+class DragDropBase extends React.Component {
     static propTypes = {
         connectDragSource: PropTypes.func.isRequired,
         connectDropTarget: PropTypes.func.isRequired,
@@ -163,7 +164,10 @@ class DragDrop extends React.Component {
         dropTarget: PropTypes.bool.isRequired,
 
         id: PropTypes.any.isRequired,
-        index: PropTypes.number.isRequired,
+        index: PropTypes.oneOfType([
+            PropTypes.number,
+            PropTypes.string
+        ]).isRequired,
         onDrag: PropTypes.func,
         onDrop: PropTypes.func.isRequired,
         onCancel: PropTypes.func,
@@ -193,25 +197,34 @@ class DragDrop extends React.Component {
     state = {}
 
     render() {
-        var connectDragSource = this.props.connectDragSource;
-        var connectDropTarget = this.props.connectDropTarget;
-        var opacity = this.props.isDragging ? 0.2 : 1;
+        const {
+            className,
+            connectDragSource,
+            connectDropTarget,
+            dropTarget,
+            isDragging
+        } = this.props;
 
-        const draggingClass = this.props.className ? this.props.className + "--is-dragging" : "";
-        const dropTargetClass = this.props.className ? this.props.className + "--drop-target" : "";
-        const dropTargetAfterClass = this.props.className ? this.props.className + "--drop-target-after" : "";
+        const opacity = this.props.isDragging ? 0.2 : 1;
 
-        var rowProps = {
-            className: classnames("drag-drop-item", this.props.className, {
-                [draggingClass]: this.props.isDragging,
-                [dropTargetClass]: this.props.dropTarget && !this.props.isDragging,
-                [dropTargetAfterClass]: this.props.dropTarget && !this.props.isDragging && this.props.dropAfter,
+        const draggingClass = className ? className + "--is-dragging" : "";
+        const dropTargetClass = className ? className + "--drop-target" : "";
+        const dropTargetAfterClass = className ? className + "--drop-target-after" : "";
+
+        const rowProps = {
+            className: classnames("drag-drop-item", className, {
+                [draggingClass]: isDragging,
+                [dropTargetClass]: dropTarget && !isDragging,
+                [dropTargetAfterClass]: dropTarget && !isDragging && this.props.dropAfter,
             }),
             "data-id": "drag-drop-item",
-            style: _.clone(_.extend(this.props.style, { opacity: opacity }))
+            style: {
+                ...this.props.style,
+                opacity
+            }
         };
 
-        var row = (React.createElement(this.props.tagName, rowProps, this.props.children));
+        const row = (React.createElement(this.props.tagName, rowProps, this.props.children));
 
         // IE must have a drop target even if dragging is disabled.  Enabling after the first render has no effect.
         return this.props.removeDraggableAttribute
@@ -220,14 +233,13 @@ class DragDrop extends React.Component {
     }
 }
 
-DragDrop = dropTarget(TYPE, dropSpec, dropCollect)(
-    dragSource(TYPE, dragSpec, dragCollect)(DragDrop)
+const DragDrop = DropTarget(TYPE, dropSpec, dropCollect)(
+    DragSource(TYPE, dragSpec, dragCollect)(DragDropBase)
 );
 
-//expose these functions for unit tests
 DragDrop.dropSpec = dropSpec;
 DragDrop.dragSpec = dragSpec;
 DragDrop.isInTopHalf = isInTopHalf;
 DragDrop.isInLeftHalf = isInLeftHalf;
 
-module.exports = DragDrop;
+export default DragDrop;

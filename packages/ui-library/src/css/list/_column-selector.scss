@@ -1,0 +1,164 @@
+.column-selector {
+    &__search {
+        width: 100%;
+
+        & .search {
+            width: 50%;
+        }
+    }
+
+    &__columns {
+        display: inline-flex;
+        width: 100%;
+    }
+
+    &__column {
+        flex-grow: 1;
+        width: 50%;
+
+        &:first-of-type {
+            margin-right: $spacing-md;
+        }
+
+        &:not(:first-of-type) {
+            margin-left: $spacing-md;
+        }
+    }
+
+    &__column-children {
+        border-top: 1px solid $color-neutral-80;
+        margin-top: $spacing-sm;
+        padding-top: $spacing-md;
+    }
+
+    &__column-subtitle {
+        color: $color-accent-neutral-40;
+        font-size: 12px;
+        margin-left: $spacing-sm;
+        text-transform: none;
+    }
+
+    &__column-title {
+        color: $color-accent-neutral-20;
+        display: inline-flex;
+        margin-right: $spacing-sm;
+        text-transform: uppercase;
+
+        & > :not(:first-child) {
+            margin-left: $spacing-sm;
+        }
+    }
+
+    &__drop-placeholder {
+        height: 100%;
+        width: 100%;
+    }
+
+    &__row {
+        background-color: $color-white;
+        border: 1px solid $color-neutral-80;
+        cursor: pointer;
+        margin-bottom: $spacing-md;
+        padding: $spacing-sm;
+
+        &--open,
+        &--closed {
+            position: relative;
+
+            &:last-child {
+                border: 1px solid $color-neutral-80;
+            }
+
+            &:hover {
+                border-color: $color-neutral-50;
+            }
+        }
+
+        &--open {
+            padding-bottom: $spacing-xs;
+
+            &:after {
+                background-image: linear-gradient(to bottom, $color-neutral-80, $color-white);
+                border-top: 1px solid $color-neutral-90;
+                content: '';
+                height: 5px;
+                margin-left: -$spacing-sm;
+                position: absolute;
+                top: 58px;
+                width: 100%;
+            }
+        }
+
+        & .column-selector {
+            &__row {
+                border: none;
+                border-top: 1px solid $color-neutral-80;
+                margin: 0 0 0 $spacing-lg;
+                padding: $spacing-md 0 $spacing-sm 0;
+
+                & .column-selector__row-title {
+                    font-weight: unset;
+                    text-transform: unset;
+                }
+            }
+        }
+    }
+
+    &__row-button {
+        margin-left: auto;
+
+        &--expandable {
+            background-color: $color-midnight;
+            color: $color-white;
+
+            &:hover {
+                background-color: $color-slate;
+                border-color: $color-slate;
+                color: $color-white;
+            }
+        }
+    }
+
+    &__row-content {
+        align-items: center;
+        display: inline-flex;
+        justify-content: flex-start;
+        width: 100%;
+
+        // This makes sure that custom buttons are aligned correctly.
+        & > *:last-child {
+            margin-left: auto;
+        }
+
+        &--open {
+            padding-bottom: $spacing-md;
+        }
+    }
+
+    &__row-subtitle {
+        color: $color-strong-neutral-60;
+    }
+
+    &__row-title {
+        align-items: center;
+        color: $color-strong-neutral-40;
+        display: inline-flex;
+        font-weight: bold;
+        justify-content: flex-start;
+        text-transform: uppercase;
+
+        & > *:not(:last-child) {
+            margin-right: $spacing-sm;
+        }
+    }
+
+    &__row-title-icon {
+        display: inline-block;
+        width: 25px;
+        vertical-align: middle;
+    }
+
+    &__row-toggle {
+        font-size: 10px;
+    }
+}
