@@ -32,7 +32,7 @@ class StatAreaCardDemo extends React.Component {
         });
     };
 
-    _handleRangeChange = (range) => {
+    _handleRangeChange = range => {
         let rangeData;
         let subtitle;
 
@@ -52,7 +52,7 @@ class StatAreaCardDemo extends React.Component {
         });
     };
 
-    _handleOnMouseOver = (value) => {
+    _handleOnMouseOver = value => {
         this.setState(
             () => ({ value })
         );

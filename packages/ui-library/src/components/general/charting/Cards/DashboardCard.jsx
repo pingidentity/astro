@@ -143,7 +143,7 @@ class DashboardCard extends React.Component {
                         </div>
                     </div>
                 }
-                {this.props.loading &&
+                {this.props.loading && !this.props.errorMessage &&
                     <PageSpinner
                         data-id={`${this.props["data-id"]}-spinner`}
                         className="dashboard-card__loader"

@@ -40,12 +40,16 @@ import _ from "underscore";
 *    The text that displays along the top of the heat map card.
 * @param {string} [data-id="heatmap-card"]
 *    The data-id applied to the top-level container of the component.
+* @param {string} [errorMessage]
+*    When provided, the error message and icon will display in place of the regular content.
 * @param {string} [heatColor="#193967"]
 *    The base hexidecimal color that the heat map shades are based upon. The highest value in the heat map will appear
 *    as this color.
 * @param {string} [labelKey="label"]
 *    The object property name (in the data prop) that contains the information that you want to be used as the label
 *    for each tooltip. Each cell tooltip has it's own label text.
+* @param {boolean} [loading=false]
+*    When true the splinner animation shows in place of the heatmap
 * @param {object} [rockerButtonProps]
 *     An optional object containing the props passed to the range-selector RockerButton component. This may be used
 *     to have greater control over the chart range selector.
@@ -93,8 +97,10 @@ class HeatMapCard extends React.Component {
             )
         ]),
         "data-id": PropTypes.string,
+        errorMessage: PropTypes.string,
         heatColor: PropTypes.string,
         labelKey: PropTypes.string,
+        loading: PropTypes.bool,
         onValueChange: PropTypes.func,
         rockerButtonProps: PropTypes.object,
         tooltipRenderer: PropTypes.func,
@@ -231,37 +237,41 @@ class HeatMapCard extends React.Component {
             <DashboardCard
                 className={classnames("heatmap-card", this.props.className)}
                 data-id={dataId}
+                errorMessage={this.props.errorMessage}
+                loading={this.props.loading}
                 front={(
                     <div>
-                        <div className="heatmap-card__chart">
-                            <div className="heatmap-card__chart-title" data-id={`${dataId}-chart-title`}>
-                                {this.props.chartTitle}
+                        {!this.props.loading && ([
+                            <div className="heatmap-card__chart" key="heatmap-chart">
+                                <div className="heatmap-card__chart-title" data-id={`${dataId}-chart-title`}>
+                                    {this.props.chartTitle}
+                                </div>
+                                <div
+                                    className="heatmap"
+                                    data-id={`${dataId}-chart`}
+                                    style={{ backgroundColor: Utils.HexToRgba(this.props.heatColor, 0.1) }}>
+                                    {this._renderXAxis()}
+                                    {this._renderCells()}
+                                </div>
+                                <div>
+                                    <RockerButton
+                                        {...rockerButtonDefaults}
+                                        {...this.props.rockerButtonProps}
+                                    />
+                                </div>
+                            </div>,
+                            <div className="heatmap-card__data" key="heatmap-data">
+                                <div className="heatmap-card__title" data-id={`${dataId}-value-title`}>
+                                    {this.props.valueTitle}
+                                </div>
+                                <div className="heatmap-card__value" data-id={`${dataId}-value`}>
+                                    {this.props.value}
+                                </div>
+                                <div className="heatmap-card__subtitle" data-id={`${dataId}-value-subtitle`}>
+                                    {this.props.valueSubtitle}
+                                </div>
                             </div>
-                            <div
-                                className="heatmap"
-                                data-id={`${dataId}-chart`}
-                                style={{ backgroundColor: Utils.HexToRgba(this.props.heatColor, 0.1) }}>
-                                {this._renderXAxis()}
-                                {this._renderCells()}
-                            </div>
-                            <div>
-                                <RockerButton
-                                    {...rockerButtonDefaults}
-                                    {...this.props.rockerButtonProps}
-                                />
-                            </div>
-                        </div>
-                        <div className="heatmap-card__data">
-                            <div className="heatmap-card__title" data-id={`${dataId}-value-title`}>
-                                {this.props.valueTitle}
-                            </div>
-                            <div className="heatmap-card__value" data-id={`${dataId}-value`}>
-                                {this.props.value}
-                            </div>
-                            <div className="heatmap-card__subtitle" data-id={`${dataId}-value-subtitle`}>
-                                {this.props.valueSubtitle}
-                            </div>
-                        </div>
+                        ])}
                     </div>
                 )}
             />
