@@ -4,7 +4,11 @@
   "description": "A UI library made of reusable React components, util functions and static assets (including CSS, Fonts, and Icons)",
   "author": "UX Front-End Development Team",
   "license": "ISC",
-  "private": true,
+  "files": [ "lib" ],
+  "main": "./lib/MainIndex.js",
+  "publishConfig": {
+    "registry":"https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
+  },
   "repository": {
     "type": "git",
     "url": "https://hg-od01.corp.pingidentity.com/r/gitweb?p=ui-library.git;a=tree;h=HEAD;hb=HEAD"
