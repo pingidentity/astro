@@ -4,6 +4,7 @@ import { BarChart, Bar, XAxis, YAxis, Cell } from "recharts";
 import { DashboardCard } from "./Cards/index";
 import FormDropDownList from "../../forms/FormDropDownList";
 import classnames from "classnames";
+import Color from "color";
 
 /**
  * @typedef {Object} HorizontalBarCard~data
@@ -47,7 +48,11 @@ import classnames from "classnames";
  * */
 
 
-const defaultColor = "#E12F51";
+
+const highlightColor = "#E12F51";
+
+const defaultColor = Color(highlightColor).lighten(0.5);
+
 export default class HorizontalBarCard extends Component {
 
     state = {
@@ -66,8 +71,8 @@ export default class HorizontalBarCard extends Component {
 
         this.setState({
             hoveredSection: value.id,
-            statColor: defaultColor,
-            strokeColor: defaultColor,
+            statColor: highlightColor,
+            strokeColor: highlightColor,
             strokeWidth: 1,
         });
     };
@@ -113,33 +118,39 @@ export default class HorizontalBarCard extends Component {
             <DashboardCard {...this.props} data-id={this.props["data-id"]} className={classes}
                 size = {2}
                 front= {(
-                    <div>
+                    <div className="horizontalBar-card__top-level-container">
                         <div className="horizontalBar-card__title">
                             {this.props.title}
                         </div>
                         {!this.props.loading && ([
-                            <BarChart
-                                data-id={`${this.props["data-id"]}-chart`}
-                                className="horizontalBar-card__horizontal-card"
-                                width={400}
-                                height={225}
-                                data={this.props.data}
-                                layout="vertical"
-                                barSize={30}
-                            >
-                                <XAxis type="number" tickLine={false} hide/>
-                                <YAxis type="category" tickLine={false} dataKey="id" />
-                                <Bar
-                                    data-id={`${this.props["data-id"]}-value`}
-                                    className="horizontalBar-card__bar"
-                                    dataKey="value"
-                                    onMouseOver={this._mouseOver}
-                                    onMouseOut={this._mouseOut}
-                                    label={{ position: "right" }}
+                            <div className="horizontalBar-card__scroll">
+                                <BarChart
+                                    data-id={`${this.props["data-id"]}-chart`}
+                                    className="horizontalBar-card__horizontal-card"
+                                    width={400}
+                                    height={this.props.data.length * 50}
+                                    data={this.props.data}
+                                    layout="vertical"
                                 >
-                                {this._renderCells(this.props.data)}
-                                </Bar>
-                            </BarChart>,
+                                    <XAxis type="number" tickLine={false} hide/>
+                                    <YAxis
+                                        type="category"
+                                        tickLine={false}
+                                        dataKey="id"
+                                        interval={0}
+                                    />
+                                    <Bar
+                                        data-id={`${this.props["data-id"]}-value`}
+                                        className="horizontalBar-card__bar"
+                                        dataKey="value"
+                                        onMouseOver={this._mouseOver}
+                                        onMouseOut={this._mouseOut}
+                                        label={{ position: "right" }}
+                                    >
+                                    {this._renderCells(this.props.data)}
+                                    </Bar>
+                                </BarChart>
+                            </div>,
                             <div className="horizontalBar-card__number-container">
                                 <div key="barTotalKey" className="horizontalBar-card__number-info">
                                     <div
@@ -157,10 +168,9 @@ export default class HorizontalBarCard extends Component {
                                         {this.props.label}
                                     </div>
                                 </div>
-                                <hr
+                                <div
                                     key="backLineKey"
                                     className="horizontalBar-card__back-line"
-                                    style={{ width: "220px" }}
                                 />
                                 <FormDropDownList
                                     data-id={`${this.props["data-id"]}-drop-down`}

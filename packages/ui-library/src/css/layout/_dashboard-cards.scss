@@ -518,6 +518,12 @@ $fullwidthBreakpoint: 950px;
 
 
 .horizontalBar-card {
+
+    &__horizontal-card {
+        padding-right: 50px;
+        margin-right: 10px;
+    }
+
     &__title {
         position: absolute;
         font-size: 18px;
@@ -529,13 +535,8 @@ $fullwidthBreakpoint: 950px;
     }
 
     &__number-container {
-        display: block;
-        position: absolute;
-        top: 110px;
-        right: 10px;
-        hr {
-            border-width: 2px 0 0;
-        }
+        display: inline-block;
+        transform: translateY(-50%);
     }
 
     &__total-number {
@@ -561,7 +562,24 @@ $fullwidthBreakpoint: 950px;
     }
 
     &__back-line {
-        margin: 20px 0 0;
+
+        &:after {
+            content: '';
+            display: block;
+            border-bottom: 1px solid $color-neutral-10;
+            width: 220px;
+        }
+    }
+
+    &__bar {
+        transform: translateX(1.5px);
+    }
+
+    &__scroll {
+        height: 225px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        display: inline-block;
     }
 
     .recharts-label {
@@ -569,16 +587,22 @@ $fullwidthBreakpoint: 950px;
     }
 
     .recharts-surface {
-        padding-right: 100px;
+        padding-left: 15px;
+        overflow: visible;
     }
 
     .dashboard-card__front {
         min-height: 307px;
-        padding-right: 230px;
+        text-align: center;
+        white-space: nowrap;
     }
 
     .recharts-cartesian-axis-line {
         stroke-width: 3px;
+    }
+
+    .recharts-cartesian-axis-ticks {
+        text-transform: uppercase;
     }
 
 }

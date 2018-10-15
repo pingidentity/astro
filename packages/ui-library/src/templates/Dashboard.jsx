@@ -1,7 +1,7 @@
 import React from "react";
 import HeroChart from "../components/general/charting/HeroChart";
 import { CardRow, DonutCard, PlaceHolderCard, StatCard, StatAreaCard } from "../components/general/charting/Cards";
-
+import { HorizontalBarCard } from "../components/general/charting/Cards";
 import demoChartData from "../demo/components/general/charting/demoChartData";
 import _ from "underscore";
 
@@ -35,8 +35,26 @@ class Dashboard extends React.Component {
         { id: "Disabled Users", value: 20000, color: "#4C8DCA" },
     ]
 
-    _donutSumTotal = () => {
-        return this.donutData.reduce((acc, { value }) => {
+    horizontalBarData = [
+        { id: "Error 401", label: "401 Unauthorized", value: 2600 },
+        { id: "Error 402", label: "402 Payment Required", value: 1890 },
+        { id: "Error 403", label: "403 Forbidden", value: 3000 },
+        { id: "Error 404", label: "404 Not Found", value: 2000 },
+        { id: "Error 408", label: "405 Request Timeout", value: 3500 },
+        { id: "Error 410", label: "410 bad request", value: 2600 },
+        { id: "Error 411", label: "411 xyz", value: 1890 },
+        { id: "Error 412", label: "412 hello", value: 3000 },
+    ]
+
+    horizontalBarOptions = [
+        { label: "This Month", value: "1" },
+        { label: "This Hour", value: "2" },
+        { label: "Today", value: "3" },
+        { label: "This Week", value: "4" },
+    ]
+
+    _sumTotal = (data) => {
+        return data.reduce((acc, { value }) => {
             return acc + value;
         }, 0);
     }
@@ -47,10 +65,14 @@ class Dashboard extends React.Component {
         areaValue: 72,
 
         donutLabel: "Total Users",
-        donutValue: this._donutSumTotal(),
+        donutValue: this._sumTotal(this.donutData),
         donutSelectedValue: this.donutOptions[0],
 
         heroTotalValue: "24,458",
+
+        horizontalLabel: "Api Errors",
+        horizontalValue: this._sumTotal(this.horizontalBarData),
+        horizontalSelectedValue: this.horizontalBarOptions[0],
     }
 
     _handleMakeDefault = () => {
@@ -109,6 +131,29 @@ class Dashboard extends React.Component {
     _donutOnSelect = (option) => {
         this.setState({
             donutSelectedValue: option
+        });
+    }
+
+    _horizontalOnHover = (e, { id }) => {
+        const matchingData = this.horizontalBarData.find(data => {
+            return id === data.id;
+        });
+        this.setState({
+            horizontalLabel: matchingData.label,
+            horizontalValue: matchingData.value,
+        });
+    }
+
+    _horizontalOnMouseOut = () => {
+        this.setState({
+            horizontalLabel: "Api Errors",
+            horizontalValue: this._horizontalSumTotal()
+        });
+    }
+
+    _horizontalOnSelect = (option) => {
+        this.setState({
+            horizontalSelectedValue: option
         });
     }
 
@@ -212,6 +257,24 @@ class Dashboard extends React.Component {
                         title="MFA Users"
                         value={`${areaPercent}%`}
                         yAxisKey="value"
+                    />
+                </CardRow>
+                <CardRow>
+                    <HorizontalBarCard
+                        data={this.horizontalBarData}
+                        title={"Api Error Rate"}
+                        loading={false}
+                        errorMessage={null}
+                        onMouseOver={this._horizontalOnHover}
+                        onMouseOut={this._horiztonalOnMouseOut}
+                        options={this.horizontalBarOptions}
+                        value={this.state.horizontalValue}
+                        label={this.state.horizontalLabel}
+                        selectOption={this.state.horizontalSelectedValue}
+                        onSelect={this._horizontalOnSelect}
+                    />
+                    <PlaceHolderCard
+                        message="We're building more data widgets. Check back soon!"
                     />
                 </CardRow>
                 <PlaceHolderCard

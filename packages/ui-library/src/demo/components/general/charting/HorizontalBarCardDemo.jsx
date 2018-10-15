@@ -17,6 +17,9 @@ export default class HorizontalBarCardDemo extends Component {
         { id: "Error 403", label: "403 Forbidden", value: 3000 },
         { id: "Error 404", label: "404 Not Found", value: 2000 },
         { id: "Error 408", label: "405 Request Timeout", value: 3500 },
+        { id: "Error 410", label: "410 bad request", value: 2600 },
+        { id: "Error 411", label: "411 xyz", value: 1890 },
+        { id: "Error 412", label: "412 hello", value: 3000 },
     ];
 
     options = [
