@@ -2498,6 +2498,10 @@ input[type=file] {
     display: none;
     &.show {
         display: block;
+        &.inline {
+            display: inline-block;
+            margin-left: 5px;
+        }
     }
     .message {
         padding: 3px 0;
