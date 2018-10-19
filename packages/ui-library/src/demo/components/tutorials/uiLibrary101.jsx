@@ -70,29 +70,35 @@ class UILibrary101 extends React.Component {
 
                 <h2 className="integrate-anchor">How to integrate the UI Library into an existing project</h2>
                 <p>
-                    The UI Library can be integrated as an npm module into an existing project by adding it as a
-                     dependency in your project's package.json file.
+                    The UI Library can be integrated as an npm module into an existing project by installing it as a
+                    dependency. The module is hosted on Ping's Artifactory, so if you use Artifactory as your npm
+                    registry, you can do a simple install.
                 </p>
-                <p>Below is an example of how it is integrated into a project called 'foobar':</p>
-                <Markup custom={true} language="json"
+                <Markup custom={true}
                     content={
                         [
                         /* eslint-disable */
-                            '{',
-                            '   "name": "foobar"',
-                            '   ...',
-                            '   "dependencies": {',
-                            '       ...',
-                            '       "ui-library": "http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library/<VERSION>/ui-library-<VERSION>.tar.gz"',
-                            '       ...',
-                            '   }',
-                            '   ...',
-                            '}'
+                            '$ npm config set registry http://art01.corp.pingidentity.com:8081/artifactory/api/npm/npm-virtual/',
+                            '$ npm install ui-library --save',
+                            ' -- OR --',
+                            '$ npm install ui-library@<VERSION> --save',
                         /* eslint-enable */
                         ].join("\n")
                     }
                 />
-                <p>Replace &lt;VERSION&gt; in the link above with a version of the library (e.g. 1.0.0).</p>
+                <p>
+                   You can also install the library from its full URL, which lets you bypass changing your npm registry.
+                   You have to hard-code the version when you do this.
+                </p>
+                <Markup custom={true}
+                    content={
+                        [
+                        /* eslint-disable */
+                            '$ npm install http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library/<VERSION>/ui-library-<VERSION>.tar.gz --save',
+                        /* eslint-enable */
+                        ].join("\n")
+                    }
+                />
                 <p className="attention">
                     A SNAPSHOT version of the UI Library can be used in development by appending &quot;-SNAPSHOT&quot;
                      to the &lt;VERSION&gt;. But you should never release a project with a dependency on a SNAPSHOT
