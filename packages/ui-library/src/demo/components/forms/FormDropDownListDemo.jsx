@@ -1,8 +1,8 @@
-var React = require("react"),
-    FormDropDownList = require("../../../components/forms/FormDropDownList");
+import React from "react";
+import FormDropDownList from "../../../components/forms/FormDropDownList";
 
 
-var NUM_DEMOS = 10,
+const NUM_DEMOS = 10,
     OPTIONS = [
         { label: "One", value: "1", helpHintText: "Help text may be added to any drop-down option." },
         { label: "Two", value: "2", group: 4 },
@@ -21,20 +21,7 @@ var NUM_DEMOS = 10,
         { label: "Section A", id: 1 },
         { label: "Disabled", id: 4, disabled: true }
     ],
-    LONGLABELS = [
-        { label: "OneOneOneOneOneOneOneOneOneOneOne", value: "1",
-            helpHintText: "Help text may be added to any drop-down option."
-        },
-        { label: "TwoTwoTwoTwoTwo", value: "2", group: 4 },
-        { label: "ThreeThreeThreeThreeThree", value: "3", group: 1 },
-        { label: "FourFourFourFourFour", value: "4", group: 2 },
-        { label: "FiveFiveFiveFiveFive", value: "5", group: 3 },
-        { label: "SixSixSixSixSixSixSix", value: "6", group: 2 },
-        { label: "SevenSevenSevenSevenSevenSeven", value: "7", group: 1 },
-        { label: "EightEightEightEightEight", value: "8", group: 3 },
-        { label: "NineNineNineNineNine", value: "9" },
-        { label: "TenTenTenTenTenTen", value: "10", group: 4 }
-    ];
+    NONEOPTION = { label: "--" };
 
 /**
 * @name FormDropDownListDemo
@@ -44,29 +31,21 @@ var NUM_DEMOS = 10,
 class FormDropDownListDemo extends React.Component {
     constructor(props) {
         super(props);
-        var initState = {
+        let initState = {
             addOptions7: OPTIONS,
             addOptions9: OPTIONS
         };
 
-        for (var i=1; i<=NUM_DEMOS - 1; i+=1) {
-            initState["selectedValue" + i] = { label: "One", value: "1" };
+        for (let i=1; i<=NUM_DEMOS - 1; i+=1) {
+            initState["selectedValue" + i] = OPTIONS[0];
         }
-        initState["selectedValue" + NUM_DEMOS] = { label: "--" };
+        initState["selectedValue" + NUM_DEMOS] = NONEOPTION;
 
         this.state = initState;
     }
 
-    _getValue = (string) => {
-        var value = "";
-        for (var i=0; i<string.length; i+=1) {
-            value = value + string.charCodeAt(i);
-        }
-        return value;
-    };
-
     _handleValueChange = (index, option) => {
-        var newState = {};
+        let newState = {};
 
         newState["selectedValue" + index] = option;
 
@@ -75,8 +54,8 @@ class FormDropDownListDemo extends React.Component {
 
     _handleAdd7 = (optionLabel) => {
         // Mock new option
-        var newOption = { label: optionLabel, value: this._getValue(optionLabel) };
-        var newOptions = this.state.addOptions7.concat([newOption]);
+        const newOption = { label: optionLabel, value: optionLabel };
+        const newOptions = this.state.addOptions7.concat([newOption]);
 
         // Update options & select the newly added option
         this.setState({
@@ -87,8 +66,8 @@ class FormDropDownListDemo extends React.Component {
 
     _handleAdd9 = (optionLabel) => {
         // Mock new option with group always being "Section A"
-        var newOption = { label: optionLabel, value: this._getValue(optionLabel), group: 1 };
-        var newOptions = this.state.addOptions9.concat([newOption]);
+        const newOption = { label: optionLabel, value: optionLabel, group: 1 };
+        const newOptions = this.state.addOptions9.concat([newOption]);
 
         // Update options & select the newly added option
         this.setState({
@@ -116,28 +95,16 @@ class FormDropDownListDemo extends React.Component {
             <div>
                 <div className="input-row">
                     <FormDropDownList
-                        options={OPTIONS}
+                        options={[
+                            { label: "One", value: "1" },
+                            { label: "Option two with a very, very, very, very long label", value: "2" },
+                            { label: "Three", value: "3" },
+                        ]}
                         autofocus={true}
-                        label="Basic with autofocus"
+                        label="Autofocus with auto-width"
                         selectedOption={this.state.selectedValue1}
                         onValueChange={this._handleValueChange1}
-                        className="input-width-small"
                     />
-
-                </div>
-                <div>Selected value: {this.state.selectedValue1.label}</div>
-                <br/>
-
-                <div className="input-row">
-                    <FormDropDownList
-                        options={LONGLABELS}
-                        autofocus={true}
-                        label="Basic with autofocus width auto and long labels"
-                        selectedOption={this.state.selectedValue10}
-                        onValueChange={this._handleValueChange10}
-                        className="input-width-auto"
-                    />
-
                 </div>
                 <div>Selected value: {this.state.selectedValue1.label}</div>
                 <br/>
@@ -150,7 +117,7 @@ class FormDropDownListDemo extends React.Component {
                         searchField="value"
                         selectedOption={this.state.selectedValue2}
                         onValueChange={this._handleValueChange2}
-                        className="input-width-small"
+                        className="input-width-medium"
                         name="custom-content-type"
                     />
                 </div>
@@ -263,7 +230,7 @@ class FormDropDownListDemo extends React.Component {
                         label="Required with none option"
                         required
                         selectedOption={this.state["selectedValue" + NUM_DEMOS]}
-                        noneOption={{ label: "--" }}
+                        noneOption={NONEOPTION}
                         onValueChange={this["_handleValueChange" + NUM_DEMOS]}
                         className="input-width-small"
                     />

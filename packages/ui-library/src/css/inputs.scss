@@ -938,10 +938,10 @@ input[type=file] {
     width: auto;           // set to auto, allow different input widths to be set
 
     &.open {
-        z-index: 2; // make sure menu appears above other elements on the page
-
         .select-list {
-            display: block;
+            visibility: visible;
+            z-index: 21;
+            top: -1px;
 
             @include animation(fade-in 0.2s);
 
@@ -1034,9 +1034,8 @@ input[type=file] {
     .select-list {
         $option-padding: 7px 40px 7px 15px;
 
-        display: none;
-        top: -1px;
-        z-index: 2; // popup so render above everything else
+        visibility: hidden;
+        top: -100000px;
         max-height: 200px;
         overflow-y: auto;
         border: 1px solid $color-rabbit-fur;
@@ -2910,22 +2909,6 @@ label {
     }
 }
 
-
-.input-custom-select {
-    &.open {
-        .select-list {
-            visibility: visible;
-        }
-    }
-    .select-list {
-        visibility: hidden;
-        display: initial;
-        z-index: 21;
-    }
-    &.input-width-auto {
-        width: auto;
-    }
-}
 
 // DEPRECATED OR SITE-SPECIFIC STYLES --------------------------------------------------------------
 // TODO : move WP styles to WP
