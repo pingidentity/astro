@@ -679,6 +679,7 @@
   right: -15px;
   -webkit-transform: translateX(100%);
           transform: translateX(100%);
+  word-break: break-all;
   z-index: 1; }
   .tooltip:before {
     content: '';
@@ -705,6 +706,7 @@
 @media (max-width: 1000px) {
   .tooltip {
     bottom: -15px;
+    max-width: 200px;
     right: 0;
     -webkit-transform: translateY(100%);
             transform: translateY(100%); }

@@ -23,6 +23,7 @@ $tooltip-border: $color-neutral-60;
     position: absolute;
     right: -$spacing-md;
     transform: translateX(100%);
+    word-break: break-all;
     z-index: 1;
 
     &:before {
@@ -37,6 +38,7 @@ $tooltip-border: $color-neutral-60;
 @media (max-width: 1000px) {
     .tooltip {
         bottom: -$spacing-md;
+        max-width: 200px;
         right: 0;
         transform: translateY(100%);
 
