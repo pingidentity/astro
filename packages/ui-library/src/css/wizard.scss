@@ -30,15 +30,6 @@ $wizard-close-button-color: $color-strong-neutral-40;
     color: $color-strong-neutral-10;
     z-index: 1;
 
-    textarea,
-    input[type],
-    .input-checkbox .icon:before,
-    .input-radio .circle {
-        background-color: $color-white;
-    }
-
-    @include style-inputs-light;
-
     // I know we are trying to only do one level of specificity for BEM and such, but I need to override the button bar defaults
     .wizard2__button-bar {
         position: fixed;
@@ -59,6 +50,12 @@ $wizard-close-button-color: $color-strong-neutral-40;
         right: 0;
         height: 46px;
         background-color: rgba($color-neutral-10, 0.7);
+    }
+
+    //TODO: input-modifier light
+    .input-multivalues .entries {
+        background-color: #fff;
+        border: 1px solid #c3c7cb;
     }
 
     // contextual CSS

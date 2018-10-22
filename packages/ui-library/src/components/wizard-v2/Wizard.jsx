@@ -191,7 +191,7 @@ class Wizard extends React.Component {
         return (
             <div data-id={dataId} className={classNames}>
                 {hasHeaderItems && <Header data-id={dataId} sections={headerItems}/> }
-                <div className="wizard2__content">
+                <div className="wizard2__content modifier_light-inputs">
                     {messageProps && <Messages {...messageProps} />}
                     <ActiveStep
                         data-id={dataId}
