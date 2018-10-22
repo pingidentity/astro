@@ -43,6 +43,25 @@ const LabelValuePairsDemo = () => {
             label: "Registration",
             value: "No"
         },
+        {
+            title: "More Data Below",
+        },
+        {
+            label: "Data",
+            value: "1",
+        },
+        {
+            label: "Data",
+            value: "2",
+        },
+        {
+            label: "Data",
+            value: "3",
+        },
+        {
+            title: "Title with hint",
+            hintText: "This is where we put it"
+        },
     ];
 
     return (

@@ -1,7 +1,5 @@
 window.__DEV__ = true;
 
-jest.dontMock("../LabelValuePairs");
-
 describe("LabelValuePairs", function () {
     let React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
@@ -38,14 +36,32 @@ describe("LabelValuePairs", function () {
         },
         {
             label: "Required",
-            value: "NO"
+            value: "No"
         },
         {
-            label: "Resgistration",
-            value: "NO"
+            label: "Registration",
+            value: "No"
+        },
+        {
+            title: "More Data Below",
+        },
+        {
+            label: "Data",
+            value: "1",
+        },
+        {
+            label: "Data",
+            value: "2",
+        },
+        {
+            label: "Data",
+            value: "3",
+        },
+        {
+            title: "Title with hint",
+            hintText: "This is where we put it"
         },
     ];
-
 
     let componentId = "label-value-pairs";
 
@@ -76,13 +92,11 @@ describe("LabelValuePairs", function () {
     });
 
     it("renders a helphint", function () {
-        let component = getComponent({
-            hintText: "this is the help text",
-        });
+        let component = getComponent({});
 
-        let element = TestUtils.findRenderedDOMNodeWithClass(component, "__react_component_tooltip");
+        let elements = TestUtils.scryRenderedDOMNodesWithClass(component, "__react_component_tooltip");
 
-        expect(ReactTestUtils.isDOMComponent(element)).toBeTruthy();
+        expect(elements.length).toEqual(2);
     });
 
     it("renders hr tag", function () {
@@ -91,6 +105,14 @@ describe("LabelValuePairs", function () {
         let element = TestUtils.scryRenderedDOMNodesWithTag(component, "hr");
 
         expect(element.length).toEqual(1);
+    });
+
+    it("renders two titles", function () {
+        let component = getComponent({});
+
+        let elements = TestUtils.scryRenderedDOMNodesWithClass(component, "label-value-pairs__title");
+
+        expect(elements.length).toEqual(2);
     });
 
 });

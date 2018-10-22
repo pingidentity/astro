@@ -41,6 +41,13 @@ $font-size-reduced: 13px;
     @include text-label;
 }
 
+// PARENT LABEL
+@mixin parent-label {
+    @include text-style($color-elephant, $font-size-primary, $font-pn-semibold);
+
+    text-transform: uppercase;
+}
+
 // VALUE
 @mixin text-value {
     @include text-style($color-midnight);

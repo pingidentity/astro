@@ -15,6 +15,21 @@ import HelpHint from "../tooltips/HelpHint";
  * @example <LabelValuePairs data=id="label-display" />
  */
 
+/**
+ * @typedef {object} LabelValuePairs#Row
+ * @desc An object describing a leaf in the LeftNav
+ * @property {string} label
+ *              The label (left column)
+ * @property {string} value
+ *              The value (right column)
+ * @property {string} hintText
+ *              Optional contents of a help hint on the value
+ * @property {boolean} divider
+ *              If set to true, this row is a divider line
+ * @property {string} title
+ *              If defined, this row is a title
+ */
+
 const LabelValuePairs = ({
     dataPairs,
     "data-id": dataId
@@ -26,22 +41,35 @@ const LabelValuePairs = ({
         hintPlacement,
         hintLink,
         divider,
+        title,
     }, dividerIndex) => {
-        return divider
-            ? <hr key={dividerIndex} className="label-value-pairs__divider" />
-            : [
-                <div key={label} className="label-value-pairs__label">{label}</div>,
-                (hintText) ? <div key={value} className="label-value-pairs__value">
-                    {value}
-                    <HelpHint
-                        className="inline"
-                        hintText={hintText}
-                        hintPlacement={hintPlacement}
-                        hintLink={hintLink}
-                    />
+        const renderHint = () => (hintText &&
+            <HelpHint
+                className="inline label-value-pairs__help-hint"
+                hintText={hintText}
+                hintPlacement={hintPlacement}
+                hintLink={hintLink}
+            />
+        );
+
+        if (divider) {
+            return <hr key={dividerIndex} className="label-value-pairs__divider" />;
+        } else if (title) {
+            return (
+                <div key={title} className="label-value-pairs__title">
+                    {title}
+                    {renderHint()}
                 </div>
-                : <div key={value} className="label-value-pairs__value">{value}</div>
+            );
+        } else {
+            return [
+                <div key={label} className="label-value-pairs__label">{label}</div>,
+                <div key={value} className="label-value-pairs__value">
+                    {value}
+                    {renderHint()}
+                </div>
             ];
+        }
     };
 
     return (
@@ -67,7 +95,13 @@ LabelValuePairs.propTypes = {
                 hintLink: PropTypes.string,
             }),
             PropTypes.shape({
-                divider: PropTypes.bool,
+                divider: PropTypes.bool.isRequired,
+            }),
+            PropTypes.shape({
+                title: PropTypes.string.isRequired,
+                hintText: PropTypes.string,
+                hintPlacement: PropTypes.string,
+                hintLink: PropTypes.string,
             })
         ])
     ).isRequired

@@ -22,10 +22,11 @@
 
     grid-column: 2;
 
-    & .help-tooltip {
-        padding-left: $spacing-sm;
-        vertical-align: middle;
-    }
+}
+
+.label-value-pairs__help-hint {
+    padding-left: $spacing-sm;
+    vertical-align: middle;
 }
 
 .label-value-pairs__divider {
@@ -35,4 +36,15 @@
 
     grid-column-start: 1;
     grid-column-end: span 2;
+}
+
+.label-value-pairs__title {
+    @include parent-label;
+
+    grid-column-start: 1;
+    grid-column-end: span 2;
+}
+
+* + .label-value-pairs__title {
+    padding-top: $spacing-xs;
 }
