@@ -9,6 +9,7 @@
 
 .requirement__icon {
     @extend %icon-pair__icon;
+    flex-shrink: 0;
     max-height: 14px;
 }
 
