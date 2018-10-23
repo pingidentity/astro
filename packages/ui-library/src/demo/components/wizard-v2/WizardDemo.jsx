@@ -253,7 +253,7 @@ class WizardDemo extends React.Component {
                         title="Select App Type"
                         menuDescription="Tell us what type of application you would like to add."
                         description="Adding a new application to your environment allows your Customers controlled
-                            access to it. Their are several dierent application technologies to choose from that
+                            access to it. Their are several different application technologies to choose from that
                             accommodate the majority of applications."
                         clickDisabled={true}
                         continueDisabled={!this.state.currentApp.selectedTile}

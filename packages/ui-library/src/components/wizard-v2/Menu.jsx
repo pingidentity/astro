@@ -40,9 +40,15 @@ class Menu extends React.Component {
 
     _buildItems(steps, type) {
         return _.map(steps, (step, index) => {
-            const clickDisabled = type === TYPES.required
-                ? !step.completed && index > 0
-                : this.state.optionalStepsVisited.indexOf(index) === -1;
+            let clickDisabled = false;
+
+            if (!this.props.onMenuClick) {
+                clickDisabled = true;
+            } else if (type === TYPES.required) {
+                clickDisabled = !step.completed && index > 0;
+            } else {
+                clickDisabled = this.state.optionalStepsVisited.indexOf(index) === -1;
+            }
 
             return (
                 <Item
