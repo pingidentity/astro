@@ -301,8 +301,6 @@ class MultiDragDemo extends React.Component {
         return options;
     };
 
-    _sortRow = row => row.sort(({ name: nameA }, { name: nameB }) => nameA > nameB);
-
     _toggleSort = id =>
         this.setState(() => ({
             sorted: id === CUSTOMSORTVALS.SORTED
@@ -331,6 +329,8 @@ class MultiDragDemo extends React.Component {
 
         const columnsStateless = this.props.drag.columns.map(filterProps);
         const columnsStateful = this.state.columns.map(filterProps);
+
+        const sortRow = row => _.sortBy(row, ({ name }) => name);
 
         return (
             <div className="multidrag-demo" data-id="multidragDemoDiv">
@@ -468,7 +468,7 @@ class MultiDragDemo extends React.Component {
                                 defaultCategoryOption: "Everything",
                                 filteredByLabel: "but only"
                             }}
-                            {...this.state.sorted && { customSort: this._sortRow }}
+                            {...this.state.sorted && { customSort: sortRow }}
                         />
                     </div>
                 }

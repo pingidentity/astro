@@ -1,9 +1,9 @@
-var Actions = require("./MultiDragActions.js"),
-    deepClone = require("clone"),
-    update = require("re-mutable"),
-    FilterUtils = require("../../../util/FilterUtils.js");
+import Actions from "./MultiDragActions";
+import deepClone from "clone";
+import update from "re-mutable";
+import FilterUtils from "../../../util/FilterUtils.js";
 
-var initialState = {
+const initialState = {
     columns: []
 };
 
@@ -33,14 +33,12 @@ var initialState = {
  *    The next state
  */
 function setSearch (state, action) {
-    var searchStr = action.filter || "";
+    const searchStr = action.filter || "";
 
-    var next = update(state)
+    return update(state)
         .set(["columns", action.column, "search"], searchStr)
         .set(["columns", action.column, "searchFieldName"], action.fieldName)
         .end();
-
-    return next;
 }
 
 /**
@@ -55,8 +53,8 @@ function setSearch (state, action) {
  * @return {object}
  *    The next state will all the current state's filters applied.
  */
-function applyFilters (state) {
-    var next = state;
+function applyFilters (state, transform) {
+    let next = state;
 
     next.columns.forEach(function (column, index) {
         const searchStr = column.search || "";
@@ -76,7 +74,13 @@ function applyFilters (state) {
         }
     });
 
-    return next;
+    return transform ? {
+        ...next,
+        columns: next.columns.map(({ filteredRows, rows, ...column }) => ({
+            filteredRows: transform(filteredRows),
+            rows: transform(rows), ...column
+        }))
+    } : next;
 }
 
 /**
@@ -160,7 +164,7 @@ function init (state, action) {
 }
 
 module.exports = function (state, action) {
-    var next;
+    let next;
 
     switch (action.type) {
         case Actions.Types.MULTIDRAG_SET:

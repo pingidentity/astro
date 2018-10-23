@@ -1,4 +1,4 @@
-var keyMirror = require("fbjs/lib/keyMirror");
+import keyMirror from "fbjs/lib/keyMirror";
 
 /**
 * @enum {string}
@@ -6,7 +6,7 @@ var keyMirror = require("fbjs/lib/keyMirror");
 * @memberof MultiDrag
 * @desc An enum of MultiDrag action types.
 */
-exports.Types = keyMirror({
+const Types = keyMirror({
     MULTIDRAG_SET: null,
     MULTIDRAG_PREPEND: null,
     MULTIDRAG_APPEND: null,
@@ -28,9 +28,9 @@ exports.Types = keyMirror({
 * @return {object}
 *    The action.
 */
-exports.set = function (path, value) {
+const set = function (path, value) {
     return {
-        type: exports.Types.MULTIDRAG_SET,
+        type: Types.MULTIDRAG_SET,
         path: path,
         value: value
     };
@@ -49,9 +49,9 @@ exports.set = function (path, value) {
 * @return {object}
 *    The action.
 */
-exports.move = function (from, to) {
+const move = function (from, to) {
     return {
-        type: exports.Types.MULTIDRAG_MOVE,
+        type: Types.MULTIDRAG_MOVE,
         from: from,
         to: to
     };
@@ -70,9 +70,9 @@ exports.move = function (from, to) {
 * @return {object}
 *    The action.
 */
-exports.prepend = function (column, data) {
+const prepend = function (column, data) {
     return {
-        type: exports.Types.MULTIDRAG_PREPEND,
+        type: Types.MULTIDRAG_PREPEND,
         column: column,
         data: data
     };
@@ -91,9 +91,9 @@ exports.prepend = function (column, data) {
 * @return {object}
 *    The action.
 */
-exports.append = function (column, data) {
+const append = function (column, data) {
     return {
-        type: exports.Types.MULTIDRAG_APPEND,
+        type: Types.MULTIDRAG_APPEND,
         column: column,
         data: data
     };
@@ -110,9 +110,9 @@ exports.append = function (column, data) {
 * @return {object}
 *    The action.
 */
-exports.init = function (data) {
+const init = function (data) {
     return {
-        type: exports.Types.MULTIDRAG_INIT,
+        type: Types.MULTIDRAG_INIT,
         data: data
     };
 };
@@ -132,9 +132,9 @@ exports.init = function (data) {
 * @return {object}
 *    The action.
 */
-exports.filterField = function (fieldName, column, filter) {
+const filterField = function (fieldName, column, filter) {
     return {
-        type: exports.Types.MULTIDRAG_FILTER,
+        type: Types.MULTIDRAG_FILTER,
         column: column,
         filter: filter,
         fieldName: fieldName
@@ -154,7 +154,7 @@ exports.filterField = function (fieldName, column, filter) {
 * @return {object}
 *    The action.
 */
-exports.filter = exports.filterField.bind(null, null);
+const filter = filterField.bind(null, null);
 
 /**
 * @alias Actions.placeholder
@@ -167,7 +167,7 @@ exports.filter = exports.filterField.bind(null, null);
 * @return {object}
 *    The action.
 */
-exports.placeholder = exports.set.bind(null, ["placeholder"]);
+const placeholder = set.bind(null, ["placeholder"]);
 
 /**
 * @alias Actions.clearPlaceholder
@@ -177,7 +177,7 @@ exports.placeholder = exports.set.bind(null, ["placeholder"]);
 * @return {object}
 *    The action.
 */
-exports.clearPlaceholder = exports.set.bind(null, ["placeholder"], null);
+const clearPlaceholder = set.bind(null, ["placeholder"], null);
 
 /**
 * @alias Actions.showCategoryList
@@ -187,7 +187,7 @@ exports.clearPlaceholder = exports.set.bind(null, ["placeholder"], null);
 * @return {object}
 *    The action.
 */
-exports.showCategoryList = (column) => exports.set(["columns", column, "showCategoryList"], true);
+const showCategoryList = (column) => set(["columns", column, "showCategoryList"], true);
 
 /**
 * @alias Actions.hideCategoryList
@@ -197,7 +197,7 @@ exports.showCategoryList = (column) => exports.set(["columns", column, "showCate
 * @return {object}
 *    The action.
 */
-exports.hideCategoryList = (column) => exports.set(["columns", column, "showCategoryList"], false);
+const hideCategoryList = (column) => set(["columns", column, "showCategoryList"], false);
 
 /**
 * @alias Actions.hideCategoryList
@@ -207,4 +207,19 @@ exports.hideCategoryList = (column) => exports.set(["columns", column, "showCate
 * @return {object}
 *    The action.
 */
-exports.setCategory = (column, category) => exports.set(["columns", column, "category"], category);
+const setCategory = (column, category) => set(["columns", column, "category"], category);
+
+export default {
+    append,
+    clearPlaceholder,
+    filter,
+    filterField,
+    hideCategoryList,
+    init,
+    move,
+    prepend,
+    placeholder,
+    showCategoryList,
+    setCategory,
+    Types
+};
