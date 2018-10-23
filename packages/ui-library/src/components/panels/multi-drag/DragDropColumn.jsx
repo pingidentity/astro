@@ -23,7 +23,8 @@ var React = require("react"),
  * @param {number} index
  *    The index of the column. Used when executing callbacks.
  * @param {object} contentType
- *    A react component to be used as a template for rendering rows.
+ *    A react component to be used as a template for rendering rows. Can also be a function that returns JSX;
+ *    function is passed all of the props of the column, including its handlers.
  * @param {string} [labelEmpty]
  *    The placeholder string for when a column is empty.
  * @param {string} [className]
@@ -36,6 +37,10 @@ var React = require("react"),
  *    If true, the drag index will only increment when the drag location has passed the edge of the row instead
  *    of being incremented after the halfway mark which is the default behaviour.
  *
+ * @param {MultiDrag~onAdd} [onAdd]
+ *    Callback to be passed to contentType (as onAdd).
+ * @param {MultiDrag~onRemove} [onRemove]
+ *    Callback to be passed to contentType (as onRemove).
  * @param {MultiDrag~onDragDrop} onDrag
  *    Callback to be triggered when a row is dragged.
  * @param {MultiDrag~onDragDrop} onDrop
@@ -63,7 +68,10 @@ module.exports = class extends React.Component {
         index: PropTypes.number.isRequired,
         filterCategory: PropTypes.string,
         categoryList: PropTypes.arrayOf(PropTypes.string),
-        contentType: PropTypes.element.isRequired,
+        contentType: PropTypes.oneOfType([
+            PropTypes.element,
+            PropTypes.func
+        ]).isRequired,
         labelEmpty: PropTypes.string,
         // optional
         ghostRowAt: PropTypes.number,
@@ -78,7 +86,9 @@ module.exports = class extends React.Component {
         onScrolledToBottom: PropTypes.func,
         onScrolledToTop: PropTypes.func,
         onDragStart: PropTypes.func,
-        onDragEnd: PropTypes.func
+        onDragEnd: PropTypes.func,
+        onAdd: PropTypes.func,
+        onRemove: PropTypes.func
     };
 
     static defaultProps = {
@@ -110,11 +120,30 @@ module.exports = class extends React.Component {
      * Renders a drag/drop from give a data object
      */
     _renderRow = (row, index, opts) => {
-        var inner = opts && opts.content;
+        let inner = opts && opts.content;
+        const {
+            contentType,
+            index: propsIndex,
+            ...props
+        } = this.props;
 
         if (!inner) {
-            var props = _.extend({ column: this.props.index, index: index, "data-id": row.id }, row);
-            inner = React.cloneElement(this.props.contentType, props);
+            inner =
+                _.isFunction(contentType)
+                    ? contentType({
+                        column: propsIndex,
+                        "data-id": row.id,
+                        index,
+                        ...props
+                    })
+                    : React.cloneElement(this.props.contentType, {
+                        column: this.props.index,
+                        "data-id": row.id,
+                        index,
+                        onAdd: this.props.onAdd,
+                        onRemove: this.props.onRemove,
+                        ...row
+                    });
         }
 
         return (

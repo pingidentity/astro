@@ -172,6 +172,9 @@ function convertFilteredIndexes (columns, desc) {
  *    Sets the text for the right column when no items are added
  * @param {array} [categoryList]
  *    The list of categories that you can filter rows by
+ * @param {object} contentType
+ *    A react component to be used as a template for rendering rows. Can also be a function that returns JSX;
+ *    function is passed all of the props of the column, including its handlers.
  *
  * @param {MultiDrag~onSearch} onSearch
  *    Callback to be triggered when a column is searched. When stateless=false, will be executed after search has
@@ -235,7 +238,10 @@ class MultiDragStateless extends React.Component {
         // so can't specify shape of object for previewMove otherwise it won't re-render
         previewMove: PropTypes.object,
         categoryList: PropTypes.arrayOf(PropTypes.string),
-        contentType: PropTypes.element,
+        contentType: PropTypes.oneOfType([
+            PropTypes.element,
+            PropTypes.func
+        ]),
         classNames: PropTypes.arrayOf(
             PropTypes.string
         ),
@@ -384,6 +390,8 @@ class MultiDragStateless extends React.Component {
                 onCancel={this._onCancel}
                 onCategoryClick={this.props.onCategoryClick}
                 onCategoryToggle={this.props.onCategoryToggle}
+                onAdd={this.props.onAdd}
+                onRemove={this.props.onRemove}
                 ghostRowAt={ghostRowAt}
                 dragToEdge={true}
                 className={this.props.classNames[index]}

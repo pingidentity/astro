@@ -207,4 +207,14 @@ describe("DragDropColumn", function () {
         jest.restoreAllMocks();
     });
     //Make sure the above test is always last because of the mock findDOMNode
+
+    it("accepts render prop as contentType with correct onAdd", () => {
+        const onAdd = jest.fn();
+        getWrappedComponent({
+            contentType: props => props.onAdd(),
+            onAdd
+        });
+
+        expect(onAdd).toHaveBeenCalled();
+    });
 });
