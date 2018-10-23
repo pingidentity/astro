@@ -2544,6 +2544,15 @@ input[type=file] {
         margin-bottom: initial;
     }
 
+    .input-checkbox {
+        &.inline {
+            vertical-align: bottom;
+            line-height: 27px;
+            .icon {
+                bottom: 3px;
+            }
+        }
+    }
 }
 
 .checkbox-list {
