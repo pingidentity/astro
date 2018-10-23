@@ -52,6 +52,9 @@ function convertFilteredIndexes (columns, desc) {
 /**
  * @typedef {object} MultiDrag~ColumnData
  *
+ * @property {string} labelEmpty
+ *    Empty label for the column. Overrides labelEmpty prop for the component as a whole, but falls back
+ *    on that prop if not provided.
  * @property {string} name
  *    The name of the column.
  * @property {object[]} rows
@@ -218,6 +221,7 @@ class MultiDragStateless extends React.Component {
         className: PropTypes.string,
         columns: PropTypes.arrayOf(
             PropTypes.shape({
+                labelEmpty: PropTypes.string,
                 name: PropTypes.string,
                 filter: PropTypes.string,
                 rows: PropTypes.array
@@ -362,6 +366,9 @@ class MultiDragStateless extends React.Component {
 
         return (
             <DragDropColumn
+                // Columns can have their own labelEmpty; this lets this.props.labelEmpty
+                // be the default
+                labelEmpty={this.props.labelEmpty}
                 {...column}
                 categoryList={categoryList}
                 key={index}
@@ -382,7 +389,6 @@ class MultiDragStateless extends React.Component {
                 className={this.props.classNames[index]}
                 contentType={contentType}
                 data-id={"DragDropColumn-" + index}
-                labelEmpty={this.props.labelEmpty}
                 showCount={index > 0}
                 strings={this.props.strings}
             />
