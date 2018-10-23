@@ -607,6 +607,8 @@
   margin-bottom: 0; }
 
 .requirement__icon {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
   max-height: 14px; }
 
 .spinner {
