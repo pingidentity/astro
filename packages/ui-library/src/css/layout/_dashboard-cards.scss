@@ -395,27 +395,32 @@ $fullwidthBreakpoint: 950px;
 
     &__center-info {
         position: absolute;
-        top: 120px;
+        top: 150px;
         left: 50%;
         transform: translateX(-50%);
         text-align: center;
         color: $color-neutral-10;
-        hr {
-            border-width: 2px 0 0;
-            border-color: $color-neutral-10;
+    }
+
+    &__front-line {
+        &:after {
+            content: '';
+            display: block;
+            border-bottom: 2px solid $color-neutral-10;
+            width: 96px;
         }
     }
 
     &__center-number {
         position: relative;
         font-size: 37px;
-        top: 20px;
+        bottom: 10px;
     }
 
     &__center-label {
         position: relative;
         font-size: 16px;
-        bottom: 28px;
+        top: 2px;
     }
 
     &__back-info {
@@ -427,16 +432,21 @@ $fullwidthBreakpoint: 950px;
     &__drop-down {
         display: flex;
         justify-content: center;
-        top: -22px;
-        margin: inherit;
         padding-left: 10px;
+        bottom: 21px;
+        margin: inherit;
         .input-container {
             width: 135px;
         }
     }
 
     &__back-line {
-        margin: 20px 0 0;
+        padding-top: 20px;
+        &:after {
+            content: '';
+            display: block;
+            border-bottom: 1px solid $color-neutral-90;
+        }
     }
 
     &__donut-chart {

@@ -167,7 +167,7 @@ class DonutCard extends Component {
                                 <div className="donut-card__center-number" style={{ color: this.state.statColor }}>
                                     {this._renderNumber(this.props.value)}
                                 </div>
-                                <hr className="donut-card__front-line" />
+                                <div className="donut-card__front-line" />
                                 <div className="donut-card__center-label" style={{ color: this.state.statColor }}>
                                     {this.props.label}
                                 </div>
@@ -184,7 +184,7 @@ class DonutCard extends Component {
                             {this.props.title}
                         </div>
                         {!this.props.loading && ([
-                            <hr key="backLineKey" className="donut-card__back-line" />,
+                            <div key="backLineKey" className="donut-card__back-line" />,
                             <FormDropDownList
                                 data-id={`${this.props["data-id"]}-drop-down`}
                                 key="dropdown"
