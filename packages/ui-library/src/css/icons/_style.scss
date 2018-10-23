@@ -1,19 +1,19 @@
 @import "variables";
 
 @font-face {
-  font-family: 'iconfont';
+  font-family: '#{$icomoon-font-family}';
   src:
-    url('#{$icomoon-font-path}/iconfont.woff2?imoegb') format('woff2'),
-    url('#{$icomoon-font-path}/iconfont.ttf?imoegb') format('truetype'),
-    url('#{$icomoon-font-path}/iconfont.woff?imoegb') format('woff'),
-    url('#{$icomoon-font-path}/iconfont.svg?imoegb#iconfont') format('svg');
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff2?k8p9wx') format('woff2'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?k8p9wx') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?k8p9wx') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?k8p9wx##{$icomoon-font-family}') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'iconfont' !important;
+  font-family: '#{$icomoon-font-family}' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -204,6 +204,11 @@
 .icon-directory-hollow {
   &:before {
     content: $icon-directory-hollow;
+  }
+}
+.icon-docs {
+  &:before {
+    content: $icon-docs;
   }
 }
 .icon-download {

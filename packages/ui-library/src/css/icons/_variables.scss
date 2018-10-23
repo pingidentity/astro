@@ -1,4 +1,5 @@
-$icomoon-font-path: "../fonts/icons"; //make sure this stays -relative to icons file where this is imported
+$icomoon-font-path: "../fonts/icons"; // KEEP - designates relative path to icons file where this is imported
+$icomoon-font-family: "iconfont"; // KEEP - designates name of font
 
 $icon-account: "\61";
 $icon-admin-account: "\74";
@@ -36,6 +37,7 @@ $icon-details: "\e900";
 $icon-device: "\e906";
 $icon-directory: "\3d";
 $icon-directory-hollow: "\23";
+$icon-docs: "\e927";
 $icon-download: "\44";
 $icon-dropdown-arrow: "\76";
 $icon-earth: "\e905";
