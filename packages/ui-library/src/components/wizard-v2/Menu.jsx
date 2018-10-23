@@ -72,25 +72,25 @@ class Menu extends React.Component {
 
     render() {
         return (
-            <div className="wizard-progress-menu-scroller" data-id={`${this.props["data-id"]}-menu`}>
-                <nav className="wizard-progress-menu">
+            <div className="wizard2-progress-menu-scroller" data-id={`${this.props["data-id"]}-menu`}>
+                <nav className="wizard2-progress-menu">
                     <button
-                        className="wizard-close-btn"
+                        className="wizard2-close-btn"
                         onClick={this.props.onClose}
                         data-id={`${this.props["data-id"]}-close-button`}
                     />
                     {this.props.strings.menuTitle !== "" &&
-                        <div className="wizard-progress-menu__title" data-id={`${this.props["data-id"]}-menu-title`}>
+                        <div className="wizard2-progress-menu__title" data-id={`${this.props["data-id"]}-menu-title`}>
                             {this.props.strings.menuTitle || "Progress"}
                         </div>
                     }
                     {this._buildItems(this.props.requiredSteps, TYPES.required)}
                     {this.props.optionalSteps && this.props.optionalSteps.length > 0 &&
                         <div
-                            className="wizard-progress-menu__divider-container"
+                            className="wizard2-progress-menu__divider-container"
                             data-id={`${this.props["data-id"]}-menu-divider-title`}>
                             {this.props.strings.dividerTitle !== "" &&
-                                <div className="wizard-progress-menu__divider">
+                                <div className="wizard2-progress-menu__divider">
                                     {this.props.strings.dividerTitle || "Optional Configurations"}
                                 </div>
                             }
@@ -106,18 +106,18 @@ class Menu extends React.Component {
 function Item(props) {
     const required = props.type === TYPES.required;
     const iconClassNames = classnames(
-        "wizard-progress-menu__step-icon",
-        { "wizard-progress-menu__step-icon--required": required },
-        { "wizard-progress-menu__step-icon--optional": !required },
-        { "wizard-progress-menu__step-icon--optional-active": props.active && !props.completed && !required },
-        { "wizard-progress-menu__step-icon--completed": props.completed }
+        "wizard2-progress-menu__step-icon",
+        { "wizard2-progress-menu__step-icon--required": required },
+        { "wizard2-progress-menu__step-icon--optional": !required },
+        { "wizard2-progress-menu__step-icon--optional-active": props.active && !props.completed && !required },
+        { "wizard2-progress-menu__step-icon--completed": props.completed }
     );
     const stepClassNames = classnames(
-        "wizard-progress-menu__step",
-        { "wizard-progress-menu__step--active": props.active },
-        { "wizard-progress-menu__step--click-disabled": props.clickDisabled },
-        { "wizard-progress-menu__step--completed": props.completed },
-        { "wizard-progress-menu__editable": props.completed && !props.clickDisabled }
+        "wizard2-progress-menu__step",
+        { "wizard2-progress-menu__step--active": props.active },
+        { "wizard2-progress-menu__step--click-disabled": props.clickDisabled },
+        { "wizard2-progress-menu__step--completed": props.completed },
+        { "wizard2-progress-menu__editable": props.completed && !props.clickDisabled }
     );
 
     const content = required && !props.completed ? props.number : null;
@@ -133,13 +133,13 @@ function Item(props) {
     return (
         <div className={stepClassNames} onClick={handleClick} data-id={props["data-id"]}>
             <div className={iconClassNames}>{content}</div>
-            <div className="wizard-progress-menu__item-title">
-                <div className="wizard-progress-menu__item-title-text">{props.menuTitle || props.title}</div>
+            <div className="wizard2-progress-menu__item-title">
+                <div className="wizard2-progress-menu__item-title-text">{props.menuTitle || props.title}</div>
                 {props.completed && !props.clickDisabled && (
-                    <div className="wizard-progress-menu__item-title-icon icon-edit" />
+                    <div className="wizard2-progress-menu__item-title-icon icon-edit" />
                 )}
             </div>
-            <div className="wizard-progress-menu__item-description">{props.menuDescription || props.description}</div>
+            <div className="wizard2-progress-menu__item-description">{props.menuDescription || props.description}</div>
         </div>
     );
 }

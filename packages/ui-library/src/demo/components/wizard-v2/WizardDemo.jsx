@@ -181,6 +181,7 @@ class WizardDemo extends React.Component {
 
     _onTileSelect = (value) => {
         this._updateCurrentApp("selectedTile", value);
+        this.onNext();
     }
 
     _onAppNameChange = (value) => {
@@ -237,6 +238,7 @@ class WizardDemo extends React.Component {
             <Button key="wizard-button" onClick={this._onOpen}>Show Wizard Example</Button>,
             (this.state.open &&
                 <Wizard
+                    data-id="wizard-demo"
                     key="wizard"
                     onNext={this.onNext}
                     onCancel={this._onClose}
@@ -253,7 +255,10 @@ class WizardDemo extends React.Component {
                         description="Adding a new application to your environment allows your Customers controlled
                             access to it. Their are several dierent application technologies to choose from that
                             accommodate the majority of applications."
+                        clickDisabled={true}
                         continueDisabled={!this.state.currentApp.selectedTile}
+                        hideMenu={true}
+                        hideButtonBar={true}
                         loading={this.state.loading}
                         required>
 

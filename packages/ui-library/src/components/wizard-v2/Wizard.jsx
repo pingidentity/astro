@@ -71,6 +71,10 @@ import Utils from "../../util/Utils";
   *     Determines whether to render the next or save button as disabled.
   * @param {string} [description]
   *     The text displayed below the title in the wizard body when the step is active.
+  * @param {boolean} [hideButtonbar=false]
+  *     When true, the button bar is not rendered on the page
+  * @param {boolean} [hideMenu=false]
+  *     When true, the wizard menu is not rendered on the page
   * @param {string} [menuDescription]
   *     The text displayed in the menu below the title.
   * @param {boolean} [required=false]
@@ -102,10 +106,10 @@ class Wizard extends React.Component {
     static defaultProps = {
         activeStep: 1,
         buttonBarProps: {},
-        messageProps: null,
         "data-id": "wizard",
         headerItems: [],
         loading: false,
+        messageProps: null,
         onCancel: _.noop,
         onNext: _.noop,
         required: false,
@@ -133,24 +137,40 @@ class Wizard extends React.Component {
     }
 
     render() {
+        const {
+            activeStep: activeStepIndex,
+            buttonBarProps,
+            children,
+            ["data-id"]: dataId,
+            loading,
+            headerItems,
+            messageProps,
+            onCancel,
+            onClose,
+            onMenuClick,
+            onNext,
+            onSave,
+            strings,
+        } = this.props;
+
         let activeStep;
         let requiredSteps = [];
         let optionalSteps = [];
         let hasHeaderItems = this.props.headerItems && this.props.headerItems.length > 0;
 
-        React.Children.forEach(this.props.children, (child, index) => {
+        React.Children.forEach(children, (child, index) => {
             if (child && typeof(child) === "object" && child.hasOwnProperty("props")) {
 
                 const childProps = _.defaults(
                     {
-                        "data-id": child.props["data-id"] || `${this.props["data-id"]}-step`,
-                        active: index === this.props.activeStep,
+                        "data-id": child.props["data-id"] || `${dataId}-step`,
+                        active: index === activeStepIndex,
                         index: index,
                         key: index,
                     },
                     child.props
                 );
-                if (index === this.props.activeStep) {
+                if (index === activeStepIndex) {
                     activeStep = React.cloneElement(child, childProps);
                 }
 
@@ -162,15 +182,19 @@ class Wizard extends React.Component {
             }
         });
 
+        const classNames = classnames("wizard2", {
+            "wizard2--header-shown": hasHeaderItems,
+            "wizard2--menu-hidden": activeStep.props.hideMenu,
+            "wizard2--buttonbar-hidden": activeStep.props.hideButtonBar,
+        });
+
         return (
-            <div
-                data-id={this.props["data-id"]}
-                className={classnames("wizard-2", hasHeaderItems ? "wizard-2--header-shown" : null)}>
-                { hasHeaderItems && <Header data-id={this.props["data-id"]} sections={this.props.headerItems}/> }
-                <div className="wizard__content">
-                    {this.props.messageProps && <Messages {...this.props.messageProps} />}
+            <div data-id={dataId} className={classNames}>
+                {hasHeaderItems && <Header data-id={dataId} sections={headerItems}/> }
+                <div className="wizard2__content">
+                    {messageProps && <Messages {...messageProps} />}
                     <ActiveStep
-                        data-id={this.props["data-id"]}
+                        data-id={dataId}
                         step={activeStep}
                         stepTotal={requiredSteps.length + optionalSteps.length}
                         stepIndex={activeStep.props.required
@@ -178,26 +202,25 @@ class Wizard extends React.Component {
                             : _.findIndex(optionalSteps, activeStep.props) + requiredSteps.length
                         }
                         hasOptional={optionalSteps.length > 0}
-                        {..._.pick(this.props, [
-                            "buttonBarProps",
-                            "loading",
-                            "onCancel",
-                            "onNext",
-                            "onSave",
-                        ])}
-                    />
-                </div>
-                <Menu
-                    optionalSteps={optionalSteps}
-                    requiredSteps={requiredSteps}
-                    {..._.pick(this.props, [
-                        "activeStep",
-                        "data-id",
-                        "strings",
-                        "onMenuClick",
-                        "onClose",
-                    ])}
+                        hideButtonBar={activeStep.props.hideButtonBar}
+                        buttonBarProps={buttonBarProps}
+                        loading={loading}
+                        onCancel={onCancel}
+                        onNext={onNext}
+                        onSave={onSave}
                 />
+                </div>
+                {!activeStep.props.hideMenu && (
+                    <Menu
+                        optionalSteps={optionalSteps}
+                        requiredSteps={requiredSteps}
+                        activeStep={activeStepIndex}
+                        data-id={dataId}
+                        strings={strings}
+                        onMenuClick={onMenuClick}
+                        onClose={onClose}
+                    />
+                )}
             </div>
         );
     }
@@ -205,7 +228,7 @@ class Wizard extends React.Component {
 
 
 function ActiveStep(props) {
-    const buttonBarDefaults = { visible: true };
+    const buttonBarDefaults = { visible: !props.hideButtonBar };
     const lastStep = props.stepIndex === props.stepTotal - 1;
     const stepSaveCallback = props.step.props.onSave;
     const stepNotCompleted = !props.step.props.completed;
@@ -252,7 +275,7 @@ function ActiveStep(props) {
             {props.step.props.loading && (
                 <PageSpinner
                     data-id={`${props["data-id"]}-loader`}
-                    className="page-loader__wizard"
+                    className="wizard2__page-loader"
                     show
                     modal
                 >
@@ -263,7 +286,7 @@ function ActiveStep(props) {
             <ButtonBar
                 key="button-bar"
                 data-id={`${props["data-id"]}-buttonbar`}
-                className="wizard__button-bar"
+                className="wizard2__button-bar"
                 {...buttonBarProps}
             />
         </div>
@@ -272,17 +295,17 @@ function ActiveStep(props) {
 
 function Header(props) {
     return (
-        <div className="wizard__header" data-id={`${props["data-id"]}-headeritems`}>
+        <div className="wizard2__header" data-id={`${props["data-id"]}-headeritems`}>
             {
                 _.map(props.sections, (section, index) => {
                     return (
                         <div
-                            className="wizard__header-details"
+                            className="wizard2__header-details"
                             key={index}
                             data-id={`${props["data-id"]}-headeritem-${index}`}
                             title={section.value}>
                             <div
-                                className="wizard__header-title"
+                                className="wizard2__header-title"
                                 data-id={`${props["data-id"]}-headeritem-title-${index}`}>
                                 {section.title}
                             </div>

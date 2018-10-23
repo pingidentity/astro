@@ -35,7 +35,7 @@ const PageSpinner = ({
             <div>
                 <Spinner className={classnames("page-loader", small ? "page-loader--small" : null)} show={true} />
             </div>
-            {children && <div className="page-loader__text">{children}</div>}
+            {children && <div className="page-loader__text" data-id={`${dataId}-text`}>{children}</div>}
         </div>
     );
 

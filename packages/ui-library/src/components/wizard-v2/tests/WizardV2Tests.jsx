@@ -6,7 +6,7 @@ jest.dontMock("../Menu");
 jest.dontMock("../../general/messages/");
 jest.dontMock("../../forms/ButtonBar");
 jest.dontMock("../../general/EllipsisLoaderButton");
-
+jest.dontMock("../../general/PageSpinner");
 
 
 describe("WizardV2", function () {
@@ -38,26 +38,35 @@ describe("WizardV2", function () {
             children: "step 1 content",
             description: "step 1 description",
             menuDescription: "step 1 menu description",
-            title: "step 1 title",
             menuTitle: "step 1 menu title",
             onSave: jest.genMockFunction(),
             required: true,
+            title: "step 1 title",
         },
         {
             children: "step 2 content",
             description: "step 2 description",
             menuDescription: "step 2 menu description",
-            title: "step 2 title",
             menuTitle: "step 2 menu title",
+            onSave: jest.genMockFunction(),
+            required: true,
+            title: "step 2 title",
         },
         {
             children: "step 3 content",
             description: "step 3 description",
             menuDescription: "step 3 menu description",
-            title: "step 3 title",
             menuTitle: "step 3 menu title",
+            title: "step 3 title",
+        },
+        {
+            children: "step 4 content",
+            description: "step 4 description",
+            menuDescription: "step 4 menu description",
+            menuTitle: "step 4 menu title",
             onSave: jest.genMockFunction(),
-        }
+            title: "step 4 title",
+        },
     ];
 
 
@@ -72,6 +81,12 @@ describe("WizardV2", function () {
             <Wizard {..._.extend({}, wizardDefaultProps, optionalProps)}>
                 {defaultSteps}
             </Wizard>
+        );
+    }
+
+    function getMenuItems(component) {
+        return ReactTestUtils.scryRenderedDOMComponentsWithClass(
+            component, "wizard2-progress-menu__step"
         );
     }
 
@@ -162,7 +177,7 @@ describe("WizardV2", function () {
     });
 
     it("renders the button bar and the proper callbacks are called on an OPTIONAL step", function () {
-        const component = getComponent({ activeStep: 1 });
+        const component = getComponent({ activeStep: 2 });
         const primaryButton = getElementByDid(component, "-buttonbar-save");
         const secondaryButton = getElementByDid(component, "-buttonbar-cancel");
 
@@ -175,14 +190,15 @@ describe("WizardV2", function () {
     });
 
     it("renders the button bar and the proper callbacks are called on the FINAL step", function () {
-        const component = getComponent({ activeStep: 2 });
+        const finalStepIndex = defaultStepData.length - 1;
+        const component = getComponent({ activeStep: finalStepIndex });
         const primaryButton = getElementByDid(component, "-buttonbar-save");
         const secondaryButton = getElementByDid(component, "-buttonbar-cancel");
 
         expect(primaryButton.textContent).toBe("Save and Close");
         expect(primaryButton.className).toContain("success");
         ReactTestUtils.Simulate.click(primaryButton);
-        expect(component.props.children[2].props.onSave).toBeCalled();
+        expect(component.props.children[finalStepIndex].props.onSave).toBeCalled();
 
         expect(secondaryButton.textContent).toBe("Cancel");
         expect(secondaryButton.className).toContain("cancel");
@@ -191,7 +207,7 @@ describe("WizardV2", function () {
     });
 
     it("renders the step properly if in a dirty state", function () {
-        let stepData = _.clone(defaultStepData);
+        let stepData = JSON.parse(JSON.stringify(defaultStepData));
         stepData[1].dirty = true;
 
         const component = getComponent({}, stepData);
@@ -260,7 +276,7 @@ describe("WizardV2", function () {
         const closeButton = getElementByDid(component, "-close-button");
 
         expect(closeButton).toBeTruthy();
-        expect(closeButton.className).toBe("wizard-close-btn");
+        expect(closeButton.className).toBe("wizard2-close-btn");
         ReactTestUtils.Simulate.click(closeButton);
         expect(component.props.onCancel).toBeCalled();
     });
@@ -268,15 +284,14 @@ describe("WizardV2", function () {
     it("renders the menu items properly", function () {
         const activeStep = 1;
         const completedStep = 0;
-        const wizardProps = { activeStep: activeStep };
 
-        let stepData = _.clone(defaultStepData);
+        let stepData = JSON.parse(JSON.stringify(defaultStepData));
         stepData[completedStep].completed = true;
 
-        const component = getComponent(wizardProps, stepData);
-        const renderedMenuItems = ReactTestUtils.scryRenderedDOMComponentsWithClass(
-            component, "wizard-progress-menu__step"
-        );
+        const component = getComponent({
+            activeStep: activeStep
+        }, stepData);
+        const renderedMenuItems = getMenuItems(component);
 
         expect(renderedMenuItems.length).toBe(stepData.length);
 
@@ -286,45 +301,43 @@ describe("WizardV2", function () {
             const itemTitle = item.children[1];
             const itemDescription = item.children[2];
 
-            expect(itemIcon.className).toContain("wizard-progress-menu__step-icon");
+            expect(itemIcon.className).toContain("wizard2-progress-menu__step-icon");
 
-            expect(itemTitle.className).toContain("wizard-progress-menu__item-title");
+            expect(itemTitle.className).toContain("wizard2-progress-menu__item-title");
             expect(itemTitle.textContent).toBe(stepData[itemIndex].menuTitle);
 
-            expect(itemDescription.className).toContain("wizard-progress-menu__item-description");
+            expect(itemDescription.className).toContain("wizard2-progress-menu__item-description");
             expect(itemDescription.textContent).toBe(stepData[itemIndex].menuDescription);
 
 
             // check if the required and optional steps have the right classes
-            if (itemIndex === 0) {
-                expect(itemIcon.className).toContain("wizard-progress-menu__step-icon--required");
-                expect(itemIcon.className).not.toContain("wizard-progress-menu__step-icon--optional");
+            if (itemIndex <= 1) {
+                expect(itemIcon.className).toContain("wizard2-progress-menu__step-icon--required");
+                expect(itemIcon.className).not.toContain("wizard2-progress-menu__step-icon--optional");
             } else {
-                expect(itemIcon.className).not.toContain("wizard-progress-menu__step-icon--required");
-                expect(itemIcon.className).toContain("wizard-progress-menu__step-icon--optional");
+                expect(itemIcon.className).not.toContain("wizard2-progress-menu__step-icon--required");
+                expect(itemIcon.className).toContain("wizard2-progress-menu__step-icon--optional");
             }
 
             // check if the completed step has the right class
             if (itemIndex === completedStep) {
-                expect(itemIcon.className).toContain("wizard-progress-menu__step-icon--completed");
+                expect(itemIcon.className).toContain("wizard2-progress-menu__step-icon--completed");
             } else {
-                expect(itemIcon.className).not.toContain("wizard-progress-menu__step-icon--completed");
+                expect(itemIcon.className).not.toContain("wizard2-progress-menu__step-icon--completed");
             }
 
             // check if the disabled step has the right class
             if (itemIndex >= activeStep) {
-                expect(itemClasses).toContain("wizard-progress-menu__step--click-disabled");
+                expect(itemClasses).toContain("wizard2-progress-menu__step--click-disabled");
             } else {
-                expect(itemClasses).not.toContain("wizard-progress-menu__step--click-disabled");
+                expect(itemClasses).not.toContain("wizard2-progress-menu__step--click-disabled");
             }
 
             // check if the activeStep step has the right classes
             if (itemIndex === activeStep) {
-                expect(itemClasses).toContain("wizard-progress-menu__step--active");
-                expect(itemIcon.className).toContain("wizard-progress-menu__step-icon--optional-active");
+                expect(itemClasses).toContain("wizard2-progress-menu__step--active");
             } else {
-                expect(itemClasses).not.toContain("wizard-progress-menu__step--active");
-                expect(itemIcon.className).not.toContain("wizard-progress-menu__step-icon--optional-active");
+                expect(itemClasses).not.toContain("wizard2-progress-menu__step--active");
             }
 
         });
@@ -340,9 +353,7 @@ describe("WizardV2", function () {
 
         const component = getComponent({}, stepData);
 
-        const renderedMenuItems = ReactTestUtils.scryRenderedDOMComponentsWithClass(
-            component, "wizard-progress-menu__step"
-        );
+        const renderedMenuItems = getMenuItems(component);
 
         renderedMenuItems.map(function(item, itemIndex) {
             expect(item.children[2].textContent).toBe(stepData[itemIndex].description);
@@ -351,9 +362,7 @@ describe("WizardV2", function () {
 
     it("disabled items do not trigger callback", function () {
         const component = getComponent();
-        const renderedMenuItems = ReactTestUtils.scryRenderedDOMComponentsWithClass(
-            component, "wizard-progress-menu__step"
-        );
+        const renderedMenuItems = getMenuItems(component);
 
         ReactTestUtils.Simulate.click(renderedMenuItems[2]);
         expect(component.props.onMenuClick).not.toBeCalled();
@@ -365,7 +374,8 @@ describe("WizardV2", function () {
     it("clicking menu items changes selected menu item / visited optional steps become clickable", function () {
         const initialActiveStep = 1;
         const nextActiveStep = 2;
-        const mySteps = _.clone(defaultStepData);
+        const finalActiveStep = 3;
+        const mySteps = JSON.parse(JSON.stringify(defaultStepData));
         let myProps = _.clone(wizardDefaultProps);
 
         myProps.activeStep = initialActiveStep;
@@ -377,30 +387,33 @@ describe("WizardV2", function () {
                 })}
             </Wrapper>
         );
-        const renderedMenuItems = ReactTestUtils.scryRenderedDOMComponentsWithClass(
-            component, "wizard-progress-menu__step"
-        );
+        let renderedMenuItems = getMenuItems(component);
 
         renderedMenuItems.map(function(item, itemIndex) {
             if (itemIndex === initialActiveStep) {
-                expect(renderedMenuItems[itemIndex].className).toContain("wizard-progress-menu__step--click-disabled");
-                expect(renderedMenuItems[itemIndex].className).toContain("wizard-progress-menu__step--active");
+                expect(renderedMenuItems[itemIndex].className).toContain("wizard2-progress-menu__step--click-disabled");
+                expect(renderedMenuItems[itemIndex].className).toContain("wizard2-progress-menu__step--active");
             } else {
-                expect(renderedMenuItems[itemIndex].className).not.toContain("wizard-progress-menu__step--active");
+                expect(renderedMenuItems[itemIndex].className).not.toContain("wizard2-progress-menu__step--active");
             }
         });
 
         component._setProps({ activeStep: nextActiveStep });
 
         renderedMenuItems.map(function(item, itemIndex) {
-            if (itemIndex === initialActiveStep) {
-                // expect(renderedMenuItems[itemIndex].className).not.toContain("wizard-progress-menu__step--click-disabled");
-            }
-
             if (itemIndex === nextActiveStep) {
-                expect(renderedMenuItems[itemIndex].className).toContain("wizard-progress-menu__step--active");
+                expect(renderedMenuItems[itemIndex].className).toContain("wizard2-progress-menu__step--active");
             } else {
-                expect(renderedMenuItems[itemIndex].className).not.toContain("wizard-progress-menu__step--active");
+                expect(renderedMenuItems[itemIndex].className).not.toContain("wizard2-progress-menu__step--active");
+            }
+        });
+
+        component._setProps({ activeStep: finalActiveStep });
+
+        renderedMenuItems.map(function (item, itemIndex) {
+            if (itemIndex === nextActiveStep) {
+                expect(renderedMenuItems[itemIndex].className)
+                    .not.toContain("wizard2-progress-menu__step--click-disabled");
             }
         });
     });
@@ -437,13 +450,13 @@ describe("WizardV2", function () {
 
     it("displays the loader when shown", function () {
         const activeStep = 0;
-        let stepData = _.clone(defaultStepData);
+        let stepData = JSON.parse(JSON.stringify(defaultStepData));
 
         stepData[activeStep].loading = true;
 
         const component = getComponent({
             activeStep: activeStep,
-        });
+        }, stepData);
 
         const loader = getElementByDid(component, "-loader");
         expect(loader).toBeTruthy();
@@ -451,17 +464,17 @@ describe("WizardV2", function () {
 
     it("displays the loader with text", function () {
         const activeStep = 0;
-        let stepData = _.clone(defaultStepData);
+        const testText = "loading...";
+        let stepData = JSON.parse(JSON.stringify(defaultStepData));
 
-        stepData[activeStep].loading = false;
-        stepData[activeStep].loading = "hello";
+        stepData[activeStep].loading = testText;
 
         const component = getComponent({
             activeStep: activeStep,
-        });
+        }, stepData);
 
-        const loader = getElementByDid(component, "-loader");
-        expect(loader.textContent).toEqual("hello");
+        const loaderText = getElementByDid(component, "-loader-text");
+        expect(loaderText.textContent).toEqual(testText);
     });
 
     it("emits open and close events", function () {
@@ -499,5 +512,18 @@ describe("WizardV2", function () {
         expect(closeListenerCallback).toBeCalled();
     });
 
+    it("hides the menu", function () {
+        const activeStep = 0;
+        let stepData = JSON.parse(JSON.stringify(defaultStepData));
+
+        stepData[activeStep].hideMenu = true;
+
+        const component = getComponent({
+            activeStep: activeStep,
+        }, stepData);
+
+        const menu = getElementByDid(component, "-menu");
+        expect(menu).toBeFalsy();
+    });
 
 });

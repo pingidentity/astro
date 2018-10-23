@@ -145,15 +145,6 @@
         background-color: rgba($color-white, 0.6);
     }
 
-    &__wizard {
-        position: fixed;
-        left: calc(50% - 140px); // 140px = half of wizard right-nav width (center on wizard content)
-        top: 50%;
-        margin: 0;
-        z-index: 11;
-        transform: translateX(-50%) translateY(-50%);
-    }
-
     &--small {
         $size: 50px;
         $border-width: 7px;
