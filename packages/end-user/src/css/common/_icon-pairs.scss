@@ -12,6 +12,9 @@
 
 %icon-pair__label,
 .icon-pair__label {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     // this is here to make text wrap properly in IE10 -jfal
     flex-shrink: 1;
 }

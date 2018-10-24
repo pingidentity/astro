@@ -51004,6 +51004,9 @@ exports.default = function (_ref) {
         }, {
             name: '1 number (0-9)',
             status: 'no'
+        }, {
+            name: 'Here is a very long requirement that hopefully won\'t come into play much\n                                    but let\'s still make sure we support having this much content show.',
+            status: 'no'
         }]
     }))), (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Verify New Password", id: "verify" }), (0, _react.createElement)(_Button2.default, { label: "Save", primary: true, disabled: true })))));
 };
