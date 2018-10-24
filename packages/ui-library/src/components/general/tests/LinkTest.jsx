@@ -91,4 +91,17 @@ describe("Link", function () {
         ReactTestUtils.Simulate.click(element);
         expect(callback).toBeCalled();
     });
+
+    it("renders an Anchor component sometimes", function () {
+        const component = ReactTestUtils.renderIntoDocument(
+            <div><Link>Simple link</Link></div>
+        );
+
+        const notElement = TestUtils.findRenderedDOMNodeWithClass(component, "content-link");
+        expect(notElement).toBeFalsy();
+
+        const element = TestUtils.findRenderedDOMNodeWithTag(component, "a");
+        expect(element).toBeTruthy();
+    });
+
 });

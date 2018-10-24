@@ -11,7 +11,7 @@ import HelpHint from "../tooltips/HelpHint";
  * @param {string} [data-id="label-display"]
  *          To define the base "data-id" value for the top-level HTML container.
  * @param {string} [className]
- *      css paramanter
+ *      css parameter
  * @example <LabelValuePairs data=id="label-display" />
  */
 
@@ -89,7 +89,7 @@ LabelValuePairs.propTypes = {
         PropTypes.oneOfType([
             PropTypes.shape({
                 label: PropTypes.string.isRequired,
-                value: PropTypes.string.isRequired,
+                value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
                 hintText: PropTypes.string,
                 hintPlacement: PropTypes.string,
                 hintLink: PropTypes.string,

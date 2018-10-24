@@ -5,6 +5,13 @@ a[class*=' icon-'] {
     text-decoration: none;
 }
 
+a [class^='icon-'],
+a [class*=' icon-'] {
+    &:before {
+        display: inline-block; // need this to remove underlines
+    }
+}
+
 a.icon-clear,
 a .icon-clear,
 a.icon-plus,

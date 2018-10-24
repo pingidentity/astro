@@ -968,7 +968,7 @@ module.exports = [
                 label: "Query Builder",
                 demo: require("../components/templates/QueryBuilderDemo"),
                 pathToDoc: "components/templates/QueryBuilder.jsx",
-                pathToSource: "templates_edit-view-modal_QueryBuilder.jsx.html",
+                pathToSource: "templates_query-builder_QueryBuilder.jsx.html",
                 pathToDemoSource: "demo_components_templates_QueryBuilderDemo.jsx.html",
                 fullscreen: true,
                 icon: "details"

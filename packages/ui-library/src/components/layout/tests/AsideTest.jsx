@@ -23,4 +23,12 @@ describe("Aside", function () {
 
         expect(TestUtils.checkForDataIds(component, ["aside", "aside-content"])).toEqual(true);
     });
+
+    it("renders with a position", function () {
+        const component = getComponent({ position: "top-right" });
+
+        const element = TestUtils.findRenderedDOMNodeWithClass(component, "aside-container__aside--top-right");
+
+        expect(element).toBeTruthy();
+    });
 });

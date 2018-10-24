@@ -13,4 +13,12 @@
 
         margin-left: $spacing-lg;
     }
+
+    &__aside {
+        &--top-right {
+            @include flexbox-grow(1);
+
+            text-align: right;
+        }
+    }
 }

@@ -137,3 +137,9 @@
         font-size: 20px;
     }
 }
+
+.anchor {
+    &__icon {
+        margin-right: $spacing-xs;
+    }
+}

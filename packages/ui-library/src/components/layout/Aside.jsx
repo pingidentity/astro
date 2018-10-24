@@ -14,6 +14,8 @@ import classnames from "classnames";
 *     The element that is positioned next to the main content
 * @param {boolean} [fullHeight]
 *     When true, stretch the aside element to the full height of the main element
+* @param {string} [position]
+*     Can specify behavior like "right-top"
 */
 
 const Aside = ({
@@ -21,7 +23,8 @@ const Aside = ({
     children,
     className,
     "data-id": dataId,
-    fullHeight
+    fullHeight,
+    position,
 }) => (
     <div
         className={classnames("aside-container", className, {
@@ -30,7 +33,10 @@ const Aside = ({
         data-id={dataId}
     >
         {children}
-        {aside}
+        {position
+            ? (<div className={`aside-container__aside aside-container__aside--${position}`}>{aside}</div>)
+            : aside
+        }
     </div>
 );
 

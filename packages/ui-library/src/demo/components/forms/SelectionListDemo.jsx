@@ -162,7 +162,7 @@ class SelectionListDemo extends React.Component {
                     data-id="radio-demo-2"
                     stateless={false}
                     type={SelectionList.ListType.SINGLE}
-                    items={SINGLE_SELECT_ITEMS}
+                    items={[]}
                     selectedItemIds={this.state.singleSelectId3}
                     showSearchBox={false}
                     searchPlaceholder="Search..."

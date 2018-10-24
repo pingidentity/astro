@@ -1266,6 +1266,7 @@ $color-grey-minor-1: $color-neutral-30;
     @include button-spacing();
 
     &--unfixed {
+        background: none;
         position: relative;
         left: auto;
         right: auto;

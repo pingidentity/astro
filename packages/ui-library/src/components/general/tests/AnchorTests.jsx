@@ -40,4 +40,24 @@ describe("Anchor", function() {
         });
         expect(callback).toBeCalled();
     });
+
+    it("renders an add link", function() {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Anchor type="add">Hello</Anchor>
+        );
+
+        var element = TestUtils.findRenderedDOMNodeWithClass(component, "icon-plus");
+
+        expect(element).toBeTruthy();
+    });
+
+    it("renders a remove link", function() {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Anchor type="remove">Hello</Anchor>
+        );
+
+        var element = TestUtils.findRenderedDOMNodeWithClass(component, "icon-clear");
+
+        expect(element).toBeTruthy();
+    });
 });

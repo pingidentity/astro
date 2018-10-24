@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import _ from "underscore";
+import classnames from "classnames";
 import KeyboardUtils from "../../util/KeyboardUtils";
 
 /**
@@ -34,14 +35,30 @@ class Anchor extends React.Component {
         }
     }
 
-    render = () => (
-        <a
-            tabIndex="0"
-            {...this.props}
-            onMouseDown={this._dontFocus}
-            onKeyPress={this._handleKeyPress}
-        />
-    );
+    _typeIcon = type => {
+        switch (type) {
+            case "add": return <span className="icon-plus anchor__icon" />;
+            case "remove": return <span className="icon-clear anchor__icon" />;
+        }
+        return null;
+    }
+
+    render = () => {
+        const { children, className, type, disabled, ...props } = this.props;
+
+        return (
+            <a
+                tabIndex="0"
+                {...props}
+                className={classnames("anchor", className, { disabled })}
+                onMouseDown={this._dontFocus}
+                onKeyPress={this._handleKeyPress}
+            >
+                {this._typeIcon(type)}
+                {children}
+            </a>
+        );
+    };
 }
 
 module.exports = Anchor;

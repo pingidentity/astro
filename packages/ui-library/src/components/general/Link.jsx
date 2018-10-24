@@ -1,9 +1,11 @@
 "use strict";
 
-var React = require("react"),
-    PropTypes = require("prop-types"),
-    Icon = require("./Icon"),
-    classnames = require("classnames");
+import React from "react";
+import PropTypes from "prop-types";
+import Icon from "./Icon";
+import Anchor from "./Anchor";
+import classnames from "classnames";
+
 
 /**
  * @class Link
@@ -17,6 +19,8 @@ var React = require("react"),
  *          URL for Link
  * @param {string} [target]
  *          Target for Link
+ * @param {string} [type]
+ *          Specify what this link is being used for.
  * @param {string} [icon]
  *          Icon name for Link
  * @param {string} [count]
@@ -41,6 +45,10 @@ var React = require("react"),
  */
 
 const Link = (props) => {
+    if ((props.children || props.type) && !(props.title || props.count)) {
+        return <Anchor href={props.url} {...props} />;
+    }
+
     const {
             count,
             disabled,
@@ -65,7 +73,7 @@ const Link = (props) => {
         }
         else if (count) {
             return [
-                <span className="count">{count}</span>,
+                <span className="count" key="count">{count}</span>,
                 title
             ];
         } else {
@@ -95,6 +103,10 @@ Link.propTypes = {
     title: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.element
+    ]),
+    type: PropTypes.oneOf([
+        "add",
+        "remove"
     ]),
     disabled: PropTypes.bool,
     onClick: PropTypes.func,
