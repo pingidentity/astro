@@ -49,14 +49,40 @@ describe("DonutCard", function () {
         expect(element.textContent).toEqual("3");
     });
 
-    it("renders a number greater than 1000", function () {
+    it("renders value correctly when greater than 1,000", function () {
         const component = getComponent({
-            value: 10000
+            value: 1234
         });
 
         const element = TestUtils.findRenderedDOMNodeWithClass(component, "donut-card__center-number");
+        expect(element.textContent).toEqual("1.23k");
+    });
 
-        expect(element.textContent).toEqual("10k");
+    it("renders value correctly when greater than 10,000", function () {
+        const component = getComponent({
+            value: 12345
+        });
+
+        const element = TestUtils.findRenderedDOMNodeWithClass(component, "donut-card__center-number");
+        expect(element.textContent).toEqual("12.3k");
+    });
+
+    it("renders value correctly when greater than 100,000", function () {
+        const component = getComponent({
+            value: 123456
+        });
+
+        const element = TestUtils.findRenderedDOMNodeWithClass(component, "donut-card__center-number");
+        expect(element.textContent).toEqual("123k");
+    });
+
+    it("renders value correctly when than 1,000,000", function () {
+        const component = getComponent({
+            value: 1234567
+        });
+
+        const element = TestUtils.findRenderedDOMNodeWithClass(component, "donut-card__center-number");
+        expect(element.textContent).toEqual("1.23m");
     });
 
     it("renders a path", function() {

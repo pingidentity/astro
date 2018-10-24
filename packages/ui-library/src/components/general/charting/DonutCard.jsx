@@ -103,7 +103,17 @@ class DonutCard extends Component {
     };
 
     _renderNumber = (value) => {
-        return value >= 1000 ? `${Number.parseFloat((value/1000).toFixed(1))}k` : value;
+        if (value >= 1000000) {
+            return `${Number.parseFloat((value / 1000000).toFixed(2))}m`;
+        } else if (value >= 100000 ) {
+            return `${Number.parseFloat((value / 1000).toFixed(0))}k`;
+        } else if (value >= 10000) {
+            return `${Number.parseFloat((value / 1000).toFixed(1))}k`;
+        } else if (value >= 1000) {
+            return `${Number.parseFloat((value / 1000).toFixed(2))}k`;
+        } else {
+            return value;
+        }
     };
 
     _renderCommas = (value) => {
@@ -144,14 +154,14 @@ class DonutCard extends Component {
                         {!this.props.loading && ([
                             <PieChart
                                 key="chartKey"
-                                height={225}
-                                width={225}
+                                height={202}
+                                width={202}
                                 data-id={`${this.props["data-id"]}-chart`}
                                 className="donut-card__donut-chart"
                             >
                                 <Pie
-                                    innerRadius={70}
-                                    outerRadius={110}
+                                    innerRadius={60}
+                                    outerRadius={100}
                                     paddingAngle={1}
                                     key="pieKey"
                                     data={this.props.data}

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { AreaChart, Area, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { AreaChart, Area, Tooltip, XAxis, YAxis } from "recharts";
 import DashboardColors from "./Cards/dashboardColors";
 import DashboardCard from "./Cards/DashboardCard";
 import DashboardCardList from "./Cards/DashboardCardList";
@@ -121,30 +121,32 @@ class StatAreaCard extends React.Component {
                             <div key="subtitle" className="dashboard-card__subtitle">
                                 {this.props.subtitle}
                             </div>,
-                            <ResponsiveContainer key="chart" width="100%" height={80} className="stat-area-card__chart">
-                                <AreaChart
-                                    data={this.props.data}
-                                    margin={chartMargin}>
-                                    <XAxis hide={true} />
-                                    <YAxis hide={true} />
-                                    <Area
-                                        connectNulls={false}
-                                        dataKey={this.props.yAxisKey}
-                                        fill={hexColor}
-                                        stroke={hexColor}
-                                        fillOpacity={1}
-                                        isAnimationActive={false}
-                                        legendType={"none"}
-                                        name={1}
-                                    />
-                                    <Tooltip
-                                        content={<CustomTooltip />}
-                                        cursor={false}
-                                        onMouseOver={this._onMouseOver}
-                                        yAxisKey={this.props.yAxisKey}
-                                    />
-                                </AreaChart>
-                            </ResponsiveContainer>
+                            <AreaChart
+                                key="chart"
+                                width={200}
+                                height={80}
+                                className="stat-area-card__chart"
+                                data={this.props.data}
+                                margin={chartMargin}>
+                                <XAxis hide={true} />
+                                <YAxis hide={true} />
+                                <Area
+                                    connectNulls={false}
+                                    dataKey={this.props.yAxisKey}
+                                    fill={hexColor}
+                                    stroke={hexColor}
+                                    fillOpacity={1}
+                                    isAnimationActive={false}
+                                    legendType={"none"}
+                                    name={1}
+                                />
+                                <Tooltip
+                                    content={<CustomTooltip />}
+                                    cursor={false}
+                                    onMouseOver={this._onMouseOver}
+                                    yAxisKey={this.props.yAxisKey}
+                                />
+                            </AreaChart>
                         ])}
                         <RockerButton {...rockerButtonDefaults} {...this.props.rockerButtonProps} />
                     </div>

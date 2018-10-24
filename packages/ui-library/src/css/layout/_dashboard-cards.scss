@@ -333,8 +333,10 @@ $fullwidthBreakpoint: 950px;
 
 .stat-area-card {
     min-height: 307px;
+    text-align: center;
 
     &__chart {
+        display: inline-block;
         margin: $spacing-md 0 0;
     }
     &__range-selector {
@@ -382,7 +384,6 @@ $fullwidthBreakpoint: 950px;
         align-items: center;
     }
 
-
     &__title {
         position: absolute;
         font-size: 18px;
@@ -395,7 +396,7 @@ $fullwidthBreakpoint: 950px;
 
     &__center-info {
         position: absolute;
-        top: 150px;
+        top: 145px;
         left: 50%;
         transform: translateX(-50%);
         text-align: center;
@@ -403,23 +404,21 @@ $fullwidthBreakpoint: 950px;
     }
 
     &__front-line {
-        &:after {
-            content: '';
-            display: block;
-            border-bottom: 2px solid $color-neutral-10;
-            width: 96px;
-        }
+        border-bottom: 2px solid $color-neutral-10;
+        width: 70px;
+        margin-left: 50%;
+        transform: translateX(-50%);
     }
 
     &__center-number {
         position: relative;
-        font-size: 37px;
+        font-size: 35px;
         bottom: 10px;
     }
 
     &__center-label {
         position: relative;
-        font-size: 16px;
+        font-size: 12px;
         top: 2px;
     }
 

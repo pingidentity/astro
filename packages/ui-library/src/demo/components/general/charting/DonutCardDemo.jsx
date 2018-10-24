@@ -19,9 +19,9 @@ class DonutCardDemo extends React.Component {
     ]
 
     data = [
-        { id: "Enabled Users", value: 120543 , color: "#E12F51" },
-        { id: "Inactive Users", value: 51233, color: "#193967" },
-        { id: "Disabled Users", value: 20000, color: "#4C8DCA" },
+        { id: "Enabled Users", value: 1205, color: "#E12F51" },
+        { id: "Inactive Users", value: 512, color: "#193967" },
+        { id: "Disabled Users", value: 200, color: "#4C8DCA" },
     ];
 
     _sumTotal = () => {

@@ -279,7 +279,7 @@ HeroChart.propTypes = {
 HeroChart.defaultProps = {
     "data-id": "hero-chart",
     bgImage: "",
-    chartWidth: 800,
+    chartWidth: 700,
     chartHeight: 200,
     loading: false,
     onValueChange: _.noop,
