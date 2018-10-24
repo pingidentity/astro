@@ -119,7 +119,6 @@ define package
 	mkdir -p dist/ui-library/examples
 	cp -rf lib dist/ui-library
 	cp -f package.json dist/ui-library
-	tar -czf dist/ui-library/examples/basic-app.tar.gz --directory=examples basic-app
 	tar -czf dist/ui-library-$(1).tar.gz --directory=dist ui-library
 endef
 
@@ -331,8 +330,6 @@ package-and-upload-for-hosting: install-node-npm
 		cp -rf src build;\
 		cp -rf build-doc build;\
 		rm -rf $${LIB_VERSION}.tar.gz;\
-		mkdir -p build/examples;\
-		tar -czf build/examples/basic-app.tar.gz --directory=examples basic-app;\
 		tar -czf $${LIB_VERSION}.tar.gz build;\
 		chmod 600 ./hosting/FARM-33-341f336d.us-west-2.pem;\
 		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -f /var/www/html/$${LIB_VERSION}.tar.gz;\
