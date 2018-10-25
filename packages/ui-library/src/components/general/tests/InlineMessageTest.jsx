@@ -34,7 +34,7 @@ describe("InlineMessage", function () {
     it("display simple inline message with button", function () {
         var text = "Your message here";
         var label = "Do Something";
-        var onClick = jest.genMockFunction();
+        var onClick = jest.fn();
         var view = getComponent({ "data-id": "notice-message-button",
                                   type: InlineMessage.MessageTypes.NOTICE,
                                   label: label, onClick: onClick }, text);
@@ -61,7 +61,7 @@ describe("InlineMessage", function () {
 
     it("display simple inline message with action, but no button text", function () {
         var text = "Your message here";
-        var onClick = jest.genMockFunction();
+        var onClick = jest.fn();
         var view = getComponent({ "data-id": "notice-message-button",
                                   type: InlineMessage.MessageTypes.NOTICE,
                                   onClick: onClick }, text);
@@ -130,7 +130,7 @@ describe("InlineMessage", function () {
         var expectedError = new Error(Utils.deprecatePropError("callback", "onClick"));
 
         expect(function () {
-            getComponent({ callback: jest.genMockFunction() });
+            getComponent({ callback: jest.fn() });
         }).toThrow(expectedError);
     });
 

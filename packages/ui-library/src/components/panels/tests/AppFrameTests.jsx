@@ -67,9 +67,9 @@ describe("AppFrame", () => {
 
     function getWrappedComponent(opts) {
         opts = _.defaults(opts || {}, {
-            onItemChange: jest.genMockFunction(),
-            onSectionChange: jest.genMockFunction(),
-            onRootChange: jest.genMockFunction(),
+            onItemChange: jest.fn(),
+            onSectionChange: jest.fn(),
+            onRootChange: jest.fn(),
             navTree: navData,
             root: "ColumnA",
             autoSelectItemFromRoot: true,

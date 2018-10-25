@@ -9,7 +9,7 @@ describe("ReduxUtils", function () {
         Utils = require("../EventUtils");
 
     it("Forwards checked attribute", function () {
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
         var wrapper = Utils.forwardTargetChecked(callback);
 
         wrapper({ target: { checked: true } });
@@ -20,7 +20,7 @@ describe("ReduxUtils", function () {
     });
 
     it("Forwards target value", function () {
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
         var wrapper = Utils.forwardTargetValue(callback);
 
         wrapper({ target: { value: "blah" } });
@@ -28,7 +28,7 @@ describe("ReduxUtils", function () {
     });
 
     it("Forwards target value as int", function () {
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
         var wrapper = Utils.forwardTargetValueAsInt(callback);
 
         wrapper({ target: { value: "105" } });
@@ -53,7 +53,7 @@ describe("ReduxUtils", function () {
             }
         }
 
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
         var component = ReactTestUtils.renderIntoDocument(<MockComp onClick={callback} />);
 
         ReactTestUtils.Simulate.click(component.refs.innerMost);

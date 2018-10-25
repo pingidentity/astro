@@ -22,7 +22,7 @@ describe("Calendar", function () {
         TestUtils = require("../../../testutil/TestUtils"),
         Utils = require("../../../util/Utils.js"),
 
-        callback = jest.genMockFunction(),
+        callback = jest.fn(),
         selectedDateString = "2015-10-15",
         dateRange = {
             startDate: new Date(2015, 9, 10),   //Oct 10 2015
@@ -387,7 +387,7 @@ describe("Calendar", function () {
         //open calendar
         ReactTestUtils.Simulate.click(container, {});
 
-        var mockpreventDefault = jest.genMockFunction();
+        var mockpreventDefault = jest.fn();
         globalKeyListener({ keyCode: 39, preventDefault: mockpreventDefault }); //arrow right
 
         expect(callback).toBeCalledWith("1444953600000");
@@ -395,8 +395,8 @@ describe("Calendar", function () {
     });
 
     it("register/unregister global listeners", function () {
-        document.addEventListener = jest.genMockFunction();
-        document.removeEventListener = jest.genMockFunction();
+        document.addEventListener = jest.fn();
+        document.removeEventListener = jest.fn();
 
         var component = ReactTestUtils.renderIntoDocument(
             <Calendar format="YYYY-MM-DD"
@@ -800,7 +800,7 @@ describe("Calendar", function () {
         var expectedError = new Error(Utils.deprecatePropError("onChange", "onValueChange"));
 
         expect(function () {
-            getComponent({ onChange: jest.genMockFunction });
+            getComponent({ onChange: jest.fn() });
         }).toThrow(expectedError);
     });
 

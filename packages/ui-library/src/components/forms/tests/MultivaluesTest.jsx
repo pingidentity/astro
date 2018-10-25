@@ -17,7 +17,7 @@ describe("FormTextField", function () {
         input;
 
     beforeEach(function () {
-        callback = jest.genMockFunction();
+        callback = jest.fn();
         component = ReactTestUtils.renderIntoDocument(
             <Multivalues title="Sites" data-id="multiselect"
                 entries={[
@@ -217,7 +217,7 @@ describe("FormTextField", function () {
             ReactTestUtils.renderIntoDocument(
                 <Multivalues
                     id="foo"
-                    title="bar" entries={[ ]} onValueChange={jest.genMockFunction()} onNewValue={jest.genMockFunction()}
+                    title="bar" entries={[ ]} onValueChange={jest.fn()} onNewValue={jest.fn()}
                 />
             );
         }).toThrow(expectedError);
@@ -229,8 +229,8 @@ describe("FormTextField", function () {
         expect(function () {
             ReactTestUtils.renderIntoDocument(
                 <Multivalues
-                    onChange={jest.genMockFunction()}
-                    title="bar" entries={[ ]} onNewValue={jest.genMockFunction()}
+                    onChange={jest.fn()}
+                    title="bar" entries={[ ]} onNewValue={jest.fn()}
                 />
             );
         }).toThrow(expectedError);
@@ -243,7 +243,7 @@ describe("FormTextField", function () {
             ReactTestUtils.renderIntoDocument(
                 <Multivalues
                     isRequired={true}
-                    title="bar" entries={[ ]} onValueChange={jest.genMockFunction()} onNewValue={jest.genMockFunction()}
+                    title="bar" entries={[ ]} onValueChange={jest.fn()} onNewValue={jest.fn()}
                 />
             );
         }).toThrow(expectedError);

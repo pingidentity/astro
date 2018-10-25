@@ -12,7 +12,7 @@ describe("DropDownButton", function () {
         DropDownButton = require("../DropDownButton");
 
     it("renders closed in stateless mode", function () {
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
 
         var menu = {
             optionOne: "Option One",
@@ -24,7 +24,7 @@ describe("DropDownButton", function () {
                             stateless={true}
                             onValueChange={callback}
                             options={menu}
-                            onToggle={jest.genMockFunction()}
+                            onToggle={jest.fn()}
                             label="Add" />
         );
 
@@ -38,7 +38,7 @@ describe("DropDownButton", function () {
     });
 
     it("renders open in stateless mode", function () {
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
 
         var menu = {
             optionOne: "Option One",
@@ -51,7 +51,7 @@ describe("DropDownButton", function () {
                             open={true}
                             onValueChange={callback}
                             options={menu}
-                            onToggle={jest.genMockFunction()} />
+                            onToggle={jest.fn()} />
         );
 
         //expect menu to be rendered
@@ -65,7 +65,7 @@ describe("DropDownButton", function () {
     });
 
     it("renders extra css classes", function () {
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
 
         var menu = {
             optionOne: "Option One",
@@ -79,7 +79,7 @@ describe("DropDownButton", function () {
                             open={true}
                             onValueChange={callback}
                             options={menu}
-                            onToggle={jest.genMockFunction()} />
+                            onToggle={jest.fn()} />
         );
 
         //expect menu to be rendered
@@ -89,7 +89,7 @@ describe("DropDownButton", function () {
     });
 
     it("triggers callback on toggle in stateless mode", function () {
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
 
         var menu = {
             optionOne: "Option One",
@@ -100,7 +100,7 @@ describe("DropDownButton", function () {
             <DropDownButton label="Test Drop Down"
                             stateless={true}
                             open={false}
-                            onValueChange={jest.genMockFunction()}
+                            onValueChange={jest.fn()}
                             onToggle={callback}
                             options={menu} />
         );
@@ -116,7 +116,7 @@ describe("DropDownButton", function () {
 
     it("test default render", function () {
 
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
 
         var menu = {
             optionOne: "Option One",
@@ -144,7 +144,7 @@ describe("DropDownButton", function () {
 
     it("initially closed menu opened on click", function () {
 
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
 
         var menu = {
             optionOne: "Option One",
@@ -189,7 +189,7 @@ describe("DropDownButton", function () {
 
     it("will trigger callback on menu item click", function () {
 
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
 
         var menu = {
             optionOne: "Option One",
@@ -234,7 +234,7 @@ describe("DropDownButton", function () {
     it("register global listeners on mount", function () {
 
 
-        window.addEventListener = jest.genMockFunction();
+        window.addEventListener = jest.fn();
 
         var menu = {
             optionOne: "Option One",
@@ -246,7 +246,7 @@ describe("DropDownButton", function () {
                             stateless={true}
                             open={true}
                             options={menu}
-                            onToggle={jest.genMockFunction()} />
+                            onToggle={jest.fn()} />
         );
 
         expect(TestUtils.mockCallsContains(window.addEventListener, "click")).toEqual(true);
@@ -255,7 +255,7 @@ describe("DropDownButton", function () {
 
     it("unregister global listeners on unmount", function () {
 
-        window.removeEventListener = jest.genMockFunction();
+        window.removeEventListener = jest.fn();
 
         var menu = {
             optionOne: "Option One",
@@ -267,7 +267,7 @@ describe("DropDownButton", function () {
                             stateless={true}
                             open={true}
                             options={menu}
-                            onToggle={jest.genMockFunction()} />
+                            onToggle={jest.fn()} />
         );
 
         //trigger unmount
@@ -278,8 +278,8 @@ describe("DropDownButton", function () {
     });
 
     it("triggers callback when clicked outside", function () {
-        window.addEventListener = jest.genMockFunction();
-        var callback = jest.genMockFunction();
+        window.addEventListener = jest.fn();
+        var callback = jest.fn();
 
         var menu = {
             optionOne: "Option One",
@@ -290,7 +290,7 @@ describe("DropDownButton", function () {
             <DropDownButton label="Test Drop Down"
                             stateless={true}
                             open={true}
-                            onValueChange={jest.genMockFunction()}
+                            onValueChange={jest.fn()}
                             options={menu}
                             onToggle={callback} />
         );
@@ -300,8 +300,8 @@ describe("DropDownButton", function () {
 
         var e = {
             target: { parentNode: document.body },
-            stopPropagation: jest.genMockFunction(),
-            preventDefault: jest.genMockFunction()
+            stopPropagation: jest.fn(),
+            preventDefault: jest.fn()
         };
 
         //click outside
@@ -310,7 +310,7 @@ describe("DropDownButton", function () {
     });
 
     it("doesn't trigger callback when clicked outside and drop down is not open", function () {
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
 
         var menu = {
             optionOne: "Option One",
@@ -321,7 +321,7 @@ describe("DropDownButton", function () {
             <DropDownButton label="Test Drop Down"
                             stateless={true}
                             open={false}
-                            onValueChange={jest.genMockFunction()}
+                            onValueChange={jest.fn()}
                             options={menu}
                             onToggle={callback} />
         );
@@ -329,8 +329,8 @@ describe("DropDownButton", function () {
         var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
         var e = {
             target: { parentNode: document.body },
-            stopPropagation: jest.genMockFunction(),
-            preventDefault: jest.genMockFunction()
+            stopPropagation: jest.fn(),
+            preventDefault: jest.fn()
         };
 
         //click outside
@@ -343,7 +343,7 @@ describe("DropDownButton", function () {
 
         var globalKeyListener = TestUtils.captureGlobalListener("keyDown");
 
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
 
         var menu = {
             optionOne: "Option One",
@@ -354,7 +354,7 @@ describe("DropDownButton", function () {
             <DropDownButton label="Test Drop Down"
                             stateless={true}
                             open={true}
-                            onValueChange={jest.genMockFunction()}
+                            onValueChange={jest.fn()}
                             options={menu}
                             onToggle={callback} />
         );
@@ -371,7 +371,7 @@ describe("DropDownButton", function () {
 
         var globalKeyListener = TestUtils.captureGlobalListener("keyDown");
 
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
 
         var menu = {
             optionOne: "Option One",
@@ -382,7 +382,7 @@ describe("DropDownButton", function () {
             <DropDownButton label="Test Drop Down"
                             stateless={true}
                             open={false}
-                            onValueChange={jest.genMockFunction()}
+                            onValueChange={jest.fn()}
                             options={menu}
                             onToggle={callback} />
         );

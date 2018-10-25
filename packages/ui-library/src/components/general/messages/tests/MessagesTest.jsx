@@ -16,7 +16,7 @@ describe("Messages", function () {
 
     beforeEach(function () {
         jest.useFakeTimers();
-        window.setTimeout = jest.genMockFunction();
+        window.setTimeout = jest.fn();
     });
 
     afterEach(function () {
@@ -28,7 +28,7 @@ describe("Messages", function () {
             messages: [{
                 text: "Test message text"
             }],
-            onRemoveMessage: jest.genMockFunction()
+            onRemoveMessage: jest.fn()
         });
 
         return ReactTestUtils.renderIntoDocument(<Messages {...props} />);
@@ -212,7 +212,7 @@ describe("Messages", function () {
         var expectedError = new Error(Utils.deprecatePropError("removeMessage", "onRemoveMessage"));
 
         expect(function () {
-            getComponent({ removeMessage: jest.genMockFunction() });
+            getComponent({ removeMessage: jest.fn() });
         }).toThrow(expectedError);
     });
 
@@ -220,7 +220,7 @@ describe("Messages", function () {
         var expectedError = new Error(Utils.deprecatePropError("i18n", "onI18n"));
 
         expect(function () {
-            getComponent({ i18n: jest.genMockFunction() });
+            getComponent({ i18n: jest.fn() });
         }).toThrow(expectedError);
     });
 

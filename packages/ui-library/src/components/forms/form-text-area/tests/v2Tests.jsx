@@ -17,9 +17,9 @@ describe("FormTextArea", function () {
     function getComponent (props) {
         props = _.defaults(props || {}, {
             stateless: true,
-            onChange: jest.genMockFunction(),
-            onValueChange: jest.genMockFunction(),
-            onBlur: jest.genMockFunction()
+            onChange: jest.fn(),
+            onValueChange: jest.fn(),
+            onBlur: jest.fn()
         });
 
         return ReactTestUtils.renderIntoDocument(<FormTextArea {...props} />);

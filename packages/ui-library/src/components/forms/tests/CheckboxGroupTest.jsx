@@ -47,8 +47,8 @@ describe("CheckboxGroup", function () {
     });
 
     it("Triggers onValueChange when checking something", function () {
-        const callback = jest.genMockFunction();
-        const addCallback = jest.genMockFunction();
+        const callback = jest.fn();
+        const addCallback = jest.fn();
         const component = getComponent({
             onValueChange: value => callback(value),
             onAdd: addCallback
@@ -63,8 +63,8 @@ describe("CheckboxGroup", function () {
     });
 
     it("Triggers onValueChange when unchecking something", function () {
-        const callback = jest.genMockFunction();
-        const removeCallback = jest.genMockFunction();
+        const callback = jest.fn();
+        const removeCallback = jest.fn();
         const component = getComponent({
             onValueChange: value => callback(value),
             onRemove: removeCallback

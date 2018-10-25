@@ -91,6 +91,10 @@ module.exports = class extends React.Component {
     };
 
     _process = (files, path) => {
+        if (!files) {
+            return;
+        }
+
         if (this.props.onValidate) {
             var errorMessage = this.props.onValidate(files[0]);
 

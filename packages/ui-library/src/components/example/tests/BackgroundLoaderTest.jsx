@@ -19,7 +19,7 @@ describe("BackgroundLoader", function () {
             );
         };
 
-        loadContentFunc = jest.genMockFunction();
+        loadContentFunc = jest.fn();
     });
 
 
@@ -36,7 +36,7 @@ describe("BackgroundLoader", function () {
                 <div data-id="loaded-content">content loaded</div>
             </BackgroundLoader>
         );
-        
+
         // the loading content should be visible; the loaded content should not be
         var loader = TestUtils.findRenderedDOMNodeWithDataId(component, "loader");
         expect(ReactTestUtils.isDOMComponent(loader)).toBeTruthy();
@@ -71,7 +71,7 @@ describe("BackgroundLoader", function () {
     });
 
     xit("logs deprecated component warning message", function () {
-        console.error = jest.genMockFunction();
+        console.error = jest.fn();
 
         ReactTestUtils.renderIntoDocument(
             <BackgroundLoader interval={2000} load={loadContentFunc} loaded={loaded} loading={loadingContentFunc}>
@@ -89,7 +89,7 @@ describe("BackgroundLoader", function () {
         //Mock process.env.NODE_ENV
         process.env.NODE_ENV = "production";
 
-        console.error = jest.genMockFunction();
+        console.error = jest.fn();
         ReactTestUtils.renderIntoDocument(
             <BackgroundLoader interval={2000} load={loadContentFunc} loaded={loaded} loading={loadingContentFunc}>
                 <div data-id="loaded-content">content loaded</div>

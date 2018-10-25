@@ -109,7 +109,7 @@ describe("Row", function () {
             lastname: "Cao",
         }];
 
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
         var component = renderSampleGrid({
             rows: rows,
             columnsPerPage: 2,
@@ -168,7 +168,7 @@ describe("Row", function () {
             rows: rows,
             columnsPerPage: 2
         };
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
         var component = ReactTestUtils.renderIntoDocument(
             <Grid data-id="grid-test" {...props}>
                 <Grid.Column headerText="Firstname" field="firstname" width={Grid.ColumnSizes.S} />

@@ -137,7 +137,7 @@ describe("Section", function () {
     });
 
     it("Stateless: triggers callback on click", function () {
-        const callback = jest.genMockFunction(),
+        const callback = jest.fn(),
             view = getComponent({
                 onToggle: callback
             }),

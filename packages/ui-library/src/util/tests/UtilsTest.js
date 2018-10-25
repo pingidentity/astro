@@ -38,7 +38,7 @@ describe("Utils", function () {
 
     describe("deprecateWarn", function () {
         it("uses deprecateWarn", function () {
-            var log = jest.genMockFunction();
+            var log = jest.fn();
             Utils.deprecateWarn("click", "onClick", log);
 
             expect(log).toBeCalledWith(
@@ -87,8 +87,8 @@ describe("Utils", function () {
         it("uses the correct function to save the blob file in IE", function () {
             // mocks for the navigator and Blob globals
             global.navigator = {};
-            global.navigator.msSaveBlob = jest.genMockFunction();
-            global.Blob = jest.genMockFunction().mockImplementation(function (blobData) {
+            global.navigator.msSaveBlob = jest.fn();
+            global.Blob = jest.fn().mockImplementation(function (blobData) {
                 return blobData;
             });
 
@@ -106,21 +106,21 @@ describe("Utils", function () {
             var fakeFilename = "someFileName.txt";
 
             global.navigator = {};
-            global.Blob = jest.genMockFunction().mockImplementation(function (blobData) {
+            global.Blob = jest.fn().mockImplementation(function (blobData) {
                 return blobData;
             });
 
-            var createObjectURL = jest.genMockFn();
+            var createObjectURL = jest.fn();
             global.URL = {};
             global.URL.createObjectURL = createObjectURL;
 
-            var click = jest.genMockFn();
-            document.createElement = jest.genMockFn();
+            var click = jest.fn();
+            document.createElement = jest.fn();
             document.createElement.mockReturnValue({
                 download: {},
                 click: click
             });
-            document.body.appendChild = jest.genMockFn();
+            document.body.appendChild = jest.fn();
 
             Utils.triggerFileDownload(fakeFilename, fakeBlob, "text/plain");
             expect(createObjectURL).toBeCalled();
@@ -135,20 +135,20 @@ describe("Utils", function () {
 
             global.navigator = { };
             global.window = global.window || { location: { href: "" } };
-            global.Blob = jest.genMockFunction().mockImplementation(function (blobData) {
+            global.Blob = jest.fn().mockImplementation(function (blobData) {
                 return blobData;
             });
 
-            var createObjectURL = jest.genMockFn().mockReturnValue(url);
+            var createObjectURL = jest.fn().mockReturnValue(url);
             global.URL = {};
             global.URL.createObjectURL = createObjectURL;
 
-            var click = jest.genMockFn();
-            document.createElement = jest.genMockFn();
+            var click = jest.fn();
+            document.createElement = jest.fn();
             document.createElement.mockReturnValue({
                 click: click
             });
-            document.body.appendChild = jest.genMockFn();
+            document.body.appendChild = jest.fn();
 
             Utils.triggerFileDownload(fakeFilename, fakeBlob, "text/plain");
             expect(createObjectURL).toBeCalled();
@@ -166,7 +166,7 @@ describe("Utils", function () {
         expect(Utils.formatDate(2525465544000)).toBe("2050-01-10");
 
         it("logs deprecated warning", function () {
-            console.warn = jest.genMockFunction();
+            console.warn = jest.fn();
 
             Utils.formatDate(0);
             expect(console.warn).toBeCalledWith(

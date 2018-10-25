@@ -32,10 +32,10 @@ describe("MultiDrag", function () {
     function getWrappedComponent (opts) {
         opts = _.defaults(opts || {}, {
             stateless: true,
-            onSearch: jest.genMockFunction(),
-            onDrag: jest.genMockFunction(),
-            onDrop: jest.genMockFunction(),
-            onCancel: jest.genMockFunction(),
+            onSearch: jest.fn(),
+            onDrag: jest.fn(),
+            onDrop: jest.fn(),
+            onCancel: jest.fn(),
             categoryList: ["One", "Two"],
             columns: [
                 { name: "Available Rows", id: 1, rows: availableRows, filteredRows: availableRows,
@@ -349,7 +349,7 @@ describe("MultiDrag", function () {
     });
 
     it("doesn't trigger category toggle event for stateful component", function () {
-        const callback = jest.genMockFunction();
+        const callback = jest.fn();
 
         const component = getWrappedComponent({
             stateless: false,
@@ -370,7 +370,7 @@ describe("MultiDrag", function () {
     });
 
     it("triggers category click event", function () {
-        const callback = jest.genMockFunction();
+        const callback = jest.fn();
 
         const component = getWrappedComponent({
             stateless: false,

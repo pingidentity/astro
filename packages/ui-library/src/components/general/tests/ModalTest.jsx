@@ -14,9 +14,9 @@ describe("ModalTest", function () {
         Wrapper = TestUtils.UpdatePropsWrapper,
         _ = require("underscore");
 
-    window.addEventListener = jest.genMockFunction();
-    window.removeEventListener = jest.genMockFunction();
-    window.setTimeout = jest.genMockFunction();
+    window.addEventListener = jest.fn();
+    window.removeEventListener = jest.fn();
+    window.setTimeout = jest.fn();
     beforeEach(function () {
         window.addEventListener.mockClear();
         window.removeEventListener.mockClear();
@@ -26,8 +26,8 @@ describe("ModalTest", function () {
 
     function getComponent (opts) {
         const modalDefaults = _.defaults(opts || {}, {
-            onOpen: jest.genMockFunction(),
-            onClose: jest.genMockFunction().mockReturnValue(true)
+            onOpen: jest.fn(),
+            onClose: jest.fn().mockReturnValue(true)
         });
 
         return ReactTestUtils.renderIntoDocument(<Modal {...modalDefaults} />);
@@ -49,8 +49,8 @@ describe("ModalTest", function () {
         var handler = TestUtils.findMockCall(window.addEventListener, "keydown")[1];
         var e = {
             target: { parentNode: document.body },
-            stopPropagation: jest.genMockFunction(),
-            preventDefault: jest.genMockFunction()
+            stopPropagation: jest.fn(),
+            preventDefault: jest.fn()
         };
 
         //expect that the collapsed modal does not process keypress events
@@ -63,8 +63,8 @@ describe("ModalTest", function () {
         var handler = TestUtils.findMockCall(window.addEventListener, "keydown")[1];
         var e = {
             target: { parentNode: document.body },
-            stopPropagation: jest.genMockFunction(),
-            preventDefault: jest.genMockFunction()
+            stopPropagation: jest.fn(),
+            preventDefault: jest.fn()
         };
 
         //expect that the collapsed modal does not process keypress events
@@ -74,14 +74,14 @@ describe("ModalTest", function () {
 
     it("emits open and close events", function () {
         const
-            openListenerCallback = jest.genMockFunction(),
-            closeListenerCallback = jest.genMockFunction(),
+            openListenerCallback = jest.fn(),
+            closeListenerCallback = jest.fn(),
             component = ReactTestUtils.renderIntoDocument(
                 <Wrapper
                     type={Modal}
                     expanded={false}
-                    onOpen={jest.genMockFunction()}
-                    onClose={jest.genMockFunction()}
+                    onOpen={jest.fn()}
+                    onClose={jest.fn()}
                 />
             );
 
@@ -101,14 +101,14 @@ describe("ModalTest", function () {
         UtilsMock.isIE = () => { return true; };
 
         const
-            openListenerCallback = jest.genMockFunction(),
-            closeListenerCallback = jest.genMockFunction(),
+            openListenerCallback = jest.fn(),
+            closeListenerCallback = jest.fn(),
             component = ReactTestUtils.renderIntoDocument(
                 <Wrapper
                     type={Modal}
                     expanded={false}
-                    onOpen={jest.genMockFunction()}
-                    onClose={jest.genMockFunction()}
+                    onOpen={jest.fn()}
+                    onClose={jest.fn()}
                 />
             );
 
@@ -196,8 +196,8 @@ describe("ModalTest", function () {
     });
 
     it("Cancel tooltip renders and triggers callbacks.", function () {
-        var cancelConfirm = jest.genMockFunction(),
-            cancelDeny = jest.genMockFunction(),
+        var cancelConfirm = jest.fn(),
+            cancelDeny = jest.fn(),
             modalParams = {
                 expanded: true,
                 cancelTooltip: {

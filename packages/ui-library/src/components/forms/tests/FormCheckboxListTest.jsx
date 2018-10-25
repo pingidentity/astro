@@ -26,11 +26,11 @@ describe("FormCheckboxList", function () {
             stateless: true,
             labelHideUnselected: "Hide Unselected",
             labelSearchPlaceholder: "Search",
-            onGetSelectAllLabel: jest.genMockFunction(),
-            onGetDeselectAllLabel: jest.genMockFunction(),
-            onValueChange: jest.genMockFunction(),
-            onQueryChange: jest.genMockFunction(),
-            onVisibilityChange: jest.genMockFunction(),
+            onGetSelectAllLabel: jest.fn(),
+            onGetDeselectAllLabel: jest.fn(),
+            onValueChange: jest.fn(),
+            onQueryChange: jest.fn(),
+            onVisibilityChange: jest.fn(),
             items: [{ id: 1, name: "Salesforce" },
                     { id: 2, name: "Google Mail" }
             ],
@@ -381,7 +381,7 @@ describe("FormCheckboxList", function () {
         var expectedError = new Error(Utils.deprecatePropError("onSelectionChange", "onValueChange"));
 
         expect(function () {
-            getComponent({ onSelectionChange: jest.genMockFunction() });
+            getComponent({ onSelectionChange: jest.fn() });
         }).toThrow(expectedError);
     });
 

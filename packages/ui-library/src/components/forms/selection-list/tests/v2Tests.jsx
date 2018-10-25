@@ -55,7 +55,7 @@ describe("SelectionList", function () {
         opts = _.defaults(opts || {}, {
             items: listItems,
             "data-id": "my-selection-list",
-            onValueChange: jest.genMockFunction()
+            onValueChange: jest.fn()
         });
 
         return ReactTestUtils.renderIntoDocument(<SelectionList {...opts} />);
@@ -162,7 +162,7 @@ describe("SelectionList", function () {
     });
 
     it("should render with few checked checkboxes and uncheck all when selected", function () {
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
         var props = {
             stateless: true,
             selectedItemIds: [1, 2],
@@ -173,7 +173,7 @@ describe("SelectionList", function () {
             labelOnlySelected: "Show Only Selected",
             labelShowAll: "Show All",
             onValueChange: callback,
-            onSearch: jest.genMockFunction(),
+            onSearch: jest.fn(),
             showOnlySelected: true
         };
         var component = getComponent(props);
@@ -198,7 +198,7 @@ describe("SelectionList", function () {
     });
 
     it("should render with no checked checkboxes and check all when selected", function () {
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
         var props = {
             stateless: false,
             selectedItemIds: [],
@@ -208,9 +208,9 @@ describe("SelectionList", function () {
             labelUnselectAll: "Unselect All",
             labelOnlySelected: "Show Only Selected",
             labelShowAll: "Show All",
-            onValueChange: jest.genMockFunction(),
+            onValueChange: jest.fn(),
             onSelectAll: callback,
-            onSearch: jest.genMockFunction()
+            onSearch: jest.fn()
         };
         var component = getComponent(props);
         var selectAll = TestUtils.findRenderedDOMNodeWithDataId(component, "select-all");
@@ -399,7 +399,7 @@ describe("SelectionList", function () {
     });
 
     it("stateful: triggers onSearch callback when search input changes", function () {
-        var component = getComponent({ showSearchBox: true, onSearch: jest.genMockFunction() });
+        var component = getComponent({ showSearchBox: true, onSearch: jest.fn() });
         var searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-search-box");
         var searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
 
@@ -408,7 +408,7 @@ describe("SelectionList", function () {
     });
 
     it("stateless: triggers onSearch callback when search input changes", function () {
-        var component = getComponent({ showSearchBox: true, stateless: true, onSearch: jest.genMockFunction() });
+        var component = getComponent({ showSearchBox: true, stateless: true, onSearch: jest.fn() });
         var searchBoxDiv = TestUtils.findRenderedDOMNodeWithDataId(component, "my-selection-list-search-box");
         var searchInput = TestUtils.findRenderedDOMNodeWithTag(searchBoxDiv, "input");
 

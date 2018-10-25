@@ -21,7 +21,7 @@ describe("BackgroundLoader", function () {
             );
         };
 
-        loadContentFunc = jest.genMockFunction();
+        loadContentFunc = jest.fn();
     });
 
 
@@ -73,7 +73,7 @@ describe("BackgroundLoader", function () {
     });
 
     xit("verify component unmount", function () {
-        global.clearTimeout = jest.genMockFunction();
+        global.clearTimeout = jest.fn();
 
         class Wrapper extends React.Component {
             state = { renderChildren: true };

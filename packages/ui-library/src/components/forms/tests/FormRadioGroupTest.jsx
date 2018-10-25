@@ -12,7 +12,7 @@ jest.dontMock("../FormLabel");
 
 describe("FormRadioGroup", function () {
 
-    const callback = jest.genMockFunction(),
+    const callback = jest.fn(),
         items = [
             { id: "1", name: "name 1" },
             { id: "2", name: "name 2" }
@@ -228,7 +228,7 @@ describe("FormRadioGroup", function () {
 
         expect(function () {
             ReactTestUtils.renderIntoDocument(
-                <FormRadioGroup onChange={jest.genMockFunction()} items={items} />
+                <FormRadioGroup onChange={jest.fn()} items={items} />
             );
         }).toThrow(expectedError);
     });

@@ -36,7 +36,7 @@ describe("Masked Value", function() {
     });
 
     it("triggers the right toggle callback", function() {
-        const callback = jest.genMockFunction();
+        const callback = jest.fn();
         const component = ReactTestUtils.renderIntoDocument(
             <div>
                 <MaskedValue onToggleReveal={callback} maskValue={true} />

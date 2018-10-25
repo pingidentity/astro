@@ -50,7 +50,7 @@ describe("ContextCloseButton", function () {
     }
 
     it("Render and click with callback only and no context", function () {
-        var clickCallback = jest.genMockFn();
+        var clickCallback = jest.fn();
         var component = ReactTestUtils.renderIntoDocument(
             <ContextCloseButton onClick={clickCallback} />
         );
@@ -71,7 +71,7 @@ describe("ContextCloseButton", function () {
      * is called when the button is clicked.
      */
     it("Render and click with context and no callback", function () {
-        var closeCallback = jest.genMockFn();
+        var closeCallback = jest.fn();
         var component = ReactTestUtils.renderIntoDocument(
             <ContextComponent closeCallback={closeCallback} />
         );
@@ -92,8 +92,8 @@ describe("ContextCloseButton", function () {
      * are both called when the button is clicked.
      */
     it("Render and click with callback and context", function () {
-        var clickCallback = jest.genMockFn();
-        var closeCallback = jest.genMockFn();
+        var clickCallback = jest.fn();
+        var closeCallback = jest.fn();
         var component = ReactTestUtils.renderIntoDocument(
             <ContextComponent closeCallback={closeCallback} clickCallback={clickCallback} />
         );

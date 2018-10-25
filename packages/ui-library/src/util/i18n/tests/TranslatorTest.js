@@ -37,7 +37,7 @@ describe("Translator", function () {
 
     it("Translate correctly", function () {
         Translator.isUseInternationalization = true;
-        Translator.importLanguage = jest.genMockFunction()
+        Translator.importLanguage = jest.fn()
             .mockReturnValue({ myKey1: "translated1", myKey2: "translated2" });
         Translator.setLanguage("zh_cn");
         expect(Translator.currentLanguage).toBe("zh_cn");
@@ -48,7 +48,7 @@ describe("Translator", function () {
     it("Translate to default language if there is no key", function () {
         Translator.languages = { en_us: { mykey3: "value" } }; // eslint-disable-line camelcase
         Translator.isUseInternationalization = true;
-        Translator.importLanguage = jest.genMockFunction()
+        Translator.importLanguage = jest.fn()
             .mockReturnValue({ myKey1: "translated1", myKey2: "translated2" });
         Translator.setLanguage("zh_cn");
         expect(Translator.currentLanguage).toBe("zh_cn");
@@ -58,7 +58,7 @@ describe("Translator", function () {
 
     it("Not translate when flag turn off", function () {
         Translator.isUseInternationalization = false;
-        Translator.importLanguage = jest.genMockFunction()
+        Translator.importLanguage = jest.fn()
             .mockReturnValue({ myKey1: "translated1", myKey2: "translated2" });
         Translator.setLanguage("zh_cn");
         expect(Translator.currentLanguage).toBe("zh_cn");
