@@ -44,6 +44,7 @@
     "validator": "5.2.0"
   },
   "devDependencies": {
+    "acorn": "^6.0.4",
     "babel-cli": "~6.26.0",
     "babel-core": "6.26.0",
     "babel-eslint": "8.0.1",
@@ -183,6 +184,7 @@
     "clean-selenium-log": "node ./clean-selenium-log.js",
     "clean-processes": "kill $(ps -ef | grep -E 'selenium|http-server' | awk '{print $2}')",
     "compile-sass": "node ./compile-sass.js",
-    "generate-release-notes": "node ./generateReleaseNotes.js"
+    "generate-release-notes": "node ./generateReleaseNotes.js",
+    "generate-template-dictionary": "node ./generate-template-dictionary"
   }
 }

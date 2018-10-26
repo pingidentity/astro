@@ -29,3 +29,6 @@ yarn-error.log
 
 selenium-standalone.log*
 http-server.log
+
+# Programatically generated internal files
+src/demo/core/templates.json
