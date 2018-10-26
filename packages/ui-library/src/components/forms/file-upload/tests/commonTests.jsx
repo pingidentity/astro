@@ -186,12 +186,18 @@ exports.run = function (getComponent, get) {
         expect(TestUtils.findRenderedDOMNodeWithClass(component, "stacked"));
     });
 
-    it("disabled is set correctly", function () {
+    it("will not respond to actions while disabled", function () {
         var fileName = "someFile.png";
         var component = getComponent({ disabled: true, fileName: fileName });
         var fileInput = get(component, "input");
+        var removeButton = get(component, "removeButton");
 
         expect(fileInput.disabled).toBeTruthy();
+
+        fileInput.value = fileName;
+        ReactTestUtils.Simulate.click(removeButton);
+
+        expect(fileInput.value).toEqual("someFile.png");
     });
 
     it("will wont show the filename when the showThumbnail property is set", function () {

@@ -34,8 +34,8 @@ describe("LeftNavBar", function () {
 
     function getWrappedComponent (opts) {
         opts = _.defaults(opts || {}, {
-            onItemValueChange: jest.fn(),
-            onSectionValueChange: jest.fn(),
+            onItemValueChange: jest.genMockFunction(),
+            onSectionValueChange: jest.genMockFunction(),
             tree: navData
         });
         return ReactTestUtils.renderIntoDocument(<ReduxTestUtils.Wrapper type={LeftNavBar} opts={opts} />);
@@ -76,7 +76,7 @@ describe("LeftNavBar", function () {
         var wrapper = getWrappedComponent();
         var component = wrapper.refs.target;
 
-        component._getItemSelector().removeEventListener = jest.fn();
+        component._getItemSelector().removeEventListener = jest.genMockFunction();
 
         component._rerender();
 
@@ -87,7 +87,7 @@ describe("LeftNavBar", function () {
         var wrapper = getWrappedComponent({ selectedNode: "item-1" });
         var component = wrapper.refs.target;
 
-        component._getItemSelector().removeEventListener = jest.fn();
+        component._getItemSelector().removeEventListener = jest.genMockFunction();
 
         ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
 
@@ -101,15 +101,15 @@ describe("LeftNavBar", function () {
         var copyright = ReactDOM.findDOMNode(component.refs.copyright);
         var itemSelector = ReactDOM.findDOMNode(component).getElementsByTagName("li")[1];
 
-        copyright.getBoundingClientRect = jest.fn().mockReturnValue({ top: 10 });
-        itemSelector.getBoundingClientRect = jest.fn().mockReturnValue({ bottom: 11 });
-        parent.getBoundingClientRect = jest.fn().mockReturnValue({ height: 10 });
+        copyright.getBoundingClientRect = jest.genMockFunction().mockReturnValue({ top: 10 });
+        itemSelector.getBoundingClientRect = jest.genMockFunction().mockReturnValue({ bottom: 11 });
+        parent.getBoundingClientRect = jest.genMockFunction().mockReturnValue({ height: 10 });
 
         wrapper.sendProps({ openNode: "section-2", selectedNode: "item-2" });
         expect(parent.scrollTop).toBe(10);
 
         itemSelector = ReactDOM.findDOMNode(component).getElementsByTagName("li")[0];
-        itemSelector.getBoundingClientRect = jest.fn().mockReturnValue({ top: -10 });
+        itemSelector.getBoundingClientRect = jest.genMockFunction().mockReturnValue({ top: -10 });
 
         wrapper.sendProps({ openNode: "section-1", selectedNode: "item-1" });
         expect(parent.scrollTop).toBe(0);
@@ -233,7 +233,7 @@ describe("LeftNavBar", function () {
 
     it("renders a tree item as a context selector when specified", function () {
         var id = "my-context-selector";
-        var addLinkCb = jest.fn();
+        var addLinkCb = jest.genMockFunction();
         var menuItemData = [
             {
                 label: "Item 1",
@@ -343,7 +343,7 @@ describe("LeftNavBar", function () {
         var expectedError = new Error(Utils.deprecatePropError("onItemClick", "onItemValueChange"));
 
         expect(function () {
-            getWrappedComponent({ onItemClick: jest.fn() });
+            getWrappedComponent({ onItemClick: jest.genMockFunction() });
         }).toThrow(expectedError);
     });
 
@@ -351,7 +351,7 @@ describe("LeftNavBar", function () {
         var expectedError = new Error(Utils.deprecatePropError("onSectionClick", "onSectionValueChange"));
 
         expect(function () {
-            getWrappedComponent({ onSectionClick: jest.fn() });
+            getWrappedComponent({ onSectionClick: jest.genMockFunction() });
         }).toThrow(expectedError);
     });
 

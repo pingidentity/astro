@@ -31,7 +31,7 @@ describe("ConfirmTooltip", function () {
     });
 
     it("renders the delete button with a click callback", function () {
-        let onConfirm = jest.fn();
+        let onConfirm = jest.genMockFunction();
         let component = getComponent({
             onConfirm: onConfirm,
             open: true
@@ -45,7 +45,7 @@ describe("ConfirmTooltip", function () {
     });
 
     it("renders the button and clicks cancel button", function () {
-        let onCancel = jest.fn();
+        let onCancel = jest.genMockFunction();
         let component = getComponent({
             onCancel: onCancel,
             open: true
@@ -59,8 +59,8 @@ describe("ConfirmTooltip", function () {
     });
 
     it("fires onConfirm and onToggle when closeOnConfirm is true", function () {
-        const confirmCallback = jest.fn();
-        const toggleCallback = jest.fn();
+        const confirmCallback = jest.genMockFunction();
+        const toggleCallback = jest.genMockFunction();
         const component = getComponent({
             onConfirm: confirmCallback,
             onToggle: toggleCallback,

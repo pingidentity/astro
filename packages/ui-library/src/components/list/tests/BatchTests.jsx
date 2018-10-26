@@ -18,11 +18,11 @@ describe("Batch", function () {
         }
     }
 
-    window.addEventListener = jest.fn();
+    window.addEventListener = jest.genMockFunction();
 
     function getRenderedComponent (opts) {
         var defaults = {
-            onGenerateHeading: jest.fn(),
+            onGenerateHeading: jest.genMockFunction(),
             contentType: <MyRow />,
             data: batches[1].data
         };
@@ -80,7 +80,7 @@ describe("Batch", function () {
     it("only passes last item of previous batch to heading generator", function () {
         var component = getRenderedComponent({
             prev: batches[0].data,
-            onGenerateHeading: jest.fn()
+            onGenerateHeading: jest.genMockFunction()
                 .mockReturnValueOnce("A")
         });
 

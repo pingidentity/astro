@@ -6,18 +6,18 @@ var request = {
         status: 200
     },
 
-    query: jest.fn().mockReturnThis(),
-    send: jest.fn().mockReturnThis(),
-    end: jest.fn().mockImplementation(function (callback) {
+    query: jest.genMockFunction().mockReturnThis(),
+    send: jest.genMockFunction().mockReturnThis(),
+    end: jest.genMockFunction().mockImplementation(function (callback) {
         callback(null, this.response);
     }),
-    set: jest.fn().mockImplementation(function (name, value) {
+    set: jest.genMockFunction().mockImplementation(function (name, value) {
         return request;
     }),
-    field: jest.fn().mockImplementation(function (name, value) {
+    field: jest.genMockFunction().mockImplementation(function (name, value) {
         return request;
     }),
-    attach: jest.fn().mockImplementation(function (name, value) {
+    attach: jest.genMockFunction().mockImplementation(function (name, value) {
         return request;
     })
 };
@@ -26,19 +26,19 @@ var agent = {
     // to allow customizing the request/response in jest tests
     request: request,
 
-    get: jest.fn().mockImplementation(function (path) {
+    get: jest.genMockFunction().mockImplementation(function (path) {
         return this.request;
     }),
-    patch: jest.fn().mockImplementation(function (path) {
+    patch: jest.genMockFunction().mockImplementation(function (path) {
         return this.request;
     }),
-    post: jest.fn().mockImplementation(function (path) {
+    post: jest.genMockFunction().mockImplementation(function (path) {
         return this.request;
     }),
-    put: jest.fn().mockImplementation(function (path) {
+    put: jest.genMockFunction().mockImplementation(function (path) {
         return this.request;
     }),
-    del: jest.fn().mockImplementation(function (path) {
+    del: jest.genMockFunction().mockImplementation(function (path) {
         return this.request;
     })
 };

@@ -16,9 +16,9 @@ describe("Infinite Scroll", function () {
         }
     }
 
-    window.addEventListener = jest.fn();
-    window.removeEventListener = jest.fn();
-    window.setTimeout = jest.fn();
+    window.addEventListener = jest.genMockFunction();
+    window.removeEventListener = jest.genMockFunction();
+    window.setTimeout = jest.genMockFunction();
 
     function getRenderedComponent (opts) {
         var batches = [{ id: 0, data: [] }];
@@ -31,7 +31,7 @@ describe("Infinite Scroll", function () {
             hasNext: true,
             batches: batches,
             attachToWindow: false,
-            onScroll: jest.fn(),
+            onScroll: jest.genMockFunction(),
             contentType: <MyRow />
         };
 
@@ -71,9 +71,9 @@ describe("Infinite Scroll", function () {
 
         //pretend we're scrolled 200 pixes in this infinite scroll
         node.scrollTop = 200;
-        node.getBoundingClientRect = jest.fn()
+        node.getBoundingClientRect = jest.genMockFunction()
             .mockReturnValue({ top: 0, left: 0, bottom: 50, right: 100, height: 50, width: 100 });
-        batches[0].getBoundingClientRect = jest.fn()
+        batches[0].getBoundingClientRect = jest.genMockFunction()
             .mockReturnValue({ top: -190, left: 0, bottom: -90, right: 100, height: 100, width: 100 });
 
         //jumping to the first item which we defined as starting at 10px, should cause the container to
@@ -86,9 +86,9 @@ describe("Infinite Scroll", function () {
         var component = getRenderedComponent();
         var node = ReactDOM.findDOMNode(component.refs.container);
 
-        component._getBatchVisibility = jest.fn().mockReturnValue([false, false, true]);
+        component._getBatchVisibility = jest.genMockFunction().mockReturnValue([false, false, true]);
         //change from mocking render because of react error
-        component.componentDidUpdate = jest.fn().mockReturnValue(component.componentDidUpdate);
+        component.componentDidUpdate = jest.genMockFunction().mockReturnValue(component.componentDidUpdate);
         //simulate a change of visibility
         ReactTestUtils.Simulate.scroll(node);
         expect(component.componentDidUpdate.mock.calls.length).toBe(1);
@@ -142,13 +142,13 @@ describe("Infinite Scroll", function () {
     it("attaches to window scrolls", function () {
         var component = getRenderedComponent({
             attachToWindow: true,
-            onLoadPrev: jest.fn(),
-            onLoadNext: jest.fn()
+            onLoadPrev: jest.genMockFunction(),
+            onLoadNext: jest.genMockFunction()
         });
 
         component.componentDidUpdate();
-        component._didScrollToTop = jest.fn().mockReturnValue(true);
-        component._didScrollToBottom = jest.fn().mockReturnValue(false);
+        component._didScrollToTop = jest.genMockFunction().mockReturnValue(true);
+        component._didScrollToBottom = jest.genMockFunction().mockReturnValue(false);
 
         //trigger scroll
         TestUtils.findMockCall(window.addEventListener, "scroll")[1]();
@@ -197,11 +197,11 @@ describe("Infinite Scroll", function () {
 
     it("loads prev upon hitting bottom of container", function () {
         var component = getRenderedComponent({
-            onLoadPrev: jest.fn(),
-            onLoadNext: jest.fn()
+            onLoadPrev: jest.genMockFunction(),
+            onLoadNext: jest.genMockFunction()
         });
-        component._didScrollToTop = jest.fn().mockReturnValue(true);
-        component._didScrollToBottom = jest.fn().mockReturnValue(false);
+        component._didScrollToTop = jest.genMockFunction().mockReturnValue(true);
+        component._didScrollToBottom = jest.genMockFunction().mockReturnValue(false);
         component.componentDidUpdate();
 
         ReactTestUtils.Simulate.scroll(ReactDOM.findDOMNode(component.refs.container));
@@ -212,11 +212,11 @@ describe("Infinite Scroll", function () {
 
     it("loads next upon hitting bottom of container", function () {
         var component = getRenderedComponent({
-            onLoadPrev: jest.fn(),
-            onLoadNext: jest.fn()
+            onLoadPrev: jest.genMockFunction(),
+            onLoadNext: jest.genMockFunction()
         });
-        component._didScrollToTop = jest.fn().mockReturnValue(false);
-        component._didScrollToBottom = jest.fn().mockReturnValue(true);
+        component._didScrollToTop = jest.genMockFunction().mockReturnValue(false);
+        component._didScrollToBottom = jest.genMockFunction().mockReturnValue(true);
         component.componentDidUpdate();
 
         ReactTestUtils.Simulate.scroll(ReactDOM.findDOMNode(component.refs.container));

@@ -14,8 +14,8 @@ describe("FormCheckbox", function () {
 
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
-            onChange: jest.fn(),
-            onValueChange: jest.fn()
+            onChange: jest.genMockFunction(),
+            onValueChange: jest.genMockFunction()
         });
 
         return ReactTestUtils.renderIntoDocument(<FormCheckbox {...opts} />);
@@ -89,7 +89,7 @@ describe("FormCheckbox", function () {
     });
 
     it("simulate change event", function () {
-        const callback = jest.fn();
+        const callback = jest.genMockFunction();
         var component = getComponent({
             onValueChange: value => callback(value)
         });

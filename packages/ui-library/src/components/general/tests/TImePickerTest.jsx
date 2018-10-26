@@ -15,7 +15,7 @@ describe("TimePicker", function () {
         TestUtils = require("../../../testutil/TestUtils"),
         TimePicker = require("../TimePicker"),
         moment = require("moment"),
-        onValueChange = jest.fn(),
+        onValueChange = jest.genMockFunction(),
         component;
 
     function render (props) {

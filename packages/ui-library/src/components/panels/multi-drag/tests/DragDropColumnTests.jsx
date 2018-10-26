@@ -29,12 +29,12 @@ describe("DragDropColumn", function () {
 
     function getOpts (opts) {
         return _.defaults(opts || {}, {
-            onDrag: jest.fn(),
-            onDrop: jest.fn(),
-            onCancel: jest.fn(),
-            onSearch: jest.fn(),
-            onScrolledToTop: jest.fn(),
-            onScrolledToBottom: jest.fn(),
+            onDrag: jest.genMockFunction(),
+            onDrop: jest.genMockFunction(),
+            onCancel: jest.genMockFunction(),
+            onSearch: jest.genMockFunction(),
+            onScrolledToTop: jest.genMockFunction(),
+            onScrolledToBottom: jest.genMockFunction(),
 
             contentType: <div />,
             name: "Available Rows",
@@ -112,8 +112,8 @@ describe("DragDropColumn", function () {
 
 
     it("triggers correct category list events", function() {
-        const toggleCallback = jest.fn();
-        const clickCallback = jest.fn();
+        const toggleCallback = jest.genMockFunction();
+        const clickCallback = jest.genMockFunction();
 
         const component = getWrappedComponent({
             categoryList: ["One", "Two"],
@@ -138,7 +138,7 @@ describe("DragDropColumn", function () {
     });
 
     it("triggers onDrag callback", function() {
-        const callback = jest.fn();
+        const callback = jest.genMockFunction();
         const mockOffset = {
             clientOffset: { x: 0, y: 0 },
             getSourceClientOffset: function () { return { x: 0, y: 0 }; }
@@ -158,7 +158,7 @@ describe("DragDropColumn", function () {
     });
 
     it("doesn't trigger onDrag callback because sort is disabled", function() {
-        const callback = jest.fn();
+        const callback = jest.genMockFunction();
         const mockOffset = {
             clientOffset: { x: 0, y: 0 },
             getSourceClientOffset: function () { return { x: 0, y: 0 }; }
@@ -186,7 +186,7 @@ describe("DragDropColumn", function () {
 
         //mocking find dom node in the function to return our new items instead
         ReactDOM.findDOMNode = jest.fn().mockReturnValue(items);
-        items.getBoundingClientRect = jest.fn().mockReturnValue({
+        items.getBoundingClientRect = jest.genMockFunction().mockReturnValue({
             height: 100
         });
 

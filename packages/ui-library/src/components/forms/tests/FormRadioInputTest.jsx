@@ -13,7 +13,7 @@ describe("FormRadioInput", function () {
     var getComponent = function (props) {
         props = _.defaults(props || {}, {
             name: "test_radio_input",
-            onValueChange: jest.fn(),
+            onValueChange: jest.genMockFunction(),
             value: "test_value"
         });
 

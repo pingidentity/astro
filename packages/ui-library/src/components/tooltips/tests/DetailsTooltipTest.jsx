@@ -14,15 +14,15 @@ describe("DetailsTooltip", function () {
         Wrapper = TestUtils.UpdatePropsWrapper,
         _ = require("underscore");
 
-    window.addEventListener = jest.fn();
-    window.removeEventListener = jest.fn();
+    window.addEventListener = jest.genMockFunction();
+    window.removeEventListener = jest.genMockFunction();
     function getComponent (opts) {
         opts = _.defaults(opts, {
             title: "Title",
             label: "Label",
             open: true,
-            onValueChange: jest.fn(),
-            onToggle: jest.fn(),
+            onValueChange: jest.genMockFunction(),
+            onToggle: jest.genMockFunction(),
         });
 
         return ReactTestUtils.renderIntoDocument(
@@ -131,7 +131,7 @@ describe("DetailsTooltip", function () {
 
     it("is notifying on toggle", function () {
 
-        var callback = jest.fn();
+        var callback = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
             <DetailsTooltip stateless={true} title="Title" label="Action" open={false} onToggle={callback}>
@@ -149,7 +149,7 @@ describe("DetailsTooltip", function () {
 
     it("is notifying on toggle via content click", function () {
 
-        var callback = jest.fn();
+        var callback = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
             <DetailsTooltip stateless={true} title="Title" label="Action" open={true}
@@ -168,7 +168,7 @@ describe("DetailsTooltip", function () {
 
     it("is notifying on toggle via close control", function () {
 
-        var callback = jest.fn();
+        var callback = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
             <DetailsTooltip stateless={true} title="Title" label="Action" open={true} onToggle={callback}>
@@ -185,7 +185,7 @@ describe("DetailsTooltip", function () {
     });
 
     it("is supports disabling", function () {
-        var callback = jest.fn();
+        var callback = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
             <DetailsTooltip stateless={true}
@@ -253,7 +253,7 @@ describe("DetailsTooltip", function () {
 
     //TODO no idea why this isn't working. can console log the full stack, it just isn't being called
     it("triggers callback when clicked outside", function () {
-        var callback = jest.fn();
+        var callback = jest.genMockFunction();
 
         ReactTestUtils.renderIntoDocument(
             <DetailsTooltip stateless={true} title="Title" label="Action" open={true} onToggle={callback}>
@@ -264,8 +264,8 @@ describe("DetailsTooltip", function () {
         var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
         var e = {
             target: { parentNode: document.body },
-            stopPropagation: jest.fn(),
-            preventDefault: jest.fn()
+            stopPropagation: jest.genMockFunction(),
+            preventDefault: jest.genMockFunction()
         };
 
         //click outside
@@ -371,11 +371,11 @@ describe("DetailsTooltip", function () {
 
     it("Renders buttons when optional buttons are provided", function () {
         var secondaryArr = [
-                { value: jest.fn(), label: "One" },
-                { value: jest.fn(), label: "Two" }
+                { value: jest.genMockFunction(), label: "One" },
+                { value: jest.genMockFunction(), label: "Two" }
             ],
             primaryArr = [
-                { value: jest.fn(), label: "Save" }
+                { value: jest.genMockFunction(), label: "Save" }
             ];
         var component = ReactTestUtils.renderIntoDocument(
                 <DetailsTooltip

@@ -15,7 +15,7 @@ describe("Messages", function () {
     beforeEach(function () {
         Actions.lastId = 0;
 
-        window.setTimeout = jest.fn().mockImplementation(function (fn, timeout) {
+        window.setTimeout = jest.genMockFunction().mockImplementation(function (fn, timeout) {
             return timeout;
         });
     });

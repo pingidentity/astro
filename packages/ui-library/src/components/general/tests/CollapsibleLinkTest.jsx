@@ -102,7 +102,7 @@ describe("CollapsibleLink", function () {
     });
 
     it("triggers callback on title click", function () {
-        var callback = jest.fn();
+        var callback = jest.genMockFunction();
         var view = ReactTestUtils.renderIntoDocument(
             <CollapsibleLink
                 title="Expanded link"
@@ -117,7 +117,7 @@ describe("CollapsibleLink", function () {
     });
 
     it("does not triggers callback on title click", function () {
-        var contentClickCallback = jest.fn();
+        var contentClickCallback = jest.genMockFunction();
         var view = ReactTestUtils.renderIntoDocument(
             <CollapsibleLink
                 title="Expanded link"

@@ -14,7 +14,7 @@ describe("HistoryWriter", function () {
     function getWrappedComponent (opts) {
         opts = _.defaults(opts || {}, {
             watch: { prop1: "a" },
-            onReplaceUrl: jest.fn(),
+            onReplaceUrl: jest.genMockFunction(),
             location: { pathname: "blah" }
         });
 

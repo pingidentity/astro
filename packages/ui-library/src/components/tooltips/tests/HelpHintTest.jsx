@@ -113,7 +113,7 @@ describe("HelpHint", function () {
         var container = TestUtils.findRenderedDOMNodeWithDataId(component, "helpTooltip");
 
         var event = {
-            preventDefault: jest.fn()
+            preventDefault: jest.genMockFunction()
         };
         ReactTestUtils.Simulate.click(container, event);
 

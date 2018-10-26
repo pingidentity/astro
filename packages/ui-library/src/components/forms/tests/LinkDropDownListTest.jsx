@@ -28,8 +28,8 @@ describe("LinkDropDownList", function () {
             "data-id": componentId,
             closeOnSelection: false,
             label: labelText,
-            onClick: jest.fn(),
-            onToggle: jest.fn(),
+            onClick: jest.genMockFunction(),
+            onToggle: jest.genMockFunction(),
             options: options,
             selectedOption: options[selectedIndex]
         });

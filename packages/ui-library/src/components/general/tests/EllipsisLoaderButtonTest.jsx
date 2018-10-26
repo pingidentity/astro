@@ -14,7 +14,7 @@ describe("Ellipsis loader button", function () {
     var buttonText = "Text Button";
 
     beforeEach(function () {
-        callback = jest.fn();
+        callback = jest.genMockFunction();
     });
 
     it("renders the animated ellipsis when the loading flag is set to true", function () {
@@ -68,7 +68,7 @@ describe("Ellipsis loader button", function () {
                     id="foo"
                     text="bar"
                     loading={false}
-                    onClick={jest.fn()}
+                    onClick={jest.genMockFunction()}
                 />
             );
         }).toThrow(expectedError);
@@ -79,7 +79,7 @@ describe("Ellipsis loader button", function () {
     //
     //     expect(function () {
     //         <EllipsisLoaderButton
-    //             onButtonClick={jest.fn()}
+    //             onButtonClick={jest.genMockFunction()}
     //             loading={false}
     //             text="bar"
     //         />

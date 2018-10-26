@@ -22,7 +22,7 @@ describe("DashboardCard", function () {
     }
 
     it("responds to flip", function () {
-        const callback = jest.fn();
+        const callback = jest.genMockFunction();
         const component = getComponent({
             flipped: true,
             onFlip: callback,
@@ -47,7 +47,7 @@ describe("DashboardCard", function () {
     });
 
     it("responds to checkbox", function () {
-        const callback = jest.fn();
+        const callback = jest.genMockFunction();
         const component = getComponent({
             back: <div/>,
             defaultChecked: false,
@@ -61,7 +61,7 @@ describe("DashboardCard", function () {
     });
 
     it("renders a checkbox", function () {
-        const callback = jest.fn();
+        const callback = jest.genMockFunction();
         const component = getComponent({
             flipped: true,
             back: <div/>,

@@ -24,9 +24,9 @@ describe("Step", function () {
             active: true,
             number: 1,
             total: 2,
-            onNext: jest.fn(),
-            onEdit: jest.fn(),
-            onDone: jest.fn(),
+            onNext: jest.genMockFunction(),
+            onEdit: jest.genMockFunction(),
+            onDone: jest.genMockFunction(),
             labelNext: "xxxnext",
             labelCancel: "xxxcancel",
             labelEdit: "xxxedit",
@@ -48,9 +48,9 @@ describe("Step", function () {
             active: true,
             number: 1,
             total: 2,
-            onNext: jest.fn(),
-            onEdit: jest.fn(),
-            onDone: jest.fn(),
+            onNext: jest.genMockFunction(),
+            onEdit: jest.genMockFunction(),
+            onDone: jest.genMockFunction(),
             labelDone: "xxxdone",
             titleSelection: "title selection",
             hintText: "hint"
@@ -174,8 +174,8 @@ describe("Step", function () {
     });
 
     it("Cancel tooltip renders and triggers callbacks.", function () {
-        var cancelConfirm = jest.fn(),
-            cancelDeny = jest.fn(),
+        var cancelConfirm = jest.genMockFunction(),
+            cancelDeny = jest.genMockFunction(),
             cancelTooltipParams = {
                 title: "Cancel Confirmation",
                 open: false,

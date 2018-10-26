@@ -5,11 +5,11 @@ jest.dontMock("../CsrfDataSourceApi");
 describe("CsrfDataSourceApi", function () {
     var api, callback;
     var apiExport = {
-        get: jest.fn(),
-        getNoCache: jest.fn(),
-        post: jest.fn(),
-        put: jest.fn(),
-        doDelete: jest.fn()
+        get: jest.genMockFunction(),
+        getNoCache: jest.genMockFunction(),
+        post: jest.genMockFunction(),
+        put: jest.genMockFunction(),
+        doDelete: jest.genMockFunction()
     };
 
     beforeEach(function () {
@@ -25,7 +25,7 @@ describe("CsrfDataSourceApi", function () {
             csrfCookieName: "web-portal-csrf"
         });
 
-        callback = jest.fn();
+        callback = jest.genMockFunction();
 
         // delete the cookies with the 2 main names used in this test class;
         // if a test uses a different name, it has to be deleted explicitly
@@ -39,7 +39,7 @@ describe("CsrfDataSourceApi", function () {
     function testUnaffectedByMiddleware (method, params) {
         var callbackIndex = params.findIndex(function (i) { return typeof(i) === "function"; });
 
-        apiExport[method] = jest.fn();
+        apiExport[method] = jest.genMockFunction();
         api[method].apply(null, params);
 
         //execute the callback
@@ -118,7 +118,7 @@ describe("CsrfDataSourceApi", function () {
 
     it("set CSRF cookie on GET response", function () {
         // mock the get function in the core DataSourceApi, so that it calls the callback function
-        apiExport.get = jest.fn().mockImplementation(function (endpoint, params, callbackFn) {
+        apiExport.get = jest.genMockFunction().mockImplementation(function (endpoint, params, callbackFn) {
             callbackFn({
                 headers: {
                     "x-csrf-token": "VALUE"
@@ -139,7 +139,7 @@ describe("CsrfDataSourceApi", function () {
 
     it("set CSRF cookie on GET no cache response", function () {
         // mock the get function in the core DataSourceApi, so that it calls the callback function
-        apiExport.getNoCache = jest.fn().mockImplementation(function (endpoint, params, callbackFn) {
+        apiExport.getNoCache = jest.genMockFunction().mockImplementation(function (endpoint, params, callbackFn) {
             callbackFn({
                 headers: {
                     "x-csrf-token": "VALUE"
@@ -160,7 +160,7 @@ describe("CsrfDataSourceApi", function () {
 
     it("doesn't set cookie if there's no such header in GET response", function () {
         // mock the get function in the core DataSourceApi, so that it calls the callback function
-        apiExport.get = jest.fn().mockImplementation(function (endpoint, params, callbackFn) {
+        apiExport.get = jest.genMockFunction().mockImplementation(function (endpoint, params, callbackFn) {
             callbackFn({
                 headers: {}
             });
@@ -197,7 +197,7 @@ describe("CsrfDataSourceApi", function () {
         });
 
         // mock the get function in the core DataSourceApi, so that it calls the callback function
-        apiExport.get = jest.fn().mockImplementation(function (endpoint, params, callbackFn) {
+        apiExport.get = jest.genMockFunction().mockImplementation(function (endpoint, params, callbackFn) {
             callbackFn({
                 headers: {
                     "x-csrf-token": "VALUE"
@@ -240,7 +240,7 @@ describe("CsrfDataSourceApi", function () {
         });
 
         // mock the get function in the core DataSourceApi, so that it calls the callback function
-        apiExport.get = jest.fn().mockImplementation(function (endpoint, params, callbackFn) {
+        apiExport.get = jest.genMockFunction().mockImplementation(function (endpoint, params, callbackFn) {
             callbackFn({
                 headers: {
                     "x-csrf-token": "VALUE"
@@ -268,7 +268,7 @@ describe("CsrfDataSourceApi", function () {
     });
 
     it("register middleware callback", function () {
-        var cb = jest.fn();
+        var cb = jest.genMockFunction();
 
         expect(api.callbacks.before).toEqual([]);
 
@@ -277,7 +277,7 @@ describe("CsrfDataSourceApi", function () {
     });
 
     it("unregister middleware callback by index", function () {
-        var cb = jest.fn();
+        var cb = jest.genMockFunction();
 
         api.registerMiddleware("before", cb);
         expect(api.callbacks.before).toEqual([cb]);
@@ -287,7 +287,7 @@ describe("CsrfDataSourceApi", function () {
     });
 
     it("unregister middleware callback", function () {
-        var cb = jest.fn();
+        var cb = jest.genMockFunction();
 
         api.registerMiddleware("before", cb);
         expect(api.callbacks.before).toEqual([cb]);
@@ -297,11 +297,11 @@ describe("CsrfDataSourceApi", function () {
     });
 
     it("unregister all middleware callback", function () {
-        var cbBefore = jest.fn();
+        var cbBefore = jest.genMockFunction();
         api.registerMiddleware("before", cbBefore);
         expect(api.callbacks.before).toEqual([cbBefore]);
 
-        var cbAfter = jest.fn();
+        var cbAfter = jest.genMockFunction();
         api.registerMiddleware("after", cbAfter);
         //stringify to get a good comparaison of the two
         expect(JSON.stringify(api.callbacks.before)).toEqual(JSON.stringify([cbAfter]));
@@ -312,29 +312,29 @@ describe("CsrfDataSourceApi", function () {
     });
 
     it("get without middleware", function () {
-        testUnaffectedByMiddleware("get", ["/some/url", {}, jest.fn()]);
+        testUnaffectedByMiddleware("get", ["/some/url", {}, jest.genMockFunction()]);
     });
 
     it("getNoCache without middleware", function () {
-        testUnaffectedByMiddleware("getNoCache", ["/some/url", {}, jest.fn()]);
+        testUnaffectedByMiddleware("getNoCache", ["/some/url", {}, jest.genMockFunction()]);
     });
 
     it("post without middleware", function () {
-        testUnaffectedByMiddleware("post", ["/some/url", { some: "data" }, {}, jest.fn()]);
+        testUnaffectedByMiddleware("post", ["/some/url", { some: "data" }, {}, jest.genMockFunction()]);
     });
 
     it("put without middleware", function () {
-        testUnaffectedByMiddleware("put", ["/some/url", { some: "data" }, {}, jest.fn()]);
+        testUnaffectedByMiddleware("put", ["/some/url", { some: "data" }, {}, jest.genMockFunction()]);
     });
 
     it("delete without middleware", function () {
-        testUnaffectedByMiddleware("doDelete", ["/some/url", {}, jest.fn()]);
+        testUnaffectedByMiddleware("doDelete", ["/some/url", {}, jest.genMockFunction()]);
     });
 
     it("executes callback", function () {
-        var before = jest.fn();
-        var after = jest.fn();
-        var cb = jest.fn();
+        var before = jest.genMockFunction();
+        var after = jest.genMockFunction();
+        var cb = jest.genMockFunction();
 
         api.registerMiddleware("before", before);
         api.registerMiddleware("after", after);
@@ -352,8 +352,8 @@ describe("CsrfDataSourceApi", function () {
     });
 
     it("skips callback if middleware returns false", function () {
-        var after = jest.fn().mockReturnValue(false);
-        var cb = jest.fn();
+        var after = jest.genMockFunction().mockReturnValue(false);
+        var cb = jest.genMockFunction();
 
         api.registerMiddleware("after", after);
         api.get("blah", null, cb);

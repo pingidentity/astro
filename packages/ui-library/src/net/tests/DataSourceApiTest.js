@@ -20,13 +20,13 @@ var verifyResponse = function (responseCallback, expectedResponse, expectedCache
 };
 
 describe("DataSourceApi", function () {
-    callback = jest.fn();
+    callback = jest.genMockFunction();
 
     // by default no request exists in the cache
-    cacheGet = jest.fn();
-    cachePatch = jest.fn().mockReturnValue(true);
-    cachePut = jest.fn().mockReturnValue(true);
-    cacheClear = jest.fn();
+    cacheGet = jest.genMockFunction();
+    cachePatch = jest.genMockFunction().mockReturnValue(true);
+    cachePut = jest.genMockFunction().mockReturnValue(true);
+    cacheClear = jest.genMockFunction();
 
     beforeEach(function () {
         callback.mockReset();
@@ -291,7 +291,7 @@ describe("DataSourceApi", function () {
     it("expect error message from error response body", function () {
         var errorMessage = "this is an error";
 
-        superagent.request.end =jest.fn().mockImplementation(function(cb) {
+        superagent.request.end =jest.genMockFunction().mockImplementation(function(cb) {
             var mockError = {
                 response: {
                     body: {
@@ -307,7 +307,7 @@ describe("DataSourceApi", function () {
     it("expect error message from error response error", function () {
         var errorMessage = "this is an error";
 
-        superagent.request.end =jest.fn().mockImplementation(function(cb) {
+        superagent.request.end =jest.genMockFunction().mockImplementation(function(cb) {
             var mockError = {
                 response: {
                     error: {
@@ -321,7 +321,7 @@ describe("DataSourceApi", function () {
         verifyResponse(callback, response, false, errorMessage);
     });
     it("expect empty error message when error respnse is null", function () {
-        superagent.request.end =jest.fn().mockImplementation(function(cb) {
+        superagent.request.end =jest.genMockFunction().mockImplementation(function(cb) {
             var mockError = {
                 response: null
             };

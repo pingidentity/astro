@@ -41,7 +41,7 @@ describe("KeywordSearchView", () => {
     });
 
     it("should call onResultClick when a result is clicked", () => {
-        const onResultClick = jest.fn();
+        const onResultClick = jest.genMockFunction();
         const component = getComponent({
             results: [
                 { label: "test" },
@@ -61,7 +61,7 @@ describe("KeywordSearchView", () => {
 
 
     it("should handle result clicks if onResultClick is not passed in", () => {
-        const onResultClick = jest.fn();
+        const onResultClick = jest.genMockFunction();
         const component = getComponent({
             results: [
                 { label: "test" },
@@ -79,7 +79,7 @@ describe("KeywordSearchView", () => {
     });
 
     it("should call onValueChange when value changes", () => {
-        const onValueChange = jest.fn();
+        const onValueChange = jest.genMockFunction();
         const component = getComponent({
             onValueChange
         });

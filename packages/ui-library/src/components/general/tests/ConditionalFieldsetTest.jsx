@@ -21,7 +21,7 @@ describe("ConditionalFieldset", function () {
         selectedIndex = 0;
 
     beforeEach(function () {
-        callback = jest.fn();
+        callback = jest.genMockFunction();
     });
 
     function getComponent (props) {

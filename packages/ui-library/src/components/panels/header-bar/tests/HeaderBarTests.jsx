@@ -18,8 +18,8 @@ describe("HeaderBar", function() {
         opts = _.omit(
             _.defaults(opts || {}, {
                 "data-id": dataId,
-                onItemValueChange: jest.fn(),
-                onMenuValueChange: jest.fn(),
+                onItemValueChange: jest.genMockFunction(),
+                onMenuValueChange: jest.genMockFunction(),
                 tree: [
                     { id: "help", url: "http://www.yahoo.com" },
                     {
@@ -42,8 +42,8 @@ describe("HeaderBar", function() {
     }
 
     beforeEach(function() {
-        window.addEventListener = jest.fn();
-        window.removeEventListener = jest.fn();
+        window.addEventListener = jest.genMockFunction();
+        window.removeEventListener = jest.genMockFunction();
     });
 
     it("clicks trigger correct callback", function() {
@@ -330,7 +330,7 @@ describe("HeaderBar", function() {
     });
 
     it("opens and clicks on the environment selector", function() {
-        var callback = jest.fn();
+        var callback = jest.genMockFunction();
 
         var wrapper = getWrappedComponent({
             environmentOptions: [{ label: "Thing", id: "thing" }],
@@ -393,7 +393,7 @@ describe("HeaderBar", function() {
     });
 
     it("opens and clicks on the market selector", function() {
-        var callback = jest.fn();
+        var callback = jest.genMockFunction();
 
         var wrapper = getWrappedComponent({
             marketOptions: [{ label: "Thing", id: "thing" }],
@@ -420,7 +420,7 @@ describe("HeaderBar", function() {
     });
 
     it("clicks on the nav", function() {
-        var callback = jest.fn();
+        var callback = jest.genMockFunction();
 
         var wrapper = getWrappedComponent({
             navOptions: [{ label: "Thing", id: "thing" }],
@@ -438,7 +438,7 @@ describe("HeaderBar", function() {
     });
 
     it("calls the new environment callback", function() {
-        var callback = jest.fn();
+        var callback = jest.genMockFunction();
 
         var wrapper = getWrappedComponent({
             environmentOptions: [{ label: "Thing", id: "thing" }],

@@ -64,9 +64,9 @@ describe("DragDropTable", function () {
     function getComponent (props) {
         props = _.defaults(props || {}, {
             "data-id": "drag-drop-table",
-            onDrag: jest.fn(),
-            onDrop: jest.fn(),
-            onCancel: jest.fn(),
+            onDrag: jest.genMockFunction(),
+            onDrop: jest.genMockFunction(),
+            onCancel: jest.genMockFunction(),
             headData: mockData.cols,
             bodyData: mockData.data
         });
@@ -241,7 +241,7 @@ describe("DragDropTable", function () {
         };
         getComponent({ fixedHead: true, infiniteScroll: infiniteScrollProps });
         var component = thisComponent;
-        component._handleHorizontalScroll = jest.fn();
+        component._handleHorizontalScroll = jest.genMockFunction();
 
         jest.runAllTimers();
 

@@ -42,11 +42,11 @@ describe("Wizard", function () {
     function getRenderedComponent (opts, steps) {
         var renderDefaults = {
             title: defaultText.title,
-            onNext: jest.fn(),
-            onEdit: jest.fn(),
-            onValueChange: jest.fn(),
-            onCancel: jest.fn(),
-            onDone: jest.fn(),
+            onNext: jest.genMockFunction(),
+            onEdit: jest.genMockFunction(),
+            onValueChange: jest.genMockFunction(),
+            onCancel: jest.genMockFunction(),
+            onDone: jest.genMockFunction(),
             labelNext: defaultText.labelNext,
             labelCancel: defaultText.labelCancel,
             labelEdit: defaultText.labelEdit,
@@ -75,10 +75,10 @@ describe("Wizard", function () {
     it("doesn't throw an error when no onValueChange is supplied", function () {
         const component = getRenderedComponentWithProps({
             title: defaultText.title,
-            onNext: jest.fn(),
-            onEdit: jest.fn(),
-            onCancel: jest.fn(),
-            onDone: jest.fn(),
+            onNext: jest.genMockFunction(),
+            onEdit: jest.genMockFunction(),
+            onCancel: jest.genMockFunction(),
+            onDone: jest.genMockFunction(),
             labelNext: defaultText.labelNext,
             labelCancel: defaultText.labelCancel,
             labelEdit: defaultText.labelEdit,
@@ -184,8 +184,8 @@ describe("Wizard", function () {
     });
 
     it("Cancel tooltip renders and triggers callbacks.", function () {
-        var cancelConfirm = jest.fn(),
-            cancelDeny = jest.fn(),
+        var cancelConfirm = jest.genMockFunction(),
+            cancelDeny = jest.genMockFunction(),
             cancelTooltipParams = {
                 title: "Cancel Confirmation",
                 open: false,
@@ -237,7 +237,7 @@ describe("Wizard", function () {
         var expectedError = new Error(Utils.deprecatePropError("onChange", "onValueChange"));
 
         expect(function () {
-            getRenderedComponent({ onChange: jest.fn() });
+            getRenderedComponent({ onChange: jest.genMockFunction() });
         }).toThrow(expectedError);
     });
 

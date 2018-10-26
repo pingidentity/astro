@@ -14,7 +14,7 @@ describe("If component", function () {
 
     function getComponent (opts) {
         opts = _.defaults(opts, {
-            onValueChange: jest.fn(),
+            onValueChange: jest.genMockFunction(),
             selectedIndex: -1
         });
 
@@ -47,7 +47,7 @@ describe("If component", function () {
     it("Highlights selectedIndex tab", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Wrapper type={TabbedSections}
-                     onValueChange={jest.fn()}
+                     onValueChange={jest.genMockFunction()}
                     selectedIndex={-1}>
                 <div data-id="section1" title="section 1">section 1</div>
                 <div data-id="section2" title="section 2">section 2</div>
@@ -77,7 +77,7 @@ describe("If component", function () {
     });
 
     it("Verify onValueChange called", function () {
-        var onValueChange = jest.fn();
+        var onValueChange = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
             <TabbedSections selectedIndex={-1} onValueChange={onValueChange}>
@@ -102,7 +102,7 @@ describe("If component", function () {
         var expectedError = new Error(Utils.deprecatePropError("onSectionChange", "onValueChange"));
 
         expect(function () {
-            getComponent({ onSectionChange: jest.fn() });
+            getComponent({ onSectionChange: jest.genMockFunction() });
         }).toThrow(expectedError);
     });
 

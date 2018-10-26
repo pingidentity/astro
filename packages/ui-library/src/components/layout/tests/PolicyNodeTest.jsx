@@ -14,14 +14,14 @@ describe("PolicyNode", function () {
         });
         return ReactTestUtils.renderIntoDocument(<div><PolicyNode {...opts}>{opts.children}</PolicyNode></div>);
     }
-
+    
     it("renders with default data-id", function () {
         const component = getComponent({});
 
         const policyNode = TestUtils.findRenderedDOMNodeWithDataId(component, "policy-node");
         expect(policyNode).toBeTruthy();
     });
-
+    
     it("renders an icon and an arrow", function () {
         const component = getComponent({ iconName: "cog-filled", gutter: "arrow" });
 
@@ -33,7 +33,7 @@ describe("PolicyNode", function () {
     });
 
     it("renders a number and an edit button, which responds to callback", function () {
-        const callback = jest.fn();
+        const callback = jest.genMockFunction();
 
         const component = getComponent({ number: 4, onEdit: callback });
 

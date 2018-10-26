@@ -72,7 +72,7 @@ describe("Grid", function () {
             firstColumn: 0,
             lastColumn: 5,
             currentPage: 1,
-            onPaginationChanged: jest.fn(),
+            onPaginationChanged: jest.genMockFunction(),
             stateless: true
         });
 
@@ -137,7 +137,7 @@ describe("Grid", function () {
     });
 
     it("should call callback function when clicking on plus icon", function () {
-        var callback = jest.fn();
+        var callback = jest.genMockFunction();
         var component = getComponent({
             rowExpandable: true,
             onRowExpanded: callback,
@@ -154,7 +154,7 @@ describe("Grid", function () {
     it("should expand a row when clicking on plus icon", function () {
         var component = getComponent({
             rowExpandable: true,
-            onRowExpanded: jest.fn(),
+            onRowExpanded: jest.genMockFunction(),
             expandedRowContentType: (<div>here is expanded section</div>)
         });
 
@@ -184,7 +184,7 @@ describe("Grid", function () {
                         hasSelectAll={true}
                         data-id="check-all-header"
                         selectAllValue={true} >
-                    <CheckboxCell onGridCellAction={jest.fn()} className="stacked" />
+                    <CheckboxCell onGridCellAction={jest.genMockFunction()} className="stacked" />
                 </Grid.Column>
             </Grid>
         );
@@ -200,7 +200,7 @@ describe("Grid", function () {
             rows: rows,
             columnsPerPage: 2
         };
-        var callback = jest.fn();
+        var callback = jest.genMockFunction();
         var component = ReactTestUtils.renderIntoDocument(
             <Grid data-id="grid-test" {...props}>
                 <Grid.Column headerText="Firstname" field="firstname" width={Grid.ColumnSizes.S} />
@@ -247,7 +247,7 @@ describe("Grid", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Grid rows={rows} stateless={false} >
                 <Grid.Column headerText="Email" field="email" >
-                    <TextFieldCell onGridCellAction={jest.fn()} />
+                    <TextFieldCell onGridCellAction={jest.genMockFunction()} />
                 </Grid.Column>
             </Grid>
         );
@@ -262,7 +262,7 @@ describe("Grid", function () {
     });
 
     it("triggers onGridCellAction on TextField cell change", function () {
-        var callback = jest.fn();
+        var callback = jest.genMockFunction();
         var component = ReactTestUtils.renderIntoDocument(
             <Grid rows={rows} stateless={false} >
                 <Grid.Column headerText="Email" field="email" >
@@ -282,7 +282,7 @@ describe("Grid", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Grid rows={rows} stateless={false} >
                 <Grid.Column headerText="Email" field="email" >
-                    <ButtonCell onGridCellAction={jest.fn()} />
+                    <ButtonCell onGridCellAction={jest.genMockFunction()} />
                 </Grid.Column>
             </Grid>
         );
@@ -297,7 +297,7 @@ describe("Grid", function () {
     });
 
     it("triggers onGridCellAction on button cell click", function () {
-        var callback = jest.fn();
+        var callback = jest.genMockFunction();
         var component = ReactTestUtils.renderIntoDocument(
             <Grid rows={rows} stateless={false} >
                 <Grid.Column headerText="Email" field="email" >

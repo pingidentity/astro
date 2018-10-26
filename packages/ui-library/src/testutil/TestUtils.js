@@ -410,7 +410,7 @@ var TestUtils = {
  *
  *     var component = ReactTestUtils.renderIntoDocument(
  *         <UpdatePropsWrapper type={TabbedSections}
- *                 onSectionChange={jest.fn()}
+ *                 onSectionChange={jest.genMockFunction()}
  *                 selectedIndex={-1}>
  *             <div data-id="section1" title="section 1">section 1</div>
  *             <div data-id="section2" title="section 2">section 2</div>

@@ -33,7 +33,7 @@ describe("ExpandableRow", function() {
             title: <div>Test Title</div>,
             subtitle: <div>Test Subtitle</div>,
             content: <div data-id="content">Test Content</div>,
-            onToggle: jest.fn()
+            onToggle: jest.genMockFunction()
         });
 
         const WrappedComponent = opts.ordering ? wrapInTestContext(ExpandableRow) : ExpandableRow;
@@ -47,7 +47,7 @@ describe("ExpandableRow", function() {
             title: <div>Test Title</div>,
             subtitle: <div>Test Subtitle</div>,
             content: <div data-id="content">Test Content</div>,
-            onToggle: jest.fn()
+            onToggle: jest.genMockFunction()
         };
         opts = _.defaults(opts || {}, defaults);
         opts2 = _.defaults(opts2 || {}, defaults);
@@ -500,8 +500,8 @@ describe("ExpandableRow", function() {
     });
 
     it("stateful: should trigger onDelete callback on click confirm-delete", function() {
-        let onDelete = jest.fn();
-
+        let onDelete = jest.genMockFunction();
+        
         var component = getComponent({
             stateless: false,
             expanded: true,
@@ -526,7 +526,7 @@ describe("ExpandableRow", function() {
             showDelete: true,
             confirmDelete: false,
             showDeleteConfirm: true,
-            onDelete: jest.fn()
+            onDelete: jest.genMockFunction()
         });
 
         var deleteBtn = TestUtils.findRenderedDOMNodeWithDataId(component, "delete-btn");
@@ -549,7 +549,7 @@ describe("ExpandableRow", function() {
     });
 
     it("stateless: should trigger onEditButtonClick callback on edit-btn click", function() {
-        var component = getComponent({ expanded: true, showEdit: true, onEditButtonClick: jest.fn() });
+        var component = getComponent({ expanded: true, showEdit: true, onEditButtonClick: jest.genMockFunction() });
 
         var editButton = getEditButton(component);
 
@@ -563,7 +563,7 @@ describe("ExpandableRow", function() {
             stateless: false,
             expanded: true,
             showEdit: true,
-            onEditButtonClick: jest.fn()
+            onEditButtonClick: jest.genMockFunction()
         });
 
         var editButton = getEditButton(component);
@@ -590,7 +590,7 @@ describe("ExpandableRow", function() {
     });
 
     it("fires reorder event from input when in ordering mode", function() {
-        const callback = jest.fn();
+        const callback = jest.genMockFunction();
         const component = getComponent({
             stateless: false,
             ordering: {
@@ -619,7 +619,7 @@ describe("ExpandableRow", function() {
     });
 
     it("fires reorder event from up/down keys when in ordering mode", function() {
-        const callback = jest.fn();
+        const callback = jest.genMockFunction();
         let component = getComponent({
             stateless: false,
             ordering: {
@@ -667,7 +667,7 @@ describe("ExpandableRow", function() {
     });
 
     it("fires no events from other keys when in ordering mode", function() {
-        const callback = jest.fn();
+        const callback = jest.genMockFunction();
         const component = getComponent({
             stateless: false,
             ordering: {
@@ -685,7 +685,7 @@ describe("ExpandableRow", function() {
     });
 
     it("calls drag handler for input when in ordering mode", function() {
-        const callback = jest.fn();
+        const callback = jest.genMockFunction();
         const component = getComponent({
             stateless: false,
             ordering: {
@@ -700,7 +700,7 @@ describe("ExpandableRow", function() {
     });
 
     it("calls onReorder callback when dropping", function() {
-        const callback = jest.fn();
+        const callback = jest.genMockFunction();
         const root = getTwoComponents(
             {
                 stateless: false,

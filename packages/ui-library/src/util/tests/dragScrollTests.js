@@ -36,7 +36,7 @@ describe ("dragScroll", function () {
     //         height: "800px"
     //     };
     //     props = _.defaults(props || {}, {
-    //         onClick: jest.fn()
+    //         onClick: jest.genMockFunction()
     //     });
     //     return ReactTestUtils.renderIntoDocument(
     //         <div>
@@ -161,7 +161,7 @@ describe ("dragScroll", function () {
     });
 
     it("test adding and removing event listener start and end", function () {
-        var listenMock = jest.fn();
+        var listenMock = jest.genMockFn();
         window.addEventListener = window.removeEventListener = listenMock;
         expect(listenMock.mock.calls.length).toBe(0);
         dragScroll.start();

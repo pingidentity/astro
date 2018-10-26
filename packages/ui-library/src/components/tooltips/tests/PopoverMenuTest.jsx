@@ -10,7 +10,7 @@ describe("PopoverMenu", function() {
         TestUtils = require("../../../testutil/TestUtils"),
         PopoverMenu = require("../PopoverMenu");
 
-    var buttonCallback = jest.fn();
+    var buttonCallback = jest.genMockFunction();
     var buttonData = [
         {
             label: "First",
@@ -30,8 +30,8 @@ describe("PopoverMenu", function() {
         }
     ];
 
-    window.addEventListener = jest.fn();
-    window.removeEventListener = jest.fn();
+    window.addEventListener = jest.genMockFunction();
+    window.removeEventListener = jest.genMockFunction();
     beforeEach(function() {
         window.addEventListener.mockClear();
         window.removeEventListener.mockClear();
@@ -52,7 +52,7 @@ describe("PopoverMenu", function() {
     });
 
     it("notifies button callback and toggle when clicking menu button", function() {
-        var callback = jest.fn();
+        var callback = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
             <div>
@@ -77,7 +77,7 @@ describe("PopoverMenu", function() {
     });
 
     it("doesn't error out if there's no event defined for a button", function() {
-        var callback = jest.fn();
+        var callback = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
             <div>

@@ -93,8 +93,8 @@ describe("FormTimeZone", function () {
         return countryZones;
     }
 
-    window.addEventListener = jest.fn();
-    window.removeEventListener = jest.fn();
+    window.addEventListener = jest.genMockFunction();
+    window.removeEventListener = jest.genMockFunction();
 
     beforeEach(function () {
         window.addEventListener.mockClear();
@@ -302,9 +302,9 @@ describe("FormTimeZone", function () {
         const component = getComponent({
             stateless: true,
             open: true,
-            onSearch: jest.fn(),
-            onToggle: jest.fn(),
-            onValueChange: jest.fn()
+            onSearch: jest.genMockFunction(),
+            onToggle: jest.genMockFunction(),
+            onValueChange: jest.genMockFunction()
         });
         const handler = component.refs.TimeZoneStateless._onGlobalClick;
 
@@ -323,9 +323,9 @@ describe("FormTimeZone", function () {
     it("skips the global click handler if not open and click on component", function () {
         const component = getComponent({
             stateless: true,
-            onToggle: jest.fn(),
-            onSearch: jest.fn(),
-            onValueChange: jest.fn()
+            onToggle: jest.genMockFunction(),
+            onSearch: jest.genMockFunction(),
+            onValueChange: jest.genMockFunction()
         });
         const handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
 
@@ -338,9 +338,9 @@ describe("FormTimeZone", function () {
     it("detaches global listeners on unmount", function () {
         const component = getComponent({
             stateless: true,
-            onToggle: jest.fn(),
-            onSearch: jest.fn(),
-            onValueChange: jest.fn()
+            onToggle: jest.genMockFunction(),
+            onSearch: jest.genMockFunction(),
+            onValueChange: jest.genMockFunction()
         });
         const componentRef = component.refs.TimeZoneStateless;
 
@@ -357,7 +357,7 @@ describe("FormTimeZone", function () {
         });
         const componentRef = component.refs.TimeZoneStateless;
 
-        componentRef._setListPosition = jest.fn();
+        componentRef._setListPosition = jest.genMockFunction();
         componentRef.componentDidUpdate();
         expect(componentRef._setListPosition).toBeCalled();
     });

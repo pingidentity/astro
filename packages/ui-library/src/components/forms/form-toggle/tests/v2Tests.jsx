@@ -11,7 +11,7 @@ describe("Toggle", function () {
     function getComponent (props) {
         var props = _.defaults(props || {}, {
             stateless: true,
-            onToggle: jest.fn()
+            onToggle: jest.genMockFunction()
         });
 
         return ReactTestUtils.renderIntoDocument(<Toggle {...props} />);

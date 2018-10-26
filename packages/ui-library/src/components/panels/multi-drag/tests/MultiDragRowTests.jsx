@@ -16,7 +16,7 @@ describe("MultiDragRow", function() {
     }
 
     it("triggers add event", function() {
-        const callback = jest.fn();
+        const callback = jest.genMockFunction();
         const component = getComponent({ onAdd: callback, column: 0 });
         const button = TestUtils.findRenderedDOMNodeWithDataId(component, "row-button-add");
 
@@ -26,7 +26,7 @@ describe("MultiDragRow", function() {
     });
 
     it("triggers remove event", function() {
-        const callback = jest.fn();
+        const callback = jest.genMockFunction();
         const component = getComponent({ onRemove: callback, column: 1 });
         const button = TestUtils.findRenderedDOMNodeWithDataId(component, "row-button-remove");
 

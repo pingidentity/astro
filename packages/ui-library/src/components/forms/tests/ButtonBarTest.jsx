@@ -24,7 +24,7 @@ describe("ButtonBar", function () {
             "data-id": componentId,
             cancelText: cancelText,
             discardText: discardText,
-            onSave: jest.fn(),
+            onSave: jest.genMockFunction(),
             saveText: saveText
         });
         return ReactTestUtils.renderIntoDocument(<ButtonBar {...opts} />);
@@ -45,8 +45,8 @@ describe("ButtonBar", function () {
 
     it("Renders all buttons when optional callbacks are provided", function () {
         var component = getComponent({
-                onCancel: jest.fn(),
-                onDiscard: jest.fn()
+                onCancel: jest.genMockFunction(),
+                onDiscard: jest.genMockFunction()
             }),
             saveBtn = getSaveButton(component),
             cancelBtn = getCancelButton(component),
@@ -88,8 +88,8 @@ describe("ButtonBar", function () {
 
     it("Renders only save button when optional callbacks are provided but the text is not", function () {
         var component = getComponent({
-                onCancel: jest.fn(),
-                onDiscard: jest.fn(),
+                onCancel: jest.genMockFunction(),
+                onDiscard: jest.genMockFunction(),
                 cancelText: null,
                 discardText: null,
             }),
@@ -104,8 +104,8 @@ describe("ButtonBar", function () {
 
     it("Renders unfixed button bar", function () {
         const component = getComponent({
-            onCancel: jest.fn(),
-            onDiscard: jest.fn(),
+            onCancel: jest.genMockFunction(),
+            onDiscard: jest.genMockFunction(),
             cancelText: null,
             discardText: null,
             unfixed: true,
@@ -117,8 +117,8 @@ describe("ButtonBar", function () {
 
     it("Triggers callbacks when the buttons are clicked", function () {
         var component = getComponent({
-                onCancel: jest.fn(),
-                onDiscard: jest.fn()
+                onCancel: jest.genMockFunction(),
+                onDiscard: jest.genMockFunction()
             }),
             saveBtn = getSaveButton(component),
             cancelBtn = getCancelButton(component),
@@ -146,8 +146,8 @@ describe("ButtonBar", function () {
                 cancelClassName: cancelClassName,
                 discardClassName: discardClassName,
 
-                onCancel: jest.fn(),
-                onDiscard: jest.fn()
+                onCancel: jest.genMockFunction(),
+                onDiscard: jest.genMockFunction()
             }),
 
             saveBtn = getSaveButton(component),
@@ -161,8 +161,8 @@ describe("ButtonBar", function () {
 
     it("Renders saving state properly", function () {
         var component = getComponent({
-                onCancel: jest.fn(),
-                onDiscard: jest.fn(),
+                onCancel: jest.genMockFunction(),
+                onDiscard: jest.genMockFunction(),
                 enableSavingAnimation: true
             }),
             saveBtn = getSaveButton(component),
@@ -209,8 +209,8 @@ describe("ButtonBar", function () {
     });
 
     it("Cancel tooltip renders and triggers callbacks.", function () {
-        var cancelConfirm = jest.fn(),
-            cancelDeny = jest.fn(),
+        var cancelConfirm = jest.genMockFunction(),
+            cancelDeny = jest.genMockFunction(),
             buttonBarParams = {
                 cancelTooltip: {
                     title: "Cancel Confirmation",
@@ -221,7 +221,7 @@ describe("ButtonBar", function () {
                     confirmButtonText: "Yes",
                     cancelButtonText: "No"
                 },
-                onCancel: jest.fn(),
+                onCancel: jest.genMockFunction(),
                 visible: true
             },
             component = getComponent(buttonBarParams),
@@ -255,8 +255,8 @@ describe("ButtonBar", function () {
     });
 
     it("Save tooltip renders and triggers callbacks.", function () {
-        const saveConfirm = jest.fn(),
-            saveDeny = jest.fn(),
+        const saveConfirm = jest.genMockFunction(),
+            saveDeny = jest.genMockFunction(),
             buttonBarParams = {
                 saveTooltip: {
                     title: "Save Confirmation",
@@ -267,7 +267,7 @@ describe("ButtonBar", function () {
                     confirmButtonText: "Yes",
                     cancelButtonText: "No"
                 },
-                onCancel: jest.fn(),
+                onCancel: jest.genMockFunction(),
                 visible: true
             },
             closed = getComponent(buttonBarParams),

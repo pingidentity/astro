@@ -10,7 +10,7 @@ import KeywordSearch from "../KeywordSearch";
 
 describe("KeywordSearch", () => {
     const searchDefaults = {
-        onResultClick: jest.fn(),
+        onResultClick: jest.genMockFunction(),
         tree: [
             {
                 id: "column",
@@ -44,7 +44,7 @@ describe("KeywordSearch", () => {
     });
 
     it("_resultClicked should correctly update state", () => {
-        const onResultClick = jest.fn();
+        const onResultClick = jest.genMockFunction();
         const component = getComponent({
             onResultClick,
             results: [
@@ -60,7 +60,7 @@ describe("KeywordSearch", () => {
     });
 
     it("_resultClicked should call onResultClick prop if passed in", () => {
-        const onResultClick = jest.fn();
+        const onResultClick = jest.genMockFunction();
         const component = getComponent({
             onResultClick,
             results: [
@@ -96,7 +96,7 @@ describe("KeywordSearch", () => {
     });
 
     it("calls onResultClick when enter key is pressed", () => {
-        const onResultClick = jest.fn();
+        const onResultClick = jest.genMockFunction();
         const component = getComponent({ onResultClick });
         component._onKeyDown({ keyCode: 13 });
 
@@ -151,7 +151,7 @@ describe("KeywordSearch", () => {
     });
 
     it("calls onResultClick when enter key is pressed", () => {
-        const onResultClick = jest.fn();
+        const onResultClick = jest.genMockFunction();
         const component = getComponent({
             onResultClick,
             results: [

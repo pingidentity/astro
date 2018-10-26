@@ -35,11 +35,11 @@ describe("SelectText", function () {
         // cannot directly test the text selection.
         // Instead, we create the appropriate mock functions
         // and see that they are called on the global object.
-        var removeAllRanges = jest.fn();
-        var addRange = jest.fn();
-        var selectNodeContents = jest.fn();
+        var removeAllRanges = jest.genMockFn();
+        var addRange = jest.genMockFn();
+        var selectNodeContents = jest.genMockFn();
 
-        global.getSelection = jest.fn();
+        global.getSelection = jest.genMockFn();
         global.getSelection.mockReturnValue({
             removeAllRanges: removeAllRanges,
             addRange: addRange,
@@ -80,10 +80,10 @@ describe("SelectText", function () {
 
     it("renders on browsers supporting createTextRange", function () {
 
-        var moveToElement = jest.fn();
-        var select = jest.fn();
+        var moveToElement = jest.genMockFunction();
+        var select = jest.genMockFunction();
 
-        global.getSelection = jest.fn();
+        global.getSelection = jest.genMockFn();
         global.getSelection.mockReturnValue({
             toString: () => "",
         });
@@ -139,11 +139,11 @@ describe("SelectText", function () {
         // cannot directly test the text selection.
         // Instead, we create the appropriate mock functions
         // and see that they are called on the global object.
-        var removeAllRanges = jest.fn();
-        var addRange = jest.fn();
-        var selectNodeContents = jest.fn();
+        var removeAllRanges = jest.genMockFn();
+        var addRange = jest.genMockFn();
+        var selectNodeContents = jest.genMockFn();
 
-        global.getSelection = jest.fn();
+        global.getSelection = jest.genMockFn();
         global.getSelection.mockReturnValue({
             removeAllRanges: removeAllRanges,
             addRange: addRange,
@@ -178,14 +178,14 @@ describe("SelectText", function () {
 
     it("is delegates selection to form text field targets", function () {
 
-        global.getSelection = jest.fn();
+        global.getSelection = jest.genMockFn();
         global.getSelection.mockReturnValue({
-            removeAllRanges: jest.fn(),
-            addRange: jest.fn(),
+            removeAllRanges: jest.genMockFn(),
+            addRange: jest.genMockFn(),
             toString: () => "",
         });
 
-        var callback = jest.fn();
+        var callback = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
             <SelectText className="testClass" select={true}>
@@ -206,15 +206,15 @@ describe("SelectText", function () {
     });
 
     it("triggers onClick callback", function () {
-        global.getSelection = jest.fn();
+        global.getSelection = jest.genMockFn();
         global.getSelection.mockReturnValue({
-            removeAllRanges: jest.fn(),
-            addRange: jest.fn(),
+            removeAllRanges: jest.genMockFn(),
+            addRange: jest.genMockFn(),
             toString: () => "",
         });
 
 
-        var callback = jest.fn();
+        var callback = jest.genMockFunction();
 
         var component = ReactTestUtils.renderIntoDocument(
             <SelectText data-id="select-text" className="testClass" select={true} onClick={callback}>
@@ -231,10 +231,10 @@ describe("SelectText", function () {
     });
 
     it("render component with data-id", function () {
-        global.getSelection = jest.fn();
+        global.getSelection = jest.genMockFn();
         global.getSelection.mockReturnValue({
-            removeAllRanges: jest.fn(),
-            addRange: jest.fn(),
+            removeAllRanges: jest.genMockFn(),
+            addRange: jest.genMockFn(),
             toString: () => "",
         });
 
@@ -250,10 +250,10 @@ describe("SelectText", function () {
     });
 
     it("render component with default data-id", function () {
-        global.getSelection = jest.fn();
+        global.getSelection = jest.genMockFn();
         global.getSelection.mockReturnValue({
-            removeAllRanges: jest.fn(),
-            addRange: jest.fn(),
+            removeAllRanges: jest.genMockFn(),
+            addRange: jest.genMockFn(),
             toString: () => "",
         });
 

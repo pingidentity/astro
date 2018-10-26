@@ -37,15 +37,15 @@ describe("FormDropDownList", function () {
             stateless: true,
             options: options,
             selectedOption: options[0],
-            onToggle: jest.fn(),
-            onSearch: jest.fn(),
-            onValueChange: jest.fn()
+            onToggle: jest.genMockFunction(),
+            onSearch: jest.genMockFunction(),
+            onValueChange: jest.genMockFunction()
         });
         return ReactTestUtils.renderIntoDocument(<FormDropDownList {...props} />);
     }
 
-    window.addEventListener = jest.fn();
-    window.removeEventListener = jest.fn();
+    window.addEventListener = jest.genMockFunction();
+    window.removeEventListener = jest.genMockFunction();
 
     beforeEach(function () {
         window.addEventListener.mockClear();
@@ -370,7 +370,7 @@ describe("FormDropDownList", function () {
             canAdd: true,
             searchString: searchString,
             labelAdd: "prompt",
-            onAdd: jest.fn()
+            onAdd: jest.genMockFunction()
         });
         var select = TestUtils.findRenderedDOMNodeWithDataId(component, "select-list");
         var prompt = TestUtils.findRenderedDOMNodeWithDataId(select, "add-prompt");
@@ -447,7 +447,7 @@ describe("FormDropDownList", function () {
         });
         var componentRef = component.refs.FormDropDownListStateless;
 
-        componentRef._setSearchListPosition = jest.fn();
+        componentRef._setSearchListPosition = jest.genMockFunction();
         componentRef.componentDidUpdate();
         expect(componentRef._setSearchListPosition).toBeCalled();
     });
@@ -483,7 +483,7 @@ describe("FormDropDownList", function () {
         });
         var componentRef = component.refs.FormDropDownListStateless;
 
-        componentRef._setupGroups = jest.fn();
+        componentRef._setupGroups = jest.genMockFunction();
         componentRef.componentWillReceiveProps({ options: [] });
         expect(componentRef._setupGroups).toBeCalled();
     });
@@ -495,7 +495,7 @@ describe("FormDropDownList", function () {
         });
         var componentRef = component.refs.FormDropDownListStateless;
 
-        componentRef._setupGroups = jest.fn();
+        componentRef._setupGroups = jest.genMockFunction();
         componentRef.componentWillReceiveProps({ groups: [] });
         expect(componentRef._setupGroups).toBeCalled();
     });
@@ -630,7 +630,7 @@ describe("FormDropDownList", function () {
         var component = getComponent({ open: true,
             options: [],
             canAdd: true,
-            onAdd: jest.fn(),
+            onAdd: jest.genMockFunction(),
             searchString: "foo"
         });
         var select = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");

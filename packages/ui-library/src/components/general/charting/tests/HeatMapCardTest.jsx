@@ -53,7 +53,7 @@ describe("HeatmapCard", function () {
         data: chartData,
         heatColor: "#ff0000",
         labelKey: "myLabel",
-        onValueChange: jest.fn(),
+        onValueChange: jest.genMockFunction(),
         rockerButtonProps: rockerButtonProps,
         tooltipSubtitle: "my tt subtitle",
         valueKey: "myValue",
@@ -178,7 +178,7 @@ describe("HeatmapCard", function () {
     });
 
     it("the callback is triggered when rocker button is clicked", function () {
-        const onValueChange = jest.fn();
+        const onValueChange = jest.genMockFunction();
         const component = getComponent({
             onValueChange: onValueChange
         });

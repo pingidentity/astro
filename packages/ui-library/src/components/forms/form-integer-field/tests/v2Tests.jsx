@@ -15,12 +15,12 @@ describe("FormIntegerField", function () {
         callback;
 
     function getComponent (opts) {
-        opts.onValueChange = jest.fn();
+        opts.onValueChange = jest.genMockFunction();
         return ReactTestUtils.renderIntoDocument(<FormIntegerField {...opts} />);
     }
 
     beforeEach(function () {
-        callback = jest.fn();
+        callback = jest.genMockFunction();
     });
 
 

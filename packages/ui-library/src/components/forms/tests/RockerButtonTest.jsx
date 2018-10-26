@@ -16,7 +16,7 @@ describe("RockerButton", function () {
 
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
-            onValueChange: jest.fn(),
+            onValueChange: jest.genMockFunction(),
             stateless: true,
             labels: labelsArray,
             className: "myRocker"
@@ -44,7 +44,7 @@ describe("RockerButton", function () {
     });
 
     it("stateful: onValueChange callback is not called when selection does not change", function () {
-        var callback = jest.fn();
+        var callback = jest.genMockFunction();
         var component = ReactTestUtils.renderIntoDocument(
             <RockerButton stateless={false} selectedIndex={0} labels={labelsArray} onValueChange={callback} />
         );
@@ -64,7 +64,7 @@ describe("RockerButton", function () {
     });
 
     it("stateful: will trigger onValueChange callback when selection changes", function () {
-        var callback = jest.fn();
+        var callback = jest.genMockFunction();
         var component = ReactTestUtils.renderIntoDocument(
             <RockerButton stateless={false} labels={labelsArray} onValueChange={callback} />
         );
@@ -76,7 +76,7 @@ describe("RockerButton", function () {
     });
 
     it("steteless: will not trigger callbacks if not given", function () {
-        var callback = jest.fn();
+        var callback = jest.genMockFunction();
         var component = ReactTestUtils.renderIntoDocument(
             <RockerButton stateless={true} labels={labelsArray} />);
         var labels = TestUtils.scryRenderedDOMNodesWithTag(component, "label");
@@ -86,7 +86,7 @@ describe("RockerButton", function () {
     });
 
     it("stateful: will not trigger callbacks if not given", function () {
-        var callback = jest.fn();
+        var callback = jest.genMockFunction();
         var component = ReactTestUtils.renderIntoDocument(
             <RockerButton stateless={false} labels={labelsArray} />);
         var labels = TestUtils.scryRenderedDOMNodesWithTag(component, "label");
@@ -138,7 +138,7 @@ describe("RockerButton", function () {
     });
 
     it("disabled will not do anything for button clicks", function () {
-        var callback = jest.fn(),
+        var callback = jest.genMockFunction(),
             component = ReactTestUtils.renderIntoDocument(
             <RockerButton stateless={false} disabled={true} labels={labelsArray} />),
             labels = TestUtils.scryRenderedDOMNodesWithTag(component, "label"),
@@ -153,8 +153,8 @@ describe("RockerButton", function () {
 
     it("is logging warning if more than 4 labels given", function () {
 
-        console.warn = jest.fn();
-        var callback = jest.fn();
+        console.warn = jest.genMockFunction();
+        var callback = jest.genMockFunction();
 
         ReactTestUtils.renderIntoDocument(
             <RockerButton labels={["Profile", "Groups", "Services", "Users", "Security"]} onValueChange={callback} />
@@ -183,7 +183,7 @@ describe("RockerButton", function () {
         var expectedError = new Error(Utils.deprecatePropError("onChange", "onValueChange"));
 
         expect(function () {
-            getComponent({ onChange: jest.fn() });
+            getComponent({ onChange: jest.genMockFunction() });
         }).toThrow(expectedError);
     });
 

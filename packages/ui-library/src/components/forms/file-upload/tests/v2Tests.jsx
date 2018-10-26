@@ -10,8 +10,8 @@ jest.dontMock("../../FormError");
 jest.dontMock("../../FormLabel");
 
 //mock the exif api
-jest.setMock("exif-js", { getData: jest.fn() });
-jest.setMock("fix-orientation", jest.fn() );
+jest.setMock("exif-js", { getData: jest.genMockFunction() });
+jest.setMock("fix-orientation", jest.genMockFunction() );
 
 describe("FileUpload", function () {
     var React = require("react"),
@@ -36,10 +36,10 @@ describe("FileUpload", function () {
             "data-id": "testFileUpload",
             maxFileSizeKb: 10,
             showThumbnail: true,
-            onValidate: jest.fn(),
+            onValidate: jest.genMockFunction(),
 
-            onPreviewReady: jest.fn(),
-            onError: jest.fn()
+            onPreviewReady: jest.genMockFunction(),
+            onError: jest.genMockFunction()
         });
 
         return ReactTestUtils.renderIntoDocument(<FileUpload {...opts} />);
@@ -89,7 +89,7 @@ describe("FileUpload", function () {
     var simulateChange = CommonTests.simulateChange.bind(null, get);
 
     it("onchange callback", function () {
-        var component = getComponent({ onChange: jest.fn() });
+        var component = getComponent({ onChange: jest.genMockFunction() });
 
         simulateChange(component);
 
@@ -151,13 +151,18 @@ describe("FileUpload", function () {
     });
 
     it("will reset the value of the file input value when the remove link is clicked.", function () {
-        const component = getComponent({ onValidate: jest.fn(), fileName: "file.jpg" });
-        const removeButton = get(component, "removeButton");
+        var component = getComponent({ onValidate: jest.genMockFunction(), fileName: "file.jpg" });
+        var fileInput = get(component, "input");
+        var removeButton = get(component, "removeButton");
+
+        fileInput.value = "someFile.png";
+        expect(fileInput.value).toEqual("someFile.png");
 
         component.props.onValidate.mockClear();
         ReactTestUtils.Simulate.click(removeButton);
 
         expect(component.props.onValidate).toBeCalled();
+        expect(fileInput.value).toEqual("");
     });
 
     it("works when HTML5 Api is not available", function () {

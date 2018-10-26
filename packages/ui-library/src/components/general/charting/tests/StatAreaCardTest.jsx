@@ -32,7 +32,7 @@ describe("StatAreaCard", () => {
         yAxisKey: "value",
         data: chartData,
         title: "Hi",
-        onValueChange: jest.fn(),
+        onValueChange: jest.genMockFunction(),
         rockerButtonProps: rockerButtonProps,
         subtitle: "so far",
         value: "1,000",
@@ -149,7 +149,7 @@ describe("StatAreaCard", () => {
     });
 
     it("calls onMouseOver", function () {
-        let onMouseOver = jest.fn();
+        let onMouseOver = jest.genMockFunction();
 
         ReactTestUtils.renderIntoDocument(
             <div>
