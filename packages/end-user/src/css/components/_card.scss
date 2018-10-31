@@ -8,6 +8,7 @@ $card-mobile-padding: $spacing-xx;
 
 .card {
     background: $card-bg;
+    box-shadow: $shadow-overlay;
     box-sizing: border-box;
     margin: 0 auto;
     max-width: $card-width;
