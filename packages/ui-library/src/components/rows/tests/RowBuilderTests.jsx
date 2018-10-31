@@ -4,7 +4,7 @@ jest.dontMock("../RowBuilder.jsx");
 
 describe("RowBuilder", () => {
     const React = require("react");
-    const { renderIntoDocument, Simulate } = require("react-dom/test-utils");
+    const { isDOMComponent, renderIntoDocument, Simulate } = require("react-dom/test-utils");
     const TestUtils = require("../../../testutil/TestUtils");
     const RowBuilder = require("../RowBuilder");
 
@@ -20,12 +20,13 @@ describe("RowBuilder", () => {
     ];
 
     function getComponent({
+        "data-id": dataId = "row-builder-test",
         rows = defaultRows,
         ...props
     } = {}) {
         return renderIntoDocument(
             <div>
-                <RowBuilder rows={rows} {...props} />
+                <RowBuilder data-id={dataId} rows={rows} {...props} />
             </div>
         );
     }
@@ -72,9 +73,9 @@ describe("RowBuilder", () => {
     it("calls onRemove prop with row id when remove button is clicked", () => {
         const onRemove = jest.fn();
         const component = getComponent({ onRemove });
-        const [removeButton,] = TestUtils.scryRenderedDOMNodesWithClass(
+        const removeButton = TestUtils.findRenderedDOMNodeWithDataId(
             component,
-            "row-builder__remove"
+            "row-builder-test-first-delete"
         );
 
         Simulate.click(removeButton);
@@ -84,9 +85,9 @@ describe("RowBuilder", () => {
     it("does not call onRemove prop when not passed in", () => {
         const onRemove = jest.fn();
         const component = getComponent();
-        const [removeButton,] = TestUtils.scryRenderedDOMNodesWithClass(
+        const removeButton = TestUtils.scryRenderedDOMNodesWithClass(
             component,
-            "row-builder__remove"
+            "row-builder-test-first-delete"
         );
 
         Simulate.click(removeButton);
@@ -105,5 +106,17 @@ describe("RowBuilder", () => {
         const label = TestUtils.findRenderedDOMNodeWithClass(component, "row-builder__remove__label");
 
         expect(label).toBeFalsy();
+    });
+
+    it("does not render delete but if row has removable prop set to false", () => {
+        const component = getComponent({
+            content: [<div />],
+            id: "no-remove",
+            removable: false
+        });
+
+        const deleteButton = TestUtils.findRenderedDOMNodeWithDataId(component, "row-builder-test-no-remove-delete");
+
+        expect(isDOMComponent(deleteButton)).toBeFalsy();
     });
 });

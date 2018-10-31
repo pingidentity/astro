@@ -47,7 +47,7 @@ function RowBuilder({
         }
     };
 
-    const renderRow = ({ id, content }, idx) => {
+    const renderRow = ({ id, content, removable = true }, idx) => {
         const hasRemoveLabel = showRemoveLabel && idx === 0;
 
         return (
@@ -58,9 +58,16 @@ function RowBuilder({
                     onClick={remove(id)}
                 >
                     {
-                        showRemoveLabel && idx === 0 && <div className="row-builder__remove__label"> Remove </div>
+                        hasRemoveLabel && <div className="row-builder__remove__label"> Remove </div>
                     }
-                    <Button className="row-builder__remove__button" iconName="minus" inline />
+                    { removable &&
+                        <Button
+                            className="row-builder__remove__button"
+                            data-id={`${dataId}-${id}-delete`}
+                            iconName="minus"
+                            inline
+                        />
+                    }
                 </div>
             </div>
         );
@@ -97,7 +104,8 @@ RowBuilder.propTypes = {
             id: propTypes.string,
             content: propTypes.arrayOf(
                 propTypes.node
-            )
+            ),
+            removable: propTypes.bool
         })
     ),
     showRemoveLabel: propTypes.bool,

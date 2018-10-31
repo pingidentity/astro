@@ -42,6 +42,12 @@ export default class RowBuilderDemo extends Component {
     }
 
     render() {
+        const nonRemovable = {
+            content: [<div key="non-removable">Non-removable row</div>],
+            id: "non-removable",
+            removable: false
+        };
+
         return (
             <div>
                 <div className="input-row">
@@ -61,6 +67,7 @@ export default class RowBuilderDemo extends Component {
                                 <FormTextField
                                     key="textfield"
                                     labelText="Text field"
+                                    stateless={false}
                                 />
                                 )
                             ],
@@ -73,10 +80,13 @@ export default class RowBuilderDemo extends Component {
                     <RowBuilder
                         onAdd={this.addSecond}
                         onRemove={this.removeRow(false)}
-                        rows={this.createRows(
-                            [<div key={uuidV4()}>Simple row</div>],
-                            this.state.secondRowIds
-                        )}
+                        rows={[
+                            ...this.createRows(
+                                [<div key={uuidV4()}>Simple row</div>],
+                                this.state.secondRowIds
+                            ),
+                            nonRemovable
+                        ]}
                     />
                 </div>
             </div>
