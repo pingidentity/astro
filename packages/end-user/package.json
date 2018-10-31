@@ -41,6 +41,7 @@
         "mdxc": "^1.0.0",
         "node-sass": "^4.7.2",
         "postcss-loader": "^2.1.0",
+        "pre-commit": "^1.2.2",
         "raw-loader": "^0.5.1",
         "sass-loader": "^6.0.6",
         "static-site-generator-webpack-plugin": "^3.4.1",
@@ -58,6 +59,7 @@
         "type": "git",
         "url": "https://gitlab.corp.pingidentity.com/jfal/end-user"
     },
+    "pre-commit": [ "static" ],
     "scripts": {
         "static": "rm -rf ./static && webpack --config webpack.config.static.js",
         "server": "webpack-dev-server --config webpack.config.server.js",
