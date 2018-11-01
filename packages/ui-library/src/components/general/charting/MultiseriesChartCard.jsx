@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import MultiseriesChart, { chartTypes } from "./MultiseriesChart";
+import MultiseriesChart, { chartTypes, propTypes as chartPropTypes } from "./MultiseriesChart";
 import { DashboardCard } from "./Cards";
 
 /**
@@ -52,6 +52,9 @@ import { DashboardCard } from "./Cards";
 *     The maximum number of datasets that can be selected at one time.
 * @param {Object} [title]
 *     The title of the chart. Can be any valid React node.
+* @param {boolean|function} [tooltip]
+*     Controls display of tooltip in chart. If false, no tooltip is displayed; if true, default tooltip
+*     is displayed. If a render function is passed in, will render custom tooltip.
 * @param {string} [type]
 *     The type of chart to display. Must be one of available values of the chartTypes object exported
 *     by this component.
@@ -77,38 +80,9 @@ const MultiseriesChartCard = ({
 );
 
 MultiseriesChartCard.propTypes = {
-    bottomPanel: PropTypes.node,
-    data: PropTypes.arrayOf(
-        PropTypes.object
-    ).isRequired,
+    ...chartPropTypes,
     errorMessage: PropTypes.string,
     loading: PropTypes.bool,
-    onDeselectOption: PropTypes.func,
-    onSelectOption: PropTypes.func,
-    onMenuToggle: PropTypes.func,
-    options: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.oneOfType([
-                PropTypes.number,
-                PropTypes.string
-            ]),
-            name: PropTypes.string
-        })
-    ).isRequired,
-    selectedDataSets: PropTypes.arrayOf(
-        PropTypes.oneOfType([
-            PropTypes.number,
-            PropTypes.string
-        ])
-    ),
-    selectedLimit: PropTypes.number,
-    title: PropTypes.node,
-    type: PropTypes.oneOf([
-        chartTypes.AREA,
-        chartTypes.LINE
-    ]),
-    xAxisKey: PropTypes.string.isRequired,
-    yAxisLabel: PropTypes.string.isRequired
 };
 
 MultiseriesChartCard.chartTypes = chartTypes;

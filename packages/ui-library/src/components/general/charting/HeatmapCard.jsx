@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import ChartTooltip, { textAlignments } from "./ChartTooltip";
 import DashboardCard from "./Cards/DashboardCard";
 import HelpHint from "../../tooltips/HelpHint";
 import RockerButton from "../../forms/RockerButton";
@@ -70,15 +71,16 @@ import _ from "underscore";
 *
 */
 
-const _defaultRender = (cellData, props) => {
-    return (
-        <div className="heatmap__tooltip">
-            <div className="heatmap__tooltip-label">{cellData[props.labelKey]}</div>
-            <div className="heatmap__tooltip-value">{cellData[props.valueKey]}</div>
-            <div className="heatmap__tooltip-subtitle">{props.tooltipSubtitle}</div>
-        </div>
-    );
-};
+const _defaultRender = (cellData, props) => (
+    <ChartTooltip
+        textAlignment={textAlignments.CENTER}
+        label={cellData[props.labelKey]}
+        values={[{
+            id: props.tooltipSubtitle,
+            value: cellData[props.valueKey]
+        }]}
+    />
+);
 
 class HeatMapCard extends React.Component {
     static displayName = "HeatMap";

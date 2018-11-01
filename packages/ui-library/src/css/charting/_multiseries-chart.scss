@@ -38,6 +38,24 @@
         text-align: center;
     }
 
+    &__tooltip {
+        @include border-radius(2px);
+        @include box-shadow(0 3px 4px 0 rgba($color-black, 0.1));
+        @include box-sizing(border-box);
+
+        background-color: $color-white;
+        border: 1px solid $color-neutral-80;
+        color: $color-midnight;
+        padding: $spacing-md;
+    }
+
+    &__tooltip-title {
+        font-size: 13px;
+        margin-bottom: $spacing-sm;
+        margin-left: -$spacing-xs;
+        text-transform: uppercase;
+    }
+
     &--line {
         .recharts-cartesian-axis {
             transform: translateY($spacing-xs);

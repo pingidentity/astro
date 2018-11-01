@@ -5,13 +5,15 @@ import {
     AreaChart,
     Line,
     LineChart,
+    Tooltip,
     XAxis,
     YAxis
 } from "recharts";
 import classnames from "classnames";
-import { noop } from "underscore";
+import { isFunction, noop } from "underscore";
 import colorLib from "color";
 import { chartingColors } from "../../../constants/DashboardConstants";
+import ChartTooltip, { textAlignments } from "./ChartTooltip";
 import DropDownSelector from "./DropDownSelector";
 import PageHeader from "../PageHeader";
 
@@ -21,6 +23,19 @@ export const chartTypes = {
     AREA: "area",
     LINE: "line"
 };
+
+export const renderDefaultTooltip = ({
+    data,
+    xAxisValue
+}) => (
+    <div className={`${baseClass}__tooltip`}>
+        <ChartTooltip
+            label={<div className={`${baseClass}__tooltip-title`}>{xAxisValue}</div>}
+            textAlignment={textAlignments.LEFT}
+            values={data}
+        />
+    </div>
+);
 
 /**
 * @class Multiseries Chart
@@ -68,6 +83,9 @@ export const chartTypes = {
 *     The maximum number of datasets that can be selected at one time.
 * @param {Object} [title]
 *     The title of the chart. Can be any valid React node.
+* @param {boolean|function} [tooltip]
+*     Controls display of tooltip in chart. If false, no tooltip is displayed; if true, default tooltip
+*     is displayed. If a render function is passed in, will render custom tooltip.
 * @param {string} [type]
 *     The type of chart to display. Must be one of available values of the chartTypes object exported
 *     by this component.
@@ -98,6 +116,10 @@ export default class MultiseriesChart extends Component {
                 name: PropTypes.string
             })
         ).isRequired,
+        renderTooltip: PropTypes.oneOfType([
+            PropTypes.func,
+            PropTypes.string
+        ]),
         selectedDataSets: PropTypes.arrayOf(
             PropTypes.oneOfType([
                 PropTypes.number,
@@ -106,6 +128,10 @@ export default class MultiseriesChart extends Component {
         ),
         selectedLimit: PropTypes.number,
         title: PropTypes.node,
+        tooltip: PropTypes.oneOfType([
+            PropTypes.bool,
+            PropTypes.func
+        ]),
         type: PropTypes.oneOf([
             chartTypes.AREA,
             chartTypes.LINE
@@ -115,12 +141,13 @@ export default class MultiseriesChart extends Component {
     };
 
     static defaultProps = {
-        height: 400,
-        width: 400,
+        height: 225,
+        width: 500,
         onDeselectOption: noop,
         onSelectOption: noop,
         onMenuToggle: noop,
-        selectedLimit: 3
+        selectedLimit: 3,
+        tooltip: true
     };
 
     state = {
@@ -197,6 +224,22 @@ export default class MultiseriesChart extends Component {
             );
     })
 
+    renderTooltip = ({ label, payload = [] }) => {
+        const renderer = isFunction(this.props.tooltip) ? this.props.tooltip : renderDefaultTooltip;
+        return renderer({
+            data: payload ? payload.map(({ dataKey, value }) => {
+                const { color, name } = this.dataWithColors.find(({ id }) => id === dataKey);
+                return {
+                    color,
+                    id: dataKey,
+                    label: name,
+                    value
+                };
+            }) : [],
+            xAxisValue: label
+        });
+    }
+
     renderYAxis = label =>
         label &&
         (<YAxis
@@ -211,32 +254,13 @@ export default class MultiseriesChart extends Component {
             width={15}
         />)
 
-    xAxis = (
-        <XAxis
-            // axisLine={{
-            //     style: "stroke-width: 12"
-            // }}
-            axisLine={false}
-            dataKey={this.props.xAxisKey}
-            // Tick does not accept a classname due to internal Recharts implementation;
-            // have to use inline style instead
-            tick={{
-                fill: "#7d8389" // $color-strong-neutral-40
-            }}
-            tickLine={{
-                style: "stroke-width: 12;"
-            }}
-            ticks={this.getTicks(this.props.data, this.props.xAxisKey)}
-            tickCount={this.props.data.length}
-            tickFormatter={this.props.tickFormatter}
-        />
-    )
-
     render() {
         const {
             bottomPanel,
             data,
+            menuRequiredText,
             title,
+            tooltip,
             type,
             yAxisLabel
         } = this.props;
@@ -245,11 +269,13 @@ export default class MultiseriesChart extends Component {
             data,
             height: this.props.height,
             margin: {
-                left: 20
+                left: 20,
+                top: 5
             },
             width: this.props.width,
         };
         const isLine = type === chartTypes.LINE;
+        const ChartType = isLine ? LineChart : AreaChart;
         const xAxis = this.getXAxis(this.props);
 
         return (
@@ -268,23 +294,21 @@ export default class MultiseriesChart extends Component {
                         onSelectOption={this.handleSelectDataSet}
                         onToggle={this.props.onMenuToggle}
                         options={this.dataWithColors}
-                        requiredText={this.props.menuRequiredText}
+                        requiredText={
+                            isFunction(menuRequiredText)
+                                ? menuRequiredText({ ...this.state })
+                                : menuRequiredText
+                        }
                         selectedOptionIds={this.state.selectedDataSets}
                     />
                     <div className={`${baseClass}__chart`}>
-                        {
-                            isLine
-                            ? <LineChart {...chartProps}>
-                                {this.renderData(isLine, this.state.selectedDataSets)}
-                                {xAxis}
-                                {this.renderYAxis(yAxisLabel)}
-                            </LineChart>
-                            : <AreaChart {...chartProps} >
-                                {this.renderData(isLine, this.state.selectedDataSets)}
-                                {xAxis}
-                                {this.renderYAxis(yAxisLabel)}
-                            </AreaChart>
-                        }
+                        <ChartType {...chartProps}>
+                            {this.renderData(isLine, this.state.selectedDataSets)}
+                            {xAxis}
+                            {this.renderYAxis(yAxisLabel)}
+                            {tooltip && this.state.selectedDataSets.length > 0 &&
+                                <Tooltip content={this.renderTooltip} />}
+                        </ChartType>
                         {bottomPanel && (
                             <div className={classnames(
                                     `${baseClass}__bottom-panel`,

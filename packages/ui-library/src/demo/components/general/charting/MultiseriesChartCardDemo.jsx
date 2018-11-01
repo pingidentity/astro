@@ -28,48 +28,60 @@ export default class MultiseriesChartCardDemo extends Component {
         },
     ]
 
-    ticks = [
-        "Jan '18",
-        "Feb '18",
-        "Mar '18",
-        "Apr '18",
-        "May '18",
-        "June '18",
-        "July '18",
-        "Aug '18",
-        "Sept '18",
-        "Oct '18",
-        "Nov '18",
-        "Dec '18"
+    timeSpans = [
+        [
+            "Jan 1",
+            "Jan 8",
+            "Jan 15",
+            "Jan 22",
+            "Feb 1",
+            "Feb 8",
+            "Feb 15",
+            "Feb 22",
+            "Mar 1",
+            "Mar 8",
+            "Mar 15",
+            "Mar 22",
+        ],
+        [
+            "Jan 1",
+            "Jan 15",
+            "Feb 1",
+            "Feb 15",
+            "Mar 1",
+            "Mar 15",
+            "Apr 1",
+            "Apr 15",
+            "May 1",
+            "May 15",
+            "Jun 1",
+            "Jun 15",
+        ],
+        [
+            "Jan '18",
+            "Feb '18",
+            "Mar '18",
+            "Apr '18",
+            "May '18",
+            "June '18",
+            "July '18",
+            "Aug '18",
+            "Sept '18",
+            "Oct '18",
+            "Nov '18",
+            "Dec '18"
+        ]
     ]
 
     _generateData = () => new Array(12).fill(undefined).map(() => Math.floor(Math.random() * 30))
 
-    _generateRockerOptions = () => {
-        const categories = this.initialOptions.map(({ id }) => id);
-        return ["3M", "6M", "1Y"].map(label => ({
-            label,
-            series: this.ticks.map(tick => ({
-                ...categories.reduce((acc, cat) => ({
-                    ...acc,
-                    [cat]: Math.floor(Math.random() * 30)
-                }), {}),
-                time: tick
-            }))
-        }));
-    }
-
-    _rockerOptions = this._generateRockerOptions()
-
     state = {
         options: this.initialOptions,
-        selectedOptionIds: [],
-        timespanIndex: 0,
+        timeSpanIndex: 0,
         typeIndex: 0
     }
 
-    _getRockerData = index => this._rockerOptions[index].series
-    _getRockerLabels = () => this._rockerOptions.map(({ label }) => label)
+    _getTimeSpan = index => this.timeSpans[index]
 
     _handleSelectOption = (id, event) => console.log("onMenuSelect called with: ", id, event);
 
@@ -82,7 +94,7 @@ export default class MultiseriesChartCardDemo extends Component {
     })
 
     _setTimeSpan = ({ index }) => this.setState(() => ({
-        timespanIndex: index
+        timeSpanIndex: index
     }))
 
     render() {
@@ -118,20 +130,7 @@ export default class MultiseriesChartCardDemo extends Component {
             {
                 id: "time",
                 name: "Time",
-                data: [
-                    "Jan '18",
-                    "Feb '18",
-                    "Mar '18",
-                    "Apr '18",
-                    "May '18",
-                    "June '18",
-                    "July '18",
-                    "Aug '18",
-                    "Sept '18",
-                    "Oct '18",
-                    "Nov '18",
-                    "Dec '18"
-                ]
+                data: this._getTimeSpan(this.state.timeSpanIndex)
             }
         ];
 
@@ -140,6 +139,11 @@ export default class MultiseriesChartCardDemo extends Component {
         const formattedData = toRechartsDataFormat(data);
         // Don't include Time in options, since this will be used for the x-axis
         const options = data.slice(0, data.length - 1).map(point => _.omit(point, "data"));
+
+        // menuRequiredText can either be a string or a function, which is passed the current state
+        // of the component.
+        const renderRequiredText = ({ selectedDataSets }) =>
+            selectedDataSets.length === 0 ? "Minimum of 1 application required." : null;
 
         return (
             <div>
@@ -153,18 +157,15 @@ export default class MultiseriesChartCardDemo extends Component {
                     bottomPanel={
                         <RockerButton
                             className={`rocker-button--chart-rocker`}
-                            labels={this._getRockerLabels()}
+                            labels={["3M", "6M", "1Y"]}
                             onValueChange={this._setTimeSpan}
                             stateless
-                            selectedIndex={this.state.timespanIndex}
+                            selectedIndex={this.state.timeSpanIndex}
                         />
                     }
                     data={formattedData}
-                    height={200}
                     menuNote={<p>Limit of 3 applications.</p>}
-                    menuRequiredText={
-                        this.state.selectedOptionIds.length === 0 ? "Minimum of 1 application required." : null
-                    }
+                    menuRequiredText={renderRequiredText}
                     // menuSelectedIds can be passed in here; if so, the DropDownSelector will not manage its internal
                     // selection state. IDs should be the same as the IDs used for data. If not passed in, the component
                     // will manage its own selection state.
@@ -176,7 +177,6 @@ export default class MultiseriesChartCardDemo extends Component {
                     // in a parent component. If it's not passed in, the component will handle that state internally.
                     type={this.state.typeIndex === 0 ? chartTypes.LINE : chartTypes.AREA}
                     title="Application Traffic"
-                    width={500}
                     xAxisKey="time"
                     yAxisLabel="# of Requests"
                 />

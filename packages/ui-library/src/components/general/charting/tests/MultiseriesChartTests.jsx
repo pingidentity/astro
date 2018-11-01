@@ -1,6 +1,8 @@
 import React from "react";
+import { shallow } from "enzyme";
 import { isDOMComponent, renderIntoDocument } from "react-dom/test-utils";
 import TestUtils from "../../../../testutil/TestUtils";
+import DropDownSelector from "../DropDownSelector";
 import MultiseriesChart, { chartTypes } from "../MultiseriesChart";
 import { toRechartsDataFormat } from "../../../../util/ChartingUtils";
 
@@ -97,6 +99,7 @@ describe("MultiseriesChart", () => {
     it("does not render with multiseries-chart--line class for area chart", () => {
         const component = getComponent({
             bottomPanel: <div/>,
+            selectedDataSets: ["confluence"],
             type: chartTypes.AREA
         });
 
@@ -198,5 +201,95 @@ describe("MultiseriesChart", () => {
         const component = getComponent({ onDeselectOption });
         component.handleDeselectDataSet("confluence", dummyEvent);
         expect(onDeselectOption).toHaveBeenCalledWith("confluence", dummyEvent);
+    });
+
+    it("renderTooltip correctly runs custom tooltip function", () => {
+        const custom = jest.fn();
+        const component = getComponent({
+            tooltip: custom
+        });
+
+        component.renderTooltip({
+            label: "Jan '18'",
+            payload: [
+                {
+                    dataKey: "confluence",
+                    data: points[0]
+                },
+                {
+                    dataKey: "dataDog",
+                    data: points[0]
+                },
+                {
+                    dataKey: "docuSign",
+                    data: points[0]
+                },
+                {
+                    dataKey: "googleCalendar",
+                    data: points[0]
+                },
+                {
+                    dataKey: "googleDrive",
+                    data: points[0]
+                }
+            ]
+        });
+
+        expect(custom).toHaveBeenCalled();
+    });
+
+    it("renderTooltip handles null payload", () => {
+        const custom = jest.fn();
+        const component = getComponent({
+            tooltip: custom
+        });
+
+        component.renderTooltip({
+            label: "Jan '18'",
+            payload: null
+        });
+
+        expect(custom).toHaveBeenCalled();
+    });
+
+    it("renderTooltip handles undefined payload", () => {
+        const custom = jest.fn();
+        const component = getComponent({
+            tooltip: custom
+        });
+
+        component.renderTooltip({
+            label: "Jan '18'",
+            payload: undefined
+        });
+
+        expect(custom).toHaveBeenCalled();
+    });
+
+    it("should render if menuRequiredText is a string", () => {
+        const component = shallow(
+            <MultiseriesChart
+                {...defaults}
+                menuRequiredText="required"
+            />
+        );
+
+        const selector = component.find(DropDownSelector);
+
+        expect(selector.props().requiredText).toEqual("required");
+    });
+
+    it("should render if menuRequiredText is a function", () => {
+        const requiredFn = () => "required";
+        const component = shallow(
+            <MultiseriesChart
+                {...defaults}
+                menuRequiredText={requiredFn}
+            />
+        );
+
+        const selector = component.find(DropDownSelector);
+
+        expect(selector.props().requiredText).toEqual("required");
     });
 });
