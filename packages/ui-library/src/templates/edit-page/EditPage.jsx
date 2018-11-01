@@ -2,6 +2,7 @@ import React from "react";
 import FormTextField from "../../components/forms//form-text-field";
 import FormRadioGroup from "../../components/forms/FormRadioGroup";
 import FormDropDownList from "../../components/forms/FormDropDownList";
+import InputWidths from "../../components/forms/InputWidths";
 import PageHeader from "../../components/general/PageHeader";
 import Layout from "../../components/general/ColumnLayout";
 import Toggle from "../../components/forms/form-toggle";
@@ -100,14 +101,14 @@ export default class EditPage extends React.Component {
                         <InputRow>
                             <FormTextField
                                 labelText="First Name"
-                                className="input-width-small"
+                                width={InputWidths.SM}
                                 data-id="firstName"
                                 required={true}
                                 value={this.state.firstName || ""}
                                 onChange={this._handleInputChange} />
                             <FormTextField
                                 labelText="Last Name"
-                                className="input-width-medium"
+                                width={InputWidths.MD}
                                 data-id="lastName"
                                 required={true}
                                 value={this.state.lastName || ""}
@@ -116,7 +117,7 @@ export default class EditPage extends React.Component {
                         <InputRow>
                             <FormTextField
                                 labelText="Username"
-                                className="input-width-medium"
+                                width={InputWidths.MD}
                                 data-id="username"
                                 required={true}
                                 value={this.state.username || ""}
@@ -131,14 +132,14 @@ export default class EditPage extends React.Component {
                                     <InputRow>
                                         <FormTextField
                                             labelText="Address"
-                                            className="input-width-medium"
+                                            width={InputWidths.MD}
                                             data-id="address1"
                                             value={this.state.address1 || ""}
                                             onChange={this._handleInputChange} />
                                     </InputRow>
                                     <InputRow>
                                         <FormTextField
-                                            className="input-width-medium"
+                                            width={InputWidths.MD}
                                             data-id="address2"
                                             value={this.state.address2 || ""}
                                             onChange={this._handleInputChange} />
@@ -146,7 +147,7 @@ export default class EditPage extends React.Component {
                                     <InputRow>
                                         <FormDropDownList
                                             label="Address Location"
-                                            className="input-width-medium"
+                                            width={InputWidths.MD}
                                             data-id="addressType"
                                             searchType="box"
                                             selectedOption={this.state.addressType || addressOptions[0]}
@@ -158,14 +159,14 @@ export default class EditPage extends React.Component {
                                     <InputRow>
                                         <FormTextField
                                             labelText="Alternate Address"
-                                            className="input-width-medium"
+                                            width={InputWidths.MD}
                                             data-id="alternateAddress1"
                                             value={this.state.alternateAddress1 || ""}
                                             onChange={this._handleInputChange} />
                                     </InputRow>
                                     <InputRow>
                                         <FormTextField
-                                            className="input-width-medium"
+                                            width={InputWidths.MD}
                                             data-id="alternateAddress2"
                                             value={this.state.alternateAddress2 || ""}
                                             onChange={this._handleInputChange} />
@@ -173,7 +174,7 @@ export default class EditPage extends React.Component {
                                     <InputRow>
                                         <FormDropDownList
                                             label="Alternate Address Location"
-                                            className="input-width-medium"
+                                            width={InputWidths.MD}
                                             data-id="alternateAddressType"
                                             selectedOption={this.state.alternateAddressType || addressOptions[1]}
                                             onValueChange={this._handleSelectChange("alternateAddressType")}

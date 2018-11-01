@@ -6,6 +6,7 @@ import Icon from "../components/general/Icon";
 import Indent from "../components/general/Indent";
 import PageHeader from "../components/general/PageHeader";
 import RowBuilder from "../components/rows/RowBuilder";
+import InputWidths from "../components/forms/InputWidths";
 
 /**
  * @class SSO Attributes
@@ -15,14 +16,16 @@ const SSOAttributes = () => {
     const firstRow = (
         [<div className="row-builder--form__row" key="first">
             <FormDropDownList
-                className="row-builder--form__input input-width-medium"
+                className="row-builder--form__input"
+                width={InputWidths.MD}
                 options={[ { label: "Name" } ]}
                 autofocus={true}
                 label="Pingone User Attribute"
             />
             <Icon className="row-builder--form__icon row-builder--form__icon--first" iconName="link"/>
             <FormTextField
-                className="row-builder--form__input input-width-medium"
+                className="row-builder--form__input"
+                width={InputWidths.MD}
                 labelText="Application Attribute"
                 value="Customer Name"
             />
@@ -36,14 +39,16 @@ const SSOAttributes = () => {
     const secondRow = (
         [<div className="row-builder--form__row" key="second">
             <FormDropDownList
-                className="row-builder--form__input input-width-medium"
+                className="row-builder--form__input"
+                width={InputWidths.MD}
                 options={[{ label: "Name" }]}
                 placeholder="Select a PingOne attribute"
                 required
             />
             <Icon className="row-builder--form__icon row-builder--form__icon--required" iconName="link"/>
             <FormTextField
-                className="row-builder--form__input input-width-medium"
+                className="row-builder--form__input"
+                width={InputWidths.MD}
                 placeholder="Enter mapped attribute"
                 required
             />

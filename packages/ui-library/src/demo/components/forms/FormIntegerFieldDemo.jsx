@@ -1,5 +1,6 @@
 var React = require("react");
 var FormIntegerField = require("./../../../components/forms/form-integer-field/");
+const InputWidths = require("./../../../components/forms/InputWidths");
 
 /**
 * @name FormIntegerFieldDemo
@@ -109,7 +110,7 @@ class FormIntegerFieldDemo extends React.Component {
                             onValueChange = {this._handleValueChange0}
                             initialValue = ""
                             stateless={false}
-                            className="input-width-medium"
+                            width={InputWidths.MD}
                             name="demo"
                     />
                 </div>
@@ -119,7 +120,7 @@ class FormIntegerFieldDemo extends React.Component {
                                 this.state.integerField1}
                             onValueChange = {this._changeCallback}
                             value={this.state.integerField1}
-                            className="input-width-medium"
+                            width={InputWidths.MD}
                             stateless={true}
                             hideControls={true}
                     />
@@ -130,7 +131,7 @@ class FormIntegerFieldDemo extends React.Component {
                             labelText={"With default value and undo - Value : " + this.state.integerField2}
                             initialValue = {8800}
                             onValueChange = {this._handleValueChange2}
-                            className="input-width-medium"
+                            width={InputWidths.MD}
                             stateless={false}
                     />
                 </div>
@@ -142,7 +143,7 @@ class FormIntegerFieldDemo extends React.Component {
                             initialValue = ""
                             required = {true}
                             placeholder = "This field is required"
-                            className="input-width-medium"
+                            width={InputWidths.MD}
                             stateless={false}
                     />
                 </div>
@@ -156,9 +157,9 @@ class FormIntegerFieldDemo extends React.Component {
                             max = {15}
                             min = {1}
                             outOfRangeErrorMessage="Please enter a number between 1 and 15"
-                            labelHelpText = "Prop enforceRange is true by default.
-                                    This doesn't allow keyboard input above the maximum range."
-                            className="input-width-medium"
+                            labelHelpText = "Prop enforceRange is true by default. This doesn't allow keyboard input\
+                                above the maximum range."
+                            width={InputWidths.MD}
                             stateless={false}
                     />
                 </div>
@@ -179,7 +180,7 @@ class FormIntegerFieldDemo extends React.Component {
                                 "Prop enforceRange set to false to allow keyboard input" +
                                 " of out of range numbers"
                             }
-                            className="input-width-medium"
+                            width={InputWidths.MD}
                             stateless={false}
                     />
                 </div>
@@ -193,7 +194,7 @@ class FormIntegerFieldDemo extends React.Component {
                             increment = {5}
                             min = {50}
                             max = {300}
-                            className="input-width-medium"
+                            width={InputWidths.MD}
                             stateless={false}
                     />
                 </div>
@@ -206,7 +207,7 @@ class FormIntegerFieldDemo extends React.Component {
                             disabled = {this.state.integerField7Disabled}
                             onValueChange = {this._changeCallback}
                             initialValue = {30}
-                            className="input-width-medium"
+                            width={InputWidths.MD}
                             stateless={false}
                     />
                 </div>
@@ -219,7 +220,7 @@ class FormIntegerFieldDemo extends React.Component {
                             onValueChange = {this._changeCallback}
                             labelHelpText = "Disabled with help text"
                             initialValue = {40}
-                            className="input-width-medium"
+                            width={InputWidths.MD}
                             stateless={false}
                     />
                 </div>

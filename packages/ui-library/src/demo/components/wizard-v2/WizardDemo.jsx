@@ -14,6 +14,7 @@ import DragScreen from "./screens/DragScreen";
 import Utils from "ui-library/lib//util/Utils";
 import fixOrientation from "fix-orientation";
 import readExif from "exif-js";
+import InputWidths from "../../../components/forms/InputWidths";
 
 /**
 * @name WizardDemo2
@@ -283,7 +284,7 @@ class WizardDemo extends React.Component {
                         required>
                         <div className="input-row">
                             <FormTextField
-                                className="input-width-medium"
+                                width={InputWidths.MD}
                                 labelText="Application Name"
                                 value={this.state.currentApp.appName}
                                 onValueChange={this._onAppNameChange}
@@ -292,7 +293,7 @@ class WizardDemo extends React.Component {
                         </div>
                         <div className="input-row">
                             <FormTextArea
-                                className="input-width-xlarge"
+                                width={InputWidths.XL}
                                 rows={4}
                                 labelText="Description"
                                 placeholder="Describe you application to your user"

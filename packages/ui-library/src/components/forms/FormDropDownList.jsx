@@ -1,12 +1,14 @@
-import PropTypes from "prop-types";
 import React from "react";
+import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
-import classnames from "classnames";
-import _ from "underscore";
+
 import FormLabel from "./FormLabel";
 import { v2 as FormTextField } from "./form-text-field";
 import HelpHint from "../tooltips/HelpHint";
+import { InputWidths, InputWidthProptypes, getInputWidthClass } from "./InputWidths";
+
 import { callIfOutsideOfContainer } from "../../util/EventUtils.js";
+import classnames from "classnames";
 import { filterFieldContains } from "../../util/FilterUtils.js";
 import {
     isArrowDown,
@@ -17,6 +19,8 @@ import {
     isTab
 } from "../../util/KeyboardUtils.js";
 import Utils from "../../util/Utils.js";
+import _ from "underscore";
+
 
 /**
 * @function FormDropDownList~filterOptions
@@ -102,7 +106,6 @@ const SearchTypes = {
 
 /**
 * @class FormDropDownList
-*
 * @desc A generic select (dropdown) component. Encapsulates common markup and designed to be a drop-in replacement.
 *       The array of options will insure display order of options. Has tabbing, up/down key, and search support.
 *
@@ -110,11 +113,42 @@ const SearchTypes = {
 *    To define the base "data-id" value for the top-level HTML container.
 * @param {string} [className]
 *    CSS classes to set on the top-level HTML container.
+* @param {string} [errorMessage]
+*     The message to display if defined when external validation failed.
+* @param {string} [helpClassName]
+*     CSS classes to set on the HelpHint component.
+* @param {string} [label]
+*     The text to display as the field's label.
+* @param {string} [labelAdd]
+*    The label for the add new option preview prompt.
+* @param {string} [labelHelpText]
+*     The text to display for the help tooltip.
+* @param {string} [labelPrompt]
+*    The label for the prompt displayed when using BOX searchType.
 * @param {string} [name]
 *     The name attribute for the input.
-* @param {boolean} [stateless=false]
-*     To enable the component to be externally managed. True will relinquish control to the component's owner.
-*     False or not specified will cause the component to manage state internally.
+* @param {string} [noneOptionLabelClassName]
+*    CSS classes to set on the label for the none option.
+* @param {string} [placeholder]
+*    Placeholder string for the input
+* @param {string} [searchField="label"]
+*    The field value to use in the search.
+* @param {number} [searchIndex=-1]
+*    The index of the option that was just searched. Allows for highlighting and up/down arrow movement.
+* @param {string} [searchString=""]
+*    Value to help with finding an option on keydown.
+* @param {number} [searchTime=0]
+*    Time to help clear the search when the user delays their search.
+* @param {string} [selectClassName]
+*    CSS classes to set on the select.
+* @param {string} [selectedOptionLabelClassName]
+*    CSS classes to set on the selected list option label.
+* @param {string} [title=""]
+*    The tooltip title to give the selected option.
+* @param {string} [validSearchCharsRegex=/[^a-zA-Z\d\s]+/]
+*    A regex of the valid characters for the search. Allows alphanumeric and whitespace by default.
+* @param {("XS" | "SM" | "MD" | "LG" | "XL" | "XX" | "MAX")} [width]
+*    Specifies the width of the input.
 *
 * @param {array<FormDropDownList~option>} options
 *    Array of options for the dropdown list. Each option should have a label and value.
@@ -124,78 +158,45 @@ const SearchTypes = {
 * @param {FormDropDownList~onValueChange} [onValueChange]
 *    Callback to be triggered when an option is selected.
 *
-* @param {element} [contentType=FormDropDownListDefaultContent]
-*    A custom element representing the contents of each option.
+* @param {boolean} [autofocus=false]
+*    Whether or not this field should autofocus.
+* @param {boolean} [canAdd=false]
+*    Whether or not adding new options to the list is enabled.
+*    Will override searchType to use BOX type searching when true.
+* @param {boolean} [disabled=false]
+*     If true, the select element will be disabled.
+* @param {boolean} [open=false]
+*    State of the open/closed dropdown menu.
+* @param {boolean} [required=false]
+*     If true, the user must select a value for this field.
+* @param {boolean} [showSelectedOptionLabel=true]
+*    Whether or not to display the label text for the selected option.
+* @param {boolean} [stateless=false]
+*     To enable the component to be externally managed. True will relinquish control to the component's owner.
+*     False or not specified will cause the component to manage state internally.
+*
+* @param {FormDropDownList.onAdd} [onAdd]
+*    Callback to be triggered when a new option is to be added to the list.
+* @param {FormDropDownList~onSearch} [onSearch]
+*    Callback to be triggered when the state of the search of an option when the list dropdown is expanded changes.
+* @param {FormDropDownList~onToggle} [onToggle]
+*    Callback to be triggered when the open/closed state changes.
 *
 * @param {array<FormDropDownList~group>} [groups]
 *    Array of group sections for the dropdown list. If specified, will enable grouping of options.
 *    Order of the groups is preserved in the dropdown list, and the order of options in each group
 *    will be preserved with the order in which they were specified in the options prop.
-*
-* @param {boolean} [open=false]
-*    State of the open/closed dropdown menu.
-* @param {FormDropDownList~onToggle} [onToggle]
-*    Callback to be triggered when the open/closed state changes.
-*
-* @param {string} [labelAdd]
-*    The label for the add new option preview prompt.
-* @param {boolean} [canAdd=false]
-*    Whether or not adding new options to the list is enabled.
-*    Will override searchType to use BOX type searching when true.
-* @param {FormDropDownList.onAdd} [onAdd]
-*    Callback to be triggered when a new option is to be added to the list.
-*
-* @param {string} [placeholder]
-*    Placeholder string for the input
-* @param {string} [searchString=""]
-*    Value to help with finding an option on keydown.
-* @param {string} [searchField="label"]
-*    The field value to use in the search.
-* @param {string} [validSearchCharsRegex=/[^a-zA-Z\d\s]+/]
-*    A regex of the valid characters for the search. Allows alphanumeric and whitespace by default.
-* @param {number} [searchIndex=-1]
-*    The index of the option that was just searched. Allows for highlighting and up/down arrow movement.
-* @param {number} [searchTime=0]
-*    Time to help clear the search when the user delays their search.
-* @param {FormDropDownList.SearchTypes} [searchType="KEYBOARD"]
-*    The type of search to use with the dropdown list.
-*    If the "add" prop is set to true, will override to use BOX type of searching.
-* @param {string} [labelPrompt]
-*    The label for the prompt displayed when using BOX searchType.
-* @param {FormDropDownList~onSearch} [onSearch]
-*    Callback to be triggered when the state of the search of an option when the list dropdown is expanded changes.
-*
-* @param {string} [selectClassName]
-*    CSS classes to set on the select.
-* @param {string} [selectedOptionLabelClassName]
-*    CSS classes to set on the selected list option label.
-* @param {string} [title=""]
-*    The tooltip title to give the selected option.
-* @param {boolean} [showSelectedOptionLabel=true]
-*    Whether or not to display the label text for the selected option.
-*
 * @param {FormDropDownList~option} [noneOption]
 *    If specified, adds an option which does not count as a selection (e.g., "select an option").
 *    This option will be shown at the top of the dropdown list.
 *    The object should specify the label of the none option.
-* @param {string} [noneOptionLabelClassName]
-*    CSS classes to set on the label for the none option.
+* @param {FormDropDownList.SearchTypes} [searchType="KEYBOARD"]
+*    The type of search to use with the dropdown list.
+*    If the "add" prop is set to true, will override to use BOX type of searching.
 *
-* @param {string} [label]
-*     The text to display as the field's label.
-* @param {string} [labelHelpText]
-*     The text to display for the help tooltip.
-* @param {string} [helpClassName]
-*     CSS classes to set on the HelpHint component.
+* @param {element} [contentType=FormDropDownListDefaultContent]
+*    A custom element representing the contents of each option.
 *
-* @param {string} [errorMessage]
-*     The message to display if defined when external validation failed.
-* @param {boolean} [required=false]
-*     If true, the user must select a value for this field.
-* @param {boolean} [disabled=false]
-*     If true, the select element will be disabled.
-* @param {bool} [autofocus=false]
-*    Whether or not this field should autofocus.
 */
 
 /**
@@ -266,44 +267,46 @@ class FormDropDownListStateless extends React.Component {
     static displayName = "FormDropDownListStateless";
 
     static propTypes = {
-        "data-id": PropTypes.string,
+        autofocus: PropTypes.bool,
+        canAdd: PropTypes.bool,
         className: PropTypes.string,
-        name: PropTypes.string,
-        options: PropTypes.arrayOf(PropTypes.object).isRequired,
-        selectedOption: PropTypes.object,
-        onValueChange: PropTypes.func,
         contentType: PropTypes.element,
+        "data-id": PropTypes.string,
+        disabled: PropTypes.bool,
+        errorMessage: PropTypes.string,
         groups: PropTypes.arrayOf(
             PropTypes.shape({
                 id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
                 label: PropTypes.string,
                 disabled: PropTypes.bool
-            })),
-        open: PropTypes.bool,
-        onToggle: PropTypes.func,
-        labelPrompt: PropTypes.string,
+            })
+        ),
+        helpClassName: PropTypes.string,
+        label: PropTypes.string,
         labelAdd: PropTypes.string,
-        canAdd: PropTypes.bool,
-        placeholder: PropTypes.string,
-        searchString: PropTypes.string,
-        searchField: PropTypes.string,
-        validSearchCharsRegex: PropTypes.string,
-        searchIndex: PropTypes.number,
-        searchTime: PropTypes.number,
-        searchType: PropTypes.oneOf([SearchTypes.KEYBOARD, SearchTypes.BOX]),
-        onSearch: PropTypes.func,
-        selectClassName: PropTypes.string,
-        selectedOptionLabelClassName: PropTypes.string,
-        title: PropTypes.string,
+        labelHelpText: PropTypes.string,
+        labelPrompt: PropTypes.string,
+        name: PropTypes.string,
         noneOption: PropTypes.object,
         noneOptionLabelClassName: PropTypes.string,
-        label: PropTypes.string,
-        labelHelpText: PropTypes.string,
-        helpClassName: PropTypes.string,
-        errorMessage: PropTypes.string,
+        onValueChange: PropTypes.func,
+        open: PropTypes.bool,
+        options: PropTypes.arrayOf(PropTypes.object).isRequired,
+        onSearch: PropTypes.func,
+        onToggle: PropTypes.func,
+        placeholder: PropTypes.string,
         required: PropTypes.bool,
-        disabled: PropTypes.bool,
-        autofocus: PropTypes.bool
+        searchField: PropTypes.string,
+        searchIndex: PropTypes.number,
+        searchString: PropTypes.string,
+        searchTime: PropTypes.number,
+        searchType: PropTypes.oneOf([SearchTypes.KEYBOARD, SearchTypes.BOX]),
+        selectClassName: PropTypes.string,
+        selectedOption: PropTypes.object,
+        selectedOptionLabelClassName: PropTypes.string,
+        title: PropTypes.string,
+        validSearchCharsRegex: PropTypes.string,
+        width: PropTypes.oneOf(InputWidthProptypes),
     };
 
     static defaultProps = {
@@ -709,7 +712,16 @@ class FormDropDownListStateless extends React.Component {
     )
 
     render() {
-        const containerClassName = classnames("input-custom-select", "input-select", this.props.className, {
+        const containerClassName = classnames(
+            "input-custom-select",
+            "input-select",
+            this.props.className,
+            getInputWidthClass({
+                width: this.props.width,
+                className: this.props.className,
+                defaultClass: InputWidths.AUTO
+            }),
+            {
                 open: this.props.open,
                 "form-error": this.props.errorMessage,
                 "value-entered": this.props.selectedOption &&
@@ -755,6 +767,7 @@ class FormDropDownListStateless extends React.Component {
                                 name={this.props.name}
                                 onValueChange={this._handleInputValueChange}
                                 readOnly={this.props.disabled || this._isKeyboardSearch()}
+                                width={InputWidths.MAX}
                             />
                             {!this.props.disabled && <div className="arrow" /> }
                         </div>

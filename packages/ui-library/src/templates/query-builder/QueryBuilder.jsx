@@ -26,6 +26,7 @@ import StretchContent from "ui-library/lib/components/layout/StretchContent";
 import togglesOpen from "ui-library/lib/util/behaviors/togglesOpen";
 
 import { populations, statuses, pwStatuses, customFilters, operators, userList } from "./data";
+import InputWidths from "../../components/forms/InputWidths";
 
 // the collapsible "ADVANCED" section in the filters panel
 const AdvancedContainerView = ({ children, open, onToggle }) => (
@@ -112,7 +113,7 @@ const CustomFilterControl = ({
                     placeholder="Select One"
                     onValueChange={_.noop}
                     selectedOption={timeRangeOptions[0]}
-                    className="input-width-x-small"
+                    width={InputWidths.XS}
                 />,
                 <Calendar
                     key="start"

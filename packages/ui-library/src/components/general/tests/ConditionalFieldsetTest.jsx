@@ -6,6 +6,9 @@ jest.dontMock("../../forms/FormLabel");
 jest.dontMock("../../forms/FormError");
 jest.dontMock("../../forms/FormRadioGroup");
 jest.dontMock("../../forms/FormRadioInput");
+jest.dontMock("../../forms/InputWidths");
+
+import { InputWidths, InputWidthClasses } from "../../forms/InputWidths";
 
 describe("ConditionalFieldset", function () {
     var React = require("react"),
@@ -15,7 +18,6 @@ describe("ConditionalFieldset", function () {
         FormDropDownList = require("../../forms/FormDropDownList"),
         FormRadioGroup = require("../../forms/FormRadioGroup"),
         ConditionalFieldset = require("../ConditionalFieldset"),
-        _ = require("underscore"),
         callback,
         dataId = "fieldset",
         selectedIndex = 0;
@@ -33,7 +35,7 @@ describe("ConditionalFieldset", function () {
             <ConditionalFieldset {...defaultProps} {...props}>
                  <div data-id="option1" title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
                  <div data-id="option2" title="Option 2">Option 2</div>
-             </ConditionalFieldset>
+            </ConditionalFieldset>
         );
     }
 
@@ -199,20 +201,19 @@ describe("ConditionalFieldset", function () {
         }).toThrow(expectedError);
     });
 
-    it("creates a conditional fieldset select with custom width", function () {
-        var component = getComponent({
+    it("creates a conditional fieldset dropdown with specified width and classname", function () {
+        const testClass = "test-class";
+        const component = getComponent({
             "data-id": dataId,
             type: ConditionalFieldset.Types.SELECT,
-            listClassName: "input-width-medium"
+            listClassName: testClass,
+            inputWidth: InputWidths.MD,
         });
 
-        var select = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-options");
+        const dropdown = TestUtils.findRenderedDOMNodeWithDataId(component, dataId + "-options");
 
-        expect(select).toBeTruthy();
-        expect(TestUtils.findRenderedDOMNodeWithClass(select, "input-width-medium")).toBeTruthy();
-
-        var classes = select.className.split(" ");
-        expect(_.contains(classes, "input-width-medium")).toEqual(true);
+        expect(dropdown.className).toContain(InputWidthClasses.MD);
+        expect(TestUtils.findRenderedDOMNodeWithClass(dropdown, testClass)).toBeTruthy();
     });
 
     it("renders as required", function () {

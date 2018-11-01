@@ -1,5 +1,6 @@
-var React = require("react");
-var FormTextArea = require("./../../../components/forms/form-text-area");
+import React from "react";
+import FormTextArea from "./../../../components/forms/form-text-area";
+import InputWidths from "./../../../components/forms/InputWidths";
 
 /**
 * @name FormTextAreaDemo
@@ -43,7 +44,7 @@ class FormTextAreaDemo extends React.Component {
                     <FormTextArea
                         stateless={false}
                         labelText="Basic"
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                 </div>
                 <div className="input-row">
@@ -54,7 +55,7 @@ class FormTextAreaDemo extends React.Component {
                         placeholder="placeholder"
                         required={true}
                         name="reqd-textarea"
-                        className="input-width-medium">
+                        width={InputWidths.MD}>
                         {this.state.onValueChangeFieldValue}
                     </FormTextArea>
                 </div>
@@ -66,7 +67,7 @@ class FormTextAreaDemo extends React.Component {
                         cols={10}
                         rows={3}
                         maxLength={25}
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                 </div>
                 <div className="input-row">
@@ -75,7 +76,7 @@ class FormTextAreaDemo extends React.Component {
                         labelText="With defaultValue and undo (stateful)"
                         value="Lorem ipsum dolor sit amet"
                         originalValue="Lorem ipsum dolor sit amet"
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                 </div>
                 <div className="input-row">
@@ -87,7 +88,7 @@ class FormTextAreaDemo extends React.Component {
                         edited={this.state.edited}
                         showUndo={this.state.showUndo}
                         onUndo={this._handleUndo}
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                 </div>
                 <div className="input-row">
@@ -95,7 +96,7 @@ class FormTextAreaDemo extends React.Component {
                         mode="read_only"
                         labelText="Read-only"
                         value="Can't touch this"
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                 </div>
                 <div className="input-row">
@@ -104,7 +105,7 @@ class FormTextAreaDemo extends React.Component {
                         labelText="With error message"
                         errorMessage="The error message appears when hovering over the error icon or when focus is
                             placed on the textarea."
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                         required={true}
                     />
                 </div>
@@ -113,7 +114,7 @@ class FormTextAreaDemo extends React.Component {
                         stateless={false}
                         labelText="With help tooltip"
                         labelHelpText="This is my help text."
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                 </div>
                 <div className="input-row">
@@ -122,7 +123,7 @@ class FormTextAreaDemo extends React.Component {
                         labelText="Disabled With help tooltip"
                         labelHelpText="This is my help text."
                         disabled={true}
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                 </div>
                 <div className="input-row">
@@ -130,7 +131,8 @@ class FormTextAreaDemo extends React.Component {
                         stateless={false}
                         labelText={heightOptions}
                         labelHelpText="This is the default medium height."
-                        className="input-width-medium textarea-height--medium"
+                        className="textarea-height--medium"
+                        width={InputWidths.MD}
                     />
                 </div>
             </div>

@@ -7,10 +7,12 @@ import classnames from "classnames";
 
 import FormLabel from "../FormLabel";
 import FormMessage from "../FormMessage";
+import { InputWidthProptypes, getInputWidthClass } from "../InputWidths";
 import Translator from "../../../util/i18n/Translator.js";
 
 import _ from "underscore";
 import Utils from "../../../util/Utils.js";
+
 
 /**
 /**
@@ -78,17 +80,71 @@ import Utils from "../../../util/Utils.js";
 * @class FormTextField
 * @desc A text field component.
 *
-* @param {string} [data-id="form-text-field"]
-*     To define the base "data-id" value for the top-level HTML container.
 * @param {string} [className]
 *     CSS classes to set on the top-level HTML container.
+* @param {string} [data-id="form-text-field"]
+*     To define the base "data-id" value for the top-level HTML container.
+* @param {string} [errorClassName]
+*     CSS classes to set on the FormTextFieldError component.
+* @param {string} [errorMessage]
+*     The message to display if defined when external validation failed.
+* @param {string} [helpClassName]
+*     CSS classes to apply to the label help hint (bottom, left, etc)
+* @param {string} [inputClassName]
+*     CSS classes to set on the input element.
+* @param {string} [labelHelpText]
+*     The text to display for the help tooltip.
+* @param {string} [labelLockText]
+*     The text to display for the lock help tooltip.
+* @param {string} [labelText]
+*     The text to show as the field's label.
+* @param {string} [label]
+*     Alias for labelText
+* @param {number} [maxLength]
+*     Maximum length supported by the text field.
+* @param {string} [message]
+*    The message text to display.
+* @param {string} [messageType=error]
+*    The type of message (error = red, info = blue, success = green, warning = yellow).
+* @param {string} [name]
+*     Name attribute on input
+* @param {string} [placeholder]
+*     Placeholder text for the input field.
+* @param {number} [type]
+*     An input type to be applied to the input. The input type often adds easily accessable and type-specific input
+*     controls that often makes it easier to enter the field data.
+* @param {string|number} [value=""]
+*     Current text field value.
+* @param {("XS" | "SM" | "MD" | "LG" | "XL" | "XX" | "MAX")} [width]
+*    Specifies the width of the input.
+*
+* @param {boolean|string} [autoComplete="nope"]
+*     Whether or not the field will support autocomplete.
+* @param {boolean} [autoFocus=false]
+*     Whether or not to auto-focus the element.
+* @param {boolean} [disabled=false]
+*     If true, the text field will be disabled.
+* @param {boolean} [flexWidth=false]
+*     When true the width of the input will grow to fit the size of its content.
+* @param {boolean} [maskValue=false]
+*     If true, the value shown in the input field will be masked with '*****'. (i.e: passwords).
+* @param {boolean} [readOnly=false]
+*     Whether or not the input field is readonly.
+* @param {boolean} [required=false]
+*     If true, the user must select a value for this field.
+* @param {boolean} [reveal=false]
+*     If true, will remove value masking.
+* @param {boolean} [showReveal=false]
+*    Whether or not to display a reveal option to remove value masking.
+* @param {boolean} [showSave=false]
+*     Whether or not to display a save option.
+* @param {boolean} [showUndo=false]
+*     Whether or not to display an undo option.
 * @param {boolean} [stateless]
 *     WARNING. Default value for "stateless" will be set to true from next version.
 *     To enable the component to be externally managed. True will relinquish control to the component's owner.
 *     False or not specified will cause the component to manage state internally.
 *
-* @param {string|number} [value=""]
-*     Current text field value.
 * @param {FormTextField~onChange} [onChange]
 *     Callback to be triggered when the field value changes. It will receive the triggering event.
 * @param {FormTextField~onValueChange} [onValueChange]
@@ -103,80 +159,24 @@ import Utils from "../../../util/Utils.js";
 *     Callback to be triggered when a key is pressed in the field.
 * @param {FormTextField~onMouseDown} [onMouseDown]
 *     Callback to be triggered when the field registers a mouse down.
-*
-* @param {string} [helpClassName]
-*     CSS classes to apply to the label help hint (bottom, left, etc)
-* @param {string} [labelHelpText]
-*     The text to display for the help tooltip.
-* @param {string} [labelLockText]
-*     The text to display for the lock help tooltip.
-* @param {string} [labelText]
-*     The text to show as the field's label.
-* @param {string} [label]
-*     Alias for labelText
-*
-* @param {string} [placeholder]
-*     Placeholder text for the input field.
-* @param {string} [inputClassName]
-*     CSS classes to set on the input element.
-* @param {number} [maxLength]
-*     Maximum length supported by the text field.
-* @param {string} [name]
-*     Name attribute on input
-* @param {number} [type]
-*     An input type to be applied to the input. The input type often adds easily accessable and type-specific input
-*     controls that often makes it easier to enter the field data.
-*
-* @param {boolean} [disabled=false]
-*     If true, the text field will be disabled.
-* @param {string} [errorMessage]
-*     The message to display if defined when external validation failed.
-* @param {string} [errorClassName]
-*     CSS classes to set on the FormTextFieldError component.
-* @param {string} [message]
-*    The message text to display.
-* @param {string} [messageType=error]
-*    The type of message (error = red, info = blue, success = green, warning = yellow).
-* @param {boolean} [required=false]
-*     If true, the user must select a value for this field.
-*
-* @param {boolean|string} [autoComplete="nope"]
-*     Whether or not the field will support autocomplete.
-* @param {boolean} [autoFocus=false]
-*     Whether or not to auto-focus the element.
-* @param {boolean} [maskValue=false]
-*     If true, the value shown in the input field will be masked with '*****'. (i.e: passwords).
-* @param {boolean} [readOnly=false]
-*     Whether or not the input field is readonly.
-* @param {boolean} [flexWidth=false]
-*     When true the width of the input will grow to fit the size of its content.
-*
-* @param {boolean} [showSave=false]
-*     Whether or not to display a save option.
 * @param {FormTextField~onSave} [onSave]
 *     Callback to be triggered when the 'save' icon is clicked.
-*
-* @param {boolean} [showUndo=false]
-*     Whether or not to display an undo option.
 * @param {FormTextField~onUndo} [onUndo]
 *     Callback to be triggred when the 'undo' icon is clicked.
-*
-* @param {boolean} [reveal=false]
-*     If true, will remove value masking.
-* @param {boolean} [showReveal=false]
-*    Whether or not to display a reveal option to remove value masking.
 * @param {FormTextField~onToggleReveal} [onToggleReveal]
 *    Callack to be triggered when the 'reveal' button is clicked.
 *
 * @param {object} [controls]
 *    Accepts a React object for extra controls. Used with FormIntegerField.
 *
-* @example <FormTextField
-*              data-id="my-data-id"
-*              labelText={element.viewName}
-*              required={element.required}
-*              value="default value"
-*              onValueChange={myFunction} />
+* @example
+*     <FormTextField
+*         data-id="my-data-id"
+*         labelText={element.viewName}
+*         required={element.required}
+*         value="default value"
+*         onValueChange={myFunction}
+*     />
 */
 
 export default class extends React.Component {
@@ -202,8 +202,6 @@ export default class extends React.Component {
             : React.createElement(Stateful, _.defaults({ ref: "stateful" }, this.props))); //eslint-disable-line no-use-before-define
     }
 }
-
-
 
 class Stateless extends React.Component {
     static displayName = "FormTextFieldStateless";
@@ -265,6 +263,7 @@ class Stateless extends React.Component {
         showReveal: PropTypes.bool,
         showSave: PropTypes.bool,
         showUndo: PropTypes.bool,
+        width: PropTypes.oneOf(InputWidthProptypes),
     };
 
     static defaultProps = {
@@ -313,13 +312,13 @@ class Stateless extends React.Component {
 
     _setFlexWidth = () => {
         if (this.props.flexWidth) {
-            var content = this._getInputType() === "password" ? Array(this.props.value.length + 1).join(this.pwChar)
-                    : this.props.value,
-                contentWidth,
-                newWidth;
+            const content = this._getInputType() === "password"
+                ? Array(this.props.value.length + 1).join(this.pwChar)
+                : this.props.value;
+            let newWidth;
 
             this._contentMeasurerInput.innerHTML = content;
-            contentWidth = this._contentMeasurerLabel.offsetWidth;
+            const contentWidth = this._contentMeasurerLabel.offsetWidth;
 
             if (contentWidth > this.initialInputWidth) {
                 newWidth = contentWidth + 10;
@@ -335,23 +334,18 @@ class Stateless extends React.Component {
     };
 
     _getInputType = () => {
-        var inputType;
-
         if (this.props.maskValue && !this.props.reveal) {
-            inputType = "password";
+            return "password";
 
         } else if (this.props.type) {
-            inputType = this.props.type;
-
             if (this.props.type === "color") {
                 if (!Utils.isProduction()) { console.warn("Please use the ColorPicker component."); }
             }
+            return this.props.type;
 
         } else {
-            inputType = "text";
+            return "text";
         }
-
-        return inputType;
     };
 
     _handleFocus = () => {
@@ -366,7 +360,8 @@ class Stateless extends React.Component {
     };
 
     componentDidMount() {
-        var label = ReactDOM.findDOMNode(this.refs["container"]),
+        const
+            label = ReactDOM.findDOMNode(this.refs["container"]),
             container = this.refs["input-container"],
             input = this.refs[this.props["data-id"] + "-input"],
             copyLabelProperties = [
@@ -392,30 +387,23 @@ class Stateless extends React.Component {
                 "border-right-width",
                 "border-left-style",
                 "border-right-style"
-            ],
-            labelStyles = "",
+            ];
+
+        let labelStyles = "",
             containerStyles = "",
             inputStyles = "white-space: nowrap; ";
 
         if (this.props.flexWidth) {
             // copy label, container, and input css to width measuring elements
             copyLabelProperties.map(function (property) {
-                labelStyles += property;
-                labelStyles += ":";
-                labelStyles += window.getComputedStyle(label, null).getPropertyValue(property);
-                labelStyles += "; ";
+                labelStyles += `${property}:${window.getComputedStyle(label, null).getPropertyValue(property)}; `;
             });
             copyContainerProperties.map(function (property) {
-                containerStyles += property;
-                containerStyles += ":";
-                containerStyles += window.getComputedStyle(container, null).getPropertyValue(property);
-                containerStyles += "; ";
+                containerStyles += `${property}:${window.getComputedStyle(container, null)
+                    .getPropertyValue(property)}; `;
             });
             copyInputProperties.map(function (property) {
-                inputStyles += property;
-                inputStyles += ":";
-                inputStyles += window.getComputedStyle(input, null).getPropertyValue(property);
-                inputStyles += "; ";
+                inputStyles += `${property}:${window.getComputedStyle(input, null).getPropertyValue(property)}; `;
             });
             this.contentMeasurerLabel.setAttribute("style", labelStyles);
             this.contentMeasurerContainer.setAttribute("style", containerStyles);
@@ -467,20 +455,27 @@ class Stateless extends React.Component {
         const undo = Translator.translate("undo");
         const save = Translator.translate("save");
 
-        const className = classnames(this.props.className, "input-text", {
-            disabled: this.props.disabled,
-            edited: this.props.isEdited,
-            "flex-width": this.props.flexWidth,
-            "input-message": message,
-            [`input-message--${this.props.messageType}`]: this.props.messageType,
-            "inline-save": this.props.showSave,
-            "masking-controls": this.props.showReveal,
-            readonly: this.props.readOnly,
-            required: this.props.required,
-            "value-entered": this.props.value || this.props.value !== "",
-            "input-text--right-icon": this.props.iconName,
-        });
-
+        const className = classnames(
+            this.props.className,
+            getInputWidthClass({
+                className: this.props.className,
+                width: this.props.width,
+            }),
+            "input-text",
+            {
+                disabled: this.props.disabled,
+                edited: this.props.isEdited,
+                "flex-width": this.props.flexWidth,
+                "input-message": message,
+                [`input-message--${this.props.messageType}`]: this.props.messageType,
+                "inline-save": this.props.showSave,
+                "masking-controls": this.props.showReveal,
+                readonly: this.props.readOnly,
+                required: this.props.required,
+                "value-entered": this.props.value || this.props.value !== "",
+                "input-text--right-icon": this.props.iconName,
+            }
+        );
 
         return (
             <FormLabel
@@ -608,7 +603,7 @@ class Stateful extends React.Component {
     }
 
     render() {
-        var props = _.defaults({
+        const props = _.defaults({
             ref: "stateless",
             reveal: this.state.reveal,
             onToggleReveal: this._handleToggleReveal,

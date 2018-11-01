@@ -1,7 +1,8 @@
-var React = require("react");
-var UnitInput = require("./../../../components/general/UnitInput");
+const React = require("react");
+const UnitInput = require("./../../../components/general/UnitInput");
+const InputWidths = require("./../../../components/forms/InputWidths");
 
-var OPTIONS = [
+const OPTIONS = [
         { label: "--", value: "" },
         { label: "Minute(s)", value: "Minute(s)" },
         { label: "Hour(s)", value: "Hour(s)" },
@@ -49,14 +50,14 @@ class UnitInputDemo extends React.Component {
                         textFieldProps={{
                             onValueChange: this._handleTextValueChange,
                             value: this.state.a,
-                            className: "input-width-xsmall",
+                            width: InputWidths.SM,
                             name: "text-field"
                         }}
                         dropDownListProps={{
                             options: OPTIONS,
                             onValueChange: this._handleDropdownValueChange,
                             selectedOption: this.state.selectedValue,
-                            className: "input-width-small",
+                            width: InputWidths.SM,
                             name: "dropdown"
                         }}
                     />

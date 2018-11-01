@@ -1,5 +1,6 @@
-var React = require("react"),
-    FormTextField = require("../../../components/forms/form-text-field").v2;
+import React from "react";
+import FormTextField from "../../../components/forms/form-text-field";
+import InputWidths from "../../../components/forms/InputWidths";
 
 
 /**
@@ -102,7 +103,7 @@ class FormTextFieldDemo extends React.Component {
                     <FormTextField
                         stateless={false}
                         labelText="Basic (stateful)"
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                 </div>
                 <div className="input-row">
@@ -111,7 +112,7 @@ class FormTextFieldDemo extends React.Component {
                         labelText="Basic (stateless)"
                         value={this.state.statelessValue}
                         onValueChange={this._handleStatelessValueChange}
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                         name="basic-stateless"
                     />
                 </div>
@@ -120,7 +121,7 @@ class FormTextFieldDemo extends React.Component {
                         stateless={false}
                         labelText="Default value"
                         value="default"
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                 </div>
                 <div className="input-row">
@@ -130,7 +131,7 @@ class FormTextFieldDemo extends React.Component {
                         onUndo={this._handleUndo}
                         value={this.state.onUndoValue || this.state.originalValue}
                         onValueChange={this._handleUndoValueChange}
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                     {this.state.onUndoValue}
                     <div>{this.state.undone ? "undone!" : null}</div>
@@ -141,7 +142,7 @@ class FormTextFieldDemo extends React.Component {
                         required={true}
                         onValueChange={this._handleRequiredValueChange}
                         value={this.state.requiredValue}
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                 </div>
                 <div className="input-row">
@@ -151,7 +152,7 @@ class FormTextFieldDemo extends React.Component {
                         onSave={this._handleSave}
                         onValueChange={this._handleRequiredValueChange}
                         value={this.state.requiredValue}
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                     <div>{this.state.saved ? "saved!" : null}</div>
                 </div>
@@ -162,14 +163,14 @@ class FormTextFieldDemo extends React.Component {
                         maskValue={true}
                         showReveal={true}
                         value="hidden text"
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                 </div>
                 <div className="input-row">
                     <FormTextField
                         labelText="Disabled"
                         disabled={true}
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                 </div>
                 <div className="input-row">
@@ -177,7 +178,7 @@ class FormTextFieldDemo extends React.Component {
                         stateless={false}
                         labelText="onChange callback"
                         onValueChange={this._handleValueChange}
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                     <span>{this.state.onValueChangeFieldValue}</span>
                 </div>
@@ -186,7 +187,7 @@ class FormTextFieldDemo extends React.Component {
                         stateless={false}
                         labelText="MaxLength (10 chars)"
                         maxLength={10}
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                 </div>
                 <div className="input-row">
@@ -194,7 +195,7 @@ class FormTextFieldDemo extends React.Component {
                         stateless={false}
                         labelText="Placeholder text"
                         placeholder="placeholder text"
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                 </div>
                 <div className="input-row">
@@ -202,7 +203,7 @@ class FormTextFieldDemo extends React.Component {
                         stateless={false}
                         labelText="onBlur callback"
                         onBlur={this._handleBlur}
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                     <span>{this.state.onBlurFieldValue}</span>
                 </div>
@@ -211,7 +212,7 @@ class FormTextFieldDemo extends React.Component {
                         labelText="Read-only"
                         value="text content cannot be edited"
                         readOnly={true}
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                 </div>
                 <div className="input-row">
@@ -220,7 +221,7 @@ class FormTextFieldDemo extends React.Component {
                         labelText="Error message"
                         errorMessage="The error message appears when hovering over the input/icon or when focus is
                             placed on the input."
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                 </div>
                 <div className="input-row">
@@ -228,7 +229,7 @@ class FormTextFieldDemo extends React.Component {
                         stateless={false}
                         labelText="Help tooltip"
                         labelHelpText="This is my help text."
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                 </div>
                 <div className="input-row">
@@ -237,7 +238,7 @@ class FormTextFieldDemo extends React.Component {
                         labelText="Help and lock tooltips"
                         labelHelpText="This is my help text."
                         labelLockText="This is the reason the field is locked."
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                         disabled={true}
                     />
                 </div>
@@ -248,7 +249,7 @@ class FormTextFieldDemo extends React.Component {
                         labelHelpText="Valid when 5 or more characters present"
                         errorMessage={this.state.onChangeValidationErrorMessage}
                         onChange={this._handleChangeErrorValidation}
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                         helpClassName="right"
                     />
                 </div>
@@ -259,7 +260,7 @@ class FormTextFieldDemo extends React.Component {
                         labelHelpText="Valid when 5 or more characters present"
                         errorMessage={this.state.onBlurValidationErrorMessage}
                         onBlur={this._handleBlurErrorValidation}
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                 </div>
                 <div className="input-row">
@@ -268,7 +269,7 @@ class FormTextFieldDemo extends React.Component {
                         labelText="Flex Width Input"
                         labelHelpText="A flex-width input grows with the content once it gets wider than the intial
                             width"
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                         flexWidth={true}
                         placeholder="try entering text longer than this field"
                     />
@@ -279,7 +280,7 @@ class FormTextFieldDemo extends React.Component {
                         labelText="Info message variant"
                         message="Info formatted messages are now supported within this component"
                         messageType={FormTextField.messageTypes.INFO}
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                 </div>
             </div>

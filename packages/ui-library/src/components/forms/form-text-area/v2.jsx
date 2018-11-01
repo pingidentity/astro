@@ -1,12 +1,16 @@
-var PropTypes = require("prop-types");
-var React = require("react"),
-    ReactDOM = require("react-dom"),
-    classnames = require("classnames"),
-    FormFieldConstants = require("../../../constants/FormFieldConstants"),
-    FormLabel = require("../FormLabel"),
-    FormError = require("../FormError"),
-    Utils = require("../../../util/Utils.js"),
-    _ = require("underscore");
+import React from "react";
+import PropTypes from "prop-types";
+import ReactDOM from "react-dom";
+
+import FormFieldConstants from "../../../constants/FormFieldConstants";
+import FormLabel from "../FormLabel";
+import FormError from "../FormError";
+import { InputWidthProptypes, getInputWidthClass } from "../InputWidths";
+
+import classnames from "classnames";
+import Utils from "../../../util/Utils.js";
+import _ from "underscore";
+
 
 /**
 * @callback FormTextArea~onChange
@@ -34,80 +38,80 @@ var React = require("react"),
 * @class FormTextArea
 * @desc A text area component that supports edit and readonly modes.
 *
-* @param {string} [data-id="form-text-area"]
-*     To define the base "data-id" value for the top-level HTML container.
 * @param {string} [className]
 *     CSS classes to se ton the top-level HTML container.
+* @param {number} [cols]
+*     Columns value for sizing, default is taken from CSS styles.
+* @param {string} [data-id="form-text-area"]
+*     To define the base "data-id" value for the top-level HTML container.
+* @param {string} [errorMessage]
+*     The message to display if defined when external validation failed.
+* @param {string} [helpClassName]
+*     CSS classes to set on the HelpHint component.
+* @param {string} [inputClassName]
+*     CSS classes to set on the input element.
+* @param {string} [label]
+*     Alias for labelText
+* @param {string} [labelHelpText]
+*     The text to display for the help tooltip.
+* @param {string} [labelText]
+*     The text to show as the field's label.
+* @param {number} [maxLength]
+*     Max length supported by the field.
+* @param {string} [name]
+*     The name attribute for the input.
+* @param {string} [originalValue]
+*     The original value of the field. Also used for handling undo when stateless=false as
+*     the value to set the field to if the undo icon is clicked - if not specified, no undo control will be shown.
+* @param {string} [placeholder]
+*     Placeholder text to show as the field's label.
+* @param {number} [rows]
+*     Rows value for sizing, default is taken from CSS styles.
+* @param {string} [value=""]
+*     The current text field value, used when state is managed outside of component.
+*     Must be used with onValueChange handle to get updates.
+* @param {("XS" | "SM" | "MD" | "LG" | "XL" | "XX" | "MAX")} [width]
+*    Specifies the width of the input.
+*
+* @param {boolean} [autoFocus=false]
+*     Whether or not to auto-focus the element.
+* @param {boolean} [disabled=false]
+*     If true, the text area will be disabled.
+* @param {boolean} [edited=false]
+*     Whether or not the field has been edited.
+* @param {boolean} [required=false]
+*     If true, the user must select a value for this field.
+* @param {boolean} [showUndo=false]
+*     Whether or not to display an undo option when field is edited. Only used when stateless=true.
 * @param {boolean} [stateless]
 *     WARNING. Default value for "stateless" will be set to true from next version.
 *     To enable the component to be externally managed. True will relinquish control to the component's owner.
 *     False or not specified will cause the component to manage state internally.
+* @param {boolean} [useAutocomplete=false]
+*     Whether or not the field will support autocomplete.
 *
-* @param {string} [value=""]
-*     The current text field value, used when state is managed outside of component.
-*     Must be used with onValueChange handle to get updates.
+* @param {FormTextArea~onBlur} [onBlur]
+*     Callback to be triggered when the field loses focus (is blurred).
 * @param {FormTextArea~onChange} [onChange]
 *     Callback to be triggered when the field changes. It will receive the triggering event.
 *     The onValueChange callback will also be triggered.
 * @param {FormTextArea~onValueChange} [onValueChange]
 *     Callback to be triggered when the field changes. It will receive the component's value.
 *     The onChange callback will also be triggered.
-* @param {FormTextArea~onBlur} [onBlur]
-*     Callback to be triggered when the field loses focus (is blurred).
-*
-* @param {String} [originalValue]
-*     The original value of the field. Also used for handling undo when stateless=false as
-*     the value to set the field to if the undo icon is clicked - if not specified, no undo control will be shown.
-* @param {boolean} [edited=false]
-*     Whether or not the field has been edited.
-* @param {boolean} [showUndo=false]
-*     Whether or not to display an undo option when field is edited. Only used when stateless=true.
 * @param {FormTextArea~onUndo} [onUndo]
 *     Callback to be triggered when the 'undo' icon is clicked. Only used when stateless=true.
 *
-* @param {string} [labelText]
-*     The text to show as the field's label.
-* @param {string} [label]
-*     Alias for labelText
-* @param {string} [labelHelpText]
-*     The text to display for the help tooltip.
-* @param {string} [helpClassName]
-*     CSS classes to set on the HelpHint component.
-* @param {string} [name]
-*     The name attribute for the input.
-*
-* @param {string} [inputClassName]
-*     CSS classes to set on the input element.
 * @param {module:constants/FormFieldConstants.FormFieldTypes} [mode=FormFieldTypes.EDIT]
 *     How the field will be shown: FormFieldTypes.EDIT or FormFieldTypes.READ_ONLY.
-* @param {number} [maxLength]
-*     Max length supported by the field.
-* @param {number} [cols]
-*     Columns value for sizing, default is taken from CSS styles.
-* @param {number} [rows]
-*     Rows value for sizing, default is taken from CSS styles.
-*
-* @param {string} [errorMessage]
-*     The message to display if defined when external validation failed.
-* @param {string} [placeholder]
-*     Placeholder text to show as the field's label.
-* @param {boolean} [disabled=false]
-*     If true, the text area will be disabled.
-* @param {boolean} [required=false]
-*     If true, the user must select a value for this field.
-*
-* @param {boolean} [autoFocus=false]
-*     Whether or not to auto-focus the element.
-* @param {boolean} [useAutocomplete=false]
-*     Whether or not the field will support autocomplete.
 *
 * @example
-*                   <FormTextArea
-*                       data-id={name}
-*                       labelText={element.viewName}
-*                       required={element.required}
-*                       value={element ? element.value : ''}
-*                       onValueChange={myFunction} />
+*     <FormTextArea
+*         data-id={name}
+*         labelText={element.viewName}
+*         required={element.required}
+*         value={element ? element.value : ''}
+*         onValueChange={myFunction}
+*     />
 */
 
 module.exports = class extends React.Component {
@@ -138,57 +142,58 @@ module.exports = class extends React.Component {
 
 class FormTextAreaStateless extends React.Component {
     static propTypes = {
-        "data-id": PropTypes.string,
+        autoFocus: PropTypes.bool,
+        children: PropTypes.node,
         className: PropTypes.string,
-        value: PropTypes.string,
-        onChange: PropTypes.func,
-        onValueChange: PropTypes.func,
-        originalValue: PropTypes.string,
+        cols: PropTypes.number,
+        "data-id": PropTypes.string,
+        disabled: PropTypes.bool,
         edited: PropTypes.bool,
-        showUndo: PropTypes.bool,
-        onUndo: PropTypes.func,
-        onBlur: PropTypes.func,
-        labelText: PropTypes.oneOfType([
-            PropTypes.array,
-            PropTypes.object,
-            PropTypes.string
-        ]),
+        errorMessage: PropTypes.string,
+        helpClassName: PropTypes.string,
+        inputClassName: PropTypes.string,
         label: PropTypes.oneOfType([
             PropTypes.array,
             PropTypes.object,
             PropTypes.string
         ]),
         labelHelpText: PropTypes.string,
-        helpClassName: PropTypes.string,
-        inputClassName: PropTypes.string,
+        labelText: PropTypes.oneOfType([
+            PropTypes.array,
+            PropTypes.object,
+            PropTypes.string
+        ]),
         mode: PropTypes.string,
         maxLength: PropTypes.number,
         name: PropTypes.string,
-        cols: PropTypes.number,
-        rows: PropTypes.number,
-        errorMessage: PropTypes.string,
+        onBlur: PropTypes.func,
+        onChange: PropTypes.func,
+        onUndo: PropTypes.func,
+        onValueChange: PropTypes.func,
+        originalValue: PropTypes.string,
         placeholder: PropTypes.string,
-        disabled: PropTypes.bool,
         required: PropTypes.bool,
-        autoFocus: PropTypes.bool,
+        rows: PropTypes.number,
+        showUndo: PropTypes.bool,
         useAutocomplete: PropTypes.bool,
-        children: PropTypes.node
+        value: PropTypes.string,
+        width: PropTypes.oneOf(InputWidthProptypes),
     };
 
     static defaultProps = {
-        "data-id": "form-text-area",
-        mode: FormFieldConstants.FormFieldMode.EDIT,
-        edited: false,
-        showUndo: false,
-        disabled: false,
-        required: false,
         autoFocus: false,
-        useAutocomplete: false,
-        onChange: _.noop,
-        onValueChange: _.noop,
+        "data-id": "form-text-area",
+        disabled: false,
+        edited: false,
+        mode: FormFieldConstants.FormFieldMode.EDIT,
         onBlur: _.noop,
+        onChange: _.noop,
         onUndo: _.noop,
-        value: ""
+        onValueChange: _.noop,
+        required: false,
+        showUndo: false,
+        useAutocomplete: false,
+        value: "",
     };
 
     _handleChange = (e) => {
@@ -197,16 +202,25 @@ class FormTextAreaStateless extends React.Component {
     };
 
     render() {
-        var readonly = this.props.mode.toUpperCase() === FormFieldConstants.FormFieldMode.READ_ONLY,
-            className = classnames("input-textarea", this.props.className, {
-                required: this.props.required,
-                "form-error": this.props.errorMessage,
-                disabled: this.props.disabled,
-                edited: this.props.edited,
-                "value-entered": !!this.props.value,
-                readonly: readonly,
-                actions: this.props.showUndo
-            });
+        const
+            readonly = this.props.mode.toUpperCase() === FormFieldConstants.FormFieldMode.READ_ONLY,
+            className = classnames(
+                "input-textarea",
+                getInputWidthClass({
+                    className: this.props.className,
+                    width: this.props.width,
+                }),
+                this.props.className,
+                {
+                    required: this.props.required,
+                    "form-error": this.props.errorMessage,
+                    disabled: this.props.disabled,
+                    edited: this.props.edited,
+                    "value-entered": !!this.props.value,
+                    readonly: readonly,
+                    actions: this.props.showUndo
+                }
+            );
 
         return (
             <FormLabel
@@ -288,7 +302,7 @@ class FormTextAreaStateful extends React.Component {
     };
 
     render() {
-        var props = _.defaults({
+        const props = _.defaults({
             ref: "FormTextAreaStateless",
             value: this.state.value,
             onValueChange: this._handleValueChange,

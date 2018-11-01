@@ -5,6 +5,8 @@ jest.dontMock("../UnitInput");
 jest.dontMock("../../forms/FormDropDownList");
 jest.dontMock("../../forms/form-text-field/v2");
 
+import { InputWidthClasses } from "../../forms/InputWidths";
+
 describe("UnitInput", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
@@ -33,13 +35,13 @@ describe("UnitInput", function () {
                 textFieldProps={{
                     onValueChange: callback,
                     value: "ABC",
-                    className: "input-width-xsmall"
+                    className: InputWidthClasses.XS
                 }}
                 dropDownListProps={{
                     options: options,
                     onValueChange: callback1,
                     selectedOption: options[0],
-                    className: "input-width-small"
+                    className: InputWidthClasses.SM
                 }}
             />
         );
@@ -87,14 +89,14 @@ describe("UnitInput", function () {
                 textFieldProps={{
                     onValueChange: callback,
                     value: "ABC",
-                    className: "input-width-xsmall",
+                    className: InputWidthClasses.XS,
                     disabled: true
                 }}
                 dropDownListProps={{
                     options: options,
                     onValueChange: callback1,
                     selectedOption: options[0],
-                    className: "input-width-small",
+                    className: InputWidthClasses.SM,
                     disabled: true
                 }}
             /> );

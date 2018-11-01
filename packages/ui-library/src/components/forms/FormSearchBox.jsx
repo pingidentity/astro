@@ -4,6 +4,7 @@ import _ from "underscore";
 import FormTextField from "./form-text-field/index";
 import KeyboardUtils from "../../util/KeyboardUtils.js";
 import classnames from "classnames";
+import { InputWidths, InputWidthProptypes } from "../forms/InputWidths";
 
 /**
 * @callback FormSearchBox~onValueChange
@@ -59,6 +60,8 @@ import classnames from "classnames";
 *     Hint text inside searchBox
 * @param {string} [name]
 *    Name attribute for the input.
+* @param {("XS" | "SM" | "MD" | "LG" | "XL" | "XX" | "MAX")} [width]
+*    Specifies the width of the input.
 * @param {FormSearchBox~onValueChange} onValueChange
 *     Callback to be triggered when the searchbox value changes
 *
@@ -102,6 +105,7 @@ class FormSearchBox extends React.Component {
         onClear: PropTypes.func,
         placeholder: PropTypes.string,
         queryString: PropTypes.string,
+        width: PropTypes.oneOf(InputWidthProptypes),
     };
 
     static defaultProps = {
@@ -111,7 +115,8 @@ class FormSearchBox extends React.Component {
         onFocus: _.noop,
         onBlur: _.noop,
         onClear: _.noop,
-        errorMessage: null
+        errorMessage: null,
+        width: InputWidths.MD,
     };
 
     /**
@@ -187,6 +192,7 @@ class FormSearchBox extends React.Component {
                         ? <a data-id="clear" className="clear-search" onClick={this._clear} />
                         : null
                     }
+                    width={this.props.width}
                 ><span className={iconClasses}/></FormTextField>
             </div>
         );

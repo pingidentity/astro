@@ -2,11 +2,12 @@
 
 //For some very odd reason linting picks up the "/**"  JSDoc definitions of the @alias as having a JSDoc syntax error. So we disable.
 
-var React = require("react"),
-    FormTextArea = require("./../../../components/forms/form-text-area"),
-    FormTextField = require("./../../../components/forms/form-text-field"),
-    FormCheckbox = require("./../../../components/forms/FormCheckbox"),
-    FormDropDownList = require("./../../../components/forms/FormDropDownList");
+import React from "react";
+import FormTextArea from "./../../../components/forms/form-text-area";
+import FormTextField from "./../../../components/forms/form-text-field";
+import FormCheckbox from "./../../../components/forms/FormCheckbox";
+import FormDropDownList from "./../../../components/forms/FormDropDownList";
+import InputWidths from "./../../../components/forms/InputWidths";
 
 /**
 * @name FormInputWidthsDemo
@@ -25,168 +26,160 @@ class FormInputWidthsDemo extends React.Component {
 
         return (
             <div>
-                <div>
-                    Reusable input width CSS classes:
+                Input widths are no longer declared using CSS class names. While the CSS classes are still supported,
+                this usage is depricated.  Widths should now be specified using the "width" prop on each input.  See the
+                examples below:
 
-                    <ul className="ul">
-                        <li>.input-width-xsmall</li>
-                        <li>.input-width-small</li>
-                        <li>.input-width-medium</li>
-                        <li>.input-width-large</li>
-                        <li>.input-width-xlarge</li>
-                        <li>.input-width-full</li>
-                        <li>.input-width-max</li>
-                    </ul>
+                <hr className="hr" />
+
+                <div>
+                    <FormTextField labelText="X-Large" width={InputWidths.XL} />
+                    <FormTextField labelText="X-Small" width={InputWidths.XS} />
                 </div>
                 <div>
-                    <FormTextField labelText="Full" className="input-width-full" />
+                    <FormTextField labelText="Large" width={InputWidths.LG} />
+                    <FormTextField labelText="Small" width={InputWidths.SM} />
                 </div>
                 <div>
-                    <FormTextField labelText="X-Large" className="input-width-xlarge" />
-                    <FormTextField labelText="X-Small" className="input-width-xsmall" />
-                </div>
-                <div>
-                    <FormTextField labelText="Large" className="input-width-large" />
-                    <FormTextField labelText="Small" className="input-width-small" />
-                </div>
-                <div>
-                    <FormTextField labelText="Medium" className="input-width-medium" />
+                    <FormTextField labelText="Medium" width={InputWidths.MD} />
                     <FormTextField labelText="Medium with a extra veryvery long label name"
-                        className="input-width-medium" />
+                        width={InputWidths.MD} />
                 </div>
                 <div>
-                    <FormTextField labelText="Small" className="input-width-small" />
-                    <FormTextField labelText="Small" className="input-width-small" />
-                    <FormTextField labelText="Small" className="input-width-small" />
+                    <FormTextField labelText="Small" width={InputWidths.SM} />
+                    <FormTextField labelText="Small" width={InputWidths.SM} />
+                    <FormTextField labelText="Small" width={InputWidths.SM} />
                 </div>
                 <div>
-                    <FormTextField labelText="Maximum/100%" className="input-width-max" />
+                    <FormTextField labelText="Maximum/100%" width={InputWidths.MAX} />
                 </div>
                 <div>
-                    <FormTextField labelText="X-Small" className="input-width-xsmall" />
-                    <FormTextField labelText="X-Small" className="input-width-xsmall" />
-                    <FormTextField labelText="X-Small" className="input-width-xsmall" />
-                    <FormTextField labelText="X-Small" className="input-width-xsmall" />
-                    <FormTextField labelText="X-Small" className="input-width-xsmall" />
-                    <FormTextField labelText="X-Small and with a veryvery longlabelname"
-                        className="input-width-xsmall" />
-                </div>
-
-                <div>
-                    <FormDropDownList selectedOption={{}} options={selectOptions}
-                            label="Full"className="input-width-full" />
-                </div>
-                <div>
-                    <FormDropDownList selectedOption={{}} options={selectOptions}
-                            label="X-Large" className="input-width-xlarge" />
-                    <FormDropDownList selectedOption={{}} options={selectOptions}
-                            label="X-Small" className="input-width-xsmall" />
-                </div>
-                <div>
-                    <FormDropDownList selectedOption={{}} options={selectOptions}
-                            label="Large" className="input-width-large" />
-                    <FormDropDownList selectedOption={{}} options={selectOptions}
-                            label="Small" className="input-width-small" />
-                </div>
-                <div>
-                    <FormDropDownList selectedOption={{}} options={selectOptions}
-                            label="Medium" className="input-width-medium" />
-                    <FormDropDownList selectedOption={{}} options={selectOptions}
-                            label="Medium" className="input-width-medium" />
-                </div>
-                <div>
-                    <FormDropDownList selectedOption={{}} options={selectOptions}
-                            label="Small" className="input-width-small" />
-                    <FormDropDownList selectedOption={{}} options={selectOptions}
-                            label="Small" className="input-width-small" />
-                    <FormDropDownList selectedOption={{}} options={selectOptions}
-                            label="Small" className="input-width-small" />
-                </div>
-                <div>
-                    <FormDropDownList selectedOption={{}} options={selectOptions}
-                            label="X-Small" className="input-width-xsmall" />
-                    <FormDropDownList selectedOption={{}} options={selectOptions}
-                            label="X-Small" className="input-width-xsmall" />
-                    <FormDropDownList selectedOption={{}} options={selectOptions}
-                            label="X-Small" className="input-width-xsmall" />
-                    <FormDropDownList selectedOption={{}} options={selectOptions}
-                            label="X-Small" className="input-width-xsmall" />
-                    <FormDropDownList selectedOption={{}} options={selectOptions}
-                            label="X-Small" className="input-width-xsmall" />
-                    <FormDropDownList selectedOption={{}} options={selectOptions}
-                            label="X-Small" className="input-width-xsmall" />
-                </div>
-                <div>
-                    <FormDropDownList selectedOption={{}} options={selectOptions}
-                            label="Maximum/100%" className="input-width-max" />
+                    <FormTextField labelText="X-Small" width={InputWidths.XS} />
+                    <FormTextField labelText="X-Small" width={InputWidths.XS} />
+                    <FormTextField labelText="X-Small" width={InputWidths.XS} />
+                    <FormTextField labelText="X-Small" width={InputWidths.XS} />
+                    <FormTextField labelText="X-Small" width={InputWidths.XS} />
+                    <FormTextField labelText="X-Small and with a veryvery longlabelname" width={InputWidths.XS} />
                 </div>
 
-                <br />
+                <hr className="hr" />
 
                 <div>
-                    <FormCheckbox label="Full" className="input-width-full" />
+                    <FormDropDownList selectedOption={{}} options={selectOptions} label="Full"
+                        width={InputWidths.XX}
+                    />
                 </div>
                 <div>
-                    <FormCheckbox label="X-Large" className="input-width-xlarge" />
-                    <FormCheckbox label="X-Small" className="input-width-xsmall" />
+                    <FormDropDownList selectedOption={{}} options={selectOptions} label="X-Large"
+                        width={InputWidths.XL} />
+                    <FormDropDownList selectedOption={{}} options={selectOptions} label="X-Small"
+                        width={InputWidths.XS} />
                 </div>
                 <div>
-                    <FormCheckbox label="Large" className="input-width-large" />
-                    <FormCheckbox label="Small" className="input-width-small" />
+                    <FormDropDownList selectedOption={{}} options={selectOptions} label="Large"
+                        width={InputWidths.LG} />
+                    <FormDropDownList selectedOption={{}} options={selectOptions} label="Small"
+                        width={InputWidths.SM} />
                 </div>
                 <div>
-                    <FormCheckbox label="Medium" className="input-width-medium" />
-                    <FormCheckbox label="Medium" className="input-width-medium" />
+                    <FormDropDownList selectedOption={{}} options={selectOptions} label="Medium"
+                        width={InputWidths.MD} />
+                    <FormDropDownList selectedOption={{}} options={selectOptions} label="Medium"
+                        width={InputWidths.MD} />
                 </div>
                 <div>
-                    <FormCheckbox label="Small" className="input-width-small" />
-                    <FormCheckbox label="Small" className="input-width-small" />
-                    <FormCheckbox label="Small" className="input-width-small" />
+                    <FormDropDownList selectedOption={{}} options={selectOptions} label="Small"
+                        width={InputWidths.SM} />
+                    <FormDropDownList selectedOption={{}} options={selectOptions} label="Small"
+                        width={InputWidths.SM} />
+                    <FormDropDownList selectedOption={{}} options={selectOptions} label="Small"
+                        width={InputWidths.SM} />
                 </div>
                 <div>
-                    <FormCheckbox label="X-Small" className="input-width-xsmall" />
-                    <FormCheckbox label="X-Small" className="input-width-xsmall" />
-                    <FormCheckbox label="X-Small" className="input-width-xsmall" />
-                    <FormCheckbox label="X-Small" className="input-width-xsmall" />
-                    <FormCheckbox label="X-Small" className="input-width-xsmall" />
-                    <FormCheckbox label="X-Small" className="input-width-xsmall" />
+                    <FormDropDownList selectedOption={{}} options={selectOptions} label="X-Small"
+                        width={InputWidths.XS} />
+                    <FormDropDownList selectedOption={{}} options={selectOptions} label="X-Small"
+                        width={InputWidths.XS} />
+                    <FormDropDownList selectedOption={{}} options={selectOptions} label="X-Small"
+                        width={InputWidths.XS} />
+                    <FormDropDownList selectedOption={{}} options={selectOptions} label="X-Small"
+                        width={InputWidths.XS} />
+                    <FormDropDownList selectedOption={{}} options={selectOptions} label="X-Small"
+                        width={InputWidths.XS} />
+                    <FormDropDownList selectedOption={{}} options={selectOptions} label="X-Small"
+                        width={InputWidths.XS} />
                 </div>
                 <div>
-                    <FormCheckbox label="Maximum/100%" className="input-width-max" />
+                    <FormDropDownList selectedOption={{}} options={selectOptions} label="Maximum/100%"
+                        width={InputWidths.MAX} />
                 </div>
 
-                <br />
+                <hr className="hr" />
 
                 <div>
-                    <FormTextArea labelText="Full" className="input-width-full" />
+                    <FormTextArea labelText="Full" width={InputWidths.XX} />
                 </div>
                 <div>
-                    <FormTextArea labelText="X-Large" className="input-width-xlarge" />
-                    <FormTextArea labelText="X-Small" className="input-width-xsmall" />
+                    <FormTextArea labelText="X-Large" width={InputWidths.XL} />
+                    <FormTextArea labelText="X-Small" width={InputWidths.XS} />
                 </div>
                 <div>
-                    <FormTextArea labelText="Large" className="input-width-large" />
-                    <FormTextArea labelText="Small" className="input-width-small" />
+                    <FormTextArea labelText="Large" width={InputWidths.LG} />
+                    <FormTextArea labelText="Small" width={InputWidths.SM} />
                 </div>
                 <div>
-                    <FormTextArea labelText="Medium" className="input-width-medium" />
-                    <FormTextArea labelText="Medium" className="input-width-medium" />
+                    <FormTextArea labelText="Medium" width={InputWidths.MD} />
+                    <FormTextArea labelText="Medium" width={InputWidths.MD} />
                 </div>
                 <div>
-                    <FormTextArea labelText="Small" className="input-width-small" />
-                    <FormTextArea labelText="Small" className="input-width-small" />
-                    <FormTextArea labelText="Small" className="input-width-small" />
+                    <FormTextArea labelText="Small" width={InputWidths.SM} />
+                    <FormTextArea labelText="Small" width={InputWidths.SM} />
+                    <FormTextArea labelText="Small" width={InputWidths.SM} />
                 </div>
                 <div>
-                    <FormTextArea labelText="X-Small" className="input-width-xsmall" />
-                    <FormTextArea labelText="X-Small" className="input-width-xsmall" />
-                    <FormTextArea labelText="X-Small" className="input-width-xsmall" />
-                    <FormTextArea labelText="X-Small" className="input-width-xsmall" />
-                    <FormTextArea labelText="X-Small" className="input-width-xsmall" />
-                    <FormTextArea labelText="X-Small" className="input-width-xsmall" />
+                    <FormTextArea labelText="X-Small" width={InputWidths.XS} />
+                    <FormTextArea labelText="X-Small" width={InputWidths.XS} />
+                    <FormTextArea labelText="X-Small" width={InputWidths.XS} />
+                    <FormTextArea labelText="X-Small" width={InputWidths.XS} />
+                    <FormTextArea labelText="X-Small" width={InputWidths.XS} />
+                    <FormTextArea labelText="X-Small" width={InputWidths.XS} />
                 </div>
                 <div>
-                    <FormTextArea labelText="Maximum/100%" className="input-width-max" />
+                    <FormTextArea labelText="Maximum/100%" width={InputWidths.MAX} />
+                </div>
+
+                <hr className="hr" />
+
+                <div>
+                    <FormCheckbox label="Full" width={InputWidths.XX} />
+                </div>
+                <div>
+                    <FormCheckbox label="X-Large" width={InputWidths.XL} />
+                    <FormCheckbox label="X-Small" width={InputWidths.XS} />
+                </div>
+                <div>
+                    <FormCheckbox label="Large" width={InputWidths.LG} />
+                    <FormCheckbox label="Small" width={InputWidths.SM} />
+                </div>
+                <div>
+                    <FormCheckbox label="Medium" width={InputWidths.MD} />
+                    <FormCheckbox label="Medium" width={InputWidths.MD} />
+                </div>
+                <div>
+                    <FormCheckbox label="Small" width={InputWidths.SM} />
+                    <FormCheckbox label="Small" width={InputWidths.SM} />
+                    <FormCheckbox label="Small" width={InputWidths.SM} />
+                </div>
+                <div>
+                    <FormCheckbox label="X-Small" width={InputWidths.XS} />
+                    <FormCheckbox label="X-Small" width={InputWidths.XS} />
+                    <FormCheckbox label="X-Small" width={InputWidths.XS} />
+                    <FormCheckbox label="X-Small" width={InputWidths.XS} />
+                    <FormCheckbox label="X-Small" width={InputWidths.XS} />
+                    <FormCheckbox label="X-Small" width={InputWidths.XS} />
+                </div>
+                <div>
+                    <FormCheckbox label="Maximum/100%" width={InputWidths.MAX} />
                 </div>
             </div>
         );

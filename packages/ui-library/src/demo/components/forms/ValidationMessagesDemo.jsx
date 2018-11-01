@@ -1,6 +1,7 @@
 import React from "react";
 import FormTextField from "../../../components/forms/form-text-field";
 import ValidationMessages from "./../../../components/forms/ValidationMessages";
+import InputWidths from "../../../components/forms/InputWidths";
 
 
 const _testLength = (value) => {
@@ -48,7 +49,7 @@ class ValidationMessagesDemo extends React.Component {
             <div>
                 <div className="input-row">
                     <FormTextField
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                         labelText="Validation always visible"
                         onValueChange={this._handleValueChange1}
                         maskValue={true}
@@ -62,7 +63,7 @@ class ValidationMessagesDemo extends React.Component {
                 </div>
                 <div className="input-row">
                     <FormTextField
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                         labelText="Validation only visibile when required"
                         maskValue={true}
                         onValueChange={this._handleValueChange2}

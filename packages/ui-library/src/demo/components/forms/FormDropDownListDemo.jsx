@@ -1,5 +1,6 @@
 import React from "react";
 import FormDropDownList from "../../../components/forms/FormDropDownList";
+import InputWidths from "../../../components/forms/InputWidths";
 
 
 const NUM_DEMOS = 10,
@@ -117,7 +118,7 @@ class FormDropDownListDemo extends React.Component {
                         searchField="value"
                         selectedOption={this.state.selectedValue2}
                         onValueChange={this._handleValueChange2}
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                         name="custom-content-type"
                     />
                 </div>
@@ -131,7 +132,7 @@ class FormDropDownListDemo extends React.Component {
                         labelHelpText="Some help tip"
                         selectedOption={this.state.selectedValue3}
                         onValueChange={this._handleValueChange3}
-                        className="input-width-small"
+                        width={InputWidths.SM}
                     />
                 </div>
                 <div>Selected value: {this.state.selectedValue3.label}</div>
@@ -144,7 +145,7 @@ class FormDropDownListDemo extends React.Component {
                         errorMessage="The error message appears when hovering over the input or the error icon."
                         selectedOption={this.state.selectedValue4}
                         onValueChange={this._handleValueChange4}
-                        className="input-width-small"
+                        width={InputWidths.SM}
                     />
                 </div>
                 <div>Selected value: {this.state.selectedValue4.label}</div>
@@ -157,7 +158,7 @@ class FormDropDownListDemo extends React.Component {
                         disabled={true}
                         selectedOption={this.state.selectedValue5}
                         onValueChange={this._handleValueChange5}
-                        className="input-width-small"
+                        width={InputWidths.SM}
                     />
                 </div>
                 <div>Selected value: {this.state.selectedValue5.label}</div>
@@ -170,7 +171,7 @@ class FormDropDownListDemo extends React.Component {
                         label="With groups"
                         selectedOption={this.state.selectedValue6}
                         onValueChange={this._handleValueChange6}
-                        className="input-width-small"
+                        width={InputWidths.SM}
                     />
                 </div>
                 <div>Selected value: {this.state.selectedValue6.label}</div>
@@ -187,7 +188,7 @@ class FormDropDownListDemo extends React.Component {
                         labelPrompt="Type to search or add"
                         selectedOption={this.state.selectedValue7}
                         onValueChange={this._handleValueChange7}
-                        className="input-width-small"
+                        width={InputWidths.SM}
                     />
                 </div>
                 <div>Selected value: {this.state.selectedValue7.label}</div>
@@ -201,7 +202,7 @@ class FormDropDownListDemo extends React.Component {
                         searchType={FormDropDownList.SearchTypes.BOX}
                         selectedOption={this.state.selectedValue8}
                         onValueChange={this._handleValueChange8}
-                        className="input-width-small"
+                        width={InputWidths.SM}
                     />
                 </div>
                 <div>Selected value: {this.state.selectedValue8.label}</div>
@@ -218,7 +219,7 @@ class FormDropDownListDemo extends React.Component {
                         labelPrompt="Type to search or add"
                         selectedOption={this.state.selectedValue9}
                         onValueChange={this._handleValueChange9}
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                     />
                 </div>
                 <div>Selected value: {this.state.selectedValue9.label}</div>
@@ -232,7 +233,7 @@ class FormDropDownListDemo extends React.Component {
                         selectedOption={this.state["selectedValue" + NUM_DEMOS]}
                         noneOption={NONEOPTION}
                         onValueChange={this["_handleValueChange" + NUM_DEMOS]}
-                        className="input-width-small"
+                        width={InputWidths.SM}
                     />
                 </div>
                 <div>Selected value: {this.state["selectedValue" + NUM_DEMOS] &&

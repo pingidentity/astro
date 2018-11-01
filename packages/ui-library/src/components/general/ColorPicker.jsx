@@ -2,6 +2,7 @@
 
 
 import { ChromePicker } from "react-color";
+import { InputWidths, InputWidthProptypes } from "../forms/InputWidths";
 
 var PropTypes = require("prop-types");
 
@@ -58,6 +59,8 @@ var callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutside
  *     A hexcode of chosen color
  * @param {boolean} [disabled=false]
  *     A property to disable the component
+ * @param {("XS" | "SM" | "MD" | "LG" | "XL" | "XX")} [width]
+*      Specifies the width of the input.
  * @param {ColorPicker~onValueChange} onValueChange
  *     Callback to be triggered when a color is chosen by passing the new color.
  *
@@ -145,7 +148,8 @@ class Stateless extends React.Component {
         open: PropTypes.bool,
         onToggle: PropTypes.func.isRequired,
         errorMessage: PropTypes.string,
-        onError: PropTypes.func
+        onError: PropTypes.func,
+        width: PropTypes.oneOf(InputWidthProptypes),
     };
 
     static defaultProps = {
@@ -154,7 +158,8 @@ class Stateless extends React.Component {
         disabled: false,
         cpid: Math.random(),
         onError: _.noop,
-        errorMessage: ""
+        errorMessage: "",
+        width: InputWidths.SM,
     };
 
     /*
@@ -300,17 +305,19 @@ class Stateless extends React.Component {
                           ref="innerSwatch"
                           onClick={this._handleClick}>
                         <FormTextField
-                                data-id="colorInput"
-                                className="colors-label"
-                                inputClassName="colors-input btn-fg-color"
-                                value={this.props.color}
-                                maxLength={7}
-                                name={this.props.name}
-                                disabled={this.props.disabled}
-                                errorMessage={this.props.errorMessage}
-                                onValueChange={this._handleColorInputChange}
-                                onKeyDown={this._handleColorInputKeyDown}
-                                onBlur={this._handleColorInputBlur} />
+                            data-id="colorInput"
+                            className="colors-label"
+                            inputClassName="colors-input btn-fg-color"
+                            value={this.props.color}
+                            maxLength={7}
+                            name={this.props.name}
+                            disabled={this.props.disabled}
+                            errorMessage={this.props.errorMessage}
+                            onValueChange={this._handleColorInputChange}
+                            onKeyDown={this._handleColorInputKeyDown}
+                            onBlur={this._handleColorInputBlur}
+                            width={this.props.width}
+                        />
                         <span className="colors-swatch" data-id={this.props["data-id"] + "-colors-swatch"} >
                             <span ref="colorSample" style={{ backgroundColor: this.props.color }}></span>
                         </span>

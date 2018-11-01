@@ -85,6 +85,7 @@ class ConditionalFieldsetStateless extends React.Component {
                     required={this.props.required && this.props.supportEmpty} // indicator only shows if noneOption is selected
                     selectedOption={selectedOption}
                     title={selectedOption.label}
+                    width={this.props.inputWidth}
                 />
             );
         } else {
@@ -174,65 +175,68 @@ class ConditionalFieldsetStateful extends React.Component {
 /**
  * @class ConditionalFieldset
  * @desc Combines a radio group or select component with a bordered area that will allow you to expand a visible series
- *          of components in a bordered area depending on your selection. It aims to make this very easy by
- *          allowing the developer to set a few divs with labels containing the different options. An empty
- *          div can be passed as a "do nothing" type of option.
+ *     of components in a bordered area depending on your selection. It aims to make this very easy by allowing the
+ *     developer to set a few divs with labels containing the different options. An empty div can be passed as a "do
+ *     nothing" type of option.
  *
- * @param {string} data-id
- *          To define the base "data-id" value for the top-level HTML container. Unlike a lot of our components, this is
- *          required.
  * @param {string} [className]
- *          CSS class to set on the top HTML element
+ *     CSS class to set on the top HTML element
+ * @param {string} data-id
+ *     To define the base "data-id" value for the top-level HTML container. Unlike a lot of our components, this is
+ *     required.
+ * @param {boolean} [disabled=false]
+ *     Disables the ConditionalFieldset options
+ * @param {string} [emptyMessage="-- Select an option --"]
+ *     Only really applies if supportEmpty is set to true and no empty div was passed. If that's the case it will
+ *     insert an empty div with the emptyMessage as the option.
+ * @param {("XS" | "SM" | "MD" | "LG" | "XL" | "XX" | "MAX")} [inputWidth]
+ *    Specifies the width of the drop-down input. Should be used in place of "listClassName" to control its width
  * @param {string} [listClassName]
- *          CSS class to set on the FormDropDownList
+ *     CSS class to set on the FormDropDownList
  * @param {string} [name]
  *    Name attribute for the input.
- * @param {boolean} [stateless]
- *          To enable the component to be externally managed. True will relinquish control to the component's owner.
- *          False or not specified will cause the component to manage state internally. If True, onValueChange and
- *          selectedIndex will be managed by the component.
- * @param {ConditionalFieldset.Type} [type]
- *          Type of selector to display to expose form options. If not set, it will default to RADIO for 2 options
- *          and select for 3 or more.
- * @param {boolean} [supportEmpty=false]
- *          Set this if you want to have an empty option inserted. Alternatively you may pass an empty div in as
- *          can be seen in the examples.
- * @param {string} [emptyMessage="-- Select an option --"]
- *          Only really applies if supportEmpty is set to true and no empty div was passed. If that's the case it will
- *          insert an empty div with the emptyMessage as the option.
+ * @param {ConditionalFieldset~onValueChange} onValueChange Callback to be triggered when the selection is changed. If
+ *     using the stateless=false option this is not required.
  * @param {number} selectedIndex
- *          The index of the currently selected option. If using the stateless=false option this is not required.
- * @param {ConditionalFieldset~onValueChange} onValueChange
- *          Callback to be triggered when the selection is changed. If using the stateless=false
- *          option this is not required.
- * @param {boolean} [disabled=false]
- *          Disables the ConditionalFieldset options
+ *     The index of the currently selected option. If using the stateless=false option this is not required.
+ * @param {boolean} [stateless]
+ *     To enable the component to be externally managed. True will relinquish control to the component's owner.
+ *     False or not specified will cause the component to manage state internally. If True, onValueChange and
+ *     selectedIndex will be managed by the component.
+ * @param {boolean} [supportEmpty=false]
+ *     Set this if you want to have an empty option inserted. Alternatively you may pass an empty div in as
+ *     can be seen in the examples.
+ * @param {ConditionalFieldset.Type} [type]
+ *     Type of selector to display to expose form options. If not set, it will default to RADIO for 2 options
+ *     and select for 3 or more.
  *
- * @example <div className="input-row">
- *               <label className="detached">ConditionalFieldset with empty support, set through props</label>
- *               <ConditionalFieldset
- *                   data-id="fieldset-1"
- *                   onValueChange={this._onCondition1ValueChange}
- *                   selectedIndex={this.state.selectedCondition1Index}
- *                   supportEmpty={true}
- *                   stateless={true}
- *                   emptyMessage={"Do Nothing"}
- *                   type={this.state.selectedTypeName} >
- *                   <div title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
- *                   <div title="Option 2">Option 2</div>
- *               </ConditionalFieldset>
- *           </div>
+ * @example
+ *     <div className="input-row">
+ *         <label className="detached">ConditionalFieldset with empty support, set through props</label>
+ *         <ConditionalFieldset
+ *             data-id="fieldset-1"
+ *             onValueChange={this._onCondition1ValueChange}
+ *             selectedIndex={this.state.selectedCondition1Index}
+ *             supportEmpty={true}
+ *             stateless={true}
+ *             emptyMessage={"Do Nothing"}
+ *             type={this.state.selectedTypeName} >
+ *             <div title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
+ *             <div title="Option 2">Option 2</div>
+ *         </ConditionalFieldset>
+ *     </div>
  *
- * @example <div className="input-row">
- *               <label className="detached">ConditionalFieldset with empty support, set through dom, stateful</label>
- *               <ConditionalFieldset
- *                   data-id="fieldset-4"
- *                   type={this.state.selectedTypeName} >
- *                   <div title="Do nothing"></div>
- *                   <div title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
- *                   <div title="Option 2">Option 2</div>
- *               </ConditionalFieldset>
- *           </div>
+ * @example
+ *     <div className="input-row">
+ *         <label className="detached">ConditionalFieldset with empty support, set through dom, stateful</label>
+ *         <ConditionalFieldset
+ *             data-id="fieldset-4"
+ *             type={this.state.selectedTypeName} >
+ *             <div title="Do nothing"></div>
+ *             <div title="Option 1"><span>Option with some <strong>MARKUP</strong></span></div>
+ *             <div title="Option 2">Option 2</div>
+ *         </ConditionalFieldset>
+ *     </div>
  *
  */
 class ConditionalFieldset extends React.Component {

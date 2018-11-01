@@ -1,6 +1,7 @@
 import React from "react";
 import InputRow from "../../../components/layout/InputRow";
 import FormTextField from "../../../components/forms/form-text-field";
+import InputWidths from "../../../components/forms/InputWidths";
 
 
 const InputRowDemo = () => {
@@ -9,13 +10,13 @@ const InputRowDemo = () => {
             <InputRow>
                 <FormTextField
                     labelText="First Name"
-                    className="input-width-small"
+                    width={InputWidths.SM}
                     data-id="firstName"
                     required={true}
                 />
                 <FormTextField
                     labelText="Last Name"
-                    className="input-width-small"
+                    width={InputWidths.SM}
                     data-id="firstName"
                     required={true}
                 />
@@ -23,7 +24,7 @@ const InputRowDemo = () => {
             <InputRow>
                 <FormTextField
                     labelText="Misc"
-                    className="input-width-small"
+                    width={InputWidths.SM}
                     data-id="firstName"
                     required={true}
                 />

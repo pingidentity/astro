@@ -2,6 +2,7 @@ import React from "react";
 import ConditionalFieldset from "./../../../components/general/ConditionalFieldset";
 import FormRadioGroup from "./../../../components/forms/FormRadioGroup";
 import _ from "underscore";
+import InputWidths from "../../../components/forms/InputWidths";
 
 const typeOptions = [
     { id: 0, name: ConditionalFieldset.Types.SELECT },
@@ -98,8 +99,8 @@ class ConditionalFieldsetDemo extends React.Component {
                     <ConditionalFieldset
                         data-id="demo-5"
                         label="Input width specified (medium)"
-                        listClassName="input-width-medium"
-                        type={this.state.type}>
+                        type={this.state.type}
+                        inputWidth={InputWidths.MD}>
                         <div title="Option 1">Option 1 content</div>
                         <div title="Option 2">Option 2 content</div>
                     </ConditionalFieldset>

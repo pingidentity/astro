@@ -11,6 +11,7 @@ var React = require("react"),
 
 import Button from "../../components/buttons/Button";
 import Modal from "../../components/general/Modal";
+import InputWidths from "../../components/forms/InputWidths";
 
 
 /**
@@ -340,20 +341,22 @@ class ComplexField extends React.Component {
                 <FormTextField labelText="First part"
                     data-id="field1"
                     value={this.props.field1}
-                    className="input-width-small"
-                    onValueChange={this._handleField1Change} />
-
+                    width={InputWidths.SM}
+                    onValueChange={this._handleField1Change}
+                />
                 <FormTextField labelText="second part"
                     data-id="field2"
                     value={this.props.field2}
-                    className="input-width-small"
-                    onValueChange={this._handleField2Change} />
-
+                    width={InputWidths.SM}
+                    onValueChange={this._handleField2Change}
+                />
                 <FormTextField labelText="third part"
                     data-id="fieldd"
                     value={this.props.field3}
-                    className="input-width-xsmall"
-                    onValueChange={this._handleField3Change} />
-            </div>);
+                    width={InputWidths.XS}
+                    onValueChange={this._handleField3Change}
+                />
+            </div>
+        );
     }
 }

@@ -1,8 +1,12 @@
-var PropTypes = require("prop-types");
-var React=require("react"),
-    classnames = require("classnames"),
-    FormLabel = require("./FormLabel"),
-    FormError = require("./FormError");
+import React from "react";
+import PropTypes from "prop-types";
+
+import FormError from "./FormError";
+import FormLabel from "./FormLabel";
+import { InputWidthProptypes, getInputWidthClass } from "./InputWidths";
+
+import classnames from "classnames";
+
 
 /**
  * @callback FormCheckbox~onChange
@@ -22,74 +26,74 @@ var React=require("react"),
  * @class FormCheckbox
  * @desc A checkbox field component.
  *
+ * @param {string} [className]
+ *    CSS classes to set on the top-level HTML container.
  * @param {string} [data-id="form-checkbox-container"]
  *    To define the base "data-id" value for the top-level HTML container.
  *    Note that "-container" will be appended to the "data-id" set on the top-level HTML container,
  *    and the "data-id" string will be set on the checkbox "input" elelment under the top-level HTML container.
- * @param {string} [className]
- *    CSS classes to set on the top-level HTML container.
- *
- * @param {boolean} [checked=false]
- *    Whether or not the checkbox is checked.
- * @param {FormCheckbox~onChange} [onChange]
- *    Callback to be triggered when checkbox is toggled. It will receive the triggering event.
- * @param {FormCheckbox~onValueChange} ]onValueChange]
- *    Callback to be triggered when checkbox is toggled. It will receive the component's value.
- *
+ * @param {string} [errorMessage]
+ *    The message to display if defined when external validation failed.
  * @param {string} [label]
  *    Label text to be displayed.
  * @param {string} [labelHelpText]
  *    Label help text to be displayed.
  * @param {string} [helpClassName]
  *    CSS classes to set on the HelpHint component.
- * @param {object} [helpTarget]
- *     An optional icon or image to replace standard help hint icon
- *
  * @param {string} [name]
  *    The name value for the input.
  * @param {string} [value]
  *    The value for the input.
+* @param {("XS" | "SM" | "MD" | "LG" | "XL" | "XX" | "MAX")} [width]
+*    Specifies the width of the input.
  *
+ * @param {boolean} [checked=false]
+ *    Whether or not the checkbox is checked.
  * @param {boolean} [disabled=false]
  *    If true, disables current checkbox and styles opacity.
+ * @param {boolean} [inline=false]
+ *    If true, adds "inline" className for inline boxes
  * @param {boolean} [stacked=false]
  *    If true, adds "stacked" className for label on right side
  *
- * @param {boolean} [inline=false]
- *    If true, adds "inline" className for inline boxes
+ * @param {object} [helpTarget]
+ *     An optional icon or image to replace standard help hint icon
  *
- * @param {string} [errorMessage]
- *    The message to display if defined when external validation failed.
+ * @param {FormCheckbox~onChange} [onChange]
+ *    Callback to be triggered when checkbox is toggled. It will receive the triggering event.
+ * @param {FormCheckbox~onValueChange} ]onValueChange]
+ *    Callback to be triggered when checkbox is toggled. It will receive the component's value.
  *
  * @example
  *
- *       <FormCheckbox label="Regular Checkbox"
- *                 data-id="form-checkbox"
- *                 onChange={this._changeCallback} />
- *
+ *     <FormCheckbox label="Regular Checkbox"
+ *         data-id="form-checkbox"
+ *         onChange={this._changeCallback}
+ *     />
  */
 class FormCheckbox extends React.Component {
     static propTypes = {
-        "data-id": PropTypes.string,
         className: PropTypes.string,
         checked: PropTypes.bool,
-        onChange: PropTypes.func,
-        onValueChange: PropTypes.func,
-        label: PropTypes.string,
-        labelHelpText: PropTypes.string,
+        "data-id": PropTypes.string,
+        disabled: PropTypes.bool,
+        errorMessage: PropTypes.string,
         helpClassName: PropTypes.string,
         helpTarget: PropTypes.bool,
         inline: PropTypes.bool,
+        label: PropTypes.string,
+        labelHelpText: PropTypes.string,
         name: PropTypes.string,
+        onChange: PropTypes.func,
+        onValueChange: PropTypes.func,
         stacked: PropTypes.bool,
         value: PropTypes.string,
-        disabled: PropTypes.bool,
-        errorMessage: PropTypes.string
+        width: PropTypes.oneOf(InputWidthProptypes),
     };
 
     static defaultProps = {
-        "data-id": "form-checkbox",
         checked: false,
+        "data-id": "form-checkbox",
         disabled: false,
         inline: false,
         stacked: false,
@@ -105,12 +109,21 @@ class FormCheckbox extends React.Component {
     };
 
     render() {
-        var labelClassName = classnames("input-checkbox", this.props.className, {
-            disabled: this.props.disabled,
-            "form-error": this.props.errorMessage,
-            stacked: this.props.stacked,
-            inline: this.props.inline,
-        });
+        const labelClassName = classnames(
+            "input-checkbox",
+            this.props.className,
+            getInputWidthClass({
+                className: this.props.className,
+                defaultClass: null,
+                width: this.props.width,
+            }),
+            {
+                disabled: this.props.disabled,
+                "form-error": this.props.errorMessage,
+                stacked: this.props.stacked,
+                inline: this.props.inline,
+            }
+        );
 
         return (
             <FormLabel data-id={this.props["data-id"] + "-container"}

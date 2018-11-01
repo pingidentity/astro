@@ -1,8 +1,9 @@
-var React = require("react"),
+const React = require("react"),
     FilterUtils = require("../../../util/FilterUtils.js"),
-    FormSearchBox = require("../../../components/forms/FormSearchBox");
+    FormSearchBox = require("../../../components/forms/FormSearchBox"),
+    InputWidths = require("../../../components/forms/InputWidths");
 
-var ITEMS = [
+const ITEMS = [
     { id: 1, name: "apples" },
     { id: 2, name: "oranges" },
     { id: 3, name: "bananas" },
@@ -89,7 +90,7 @@ class FormSearchBoxDemo extends React.Component {
                         onFocus={this._handleFocus}
                         onBlur={this._handleBlur}
                         onClear={this._handleClear}
-                        className="input-width-medium"
+                        width={InputWidths.MD}
                         name="search-box"
                     />
                 </div>

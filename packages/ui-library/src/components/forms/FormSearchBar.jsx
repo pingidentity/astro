@@ -5,6 +5,7 @@ import FormSearchBox from "./FormSearchBox";
 import CollapsibleLink from "../general/CollapsibleLink";
 import Anchor from "../general/Anchor";
 import _ from "underscore";
+import { InputWidths } from "../forms/InputWidths";
 
 /**
  * @class FormSearchBar
@@ -89,6 +90,7 @@ class SearchBar extends React.Component {
             <FormSearchBox
                 data-id={`${dataId}-input`}
                 className="searchbar__input"
+                width={InputWidths.MAX}
                 {...props}
                 {...formSearchBoxProps}
             />

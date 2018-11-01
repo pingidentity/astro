@@ -16,13 +16,13 @@ import classnames from "classnames";
 <InputRow>
     <FormTextField
         labelText="First Name"
-        className="input-width-small"
+        width={InputWidths.SM}
         data-id="firstName"
         required={true}
     />
     <FormTextField
         labelText="Last Name"
-        className="input-width-small"
+        width={InputWidths.SM}
         data-id="firstName"
         required={true}
     />
