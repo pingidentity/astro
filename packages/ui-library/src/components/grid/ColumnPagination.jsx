@@ -122,7 +122,7 @@ module.exports = class extends React.Component {
         if (this.props.total && this.props.perPage) {
             return Math.ceil(this.props.total / this.props.perPage);
         } else {
-            throw("props.total and props.perPage must be defined to determine the number of page links!");
+            throw ("props.total and props.perPage must be defined to determine the number of page links!");
         }
     };
 

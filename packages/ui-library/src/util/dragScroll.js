@@ -68,6 +68,21 @@ var findScrollParent = function (element, axis) {
     return element.parentNode;
 };
 
+var getScrollDirection = function (element, axis, e, buffer) {
+    var edge1 = axis === SCROLL_AXIS.X ? "left" : "top";
+    var edge2 = axis === SCROLL_AXIS.X ? "right" : "bottom";
+    var rect = element.getBoundingClientRect();
+    var client = e["client" + axis];
+
+    if (client < rect[edge1] + buffer) {
+        return -1;
+    } else if (client > rect[edge2] - buffer) {
+        return 1;
+    } else {
+        return null;
+    }
+};
+
 var getScrollParents = function (element, e, buffer) {
     var parent = {};
     var pX = findScrollParent(element, SCROLL_AXIS.X);
@@ -95,21 +110,6 @@ var getScrollParents = function (element, e, buffer) {
     return parent;
 };
 
-var getScrollDirection = function (element, axis, e, buffer) {
-    var edge1 = axis === SCROLL_AXIS.X ? "left" : "top";
-    var edge2 = axis === SCROLL_AXIS.X ? "right" : "bottom";
-    var rect = element.getBoundingClientRect();
-    var client = e["client" + axis];
-
-    if (client < rect[edge1] + buffer) {
-        return -1;
-    } else if (client > rect[edge2] - buffer) {
-        return 1;
-    } else {
-        return null;
-    }
-};
-
 var scrollParent = {};
 var scrollInterval = {};
 
@@ -118,6 +118,11 @@ var opts = {
     DRAGDELAY: 300,
     SCROLLDELAY: 10,
     SCROLLPIXELS: 5,
+};
+
+var clearScroll = function (axis) {
+    clearInterval(scrollInterval[axis]);
+    scrollInterval[axis] = null;
 };
 
 var onDragOver = function (e) {
@@ -143,11 +148,6 @@ var onDragOver = function (e) {
             ? setInterval(getScrollFunction(scrollParent[axis].element, axis, direction, opts.SCROLLPIXELS),opts.SCROLLDELAY) //eslint-disable-line
             : undefined;
     }
-};
-
-var clearScroll = function (axis) {
-    clearInterval(scrollInterval[axis]);
-    scrollInterval[axis] = null;
 };
 
 var start = function () {

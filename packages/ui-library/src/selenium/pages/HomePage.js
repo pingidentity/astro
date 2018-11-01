@@ -1,6 +1,6 @@
 var Page = require("./Page.js");
-var ScreenshotUtils = require("../../util/ScreenshotUtils.js");
-var ScreenshotComparisonException = require("../../util/ScreenshotComparisonException.js");
+var ScreenshotUtils = require("../../devUtil/ScreenshotUtils.js");
+var ScreenshotComparisonException = require("../../devUtil/ScreenshotComparisonException.js");
 var wdioConfig = require("../../../wdio.conf.js").config;
 
 var HomePage = Object.create(Page, {
@@ -85,7 +85,7 @@ var HomePage = Object.create(Page, {
             if (!pageName) {
                 pageName = categoryName;
             }
-            
+
             this.openNavRoot(rootName);
             if (categoryName) {
                 this.openNavNode(categoryName);

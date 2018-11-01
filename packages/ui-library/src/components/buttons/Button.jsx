@@ -70,7 +70,7 @@ class Button extends Component {
 
         const TagName = this.props.href ? "a" : "button";
 
-        return(
+        return (
             <TagName
                 className = {classes}
                 data-id={this.props["data-id"]}

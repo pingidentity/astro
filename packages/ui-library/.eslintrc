@@ -29,7 +29,7 @@
 		"quotes": [
 			2,
 			"double",
-			"avoid-escape"
+			{ "allowTemplateLiterals": true, "avoidEscape": true }
 		],
 		"no-cond-assign": [2],
 		"no-dupe-args": [2],
@@ -86,8 +86,7 @@
 			}
 		],
 		"object-curly-spacing": [2, "always"],
-		"space-before-keywords": [2],
-		"space-after-keywords": [2],
+		"keyword-spacing": [2, {"before": true, "after": true}],
 		"space-before-blocks": [2],
 		"operator-linebreak": [
 			2,
@@ -112,16 +111,33 @@
 		"react/react-in-jsx-scope": [2],
 		"react/self-closing-comp": [1],
 		"react/wrap-multilines": [2],
-		"react/jsx-no-bind": [2, { "ignoreRefs": true }]
+		"react/jsx-no-bind": [2, { "ignoreRefs": true }],
+		"import/no-extraneous-dependencies": [
+			2,
+			{
+				"devDependencies": [
+					"!/**/src/**",
+					"**/demo/**",
+					"**/templates/**",
+					"**/selenium/**",
+					"**/tutorials/**",
+					"**/*Test?(s).js?(x)",
+					"**/devUtil/**"
+				],
+				"optionalDependencies": true
+			}
+		]
 	},
 	"plugins": [
-		"react"
+		"react",
+		"import"
 	],
 	"settings": {
 		"ecmascript": 6,
 		"jsx": true
 	},
 	"env": {
+		"es6": true,
 		"browser": true,
 		"node": true,
 		"jest": true,

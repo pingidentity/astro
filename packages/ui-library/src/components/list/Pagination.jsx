@@ -268,7 +268,7 @@ class PaginationStateless extends React.Component {
         } else if (this.props.total && this.props.perPage) {
             return Math.ceil(this.props.total / this.props.perPage);
         } else {
-            throw("Either props.totalPages OR (props.total and props.perPage) must be defined to \
+            throw ("Either props.totalPages OR (props.total and props.perPage) must be defined to \
                 determine the number of page links to render!");
         }
     };

@@ -88,7 +88,6 @@ const AuthnPolicyReducer = function (state, action) {
 
                 return update.set(state, ["draftStep"], formData);
             }
-            break;
         case Actions.Types.CANCEL_EDIT_STEP:
             return update.set(state, ["draftStep"], {});
         case Actions.Types.SAVE_STEP:
@@ -103,7 +102,6 @@ const AuthnPolicyReducer = function (state, action) {
                     ), "draftStep", {}
                 );
             }
-            break;
         case Actions.Types.CHANGE_VALUE:
             const path = ["draftStep"].concat(action.path);
             return update.set(
@@ -114,8 +112,6 @@ const AuthnPolicyReducer = function (state, action) {
         default:
             return state || initialState;
     }
-
-    return state;
 };
 
 export default combineReducers({ authn: AuthnPolicyReducer, messages: Messages.Reducer });

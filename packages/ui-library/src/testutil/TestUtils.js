@@ -14,7 +14,6 @@ var ReactDOM = require("react-dom");
 var React = require("react");
 var ReactTestUtils = require("react-dom/test-utils");
 var _ = require("underscore");
-var assign = require("object-assign");
 
 var TestUtils = {
 
@@ -420,7 +419,7 @@ var TestUtils = {
  *
  */
 TestUtils.UpdatePropsWrapper = class extends React.Component {
-    state = assign({ ref: "wrapper" }, this.props);
+    state = { ...this.props, ref: "wrapper" };
 
     /*
      * Re-render the wrapped component using the new property.

@@ -676,7 +676,7 @@ class FormDropDownListStateless extends React.Component {
                 </span>
             );
 
-        return(
+        return (
             <OptionItem
                 key="none-option"
                 data-id="none-option"

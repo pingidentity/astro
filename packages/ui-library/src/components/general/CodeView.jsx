@@ -24,7 +24,7 @@ class Code extends Component {
         "data-id": "code-view"
     }
     render() {
-        return(
+        return (
             <SelectText data-id={this.props["data-id"]}>
                 <div className="code-view">
                     <pre>
