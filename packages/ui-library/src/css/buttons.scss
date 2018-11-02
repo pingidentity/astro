@@ -499,6 +499,19 @@ button.tile-button {
         }
     }
 
+    &__details {
+        text-align: left;
+        color: $color-neutral-50;
+        list-style: disc inside;
+        margin-top: $spacing-sm;
+    }
+
+    &__divider {
+        border-top: 1px solid $color-neutral-50;
+        margin-top: $spacing-sm;
+        width: 100%;
+    }
+
     &__icon {
         font-size: 80px;
         color: $color-midnight;
@@ -507,6 +520,9 @@ button.tile-button {
 
     &__content {
         @include flexbox-grow(1);
+
+        line-height: 1.3em;
+        text-align: left;
     }
 
     &__title {

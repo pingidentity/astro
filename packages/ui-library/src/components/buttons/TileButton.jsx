@@ -14,6 +14,8 @@ import classnames from "classnames";
  *     Defines the "data-id" for top-level HTML container.
  * @param {string} [description]
  *     The blob of text between the icon and the title
+ * @param {string[]} [details]
+ *     A list of details displayed below the main content.
  * @param {string} [iconName]
  *     The name of the icon
  * @param {function} [onClick]
@@ -29,27 +31,38 @@ import classnames from "classnames";
  * </TileButton>
  *
  */
-const TileButton = (props) => {
-    const {
-        panel,
-        selected,
-        title
-    } = props;
+const TileButton = ({
+    children,
+    className,
+    "data-id": dataId,
+    details,
+    onClick,
+    panel,
+    selected,
+    title,
+    ...props
+}) => {
     const iconClassName = getIconClassName(props);
-    const classNames = classnames("tile-button", props.className, {
+    const classNames = classnames("tile-button", className, {
         "tile-button--selected": selected
     },
     (panel && selected) ? "tile-button--panel" : ""
     );
 
     return (
-        <button className={classNames} data-id={props["data-id"]} onClick={props.onClick}>
+        <button className={classNames} data-id={dataId} onClick={onClick}>
             {iconClassName &&
                 <div className={classnames("tile-button__icon", iconClassName)}/>
             }
             <div className="tile-button__content">
-                {props.children}
+                {children}
             </div>
+            {details && [
+                <div className="tile-button__divider" key="divider" />,
+                <ul key="details" className="tile-button__details">
+                    {details.map(detail => <li>{detail}</li>)}
+                </ul>
+            ]}
             {title &&
                 <div className="tile-button__title">
                     {title}
@@ -63,6 +76,7 @@ TileButton.propTypes = {
     className: PropTypes.string,
     "data-id": PropTypes.string,
     description: PropTypes.string,
+    details: PropTypes.arrayOf(PropTypes.string),
     iconName: PropTypes.string,
     onClick: PropTypes.func,
     panel: PropTypes.bool,

@@ -21,7 +21,14 @@ class TileSelectorDemo extends React.Component {
         return (
             <div>
                 <TileSelector>
-                    <TileSelector.TileButton title="Web App" iconName="network">
+                    <TileSelector.TileButton
+                        details={[
+                            "Cloud-based",
+                            "Easily accessible"
+                        ]}
+                        iconName="network"
+                        title="Web App"
+                    >
                         Cloud-based apps that are accessed within a browser.
                     </TileSelector.TileButton>
                     <TileSelector.TileButton title="Native App" iconName="device" selected>

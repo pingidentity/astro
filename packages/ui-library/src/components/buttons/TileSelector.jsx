@@ -124,6 +124,7 @@ TileSelector.propTypes = {
     options: PropTypes.arrayOf(
         PropTypes.shape({
             description: PropTypes.string,
+            details: PropTypes.arrayOf(PropTypes.string),
             iconName: PropTypes.string,
             panel: PropTypes.shape({
                 className: PropTypes.string,
