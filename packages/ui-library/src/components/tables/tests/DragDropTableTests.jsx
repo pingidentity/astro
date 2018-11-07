@@ -196,6 +196,26 @@ describe("DragDropTable", function () {
         expect(component.state.columnWidths.length).toBe(3);
     });
 
+    it("handles headData with specific widths", () => {
+        const {
+            cols: [first, ...cols]
+        } = mockData;
+
+        getComponent({
+            fixedHead: true,
+            headData: [
+                {
+                    content: first,
+                    width: 500
+                },
+                ...cols
+            ]
+        });
+
+        jest.runAllTimers();
+        expect(thisComponent.state.columnWidths[0]).toEqual(500);
+    });
+
     it("renders with InfiniteScroll and fires scroll callback", function () {
         var infiniteScrollProps = {
             onNext: jest.genMockFunction,

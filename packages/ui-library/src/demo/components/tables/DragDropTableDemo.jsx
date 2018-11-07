@@ -149,19 +149,30 @@ class DragDropTableDemo extends React.Component {
     };
 
     render() {
-        var infiniteScrollProps = {
+        const infiniteScrollProps = {
             onLoadPrev: _.noop,
             onLoadNext: this._onNext,
             hasNext: this.state.hasNext,
             batches: this.state.batches
         };
+
+        // Individual columns can have hard-coded widths by passing in an object
+        // with a content and width property instead of a string for that array member.
+        const [first, ...headings] = this.state.headings;
+        const withWidth = [
+            {
+                content: first,
+                width: 250
+            },
+            ...headings
+        ];
         return (
             <div data-id="dragDropRowDemo" id="dragDemoParent">
 
                 <div className="instructions">Basic Drag and drop table with fixed head</div>
 
                 <DragDropTable
-                    headData={this.state.headings}
+                    headData={withWidth}
                     columnOrder={this.state.order}
                     headContentType={this._getHeadContentType(this._sort)}
                     bodyData={this.state.rows}
