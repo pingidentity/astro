@@ -147,8 +147,10 @@ export default class ColumnSelectorDemo extends Component {
         console.log("onToggleOption called with: ", payload);
     }
 
-    _toggleTooltip = e => {
-        e.stopPropagation();
+    _toggleTooltip = (e) => {
+        if (e) {
+            e.stopPropagation();
+        }
         this.setState(({ tooltipOpen }) => ({ tooltipOpen: !tooltipOpen }));
     }
 
