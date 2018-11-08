@@ -1,5 +1,6 @@
 import React from "react";
 import PageSection from "ui-library/lib/components/layout/PageSection";
+import HelpHint from "ui-library/lib/components/tooltips/HelpHint";
 
 /**
 * @name PageSectionDemo
@@ -8,6 +9,8 @@ import PageSection from "ui-library/lib/components/layout/PageSection";
 */
 class PageSectionDemo extends React.Component {
     render() {
+        const helpHint = <span>Would you like <HelpHint hintText="Some help?" className="inline" /></span>;
+
         return (
             <div>
                 <PageSection
@@ -42,6 +45,10 @@ class PageSectionDemo extends React.Component {
                     This section is merely indented. This section is merely indented.
                      This section is merely indented. This section is merely indented.
                      This section is merely indented. This section is merely indented.
+                </PageSection>
+                <hr className="hr" />
+                <PageSection title={helpHint}>
+                    You can put markup in the title prop as well.
                 </PageSection>
             </div>
         );

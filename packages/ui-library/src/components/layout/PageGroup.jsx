@@ -9,7 +9,7 @@ import classnames from "classnames";
  *          To define the base "data-id" value for the top-level HTML container.
  * @param {string} [className]
  *      class name(s) to add to the top-level container/div
- * @param {string} title
+ * @param {string|node} title
  *     Title of section
  * @example <PageGroup data=id="page-group" />
  */
@@ -31,7 +31,7 @@ const PageGroup = ({
 PageGroup.propTypes = {
     className: PropTypes.string,
     "data-id": PropTypes.string,
-    title: PropTypes.string
+    title: PropTypes.node
 };
 
 PageGroup.defaultProps = {

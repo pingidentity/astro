@@ -1,5 +1,6 @@
 import React from "react";
 import PageGroup from "../../../components/layout/PageGroup";
+import HelpHint from "ui-library/lib/components/tooltips/HelpHint";
 
 /**
 * @name PageGroupDemo
@@ -8,10 +9,11 @@ import PageGroup from "../../../components/layout/PageGroup";
 */
 
 const PageGroupDemo = () => {
+    const helpHint = <span>Would you like <HelpHint hintText="Some help?" className="inline" /></span>;
+
     return (
-        <PageGroup
-                title="Here is your Group Header"
-            >
+        <div>
+            <PageGroup title="Here is your Group Header">
                 Bacon ipsum dolor amet pork belly leberkas short loin filet mignon capicola.
                 Picanha ribeye meatloaf, doner beef frankfurter sirloin burgdoggen prosciutto ball tip.
                 Kevin spare ribs salami capicola meatball shoulder rump alcatra.
@@ -20,6 +22,12 @@ const PageGroupDemo = () => {
                 steak pork loin boudin porchetta frankfurter beef.
                 Buffalo ham hock meatloaf kielbasa.
             </PageGroup>
+            <hr className="hr" />
+            <PageGroup title={helpHint}>
+                You can put markup in the title.
+            </PageGroup>
+        </div>
     );
 };
+
 module.exports = PageGroupDemo;

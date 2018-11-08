@@ -12,7 +12,7 @@ import classnames from "classnames";
 *     Class name(s) to add to the top-level container/div
 * @param {string} description
 *     Intro paragraph to the section
-* @param {string} title
+* @param {string|node} title
 *     Title of section
 */
 const PageSection = ({
@@ -42,7 +42,7 @@ PageSection.propTypes = {
     className: PropTypes.string,
     "data-id": PropTypes.string,
     description: PropTypes.string,
-    title: PropTypes.string,
+    title: PropTypes.node,
 };
 
 PageSection.defaultProps = {
