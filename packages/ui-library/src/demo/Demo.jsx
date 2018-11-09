@@ -304,6 +304,7 @@ class DemoApp extends React.Component {
                         demoCodePathUrl={this._getSourceUrl(demoPath)}
                         importPath={this._getImportPath(this._demoItem.pathToSource)}
                         code={this.props.code[id]}
+                        status={this._demoItem.status}
                         fullscreen={this._demoItem.fullscreen} />
                 </div>
 

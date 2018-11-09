@@ -533,7 +533,11 @@ module.exports = [
                         demo: require("../components/wizard/WizardDemo"),
                         pathToDoc: "components/wizard/Wizard.jsx",
                         pathToSource: "components_wizard_Wizard.jsx.html",
-                        pathToDemoSource: "demo_components_wizard_WizardDemo.jsx.html"
+                        pathToDemoSource: "demo_components_wizard_WizardDemo.jsx.html",
+                        status: {
+                            type: "design-deprecated",
+                            use: "Wizard V2",
+                        },
                     },
                     {
                         label: "Wizard - v2",
@@ -568,7 +572,11 @@ module.exports = [
                         demo: require("../components/grid/GridDemo"),
                         pathToDoc: "components/grid/Grid.jsx",
                         pathToSource: "components_grid_Grid.jsx.html",
-                        pathToDemoSource: "demo_components_grid_GridDemo.jsx.html"
+                        pathToDemoSource: "demo_components_grid_GridDemo.jsx.html",
+                        status: {
+                            type: "design-deprecated",
+                            use: "Table",
+                        },
                     },
                     {
                         label: "Expandable Row",

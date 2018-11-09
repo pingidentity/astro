@@ -1,11 +1,11 @@
-var React = require("react"),
-    classnames = require("classnames"),
-    marked = require("marked"),
-    Markup = require("./Markup"),
-    PageHeader = require("../../components/general/PageHeader"),
-    _ = require("underscore");
-
+import React from "react";
+import classnames from "classnames";
+import marked from "marked";
+import _ from "underscore";
+import Markup from "./Markup";
+import PageHeader from "ui-library/lib/components/general/PageHeader";
 import StretchContent from "ui-library/lib/components/layout/StretchContent";
+import InlineMessage from "ui-library/lib/components/general/InlineMessage";
 
 class DemoItem extends React.Component {
     static propTypes = {
@@ -46,7 +46,8 @@ class DemoItem extends React.Component {
             description,
             fullscreen,
             jsdocUrl,
-            type
+            type,
+            status,
         } = this.props;
 
         // This is very important because Redux updates are not instant.  When replacing the demoItemReducer,
@@ -92,6 +93,14 @@ class DemoItem extends React.Component {
 
                 </div>
                 <StretchContent className="section-content">
+                    {status && (status === "design-deprecated" || status.type === "design-deprecated") &&
+                        <InlineMessage type={InlineMessage.MessageTypes.WARNING}>
+                            This component is <strong>design-deprecated</strong>.
+                            It should not appear in new designs,
+                            and when possible, we should replace existing uses of it.
+                            {status.use && ` Please use ${status.use} instead.`}
+                        </InlineMessage>
+                    }
                     <div className="demo-description"
                          dangerouslySetInnerHTML={{ __html: markdown }}></div>
 
