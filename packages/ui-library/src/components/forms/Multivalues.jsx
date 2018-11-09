@@ -94,6 +94,8 @@ class MultivaluesOption extends React.Component {
  *     If true, each value occupies it's own line.
  * @param {boolean} [required=false]
  *     If true, the user must enter an entry to the field.
+ * @param {boolean} [autoFocus=false]
+ *     Whether or not to auto-focus the element.
  *
 
  *
@@ -130,6 +132,7 @@ class Multivalues extends React.Component {
         required: PropTypes.bool,
         stacked: PropTypes.bool,
         iconName: PropTypes.string,
+        autoFocus: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -138,6 +141,7 @@ class Multivalues extends React.Component {
         name: "value-entry",
         stacked: false,
         required: false,
+        autoFocus: false,
         onNewValue: function (keyCode) {
             if (keyCode === 13 || keyCode === 188 || keyCode === 9 || keyCode === 32) {
                 return true;
@@ -323,6 +327,7 @@ class Multivalues extends React.Component {
                             onBlur={this._handleBlur}
                             onChange={this._handleChange}
                             onKeyDown={this._handleKeyDown}
+                            autoFocus={this.props.autoFocus}
                         />
                     </div>
                     <div ref = "hidden-div" style = {hiddenStyle} />

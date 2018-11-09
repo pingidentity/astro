@@ -68,6 +68,7 @@ class MultivaluesDemo extends React.Component {
                         stateless={false}
                         entries={this.state.entries}
                         onValueChange={this._handleValueChange}
+                        autoFocus={true}
                     />
                 </div>
 

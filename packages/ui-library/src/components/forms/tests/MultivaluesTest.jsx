@@ -26,7 +26,8 @@ describe("FormTextField", function () {
                     "Entry 3",
                     "Entry 4"
                 ]}
-                onValueChange={callback} />
+                onValueChange={callback}
+                autofocus={false}/>
         );
         entries = TestUtils.scryRenderedDOMNodesWithClass(component, "entry");
         input = TestUtils.findRenderedDOMNodeWithDataId(component,"value-entry");
@@ -247,6 +248,16 @@ describe("FormTextField", function () {
                 />
             );
         }).toThrow(expectedError);
+    });
+
+    it("renders with autofocus true", function () {
+        component = ReactTestUtils.renderIntoDocument(
+            <Multivalues title="Sites" data-id="multivalues" autoFocus={true}/>
+        );
+
+        const focus = TestUtils.findRenderedDOMNodeWithDataId(component, "value-entry");
+
+        expect(document.activeElement).toEqual(focus);
     });
 
 });
