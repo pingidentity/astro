@@ -66,7 +66,7 @@ import popsOver from "../../util/behaviors/popsOver";
 
 
 class ConfirmTooltipBase extends Component {
-    static PropTypes = {
+    static propTypes = {
         "data-id": PropTypes.string,
         onConfirm: PropTypes.func,
         onCancel: PropTypes.func,
