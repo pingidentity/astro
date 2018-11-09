@@ -3,10 +3,10 @@
 @font-face {
   font-family: '#{$icomoon-font-family}';
   src:
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff2?k8p9wx') format('woff2'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?k8p9wx') format('truetype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?k8p9wx') format('woff'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?k8p9wx##{$icomoon-font-family}') format('svg');
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff2?m2dyk6') format('woff2'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?m2dyk6') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?m2dyk6') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?m2dyk6##{$icomoon-font-family}') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -99,6 +99,12 @@
 .icon-calendar {
   &:before {
     content: $icon-calendar;
+  }
+}
+.icon-cert-connection {
+  &:before {
+    content: $icon-cert-connection;
+    color: #474c50;
   }
 }
 .icon-certificate {
