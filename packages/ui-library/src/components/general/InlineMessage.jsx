@@ -38,8 +38,10 @@ var React = require("react"),
  *     also pass the callback function.
  * @param {boolean} [bordered=true]
  *     Whether or not to surround the inline message with a border.
- * @param {boolean} [alternate=true]
+ * @param {boolean} [alternate]
  *     Warning message with full background color and no icon.
+ *  @param {boolean} [fullwidth]
+ *     when true creates a full page width inline message.
  * @param {InlineMessage~onClick} [onClick]
  *     Callback to be triggered when the button is clicked.
  *  @param {Array.InlineMessage~secondaryButtons} [secondaryButtons]
@@ -60,6 +62,7 @@ var React = require("react"),
 class InlineMessage extends React.Component {
     static propTypes = {
         alternate: PropTypes.bool,
+        fullwidth: PropTypes.bool,
         bordered: PropTypes.bool,
         className: PropTypes.string,
         "data-id": PropTypes.string,
@@ -100,7 +103,8 @@ class InlineMessage extends React.Component {
     render() {
         var className = classnames("inline-message", this.props.type, {
             "inline-message--borderless": !this.props.bordered,
-            "inline-message--alternate": this.props.alternate
+            "inline-message--alternate": this.props.alternate,
+            "inline-message--fullwidth": this.props.fullwidth
         });
 
         return (

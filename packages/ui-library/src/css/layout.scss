@@ -959,6 +959,10 @@ $color-grey-minor-1: $color-neutral-30;
         }
     }
 
+    &--fullwidth {
+        display: block;
+    }
+
     &--borderless {
         &,
         &.warning,

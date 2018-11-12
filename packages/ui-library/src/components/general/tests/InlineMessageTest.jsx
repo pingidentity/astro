@@ -126,6 +126,15 @@ describe("InlineMessage", function () {
         expect(component).toBeTruthy();
     });
 
+    it("displays a full width message", function () {
+        const text = "Message text";
+        const view = getComponent({ "data-id": "message-fullwidth", fullwidth: true }, text);
+
+        const component = TestUtils.findRenderedDOMNodeWithClass(view, "inline-message--fullwidth");
+
+        expect(component).toBeTruthy();
+    });
+
     it("throws error when deprecated prop 'callback' is passed in", function () {
         var expectedError = new Error(Utils.deprecatePropError("callback", "onClick"));
 

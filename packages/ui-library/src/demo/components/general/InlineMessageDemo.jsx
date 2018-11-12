@@ -31,7 +31,11 @@ class InlineMessageDemo extends React.Component {
                     Warning message
                 </InlineMessage>
 
-                <InlineMessage type={ InlineMessage.MessageTypes.WARNING} alternate={true}>
+                <InlineMessage type={ InlineMessage.MessageTypes.WARNING } fullwidth>
+                    Full Width Warning message
+                </InlineMessage>
+
+                <InlineMessage type={ InlineMessage.MessageTypes.WARNING} alternate>
                     Warning message
                 </InlineMessage>
 
@@ -39,15 +43,19 @@ class InlineMessageDemo extends React.Component {
                     Error message
                 </InlineMessage>
 
-                 <InlineMessage type={ InlineMessage.MessageTypes.ERROR} alternate={true}>
+                 <InlineMessage type={ InlineMessage.MessageTypes.ERROR} alternate>
                     Error message
+                </InlineMessage>
+
+                <InlineMessage type={ InlineMessage.MessageTypes.ERROR} alternate fullwidth>
+                    Full Width Alternate Error message
                 </InlineMessage>
 
                 <InlineMessage type={ InlineMessage.MessageTypes.SUCCESS }>
                     Success message
                 </InlineMessage>
 
-                <InlineMessage type={ InlineMessage.MessageTypes.SUCCESS} alternate={true}>
+                <InlineMessage type={ InlineMessage.MessageTypes.SUCCESS} alternate>
                     Success message
                 </InlineMessage>
 
@@ -55,7 +63,7 @@ class InlineMessageDemo extends React.Component {
                     Notice message
                 </InlineMessage>
 
-                <InlineMessage type={ InlineMessage.MessageTypes.NOTICE} alternate={true}>
+                <InlineMessage type={ InlineMessage.MessageTypes.NOTICE} alternate>
                     Notice message
                 </InlineMessage>
 
@@ -90,7 +98,7 @@ class InlineMessageDemo extends React.Component {
                     type={ InlineMessage.MessageTypes.WARNING }
                     label="Do Something"
                     onClick={doSomething}
-                    alternate={true}>
+                    alternate>
                     Alternate Message with action.
                 </InlineMessage>
 
@@ -106,7 +114,7 @@ class InlineMessageDemo extends React.Component {
 
                         },
                     ]}
-                    alternate={true}>
+                    alternate>
                     Alternate Message with two actions.
                 </InlineMessage>
 
@@ -114,7 +122,7 @@ class InlineMessageDemo extends React.Component {
                     Message with missing action parameter, must pass label and action.
                 </InlineMessage>
 
-                <InlineMessage type={ InlineMessage.MessageTypes.WARNING } label="Bad button" alternate={true} >
+                <InlineMessage type={ InlineMessage.MessageTypes.WARNING } label="Bad button" alternate>
                     Message with missing action parameter, must pass label and action.
                 </InlineMessage>
 
@@ -122,7 +130,7 @@ class InlineMessageDemo extends React.Component {
                     <strong>Message with markup.</strong>
                 </InlineMessage>
 
-                <InlineMessage type={ InlineMessage.MessageTypes.WARNING } alternate={true}>
+                <InlineMessage type={ InlineMessage.MessageTypes.WARNING } alternate>
                     <strong>Message with markup.</strong>
                 </InlineMessage>
 
