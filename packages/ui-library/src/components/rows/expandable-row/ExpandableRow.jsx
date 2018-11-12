@@ -176,7 +176,7 @@ var ConfirmDeletePositions = {
  * @param {ExpandableRow.RowMessageTypes} [rowMessage]
  *     Displays a message along the top of the expanded row above all row content including the title and row
   *    accessories.
- * @param {object} [rowAccessories]
+ * @param {node} [rowAccessories]
  *     A right-aligned container where buttons, toggles, or anything else may be passed in to render on the right side
  *     of the row, just to the left of the expand button.
  *
@@ -361,7 +361,7 @@ class StatelessExpandableRow extends React.Component {
         onDeleteCancelClick: PropTypes.func,
         onDeleteConfirmClick: PropTypes.func,
         status: PropTypes.oneOf([Statuses.GOOD, Statuses.ERROR, Statuses.WARNING]),
-        rowAccessories: PropTypes.object,
+        rowAccessories: PropTypes.node,
         rowMessage: PropTypes.object,
         waiting: PropTypes.bool,
         ordering: PropTypes.shape({

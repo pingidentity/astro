@@ -137,7 +137,7 @@ class ExpandableRowDemo extends React.Component {
                         text: ([
                             "The optional row message appears at the top of the expanded row only when the row is \
                             expanded.",
-                            <span className="item-message__buttons">
+                            <span key="item-message" className="item-message__buttons">
                                 <Button inline>Foo</Button>
                                 <Button inline>Bar</Button>
                             </span>
@@ -172,14 +172,14 @@ class ExpandableRowDemo extends React.Component {
                     title="Row With a Variety of Right Content"
                     subtitle="Row Subtitle"
                     rowAccessories={[
-                        <a>Link</a>,
-                        <span className="icon-cog" />,
-                        <HelpHint className="width-auto bottom" hintText="Provisioning">
+                        <a key="link">Link</a>,
+                        <span key="icon" className="icon-cog" />,
+                        <HelpHint key="help" className="width-auto bottom" hintText="Provisioning">
                             <label className="row-help">PROV</label>
                         </HelpHint>,
-                        <button className="inline">Inline Button</button>,
-                        <Toggle stateless={false} />,
-                        <span className="count">2</span>
+                        <button key="button"className="inline">Inline Button</button>,
+                        <Toggle key="toggle" stateless={false} />,
+                        <span key="count" className="count">2</span>
                     ]}
                 />
                 <ExpandableRow
@@ -242,11 +242,11 @@ class ExpandableRowDemo extends React.Component {
                     className="invited"
                     expanded={false}
                     rowAccessories={[
-                        <div className="invite-info">
+                        <div key="invite-info" className="invite-info">
                             <div className="invite-status">Invited (Open)</div>
                             <div className="invite-date">2017-4-10 4:35pm</div>
                         </div>,
-                        <button className="inline">Resend Invitation</button>
+                        <button key="button" className="inline">Resend Invitation</button>
                     ]}
                 />
                 <ExpandableRow

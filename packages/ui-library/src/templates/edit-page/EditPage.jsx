@@ -86,8 +86,8 @@ export default class EditPage extends React.Component {
                 <PageHeader title="Denver Broncos"
                         underlined={true}
                         accessories={[
-                            <Button label="Reset Password" inline />,
-                            <Toggle stateless={false} />
+                            <Button label="Reset Password" inline key="button" />,
+                            <Toggle stateless={false} key="toggle"/>
                         ]} />
 
                 <PageSection>
