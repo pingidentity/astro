@@ -82,8 +82,11 @@ class LandingPage extends React.Component {
                             {
                                 label: "Versions",
                                 id: "versions",
-                                children: versions.slice().reverse().map(function (version) {
-                                    return { label: version, id: version };
+                                children: versions.slice().reverse().map(function (version, index) {
+                                    return {
+                                        label: index > 0 ? version.replace("-SNAPSHOT", "") : version,
+                                        id: version
+                                    };
                                 })
                             }
                         ]
