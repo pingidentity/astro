@@ -31,10 +31,13 @@ class TileSelectorDemo extends React.Component {
                     >
                         Cloud-based apps that are accessed within a browser.
                     </TileSelector.TileButton>
-                    <TileSelector.TileButton title="Native App" iconName="device" selected>
+                    <TileSelector.TileButton title="Native App" iconName="device" selected >
                         Applications that are stored and run from a device or desktop.
                     </TileSelector.TileButton>
-                    <TileSelector.TileButton title="Single Page App" iconName="apps">
+                    <TileSelector.TileButton title="Single Page App" iconName="apps" details={[
+                        "Cloud-based",
+                        "Easily accessible"
+                    ]}>
                         Just a bit of text.
                     </TileSelector.TileButton>
                     <TileSelector.TileButton title="Non-Interactive" iconName="server">

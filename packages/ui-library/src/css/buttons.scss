@@ -500,15 +500,30 @@ button.tile-button {
     }
 
     &__details {
+        position: relative;
         text-align: left;
         color: $color-neutral-50;
-        list-style: disc inside;
-        margin-top: $spacing-sm;
+        list-style: none;
+        margin-top: $spacing-lg;
+        line-height: 1em;
+
+        li {
+            margin-bottom: $spacing-xs;
+
+            &:before {
+                content: '•';
+                position: absolute;
+                left: -10px;
+            }
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
     }
 
     &__divider {
         border-top: 1px solid $color-neutral-50;
-        margin-top: $spacing-sm;
+        margin-top: $spacing-lg;
         width: 100%;
     }
 
@@ -529,6 +544,8 @@ button.tile-button {
         color: $color-active-blue;
         font-size: 17px;
         margin-top: $spacing-lg;
+        text-transform: uppercase;
+        word-break: break-word;
     }
 
     &--panel {
