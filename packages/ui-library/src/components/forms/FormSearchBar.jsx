@@ -31,6 +31,8 @@ import _ from "underscore";
  *     A content area that appears to the right of the search field, above the expanded filter area
  * @param {node} [centerControl]
  *     A content area that appears immediately to the right of the search field
+ * @param {variable} [renderDocLink]
+ *      When called it renders a documentation link
  **/
 
 class SearchBar extends React.Component {
@@ -107,9 +109,9 @@ class SearchBar extends React.Component {
             </div>
         );
 
-        const renderDocLink = documentationLink && !filtersOpen ? (
+        const renderDocLink = documentationLink ? (
             <div className="searchbar__doc-link" key="doc-link">
-                <Anchor href={documentationLink.href} target="_blank" data-id="doc-link">
+                <Anchor href={documentationLink.href} target="_blank" data-id={`${this.props["data-id"]}-doc-link`}>
                     {documentationLink.label}
                 </Anchor>
             </div>
@@ -122,19 +124,22 @@ class SearchBar extends React.Component {
                     ? <div className="searchbar__top-line">
                         <div className="searchbar__left-control">
                             {renderSearchBar}
-                            {renderDocLink}
+                            {!filtersOpen && renderDocLink }
                         </div>
                         <div className="searchbar__right-control">{rightControl}</div>
                     </div>
                     : [ renderSearchBar, renderDocLink ]
                 }
                 {filtersOpen &&
-                    <div
-                        data-id={`${dataId}-filters`}
-                        className="searchbar__filters modifier_light-inputs"
-                        key="searchbar-filters"
-                    >
-                        {children}
+                    <div data-id={`${dataId}-filters-container`}>
+                        <div
+                            data-id={`${dataId}-filters`}
+                            className="searchbar__filters modifier_light-inputs"
+                            key="searchbar-filters"
+                        >
+                            {children}
+                        </div>
+                        {filtersOpen && documentationLink && documentationLink.showWithFilters && renderDocLink}
                     </div>
                 }
             </div>

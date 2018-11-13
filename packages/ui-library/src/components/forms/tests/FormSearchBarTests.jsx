@@ -100,9 +100,54 @@ describe("FormSearchBar", function () {
             children: filterContent,
             documentationLink: { label },
         });
-        const link = TestUtils.findRenderedDOMNodeWithDataId(component, "doc-link");
+        const link = getElementByDid(component, "-doc-link");
 
         expect(link.textContent).toBe(label);
+    });
+
+    it("should not render the documentation link if id does not exist", function () {
+        const filterContent = "my filter content here";
+        const component = getComponent({
+            children: filterContent,
+        });
+        const link = getElementByDid(component, "-doc-link");
+
+        expect(link).toBeFalsy();
+    });
+
+
+    it("should render the doc link in filter container when filter is open and showWithFilters true", function () {
+        const filterContent = "my filter content here";
+        const label = "test label";
+        const component = getComponent({
+            children: filterContent,
+            documentationLink: { label, showWithFilters: true },
+            open: true,
+        });
+
+        const container = getElementByDid(component, "-filters-container");
+
+        const link = getElementByDid(container, "-doc-link");
+
+        expect(link).toBeTruthy();
+
+    });
+
+    it("shouldn't render the doc link in filter container when filter is open and showWithFilters false", function () {
+        const filterContent = "my filter content here";
+        const label = "test label";
+        const component = getComponent({
+            children: filterContent,
+            documentationLink: { label, showWithFilters: false },
+            open: true,
+        });
+
+        const container = getElementByDid(component, "-filters-container");
+
+        const link = getElementByDid(container, "-doc-link");
+
+        expect(link).toBeFalsy();
+
     });
 
     it("should render the right control", function () {

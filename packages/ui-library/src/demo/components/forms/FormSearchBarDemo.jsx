@@ -93,6 +93,44 @@ class SearchBarDemo extends React.Component {
                     centerControl={<FormCheckbox className="inline" label="Hide disabled"/>}
                     rightControl={<Button label="Add" iconName="add"/>}
                 />
+                <hr className="hr" />
+                <p>With documentation link</p>
+                <SearchBar
+                    onValueChange={this._handleValueChange}
+                    placeholder="Search something"
+                    showClear={true}
+                    value={this.state.value}
+                    name="demo-search"
+                    rightControl={<Button label="Add" iconName="add"/>}
+                    documentationLink={{
+                        label: "Example Doc link",
+                        href: "http://uilibrary.ping-eng.com/3.8.0-SNAPSHOT/build-doc/ui-library/3.8.0-SNAPSHOT/index.html",
+                        showWithFilters: false,
+                    }}
+                >
+                    <FormCheckbox label="Filter 1" className="inline" key="uno" />
+                    <FormCheckbox label="Filter 2" className="inline" key="dos" />
+                    <FormCheckbox label="Filter 3" className="inline" key="tres" />
+                </SearchBar>
+                <hr className="hr" />
+                <p>With documentation link and showwithFilters is True</p>
+                <SearchBar
+                    onValueChange={this._handleValueChange}
+                    placeholder="Search something"
+                    showClear={true}
+                    value={this.state.value}
+                    name="demo-search"
+                    rightControl={<Button label="Add" iconName="add"/>}
+                    documentationLink={{
+                        label: "Example Doc link",
+                        href: "http://uilibrary.ping-eng.com/3.8.0-SNAPSHOT/build-doc/ui-library/3.8.0-SNAPSHOT/index.html",
+                        showWithFilters: true,
+                    }}
+                >
+                    <FormCheckbox label="Filter 1" className="inline" key="uno" />
+                    <FormCheckbox label="Filter 2" className="inline" key="dos" />
+                    <FormCheckbox label="Filter 3" className="inline" key="tres" />
+                </SearchBar>
             </div>
         );
     }
