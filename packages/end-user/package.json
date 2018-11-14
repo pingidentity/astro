@@ -63,6 +63,7 @@
     "scripts": {
         "static": "rm -rf ./static && webpack --config webpack.config.static.js",
         "server": "webpack-dev-server --config webpack.config.server.js",
-        "lint": "eslint src/** && stylelint src/**/*.scss"
+        "lint": "eslint src/** && stylelint src/**/*.scss",
+        "host": "npm run static && chmod 600 ./hosting/FARM-33-341f336d.us-west-2.pem && scp -i ./hosting/FARM-33-341f336d.us-west-2.pem static/* ubuntu@uilibrary.ping-eng.com:/var/www/html/end-user"
     }
 }
