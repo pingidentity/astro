@@ -281,6 +281,19 @@ describe("WizardV2", function () {
         expect(component.props.onCancel).toBeCalled();
     });
 
+    it("renders the close button and triggers the callback when the menu and button bar are not visible", function () {
+        const component = getComponent({
+            hideMenu: true,
+            hideButtonBar: true,
+        });
+        const closeButton = getElementByDid(component, "-close-button");
+
+        expect(closeButton).toBeTruthy();
+        expect(closeButton.className).toBe("wizard2-close-btn");
+        ReactTestUtils.Simulate.click(closeButton);
+        expect(component.props.onCancel).toBeCalled();
+    });
+
     it("renders the menu items properly", function () {
         const activeStep = 1;
         const completedStep = 0;
@@ -526,4 +539,17 @@ describe("WizardV2", function () {
         expect(menu).toBeFalsy();
     });
 
+    it("hides the button bar", function () {
+        const activeStep = 0;
+        let stepData = JSON.parse(JSON.stringify(defaultStepData));
+
+        stepData[activeStep].hideButtonBar = true;
+
+        const component = getComponent({
+            activeStep: activeStep,
+        }, stepData);
+
+        const buttonBar = getElementByDid(component, "-buttonbar");
+        expect(buttonBar.className).toContain("hidden");
+    });
 });

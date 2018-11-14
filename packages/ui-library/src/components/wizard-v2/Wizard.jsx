@@ -146,7 +146,6 @@ class Wizard extends React.Component {
             headerItems,
             messageProps,
             onCancel,
-            onClose,
             onMenuClick,
             onNext,
             onSave,
@@ -191,6 +190,11 @@ class Wizard extends React.Component {
         return (
             <div data-id={dataId} className={classNames}>
                 {hasHeaderItems && <Header data-id={dataId} sections={headerItems}/> }
+                <button
+                    className="wizard2-close-btn"
+                    onClick={this.props.onClose}
+                    data-id={`${dataId}-close-button`}
+                />
                 <div className="wizard2__content modifier_light-inputs">
                     {messageProps && <Messages {...messageProps} />}
                     <ActiveStep
@@ -218,7 +222,6 @@ class Wizard extends React.Component {
                         data-id={dataId}
                         strings={strings}
                         onMenuClick={onMenuClick}
-                        onClose={onClose}
                     />
                 )}
             </div>

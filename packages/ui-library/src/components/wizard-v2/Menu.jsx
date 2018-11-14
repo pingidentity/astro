@@ -80,11 +80,6 @@ class Menu extends React.Component {
         return (
             <div className="wizard2-progress-menu-scroller" data-id={`${this.props["data-id"]}-menu`}>
                 <nav className="wizard2-progress-menu">
-                    <button
-                        className="wizard2-close-btn"
-                        onClick={this.props.onClose}
-                        data-id={`${this.props["data-id"]}-close-button`}
-                    />
                     {this.props.strings.menuTitle !== "" &&
                         <div className="wizard2-progress-menu__title" data-id={`${this.props["data-id"]}-menu-title`}>
                             {this.props.strings.menuTitle || "Progress"}

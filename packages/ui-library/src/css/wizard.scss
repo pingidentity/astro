@@ -77,6 +77,10 @@ $wizard-close-button-color: $color-strong-neutral-40;
         .wizard2__page-loader {
             left: 50%;
         }
+        .wizard2-close-btn,
+        .wizard2-close-btn:hover {
+            color: $color-neutral-30;
+        }
     }
     &--buttonbar-hidden {
         .wizard2__content {
