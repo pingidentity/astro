@@ -10,7 +10,7 @@
     }
 
     &--timeout {
-        color: $color-warning-yellow;
+        color: $color-neutral-20;;
     }
 
     &--error, &--stopped, &--disabled {
@@ -23,5 +23,23 @@
 
     &__label {
         margin: 0;
+    }
+
+    &--small {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &--small &__icon {
+        height: 50px;
+        margin-bottom: 0;
+        margin-right: $spacing-sm;
+        width: 50px;
+    }
+
+    &--small &__label {
+        font-size: $font-size-lg;
+        padding-right: $spacing-md;
     }
 }

@@ -16,8 +16,10 @@ const typeIcons = {
     disabled: disabledIcon,
 };
 
-const IconFeedback = ({ type, children }) => {
-    const classNames = classnames('icon-feedback', `icon-feedback--${type}`);
+const IconFeedback = ({ type, small = false, children }) => {
+    const classNames = classnames('icon-feedback', `icon-feedback--${type}`, {
+        'icon-feedback--small': small,
+    });
     return (
         <div className={classNames}>
             <img src={typeIcons[type]} className="icon-feedback__icon" alt="" />
@@ -28,6 +30,7 @@ const IconFeedback = ({ type, children }) => {
 
 IconFeedback.propTypes = {
     type: PropTypes.string,
+    small: PropTypes.bool,
 };
 
 export default IconFeedback;

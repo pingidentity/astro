@@ -745,6 +745,72 @@
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
 </div>
 </div>
+<div class="component-demo">
+    <div class="component-demo__preview">
+        <div class="card">
+            <div class="org-logo">
+                <img class="org-logo__image" src="ping-logo.svg"
+                    alt="Company Logo" />
+            </div>
+            <div class="icon-feedback icon-feedback--success icon-feedback--small">
+                <img src="ghost-success.svg" class="icon-feedback__icon"
+                    alt="" />
+                <p class="icon-feedback__label">Registered</p>
+            </div>
+            <div class="text-block">
+                <div class="text-block__text">Now that you&#x27;ve registered, you can either
+                    continue on or edit your profile.</div>
+            </div>
+            <div class="button-set">
+                <button class="button">Edit Profile</button>
+                <button class="button button--primary brand-primary-bg">Continue</button>
+            </div>
+        </div>
+    </div>
+    <div class="component-demo__markup">
+        <div class="component-demo__code">
+            <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Logo</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">IconFeedback</span>
+    <span class="hljs-attr">small</span>
+    <span class="hljs-attr">type</span>=<span class="hljs-string">"success"</span>
+  &gt;</span>
+    Registered
+  <span class="hljs-tag">&lt;/<span class="hljs-name">IconFeedback</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">TextBlock</span>&gt;</span>
+    Now that you've registered, you can either continue on or edit your profile.
+  <span class="hljs-tag">&lt;/<span class="hljs-name">TextBlock</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ButtonSet</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Edit Profile"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Continue"</span>
+      <span class="hljs-attr">primary</span>
+     /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ButtonSet</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span></pre></div>
+        <div
+            class="component-demo__code">
+            <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo__image"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Company Logo"</span>
+        /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback icon-feedback--success icon-feedback--small"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ghost-success.svg"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback__icon"</span>
+            <span class="hljs-attr">alt</span>=<span class="hljs-string">""</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback__label"</span>&gt;</span>Registered<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span>Now that you&amp;#x27;ve registered, you can either continue
+            on or edit your profile.<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button-set"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span>&gt;</span>Edit Profile<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--primary brand-primary-bg"</span>&gt;</span>Continue<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
+</div>
+</div>
 </div>
 </div>
     </div>
