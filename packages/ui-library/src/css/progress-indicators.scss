@@ -23,37 +23,31 @@
     }
     &:before {
         color: rgba($color-midnight, 0.2);
+        content: 'O';
     }
     &:after {
         color: $color-midnight;
     }
 
-    &.of1,
-    &.of2,
-    &.of3,
-    &.of4,
-    &.of5,
-    &.of6 {
-        &.done {
-            i {
-                display: inline-block;
+    &.done {
+        i {
+            display: inline-block;
+            height: $progress-size;
+            width: $progress-size;
+            color: transparent;
+            font-size: 0;
+            font-style: normal;
+
+            &:after {
+                position: absolute;
+                top: 2px;
+                left: -1px;
+                font-family: $icon-font;
+                content: '\79';
                 height: $progress-size;
                 width: $progress-size;
-                color: transparent;
-                font-size: 0;
-                font-style: normal;
-
-                &:after {
-                    position: absolute;
-                    top: 2px;
-                    left: -1px;
-                    font-family: $icon-font;
-                    content: '\79';
-                    height: $progress-size;
-                    width: $progress-size;
-                    color: $color-midnight;
-                    font-size: 12px;
-                }
+                color: $color-midnight;
+                font-size: 12px;
             }
         }
     }
