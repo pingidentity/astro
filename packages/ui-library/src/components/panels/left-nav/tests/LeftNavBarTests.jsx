@@ -198,6 +198,24 @@ describe("LeftNavBar", function () {
         expect(application.getAttribute("src")).toBe(logoSource);
     });
 
+    it("renders the logo when logoSrc object is provided", function () {
+        const logoSrc = {
+            url: "http://foobar.com/my-logo.jpg",
+            width: "200px",
+            height: "100px",
+        };
+        const wrapper = getWrappedComponent({
+            logoSrc: logoSrc
+        });
+
+        const copyright = TestUtils.findRenderedDOMNodeWithDataId(wrapper, "copyright");
+        const imageTag = TestUtils.findRenderedDOMNodeWithTag(copyright, "img");
+
+        expect(imageTag.getAttribute("src")).toBe(logoSrc.url);
+        expect(imageTag.style.height).toBe(logoSrc.height);
+        expect(imageTag.style.width).toBe(logoSrc.width);
+    });
+
     it("renders a pingone logo when pingoneLogo variable is set to true", function () {
         var wrapper = getWrappedComponent({ pingoneLogo: true });
         var component = wrapper.refs.target;

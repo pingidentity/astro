@@ -12,45 +12,44 @@ var React = require("react"),
  * @typedef {object} LeftNavBar#Node
  * @desc An object describing a leaf in the LeftNav
  * @property {string} label
- *              The label of the node
+ *     The label of the node
  * @property {string|number} id
- *              A unique string identifier.  This value will be passed back to the onItemValueChange callback.
+ *     A unique string identifier.  This value will be passed back to the onItemValueChange callback.
  */
 
 /**
  * @typedef {object} LeftNavBar#Section
  * @property {string} label
- *              The label of the section
+ *     The label of the section
  * @property {string|number} id
- *              A unique string identifier.  This value will be passed back to the onSectionValueChange callback.
+ *     A unique string identifier.  This value will be passed back to the onSectionValueChange callback.
  * @property {string} icon
- *              A string corresponding to an existing icon in the ui-library icon font.
+ *     A string corresponding to an existing icon in the ui-library icon font.
  * @property {string} type
- *              A string that designates wether the section should be rendered as navigation links or a context
- *              drop-down style menu within the sidebar.
+ *     A string that designates wether the section should be rendered as navigation links or a context drop-down style
+ *     menu within the sidebar.
  * @property {object} addLink
- *              For sections type=context only.  An object that spefies the text and callback for the context menu add
- *              menu.
+ *     For sections type=context only.  An object that spefies the text and callback for the context menu add menu.
  * @property {string} addLink.text
- *              The text to display in the addLink.
+ *     The text to display in the addLink.
  * @property {func} addLink.callback
- *              The callback to trigger when the addLink is clicked.
+ *     The callback to trigger when the addLink is clicked.
  * @property {LeftNavBar#Node[]} [children]
- *              An optional array of children under this section.
+ *     An optional array of children under this section.
  */
 
 /**
  * @callback LeftNavBar~onSectionValueChange
  * @param {string|number} id
- *             The id of the item that was clicked
+ *     The id of the item that was clicked
  */
 
 /**
  * @callback LeftNavBar~onItemValueChange
  * @param {string|number} id
- *             The id of the item that was clicked
+ *     The id of the item that was clicked
  * @param {string|number} sectionId
- *             The id of the section the item that was clicked belongs to.
+ *     The id of the section the item that was clicked belongs to.
  */
 
 /**
@@ -69,36 +68,35 @@ var React = require("react"),
  * map that data to whatever internal markup it wants.
  *
  * @param {string} [data-id="left-nav-bar"]
- *          To define the base "data-id" value for the top-level HTML container.
+ *     To define the base "data-id" value for the top-level HTML container.
  * @param {LeftNavBar#Section[]} tree
- *          A prop which describes the structure of the nav tree.  This will be an array of
- *          Section objects, each of which may have an array of Node objects as its children.
- *          Please refer to the example below.
+ *     A prop which describes the structure of the nav tree.  This will be an array of Section objects, each of which
+ *     may have an array of Node objects as its children. Please refer to the example below.
  * @param {string|number} [selectedNode]
- *          The id of the selected node.
+ *     The id of the selected node.
  * @param {string|number} [selectedSection]
- *          The id of the selected section.
+ *     The id of the selected section.
  * @param {object} [openSections={}]
- *          A hash map of ids and their open state. This is used internally by the Reducer to maintain
- *          expand/collapse state.
+ *     A hash map of ids and their open state. This is used internally by the Reducer to maintain expand/collapse state.
  * @param {boolean} [updated=false]
- *          If true, will return the new left nav.
+ *     If true, will return the new left nav.
  * @param {boolean} [collapsible=false]
- *          If false, will have all sections open at once by default and disable the collapse feature.
+ *     If false, will have all sections open at once by default and disable the collapse feature.
  * @param {boolean} [autocollapse=false]
- *          Whether or not the sections should autocollapse. Disabled if the collapsible prop is set to false.
+ *     Whether or not the sections should autocollapse. Disabled if the collapsible prop is set to false.
  * @param {LeftNavBar~onSectionValueChange} [onSectionValueChange]
- *          A callback which will be excuted when any section node is clicked. The callback will be given 1 parameter
- *          equal to the id of the item clicked.
+ *     A callback which will be excuted when any section node is clicked. The callback will be given 1 parameter equal
+ *     to the id of the item clicked.
  * @param {LeftNavBar~onItemValueChange} [onItemValueChange]
- *          A callback which will be executed when any leaf node is clicked. The callback will be given 1 parameter
- *          equal to the id of the item clicked.
+ *     A callback which will be executed when any leaf node is clicked. The callback will be given 1 parameter equal to
+ *     the id of the item clicked.
  * @param {boolean} [pingoneLogo=false]
- *          Determines whether to show the PingOne Logo.
+ *     Determines whether to show the PingOne Logo.
  * @param {string} [logoSrc]
- *          An optional URL that can be provided for a logo.
+ *     An optional URL or object (containing the URL, height (px), and width (px)) that can be provided to override the
+ *     default logo.
  * @param {string|object} [topContent]
- *          String or html content to inject into the top of the sidebar.
+ *     String or html content to inject into the top of the sidebar.
  *
  * @example
  * var item1 = {label: "Item 1", id: "item1"};
@@ -121,7 +119,7 @@ class LeftNavBar extends React.Component {
         onSectionValueChange: PropTypes.func,
         onItemValueChange: PropTypes.func,
         pingoneLogo: PropTypes.bool,
-        logoSrc: PropTypes.string,
+        logoSrc: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
         topContent: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
     };
 
@@ -136,7 +134,6 @@ class LeftNavBar extends React.Component {
     };
 
     state = {
-        copyrightHeight: 0,
         selectorStyle: { top: 0, height: 0 },
         scrollable: false
     };
@@ -207,14 +204,6 @@ class LeftNavBar extends React.Component {
         // animations happening on the page.  Recalculate after the initialRender
         this._getItemSelector().addEventListener("transitionend", this._rerender, false);
 
-        // store height of copyright to use as bottom of nav-menus
-        var copyright = ReactDOM.findDOMNode(this.refs.copyright),
-            dims = copyright.getBoundingClientRect();
-
-        /* eslint-disable */
-        this.setState({ copyrightHeight: Math.round(dims.height) });
-        /* eslint-enable */
-
         window.addEventListener("resize", this._handleResize);
 
         this.componentDidUpdate();
@@ -231,7 +220,7 @@ class LeftNavBar extends React.Component {
      * @desc After each render, we need to check if the NavBar highlter needs to be slid over a new item
      * @name LeftNavBar~componentDidUpdate
      * @param {object} prevProps
-     *          Previous props
+     *     Previous props
      */
     componentDidUpdate(prevProps) {
         // it is generally bad practice to touch the dom after rendering and also bad practice to set state within
@@ -345,7 +334,7 @@ class LeftNavBar extends React.Component {
 
         return (
             <div id="nav" ref="nav" className={className}>
-                <div className="nav-menus" ref="container" style={{ bottom: this.state.copyrightHeight }}>
+                <div className="nav-menus" ref="container">
                     <div ref="itemSelector" className="selected-item" style={this.state.selectorStyle} />
                     <div ref="itemSelectorArrow" className="selected-item-arrow" style={this.state.selectorStyle}>
                         <svg version="1.1" width="10px" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -374,19 +363,19 @@ class LeftNavBar extends React.Component {
  * @private
  * @desc Internal class which renders a navigation section of the LeftNavBar
  * @param {string} data-id
- *          This may or may not be the same as the id.
+ *     This may or may not be the same as the id.
  * @param {string} id
- *          The id of the component (this is what will be passed back to the onSectionValueChange handler)
+ *     The id of the component (this is what will be passed back to the onSectionValueChange handler)
  * @param {string} [icon]
- *          Optional icon to display next to the section label
+ *     Optional icon to display next to the section label
  * @param {boolean} open
- *          Indicates if the section is open
+ *     Indicates if the section is open
  * @param {boolean} selectedNav
- *          Indicates if the section has a selected nav item
+ *     Indicates if the section has a selected nav item
  * @param {function} onItemValueChange
- *          The callback for when an leaf is clicked.  Will be passed back the id of the clicked item.
+ *     The callback for when an leaf is clicked.  Will be passed back the id of the clicked item.
  * @param {function} onSectionValueChange
- *          The callback for when a section label is clicked.  Will be passed back the id of the clicked section.
+ *     The callback for when a section label is clicked.  Will be passed back the id of the clicked section.
  */
 class LeftNavSection extends React.Component {
     static propTypes = {

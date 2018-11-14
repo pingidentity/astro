@@ -11,15 +11,15 @@ var React = require("react");
  * @param {boolean} [updated=false]
  *     Determines whether to show the default Ping Logo
  * @param {string} [logoSrc]
- *     Site or service specific logo source
+ *     An optional URL or object (containing the URL, height (px), and width (px)) that can be provided to override the
+ *     default logo
  * @param {function} [renderFooterContent]
  *     Optional render prop
- *
  */
 class Copyright extends React.Component {
     static propTypes = {
         pingoneLogo: PropTypes.bool,
-        logoSrc: PropTypes.string,
+        logoSrc: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
         updated: PropTypes.bool
     };
 
@@ -43,16 +43,24 @@ class Copyright extends React.Component {
     _getLogo = () => {
 
         if (this.props.logoSrc) {
+            const style = typeof this.props.logoSrc === "object" ? {
+                height: this.props.logoSrc.height,
+                width: this.props.logoSrc.width,
+            } : null;
+            const attributes = {
+                src: typeof this.props.logoSrc === "object" ? this.props.logoSrc.url : this.props.logoSrc
+            };
+
             return (
-                <span className="logo-container" data-id="logo-container">
-                    <img src={this.props.logoSrc} className="ping-application" />
-                </span>
+                <div className="logo-container" data-id="logo-container">
+                    <img {...attributes} style={style} className="ping-application" />
+                </div>
             );
         }
         else if (this.props.pingoneLogo) {
             /*eslint-disable max-len*/
             return (
-                <span className="logo-container" data-id="logo-container">
+                <div className="logo-container" data-id="logo-container">
                     <svg className="pingone-logo" viewBox="0 0 300 80" >
                         <path d="M177.5,5.4C194.2,5.4,204,18,204,34.8c0,17.2-9.7,29.4-26.5,29.4C160.7,64.2,151,52,151,34.8
                             C151,18,160.8,5.4,177.5,5.4z M177.5,57c12.7,0,18.1-10.9,18.1-22.2c0-11.5-6-22.3-18.1-22.2c-12.1-0.1-18.1,10.7-18.1,22.2
@@ -77,14 +85,14 @@ class Copyright extends React.Component {
                             c-0.2-0.3-0.3-0.9-0.5-1.7c-0.1-0.8-0.5-1.1-1.4-1.1H290V21z M290,17.1h0.8c0.9,0,1.6-0.3,1.6-1c0-0.6-0.5-1.1-1.5-1.1
                             c-0.4,0-0.7,0-0.9,0.1V17.1z" />
                     </svg>
-                </span>);
+                </div>);
             /*eslint-enable max-len*/
         }
         else if (this.props.updated) {
             return (
-                <span className="logo-container" data-id="logo-container">
+                <div className="logo-container" data-id="logo-container">
                     <div className="logo" data-id="copyright-logo" />
-                </span>
+                </div>
             );
         }
         else {

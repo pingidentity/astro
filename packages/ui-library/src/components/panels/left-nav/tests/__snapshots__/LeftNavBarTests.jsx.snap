@@ -6,7 +6,7 @@ exports[`LeftNavBar renders a custom footer if the renderFooterContent render-pr
   data-id="copyright"
 >
   <div>
-    <span
+    <div
       class="logo-container"
       data-id="logo-container"
     >
@@ -14,7 +14,7 @@ exports[`LeftNavBar renders a custom footer if the renderFooterContent render-pr
         class="ping-application"
         src="http://foobar.com/mylogo.jpg"
       />
-    </span>
+    </div>
     Copyright © 2003-2018
     <br />
     Ping Identity Corporation

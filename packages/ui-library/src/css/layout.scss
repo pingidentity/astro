@@ -91,6 +91,8 @@ $color-grey-minor-1: $color-neutral-30;
     box-sizing: border-box;
     background-color: $color-timberwolf;
     border-right: $layout-nav-width-offset solid $color-white;
+    display: flex;
+    flex-direction: column;
 
     .collapsible-link {
         display: block;
@@ -184,15 +186,12 @@ $color-grey-minor-1: $color-neutral-30;
         }
     }
     .nav-menus {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 112px;
         overflow-x: hidden;
         overflow-y: auto;
         width: $layout-nav-width + 10px;
         padding: 15px 10px 0 0;
         box-sizing: border-box;
+        flex: 1;
     }
     ul.menu {
         font-size: 16px;
@@ -246,9 +245,7 @@ $color-grey-minor-1: $color-neutral-30;
         }
     }
     .copyright {
-        position: absolute;
-        bottom: 0;
-        left: 0;
+
         width: $layout-nav-width;
         box-sizing: border-box;
         padding: 20px 10px 25px 20px;
@@ -265,9 +262,14 @@ $color-grey-minor-1: $color-neutral-30;
         }
         // application logos
         .logo-container {
+            margin: 0 0 $spacing-sm 0;
+
             @include clearfix();
+
             .ping-application {
+                display: block;
                 max-width: 175px;
+                max-height: 52px;
                 height: auto;
             }
         }
@@ -586,11 +588,6 @@ $color-grey-minor-1: $color-neutral-30;
             }
             // application logos
             .logo-container {
-                @include clearfix();
-                .ping-application {
-                    max-width: 175px;
-                    height: auto;
-                }
                 .logo {
                     $logo-env-size: 52px;
                     $logo-env-pad: 5px;
@@ -600,7 +597,6 @@ $color-grey-minor-1: $color-neutral-30;
 
                     display: inline-block;
                     vertical-align: middle;
-                    margin: 0 0 $spacing-sm 0;
                     background-image: url('#{$img-path}logo-pingidentity.png');
                     background-size: contain;
                     background-repeat: no-repeat;
