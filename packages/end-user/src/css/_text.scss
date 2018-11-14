@@ -23,13 +23,14 @@
 .heading--4 {
     margin-bottom: $spacing-md;
     font-size: $font-size-md;
+    text-align: left;
 }
 
 %tiny-text,
 .tiny-text {
-    color: $color-neutral-20;
+    color: $color-neutral-10;
     font-weight: 200;
-    font-size: $font-size-xs;
+    font-size: $font-size-sm;
     font-family: $font-default;
 }
 

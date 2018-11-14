@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import noIcon from '../icons/error.svg';
+import noIcon from '../icons/incomplete.svg';
 import yesIcon from '../icons/success.svg';
 
 const Requirement = ({ status, name }) => (
