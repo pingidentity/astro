@@ -824,14 +824,13 @@ $color-grey-minor-1: $color-neutral-30;
 }
 
 .inline-message {
+    @include text-body;
+
     position: relative;
     display: table;
     padding: 15px;
     margin: 15px 0 30px;
     border: 1px solid $color-rabbit-fur;
-    color: $color-elephant;
-    font-size: 14px;
-    font-family: $font-pn-regular;
 
     @include border-radius(3px);
 

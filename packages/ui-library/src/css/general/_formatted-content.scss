@@ -1,0 +1,142 @@
+.formatted-content {
+    @include text-body();
+
+    line-height: 1.5em;
+
+    hr {
+        @extend .hr;
+    }
+
+    ol {
+        list-style: decimal;
+        margin: 0 0 1em $spacing-lg;
+    }
+
+    em {
+        font-style: italic;
+    }
+
+    blockquote {
+        border-left: 1px solid $color-rabbit-fur;
+        margin-left: $spacing-sm;
+        padding-left: $spacing-lg - $spacing-sm;
+        margin-bottom: 1em;
+    }
+
+    h1 {
+        @include text-page-title;
+    }
+
+    h2, {
+        @include text-section-title;
+    }
+
+    h3 {
+        @include text-parent-label;
+    }
+
+    h4 {
+        @include text-label;
+    }
+
+
+    ul {
+        margin: 0 0 1em $spacing-lg;
+
+        li {
+            list-style: disc;
+        }
+        ul {
+            li {
+                list-style: circle;
+            }
+            ul {
+                li {
+                    list-style: square;
+                }
+                ul {
+                    li {
+                        &:before {
+                            content: '- ';
+                        }
+                        list-style-type: none;
+                    }
+                }
+            }
+        }
+    }
+    // MARKUP
+
+    code,
+    pre {
+        color: $color-slate;
+        text-shadow: 0 1px $color-white;
+        font-family: 'Consolas', 'Monaco', 'Andale Mono', monospace;
+        font-size: 14px;
+        direction: ltr;
+        text-align: left;
+        white-space: pre;
+        word-spacing: normal;
+        word-break: normal;
+        line-height: 1.5;
+
+        -moz-tab-size: 4;
+        -o-tab-size: 4;
+        tab-size: 4;
+
+        -webkit-hyphens: none;
+        -moz-hyphens: none;
+        -ms-hyphens: none;
+        hyphens: none;
+    }
+
+    pre::-moz-selection,
+    pre ::-moz-selection,
+    code::-moz-selection,
+    code ::-moz-selection {
+        text-shadow: none;
+        background: #b3d4fc;
+    }
+
+    pre::selection,
+    pre ::selection,
+    code::selection,
+    code ::selection {
+        text-shadow: none;
+        background: #b3d4fc;
+    }
+
+    @media print {
+        code,
+        pre {
+            text-shadow: none;
+        }
+    }
+
+    /* Code blocks */
+    pre {
+        padding: 1em;
+        margin: 0.5em 0;
+        overflow: auto;
+    }
+
+    :not(pre) > code,
+    pre {
+        background: $color-neutral-95;
+    }
+
+    /* Inline code */
+    :not(pre) > code {
+        padding: 0.1em;
+        border-radius: 0.3em;
+    }
+    details {
+        summary {
+            cursor: pointer;
+            font-size: 16px;
+        }
+        code {
+            background-color: transparent;
+        }
+    }
+}

@@ -1,10 +1,8 @@
 
 body {
-    font-family: $font-pn-regular;
-    font-size: 14px;
+    @include text-body;
+
     line-height: $line-height-default;
-    color: $color-elephant;
-    font-weight: 300;
 }
 
 a {

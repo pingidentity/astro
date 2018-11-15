@@ -320,6 +320,13 @@ module.exports = [
                         pathToSource: "components_general_MaskedValue.jsx.html",
                         pathToDemoSource: "demo_components_general_MaskedValueDemo.jsx.html"
                     },
+                    {
+                        label: "Formatted Content",
+                        demo: require("../components/general/FormattedContentDemo"),
+                        pathToDoc: "components/general/FormattedContent.jsx",
+                        pathToSource: "components_general_FormattedContent.jsx.html",
+                        pathToDemoSource: "demo_components_general_FormattedContentDemo.jsx.html"
+                    }
                 ]
             },
             {
