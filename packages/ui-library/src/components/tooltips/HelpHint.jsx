@@ -177,7 +177,9 @@ class HelpHint extends React.Component {
             <div className={containerClassNames} data-id={dataId}>
                 <div
                     data-id={dataId + "-target"}
-                    className={classnames(this.props.className, "help-tooltip-target")}
+                    className={classnames(this.props.className, "help-tooltip-target", {
+                        "inline": (!children && !this.props.className), // make the icon inline if no other class is specified
+                    })}
                     onClick={this._handleClick}
                     data-tip={true}
                     data-for={uid}
