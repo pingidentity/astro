@@ -10,7 +10,7 @@ var initialState = {
     selectedContexts: {},
     collapsible: false,
     autocollapse: false,
-    updated: false
+    updated: false,
 };
 
 /**

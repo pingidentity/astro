@@ -5,12 +5,15 @@ var React = require("react");
  * @class Copyright
  *
  * @desc Renders the copyright block
+ *
  * @param {boolean} [pingoneLogo=false]
- *          Determines whether to show the PingOne Logo
+ *     Determines whether to show the PingOne Logo
  * @param {boolean} [updated=false]
- *          Determines whether to show the default Ping Logo
+ *     Determines whether to show the default Ping Logo
  * @param {string} [logoSrc]
- *          Site or service specific logo source
+ *     Site or service specific logo source
+ * @param {function} [renderFooterContent]
+ *     Optional render prop
  *
  */
 class Copyright extends React.Component {
@@ -27,6 +30,14 @@ class Copyright extends React.Component {
 
     componentWillMount() {
         this._year = new Date().getFullYear();
+        this._defaultChildren = [
+            this._getLogo(),
+            `Copyright © 2003-${this._year}`,
+            <br />,
+            "Ping Identity Corporation",
+            <br />,
+            "All rights reserved"
+        ];
     }
 
     _getLogo = () => {
@@ -82,13 +93,12 @@ class Copyright extends React.Component {
     };
 
     render() {
+        const { renderFooterContent } = this.props;
         return (
             <div className="copyright" data-id="copyright">
-                { this._getLogo() }
-                Copyright &copy; 2003-{this._year}
-                <br />Ping Identity Corporation
-                <br />All rights reserved
-            </div>);
+                {renderFooterContent ? renderFooterContent(this._defaultChildren) : this._defaultChildren}
+            </div>
+        );
     }
 }
 

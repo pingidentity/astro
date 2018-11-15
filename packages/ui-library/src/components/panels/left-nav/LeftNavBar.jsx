@@ -362,6 +362,7 @@ class LeftNavBar extends React.Component {
                     pingoneLogo={this.props.pingoneLogo}
                     logoSrc={this.props.logoSrc}
                     updated={this.props.updated}
+                    renderFooterContent={this.props.renderFooterContent}
                 />
             </div>
         );

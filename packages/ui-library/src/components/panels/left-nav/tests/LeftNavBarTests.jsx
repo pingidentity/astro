@@ -220,6 +220,32 @@ describe("LeftNavBar", function () {
         expect(logo).toBeFalsy();
     });
 
+    it("renders a custom footer if the renderFooterContent render-prop is defined", function () {
+        const customContent = "foobar footer content";
+        const logoSrc = "http://foobar.com/mylogo.jpg";
+        const renderFooterContent = (defaultContent) => {
+            return (
+                <div>
+                    {defaultContent}
+                    <div>{customContent}</div>
+                </div>
+            );
+        };
+
+        var wrapper = getWrappedComponent({
+            renderFooterContent: renderFooterContent,
+            logoSrc: logoSrc,
+        });
+        var component = wrapper.refs.target;
+
+        var copyright = TestUtils.findRenderedDOMNodeWithDataId(component, "copyright");
+        expect(copyright.textContent).toContain(customContent);
+        expect(copyright).toMatchSnapshot();
+
+        var logo = TestUtils.findRenderedDOMNodeWithTag(copyright, "img");
+        expect(logo.getAttribute("src")).toBe(logoSrc);
+    });
+
     it("renders a topContent when specified", function () {
         var text = "Something";
         var content = <span>{text}</span>;
