@@ -6,7 +6,9 @@ jest.dontMock("../../../util/format.js");
 jest.dontMock("../../general/EllipsisLoaderButton");
 jest.dontMock("../../general/context-close-button/v2");
 jest.dontMock("../../tooltips/CancelTooltip");
+jest.dontMock("../../tooltips/ConfirmTooltip");
 jest.dontMock("../../tooltips/DetailsTooltip");
+jest.dontMock("../../buttons/Button.jsx");
 
 describe("Step", function () {
     var React = require("react"),
@@ -71,6 +73,25 @@ describe("Step", function () {
 
         component = getRenderedComponent({ active: false });
         expect(ReactDOM.findDOMNode(component.refs.editButton).textContent).toBe("xxxedit");
+    });
+
+    it("Specifies default button labels", function () {
+        const props = {
+            isModal: false,
+            labelNext: null,
+            labelCancel: null,
+            labelEdit: null,
+        };
+        var component = getRenderedComponent(props);
+
+        expect(ReactDOM.findDOMNode(component.refs.nextButton).textContent).toBe("Next");
+        expect(ReactDOM.findDOMNode(component.refs.cancelButton).value).toBe("Cancel");
+
+        component = getRenderedComponent({
+            ...props,
+            active: false
+        });
+        expect(ReactDOM.findDOMNode(component.refs.editButton).textContent).toBe("Edit");
     });
 
     it("Next button executes callback", function () {
@@ -213,5 +234,61 @@ describe("Step", function () {
         expect(tooltipDenyBtn.textContent).toBe(cancelTooltipParams.cancelButtonText);
         expect(tooltipTitle.textContent).toBe(cancelTooltipParams.title);
         expect(tooltipText.textContent).toBe(cancelTooltipParams.messageText);
+    });
+
+    it("Save tooltip renders and triggers callbacks.", function () {
+        const
+            saveConfirm = jest.genMockFunction(),
+            saveDeny = jest.genMockFunction(),
+            saveTooltipParams = {
+                title: "Save Confirmation",
+                onConfirm: saveConfirm,
+                onCancel: saveDeny,
+                messageText: "Are you sure?",
+                confirmButtonText: "Yes",
+                cancelButtonText: "No"
+            };
+
+        let step,
+            saveToolipContainer,
+            saveTooltip;
+
+        step = getRenderedComponent({
+            saveTooltip: {
+                open: false,
+                ...saveTooltipParams
+            }
+        });
+        saveToolipContainer = TestUtils.findRenderedDOMNodeWithDataId(step, "confirm-tooltip");
+        saveTooltip = TestUtils.findRenderedDOMNodeWithDataId(saveToolipContainer, "details-content");
+        expect(saveTooltip).toBeFalsy();
+
+        step = getRenderedComponent({
+            saveTooltip: {
+                open: true,
+                ...saveTooltipParams,
+            }
+        });
+        saveToolipContainer = TestUtils.findRenderedDOMNodeWithDataId(step, "confirm-tooltip");
+        saveTooltip = TestUtils.findRenderedDOMNodeWithDataId(saveToolipContainer, "details-content");
+        expect(saveTooltip).toBeTruthy();
+
+        const
+            tooltipConfirmBtn = TestUtils.findRenderedDOMNodeWithDataId(saveTooltip, "confirm-tooltip-button"),
+            tooltipDenyBtn = TestUtils.findRenderedDOMNodeWithDataId(saveTooltip, "confirm-tooltip-cancel"),
+            tooltipTitle = TestUtils.findRenderedDOMNodeWithDataId(saveTooltip, "details-title"),
+            tooltipText = TestUtils.findRenderedDOMNodeWithDataId(saveTooltip, "details-body");
+
+        ReactTestUtils.Simulate.click(tooltipConfirmBtn);
+        expect(saveConfirm).toBeCalled();
+        expect(saveDeny).not.toBeCalled();
+
+        ReactTestUtils.Simulate.click(tooltipDenyBtn);
+        expect(saveDeny).toBeCalled();
+
+        expect(tooltipConfirmBtn.textContent).toBe(saveTooltipParams.confirmButtonText);
+        expect(tooltipDenyBtn.textContent).toBe(saveTooltipParams.cancelButtonText);
+        expect(tooltipTitle.textContent).toBe(saveTooltipParams.title);
+        expect(tooltipText.textContent).toContain(saveTooltipParams.messageText);
     });
 });

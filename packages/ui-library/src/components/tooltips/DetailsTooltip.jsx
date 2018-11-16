@@ -35,7 +35,7 @@ import Button from "../buttons/Button";
  *     CSS classes to set on the top-level HTML container. Used to manage tooltip callout positioning with the
  *     DetailsTooltip.positionStyles enum and/or any extra css styling if needed.
  *
- * @param {object|string} [label]
+ * @param {node} [label]
  *     A string or JSX object that serves as the trigger label.
  * @param {string} [title]
  *     Tooltip title
@@ -151,9 +151,7 @@ class DetailsTooltipStateless extends React.Component {
         titleClassName: PropTypes.string,
         labelClassname: PropTypes.string,
         positionClassname: PropTypes.string,
-        label: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.object]),
+        label: PropTypes.node,
         title: PropTypes.string,
         disabled: PropTypes.bool,
         hideOnClick: PropTypes.bool,

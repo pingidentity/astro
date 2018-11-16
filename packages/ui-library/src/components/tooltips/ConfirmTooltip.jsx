@@ -11,7 +11,7 @@ import popsOver from "../../util/behaviors/popsOver";
  *
  * @param {string} [data-id]
  *     The data-id of the component.
- * @param {string} label
+ * @param {node} label
  *     The text of the link.
  * @param {string} [positionClassName]
  *     CSS classes to set on the top-level HTML container. Used to manage tooltip callout positioning.
@@ -73,7 +73,7 @@ class ConfirmTooltipBase extends Component {
         className: PropTypes.string,
         open: PropTypes.bool,
         onToggle: PropTypes.func,
-        label: PropTypes.string,
+        label: PropTypes.node,
         cancelText: PropTypes.string,
         buttonLabel: PropTypes.string,
         buttonType: PropTypes.string,

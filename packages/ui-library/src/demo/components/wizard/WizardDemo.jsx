@@ -21,6 +21,7 @@ class WizardDemo extends React.Component {
     state = {
         isLoading: false,
         showCancelTooltip: false,
+        showSaveTooltip: true,
         usePulsing: false
     };
 
@@ -31,7 +32,8 @@ class WizardDemo extends React.Component {
     };
 
     _handleNext = () => {
-        this._closeTooltip();
+        this._closeCancelTooltip();
+        this._closeSaveTooltip();
 
         if (this.state.usePulsing) {
             this.setState({ isLoading: true });
@@ -50,6 +52,8 @@ class WizardDemo extends React.Component {
     };
 
     _handleDone = () => {
+        this._closeSaveTooltip();
+
         if (this.state.usePulsing) {
             this.setState({ isLoading: true });
             setTimeout(function () {
@@ -60,12 +64,20 @@ class WizardDemo extends React.Component {
         }
     };
 
-    _openTooltip = () => {
+    _openCancelTooltip = () => {
         this.setState({ showCancelTooltip: true });
     };
 
-    _closeTooltip = () => {
+    _closeCancelTooltip = () => {
         this.setState({ showCancelTooltip: false });
+    };
+
+    _openSaveTooltip = () => {
+        this.setState({ showSaveTooltip: true });
+    };
+
+    _closeSaveTooltip = () => {
+        this.setState({ showSaveTooltip: false });
     };
 
     componentWillMount() {
@@ -76,14 +88,20 @@ class WizardDemo extends React.Component {
     }
 
     render() {
-        var cancelTooltipParams = {
-            title: "Cancel Confirmation",
+        const cancelTooltipParams = {
+            title: "Confirm cancel",
             open: this.state.showCancelTooltip,
             onConfirm: this._reset,
-            onCancel: this._closeTooltip,
+            onCancel: this._closeCancelTooltip,
             messageText: "Are you sure you want to cancel this wizard?",
             confirmButtonText: "Yes",
-            cancelButtonText: "No"
+            cancelButtonText: "No",
+        };
+        const saveTooltipParams = {
+            confirmButtonText: "Confirm save",
+            cancelButtonText: "Nevermind",
+            showClose: false,
+            title: "Are you sure?",
         };
 
         return (
@@ -102,16 +120,34 @@ class WizardDemo extends React.Component {
                     onValueChange={this._handlePick}
                     onEdit={this.actions.edit}
                     onNext={this._handleNext}
-                    onDone={this._handleDone}
-                    onCancel={this._openTooltip}
+                    onDone={this._openSaveTooltip}
+                    onCancel={this._openCancelTooltip}
                     showPulsing={this.state.isLoading}
                     {...this.props}
                     {...BUTTON_LABELS}>
 
                     <Wizard
                         title="Wizard 1"
-                        cancelTooltip={cancelTooltipParams}>
-                        <Step title="Wizard 1 - Step 1" cancelTooltip={cancelTooltipParams}>
+                        cancelTooltip={cancelTooltipParams}
+                        saveTooltip={{
+                            ...saveTooltipParams,
+                            messageText: "Are you sure you are want to complete this wizard?",
+                            onConfirm: this._handleDone,
+                            onCancel: this._closeSaveTooltip,
+                            open: this.state.showSaveTooltip,
+                        }}
+                        >
+                        <Step
+                            title="Wizard 1 - Step 1"
+                            cancelTooltip={cancelTooltipParams}
+                            onNext={this._openSaveTooltip}
+                            saveTooltip={{
+                                ...saveTooltipParams,
+                                messageText: "Are you sure you are want to save this step?",
+                                onConfirm: this._handleNext,
+                                onCancel: this._closeSaveTooltip,
+                                open: this.state.showSaveTooltip,
+                            }}>
                             Step 1 content goes here.
                         </Step>
                         <Step title="Wizard 1 - Step 2" cancelTooltip={cancelTooltipParams}>

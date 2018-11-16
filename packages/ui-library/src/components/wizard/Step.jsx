@@ -3,7 +3,8 @@
 var PropTypes = require("prop-types");
 
 var React = require("react"),
-    CancelTooltip = require("./../tooltips/CancelTooltip"),
+    CancelTooltip = require("../tooltips/CancelTooltip"),
+    ConfirmTooltip = require("../tooltips/ConfirmTooltip"),
     ContextButton = require("../general/context-close-button").v2,
     EllipsisLoaderButton = require("../general/EllipsisLoaderButton"),
     HelpHint = require("../tooltips/HelpHint"),
@@ -89,6 +90,7 @@ class Step extends React.Component {
         "data-id": PropTypes.string,
         className: PropTypes.string,
         cancelTooltip: PropTypes.object,
+        saveTooltip: PropTypes.object,
         labelEdit: PropTypes.string,
         labelCancel: PropTypes.string,
         labelNext: PropTypes.string,
@@ -143,67 +145,61 @@ class Step extends React.Component {
     };
 
     _getCancelButtonMarkup = () => {
-        var labelCancel = this.props.labelCancel || Translator.translate("cancel");
-
         return React.createElement(this.props.isModal ? ContextButton : "input", {
             onClick: this.props.onCancel,
             type: "button",
             ref: "cancelButton",
             className: "cancel cancel-step",
-            value: labelCancel,
+            value: this.props.labelCancel || Translator.translate("cancel"),
             disabled: this.props.showPulsing
         });
     };
 
     _getCancelButton = () => {
         if (!this.props.hideCancel) {
-            var cancelButton;
-
-            if (this.props.cancelTooltip) {
-                cancelButton = (
-                    <CancelTooltip
-                        data-id={this.props["data-id"]}
-                        confirmButtonText={this.props.cancelTooltip.confirmButtonText}
-                        cancelButtonText={this.props.cancelTooltip.cancelButtonText}
-                        label={this._getCancelButtonMarkup()}
-                        messageText={this.props.cancelTooltip.messageText}
-                        onConfirm={this.props.cancelTooltip.onConfirm}
-                        onCancel={this.props.cancelTooltip.onCancel}
-                        open={this.props.cancelTooltip.open}
-                        positionClassName="top left"
-                        title={this.props.cancelTooltip.title}
-                    />
-                );
-            } else {
-                cancelButton = this._getCancelButtonMarkup();
-            }
-
-            return cancelButton;
+            return this.props.cancelTooltip ? (
+                <CancelTooltip
+                    data-id={this.props["data-id"]}
+                    label={this._getCancelButtonMarkup()}
+                    positionClassName="top left"
+                    {...this.props.cancelTooltip}
+                />
+            ) : this._getCancelButtonMarkup();
         }
     };
 
-    _getNextButton = () => {
-        var labelNext = this.props.labelNext;
-        if (!this.props.labelNext) {
-            labelNext = Translator.translate("next");
-        }
+    _getNextButtonMarkup = () => {
         return (
             <EllipsisLoaderButton ref="nextButton" data-id="nextButton"
                 onClick={this._next}
-                text={labelNext}
+                text={this.props.labelNext || Translator.translate("next")}
                 loading={this.props.showPulsing}
                 disabled={!this.props.canProceed || this.props.showPulsing}
-                className={this.props.nextButtonClassName} />);
+                className={this.props.nextButtonClassName}
+            />
+        );
+    }
+
+    _getNextButton = () => {
+        return this.props.saveTooltip ? (
+            <ConfirmTooltip
+                buttonLabel={this.props.saveTooltip.confirmButtonText}
+                cancelText={this.props.saveTooltip.cancelButtonText}
+                data-id={this.props.saveTooltip["data-id"]}
+                label={this._getNextButtonMarkup()}
+                positionClassName="top left"
+
+                {...this.props.saveTooltip}
+                >
+                {this.props.saveTooltip.messageText}
+            </ConfirmTooltip>
+        ) : this._getNextButtonMarkup();
     };
 
     _getEditLink = () => {
-        var labelEdit = this.props.labelEdit;
-        if (!this.props.labelEdit) {
-            labelEdit = Translator.translate("edit");
-        }
         if (!this.props.active && this.props.showEdit) {
             return (<a ref="editButton" className="task-edit-link edit edit-directory" onClick={this._edit}>
-                {labelEdit}
+                {this.props.labelEdit || Translator.translate("edit")}
             </a>);
         }
     };
@@ -254,6 +250,7 @@ class Step extends React.Component {
     };
 
     componentWillMount() {
+        /* istanbul ignore if  */
         if (!Utils.isProduction()) {
             if (this.props.id) {
                 throw new Error(Utils.deprecatePropError("id", "data-id"));

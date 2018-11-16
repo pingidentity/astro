@@ -20,6 +20,7 @@ var INHERIT_PROPS = [
     "onValueChange",
     "onNext",
     "onCancel",
+    "saveTooltip",
     "showPulsing"
 ];
 
@@ -105,6 +106,17 @@ var INHERIT_PROPS = [
  *         cancelTooltip.messageText : the text to display in the body of the tooltip
  *         cancelTooltip.open : the prop that controls whether the tooltip is visible or not
  *
+ * @param {object} [saveTooltip]
+ *     An object containing the props required to generate a details tooltip to confirm the canceling of a wizard.
+ *     The properties required by this object are:
+ *         saveTooltip.title : the title of the details tooltip
+ *         saveTooltip.cancelButtonText : the text of the cancel link
+ *         saveTooltip.confirmButtonText : the text of the confirm button
+ *         saveTooltip.onCancel : the callback triggered when the cancel button is pressed
+ *         saveTooltip.onConfirm : the callback triggered when the confirm button is pressed
+ *         saveTooltip.messageText : the text to display in the body of the tooltip
+ *         saveTooltip.open : the prop that controls whether the tooltip is visible or not
+ *
  * @param {Wizard~onEdit} [onEdit]
  *      Callback to be triggered when a the edit link of any children is clicked.  If provided, will be injected
  *      its children's props, otherwise the actions of each step must be handled and the store updated
@@ -145,6 +157,7 @@ class Wizard extends React.Component {
         labelCancel: PropTypes.string,
         labelNext: PropTypes.string,
         labelDone: PropTypes.string,
+        saveTooltip: PropTypes.object,
         showPulsing: PropTypes.bool,
         onValueChange: PropTypes.func,
         onNext: PropTypes.func,
@@ -206,7 +219,9 @@ class Wizard extends React.Component {
                 total: this.props.numSteps,
                 completed: this.props.activeStep > idx,
                 showEdit: this.props.activeStep > idx,
-                hideCancel: this.props.activeStep === this.props.numSteps
+                hideCancel: this.props.activeStep === this.props.numSteps,
+                onNext: step.props.onNext,
+                saveTooltip: step.props.saveTooltip,
             }, props));
         }.bind(this));
 
@@ -224,6 +239,7 @@ class Wizard extends React.Component {
                         enableSavingAnimation={this.props.showPulsing}
                         saveClassName="success"
                         cancelTooltip={this.props.cancelTooltip}
+                        saveTooltip={this.props.saveTooltip}
                     />
                 ) : null}
             </div>

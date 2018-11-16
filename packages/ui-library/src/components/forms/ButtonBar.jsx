@@ -92,7 +92,7 @@ class ButtonBar extends React.Component {
         cancelClassName: PropTypes.string,
         cancelText: PropTypes.string,
         cancelTooltip: PropTypes.shape({
-            confirmButtonTex: PropTypes.string,
+            confirmButtonText: PropTypes.string,
             cancelButtonText: PropTypes.string,
             label: PropTypes.node,
             messageText: PropTypes.node,
