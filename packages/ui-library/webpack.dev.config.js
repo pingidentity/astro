@@ -25,6 +25,10 @@ module.exports = {
                 test: /\.md$/,
                 loaders: ["html-loader","markdown-loader"]
             },
+            {
+                test: /\.mdx$/,
+                loaders: ["babel-loader","mdx-loader"]
+            },
             // the core css gets embedded in the JS file
             {
                 test: /\.css$/,

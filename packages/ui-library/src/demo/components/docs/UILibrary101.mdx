@@ -1,0 +1,53 @@
+Welcome to Ping’s UI Library - a collection of React components, utility functions, and static assets. This page will guide you through the basics of setting up a project to use the library and including our components and styles.
+
+## Local NPM
+We expect projects that use the library to have their npm registry set to the Ping Artifactory. The best way to do this is include an `.npmrc` file alongside your package.json with the entry `registry=https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/`. This should work the same for `.yarnrc`. If committed with your code, it should work for all users without the need to make changes.
+
+An alternative way is to run `npm config set registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual`. This will save it to your local user config for all npm projects. Every user will have to do this for your project.
+
+
+## Integrate the UI Library into a project
+
+Once your npm registry is set correctly, the UI Library can be integrated as an npm module into a project by installing it as a dependency.
+
+```bash
+$ npm install ui-library --save
+ -- OR --
+$ npm install ui-library@[VERSION] --save
+```
+
+You can also install the library from its full URL, which lets you bypass changing your npm registry. You have to hard-code the version when you do this.
+
+```bash
+$ npm install http://art01.corp.pingidentity.com:8080/artifactory/simple/inhouse/com/pingone/ui-library/ui-library/[VERSION]/ui-library-[VERSION].tar.gz --save
+```
+
+A snapshot version of the UI Library can be used in development by appending "-SNAPSHOT" to the version, but you should never use a snapshot of the library in a released product. You might want to perform a check during the release build of your project that the UI Library dependency is not on a SNAPSHOT and block the package release if the UI Library dependency is a SNAPSHOT.
+
+## Structure of the UI Library
+All the files in the UI Library are under the folder `lib`, and the components are under `lib/components`. CSS and Sass files are under `lib/css`. Font files, including for our custom icon font, are under `lib/fonts`.
+
+## Using Components
+While browsing components on this site, you’ll see the import path of every component just below the component’s name at the top of the page. You should be able to paste that verbatim into your import statement. The statement should end up looking something like this:
+
+```code
+import FormSearchBar from 'ui-library/lib/components/forms/FormSearchBar';
+```
+
+## Using CSS
+To style components correctly, you’ll need to include our CSS. We provide a flat CSS file at `ui-library/lib/css/ui-library.css` as well as all the source files. Our styles are written in Sass, and if your project processes Sass, you can work from the source. You could also use our variables for your own styles by including files like `ui-library/lib/css/colors.scss` and `ui-library/lib/css/spacing.scss`.
+
+## Hosted Static Assets
+All the library static assets are also hosted on a CDN. You can skip including the CSS in your project and just point to the hosted URL.
+
+```url
+https://assets.pingone.com/ux/ui-library/[VERSION]/css/ui-library.css
+```
+
+The `fonts` and `images` folders are also available.
+
+## Templates
+Please look at our templates for examples of how to use many components together to produce a complete page. We’ve tried to make the templates as self-contained as possible so that you can see all the parts working together. Templates also form the basis for our internal integration tests.
+
+## Contact Us
+You can post questions about the library to [#ui-coalition](https://pingidentity.slack.com/messages/C0P4USREK) on Slack.

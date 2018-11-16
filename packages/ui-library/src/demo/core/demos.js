@@ -1,3 +1,12 @@
+import React from "react";
+import PageSection from "ui-library/lib/components/layout/PageSection";
+import FormattedContent from "ui-library/lib/components/general/FormattedContent";
+import UILibrary101 from "../components/docs/UILibrary101.mdx";
+
+const contentPage = WrappedComponent => (props) => (
+    <PageSection><FormattedContent><WrappedComponent {...props} /></FormattedContent></PageSection>
+);
+
 module.exports = [
     {
         label: "Documentation",
@@ -13,7 +22,7 @@ module.exports = [
             },
             {
                 label: "UI Library 101",
-                demo: require("../components/tutorials/uiLibrary101"),
+                demo: contentPage(UILibrary101),
                 fullscreen: true,
                 icon: "clipboard"
             },

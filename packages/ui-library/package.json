@@ -92,6 +92,8 @@
     "markdown-loader": "~2.0.1",
     "markdown-to-jsx": "~5.4.2",
     "marked": "0.3.5",
+    "mdx-loader": "1.x",
+    "mdxc": "^1.x",
     "node-fetch": "~2.1.2",
     "node-sass": "4.3.0",
     "object-assign": "4.0.1",

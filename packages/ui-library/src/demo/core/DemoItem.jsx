@@ -83,12 +83,10 @@ class DemoItem extends React.Component {
                 <div className="documentation">
 
                     <div className={headerClassName}>
-                        <div className="clearfix">
-                            <PageHeader data-id="component-title"
-                                    title={this.props.label}
-                                    subtitle={this.props.importPath} />
-                            {docLinks}
-                        </div>
+                        <PageHeader data-id="component-title"
+                                title={this.props.label}
+                                subtitle={this.props.importPath} />
+                        {docLinks}
                     </div>
 
                 </div>
@@ -104,7 +102,7 @@ class DemoItem extends React.Component {
                     <div className="demo-description"
                          dangerouslySetInnerHTML={{ __html: markdown }}></div>
 
-                    <OutputComponent className="output clearfix">
+                    <OutputComponent className="output">
                         {React.createElement(type, props)}
                     </OutputComponent>
 
