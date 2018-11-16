@@ -56,18 +56,12 @@ describe("FormTextField", function () {
     it("shows field as required if required set", function () {
         component = ReactTestUtils.renderIntoDocument(
             <Multivalues title="Sites" data-id="multiselect"
-                entries={[
-                    "Entry 1",
-                    "Entry 2",
-                    "Entry 3",
-                    "Entry 4"
-                ]}
                 required={true}
                 onValueChange={callback} />
         );
         // verify that the component is rendered
         var field = TestUtils.findRenderedDOMNodeWithClass(component, "required");
-        expect(ReactTestUtils.isDOMComponent(field)).toBeTruthy();
+        expect(field).toBeTruthy();
     });
 
     it ("rendered with all 4 strings", function () {

@@ -264,7 +264,7 @@ class Multivalues extends React.Component {
     render() {
         var className = classnames(this.props.className, {
             "input-multivalues": true,
-            required: this.props.required,
+            required: this.props.required && this.props.entries.length === 0,
             "value-entered": (this.props.entries.length !== 0),
             stacked: this.props.stacked
         });

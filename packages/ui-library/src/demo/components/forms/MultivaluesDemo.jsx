@@ -91,6 +91,7 @@ class MultivaluesDemo extends React.Component {
                         onValueChange={this._handleUrlChange}
                         stacked={true}
                         name="mv-demo"
+                        required={true}
                     />
                 </div>
 
