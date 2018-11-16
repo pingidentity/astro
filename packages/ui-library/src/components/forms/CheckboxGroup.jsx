@@ -96,6 +96,7 @@ const CheckboxGroup = ({
                             value={option.value}
                             checked={checked}
                             onValueChange={handleValueChange}
+                            labelHelpText={option.labelHelpText}
                         />
                         {checked && option.conditionalContent &&
                             <div className="checkbox-description">{option.conditionalContent}</div>
@@ -113,6 +114,7 @@ CheckboxGroup.propTypes = {
         PropTypes.shape({
             value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).required,
             label: PropTypes.string,
+            labelHelpText: PropTypes.string,
             conditionalContent: PropTypes.oneOfType([
                 PropTypes.string,
                 PropTypes.node

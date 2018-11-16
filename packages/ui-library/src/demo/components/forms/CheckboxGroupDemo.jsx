@@ -14,6 +14,7 @@ const optionsData = [
     {
         value: "three",
         label: "Three",
+        labelHelpText: "this is a help text"
     },
 ];
 
