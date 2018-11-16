@@ -127,4 +127,13 @@ $searchbar-input-height: 38px;
         border-top: none;
         padding-bottom: 0;
     }
+
+    .input-message {
+        &__icon {
+            display: none;
+        }
+        .input-container {
+            padding-right: 0;
+        }
+    }
 }
