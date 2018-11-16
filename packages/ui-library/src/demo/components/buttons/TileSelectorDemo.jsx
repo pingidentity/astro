@@ -80,6 +80,10 @@ class TileSelectorDemo extends React.Component {
                             title: "Native App",
                             iconName: "device",
                             description: "Applications that are stored and run from a device or desktop.",
+                            details: [
+                                "Cloud-based",
+                                "Easily accessible"
+                            ],
                             panel: {
                                 label: "CHOOSE CONNECTION TYPE",
                                 options: [

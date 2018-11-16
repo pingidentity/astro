@@ -73,7 +73,8 @@ const TileSelector = ({
             iconName,
             id,
             title,
-            panel: optionPanel
+            panel: optionPanel,
+            details,
         }
     ) => {
         const handleChange = e => onValueChange(id, e);
@@ -91,6 +92,7 @@ const TileSelector = ({
                     selected={isSelected}
                     onClick={handleChange}
                     panel={optionPanel ? true : false}
+                    details={details}
                 >
                     {description}
                 </TileButton>
