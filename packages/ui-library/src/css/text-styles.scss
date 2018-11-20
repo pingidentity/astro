@@ -59,7 +59,7 @@ $font-size-reduced: 13px;
 
 // BODY
 @mixin text-body {
-    @include text-style($color-elephant);
+    @include text-style($color-neutral-20);
 }
 
 .text-body {
