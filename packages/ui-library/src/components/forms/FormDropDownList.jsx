@@ -654,7 +654,7 @@ class FormDropDownListStateless extends React.Component {
 
         return (
             <OptionItem
-                key={"option-" + option.label} // add prop allows re-ordering, so must have unique key
+                key={`option-${option.label}-${option.value}`} // add prop allows re-ordering, so must have unique key
                 ref={"option-" + index}
                 data-id={"option-" + index}
                 className={className}
