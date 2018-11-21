@@ -150,7 +150,7 @@ class UILibrary101 extends React.Component {
                             '       > index.html',
                             '   > fonts (fonts to support the common L&F)',
                             '   > images (images to support the common L&F)',
-                            '   > net (support for the API layer (HTTP client, Cache, etc)',
+                            '   > net (DEPRECATED, please switch to @pingone/net. Support for the API layer (HTTP client, Cache, etc)',
                             '   > templates (examples of how the UI Library components can be wired together to give you a specific view / layout)',
                             '   > testutil (utils to make the testing of ReactJS components easier - build on top of the ReactTestUtils)',
                             '   > util (various utils, mainly for string formatting and validation)'
