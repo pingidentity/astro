@@ -258,7 +258,6 @@ describe("LeftNavBar", function () {
 
         var copyright = TestUtils.findRenderedDOMNodeWithDataId(component, "copyright");
         expect(copyright.textContent).toContain(customContent);
-        expect(copyright).toMatchSnapshot();
 
         var logo = TestUtils.findRenderedDOMNodeWithTag(copyright, "img");
         expect(logo.getAttribute("src")).toBe(logoSrc);
