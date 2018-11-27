@@ -2,7 +2,7 @@
     @include border-radius(10px);
     @include transition(background 0.1s);
 
-    background: $color-neutral-95;
+    background: $color-neutral-80;
     border: none;
     height: 20px;
     line-height: 1em;
@@ -69,6 +69,6 @@
     path {
         @include transition(fill 0.1s);
 
-        fill: $color-neutral-70;
+        fill: $color-neutral-30;
     }
 }
