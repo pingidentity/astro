@@ -16,6 +16,10 @@ $card-mobile-padding: $spacing-xx;
     padding: $card-padding-top $card-padding-horizontal $card-padding-bottom $card-padding-horizontal;
     position: relative;
     width: 100%;
+
+    &--wide {
+        max-width: 550px;
+    }
 }
 
 @media (max-width: $breakpoint-mobile) {
