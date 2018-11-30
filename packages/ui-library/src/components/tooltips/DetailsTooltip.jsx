@@ -323,6 +323,8 @@ class DetailsTooltipStateless extends React.Component {
         });
     };
 
+    _stopClickPropagation = e => e.stopPropagation()
+
     componentWillReceiveProps(nextProps) {
         if (!this.props.open && nextProps.open) {
             this._bindWindowsEvents();
@@ -360,7 +362,13 @@ class DetailsTooltipStateless extends React.Component {
         );
 
         return (
-            <span className={containerClassName} data-id={this.props["data-id"]} ref="container">
+            <span
+                className={containerClassName}
+                data-id={this.props["data-id"]}
+                // Stop events from bubbling up out of tooltip
+                onClick={this._stopClickPropagation}
+                ref="container"
+            >
                 {this.props.label && (
                     <a
                         data-id="action-btn"
