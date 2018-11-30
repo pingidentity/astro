@@ -74,13 +74,13 @@ describe("ColorPicker", function () {
         expect(picker).toBeUndefined();
     });
 
-    it("stateless: opens if tabbed to it", function () {
+    it("stateless: doesn't open when tabbed to it", function () {
         var component = getComponent({ stateless: true });
         var input = getParts(component).input;
 
         ReactTestUtils.Simulate.focus(input, { nativeEvent: { relatedTarget: {} } });
 
-        expect(component.props.onToggle).toBeCalled();
+        expect(component.props.onToggle).not.toBeCalled();
     });
 
     it("stateless: closes on a global click", function () {
@@ -460,13 +460,13 @@ describe("ColorPicker", function () {
         expect(onToggle.mock.calls.length).toBe(0);
     });
 
-    it("stateless: open when the inner swatch is focused on", function () {
+    it("stateless: doesn't open when the inner swatch is focused on", function () {
         var component = getComponent({ stateless: true });
         var componentRef = component.refs.stateless;
 
         ReactTestUtils.Simulate.focus(componentRef.refs.innerSwatch, { nativeEvent: { relatedTarget: {} } });
 
-        expect(component.props.onToggle).toBeCalled();
+        expect(component.props.onToggle).not.toBeCalled();
     });
 
     it("stateless: open when the inner swatch is focused on", function () {

@@ -19,7 +19,7 @@ describe("ColorPicker Integration", function () {
      * THEN: The base image and the current image should be identical
      */
     it("should have color wrappers when clicking on Color Pickers", ColorPickerPage.retriable(function () {
-        ColorPickerPage.openColorPickerDemoPage();
+       // ColorPickerPage.openColorPickerDemoPage();
 
         expect(ColorPickerPage.verifyColorPickerExisting(1)).toBeTruthy();
         //click on the first color picker
@@ -40,14 +40,14 @@ describe("ColorPicker Integration", function () {
         //take screenshot and compare
         ColorPickerPage.takeScreenshotAndCompare("ComponentColorPicker_Wrapper2");
     }));
-    
+
     /**
      * SCENARIO: Should change the color value
      * GIVEN: Goes to component ColorPicker
      * WHEN: Inputs correct color into the field
      * THEN: The input color should be selected
      */
-     
+
     it("should change the color value", ColorPickerPage.retriable(function () {
         ColorPickerPage.openColorPickerDemoPage();
 

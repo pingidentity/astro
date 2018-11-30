@@ -237,12 +237,6 @@ class Stateless extends React.Component {
         }
     };
 
-    _handleFocus = (e) => {
-        if (e.nativeEvent.relatedTarget) {
-            this._open();
-        }
-    };
-
     _valueChange = (hex) => {
         return this.props.onValueChange(hex);
     };
@@ -304,7 +298,6 @@ class Stateless extends React.Component {
                 <div className="color-picker" ref="swatch">
                     <span className="colors colors-theme-default colors-swatch-position-left colors-swatch-left colors-position-default"
                           ref="innerSwatch"
-                          onFocus={this._handleFocus}
                           onClick={this._handleClick}>
                         <FormTextField
                                 data-id="colorInput"
