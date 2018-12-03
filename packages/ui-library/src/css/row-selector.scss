@@ -93,6 +93,10 @@
         text-transform: uppercase;
         margin-right: $spacing-sm;
     }
+    &__column-helptext {
+        margin: 0 $spacing-md 0 $spacing-xs;
+    }
+
     &--resizable {
         .items {
             max-height: none !important;

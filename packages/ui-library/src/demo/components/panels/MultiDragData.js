@@ -5,6 +5,7 @@ exports.columns = [
         searchName: "these available rows you might want",
         id: 1,
         disableSort: true,
+        helpText: "A helphint can be added to the column titles",
         rows: [
             {
                 id: 0,

@@ -2,6 +2,7 @@ var PropTypes = require("prop-types");
 var React = require("react"),
     ReactDOM = require("react-dom"),
     DragDropRow = require("../../rows/DragDropRow"),
+    HelpHint = require("../../tooltips/HelpHint"),
     LinkDropDownList = require("../../forms/LinkDropDownList"),
     classnames = require("classnames"),
     _ = require("underscore");
@@ -36,6 +37,8 @@ var React = require("react"),
  * @param {number} [dragToEdge=false]
  *    If true, the drag index will only increment when the drag location has passed the edge of the row instead
  *    of being incremented after the halfway mark which is the default behaviour.
+ * @param {number} [helpText]
+ *    When provided, this text appears withing a helphint next to the column title/name
  *
  * @param {MultiDrag~onAdd} [onAdd]
  *    Callback to be passed to contentType (as onAdd).
@@ -221,28 +224,45 @@ module.exports = class extends React.Component {
     };
 
     render() {
-
+        const {
+            category,
+            categoryList,
+            "data-id": dataId,
+            helpText,
+            name,
+            rows,
+            showCategoryList,
+            showCount,
+            strings,
+        } = this.props;
         const className = classnames(
             this.props.className, {
                 "disable-sort": this.props.disableSort
             }
         );
-
         const categoryOptions = this._getCategoryOptions();
-        const selectedCategory = _.find(categoryOptions, option => option.id === (this.props.category || ""));
-        const title = this.props.categoryList
-            ? `${this.props.name} ${this.props.strings.filteredByLabel || "filtered by"}:`
-            : this.props.name;
+        const selectedCategory = _.find(categoryOptions, option => option.id === (category || ""));
+        const helpHint = helpText ? (
+            <HelpHint
+                className="row-selector__column-helptext inline"
+                data-id={`${dataId}-helphint`}
+                hintText={helpText}
+            />
+        ) : null;
 
         return (
-            <div data-id={this.props["data-id"]} className={className}>
+            <div data-id={dataId} className={className}>
 
                 <div className="row-selector__column-header">
-                    <span className="row-selector__column-title">{title}</span>
-                    {this.props.categoryList &&
+                    <span className="row-selector__column-title">
+                        {name}
+                        {helpHint}
+                        {categoryList && (`${strings.filteredByLabel}:` || "filtered by:")}
+                    </span>
+                    {categoryList &&
                         <LinkDropDownList
                             className="row-selector__category-selector"
-                            open={this.props.showCategoryList}
+                            open={showCategoryList}
                             label={selectedCategory.label}
                             stateless={true}
                             onClick={this._handleCategoryClick}
@@ -250,8 +270,8 @@ module.exports = class extends React.Component {
                             options={categoryOptions}
                         />
                     }
-                    {this.props.showCount &&
-                        <span className="row-selector__column-count">{this.props.rows.length}</span>
+                    {showCount &&
+                        <span className="row-selector__column-count">{rows.length}</span>
                     }
                 </div>
 

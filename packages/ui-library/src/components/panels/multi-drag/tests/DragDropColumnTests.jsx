@@ -176,6 +176,39 @@ describe("DragDropColumn", function () {
         expect(callback).not.toBeCalled();
     });
 
+    it("renders the column title helphint", () => {
+        const dataId = "testdataid";
+        const name = "Test column name";
+        const helpText = "Test help text!";
+
+        getWrappedComponent({
+            "data-id": dataId,
+            helpText: helpText,
+            name: name,
+        });
+
+        const component = thisComponent;
+
+        const helpHintElement = TestUtils.findRenderedDOMNodeWithDataId(component, `${dataId}-helphint`);
+        expect(helpHintElement).toBeTruthy();
+
+        const helpHintTarget = TestUtils.findRenderedDOMNodeWithDataId(component, `${dataId}-helphint-target`);
+        expect(helpHintTarget.className).toContain("row-selector__column-helptext inline");
+
+        const helpHintText = TestUtils.findRenderedDOMNodeWithDataId(helpHintElement, "tooltip");
+        expect(helpHintText.textContent).toEqual(helpText);
+    });
+
+    it("accepts render prop as contentType with correct onAdd", () => {
+        const onAdd = jest.fn();
+        getWrappedComponent({
+            contentType: props => props.onAdd(),
+            onAdd
+        });
+
+        expect(onAdd).toHaveBeenCalled();
+    });
+
     it("Executes scroll callbacks", function () {
         getWrappedComponent({ rows: [] });
         var component = thisComponent;
@@ -206,15 +239,6 @@ describe("DragDropColumn", function () {
 
         jest.restoreAllMocks();
     });
-    //Make sure the above test is always last because of the mock findDOMNode
+    // *** Make sure the above test is always last because of the mock findDOMNode ***
 
-    it("accepts render prop as contentType with correct onAdd", () => {
-        const onAdd = jest.fn();
-        getWrappedComponent({
-            contentType: props => props.onAdd(),
-            onAdd
-        });
-
-        expect(onAdd).toHaveBeenCalled();
-    });
 });
