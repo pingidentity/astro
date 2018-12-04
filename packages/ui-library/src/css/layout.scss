@@ -253,6 +253,7 @@ $color-grey-minor-1: $color-neutral-30;
         font-size: 10px;
         line-height: 1.3em;
         color: $color-elephant;
+        background: $color-neutral-90;
 
         .pingone-logo {
             max-width: 75px;
@@ -401,6 +402,10 @@ $color-grey-minor-1: $color-neutral-30;
         color: $color-white;
         border-right: none;
         width: $layout-nav-width;
+
+        .copyright {
+            background: inherit;
+        }
 
         .top-content {
             padding: 15px 10px 13px 15px;
