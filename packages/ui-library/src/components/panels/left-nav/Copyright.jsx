@@ -33,9 +33,9 @@ class Copyright extends React.Component {
         this._defaultChildren = [
             this._getLogo(),
             `Copyright © 2003-${this._year}`,
-            <br />,
+            <br key="br1" />,
             "Ping Identity Corporation",
-            <br />,
+            <br key="br2" />,
             "All rights reserved"
         ];
     }
@@ -52,7 +52,7 @@ class Copyright extends React.Component {
             };
 
             return (
-                <div className="logo-container" data-id="logo-container">
+                <div key="logo" className="logo-container" data-id="logo-container">
                     <img {...attributes} style={style} className="ping-application" />
                 </div>
             );
@@ -60,7 +60,7 @@ class Copyright extends React.Component {
         else if (this.props.pingoneLogo) {
             /*eslint-disable max-len*/
             return (
-                <div className="logo-container" data-id="logo-container">
+                <div key="logo" className="logo-container" data-id="logo-container">
                     <svg className="pingone-logo" viewBox="0 0 300 80" >
                         <path d="M177.5,5.4C194.2,5.4,204,18,204,34.8c0,17.2-9.7,29.4-26.5,29.4C160.7,64.2,151,52,151,34.8
                             C151,18,160.8,5.4,177.5,5.4z M177.5,57c12.7,0,18.1-10.9,18.1-22.2c0-11.5-6-22.3-18.1-22.2c-12.1-0.1-18.1,10.7-18.1,22.2
@@ -90,7 +90,7 @@ class Copyright extends React.Component {
         }
         else if (this.props.updated) {
             return (
-                <div className="logo-container" data-id="logo-container">
+                <div key="logo" className="logo-container" data-id="logo-container">
                     <div className="logo" data-id="copyright-logo" />
                 </div>
             );
