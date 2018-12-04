@@ -282,7 +282,11 @@ class DetailsTooltipStateless extends React.Component {
         return this.props.open ? (
             <div className={contentClassName} data-id="details-content"
                     onClick={hide}>
-                <div className="details-content-inner">
+                <div
+                    className="details-content-inner"
+                    // Stop events from bubbling up out of tooltip
+                    onClick={this._stopClickPropagation}
+                >
                     {this.props.showClose && (
                         <span className="details-close" data-id="details-close" onClick={this._handleToggle}></span>
                     )}
@@ -365,8 +369,6 @@ class DetailsTooltipStateless extends React.Component {
             <span
                 className={containerClassName}
                 data-id={this.props["data-id"]}
-                // Stop events from bubbling up out of tooltip
-                onClick={this._stopClickPropagation}
                 ref="container"
             >
                 {this.props.label && (
