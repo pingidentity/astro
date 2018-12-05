@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import Button from "./Button";
 
-const renderOptions = (tileId, options) => options.map(({
+const renderOptions = (dataId, tileId, options) => options.map(({
     buttonLabel,
     content,
     label,
@@ -17,7 +17,12 @@ const renderOptions = (tileId, options) => options.map(({
                 <div className="tile-panel__option__label">{label}</div>
                 <div className="tile-panel__option__content">{content}</div>
             </div>
-            <Button className="tile-panel__option__button" label={buttonLabel} onClick={buttonClick} />
+            <Button
+                className="tile-panel__option__button"
+                data-id={`${dataId}-${id}-button`}
+                label={buttonLabel}
+                onClick={buttonClick}
+            />
         </div>
     );
 });
@@ -60,7 +65,7 @@ const TilePanel = ({
         >
             {label && <div className="tile-panel__label">{label}</div>}
             {Array.isArray(options) && options.some(({ content }) => content !== undefined)
-                ? renderOptions(tileId, options)
+                ? renderOptions(dataId, tileId, options)
                 : options}
         </div>
     );
