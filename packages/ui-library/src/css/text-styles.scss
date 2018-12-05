@@ -2,6 +2,8 @@ $font-size-primary: 15px;
 $font-size-normal: 14px;
 $font-size-reduced: 13px;
 
+$body-text-color: $color-neutral-20;
+
 @mixin text-style(
     $color: $color-slate,
     $size: $font-size-normal,
@@ -59,11 +61,24 @@ $font-size-reduced: 13px;
 
 // BODY
 @mixin text-body {
-    @include text-style($color-neutral-20);
+    @include text-style($body-text-color);
+
+    em {
+        font-style: italic;
+    }
 }
 
 .text-body {
     @include text-body;
+}
+
+@mixin text-note {
+    @include text-style($body-text-color);
+    font-style: italic;
+}
+
+.text-note {
+    @include text-note;
 }
 
 // PRIMARY

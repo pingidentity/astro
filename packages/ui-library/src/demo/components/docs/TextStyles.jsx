@@ -33,12 +33,12 @@ const TextStyles = () => (
             />
         </PageSection>
         <PageSection title="Body Text">
-            <div className="text-body">This is some body text.</div>
+            <div className="text-body">This is some body text. You can <em>italicized words in it</em>.</div>
             <Markup
                 custom={true}
                 language="html"
                 content={
-                    `<div className="text-body">This is some body text.</div>`
+                    `<div className="text-body">This is some body text. You can <em>italicized words in it</em>.</div>`
                 }
             />
             <hr className="hr"/>
@@ -48,6 +48,15 @@ const TextStyles = () => (
                 language="html"
                 content={
                     `<div className="text-primary">This is some primary text.</div>`
+                }
+            />
+            <hr className="hr"/>
+            <div className="text-note">This is a note.</div>
+            <Markup
+                custom={true}
+                language="html"
+                content={
+                    `<div className="text-note">This is a note.</div>`
                 }
             />
         </PageSection>
