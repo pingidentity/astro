@@ -60,7 +60,7 @@ textarea {
     display: block;
     height: $default-input-height;
     box-sizing: border-box;
-    outline: none;
+    outline-width: 0;
     font-family: $font-pn-regular;
 
     @include border-radius($default-input-border-radius);
@@ -469,11 +469,18 @@ label {
         }
         input[type=radio] {
             position: absolute;
-            visibility: hidden;
             margin: 0;
+            top: -1px;
+            left: 0;
+            height: 24px;
+            width: 24px;
 
             &:checked + .circle:after {
                 background-color: $color-midnight;
+            }
+
+            :focus {
+                outline-width: 1px;
             }
         }
         &.input-text {
