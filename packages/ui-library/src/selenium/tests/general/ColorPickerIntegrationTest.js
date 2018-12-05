@@ -29,6 +29,11 @@ describe("ColorPicker Integration", function () {
         expect(ColorPickerPage.verifyColorWrapperExisting(1)).toBeTruthy();
         //take screenshot and compare
         ColorPickerPage.takeScreenshotAndCompare("ComponentColorPicker_Wrapper1");
+
+        //pause to fix flaky screenshot test.
+        //sometimes the input is focused in the screenshot and sometimes not because of the next line of code
+        ColorPickerPage.pause(8000);
+
         //click on the first color picker
         ColorPickerPage.clickColorPicker(1);
         ColorPickerPage.waitForColorWrapperInvisible(1);

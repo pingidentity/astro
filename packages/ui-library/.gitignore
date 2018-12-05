@@ -6,6 +6,7 @@ mvn/
 build*
 dist
 lib
+temp
 **/coverage
 **/coverage-reference
 npm-debug.log
@@ -15,6 +16,8 @@ package-lock.json
 yarn.lock
 yarn-error.log
 .vscode/*
+rust_mozprofile*
+logs
 
 # IDEA
 *.iml

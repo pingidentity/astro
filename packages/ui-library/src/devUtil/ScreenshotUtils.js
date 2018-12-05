@@ -2,16 +2,14 @@
 var fs = require("fs");
 var _ = require("underscore");
 var im = require("./ImageMagick.js");
-var wdioConfig = require("../../wdio.conf.js").config;
 var ScreenshotComparisonException = require("./ScreenshotComparisonException.js");
 var ComparisonExitCode = ScreenshotComparisonException.ComparisonExitCode;
-var tempRoot = wdioConfig.screenshotOpts.tempRoot;
-var baseLineRoot = wdioConfig.screenshotOpts.baseLineRoot;
-var diffRoot = wdioConfig.screenshotOpts.diffRoot;
-var globalTolerance = wdioConfig.screenshotOpts.tolerance || 0;
-var unstableScreenshots = wdioConfig.screenshotOpts.unstableScreenshots || [];
-var comparisonWaitTime = wdioConfig.screenshotOpts.comparisonWaitTime;
-var isScreenshotActive = wdioConfig.screenshotOpts.useScreenshotTool;
+var tempRoot = browser.options.screenshotOpts.tempRoot;
+var baseLineRoot = browser.options.screenshotOpts.baseLineRoot;
+var diffRoot = browser.options.screenshotOpts.diffRoot;
+var globalTolerance = browser.options.screenshotOpts.tolerance || 0;
+var unstableScreenshots = browser.options.screenshotOpts.unstableScreenshots || [];
+var isScreenshotActive = browser.options.screenshotOpts.useScreenshotTool;
 
 var ScreenshotUtils = {
     /**
@@ -123,20 +121,21 @@ var ScreenshotUtils = {
     },
 
     cropImage: function (path, width, height, x, y) {
-        var crop = im.crop(path, path, width, height, x, y);
         var result = false;
-        // execute IM command line
-        crop.then(function (data) {
-            if (!data.error) {
-                result = true;
-            } else {
-                console.log("Error: "+ data.stderr);
-                result = false;
-            }
-        });
+        browser.call(function() {
+            const crop = im.crop(path, path, width, height, x, y);
+            // execute IM command line
+            crop.then(function (data) {
+                if (!data.error) {
+                    result = true;
+                } else {
+                    console.log("Error: "+ data.stderr);
+                    result = false;
+                }
+            });
+            return crop;
 
-        // wait for IM finishes its job
-        browser.waitUntil(crop, comparisonWaitTime, 100);
+        });
         return result;
     },
 
@@ -167,36 +166,40 @@ var ScreenshotUtils = {
 
                 var currentPath = this.getCurrentScreenshotPath(fileName);
                 var diffPath = this.getDiffScreenshotPath(fileName);
-                var comp = im.compare(baselinePath, currentPath, diffPath);
+                //Wait for promise to be fulfilled
+                browser.call(function() {
+                    const comp = im.compare(baselinePath, currentPath, diffPath);
+                                    // execute IM command line
+                    comp.then(function (data) {
+                        var error = (data.stderr || "").trim();
+                        var diffPixelCount = Number(error);
 
-                // execute IM command line
-                comp.then(function (data) {
-                    var error = (data.stderr || "").trim();
-                    var diffPixelCount = Number(error);
+                        if (diffPixelCount >= 0 && diffPixelCount <= disimilarPixelsAllowed) {
+                            result = ComparisonExitCode.SUCCESS;
 
-                    if (diffPixelCount >= 0 && diffPixelCount <= disimilarPixelsAllowed) {
-                        result = ComparisonExitCode.SUCCESS;
+                            // remove diff screenshot if there is nothing difference
+                            fs.unlinkSync(diffPath);
+                        }
+                        else if (diffPixelCount > disimilarPixelsAllowed) {
+                            result = diffPixelCount;
+                        }
+                        else if (error.indexOf("image widths or heights differ") > -1) {
+                            result = ComparisonExitCode.DIFFERENT_IMAGE_SIZE;
 
-                        // remove diff screenshot if there is nothing difference
-                        fs.unlinkSync(diffPath);
-                    }
-                    else if (diffPixelCount > disimilarPixelsAllowed) {
-                        result = diffPixelCount;
-                    }
-                    else if (error.indexOf("image widths or heights differ") > -1) {
-                        result = ComparisonExitCode.DIFFERENT_IMAGE_SIZE;
+                            var label = "Cannot compare\n\nBase and New screenshot\nhave different size";
+                            im.createBlankImageWithText(label, diffPath);
+                            console.log(
+                                "Error: Screenshot dimensions are different. Created a default diff screenshot"
+                            );
+                        }
+                        else {
+                            result = ComparisonExitCode.UNKNOWN_ERROR;
+                        }
+                    });
 
-                        var label = "Cannot compare\n\nBase and New screenshot\nhave different size";
-                        im.createBlankImageWithText(label, diffPath);
-                        console.log("Error: Screenshot dimensions are different. Created a default diff screenshot");
-                    }
-                    else {
-                        result = ComparisonExitCode.UNKNOWN_ERROR;
-                    }
+                    return comp;
+
                 });
-
-                // wait for IM finishes its job
-                browser.waitUntil(comp, comparisonWaitTime, 100);
             } else {
                 result = ComparisonExitCode.NO_BASELINE;
                 this.takeScreenshotThenSaveToCurrentDiff(fileName, elementSelector);
@@ -242,7 +245,7 @@ var ScreenshotUtils = {
             this.initializeScreenshotDir();
             var currentPath = this.getCurrentScreenshotPath(fileName),
                 tryCount = 0,
-                maxRetry = wdioConfig.screenshotOpts.maxScreenshotAttempt,
+                maxRetry = browser.options.screenshotOpts.maxScreenshotAttempt,
                 result = 0,
                 baselinePath = this.getBaseLineScreenshotPath(fileName);
 
@@ -251,7 +254,7 @@ var ScreenshotUtils = {
                     fs.unlinkSync(currentPath);
                     console.log("Comparison failed, taking other screenshot: " + fileName);
                 }
-                browser.pause(wdioConfig.screenshotOpts.retryInterval);
+                browser.pause(browser.options.screenshotOpts.retryInterval);
                 if (browser.isExisting(elementSelector)) {
                     this.takeElementScreenshotAndSaveToCurrentPath(fileName, elementSelector);
                     result = this.compareScreenshotWithBaseline(fileName, elementSelector, tolerance);
@@ -298,17 +301,18 @@ var ScreenshotUtils = {
         }
 
         var result = 0;
-        var getSize = im.getSize(imagepath);
+        // wait for IM promise to resolve
+        browser.call(function() {
+            const getSize = im.getSize(imagepath);
 
-        // execute IM command line
-        getSize.then(function (data) {
-            if (data.width !== 0 && data.height !== 0) {
-                result = Math.round(data.width * data.height * _tolerance / 100);
-            }
+            // execute IM command line
+            getSize.then(function (data) {
+                if (data.width !== 0 && data.height !== 0) {
+                    result = Math.round(data.width * data.height * _tolerance / 100);
+                }
+            });
+            return getSize;
         });
-
-        // wait for IM finishes its job
-        browser.waitUntil(getSize, comparisonWaitTime, 100);
 
         console.log("Allowing " + result + " disimilar pixels for image '" + imagepath + "'");
 

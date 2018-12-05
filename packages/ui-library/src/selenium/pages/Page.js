@@ -227,9 +227,9 @@ Page.prototype.scrollPage = function (elementPath, x, y) {
 Page.prototype.scrollElementToTopSync = function (elementPath, offset) {
     this.assertExistingElement(elementPath);
 
-    var newOffset = browser.selectorExecute(elementPath, "return arguments[0][0].scrollTop = "+ offset);
-    return browser.waitUntil(browser.selectorExecute(elementPath,
-        "return arguments[0][0].scrollTop") === newOffset , 5000, "Error: Cannot wait for scrolling", 100);
+    return browser.call(function() {
+        browser.selectorExecute(elementPath, "return arguments[0][0].scrollTop = "+ offset);
+    });
 };
 
 /**
@@ -250,9 +250,10 @@ Page.prototype.scrollToElement = function (tagName, dataId) {
  * @returns {object} browser waitUntil object
  */
 Page.prototype.blurElement = function () {
-    browser.execute("return document.activeElement.blur();");
-    return browser.waitUntil(browser.execute("return !document.hasFocus();")
-        , 5000, "Error: fail when waiting to lose focus", 100);
+
+    return browser.call(function() {
+        return browser.execute("return document.activeElement.blur();");
+    });
 
 };
 

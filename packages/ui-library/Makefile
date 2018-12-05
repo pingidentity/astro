@@ -235,8 +235,6 @@ verify: install-node-npm
 
 integration: install-node-npm
 	rm -rf reports
-	node_modules/.bin/selenium-standalone install
-	node_modules/.bin/selenium-standalone start & node_modules/.bin/http-server ./build &
 	$(NPM_EXEC) run pack
 	node_modules/.bin/wdio wdio.conf.js
 

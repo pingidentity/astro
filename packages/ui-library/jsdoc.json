@@ -10,7 +10,6 @@
         "./src/demo/fonts",
         "./src/demo/images",
         "./src/demo/Demo.jsx",
-        "./src/demo/highlight.js",
         "./src/css",
         "./src/fonts",
         "./src/images",

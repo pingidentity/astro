@@ -1,7 +1,8 @@
+/*global browser:true */
+
 var Page = require("./Page.js");
 var ScreenshotUtils = require("../../devUtil/ScreenshotUtils.js");
 var ScreenshotComparisonException = require("../../devUtil/ScreenshotComparisonException.js");
-var wdioConfig = require("../../../wdio.conf.js").config;
 
 var HomePage = Object.create(Page, {
     /**
@@ -104,7 +105,7 @@ var HomePage = Object.create(Page, {
      */
     openHomePage: {
         value: function() {
-            this.open(wdioConfig.baseUrl + "/index.html");
+            this.open("/index.html");
         }
     },
 
@@ -187,8 +188,8 @@ var HomePage = Object.create(Page, {
 
             return function() {
                 var retryCount = 0;
-                var maxRetryCount = wdioConfig.testRetryCount;
-                var retryWaitTime = wdioConfig.testRetryWaitTime;
+                var maxRetryCount = browser.options.testRetryCount;
+                var retryWaitTime = browser.options.testRetryWaitTime;
                 var error;
 
                 do {

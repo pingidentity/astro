@@ -45,6 +45,10 @@ describe("Wizard Integration", function () {
         WizardPage.takeScreenshotAndCompare("ComponentWizard_Wizard1Step2");
         //click button next
         WizardPage.clickNextButton();
+        //verify confirm tooltip
+        expect(WizardPage.verifyConfirmTooltipExisting("step")).toBeTruthy();
+        WizardPage.clickConfirmButton("step");
+
         //Verify the pulsing loading
         expect(WizardPage.verifyNextButtonPulsingExisting()).toBeTruthy();
         WizardPage.waitForNextButtonPulsingInvisible();
@@ -59,11 +63,21 @@ describe("Wizard Integration", function () {
         WizardPage.clickLinkEditStep2();
         //click button next
         WizardPage.clickNextButton();
+
+        //verify confirm tooltip
+        expect(WizardPage.verifyConfirmTooltipExisting("step")).toBeTruthy();
+        WizardPage.clickConfirmButton("step");
+
         //Verify the pulsing loading
         expect(WizardPage.verifyNextButtonPulsingExisting()).toBeTruthy();
         //click button Done
         WizardPage.waitForNextButtonPulsingInvisible();
         WizardPage.clickDoneButton();
+
+        //verify confirm tooltip
+        expect(WizardPage.verifyConfirmTooltipExisting("done")).toBeTruthy();
+        WizardPage.clickConfirmButton("done");
+
         //Verify the pulsing loading
         expect(WizardPage.verifyDoneButtonPulsingExisting()).toBeTruthy();
         WizardPage.waitForDoneButtonPulsingInvisible();

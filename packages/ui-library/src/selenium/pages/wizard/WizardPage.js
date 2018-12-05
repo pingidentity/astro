@@ -256,7 +256,46 @@ var WizardDemoPage = Object.create(HomePage, {
             this.openHomePage();
             this.navigateToPath("Components", "ModalsTooltips", "Wizard");
         }
-    }
+    },
+
+        /**
+     * @desc this function is to check if check box Pulsing existing
+     */
+    verifyConfirmTooltipExisting: {
+        value: function (which) {
+            switch (which) {
+                case "done":
+                    return (
+                        this.isExisting("//span[@data-id='button-bar-save-tooltip']//div[@data-id='details-content']")
+                    );
+                case "step":
+                    return (
+                        this.isExisting("//span[@data-id='confirm-tooltip']//div[@data-id='details-content']")
+                    );
+                default:
+                    return;
+            }
+        }
+    },
+
+    /**
+     * @desc this function is to click check box Pulsing
+     */
+    clickConfirmButton: {
+        value: function (which) {
+            switch (which) {
+                case "done":
+                    return this.click("//button[@data-id='button-bar-save-tooltip-button']");
+                case "step":
+                    return this.click("//button[@data-id='confirm-tooltip-button']");
+                default:
+                    return;
+            }
+        }
+    },
+
+
+
 });
 
 module.exports = WizardDemoPage;

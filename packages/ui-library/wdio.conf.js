@@ -24,8 +24,8 @@ switch (argv7) {
         browserName = "firefox";
 }
 
-exports.config = {
 
+exports.config = {
     host: "127.0.0.1",
     port: 4444,
     //
@@ -40,11 +40,29 @@ exports.config = {
     specs: [
         "./src/selenium/tests/**/*IntegrationTest.js"
     ],
+    services: ["static-server","docker"],
+
+    dockerLogs: "./logs",
+    dockerOptions: {
+        image: "selenium/standalone-firefox",
+        healthCheck: "http://localhost:4444",
+        options: {
+            p: ["4444:4444"],
+            shmSize: "2g",
+            net: "host",
+            D: true,
+        }
+    },
+    staticServerFolders: [
+        { mount: "/", path: "./build" },
+    ],
+    staticServerPort: 8080,
 
     // Patterns to exclude.
     exclude: [
         // "path/to/excluded/files"
     ],
+
     //
     // ============
     // Capabilities
@@ -165,7 +183,6 @@ exports.config = {
             "TemplatesEditViewCollapsible_ExpandedAddress",
             "TemplatesWizardView_Wizard2Step3"
         ],
-        comparisonWaitTime: 10000 // how long to wait for the comparison to finish
     },
 
     // number of retries (set to 0 for no retry) for failed tests
