@@ -16,7 +16,7 @@ import PropTypes from "prop-types";
 
 class Code extends Component {
 
-    static PropTypes = {
+    static propTypes = {
         "data-id": PropTypes.string
     }
 
