@@ -1,5 +1,6 @@
-var keyMirror = require("fbjs/lib/keyMirror"),
-    Constants = require("./MessagesConstants.js");
+import { MessageTypes, MessageTypeValues } from "./MessagesConstants";
+
+var keyMirror = require("fbjs/lib/keyMirror");
 
 /*
  * This is a private incrementing variable used to give each message object a unique id.  It's only
@@ -43,7 +44,7 @@ exports.pushMessage = function (containerId, text, status, timer, index, isHtml)
     return {
         type: exports.Types.ADD_MESSAGE,
         text: text,
-        status: status || Constants.MessageTypes.SUCCESS,
+        status: status || MessageTypes.SUCCESS,
         timer: timer,
         containerId: containerId,
         index: index,
@@ -79,7 +80,7 @@ exports.addMessage = function (containerId, message, status, removeAfterMs) {
     let isHtml, progress, messageId, minimized, minimizeAfterMS = 0;
 
     if ((arguments.length === 1 && typeof(containerId) !== "object") ||
-        (arguments.length === 2 && Constants.MessageTypeValues.indexOf(message) > -1) ||
+        (arguments.length === 2 && MessageTypeValues.indexOf(message) > -1) ||
         (arguments.length === 3 && typeof(status) === "number"))
     {
         removeAfterMs = arguments[2];
@@ -97,8 +98,12 @@ exports.addMessage = function (containerId, message, status, removeAfterMs) {
         minimized = arguments[0].minimized;
         minimizeAfterMS = arguments[0].minimizeAfterMS;
     }
-
-    removeAfterMs = typeof(removeAfterMs) === "undefined" ? 5000 : removeAfterMs;
+    // error messages should stay until dismissed
+    if (typeof(removeAfterMs) === "undefined" ) {
+        //OUR NAMES ARE REALLY TERRIBLE SO WE HAVE TO DO THIS
+        const isError = status === MessageTypes.WARNING || status === MessageTypes.ERROR;
+        removeAfterMs = isError ? 0 : 5000;
+    }
 
     return function (dispatch) {
         var timer = removeAfterMs;
@@ -121,7 +126,7 @@ exports.addMessage = function (containerId, message, status, removeAfterMs) {
         dispatch({
             containerId,
             type: exports.Types.ADD_MESSAGE,
-            status: status || Constants.MessageTypes.SUCCESS,
+            status: status || MessageTypes.SUCCESS,
             text: message,
             timer,
             index: messageId,

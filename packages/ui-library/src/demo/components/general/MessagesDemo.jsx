@@ -1,6 +1,7 @@
 var React = require("react"),
     Redux = require("redux"),
     Messages = require("./../../../components/general/messages/"),
+    InlineMessage = require("../../../components/general/InlineMessage"),
     uuid = require("uuid");
 
 import Button from "../../../components/buttons/Button";
@@ -16,7 +17,7 @@ class MessagesDemo extends React.Component {
     };
 
     _addErrorMessage = () => {
-        this.actions.addMessage("New Error Message Added at " + new Date().toString(), Messages.MessageTypes.WARNING);
+        this.actions.addMessage("New Error Message Added at " + new Date().toString(), Messages.MessageTypes.ERROR);
     };
 
     _addWarningMessage = () => {
@@ -103,6 +104,14 @@ class MessagesDemo extends React.Component {
     render() {
         return (
             <div>
+                <InlineMessage type={ InlineMessage.MessageTypes.WARNING }>
+                    There is a discrepency between the message types and the constant name.
+                    Please use the following for the status. <br />
+                    Success = MessageTypes.SUCCESS <br />
+                    Error = MessageTypes.WARNING || MessageTypes.ERROR <br />
+                    Warning = MessageTypes.NOTICE <br />
+                    Info = MessageTypes.FEATURE <br />
+                </InlineMessage>
                 <p>
                     For messages that will appear in full width pages like Login or Change Password pages, add
                     'containerType=&#123;Messages.ContainerTypes.FULL&#125;'. For messages that will appear in Modals or
@@ -112,10 +121,11 @@ class MessagesDemo extends React.Component {
 
                 <Messages messages={this.props.messages} onRemoveMessage={this.actions.removeAt} />
                 <br />
-                <Button onClick={this._addSuccessMessage}>Add success message</Button>
-                <Button onClick={this._addErrorMessage}>Add error message</Button>
-                <Button onClick={this._addWarningMessage}>Add warning message</Button>
-                <Button onClick={this._addInfoMessage}>Add info message</Button>
+                <Button onClick={this._addSuccessMessage}>Add success message (MessageTypes.SUCCESS)</Button>
+                <Button onClick={this._addErrorMessage}>Add error message (MessageTypes.ERROR)</Button>
+                <br />
+                <Button onClick={this._addWarningMessage}>Add warning message (MessageTypes.NOTICE)</Button>
+                <Button onClick={this._addInfoMessage}>Add info message (MessageTypes.FEATURE)</Button>
                 <hr className="hr" />
                 <Button onClick={this._addHtmlMessage}>Add HTML message</Button>
                 <Button onClick={this._addProgressMessage}>Add progress message</Button>

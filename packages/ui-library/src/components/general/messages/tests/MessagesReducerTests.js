@@ -31,7 +31,6 @@ describe("Messages", function () {
     it("backwards compat: adds message", function () {
         var store = getStore();
         store.dispatch(Actions.addMessage("hello world"));
-
         expect(store.getState().messages).toEqual([{
             containerId: "messages",
             status: "success",
@@ -52,7 +51,7 @@ describe("Messages", function () {
             type: "warning",
             text: "hello world",
             index: 1,
-            timer: 5000
+            timer: 0
         }]);
     });
 
@@ -131,7 +130,7 @@ describe("Messages", function () {
             type: "warning",
             text: "hello world",
             index: 1,
-            timer: 5000
+            timer: 0
         }]);
     });
 
@@ -163,7 +162,7 @@ describe("Messages", function () {
             type: "warning",
             text: "hello world",
             index: 1,
-            timer: 5000
+            timer: 0
         }]);
     });
 

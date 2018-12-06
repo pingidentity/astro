@@ -82,12 +82,12 @@ describe("Messages", function () {
 
     it("Render single message with custom interval", function () {
         var component = getComponent({
-            messages: [{ key: "Test message text", duration: 5000 }]
+            messages: [{ key: "Test message text", duration: 3000 }]
         });
         var messages = TestUtils.scryRenderedDOMNodesWithClass(component, "message");
 
         expect(messages.length).toEqual(1);
-        expect(setInterval.mock.calls[0][1]).toBe(5000);
+        expect(setInterval.mock.calls[0][1]).toBe(3000);
     });
 
     it("Test unmount clears timers", function () {
