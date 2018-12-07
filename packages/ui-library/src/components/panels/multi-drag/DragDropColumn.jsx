@@ -249,6 +249,7 @@ module.exports = class extends React.Component {
                 hintText={helpText}
             />
         ) : null;
+        const filterLabel = categoryList ? strings.filteredByLabel || "filtered by" : null;
 
         return (
             <div data-id={dataId} className={className}>
@@ -257,7 +258,7 @@ module.exports = class extends React.Component {
                     <span className="row-selector__column-title">
                         {name}
                         {helpHint}
-                        {categoryList && (`${strings.filteredByLabel}:` || "filtered by:")}
+                        {filterLabel && `${filterLabel}:`}
                     </span>
                     {categoryList &&
                         <LinkDropDownList
