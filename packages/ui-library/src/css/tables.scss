@@ -108,6 +108,7 @@ table {
         td {
             font-size: 14px;
             color: $color-midnight;
+            word-break: break-word;
 
             button.inline {
                 &.delete {
