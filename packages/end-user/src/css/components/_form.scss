@@ -1,4 +1,7 @@
 .form {
     @include stack($spacing-md);
     @include stacked-item($spacing-xl);
+    &--margin-small {
+       @include stack(5px);
+    }
 }

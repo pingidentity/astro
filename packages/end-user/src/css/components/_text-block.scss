@@ -15,4 +15,10 @@
     &--large {
         font-size: $font-size-lg;
     }
+
+    &--small-right {
+        font-size: $font-size-sm;
+        text-align: right;
+        margin-bottom: 15px;
+    }
 }

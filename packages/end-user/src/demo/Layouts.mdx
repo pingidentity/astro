@@ -187,3 +187,251 @@ import ComponentDemo from './components/ComponentDemo';
     </Card>
 </ComponentDemo>
 
+# Account Recovery
+
+### The Sign-On Form
+
+<ComponentDemo>
+    <Card>
+        <Logo src="ping-logo.svg"/>
+        <Form>
+            <FloatLabelTextInput label="Username" id="username9"/>
+            <FloatLabelPasswordInput label="Password" id="password6"/>
+            <Button label="Sign On" primary disabled/>
+        </Form>
+        <TextBlock size="small">Trouble signing on? <a href="#">Reset password</a></TextBlock>
+    </Card>
+</ComponentDemo>
+
+### Reset password
+<ComponentDemo>
+    <Card>
+        <Logo src="ping-logo.svg"/>
+        <Heading>
+            Reset Your Password
+        </Heading>
+        <TextBlock>
+            Enter your username, and we'll send you a link to create a new password.
+        </TextBlock>
+        <Form margin="small">
+            <FloatLabelTextInput label="Username" id="username10"/>
+            <TextBlock size="small-right"><a href="#">Have a reset code?</a></TextBlock>
+            <Button label="Reset" primary disabled/>
+        </Form>
+    </Card>
+</ComponentDemo>
+
+<ComponentDemo>
+    <Card>
+        <Logo src="ping-logo.svg"/>
+        <Heading>
+            Reset Your Password
+        </Heading>
+        <TextBlock>
+            Enter your username, and we'll send you a link to create a new password.
+        </TextBlock>
+        <Form margin="small">
+            <FloatLabelTextInput label="Username" id="username11" defaultValue="IronMan@gmail.com"/>
+            <TextBlock size="small-right"><a href="#">Have a reset code?</a></TextBlock>
+            <Button label="Reset" primary/>
+        </Form>
+    </Card>
+</ComponentDemo>
+
+### Reset Password if clicking on reset button
+<ComponentDemo>
+    <Card>
+        <Logo src="ping-logo.svg"/>
+        <Heading>
+            Reset Your Password
+        </Heading>
+        <TextBlock>
+            A password reset code has been sent. Enter your reset code below.
+        </TextBlock>
+        <Form>
+            <FloatLabelTextInput label="Reset Code"/>
+            <Button label="Reset" primary disabled/>
+        </Form>
+    </Card>
+</ComponentDemo>
+
+### Reset Password if clicking on "have a reset code?"
+<ComponentDemo>
+    <Card>
+        <Logo src="ping-logo.svg"/>
+        <Heading>
+            Reset Your Password
+        </Heading>
+        <Form>
+            <FloatLabelTextInput label="Reset Code"/>
+            <Button label="Reset" primary disabled/>
+        </Form>
+    </Card>
+</ComponentDemo>
+
+
+
+### Code Expired
+<ComponentDemo>
+    <Card>
+        <Logo src="ping-logo.svg"/>
+        <Heading>
+            Reset Your Password
+        </Heading>
+        <Feedback type="error">
+            The reset code you entered has expired.
+        </Feedback>
+        <Form>
+            <FloatLabelTextInput label="Username" id="username12" defaultValue="IronMan@gmail.com"/>
+            <Button label="Send New Code" primary/>
+        </Form>
+    </Card>
+</ComponentDemo>
+
+##Change Password
+
+
+<ComponentDemo>
+    <Card>
+        <Logo src="ping-logo.svg"/>
+        <Heading>Change Password</Heading>
+        <Form>
+            <FloatLabelPasswordInput label="New Password" id="newPwd1" />
+            <FloatLabelPasswordInput label="Verify New Password" id="verifyPwd1" />
+            <Button label="Save" primary disabled />
+        </Form>
+    </Card>
+</ComponentDemo>
+
+<ComponentDemo>
+    <Card>
+        <Logo src="ping-logo.svg"/>
+        <Heading>Change Password</Heading>
+        <Form>
+            <FloatLabelPasswordInput label="New Password" id="newPwD2" defaultValue="eightPassword">
+                <Tooltip>
+                    <Heading level={4}>Minimum Password Requirements:</Heading>
+                    <Requirements
+                        requirements={[
+                            {
+                                name: '8 characters',
+                                status: 'yes',
+                            },
+                            {
+                                name: 'At least 1 special character',
+                                status: 'no',
+                            },
+                            {
+                                name: '1 UPPERCASE Character',
+                                status: 'yes',
+                            },
+                            {
+                                name: '1 number (0-9)',
+                                status: 'no',
+                            },
+                        ]}
+                    />
+                </Tooltip>
+            </FloatLabelPasswordInput>
+            <FloatLabelPasswordInput label="Verify New Password" id="verifyPwd2" />
+            <Button label="Save" primary disabled />
+        </Form>
+    </Card>
+</ComponentDemo>
+
+<ComponentDemo>
+    <Card>
+        <Logo src="ping-logo.svg"/>
+        <Heading>Change Password</Heading>
+        <Form>
+            <FloatLabelPasswordInput label="New Password" id="newPwD3" defaultValue="eightPassword" success>
+                <Tooltip>
+                    <Heading level={4}>Minimum Password Requirements:</Heading>
+                    <Requirements
+                        requirements={[
+                            {
+                                name: '8 characters',
+                                status: 'yes',
+                            },
+                            {
+                                name: 'At least 1 special character',
+                                status: 'no',
+                            },
+                            {
+                                name: '1 UPPERCASE Character',
+                                status: 'yes',
+                            },
+                            {
+                                name: '1 number (0-9)',
+                                status: 'no',
+                            },
+                        ]}
+                    />
+                </Tooltip>
+            </FloatLabelPasswordInput>
+            <FloatLabelPasswordInput label="Verify New Password" id="verifyPwd3" defaultValue="eightPa"/>
+            <Button label="Save" primary disabled />
+        </Form>
+    </Card>
+</ComponentDemo>
+
+<ComponentDemo>
+    <Card>
+        <Logo src="ping-logo.svg"/>
+        <Heading>Change Password</Heading>
+        <Form>
+            <FloatLabelPasswordInput label="New Password" id="newPwD4" defaultValue="eightPassword" success>
+                <Tooltip>
+                    <Heading level={4}>Minimum Password Requirements:</Heading>
+                    <Requirements
+                        requirements={[
+                            {
+                                name: '8 characters',
+                                status: 'yes',
+                            },
+                            {
+                                name: 'At least 1 special character',
+                                status: 'no',
+                            },
+                            {
+                                name: '1 UPPERCASE Character',
+                                status: 'yes',
+                            },
+                            {
+                                name: '1 number (0-9)',
+                                status: 'no',
+                            },
+                        ]}
+                    />
+                </Tooltip>
+            </FloatLabelPasswordInput>
+            <FloatLabelPasswordInput label="Verify New Password" id="verifyPwd4" defaultValue="eightPassword" success/>
+            <Button label="Save" primary/>
+        </Form>
+    </Card>
+</ComponentDemo>
+
+<ComponentDemo>
+    <Card>
+        <Logo src="ping-logo.svg"/>
+        <Heading>Change Password</Heading>
+        <Feedback type="error">
+            Password cannot contain information from your user profile
+        </Feedback>
+        <Form>
+            <FloatLabelPasswordInput label="New Password" id="newPwD5" defaultValue="eightPassword">
+            </FloatLabelPasswordInput>
+            <FloatLabelPasswordInput label="Verify New Password" id="verifyPwd5" defaultValue="eightPassword"/>
+            <Button label="Save" primary disabled />
+        </Form>
+    </Card>
+</ComponentDemo>
+
+<ComponentDemo>
+    <Card>
+        <Logo src="ping-logo.svg"/>
+        <IconFeedback type="success" medium>Password Changed</IconFeedback>
+        <Button label="Continue" secondary/>
+    </Card>
+</ComponentDemo>
+

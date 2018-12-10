@@ -6,6 +6,7 @@ const TextBlock = ({ children, size }) => {
     const classNames = classnames('text-block', {
         'text-block--small': size === 'small',
         'text-block--large': size === 'large',
+        'text-block--small-right': size === 'small-right',
     });
 
     const Outer = typeof Children === 'string' ? 'p' : 'div';
@@ -19,7 +20,7 @@ const TextBlock = ({ children, size }) => {
 };
 
 TextBlock.propTypes = {
-    size: PropTypes.oneOf(['small', 'large']),
+    size: PropTypes.oneOf(['small', 'large', 'small-right']),
 };
 
 export default TextBlock;

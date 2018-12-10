@@ -466,6 +466,10 @@
     margin-bottom: 0; }
   .form:last-child {
     margin-bottom: 0; }
+  .form--margin-small > * {
+    margin-bottom: 5px; }
+  .form--margin-small > :last-child {
+    margin-bottom: 0; }
 
 .icon-feedback {
   color: #277ba5;
@@ -683,6 +687,10 @@
     font-size: 13px; }
   .text-block--large {
     font-size: 22px; }
+  .text-block--small-right {
+    font-size: 13px;
+    text-align: right;
+    margin-bottom: 15px; }
 
 .text-input:focus {
   border-color: #277ba5; }

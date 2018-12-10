@@ -333,22 +333,40 @@ exports.default = FloatLabelPasswordInput;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _classnames = __webpack_require__(2);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Form = function Form(_ref) {
-  var children = _ref.children;
-  return _react2.default.createElement(
-    "form",
-    { className: "form" },
-    children
-  );
+    var children = _ref.children,
+        margin = _ref.margin;
+
+    var classNames = (0, _classnames2.default)('form', {
+        'form--margin-small': margin === 'small'
+    });
+
+    return _react2.default.createElement(
+        'form',
+        { className: classNames },
+        children
+    );
+};
+
+Form.propTypes = {
+    margin: _propTypes2.default.oneOf(['small'])
 };
 
 exports.default = Form;
@@ -916,7 +934,7 @@ TextInput.propTypes = {
     error: _propTypes2.default.bool,
     success: _propTypes2.default.bool,
     primary: _propTypes2.default.bool,
-    value: _propTypes2.default.string
+    value: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
 };
 
 exports.default = TextInput;
@@ -1053,7 +1071,8 @@ var TextBlock = function TextBlock(_ref) {
 
     var classNames = (0, _classnames2.default)('text-block', {
         'text-block--small': size === 'small',
-        'text-block--large': size === 'large'
+        'text-block--large': size === 'large',
+        'text-block--small-right': size === 'small-right'
     });
 
     var Outer = typeof Children === 'string' ? 'p' : 'div';
@@ -1071,7 +1090,7 @@ var TextBlock = function TextBlock(_ref) {
 };
 
 TextBlock.propTypes = {
-    size: _propTypes2.default.oneOf(['small', 'large'])
+    size: _propTypes2.default.oneOf(['small', 'large', 'small-right'])
 };
 
 exports.default = TextBlock;
@@ -33700,21 +33719,23 @@ var PasswordInput = function PasswordInput(_ref) {
         id = _ref.id,
         className = _ref.className,
         error = _ref.error,
-        success = _ref.success;
+        success = _ref.success,
+        defaultValue = _ref.defaultValue;
 
     var classNames = (0, _classnames2.default)('text-input', className, {
         'text-input--error': error,
         'text-input--success': success
     });
 
-    return _react2.default.createElement('input', { className: classNames, id: id, name: id, placeholder: placeholder, type: 'password' });
+    return _react2.default.createElement('input', { className: classNames, id: id, name: id, placeholder: placeholder, type: 'password', defaultValue: defaultValue });
 };
 
 PasswordInput.propTypes = {
     placeholder: _propTypes2.default.string,
     id: _propTypes2.default.string,
     error: _propTypes2.default.bool,
-    success: _propTypes2.default.bool
+    success: _propTypes2.default.bool,
+    defaultValue: _propTypes2.default.string
 };
 
 exports.default = PasswordInput;
@@ -59679,6 +59700,8 @@ exports.default = function (_ref) {
         h2 = _factories$h2 === undefined ? (0, _react.createFactory)('h2') : _factories$h2,
         _factories$h3 = factories.h3,
         h3 = _factories$h3 === undefined ? (0, _react.createFactory)('h3') : _factories$h3,
+        _factories$p = factories.p,
+        p = _factories$p === undefined ? (0, _react.createFactory)('p') : _factories$p,
         _factories$wrapper = factories.wrapper,
         wrapper = _factories$wrapper === undefined ? (0, _react.createFactory)('div') : _factories$wrapper;
 
@@ -59700,7 +59723,49 @@ exports.default = function (_ref) {
             name: 'Here is a very long requirement that hopefully won\'t come into play much\n                                    but let\'s still make sure we support having this much content show.',
             status: 'no'
         }]
-    }))), (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Verify New Password", id: "verify" }), (0, _react.createElement)(_Button2.default, { label: "Save", primary: true, disabled: true })))), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_IconFeedback2.default, { type: "success", small: true }, "Registered"), (0, _react.createElement)(_TextBlock2.default, null, "Now that you've registered, you can either continue on or edit your profile."), (0, _react.createElement)(_ButtonSet2.default, null, (0, _react.createElement)(_Button2.default, { label: "Edit Profile" }), (0, _react.createElement)(_Button2.default, { label: "Continue", primary: true })))), h3({ "id": "Invalid-Sign-on-URL" }, "Invalid Sign-on URL"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, { width: "large" }, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Heading2.default, null, " Invalid Sign-on URL "), (0, _react.createElement)(_TextBlock2.default, null, (0, _react.createElement)("p", null, "The URL you entered isn't specific to signing on to your domain console. Make sure to enter a valid sign-on URL that includes your environemnt ID. like this: ", (0, _react.createElement)("a", null, "https://console.pingone.com/index.html?env=<ENV ID>")), (0, _react.createElement)("p", null, "If you need help, contact your administator of Ping Identity.")))));
+    }))), (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Verify New Password", id: "verify" }), (0, _react.createElement)(_Button2.default, { label: "Save", primary: true, disabled: true })))), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_IconFeedback2.default, { type: "success", small: true }, "Registered"), (0, _react.createElement)(_TextBlock2.default, null, "Now that you've registered, you can either continue on or edit your profile."), (0, _react.createElement)(_ButtonSet2.default, null, (0, _react.createElement)(_Button2.default, { label: "Edit Profile" }), (0, _react.createElement)(_Button2.default, { label: "Continue", primary: true })))), h3({ "id": "Invalid-Sign-on-URL" }, "Invalid Sign-on URL"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, { width: "large" }, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Heading2.default, null, " Invalid Sign-on URL "), (0, _react.createElement)(_TextBlock2.default, null, (0, _react.createElement)("p", null, "The URL you entered isn't specific to signing on to your domain console. Make sure to enter a valid sign-on URL that includes your environemnt ID. like this: ", (0, _react.createElement)("a", null, "https://console.pingone.com/index.html?env=<ENV ID>")), (0, _react.createElement)("p", null, "If you need help, contact your administator of Ping Identity.")))), h1({ "id": "Account-Recovery" }, "Account Recovery"), h3({ "id": "The-Sign-On-Form-2" }, "The Sign-On Form"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelTextInput2.default, { label: "Username", id: "username9" }), (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Password", id: "password6" }), (0, _react.createElement)(_Button2.default, { label: "Sign On", primary: true, disabled: true })), (0, _react.createElement)(_TextBlock2.default, { size: "small" }, "Trouble signing on? ", (0, _react.createElement)("a", { href: "#" }, "Reset password")))), h3({ "id": "Reset-password-2" }, "Reset password"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Heading2.default, null, "Reset Your Password"), (0, _react.createElement)(_TextBlock2.default, null, "Enter your username, and we'll send you a link to create a new password."), (0, _react.createElement)(_Form2.default, { margin: "small" }, (0, _react.createElement)(_FloatLabelTextInput2.default, { label: "Username", id: "username10" }), (0, _react.createElement)(_TextBlock2.default, { size: "small-right" }, (0, _react.createElement)("a", { href: "#" }, "Have a reset code?")), (0, _react.createElement)(_Button2.default, { label: "Reset", primary: true, disabled: true })))), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Heading2.default, null, "Reset Your Password"), (0, _react.createElement)(_TextBlock2.default, null, "Enter your username, and we'll send you a link to create a new password."), (0, _react.createElement)(_Form2.default, { margin: "small" }, (0, _react.createElement)(_FloatLabelTextInput2.default, { label: "Username", id: "username11", defaultValue: "IronMan@gmail.com" }), (0, _react.createElement)(_TextBlock2.default, { size: "small-right" }, (0, _react.createElement)("a", { href: "#" }, "Have a reset code?")), (0, _react.createElement)(_Button2.default, { label: "Reset", primary: true })))), h3({ "id": "Reset-Password-if-clicking-on-reset-button" }, "Reset Password if clicking on reset button"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Heading2.default, null, "Reset Your Password"), (0, _react.createElement)(_TextBlock2.default, null, "A password reset code has been sent. Enter your reset code below."), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelTextInput2.default, { label: "Reset Code" }), (0, _react.createElement)(_Button2.default, { label: "Reset", primary: true, disabled: true })))), h3({ "id": "Reset-Password-if-clicking-on-\"have-a-reset-code\"" }, "Reset Password if clicking on “have a reset code?”"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Heading2.default, null, "Reset Your Password"), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelTextInput2.default, { label: "Reset Code" }), (0, _react.createElement)(_Button2.default, { label: "Reset", primary: true, disabled: true })))), h3({ "id": "Code-Expired" }, "Code Expired"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Heading2.default, null, "Reset Your Password"), (0, _react.createElement)(_Feedback2.default, { type: "error" }, "The reset code you entered has expired."), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelTextInput2.default, { label: "Username", id: "username12", defaultValue: "IronMan@gmail.com" }), (0, _react.createElement)(_Button2.default, { label: "Send New Code", primary: true })))), p({}, "##Change Password"), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Heading2.default, null, "Change Password"), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "New Password", id: "newPwd1" }), (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Verify New Password", id: "verifyPwd1" }), (0, _react.createElement)(_Button2.default, { label: "Save", primary: true, disabled: true })))), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Heading2.default, null, "Change Password"), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "New Password", id: "newPwD2", defaultValue: "eightPassword" }, (0, _react.createElement)(_Tooltip2.default, null, (0, _react.createElement)(_Heading2.default, { level: 4 }, "Minimum Password Requirements:"), (0, _react.createElement)(_Requirements2.default, {
+        requirements: [{
+            name: '8 characters',
+            status: 'yes'
+        }, {
+            name: 'At least 1 special character',
+            status: 'no'
+        }, {
+            name: '1 UPPERCASE Character',
+            status: 'yes'
+        }, {
+            name: '1 number (0-9)',
+            status: 'no'
+        }]
+    }))), (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Verify New Password", id: "verifyPwd2" }), (0, _react.createElement)(_Button2.default, { label: "Save", primary: true, disabled: true })))), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Heading2.default, null, "Change Password"), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "New Password", id: "newPwD3", defaultValue: "eightPassword", success: true }, (0, _react.createElement)(_Tooltip2.default, null, (0, _react.createElement)(_Heading2.default, { level: 4 }, "Minimum Password Requirements:"), (0, _react.createElement)(_Requirements2.default, {
+        requirements: [{
+            name: '8 characters',
+            status: 'yes'
+        }, {
+            name: 'At least 1 special character',
+            status: 'no'
+        }, {
+            name: '1 UPPERCASE Character',
+            status: 'yes'
+        }, {
+            name: '1 number (0-9)',
+            status: 'no'
+        }]
+    }))), (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Verify New Password", id: "verifyPwd3", defaultValue: "eightPa" }), (0, _react.createElement)(_Button2.default, { label: "Save", primary: true, disabled: true })))), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Heading2.default, null, "Change Password"), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "New Password", id: "newPwD4", defaultValue: "eightPassword", success: true }, (0, _react.createElement)(_Tooltip2.default, null, (0, _react.createElement)(_Heading2.default, { level: 4 }, "Minimum Password Requirements:"), (0, _react.createElement)(_Requirements2.default, {
+        requirements: [{
+            name: '8 characters',
+            status: 'yes'
+        }, {
+            name: 'At least 1 special character',
+            status: 'no'
+        }, {
+            name: '1 UPPERCASE Character',
+            status: 'yes'
+        }, {
+            name: '1 number (0-9)',
+            status: 'no'
+        }]
+    }))), (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Verify New Password", id: "verifyPwd4", defaultValue: "eightPassword", success: true }), (0, _react.createElement)(_Button2.default, { label: "Save", primary: true })))), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_Heading2.default, null, "Change Password"), (0, _react.createElement)(_Feedback2.default, { type: "error" }, "Password cannot contain information from your user profile"), (0, _react.createElement)(_Form2.default, null, (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "New Password", id: "newPwD5", defaultValue: "eightPassword" }), (0, _react.createElement)(_FloatLabelPasswordInput2.default, { label: "Verify New Password", id: "verifyPwd5", defaultValue: "eightPassword" }), (0, _react.createElement)(_Button2.default, { label: "Save", primary: true, disabled: true })))), (0, _react.createElement)(_ComponentDemo2.default, null, (0, _react.createElement)(_Card2.default, null, (0, _react.createElement)(_Logo2.default, { src: "ping-logo.svg" }), (0, _react.createElement)(_IconFeedback2.default, { type: "success", medium: true }, "Password Changed"), (0, _react.createElement)(_Button2.default, { label: "Continue", secondary: true }))));
 };
 
 var _react = __webpack_require__(0);

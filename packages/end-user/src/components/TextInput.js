@@ -38,7 +38,10 @@ TextInput.propTypes = {
     error: PropTypes.bool,
     success: PropTypes.bool,
     primary: PropTypes.bool,
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+    ]),
 };
 
 export default TextInput;

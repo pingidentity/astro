@@ -822,6 +822,1054 @@
                 </div>
             </div>
         </div>
+        <h1 id="Account-Recovery">Account Recovery</h1>
+        <h3 id="The-Sign-On-Form-2">The Sign-On Form</h3>
+        <div class="component-demo">
+            <div class="component-demo__preview">
+                <div class="card">
+                    <div class="org-logo"><img class="org-logo__image"
+                            src="ping-logo.svg" alt="Company Logo" /></div>
+                    <form class="form">
+                        <div class="float-label"><input
+                                type="text" class="text-input float-label__input"
+                                id="username9" name="username9"
+                                placeholder="Username" /><label
+                                class="float-label__label"
+                                for="username9">Username</label></div>
+                        <div class="float-label"><input
+                                type="password" class="text-input float-label__input"
+                                id="password6" name="password6"
+                                placeholder="Password" /><label
+                                class="float-label__label"
+                                for="password6">Password</label></div><button
+                            class="button button--primary button--disabled brand-primary-bg"
+                            disabled="">Sign On</button>
+                    </form>
+                    <div class="text-block text-block--small">
+                        <div class="text-block__text">Trouble
+                            signing on? <a href="#">Reset
+                                password</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="component-demo__markup">
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Logo</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Form</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelTextInput</span>
+      <span class="hljs-attr">id</span>=<span class="hljs-string">"username9"</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Username"</span>
+     /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelPasswordInput</span>
+      <span class="hljs-attr">id</span>=<span class="hljs-string">"password6"</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Password"</span>
+     /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+      <span class="hljs-attr">disabled</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Sign On"</span>
+      <span class="hljs-attr">primary</span>
+     /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Form</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">TextBlock</span> <span class="hljs-attr">size</span>=<span class="hljs-string">"small"</span>&gt;</span>
+    Trouble signing on? 
+    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#"</span>&gt;</span>
+      Reset password
+    <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">TextBlock</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span></pre>
+                </div>
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo__image"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span>
+            <span class="hljs-attr">alt</span>=<span class="hljs-string">"Company Logo"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input float-label__input"</span>
+                <span class="hljs-attr">id</span>=<span class="hljs-string">"username9"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"username9"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Username"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"username9"</span>&gt;</span>Username<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input float-label__input"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"password6"</span>
+                <span class="hljs-attr">name</span>=<span class="hljs-string">"password6"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Password"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"password6"</span>&gt;</span>Password<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
+            <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--primary button--disabled brand-primary-bg"</span>
+            <span class="hljs-attr">disabled</span>=<span class="hljs-string">""</span>&gt;</span>Sign On<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block text-block--small"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span>Trouble signing on?
+            <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#"</span>&gt;</span>Reset password<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
+                </div>
+            </div>
+        </div>
+        <h3 id="Reset-password-2">Reset password</h3>
+        <div class="component-demo">
+            <div class="component-demo__preview">
+                <div class="card">
+                    <div class="org-logo"><img class="org-logo__image"
+                            src="ping-logo.svg" alt="Company Logo" /></div>
+                    <h1 class="heading">Reset Your Password</h1>
+                    <div class="text-block">
+                        <div class="text-block__text">Enter
+                            your username, and we&#x27;ll
+                            send you a link to create a new
+                            password.</div>
+                    </div>
+                    <form class="form form--margin-small">
+                        <div class="float-label"><input
+                                type="text" class="text-input float-label__input"
+                                id="username10" name="username10"
+                                placeholder="Username" /><label
+                                class="float-label__label"
+                                for="username10">Username</label></div>
+                        <div class="text-block text-block--small-right">
+                            <div class="text-block__text"><a
+                                    href="#">Have a reset
+                                    code?</a></div>
+                        </div><button class="button button--primary button--disabled brand-primary-bg"
+                            disabled="">Reset</button>
+                    </form>
+                </div>
+            </div>
+            <div class="component-demo__markup">
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Logo</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Heading</span>&gt;</span>
+    Reset Your Password
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Heading</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">TextBlock</span>&gt;</span>
+    Enter your username, and we'll send you a link to create a new password.
+  <span class="hljs-tag">&lt;/<span class="hljs-name">TextBlock</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Form</span> <span class="hljs-attr">margin</span>=<span class="hljs-string">"small"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelTextInput</span>
+      <span class="hljs-attr">id</span>=<span class="hljs-string">"username10"</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Username"</span>
+     /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">TextBlock</span> <span class="hljs-attr">size</span>=<span class="hljs-string">"small-right"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#"</span>&gt;</span>
+        Have a reset code?
+      <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">TextBlock</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+      <span class="hljs-attr">disabled</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Reset"</span>
+      <span class="hljs-attr">primary</span>
+     /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span></pre>
+                </div>
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo__image"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span>
+            <span class="hljs-attr">alt</span>=<span class="hljs-string">"Company Logo"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"heading"</span>&gt;</span>Reset Your Password<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span>Enter your username,
+            and we&amp;#x27;ll send you a link to create a new
+            password.<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form form--margin-small"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input float-label__input"</span>
+                <span class="hljs-attr">id</span>=<span class="hljs-string">"username10"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"username10"</span>
+                <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Username"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span>
+                <span class="hljs-attr">for</span>=<span class="hljs-string">"username10"</span>&gt;</span>Username<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block text-block--small-right"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#"</span>&gt;</span>Have
+                    a reset code?<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--primary button--disabled brand-primary-bg"</span>
+            <span class="hljs-attr">disabled</span>=<span class="hljs-string">""</span>&gt;</span>Reset<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
+                </div>
+            </div>
+        </div>
+        <div class="component-demo">
+            <div class="component-demo__preview">
+                <div class="card">
+                    <div class="org-logo"><img class="org-logo__image"
+                            src="ping-logo.svg" alt="Company Logo" /></div>
+                    <h1 class="heading">Reset Your Password</h1>
+                    <div class="text-block">
+                        <div class="text-block__text">Enter
+                            your username, and we&#x27;ll
+                            send you a link to create a new
+                            password.</div>
+                    </div>
+                    <form class="form form--margin-small">
+                        <div class="float-label"><input
+                                type="text" class="text-input float-label__input"
+                                id="username11" name="username11"
+                                placeholder="Username"
+                                value="IronMan@gmail.com" /><label
+                                class="float-label__label"
+                                for="username11">Username</label></div>
+                        <div class="text-block text-block--small-right">
+                            <div class="text-block__text"><a
+                                    href="#">Have a reset
+                                    code?</a></div>
+                        </div><button class="button button--primary brand-primary-bg">Reset</button>
+                    </form>
+                </div>
+            </div>
+            <div class="component-demo__markup">
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Logo</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Heading</span>&gt;</span>
+    Reset Your Password
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Heading</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">TextBlock</span>&gt;</span>
+    Enter your username, and we'll send you a link to create a new password.
+  <span class="hljs-tag">&lt;/<span class="hljs-name">TextBlock</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Form</span> <span class="hljs-attr">margin</span>=<span class="hljs-string">"small"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelTextInput</span>
+      <span class="hljs-attr">defaultValue</span>=<span class="hljs-string">"IronMan@gmail.com"</span>
+      <span class="hljs-attr">id</span>=<span class="hljs-string">"username11"</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Username"</span>
+     /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">TextBlock</span> <span class="hljs-attr">size</span>=<span class="hljs-string">"small-right"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#"</span>&gt;</span>
+        Have a reset code?
+      <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">TextBlock</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Reset"</span>
+      <span class="hljs-attr">primary</span>
+     /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span></pre>
+                </div>
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo__image"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span>
+            <span class="hljs-attr">alt</span>=<span class="hljs-string">"Company Logo"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"heading"</span>&gt;</span>Reset Your Password<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span>Enter your username,
+            and we&amp;#x27;ll send you a link to create a new
+            password.<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form form--margin-small"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input float-label__input"</span>
+                <span class="hljs-attr">id</span>=<span class="hljs-string">"username11"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"username11"</span>
+                <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Username"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"IronMan@gmail.com"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"username11"</span>&gt;</span>Username<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block text-block--small-right"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#"</span>&gt;</span>Have
+                    a reset code?<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--primary brand-primary-bg"</span>&gt;</span>Reset<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
+                </div>
+            </div>
+        </div>
+        <h3 id="Reset-Password-if-clicking-on-reset-button">Reset
+            Password if clicking on reset button</h3>
+        <div class="component-demo">
+            <div class="component-demo__preview">
+                <div class="card">
+                    <div class="org-logo"><img class="org-logo__image"
+                            src="ping-logo.svg" alt="Company Logo" /></div>
+                    <h1 class="heading">Reset Your Password</h1>
+                    <div class="text-block">
+                        <div class="text-block__text">A
+                            password reset code has been
+                            sent. Enter your reset code
+                            below.</div>
+                    </div>
+                    <form class="form">
+                        <div class="float-label"><input
+                                type="text" class="text-input float-label__input"
+                                placeholder="Reset Code" /><label
+                                class="float-label__label">Reset
+                                Code</label></div><button
+                            class="button button--primary button--disabled brand-primary-bg"
+                            disabled="">Reset</button>
+                    </form>
+                </div>
+            </div>
+            <div class="component-demo__markup">
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Logo</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Heading</span>&gt;</span>
+    Reset Your Password
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Heading</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">TextBlock</span>&gt;</span>
+    A password reset code has been sent. Enter your reset code below.
+  <span class="hljs-tag">&lt;/<span class="hljs-name">TextBlock</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Form</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelTextInput</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Reset Code"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+      <span class="hljs-attr">disabled</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Reset"</span>
+      <span class="hljs-attr">primary</span>
+     /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span></pre>
+                </div>
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo__image"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span>
+            <span class="hljs-attr">alt</span>=<span class="hljs-string">"Company Logo"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"heading"</span>&gt;</span>Reset Your Password<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-block__text"</span>&gt;</span>A password reset code
+            has been sent. Enter your reset code below.<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input float-label__input"</span>
+                <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Reset Code"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span>&gt;</span>Reset
+                Code<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--primary button--disabled brand-primary-bg"</span>
+            <span class="hljs-attr">disabled</span>=<span class="hljs-string">""</span>&gt;</span>Reset<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
+                </div>
+            </div>
+        </div>
+        <h3 id="Reset-Password-if-clicking-on-&quot;have-a-reset-code&quot;">Reset
+            Password if clicking on “have a reset code?”</h3>
+        <div class="component-demo">
+            <div class="component-demo__preview">
+                <div class="card">
+                    <div class="org-logo"><img class="org-logo__image"
+                            src="ping-logo.svg" alt="Company Logo" /></div>
+                    <h1 class="heading">Reset Your Password</h1>
+                    <form class="form">
+                        <div class="float-label"><input
+                                type="text" class="text-input float-label__input"
+                                placeholder="Reset Code" /><label
+                                class="float-label__label">Reset
+                                Code</label></div><button
+                            class="button button--primary button--disabled brand-primary-bg"
+                            disabled="">Reset</button>
+                    </form>
+                </div>
+            </div>
+            <div class="component-demo__markup">
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Logo</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Heading</span>&gt;</span>
+    Reset Your Password
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Heading</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Form</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelTextInput</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Reset Code"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+      <span class="hljs-attr">disabled</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Reset"</span>
+      <span class="hljs-attr">primary</span>
+     /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span></pre>
+                </div>
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo__image"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span>
+            <span class="hljs-attr">alt</span>=<span class="hljs-string">"Company Logo"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"heading"</span>&gt;</span>Reset Your Password<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input float-label__input"</span>
+                <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Reset Code"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span>&gt;</span>Reset
+                Code<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--primary button--disabled brand-primary-bg"</span>
+            <span class="hljs-attr">disabled</span>=<span class="hljs-string">""</span>&gt;</span>Reset<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
+                </div>
+            </div>
+        </div>
+        <h3 id="Code-Expired">Code Expired</h3>
+        <div class="component-demo">
+            <div class="component-demo__preview">
+                <div class="card">
+                    <div class="org-logo"><img class="org-logo__image"
+                            src="ping-logo.svg" alt="Company Logo" /></div>
+                    <h1 class="heading">Reset Your Password</h1>
+                    <div class="feedback feedback--error"><img
+                            class="feedback__icon" src="error.svg"
+                            alt="Error" />
+                        <div class="feedback__message">The
+                            reset code you entered has
+                            expired.</div>
+                    </div>
+                    <form class="form">
+                        <div class="float-label"><input
+                                type="text" class="text-input float-label__input"
+                                id="username12" name="username12"
+                                placeholder="Username"
+                                value="IronMan@gmail.com" /><label
+                                class="float-label__label"
+                                for="username12">Username</label></div><button
+                            class="button button--primary brand-primary-bg">Send
+                            New Code</button>
+                    </form>
+                </div>
+            </div>
+            <div class="component-demo__markup">
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Logo</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Heading</span>&gt;</span>
+    Reset Your Password
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Heading</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Message</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"error"</span>&gt;</span>
+    The reset code you entered has expired.
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Message</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Form</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelTextInput</span>
+      <span class="hljs-attr">defaultValue</span>=<span class="hljs-string">"IronMan@gmail.com"</span>
+      <span class="hljs-attr">id</span>=<span class="hljs-string">"username12"</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Username"</span>
+     /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Send New Code"</span>
+      <span class="hljs-attr">primary</span>
+     /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span></pre>
+                </div>
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo__image"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span>
+            <span class="hljs-attr">alt</span>=<span class="hljs-string">"Company Logo"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"heading"</span>&gt;</span>Reset Your Password<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"feedback feedback--error"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"feedback__icon"</span>
+            <span class="hljs-attr">src</span>=<span class="hljs-string">"error.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Error"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"feedback__message"</span>&gt;</span>The reset code you
+            entered has expired.<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input float-label__input"</span>
+                <span class="hljs-attr">id</span>=<span class="hljs-string">"username12"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"username12"</span>
+                <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Username"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"IronMan@gmail.com"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"username12"</span>&gt;</span>Username<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
+            <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--primary brand-primary-bg"</span>&gt;</span>Send
+            New Code<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
+                </div>
+            </div>
+        </div>
+        <p>##Change Password</p>
+        <div class="component-demo">
+            <div class="component-demo__preview">
+                <div class="card">
+                    <div class="org-logo"><img class="org-logo__image"
+                            src="ping-logo.svg" alt="Company Logo" /></div>
+                    <h1 class="heading">Change Password</h1>
+                    <form class="form">
+                        <div class="float-label"><input
+                                type="password" class="text-input float-label__input"
+                                id="newPwd1" name="newPwd1"
+                                placeholder="New Password" /><label
+                                class="float-label__label"
+                                for="newPwd1">New Password</label></div>
+                        <div class="float-label"><input
+                                type="password" class="text-input float-label__input"
+                                id="verifyPwd1" name="verifyPwd1"
+                                placeholder="Verify New Password" /><label
+                                class="float-label__label"
+                                for="verifyPwd1">Verify New
+                                Password</label></div><button
+                            class="button button--primary button--disabled brand-primary-bg"
+                            disabled="">Save</button>
+                    </form>
+                </div>
+            </div>
+            <div class="component-demo__markup">
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Logo</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Heading</span>&gt;</span>
+    Change Password
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Heading</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Form</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelPasswordInput</span>
+      <span class="hljs-attr">id</span>=<span class="hljs-string">"newPwd1"</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"New Password"</span>
+     /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelPasswordInput</span>
+      <span class="hljs-attr">id</span>=<span class="hljs-string">"verifyPwd1"</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Verify New Password"</span>
+     /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+      <span class="hljs-attr">disabled</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Save"</span>
+      <span class="hljs-attr">primary</span>
+     /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span></pre>
+                </div>
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo__image"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span>
+            <span class="hljs-attr">alt</span>=<span class="hljs-string">"Company Logo"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"heading"</span>&gt;</span>Change Password<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input float-label__input"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"newPwd1"</span>
+                <span class="hljs-attr">name</span>=<span class="hljs-string">"newPwd1"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"New Password"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"newPwd1"</span>&gt;</span>New
+                Password<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input float-label__input"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"verifyPwd1"</span>
+                <span class="hljs-attr">name</span>=<span class="hljs-string">"verifyPwd1"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Verify New Password"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"verifyPwd1"</span>&gt;</span>Verify
+                New Password<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--primary button--disabled brand-primary-bg"</span>
+            <span class="hljs-attr">disabled</span>=<span class="hljs-string">""</span>&gt;</span>Save<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
+                </div>
+            </div>
+        </div>
+        <div class="component-demo">
+            <div class="component-demo__preview">
+                <div class="card">
+                    <div class="org-logo"><img class="org-logo__image"
+                            src="ping-logo.svg" alt="Company Logo" /></div>
+                    <h1 class="heading">Change Password</h1>
+                    <form class="form">
+                        <div class="float-label"><input
+                                type="password" class="text-input float-label__input"
+                                id="newPwD2" name="newPwD2"
+                                placeholder="New Password"
+                                value="eightPassword" /><label
+                                class="float-label__label"
+                                for="newPwD2">New Password</label>
+                            <div class="tooltip">
+                                <h4 class="heading heading--4">Minimum
+                                    Password Requirements:</h4>
+                                <div class="requirements">
+                                    <div class="requirement"><img
+                                            class="requirement__icon"
+                                            src="success.svg"
+                                            alt="Yes" /><span
+                                            class="requirement__name">8
+                                            characters</span></div>
+                                    <div class="requirement"><img
+                                            class="requirement__icon"
+                                            src="incomplete.svg"
+                                            alt="No" /><span
+                                            class="requirement__name">At
+                                            least 1 special
+                                            character</span></div>
+                                    <div class="requirement"><img
+                                            class="requirement__icon"
+                                            src="success.svg"
+                                            alt="Yes" /><span
+                                            class="requirement__name">1
+                                            UPPERCASE
+                                            Character</span></div>
+                                    <div class="requirement"><img
+                                            class="requirement__icon"
+                                            src="incomplete.svg"
+                                            alt="No" /><span
+                                            class="requirement__name">1
+                                            number (0-9)</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="float-label"><input
+                                type="password" class="text-input float-label__input"
+                                id="verifyPwd2" name="verifyPwd2"
+                                placeholder="Verify New Password" /><label
+                                class="float-label__label"
+                                for="verifyPwd2">Verify New
+                                Password</label></div><button
+                            class="button button--primary button--disabled brand-primary-bg"
+                            disabled="">Save</button>
+                    </form>
+                </div>
+            </div>
+            <div class="component-demo__markup">
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Logo</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Heading</span>&gt;</span>
+    Change Password
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Heading</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Form</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelPasswordInput</span>
+      <span class="hljs-attr">defaultValue</span>=<span class="hljs-string">"eightPassword"</span>
+      <span class="hljs-attr">id</span>=<span class="hljs-string">"newPwD2"</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"New Password"</span>
+    &gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Tooltip</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Heading</span> <span class="hljs-attr">level</span>=<span class="hljs-string">{4}</span>&gt;</span>
+          Minimum Password Requirements:
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Heading</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Requirements</span> <span class="hljs-attr">requirements</span>=<span class="hljs-string">{[{</span>"<span class="hljs-attr">name</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">8</span> <span class="hljs-attr">characters</span>","<span class="hljs-attr">status</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">yes</span>"},{"<span class="hljs-attr">name</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">At</span> <span class="hljs-attr">least</span> <span class="hljs-attr">1</span> <span class="hljs-attr">special</span> <span class="hljs-attr">character</span>","<span class="hljs-attr">status</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">no</span>"},{"<span class="hljs-attr">name</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">1</span> <span class="hljs-attr">UPPERCASE</span> <span class="hljs-attr">Character</span>","<span class="hljs-attr">status</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">yes</span>"},{"<span class="hljs-attr">name</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">1</span> <span class="hljs-attr">number</span> (<span class="hljs-attr">0-9</span>)","<span class="hljs-attr">status</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">no</span>"}]} /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">Tooltip</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">FloatLabelPasswordInput</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelPasswordInput</span>
+      <span class="hljs-attr">id</span>=<span class="hljs-string">"verifyPwd2"</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Verify New Password"</span>
+     /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+      <span class="hljs-attr">disabled</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Save"</span>
+      <span class="hljs-attr">primary</span>
+     /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span></pre>
+                </div>
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo__image"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span>
+            <span class="hljs-attr">alt</span>=<span class="hljs-string">"Company Logo"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"heading"</span>&gt;</span>Change Password<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input float-label__input"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"newPwD2"</span>
+                <span class="hljs-attr">name</span>=<span class="hljs-string">"newPwD2"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"New Password"</span>
+                <span class="hljs-attr">value</span>=<span class="hljs-string">"eightPassword"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span>
+                <span class="hljs-attr">for</span>=<span class="hljs-string">"newPwD2"</span>&gt;</span>New Password<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tooltip"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">h4</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"heading heading--4"</span>&gt;</span>Minimum
+                    Password Requirements:<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirements"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__icon"</span>
+                            <span class="hljs-attr">src</span>=<span class="hljs-string">"success.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Yes"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>
+                            <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__name"</span>&gt;</span>8
+                            characters<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__icon"</span>
+                            <span class="hljs-attr">src</span>=<span class="hljs-string">"incomplete.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"No"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>
+                            <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__name"</span>&gt;</span>At
+                            least 1 special character<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__icon"</span>
+                            <span class="hljs-attr">src</span>=<span class="hljs-string">"success.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Yes"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>
+                            <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__name"</span>&gt;</span>1
+                            UPPERCASE Character<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__icon"</span>
+                            <span class="hljs-attr">src</span>=<span class="hljs-string">"incomplete.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"No"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>
+                            <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__name"</span>&gt;</span>1
+                            number (0-9)<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input float-label__input"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"verifyPwd2"</span>
+                <span class="hljs-attr">name</span>=<span class="hljs-string">"verifyPwd2"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Verify New Password"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"verifyPwd2"</span>&gt;</span>Verify
+                New Password<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--primary button--disabled brand-primary-bg"</span>
+            <span class="hljs-attr">disabled</span>=<span class="hljs-string">""</span>&gt;</span>Save<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
+                </div>
+            </div>
+        </div>
+        <div class="component-demo">
+            <div class="component-demo__preview">
+                <div class="card">
+                    <div class="org-logo"><img class="org-logo__image"
+                            src="ping-logo.svg" alt="Company Logo" /></div>
+                    <h1 class="heading">Change Password</h1>
+                    <form class="form">
+                        <div class="float-label"><input
+                                type="password" class="text-input float-label__input text-input--success"
+                                id="newPwD3" name="newPwD3"
+                                placeholder="New Password"
+                                value="eightPassword" /><label
+                                class="float-label__label"
+                                for="newPwD3">New Password</label>
+                            <div class="tooltip">
+                                <h4 class="heading heading--4">Minimum
+                                    Password Requirements:</h4>
+                                <div class="requirements">
+                                    <div class="requirement"><img
+                                            class="requirement__icon"
+                                            src="success.svg"
+                                            alt="Yes" /><span
+                                            class="requirement__name">8
+                                            characters</span></div>
+                                    <div class="requirement"><img
+                                            class="requirement__icon"
+                                            src="incomplete.svg"
+                                            alt="No" /><span
+                                            class="requirement__name">At
+                                            least 1 special
+                                            character</span></div>
+                                    <div class="requirement"><img
+                                            class="requirement__icon"
+                                            src="success.svg"
+                                            alt="Yes" /><span
+                                            class="requirement__name">1
+                                            UPPERCASE
+                                            Character</span></div>
+                                    <div class="requirement"><img
+                                            class="requirement__icon"
+                                            src="incomplete.svg"
+                                            alt="No" /><span
+                                            class="requirement__name">1
+                                            number (0-9)</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="float-label"><input
+                                type="password" class="text-input float-label__input"
+                                id="verifyPwd3" name="verifyPwd3"
+                                placeholder="Verify New Password"
+                                value="eightPa" /><label
+                                class="float-label__label"
+                                for="verifyPwd3">Verify New
+                                Password</label></div><button
+                            class="button button--primary button--disabled brand-primary-bg"
+                            disabled="">Save</button>
+                    </form>
+                </div>
+            </div>
+            <div class="component-demo__markup">
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Logo</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Heading</span>&gt;</span>
+    Change Password
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Heading</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Form</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelPasswordInput</span>
+      <span class="hljs-attr">defaultValue</span>=<span class="hljs-string">"eightPassword"</span>
+      <span class="hljs-attr">id</span>=<span class="hljs-string">"newPwD3"</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"New Password"</span>
+      <span class="hljs-attr">success</span>
+    &gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Tooltip</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Heading</span> <span class="hljs-attr">level</span>=<span class="hljs-string">{4}</span>&gt;</span>
+          Minimum Password Requirements:
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Heading</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Requirements</span> <span class="hljs-attr">requirements</span>=<span class="hljs-string">{[{</span>"<span class="hljs-attr">name</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">8</span> <span class="hljs-attr">characters</span>","<span class="hljs-attr">status</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">yes</span>"},{"<span class="hljs-attr">name</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">At</span> <span class="hljs-attr">least</span> <span class="hljs-attr">1</span> <span class="hljs-attr">special</span> <span class="hljs-attr">character</span>","<span class="hljs-attr">status</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">no</span>"},{"<span class="hljs-attr">name</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">1</span> <span class="hljs-attr">UPPERCASE</span> <span class="hljs-attr">Character</span>","<span class="hljs-attr">status</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">yes</span>"},{"<span class="hljs-attr">name</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">1</span> <span class="hljs-attr">number</span> (<span class="hljs-attr">0-9</span>)","<span class="hljs-attr">status</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">no</span>"}]} /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">Tooltip</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">FloatLabelPasswordInput</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelPasswordInput</span>
+      <span class="hljs-attr">defaultValue</span>=<span class="hljs-string">"eightPa"</span>
+      <span class="hljs-attr">id</span>=<span class="hljs-string">"verifyPwd3"</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Verify New Password"</span>
+     /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+      <span class="hljs-attr">disabled</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Save"</span>
+      <span class="hljs-attr">primary</span>
+     /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span></pre>
+                </div>
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo__image"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span>
+            <span class="hljs-attr">alt</span>=<span class="hljs-string">"Company Logo"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"heading"</span>&gt;</span>Change Password<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input float-label__input text-input--success"</span>
+                <span class="hljs-attr">id</span>=<span class="hljs-string">"newPwD3"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"newPwD3"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"New Password"</span>
+                <span class="hljs-attr">value</span>=<span class="hljs-string">"eightPassword"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span>
+                <span class="hljs-attr">for</span>=<span class="hljs-string">"newPwD3"</span>&gt;</span>New Password<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tooltip"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">h4</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"heading heading--4"</span>&gt;</span>Minimum
+                    Password Requirements:<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirements"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__icon"</span>
+                            <span class="hljs-attr">src</span>=<span class="hljs-string">"success.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Yes"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>
+                            <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__name"</span>&gt;</span>8
+                            characters<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__icon"</span>
+                            <span class="hljs-attr">src</span>=<span class="hljs-string">"incomplete.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"No"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>
+                            <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__name"</span>&gt;</span>At
+                            least 1 special character<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__icon"</span>
+                            <span class="hljs-attr">src</span>=<span class="hljs-string">"success.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Yes"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>
+                            <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__name"</span>&gt;</span>1
+                            UPPERCASE Character<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__icon"</span>
+                            <span class="hljs-attr">src</span>=<span class="hljs-string">"incomplete.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"No"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>
+                            <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__name"</span>&gt;</span>1
+                            number (0-9)<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input float-label__input"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"verifyPwd3"</span>
+                <span class="hljs-attr">name</span>=<span class="hljs-string">"verifyPwd3"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Verify New Password"</span>
+                <span class="hljs-attr">value</span>=<span class="hljs-string">"eightPa"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span>
+                <span class="hljs-attr">for</span>=<span class="hljs-string">"verifyPwd3"</span>&gt;</span>Verify New Password<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
+            <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--primary button--disabled brand-primary-bg"</span>
+            <span class="hljs-attr">disabled</span>=<span class="hljs-string">""</span>&gt;</span>Save<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
+                </div>
+            </div>
+        </div>
+        <div class="component-demo">
+            <div class="component-demo__preview">
+                <div class="card">
+                    <div class="org-logo"><img class="org-logo__image"
+                            src="ping-logo.svg" alt="Company Logo" /></div>
+                    <h1 class="heading">Change Password</h1>
+                    <form class="form">
+                        <div class="float-label"><input
+                                type="password" class="text-input float-label__input text-input--success"
+                                id="newPwD4" name="newPwD4"
+                                placeholder="New Password"
+                                value="eightPassword" /><label
+                                class="float-label__label"
+                                for="newPwD4">New Password</label>
+                            <div class="tooltip">
+                                <h4 class="heading heading--4">Minimum
+                                    Password Requirements:</h4>
+                                <div class="requirements">
+                                    <div class="requirement"><img
+                                            class="requirement__icon"
+                                            src="success.svg"
+                                            alt="Yes" /><span
+                                            class="requirement__name">8
+                                            characters</span></div>
+                                    <div class="requirement"><img
+                                            class="requirement__icon"
+                                            src="incomplete.svg"
+                                            alt="No" /><span
+                                            class="requirement__name">At
+                                            least 1 special
+                                            character</span></div>
+                                    <div class="requirement"><img
+                                            class="requirement__icon"
+                                            src="success.svg"
+                                            alt="Yes" /><span
+                                            class="requirement__name">1
+                                            UPPERCASE
+                                            Character</span></div>
+                                    <div class="requirement"><img
+                                            class="requirement__icon"
+                                            src="incomplete.svg"
+                                            alt="No" /><span
+                                            class="requirement__name">1
+                                            number (0-9)</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="float-label"><input
+                                type="password" class="text-input float-label__input text-input--success"
+                                id="verifyPwd4" name="verifyPwd4"
+                                placeholder="Verify New Password"
+                                value="eightPassword" /><label
+                                class="float-label__label"
+                                for="verifyPwd4">Verify New
+                                Password</label></div><button
+                            class="button button--primary brand-primary-bg">Save</button>
+                    </form>
+                </div>
+            </div>
+            <div class="component-demo__markup">
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Logo</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Heading</span>&gt;</span>
+    Change Password
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Heading</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Form</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelPasswordInput</span>
+      <span class="hljs-attr">defaultValue</span>=<span class="hljs-string">"eightPassword"</span>
+      <span class="hljs-attr">id</span>=<span class="hljs-string">"newPwD4"</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"New Password"</span>
+      <span class="hljs-attr">success</span>
+    &gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Tooltip</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Heading</span> <span class="hljs-attr">level</span>=<span class="hljs-string">{4}</span>&gt;</span>
+          Minimum Password Requirements:
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Heading</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Requirements</span> <span class="hljs-attr">requirements</span>=<span class="hljs-string">{[{</span>"<span class="hljs-attr">name</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">8</span> <span class="hljs-attr">characters</span>","<span class="hljs-attr">status</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">yes</span>"},{"<span class="hljs-attr">name</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">At</span> <span class="hljs-attr">least</span> <span class="hljs-attr">1</span> <span class="hljs-attr">special</span> <span class="hljs-attr">character</span>","<span class="hljs-attr">status</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">no</span>"},{"<span class="hljs-attr">name</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">1</span> <span class="hljs-attr">UPPERCASE</span> <span class="hljs-attr">Character</span>","<span class="hljs-attr">status</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">yes</span>"},{"<span class="hljs-attr">name</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">1</span> <span class="hljs-attr">number</span> (<span class="hljs-attr">0-9</span>)","<span class="hljs-attr">status</span>"<span class="hljs-attr">:</span>"<span class="hljs-attr">no</span>"}]} /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">Tooltip</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">FloatLabelPasswordInput</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelPasswordInput</span>
+      <span class="hljs-attr">defaultValue</span>=<span class="hljs-string">"eightPassword"</span>
+      <span class="hljs-attr">id</span>=<span class="hljs-string">"verifyPwd4"</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Verify New Password"</span>
+      <span class="hljs-attr">success</span>
+     /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Save"</span>
+      <span class="hljs-attr">primary</span>
+     /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span></pre>
+                </div>
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo__image"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span>
+            <span class="hljs-attr">alt</span>=<span class="hljs-string">"Company Logo"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"heading"</span>&gt;</span>Change Password<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input float-label__input text-input--success"</span>
+                <span class="hljs-attr">id</span>=<span class="hljs-string">"newPwD4"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"newPwD4"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"New Password"</span>
+                <span class="hljs-attr">value</span>=<span class="hljs-string">"eightPassword"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span>
+                <span class="hljs-attr">for</span>=<span class="hljs-string">"newPwD4"</span>&gt;</span>New Password<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tooltip"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">h4</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"heading heading--4"</span>&gt;</span>Minimum
+                    Password Requirements:<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirements"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__icon"</span>
+                            <span class="hljs-attr">src</span>=<span class="hljs-string">"success.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Yes"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>
+                            <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__name"</span>&gt;</span>8
+                            characters<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__icon"</span>
+                            <span class="hljs-attr">src</span>=<span class="hljs-string">"incomplete.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"No"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>
+                            <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__name"</span>&gt;</span>At
+                            least 1 special character<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__icon"</span>
+                            <span class="hljs-attr">src</span>=<span class="hljs-string">"success.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Yes"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>
+                            <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__name"</span>&gt;</span>1
+                            UPPERCASE Character<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__icon"</span>
+                            <span class="hljs-attr">src</span>=<span class="hljs-string">"incomplete.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"No"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>
+                            <span class="hljs-attr">class</span>=<span class="hljs-string">"requirement__name"</span>&gt;</span>1
+                            number (0-9)<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input float-label__input text-input--success"</span>
+                <span class="hljs-attr">id</span>=<span class="hljs-string">"verifyPwd4"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"verifyPwd4"</span>
+                <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Verify New Password"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"eightPassword"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"verifyPwd4"</span>&gt;</span>Verify
+                New Password<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--primary brand-primary-bg"</span>&gt;</span>Save<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
+                </div>
+            </div>
+        </div>
+        <div class="component-demo">
+            <div class="component-demo__preview">
+                <div class="card">
+                    <div class="org-logo"><img class="org-logo__image"
+                            src="ping-logo.svg" alt="Company Logo" /></div>
+                    <h1 class="heading">Change Password</h1>
+                    <div class="feedback feedback--error"><img
+                            class="feedback__icon" src="error.svg"
+                            alt="Error" />
+                        <div class="feedback__message">Password
+                            cannot contain information from
+                            your user profile</div>
+                    </div>
+                    <form class="form">
+                        <div class="float-label"><input
+                                type="password" class="text-input float-label__input"
+                                id="newPwD5" name="newPwD5"
+                                placeholder="New Password"
+                                value="eightPassword" /><label
+                                class="float-label__label"
+                                for="newPwD5">New Password</label></div>
+                        <div class="float-label"><input
+                                type="password" class="text-input float-label__input"
+                                id="verifyPwd5" name="verifyPwd5"
+                                placeholder="Verify New Password"
+                                value="eightPassword" /><label
+                                class="float-label__label"
+                                for="verifyPwd5">Verify New
+                                Password</label></div><button
+                            class="button button--primary button--disabled brand-primary-bg"
+                            disabled="">Save</button>
+                    </form>
+                </div>
+            </div>
+            <div class="component-demo__markup">
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Logo</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Heading</span>&gt;</span>
+    Change Password
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Heading</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Message</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"error"</span>&gt;</span>
+    Password cannot contain information from your user profile
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Message</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Form</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelPasswordInput</span>
+      <span class="hljs-attr">defaultValue</span>=<span class="hljs-string">"eightPassword"</span>
+      <span class="hljs-attr">id</span>=<span class="hljs-string">"newPwD5"</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"New Password"</span>
+     /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelPasswordInput</span>
+      <span class="hljs-attr">defaultValue</span>=<span class="hljs-string">"eightPassword"</span>
+      <span class="hljs-attr">id</span>=<span class="hljs-string">"verifyPwd5"</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Verify New Password"</span>
+     /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+      <span class="hljs-attr">disabled</span>
+      <span class="hljs-attr">label</span>=<span class="hljs-string">"Save"</span>
+      <span class="hljs-attr">primary</span>
+     /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span></pre>
+                </div>
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo__image"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span>
+            <span class="hljs-attr">alt</span>=<span class="hljs-string">"Company Logo"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"heading"</span>&gt;</span>Change Password<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"feedback feedback--error"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"feedback__icon"</span>
+            <span class="hljs-attr">src</span>=<span class="hljs-string">"error.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Error"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"feedback__message"</span>&gt;</span>Password cannot
+            contain information from your user profile<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input float-label__input"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"newPwD5"</span>
+                <span class="hljs-attr">name</span>=<span class="hljs-string">"newPwD5"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"New Password"</span>
+                <span class="hljs-attr">value</span>=<span class="hljs-string">"eightPassword"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span>
+                <span class="hljs-attr">for</span>=<span class="hljs-string">"newPwD5"</span>&gt;</span>New Password<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input float-label__input"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"verifyPwd5"</span>
+                <span class="hljs-attr">name</span>=<span class="hljs-string">"verifyPwd5"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Verify New Password"</span>
+                <span class="hljs-attr">value</span>=<span class="hljs-string">"eightPassword"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span>
+                <span class="hljs-attr">for</span>=<span class="hljs-string">"verifyPwd5"</span>&gt;</span>Verify New Password<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
+            <span class="hljs-attr">class</span>=<span class="hljs-string">"button button--primary button--disabled brand-primary-bg"</span>
+            <span class="hljs-attr">disabled</span>=<span class="hljs-string">""</span>&gt;</span>Save<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
+                </div>
+            </div>
+        </div>
+        <div class="component-demo">
+            <div class="component-demo__preview">
+                <div class="card">
+                    <div class="org-logo"><img class="org-logo__image"
+                            src="ping-logo.svg" alt="Company Logo" /></div>
+                    <div class="icon-feedback icon-feedback--success"><img
+                            src="ghost-success.svg" class="icon-feedback__icon"
+                            alt="" />
+                        <p class="icon-feedback__label">Password
+                            Changed</p>
+                    </div><button class="button">Continue</button>
+                </div>
+            </div>
+            <div class="component-demo__markup">
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Logo</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">IconFeedback</span>
+    <span class="hljs-attr">medium</span>
+    <span class="hljs-attr">type</span>=<span class="hljs-string">"success"</span>
+  &gt;</span>
+    Password Changed
+  <span class="hljs-tag">&lt;/<span class="hljs-name">IconFeedback</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+    <span class="hljs-attr">label</span>=<span class="hljs-string">"Continue"</span>
+    <span class="hljs-attr">secondary</span>
+   /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span></pre>
+                </div>
+                <div class="component-demo__code"><span
+                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org-logo__image"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"ping-logo.svg"</span>
+            <span class="hljs-attr">alt</span>=<span class="hljs-string">"Company Logo"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback icon-feedback--success"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span>
+            <span class="hljs-attr">src</span>=<span class="hljs-string">"ghost-success.svg"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback__icon"</span>
+            <span class="hljs-attr">alt</span>=<span class="hljs-string">""</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"icon-feedback__label"</span>&gt;</span>Password Changed<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span>&gt;</span>Continue<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
     </div>
