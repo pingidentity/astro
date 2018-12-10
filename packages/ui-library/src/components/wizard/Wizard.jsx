@@ -67,6 +67,8 @@ var INHERIT_PROPS = [
  * @param {string} [className]
  *      CSS classes to set on the top-level HTML container
  *
+ * @param {array} [flags]
+ *     Set the flag for "use-portal" to render the tooltip with popper.js and react-portal
  * @param {string} [labelEdit]
  *      If provided, will be injected its children's props
  * @param {string} [labelNext]
@@ -163,7 +165,8 @@ class Wizard extends React.Component {
         onNext: PropTypes.func,
         onEdit: PropTypes.func,
         onDone: PropTypes.func,
-        children: PropTypes.node
+        children: PropTypes.node,
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -240,6 +243,7 @@ class Wizard extends React.Component {
                         saveClassName="success"
                         cancelTooltip={this.props.cancelTooltip}
                         saveTooltip={this.props.saveTooltip}
+                        flags={this.props.flags}
                     />
                 ) : null}
             </div>

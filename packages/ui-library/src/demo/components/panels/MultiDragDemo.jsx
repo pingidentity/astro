@@ -120,6 +120,8 @@ class Row extends React.Component {
  * the type for each row.
  */
 class MultiDragDemo extends React.Component {
+    static flags = [ "use-portal" ];
+
     state = {
         demoType: "STATELESS",
         columns: data.columns, // used for stateful (stateless=false) demo
@@ -332,6 +334,8 @@ class MultiDragDemo extends React.Component {
 
         const sortRow = row => _.sortBy(row, ({ name }) => name);
 
+        const { flags } = this.props;
+
         return (
             <div className="multidrag-demo" data-id="multidragDemoDiv">
                 <Messages messages={this.props.messages.messages} onRemoveMessage={this.messageActions.removeAt} />
@@ -436,6 +440,7 @@ class MultiDragDemo extends React.Component {
                             onRemove={this._handleRemoveStateless}
                             labelEmpty="No Items Available"
                             disabled={this.state.disabled}
+                            flags={flags}
                         />
                     </div>
                 }
@@ -469,6 +474,7 @@ class MultiDragDemo extends React.Component {
                                 filteredByLabel: "but only"
                             }}
                             {...this.state.sorted && { customSort: sortRow }}
+                            flags={flags}
                         />
                     </div>
                 }
@@ -490,6 +496,7 @@ class MultiDragDemo extends React.Component {
                         contentType={contentTypeStateful}
                         labelEmpty="No Items Available"
                         disabled={false}
+                        flags={flags}
                     />
                 </div>
           </div>);

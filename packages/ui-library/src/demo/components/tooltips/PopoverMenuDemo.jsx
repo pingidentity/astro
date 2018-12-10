@@ -8,6 +8,8 @@ import PopoverMenu from "../../../components/tooltips/PopoverMenu";
  */
 
 class PopoverMenuDemo extends React.Component {
+    static flags = ["use-portal"];
+
     state = {
         open1: false,
         message: ""
@@ -35,13 +37,14 @@ class PopoverMenuDemo extends React.Component {
     render() {
         return (
             <div>
+                <p>Last clicked: {this.state.message}</p>
                 <PopoverMenu
                     label={<span className="button inline edit" />}
                     buttons={this._buttons}
                     open={this.state.open1}
                     onToggle={this._toggle1}
+                    flags={this.props.flags}
                 />
-                <p>{this.state.message}</p>
             </div>
         );
     }

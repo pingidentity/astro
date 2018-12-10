@@ -9,6 +9,8 @@ var Calendar = require("./../../../components/calendars/Calendar");
 * @desc A demo for TimePicker
 */
 class TimePickerDemo extends React.Component {
+    static flags = [ "use-portal" ];
+
     constructor(props) {
         super(props);
         var initialState = {
@@ -38,6 +40,8 @@ class TimePickerDemo extends React.Component {
     };
 
     render() {
+        const { flags } = this.props;
+
         return (
             <div>
                 <div className="input-row">
@@ -47,6 +51,7 @@ class TimePickerDemo extends React.Component {
                         labelText="12 Hour Format"
                         value={this.state.a}
                         name="timepicker-demo"
+                        flags={flags}
                     />
                     <br /><br />
                     12hr (w/30m): <strong>{this.state.a}</strong>
@@ -58,6 +63,7 @@ class TimePickerDemo extends React.Component {
                         format="24"
                         labelText="24 Hour Format"
                         value={this.state.b}
+                        flags={flags}
                     />
                     <br /><br />
                     24hr: <strong>{this.state.b}</strong>
@@ -73,12 +79,14 @@ class TimePickerDemo extends React.Component {
                         closeOnSelect={true}
                         onValueChange={this._handleValueChangeC1}
                         date={this.state.c1}
+                        flags={flags}
                     />
                     <TimePicker
                         onValueChange={this._handleValueChangeC2}
                         increments={60}
                         format="24"
                         value={this.state.c2}
+                        flags={flags}
                     />
                 </div>
             </div>

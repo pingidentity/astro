@@ -37,6 +37,8 @@ var React = require("react"),
  *              The value to be set, eg: "3:00pm" or a `moment` object
  * @param {TimePicker~onValueChange} onValueChange
  *              Callback to be triggered when the select element value changes
+ * @param {array} [flags]
+ *     Set the flag for "use-portal" to render with popper.js and react-portal
  */
 module.exports = class extends React.Component {
     static propTypes = {
@@ -51,7 +53,8 @@ module.exports = class extends React.Component {
             PropTypes.string,
             PropTypes.object
         ]),
-        onValueChange: PropTypes.func.isRequired
+        onValueChange: PropTypes.func.isRequired,
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -226,7 +229,9 @@ module.exports = class extends React.Component {
                     selectedOption={selectedTime || noTime}
                     validSearchCharsRegex="/[^\d:\s]+/"
                     title={value}
-                    noneOption={noTime} />
+                    noneOption={noTime}
+                    flags={this.props.flags}
+            />
         );
     }
 };

@@ -36,6 +36,7 @@ class ConditionalFieldsetStateless extends React.Component {
         selectedIndex: PropTypes.number,
         supportEmpty: PropTypes.bool,
         type: PropTypes.string,
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -56,6 +57,7 @@ class ConditionalFieldsetStateless extends React.Component {
 
     _getOptions = type => {
         const dataId = this.props["data-id"] + "-options";
+        const { flags } = this.props;
 
         if (this.props.required || type === Types.SELECT) {
             const indexOffset = this.props.supportEmpty ? 1 : 0;
@@ -86,6 +88,7 @@ class ConditionalFieldsetStateless extends React.Component {
                     selectedOption={selectedOption}
                     title={selectedOption.label}
                     width={this.props.inputWidth}
+                    flags={flags}
                 />
             );
         } else {
@@ -199,6 +202,8 @@ class ConditionalFieldsetStateful extends React.Component {
  *     using the stateless=false option this is not required.
  * @param {number} selectedIndex
  *     The index of the currently selected option. If using the stateless=false option this is not required.
+ * @param {array} [flags]
+ *     Set the flag for "use-portal" to render dropdown with popper.js and react-portal
  * @param {boolean} [stateless]
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally. If True, onValueChange and

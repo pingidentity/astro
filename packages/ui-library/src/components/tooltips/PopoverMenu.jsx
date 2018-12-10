@@ -18,6 +18,8 @@ const PopoverBase = Popover.Base;
  *     CSS classes to set on the top-level HTML container.
  * @param {array} [buttons]
  *     Objects that define the buttons. Accepts "label" and "onClick"
+ * @param {array} [flags]
+ *     Set the flag for "use-portal" to render with popper.js and react-portal
  * @param {string} [triggerClassName]
  *     CSS classes to set on the link that triggers the popover.
  *

@@ -69,6 +69,8 @@ var getZoneNameDisplayValue = function (zoneName) {
 * @param {string} [className]
 *     Class name(s) to add to the top-level container/div
 *
+* @param {array} [flags]
+*     Set the flag for "use-portal" to render with popper.js and react-portal
 * @param {string} [countryLabel="Country"]
 *     The text to display over the selected country
 * @param {string} [displayValue] Value to be displayed other than the unique string value. For example the abbreviation
@@ -175,6 +177,7 @@ class TimeZoneStateless extends React.Component {
         selectCountryLabel: PropTypes.string.isRequired,
         selectedIndex: PropTypes.number,
         value: PropTypes.string,
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
     static defaultProps = {
         clearLabel: LABEL_DEFAULTS.CLEAR,
@@ -186,7 +189,8 @@ class TimeZoneStateless extends React.Component {
         open: false,
         selectCountryLabel: LABEL_DEFAULTS["SELECT-COUNTRY"],
         selectedIndex: 0,
-        value: moment.tz.guess()
+        value: moment.tz.guess(),
+        flags: [],
     };
     state = {
         countryData: null,
@@ -504,9 +508,12 @@ class TimeZoneStateless extends React.Component {
                     label={this._renderLabel()}
                     open={this.props.open}
                     placement="right"
-                    padded>
+                    padded
+                    flags={this.props.flags}
+                >
                     <div className="popover-search">
                         <FormSearchBox
+                            className="input-timezone__search"
                             data-id={`${this.props["data-id"]}-search-input`}
                             queryString={this.props.searchString}
                             onValueChange={this._onSearch}

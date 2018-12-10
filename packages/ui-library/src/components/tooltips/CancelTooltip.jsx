@@ -22,6 +22,8 @@ import Button from "../buttons/Button";
  *     The text of the cancel link.
  * @param {string} confirmButtonText
  *     The text of the confirm button.
+ * @param {array} [flags]
+ *     Set the flag for "use-portal" to render with popper.js and react-portal
  * @param {string} messageText
  *     The text to display in the body of the tooltip.
  * @param {string} [positionClassName]
@@ -59,7 +61,8 @@ class CancelTooltip extends React.Component {
         ]),
         onConfirm: PropTypes.func.isRequired,
         onCancel: PropTypes.func.isRequired,
-        positionClassName: PropTypes.string
+        positionClassName: PropTypes.string,
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     render() {
@@ -67,6 +70,7 @@ class CancelTooltip extends React.Component {
             <DetailsTooltip
                 data-id={this.props["data-id"] + "-cancel-tooltip"}
                 className="cancel-tooltip"
+                flags={this.props.flags}
                 label={this.props.label}
                 open={this.props.open}
                 positionClassName={this.props.positionClassName}

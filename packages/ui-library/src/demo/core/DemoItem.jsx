@@ -6,8 +6,19 @@ import Markup from "./Markup";
 import PageHeader from "ui-library/lib/components/general/PageHeader";
 import StretchContent from "ui-library/lib/components/layout/StretchContent";
 import InlineMessage from "ui-library/lib/components/general/InlineMessage";
+import CheckboxGroup from "ui-library/lib/components/forms/CheckboxGroup";
+import FormLabel from "ui-library/lib/components/forms/FormLabel";
+
+const flagHelp = (
+    `Use the flags prop on your component to specify custom behaviors.
+    Example: flag={["new-behavior", "something-else"]}`
+);
 
 class DemoItem extends React.Component {
+    state = {
+        flags: [],
+    };
+
     static propTypes = {
     };
 
@@ -16,6 +27,8 @@ class DemoItem extends React.Component {
             store: this.props.store.getState()
         });
     };
+
+    _handleUpdateFlags = flags => this.setState({ flags });
 
     /*
      * When a new demo is selected, inspect the properties of the demo and determine if it's requesting an
@@ -48,6 +61,7 @@ class DemoItem extends React.Component {
             jsdocUrl,
             type,
             status,
+            flags,
         } = this.props;
 
         // This is very important because Redux updates are not instant.  When replacing the demoItemReducer,
@@ -72,7 +86,7 @@ class DemoItem extends React.Component {
         ]}</div>);
 
         const markdown = description && marked(description),
-            props = _.extend({}, this.props, this.state.store),
+            props = _.extend({}, this.props, this.state.store, { flags: this.state.flags }),
             containerClassName = classnames("section", { fullscreen }),
             headerClassName = "doc";
 
@@ -104,6 +118,18 @@ class DemoItem extends React.Component {
 
                     <OutputComponent className="output">
                         {React.createElement(type, props)}
+
+                        {flags &&
+                            <div>
+                                <hr className="hr" />
+                                <FormLabel value="Flags" hint={flagHelp} />
+                                <CheckboxGroup
+                                    options={flags.map(flag => ({ value: flag, label: flag }))}
+                                    values={this.state.flags}
+                                    onValueChange={this._handleUpdateFlags}
+                                />
+                            </div>
+                        }
                     </OutputComponent>
 
                     {!fullscreen && <Markup content={this.props.code} />}

@@ -39,6 +39,8 @@ var React = require("react"),
  *    of being incremented after the halfway mark which is the default behavior.
  * @param {number} [helpText]
  *    When provided, this text appears withing a helphint next to the column title/name
+ * @param {array} [flags]
+ *     Set the flag for "use-portal" to render with popper.js and react-portal
  *
  * @param {MultiDrag~onAdd} [onAdd]
  *    Callback to be passed to contentType (as onAdd).
@@ -91,7 +93,8 @@ module.exports = class extends React.Component {
         onDragStart: PropTypes.func,
         onDragEnd: PropTypes.func,
         onAdd: PropTypes.func,
-        onRemove: PropTypes.func
+        onRemove: PropTypes.func,
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -272,6 +275,7 @@ module.exports = class extends React.Component {
                             onClick={this._handleCategoryClick}
                             onToggle={this._handleCategoryToggle}
                             options={categoryOptions}
+                            flags={this.props.flags}
                         />
                     }
                     {showCount &&

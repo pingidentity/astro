@@ -107,10 +107,6 @@
         @include border-radius($border-radius);
         @include transition(0.3s ease);
 
-        .chrome-picker {
-            @include box-shadow(none !important);
-        }
-
         &:before {
             content: '▲';
             // text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
@@ -130,3 +126,6 @@
     }
 }
 
+.chrome-picker {
+    @include box-shadow(none !important);
+}

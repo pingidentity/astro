@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import _ from "underscore";
+import PopperContainer from "./PopperContainer";
 
 import popsOver from "../../util/behaviors/popsOver";
 
@@ -13,6 +14,8 @@ import popsOver from "../../util/behaviors/popsOver";
  *     To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
+ * @param {array} [flags]
+ *     Set the flag for "use-portal" to render with popper.js and react-portal
  * @param {string} [triggerClassName]
  *     CSS classes to set on the link that triggers the popover.
  *
@@ -38,6 +41,7 @@ class PopoverBase extends React.Component {
         "data-id": PropTypes.string,
         children: PropTypes.node,
         className: PropTypes.string,
+        flags: PropTypes.arrayOf(PropTypes.string),
         label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
         onKeyDown: PropTypes.func,
         onToggle: PropTypes.func,
@@ -49,6 +53,7 @@ class PopoverBase extends React.Component {
 
     static defaultProps = {
         "data-id": "popover",
+        flags: [],
         label: "Link",
         onKeyDown: _.noop,
         onToggle: _.noop,
@@ -56,6 +61,8 @@ class PopoverBase extends React.Component {
         triggerClassName: "",
         padded: false,
     };
+
+    _usePortal = () => this.props.flags.findIndex(item => item === "use-portal") >= 0;
 
     /*
      * Check if placement contains a word (like top, right, or left)
@@ -83,26 +90,67 @@ class PopoverBase extends React.Component {
      * @return {React.Component} the React component to be used as tooltip content
      */
     _content = () => {
+        if (!this.props.open) {
+            return null;
+        }
+
         var frameClassName = classnames(
-            "popup-frame popup-frame--pointer",
+            "popup-frame",
             this.props.className,
             this._getModifiers("popup-frame"), {
                 "popup-frame--padded": this.props.padded,
+            }, {
+                "popup-frame--pointer": !this._usePortal(),
             }
         );
 
-        return this.props.open ? (
-            <div className="popover__container">
-                <div className={frameClassName}>{this.renderContent()}</div>
-            </div>
-        ) : null;
+        const contents = <div className={frameClassName}>{this.renderContent()}</div>;
+
+        const positionList = (this.props.placement).split(" ");
+
+        const getHorizontalPlacement = vertical => {
+            if (_.find(positionList, v => v === "left")) {
+                return vertical + "-end";
+            } else if (_.find(positionList, v => v === "center")) {
+                return vertical;
+            } else {
+                return vertical + "-start";
+            }
+        };
+
+        const getPlacement = () => {
+            if (_.find(positionList, v => v === "top")) {
+                return getHorizontalPlacement("top");
+            } else {
+                return getHorizontalPlacement("bottom");
+            }
+        };
+
+        return this._usePortal() ? (
+            <PopperContainer
+                className="popover-display"
+                getReference={this._getReference}
+                pointerClassName="popup-frame__pointer"
+                placement={getPlacement()}
+                ref={el => this.popperContainer = el}
+            >
+                {contents}
+            </PopperContainer>
+        ) : (
+            <div className="popover__container">{contents}</div>
+        );
     };
+
+    _getReference = () => this.reference;
 
     render() {
         var containerClassName = classnames(
             "popover",
             this.props.className,
-            this._getModifiers("popover")
+            this._getModifiers("popover"),
+            {
+                "popover--use-portal": this._usePortal(),
+            }
         );
 
         return (
@@ -119,6 +167,7 @@ class PopoverBase extends React.Component {
                     onClick={this.props.onToggle}
                     onKeyDown={this.props.onKeyDown}
                     title={this.props.title}
+                    ref={el => this.reference = el}
                 >
                     {this.props.label}
                 </a>

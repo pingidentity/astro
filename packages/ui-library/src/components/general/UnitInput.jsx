@@ -15,6 +15,8 @@ var React = require("react"),
  *     The data-id assigned to the top-level of the component
  * @param {string}   [className]
  *     CSS class names to assign to the top-level of the component
+ * @param {array} [flags]
+ *     Set the flag for "use-portal" to render the dropdown with popper.js and react-portal
  * @param {string}   [labelText]
  *     The label text for the compound input
  * @param {string} [label]
@@ -32,7 +34,8 @@ module.exports = class extends React.Component {
         label: PropTypes.string,
         labelHelpText: PropTypes.string,
         textFieldProps: PropTypes.object,
-        dropDownListProps: PropTypes.object
+        dropDownListProps: PropTypes.object,
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -56,6 +59,7 @@ module.exports = class extends React.Component {
                 />
                 <FormDropDownList
                     {...this.props.dropDownListProps}
+                    flags={this.props.flags}
                 />
             </div>
         );

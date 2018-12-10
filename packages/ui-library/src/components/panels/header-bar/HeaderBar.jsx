@@ -81,6 +81,8 @@ var React = require("react"),
  *          Used as the label for the user menu
  * @param {boolean} [updated]
  *          Flag to explicitly indicate you're using the new style of the header bar. (Without the Ping logo)
+ * @param {array} [flags]
+ *     Set the flag for "use-portal" to render with popper.js and react-portal
  *
  **/
 
@@ -158,7 +160,8 @@ class HeaderBar extends React.Component {
         tree: PropTypes.arrayOf(PropTypes.object),
         userMenu: PropTypes.arrayOf(PropTypes.object),
         userName: PropTypes.string,
-        updated: PropTypes.bool
+        updated: PropTypes.bool,
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -188,9 +191,10 @@ class HeaderBar extends React.Component {
                 onMenuToggle: this
                     ._handleMenuToggle,
                 onMenuValueChange: this.props
-                    .onMenuValueChange
+                    .onMenuValueChange,
+                flags: this.props.flags
             },
-            item
+            item,
         );
         if (this.props.openNode !== undefined) {
             props.open =
@@ -241,6 +245,8 @@ class HeaderBar extends React.Component {
                 }
             ];
         }
+
+        const { flags } = this.props;
 
         return (
             <div
@@ -294,6 +300,7 @@ class HeaderBar extends React.Component {
                             options={this.props.marketOptions}
                             market={this.props.marketSelected}
                             onMarketChange={this.props.onMarketChange}
+                            flags={flags}
                         />
                     )}
                 </div>
@@ -314,6 +321,7 @@ class HeaderBar extends React.Component {
                             onEnvironmentChange={this.props.onEnvironmentChange}
                             onNewEnvironment={this.props.onNewEnvironment}
                             newEnvironmentLabel={this.props.newEnvironmentLabel}
+                            flags={flags}
                         />
                     )}
 
@@ -369,7 +377,8 @@ class NavItem extends React.Component {
         open: PropTypes.bool,
         children: PropTypes.array,
         onMenuToggle: PropTypes.func,
-        onMenuValueChange: PropTypes.func
+        onMenuValueChange: PropTypes.func,
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -453,6 +462,7 @@ class NavItem extends React.Component {
                         onOpen={this._handleMenuToggle}
                         onClose={this._handleMenuToggle}
                         triggerClassName="product-nav__menu-trigger"
+                        flags={this.props.flags}
                     />
                 ) : (
                     <a

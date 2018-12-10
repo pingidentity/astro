@@ -24,6 +24,8 @@ const OPTIONS = [
 ];
 
 class TranslationPickerDemo extends React.Component {
+    static flags = [ "use-portal" ];
+
     state = {
         open: false,
         text: OPTIONS[0]
@@ -45,6 +47,7 @@ class TranslationPickerDemo extends React.Component {
         return (
             <div className="input-row">
                 <TranslationPicker
+                    flags={this.props.flags}
                     options={OPTIONS}
                     label={this.state.text.value}
                     onClick={this._handleClick}

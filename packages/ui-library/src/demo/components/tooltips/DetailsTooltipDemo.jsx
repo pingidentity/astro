@@ -1,7 +1,8 @@
-var React = require("react");
-var _ = require("underscore");
-var DetailsTooltip = require("../../../components/tooltips/DetailsTooltip");
-import Button from "../../../components/buttons/Button";
+import React from "react";
+import _ from "underscore";
+import DetailsTooltip from "ui-library/lib/components/tooltips/DetailsTooltip";
+import Button from "ui-library/lib/components/buttons/Button";
+
 /**
 * @name DetailsTooltipDemo
 * @memberof DetailsTooltip
@@ -21,6 +22,8 @@ class DetailsTooltipDemo extends React.Component {
 
         this.state = initState;
     }
+
+    static flags = ["use-portal"];
 
     numDemos = 9;
 
@@ -70,17 +73,21 @@ class DetailsTooltipDemo extends React.Component {
 
     render() {
 
-        var secondaryArr = [
+        const secondaryArr = [
             { value: this._handleCancel8, label: "One" },
             { value: this._handleCancel8, label: "Two" }
         ];
-        var primaryArr = [
+
+        const primaryArr = [
             { value: this._handleConfirm8, label: "Save" }
         ];
+
+        const { flags } = this.props;
 
         return (
             <div className="controls">
                 <DetailsTooltip
+                    flags={flags}
                     stateless={true}
                     positionClassName="bottom right"
                     label="With a label (label is passed into component)"
@@ -108,6 +115,7 @@ class DetailsTooltipDemo extends React.Component {
                 <br/>
                 <a onClick={this._handleToggle2}>Without label (label is outside component)</a>
                 <DetailsTooltip
+                    flags={flags}
                     stateless={true}
                     positionClassName="bottom right"
                     title="Tooltip Title"
@@ -134,6 +142,7 @@ class DetailsTooltipDemo extends React.Component {
 
                 <br/>
                 <DetailsTooltip
+                    flags={flags}
                     stateless={true}
                     label={(<button type="button" className="delete-btn">Label as button</button>)}
                     positionClassName="bottom right"
@@ -160,6 +169,7 @@ class DetailsTooltipDemo extends React.Component {
 
                 <br/>
                 <DetailsTooltip
+                    flags={flags}
                     stateless={true}
                     positionClassName="bottom"
                     label="Open by default"
@@ -186,6 +196,7 @@ class DetailsTooltipDemo extends React.Component {
 
                 <br/>
                 <DetailsTooltip
+                    flags={flags}
                     stateless={true}
                     label="With alert styling"
                     positionClassName="alert"
@@ -214,6 +225,7 @@ class DetailsTooltipDemo extends React.Component {
 
                 <br/>
                 <DetailsTooltip
+                    flags={flags}
                     stateless={true}
                     positionClassName="bottom right"
                     label="Three Buttons"
@@ -246,6 +258,7 @@ class DetailsTooltipDemo extends React.Component {
 
                 <br/>
                 <DetailsTooltip
+                    flags={flags}
                     stateless={true}
                     label="Alert styling with three buttons"
                     positionClassName="alert"
@@ -278,6 +291,7 @@ class DetailsTooltipDemo extends React.Component {
 
                 <br/>
                 <DetailsTooltip
+                    flags={flags}
                     stateless={true}
                     label="Test passing buttons"
                     positionClassName="bottom right"
@@ -298,6 +312,7 @@ class DetailsTooltipDemo extends React.Component {
 
                 <br/>
                 <DetailsTooltip
+                    flags={flags}
                     positionClassName="bottom right"
                     labelClassName="my-css-class"
                     label="Stateful tooltip"
@@ -313,6 +328,7 @@ class DetailsTooltipDemo extends React.Component {
                 <hr className="hr" />
 
                 <DetailsTooltip
+                    flags={flags}
                     positionClassName="bottom left"
                     labelClassName="my-css-class"
                     label="Hang on the left"
@@ -327,6 +343,7 @@ class DetailsTooltipDemo extends React.Component {
                 <br />
 
                 <DetailsTooltip
+                    flags={flags}
                     positionClassName="bottom center"
                     labelClassName="my-css-class"
                     label="Hang center"

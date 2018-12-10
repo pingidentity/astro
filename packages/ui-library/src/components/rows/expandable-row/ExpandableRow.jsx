@@ -88,6 +88,8 @@ var ConfirmDeletePositions = {
  *     Row id, which may be used as a numeric counter rather. Can compliment data-id.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
+ * @param {array} [flags]
+ *     Set the flag for "use-portal" to render tooltips with popper.js and react-portal
  * @param {boolean} [stateless]
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally.
@@ -370,6 +372,7 @@ class StatelessExpandableRow extends React.Component {
             onReorder: PropTypes.func,
             onPositionValueChange: PropTypes.func,
         }),
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -525,7 +528,9 @@ class StatelessExpandableRow extends React.Component {
                                     onCancel={this.props.onDeleteCancelClick}
                                     confirmDeleteTitle={this.props.confirmDeleteTitle}
                                     onDeleteConfirm={this.props.onDeleteConfirmClick}
-                                    confirmDeletePosition={this.props.confirmDeletePosition}>
+                                    confirmDeletePosition={this.props.confirmDeletePosition}
+                                    flags={this.props.flags}
+                                >
                                     {this.props.confirmDeleteContent}
                                 </ConfirmDeleteDialog>);
             }
@@ -630,7 +635,8 @@ class ConfirmDeleteDialog extends React.Component {
         label: PropTypes.string,
         confirmDeleteTitle: PropTypes.string,
         onCancel: PropTypes.func,
-        onDeleteConfirm: PropTypes.func
+        onDeleteConfirm: PropTypes.func,
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -671,7 +677,9 @@ class ConfirmDeleteDialog extends React.Component {
                 title={this.props.confirmDeleteTitle}
                 label={this.props.trigger}
                 open={this.props.open}
-                onToggle={this.props.open ? this.props.onCancel : _.noop}>
+                onToggle={this.props.open ? this.props.onCancel : _.noop}
+                flags={this.props.flags}
+            >
                 {this._renderTooltipContent()}
             </DetailsTooltip>
         );

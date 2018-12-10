@@ -61,6 +61,7 @@ var NUM_SINGLE_SELECT_DEMOS = 3,
 * @desc A demo for SelectionList
 */
 class SelectionListDemo extends React.Component {
+    static flags = [ "use-portal" ];
     state = {
         singleSelectId1: 1,
         singleSelectId2: 3,
@@ -120,6 +121,8 @@ class SelectionListDemo extends React.Component {
     }
 
     render() {
+        const { flags } = this.props;
+
         return (
             <div>
                 <h2>
@@ -180,6 +183,7 @@ class SelectionListDemo extends React.Component {
                     Selected Radio ID = {this.state.singleSelectId1}
                 </p>
                 <DetailsTooltip
+                    flags={flags}
                     positionClassName="bottom right"
                     className="input-selection-list-tooltip"
                     label="Single Selection List"
@@ -252,6 +256,7 @@ class SelectionListDemo extends React.Component {
                     Selected Radio ID = {this.state.multiSelectIds1.join()}
                 </div>
                 <DetailsTooltip
+                    flags={flags}
                     positionClassName="bottom right"
                     className="input-selection-list-tooltip filter"
                     label="Multi Selection List"
@@ -281,6 +286,7 @@ class SelectionListDemo extends React.Component {
                     Selected Radio IDs = {this.state.multiSelectIds4.join()}
                 </div>
                 <DetailsTooltip
+                    flags={flags}
                     positionClassName="bottom right"
                     className="input-selection-list-tooltip filter"
                     label={(

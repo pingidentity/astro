@@ -26,6 +26,8 @@ class ExpandableRowDemo extends React.Component {
         };
     }
 
+    static flags = ["use-portal"];
+
     _onToggle = (index) => {
         var newState = {},
             key = "expanded" + index;
@@ -98,8 +100,12 @@ class ExpandableRowDemo extends React.Component {
                 value: "NO"
             },
         ];
+
+        const { flags } = this.props;
+
         var customDeleteButton = (
             <DetailsTooltip
+                flags={flags}
                 stateless={false}
                 label={(<button type="button" className="delete-btn" onClick={this._toggleCustomDelete}/>)}
                 positionClassName="top left"
@@ -125,12 +131,14 @@ class ExpandableRowDemo extends React.Component {
         return (
             <div data-id="idp-row" className="result-set">
                 <ExpandableRow
+                    flags={flags}
                     stateless={false}
                     title="Basic Row"
                     subtitle="Row Subtitle">
                     <LabelValuePairs dataPairs={mockData} />
                 </ExpandableRow>
                 <ExpandableRow
+                    flags={flags}
                     stateless={false}
                     title="Expanded Row with Row Message"
                     rowMessage={{
@@ -147,12 +155,14 @@ class ExpandableRowDemo extends React.Component {
                     expanded={true}
                 />
                 <ExpandableRow
+                    flags={flags}
                     stateless={false}
                     title="Row with Status Indicator"
                     subtitle="Row Subtitle"
                     status={ExpandableRow.Statuses.ERROR}
                 />
                 <ExpandableRow
+                    flags={flags}
                     stateless={false}
                     title="Row with Toggle"
                     subtitle="stateful"
@@ -160,6 +170,7 @@ class ExpandableRowDemo extends React.Component {
                     rowAccessories={<Toggle stateless={false} />}
                 />
                 <ExpandableRow
+                    flags={flags}
                     title="Row with Pill Button"
                     subtitle="stateless"
                     stateless={false}
@@ -168,6 +179,7 @@ class ExpandableRowDemo extends React.Component {
                     rowAccessories={<RowAccessories.PillButton label="Pill Button" />}
                 />
                 <ExpandableRow
+                    flags={flags}
                     stateless={false}
                     title="Row With a Variety of Right Content"
                     subtitle="Row Subtitle"
@@ -183,18 +195,21 @@ class ExpandableRowDemo extends React.Component {
                     ]}
                 />
                 <ExpandableRow
+                    flags={flags}
                     stateless={false}
                     title="Row With Image"
                     subtitle="Row Subtitle"
                     image="src/demo/images/example-expandable-row-image.png"
                 />
                 <ExpandableRow
+                    flags={flags}
                     stateless={false}
                     title="Row With Icon"
                     subtitle="Row Subtitle"
                     icon="icon-cog"
                 />
                 <ExpandableRow
+                    flags={flags}
                     stateless={false}
                     title={
                         <div className="hover-tooltip">
@@ -209,12 +224,14 @@ class ExpandableRowDemo extends React.Component {
                     expanded={false}
                 />
                 <ExpandableRow
+                    flags={flags}
                     stateless={false}
                     title="Row in Waiting Mode"
                     subtitle="stateful"
                     waiting={true}
                 />
                 <ExpandableRow
+                    flags={flags}
                     stateless={false}
                     title="Row in Ordering Mode"
                     subtitle="stateful"
@@ -237,6 +254,7 @@ class ExpandableRowDemo extends React.Component {
                     )}
                 />
                 <ExpandableRow
+                    flags={flags}
                     stateless={false}
                     title="Row With Invited Styling"
                     className="invited"
@@ -250,8 +268,10 @@ class ExpandableRowDemo extends React.Component {
                     ]}
                 />
                 <ExpandableRow
+                    flags={flags}
                     editButton={
                         <ConfirmTooltip
+                            flags={flags}
                             label=" "
                             className="edit-btn left"
                         >Confirm?</ConfirmTooltip>
@@ -262,6 +282,7 @@ class ExpandableRowDemo extends React.Component {
                 />
                 {!this.state.rowDeleted && (
                     <ExpandableRow
+                        flags={flags}
                         title="Row with Delete Confirmation with Custom delete title"
                         subtitle="stateless"
                         stateless={false}
@@ -279,6 +300,7 @@ class ExpandableRowDemo extends React.Component {
                 )}
                 {!this.state.rowCustomDeleted && (
                     <ExpandableRow
+                        flags={flags}
                         title="Row with Custom Delete Tooltip Button"
                         subtitle="stateless"
                         stateless={false}

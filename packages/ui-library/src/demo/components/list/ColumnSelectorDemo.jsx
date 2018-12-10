@@ -6,6 +6,8 @@ import Icon from "../../../components/general/Icon";
 import LinkDropDownList from "../../../components/forms/LinkDropDownList";
 
 export default class ColumnSelectorDemo extends Component {
+    static flags = [ "use-portal" ];
+
     state = {
         filterOpen: false,
         selectedRowIds: [],
@@ -312,6 +314,7 @@ export default class ColumnSelectorDemo extends Component {
                             options={filterOptions}
                             selectedOption={this.state.selectedFilter}
                             stateless
+                            flags={this.props.flags}
                         />
                     </div>
                 }

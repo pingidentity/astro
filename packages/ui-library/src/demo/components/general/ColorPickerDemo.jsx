@@ -7,6 +7,8 @@ var React = require("react"),
 * @desc A demo for ColorPicker
 */
 class ColorPickerDemo extends React.Component {
+    static flags = [ "use-portal" ];
+
     state = {
         picker1color: "#fff",
         picker2color: "#000",
@@ -34,6 +36,8 @@ class ColorPickerDemo extends React.Component {
     };
 
     render() {
+        const { flags } = this.props;
+
         return (
             <div>
                 <div className="input-row">
@@ -43,7 +47,9 @@ class ColorPickerDemo extends React.Component {
                         onValueChange={this._handleChange1}
                         labelText="Background color"
                         name="stateful-demo"
-                        hintText="Pick a color or type in the hex code" />
+                        hintText="Pick a color or type in the hex code"
+                        flags={flags}
+                    />
                 </div>
                 <div className="input-row">
                     <ColorPicker
@@ -56,7 +62,9 @@ class ColorPickerDemo extends React.Component {
                         onError={this._handleError}
                         errorMessage={this.state.errorMessage}
                         open={this.state.picker2open}
-                        stateless={true} />
+                        stateless={true}
+                        flags={flags}
+                    />
                     </div>
             </div>);
     }

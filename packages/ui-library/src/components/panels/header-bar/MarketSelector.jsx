@@ -8,7 +8,8 @@ class MarketSelector extends React.Component {
         "data-id": PropTypes.string,
         onMarketChange: PropTypes.func,
         market: PropTypes.string,
-        options: PropTypes.arrayOf(PropTypes.object)
+        options: PropTypes.arrayOf(PropTypes.object),
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -45,6 +46,7 @@ class MarketSelector extends React.Component {
             selectedOption={this._getSelectedOption()}
             onValueChange={this._handleMarketChange}
             options={this._getOptions()}
+            flags={this.props.flags}
         />
     );
 }

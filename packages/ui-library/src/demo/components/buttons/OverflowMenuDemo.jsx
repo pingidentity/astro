@@ -9,6 +9,8 @@ import Button from "../../../components/buttons/Button";
  */
 
 class OverflowMenuDemo extends React.Component {
+    static flags = [ "use-portal" ];
+
     state = {
         message: ""
     };
@@ -37,6 +39,7 @@ class OverflowMenuDemo extends React.Component {
             <div>
                 <Button>Regular Button</Button>
                 <OverflowMenu
+                    flags={this.props.flags}
                     buttons={this._buttons}
                 />
                 <br />

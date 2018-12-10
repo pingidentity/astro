@@ -7,6 +7,9 @@ jest.dontMock("../../../util/Validators.js");
 jest.dontMock("../../../util/Utils.js");
 jest.dontMock("react-color");
 
+jest.mock("popper.js");
+jest.mock("react-portal");
+
 describe("ColorPicker", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
@@ -590,6 +593,18 @@ describe("ColorPicker", function () {
         var colorInput = TestUtils.findRenderedDOMNodeWithTag(component, "input");
         expect(colorInput.disabled).toBe(false);
         expect(colorInput.value).toEqual("");
+    });
+
+    it("render open state using portal", function () {
+        var component = getComponent({
+            stateless: true,
+            open: true,
+            flags: [ "use-portal" ],
+        });
+
+        var element = TestUtils.findRenderedDOMNodeWithClass(component, "popover-display");
+
+        expect(element).toBeDefined();
     });
 
 });

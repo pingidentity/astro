@@ -29,6 +29,8 @@ import Translator from "../../util/i18n/Translator.js";
 * @param {string} [className]
 *     Class name(s) to add to the top-level container/div
 *
+* @param {array} [flags]
+*     Set the flag for "use-portal" to render the confirmation tooltips with popper.js and react-portal
 * @param {string} [cancelClassName]
 *     Class name(s) to add to the "cancel" button
 * @param {string} [cancelText]
@@ -123,7 +125,8 @@ class ButtonBar extends React.Component {
         }),
         enableSavingAnimation: PropTypes.bool,
         unfixed: PropTypes.bool,
-        visible: PropTypes.bool
+        visible: PropTypes.bool,
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -181,6 +184,7 @@ class ButtonBar extends React.Component {
                     data-id={this.props["data-id"]}
                     label={this._getCancelButtonMarkup()}
                     positionClassName="top left"
+                    flags={this.props.flags}
                     {...this.props.cancelTooltip}
                 />
             : this._getCancelButtonMarkup()
@@ -202,6 +206,7 @@ class ButtonBar extends React.Component {
                     label={this._getSaveButtonMarkup()}
                     onConfirm={this._handleSave}
                     positionClassName="top left"
+                    flags={this.props.flags}
                     {...props}
                 >
                     {messageText}

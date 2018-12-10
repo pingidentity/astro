@@ -29,6 +29,8 @@ var React = require("react"),
  *     A string or JSX object that serves as the trigger label.
 * @param {string} [className]
  *     CSS classes to be set on the top-level HTML container.
+ * @param {array} [flags]
+ *     Set the flag for "use-portal" to render with popper.js and react-portal
  *
  * @param {object} [bottomPanel]
  *     Link actions for the bottom of the list
@@ -84,7 +86,8 @@ class LinkDropDownListStateless extends React.Component {
         onToggle: PropTypes.func,
         open: PropTypes.bool,
         options: PropTypes.arrayOf(PropTypes.object).isRequired,
-        selectedOption: PropTypes.object
+        selectedOption: PropTypes.object,
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -130,11 +133,14 @@ class LinkDropDownListStateless extends React.Component {
             <DetailsTooltip
                 data-id={this.props["data-id"]}
                 positionClassName="bottom right"
+                contentClassName="link-dropdown-list"
                 className={classnames(this.props.className, "link-dropdown-list")}
                 label={this._renderLabel()}
                 showClose={false}
                 open={this.props.open}
-                onToggle={this.props.onToggle}>
+                onToggle={this.props.onToggle}
+                flags={this.props.flags}
+            >
                 <ul className="select-list" data-id={this.props["data-id"] + "-menu"}>
                     {this._renderOptions()}
                 </ul>

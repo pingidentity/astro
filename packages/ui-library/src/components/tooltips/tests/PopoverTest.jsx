@@ -1,21 +1,24 @@
 import { handleOpen } from "../../../util/behaviors/popsOver.js";
 
+import React from "react";
+import ReactDOM from "react-dom";
+import ReactTestUtils from "react-dom/test-utils";
+import TestUtils from "../../../testutil/TestUtils";
+import KeyboardUtils from "../../../util/KeyboardUtils";
+import Popover from "../Popover";
+import _ from "underscore";
+const Wrapper = TestUtils.UpdatePropsWrapper;
+
 window.__DEV__ = true;
 
 jest.dontMock("../Popover");
 jest.dontMock("../../../util/EventUtils.js");
 jest.dontMock("../../../util/Utils.js");
 
-describe("Popover", function() {
-    var React = require("react"),
-        ReactDOM = require("react-dom"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        TestUtils = require("../../../testutil/TestUtils"),
-        KeyboardUtils = require("../../../util/KeyboardUtils"),
-        Popover = require("../Popover"),
-        Wrapper = TestUtils.UpdatePropsWrapper,
-        _ = require("underscore");
+jest.mock("popper.js");
+jest.mock("react-portal");
 
+describe("Popover", function() {
     window.addEventListener = jest.fn();
     window.removeEventListener = jest.fn();
     beforeEach(function() {
@@ -45,6 +48,27 @@ describe("Popover", function() {
         );
 
         expect(popoverContainer.length).toBe(1);
+        expect(popupFrame.length).toBe(1);
+        expect(content.length).toBe(1);
+    });
+
+    it("renders open state using portal", function() {
+        var component = ReactTestUtils.renderIntoDocument(
+            <div>
+                <Popover label="hello" open={true} flags={[ "use-portal" ]}>
+                    <div className="content">Popover</div>
+                </Popover>
+            </div>
+        );
+        var popupFrame = TestUtils.scryRenderedDOMNodesWithClass(
+            component,
+            "popup-frame"
+        );
+        var content = TestUtils.scryRenderedDOMNodesWithClass(
+            component,
+            "content"
+        );
+
         expect(popupFrame.length).toBe(1);
         expect(content.length).toBe(1);
     });
@@ -117,6 +141,59 @@ describe("Popover", function() {
         );
 
         expect(withRightClass.length).toBe(1);
+    });
+
+    it("renders with top and left placement using a portal", function() {
+        var component = ReactTestUtils.renderIntoDocument(
+            <div>
+                <Popover label="hello" open={true} placement="top left" flags={[ "use-portal" ]}>
+                    <div className="content">Popover</div>
+                </Popover>
+            </div>
+        );
+        var withLeftClass = TestUtils.scryRenderedDOMNodesWithClass(
+            component,
+            "popover--left"
+        );
+        var withTopClass = TestUtils.scryRenderedDOMNodesWithClass(
+            component,
+            "popover--top"
+        );
+
+        expect(withLeftClass.length).toBe(1);
+        expect(withTopClass.length).toBe(1);
+    });
+
+    it("renders with right placement using a portal", function() {
+        var component = ReactTestUtils.renderIntoDocument(
+            <div>
+                <Popover label="hello" open={true} placement="right" flags={[ "use-portal" ]}>
+                    <div className="content">Popover</div>
+                </Popover>
+            </div>
+        );
+        var withRightClass = TestUtils.scryRenderedDOMNodesWithClass(
+            component,
+            "popover--right"
+        );
+
+        expect(withRightClass.length).toBe(1);
+    });
+
+    it("renders with center placement using a portal", function() {
+        var component = ReactTestUtils.renderIntoDocument(
+            <div>
+                <Popover label="hello" open={true} placement="center" flags={[ "use-portal" ]}>
+                    <div className="content">Popover</div>
+                </Popover>
+            </div>
+        );
+        var withRightClass = TestUtils.scryRenderedDOMNodesWithClass(
+            component,
+            "popover--right"
+        );
+
+        expect(withRightClass.length).toBe(0);
     });
 
     it("notifies toggle when clicking trigger", function() {

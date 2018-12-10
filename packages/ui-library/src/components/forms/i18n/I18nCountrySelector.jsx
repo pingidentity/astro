@@ -39,6 +39,8 @@ var React = require("react"),
 *     To define the base "data-id" value for top-level HTML container.
 * @param {string} [className]
 *     CSS classes to set on the top-level HTML container.
+* @param {array} [flags]
+*     Set the flag for "use-portal" to render with popper.js and react-portal
 * @param {boolean} [stateless]
 *    To enable the component to be externally managed. True will relinquish control to the component's owner.
 *    False or not specified will cause the component to manage state internally.
@@ -106,7 +108,8 @@ class I18nCountrySelectorStateless extends React.Component {
         searchIndex: PropTypes.number,
         searchString: PropTypes.string,
         searchTime: PropTypes.number,
-        onSearch: PropTypes.func
+        onSearch: PropTypes.func,
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -140,11 +143,14 @@ class I18nCountrySelectorStateless extends React.Component {
 
     render() {
         var classname = classnames("intl-country-selector", this.props.className);
+        const { flags } = this.props;
+        
         return (
             <div className={classname} data-id={this.props["data-id"]}>
                 <CountryFlagList
                     countryCodeClassName="isoNum-code"
                     countryCodeDisplayType={CountryFlagList.CountryCodeTypes.ISO_NUM}
+                    flags={flags}
                     name={this.props.name}
                     selectedCountryCode={this.props.countryCode}
                     open={this.props.open}

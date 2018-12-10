@@ -458,6 +458,55 @@
     }
 }
 
+// POPOVER/TOOLTIP/HELPHINT POINTERS
+@mixin makePointer($height, $fill, $direction: down) {
+    width: $height * 2;
+    height: $height * 2;
+    box-sizing: border-box;
+    border: $height solid transparent;
+    position: absolute;
+
+    @if $direction == down {
+        border-top-color: $fill;
+    }
+    @else if $direction == right {
+        border-left-color: $fill;
+    }
+    @else if $direction == left {
+        border-right-color: $fill;
+    }
+    @else {
+        border-bottom-color: $fill;
+    }
+}
+
+@mixin makeBorderedPointer($height, $fill, $border, $direction: down) {
+    @include makePointer($height, $border, $direction);
+
+    &:after {
+        content: '';
+
+        @include makePointer($height, $fill, $direction);
+
+        @if $direction == down {
+            left: -$height;
+            bottom: 1px - $height;
+        }
+        @else if $direction == right {
+            bottom: -$height;
+            right: 1px - $height;
+        }
+        @else if $direction == left {
+            bottom: -$height;
+            left: 1px - $height;
+        }
+        @else {
+            left: -$height;
+            top: 1px - $height;
+        }
+    }
+}
+
 // DEPRECATED OR SITE-SPECIFIC --------------------------------------------------------------------
 
 @mixin chrome-fixed-positioning-bug-hack {

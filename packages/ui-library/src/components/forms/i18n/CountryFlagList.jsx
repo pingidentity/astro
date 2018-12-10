@@ -62,6 +62,8 @@ var Types = {
 *    CSS classes to set on the top-level HTML container.
 * @param {string} [name]
 *    Name attribute for the input.
+* @param {array} [flags]
+*     Set the flag for "use-portal" to render with popper.js and react-portal
 *
 * @param {string|number} [selectedCountryCode]
 *    The selected country's iso2 or isoNum code.
@@ -106,7 +108,8 @@ class CountryFlagList extends React.Component {
         onToggle: PropTypes.func,
         searchString: PropTypes.string,
         searchTime: PropTypes.number,
-        onSearch: PropTypes.func
+        onSearch: PropTypes.func,
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -151,7 +154,8 @@ class CountryFlagList extends React.Component {
     render() {
         const {
             countryCodeDisplayType,
-            selectedCountryCode
+            selectedCountryCode,
+            flags,
         } = this.props;
         var containerClassName = classnames(
             "flag-container",
@@ -182,6 +186,7 @@ class CountryFlagList extends React.Component {
 
         return (
             <FormDropDownList
+                    flags={flags}
                     stateless={true}
                     data-id={this.props["data-id"]}
                     className={containerClassName}

@@ -18,6 +18,8 @@ const OPTIONS = [
 * @desc A demo for UnitInput
 */
 class UnitInputDemo extends React.Component {
+    static flags = [ "use-portal" ];
+
     constructor(props) {
         super(props);
         var initialState = {
@@ -60,6 +62,7 @@ class UnitInputDemo extends React.Component {
                             width: InputWidths.SM,
                             name: "dropdown"
                         }}
+                        flags={this.props.flags}
                     />
                     <br /><br />
                     Selected Value: <strong>{this.state.a} {this.state.selectedValue.value}</strong>

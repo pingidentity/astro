@@ -1,7 +1,12 @@
 // Popup and popover frame
 $popup-border-color: $color-timberwolf;
+$popup-border: 1px solid $popup-border-color;
+
 $popup-border-radius: 4px;
 $popup-box-shadow: 0 3px 4px 0 rgba($color-black, 0.1);
+
+$popup-width: 360px;
+$popup-title-height: 50px;
 
 $arrow-offset: 15px;
 $arrow-height: 10px;
@@ -16,6 +21,22 @@ $popup-min-width: 2 * $arrow-offset + 2 * $arrow-height + 65px;
     border: 1px solid $popup-border-color;
     border-radius: $popup-border-radius;
     background: $color-white;
+
+    &__pointer {
+        margin: 0 $spacing-xs;
+
+        *[x-placement^='top'] & {
+            @include makeBorderedPointer($arrow-height, $color-white, $popup-border-color, down);
+        }
+
+        *[x-placement^='bottom'] & {
+            @include makeBorderedPointer($arrow-height, $color-white, $popup-border-color, up);
+        }
+    }
+
+    &--padded {
+        padding: $spacing-md;
+    }
 }
 
 @mixin popover-pointer($top, $color) {
@@ -104,6 +125,10 @@ $max-popover-width: 360px;
 .popover {
     position: relative;
     display: inline-block;
+
+    &__trigger {
+        display: inline-block;
+    }
 }
 
 .popover__container {
@@ -207,6 +232,7 @@ $max-popover-width: 360px;
 
 .nav-menu__link--w-icon {
     padding-left: $spacing-xl;
+    line-height: 30px;
 }
 
 .nav-menu__link + .nav-menu__link {

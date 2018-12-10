@@ -9,6 +9,9 @@ jest.dontMock("../FormError");
 jest.dontMock("../form-text-field/index.js");
 jest.dontMock("../form-text-field/v2");
 
+jest.mock("popper.js");
+jest.mock("react-portal");
+
 describe("FormDropDownList", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
@@ -276,6 +279,18 @@ describe("FormDropDownList", function () {
 
     it("renders list of options", function () {
         var component = getComponent({ open: true });
+        var select = TestUtils.findRenderedDOMNodeWithDataId(component, "select-list");
+
+        expect(select.children.length).toEqual(5);
+        expect(select.children[0].textContent).toEqual("One");
+        expect(select.children[1].textContent).toEqual("Two");
+        expect(select.children[2].textContent).toEqual("Three");
+        expect(select.children[3].textContent).toEqual("Four");
+        expect(select.children[4].textContent).toEqual("Five");
+    });
+
+    it("renders list of options using portal", function () {
+        var component = getComponent({ open: true, flags: [ "use-portal" ] });
         var select = TestUtils.findRenderedDOMNodeWithDataId(component, "select-list");
 
         expect(select.children.length).toEqual(5);
@@ -784,6 +799,23 @@ describe("FormDropDownList", function () {
         const selectedIcon = TestUtils.findRenderedDOMNodeWithClass(component, "icon-globe");
 
         expect(selectedIcon).toBeTruthy();
+    });
 
+    it("gives popper.js the correct width with _dropdownWidth", function() {
+        const component = getComponent({ flags: [ "use-portal" ] });
+        const width = 1234;
+
+        const data = {
+            styles: {},
+            offsets: {
+                reference: {
+                    width: width
+                }
+            }
+        };
+
+        const newData = component.refs.FormDropDownListStateless._dropdownWidth(data);
+
+        expect(newData.styles.minWidth).toEqual(`${width}px`);
     });
 });

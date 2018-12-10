@@ -13,6 +13,8 @@ import popsOver from "../../util/behaviors/popsOver";
  *     The data-id of the component.
  * @param {node} label
  *     The text of the link.
+ * @param {array} [flags]
+ *     Set the flag for "use-portal" to render with popper.js and react-portal
  * @param {string} [positionClassName]
  *     CSS classes to set on the top-level HTML container. Used to manage tooltip callout positioning.
  *      When using multiple positions like "top left" or "bottom right" do not use dashes as it will not work.
@@ -79,6 +81,7 @@ class ConfirmTooltipBase extends Component {
         buttonType: PropTypes.string,
         disableSave: PropTypes.bool,
         closeOnConfirm: PropTypes.bool,
+        flags: PropTypes.arrayOf(PropTypes.string),
     }
 
     static defaultProps = {

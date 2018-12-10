@@ -197,6 +197,8 @@ function convertFilteredIndexes (columns, desc) {
  *    Callback to be triggered when a drag even ends.
  * @param {MultiDrag~customSort} [customSort]
  *    Callback to sort rows according to custom criteria. Expects to receive rows as a return value.
+ * @param {array} [flags]
+ *     Set the flag for "use-portal" to render with popper.js and react-portal
  *
  * @example
  *    <MultiDrag
@@ -256,7 +258,8 @@ class MultiDragStateless extends React.Component {
         disabled: PropTypes.bool,
         onDragStart: PropTypes.func,
         onDragEnd: PropTypes.func,
-        strings: PropTypes.objectOf(PropTypes.string)
+        strings: PropTypes.objectOf(PropTypes.string),
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -397,6 +400,7 @@ class MultiDragStateless extends React.Component {
                 data-id={"DragDropColumn-" + index}
                 showCount={index > 0}
                 strings={this.props.strings}
+                flags={this.props.flags}
             />
         );
     }

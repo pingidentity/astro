@@ -755,6 +755,15 @@ input[type=file] {
                 color: $color-midnight;
                 pointer-events: none;
             }
+
+            &__spacer {
+                @include text-value;
+
+                padding: 0 25px;
+                height: 0;
+                display: block;
+                visibility: hidden;
+            }
         }
     }
     &.no-label {
@@ -1483,6 +1492,153 @@ input[type=file] {
     }
 }
 
+@mixin calendar-wrapper {
+    font-family: $font-stack;
+
+    padding: 5px 12px;
+    border: 1px solid $color-stone;
+    background-color: $color-input-fill;
+    width: 200px;
+    text-align: center;
+
+    @include border-radius(0 0 $default-input-border-radius $default-input-border-radius);
+    @include user-select(none);
+
+    .today-btn {
+        display: none;
+    }
+    .days-view,
+    .months-view,
+    .years-view {
+        .navigation-wrapper {
+            .navigation-title {
+                width: 100px;
+                display: inline-block;
+                cursor: pointer;
+                color: $color-input-text;
+                font-weight: 600;
+            }
+            .icon {
+                display: inline-block;
+
+                .fa {
+                    display: inline-block;
+                    height: 25px;
+                    width: 25px;
+                    color: $color-midnight;
+                    font-size: 13px;
+                    cursor: pointer;
+
+                    &.fa-angle-left {
+                        margin-right: 20px;
+                    }
+                    &.fa-angle-right {
+                        margin-left: 20px;
+                    }
+                }
+                &.disabled {
+                    .fa {
+                        @include opacity(0.4);
+                    }
+                }
+            }
+        }
+        .days-title {
+            .cell {
+                height: 25px;
+                line-height: 25px;
+                cursor: default;
+                font-weight: 600;
+                margin: 0;
+                color: $color-input-text;
+            }
+        }
+        .days,
+        .months,
+        .years {
+            padding-bottom: 2px;
+            .day {
+                width: 26px;
+                height: 25px;
+                font-weight: 600;
+            }
+            .month {
+                width: 58px;
+                height: 38px;
+                line-height: 38px;
+                color: $color-input-text;
+            }
+        }
+        .year {
+            width: 58px;
+            height: 38px;
+            line-height: 38px;
+            color: $color-input-text;
+        }
+        .day {
+            width: 26px;
+            height: 25px;
+            line-height: 25px;
+            color: $color-input-text;
+            &.prev,
+            &.next {
+                @include opacity(0.4);
+                @include transition(opacity 0.5s ease);
+                visibility: hidden;
+            }
+        }
+        .cell {
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            -webkit-touch-callout: none;
+            font-size: 13px;
+
+            @include user-select(none);
+            @include transition($default-input-transition);
+
+            &.hover {
+                color: $color-input-text;
+            }
+            &.current,
+            &:hover {
+                @include opacity(0.8);
+                @include border-radius(3px);
+            }
+            &.current {
+                color: $color-white;
+                background: $color-input-text;
+            }
+            &:hover {
+                background: transparentize($color-input-text, 0.85);
+            }
+            &.title {
+                &:hover {
+                    @include opacity(1);
+                    background: transparent;
+                }
+            }
+            &.disabled {
+                @include opacity(0.4);
+            }
+        }
+    }
+}
+
+@mixin calendar-wrapper-no-portal {
+    display: none;
+
+    &.active {
+        position: absolute;
+        display: block;
+        left: 0;
+        top: calc(100% - 1px);
+        -webkit-touch-callout: none;
+        z-index: 2;
+    }
+}
+
 .input-calendar {
     display: inline-block;
     position: relative;
@@ -1538,151 +1694,26 @@ input[type=file] {
 
     // display
     .input-calendar-wrapper {
-        display: none;
-        font-family: $font-stack;
-
-        &.active {
-            position: absolute;
-            display: block;
-            padding: 5px 12px;
-            border: 1px solid $color-stone;
-            background-color: $color-input-fill;
-            width: 200px;
-            text-align: center;
-            left: 0;
-            top: calc(100% - 1px);
-            -webkit-touch-callout: none;
-            z-index: 2;
-
-            @include border-radius(0 0 $default-input-border-radius $default-input-border-radius);
-            @include user-select(none);
-        }
-        .today-btn {
-            display: none;
-        }
-        .days-view,
-        .months-view,
-        .years-view {
-            .navigation-wrapper {
-                .navigation-title {
-                    width: 100px;
-                    display: inline-block;
-                    cursor: pointer;
-                    color: $color-input-text;
-                    font-weight: 600;
-                }
-                .icon {
-                    display: inline-block;
-
-                    .fa {
-                        display: inline-block;
-                        height: 25px;
-                        width: 25px;
-                        color: $color-midnight;
-                        font-size: 13px;
-                        cursor: pointer;
-
-                        &.fa-angle-left {
-                            margin-right: 20px;
-                        }
-                        &.fa-angle-right {
-                            margin-left: 20px;
-                        }
-                    }
-                    &.disabled {
-                        .fa {
-                            @include opacity(0.4);
-                        }
-                    }
-                }
-            }
-            .days-title {
-                .cell {
-                    height: 25px;
-                    line-height: 25px;
-                    cursor: default;
-                    font-weight: 600;
-                    margin: 0;
-                    color: $color-input-text;
-                }
-            }
-            .days,
-            .months,
-            .years {
-                padding-bottom: 2px;
-                .day {
-                    width: 26px;
-                    height: 25px;
-                    font-weight: 600;
-                }
-                .month {
-                    width: 58px;
-                    height: 38px;
-                    line-height: 38px;
-                    color: $color-input-text;
-                }
-            }
-            .year {
-                width: 58px;
-                height: 38px;
-                line-height: 38px;
-                color: $color-input-text;
-            }
-            .day {
-                width: 26px;
-                height: 25px;
-                line-height: 25px;
-                color: $color-input-text;
-                &.prev,
-                &.next {
-                    @include opacity(0.4);
-                    @include transition(opacity 0.5s ease);
-                    visibility: hidden;
-                }
-            }
-            .cell {
-                display: inline-block;
-                text-align: center;
-                cursor: pointer;
-                border: none;
-                -webkit-touch-callout: none;
-                font-size: 13px;
-
-                @include user-select(none);
-                @include transition($default-input-transition);
-
-                &.hover {
-                    color: $color-input-text;
-                }
-                &.current,
-                &:hover {
-                    @include opacity(0.8);
-                    @include border-radius(3px);
-                }
-                &.current {
-                    color: $color-white;
-                    background: $color-input-text;
-                }
-                &:hover {
-                    background: transparentize($color-input-text, 0.85);
-                }
-                &.title {
-                    &:hover {
-                        @include opacity(1);
-                        background: transparent;
-                    }
-                }
-                &.disabled {
-                    @include opacity(0.4);
-                }
-            }
-        }
+        @include calendar-wrapper-no-portal;
+        @include calendar-wrapper;
     }
 
     &--width-tight {
         input[type=text].input-calendar-value {
             width: 150px;
         }
+    }
+}
+
+// make styles work for popper container version
+.calendar-popup {
+    &.popper-container {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .input-calendar-wrapper {
+        @include calendar-wrapper;
     }
 }
 
@@ -3225,6 +3256,9 @@ label {
             overflow: hidden;
             opacity: 0;
         }
+    }
+    &__search .input-text {
+        margin-bottom: 0;
     }
 }
 

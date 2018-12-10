@@ -7,6 +7,8 @@ var React = require("react"),
 * @desc A demo for I18nPhoneInput
 */
 class I18nPhoneInputDemo extends React.Component {
+    static flags = [ "use-portal" ];
+
     state = {
         countryCodeStateful: "dj",
         dialCodeStateful: "253",
@@ -67,6 +69,8 @@ class I18nPhoneInputDemo extends React.Component {
     };
 
     render() {
+        const { flags } = this.props;
+
         return (
             <div>
                 <label className="detached">Stateful Phone Input</label>
@@ -74,7 +78,9 @@ class I18nPhoneInputDemo extends React.Component {
                     onValueChange={this._handleValueChangeStateful}
                     countryCode={this.state.countryCodeStateful}
                     dialCode={this.state.dialCodeStateful}
-                    phoneNumber={this.state.phoneNumberStateful} />
+                    phoneNumber={this.state.phoneNumberStateful}
+                    flags={flags}
+                />
                 <br/>
                 <div>
                     {this.state.dialCodeStateful ? "+" + this.state.dialCodeStateful : ""}
@@ -95,7 +101,9 @@ class I18nPhoneInputDemo extends React.Component {
                     onValueChange={this._handleValueChangeStateless}
                     countryCode={this.state.countryCodeStateless}
                     dialCode={this.state.dialCodeStateless}
-                    phoneNumber={this.state.phoneNumberStateless} />
+                    phoneNumber={this.state.phoneNumberStateless}
+                    flags={flags}
+                />
                 <br/>
                 <div>
                     {this.state.dialCodeStateless ? "+" + this.state.dialCodeStateless : ""}
@@ -109,7 +117,9 @@ class I18nPhoneInputDemo extends React.Component {
                     open={false}
                     countryCode={this.state.countryCodeStateless2}
                     dialCode={this.state.dialCodeStateless1}
-                    phoneNumber={this.state.phoneNumberStateless2} />
+                    phoneNumber={this.state.phoneNumberStateless2}
+                    flags={flags}
+                />
                 <br/>
 
                 <label className="detached">Stateless, Disabled Phone Input</label>
@@ -119,7 +129,9 @@ class I18nPhoneInputDemo extends React.Component {
                     countryCode={this.state.countryCodeStateless1}
                     dialCode={this.state.dialCodeStateless1}
                     phoneNumber={this.state.phoneNumberStateless1}
-                    disabled={true} />
+                    disabled={true}
+                    flags={flags}
+                />
                 <br/>
                 <div>
                     {this.state.dialCodeStateless ? "+" + this.state.dialCodeStateless : ""}

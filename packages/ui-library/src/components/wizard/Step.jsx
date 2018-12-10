@@ -36,6 +36,8 @@ var React = require("react"),
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container
  *
+ * @param {array} [flags]
+ *     Set the flag for "use-portal" to render the tooltip with popper.js and react-portal
  * @param {string} [hintText]
  *     String tooltip help text
  * @param {string} labelEdit
@@ -112,7 +114,8 @@ class Step extends React.Component {
         showPulsing: PropTypes.bool,
         onEdit: PropTypes.func,
         onNext: PropTypes.func,
-        children: PropTypes.node
+        children: PropTypes.node,
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -162,6 +165,7 @@ class Step extends React.Component {
                     data-id={this.props["data-id"]}
                     label={this._getCancelButtonMarkup()}
                     positionClassName="top left"
+                    flags={this.props.flags}
                     {...this.props.cancelTooltip}
                 />
             ) : this._getCancelButtonMarkup();
@@ -188,6 +192,7 @@ class Step extends React.Component {
                 data-id={this.props.saveTooltip["data-id"]}
                 label={this._getNextButtonMarkup()}
                 positionClassName="top left"
+                flags={this.props.flags}
 
                 {...this.props.saveTooltip}
                 >

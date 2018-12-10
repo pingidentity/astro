@@ -9,7 +9,7 @@ var React = require("react"),
 */
 
 var _options = [
-    { label: "One", value: "1" },
+    { label: "One is the loneliest number", value: "1" },
     { label: "Two", value: "2" },
     { label: "Three", value: "3" },
     { label: "Four", value: "4" },
@@ -22,6 +22,8 @@ var _options = [
 ];
 
 class LinkDropDownListDemo extends React.Component {
+    static flags = [ "use-portal" ];
+
     state = {
         open: false,
         selectedOption: _options[0]
@@ -40,10 +42,12 @@ class LinkDropDownListDemo extends React.Component {
     };
 
     render() {
+        const { flags } = this.props;
         return (
             <div>
                 <div className="input-row">
                     <LinkDropDownList
+                        flags={flags}
                         closeOnClick={true}
                         label="Stateless Version"
                         onClick={this._handleClick}
@@ -55,6 +59,7 @@ class LinkDropDownListDemo extends React.Component {
                     />
                 </div>
                 <LinkDropDownList
+                    flags={flags}
                     stateless={false}
                     closeOnClick={true}
                     label="Stateful Version"
@@ -64,6 +69,7 @@ class LinkDropDownListDemo extends React.Component {
                 />
                 <hr className="hr" />
                 <LinkDropDownList
+                    flags={flags}
                     stateless={false}
                     closeOnClick={true}
                     label="Right-aligned"

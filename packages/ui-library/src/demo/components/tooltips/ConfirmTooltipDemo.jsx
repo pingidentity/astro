@@ -8,6 +8,7 @@ import ConfirmTooltip from "../../../components/tooltips/ConfirmTooltip";
 */
 
 class ConfirmTooltipDemo extends Component {
+    static flags = ["use-portal"];
 
     state = {
         open: this.props.open
@@ -43,6 +44,7 @@ class ConfirmTooltipDemo extends Component {
                     buttonLabel="Confirm"
                     cancelText="Cancel"
                     disableSave={false}
+                    flags={this.props.flags}
                 >
                 {markup}
                 </ConfirmTooltip>
@@ -55,6 +57,7 @@ class ConfirmTooltipDemo extends Component {
                     cancelText="Cancel"
                     disableSave={false}
                     closeOnConfirm={true}
+                    flags={this.props.flags}
                 >
                 {markup}
                 </ConfirmTooltip>

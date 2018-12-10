@@ -16,6 +16,7 @@
     "url": "https://hg-od01.corp.pingidentity.com/r/gitweb?p=ui-library.git;a=tree;h=HEAD;hb=HEAD"
   },
   "dependencies": {
+    "@pingone/net": "0.1.3",
     "babel-runtime": "6.26.0",
     "classnames": "1.2.1",
     "clipboard-polyfill": "2.4.7",
@@ -28,19 +29,20 @@
     "moment": "2.22.2",
     "moment-range": "1.0.5",
     "moment-timezone": "0.5.5",
+    "popper.js": "1.14.6",
     "prop-types": "^15.5.7",
     "raf": "3.4.0",
     "re-mutable": "1.1.1",
     "react-color": "2.13.8",
     "react-dnd": "2.5.4",
     "react-dnd-html5-backend": "2.5.4",
+    "react-portal": "4.2.0",
     "react-tooltip": "3.8.4",
     "recharts": "1.0.0-beta.0",
     "reselect": "2.5.1",
     "underscore": "1.8.3",
     "uuid": "2.0.3",
-    "validator": "5.2.0",
-    "@pingone/net": "0.1.3"
+    "validator": "5.2.0"
   },
   "devDependencies": {
     "acorn": "^6.0.4",

@@ -151,7 +151,8 @@ $flagsImageExtension: 'png' !default;
 }
 
 .intl-tel-input,
-.intl-country-selector {
+.intl-country-selector,
+.flag-container {
     // need position on the container so the selected flag can be
     // absolutely positioned over the input
     position: relative;

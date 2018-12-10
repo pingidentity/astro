@@ -15,6 +15,8 @@ const typeOptions = [
  * @desc A demo for ConditionalFieldset
  */
 class ConditionalFieldsetDemo extends React.Component {
+    static flags = [ "use-portal" ];
+
     state= {
         selectedIndex: 0,
         type: ConditionalFieldset.Types.SELECT,
@@ -36,6 +38,8 @@ class ConditionalFieldsetDemo extends React.Component {
     }
 
     render() {
+        const { flags } = this.props;
+
         return (
             <div style = {{ marginLeft: "20px" }}>
                 <FormRadioGroup
@@ -50,6 +54,7 @@ class ConditionalFieldsetDemo extends React.Component {
 
                 <div className="input-row">
                     <ConditionalFieldset
+                        flags={flags}
                         data-id="demo-1"
                         emptyMessage={"Do nothing"}
                         label="Stateless version"
@@ -64,6 +69,7 @@ class ConditionalFieldsetDemo extends React.Component {
 
                 <div className="input-row">
                     <ConditionalFieldset
+                        flags={flags}
                         data-id="demo-2"
                         label="Stateful version"
                         type={this.state.type}>
@@ -74,6 +80,7 @@ class ConditionalFieldsetDemo extends React.Component {
 
                 <div className="input-row">
                     <ConditionalFieldset
+                        flags={flags}
                         data-id="demo-4"
                         emptyMessage="Do nothing"
                         label="Empty option - declared with prop"
@@ -86,6 +93,7 @@ class ConditionalFieldsetDemo extends React.Component {
 
                 <div className="input-row">
                     <ConditionalFieldset
+                        flags={flags}
                         data-id="demo-3"
                         label="Empty option - declared with empty child div"
                         type={this.state.type}>
@@ -97,6 +105,7 @@ class ConditionalFieldsetDemo extends React.Component {
 
                 <div className="input-row">
                     <ConditionalFieldset
+                        flags={flags}
                         data-id="demo-5"
                         label="Input width specified (medium)"
                         type={this.state.type}
@@ -108,6 +117,7 @@ class ConditionalFieldsetDemo extends React.Component {
 
                 <div className="input-row">
                     <ConditionalFieldset
+                        flags={flags}
                         data-id="demo-6"
                         label="Disabled"
                         type={this.state.type}
@@ -119,6 +129,7 @@ class ConditionalFieldsetDemo extends React.Component {
 
                 <div className="input-row">
                     <ConditionalFieldset
+                        flags={flags}
                         data-id="demo-7"
                         emptyMessage="select option"
                         label="Required - only applicable for the drop-down/select"

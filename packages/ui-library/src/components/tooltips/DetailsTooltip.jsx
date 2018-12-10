@@ -1,13 +1,15 @@
 "use strict";
-var PropTypes = require("prop-types");
-var React = require("react"),
-    ReactDOM = require("react-dom"),
-    classnames = require("classnames"),
-    _ = require("underscore"),
-    callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutsideOfContainer,
-    Utils = require("../../util/Utils");
+import PropTypes from "prop-types";
+import React from "react";
+import ReactDOM from "react-dom";
+import classnames from "classnames";
+import _ from "underscore";
+import { callIfOutsideOfContainer } from "../../util/EventUtils.js";
+import Utils from "../../util/Utils";
 
 import Button from "../buttons/Button";
+import PopperContainer from "./PopperContainer";
+
 /**
  * @callback DetailsTooltip~onToggle
  **/
@@ -20,6 +22,8 @@ import Button from "../buttons/Button";
  *     To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
+ * @param {array} [flags]
+ *     Set the flag for "use-portal" to render with popper.js and react-portal
  * @param {boolean} [stateless]
  *     WARNING. Default value for "stateless" will be set to false from next version.
  *     To enable the component to be externally managed.
@@ -162,7 +166,8 @@ class DetailsTooltipStateless extends React.Component {
         onKeyDown: PropTypes.func,
         secondaryLabels: PropTypes.array,
         primaryLabels: PropTypes.array,
-        cancelLabel: PropTypes.string
+        cancelLabel: PropTypes.string,
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -173,7 +178,8 @@ class DetailsTooltipStateless extends React.Component {
         open: false,
         disabled: false,
         showClose: true,
-        hideOnClick: false
+        hideOnClick: false,
+        flags: [],
     };
 
     /*
@@ -189,7 +195,7 @@ class DetailsTooltipStateless extends React.Component {
     _getSecondaryButtonHtml = (label, value, i) => {
         var dataId = "secondary-action";
 
-        if (i > 1) {
+        if (i > 0) {
             dataId = dataId + "-" + i;
         }
 
@@ -210,7 +216,7 @@ class DetailsTooltipStateless extends React.Component {
     _getPrimaryButtonHtml = (label, value, i) => {
         var dataId = "confirm-action";
 
-        if (i > 1) {
+        if (i > 0) {
             dataId = dataId + "-" + i;
         }
 
@@ -268,38 +274,83 @@ class DetailsTooltipStateless extends React.Component {
         return buttons;
     };
 
+    _usePortal = () => this.props.flags.findIndex(item => item === "use-portal") >= 0;
+
     /*
      * Return of content based on props.open.
      *
      * @return {React.Component} the React component to be used as tooltip content
      */
     _content = () => {
+        if (!this.props.open) {
+            return null;
+        }
 
-        var hide = this.props.hideOnClick ? this._handleToggle : _.noop;
-        var contentClassName =
-            classnames("details-content", this.props.contentClassName) ;
+        const hide = this.props.hideOnClick ? this._handleToggle : _.noop;
 
-        return this.props.open ? (
-            <div className={contentClassName} data-id="details-content"
-                    onClick={hide}>
-                <div
-                    className="details-content-inner"
-                    // Stop events from bubbling up out of tooltip
-                    onClick={this._stopClickPropagation}
-                >
-                    {this.props.showClose && (
-                        <span className="details-close" data-id="details-close" onClick={this._handleToggle}></span>
-                    )}
-                    {this.props.title && (
-                        <div className={this.props.titleClassName} data-id="details-title">{this.props.title}</div>
-                    )}
-                    <div className="details-body" data-id="details-body">
-                        {this.props.children}
-                        {this._getButtons()}
-                    </div>
+        const contentClassName = classnames(
+            "details-content",
+            this.props.contentClassName,
+            this.props.positionClassName
+        );
+
+        const positionList = (this.props.positionClassName + " " + this.props.className).split(" ");
+
+        const getHorizontalPlacement = vertical => {
+            if (_.find(positionList, v => v === "left")) {
+                return vertical + "-end";
+            } else if (_.find(positionList, v => v === "center")) {
+                return vertical;
+            } else {
+                return vertical + "-start";
+            }
+        };
+
+        const getPlacement = () => {
+            if (_.find(positionList, v => v === "top")) {
+                return getHorizontalPlacement("top");
+            } else {
+                return getHorizontalPlacement("bottom");
+            }
+        };
+
+        const contents = (
+            <div
+                className="details-content-inner"
+                // Stop events from bubbling up out of tooltip
+                onClick={this._stopClickPropagation}
+            >
+                {this.props.showClose && (
+                    <span className="details-close" data-id="details-close" onClick={this._handleToggle}></span>
+                )}
+                {this.props.title && (
+                    <div className={this.props.titleClassName} data-id="details-title">{this.props.title}</div>
+                )}
+                <div className="details-body" data-id="details-body">
+                    {this.props.children}
+                    {this._getButtons()}
                 </div>
             </div>
-        ) : null;
+        );
+
+        return this._usePortal() ? (
+            // implement use-portal flag
+            <PopperContainer
+                getReference={this._getTrigger}
+                className={classnames("details-tooltip-display", contentClassName, this.props.className)}
+                pointerClassName="details-tooltip-display__pointer"
+                data-id="details-content"
+                placement={getPlacement()}
+                onClick={hide}
+                ref={el => this.popperContainer = el}
+            >{contents}</PopperContainer>
+        ) : (
+            <div
+                className={contentClassName}
+                data-id="details-content"
+                onClick={hide}
+            >{contents}</div>
+        );
     };
 
     _handleGlobalClick = (e) => {
@@ -350,6 +401,8 @@ class DetailsTooltipStateless extends React.Component {
         window.removeEventListener("keydown", this._handleGlobalKeyDown);
     }
 
+    _getTrigger = () => this.trigger;
+
     render() {
         var containerCss = {
                 show: this.props.open
@@ -371,14 +424,17 @@ class DetailsTooltipStateless extends React.Component {
                 data-id={this.props["data-id"]}
                 ref="container"
             >
-                {this.props.label && (
-                    <a
+                {this.props.label
+                     ? <a
                         data-id="action-btn"
                         className={classnames("details-target", targetCss, this.props.labelClassName)}
-                        onClick={!this.props.disabled ? this._handleToggle : null}>
+                        onClick={!this.props.disabled ? this._handleToggle : null}
+                        ref={el => this.trigger = el}
+                    >
                         {this.props.label}
                     </a>
-                )}
+                    : <span ref={el => this.trigger = el} />
+                }
                 {this._content()}
             </span>
         );

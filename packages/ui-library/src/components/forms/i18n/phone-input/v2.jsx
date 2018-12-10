@@ -87,6 +87,8 @@ var React = require("react"),
 *     Passes to and auto focuses the FormTextField input.
 * @param {boolean} [useAutoComplete="false"]
 *     Whether or not the field will support autocomplete.
+* @param {array} [flags]
+*     Set the flag for "use-portal" to render with popper.js and react-portal
 *
 * @example
 *       <I18nPhoneInput
@@ -136,7 +138,8 @@ class I18nPhoneInputStateless extends React.Component {
         placeholder: PropTypes.string,
         autoFocus: PropTypes.bool,
         useAutoComplete: PropTypes.bool,
-        disabled: PropTypes.bool
+        disabled: PropTypes.bool,
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -213,7 +216,9 @@ class I18nPhoneInputStateless extends React.Component {
                         searchString={this.props.searchString}
                         searchTime={this.props.searchTime}
                         name={this.props.name ? this.props.name+"-country" : null}
-                        onSearch={this.props.onSearch} />
+                        onSearch={this.props.onSearch}
+                        flags={this.props.flags}
+                />
                 <FormTextField
                         data-id={this.props["data-id"] + "-phoneNumber"}
                         className="form-control"

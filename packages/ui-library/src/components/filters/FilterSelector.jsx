@@ -45,6 +45,8 @@ const optionsSelector = createSelector(
 *     Filters the list. If not provided, search is stored in state
 * @param {array} [selected]
 *     All the selected ids
+* @param {array} [flags]
+*     Set the flag for "use-portal" to render with popper.js and react-portal
 */
 class FilterSelector extends React.Component {
     state = {
@@ -70,7 +72,8 @@ class FilterSelector extends React.Component {
         type: PropTypes.oneOf([
             SelectionList.ListType.ADD,
             SelectionList.ListType.MULTI
-        ])
+        ]),
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -113,6 +116,7 @@ class FilterSelector extends React.Component {
             "data-id": dataId,
             bottomPanel,
             className,
+            flags,
             labelText,
             label,
             selected,
@@ -139,6 +143,7 @@ class FilterSelector extends React.Component {
                     }
                     open={open}
                     onToggle={onToggle}
+                    flags={flags}
                 >
                     <SelectionList
                         className="modifier_dark-inputs"

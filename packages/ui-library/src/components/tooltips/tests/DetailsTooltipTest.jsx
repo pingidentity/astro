@@ -1,8 +1,7 @@
 window.__DEV__ = true;
 
-jest.dontMock("../DetailsTooltip");
-jest.dontMock("../../../util/EventUtils.js");
-jest.dontMock("../../../util/Utils.js");
+jest.mock("popper.js");
+jest.mock("react-portal");
 
 describe("DetailsTooltip", function () {
 
@@ -32,9 +31,17 @@ describe("DetailsTooltip", function () {
         window.addEventListener.mockClear();
         window.removeEventListener.mockClear();
     });
+    afterEach(function () {
+        delete process.env.NODE_ENV;
+    });
 
     it("managed component that starts open", function () {
         var component = getComponent({ stateless: false });
+        expect(component.refs.manager.state.open).toBe(true);
+    });
+
+    it("managed component that starts open using a portal", function () {
+        var component = getComponent({ stateless: false, flags: ["use-portal"] });
         expect(component.refs.manager.state.open).toBe(true);
     });
 
@@ -184,6 +191,17 @@ describe("DetailsTooltip", function () {
         expect(callback).toBeCalled(); //make sure callback was triggered
     });
 
+    it("when stateless, close method doesn't fire an error", function () {
+
+        var component = ReactTestUtils.renderIntoDocument(
+            <DetailsTooltip stateless={true} title="Title" label="Action" open={true}>
+                <p>what ever callout content is</p>
+            </DetailsTooltip>
+        );
+
+        component.close();
+    });
+
     it("is supports disabling", function () {
         var callback = jest.fn();
 
@@ -272,6 +290,72 @@ describe("DetailsTooltip", function () {
         handler(e);
 
         expect(callback).toBeCalled();
+    });
+
+    it("triggers callback when escape is pressed", function () {
+        var callback = jest.fn();
+
+        ReactTestUtils.renderIntoDocument(
+            <DetailsTooltip stateless={true} title="Title" label="Action" open={true} onToggle={callback}>
+                <p>what ever callout content is</p>
+            </DetailsTooltip>
+        );
+
+        var handler = TestUtils.findMockCall(window.addEventListener, "keydown")[1];
+        var e = {
+            target: { parentNode: document.body },
+            stopPropagation: jest.fn(),
+            preventDefault: jest.fn(),
+            keyCode: 27,
+        };
+
+        //press escape
+        handler(e);
+
+        expect(callback).toBeCalled();
+    });
+
+    it("doesn't trigger callback when a key other than escape is pressed", function () {
+        var callback = jest.fn();
+
+        ReactTestUtils.renderIntoDocument(
+            <DetailsTooltip stateless={true} title="Title" label="Action" open={true} onToggle={callback}>
+                <p>what ever callout content is</p>
+            </DetailsTooltip>
+        );
+
+        var handler = TestUtils.findMockCall(window.addEventListener, "keydown")[1];
+        var e = {
+            target: { parentNode: document.body },
+            stopPropagation: jest.fn(),
+            preventDefault: jest.fn(),
+            keyCode: 10,
+        };
+
+        //press escape
+        handler(e);
+
+        expect(callback).not.toBeCalled();
+    });
+
+    it("doesn't error when handling outside click but not open", function () {
+        const component = ReactTestUtils.renderIntoDocument(
+            <DetailsTooltip stateless={true} title="Title" label="Action" open={false}>
+                <p>what ever callout content is</p>
+            </DetailsTooltip>
+        );
+
+        component.refs.tooltip._handleGlobalClick();
+    });
+
+    it("doesn't error when handling escape click but not open", function () {
+        const component = ReactTestUtils.renderIntoDocument(
+            <DetailsTooltip stateless={true} title="Title" label="Action" open={false}>
+                <p>what ever callout content is</p>
+            </DetailsTooltip>
+        );
+
+        component.refs.tooltip._handleGlobalKeyDown({ keyCode: 27 });
     });
 
     it("unregister listener when transitioning from open to closed", function () {
@@ -375,7 +459,8 @@ describe("DetailsTooltip", function () {
                 { value: jest.fn(), label: "Two" }
             ],
             primaryArr = [
-                { value: jest.fn(), label: "Save" }
+                { value: jest.fn(), label: "Save" },
+                { value: jest.fn(), label: "Save More" },
             ];
         var component = ReactTestUtils.renderIntoDocument(
                 <DetailsTooltip
@@ -397,15 +482,40 @@ describe("DetailsTooltip", function () {
         expect(cancelBtn).toBeTruthy();
 
         // check length of buttons
-        expect(saveBtn.length).toBe(1);
+        expect(saveBtn.length).toBe(2);
         expect(TestUtils.scryRenderedDOMNodesWithClass(component, "cancel").length).toBe(3);
-        expect(secondaryBtns.length).toBe(3);
+        expect(secondaryBtns.length).toBe(4);
 
         // check button text
         expect(secondaryBtns[0].textContent).toBe("One");
         expect(secondaryBtns[1].textContent).toBe("Two");
         expect(cancelBtn.textContent).toBe("Cancel");
         expect(secondaryBtns[2].textContent).toBe("Save");
+        expect(secondaryBtns[3].textContent).toBe("Save More");
+    });
+
+    it("is rendering with the right x-placement attribute based on the positionClass", function() {
+        const positionedComponent = position => ReactTestUtils.renderIntoDocument(
+            <DetailsTooltip
+                stateless={true}
+                title="Title"
+                label="Action"
+                open={true}
+                positionClassName={position}
+                flags={[ "use-portal" ]}
+            >
+                <p>what ever callout content is</p>
+            </DetailsTooltip>
+        );
+
+        const positioningProp = position => positionedComponent(position).refs.tooltip.popperContainer.props.placement;
+
+        expect(positioningProp("top")).toBe("top-start");
+        expect(positioningProp("bottom")).toBe("bottom-start");
+        expect(positioningProp("top left")).toBe("top-end");
+        expect(positioningProp("bottom left")).toBe("bottom-end");
+        expect(positioningProp("top center")).toBe("top");
+        expect(positioningProp("bottom center")).toBe("bottom");
     });
 
 });

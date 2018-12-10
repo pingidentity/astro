@@ -8,6 +8,8 @@ var React = require("react"),
 * @desc A demo for FormTimeZone
 */
 class FormTimeZoneDemo extends React.Component {
+    static flags = [ "use-portal" ];
+
     constructor(props) {
         super(props);
         let state = {};
@@ -80,6 +82,7 @@ class FormTimeZoneDemo extends React.Component {
     }
 
     render() {
+        const { flags } = this.props;
 
         return (
             <div>
@@ -99,6 +102,7 @@ class FormTimeZoneDemo extends React.Component {
                         value={this.state.value0.name}
                         displayValue={this.state.displayValue0}
                         ref="tzStateless"
+                        flags={flags}
                     />
                 </div>
                 <div className="input-row">
@@ -116,6 +120,7 @@ class FormTimeZoneDemo extends React.Component {
                         value={this.state.value1.name}
                         displayValue={this.state.value1.abbr}
                         ref="tzStateless"
+                        flags={flags}
                     />
                 </div>
                 <div className="input-row">
@@ -125,6 +130,7 @@ class FormTimeZoneDemo extends React.Component {
                         labelText="Stateful Version"
                         labelHelpText="Help hints are optional for both versions"
                         helpClassName="bottom right"
+                        flags={flags}
                     />
                 </div>
                 <p>

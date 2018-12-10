@@ -7,6 +7,8 @@ import FilterSelector from "ui-library/lib/components/filters/FilterSelector";
 * @desc A demo for FilterSelector
 */
 class FilterSelectorDemo extends React.Component {
+    static flags = [ "use-portal" ];
+
     state = {
         values1: [
             "8675309"
@@ -16,9 +18,12 @@ class FilterSelectorDemo extends React.Component {
     _handleChange1 = value => this.setState({ values1: value });
 
     render() {
+        const { flags } = this.props;
+
         return (
             <div>
                 <FilterSelector
+                    flags={flags}
                     labelText="A Filter"
                     options={[
                         {

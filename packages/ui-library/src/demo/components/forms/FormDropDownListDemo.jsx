@@ -30,6 +30,8 @@ const NUM_DEMOS = 12,
 * @desc A demo for FormDropDownList
 */
 class FormDropDownListDemo extends React.Component {
+    static flags = [ "use-portal" ];
+
     constructor(props) {
         super(props);
         let initState = {
@@ -92,10 +94,13 @@ class FormDropDownListDemo extends React.Component {
 
         var customType = <CustomType />;
 
+        const { flags } = this.props;
+
         return (
             <div>
                 <div className="input-row">
                     <FormDropDownList
+                        flags={flags}
                         options={[
                             { label: "One", value: "1" },
                             { label: "Option two with a very, very, very, very long label", value: "2" },
@@ -112,6 +117,7 @@ class FormDropDownListDemo extends React.Component {
 
                 <div className="input-row">
                     <FormDropDownList
+                        flags={flags}
                         options={[
                             { iconName: "globe", label: "One", value: "1" },
                             { iconName: "cog", label: "Option two", value: "2" },
@@ -128,6 +134,7 @@ class FormDropDownListDemo extends React.Component {
 
                 <div className="input-row">
                     <FormDropDownList
+                        flags={flags}
                         options={OPTIONS}
                         contentType={customType}
                         label="Custom content type and search field"
@@ -143,6 +150,7 @@ class FormDropDownListDemo extends React.Component {
 
                 <div className="input-row">
                     <FormDropDownList
+                        flags={flags}
                         options={OPTIONS}
                         label="With a help hint"
                         labelHelpText="Some help tip"
@@ -156,6 +164,7 @@ class FormDropDownListDemo extends React.Component {
 
                 <div className="input-row">
                     <FormDropDownList
+                        flags={flags}
                         options={OPTIONS}
                         label="With error"
                         errorMessage="The error message appears when hovering over the input or the error icon."
@@ -169,6 +178,7 @@ class FormDropDownListDemo extends React.Component {
 
                 <div className="input-row">
                     <FormDropDownList
+                        flags={flags}
                         options={OPTIONS}
                         label="Disabled"
                         disabled={true}
@@ -182,6 +192,7 @@ class FormDropDownListDemo extends React.Component {
 
                 <div className="input-row">
                     <FormDropDownList
+                        flags={flags}
                         options={OPTIONS}
                         groups={GROUPS}
                         label="With groups"
@@ -195,6 +206,7 @@ class FormDropDownListDemo extends React.Component {
 
                 <div className="input-row">
                     <FormDropDownList
+                        flags={flags}
                         options={this.state.addOptions7}
                         label="With add and none option"
                         canAdd={true}
@@ -212,6 +224,7 @@ class FormDropDownListDemo extends React.Component {
 
                 <div className="input-row">
                     <FormDropDownList
+                        flags={flags}
                         options={OPTIONS}
                         label="With search box filtering"
                         labelPrompt="Type to search"
@@ -226,6 +239,7 @@ class FormDropDownListDemo extends React.Component {
 
                 <div className="input-row">
                     <FormDropDownList
+                        flags={flags}
                         groups={GROUPS}
                         options={this.state.addOptions9}
                         label="With groups & add"
@@ -243,6 +257,7 @@ class FormDropDownListDemo extends React.Component {
 
                 <div className="input-row">
                     <FormDropDownList
+                        flags={flags}
                         options={OPTIONS}
                         label="Required with none option"
                         required

@@ -22,6 +22,7 @@ import {
 import Utils from "../../util/Utils.js";
 import _ from "underscore";
 
+import PopperContainer from "../tooltips/PopperContainer";
 
 /**
 * @function FormDropDownList~filterOptions
@@ -122,6 +123,35 @@ const SearchTypes = {
 *     adds an icon to the option
 * @param {string} [label]
 *     The text to display as the field's label.
+* @param {string} [name]
+*     The name attribute for the input.
+* @param {boolean} [stateless=false]
+*     To enable the component to be externally managed. True will relinquish control to the component's owner.
+*     False or not specified will cause the component to manage state internally.
+* @param {array} [flags]
+*     Set the flag for "use-portal" to render with popper.js and react-portal
+*
+* @param {array<FormDropDownList~option>} options
+*    Array of options for the dropdown list. Each option should have a label and value.
+*    Additional properties of the option object will be passed as props to the contentType.
+* @param {FormDropDownList~option} selectedOption
+*    The selected list option.
+* @param {FormDropDownList~onValueChange} [onValueChange]
+*    Callback to be triggered when an option is selected.
+*
+* @param {element} [contentType=FormDropDownListDefaultContent]
+*    A custom element representing the contents of each option.
+*
+* @param {array<FormDropDownList~group>} [groups]
+*    Array of group sections for the dropdown list. If specified, will enable grouping of options.
+*    Order of the groups is preserved in the dropdown list, and the order of options in each group
+*    will be preserved with the order in which they were specified in the options prop.
+*
+* @param {boolean} [open=false]
+*    State of the open/closed dropdown menu.
+* @param {FormDropDownList~onToggle} [onToggle]
+*    Callback to be triggered when the open/closed state changes.
+*
 * @param {string} [labelAdd]
 *    The label for the add new option preview prompt.
 * @param {string} [labelHelpText]
@@ -321,6 +351,7 @@ class FormDropDownListStateless extends React.Component {
         title: PropTypes.string,
         validSearchCharsRegex: PropTypes.string,
         width: PropTypes.oneOf(InputWidthProptypes),
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -342,6 +373,7 @@ class FormDropDownListStateless extends React.Component {
         required: false,
         disabled: false,
         autofocus: false,
+        flags: [],
     };
 
     didPressKey = false;
@@ -729,6 +761,15 @@ class FormDropDownListStateless extends React.Component {
         ]
     )
 
+    _getReference = () => this.reference;
+
+    _dropdownWidth = data => {
+        data.styles.minWidth = data.offsets.reference.width + "px";
+        return data;
+    }
+
+    _usePortal = () => this.props.flags.findIndex(item => item === "use-portal") >= 0;
+
     render() {
         const hasIcon = this.props.options.some((option) => option.iconName);
         const containerClassName = classnames(
@@ -762,6 +803,17 @@ class FormDropDownListStateless extends React.Component {
             inputValue = this._isBoxSearch() &&
                 this.didPressKey && this.props.open ? this.props.searchString : selectedOptionLabel;
 
+        const menuList = (
+            <ul
+                data-id="select-list"
+                className="select-list"
+                ref="selectList"
+                style={this.inlineMenuStyle}>
+                {this._getPrompt()}
+                {this._generateOptions(hasIcon)}
+            </ul>
+        );
+
         return (
             <FormLabel
                 value={this.props.label}
@@ -778,6 +830,10 @@ class FormDropDownListStateless extends React.Component {
                             onKeyDown={this._handleKeyDown}
                             className={selectClassName}
                             title={this.props.title}>
+                            {this._usePortal() &&
+                                <span className="wrapper__spacer">{inputValue}</span>
+                                // for auto-sized dropdowns, it pushes out the width of the input
+                            }
 
                             <FormTextField
                                 data-id="selected-input"
@@ -797,17 +853,35 @@ class FormDropDownListStateless extends React.Component {
                                     : undefined }
                                 readOnly={this.props.disabled || this._isKeyboardSearch()}
                                 width={InputWidths.MAX}
+                                ref={el => this.reference = el}
                             />
                             {!this.props.disabled && <div className="arrow" /> }
                         </div>
-                        <ul
-                            data-id="select-list"
-                            className="select-list"
-                            ref="selectList"
-                            style={this.inlineMenuStyle}>
-                            {this._getPrompt()}
-                            {this._generateOptions(hasIcon)}
-                        </ul>
+                        {this._usePortal()
+                            ? (this.props.open &&
+                                <PopperContainer
+                                    data-id={this.props["data-id"]+"-dropdown"}
+                                    getReference={this._getReference}
+                                    className={containerClassName}
+                                    config={{
+                                        placement: "bottom-start",
+                                        modifiers: {
+                                            autoWidth: {
+                                                enabled: true,
+                                                order: 650,
+                                                fn: this._dropdownWidth,
+                                            },
+                                            computeStyle: {
+                                                gpuAcceleration: false,
+                                            },
+                                        }
+                                    }}
+                                >
+                                    {menuList}
+                                </PopperContainer>
+                            )
+                            : menuList
+                        }
                     </div>
                 </div>
             </FormLabel>

@@ -10,6 +10,8 @@ import Button from "../../../components/buttons/Button";
 * @desc A demo for ButtonBar
 */
 class ButtonBarDemo extends React.Component {
+    static flags = [ "use-portal" ];
+
     state = {
         saving: false,
         showBar: true,
@@ -98,6 +100,7 @@ class ButtonBarDemo extends React.Component {
 
                 <ButtonBar
                     data-id="buttonbar"
+                    flags={this.props.flags}
 
                     cancelText="Cancel"
                     discardText="Discard"

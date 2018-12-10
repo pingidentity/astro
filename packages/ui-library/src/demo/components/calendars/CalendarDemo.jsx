@@ -8,6 +8,8 @@ var React = require("react"),
 * @desc A demo for Calendar
 */
 class CalendarDemo extends React.Component {
+    static flags = [ "use-portal" ];
+
     state = {
         selectedDate1: moment(new Date()), //current date
         selectedDate2: new Date(2017, 1, 20), //Feb 20 2017
@@ -38,6 +40,8 @@ class CalendarDemo extends React.Component {
     };
 
     render() {
+        const { flags } = this.props;
+
         return (
             <div>
                 <Calendar data-id="calendar"
@@ -49,7 +53,9 @@ class CalendarDemo extends React.Component {
                         labelText="Date"
                         labelHelpText="Help text can go here"
                         name="calendar-demo"
-                        onValueChange={this._onEnrollmentDateChanged1} />
+                        onValueChange={this._onEnrollmentDateChanged1}
+                        flags={flags}
+                />
                 <div>{"Selected Date: " + this._getSelectedDateLabel(this.state.selectedDate1)}</div>
 
                 <br /><br />
@@ -64,7 +70,9 @@ class CalendarDemo extends React.Component {
                         required={true}
                         labelText="Date with date range"
                         labelHelpText="Selection outside of date range is not permitted"
-                        onValueChange={this._onEnrollmentDateChanged2} />
+                        onValueChange={this._onEnrollmentDateChanged2}
+                        flags={flags}
+                />
                 <div>{"Selected Date: " + this._getSelectedDateLabel(this.state.selectedDate2)}</div>
             </div>
         );

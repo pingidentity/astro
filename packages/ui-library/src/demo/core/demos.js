@@ -266,10 +266,10 @@ module.exports = [
                     },
                     {
                         label: "Time Zone",
-                        demo: require("../components/forms/TimeZoneDemo"),
+                        demo: require("../components/forms/FormTimeZoneDemo"),
                         pathToDoc: "components/forms/FormTimeZone.jsx",
                         pathToSource: "components_forms_FormTimeZone.jsx.html",
-                        pathToDemoSource: "demo_components_forms_TimeZoneDemo.jsx.html",
+                        pathToDemoSource: "demo_components_forms_FormTimeZoneDemo.jsx.html",
                         keywords: ["FormTimeZone"]
                     },
                     {

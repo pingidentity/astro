@@ -235,6 +235,14 @@ $topnav-bg: $color-neutral-10;
     line-height: 30px;
     padding: 0 10px;
     vertical-align: middle;
+
+    // compensate for this class being passed on
+    // to DetailsTooltip when using portals
+    &.popper-container {
+        border: none;
+        padding: 0;
+        line-height: auto;
+    }
 }
 
 .environment-selector__icon {

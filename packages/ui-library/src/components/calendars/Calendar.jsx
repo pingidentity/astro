@@ -1,14 +1,15 @@
-var PropTypes = require("prop-types");
-var React = require("react"),
-    classnames = require("classnames"),
-    moment = require("moment-range"),
-    DaysView = require("./DaysView"),
-    FormLabel = require("../forms/FormLabel"),
-    MonthsView = require("./MonthsView"),
-    YearsView = require("./YearsView"),
-    CalendarUtils = require("./Utils"),
-    Translator = require("../../util/i18n/Translator.js"),
-    Utils = require("../../util/Utils.js");
+import PropTypes from "prop-types";
+import React from "react";
+import classnames from "classnames";
+import moment from "moment-range";
+import DaysView from "./DaysView";
+import FormLabel from "../forms/FormLabel";
+import MonthsView from "./MonthsView";
+import YearsView from "./YearsView";
+import CalendarUtils from "./Utils";
+import Translator from "../../util/i18n/Translator.js";
+import Utils from "../../util/Utils.js";
+import PopperContainer from "../tooltips/PopperContainer";
 
 var _keyDownActions = CalendarUtils.keyDownActions;
 /**
@@ -88,6 +89,8 @@ var Views = {
  *    Whether or not the calendar should close once a date is selected.
  * @param {boolean} [required=false]
  *    If true, the user must select a date for the calendar.
+ * @param {array} [flags]
+ *     Set the flag for "use-portal" to render with popper.js and react-portal
  *
  * @example
  *
@@ -139,6 +142,7 @@ class Calendar extends React.Component {
         required: PropTypes.bool,
 
         onValueChange: PropTypes.func.isRequired,
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -147,7 +151,8 @@ class Calendar extends React.Component {
         minView: Views.DAYS,
         closeOnSelect: false,
         required: false,
-        format: Translator.translate("dateformat")
+        format: Translator.translate("dateformat"),
+        flags: [],
     };
 
     constructor(props) {
@@ -371,6 +376,10 @@ class Calendar extends React.Component {
         e.stopPropagation();
     };
 
+    _usePortal = () => this.props.flags.findIndex(item => item === "use-portal") >= 0;
+
+    _getReference = () => this.reference;
+
     render() {
 
         // its ok for this.state.date to be null, but we should never
@@ -397,7 +406,7 @@ class Calendar extends React.Component {
                 break;
         }
 
-        var calendar = !this.state.isVisible ? "" : (
+        const calendar = (
             <div className="input-calendar-wrapper active"
                  data-id="input-calendar-wrapper"
                  onClick={this.calendarClick}>
@@ -405,7 +414,21 @@ class Calendar extends React.Component {
             </div>
         );
 
-        var className = classnames("input-calendar", this.props.className, {
+        const popup = (this._usePortal()
+            ? (
+                <PopperContainer
+                    className="calendar-popup"
+                    getReference={this._getReference}
+                    placement="bottom-start"
+                    ref={el => this.popperContainer = el}
+                >
+                    {calendar}
+                </PopperContainer>
+            )
+            : calendar
+        );
+
+        const className = classnames("input-calendar", this.props.className, {
             active: this.state.isVisible,
             required: this.props.required,
             "value-entered": !!this.state.inputValue
@@ -432,9 +455,11 @@ class Calendar extends React.Component {
                            onBlur={this.inputBlur}
                            onChange={this.changeDate}
                            onClick={this.inputClick}
-                           placeholder={this.props.placeholder} />
+                           placeholder={this.props.placeholder}
+                           ref={el => this.reference = el}
+                    />
                 </div>
-                {calendar}
+                {this.state.isVisible && popup}
             </div>
         );
     }

@@ -12,6 +12,9 @@ jest.dontMock("../../forms/FormLabel");
 jest.dontMock("../../tooltips/HelpHint");
 jest.dontMock("../../../util/KeyboardUtils.js");
 
+jest.mock("popper.js");
+jest.mock("react-portal");
+
 describe("Calendar", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
@@ -46,6 +49,18 @@ describe("Calendar", function () {
         );
 
         var calendar = TestUtils.findRenderedDOMNodeWithDataId(component, "calendar");
+
+        expect(calendar).toBeDefined();
+    });
+
+    it("renders open state in portal", function () {
+        var component = ReactTestUtils.renderIntoDocument(
+            <Calendar date={selectedDate} flags={[ "use-portal" ]} />
+        );
+
+        component.setState({ isVisible: true });
+
+        var calendar = TestUtils.findRenderedDOMNodeWithDataId(component, "input-calendar-wrapper");
 
         expect(calendar).toBeDefined();
     });

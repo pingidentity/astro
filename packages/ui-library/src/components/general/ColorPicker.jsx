@@ -18,6 +18,8 @@ var Validator = require("validator");
 var If = require("./If");
 var callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutsideOfContainer;
 
+import PopperContainer from "../tooltips/PopperContainer";
+
 /**
  * @callback ColorPicker~onValueChange
  * @param {string} color
@@ -48,6 +50,8 @@ var callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutside
  *     False or not specified will cause the component to manage state internally.
  * @param {string} [name]
  *    Name attribute for the input.
+ * @param {array} [flags]
+ *     Set the flag for "use-portal" to render with popper.js and react-portal
  *
  * @param {string} [labelText]
  *     A label to render at the top of the color picker
@@ -150,6 +154,7 @@ class Stateless extends React.Component {
         errorMessage: PropTypes.string,
         onError: PropTypes.func,
         width: PropTypes.oneOf(InputWidthProptypes),
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -160,6 +165,7 @@ class Stateless extends React.Component {
         onError: _.noop,
         errorMessage: "",
         width: InputWidths.SM,
+        flags: [],
     };
 
     /*
@@ -288,6 +294,10 @@ class Stateless extends React.Component {
         window.removeEventListener("keydown", this._handleGlobalKeyDown);
     }
 
+    _usePortal = () => this.props.flags.findIndex(item => item === "use-portal") >= 0;
+
+    _getReference = () => this.refs.swatch;
+
     render() {
         var containerCss = {
             "input-color-picker": true,
@@ -295,6 +305,17 @@ class Stateless extends React.Component {
             "color-picker-error": this.props.errorMessage
         };
         containerCss[this.props.className] = !!this.props.className;
+
+        const picker = (
+            <ChromePicker
+                ref={component => this.reactColorPicker = component}
+                color={Validator.isHexColor(this.props.color || "") ? this.props.color : ""}
+                handleChangeComplete={this._handleValueChange}
+                disableAlpha={true}
+                onChange={this._handleDrag}
+            />
+        );
+
 
         return (
             /* eslint-disable max-len */
@@ -323,16 +344,20 @@ class Stateless extends React.Component {
                         </span>
                     </span>
                     <If test={this.props.open && !this.props.disabled}>
-                        <span className="colorpicker-container">
-                            <ChromePicker
-                                    ref={component => this.reactColorPicker = component}
-                                    color={Validator.isHexColor(this.props.color || "") ? this.props.color : ""}
-                                    handleChangeComplete={this._handleValueChange}
-                                    disableAlpha={true}
-                                    onChange={this._handleDrag}
-
-                                     />
-                        </span>
+                        {this._usePortal()
+                            ? (
+                                <PopperContainer
+                                    className="popover-display"
+                                    getReference={this._getReference}
+                                    pointerClassName="popup-frame__pointer"
+                                    ref={el => this.popperContainer = el}
+                                    config={{ positionFixed: true }}
+                                >
+                                    <div className="popup-frame popup-frame--padded">{picker}</div>
+                                </PopperContainer>
+                            )
+                            : <span className="colorpicker-container">{picker}</span>
+                        }
                     </If>
                 </div>
             </div>

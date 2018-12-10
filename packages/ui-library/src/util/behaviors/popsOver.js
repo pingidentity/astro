@@ -80,8 +80,11 @@ const popsOver = WrappedComponent =>
 
         _handleGlobalClick = e => {
             // handle click outside of container
+            const domRef = this.component.popperContainer
+                ? this.component.popperContainer.popper
+                : this.component;
             callIfOutsideOfContainer(
-                ReactDOM.findDOMNode(this.refs.component),
+                ReactDOM.findDOMNode(domRef),
                 this._handleClose,
                 e
             );
@@ -124,7 +127,7 @@ const popsOver = WrappedComponent =>
                     onOpen={this._handleOpen}
                     onToggle={this._handleToggle}
                     open={this._isOpen()}
-                    ref="component"
+                    ref={el => this.component = el}
                 />
             );
         }
