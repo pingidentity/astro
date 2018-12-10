@@ -1,0 +1,6 @@
+This is what all components in the UI Library should have before they can be considered done:
+
+* **Demo:** Please demonstrate how to use all the main props on your component. The demo should go in the `src/demo/components` folder to match where it is in `src/components`. You’ll need to add an entry to `src/demo/core/demos.js` to make it appear in the nav.
+* **Documentation:** Please write JSDoc documentation in the source file of your component and confirm that it is being correctly rendered to a page. (Linked to at the top-right of the demo page.) Check out other components to see how to write this.
+* **Prop type validation:** Learn more at https://reactjs.org/docs/typechecking-with-proptypes.html
+* **Unit testing:** Every component should have its own suite of Jest tests. We strive for 100% code coverage, but we understand that some front-end code doesn’t lend itself to testing. You can run all tests and linting with the `npm run verify` command.

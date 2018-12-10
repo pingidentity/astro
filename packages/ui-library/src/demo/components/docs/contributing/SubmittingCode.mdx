@@ -1,0 +1,15 @@
+We welcome submissions to the UI Library codebase, especially if you’ve found both a bug and a solution to that bug. The project is managed on Gerrit here: https://hg-od01.corp.pingidentity.com/r/#/admin/projects/ui-library
+
+To submit a change:
+1. Create a UIP ticket for your issue in Jira.
+2. Create a branch on Gerrit named with your ticket number.
+3. Commit and push your change to your branch.
+    * The commit message should start with the ticket number.
+    * The command to push is `git push origin HEAD:refs/for/[branch name]`
+4. A change set will be created on Gerrit, and the build process will kick off.
+    * If the build succeeds, add the UX-DEV group to the reviewers.
+    * If the build fails, reach out for help on [#ui-coalition](https://pingidentity.slack.com/messages/C0P4USREK).
+5. Change the status of your ticket to “In Review”.
+6. We require two members of the team to approve a change set. Usually, one will +1 the change, and the second will +2 it. Once this is done, you can submit the change to your branch.
+7. Finally, if all went well, assign your Jira ticket to a member of the UX Dev team, and they will merge your change into master for the next release.
+8. Once your change is merged, the UX Dev team member will close your ticket.

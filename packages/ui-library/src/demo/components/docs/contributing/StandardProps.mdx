@@ -1,0 +1,70 @@
+When building components, one of the trickier tasks is figuring out what to name props. We’ve set some guidelines to make those decisions a bit easier.
+
+## Basics
+
+Choose the most descriptive word you can get away with. For instance, “label” is better than “text”. Avoid multiple words when you can: “saveLabel” is better than “saveButtonLabel” and “onSave” is better than “onSaveClick”.
+
+## Specifiers
+
+When the basic prop name isn’t specific enough to distinguish it from other props in the component, prepend a name. For instance, if a component contained several titles, one of them might be called “introTitle”.
+
+## General
+* **className**
+{string} One or more css class names added to the root of DOM element of the component. All components should support this prop.
+
+* **data-id**
+{string} All components should have this prop as it facilitates testing. The data-id should be applied to the top-most level of markup in the component. Other key items within the component should get a variant of the data-id. For example an input ("[data-id]-input") or a label ("[data-id]-label"). All components should support this prop.
+
+## View States
+* **open**
+{boolean} Whether an input, row, modal, or any other page element is displayed or expanded.
+
+## Content
+* **text**
+{string | node} A piece of text when there is absolutely no better way to describe it. (Try to avoid this.)
+
+* **label**
+{string | node} Text that titles a control.
+
+* **title**
+{string | node} Similar to label, but meant for when we are labeling a group of things or a section.
+
+* **content**
+{string | node} For when ‘text’ isn’t generic enough.
+
+* **count**
+{number} A number that is displayed on a component.
+
+## Event Handlers
+Event handlers should be named something like "on[Action]". We have three standard signatures for event handlers: `function(event)`, `function(value, event)`, and `function(payload, event)`. Event handlers should always pass the original event that triggered them. If the event contains a value, that should be the first argument. If the event requires more complex information, it should be bundled into a payload object that will be the first argument.
+
+* **onValueChange**
+{function(value, event)} The most important event for form inputs or menus. This handler should fire whenever a value changes.
+
+* **onBlur onChange onFocus onKeyDown onKeyPress onMouseDown**
+{function(event) | function(value, event)} Other common events for form inputs and other page elements.
+
+* **onOpen onClose onToggle**
+{function(event)} Three events that should go with any component that controls the visibility of a view. The developer should be able to use either onOpen/onClose or onToggle to pretty much the same result.
+
+## Inputs and Controls
+* **checked**
+{boolean} For simple elements like radio buttons and checkboxes, value for whether they’re on.
+
+* **disabled**
+{boolean} Whether the input is in a disabled state. Often affects behavior and styling. The disabled state should not allow any interaction.
+
+* **label**
+{string | node} Text that titles the input control.  Describes a value, but is not itself a value.
+
+* **options**
+{array} An array for input components that let the user choose from a set of options. This could be an input or a menu.
+
+* **readOnly**
+{boolean} Whether the input is read-only.  Often affects behavior and styling. Differs from disabled in that the value may be copied by selecting it with the cursor.
+
+* **required**
+{boolean} Whether the input is required. Often affects behavior and styling.
+
+* **value**
+The single value being displayed by a component.

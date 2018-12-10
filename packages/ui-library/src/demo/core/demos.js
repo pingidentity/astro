@@ -2,9 +2,22 @@ import React from "react";
 import PageSection from "ui-library/lib/components/layout/PageSection";
 import FormattedContent from "ui-library/lib/components/general/FormattedContent";
 import UILibrary101 from "../components/docs/UILibrary101.mdx";
+import SubmittingCode from "../components/docs/contributing/SubmittingCode.mdx";
+import ComponentRequirements from "../components/docs/contributing/ComponentRequirements.mdx";
+import StandardProps from "../components/docs/contributing/StandardProps.mdx";
+import ClassNames from "../components/docs/contributing/ClassNames.mdx";
 
 const contentPage = WrappedComponent => (props) => (
-    <PageSection><FormattedContent><WrappedComponent {...props} /></FormattedContent></PageSection>
+    <PageSection>
+        <FormattedContent>
+            <WrappedComponent
+                factories={{
+                    a: (aProps, aChildren) => <a target="_blank" {...aProps}>{aChildren}</a>,
+                }}
+                {...props}
+            />
+        </FormattedContent>
+    </PageSection>
 );
 
 module.exports = [
@@ -80,6 +93,33 @@ module.exports = [
                 pathToDemoSource: "demo_components_forms_FormInputWidthsDemo.jsx.html",
                 icon: "clipboard"
             },
+            {
+                label: "Contributing",
+                icon: "code",
+                listOrder: true,
+                children: [
+                    {
+                        label: "Submitting Code",
+                        demo: contentPage(SubmittingCode),
+                        fullscreen: true,
+                    },
+                    {
+                        label: "Component Requirements",
+                        demo: contentPage(ComponentRequirements),
+                        fullscreen: true,
+                    },
+                    {
+                        label: "Standard Props",
+                        demo: contentPage(StandardProps),
+                        fullscreen: true,
+                    },
+                    {
+                        label: "Class Names",
+                        demo: contentPage(ClassNames),
+                        fullscreen: true,
+                    },
+                ]
+            }
         ]
     },
     {
