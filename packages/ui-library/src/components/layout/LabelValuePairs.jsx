@@ -20,7 +20,7 @@ import HelpHint from "../tooltips/HelpHint";
  * @desc An object describing a leaf in the LeftNav
  * @property {string} label
  *              The label (left column)
- * @property {string} value
+ * @property {node} value
  *              The value (right column)
  * @property {string} hintText
  *              Optional contents of a help hint on the value
@@ -89,7 +89,7 @@ LabelValuePairs.propTypes = {
         PropTypes.oneOfType([
             PropTypes.shape({
                 label: PropTypes.string.isRequired,
-                value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+                value: PropTypes.node,
                 hintText: PropTypes.string,
                 hintPlacement: PropTypes.string,
                 hintLink: PropTypes.string,

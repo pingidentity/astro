@@ -1,5 +1,6 @@
 import React from "react";
 import LabelValuePairs from "../../../components/layout/LabelValuePairs";
+import CopyField from "../../../components/utils/CopyField";
 
 /**
 * @name LabelValuePairsDemo
@@ -24,6 +25,10 @@ const LabelValuePairsDemo = () => {
         {
             label: "Display Name",
             value: "Iron Man"
+        },
+        {
+            label: "Copy Superhero",
+            value: <CopyField text="Copy superhero." />
         },
         {
             label: "Description with helphint",
@@ -65,7 +70,7 @@ const LabelValuePairsDemo = () => {
     ];
 
     return (
-        <LabelValuePairs dataPairs={mockData}/>
+        <LabelValuePairs dataPairs={mockData} />
     );
 };
 
