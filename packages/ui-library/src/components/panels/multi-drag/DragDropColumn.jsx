@@ -36,7 +36,7 @@ var React = require("react"),
  *    Determines whether the column is internally sortable
  * @param {number} [dragToEdge=false]
  *    If true, the drag index will only increment when the drag location has passed the edge of the row instead
- *    of being incremented after the halfway mark which is the default behaviour.
+ *    of being incremented after the halfway mark which is the default behavior.
  * @param {number} [helpText]
  *    When provided, this text appears withing a helphint next to the column title/name
  *
@@ -139,7 +139,7 @@ module.exports = class extends React.Component {
                         index,
                         ...props
                     })
-                    : React.cloneElement(this.props.contentType, {
+                    : React.cloneElement(contentType, {
                         column: this.props.index,
                         "data-id": row.id,
                         index,
@@ -151,6 +151,7 @@ module.exports = class extends React.Component {
 
         return (
             <DragDropRow id={row.id} key={row.id} index={index}
+                className={row.preview ? "selector-row--drop-preview" : ""}
                 disabled={opts && opts.disabled}
                 column={this.props.index}
                 onDrag={this._handleDrag}
@@ -158,15 +159,15 @@ module.exports = class extends React.Component {
                 onDragStart={this.props.onDragStart}
                 onDragEnd={this.props.onDragEnd}
                 onCancel={this.props.onCancel}
-                dragToEdge={this.props.dragToEdge}
             >
                 {inner}
             </DragDropRow>);
     };
 
     _renderRows = () => {
-        if (!this.props.rows || this.props.rows.length === 0) {
-            var className = classnames("no-items", {
+        const { rows } = this.props;
+        if (!rows || rows.length === 0) {
+            const className = classnames("no-items", {
                 preview: typeof(this.props.ghostRowAt) === "number"
             });
 
@@ -176,19 +177,19 @@ module.exports = class extends React.Component {
             });
         }
 
-        var rows = this.props.rows.map(this._renderRow);
+        const renderedRows = rows.map(this._renderRow);
+        const ghostIndex = Math.min(rows.length, this.props.ghostRowAt);
 
-        // if there's a preview add it after so it doesnt screw up the indexing
-        if (typeof(this.props.ghostRowAt) === "number") {
-            var index = Math.min(this.props.rows.length, this.props.ghostRowAt);
-
-            rows.splice(index, 0, this._renderRow({
-                preview: true,
-                id: "preview"
-            }, index));
-        }
-
-        return rows;
+        return typeof(this.props.ghostRowAt) === "number"
+            ? [
+                ...renderedRows.slice(0, ghostIndex),
+                this._renderRow({
+                    preview: true,
+                    id: "preview"
+                }, ghostIndex),
+                ...renderedRows.slice(ghostIndex, rows.length)
+            ]
+            : renderedRows;
     };
 
     _getCategoryOptions = () => {

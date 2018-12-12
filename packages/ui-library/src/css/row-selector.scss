@@ -319,4 +319,5 @@
 .selector-row--preview {
     border: 1px solid $color-active-blue;
     background-color: rgba($color-active-blue, 0.25);
+    min-height: 30px;
 }

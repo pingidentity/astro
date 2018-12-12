@@ -147,7 +147,7 @@ const dropCollect = function (connect, monitor) {
  *          Inline style object for child
  * @param {number} [dragToEdge=false]
  *          If true, the drag index will only increment when the drag location has passed the edge of the row instead
- *          of being incremented after the halfway mark which is the default behaviour.
+ *          of being incremented after the halfway mark which is the default behavior.
  * @example
  *
  *  <Draggable id={index} index={index} onDrag={this._onDrag} onDrop={this._onDrop}
