@@ -8,7 +8,7 @@ describe("Anchor", function() {
         Anchor = require("../Anchor");
 
     it("renders and calls click event", function() {
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
         var component = ReactTestUtils.renderIntoDocument(
             <Anchor onClick={callback}>Hello</Anchor>
         );
@@ -23,7 +23,7 @@ describe("Anchor", function() {
     });
 
     it("renders and calls click event with enter key", function() {
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
         var component = ReactTestUtils.renderIntoDocument(
             <Anchor onClick={callback}>Hello</Anchor>
         );

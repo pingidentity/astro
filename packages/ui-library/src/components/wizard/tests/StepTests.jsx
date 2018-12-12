@@ -26,9 +26,9 @@ describe("Step", function () {
             active: true,
             number: 1,
             total: 2,
-            onNext: jest.genMockFunction(),
-            onEdit: jest.genMockFunction(),
-            onDone: jest.genMockFunction(),
+            onNext: jest.fn(),
+            onEdit: jest.fn(),
+            onDone: jest.fn(),
             labelNext: "xxxnext",
             labelCancel: "xxxcancel",
             labelEdit: "xxxedit",
@@ -50,9 +50,9 @@ describe("Step", function () {
             active: true,
             number: 1,
             total: 2,
-            onNext: jest.genMockFunction(),
-            onEdit: jest.genMockFunction(),
-            onDone: jest.genMockFunction(),
+            onNext: jest.fn(),
+            onEdit: jest.fn(),
+            onDone: jest.fn(),
             labelDone: "xxxdone",
             titleSelection: "title selection",
             hintText: "hint"
@@ -195,8 +195,8 @@ describe("Step", function () {
     });
 
     it("Cancel tooltip renders and triggers callbacks.", function () {
-        var cancelConfirm = jest.genMockFunction(),
-            cancelDeny = jest.genMockFunction(),
+        var cancelConfirm = jest.fn(),
+            cancelDeny = jest.fn(),
             cancelTooltipParams = {
                 title: "Cancel Confirmation",
                 open: false,
@@ -238,8 +238,8 @@ describe("Step", function () {
 
     it("Save tooltip renders and triggers callbacks.", function () {
         const
-            saveConfirm = jest.genMockFunction(),
-            saveDeny = jest.genMockFunction(),
+            saveConfirm = jest.fn(),
+            saveDeny = jest.fn(),
             saveTooltipParams = {
                 title: "Save Confirmation",
                 onConfirm: saveConfirm,

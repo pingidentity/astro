@@ -95,7 +95,7 @@ describe("FormTextField", function () {
     });
 
     it("fire onFocus callback when input gains focus", function () {
-        var handleFocus = jest.genMockFunction();
+        var handleFocus = jest.fn();
         var component = getComponent({
             onFocus: handleFocus
         });
@@ -139,7 +139,7 @@ describe("FormTextField", function () {
     });
 
     it("triggers onChange callback when input updated", function () {
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
         var component = getComponent({ onChange: callback });
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
 
@@ -212,7 +212,7 @@ describe("FormTextField", function () {
     });
 
     it("stateless: toggles reveal state", function () {
-        var handleReveal = jest.genMockFunction();
+        var handleReveal = jest.fn();
         var component = getComponent({
             showReveal: true,
             stateless: true,
@@ -237,7 +237,7 @@ describe("FormTextField", function () {
     });
 
     it("fires onKeyPress when key is pressed", function () {
-        var handleKeyPress = jest.genMockFunction();
+        var handleKeyPress = jest.fn();
         var component = getComponent({
             onKeyPress: handleKeyPress
         });
@@ -249,7 +249,7 @@ describe("FormTextField", function () {
     });
 
     it("fires onKeyDown when key is pressed down", function () {
-        var handleKeyDown = jest.genMockFunction();
+        var handleKeyDown = jest.fn();
         var component = getComponent({
             onKeyDown: handleKeyDown
         });
@@ -261,7 +261,7 @@ describe("FormTextField", function () {
     });
 
     it("passes back value to onValueChange", function () {
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
         var component = getComponent({ onValueChange: callback });
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
 
@@ -285,7 +285,7 @@ describe("FormTextField", function () {
     });
 
     it("triggers onMouseDown", function () {
-        var handleMouseDown = jest.genMockFunction();
+        var handleMouseDown = jest.fn();
         var component = getComponent({
             onMouseDown: handleMouseDown
         });
@@ -297,7 +297,7 @@ describe("FormTextField", function () {
     });
 
     it("triggers onSave when save is clicked", function () {
-        var onSave = jest.genMockFunction();
+        var onSave = jest.fn();
         var component = getComponent({
             showSave: true,
             onSave: onSave
@@ -310,7 +310,7 @@ describe("FormTextField", function () {
     });
 
     it("triggers onUndo when undo is clicked", function () {
-        var onUndo = jest.genMockFunction();
+        var onUndo = jest.fn();
         var component = getComponent({
             showUndo: true,
             onUndo: onUndo
@@ -500,7 +500,7 @@ describe("FormTextField", function () {
     });
 
     it("logs warning for type color when not in production", function () {
-        console.warn = jest.genMockFunction();
+        console.warn = jest.fn();
         getComponent({ type: "color" });
 
         expect(console.warn).toBeCalledWith("Please use the ColorPicker component.");
@@ -510,7 +510,7 @@ describe("FormTextField", function () {
         //Mock process.env.NODE_ENV
         process.env.NODE_ENV = "production";
 
-        console.warn = jest.genMockFunction();
+        console.warn = jest.fn();
         getComponent({ type: "color" });
 
         expect(console.warn).not.toBeCalled();

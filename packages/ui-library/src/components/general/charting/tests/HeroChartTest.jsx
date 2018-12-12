@@ -28,7 +28,7 @@ describe("HeroChart", function () {
         bottomSeriesKey: "nopes",
         data: chartData,
         greeting: "Hi",
-        onValueChange: jest.genMockFunction(),
+        onValueChange: jest.fn(),
         rockerButtonProps: rockerButtonProps,
         subtitle: "so far",
         value: "1,000",

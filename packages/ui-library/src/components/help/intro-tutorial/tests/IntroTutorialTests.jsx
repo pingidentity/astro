@@ -55,10 +55,10 @@ describe("IntroTutorial", function () {
             labelGotIt: "Got it",
             messageWelcome: "HELLO WORLD",
 
-            onNext: jest.genMockFunction(),
-            onPrevious: jest.genMockFunction(),
-            onDismiss: jest.genMockFunction(),
-            onGotIt: jest.genMockFunction(),
+            onNext: jest.fn(),
+            onPrevious: jest.fn(),
+            onDismiss: jest.fn(),
+            onGotIt: jest.fn(),
             visible: true,
             steps: [],
             active: 0
@@ -68,8 +68,8 @@ describe("IntroTutorial", function () {
         return ReactTestUtils.renderIntoDocument(<Doc {...props} />);
     };
 
-    window.addEventListener = jest.genMockFunction();
-    window.removeEventListener = jest.genMockFunction();
+    window.addEventListener = jest.fn();
+    window.removeEventListener = jest.fn();
 
     beforeEach(function () {
         window.addEventListener.mockClear();

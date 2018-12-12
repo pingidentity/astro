@@ -21,10 +21,10 @@ const delayPromise = delay => (new Promise(resolve => window.setTimeout(resolve,
 describe("copiesText", function () {
 
     beforeEach(function() {
-        clipboard.writeText = jest.genMockFn();
+        clipboard.writeText = jest.fn();
         clipboard.writeText.mockReturnValue(new Promise(resolve => resolve()));
 
-        global.getSelection = jest.genMockFn();
+        global.getSelection = jest.fn();
         global.getSelection.mockReturnValue({
             toString: () => "",
         });

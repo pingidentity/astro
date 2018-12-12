@@ -51,13 +51,13 @@ describe("CountryFlagList", function () {
         Translator = require("../../../util/i18n/Translator.js"),
         _ = require("underscore");
 
-    window.addEventListener = jest.genMockFunction();
-    window.removeEventListener = jest.genMockFunction();
+    window.addEventListener = jest.fn();
+    window.removeEventListener = jest.fn();
     function getComponent (props) {
         props = _.defaults(props || {}, {
-            onValueChange: jest.genMockFunction(),
-            onToggle: jest.genMockFunction(),
-            onSearch: jest.genMockFunction()
+            onValueChange: jest.fn(),
+            onToggle: jest.fn(),
+            onSearch: jest.fn()
         });
         return ReactTestUtils.renderIntoDocument(<CountryFlagList {...props} />);
     }
@@ -326,7 +326,7 @@ describe("CountryFlagList", function () {
 
     it("call component will mount", function () {
         var component = getComponent();
-        component._translateCountryNames = jest.genMockFunction();
+        component._translateCountryNames = jest.fn();
         component.componentWillMount();
         expect(component._translateCountryNames).toBeCalled();
     });
@@ -352,7 +352,7 @@ describe("CountryFlagList", function () {
             }];
         // Override Translator to mocks after getComponent so any Translator initialized as part of
         // the component's creation gets overriden with our latest mocks
-        Translator.translate = jest.genMockFunction().mockReturnValueOnce("translated text 2")
+        Translator.translate = jest.fn().mockReturnValueOnce("translated text 2")
             .mockReturnValueOnce("translated text 1");
         Translator.currentLanguage = "vi_vn";
 

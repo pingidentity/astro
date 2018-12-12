@@ -27,8 +27,8 @@ describe("PopoverNavMenu", function() {
         }
     ];
 
-    window.addEventListener = jest.genMockFunction();
-    window.removeEventListener = jest.genMockFunction();
+    window.addEventListener = jest.fn();
+    window.removeEventListener = jest.fn();
     beforeEach(function() {
         window.addEventListener.mockClear();
         window.removeEventListener.mockClear();

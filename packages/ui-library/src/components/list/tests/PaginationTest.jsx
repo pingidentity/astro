@@ -18,7 +18,7 @@ describe("Pagination", function () {
         topLinks;
 
     beforeEach(function () {
-        callback = jest.genMockFunction();
+        callback = jest.fn();
         component = ReactTestUtils.renderIntoDocument(
             <Pagination
                 data-id="test-pagination"
@@ -226,7 +226,7 @@ describe("Pagination", function () {
 
         expect(function () {
             ReactTestUtils.renderIntoDocument(
-                <Pagination id="foo" totalPages={2} perPage={1} onValueChange={jest.genMockFunction()}>
+                <Pagination id="foo" totalPages={2} perPage={1} onValueChange={jest.fn()}>
                     <ExpandableRow className="row" key={1} />
                     <ExpandableRow className="row" key={2} />
                 </Pagination>
@@ -239,7 +239,7 @@ describe("Pagination", function () {
 
         expect(function () {
             ReactTestUtils.renderIntoDocument(
-                <Pagination controlled={true} totalPages={2} perPage={1} onValueChange={jest.genMockFunction()}>
+                <Pagination controlled={true} totalPages={2} perPage={1} onValueChange={jest.fn()}>
                     <ExpandableRow className="row" key={1} />
                     <ExpandableRow className="row" key={2} />
                 </Pagination>
@@ -252,7 +252,7 @@ describe("Pagination", function () {
 
         expect(function () {
             ReactTestUtils.renderIntoDocument(
-                <Pagination onChange={jest.genMockFunction()} totalPages={2} perPage={1}>
+                <Pagination onChange={jest.fn()} totalPages={2} perPage={1}>
                     <ExpandableRow className="row" key={1} />
                     <ExpandableRow className="row" key={2} />
                 </Pagination>

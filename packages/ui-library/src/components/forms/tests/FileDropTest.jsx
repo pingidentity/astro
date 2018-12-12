@@ -32,7 +32,7 @@ describe("FileDrop", function () {
     function getComponent(opts) {
         opts = _.defaults(opts || {}, {
             "data-id": componentId,
-            onRemove: jest.genMockFunction(),
+            onRemove: jest.fn(),
         });
         return ReactTestUtils.renderIntoDocument(<FileDrop {...opts} />);
     }
@@ -121,7 +121,7 @@ describe("FileDrop", function () {
     });
 
     it("Triggers onValueChange callback", function () {
-        const onValueChange = jest.genMockFunction();
+        const onValueChange = jest.fn();
         const evtObj = { target: {
             files: ["myfile.jpg"],
             type: "image/jpg"
@@ -137,9 +137,9 @@ describe("FileDrop", function () {
     });
 
     it("Triggers onValueChange on drop", function () {
-        const onValueChange = jest.genMockFunction();
-        const preventDefault = jest.genMockFunction();
-        const stopPropagation = jest.genMockFunction();
+        const onValueChange = jest.fn();
+        const preventDefault = jest.fn();
+        const stopPropagation = jest.fn();
         const fileObj = {
             name: "myfile.jpg",
             type: "image/jpg"
@@ -164,9 +164,9 @@ describe("FileDrop", function () {
     });
 
     it("Does NOT trigger onValueChange on drop with wrong mimetype", function () {
-        const onValueChange = jest.genMockFunction();
-        const preventDefault = jest.genMockFunction();
-        const stopPropagation = jest.genMockFunction();
+        const onValueChange = jest.fn();
+        const preventDefault = jest.fn();
+        const stopPropagation = jest.fn();
         const fileObj = {
             name: "myfile.jpg",
             type: "image/jpg"
@@ -203,7 +203,7 @@ describe("FileDrop", function () {
     it("Removes event listeners on unmount", function () {
         const component = getComponent();
         const componentDom = TestUtils.findRenderedDOMNodeWithDataId(component, componentId);
-        componentDom.removeEventListener = jest.genMockFunction();
+        componentDom.removeEventListener = jest.fn();
 
         ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
 

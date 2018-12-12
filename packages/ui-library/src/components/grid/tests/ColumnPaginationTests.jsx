@@ -8,7 +8,7 @@ describe("ColumnPagination", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         ColumnPagination = require("../ColumnPagination"),
-        callback = jest.genMockFunction(),
+        callback = jest.fn(),
         node,
         component;
 
@@ -48,7 +48,7 @@ describe("ColumnPagination", function () {
     });
 
     it("should callback to parent when links are clicked", function () {
-        callback = jest.genMockFunction();
+        callback = jest.fn();
         component = render({
             perPage: 3,
             page: 2,

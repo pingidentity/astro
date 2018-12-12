@@ -32,7 +32,7 @@ describe("FilterSelector", function () {
     });
 
     it("triggers search callback", function () {
-        const callback = jest.genMockFunction();
+        const callback = jest.fn();
         const component = getComponent({ options, open: true, onSearch: callback, search: "searching" });
         const searchBox = TestUtils.findRenderedDOMNodeWithDataId(component, "searchBox-input");
 

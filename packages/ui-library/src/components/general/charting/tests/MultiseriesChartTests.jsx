@@ -58,7 +58,7 @@ describe("MultiseriesChart", () => {
     ];
 
     const defaults = {
-        onResultClick: jest.genMockFunction(),
+        onResultClick: jest.fn(),
         data: toRechartsDataFormat(baseData),
         options: baseData,
         xAxisKey: "time"

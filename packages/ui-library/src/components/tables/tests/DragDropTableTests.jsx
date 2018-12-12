@@ -64,9 +64,9 @@ describe("DragDropTable", function () {
     function getComponent (props) {
         props = _.defaults(props || {}, {
             "data-id": "drag-drop-table",
-            onDrag: jest.genMockFunction(),
-            onDrop: jest.genMockFunction(),
-            onCancel: jest.genMockFunction(),
+            onDrag: jest.fn(),
+            onDrop: jest.fn(),
+            onCancel: jest.fn(),
             headData: mockData.cols,
             bodyData: mockData.data
         });
@@ -218,7 +218,7 @@ describe("DragDropTable", function () {
 
     it("renders with InfiniteScroll and fires scroll callback", function () {
         var infiniteScrollProps = {
-            onNext: jest.genMockFunction,
+            onNext: jest.fn(),
             hasNext: true,
             batches: [
                 { id: 1, data: mockData.data }
@@ -253,7 +253,7 @@ describe("DragDropTable", function () {
 
     it("calls scroll callback for InfiniteScroll", function () {
         var infiniteScrollProps = {
-            onNext: jest.genMockFunction,
+            onNext: jest.fn(),
             hasNext: true,
             batches: [
                 { id: 1, data: mockData.data }
@@ -261,7 +261,7 @@ describe("DragDropTable", function () {
         };
         getComponent({ fixedHead: true, infiniteScroll: infiniteScrollProps });
         var component = thisComponent;
-        component._handleHorizontalScroll = jest.genMockFunction();
+        component._handleHorizontalScroll = jest.fn();
 
         jest.runAllTimers();
 

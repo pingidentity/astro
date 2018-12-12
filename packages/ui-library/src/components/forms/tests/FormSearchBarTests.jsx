@@ -17,11 +17,11 @@ describe("FormSearchBar", function () {
 
 
     const boxDefaults = {
-        onValueChange: jest.genMockFunction(),
-        onKeyDown: jest.genMockFunction(),
-        onFocus: jest.genMockFunction(),
-        onBlur: jest.genMockFunction(),
-        onClear: jest.genMockFunction()
+        onValueChange: jest.fn(),
+        onKeyDown: jest.fn(),
+        onFocus: jest.fn(),
+        onBlur: jest.fn(),
+        onClear: jest.fn()
     };
 
     const barDefaults = {

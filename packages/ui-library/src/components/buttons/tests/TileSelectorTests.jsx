@@ -45,7 +45,7 @@ describe("TileSelector", function() {
     }
 
     it("clicks trigger correct callback", function() {
-        const callback = jest.genMockFunction();
+        const callback = jest.fn();
         const onValueChange = value => callback(value);
         const component = getComponent({
             onValueChange

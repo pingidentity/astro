@@ -21,11 +21,11 @@ describe("FormSearchBox", function () {
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
             stateless: false,
-            onValueChange: jest.genMockFunction(),
-            onKeyDown: jest.genMockFunction(),
-            onFocus: jest.genMockFunction(),
-            onBlur: jest.genMockFunction(),
-            onClear: jest.genMockFunction()
+            onValueChange: jest.fn(),
+            onKeyDown: jest.fn(),
+            onFocus: jest.fn(),
+            onBlur: jest.fn(),
+            onClear: jest.fn()
         });
 
         return ReactTestUtils.renderIntoDocument(<FormSearchBox {...opts} />);
@@ -74,7 +74,7 @@ describe("FormSearchBox", function () {
     });
 
     it("should fire onChange when field changes", function () {
-        var handleOnChange = jest.genMockFunction();
+        var handleOnChange = jest.fn();
         var component = ReactTestUtils.renderIntoDocument(
             <FormSearchBox onValueChange={handleOnChange} />
         );

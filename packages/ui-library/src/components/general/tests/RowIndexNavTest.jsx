@@ -14,7 +14,7 @@ describe("Indent", function () {
         componentId = "index-nav",
         indexes = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),
         navItems,
-        onClickFunction = jest.genMockFunction(),
+        onClickFunction = jest.fn(),
         selectedClass = "selected",
         selectedIndex = 2;
 

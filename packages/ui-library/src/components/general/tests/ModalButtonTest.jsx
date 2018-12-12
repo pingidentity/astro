@@ -20,7 +20,7 @@ describe("ModalButtonTest", function () {
     };
 
     beforeEach(function () {
-        window.setTimeout = jest.genMockFunction();
+        window.setTimeout = jest.fn();
     });
 
     function getComponentWithoutDefaults (opts) {
@@ -30,15 +30,15 @@ describe("ModalButtonTest", function () {
         opts = _.defaults(opts || {}, {
             activatorButtonLabel: "My Button",
             activatorButtonClassName: "buttonClass",
-            onOpen: jest.genMockFunction(),
-            onClose: jest.genMockFunction().mockReturnValue(true)
+            onOpen: jest.fn(),
+            onClose: jest.fn().mockReturnValue(true)
         });
 
         return getComponentWithoutDefaults(opts);
     }
 
     it("Doesn't render body until expanded", function () {
-        var component = getComponent({ modalBody: jest.genMockFunction() });
+        var component = getComponent({ modalBody: jest.fn() });
 
         expect(component.props.modalBody).not.toBeCalled();
 
@@ -200,8 +200,8 @@ describe("ModalButtonTest", function () {
         var component = getComponentWithoutDefaults({
             activatorContent: "some text",
             activatorContentClassName: "someStyle",
-            onOpen: jest.genMockFunction(),
-            onClose: jest.genMockFunction().mockReturnValue(true)
+            onOpen: jest.fn(),
+            onClose: jest.fn().mockReturnValue(true)
         });
 
         // Expect a single button to be rendered.
@@ -222,8 +222,8 @@ describe("ModalButtonTest", function () {
         var component = getComponentWithoutDefaults({
             activatorContent: linkCallback,
             activatorContentClassName: "someStyle",
-            onOpen: jest.genMockFunction(),
-            onClose: jest.genMockFunction().mockReturnValue(true)
+            onOpen: jest.fn(),
+            onClose: jest.fn().mockReturnValue(true)
         });
 
         // Expect a single button to be rendered.
@@ -257,13 +257,13 @@ describe("ModalButtonTest", function () {
     });
 
     it("Test warning on providing both the activator label and the content", function () {
-        console.warn = jest.genMockFunction();
+        console.warn = jest.fn();
 
         getComponentWithoutDefaults({
             activatorButtonLabel: "button label",
             activatorContent: "some text",
-            onOpen: jest.genMockFunction(),
-            onClose: jest.genMockFunction().mockReturnValue(true)
+            onOpen: jest.fn(),
+            onClose: jest.fn().mockReturnValue(true)
         });
 
         expect(console.warn).toBeCalledWith("Only one of ('content', 'buttonLabel') is required");
@@ -313,8 +313,8 @@ describe("ModalButtonTest", function () {
     it("Open/close stateless modal button", function () {
         var component = getComponentWithoutDefaults({
             activatorContent: "some text",
-            onOpen: jest.genMockFunction().mockReturnValue(true),
-            onClose: jest.genMockFunction().mockReturnValue(true),
+            onOpen: jest.fn().mockReturnValue(true),
+            onClose: jest.fn().mockReturnValue(true),
             stateless: true
         });
 
@@ -324,8 +324,8 @@ describe("ModalButtonTest", function () {
     it("does not call onClose callback when bg is clicked and closeOnBgClick prop is false", function () {
         var component = getComponentWithoutDefaults({
                 activatorContent: linkCallback,
-                onOpen: jest.genMockFunction(),
-                onClose: jest.genMockFunction().mockReturnValue(true),
+                onOpen: jest.fn(),
+                onClose: jest.fn().mockReturnValue(true),
                 stateless: true,
                 expanded: true,
                 closeOnBgClick: false
@@ -339,8 +339,8 @@ describe("ModalButtonTest", function () {
     it("calls onClose callback when bg is clicked and closeOnBgClick prop is true", function () {
         var component = getComponentWithoutDefaults({
                 activatorContent: linkCallback,
-                onOpen: jest.genMockFunction(),
-                onClose: jest.genMockFunction().mockReturnValue(true),
+                onOpen: jest.fn(),
+                onClose: jest.fn().mockReturnValue(true),
                 stateless: true,
                 expanded: true,
                 closeOnBgClick: true

@@ -13,7 +13,7 @@ describe("IntroTutorial", function () {
 
     it("Clones and positions the target", function () {
         var target = {
-            getBoundingClientRect: jest.genMockFunction().mockReturnValue({
+            getBoundingClientRect: jest.fn().mockReturnValue({
                 top: 100,
                 left: 100,
                 width: 500

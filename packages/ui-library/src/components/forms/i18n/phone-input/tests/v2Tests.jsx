@@ -47,9 +47,9 @@ describe("I18nPhoneInput", function () {
 
     function getComponent (props) {
         props = _.defaults(props || {}, {
-            onValueChange: jest.genMockFunction(),
-            onToggle: jest.genMockFunction(),
-            onSearch: jest.genMockFunction()
+            onValueChange: jest.fn(),
+            onToggle: jest.fn(),
+            onSearch: jest.fn()
         });
 
         return ReactTestUtils.renderIntoDocument(<I18nPhoneInput {...props} />);
@@ -273,7 +273,7 @@ describe("I18nPhoneInput", function () {
         var expectedError = new Error(Utils.deprecatePropError("onCountrySearch", "onSearch"));
 
         expect(function () {
-            getComponent({ onCountrySearch: jest.genMockFunction() });
+            getComponent({ onCountrySearch: jest.fn() });
         }).toThrow(expectedError);
     });
 

@@ -16,8 +16,8 @@ describe("Popover", function() {
         Wrapper = TestUtils.UpdatePropsWrapper,
         _ = require("underscore");
 
-    window.addEventListener = jest.genMockFunction();
-    window.removeEventListener = jest.genMockFunction();
+    window.addEventListener = jest.fn();
+    window.removeEventListener = jest.fn();
     beforeEach(function() {
         window.addEventListener.mockClear();
         window.removeEventListener.mockClear();
@@ -120,7 +120,7 @@ describe("Popover", function() {
     });
 
     it("notifies toggle when clicking trigger", function() {
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
 
         var component = ReactTestUtils.renderIntoDocument(
             <div>
@@ -278,7 +278,7 @@ describe("Popover", function() {
     });
 
     it("triggers callback when clicked outside", function() {
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
 
         ReactTestUtils.renderIntoDocument(
             <div>
@@ -294,8 +294,8 @@ describe("Popover", function() {
         )[1];
         var e = {
             target: { parentNode: document.body },
-            stopPropagation: jest.genMockFunction(),
-            preventDefault: jest.genMockFunction()
+            stopPropagation: jest.fn(),
+            preventDefault: jest.fn()
         };
 
         expect(callback).not.toBeCalled();
@@ -307,7 +307,7 @@ describe("Popover", function() {
     });
 
     it("triggers callback when global key event fires", function() {
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
 
         ReactTestUtils.renderIntoDocument(
             <div>
@@ -323,14 +323,14 @@ describe("Popover", function() {
         )[1];
         var e = {
             target: { parentNode: document.body },
-            stopPropagation: jest.genMockFunction(),
-            preventDefault: jest.genMockFunction(),
+            stopPropagation: jest.fn(),
+            preventDefault: jest.fn(),
             keyCode: KeyboardUtils.KeyCodes.ESC
         };
         var eWrong = {
             target: { parentNode: document.body },
-            stopPropagation: jest.genMockFunction(),
-            preventDefault: jest.genMockFunction(),
+            stopPropagation: jest.fn(),
+            preventDefault: jest.fn(),
             keyCode: 2
         };
 
@@ -345,7 +345,7 @@ describe("Popover", function() {
     });
 
     it("call handleOpen", function() {
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
 
         expect(callback).not.toBeCalled();
         handleOpen({ onOpen: callback });

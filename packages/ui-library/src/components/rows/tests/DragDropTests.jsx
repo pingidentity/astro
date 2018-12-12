@@ -22,9 +22,9 @@ describe("DragDrop", function () {
 
     function getComponent (props) {
         props = _.defaults(props || {}, {
-            onDrag: jest.genMockFunction(),
-            onDrop: jest.genMockFunction(),
-            onCancel: jest.genMockFunction(),
+            onDrag: jest.fn(),
+            onDrop: jest.fn(),
+            onCancel: jest.fn(),
             isDragging: false,
             id: 1,
             index: 1
@@ -57,9 +57,9 @@ describe("DragDrop", function () {
         return {
             id: id,
             index: typeof(index) === "undefined" ? id : index,
-            onDrag: jest.genMockFunction(),
-            onCancel: jest.genMockFunction(),
-            onDrop: jest.genMockFunction()
+            onDrag: jest.fn(),
+            onCancel: jest.fn(),
+            onDrop: jest.fn()
         };
     };
 
@@ -69,7 +69,7 @@ describe("DragDrop", function () {
     };
 
     it("rendered and calls onDrag callback", function () {
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
         var root = getComponent({ onDrag: callback });
         var backend = root.getManager().getBackend();
         var dropzone = ReactTestUtils.findRenderedComponentWithType(root, DragDrop);
@@ -83,7 +83,7 @@ describe("DragDrop", function () {
     });
 
     it("calls onDrop callback", function () {
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
         var root = getComponent({ onDrop: callback, type: "column" });
         var backend = root.getManager().getBackend();
         var dropzone = ReactTestUtils.findRenderedComponentWithType(root, DragDrop);
@@ -97,7 +97,7 @@ describe("DragDrop", function () {
     });
 
     it("calls onCancel callback", function () {
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
         var root = getComponent({ onCancel: callback });
         var backend = root.getManager().getBackend();
         var dropzone = ReactTestUtils.findRenderedComponentWithType(root, DragDrop);

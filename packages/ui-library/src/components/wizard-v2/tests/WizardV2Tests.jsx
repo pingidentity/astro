@@ -28,9 +28,9 @@ describe("WizardV2", function () {
             { title: "title 2", value: "value 2" },
             { title: "title 3", value: "value 3" },
         ],
-        onCancel: jest.genMockFunction(),
-        onMenuClick: jest.genMockFunction(),
-        onNext: jest.genMockFunction(),
+        onCancel: jest.fn(),
+        onMenuClick: jest.fn(),
+        onNext: jest.fn(),
     };
 
     const defaultStepData = [
@@ -39,7 +39,7 @@ describe("WizardV2", function () {
             description: "step 1 description",
             menuDescription: "step 1 menu description",
             menuTitle: "step 1 menu title",
-            onSave: jest.genMockFunction(),
+            onSave: jest.fn(),
             required: true,
             title: "step 1 title",
         },
@@ -48,7 +48,7 @@ describe("WizardV2", function () {
             description: "step 2 description",
             menuDescription: "step 2 menu description",
             menuTitle: "step 2 menu title",
-            onSave: jest.genMockFunction(),
+            onSave: jest.fn(),
             required: true,
             title: "step 2 title",
         },
@@ -64,7 +64,7 @@ describe("WizardV2", function () {
             description: "step 4 description",
             menuDescription: "step 4 menu description",
             menuTitle: "step 4 menu title",
-            onSave: jest.genMockFunction(),
+            onSave: jest.fn(),
             title: "step 4 title",
         },
     ];
@@ -228,8 +228,8 @@ describe("WizardV2", function () {
             saveText: "OK",
             cancelClassName: "custom-cancel-class",
             saveClassName: "custom-save-class",
-            onCancel: jest.genMockFunction(),
-            onSave: jest.genMockFunction(),
+            onCancel: jest.fn(),
+            onSave: jest.fn(),
         };
 
         const component = getComponent({ buttonBarProps: buttonBarData });
@@ -491,8 +491,8 @@ describe("WizardV2", function () {
     });
 
     it("emits open and close events", function () {
-        const openListenerCallback = jest.genMockFunction();
-        const closeListenerCallback = jest.genMockFunction();
+        const openListenerCallback = jest.fn();
+        const closeListenerCallback = jest.fn();
 
         document.body.addEventListener("uilibrary-wizard-open", openListenerCallback);
         document.body.addEventListener("uilibrary-wizard-close", closeListenerCallback);
@@ -510,8 +510,8 @@ describe("WizardV2", function () {
         const UtilsMock = require("../../../util/Utils");
         UtilsMock.isIE = () => { return true; };
 
-        const openListenerCallback = jest.genMockFunction();
-        const closeListenerCallback = jest.genMockFunction();
+        const openListenerCallback = jest.fn();
+        const closeListenerCallback = jest.fn();
 
         document.body.addEventListener("uilibrary-wizard-open", openListenerCallback);
         document.body.addEventListener("uilibrary-wizard-close", closeListenerCallback);

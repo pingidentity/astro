@@ -50,7 +50,7 @@ describe("Link", function () {
     });
 
     it("disabled will not do anything for clicks", function () {
-        var callback = jest.genMockFunction(),
+        var callback = jest.fn(),
             component = ReactTestUtils.renderIntoDocument(
             <div><Link title="Link Name" disabled={true} onClick={callback} /></div>);
 
@@ -80,7 +80,7 @@ describe("Link", function () {
     });
 
     it("render component for click event", function () {
-        var callback = jest.genMockFunction();
+        var callback = jest.fn();
         var component = ReactTestUtils.renderIntoDocument(
             <div><Link title="Link Name" onClick={callback} icon="cog" className="test-link" /></div>
         );

@@ -16,14 +16,14 @@ describe("ColorPicker", function () {
         FormLabel = require("../../forms/FormLabel"),
         _ = require("underscore");
 
-    window.addEventListener = jest.genMockFunction();
-    window.removeEventListener = jest.genMockFunction();
+    window.addEventListener = jest.fn();
+    window.removeEventListener = jest.fn();
 
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
-            onToggle: jest.genMockFunction(),
-            onValueChange: jest.genMockFunction(),
-            onError: jest.genMockFunction(),
+            onToggle: jest.fn(),
+            onValueChange: jest.fn(),
+            onError: jest.fn(),
             color: "#fff"
         });
         return ReactTestUtils.renderIntoDocument(<ColorPicker {...opts} />);
@@ -379,7 +379,7 @@ describe("ColorPicker", function () {
     });
 
     it("stateless: calls onToggle when press ENTER when closed", function () {
-        var onToggle = jest.genMockFunction();
+        var onToggle = jest.fn();
         var component = getComponent({
             stateless: true,
             onToggle: onToggle
@@ -398,7 +398,7 @@ describe("ColorPicker", function () {
     });
 
     it("stateless: calls onToggle when press ESC when closed", function () {
-        var onToggle = jest.genMockFunction();
+        var onToggle = jest.fn();
         var component = getComponent({
             stateless: true,
             onToggle: onToggle,
@@ -415,7 +415,7 @@ describe("ColorPicker", function () {
     });
 
     it("stateless: calls onToggle when press tab when closed", function () {
-        var onToggle = jest.genMockFunction();
+        var onToggle = jest.fn();
         var component = getComponent({
             stateless: true,
             onToggle: onToggle,
@@ -432,7 +432,7 @@ describe("ColorPicker", function () {
     });
 
     it("stateless: toggle when the inner swatch is clicked", function () {
-        var onToggle = jest.genMockFunction();
+        var onToggle = jest.fn();
         var component = getComponent({
             stateless: true,
             onToggle: onToggle
@@ -446,7 +446,7 @@ describe("ColorPicker", function () {
     });
 
     it("stateless: do not toggle if disabled when the inner swatch is clicked", function () {
-        var onToggle = jest.genMockFunction();
+        var onToggle = jest.fn();
         var component = getComponent({
             stateless: true,
             disabled: true,

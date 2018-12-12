@@ -43,7 +43,7 @@ describe("Button", function () {
 
 
     it("renders the button with click callback", function () {
-        let onClick = jest.genMockFunction();
+        let onClick = jest.fn();
         let component = getComponent({
             onClick: onClick
         });

@@ -13,7 +13,7 @@ describe("UnitInput", function () {
         UnitInput = require("../UnitInput"),
         _ = require("underscore"),
         component;
-        
+
     var options = [
         { label: "Minute(s)", value: "Minute(s)" },
         { label: "Hour(s)", value: "Hour(s)" },
@@ -23,8 +23,8 @@ describe("UnitInput", function () {
     ];
 
     function render (props) {
-        var callback = jest.genMockFunction();
-        var callback1 = jest.genMockFunction();
+        var callback = jest.fn();
+        var callback1 = jest.fn();
         return ReactTestUtils.renderIntoDocument(
             <UnitInput
                 {...props}
@@ -50,12 +50,12 @@ describe("UnitInput", function () {
         var input = ReactDOM.findDOMNode(component);
         expect(ReactTestUtils.isDOMComponent(input)).toBeTruthy();
     });
-    
+
     it("verify default data-id", function () {
         component = render({ labelText: "Unit Input Text" });
         expect(component.props["data-id"]).toBe("unit-input");
     });
-    
+
     it("accepts custom data-id", function () {
         component = render({ labelText: "Unit Input Text",
                              "data-id": "my-custom-select" });
@@ -77,8 +77,8 @@ describe("UnitInput", function () {
     });
 
     it("supports disabled when set", function () {
-        var callback = jest.genMockFunction();
-        var callback1 = jest.genMockFunction();
+        var callback = jest.fn();
+        var callback1 = jest.fn();
         var component1 = ReactTestUtils.renderIntoDocument(
             <UnitInput
                 labelText="Unit Input Text"
@@ -103,13 +103,13 @@ describe("UnitInput", function () {
         var textClasses = formTextField.className.split(" ");
 
         expect(_.contains(textClasses, "disabled")).toEqual(true);
-        
+
         var formDropDown = TestUtils.findRenderedDOMNodeWithDataId(component1, "form-drop-down-list");
         var dropDownClasses = formDropDown.className.split(" ");
 
         expect(_.contains(dropDownClasses, "disabled")).toEqual(true);
     });
-    
+
     it("renders list of options", function () {
         component = render({ labelText: "Unit Input Text" });
 
@@ -122,11 +122,11 @@ describe("UnitInput", function () {
         expect(select.children[3].textContent).toEqual("Week(s)");
         expect(select.children[4].textContent).toEqual("Year(s)");
     });
-    
+
     it("renders value in form text field", function () {
         component = render({ labelText: "Unit Input Text" });
         var input = TestUtils.findRenderedDOMNodeWithDataId(component, "form-text-field-input");
-        
+
         expect(input.value).toEqual("ABC");
     });
 

@@ -13,10 +13,10 @@ describe("IntroTutorial", function () {
 
     function getComponent (targetBounds, windowBounds) {
         var win = {
-            getBoundingClientRect: jest.genMockFunction().mockReturnValue(windowBounds)
+            getBoundingClientRect: jest.fn().mockReturnValue(windowBounds)
         };
         var target = {
-            getBoundingClientRect: jest.genMockFunction().mockReturnValue({
+            getBoundingClientRect: jest.fn().mockReturnValue({
                 left: targetBounds.left,
                 top: targetBounds.top,
                 width: targetBounds.width,
@@ -31,7 +31,7 @@ describe("IntroTutorial", function () {
 
     it("componentWillReceiveProps called on first render", function () {
         var originalFn = Arrow.prototype.componentWillReceiveProps;
-        Arrow.prototype.componentWillReceiveProps = jest.genMockFunction();
+        Arrow.prototype.componentWillReceiveProps = jest.fn();
 
         var component = getComponent(
             { top: 100, left: 490, width: 100, height: 200 },

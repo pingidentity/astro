@@ -79,8 +79,8 @@ exports.Wrapper = class extends React.Component {
  *    The result of the test.
  */
 exports.unmountDetachesWindowListener = function (getComponent, type) {
-    window.addEventListener = jest.genMockFunction();
-    window.removeEventListener = jest.genMockFunction();
+    window.addEventListener = jest.fn();
+    window.removeEventListener = jest.fn();
 
     var component = getComponent();
     var handler;

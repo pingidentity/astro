@@ -189,15 +189,13 @@ exports.run = function (getComponent, get) {
     it("will not respond to actions while disabled", function () {
         var fileName = "someFile.png";
         var component = getComponent({ disabled: true, fileName: fileName });
-        var fileInput = get(component, "input");
         var removeButton = get(component, "removeButton");
+        var fileInput = get(component, "input");
 
-        expect(fileInput.disabled).toBeTruthy();
-
-        fileInput.value = fileName;
+        expect(fileInput.disabled).toEqual(true);
         ReactTestUtils.Simulate.click(removeButton);
 
-        expect(fileInput.value).toEqual("someFile.png");
+        expect(component.props.onValidate).not.toBeCalled();
     });
 
     it("will wont show the filename when the showThumbnail property is set", function () {
