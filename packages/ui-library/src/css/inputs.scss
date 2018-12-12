@@ -887,6 +887,11 @@ input[type=file] {
                 background: none;
                 color: $color-rabbit-fur;
             }
+
+
+            &__placeholder {
+                padding-left: 37px;
+            }
         }
         .help-hint-option {
             &.select-option {
@@ -1030,6 +1035,9 @@ input[type=file] {
             &:focus {
                 cursor: pointer;
                 border-color: $color-input-fill;
+            }
+            &--icon-padding {
+                padding-left: 30px;
             }
         }
     }

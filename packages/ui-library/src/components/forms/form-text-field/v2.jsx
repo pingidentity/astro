@@ -221,7 +221,9 @@ class Stateless extends React.Component {
         errorClassName: PropTypes.string,
         flexWidth: PropTypes.bool,
         helpClassName: PropTypes.string,
-        iconName: PropTypes.string,
+        iconRight: PropTypes.string,
+        iconLeft: PropTypes.string,
+
         inputClassName: PropTypes.string,
         label: PropTypes.oneOfType([
             PropTypes.array,
@@ -473,7 +475,8 @@ class Stateless extends React.Component {
                 readonly: this.props.readOnly,
                 required: this.props.required,
                 "value-entered": this.props.value || this.props.value !== "",
-                "input-text--right-icon": this.props.iconName,
+                "input-text--right-icon": this.props.iconRight,
+                "input-text--left-icon": this.props.iconLeft,
             }
         );
 
@@ -553,8 +556,11 @@ class Stateless extends React.Component {
                         </a>
                     )}
                     {this.props.controls}
-                    {this.props.iconName &&
-                        <span className={`input-icon input-icon--right icon-${this.props.iconName}`}/>
+                    {this.props.iconRight &&
+                        <span className={`input-icon input-icon--right icon-${this.props.iconRight}`}/>
+                    }
+                    {this.props.iconLeft &&
+                        <span className={`input-icon input-icon--Left icon-${this.props.iconLeft}`}/>
                     }
                     {message && (
                         <FormMessage

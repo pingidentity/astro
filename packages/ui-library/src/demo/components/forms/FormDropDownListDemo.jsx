@@ -3,7 +3,7 @@ import FormDropDownList from "../../../components/forms/FormDropDownList";
 import InputWidths from "../../../components/forms/InputWidths";
 
 
-const NUM_DEMOS = 10,
+const NUM_DEMOS = 12,
     OPTIONS = [
         { label: "One", value: "1", helpHintText: "Help text may be added to any drop-down option." },
         { label: "Two", value: "2", group: 4 },
@@ -38,7 +38,7 @@ class FormDropDownListDemo extends React.Component {
         };
 
         for (let i=1; i<=NUM_DEMOS - 1; i+=1) {
-            initState["selectedValue" + i] = OPTIONS[0];
+            initState["selectedValue" + i] = i === 11 ? { iconName: "globe", label: "One", value: "1" } : OPTIONS[0];
         }
         initState["selectedValue" + NUM_DEMOS] = NONEOPTION;
 
@@ -108,6 +108,22 @@ class FormDropDownListDemo extends React.Component {
                     />
                 </div>
                 <div>Selected value: {this.state.selectedValue1.label}</div>
+                <br/>
+
+                <div className="input-row">
+                    <FormDropDownList
+                        options={[
+                            { iconName: "globe", label: "One", value: "1" },
+                            { iconName: "cog", label: "Option two", value: "2" },
+                            { label: "with no icon", value: "3" },
+                        ]}
+                        autofocus={true}
+                        label="input row with icons"
+                        selectedOption={this.state.selectedValue11}
+                        onValueChange={this._handleValueChange11}
+                    />
+                </div>
+                <div>Selected value: {this.state.selectedValue11.value}</div>
                 <br/>
 
                 <div className="input-row">

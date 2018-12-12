@@ -739,4 +739,51 @@ describe("FormDropDownList", function () {
         expect(selected.value).toEqual("none");
 
     });
+
+    it("shows options with icons", function () {
+        const iconOption = { iconName: "globe", label: "one" };
+        const component = getComponent({
+            autofocus: true,
+            open: true,
+            searchIndex: 1,
+            searchTime: 0,
+            options: [...options, iconOption]
+        });
+
+        const optionWithIcon = TestUtils.findRenderedDOMNodeWithClass(component, "select-option__icon");
+
+        expect(optionWithIcon).toBeTruthy();
+
+    });
+
+    it("doesnt try to show icon if icon is not passed in", function () {
+        const component = getComponent({
+            autofocus: true,
+            open: true,
+            searchIndex: 1,
+            searchTime: 0,
+        });
+
+        const optionWithIcon = TestUtils.findRenderedDOMNodeWithClass(component, "select-option__icon");
+
+        expect(optionWithIcon).toBeFalsy();
+
+    });
+
+    it("shows selected option with icon, function", function () {
+        const iconOption = { iconName: "globe", label: "one" };
+        const component = getComponent({
+            autofocus: true,
+            open: true,
+            searchIndex: 1,
+            searchTime: 0,
+            selectOption: iconOption,
+            options: [...options, iconOption]
+        });
+
+        const selectedIcon = TestUtils.findRenderedDOMNodeWithClass(component, "icon-globe");
+
+        expect(selectedIcon).toBeTruthy();
+
+    });
 });

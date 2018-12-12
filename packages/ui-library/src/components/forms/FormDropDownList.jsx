@@ -7,6 +7,7 @@ import { v2 as FormTextField } from "./form-text-field";
 import HelpHint from "../tooltips/HelpHint";
 import { InputWidths, InputWidthProptypes, getInputWidthClass } from "./InputWidths";
 
+import Icon from "../general/Icon";
 import { callIfOutsideOfContainer } from "../../util/EventUtils.js";
 import classnames from "classnames";
 import { filterFieldContains } from "../../util/FilterUtils.js";
@@ -117,6 +118,8 @@ const SearchTypes = {
 *     The message to display if defined when external validation failed.
 * @param {string} [helpClassName]
 *     CSS classes to set on the HelpHint component.
+* @param {string} [iconName]
+*     adds an icon to the option
 * @param {string} [label]
 *     The text to display as the field's label.
 * @param {string} [labelAdd]
@@ -213,7 +216,7 @@ class FormDropDownListDefaultContent extends React.Component {
     };
 
     render() {
-        return <div>{this.props.label}</div>;
+        return this.props.label;
     }
 }
 
@@ -221,9 +224,11 @@ class OptionItem extends React.Component {
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
-        onClick: PropTypes.func,
         content: PropTypes.node,
-        option: PropTypes.object
+        iconName: PropTypes.string,
+        onClick: PropTypes.func,
+        option: PropTypes.object,
+        iconPlaceholder: PropTypes.bool
     };
 
     _handleClick = (event) => {
@@ -244,19 +249,23 @@ class OptionItem extends React.Component {
                 </HelpHint>
             );
         } else {
-            return this.props.content;
+            return <span>{this.props.content}</span>;
         }
     };
 
     render() {
         const className = {
-            "help-hint-option": this.props.option.helpHintText
+            "help-hint-option": this.props.option.helpHintText,
+            "select-option__placeholder": this.props.iconPlaceholder && this.props.iconName === undefined
         };
         return (
             <li
                 data-id={this.props["data-id"]}
                 className={classnames(this.props.className, className)}
                 onClick={this._handleClick}>
+                { this.props.iconName && (
+                    <Icon iconName={this.props.iconName} className="select-option__icon"/>
+                )}
                 {this._renderContent()}
             </li>
         );
@@ -646,12 +655,12 @@ class FormDropDownListStateless extends React.Component {
             </li>
         );
 
-    _getSingleOption = (option, index) => {
+    _getSingleOption = hasIcon => (option, index) => {
         const group = this.props.groups && this._groupById[option.group],
             disabled = group && group.disabled,
             className = classnames("select-option", {
                 highlighted: !disabled && index === this.props.searchIndex,
-                selected: option.value === (this.props.selectedOption && this.props.selectedOption.value),
+                selected: option.value === (this.props.selectedOption && this.props.selectedOption.label),
                 disabled: disabled
             });
 
@@ -664,6 +673,8 @@ class FormDropDownListStateless extends React.Component {
                 onClick={!disabled ? this._handleOptionClick : _.noop}
                 option={option}
                 content={React.cloneElement(this.props.contentType, option)}
+                iconName={option.iconName}
+                iconPlaceholder={hasIcon}
             />
         );
     };
@@ -692,7 +703,7 @@ class FormDropDownListStateless extends React.Component {
         );
     };
 
-    _getGroupedOptions = () =>
+    _getGroupedOptions = (hasIcon) =>
         this._orderedOptions.reduce(({ lastGroup, opts }, { group, ...opt }, index) => ({
             lastGroup: group,
             opts: [
@@ -700,18 +711,21 @@ class FormDropDownListStateless extends React.Component {
                 ...(group && group !== lastGroup)
                     ? [this._getGroupSeparator(index), this._getSingleGroupHeader(this._groupById[group])]
                     : [],
-                this._getSingleOption({ group, ...opt }, index)
+                this._getSingleOption(hasIcon)({ group, ...opt }, index)
             ]
         }), { lastGroup: null, opts: [] }).opts;
 
-    _generateOptions = () => (
+    _generateOptions = (hasIcon) => (
         [
             ...this.props.noneOption && !this.props.searchString ? [this._getNoneOption()] : [],
-            ...this.props.groups ? this._getGroupedOptions() : this.props.options.map(this._getSingleOption)
+            ...this.props.groups
+                ? this._getGroupedOptions(hasIcon)
+                : this.props.options.map(this._getSingleOption(hasIcon))
         ]
     )
 
     render() {
+        const hasIcon = this.props.options.some((option) => option.iconName);
         const containerClassName = classnames(
             "input-custom-select",
             "input-select",
@@ -727,10 +741,17 @@ class FormDropDownListStateless extends React.Component {
                 "value-entered": this.props.selectedOption &&
                     (!this.props.noneOption || this.props.noneOption.label !== this.props.selectedOption.label),
                 required: this.props.required,
-                disabled: this.props.disabled
+                disabled: this.props.disabled,
             }),
             selectClassName = classnames("selected-option", this.props.selectClassName),
-            selectedOptionLabelClassName = classnames("selected-option-label", this.props.selectedOptionLabelClassName),
+            selectedOptionLabelClassName = classnames(
+                "selected-option-label",
+                this.props.selectedOptionLabelClassName,
+                {
+                    "selected-option-label--icon-padding": this.props.selectedOption &&
+                    this.props.selectedOption.iconName
+                }
+            ),
             selectedOptionLabel = this.props.showSelectedOptionLabel && this.props.selectedOption
                 ? this.props.selectedOption.label : "",
             inputValue = this._isBoxSearch() &&
@@ -766,6 +787,9 @@ class FormDropDownListStateless extends React.Component {
                                 placeholder={this.props.placeholder}
                                 name={this.props.name}
                                 onValueChange={this._handleInputValueChange}
+                                iconLeft={this.props.selectedOption && this.props.selectedOption.iconName
+                                    ? this.props.selectedOption.iconName
+                                    : undefined }
                                 readOnly={this.props.disabled || this._isKeyboardSearch()}
                                 width={InputWidths.MAX}
                             />
@@ -777,7 +801,7 @@ class FormDropDownListStateless extends React.Component {
                             ref="selectList"
                             style={this.inlineMenuStyle}>
                             {this._getPrompt()}
-                            {this._generateOptions()}
+                            {this._generateOptions(hasIcon)}
                         </ul>
                     </div>
                 </div>

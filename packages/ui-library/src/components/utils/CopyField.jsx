@@ -14,7 +14,7 @@ CopyField.defaultProps = {
     ...CopyField.defaultProps,
     "data-id": "copy-field",
     readOnly: true,
-    iconName: "clipboard",
+    iconRight: "clipboard",
 };
 
 export default CopyField;
