@@ -1490,6 +1490,7 @@ input[type=file] {
         content: '\43';
         left: 10px;
         bottom: 14px;
+        z-index: 1;
 
         @include transition($default-input-transition);
     }
@@ -1517,6 +1518,9 @@ input[type=file] {
         &:focus {
             border: 1px solid $color-stone;
         }
+    }
+    .input-container {
+        position: relative;
     }
 
     // display

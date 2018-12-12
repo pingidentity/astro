@@ -61,6 +61,7 @@ class CalendarDemo extends React.Component {
                         date={this.state.selectedDate2}
                         format="YYYY-MM-DD"
                         helpClassName="right"
+                        required={true}
                         labelText="Date with date range"
                         labelHelpText="Selection outside of date range is not permitted"
                         onValueChange={this._onEnrollmentDateChanged2} />
