@@ -1283,6 +1283,17 @@ $color-grey-minor-1: $color-neutral-30;
     }
 }
 
+.button-bar {
+    &__buttons {
+        display: inline-flex;
+        flex-flow: row-reverse;
+    }
+
+    &__save {
+        margin-right: 0;
+    }
+}
+
 .tab-set-children {
     padding-left: $spacing-lg;
 }

@@ -165,7 +165,8 @@ class ButtonBar extends React.Component {
             data-id={this.props["data-id"] + "-save"}
             className={classnames(
                 this.props.saveClassName || "primary",
-                { disabled: this.props.saveDisabled }
+                "button-bar__save",
+                { disabled: this.props.saveDisabled },
             )}
             disabled={this.props.saveDisabled}
             loading={this.props.enableSavingAnimation}
@@ -225,18 +226,20 @@ class ButtonBar extends React.Component {
                 data-id={this.props["data-id"]}
                 className={classnames(this.props.className, containerClassName, unfixedClassName)}>
                 {this.props.children}
-                {this.props.discardText && this.props.onDiscard && (
-                    <Button
-                        data-id={this.props["data-id"] + "-discard"}
-                        className={discardClassName}
-                        onClick={this.props.onDiscard}
-                        disabled={this.props.enableSavingAnimation}
-                        >
-                        {discardText}
-                    </Button>
-                )}
-                {this.props.cancelText && this.props.onCancel && this._renderCancelButton()}
-                {this._renderSaveButton()}
+                <div className="button-bar__buttons">
+                    {this._renderSaveButton()}
+                    {this.props.cancelText && this.props.onCancel && this._renderCancelButton()}
+                    {this.props.discardText && this.props.onDiscard && (
+                        <Button
+                            data-id={this.props["data-id"] + "-discard"}
+                            className={discardClassName}
+                            onClick={this.props.onDiscard}
+                            disabled={this.props.enableSavingAnimation}
+                            >
+                            {discardText}
+                        </Button>
+                    )}
+                </div>
             </div>
         );
     }
