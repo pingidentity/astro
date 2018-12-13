@@ -13,6 +13,7 @@ module.exports = Object.assign(config, {
         port: 4040,
         compress: true,
         disableHostCheck: true,
+        host: '0.0.0.0',
     },
     plugins: plugins.concat(routes.map(route => (
         new HtmlWebpackPlugin({
