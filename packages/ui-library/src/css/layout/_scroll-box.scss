@@ -1,0 +1,33 @@
+.scroll-box {
+    $border-color: $color-neutral-90;
+
+    position: relative;
+
+    &__content {
+        overflow: auto;
+    }
+
+    &__top-shadow,
+    &__bottom-shadow {
+        display: none;
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: rgba($color-neutral-70, 0.15);
+
+        &--show {
+            display: block;
+        }
+    }
+
+    &__top-shadow {
+        border-top: 1px solid $border-color;
+        top: 0;
+    }
+
+    &__bottom-shadow {
+        border-bottom: 1px solid $border-color;
+        bottom: 0;
+    }
+}

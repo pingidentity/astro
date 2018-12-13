@@ -546,6 +546,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_layout_TabSetDemo.jsx.html"
                     },
                     {
+                        label: "Scroll Box",
+                        demo: require("../components/layout/ScrollBoxDemo"),
+                        pathToDoc: "components/layout/ScrollBox.jsx",
+                        pathToSource: "components_layout_ScrollBox.jsx.html",
+                        pathToDemoSource: "demo_components_layout_ScrollBoxDemo.jsx.html"
+                    },
+                    {
                         label: "Section",
                         demo: require("../components/general/SectionDemo"),
                         pathToDoc: "components/general/Section.jsx",
