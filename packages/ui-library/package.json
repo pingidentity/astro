@@ -178,7 +178,7 @@
     "jslint": "eslint --ext .js,.jsx .",
     "stylelint": "stylelint \"src/css/**/*.scss\" --config ./.stylelintrc --syntax scss",
     "jest": "jest && node ./clean-after.js",
-    "coverage": "jest --coverage && node ./clean-after.js",
+    "coverage": "jest --coverage --ci && node ./clean-after.js",
     "test": "jest",
     "verify": "npm run jslint && npm run stylelint && npm run test",
     "preintegration": "npm run clean-selenium-log & selenium-standalone install && selenium-standalone start -- -log ./selenium-standalone.log & http-server ./build > ./http-server.log 2>&1 & npm run pack",
