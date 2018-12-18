@@ -5,7 +5,8 @@ jest.dontMock("../SearchUtils");
 import {
     _addToSearchTerms,
     _sort,
-    createSearch
+    containsString,
+    createSearch,
 } from "../SearchUtils";
 
 describe("SearchUtils", () => {
@@ -89,5 +90,17 @@ describe("SearchUtils", () => {
         const expected = [{ id: "a" }, { id: "b" }, { id: "c" }];
 
         expect(sorted).toEqual(expected);
+    });
+
+    it("containsString returns true if the given argument contains a specific string", () => {
+        const contains = containsString("astring", "a");
+
+        expect(contains).toEqual(true);
+    });
+
+    it("containsString returns false if the given argument does not contain a specific string", () => {
+        const contains = containsString("astring", "[*{");
+
+        expect(contains).toEqual(false);
     });
 });

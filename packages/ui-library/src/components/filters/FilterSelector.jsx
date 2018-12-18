@@ -6,15 +6,14 @@ import Popover from "../tooltips/Popover";
 import _ from "underscore";
 import { createSelector } from "reselect";
 import togglesOpen from "../../util/behaviors/togglesOpen";
+import { containsString } from "../../util/SearchUtils";
 
 const optionsSelector = createSelector(
     state => state.search,
     state => state.options,
     (search, options) => _.filter(
         options,
-        option => (
-            option.name.search(new RegExp(search, "i")) >= 0 ? true : false
-        )
+        option => containsString(option.name, search)
     )
 );
 
@@ -26,6 +25,8 @@ const optionsSelector = createSelector(
 *     The data-id of the component
 * @param {string} [className]
 *     Class name(s) to add to the top-level container/div
+* @param {node} [bottomPanel]
+*     Content to be shown after the list of options.
 * @param {string} [labelText]
 *     Label of the field
 * @param {string} [label]
@@ -52,7 +53,7 @@ class FilterSelector extends React.Component {
 
     static propTypes = {
         "data-id": PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        bottomPane: PropTypes.node,
+        bottomPanel: PropTypes.node,
         className: PropTypes.string,
         labelText: PropTypes.string,
         label: PropTypes.string,

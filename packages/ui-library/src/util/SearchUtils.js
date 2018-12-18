@@ -5,7 +5,7 @@
  * @private
  * @desc Adds item label and keywords to search terms
  */
-const _addToSearchTerms = ({
+export const _addToSearchTerms = ({
     id,
     label,
     keywords = []
@@ -90,7 +90,7 @@ const _getResults = (possibleResults, ids, currentResults = []) => {
     }, []);
 };
 
-const _sort = ({ id: a }, { id: b }) => a > b ? 1 : -1;
+export const _sort = ({ id: a }, { id: b }) => a > b ? 1 : -1;
 
 /**
  * @method
@@ -99,7 +99,7 @@ const _sort = ({ id: a }, { id: b }) => a > b ? 1 : -1;
  * @private
  * @desc Return the results lookup and the keyword lookup for search
  */
-const _buildSearchProps = (tree) => {
+export const _buildSearchProps = (tree) => {
     return tree.reduce(({ possibleResults, searchTerms }, { id, children }) => {
         return children.reduce(({ possibleResults: accResults, searchTerms: accSearch }, child) => {
             return _getSearchProps({ ...child, root: id }, accResults, accSearch);
@@ -162,7 +162,7 @@ const _checkForMatch = searchTerms => possibleResults => query => {
  * @public
  * @desc Returns a function that searches the nodes of a given tree based on the provided string query.
  */
-const createSearch = (tree = []) => {
+export const createSearch = (tree = []) => {
     const {
         possibleResults,
         searchTerms
@@ -171,9 +171,7 @@ const createSearch = (tree = []) => {
     return _checkForMatch(searchTerms)(possibleResults);
 };
 
-export default {
-    _addToSearchTerms,
-    _buildSearchProps,
-    _sort,
-    createSearch
-};
+// Would use string.contains() here, but Jest doesn't like it. Probably related to our Node.js version.
+export function containsString(string, searchTerm) {
+    return string.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+}
