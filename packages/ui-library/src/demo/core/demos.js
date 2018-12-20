@@ -671,6 +671,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_general_RowIndexNavDemo.jsx.html",
                         keywords: ["RowIndexNav", "rows"]
                     },
+                    {
+                        label: "Table",
+                        demo: require("../components/tables/TableDemo"),
+                        pathToDoc: "components/tables/Table.jsx",
+                        pathToSource: "components_tables_Table.jsx.html",
+                        pathToDemoSource: "demo_components_tables_TableDemo.jsx.html"
+                    },
                 ]
             },
             {
@@ -699,35 +706,6 @@ module.exports = [
                         pathToDoc: "components/filters/FilterSelector.jsx",
                         pathToSource: "components_filters_FilterSelector.jsx.html",
                         pathToDemoSource: "demo_components_filters_FilterSelectorDemo.jsx.html"
-                    },
-                ]
-            },
-            {
-                label: "General",
-                icon: "globe",
-                children: [
-                    {
-                        label: "Search Bar",
-                        demo: require("../components/forms/FormSearchBarDemo"),
-                        pathToDoc: "components/forms/SearchBar.jsx",
-                        pathToSource: "components_forms_FormSearchBar.jsx.html",
-                        pathToDemoSource: "demo_components_forms_FormSearchBarDemo.jsx.html",
-                        keywords: ["FormSearchBar"]
-                    },
-                    {
-                        label: "Search Box",
-                        demo: require("../components/forms/FormSearchBoxDemo"),
-                        pathToDoc: "components/forms/FormSearchBox.jsx",
-                        pathToSource: "components_forms_FormSearchBox.jsx.html",
-                        pathToDemoSource: "demo_components_forms_FormSearchBoxDemo.jsx.html",
-                        keywords: ["FormSearchBox"]
-                    },
-                    {
-                        label: "Table",
-                        demo: require("../components/tables/TableDemo"),
-                        pathToDoc: "components/tables/Table.jsx",
-                        pathToSource: "components_tables_Table.jsx.html",
-                        pathToDemoSource: "demo_components_tables_TableDemo.jsx.html"
                     },
                 ]
             },
