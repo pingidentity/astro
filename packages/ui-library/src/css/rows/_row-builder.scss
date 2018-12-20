@@ -2,14 +2,14 @@
     &__row {
         @extend .input-row;
 
-        align-items: center;
+        align-items: flex-end;
         display: inline-flex;
         margin: $spacing-md 0;
         width: 100%;
     }
 
     &__remove {
-        align-self: flex-start;
+        margin-bottom: 1px;
 
         &--no-label {
             align-self: center;
@@ -31,17 +31,14 @@
 
     &--form {
         &__row {
-            align-items: center;
+            align-items: flex-end;
             display: inline-flex;
             justify-content: space-between;
         }
 
         &__icon {
             font-size: 20px;
-
-            &--first {
-                margin-top: 20px;
-            }
+            margin-bottom: 11px;
 
             &--required {
                 color: $color-dolphin;
