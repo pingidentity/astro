@@ -73,6 +73,7 @@ describe("InputWidths", function () {
         });
 
         expect(console.warn).not.toBeCalled();
+        delete process.env.NODE_ENV;
     });
 
     it("does not fire warning if non-width CSS class is used", function () {
