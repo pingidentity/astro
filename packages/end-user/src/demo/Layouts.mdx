@@ -14,12 +14,15 @@ import IconFeedback from '../components/IconFeedback';
 import Logo from '../components/Logo';
 import ModalMenu from '../components/ModalMenu';
 import Requirements from '../components/Requirements';
+import SerializedData from '../components/SerializedData';
 import Spinner from '../components/Spinner';
 import Stack from '../components/Stack';
+import StepLink from '../components/StepLink';
 import TextBlock from '../components/TextBlock';
 import TextInput from '../components/TextInput';
 import TextStyle from '../components/TextStyle';
 import Tooltip from '../components/Tooltip';
+import TwoSidedDemo from '../components/stateful/TwoSidedDemo';
 import ComponentDemo from './components/ComponentDemo';
 
 # Layouts
@@ -28,7 +31,7 @@ import ComponentDemo from './components/ComponentDemo';
 
 <ComponentDemo>
     <Card>
-            <Logo src="ping-logo.svg"/>
+        <Logo src="ping-logo.svg"/>
         <Form>
             <FloatLabelTextInput label="Username" id="username6"/>
             <FloatLabelPasswordInput label="Password" id="password2"/>
@@ -187,6 +190,42 @@ import ComponentDemo from './components/ComponentDemo';
     </Card>
 </ComponentDemo>
 
+### Error with details
+
+<ComponentDemo>
+    <TwoSidedDemo
+        renderSides={onFlip => ([
+            <Card key="front">
+                <Logo src="ping-logo.svg"/>
+                <IconFeedback type="error">Error</IconFeedback>
+                <StepLink onClick={onFlip}>View Details</StepLink>
+            </Card>,
+            <Card key="back">
+                <SerializedData data={{
+                    'id': '6c796712-0f16-4062-815a-e0a92f4a2143',
+                    'code': 'INVALID_DATA',
+                    'details': [
+                        {
+                            'code': 'EMPTY_VALUE',
+                            'target': 'givenName',
+                            'message': 'Given name cannot be empty.',
+                        },
+                        {
+                            'code': 'OUT_OF_RANGE',
+                            'target': 'age',
+                            'message': 'Age must be between 1 and 150',
+                            'innerError': {
+                                'rangeMinimumValue': '1',
+                                'rangeMaximumValue': '150',
+                            }
+                        },
+                    ]
+                }} />
+                <StepLink type="back" onClick={onFlip}>Back</StepLink>
+            </Card>,
+        ])}
+    />
+</ComponentDemo>
 # Account Recovery
 
 ### The Sign-On Form

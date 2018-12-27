@@ -1,0 +1,40 @@
+@mixin serialized-grid {
+    display: table;
+}
+
+.serialized-data {
+    @include serialized-grid();
+    @extend %tiny-text;
+
+    &__item {
+        display: table-row;
+    }
+
+    &__item + &__item > * {
+        margin-top: $spacing-md;
+    }
+
+    &__key, &__value {
+        display: table-cell;
+    }
+
+    &__key {
+        font-weight: 600;
+        padding-right: $spacing-md;
+    }
+
+    &__value {
+        @extend %tiny-text;
+
+        @include serialized-grid();
+
+        flex-basis: 70%;
+        flex-shrink: 1;
+    }
+
+    &__list-item + &__list-item {
+        border-top: 1px solid $color-neutral-70;
+        margin-top: $spacing-md;
+        padding-top: $spacing-md;
+    }
+}

@@ -13,8 +13,10 @@ import IconFeedback from '../components/IconFeedback';
 import Logo from '../components/Logo';
 import ModalMenu from '../components/ModalMenu';
 import Requirements from '../components/Requirements';
+import SerializedData from '../components/SerializedData';
 import Spinner from '../components/Spinner';
 import Stack from '../components/Stack';
+import StepLink from '../components/StepLink';
 import TextBlock from '../components/TextBlock';
 import TextInput from '../components/TextInput';
 import TextStyle from '../components/TextStyle';
@@ -152,4 +154,40 @@ Error message
             }
         ]} />
     </div>
+</ComponentDemo>
+
+## Step Links
+
+<ComponentDemo>
+    <div>
+        <StepLink type="forward">Forward link</StepLink>
+        <StepLink type="back">Back link</StepLink>
+    </div>
+</ComponentDemo>
+
+## Serialized Data
+
+Display a data object, like JSON or YAML.
+
+<ComponentDemo>
+    <SerializedData data={{
+        'id': '6c796712-0f16-4062-815a-e0a92f4a2143',
+        'code': 'INVALID_DATA',
+        'details': [
+            {
+                'code': 'EMPTY_VALUE',
+                'target': 'givenName',
+                'message': 'Given name cannot be empty.',
+            },
+            {
+                'code': 'OUT_OF_RANGE',
+                'target': 'age',
+                'message': 'Age must be between 1 and 150',
+                'innerError': {
+                    'rangeMinimumValue': '1',
+                    'rangeMaximumValue': '150',
+                }
+            },
+        ]
+    }} />
 </ComponentDemo>

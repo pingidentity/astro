@@ -3,6 +3,17 @@
     box-shadow: 0 0 6px 0 $color-active-blue-highlighted;
 }
 
+@mixin link {
+    color: $color-active-blue;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+        color: $color-active-blue-highlighted;
+        text-decoration: underline;
+    }
+}
+
 @import './global-vars';
 @import './fonts';
 @import './text';
@@ -25,10 +36,13 @@
 @import './components/org-logo';
 @import './components/page';
 @import './components/requirements';
+@import './components/serialized-data';
 @import './components/spinner';
+@import './components/step-link';
 @import './components/text-block';
 @import './components/text-input';
 @import './components/tooltip';
+@import './components/two-sided';
 
 // spacing components are after so they take precedence
 
@@ -50,13 +64,7 @@ input {
 }
 
 a {
-    color: $color-active-blue;
-    text-decoration: none;
-
-    &:hover {
-        color: $color-active-blue-highlighted;
-        text-decoration: underline;
-    }
+    @include link;
 }
 
 .app-container {

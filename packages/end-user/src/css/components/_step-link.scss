@@ -1,0 +1,30 @@
+.step-link {
+    font-size: $font-size-sm;
+    margin: $spacing-xl 0 $spacing-lg 0;
+    text-align: center;
+
+    &__link {
+        @include link;
+        position: relative;
+
+        &:after {
+            content: '';
+            background: url('images/caret-blue.svg') center no-repeat;
+            padding: $spacing-xs 0;
+            position: absolute;
+            height: $caret-height;
+            width: $caret-height;
+            right: -$spacing-xs - $caret-height;
+            top: 50%;
+            transform: translateY(-50%) rotate(270deg);
+        }
+    }
+
+    &--back &__link {
+        &:after {
+            right: auto;
+            left: -$spacing-xs - $caret-height;
+            transform: translateY(-50%) rotate(90deg);
+        }
+    }
+}

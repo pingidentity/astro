@@ -57,7 +57,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://gitlab.corp.pingidentity.com/jfal/end-user"
+        "url": "https://gitlab.corp.pingidentity.com/ux/end-user"
     },
     "pre-commit": [ "static" ],
     "scripts": {

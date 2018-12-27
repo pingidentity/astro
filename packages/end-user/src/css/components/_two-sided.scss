@@ -1,0 +1,25 @@
+.two-sided {
+    position: relative;
+
+    &__front, &__back {
+        backface-visibility: hidden;
+        transition: all 0.2s ease-in-out;
+    }
+
+    &__back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+
+    &__front,
+    &--flipped &__back {
+        transform: rotateY(0deg);
+    }
+
+    &__back,
+    &--flipped &__front {
+        transform: rotateY(180deg);
+    }
+}
