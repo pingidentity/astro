@@ -58,6 +58,7 @@ class Button extends Component {
         submit: false,
     };
 
+    _dontFocus = event => event.preventDefault();
 
     render() {
         const classes = classnames("button", this.props.className, this.props.iconName,{
@@ -74,6 +75,7 @@ class Button extends Component {
             <TagName
                 className = {classes}
                 data-id={this.props["data-id"]}
+                onMouseDown={this._dontFocus}
                 onClick={this.props.onClick}
                 disabled={this.props.disabled}
                 type={this.props.submit ? "submit" : "button"}
