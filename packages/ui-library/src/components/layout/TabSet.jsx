@@ -15,9 +15,6 @@ import _ from "underscore";
 *     Array of label strings to use as button titles.
 * @param {onValueChange} [onValueChange]
 *     Callback to be triggered when selection changes.
-* @param {string} [selected]
-*     The text value of the item to select initially. Used only when stateless=false.
-*     stateless components must use 'selectedIndex'. Is mutually exclusive with "selectedIndex".
 * @param {number} [selectedIndex=0]
 *     The index of the selected label. Is mutually exclusive with "selected".
 * @param {TabConent~string} [label]
@@ -27,7 +24,6 @@ import _ from "underscore";
 *   <TabSet
 *       labels={labels}
 *       onValueChange={this._handleValueChange}
-*       stateless={false}
 *       selectedIndex={this.state.selectedIndex}
 *    >
 *      <TabContent label="Label One">
@@ -47,7 +43,6 @@ class TabSet extends Component {
         className: PropTypes.string,
         labels: PropTypes.array.isRequired,
         onValueChange: PropTypes.func,
-        selected: PropTypes.string,
         selectedIndex: PropTypes.number,
     }
 
@@ -55,7 +50,6 @@ class TabSet extends Component {
         "data-id": "tab-set",
         className: "",
         onValueChange: _.noop,
-        selected: "",
         selectedIndex: 0,
     }
 
