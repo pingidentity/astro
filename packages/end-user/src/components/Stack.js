@@ -6,6 +6,7 @@ const Stack = ({ children, size }) => {
     const classNames = classnames('stack', {
         'stack--small': size === 'small',
         'stack--xsmall': size === 'xsmall',
+        'stack--large': size === 'large',
     });
 
     return <div className={classNames}>{children}</div>;

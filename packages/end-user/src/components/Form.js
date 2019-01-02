@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-const Form = ({ children, margin }) => {
+const Form = ({ children, margin, spacing }) => {
     const classNames = classnames('form', {
         'form--margin-small': margin === 'small',
+        'form--spacing-lg': spacing === 'large',
     });
 
     return (
@@ -15,6 +16,7 @@ const Form = ({ children, margin }) => {
 
 Form.propTypes = {
     margin: PropTypes.oneOf(['small']),
+    spacing: PropTypes.oneOf(['large']),
 };
 
 

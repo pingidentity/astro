@@ -474,3 +474,93 @@ import ComponentDemo from './components/ComponentDemo';
     </Card>
 </ComponentDemo>
 
+#Self Registration
+
+### Create Profile Form
+<ComponentDemo>
+    <Card>
+        <Logo src="ping-logo.svg"/>
+        <Heading>Create Your Profile</Heading>
+        <TextBlock size="small">Enter the required information below.</TextBlock>
+        <Form spacing="large" >
+            <Stack size="small">
+                <FloatLabelTextInput label="First Name" id="firstname1"/>
+                <FloatLabelTextInput label="Last Name" id="lastname1"/>
+            </Stack>
+            <Stack size="small">
+                <FloatLabelTextInput label="Username" id="username13"/>
+                <FloatLabelTextInput label="Email Address" id="email1"/>
+            </Stack>
+            <Stack size="small">
+                <FloatLabelPasswordInput label="Password" id="newPwd6"/>
+                <FloatLabelPasswordInput label="Verify New Password" id="verifyPwd6"/>
+            </Stack>
+            <Button label="Save" primary disabled/>
+        </Form>
+        <TextBlock size="small">Already have an account? <a href="#">Sign in</a></TextBlock>
+    </Card>
+</ComponentDemo>
+
+<ComponentDemo>
+    <Card>
+        <Logo src="ping-logo.svg"/>
+        <Heading>Create Your Profile</Heading>
+        <TextBlock size="small">Enter the required information below.</TextBlock>
+        <Form>
+            <FloatLabelTextInput label="First Name" id="firstname2" defaultValue="Tony"/>
+            <FloatLabelTextInput label="Last Name" id="lastname2" defaultValue="Stark"/>
+            <FloatLabelTextInput label="Username" id="username14" defaultValue="IronMan1"/>
+            <FloatLabelTextInput label="Email Address" id="email2" defaultValue="IronMan1@ping.com"/>
+            <FloatLabelPasswordInput label="Password" id="newPwd7" defaultValue="Hello">
+                    <Tooltip>
+                    <Heading level={4}>Password Must Have at Least:</Heading>
+                    <Requirements
+                        requirements={[
+                            {
+                                name: '8 characters',
+                                status: 'error',
+                            },
+                            {
+                                name: '1 UPPERCASE letter',
+                                status: 'yes',
+                            },
+                            {
+                                name: '1 lowercase letter',
+                                status: 'yes',
+                            },
+                            {
+                                name: '1 number (0-9)',
+                                status: 'error',
+                            },
+                        ]}
+                    />
+                </Tooltip>
+            </FloatLabelPasswordInput>
+            <FloatLabelPasswordInput label="Verify New Password" id="verifyPwd7"/>
+            <Button label="Save" primary disabled/>
+        </Form>
+        <TextBlock size="small">Already have an account? <a href="#">Sign in</a></TextBlock>
+    </Card>
+</ComponentDemo>
+
+<ComponentDemo>
+    <Card>
+        <Logo src="ping-logo.svg"/>
+        <Heading>Thank You!</Heading>
+        <TextBlock>
+            We've sent a verification email to IronMan1@ping.com.
+            Please verify you email to finish setting up your PingOne account.
+        </TextBlock>
+        <TextBlock size="small">Didn't receive an email? <a href="#">Resend</a></TextBlock>
+    </Card>
+</ComponentDemo>
+
+<ComponentDemo>
+    <Card>
+        <Logo src="ping-logo.svg"/>
+        <IconFeedback type="success" small>You're Registered</IconFeedback>
+        <TextBlock spacing="xxlarge">Your account is setup and ready to go.</TextBlock>
+        <Button label="Sign On" primary/>
+    </Card>
+</ComponentDemo>
+

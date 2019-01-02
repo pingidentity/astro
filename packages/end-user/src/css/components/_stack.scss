@@ -8,4 +8,8 @@
     &--xsmall > * {
         margin-bottom: $spacing-xs;
     }
+
+    &--large > * {
+        margin-bottom: $spacing-lg;
+    }
 }

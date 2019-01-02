@@ -12,9 +12,11 @@ import '../css/styles.scss';
 import './css/demo.scss';
 import pinglogo from './assets/ping-logo.svg';
 import jjlogo from './assets/jj-logo.png';
+import background from './assets/background.jpg';
 
 const pingBranding = {
     logo: pinglogo,
+    backgroundImage: background,
 };
 
 const jjBranding = completeBranding({
@@ -22,6 +24,7 @@ const jjBranding = completeBranding({
     backgroundColor: '#0000ff',
     primaryColor: '#ff0000',
 });
+
 
 const App = PageComponent => (
     <div className="page-content">

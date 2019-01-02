@@ -168,12 +168,6 @@
   font-size: 15px;
   font-weight: 400; }
 
-.dropdown__select:-ms-input-placeholder, .dropdown__input:-ms-input-placeholder, .float-label__input:placeholder-shown + .float-label__label, .float-label__input.placeholder-shown + .float-label__label, .text-input:-ms-input-placeholder,
-.placeholder-text {
-  color: #666;
-  font-size: 15px;
-  font-weight: 400; }
-
 .dropdown__select::-ms-input-placeholder, .dropdown__input::-ms-input-placeholder, .float-label__input:placeholder-shown + .float-label__label, .float-label__input.placeholder-shown + .float-label__label, .text-input::-ms-input-placeholder,
 .placeholder-text {
   color: #666;
@@ -439,8 +433,6 @@
   padding-left: 20px; }
   .float-label__input::-webkit-input-placeholder, .float-label .float-label__input::-webkit-input-placeholder {
     color: rgba(255, 255, 255, 0); }
-  .float-label__input:-ms-input-placeholder, .float-label .float-label__input:-ms-input-placeholder {
-    color: rgba(255, 255, 255, 0); }
   .float-label__input::-ms-input-placeholder, .float-label .float-label__input::-ms-input-placeholder {
     color: rgba(255, 255, 255, 0); }
   .float-label__input::placeholder, .float-label .float-label__input::placeholder {
@@ -478,6 +470,10 @@
     margin-bottom: 5px; }
   .form--margin-small > :last-child {
     margin-bottom: 0; }
+  .form--spacing-lg > * {
+    margin-bottom: 25px; }
+  .form > *:last-child {
+    margin-top: 25px; }
 
 .icon-feedback {
   color: #277ba5;
@@ -750,6 +746,8 @@
     font-size: 13px;
     text-align: right;
     margin-bottom: 15px; }
+  .text-block--xxlarge {
+    margin-bottom: 65px; }
 
 .text-input:focus {
   border-color: #277ba5; }
@@ -874,6 +872,9 @@
 
 .stack--xsmall > * {
   margin-bottom: 5px; }
+
+.stack--large > * {
+  margin-bottom: 25px; }
 
 body {
   margin: 0; }
