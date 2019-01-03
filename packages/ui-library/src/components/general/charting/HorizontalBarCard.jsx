@@ -189,7 +189,7 @@ export default class HorizontalBarCard extends Component {
     }
 
 
-    static PropTypes = {
+    static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
         label: PropTypes.string,
