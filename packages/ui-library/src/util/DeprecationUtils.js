@@ -45,10 +45,12 @@ export const deprecatedProp = ({
     message,
     substitute,
     version
-}) => (props, propName) => new Error(
-    `Prop "${propName}" is deprecated and will be removed in ${getVersionMessage(version)}.` +
+}) => (props, propName) => (props[propName] !== undefined)
+    ? new Error(
+        `Prop "${propName}" is deprecated and will be removed in ${getVersionMessage(version)}.` +
         `${substitute ? ` Use "${substitute}" instead.` : ""}${renderMessage(message)}`
-);
+    )
+    : null;
 
 /**
  * @desc Fires deprecation warnings for specific values of a prop with option substitutes

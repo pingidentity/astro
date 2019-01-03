@@ -4,6 +4,7 @@ import HeaderBar from "./header-bar";
 import LeftNav from "./left-nav";
 import KeywordSearch from "../forms/KeywordSearch";
 import Modal from "../general/Modal";
+import { deprecatedProp } from "../../util/DeprecationUtils";
 
 import _ from "underscore";
 
@@ -63,7 +64,10 @@ import _ from "underscore";
 class AppFrame extends React.Component {
     static propTypes = {
         autoSelectItemFromRoot: PropTypes.bool,
-        autoSelectItemfromSection: PropTypes.bool,
+        autoSelectItemFromSection: PropTypes.bool,
+        autoSelectItemfromSection: deprecatedProp(
+            { message: "There was a typo. Please capitalize the F." }
+        ),
         autoSelectSectionFromItem: PropTypes.bool,
         className: PropTypes.string,
         headerBarProps: PropTypes.object,
@@ -80,7 +84,7 @@ class AppFrame extends React.Component {
 
     static defaultProps = {
         autoSelectItemFromRoot: false,
-        autoSelectItemfromSection: false,
+        autoSelectItemFromSection: false,
         autoSelectSectionFromItem: false,
         "data-id": "app-frame",
         oneSectionOnly: false,
@@ -186,7 +190,7 @@ class AppFrame extends React.Component {
 
         this.props.onSectionChange(id);
 
-        if (this.props.autoSelectItemfromSection && opening) {
+        if ((this.props.autoSelectItemfromSection || this.props.autoSelectItemFromSection) && opening) {
             const { children } = this._getNode(id);
 
             if (!this._isNodeIn(this.props.selectedNode, children)) {

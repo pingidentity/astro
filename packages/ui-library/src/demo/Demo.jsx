@@ -264,7 +264,7 @@ class DemoApp extends React.Component {
             <AppFrame
                 autoSelectItemFromRoot={true}
                 autoSelectSectionFromItem={false}
-                autoSelectItemfromSection={true}
+                autoSelectItemFromSection={true}
                 className="components-container"
                 oneSectionOnly={true}
                 headerBarProps={_.extend(this.props.header, {

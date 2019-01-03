@@ -24,7 +24,7 @@ describe("Deprecation Utils", () => {
         const { message } = deprecatedProp({
             substitute: "betterProp",
             version: "testVersion"
-        })({}, "testProp");
+        })({ "testProp": {} }, "testProp");
 
         expect(message).toEqual(
             "Prop \"testProp\" is deprecated and will be removed in version testVersion. Use \"betterProp\" instead."
@@ -34,7 +34,7 @@ describe("Deprecation Utils", () => {
     it("deprecatedProp returns error with message", () => {
         const { message } = deprecatedProp({
             message: "I'm a message"
-        })({}, "testProp");
+        })({ "testProp": {} }, "testProp");
 
         expect(message).toEqual(
             "Prop \"testProp\" is deprecated and will be removed in a future release. I'm a message"
