@@ -65,7 +65,7 @@ describe("DashboardCard", function () {
         const component = getComponent({
             flipped: true,
             back: <div/>,
-            defaultChecked: true,
+            defaultChecked: false,
             onMakeDefault: callback
         });
         const checked = TestUtils.findRenderedDOMNodeWithDataId(component, `${componentId}-make-default`);

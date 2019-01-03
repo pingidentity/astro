@@ -100,6 +100,7 @@ class StatAreaCardDemo extends React.Component {
                         title="MFA Users"
                         value={`${percent}%`}
                         yAxisKey="value"
+                        defaultChecked={false}
                     />
                     <DashboardCard size={2} />
                 </CardRow>

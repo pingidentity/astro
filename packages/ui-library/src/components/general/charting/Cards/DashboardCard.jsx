@@ -33,6 +33,8 @@ import Checkbox from "../../../forms/FormCheckbox";
  *     if provided it will add a checkbox to the back of the card to make that the default view.
  * @param {function} [ makeDefaultLabel]
  *     if provided it will add a label to the check box.
+ *  @param {bool} [defaultChecked]
+ *     state of the checkbox set to false. If set to true will render with onMakeDefault already checked.
  *
  * @example
  * <DashboardCard
@@ -64,6 +66,7 @@ class DashboardCard extends React.Component {
         size: PropTypes.number,
         onMakeDefault: PropTypes.func,
         makeDefaultLabel: PropTypes.string
+
     }
 
     static defaultProps = {
@@ -74,7 +77,7 @@ class DashboardCard extends React.Component {
 
     state = {
         flipped: false,
-        defaultChecked: false
+        defaultChecked: this.props.defaultChecked
     }
 
     _handleChecked = (val) => {

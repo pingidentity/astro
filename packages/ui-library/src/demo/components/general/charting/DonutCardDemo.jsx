@@ -34,7 +34,7 @@ class DonutCardDemo extends React.Component {
         label: "Total Users",
         value: this._sumTotal(),
         selectedValue: this.options[0],
-        loading: false
+        loading: false,
     }
 
     _onHover = (e, { id }) => {
@@ -54,8 +54,8 @@ class DonutCardDemo extends React.Component {
         });
     }
 
-    _onMakeDefault = (val) => {
-        console.log(val);
+    _handleMakeDefault = () => {
+        console.log("Make default clicked");
     }
 
     _onSelect = (option) => {
@@ -108,11 +108,12 @@ class DonutCardDemo extends React.Component {
                         onMouseOut={this._onMouseOut}
                         label={this.state.label}
                         value={this.state.value}
-                        onMakeDefault={this._onMakeDefault}
+                        onMakeDefault={this._handleMakeDefault}
                         makeDefaultLabel={"Make Default View"}
                         options={this.options}
                         selectOption={this.state.selectedValue}
                         onSelect={this._onSelect}
+                        defaultChecked={false}
                     />
                     <DashboardCard size={2} />
             </CardRow>

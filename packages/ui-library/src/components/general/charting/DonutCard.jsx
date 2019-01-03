@@ -42,8 +42,13 @@ import classnames from "classnames";
  *     highlightes selected option
  * @param {object} [onSelect]
  *     selects from the list of options
+ * @param {function} [onMakeDefault]
+ *    Callback triggered when the make-default checkbox is changed.  When provided a checkbox will render on the back
+ *    of the card.
  * @param {object} [Array.DonutCard~data]
  *     A list of objects that provides the data for the chart
+ *  @param {bool} [defaultChecked]
+ *     state of the checkbox set to false. If set to true will render with onMakeDefault already checked.
  * */
 
 
@@ -227,6 +232,7 @@ class DonutCard extends Component {
         options: PropTypes.arrayOf(PropTypes.object),
         selectOption: PropTypes.object,
         onSelect: PropTypes.func,
+        onMakeDefault: PropTypes.func,
         errorMessage: PropTypes.string,
         data: PropTypes.arrayOf(PropTypes.shape({
             label: PropTypes.string,
