@@ -159,6 +159,7 @@ module.exports = class extends React.Component {
                             queryString={this.props.queryString}
                             placeholder={this.props.searchPlaceholder}
                             onValueChange={this.props.onSearch}
+                            width="MAX"
                             {...this.props.searchBoxProps} // band-aid fix to allow overriding the stateful text field
                         />
                     </div>
