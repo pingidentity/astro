@@ -37,4 +37,13 @@ describe("PageSection", function () {
         const content = TestUtils.findRenderedDOMNodeWithClass(component, "page-section-content");
         expect(content).not.toBeTruthy();
     });
+
+    it("renders a label for right Content", function() {
+        const component = ReactTestUtils.renderIntoDocument(
+            <div><PageSection title="email" titleAccessories="hello">some content</PageSection></div>
+        );
+
+        const content = TestUtils.findRenderedDOMNodeWithClass(component, "page-section__title-accessories");
+        expect(content).toBeTruthy();
+    });
 });

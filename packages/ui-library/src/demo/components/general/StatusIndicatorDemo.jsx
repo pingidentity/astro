@@ -2,9 +2,9 @@ import React from "react";
 import StatusIndicator from "../../../components/general/StatusIndicator";
 
 /**
-* @name SpinnerDemo
-* @memberof Spinner
-* @desc A demo for Spinner
+* @name StatusIndicatorDemo
+* @memberof StatusIndicator
+* @desc A demo for StatusIndicator
 */
 const StatusIndicatorDemo = () => {
     return (

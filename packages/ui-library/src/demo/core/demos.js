@@ -433,6 +433,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_layout_LabelValuePairsDemo.jsx.html"
                     },
                     {
+                        label: "List Nav",
+                        demo: require("../components/layout/ListNavDemo"),
+                        pathToDoc: "components/layout/ListNav.jsx",
+                        pathToSource: "components_layout_ListNav.jsx.html",
+                        pathToDemoSource: "demo_components_layout_ListNavDemo.jsx.html"
+                    },
+                    {
                         label: "Page Group",
                         demo: require("../components/layout/PageGroupDemo"),
                         pathToDoc: "components/layout/PageGroup.jsx",
@@ -1047,6 +1054,13 @@ module.exports = [
                 pathToDoc: "components/templates/Dashboard.jsx",
                 pathToSource: "templates_Dashboard.jsx.html",
                 pathToDemoSource: "demo_components_templates_DashboardDemo.jsx.html",
+                fullscreen: true,
+                icon: "details"
+            },
+            {
+                label: "Notifications",
+                demo: require("../components/templates/NotificationsDemo"),
+                pathToSource: "templates_Notifications.jsx.html",
                 fullscreen: true,
                 icon: "details"
             }

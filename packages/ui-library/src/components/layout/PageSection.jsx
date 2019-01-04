@@ -14,6 +14,8 @@ import classnames from "classnames";
 *     Intro paragraph to the section
 * @param {string|node} title
 *     Title of section
+* @param {string|node} rightContent
+*     label that sits on the right side of the page
 */
 const PageSection = ({
     children,
@@ -21,12 +23,18 @@ const PageSection = ({
     "data-id": dataId,
     description,
     title,
+    titleAccessories
 }) => {
     const props = { className: classnames("page-section", className), "data-id": dataId };
 
-    return title
+    return title || titleAccessories
         ? <div {...props}>
-            <div className="page-section-title">{title}</div>
+            <div className="page-section-title">{title}
+                {
+                    titleAccessories && <div className="page-section__title-accessories">{titleAccessories}</div>
+                }
+            </div>
+
             {description && <p>{description}</p>}
             <div className="page-section-content">
                 {children}
@@ -43,6 +51,7 @@ PageSection.propTypes = {
     "data-id": PropTypes.string,
     description: PropTypes.string,
     title: PropTypes.node,
+    titleAccessories: PropTypes.node
 };
 
 PageSection.defaultProps = {

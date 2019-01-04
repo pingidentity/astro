@@ -13,6 +13,7 @@
 @import 'layout/callout-box';
 @import 'layout/aside-container';
 @import 'layout/stretch-content';
+@import 'layout/_list-nav.scss';
 @import 'templates/expandable-row-tooltip.scss';
 @import 'templates/section-columns';
 
@@ -1112,6 +1113,13 @@ $color-grey-minor-1: $color-neutral-30;
     @include font-pn-regular;
     color: $color-strong-neutral-10;
     text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+}
+
+.page-section__title-accessories {
+    color: $color-elephant;
+    text-transform: none;
 }
 
 .page-section-group-title {
