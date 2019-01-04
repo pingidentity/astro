@@ -38,7 +38,7 @@ import _ from "underscore";
 **/
 
 class TabSet extends Component {
-    static PropTypes = {
+    static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
         labels: PropTypes.array.isRequired,
