@@ -10,528 +10,495 @@
     <div id="app" class="app-container">
         <div class="page-content">
             <ul class="demo-nav">
-        <li><a href="./">Main</a></li>
-        <li><a href="inputs.html">Inputs</a></li>
-        <li><a href="layouts.html">Layouts</a></li>
-        <li><a href="mfa.html">MFA</a></li>
+        <li>
+            <a href="./">Main</a>
+        </li>
+        <li>
+            <a href="inputs.html">Inputs</a>
+        </li>
+        <li>
+            <a href="layouts.html">Layouts</a>
+        </li>
+        <li>
+            <a href="mfa.html">MFA</a>
+        </li>
     </ul>
     <div>
         <h1 id="Inputs">Inputs</h1>
         <h2 id="Text-Input">Text Input</h2>
         <div class="component-demo">
-            <div class="component-demo__preview"><input
-                    type="text" class="text-input" id="username1"
-                    name="username1" placeholder="Enter text..." /></div>
+            <div class="component-demo__preview">
+                <input type="text" class="text-input" id="username1"
+                    name="username1" placeholder="Enter text..."
+                />
+            </div>
             <div class="component-demo__markup">
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">TextInput</span>
+                <div class="component-demo__code">
+                    <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">TextInput</span>
   <span class="hljs-attr">id</span>=<span class="hljs-string">"username1"</span>
   <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Enter text..."</span>
- /&gt;</span></pre>
-                </div>
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"username1"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"username1"</span>
-    <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Enter text..."</span> /&gt;</span></pre>
-                </div>
+ /&gt;</span></pre></div>
+                <div class="component-demo__code">
+                    <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"username1"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"username1"</span>
+    <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Enter text..."</span> /&gt;</span></pre></div>
             </div>
         </div>
         <h3 id="Error-state">Error state</h3>
         <div class="component-demo">
-            <div class="component-demo__preview"><input
-                    type="text" class="text-input text-input--error"
-                    id="username2" name="username2" /></div>
+            <div class="component-demo__preview">
+                <input type="text" class="text-input text-input--error"
+                    id="username2" name="username2" />
+            </div>
             <div class="component-demo__markup">
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">TextInput</span>
+                <div class="component-demo__code">
+                    <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">TextInput</span>
   <span class="hljs-attr">error</span>
   <span class="hljs-attr">id</span>=<span class="hljs-string">"username2"</span>
- /&gt;</span></pre>
-                </div>
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input text-input--error"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"username2"</span>
-    <span class="hljs-attr">name</span>=<span class="hljs-string">"username2"</span> /&gt;</span></pre>
-                </div>
+ /&gt;</span></pre></div>
+                <div class="component-demo__code">
+                    <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input text-input--error"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"username2"</span>
+    <span class="hljs-attr">name</span>=<span class="hljs-string">"username2"</span> /&gt;</span></pre></div>
             </div>
         </div>
         <h3 id="Success-state">Success state</h3>
         <div class="component-demo">
-            <div class="component-demo__preview"><input
-                    type="text" class="text-input text-input--success"
-                    id="username3" name="username3" /></div>
+            <div class="component-demo__preview">
+                <input type="text" class="text-input text-input--success"
+                    id="username3" name="username3" />
+            </div>
             <div class="component-demo__markup">
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">TextInput</span>
+                <div class="component-demo__code">
+                    <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">TextInput</span>
   <span class="hljs-attr">id</span>=<span class="hljs-string">"username3"</span>
   <span class="hljs-attr">success</span>
- /&gt;</span></pre>
-                </div>
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input text-input--success"</span>
-    <span class="hljs-attr">id</span>=<span class="hljs-string">"username3"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"username3"</span> /&gt;</span></pre>
-                </div>
+ /&gt;</span></pre></div>
+                <div class="component-demo__code">
+                    <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input text-input--success"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"username3"</span>
+    <span class="hljs-attr">name</span>=<span class="hljs-string">"username3"</span> /&gt;</span></pre></div>
             </div>
         </div>
         <h3 id="Primary-input">Primary input</h3>
         <div class="component-demo">
-            <div class="component-demo__preview"><input
-                    type="text" class="text-input text-input--primary"
-                    id="primary" name="primary" value="495837" /></div>
+            <div class="component-demo__preview">
+                <input type="text" class="text-input text-input--primary"
+                    id="primary" name="primary" value="495837" />
+            </div>
             <div class="component-demo__markup">
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">TextInput</span>
+                <div class="component-demo__code">
+                    <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">TextInput</span>
   <span class="hljs-attr">defaultValue</span>=<span class="hljs-string">"495837"</span>
   <span class="hljs-attr">id</span>=<span class="hljs-string">"primary"</span>
   <span class="hljs-attr">primary</span>
- /&gt;</span></pre>
-                </div>
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input text-input--primary"</span>
-    <span class="hljs-attr">id</span>=<span class="hljs-string">"primary"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"primary"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"495837"</span> /&gt;</span></pre>
-                </div>
+ /&gt;</span></pre></div>
+                <div class="component-demo__code">
+                    <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input text-input--primary"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"primary"</span>
+    <span class="hljs-attr">name</span>=<span class="hljs-string">"primary"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"495837"</span> /&gt;</span></pre></div>
             </div>
         </div>
         <h3 id="Float-Label-Inputs">Float Label Inputs</h3>
         <div class="component-demo">
             <div class="component-demo__preview">
-                <div class="float-label"><input type="text"
-                        class="text-input float-label__input"
-                        id="username4" name="username4"
-                        placeholder="Username" /><label
-                        class="float-label__label" for="username4">Username</label></div>
+                <div class="float-label">
+                    <input type="text" class="text-input float-label__input"
+                        id="username4" name="username4" placeholder="Username"
+                    />
+                    <label class="float-label__label" for="username4">Username</label>
+                </div>
             </div>
             <div class="component-demo__markup">
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelTextInput</span>
+                <div class="component-demo__code">
+                    <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelTextInput</span>
   <span class="hljs-attr">id</span>=<span class="hljs-string">"username4"</span>
   <span class="hljs-attr">label</span>=<span class="hljs-string">"Username"</span>
- /&gt;</span></pre>
-                </div>
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input float-label__input"</span>
-        <span class="hljs-attr">id</span>=<span class="hljs-string">"username4"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"username4"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Username"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span>
-        <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"username4"</span>&gt;</span>Username<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
-                </div>
+ /&gt;</span></pre></div>
+                <div class="component-demo__code">
+                    <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input float-label__input"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"username4"</span>
+        <span class="hljs-attr">name</span>=<span class="hljs-string">"username4"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Username"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"username4"</span>&gt;</span>Username<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
             </div>
         </div>
         <div class="component-demo">
             <div class="component-demo__preview">
-                <div class="float-label"><input type="password"
-                        class="text-input float-label__input"
-                        id="password1" name="password1"
-                        placeholder="Password" /><label
-                        class="float-label__label" for="password1">Password</label></div>
+                <div class="float-label">
+                    <input type="password" class="text-input float-label__input"
+                        id="password1" name="password1" placeholder="Password"
+                    />
+                    <label class="float-label__label" for="password1">Password</label>
+                </div>
             </div>
             <div class="component-demo__markup">
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelPasswordInput</span>
+                <div class="component-demo__code">
+                    <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelPasswordInput</span>
   <span class="hljs-attr">id</span>=<span class="hljs-string">"password1"</span>
   <span class="hljs-attr">label</span>=<span class="hljs-string">"Password"</span>
- /&gt;</span></pre>
-                </div>
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input float-label__input"</span>
-        <span class="hljs-attr">id</span>=<span class="hljs-string">"password1"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"password1"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Password"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span>
-        <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"password1"</span>&gt;</span>Password<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
-                </div>
+ /&gt;</span></pre></div>
+                <div class="component-demo__code">
+                    <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input float-label__input"</span>
+        <span class="hljs-attr">id</span>=<span class="hljs-string">"password1"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"password1"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Password"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"password1"</span>&gt;</span>Password<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
             </div>
         </div>
-        <p>IE &amp; Edge don’t support the CSS-only
-            solution for float labels, but we can simulate
-            the “placeholder-shown” pseudo-selector with a
-            “placeholder-shown” class. (View in IE or Edge
-            to see the difference.)</p>
-        <div class="component-demo">
+        <p>IE &amp; Edge don’t support the CSS-only solution for
+            float labels, but we can simulate the “placeholder-shown”
+            pseudo-selector with a “placeholder-shown” class.
+            (View in IE or Edge to see the difference.)</p>
+        <div
+            class="component-demo">
             <div class="component-demo__preview">
-                <div class="float-label"><input type="text"
-                        class="text-input float-label__input placeholder-shown"
-                        id="username5" name="username5"
-                        placeholder="Username" /><label
-                        class="float-label__label" for="username5">Username</label></div>
+                <div class="float-label">
+                    <input type="text" class="text-input float-label__input placeholder-shown"
+                        id="username5" name="username5" placeholder="Username"
+                    />
+                    <label class="float-label__label" for="username5">Username</label>
+                </div>
             </div>
             <div class="component-demo__markup">
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelTextInput</span>
+                <div class="component-demo__code">
+                    <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelTextInput</span>
   <span class="hljs-attr">id</span>=<span class="hljs-string">"username5"</span>
   <span class="hljs-attr">inputClassName</span>=<span class="hljs-string">"placeholder-shown"</span>
   <span class="hljs-attr">label</span>=<span class="hljs-string">"Username"</span>
- /&gt;</span></pre>
-                </div>
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input float-label__input placeholder-shown"</span>
-        <span class="hljs-attr">id</span>=<span class="hljs-string">"username5"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"username5"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Username"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span>
-        <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"username5"</span>&gt;</span>Username<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
-                </div>
+ /&gt;</span></pre></div>
+                <div class="component-demo__code">
+                    <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-input float-label__input placeholder-shown"</span>
+        <span class="hljs-attr">id</span>=<span class="hljs-string">"username5"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"username5"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Username"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"username5"</span>&gt;</span>Username<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
+            </div>
+    </div>
+    <h2 id="Dropdown">Dropdown</h2>
+    <div class="component-demo">
+        <div class="component-demo__preview">
+            <div class="dropdown">
+                <select class="dropdown__select">
+                    <option disabled="" value="">Select one</option>
+                    <option value="First Value">First Value</option>
+                    <option value="Second Value">Second Value</option>
+                    <option value="Third Value">Third Value</option>
+                    <option value="Fourth Value">Fourth Value</option>
+                </select>
             </div>
         </div>
-        <h2 id="Dropdown">Dropdown</h2>
-        <div class="component-demo">
-            <div class="component-demo__preview">
-                <div class="dropdown"><select class="dropdown__select">
-                        <option disabled="" value="">Select
-                            one</option>
-                        <option value="First Value">First
-                            Value</option>
-                        <option value="Second Value">Second
-                            Value</option>
-                        <option value="Third Value">Third
-                            Value</option>
-                        <option value="Fourth Value">Fourth
-                            Value</option>
-                    </select></div>
-            </div>
-            <div class="component-demo__markup">
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Dropdown</span>
+        <div class="component-demo__markup">
+            <div class="component-demo__code">
+                <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">Dropdown</span>
   <span class="hljs-attr">options</span>=<span class="hljs-string">{[</span>"<span class="hljs-attr">First</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Second</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Third</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Fourth</span> <span class="hljs-attr">Value</span>"]}
   <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Select one"</span>
- /&gt;</span></pre>
-                </div>
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__select"</span>&gt;</span>
+ /&gt;</span></pre></div>
+            <div class="component-demo__code">
+                <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__select"</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">disabled</span>=<span class="hljs-string">""</span> <span class="hljs-attr">value</span>=<span class="hljs-string">""</span>&gt;</span>Select one<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"First Value"</span>&gt;</span>First Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Second Value"</span>&gt;</span>Second Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span>&gt;</span>Third Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Fourth Value"</span>&gt;</span>Fourth Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
-                </div>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
+        </div>
+    </div>
+    <h3 id="Float-Label-States">Float Label States</h3>
+    <p>When something is selected:</p>
+    <div class="component-demo">
+        <div class="component-demo__preview">
+            <div class="dropdown float-label">
+                <select id="float-label-dropdown" name="float-label-dropdown"
+                    class="dropdown__select float-label__input">
+                    <option disabled="" value="">Select one</option>
+                    <option value="First Value">First Value</option>
+                    <option value="Second Value">Second Value</option>
+                    <option value="Third Value">Third Value</option>
+                    <option value="Fourth Value">Fourth Value</option>
+                </select>
+                <label class="float-label__label" for="float-label-dropdown">Select one</label>
             </div>
         </div>
-        <h3 id="Float-Label-States">Float Label States</h3>
-        <p>When something is selected:</p>
-        <div class="component-demo">
-            <div class="component-demo__preview">
-                <div class="dropdown float-label"><select
-                        id="float-label-dropdown" name="float-label-dropdown"
-                        class="dropdown__select float-label__input">
-                        <option disabled="" value="">Select
-                            one</option>
-                        <option value="First Value">First
-                            Value</option>
-                        <option value="Second Value">Second
-                            Value</option>
-                        <option value="Third Value">Third
-                            Value</option>
-                        <option value="Fourth Value">Fourth
-                            Value</option>
-                    </select><label class="float-label__label"
-                        for="float-label-dropdown">Select
-                        one</label></div>
-            </div>
-            <div class="component-demo__markup">
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelDropdown</span>
+        <div class="component-demo__markup">
+            <div class="component-demo__code">
+                <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelDropdown</span>
   <span class="hljs-attr">id</span>=<span class="hljs-string">"float-label-dropdown"</span>
   <span class="hljs-attr">label</span>=<span class="hljs-string">"Select one"</span>
   <span class="hljs-attr">options</span>=<span class="hljs-string">{[</span>"<span class="hljs-attr">First</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Second</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Third</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Fourth</span> <span class="hljs-attr">Value</span>"]}
- /&gt;</span></pre>
-                </div>
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"float-label-dropdown"</span>
-        <span class="hljs-attr">name</span>=<span class="hljs-string">"float-label-dropdown"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__select float-label__input"</span>&gt;</span>
+ /&gt;</span></pre></div>
+            <div class="component-demo__code">
+                <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown float-label"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"float-label-dropdown"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"float-label-dropdown"</span>
+        <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__select float-label__input"</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">disabled</span>=<span class="hljs-string">""</span> <span class="hljs-attr">value</span>=<span class="hljs-string">""</span>&gt;</span>Select one<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"First Value"</span>&gt;</span>First Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Second Value"</span>&gt;</span>Second Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span>&gt;</span>Third Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Fourth Value"</span>&gt;</span>Fourth Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"float-label-dropdown"</span>&gt;</span>Select
-        one<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
-                </div>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"float-label-dropdown"</span>&gt;</span>Select one<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
+        </div>
+    </div>
+    <p>When nothing is selected:</p>
+    <div class="component-demo">
+        <div class="component-demo__preview">
+            <div class="dropdown float-label">
+                <select id="dropdown" name="dropdown" class="dropdown__select float-label__input placeholder-shown">
+                    <option disabled="" value="">Select one</option>
+                    <option value="First Value">First Value</option>
+                    <option value="Second Value">Second Value</option>
+                    <option value="Third Value">Third Value</option>
+                    <option value="Fourth Value">Fourth Value</option>
+                </select>
+                <label class="float-label__label" for="dropdown">Select one</label>
             </div>
         </div>
-        <p>When nothing is selected:</p>
-        <div class="component-demo">
-            <div class="component-demo__preview">
-                <div class="dropdown float-label"><select
-                        id="dropdown" name="dropdown" class="dropdown__select float-label__input placeholder-shown">
-                        <option disabled="" value="">Select
-                            one</option>
-                        <option value="First Value">First
-                            Value</option>
-                        <option value="Second Value">Second
-                            Value</option>
-                        <option value="Third Value">Third
-                            Value</option>
-                        <option value="Fourth Value">Fourth
-                            Value</option>
-                    </select><label class="float-label__label"
-                        for="dropdown">Select one</label></div>
-            </div>
-            <div class="component-demo__markup">
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelDropdown</span>
+        <div class="component-demo__markup">
+            <div class="component-demo__code">
+                <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelDropdown</span>
   <span class="hljs-attr">inputClassName</span>=<span class="hljs-string">"placeholder-shown"</span>
   <span class="hljs-attr">label</span>=<span class="hljs-string">"Select one"</span>
   <span class="hljs-attr">options</span>=<span class="hljs-string">{[</span>"<span class="hljs-attr">First</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Second</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Third</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Fourth</span> <span class="hljs-attr">Value</span>"]}
- /&gt;</span></pre>
-                </div>
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"dropdown"</span>
-        <span class="hljs-attr">name</span>=<span class="hljs-string">"dropdown"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__select float-label__input placeholder-shown"</span>&gt;</span>
+ /&gt;</span></pre></div>
+            <div class="component-demo__code">
+                <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown float-label"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"dropdown"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"dropdown"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__select float-label__input placeholder-shown"</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">disabled</span>=<span class="hljs-string">""</span> <span class="hljs-attr">value</span>=<span class="hljs-string">""</span>&gt;</span>Select one<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"First Value"</span>&gt;</span>First Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Second Value"</span>&gt;</span>Second Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span>&gt;</span>Third Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Fourth Value"</span>&gt;</span>Fourth Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"dropdown"</span>&gt;</span>Select
-        one<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
-                </div>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"dropdown"</span>&gt;</span>Select one<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
+        </div>
+    </div>
+    <h3 id="Stateful-demo">Stateful demo</h3>
+    <p>This component toggles the “placeholder-shown” class depending
+        on whether there’s a value.</p>
+    <div class="component-demo">
+        <div class="component-demo__preview">
+            <div class="dropdown float-label">
+                <select id="dropdown" name="dropdown" class="dropdown__select float-label__input placeholder-shown">
+                    <option selected="" disabled="" value="">Select one</option>
+                    <option value="First Value">First Value</option>
+                    <option value="Second Value">Second Value</option>
+                    <option value="Third Value">Third Value</option>
+                    <option value="Fourth Value">Fourth Value</option>
+                </select>
+                <label class="float-label__label" for="dropdown">Select one</label>
             </div>
         </div>
-        <h3 id="Stateful-demo">Stateful demo</h3>
-        <p>This component toggles the “placeholder-shown”
-            class depending on whether there’s a value.</p>
-        <div class="component-demo">
-            <div class="component-demo__preview">
-                <div class="dropdown float-label"><select
-                        id="dropdown" name="dropdown" class="dropdown__select float-label__input placeholder-shown">
-                        <option selected="" disabled=""
-                            value="">Select one</option>
-                        <option value="First Value">First
-                            Value</option>
-                        <option value="Second Value">Second
-                            Value</option>
-                        <option value="Third Value">Third
-                            Value</option>
-                        <option value="Fourth Value">Fourth
-                            Value</option>
-                    </select><label class="float-label__label"
-                        for="dropdown">Select one</label></div>
-            </div>
-            <div class="component-demo__markup">
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">withState(mapProps(withHandlers(FloatLabelDropdown)))</span>
+        <div class="component-demo__markup">
+            <div class="component-demo__code">
+                <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">withState(mapProps(withHandlers(FloatLabelDropdown)))</span>
   <span class="hljs-attr">label</span>=<span class="hljs-string">"Select one"</span>
   <span class="hljs-attr">options</span>=<span class="hljs-string">{[</span>"<span class="hljs-attr">First</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Second</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Third</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Fourth</span> <span class="hljs-attr">Value</span>"]}
- /&gt;</span></pre>
-                </div>
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"dropdown"</span>
-        <span class="hljs-attr">name</span>=<span class="hljs-string">"dropdown"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__select float-label__input placeholder-shown"</span>&gt;</span>
+ /&gt;</span></pre></div>
+            <div class="component-demo__code">
+                <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown float-label"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"dropdown"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"dropdown"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__select float-label__input placeholder-shown"</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">selected</span>=<span class="hljs-string">""</span> <span class="hljs-attr">disabled</span>=<span class="hljs-string">""</span> <span class="hljs-attr">value</span>=<span class="hljs-string">""</span>&gt;</span>Select one<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"First Value"</span>&gt;</span>First Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Second Value"</span>&gt;</span>Second Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span>&gt;</span>Third Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Fourth Value"</span>&gt;</span>Fourth Value<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"dropdown"</span>&gt;</span>Select
-        one<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
-                </div>
-            </div>
-        </div>
-        <h3 id="Custom-styled-Dropdown">Custom-styled
-            Dropdown</h3>
-        <p>Closed state:</p>
-        <div class="component-demo">
-            <div class="component-demo__preview">
-                <div class="dropdown"><input type="text"
-                        class="dropdown__input" placeholder="Select one"
-                        readonly="" /></div>
-            </div>
-            <div class="component-demo__markup">
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">DropdownCustom</span>
-  <span class="hljs-attr">options</span>=<span class="hljs-string">{[</span>"<span class="hljs-attr">First</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Second</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Third</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Fourth</span> <span class="hljs-attr">Value</span>"]}
-  <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Select one"</span>
- /&gt;</span></pre>
-                </div>
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__input"</span>
-        <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Select one"</span> <span class="hljs-attr">readonly</span>=<span class="hljs-string">""</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
-                </div>
-            </div>
-        </div>
-        <p>Open state:</p>
-        <div class="component-demo">
-            <div class="component-demo__preview">
-                <div class="dropdown dropdown--open"><input
-                        type="text" class="dropdown__input"
-                        placeholder="Select one" readonly="" />
-                    <ul class="dropdown__list">
-                        <li class="dropdown__option" value="First Value">First
-                            Value</li>
-                        <li class="dropdown__option" value="Second Value">Second
-                            Value</li>
-                        <li class="dropdown__option" value="Third Value">Third
-                            Value</li>
-                        <li class="dropdown__option" value="Fourth Value">Fourth
-                            Value</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="component-demo__markup">
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">DropdownCustom</span>
-  <span class="hljs-attr">open</span>
-  <span class="hljs-attr">options</span>=<span class="hljs-string">{[</span>"<span class="hljs-attr">First</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Second</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Third</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Fourth</span> <span class="hljs-attr">Value</span>"]}
-  <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Select one"</span>
- /&gt;</span></pre>
-                </div>
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown dropdown--open"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span>
-        <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__input"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Select one"</span>
-        <span class="hljs-attr">readonly</span>=<span class="hljs-string">""</span> /&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__list"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"First Value"</span>&gt;</span>First
-            Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Second Value"</span>&gt;</span>Second
-            Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span>&gt;</span>Third
-            Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Fourth Value"</span>&gt;</span>Fourth
-            Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
-                </div>
-            </div>
-        </div>
-        <p>Open state with a selected value:</p>
-        <div class="component-demo">
-            <div class="component-demo__preview">
-                <div class="dropdown dropdown--open"><input
-                        type="text" class="dropdown__input"
-                        placeholder="Select one" value="Third Value"
-                        readonly="" />
-                    <ul class="dropdown__list">
-                        <li class="dropdown__option" value="First Value">First
-                            Value</li>
-                        <li class="dropdown__option" value="Second Value">Second
-                            Value</li>
-                        <li class="dropdown__option dropdown__option--selected"
-                            value="Third Value">Third Value</li>
-                        <li class="dropdown__option" value="Fourth Value">Fourth
-                            Value</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="component-demo__markup">
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">DropdownCustom</span>
-  <span class="hljs-attr">open</span>
-  <span class="hljs-attr">options</span>=<span class="hljs-string">{[</span>"<span class="hljs-attr">First</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Second</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Third</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Fourth</span> <span class="hljs-attr">Value</span>"]}
-  <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Select one"</span>
-  <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span>
- /&gt;</span></pre>
-                </div>
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown dropdown--open"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span>
-        <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__input"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Select one"</span>
-        <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span> <span class="hljs-attr">readonly</span>=<span class="hljs-string">""</span> /&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__list"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"First Value"</span>&gt;</span>First
-            Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Second Value"</span>&gt;</span>Second
-            Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option dropdown__option--selected"</span>
-            <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span>&gt;</span>Third Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Fourth Value"</span>&gt;</span>Fourth
-            Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
-                </div>
-            </div>
-        </div>
-        <p>With a float label:</p>
-        <div class="component-demo">
-            <div class="component-demo__preview">
-                <div class="dropdown float-label"><input
-                        type="text" class="dropdown__input float-label__input"
-                        id="dropdownCustom" name="dropdownCustom"
-                        placeholder="Select one" readonly="" /><label
-                        class="float-label__label" for="dropdownCustom">Select
-                        one</label></div>
-            </div>
-            <div class="component-demo__markup">
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelDropdownCustom</span>
-  <span class="hljs-attr">label</span>=<span class="hljs-string">"Select one"</span>
-  <span class="hljs-attr">options</span>=<span class="hljs-string">{[</span>"<span class="hljs-attr">First</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Second</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Third</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Fourth</span> <span class="hljs-attr">Value</span>"]}
- /&gt;</span></pre>
-                </div>
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__input float-label__input"</span>
-        <span class="hljs-attr">id</span>=<span class="hljs-string">"dropdownCustom"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"dropdownCustom"</span>
-        <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Select one"</span> <span class="hljs-attr">readonly</span>=<span class="hljs-string">""</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span>
-        <span class="hljs-attr">for</span>=<span class="hljs-string">"dropdownCustom"</span>&gt;</span>Select one<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
-                </div>
-            </div>
-        </div>
-        <div class="component-demo">
-            <div class="component-demo__preview">
-                <div class="dropdown float-label"><input
-                        type="text" class="dropdown__input float-label__input"
-                        id="dropdownCustom" name="dropdownCustom"
-                        placeholder="Select one" value="Third Value"
-                        readonly="" /><label class="float-label__label"
-                        for="dropdownCustom">Select one</label></div>
-            </div>
-            <div class="component-demo__markup">
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelDropdownCustom</span>
-  <span class="hljs-attr">label</span>=<span class="hljs-string">"Select one"</span>
-  <span class="hljs-attr">options</span>=<span class="hljs-string">{[</span>"<span class="hljs-attr">First</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Second</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Third</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Fourth</span> <span class="hljs-attr">Value</span>"]}
-  <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span>
- /&gt;</span></pre>
-                </div>
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown float-label"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__input float-label__input"</span>
-        <span class="hljs-attr">id</span>=<span class="hljs-string">"dropdownCustom"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"dropdownCustom"</span>
-        <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Select one"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span>
-        <span class="hljs-attr">readonly</span>=<span class="hljs-string">""</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"dropdownCustom"</span>&gt;</span>Select
-        one<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
-                </div>
-            </div>
-        </div>
-        <div class="component-demo">
-            <div class="component-demo__preview">
-                <div class="dropdown float-label dropdown--open"><input
-                        type="text" class="dropdown__input float-label__input"
-                        id="dropdownCustom" name="dropdownCustom"
-                        placeholder="Select one" value="Third Value"
-                        readonly="" /><label class="float-label__label"
-                        for="dropdownCustom">Select one</label>
-                    <ul class="dropdown__list">
-                        <li class="dropdown__option" value="First Value">First
-                            Value</li>
-                        <li class="dropdown__option" value="Second Value">Second
-                            Value</li>
-                        <li class="dropdown__option dropdown__option--selected"
-                            value="Third Value">Third Value</li>
-                        <li class="dropdown__option" value="Fourth Value">Fourth
-                            Value</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="component-demo__markup">
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelDropdownCustom</span>
-  <span class="hljs-attr">label</span>=<span class="hljs-string">"Select one"</span>
-  <span class="hljs-attr">open</span>
-  <span class="hljs-attr">options</span>=<span class="hljs-string">{[</span>"<span class="hljs-attr">First</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Second</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Third</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Fourth</span> <span class="hljs-attr">Value</span>"]}
-  <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span>
- /&gt;</span></pre>
-                </div>
-                <div class="component-demo__code"><span
-                        class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown float-label dropdown--open"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span>
-        <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__input float-label__input"</span>
-        <span class="hljs-attr">id</span>=<span class="hljs-string">"dropdownCustom"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"dropdownCustom"</span>
-        <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Select one"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span>
-        <span class="hljs-attr">readonly</span>=<span class="hljs-string">""</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"dropdownCustom"</span>&gt;</span>Select
-        one<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__list"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"First Value"</span>&gt;</span>First
-            Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Second Value"</span>&gt;</span>Second
-            Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option dropdown__option--selected"</span>
-            <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span>&gt;</span>Third Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Fourth Value"</span>&gt;</span>Fourth
-            Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre>
-                </div>
-            </div>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"dropdown"</span>&gt;</span>Select one<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
         </div>
     </div>
+    <h3 id="Custom-styled-Dropdown">Custom-styled Dropdown</h3>
+    <p>Closed state:</p>
+    <div class="component-demo">
+        <div class="component-demo__preview">
+            <div class="dropdown">
+                <input type="text" class="dropdown__input" placeholder="Select one"
+                    readonly="" />
+            </div>
+        </div>
+        <div class="component-demo__markup">
+            <div class="component-demo__code">
+                <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">DropdownCustom</span>
+  <span class="hljs-attr">options</span>=<span class="hljs-string">{[</span>"<span class="hljs-attr">First</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Second</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Third</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Fourth</span> <span class="hljs-attr">Value</span>"]}
+  <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Select one"</span>
+ /&gt;</span></pre></div>
+            <div class="component-demo__code">
+                <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__input"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Select one"</span>
+        <span class="hljs-attr">readonly</span>=<span class="hljs-string">""</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
+        </div>
+    </div>
+    <p>Open state:</p>
+    <div class="component-demo">
+        <div class="component-demo__preview">
+            <div class="dropdown dropdown--open">
+                <input type="text" class="dropdown__input" placeholder="Select one"
+                    readonly="" />
+                <ul class="dropdown__list">
+                    <li class="dropdown__option" value="First Value">First Value</li>
+                    <li class="dropdown__option"
+                        value="Second Value">Second Value</li>
+                    <li class="dropdown__option"
+                        value="Third Value">Third Value</li>
+                    <li class="dropdown__option"
+                        value="Fourth Value">Fourth Value</li>
+                </ul>
+            </div>
+        </div>
+        <div class="component-demo__markup">
+            <div class="component-demo__code">
+                <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">DropdownCustom</span>
+  <span class="hljs-attr">open</span>
+  <span class="hljs-attr">options</span>=<span class="hljs-string">{[</span>"<span class="hljs-attr">First</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Second</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Third</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Fourth</span> <span class="hljs-attr">Value</span>"]}
+  <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Select one"</span>
+ /&gt;</span></pre></div>
+            <div class="component-demo__code">
+                <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown dropdown--open"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__input"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Select one"</span>
+        <span class="hljs-attr">readonly</span>=<span class="hljs-string">""</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__list"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"First Value"</span>&gt;</span>First Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Second Value"</span>&gt;</span>Second Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span>&gt;</span>Third Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Fourth Value"</span>&gt;</span>Fourth Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
+        </div>
+    </div>
+    <p>Open state with a selected value:</p>
+    <div class="component-demo">
+        <div class="component-demo__preview">
+            <div class="dropdown dropdown--open">
+                <input type="text" class="dropdown__input" placeholder="Select one"
+                    value="Third Value" readonly="" />
+                <ul class="dropdown__list">
+                    <li class="dropdown__option" value="First Value">First Value</li>
+                    <li class="dropdown__option"
+                        value="Second Value">Second Value</li>
+                    <li class="dropdown__option dropdown__option--selected"
+                        value="Third Value">Third Value</li>
+                    <li class="dropdown__option"
+                        value="Fourth Value">Fourth Value</li>
+                </ul>
+            </div>
+        </div>
+        <div class="component-demo__markup">
+            <div class="component-demo__code">
+                <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">DropdownCustom</span>
+  <span class="hljs-attr">open</span>
+  <span class="hljs-attr">options</span>=<span class="hljs-string">{[</span>"<span class="hljs-attr">First</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Second</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Third</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Fourth</span> <span class="hljs-attr">Value</span>"]}
+  <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Select one"</span>
+  <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span>
+ /&gt;</span></pre></div>
+            <div class="component-demo__code">
+                <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown dropdown--open"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__input"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Select one"</span>
+        <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span> <span class="hljs-attr">readonly</span>=<span class="hljs-string">""</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__list"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"First Value"</span>&gt;</span>First Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Second Value"</span>&gt;</span>Second Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option dropdown__option--selected"</span>
+            <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span>&gt;</span>Third Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Fourth Value"</span>&gt;</span>Fourth Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
+        </div>
+    </div>
+    <p>With a float label:</p>
+    <div class="component-demo">
+        <div class="component-demo__preview">
+            <div class="dropdown float-label">
+                <input type="text" class="dropdown__input float-label__input"
+                    id="dropdownCustom" name="dropdownCustom" placeholder="Select one"
+                    readonly="" />
+                <label class="float-label__label" for="dropdownCustom">Select one</label>
+            </div>
+        </div>
+        <div class="component-demo__markup">
+            <div class="component-demo__code">
+                <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelDropdownCustom</span>
+  <span class="hljs-attr">label</span>=<span class="hljs-string">"Select one"</span>
+  <span class="hljs-attr">options</span>=<span class="hljs-string">{[</span>"<span class="hljs-attr">First</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Second</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Third</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Fourth</span> <span class="hljs-attr">Value</span>"]}
+ /&gt;</span></pre></div>
+            <div class="component-demo__code">
+                <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown float-label"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__input float-label__input"</span>
+        <span class="hljs-attr">id</span>=<span class="hljs-string">"dropdownCustom"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"dropdownCustom"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Select one"</span>
+        <span class="hljs-attr">readonly</span>=<span class="hljs-string">""</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"dropdownCustom"</span>&gt;</span>Select one<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
+        </div>
+    </div>
+    <div class="component-demo">
+        <div class="component-demo__preview">
+            <div class="dropdown float-label">
+                <input type="text" class="dropdown__input float-label__input"
+                    id="dropdownCustom" name="dropdownCustom" placeholder="Select one"
+                    value="Third Value" readonly="" />
+                <label class="float-label__label" for="dropdownCustom">Select one</label>
+            </div>
+        </div>
+        <div class="component-demo__markup">
+            <div class="component-demo__code">
+                <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelDropdownCustom</span>
+  <span class="hljs-attr">label</span>=<span class="hljs-string">"Select one"</span>
+  <span class="hljs-attr">options</span>=<span class="hljs-string">{[</span>"<span class="hljs-attr">First</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Second</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Third</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Fourth</span> <span class="hljs-attr">Value</span>"]}
+  <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span>
+ /&gt;</span></pre></div>
+            <div class="component-demo__code">
+                <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown float-label"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__input float-label__input"</span>
+        <span class="hljs-attr">id</span>=<span class="hljs-string">"dropdownCustom"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"dropdownCustom"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Select one"</span>
+        <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span> <span class="hljs-attr">readonly</span>=<span class="hljs-string">""</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"dropdownCustom"</span>&gt;</span>Select one<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
+        </div>
+    </div>
+    <div class="component-demo">
+        <div class="component-demo__preview">
+            <div class="dropdown float-label dropdown--open">
+                <input type="text" class="dropdown__input float-label__input"
+                    id="dropdownCustom" name="dropdownCustom" placeholder="Select one"
+                    value="Third Value" readonly="" />
+                <label class="float-label__label" for="dropdownCustom">Select one</label>
+                <ul class="dropdown__list">
+                    <li class="dropdown__option" value="First Value">First Value</li>
+                    <li class="dropdown__option"
+                        value="Second Value">Second Value</li>
+                    <li class="dropdown__option dropdown__option--selected"
+                        value="Third Value">Third Value</li>
+                    <li class="dropdown__option"
+                        value="Fourth Value">Fourth Value</li>
+                </ul>
+            </div>
+        </div>
+        <div class="component-demo__markup">
+            <div class="component-demo__code">
+                <span class="component-demo__preview-label">React</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">FloatLabelDropdownCustom</span>
+  <span class="hljs-attr">label</span>=<span class="hljs-string">"Select one"</span>
+  <span class="hljs-attr">open</span>
+  <span class="hljs-attr">options</span>=<span class="hljs-string">{[</span>"<span class="hljs-attr">First</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Second</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Third</span> <span class="hljs-attr">Value</span>","<span class="hljs-attr">Fourth</span> <span class="hljs-attr">Value</span>"]}
+  <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span>
+ /&gt;</span></pre></div>
+            <div class="component-demo__code">
+                <span class="component-demo__preview-label">HTML</span><pre><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown float-label dropdown--open"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__input float-label__input"</span>
+        <span class="hljs-attr">id</span>=<span class="hljs-string">"dropdownCustom"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"dropdownCustom"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Select one"</span>
+        <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span> <span class="hljs-attr">readonly</span>=<span class="hljs-string">""</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"float-label__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"dropdownCustom"</span>&gt;</span>Select one<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__list"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"First Value"</span>&gt;</span>First Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Second Value"</span>&gt;</span>Second Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option dropdown__option--selected"</span>
+            <span class="hljs-attr">value</span>=<span class="hljs-string">"Third Value"</span>&gt;</span>Third Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"dropdown__option"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Fourth Value"</span>&gt;</span>Fourth Value<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></pre></div>
+        </div>
+    </div>
+</div>
 </div>
     </div>
 </body>

@@ -1,8 +1,22 @@
-This project provides static HTML and CSS to build end-user pages. It currently lives in this temporary location while we decide where it should be permanently.
+This project provides static HTML and CSS to build end-user pages.
+
+#### Install
+
+You can install the module from Ping's Artifactory.
+
+```
+npm i @pingux/end-user
+```
+
+The module consists of a `package.json` file and `end-user.css` + assets.
+
+#### Demo Site
+
+You can see the styles in action with code examples at http://uilibrary.ping-eng.com/end-user/
 
 #### Scripts
 
-View the catalog of components with their code by running the server.
+You can also pull down the repo and view the catalog of components locally by running the server.
 ```
 yarn
 yarn server
