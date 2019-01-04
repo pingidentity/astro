@@ -93,8 +93,12 @@
         text-transform: uppercase;
         margin-right: $spacing-sm;
     }
+    &__filter-label {
+        display: inline-block;
+        margin-left: $spacing-sm;
+    }
     &__column-helptext {
-        margin: 0 $spacing-md 0 $spacing-xs;
+        margin: 0 0 0 $spacing-xs;
     }
 
     &--resizable {

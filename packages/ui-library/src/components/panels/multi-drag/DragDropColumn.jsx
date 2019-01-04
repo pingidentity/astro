@@ -259,7 +259,9 @@ module.exports = class extends React.Component {
                     <span className="row-selector__column-title">
                         {name}
                         {helpHint}
-                        {filterLabel && `${filterLabel}:`}
+                        {filterLabel && (
+                            <span className="row-selector__filter-label">{filterLabel}:</span>
+                        )}
                     </span>
                     {categoryList &&
                         <LinkDropDownList
