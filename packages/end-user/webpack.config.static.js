@@ -4,7 +4,7 @@ const config = require('./webpack.config.common.js');
 const loaders = config.module.loaders;
 const plugins = config.plugins;
 
-module.exports = Object.assign(config, {
+module.exports = Object.assign({}, config, {
     output: {
         path: `${__dirname}/static`,
         filename: '[name].bundle.js',

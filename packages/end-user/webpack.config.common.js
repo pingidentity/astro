@@ -13,6 +13,7 @@ for (let i = 0; i < routes.length; i += 1) {
 
 module.exports = {
     entry: entries,
+    devtool: 'source-map',
     module: {
         loaders: [
             {

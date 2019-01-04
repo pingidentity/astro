@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { v4 as uuid } from 'uuid';
 
 const renderValue = (value) => {
     if (typeof value === 'object') {
@@ -16,7 +17,9 @@ const renderRow = (dataKey, value) => (
 );
 
 const renderObject = object => (Array.isArray(object)
-    ? (object.map(item => <div className="serialized-data__list-item">{renderObject(item)}</div>))
+    ? (object.map(item => (
+        <div className="serialized-data__list-item" key={uuid()}>{renderObject(item)}</div>
+    )))
     : Object.keys(object).map(dataKey => renderRow(dataKey, renderValue(object[dataKey])))
 );
 
@@ -25,7 +28,7 @@ const SerializedData = ({ data }) => (
 );
 
 SerializedData.propTypes = {
-    data: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+    data: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
 
 SerializedData.defaultProps = {

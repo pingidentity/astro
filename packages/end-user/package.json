@@ -54,6 +54,7 @@
     "stylelint-order": "^0.8.1",
     "stylelint-scss": "^2.4.0",
     "stylelint-selector-bem-pattern": "^2.0.0",
+    "uuid": "^3.3.2",
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.11.1"
   },
