@@ -98,7 +98,7 @@ class TabSet extends Component {
 }
 
 class TabContent extends Component {
-    static PropTypes = {
+    static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
         label: PropTypes.string,
