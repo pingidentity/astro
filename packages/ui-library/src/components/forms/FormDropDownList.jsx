@@ -216,7 +216,7 @@ class FormDropDownListDefaultContent extends React.Component {
     };
 
     render() {
-        return this.props.label;
+        return <span>{this.props.label}</span>;
     }
 }
 
@@ -228,7 +228,11 @@ class OptionItem extends React.Component {
         iconName: PropTypes.string,
         onClick: PropTypes.func,
         option: PropTypes.object,
-        iconPlaceholder: PropTypes.bool
+        iconPlaceholder: PropTypes.bool,
+    };
+
+    static defaultProps = {
+        content: null
     };
 
     _handleClick = (event) => {
@@ -238,6 +242,10 @@ class OptionItem extends React.Component {
     };
 
     _renderContent = () => {
+        const content = this.props.iconName
+        ? <div><Icon iconName={this.props.iconName} className="select-option__icon"/>{this.props.content}</div>
+        : <div>{this.props.content}</div>;
+
         if (this.props.option.helpHintText) {
             return (
                 <HelpHint
@@ -245,11 +253,11 @@ class OptionItem extends React.Component {
                     delayHide={0}
                     placement="right"
                     hintText={this.props.option.helpHintText}>
-                        {this.props.content}
+                        {content}
                 </HelpHint>
             );
         } else {
-            return <span>{this.props.content}</span>;
+            return content;
         }
     };
 
@@ -263,9 +271,6 @@ class OptionItem extends React.Component {
                 data-id={this.props["data-id"]}
                 className={classnames(this.props.className, className)}
                 onClick={this._handleClick}>
-                { this.props.iconName && (
-                    <Icon iconName={this.props.iconName} className="select-option__icon"/>
-                )}
                 {this._renderContent()}
             </li>
         );
