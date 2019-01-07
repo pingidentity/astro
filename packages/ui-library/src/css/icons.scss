@@ -91,3 +91,47 @@ a.icon-clear {
         font-size: 10px;
     }
 }
+
+.status-indicator {
+    $size: 14px;
+
+    &--icon {
+        display: inline-block;
+        box-sizing: border-box;
+        height: $size;
+        width: $size;
+        border-radius: ceil($size);
+
+        font-family: '#{$icomoon-font-family}' !important;
+        font-size: 6px;
+        line-height: $size;
+        text-align: center;
+        vertical-align: top;
+        color: $color-white;
+
+        &__success {
+            @extend .icon-success;
+            background-color: $color-success;
+        }
+        &__notice {
+            @extend .icon-info;
+            overflow: hidden;
+            border: 1px solid $color-active-blue;
+            font-size: $size;
+            background-color: $color-active-blue;
+
+            &:before {
+                display: block;
+                margin: -1px 0 0 -1px;
+            }
+        }
+        &__warning {
+            border: 3px solid $color-warning-yellow;
+        }
+        &__error {
+            @extend .icon-clear;
+            background-color: $color-critical-red;
+            font-weight: bold;
+        }
+    }
+}

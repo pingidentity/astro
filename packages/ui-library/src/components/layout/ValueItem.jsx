@@ -11,12 +11,14 @@ import classnames from "classnames";
 * @param {string} [data-id=value-item]
 *     The data-id of the component
 * @param {string} [icon]
-*     The icon or control to show left of the text value
+*     The icon or control to show left of the text value*
+* @param {boolean} [inline=false]
+*     When true, the value item displays inline
 */
-const ValueItem = ({ children, className, "data-id": dataId, icon, }) => (
-    <div className={classnames("value-item", className)} data-id={dataId}>
+const ValueItem = ({ children, className, "data-id": dataId, icon, inline, }) => (
+    <div className={classnames("value-item", className, inline ? "value-item__inline" : null )} data-id={dataId}>
         {icon && <span className="value-item__icon">{icon}</span>}
-        <span className="value-item__value">{children}</span>
+        {children && <span className="value-item__value">{children}</span>}
     </div>
 );
 
@@ -24,10 +26,12 @@ ValueItem.propTypes = {
     className: PropTypes.string,
     "data-id": PropTypes.string,
     icon: PropTypes.node,
+    inline: PropTypes.bool,
 };
 
 ValueItem.defaultProps = {
     "data-id": "value-item",
+    inline: false,
 };
 
 export default ValueItem;

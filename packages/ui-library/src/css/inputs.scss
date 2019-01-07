@@ -2561,31 +2561,6 @@ input[type=file] {
     .message {
         padding: 3px 0;
     }
-    .icon-fail,
-    .icon-success {
-        @include border-radius(6px);
-        margin-right: 5px;
-        padding: 3px;
-        display: inline-block;
-        font-size: 6px;
-        height: 7px;
-        width: 7px;
-        line-height: 1em;
-        text-align: center;
-        vertical-align: text-top;
-    }
-    .icon-fail {
-        color: $color-white;
-        background-color: $color-critical-red;
-        font-weight: 600;
-        &:before {
-            content: 'X';
-        }
-    }
-    .icon-success {
-        color: $color-white;
-        background-color: $color-success;
-    }
 }
 
 

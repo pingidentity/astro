@@ -1599,6 +1599,14 @@ a {
     color: $color-midnight;
 
     &__icon {
-        margin-right: $spacing-sm;
+        line-height: 1em;
+    }
+
+    &__value {
+        margin-left: $spacing-sm;
+    }
+
+    &__inline {
+        display: inline-block;
     }
 }

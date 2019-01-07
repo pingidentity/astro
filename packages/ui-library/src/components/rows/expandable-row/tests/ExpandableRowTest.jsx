@@ -537,15 +537,17 @@ describe("ExpandableRow", function() {
     });
 
     it("stateless: renders the status as good", function() {
-        var component = getComponent({ status: ExpandableRow.Statuses.GOOD });
-        var status = TestUtils.findRenderedDOMNodeWithDataId(component, "status");
-        expect(status.getAttribute("class")).toContain(ExpandableRow.Statuses.GOOD);
+        const component = getComponent({ status: ExpandableRow.Statuses.GOOD });
+        const status = TestUtils.findRenderedDOMNodeWithDataId(component, "status");
+        const icon = TestUtils.findRenderedDOMNodeWithClass(status, "status-indicator--icon");
+        expect(icon.className).toContain("status-indicator--icon__success");
     });
 
     it("stateless: renders the status as error", function() {
-        var component = getComponent({ status: ExpandableRow.Statuses.ERROR });
-        var status = TestUtils.findRenderedDOMNodeWithDataId(component, "status");
-        expect(status.getAttribute("class")).toContain(ExpandableRow.Statuses.ERROR);
+        const component = getComponent({ status: ExpandableRow.Statuses.ERROR });
+        const status = TestUtils.findRenderedDOMNodeWithDataId(component, "status");
+        const icon = TestUtils.findRenderedDOMNodeWithClass(status, "status-indicator--icon");
+        expect(icon.className).toContain("status-indicator--icon__error");
     });
 
     it("stateless: should trigger onEditButtonClick callback on edit-btn click", function() {

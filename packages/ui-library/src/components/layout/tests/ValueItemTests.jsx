@@ -4,25 +4,34 @@ describe("ValueItem", function () {
     const React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
-        ValueItem = require("../ValueItem");
+        ValueItem = require("../ValueItem"),
+        dataId = "my-value-item",
+        value = "Hello there";
 
-    function getComponent () {
+    function getComponent (opts) {
         return ReactTestUtils.renderIntoDocument(
             <div>
-                <ValueItem icon={<span className="icon-chat"/>}>Hello there</ValueItem>
+                <ValueItem data-id={dataId} icon={<span className="icon-chat" />} {...opts}>{value}</ValueItem>
             </div>
         );
     }
 
     it("renders with data-id and classes", function () {
-        const component = getComponent({});
-        const item = TestUtils.findRenderedDOMNodeWithDataId(component, "value-item");
+        const component = getComponent();
+        const item = TestUtils.findRenderedDOMNodeWithDataId(component, dataId);
+
         expect(item).toBeTruthy();
 
-        const icon = TestUtils.findRenderedDOMNodeWithClass(item, "value-item__icon");
-        const value = TestUtils.findRenderedDOMNodeWithClass(item, "value-item__value");
+        const iconDom = TestUtils.findRenderedDOMNodeWithClass(item, "value-item__icon");
+        const valueDom = TestUtils.findRenderedDOMNodeWithClass(item, "value-item__value");
 
-        expect(icon).toBeTruthy();
-        expect(value).toBeTruthy();
+        expect(iconDom.childNodes[0]).toBeTruthy();
+        expect(valueDom.textContent).toBe(value);
+    });
+
+    it("renders as inline when specified", function () {
+        const component = getComponent({ inline: true });
+        const item = TestUtils.findRenderedDOMNodeWithDataId(component, dataId);
+        expect(item.className).toContain("value-item__inline");
     });
 });

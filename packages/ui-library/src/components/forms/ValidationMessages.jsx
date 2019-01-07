@@ -3,6 +3,8 @@ var PropTypes = require("prop-types");
 var React = require("react"),
     classnames = require("classnames");
 
+import StatusIndicator from "../general/StatusIndicator";
+
 /**
 * @class ValidationMessages
 *
@@ -36,20 +38,24 @@ var Status = {
     FAIL: "icon-fail"
 };
 
+const StatusTypes = {
+    [Status.PASS]: StatusIndicator.Types.SUCCESS,
+    [Status.FAIL]: StatusIndicator.Types.ERROR,
+};
+
 var ValidationMessages = function (props) {
 
     var _getMessages = function () {
-        var messages = [];
-
-        messages = props.messages.map(function (item, i) {
+        return props.messages.map(function (item, i) {
             return (
-                <div key={i} index={i} className="message">
-                    <span className={item.status} />{item.text}
-                </div>
+                <StatusIndicator
+                    className="message"
+                    key={i}
+                    type={StatusTypes[item.status]}>
+                    {item.text}
+                </StatusIndicator>
             );
         }.bind(this));
-
-        return messages;
     };
 
     var className = classnames("validation-messages", props.className);

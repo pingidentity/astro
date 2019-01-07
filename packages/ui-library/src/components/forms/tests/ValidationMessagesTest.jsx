@@ -29,17 +29,16 @@ describe("ValidationMessages", function () {
     });
 
     it("renders messages with icons", function () {
-        var component = ReactTestUtils.renderIntoDocument(
-            <div><ValidationMessages className="show"
-                                messages={ messages } /></div>
-                        );
+        const component = ReactTestUtils.renderIntoDocument(
+            <div><ValidationMessages className="show"messages={ messages } /></div>
+        );
 
         // Expect one validation tooltip to be rendered with one fail message.
-        var fail = TestUtils.scryRenderedDOMNodesWithClass(component, "icon-fail");
+        const fail = TestUtils.scryRenderedDOMNodesWithClass(component, "status-indicator--icon__error");
         expect(fail.length).toEqual(1);
 
         // Expect a validation tooltip to be rendered with two pass messages.
-        var success = TestUtils.scryRenderedDOMNodesWithClass(component, "icon-success");
+        const success = TestUtils.scryRenderedDOMNodesWithClass(component, "status-indicator--icon__success");
         expect(success.length).toEqual(2);
     });
 });

@@ -12,6 +12,7 @@ import DragDrop from "../DragDropRow";
 import dragScroll from "../../../util/dragScroll";
 import InlineMessage from "../../general/InlineMessage";
 import Button from "../../buttons/Button";
+import StatusIndicator from "../../general/StatusIndicator";
 
 /**
 * @enum {string}
@@ -22,6 +23,12 @@ var Statuses = {
     GOOD: "good",
     WARNING: "warning",
     ERROR: "error"
+};
+
+const StatusTypes = {
+    [Statuses.GOOD]: StatusIndicator.Types.SUCCESS,
+    [Statuses.WARNING]: StatusIndicator.Types.WARNING,
+    [Statuses.ERROR]: StatusIndicator.Types.ERROR,
 };
 
 /**
@@ -545,7 +552,7 @@ class StatelessExpandableRow extends React.Component {
                     <div data-id="row-accessories" className="row-accessories">
                         {this.props.rowAccessories}
                         {this.props.status && (
-                            <div data-id="status" className={"status " + this.props.status}></div>
+                            <StatusIndicator data-id="status" type={StatusTypes[this.props.status]} inline />
                         )}
                     </div>
                 )}

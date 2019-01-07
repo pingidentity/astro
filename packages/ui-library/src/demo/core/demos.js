@@ -749,6 +749,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_general_PageSpinnerDemo.jsx.html"
                     },
                     {
+                        label: "Status Indicator",
+                        demo: require("../components/general/StatusIndicatorDemo"),
+                        pathToDoc: "components/general/StatusIndicator.jsx",
+                        pathToSource: "components_general_StatusIndicator.jsx.html",
+                        pathToDemoSource: "demo_components_general_StatusIndicatorDemo.jsx.html"
+                    },
+                    {
                         label: "Validation Messages",
                         demo: require("../components/forms/ValidationMessagesDemo"),
                         pathToDoc: "components/forms/ValidationMessages.jsx",
