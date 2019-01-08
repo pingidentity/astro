@@ -58,6 +58,7 @@ class SearchBar extends React.Component {
         strings: {},
         onToggle: _.noop,
         disableFilters: false,
+        rightControl: null,
     };
 
     _handleToggle = () => {
@@ -121,17 +122,13 @@ class SearchBar extends React.Component {
 
         return (
             <div key="searchbar" className={classes} data-id={this.props["data-id"]}>
-                {
-                    rightControl
-                    ? <div className="searchbar__top-line">
-                        <div className="searchbar__left-control">
-                            {renderSearchBar}
-                            {!filtersOpen && renderDocLink }
-                        </div>
-                        <div className="searchbar__right-control">{rightControl}</div>
+                <div className="searchbar__top-line">
+                    <div className="searchbar__left-control">
+                        {renderSearchBar}
+                        {!filtersOpen && renderDocLink}
                     </div>
-                    : [ renderSearchBar, renderDocLink ]
-                }
+                    <div className="searchbar__right-control">{rightControl}</div>
+                </div>
                 {filtersOpen &&
                     <div data-id={`${dataId}-filters-container`}>
                         <div
