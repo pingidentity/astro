@@ -605,7 +605,7 @@ label {
 .content-measurer {
     position: absolute;
     display: inline-block;
-    z-index: -10;
+    z-index: $zindex__hidden;
     visibility: hidden;
 }
 
@@ -966,7 +966,7 @@ input[type=file] {
     &.open {
         .select-list {
             visibility: visible;
-            z-index: 21;
+            z-index: $zindex__menu;
             top: -1px;
 
             @include animation(fade-in 0.2s);
@@ -1158,7 +1158,7 @@ input[type=file] {
         margin: 0;
         padding: 0;
         font-size: 1px;
-        z-index: 1;
+        z-index: $zindex__elevated;
         width: 100%;
         height: 100%;
         cursor: pointer;
@@ -1350,7 +1350,7 @@ input[type=file] {
     input[type=file] {
         opacity: 0;
         position: absolute;
-        z-index: -1;
+        z-index: $zindex__hidden;
     }
 }
 
@@ -1635,7 +1635,7 @@ input[type=file] {
         left: 0;
         top: calc(100% - 1px);
         -webkit-touch-callout: none;
-        z-index: 2;
+        z-index: $zindex__menu;
     }
 }
 
@@ -1659,7 +1659,7 @@ input[type=file] {
         content: '\43';
         left: 10px;
         bottom: 14px;
-        z-index: 1;
+        z-index: $zindex__elevated;
 
         @include transition($default-input-transition);
     }
@@ -1956,7 +1956,7 @@ input[type=file] {
         font-size: 16px;
         text-align: center;
         width: 5px;
-        z-index: 1;
+        z-index: $zindex__elevated;
 
         @include border-radius(1px);
         @include transition($default-input-transition);
@@ -2358,7 +2358,7 @@ input[type=file] {
         left: 0;
         right: $message-input-offset;
         display: none;
-        z-index: 20;
+        z-index: $zindex__elevated;
         padding: 15px;
         box-sizing: border-box;
         min-width: 169px;
@@ -3121,7 +3121,7 @@ label {
         display: block;
         position: absolute;
         left: 0;
-        z-index: 10;
+        z-index: $zindex__menu;
         border: 1px solid $color-input-border;
         background: $color-white;
 

@@ -17,7 +17,7 @@
     }
     .entries {
         position: relative;
-        z-index: 10;
+        z-index: $zindex__elevated;
         display: block;
         min-height: 36px;
         outline: none;

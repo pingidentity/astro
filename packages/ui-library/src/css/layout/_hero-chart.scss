@@ -12,7 +12,7 @@
     .recharts-wrapper {
         margin: 0 0 0 50%;
         transform: translateX(-50%);
-        z-index: 10;
+        z-index: $zindex__elevated;
     }
     .recharts-tooltip-wrapper {
         border-radius: 5px !important;

@@ -15,7 +15,7 @@
     padding: 1px;
 
     label {
-        z-index: 1;
+        z-index: $zindex__elevated;
         border: none;
         height: 100%;
         line-height: $button-height + 2;

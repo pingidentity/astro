@@ -28,7 +28,7 @@ $wizard-close-button-color: $color-strong-neutral-40;
     left: 0;
     background-color: $wizard-content-bg-color;
     color: $color-strong-neutral-10;
-    z-index: 1;
+    z-index: $zindex__modal;
 
     // I know we are trying to only do one level of specificity for BEM and such, but I need to override the button bar defaults
     .wizard2__button-bar {
@@ -38,7 +38,7 @@ $wizard-close-button-color: $color-strong-neutral-40;
         bottom: 0;
         background-color: $wizard-content-bg-color;
         padding: $wizard-v-spacing 0;
-        z-index: 10;
+        z-index: $zindex__fixed-controls;
     }
 
     // psuedo element to cover the header items when the wizard is open
@@ -89,7 +89,7 @@ $wizard-close-button-color: $color-strong-neutral-40;
     }
 
     &-close-btn {
-        z-index: 1;
+        z-index: $zindex__elevated;
         float: right;
         margin: 20px 15px 0 0;
         padding: 0;
@@ -387,7 +387,7 @@ $wizard-close-button-color: $color-strong-neutral-40;
         left: calc(50% - 140px); // 140px = half of wizard right-nav width (center on wizard content)
         top: 50%;
         margin: 0;
-        z-index: 11;
+        z-index: zindex__page-overlay;
         transform: translateX(-50%) translateY(-50%);
     }
 }

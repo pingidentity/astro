@@ -49,7 +49,7 @@ $layout-nav-width-offset: 15px;
 
 // CORE PAGE LAYOUT STYLES -------------------------------------------------------------------------
 #header {
-    z-index: 2;
+    z-index: $zindex__nav--primary;
     position: absolute;
     top: 0;
     left: 0;
@@ -82,7 +82,7 @@ $color-grey-minor-1: $color-neutral-30;
 }
 
 #nav {
-    z-index: 0;
+    z-index: $zindex__nav--primary;
     position: absolute;
     top: $layout-header-height;
     bottom: 0;
@@ -154,7 +154,7 @@ $color-grey-minor-1: $color-neutral-30;
         bottom: -1px;
         width: $layout-nav-width;
         box-sizing: border-box;
-        z-index: -1;
+        z-index: $zindex__hidden;
         background-color: $color-white;
         border-style: solid;
         border-color: $color-rabbit-fur;
@@ -176,7 +176,7 @@ $color-grey-minor-1: $color-neutral-30;
         @include transition(all 0.3s);
         position: absolute;
         left: $layout-nav-width;
-        z-index: -1;
+        z-index: $zindex__hidden;
         opacity: 0;
 
         .arrow {
@@ -245,7 +245,6 @@ $color-grey-minor-1: $color-neutral-30;
         }
     }
     .copyright {
-
         width: $layout-nav-width;
         box-sizing: border-box;
         padding: 20px 10px 25px 20px;
@@ -278,34 +277,6 @@ $color-grey-minor-1: $color-neutral-30;
     &.scrollable {
         .copyright {
             border-top: 1px solid darken($color-timberwolf, 7%);
-
-            &:before,
-            &:after {
-                content: '';
-                position: absolute;
-
-                left: 0;
-                right: 0;
-
-            }
-            &:before {
-                $gradient-height: 20px;
-
-                z-index: 1;
-                top: -$gradient-height - 1;
-                height: $gradient-height;
-
-                @include gradient-vertical(transparent, rgba($color-timberwolf, 0.9), 0%, 85%);
-            }
-            &:after {
-                $gradient-height: 5px;
-
-                z-index: 2;
-                top: -$gradient-height - 1;
-                height: $gradient-height;
-
-                @include gradient-vertical(transparent, rgba($color-black, 0.05));
-            }
         }
     }
     &.collapsible {
@@ -343,7 +314,7 @@ $color-grey-minor-1: $color-neutral-30;
             display: none;
             padding: 5px 0 10px;
             background-color: rgba($color-black, 0.05);
-            z-index: 1;
+            z-index: $zindex__menu;
 
             @include animation(fade-in 0.3s);
 
@@ -638,19 +609,6 @@ $color-grey-minor-1: $color-neutral-30;
     left: $layout-nav-width;
     padding: 25px 40px 40px;
 
-    .detail-primary-buttons {
-        position: absolute;
-        z-index: 2;
-        bottom: 0;
-        left: 241px;
-        right: 30px;
-        top: auto;
-        padding: 15px 0;
-        text-align: right;
-        background: rgba($color-white, 0.9);
-        border-top: 1px solid $color-input-border;
-    }
-
     // workaround for bottom padding - bottom padding is ignored in scrolling elements in FF and IE
     &:after {
         @include flexbox-shrink(0);
@@ -663,7 +621,7 @@ $color-grey-minor-1: $color-neutral-30;
 
 .page-messages {
     position: fixed;
-    z-index: 1;
+    z-index: $zindex__message;
     top: $layout-header-height;
     left: $layout-nav-width;
     right: 0;
@@ -688,7 +646,7 @@ $color-grey-minor-1: $color-neutral-30;
         top: auto;
         left: auto;
         right: auto;
-        z-index: -1;
+        z-index: zindex__base;
     }
     .close {
         $size: 16px;
@@ -1248,14 +1206,14 @@ $color-grey-minor-1: $color-neutral-30;
         }
     }
     .details-tooltip {
-        z-index: 1;
+        z-index: $zindex__elevated;
     }
 }
 
 .page-controls-primary {
     box-sizing: border-box;
     position: fixed;
-    z-index: 999;
+    z-index: $zindex__fixed-controls;
     left: $layout-nav-width + 40px;
     right: 40px;
     bottom: 0;
@@ -1279,7 +1237,7 @@ $color-grey-minor-1: $color-neutral-30;
         right: auto;
         bottom: auto;
         margin-top: $spacing-md;
-        z-index: initial;
+        z-index: $zindex__base;
     }
 }
 

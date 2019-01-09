@@ -134,7 +134,7 @@ $max-popover-width: 360px;
 .popover__container {
     margin-right: -$max-popover-width;
     max-width: $max-popover-width;
-    z-index: 1001;
+    z-index: $zindex__popover;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);

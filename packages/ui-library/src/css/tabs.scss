@@ -39,7 +39,7 @@
                     margin: 0 0 0 -7px;
                     border-width: 5px 7px;
                     border-style: solid;
-                    z-index: 1;
+                    z-index: $zindex__elevated;
                     border-color: $color-active transparent transparent transparent;
                     bottom: -13px;
                 }

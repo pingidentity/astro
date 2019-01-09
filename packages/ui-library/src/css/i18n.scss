@@ -66,7 +66,7 @@ $flagsImageExtension: 'png' !default;
             position: absolute;
             top: 30%;
             left: 20%;
-            z-index: 1;
+            z-index: $zindex__elevated;
         }
     }
 
@@ -78,7 +78,7 @@ $flagsImageExtension: 'png' !default;
         .input-container {
             .wrapper {
                 .selected-option {
-                    z-index: 1;
+                    z-index: $zindex__elevated;
                     position: relative;
                     width: 42px;
                     height: 100%;
@@ -171,7 +171,7 @@ $flagsImageExtension: 'png' !default;
         input[type=tel] {
             position: relative;
             // input is bottom level, below selected flag and dropdown
-            z-index: 0;
+            z-index: $zindex__base;
 
             // any vertical margin the user has on their inputs would no longer work as expected
             // because we wrap everything in a container div. i justify the use of !important
@@ -284,27 +284,14 @@ $flagsImageExtension: 'png' !default;
         }
     }
 
-    // on mobiles we use a select for the country dropdown
+    // on mobile we use a select for the country dropdown
     select {
         position: absolute;
         top: 0;
         left: 0;
-        z-index: 1;
+        z-index: $zindex__elevated;
         width: $selectedFlagWidth;
         height: 100%;
-    }
-
-    // if dropdownContainer option is set, increase z-index to prevent display issues
-    &.iti-container {
-        position: absolute;
-        top: -1000px;
-        left: -1000px;
-        z-index: 1060; // higher than default Bootstrap modal z-index of 1050
-        padding: $borderSize; // to keep styling consistent with .flag-container
-
-        &:hover {
-            cursor: pointer;
-        }
     }
 
     // hacks for bad dom: TODO refactor

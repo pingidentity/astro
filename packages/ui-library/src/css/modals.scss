@@ -10,7 +10,7 @@
     right: 10px;
     top: $default-top;
     bottom: 0;
-    z-index: 1001;
+    z-index: $zindex__modal;
 
     &.show {
         .modal-content {
@@ -23,7 +23,6 @@
             bottom: 0;
             left: 0;
             right: 0;
-            z-index: 1;
 
             @include opacity(0.4);
         }
@@ -43,7 +42,6 @@
     .modal-content {
         display: none;
         position: relative;
-        z-index: 1;
         outline: none; //prevent outline when focused
         top: 0;
         left: 50%;
@@ -208,7 +206,7 @@
                 text-align: center;
                 font-size: 22px;
                 line-height: 1;
-                z-index: 1;
+                z-index: $zindex__elevated;
                 color: $color-warning-text;
             }
             .close-modal {

@@ -39,7 +39,7 @@
         padding: 0 $spacing-xs;
         text-align: center;
         position: relative;
-        z-index: 0;
+        z-index: $zindex__base;
 
         &:before {
             content: '';
@@ -50,7 +50,7 @@
             position: absolute;
             border: 1px solid $color-neutral-60;
             background: $color-white;
-            z-index: -1;
+            z-index: $zindex__base - 1;
 
             @include border-radius(7px);
         }
@@ -128,7 +128,7 @@
         border: 1px dashed $color-rabbit-fur;
         left: 0;
         right: 0;
-        z-index: 10;
+        z-index: $zindex__elevated;
         background-color: $color-white;
         min-height: 50px;
 

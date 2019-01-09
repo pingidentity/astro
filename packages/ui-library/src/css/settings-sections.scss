@@ -522,7 +522,7 @@
                     right: 0;
                     width: $modal-width;
                     height: $modal-height;
-                    z-index: 10;
+                    z-index: $zindex__elevated;
                     text-decoration: none;
                 }
 

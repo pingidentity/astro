@@ -119,13 +119,21 @@ class MessagesDemo extends React.Component {
                     pages with a left-nav, do not set the containerType prop.
                 </p>
 
-                <Messages messages={this.props.messages} onRemoveMessage={this.actions.removeAt} />
-                <br />
-                <Button onClick={this._addSuccessMessage}>Add success message (MessageTypes.SUCCESS)</Button>
-                <Button onClick={this._addErrorMessage}>Add error message (MessageTypes.ERROR)</Button>
-                <br />
-                <Button onClick={this._addWarningMessage}>Add warning message (MessageTypes.NOTICE)</Button>
-                <Button onClick={this._addInfoMessage}>Add info message (MessageTypes.FEATURE)</Button>
+                <p>
+                    <Messages messages={this.props.messages} onRemoveMessage={this.actions.removeAt} />
+                </p>
+                <p>
+                    <Button onClick={this._addSuccessMessage}>Add success message - MessageTypes.SUCCESS</Button>
+                </p>
+                <p>
+                    <Button onClick={this._addErrorMessage}>Add error message - MessageTypes.ERROR</Button>
+                </p>
+                <p>
+                    <Button onClick={this._addWarningMessage}>Add warning message - MessageTypes.NOTICE</Button>
+                </p>
+                <p>
+                    <Button onClick={this._addInfoMessage}>Add info message - MessageTypes.FEATURE</Button>
+                </p>
                 <hr className="hr" />
                 <Button onClick={this._addHtmlMessage}>Add HTML message</Button>
                 <Button onClick={this._addProgressMessage}>Add progress message</Button>
