@@ -18,11 +18,12 @@ jest.dontMock("../../../tooltips/HelpHint");
 jest.dontMock("../../../../util/FilterUtils.js");
 jest.dontMock("../../../../util/KeyboardUtils.js");
 
+const endsWith = (bigString, littleString) => (bigString.slice(-1 * littleString.length) === littleString);
+
 describe("SelectionList", function () {
     var React = require("react");
     var ReactTestUtils = require("react-dom/test-utils");
     var _ = require("underscore");
-    var _s = require("underscore.string");
     var Utils = require("../../../../util/Utils");
     var TestUtils = require("../../../../testutil/TestUtils");
     var SelectionList = require("../v2");
@@ -364,7 +365,7 @@ describe("SelectionList", function () {
     it("should do a custom search and return an expected result", function () {
         var customSearchFunc = function (queryString) {
             var matchedItems = _.filter(listItems, function (item) {
-                return _s.endsWith(item.name.toLowerCase(), queryString.toLowerCase());
+                return endsWith(item.name.toLowerCase(), queryString.toLowerCase());
             });
 
             return matchedItems;

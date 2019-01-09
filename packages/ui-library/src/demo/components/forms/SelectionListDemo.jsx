@@ -1,11 +1,12 @@
 var React = require("react"),
     _ = require("underscore"),
-    _s = require("underscore.string"),
     SelectionList = require("../../../components/forms/selection-list/index"),
     SelectionFilterLabel = require("../../../components/forms/SelectionFilterLabel"),
     DetailsTooltip = require("../../../components/tooltips/DetailsTooltip");
 
 import Button from "../../../components/buttons/Button";
+
+const endsWith = (bigString, littleString) => (bigString.slice(-1 * littleString.length) === littleString);
 
 var testIcon = <span className="icon-cog inline-icon"></span>;
 var testImage = <img src="./favicon.png" />;
@@ -95,7 +96,7 @@ class SelectionListDemo extends React.Component {
 
     _myCustomSearch = (queryString) => {
         var matchedItems = _.filter(MULTI_SELECT_ITEMS, function (item) {
-            return _s.endsWith(item.name.toLowerCase(), queryString.toLowerCase());
+            return endsWith(item.name.toLowerCase(), queryString.toLowerCase());
         });
         return matchedItems;
     };
