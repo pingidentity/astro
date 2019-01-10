@@ -62,7 +62,7 @@
     .details-section-title {
         text-transform: uppercase;
         font-size: 15px;
-        font-family: $font-pn-semibold;
+        @include font-pn-semibold;
         color: $color-blue-grey;
         padding: 0 0 10px;
         margin: 0 0 30px;

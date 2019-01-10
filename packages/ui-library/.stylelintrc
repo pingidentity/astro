@@ -11,10 +11,7 @@
         "no-invalid-double-slash-comments": true,
         "no-unknown-animations": true,
 
-        "at-rule-empty-line-before": [ "always", {
-            "except": ["blockless-group", "first-nested"],
-            "ignoreAtRules": [ "else" ]
-        }],
+        "at-rule-empty-line-before": null,
         "at-rule-name-case": "lower",
         "at-rule-name-space-after": "always",
         "at-rule-no-unknown": [ true, {

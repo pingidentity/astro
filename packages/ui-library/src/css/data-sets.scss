@@ -54,7 +54,7 @@
                         color: $color-blue-grey;
                         border-bottom: 1px solid $color-stratus;
                         text-transform: uppercase;
-                        font-family: $font-pn-semibold;
+                        @include font-pn-semibold;
                         font-size: 15px;
                         line-height: 1em;
                         &:after {
@@ -128,7 +128,7 @@
     .data-title {
         color: $color-blue-grey;
         text-transform: uppercase;
-        font-family: $font-pn-semibold;
+        @include font-pn-semibold;
         padding: 25px 0 15px;
         font-size: 15px;
         line-height: 1em;

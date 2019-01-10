@@ -142,7 +142,7 @@ table {
             border-bottom: 1px dotted $color-rabbit-fur;
             text-align: left;
             box-sizing: border-box;
-            font-family: $font-pn-regular;
+            @include font-pn-regular;
             line-height: 1.1em;
             vertical-align: baseline;
 

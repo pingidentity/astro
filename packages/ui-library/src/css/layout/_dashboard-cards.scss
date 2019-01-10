@@ -143,7 +143,7 @@ $fullwidthBreakpoint: 950px;
         font-size: 55px;
         line-height: 1em;
         min-height: 1em;
-        font-family: $font-pn-semibold;
+        @include font-pn-semibold;
         margin: $spacing-md 0 0;
     }
 
@@ -186,7 +186,7 @@ $fullwidthBreakpoint: 950px;
         @include standoutText;
 
         display: inline-block;
-        font-family: $font-pn-light;
+        @include font-pn-light;
         font-size: 16px;
         margin-bottom: $spacing-md;
         padding: $spacing-xs $spacing-sm;
@@ -493,7 +493,7 @@ $fullwidthBreakpoint: 950px;
     &__value {
         font-size: 54px;
         line-height: 54px;
-        font-family: $font-pn-semibold;
+        @include font-pn-semibold;
         text-align: right;
     }
     &__subtitle {

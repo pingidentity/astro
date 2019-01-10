@@ -102,7 +102,7 @@ $sidenav-lineheight: 22px;
             top: -18px;
             left: 2px;
             font-size: 14px;
-            font-family: $font-pn-semibold;
+            @include font-pn-semibold;
         }
     }
     pre.language-markup {
@@ -158,5 +158,5 @@ $sidenav-lineheight: 22px;
     color: $color-walrus;
     border-left: 10px solid $color-warning-yellow;
     background: $color-elderly;
-    font-family: $font-pn-regular;
+    @include font-pn-regular;
 }

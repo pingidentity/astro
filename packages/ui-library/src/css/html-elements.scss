@@ -58,13 +58,13 @@ h3 {
 
 p {
     margin: 0 0 1em;
-    font-family: $font-pn-regular;
+    @include font-pn-regular;
     font-size: 14px;
 }
 
 strong {
     font-weight: bold;
-    font-family: $font-pn-bold;
+    @include font-pn-bold;
 }
 
 i {

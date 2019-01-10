@@ -57,7 +57,7 @@
         font-size: 18px;
         line-height: 1em;
         height: 33px;
-        font-family: $font-pn-light;
+        @include font-pn-light;
         color: $color-slate;
         text-transform: uppercase;
 
@@ -68,7 +68,7 @@
         .progress {
             text-transform: none;
             margin: 0 15px 0 0;
-            font-family: $font-pn-semibold;
+            @include font-pn-semibold;
             i {
                 font-style: normal;
             }
@@ -83,7 +83,7 @@
     }
     .task-title-selection {
         padding: 0 0 0 6px;
-        font-family: $font-pn-regular;
+        @include font-pn-regular;
         text-transform: initial;
 
         @include opacity($inactive-opacity);
@@ -118,7 +118,7 @@
         margin: 40px 0 25px;
         color: $color-blue-grey;
         border-bottom: 1px solid $color-stone;
-        font-family: $font-pn-bold;
+        @include font-pn-bold;
 
         .help-tooltip {
             margin: 0 0 0 10px;

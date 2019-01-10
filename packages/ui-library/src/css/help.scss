@@ -37,7 +37,7 @@
     // overrides for the default react-tooltip styling
     .tooltip-text {
         color: $color-white;
-        font-family: $font-pn-regular;
+        @include font-pn-regular;
         font-size: 14px;
         text-transform: none;
         white-space: normal;

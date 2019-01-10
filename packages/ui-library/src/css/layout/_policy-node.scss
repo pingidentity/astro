@@ -1,7 +1,7 @@
 // these mixins should be replaced by centralized text styles
 @mixin text-parent-label {
     color: $color-elephant;
-    font-family: $font-pn-semibold;
+    @include font-pn-semibold;
     font-size: 14px;
     text-transform: uppercase;
 }
@@ -54,7 +54,7 @@
 
         background: $color-blue-grey;
         color: $color-white;
-        font-family: $font-pn-regular;
+        @include font-pn-regular;
         font-size: 15px;
         display: inline-block;
         height: $height;

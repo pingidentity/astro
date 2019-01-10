@@ -1,7 +1,7 @@
 .tutorial {
 
     h3 {
-        font-family: $font-pn-semibold;
+        @include font-pn-semibold;
         padding-bottom: 7px;
     }
     .attention {
@@ -9,7 +9,7 @@
 
         &:before {
             font-size: 14px;
-            font-family: $font-pn-semibold;
+            @include font-pn-semibold;
             color: $color-elephant;
             position: absolute;
             content: 'ATTENTION!';
@@ -24,7 +24,7 @@
 
     .table-of-contents {
         margin: 0 0 $spacing-xl 5px;
-        font-family: $font-pn-regular;
+        @include font-pn-regular;
 
         &:before {
             content: 'Table of Contents';

@@ -61,7 +61,7 @@ textarea {
     height: $default-input-height;
     box-sizing: border-box;
     outline-width: 0;
-    font-family: $font-pn-regular;
+    @include font-pn-regular;
 
     @include border-radius($default-input-border-radius);
     @include transition(border-color 0.3s);
@@ -516,7 +516,7 @@ label {
 
     &.parent {
         color: $color-elephant;
-        font-family: $font-pn-semibold;
+        @include font-pn-semibold;
         display: block;
         font-size: 15px;
         margin: 0 0 $spacing-sm;
@@ -796,7 +796,7 @@ input[type=file] {
         cursor: pointer;
         padding: 0 40px 0 10px;
         width: 110%;
-        font-family: $font-stack;
+        @include font-pn-regular;
         text-transform: none;
 
         @include transition($default-input-transition);
@@ -934,7 +934,7 @@ input[type=file] {
             }
         }
         .selected {
-            font-family: $font-pn-semibold;
+            @include font-pn-semibold;
 
             &:before {
                 content: '';
@@ -1100,7 +1100,7 @@ input[type=file] {
             font-size: 14px;
         }
         .select-search-prompt {
-            font-family: $font-pn-light;
+            @include font-pn-light;
             font-style: italic;
             color: $color-stratus;
         }
@@ -1174,7 +1174,7 @@ input[type=file] {
         display: block;
         position: relative;
         line-height: 1em;
-        font-family: $font-pn-regular;
+        @include font-pn-regular;
         margin: 10px 0 0 1px;
 
         .icon-file {
@@ -1330,7 +1330,7 @@ input[type=file] {
     height: 95px;
     background-color: $color-white;
     color: $color-strong-neutral-20;
-    font-family: $font-pn-light;
+    @include font-pn-light;
     border-radius: 2px;
     line-height: 1em;
     margin-bottom: $spacing-lg;
@@ -1345,7 +1345,7 @@ input[type=file] {
         text-transform: none;
         font-size: 15px;
         cursor: pointer;
-        font-family: $font-pn-light;
+        @include font-pn-light;
     }
     input[type=file] {
         opacity: 0;
@@ -1493,7 +1493,7 @@ input[type=file] {
 }
 
 @mixin calendar-wrapper {
-    font-family: $font-stack;
+    @include font-pn-regular;
 
     padding: 5px 12px;
     border: 1px solid $color-stone;
@@ -1642,7 +1642,7 @@ input[type=file] {
 .input-calendar {
     display: inline-block;
     position: relative;
-    font-family: $font-stack;
+    @include font-pn-regular;
     margin-bottom: 7px;
 
     &:before,
@@ -1910,7 +1910,7 @@ input[type=file] {
     .option,
     a {
         font-size: 13px;
-        font-family: $font-pn-regular;
+        @include font-pn-regular;
         color: $color-active-blue;
         display: inline-block;
         padding: 0;
@@ -1963,7 +1963,7 @@ input[type=file] {
     }
 
     @mixin requiredPadding {
-        font-family: $font-stack;
+        @include font-pn-regular;
         padding-left: $spacing-md;
     }
 
@@ -3292,7 +3292,7 @@ label {
     border: $borderSize solid $color-rabbit-fur;
     position: relative;
     display: inline-block;
-    font-family: $font-pn-regular;
+    @include font-pn-regular;
     background-color: $color-white;
     min-width: 170px;
     text-align: left;

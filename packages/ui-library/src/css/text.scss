@@ -94,7 +94,7 @@
 }
 
 .textblock--semibold {
-    font-family: $font-pn-semibold;
+    @include font-pn-semibold;
 }
 
 .textblock--value {

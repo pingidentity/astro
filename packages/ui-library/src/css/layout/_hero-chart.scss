@@ -31,7 +31,7 @@
 
     &__center-text {
         color: $color-white;
-        font-family: $font-pn-light;
+        @include font-pn-light;
         margin: 0 0 15px;
     }
 
@@ -46,7 +46,7 @@
         line-height: 1em;
         min-height: 1em;
         margin: 5px 0;
-        font-family: $font-pn-semibold;
+        @include font-pn-semibold;
     }
 
     &__subtitle {

@@ -48,7 +48,7 @@
         height: 100%;
         max-width: $max-modal-width;
         min-width: 360px;
-        font-family: $font-pn-regular;
+        @include font-pn-regular;
 
         @include transform(translateX(-50%));
     }

@@ -6,12 +6,11 @@ $body-text-color: $color-neutral-20;
 
 @mixin text-style(
     $color: $color-slate,
-    $size: $font-size-normal,
-    $family: $font-pn-regular
+    $size: $font-size-normal
 ) {
     color: $color;
     font-size: $size;
-    font-family: $family;
+    @include font-pn-regular;
 }
 
 // PAGE TITLE
@@ -45,7 +44,8 @@ $body-text-color: $color-neutral-20;
 
 // PARENT LABEL
 @mixin parent-label {
-    @include text-style($color-elephant, $font-size-primary, $font-pn-semibold);
+    @include text-style($color-elephant, $font-size-primary);
+    @include font-pn-semibold;
 
     text-transform: uppercase;
 }

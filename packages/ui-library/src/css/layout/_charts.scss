@@ -212,7 +212,7 @@
     &__value {
         font-size: 23px;
         line-height: 1em;
-        font-family: $font-pn-regular;
+        @include font-pn-regular;
         margin: 3px 0 0;
     }
 

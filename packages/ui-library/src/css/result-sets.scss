@@ -3,7 +3,7 @@
     font-size: 14px;
     line-height: 1.3;
     color: $color-manatee;
-    font-family: $font-pn-regular;
+    @include font-pn-regular;
 
     button {
         margin: 0 0 0 30px;
@@ -77,14 +77,14 @@ $expandable-row-gap: 12px;
             font-size: 17px;
             line-height: 1.1em;
             font-weight: normal;
-            font-family: $font-pn-regular;
+            @include font-pn-regular;
             color: $color-slate;
         }
         .item-sub-title {
             font-size: 13px;
             line-height: 1.1em;
             font-weight: normal;
-            font-family: $font-pn-regular;
+            @include font-pn-regular;
             color: $color-elephant;
             margin-top: 2px;
         }
@@ -368,7 +368,7 @@ $expandable-row-gap: 12px;
         }
     }
     .result-section-title {
-        font-family: $font-pn-semibold;
+        @include font-pn-semibold;
         font-size: 16px;
         color: $color-blue-grey;
         margin: 30px 0 10px;
@@ -646,7 +646,7 @@ input.ordering-controls__input {
             }
         }
         .item-username {
-            font-family: $font-pn-regular;
+            @include font-pn-regular;
             font-size: 17px;
             color: $color-text;
             padding-top: 7px;
@@ -812,7 +812,7 @@ input.ordering-controls__input {
         padding: 0 0 5px;
         margin: 0 0 25px;
         border-bottom: 1px solid $color-elephant;
-        font-family: $font-pn-regular;
+        @include font-pn-regular;
         font-size: 16px;
         a {
             margin-left: 20px;
@@ -933,7 +933,7 @@ input.ordering-controls__input {
         text-transform: uppercase;
         color: $color-rhino;
         font-size: 14px;
-        font-family: $font-pn-regular;
+        @include font-pn-regular;
         font-weight: 600;
 
         &:hover {
@@ -958,7 +958,7 @@ input.ordering-controls__input {
                 content: ': ';
                 color: $color-rhino;
                 font-size: 14px;
-                font-family: $font-pn-regular;
+                @include font-pn-regular;
                 font-weight: 600;
             }
         }

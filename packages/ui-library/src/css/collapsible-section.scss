@@ -16,7 +16,7 @@
         color: $color-slate;
         line-height: 1em;
         cursor: pointer;
-        font-family: $font-pn-regular;
+        @include font-pn-regular;
     }
     > .collapsible-section-title-value {
         font-size: 14px;

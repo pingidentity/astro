@@ -135,7 +135,7 @@ $color-grey-minor-1: $color-neutral-30;
         font-size: 12px;
         line-height: 1em;
         text-transform: uppercase;
-        font-family: $font-pn-semibold;
+        @include font-pn-semibold;
 
         &.narrow {
             margin-top: 5px;
@@ -210,7 +210,7 @@ $color-grey-minor-1: $color-neutral-30;
                 padding: 16px 20px 16px 25px;
                 line-height: 1em;
                 font-size: 14px;
-                font-family: $font-pn-regular;
+                @include font-pn-regular;
                 color: $color-slate;
                 background-color: transparent;
 
@@ -248,7 +248,7 @@ $color-grey-minor-1: $color-neutral-30;
         width: $layout-nav-width;
         box-sizing: border-box;
         padding: 20px 10px 25px 20px;
-        font-family: $font-pn-regular;
+        @include font-pn-regular;
         font-size: 10px;
         line-height: 1.3em;
         color: $color-elephant;
@@ -414,7 +414,7 @@ $color-grey-minor-1: $color-neutral-30;
             &.selected {
                 .title {
                     @include transition(background-color 0.2s);
-                    font-family: $font-pn-semibold;
+                    @include font-pn-semibold;
                     background-color: $color-grey-main-2;
                     &:before {
                         @include active-link-styles;
@@ -427,7 +427,7 @@ $color-grey-minor-1: $color-neutral-30;
             &.highlighted .title {
                 @include transition(padding 0);
                 @include transition(background-color 0.2s);
-                font-family: $font-pn-semibold;
+                @include font-pn-semibold;
                 padding-right: 15px;
                 background-color: $color-grey-main;
                 &:before {
@@ -439,7 +439,7 @@ $color-grey-minor-1: $color-neutral-30;
                 &.selected {
                     .title {
                         @include transition(background-color 0.2s);
-                        font-family: $font-pn-light;
+                        @include font-pn-light;
                         background-color: $color-grey-main-2;
                         &:before {
                             height: 0;
@@ -467,7 +467,7 @@ $color-grey-minor-1: $color-neutral-30;
         .title {
             padding: 16px $spacing-md+2px 16px 45px;
             color: $color-white;
-            font-family: $font-pn-light;
+            @include font-pn-light;
             text-transform: none;
             font-size: 14px;
             [class^='icon-'],
@@ -513,7 +513,7 @@ $color-grey-minor-1: $color-neutral-30;
             width: $layout-nav-width;
             > li {
                 a {
-                    font-family: $font-pn-light;
+                    @include font-pn-light;
                     padding: 13px 20px 13px 45px;
                     color: $color-white;
                     &:hover {
@@ -535,7 +535,7 @@ $color-grey-minor-1: $color-neutral-30;
                         @include active-link-styles;
                     }
                     a {
-                        font-family: $font-pn-semibold;
+                        @include font-pn-semibold;
                         &:hover {
                             &:after {
                                 @include active-link-styles;
@@ -739,7 +739,7 @@ $color-grey-minor-1: $color-neutral-30;
             }
 
             &-text {
-                font-family: $font-pn-light;
+                @include font-pn-light;
                 font-size: 13px;
                 line-height: 19px;
                 vertical-align: middle;
@@ -972,7 +972,7 @@ $color-grey-minor-1: $color-neutral-30;
     color: $color-active-blue;
     line-height: 1em;
     cursor: pointer;
-    font-family: $font-pn-regular;
+    @include font-pn-regular;
 
     &:hover {
         color: $color-active-blue-highlighted;
@@ -1109,7 +1109,7 @@ $color-grey-minor-1: $color-neutral-30;
     padding: 0 0 5px;
     border-bottom: 1px solid $color-neutral-70;
     line-height: 1em;
-    font-family: $font-pn-regular;
+    @include font-pn-regular;
     color: $color-strong-neutral-10;
     text-transform: uppercase;
 }
@@ -1161,7 +1161,7 @@ $color-grey-minor-1: $color-neutral-30;
             display: table-cell;
             padding-top: 5px;
             padding-bottom: 5px;
-            font-family: $font-pn-regular;
+            @include font-pn-regular;
             line-height: 1em;
         }
         .data-item-label {

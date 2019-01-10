@@ -104,7 +104,7 @@
         color: $color-white;
 
         text-align: center;
-        font-family: $font-pn-regular;
+        @include font-pn-regular;
         font-size: 17px;
         line-height: 18px;
         letter-spacing: 0;
@@ -328,7 +328,7 @@
                 color: $color-white;
 
                 text-align: center;
-                font-family: $font-pn-regular;
+                @include font-pn-regular;
                 font-size: 17px;
                 line-height: 18px;
                 letter-spacing: 0;

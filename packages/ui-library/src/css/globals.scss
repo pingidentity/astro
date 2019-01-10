@@ -3,46 +3,44 @@
 $img-path: '../images/';
 $pn-font-path: '../fonts/proxima-nova/' !default;
 
-// FONTS ---------------------------------------------------------------------------------------------------------------
+@import url('https://use.typekit.net/nxh5mrb.css');
 
-@font-face {
-    font-family: 'ProximaNovaRegular';
-    font-weight: normal;
-    src: url('#{$pn-font-path}ProximaNova-Regular.otf');
-}
+$img-path: '../images/';
 
-@font-face {
-    font-family: 'ProximaNovaBold';
-    font-weight: bold;
-    src: url('#{$pn-font-path}ProximaNova-Bold.otf');
-}
+@import 'colors';
+@import 'spacing';
 
-@font-face {
-    font-family: 'ProximaNovaLight';
-    font-weight: normal;
-    src: url('#{$pn-font-path}ProximaNova-Light.otf');
-}
-
-@font-face {
-    font-family: 'ProximaNovaSemibold';
-    font-weight: normal;
-    src: url('#{$pn-font-path}ProximaNova-Semibold.otf');
-}
-
-@font-face {
-    font-family: 'ProximaNovaCondRegular';
-    font-weight: normal;
-    src: url('#{$pn-font-path}ProximaNovaCond-Regular.otf');
-}
-
-$font-stack: 'ProximaNovaRegular', helvetica, arial, sans-serif;
-$font-pn-regular: 'ProximaNovaRegular', helvetica, arial, sans-serif;
-$font-pn-bold: 'ProximaNovaBold', helvetica, arial, sans-serif;
-$font-pn-light: 'ProximaNovaLight', helvetica, arial, sans-serif;
-$font-pn-semibold: 'ProximaNovaSemibold', helvetica, arial, sans-serif;
-$font-pn-cond-regular: 'ProximaNovaCondRegular', helvetica, arial, sans-serif;
+// FONTS
+// $font-stack: 'ProximaNovaRegular', helvetica, arial, sans-serif;
+// $font-pn-cond-regular: 'ProximaNovaCondRegular', helvetica, arial, sans-serif;
 $icon-font: 'iconfont';
 $input-font-stack: proxima-nova, sans-serif;
+
+@mixin font-pn-regular {
+    font-family: 'proxima-nova', 'helvetica', 'arial', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+@mixin font-pn-light {
+    font-family: 'proxima-nova', 'helvetica', 'arial', sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+@mixin font-pn-semibold {
+    font-family: 'proxima-nova', 'helvetica', 'arial', sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+@mixin font-pn-bold {
+    font-family: 'proxima-nova', 'helvetica', 'arial', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+// MISC
+$layout-header-height: 64px;    // used in miltiple includes
+$layout-nav-width: 190px;       // used in miltiple include
+$line-height-default: 1.3em;
 
 // Z-INDEXES -----------------------------------------------------------------------------------------------------------
 $zindex__modal:          80;
@@ -55,11 +53,6 @@ $zindex__fixed-controls: 20;
 $zindex__elevated:       10;
 $zindex__base:            0;
 $zindex__hidden:        -10;
-
-// MISC ----------------------------------------------------------------------------------------------------------------
-$layout-header-height: 64px;    // used in miltiple includes
-$layout-nav-width: 190px;       // used in miltiple include
-$line-height-default: 1.3em;
 
 // IMPORTS -------------------------------------------------------------------------------------------------------------
 @import 'colors';

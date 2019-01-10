@@ -4,7 +4,7 @@
         position: relative;
         font-size: 18px;
         text-transform: uppercase;
-        font-family: $font-pn-regular;
+        @include font-pn-regular;
         border-bottom: 2px solid $color-dolphin;
         padding: 0 0 5px;
         margin: 0 0 5px;
@@ -49,7 +49,7 @@
         text-transform: uppercase;
         font-size: 15px;
         color: $color-slate;
-        font-family: $font-pn-regular;
+        @include font-pn-regular;
         position: relative;
 
         .section-title-text {
@@ -74,7 +74,7 @@
     .section-sub-title {
         color: $color-rhino;
         font-size: 12px;
-        font-family: $font-pn-light;
+        @include font-pn-light;
         text-transform: none;
         padding: 0 0 0 25px;
     }
@@ -162,7 +162,7 @@
         }
 
         &.headings {
-            font-family: $font-pn-regular;
+            @include font-pn-regular;
 
             > div {
                 display: table-cell;
@@ -175,7 +175,7 @@
             > div {
                 &:first-of-type {
                     text-align: left;
-                    font-family: $font-pn-regular;
+                    @include font-pn-regular;
                     text-transform: uppercase;
                     color: $color-elephant;
                     &.value {
@@ -368,7 +368,7 @@
             margin-left: 10px;
         }
         span {
-            font-family: $font-pn-regular;
+            @include font-pn-regular;
             font-size: 13px;
         }
         &.section {
