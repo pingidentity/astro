@@ -26,6 +26,7 @@
     "exif-js": "2.1.1",
     "fbjs": "0.4.0",
     "fix-orientation": "0.0.2",
+    "highlight.js": "^9.13.1",
     "moment": "2.22.2",
     "moment-range": "1.0.5",
     "moment-timezone": "0.5.5",

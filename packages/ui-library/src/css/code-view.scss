@@ -1,4 +1,6 @@
+
 .code-view {
+    @import './hljs.scss';
     padding: $spacing-md;
     max-height: 400px;
     overflow: scroll;
@@ -18,3 +20,5 @@
     word-break: normal;
     line-height: 1.5;
 }
+
+

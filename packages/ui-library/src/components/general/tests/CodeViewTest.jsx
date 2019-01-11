@@ -4,55 +4,73 @@ jest.dontMock("../CodeView");
 jest.dontMock("../SelectText");
 
 describe("CodeView", function () {
-    var React = require("react"),
+    const React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
         _ = require("underscore"),
         CodeView = require("../CodeView");
 
-    let componentId = "code-view";
+    const componentId = "code-view";
 
     function getComponent (opts) {
         opts = _.defaults(opts || {}, {
-            "data-id": componentId
+            "data-id": componentId,
+            value: "",
+            language: "json"
         });
 
         return ReactTestUtils.renderIntoDocument(<CodeView {...opts} />);
     }
 
     it("rendered component with data-id", function() {
-        let component = getComponent({});
+        const component = getComponent({});
 
-        let element = TestUtils.findRenderedDOMNodeWithDataId(component, componentId);
+        const element = TestUtils.findRenderedDOMNodeWithDataId(component, componentId);
 
         expect(ReactTestUtils.isDOMComponent(element)).toBeDefined();
     });
 
     it("renders a code tag", function () {
-        let component = getComponent({});
+        const component = getComponent({});
 
-        let element = TestUtils.findRenderedDOMNodeWithTag(component, "code");
+        const element = TestUtils.findRenderedDOMNodeWithTag(component, "code");
 
         expect(ReactTestUtils.isDOMComponent(element)).toBeTruthy();
     });
 
     it("renders a pre tag", function () {
-        let component = getComponent({});
+        const component = getComponent({});
 
-        let element = TestUtils.findRenderedDOMNodeWithTag(component, "pre");
+        const element = TestUtils.findRenderedDOMNodeWithTag(component, "pre");
 
         expect(ReactTestUtils.isDOMComponent(element)).toBeTruthy();
     });
 
-    it("renders content", function () {
-        let myContent = "text";
+    it("renders content and language", function () {
+        const myContent = "text";
 
-        let component = getComponent({
-            value: myContent
+        const component = getComponent({
+            value: myContent,
+            language: "xml"
         });
 
-        let element = TestUtils.findRenderedDOMNodeWithTag(component, "code");
+        const element = TestUtils.findRenderedDOMNodeWithTag(component, "code");
 
         expect(element.textContent).toBe(myContent);
+    });
+
+    it("is logging warning if you supplied an invalid language", function () {
+
+        console.warn = jest.fn();
+
+        const myContent = "text";
+
+        getComponent({
+            value: myContent,
+            language: "pemyrearlstone"
+        });
+
+
+        expect(console.warn).toBeCalled();
     });
 });
