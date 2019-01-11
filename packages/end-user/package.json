@@ -72,6 +72,6 @@
     "host": "npm run static && chmod 600 ./hosting/FARM-33-341f336d.us-west-2.pem && scp -i ./hosting/FARM-33-341f336d.us-west-2.pem static/* ubuntu@uilibrary.ping-eng.com:/var/www/html/end-user",
     "build-dist": "rm -rf ./dist && mkdir dist && cp ./static/end-user.css ./dist && cp ./static/*.otf ./dist && cp ./static/*.svg ./dist && cp ./package.json ./dist",
     "build": "npm run static && npm run build-dist",
-    "prepublish": "[[ \"$PWD\" =~ ./dist ]]"
+    "prepublishOnly": "[[ \"$PWD\" =~ ./dist ]]"
   }
 }

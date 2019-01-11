@@ -1,5 +1,5 @@
 .icon-feedback {
-    color: $color-active-blue;
+    color: $color-neutral-20;
     font-size: $font-size-xl;
     font-weight: 200;
     margin: $spacing-xl 0;
@@ -7,14 +7,6 @@
 
     &--success {
         color: $color-success-green;
-    }
-
-    &--timeout {
-        color: $color-neutral-20;;
-    }
-
-    &--error, &--stopped, &--disabled {
-        color: $color-critical-red;
     }
 
     &__icon {

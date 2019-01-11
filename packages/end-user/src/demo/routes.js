@@ -21,6 +21,13 @@ module.exports = [
         demoCSS: true,
     },
     {
+        id: 'feedback',
+        script: 'feedback.js',
+        title: 'Ping End User Components - Feedback Pages',
+        filename: 'feedback.html',
+        demoCSS: true,
+    },
+    {
         id: 'mfa',
         script: 'mfa.js',
         title: 'Ping End User MFA',

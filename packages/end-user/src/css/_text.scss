@@ -18,12 +18,14 @@
     margin-top: 0;
     margin-bottom: $spacing-lg;
     text-align: center;
+    font-family: $font-default;
 }
 
 .heading--4 {
     margin-bottom: $spacing-md;
     text-align: left;
     font-size: $font-size-md;
+    font-family: $font-default;
 }
 
 %tiny-text,
