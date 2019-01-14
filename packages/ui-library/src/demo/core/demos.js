@@ -931,13 +931,6 @@ module.exports = [
                         pathToSource: "components_utils_CopyIcon.jsx.html",
                         pathToDemoSource: "demo_components_utils_CopyIconDemo.jsx.html"
                     },
-                    {
-                        label: "Unit Input",
-                        demo: require("../components/general/UnitInputDemo"),
-                        pathToDoc: "components/general/UnitInput.jsx",
-                        pathToSource: "components_general_UnitInput.jsx.html",
-                        pathToDemoSource: "demo_components_general_UnitInputDemo.jsx.html"
-                    },
                 ]
             },
         ]

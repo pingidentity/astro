@@ -1,6 +1,6 @@
-const React = require("react");
-const UnitInput = require("./../../../components/general/UnitInput");
-const InputWidths = require("./../../../components/forms/InputWidths");
+import React from "react";
+import UnitInput from "./../../../components/general/UnitInput";
+import { InputWidths } from "./../../../components/forms/InputWidths";
 
 const OPTIONS = [
     { label: "--", value: "" },
@@ -52,14 +52,14 @@ class UnitInputDemo extends React.Component {
                         textFieldProps={{
                             onValueChange: this._handleTextValueChange,
                             value: this.state.a,
-                            width: InputWidths.SM,
+                            width: InputWidths.XS,
                             name: "text-field"
                         }}
                         dropDownListProps={{
                             options: OPTIONS,
                             onValueChange: this._handleDropdownValueChange,
                             selectedOption: this.state.selectedValue,
-                            width: InputWidths.SM,
+                            width: InputWidths.XS,
                             name: "dropdown"
                         }}
                         flags={this.props.flags}
