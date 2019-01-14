@@ -140,7 +140,7 @@ describe("RockerButton", function () {
     it("disabled will not do anything for button clicks", function () {
         var callback = jest.fn(),
             component = ReactTestUtils.renderIntoDocument(
-            <RockerButton stateless={false} disabled={true} labels={labelsArray} />),
+                <RockerButton stateless={false} disabled={true} labels={labelsArray} />),
             labels = TestUtils.scryRenderedDOMNodesWithTag(component, "label"),
             container = ReactDOM.findDOMNode(component);
 

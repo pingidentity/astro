@@ -50,9 +50,9 @@ class TextFieldCell extends React.Component {
     render() {
         return (
             <FormTextField data-id={this.props["data-id"]}
-                    className={this.props.className}
-                    value={this.props.value}
-                    onChange={this.props.onGridCellAction}
+                className={this.props.className}
+                value={this.props.value}
+                onChange={this.props.onGridCellAction}
             />
         );
     }

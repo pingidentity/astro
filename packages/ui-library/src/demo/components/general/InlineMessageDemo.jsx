@@ -43,7 +43,7 @@ class InlineMessageDemo extends React.Component {
                     Error message
                 </InlineMessage>
 
-                 <InlineMessage type={ InlineMessage.MessageTypes.ERROR} alternate>
+                <InlineMessage type={ InlineMessage.MessageTypes.ERROR} alternate>
                     Error message
                 </InlineMessage>
 
@@ -90,7 +90,7 @@ class InlineMessageDemo extends React.Component {
 
                         },
                     ]}
-                    >
+                >
                     Message with two actions
                 </InlineMessage>
 

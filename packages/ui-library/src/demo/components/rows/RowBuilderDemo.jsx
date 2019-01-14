@@ -29,8 +29,8 @@ export default class RowBuilderDemo extends Component {
 
         return ids.map((id, index) =>
             index === 0
-             ? { id, content }
-             : { id, content: noLabels }
+                ? { id, content }
+                : { id, content: noLabels }
         );
     }
 
@@ -57,18 +57,18 @@ export default class RowBuilderDemo extends Component {
                         rows={this.createRows(
                             [
                                 (
-                                <FormDropDownList
-                                    key="dropdown"
-                                    options={[{ label: "Name", value: "" } ]}
-                                    label="Row with inputs"
-                                />
+                                    <FormDropDownList
+                                        key="dropdown"
+                                        options={[{ label: "Name", value: "" } ]}
+                                        label="Row with inputs"
+                                    />
                                 ),
                                 (
-                                <FormTextField
-                                    key="textfield"
-                                    labelText="Text field"
-                                    stateless={false}
-                                />
+                                    <FormTextField
+                                        key="textfield"
+                                        labelText="Text field"
+                                        stateless={false}
+                                    />
                                 )
                             ],
                             this.state.firstRowIds

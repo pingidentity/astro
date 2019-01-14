@@ -46,7 +46,7 @@ class ConfirmTooltipDemo extends Component {
                     disableSave={false}
                     flags={this.props.flags}
                 >
-                {markup}
+                    {markup}
                 </ConfirmTooltip>
                 <hr className="hr"/>
                 <ConfirmTooltip
@@ -59,7 +59,7 @@ class ConfirmTooltipDemo extends Component {
                     closeOnConfirm={true}
                     flags={this.props.flags}
                 >
-                {markup}
+                    {markup}
                 </ConfirmTooltip>
             </div>
         );

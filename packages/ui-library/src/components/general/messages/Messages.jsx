@@ -121,17 +121,17 @@ module.exports = class extends React.Component {
 
         return (
             <div data-id={this.props["data-id"]} className={className}>
-            {
-                this.props.messages && this.props.messages.map(function (item, i) {
-                    return (
-                        <Message key={i} index={i} message={item}
-                            onI18n={this.props.onI18n}
-                            onRemoveMessage={this.props.onRemoveMessage}
-                            defaultTimeout={this.props.defaultMessageTimeout}
-                            data-id={this.props["data-id"]+"-message-"+i}
+                {
+                    this.props.messages && this.props.messages.map(function (item, i) {
+                        return (
+                            <Message key={i} index={i} message={item}
+                                onI18n={this.props.onI18n}
+                                onRemoveMessage={this.props.onRemoveMessage}
+                                defaultTimeout={this.props.defaultMessageTimeout}
+                                data-id={this.props["data-id"]+"-message-"+i}
                             />);
-                }.bind(this))
-            }
+                    }.bind(this))
+                }
             </div>
         );
     }

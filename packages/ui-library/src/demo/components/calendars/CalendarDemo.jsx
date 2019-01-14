@@ -14,8 +14,8 @@ class CalendarDemo extends React.Component {
         selectedDate1: moment(new Date()), //current date
         selectedDate2: new Date(2017, 1, 20), //Feb 20 2017
         dateRange: {
-            startDate: new Date(2017, 1, 14),   //Feb 14 2017
-            endDate: new Date(2018, 3, 28)  //Apr 28 2018
+            startDate: new Date(2017, 1, 14), //Feb 14 2017
+            endDate: new Date(2018, 3, 28) //Apr 28 2018
         }
     };
 
@@ -45,33 +45,33 @@ class CalendarDemo extends React.Component {
         return (
             <div>
                 <Calendar data-id="calendar"
-                        closeOnSelect={true}
-                        computableFormat="x"
-                        date={this.state.selectedDate1}
-                        format="YYYY-MM-DD"
-                        helpClassName="right"
-                        labelText="Date"
-                        labelHelpText="Help text can go here"
-                        name="calendar-demo"
-                        onValueChange={this._onEnrollmentDateChanged1}
-                        flags={flags}
+                    closeOnSelect={true}
+                    computableFormat="x"
+                    date={this.state.selectedDate1}
+                    format="YYYY-MM-DD"
+                    helpClassName="right"
+                    labelText="Date"
+                    labelHelpText="Help text can go here"
+                    name="calendar-demo"
+                    onValueChange={this._onEnrollmentDateChanged1}
+                    flags={flags}
                 />
                 <div>{"Selected Date: " + this._getSelectedDateLabel(this.state.selectedDate1)}</div>
 
                 <br /><br />
 
                 <Calendar data-id="calendar-2"
-                        closeOnSelect={true}
-                        computableFormat="x"
-                        dateRange={this.state.dateRange}
-                        date={this.state.selectedDate2}
-                        format="YYYY-MM-DD"
-                        helpClassName="right"
-                        required={true}
-                        labelText="Date with date range"
-                        labelHelpText="Selection outside of date range is not permitted"
-                        onValueChange={this._onEnrollmentDateChanged2}
-                        flags={flags}
+                    closeOnSelect={true}
+                    computableFormat="x"
+                    dateRange={this.state.dateRange}
+                    date={this.state.selectedDate2}
+                    format="YYYY-MM-DD"
+                    helpClassName="right"
+                    required={true}
+                    labelText="Date with date range"
+                    labelHelpText="Selection outside of date range is not permitted"
+                    onValueChange={this._onEnrollmentDateChanged2}
+                    flags={flags}
                 />
                 <div>{"Selected Date: " + this._getSelectedDateLabel(this.state.selectedDate2)}</div>
             </div>

@@ -80,8 +80,8 @@ export default class KeywordSearch extends React.Component {
     _onValueChange = (query) => {
         const resultsFromStore =
             query.length >= this.props.searchBuffer
-            ? this.checkForMatch(query)
-            : [];
+                ? this.checkForMatch(query)
+                : [];
 
         this.setState(() => ({
             results: resultsFromStore,
@@ -97,7 +97,7 @@ export default class KeywordSearch extends React.Component {
             results: []
         }));
 
-         /* istanbul ignore next */
+        /* istanbul ignore next */
         if (onResultClick) {
             onResultClick(result);
         }

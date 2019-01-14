@@ -75,9 +75,9 @@ class ContextCloseButton extends React.Component {
         return (
             this.props.show ? (
                 <Button data-id={this.props["data-id"]}
-                        className={css(styles)}
-                        onClick={this._handleClick}
-                        disabled={this.props.disabled} >
+                    className={css(styles)}
+                    onClick={this._handleClick}
+                    disabled={this.props.disabled} >
                     {this.props.value}
                 </Button>
             ) : null

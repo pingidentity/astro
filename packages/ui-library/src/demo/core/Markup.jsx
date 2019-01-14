@@ -36,7 +36,7 @@ class Markup extends React.Component {
                 <pre className="language-markup">
                     <div className="inner-markup-wrapper">
                         <code className="language-markup"
-                              dangerouslySetInnerHTML={{ __html: this.props.custom
+                            dangerouslySetInnerHTML={{ __html: this.props.custom
                                 ? this._extractCustomCode() : this._extractRenderCode() }}>
                         </code>
                     </div>

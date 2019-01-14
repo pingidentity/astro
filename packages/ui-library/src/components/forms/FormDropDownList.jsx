@@ -273,8 +273,8 @@ class OptionItem extends React.Component {
 
     _renderContent = () => {
         const content = this.props.iconName
-        ? <div><Icon iconName={this.props.iconName} className="select-option__icon"/>{this.props.content}</div>
-        : <div>{this.props.content}</div>;
+            ? <div><Icon iconName={this.props.iconName} className="select-option__icon"/>{this.props.content}</div>
+            : <div>{this.props.content}</div>;
 
         if (this.props.option.helpHintText) {
             return (
@@ -283,7 +283,7 @@ class OptionItem extends React.Component {
                     delayHide={0}
                     placement="right"
                     hintText={this.props.option.helpHintText}>
-                        {content}
+                    {content}
                 </HelpHint>
             );
         } else {
@@ -464,8 +464,8 @@ class FormDropDownListStateless extends React.Component {
 
     _getOrderedOptionsIndex = option => (
         this.props.groups && option
-        ? this._orderedOptions.findIndex(({ value }) => value === option.value)
-        : -1
+            ? this._orderedOptions.findIndex(({ value }) => value === option.value)
+            : -1
     );
 
     _isBoxSearch = () => this.props.canAdd || this.props.searchType === SearchTypes.BOX;
@@ -487,9 +487,9 @@ class FormDropDownListStateless extends React.Component {
                     ? undefined
                     : (
                         <li data-id="add-prompt" className={addClassName} onClick={this._handleAdd}>
-                        <span className="label">{this.props.labelAdd}</span>
-                        <span>{this.props.searchString}</span>
-                    </li>
+                            <span className="label">{this.props.labelAdd}</span>
+                            <span>{this.props.searchString}</span>
+                        </li>
                     );
             }
         }
@@ -683,14 +683,14 @@ class FormDropDownListStateless extends React.Component {
     _getGroupSeparator = (index) => <div key={"group-separator" + index} className="group-separator" />;
 
     _getSingleGroupHeader = ({ disabled, id, label }) => (
-            <li
-                key={"select-group-" + id}
-                ref={"select-group-" + id}
-                data-id={"select-group-" + id}
-                className={classnames("select-group", { disabled })}>
-                {label}
-            </li>
-        );
+        <li
+            key={"select-group-" + id}
+            ref={"select-group-" + id}
+            data-id={"select-group-" + id}
+            className={classnames("select-group", { disabled })}>
+            {label}
+        </li>
+    );
 
     _getSingleOption = hasIcon => (option, index) => {
         const group = this.props.groups && this._groupById[option.group],
@@ -773,22 +773,22 @@ class FormDropDownListStateless extends React.Component {
     render() {
         const hasIcon = this.props.options.some((option) => option.iconName);
         const containerClassName = classnames(
-            "input-custom-select",
-            "input-select",
-            this.props.className,
-            getInputWidthClass({
-                width: this.props.width,
-                className: this.props.className,
-                defaultClass: InputWidths.AUTO
-            }),
-            {
-                open: this.props.open,
-                "form-error": this.props.errorMessage,
-                "value-entered": this.props.selectedOption &&
+                "input-custom-select",
+                "input-select",
+                this.props.className,
+                getInputWidthClass({
+                    width: this.props.width,
+                    className: this.props.className,
+                    defaultClass: InputWidths.AUTO
+                }),
+                {
+                    open: this.props.open,
+                    "form-error": this.props.errorMessage,
+                    "value-entered": this.props.selectedOption &&
                     (!this.props.noneOption || this.props.noneOption.label !== this.props.selectedOption.label),
-                required: this.props.required,
-                disabled: this.props.disabled,
-            }),
+                    required: this.props.required,
+                    disabled: this.props.disabled,
+                }),
             selectClassName = classnames("selected-option", this.props.selectClassName),
             selectedOptionLabelClassName = classnames(
                 "selected-option-label",
@@ -919,8 +919,8 @@ class FormDropDownListStateful extends React.Component {
     _handleSearch = (search, time, index) => {
         const matchedOptions =
             this.props.canAdd || this.props.searchType === SearchTypes.BOX
-            ? (search === "" ? this.props.options : filterOptions(this.props.options, search))
-            : this.state.matchedOptions;
+                ? (search === "" ? this.props.options : filterOptions(this.props.options, search))
+                : this.state.matchedOptions;
 
         this.setState({
             searchString: search,

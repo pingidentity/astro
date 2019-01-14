@@ -134,10 +134,10 @@ class DonutCard extends Component {
                         <div
                             className="dashboard-card__stat-row-number"
                             style={{ color: color }}>
-                                {this._renderCommas(value)}
+                            {this._renderCommas(value)}
                         </div>
                     </div>
-                    ))}
+                ))}
             </div>
         );
     };
@@ -195,7 +195,7 @@ class DonutCard extends Component {
                         <div
                             data-id={`${this.props["data-id"]}-back-title`}
                             className="dashboard-card__back-title donut-card__back-title"
-                            >
+                        >
                             {this.props.title}
                         </div>
                         {!this.props.loading && ([

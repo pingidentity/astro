@@ -131,12 +131,12 @@ class GridDemo extends React.Component {
                 <h2>Grid example 1 (Expandable row, Components inside a cell, Stateless)</h2>
                 <br /><br />
                 <Grid {...this.props[this.id]}
-                      stateless={true}
-                      columnsPerPage={2}
-                      onPaginationChanged={this._handlePaginationChange}
-                      rowExpandable={true}
-                      onRowExpanded={this._handleRowExpanded}
-                      expandedRowContentType={this.expandedRowContentType} >
+                    stateless={true}
+                    columnsPerPage={2}
+                    onPaginationChanged={this._handlePaginationChange}
+                    rowExpandable={true}
+                    onRowExpanded={this._handleRowExpanded}
+                    expandedRowContentType={this.expandedRowContentType} >
                     <Grid.Column isLeftHeader={true} field="rowheader" width={Grid.ColumnSizes.S} />
                     <Grid.Column headerText="Firstname" fixed={true} field="firstname" />
                     <Grid.Column headerText="Lastname" fixed={true} field="lastname" />
@@ -149,11 +149,11 @@ class GridDemo extends React.Component {
                         <TextFieldCell onGridCellAction={this._handleBirthYearChanged} />
                     </Grid.Column>
                     <Grid.Column headerText="Has Laptop"
-                            field="hasLaptop"
-                            hasSelectAll={true}
-                            selectAllValue={this.props[this.id].hasLaptopForAll}
-                            onSelectAllChange={this._handleSelectAllHasLaptop}
-                            width={Grid.ColumnSizes.M}>
+                        field="hasLaptop"
+                        hasSelectAll={true}
+                        selectAllValue={this.props[this.id].hasLaptopForAll}
+                        onSelectAllChange={this._handleSelectAllHasLaptop}
+                        width={Grid.ColumnSizes.M}>
                         <CheckboxCell onGridCellAction={this._handleLaptopChecked} className="stacked" />
                     </Grid.Column>
                 </Grid>
@@ -167,7 +167,7 @@ class GridDemo extends React.Component {
                     <Grid.Column field="lastname" width={Grid.ColumnSizes.XS} />
                     <Grid.Column field="email" />
                     <Grid.Column field="gender" width={Grid.ColumnSizes.XS}
-                            align={Grid.Alignments.RIGHT} />
+                        align={Grid.Alignments.RIGHT} />
                     <Grid.Column field="job" align={Grid.Alignments.RIGHT} />
                 </Grid>
             </div>

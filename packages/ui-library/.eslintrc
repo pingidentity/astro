@@ -126,10 +126,12 @@
 				],
 				"optionalDependencies": true
 			}
-		]
+		],
+		"react-15/component-must-return-jsx": [2]
 	},
 	"plugins": [
 		"react",
+		"react-15",
 		"import"
 	],
 	"settings": {

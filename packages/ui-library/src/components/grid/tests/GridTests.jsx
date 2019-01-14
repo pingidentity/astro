@@ -82,9 +82,9 @@ describe("Grid", function () {
                 <Grid.Column headerText="Firstname" fixed={true} field="firstname" />
                 <Grid.Column headerText="Lastname" field="lastname" />
                 <Grid.Column headerText="Midname" field="midname"
-                        width={Grid.ColumnSizes.XS}
-                        data-id="grid-column-3"
-                        align={Grid.Alignments.RIGHT} />
+                    width={Grid.ColumnSizes.XS}
+                    data-id="grid-column-3"
+                    align={Grid.Alignments.RIGHT} />
                 <Grid.Column headerText="Email" field="email" />
                 <Grid.Column headerText="Gender" field="gender" />
             </Grid>
@@ -180,10 +180,10 @@ describe("Grid", function () {
             <Grid data-id="grid-test" {...props}>
                 <Grid.Column headerText="Firstname" field="firstname" />
                 <Grid.Column headerText="Has Laptop"
-                        field="hasLaptop"
-                        hasSelectAll={true}
-                        data-id="check-all-header"
-                        selectAllValue={true} >
+                    field="hasLaptop"
+                    hasSelectAll={true}
+                    data-id="check-all-header"
+                    selectAllValue={true} >
                     <CheckboxCell onGridCellAction={jest.fn()} className="stacked" />
                 </Grid.Column>
             </Grid>

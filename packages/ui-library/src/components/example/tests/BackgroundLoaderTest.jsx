@@ -28,11 +28,11 @@ describe("BackgroundLoader", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
             <BackgroundLoader
-                    interval={2000}
-                    load={loadContentFunc}
-                    loaded={loaded}
-                    loading={loadingContentFunc}
-                    className="css-class">
+                interval={2000}
+                load={loadContentFunc}
+                loaded={loaded}
+                loading={loadingContentFunc}
+                className="css-class">
                 <div data-id="loaded-content">content loaded</div>
             </BackgroundLoader>
         );
@@ -52,11 +52,11 @@ describe("BackgroundLoader", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
             <BackgroundLoader
-                    interval={2000}
-                    load={loadContentFunc}
-                    loaded={loaded}
-                    loading={loadingContentFunc}
-                    className="css-class">
+                interval={2000}
+                load={loadContentFunc}
+                loaded={loaded}
+                loading={loadingContentFunc}
+                className="css-class">
                 <div data-id="loaded-content">content loaded</div>
             </BackgroundLoader>
         );

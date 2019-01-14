@@ -29,14 +29,14 @@ class ListViewOrderingDemo extends React.Component {
                     onPageChange={this.actions.setPage}
                     onReorder={this.actions.reorder} />
                 {
-                  /* Because the DemoApp also writes the url, the open/selected nodes need to be passed in */
+                    /* Because the DemoApp also writes the url, the open/selected nodes need to be passed in */
                 }
                 <PropsToUrlWatcher ignoreFalse={true}
                     location={this.props.location}
                     onReplaceUrl={this.props.replace}
                     watch={_.defaults(demoWatch, this.props.watch)} />
             </div>
-            );
+        );
     }
 }
 

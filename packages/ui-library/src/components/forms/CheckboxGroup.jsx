@@ -27,7 +27,7 @@ import FormCheckbox from "./FormCheckbox";
  *
  */
 
- /**
+/**
 * @typedef CheckboxGroup~option
 * @desc An option
 *

@@ -84,18 +84,18 @@ const TileSelector = ({
             [
                 ...buttonsAcc,
                 (
-                <TileButton
-                    key={id}
-                    data-id={`${dataId}-button-${id}`}
-                    title={title}
-                    iconName={iconName}
-                    selected={isSelected}
-                    onClick={handleChange}
-                    panel={optionPanel ? true : false}
-                    details={details}
-                >
-                    {description}
-                </TileButton>
+                    <TileButton
+                        key={id}
+                        data-id={`${dataId}-button-${id}`}
+                        title={title}
+                        iconName={iconName}
+                        selected={isSelected}
+                        onClick={handleChange}
+                        panel={optionPanel ? true : false}
+                        details={details}
+                    >
+                        {description}
+                    </TileButton>
                 )
             ],
             (optionPanel && isSelected)

@@ -38,9 +38,9 @@ describe("IntroTutorial", function () {
         component._setProps({
             active: activeStep,
             steps: [
-               { target: node.getElementsByClassName("app-search")[0], title: "title 1", description: "d1" },
-               { target: node.getElementsByClassName("menu-button")[0], title: "title 2", description: "d2" },
-               { target: node.getElementsByClassName("main-content")[0], title: "title 3", description: "d3" }
+                { target: node.getElementsByClassName("app-search")[0], title: "title 1", description: "d1" },
+                { target: node.getElementsByClassName("menu-button")[0], title: "title 2", description: "d2" },
+                { target: node.getElementsByClassName("main-content")[0], title: "title 3", description: "d3" }
             ]
         });
     };

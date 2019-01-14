@@ -348,7 +348,7 @@ var TestUtils = {
     findMockCall: function (mockFunction, value) {
         return _.find(mockFunction.mock.calls, call => _.contains(call, value));
     },
-     /**
+    /**
       * @alias module:util/TestUtils.findMockCallIndex
       * @desc Searches a mock function calls to see if value exists and returns the index of the call. Written because new react-dom.development.js adds error calls to window object
       *
@@ -368,7 +368,7 @@ var TestUtils = {
     findMockCallIndex: function (mockFunction, value) {
         return _.findIndex(mockFunction.mock.calls, call => _.contains(call, value));
     },
-     /**
+    /**
       * @alias module:util/TestUtils.mockCallsContains
       * @desc Finds searches a mock function calls to see if value exists. Written because new react-dom.development.js adds error calls to window object
       *

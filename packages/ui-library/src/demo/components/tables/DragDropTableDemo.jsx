@@ -89,10 +89,10 @@ class DragDropTableDemo extends React.Component {
             };
 
             return (
-                    <a onClick={_handleOnClick} className={linkClass}>
-                        {props.data}
-                    </a>
-                );
+                <a onClick={_handleOnClick} className={linkClass}>
+                    {props.data}
+                </a>
+            );
         }.bind(this);
         return (<HeaderCell />);
     };
@@ -117,12 +117,12 @@ class DragDropTableDemo extends React.Component {
     _sortBatches = (index) => {
         var ascending = this.state.sort && this.state.sort.column === index ? !this.state.sort.ascending : true;
         var nextBatchData = _.sortBy(
-                _.flatten(
-                    this.state.batches.map(
-                        function (batch) {
-                            return batch.data;
-                        }),
-                    true),
+            _.flatten(
+                this.state.batches.map(
+                    function (batch) {
+                        return batch.data;
+                    }),
+                true),
             function (a) {
                 return (a[index].toLowerCase());
             });

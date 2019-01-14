@@ -280,9 +280,9 @@ export default class MultiseriesChart extends Component {
 
         return (
             <div className={classnames(
-                    baseClass,
-                    { [`${baseClass}--line`]: isLine }
-                )}>
+                baseClass,
+                { [`${baseClass}--line`]: isLine }
+            )}>
                 {title && <PageHeader className={`${baseClass}__title`} title={title} />}
                 <div className={`${baseClass}__content`}>
                     <DropDownSelector
@@ -311,9 +311,9 @@ export default class MultiseriesChart extends Component {
                         </ChartType>
                         {bottomPanel && (
                             <div className={classnames(
-                                    `${baseClass}__bottom-panel`,
-                                    { [`${baseClass}__bottom-panel--line`]: isLine }
-                                )}
+                                `${baseClass}__bottom-panel`,
+                                { [`${baseClass}__bottom-panel--line`]: isLine }
+                            )}
                             >
                                 {bottomPanel}
                             </div>

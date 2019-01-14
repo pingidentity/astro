@@ -205,34 +205,34 @@ class I18nPhoneInputStateless extends React.Component {
         return (
             <div data-id={this.props["data-id"]} className={classname}>
                 <CountryFlagList
-                        data-id={this.props["data-id"] + "-countryFlagList"}
-                        countryCodeClassName="dial-code"
-                        countryCodeDisplayType={CountryFlagList.CountryCodeTypes.DIAL_CODE}
-                        selectedCountryCode={this.props.countryCode}
-                        onValueChange={this._handleValueChange}
-                        open={this.props.open}
-                        onToggle={this.props.onToggle}
-                        searchIndex={this.props.searchIndex}
-                        searchString={this.props.searchString}
-                        searchTime={this.props.searchTime}
-                        name={this.props.name ? this.props.name+"-country" : null}
-                        onSearch={this.props.onSearch}
-                        flags={this.props.flags}
+                    data-id={this.props["data-id"] + "-countryFlagList"}
+                    countryCodeClassName="dial-code"
+                    countryCodeDisplayType={CountryFlagList.CountryCodeTypes.DIAL_CODE}
+                    selectedCountryCode={this.props.countryCode}
+                    onValueChange={this._handleValueChange}
+                    open={this.props.open}
+                    onToggle={this.props.onToggle}
+                    searchIndex={this.props.searchIndex}
+                    searchString={this.props.searchString}
+                    searchTime={this.props.searchTime}
+                    name={this.props.name ? this.props.name+"-country" : null}
+                    onSearch={this.props.onSearch}
+                    flags={this.props.flags}
                 />
                 <FormTextField
-                        data-id={this.props["data-id"] + "-phoneNumber"}
-                        className="form-control"
-                        placeholder={this.props.placeholder}
-                        value={this.props.phoneNumber}
-                        name={this.props.name}
-                        onChange={this._handlePhoneNumberChange}
-                        errorMessage={
-                            Validators.isValidPhoneNumber(this.props.phoneNumber)
-                                ? null
-                                : this.props.errorMessage
-                        }
-                        autoFocus={this.props.autoFocus}
-                        useAutocomplete={this.props.useAutocomplete} />
+                    data-id={this.props["data-id"] + "-phoneNumber"}
+                    className="form-control"
+                    placeholder={this.props.placeholder}
+                    value={this.props.phoneNumber}
+                    name={this.props.name}
+                    onChange={this._handlePhoneNumberChange}
+                    errorMessage={
+                        Validators.isValidPhoneNumber(this.props.phoneNumber)
+                            ? null
+                            : this.props.errorMessage
+                    }
+                    autoFocus={this.props.autoFocus}
+                    useAutocomplete={this.props.useAutocomplete} />
             </div>
         );
     }

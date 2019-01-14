@@ -286,26 +286,26 @@ class Multivalues extends React.Component {
         };
 
         var entryNodes = _.map(this.props.entries, (entry, index) =>
-           typeof entry === "string"
-           ? (
-            <MultivaluesOption
-            id={index}
-            label={entry}
-            onChange={this.props.onValueChange}
-            onDelete = {this._handleDelete}
-            key={index}
-        />
-        )
-        : (
-            <MultivaluesOption
-            id={index}
-            label={entry.label}
-            onChange={this.props.onValueChange}
-            onDelete = {this._handleDelete}
-            key={index}
-            iconName={entry.icon}
-        />
-        ));
+            typeof entry === "string"
+                ? (
+                    <MultivaluesOption
+                        id={index}
+                        label={entry}
+                        onChange={this.props.onValueChange}
+                        onDelete = {this._handleDelete}
+                        key={index}
+                    />
+                )
+                : (
+                    <MultivaluesOption
+                        id={index}
+                        label={entry.label}
+                        onChange={this.props.onValueChange}
+                        onDelete = {this._handleDelete}
+                        key={index}
+                        iconName={entry.icon}
+                    />
+                ));
 
 
         return (

@@ -470,10 +470,10 @@ class InfiniteScroll extends React.Component {
 
         return (
             <div data-id={this.props["data-id"]}
-                    className={this.props.className}
-                    style={style}
-                    onScroll={onScroll}
-                    ref={ref} >
+                className={this.props.className}
+                style={style}
+                onScroll={onScroll}
+                ref={ref} >
                 { this.props.hasPrev ? <span ref="spinnerPrev"><Spinner show={true} /></span> : null }
                 {
                     this.props.batches.map(function (b, i) {

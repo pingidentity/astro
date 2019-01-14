@@ -186,29 +186,29 @@ class CountryFlagList extends React.Component {
 
         return (
             <FormDropDownList
-                    flags={flags}
-                    stateless={true}
-                    data-id={this.props["data-id"]}
-                    className={containerClassName}
-                    options={countryCodes}
-                    contentType={type}
-                    onValueChange={this.props.onValueChange}
-                    open={this.props.open}
-                    onToggle={this.props.onToggle}
-                    searchIndex={this.props.searchIndex}
-                    searchString={this.props.searchString}
-                    searchField="name"
-                    searchTime={this.props.searchTime}
-                    searchType={FormDropDownList.SearchTypes.KEYBOARD}
-                    onSearch={this.props.onSearch}
-                    validSearchCharsRegex="/[^a-zA-Z\s]+/"
-                    title={title}
-                    selectedOption={selectedCountry}
-                    selectedOptionLabelClassName={selectorFlagClassName}
-                    showSelectedOptionLabel={false}
-                    name={this.props.name}
-                    noneOption={{ label: this.props.labelNoCountry }}
-                    noneOptionLabelClassName="country-name" />
+                flags={flags}
+                stateless={true}
+                data-id={this.props["data-id"]}
+                className={containerClassName}
+                options={countryCodes}
+                contentType={type}
+                onValueChange={this.props.onValueChange}
+                open={this.props.open}
+                onToggle={this.props.onToggle}
+                searchIndex={this.props.searchIndex}
+                searchString={this.props.searchString}
+                searchField="name"
+                searchTime={this.props.searchTime}
+                searchType={FormDropDownList.SearchTypes.KEYBOARD}
+                onSearch={this.props.onSearch}
+                validSearchCharsRegex="/[^a-zA-Z\s]+/"
+                title={title}
+                selectedOption={selectedCountry}
+                selectedOptionLabelClassName={selectorFlagClassName}
+                showSelectedOptionLabel={false}
+                name={this.props.name}
+                noneOption={{ label: this.props.labelNoCountry }}
+                noneOptionLabelClassName="country-name" />
         );
     }
 }

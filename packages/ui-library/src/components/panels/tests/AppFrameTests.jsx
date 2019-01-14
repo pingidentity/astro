@@ -412,7 +412,7 @@ describe("AppFrame", () => {
         const {
             id: rootId,
             children
-         } = navData[0];
+        } = navData[0];
 
         const node = getSearchableNode(component, children[2].id);
 

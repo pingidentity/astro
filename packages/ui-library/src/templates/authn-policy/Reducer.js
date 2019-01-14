@@ -76,32 +76,32 @@ const getStepIndex = (policy, id) => _.findIndex(policy.steps, step => step.id =
 const AuthnPolicyReducer = function (state, action) {
     switch (action.type) {
         case Actions.Types.EDIT_STEP:
-            {
-                const policyIndex = getPolicyIndex(state, action.policy);
-                const stepIndex = getStepIndex(state.policies[policyIndex], action.step);
+        {
+            const policyIndex = getPolicyIndex(state, action.policy);
+            const stepIndex = getStepIndex(state.policies[policyIndex], action.step);
 
-                const formData = update.set(
-                    state.policies[policyIndex].steps[stepIndex],
-                    ["policyId"],
-                    action.policy
-                );
+            const formData = update.set(
+                state.policies[policyIndex].steps[stepIndex],
+                ["policyId"],
+                action.policy
+            );
 
-                return update.set(state, ["draftStep"], formData);
-            }
+            return update.set(state, ["draftStep"], formData);
+        }
         case Actions.Types.CANCEL_EDIT_STEP:
             return update.set(state, ["draftStep"], {});
         case Actions.Types.SAVE_STEP:
-            {
-                const newStep = _.omit(state.draftStep, ["policyId", "dirty"]);
-                const policyIndex = getPolicyIndex(state, state.draftStep.policyId);
-                const stepIndex = getStepIndex(state.policies[policyIndex], action.step);
+        {
+            const newStep = _.omit(state.draftStep, ["policyId", "dirty"]);
+            const policyIndex = getPolicyIndex(state, state.draftStep.policyId);
+            const stepIndex = getStepIndex(state.policies[policyIndex], action.step);
 
-                return update.set(
-                    update.set(
-                        state, ["policies", policyIndex, "steps", stepIndex], newStep
-                    ), "draftStep", {}
-                );
-            }
+            return update.set(
+                update.set(
+                    state, ["policies", policyIndex, "steps", stepIndex], newStep
+                ), "draftStep", {}
+            );
+        }
         case Actions.Types.CHANGE_VALUE:
             const path = ["draftStep"].concat(action.path);
             return update.set(

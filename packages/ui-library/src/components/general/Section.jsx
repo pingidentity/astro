@@ -151,7 +151,7 @@ class SectionStateless extends React.Component {
 
             const collapsed = detailsText
                 ? <div key="collapsed" className="collapsible-section__details-text">
-                        {expanded ? detailsText.expanded : detailsText.collapsed}
+                    {expanded ? detailsText.expanded : detailsText.collapsed}
                 </div>
                 : <div key="collapsed"></div>;
 

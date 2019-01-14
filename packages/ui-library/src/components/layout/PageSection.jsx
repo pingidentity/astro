@@ -26,11 +26,11 @@ const PageSection = ({
 
     return title
         ? <div {...props}>
-                <div className="page-section-title">{title}</div>
-                {description && <p>{description}</p>}
-                <div className="page-section-content">
-                    {children}
-                </div>
+            <div className="page-section-title">{title}</div>
+            {description && <p>{description}</p>}
+            <div className="page-section-content">
+                {children}
+            </div>
         </div>
         : <div {...props}>
             {description && <p>{description}</p>}

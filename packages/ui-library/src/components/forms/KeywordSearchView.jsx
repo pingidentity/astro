@@ -21,8 +21,8 @@ const KeywordSearchView = ({
     const _getNav = (root, section) => {
         const nav =
             [root, section]
-            .filter(node => node)
-            .join(" > ");
+                .filter(node => node)
+                .join(" > ");
 
         return (
             <div className="keyword-search__result__nav">

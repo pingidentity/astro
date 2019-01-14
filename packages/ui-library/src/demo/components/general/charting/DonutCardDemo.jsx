@@ -116,8 +116,8 @@ class DonutCardDemo extends React.Component {
                         defaultChecked={false}
                     />
                     <DashboardCard size={2} />
-            </CardRow>
-        </div>
+                </CardRow>
+            </div>
         );
     }
 }

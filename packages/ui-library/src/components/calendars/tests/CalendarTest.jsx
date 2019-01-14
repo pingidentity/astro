@@ -28,8 +28,8 @@ describe("Calendar", function () {
         callback = jest.fn(),
         selectedDateString = "2015-10-15",
         dateRange = {
-            startDate: new Date(2015, 9, 10),   //Oct 10 2015
-            endDate: new Date(2015, 10, 20)  //Nov 20 2015
+            startDate: new Date(2015, 9, 10), //Oct 10 2015
+            endDate: new Date(2015, 10, 20) //Nov 20 2015
         },
         selectedDate = moment(new Date(selectedDateString));
 
@@ -135,10 +135,10 @@ describe("Calendar", function () {
     it("is rendering closed view", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Calendar format="YYYY-MM-DD"
-                      date={selectedDate}
-                      computableFormat="x"
-                      closeOnSelect={true}
-                      onValueChange={callback}/>
+                date={selectedDate}
+                computableFormat="x"
+                closeOnSelect={true}
+                onValueChange={callback}/>
         );
 
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
@@ -272,11 +272,11 @@ describe("Calendar", function () {
     it("renders as required when required set", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Calendar format="YYYY-MM-DD"
-                      date={selectedDate}
-                      computableFormat="x"
-                      closeOnSelect={true}
-                      onValueChange={callback}
-                      required={true}/>
+                date={selectedDate}
+                computableFormat="x"
+                closeOnSelect={true}
+                onValueChange={callback}
+                required={true}/>
         );
 
         expect(ReactDOM.findDOMNode(component).className).toContain("required");
@@ -285,10 +285,10 @@ describe("Calendar", function () {
     it("is triggering onValueChange callback on date selection", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Calendar format="YYYY-MM-DD"
-                      date={selectedDate}
-                      computableFormat="x"
-                      closeOnSelect={true}
-                      onValueChange={callback}/>
+                date={selectedDate}
+                computableFormat="x"
+                closeOnSelect={true}
+                onValueChange={callback}/>
         );
 
         var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
@@ -327,10 +327,10 @@ describe("Calendar", function () {
     it("onValueChange changes date via input field", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Calendar format="YYYY-MM-DD"
-                      date={selectedDate}
-                      computableFormat="x"
-                      closeOnSelect={true}
-                      onValueChange={callback}/>
+                date={selectedDate}
+                computableFormat="x"
+                closeOnSelect={true}
+                onValueChange={callback}/>
         );
 
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
@@ -344,11 +344,11 @@ describe("Calendar", function () {
     it("is supporting min view", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Calendar format="YYYY-MM-DD"
-                      date={selectedDate}
-                      minView={1}
-                      computableFormat="x"
-                      closeOnSelect={true}
-                      onValueChange={callback}/>
+                date={selectedDate}
+                minView={1}
+                computableFormat="x"
+                closeOnSelect={true}
+                onValueChange={callback}/>
         );
 
         var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
@@ -370,10 +370,10 @@ describe("Calendar", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
             <Calendar format="YYYY-MM-DD"
-                      date={selectedDate}
-                      computableFormat="x"
-                      closeOnSelect={true}
-                      onValueChange={callback}/>
+                date={selectedDate}
+                computableFormat="x"
+                closeOnSelect={true}
+                onValueChange={callback}/>
         );
 
         var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
@@ -391,10 +391,10 @@ describe("Calendar", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
             <Calendar format="YYYY-MM-DD"
-                      date={selectedDate}
-                      computableFormat="x"
-                      closeOnSelect={true}
-                      onValueChange={callback} />
+                date={selectedDate}
+                computableFormat="x"
+                closeOnSelect={true}
+                onValueChange={callback} />
         );
 
         var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
@@ -415,10 +415,10 @@ describe("Calendar", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
             <Calendar format="YYYY-MM-DD"
-                      date={selectedDate}
-                      computableFormat="x"
-                      closeOnSelect={true}
-                      onValueChange={callback}/>
+                date={selectedDate}
+                computableFormat="x"
+                closeOnSelect={true}
+                onValueChange={callback}/>
         );
 
         ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
@@ -433,10 +433,10 @@ describe("Calendar", function () {
     it("handles input blur event", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Calendar format="YYYY-MM-DD"
-                      date={selectedDate}
-                      computableFormat="x"
-                      closeOnSelect={true}
-                      onValueChange={callback}/>
+                date={selectedDate}
+                computableFormat="x"
+                closeOnSelect={true}
+                onValueChange={callback}/>
         );
 
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
@@ -449,10 +449,10 @@ describe("Calendar", function () {
     it("handles input blur with invalid date", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Calendar format="YYYY-MM-DD"
-                      date={selectedDate}
-                      computableFormat="x"
-                      closeOnSelect={true}
-                      onValueChange={callback}/>
+                date={selectedDate}
+                computableFormat="x"
+                closeOnSelect={true}
+                onValueChange={callback}/>
         );
 
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
@@ -468,10 +468,10 @@ describe("Calendar", function () {
 
         var component = ReactTestUtils.renderIntoDocument(
             <Calendar format="YYYY-MM-DD"
-                      date={selectedDate}
-                      computableFormat="x"
-                      closeOnSelect={true}
-                      onValueChange={callback}/>
+                date={selectedDate}
+                computableFormat="x"
+                closeOnSelect={true}
+                onValueChange={callback}/>
         );
 
         var container = ReactTestUtils.findRenderedDOMComponentWithClass(component, "input-calendar");
@@ -576,7 +576,7 @@ describe("Calendar", function () {
         var enabled = cells.filter(function (cell) {
             return !cell.classList.contains("disabled");
         });
-        expect(enabled.length).toBe(1);  // only 2015 not disabled
+        expect(enabled.length).toBe(1); // only 2015 not disabled
         expect(enabled[0].textContent).toBe("2015");
     });
 

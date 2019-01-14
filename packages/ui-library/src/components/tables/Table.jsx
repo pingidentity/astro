@@ -57,15 +57,15 @@ const Table = ({
             <tbody>
                 {_.map(bodyData, (item, index) => (
                     <tr key={index}>
-                    {_.map(item, (entry, entryIndex) => {
-                        const isLabel = rowLabels && entryIndex === 0;
-                        const Cell = isLabel ? "th" : "td";
-                        const cellValue = cellRenderers[entryIndex]
-                            ? cellRenderers[entryIndex](entry, item)
-                            : entry;
+                        {_.map(item, (entry, entryIndex) => {
+                            const isLabel = rowLabels && entryIndex === 0;
+                            const Cell = isLabel ? "th" : "td";
+                            const cellValue = cellRenderers[entryIndex]
+                                ? cellRenderers[entryIndex](entry, item)
+                                : entry;
 
-                        return <Cell key={index+"-"+entryIndex}>{cellValue}{isLabel && ":"}</Cell>;
-                    })}
+                            return <Cell key={index+"-"+entryIndex}>{cellValue}{isLabel && ":"}</Cell>;
+                        })}
                     </tr>
                 ))}
             </tbody>

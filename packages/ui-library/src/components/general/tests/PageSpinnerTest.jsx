@@ -19,9 +19,9 @@ describe("PageSpinner", function () {
 
         return ReactTestUtils.renderIntoDocument(
             <div>
-            <PageSpinner {...opts}>
-                <div>whatever</div>
-            </PageSpinner>
+                <PageSpinner {...opts}>
+                    <div>whatever</div>
+                </PageSpinner>
             </div>
         );
     }

@@ -51,9 +51,9 @@ class CheckboxCell extends React.Component {
     render() {
         return (
             <FormCheckbox data-id={this.props["data-id"]}
-                    className={this.props.className}
-                    checked={this.props.value}
-                    onChange={this.props.onGridCellAction}
+                className={this.props.className}
+                checked={this.props.value}
+                onChange={this.props.onGridCellAction}
             />
         );
     }

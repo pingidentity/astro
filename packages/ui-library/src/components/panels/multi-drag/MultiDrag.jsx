@@ -441,14 +441,14 @@ class MultiDragStateless extends React.Component {
                 <div key="search-row" className="row-selector__search-row">
                     {columns.map((column, index) => (
                         (showSearch && index === 0) || showSearchOnAllColumns
-                        ? this._renderSearch(column, index)
-                        : <div key={"search"+column.name} className="row-selector__search"/>
+                            ? this._renderSearch(column, index)
+                            : <div key={"search"+column.name} className="row-selector__search"/>
                     ))}
                 </div>
                 <div key="columns" className="row-selector__columns">
-                {
-                    columns.map(this._renderColumn)
-                }
+                    {
+                        columns.map(this._renderColumn)
+                    }
                 </div>
             </div>
         );

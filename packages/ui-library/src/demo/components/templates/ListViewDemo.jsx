@@ -28,12 +28,12 @@ class ListViewDemo extends React.Component {
         return (
             <div>
                 <ListView {...this.props}
-                        onSearchAdvancedToggle={this._handleToggleSearchBar}
-                        onSearchFilterChange={this._handleSearchFilterChange}
-                        onScrollPositionChange={this.actions.setPosition}
-                        onActiveTabChange={this.actions.setActiveTab}/>
+                    onSearchAdvancedToggle={this._handleToggleSearchBar}
+                    onSearchFilterChange={this._handleSearchFilterChange}
+                    onScrollPositionChange={this.actions.setPosition}
+                    onActiveTabChange={this.actions.setActiveTab}/>
                 {
-                  /* Because the DemoApp also writes the url, the open/selected nodes need to be passed in */
+                    /* Because the DemoApp also writes the url, the open/selected nodes need to be passed in */
                 }
                 <PropsToUrlWatcher ignoreFalse={true}
                     location={this.props.location}

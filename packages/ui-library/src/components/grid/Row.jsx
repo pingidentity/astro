@@ -148,7 +148,7 @@ class Row extends React.Component {
 
         return (
             <tr data-id={this.props["data-id"]} key={this.props["data-id"]}
-                    className={classnames({ expanded: this.props.rowObject.expanded })} >
+                className={classnames({ expanded: this.props.rowObject.expanded })} >
                 {row}
             </tr>
         );

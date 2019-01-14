@@ -63,8 +63,10 @@ class PageLinks extends React.Component {
                 {this.props.currentPage} of {this.props.numPages}
 
                 <a data-id={nextKey} key={nextKey}
-                  className={currentPage === numPages ? "icon-next disabled" : "icon-next"}
-                  onClick={_.partial(this._handleClick, _, (currentPage >= numPages ? currentPage : currentPage + 1))} >
+                    className={currentPage === numPages ? "icon-next disabled" : "icon-next"}
+                    onClick={_.partial(
+                        this._handleClick, _, (currentPage >= numPages ? currentPage : currentPage + 1)
+                    )} >
                 </a>
             </div>
         );

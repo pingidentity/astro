@@ -52,7 +52,7 @@ describe("Link", function () {
     it("disabled will not do anything for clicks", function () {
         var callback = jest.fn(),
             component = ReactTestUtils.renderIntoDocument(
-            <div><Link title="Link Name" disabled={true} onClick={callback} /></div>);
+                <div><Link title="Link Name" disabled={true} onClick={callback} /></div>);
 
         expect(component).toBeDefined();
         var element = TestUtils.findRenderedDOMNodeWithTag(component, "a");

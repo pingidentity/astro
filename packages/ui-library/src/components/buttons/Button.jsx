@@ -81,7 +81,7 @@ class Button extends Component {
                 type={this.props.submit ? "submit" : "button"}
                 href={this.props.href}
                 target={this.props.target}
-                >
+            >
                 {this.props.label}
                 {this.props.children}
                 <EllipsisLoader loading={this.props.loading}/>

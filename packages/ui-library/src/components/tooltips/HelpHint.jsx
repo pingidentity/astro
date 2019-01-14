@@ -143,8 +143,8 @@ class HelpHint extends React.Component {
             return `icon-${iconName}`;
         } else {
             return lock
-            ? "icon-lock"
-            : "icon-help";
+                ? "icon-lock"
+                : "icon-help";
         }
     }
 

@@ -71,8 +71,8 @@ var CondensedTable = function (props) {
         <div className={classnames("data", "condensed", props.className)} data-id={props["data-id"]}>
             {
                 props.data
-                ? <ObjectTable data={props.data} />
-                : <ArrayTable headData={props.headData} bodyData={props.bodyData} />
+                    ? <ObjectTable data={props.data} />
+                    : <ArrayTable headData={props.headData} bodyData={props.bodyData} />
             }
         </div>
     );

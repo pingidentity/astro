@@ -329,20 +329,20 @@ class Stateless extends React.Component {
             integerControls = (
                 <span className="integer-controls" onMouseOut={this._handleSpinnerRelease}>
                     <button data-id={this.props["data-id"] + "-up-btn"}
-                            data-direction="up"
-                            className="integer-up"
-                            onMouseDown={this._handleSpinnerPress}
-                            onMouseUp={this._handleSpinnerRelease}
-                            tabIndex={this.props.tabIndex}
-                            type="button"
+                        data-direction="up"
+                        className="integer-up"
+                        onMouseDown={this._handleSpinnerPress}
+                        onMouseUp={this._handleSpinnerRelease}
+                        tabIndex={this.props.tabIndex}
+                        type="button"
                     />
                     <button data-id={this.props["data-id"] + "-down-btn"}
-                            data-direction="down"
-                            className="integer-down"
-                            onMouseDown={this._handleSpinnerPress}
-                            onMouseUp={this._handleSpinnerRelease}
-                            tabIndex={this.props.tabIndex}
-                            type="button"
+                        data-direction="down"
+                        className="integer-down"
+                        onMouseDown={this._handleSpinnerPress}
+                        onMouseUp={this._handleSpinnerRelease}
+                        tabIndex={this.props.tabIndex}
+                        type="button"
                     />
                 </span>
             );
@@ -350,14 +350,14 @@ class Stateless extends React.Component {
         return (
             <div onKeyDown={this._handleKeyDown} className="form-integer-container input-integer">
                 <FormTextField {...this.props}
-                        ref="formTextField"
-                        data-id={this.props["data-id"] + "-text-field"}
-                        name={this.props.name}
-                        stateless={true}
-                        className={this.props.className}
-                        labelClassName={classnames(this.props.labelClassName)}
-                        onValueChange={this.props.onValueChange}
-                        controls={integerControls}
+                    ref="formTextField"
+                    data-id={this.props["data-id"] + "-text-field"}
+                    name={this.props.name}
+                    stateless={true}
+                    className={this.props.className}
+                    labelClassName={classnames(this.props.labelClassName)}
+                    onValueChange={this.props.onValueChange}
+                    controls={integerControls}
                 />
             </div>
         );
@@ -481,8 +481,8 @@ class FormIntegerFieldV2 extends React.Component {
 
     render() {
         return (this.props.stateless
-                ? React.createElement(Stateless, _.defaults({ ref: "formIntegerFieldStateless" }, this.props))
-                : React.createElement(Stateful, _.defaults({ ref: "formIntegerFieldStateful" }, this.props)));
+            ? React.createElement(Stateless, _.defaults({ ref: "formIntegerFieldStateless" }, this.props))
+            : React.createElement(Stateful, _.defaults({ ref: "formIntegerFieldStateful" }, this.props)));
     }
 }
 

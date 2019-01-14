@@ -36,8 +36,8 @@ describe("InlineMessage", function () {
         var label = "Do Something";
         var onClick = jest.fn();
         var view = getComponent({ "data-id": "notice-message-button",
-                                  type: InlineMessage.MessageTypes.NOTICE,
-                                  label: label, onClick: onClick }, text);
+            type: InlineMessage.MessageTypes.NOTICE,
+            label: label, onClick: onClick }, text);
         var container = TestUtils.findRenderedDOMNodeWithDataId(view, "notice-message-button");
         var actionContainer = TestUtils.findRenderedDOMNodeWithDataId(container, "inline-message-btn");
         var buttonElement = TestUtils.findRenderedDOMNodeWithTag(actionContainer, "button");
@@ -53,7 +53,7 @@ describe("InlineMessage", function () {
         var label = "Do Something" ;
         var view = getComponent({ "data-id": "notice-message-button",
             type: InlineMessage.MessageTypes.NOTICE,
-                                  label: label }, text);
+            label: label }, text);
         var container = TestUtils.findRenderedDOMNodeWithDataId(view, "notice-message-button");
         var actionContainer = TestUtils.findRenderedDOMNodeWithDataId(container, "inline-message-btn");
         expect(actionContainer).toBeFalsy();
@@ -63,8 +63,8 @@ describe("InlineMessage", function () {
         var text = "Your message here";
         var onClick = jest.fn();
         var view = getComponent({ "data-id": "notice-message-button",
-                                  type: InlineMessage.MessageTypes.NOTICE,
-                                  onClick: onClick }, text);
+            type: InlineMessage.MessageTypes.NOTICE,
+            onClick: onClick }, text);
         var container = TestUtils.findRenderedDOMNodeWithDataId(view, "notice-message-button");
         var actionContainer = TestUtils.findRenderedDOMNodeWithDataId(container, "inline-message-btn");
         expect(actionContainer).toBeFalsy();

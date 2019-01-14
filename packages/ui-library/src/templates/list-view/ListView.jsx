@@ -109,7 +109,7 @@ module.exports = class extends React.Component {
                     expanded={this.state.expanded}
                     onOpen={this._toggleModal}
                     onClose={this._toggleModal}
-                    >
+                >
                     <p>
                         Add Modal content
                     </p>
@@ -144,13 +144,13 @@ module.exports = class extends React.Component {
                 }
                 <div className="result-set" data-id="result-set" style={{ height: 500 }}>
                     <InfiniteScroll contentType={this._contentType}
-                            initialItem={this.props.position}
-                            onScroll={this._handleScroll}
-                            batches={this.props.batches}
-                            hasNext={this.props.hasNext}
-                            hasPrev={this.props.hasPrev}
-                            onLoadNext={_.noop}
-                            onLoadPrev={_.noop} >
+                        initialItem={this.props.position}
+                        onScroll={this._handleScroll}
+                        batches={this.props.batches}
+                        hasNext={this.props.hasNext}
+                        hasPrev={this.props.hasPrev}
+                        onLoadNext={_.noop}
+                        onLoadPrev={_.noop} >
                         <div className="result-set">No rows returned</div>
                     </InfiniteScroll>
                 </div>
@@ -220,7 +220,7 @@ class Row extends React.Component {
                         image="https://media1.giphy.com/media/EldfH1VJdbrwY/200_s.gif"
                         subtitle="this is a subtitle"
                         title={"Row number " + this.props["data-id"] + " (" + this.props.type + ")"}>
-                         <LabelValuePairs dataPairs={mockData} />
+                        <LabelValuePairs dataPairs={mockData} />
                     </ExpandableRow>);
             case "1 line no icon, no accessories":
                 return (
@@ -230,10 +230,10 @@ class Row extends React.Component {
                         title={"Row number " + this.props["data-id"] + " (" + this.props.type + ")"}>
                         <ColumnLayout.Row data-id="columns-2">
                             <ColumnLayout.Column>
-                                 <LabelValuePairs dataPairs={mockData} />
+                                <LabelValuePairs dataPairs={mockData} />
                             </ColumnLayout.Column>
                             <ColumnLayout.Column>
-                                 <LabelValuePairs dataPairs={mockData} />
+                                <LabelValuePairs dataPairs={mockData} />
                             </ColumnLayout.Column>
                         </ColumnLayout.Row>
                     </ExpandableRow>);
@@ -244,7 +244,7 @@ class Row extends React.Component {
                         showEdit={this.props.showEdit}
                         subtitle="this is a subtitle"
                         title={"Row number " + this.props["data-id"] + " (" + this.props.type + ")"}>
-                         <LabelValuePairs dataPairs={mockData} />
+                        <LabelValuePairs dataPairs={mockData} />
                     </ExpandableRow>);
             case "2 lines with icon, with status=good":
                 return (
@@ -257,10 +257,10 @@ class Row extends React.Component {
                         title={"Row number " + this.props["data-id"] + " (" + this.props.type + ")"}>
                         <ColumnLayout.Row data-id="columns-2">
                             <ColumnLayout.Column>
-                                 <LabelValuePairs dataPairs={mockData} />
+                                <LabelValuePairs dataPairs={mockData} />
                             </ColumnLayout.Column>
                             <ColumnLayout.Column>
-                                 <LabelValuePairs dataPairs={mockData} />
+                                <LabelValuePairs dataPairs={mockData} />
                             </ColumnLayout.Column>
                         </ColumnLayout.Row>
                     </ExpandableRow>);
@@ -273,7 +273,7 @@ class Row extends React.Component {
                         image="https://media1.giphy.com/media/EldfH1VJdbrwY/200_s.gif"
                         rowAccessories={<RowAccessories.Status status="error" />}
                         title={"Row number " + this.props["data-id"] + " (" + this.props.type + ")"}>
-                         <LabelValuePairs dataPairs={mockData} />
+                        <LabelValuePairs dataPairs={mockData} />
                     </ExpandableRow>);
             case "2 lines with icon toggle on":
                 return (
@@ -284,12 +284,12 @@ class Row extends React.Component {
                         image="https://media1.giphy.com/media/EldfH1VJdbrwY/200_s.gif"
                         rowAccessories={<Toggle toggled={true} stateless={false} />}
                         title={"Row number " + this.props["data-id"] + " (" + this.props.type + ")"}>
-                       <ColumnLayout.Row data-id="columns-2">
+                        <ColumnLayout.Row data-id="columns-2">
                             <ColumnLayout.Column>
-                                 <LabelValuePairs dataPairs={mockData} />
+                                <LabelValuePairs dataPairs={mockData} />
                             </ColumnLayout.Column>
                             <ColumnLayout.Column>
-                                 <LabelValuePairs dataPairs={mockData} />
+                                <LabelValuePairs dataPairs={mockData} />
                             </ColumnLayout.Column>
                         </ColumnLayout.Row>
                     </ExpandableRow>);
@@ -302,7 +302,7 @@ class Row extends React.Component {
                         image="https://media1.giphy.com/media/EldfH1VJdbrwY/200_s.gif"
                         rowAccessories={<Toggle toggled={false} stateless={false} />}
                         title={"Row number " + this.props["data-id"] + " (" + this.props.type + ")"}>
-                         <LabelValuePairs dataPairs={mockData} />
+                        <LabelValuePairs dataPairs={mockData} />
                     </ExpandableRow>);
             case "2 lines with icon, with pill button":
                 return (
@@ -315,10 +315,10 @@ class Row extends React.Component {
                         title={"Row number " + this.props["data-id"] + " (" + this.props.type + ")"}>
                         <ColumnLayout.Row data-id="columns-2">
                             <ColumnLayout.Column>
-                                 <LabelValuePairs dataPairs={mockData} />
+                                <LabelValuePairs dataPairs={mockData} />
                             </ColumnLayout.Column>
                             <ColumnLayout.Column>
-                                 <LabelValuePairs dataPairs={mockData} />
+                                <LabelValuePairs dataPairs={mockData} />
                             </ColumnLayout.Column>
                         </ColumnLayout.Row>
                     </ExpandableRow>);
@@ -340,7 +340,7 @@ class Row extends React.Component {
                         image="https://media1.giphy.com/media/EldfH1VJdbrwY/200_s.gif"
                         rowAccessories={accessories}
                         title={"Row number " + this.props["data-id"] + " (" + this.props.type + ")"}>
-                         <LabelValuePairs dataPairs={mockData} />
+                        <LabelValuePairs dataPairs={mockData} />
                     </ExpandableRow>);
         }
     }

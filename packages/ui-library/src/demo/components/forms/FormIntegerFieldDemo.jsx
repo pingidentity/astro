@@ -106,122 +106,122 @@ class FormIntegerFieldDemo extends React.Component {
             <div>
                 <div className="input-row">
                     <FormIntegerField
-                            labelText={"Basic - Value : " + this.state.integerField0}
-                            onValueChange = {this._handleValueChange0}
-                            initialValue = ""
-                            stateless={false}
-                            width={InputWidths.MD}
-                            name="demo"
+                        labelText={"Basic - Value : " + this.state.integerField0}
+                        onValueChange = {this._handleValueChange0}
+                        initialValue = ""
+                        stateless={false}
+                        width={InputWidths.MD}
+                        name="demo"
                     />
                 </div>
                 <div className="input-row">
                     <FormIntegerField
-                            labelText={"Basic stateless with validation helper and with hidden controls - Value : " +
+                        labelText={"Basic stateless with validation helper and with hidden controls - Value : " +
                                 this.state.integerField1}
-                            onValueChange = {this._changeCallback}
-                            value={this.state.integerField1}
-                            width={InputWidths.MD}
-                            stateless={true}
-                            hideControls={true}
+                        onValueChange = {this._changeCallback}
+                        value={this.state.integerField1}
+                        width={InputWidths.MD}
+                        stateless={true}
+                        hideControls={true}
                     />
                 </div>
                 <div className="input-row">
                     <FormIntegerField
-                            showUndo = {true}
-                            labelText={"With default value and undo - Value : " + this.state.integerField2}
-                            initialValue = {8800}
-                            onValueChange = {this._handleValueChange2}
-                            width={InputWidths.MD}
-                            stateless={false}
+                        showUndo = {true}
+                        labelText={"With default value and undo - Value : " + this.state.integerField2}
+                        initialValue = {8800}
+                        onValueChange = {this._handleValueChange2}
+                        width={InputWidths.MD}
+                        stateless={false}
                     />
                 </div>
                 <div className="input-row">
                     <FormIntegerField
-                            onValueChange = {this._handleValueChange3}
-                            data-id = "integerField3"
-                            labelText={"Required - Value : " + this.state.integerField3}
-                            initialValue = ""
-                            required = {true}
-                            placeholder = "This field is required"
-                            width={InputWidths.MD}
-                            stateless={false}
+                        onValueChange = {this._handleValueChange3}
+                        data-id = "integerField3"
+                        labelText={"Required - Value : " + this.state.integerField3}
+                        initialValue = ""
+                        required = {true}
+                        placeholder = "This field is required"
+                        width={InputWidths.MD}
+                        stateless={false}
                     />
                 </div>
                 <div className="input-row">
                     <FormIntegerField
-                            onValueChange = {this._handleValueChange6}
-                            data-id = "integerField6"
-                            labelText={"Range 1 - 15 - Value : " + this.state.integerField6}
-                            initialValue = {this.state.integerField6}
-                            placeholder = "Enter an integer between 1 and 15"
-                            max = {15}
-                            min = {1}
-                            outOfRangeErrorMessage="Please enter a number between 1 and 15"
-                            labelHelpText = "Prop enforceRange is true by default. This doesn't allow keyboard input\
+                        onValueChange = {this._handleValueChange6}
+                        data-id = "integerField6"
+                        labelText={"Range 1 - 15 - Value : " + this.state.integerField6}
+                        initialValue = {this.state.integerField6}
+                        placeholder = "Enter an integer between 1 and 15"
+                        max = {15}
+                        min = {1}
+                        outOfRangeErrorMessage="Please enter a number between 1 and 15"
+                        labelHelpText = "Prop enforceRange is true by default. This doesn't allow keyboard input\
                                 above the maximum range."
-                            width={InputWidths.MD}
-                            stateless={false}
+                        width={InputWidths.MD}
+                        stateless={false}
                     />
                 </div>
                 <div className="input-row">
                     <FormIntegerField
-                            onValueChange = {this._changeCallback4}
-                            data-id = "integerField4"
-                            labelText={
-                                "Range 0 - 25 w/ Error text on Blur - Value : " +
+                        onValueChange = {this._changeCallback4}
+                        data-id = "integerField4"
+                        labelText={
+                            "Range 0 - 25 w/ Error text on Blur - Value : " +
                                 this.state.integerField4
-                            }
-                            enforceRange={false}
-                            onBlur = {this._handleBlur4}
-                            errorMessage = {this.state.integerField4Error}
-                            max = {25}
-                            min = {0}
-                            labelHelpText ={
-                                "Prop enforceRange set to false to allow keyboard input" +
+                        }
+                        enforceRange={false}
+                        onBlur = {this._handleBlur4}
+                        errorMessage = {this.state.integerField4Error}
+                        max = {25}
+                        min = {0}
+                        labelHelpText ={
+                            "Prop enforceRange set to false to allow keyboard input" +
                                 " of out of range numbers"
-                            }
-                            width={InputWidths.MD}
-                            stateless={false}
+                        }
+                        width={InputWidths.MD}
+                        stateless={false}
                     />
                 </div>
                 <div className="input-row">
                     <FormIntegerField
-                            onValueChange = {this._changeCallback5}
-                            onBlur={this._handleBlur5}
-                            data-id = "integerField5"
-                            labelText={"Range 50 - 300, Increment 5 - Value : " + this.state.integerField5}
-                            errorMessage = {this.state.integerField5Error}
-                            increment = {5}
-                            min = {50}
-                            max = {300}
-                            width={InputWidths.MD}
-                            stateless={false}
-                    />
-                </div>
-
-                <div className="input-row">
-                    <FormIntegerField
-                            readOnly={true}
-                            labelText = {"Read Only"}
-                            mode = {this.state.integerField7Mode}
-                            disabled = {this.state.integerField7Disabled}
-                            onValueChange = {this._changeCallback}
-                            initialValue = {30}
-                            width={InputWidths.MD}
-                            stateless={false}
+                        onValueChange = {this._changeCallback5}
+                        onBlur={this._handleBlur5}
+                        data-id = "integerField5"
+                        labelText={"Range 50 - 300, Increment 5 - Value : " + this.state.integerField5}
+                        errorMessage = {this.state.integerField5Error}
+                        increment = {5}
+                        min = {50}
+                        max = {300}
+                        width={InputWidths.MD}
+                        stateless={false}
                     />
                 </div>
 
                 <div className="input-row">
                     <FormIntegerField
-                            labelText = {"Disabled with help text"}
-                            mode = {this.state.integerField8Mode}
-                            disabled = {true}
-                            onValueChange = {this._changeCallback}
-                            labelHelpText = "Disabled with help text"
-                            initialValue = {40}
-                            width={InputWidths.MD}
-                            stateless={false}
+                        readOnly={true}
+                        labelText = {"Read Only"}
+                        mode = {this.state.integerField7Mode}
+                        disabled = {this.state.integerField7Disabled}
+                        onValueChange = {this._changeCallback}
+                        initialValue = {30}
+                        width={InputWidths.MD}
+                        stateless={false}
+                    />
+                </div>
+
+                <div className="input-row">
+                    <FormIntegerField
+                        labelText = {"Disabled with help text"}
+                        mode = {this.state.integerField8Mode}
+                        disabled = {true}
+                        onValueChange = {this._changeCallback}
+                        labelHelpText = "Disabled with help text"
+                        initialValue = {40}
+                        width={InputWidths.MD}
+                        stateless={false}
                     />
                 </div>
 

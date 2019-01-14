@@ -30,29 +30,29 @@ const Head = ({
                         : null;
                     const className = classnames(getDropClass(content, index), "th");
                     return (
-                            <DragDrop
-                                key={index}
-                                id={index}
-                                index={index}
-                                onDrag={onDrag}
-                                style={style}
-                                type="column"
-                                className={className}
-                                onDrop={onDrop}
-                                onCancel={onCancel}>
-                                    { (headContentType)
-                                        ? React.cloneElement(
-                                                headContentType,
-                                                _.defaults(
-                                                    { id: headIndex,
-                                                        key: headIndex,
-                                                        index: headIndex,
-                                                        data: content }
-                                                )
-                                            )
-                                        : content
-                                    }
-                            </DragDrop>
+                        <DragDrop
+                            key={index}
+                            id={index}
+                            index={index}
+                            onDrag={onDrag}
+                            style={style}
+                            type="column"
+                            className={className}
+                            onDrop={onDrop}
+                            onCancel={onCancel}>
+                            { (headContentType)
+                                ? React.cloneElement(
+                                    headContentType,
+                                    _.defaults(
+                                        { id: headIndex,
+                                            key: headIndex,
+                                            index: headIndex,
+                                            data: content }
+                                    )
+                                )
+                                : content
+                            }
+                        </DragDrop>
                     );
                 })}
             </div>
@@ -101,7 +101,7 @@ const ISBody = (props) => (
             onScroll={props.onISScroll}
             batches={
                 props.infiniteScroll.batches || [{ id: 1, data: props.bodyData }]}
-            />
+        />
     </div>
 );
 

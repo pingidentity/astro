@@ -18,7 +18,7 @@ class TabbedSectionsDemo extends React.Component {
     render() {
         return (
             <TabbedSections selectedIndex={this.state.selectedIndex}
-                            onValueChange={this._handleSectionChange} >
+                onValueChange={this._handleSectionChange} >
                 <div title="Section 1">
                     <span>This is the content of section 1</span>
                 </div>

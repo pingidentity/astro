@@ -69,7 +69,7 @@ module.exports = {
                 test: /\.(ttf|eot|otf|woff2?)(\?.*)?$/,
                 loader: "file-loader?name=fonts/[path][name].[ext]"
             }
-/*
+            /*
             // embed some images as base64 encoded strings
             {
                 test: /\.png$/,
@@ -113,7 +113,7 @@ module.exports = {
             favicon: "./hosting/assets/images/favicon.png"
         }),
         new ExtractTextPlugin("[name].css"),
-/*
+        /*
         new DedupePlugin()
         new UglifyJsPlugin({
             minimize: true,

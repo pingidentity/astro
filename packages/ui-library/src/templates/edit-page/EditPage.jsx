@@ -85,11 +85,11 @@ export default class EditPage extends React.Component {
                 <Link className="page-return-link" title="To record list"/>
 
                 <PageHeader title="Denver Broncos"
-                        underlined={true}
-                        accessories={[
-                            <Button label="Reset Password" inline key="button" />,
-                            <Toggle stateless={false} key="toggle"/>
-                        ]} />
+                    underlined={true}
+                    accessories={[
+                        <Button label="Reset Password" inline key="button" />,
+                        <Toggle stateless={false} key="toggle"/>
+                    ]} />
 
                 <PageSection>
                     <RockerButton
@@ -202,12 +202,12 @@ export default class EditPage extends React.Component {
                     </PageSection>
                 </PageSection>
                 <ButtonBar
-                        onCancel={this._handleCancel}
-                        onSave={this._handleSave}
-                        cancelText="Discard Changes"
-                        saveText="Save"
-                        enableSavingAnimation={this.state.saving}
-                        visible={this._showButtonBar(this.state)} />
+                    onCancel={this._handleCancel}
+                    onSave={this._handleSave}
+                    cancelText="Discard Changes"
+                    saveText="Save"
+                    enableSavingAnimation={this.state.saving}
+                    visible={this._showButtonBar(this.state)} />
             </div>
         );
     }

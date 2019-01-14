@@ -41,25 +41,25 @@ class FormCheckboxListDemo extends React.Component {
         ];
 
         return (
+            <div>
+                <FormCheckboxList
+                    stateless={true}
+                    hideUnchecked={this.state.hideUnchecked}
+                    items={checkboxItems}
+                    onGetSelectAllLabel={function (count) { return "Select " + count + " items"; }}
+                    onGetDeselectAllLabel={function (count) { return "Deselect " + count + " items"; }}
+                    labelHideUnselected="Hide Unselected"
+                    labelSearchPlaceholder="Search"
+                    onValueChange={this._handleValueChange}
+                    onQueryChange={this._handleQueryChange}
+                    onVisibilityChange={this._handleVisibilityChange}
+                    queryString={this.state.queryString}
+                    selected={this.state.selectedIds}
+                />
                 <div>
-                    <FormCheckboxList
-                        stateless={true}
-                        hideUnchecked={this.state.hideUnchecked}
-                        items={checkboxItems}
-                        onGetSelectAllLabel={function (count) { return "Select " + count + " items"; }}
-                        onGetDeselectAllLabel={function (count) { return "Deselect " + count + " items"; }}
-                        labelHideUnselected="Hide Unselected"
-                        labelSearchPlaceholder="Search"
-                        onValueChange={this._handleValueChange}
-                        onQueryChange={this._handleQueryChange}
-                        onVisibilityChange={this._handleVisibilityChange}
-                        queryString={this.state.queryString}
-                        selected={this.state.selectedIds}
-                    />
-                    <div>
                         Selected Checkbox IDs = {this.state.selectedIds.join()}
-                    </div>
                 </div>
+            </div>
         );
     }
 }

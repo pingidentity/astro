@@ -17,7 +17,7 @@ const PolicySettingsList = ({ character, iconName, label, settings, fallbackText
                 : <div className="text-value">
                     {settings && settings.length > 0 ? settings[0] : fallbackText}
                 </div>
-            }
+        }
     </PolicyNode>
 );
 

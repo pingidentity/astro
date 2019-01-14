@@ -28,8 +28,8 @@ module.exports = function (state, action) {
     // otherwise clone the existing current state,
     // and set it on the next state
     var currentNextState = (action.componentId in nextState)
-            ? _.clone(nextState[action.componentId])
-            : _.clone(initialState);
+        ? _.clone(nextState[action.componentId])
+        : _.clone(initialState);
     nextState[action.componentId] = currentNextState;
 
     switch (action.type) {

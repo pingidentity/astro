@@ -95,20 +95,24 @@ class TabbedSections extends React.Component {
             <div data-id={this.props["data-id"]} className={this.props.className}>
                 <div className="tabs">
                     <ul ref="tabs">
-                    {
-                        React.Children.map(this.props.children, function (child, index) {
-                            return (<TabbedSectionChild className={this.props.selectedIndex === index ? "active" : ""}
+                        {
+                            React.Children.map(this.props.children, function (child, index) {
+                                return (
+                                    <TabbedSectionChild
+                                        className={this.props.selectedIndex === index ? "active" : ""}
                                         data-id={this.props["data-id"] + "-" + index}
                                         onClick={this.props.onValueChange}
                                         key={index}
                                         index={index}
-                                        content={child.props.title} />);
-                        }.bind(this))
-                    }
+                                        content={child.props.title}
+                                    />
+                                );
+                            }.bind(this))
+                        }
                     </ul>
                 </div>
                 <div ref="content">
-                { this.props.renderHidden ? this._renderAllChildren() : this._renderSelectedChild() }
+                    { this.props.renderHidden ? this._renderAllChildren() : this._renderSelectedChild() }
                 </div>
             </div>
         );
@@ -123,8 +127,8 @@ var TabbedSectionChild = function (props) {
 
     return (
         <li className={props.className}
-                data-id={props["data-id"]}
-                onClick={_handleClick}>
+            data-id={props["data-id"]}
+            onClick={_handleClick}>
             {props.content}
         </li>
     );

@@ -50,12 +50,12 @@ const Link = (props) => {
     }
 
     const {
-            count,
-            disabled,
-            icon,
-            onClick,
-            title
-          } = props;
+        count,
+        disabled,
+        icon,
+        onClick,
+        title
+    } = props;
 
     const _handleClick = (event) => {
         if (!disabled && onClick) {

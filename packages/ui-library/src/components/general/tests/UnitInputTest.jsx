@@ -60,13 +60,13 @@ describe("UnitInput", function () {
 
     it("accepts custom data-id", function () {
         component = render({ labelText: "Unit Input Text",
-                             "data-id": "my-custom-select" });
+            "data-id": "my-custom-select" });
         expect(TestUtils.findRenderedDOMNodeWithDataId(component, "my-custom-select")).toBeTruthy();
     });
 
     it("accepts classsname", function () {
         component = render({ labelText: "Unit Input Text",
-                            className: "custom-container-class" });
+            className: "custom-container-class" });
         expect(TestUtils.findRenderedDOMNodeWithClass(component, "custom-container-class")).toBeTruthy();
     });
 

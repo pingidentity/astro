@@ -26,11 +26,11 @@ class BackgroundLoaderDemo extends React.Component {
         return (
             <div>
                 <BackgroundLoader
-                        className="background-loader-example-wrapper"
-                        interval={this.state.interval}
-                        load={this._loadData}
-                        loading={this._showLoading}
-                        loaded={this.state.isLoaded}>
+                    className="background-loader-example-wrapper"
+                    interval={this.state.interval}
+                    load={this._loadData}
+                    loading={this._showLoading}
+                    loaded={this.state.isLoaded}>
                     <span>Data has been loaded.</span>
                 </BackgroundLoader>
             </div>

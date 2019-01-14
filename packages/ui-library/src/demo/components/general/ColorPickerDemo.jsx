@@ -65,7 +65,7 @@ class ColorPickerDemo extends React.Component {
                         stateless={true}
                         flags={flags}
                     />
-                    </div>
+                </div>
             </div>);
     }
 }

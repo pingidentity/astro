@@ -40,7 +40,7 @@ import Utils from "../../util/Utils";
  *     button is clicked.
  */
 
- /**
+/**
  * @typedef {Array} Wizard_v2~headerItems
  *
  * @param {string} [title]
@@ -49,7 +49,7 @@ import Utils from "../../util/Utils";
  *     The value to display below the title :-|
  */
 
- /**
+/**
  * @typedef {Object} Wizard_v2~strings
  *
  * @param {string} [key]
@@ -58,7 +58,7 @@ import Utils from "../../util/Utils";
  *     The text associated with the key.
  */
 
- /**
+/**
   * @class Step
   * @desc Displays a single wizard step.
   * @param {string} [data-id="wizard"]
@@ -212,7 +212,7 @@ class Wizard extends React.Component {
                         onCancel={onCancel}
                         onNext={onNext}
                         onSave={onSave}
-                />
+                    />
                 </div>
                 {!activeStep.props.hideMenu && (
                     <Menu
@@ -282,7 +282,7 @@ function ActiveStep(props) {
                     show
                     modal
                 >
-                {props.step.props.loading !== true && props.step.props.loading}
+                    {props.step.props.loading !== true && props.step.props.loading}
                 </PageSpinner>
             )}
             {props.step}

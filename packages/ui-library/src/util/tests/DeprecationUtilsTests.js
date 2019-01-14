@@ -292,7 +292,9 @@ The prop value "isEvenWorse" is deprecated and can no longer be used. Use "aGrea
             name: "Component",
             substitute: "Substitute"
         }))
-        .toThrow(Error("The component \"Component\" is deprecated and has been removed. Use \"Substitute\" instead."));
+            .toThrow(Error(
+                "The component \"Component\" is deprecated and has been removed. Use \"Substitute\" instead."
+            ));
     });
 
     it("deprecationError logs warning with name and message", () => {

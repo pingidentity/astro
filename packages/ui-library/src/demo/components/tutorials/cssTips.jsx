@@ -418,7 +418,7 @@ class cssTips extends React.Component {
                     <fieldset className={classnames(fieldsetCss)}>
                         <legend>
                             <Toggle stateless={true} onToggle={this._toggleFieldset} toggled={this.state.showFieldset}
-                                    value={this.state.showFieldset} />
+                                value={this.state.showFieldset} />
                             &nbsp; Click here to toggle fieldset content
                         </legend>
 
@@ -471,30 +471,30 @@ class cssTips extends React.Component {
                                         marginBottom: "15px",
                                     }}
                                     />
-                                <strong style={{
-                                    textDecoration: deprecatedIcons.indexOf(sorted.name) !== -1
-                                    ? "line-through" : "none",
-                                    opacity: deprecatedIcons.indexOf(sorted.name) !== -1
-                                    ? "0.5" : "1",
-                                }}>
-                                    {sorted.name}
-                                </strong>
-                                <div style={{
-                                    textDecoration: deprecatedIcons.indexOf(sorted.name) !== -1
-                                    ? "line-through" : "none",
-                                    opacity: deprecatedIcons.indexOf(sorted.name) !== -1 ? "0.5" : "1",
-                                }}>
-                                    {sorted.value}
-                                </div>
+                                    <strong style={{
+                                        textDecoration: deprecatedIcons.indexOf(sorted.name) !== -1
+                                            ? "line-through" : "none",
+                                        opacity: deprecatedIcons.indexOf(sorted.name) !== -1
+                                            ? "0.5" : "1",
+                                    }}>
+                                        {sorted.name}
+                                    </strong>
+                                    <div style={{
+                                        textDecoration: deprecatedIcons.indexOf(sorted.name) !== -1
+                                            ? "line-through" : "none",
+                                        opacity: deprecatedIcons.indexOf(sorted.name) !== -1 ? "0.5" : "1",
+                                    }}>
+                                        {sorted.value}
+                                    </div>
 
-                                {sorted.deprecatedValue &&
+                                    {sorted.deprecatedValue &&
                                     <div style={{
                                         textDecoration: "line-through",
                                         opacity: "0.5",
                                     }}>
                                         {sorted.deprecatedValue}
                                     </div>
-                                }
+                                    }
 
                                 </div>
                             );

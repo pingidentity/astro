@@ -250,9 +250,9 @@ describe("ModalButtonTest", function () {
         });
 
         var container = TestUtils.findRenderedDOMNodeWithDataId(
-                component,
-                "modal-button-button-container"
-            );
+            component,
+            "modal-button-button-container"
+        );
         expect(container).toBeDefined();
     });
 

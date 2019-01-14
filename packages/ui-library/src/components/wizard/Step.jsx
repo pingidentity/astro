@@ -195,7 +195,7 @@ class Step extends React.Component {
                 flags={this.props.flags}
 
                 {...this.props.saveTooltip}
-                >
+            >
                 {this.props.saveTooltip.messageText}
             </ConfirmTooltip>
         ) : this._getNextButtonMarkup();

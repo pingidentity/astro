@@ -326,7 +326,7 @@ describe("FormDropDownList", function () {
         var select = TestUtils.findRenderedDOMNodeWithDataId(component, "select-list");
         var listOptions = TestUtils.scryRenderedDOMNodesWithTag(select, "li");
 
-        expect(listOptions.length).toEqual(8);  // 5 options + 3 groups
+        expect(listOptions.length).toEqual(8); // 5 options + 3 groups
         expect(listOptions[0].textContent).toEqual("One");
         expect(listOptions[1].textContent).toEqual("Five");
         expect(listOptions[2].textContent).toEqual("Group A");
@@ -342,7 +342,7 @@ describe("FormDropDownList", function () {
         var select = TestUtils.findRenderedDOMNodeWithDataId(component, "select-list");
         var listOptions = TestUtils.scryRenderedDOMNodesWithTag(select, "li");
 
-        expect(listOptions.length).toEqual(9);  // 5 listOptions + 3 groups + noneOption
+        expect(listOptions.length).toEqual(9); // 5 listOptions + 3 groups + noneOption
         expect(listOptions[0].textContent).toEqual("none");
         expect(listOptions[1].textContent).toEqual("One");
         expect(listOptions[2].textContent).toEqual("Five");

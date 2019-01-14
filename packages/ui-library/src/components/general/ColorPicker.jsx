@@ -130,8 +130,8 @@ module.exports = class extends React.Component {
     render() {
         return (
             this.props.stateless
-                    ? <Stateless ref="stateless" {...this.props} />
-                    : <Stateful ref="stateful" {...this.props} />);
+                ? <Stateless ref="stateless" {...this.props} />
+                : <Stateful ref="stateful" {...this.props} />);
     }
 };
 
@@ -201,11 +201,11 @@ class Stateless extends React.Component {
      */
     _handleColorInputKeyDown = (e) => {
         switch (e.keyCode) {
-            case 13:  //return key
+            case 13: //return key
                 this._open();
                 break;
-            case 9:   //tab key
-            case 27:  //esc key
+            case 9: //tab key
+            case 27: //esc key
                 this._close();
                 break;
         }
@@ -280,7 +280,7 @@ class Stateless extends React.Component {
 
         if (Validators.isValidHexColorCharacter(val)) {
             this._valueChange(val);
-            this.props.onError(null);   // clear the errorMessage
+            this.props.onError(null); // clear the errorMessage
         }
     };
 
@@ -323,8 +323,8 @@ class Stateless extends React.Component {
                 <FormLabel data-id="colorLabel" value={this.props.labelText || this.props.label} hint={this.props.hintText}/>
                 <div className="color-picker" ref="swatch">
                     <span className="colors colors-theme-default colors-swatch-position-left colors-swatch-left colors-position-default"
-                          ref="innerSwatch"
-                          onClick={this._handleClick}>
+                        ref="innerSwatch"
+                        onClick={this._handleClick}>
                         <FormTextField
                             data-id="colorInput"
                             className="colors-label"
@@ -387,11 +387,11 @@ class Stateful extends React.Component {
     render() {
         return (
             <Stateless ref="stateless" {...this.props}
-                    errorMessage={this.state.errorMessage}
-                    onError={this._handleError}
-                    onToggle={this._handleToggle}
-                    onValueChange={this.props.onValueChange}
-                    open={this.state.open}/>
+                errorMessage={this.state.errorMessage}
+                onError={this._handleError}
+                onToggle={this._handleToggle}
+                onValueChange={this.props.onValueChange}
+                open={this.state.open}/>
         );
     }
 }

@@ -108,8 +108,8 @@ class Chart extends React.Component {
             <div data-id={this.props["data-id"]}>
                 <PieChart width={this.props.width} height={this.props.height} margin={this.props.margin}>
                     <Pie data={this.props.data} nameKey={this.props.sectorKey} valueKey={this.props.sectorDataKey}
-                            innerRadius={this.props.donut ? "50%" : null} label={this.props.sectorLabel}
-                            legendType={this.props.legendType} isAnimationActive={this.props.animate}>
+                        innerRadius={this.props.donut ? "50%" : null} label={this.props.sectorLabel}
+                        legendType={this.props.legendType} isAnimationActive={this.props.animate}>
                         {this._renderCells()}
                     </Pie>
                     {this.props.showTooltips && <Tooltip />}

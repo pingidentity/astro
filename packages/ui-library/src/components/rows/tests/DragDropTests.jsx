@@ -220,8 +220,8 @@ describe("DragDrop", function () {
     });
 
     it("Processes drag to bottom half of row", function () {
-        var monitor = genMockMonitor(0, 60, genMockProps(1));   //pretend we"re dragging row index 1
-        var props = genMockProps(2);                            //onto row index 2
+        var monitor = genMockMonitor(0, 60, genMockProps(1)); //pretend we"re dragging row index 1
+        var props = genMockProps(2); //onto row index 2
 
         var targetComponent = ReactTestUtils.renderIntoDocument(<div>Blah</div>);
         var targetNode = ReactDOM.findDOMNode(targetComponent);
@@ -235,8 +235,8 @@ describe("DragDrop", function () {
     });
 
     it("Processes drag to top half of row", function () {
-        var monitor = genMockMonitor(0, 10, genMockProps(1));   //pretend we"re dragging row index 1
-        var props = genMockProps(2);                            //onto row index 2
+        var monitor = genMockMonitor(0, 10, genMockProps(1)); //pretend we"re dragging row index 1
+        var props = genMockProps(2); //onto row index 2
 
         var targetComponent = ReactTestUtils.renderIntoDocument(<div>Blah</div>);
         var targetNode = ReactDOM.findDOMNode(targetComponent);

@@ -46,18 +46,18 @@ const _getSearchProps = ({
     children = []
 }, possibleResults, searchTerms) => {
     const ancestorProps = root && !section && children.length > 0
-    ? {
-        root,
-        section: id
-    }
-    : {
-        root
-    };
+        ? {
+            root,
+            section: id
+        }
+        : {
+            root
+        };
 
     const { possibleResults: newResults, searchTerms: childSearchTerms } = children.reduce(
         ({ possibleResults: accResults, searchTerms: accSearch }, child) =>
             _getSearchProps({ ...child, ...ancestorProps }, accResults, accSearch)
-    , { possibleResults, searchTerms });
+        , { possibleResults, searchTerms });
 
     const result = {
         hasChildren: children.length > 0,
@@ -85,8 +85,8 @@ const _getSearchProps = ({
 const _getResults = (possibleResults, ids, currentResults = []) => {
     return ids.reduce((acc, id) => {
         return currentResults.some(current => id === current.id)
-        ? acc
-        : [possibleResults[id], ...acc];
+            ? acc
+            : [possibleResults[id], ...acc];
     }, []);
 };
 

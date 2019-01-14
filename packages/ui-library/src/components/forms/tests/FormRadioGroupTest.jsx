@@ -192,8 +192,8 @@ describe("FormRadioGroup", function () {
     it("render component with data-id", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormRadioGroup data-id="radioGroupWithDataId"
-                            groupName="test_radio_group"
-                            items={items} />
+                groupName="test_radio_group"
+                items={items} />
         );
 
         var element = TestUtils.findRenderedDOMNodeWithDataId(component, "radioGroupWithDataId");
@@ -204,8 +204,8 @@ describe("FormRadioGroup", function () {
     it("render component with default data-id", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormRadioGroup
-                            groupName="test_radio_group"
-                            items={items} />
+                groupName="test_radio_group"
+                items={items} />
         );
 
         var element = TestUtils.findRenderedDOMNodeWithDataId(component, "radio-btn");
@@ -265,13 +265,13 @@ describe("FormRadioGroup", function () {
 
     it("doesn't render label if no label prop is passed", function () {
         const component = ReactTestUtils.renderIntoDocument(
-                <FormRadioGroup
-                    data-id="test-radio-group"
-                    groupName="test_radio_group"
-                    onValueChange={callback}
-                    items={items}
-                    />
-            );
+            <FormRadioGroup
+                data-id="test-radio-group"
+                groupName="test_radio_group"
+                onValueChange={callback}
+                items={items}
+            />
+        );
 
         const element = TestUtils.findRenderedDOMNodeWithDataId(component, "test-radio-group-container");
 

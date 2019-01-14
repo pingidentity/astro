@@ -70,8 +70,8 @@ class PropsToUrlWatcher extends React.Component {
         var vals = [], v;
 
         //only recompute the string if the input props have changed
-        if ( _.isEqual(this.props.watch, nextProps.watch) &&   //list of props to watch changed
-            nextProps.ignoreFalse === this.props.ignoreFalse)  //or the option to ignoreFalse changed
+        if ( _.isEqual(this.props.watch, nextProps.watch) && //list of props to watch changed
+            nextProps.ignoreFalse === this.props.ignoreFalse) //or the option to ignoreFalse changed
         {
             return;
         }

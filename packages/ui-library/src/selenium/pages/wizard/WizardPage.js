@@ -258,7 +258,7 @@ var WizardDemoPage = Object.create(HomePage, {
         }
     },
 
-        /**
+    /**
      * @desc this function is to check if check box Pulsing existing
      */
     verifyConfirmTooltipExisting: {

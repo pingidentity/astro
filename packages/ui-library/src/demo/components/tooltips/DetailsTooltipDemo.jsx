@@ -101,9 +101,9 @@ class DetailsTooltipDemo extends React.Component {
                     </p>
                     <div className="button-group" data-id="delete-confirmation">
                         <Button
-                                data-id="confirm-action"
-                                type="primary"
-                                onClick={this._handleConfirm1} >
+                            data-id="confirm-action"
+                            type="primary"
+                            onClick={this._handleConfirm1} >
                             Confirm
                         </Button>
                         <br />
@@ -128,9 +128,9 @@ class DetailsTooltipDemo extends React.Component {
                     </p>
                     <div className="button-group" data-id="delete-confirmation">
                         <Button
-                                data-id="confirm-action"
-                                type="primary"
-                                onClick={this._handleConfirm2} >
+                            data-id="confirm-action"
+                            type="primary"
+                            onClick={this._handleConfirm2} >
                             Confirm
                         </Button>
                         <br />
@@ -156,9 +156,9 @@ class DetailsTooltipDemo extends React.Component {
                     </p>
                     <div className="button-group" data-id="delete-confirmation">
                         <Button
-                                data-id="confirm-action"
-                                type="primary"
-                                onClick={this._handleConfirm3} >
+                            data-id="confirm-action"
+                            type="primary"
+                            onClick={this._handleConfirm3} >
                             Confirm
                         </Button>
                         <br />
@@ -183,9 +183,9 @@ class DetailsTooltipDemo extends React.Component {
                     </p>
                     <div className="button-group" data-id="delete-confirmation">
                         <Button
-                                data-id="confirm-action"
-                                type="primary"
-                                onClick={this._handleConfirm4} >
+                            data-id="confirm-action"
+                            type="primary"
+                            onClick={this._handleConfirm4} >
                             Confirm
                         </Button>
                         <br />
@@ -301,7 +301,7 @@ class DetailsTooltipDemo extends React.Component {
                     secondaryLabels={secondaryArr}
                     primaryLabels={primaryArr}
                     cancelLabel="Cancel"
-                    >
+                >
                     <div className="title">Pass buttons</div>
                     <p>
                         Lorem ipsum dolor sit amet, nonummy non donec, ac eget. Vero et in, diam hac pharetra

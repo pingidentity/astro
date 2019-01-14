@@ -103,14 +103,14 @@ describe("FormTextField", function () {
         };
         component = ReactTestUtils.renderIntoDocument(
             <Multivalues title="Sites" data-id="multiselect"
-                 entries={[
-                     "Entry 1",
-                     "Entry 2",
-                     "Entry 3",
-                     "Entry 4"
-                 ]}
-                 onValueChange={callback}
-                 onNewValue={_onNewValueCallback} />
+                entries={[
+                    "Entry 1",
+                    "Entry 2",
+                    "Entry 3",
+                    "Entry 4"
+                ]}
+                onValueChange={callback}
+                onNewValue={_onNewValueCallback} />
         );
         input = TestUtils.findRenderedDOMNodeWithDataId(component,"value-entry");
 
@@ -134,14 +134,14 @@ describe("FormTextField", function () {
         };
         component = ReactTestUtils.renderIntoDocument(
             <Multivalues title="Sites" data-id="multiselect"
-                         entries={[
-                             "Entry 1",
-                             "Entry 2",
-                             "Entry 3",
-                             "Entry 4"
-                         ]}
-                         onValueChange={callback}
-                         onNewValue={_onNewValueCallback} />
+                entries={[
+                    "Entry 1",
+                    "Entry 2",
+                    "Entry 3",
+                    "Entry 4"
+                ]}
+                onValueChange={callback}
+                onNewValue={_onNewValueCallback} />
         );
         input = TestUtils.findRenderedDOMNodeWithDataId(component,"value-entry");
 
@@ -164,14 +164,14 @@ describe("FormTextField", function () {
         };
         component = ReactTestUtils.renderIntoDocument(
             <Multivalues title="Sites" data-id="multiselect"
-                         entries={[
-                             "Entry 1",
-                             "Entry 2",
-                             "Entry 3",
-                             "Entry 4"
-                         ]}
-                         onValueChange={callback}
-                         onNewValue={_onNewValueCallback} />
+                entries={[
+                    "Entry 1",
+                    "Entry 2",
+                    "Entry 3",
+                    "Entry 4"
+                ]}
+                onValueChange={callback}
+                onNewValue={_onNewValueCallback} />
         );
         input = TestUtils.findRenderedDOMNodeWithDataId(component,"value-entry");
 

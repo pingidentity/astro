@@ -155,7 +155,7 @@ class FileDrop extends React.Component {
         };
 
         return (
-             <div
+            <div
                 data-id={this.props["data-id"]}
                 ref={ (df) => this.dropFile = df }
                 className={classnames("input-filedrop", classNames)}>

@@ -221,16 +221,16 @@ module.exports = class extends React.Component {
 
         return (
             <FormDropDownList data-id={this.props["data-id"]}
-                    label={this.props.labelText || this.props.label}
-                    className={containerClassName}
-                    name={this.props.name}
-                    options={times}
-                    onValueChange={this._handleValueChange}
-                    selectedOption={selectedTime || noTime}
-                    validSearchCharsRegex="/[^\d:\s]+/"
-                    title={value}
-                    noneOption={noTime}
-                    flags={this.props.flags}
+                label={this.props.labelText || this.props.label}
+                className={containerClassName}
+                name={this.props.name}
+                options={times}
+                onValueChange={this._handleValueChange}
+                selectedOption={selectedTime || noTime}
+                validSearchCharsRegex="/[^\d:\s]+/"
+                title={value}
+                noneOption={noTime}
+                flags={this.props.flags}
             />
         );
     }

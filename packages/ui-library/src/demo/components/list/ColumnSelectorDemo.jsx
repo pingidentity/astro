@@ -297,8 +297,8 @@ export default class ColumnSelectorDemo extends Component {
                 onToggleOption={this._handleToggleOption}
                 options={
                     this.state.selectedFilter && this.state.selectedFilter.value === "pops"
-                    ? this._flattenOptions(filteredOptions)
-                    : filteredOptions
+                        ? this._flattenOptions(filteredOptions)
+                        : filteredOptions
                 }
                 optionsTitle={
                     <div>

@@ -99,7 +99,7 @@ export default class HorizontalBarCard extends Component {
                         stroke: this.state.strokeColor,
                         strokeWidth: this.state.strokeWidth,
                     }}
-            />) : (<Cell key={id} fill={color} />);
+                />) : (<Cell key={id} fill={color} />);
         });
     }
 
@@ -147,18 +147,18 @@ export default class HorizontalBarCard extends Component {
                                         onMouseOut={this._mouseOut}
                                         label={{ position: "right" }}
                                     >
-                                    {this._renderCells(this.props.data)}
+                                        {this._renderCells(this.props.data)}
                                     </Bar>
                                 </BarChart>
                             </div>,
                             <div className="horizontalBar-card__number-container">
                                 <div key="barTotalKey" className="horizontalBar-card__number-info">
                                     <div
-                                    data-id={`${this.props["data-id"]}-number`}
+                                        data-id={`${this.props["data-id"]}-number`}
                                         className="horizontalBar-card__total-number"
                                         style={{ color: this.state.statColor }}
                                     >
-                                    {this._renderCommas(this.props.value)}
+                                        {this._renderCommas(this.props.value)}
                                     </div>
                                     <div
                                         data-id={`${this.props["data-id"]}-label`}

@@ -155,72 +155,72 @@ module.exports = class extends React.Component {
             <div className="clear-both">
                 {/* This outer div is only required to style inside the DemoApp */}
                 <Button data-id="showWizard-button" label="Show Wizard" onClick={this._handleModalToggle}/>
-                    <Modal ref="modal"
-                            data-id="showWizard"
-                            className="full-width"
-                            modalTitle="Object creation wizard"
-                            expanded={this.state.expanded}
-                            onClose={this._handleModalToggle}>
-                        <Messages messages={this.props.messages}
-                            onRemoveMessage={this.props.onRemoveMessage} />
-                        <Wizard.Choose labelCancel={this.props.labelCancel}
+                <Modal ref="modal"
+                    data-id="showWizard"
+                    className="full-width"
+                    modalTitle="Object creation wizard"
+                    expanded={this.state.expanded}
+                    onClose={this._handleModalToggle}>
+                    <Messages messages={this.props.messages}
+                        onRemoveMessage={this.props.onRemoveMessage} />
+                    <Wizard.Choose labelCancel={this.props.labelCancel}
+                        labelDone={this.props.labelDone}
+                        labelEdit={this.props.labelEdit}
+                        labelNext={this.props.labelNext}
+                        numSteps={this.props.numSteps}
+                        activeStep={this.props.activeStep}
+                        choices={this.props.choices}
+                        title="Choose a Wizard"
+                        onEdit={this.props.onEdit}
+                        onValueChange={this.props.onValueChange}
+                        onNext={this._next}
+                        onCancel={this._cancel}
+                        onReset={this.props.onReset}
+                        onDone={this._done} >
+                        <Wizard title="Two Column Step">
+                            <TwoColumnStep labelCancel={this.props.labelCancel}
                                 labelDone={this.props.labelDone}
                                 labelEdit={this.props.labelEdit}
                                 labelNext={this.props.labelNext}
                                 numSteps={this.props.numSteps}
                                 activeStep={this.props.activeStep}
-                                choices={this.props.choices}
-                                title="Choose a Wizard"
+                                fields={this.props.fields}
                                 onEdit={this.props.onEdit}
-                                onValueChange={this.props.onValueChange}
                                 onNext={this._next}
+                                onDone={this._done}
                                 onCancel={this._cancel}
-                                onReset={this.props.onReset}
-                                onDone={this._done} >
-                            <Wizard title="Two Column Step">
-                                <TwoColumnStep labelCancel={this.props.labelCancel}
-                                    labelDone={this.props.labelDone}
-                                    labelEdit={this.props.labelEdit}
-                                    labelNext={this.props.labelNext}
-                                    numSteps={this.props.numSteps}
-                                    activeStep={this.props.activeStep}
-                                    fields={this.props.fields}
-                                    onEdit={this.props.onEdit}
-                                    onNext={this._next}
-                                    onDone={this._done}
-                                    onCancel={this._cancel}
-                                    onFieldChange={this._onFieldChange}
-                                    onRemoveMessage={this.props.onRemoveMessage}
-                                    onComplexFieldChange={this.props.onComplexFieldChange}
-                                    onAddMessage={this.props.onAddMessage}
-                                    onAddComplexFieldsRow={this.props.onAddComplexFieldsRow}
-                                />
-                            </Wizard>
+                                onFieldChange={this._onFieldChange}
+                                onRemoveMessage={this.props.onRemoveMessage}
+                                onComplexFieldChange={this.props.onComplexFieldChange}
+                                onAddMessage={this.props.onAddMessage}
+                                onAddComplexFieldsRow={this.props.onAddComplexFieldsRow}
+                            />
+                        </Wizard>
 
-                            <Or />
+                        <Or />
 
-                            <Wizard title="Form Template">
-                                <FormStep labelCancel={this.props.labelCancel}
-                                    labelDone={this.props.labelDone}
-                                    labelEdit={this.props.labelEdit}
-                                    labelNext={this.props.labelNext}
-                                    numSteps={this.props.numSteps}
-                                    activeStep={this.props.activeStep}
-                                    fields={this.props.fields}
-                                    onEdit={this.props.onEdit}
-                                    onNext={this._next}
-                                    onDone={this._done}
-                                    onCancel={this._cancel}
-                                    onFieldChange={this._onFieldChange}
-                                    onRemoveMessage={this.props.onRemoveMessage}
-                                    onComplexFieldChange={this.props.onComplexFieldChange}
-                                    onAddMessage={this.props.onAddMessage}
-                                    onAddComplexFieldsRow={this.props.onAddComplexFieldsRow}
-                                />
-                                <Wizard.Step title="Final Step" />
-                            </Wizard>
-                        </Wizard.Choose>
-                    </Modal>
+                        <Wizard title="Form Template">
+                            <FormStep labelCancel={this.props.labelCancel}
+                                labelDone={this.props.labelDone}
+                                labelEdit={this.props.labelEdit}
+                                labelNext={this.props.labelNext}
+                                numSteps={this.props.numSteps}
+                                activeStep={this.props.activeStep}
+                                fields={this.props.fields}
+                                onEdit={this.props.onEdit}
+                                onNext={this._next}
+                                onDone={this._done}
+                                onCancel={this._cancel}
+                                onFieldChange={this._onFieldChange}
+                                onRemoveMessage={this.props.onRemoveMessage}
+                                onComplexFieldChange={this.props.onComplexFieldChange}
+                                onAddMessage={this.props.onAddMessage}
+                                onAddComplexFieldsRow={this.props.onAddComplexFieldsRow}
+                            />
+                            <Wizard.Step title="Final Step" />
+                        </Wizard>
+                    </Wizard.Choose>
+                </Modal>
             </div>);
     }
 };

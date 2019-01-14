@@ -79,9 +79,9 @@ class Row extends React.Component {
         }
 
         return (<Button inline iconName="remove"
-                    data-id="row-button-remove"
-                    onClick={this._handleRemove}
-                    type="button" />
+            data-id="row-button-remove"
+            onClick={this._handleRemove}
+            type="button" />
         );
     };
 
@@ -92,8 +92,8 @@ class Row extends React.Component {
 
         return (
             <div className={classnames(
-                    "item",
-                    { preview: this.props.preview,
+                "item",
+                { preview: this.props.preview,
                     "item-decoration": hasImage || hasIcon || hasCount
                 })} data-id={this.props["data-id"]}>
                 <span className="icon-grip"></span>
@@ -499,7 +499,7 @@ class MultiDragDemo extends React.Component {
                         flags={flags}
                     />
                 </div>
-          </div>);
+            </div>);
     }
 }
 

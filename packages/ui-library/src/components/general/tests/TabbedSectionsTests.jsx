@@ -47,8 +47,8 @@ describe("If component", function () {
     it("Highlights selectedIndex tab", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <Wrapper type={TabbedSections}
-                     onValueChange={jest.fn()}
-                    selectedIndex={-1}>
+                onValueChange={jest.fn()}
+                selectedIndex={-1}>
                 <div data-id="section1" title="section 1">section 1</div>
                 <div data-id="section2" title="section 2">section 2</div>
             </Wrapper>

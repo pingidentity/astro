@@ -190,14 +190,14 @@ class ModalButtonStateless extends React.Component {
     render() {
         var activator = (
             <ModalActivator key="activator"
-                    data-id={this.props["data-id"] + "-button"}
-                    containerClassName={this.props.activatorContainerClassName}
-                    content={this.props.activatorContent}
-                    contentClassName={this.props.activatorContentClassName}
-                    buttonLabel={this.props.activatorButtonLabel}
-                    buttonLabelClassName={this.props.activatorButtonClassName}
-                    onOpen={this.props.onOpen}
-                    disabled={this.props.disabled} />
+                data-id={this.props["data-id"] + "-button"}
+                containerClassName={this.props.activatorContainerClassName}
+                content={this.props.activatorContent}
+                contentClassName={this.props.activatorContentClassName}
+                buttonLabel={this.props.activatorButtonLabel}
+                buttonLabelClassName={this.props.activatorButtonClassName}
+                onOpen={this.props.onOpen}
+                disabled={this.props.disabled} />
         );
 
         /*
@@ -218,20 +218,20 @@ class ModalButtonStateless extends React.Component {
          * via callback here.
          */
         var modalBodyContent = this.props.modalBody && this.props.expanded
-                ? this.props.modalBody()
-                : null;
+            ? this.props.modalBody()
+            : null;
 
         var modal = (
             <Modal key="modal"
-                    data-id={this.props["data-id"] + "-modal"}
-                    className={this.props.modalClassName}
-                    expanded={this.props.expanded}
-                    modalTitle={this.props.modalTitle}
-                    showHeader={this.props.showHeader}
-                    onClose={this.close}
-                    maximize={this.props.maximize}
-                    type={this.props.type}
-                    closeOnBgClick={this.props.closeOnBgClick}>
+                data-id={this.props["data-id"] + "-modal"}
+                className={this.props.modalClassName}
+                expanded={this.props.expanded}
+                modalTitle={this.props.modalTitle}
+                showHeader={this.props.showHeader}
+                onClose={this.close}
+                maximize={this.props.maximize}
+                type={this.props.type}
+                closeOnBgClick={this.props.closeOnBgClick}>
                 {this.props.children || modalBodyContent}
             </Modal>
         );
@@ -449,25 +449,25 @@ class ModalActivator extends React.Component {
 
         if (this.props.content) {
             var content = (typeof(this.props.content) === "function")
-                    ? this.props.content()
-                    : this.props.content;
+                ? this.props.content()
+                : this.props.content;
 
             activator = (
                 <span data-id={this.props["data-id"]}
-                        className={this.props.contentClassName}
-                        onClick={this.props.onOpen}
-                        disabled={this.props.disabled}>
+                    className={this.props.contentClassName}
+                    onClick={this.props.onOpen}
+                    disabled={this.props.disabled}>
                     {content}
                 </span>
             );
         } else if (this.props.buttonLabel) {
             activator = (
                 <Button data-id={this.props["data-id"]}
-                        className={this.props.buttonLabelClassName}
-                        onClick={this.props.onOpen}
-                        title={this.props.buttonLabel}
-                        disabled={this.props.disabled}
-                    >
+                    className={this.props.buttonLabelClassName}
+                    onClick={this.props.onOpen}
+                    title={this.props.buttonLabel}
+                    disabled={this.props.disabled}
+                >
                     {this.props.buttonLabel}
                 </Button>
             );
@@ -476,7 +476,7 @@ class ModalActivator extends React.Component {
         if (activator && this.props.containerClassName) {
             activator = (
                 <div data-id={this.props["data-id"] + "-container"}
-                        className={this.props.containerClassName}>
+                    className={this.props.containerClassName}>
                     {activator}
                 </div>
             );

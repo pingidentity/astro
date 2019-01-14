@@ -187,13 +187,13 @@ class Chart extends React.Component {
         return this.props.series.map(function (item) {
             return (
                 <Area key={"area-" + item.id} dataKey={item.id} name={item.label || item.id}
-                        type={item.lineType || LineTypes.LINEAR}
-                        legendType={item.legendType || LegendTypes.LINE}
-                        dot={item.dots === false ? false : true}
-                        stroke={item.color}
-                        fill={item.color}
-                        connectNulls={item.connectNulls || false}
-                        isAnimationActive={item.animate || false} />
+                    type={item.lineType || LineTypes.LINEAR}
+                    legendType={item.legendType || LegendTypes.LINE}
+                    dot={item.dots === false ? false : true}
+                    stroke={item.color}
+                    fill={item.color}
+                    connectNulls={item.connectNulls || false}
+                    isAnimationActive={item.animate || false} />
             );
         }.bind(this));
     };
@@ -201,16 +201,16 @@ class Chart extends React.Component {
     _renderXAxis = () => {
         return (
             <XAxis dataKey={this.props.xDataKey} type={this.props.xAxisType} hide={this.props.hideX}
-                    domain={[(this.props.xMin || "auto"), (this.props.xMax || "auto")]} label={this.props.xLabel}
-                    tickCount={this.props.xTickDensity} orientation={this.props.xOrientation} />
+                domain={[(this.props.xMin || "auto"), (this.props.xMax || "auto")]} label={this.props.xLabel}
+                tickCount={this.props.xTickDensity} orientation={this.props.xOrientation} />
         );
     };
 
     _renderYAxis = () => {
         return (
             <YAxis dataKey={this.props.yDataKey} type={this.props.yAxisType} hide={this.props.hideY}
-                    domain={[(this.props.yMin || "auto"), (this.props.yMax || "auto")]} label={this.props.yLabel}
-                    tickCount={this.props.yTickDensity} orientation={this.props.yOrientation} />
+                domain={[(this.props.yMin || "auto"), (this.props.yMax || "auto")]} label={this.props.yLabel}
+                tickCount={this.props.yTickDensity} orientation={this.props.yOrientation} />
         );
     };
 
@@ -218,10 +218,10 @@ class Chart extends React.Component {
         return (
             <div data-id={this.props["data-id"]}>
                 <AreaChart layout={this.props.layout}
-                        width={this.props.width}
-                        height={this.props.height}
-                        margin={this.props.margin}
-                        data={this.props.data}>
+                    width={this.props.width}
+                    height={this.props.height}
+                    margin={this.props.margin}
+                    data={this.props.data}>
                     {this._renderXAxis()}
                     {this._renderYAxis()}
                     <CartesianGrid strokeDasharray="3 3"/>

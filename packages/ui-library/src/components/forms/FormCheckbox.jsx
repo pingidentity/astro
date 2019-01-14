@@ -127,19 +127,19 @@ class FormCheckbox extends React.Component {
 
         return (
             <FormLabel data-id={this.props["data-id"] + "-container"}
-                    className={labelClassName}
-                    helpClassName={this.props.helpClassName}
-                    helpTarget={this.props.helpTarget}
-                    disabled={this.props.disabled}
-                    value={this.props.label}
-                    hint={this.props.labelHelpText}>
+                className={labelClassName}
+                helpClassName={this.props.helpClassName}
+                helpTarget={this.props.helpTarget}
+                disabled={this.props.disabled}
+                value={this.props.label}
+                hint={this.props.labelHelpText}>
                 <input data-id={this.props["data-id"]}
-                        type="checkbox"
-                        name={this.props.name ? this.props.name : this.props["data-id"]}
-                        value={this.props.value ? this.props.value: this.props["data-id"]}
-                        onChange={this._handleChange}
-                        checked={this.props.checked}
-                        disabled={this.props.disabled}
+                    type="checkbox"
+                    name={this.props.name ? this.props.name : this.props["data-id"]}
+                    value={this.props.value ? this.props.value: this.props["data-id"]}
+                    onChange={this._handleChange}
+                    checked={this.props.checked}
+                    disabled={this.props.disabled}
                 />
                 <div className="icon"/>
                 {this.props.errorMessage && (

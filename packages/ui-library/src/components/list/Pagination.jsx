@@ -152,9 +152,9 @@ class PageLinks extends React.Component {
         pageLinks.push(
             <a key="previous"
                 data-id={this.props["data-id"] + "previous"}
-               onClick={_.partial(this._onLinkClick, _, (currentPage <= 1 ? currentPage : currentPage - 1))}
-               className={currentPage === 1 ? "disabled" : ""}>
-                    <span className="icon-previous"></span>
+                onClick={_.partial(this._onLinkClick, _, (currentPage <= 1 ? currentPage : currentPage - 1))}
+                className={currentPage === 1 ? "disabled" : ""}>
+                <span className="icon-previous"></span>
             </a>
         );
 
@@ -225,7 +225,7 @@ class PageLinks extends React.Component {
                 data-id={this.props["data-id"] + "next"}
                 className={currentPage === numPages ? "disabled" : ""}
                 onClick={_.partial(this._onLinkClick, _, (currentPage >= numPages ? currentPage : currentPage + 1))}>
-                    <span className="icon-next"></span>
+                <span className="icon-next"></span>
             </a>
         );
 

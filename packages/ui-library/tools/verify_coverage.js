@@ -118,8 +118,8 @@ var getFeatureCoverage = function (name, coverage, refCoverage) {
     //Okhtay: It's too restrictive to say that coverage will never drop.  Instead, we should always meet at least the reference
     //level of coverage or better than before.
     var reference = refCoverage && refCoverage[name].found
-            ? refCoverage[name].hit / refCoverage[name].found
-            : 1;
+        ? refCoverage[name].hit / refCoverage[name].found
+        : 1;
 
     return {
         current: current,

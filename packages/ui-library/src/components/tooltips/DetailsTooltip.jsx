@@ -425,7 +425,7 @@ class DetailsTooltipStateless extends React.Component {
                 ref="container"
             >
                 {this.props.label
-                     ? <a
+                    ? <a
                         data-id="action-btn"
                         className={classnames("details-target", targetCss, this.props.labelClassName)}
                         onClick={!this.props.disabled ? this._handleToggle : null}

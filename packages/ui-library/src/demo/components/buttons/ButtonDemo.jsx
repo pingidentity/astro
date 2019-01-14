@@ -62,7 +62,7 @@ class ButtonsDemo extends Component {
                 <Button
                     label="Inline"
                     inline>
-                        <span className="badge">4</span>
+                    <span className="badge">4</span>
                 </Button>
                 <br /><br />
                 <Button

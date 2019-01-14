@@ -84,10 +84,10 @@ class SelectionFilterLabel extends React.Component {
     render() {
         const labelText = this.props.labelText || this.props.label;
         return labelText ? (
-                <FormLabel data-id={this.props["data-id"] + "-label"} value={labelText}>
-                    {this._renderSelectionFilter()}
-                </FormLabel>
-            ) : this._renderSelectionFilter();
+            <FormLabel data-id={this.props["data-id"] + "-label"} value={labelText}>
+                {this._renderSelectionFilter()}
+            </FormLabel>
+        ) : this._renderSelectionFilter();
     }
 }
 

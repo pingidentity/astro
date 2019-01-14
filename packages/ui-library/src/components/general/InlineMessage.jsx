@@ -112,8 +112,8 @@ class InlineMessage extends React.Component {
                 <div data-id="inline-message-text" className="inline-message-text">
                     {this.props.children}
                 </div>
-                    {
-                        this._showAction() &&
+                {
+                    this._showAction() &&
                         [{
                             type: this.props.type,
                             label: this.props.label,
@@ -126,17 +126,17 @@ class InlineMessage extends React.Component {
                             className: buttonClass,
                         }, index) => {
                             return (
-                                    <div key={`${label}-${index}`}
-                                        data-id="inline-message-btn"
-                                        className="inline-message-btn"
-                                    >
-                                        <Button key="main" inline type={type} label={label}
-                                            onClick={this._onClick(onClick)} className={buttonClass}
-                                        />
-                                    </div>
+                                <div key={`${label}-${index}`}
+                                    data-id="inline-message-btn"
+                                    className="inline-message-btn"
+                                >
+                                    <Button key="main" inline type={type} label={label}
+                                        onClick={this._onClick(onClick)} className={buttonClass}
+                                    />
+                                </div>
                             );
                         })
-                    }
+                }
             </div>
         );
     }

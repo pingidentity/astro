@@ -1,0 +1,11 @@
+{
+	"name": "eslint-plugin-react-15",
+	"version": "0.0.1",
+	"main": "index.js",
+	"peerDependencies": {
+		"eslint": "^5.12.0"
+	},
+	"engines": {
+		"node": ">=0.10.0"
+	}
+}

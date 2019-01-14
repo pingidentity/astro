@@ -323,7 +323,7 @@ class Stateless extends React.Component {
                             </If>
                             <FormLabel className="input-checkbox" inline value={item.name}>
                                 <input data-id="checkbox" type="checkbox" name={groupName}
-                                       value={item.id} onChange={onChange} checked={checked}/>
+                                    value={item.id} onChange={onChange} checked={checked}/>
                                 <div className="icon"></div>
                             </FormLabel>
                         </span>
@@ -394,23 +394,23 @@ class Stateless extends React.Component {
             <div className={className} data-id={this.props["data-id"]}>
                 <div className="filters">
                     <FormSearchBox data-id="dataobject-search"
-                            onClear={this._handleSearchUndo}
-                            onValueChange={this._searchOnType}
-                            queryString={this.props.queryString}
-                            placeholder={this.props.labelSearchPlaceholder}/>
+                        onClear={this._handleSearchUndo}
+                        onValueChange={this._searchOnType}
+                        queryString={this.props.queryString}
+                        placeholder={this.props.labelSearchPlaceholder}/>
 
                     <div className="actions">
                         <a href="#" data-id="check-all" className="check-all"
-                               onClick={_.partial(this._toggleCheckAll, visibleItems, selector) }>
-                                {selectAllLabel}
+                            onClick={_.partial(this._toggleCheckAll, visibleItems, selector) }>
+                            {selectAllLabel}
                         </a>
                         <div className="toggle-container">
                             {this.props.labelHideUnselected}
                             <Toggle data-id="hide-unchecked"
-                                    className="small"
-                                    stateless={true}
-                                    onToggle={this._onHideUncheckedToggle}
-                                    toggled={this.props.hideUnchecked}/>
+                                className="small"
+                                stateless={true}
+                                onToggle={this._onHideUncheckedToggle}
+                                toggled={this.props.hideUnchecked}/>
                         </div>
                     </div>
                 </div>

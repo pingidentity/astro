@@ -19,7 +19,7 @@ describe("ColorPicker Integration", function () {
      * THEN: The base image and the current image should be identical
      */
     it("should have color wrappers when clicking on Color Pickers", ColorPickerPage.retriable(function () {
-       // ColorPickerPage.openColorPickerDemoPage();
+        // ColorPickerPage.openColorPickerDemoPage();
 
         expect(ColorPickerPage.verifyColorPickerExisting(1)).toBeTruthy();
         //click on the first color picker

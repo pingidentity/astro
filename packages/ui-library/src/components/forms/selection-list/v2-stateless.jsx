@@ -235,7 +235,7 @@ class ListOptions extends React.Component {
         onValueChange: _.noop
     };
 
-        /**
+    /**
     * @desc Generate list options as radio buttons
     * @return {object}
     *     The set of list options as radio buttons

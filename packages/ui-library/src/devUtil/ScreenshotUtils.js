@@ -169,7 +169,7 @@ var ScreenshotUtils = {
                 //Wait for promise to be fulfilled
                 browser.call(function() {
                     const comp = im.compare(baselinePath, currentPath, diffPath);
-                                    // execute IM command line
+                    // execute IM command line
                     comp.then(function (data) {
                         var error = (data.stderr || "").trim();
                         var diffPixelCount = Number(error);
@@ -220,9 +220,9 @@ var ScreenshotUtils = {
      */
     takeScreenShotAndCompareWithBaseline: function (fileName, tolerance) {
         this.takeElementScreenShotAndCompareWithBaseline(
-                fileName,
-                "//div[@data-id='components']",
-                tolerance);
+            fileName,
+            "//div[@data-id='components']",
+            tolerance);
     },
 
     /**

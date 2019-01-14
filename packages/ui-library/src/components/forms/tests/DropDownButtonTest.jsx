@@ -21,11 +21,11 @@ describe("DropDownButton", function () {
 
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
             <DropDownButton title="Test Drop Down"
-                            stateless={true}
-                            onValueChange={callback}
-                            options={menu}
-                            onToggle={jest.fn()}
-                            label="Add" />
+                stateless={true}
+                onValueChange={callback}
+                options={menu}
+                onToggle={jest.fn()}
+                label="Add" />
         );
 
         // expect a single button to be rendered.
@@ -47,11 +47,11 @@ describe("DropDownButton", function () {
 
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
             <DropDownButton label="Test Drop Down"
-                            stateless={true}
-                            open={true}
-                            onValueChange={callback}
-                            options={menu}
-                            onToggle={jest.fn()} />
+                stateless={true}
+                open={true}
+                onValueChange={callback}
+                options={menu}
+                onToggle={jest.fn()} />
         );
 
         //expect menu to be rendered
@@ -74,12 +74,12 @@ describe("DropDownButton", function () {
 
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
             <DropDownButton label="Test Drop Down"
-                            className="extra"
-                            stateless={true}
-                            open={true}
-                            onValueChange={callback}
-                            options={menu}
-                            onToggle={jest.fn()} />
+                className="extra"
+                stateless={true}
+                open={true}
+                onValueChange={callback}
+                options={menu}
+                onToggle={jest.fn()} />
         );
 
         //expect menu to be rendered
@@ -98,11 +98,11 @@ describe("DropDownButton", function () {
 
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
             <DropDownButton label="Test Drop Down"
-                            stateless={true}
-                            open={false}
-                            onValueChange={jest.fn()}
-                            onToggle={callback}
-                            options={menu} />
+                stateless={true}
+                open={false}
+                onValueChange={jest.fn()}
+                onToggle={callback}
+                options={menu} />
         );
 
         var button = TestUtils.findRenderedDOMNodeWithDataId(dropDownButtonComponent, "action");
@@ -128,8 +128,8 @@ describe("DropDownButton", function () {
 
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
             <DropDownButton label="Add" title="Test Drop Down"
-                            onValueChange={callback}
-                            options={menu} />
+                onValueChange={callback}
+                options={menu} />
         );
 
         // expect a single button to be rendered.
@@ -156,8 +156,8 @@ describe("DropDownButton", function () {
 
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
             <DropDownButton label="Test Drop Down"
-                            onValueChange={callback}
-                            options={menu} />
+                onValueChange={callback}
+                options={menu} />
         );
 
         // expect a single button to be rendered.
@@ -201,8 +201,8 @@ describe("DropDownButton", function () {
 
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
             <DropDownButton label="Test Drop Down"
-                            onValueChange={callback}
-                            options={menu} />
+                onValueChange={callback}
+                options={menu} />
         );
 
         // expect a single button to be rendered.
@@ -243,10 +243,10 @@ describe("DropDownButton", function () {
 
         ReactTestUtils.renderIntoDocument(
             <DropDownButton label="Test Drop Down"
-                            stateless={true}
-                            open={true}
-                            options={menu}
-                            onToggle={jest.fn()} />
+                stateless={true}
+                open={true}
+                options={menu}
+                onToggle={jest.fn()} />
         );
 
         expect(TestUtils.mockCallsContains(window.addEventListener, "click")).toEqual(true);
@@ -264,10 +264,10 @@ describe("DropDownButton", function () {
 
         var dropDownButtonComponent = ReactTestUtils.renderIntoDocument(
             <DropDownButton label="Test Drop Down"
-                            stateless={true}
-                            open={true}
-                            options={menu}
-                            onToggle={jest.fn()} />
+                stateless={true}
+                open={true}
+                options={menu}
+                onToggle={jest.fn()} />
         );
 
         //trigger unmount
@@ -288,11 +288,11 @@ describe("DropDownButton", function () {
 
         ReactTestUtils.renderIntoDocument(
             <DropDownButton label="Test Drop Down"
-                            stateless={true}
-                            open={true}
-                            onValueChange={jest.fn()}
-                            options={menu}
-                            onToggle={callback} />
+                stateless={true}
+                open={true}
+                onValueChange={jest.fn()}
+                options={menu}
+                onToggle={callback} />
         );
 
         var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
@@ -319,11 +319,11 @@ describe("DropDownButton", function () {
 
         ReactTestUtils.renderIntoDocument(
             <DropDownButton label="Test Drop Down"
-                            stateless={true}
-                            open={false}
-                            onValueChange={jest.fn()}
-                            options={menu}
-                            onToggle={callback} />
+                stateless={true}
+                open={false}
+                onValueChange={jest.fn()}
+                options={menu}
+                onToggle={callback} />
         );
 
         var handler = TestUtils.findMockCall(window.addEventListener, "click")[1];
@@ -352,11 +352,11 @@ describe("DropDownButton", function () {
 
         ReactTestUtils.renderIntoDocument(
             <DropDownButton label="Test Drop Down"
-                            stateless={true}
-                            open={true}
-                            onValueChange={jest.fn()}
-                            options={menu}
-                            onToggle={callback} />
+                stateless={true}
+                open={true}
+                onValueChange={jest.fn()}
+                options={menu}
+                onToggle={callback} />
         );
 
         //press ESC
@@ -380,11 +380,11 @@ describe("DropDownButton", function () {
 
         ReactTestUtils.renderIntoDocument(
             <DropDownButton label="Test Drop Down"
-                            stateless={true}
-                            open={false}
-                            onValueChange={jest.fn()}
-                            options={menu}
-                            onToggle={callback} />
+                stateless={true}
+                open={false}
+                onValueChange={jest.fn()}
+                options={menu}
+                onToggle={callback} />
         );
 
         //press ESC

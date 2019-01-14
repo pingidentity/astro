@@ -82,12 +82,12 @@ class ContextCloseButtonDemo extends React.Component {
                 </div>
                 {this.state.clickCallbackCalled
                     ? <div id="clickCallback">
-                    <span>onClick callback called</span>
-                </div> : null}
+                        <span>onClick callback called</span>
+                    </div> : null}
                 {this.state.contextCloseCalled
                     ? <div id="contextClose">
-                    <span>context close called</span>
-                </div> : null}
+                        <span>context close called</span>
+                    </div> : null}
 
             </div>
         );

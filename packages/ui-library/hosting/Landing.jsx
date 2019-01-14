@@ -12,7 +12,7 @@ var React = require("react"),
 // and injected into the head section of the HTML page by another plugin
 require("../src/css/ui-library.scss"); // UI Library styles
 require("../src/demo/css/ui-library-demo.scss"); // UI Library demo styles
-require("./assets/css/landing.css");   // Override undesired styles from ui-library.scss and ui-library-demo.scss
+require("./assets/css/landing.css"); // Override undesired styles from ui-library.scss and ui-library-demo.scss
 
 class LandingPage extends React.Component {
     state = {
@@ -120,89 +120,90 @@ class LandingPage extends React.Component {
             <div>
                 <div className="components-container">
                     <HeaderBar tree={this.state.headerBarTree}
-                            label="UI Library" />
+                        label="UI Library" />
 
                     <LeftNavBar tree={this.state.leftNavBarTree}
-                            openSections={this.state.leftNavOpenSections}
-                            onItemValueChange={this._handleLeftNavBarItemValueChange}
-                            onSectionValueChange={this._handleLeftNavBarSectionValueChange}
-                            collapsible={true}/>
+                        openSections={this.state.leftNavOpenSections}
+                        onItemValueChange={this._handleLeftNavBarItemValueChange}
+                        onSectionValueChange={this._handleLeftNavBarSectionValueChange}
+                        collapsible={true}/>
 
 
-                 <div id="library-content" className="contrast">
-                    <div>
-                        <div className="section">
-                            <div className="documentation">
-                                <div className="doc">
-                                    <div className="clearfix">
-                                        <h1>
+                    <div id="library-content" className="contrast">
+                        <div>
+                            <div className="section">
+                                <div className="documentation">
+                                    <div className="doc">
+                                        <div className="clearfix">
+                                            <h1>
                                             Welcome to the UI Library
-                                        </h1>
+                                            </h1>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div className="section-content">
-                                <div className="clearfix">
-                                    <div className="about-section">
-                                        <div className="description">
+                                <div className="section-content">
+                                    <div className="clearfix">
+                                        <div className="about-section">
+                                            <div className="description">
                                             The UI library is intended to solve a number of challenges for
                                             Ping's product development teams:
-                                            <ol>
-                                                <li><strong>Components:</strong> Ensure that all base-level, reusable
-                                                    pieces of UI code developed at Ping can be leveraged by all teams.
-                                                </li>
-                                                <li><strong>Templates:</strong> Create the most standard layouts
+                                                <ol>
+                                                    <li><strong>Components:</strong> Ensure that all base-level,
+                                                    reusable pieces of UI code developed at Ping can be leveraged
+                                                    by all teams.
+                                                    </li>
+                                                    <li><strong>Templates:</strong> Create the most standard layouts
                                                     based on the design standards document produced by UX,
                                                     to provide common markup and styling layouts for teams to use to
                                                     quickly produce pixel-perfect pages.
-                                                </li>
-                                                <li><strong>Tutorials:</strong> Educate and enable developers
+                                                    </li>
+                                                    <li><strong>Tutorials:</strong> Educate and enable developers
                                                     to use the library components and templates to quickly create
                                                     new applications and features.</li>
-                                            </ol>
-                                        </div>
+                                                </ol>
+                                            </div>
 
-                                        <br/><br/>
-                                        <div className="description">
+                                            <br/><br/>
+                                            <div className="description">
                                             Access the current version: <a id="currentVersionLink"
                                                     href={this.state.version + "/index.html"}>
-                                                {this.state.version ? this.state.version : "In development"}
-                                            </a>
+                                                    {this.state.version ? this.state.version : "In development"}
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div className="page-section-data-divider"></div>
+                                        <div className="page-section-data-divider"></div>
 
-                                    <div className="content-section">
-                                        <div className="content-columns columns-3" data-id="columns-3">
-                                            <div className="content-column">
-                                                <h2>
-                                                    <span data-id="quickstart" className="icon-thumb"></span>
+                                        <div className="content-section">
+                                            <div className="content-columns columns-3" data-id="columns-3">
+                                                <div className="content-column">
+                                                    <h2>
+                                                        <span data-id="quickstart" className="icon-thumb"></span>
                                                     QuickStart
-                                                </h2>
+                                                    </h2>
 
-                                                <div className="description">
+                                                    <div className="description">
                                                     Getting up and running with the UI Library is a quick and easy.
                                                     Just follow our 101 quickstart guide and you'll know exactly
                                                     what to do.
-                                                </div>
+                                                    </div>
 
-                                                <div className="button-container">
-                                                    <button type="button" className="success"
+                                                    <div className="button-container">
+                                                        <button type="button" className="success"
                                                             onClick={this._gotoQuickstartPage}>
                                                         Get Started
-                                                    </button>
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div className="content-column">
-                                                <h2>
-                                                    <span data-id="tutorials" className="icon-wand"></span>
+                                                <div className="content-column">
+                                                    <h2>
+                                                        <span data-id="tutorials" className="icon-wand"></span>
                                                     Tutorials
-                                                </h2>
+                                                    </h2>
 
-                                                <div className="description">
+                                                    <div className="description">
                                                     This <a href="#" onClick={this._gotoTutorials}>tutorial</a> will
                                                     guide you through how to integrate the UI Library project into your
                                                     own project and start using it to create a new application using
@@ -210,17 +211,17 @@ class LandingPage extends React.Component {
                                                     you can refer to with best practices, coding examples, and details
                                                     on how to successfully use the library to increase your team's
                                                     velocity.
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div className="content-column">
-                                                <h2>
-                                                    <span data-id="downloads" className="icon-download"></span>
+                                                <div className="content-column">
+                                                    <h2>
+                                                        <span data-id="downloads" className="icon-download"></span>
                                                     Downloads
-                                                </h2>
-                                                {
+                                                    </h2>
+                                                    {
                                                     /* eslint-disable max-len */
-                                                    <div className="description">
+                                                        <div className="description">
                                                         To download the latest UI Library or a specific version of the
                                                         library you can either download it from artifactory,
                                                         where each version is uploaded with the
@@ -228,12 +229,13 @@ class LandingPage extends React.Component {
                                                                 href="https://hg-od01.corp.pingidentity.com/r/#/admin/projects/ui-library"
                                                                 target="_blanke">
                                                             here
-                                                        </a>.
+                                                            </a>.
                                                         If you choose to download the source from Gerrit,
                                                         you can access a specific release by branching from a tag.
-                                                    </div>
+                                                        </div>
                                                     /* eslint-enable max-len */
-                                                }
+                                                    }
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -242,8 +244,7 @@ class LandingPage extends React.Component {
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>);
+            </div>);
     }
 }
 

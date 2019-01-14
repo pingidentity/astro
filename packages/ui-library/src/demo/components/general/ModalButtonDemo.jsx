@@ -49,9 +49,9 @@ class ModalButtonDemo extends React.Component {
             <div>
                 <div className="input-row">
                     <ModalButton data-id="default-example"
-                            activatorButtonLabel="Open Default Modal"
-                            modalTitle="Default Modal"
-                            stateless={false}>
+                        activatorButtonLabel="Open Default Modal"
+                        modalTitle="Default Modal"
+                        stateless={false}>
                         <div>
                             <p>
                                 Default modals size both vertically and horizontally with the content.
@@ -67,13 +67,13 @@ class ModalButtonDemo extends React.Component {
                 </div>
                 <div className="input-row">
                     <ModalButton data-id="stateless-example"
-                            activatorButtonLabel="Open Stateless Modal"
-                            modalTitle="Stateless Modal"
-                            stateless={true}
-                            onOpen={this._handleOpen1}
-                            onClose={this._handleClose1}
-                            initiallyExpanded={false}
-                            expanded={this.state.modalExpanded1}>
+                        activatorButtonLabel="Open Stateless Modal"
+                        modalTitle="Stateless Modal"
+                        stateless={true}
+                        onOpen={this._handleOpen1}
+                        onClose={this._handleClose1}
+                        initiallyExpanded={false}
+                        expanded={this.state.modalExpanded1}>
                         <div>
                             A stateless modals expanded state is stateless by the boolean "expanded" prop. When true
                             the modal will display.
@@ -82,9 +82,9 @@ class ModalButtonDemo extends React.Component {
                 </div>
                 <div className="input-row">
                     <ModalButton activatorButtonLabel="Open Maximized Modal"
-                            data-id="maximized-modal"
-                            modalTitle="Maximized Modal"
-                            maximize={true}>
+                        data-id="maximized-modal"
+                        modalTitle="Maximized Modal"
+                        maximize={true}>
                         <div>
                             A maximized modal always occupy the full maximum height and width that a modal may have,
                             regardless of content.
@@ -93,9 +93,9 @@ class ModalButtonDemo extends React.Component {
                 </div>
                 <div className="input-row">
                     <ModalButton activatorButtonLabel="Open BG Click Enabled Modal"
-                            data-id="bgclick-modal"
-                            modalTitle="Closing a Modal with a Background Click"
-                            closeOnBgClick={true}>
+                        data-id="bgclick-modal"
+                        modalTitle="Closing a Modal with a Background Click"
+                        closeOnBgClick={true}>
                         <div>
                             When you set the "closeOnBgClick" prop to "true", clicking the modal background will trigger
                             the onClose callback. If you are using the "stateless" or stateless version, you will
@@ -106,14 +106,14 @@ class ModalButtonDemo extends React.Component {
                 </div>
                 <div className="input-row">
                     <ModalButton activatorButtonLabel="Open Dialog Modal"
-                            data-id="dialog-modal"
-                            modalTitle="Dialog Modal"
-                            type={ModalButton.Modal.Type.DIALOG}
-                            ref="dialogModal"
-                            stateless={true}
-                            onOpen={this._handleOpen2}
-                            onClose={this._handleClose2}
-                            expanded={this.state.modalExpanded2}>
+                        data-id="dialog-modal"
+                        modalTitle="Dialog Modal"
+                        type={ModalButton.Modal.Type.DIALOG}
+                        ref="dialogModal"
+                        stateless={true}
+                        onOpen={this._handleOpen2}
+                        onClose={this._handleClose2}
+                        expanded={this.state.modalExpanded2}>
                         <div>
                             <div className="modal-title">
                                 Dialog modal content here!
@@ -125,7 +125,7 @@ class ModalButtonDemo extends React.Component {
                             <div className="button-group">
                                 <Button data-id="nopeButton" onClick={this._handleClose2}>Nope</Button>
                                 <Button type="primary" data-id="yupButton"
-                                        onClick={this._handleClose2} >
+                                    onClick={this._handleClose2} >
                                     Yup
                                 </Button>
                             </div>
@@ -134,14 +134,14 @@ class ModalButtonDemo extends React.Component {
                 </div>
                 <div className="input-row">
                     <ModalButton activatorButtonLabel="Open Alert Modal"
-                            data-id="alert-modal"
-                            modalTitle=""
-                            type={ModalButton.Modal.Type.ALERT}
-                            ref="alertModal"
-                            stateless={true}
-                            onOpen={this._handleOpen3}
-                            onClose={this._handleClose3}
-                            expanded={this.state.modalExpanded3}>
+                        data-id="alert-modal"
+                        modalTitle=""
+                        type={ModalButton.Modal.Type.ALERT}
+                        ref="alertModal"
+                        stateless={true}
+                        onOpen={this._handleOpen3}
+                        onClose={this._handleClose3}
+                        expanded={this.state.modalExpanded3}>
                         <div className = "title">
                             Alert Modal
                         </div>
@@ -150,11 +150,11 @@ class ModalButtonDemo extends React.Component {
                         </div>
                         <div className="button-group">
                             <Button type="cancel"
-                                    onClick={this._handleClose3} data-id="disgardChangesButton" >
+                                onClick={this._handleClose3} data-id="disgardChangesButton" >
                                 Disgard Changes
                             </Button>
                             <Button type="primary"
-                                    onClick={this._handleClose3} data-id="saveButton">
+                                onClick={this._handleClose3} data-id="saveButton">
                                 Save
                             </Button>
                             <br />

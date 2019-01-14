@@ -36,7 +36,7 @@ class componentsInDepth extends React.Component {
                      its demo page. Look for the &quot;+ expand documentation&quot; link in the top right corner of the
                      demo. There is also a link to the JS documentation home page in the top right hand corner of the
                      demo app. Look for the help icon:
-                     <span className="icon-help" />
+                    <span className="icon-help" />
                 </p>
                 <p>
                     Referring to the UI Library package's source code directly will reveal all the implementation

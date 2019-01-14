@@ -98,8 +98,8 @@ class DemoItem extends React.Component {
 
                     <div className={headerClassName}>
                         <PageHeader data-id="component-title"
-                                title={this.props.label}
-                                subtitle={this.props.importPath} />
+                            title={this.props.label}
+                            subtitle={this.props.importPath} />
                         {docLinks}
                     </div>
 
@@ -114,7 +114,7 @@ class DemoItem extends React.Component {
                         </InlineMessage>
                     }
                     <div className="demo-description"
-                         dangerouslySetInnerHTML={{ __html: markdown }}></div>
+                        dangerouslySetInnerHTML={{ __html: markdown }}></div>
 
                     <OutputComponent className="output">
                         {React.createElement(type, props)}

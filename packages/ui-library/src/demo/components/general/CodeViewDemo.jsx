@@ -48,7 +48,7 @@ class CodeViewDemo extends Component {
         </saml:AttributeStatement>
     </saml:Assertion>
 </samlp:Response>`;
-/* eslint-enable max-len */
+        /* eslint-enable max-len */
         return (
             <CodeView value={markup} />
         );

@@ -508,15 +508,15 @@ class StatelessExpandableRow extends React.Component {
         if (this.props.showEdit) {
             editButton = this.props.editButton || (
                 <a data-id="edit-btn" className={editButtonClassname}
-                        href={this._getEditViewRoute(this.props.editViewRoute)}
-                        onClick={this.props.onEditButtonClick} />);
+                    href={this._getEditViewRoute(this.props.editViewRoute)}
+                    onClick={this.props.onEditButtonClick} />);
         }
 
         if (this.props.showDelete) {
             deleteButton = this.props.deleteButton || (
                 <a data-id={this.props.confirmDelete ? "delete-btn-confirm" : "delete-btn"}
-                      className="delete-btn"
-                      onClick={this.props.onDelete}/>);
+                    className="delete-btn"
+                    onClick={this.props.onDelete}/>);
         }
 
         var titleClassName = classnames("item-title", this.props.titleClassName);
@@ -524,22 +524,22 @@ class StatelessExpandableRow extends React.Component {
         if (this.props.showDelete) {
             var deleteObject = this.props.deleteButton || (
                 <button data-id={this.props.confirmDelete ? "delete-btn-confirm" : "delete-btn"}
-                      className="delete-btn"
-                      onClick={this.props.onDelete} />);
+                    className="delete-btn"
+                    onClick={this.props.onDelete} />);
             //details tooltip should be delete button
             if (this.props.confirmDelete || this.props.confirmDeleteContent) {
                 deleteButton = (<ConfirmDeleteDialog
-                                    trigger={deleteObject}
-                                    label={this.props.labelDeleteConfirm}
-                                    open={this.props.expanded && this.props.showDeleteConfirm}
-                                    onCancel={this.props.onDeleteCancelClick}
-                                    confirmDeleteTitle={this.props.confirmDeleteTitle}
-                                    onDeleteConfirm={this.props.onDeleteConfirmClick}
-                                    confirmDeletePosition={this.props.confirmDeletePosition}
-                                    flags={this.props.flags}
-                                >
-                                    {this.props.confirmDeleteContent}
-                                </ConfirmDeleteDialog>);
+                    trigger={deleteObject}
+                    label={this.props.labelDeleteConfirm}
+                    open={this.props.expanded && this.props.showDeleteConfirm}
+                    onCancel={this.props.onDeleteCancelClick}
+                    confirmDeleteTitle={this.props.confirmDeleteTitle}
+                    onDeleteConfirm={this.props.onDeleteConfirmClick}
+                    confirmDeletePosition={this.props.confirmDeletePosition}
+                    flags={this.props.flags}
+                >
+                    {this.props.confirmDeleteContent}
+                </ConfirmDeleteDialog>);
             }
             else {
                 deleteButton = deleteObject;

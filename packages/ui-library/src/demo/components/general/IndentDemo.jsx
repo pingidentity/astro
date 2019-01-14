@@ -67,12 +67,12 @@ class IndentDemo extends React.Component {
                 <br />
                 <Indent title="all">
                     <Link icon="cog"
-                          title="Basic Content Rewrite"
-                          onClick={this._handleOnClick}
+                        title="Basic Content Rewrite"
+                        onClick={this._handleOnClick}
                     />
                     <Link icon="thumb"
-                          title="Super User Group"
-                          onClick={this._handleOnClick}
+                        title="Super User Group"
+                        onClick={this._handleOnClick}
                     />
                 </Indent>
                 <br/>

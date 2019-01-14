@@ -24,9 +24,9 @@ describe("Row", function () {
     function render (props) {
         return ReactTestUtils.renderIntoDocument(
             <table>
-              <tbody>
-                <Row data-id="grid-row-test" {...props} />
-              </tbody>
+                <tbody>
+                    <Row data-id="grid-row-test" {...props} />
+                </tbody>
             </table>
         );
     }

@@ -142,7 +142,7 @@ class AppFrame extends React.Component {
      */
     _getNode = id => this._getNodeIn(id, this.props.navTree);
 
-        /**
+    /**
      * @method
      * @name AppFrame#_isNodeIn
      * @param {string} id
@@ -327,21 +327,21 @@ class AppFrame extends React.Component {
         const
             rootBranch =
                 root
-                ? navTree.filter(
-                    ({ id, label }) =>
-                        id === root ||
+                    ? navTree.filter(
+                        ({ id, label }) =>
+                            id === root ||
                         label === root
                     )[0]
-                : navTree,
+                    : navTree,
             tree = rootBranch.children || navTree,
             navOptions =
                 rootBranch !== navTree
-                ? _.map(
-                    navTree, ({ id, label }) => ({
-                        id,
-                        label
-                    }))
-                : null;
+                    ? _.map(
+                        navTree, ({ id, label }) => ({
+                            id,
+                            label
+                        }))
+                    : null;
 
         return (
             <div

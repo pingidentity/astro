@@ -10,7 +10,7 @@ var React = require("react"),
 const PaginatedListDemo = () => {
 
     return (
-            <PaginatedList />
+        <PaginatedList />
     );
 };
 

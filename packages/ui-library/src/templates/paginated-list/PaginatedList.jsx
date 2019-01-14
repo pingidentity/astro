@@ -37,11 +37,11 @@ export default class PaginatedList extends React.Component {
     _generatePageRows = () => {
         let rows = [];
         const statuses = [ ExpandableRow.Statuses.GOOD,
-                            ExpandableRow.Statuses.GOOD,
-                            ExpandableRow.Statuses.GOOD,
-                            ExpandableRow.Statuses.ERROR,
-                            ExpandableRow.Statuses.WARNING
-                        ];
+            ExpandableRow.Statuses.GOOD,
+            ExpandableRow.Statuses.GOOD,
+            ExpandableRow.Statuses.ERROR,
+            ExpandableRow.Statuses.WARNING
+        ];
         for (let i = 1; i < 51; i+= 1) {
             rows.push({
                 id: i, key: "row-" + i, "data-id": "row-" + i,
@@ -60,9 +60,9 @@ export default class PaginatedList extends React.Component {
     _rowSlice = (rows) => rows
         .slice((this.state.page -1) * 10, ((this.state.page - 1) * 10) + 10).map( ({ status, ...obj }) => {
             return (<ExpandableRow {...obj}
-                        showEdit={true}
-                        rowAccessories={<RowAccessories.Status status={status} />}
-                    />);
+                showEdit={true}
+                rowAccessories={<RowAccessories.Status status={status} />}
+            />);
         });
 
 

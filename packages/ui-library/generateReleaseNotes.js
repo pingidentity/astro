@@ -32,31 +32,31 @@ fetch(requestUri, {
         "Content-Type": "application/json"
     }
 })
-.then(data => data.json())
-.then(({ issues }) => {
-    if (issues === undefined || issues.length < 1) {
-        console.log(`No issues found matching the version number you entered, "${version}".`);
-        return;
-    }
+    .then(data => data.json())
+    .then(({ issues }) => {
+        if (issues === undefined || issues.length < 1) {
+            console.log(`No issues found matching the version number you entered, "${version}".`);
+            return;
+        }
 
-    const content =
+        const content =
         issues
-        .map(parseIssue)
-        .sort((a, b) => a > b ? 1 : -1)
-        .join("\r\n");
+            .map(parseIssue)
+            .sort((a, b) => a > b ? 1 : -1)
+            .join("\r\n");
 
-    const parsedVersion = version.split(".").join("-");
-    const path = `src/demo/components/docs/release-notes/v${parsedVersion}.md`;
+        const parsedVersion = version.split(".").join("-");
+        const path = `src/demo/components/docs/release-notes/v${parsedVersion}.md`;
 
-    if (fs.existsSync(path)) {
-        console.log(`File ${path} already exists. Please delete the file before continuing.`);
-        return;
-    }
+        if (fs.existsSync(path)) {
+            console.log(`File ${path} already exists. Please delete the file before continuing.`);
+            return;
+        }
 
-    fs.writeFile(
-        path,
-        content,
-        err => console.log("Could not write to file: ", err)
-    );
-})
-.catch(err => console.log(err));
+        fs.writeFile(
+            path,
+            content,
+            err => console.log("Could not write to file: ", err)
+        );
+    })
+    .catch(err => console.log(err));

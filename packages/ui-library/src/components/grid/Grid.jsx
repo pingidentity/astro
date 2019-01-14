@@ -132,12 +132,12 @@ class GridStateless extends React.Component {
         this.props.rows.forEach(function (rowObject, index) {
             rows.push(
                 <Row onRowExpanded={this.props.onRowExpanded}
-                        rowIndex={index}
-                        columns={visibleColumnList}
-                        rowObject={rowObject}
-                        data-id={"grid-row-" + index}
-                        key={"row" + index}
-                        rowExpandable={this.props.rowExpandable}
+                    rowIndex={index}
+                    columns={visibleColumnList}
+                    rowObject={rowObject}
+                    data-id={"grid-row-" + index}
+                    key={"row" + index}
+                    rowExpandable={this.props.rowExpandable}
                 />
             );
 
@@ -165,9 +165,9 @@ class GridStateless extends React.Component {
         if (column.props.hasSelectAll) {
             headerText = (
                 <FormCheckbox onValueChange={column.props.onSelectAllChange}
-                        checked={column.props.selectAllValue}
-                        label={headerText}
-                        className="stacked" />
+                    checked={column.props.selectAllValue}
+                    label={headerText}
+                    className="stacked" />
             );
         }
 

@@ -38,7 +38,7 @@ const ChartTooltip = ({
                 {
                     [`${baseClass}__label--horizontal`]: isHorizontal
                 }
-                )}
+            )}
             >
                 {label}
             </div>

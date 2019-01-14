@@ -311,7 +311,7 @@ class DemoApp extends React.Component {
                 </div>
 
                 {
-                  /*
+                    /*
                    * This component will watch the provided properties and update the url hash when they change
                    */
                 }

@@ -17,9 +17,9 @@ gulp.task("transpile-lib", () =>
         "!./src/templates/**", //exlude templates
         "!./src/tutorials/**", //exlude tutorials
     ])
-    .pipe(babel())
-    .pipe(debug({ title: "transpiling:" }))
-    .pipe(gulp.dest("lib"))
+        .pipe(babel())
+        .pipe(debug({ title: "transpiling:" }))
+        .pipe(gulp.dest("lib"))
 );
 
 gulp.task("move-files", () =>
@@ -37,14 +37,14 @@ gulp.task("move-files", () =>
         "!./src/tutorials", //exlude tutorials folder
         "!./src/tutorials/**", //exlude tutorials
     ])
-    .pipe(debug({ title: "moving:" }))
-    .pipe(gulp.dest("lib"))
+        .pipe(debug({ title: "moving:" }))
+        .pipe(gulp.dest("lib"))
 );
 
 gulp.task("build-css", () =>
     gulp.src("./src/css/ui-library.scss")
-    .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
-    .pipe(gulp.dest("lib/css"))
+        .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
+        .pipe(gulp.dest("lib/css"))
 );
 
 

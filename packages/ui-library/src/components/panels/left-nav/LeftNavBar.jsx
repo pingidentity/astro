@@ -292,7 +292,7 @@ class LeftNavBar extends React.Component {
                 // ONLY if the closed section is above the current one
                 if (closedSectionIndex > -1 && closedSectionIndex < newSectionIndex) {
                     const closedSectionNode = ReactDOM.findDOMNode(this.refs.container)
-                            .getElementsByClassName("nav-section")[closedSectionIndex];
+                        .getElementsByClassName("nav-section")[closedSectionIndex];
 
                     // check wheter the
                     const closedNode = ReactDOM.findDOMNode(closedSectionNode)

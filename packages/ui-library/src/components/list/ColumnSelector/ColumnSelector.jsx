@@ -285,7 +285,7 @@ export default class ColumnSelector extends Component {
                 onButtonClick={handleButtonClick}
                 {...child}
             />
-        , isSelected)
+            , isSelected)
     );
 
     // Renders options; curried so that it can pass an icon to all of its children, decide whether
@@ -327,7 +327,7 @@ export default class ColumnSelector extends Component {
                     }
                 }}
             </ColumnSelectorRow>
-        , isSelected);
+            , isSelected);
     };
 
     shouldManageOpen = options => !options.some(({ open }) => open !== undefined);

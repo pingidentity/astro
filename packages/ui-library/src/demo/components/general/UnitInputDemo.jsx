@@ -3,13 +3,13 @@ const UnitInput = require("./../../../components/general/UnitInput");
 const InputWidths = require("./../../../components/forms/InputWidths");
 
 const OPTIONS = [
-        { label: "--", value: "" },
-        { label: "Minute(s)", value: "Minute(s)" },
-        { label: "Hour(s)", value: "Hour(s)" },
-        { label: "Day(s)", value: "Day(s)" },
-        { label: "Week(s)", value: "Week(s)" },
-        { label: "Month(s)", value: "Month(s)" },
-        { label: "Year(s)", value: "Year(s)" }
+    { label: "--", value: "" },
+    { label: "Minute(s)", value: "Minute(s)" },
+    { label: "Hour(s)", value: "Hour(s)" },
+    { label: "Day(s)", value: "Day(s)" },
+    { label: "Week(s)", value: "Week(s)" },
+    { label: "Month(s)", value: "Month(s)" },
+    { label: "Year(s)", value: "Year(s)" }
 ];
 
 /**

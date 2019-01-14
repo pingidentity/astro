@@ -63,7 +63,7 @@ class Spotlight extends React.Component {
 
         return (
             <div data-id={this.props["data-id"]} className="spotlight" style={style}
-                    dangerouslySetInnerHTML={{ __html: this.state.clone }} />
+                dangerouslySetInnerHTML={{ __html: this.state.clone }} />
         );
     }
 }

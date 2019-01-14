@@ -154,25 +154,25 @@ class IntroTutorial extends React.Component {
             <div key={2} className="page">{this.props.active} {this.props.labelOf} {this.props.steps.length}</div>,
             <div key={3} className="controls">
                 <button type="button"
-                        ref="dismissButton"
-                        onClick={this._handleDismiss}
-                        className="dismiss"
-                        data-id="dismiss-button" >
+                    ref="dismissButton"
+                    onClick={this._handleDismiss}
+                    className="dismiss"
+                    data-id="dismiss-button" >
                     {this.props.labelDismiss}
                 </button>
                 <button type="button"
-                        ref="prevButton"
-                        disabled={this.props.active === 1}
-                        data-id="prev-button"
-                        onClick={this.props.onPrevious}
-                        className="prev" >
+                    ref="prevButton"
+                    disabled={this.props.active === 1}
+                    data-id="prev-button"
+                    onClick={this.props.onPrevious}
+                    className="prev" >
                     {"« " + this.props.labelPrevious}
                 </button>
                 <button type="button"
-                        ref="nextButton"
-                        className="next"
-                        data-id="next-button"
-                        onClick={this._handleNext} >
+                    ref="nextButton"
+                    className="next"
+                    data-id="next-button"
+                    onClick={this._handleNext} >
                     {this._getNextLabel()}
                 </button>
             </div>

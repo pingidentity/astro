@@ -16,14 +16,14 @@ var NUM_SINGLE_SELECT_DEMOS = 3,
     SINGLE_SELECT_ITEMS = [
         { name: "Hockey", id: 1 },
         { name: "Soccer", id: 2,
-          helpHintText: "Selection List items may have Help Hints" },
+            helpHintText: "Selection List items may have Help Hints" },
         { name: "Basketball", id: 3,
-          helpHintText: "Help Hint with dynamic icon",
-          helpTarget: testIcon },
+            helpHintText: "Help Hint with dynamic icon",
+            helpTarget: testIcon },
         { name: "Swimming", id: 4 },
         { name: "Chess", id: 5,
-          helpHintText: "Help Hint with custom image",
-          helpTarget: testImage },
+            helpHintText: "Help Hint with custom image",
+            helpTarget: testImage },
         { name: "Cross Country Skiing", id: 6 },
         { name: "Wrestling", id: 7 },
         { name: "Diving", id: 8 },
@@ -35,15 +35,15 @@ var NUM_SINGLE_SELECT_DEMOS = 3,
         { name: "Apple", id: 1 },
         { name: "Orange", id: 2 },
         { name: "Banana", id: 3,
-          helpHintText: "Help Hint with dynamic icon",
-          helpTarget: testIcon },
+            helpHintText: "Help Hint with dynamic icon",
+            helpTarget: testIcon },
         { name: "Watermelon", id: 4,
-          helpHintText: "Help Hint with custom image",
-          helpTarget: testImage } ,
+            helpHintText: "Help Hint with custom image",
+            helpTarget: testImage } ,
         { name: "Grape Fruit", id: 5 },
         { name: "Peach", id: 6 },
         { name: "Plum", id: 7,
-          helpHintText: "Selection List items may have Help Hints" },
+            helpHintText: "Selection List items may have Help Hints" },
         { name: "Strawberry", id: 8 },
         { name: "Kiwi", id: 9 }
     ],
@@ -293,7 +293,7 @@ class SelectionListDemo extends React.Component {
                         <SelectionFilterLabel
                             filterLabel="Selected Filters"
                             count={this.state.multiSelectIds4.length} />
-                        )}
+                    )}
                     showClose={false}
                     stateless={false}
                     onToggle={function () {}}>

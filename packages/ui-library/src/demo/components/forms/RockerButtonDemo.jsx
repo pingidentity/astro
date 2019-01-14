@@ -54,7 +54,7 @@ class RockerButtonDemo extends React.Component {
 
                 <br /><br />
 
-                 <RockerButton
+                <RockerButton
                     className="rocker-button--chart-rocker rocker-button--chart-rocker-small"
                     stateless={false}
                     onValueChange={this._handleValueChange}

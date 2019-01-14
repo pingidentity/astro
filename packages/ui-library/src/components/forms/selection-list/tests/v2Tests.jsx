@@ -545,7 +545,7 @@ describe("SelectionList", function () {
         componentRef.componentDidUpdate(
             { listItems: listItems },
             { listItems: listItems.push({ name: "Juan Moore", id: 10 })
-        });
+            });
 
         inputs = TestUtils.scryRenderedComponentsWithType(component, FormCheckbox);
         expect(inputs.length).toBe(10);

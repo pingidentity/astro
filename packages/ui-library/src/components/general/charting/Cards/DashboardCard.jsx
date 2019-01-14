@@ -136,7 +136,7 @@ class DashboardCard extends React.Component {
                         }
                     </div>
                 ]}
-                 {this.props.errorMessage &&
+                {this.props.errorMessage &&
                     <div className="dashboard-card__front">
                         <div className="dashboard-card__error" data-id={`${this.props["data-id"]}-error-message`}>
                             <div className="icon-cogs dashboard-card__error-icon" />

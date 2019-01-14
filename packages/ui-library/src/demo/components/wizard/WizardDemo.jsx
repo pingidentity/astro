@@ -173,7 +173,7 @@ class WizardDemo extends React.Component {
                     </Wizard>
                 </Choose>
                 <div>{this.state.isLoading && "Making some async call..."}</div>
-           </div>);
+            </div>);
     }
 }
 

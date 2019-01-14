@@ -160,31 +160,31 @@ describe("LinkDropDownList", function () {
 
     it("No onToggle callback exists when onToggle not provided", function () {
         var component = ReactTestUtils.renderIntoDocument(
-                            <LinkDropDownList
-                                data-id={componentId}
-                                stateless={false}
-                                closeOnSelection={false}
-                                label={labelText}
-                                onClick={jest.fn()}
-                                options={options}
-                                selectedOption={options[selectedIndex]}
-                            />);
+            <LinkDropDownList
+                data-id={componentId}
+                stateless={false}
+                closeOnSelection={false}
+                label={labelText}
+                onClick={jest.fn()}
+                options={options}
+                selectedOption={options[selectedIndex]}
+            />);
 
         expect(component.props.onToggle).toBeFalsy();
     });
 
     it("Triggers onToggle callback when label clicked and onToggle provided", function () {
         var component = ReactTestUtils.renderIntoDocument(
-                            <LinkDropDownList
-                                data-id={componentId}
-                                stateless={false}
-                                closeOnSelection={false}
-                                label={labelText}
-                                onClick={jest.fn()}
-                                onToggle={jest.fn()}
-                                options={options}
-                                selectedOption={options[selectedIndex]}
-                            />);
+            <LinkDropDownList
+                data-id={componentId}
+                stateless={false}
+                closeOnSelection={false}
+                label={labelText}
+                onClick={jest.fn()}
+                onToggle={jest.fn()}
+                options={options}
+                selectedOption={options[selectedIndex]}
+            />);
 
         expect(component.props.onToggle).toBeTruthy();
 

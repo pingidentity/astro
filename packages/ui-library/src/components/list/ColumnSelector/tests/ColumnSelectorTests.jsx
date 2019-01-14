@@ -134,7 +134,7 @@ describe("ColumnSelector", () => {
 
         const [firstRow] =
             shallow(firstColumn)
-            .find(ColumnSelectorRow);
+                .find(ColumnSelectorRow);
 
         const renderedRow = mount(firstRow);
 
@@ -160,7 +160,7 @@ describe("ColumnSelector", () => {
 
         const [firstRow] =
             shallow(firstColumn)
-            .find(ColumnSelectorRow);
+                .find(ColumnSelectorRow);
 
         const renderedRow = mount(firstRow);
 
@@ -186,7 +186,7 @@ describe("ColumnSelector", () => {
 
         const [firstRow] =
             shallow(firstColumn)
-            .find(ColumnSelectorRow);
+                .find(ColumnSelectorRow);
 
         const childRows = shallow(firstRow).find(ColumnSelectorRow);
 

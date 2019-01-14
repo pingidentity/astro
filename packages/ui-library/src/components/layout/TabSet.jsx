@@ -69,10 +69,10 @@ class TabSet extends Component {
                 labels: [...labels, label]
             };
         },
-            {
-                activeTabContent: {},
-                labels: []
-            })
+        {
+            activeTabContent: {},
+            labels: []
+        })
     )
 
     render () {

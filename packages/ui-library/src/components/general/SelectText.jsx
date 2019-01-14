@@ -150,8 +150,8 @@ class SelectText extends React.Component {
         var dataId = this.props.dataId || this.props["data-id"];
         return (
             <span className={this.props.className}
-                  onClick={this._selectText}
-                  data-id={dataId}>
+                onClick={this._selectText}
+                data-id={dataId}>
                 {this.props.children}
             </span>
         );

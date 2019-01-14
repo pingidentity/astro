@@ -337,12 +337,12 @@ const FilterControls = ({
                         })}
                         {
                             customFilterList.length < 1 || customFilterList[customFilterList.length - 1].type
-                            ? <div>
-                                <Link onClick={addCustomFilter} type="add">Add Filter</Link>
-                            </div>
-                            : <div>
-                                <Link disabled={true} type="add">Add Filter</Link>
-                            </div>
+                                ? <div>
+                                    <Link onClick={addCustomFilter} type="add">Add Filter</Link>
+                                </div>
+                                : <div>
+                                    <Link disabled={true} type="add">Add Filter</Link>
+                                </div>
                         }
                     </div>
                 </Aside>

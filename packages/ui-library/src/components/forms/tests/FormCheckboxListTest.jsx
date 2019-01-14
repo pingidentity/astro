@@ -32,7 +32,7 @@ describe("FormCheckboxList", function () {
             onQueryChange: jest.fn(),
             onVisibilityChange: jest.fn(),
             items: [{ id: 1, name: "Salesforce" },
-                    { id: 2, name: "Google Mail" }
+                { id: 2, name: "Google Mail" }
             ],
             selected: [2]
         });
@@ -128,8 +128,8 @@ describe("FormCheckboxList", function () {
     it("renders grouped data", function () {
         var component = getComponent({
             items: [{ id: 1, name: "Salesforce", group: "Marketing" },
-                    { id: 2, name: "Google Mail", group: "Personal" },
-                    { id: 3, name: "Concur", group: "Marketing" }
+                { id: 2, name: "Google Mail", group: "Personal" },
+                { id: 3, name: "Concur", group: "Marketing" }
             ]
         });
 
@@ -150,8 +150,8 @@ describe("FormCheckboxList", function () {
     it("triggers onQueryChange query update when clicking on group label", function () {
         var component = getComponent({
             items: [{ id: 1, name: "Salesforce", group: "Marketing" },
-                    { id: 2, name: "Google Mail", group: "Personal" },
-                    { id: 3, name: "Concur", group: "Marketing" }
+                { id: 2, name: "Google Mail", group: "Personal" },
+                { id: 3, name: "Concur", group: "Marketing" }
             ]
         });
 
@@ -203,8 +203,8 @@ describe("FormCheckboxList", function () {
         var component = getComponent({
             queryString: "Marketing",
             items: [{ id: 1, name: "Salesforce", group: "Marketing" },
-                    { id: 2, name: "Google Mail", group: "Personal" },
-                    { id: 3, name: "Concur", group: "Marketing" }
+                { id: 2, name: "Google Mail", group: "Personal" },
+                { id: 3, name: "Concur", group: "Marketing" }
             ]
         });
 
@@ -236,8 +236,8 @@ describe("FormCheckboxList", function () {
             queryString: "Marketing",
             hideUnchecked: true,
             items: [{ id: 1, name: "Salesforce", group: "Marketing" },
-                    { id: 2, name: "Google Mail", group: "Personal" },
-                    { id: 3, name: "Concur", group: "Marketing" }
+                { id: 2, name: "Google Mail", group: "Personal" },
+                { id: 3, name: "Concur", group: "Marketing" }
             ],
             selected: [3]
         });
@@ -266,8 +266,8 @@ describe("FormCheckboxList", function () {
         var component = getComponent({
             stateless: false,
             items: [{ id: 1, name: "Salesforce", group: "Marketing" },
-                    { id: 2, name: "Google Mail", group: "Personal" },
-                    { id: 3, name: "Concur", group: "Marketing" }
+                { id: 2, name: "Google Mail", group: "Personal" },
+                { id: 3, name: "Concur", group: "Marketing" }
             ]
         });
 
@@ -283,8 +283,8 @@ describe("FormCheckboxList", function () {
         var component = getComponent({
             stateless: false,
             items: [{ id: 1, name: "Salesforce", group: "Marketing" },
-                    { id: 2, name: "Google Mail", group: "Personal" },
-                    { id: 3, name: "Concur", group: "Marketing" }
+                { id: 2, name: "Google Mail", group: "Personal" },
+                { id: 3, name: "Concur", group: "Marketing" }
             ]
         });
 
@@ -298,8 +298,8 @@ describe("FormCheckboxList", function () {
         var component = getComponent({
             stateless: false,
             items: [{ id: 1, name: "Salesforce", group: "Marketing" },
-                    { id: 2, name: "Google Mail", group: "Personal" },
-                    { id: 3, name: "Concur", group: "Marketing" }
+                { id: 2, name: "Google Mail", group: "Personal" },
+                { id: 3, name: "Concur", group: "Marketing" }
             ],
             selected: [2,1]
         });

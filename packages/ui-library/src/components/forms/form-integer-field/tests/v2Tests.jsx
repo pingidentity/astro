@@ -167,7 +167,7 @@ describe("FormIntegerField", function () {
         var error = "This is out of range";
         var component = ReactTestUtils.renderIntoDocument(
             <FormIntegerField onValueChange={callback} stateless={false} enforceRange={true}
-                    min={1} max={5} outOfRangeErrorMessage={error} />
+                min={1} max={5} outOfRangeErrorMessage={error} />
         );
         var input = TestUtils.findRenderedDOMNodeWithTag(component, "input");
 
@@ -217,11 +217,11 @@ describe("FormIntegerField", function () {
     it("is limiting up/down arrows within min-max interval", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormIntegerField data-id="int"
-                    onValueChange={callback}
-                    max={5}
-                    min={3}
-                    value={4}
-                    increment={3}
+                onValueChange={callback}
+                max={5}
+                min={3}
+                value={4}
+                increment={3}
             />
         );
 
@@ -382,10 +382,10 @@ describe("FormIntegerField", function () {
     it("toggle reveal in stateful component", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormIntegerField value={3}
-                    onValueChange={callback}
-                    stateless={false}
-                    showReveal={true}
-                    maskValue={true} />
+                onValueChange={callback}
+                stateless={false}
+                showReveal={true}
+                maskValue={true} />
         );
 
         var stateful = component.refs.formIntegerFieldStateful;
@@ -400,9 +400,9 @@ describe("FormIntegerField", function () {
     it("undo in stateful component", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormIntegerField initialValue={3}
-                    onValueChange={callback}
-                    stateless={false}
-                    showUndo={true} />
+                onValueChange={callback}
+                stateless={false}
+                showUndo={true} />
         );
 
         var stateful = component.refs.formIntegerFieldStateful;
@@ -423,9 +423,9 @@ describe("FormIntegerField", function () {
     it("will add css class to container", function () {
         var component = ReactTestUtils.renderIntoDocument(
             <FormIntegerField
-                    className="added"
-                    stateless={false}
-                    />
+                className="added"
+                stateless={false}
+            />
         );
         expect(TestUtils.findRenderedDOMNodeWithClass(component, "added")).not.toBeNull();
     });

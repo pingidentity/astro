@@ -154,14 +154,14 @@ class FormRadioGroup extends React.Component {
         return (
             this.props.label ? (
                 <FormLabel data-id={this.props["data-id"]}
-                disabled={this.props.disabled}
-                value={this.props.label || this.props.labelText}
-                hint={this.props.labelHelpText}
-                className="list">{this._getRadioButtons()}</FormLabel>
+                    disabled={this.props.disabled}
+                    value={this.props.label || this.props.labelText}
+                    hint={this.props.labelHelpText}
+                    className="list">{this._getRadioButtons()}</FormLabel>
             ): <div data-id={this.props["data-id"]}
-                    className="list">
-                    {this._getRadioButtons()}
-                </div>
+                className="list">
+                {this._getRadioButtons()}
+            </div>
         );
     }
 }

@@ -118,9 +118,9 @@ class ExpandableRowDemo extends React.Component {
                 </p>
                 <div className="button-group" data-id="delete-confirmation">
                     <button
-                            type="button"
-                            data-id="confirm-action"
-                            onClick={this._customConfirm} >
+                        type="button"
+                        data-id="confirm-action"
+                        onClick={this._customConfirm} >
                         Confirm
                     </button>
                     <br />

@@ -157,7 +157,7 @@ class ButtonBar extends React.Component {
                 className={cancelClassName}
                 onClick={this.props.onCancel}
                 disabled={this.props.enableSavingAnimation}
-                >
+            >
                 {this.props.cancelText || Translator.translate("cancel")}
             </Button>
         );
@@ -181,12 +181,12 @@ class ButtonBar extends React.Component {
     _renderCancelButton = () => (
         this.props.cancelTooltip
             ? <CancelTooltip
-                    data-id={this.props["data-id"]}
-                    label={this._getCancelButtonMarkup()}
-                    positionClassName="top left"
-                    flags={this.props.flags}
-                    {...this.props.cancelTooltip}
-                />
+                data-id={this.props["data-id"]}
+                label={this._getCancelButtonMarkup()}
+                positionClassName="top left"
+                flags={this.props.flags}
+                {...this.props.cancelTooltip}
+            />
             : this._getCancelButtonMarkup()
     )
 
@@ -200,17 +200,17 @@ class ButtonBar extends React.Component {
 
         return this.props.saveTooltip
             ? (<ConfirmTooltip
-                    buttonLabel={confirmButtonText}
-                    cancelText={cancelButtonText}
-                    data-id={this.props["data-id"] + "-save-tooltip"}
-                    label={this._getSaveButtonMarkup()}
-                    onConfirm={this._handleSave}
-                    positionClassName="top left"
-                    flags={this.props.flags}
-                    {...props}
-                >
-                    {messageText}
-                </ ConfirmTooltip >)
+                buttonLabel={confirmButtonText}
+                cancelText={cancelButtonText}
+                data-id={this.props["data-id"] + "-save-tooltip"}
+                label={this._getSaveButtonMarkup()}
+                onConfirm={this._handleSave}
+                positionClassName="top left"
+                flags={this.props.flags}
+                {...props}
+            >
+                {messageText}
+            </ ConfirmTooltip >)
             : this._getSaveButtonMarkup();
     }
 
@@ -240,7 +240,7 @@ class ButtonBar extends React.Component {
                             className={discardClassName}
                             onClick={this.props.onDiscard}
                             disabled={this.props.enableSavingAnimation}
-                            >
+                        >
                             {discardText}
                         </Button>
                     )}

@@ -393,23 +393,23 @@ class Calendar extends React.Component {
                     calendarDate.locale(Translator.currentLanguage);
                 }
                 view = (<DaysView date={calendarDate} onSetDate={this.setDate} onNextView={this.nextView}
-                                  dateRange={this.props.dateRange} />);
+                    dateRange={this.props.dateRange} />);
                 break;
             case Views.MONTHS:
                 view = (<MonthsView date={calendarDate} onSetDate={this.setDate} //eslint-disable-line
-                                    onNextView={this.nextView} onPrevView={this.prevView}
-                                    dateRange={this.props.dateRange} />);
+                    onNextView={this.nextView} onPrevView={this.prevView}
+                    dateRange={this.props.dateRange} />);
                 break;
             case Views.YEARS:
                 view = (<YearsView date={calendarDate} onSetDate={this.setDate} onPrevView={this.prevView}
-                                   dateRange={this.props.dateRange} />);
+                    dateRange={this.props.dateRange} />);
                 break;
         }
 
         const calendar = (
             <div className="input-calendar-wrapper active"
-                 data-id="input-calendar-wrapper"
-                 onClick={this.calendarClick}>
+                data-id="input-calendar-wrapper"
+                onClick={this.calendarClick}>
                 {view}
             </div>
         );
@@ -448,15 +448,15 @@ class Calendar extends React.Component {
                 />
                 <div className="input-container">
                     <input type="text"
-                           data-id={this.props["data-id"]}
-                           className="input-calendar-value"
-                           name={this.props.name}
-                           value={this.state.inputValue}
-                           onBlur={this.inputBlur}
-                           onChange={this.changeDate}
-                           onClick={this.inputClick}
-                           placeholder={this.props.placeholder}
-                           ref={el => this.reference = el}
+                        data-id={this.props["data-id"]}
+                        className="input-calendar-value"
+                        name={this.props.name}
+                        value={this.state.inputValue}
+                        onBlur={this.inputBlur}
+                        onChange={this.changeDate}
+                        onClick={this.inputClick}
+                        placeholder={this.props.placeholder}
+                        ref={el => this.reference = el}
                     />
                 </div>
                 {this.state.isVisible && popup}

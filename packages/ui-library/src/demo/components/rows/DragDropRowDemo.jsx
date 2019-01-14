@@ -59,13 +59,13 @@ class DragDropRowDemo extends React.Component {
                     this.state.rows.map(function (item, index) {
                         return (
                             <Draggable
-                                    key={index}
-                                    id={index}
-                                    index={index}
-                                    onDrag={this._onDrag}
-                                    onDrop={this._onDrop}
-                                    onCancel={this._onCancel}
-                                    disabled={item === 2}>
+                                key={index}
+                                id={index}
+                                index={index}
+                                onDrag={this._onDrag}
+                                onDrop={this._onDrop}
+                                onCancel={this._onCancel}
+                                disabled={item === 2}>
                                 <div className={this._getDragClass(item, index)}>
                                     Row {item} {item === 2 && "can't drag me"}
                                 </div>

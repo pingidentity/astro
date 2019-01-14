@@ -49,7 +49,7 @@ class ButtonCell extends React.Component {
     render() {
         return (
             <button data-id={this.props["data-id"]}
-                    className={this.props.className} onClick={this.props.onGridCellAction} />
+                className={this.props.className} onClick={this.props.onGridCellAction} />
         );
     }
 }

@@ -157,30 +157,30 @@ class Colors extends Component {
                                         marginBottom: "15px",
                                     }}
                                     />
-                                <strong style={{
-                                    textDecoration: deprecatedIcons.indexOf(sorted.name) !== -1
-                                    ? "line-through" : "none",
-                                    opacity: deprecatedIcons.indexOf(sorted.name) !== -1
-                                    ? "0.5" : "1",
-                                }}>
-                                    {sorted.name}
-                                </strong>
-                                <div style={{
-                                    textDecoration: deprecatedIcons.indexOf(sorted.name) !== -1
-                                    ? "line-through" : "none",
-                                    opacity: deprecatedIcons.indexOf(sorted.name) !== -1 ? "0.5" : "1",
-                                }}>
-                                    {sorted.value}
-                                </div>
+                                    <strong style={{
+                                        textDecoration: deprecatedIcons.indexOf(sorted.name) !== -1
+                                            ? "line-through" : "none",
+                                        opacity: deprecatedIcons.indexOf(sorted.name) !== -1
+                                            ? "0.5" : "1",
+                                    }}>
+                                        {sorted.name}
+                                    </strong>
+                                    <div style={{
+                                        textDecoration: deprecatedIcons.indexOf(sorted.name) !== -1
+                                            ? "line-through" : "none",
+                                        opacity: deprecatedIcons.indexOf(sorted.name) !== -1 ? "0.5" : "1",
+                                    }}>
+                                        {sorted.value}
+                                    </div>
 
-                                {sorted.deprecatedValue &&
+                                    {sorted.deprecatedValue &&
                                     <div style={{
                                         textDecoration: "line-through",
                                         opacity: "0.5",
                                     }}>
                                         {sorted.deprecatedValue}
                                     </div>
-                                }
+                                    }
 
                                 </div>
                             );
