@@ -234,7 +234,9 @@ class FormDropDownListDemo extends React.Component {
                         width={InputWidths.SM}
                     />
                 </div>
-                <div>Selected value: {this.state.selectedValue8.label}</div>
+                {/* It's possible for this selected option value to be null, so we need to handle
+                that case. */}
+                <div>Selected value: {this.state.selectedValue8 && this.state.selectedValue8.label}</div>
                 <br/>
 
                 <div className="input-row">
