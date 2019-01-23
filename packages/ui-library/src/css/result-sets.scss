@@ -509,6 +509,22 @@ input.ordering-controls__input {
     vertical-align: middle;
 }
 
+.result-set {
+    $content-padding: $spacing-xl;
+
+    &--stretched &__scroller {
+        > * {
+            padding-right: $content-padding;
+            padding-bottom: $content-padding;
+        }
+
+        margin-right: -$content-padding; // page offset to make scrollbar go all the way to right
+        margin-bottom: -2 * $spacing-xl; // page offset to make it look like it is on the bottom
+
+        overflow: auto visible;
+    }
+}
+
 // V1 - TO BE REMOVED OR MOVED - DEPRECATED OR SITE SPECIFIC -----------------------------------------------------------
 .result-set {
     $item-height: 75px;

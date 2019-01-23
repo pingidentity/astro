@@ -13,6 +13,7 @@ import dragScroll from "../../../util/dragScroll";
 import InlineMessage from "../../general/InlineMessage";
 import Button from "../../buttons/Button";
 import StatusIndicator from "../../general/StatusIndicator";
+import StretchContent from "../../layout/StretchContent";
 
 /**
 * @enum {string}
@@ -197,12 +198,12 @@ var ConfirmDeletePositions = {
  *
  * @example
  *         <h1>My Row Results</h1>
- *         <!-- note that all expanding rows must be in a div with the "result-set" css class -->
- *         <div className="result-set">
+ *         <!-- note that all expanding rows must be in a div with the "result-set" css class or a wrapper component -->
+ *         <ExpandableRow.SimpleWrapper>
  *             <ExpandableRow id="1" title={'row1'} subtitle={'row1 subtitle'} content={row1Content} />
  *             <ExpandableRow id="2" title={'row2'} subtitle={'row2 subtitle'} content={row2Content} />
  *             <ExpandableRow id="3" title={'row3'} subtitle={'row3 subtitle'} content={row3Content} />
- *         </div>
+ *         </ExpandableRow.SimpleWrapper>
  *
  *     You can also pass the content as a children of the component. This will overwrite any content passed in as a prop
  *
@@ -705,7 +706,75 @@ class ConfirmDeleteDialog extends React.Component {
     }
 }
 
+/**
+* @class ScrollingWrapper
+* @memberof ExpandableRow
+* @desc Wraps around a list of ExpandableRow components to display a scrolling list properly
+*       You probably want to use it with an InfiniteScroll component
+*
+* @param {string} [data-id="scrolling-wrapper"]
+*     To define the base "data-id" value for the top-level HTML container.
+* @param {string} [className]
+*     CSS classes to set on the top-level HTML container.
+* @param {node} [title]
+*     Content to put in the title above the list
+* @param {node} [heading]
+*     Content to put above the list
+*/
+
+// list and wrapper components to make a list display correctly
+const ScrollingWrapper = ({ "data-id": dataId, className, title, children, heading, ...props }) => (
+    <StretchContent
+        data-id={dataId}
+        className={classnames("result-set", "result-set--stretched", className)}
+        {...props}
+    >
+        {title && <div className="result-set__title">{title}</div>}
+        {heading}
+        <StretchContent scrollable className="result-set__scroller">{children}</StretchContent>
+    </StretchContent>
+);
+
+ScrollingWrapper.propTypes = {
+    "data-id": PropTypes.string,
+    className: PropTypes.string,
+    children: PropTypes.node,
+    title: PropTypes.node,
+    heading: PropTypes.node,
+};
+
+ScrollingWrapper.defaultProps = {
+    "data-id": "scrolling-wrapper",
+};
+
+/**
+* @class SimpleWrapper
+* @memberof ExpandableRow
+* @desc Wraps around a list of ExpandableRow components to display a scrolling list properly
+*
+* @param {string} [data-id="scrolling-wrapper"]
+*     To define the base "data-id" value for the top-level HTML container.
+* @param {string} [className]
+*     CSS classes to set on the top-level HTML container.
+*/
+
+const SimpleWrapper = ({ "data-id": dataId, className, children, ...props }) => (
+    <div data-id={dataId} className={classnames("result-set", className)} {...props}>{children}</div>
+);
+
+SimpleWrapper.propTypes = {
+    "data-id": PropTypes.string,
+    className: PropTypes.string,
+    children: PropTypes.node,
+};
+
+SimpleWrapper.defaultProps = {
+    "data-id": "simple-wrapper",
+};
+
 ExpandableRow.Statuses = Statuses;
 ExpandableRow.RowMessageTypes = RowMessageTypes;
 ExpandableRow.ConfirmDeletePositions = ConfirmDeletePositions;
+ExpandableRow.ScrollingWrapper = ScrollingWrapper;
+ExpandableRow.SimpleWrapper = SimpleWrapper;
 module.exports = ExpandableRow;

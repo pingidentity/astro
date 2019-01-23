@@ -608,7 +608,7 @@ $color-grey-minor-1: $color-neutral-30;
     right: 0;
     bottom: 0;
     left: $layout-nav-width;
-    padding: 25px 40px 40px;
+    padding: 25px 40px 0;
 
     // workaround for bottom padding - bottom padding is ignored in scrolling elements in FF and IE
     &:after {
@@ -616,7 +616,7 @@ $color-grey-minor-1: $color-neutral-30;
 
         content: '';
         display: block;
-        height: 78px;
+        height: 2 * $spacing-xl;
     }
 }
 
@@ -1143,7 +1143,7 @@ $color-grey-minor-1: $color-neutral-30;
 }
 
 .page-group-content {
-    padding: $spacing-sm;
+    padding: 0 0 $spacing-sm $spacing-sm;
 }
 
 .page-section-content {

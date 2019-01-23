@@ -20,9 +20,7 @@ var React = require("react"),
  *
  * @example
  *     <Spinner show={this.state.show} defaultText="Loading...">
- *         <div className="result-set">
- *             {data}
- *         </div>
+ *         {data}
  *     </Spinner>
  **/
 

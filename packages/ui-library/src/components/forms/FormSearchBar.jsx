@@ -6,6 +6,7 @@ import CollapsibleLink from "../general/CollapsibleLink";
 import Anchor from "../general/Anchor";
 import _ from "underscore";
 import { InputWidths } from "../forms/InputWidths";
+import { lightInputs } from "../../util/CSSModifiers";
 
 /**
  * @class FormSearchBar
@@ -133,7 +134,7 @@ class SearchBar extends React.Component {
                     <div data-id={`${dataId}-filters-container`}>
                         <div
                             data-id={`${dataId}-filters`}
-                            className="searchbar__filters modifier_light-inputs"
+                            className={classnames("searchbar__filters", lightInputs)}
                             key="searchbar-filters"
                         >
                             {children}

@@ -749,4 +749,31 @@ describe("ExpandableRow", function() {
         expect(callback).toBeCalled();
     });
 
+    it("renders scrolling wrapper with data-id", function() {
+        const component = ReactTestUtils.renderIntoDocument(
+            <div><ExpandableRow.ScrollingWrapper>nothing</ExpandableRow.ScrollingWrapper></div>
+        );
+
+        const element = TestUtils.findRenderedDOMNodeWithDataId(component, "scrolling-wrapper");
+        expect(element).not.toBeNull();
+    });
+
+    it("renders scrolling wrapper with a title", function() {
+        const component = ReactTestUtils.renderIntoDocument(
+            <div><ExpandableRow.ScrollingWrapper title="the title">nothing</ExpandableRow.ScrollingWrapper></div>
+        );
+
+        const element = TestUtils.findRenderedDOMNodeWithClass(component, "result-set__title");
+        expect(element).not.toBeNull();
+    });
+
+    it("renders simple wrapper with data-id", function() {
+        const component = ReactTestUtils.renderIntoDocument(
+            <div><ExpandableRow.SimpleWrapper>nothing</ExpandableRow.SimpleWrapper></div>
+        );
+
+        const element = TestUtils.findRenderedDOMNodeWithDataId(component, "simple-wrapper");
+        expect(element).not.toBeNull();
+    });
+
 });

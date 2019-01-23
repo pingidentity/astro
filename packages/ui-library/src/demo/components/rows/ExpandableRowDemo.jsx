@@ -129,7 +129,7 @@ class ExpandableRowDemo extends React.Component {
             </DetailsTooltip>
         );
         return (
-            <div data-id="idp-row" className="result-set">
+            <ExpandableRow.SimpleWrapper data-id="idp-row">
                 <ExpandableRow
                     flags={flags}
                     stateless={false}
@@ -309,7 +309,7 @@ class ExpandableRowDemo extends React.Component {
                         deleteButton={customDeleteButton}
                     />
                 )}
-            </div>
+            </ExpandableRow.SimpleWrapper>
         );
     }
 }

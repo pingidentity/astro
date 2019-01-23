@@ -140,6 +140,7 @@ class Calendar extends React.Component {
         name: PropTypes.string,
         placeholder: PropTypes.string,
         required: PropTypes.bool,
+        tight: PropTypes.bool,
 
         onValueChange: PropTypes.func.isRequired,
         flags: PropTypes.arrayOf(PropTypes.string),
@@ -152,6 +153,7 @@ class Calendar extends React.Component {
         closeOnSelect: false,
         required: false,
         format: Translator.translate("dateformat"),
+        tight: false,
         flags: [],
     };
 
@@ -431,7 +433,8 @@ class Calendar extends React.Component {
         const className = classnames("input-calendar", this.props.className, {
             active: this.state.isVisible,
             required: this.props.required,
-            "value-entered": !!this.state.inputValue
+            "value-entered": !!this.state.inputValue,
+            "input-calendar--width-tight": this.props.tight,
         });
 
         return (

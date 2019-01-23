@@ -11,38 +11,86 @@ describe("List View Infinite Scroll Integration", function () {
     });
 
     /**
-     * SCENARIO: Should filter odd rows and even rows
+     * SCENARIO: Should filter Enabled/Good users
      * GIVEN: Goes to template List View Infinite Scroll
      * WHEN: Selects the first page
-     * AND: Selects the odd row filter option
-     * THEN: There should be only odd rows displayed in the list
-     * WHEN: Selects only the Even row filter option
-     * THEN: There should be only even rows displayed in the list
+     * AND: Selects the enabled and good password statuses
+     * THEN: Rows should only show green indicators
      */
-    it("should filter odd rows and even rows", function () {
-        //click on Narrow By link
+    it("should filter Enabled/Good users", function () {
+        //click on Filters link
         ListViewInfiniteScrollPage.clickOpenFilters();
-        //filter odd rows
-        ListViewInfiniteScrollPage.clickCheckboxFilterOddRows();
-        expect(ListViewInfiniteScrollPage.verifyOddRows).toBeTruthy();
-
-        //filter even rows
-        ListViewInfiniteScrollPage.clickCheckboxFilterOddRows();
-        ListViewInfiniteScrollPage.clickCheckboxFilterEvenRows();
-        expect(ListViewInfiniteScrollPage.verifyEvenRows).toBeTruthy();
+        ListViewInfiniteScrollPage.clickEnabledStatus();
+        ListViewInfiniteScrollPage.clickGoodPasswordStatus();
+        expect(ListViewInfiniteScrollPage.verifySuccessStatuses()).toBeTruthy();
+        ListViewInfiniteScrollPage.takeScreenshotAndCompare("TemplatesListView_FilteredList");
     });
 
     /**
      * SCENARIO: Should search rows normally
      * GIVEN: Goes to template List View Infinite Scroll
-     * WHEN: Search any row (e.g "15")
-     * THEN: The row 15 should display in the list
+     * WHEN: Search any row (e.g "curtis")
+     * THEN: The row for Kathryn Curtis
+     * WHEN: Click clear search
+     * THEN: The row for Teresa Adams
      */
     it("should search rows normally", function () {
-        //search with item "15"
-        ListViewInfiniteScrollPage.setSearchValue("15");
+        //search with item "curtis"
+        ListViewInfiniteScrollPage.setSearchValue("curtis");
         //verify result
-        expect(ListViewInfiniteScrollPage.verifyResultItemsExisting(15)).toBeTruthy();
+        expect(ListViewInfiniteScrollPage.verifyItemHasTitle("user-0", "Kathryn Curtis")).toBeTruthy();
+        ListViewInfiniteScrollPage.takeScreenshotAndCompare("TemplatesListView_Search");
+
+        // clear search
+        ListViewInfiniteScrollPage.clickClearSearch();
+        //verify result
+        expect(ListViewInfiniteScrollPage.verifyItemHasTitle("user-0", "Teresa Adams")).toBeTruthy();
+    });
+
+    /**
+     * SCENARIO: Should expand item in list
+     * GIVEN: Goes to template List View Infinite Scroll
+     * WHEN: Click expand button on row
+     * THEN: There is an "expanded-row" data id in the row
+     */
+    it("should expand item in list", function () {
+        // row not opened yet
+        expect(ListViewInfiniteScrollPage.verifyRowIsOpen(4)).not.toBeTruthy();
+        // open row
+        ListViewInfiniteScrollPage.clickExpandRow(4);
+        // verify result
+        expect(ListViewInfiniteScrollPage.verifyRowIsOpen(4)).toBeTruthy();
+        ListViewInfiniteScrollPage.takeScreenshotAndCompare("TemplatesListView_ExpandedItem");
+    });
+
+    /**
+     * SCENARIO: Should show any/all control and change divider to say any
+     * GIVEN: Goes to template List View Infinite Scroll
+     * WHEN: Click expand filters and click Advanced
+     * THEN: There is an "advanced-container" data id showing
+     * WHEN: Click to choose filter and add a second
+     * THEN: There is an "indent" data id showing
+     * WHEN: Click radio button for Any
+     * THEN: The divider shows "Any"
+     */
+    it("should show any/all control and change divider to say any", function () {
+        // click on Filters link
+        ListViewInfiniteScrollPage.clickOpenFilters();
+        // click on Advanced link
+        ListViewInfiniteScrollPage.clickOpenAdvanced();
+        // verify advanced section
+        expect(ListViewInfiniteScrollPage.verifyAdvancedIsShowing()).toBeTruthy();
+        // choose a custom filter type
+        ListViewInfiniteScrollPage.chooseNewFilterType(1);
+        // add a filter
+        ListViewInfiniteScrollPage.clickAddCustomFilter();
+        // verify any/all is showing
+        expect(ListViewInfiniteScrollPage.verifyIndentIsShowing()).toBeTruthy();
+        // click on Any radio button
+        ListViewInfiniteScrollPage.clickRadio("Any");
+        // verify indent says "Any"
+        expect(ListViewInfiniteScrollPage.verifyIndentTitle("ANY")).toBeTruthy();
+        ListViewInfiniteScrollPage.takeScreenshotAndCompare("TemplatesListView_CustomFilters");
     });
 });
 

@@ -9,6 +9,7 @@ import Step from "./Step";
 import _ from "underscore";
 import classnames from "classnames";
 import Utils from "../../util/Utils";
+import { lightInputs } from "../../util/CSSModifiers";
 
 
 /**
@@ -196,7 +197,7 @@ class Wizard extends React.Component {
                     onClick={this.props.onClose}
                     data-id={`${dataId}-close-button`}
                 />
-                <div className="wizard2__content modifier_light-inputs">
+                <div className={classnames("wizard2__content", lightInputs)}>
                     {messageProps && <Messages {...messageProps} />}
                     <ActiveStep
                         data-id={dataId}

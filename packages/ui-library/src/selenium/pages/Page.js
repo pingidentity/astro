@@ -64,7 +64,7 @@ Page.prototype.isExisting = function (path) {
  */
 Page.prototype.assertExistingElement = function (path) {
     if (!browser.isExisting(path)) {
-        throw "#Error: the given path '" + path + "' not exist!";
+        throw "#Error: the given path '" + path + "' does not exist!";
     }
 };
 

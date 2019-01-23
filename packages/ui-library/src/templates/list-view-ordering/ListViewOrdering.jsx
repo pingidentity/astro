@@ -137,14 +137,12 @@ module.exports = class extends React.Component {
                         perPage = {this.props.perPage}
                         page = {this.props.page}
                         total = {this.props.rows.filtered.length}
-                        onValueChange = {this._handlePageChange}>
-
-                        <div className="result-set">
-                            {this._generatePageRows()}
-                        </div>
+                        onValueChange = {this._handlePageChange}
+                    >
+                        {this._generatePageRows()}
                     </Pagination>
                 ) || (
-                    <div className="result-set">No rows returned</div>
+                    <ExpandableRow.SimpleWrapper>No rows returned</ExpandableRow.SimpleWrapper>
                 )}
 
             </div>

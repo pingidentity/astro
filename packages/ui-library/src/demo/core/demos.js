@@ -1022,15 +1022,6 @@ module.exports = [
                 icon: "details"
             },
             {
-                label: "Query Builder",
-                demo: require("../components/templates/QueryBuilderDemo"),
-                pathToDoc: "components/templates/QueryBuilder.jsx",
-                pathToSource: "templates_query-builder_QueryBuilder.jsx.html",
-                pathToDemoSource: "demo_components_templates_QueryBuilderDemo.jsx.html",
-                fullscreen: true,
-                icon: "details"
-            },
-            {
                 label: "Home App",
                 demo: require("../components/templates/HomeAppDemo"),
                 pathToDoc: "components/templates/HomeApp.jsx",

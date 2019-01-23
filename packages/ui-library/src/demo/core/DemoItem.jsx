@@ -87,7 +87,7 @@ class DemoItem extends React.Component {
 
         const markdown = description && marked(description),
             props = _.extend({}, this.props, this.state.store, { flags: this.state.flags }),
-            containerClassName = classnames("section", { fullscreen }),
+            containerClassName = classnames({ fullscreen }),
             headerClassName = "doc";
 
         const OutputComponent = fullscreen ? StretchContent : "div";

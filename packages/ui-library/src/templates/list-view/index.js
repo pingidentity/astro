@@ -1,6 +1,3 @@
-var ListView = require("./ListView");
+import ListView from "./ListView";
 
-ListView.Reducer = require("./Reducer");
-ListView.Actions = require("./Actions");
-
-module.exports = ListView;
+export default ListView;

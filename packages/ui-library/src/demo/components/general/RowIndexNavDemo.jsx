@@ -47,7 +47,7 @@ var RowIndexNavDemo = createReactClass({
                     Note that the rows below are not tied in anyway to the Index Nav on the right. The are present
                     only to show how the layout of the nav is acheived.
                 </div>
-                <div className="result-set">
+                <ExpandableRow.SimpleWrapper>
                     <RowIndexNav
                         activeIndexes={this.activeIndexes}
                         onClick={this._handleOnClick}
@@ -68,7 +68,7 @@ var RowIndexNavDemo = createReactClass({
                     <ExpandableRow
                         title="Expandable Row"
                     />
-                </div>
+                </ExpandableRow.SimpleWrapper>
             </div>
         );
     },

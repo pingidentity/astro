@@ -25,7 +25,7 @@ const UserEdit = () => {
     ];
 
     return (
-        <div className="section-columns result-set">
+        <ExpandableRow.SimpleWrapper>
             <ExpandableRow
                 title="Addleman, Katie"
                 subtitle="kaddleman"
@@ -177,7 +177,7 @@ const UserEdit = () => {
                     </Row>
                 </Section>
             </ExpandableRow>
-        </div>
+        </ExpandableRow.SimpleWrapper>
     );
 };
 

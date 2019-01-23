@@ -30,11 +30,11 @@
     @include font-pn-regular;
     color: $color-slate;
     word-wrap: break-word;
+    line-height: 1.2em;
 }
 
 
 .page-header__subtitle {
-    margin: 5px 0 0;
     font-size: 14px;
     color: $color-elephant;
 }

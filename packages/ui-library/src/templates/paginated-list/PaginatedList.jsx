@@ -85,10 +85,10 @@ export default class PaginatedList extends React.Component {
                         total = {filteredPages.length}
                         onValueChange = {this._handlePageChange}>
 
-                        <div className="result-set">{this._rowSlice(filteredPages)}</div>
+                        {this._rowSlice(filteredPages)}
                     </Pagination>
                 ) || (
-                    <div className="result-set">No rows returned</div>
+                    <ExpandableRow.SimpleWrapper>No rows returned</ExpandableRow.SimpleWrapper>
                 )}
 
             </div>

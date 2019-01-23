@@ -7,6 +7,7 @@ import _ from "underscore";
 import { createSelector } from "reselect";
 import togglesOpen from "../../util/behaviors/togglesOpen";
 import { containsString } from "../../util/SearchUtils";
+import { darkInputs } from "../../util/CSSModifiers";
 
 const optionsSelector = createSelector(
     state => state.search,
@@ -146,7 +147,7 @@ class FilterSelector extends React.Component {
                     flags={flags}
                 >
                     <SelectionList
-                        className="modifier_dark-inputs"
+                        className={darkInputs}
                         stateless={true}
                         type={type}
                         bottomPanel={bottomPanel}

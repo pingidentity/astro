@@ -380,7 +380,7 @@ button.ellipsis-loader-button {
 
     height: $height;
     line-height: $height;
-    margin-bottom: $spacing-xl;
+    margin-bottom: $spacing-lg;
 
     @include border-radius(3px);
     @include base-button-styles;

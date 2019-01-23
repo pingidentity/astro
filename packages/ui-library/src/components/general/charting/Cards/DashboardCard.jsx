@@ -5,6 +5,7 @@ import PageSpinner from "../../../general/PageSpinner";
 import ViewToggle from "../ViewToggle";
 import classnames from "classnames";
 import Checkbox from "../../../forms/FormCheckbox";
+import { lightInputs } from "../../../../util/CSSModifiers";
 
 
 /**
@@ -113,7 +114,7 @@ class DashboardCard extends React.Component {
         return (
             <div className={classes} data-id={this.props["data-id"]}>
                 {!this.props.errorMessage && [
-                    <div key="back" className="dashboard-card__back modifier_light-inputs">
+                    <div key="back" className={classnames("dashboard-card__back", lightInputs)}>
                         {this.props.back}
                         {this.props.onMakeDefault &&
                             <Checkbox
@@ -125,7 +126,9 @@ class DashboardCard extends React.Component {
                             />
                         }
                     </div>,
-                    <div key="front" className="dashboard-card__front modifier_light-inputs">{this.props.front}</div>,
+                    <div key="front" className={classnames("dashboard-card__front", lightInputs)}>
+                        {this.props.front}
+                    </div>,
                     <div key="control" className="dashboard-card__control">
                         {!this.props.loading && this.props.back &&
                             <ViewToggle

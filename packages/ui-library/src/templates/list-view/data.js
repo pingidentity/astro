@@ -100,22 +100,22 @@ const pwPicker = [0,0,0,0,0,0,0,0,1,2];
 const failedLoginsPicker = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,3,4,5,6,7,8,9,10,50];
 const countryCodePicker = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,2,2,2,3,3,4,5,6,7,8,9,10,11];
 
-const pickValue = (list, listPicker) => (
+const pickValue = (i, list, listPicker) => (
     listPicker
-        ? list[listPicker[Math.floor(Math.random() * listPicker.length)]]
-        : list[Math.floor(Math.random() * list.length)]
+        ? list[listPicker[(i * 3) % listPicker.length]]
+        : list[(i * 3) % list.length]
 );
 
 export const userList = _.map(
     _.sortBy(names, name => name.surname+name.name),
-    name => _.extend(name, {
-        population: pickValue(populations, populationPicker),
-        status: pickValue(statuses, statusPicker),
-        pwStatus: pickValue(pwStatuses, pwPicker),
+    (name, index) => _.extend(name, {
+        population: pickValue(index, populations, populationPicker),
+        status: pickValue(index, statuses, statusPicker),
+        pwStatus: pickValue(index, pwStatuses, pwPicker),
         email: `${name.name.toLowerCase()}.${name.surname.toLowerCase()}@the.company.com`,
-        department: pickValue(departments),
-        recentLogin: new Date(Date.now() - (Math.random() * 1000 * 60 * 60 * 24 * 365)),
-        failedLogins: pickValue(failedLoginsPicker),
-        countryCode: pickValue(countryCodes, countryCodePicker),
+        department: pickValue(index, departments),
+        recentLogin: new Date(1450000000000 + (index * 6.3 * 60 * 60 * 24 * 365)),
+        failedLogins: pickValue(index, failedLoginsPicker),
+        countryCode: pickValue(index, countryCodes, countryCodePicker),
     })
 );
