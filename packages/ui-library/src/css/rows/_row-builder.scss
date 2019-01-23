@@ -11,10 +11,6 @@
     &__remove {
         margin-bottom: 1px;
 
-        &--no-label {
-            align-self: center;
-        }
-
         &__label {
             @include text-label;
             line-height: $font-size-reduced;
@@ -26,6 +22,7 @@
         &__button {
             display: block;
             margin-left: $spacing-sm;
+            margin-bottom: 6px;
         }
     }
 

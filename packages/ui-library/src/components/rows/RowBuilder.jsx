@@ -53,10 +53,7 @@ function RowBuilder({
         return (
             <div className="row-builder__row" key={id}>
                 {content}
-                <div
-                    className={`row-builder__remove ${hasRemoveLabel ? "" : "row-builder__remove--no-label"}`}
-                    onClick={remove(id)}
-                >
+                <div onClick={remove(id)}>
                     {
                         hasRemoveLabel && <div className="row-builder__remove__label"> Remove </div>
                     }
