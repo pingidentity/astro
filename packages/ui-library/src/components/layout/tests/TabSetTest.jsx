@@ -1,22 +1,23 @@
+import React from "react";
+import ReactTestUtils from "react-dom/test-utils";
+import { TabSet, TabContent } from "../TabSet";
+import TestUtils from "../../../testutil/TestUtils";
+import _ from "underscore";
+
 jest.dontMock("../TabSet");
 jest.dontMock("../../forms/RockerButton");
 
 describe("TabSet", function () {
-    const React = require("react"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        TestUtils = require("../../../testutil/TestUtils"),
-        TabSet = require("../TabSet"),
-        _ = require("underscore");
-
-
     const componentId = "tab-set";
+    const defaults = {
+        "data-id": componentId,
+        labels: [],
+        children: [<div />, <div />]
+    };
 
     function getTabSet (opts) {
-        opts = _.defaults(opts || {}, {
-            "data-id": componentId,
-            labels: []
-        });
-        return ReactTestUtils.renderIntoDocument(<TabSet.TabSet {...opts}><div></div><div></div></TabSet.TabSet>);
+        opts = _.defaults(opts || {}, );
+        return ReactTestUtils.renderIntoDocument(<TabSet {...defaults} {...opts} />);
     }
 
     it("renders component with data-id=tab-set", function () {
@@ -89,7 +90,7 @@ describe("TabSet", function () {
         });
 
         const element = TestUtils.findRenderedDOMNodeWithClass(component, "rocker-button sel-0");
-        
+
         expect(element).toBeTruthy();
 
     });
@@ -97,40 +98,87 @@ describe("TabSet", function () {
     it("renders the children and labels correctly", function () {
         const component = getTabSet({
             selectedIndex: 0,
-            children: ["whatever", "hello world"]
+            children: [<div>whatever</div>, <div>hello world</div>]
         });
 
         const element = TestUtils.findRenderedDOMNodeWithClass(component, "tab-set-children");
-
         expect(ReactTestUtils.isDOMComponent(element)).toBeTruthy();
-
     });
 
-});
+    it("renders the custom labels correctly", () => {
+        const renderCustomLabels = data => {
+            return (
+                <div className="custom-labels">
+                    {data.labels.map((label, index) => <div key={index} className="custom-tab">{label}</div>)}
+                </div>
+            );
+        };
 
-describe("TabSet", function () {
-    const React = require("react"),
-        ReactTestUtils = require("react-dom/test-utils"),
-        TestUtils = require("../../../testutil/TestUtils"),
-        TabSet = require("../TabSet"),
-        _ = require("underscore");
+        const tabContents = [
+            { label: "Label 1", content: "Label one content" },
+            { label: "Label 2", content: "Label two content" },
+            { label: "Label 3", content: "Label three content" },
+        ];
 
+        const children = [
+            <TabContent label={tabContents[0].label}>{tabContents[0].content}</TabContent>,
+            <TabContent label={tabContents[1].label}>{tabContents[1].content}</TabContent>,
+            <TabContent label={tabContents[2].label}>{tabContents[2].content}</TabContent>,
+        ];
 
-    const componentId = "tab-set-content";
-
-    function getTabContent (opts) {
-        opts = _.defaults(opts || {}, {
-            "data-id": componentId,
-            labels: []
+        var component = getTabSet({
+            renderLabels: renderCustomLabels,
+            children: children,
         });
-        return ReactTestUtils.renderIntoDocument(<TabSet.TabContent {...opts} />);
-    }
 
-    it("renders a div tags", function () {
-        const component = getTabContent({});
+        var selectedContent = TestUtils.findRenderedDOMNodeWithClass(component, "tab-set-children");
+        expect(selectedContent.textContent).toBe(tabContents[0].content);
 
-        const element = TestUtils.scryRenderedDOMNodesWithTag(component, "div");
+        const customLabels = TestUtils.findRenderedDOMNodeWithClass(component, "custom-labels");
+        expect(customLabels.children[0].textContent).toContain(tabContents[0].label);
+        expect(customLabels.children[1].textContent).toContain(tabContents[1].label);
+        expect(customLabels.children[2].textContent).toContain(tabContents[2].label);
 
-        expect(element.length).toEqual(1);
+        component = getTabSet({
+            renderLabels: renderCustomLabels,
+            children: children,
+            selectedIndex: 1,
+        });
+        selectedContent = TestUtils.findRenderedDOMNodeWithClass(component, "tab-set-children");
+        expect(selectedContent.textContent).toBe(tabContents[1].content);
+
+        component = getTabSet({
+            renderLabels: renderCustomLabels,
+            children: children,
+            selectedIndex: 2,
+        });
+        selectedContent = TestUtils.findRenderedDOMNodeWithClass(component, "tab-set-children");
+        expect(selectedContent.textContent).toBe(tabContents[2].content);
     });
+
+    it("renders the tabContent correctly", () => {
+        const myCss = "mur-sur-urs-urs";
+        const myContent = "mur curnturnt";
+        const myDataId = "mur-durdur-urdur";
+        const myLabel = "mur lurbl";
+
+        const component = ReactTestUtils.renderIntoDocument(
+            <TabContent className={myCss} data-id={myDataId} label={myLabel}>{myContent}</TabContent>
+        );
+
+        const dom = TestUtils.findRenderedDOMNodeWithDataId(component, myDataId);
+        expect(dom).toBeTruthy();
+        expect(dom.className).toContain(myCss);
+        expect(dom.getAttribute("label")).toContain(myLabel);
+        expect(dom.textContent).toContain(myContent);
+    });
+
+    // TODO: This test needs to be rewritten or removed - will be addressed in UIP-2054
+    // it("renders a div tags", function () {
+    //     const component = getTabContent({});
+
+    //     const element = TestUtils.scryRenderedDOMNodesWithTag(component, "div");
+
+    //     expect(element.length).toEqual(1);
+    // });
 });

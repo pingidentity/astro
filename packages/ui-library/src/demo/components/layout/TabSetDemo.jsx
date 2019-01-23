@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { TabSet, TabContent } from "../../../components/layout/TabSet";
 import LabelValuePairs from "../../../components/layout/LabelValuePairs";
 import PageGroup from "../../../components/layout/PageGroup";
+import Button from "../../../components/buttons/Button";
+import InputRow from "../../../components/layout/InputRow";
+import Layout from "../../../components/general/ColumnLayout";
 
 /**
 * @name TabSetDemo
@@ -11,13 +14,55 @@ import PageGroup from "../../../components/layout/PageGroup";
 
 export default class TabSetDemo extends Component {
     state = {
-        selectedIndex: 0
+        selectedIndex1: 0,
+        selectedIndex2: 0,
+        selectedIndex3: 0,
     };
 
-    _handleValueChange = (labelValues) => {
+    _handleValueChange1 = labelValues => {
         this.setState({
-            selectedIndex: labelValues.index
+            selectedIndex1: labelValues.index,
         });
+    };
+
+    _handleValueChange2 = e => {
+        this.setState({
+            selectedIndex2: parseInt(e.target.textContent.replace("Label ", "")) - 1,
+        });
+    };
+
+    _handleValueChange3 = labelValues => {
+        this.setState({
+            selectedIndex3: labelValues.index,
+        });
+    };
+
+    renderCustomLabels = data => {
+        return (
+            <InputRow>
+                {data.labels.map((label, index) => <Button
+                    className={index === this.state.selectedIndex2 ? "cancel" : null}
+                    key={index}
+                    label={label}
+                    onClick={this._handleValueChange2}
+                /> )}
+            </InputRow>
+        );
+    };
+
+    renderLabelsRightContent = data => {
+        return (
+            <Layout.Row data-id="columns-6-auto" autoWidth>
+                <Layout.Column>
+                    { data.defaultLabels }
+                </Layout.Column>
+                <Layout.Column>
+                    <div style={{ paddingTop: "8px" }}>
+                        With the right components content can appear to the right of a tabset.
+                    </div>
+                </Layout.Column>
+            </Layout.Row>
+        );
     };
 
     render () {
@@ -56,9 +101,9 @@ export default class TabSetDemo extends Component {
         return (
             <div>
                 <TabSet
-                    onValueChange={this._handleValueChange}
+                    onValueChange={this._handleValueChange1}
                     stateless={false}
-                    selectedIndex={this.state.selectedIndex}
+                    selectedIndex={this.state.selectedIndex1}
                 >
                     <TabContent label="Label One">
                         Spicy jalapeno bacon ipsum dolor amet tenderloin sirloin bacon biltong pork belly
@@ -73,7 +118,7 @@ export default class TabSetDemo extends Component {
                             <LabelValuePairs dataPairs={mockData} />
                         </PageGroup>
                     </TabContent>
-                    <TabContent label="Label Three">
+                    <TabContent label="Label 3">
                         Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                         Inventore autem beatae aperiam, unde tempore, minima repudiandae reiciendis accusamus
                         commodi nemo quo reprehenderit labore cum amet nobis blanditiis error officiis! Quis?
@@ -82,6 +127,52 @@ export default class TabSetDemo extends Component {
                         <LabelValuePairs dataPairs={mockData} />
                     </TabContent>
 
+                </TabSet>
+
+                <hr className="hr" />
+                <h3>Example with custom labels/tabs</h3>
+                <p>
+                    *** Note that buttons are not intended to be used this way and are used here for illustrative
+                    purposes only.
+                </p>
+                <br />
+
+                <TabSet
+                    onValueChange={this._handleValueChange2}
+                    renderLabels={this.renderCustomLabels}
+                    selectedIndex={this.state.selectedIndex2}
+                    stateless={false}
+                >
+                    <TabContent label="Label 1">
+                        Label one content
+                    </TabContent>
+                    <TabContent label="Label 2">
+                        Label two content
+                    </TabContent>
+                    <TabContent label="Label 3">
+                        Label three content
+                    </TabContent>
+                </TabSet>
+
+                <hr className="hr" />
+                <h3>Labels with right content</h3>
+                <br />
+
+                <TabSet
+                    onValueChange={this._handleValueChange3}
+                    renderLabels={this.renderLabelsRightContent}
+                    selectedIndex={this.state.selectedIndex3}
+                    stateless={true}
+                >
+                    <TabContent label="Label 1">
+                        Label one content
+                    </TabContent>
+                    <TabContent label="Label 2">
+                        Label two content
+                    </TabContent>
+                    <TabContent label="Label 3">
+                        Label three content
+                    </TabContent>
                 </TabSet>
             </div>
         );
