@@ -1,14 +1,12 @@
-"use strict";
-
-var PropTypes = require("prop-types");
-
-var React = require("react"),
-    _ = require("underscore"),
-    classnames = require("classnames"),
-    CountryFlagList = require("../CountryFlagList"),
-    FormTextField = require("../../form-text-field").v2,
-    Validators = require("../../../../util/Validators"),
-    Utils = require("../../../../util/Utils.js");
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import _ from "underscore";
+import classnames from "classnames";
+import { parsePhoneNumberFromString } from "libphonenumber-js";
+import CountryFlagList from "../CountryFlagList";
+import { v2 as FormTextField } from "../../form-text-field";
+import Validators from "../../../../util/Validators";
+import Utils from "../../../../util/Utils.js";
 
 /**
  * @typedef I18nPhoneInput~PhoneInputValues
@@ -97,7 +95,7 @@ var React = require("react"),
 *           phoneNumber={this.state.phoneNumberStateful} />
 */
 
-module.exports = class extends React.Component {
+export default class I18nPhoneInput extends Component {
     static propTypes = {
         stateless: PropTypes.bool
     };
@@ -113,10 +111,9 @@ module.exports = class extends React.Component {
             : React.createElement(I18nPhoneInputStateful, //eslint-disable-line
                 _.defaults({ ref: "I18nPhoneInputStateful" }, this.props));
     }
-};
+}
 
-class I18nPhoneInputStateless extends React.Component {
-
+class I18nPhoneInputStateless extends Component {
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
@@ -173,6 +170,26 @@ class I18nPhoneInputStateless extends React.Component {
         }
     }
 
+    _getCountryCode() {
+        const {
+            countryCode,
+            dialCode,
+            phoneNumber
+        } = this.props;
+        if (countryCode !== "") {
+            return countryCode;
+        } else if (dialCode !== "" && phoneNumber !== "") {
+            const parsedDialCode = dialCode.startsWith("+")
+                ? dialCode
+                : `+${dialCode}`;
+
+            const { country = "" } = parsePhoneNumberFromString(`${parsedDialCode}${phoneNumber}`) || {};
+            return country.toLowerCase();
+        } else {
+            return "";
+        }
+    }
+
     /**
     * @method handleCountryClick
     * @memberof I18nPhoneInputStateless
@@ -200,7 +217,11 @@ class I18nPhoneInputStateless extends React.Component {
     };
 
     render() {
-        var classname = classnames("intl-tel-input", this.props.className, { disabled: this.props.disabled });
+        const classname = classnames(
+            "intl-tel-input",
+            this.props.className,
+            { disabled: this.props.disabled }
+        );
 
         return (
             <div data-id={this.props["data-id"]} className={classname}>
@@ -208,7 +229,7 @@ class I18nPhoneInputStateless extends React.Component {
                     data-id={this.props["data-id"] + "-countryFlagList"}
                     countryCodeClassName="dial-code"
                     countryCodeDisplayType={CountryFlagList.CountryCodeTypes.DIAL_CODE}
-                    selectedCountryCode={this.props.countryCode}
+                    selectedCountryCode={this._getCountryCode()}
                     onValueChange={this._handleValueChange}
                     open={this.props.open}
                     onToggle={this.props.onToggle}
@@ -238,7 +259,7 @@ class I18nPhoneInputStateless extends React.Component {
     }
 }
 
-class I18nPhoneInputStateful extends React.Component {
+class I18nPhoneInputStateful extends Component {
     state = {
         open: this.props.open || false,
         searchIndex: -1,
@@ -289,6 +310,6 @@ class I18nPhoneInputStateful extends React.Component {
             onSearch: this._handleSearch
         }, this.props);
 
-        return React.createElement(I18nPhoneInputStateless, props);
+        return <I18nPhoneInputStateless {...props} />;
     }
 }

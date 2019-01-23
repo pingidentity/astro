@@ -277,4 +277,15 @@ describe("I18nPhoneInput", function () {
         }).toThrow(expectedError);
     });
 
+    it("gets correct country code if given dial code and phone number for a specific country", () => {
+        const component = getComponent({
+            dialCode: "+1",
+            // This is the main phone number for Ping
+            phoneNumber: "8778982905"
+        });
+
+        const usFlag = TestUtils.findRenderedDOMNodeWithClass(component, "selected-option-label us");
+
+        expect(usFlag).toBeTruthy();
+    });
 });
