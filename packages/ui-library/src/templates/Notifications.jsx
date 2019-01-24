@@ -14,6 +14,7 @@ import ButtonBar from "../components/forms/ButtonBar";
 import LinkDropDownList from "../components/forms/LinkDropDownList";
 import Layout from "../components/general/ColumnLayout";
 import PopOverMenu from "../components/tooltips/PopoverMenu";
+import PageHeader from "../components/general/PageHeader";
 
 /**
 * @name Notifications
@@ -183,6 +184,7 @@ export default class Notifications extends Component {
     render() {
         return (
             <div>
+                <PageHeader title="Notifications" />
                 <Layout.Row className="columns-width-auto">
                     <Layout.Column>
                         <FormLabel value="Default Language" />

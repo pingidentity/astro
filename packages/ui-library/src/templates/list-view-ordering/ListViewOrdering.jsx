@@ -4,6 +4,7 @@ import ExpandableRow from "../../components/rows/ExpandableRow";
 import FormCheckbox from "../../components/forms/FormCheckbox";
 import FormSearchBar from "../../components/forms/FormSearchBar";
 import Pagination from "../../components/list/Pagination";
+import PageHeader from "../../components/general/PageHeader";
 import Toggle from "../../components/forms/form-toggle";
 
 /**
@@ -116,6 +117,7 @@ module.exports = class extends React.Component {
     render() {
         return (
             <div>
+                <PageHeader title="Ordering" />
                 <FormSearchBar
                     formSearchBoxProps={{
                         onValueChange: this._handleTextChange,

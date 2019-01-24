@@ -2,6 +2,7 @@ import React from "react";
 import RockerButton from "../components/forms/RockerButton";
 import Section from "../components/general/Section";
 import Table from "../components/tables/Table";
+import PageHeader from "../components/general/PageHeader";
 
 /**
  * @class Home App
@@ -39,6 +40,7 @@ const HomeApp = () => {
 
     return (
         <div>
+            <PageHeader title="Home App" />
             <RockerButton
                 stateless={true}
                 labels={[

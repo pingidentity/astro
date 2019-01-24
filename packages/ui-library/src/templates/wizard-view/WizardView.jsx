@@ -12,6 +12,7 @@ var React = require("react"),
 import Button from "../../components/buttons/Button";
 import Modal from "../../components/general/Modal";
 import InputWidths from "../../components/forms/InputWidths";
+import PageHeader from "../../components/general/PageHeader";
 
 
 /**
@@ -154,6 +155,7 @@ module.exports = class extends React.Component {
         return (
             <div className="clear-both">
                 {/* This outer div is only required to style inside the DemoApp */}
+                <PageHeader title="Wizard View" />
                 <Button data-id="showWizard-button" label="Show Wizard" onClick={this._handleModalToggle}/>
                 <Modal ref="modal"
                     data-id="showWizard"

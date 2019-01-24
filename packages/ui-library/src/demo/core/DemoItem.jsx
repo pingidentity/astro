@@ -97,9 +97,12 @@ class DemoItem extends React.Component {
                 <div className="documentation">
 
                     <div className={headerClassName}>
-                        <PageHeader data-id="component-title"
-                            title={this.props.label}
-                            subtitle={this.props.importPath} />
+                        { !fullscreen &&
+                            <PageHeader data-id="component-title"
+                                title={this.props.label}
+                                subtitle={this.props.importPath}
+                            />
+                        }
                         {docLinks}
                     </div>
 

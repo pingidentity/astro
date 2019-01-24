@@ -950,9 +950,7 @@ module.exports = [
             {
                 label: "Edit Page",
                 demo: require("../components/templates/EditPageDemo"),
-                pathToDoc: "components/templates/EditPage.jsx",
                 pathToSource: "templates_edit-view-sectioned_EditPage.jsx.html",
-                pathToDemoSource: "demo_components_templates_EditPageDemo.jsx.html",
                 fullscreen: true,
                 icon: "edit"
             },
@@ -963,25 +961,19 @@ module.exports = [
                     {
                         label: "List View - Infinite Scroll",
                         demo: require("../components/templates/ListViewDemo"),
-                        pathToDoc: "components/templates/ListView.jsx",
                         pathToSource: "templates_list-view_ListView.jsx.html",
-                        pathToDemoSource: "demo_components_templates_ListViewDemo.jsx.html",
                         fullscreen: true
                     },
                     {
                         label: "List View - Ordering",
                         demo: require("../components/templates/ListViewOrderingDemo"),
-                        pathToDoc: "components/templates/ListViewOrdering.jsx",
                         pathToSource: "templates_list-view-paginated_ListViewOrdering.jsx.html",
-                        pathToDemoSource: "demo_components_templates_ListViewOrderingDemo.jsx.html",
                         fullscreen: true
                     },
                     {
                         label: "Paginated List",
                         demo: require("../components/templates/PaginatedListDemo"),
-                        pathToDoc: "components/templates/PaginatedList.jsx",
-                        pathToSource: "templates_paginated-list_PaginatedList.jsx.html",
-                        pathToDemoSource: "demo_components_templates_PaginatedListDemo.jsx.html",
+                        pathToSource: "temppaginated-list_PaginatedList.jsx.html",
                         fullscreen: true,
                         icon: "directory-hollow",
                     },
@@ -990,63 +982,49 @@ module.exports = [
             {
                 label: "Authentication Policy",
                 demo: require("../components/templates/AuthnPolicyDemo"),
-                pathToDoc: "components/templates/AuthnPolicy.jsx",
                 pathToSource: "templates_authn-policy_AuthnPolicy.jsx.html",
-                pathToDemoSource: "demo_components_templates_AuthnPolicyDemo.jsx.html",
                 fullscreen: true,
                 icon: "details"
             },
             {
                 label: "Wizard View",
                 demo: require("../components/templates/WizardViewDemo"),
-                pathToDoc: "components/templates/WizardView.jsx",
                 pathToSource: "templates_wizard-view_WizardView.jsx.html",
-                pathToDemoSource: "demo_components_templates_WizardViewDemo.jsx.html",
                 fullscreen: true,
                 icon: "details"
             },
             {
                 label: "User MFA",
                 demo: require("../components/templates/UserMFADemo"),
-                pathToDoc: "components/templates/UserMFA.jsx",
                 pathToSource: "templates_user-mfa_UserMFA.jsx.html",
-                pathToDemoSource: "demo_components_templates_UserMFADemo.jsx.html",
                 fullscreen: true,
                 icon: "details"
             },
             {
                 label: "User Edit",
                 demo: require("../components/templates/UserEditDemo"),
-                pathToDoc: "components/templates/UserEdit.jsx",
                 pathToSource: "templates_user-mfa_UserEdit.jsx.html",
-                pathToDemoSource: "demo_components_templates_UserEditDemo.jsx.html",
                 fullscreen: true,
                 icon: "details"
             },
             {
                 label: "Home App",
                 demo: require("../components/templates/HomeAppDemo"),
-                pathToDoc: "components/templates/HomeApp.jsx",
                 pathToSource: "templates_HomeApp.jsx.html",
-                pathToDemoSource: "demo_components_templates_HomeAppDemo.jsx.html",
                 fullscreen: true,
                 icon: "details"
             },
             {
                 label: "Attribute Mappings",
                 demo: require("../components/templates/AttributeMappingsDemo"),
-                pathToDoc: "components/templates/AttributeMappings.jsx",
                 pathToSource: "templates_AttributeMappings.jsx.html",
-                pathToDemoSource: "demo_components_templates_AttributeMappingsDemo.jsx.html",
                 fullscreen: true,
                 icon: "details"
             },
             {
                 label: "Dashboard Layout",
                 demo: require("../components/templates/DashboardDemo"),
-                pathToDoc: "components/templates/Dashboard.jsx",
                 pathToSource: "templates_Dashboard.jsx.html",
-                pathToDemoSource: "demo_components_templates_DashboardDemo.jsx.html",
                 fullscreen: true,
                 icon: "details"
             },

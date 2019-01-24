@@ -83,13 +83,13 @@ export default class EditPage extends React.Component {
         return (
             <div>
                 <Link className="page-return-link" title="To record list"/>
-
                 <PageHeader title="Denver Broncos"
                     underlined={true}
                     accessories={[
                         <Button label="Reset Password" inline key="button" />,
                         <Toggle stateless={false} key="toggle"/>
-                    ]} />
+                    ]}
+                />
 
                 <PageSection>
                     <RockerButton

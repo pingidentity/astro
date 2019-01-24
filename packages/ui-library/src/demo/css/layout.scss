@@ -13,7 +13,8 @@ $sidenav-lineheight: 22px;
 
 .doc {
     width: 100%;
-    position: inherit;
+    position: relative;
+    z-index: $zindex__elevated;
 
     @include transition(all 0.3s);
 
@@ -62,6 +63,11 @@ $sidenav-lineheight: 22px;
 
         .section-content {
             margin: 0;
+        }
+
+        .doc .doc-links {
+            top: -20px;
+            right: -30px;
         }
     }
     .section-content {

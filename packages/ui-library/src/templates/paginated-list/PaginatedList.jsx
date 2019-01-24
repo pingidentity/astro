@@ -4,6 +4,7 @@ import FormSearchBar from "../../components/forms/FormSearchBar";
 import Pagination from "../../components/list/Pagination";
 import Button from "../../components/buttons/Button";
 import RowAccessories from "../../components/rows/expandable-row/Accessories";
+import PageHeader from "../../components/general/PageHeader";
 
 
 /**
@@ -72,6 +73,7 @@ export default class PaginatedList extends React.Component {
 
         return (
             <div>
+                <PageHeader title="Paginated List" />
                 <FormSearchBar
                     formSearchBoxProps={{
                         onValueChange: this._handleFilter,

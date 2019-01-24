@@ -10,6 +10,7 @@ import PageSection from "ui-library/lib/components/layout/PageSection";
 import PolicyNode from "ui-library/lib/components/layout/PolicyNode";
 import EditablePolicyNode from "ui-library/lib/components/layout/EditablePolicyNode";
 import PolicySettingsList from "ui-library/lib/components/layout/PolicySettingsList";
+import PageHeader from "../../components/general/PageHeader";
 import _ from "underscore";
 import Actions from "./Actions";
 
@@ -307,7 +308,7 @@ module.exports = class extends React.Component {
         return (
             <div>
                 <ConnectedMessages containerType="page-messages--sidebar-fix" />
-                <h1 className="page-title">Policies</h1>
+                <PageHeader title="Policies" />
 
                 <PolicyList/>
             </div>

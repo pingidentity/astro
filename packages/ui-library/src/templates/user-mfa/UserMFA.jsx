@@ -8,6 +8,7 @@ import Anchor from "ui-library/lib/components/general/Anchor";
 import Popover from "ui-library/lib/components/tooltips/Popover";
 import ConfirmTooltip from "ui-library/lib/components/tooltips/ConfirmTooltip";
 import ValueItem from "ui-library/lib/components/layout/ValueItem";
+import PageHeader from "../../components/general/PageHeader";
 
 /**
  * @class UserMFA
@@ -15,6 +16,7 @@ import ValueItem from "ui-library/lib/components/layout/ValueItem";
  */
 export default () => (
     <div>
+        <PageHeader title="User MFA" />
         <RockerButton
             stateless={true}
             labels={[

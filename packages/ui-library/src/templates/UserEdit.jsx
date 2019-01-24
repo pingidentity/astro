@@ -7,6 +7,7 @@ import Link from "../components/general/Link";
 import RockerButton from "../components/forms/RockerButton";
 import Section from "../components/general/Section";
 import Toggle from "../components/forms/form-toggle";
+import PageHeader from "../components/general/PageHeader";
 
 /**
  * @class User Edit
@@ -26,6 +27,7 @@ const UserEdit = () => {
 
     return (
         <ExpandableRow.SimpleWrapper>
+            <PageHeader title="User Edit" />
             <ExpandableRow
                 title="Addleman, Katie"
                 subtitle="kaddleman"

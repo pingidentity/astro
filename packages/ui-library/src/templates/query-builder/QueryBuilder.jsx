@@ -22,6 +22,7 @@ import InputRow from "ui-library/lib/components/layout/InputRow";
 import LabelValuePairs from "ui-library/lib/components/layout/LabelValuePairs";
 import Link from "ui-library/lib/components/general/Link";
 import PageSection from "ui-library/lib/components/layout/PageSection";
+import PageHeader from "../../components/general/PageHeader";
 import StretchContent from "ui-library/lib/components/layout/StretchContent";
 import togglesOpen from "ui-library/lib/util/behaviors/togglesOpen";
 
@@ -576,6 +577,7 @@ class QueryBuilder extends React.Component {
 
     render = () => (
         <StretchContent>
+            <PageHeader title="Query Builder" />
             <FilterControls
                 populationOptions={this.state.filters.population}
                 statusOptions={this.state.filters.status}
