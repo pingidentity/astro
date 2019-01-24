@@ -114,18 +114,17 @@ describe("Messages", function () {
         expect(clearInterval.mock.calls.length).toBe(0);
     });
 
-    it("Render html message", function () {
-        var component = getComponent({
-            messages: [{ text: 'Test message text <span id="testSpan">html</span>', isHtml: true }]
+    it("Render an html message", function () {
+        const htmlMessage = <span>Test message text <button>html</button></span>;
+        const component = getComponent({
+            messages: [{ text: htmlMessage }]
         });
 
-        var messages = TestUtils.scryRenderedDOMNodesWithClass(component, "message");
+        const messages = TestUtils.scryRenderedDOMNodesWithClass(component, "message");
 
         expect(messages.length).toEqual(1);
 
-        // Ensure html tags are not included as text content (which is what would happen if html
-        // was being rendered as text).
-        expect(messages[0].textContent).toEqual("Test message text html");
+        expect(messages[0].childNodes[0].childNodes[0].textContent).toBe("Test message text html");
     });
 
     it("Renders progress bar", function () {

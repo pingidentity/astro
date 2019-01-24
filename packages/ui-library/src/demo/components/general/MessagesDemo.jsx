@@ -5,6 +5,7 @@ var React = require("react"),
     uuid = require("uuid");
 
 import Button from "../../../components/buttons/Button";
+import InputRow from "../../../components/layout/InputRow";
 
 /**
  * @name MessagesDemo
@@ -13,25 +14,32 @@ import Button from "../../../components/buttons/Button";
  */
 class MessagesDemo extends React.Component {
     _addSuccessMessage = () => {
-        this.actions.addMessage("New Success Message Added at " + new Date().toString(), Messages.MessageTypes.SUCCESS);
+        this.actions.addMessage(`New Success Message Added at ${new Date().toString()}`, Messages.MessageTypes.SUCCESS);
     };
 
     _addErrorMessage = () => {
-        this.actions.addMessage("New Error Message Added at " + new Date().toString(), Messages.MessageTypes.ERROR);
+        this.actions.addMessage(`New Error Message Added at ${new Date().toString()}`, Messages.MessageTypes.ERROR);
     };
 
     _addWarningMessage = () => {
-        this.actions.addMessage("New Warning Message Added at " + new Date().toString(), Messages.MessageTypes.NOTICE);
+        this.actions.addMessage(`New Warning Message Added at ${new Date().toString()}`, Messages.MessageTypes.NOTICE);
     };
 
     _addInfoMessage = () => {
-        this.actions.addMessage("New Info Message Added at " + new Date().toString(), Messages.MessageTypes.FEATURE);
+        this.actions.addMessage(`New Info Message Added at ${new Date().toString()}`, Messages.MessageTypes.FEATURE);
     };
+
+    _testButtonClick = () => {
+        console.log("Button clicked");
+    }
 
     _addHtmlMessage = () => {
         this.actions.addMessage({
-            message: "New <strong>bolded</strong> Message Added at " + new Date().toString(),
-            status: Messages.MessageTypes.FEATURE,
+            message: <div>
+                New Message Added with <Button inline onClick={this._testButtonClick}>HTML</Button>
+                at {new Date().toString()}
+            </div>,
+            status: Messages.MessageTypes.ERROR,
             isHtml: true
         });
     };
@@ -112,29 +120,32 @@ class MessagesDemo extends React.Component {
                     Warning = MessageTypes.NOTICE <br />
                     Info = MessageTypes.FEATURE <br />
                 </InlineMessage>
-                <p>
+
+                <InputRow>
                     For messages that will appear in full width pages like Login or Change Password pages, add
                     'containerType=&#123;Messages.ContainerTypes.FULL&#125;'. For messages that will appear in Modals or
                     Wizards, add 'className=&#123;Messages.ContainerTypes.MODAL&#125;'.For messages that will appear in
                     pages with a left-nav, do not set the containerType prop.
-                </p>
+                </InputRow>
 
-                <p>
+                <InputRow>
                     <Messages messages={this.props.messages} onRemoveMessage={this.actions.removeAt} />
-                </p>
-                <p>
+                </InputRow>
+                <InputRow>
                     <Button onClick={this._addSuccessMessage}>Add success message - MessageTypes.SUCCESS</Button>
-                </p>
-                <p>
+                </InputRow>
+                <InputRow>
                     <Button onClick={this._addErrorMessage}>Add error message - MessageTypes.ERROR</Button>
-                </p>
-                <p>
+                </InputRow>
+                <InputRow>
                     <Button onClick={this._addWarningMessage}>Add warning message - MessageTypes.NOTICE</Button>
-                </p>
-                <p>
+                </InputRow>
+                <InputRow>
                     <Button onClick={this._addInfoMessage}>Add info message - MessageTypes.FEATURE</Button>
-                </p>
+                </InputRow>
+
                 <hr className="hr" />
+
                 <Button onClick={this._addHtmlMessage}>Add HTML message</Button>
                 <Button onClick={this._addProgressMessage}>Add progress message</Button>
                 <Button onClick={this._addMinimizedProgressMessage}>Add minimized message</Button>

@@ -26,7 +26,7 @@ var React = require("react"),
 
 /**
  * @typedef Messages~MessageItem
- * @property {string} text
+ * @property {node} text
  *     Message text
  * @property {Messages.MessageTypes} type
  *     Message type
@@ -35,7 +35,7 @@ var React = require("react"),
  * @property {number|string} index
  *     Message index.
  * @property {boolean} isHtml
- *     When true, renders HTML without escaping.
+ *     DEPRICATED: no longer needed. You can now simply use html in your messages as needed.
  * @property {Messages~ProgressSpec}
  *     Object containing data to show a progress bar in the message.
  * @property {boolean} minimized
@@ -196,23 +196,14 @@ class Message extends React.Component {
     }
 
     render() {
-        var text = this.props.message.text || this.props.onI18n(this.props.message.key, this.props.message.params);
-        var classes = classnames("message show", this.props.message.type, {
+        const text = this.props.message.text || this.props.onI18n(this.props.message.key, this.props.message.params);
+        const classes = classnames("message show", this.props.message.type, {
             "message--minimized": this.props.message.minimized
         });
 
-        // Allow html messages to be rendered, this is dangerous
-        // as it could allow XSS, so messages have to be explicitly
-        // flagged as being html.
-        if (this.props.message.isHtml) {
-            text = <span className="message__text" dangerouslySetInnerHTML={{ __html: text }} /> ;
-        } else {
-            text = <span className="message__text">{text}</span>;
-        }
-
         return (
             <div className={classes} data-id={this.props["data-id"]}>
-                {!this.props.message.minimized && text}
+                {!this.props.message.minimized && text && (<span className="message__text">{text}</span>)}
                 {this.props.message.progress && this._renderProgress()}
                 <a className="close" onClick={this._handleRemove}></a>
             </div>
