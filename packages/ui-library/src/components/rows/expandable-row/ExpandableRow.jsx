@@ -485,6 +485,14 @@ class StatelessExpandableRow extends React.Component {
         return "#/" + route;
     };
 
+    componentDidUpdate(prevProps) {
+        if (this.props.expanded && !prevProps.expanded) {
+            setTimeout(() => this.expandableRow.scrollIntoView(
+                { behavior: "smooth", block: "nearest" }), 50
+            );
+        }
+    }
+
     render() {
         var showEditIcon = this.props.showEdit && this.props.isEditEnabled,
             showViewIcon = this.props.showEdit && !this.props.isEditEnabled,
@@ -547,7 +555,11 @@ class StatelessExpandableRow extends React.Component {
         }
 
         const rendered = (
-            <div data-id={this.props["data-id"]} className={containerClassname}>
+            <div
+                ref={(row) => (this.expandableRow = row)}
+                data-id={this.props["data-id"]}
+                className={containerClassname}
+            >
                 { (this.props.rowAccessories || this.props.status) && (
                     <div data-id="row-accessories" className="row-accessories">
                         {this.props.rowAccessories}

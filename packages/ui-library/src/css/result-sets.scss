@@ -206,7 +206,7 @@ $expandable-row-gap: 12px;
             max-height: 4000px;
             border: 1px solid $color-rabbit-fur;
 
-            @include transition(max-height 1s);
+            //@include transition(max-height 1s);
 
             .expand-btn {
                 position: relative;
