@@ -33,15 +33,30 @@ describe("ModalTest", function () {
         return ReactTestUtils.renderIntoDocument(<Modal {...modalDefaults} />);
     }
 
-    it("detaches event listeners on unmount", function () {
+    it("detaches event listeners and calls close event on unmount", function () {
         var component = getComponent({ expanded: true });
         var handler = TestUtils.findMockCall(window.addEventListener, "keydown")[1];
+        const close = jest.fn();
+        document.body.addEventListener("ui-library-modal-close", close);
 
         expect(window.addEventListener).toBeCalled();
 
         ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
 
         expect(window.removeEventListener).toBeCalledWith("keydown", handler);
+        expect(close).toBeCalled();
+    });
+
+    it("no close event on unmount when component was never opened", function () {
+        var component = getComponent({ expanded: false });
+        const close = jest.fn();
+        const open = jest.fn();
+        document.body.addEventListener("ui-library-modal-open", open);
+        document.body.addEventListener("ui-library-modal-close", close);
+
+        expect(open).not.toBeCalled();
+        component.componentWillUnmount();
+        expect(close).not.toBeCalled();
     });
 
     it("keydown event listener does not trigger when modal is closed", function () {
@@ -85,8 +100,8 @@ describe("ModalTest", function () {
                 />
             );
 
-        document.body.addEventListener("uilibrary-modal-open", openListenerCallback);
-        document.body.addEventListener("uilibrary-modal-close", closeListenerCallback);
+        document.body.addEventListener("ui-library-modal-open", openListenerCallback);
+        document.body.addEventListener("ui-library-modal-close", closeListenerCallback);
 
         component._setProps({ expanded: true });
         expect(openListenerCallback).toBeCalled();
@@ -112,8 +127,8 @@ describe("ModalTest", function () {
                 />
             );
 
-        document.body.addEventListener("uilibrary-modal-open", openListenerCallback);
-        document.body.addEventListener("uilibrary-modal-close", closeListenerCallback);
+        document.body.addEventListener("ui-library-modal-open", openListenerCallback);
+        document.body.addEventListener("ui-library-modal-close", closeListenerCallback);
 
         component._setProps({ expanded: true });
         expect(openListenerCallback).toBeCalled();

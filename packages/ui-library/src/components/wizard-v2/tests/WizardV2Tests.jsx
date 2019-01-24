@@ -494,8 +494,8 @@ describe("WizardV2", function () {
         const openListenerCallback = jest.fn();
         const closeListenerCallback = jest.fn();
 
-        document.body.addEventListener("uilibrary-wizard-open", openListenerCallback);
-        document.body.addEventListener("uilibrary-wizard-close", closeListenerCallback);
+        document.body.addEventListener("ui-library-modal-open", openListenerCallback);
+        document.body.addEventListener("ui-library-modal-close", closeListenerCallback);
 
         let component = getComponent();
 
@@ -513,8 +513,8 @@ describe("WizardV2", function () {
         const openListenerCallback = jest.fn();
         const closeListenerCallback = jest.fn();
 
-        document.body.addEventListener("uilibrary-wizard-open", openListenerCallback);
-        document.body.addEventListener("uilibrary-wizard-close", closeListenerCallback);
+        document.body.addEventListener("ui-library-modal-open", openListenerCallback);
+        document.body.addEventListener("ui-library-modal-close", closeListenerCallback);
 
         let component = getComponent();
 

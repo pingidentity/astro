@@ -64,6 +64,7 @@ var Type = {
  *      </Modal>
  */
 class Modal extends React.Component {
+    static displayName = "Modal";
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
@@ -163,14 +164,15 @@ class Modal extends React.Component {
     };
 
     _triggerEvent(open) {
-        const eventName = open ? "uilibrary-modal-open" : "uilibrary-modal-close";
+        const eventName = open ? "ui-library-modal-open" : "ui-library-modal-close";
+        const eventDetail = { component: this.displayName };
         let event;
 
         if (Utils.isIE()) {
             event = document.createEvent("CustomEvent");
-            event.initCustomEvent(eventName, true, false, undefined);
+            event.initCustomEvent(eventName, true, false, eventDetail);
         } else {
-            event = new CustomEvent(eventName, { bubbles: true });
+            event = new CustomEvent(eventName, { bubbles: true, detail: eventDetail });
         }
         document.body.dispatchEvent(event);
     }
@@ -208,6 +210,9 @@ class Modal extends React.Component {
 
     componentWillUnmount() {
         window.removeEventListener("keydown", this._handleKeyDown);
+        if (this.props.expanded) {
+            this._triggerEvent(false);
+        }
     }
 
     render() {
