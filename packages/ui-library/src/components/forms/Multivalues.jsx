@@ -1,15 +1,14 @@
 "use strict";
 
-var PropTypes = require("prop-types");
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import _ from "underscore";
+import Utils from "../../util/Utils.js";
+import FormLabel from "./FormLabel";
+import FormError from "./FormError";
 
-var React = require("react"),
-    ReactDOM = require("react-dom"),
-    classnames = require("classnames"),
-    _ = require("underscore"),
-    Utils = require("../../util/Utils.js"),
-    placeholder = document.createElement("span"),
-    FormLabel = require("./FormLabel");
-
+const placeholder = document.createElement("span");
 placeholder.className = "placeholder";
 
 import Icon from "../general/Icon";
@@ -20,8 +19,9 @@ import Icon from "../general/Icon";
  * @private
  * @ignore
  **/
-class MultivaluesOption extends React.Component {
+class MultivaluesOption extends Component {
     static propTypes = {
+        errorMessage: PropTypes.string,
         label: PropTypes.string.isRequired,
         onChange: PropTypes.func.isRequired,
     };
@@ -34,9 +34,8 @@ class MultivaluesOption extends React.Component {
     * @private
     * @ignore
     */
-    _delete = (e) => {
-        var id = e.target.id;
-        this.props.onDelete(id);
+    _delete = () => {
+        this.props.onDelete(this.props.id);
     };
 
     render() {
@@ -47,7 +46,7 @@ class MultivaluesOption extends React.Component {
                 {this.props.iconName && <Icon iconName={this.props.iconName}/>}
                 <a className="delete"
                     data-id="delete"
-                    id = {this.props.id}
+                    id={this.props.id}
                     onClick={this._delete}
                 />
             </label>
@@ -96,6 +95,8 @@ class MultivaluesOption extends React.Component {
  *     If true, the user must enter an entry to the field.
  * @param {boolean} [autoFocus=false]
  *     Whether or not to auto-focus the element.
+ * @param {string} [errorMessage]
+ *     An error message to be displayed below the component body.
  *
 
  *
@@ -113,12 +114,13 @@ class MultivaluesOption extends React.Component {
  *
  **/
 
-class Multivalues extends React.Component {
+class Multivalues extends Component {
     static displayName = "Multivalues";
 
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
+        autoFocus: PropTypes.bool,
         entries: PropTypes.arrayOf(PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.shape({
@@ -126,13 +128,13 @@ class Multivalues extends React.Component {
                 icon: PropTypes.string.isRequired
             })
         ])),
+        errorMessage: PropTypes.string,
+        iconName: PropTypes.string,
         name: PropTypes.string,
         onValueChange: PropTypes.func.isRequired,
         onNewValue: PropTypes.func,
         required: PropTypes.bool,
         stacked: PropTypes.bool,
-        iconName: PropTypes.string,
-        autoFocus: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -150,8 +152,11 @@ class Multivalues extends React.Component {
         }
     };
 
+    hiddenDiv = null;
+
     state = {
-        inputWidth: "20px"
+        inputWidth: "20px",
+        validValue: true
     };
 
     componentWillMount() {
@@ -177,14 +182,11 @@ class Multivalues extends React.Component {
     */
     _handleChange = (e) => {
         //Sets the html of a hidden div to calculate exact pixel width of the input string
-        var hidden = ReactDOM.findDOMNode(this.refs["hidden-div"]);
-        hidden.innerHTML = e.target.value;
+        this.hiddenDiv.innerHTML = e.target.value;
         //add 20 pixels so input has room for next character
-        var newWidth = hidden.offsetWidth + 20 + "px";
-
-        var newState = {};
-        newState["inputWidth"] = newWidth;
-        this.setState(newState);
+        this.setState({
+            inputWidth: this.hiddenDiv.offsetWidth + 20 + "px"
+        });
     };
 
     /**
@@ -194,7 +196,7 @@ class Multivalues extends React.Component {
      */
     _handleBlur = (e) => {
         // simulate a tab key press
-        var syntheticEvent = {
+        const syntheticEvent = {
             target: e.target,
             preventDefault: _.noop,
             keyCode: 9
@@ -210,32 +212,38 @@ class Multivalues extends React.Component {
     * @private
     */
     _handleKeyDown = (e) => {
-        var enteredValue = e.target.value ? e.target.value : "";
+        const {
+            keyCode,
+            target: {
+                value = ""
+            }
+        } = e;
 
         //When delete key is pressed, delete previous string if nothing is entered
-        if (e.keyCode === 8 && enteredValue.length < 1) {
+        if (keyCode === 8 && value.length < 1) {
             e.preventDefault(); //keeps the browser from going back after last item is deleted
-            var id = this.props.entries.length - 1;
+            const id = this.props.entries.length - 1;
             this._handleDelete(id);
             return;
         }
 
-        enteredValue = e.target.value.trim();
         //Adds input value to array when Enter and Comma key are pressed
-        if (this.props.onNewValue(e.keyCode)) {
-            if (!enteredValue) {
-                if (e.keyCode !== 9) { //let key tab take you to the next field if input is empty
+        if (this.props.onNewValue(keyCode, value)) {
+            const trimmedValue = value.trim();
+            if (!trimmedValue) {
+                if (keyCode !== 9) { //let key tab take you to the next field if input is empty
                     e.preventDefault();
                 }
                 return;
             }
             e.preventDefault();
             e.target.value = "";
-            var entries = this.props.entries;
-            entries.push(enteredValue);
 
             if (this.props.onValueChange) {
-                this.props.onValueChange(entries);
+                this.props.onValueChange([
+                    ...this.props.entries,
+                    trimmedValue
+                ]);
             }
 
             //reset the input width
@@ -262,16 +270,21 @@ class Multivalues extends React.Component {
     };
 
     render() {
-        var className = classnames(this.props.className, {
-            "input-multivalues": true,
-            required: this.props.required && this.props.entries.length === 0,
-            "value-entered": (this.props.entries.length !== 0),
+        const {
+            entries,
+            errorMessage,
+            onValueChange
+        } = this.props;
+
+        const className = classnames(this.props.className, "input-multivalues", {
+            required: this.props.required && entries.length === 0,
+            "value-entered": (entries.length !== 0),
             stacked: this.props.stacked
         });
 
         //this style is for the hidden div that allows us to get an accurate
         //size for our dynamic input
-        var hiddenStyle = {
+        const hiddenStyle = {
             width: "auto",
             display: "inline-block",
             visibility: "hidden",
@@ -281,32 +294,30 @@ class Multivalues extends React.Component {
             left: "0"
         };
 
-        var inputStyle = {
+        const inputStyle = {
             width: [this.state.inputWidth]
         };
 
-        var entryNodes = _.map(this.props.entries, (entry, index) =>
-            typeof entry === "string"
-                ? (
-                    <MultivaluesOption
-                        id={index}
-                        label={entry}
-                        onChange={this.props.onValueChange}
-                        onDelete = {this._handleDelete}
-                        key={index}
-                    />
-                )
-                : (
-                    <MultivaluesOption
-                        id={index}
-                        label={entry.label}
-                        onChange={this.props.onValueChange}
-                        onDelete = {this._handleDelete}
-                        key={index}
-                        iconName={entry.icon}
-                    />
-                ));
-
+        const entryNodes = _.map(entries, (entry, index) => _.isString(entry)
+            ? (
+                <MultivaluesOption
+                    id={index}
+                    label={entry}
+                    onChange={onValueChange}
+                    onDelete = {this._handleDelete}
+                    key={index}
+                />
+            )
+            : (
+                <MultivaluesOption
+                    id={index}
+                    label={entry.label}
+                    onChange={onValueChange}
+                    onDelete = {this._handleDelete}
+                    key={index}
+                    iconName={entry.icon}
+                />
+            ));
 
         return (
             <FormLabel
@@ -318,10 +329,9 @@ class Multivalues extends React.Component {
                     {entryNodes}
                     <div className="value-input">
                         <input
-                            data-id = "value-entry"
-                            style = {inputStyle}
-                            type = "text"
-                            ref="value-entry"
+                            data-id="value-entry"
+                            style={inputStyle}
+                            type="text"
                             tabIndex="0"
                             name={this.props.name}
                             onBlur={this._handleBlur}
@@ -330,8 +340,16 @@ class Multivalues extends React.Component {
                             autoFocus={this.props.autoFocus}
                         />
                     </div>
-                    <div ref = "hidden-div" style = {hiddenStyle} />
+                    <div ref={ref => this.hiddenDiv = ref} style={hiddenStyle} />
                 </div>
+                {errorMessage &&
+                    <div className="form-error">
+                        <FormError.Message
+                            className={"input-multivalues__error"}
+                            value={errorMessage}
+                        />
+                    </div>
+                }
             </FormLabel>
         );
     }

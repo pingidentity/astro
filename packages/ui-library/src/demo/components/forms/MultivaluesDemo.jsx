@@ -1,5 +1,6 @@
-var React = require("react");
-var Multivalues = require("../../../components/forms/Multivalues");
+import React from "react";
+import Multivalues from "../../../components/forms/Multivalues";
+import InputRow from "../../../components/layout/InputRow";
 
 /**
 * @name MultivaluesDemo
@@ -32,7 +33,17 @@ class MultivaluesDemo extends React.Component {
                 label: "Four",
                 icon: "clipboard"
             }
-        ]
+        ],
+        errorEntries: [
+            "Error",
+            "will",
+            "show",
+            "if",
+            "entry",
+            "is",
+            "repeated"
+        ],
+        error: null
     };
 
     _handleValueChange = (entries) => {
@@ -47,12 +58,34 @@ class MultivaluesDemo extends React.Component {
         });
     };
 
-    _onNewValue = (keyCode) => {
+    _handleErrorEntryChange = (errorEntries) => this.setState({ errorEntries })
+
+    _onNewValue = (keyCode) => keyCode === 13
+
+    _onNewErrorEntry = (keyCode, value) => {
+        // 13 is the keycode for enter
         if (keyCode === 13) {
-            return true;
+            const isInvalid = this.state.errorEntries.some(entry => entry.toLowerCase() === value);
+            if (isInvalid) {
+                this.setState({
+                    error: "Entries must be unique"
+                });
+
+                return false;
+            } else {
+                this.setState({
+                    error: null
+                });
+
+                return this._onNewValue(keyCode);
+            }
+        } else {
+            this.setState({
+                error: null
+            });
+            return false;
         }
-        return false;
-    };
+    }
 
     render() {
         return (
@@ -62,7 +95,7 @@ class MultivaluesDemo extends React.Component {
                     clicking "x".
                 </p>
 
-                <div className="input-row">
+                <InputRow>
                     <Multivalues
                         labelText="Default multi-values input"
                         stateless={false}
@@ -70,19 +103,18 @@ class MultivaluesDemo extends React.Component {
                         onValueChange={this._handleValueChange}
                         autoFocus={true}
                     />
-                </div>
+                </InputRow>
 
-                <div className="input-row">
+                <InputRow>
                     <Multivalues
                         labelText="Default multi-values input with icons"
                         stateless={false}
                         entries={this.state.iconEntries}
                         onValueChange={this._handleValueChange}
-
                     />
-                </div>
+                </InputRow>
 
-                <div className="input-row">
+                <InputRow>
                     <Multivalues
                         labelText="Alternate stacked formatting"
                         stateless={false}
@@ -93,7 +125,18 @@ class MultivaluesDemo extends React.Component {
                         name="mv-demo"
                         required={true}
                     />
-                </div>
+                </InputRow>
+
+                <InputRow>
+                    <Multivalues
+                        labelText="With error message"
+                        stateless={false}
+                        entries={this.state.errorEntries}
+                        onNewValue={this._onNewErrorEntry}
+                        onValueChange={this._handleErrorEntryChange}
+                        errorMessage={this.state.error}
+                    />
+                </InputRow>
 
             </div>
         );

@@ -151,8 +151,13 @@ describe("FormTextField", function () {
         input.value = "Entry 5";
         ReactTestUtils.Simulate.blur(input);
 
-        expect(callback.mock.calls.length).toBe(1);
-        expect(component.props.entries.length).toBe(5);
+        expect(callback).toHaveBeenCalledWith([
+            "Entry 1",
+            "Entry 2",
+            "Entry 3",
+            "Entry 4",
+            "Entry 5"
+        ]);
     });
 
     it ("trigger onValuechange callback with space", function () {
@@ -252,6 +257,21 @@ describe("FormTextField", function () {
         const focus = TestUtils.findRenderedDOMNodeWithDataId(component, "value-entry");
 
         expect(document.activeElement).toEqual(focus);
+    });
+
+    it("displays error message when error prop is passed in", function () {
+        const multivalues = ReactTestUtils.renderIntoDocument(
+            <Multivalues
+                title="Sites"
+                data-id="multivalues"
+                autoFocus={true}
+                errorMessage="I'm an error message"
+            />
+        );
+
+        const error = TestUtils.findRenderedDOMNodeWithClass(multivalues, "input-multivalues__error");
+
+        expect(error.textContent).toEqual("I'm an error message");
     });
 
 });

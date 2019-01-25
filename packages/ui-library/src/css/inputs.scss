@@ -2401,6 +2401,14 @@ input[type=file] {
     &.input-message--info {
         @include messageTypeCss ($color-active-blue, $icon-info);
     }
+
+    .input-multivalues {
+        &__error {
+            display: block;
+            font-size: 0.9em;
+            width: 100%;
+        }
+    }
 }
 
 .disabled {
