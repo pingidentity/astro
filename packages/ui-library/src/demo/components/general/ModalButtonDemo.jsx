@@ -10,6 +10,8 @@ const NUM_STATELESS_DEMOS = 3;
 * @desc A demo for ModalButton
 */
 class ModalButtonDemo extends React.Component {
+    static flags = [ "use-portal" ];
+
     constructor(props) {
         super(props);
         var initialState = {};
@@ -45,13 +47,16 @@ class ModalButtonDemo extends React.Component {
     }
 
     render() {
+        const { flags } = this.props;
         return (
             <div>
                 <div className="input-row">
                     <ModalButton data-id="default-example"
                         activatorButtonLabel="Open Default Modal"
                         modalTitle="Default Modal"
-                        stateless={false}>
+                        stateless={false}
+                        flags={flags}
+                    >
                         <div>
                             <p>
                                 Default modals size both vertically and horizontally with the content.
@@ -73,7 +78,9 @@ class ModalButtonDemo extends React.Component {
                         onOpen={this._handleOpen1}
                         onClose={this._handleClose1}
                         initiallyExpanded={false}
-                        expanded={this.state.modalExpanded1}>
+                        expanded={this.state.modalExpanded1}
+                        flags={flags}
+                    >
                         <div>
                             A stateless modals expanded state is stateless by the boolean "expanded" prop. When true
                             the modal will display.
@@ -84,7 +91,9 @@ class ModalButtonDemo extends React.Component {
                     <ModalButton activatorButtonLabel="Open Maximized Modal"
                         data-id="maximized-modal"
                         modalTitle="Maximized Modal"
-                        maximize={true}>
+                        maximize={true}
+                        flags={flags}
+                    >
                         <div>
                             A maximized modal always occupy the full maximum height and width that a modal may have,
                             regardless of content.
@@ -95,7 +104,9 @@ class ModalButtonDemo extends React.Component {
                     <ModalButton activatorButtonLabel="Open BG Click Enabled Modal"
                         data-id="bgclick-modal"
                         modalTitle="Closing a Modal with a Background Click"
-                        closeOnBgClick={true}>
+                        closeOnBgClick={true}
+                        flags={flags}
+                    >
                         <div>
                             When you set the "closeOnBgClick" prop to "true", clicking the modal background will trigger
                             the onClose callback. If you are using the "stateless" or stateless version, you will
@@ -113,7 +124,9 @@ class ModalButtonDemo extends React.Component {
                         stateless={true}
                         onOpen={this._handleOpen2}
                         onClose={this._handleClose2}
-                        expanded={this.state.modalExpanded2}>
+                        expanded={this.state.modalExpanded2}
+                        flags={flags}
+                    >
                         <div>
                             <div className="modal-title">
                                 Dialog modal content here!
@@ -141,7 +154,9 @@ class ModalButtonDemo extends React.Component {
                         stateless={true}
                         onOpen={this._handleOpen3}
                         onClose={this._handleClose3}
-                        expanded={this.state.modalExpanded3}>
+                        expanded={this.state.modalExpanded3}
+                        flags={flags}
+                    >
                         <div className = "title">
                             Alert Modal
                         </div>

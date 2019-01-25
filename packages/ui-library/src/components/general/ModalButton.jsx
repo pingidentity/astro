@@ -1,4 +1,5 @@
 "use strict";
+import { Portal } from "react-portal";
 
 var PropTypes = require("prop-types");
 
@@ -39,6 +40,8 @@ var React = require("react"),
  *     then the modal will not keep its own expanded state,
  *     and closing the modal must be managed externally.
  *
+ *  @param {array} [flags]
+ *     Set the flag for "use-portal" to render with react-portal
  * @param {function} [onOpen]
  *     Callback to be triggered when the activator is clicked and the modal is about to open.
  *     If this function returns false, the opening will be prevented.
@@ -134,6 +137,7 @@ class ModalButtonStateless extends React.Component {
         activatorButtonLabel: PropTypes.string,
         value: PropTypes.string,
         activatorButtonClassName: PropTypes.string,
+        flags: PropTypes.arrayOf(PropTypes.string),
 
         // Modal/ModalButton props (passed through to modal component)
         modalClassName: PropTypes.string,
@@ -151,8 +155,11 @@ class ModalButtonStateless extends React.Component {
         disabled: false,
         showHeader: true,
         maximize: false,
-        type: Modal.Type.BASIC
+        type: Modal.Type.BASIC,
+        flags: [],
     };
+
+    _usePortal = () => this.props.flags.findIndex(item => item === "use-portal") >= 0;
 
     close = () => {
         this.props.onClose();
@@ -236,6 +243,8 @@ class ModalButtonStateless extends React.Component {
             </Modal>
         );
 
+        const renderedModal = this._usePortal() ? <Portal>{modal}</Portal> : modal;
+
         return React.createElement(
             this.props.inline ? "span" : "div",
             {
@@ -243,7 +252,7 @@ class ModalButtonStateless extends React.Component {
                 "data-id": this.props["data-id"],
                 className: this.props.className
             },
-            [activator, modal]
+            [activator, renderedModal]
         );
     }
 }
