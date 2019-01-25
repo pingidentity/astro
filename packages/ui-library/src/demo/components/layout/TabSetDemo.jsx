@@ -16,7 +16,6 @@ export default class TabSetDemo extends Component {
     state = {
         selectedIndex1: 0,
         selectedIndex2: 0,
-        selectedIndex3: 0,
     };
 
     _handleValueChange1 = labelValues => {
@@ -25,15 +24,9 @@ export default class TabSetDemo extends Component {
         });
     };
 
-    _handleValueChange2 = e => {
+    _handleValueChange2 = labelValues => {
         this.setState({
-            selectedIndex2: parseInt(e.target.textContent.replace("Label ", "")) - 1,
-        });
-    };
-
-    _handleValueChange3 = labelValues => {
-        this.setState({
-            selectedIndex3: labelValues.index,
+            selectedIndex2: labelValues.index,
         });
     };
 
@@ -130,38 +123,13 @@ export default class TabSetDemo extends Component {
                 </TabSet>
 
                 <hr className="hr" />
-                <h3>Example with custom labels/tabs</h3>
-                <p>
-                    *** Note that buttons are not intended to be used this way and are used here for illustrative
-                    purposes only.
-                </p>
-                <br />
-
-                <TabSet
-                    onValueChange={this._handleValueChange2}
-                    renderLabels={this.renderCustomLabels}
-                    selectedIndex={this.state.selectedIndex2}
-                    stateless={false}
-                >
-                    <TabContent label="Label 1">
-                        Label one content
-                    </TabContent>
-                    <TabContent label="Label 2">
-                        Label two content
-                    </TabContent>
-                    <TabContent label="Label 3">
-                        Label three content
-                    </TabContent>
-                </TabSet>
-
-                <hr className="hr" />
                 <h3>Labels with right content</h3>
                 <br />
 
                 <TabSet
-                    onValueChange={this._handleValueChange3}
+                    onValueChange={this._handleValueChange2}
                     renderLabels={this.renderLabelsRightContent}
-                    selectedIndex={this.state.selectedIndex3}
+                    selectedIndex={this.state.selectedIndex2}
                     stateless={true}
                 >
                     <TabContent label="Label 1">
