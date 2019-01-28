@@ -177,6 +177,9 @@ export default class Notifications extends Component {
 
     _showButtonBar = (state) => {
         return Object.entries(this.initState).some(([key, value]) => {
+            if (key === "selectedLabel" || key === "selectedLocale" || key === "selectedValue" ) {
+                return false;
+            }
             return value !== state[key];
         });
     }
@@ -224,7 +227,6 @@ export default class Notifications extends Component {
                         <ConfirmToolTip
                             flags={["use-portal"]}
                             positionClassName="bottom center"
-                            labelClassName="my-css-class"
                             label="+ Add Language"
                             title="Add Language"
                             buttonLabel="Add"

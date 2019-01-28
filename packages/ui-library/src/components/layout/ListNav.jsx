@@ -87,7 +87,10 @@ export default class ListNav extends Component {
 
             return (
                 <li className={classes} key={id}>
-                    <a className="list-nav-item__link" onClick={handleClick}>
+                    <a className="list-nav-item__link"
+                        data-id={`${this.props["data-id"]}_nav-link_${id}`}
+                        onClick={handleClick}
+                    >
                         {label}
                     </a>
                 </li>
