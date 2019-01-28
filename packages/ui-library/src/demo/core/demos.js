@@ -2,6 +2,8 @@ import React from "react";
 import PageSection from "ui-library/lib/components/layout/PageSection";
 import FormattedContent from "ui-library/lib/components/general/FormattedContent";
 import UILibrary101 from "../components/docs/UILibrary101.mdx";
+import UsingComponents from "../components/docs/UsingComponents.mdx";
+import UsingTemplates from "../components/docs/UsingTemplates.mdx";
 import SubmittingCode from "../components/docs/contributing/SubmittingCode.mdx";
 import ComponentRequirements from "../components/docs/contributing/ComponentRequirements.mdx";
 import StandardProps from "../components/docs/contributing/StandardProps.mdx";
@@ -40,14 +42,14 @@ module.exports = [
                 icon: "clipboard"
             },
             {
-                label: "Components In-depth",
-                demo: require("../components/tutorials/componentsInDepth"),
+                label: "Using Components",
+                demo: contentPage(UsingComponents),
                 fullscreen: true,
                 icon: "clipboard"
             },
             {
-                label: "Templates In-depth",
-                demo: require("../components/tutorials/templatesInDepth"),
+                label: "Using Templates",
+                demo: contentPage(UsingTemplates),
                 fullscreen: true,
                 icon: "clipboard"
             },
