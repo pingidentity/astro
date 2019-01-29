@@ -609,6 +609,7 @@ $color-grey-minor-1: $color-neutral-30;
     bottom: 0;
     left: $layout-nav-width;
     padding: 25px 40px 0;
+    box-sizing: border-box;
 
     // workaround for bottom padding - bottom padding is ignored in scrolling elements in FF and IE
     &:after {

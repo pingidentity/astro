@@ -3,7 +3,6 @@
     @include flexbox-direction(column);
     @include flexbox-grow(1);
 
-    min-height: 400px;
     position: relative;
 
     > * {
@@ -11,6 +10,8 @@
     }
 
     &--scrollable {
+        min-height: 400px;
+
         > *,
         > div {
             position: absolute;
