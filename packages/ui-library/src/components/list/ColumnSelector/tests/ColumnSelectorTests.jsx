@@ -1,8 +1,9 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
 import { omit } from "underscore";
-import ColumnSelector, { ColumnSelectorRow, RowButton } from "../../ColumnSelector";
+import ColumnSelector from "../ColumnSelector";
 import ColumnSelectorFrame from "../ColumnSelectorFrame";
+import ColumnSelectorRow, { RowButton } from "../ColumnSelectorRow";
 
 window.__DEV__ = true;
 
