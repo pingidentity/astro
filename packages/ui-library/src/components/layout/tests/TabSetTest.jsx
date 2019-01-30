@@ -5,7 +5,7 @@ import TestUtils from "../../../testutil/TestUtils";
 import _ from "underscore";
 
 jest.dontMock("../TabSet");
-jest.dontMock("../../forms/RockerButton");
+jest.dontMock("../../forms/RockerButton.jsx");
 
 describe("TabSet", function () {
     const componentId = "tab-set";
@@ -84,27 +84,6 @@ describe("TabSet", function () {
         expect(activeTabContent).toEqual(["hello world"]);
     });
 
-    it("shows the correct rocker button as active", () => {
-        const component = getTabSet({
-            selectedIndex: 0
-        });
-
-        const element = TestUtils.findRenderedDOMNodeWithClass(component, "rocker-button sel-0");
-
-        expect(element).toBeTruthy();
-
-    });
-
-    it("renders the children and labels correctly", function () {
-        const component = getTabSet({
-            selectedIndex: 0,
-            children: [<div>whatever</div>, <div>hello world</div>]
-        });
-
-        const element = TestUtils.findRenderedDOMNodeWithClass(component, "tab-set-children");
-        expect(ReactTestUtils.isDOMComponent(element)).toBeTruthy();
-    });
-
     it("renders the custom labels correctly", () => {
         const renderCustomLabels = data => {
             return (
@@ -172,13 +151,4 @@ describe("TabSet", function () {
         expect(dom.getAttribute("label")).toContain(myLabel);
         expect(dom.textContent).toContain(myContent);
     });
-
-    // TODO: This test needs to be rewritten or removed - will be addressed in UIP-2054
-    // it("renders a div tags", function () {
-    //     const component = getTabContent({});
-
-    //     const element = TestUtils.scryRenderedDOMNodesWithTag(component, "div");
-
-    //     expect(element.length).toEqual(1);
-    // });
 });

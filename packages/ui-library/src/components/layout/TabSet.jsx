@@ -5,12 +5,10 @@ import classnames from "classnames";
 import _ from "underscore";
 
 /**
- * @callback TabContent~renderLabels
+ * @callback TabSet~renderLabels
  *
  * @param {Object} data
  *     An object containing information required or useful to generating  the TabSet label markup
- * @param {Array} data.labels
- *     An array of labels generated from the TabContent title attributes.
  * @param {Object} data.props
  *     The props from the TabSet component.
  * @param {Object} data.defaultLabels
@@ -29,10 +27,8 @@ import _ from "underscore";
 *     Callback to be triggered when selection changes.
 * @param {number} [selectedIndex=0]
 *     The index of the selected label. Is mutually exclusive with "selected".
-* @param {TabContent~renderLabels} [renderLabels]
+* @param {TabSet~renderLabels} [renderLabels]
 *     When provided, this function renders in place of the tabs (rockerButtons).
-* @param {string} [label]
-*     corresponding index for selcted label to match the TabContent to the array labels
 * @example
 *
 *     <TabSet
@@ -43,6 +39,8 @@ import _ from "underscore";
 *         <TabContent label="Label Two">Two</TabContent>
 *    </TabSet>
 **/
+
+
 
 class TabSet extends Component {
     static propTypes = {
@@ -85,7 +83,7 @@ class TabSet extends Component {
 
     render () {
         const {
-            children,
+            children = [],
             onValueChange,
             renderLabels,
             selectedIndex,
@@ -123,6 +121,23 @@ class TabSet extends Component {
         );
     }
 }
+
+
+/**
+* @class TabContent
+* @desc TabContent implementation, the labels for the tabs
+* @param {string} [label]
+*     corresponding index for selected label to match the TabContent to the array labels
+* @param {string} [data-id="tab-set-content"]
+*     To define the base "data-id" value for the top-level HTML container.
+* @param {string} [className]
+*     CSS classes to be set on the top-level HTML container.
+
+* @example
+*   <TabContent label="Label One">One</TabContent>
+*   <TabContent label="Label Two">Two</TabContent>
+**/
+
 
 class TabContent extends Component {
     static propTypes = {
