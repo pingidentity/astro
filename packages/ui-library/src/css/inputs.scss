@@ -2676,7 +2676,6 @@ input[type=file] {
             input[type=text] {
                 &.selected-option-label {
                     text-align: left;
-                    border-color: transparent;
                 }
             }
         }
@@ -2685,6 +2684,9 @@ input[type=file] {
                 input[type=text] {
                     border-color: $color-dolphin;
                     background-color: $color-white;
+                    &.selected-option-label {
+                        border-color: $color-dolphin;
+                    }
                 }
             }
             > .input-text {

@@ -48,7 +48,6 @@ class UnitInputDemo extends React.Component {
                 <div className="input-row">
                     <UnitInput
                         labelText="Unit Input Text"
-                        className="demo"
                         textFieldProps={{
                             onValueChange: this._handleTextValueChange,
                             value: this.state.a,
