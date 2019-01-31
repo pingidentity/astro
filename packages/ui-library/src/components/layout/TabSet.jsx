@@ -25,8 +25,6 @@ import _ from "underscore";
 *     To define the base "data-id" value for the top-level HTML container.
 * @param {string} [className]
 *     CSS classes to be set on the top-level HTML container.
-* @param {array} labels
-*     Array of label strings to use as button titles.
 * @param {onValueChange} [onValueChange]
 *     Callback to be triggered when selection changes.
 * @param {number} [selectedIndex=0]
@@ -50,7 +48,6 @@ class TabSet extends Component {
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
-        labels: PropTypes.array,
         onValueChange: PropTypes.func,
         renderLabels: PropTypes.func,
         selectedIndex: PropTypes.number,
