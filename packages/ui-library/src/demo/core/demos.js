@@ -31,7 +31,7 @@ module.exports = [
         children: [
             {
                 label: "Release Notes",
-                demo: require("../components/docs/releaseNotes"),
+                demo: require("../components/docs/ReleaseNotes"),
                 fullscreen: true,
                 icon: "chat"
             },

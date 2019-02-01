@@ -54,10 +54,19 @@ export default class ListNav extends Component {
         "data-id": PropTypes.string,
         className: PropTypes.string,
         labels: PropTypes.arrayOf(PropTypes.shape({
-            label: PropTypes.string,
-            id: PropTypes.string
+            label: PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.number
+            ]),
+            id: PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.number
+            ]),
         })).isRequired,
-        selectedLabel: PropTypes.string,
+        selectedLabel: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number
+        ]),
         onSelect: PropTypes.func.isRequired,
         listButton: PropTypes.node,
 
