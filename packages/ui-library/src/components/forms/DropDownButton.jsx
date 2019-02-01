@@ -58,11 +58,11 @@ var React = require("react"),
  *          onValueChange={this._changeARule}
  *          open={this.state.menuOpen}
  *          onToggle={this._toggleMenu}
- *          options={
+ *          options={{
  *              one: "One",
  *              two: "Two",
  *              three: "Three"
- *          }
+ *          }}
  *     />
  */
 
