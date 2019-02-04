@@ -1,6 +1,3 @@
-NODE_VERSION=6.9.5
-NPM_VERSION=3.7.1
-
 COVERAGE_ADDRESS=http://art01.corp.pingidentity.com:8080/artifactory/inhouse/com/pingone/ui-library/ui-library-coverage
 HOSTING_SERVER_ADDRESS=uilibrary.ping-eng.com
 HOSTING_SERVER_USERNAME=ubuntu
@@ -23,20 +20,10 @@ else ifeq ($(filter %86,$(UNAME_P)),)
 	ARCH_NAME=x32
 endif
 
-NODE_FILENAME=node-v$(NODE_VERSION)-$(SYS_NAME)-$(ARCH_NAME)
-NPM_FILENAME=npm-$(NPM_VERSION)
-NODE_EXEC=$(CURRENT_DIR)/node/node
-NPM_EXEC=$(NODE_EXEC) $(CURRENT_DIR)/node/node_modules/npm/bin/npm-cli.js
 MVN_FILENAME=apache-maven-3.2.2-bin.tar.gz
 SC_FILENAME=sc-4.4.1-linux.tar.gz
 CREATING_TUNNEL_TIMEOUT=60
 CREATING_TUNNEL_ATTEMPT=0
-
-CURRENT_DIR := $(shell pwd)
-
-M2_HOME := $(CURRENT_DIR)/mvn
-SHELL := /bin/bash
-PATH := $(CURRENT_DIR)/node:$(CURRENT_DIR)/node/node_modules/npm/bin:$(PATH):$(M2_HOME)/bin
 
 # The Git branch is to be passed as argument on the command line
 # (eg. make GIT_BRANCH=master verify)
@@ -108,12 +95,12 @@ define version_and_tag
 endef
 
 define run_coverage
-	$(NPM_EXEC) run coverage
+	npm run coverage
 	rm -rf $$TMPDIR/jest_preprocess_cache
 endef
 
 define package
-	$(NPM_EXEC) run package-library
+	npm run package-library
 	rm -rf dist
 	mkdir -p dist/ui-library
 	mkdir -p dist/ui-library/examples
@@ -132,7 +119,7 @@ define package_css
 	rm -rf build-css/$(1)
 
 	mkdir -p build-css/css
-	$(NPM_EXEC) run compile-sass
+	npm run compile-sass
 
 	mkdir build-css/$(1)
 	mv build-css/css build-css/$(1)
@@ -187,23 +174,10 @@ log-config:
 	@echo "Coverage version: $(COVERAGE_VERSION)"
 	@echo "Coverage status code: $(COVERAGE_STATUS_CODE)"
 
-clean-node:
-	rm -f $(NODE_FILENAME).tar.gz
-	rm -f $(NPM_FILENAME).tgz
-	rm -rf node
-	rm -rf node_modules
-
-install-node-npm: clean-node
-	wget http://art01.corp.pingidentity.com:8080/artifactory/simple/ext-releases-local/nodejs/v$(NODE_VERSION)/$(NODE_FILENAME).tar.gz
-	mkdir -p node
-	tar -xzf $(NODE_FILENAME).tar.gz --strip=2 -C node/ $(NODE_FILENAME)/bin/node
-	rm -r $(NODE_FILENAME).tar.gz
-	wget http://art01.corp.pingidentity.com:8080/artifactory/simple/ext-releases-local/npm/$(NPM_FILENAME).tgz
-	mkdir -p node/node_modules/npm
-	tar -xzf $(NPM_FILENAME).tgz --strip=1 -C node/node_modules/npm
-	rm -r $(NPM_FILENAME).tgz
-	rm -rf node_modules
-	$(NPM_EXEC) install --registry=http://art01.corp.pingidentity.com:8081/artifactory/api/npm/npm-virtual/
+install-node-npm:
+	npm prune
+	npm install
+	npm rebuild node-sass
 
 clean-mvn:
 	rm -f $(MVN_FILENAME)
@@ -216,8 +190,8 @@ install-mvn: clean-mvn
 	rm -f $(MVN_FILENAME)
 
 verify: install-node-npm
-	$(NPM_EXEC) run jslint
-	$(NPM_EXEC) run stylelint
+	npm run jslint
+	npm run stylelint
 	$(call run_coverage)
 
 	# convert the lcov report to cobertura format to be published by Jenkins
@@ -231,11 +205,11 @@ verify: install-node-npm
 	# download the coverage report from art01 for the current version
 	# verify the current coverage against the reference;
 	$(call install_reference_coverage_report,$(COVERAGE_VERSION))
-	$(NODE_EXEC) tools/verify_coverage.js
+	node tools/verify_coverage.js
 
 integration: install-node-npm
 	rm -rf reports
-	$(NPM_EXEC) run pack
+	npm run pack
 	node_modules/.bin/wdio wdio.conf.js
 
 # $(SAUCELABS_BROWSER) is parameter from Jenkins variable SAUCELABS_BROWSER
@@ -243,7 +217,7 @@ integration-saucelabs: install-node-npm
 	rm -rf reports
 	node_modules/.bin/selenium-standalone install
 	node_modules/.bin/selenium-standalone start & node_modules/.bin/http-server ./build &
-	$(NPM_EXEC) run pack
+	npm run pack
 
 	# create tunnel to connect to Sauce Labs
 	wget https://saucelabs.com/downloads/$(SC_FILENAME)
@@ -323,8 +297,8 @@ package-and-upload-for-hosting: install-node-npm
 	# (with a temp unique name first, to minimize the risk of colisions with another process doing the same thing)
 	if [ "$(GIT_BRANCH)" == "master" ]; then\
 		LIB_VERSION=`sed -n -e 's/.*"version"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' package.json`;\
-		$(NPM_EXEC) run doc;\
-		$(NPM_EXEC) run pack;\
+		npm run doc;\
+		npm run pack;\
 		cp -rf src build;\
 		cp -rf build-doc build;\
 		rm -rf $${LIB_VERSION}.tar.gz;\
@@ -337,7 +311,7 @@ package-and-upload-for-hosting: install-node-npm
 		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) tar -xzf /var/www/html/$${LIB_VERSION}.tar.gz --strip 1 -C /var/www/html/$${LIB_VERSION};\
 		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -f /var/www/html/$${LIB_VERSION}.tar.gz;\
 		scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/versions.json ./;\
-		$(NODE_EXEC) hosting/append_current_version.js;\
+		node hosting/append_current_version.js;\
 		uuid=$(uuidgen);\
 		scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem ./versions.json $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):/var/www/html/versions-$(UUID).json;\
 		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./hosting/FARM-33-341f336d.us-west-2.pem $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) mv /var/www/html/versions-$(UUID).json /var/www/html/versions.json;\

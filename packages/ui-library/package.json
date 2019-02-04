@@ -134,10 +134,6 @@
     "react": "^15.0.0 || ^16.0.0",
     "react-dom": "^15.0.0 || ^16.0.0"
   },
-  "engines": {
-    "node": ">= 4.3.x",
-    "npm": ">= 3.7.x"
-  },
   "jest": {
     "rootDir": "./",
     "unmockedModulePathPatterns": [
