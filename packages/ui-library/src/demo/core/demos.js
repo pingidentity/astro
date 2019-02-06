@@ -60,12 +60,6 @@ module.exports = [
                 icon: "details"
             },
             {
-                label: "Prototyping",
-                demo: require("../components/tutorials/prototyping"),
-                fullscreen: true,
-                icon: "clipboard"
-            },
-            {
                 label: "Content",
                 demo: require("../components/docs/Content"),
                 fullscreen: true,

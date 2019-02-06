@@ -35,3 +35,5 @@ http-server.log
 
 # Programatically generated internal files
 src/demo/core/templates.json
+
+*.code-workspace
