@@ -33,7 +33,7 @@ module.exports = [
                 label: "Release Notes",
                 demo: require("../components/docs/releaseNotes"),
                 fullscreen: true,
-                icon: "clipboard"
+                icon: "chat"
             },
             {
                 label: "UI Library 101",
@@ -45,49 +45,55 @@ module.exports = [
                 label: "Using Components",
                 demo: contentPage(UsingComponents),
                 fullscreen: true,
-                icon: "clipboard"
+                icon: "curly-braces"
             },
             {
                 label: "Using Templates",
                 demo: contentPage(UsingTemplates),
                 fullscreen: true,
-                icon: "clipboard"
-            },
-            {
-                label: "Text Styles",
-                demo: require("../components/docs/TextStyles"),
-                fullscreen: true,
-                icon: "details"
+                icon: "apps"
             },
             {
                 label: "Content",
                 demo: require("../components/docs/Content"),
                 fullscreen: true,
-                icon: "clipboard"
+                icon: "notepad"
             },
             {
-                label: "Colors",
-                demo: require("../components/tutorials/Colors"),
-                fullscreen: true,
-                icon: "clipboard"
-            },
-            {
-                label: "Icons",
-                demo: require("../components/tutorials/Icons"),
-                fullscreen: true,
-                icon: "clipboard"
-            },
-            {
-                label: "Inputs",
-                demo: require("../components/tutorials/Inputs"),
-                fullscreen: true,
-                icon: "clipboard"
-            },
-            {
-                label: "Input Widths",
-                demo: require("../components/forms/FormInputWidthsDemo"),
-                pathToDemoSource: "demo_components_forms_FormInputWidthsDemo.jsx.html",
-                icon: "clipboard"
+                label: "Reference",
+                icon: "cabinet",
+                children: [
+                    {
+                        label: "Text Styles",
+                        demo: require("../components/docs/TextStyles"),
+                        fullscreen: true,
+                        icon: "details"
+                    },
+                    {
+                        label: "Colors",
+                        demo: require("../components/tutorials/Colors"),
+                        fullscreen: true,
+                        icon: "clipboard"
+                    },
+                    {
+                        label: "Icons",
+                        demo: require("../components/tutorials/Icons"),
+                        fullscreen: true,
+                        icon: "clipboard"
+                    },
+                    {
+                        label: "Inputs",
+                        demo: require("../components/tutorials/Inputs"),
+                        fullscreen: true,
+                        icon: "clipboard"
+                    },
+                    {
+                        label: "Input Widths",
+                        demo: require("../components/forms/FormInputWidthsDemo"),
+                        pathToDemoSource: "demo_components_forms_FormInputWidthsDemo.jsx.html",
+                        icon: "clipboard"
+                    },
+                ]
             },
             {
                 label: "Contributing",
