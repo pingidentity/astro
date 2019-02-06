@@ -829,7 +829,8 @@ $color-grey-minor-1: $color-neutral-30;
     margin: 0 0 40px 25px;
 }
 
-.page-section-title-desc {
+.page-section__description,
+.page-section-title-desc { // deprecated selector
     margin: -10px 0 25px 0;
 
     &.only {

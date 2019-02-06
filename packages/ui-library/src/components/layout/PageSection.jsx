@@ -17,6 +17,7 @@ import classnames from "classnames";
 * @param {string|node} titleAccessories
 *     Label that sits on the right side of the page.
 */
+
 const PageSection = ({
     children,
     className,
@@ -35,13 +36,13 @@ const PageSection = ({
                 }
             </div>
 
-            {description && <p>{description}</p>}
+            {description && <div className="page-section__description">{description}</div>}
             <div className="page-section-content">
                 {children}
             </div>
         </div>
         : <div {...props}>
-            {description && <p>{description}</p>}
+            {description && <div className="page-section__description">{description}</div>}
             {children}
         </div>;
 };
@@ -49,9 +50,9 @@ const PageSection = ({
 PageSection.propTypes = {
     className: PropTypes.string,
     "data-id": PropTypes.string,
-    description: PropTypes.string,
+    description: PropTypes.node,
     title: PropTypes.node,
-    titleAccessories: PropTypes.node
+    titleAccessories: PropTypes.node,
 };
 
 PageSection.defaultProps = {

@@ -1021,6 +1021,13 @@ module.exports = [
         label: "Templates",
         children: [
             {
+                label: "Actions template",
+                demo: require("../components/templates/ActionsDemo"),
+                pathToSource: "templates_Actions.jsx.html",
+                fullscreen: true,
+                icon: "circle-o",
+            },
+            {
                 label: "Edit Template",
                 demo: require("../components/templates/EditPageDemo"),
                 pathToSource: "templates_edit-page_EditPage.jsx.html",

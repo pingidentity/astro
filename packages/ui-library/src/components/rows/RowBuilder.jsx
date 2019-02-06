@@ -39,11 +39,16 @@ function Separator({
  * @param {object} [rows]
  *     Rows for the component; must be an array of objects each with a string ID and
  *     a valid React node as its content property.
+ * @param {boolean} [hasLineBetween=true]
+ *     When true, lines and wider spacing are rendered between rows.
  * @param {boolean} [showRemoveLabel]
  *     Toggles whether or not remove button has a label on first row.
  * @param {node|function} [renderAddButton]
  *     Located below the row builder; normally an add link by default. Can be either a node
  *     a function that returns a function; the function is given the RowBuilder's onAdd.
+ * @param {node|function} [renderRemoveButton]
+ *     Located on the right each of the row builder; normally an inline button with a minus icon.
+ *     Can be either a node a function that returns a function; the function is given the RowBuilder's onRemove.
  * @param {RowBuilder~onAdd} [onAdd]
  *     Callback triggered when add button is clicked. Passes in event as its parameter.
  * @param {RowBuilder~onRemove} [onRemove]
@@ -59,6 +64,7 @@ function RowBuilder({
     onAdd,
     onRemove,
     renderAddButton,
+    renderRemoveButton,
     rows,
     showRemoveLabel,
 }) {
@@ -79,48 +85,61 @@ function RowBuilder({
 
         return (
             <InputRow
-                className={classnames(
-                    "row-builder__row",
-                    {
-                        "row-builder__row--underlined": hasLineBetween
-                    }
-                )}
+                className="row-builder__row"
                 key={id}
             >
                 {content}
-                <div className="row-builder__remove" onClick={remove(id)}>
+                <div className="row-builder__remove">
                     {
                         hasRemoveLabel && <div className="row-builder__remove__label"> Remove </div>
                     }
-                    <Button
-                        className={classnames(
-                            "row-builder__remove__button",
-                            {
-                                "row-builder__remove__button--hidden": !removable
-                            }
-                        )}
-                        data-id={`${dataId}-${id}-delete`}
-                        iconName="minus"
-                        inline
-                    />
+                    {renderRemoveButton
+                        ? isFunction(renderRemoveButton)
+                            ? renderRemoveButton({ id, onRemove, removable })
+                            : renderRemoveButton
+                        : (<Button
+                            className={classnames(
+                                "row-builder__remove__button",
+                                {
+                                    "row-builder__remove__button--hidden": !removable
+                                }
+                            )}
+                            data-id={`${dataId}-${id}-delete`}
+                            iconName="minus"
+                            inline
+                            onClick={remove(id)}
+                        />)
+                    }
                 </div>
             </InputRow>
         );
     };
 
     return (
-        <div className={classnames("row-builder", className)} data-id={dataId} >
-            <div className="row-builder__rows">
+        <div
+            className={classnames(
+                "row-builder",
+                className,
+                { "row-builder--underlined": hasLineBetween }
+            )}
+            data-id={dataId}
+        >
+            <div className={classnames({ "row-builder__rows": rows.length > 0 })}>
                 {rows.map(renderRow)}
             </div>
-            {renderAddButton
-                ? isFunction(renderAddButton) ? renderAddButton({ onAdd }) : renderAddButton
-                : (<Link
-                    data-id="row-builder-add"
-                    onClick={add}
-                    title={addLabel}
-                />)
-            }
+
+            <div className="row-builder__add">
+                {renderAddButton
+                    ? isFunction(renderAddButton) ? renderAddButton({ onAdd }) : renderAddButton
+                    : (
+                        <Link
+                            data-id="row-builder-add"
+                            onClick={add}
+                            title={addLabel}
+                        />
+                    )
+                }
+            </div>
         </div>
     );
 }
@@ -139,6 +158,14 @@ RowBuilder.propTypes = {
     "data-id": propTypes.string,
     onAdd: propTypes.func,
     onRemove: propTypes.func,
+    renderAddButton: propTypes.oneOfType([
+        propTypes.node,
+        propTypes.func
+    ]),
+    renderRemoveButton: propTypes.oneOfType([
+        propTypes.node,
+        propTypes.func
+    ]),
     rows: propTypes.arrayOf(
         propTypes.shape({
             id: propTypes.string,

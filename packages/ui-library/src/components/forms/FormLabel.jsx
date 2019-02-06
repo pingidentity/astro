@@ -14,7 +14,8 @@ var React = require("react"),
  *     To define the base "data-id" value for top-level HTML container.
  * @param {string} [className]
  *     CSS classes to set on the top-level HTML container.
- *
+ * @param {boolean} [detached=false]
+ *     When true, detached styling is applied. For use when label is used when not bundled with an input
  * @param {string} [value]
  *     The label text.  If omitted and if this element has no children, nothing is rendered.
  * @param {string} [hint]
@@ -39,12 +40,14 @@ class FormLabel extends React.Component {
         lockText: PropTypes.string,
         helpClassName: PropTypes.string,
         helpTarget: PropTypes.object,
-        style: PropTypes.object
+        style: PropTypes.object,
+        detached: PropTypes.bool,
     };
 
     static defaultProps = {
         "data-id": "formLabel",
-        style: {}
+        detached: false,
+        style: {},
     };
 
     constructor(props) {
@@ -95,7 +98,11 @@ class FormLabel extends React.Component {
         }
 
         return (
-            <label data-id={this.props["data-id"]} className={this.props.className} style={this.props.style}>
+            <label
+                data-id={this.props["data-id"]}
+                className={classnames(this.props.className, this.props.detached && "detached")}
+                style={this.props.style}
+            >
                 { !noLabel && (
                     <span className="label-text" data-id="label">
                         { this.props.value }

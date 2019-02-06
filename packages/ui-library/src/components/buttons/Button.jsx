@@ -12,6 +12,8 @@ import _ from "underscore";
  *
  * @param {string} [type]
  *      CSS class applied to html.
+ * @param {string} [alignInputs]
+ *     When true, aligns a  button with text fields in the same row
  * @param {string} [className]
  *     Extra CSS class(s) applied to the top-level HTML container.
  * @param {string} [data-id="button"]
@@ -47,25 +49,27 @@ import _ from "underscore";
 
 class Button extends Component {
     static propTypes = {
-        "data-id": PropTypes.string,
-        onClick: PropTypes.func,
+        alignInputs: PropTypes.bool,
+        className: PropTypes.string,
         disabled: PropTypes.bool,
         disabledText: PropTypes.string,
-        className: PropTypes.string,
-        label: PropTypes.string,
+        "data-id": PropTypes.string,
+        href: PropTypes.string,
         iconName: PropTypes.string,
         inline: PropTypes.bool,
+        label: PropTypes.string,
         loading: PropTypes.bool,
-        type: PropTypes.string,
+        onClick: PropTypes.func,
         submit: PropTypes.bool,
-        href: PropTypes.string,
         target: PropTypes.string,
         noSpacing: PropTypes.bool,
         active: PropTypes.bool,
         flags: PropTypes.arrayOf(PropTypes.string),
+        type: PropTypes.string,
     };
 
     static defaultProps = {
+        alignInputs: false,
         "data-id": "button",
         disabled: false,
         loading: false,
@@ -92,38 +96,58 @@ class Button extends Component {
     }
 
     render() {
+        const {
+            active,
+            alignInputs,
+            children,
+            className,
+            "data-id": dataId,
+            disabled,
+            href,
+            iconName,
+            inline,
+            label,
+            loading,
+            noSpacing,
+            onClick,
+            submit,
+            target,
+            type,
+        } = this.props;
+
         const classes = classnames(
             "button",
-            this.props.className,
-            this.props.iconName,
+            className,
+            iconName,
             {
-                "button--add-margin-fix": this.props.iconName === "add" && this._fixAddMargin(),
-                "button--no-spacing": this.props.noSpacing,
-                inline: this.props.inline,
-                loading: this.props.loading,
-                disabled: this.props.disabled,
-                "button--active": this.props.active,
-                "ellipsis-loader-button": this.props.loading,
-                [this.props.type]: _.indexOf(["primary", "success", "cancel", "danger"], this.props.type) !== -1
+                "align-inputs": alignInputs,
+                "button--add-margin-fix": iconName === "add" && this._fixAddMargin(),
+                "button--no-spacing": noSpacing,
+                inline: inline,
+                loading: loading,
+                disabled: disabled,
+                "button--active": active,
+                "ellipsis-loader-button": loading,
+                [type]: _.indexOf(["primary", "success", "cancel", "danger"], type) !== -1
             }
         );
 
-        const TagName = this.props.href ? "a" : "button";
+        const TagName = href ? "a" : "button";
 
         const Tags = (
             <TagName
                 className = {classes}
-                data-id={this.props["data-id"]}
+                data-id={dataId}
                 onMouseDown={this._dontFocus}
-                onClick={this.props.onClick}
-                disabled={this.props.disabled}
-                type={this.props.submit ? "submit" : "button"}
-                href={this.props.href}
-                target={this.props.target}
+                onClick={onClick}
+                disabled={disabled}
+                type={submit ? "submit" : "button"}
+                href={href}
+                target={target}
             >
-                {this.props.label}
-                {this.props.children}
-                <EllipsisLoader loading={this.props.loading}/>
+                {label}
+                {children}
+                <EllipsisLoader loading={loading}/>
             </TagName>
         );
 

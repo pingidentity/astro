@@ -79,11 +79,16 @@ export default class RowBuilderDemo extends Component {
                 </InputRow>
                 <InputRow>
                     <RowBuilder
+                        hasLineBetween={false}
                         onAdd={this.addSecond}
                         onRemove={this.removeRow(false)}
                         rows={[
                             ...this.createRows(
-                                [<div key={uuidV4()}>Simple row</div>],
+                                [<FormTextField
+                                    key="textfield"
+                                    placeholder="Rows without dividing lines"
+                                    stateless={false}
+                                />],
                                 this.state.secondRowIds
                             ),
                             nonRemovable

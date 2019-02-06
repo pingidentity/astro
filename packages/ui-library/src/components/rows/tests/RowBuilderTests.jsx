@@ -140,6 +140,28 @@ describe("RowBuilder", () => {
         expect(addButton).toBeTruthy();
     });
 
+    it("renders custom remove button when given node", () => {
+        const customClass = "custom-remove-btn";
+        const component = getComponent({
+            renderRemoveButton: <div className={customClass} />
+        });
+
+        const customRemoveButtons = TestUtils.scryRenderedDOMNodesWithClass(component, customClass);
+
+        expect(customRemoveButtons.length).toBe(defaultRows.length);
+    });
+
+    it("renders custom remove button when given function", () => {
+        const customClass = "custom-remove-btn";
+        const component = getComponent({
+            renderRemoveButton: () => <div className={customClass} />
+        });
+
+        const customRemoveButtons = TestUtils.scryRenderedDOMNodesWithClass(component, customClass);
+
+        expect(customRemoveButtons.length).toBe(defaultRows.length);
+    });
+
     it("renders separator", () => {
         const separator = renderIntoDocument(
             <div>
