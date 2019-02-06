@@ -6,8 +6,13 @@ const Content = () => (
         <PageSection title="Capitalization">
             <ul className="ul">
                 <li>Buttons are title case, like "Delete Application"</li>
-                <li>Links are sentence case, like "See more information"</li>
-                <li>Even if a link is being used as a button, it should be in sentence case, like "+ Add row"</li>
+                <li>Links can be either sentence case or title case, depending on context</li>
+                <li>If a link is being used to perform an action, it should be title case, like "+ Add Row"</li>
+                <li>Links should be sentence case when they appear within other content</li>
+                <li>
+                    If a standalone link is not an action and is a complete sentence,
+                    it should be sentence case like "Read more about this on our documentation site"
+                </li>
             </ul>
         </PageSection>
         <PageSection title="Formats">
@@ -22,7 +27,7 @@ const Content = () => (
             <ul className="ul">
                 <li>
                     Buttons and link button labels should be phrased as
-                    verbs with objects when appropriate, like "+ Add certificate" or "Change token provider"
+                    verbs with objects when appropriate, like "+ Add Certificate" or "Change Token Provider"
                 </li>
                 <li>The titles of popups and popovers should match the labels of the buttons that triggered them</li>
                 <li>
