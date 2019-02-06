@@ -326,7 +326,7 @@ class FormDropDownListStateless extends React.Component {
             })
         ),
         helpClassName: PropTypes.string,
-        label: PropTypes.string,
+        label: PropTypes.node,
         labelAdd: PropTypes.string,
         labelHelpText: PropTypes.string,
         labelPrompt: PropTypes.string,

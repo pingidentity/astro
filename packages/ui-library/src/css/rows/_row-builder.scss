@@ -1,11 +1,21 @@
 .row-builder {
     &__row {
-        @extend .input-row;
-
         align-items: flex-end;
         display: inline-flex;
-        margin: $spacing-md 0;
-        width: 100%;
+        position: relative;
+
+        &.input-row {
+            margin: $spacing-lg 0;
+        }
+
+        &--underlined:not(:last-of-type) > :after {
+            border-bottom: 1px solid $color-rabbit-fur;
+            bottom: -$spacing-lg;
+            content: '';
+            left: 0;
+            position: absolute;
+            width: 100%;
+        }
     }
 
     &__remove {
@@ -23,6 +33,11 @@
             display: block;
             margin-left: $spacing-sm;
             margin-bottom: 6px;
+
+            &--hidden {
+                pointer-events: none;
+                visibility: hidden;
+            }
         }
     }
 
@@ -33,6 +48,7 @@
             justify-content: space-between;
         }
 
+        // Here for backward compatibility with old SSO Attributes template designs
         &__icon {
             font-size: 20px;
             margin-bottom: 11px;
@@ -40,6 +56,11 @@
             &--required {
                 color: $color-dolphin;
             }
+        }
+
+        &__separator {
+            font-size: 20px;
+            margin: 0 20px 11px 8px;
         }
 
         &__input {

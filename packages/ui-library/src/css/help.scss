@@ -140,4 +140,9 @@
             @include box-shadow(0 3px 4px 0 rgba($color-black, 0.1));
         }
     }
+
+    // Class to add same left margin that tooltips have when inside of inputs.
+    &--left-margin {
+        margin-left: 10px;
+    }
 }

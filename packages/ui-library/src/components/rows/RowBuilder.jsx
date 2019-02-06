@@ -1,8 +1,30 @@
 import React from "react";
 import propTypes from "prop-types";
 import classnames from "classnames";
+import { isFunction } from "underscore";
 import Button from "../buttons/Button";
+import InputRow from "../layout/InputRow";
 import Link from "../general/Link";
+
+function Row({
+    children
+}) {
+    return (
+        <div className="row-builder--form__row">
+            {children}
+        </div>
+    );
+}
+
+function Separator({
+    children
+}) {
+    return (
+        <div className="row-builder--form__separator">
+            {children}
+        </div>
+    );
+}
 
 /**
  * @class Row Builder
@@ -19,6 +41,9 @@ import Link from "../general/Link";
  *     a valid React node as its content property.
  * @param {boolean} [showRemoveLabel]
  *     Toggles whether or not remove button has a label on first row.
+ * @param {node|function} [renderAddButton]
+ *     Located below the row builder; normally an add link by default. Can be either a node
+ *     a function that returns a function; the function is given the RowBuilder's onAdd.
  * @param {RowBuilder~onAdd} [onAdd]
  *     Callback triggered when add button is clicked. Passes in event as its parameter.
  * @param {RowBuilder~onRemove} [onRemove]
@@ -30,8 +55,10 @@ function RowBuilder({
     addLabel,
     className,
     ["data-id"]: dataId,
+    hasLineBetween,
     onAdd,
     onRemove,
+    renderAddButton,
     rows,
     showRemoveLabel,
 }) {
@@ -51,22 +78,33 @@ function RowBuilder({
         const hasRemoveLabel = showRemoveLabel && idx === 0;
 
         return (
-            <div className="row-builder__row" key={id}>
+            <InputRow
+                className={classnames(
+                    "row-builder__row",
+                    {
+                        "row-builder__row--underlined": hasLineBetween
+                    }
+                )}
+                key={id}
+            >
                 {content}
                 <div onClick={remove(id)}>
                     {
                         hasRemoveLabel && <div className="row-builder__remove__label"> Remove </div>
                     }
-                    { removable &&
-                        <Button
-                            className="row-builder__remove__button"
-                            data-id={`${dataId}-${id}-delete`}
-                            iconName="minus"
-                            inline
-                        />
-                    }
+                    <Button
+                        className={classnames(
+                            "row-builder__remove__button",
+                            {
+                                "row-builder__remove__button--hidden": !removable
+                            }
+                        )}
+                        data-id={`${dataId}-${id}-delete`}
+                        iconName="minus"
+                        inline
+                    />
                 </div>
-            </div>
+            </InputRow>
         );
     };
 
@@ -75,11 +113,14 @@ function RowBuilder({
             <div className="row-builder__rows">
                 {rows.map(renderRow)}
             </div>
-            <Link
-                data-id="row-builder-add"
-                onClick={add}
-                title={addLabel}
-            />
+            {renderAddButton
+                ? isFunction(renderAddButton) ? renderAddButton({ onAdd }) : renderAddButton
+                : (<Link
+                    data-id="row-builder-add"
+                    onClick={add}
+                    title={addLabel}
+                />)
+            }
         </div>
     );
 }
@@ -87,10 +128,12 @@ function RowBuilder({
 RowBuilder.defaultProps = {
     addLabel: "+ Add",
     "data-id": "row-builder",
+    hasLineBetween: true,
     rows: []
 };
 
 RowBuilder.propTypes = {
+    addButton: propTypes.node,
     addLabel: propTypes.node,
     className: propTypes.string,
     "data-id": propTypes.string,
@@ -107,5 +150,8 @@ RowBuilder.propTypes = {
     ),
     showRemoveLabel: propTypes.bool,
 };
+
+RowBuilder.Row = Row;
+RowBuilder.Separator = Separator;
 
 export default RowBuilder;

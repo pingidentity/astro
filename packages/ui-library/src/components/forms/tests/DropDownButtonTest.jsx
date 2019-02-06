@@ -432,4 +432,27 @@ describe("DropDownButton", function () {
         expect(element).toBeDefined();
     });
 
+    it("renderButton renders correct content and passes toggle function", () => {
+        const renderButton = ({
+            onClick
+        }) => <button data-id="render-button" onClick={onClick} />;
+
+        const component = ReactTestUtils.renderIntoDocument(
+            <DropDownButton
+                label="Add"
+                options={{
+                    one: "one"
+                }}
+                renderButton={renderButton}
+            />
+        );
+
+        const button = TestUtils.findRenderedDOMNodeWithDataId(component, "render-button");
+        expect(button).toBeTruthy();
+
+        ReactTestUtils.Simulate.click(button);
+
+        const option = TestUtils.findRenderedDOMNodeWithDataId(component, "one");
+        expect(option).toBeTruthy();
+    });
 });

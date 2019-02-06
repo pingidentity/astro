@@ -1033,11 +1033,11 @@ module.exports = [
                 icon: "details"
             },
             {
-                label: "SSO Attributes",
-                demo: require("../components/templates/SSOAttributesDemo"),
-                pathToDoc: "components/templates/SSOAttributes.jsx",
-                pathToSource: "templates_SSOAttributes.jsx.html",
-                pathToDemoSource: "demo_components_templates_SSOAttributesDemo.jsx.html",
+                label: "Attribute Mappings",
+                demo: require("../components/templates/AttributeMappingsDemo"),
+                pathToDoc: "components/templates/AttributeMappings.jsx",
+                pathToSource: "templates_AttributeMappings.jsx.html",
+                pathToDemoSource: "demo_components_templates_AttributeMappingsDemo.jsx.html",
                 fullscreen: true,
                 icon: "details"
             },

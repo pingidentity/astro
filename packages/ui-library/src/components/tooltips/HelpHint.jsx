@@ -71,6 +71,7 @@ class HelpHint extends React.Component {
         delayHide: PropTypes.number,
         delayShow: PropTypes.number,
         iconName: PropTypes.string,
+        leftMargin: PropTypes.bool,
         placement: PropTypes.oneOf([
             Placements.TOP,
             Placements.BOTTOM,
@@ -87,6 +88,7 @@ class HelpHint extends React.Component {
         delayHide: 400,
         delayShow: 0,
         className: "",
+        leftMargin: false,
     };
 
     _handleClick = (e) => {
@@ -162,7 +164,8 @@ class HelpHint extends React.Component {
     render() {
         const {
             "data-id": dataId,
-            children
+            children,
+            leftMargin
         } = this.props;
 
         const iconName = this.getIconName(),
@@ -171,7 +174,13 @@ class HelpHint extends React.Component {
                 ? children
                 : <span className={iconName} data-id={dataId + "-icon"} />;
 
-        const containerClassNames = classnames("help-tooltip", this._getTypeClass());
+        const containerClassNames = classnames(
+            "help-tooltip",
+            this._getTypeClass(),
+            {
+                "help-tooltip--left-margin": leftMargin
+            }
+        );
 
         return (
             <div className={containerClassNames} data-id={dataId}>

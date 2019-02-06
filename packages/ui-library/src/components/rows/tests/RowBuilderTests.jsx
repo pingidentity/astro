@@ -119,4 +119,50 @@ describe("RowBuilder", () => {
 
         expect(isDOMComponent(deleteButton)).toBeFalsy();
     });
+
+    it("renders custom add button when given node", () => {
+        const component = getComponent({
+            renderAddButton: <div data-id="addButtonTest" />
+        });
+
+        const addButton = TestUtils.findRenderedDOMNodeWithDataId(component, "addButtonTest");
+
+        expect(addButton).toBeTruthy();
+    });
+
+    it("renders custom add button when given function", () => {
+        const component = getComponent({
+            renderAddButton: () => <div data-id="addButtonTest" />
+        });
+
+        const addButton = TestUtils.findRenderedDOMNodeWithDataId(component, "addButtonTest");
+
+        expect(addButton).toBeTruthy();
+    });
+
+    it("renders separator", () => {
+        const separator = renderIntoDocument(
+            <div>
+                <RowBuilder.Separator>
+                    <div data-id="separatorTest" />
+                </RowBuilder.Separator>
+            </div>
+        );
+
+        const testDiv = TestUtils.findRenderedDOMNodeWithDataId(separator, "separatorTest");
+        expect(testDiv).toBeTruthy();
+    });
+
+    it("renders row", () => {
+        const row = renderIntoDocument(
+            <div>
+                <RowBuilder.Row>
+                    <div data-id="rowTest" />
+                </RowBuilder.Row>
+            </div>
+        );
+
+        const testDiv = TestUtils.findRenderedDOMNodeWithDataId(row, "rowTest");
+        expect(testDiv).toBeTruthy();
+    });
 });

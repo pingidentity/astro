@@ -1,11 +1,10 @@
-var PropTypes = require("prop-types");
-var React = require("react"),
-    ReactDOM = require("react-dom"),
-    cx = require("classnames"),
-    callIfOutsideOfContainer = require("../../util/EventUtils.js").callIfOutsideOfContainer,
-    _ = require("underscore"),
-    If = require("../general/If"),
-    Utils = require("../../util/Utils.js");
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import classnames from "classnames";
+import { callIfOutsideOfContainer } from "../../util/EventUtils.js";
+import _ from "underscore";
+import Utils from "../../util/Utils.js";
 
 /**
  * @callback DropDownButton~onValueChange
@@ -39,8 +38,11 @@ var React = require("react"),
  *     Callback to be triggered when open/closed state changed. Used only when stateless=true.
  * @param {boolean} [open=false]
  *     Boolean state of open/closed menu. Used only when stateless=true.
- * @param {string} label
- *     Label text for button
+ * @param {function} [renderButton]
+ *     Function that gets passed the onClick function for the drop down button;
+ *     used to render something other than the default button.
+ * @param {string} [label]
+ *     Label text for button. Not necessary if renderButton is being passed in.
  * @param {string} [title]
  *     Menu title text
  *
@@ -67,17 +69,18 @@ var React = require("react"),
  */
 
 
-class Stateless extends React.Component {
+class Stateless extends Component {
     static displayName = "DropDownButtonStateless";
 
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
+        label: PropTypes.string,
         options: PropTypes.object.isRequired,
         onValueChange: PropTypes.func,
         onToggle: PropTypes.func.isRequired,
         open: PropTypes.bool.isRequired,
-        label: PropTypes.string.isRequired,
+        renderButton: PropTypes.func,
         title: PropTypes.string
     };
 
@@ -162,22 +165,25 @@ class Stateless extends React.Component {
     }
 
     render() {
+        const {
+            label,
+            renderButton,
+            title
+        } = this.props;
+        const classNames = classnames(
+            "input-menu-button",
+            this.props.className
+        );
 
-        var that = this,
-            styles = cx(
-                "input-menu-button",
-                this.props.className
-            ),
-            content = null;
+        let content = null;
 
         if (this.props.open) {
-
-            var optionNodes = _.map(this.props.options, function (value, key) {
+            const optionNodes = _.map(this.props.options, (value, key) => {
 
                 return (
                     <a
                         data-id={key}
-                        onClick={_.partial(that._onValueChanged, key)}
+                        onClick={_.partial(this._onValueChanged, key)}
                         key={key}
                         className="tooltip-menu-option">
                         {value}
@@ -185,12 +191,18 @@ class Stateless extends React.Component {
                 );
             });
 
+            const menuClassNames = classnames(
+                "tooltip-menu-options",
+                {
+                    "tooltip-menu-options--no-title": !title
+                }
+            );
+
             content = (
                 <div className="tooltip-menu" ref="menu" data-id="menu">
-                    <If test={this.props.title}>
-                        <div className="tooltip-menu-options-title" data-id="options-title">{this.props.title}</div>
-                    </If>
-                    <div className="tooltip-menu-options" data-id="options">
+                    {title &&
+                        <div className="tooltip-menu-options-title" data-id="options-title">{title}</div>}
+                    <div className={menuClassNames} data-id="options">
                         {optionNodes}
                     </div>
                 </div>
@@ -198,17 +210,22 @@ class Stateless extends React.Component {
         }
 
         return (
-            <div className={styles} data-id={this.props["data-id"]}>
-                <a data-id="action" className="add button inline" onClick={this._toggle}>
-                    {this.props.label}
-                </a>
+            <div className={classNames} data-id={this.props["data-id"]}>
+                {renderButton
+                    ? renderButton({
+                        onClick: this._toggle,
+                        label
+                    })
+                    : <a data-id="action" className="add button inline" onClick={this._toggle}>
+                        {label}
+                    </a>}
                 {content}
             </div>
         );
     }
 }
 
-class Stateful extends React.Component {
+class Stateful extends Component {
     static displayName = "DropDownButtonStateful";
 
     static defaultProps = {
@@ -219,11 +236,10 @@ class Stateful extends React.Component {
         open: false
     };
 
-    _toggle = () => {
-        this.setState({
-            open: !this.state.open
-        });
-    };
+    _toggle = () =>
+        this.setState(({ open }) => ({
+            open: !open
+        }));
 
     _select = (value) => {
         this.setState({
@@ -234,7 +250,7 @@ class Stateful extends React.Component {
     };
 
     render() {
-        var props = _.defaults({
+        const props = _.defaults({
             onToggle: this._toggle,
             onValueChange: this._select,
             open: this.state.open
@@ -243,7 +259,7 @@ class Stateful extends React.Component {
     }
 }
 
-module.exports = class extends React.Component {
+module.exports = class DropDownButton extends Component {
     static displayName = "DropDownButton";
 
     static propTypes = {
@@ -254,6 +270,7 @@ module.exports = class extends React.Component {
         onValueChange: PropTypes.func,
         onToggle: PropTypes.func,
         open: PropTypes.bool,
+        renderButton: PropTypes.func,
         label: PropTypes.string,
         title: PropTypes.string
     };
