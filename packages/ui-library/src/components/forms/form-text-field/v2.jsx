@@ -13,6 +13,7 @@ import Translator from "../../../util/i18n/Translator.js";
 import _ from "underscore";
 import Utils from "../../../util/Utils.js";
 
+import { inStateContainer, toggleTransform } from "../../utils/StateContainer";
 
 /**
 /**
@@ -178,30 +179,6 @@ import Utils from "../../../util/Utils.js";
 *         onValueChange={myFunction}
 *     />
 */
-
-export default class extends React.Component {
-    static messageTypes = FormMessage.messageTypes;
-
-    static propTypes = {
-        stateless: PropTypes.bool
-    };
-
-    static defaultProps = {
-        stateless: true
-    };
-
-    componentWillMount() {
-        if (!Utils.isProduction() && this.props.controlled !== undefined) {
-            throw new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
-        }
-    }
-
-    render() {
-        return (this.props.stateless
-            ? React.createElement(Stateless, _.defaults({ ref: "stateless" }, this.props)) //eslint-disable-line no-use-before-define
-            : React.createElement(Stateful, _.defaults({ ref: "stateful" }, this.props))); //eslint-disable-line no-use-before-define
-    }
-}
 
 class Stateless extends React.Component {
     static displayName = "FormTextFieldStateless";
@@ -620,3 +597,54 @@ class Stateful extends React.Component {
         return React.createElement(Stateless, props);
     }
 }
+
+const PStatefulFormTextField = inStateContainer([
+    {
+        name: "reveal",
+        initial: false,
+        callbacks: [{
+            name: "onToggleReveal",
+            transform: toggleTransform,
+        }],
+    },
+    {
+        name: "value",
+        initial: "",
+        setter: "onValueChange",
+    },
+])(Stateless);
+
+class FormTextField extends React.Component {
+    static messageTypes = FormMessage.messageTypes;
+
+    static propTypes = {
+        stateless: PropTypes.bool,
+        flags: PropTypes.arrayOf(PropTypes.oneOf([ "p-stateful" ])),
+    };
+
+    static defaultProps = {
+        stateless: true,
+        flags: [],
+    };
+
+    componentWillMount() {
+        if (!Utils.isProduction() && this.props.controlled !== undefined) {
+            throw new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
+        }
+    }
+
+    _usePStateful = () => this.props.flags.findIndex(item => item === "p-stateful") >= 0;
+
+    render() {
+        if (this._usePStateful()) {
+            return <PStatefulFormTextField {...this.props} />;
+        }
+
+        return (this.props.stateless
+            ? React.createElement(Stateless, _.defaults({ ref: "stateless" }, this.props)) //eslint-disable-line no-use-before-define
+            : React.createElement(Stateful, _.defaults({ ref: "stateful" }, this.props))); //eslint-disable-line no-use-before-define
+    }
+}
+
+
+export default FormTextField;
