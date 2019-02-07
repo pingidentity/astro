@@ -9,6 +9,261 @@ var React = require("react"),
     Logo = require("./logos/Logo"),
     getIconClassName = require("../../../util/PropUtils").getIconClassName;
 
+const defaultRender = (props, DefaultComponent) => <DefaultComponent {...props} />;
+
+/**
+ *  @typedef {function} HeaderBar~MenuRenderer
+ *  @desc Function for overriding default rendering
+ *  @param {PopoverMenu} props
+ *      Object of props that can be passed to the component
+ *  @param {object} DefaultComponent
+ *      The component that encompasses the default rendering. Accepts props from the props parameter
+ */
+
+/**
+ * @class HeaderBar~NavItem
+ * @desc Internal component type which will render a product-nav item and optional a corresponding menu
+ *
+ * @param {string} id
+ *          The id of the component.  Determines the icon
+ * @param {string} [data-id="nav-item"]
+ *          To define the base "data-id" value for the top-level HTML container.
+ * @param {string} [title]
+ *          Sets the title attribute of the label (tooltip)
+ * @param {string} [target=_blank]
+ *          This may be "" or "_blank"
+ * @param {string} [url]
+ *          If provided the NavItem will be a clickable link instead of executing a callback
+ * @param {string} [iconClassName]
+ *          The className for the menu icon. Takes priority over the iconSrc prop.
+ * @param {string} [iconSrc]
+ *          Allows the passage of an image url (most likely an svg) for the icon.
+ * @param {boolean} [open=false]
+ *          Menu state while this is defined, if it's not defined, it's managed internally to this component and doesn't
+ *          require the developer to do anything when they use the headerbar.
+ * @param {HeaderBar~MenuRenderer} renderMenu
+ *          Renders the popup menu
+ * @param {array} [flags]
+ *     Set the flag for "use-portal" to render with popper.js and react-portal
+ */
+class NavItem extends React.Component {
+    static propTypes = {
+        id: PropTypes.string.isRequired,
+        "data-id": PropTypes.string,
+        label: PropTypes.string,
+        title: PropTypes.string,
+        target: PropTypes.string,
+        url: PropTypes.string,
+        iconClassName: PropTypes.string,
+        iconSrc: PropTypes.string,
+        onClick: PropTypes.func,
+        open: PropTypes.bool,
+        children: PropTypes.array,
+        onMenuToggle: PropTypes.func,
+        onMenuValueChange: PropTypes.func,
+        renderMenu: PropTypes.func,
+        flags: PropTypes.arrayOf(PropTypes.string),
+    };
+
+    static defaultProps = {
+        target: "_blank",
+        "data-id": "nav-item",
+        onClick: _.noop,
+        onMenuToggle: _.noop,
+        onMenuValueChange: _.noop,
+        renderMenu: defaultRender,
+    };
+
+    /**
+     * @method
+     * @name NavItem#_handleMenuToggle
+     * @private
+     * @desc Toggling this menu
+     */
+    _handleMenuToggle = () => {
+        this.props.onMenuToggle(this.props.id);
+    };
+
+    /**
+     * @method
+     * @name NavItem#_handleMenuClick
+     * @param {string|number} value
+     * @private
+     * @desc Handle clicking on a menu item (or on the main item itself if it's not a menu)
+     */
+    _handleMenuClick = value => {
+        this.props.onMenuValueChange(
+            value,
+            this.props.id
+        );
+    };
+
+    /**
+     * @method
+     * @name NavItem#_getIcon
+     * @param {object} item
+     * @private
+     * @desc Provide the appropriate markup for an icon based on the item's props
+     */
+    _getIcon = item => {
+        if (item.iconSrc) {
+            return <img src={item.iconSrc} className="product-nav__image icon" />;
+        } else {
+            const iconClassName = getIconClassName(item, { useId: true });
+            return (
+                <span
+                    className={classnames(
+                        "product-nav__icon",
+                        "icon",
+                        iconClassName
+                    )}
+                />
+            );
+        }
+    };
+
+    /**
+     * @method
+     * @name NavItem#_getMenuChildren
+     * @private
+     * @desc Get the options for a menu along with a callback
+     */
+    _getMenuChildren = () => this.props.children.map(child => _.defaults(child, {
+        "data-id": child.id,
+        onClick: () => this._handleMenuClick(child.id)
+    }));
+
+    render() {
+        const { renderMenu } = this.props;
+
+        return (
+            <li className="product-nav__item">
+                {this.props.children ? (
+                    renderMenu(
+                        {
+                            "data-id": this.props["data-id"],
+                            label: this._getIcon(this.props),
+                            title: this.props.label,
+                            placement: "left",
+                            items: this._getMenuChildren(),
+                            open: this.props.open,
+                            onOpen: this._handleMenuToggle,
+                            onClose: this._handleMenuToggle,
+                            triggerClassName: "product-nav__menu-trigger",
+                            flags: this.props.flags,
+                        },
+                        PopoverNavMenu
+                    )
+                ) : (
+                    <a
+                        className="product-nav__link"
+                        onClick={this.props.onClick}
+                        href={this.props.url}
+                        data-id={this.props["data-id"]}
+                        title={this.props.title}
+                        target={this.props.target}
+                    >
+                        {this._getIcon(this.props)}
+                    </a>
+                )}
+            </li>
+        );
+    }
+}
+
+/**
+ *  @typedef {function} HeaderBar~ItemRenderer
+ *  @desc Function for overriding default rendering
+ *  @param {HeaderBar~NavItem} props
+ *      Object of props that can be passed to the component
+ *  @param {object} DefaultComponent
+ *      The component that encompasses the default rendering. Accepts props from the props parameter
+ */
+
+/**
+ * @class HeaderBar~ProductNav
+ * @desc Internal component type which will renders a Product Nav based on tree
+ *
+ * @param {string} [data-id="nav-item"]
+ *          To define the base "data-id" value for the top-level HTML container.
+ * @param {array} tree
+ *          The data structure of the menus of the headerbar
+ * @param {HeaderBar~ItemRenderer} renderNavItem
+ *          Function to render a nav item
+ * @param {function} onMenuToggle
+ *          Callback for opening the menu
+ * @param {HeaderBar~onMenuValueChange} [onMenuValueChange]
+ *          Callback which will be executed when a menu item is clicked.  The id
+ *          of the nav item and the id of the menu item will be passed back as parameters 1 and 2.
+ * @param {string} openNode
+ *          Id of the open node
+ * @param {array} [flags]
+ *     Set the flag for "use-portal" to render with popper.js and react-portal
+ * @param {HeaderBar~navigationLink[]} tree
+ *          The data structure of the menus of the headerbar
+ *
+ */
+
+const ProductNav = ({
+    "data-id": dataId,
+    onMenuToggle,
+    onMenuValueChange,
+    openNode,
+    renderNavItem,
+    flags,
+    tree,
+}) => {
+    const getNavItem = item => {
+        const props = _.defaults(
+            {
+                key: item.id,
+                id: item.id,
+                "data-id": item.id,
+                onMenuToggle,
+                onMenuValueChange,
+                flags,
+            },
+            item,
+        );
+        if (openNode !== undefined) {
+            props.open = item.id === openNode;
+        }
+
+        return renderNavItem(props, NavItem);
+    };
+
+    return (
+        <ul
+            className="product-nav"
+            data-id={dataId}
+        >
+            {_.map(tree, getNavItem)}
+        </ul>
+    );
+};
+
+ProductNav.propTypes = {
+    "data-id": PropTypes.string,
+    onMenuToggle: PropTypes.func.isRequired,
+    onMenuValueChange: PropTypes.func.isRequired,
+    renderNavItem: PropTypes.func,
+    tree: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+ProductNav.defaultProps = {
+    renderNavItem: defaultRender,
+};
+
+
+/**
+ *  @typedef {function} HeaderBar~ProductNavRenderer
+ *  @desc Function for overriding default rendering
+ *  @param {HeaderBar~ProductNav} props
+ *      Object of props that can be passed to the component
+ *  @param {object} DefaultComponent
+ *      The component that encompasses the default rendering. Accepts props from the props parameter
+ */
+
 /**
  * @typedef HeaderBar~navigationLink
  * @desc Look at HeaderBar#NavItem to understand what can be passed.
@@ -83,6 +338,8 @@ var React = require("react"),
  *          Flag to explicitly indicate you're using the new style of the header bar. (Without the Ping logo)
  * @param {array} [flags]
  *     Set the flag for "use-portal" to render with popper.js and react-portal
+ * @param {HeaderBar~ProductNavRenderer} renderProductNav
+ *     Function that renders the product nav. Accepts props as the first argument and the default component as the second.
  *
  **/
 
@@ -162,6 +419,7 @@ class HeaderBar extends React.Component {
         userName: PropTypes.string,
         updated: PropTypes.bool,
         flags: PropTypes.arrayOf(PropTypes.string),
+        renderProductNav: PropTypes.func,
     };
 
     static defaultProps = {
@@ -172,43 +430,9 @@ class HeaderBar extends React.Component {
         onMenuValueChange: _.noop,
         onMarketChange: _.noop,
         "data-id": "header",
-        updated: false
+        updated: false,
+        renderProductNav: defaultRender,
     };
-
-    /**
-     * @method
-     * @name HeaderBar#_getNavItem
-     * @param {object} item
-     * @private
-     * @desc Creates the NavItem component based on the item object
-     */
-    _getNavItem = item => {
-        var props = _.defaults(
-            {
-                key: item.id,
-                id: item.id,
-                "data-id": item.id,
-                onMenuToggle: this
-                    ._handleMenuToggle,
-                onMenuValueChange: this.props
-                    .onMenuValueChange,
-                flags: this.props.flags
-            },
-            item,
-        );
-        if (this.props.openNode !== undefined) {
-            props.open =
-                item.id === this.props.openNode
-                    ? true
-                    : false;
-        }
-
-        return (
-            <NavItem {...props}>
-                {item.children}
-            </NavItem>
-        ); //eslint-disable-line no-use-before-define
-    }
 
     /**
      * @method
@@ -246,7 +470,7 @@ class HeaderBar extends React.Component {
             ];
         }
 
-        const { flags } = this.props;
+        const { flags, renderProductNav, openNode } = this.props;
 
         return (
             <div
@@ -326,12 +550,14 @@ class HeaderBar extends React.Component {
                     )}
 
                     {
-                        <ul
-                            className="product-nav"
-                            data-id={this.props["data-id"] + "-product-nav"}
-                        >
-                            {_.map(tree, this._getNavItem)}
-                        </ul>
+                        tree && renderProductNav({
+                            "data-id": `${this.props["data-id"]}-product-nav`,
+                            flags,
+                            onMenuToggle: this._handleMenuToggle,
+                            onMenuValueChange: this.props.onMenuValueChange,
+                            openNode,
+                            tree,
+                        }, ProductNav)
                     }
                 </div>
             </div>
@@ -339,146 +565,5 @@ class HeaderBar extends React.Component {
     }
 }
 
-/**
- * @class NavItem
- * @desc Internal component type which will render a product-nav item and optional a corresponding menu
- * @private
- * @memberOf HeaderBar
- *
- * @param {string} id
- *          The id of the component.  Determines the icon
- * @param {string} [data-id="nav-item"]
- *          To define the base "data-id" value for the top-level HTML container.
- * @param {string} [title]
- *          Sets the title attribute of the label (tooltip)
- * @param {string} [target=_blank]
- *          This may be "" or "_blank"
- * @param {string} [url]
- *          If provided the NavItem will be a clickable link instead of executing a callback
- * @param {string} [iconClassName]
- *          The className for the menu icon. Takes priority over the iconSrc prop.
- * @param {string} [iconSrc]
- *          Allows the passage of an image url (most likely an svg) for the icon.
- * @param {boolean} [open=false]
- *          Menu state while this is defined, if it's not defined, it's managed internally to this component and doesn't
- *          require the developer to do anything when they use the headerbar.
- */
-class NavItem extends React.Component {
-    static propTypes = {
-        id: PropTypes.string.isRequired,
-        "data-id": PropTypes.string,
-        label: PropTypes.string,
-        title: PropTypes.string,
-        target: PropTypes.string,
-        url: PropTypes.string,
-        iconClassName: PropTypes.string,
-        iconSrc: PropTypes.string,
-        onClick: PropTypes.func,
-        open: PropTypes.bool,
-        children: PropTypes.array,
-        onMenuToggle: PropTypes.func,
-        onMenuValueChange: PropTypes.func,
-        flags: PropTypes.arrayOf(PropTypes.string),
-    };
-
-    static defaultProps = {
-        target: "_blank",
-        "data-id": "nav-item",
-        onClick: _.noop,
-        onMenuToggle: _.noop,
-        onMenuValueChange: _.noop
-    };
-
-    /**
-     * @method
-     * @name NavItem#_handleMenuToggle
-     * @private
-     * @desc Toggling this menu
-     */
-    _handleMenuToggle = () => {
-        this.props.onMenuToggle(this.props.id);
-    };
-
-    /**
-     * @method
-     * @name NavItem#_handleMenuClick
-     * @param {string|number} value
-     * @private
-     * @desc Handle clicking on a menu item (or on the main item itself if it's not a menu)
-     */
-    _handleMenuClick = value => {
-        this.props.onMenuValueChange(
-            value,
-            this.props.id
-        );
-    };
-
-    /**
-     * @method
-     * @name NavItem#_getIcon
-     * @param {object} item
-     * @private
-     * @desc Provide the appropriate markup for an icon based on the item's props
-     */
-    _getIcon = item => {
-        if (item.iconSrc) {
-            return <img src={item.iconSrc} className="product-nav__image icon" />;
-        } else {
-            const iconClassName = getIconClassName(item, { useId: true });
-            return (
-                <span
-                    className={classnames(
-                        "product-nav__icon",
-                        "icon",
-                        iconClassName
-                    )}
-                />
-            );
-        }
-    };
-
-    /**
-     * @method
-     * @name NavItem#_getMenuChildren
-     * @private
-     * @desc Get the options for a menu along with a callback
-     */
-    _getMenuChildren = () => this.props.children.map(child => _.defaults(child, {
-        "data-id": child.id,
-        onClick: () => this._handleMenuClick(child.id)
-    }));
-
-    render() {
-        return (
-            <li className="product-nav__item">
-                {this.props.children ? (
-                    <PopoverNavMenu
-                        data-id={this.props["data-id"]}
-                        label={this._getIcon(this.props)}
-                        title={this.props.label}
-                        placement="left"
-                        items={this._getMenuChildren()}
-                        open={this.props.open}
-                        onOpen={this._handleMenuToggle}
-                        onClose={this._handleMenuToggle}
-                        triggerClassName="product-nav__menu-trigger"
-                        flags={this.props.flags}
-                    />
-                ) : (
-                    <a
-                        className="product-nav__link"
-                        onClick={this.props.onClick}
-                        href={this.props.url}
-                        data-id={this.props["data-id"]}
-                        title={this.props.title}
-                        target={this.props.target}
-                    >
-                        {this._getIcon(this.props)}
-                    </a>
-                )}
-            </li>
-        );
-    }
-}
 
 module.exports = HeaderBar;

@@ -1,5 +1,6 @@
-var React = require("react");
-var HeaderBar = require("../../../components/panels/header-bar");
+import React from "react";
+import HeaderBar from "../../../components/panels/header-bar";
+import DetailsTooltip from "ui-library/lib/components/tooltips/DetailsTooltip";
 
 const environments = [
     {
@@ -57,6 +58,26 @@ const userMenuItems = [
         icon: "close"
     }
 ];
+
+const customMenuPopup = ({ triggerClassName, ...props }) => (
+    <DetailsTooltip
+        {...props}
+        title="Custom Popover"
+        stateless={false}
+        positionClassName="bottom left"
+        labelClassName={triggerClassName}
+    >
+        Hello
+    </DetailsTooltip>
+);
+
+const customRenderNavItem = (props, DefaultItem) => (
+    <DefaultItem {...props} renderMenu={customMenuPopup} />
+);
+
+const customRenderProductNav = (props, DefaultNav) => (
+    <DefaultNav {...props} renderNavItem={customRenderNavItem} />
+);
 
 /**
 * @name HeaderBarDemo
@@ -200,7 +221,20 @@ class HeaderBarDemo extends React.Component {
                     siteLogo="pingone"
                     flags={flags}
 
-                    additionalContent="Additional Content" />
+                    tree={[{
+                        id: "account",
+                        label: "John Doe",
+                        children: [{
+                            id: "globe",
+                            iconClassName: "icon-globe",
+                            title: "Internet",
+                            label: "Internet" }
+                        ]
+                    }]}
+
+                    additionalContent="Additional Content"
+                    renderProductNav={customRenderProductNav}
+                />
             </div>
         );
     }
