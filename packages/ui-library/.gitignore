@@ -1,34 +1,39 @@
+# ???
 .*.swp
-node/
-node_modules/
 reports/
 mvn/
 build*
 dist
 lib
 temp
-**/coverage
-**/coverage-reference
-npm-debug.log
 **/examples/node_modules
 **/examples/basic-app/src/ui-lib-assets
-package-lock.json
-yarn.lock
-yarn-error.log
-.vscode/*
 rust_mozprofile*
 logs
+
+# Node / NPM / Yarn
+node/
+node_modules/
+yarn.lock
+yarn-error.log
+package-lock.json
+npm-debug.log
+
+# Istanbul
+**/coverage
+**/coverage-reference
 
 # IDEA
 *.iml
 .idea/
 
-.DS_Store
-**/.DS_Store
-
 # Eclipse
 .project
 .settings
+
+# VS Code
+*.code-workspace
+.vscode/*
 
 selenium-standalone.log*
 http-server.log
@@ -36,4 +41,6 @@ http-server.log
 # Programatically generated internal files
 src/demo/core/templates.json
 
-*.code-workspace
+# Mac
+.DS_Store
+**/.DS_Store

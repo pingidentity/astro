@@ -1,12 +1,74 @@
 "use strict";
 
-var gulp = require("gulp");
-var babel = require("gulp-babel");
-//var flatten = require("gulp-flatten");
-var debug = require("gulp-debug");
-//var rp = require("gulp-revert-path");
-var runSequence = require("run-sequence");
-var sass = require("gulp-sass");
+const gulp = require("gulp");
+const babel = require("gulp-babel");
+const debug = require("gulp-debug");
+const rename = require("gulp-rename");
+const fs = require("fs");
+const path = require("path");
+const runSequence = require("run-sequence");
+const sass = require("gulp-sass");
+const tap = require("gulp-tap");
+const _ = require("underscore");
+
+// Flat file generation data & vars
+const demoComponentSrcPaths = fs.readFileSync("./src/demo/core/demos.js")
+    .toString()
+    .match(/((pathToDoc).*?(jsx\"))|((pathToDoc).*?(js\"))/g)
+    .filter(value => {
+        return !value.includes("templates");
+    })
+    .map(value => {
+        const start = value.includes("net/") ? value.indexOf("net") : value.indexOf("components");
+        const end = value.lastIndexOf(`"`);
+        return `src/${value.substring(start, end)}`;
+    })
+;
+const renameFiles = [
+    { name: "charting/Cards/DashboardCard.jsx", rename: "Card.jsx" },
+    { name: "charting/Cards/index.js", rename: "Cards.jsx" },
+    { name: "charting/StatCardRow.jsx", rename: "CardRow.jsx" },
+    { name: "expandable-row/Accessories.jsx", rename: "ExpandableRowAccessories.jsx" },
+    { name: "grid/cells/ButtonCell", rename: "GridButtonCell.jsx" },
+    { name: "grid/cells/CheckboxCell", rename: "GridCheckboxCell.jsx" },
+    { name: "grid/cells/TextFieldCell", rename: "GridTextFieldCell.jsx" },
+    { name: "wizard-v2/Wizard.jsx", rename: "WizardV2.jsx" },
+];
+const demolessSrcPaths = [
+    "src/components/forms/FormLabel.jsx",
+    "src/components/forms/InputWidths.js",
+    "src/components/forms/SelectionFilterLabel.jsx",
+    "src/components/general/charting/Cards/DashboardCard.jsx",
+    "src/components/general/charting/Cards/index.js",
+    "src/components/general/charting/StatCardRow.jsx",
+    "src/components/grid/cells/ButtonCell.jsx",
+    "src/components/grid/cells/CheckboxCell.jsx",
+    "src/components/grid/cells/TextFieldCell.jsx",
+    "src/components/rows/DragDropRow.jsx",
+    "src/components/rows/expandable-row/Accessories.jsx",
+    "src/components/tooltips/CancelTooltip.jsx",
+    "src/constants/CacheConstants.js",
+    "src/constants/ChartingConstants.js",
+    "src/constants/DashboardConstants.js",
+    "src/constants/FormFieldConstants.js",
+    "src/util/ChartingUtils.js",
+    "src/util/FilterUtils.js",
+    "src/util/Utils.js",
+];
+const allFlatfileSrcPaths = demoComponentSrcPaths.concat(demolessSrcPaths);
+const componentFlatfileNames = allFlatfileSrcPaths.map(componentPath => {
+
+    const renameFile = _.find(renameFiles, file => componentPath.includes(file.name) );
+    const filePath = renameFile ? renameFile.rename : componentPath;
+
+    return path
+        .basename(filePath)
+        .replace(".jsx", "")
+        .replace(".js", "")
+    ;
+});
+let componentIndex = 0;
+
 
 gulp.task("transpile-lib", () =>
     gulp.src([
@@ -19,6 +81,29 @@ gulp.task("transpile-lib", () =>
     ])
         .pipe(babel())
         .pipe(debug({ title: "transpiling:" }))
+        .pipe(gulp.dest("lib"))
+);
+
+gulp.task("create-flatfiles", () =>
+    gulp
+        .src(allFlatfileSrcPaths)
+        .pipe(debug({ title: `flat-file` }))
+        .pipe(tap(file => {
+            const componentPath = file
+                .path
+                .replace(file.cwd, "")
+                .replace("src/", "")
+                .replace(".jsx", "")
+                .replace(".js", "")
+            ;
+            /* jshint ignore:start */
+            file.contents = new Buffer(`module.exports = require(".${componentPath}");`);
+            /* jshint ignore:end */
+        }))
+        .pipe(rename(file => {
+            file.basename = componentFlatfileNames[componentIndex];
+            componentIndex += 1;
+        }))
         .pipe(gulp.dest("lib"))
 );
 
@@ -51,6 +136,7 @@ gulp.task("build-css", () =>
 gulp.task("package-lib", () => {
     runSequence(
         ["transpile-lib"],
+        ["create-flatfiles"],
         ["move-files"],
         ["build-css"]
     );

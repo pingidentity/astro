@@ -290,7 +290,7 @@ module.exports = [
                     {
                         label: "Column Selector",
                         demo: require("../components/list/ColumnSelectorDemo"),
-                        pathToDoc: "components/list/ColumnSelector.jsx",
+                        pathToDoc: "components/list/ColumnSelector/ColumnSelector.jsx",
                         pathToSource: "components_list_ColumnSelector.jsx.html",
                         pathToDemoSource: "demo_components_list_ColumnSelectorDemo.jsx.html"
                     },
@@ -312,7 +312,7 @@ module.exports = [
                     {
                         label: "Multi Column Drag Drop",
                         demo: require("../components/panels/MultiDragDemo"),
-                        pathToDoc: "components/panels/MultiDrag.jsx",
+                        pathToDoc: "components/panels/multi-drag/MultiDrag.jsx",
                         pathToSource: "components_panels_multi-drag_MultiDrag.jsx.html",
                         pathToDemoSource: "demo_components_panels_MultiDragDemo.jsx.html",
                         keywords: ["MultiDrag"]
@@ -607,7 +607,7 @@ module.exports = [
                     {
                         label: "Wizard - v2",
                         demo: require("../components/wizard-v2/WizardDemo"),
-                        pathToDoc: "components/wizard-v2/Wizard_v2.jsx",
+                        pathToDoc: "components/wizard-v2/Wizard.jsx",
                         pathToSource: "components_wizard-v2_Wizard.jsx.html",
                         pathToDemoSource: "demo_components_wizard-v2_WizardDemo.jsx.html"
                     },
@@ -787,14 +787,14 @@ module.exports = [
                     {
                         label: "Header Bar",
                         demo: require("../components/panels/HeaderBarDemo"),
-                        pathToDoc: "components/panels/HeaderBar.jsx",
+                        pathToDoc: "components/panels/header-bar/HeaderBar.jsx",
                         pathToSource: "components_panels_header-bar_HeaderBar.jsx.html",
                         pathToDemoSource: "demo_components_panels_HeaderBarDemo.jsx.html"
                     },
                     {
                         label: "Left Side Nav Bar",
                         demo: require("../components/panels/LeftNavBarDemo"),
-                        pathToDoc: "components/panels/LeftNavBar.jsx",
+                        pathToDoc: "components/panels/left-nav/LeftNavBar.jsx",
                         pathToSource: "components_panels_left-nav_LeftNavBar.jsx.html",
                         pathToDemoSource: "demo_components_panels_LeftNavBarDemo.jsx.html",
                         keywords: ["LeftNavBar"]
