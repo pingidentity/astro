@@ -26,6 +26,11 @@
         padding: 12px;
         width: 100%;
         height: 200px;
+        border: 1px solid $color-input-fill;
+
+        &--error {
+            border: 1px solid $color-critical-red;
+        }
 
         @include box-sizing(border-box);
 

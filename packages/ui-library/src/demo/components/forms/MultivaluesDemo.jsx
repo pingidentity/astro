@@ -52,6 +52,10 @@ class MultivaluesDemo extends React.Component {
         });
     };
 
+    _handleIconChange = iconEntries => this.setState({
+        iconEntries
+    })
+
     _handleUrlChange = (entries) => {
         this.setState({
             urlEntries: entries
@@ -110,7 +114,7 @@ class MultivaluesDemo extends React.Component {
                         labelText="Default multi-values input with icons"
                         stateless={false}
                         entries={this.state.iconEntries}
-                        onValueChange={this._handleValueChange}
+                        onValueChange={this._handleIconChange}
                     />
                 </InputRow>
 

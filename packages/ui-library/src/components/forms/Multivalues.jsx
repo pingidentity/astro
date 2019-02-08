@@ -21,7 +21,6 @@ import Icon from "../general/Icon";
  **/
 class MultivaluesOption extends Component {
     static propTypes = {
-        errorMessage: PropTypes.string,
         label: PropTypes.string.isRequired,
         onChange: PropTypes.func.isRequired,
     };
@@ -282,6 +281,13 @@ class Multivalues extends Component {
             stacked: this.props.stacked
         });
 
+        const entryClassNames = classnames(
+            "entries",
+            {
+                "entries--error": errorMessage
+            }
+        );
+
         //this style is for the hidden div that allows us to get an accurate
         //size for our dynamic input
         const hiddenStyle = {
@@ -325,7 +331,7 @@ class Multivalues extends Component {
                 className={className}
                 data-id={this.props["data-id"]}
             >
-                <div className="entries" data-id="entries">
+                <div className={entryClassNames} data-id="entries">
                     {entryNodes}
                     <div className="value-input">
                         <input
