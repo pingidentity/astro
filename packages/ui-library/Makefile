@@ -25,6 +25,12 @@ SC_FILENAME=sc-4.4.1-linux.tar.gz
 CREATING_TUNNEL_TIMEOUT=60
 CREATING_TUNNEL_ATTEMPT=0
 
+CURRENT_DIR := $(shell pwd)
+
+M2_HOME := $(CURRENT_DIR)/mvn
+SHELL := /bin/bash
+PATH := $(PATH):$(M2_HOME)/bin
+
 # The Git branch is to be passed as argument on the command line
 # (eg. make GIT_BRANCH=master verify)
 # GIT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
