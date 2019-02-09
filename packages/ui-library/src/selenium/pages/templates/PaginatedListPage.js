@@ -85,7 +85,7 @@ var PaginatedListDemoPage = Object.create(HomePage, {
     openPaginatedListDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Templates", "ListView", "PaginatedList");
+            this.navigateToPath("Templates", "ListTemplatePaginated");
         }
     }
 });

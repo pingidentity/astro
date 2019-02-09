@@ -948,92 +948,84 @@ module.exports = [
         label: "Templates",
         children: [
             {
-                label: "Edit Page",
+                label: "Edit Template",
                 demo: require("../components/templates/EditPageDemo"),
                 pathToSource: "templates_edit-view-sectioned_EditPage.jsx.html",
                 fullscreen: true,
-                icon: "edit"
+                icon: "circle-o",
             },
             {
-                label: "List View",
-                icon: "directory-hollow",
+                label: "List Template - Infinite Scroll",
+                demo: require("../components/templates/ListViewDemo"),
+                pathToSource: "templates_list-view_ListView.jsx.html",
+                fullscreen: true,
+                icon: "circle-o",
+            },
+            {
+                label: "List Template - Paginated",
+                demo: require("../components/templates/PaginatedListDemo"),
+                pathToSource: "templates_paginated-list_PaginatedList.jsx.html",
+                fullscreen: true,
+                icon: "circle-o",
+            },
+            {
+                label: "Property Specific",
+                icon: "globe",
                 children: [
+
                     {
-                        label: "List View - Infinite Scroll",
-                        demo: require("../components/templates/ListViewDemo"),
-                        pathToSource: "templates_list-view_ListView.jsx.html",
-                        fullscreen: true
-                    },
-                    {
-                        label: "List View - Ordering",
-                        demo: require("../components/templates/ListViewOrderingDemo"),
-                        pathToSource: "templates_list-view-paginated_ListViewOrdering.jsx.html",
-                        fullscreen: true
-                    },
-                    {
-                        label: "Paginated List",
-                        demo: require("../components/templates/PaginatedListDemo"),
-                        pathToSource: "temppaginated-list_PaginatedList.jsx.html",
+                        label: "Authentication Policy",
+                        demo: require("../components/templates/AuthnPolicyDemo"),
+                        pathToSource: "templates_authn-policy_AuthnPolicy.jsx.html",
                         fullscreen: true,
-                        icon: "directory-hollow",
+                        icon: "details"
                     },
+
+                    // TEMPORARILY DISABLED UNTIL MARKUP CAN BE REPLACED WITH COMPONTENTS
+                    // {
+                    //     label: "User MFA",
+                    //     demo: require("../components/templates/UserMFADemo"),
+                    //     pathToSource: "templates_user-mfa_UserMFA.jsx.html",
+                    //     fullscreen: true,
+                    //     icon: "details"
+                    // },
+                    // {
+                    //     label: "User Edit",
+                    //     demo: require("../components/templates/UserEditDemo"),
+                    //     pathToSource: "templates_user-mfa_UserEdit.jsx.html",
+                    //     fullscreen: true,
+                    //     icon: "details"
+                    // },
+
+                    {
+                        label: "Home App",
+                        demo: require("../components/templates/HomeAppDemo"),
+                        pathToSource: "templates_HomeApp.jsx.html",
+                        fullscreen: true,
+                        icon: "details"
+                    },
+                    {
+                        label: "Attribute Mappings",
+                        demo: require("../components/templates/AttributeMappingsDemo"),
+                        pathToSource: "templates_AttributeMappings.jsx.html",
+                        fullscreen: true,
+                        icon: "details"
+                    },
+                    {
+                        label: "Dashboard Layout",
+                        demo: require("../components/templates/DashboardDemo"),
+                        pathToSource: "templates_Dashboard.jsx.html",
+                        fullscreen: true,
+                        icon: "details"
+                    },
+                    {
+                        label: "Notifications",
+                        demo: require("../components/templates/NotificationsDemo"),
+                        pathToSource: "templates_Notifications.jsx.html",
+                        fullscreen: true,
+                        icon: "details"
+                    }
                 ]
-            },
-            {
-                label: "Authentication Policy",
-                demo: require("../components/templates/AuthnPolicyDemo"),
-                pathToSource: "templates_authn-policy_AuthnPolicy.jsx.html",
-                fullscreen: true,
-                icon: "details"
-            },
-            {
-                label: "Wizard View",
-                demo: require("../components/templates/WizardViewDemo"),
-                pathToSource: "templates_wizard-view_WizardView.jsx.html",
-                fullscreen: true,
-                icon: "details"
-            },
-            {
-                label: "User MFA",
-                demo: require("../components/templates/UserMFADemo"),
-                pathToSource: "templates_user-mfa_UserMFA.jsx.html",
-                fullscreen: true,
-                icon: "details"
-            },
-            {
-                label: "User Edit",
-                demo: require("../components/templates/UserEditDemo"),
-                pathToSource: "templates_user-mfa_UserEdit.jsx.html",
-                fullscreen: true,
-                icon: "details"
-            },
-            {
-                label: "Home App",
-                demo: require("../components/templates/HomeAppDemo"),
-                pathToSource: "templates_HomeApp.jsx.html",
-                fullscreen: true,
-                icon: "details"
-            },
-            {
-                label: "Attribute Mappings",
-                demo: require("../components/templates/AttributeMappingsDemo"),
-                pathToSource: "templates_AttributeMappings.jsx.html",
-                fullscreen: true,
-                icon: "details"
-            },
-            {
-                label: "Dashboard Layout",
-                demo: require("../components/templates/DashboardDemo"),
-                pathToSource: "templates_Dashboard.jsx.html",
-                fullscreen: true,
-                icon: "details"
-            },
-            {
-                label: "Notifications",
-                demo: require("../components/templates/NotificationsDemo"),
-                pathToSource: "templates_Notifications.jsx.html",
-                fullscreen: true,
-                icon: "details"
             }
         ]
     }

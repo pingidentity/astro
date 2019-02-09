@@ -176,7 +176,7 @@ var EditPageDemoPage = Object.create(HomePage, {
     EditPageDemoPage: {
         value: function () {
             this.openHomePage();
-            this.navigateToPath("Templates", "EditPage", "EditPage");
+            this.navigateToPath("Templates", "EditTemplate");
         }
     }
 });

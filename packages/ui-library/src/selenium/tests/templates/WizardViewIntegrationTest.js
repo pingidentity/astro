@@ -19,7 +19,7 @@ describe("Wizard View Integration", function () {
      * AND: Goes through all steps of wizard Two Column Step
      * THEN: All steps should be processed normally
      */
-    it("should go through all steps of wizard Two Column Step", WizardViewPage.retriable(function () {
+    xit("should go through all steps of wizard Two Column Step", WizardViewPage.retriable(function () {
         WizardViewPage.openWizardViewDemoPage();
 
         //clicks on button Show wizard
@@ -69,7 +69,7 @@ describe("Wizard View Integration", function () {
      * AND: Goes through all steps of wizard Two Column Step
      * THEN: All steps should be processed normally
      */
-    it("should go through all steps of wizard Form Template", WizardViewPage.retriable(function () {
+    xit("should go through all steps of wizard Form Template", WizardViewPage.retriable(function () {
         WizardViewPage.openWizardViewDemoPage();
 
         //clicks on button Show wizard
