@@ -143,6 +143,7 @@ var INHERIT_PROPS = [
  *
  */
 class Wizard extends React.Component {
+
     static displayName = "Wizard";
 
 
@@ -177,6 +178,18 @@ class Wizard extends React.Component {
         onValueChange: _.noop,
     };
 
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction()) {
+            if (props.id) {
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
+            }
+            if (props.onChange) {
+                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
+            }
+        }
+    }
+
     _filter = (children) => {
         var result = [];
 
@@ -193,17 +206,6 @@ class Wizard extends React.Component {
     componentDidMount() {
         if (this.props.number === 1) {
             this.props.onValueChange({ choice: 0, numSteps: this._filter(this.props.children).length });
-        }
-    }
-
-    componentWillMount() {
-        if (!Utils.isProduction()) {
-            if (this.props.id) {
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            if (this.props.onChange) {
-                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
-            }
         }
     }
 

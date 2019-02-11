@@ -61,6 +61,7 @@ var React = require("react"),
  **/
 
 class Section extends React.Component {
+
     static propTypes = {
         stateless: PropTypes.bool
     };
@@ -69,12 +70,13 @@ class Section extends React.Component {
         stateless: true
     };
 
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         if (!Utils.isProduction()) {
-            if (this.props.id) {
+            if (props.id) {
                 throw new Error(Utils.deprecatePropError("id", "data-id"));
             }
-            if (this.props.controlled !== undefined) {
+            if (props.controlled !== undefined) {
                 throw new Error(Utils.deprecatePropError("controlled", "stateless", "true", "false"));
             }
         }

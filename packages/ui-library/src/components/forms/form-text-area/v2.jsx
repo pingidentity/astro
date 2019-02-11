@@ -115,6 +115,7 @@ import _ from "underscore";
 */
 
 module.exports = class extends React.Component {
+
     static propTypes = {
         stateless: PropTypes.bool
     };
@@ -123,8 +124,9 @@ module.exports = class extends React.Component {
         stateless: true
     };
 
-    componentWillMount() {
-        if (!Utils.isProduction() && this.props.controlled !== undefined) {
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction() && props.controlled !== undefined) {
             throw new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
         }
     }

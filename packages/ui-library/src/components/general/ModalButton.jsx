@@ -112,6 +112,7 @@ var React = require("react"),
  */
 
 class ModalButtonStateless extends React.Component {
+
     static displayName = "ModalButtonStateless";
 
     static propTypes = {
@@ -159,40 +160,41 @@ class ModalButtonStateless extends React.Component {
         flags: [],
     };
 
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction()) {
+            if (props.controlled !== undefined) {
+                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
+            }
+            if (props.id) {
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
+            }
+            if (props.containerStyle) {
+                throw new Error(Utils.deprecatePropError("containerStyle", "className"));
+            }
+            if (props.activatorContainerStyle) {
+                throw new Error(Utils.deprecatePropError("activatorContainerStyle", "activatorContainerClassName"));
+            }
+            if (props.linkContent) {
+                throw new Error(Utils.deprecatePropError("linkContent", "activatorContent"));
+            }
+            if (props.linkStyle) {
+                throw new Error(Utils.deprecatePropError("linkStyle", "activatorContentClassName"));
+            }
+            if (props.value) {
+                throw new Error(Utils.deprecatePropError("value", "activatorButtonLabel"));
+            }
+            if (props.buttonStyle) {
+                throw new Error(Utils.deprecatePropError("buttonStyle", "activatorButtonClassName"));
+            }
+        }
+    }
+
     _usePortal = () => this.props.flags.findIndex(item => item === "use-portal") >= 0;
 
     close = () => {
         this.props.onClose();
     };
-
-    componentWillMount() {
-        if (!Utils.isProduction()) {
-            if (this.props.controlled !== undefined) {
-                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
-            }
-            if (this.props.id) {
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            if (this.props.containerStyle) {
-                throw new Error(Utils.deprecatePropError("containerStyle", "className"));
-            }
-            if (this.props.activatorContainerStyle) {
-                throw new Error(Utils.deprecatePropError("activatorContainerStyle", "activatorContainerClassName"));
-            }
-            if (this.props.linkContent) {
-                throw new Error(Utils.deprecatePropError("linkContent", "activatorContent"));
-            }
-            if (this.props.linkStyle) {
-                throw new Error(Utils.deprecatePropError("linkStyle", "activatorContentClassName"));
-            }
-            if (this.props.value) {
-                throw new Error(Utils.deprecatePropError("value", "activatorButtonLabel"));
-            }
-            if (this.props.buttonStyle) {
-                throw new Error(Utils.deprecatePropError("buttonStyle", "activatorButtonClassName"));
-            }
-        }
-    }
 
     render() {
         var activator = (
@@ -427,6 +429,7 @@ class ModalButton extends React.Component {
  *     Whether to disable the activator.
  */
 class ModalActivator extends React.Component {
+
     static displayName = "ModalActivator";
 
     static propTypes = {
@@ -446,8 +449,9 @@ class ModalActivator extends React.Component {
         disabled: false
     };
 
-    componentWillMount() {
-        if (this.props.content && this.props.buttonLabel && !Utils.isProduction()) {
+    constructor(props) {
+        super(props);
+        if (props.content && props.buttonLabel && !Utils.isProduction()) {
             global.console.warn("Only one of ('content', 'buttonLabel') is required");
         }
         // no warning for not providing any of the two; the rendering will fail

@@ -61,6 +61,20 @@ var NUM_SINGLE_SELECT_DEMOS = 3,
 * @desc A demo for SelectionList
 */
 class SelectionListDemo extends React.Component {
+
+    constructor(props) {
+        super(props);
+        var i;
+
+        for (i=1; i<=NUM_SINGLE_SELECT_DEMOS; i+=1) {
+            this["_onSingleSelectChange" + i] = this._onSingleSelectChange.bind(null, i);
+        }
+        for (i=1; i<=NUM_MULTI_SELECT_DEMOS; i+=1) {
+            this["_onMultiSelectChange" + i] = this._onMultiSelectChange.bind(null, i);
+            this["_onMultiSelectAll" + i] = this._onMultiSelectAll.bind(null, i);
+        }
+    }
+
     static flags = [ "use-portal" ];
     state = {
         singleSelectId1: 1,
@@ -107,18 +121,6 @@ class SelectionListDemo extends React.Component {
             required: !this.state.required
         });
     };
-
-    componentWillMount() {
-        var i;
-
-        for (i=1; i<=NUM_SINGLE_SELECT_DEMOS; i+=1) {
-            this["_onSingleSelectChange" + i] = this._onSingleSelectChange.bind(null, i);
-        }
-        for (i=1; i<=NUM_MULTI_SELECT_DEMOS; i+=1) {
-            this["_onMultiSelectChange" + i] = this._onMultiSelectChange.bind(null, i);
-            this["_onMultiSelectAll" + i] = this._onMultiSelectAll.bind(null, i);
-        }
-    }
 
     render() {
         const { flags } = this.props;

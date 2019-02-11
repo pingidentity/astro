@@ -7,6 +7,7 @@ var ViewHeader = require("./ViewHeader");
 var CalendarUtils = require("./Utils.js");
 
 module.exports = class extends React.Component {
+
     static propTypes = {
         "data-id": PropTypes.string,
         date: PropTypes.object,
@@ -17,6 +18,8 @@ module.exports = class extends React.Component {
     static defaultProps = {
         "data-id": "years-view"
     };
+
+    years = [];
 
     next = () => {
         var date = this.props.date.clone().add(10, "years");
@@ -78,10 +81,6 @@ module.exports = class extends React.Component {
             this.props.onPrevView(date);
         }
     };
-
-    componentWillMount() {
-        this.years = [];
-    }
 
     render() {
         var years = this.getYears();

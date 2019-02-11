@@ -18,6 +18,8 @@ class ModalButtonDemo extends React.Component {
 
         for (var i=1; i<=NUM_STATELESS_DEMOS; i+=1) {
             initialState["modalExpanded" + i] = false;
+            this["_handleOpen" + i] = this._handleOpen.bind(null, i);
+            this["_handleClose" + i] = this._handleClose.bind(null, i);
         }
 
         this.state = initialState;
@@ -38,13 +40,6 @@ class ModalButtonDemo extends React.Component {
 
         this.setState(newState);
     };
-
-    componentWillMount() {
-        for (var i=1; i<=NUM_STATELESS_DEMOS; i+=1) {
-            this["_handleOpen" + i] = this._handleOpen.bind(null, i);
-            this["_handleClose" + i] = this._handleClose.bind(null, i);
-        }
-    }
 
     render() {
         const { flags } = this.props;

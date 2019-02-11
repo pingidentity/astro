@@ -119,6 +119,7 @@ var Views = {
  */
 
 class Calendar extends React.Component {
+
     static propTypes = {
         "data-id": PropTypes.string,
 
@@ -159,17 +160,7 @@ class Calendar extends React.Component {
 
     constructor(props) {
         super(props);
-        var date = props.date ? moment(props.date) : null;
 
-        this.state = {
-            date: date,
-            inputValue: date ? date.format(props.format) : "",
-            currentView: props.minView,
-            isVisible: false
-        };
-    }
-
-    componentWillMount() {
         moment.locale(Translator.currentLanguage);
 
         if (!Utils.isProduction()) {
@@ -183,7 +174,17 @@ class Calendar extends React.Component {
                 throw new Error(Utils.deprecatePropError("isRequired", "required"));
             }
         }
+
+        var date = props.date ? moment(props.date) : null;
+
+        this.state = {
+            date: date,
+            inputValue: date ? date.format(props.format) : "",
+            currentView: props.minView,
+            isVisible: false
+        };
     }
+
 
     componentDidMount() {
         document.addEventListener("click", this.documentClick);

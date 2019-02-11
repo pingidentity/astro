@@ -465,6 +465,7 @@ class Stateful extends React.Component {
 }
 
 class FormIntegerFieldV2 extends React.Component {
+
     static propTypes = {
         stateless: PropTypes.bool
     };
@@ -473,8 +474,9 @@ class FormIntegerFieldV2 extends React.Component {
         stateless: true
     };
 
-    componentWillMount() {
-        if (!Utils.isProduction() && this.props.controlled !== undefined) {
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction() && props.controlled !== undefined) {
             throw new Error(Utils.deprecatePropError("controlled", "stateless"));
         }
     }

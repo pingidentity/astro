@@ -947,6 +947,7 @@ class FormDropDownListStateful extends React.Component {
 }
 
 class FormDropDownList extends React.Component {
+
     static displayName = "FormDropDownList";
 
     static propTypes = {
@@ -957,10 +958,11 @@ class FormDropDownList extends React.Component {
         stateless: false
     };
 
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
         /* istanbul ignore if  */
-        if (!Utils.isProduction() && this.props.controlled !== undefined) {
+        if (!Utils.isProduction() && props.controlled !== undefined) {
             /* istanbul ignore next  */
             throw new Error(Utils.deprecatePropError("controlled", "stateless"));
         }

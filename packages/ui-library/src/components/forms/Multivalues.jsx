@@ -114,6 +114,7 @@ class MultivaluesOption extends Component {
  **/
 
 class Multivalues extends Component {
+
     static displayName = "Multivalues";
 
     static propTypes = {
@@ -151,26 +152,27 @@ class Multivalues extends Component {
         }
     };
 
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction()) {
+            if (props.id) {
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
+            }
+            if (props.onChange) {
+                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
+            }
+            if (props.isRequired !== undefined) {
+                throw new Error(Utils.deprecatePropError("isRequired", "required"));
+            }
+        }
+    }
+
     hiddenDiv = null;
 
     state = {
         inputWidth: "20px",
         validValue: true
     };
-
-    componentWillMount() {
-        if (!Utils.isProduction()) {
-            if (this.props.id) {
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            if (this.props.onChange) {
-                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
-            }
-            if (this.props.isRequired !== undefined) {
-                throw new Error(Utils.deprecatePropError("isRequired", "required"));
-            }
-        }
-    }
 
     /**
     * Dynamically expand the input as the user types

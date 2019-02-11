@@ -92,6 +92,7 @@ var Types = {
 */
 
 class CountryFlagList extends React.Component {
+
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
@@ -124,6 +125,11 @@ class CountryFlagList extends React.Component {
         onToggle: _.noop
     };
 
+    constructor(props) {
+        super(props);
+        countryCodes = this._translateCountryNames(countryCodes);
+    }
+
     /**
     * Returns a country's data by code
     * @param {string} code - the country's iso2 or isoNum code
@@ -146,10 +152,6 @@ class CountryFlagList extends React.Component {
 
         return listCountry;
     };
-
-    componentWillMount() {
-        countryCodes = this._translateCountryNames(countryCodes);
-    }
 
     render() {
         const {

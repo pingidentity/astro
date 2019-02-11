@@ -48,6 +48,7 @@ var Status = {
 */
 
 class Toggle extends React.Component {
+
     static propTypes = {
         stateless: PropTypes.bool
     };
@@ -56,12 +57,13 @@ class Toggle extends React.Component {
         stateless: true
     };
 
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         if (!Utils.isProduction()) {
-            if (this.props.controlled !== undefined) {
+            if (props.controlled !== undefined) {
                 throw new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
             }
-            if (this.props.id) {
+            if (props.id) {
                 throw new Error(Utils.deprecatePropError("id", "data-id"));
             }
         }

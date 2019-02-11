@@ -168,15 +168,16 @@ class DemoApp extends React.Component {
 
     /**
      * @method
-     * @name DemoApp#componentWillMount
-     * @desc Initialize the app
+     * @name DemoApp#constructor
+     * @desc Initialize and rendering the app
      */
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         // bind action creators
-        this.appActions = Redux.bindActionCreators(Actions, this.props.dispatch);
-        this.routerActions = Redux.bindActionCreators(ReactRouterRedux.routerActions, this.props.dispatch);
-        this.navActions = Redux.bindActionCreators(LeftNavBar.Actions, this.props.dispatch);
-        this.headerActions = Redux.bindActionCreators(HeaderBar.Actions, this.props.dispatch);
+        this.appActions = Redux.bindActionCreators(Actions, props.dispatch);
+        this.routerActions = Redux.bindActionCreators(ReactRouterRedux.routerActions, props.dispatch);
+        this.navActions = Redux.bindActionCreators(LeftNavBar.Actions, props.dispatch);
+        this.headerActions = Redux.bindActionCreators(HeaderBar.Actions, props.dispatch);
         this._demoItem = {};
 
         // set up member variables

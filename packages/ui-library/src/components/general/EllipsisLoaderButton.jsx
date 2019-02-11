@@ -36,6 +36,7 @@ var React = require("react"),
  *         onClick={this._onClick} />
  */
 class EllipsisLoaderButton extends React.Component {
+
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
@@ -51,14 +52,15 @@ class EllipsisLoaderButton extends React.Component {
         loading: false
     };
 
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         if (!Utils.isProduction()) {
-            if (this.props.id) {
+            if (props.id) {
                 throw new Error(Utils.deprecatePropError("id", "data-id"));
             }
             // TODO: figure out why Jest test is not working, reenable test
             /* istanbul ignore if  */
-            if (this.props.onButtonClick) {
+            if (props.onButtonClick) {
                 /* istanbul ignore next  */
                 throw new Error(Utils.deprecatePropError("onButtonClick", "onClick"));
             }

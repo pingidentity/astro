@@ -27,6 +27,7 @@ var React = require("react"),
  **/
 
 class CheckboxCell extends React.Component {
+
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
@@ -39,10 +40,11 @@ class CheckboxCell extends React.Component {
         value: false
     };
 
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         // TODO: figure out how to test separage throws in Jest and implement
         /* istanbul ignore if  */
-        if (!Utils.isProduction() && this.props.onCallBack) {
+        if (!Utils.isProduction() && props.onCallBack) {
             /* istanbul ignore next  */
             throw new Error(Utils.deprecatePropError("onCallBack", "onGridCellAction"));
         }

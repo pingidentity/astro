@@ -35,11 +35,6 @@ import { ListType } from "../../forms/selection-list";
 *     An array of strings or numbers that match with the options parameter to show which are selected.
 */
 export default class DropDownSelector extends Component {
-    constructor(props) {
-        super(props);
-        const { open = false } = props;
-        this.state = { open };
-    }
 
     static propTypes = {
         "data-id": PropTypes.string,
@@ -73,6 +68,12 @@ export default class DropDownSelector extends Component {
         "data-id": "dropdown-selector",
         options: [],
         selectedOptionIds: []
+    }
+
+    constructor(props) {
+        super(props);
+        const { open = false } = props;
+        this.state = { open };
     }
 
     // Have to use underscore's contains here because version of node in Jenkins

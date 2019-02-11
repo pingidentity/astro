@@ -96,6 +96,7 @@ var INHERIT_PROPS = [
  *
  */
 class Choose extends React.Component {
+
     static displayName = "Choose";
 
     static defaultProps = {
@@ -104,6 +105,18 @@ class Choose extends React.Component {
         showPulsing: false,
         onValueChange: _.noop
     };
+
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction()) {
+            if (props.id) {
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
+            }
+            if (props.onChange) {
+                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
+            }
+        }
+    }
 
     _getChoice = () => {
         return this.props.choices && this.props.choices[this.props.number - 1];
@@ -176,17 +189,6 @@ class Choose extends React.Component {
             }
         }.bind(this));
     };
-
-    componentWillMount() {
-        if (!Utils.isProduction()) {
-            if (this.props.id) {
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            if (this.props.onChange) {
-                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
-            }
-        }
-    }
 
     render() {
         var props = _.pick(this.props, INHERIT_PROPS.concat(["number", "title"]));

@@ -75,6 +75,7 @@ import PopperContainer from "./PopperContainer";
  **/
 
 class DetailsTooltip extends React.Component {
+
     static displayName = "DetailsTooltip";
 
     static propTypes = {
@@ -85,54 +86,55 @@ class DetailsTooltip extends React.Component {
         stateless: true //TODO: change to stateless with false default in new version
     };
 
+    constructor(props) {
+        super(props);
+        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
+        /* istanbul ignore if  */
+        if (!Utils.isProduction()) {
+            /* istanbul ignore if  */
+            if (props.id) {
+                /* istanbul ignore next  */
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
+            }
+            /* istanbul ignore if  */
+            if (props.controlled !== undefined) {
+                /* istanbul ignore next  */
+                throw new Error(Utils.deprecatePropError("controlled", "stateless", "true", "false"));
+            }
+            /* istanbul ignore if  */
+            if (props.contentClassNames) {
+                /* istanbul ignore next  */
+                throw new Error(Utils.deprecatePropError("contentClassNames", "contentClassName"));
+            }
+            /* istanbul ignore if  */
+            if (props.titleClassNames) {
+                /* istanbul ignore next  */
+                throw new Error(Utils.deprecatePropError("titleClassNames", "titleClassName"));
+            }
+            /* istanbul ignore if  */
+            if (props.labelStyle) {
+                /* istanbul ignore next  */
+                throw new Error(Utils.deprecatePropError("labelStyle", "labelClassName"));
+            }
+            /* istanbul ignore if  */
+            if (props.positionStyle) {
+                /* istanbul ignore next  */
+                throw new Error(Utils.deprecatePropError("positionStyle", "positionClassName"));
+            }
+            if (props.secondaryLabels && props.secondaryLabels.length > 2) {
+                console.warn(
+                    "DetailsTooltip expecting two or less secondary button labels.",
+                    props.secondaryLabels.length
+                );
+            }
+        }
+    }
+
     close = () => {
         if (!this.props.stateless) {
             this.refs.manager.close();
         }
     };
-
-    componentWillMount() {
-        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
-        /* istanbul ignore if  */
-        if (!Utils.isProduction()) {
-            /* istanbul ignore if  */
-            if (this.props.id) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            /* istanbul ignore if  */
-            if (this.props.controlled !== undefined) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("controlled", "stateless", "true", "false"));
-            }
-            /* istanbul ignore if  */
-            if (this.props.contentClassNames) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("contentClassNames", "contentClassName"));
-            }
-            /* istanbul ignore if  */
-            if (this.props.titleClassNames) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("titleClassNames", "titleClassName"));
-            }
-            /* istanbul ignore if  */
-            if (this.props.labelStyle) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("labelStyle", "labelClassName"));
-            }
-            /* istanbul ignore if  */
-            if (this.props.positionStyle) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("positionStyle", "positionClassName"));
-            }
-            if (this.props.secondaryLabels && this.props.secondaryLabels.length > 2) {
-                console.warn(
-                    "DetailsTooltip expecting two or less secondary button labels.",
-                    this.props.secondaryLabels.length
-                );
-            }
-        }
-    }
 
     render() {
         return (

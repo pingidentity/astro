@@ -17,6 +17,14 @@ var LABELS = {
 * @desc A demo for WizardView
 */
 class WizardViewDemo extends React.Component {
+
+        messageActions = Redux.bindActionCreators(Messages.Actions, this.props.store.dispatch);
+        wizardActions = Redux.bindActionCreators(Wizard.Actions, this.props.store.dispatch);
+        fieldActions = Redux.bindActionCreators(WizardView.Actions, this.props.store.dispatch);
+
+        //Root level reducer so null id
+       _handlePick = this.wizardActions.pick.bind(null, null);
+
     _handleFieldChange = (name, value) => {
         this.fieldActions.set(["fields", name], value);
     };
@@ -29,15 +37,6 @@ class WizardViewDemo extends React.Component {
         this.wizardActions.reset(id);
         this.fieldActions.reset();
     };
-
-    componentWillMount() {
-        this.messageActions = Redux.bindActionCreators(Messages.Actions, this.props.store.dispatch);
-        this.wizardActions = Redux.bindActionCreators(Wizard.Actions, this.props.store.dispatch);
-        this.fieldActions = Redux.bindActionCreators(WizardView.Actions, this.props.store.dispatch);
-
-        //Root level reducer so null id
-        this._handlePick = this.wizardActions.pick.bind(null, null);
-    }
 
     render() {
         return (

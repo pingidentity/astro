@@ -18,6 +18,7 @@ var React = require("react"),
  * @param {boolean} done
  *              Completed step indicator */
 class Progress extends React.Component {
+
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
@@ -29,6 +30,13 @@ class Progress extends React.Component {
     static defaultProps = {
         "data-id": "progress"
     };
+
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction() && props.id) {
+            throw new Error(Utils.deprecatePropError("id", "data-id"));
+        }
+    }
 
     _style = () => {
         return format("progress step{step} of{of}", this.props) +
@@ -46,12 +54,6 @@ class Progress extends React.Component {
             if (hasOf) {
                 console.warn("Progress expecting 'of' param between 1 and 6, but was given ", nextProps.of);
             }
-        }
-    }
-
-    componentWillMount() {
-        if (!Utils.isProduction() && this.props.id) {
-            throw new Error(Utils.deprecatePropError("id", "data-id"));
         }
     }
 

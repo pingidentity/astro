@@ -302,6 +302,7 @@ class GridStateful extends React.Component {
 }
 
 class Grid extends React.Component {
+
     static displayName = "Grid";
 
     static propTypes = {
@@ -312,8 +313,9 @@ class Grid extends React.Component {
         stateless: false
     };
 
-    componentWillMount() {
-        if (!Utils.isProduction() && this.props.controlled !== undefined) {
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction() && props.controlled !== undefined) {
             throw new Error(Utils.deprecatePropError("controlled", "stateless"));
         }
     }

@@ -27,6 +27,7 @@ var React = require("react"),
  **/
 
 class TextFieldCell extends React.Component {
+
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
@@ -38,10 +39,11 @@ class TextFieldCell extends React.Component {
         "data-id": "grid-textfield-cell"
     };
 
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         // TODO: figure out how to test separage throws in Jest and implement
         /* istanbul ignore if  */
-        if (!Utils.isProduction() && this.props.onCallBack) {
+        if (!Utils.isProduction() && props.onCallBack) {
             /* istanbul ignore next  */
             throw new Error(Utils.deprecatePropError("onCallBack", "onGridCellAction"));
         }

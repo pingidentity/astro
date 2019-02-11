@@ -8,6 +8,16 @@ var React = require("react"),
 * @desc A demo for Calendar
 */
 class CalendarDemo extends React.Component {
+
+    numDemos = 2;
+
+    constructor(props) {
+        super(props);
+        for (var i=1; i<=this.numDemos; i+=1) {
+            this["_onEnrollmentDateChanged" + i] = this._onEnrollmentDateChanged.bind(null, i);
+        }
+    }
+
     static flags = [ "use-portal" ];
 
     state = {
@@ -18,14 +28,6 @@ class CalendarDemo extends React.Component {
             endDate: new Date(2018, 3, 28) //Apr 28 2018
         }
     };
-
-    numDemos = 2;
-
-    componentWillMount() {
-        for (var i=1; i<=this.numDemos; i+=1) {
-            this["_onEnrollmentDateChanged" + i] = this._onEnrollmentDateChanged.bind(null, i);
-        }
-    }
 
     _onEnrollmentDateChanged = (index, newValue) => {
         var newState = {};

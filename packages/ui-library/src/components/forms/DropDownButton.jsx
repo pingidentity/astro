@@ -70,6 +70,7 @@ import Utils from "../../util/Utils.js";
 
 
 class Stateless extends Component {
+
     static displayName = "DropDownButtonStateless";
 
     static propTypes = {
@@ -90,6 +91,29 @@ class Stateless extends Component {
         options: {},
         open: false
     };
+
+    constructor(props) {
+        super(props);
+        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
+        /* istanbul ignore if  */
+        if (!Utils.isProduction()) {
+            /* istanbul ignore if  */
+            if (props.id) {
+                /* istanbul ignore next  */
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
+            }
+            /* istanbul ignore if  */
+            if (props.controlled !== undefined) {
+                /* istanbul ignore next  */
+                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
+            }
+            /* istanbul ignore if  */
+            if (props.onSelect) {
+                /* istanbul ignore next  */
+                throw new Error(Utils.deprecatePropError("onSelect", "onValueChange"));
+            }
+        }
+    }
 
     /**
      * Triggered
@@ -132,27 +156,6 @@ class Stateless extends Component {
         }
     };
 
-    componentWillMount() {
-        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
-        /* istanbul ignore if  */
-        if (!Utils.isProduction()) {
-            /* istanbul ignore if  */
-            if (this.props.id) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            /* istanbul ignore if  */
-            if (this.props.controlled !== undefined) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("controlled", "stateless"));
-            }
-            /* istanbul ignore if  */
-            if (this.props.onSelect) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("onSelect", "onValueChange"));
-            }
-        }
-    }
 
     componentDidMount() {
         window.addEventListener("click", this._handleGlobalClick);

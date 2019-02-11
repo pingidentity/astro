@@ -88,6 +88,7 @@ var React = require("react"),
  **/
 
 class IntroTutorial extends React.Component {
+
     static propTypes = {
         "data-id": PropTypes.string,
         steps: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -114,6 +115,11 @@ class IntroTutorial extends React.Component {
         onGotIt: _.noop,
         visible: true
     };
+
+    constructor(props) {
+        super(props);
+        window.addEventListener("resize", this._handleWindowResize);
+    }
 
     _handleDismiss = () => {
         this.targetClone = null;
@@ -178,10 +184,6 @@ class IntroTutorial extends React.Component {
             </div>
         ];
     };
-
-    componentWillMount() {
-        window.addEventListener("resize", this._handleWindowResize);
-    }
 
     componentWillUnmount() {
         window.removeEventListener("resize", this._handleWindowResize);

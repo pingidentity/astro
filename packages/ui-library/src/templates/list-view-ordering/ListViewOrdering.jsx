@@ -62,7 +62,8 @@ module.exports = class extends React.Component {
     /*
      * When the component mounts, do a bunch of initialization
      */
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         //Instead of creating partials in the render function, which get computed on ever render, or
         //extracting the data-id of the target.  Created partials on mount and use them
         this._handleTextChange = this._handleFilter.bind(null, "text");

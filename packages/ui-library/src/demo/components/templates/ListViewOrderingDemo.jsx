@@ -10,13 +10,15 @@ var React = require("react"),
 * @desc A demo for ListViewOrdering
 */
 class ListViewOrderingDemo extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.actions = Redux.bindActionCreators(ListViewOrdering.Actions, props.store.dispatch);
+    }
+
     _handleToggleSearchBar = () => {
         this.actions.setExpandedSearch(!this.props.advancedSearch);
     };
-
-    componentWillMount() {
-        this.actions = Redux.bindActionCreators(ListViewOrdering.Actions, this.props.store.dispatch);
-    }
 
     render() {
         var demoWatch = _.pick(this.props, "page", "filters", "advancedSearch");

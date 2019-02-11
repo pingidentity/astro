@@ -102,6 +102,7 @@ const DEFAULT_TEXT = {
 };
 
 class Wizard extends React.Component {
+
     static displayName = "Wizard";
 
     static defaultProps = {
@@ -116,6 +117,11 @@ class Wizard extends React.Component {
         required: false,
     };
 
+    constructor(props) {
+        super(props);
+        this._triggerEvent(true);
+    }
+
     _triggerEvent(open) {
         const eventName = open ? "ui-library-modal-open" : "ui-library-modal-close";
         const eventDetail = { component: this.displayName };
@@ -128,10 +134,6 @@ class Wizard extends React.Component {
             event = new CustomEvent(eventName, { bubbles: true, detail: eventDetail });
         }
         document.body.dispatchEvent(event);
-    }
-
-    componentWillMount() {
-        this._triggerEvent(true);
     }
 
     componentWillUnmount() {

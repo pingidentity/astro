@@ -14,11 +14,13 @@ class DragDropTableDemo extends React.Component {
         //slice of 20 for infinite scroll
         var dataSlice = (mockData.data).slice(0, this.ENTRIES_PER_BATCH);
 
+        var order = Array.apply(this, { length: mockData.cols.length }).map(Number.call, Number);
+
         this.state = {
             loading: false,
             headings: mockData.cols,
             rows: mockData.data,
-            order: null,
+            order: order,
             sort: {},
             dropTarget: -1,
             beingDragged: -1,
@@ -30,10 +32,6 @@ class DragDropTableDemo extends React.Component {
     SIMULATED_DELAY_MS = 2000;
     ENTRIES_PER_BATCH = 20;
 
-    componentWillMount() {
-        var order = Array.apply(this, { length: this.state.headings.length }).map(Number.call, Number);
-        this.setState({ order: order });
-    }
 
     _onCancel = () => {
         this.setState({ dropTarget: -1, beingDragged: -1 });

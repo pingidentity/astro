@@ -13,6 +13,9 @@ import InputRow from "../../../components/layout/InputRow";
  * @desc A demo for Messages
  */
 class MessagesDemo extends React.Component {
+
+   actions = Redux.bindActionCreators(Messages.Actions, this.props.store.dispatch);
+
     _addSuccessMessage = () => {
         this.actions.addMessage(`New Success Message Added at ${new Date().toString()}`, Messages.MessageTypes.SUCCESS);
     };
@@ -104,10 +107,6 @@ class MessagesDemo extends React.Component {
             4000
         );
     };
-
-    componentWillMount() {
-        this.actions = Redux.bindActionCreators(Messages.Actions, this.props.store.dispatch);
-    }
 
     render() {
         return (

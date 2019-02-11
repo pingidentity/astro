@@ -64,6 +64,7 @@ var Type = {
  *      </Modal>
  */
 class Modal extends React.Component {
+
     static displayName = "Modal";
     static propTypes = {
         "data-id": PropTypes.string,
@@ -94,6 +95,16 @@ class Modal extends React.Component {
         maximize: false,
         type: Type.BASIC
     };
+
+    constructor(props) {
+        super(props);
+        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
+        /* istanbul ignore if  */
+        if (!Utils.isProduction() && props.id) {
+            /* istanbul ignore next  */
+            throw new Error(Utils.deprecatePropError("id", "data-id"));
+        }
+    }
 
     /*
      * Set close method into context to allow children
@@ -175,15 +186,6 @@ class Modal extends React.Component {
             event = new CustomEvent(eventName, { bubbles: true, detail: eventDetail });
         }
         document.body.dispatchEvent(event);
-    }
-
-    componentWillMount() {
-        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
-        /* istanbul ignore if  */
-        if (!Utils.isProduction() && this.props.id) {
-            /* istanbul ignore next  */
-            throw new Error(Utils.deprecatePropError("id", "data-id"));
-        }
     }
 
     componentDidMount() {

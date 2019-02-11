@@ -15,40 +15,9 @@ require("../src/demo/css/ui-library-demo.scss"); // UI Library demo styles
 require("./assets/css/landing.css"); // Override undesired styles from ui-library.scss and ui-library-demo.scss
 
 class LandingPage extends React.Component {
-    state = {
-        version: "",
-        headerBarTree: [],
-        leftNavBarTree: [],
-        leftNavOpenSections: { versions: true }
-    };
 
-    _gotoTutorials = () => {
-        window.location.href = this.state.version + "/index.html#/?openNode=Tutorials";
-    };
-
-    _gotoQuickstartPage = () => {
-        window.location.href = this.state.version + "/index.html#/?openNode=Tutorials&selectedNode=UILibrary101";
-    };
-
-    _gotoDemoVersion = (version) => {
-        window.location.href = version + "/index.html";
-    };
-
-    _handleLeftNavBarItemValueChange = (itemId) => {
-        if (itemId === "getting-started") {
-            this._gotoQuickstartPage();
-        } else {
-            this._gotoDemoVersion(itemId);
-        }
-    };
-
-    _handleLeftNavBarSectionValueChange = (sectionId) => {
-        var nextState = _.clone(this.state.leftNavOpenSections);
-        nextState[sectionId] = !nextState[sectionId];
-        this.setState({ leftNavOpenSections: nextState });
-    };
-
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         fetch("versions.json?_=" + new Date().getTime())
             .then(function (resp) {
                 if (resp.status >= 400) {
@@ -114,6 +83,39 @@ class LandingPage extends React.Component {
                 }
             }.bind(this));
     }
+
+    state = {
+        version: "",
+        headerBarTree: [],
+        leftNavBarTree: [],
+        leftNavOpenSections: { versions: true }
+    };
+
+    _gotoTutorials = () => {
+        window.location.href = this.state.version + "/index.html#/?openNode=Tutorials";
+    };
+
+    _gotoQuickstartPage = () => {
+        window.location.href = this.state.version + "/index.html#/?openNode=Tutorials&selectedNode=UILibrary101";
+    };
+
+    _gotoDemoVersion = (version) => {
+        window.location.href = version + "/index.html";
+    };
+
+    _handleLeftNavBarItemValueChange = (itemId) => {
+        if (itemId === "getting-started") {
+            this._gotoQuickstartPage();
+        } else {
+            this._gotoDemoVersion(itemId);
+        }
+    };
+
+    _handleLeftNavBarSectionValueChange = (sectionId) => {
+        var nextState = _.clone(this.state.leftNavOpenSections);
+        nextState[sectionId] = !nextState[sectionId];
+        this.setState({ leftNavOpenSections: nextState });
+    };
 
     render() {
         return (

@@ -472,6 +472,14 @@ class MultiDragStateful extends React.Component {
         showCategoryList: false,
     };
 
+    componentWillMount() {
+        // apply any initial filters
+        this.setState({
+            ...reapplyFilters(this.state, this.props.customSort)
+        });
+    }
+
+
     _handleSearch = (index, value) => {
         this.setState(
             search(this.state, {
@@ -591,13 +599,6 @@ class MultiDragStateful extends React.Component {
         }
     }
 
-    componentWillMount() {
-        // apply any initial filters
-        this.setState({
-            ...reapplyFilters(this.state, this.props.customSort)
-        });
-    }
-
     componentWillReceiveProps({ columns: nextCols, customSort }) {
         if (!_.isEqual(nextCols, this.props.columns) || !_.isEqual(customSort, this.props.customSort)) {
             this.setState((prevState) => reapplyFilters(prevState, customSort || this.props.customSort));
@@ -623,6 +624,7 @@ class MultiDragStateful extends React.Component {
 }
 
 class MultiDrag extends React.Component {
+
     static displayName = "MultiDrag";
 
     static propTypes = {
@@ -633,8 +635,9 @@ class MultiDrag extends React.Component {
         stateless: false
     };
 
-    componentWillMount() {
-        if (!Utils.isProduction() && this.props.controlled !== undefined) {
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction() && props.controlled !== undefined) {
             throw new Error(Utils.deprecatePropError("controlled", "stateless"));
         }
     }

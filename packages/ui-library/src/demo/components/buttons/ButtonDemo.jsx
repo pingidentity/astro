@@ -9,20 +9,21 @@ import Button from "../../../components/buttons/Button";
 
 class ButtonsDemo extends Component {
 
-    state = {
-        loading1: false,
-        loading2: false
-    };
-
-    numDemos = 3;
-
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         var i;
 
         for (i=1; i<=this.numDemos; i+=1) {
             this["_toggleLoadingButton" + i] = this._toggleLoadingButton.bind(null, i);
         }
     }
+
+    state = {
+        loading1: false,
+        loading2: false
+    };
+
+    numDemos = 3;
 
     _toggleLoadingButton = (i) => {
         var newState = {};

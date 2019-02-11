@@ -196,6 +196,7 @@ class Batch extends React.Component {
  *   <InfiniteScroll onLoadNext={this.onLoadNext} hasNext={true} hasPrev={false} batches={batches} contentType={MyRow} />
  */
 class InfiniteScroll extends React.Component {
+
     static displayName = "InfiniteScroll";
 
     static propTypes = {
@@ -226,6 +227,31 @@ class InfiniteScroll extends React.Component {
         hasNext: false,
         attachToWindow: false
     };
+
+    constructor(props) {
+        super(props);
+        this.visibilityArray = this._getBatchVisibility();
+        this.inited = false;
+
+        if (props.attachToWindow) {
+            window.addEventListener("scroll", this._handleScroll);
+        }
+
+        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
+        /* istanbul ignore if  */
+        if (!Utils.isProduction()) {
+            /* istanbul ignore if  */
+            if (props.loadPrev) {
+                /* istanbul ignore next  */
+                throw new Error(Utils.deprecatePropError("loadPrev", "onLoadPrev"));
+            }
+            /* istanbul ignore if  */
+            if (props.loadNext) {
+                /* istanbul ignore next  */
+                throw new Error(Utils.deprecatePropError("loadNext", "onLoadNext"));
+            }
+        }
+    }
 
     _padVisibility = (visibility) => {
         // Pad visibility with a batch before & after the batches currently visible in the container viewport
@@ -370,30 +396,6 @@ class InfiniteScroll extends React.Component {
             return false;
         }
     };
-
-    componentWillMount() {
-        this.componentWillUpdate();
-        this.inited = false;
-
-        if (this.props.attachToWindow) {
-            window.addEventListener("scroll", this._handleScroll);
-        }
-
-        // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
-        /* istanbul ignore if  */
-        if (!Utils.isProduction()) {
-            /* istanbul ignore if  */
-            if (this.props.loadPrev) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("loadPrev", "onLoadPrev"));
-            }
-            /* istanbul ignore if  */
-            if (this.props.loadNext) {
-                /* istanbul ignore next  */
-                throw new Error(Utils.deprecatePropError("loadNext", "onLoadNext"));
-            }
-        }
-    }
 
     componentWillUnmount() {
         if (this.props.attachToWindow) {

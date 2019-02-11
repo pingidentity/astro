@@ -57,6 +57,7 @@ var React = require("react"),
  *
  */
 class BackgroundLoader extends React.Component {
+
     static propTypes = {
         // The CSS class to set on the top HTML element
         className: PropTypes.string,
@@ -77,6 +78,15 @@ class BackgroundLoader extends React.Component {
         // Whether the data has been loaded yet.
         loaded: PropTypes.bool
     };
+
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction()) {
+            console.warn("** This component is deprecated and will be removed in the next release. " +
+            "There is no direct replacement. Timer based polling or other timer related activities is better to be " +
+            "implemented on middleware/actions/reducers layer.");
+        }
+    }
 
     state = {
         hidden: "hidden",
@@ -154,13 +164,6 @@ class BackgroundLoader extends React.Component {
         return (interval > 2000) ? interval : 2000;
     };
 
-    componentWillMount() {
-        if (!Utils.isProduction()) {
-            console.warn("** This component is deprecated and will be removed in the next release. " +
-            "There is no direct replacement. Timer based polling or other timer related activities is better to be " +
-            "implemented on middleware/actions/reducers layer.");
-        }
-    }
 
     /*
      * When we mount we start trying to load the data.

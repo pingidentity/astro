@@ -35,24 +35,19 @@ function DemoReducer (state, action) {
 }
 
 class WizardDemoDragScreen extends React.Component {
+
+    // initialize the multi drag data
+
+    rowsAvailableStateless = true;
+    rowsAvailableStateful = true;
+
     state = {
         columns: data.columns, // used for stateful (stateless=false) demo
         disabled: false,
-        drag: MultiDrag.Reducer(null, "init"),
+        drag: MultiDrag.Reducer(MultiDrag.Reducer(null, "init"), MultiDrag.Actions.init(data.columns)),
         //messages: Messages.Reducer,
         demo: DemoReducer(null, "init")
     };
-
-    componentWillMount() {
-
-        // initialize the multi drag data
-        this.setState(
-            { drag: MultiDrag.Reducer(this.state.drag, MultiDrag.Actions.init(data.columns)) }
-        );
-
-        this.rowsAvailableStateless = true;
-        this.rowsAvailableStateful = true;
-    }
 
     _handleAddStateless = (from) => {
         this._handleDropStateless({ from: from, to: { column: 1, index: 0 } });

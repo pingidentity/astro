@@ -18,6 +18,15 @@ var BUTTON_LABELS = {
 * @desc A demo for Wizard
 */
 class WizardDemo extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.actions = Redux.bindActionCreators(Wizard.Actions, props.store.dispatch);
+
+        //Root level reducer so null id
+        this._handlePick = this.actions.pick.bind(null, null);
+    }
+
     static flags = [ "use-portal" ];
 
     state = {
@@ -81,13 +90,6 @@ class WizardDemo extends React.Component {
     _closeSaveTooltip = () => {
         this.setState({ showSaveTooltip: false });
     };
-
-    componentWillMount() {
-        this.actions = Redux.bindActionCreators(Wizard.Actions, this.props.store.dispatch);
-
-        //Root level reducer so null id
-        this._handlePick = this.actions.pick.bind(null, null);
-    }
 
     render() {
         const cancelTooltipParams = {

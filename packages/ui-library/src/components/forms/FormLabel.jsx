@@ -30,6 +30,7 @@ var React = require("react"),
  */
 
 class FormLabel extends React.Component {
+
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
@@ -46,11 +47,13 @@ class FormLabel extends React.Component {
         style: {}
     };
 
-    componentWillMount() {
-        if (!Utils.isProduction() && this.props.id) {
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction() && props.id) {
             throw new Error(Utils.deprecatePropError("id", "data-id"));
         }
     }
+
 
     _renderHint = () => {
         if (!this.props.hint) {

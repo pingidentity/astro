@@ -42,6 +42,7 @@ var React = require("react"),
 */
 
 class Row extends React.Component {
+
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
@@ -52,8 +53,9 @@ class Row extends React.Component {
         "data-id": "row"
     };
 
-    componentWillMount() {
-        if (!Utils.isProduction() && this.props.id) {
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction() && props.id) {
             throw new Error(Utils.deprecatePropError("id", "data-id"));
         }
     }
@@ -91,6 +93,7 @@ class Row extends React.Component {
  */
 
 class Column extends React.Component {
+
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string
@@ -100,8 +103,9 @@ class Column extends React.Component {
         "data-id": "column-layout"
     };
 
-    componentWillMount() {
-        if (!Utils.isProduction() && this.props.id) {
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction() && props.id) {
             throw new Error(Utils.deprecatePropError("id", "data-id"));
         }
     }

@@ -25,6 +25,7 @@ var React = require("react"),
  **/
 
 class Spinner extends React.Component {
+
     static propTypes = {
         "data-id": PropTypes.string,
         defaultText: PropTypes.string,
@@ -37,8 +38,9 @@ class Spinner extends React.Component {
         defaultText: ""
     };
 
-    componentWillMount() {
-        if (!Utils.isProduction() && this.props.id) {
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction() && props.id) {
             throw new Error(Utils.deprecatePropError("id", "data-id"));
         }
     }

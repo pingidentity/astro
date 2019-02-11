@@ -246,6 +246,7 @@ class ConditionalFieldsetStateful extends React.Component {
  *
  */
 class ConditionalFieldset extends React.Component {
+
     static propTypes = {
         stateless: PropTypes.bool
     };
@@ -254,8 +255,9 @@ class ConditionalFieldset extends React.Component {
         stateless: false
     };
 
-    componentWillMount() {
-        if (!Utils.isProduction() && this.props.controlled !== undefined) {
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction() && props.controlled !== undefined) {
             throw new Error(Utils.deprecatePropError("controlled", "stateless"));
         }
     }

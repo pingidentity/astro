@@ -213,6 +213,7 @@ var ConfirmDeletePositions = {
  */
 
 class ExpandableRow extends React.Component {
+
     static displayName = "ExpandableRow";
 
     static propTypes = {
@@ -223,12 +224,13 @@ class ExpandableRow extends React.Component {
         stateless: false
     };
 
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         if (!Utils.isProduction()) {
-            if (this.props.controlled !== undefined) {
+            if (props.controlled !== undefined) {
                 throw new Error(Utils.deprecatePropError("controlled", "stateless"));
             }
-            if (this.props.defaultToExpanded !== undefined) {
+            if (props.defaultToExpanded !== undefined) {
                 throw new Error(Utils.deprecatePropError("defaultToExpanded", "expanded"));
             }
         }

@@ -611,6 +611,7 @@ const PStatefulFormTextField = inStateContainer([
 ])(Stateless);
 
 class FormTextField extends React.Component {
+
     static messageTypes = FormMessage.messageTypes;
 
     static propTypes = {
@@ -623,8 +624,9 @@ class FormTextField extends React.Component {
         flags: [],
     };
 
-    componentWillMount() {
-        if (!Utils.isProduction() && this.props.controlled !== undefined) {
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction() && props.controlled !== undefined) {
             throw new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
         }
     }

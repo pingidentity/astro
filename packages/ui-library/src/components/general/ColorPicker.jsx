@@ -95,6 +95,7 @@ import PopperContainer from "../tooltips/PopperContainer";
  */
 
 module.exports = class extends React.Component {
+
     static displayName = "ColorPicker";
 
     static propTypes = {
@@ -105,22 +106,23 @@ module.exports = class extends React.Component {
         stateless: false
     };
 
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
         /* istanbul ignore if  */
         if (!Utils.isProduction()) {
             /* istanbul ignore if  */
-            if (this.props.controlled !== undefined) {
+            if (props.controlled !== undefined) {
                 /* istanbul ignore next  */
                 throw new Error(Utils.deprecatePropError("controlled", "stateless"));
             }
             /* istanbul ignore if  */
-            if (this.props.id) {
+            if (props.id) {
                 /* istanbul ignore next  */
                 throw new Error(Utils.deprecatePropError("id", "data-id"));
             }
             /* istanbul ignore if  */
-            if (this.props.onChange) {
+            if (props.onChange) {
                 /* istanbul ignore next  */
                 throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
             }

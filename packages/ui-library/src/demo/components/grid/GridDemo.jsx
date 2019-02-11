@@ -58,8 +58,9 @@ class ExpandedRow extends React.Component {
 }
 
 class GridDemo extends React.Component {
-    componentWillMount() {
-        this.actions = Redux.bindActionCreators(Grid.Actions, this.props.store.dispatch);
+    constructor(props) {
+        super(props);
+        this.actions = Redux.bindActionCreators(Grid.Actions, props.store.dispatch);
         this.id = "GridDemo";
         this.id2 = "GridDemo2";
         this.expandedRowContentType = <ExpandedRow />;

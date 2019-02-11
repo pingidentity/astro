@@ -75,6 +75,7 @@ var React = require("react"),
  */
 
 class SelectText extends React.Component {
+
     static propTypes = {
         "data-id": PropTypes.string,
         dataId: PropTypes.string,
@@ -86,6 +87,13 @@ class SelectText extends React.Component {
     static defaultProps = {
         "data-id": "select-text"
     };
+
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction() && props.dataId) {
+            throw new Error(Utils.deprecatePropError("dataId", "data-id"));
+        }
+    }
 
     /*
      * Select the text of the clicked element using
@@ -109,7 +117,7 @@ class SelectText extends React.Component {
             } else {
                 var text = ReactDOM.findDOMNode(this);
                 var range;
-    
+
                 if (global.document.body.createTextRange) {
                     range = global.document.body.createTextRange();
                     range.moveToElementText(text);
@@ -127,12 +135,6 @@ class SelectText extends React.Component {
             this.props.onClick();
         }
     };
-
-    componentWillMount() {
-        if (!Utils.isProduction() && this.props.dataId) {
-            throw new Error(Utils.deprecatePropError("dataId", "data-id"));
-        }
-    }
 
     componentDidMount() {
         if (this.props.select) {

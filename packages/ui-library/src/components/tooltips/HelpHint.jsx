@@ -65,6 +65,7 @@ var Types = {
  */
 
 class HelpHint extends React.Component {
+
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
@@ -90,6 +91,13 @@ class HelpHint extends React.Component {
         className: "",
         leftMargin: false,
     };
+
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction() && props.id) {
+            throw new Error(Utils.deprecatePropError("id", "data-id"));
+        }
+    }
 
     _handleClick = (e) => {
         // kill click event to prevent event from triggering label from checking a checkbox/radio
@@ -121,12 +129,6 @@ class HelpHint extends React.Component {
 
     _getTypeClass = () => {
         return this.props.type ? `help-tooltip--${this.props.type}` : null;
-    }
-
-    componentWillMount() {
-        if (!Utils.isProduction() && this.props.id) {
-            throw new Error(Utils.deprecatePropError("id", "data-id"));
-        }
     }
 
     componentDidMount() {

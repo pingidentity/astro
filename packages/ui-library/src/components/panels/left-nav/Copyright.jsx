@@ -17,6 +17,7 @@ var React = require("react");
  *     Optional render prop
  */
 class Copyright extends React.Component {
+
     static propTypes = {
         pingoneLogo: PropTypes.bool,
         logoSrc: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
@@ -27,18 +28,6 @@ class Copyright extends React.Component {
         pingoneLogo: false,
         updated: false
     };
-
-    componentWillMount() {
-        this._year = new Date().getFullYear();
-        this._defaultChildren = [
-            this._getLogo(),
-            `Copyright © 2003-${this._year}`,
-            <br key="br1" />,
-            "Ping Identity Corporation",
-            <br key="br2" />,
-            "All rights reserved"
-        ];
-    }
 
     _getLogo = () => {
 
@@ -99,6 +88,16 @@ class Copyright extends React.Component {
             return "";
         }
     };
+
+    _year = new Date().getFullYear();
+    _defaultChildren = [
+        this._getLogo(),
+        `Copyright © 2003-${this._year}`,
+        <br key="br1" />,
+        "Ping Identity Corporation",
+        <br key="br2" />,
+        "All rights reserved"
+    ];
 
     render() {
         const { renderFooterContent } = this.props;

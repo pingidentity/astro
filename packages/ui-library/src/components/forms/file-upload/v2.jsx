@@ -120,6 +120,7 @@ var React = require("react"),
 
 
 class FileUpload extends React.Component {
+
     static displayName = "FileUpload";
 
     static propTypes = {
@@ -135,12 +136,13 @@ class FileUpload extends React.Component {
         disabled: false
     };
 
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         if (!Utils.isProduction()) {
-            if (this.props.controlled !== undefined) {
+            if (props.controlled !== undefined) {
                 throw new Error(Utils.deprecatePropError("controlled", "stateless"));
             }
-            if (this.props.title) {
+            if (props.title) {
                 throw new Error(Utils.deprecatePropError("title", "labelText"));
             }
         }

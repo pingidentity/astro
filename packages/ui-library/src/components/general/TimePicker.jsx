@@ -41,6 +41,7 @@ var React = require("react"),
  *     Set the flag for "use-portal" to render with popper.js and react-portal
  */
 module.exports = class extends React.Component {
+
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
@@ -63,6 +64,15 @@ module.exports = class extends React.Component {
         value: "12:00pm",
         "data-id": "time-picker"
     };
+
+    constructor(props) {
+        super(props);
+        moment.locale(Translator.currentLanguage);
+
+        if (!Utils.isProduction() && props.id) {
+            throw new Error(Utils.deprecatePropError("id", "data-id"));
+        }
+    }
 
     /**
      * Adjusts hours based on format, adds am/pm property if needed
@@ -185,14 +195,6 @@ module.exports = class extends React.Component {
         }
         return times;
     };
-
-    componentWillMount() {
-        moment.locale(Translator.currentLanguage);
-
-        if (!Utils.isProduction() && this.props.id) {
-            throw new Error(Utils.deprecatePropError("id", "data-id"));
-        }
-    }
 
     _handleValueChange = (time) => {
         this.props.onValueChange(time.value || "");

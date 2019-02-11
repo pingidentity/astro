@@ -60,6 +60,7 @@ var React = require("react"),
  *     </InlineMessage>
  **/
 class InlineMessage extends React.Component {
+
     static propTypes = {
         alternate: PropTypes.bool,
         fullwidth: PropTypes.bool,
@@ -85,6 +86,13 @@ class InlineMessage extends React.Component {
         secondaryButtons: []
     };
 
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction() && props.callback) {
+            throw new Error(Utils.deprecatePropError("callback", "onClick"));
+        }
+    }
+
     _showAction = () => {
         return (this.props.label !== undefined && this.props.onClick !== undefined);
     };
@@ -93,12 +101,6 @@ class InlineMessage extends React.Component {
     _onClick = onClick => (e) => {
         onClick(e);
     };
-
-    componentWillMount() {
-        if (!Utils.isProduction() && this.props.callback) {
-            throw new Error(Utils.deprecatePropError("callback", "onClick"));
-        }
-    }
 
     render() {
         var className = classnames("inline-message", this.props.type, {

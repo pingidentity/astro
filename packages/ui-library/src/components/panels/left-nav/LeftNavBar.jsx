@@ -107,6 +107,7 @@ var React = require("react"),
  * <LeftNavBar updated={true} tree={[section1, section2]} />
  */
 class LeftNavBar extends React.Component {
+
     static propTypes = {
         "data-id": PropTypes.string,
         tree: PropTypes.array.isRequired,
@@ -132,6 +133,18 @@ class LeftNavBar extends React.Component {
         pingoneLogo: false,
         updated: false,
     };
+
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction()) {
+            if (props.onItemClick) {
+                throw new Error(Utils.deprecatePropError("onItemClick", "onItemValueChange"));
+            }
+            if (props.onSectionClick) {
+                throw new Error(Utils.deprecatePropError("onSectionClick", "onSectionValueChange"));
+            }
+        }
+    }
 
     state = {
         selectorStyle: { top: 0, height: 0 },
@@ -314,17 +327,6 @@ class LeftNavBar extends React.Component {
         }
     }
 
-    componentWillMount() {
-        if (!Utils.isProduction()) {
-            if (this.props.onItemClick) {
-                throw new Error(Utils.deprecatePropError("onItemClick", "onItemValueChange"));
-            }
-            if (this.props.onSectionClick) {
-                throw new Error(Utils.deprecatePropError("onSectionClick", "onSectionValueChange"));
-            }
-        }
-    }
-
     render() {
         var className = classnames({
             scrollable: this.state.scrollable,
@@ -378,6 +380,7 @@ class LeftNavBar extends React.Component {
  *     The callback for when a section label is clicked.  Will be passed back the id of the clicked section.
  */
 class LeftNavSection extends React.Component {
+
     static propTypes = {
         onItemValueChange: PropTypes.func,
         onSectionValueChange: PropTypes.func,
@@ -389,6 +392,21 @@ class LeftNavSection extends React.Component {
         children: PropTypes.array,
         icon: PropTypes.string
     };
+
+    constructor(props) {
+        super(props);
+        this._handleItemClicks = [];
+
+        if (props.children) {
+            // bind the click functions for each item here instead of in the render
+            props.children.map(function (item) {
+                this._handleItemClicks.push(
+                    this._handleItemClick.bind(null, item.id, props.id)
+                );
+            }.bind(this));
+        }
+
+    }
 
     /*
      * Instead of using bind to create a partial after ever render, just use the data-id to pass the
@@ -443,20 +461,6 @@ class LeftNavSection extends React.Component {
         }
         return items;
     };
-
-    componentWillMount() {
-        this._handleItemClicks = [];
-
-        if (this.props.children) {
-            // bind the click functions for each item here instead of in the render
-            this.props.children.map(function (item) {
-                this._handleItemClicks.push(
-                    this._handleItemClick.bind(null, item.id, this.props.id)
-                );
-            }.bind(this));
-        }
-
-    }
 
     _isOpen() {
         return !this.props.label || this.props.open;
@@ -514,6 +518,7 @@ class LeftNavSection extends React.Component {
  *          The callback for when a section label is clicked.  Will be passed back the id of the clicked section.
  */
 class LeftNavContextSelector extends React.Component {
+
     static propTypes = {
         onItemValueChange: PropTypes.func,
         onSectionValueChange: PropTypes.func,
@@ -523,6 +528,18 @@ class LeftNavContextSelector extends React.Component {
         selectedNode: PropTypes.string,
         children: PropTypes.array
     };
+
+    constructor(props) {
+        super(props);
+        this._handleItemClicks = [];
+
+        // bind the click functions for each item here instead of in the render
+        props.children.map(function (item) {
+            this._handleItemClicks.push(
+                this._handleItemClick.bind(null, item.id, props.id)
+            );
+        }.bind(this));
+    }
 
     _getSelectedChild = () => {
         return _.find(this.props.children, function (item) {
@@ -573,16 +590,6 @@ class LeftNavContextSelector extends React.Component {
         this.props.onSectionValueChange(this.props.id);
     };
 
-    componentWillMount() {
-        this._handleItemClicks = [];
-
-        // bind the click functions for each item here instead of in the render
-        this.props.children.map(function (item) {
-            this._handleItemClicks.push(
-                this._handleItemClick.bind(null, item.id, this.props.id)
-            );
-        }.bind(this));
-    }
 
     render() {
         var className = {

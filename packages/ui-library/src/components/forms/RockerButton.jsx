@@ -57,6 +57,7 @@ var React = require("react"),
 */
 
 module.exports = class extends React.Component {
+
     static propTypes = {
         stateless: PropTypes.bool
     };
@@ -65,21 +66,22 @@ module.exports = class extends React.Component {
         stateless: false
     };
 
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         if (!Utils.isProduction()) {
-            if (this.props.controlled !== undefined) {
+            if (props.controlled !== undefined) {
                 throw new Error(Utils.deprecatePropError("controlled", "stateless"));
             }
-            if (this.props.id) {
+            if (props.id) {
                 throw new Error(Utils.deprecatePropError("id", "data-id"));
             }
-            if (this.props.onChange) {
+            if (props.onChange) {
                 throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
             }
-            if (this.props.labels && (this.props.labels.length < 2 || this.props.labels.length > 4)) {
-                console.warn("RockerButton expecting two to four labels, but was given ", this.props.labels.length);
+            if (props.labels && (props.labels.length < 2 || props.labels.length > 4)) {
+                console.warn("RockerButton expecting two to four labels, but was given ", props.labels.length);
             }
-            if (this.props.stateless === false) {
+            if (props.stateless === false) {
                 console.warn("Deprecated: the stateful option for this component will be removed in next version");
             }
         }

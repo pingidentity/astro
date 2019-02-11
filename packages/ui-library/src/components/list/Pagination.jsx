@@ -70,6 +70,7 @@ var React = require("react"),
  */
 
 module.exports = class extends React.Component {
+
     static displayName = "Pagination";
 
     static propTypes = {
@@ -80,15 +81,16 @@ module.exports = class extends React.Component {
         stateless: false
     };
 
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         if (!Utils.isProduction()) {
-            if (this.props.id) {
+            if (props.id) {
                 throw new Error(Utils.deprecatePropError("id", "data-id"));
             }
-            if (this.props.controlled !== undefined) {
+            if (props.controlled !== undefined) {
                 throw new Error(Utils.deprecatePropError("controlled", "stateless"));
             }
-            if (this.props.onChange) {
+            if (props.onChange) {
                 throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
             }
         }

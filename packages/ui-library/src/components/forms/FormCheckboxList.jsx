@@ -205,21 +205,22 @@ class Stateless extends React.Component {
         hideUnchecked: false
     };
 
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         if (!Utils.isProduction()) {
-            if (this.props.controlled !== undefined) {
+            if (props.controlled !== undefined) {
                 throw new Error(Utils.deprecatePropError("controlled", "stateless", "false", "true"));
             }
-            if (this.props.id) {
+            if (props.id) {
                 throw new Error(Utils.deprecatePropError("id", "data-id"));
             }
-            if (this.props.onSelectionChange) {
+            if (props.onSelectionChange) {
                 throw new Error(Utils.deprecatePropError("onSelectionChange", "onValueChange"));
             }
-            if (this.props.labelSelectAll) {
+            if (props.labelSelectAll) {
                 throw new Error(Utils.deprecatePropError("labelSelectAll", "onGetSelectAllLabel"));
             }
-            if (this.props.labelDeselectAll) {
+            if (props.labelDeselectAll) {
                 throw new Error(Utils.deprecatePropError("labelDeselectAll", "onGetDeselectAllLabel"));
             }
         }
@@ -426,10 +427,11 @@ class Stateless extends React.Component {
 }
 
 class Stateful extends React.Component {
+
     static displayName = "FormCheckboxListStateful";
 
     state = {
-        selected: [],
+        selected: this.props.selected,
         hideUnchecked: false,
         queryString: ""
     };
@@ -455,12 +457,6 @@ class Stateful extends React.Component {
             hideUnchecked: !hideUnchecked
         });
     };
-
-    componentWillMount() {
-        this.setState({
-            selected: this.props.selected
-        });
-    }
 
     render() {
         var props = _.defaults({

@@ -85,6 +85,7 @@ var React = require("react"),
  */
 
 module.exports = class extends React.Component {
+
     static propTypes = {
         "data-id": PropTypes.string,
         containerType: PropTypes.oneOf(["full", "page-messages--sidebar-fix"]),
@@ -102,15 +103,16 @@ module.exports = class extends React.Component {
         onI18n: function (key) { return key; }
     };
 
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         if (!Utils.isProduction()) {
-            if (this.props.id) {
+            if (props.id) {
                 throw new Error(Utils.deprecatePropError("id", "data-id"));
             }
-            if (this.props.removeMessage) {
+            if (props.removeMessage) {
                 throw new Error(Utils.deprecatePropError("removeMessage", "onRemoveMessage"));
             }
-            if (this.props.i18n) {
+            if (props.i18n) {
                 throw new Error(Utils.deprecatePropError("i18n", "onI18n"));
             }
         }

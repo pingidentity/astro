@@ -94,6 +94,7 @@ import PageHeader from "../../components/general/PageHeader";
  *     Callback to be triggered when the choice is made on first step of wizard.
  */
 module.exports = class extends React.Component {
+
     static propTypes = {
         labelNext: PropTypes.string,
         labelCancel: PropTypes.string,
@@ -112,6 +113,11 @@ module.exports = class extends React.Component {
         onNext: PropTypes.func,
         onReset: PropTypes.func,
     };
+
+    constructor(props) {
+        super(props);
+        props.onReset();
+    }
 
     state = {
         expanded: false
@@ -146,10 +152,6 @@ module.exports = class extends React.Component {
         });
     }
 
-
-    componentWillMount() {
-        this.props.onReset();
-    }
 
     render() {
         return (
@@ -239,11 +241,13 @@ var RADIO_OPTS = [
  */
 class TwoColumnStep extends React.Component {
     //create the partials on bind for better performance, instead of binding on every render
-    componentWillMount() {
-        this._handleField1Change = this.props.onFieldChange.bind(null, "field1");
-        this._handleCheckboxChange1 = this.props.onFieldChange.bind(null, "checkbox1");
-        this._handleCheckboxChange2 = this.props.onFieldChange.bind(null, "checkbox2");
-        this._handleRadioChange = this.props.onFieldChange.bind(null, "radio");
+    constructor(props) {
+        super(props);
+
+        this._handleField1Change = props.onFieldChange.bind(null, "field1");
+        this._handleCheckboxChange1 = props.onFieldChange.bind(null, "checkbox1");
+        this._handleCheckboxChange2 = props.onFieldChange.bind(null, "checkbox2");
+        this._handleRadioChange = props.onFieldChange.bind(null, "radio");
     }
 
     render() {
@@ -280,9 +284,11 @@ class TwoColumnStep extends React.Component {
 }
 
 class FormStep extends React.Component {
-    componentWillMount() {
-        this._handleField1Change = this.props.onFieldChange.bind(null, "field1");
-        this._handleCheckboxChange = this.props.onFieldChange.bind(null, "checkbox");
+    constructor(props) {
+        super(props);
+
+        this._handleField1Change = props.onFieldChange.bind(null, "field1");
+        this._handleCheckboxChange = props.onFieldChange.bind(null, "checkbox");
     }
 
     render() {
@@ -331,10 +337,12 @@ class Or extends React.Component {
  * lines of jsx inline inside another component
  */
 class ComplexField extends React.Component {
-    componentWillMount() {
-        this._handleField1Change = this.props.onComplexFieldChange.bind(null, this.props.id, "field1");
-        this._handleField2Change = this.props.onComplexFieldChange.bind(null, this.props.id, "field2");
-        this._handleField3Change = this.props.onComplexFieldChange.bind(null, this.props.id, "field3");
+    constructor(props) {
+        super(props);
+
+        this._handleField1Change = props.onComplexFieldChange.bind(null, props.id, "field1");
+        this._handleField2Change = props.onComplexFieldChange.bind(null, props.id, "field2");
+        this._handleField3Change = props.onComplexFieldChange.bind(null, props.id, "field3");
     }
 
     render() {

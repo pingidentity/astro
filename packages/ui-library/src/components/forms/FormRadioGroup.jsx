@@ -87,6 +87,7 @@ import FormLabel from "./FormLabel";
  */
 
 class FormRadioGroup extends React.Component {
+
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
@@ -106,6 +107,18 @@ class FormRadioGroup extends React.Component {
         stacked: true,
         disabled: false
     };
+
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction()) {
+            if (props.id) {
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
+            }
+            if (props.onChange) {
+                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
+            }
+        }
+    }
 
     _handleChange = (value) => {
         this.props.onValueChange(value);
@@ -138,17 +151,6 @@ class FormRadioGroup extends React.Component {
             );
         });
     };
-
-    componentWillMount() {
-        if (!Utils.isProduction()) {
-            if (this.props.id) {
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            if (this.props.onChange) {
-                throw new Error(Utils.deprecatePropError("onChange", "onValueChange"));
-            }
-        }
-    }
 
     render() {
         return (

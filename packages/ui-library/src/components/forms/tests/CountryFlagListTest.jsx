@@ -332,13 +332,6 @@ describe("CountryFlagList", function () {
         expect(component.props.onSearch.mock.calls[1][2]).toBe(0); //subtract 1 from searchIndex
     });
 
-    it("call component will mount", function () {
-        var component = getComponent();
-        component._translateCountryNames = jest.fn();
-        component.componentWillMount();
-        expect(component._translateCountryNames).toBeCalled();
-    });
-
     it("translates and sorts country names when current language is not en_us", function () {
         var component = getComponent();
         var countryList = [

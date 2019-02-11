@@ -41,6 +41,7 @@ var React = require("react"),
  *       </TabbedSections>
  */
 class TabbedSections extends React.Component {
+
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
@@ -54,6 +55,19 @@ class TabbedSections extends React.Component {
         "data-id": "tabbed-sections",
         renderHidden: false
     };
+
+    constructor(props) {
+        super(props);
+
+        if (!Utils.isProduction()) {
+            if (props.id) {
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
+            }
+            if (props.onSectionChange) {
+                throw new Error(Utils.deprecatePropError("onSectionChange", "onValueChange"));
+            }
+        }
+    }
 
     /**
      * Returns all children
@@ -77,17 +91,6 @@ class TabbedSections extends React.Component {
         return React.Children.count(this.props.children) === 1
             ? this.props.children : this.props.children[this.props.selectedIndex];
     };
-
-    componentWillMount() {
-        if (!Utils.isProduction()) {
-            if (this.props.id) {
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            if (this.props.onSectionChange) {
-                throw new Error(Utils.deprecatePropError("onSectionChange", "onValueChange"));
-            }
-        }
-    }
 
     render() {
         /* jshint ignore:start */

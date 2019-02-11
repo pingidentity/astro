@@ -65,6 +65,7 @@ var React = require("react"),
 */
 
 module.exports = class extends React.Component {
+
     static propTypes = {
         stateless: PropTypes.bool
     };
@@ -73,12 +74,13 @@ module.exports = class extends React.Component {
         stateless: false
     };
 
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         if (!Utils.isProduction()) {
-            if (this.props.controlled !== undefined) {
+            if (props.controlled !== undefined) {
                 throw new Error(Utils.deprecatePropError("controlled", "stateless"));
             }
-            if (this.props.onCountrySearch) {
+            if (props.onCountrySearch) {
                 throw new Error(Utils.deprecatePropError("onCountrySearch", "onSearch"));
             }
         }
@@ -144,7 +146,7 @@ class I18nCountrySelectorStateless extends React.Component {
     render() {
         var classname = classnames("intl-country-selector", this.props.className);
         const { flags } = this.props;
-        
+
         return (
             <div className={classname} data-id={this.props["data-id"]}>
                 <CountryFlagList

@@ -88,6 +88,7 @@ var React = require("react"),
  *     Callback to be triggered in response of 'edit' click, which will receive the current number.
  */
 class Step extends React.Component {
+
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
@@ -134,6 +135,22 @@ class Step extends React.Component {
         nextButtonClassName: "primary next-step",
         doneButtonClassName: "primary final-step"
     };
+
+    constructor(props) {
+        super(props);
+        /* istanbul ignore if  */
+        if (!Utils.isProduction()) {
+            if (props.id) {
+                throw new Error(Utils.deprecatePropError("id", "data-id"));
+            }
+            if (props.doneButtonStyle) {
+                throw new Error(Utils.deprecatePropError("doneButtonStyle", "doneButtonClassName"));
+            }
+            if (props.nextButtonStyle) {
+                throw new Error(Utils.deprecatePropError("nextButtonStyle", "nextButtonClassName"));
+            }
+        }
+    }
 
     _edit = () => {
         if (this.props.onEdit && !this.props.showPulsing) {
@@ -254,20 +271,6 @@ class Step extends React.Component {
             </div>) : null;
     };
 
-    componentWillMount() {
-        /* istanbul ignore if  */
-        if (!Utils.isProduction()) {
-            if (this.props.id) {
-                throw new Error(Utils.deprecatePropError("id", "data-id"));
-            }
-            if (this.props.doneButtonStyle) {
-                throw new Error(Utils.deprecatePropError("doneButtonStyle", "doneButtonClassName"));
-            }
-            if (this.props.nextButtonStyle) {
-                throw new Error(Utils.deprecatePropError("nextButtonStyle", "nextButtonClassName"));
-            }
-        }
-    }
 
     render() {
         var classNames = {

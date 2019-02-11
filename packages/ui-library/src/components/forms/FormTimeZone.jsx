@@ -120,6 +120,7 @@ var getZoneNameDisplayValue = function (zoneName) {
 
 
 class FormTimeZone extends React.Component {
+
     static propTypes = {
         stateless: PropTypes.bool
     };
@@ -128,10 +129,11 @@ class FormTimeZone extends React.Component {
         stateless: true
     };
 
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         // TODO: figure out why Jest test was unable to detect the specific error, create tests for throws
         /* istanbul ignore if  */
-        if (!Utils.isProduction() && this.props.controlled !== undefined) {
+        if (!Utils.isProduction() && props.controlled !== undefined) {
             /* istanbul ignore next  */
             throw new Error(Utils.deprecatePropError("controlled", "stateless"));
         }
@@ -198,6 +200,15 @@ class TimeZoneStateless extends React.Component {
         renderedZones: [],
         zoneData: null
     };
+
+    componentWillMount() {
+        this.setState({
+            zoneData: this._getZoneData(),
+            countryData: this._getCountryData()
+        }, function () {
+            this._refreshData(this.props);
+        });
+    }
 
     _clearSearchString = () => {
         this.props.onSearch("", this.props.selectedIndex);
@@ -459,15 +470,6 @@ class TimeZoneStateless extends React.Component {
             };
         });
     };
-
-    componentWillMount() {
-        this.setState({
-            zoneData: this._getZoneData(),
-            countryData: this._getCountryData()
-        }, function () {
-            this._refreshData(this.props);
-        });
-    }
 
     componentDidMount() {
         window.addEventListener("click", this._onGlobalClick);

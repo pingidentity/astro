@@ -17,6 +17,7 @@ var React = require("react"),
  * @example <EllipsisLoader id="my-loader" loading={this.state.isLoading} className="css-class" />
  */
 class EllipsisLoader extends React.Component {
+
     static propTypes = {
         id: PropTypes.string,
         "data-id": PropTypes.string,
@@ -28,8 +29,9 @@ class EllipsisLoader extends React.Component {
         "data-id": "ellipsis-loader"
     };
 
-    componentWillMount() {
-        if (!Utils.isProduction() && this.props.id) {
+    constructor(props) {
+        super(props);
+        if (!Utils.isProduction() && props.id) {
             throw new Error(Utils.deprecatePropError("id", "data-id"));
         }
     }

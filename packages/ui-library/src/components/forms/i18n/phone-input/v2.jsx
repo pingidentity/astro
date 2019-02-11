@@ -114,6 +114,7 @@ export default class I18nPhoneInput extends Component {
 }
 
 class I18nPhoneInputStateless extends Component {
+
     static propTypes = {
         "data-id": PropTypes.string,
         className: PropTypes.string,
@@ -159,12 +160,13 @@ class I18nPhoneInputStateless extends Component {
         disabled: false
     };
 
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         if (!Utils.isProduction()) {
-            if (this.props.controlled !== undefined) {
+            if (props.controlled !== undefined) {
                 throw new Error(Utils.deprecatePropError("controlled", "stateless"));
             }
-            if (this.props.onCountrySearch) {
+            if (props.onCountrySearch) {
                 throw new Error(Utils.deprecatePropError("onCountrySearch", "onSearch"));
             }
         }
