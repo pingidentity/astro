@@ -1,4 +1,9 @@
 .row-builder {
+    &__rows {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
     &__row {
         align-items: flex-end;
         display: inline-flex;
@@ -20,6 +25,7 @@
 
     &__remove {
         margin-bottom: 1px;
+        margin-left: auto;
 
         &__label {
             @include text-label;
@@ -67,10 +73,6 @@
             &__option {
                 color: $color-dolphin !important;
             }
-        }
-
-        & .row-builder__remove {
-            justify-self: flex-end;
         }
 
         &__no-label-above {

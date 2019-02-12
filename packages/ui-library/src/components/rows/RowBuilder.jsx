@@ -88,7 +88,7 @@ function RowBuilder({
                 key={id}
             >
                 {content}
-                <div onClick={remove(id)}>
+                <div className="row-builder__remove" onClick={remove(id)}>
                     {
                         hasRemoveLabel && <div className="row-builder__remove__label"> Remove </div>
                     }
