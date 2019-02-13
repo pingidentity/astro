@@ -25,7 +25,7 @@ class ConditionalFieldsetStateless extends React.Component {
     static propTypes = {
         children: PropTypes.node,
         className: PropTypes.string,
-        "data-id": PropTypes.string.isRequired,
+        "data-id": PropTypes.string,
         disabled: PropTypes.bool,
         emptyMessage: PropTypes.string,
         name: PropTypes.string,
@@ -40,6 +40,7 @@ class ConditionalFieldsetStateless extends React.Component {
     };
 
     static defaultProps = {
+        "data-id": "conditional-fieldset",
         disabled: false,
         emptyMessage: "-- Select an option --",
         required: false,

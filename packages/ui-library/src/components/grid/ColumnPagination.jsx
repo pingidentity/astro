@@ -30,10 +30,14 @@ var _ = require("underscore");
 
 class PageLinks extends React.Component {
     static propTypes = {
-        "data-id": PropTypes.string.isRequired,
+        "data-id": PropTypes.string,
         numPages: PropTypes.number.isRequired,
         currentPage: PropTypes.number.isRequired,
         onClick: PropTypes.func.isRequired
+    };
+
+    static defaultProps = {
+        "data-id": "page-links",
     };
 
     _handleClick = (e, page) => {

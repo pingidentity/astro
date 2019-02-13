@@ -48,7 +48,7 @@ var React = require("react"),
 
 class Row extends React.Component {
     static propTypes = {
-        "data-id": PropTypes.string.isRequired,
+        "data-id": PropTypes.string,
         rowObject: PropTypes.object,
         rowIndex: PropTypes.number,
         columns: PropTypes.array,
@@ -57,7 +57,8 @@ class Row extends React.Component {
     };
 
     static defaultProps = {
-        rowExpandable: false
+        "data-id": "row",
+        rowExpandable: false,
     };
 
     /*
