@@ -23,12 +23,362 @@
 $expandable-row-height: 60px;
 $expandable-row-gap: 12px;
 
-.result-set {
+.expandable-row {
     $button-height: $expandable-row-height;
     $button-width: 45px;
     $button-top: 22px;
     $button-bottom: 6px;
 
+    position: relative;
+    background-color: $color-elderly;
+    border: 1px solid $color-elderly;
+    margin: 0 0 $expandable-row-gap;
+    max-height: $expandable-row-height;
+
+    @include border-radius(2px);
+    @include transition(all 0.1s);
+
+    .collapsed-content {
+        position: relative;
+        overflow: hidden;
+        box-sizing: border-box;
+        min-height: $expandable-row-height;
+        padding: 23px 0 0 $spacing-lg;
+        margin: 0 45px 0 0;
+    }
+    &.has-subtitle {
+        .collapsed-content {
+            padding-top: 15px;
+        }
+    }
+    .expanded-content {
+        position: relative;
+        padding: $spacing-md 75px $spacing-xl $spacing-lg;
+        min-height: 3 * $button-height - 4px;
+    }
+    &.expanded-content-scroll {
+        .expanded-content-scroller {
+            max-height: 700px;
+            overflow-y: auto;
+        }
+    }
+    .item-title {
+        font-size: 17px;
+        line-height: 1.1em;
+        font-weight: normal;
+        @include font-pn-regular;
+        color: $color-slate;
+    }
+    .item-sub-title {
+        font-size: 13px;
+        line-height: 1.1em;
+        font-weight: normal;
+        @include font-pn-regular;
+        color: $color-elephant;
+        margin-top: 2px;
+    }
+    .item-title,
+    .item-sub-title {
+        @include text-truncate;
+    }
+    .item-image {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        max-height: 42px;
+        max-width: 42px;
+    }
+    .item-icon {
+        position: absolute;
+        left: 19px;
+        top: 18px;
+        font-size: 24px;
+    }
+    &.has-image,
+    &.has-icon {
+        .collapsed-content {
+            padding-left: 76px;
+        }
+    }
+    &.subtitle-overflow-visible {
+        .item-sub-title {
+            overflow: visible;
+        }
+    }
+    .row-accessories {
+        height: 60px;
+        margin: 0 46px 0 0;
+        padding: 0 20px 0 0;
+    }
+
+    .row-btns {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: $button-width;
+    }
+
+    .expand-btn,
+    .delete-btn,
+    .edit-btn,
+    .view-btn,
+    .no-edit,
+    .btn-fill {
+        position: relative;
+        background-color: $color-chilly;
+        text-align: center;
+
+        &:after {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            text-transform: none;
+            font-size: 18px;
+            font-family: $icon-font;
+            color: $color-walrus;
+
+            @include transform(translateX(-50%) translateY(-50%));
+        }
+        &:hover {
+            &:after {
+                @include opacity(0.65);
+                text-decoration: none;
+            }
+        }
+    }
+    .expand-btn {
+        display: block;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+
+        &:after {
+            content: '\45';
+        }
+    }
+    .edit-btn,
+    .view-btn,
+    .btn-fill {
+        display: none;
+        height: calc(100% - #{2 * $button-height} - 2px);
+    }
+    .edit-btn {
+        &:after {
+            content: '\65';
+        }
+    }
+    .view-btn {
+        &:after {
+            content: '\56';
+            font-size: 13px;
+        }
+    }
+    .delete-btn {
+        display: none;
+        height: $button-height;
+
+        //changed to <button> from <a>
+        width: $button-width;
+        padding: 0;
+        border: none;
+        border-radius: 0;
+
+        &:after {
+            content: '\64';
+        }
+    }
+    &.expanded {
+        background-color: $color-white;
+        max-height: 4000px;
+        border: 1px solid $color-rabbit-fur;
+
+        //@include transition(max-height 1s);
+
+        .expand-btn {
+            position: relative;
+            height: $expandable-row-height;
+            top: auto;
+            bottom: auto;
+            margin: 0 0 1px;
+
+            &:after {
+                font-family: 'iconfont';
+                content: '\63';
+            }
+        }
+        .edit-btn,
+        .view-btn,
+        .btn-fill {
+            display: block;
+        }
+        .delete-btn {
+            display: block;
+            margin: 1px 0 0;
+        }
+
+        .collapsed-content {
+            height: auto;
+        }
+
+        .item-title,
+        .item-sub-title {
+            white-space: normal;
+            word-break: break-word;
+        }
+    }
+    &.no-edit {
+        .edit-btn {
+            pointer-events: none;
+
+            &:after {
+                content: '';
+            }
+            &:hover {
+                @include opacity(1);
+            }
+        }
+    }
+    &.no-delete {
+        .edit-btn,
+        .view-btn {
+            height: calc(100% - #{$button-height} - 1px);
+        }
+        .resend-tooltip {
+            position: absolute;
+            top: 0;
+            right: 0;
+
+            &.bottom {
+                position: absolute;
+                bottom: 0;
+                top: auto;
+            }
+        }
+    }
+    &.no-edit.no-delete {
+        .btn-fill {
+            height: calc(100% - #{$button-height} - 1px);
+        }
+    }
+    &.waiting {
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: $color-white;
+
+            @include opacity(0.6);
+        }
+    }
+    &.draggable {
+        .expanded-content {
+            padding-left: 45px;
+        }
+        .item-title,
+        .item-sub-title {
+            margin-left: 25px;
+        }
+        .grip {
+            position: absolute;
+            top: 21px;
+            left: 20px;
+
+            @include grab-cursor;
+
+            &:before {
+                content: '\47';
+                text-transform: none;
+                font-size: 18px;
+                font-family: 'iconfont';
+                color: $color-stone;
+            }
+        }
+        .row.dragTop {
+            border-top: 3px solid $color-active-blue;
+        }
+        .row.dragBottom,
+        .row.dragTop.dragBottom {
+            border-bottom: 3px solid $color-active-blue;
+        }
+    }
+    &.invited {
+        .row-accessories {
+            background-color: $color-chilly;
+            padding-left: 20px;
+
+            button.inline {
+                border-color: $color-chilly;
+            }
+        }
+        &.expanded {
+            .button.inline {
+                border-color: $color-rhino;
+            }
+        }
+        .invite-info {
+            line-height: 1em;
+
+            .invite-status {
+                font-size: 14px;
+                color: $color-slate;
+                margin-bottom: 2px;
+            }
+            .invite-date {
+                font-size: 12px;
+                color: $color-rhino;
+            }
+        }
+    }
+    &.z-index-priority {
+        z-index: $zindex__elevated;
+    }
+    .item-message {
+        display: block;
+        text-align: center;
+        margin: -15px 0 15px 0;
+        padding: 10px 25px;
+
+        .inline-message-text {
+            display: block;
+        }
+    }
+    .item-message__buttons {
+        margin-left: 25px;
+
+        > .button {
+            margin-right: 10px;
+        }
+    }
+    &--ordering {
+        @include grab-cursor;
+        position: relative;
+
+        .row-accessories,
+        .row-btns {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        &:before {
+            content: '';
+            right: 0;
+            top: -1 * $expandable-row-gap - 1px;
+            left: 0;
+            height: $expandable-row-gap + 1px;
+            position: absolute;
+        }
+    }
+
+}
+
+
+.result-set {
     position: relative;
     margin: 20px 0 0;
 
@@ -40,332 +390,7 @@ $expandable-row-gap: 12px;
     }
 
     .item {
-        position: relative;
-        background-color: $color-elderly;
-        border: 1px solid $color-elderly;
-        margin: 0 0 $expandable-row-gap;
-        max-height: $expandable-row-height;
-
-        @include border-radius(2px);
-        @include transition(all 0.1s);
-
-        .collapsed-content {
-            position: relative;
-            overflow: hidden;
-            box-sizing: border-box;
-            min-height: $expandable-row-height;
-            padding: 23px 0 0 $spacing-lg;
-            margin: 0 45px 0 0;
-        }
-        &.has-subtitle {
-            .collapsed-content {
-                padding-top: 15px;
-            }
-        }
-        .expanded-content {
-            position: relative;
-            padding: $spacing-md 75px $spacing-xl $spacing-lg;
-            min-height: 3 * $button-height - 4px;
-        }
-        &.expanded-content-scroll {
-            .expanded-content-scroller {
-                max-height: 700px;
-                overflow-y: auto;
-            }
-        }
-        .item-title {
-            font-size: 17px;
-            line-height: 1.1em;
-            font-weight: normal;
-            @include font-pn-regular;
-            color: $color-slate;
-        }
-        .item-sub-title {
-            font-size: 13px;
-            line-height: 1.1em;
-            font-weight: normal;
-            @include font-pn-regular;
-            color: $color-elephant;
-            margin-top: 2px;
-        }
-        .item-title,
-        .item-sub-title {
-            @include text-truncate;
-        }
-        .item-image {
-            position: absolute;
-            left: 10px;
-            top: 10px;
-            max-height: 42px;
-            max-width: 42px;
-        }
-        .item-icon {
-            position: absolute;
-            left: 19px;
-            top: 18px;
-            font-size: 24px;
-        }
-        &.has-image,
-        &.has-icon {
-            .collapsed-content {
-                padding-left: 76px;
-            }
-        }
-        &.subtitle-overflow-visible {
-            .item-sub-title {
-                overflow: visible;
-            }
-        }
-        .row-accessories {
-            height: 60px;
-            margin: 0 46px 0 0;
-            padding: 0 20px 0 0;
-        }
-
-        .row-btns {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            right: 0;
-            width: $button-width;
-        }
-
-        .expand-btn,
-        .delete-btn,
-        .edit-btn,
-        .view-btn,
-        .no-edit,
-        .btn-fill {
-            position: relative;
-            background-color: $color-chilly;
-            text-align: center;
-
-            &:after {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                text-transform: none;
-                font-size: 18px;
-                font-family: $icon-font;
-                color: $color-walrus;
-
-                @include transform(translateX(-50%) translateY(-50%));
-            }
-            &:hover {
-                &:after {
-                    @include opacity(0.65);
-                    text-decoration: none;
-                }
-            }
-        }
-        .expand-btn {
-            display: block;
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-
-            &:after {
-                content: '\45';
-            }
-        }
-        .edit-btn,
-        .view-btn,
-        .btn-fill {
-            display: none;
-            height: calc(100% - #{2 * $button-height} - 2px);
-        }
-        .edit-btn {
-            &:after {
-                content: '\65';
-            }
-        }
-        .view-btn {
-            &:after {
-                content: '\56';
-                font-size: 13px;
-            }
-        }
-        .delete-btn {
-            display: none;
-            height: $button-height;
-
-            //changed to <button> from <a>
-            width: $button-width;
-            padding: 0;
-            border: none;
-            border-radius: 0;
-
-            &:after {
-                content: '\64';
-            }
-        }
-        &.expanded {
-            background-color: $color-white;
-            max-height: 4000px;
-            border: 1px solid $color-rabbit-fur;
-
-            //@include transition(max-height 1s);
-
-            .expand-btn {
-                position: relative;
-                height: $expandable-row-height;
-                top: auto;
-                bottom: auto;
-                margin: 0 0 1px;
-
-                &:after {
-                    font-family: 'iconfont';
-                    content: '\63';
-                }
-            }
-            .edit-btn,
-            .view-btn,
-            .btn-fill {
-                display: block;
-            }
-            .delete-btn {
-                display: block;
-                margin: 1px 0 0;
-            }
-
-            .collapsed-content {
-                height: auto;
-            }
-
-            .item-title,
-            .item-sub-title {
-                white-space: normal;
-                word-break: break-word;
-            }
-        }
-        &.no-edit {
-            .edit-btn {
-                pointer-events: none;
-
-                &:after {
-                    content: '';
-                }
-                &:hover {
-                    @include opacity(1);
-                }
-            }
-        }
-        &.no-delete {
-            .edit-btn,
-            .view-btn {
-                height: calc(100% - #{$button-height} - 1px);
-            }
-            .resend-tooltip {
-                position: absolute;
-                top: 0;
-                right: 0;
-
-                &.bottom {
-                    position: absolute;
-                    bottom: 0;
-                    top: auto;
-                }
-            }
-        }
-        &.no-edit.no-delete {
-            .btn-fill {
-                height: calc(100% - #{$button-height} - 1px);
-            }
-        }
-        &.waiting {
-            &:after {
-                content: '';
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                background-color: $color-white;
-
-                @include opacity(0.6);
-            }
-        }
-        &.draggable {
-            .expanded-content {
-                padding-left: 45px;
-            }
-            .item-title,
-            .item-sub-title {
-                margin-left: 25px;
-            }
-            .grip {
-                position: absolute;
-                top: 21px;
-                left: 20px;
-
-                @include grab-cursor;
-
-                &:before {
-                    content: '\47';
-                    text-transform: none;
-                    font-size: 18px;
-                    font-family: 'iconfont';
-                    color: $color-stone;
-                }
-            }
-            .row.dragTop {
-                border-top: 3px solid $color-active-blue;
-            }
-            .row.dragBottom,
-            .row.dragTop.dragBottom {
-                border-bottom: 3px solid $color-active-blue;
-            }
-        }
-        &.invited {
-            .row-accessories {
-                background-color: $color-chilly;
-                padding-left: 20px;
-
-                button.inline {
-                    border-color: $color-chilly;
-                }
-            }
-            &.expanded {
-                .button.inline {
-                    border-color: $color-rhino;
-                }
-            }
-            .invite-info {
-                line-height: 1em;
-
-                .invite-status {
-                    font-size: 14px;
-                    color: $color-slate;
-                    margin-bottom: 2px;
-                }
-                .invite-date {
-                    font-size: 12px;
-                    color: $color-rhino;
-                }
-            }
-        }
-        &.z-index-priority {
-            z-index: $zindex__elevated;
-        }
-        .item-message {
-            display: block;
-            text-align: center;
-            margin: -15px 0 15px 0;
-            padding: 10px 25px;
-
-            .inline-message-text {
-                display: block;
-            }
-        }
-        .item-message__buttons {
-            margin-left: 25px;
-
-            > .button {
-                margin-right: 10px;
-            }
-        }
+        @extend .expandable-row;
     }
     .result-section-title {
         @include font-pn-semibold;
@@ -417,26 +442,6 @@ $expandable-row-gap: 12px;
     background-color: $color-elephant;
 
     @include border-radius(3px);
-}
-
-.item--ordering {
-    @include grab-cursor;
-    position: relative;
-
-    .row-accessories,
-    .row-btns {
-        opacity: 0.4;
-        pointer-events: none;
-    }
-
-    &:before {
-        content: '';
-        right: 0;
-        top: -1 * $expandable-row-gap - 1px;
-        left: 0;
-        height: $expandable-row-gap + 1px;
-        position: absolute;
-    }
 }
 
 .draggable-item--drop-target {

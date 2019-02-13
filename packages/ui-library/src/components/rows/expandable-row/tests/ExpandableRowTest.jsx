@@ -776,4 +776,28 @@ describe("ExpandableRow", function() {
         expect(element).not.toBeNull();
     });
 
+    it("renders with new class when flag is set", function() {
+        const component = getComponent({ flags: [ "expandable-row-class" ] });
+
+        const row = TestUtils.findRenderedDOMNodeWithClass(component, "expandable-row");
+
+        expect(row).toBeTruthy();
+    });
+
+    it("does not render with new class when flag is not set", function() {
+        const component = getComponent();
+
+        const row = TestUtils.findRenderedDOMNodeWithClass(component, "expandable-row");
+
+        expect(row).toBeFalsy();
+    });
+
+    it("fires Cannonball warning when new class flag is not set", function() {
+        console.warn = jest.fn();
+
+        expect(console.warn).not.toHaveBeenCalled();
+        getComponent();
+        expect(console.warn).toHaveBeenCalled();
+    });
+
 });

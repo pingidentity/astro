@@ -14,6 +14,7 @@ import InlineMessage from "../../general/InlineMessage";
 import Button from "../../buttons/Button";
 import StatusIndicator from "../../general/StatusIndicator";
 import StretchContent from "../../layout/StretchContent";
+import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
 
 /**
 * @enum {string}
@@ -98,6 +99,7 @@ var ConfirmDeletePositions = {
  *     CSS classes to set on the top-level HTML container.
  * @param {array} [flags]
  *     Set the flag for "use-portal" to render tooltips with popper.js and react-portal
+ *     Set the flag for "expandable-row-class" to use the updated CSS className
  * @param {boolean} [stateless]
  *     To enable the component to be externally managed. True will relinquish control to the component's owner.
  *     False or not specified will cause the component to manage state internally.
@@ -400,7 +402,19 @@ class StatelessExpandableRow extends React.Component {
         onDeleteCancelClick: _.noop,
         onDeleteConfirmClick: _.noop,
         waiting: false,
+        flags: [],
     };
+
+    componentDidMount() {
+        if (!this._useNewClassName()) {
+            cannonballChangeWarning({
+                message: (
+                    `ExpandableRow will use a new className in v4. To use that className now, ` +
+                    `add the flag 'expandable-row-class' to ExpandableRow.`
+                ),
+            });
+        }
+    }
 
     /**
      * Propagate expanded/collapse toggle event to owner.
@@ -496,13 +510,16 @@ class StatelessExpandableRow extends React.Component {
         }
     }
 
+    _useNewClassName = () => this.props.flags.findIndex(flag => flag === "expandable-row-class") >= 0;
+
     render() {
+        const baseClassName = this._useNewClassName() ? "expandable-row" : "item";
         var showEditIcon = this.props.showEdit && this.props.isEditEnabled,
             showViewIcon = this.props.showEdit && !this.props.isEditEnabled,
-            containerClassname = classnames("item", this.props.className, {
+            containerClassname = classnames(baseClassName, this.props.className, {
                 expanded: this.props.expanded,
                 waiting: this.props.waiting,
-                "item--ordering": this.props.ordering,
+                [`${baseClassName}--ordering`]: this.props.ordering,
                 "has-image": !!this.props.image,
                 "has-icon": !!this.props.icon,
                 "no-delete": !this.props.showDelete,

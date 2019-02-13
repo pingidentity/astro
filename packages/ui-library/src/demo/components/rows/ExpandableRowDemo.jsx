@@ -26,7 +26,7 @@ class ExpandableRowDemo extends React.Component {
         };
     }
 
-    static flags = ["use-portal"];
+    static flags = ["use-portal", "expandable-row-class"];
 
     _onToggle = (index) => {
         var newState = {},
