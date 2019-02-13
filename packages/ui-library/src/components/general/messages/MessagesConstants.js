@@ -8,14 +8,16 @@ var _ = require("underscore");
 exports.MessageTypes = {
     /** success */
     SUCCESS: "success",
-    /** notice */
-    NOTICE: "notice",
     /** warning */
     WARNING: "warning",
+    /** error */
+    ERROR: "error",
+    /** info */
+    INFO: "info",
+    /** notice */
+    NOTICE: "notice",
     /** feature */
     FEATURE: "feature",
-    /** error */
-    ERROR: "error"
 };
 
 /*

@@ -13,8 +13,9 @@ import InputRow from "../../../components/layout/InputRow";
  * @desc A demo for Messages
  */
 class MessagesDemo extends React.Component {
-
-   actions = Redux.bindActionCreators(Messages.Actions, this.props.store.dispatch);
+    static flags = [ "fixed-messages-constants" ];
+    
+    actions = Redux.bindActionCreators(Messages.Actions, this.props.store.dispatch);
 
     _addSuccessMessage = () => {
         this.actions.addMessage(`New Success Message Added at ${new Date().toString()}`, Messages.MessageTypes.SUCCESS);
@@ -30,6 +31,14 @@ class MessagesDemo extends React.Component {
 
     _addInfoMessage = () => {
         this.actions.addMessage(`New Info Message Added at ${new Date().toString()}`, Messages.MessageTypes.FEATURE);
+    };
+
+    _addWarningConstantMessage = () => {
+        this.actions.addMessage(`New Info Message Added at ${new Date().toString()}`, Messages.MessageTypes.WARNING);
+    };
+
+    _addInfoConstantMessage = () => {
+        this.actions.addMessage(`New Info Message Added at ${new Date().toString()}`, Messages.MessageTypes.INFO);
     };
 
     _testButtonClick = () => {
@@ -109,16 +118,19 @@ class MessagesDemo extends React.Component {
     };
 
     render() {
+        const fixedConstants = this.props.flags.includes("fixed-messages-constants");
         return (
             <div>
-                <InlineMessage type={ InlineMessage.MessageTypes.WARNING }>
-                    There is a discrepency between the message types and the constant name.
-                    Please use the following for the status. <br />
-                    Success = MessageTypes.SUCCESS <br />
-                    Error = MessageTypes.WARNING || MessageTypes.ERROR <br />
-                    Warning = MessageTypes.NOTICE <br />
-                    Info = MessageTypes.FEATURE <br />
-                </InlineMessage>
+                {!fixedConstants &&
+                    <InlineMessage type={ InlineMessage.MessageTypes.WARNING }>
+                        There is a discrepency between the message types and the constant name.
+                        Please use the following for the status. <br />
+                        Success = MessageTypes.SUCCESS <br />
+                        Error = MessageTypes.WARNING || MessageTypes.ERROR <br />
+                        Warning = MessageTypes.NOTICE <br />
+                        Info = MessageTypes.FEATURE <br />
+                    </InlineMessage>
+                }
 
                 <InputRow>
                     For messages that will appear in full width pages like Login or Change Password pages, add
@@ -128,7 +140,11 @@ class MessagesDemo extends React.Component {
                 </InputRow>
 
                 <InputRow>
-                    <Messages messages={this.props.messages} onRemoveMessage={this.actions.removeAt} />
+                    <Messages
+                        messages={this.props.messages}
+                        onRemoveMessage={this.actions.removeAt}
+                        flags={this.props.flags}
+                    />
                 </InputRow>
                 <InputRow>
                     <Button onClick={this._addSuccessMessage}>Add success message - MessageTypes.SUCCESS</Button>
@@ -142,6 +158,16 @@ class MessagesDemo extends React.Component {
                 <InputRow>
                     <Button onClick={this._addInfoMessage}>Add info message - MessageTypes.FEATURE</Button>
                 </InputRow>
+                <InputRow>
+                    <Button
+                        onClick={this._addWarningConstantMessage}
+                    >Add warning message - MessageTypes.WARNING</Button>
+                </InputRow>
+                {fixedConstants &&
+                    <InputRow>
+                        <Button onClick={this._addInfoConstantMessage}>Add info message - MessageTypes.INFO</Button>
+                    </InputRow>
+                }
 
                 <hr className="hr" />
 

@@ -1,10 +1,14 @@
 "use strict";
 
-var PropTypes = require("prop-types");
+import PropTypes from "prop-types";
 
-var React = require("react"),
-    classnames = require("classnames"),
-    Utils = require("../../../util/Utils");
+import React from "react";
+import classnames from "classnames";
+import Utils from "../../../util/Utils";
+import { cannonballChangeWarning } from "../../../util/DeprecationUtils";
+import _ from "underscore";
+
+import { MessageTypes } from "./MessagesConstants";
 
 /**
  * @callback Messages~onRemoveMessage
@@ -75,6 +79,8 @@ var React = require("react"),
  * @param {number} [defaultMessageTimeout]
  *     Default message timeout in ms. Messages will remove themselves after this time, unless the message specifically
  *     overrides the default timeout itself.
+ * @param {array} [flags]
+ *     Set the flag for "fix-messages-constants" to use WARNING and INFO correctly
  *
  * @example
  * Usage:
@@ -94,13 +100,14 @@ module.exports = class extends React.Component {
         removeMessage: PropTypes.func,
         onI18n: PropTypes.func,
         i18n: PropTypes.func,
-        defaultMessageTimeout: PropTypes.number
+        defaultMessageTimeout: PropTypes.number,
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
         "data-id": "messages",
         onRemoveMessage: null,
-        onI18n: function (key) { return key; }
+        onI18n: function (key) { return key; },
     };
 
     constructor(props) {
@@ -119,6 +126,7 @@ module.exports = class extends React.Component {
     }
 
     render() {
+        const { flags } = this.props;
         var className = classnames("page-messages", this.props.containerType );
 
         return (
@@ -131,6 +139,7 @@ module.exports = class extends React.Component {
                                 onRemoveMessage={this.props.onRemoveMessage}
                                 defaultTimeout={this.props.defaultMessageTimeout}
                                 data-id={this.props["data-id"]+"-message-"+i}
+                                flags={flags}
                             />);
                     }.bind(this))
                 }
@@ -145,13 +154,21 @@ module.exports = class extends React.Component {
  *
  */
 class Message extends React.Component {
+    static propTypes = {
+        flags: PropTypes.arrayOf(PropTypes.string),
+        onRemoveMessage: PropTypes.func,
+    }
+
+    static defaultProps = {
+        flags: [],
+        onRemoveMessage: _.noop,
+    }
+
     /*
      * Remove the message by calling the removeMessage callback if it exists.
      */
     _handleRemove = () => {
-        if (this.props.onRemoveMessage) {
-            this.props.onRemoveMessage(this.props.index);
-        }
+        this.props.onRemoveMessage(this.props.index);
     };
 
     componentDidMount() {
@@ -161,6 +178,15 @@ class Message extends React.Component {
 
         if (interval) {
             this.interval = global.setInterval(this._handleRemove, interval);
+        }
+
+        if (this.props.message.type === MessageTypes.WARNING && !this._fixedConstants()) {
+            cannonballChangeWarning({
+                message: (
+                    `The WARNING message type will use the yellow style instead of the red. ` +
+                    `Add the 'fixed-messages-constants' flag to Messages or use the ERROR or NOTICE constant.`
+                ),
+            });
         }
     }
 
@@ -197,9 +223,26 @@ class Message extends React.Component {
         );
     }
 
+    _translatedConstants = {
+        [MessageTypes.SUCCESS]: MessageTypes.SUCCESS,
+        [MessageTypes.ERROR]: MessageTypes.ERROR,
+        [MessageTypes.WARNING]: MessageTypes.NOTICE,
+        [MessageTypes.NOTICE]: MessageTypes.NOTICE,
+        [MessageTypes.FEATURE]: MessageTypes.FEATURE,
+        [MessageTypes.INFO]: MessageTypes.FEATURE,
+    };
+
+    _fixedConstants = () => this.props.flags.includes("fixed-messages-constants");
+
+    _transformType = type => (
+        this._fixedConstants()
+            ? this._translatedConstants[type]
+            : type
+    );
+
     render() {
         const text = this.props.message.text || this.props.onI18n(this.props.message.key, this.props.message.params);
-        const classes = classnames("message show", this.props.message.type, {
+        const classes = classnames("message show", this._transformType(this.props.message.type), {
             "message--minimized": this.props.message.minimized
         });
 

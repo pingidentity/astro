@@ -4,6 +4,8 @@ jest.dontMock("../index.js");
 jest.dontMock("../Messages");
 jest.dontMock("../MessagesConstants.js");
 
+import { MessageTypes } from "../MessagesConstants";
+
 describe("Messages", function () {
     var React = require("react"),
         ReactDOM = require("react-dom"),
@@ -26,7 +28,8 @@ describe("Messages", function () {
     function getComponent (props) {
         props = _.defaults(props || {}, {
             messages: [{
-                text: "Test message text"
+                text: "Test message text",
+                type: MessageTypes.SUCCESS,
             }],
             onRemoveMessage: jest.fn()
         });
@@ -221,6 +224,47 @@ describe("Messages", function () {
         expect(function () {
             getComponent({ i18n: jest.fn() });
         }).toThrow(expectedError);
+    });
+
+    const warningMessage = [
+        {
+            message: "Warrrrrning",
+            type: MessageTypes.WARNING,
+        }
+    ];
+
+    it("shows Cannonball warning when using WARNING type without the flag", function() {
+        console.warn = jest.fn();
+
+        expect(console.warn).not.toHaveBeenCalled();
+        getComponent({ messages: warningMessage });
+        expect(console.warn).toHaveBeenCalled();
+    });
+
+    it("doesn't show Cannonball warning if you use the flag", function() {
+        console.warn = jest.fn();
+
+        getComponent({ messages: warningMessage, flags: [ "fixed-messages-constants" ] });
+        expect(console.warn).not.toHaveBeenCalled();
+    });
+
+    it("doesn't show Cannonball warning normally", function() {
+        console.warn = jest.fn();
+
+        getComponent();
+        expect(console.warn).not.toHaveBeenCalled();
+    });
+
+    it("changes the warning class if the flag is set", function() {
+        const component = getComponent({ messages: warningMessage, flags: [ "fixed-messages-constants" ] });
+        const message = TestUtils.findRenderedDOMNodeWithClass(component, "notice");
+        expect(message).toBeTruthy();
+    });
+
+    it("doesn't change the warning class if the flag is not set", function() {
+        const component = getComponent({ messages: warningMessage });
+        const message = TestUtils.findRenderedDOMNodeWithClass(component, "warning");
+        expect(message).toBeTruthy();
     });
 
 });
