@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import EllipsisLoader from "../general/EllipsisLoader";
+import { cannonballChangeWarning } from "../../util/DeprecationUtils";
 import _ from "underscore";
 
 /**
@@ -22,9 +23,13 @@ import _ from "underscore";
  *     Html name of the button
  * @param {boolean} [disabled=false]
  *     Button will not function when true
- * @param {string} [inline]
+ *  @param {boolean} [inline]
  *  @param {boolean} loading
  *       While true, loading animation will be shown
+ *  @param {boolean} [noSpacing]
+ *     Don't include the right margin
+ * @param {array} [flags]
+ *     Set the flag for "add-button-margin" to override the special add button margin styling.
  * @example
  *  <Button
  *      label="Button"
@@ -49,6 +54,8 @@ class Button extends Component {
         submit: PropTypes.bool,
         href: PropTypes.string,
         target: PropTypes.string,
+        noSpacing: PropTypes.bool,
+        flags: PropTypes.arrayOf(PropTypes.string),
     };
 
     static defaultProps = {
@@ -56,18 +63,41 @@ class Button extends Component {
         disabled: false,
         loading: false,
         submit: false,
+        noSpacing: false,
+        flags: [],
     };
 
     _dontFocus = event => event.preventDefault();
 
+    _fixAddMargin = () => this.props.flags.includes("add-button-margin");
+
+    componentDidMount() {
+        if (this.props.iconName === "add" && !this._fixAddMargin() && !this.props.noSpacing) {
+            cannonballChangeWarning({
+                message: (
+                    `Add buttons will no longer automatically have their right margin stripped. ` +
+                    `Instead, the 'noSpacing' prop will manually do it. ` +
+                    `Switch over by adding the 'add-button-margin' flag to Add buttons.`
+                ),
+            });
+        }
+    }
+
     render() {
-        const classes = classnames("button", this.props.className, this.props.iconName,{
-            inline: this.props.inline,
-            loading: this.props.loading,
-            disabled: this.props.disabled,
-            "ellipsis-loader-button": this.props.loading,
-            [this.props.type]: _.indexOf(["primary", "success", "cancel", "danger"], this.props.type) !== -1
-        });
+        const classes = classnames(
+            "button",
+            this.props.className,
+            this.props.iconName,
+            {
+                "button--add-margin-fix": this.props.iconName === "add" && this._fixAddMargin(),
+                "button--no-spacing": this.props.noSpacing,
+                inline: this.props.inline,
+                loading: this.props.loading,
+                disabled: this.props.disabled,
+                "ellipsis-loader-button": this.props.loading,
+                [this.props.type]: _.indexOf(["primary", "success", "cancel", "danger"], this.props.type) !== -1
+            }
+        );
 
         const TagName = this.props.href ? "a" : "button";
 

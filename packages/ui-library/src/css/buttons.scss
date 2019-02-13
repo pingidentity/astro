@@ -29,8 +29,8 @@ button,
 .button {
     $height: 36px;
 
-    padding: 0 25px;
-    margin-right: 10px;
+    padding: 0 $spacing-lg;
+    margin-right: $spacing-sm;
     height: $height;
     line-height: $height;
     border: 1px solid $color-rhino;
@@ -39,6 +39,10 @@ button,
     @include border-radius(2px);
     @include base-button-styles;
     @include default-button-styles;
+
+    &.button--no-spacing {
+        margin-right: 0;
+    }
 
     &:hover {
         color: $color-active;
@@ -159,6 +163,10 @@ button,
     &.add {
         padding-left: 36px;
         margin: 0;
+
+        &.button--add-margin-fix { // just to fix the margin change - remove in V4
+            margin-right: $spacing-sm;
+        }
 
         &:before,
         &:after {

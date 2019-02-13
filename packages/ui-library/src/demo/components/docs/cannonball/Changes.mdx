@@ -21,3 +21,11 @@
 **V3 Behavior:** The discard button is styled like a standard button.
 
 **Recommendation:** Set the 'fix-discard-button' flag for ButtonBar or use the props for a cancel button instead.
+
+### Button
+
+**V4 Behavior:** All buttons, including those with the 'add' icon, will have margin on their right side unless other styles from, for instance, a container remove it.
+
+**V3 Behavior:** Buttons with the icon "add" have their margin removed.
+
+**Recommendation:** Set the 'add-button-margin' flag to keep the margin or set the `noSpacing` prop to true on a button to keep it removed.

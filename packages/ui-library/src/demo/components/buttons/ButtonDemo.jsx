@@ -8,6 +8,7 @@ import Button from "../../../components/buttons/Button";
  */
 
 class ButtonsDemo extends Component {
+    static flags = [ "add-button-margin" ];
 
     constructor(props) {
         super(props);
@@ -69,6 +70,7 @@ class ButtonsDemo extends Component {
                 <Button
                     label="Add"
                     iconName="add"
+                    flags={this.props.flags}
                 />
                 <Button
                     label="Download"

@@ -66,5 +66,33 @@ describe("Button", function () {
         expect(callback).toBeCalled();
     });
 
+    it("should show Cannonball warning if using 'add' class with no flag", function() {
+        console.warn = jest.fn();
+
+        expect(console.warn).not.toBeCalled();
+        getComponent({ iconName: "add" });
+        expect(console.warn).toBeCalled();
+    });
+
+    it("should not show the Cannonball warning if 'noSpacing' is true", function() {
+        console.warn = jest.fn();
+
+        getComponent({ iconName: "add", noSpacing: true });
+        expect(console.warn).not.toBeCalled();
+    });
+
+    it("should not show the Cannonball warning if not using the add class", function() {
+        console.warn = jest.fn();
+
+        getComponent();
+        expect(console.warn).not.toBeCalled();
+    });
+
+    it("should not show the Cannonball warning if the flag is set", function() {
+        console.warn = jest.fn();
+
+        getComponent({ iconName: "add", flags: [ "add-button-margin" ] });
+        expect(console.warn).not.toBeCalled();
+    });
 
 });
