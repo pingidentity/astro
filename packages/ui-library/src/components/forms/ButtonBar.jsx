@@ -55,11 +55,45 @@ import Translator from "../../util/i18n/Translator.js";
 * @param {boolean} [visible=true]
 *     Shows/hides the button bar. This is often set to true when a form data is "dirty"/has been edited
 *
-* @param {object} [cancelTooltip]
+* @param {Object} cancelTooltip
 *     An object of the props required to generate a details tooltip that to confirm the closing of a modal.
+* @param {string} cancelTooltip.confirmButtonText
+*     Text to display for "save" button in the modal.
+* @param {string} cancelTooltip.cancelButtontext
+*     Text to display for "cancel" button in the modal.
+* @param {node} cancelTooltip.label
+*     Can pass anything such as numbers, string, DOM elements, arrays to the label.
+* @param {node} cancelTooltip.messageText
+*     Can pass anything such as numbers, string, DOM elements, arrays
+*      to display the messages displayed in the modal.
+* @param {function} cancelTooltip.onConfirm
+*     Callback for when confirm button is clicked.
+* @param {function} cancelTooltip.onCancel
+*     Callback for when cancel button is clicked.
+* @param {boolean} cancelTooltip.open
+*     When true will open tooltip.
+* @param {string} cancelTooltip.title
+*     Text for the title of the modal.
 *
-* @param {object} [saveTooltip]
+* @param {Object} saveTooltip
 *     An object of the props required to generate a details tooltip to confirm saving.
+* @param {string} saveTooltip.confirmButtonText
+*     Text to display for "save" button in the modal.
+* @param {string} saveTooltip.cancelButtontext
+*     Text to display for "cancel" button in the modal.
+* @param {node} saveTooltip.label
+*     Can pass anything such as numbers, string, DOM elements, arrays to the label.
+* @param {node} saveTooltip.messageText
+*     Can pass anything such as numbers, string, DOM elements, arrays
+*     to display the messages displayed in the modal.
+* @param {function} saveTooltip.onConfirm
+*     Callback for when confirm button is clicked.
+* @param {function} saveTooltip.onCancel
+*     Callback for when cancel button is clicked.
+* @param {boolean} saveTooltip.open
+*     When true will open tooltip.
+* @param {string} saveTooltip.title
+*     Text for the title of the modal.
 *
 * @param {ButtonBar~onCancel} [onCancel]
 *     Callback that will be triggered when the "cancel" button is clicked. Note that the onCancel callback and
@@ -88,7 +122,51 @@ import Translator from "../../util/i18n/Translator.js";
 *         </span>
 *      </ButtonBar>
 *
+* @example button bar with tooltips
+*     <ButtonBar
+*        data-id="buttonbar"
+*        flags={this.props.flags}
+*
+*        cancelText="Cancel"
+*        discardText="Discard"
+*        saveText="Save"
+*
+*        onCancel={this._openCancelTooltip}
+*        onDiscard={this._handleDiscard}
+*        onSave={this._openSaveTooltip}
+*
+*        enableSavingAnimation={this.state.saving}
+*        visible={this.state.showBar}
+*        saveDisabled={this.state.saveDisabled}
+*        unfixed={this.state.unfixed}
+*
+*        cancelTooltip={{
+*            title: "Cancel Confirmation",
+*            open: this.state.showCancelTooltip,
+*            onConfirm: this._handleCancel,
+*            onCancel: this._closeCancelTooltip,
+*            messageText: "Are you sure you want to cancel these changes?",
+*            confirmButtonText: "Yes",
+*            cancelButtonText: "No"
+*        }}
+*
+*        saveTooltip={{
+*            title: "Save Confirmation",
+*            open: this.state.showSaveTooltip,
+*            onConfirm: this._handleSave,
+*            onCancel: this._closeSaveTooltip,
+*            messageText: "Are you sure you want to save these changes?",
+*            confirmButtonText: "Yes",
+*            cancelButtonText: "No"
+*        }}>
+*
+*        <span style={{ margin: "0 30px 0 0" }}>
+*            Child content can added and will display to the left of the buttons by default.
+*        </span>
+*    </ButtonBar>
+*
 **/
+
 class ButtonBar extends React.Component {
     static propTypes = {
         cancelClassName: PropTypes.string,
@@ -207,6 +285,7 @@ class ButtonBar extends React.Component {
                 onConfirm={this._handleSave}
                 positionClassName="top left"
                 flags={this.props.flags}
+                showClose={false}
                 {...props}
             >
                 {messageText}
