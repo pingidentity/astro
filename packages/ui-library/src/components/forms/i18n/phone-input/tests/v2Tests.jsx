@@ -42,17 +42,22 @@ describe("I18nPhoneInput", function () {
         ReactTestUtils = require("react-dom/test-utils"),
         Utils = require("../../../../../util/Utils"),
         TestUtils = require("../../../../../testutil/TestUtils"),
-        I18nPhoneInput = require("../v2"),
-        _ = require("underscore");
+        I18nPhoneInput = require("../v2");
 
-    function getComponent (props) {
-        props = _.defaults(props || {}, {
-            onValueChange: jest.fn(),
-            onToggle: jest.fn(),
-            onSearch: jest.fn()
-        });
-
-        return ReactTestUtils.renderIntoDocument(<I18nPhoneInput {...props} />);
+    function getComponent ({
+        onSearch = jest.fn(),
+        onToggle = jest.fn(),
+        onValueChange = jest.fn(),
+        ...props
+    } = {}) {
+        return ReactTestUtils.renderIntoDocument(
+            <I18nPhoneInput
+                onSearch={onSearch}
+                onToggle={onToggle}
+                onValueChange={onValueChange}
+                {...props}
+            />
+        );
     }
 
     it("renders the component", function () {
@@ -100,7 +105,9 @@ describe("I18nPhoneInput", function () {
     });
 
     it("updates callback on country select", function () {
-        var component = getComponent();
+        var component = getComponent({
+            open: true
+        });
 
         var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         var canada = TestUtils.findRenderedDOMNodeWithDataId(component, "country-ca");
@@ -118,11 +125,13 @@ describe("I18nPhoneInput", function () {
     });
 
     it("gets correct country when more than one country has the same dial code", function () {
-        var component = getComponent();
+        const component = getComponent({
+            open: true
+        });
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
-        var canada = TestUtils.findRenderedDOMNodeWithDataId(component, "country-ca");
-        var unitedStates = TestUtils.findRenderedDOMNodeWithDataId(component, "country-us");
+        const flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
+        const canada = TestUtils.findRenderedDOMNodeWithDataId(component, "country-ca");
+        const unitedStates = TestUtils.findRenderedDOMNodeWithDataId(component, "country-us");
 
         ReactTestUtils.Simulate.click(flag);
 
@@ -187,12 +196,12 @@ describe("I18nPhoneInput", function () {
     });
 
     it("find and select country by typing", function () {
-        var component = getComponent({
+        const component = getComponent({
             open: true
         });
-        var componentRef = component.refs.I18nPhoneInputStateful;
+        const componentRef = component.refs.I18nPhoneInputStateful;
 
-        var flag = TestUtils.findRenderedDOMNodeWithDataId(componentRef, "selected-option");
+        const flag = TestUtils.findRenderedDOMNodeWithDataId(componentRef, "selected-option");
         // enter can, validate still not selected, hit enter, validate Canada now selected
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 67 }); // c
         ReactTestUtils.Simulate.keyDown(flag, { keyCode: 65 }); // a

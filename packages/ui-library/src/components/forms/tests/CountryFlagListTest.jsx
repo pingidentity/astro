@@ -83,7 +83,10 @@ describe("CountryFlagList", function () {
     });
 
     it("accepts countryCodeClassname classes", function () {
-        var component = getComponent({ countryCodeClassName: "custom-country-code-class" });
+        var component = getComponent({
+            countryCodeClassName: "custom-country-code-class",
+            open: true
+        });
         expect(TestUtils.scryRenderedDOMNodesWithClass(component, "custom-country-code-class").length).toBe(4);
     });
 
@@ -106,6 +109,7 @@ describe("CountryFlagList", function () {
     it("displays correct country code in list for iso2 countryCodeDisplayType", function () {
         var component = getComponent({
             countryCodeDisplayType: "iso2",
+            open: true,
             selectedCountryCode: "us"
         });
 
@@ -118,6 +122,7 @@ describe("CountryFlagList", function () {
     it("displays correct country code in list for isoNum countryCodeDisplayType", function () {
         var component = getComponent({
             countryCodeDisplayType: "isoNum",
+            open: true,
             selectedCountryCode: "ca"
         });
 
@@ -130,6 +135,7 @@ describe("CountryFlagList", function () {
     it("displays correct country code in list for dialCode countryCodeDisplayType", function () {
         var component = getComponent({
             countryCodeDisplayType: "dialCode",
+            open: true,
             selectedCountryCode: "af"
         });
 
@@ -197,7 +203,9 @@ describe("CountryFlagList", function () {
     });
 
     it("triggers onValueChange callback when a country in the list is clicked", function () {
-        var component = getComponent();
+        var component = getComponent({
+            open: true
+        });
 
         // Click on Canada in the list
         var canada = TestUtils.findRenderedDOMNodeWithDataId(component, "country-ca");

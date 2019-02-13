@@ -66,6 +66,7 @@ describe("I18nCountrySelector", function () {
 
     it("stateless: updates callback on country select", function () {
         var component = getComponent({
+            open: true,
             stateless: true
         });
         var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
@@ -84,7 +85,9 @@ describe("I18nCountrySelector", function () {
     });
 
     it("stateful: updates callback on country select", function () {
-        var component = getComponent();
+        var component = getComponent({
+            open: true
+        });
         var flag = TestUtils.findRenderedDOMNodeWithDataId(component, "selected-option");
         var canada = TestUtils.findRenderedDOMNodeWithDataId(component, "country-ca");
         var afghanistan = TestUtils.findRenderedDOMNodeWithDataId(component, "country-af");

@@ -156,6 +156,7 @@ class CountryFlagList extends React.Component {
             countryCodeDisplayType,
             selectedCountryCode,
             flags,
+            open
         } = this.props;
         var containerClassName = classnames(
             "flag-container",
@@ -190,10 +191,10 @@ class CountryFlagList extends React.Component {
                 stateless={true}
                 data-id={this.props["data-id"]}
                 className={containerClassName}
-                options={countryCodes}
+                options={open ? countryCodes : [selectedCountry]}
                 contentType={type}
                 onValueChange={this.props.onValueChange}
-                open={this.props.open}
+                open={open}
                 onToggle={this.props.onToggle}
                 searchIndex={this.props.searchIndex}
                 searchString={this.props.searchString}
