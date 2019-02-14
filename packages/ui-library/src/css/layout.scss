@@ -621,6 +621,26 @@ $color-grey-minor-1: $color-neutral-30;
     }
 }
 
+@mixin message-button-css {
+    button,
+    .button {
+        background-color: transparent;
+        color: $color-white;
+        border-color: $color-white;
+        vertical-align: baseline;
+    }
+}
+@mixin message-primary-button-css ($color) {
+    .button,
+    button {
+        &.inline.primary {
+            border: 1px solid $color-white;
+            background-color: $color-white;
+            color: $color;
+        }
+    }
+}
+
 .page-messages {
     position: fixed;
     z-index: $zindex__message;
@@ -693,36 +713,19 @@ $color-grey-minor-1: $color-neutral-30;
         &.warning,
         &.error {
             background-color: $color-critical-red;
-
-            input[type=button] {
-                color: $color-critical-red;
-            }
+            @include message-primary-button-css ($color-critical-red);
         }
         &.success {
             background-color: $color-success;
-
-            input[type=button] {
-                color: $color-success;
-            }
+            @include message-primary-button-css ($color-success);
         }
         &.notice {
             background-color: $color-warning-yellow;
-            color: $color-white;
-
-            .close {
-                color: $color-white;
-            }
-            input[type=button] {
-                color: $color-warning-yellow;
-            }
-
+            @include message-primary-button-css ($color-warning-yellow);
         }
         &.feature {
             background-color: $color-active-blue;
-
-            input[type=button] {
-                color: $color-active-blue;
-            }
+            @include message-primary-button-css ($color-active-blue);
         }
 
         &__text {
@@ -782,6 +785,14 @@ $color-grey-minor-1: $color-neutral-30;
             @include transition(margin-top 0.1s);
         }
     }
+
+    @include message-button-css;
+    .button,
+    button {
+        &.inline {
+            margin: 0 0 0 $spacing-md;
+        }
+    }
 }
 
 .inline-message {
@@ -794,6 +805,21 @@ $color-grey-minor-1: $color-neutral-30;
     border: 1px solid $color-rabbit-fur;
 
     @include border-radius(3px);
+
+    // TODO: determine primary button styling in non-alternate inline message
+    button,
+    .button {
+        &.inline.primary {
+            background: $color-white;
+            color: $color-strong-neutral-10;
+            border: 1px solid $color-neutral-50;
+
+            &:hover {
+                color: $color-active-blue-highlighted;
+                border-color: $color-active-blue-highlighted;
+            }
+        }
+    }
 
     .inline-message-icon,
     .inline-message-text,
@@ -865,58 +891,48 @@ $color-grey-minor-1: $color-neutral-30;
             color: $color-active-blue;
         }
     }
+
     &--alternate {
-        &.warning,
-        &.error,
-        &.success,
-        &.notice {
-            color: $color-white;
-            padding-left: 15px;
-            border: none;
-            &:before {
-                content: none;
-            }
-        }
         &.warning {
             background-color: $color-warning-icon-yellow;
-            .button.inline {
-                border: 1px solid $color-warning-icon-yellow;
-                color: $color-warning-icon-yellow;
-            }
+            @include message-primary-button-css($color-warning-icon-yellow);
         }
-
         &.error {
             background-color: $color-critical-red;
-            .button.inline {
-                color: $color-critical-red;
-                border: 1px solid $color-critical-red;
-            }
+            @include message-primary-button-css($color-critical-red);
         }
         &.success {
             background-color: $color-success;
-            .button.inline {
-                color: $color-success;
-                border: 1px solid $color-success;
-            }
+            @include message-primary-button-css($color-success);
         }
         &.notice {
             background-color: $color-active-blue;
-            .button.inline {
-                color: $color-active-blue;
-                border: 1px solid $color-active-blue;
-            }
+            @include message-primary-button-css($color-active-blue);
         }
 
         &.error,
         &.warning,
         &.notice,
         &.success {
-            .button.secondary {
-                background: transparent;
-                border: 1px solid $color-white;
-                color: $color-white;
+            color: $color-white;
+            padding-left: 15px;
+            border: none;
+
+            &:before {
+                content: none;
+            }
+
+            .button,
+            button {
+                &.secondary {
+                    background: transparent;
+                    border-color: $color-white;
+                    color: $color-white;
+                }
             }
         }
+
+        @include message-button-css;
     }
 
     &--fullwidth {
@@ -936,15 +952,6 @@ $color-grey-minor-1: $color-neutral-30;
                 left: 0;
             }
         }
-    }
-
-    .button.inline,
-    .primary {
-        margin-left: 15px;
-        margin-right: 0;
-        background: $color-white;
-        border: 1px solid $color-rhino;
-        color: $color-walrus;
     }
 }
 

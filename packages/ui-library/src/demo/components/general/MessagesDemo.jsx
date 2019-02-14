@@ -48,8 +48,8 @@ class MessagesDemo extends React.Component {
     _addHtmlMessage = () => {
         this.actions.addMessage({
             message: <div>
-                New Message Added with <Button inline onClick={this._testButtonClick}>HTML</Button>
-                at {new Date().toString()}
+                New Message Added with html/buttons: <Button inline onClick={this._testButtonClick}>Button</Button>
+                <Button type="primary" inline onClick={this._testButtonClick}>Primary Button</Button>
             </div>,
             status: Messages.MessageTypes.ERROR,
             isHtml: true
