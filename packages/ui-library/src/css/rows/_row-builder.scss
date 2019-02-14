@@ -13,13 +13,15 @@
             margin: $spacing-lg 0;
         }
 
-        &--underlined:not(:last-of-type) > :after {
-            border-bottom: 1px solid $color-rabbit-fur;
-            bottom: -$spacing-lg;
-            content: '';
-            left: 0;
-            position: absolute;
-            width: 100%;
+        &--underlined:not(:last-of-type) {
+            &:after {
+                border-bottom: 1px solid $color-rabbit-fur;
+                bottom: -$spacing-lg;
+                content: '';
+                left: 0;
+                position: absolute;
+                width: 100%;
+            }
         }
     }
 
