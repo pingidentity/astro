@@ -101,9 +101,7 @@ class StatAreaCard extends React.Component {
                             {this.props.title}
                         </div>
                         {!this.props.loading && (
-                            <div className="dashboard-card__stat-list">
-                                <DashboardCardList data={this.props.listData} />
-                            </div>
+                            <DashboardCardList data={this.props.listData} />
                         )}
                     </div>
                 }
@@ -205,7 +203,7 @@ StatAreaCard.propTypes = {
         PropTypes.number,
         PropTypes.string,
     ]),
-    AxisKey: PropTypes.string,
+    yAxisKey: PropTypes.string,
 };
 
 StatAreaCard.defaultProps = {
@@ -217,7 +215,7 @@ StatAreaCard.defaultProps = {
     onMouseOver: _.noop,
     onValueChange: _.noop,
     rockerButtonProps: {},
-    xAxisKey: "id",
+    yAxisKey: "id",
 };
 
 StatAreaCard.CustomTooltip = CustomTooltip;
